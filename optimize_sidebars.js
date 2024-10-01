@@ -1523,6 +1523,314 @@ module.exports = {
         },
 
         {
+          "Administration API (Self-Managed)": [
+            docsLink(
+              "Overview",
+              "apis-tools/administration-sm-api/administration-sm-api-overview/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/administration-sm-api/administration-sm-api-authentication/"
+            ),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/administration-sm-api/specifications/sm-admin-api/"
+                ),
+
+                {
+                  "Usage Metrics": [
+                    docsLink(
+                      "Get usage metrics for clusters",
+                      "apis-tools/administration-sm-api/specifications/get-usage-metrics/"
+                    ),
+                  ],
+                },
+
+                {
+                  Clusters: [
+                    docsLink(
+                      "Get current clusters",
+                      "apis-tools/administration-sm-api/specifications/get-clusters/"
+                    ),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          "Camunda 8 API (REST)": [
+            docsLink(
+              "Overview",
+              "apis-tools/camunda-api-rest/camunda-api-rest-overview/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/camunda-api-rest/camunda-api-rest-authentication/"
+            ),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/"
+                ),
+
+                {
+                  Cluster: [
+                    docsLink(
+                      "Get cluster topology",
+                      "apis-tools/camunda-api-rest/specifications/get-cluster-topology/"
+                    ),
+                  ],
+                },
+
+                {
+                  License: [
+                    docsLink(
+                      "Get status of Camunda license",
+                      "apis-tools/camunda-api-rest/specifications/get-status-of-camunda-license/"
+                    ),
+                  ],
+                },
+
+                {
+                  Job: [
+                    docsLink(
+                      "Activate jobs",
+                      "apis-tools/camunda-api-rest/specifications/activate-jobs/"
+                    ),
+                    docsLink(
+                      "Fail job",
+                      "apis-tools/camunda-api-rest/specifications/fail-job/"
+                    ),
+                    docsLink(
+                      "Report error for job",
+                      "apis-tools/camunda-api-rest/specifications/report-error-for-job/"
+                    ),
+                    docsLink(
+                      "Complete job",
+                      "apis-tools/camunda-api-rest/specifications/complete-job/"
+                    ),
+                    docsLink(
+                      "Update a job",
+                      "apis-tools/camunda-api-rest/specifications/update-a-job/"
+                    ),
+                  ],
+                },
+
+                {
+                  Incident: [
+                    docsLink(
+                      "Resolve incident",
+                      "apis-tools/camunda-api-rest/specifications/resolve-incident/"
+                    ),
+                    docsLink(
+                      "Query incidents (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-incidents-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  "User task": [
+                    docsLink(
+                      "Complete user task",
+                      "apis-tools/camunda-api-rest/specifications/complete-user-task/"
+                    ),
+                    docsLink(
+                      "Assign user task",
+                      "apis-tools/camunda-api-rest/specifications/assign-user-task/"
+                    ),
+                    docsLink(
+                      "Update user task",
+                      "apis-tools/camunda-api-rest/specifications/update-user-task/"
+                    ),
+                    docsLink(
+                      "Unassign user task",
+                      "apis-tools/camunda-api-rest/specifications/unassign-user-task/"
+                    ),
+                    docsLink(
+                      "Query user tasks (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-user-tasks-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  Clock: [
+                    docsLink(
+                      "Pin internal clock",
+                      "apis-tools/camunda-api-rest/specifications/pin-internal-clock/"
+                    ),
+                    docsLink(
+                      "Reset internal clock",
+                      "apis-tools/camunda-api-rest/specifications/reset-internal-clock/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Process instance": [
+                    docsLink(
+                      "Create process instance",
+                      "apis-tools/camunda-api-rest/specifications/create-process-instance/"
+                    ),
+                    docsLink(
+                      "Query process instances (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-process-instances-alpha/"
+                    ),
+                    docsLink(
+                      "Migrate process instance",
+                      "apis-tools/camunda-api-rest/specifications/migrate-process-instance/"
+                    ),
+                    docsLink(
+                      "Modify process instance",
+                      "apis-tools/camunda-api-rest/specifications/modify-process-instance/"
+                    ),
+                    docsLink(
+                      "Cancel process instance",
+                      "apis-tools/camunda-api-rest/specifications/cancel-process-instance/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Flow node Instance": [
+                    docsLink(
+                      "Query flow node instances (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-flow-node-instances-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Decision definition": [
+                    docsLink(
+                      "Query decision definitions (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-decision-definitions-alpha/"
+                    ),
+                    docsLink(
+                      "Get decision definition XML (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Decision requirements": [
+                    docsLink(
+                      "Query decision requirements (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-decision-requirements-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  Decision: [
+                    docsLink(
+                      "Evaluate decision",
+                      "apis-tools/camunda-api-rest/specifications/evaluate-decision/"
+                    ),
+                  ],
+                },
+
+                {
+                  Authorization: [
+                    docsLink(
+                      "Patch authorization",
+                      "apis-tools/camunda-api-rest/specifications/patch-authorization/"
+                    ),
+                  ],
+                },
+
+                {
+                  User: [
+                    docsLink(
+                      "Create a user",
+                      "apis-tools/camunda-api-rest/specifications/create-user/"
+                    ),
+                    docsLink(
+                      "Query users (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/find-all-users/"
+                    ),
+                  ],
+                },
+
+                {
+                  Message: [
+                    docsLink(
+                      "Publish a message",
+                      "apis-tools/camunda-api-rest/specifications/publish-a-message/"
+                    ),
+                    docsLink(
+                      "Correlate a message",
+                      "apis-tools/camunda-api-rest/specifications/correlate-a-message/"
+                    ),
+                  ],
+                },
+
+                {
+                  Documents: [
+                    docsLink(
+                      "Upload document (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/upload-document-alpha/"
+                    ),
+                    docsLink(
+                      "Download document (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/download-document-alpha/"
+                    ),
+                    docsLink(
+                      "Delete document (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/delete-document-alpha/"
+                    ),
+                    docsLink(
+                      "Create document link (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/create-document-link-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  Resource: [
+                    docsLink(
+                      "Deploy resources",
+                      "apis-tools/camunda-api-rest/specifications/deploy-resources/"
+                    ),
+                    docsLink(
+                      "Delete resource",
+                      "apis-tools/camunda-api-rest/specifications/delete-resource/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Element instance": [
+                    docsLink(
+                      "Update element instance variables",
+                      "apis-tools/camunda-api-rest/specifications/update-element-instance-variables/"
+                    ),
+                  ],
+                },
+
+                {
+                  Signal: [
+                    docsLink(
+                      "Broadcast signal",
+                      "apis-tools/camunda-api-rest/specifications/broadcast-signal/"
+                    ),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
             docsLink(
@@ -1787,6 +2095,7 @@ module.exports = {
               "Authentication",
               "apis-tools/web-modeler-api/authentication/"
             ),
+            docsLink("Tutorial", "apis-tools/web-modeler-api/tutorial/"),
           ],
         },
 
@@ -1802,58 +2111,6 @@ module.exports = {
               "Deprecated RPCs",
               "apis-tools/zeebe-api/deprecated-rpcs/"
             ),
-          ],
-        },
-
-        {
-          "Zeebe API (REST)": [
-            docsLink(
-              "Overview",
-              "apis-tools/zeebe-api-rest/zeebe-api-rest-overview/"
-            ),
-            docsLink(
-              "Authentication",
-              "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
-            ),
-
-            {
-              Specifications: [
-                docsLink(
-                  "Introduction",
-                  "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api/"
-                ),
-
-                {
-                  Cluster: [
-                    docsLink(
-                      "Get cluster topology",
-                      "apis-tools/zeebe-api-rest/specifications/get-cluster-topology/"
-                    ),
-                  ],
-                },
-
-                {
-                  "User task": [
-                    docsLink(
-                      "Complete a user task",
-                      "apis-tools/zeebe-api-rest/specifications/complete-a-user-task/"
-                    ),
-                    docsLink(
-                      "Assign a user task",
-                      "apis-tools/zeebe-api-rest/specifications/assign-a-user-task/"
-                    ),
-                    docsLink(
-                      "Update a user task",
-                      "apis-tools/zeebe-api-rest/specifications/update-a-user-task/"
-                    ),
-                    docsLink(
-                      "Unassign a user task",
-                      "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task/"
-                    ),
-                  ],
-                },
-              ],
-            },
           ],
         },
 
@@ -2004,6 +2261,62 @@ module.exports = {
                       "String",
                       "apis-tools/tasklist-api/scalars/string/"
                     ),
+                  ],
+                },
+              ],
+            },
+
+            {
+              "Zeebe API (REST)": [
+                docsLink(
+                  "Overview",
+                  "apis-tools/zeebe-api-rest/zeebe-api-rest-overview/"
+                ),
+                docsLink(
+                  "Authentication",
+                  "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
+                ),
+                docsLink(
+                  "Tutorial",
+                  "apis-tools/zeebe-api-rest/zeebe-api-tutorial/"
+                ),
+
+                {
+                  Specifications: [
+                    docsLink(
+                      "Introduction",
+                      "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api/"
+                    ),
+
+                    {
+                      Cluster: [
+                        docsLink(
+                          "Get cluster topology",
+                          "apis-tools/zeebe-api-rest/specifications/get-cluster-topology/"
+                        ),
+                      ],
+                    },
+
+                    {
+                      "User task": [
+                        docsLink(
+                          "Complete a user task",
+                          "apis-tools/zeebe-api-rest/specifications/complete-a-user-task/"
+                        ),
+                        docsLink(
+                          "Assign a user task",
+                          "apis-tools/zeebe-api-rest/specifications/assign-a-user-task/"
+                        ),
+                        docsLink(
+                          "Update a user task",
+                          "apis-tools/zeebe-api-rest/specifications/update-a-user-task/"
+                        ),
+                        docsLink(
+                          "Unassign a user task",
+                          "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task/"
+                        ),
+                      ],
+                    },
                   ],
                 },
               ],
