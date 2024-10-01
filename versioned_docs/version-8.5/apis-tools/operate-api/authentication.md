@@ -91,7 +91,7 @@ See the [Operate Configuration - Authentication](/self-managed/operate-deploymen
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to send a request to the Operate REST API's ["Search process instances" endpoint](./specifications/search-1.api.mdx):
+For example, to send a request to the Operate REST API's ["Search process instances"](./specifications/search-1.api.mdx) endpoint:
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [

@@ -36,7 +36,7 @@ All Administration Self-Managed API requests require authentication. To authenti
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to send a request to the ["Get current clusters" endpoint](./specifications/get-clusters.api.mdx):
+For example, to send a request to the ["Get current clusters"](./specifications/get-clusters.api.mdx) endpoint:
 
 :::tip
 The `${CAMUNDA_BASE_URL}` variable below represents the URL of the Self-Managed environment. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8080`.

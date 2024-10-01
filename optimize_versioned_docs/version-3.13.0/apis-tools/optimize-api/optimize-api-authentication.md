@@ -7,7 +7,7 @@ description: "Connect business process-related event data and variable data held
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Optimize API requests except [the health readiness endpoint](./health-readiness.md) require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
+All Optimize API requests except [the health readiness](./health-readiness.md) endpoint require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
 ## Generate a token
 
@@ -93,7 +93,7 @@ The Optimize API can also be configured in a Self-Managed environment to authent
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to send a request to the Optimize API's ["Get dashboard IDs" endpoint](./dashboard/get-dashboard-ids.md):
+For example, to send a request to the Optimize API's ["Get dashboard IDs"](./dashboard/get-dashboard-ids.md) endpoint:
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
