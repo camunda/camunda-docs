@@ -46,7 +46,7 @@ The cluster size defines the cluster performance and capacity.
 
 Choose the cluster size that best meets your cluster environment requirements. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
 
-- You can choose from four cluster sizes: 1x, 2x, 3x, 4x.
+- You can choose from three cluster sizes: 1x, 2x, and 3x.
 - Each increase in size boosts cluster performance and adds capacity. Larger cluster sizes allow you to serve more workload.
 - Increased usage such as higher throughput or longer data retention requires a larger cluster size.
 - Each size increase uses one of your available cluster reservations.
@@ -55,7 +55,7 @@ Choose the cluster size that best meets your cluster environment requirements. S
 
 Contact your Customer Success Manager to:
 
-- Increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
+- Increase the cluster size beyond the maximum 3x size. This requires custom sizing and pricing.
 - Increase the cluster size of an existing cluster.
 
 :::
@@ -83,6 +83,6 @@ You can resume a paused cluster at any time, which typically takes five to ten m
 To prevent auto-pause, you can:
 
 - Tag the cluster as `test`, `stage`, or `prod` instead of `dev`.
-- [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter, Professional, or Enterprise plan.
+- [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
 
 :::
