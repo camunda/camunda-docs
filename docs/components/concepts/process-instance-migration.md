@@ -321,6 +321,8 @@ In the following cases, the process instance can't apply the migration plan and 
   E.g. a service task `A` has timer boundary event `T1` and will be migrated to the service task `B` has timer boundary event `T2`.
   If a mapping instruction between `A` -> `B` is provided, a mapping instruction for `T1` can only refer to `T2`.
 - Each catch event can only be the target of a mapping instruction once.
+- Two catch events in the source cannot be mapped to the same catch event in the target.
+- A catch event in the source cannot be mapped to a different type of catch event in the target.
 
 The following limitations exist that may be supported in future versions:
 
