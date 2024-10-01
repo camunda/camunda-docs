@@ -155,7 +155,7 @@ You decide what happens to the associated event subscription through the mapping
 
 - Migrate catch events: if a catch event is mapped, the associated subscription is migrated.
 - Remove catch events: if a catch event in the source process is not mapped, then the associated subscription is closed during migration.
-- Create catch events: if a catch event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
+- Add catch events: if a catch event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
 
 ### Migrate catch events
 
@@ -196,7 +196,7 @@ Assuming that the timer boundary event is defined as 2 weeks duration in the tar
 
 ![The process instance is waiting at the active user task A with the migrated timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target.png)
 
-That case applies to other event types as well.
+Mapping catch events applies to other event types as well.
 For example, if you want to keep the message name the same for a message event subprocess start event, you should map the message start event when migrating the process instance.
 Another example would be to preserve a signal name for an intermediate signal catch event, you should map the signal catch event when to the one in the target while migrating the process instance.
 
@@ -233,6 +233,12 @@ After the migration the process instance will look like following:
 
 ![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target-trigger-updated.png)
 
+Same as above, omitting the mapping instruction for catch events applies to other event types as well.
+For example, if you want to change the message name for a message event subprocess start event, you must omit mapping the message start event when migrating the process instance.
+Another example would be to update a signal name for an intermediate signal catch event, you must omit mapping the signal catch event when to the one in the target while migrating the process instance.
+
+// TODO - fix links to the support bpmn elements
+
 ### Add or remove catch events
 
 You can also add or remove catch events.
@@ -241,17 +247,20 @@ Let's consider a process instance awaiting at a service task `A`.
 
 ![The process instance is waiting at the active service task A without any boundary events attached.](assets/process-instance-migration/migration-boundary-event_before.png)
 
-You can migrate it to a process definition where a message boundary event `M` is attached to the service task `A`.
+You can migrate it to a process definition where a message event subprocess with message start event `M` is added to the process.
 To do so, you only have to map element `A` to element `A` in the target process.
 After migrating active element `A`, the process instance is newly subscribed to the message boundary event `M` (_a new subscription is opened_).
 
-![After migrating, the process instance is subscribed to the newly introduced message boundary event.](assets/process-instance-migration/migration-boundary-event_after.png)
+![After migrating, the process instance is subscribed to the newly introduced message event subprocess start event.](assets/process-instance-migration/migration-catch-event-target-added.png)
 
-Likewise, you can migrate the process instance back to the previous process definition where no boundary event is attached to the service task `A`.
+Likewise, you can migrate the process instance back to the previous process definition where no message event subprocess is defined.
 To do so, you only have to map element `A` to element `A` again.
-After migrating active element `A`, the process instance is no longer subscribed to the message boundary event `M` (_associated subscription is closed_).
+After migrating active element `A`, the process instance is no longer subscribed to the message start event `M` (_associated subscription is closed_).
 
 ![After migrating back, the process instance is no longer subscribed to the message boundary event](assets/process-instance-migration/migration-boundary-event_before.png)
+
+Likewise, adding and removing catch events applies to all other supported catch event types as well.
+For instance, an intermediate signal catch event can be added or removed in the same way as the message event subprocess in the example above.
 
 :::tip
 Currently, you cannot migrate an active element with a message boundary event attached to an element that also has a message boundary event attached if both the boundary events rely on the same message name and no mapping is provided between these boundary events.
