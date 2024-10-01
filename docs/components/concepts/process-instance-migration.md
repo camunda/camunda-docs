@@ -11,9 +11,7 @@ This can be useful when the process definition of a running process instance nee
 To repair a broken process instance without making changes to the process definition, use [process instance modification](./process-instance-modification.md) instead.
 :::
 
-<!-- TODO: add link to REST API -->
-
-Use the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) to change the process model of a running process instance.
+Use the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/camunda-api-rest/specifications/migrate-process-instance.api.mdx) to change the process model of a running process instance.
 
 :::note
 You can also migrate your process instances using Operate's UI by following [the user guide](../operate/userguide/process-instance-migration.md).
