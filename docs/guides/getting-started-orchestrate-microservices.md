@@ -23,23 +23,12 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 
 ## Prerequisites
 
-You must have access to either a local or remote Camunda Self-Managed installation or a SaaS account.
+You must have access a Camunda 8 SaaS account.
 
-<Tabs>
-   <TabItem value="sm" label="Self-Managed" default>
-      <details>
-         <summary>Have you installed Camunda yet?</summary>
-         <SmPrereqs/>
-         <Install/>
-      </details>
-   </TabItem>
-   <TabItem value="saas" label="SaaS">
-      <details>
-         <summary>Have you signed up for Camunda yet?</summary>
-         <SaasPrereqs/>
-      </details>
-   </TabItem>
-</Tabs>
+<details>
+   <summary>Have you signed up for Camunda yet?</summary>
+   <SaasPrereqs/>
+</details>
 
 Additionally, you need the following:
 
