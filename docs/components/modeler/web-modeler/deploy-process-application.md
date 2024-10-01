@@ -1,14 +1,14 @@
 ---
 id: deploy-process-application
 title: Validate and deploy your process application
-description: Validate your process application in development, before deploying it to testing, staging, or production.
+description: Validate your process application in development before deploying it to testing, staging, or production.
 ---
 
 import DeployImg from './img/process-applications/define-stages-deploy.png'
 import RunProcessApplicationImg from './img/process-applications/run-process-application.png'
 import DeployErrorImg from './img/process-applications/deploy-error.png'
 
-You should validate your process application in development, before deploying it to testing, staging, or production.
+You should validate your process application in development before deploying it to testing, staging, or production.
 
 ## Validate your process application
 
@@ -45,7 +45,7 @@ If any resource fails to deploy, the whole deployment [fails](#deployment-errors
 
 ## Run your process application
 
-You can also manually [run](/components/modeler/web-modeler/run-or-publish-your-process/#run-a-process) your process application if required, for example to perform manual testing.
+You can also manually [run](/components/modeler/web-modeler/run-or-publish-your-process.md#run-a-process) your process application if required, for example to perform manual testing.
 
 :::note
 You should use Play to validate your process application in a development cluster, and only use Run when interacting with other stages such as testing, staging, or production.
