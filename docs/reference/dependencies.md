@@ -38,7 +38,7 @@ import TabItem from "@theme/TabItem";
 ### Operate Dependencies (Front end)
 
 - **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
-- **Source code:** Access the source code for Camunda 8 at [github.com/camunda/camunda/tree/main/operate/client](https://github.com/camunda/camunda/tree/main/operate/client).
+- **Source code:** Access the source code for Operate Frontend at [github.com/camunda/camunda/tree/main/operate/client](https://github.com/camunda/camunda/tree/main/operate/client).
 
 </TabItem>
 
@@ -47,7 +47,7 @@ import TabItem from "@theme/TabItem";
 ### Tasklist Dependencies (Front end)
 
 - **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
-- **Source code:** Access the source code for Camunda 8 at [github.com/camunda/camunda/tree/main/tasklist/client](https://github.com/camunda/camunda/tree/main/tasklist/client).
+- **Source code:** Access the source code for Tasklist Frontend at [github.com/camunda/camunda/tree/main/tasklist/client](https://github.com/camunda/camunda/tree/main/tasklist/client).
 
 </TabItem>
 
@@ -56,7 +56,7 @@ import TabItem from "@theme/TabItem";
 ### Identity Dependencies (Front end)
 
 - **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
-- **Source code:** Access the source code for Camunda 8 at [github.com/camunda/camunda/tree/main/identity/client](https://github.com/camunda/camunda/tree/main/identity/client).
+- **Source code:** Access the source code for Identity Frontend at [github.com/camunda/camunda/tree/main/identity/client](https://github.com/camunda/camunda/tree/main/identity/client).
 
 </TabItem>
 
@@ -65,7 +65,7 @@ import TabItem from "@theme/TabItem";
 ### Optimize Dependencies (Front end)
 
 - **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
-- **Source code:** Access the source code for Camunda 8 at [github.com/camunda/camunda/tree/main/optimize/client](https://github.com/camunda/camunda/tree/main/optimize/client).
+- **Source code:** Access the source code for Optimize Frontend at [github.com/camunda/camunda/tree/main/optimize/client](https://github.com/camunda/camunda/tree/main/optimize/client).
 
 </TabItem>
 
