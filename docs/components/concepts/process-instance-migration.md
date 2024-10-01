@@ -237,8 +237,6 @@ Same as above, omitting the mapping instruction for catch events applies to othe
 For example, if you want to change the message name for a message event subprocess start event, you must omit mapping the message start event when migrating the process instance.
 Another example would be to update a signal name for an intermediate signal catch event, you must omit mapping the signal catch event when to the one in the target while migrating the process instance.
 
-// TODO - fix links to the support bpmn elements
-
 ### Add or remove catch events
 
 You can also add or remove catch events.
@@ -360,13 +358,13 @@ import CallActivitySvg from './assets/bpmn-symbols/call-activity.svg';
 import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../embedded-subprocesses/">
+    <a href="../../modeler/bpmn/embedded-subprocesses/">
         <EmbeddedSubprocessSvg className="implemented" />
     </a>
-    <a href="../call-activities/">
+    <a href="../../modeler/bpmn/call-activities/">
         <CallActivitySvg className="implemented" />
     </a>
-    <a href="../event-subprocesses/">
+    <a href="../../modeler/bpmn/event-subprocesses/">
         <EventSubprocessSvg className="implemented" />
     </a>
 </div>
@@ -381,22 +379,22 @@ import BusinessRuleTaskSvg from './assets/bpmn-symbols/business-rule-task.svg'
 import ScriptTaskSvg from './assets/bpmn-symbols/script-task.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../service-tasks/">
+    <a href="../../modeler/bpmn/service-tasks/">
         <ServiceTaskSvg className="implemented" />
     </a>
-    <a href="../user-tasks/">
+    <a href="../../modeler/bpmn/user-tasks/">
         <UserTaskSvg className="implemented" />
     </a>
-    <a href="../receive-tasks/">
+    <a href="../../modeler/bpmn/receive-tasks/">
         <ReceiveTaskSvg className="implemented" />
     </a>
-    <a href="../send-tasks/">
+    <a href="../../modeler/bpmn/send-tasks/">
         <SendTaskSvg className="implemented" />
     </a>
-    <a href="../business-rule-tasks/">
+    <a href="../../modeler/bpmn/business-rule-tasks/">
         <BusinessRuleTaskSvg className="implemented" />
     </a>
-    <a href="../script-tasks/">
+    <a href="../../modeler/bpmn/script-tasks/">
         <ScriptTaskSvg className="implemented" />
     </a>
 </div>
@@ -407,10 +405,10 @@ import ExclusiveGatewaySvg from './assets/bpmn-symbols/exclusive-gateway.svg'
 import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../exclusive-gateways/">
+    <a href="../../modeler/bpmn/exclusive-gateways/">
         <ExclusiveGatewaySvg className="implemented" />
     </a>
-    <a href="../event-based-gateways/">
+    <a href="../../modeler/bpmn/event-based-gateways/">
         <EventBasedGatewaySvg className="implemented" />
     </a>
 </div>
@@ -421,10 +419,10 @@ import MultiInstanceParallelSvg from './assets/bpmn-symbols/multi-instance-paral
 import MultiInstanceSequentialSvg from './assets/bpmn-symbols/multi-instance-sequential.svg'
 
 <div className="bpmn-symbol-container">
-    <a href="../multi-instance/">
+    <a href="../../modeler/bpmn/multi-instance/">
         <MultiInstanceParallelSvg className="implemented" />
     </a>
-    <a href="../multi-instance/">
+    <a href="../../modeler/bpmn/multi-instance/">
         <MultiInstanceSequentialSvg className="implemented" />
     </a>
 </div>
@@ -473,77 +471,77 @@ import SignalBoundaryEventNonInterruptingSvg from './assets/bpmn-symbols/signal-
   <tbody>
     <tr>
         <td>
-            <a href="../message-events/">Message</a>
+            <a href="../../modeler/bpmn/message-events/">Message</a>
         </td>
         <td>
-            <a href="../message-events/">
+            <a href="../../modeler/bpmn/message-events/">
                 <MessageEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/">
+            <a href="../../modeler/bpmn/message-events/">
                 <MessageEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/">
+            <a href="../../modeler/bpmn/message-events/">
                 <MessageCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/">
+            <a href="../../modeler/bpmn/message-events/">
                 <MessageBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../message-events/">
+            <a href="../../modeler/bpmn/message-events/">
                 <MessageBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="../timer-events/">Timer</a>
+            <a href="../../modeler/bpmn/timer-events/">Timer</a>
         </td>
         <td>
-            <a href="../timer-events/">
+            <a href="../../modeler/bpmn/timer-events/">
                 <TimerEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/">
+            <a href="../../modeler/bpmn/timer-events/">
                 <TimerEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/">
+            <a href="../../modeler/bpmn/timer-events/">
                 <TimerCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/">
+            <a href="../../modeler/bpmn/timer-events/">
                 <TimerBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../timer-events/">
+            <a href="../../modeler/bpmn/timer-events/">
                 <TimerBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
     </tr>
     <tr>
         <td>
-            <a href="../error-events/">Error</a>
+            <a href="../../modeler/bpmn/error-events/">Error</a>
         </td>
         <td>
-            <a href="../error-events/">
+            <a href="../../modeler/bpmn/error-events/">
                 <ErrorEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td></td>
         <td></td>
         <td>
-            <a href="../error-events/">
+            <a href="../../modeler/bpmn/error-events/">
                 <ErrorBoundaryEventSvg className="implemented" />
             </a>
         </td>
@@ -551,30 +549,30 @@ import SignalBoundaryEventNonInterruptingSvg from './assets/bpmn-symbols/signal-
     </tr>
     <tr>
         <td>
-            <a href="../signal-events/">Signal</a>
+            <a href="../../modeler/bpmn/signal-events/">Signal</a>
         </td>
         <td>
-            <a href="../signal-events/">
+            <a href="../../modeler/bpmn/signal-events/">
                 <SignalEventSubprocessSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../signal-events/">
+            <a href="../../modeler/bpmn/signal-events/">
                 <SignalEventSubprocessNonInterruptingSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../signal-events/">
+            <a href="../../modeler/bpmn/signal-events/">
                 <SignalCatchEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../signal-events/">
+            <a href="../../modeler/bpmn/signal-events/">
                 <SignalBoundaryEventSvg className="implemented" />
             </a>
         </td>
         <td>
-            <a href="../signal-events/">
+            <a href="../../modeler/bpmn/signal-events/">
                 <SignalBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
