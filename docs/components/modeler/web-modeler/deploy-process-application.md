@@ -8,23 +8,23 @@ import DeployImg from './img/process-applications/define-stages-deploy.png'
 import RunProcessApplicationImg from './img/process-applications/run-process-application.png'
 import DeployErrorImg from './img/process-applications/deploy-error.png'
 
-You should validate your process application in development before deploying it to testing, staging, or production.
+Validate your process application in development before deploying it to testing, staging, or production.
 
 ## Validate your process application
 
-Use [play mode](/components/modeler/web-modeler/play-your-process.md) to validate your process application in development.
+Use [Play mode](/components/modeler/web-modeler/play-your-process.md) to validate your process application in development.
 
 1. Open the [main process](create-a-process-application.md#main-process).
 1. Select the **Play** tab to play the process application using your selected development cluster.
 1. Perform validation as required, for example, debug your process logic and test the process application.
 
 :::info
-To learn more about using Play for validation, see [play mode for rapid validation](/components/modeler/web-modeler/play-your-process.md)
+To learn more about using Play for validation, see [Play mode for rapid validation](/components/modeler/web-modeler/play-your-process.md)
 :::
 
 ## Deploy your process application
 
-Deploy your process application to testing, staging, or production, for example to run automated tests or make it available for testing.
+Once validation is complete, deploy your process application to cluster stages in your [development lifecycle](/components/modeler/web-modeler/process-application-pipeline.md), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
 
 1. Open the [main process](create-a-process-application.md#main-process).
 1. Select the **Implement** tab.
@@ -45,10 +45,10 @@ If any resource fails to deploy, the whole deployment [fails](#deployment-errors
 
 ## Run your process application
 
-You can also manually [run](/components/modeler/web-modeler/run-or-publish-your-process.md#run-a-process) your process application if required, for example to perform manual testing.
+You can manually [run](/components/modeler/web-modeler/run-or-publish-your-process.md#run-a-process) your process application to test it after it has been deployed to a testing, staging, or production cluster.
 
 :::note
-You should use Play to validate your process application in a development cluster, and only use Run when interacting with other stages such as testing, staging, or production.
+Use Play to validate your process application in a development cluster, and only use Run when interacting with other stages such as testing, staging, or production.
 :::
 
 To run your process application:
