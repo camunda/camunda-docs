@@ -28,7 +28,7 @@ import TabItem from "@theme/TabItem";
 
 ### All Camunda 8 Dependencies
 
-- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
+- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release. This file includes all dependencies for Zeebe, Operate, Tasklist, Optimize and Identity backends.
 - **Source code:** Access the source code for Camunda 8 at [github.com/camunda/camunda](https://github.com/camunda/camunda).
 
 </TabItem>
@@ -53,6 +53,12 @@ import TabItem from "@theme/TabItem";
 
 <TabItem value='identity'>
 
+:::note
+
+Identity is only available for Camunda 8 Self-Managed at this time.
+
+:::
+
 ### Identity Dependencies (Front end)
 
 - **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
@@ -61,6 +67,15 @@ import TabItem from "@theme/TabItem";
 </TabItem>
 
 <TabItem value='optimize'>
+
+<Tabs groupId="optimize-versions" defaultValue="camunda-8" queryString values={
+[
+{label: 'Camunda 8', value: 'camunda-8', },
+{label: 'Camunda 7', value: 'camunda-7', },
+]
+}>
+
+<TabItem value='camunda-8'>
 
 ### Optimize Dependencies (Front end)
 
@@ -354,6 +369,306 @@ import TabItem from "@theme/TabItem";
 - [w3c-keyname@2.2.8](https://github.com/marijnh/w3c-keyname) (MIT)
 - [wicg-inert@3.1.2](https://github.com/WICG/inert) (W3C-20150513)
 - [window-or-global@1.0.1](https://github.com/purposeindustries/window-or-global) (MIT)
+
+### Optimize Dependencies (Back end)
+
+- logback-classic@1.4.14, [(Eclipse Public License - v 1.0)](http://www.eclipse.org/legal/epl-v10.html)
+- logback-core@1.4.14, [(Eclipse Public License - v 1.0)](http://www.eclipse.org/legal/epl-v10.html)
+- auth0@1.45.1, [(The MIT License (MIT))](https://raw.githubusercontent.com/auth0/auth0-java/master/LICENSE)
+- java-jwt@4.4.0, [(The MIT License (MIT))](https://raw.githubusercontent.com/auth0/java-jwt/master/LICENSE)
+- jwks-rsa@0.22.1, [(The MIT License (MIT))](https://raw.githubusercontent.com/auth0/jwks-rsa-java/master/LICENSE)
+- hppc@0.8.1, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- itu@1.7.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-annotations@2.15.3, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-core@2.15.3, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-databind@2.15.3, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-dataformat-cbor@2.15.3, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-dataformat-smile@2.15.3, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-dataformat-yaml@2.15.3, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-datatype-jdk8@2.15.3, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-datatype-jsr310@2.15.3, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-jaxrs-base@2.15.3, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-jaxrs-json-provider@2.15.3, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-module-jakarta-xmlbind-annotations@2.15.3, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- jackson-module-parameter-names@2.15.3, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- classmate@1.5.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- caffeine@3.1.8, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- dateparser@1.0.11, [(Apache-2.0 License)](https://github.com/sisyphsu/dateparser/blob/master/LICENSE)
+- retree@1.0.4, [(Apache-2.0 License)](https://github.com/sisyphsu/retree-java/blob/master/LICENSE)
+- compiler@0.9.6, [(Apache License 2.0)](http://www.apache.org/licenses/LICENSE-2.0)
+- jcip-annotations@1.0-1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- json-base@2.4.3, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- json-flattener@0.16.6, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jsr305@3.0.2, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- error_prone_annotations@2.21.1, [(Apache 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- failureaccess@1.0.1, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- guava@32.1.3-jre, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- listenablefuture@9999.0-empty-to-avoid-conflict-with-guava, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- j2objc-annotations@2.8, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- json-path@2.8.0, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- c3p0@0.9.5.4, [(GNU Lesser General Public License, Version 2.1)](http://www.gnu.org/licenses/lgpl-2.1.html)
+- mchange-commons-java@0.2.15, [(GNU Lesser General Public License, Version 2.1)](http://www.gnu.org/licenses/lgpl-2.1.html)
+- content-type@2.2, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- lang-tag@1.7, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- nimbus-jose-jwt@9.24.4, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- oauth2-oidc-sdk@9.43.3, [(Apache License, version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.html)
+- opencsv@5.9, [(Apache 2)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- logging-interceptor@4.11.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- okhttp@4.11.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- okio-jvm@3.5.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- okio@3.5.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- t-digest@3.2, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- semver4j@3.1.0, [(The MIT License)](http://www.opensource.org/licenses/mit-license.php)
+- HikariCP-java7@2.4.13, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-beanutils@1.9.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-codec@1.15, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-collections@3.2.2, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-io@2.15.1, [(Apache-2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-logging@1.2, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- zeebe-protocol@8.4.0, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0)
+- classgraph@4.8.165, [(The MIT License (MIT))](http://opensource.org/licenses/MIT)
+- micrometer-commons@1.11.7, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- micrometer-core@1.11.7, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- micrometer-observation@1.11.7, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- micrometer-registry-prometheus@1.12.1, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- netty-buffer@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-codec-http2@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-codec-http@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-codec-socks@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-codec@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-common@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-handler-proxy@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-handler@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-resolver@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-transport-native-unix-common@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- netty-transport@4.1.104.Final, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- simpleclient@0.16.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- simpleclient_common@0.16.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- simpleclient_tracer_common@0.16.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- simpleclient_tracer_otel@0.16.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- simpleclient_tracer_otel_agent@0.16.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jakarta.activation-api@2.1.2, [(EDL 1.0)](http://www.eclipse.org/org/documents/edl-v10.php)
+- jakarta.annotation-api@2.1.1, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jakarta.inject-api@2.0.1, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jakarta.json.bind-api@2.0.0, [(Eclipse Public License 2.0)](https://projects.eclipse.org/license/epl-2.0)
+- jakarta.json-api@2.1.2, [(Eclipse Public License 2.0)](https://projects.eclipse.org/license/epl-2.0)
+- jakarta.mail-api@2.1.2, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jakarta.servlet-api@6.0.0, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jakarta.transaction-api@2.0.0, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jakarta.validation-api@3.0.2, [(Apache License 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jakarta.websocket-api@2.1.1, [(Eclipse Public License v. 2.0)](https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.txt)
+- jakarta.websocket-client-api@2.1.1, [(Eclipse Public License v. 2.0)](https://www.eclipse.org/org/documents/epl-2.0/EPL-2.0.txt)
+- jakarta.ws.rs-api@3.1.0, [(EPL-2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jakarta.xml.bind-api@4.0.1, [(Eclipse Distribution License - v 1.0)](http://www.eclipse.org/org/documents/edl-v10.php)
+- cache-api@1.1.0, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- joda-time@2.1, [(Apache 2)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jna@5.10.0, [(LGPL-2.1-or-later)](https://www.gnu.org/licenses/old-licenses/lgpl-2.1)
+- failsafe@2.4.4, [(Apache License, Version 2.0)](http://apache.org/licenses/LICENSE-2.0)
+- logstash-logback-encoder@7.4, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0)
+- accessors-smart@2.4.9, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- json-smart@2.4.10, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jopt-simple@5.0.2, [(The MIT License)](http://www.opensource.org/licenses/mit-license.php)
+- agrona@1.20.0, [(The Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-collections4@4.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-lang3@3.14.0, [(Apache-2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-math3@3.6.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- commons-text@1.11.0, [(Apache-2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- httpclient5@5.3, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- httpcore5-h2@5.2.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- httpcore5@5.2.4, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- httpasyncclient@4.1.5, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- httpclient@4.5.14, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- httpcore-nio@4.4.15, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- httpcore@4.4.16, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- log4j-api@2.22.0, [(Apache-2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- log4j-core@2.17.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- log4j-to-slf4j@2.22.0, [(Apache-2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-analyzers-common@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-backward-codecs@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-core@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-grouping@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-highlighter@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-join@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-memory@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-misc@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-queries@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-queryparser@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-sandbox@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-spatial3d@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- lucene-suggest@8.11.1, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- tika-core@2.9.1, [(Apache-2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- tomcat-embed-el@10.1.17, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-engine-dmn@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-engine-feel-api@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-engine-feel-juel@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-engine-feel-scala@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-bpmn-model@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-cmmn-model@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-dmn-model@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-xml-model@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-engine@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-license-check@2.7.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-commons-logging@1.12.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-commons-typed-values@7.18.11-ee, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-commons-utils@1.12.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-connect-connectors-all@1.5.6, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- camunda-connect-core@1.5.6, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- checker-qual@3.37.0, [(The MIT License)](http://opensource.org/licenses/MIT)
+- commons-compiler@3.1.11, [(BSD-3-Clause)](https://spdx.org/licenses/BSD-3-Clause.html)
+- janino@3.1.11, [(BSD-3-Clause)](https://spdx.org/licenses/BSD-3-Clause.html)
+- angus-activation@1.1.0, [(EDL 1.0)](http://www.eclipse.org/org/documents/edl-v10.php)
+- jakarta.mail@1.1.0, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jetty-jakarta-servlet-api@5.0.2, [(Apache Software License - Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0)
+- jetty-jakarta-websocket-api@2.0.0, [(Apache Software License - Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0)
+- websocket-core-client@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- websocket-core-common@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- websocket-core-server@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- websocket-jakarta-client@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- websocket-jakarta-common@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- websocket-jakarta-server@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- websocket-jetty-api@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- websocket-jetty-common@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- websocket-jetty-server@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- websocket-servlet@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-alpn-client@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-annotations@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-client@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-http@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-io@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-jndi@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-plus@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-rewrite@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-security@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-server@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-servlet@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-servlets@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-util@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-webapp@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- jetty-xml@11.0.19, [(Eclipse Public License - Version 2.0)](https://www.eclipse.org/legal/epl-2.0/)
+- parsson@1.1.4, [(Eclipse Public License 2.0)](https://projects.eclipse.org/license/epl-2.0)
+- yasson@2.0.2, [(Eclipse Public License v. 2.0)](http://www.eclipse.org/legal/epl-v20.html)
+- ehcache@3.10.8, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- elasticsearch-rest-client@7.17.16, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0)
+- elasticsearch-rest-high-level-client@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- aggs-matrix-stats-client@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- lang-mustache-client@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- mapper-extras-client@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- parent-join-client@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- rank-eval-client@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- elasticsearch-cli@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- elasticsearch-core@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- elasticsearch-geo@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- elasticsearch-lz4@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- elasticsearch-plugin-classloader@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- elasticsearch-secure-sm@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- elasticsearch-x-content@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- elasticsearch@7.17.16, [(Elastic License 2.0)](https://raw.githubusercontent.com/elastic/elasticsearch/v7.17.16/licenses/ELASTIC-LICENSE-2.0.txt)
+- freemarker@2.3.32, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- aopalliance-repackaged@3.0.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- class-model@3.0.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- hk2-api@3.0.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- hk2-core@3.0.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- hk2-locator@3.0.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- hk2-runlevel@3.0.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- hk2-utils@3.0.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- hk2@3.0.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- osgi-resource-locator@1.0.3, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- spring-bridge@3.0.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-container-servlet-core@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-container-servlet@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-client@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-common@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-server@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-bean-validation@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-entity-filtering@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-spring6@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-hk2@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jersey-media-json-jackson@3.1.5, [(EPL 2.0)](http://www.eclipse.org/legal/epl-2.0)
+- jakarta.json@2.0.0, [(Eclipse Public License 2.0)](https://projects.eclipse.org/license/epl-2.0)
+- HdrHistogram@2.1.12, [(Public Domain, per Creative Commons CC0)](http://creativecommons.org/publicdomain/zero/1.0/)
+- hibernate-validator@8.0.1.Final, [(Apache License 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- javassist@3.29.2-GA, [(MPL 1.1)](http://www.mozilla.org/MPL/MPL-1.1.html)
+- jboss-logging@3.5.3.Final, [(Apache License 2.0)](https://repository.jboss.org/licenses/apache-2.0.txt)
+- kotlin-stdlib-common@1.6.20, [(The Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- kotlin-stdlib-jdk7@1.6.20, [(The Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- kotlin-stdlib-jdk8@1.6.20, [(The Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- kotlin-stdlib@1.6.20, [(The Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- annotations@17.0.0, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- LatencyUtils@2.0.3, [(Public Domain, per Creative Commons CC0)](http://creativecommons.org/publicdomain/zero/1.0/)
+- lz4-java@1.8.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- mybatis@3.5.6, [(The Apache Software License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- opensearch-java@2.8.1, [(The Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+- opensearch-rest-client@2.7.0, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- asm-analysis@9.6, [(BSD-3-Clause)](https://asm.ow2.io/license.html)
+- asm-commons@9.6, [(BSD-3-Clause)](https://asm.ow2.io/license.html)
+- asm-tree@9.6, [(BSD-3-Clause)](https://asm.ow2.io/license.html)
+- asm-util@9.6, [(BSD-3-Clause)](https://asm.ow2.io/license.html)
+- asm@9.6, [(BSD-3-Clause)](https://asm.ow2.io/license.html)
+- quartz@2.3.2, [(The Apache Software License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+- jul-to-slf4j@2.0.9, [(MIT License)](http://www.opensource.org/licenses/mit-license.php)
+- slf4j-api@2.0.9, [(MIT License)](http://www.opensource.org/licenses/mit-license.php)
+- spring-boot-actuator-autoconfigure@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-actuator@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-autoconfigure@3.1.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-actuator@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-jersey@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-jetty@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-json@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-logging@3.1.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-mail@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-validation@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter-web@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot-starter@3.1.5, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-boot@3.1.7, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-config@6.2.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-core@6.2.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-crypto@6.2.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-oauth2-client@6.2.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-oauth2-core@6.2.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-oauth2-jose@6.2.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-oauth2-resource-server@6.2.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-security-web@6.2.1, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-aop@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-beans@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-context-support@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-context@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-core@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-expression@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-jcl@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-tx@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-web@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-webmvc@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- spring-websocket@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
+- snakeyaml@2.2, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+</TabItem>
+
+</Tabs>
+
+</TabItem>
+
+<TabItem value='modeler'>
+
+- **Dependencies:** You can find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/camunda-modeler/blob/master/THIRD_PARTY_NOTICES), located in the root of the source code repository. This file is also shipped with the application distribution as `THIRD_PARTY_NOTICES.camunda-modeler.txt`.
+- **Source code:** Access the source code for Desktop Modeler at [github.com/camunda/camunda-modeler](https://github.com/camunda/camunda-modeler).
+
+</TabItem>
+
+<TabItem value='web-modeler'>
+
+- **Dependencies:** SBOM CycloneDX files with up-to-date lists of third party libraries used and their licenses can be requested [on demand](mailto:dependency-request@camunda.com).
+- **Source code:** Access to source code is provided [on demand](mailto:dependency-request@camunda.com).
+
+</TabItem>
+
+<TabItem value='connectors'>
+
+- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/connectors/releases) of each Connectors release.
+- **Source code:** Access the source code for Connectors at [github.com/camunda/connectors](https://github.com/camunda/connectors).
+
+</TabItem>
+
+<TabItem value='console-sm'>
 
 ### Console Self-Managed dependencies (backend)
 
