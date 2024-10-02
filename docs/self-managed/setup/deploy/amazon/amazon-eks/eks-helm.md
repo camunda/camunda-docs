@@ -15,7 +15,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide.
 - [Helm (3.13+)](https://helm.sh/docs/intro/install/)
 - [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](../../../../../../apis-tools/cli-client/) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 
 ## Considerations
 
@@ -268,7 +268,7 @@ This reveals a `client-id` and `client-secret` that can be used to connect to th
 <Tabs groupId="c8-connectivity">
   <TabItem value="zbctl" label="zbctl">
 
-After following the installation instructions in the [zbctl docs](/apis-tools/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
+After following the installation instructions in the [zbctl docs](/apis-tools/community-clients/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain">
@@ -340,7 +340,7 @@ Brokers:
     Partition 3 : Leader, Healthy
 ```
 
-For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/cli-client/cli-get-started.md).
+For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/community-clients/cli-client/cli-get-started.md).
 
 If you want to access the other services and their UI, you can port-forward those as well:
 

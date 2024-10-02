@@ -48,9 +48,3 @@ Users without **Admin** roles can deploy only on `dev`, `test`, or `stage` clust
 ![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
 
 3. After the cluster is created, click on the cluster name to visit the cluster detail page.
-
-:::note
-**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Free Trial `dev` (or untagged) clusters are automatically paused eight hours after a cluster is created or resumed from a paused state. Auto-pause occurs regardless of cluster usage.
-
-You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume your cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
-:::

@@ -124,7 +124,7 @@ Take a look at [this example](https://github.com/camunda/camunda-consulting/tree
 
 ## Thinking about operations during modeling
 
-Make sure you also understand how to [operate Camunda 7](../../operations/operating-camunda-c7) - in particular by understanding _retry behaviour_ and _incident management_ for service tasks.
+Make sure you also understand how to [operate Camunda 7](../../operations/operating-camunda-c7) - in particular by understanding _retry behavior_ and _incident management_ for service tasks.
 
 ## Rolling back a transaction on unhandled errors
 

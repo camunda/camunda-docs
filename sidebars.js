@@ -330,6 +330,7 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
+            "components/connectors/out-of-the-box-connectors/email",
             "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
@@ -794,19 +795,6 @@ module.exports = {
     {
       Clients: [
         {
-          "CLI client": [
-            "apis-tools/cli-client/index",
-            "apis-tools/cli-client/cli-get-started",
-          ],
-        },
-        {
-          "Go client (Deprecated)": [
-            "apis-tools/go-client/index",
-            "apis-tools/go-client/go-get-started",
-            "apis-tools/go-client/job-worker",
-          ],
-        },
-        {
           "Java client": [
             "apis-tools/java-client/index",
             "apis-tools/java-client/job-worker",
@@ -838,6 +826,17 @@ module.exports = {
                 "apis-tools/community-clients/ruby",
                 "apis-tools/community-clients/rust",
                 "apis-tools/community-clients/quarkus",
+                {
+                  "CLI client": [
+                    "apis-tools/community-clients/cli-client/index",
+                    "apis-tools/community-clients/cli-client/cli-get-started",
+                  ],
+                  "Go client": [
+                    "apis-tools/community-clients/go-client/index",
+                    "apis-tools/community-clients/go-client/go-get-started",
+                    "apis-tools/community-clients/go-client/job-worker",
+                  ],
+                },
               ],
             },
           ],

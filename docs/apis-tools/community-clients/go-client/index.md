@@ -1,26 +1,22 @@
 ---
 id: index
-title: "Go client (Deprecated)"
+title: "Go client"
 sidebar_label: "Quick reference"
 description: "Instantiate the client by passing in the address of the cluster you want to connect to in a Go application to interact with Camunda 8."
 ---
 
-:::caution
-
-The Zeebe Go client will be officially deprecated with the 8.6 release. For more information, see [announcements](../../reference/announcements/#deprecation-zeebe-go-client--zbctl).
-
-:::
+You can use the [community-supported](https://github.com/camunda-community-hub) Zeebe Go client library to interact with Camunda 8.
 
 ## Dependencies
 
-To use the [Zeebe Go client library](https://github.com/camunda/camunda-platform-get-started/tree/main/go), add the following dependency to your `go.mod`:
+To use the [Zeebe Go client library](https://github.com/camunda-community-hub/zeebe-client-go/), add the following dependency to your `go.mod`:
 
 ```
 module github.com/zb-user/zb-example
 
 go 1.21
 
-require github.com/camunda/camunda/clients/go/v8@v8.5.0
+require github.com/camunda-community-hub/zeebe-client-go/v8@v8.5.0
 ```
 
 ## Bootstrapping
@@ -33,7 +29,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/camunda/camunda/clients/go/v8/pkg/zbc"
+    "github.com/camunda-community-hub/zeebe-client-go/v8/pkg/zbc"
 )
 
 func main() {
@@ -92,7 +88,7 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/camunda/camunda/clients/go/v8/pkg/zbc"
+    "github.com/camunda-community-hub/zeebe-client-go/v8/pkg/zbc"
     "os"
 )
 

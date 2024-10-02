@@ -14,11 +14,9 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
 
-In Self-Managed, you will be prompted to provide the [details](#use-play-with-camunda-self-managed) of your cluster:
+In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Docker Compose distribution provides one cluster configured by default. If no configuration is found, you are prompted to [manually enter your cluster details](#use-play-with-camunda-self-managed).
 
-![play cluster config](img/play-cluster-configuration.png)
-
-This starts a Play environment that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
+A Play environment is then started that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
 
 The current version of the active process and all its dependencies, like called processes or DMN files, are automatically deployed to the Play environment. An error or warning is raised if a file fails to deploy, is missing, or a Connector secret isn’t filled out.
 
@@ -149,15 +147,16 @@ Both offer monitoring of a single process instance, its variables and path, inci
 
 ## Limitations and availability
 
-Play is being rebuilt and progressively rolled out to more users. This section explains why you might not see the **Play** tab, and any additional limitations.
+This section explains why you might not see the **Play** tab, and any additional limitations.
 
 For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
+
+Although Play is compatible with cluster versions 8.5.1 and above, we fully support and recommend using versions 8.6.0 or higher.
 
 ### Camunda 8 SaaS
 
 In Camunda 8 SaaS, Play is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
 Additionally, within their organization, users need to have a [role](/components/console/manage-organization/manage-users.md#roles-and-permissions) which has deployment privileges.
-Enterprise users need an admin to enable Play by opting in to [alpha features](/components/console/manage-organization/enable-alpha-features.md).
 
 ### Camunda 8 Self-Managed
 
@@ -171,13 +170,16 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 ### Features
 
-[Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
+- [Decision table rule](/components/modeler/dmn/decision-table-rule.md) evaluations are not viewable from Play. However, they can be inferred from the output variable, or can be viewed from Operate.
+- Currently, Play supports displaying up to 100 flow node instances in the instance history panel, 100 variables in the variables panel, and 100 process instances on the process definition page. To access all related data, you can use Operate.
+- While you can still interact with your process instance in Play (for example, completing jobs or publishing messages), you may be unable to resolve incidents if they occur beyond the 100th flow node instance, as Play does not track them. In this case, incident resolution can be managed in Operate.
+- Play doesn't support elements defined using [FEEL expressions](/components/modeler/feel/what-is-feel.md), such as job types for service tasks, message correlation keys, and called elements in call activities.
 
 ## Use Play with Camunda Self-Managed
 
-After selecting the **Play** tab in Self-Managed, you are prompted to provide the details of your cluster.
+After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Docker Compose distribution provides one cluster configured by default.
 
-See the table below for the requirement for each field, as well as an example value:
+If no cluster is configured, Web Modeler requests the following cluster details to use for deployment:
 
 | Name              | Description                                     | Example value                                                                      |
 | ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
@@ -194,7 +196,10 @@ See the table below for the requirement for each field, as well as an example va
 
 ### Limitations
 
-The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior and, therefore, are not supported when used with Play.
+- The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
+- Play cannot check the presence of Connector secrets in Self-Managed setups.
+  If a secret is missing, Play will show an incident at runtime.
+  Learn more about [configuring Connector secrets](/self-managed/connectors-deployment/connectors-configuration.md/#secrets).
 
 ## Play Usage and Billing Considerations
 
