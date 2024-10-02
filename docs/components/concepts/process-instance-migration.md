@@ -301,6 +301,11 @@ Migration of a process instance consists of following steps:
 - Subscribing to catch events
 - Migrating catch events subscriptions
 
+If any of the steps fail, the migration is rejected and a rejection message that explains the reason is returned.
+For example, if a mapping is not provided for an active element, the migration is rejected with an error message indicating that the mapping is missing.
+As a result, the process instance will not be migrated and remains in its current state.
+The migration runs in a **transactional** manner, meaning that it is migrating all active elements or nothing.
+
 ### Validation
 
 The migration plan is validated before the migration is executed.
