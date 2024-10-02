@@ -306,6 +306,8 @@ In the following cases, the process instance can't apply the migration plan and 
 - Each catch event can only be the target of a mapping instruction once.
 - Two catch events in the source cannot be mapped to the same catch event in the target.
 - A catch event in the source cannot be mapped to a different type of catch event in the target.
+- Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
+- It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
 
 The following limitations exist that may be supported in future versions:
 
