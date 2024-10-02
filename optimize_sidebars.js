@@ -1950,27 +1950,6 @@ module.exports = {
     {
       Clients: [
         {
-          "CLI client": [
-            docsLink("Quick reference", "apis-tools/cli-client/"),
-            docsLink(
-              "Getting started with the CLI client",
-              "apis-tools/cli-client/cli-get-started/"
-            ),
-          ],
-        },
-
-        {
-          "Go client": [
-            docsLink("Quick reference", "apis-tools/go-client/"),
-            docsLink(
-              "Getting started with the Go client",
-              "apis-tools/go-client/go-get-started/"
-            ),
-            docsLink("Job worker", "apis-tools/go-client/job-worker/"),
-          ],
-        },
-
-        {
           "Java client": [
             docsLink("Quick reference", "apis-tools/java-client/"),
             docsLink("Job worker", "apis-tools/java-client/job-worker/"),
@@ -2040,6 +2019,26 @@ module.exports = {
                 docsLink("Rust", "apis-tools/community-clients/rust/"),
                 docsLink("Spring", "apis-tools/community-clients/spring/"),
                 docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
+                {
+                  "CLI client": [
+                    docsLink("Quick reference", "apis-tools/cli-client/"),
+                    docsLink(
+                      "Getting started with the CLI client",
+                      "apis-tools/cli-client/cli-get-started/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Go client": [
+                    docsLink("Quick reference", "apis-tools/go-client/"),
+                    docsLink(
+                      "Getting started with the Go client",
+                      "apis-tools/go-client/go-get-started/"
+                    ),
+                    docsLink("Job worker", "apis-tools/go-client/job-worker/"),
+                  ],
+                },
               ],
             },
           ],
