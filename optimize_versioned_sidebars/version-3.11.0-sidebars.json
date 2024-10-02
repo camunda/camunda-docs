@@ -75,6 +75,11 @@
         },
         {
           "type": "link",
+          "label": "Encryption at rest",
+          "href": "/docs/8.3/components/concepts/encryption-at-rest/"
+        },
+        {
+          "type": "link",
           "label": "Outbound Connectors vs. job workers",
           "href": "/docs/8.3/components/concepts/outbound-connectors-job-workers/"
         },
@@ -1102,12 +1107,22 @@
 
             {
               "type": "link",
+              "label": "Hugging Face Connector",
+              "href": "/docs/8.3/components/connectors/out-of-the-box-connectors/hugging-face/"
+            },
+            {
+              "type": "link",
               "label": "Kafka Connector",
               "href": "/docs/8.3/components/connectors/out-of-the-box-connectors/kafka/"
             },
 
             {
               "Microsoft": [
+                {
+                  "type": "link",
+                  "label": "Azure OpenAI Connector",
+                  "href": "/docs/8.3/components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                },
                 {
                   "type": "link",
                   "label": "Microsoft Teams Connector",
@@ -1391,11 +1406,6 @@
               "type": "link",
               "label": "Starting processes",
               "href": "/docs/8.3/components/tasklist/userguide/starting-processes/"
-            },
-            {
-              "type": "link",
-              "label": "Updating Tasklist",
-              "href": "/docs/8.3/components/tasklist/userguide/updating-tasklist-cloud/"
             }
           ]
         }
