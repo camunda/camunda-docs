@@ -174,11 +174,9 @@ The user task has not been completed and has already spent five days waiting for
 ![The process instance is waiting at the active user task A with a timer boundary event attached.](assets/process-instance-migration/migration-catch-event-source.png)
 
 Now we want to [change an inactive part of the process](#changing-the-process-instance-flow-for-inactive-parts) by adding a user task after the timer boundary event.
-When migrating the process instance, we want to keep the timer unchanged.
 Instead of waiting for the full time defined by the target process' timer boundary event, we only want to wait for the remaining two days.
-To achieve that, you must map the timer boundary event to the timer boundary event in the target process.
-This ensures the timer is migrated (_the associated subscription is migrated_) and the duration is preserved.
 To achieve this for the example above, the mapping between active user tasks `A` -> `A` and timer boundary events `Timer1` -> `Timer2` must be provided.
+This ensures the timer is migrated (_the associated subscription is migrated_) and the duration is preserved.
 Assuming that the timer boundary event is defined as 2 weeks duration in the target process, the process instance will look like following after the migration:
 
 ![The process instance is waiting at the active user task A with the migrated timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target.png)
@@ -204,18 +202,18 @@ The user task has not been completed and has already spent five days waiting for
 
 First scenario, the catch event in the source process is identical to the catch event in the target process:
 
-If you want to reset the timer and wait for the full week again, you should not map the timer boundary event when migrating the process instance.
-Because, this will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
+This time we want to reset the timer and wait for the full week again.
 To achieve this for the example above, only a mapping between active user tasks `A` -> `A` must be provided.
+This will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
 After the migration the process instance will look like following:
 
 ![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-identical-target-trigger-updated.png)
 
 Second scenario, there are changes between these catch events:
 
-If you want to reset the timer and wait for two weeks, you should not map the timer boundary event when migrating the process instance.
-Because, this will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
+Now, we want to reset the timer and wait for two weeks as in the target process definition.
 To achieve this for the example above, only a mapping between active user tasks `A` -> `A` must be provided.
+This will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
 After the migration the process instance will look like following:
 
 ![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target-trigger-updated.png)
