@@ -21,9 +21,9 @@ This guide requires you to have previously completed or reviewed the steps taken
 ## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create resources within AWS.
-- [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
-- [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [Terraform (1.9.x)](https://developer.hashicorp.com/terraform/downloads)
+- [Helm (3.16+)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
+- [Kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
 
 ## Considerations
 
@@ -79,7 +79,7 @@ Using the same namespace names on both clusters won't work as CoreDNS won't be a
 
 The dot is required to export those variables to your shell and not a spawned subshell.
 
-```shell
+```shell reference
 https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh
 ```
 
