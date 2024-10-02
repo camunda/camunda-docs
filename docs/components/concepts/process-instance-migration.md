@@ -148,7 +148,7 @@ You can migrate a called process instance in the same way as a regular process i
 
 An exception to changing the process instance state is specific to catch events.
 This is necessary to ensure that the process instance can be executed according to the new process definition.
-This allows you to add or remove catch events from an active element.
+It allows you to add or remove catch events from an active element.
 At the same time, you can leave an existing catch event unchanged.
 This section explains how to deal with catch events when migrating a process instance.
 
@@ -161,7 +161,7 @@ You decide what happens to the associated event subscription through the mapping
 ### Migrate catch events
 
 Catch events can be migrated by providing a mapping instruction between the source and the target catch event.
-Providing a mapping between catch events ensures that the behaviour of the event subscription in the source process is preserved after the migration.
+Providing a mapping between catch events ensures that the event subscription in the source process is preserved after the migration.
 In the following section we will discuss situations where mapping a catch event may or may not be useful.
 Let's explain both mapping and non-mapping scenarios with examples.
 
@@ -173,7 +173,7 @@ The user task has not been completed and has already spent five days waiting for
 
 ![The process instance is waiting at the active user task A with a timer boundary event attached.](assets/process-instance-migration/migration-catch-event-source.png)
 
-Now we want to [change an inactive part of the process](#changing-the-process-instance-flow-for-inactive-parts) by adding a user task after the user task with the timer boundary event.
+Now we want to [change an inactive part of the process](#changing-the-process-instance-flow-for-inactive-parts) by adding a user task after the timer boundary event.
 When migrating the process instance, we want to keep the timer unchanged.
 Instead of waiting for the full time defined by the target process' timer boundary event, we only want to wait for the remaining two days.
 To achieve that, you must map the timer boundary event to the timer boundary event in the target process.
@@ -184,8 +184,8 @@ Assuming that the timer boundary event is defined as 2 weeks duration in the tar
 ![The process instance is waiting at the active user task A with the migrated timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target.png)
 
 Mapping catch events applies to other event types as well.
-For example, if you want to keep the message name the same for a message event subprocess start event, you should map the message start event when migrating the process instance.
-Another example would be to preserve a signal name for an intermediate signal catch event, you should map the signal catch event when to the one in the target while migrating the process instance.
+For example, if you want to keep the message name the same for a message event subprocess, you should map the start event of the event subprocess when migrating the process instance.
+Another example would be to preserve a signal name for an intermediate signal catch event attached to an event-based gateway. In this case, you should map the signal catch event to the one in the target while migrating the process instance.
 
 #### No mapping instruction is provided between the catch events
 
