@@ -162,7 +162,6 @@ You decide what happens to the associated event subscription through the mapping
 
 Catch events can be migrated by providing a mapping instruction between the source and the target catch event.
 Providing a mapping between catch events ensures that the behaviour of the event subscription in the source process is preserved after the migration.
-This is especially useful when a subscription behaviour is changed in the new version of the process definition, but you want to keep the catch event behaviour of the running processes the same after the migration.
 In the following section we will discuss situations where mapping a catch event may or may not be useful.
 
 #### When to map a catch event?
