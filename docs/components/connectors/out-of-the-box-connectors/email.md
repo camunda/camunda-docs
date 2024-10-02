@@ -282,7 +282,7 @@ Allow users to send an email from the connected email account.
 
 :::info
 To learn more about Friendly Enough Expression Language (FEEL) expression,
-see [what is FEEL?](/docs/components/modeler/feel/what-is-feel.md).
+see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
 :::
 
 #### Response Structure
