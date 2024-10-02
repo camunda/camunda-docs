@@ -163,10 +163,6 @@ You decide what happens to the associated event subscription through the mapping
 Catch events can be migrated by providing a mapping instruction between the source and the target catch event.
 Providing a mapping between catch events ensures that the behaviour of the event subscription in the source process is preserved after the migration.
 In the following section we will discuss situations where mapping a catch event may or may not be useful.
-
-#### When to map a catch event?
-
-Choosing to map the catch event or not gives you control over what happens to the event subscription.
 Let's explain both mapping and non-mapping scenarios with examples.
 
 #### A mapping instruction is provided between the catch events
