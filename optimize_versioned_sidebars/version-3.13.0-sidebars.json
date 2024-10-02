@@ -80,6 +80,11 @@
         },
         {
           "type": "link",
+          "label": "Encryption at rest",
+          "href": "/docs/components/concepts/encryption-at-rest/"
+        },
+        {
+          "type": "link",
           "label": "Outbound Connectors vs. job workers",
           "href": "/docs/components/concepts/outbound-connectors-job-workers/"
         },
@@ -205,6 +210,11 @@
               "type": "link",
               "label": "Manage IP allowlists",
               "href": "/docs/components/console/manage-clusters/manage-ip-allowlists/"
+            },
+            {
+              "type": "link",
+              "label": "Create backup",
+              "href": "/docs/components/console/manage-clusters/create-backups/"
             },
             {
               "type": "link",
@@ -411,6 +421,11 @@
               "type": "link",
               "label": "Start a new process instance",
               "href": "/docs/components/modeler/desktop-modeler/start-instance/"
+            },
+            {
+              "type": "link",
+              "label": "Use Connectors",
+              "href": "/docs/components/modeler/desktop-modeler/use-connectors/"
             },
 
             {
@@ -964,6 +979,11 @@
                 },
                 {
                   "type": "link",
+                  "label": "Expression field",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-expression/"
+                },
+                {
+                  "type": "link",
                   "label": "Image view",
                   "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-image/"
                 },
@@ -1188,12 +1208,22 @@
 
             {
               "type": "link",
+              "label": "Hugging Face Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/hugging-face/"
+            },
+            {
+              "type": "link",
               "label": "Kafka Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/kafka/"
             },
 
             {
               "Microsoft": [
+                {
+                  "type": "link",
+                  "label": "Azure OpenAI Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                },
                 {
                   "type": "link",
                   "label": "Microsoft Teams Connector",
@@ -1276,6 +1306,11 @@
               "type": "link",
               "label": "REST Connector",
               "href": "/docs/components/connectors/protocol/rest/"
+            },
+            {
+              "type": "link",
+              "label": "SOAP Connector",
+              "href": "/docs/components/connectors/protocol/soap/"
             }
           ]
         },
