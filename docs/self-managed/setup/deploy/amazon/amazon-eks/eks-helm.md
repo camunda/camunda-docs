@@ -108,7 +108,7 @@ Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having follow
 :::warning
 If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
 
-In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.14.2/initial-design/#ownership) to learn more about DNS record ownership.
+In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.15.0/#note) to learn more about DNS record ownership.
 :::
 
 ```shell

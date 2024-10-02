@@ -286,7 +286,7 @@ The same can also be achieved by using `kubectl` and manually adding the mapping
 kubectl edit configmap aws-auth -n kube-system
 ```
 
-For detailed examples, review the [documentation provided by AWS](https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html/).
+For detailed examples, review the [documentation provided by AWS](https://docs.aws.amazon.com/eks/latest/userguide/auth-configmap.html).
 
   </p>
 </details>

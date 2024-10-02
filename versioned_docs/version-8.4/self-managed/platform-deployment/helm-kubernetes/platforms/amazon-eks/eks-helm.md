@@ -108,7 +108,7 @@ Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having follow
 :::warning
 If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
 
-In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.14.2/initial-design/#ownership) to learn more about DNS record ownership.
+In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.15.0/#note) to learn more about DNS record ownership.
 :::
 
 ```shell
@@ -314,20 +314,20 @@ zbctl status --insecure
 Cluster size: 3
 Partitions count: 3
 Replication factor: 3
-Gateway version: 8.4.11
+Gateway version: 8.4.12
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
-    Version: 8.4.11
+    Version: 8.4.12
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
   Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
-    Version: 8.4.11
+    Version: 8.4.12
     Partition 1 : Leader, Healthy
     Partition 2 : Leader, Healthy
     Partition 3 : Follower, Healthy
   Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
-    Version: 8.4.11
+    Version: 8.4.12
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy

@@ -110,7 +110,7 @@ This module creates the basic layout that configures AWS access and Terraform.
 
 The following will use [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allows abstracting resources into reusable components.
 
-The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) is publicly available. It's advisable to review this module before usage.
+The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module/tree/main/modules/eks-cluster) is publicly available. It's advisable to review this module before usage.
 
 1. In the folder where your `config.tf` resides, create an additional `cluster.tf`.
 2. Paste the following content into the newly created `cluster.tf` file to make use of the provided module:
@@ -128,7 +128,7 @@ module "eks_cluster" {
 }
 ```
 
-There are various other input options to customize the cluster setup further; see the [module documentation](https://github.com/camunda/camunda-tf-eks-module).
+There are various other input options to customize the cluster setup further; see the [module documentation](https://github.com/camunda/camunda-tf-eks-module/tree/main/modules/eks-cluster).
 
 ### PostgreSQL module
 
