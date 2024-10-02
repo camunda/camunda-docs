@@ -288,6 +288,46 @@ You can use [process instance modification](./process-instance-modification.md) 
 This results in new keys for the service task as well as the job.
 :::
 
+## Operational Semantics
+
+In the following, we will explain the internal execution of process instance migration.
+It is recommended to understand these steps to fully understand the power of process instance migration.
+
+Migration of a process instance consists of following steps:
+
+- Validation
+- Migration of mapped active elements
+- Unsubscribing from catch events
+- Subscribing to catch events
+- Migrating catch events subscriptions
+
+### Validation
+
+The migration plan is validated before the migration is executed.
+The validation starts with validating the mapping instructions provided in the migration plan.
+For example, the validation checks if the source element ID refers to an existing element in the process instance's process definition.
+Later, while attempting to migrate each active element, each limitation mentioned in the [limitations section](#limitations) is applied.
+For example, the flow scope of an active element is validated to ensure that it is not changed during migration.
+
+### Migration of mapped active elements
+
+The execution of the migration is done in a depth-first manner.
+After all validations are successful, the migration of the outermost active element which is the process instance itself is started.
+Later, the first active child instance of the process instance is migrated followed by the migration of its active child instances.
+In this stage, jobs, incidents and variables contained in each active element is also migrated.
+
+### Unsubscribing/subscribing from/to catch events
+
+If a catch event is not mapped, the subscription to the catch event is removed.
+If a catch event exists in the target process definition and not part of the migration plan, a new subscription is created for the catch event.
+This operation is performed per active element as the execution continues to migrate each active element.
+
+### Migrating catch events subscriptions
+
+If a catch event is mapped, the subscription to the catch event is migrated.
+This operation is also performed per active element as the execution continues to migrate each active element.
+Please note that, it is possible to change the interrupting status of the catch event during migration.
+
 ## Limitations
 
 Not all process instances can be migrated to another process definition.
