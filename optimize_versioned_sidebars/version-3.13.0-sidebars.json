@@ -2142,6 +2142,11 @@
               "type": "link",
               "label": "Authentication",
               "href": "/docs/apis-tools/web-modeler-api/authentication/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/apis-tools/web-modeler-api/tutorial/"
             }
           ]
         },
@@ -2182,6 +2187,11 @@
               "type": "link",
               "label": "Authentication",
               "href": "/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/apis-tools/zeebe-api-rest/zeebe-api-tutorial/"
             },
 
             {
