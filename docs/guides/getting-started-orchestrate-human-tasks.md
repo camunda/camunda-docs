@@ -28,13 +28,20 @@ import SmPrereqs from './react-components/sm-prerequisites.md'
 import SaasPrereqs from './react-components/saas-prerequisites.md'
 import Install from './react-components/install-plain-java.md'
 
-Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
+You can use Camunda 8 to orchestrate processes with human tasks of any complexity. User tasks allow you to create and assign tasks to users, who can then perform their work and enter the required data to drive the business process.
+
+This guide introduces you to the basics of human task orchestration.
+
+- You will create a simple process to decide on what to eat for dinner, and drive the process flow according to that decision.
+- This process is entirely executable in the browser.
 
 :::note
-If you prefer a video-based learning experience or a more complex example, visit [this Camunda Academy course](https://bit.ly/3PJJocB).
+For a video-based learning experience or a more complex example, see the [Getting Started with Human Workflow](https://bit.ly/3PJJocB) Camunda Academy course.
 :::
 
-This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on dinner, and drive the process flow according to that decision. This process is entirely executable in the browser.
+## Before you begin
+
+To complete this guide you must either sign up for camunda 8 SaaS or install Camunda 8 Self-Managed:
 
 <Tabs>
    <TabItem value="sm" label="Self-Managed">
@@ -52,36 +59,37 @@ This guide introduces you to the basics of human task orchestration. You will cr
    </TabItem>
 </Tabs>
 
-Take the following five steps to create and run your first process with a human in the loop:
+Perform the following steps to create and run your first process with a human in the loop.
 
-### Step 1: Create a new process
+## Step 1: Create a new process
 
-In this step, you will design a process that demonstrates how to route the process flow based on a user decision. In this example, you will create a process to decide what is for dinner.
+Start by designing a process to demonstrate how to route the process flow based on a user decision. In this example, you will create a process to decide what to eat for dinner.
 
-#### Create a new file
+### Create a new project and file
 
-1. Every file in Web Modeler requires a project. Within Modeler, click **New project**.
-2. Name your project and select **Create new > BPMN diagram**.
-3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
+1. Open Modeler, and click **New project**. Every file in Web Modeler requires a project.
+2. Select **Create new > BPMN diagram**.
+3. Give your file a descriptive name. For example, 'Decide for Dinner'.
+4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process appears in other Camunda 8 components.
 
-#### Design the process
+### Design the process
 
 :::note
-To run this guide, make sure to be in **Implement** mode to specify the technical details of the process.
+
+Make sure you are in **Implement** mode as this allows you to configure the process technical details.
 <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
+
 :::
 
 1. A **start event** is automatically added to the canvas. Click it to display configuration and append options.
 2. Click the rectangular **Append Task** icon to append a task.
-3. Enter a descriptive name for the task, such as `Decide what's for dinner`.
-4. Change the task type by clicking the **wrench** icon. Select **User Task**.
-5. Select the user task and click on the diamond-shaped icon to append an exclusive gateway. The gateway allows to route the process flow differently, depending on conditions.
-6. Select the gateway and append a task by clicking the task icon. Repeat it to create a second process flow. Name the tasks based on what the user decides to eat: in this case, we've named ours `Prepare chicken` and `Prepare salad`.
+3. Enter a descriptive name for the task, for example `Decide what's for dinner`.
+4. Change the task type by clicking the **Change element** icon. Select **User task**.
+5. Select the user task and click on the diamond-shaped icon to append an exclusive gateway. The gateway allows you to route the process flow differently, depending on conditions.
+6. Select the gateway and append a task by clicking the task icon. Repeat this to create a second process flow. Name the tasks based on what the user decides to eat, for example, we've named ours `Prepare chicken` and `Prepare salad`.
 7. To route the user to the right task, add [expressions](/components/concepts/expressions.md) to the **sequence flows**. Sequence flows are represented by arrows connecting the gateway to the tasks. To add an expression, click on a sequence flow to view the **properties panel**, and open the **Condition** section.
 8. Verify the sequence flows have the following expressions: `meal = "Salad"` on one side, and `meal = "Chicken"` on the other. You will define the variable `meal` later when designing a form for the user task.
-   <img src={ExpressionInputImg} style={{width: 400}} alt="Example of a conditional expression" />
-
+   <p><img src={ExpressionInputImg} style={{width: 400}} alt="Example of a conditional expression" /></p>
 9. Connect the split process flows again. Append another exclusive gateway to one of the tasks. Select the other task and drag the arrow-shaped sequence flow tool to connect it to the gateway.
 10. Select the gateway and add an **end event** to your process, denoted by the circle with the thick outline.
 
@@ -92,13 +100,13 @@ Variables are part of a process instance and represent the data of the instance.
 
 <!-- TODO note that processes can be of any complexity, and link to advanced guides -->
 
-### Step 2: Design a form
+## Step 2: Design a form
 
-You have now designed the process. To allow the user to make the decision, you will now design a [form](../components/modeler/forms/camunda-forms-reference.md). Forms can be added to user tasks and start events to capture user input, and the user input can be used to route the process flow, to make calls to APIs, or to orchestrate your services.
+You have now designed the process. To allow the user to make the decision, you will now design a [form](../components/modeler/forms/camunda-forms-reference.md). Forms can be added to user tasks and start events to capture user input, and the user input can be used to route the process flow, to make API requests, or to orchestrate your services.
 
 1. Select the user task you created in **[Step 1](#step-1-create-a-new-process)**.
 2. Click the blue **link icon** in the lower right corner. A menu expands that allows you to create a new form.
-   <img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" />
+   <p><img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" /></p>
 3. Click **Create new form**. A form will be created and opened in the form editor. The form is automatically named.
 
 :::note
@@ -115,7 +123,7 @@ Don't worry about saving your process diagram. Modeler automatically saves every
 
 <img src={FormValuesImg} style={{width: 600}} alt="Defining a radio group and its values" />
 
-### Step 3: Link the form to your process
+## Step 3: Link the form to your process
 
 Once the form is designed, you must link it to your process.
 
@@ -131,7 +139,7 @@ Once the form is designed, you must link it to your process.
 Forms linked in the user task are deployed together with the process. If you make changes to a form, you have to deploy the referencing process again to make the changes appear.
 :::
 
-### Step 4: Run your process
+## Step 4: Run your process
 
 Your process is now ready to run. Given its human-centric nature, it is well suited to be run in Tasklist. In order to make it accessible from Tasklist, the process must be deployed first.
 
@@ -139,7 +147,7 @@ Your process is now ready to run. Given its human-centric nature, it is well sui
 Human-centric processes involving user tasks seamlessly unfold within Tasklist, offering a cost-effective orchestration solution for human work with forms. However, the versatility of these processes extends beyond Tasklist, encompassing various alternative methods and applications. For instance, users can be redirected to external applications to fulfill tasks, bespoke task applications can be developed for any domain, or interactions with the physical world can be captured through event signals from sensors and IoT devices.
 :::
 
-#### Deploy and test run
+### Deploy and test run
 
 1. Click **Deploy** to deploy the process to your cluster.
    :::note
@@ -151,7 +159,7 @@ Human-centric processes involving user tasks seamlessly unfold within Tasklist, 
 Other options to run a process are to start it via Tasklist, test it in the Play mode, or call it via the API or an inbound trigger. Read more about [run options](/components/modeler/web-modeler/run-or-publish-your-process.md).
 :::
 
-#### Check successful start in Operate
+### Check successful start in Operate
 
 1. The process start will be confirmed via a notification message on the screen. Click the **chevron icon** next to **Run** to open more options. Click **View process instances** to see the running process in Operate.
    <img src={RunProcessImg} style={{width: 300}} alt="Run action in Modeler" />
@@ -163,7 +171,7 @@ Other options to run a process are to start it via Tasklist, test it in the Play
 In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Play mode](/components/modeler/web-modeler/play-your-process.md).
 :::
 
-### Step 5: Complete a user task
+## Step 5: Complete a user task
 
 When the process instance arrives at the user task, a new user task instance is created at Zeebe. The process instance stops at this point and waits until the user task is completed. Applications like [Tasklist](/components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks. In this last step, you will open Tasklist to run the user task you created.
 
