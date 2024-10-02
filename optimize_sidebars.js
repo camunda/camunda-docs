@@ -840,7 +840,10 @@ module.exports = {
               "Automation Anywhere Connector",
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
-
+            docsLink(
+              "Email Connector",
+              "components/connectors/out-of-the-box-connectors/email/"
+            ),
             {
               AWS: [
                 docsLink(
