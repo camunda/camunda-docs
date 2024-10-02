@@ -6,6 +6,9 @@ description: "Use process instance migration to change the process definition of
 
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
+While doing so, we aim to interfere as little as possible with the process instance state during the migration.
+For example, a migrated active user task remains assigned to the same user.
+This principle applies to all parts of the process instance.
 
 :::tip
 To repair a broken process instance without making changes to the process definition, use [process instance modification](./process-instance-modification.md) instead.
@@ -279,10 +282,6 @@ You do not have to provide a mapping instruction from the process instance's pro
 :::
 
 ## Jobs, expressions, and input mappings
-
-We aim to interfere as little as possible with the process instance state during the migration.
-For example, a migrated active user task remains assigned to the same user.
-This principle applies to all parts of the process instance.
 
 We do not recreate jobs, reevaluate expressions, and reapply input mappings of the active elements.
 We also don't adjust any static values if they differ between the two process definitions.
