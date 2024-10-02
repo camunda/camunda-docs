@@ -8,14 +8,14 @@ Optimize releases two new minor versions a year. These documents guide you throu
 
 If you want to update Optimize by several versions, you cannot do that at once, but you need to perform the updates in sequential order. For instance, if you want to update from 2.5 to 3.0, you need to update first from 2.5 to 2.6, then from 2.6 to 2.7, and finally from 2.7 to 3.0. The following table shows the recommended update paths to the latest version:
 
-| Update from      | Recommended update path to 3.14                                                   |
-| ---------------- | --------------------------------------------------------------------------------- |
-| 3.14             | You are on the latest version.                                                    |
-| 3.0 - 3.13.x     | Rolling update to 3.14                                                            |
-| 3.7.3 OpenSearch | There is a direct update path to 3.14 (Fast-Track), see instructions in section 5 |
-| 3.7.x OpenSearch | 1. Rolling update to 3.7.3 <br /> 2. Direct update to 3.14                        |
-| 2.0 - 2.7        | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0                 |
-| 1.0 - 1.5        | No update possible. Use the latest version directly.                              |
+| Update from      | Recommended update path to 3.14                                                                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 3.14             | You are on the latest version.                                                                                                                              |
+| 3.0 - 3.13.x     | Rolling update to 3.14                                                                                                                                      |
+| 3.7.3 OpenSearch | There is a direct update path to 3.14 (Fast-Track), see instructions in [section 5](#5-direct-update-from-optimize-373-to-314-for-opensearch-installations) |
+| 3.7.x OpenSearch | 1. Rolling update to 3.7.3 <br /> 2. Direct update to 3.14                                                                                                  |
+| 2.0 - 2.7        | 1. Rolling update to 2.7 <br /> 2. Rolling update from 2.7 to 3.0                                                                                           |
+| 1.0 - 1.5        | No update possible. Use the latest version directly.                                                                                                        |
 
 ## Migration instructions
 
@@ -47,7 +47,7 @@ All the steps below are applicable to ElasticSearch and OpenSearch installations
 
 You only need to execute this step if you want to update the Elasticsearch (ES) or OpenSearch (OS) version during the update. In case the ES/OS version stays the same, you can skip this step.
 
-The database update is usually performed in a rolling fashion. Read all about how to do the update in the general [Elasticsearch Update Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) / [OpenSearch Update Guide](https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/index/) and consult the [rolling ugprade ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/rolling-upgrades.html) / [rolling ugprade OS](https://opensearch.org/docs/2.17/install-and-configure/upgrade-opensearch/rolling-upgrade/) guide on how to conduct the rolling update.
+The database update is usually performed in a rolling fashion. Read all about how to do the update in the general [Elasticsearch Update Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) / [OpenSearch Update Guide](https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/index/) and consult the [rolling upgrade ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/rolling-upgrades.html) / [rolling upgrade OS](https://opensearch.org/docs/2.17/install-and-configure/upgrade-opensearch/rolling-upgrade/) guide on how to conduct the rolling update.
 
 ### 3. Perform the migration
 
@@ -115,15 +115,15 @@ INFO UpgradeProcedure - Starting step 2/2: UpdateIndexStep on index: decision-in
 ...
 ```
 
-### 5. Direct Update from Optimize 3.7.3 to 3.14 for OpenSearch installations (Fast-Track update)
+### 5. Direct Update from Optimize 3.7.3 to 3.14 for OpenSearch installations
 
-Optimize 3.14 supports a direct update path from Optimize 3.7.3 to 3.14 for OpenSearch installations. In case you are using a previous 3.7.x version, you need to update to 3.7.3 first by following the normal update procedure. To perform the Fast-Track update, follow the steps below:
+Optimize 3.14 supports a direct update path from Optimize 3.7.3 to 3.14 for OpenSearch installations (Fast-Track update). In case you are using a previous 3.7.x version, you need to update to 3.7.3 first by following the normal update procedure. To perform the Fast-Track update, follow the steps below:
 
 1. Perform steps 1 and 2 as described above. Please note, the backup step is NOT optional, please make sure you perform a full backup of your OpenSearch database before proceeding.
 2. Set the environment variables:
    1. `CAMUNDA_OPTIMIZE_DATABASE=opensearch`
    2. `CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT=<OpenSearch_Port>` (e.g. 9200)
-3. Since the Fast-Track update is expected to require a significant amount of time, only the manual update script execution is supported. Therefore execute the update script as described in step 3.1 with the following additional parameter: `-fastTrack`. Example:
+3. Since the Fast-Track update is expected to require a significant amount of time, only the manual update script execution is supported. Therefore execute the update script as described in [section 3.1](#31-manual-update-script-execution) with the following additional parameter: `-fastTrack`. Example:
 
    ```bash
    For UNIX:

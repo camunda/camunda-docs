@@ -46,7 +46,7 @@ All the steps below are applicable to ElasticSearch and OpenSearch installations
 
 You only need to execute this step if you want to update the Elasticsearch (ES) or OpenSearch (OS) version during the update. In case the ES/OS version stays the same, you can skip this step.
 
-The database update is usually performed in a rolling fashion. Read all about how to do the update in the general [Elasticsearch Update Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) / [OpenSearch Update Guide](https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/index/) and consult the [rolling ugprade ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/rolling-upgrades.html) / [rolling ugprade OS](https://opensearch.org/docs/2.17/install-and-configure/upgrade-opensearch/rolling-upgrade/) guide on how to conduct the rolling update.
+The database update is usually performed in a rolling fashion. Read all about how to do the update in the general [Elasticsearch Update Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) / [OpenSearch Update Guide](https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/index/) and consult the [rolling upgrade ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/rolling-upgrades.html) / [rolling upgrade OS](https://opensearch.org/docs/2.17/install-and-configure/upgrade-opensearch/rolling-upgrade/) guide on how to conduct the rolling update.
 
 ### 3. Perform the migration
 
@@ -82,7 +82,7 @@ spec:
 
 ### 4. Resume a canceled update
 
-Updates are resumable. So if the update process got interrupted either manually or due to an error you don't have to restore the Elasticsearch backup and start over but can simply rerun the update. On resume previously completed update steps will be detected and logged as being skipped. In the following log example **Step 1** was previously completed and is thus skipped:
+Updates are resumable. So if the update process got interrupted either manually or due to an error you don't have to restore the database backup and start over but can simply rerun the update. On resume previously completed update steps will be detected and logged as being skipped. In the following log example **Step 1** was previously completed and is thus skipped:
 
 ```
 ./upgrade/upgrade.sh
@@ -100,4 +100,4 @@ INFO UpgradeProcedure - Starting step 2/2: UpdateIndexStep on index: process-ins
 Schema version saved in Metadata does not match required [8.X.0]
 ```
 
-Let's assume have Optimize 8.4 and want to update to 8.6 and use the jar to update from 8.5 to 8.6. This error occurs because the jar expects Elasticsearch to have the schema version 8.4. This is because you downloaded the wrong Optimize artifact which contained the wrong update jar version.
+Let's assume have Optimize 8.4 and want to update to 8.6 and use the jar to update from 8.5 to 8.6. This error occurs because the jar expects the database to have the schema version 8.4. This is because you downloaded the wrong Optimize artifact which contained the wrong update jar version.
