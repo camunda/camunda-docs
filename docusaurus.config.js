@@ -30,7 +30,7 @@ module.exports = {
       {
         containerId: "GTM-KQGNSTS",
         tagManagerUrl:
-          process.env.TAG_MANAGER_URL || "https://ssgtm.camunda.com",
+          process.env.TAG_MANAGER_URL || "https://ssgtm.camunda.io",
       },
     ],
     "./static/plugins/bpmn-js",
