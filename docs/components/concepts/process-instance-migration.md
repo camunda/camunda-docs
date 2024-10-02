@@ -347,9 +347,9 @@ The following BPMN elements are supported by the migration tool.
 
 ### Subprocesses
 
-import EmbeddedSubprocessSvg from './assets/bpmn-symbols/embedded-subprocess.svg';
-import CallActivitySvg from './assets/bpmn-symbols/call-activity.svg';
-import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
+import EmbeddedSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/embedded-subprocess.svg';
+import CallActivitySvg from '../modeler/bpmn/assets/bpmn-symbols/call-activity.svg';
+import EventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/event-subprocess.svg'
 
 <div className="bpmn-symbol-container">
     <a href="../../modeler/bpmn/embedded-subprocesses/">
@@ -365,12 +365,12 @@ import EventSubprocessSvg from './assets/bpmn-symbols/event-subprocess.svg'
 
 ### Tasks
 
-import ServiceTaskSvg from './assets/bpmn-symbols/service-task.svg'
-import UserTaskSvg from './assets/bpmn-symbols/user-task.svg'
-import ReceiveTaskSvg from './assets/bpmn-symbols/receive-task.svg'
-import SendTaskSvg from './assets/bpmn-symbols/send-task.svg'
-import BusinessRuleTaskSvg from './assets/bpmn-symbols/business-rule-task.svg'
-import ScriptTaskSvg from './assets/bpmn-symbols/script-task.svg'
+import ServiceTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/service-task.svg'
+import UserTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/user-task.svg'
+import ReceiveTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/receive-task.svg'
+import SendTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/send-task.svg'
+import BusinessRuleTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/business-rule-task.svg'
+import ScriptTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/script-task.svg'
 
 <div className="bpmn-symbol-container">
     <a href="../../modeler/bpmn/service-tasks/">
@@ -395,8 +395,8 @@ import ScriptTaskSvg from './assets/bpmn-symbols/script-task.svg'
 
 ### Gateways
 
-import ExclusiveGatewaySvg from './assets/bpmn-symbols/exclusive-gateway.svg'
-import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
+import ExclusiveGatewaySvg from '../modeler/bpmn/assets/bpmn-symbols/exclusive-gateway.svg'
+import EventBasedGatewaySvg from '../modeler/bpmn/assets/bpmn-symbols/event-based-gateway.svg'
 
 <div className="bpmn-symbol-container">
     <a href="../../modeler/bpmn/exclusive-gateways/">
@@ -409,8 +409,8 @@ import EventBasedGatewaySvg from './assets/bpmn-symbols/event-based-gateway.svg'
 
 ### Markers
 
-import MultiInstanceParallelSvg from './assets/bpmn-symbols/multi-instance-parallel.svg'
-import MultiInstanceSequentialSvg from './assets/bpmn-symbols/multi-instance-sequential.svg'
+import MultiInstanceParallelSvg from '../modeler/bpmn/assets/bpmn-symbols/multi-instance-parallel.svg'
+import MultiInstanceSequentialSvg from '../modeler/bpmn/assets/bpmn-symbols/multi-instance-sequential.svg'
 
 <div className="bpmn-symbol-container">
     <a href="../../modeler/bpmn/multi-instance/">
@@ -423,28 +423,28 @@ import MultiInstanceSequentialSvg from './assets/bpmn-symbols/multi-instance-seq
 
 ### Events
 
-import MessageStartEventSvg from './assets/bpmn-symbols/message-start-event.svg'
-import MessageEventSubprocessSvg from './assets/bpmn-symbols/message-event-subprocess.svg'
-import MessageEventSubprocessNonInterruptingSvg from './assets/bpmn-symbols/message-event-subprocess-non-interrupting.svg'
-import MessageCatchEventSvg from './assets/bpmn-symbols/message-catch-event.svg'
-import MessageBoundaryEventSvg from './assets/bpmn-symbols/message-boundary-event.svg'
-import MessageBoundaryEventNonInterruptingSvg from './assets/bpmn-symbols/message-boundary-event-non-interrupting.svg'
+import MessageStartEventSvg from '../modeler/bpmn/assets/bpmn-symbols/message-start-event.svg'
+import MessageEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/message-event-subprocess.svg'
+import MessageEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/message-event-subprocess-non-interrupting.svg'
+import MessageCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/message-catch-event.svg'
+import MessageBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/message-boundary-event.svg'
+import MessageBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/message-boundary-event-non-interrupting.svg'
 
-import TimerEventSubprocessSvg from './assets/bpmn-symbols/timer-event-subprocess.svg'
-import TimerEventSubprocessNonInterruptingSvg from './assets/bpmn-symbols/timer-event-subprocess-non-interrupting.svg'
-import TimerCatchEventSvg from './assets/bpmn-symbols/timer-catch-event.svg'
-import TimerBoundaryEventSvg from './assets/bpmn-symbols/timer-boundary-event.svg'
-import TimerBoundaryEventNonInterruptingSvg from './assets/bpmn-symbols/timer-boundary-event-non-interrupting.svg'
+import TimerEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-event-subprocess.svg'
+import TimerEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-event-subprocess-non-interrupting.svg'
+import TimerCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-catch-event.svg'
+import TimerBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-boundary-event.svg'
+import TimerBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-boundary-event-non-interrupting.svg'
 
-import ErrorEventSubprocessSvg from './assets/bpmn-symbols/error-event-subprocess.svg'
-import ErrorBoundaryEventSvg from './assets/bpmn-symbols/error-boundary-event.svg'
-import ErrorEndEventSvg from './assets/bpmn-symbols/error-end-event.svg'
+import ErrorEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/error-event-subprocess.svg'
+import ErrorBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/error-boundary-event.svg'
+import ErrorEndEventSvg from '../modeler/bpmn/assets/bpmn-symbols/error-end-event.svg'
 
-import SignalEventSubprocessSvg from './assets/bpmn-symbols/signal-event-subprocess.svg'
-import SignalEventSubprocessNonInterruptingSvg from './assets/bpmn-symbols/signal-event-subprocess-non-interrupting.svg'
-import SignalCatchEventSvg from './assets/bpmn-symbols/signal-catch-event.svg'
-import SignalBoundaryEventSvg from './assets/bpmn-symbols/signal-boundary-event.svg'
-import SignalBoundaryEventNonInterruptingSvg from './assets/bpmn-symbols/signal-boundary-event-non-interrupting.svg'
+import SignalEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-event-subprocess.svg'
+import SignalEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-event-subprocess-non-interrupting.svg'
+import SignalCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-catch-event.svg'
+import SignalBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-boundary-event.svg'
+import SignalBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-boundary-event-non-interrupting.svg'
 
 <table className="bpmn-coverage-event-table">
   <thead>
