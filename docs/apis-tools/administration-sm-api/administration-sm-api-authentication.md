@@ -7,7 +7,7 @@ description: "The Administration API for Self-Managed is a REST API and provides
 
 All Administration Self-Managed API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-## Generating a token
+## Generate a token
 
 1. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Administration Self-Managed API**.
@@ -20,7 +20,7 @@ All Administration Self-Managed API requests require authentication. To authenti
    --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -30,13 +30,13 @@ All Administration Self-Managed API requests require authentication. To authenti
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
-## Using a token
+## Use a token
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to send a request to the ["Get current clusters" endpoint](./specifications/get-clusters.api.mdx):
+For example, to send a request to the ["Get current clusters"](./specifications/get-clusters.api.mdx) endpoint:
 
 :::tip
 The `${CAMUNDA_BASE_URL}` variable below represents the URL of the Self-Managed environment. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8080`.
