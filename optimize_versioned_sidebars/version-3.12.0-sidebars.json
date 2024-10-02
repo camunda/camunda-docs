@@ -80,6 +80,11 @@
         },
         {
           "type": "link",
+          "label": "Encryption at rest",
+          "href": "/docs/8.4/components/concepts/encryption-at-rest/"
+        },
+        {
+          "type": "link",
           "label": "Outbound Connectors vs. job workers",
           "href": "/docs/8.4/components/concepts/outbound-connectors-job-workers/"
         },
@@ -205,6 +210,11 @@
               "type": "link",
               "label": "Manage IP allowlists",
               "href": "/docs/8.4/components/console/manage-clusters/manage-ip-allowlists/"
+            },
+            {
+              "type": "link",
+              "label": "Create backup",
+              "href": "/docs/8.4/components/console/manage-clusters/create-backups/"
             },
             {
               "type": "link",
@@ -1152,12 +1162,22 @@
 
             {
               "type": "link",
+              "label": "Hugging Face Connector",
+              "href": "/docs/8.4/components/connectors/out-of-the-box-connectors/hugging-face/"
+            },
+            {
+              "type": "link",
               "label": "Kafka Connector",
               "href": "/docs/8.4/components/connectors/out-of-the-box-connectors/kafka/"
             },
 
             {
               "Microsoft": [
+                {
+                  "type": "link",
+                  "label": "Azure OpenAI Connector",
+                  "href": "/docs/8.4/components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                },
                 {
                   "type": "link",
                   "label": "Microsoft Teams Connector",
