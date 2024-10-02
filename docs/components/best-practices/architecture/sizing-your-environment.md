@@ -143,16 +143,16 @@ Now you can select a hardware package that can cover these requirements. In this
 
 ### Camunda 8 SaaS
 
-Camunda 8 defines three fixed hardware packages you can select from (1x, 2x, and 3x) when choosing your cluster [type](/components/concepts/clusters.md#cluster-type) and [size](/components/concepts/clusters.md#cluster-size). The following table gives you an indication of what requirements you can fulfill with each cluster size.
+Camunda 8 defines three fixed hardware package sizes you can select from (1x, 2x, and 3x) when choosing your cluster [type](/components/concepts/clusters.md#cluster-type) and [size](/components/concepts/clusters.md#cluster-size). The following table gives you an indication of what requirements you can fulfill with each cluster size.
+
+| Hardware package                                                                    | 1x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 3x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+| :---------------------------------------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- |
+| Max Throughput **Tasks/day** **\***                                                 | 4.3 M                                               | 9.3 M                                               | 13.8 M                                              |
+| Max Throughput **Tasks/second** **\***                                              | 50                                                  | 108                                                 | 160                                                 |
+| Max Throughput **Process Instances/day** **\*\***                                   | 3 M                                                 | 6 M                                                 | 9 M                                                 |
+| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** | 75 k                                                | 150 k                                               | 225 k                                               |
 
 The numbers in the table were measured using Camunda 8 (version 8.6), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes Cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/zeebe/benchmarks/project/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) containing a mix of BPMN symbols such as tasks, events and call activities including subprocesses. To calculate day-based metrics, an equal distribution over 24 hours is assumed.
-
-|                                                                                     | Basic | Standard | Advanced |
-| :---------------------------------------------------------------------------------- | :---- | :------- | :------- |
-| Max Throughput **Tasks/day** **\***                                                 | 4.5 M | ? M      | ? M      |
-| Max Throughput **Tasks/second** **\***                                              | 52    | ?        | ?        |
-| Max Throughput **Process Instances/day** **\*\***                                   | 2.9 M | ? M      | ? M      |
-| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** | ?     | ?        | ?        |
 
 **\*** Tasks (Service Tasks, Send Tasks, User Tasks, and so on) completed per day is the primary metric, as this is easy to measure and has a strong influence on resource consumption. This number assumes a constant load over the day.
 
