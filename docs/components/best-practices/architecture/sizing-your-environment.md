@@ -145,7 +145,7 @@ Now you can select a hardware package that can cover these requirements. In this
 
 Camunda 8 defines three fixed hardware package sizes you can select from (1x, 2x, and 3x) when choosing your cluster [type](/components/concepts/clusters.md#cluster-type) and [size](/components/concepts/clusters.md#cluster-size). The following table gives you an indication of what requirements you can fulfill with each cluster size.
 
-| Hardware package                                                                    | 1x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 3x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+| Cluster size                                                                        | 1x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 3x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 | :---------------------------------------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- |
 | Max Throughput **Tasks/day** **\***                                                 | 4.3 M                                               | 9.3 M                                               | 13.8 M                                              |
 | Max Throughput **Tasks/second** **\***                                              | 50                                                  | 108                                                 | 160                                                 |
