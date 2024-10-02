@@ -41,7 +41,7 @@ Visit [Authorization Management - event-based process](./authorization-managemen
 To publish event-based processes that include [Camunda Event Sources](components/userguide/additional-features/event-based-processes.md#camunda-events), it is required to set [`engines.${engineAlias}.eventImportEnabled`](./system-configuration-platform-7.md) to `true` for the connected engine the Camunda process originates from.
 
 :::note Heads Up!
-You need to [reimport data](./../migration-update/instructions.md#force-reimport-of-engine-data-in-optimize) from this engine to have all historic Camunda events available for event-based processes. Otherwise, only new events will be included.
+You need to [reimport data](./../migration-update/camunda-7/instructions.md#force-reimport-of-engine-data-in-optimize) from this engine to have all historic Camunda events available for event-based processes. Otherwise, only new events will be included.
 :::
 
 As an example, in order to be able to create event processes based on Camunda events from the configured engine named `camunda-bpm`, the configuration of that engine needs to have the `importEnabled` configuration property as well as the `eventImportEnabled` set to `true`:
