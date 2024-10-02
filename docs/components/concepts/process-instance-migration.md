@@ -167,15 +167,6 @@ In the following section we will discuss situations where mapping a catch event 
 
 #### When to map a catch event?
 
-<!--
-- Definition of the catch event does not change
-  - You want to keep the event subscription the same
-  - You want to reset event subscription
-- Definition of the catch event changes
-  - You want to keep the old event subscription
-  - You want to use the new catch event definition to re-initiate the subscription
--->
-
 Choosing to map the catch event or not gives you control over what happens to the event subscription.
 Let's explain both mapping and non-mapping scenarios with examples.
 
