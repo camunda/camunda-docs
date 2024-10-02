@@ -340,11 +340,11 @@ If your specific case is not (yet) supported by process instance migration, you 
 Note that this results in new keys for the process instance and its associated variables, element instances, and other entities.
 :::
 
-## Supported BPMN elements
+### Supported BPMN elements
 
 The following BPMN elements are supported by the migration tool.
 
-### Subprocesses
+#### Subprocesses
 
 import EmbeddedSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/embedded-subprocess.svg';
 import CallActivitySvg from '../modeler/bpmn/assets/bpmn-symbols/call-activity.svg';
@@ -362,7 +362,7 @@ import EventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/event-subpro
     </a>
 </div>
 
-### Tasks
+#### Tasks
 
 import ServiceTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/service-task.svg'
 import UserTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/user-task.svg'
@@ -392,7 +392,7 @@ import ScriptTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/script-task.svg'
     </a>
 </div>
 
-### Gateways
+#### Gateways
 
 import ExclusiveGatewaySvg from '../modeler/bpmn/assets/bpmn-symbols/exclusive-gateway.svg'
 import EventBasedGatewaySvg from '../modeler/bpmn/assets/bpmn-symbols/event-based-gateway.svg'
@@ -406,7 +406,7 @@ import EventBasedGatewaySvg from '../modeler/bpmn/assets/bpmn-symbols/event-base
     </a>
 </div>
 
-### Markers
+#### Markers
 
 import MultiInstanceParallelSvg from '../modeler/bpmn/assets/bpmn-symbols/multi-instance-parallel.svg'
 import MultiInstanceSequentialSvg from '../modeler/bpmn/assets/bpmn-symbols/multi-instance-sequential.svg'
@@ -420,7 +420,7 @@ import MultiInstanceSequentialSvg from '../modeler/bpmn/assets/bpmn-symbols/mult
     </a>
 </div>
 
-### Events
+#### Events
 
 import MessageStartEventSvg from '../modeler/bpmn/assets/bpmn-symbols/message-start-event.svg'
 import MessageEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/message-event-subprocess.svg'
