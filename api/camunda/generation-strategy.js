@@ -10,6 +10,7 @@ function preGenerateDocs() {
   console.log("adjusting C8 spec file...");
 
   const specUpdates = [
+    addDisclaimer(),
     ...redefineCreateProcessInstanceRequest(originalSpec),
     ...redefineEvaluateDecisionRequest(originalSpec),
   ];
@@ -23,6 +24,16 @@ function preGenerateDocs() {
 
 function postGenerateDocs() {
   removeDuplicateVersionBadge(`${outputDir}/camunda-8-rest-api.info.mdx`);
+}
+
+function addDisclaimer() {
+  // Adds a disclaimer to the very beginning of the file, so that people know this isn't the true spec.
+  return {
+    from: /^/,
+    to: `# Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
+
+`,
+  };
 }
 
 function redefineCreateProcessInstanceRequest(originalSpec) {

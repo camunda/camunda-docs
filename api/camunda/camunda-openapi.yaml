@@ -1,3 +1,5 @@
+# Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
+
 openapi: "3.0.3"
 info:
   title: Camunda 8 REST API
