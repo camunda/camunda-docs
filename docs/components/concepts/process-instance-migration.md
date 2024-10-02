@@ -290,8 +290,6 @@ This results in new keys for the service task as well as the job.
 
 ## Limitations
 
-<!-- TODO: update the limitations -->
-
 Not all process instances can be migrated to another process definition.
 In the following cases, the process instance can't apply the migration plan and rejects the migration command.
 
@@ -302,7 +300,7 @@ In the following cases, the process instance can't apply the migration plan and 
 - The migration plan can only map each `sourceElementId` once.
 - A mapping instruction's `sourceElementId` must refer to an element existing in the process instance's process definition.
 - A mapping instruction's `targetElementId` must refer to an element existing in the target process definition.
-- A mapping instruction cannot detach a boundary event from an active element.
+- A mapping instruction cannot detach a catch event from an active element.
   E.g. a service task `A` has timer boundary event `T1` and will be migrated to the service task `B` has timer boundary event `T2`.
   If a mapping instruction between `A` -> `B` is provided, a mapping instruction for `T1` can only refer to `T2`.
 - Each catch event can only be the target of a mapping instruction once.
