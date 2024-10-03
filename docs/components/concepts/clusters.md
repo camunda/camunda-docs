@@ -90,3 +90,4 @@ To prevent auto-pause, you can:
 - [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
 
 :::
+

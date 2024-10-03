@@ -89,64 +89,6 @@ public class InsecureClient {
 
 Alternatively, use the `ZEEBE_INSECURE_CONNECTION` environment variable to override the code configuration. To enable an insecure connection, set it to **true**. To use a secure connection, set it to any non-empty value other than **true**. Setting the environment variable to an empty string is equivalent to unsetting it.
 
-### Go
-
-Similarly to the Java client, if no CA certificate is specified, the client will look in the default location for a CA certificate with which to validate the gateway's certificate chain. It's also possible to specify a path to a CA certificate in the Go client:
-
-```go
-package test
-
-import (
-	"github.com/camunda-cloud/zeebe/clients/go/zbc"
-)
-
-
-func main() {
-	client, err := zbc.NewClient(&zbc.ClientConfig{
-		CaCertificatePath: "path/to/certificate",
-	})
-
-	// ...
-}
-```
-
-To disable TLS, execute the following:
-
-```go
-package test
-
-import (
-	"github.com/camunda-cloud/zeebe/clients/go/zbc"
-)
-
-
-func main() {
-	client, err := zbc.NewClient(&zbc.ClientConfig{
-		UsePlaintextConnection: true,
-	})
-
-  // ...
-}
-```
-
-As in the Java client, you can use the `ZEEBE_INSECURE_CONNECTION` and `ZEEBE_CA_CERTIFICATE_PATH` to override these configurations.
-
-### zbctl
-
-To configure `zbctl` to use a path to a CA certificate:
-
-```
-./zbctl --certPath /my/certificate/location <command> [arguments]
-```
-
-To configure `zbctl` to disable TLS:
-
-```
-./zbctl --insecure <command> [arguments]
-```
-
-Since `zbctl` is based on the Go client, setting the appropriate environment variables will override these parameters.
-
 ## Self signed certificates
 
 It may be useful, for testing or development purposes, to use TLS between the client and the gateway; to simplify things, we can use self-signed certificates for this.
