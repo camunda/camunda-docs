@@ -1,12 +1,12 @@
 ---
 id: troubleshoot-zeebe-connection
-title: "Troubleshooting Zeebe connection issues"
+title: "Troubleshoot Zeebe connection issues"
 sidebar_label: "Zeebe connection"
 ---
 
 You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler reports an error.
 
-To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](/apis-tools/cli-client/index.md).
+To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](/apis-tools/community-clients/cli-client/index.md).
 If that doesn't work, resolve the general connection issue first (see [the platform deployment troubleshooting section](/self-managed/operational-guides/troubleshooting/troubleshooting.md), for example.)
 
 If that works, further debug your Zeebe connection with the help of the information stated below. Enabling [debug logging in `modeler-restapi`](#how-can-i-debug-log-grpc--zeebe-communication) may also help to understand the issue.

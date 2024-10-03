@@ -76,7 +76,7 @@ console:
 By default, Console uses Keycloak to provide authentication.
 You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
 
-## Montioring
+## Monitoring
 
 To help understand how Console operates, we expose the following endpoints by default:
 

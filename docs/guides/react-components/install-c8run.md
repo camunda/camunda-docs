@@ -1,9 +1,9 @@
-## --
+--
 
 ## Prerequisites
 
 - OpenJDK 21+
-- Desktop Modeler
+- [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
@@ -13,7 +13,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.0-alpha3) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.0-alpha5) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 

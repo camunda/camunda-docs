@@ -25,7 +25,7 @@ Clients allow applications to do the following:
 - Start and cancel process instances.
 - Activate jobs, work on those jobs, and subsequently complete or fail jobs.
 - Publish messages.
-- Update process instance variables and resolve incidents.
+- Update process instance variables and resolve [incidents](/components/concepts/incidents.md).
 
 The official clients mentioned below interact with [Zeebe](/components/zeebe/zeebe-overview.md), the workflow engine integrated into Camunda 8. All clients require [setting up client credentials](/guides/setup-client-connection-credentials.md) to authenticate. Clients connect to Camunda 8 via a mix of REST and [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
 
@@ -35,12 +35,12 @@ Camunda 8 provides several official clients based on this API. Official clients 
 
 Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/cli-client/", label: "CLI client", docId:"apis-tools/cli-client/index"},
+<DocCardList items={[{type:"link", href:"/docs/apis-tools/cli-client/", label: "CLI client", docId:"apis-tools/cli-client/index"},
 {
-type:"link", href:"/docs/next/apis-tools/go-client/go-get-started/", label: "Go client", docId:"apis-tools/go-client/index",
+type:"link", href:"/docs/apis-tools/go-client/go-get-started/", label: "Go client", docId:"apis-tools/go-client/index",
 },
 {
-type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"
+type:"link", href:"/docs/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"
 }
 ]}/>
 
