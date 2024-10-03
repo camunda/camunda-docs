@@ -29,6 +29,9 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   padding: 0 var(--ifm-pre-padding);
 }
 
+/* Import IBM Plex Sans font */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+
 body {
   font-family:
     IBM Plex Sans,
@@ -174,49 +177,72 @@ svg.implemented:hover [stroke="#333"] {
   text-align: center;
 }
 
+/* Badge padding and styles */
 .badge {
-  margin-left: 5px;
+  margin-left: 0;
 }
 
 .badge--beginner {
   background-color: #ff8b00;
   color: #ffffff;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .badge--intermediate {
   background-color: #ff5400;
   color: #ffffff;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .badge--advanced {
   background-color: #ff1f00;
   color: #ffffff;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .badge--short {
   background-color: #14d890;
   color: #ffffff;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .badge--medium {
   background-color: #0ba7b9;
   color: #ffffff;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .badge--long {
   background-color: #0075ff;
   color: #ffffff;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .badge--platform {
   background-color: #fc5d0d;
   color: #ffffff;
-  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
 }
 .badge--cloud {
   background-color: #26d07c;
   color: #000000;
-  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 10px;
+  margin-bottom: 1.5rem;
 }
 
 .badge--beta {
@@ -373,12 +399,16 @@ span.callout + p::after {
   width: 100%;
 }
 
+/* Add space and thin border to images, remove drop shadow */
 .theme-doc-markdown img {
   border-style: solid;
-  border-color: lightgray;
+  border-color: #dedede;
   border-width: 1px;
-  box-shadow: 4px 4px 4px 1px lightgray;
+  box-shadow: none;
   height: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 20px;
 }
 
 .theme-doc-markdown table img {
@@ -479,7 +509,7 @@ span.callout + p::after {
   color: transparent;
 }
 
-/* Revamping docs homepage */
+/* Homepage hero image */
 
 .hero--primary {
   background-image: url("/static/img/hero-bg.png");
@@ -495,11 +525,7 @@ a.table-of-contents__link.toc-highlight > span.badge {
   display: none;
 }
 
-/* #364 styling modifications */
-/* Use IBM Plex Sans font */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
-
-/* Page title */
+/* Page titles */
 .markdown h1:first-child {
   font-weight: 600;
   font-size: 2.5rem;
@@ -507,6 +533,11 @@ a.table-of-contents__link.toc-highlight > span.badge {
 h1 {
   padding-top: 10px;
   font-family: "IBM Plex Sans", "sans-serif";
+}
+h1.openapi__heading {
+  margin-bottom: calc(
+    var(--ifm-h1-vertical-rhythm-bottom) * var(--ifm-leading)
+  ) !important;
 }
 /* Main page headings */
 h2 {
@@ -530,16 +561,14 @@ h2.openapi__method-endpoint-path {
   font-size: 28px;
   padding-bottom: 0;
 }
-h2.openapi__method-endpoint-path {
-  border-bottom: none;
-  padding-top: 0;
-  padding-bottom: 0;
-}
 .anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#responses {
   border-bottom: none;
   padding-top: 10px;
   font-size: 28px;
   padding-bottom: 0;
+}
+.openapi-tabs__response-header-section {
+  padding-top: 0 !important;
 }
 /* Second level page heading modifications for home page */
 .hero__title {
@@ -572,28 +601,7 @@ h4 {
 h4.openapi-security__summary-header {
   margin-top: 0;
 }
-/* Badge padding and styles */
-.badge {
-  margin-left: 0;
-  margin-right: 10px;
-}
-.badge--beginner,
-.badge--cloud {
-  margin-left: 0;
-  margin-right: 10px;
-  margin-bottom: 1.5rem;
-}
-/* Add space and thin border to images, remove drop shadow */
-.theme-doc-markdown img {
-  border-style: solid;
-  border-color: #dedede;
-  border-width: 1px;
-  box-shadow: none;
-  height: auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  padding: 20px;
-}
+
 /* Add spacing around tables */
 .markdown table {
   margin-top: 20px;
@@ -602,7 +610,7 @@ h4.openapi-security__summary-header {
 table {
   padding-top: 15px;
 }
-/* Add spacing around code blocks */
+/* Add spacing around list code blocks */
 li .theme-code-block {
   margin-top: 20px;
 }
@@ -620,8 +628,8 @@ ul ol {
 }
 /* Highlight tabs */
 .tabs {
+  padding-top: 20px;
   border-bottom: 1px solid #dedede;
-  margin-top: 40px;
 }
 .tabs__item--active {
   background-color: #f7f7f7;
@@ -629,12 +637,16 @@ ul ol {
 .tabs__item:hover {
   background-color: #f7f7f7;
 }
+.openapi-tabs__response-list-container {
+  border-bottom: none;
+}
+.openapi-tabs__schema-list-container {
+  border-bottom: none;
+}
+
+/* lighter menu font  */
 .menu__list-item-collapsible .menu__link:hover,
 .menu__list-item-collapsible .menu__link--active,
 .menu__link--active:not(.menu__link--sublist) {
   font-weight: 600;
-}
-
-table th {
-  text-align: left;
 }
