@@ -84,7 +84,6 @@ Camunda 8 Self-Managed clusters are not affected by this.
 ### Support for Amazon OpenSearch for Optimize
 This release extends the OpenSearch features supported by Optimize. Full support is committed for the next release in January 2025.
 
-
 ### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
 Version changes are made to supported environments:
