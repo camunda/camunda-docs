@@ -139,18 +139,19 @@ First, calculate your requirements using the information provided above, taking 
 - Throughput: 20,000 process instances / day
 - Disk space: 114 GB
 
-Now you can select a hardware package that can cover these requirements. In this example this fits well into a cluster of size S.
+Now you can select a hardware package that can cover these requirements. In this example this fits well into a cluster of size 2x.
 
 ### Camunda 8 SaaS
 
-Camunda 8 defines three fixed hardware package sizes you can select from (1x, 2x, and 3x) when choosing your cluster [type](/components/concepts/clusters.md#cluster-type) and [size](/components/concepts/clusters.md#cluster-size). The following table gives you an indication of what requirements you can fulfill with each cluster size.
+Camunda 8 defines three [cluster sizes](/components/concepts/clusters.md#cluster-size) you can select from (1x, 2x, and 3x) after you have chosen your [cluster type](/components/concepts/clusters.md#cluster-type). The following table gives you an indication of what requirements you can fulfill with each cluster size.
 
-| Cluster size                                                                        | 1x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 2x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 3x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
-| :---------------------------------------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- | :-------------------------------------------------- |
-| Max Throughput **Tasks/day** **\***                                                 | 4.3 M                                               | 9.3 M                                               | 13.8 M                                              |
-| Max Throughput **Tasks/second** **\***                                              | 50                                                  | 108                                                 | 160                                                 |
-| Max Throughput **Process Instances/day** **\*\***                                   | 3 M                                                 | 6 M                                                 | 9 M                                                 |
-| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** | 75 k                                                | 150 k                                               | 225 k                                               |
+| Cluster size                                                                        |                                 1x |                                  2x |                               3x |
+| :---------------------------------------------------------------------------------- | ---------------------------------: | ----------------------------------: | -------------------------------: |
+| Max Throughput **Tasks/day** **\***                                                 |                              4.3 M |                               9.3 M |                           13.8 M |
+| Max Throughput **Tasks/second** **\***                                              |                                 50 |                                 108 |                              160 |
+| Max Throughput **Process Instances/day** **\*\***                                   |                                3 M |                                 6 M |                              9 M |
+| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** |                               75 k |                               150 k |                            225 k |
+| Approximate resources provisioned **\*\*\*\***                                      | 11 vCPU, 22 GB memory, 64 GB disk. | 22 vCPU, 44 GB memory, 128 GB disk. | 33 vCPU, 66 GB mem, 256 GB disk. |
 
 The numbers in the table were measured using Camunda 8 (version 8.6), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes Cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/zeebe/benchmarks/project/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) containing a mix of BPMN symbols such as tasks, events and call activities including subprocesses. To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 
@@ -162,6 +163,8 @@ The numbers in the table were measured using Camunda 8 (version 8.6), [the bench
 
 Data Retention has an influence on the amount of data that is kept for completed instances in your cluster. The default Data retention is set to 30 days, which means that data that is older than 30 days gets removed from Operate and Tasklist. If a process instance is still active, it is fully functioning in runtime, but customers are not able to access historical data older than 30 days from Operate and Tasklist. Data retention is set to 6 months, meaning that data that is older than 6 months will be removed from Optimize. Up to certain limits Data Retention can be adjusted by Camunda on request. See [Camunda 8 SaaS data retention](/components/concepts/data-retention.md).
 
+**\*\*\*\*** These are the resource limits configured in the Kubernetes cluster and are always subject to change.
+
 :::note
 Contact your Customer Success Manager if you require a custom cluster size above these requirements.
 :::
@@ -172,7 +175,7 @@ You might wonder why the total number of process instances stored is that low. T
 
 Provisioning Camunda 8 onto your Self-Managed Kubernetes cluster might depend on various factors. For example, most customers already have their own teams providing Elasticsearch for them as a service.
 
-However, the following example shows a possible configuration which is close to a cluster of size S in Camunda 8 SaaS, which can serve as a starting point for your own sizing.
+However, the following example shows a possible configuration which is close to a cluster of size 1x in Camunda 8 SaaS, which can serve as a starting point for your own sizing.
 
 :::note
 Such a cluster can serve roughly 65 tasks per second as a peak load, and it can store up to 100,000 process instances in Elasticsearch (in-flight and history) before running out of disk-space.
