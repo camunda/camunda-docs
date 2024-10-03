@@ -55,7 +55,7 @@ Replace `<REGION>`, `<ACCOUNT-ID>`, `<DB-RESOURCE-ID>`, and `<DB-USERNAME>` with
   
   <TabItem value="aws-cli" label="AWS CLI">
 
-To create the AWS policy using the AWS CLI, you can use the `aws iam create-policy` command. Here’s an example:
+To create the AWS policy using the AWS CLI, use the `aws iam create-policy` command:
 
 ```bash
 aws iam create-policy \
@@ -86,7 +86,7 @@ Replace `<REGION>`, `<ACCOUNT-ID>`, `<DB-RESOURCE-ID>`, and `<DB-USERNAME>` with
 <Tabs>
   <TabItem value="terraform" label="Terraform" default>
 
-To assign the policy to a role for IAM role to service account mapping in Amazon EKS, you can use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks). Here’s an example configuration:
+To assign the policy to a role for IAM role to service account mapping in Amazon EKS, use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks):
 
 ```json
 module "aurora_role" {
@@ -114,7 +114,7 @@ This Terraform snippet creates a role that allows the service account `<AURORA-S
 
 To assign the policy to a role using the AWS CLI, follow these steps:
 
-1. **Create the IAM Role**:
+1. **Create the IAM role**:
 
 ```bash
 aws iam create-role \
@@ -138,7 +138,7 @@ aws iam create-role \
   }'
 ```
 
-2. **Attach the Policy to the Role**:
+2. **Attach the policy to the role**:
 
 ```bash
 aws iam attach-role-policy \
@@ -149,7 +149,7 @@ aws iam attach-role-policy \
   </TabItem>
 </Tabs>
 
-You need to annotate the service account with the `iam_role_arn`. Here is an example YAML configuration:
+Annotate the service account with the `iam_role_arn`:
 
 ```yaml
 apiVersion: v1
@@ -388,7 +388,7 @@ Replace `<REGION>`, `<ACCOUNT-ID>`, and `<DOMAIN-NAME>` with the appropriate val
 
   <TabItem value="aws-cli" label="AWS CLI">
 
-To create an AWS policy for Amazon OpenSearch Service using the AWS CLI, you can use the `aws iam create-policy` command. Here’s an example:
+To create an AWS policy for Amazon OpenSearch Service using the AWS CLI, you use the `aws iam create-policy` command:
 
 ```bash
 aws iam create-policy \
@@ -440,7 +440,7 @@ To assign the policy to a role for the IAM role to service account mapping in Am
 <Tabs>
   <TabItem value="terraform" label="Terraform" default>
 
-You can use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks). Here’s an example configuration:
+You can use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks):
 
 ```json
 module "opensearch_role" {
@@ -470,7 +470,7 @@ Annotate the service account with the `iam_role_arn` output.
 
 To assign the policy to a role using the AWS CLI, follow these steps:
 
-1. **Create the IAM Role**:
+1. **Create the IAM role**:
 
 ```bash
 aws iam create-role \
@@ -494,7 +494,7 @@ aws iam create-role \
   }'
 ```
 
-2. **Attach the Policy to the Role**:
+2. **Attach the policy to the role**:
 
 ```bash
 aws iam attach-role-policy \
@@ -505,7 +505,7 @@ aws iam attach-role-policy \
   </TabItem>
 </Tabs>
 
-You need to annotate the service account with the `iam_role_arn`. Here is an example YAML configuration:
+Annotate the service account with the `iam_role_arn`:
 
 ```yaml
 apiVersion: v1
