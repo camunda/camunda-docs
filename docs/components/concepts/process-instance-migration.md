@@ -286,10 +286,10 @@ You can use [process instance modification](./process-instance-modification.md) 
 This results in new keys for the service task as well as the job.
 :::
 
-## Operational Semantics
+## Internal Execution
 
-In the following, we will explain the internal execution of process instance migration.
-It is recommended to understand these steps to fully understand the power of process instance migration.
+In the following, we will explain the internal execution steps of process instance migration.
+It is recommended to read these steps to fully understand the power of process instance migration.
 
 Migration of a process instance consists of following steps:
 
@@ -309,7 +309,7 @@ The migration runs in a **transactional** manner, meaning that it is migrating a
 The migration plan is validated before the migration is executed.
 The validation starts with validating the mapping instructions provided in the migration plan.
 For example, the validation checks if the source element ID refers to an existing element in the process instance's process definition.
-Later, while attempting to migrate each active element, each limitation mentioned in the [limitations section](#limitations) is applied.
+Later, while attempting to migrate each active element, each limitation mentioned in the [limitations section](#limitations) is validated.
 For example, the flow scope of an active element is validated to ensure that it is not changed during migration.
 
 ### Migration of mapped active elements
@@ -319,16 +319,21 @@ After all validations are successful, the migration of the outermost active elem
 Later, the first active child instance of the process instance is migrated followed by the migration of its active child instances.
 In this stage, jobs, incidents and variables contained in each active element is also migrated.
 
+While traversing each active element, the migration plan is used to determine the target element for each active element.
+For each active element, `processDefinitionKey`, `bpmnProcessId`, `elementId`, `version` properties are updated to the target process definition.
+
 ### Unsubscribing/subscribing from/to catch events
 
-If a catch event is not mapped, the subscription to the catch event is removed.
-If a catch event exists in the target process definition and not part of the migration plan, a new subscription is created for the catch event.
-This operation is performed per active element as the execution continues to migrate each active element.
+Following operations are performed in respective order for each active element as the execution continues to migrate each active element:
+
+- If a catch event exists in the source process instance and not part of the migration plan, the subscription to the catch event is removed.
+- If a catch event exists in the target process definition and not part of the migration plan, a new subscription is created for the catch event.
 
 ### Migrating catch events subscriptions
 
-If a catch event is mapped, the subscription to the catch event is migrated.
-This operation is also performed per active element as the execution continues to migrate each active element.
+After removing and adding subscriptions to catch events, the migration continues with migrating the catch events per active element.
+If a catch event in the source process is mapped to a catch event in the target process, the subscription is migrated.
+As done for each active element, the catch event's `processDefinitionKey`, `bpmnProcessId`, `elementId` properties are updated to the target process definition.
 Please note that, it is possible to change the interrupting status of the catch event during migration.
 
 ## Limitations
