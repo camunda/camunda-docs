@@ -1891,7 +1891,7 @@ components:
           format: date-time
         processDefinitionId:
           type: string
-          description: The process desfinition ID.
+          description: The process definition ID.
         processDefinitionVersion:
           type: integer
           format: int32
