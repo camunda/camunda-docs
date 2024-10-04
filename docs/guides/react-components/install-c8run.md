@@ -1,5 +1,3 @@
---
-
 ## Prerequisites
 
 - OpenJDK 21+
@@ -23,4 +21,4 @@ When successful, a new Operate window automatically opens.
 If Camunda 8 Run fails to start, run the [shutdown script](/self-managed/setup/deploy/local/c8run.md/#shut-down-camunda-8-run) to end the current processes, then run the start script again.
 :::
 
-For more information and local configuration options, see the [Camunda 8 Run distribution guide](/self-managed/setup/deploy/local/c8run.md).
+For more information and local configuration options, see the [Camunda 8 Run installation guide](/self-managed/setup/deploy/local/c8run.md).
