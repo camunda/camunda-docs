@@ -1,11 +1,11 @@
 ---
 id: dependencies
-title: "Dependencies"
+title: "Source-code and third-party dependencies"
 description: "Dependencies and Third Party Libraries for all the components of Camunda 8"
 keywords: ["dependencies", "third party", "third party libraries"]
 ---
 
-A complete list of all dependencies and third-party libraries for all the components of Camunda 8 (including Self-Managed).
+Camunda provides its users and customers access to its source code as part of [this written offer](https://legal.camunda.com/licensing-and-other-legal-terms#written-offer-source-code), as well as CycloneDX SBOMs, which list all direct and transitive third-party dependencies and their respective licenses. Please click the tabs below to access these items for each Camunda component.
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -13,78 +13,54 @@ import TabItem from "@theme/TabItem";
 <Tabs groupId="dependencies" defaultValue="camunda-platform" queryString values={
 [
 {label: 'Camunda 8', value: 'camunda-platform', },
-{label: 'Operate', value: 'operate', },
-{label: 'Tasklist', value: 'tasklist', },
-{label: 'Identity', value: 'identity', },
-{label: 'Optimize', value: 'optimize', },
 {label: 'Desktop Modeler', value: 'modeler', },
 {label: 'Web Modeler', value: 'web-modeler', },
 {label: 'Connectors', value: 'connectors', },
 {label: 'Console Self-Managed', value: 'console-sm', },
+{label: 'Optimize 7', value: 'optimize-7', },
 ]
 }>
 
 <TabItem value='camunda-platform'>
 
-### All Camunda 8 Dependencies
+### Camunda 8
 
-- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release. This file includes all dependencies for Zeebe, Operate, Tasklist, Optimize and Identity backends.
+- **Dependencies:** Find CycloneDX SBOMs files, which list all direct and transitive third-party dependencies and their respective licenses, in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
 - **Source code:** Access the source code for Camunda 8 at [github.com/camunda/camunda](https://github.com/camunda/camunda).
 
 </TabItem>
 
-<TabItem value='operate'>
+<TabItem value='modeler'>
 
-### Operate Dependencies (Front end)
-
-- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
-- **Source code:** Access the source code for Operate Frontend at [github.com/camunda/camunda/tree/main/operate/client](https://github.com/camunda/camunda/tree/main/operate/client).
+- **Dependencies:** You can find an up-to-date list of direct and transitive libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/camunda-modeler/blob/master/THIRD_PARTY_NOTICES), located in the root of the source code repository. This file is also shipped with the application distribution as `THIRD_PARTY_NOTICES.camunda-modeler.txt`.
+- **Source code:** Access the source code for Desktop Modeler at [github.com/camunda/camunda-modeler](https://github.com/camunda/camunda-modeler).
 
 </TabItem>
 
-<TabItem value='tasklist'>
+<TabItem value='web-modeler'>
 
-### Tasklist Dependencies (Front end)
-
-- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
-- **Source code:** Access the source code for Tasklist Frontend at [github.com/camunda/camunda/tree/main/tasklist/client](https://github.com/camunda/camunda/tree/main/tasklist/client).
+- **Dependencies:** SBOM CycloneDX files, which list all direct and transitive third-party dependencies and their respective licenses, are provided [on demand](mailto:dependency-request@camunda.com).
+- **Source code:** Access to source code is provided [on demand](mailto:dependency-request@camunda.com).
 
 </TabItem>
 
-<TabItem value='identity'>
+<TabItem value='connectors'>
 
-:::note
-
-Identity is only available for Camunda 8 Self-Managed at this time.
-
-:::
-
-### Identity Dependencies (Front end)
-
-- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
-- **Source code:** Access the source code for Identity Frontend at [github.com/camunda/camunda/tree/main/identity/client](https://github.com/camunda/camunda/tree/main/identity/client).
+- **Dependencies:** Find CycloneDX SBOMs files, which list all direct and transitive third-party dependencies and their respective licenses, in the [release assets](https://github.com/camunda/connectors/releases) of each Connectors release.
+- **Source code:** Access the source code for Connectors at [github.com/camunda/connectors](https://github.com/camunda/connectors).
 
 </TabItem>
 
-<TabItem value='optimize'>
+<TabItem value='console-sm'>
 
-<Tabs groupId="optimize-versions" defaultValue="camunda-8" queryString values={
-[
-{label: 'Camunda 8', value: 'camunda-8', },
-{label: 'Camunda 7', value: 'camunda-7', },
-]
-}>
+### Console Self-Managed
 
-<TabItem value='camunda-8'>
-
-### Optimize Dependencies (Front end)
-
-- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/camunda/releases) of each Camunda 8 release.
-- **Source code:** Access the source code for Optimize Frontend at [github.com/camunda/camunda/tree/main/optimize/client](https://github.com/camunda/camunda/tree/main/optimize/client).
+- **Dependencies:** SBOM CycloneDX files, which list all direct and transitive third-party dependencies and their respective licenses, are provided [on demand](mailto:dependency-request@camunda.com).
+- **Source code:** Access to source code is provided [on demand](mailto:dependency-request@camunda.com).
 
 </TabItem>
 
-<TabItem value='camunda-7'>
+<TabItem value='optimize-7'>
 
 ### Optimize Dependencies (Front end)
 
@@ -640,493 +616,6 @@ Identity is only available for Camunda 8 Self-Managed at this time.
 - spring-webmvc@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
 - spring-websocket@6.1.2, [(Apache License, Version 2.0)](https://www.apache.org/licenses/LICENSE-2.0)
 - snakeyaml@2.2, [(Apache License, Version 2.0)](http://www.apache.org/licenses/LICENSE-2.0.txt)
-
-</TabItem>
-
-</Tabs>
-
-</TabItem>
-
-<TabItem value='modeler'>
-
-- **Dependencies:** You can find an up-to-date list of third party libraries used and their license terms in the [THIRD_PARTY_NOTICES](https://github.com/camunda/camunda-modeler/blob/master/THIRD_PARTY_NOTICES), located in the root of the source code repository. This file is also shipped with the application distribution as `THIRD_PARTY_NOTICES.camunda-modeler.txt`.
-- **Source code:** Access the source code for Desktop Modeler at [github.com/camunda/camunda-modeler](https://github.com/camunda/camunda-modeler).
-
-</TabItem>
-
-<TabItem value='web-modeler'>
-
-- **Dependencies:** SBOM CycloneDX files with up-to-date lists of third party libraries used and their licenses can be requested [on demand](mailto:dependency-request@camunda.com).
-- **Source code:** Access to source code is provided [on demand](mailto:dependency-request@camunda.com).
-
-</TabItem>
-
-<TabItem value='connectors'>
-
-- **Dependencies:** Find a SBOM CycloneDX file with an up-to-date list of third party libraries used and their licenses in the [release assets](https://github.com/camunda/connectors/releases) of each Connectors release.
-- **Source code:** Access the source code for Connectors at [github.com/camunda/connectors](https://github.com/camunda/connectors).
-
-</TabItem>
-
-<TabItem value='console-sm'>
-
-### Console Self-Managed dependencies (backend)
-
-- [@isaacs/cliui](https://github.com/yargs/cliui#readme) (ISC)
-- [cliui](https://github.com/yargs/cliui#readme) (ISC)
-- [foreground-child](https://github.com/tapjs/foreground-child#readme) (ISC)
-- [fs.realpath](https://github.com/isaacs/fs.realpath#readme) (ISC)
-- [get-caller-file](https://github.com/stefanpenner/get-caller-file#readme) (ISC)
-- [glob](https://github.com/isaacs/node-glob#readme) (ISC)
-- [graceful-fs](https://github.com/isaacs/node-graceful-fs#readme) (ISC)
-- [inflight](https://github.com/isaacs/inflight) (ISC)
-- [inherits](https://github.com/isaacs/inherits#readme) (ISC)
-- [isexe](https://github.com/isaacs/isexe#readme) (ISC)
-- [lru-cache](https://github.com/isaacs/node-lru-cache#readme) (ISC)
-- [minimatch](https://github.com/isaacs/minimatch#readme) (ISC)
-- [minipass](https://github.com/isaacs/minipass#readme) (ISC)
-- [once](https://github.com/isaacs/once#readme) (ISC)
-- [pseudomap](https://github.com/isaacs/pseudomap#readme) (ISC)
-- [semver](https://github.com/npm/node-semver#readme) (ISC)
-- [setprototypeof](https://github.com/wesleytodd/setprototypeof) (ISC)
-- [signal-exit](https://github.com/tapjs/signal-exit#readme) (ISC)
-- [which](https://github.com/isaacs/node-which#readme) (ISC)
-- [wrappy](https://github.com/npm/wrappy) (ISC)
-- [y18n](https://github.com/yargs/y18n) (ISC)
-- [yallist](https://github.com/isaacs/yallist#readme) (ISC)
-- [yaml](https://eemeli.org/yaml/) (ISC)
-- [yargs-parser](https://github.com/yargs/yargs-parser#readme) (ISC)
-- [@panva/asn1.js](https://github.com/panva/asn1.js) (MIT)
-- [@promster/express](https://github.com/tdeekens/promster#readme) (MIT)
-- [@promster/metrics](https://github.com/tdeekens/promster#readme) (MIT)
-- [@tsoa/cli](https://github.com/lukeautry/tsoa#readme) (MIT)
-- [@tsoa/runtime](https://github.com/lukeautry/tsoa#readme) (MIT)
-- [@types/body-parser](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/body-parser) (MIT)
-- [@types/connect](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/connect) (MIT)
-- [@types/express](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/express) (MIT)
-- [@types/express-serve-static-core](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/express-serve-static-core) (MIT)
-- [@types/http-errors](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/http-errors) (MIT)
-- [@types/jsonwebtoken](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/jsonwebtoken) (MIT)
-- [@types/mime](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/mime) (MIT)
-- [@types/multer](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/multer) (MIT)
-- [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node) (MIT)
-- [@types/qs](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/qs) (MIT)
-- [@types/range-parser](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/range-parser) (MIT)
-- [@types/send](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/send) (MIT)
-- [@types/serve-static](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/serve-static) (MIT)
-- [accepts](https://github.com/jshttp/accepts#readme) (MIT)
-- [ansi-regex](https://github.com/chalk/ansi-regex#readme) (MIT)
-- [ansi-styles](https://github.com/chalk/ansi-styles#readme) (MIT)
-- [argparse](https://github.com/nodeca/argparse#readme) (MIT)
-- [array-flatten](https://github.com/blakeembrey/array-flatten) (MIT)
-- [balanced-match](https://github.com/juliangruber/balanced-match) (MIT)
-- [bintrees](https://github.com/vadimg/js_bintrees#readme) (MIT)
-- [body-parser](https://github.com/expressjs/body-parser#readme) (MIT)
-- [brace-expansion](https://github.com/juliangruber/brace-expansion) (MIT)
-- [bytes](https://github.com/visionmedia/bytes.js#readme) (MIT)
-- [call-bind](https://github.com/ljharb/call-bind#readme) (MIT)
-- [clone](https://github.com/pvorb/node-clone#readme) (MIT)
-- [color-convert](https://github.com/Qix-/color-convert#readme) (MIT)
-- [color-name](https://github.com/colorjs/color-name) (MIT)
-- [concat-map](https://github.com/substack/node-concat-map#readme) (MIT)
-- [content-disposition](https://github.com/jshttp/content-disposition#readme) (MIT)
-- [content-type](https://github.com/jshttp/content-type#readme) (MIT)
-- [cookie](https://github.com/jshttp/cookie#readme) (MIT)
-- [cookie-signature](https://github.com/visionmedia/node-cookie-signature#readme) (MIT)
-- [cors](https://github.com/expressjs/cors#readme) (MIT)
-- [cross-spawn](https://github.com/moxystudio/node-cross-spawn) (MIT)
-- [debug](https://github.com/debug-js/debug#readme) (MIT)
-- [deepmerge](https://github.com/TehShrike/deepmerge) (MIT)
-- [define-data-property](https://github.com/ljharb/define-data-property#readme) (MIT)
-- [depd](https://github.com/dougwilson/nodejs-depd#readme) (MIT)
-- [destroy](https://github.com/stream-utils/destroy#readme) (MIT)
-- [eastasianwidth](https://github.com/komagata/eastasianwidth#readme) (MIT)
-- [ee-first](https://github.com/jonathanong/ee-first#readme) (MIT)
-- [emoji-regex](https://mths.be/emoji-regex) (MIT)
-- [encodeurl](https://github.com/pillarjs/encodeurl#readme) (MIT)
-- [es-define-property](https://github.com/ljharb/es-define-property#readme) (MIT)
-- [es-errors](https://github.com/ljharb/es-errors#readme) (MIT)
-- [escalade](https://github.com/lukeed/escalade#readme) (MIT)
-- [escape-html](https://github.com/component/escape-html#readme) (MIT)
-- [etag](https://github.com/jshttp/etag#readme) (MIT)
-- [express](http://expressjs.com/) (MIT)
-- [express-jwt](https://github.com/auth0/express-jwt#readme) (MIT)
-- [express-unless](https://github.com/jfromaniello/express-unless#readme) (MIT)
-- [finalhandler](https://github.com/pillarjs/finalhandler#readme) (MIT)
-- [forwarded](https://github.com/jshttp/forwarded#readme) (MIT)
-- [fresh](https://github.com/jshttp/fresh#readme) (MIT)
-- [fs-extra](https://github.com/jprichardson/node-fs-extra) (MIT)
-- [function-bind](https://github.com/Raynos/function-bind) (MIT)
-- [get-intrinsic](https://github.com/ljharb/get-intrinsic#readme) (MIT)
-- [gopd](https://github.com/ljharb/gopd#readme) (MIT)
-- [handlebars](https://www.handlebarsjs.com/) (MIT)
-- [has-flag](https://github.com/sindresorhus/has-flag#readme) (MIT)
-- [has-property-descriptors](https://github.com/inspect-js/has-property-descriptors#readme) (MIT)
-- [has-proto](https://github.com/inspect-js/has-proto#readme) (MIT)
-- [has-symbols](https://github.com/ljharb/has-symbols#readme) (MIT)
-- [hasown](https://github.com/inspect-js/hasOwn#readme) (MIT)
-- [http-errors](https://github.com/jshttp/http-errors#readme) (MIT)
-- [iconv-lite](https://github.com/ashtuchkin/iconv-lite) (MIT)
-- [ipaddr.js](https://github.com/whitequark/ipaddr.js#readme) (MIT)
-- [is-fullwidth-code-point](https://github.com/sindresorhus/is-fullwidth-code-point#readme) (MIT)
-- [is-plain-obj](https://github.com/sindresorhus/is-plain-obj#readme) (MIT)
-- [is-what](https://github.com/mesqueeb/is-what#readme) (MIT)
-- [jose](https://github.com/panva/jose) (MIT)
-- [jsonfile](https://github.com/jprichardson/node-jsonfile#readme) (MIT)
-- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken#readme) (MIT)
-- [jwa](https://github.com/brianloveswords/node-jwa#readme) (MIT)
-- [jwks-rsa](https://github.com/auth0/node-jwks-rsa#readme) (MIT)
-- [jws](https://github.com/brianloveswords/node-jws#readme) (MIT)
-- [limiter](https://github.com/jhurliman/node-rate-limiter#readme) (MIT)
-- [lodash.clonedeep](https://lodash.com/) (MIT)
-- [lodash.includes](https://lodash.com/) (MIT)
-- [lodash.isboolean](https://lodash.com/) (MIT)
-- [lodash.isinteger](https://lodash.com/) (MIT)
-- [lodash.isnumber](https://lodash.com/) (MIT)
-- [lodash.isplainobject](https://lodash.com/) (MIT)
-- [lodash.isstring](https://lodash.com/) (MIT)
-- [lodash.memoize](https://lodash.com/) (MIT)
-- [lodash.once](https://lodash.com/) (MIT)
-- [lru-memoizer](https://github.com/jfromaniello/lru-memoizer#readme) (MIT)
-- [media-typer](https://github.com/jshttp/media-typer#readme) (MIT)
-- [merge-anything](https://github.com/mesqueeb/merge-anything#readme) (MIT)
-- [merge-descriptors](https://github.com/component/merge-descriptors#readme) (MIT)
-- [merge-options](https://github.com/schnittstabil/merge-options#readme) (MIT)
-- [methods](https://github.com/jshttp/methods#readme) (MIT)
-- [mime](https://github.com/broofa/node-mime#readme) (MIT)
-- [mime-db](https://github.com/jshttp/mime-db#readme) (MIT)
-- [mime-types](https://github.com/jshttp/mime-types#readme) (MIT)
-- [minimist](https://github.com/minimistjs/minimist) (MIT)
-- [ms](https://github.com/vercel/ms#readme) (MIT)
-- [negotiator](https://github.com/jshttp/negotiator#readme) (MIT)
-- [neo-async](https://github.com/suguru03/neo-async) (MIT)
-- [node-cache](https://github.com/node-cache/node-cache) (MIT)
-- [object-assign](https://github.com/sindresorhus/object-assign#readme) (MIT)
-- [object-inspect](https://github.com/inspect-js/object-inspect) (MIT)
-- [on-finished](https://github.com/jshttp/on-finished#readme) (MIT)
-- [optional](http://segomos.com/) (MIT)
-- [parseurl](https://github.com/pillarjs/parseurl#readme) (MIT)
-- [path-is-absolute](https://github.com/sindresorhus/path-is-absolute#readme) (MIT)
-- [path-key](https://github.com/sindresorhus/path-key#readme) (MIT)
-- [path-to-regexp](https://github.com/component/path-to-regexp#readme) (MIT)
-- [proxy-addr](https://github.com/jshttp/proxy-addr#readme) (MIT)
-- [range-parser](https://github.com/jshttp/range-parser#readme) (MIT)
-- [raw-body](https://github.com/stream-utils/raw-body#readme) (MIT)
-- [require-directory](https://github.com/troygoode/node-require-directory/) (MIT)
-- [safe-buffer](https://github.com/feross/safe-buffer) (MIT)
-- [safer-buffer](https://github.com/ChALkeR/safer-buffer#readme) (MIT)
-- [send](https://github.com/pillarjs/send#readme) (MIT)
-- [serve-static](https://github.com/expressjs/serve-static#readme) (MIT)
-- [set-function-length](https://github.com/ljharb/set-function-length#readme) (MIT)
-- [shallow-equal](https://github.com/moroshko/shallow-equal#readme) (MIT)
-- [shebang-command](https://github.com/kevva/shebang-command#readme) (MIT)
-- [shebang-regex](https://github.com/sindresorhus/shebang-regex#readme) (MIT)
-- [side-channel](https://github.com/ljharb/side-channel#readme) (MIT)
-- [statuses](https://github.com/jshttp/statuses#readme) (MIT)
-- [string-width](https://github.com/sindresorhus/string-width#readme) (MIT)
-- [strip-ansi](https://github.com/chalk/strip-ansi#readme) (MIT)
-- [supports-color](https://github.com/chalk/supports-color#readme) (MIT)
-- [swagger-ui-express](https://github.com/scottie1984/swagger-ui-express) (MIT)
-- [tdigest](https://github.com/welch/tdigest) (MIT)
-- [toidentifier](https://github.com/component/toidentifier#readme) (MIT)
-- [ts-essentials](https://github.com/krzkaczor/ts-essentials#readme) (MIT)
-- [tsoa](https://github.com/lukeautry/tsoa#readme) (MIT)
-- [type-is](https://github.com/jshttp/type-is#readme) (MIT)
-- [undici-types](https://undici.nodejs.org) (MIT)
-- [universalify](https://github.com/RyanZim/universalify#readme) (MIT)
-- [unpipe](https://github.com/stream-utils/unpipe#readme) (MIT)
-- [utils-merge](https://github.com/jaredhanson/utils-merge#readme) (MIT)
-- [validator](https://github.com/validatorjs/validator.js) (MIT)
-- [vary](https://github.com/jshttp/vary#readme) (MIT)
-- [wordwrap](https://github.com/substack/node-wordwrap#readme) (MIT)
-- [wrap-ansi](https://github.com/chalk/wrap-ansi#readme) (MIT)
-- [yamljs](https://github.com/jeremyfa/yaml.js#readme) (MIT)
-- [yargs](https://yargs.js.org/) (MIT)
-- [zod](https://zod.dev) (MIT)
-- [buffer-equal-constant-time](https://github.com/goinstant/buffer-equal-constant-time#readme) (BSD-3-Clause)
-- [qs](https://github.com/ljharb/qs) (BSD-3-Clause)
-- [source-map](https://github.com/mozilla/source-map) (BSD-3-Clause)
-- [sprintf-js](https://github.com/alexei/sprintf.js#readme) (BSD-3-Clause)
-- [dotenv](https://github.com/motdotla/dotenv#readme) (BSD-2-Clause)
-- [ecdsa-sig-formatter](https://github.com/Brightspace/node-ecdsa-sig-formatter#readme) (Apache-2.0)
-- [prom-client](https://github.com/siimon/prom-client) (Apache-2.0)
-- [reflect-metadata](http://rbuckton.github.io/reflect-metadata) (Apache-2.0)
-- [swagger-ui-dist](https://github.com/swagger-api/swagger-ui#readme) (Apache-2.0)
-- [typescript](https://www.typescriptlang.org/) (Apache-2.0)
-- [jackspeak](https://github.com/isaacs/jackspeak#readme) (BlueOak-1.0.0)
-- [path-scurry](https://github.com/isaacs/path-scurry#readme) (BlueOak-1.0.0)
-- [tslib](https://www.typescriptlang.org/) (0BSD)
-- [url-value-parser](https://github.com/disjunction/url-value-parser#readme) (MIT-0)
-
-### Console Self-Managed Dependencies (frontend)
-
-- [@ampproject/remapping](https://github.com/ampproject/remapping#readme) (Apache-2.0)
-- [@camunda/camunda-composite-components](https://github.com/camunda-cloud/c4-starter) (Apache-2.0)
-- [@carbon/charts](https://github.com/carbon-design-system/carbon-charts#readme) (Apache-2.0)
-- [@carbon/charts-react](https://github.com/carbon-design-system/carbon-charts#readme) (Apache-2.0)
-- [@carbon/colors](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/feature-flags](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/grid](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/icon-helpers](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/icons-react](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/layout](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/motion](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/react](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/styles](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/telemetry](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/themes](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@carbon/type](https://github.com/carbon-design-system/carbon#readme) (Apache-2.0)
-- [@ibm/telemetry-js](https://github.com/ibm-telemetry/telemetry-js#readme) (Apache-2.0)
-- [carbon-components](https://www.carbondesignsystem.com/) (Apache-2.0)
-- [keycloak-js](https://www.keycloak.org) (Apache-2.0)
-- [@babel/code-frame](https://babel.dev/docs/en/next/babel-code-frame) (MIT)
-- [@babel/compat-data](https://github.com/babel/babel#readme) (MIT)
-- [@babel/core](https://babel.dev/docs/en/next/babel-core) (MIT)
-- [@babel/generator](https://babel.dev/docs/en/next/babel-generator) (MIT)
-- [@babel/helper-annotate-as-pure](https://babel.dev/docs/en/next/babel-helper-annotate-as-pure) (MIT)
-- [@babel/helper-compilation-targets](https://github.com/babel/babel#readme) (MIT)
-- [@babel/helper-environment-visitor](https://babel.dev/docs/en/next/babel-helper-environment-visitor) (MIT)
-- [@babel/helper-function-name](https://babel.dev/docs/en/next/babel-helper-function-name) (MIT)
-- [@babel/helper-hoist-variables](https://babel.dev/docs/en/next/babel-helper-hoist-variables) (MIT)
-- [@babel/helper-module-imports](https://babel.dev/docs/en/next/babel-helper-module-imports) (MIT)
-- [@babel/helper-module-transforms](https://babel.dev/docs/en/next/babel-helper-module-transforms) (MIT)
-- [@babel/helper-plugin-utils](https://babel.dev/docs/en/next/babel-helper-plugin-utils) (MIT)
-- [@babel/helper-simple-access](https://babel.dev/docs/en/next/babel-helper-simple-access) (MIT)
-- [@babel/helper-split-export-declaration](https://babel.dev/docs/en/next/babel-helper-split-export-declaration) (MIT)
-- [@babel/helper-string-parser](https://babel.dev/docs/en/next/babel-helper-string-parser) (MIT)
-- [@babel/helper-validator-identifier](https://github.com/babel/babel#readme) (MIT)
-- [@babel/helper-validator-option](https://github.com/babel/babel#readme) (MIT)
-- [@babel/helpers](https://babel.dev/docs/en/next/babel-helpers) (MIT)
-- [@babel/highlight](https://babel.dev/docs/en/next/babel-highlight) (MIT)
-- [@babel/parser](https://babel.dev/docs/en/next/babel-parser) (MIT)
-- [@babel/plugin-syntax-jsx](https://babel.dev/docs/en/next/babel-plugin-syntax-jsx) (MIT)
-- [@babel/runtime](https://babel.dev/docs/en/next/babel-runtime) (MIT)
-- [@babel/template](https://babel.dev/docs/en/next/babel-template) (MIT)
-- [@babel/traverse](https://babel.dev/docs/en/next/babel-traverse) (MIT)
-- [@babel/types](https://babel.dev/docs/en/next/babel-types) (MIT)
-- [@carbon/utils-position](https://github.com/carbon-design-system/carbon-utils-position#readme) (MIT)
-- [@emotion/is-prop-valid](https://github.com/emotion-js/emotion/tree/main#readme) (MIT)
-- [@emotion/memoize](https://github.com/emotion-js/emotion/tree/main#readme) (MIT)
-- [@emotion/stylis](https://github.com/emotion-js/emotion/tree/master#readme) (MIT)
-- [@emotion/unitless](https://github.com/emotion-js/emotion/tree/master#readme) (MIT)
-- [@jridgewell/gen-mapping](https://github.com/jridgewell/gen-mapping#readme) (MIT)
-- [@jridgewell/resolve-uri](https://github.com/jridgewell/resolve-uri#readme) (MIT)
-- [@jridgewell/set-array](https://github.com/jridgewell/set-array#readme) (MIT)
-- [@jridgewell/sourcemap-codec](https://github.com/jridgewell/sourcemap-codec#readme) (MIT)
-- [@jridgewell/trace-mapping](https://github.com/jridgewell/trace-mapping#readme) (MIT)
-- [@types/debug](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/debug) (MIT)
-- [@types/hast](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/hast) (MIT)
-- [@types/mdast](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/mdast) (MIT)
-- [@types/ms](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/ms) (MIT)
-- [@types/prop-types](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/prop-types) (MIT)
-- [@types/react](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react) (MIT)
-- [@types/scheduler](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/scheduler) (MIT)
-- [@types/unist](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/unist) (MIT)
-- [ansi-styles](https://github.com/chalk/ansi-styles#readme) (MIT)
-- [babel-plugin-styled-components](https://styled-components.com/docs/tooling#babel-plugin) (MIT)
-- [bail](https://github.com/wooorm/bail#readme) (MIT)
-- [base64-js](https://github.com/beatgammit/base64-js) (MIT)
-- [binary-extensions](https://github.com/sindresorhus/binary-extensions#readme) (MIT)
-- [braces](https://github.com/micromatch/braces) (MIT)
-- [browserslist](https://github.com/browserslist/browserslist#readme) (MIT)
-- [camelize](https://github.com/ljharb/camelize) (MIT)
-- [chalk](https://github.com/chalk/chalk#readme) (MIT)
-- [character-entities](https://github.com/wooorm/character-entities#readme) (MIT)
-- [chokidar](https://github.com/paulmillr/chokidar) (MIT)
-- [classnames](https://github.com/JedWatson/classnames#readme) (MIT)
-- [color](https://github.com/Qix-/color#readme) (MIT)
-- [color-convert](https://github.com/Qix-/color-convert#readme) (MIT)
-- [color-name](https://github.com/colorjs/color-name) (MIT)
-- [color-string](https://github.com/Qix-/color-string#readme) (MIT)
-- [comma-separated-tokens](https://github.com/wooorm/comma-separated-tokens#readme) (MIT)
-- [commander](https://github.com/tj/commander.js#readme) (MIT)
-- [compute-scroll-into-view](https://scroll-into-view.dev) (MIT)
-- [convert-source-map](https://github.com/thlorenz/convert-source-map) (MIT)
-- [copy-to-clipboard](https://github.com/sudodoki/copy-to-clipboard#readme) (MIT)
-- [css-to-react-native](https://github.com/styled-components/css-to-react-native#readme) (MIT)
-- [csstype](https://github.com/frenic/csstype#readme) (MIT)
-- [date-fns](https://github.com/date-fns/date-fns#readme) (MIT)
-- [debug](https://github.com/debug-js/debug#readme) (MIT)
-- [decode-named-character-reference](https://github.com/wooorm/decode-named-character-reference#readme) (MIT)
-- [decode-uri-component](https://github.com/SamVerschueren/decode-uri-component#readme) (MIT)
-- [dequal](https://github.com/lukeed/dequal#readme) (MIT)
-- [downshift](https://downshift-js.com) (MIT)
-- [escalade](https://github.com/lukeed/escalade#readme) (MIT)
-- [escape-string-regexp](https://github.com/sindresorhus/escape-string-regexp#readme) (MIT)
-- [event-source-polyfill](https://github.com/Yaffle/EventSource) (MIT)
-- [extend](https://github.com/justmoon/node-extend#readme) (MIT)
-- [fill-range](https://github.com/jonschlinkert/fill-range) (MIT)
-- [filter-obj](https://github.com/sindresorhus/filter-obj#readme) (MIT)
-- [flatpickr](https://flatpickr.js.org) (MIT)
-- [gensync](https://github.com/loganfsmyth/gensync) (MIT)
-- [globals](https://github.com/sindresorhus/globals#readme) (MIT)
-- [has-flag](https://github.com/sindresorhus/has-flag#readme) (MIT)
-- [hast-util-whitespace](https://github.com/syntax-tree/hast-util-whitespace#readme) (MIT)
-- [html-parse-stringify](https://github.com/henrikjoreteg/html-parse-stringify) (MIT)
-- [html-to-image](https://github.com/bubkoo/html-to-image#readme) (MIT)
-- [i18next](https://www.i18next.com) (MIT)
-- [i18next-xhr-backend](https://github.com/i18next/i18next-xhr-backend) (MIT)
-- [iconv-lite](https://github.com/ashtuchkin/iconv-lite) (MIT)
-- [immutable](https://immutable-js.com) (MIT)
-- [inline-style-parser](https://github.com/remarkablemark/inline-style-parser#readme) (MIT)
-- [invariant](https://github.com/zertosh/invariant#readme) (MIT)
-- [is-arrayish](https://github.com/qix-/node-is-arrayish#readme) (MIT)
-- [is-binary-path](https://github.com/sindresorhus/is-binary-path#readme) (MIT)
-- [is-buffer](https://github.com/feross/is-buffer#readme) (MIT)
-- [is-extglob](https://github.com/jonschlinkert/is-extglob) (MIT)
-- [is-glob](https://github.com/micromatch/is-glob) (MIT)
-- [is-number](https://github.com/jonschlinkert/is-number) (MIT)
-- [is-plain-obj](https://github.com/sindresorhus/is-plain-obj#readme) (MIT)
-- [js-sha256](https://github.com/emn178/js-sha256) (MIT)
-- [js-tokens](https://github.com/lydell/js-tokens#readme) (MIT)
-- [jsesc](https://mths.be/jsesc) (MIT)
-- [json5](http://json5.org/) (MIT)
-- [jwt-decode](https://github.com/auth0/jwt-decode#readme) (MIT)
-- [kleur](https://github.com/lukeed/kleur#readme) (MIT)
-- [lodash](https://lodash.com/) (MIT)
-- [lodash-es](https://lodash.com/custom-builds) (MIT)
-- [lodash.debounce](https://lodash.com/) (MIT)
-- [lodash.findlast](https://lodash.com/) (MIT)
-- [lodash.isequal](https://lodash.com/) (MIT)
-- [lodash.omit](https://lodash.com/) (MIT)
-- [lodash.throttle](https://lodash.com/) (MIT)
-- [loose-envify](https://github.com/zertosh/loose-envify) (MIT)
-- [mdast-util-definitions](https://github.com/syntax-tree/mdast-util-definitions#readme) (MIT)
-- [mdast-util-from-markdown](https://github.com/syntax-tree/mdast-util-from-markdown#readme) (MIT)
-- [mdast-util-to-hast](https://github.com/syntax-tree/mdast-util-to-hast#readme) (MIT)
-- [mdast-util-to-string](https://github.com/syntax-tree/mdast-util-to-string#readme) (MIT)
-- [micromark](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-core-commonmark](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-factory-destination](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-factory-label](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-factory-space](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-factory-title](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-factory-whitespace](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-character](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-chunked](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-classify-character](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-combine-extensions](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-decode-numeric-character-reference](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-decode-string](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-encode](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-html-tag-name](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-normalize-identifier](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-resolve-all](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-sanitize-uri](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-subtokenize](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-symbol](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [micromark-util-types](https://github.com/micromark/micromark/tree/main#readme) (MIT)
-- [mobx](https://mobx.js.org/) (MIT)
-- [mobx-react](https://mobx.js.org) (MIT)
-- [mobx-react-lite](https://mobx.js.org) (MIT)
-- [mobx-state-tree](https://github.com/mobxjs/mobx-state-tree#readme) (MIT)
-- [mri](https://github.com/lukeed/mri#readme) (MIT)
-- [ms](https://github.com/zeit/ms#readme) (MIT)
-- [mst-middlewares](https://github.com/mobxjs/mobx-state-tree#readme) (MIT)
-- [node-releases](https://github.com/chicoxyzzy/node-releases#readme) (MIT)
-- [normalize-path](https://github.com/jonschlinkert/normalize-path) (MIT)
-- [object-assign](https://github.com/sindresorhus/object-assign#readme) (MIT)
-- [picomatch](https://github.com/micromatch/picomatch) (MIT)
-- [postcss-value-parser](https://github.com/TrySound/postcss-value-parser) (MIT)
-- [prop-types](https://facebook.github.io/react/) (MIT)
-- [property-information](https://github.com/wooorm/property-information#readme) (MIT)
-- [query-string](https://github.com/sindresorhus/query-string#readme) (MIT)
-- [react](https://reactjs.org/) (MIT)
-- [react-dom](https://reactjs.org/) (MIT)
-- [react-i18next](https://github.com/i18next/react-i18next) (MIT)
-- [react-is](https://reactjs.org/) (MIT)
-- [react-markdown](https://github.com/remarkjs/react-markdown#readme) (MIT)
-- [readdirp](https://github.com/paulmillr/readdirp) (MIT)
-- [regenerator-runtime](https://github.com/facebook/regenerator/tree/main#readme) (MIT)
-- [remark-parse](https://remark.js.org) (MIT)
-- [remark-rehype](https://github.com/remarkjs/remark-rehype#readme) (MIT)
-- [resize-observer-polyfill](https://github.com/que-etc/resize-observer-polyfill) (MIT)
-- [sade](https://github.com/lukeed/sade#readme) (MIT)
-- [safer-buffer](https://github.com/ChALkeR/safer-buffer#readme) (MIT)
-- [sass](https://github.com/sass/dart-sass) (MIT)
-- [scheduler](https://reactjs.org/) (MIT)
-- [shallowequal](https://github.com/dashed/shallowequal#readme) (MIT)
-- [simple-swizzle](https://github.com/qix-/node-simple-swizzle#readme) (MIT)
-- [space-separated-tokens](https://github.com/wooorm/space-separated-tokens#readme) (MIT)
-- [split-on-first](https://github.com/sindresorhus/split-on-first#readme) (MIT)
-- [strict-uri-encode](https://github.com/kevva/strict-uri-encode#readme) (MIT)
-- [style-to-object](https://github.com/remarkablemark/style-to-object#readme) (MIT)
-- [styled-components](https://styled-components.com) (MIT)
-- [supports-color](https://github.com/chalk/supports-color#readme) (MIT)
-- [to-fast-properties](https://github.com/sindresorhus/to-fast-properties#readme) (MIT)
-- [to-regex-range](https://github.com/micromatch/to-regex-range) (MIT)
-- [toggle-selection](https://github.com/sudodoki/toggle-selection#readme) (MIT)
-- [trim-lines](https://github.com/wooorm/trim-lines#readme) (MIT)
-- [trough](https://github.com/wooorm/trough#readme) (MIT)
-- [unified](https://unifiedjs.com) (MIT)
-- [unist-util-generated](https://github.com/syntax-tree/unist-util-generated#readme) (MIT)
-- [unist-util-is](https://github.com/syntax-tree/unist-util-is#readme) (MIT)
-- [unist-util-position](https://github.com/syntax-tree/unist-util-position#readme) (MIT)
-- [unist-util-stringify-position](https://github.com/syntax-tree/unist-util-stringify-position#readme) (MIT)
-- [unist-util-visit](https://github.com/syntax-tree/unist-util-visit#readme) (MIT)
-- [unist-util-visit-parents](https://github.com/syntax-tree/unist-util-visit-parents#readme) (MIT)
-- [update-browserslist-db](https://github.com/browserslist/update-db#readme) (MIT)
-- [use-resize-observer](https://github.com/ZeeCoder/use-resize-observer#readme) (MIT)
-- [uvu](https://github.com/lukeed/uvu#readme) (MIT)
-- [vfile](https://github.com/vfile/vfile#readme) (MIT)
-- [vfile-message](https://github.com/vfile/vfile-message#readme) (MIT)
-- [void-elements](https://github.com/jadejs/void-elements) (MIT)
-- [window-or-global](https://github.com/purposeindustries/window-or-global#readme) (MIT)
-- [@ibm/plex](https://github.com/ibm/plex#readme) (OFL-1.1)
-- [anymatch](https://github.com/micromatch/anymatch) (ISC)
-- [css-color-keywords](https://github.com/sonicdoe/css-color-keywords#readme) (ISC)
-- [d3](https://d3js.org) (ISC)
-- [d3-array](https://d3js.org/d3-array/) (ISC)
-- [d3-axis](https://d3js.org/d3-axis/) (ISC)
-- [d3-brush](https://d3js.org/d3-brush/) (ISC)
-- [d3-chord](https://d3js.org/d3-chord/) (ISC)
-- [d3-color](https://d3js.org/d3-color/) (ISC)
-- [d3-contour](https://d3js.org/d3-contour/) (ISC)
-- [d3-delaunay](https://github.com/d3/d3-delaunay) (ISC)
-- [d3-dispatch](https://d3js.org/d3-dispatch/) (ISC)
-- [d3-drag](https://d3js.org/d3-drag/) (ISC)
-- [d3-dsv](https://d3js.org/d3-dsv/) (ISC)
-- [d3-fetch](https://d3js.org/d3-fetch/) (ISC)
-- [d3-force](https://d3js.org/d3-force/) (ISC)
-- [d3-format](https://d3js.org/d3-format/) (ISC)
-- [d3-geo](https://d3js.org/d3-geo/) (ISC)
-- [d3-hierarchy](https://d3js.org/d3-hierarchy/) (ISC)
-- [d3-interpolate](https://d3js.org/d3-interpolate/) (ISC)
-- [d3-path](https://d3js.org/d3-path/) (ISC)
-- [d3-polygon](https://d3js.org/d3-polygon/) (ISC)
-- [d3-quadtree](https://d3js.org/d3-quadtree/) (ISC)
-- [d3-random](https://d3js.org/d3-random/) (ISC)
-- [d3-scale](https://d3js.org/d3-scale/) (ISC)
-- [d3-scale-chromatic](https://d3js.org/d3-scale-chromatic/) (ISC)
-- [d3-selection](https://d3js.org/d3-selection/) (ISC)
-- [d3-shape](https://d3js.org/d3-shape/) (ISC)
-- [d3-time](https://d3js.org/d3-time/) (ISC)
-- [d3-time-format](https://d3js.org/d3-time-format/) (ISC)
-- [d3-timer](https://d3js.org/d3-timer/) (ISC)
-- [d3-transition](https://d3js.org/d3-transition/) (ISC)
-- [d3-zoom](https://d3js.org/d3-zoom/) (ISC)
-- [delaunator](https://github.com/mapbox/delaunator#readme) (ISC)
-- [electron-to-chromium](https://github.com/kilian/electron-to-chromium#readme) (ISC)
-- [glob-parent](https://github.com/gulpjs/glob-parent#readme) (ISC)
-- [internmap](https://github.com/mbostock/internmap/) (ISC)
-- [lru-cache](https://github.com/isaacs/node-lru-cache#readme) (ISC)
-- [mobx-router](https://github.com/kitze/mobx-router#readme) (ISC)
-- [picocolors](https://github.com/alexeyraspopov/picocolors#readme) (ISC)
-- [semver](https://github.com/npm/node-semver#readme) (ISC)
-- [topojson-client](https://github.com/topojson/topojson-client) (ISC)
-- [yallist](https://github.com/isaacs/yallist#readme) (ISC)
-- [caniuse-lite](https://github.com/browserslist/caniuse-lite#readme) (CC-BY-4.0)
-- [d3-ease](https://d3js.org/d3-ease/) (BSD-3-Clause)
-- [diff](https://github.com/kpdecker/jsdiff#readme) (BSD-3-Clause)
-- [hoist-non-react-statics](https://github.com/mridgway/hoist-non-react-statics#readme) (BSD-3-Clause)
-- [rw](https://github.com/mbostock/rw) (BSD-3-Clause)
-- [source-map-js](https://github.com/7rulnik/source-map-js) (BSD-3-Clause)
-- [warning](https://github.com/BerkeleyTrue/warning) (BSD-3-Clause)
-- [director](https://github.com/flatiron/director#readme) (Unknown)
-- [dompurify](https://github.com/cure53/DOMPurify) ((MPL-2.0 OR Apache-2.0))
-- [robust-predicates](https://github.com/mourner/robust-predicates#readme) (Unlicense)
-- [tslib](https://www.typescriptlang.org/) (0BSD)
-- [wicg-inert](https://github.com/WICG/inert#readme) (W3C-20150513)
 
 </TabItem>
 
