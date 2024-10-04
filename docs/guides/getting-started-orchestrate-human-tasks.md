@@ -11,6 +11,7 @@ keywords: [human tasks, orchestration, getting started, user guide]
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesImg from './img/form-values-example.png';
+import HumanTaskDiagramImg from './img/human-task-bpmn-diagram.png';
 import ImplementModeImg from './img/implement-mode-active.png';
 import FormLinkingImg from './img/form-linking.png';
 import ModelerNavImg from './img/modeler-navigation.png';
@@ -20,6 +21,9 @@ import RunProcessImg from './img/run-process.png';
 import OperateHumanTasks from './img/operate-human-tasks.png';
 import FormEditorImg from './img/form-editor.png';
 import NavigationHistoryImg from './img/modeler-navigation-history.png';
+import PlayButtonImg from './img/play-play-button.png';
+import PlayOpenFormImg from './img/play-open-form.png';
+import PlayChickenImg from './img/play-chicken-complete.png';
 
 import clsx from "clsx";
 import Tabs from '@theme/Tabs';
@@ -30,13 +34,24 @@ import Install from './react-components/install-plain-java.md'
 
 You can use Camunda 8 to orchestrate processes with human tasks of any complexity. User tasks allow you to create and assign tasks to users, who can then perform their work and enter the required data to drive the business process.
 
+## About this guide
+
 This guide introduces you to the basics of human task orchestration.
 
 - You will create a simple process to decide on what to eat for dinner, and drive the process flow according to that decision.
 - This process is entirely executable in the browser.
 
+<p><img src={HumanTaskDiagramImg} alt="The completed BPMN diagram" /></p>
+
+You will learn how to:
+
+- Create and run your first process with a human in the loop.
+- Build a BPMN diagram using Modeler.
+- Create and link a form to a user task.
+- Validate your process using Play mode.
+
 :::note
-For a video-based learning experience or a more complex example, see the [Getting Started with Human Workflow](https://bit.ly/3PJJocB) Camunda Academy course.
+For a video-based learning experience and a more complex example, see [Getting Started with Human Workflow](https://bit.ly/3PJJocB).
 :::
 
 ## Before you begin
@@ -67,16 +82,20 @@ Start by designing a process to demonstrate how to route the process flow based 
 
 ### Create a new project and file
 
+First, you must create the BPMN diagram file and project.
+
 1. Open Modeler, and click **New project**. Every file in Web Modeler requires a project.
 2. Select **Create new > BPMN diagram**.
-3. Give your file a descriptive name. For example, 'Decide for Dinner'.
+3. Give your file a descriptive name. For example, `Decide for Dinner`.
 4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process appears in other Camunda 8 components.
 
 ### Design the process
 
+Next, you must design the process in Modeler.
+
 :::note
 
-Make sure you are in **Implement** mode as this allows you to configure the process technical details.
+Check you are in **Implement** mode as this allows you to configure the process technical details.
 <img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
 
 :::
@@ -102,16 +121,16 @@ Variables are part of a process instance and represent the data of the instance.
 
 ## Step 2: Design a form
 
-You have now designed the process. To allow the user to make the decision, you will now design a [form](../components/modeler/forms/camunda-forms-reference.md). Forms can be added to user tasks and start events to capture user input, and the user input can be used to route the process flow, to make API requests, or to orchestrate your services.
+You have now designed the process. To allow the user to make the decision, you will now design a [form](../components/modeler/forms/camunda-forms-reference.md). Forms can be added to user tasks and start events to capture user input, with the user input used to route the process flow, make API requests, or orchestrate your services.
 
 1. Select the user task you created in **[Step 1](#step-1-create-a-new-process)**.
 2. Click the blue **link icon** in the lower right corner. A menu expands that allows you to create a new form.
    <p><img src={ModelerFormMenuImg} style={{width: 400}} alt="Annotation to open the form menu" /></p>
 3. Click **Create new form**. A form will be created and opened in the form editor. The form is automatically named.
 
-:::note
-Don't worry about saving your process diagram. Modeler automatically saves every change you make.
-:::
+   :::note
+   Don't worry about saving your process diagram. Modeler automatically saves every change you make.
+   :::
 
 4. Click and drag the **Text** component to the empty form.
    <img src={FormEditorImg} alt="Dragging a component to a form" />
@@ -120,11 +139,11 @@ Don't worry about saving your process diagram. Modeler automatically saves every
 6. Click and drag the **Radio** component to the form to create a radio group. Give it a descriptive name within the properties panel.
 7. Additionally, set a **key** which maps to a process variable. The value of the component will be stored in this variable, and it can be read by the process that uses this form. As already defined by the conditions in the process earlier, use the variable `meal`.
 8. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value.
-   <img src={FormValuesImg} style={{width: 300}} alt="Defining a radio group and its values" />
+   <img src={FormValuesImg} style={{width: 250}} alt="Defining a radio group and its values" />
 
 ## Step 3: Link the form to your process
 
-Once the form is designed, you must link it to your process.
+Now you have created and designed the form, you must link it to your process.
 
 1. Click on the project name in the navigation history in the top bar to navigate back, and open the process you created in **[Step 1](#step-1-create-a-new-process)**.
    <img src={NavigationHistoryImg} style={{width: 500}} alt="Navigation history in Web Modeler" />
@@ -134,35 +153,70 @@ Once the form is designed, you must link it to your process.
 
 4. You can check if you linked the right form by clicking the form linking icon again. A preview of the form will appear.
 
+Your process is now complete and ready for validation.
+
+<p><img src={HumanTaskDiagramImg} alt="The completed BPMN diagram" /></p>
+
 :::note
-Forms linked in the user task are deployed together with the process. If you make changes to a form, you have to deploy the referencing process again to make the changes appear.
+Forms linked in the user task are deployed together with the process. If you make changes to a form, you must deploy the referencing process again for the changes to appear.
 :::
 
 ## Step 4: Validate your process using Play
 
-Now that your process is complete, you can use [Play mode](/components/modeler/web-modeler/play-your-process.md) to quickly validate the process behavior and play different scenarios.
+You can use [Play mode](/components/modeler/web-modeler/play-your-process.md) to quickly validate the process behavior and play different scenarios.
 
 1. Click the **Play** tab to enter Play mode.
 1. Once the Play environment is ready, click **Start a process instance** to start testing your process.
-1. Start by activating a process instance. Click **Play** on the canvas.
-1. The token moves to the user task, stops and waits until the user task is completed. Click **Open Task Form** to open the form, choose the `Chicken` option and click **Complete**.
+1. Start by activating a process instance. Click **Play** on the canvas above the process start event.
+   <img src={PlayButtonImg} style={{width: 300}} alt="Start playing the process instance" />
+1. The token moves to the user task, stops and waits until the user task is completed. Click **Open Task Form** to open the form, choose the `Chicken` option, and click **Complete**.
+   <img src={PlayOpenFormImg} style={{width: 300}} alt="Complete the form and continue" />
 1. The token moves through the exclusive gateway (also called the XOR gateway), and is used to model the decision in the process.
+   <img src={PlayChickenImg} style={{width: 800}} alt="Completing the Play process" />
 
    <p>When the execution arrives at this gateway, all outgoing sequence flows are evaluated in the order in which they have been defined. The sequence flow which condition evaluates to ‘true’ is selected for continuing the process.</p>
-   <p>In this case, the token moved through the gateway and (according to the conditional expressions outlined earlier) to the selected dinner based on the <code>Decide what's for dinner</code> user task we completed.</p><p>As we selected <code>Chicken</code>, the token moved through to <code>Prepare chicken</code>. If we selected <code>Salad</code>, the token would move through to <code>Prepare salad</code>.</p>
+   <p>In this example, the token moved through the gateway and (according to the conditional expressions outlined earlier) to the selected dinner based on the <code>Decide what's for dinner</code> user task you completed.</p><p>As you chose <code>Chicken</code>, the token moved through to <code>Prepare chicken</code> and successfully completed. If you had selected <code>Salad</code>, the token would have moved through to <code>Prepare salad</code>.</p>
 
-## Conclusion
+1. Click **Rewind** on the canvas and select the `Salad` option to test this flow also works correctly.
 
-Congratulations, you successfully built a human-centered process that routes the process flow based on the decision made by a user.
+:::note
 
-A core value of Camunda 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
+As well as using Play mode to quickly validate and run your process in development, you can also:
 
-Don't want to build the process yourself? Click **Open model in Camunda 8** to create it from a template in Camunda 8 SaaS, or sign up first.
+- Deploy the process to a [cluster](/components/concepts/clusters.md) in other environments such as testing, staging, and production. After you deploy your process, it can be run on the cluster.
+- Run and complete the user task in [Tasklist](/components/tasklist/introduction-to-tasklist.md). Applications such as Tasklist can be used by humans to complete tasks. As well as using Play mode and Tasklist to run a process, you can call the process via the API or an inbound trigger. Read more about [run options](/components/modeler/web-modeler/run-or-publish-your-process.md).
+- Check the process in production using [Operate](/components/operate/operate-introduction.md). Operate is used to monitor both long-running and straight-through, high-throughput processes. In development, as well as using [Play mode](/components/modeler/web-modeler/play-your-process.md) for faster in-place validation, you can use Operate to confirm if the process flow works as expected.
+- Create [milestones](/components/modeler/web-modeler/milestones.md) to save a snapshot of your BPMN or DMN diagram at any time.
+
+:::
+
+## Next steps
+
+In this guide, you successfully built a human-centered process that routes the process flow based on the decision made by a user, and learned how to:
+
+- Create and run your first process with a human in the loop.
+- Build a BPMN diagram using Modeler.
+- Create and link a form to a user task.
+- Validate your process using Play mode.
+
+**A core value of Camunda 8 lies in the combination of automation and human interaction.**
+
+Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
+
+- Watch the [video-based Human Task Orchestration Course](https://bit.ly/3PJJocB).
+- Learn how to use [BPMN user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) to route tasks to the right users.
+- Learn how to [build more complex forms](./utilizing-forms.md) using the form editor.
+- Learn how to write powerful [expressions](/components/concepts/expressions.md) and utilize [variables](/components/concepts/variables.md) to route complex process flows.
+- Get an [introduction to Operate](/components/operate/operate-introduction.md).
+- Learn how to [set up Tasklist](/components/tasklist/introduction-to-tasklist.md) for efficient task management.
+- Explore [start forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md) and attach the form directly to the start event.
+
+Don't want to build the process yourself? Click **Open model in Camunda 8** to create from a template in Camunda 8 SaaS, or sign up.
 
 <div style={{display: "flex", gap: 8}}>
    <a
       className={clsx(
-         "button button--outline button--secondary button--lg"
+         "button button--outline button--secondary button--lg button--hero"
       )}
       href="https://marketplace.camunda.com/en-US/apps/437142/human-task-orchestration-quick-start">
       Open model in Camunda 8
@@ -175,31 +229,3 @@ Don't want to build the process yourself? Click **Open model in Camunda 8** to c
       Sign up
    </a>
 </div><br />
-
-### Collaboration, milestones, and review
-
-### Deployment, Operate, and Tasklist
-
-In this guide, you used Play mode to quickly validate and run your process in development.
-
-You can also:
-
-- Deploy the process to a [cluster](/components/concepts/clusters.md) in other environments such as testing, staging, and production. After you deploy your process, it can be run on the cluster.
-
-- Run and complete the user task in [Tasklist](/components/tasklist/introduction-to-tasklist.md). Applications such as Tasklist can be used by humans to complete tasks. As well as using Play mode and Tasklist to run a process, you can call the process via the API or an inbound trigger. Read more about [run options](/components/modeler/web-modeler/run-or-publish-your-process.md).
-
-- Check the process in production using [Operate](/components/operate/operate-introduction.md). Operate is used to monitor both long-running and straight-through, high-throughput processes. In development, as well as using [Play mode](/components/modeler/web-modeler/play-your-process.md) for faster in-place validation, you can use Operate to confirm if the process flow works as expected.
-
-:::note
-Human-centric processes involving user tasks seamlessly unfold within Tasklist, offering a cost-effective orchestration solution for human work with forms. However, the versatility of these processes extends beyond Tasklist, encompassing various alternative methods and applications. For instance, users can be redirected to external applications to fulfill tasks, bespoke task applications can be developed for any domain, or interactions with the physical world can be captured through event signals from sensors and IoT devices.
-:::
-
-## Additional resources and next steps
-
-- Watch the [video-based Human Task Orchestration Course](https://bit.ly/3PJJocB).
-- Learn how to use [BPMN user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) to route tasks to the right users.
-- Learn how to [build more complex forms](./utilizing-forms.md) using the form editor.
-- Learn how to write powerful [expressions](/components/concepts/expressions.md) and utilize [variables](/components/concepts/variables.md) to route complex process flows.
-- Get an [introduction to Operate](/components/operate/operate-introduction.md).
-- Learn how to [set up Tasklist](/components/tasklist/introduction-to-tasklist.md) for efficient task management.
-- Explore [start forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md) and attach the form directly to the start event.
