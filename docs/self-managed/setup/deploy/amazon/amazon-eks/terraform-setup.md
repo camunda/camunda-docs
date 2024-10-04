@@ -37,6 +37,8 @@ For the simplicity of this guide, certain best practices will be provided with l
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
+<!--- TODO : add architecture diagram --->
+
 ## Outcome
 
 Following this tutorial and steps will result in:
