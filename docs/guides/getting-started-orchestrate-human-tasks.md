@@ -120,8 +120,7 @@ Don't worry about saving your process diagram. Modeler automatically saves every
 6. Click and drag the **Radio** component to the form to create a radio group. Give it a descriptive name within the properties panel.
 7. Additionally, set a **key** which maps to a process variable. The value of the component will be stored in this variable, and it can be read by the process that uses this form. As already defined by the conditions in the process earlier, use the variable `meal`.
 8. Scroll down to the **Static options** section of the properties panel to add radio options. Since there are two options for the dinner, add an extra value by clicking on the plus sign. Enter the value `Chicken` with the same label as `Chicken` and enter the value `Salad` with the label as `Salad` in the other value.
-
-<img src={FormValuesImg} style={{width: 600}} alt="Defining a radio group and its values" />
+   <img src={FormValuesImg} style={{width: 300}} alt="Defining a radio group and its values" />
 
 ## Step 3: Link the form to your process
 
@@ -139,72 +138,26 @@ Once the form is designed, you must link it to your process.
 Forms linked in the user task are deployed together with the process. If you make changes to a form, you have to deploy the referencing process again to make the changes appear.
 :::
 
-## Step 4: Run your process
+## Step 4: Validate your process using Play
 
-Your process is now ready to run. Given its human-centric nature, it is well suited to be run in Tasklist. In order to make it accessible from Tasklist, the process must be deployed first.
+Now that your process is complete, you can use [Play mode](/components/modeler/web-modeler/play-your-process.md) to quickly validate the process behavior and play different scenarios.
 
-:::note
-Human-centric processes involving user tasks seamlessly unfold within Tasklist, offering a cost-effective orchestration solution for human work with forms. However, the versatility of these processes extends beyond Tasklist, encompassing various alternative methods and applications. For instance, users can be redirected to external applications to fulfill tasks, bespoke task applications can be developed for any domain, or interactions with the physical world can be captured through event signals from sensors and IoT devices.
-:::
+1. Click the **Play** tab to enter Play mode.
+1. Once the Play environment is ready, click **Start a process instance** to start testing your process.
+1. Start by activating a process instance. Click **Play** on the canvas.
+1. The token moves to the user task, stops and waits until the user task is completed. Click **Open Task Form** to open the form, choose the `Chicken` option and click **Complete**.
+1. The token moves through the exclusive gateway (also called the XOR gateway), and is used to model the decision in the process.
 
-### Deploy and test run
+   <p>When the execution arrives at this gateway, all outgoing sequence flows are evaluated in the order in which they have been defined. The sequence flow which condition evaluates to ‘true’ is selected for continuing the process.</p>
+   <p>In this case, the token moved through the gateway and (according to the conditional expressions outlined earlier) to the selected dinner based on the <code>Decide what's for dinner</code> user task we completed.</p><p>As we selected <code>Chicken</code>, the token moved through to <code>Prepare chicken</code>. If we selected <code>Salad</code>, the token would move through to <code>Prepare salad</code>.</p>
 
-1. Click **Deploy** to deploy the process to your cluster.
-   :::note
-   If you have not yet created a cluster, clicking **Deploy** will take you to Console to [create a cluster](create-cluster.md) first. Continue with this guide after cluster creation.
-   :::
-2. After you deploy your process, it can be executed on the cluster. There are multiple ways to run a process. This time, click **Run** in Modeler for a test run.
+## Conclusion
 
-:::tip
-Other options to run a process are to start it via Tasklist, test it in the Play mode, or call it via the API or an inbound trigger. Read more about [run options](/components/modeler/web-modeler/run-or-publish-your-process.md).
-:::
-
-### Check successful start in Operate
-
-1. The process start will be confirmed via a notification message on the screen. Click the **chevron icon** next to **Run** to open more options. Click **View process instances** to see the running process in Operate.
-   <img src={RunProcessImg} style={{width: 300}} alt="Run action in Modeler" />
-
-2. In Operate, you will see a visualization of the running process instance. Notice that a green **token** is waiting at the user task. This means that a task is waiting to be worked on in Tasklist.
-   <img src={OperateHumanTasks} alt="Process instance monitoring in Operate" />
-
-:::tip
-In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Play mode](/components/modeler/web-modeler/play-your-process.md).
-:::
-
-## Step 5: Complete a user task
-
-When the process instance arrives at the user task, a new user task instance is created at Zeebe. The process instance stops at this point and waits until the user task is completed. Applications like [Tasklist](/components/tasklist/introduction-to-tasklist.md) can be used by humans to complete these tasks. In this last step, you will open Tasklist to run the user task you created.
-
-:::tip
-While it may originally seem like the goal of automating a process is to remove humans entirely, efficiently allocating work through user tasks can be even more beneficial. Within this example, we've included a form to demonstrate the completion of a user task.
-
-Using the Zeebe or Tasklist API, many other ways to complete a user task are possible, such as redirecting to another application to complete the task, or even listening to IoT devices to capture human interaction with the real world via job workers.
-:::
-
-1. Click the **navigation menu icon** next to the Camunda logo in the top bar to open the global navigation.
-2. Click **Tasklist** to open the Tasklist application.
-   <img src={ModelerNavImg} style={{width: 200}} alt="Navigation to other applications" />
-
-3. On the left, you will notice a list of **tasks**. There should be one open task `Decide what's for dinner`. Click this task to open it in the detail view.
-4. In the detail view, the form you created in **[Step 2](#step-2-design-a-form)** appears. It is read only since this task is currently unassigned. You have to claim the task to work on it. Next to **Assignee**, click **Assign to me** to claim the task.
-5. Select one of the radio options.
-6. Click **Complete Task** to submit the form.
-   ![complete a human task in Tasklist](./img/user-task-tasklist.png)
-7. To verify your task completion, you can filter by **Completed** tasks in the left task list panel.
-
-You can now navigate back to Operate and notice the process instance has continued as the token has moved forward to the selected option.
-
-The token moves through the exclusive gateway (also called the XOR gateway), and is used to model the decision in the process. When the execution arrives at this gateway, all outgoing sequence flows are evaluated in the order in which they have been defined. The sequence flow which condition evaluates to ‘true’ is selected for continuing the process.
-
-In this case, the token will move through the gateway and (according to the conditional expressions we outlined earlier) to the selected dinner based on the **Decide what's for dinner** user task we completed. If we select **Chicken**, the token moves forward to **Prepare chicken**. If we select **Salad**, the token moves forward to **Prepare salad**.
-
-## Wrap up
-
-At this point, you've successfully crafted a human-centered process that routes the process flow based on a decision made by a user.
+Congratulations, you successfully built a human-centered process that routes the process flow based on the decision made by a user.
 
 A core value of Camunda 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
 
-Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
+Don't want to build the process yourself? Click **Open model in Camunda 8** to create it from a template in Camunda 8 SaaS, or sign up first.
 
 <div style={{display: "flex", gap: 8}}>
    <a
@@ -222,6 +175,24 @@ Don't want to build the process yourself? Click this button to create it from a 
       Sign up
    </a>
 </div><br />
+
+### Collaboration, milestones, and review
+
+### Deployment, Operate, and Tasklist
+
+In this guide, you used Play mode to quickly validate and run your process in development.
+
+You can also:
+
+- Deploy the process to a [cluster](/components/concepts/clusters.md) in other environments such as testing, staging, and production. After you deploy your process, it can be run on the cluster.
+
+- Run and complete the user task in [Tasklist](/components/tasklist/introduction-to-tasklist.md). Applications such as Tasklist can be used by humans to complete tasks. As well as using Play mode and Tasklist to run a process, you can call the process via the API or an inbound trigger. Read more about [run options](/components/modeler/web-modeler/run-or-publish-your-process.md).
+
+- Check the process in production using [Operate](/components/operate/operate-introduction.md). Operate is used to monitor both long-running and straight-through, high-throughput processes. In development, as well as using [Play mode](/components/modeler/web-modeler/play-your-process.md) for faster in-place validation, you can use Operate to confirm if the process flow works as expected.
+
+:::note
+Human-centric processes involving user tasks seamlessly unfold within Tasklist, offering a cost-effective orchestration solution for human work with forms. However, the versatility of these processes extends beyond Tasklist, encompassing various alternative methods and applications. For instance, users can be redirected to external applications to fulfill tasks, bespoke task applications can be developed for any domain, or interactions with the physical world can be captured through event signals from sensors and IoT devices.
+:::
 
 ## Additional resources and next steps
 
