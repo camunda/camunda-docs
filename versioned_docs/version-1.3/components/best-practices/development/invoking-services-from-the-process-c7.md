@@ -28,7 +28,7 @@ In most cases, you should use a pull approach, where external worker threads que
 
 There are two patterns available to glue your code to a process model:
 
-* **Push:** The process engine actively issues a **service call** (or executes a **script**) via the mechanisms described below. The workflow engie pushes the work.
+* **Push:** The process engine actively issues a **service call** (or executes a **script**) via the mechanisms described below. The workflow engine pushes the work.
 * **Pull:** External worker threads query the process engine API for **external tasks**, and they pull the work. Then, they do the actual work and notify the process engine of works completion.
 
 ### External tasks
@@ -51,7 +51,7 @@ Using external tasks comes with the following advantages:
 
 * **Better scaling**: The pattern allows you to start and stop workers as you like, and run as many of them as you need. By doing so, you can scale each service task (or to be precise, each "topic") individually.
 
-* **Connect cloud and on-premise**: The pattern supports you in running Camunda somewhere in the cloud (as our customers often do), because you can still have services on-premise, as they can now query their work via REST over SSL, which is also quite firewall-friendly.
+* **Connect cloud and on-premises**: The pattern supports you in running Camunda somewhere in the cloud (as our customers often do), because you can still have services on-premises, as they can now query their work via REST over SSL, which is also quite firewall-friendly.
 
 * **Avoid timeouts**: The pattern allows you to asynchronously call long-running services, which eventually block for hours (and would therefore cause transaction and connection timeouts when being called synchronously).
 

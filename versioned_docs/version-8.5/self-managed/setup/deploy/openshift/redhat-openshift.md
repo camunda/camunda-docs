@@ -7,7 +7,7 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premise hosting.
+Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
 :::note
 Deploying Camunda 8 on Red Hat OpenShift is achievable using Helm, given the appropriate configurations. However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
