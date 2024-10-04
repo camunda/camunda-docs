@@ -50,16 +50,16 @@ After you have chosen your cluster type, you can choose the cluster size that be
 
 To learn more about choosing your cluster size, see [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
 
-- You can choose from three cluster sizes: 1x, 2x, and 3x.
+- You can choose from four cluster sizes: 1x, 2x, 3x, and 4x.
 - Larger cluster sizes include increased performance and capacity, allowing you to serve more workload.
 - Increased usage such as higher throughput or longer data retention requires a larger cluster size.
-- Each size increase uses one of your available cluster reservations.
+- Each size increase uses one of your available cluster reservations. For example, purchasing two HWP advanced reservations for your production cluster allows you to configure two clusters of size 1x, or one cluster of size 2x.
 
 :::note
 
 Contact your Customer Success Manager to:
 
-- Increase the cluster size beyond the maximum 3x size. This requires custom sizing and pricing.
+- Increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
 - Increase the cluster size of an existing cluster.
 
 :::
@@ -90,4 +90,3 @@ To prevent auto-pause, you can:
 - [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
 
 :::
-
