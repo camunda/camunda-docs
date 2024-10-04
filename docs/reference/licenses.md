@@ -6,7 +6,7 @@ description: "Licensing information for components of Camunda 8"
 
 ## Licensing
 
-This page contains licensing information for all Components of Camunda 8 from version 8.6 and higher.
+This page contains licensing information for all Camunda 8 Components version 8.6 and higher.
 
 ### Zeebe, Operate, Tasklist, Identity, and Optimize
 
