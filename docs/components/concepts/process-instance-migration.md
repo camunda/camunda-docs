@@ -348,14 +348,16 @@ In the following cases, the process instance can't apply the migration plan and 
 - The migration plan can only map each `sourceElementId` once.
 - A mapping instruction's `sourceElementId` must refer to an element existing in the process instance's process definition.
 - A mapping instruction's `targetElementId` must refer to an element existing in the target process definition.
-- A mapping instruction cannot detach a catch event from an active element.
-  E.g. a service task `A` has timer boundary event `T1` and will be migrated to the service task `B` has timer boundary event `T2`.
-  If a mapping instruction between `A` -> `B` is provided, a mapping instruction for `T1` can only refer to `T2`.
-- Each catch event can only be the target of a mapping instruction once.
-- Two catch events in the source cannot be mapped to the same catch event in the target.
-- A catch event in the source cannot be mapped to a different type of catch event in the target.
-- Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
-- It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
+- Catch event limitations:
+  - A mapping instruction cannot detach a catch event from an active element.
+    E.g. a service task `A` has timer boundary event `T1` and will be migrated to the service task `B` has timer boundary event `T2`.
+    If a mapping instruction between `A` -> `B` is provided, a mapping instruction for `T1` can only refer to `T2`.
+  - Each catch event can only be the target of a mapping instruction once.
+  - Two catch events in the source cannot be mapped to the same catch event in the target.
+  - A catch event in the source cannot be mapped to a different type of catch event in the target.
+- Multi-instance body limitations:
+  - Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
+  - It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
 
 The following limitations exist that may be supported in future versions:
 
