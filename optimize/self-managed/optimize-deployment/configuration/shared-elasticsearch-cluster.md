@@ -19,7 +19,7 @@ Changing the value of `*.settings.index.prefix` after an instance was already ru
 :::
 
 :::note
-OpenSearch support is currently only available for `ccsm` mode. Moreover, OpenSearch support in Optimize is limited to data import and the raw data report. The remaining functionality will be delivered with upcoming patches.
+Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are now supported, please refer to the [Camunda 7](https://github.com/camunda/issues/issues/705) and [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 :::
 
 \* Elasticsearch index prefix settings path: `es.settings.index.prefix`<br/> \* OpenSearch index prefix settings path: `opensearch.settings.index.prefix`

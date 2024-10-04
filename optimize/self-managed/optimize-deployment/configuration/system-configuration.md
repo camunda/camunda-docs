@@ -191,7 +191,7 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 These settings are only relevant when operating Optimize with OpenSearch.
 
 :::note
-OpenSearch support is currently only available for `ccsm` mode. Moreover, OpenSearch support in Optimize is limited to data import and the raw data report. The remaining functionality will be delivered with upcoming patches.
+Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are now supported, please refer to the [Camunda 7](https://github.com/camunda/issues/issues/705) and [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 :::
 
 #### Connection settings
@@ -208,12 +208,13 @@ You can define a number of connection points in a cluster. Therefore, everything
 | opensearch.connection.responseConsumerBufferLimitInMb | 100           | Maximum size of the OpenSearch response consumer heap buffer. This can be increased to resolve errors from OpenSearch relating to the entity content being too long. |
 | opensearch.connection.pathPrefix                      |               | The path prefix under which OpenSearch is available.                                                                                                                 |
 | opensearch.connection.nodes[*].host                   | localhost     | The address/hostname under which the OpenSearch node is available.                                                                                                   |
-| opensearch.connection.nodes[*].httpPort               | 9200          | A port number used by OpenSearch to accept HTTP connections.                                                                                                         |
+| opensearch.connection.nodes[*].httpPort               | 9205          | A port number used by OpenSearch to accept HTTP connections.                                                                                                         |
 | opensearch.connection.proxy.enabled                   | false         | Whether an HTTP proxy should be used for requests to OpenSearch.                                                                                                     |
 | opensearch.connection.proxy.host                      | null          | The proxy host to use, must be set if `opensearch.connection.proxy.enabled = true`.                                                                                  |
 | opensearch.connection.proxy.port                      | null          | The proxy port to use, must be set if `opensearch.connection.proxy.enabled = true`.                                                                                  |
 | opensearch.connection.proxy.sslEnabled                | false         | Whether this proxy is using a secured connection (HTTPS).                                                                                                            |
 | opensearch.connection.skipHostnameVerification        | false         | Determines whether the hostname verification should be skipped.                                                                                                      |
+| opensearch.connection.awsEnabled                      | false         | Determines if AWS credentials shall be used for authentication                                                                                                       |
 
 #### Index settings
 

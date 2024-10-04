@@ -15,7 +15,7 @@ This guide also identifies areas where we consider security issues to be relevan
 [
 {label: 'Camunda 7', value: 'c7' },
 {label: 'Optimize', value: 'optimize' },
-{label: 'Elasticsearch', value: 'elasticsearch' }
+{label: 'Database', value: 'database' }
 ]
 }>
 
@@ -59,11 +59,11 @@ Authorization controls what data a user can access and change in Optimize once a
 
 </TabItem>
 
-<TabItem value='elasticsearch'>
+<TabItem value='database'>
 
-Optimize stores its data in Elasticsearch, which is a search engine that acts as a document-based datastore. To protect access to this data, Elasticsearch should be configured carefully as well. Refer to the official [Secure the Elastic Stack](https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-cluster.html#secure-cluster) documentation of Elasticsearch.
+Optimize stores its data in Elasticsearch or OpenSearch, which is a search engine that acts as a document-based datastore. To protect access to this data, the database should be configured carefully as well. Refer to the official security guidelines for [ElasticSearch](https://www.elastic.co/guide/en/elasticsearch/reference/master/secure-cluster.html#secure-cluster) or [OpenSearch](https://opensearch.org/docs/latest/getting-started/security).
 
-Within the Optimize configuration, you can then enable SSL and/or the credentials to be used when Camunda Optimize connects to Elasticsearch. See [Elasticsearch Security](./system-configuration.md#elasticsearch-security) for details.
+Within the Optimize configuration, you can then enable SSL and/or the credentials to be used when Camunda Optimize connects to the database. See [Elasticsearch Security](./system-configuration.md#elasticsearch-security) or [OpenSearch Security](./system-configuration.md#opensearch-security) for details.
 
 </TabItem>
 </Tabs>
