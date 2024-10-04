@@ -858,11 +858,15 @@ Returned if:
 - Not all active elements in the given process instance are mapped to the elements in the target process definition
 - A mapping instruction changes the type of an element or event
 - A mapping instruction changes the implementation of a task
-- A mapping instruction detaches a boundary event from an active element
 - A mapping instruction refers to an unsupported element (i.e. some elements will be supported later on)
 - A mapping instruction refers to element in unsupported scenarios.
   (i.e. migrating active elements with event subscriptions will be supported later on)
-- Multiple mapping instructions target the same boundary event
+- Multiple mapping instructions target the same catch event
+- A mapping instruction detaches a boundary event from an active element
+- Two catch events in the source are mapped to the same catch event in the target
+- A catch event in the source is mapped to a different type of catch event in the target
+- A message catch event in the source process instance is not fully distributed
+- Parallel multi-instance body is mapped to a sequential multi-instance body and vice versa
 
 ## `PublishMessage` RPC
 

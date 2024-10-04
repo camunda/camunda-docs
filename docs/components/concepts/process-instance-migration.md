@@ -334,7 +334,7 @@ Following operations are performed in respective order for each active element a
 After removing and adding subscriptions to catch events, the migration continues with migrating the catch events per active element.
 If a catch event in the source process is mapped to a catch event in the target process, the subscription is migrated.
 As done for each active element, the catch event's `processDefinitionKey`, `bpmnProcessId`, `elementId` properties are updated to the target process definition.
-Please note that, it is possible to change the interrupting status of the catch event during migration.
+Please note that, it is **possible** to change the interrupting status of the catch event during migration.
 
 ## Limitations
 
