@@ -17,6 +17,9 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 
+<!-- TODO: for IRSA postgres, adjust with the creation of a database -->
+<!-- TODO: also reference usage of SM C8 Check for IRSA -->
+
 ## Considerations
 
 While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
