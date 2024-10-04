@@ -106,8 +106,8 @@ RewriteRule ^docs/8.2/components/modeler/web-modeler/launch-cloud-modeler/?$ /do
 RewriteRule ^docs/1.3/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/1.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 
 # For linking from our apps - redirect URLs with the current version to URLs with no version
-RewriteRule ^docs/8.5/(.*)$ /docs/$1 [R=302,L]
-RewriteRule ^optimize/3.13.0/(.*)$ /optimize/$1 [R=302,L]
+RewriteRule ^docs/8.6/(.*)$ /docs/$1 [R=302,L]
+RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 
 # 8.5 content moves vvvv
 RewriteRule ^docs/apis-tools/frontend-development/introduction-to-task-applications/?$ /docs/apis-tools/frontend-development/task-applications/introduction-to-task-applications$1 [R=301,L]
