@@ -50,18 +50,88 @@ Following this tutorial and steps will result in:
 
 ## Provisioning the Complete Infrastructure for Camunda 8 on AWS
 
-### Terraform prerequsites
+### Terraform Prerequisites
 
-<!--- TODO : add s3 bucket instead of terraform local, add instructions to create the bucket etc--->
+To manage the infrastructure for Camunda 8 on AWS using Terraform, we need to set up Terraform's backend to store the state file remotely in an S3 bucket. This ensures secure and persistent storage of the state file.
 
-1. Create an empty folder to place your Terraform files in.
-2. Create a `config.tf` with the following setup:
+#### 0. Set Up AWS Authentication
+
+The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. Before you can use the provider, you must authenticate it using your AWS credentials.
+You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods.
+Here are a few options to authenticate:
+
+- **(Recommended)** Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). If you have configured your AWS CLI, Terraform will automatically detect and use those credentials.
+
+  To configure the AWS CLI:
+
+  ```bash
+  aws configure
+  ```
+
+  Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format which can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+
+:::caution
+
+A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters created. It is recommended to create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) for Terraform purposes, ensuring that the resources are managed and owned by that user.
+
+:::
+
+#### 1. Create an S3 Bucket for Terraform State Management
+
+Before setting up Terraform, you need to create an S3 bucket that will store the state file. This is important for collaboration and to prevent issues like state file corruption.
+
+You can optionally set the region as an environment variable upfront to avoid repeating it in each command:
+
+```bash
+export AWS_REGION=<your-region>
+```
+
+Replace `<your-region>` with your chosen AWS region (e.g., `eu-central-1`).
+
+Now, follow these steps to create the S3 bucket with versioning enabled:
+
+1. **Open your terminal** and ensure the AWS CLI is installed and configured.
+
+2. **Run the following command** to create the S3 bucket, using the previously set `AWS_REGION` environment variable:
+
+   ```bash
+   aws s3api create-bucket --bucket my-eks-tf-state --region $AWS_REGION \
+     --create-bucket-configuration LocationConstraint=$AWS_REGION
+   ```
+
+3. **Enable versioning** on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
+
+   ```bash
+   aws s3api put-bucket-versioning --bucket my-eks-tf-state --versioning-configuration Status=Enabled --region $AWS_REGION
+   ```
+
+4. **Secure the bucket** by blocking public access:
+
+   ```bash
+   aws s3api put-public-access-block --bucket my-eks-tf-state --public-access-block-configuration \
+     "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region $AWS_REGION
+   ```
+
+5. **Verify versioning** is enabled on the bucket:
+
+   ```bash
+   aws s3api get-bucket-versioning --bucket my-eks-tf-state --region $AWS_REGION
+   ```
+
+This S3 bucket will now securely store your Terraform state files with versioning enabled.
+
+#### 2. Create a `config.tf` with the Following Setup
+
+Once the S3 bucket is created, configure your `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl
 terraform {
-  # for production, please use a different backend such as s3
-  backend "local" {
-    path = "terraform.tfstate"
+  required_version = ">= 1.0"
+
+  backend "s3" {
+    bucket         = "my-eks-tf-state"
+    key            = "camunda-terraform/terraform.tfstate"
+    encrypt        = true
   }
 
   required_providers {
@@ -72,27 +142,18 @@ terraform {
   }
 }
 
-provider "aws" {
-  region     = "eu-central-1"
-}
+provider "aws" {}
 ```
 
-3. Set up the authentication for the `AWS` provider.
+#### 3. Initialize Terraform
 
-The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. You must configure the provider with the proper credentials before using it. You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods.
+Once your `config.tf` and authentication are set up, you can initialize your Terraform project. This will configure the backend and download the necessary provider plugins:
 
-There are several ways to authenticate the `AWS` provider.
+```bash
+terraform init
+```
 
-- (Recommended) Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) to configure access. Terraform will automatically default to AWS CLI configuration when present.
-- Set environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, which can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-
-:::caution
-
-A user who creates resources in AWS will therefore own these resources. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
-
-Therefore, it can make sense to create an extra [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) which credentials are used for Terraform purposes.
-
-:::
+Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
 ### EKS Cluster Module Setup
 
@@ -136,19 +197,25 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
 2. Add the following content to `db.tf` to use the provided PostgreSQL module:
 
 ```hcl
+locals {
+  aurora_cluster_name                 = "cluster-name-postgresql"  # Replace "cluster-name" with your cluster's name
+}
+
 module "postgresql" {
   source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=2.6.0"
   engine_version             = "15.4"
   auto_minor_version_upgrade = false
-  cluster_name               = "cluster-name-postgresql" # Replace "cluster-name" with your cluster name
+  cluster_name               = "${locals.aurora_cluster_name}"
   default_database_name      = "camunda"
 
   # Supply your own secret values for username and password
   username         = "secret_user"
   password         = "secretvalue%23"
+
   vpc_id           = module.eks_cluster.vpc_id
   subnet_ids       = module.eks_cluster.private_subnet_ids
   cidr_blocks      = concat(module.eks_cluster.private_vpc_cidr_blocks, module.eks_cluster.public_vpc_cidr_blocks)
+
   instance_class   = "db.t3.medium"
   iam_auth_enabled = true
 
@@ -171,23 +238,21 @@ If you choose to use IRSA, you’ll need to take note of the **IAM role** create
 
 The Aurora module uses outputs from the EKS cluster module to configure the IRSA role and policy. Below are the required parameters:
 
-<!--- TODO : indicates that var. can be stored in a file or set manually --->
-
-- `module.eks_cluster.oidc_provider_arn`: The ARN of the OIDC provider for the EKS cluster.
-- `module.eks_cluster.oidc_provider_id`: The ID of the OIDC provider for the EKS cluster.
-- `module.eks_cluster.aws_caller_identity_account_id`: The AWS Account ID.
-- `var.aurora_cluster_name`: The name of the Aurora cluster (e.g., `cluster-name-postgresql`).
-- `var.aurora_irsa_username`: The username used to access AuroraDB.
-- `var.aurora_namespace`: The namespace to allow access (e.g., `camunda`).
-- `var.aurora_service_account`: The ServiceAccount to allow access (e.g., `postgres-sa`).
-- **IAM role name**: The name of the IAM role assigned to Aurora, specified as `iam_aurora_role_name = "AuroraRole-${var.aurora_cluster_name}"`.
-
 Here’s how to define the IAM role trust policy and access policy for Aurora:
 
 ```hcl
+# Previous configuration...
+
+locals {
+  camunda_namespace                   = "camunda"                  # Replace with your Kubernetes namespace that will host C8 Platform
+  aurora_irsa_username                = "secret_user_irsa"         # This is the username that will be used for IRSA connection to the DB
+  camunda_webmodeler_service_account  = "webmodeler-sa"            # Replace with your Kubernetes ServiceAcccount that will be created for WebModeler
+  camunda_identity_service_account    = "identity-sa"              # Replace with your Kubernetes ServiceAcccount that will be created for Identity
+  camunda_keycloak_service_account    = "keycloak-sa"              # Replace with your Kubernetes ServiceAcccount that will be created for Keycloak
+}
+
 module "postgresql" {
-  # Previous configuration...
-  iam_aurora_role_name   = "AuroraRole-${var.aurora_cluster_name}"  # Ensure this name is unique
+  iam_aurora_role_name   = "AuroraRole-${locals.aurora_cluster_name}"  # Ensure this name is unique
   iam_create_aurora_role = true
   iam_auth_enabled       = true
 
@@ -200,7 +265,7 @@ module "postgresql" {
                   "Action": [
                     "rds-db:connect"
                   ],
-                  "Resource": "arn:aws:rds-db:${module.eks_cluster.region}:${module.eks_cluster.aws_caller_identity_account_id}:dbuser:${var.aurora_cluster_name}/${var.aurora_irsa_username}"
+                  "Resource": "arn:aws:rds-db:${module.eks_cluster.region}:${module.eks_cluster.aws_caller_identity_account_id}:dbuser:${locals.aurora_cluster_name}/${locals.aurora_irsa_username}"
                 }
               ]
             }
@@ -218,7 +283,9 @@ EOF
                 "Action": "sts:AssumeRoleWithWebIdentity",
                 "Condition": {
                   "StringEquals": {
-                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${var.aurora_namespace}:${var.aurora_service_account}"
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.aurora_namespace}:${locals.camunda_webmodeler_service_account}",
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.aurora_namespace}:${locals.camunda_identity_service_account}",
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.aurora_namespace}:${locals.camunda_keycloak_service_account}"
                   }
                 }
               }
@@ -228,7 +295,9 @@ EOF
 }
 ```
 
-Once the IRSA configuration is complete, make sure to **record the IAM role name** (from the `iam_aurora_role_name` configuration) and the **AWS Account ID** (from `module.eks_cluster.aws_caller_identity_account_id`), as these will be required to annotate the Kubernetes service account in the next steps.
+Once the IRSA configuration is complete, make sure to **record the IAM role name** (from the `iam_aurora_role_name` configuration) and the **AWS Account ID** (from `module.eks_cluster.aws_caller_identity_account_id`), as these will be required to annotate the Kubernetes service accounts during the helm configuration.
+
+<!-- TODO: for IRSA postgres, adjust with the creation of a database -->
 
 </details>
 
@@ -246,9 +315,13 @@ The OpenSearch module creates an OpenSearch domain intended to be used by the Ca
 2. Add the following content to `opensearch.tf` to make use of the provided OpenSearch module:
 
 ```hcl
+locals {
+  opensearch_domain_name     = "domain-name-opensearch"  # Replace "domain-name" with your domain name
+}
+
 module "opensearch" {
   source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/opensearch?ref=2.6.0"
-  domain_name                = "domain-name-opensearch" # Replace "domain-name" with your domain name
+  domain_name                = "${locals.opensearch_domain_name}"
   engine_version             = "2.15"
 
   instance_type   = "t3.medium.search"
@@ -286,26 +359,28 @@ If you choose to use IRSA, you’ll need to take note of the **IAM role name** c
 
 ##### OpenSearch IRSA Role and Policy
 
-To configure IRSA for OpenSearch, the OpenSearch module uses outputs from the EKS cluster module to define the necessary IAM role and policies. Below are the required parameters:
-
-<!--- TODO : indicates that var. can be stored in a file or set manually --->
-
-- `module.eks_cluster.oidc_provider_arn`: The ARN of the OIDC provider for the EKS cluster.
-- `module.eks_cluster.oidc_provider_id`: The ID of the OIDC provider for the EKS cluster.
-- `module.eks_cluster.aws_caller_identity_account_id`: The AWS Account ID.
-- `var.opensearch_domain_name`: The name of the OpenSearch domain.
-- `var.opensearch_namespace`: The namespace in which to allow access (e.g., `camunda`).
-- `var.opensearch_service_account`: The ServiceAccount used to access OpenSearch (e.g., `opensearch-sa`).
-- **IAM role name**: The name of the IAM role assigned to OpenSearch, defined as `iam_opensearch_role_name = "OpenSearchRole-${var.opensearch_domain_name}"`.
+To configure IRSA for OpenSearch, the OpenSearch module uses outputs from the EKS cluster module to define the necessary IAM role and policies.
 
 Here's an example of how to define the IAM role trust policy and access policy for OpenSearch:
 
 ```hcl
+locals {
+  camunda_namespace                         = "camunda"               # Replace with your Kubernetes namespace that will host C8 Platform
+  camunda_zeebe_service_account             = "zeebe-sa"              # Replace with your Kubernetes ServiceAcccount that will be created for Zeebe
+  camunda_zeebe_gateway_service_account     = "zeebegateway-sa"       # Replace with your Kubernetes ServiceAcccount that will be created for ZeebeGateway
+  camunda_operate_service_account           = "operate-sa"            # Replace with your Kubernetes ServiceAcccount that will be created for Operate
+  camunda_identity_service_account          = "identity-sa"           # Replace with your Kubernetes ServiceAcccount that will be created for Identity
+  camunda_tasklist_service_account          = "tasklist-sa"           # Replace with your Kubernetes ServiceAcccount that will be created for TaskList
+  camunda_webmodeler_service_account        = "webmodeler-sa"         # Replace with your Kubernetes ServiceAcccount that will be created for WebModeler
+  camunda_connectors_service_account        = "connectors-sa"         # Replace with your Kubernetes ServiceAcccount that will be created for Connectors
+}
+
+
 module "opensearch_domain" {
   # Previous configuration...
 
   iam_create_opensearch_role = true
-  iam_opensearch_role_name = "OpenSearchRole-${var.opensearch_domain_name}" # Ensure uniqueness
+  iam_opensearch_role_name = "OpenSearchRole-${locals.opensearch_domain_name}" # Ensure uniqueness
 
   iam_opensearch_access_policy = <<EOF
             {
@@ -336,7 +411,13 @@ EOF
                 "Action": "sts:AssumeRoleWithWebIdentity",
                 "Condition": {
                   "StringEquals": {
-                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${var.opensearch_namespace}:${var.opensearch_service_account}"
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.camunda_namespace}:${locals.camunda_zeebe_service_account}",
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.camunda_namespace}:${locals.camunda_zeebe_gateway_service_account}",
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.camunda_namespace}:${locals.camunda_operate_service_account}",
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.camunda_namespace}:${locals.camunda_identity_service_account}",
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.camunda_namespace}:${locals.camunda_tasklist_service_account}",
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.camunda_namespace}:${locals.camunda_webmodeler_service_account}",
+                    "${module.eks_cluster.oidc_provider_id}:sub": "system:serviceaccount:${locals.camunda_namespace}:${locals.camunda_connectors_service_account}"
                   }
                 }
               }
@@ -372,14 +453,15 @@ terraform init
 3. Apply the configuration files:
 
 ```hcl
-terraform apply
+terraform plan -out cluster.plan # describe what will be created
+terraform apply cluster.plan     # apply the creation
 ```
 
-4. After reviewing the plan, you can type `yes` to confirm and apply the changes.
+4. After reviewing the plan, you can confirm and apply the changes.
 
 At this point, Terraform will create the Amazon EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes for each component.
 
-## (Optional) AWS IAM access management
+## (Optional) AWS IAM access management for EKS
 
 Kubernetes access is divided into two distinct layers. The first involves AWS IAM permissions, which enable basic Amazon EKS functionalities such as using the Amazon EKS UI and generating Amazon EKS access through the AWS CLI. The second layer provides access within the cluster itself, determining the user's permissions within the Kubernetes cluster.
 
@@ -543,7 +625,7 @@ In this case, IRSA will handle the authentication, and the exported variables fo
 
 :::
 
-<!-- TODO: for IRSA postgres, adjust with the creation of a database -->
+<!-- TODO: add a copy of the global reference file that we can also use internally for testing this procedure -->
 
 ## Install Camunda 8 using the Helm Chart
 
