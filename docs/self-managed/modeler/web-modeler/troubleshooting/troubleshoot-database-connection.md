@@ -1,6 +1,6 @@
 ---
 id: troubleshoot-database-connection
-title: "Troubleshooting database connection issues"
+title: "Troubleshoot database connection issues"
 sidebar_label: "Database connection"
 ---
 

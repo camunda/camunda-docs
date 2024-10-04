@@ -134,6 +134,9 @@ In the event of a total active region loss, the following data will be lost:
   - This is due to Optimize depending on Identity to work.
 - Connectors can be deployed alongside but ensure to understand idempotency based on [the described documentation](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event).
   - in a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.
+- If you are running Connectors and have a process with an inbound connector deployed in a dual-region setup, consider the following:
+  - when you want to delete the process deployment, delete it via Operate (not zbctl), otherwise the inbound connector won't deregister.
+  - if you have multiple Operate instances running, then perform the delete operation in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).
 - During the failback procedure, there’s a small chance that some data will be lost in Elasticsearch affecting Operate and Tasklist.
   - This **does not** affect the processing of process instances in any way. The impact is that some information about the affected instances might not be visible in Operate and Tasklist.
   - This is further explained in the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md?failback=step2#failback) during the relevant step.
@@ -152,6 +155,12 @@ You should familiarize yourself with those before deciding to go for a dual-regi
 - Data consistency and synchronization challenges (for example, brought in by the increased latency)
   - Bursts of increased latency can already have an impact
 - Managing DNS and incoming traffic
+
+### Upgrade considerations
+
+When upgrading a dual-region setup, it is crucial to follow a staged approach. Perform the upgrade in one region first before proceeding to the other.
+
+Simultaneously upgrading both regions can result in a loss of quorum for partitions, as two Zeebe brokers might be upgraded at the same time. To prevent this issue, it is recommended to upgrade one region at a time, ensuring that only one Zeebe broker is updated during each upgrade phase.
 
 ## Region loss
 

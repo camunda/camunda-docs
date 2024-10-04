@@ -64,6 +64,7 @@
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -94,10 +95,7 @@
         {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
-            "components/console/manage-clusters/rename-cluster",
-            "components/console/manage-clusters/resume-cluster",
-            "components/console/manage-clusters/update-cluster",
-            "components/console/manage-clusters/delete-cluster",
+            "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
@@ -1620,6 +1618,7 @@
               "label": "Version policy",
               "href": "/optimize/self-managed/optimize-deployment/version-policy/"
             },
+
             {
               "Configuration": [
                 {
@@ -1627,6 +1626,7 @@
                   "label": "Getting started",
                   "href": "/optimize/self-managed/optimize-deployment/configuration/getting-started/"
                 },
+
                 {
                   "System configuration": [
                     {
@@ -1651,6 +1651,7 @@
                     }
                   ]
                 },
+
                 {
                   "type": "link",
                   "label": "Logging",
@@ -1668,7 +1669,7 @@
                 },
                 {
                   "type": "link",
-                  "label": "Shared Elasticsearch cluster",
+                  "label": "Shared Elasticsearch/OpenSearch cluster",
                   "href": "/optimize/self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
                 },
                 {
@@ -1733,6 +1734,7 @@
                 }
               ]
             },
+
             {
               "Plugins": [
                 {
@@ -1772,11 +1774,13 @@
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Camunda engine data reimport",
               "href": "/optimize/self-managed/optimize-deployment/reimport/"
             },
+
             {
               "Migration & update": [
                 {
@@ -1891,6 +1895,7 @@
                 }
               ]
             },
+
             {
               "Advanced features": [
                 {

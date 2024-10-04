@@ -9,9 +9,9 @@ description: "Web Modeler API is a REST API and provides access to Web Modeler d
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and pass it in each request.
+All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
-## Generating a token
+## Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -23,7 +23,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
 
 1. Create client credentials by clicking **Console > Organization > Administration API > Create new credentials**.
 2. Add permissions to this client for **Web Modeler API**.
-3. Upon creating the client, capture the following values required to generate a token:
+3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
    | ------------------------ | -------------------------------- | -------------------------------------------- |
@@ -32,7 +32,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    | Authorization Server URL | `CAMUNDA_OAUTH_URL`              | `https://login.cloud.camunda.io/oauth/token` |
    | Audience                 | `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::tip
+   :::caution
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
 4. Execute an authentication request to the token issuer:
@@ -44,7 +44,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
        --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
        --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -54,7 +54,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
@@ -71,7 +71,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
    --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -81,17 +81,17 @@ All Web Modeler API requests require authentication. To authenticate, generate a
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
 </Tabs>
 
-## Using a token
+## Use a token
 
-Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Web Modeler API's `/info` endpoint, send the following request against the target environment:
+For example, to send a request to the Web Modeler API's `/info` endpoint:
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -122,7 +122,7 @@ curl --header "Authorization: Bearer ${TOKEN}" \
 </TabItem>
 </Tabs>
 
-A successful response would include [information about the environment](https://modeler.camunda.io/swagger-ui/index.html#/Info/getInfo). For example:
+A successful response includes [information about the environment](https://modeler.camunda.io/swagger-ui/index.html#/Info/getInfo). For example:
 
 ```json
 {

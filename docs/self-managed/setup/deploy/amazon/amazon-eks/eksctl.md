@@ -121,7 +121,7 @@ metadata:
   region: ${REGION:-eu-central-1} # e.g. eu-central-1
   version: "1.28"
 availabilityZones:
-  - ${REGION:-eu-central-1}c # e.g. eu-central-1c
+  - ${REGION:-eu-central-1}c # e.g. eu-central-1c, the minimal is two distinct Availability Zones (AZs) within the region
   - ${REGION:-eu-central-1}b
   - ${REGION:-eu-central-1}a
 cloudWatch:
