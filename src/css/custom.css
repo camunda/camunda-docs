@@ -179,70 +179,49 @@ svg.implemented:hover [stroke="#333"] {
 
 /* Badge padding and styles */
 .badge {
-  margin-left: 0;
+  margin-left: 10px;
 }
-
+.badge:nth-of-type(1) {
+  margin-left: 0;
+  margin-bottom: 1.5rem;
+}
 .badge--beginner {
   background-color: #ff8b00;
   color: #ffffff;
-  margin-left: 0;
-  margin-right: 10px;
-  margin-bottom: 1.5rem;
 }
 
 .badge--intermediate {
   background-color: #ff5400;
   color: #ffffff;
-  margin-left: 0;
-  margin-right: 10px;
-  margin-bottom: 1.5rem;
 }
 
 .badge--advanced {
   background-color: #ff1f00;
   color: #ffffff;
-  margin-left: 0;
-  margin-right: 10px;
-  margin-bottom: 1.5rem;
 }
 
 .badge--short {
   background-color: #14d890;
   color: #ffffff;
-  margin-left: 0;
-  margin-right: 10px;
-  margin-bottom: 1.5rem;
 }
 
 .badge--medium {
   background-color: #0ba7b9;
   color: #ffffff;
-  margin-left: 0;
-  margin-right: 10px;
-  margin-bottom: 1.5rem;
 }
 
 .badge--long {
   background-color: #0075ff;
   color: #ffffff;
-  margin-left: 0;
-  margin-right: 10px;
-  margin-bottom: 1.5rem;
 }
 
 .badge--platform {
   background-color: #fc5d0d;
   color: #ffffff;
-  margin-left: 0;
-  margin-right: 10px;
-  margin-bottom: 1.5rem;
 }
 .badge--cloud {
   background-color: #26d07c;
   color: #000000;
-  margin-left: 0;
-  margin-right: 10px;
-  margin-bottom: 1.5rem;
 }
 
 .badge--beta {
@@ -404,7 +383,6 @@ span.callout + p::after {
   border-style: solid;
   border-color: #dedede;
   border-width: 1px;
-  box-shadow: none;
   height: auto;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -413,7 +391,6 @@ span.callout + p::after {
 
 .theme-doc-markdown table img {
   border: none;
-  box-shadow: none;
 }
 
 /* Unsupported versions in the versions selector */
@@ -555,6 +532,9 @@ h2.openapi__method-endpoint-path {
   padding-top: 0;
   padding-bottom: 0;
 }
+h2.openapi-tabs__response-header {
+  border-bottom: none;
+}
 .anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#request {
   border-bottom: none;
   padding-top: 10px;
@@ -568,7 +548,10 @@ h2.openapi__method-endpoint-path {
   padding-bottom: 0;
 }
 .openapi-tabs__response-header-section {
-  padding-top: 0 !important;
+  padding-top: 1rem !important;
+}
+.openapi-tabs__mime-container {
+  padding-top: 0;
 }
 /* Second level page heading modifications for home page */
 .hero__title {
@@ -580,7 +563,7 @@ h2.openapi__method-endpoint-path {
 /* Second level page heading */
 h3 {
   margin-bottom: 0.8rem;
-  margin-top: 2.5rem;
+  margin-top: 2.2rem;
   font-weight: 500;
   font-size: 1.6rem;
 }
@@ -590,7 +573,19 @@ h3.featuresTitle_lAgg {
   font-size: 1.6rem;
   margin-top: 0;
 }
+h3.openapi-markdown__details-summary-header-params,
+h3.openapi-markdown__details-summary-header-body {
+  margin-top: 0;
+}
+h3 .badge--long {
+  margin-bottom: 0;
+  font-size: 12px;
+  margin-left: 5px;
+}
 /* Third level page heading */
+h3 .badge--long:nth-of-type(1) {
+  margin-left: 5px;
+}
 h4 {
   font-size: 1.3rem;
   margin-top: 2rem;
@@ -628,7 +623,6 @@ ul ol {
 }
 /* Highlight tabs */
 .tabs {
-  padding-top: 20px;
   border-bottom: 1px solid #dedede;
 }
 .tabs__item--active {
