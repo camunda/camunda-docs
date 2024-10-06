@@ -7,9 +7,9 @@ description: "Connect business process-related event data and variable data held
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Optimize API requests except [the health readiness endpoint](./health-readiness.md) require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
+All Optimize API requests except [the health readiness](./health-readiness.md) endpoint require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-## Generating a token
+## Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -20,7 +20,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
 
 1. [Create client credentials]($docs$/guides/setup-client-connection-credentials/) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
 2. Add permissions to this client for **Optimize**.
-3. Upon creating the client, capture the following values required to generate a token:
+3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
    | ------------------------ | -------------------------------- | -------------------------------------------- |
@@ -29,7 +29,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
    | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
    | Optimize REST Address    | `CAMUNDA_OPTIMIZE_BASE_URL`      | -                                            |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::tip
+   :::caution
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
 4. Execute an authentication request to the token issuer:
@@ -41,7 +41,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
        --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
        --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -51,7 +51,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
@@ -69,7 +69,7 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
    --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-6. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -79,21 +79,21 @@ All Optimize API requests except [the health readiness endpoint](./health-readin
      "not-before-policy": 0
    }
    ```
-7. Capture the value of the `access_token` property and store it as your token.
+6. Capture the value of the `access_token` property and store it as your token.
 
 :::note
-The Optimize API can also be configured in a Self-Managed environment to authenticate with a single shared access token. Refer to [Public API Configuration](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the configuration required to access the public API using a specific token.
+The Optimize API can also be configured in a Self-Managed environment to authenticate using a single shared access token. See [Public API Configuration](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) for the configuration required to access the public API using a specific token.
 :::
 
 </TabItem>
 
 </Tabs>
 
-## Using a token
+## Use a token
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to send a request to the Optimize API's ["Get dashboard IDs" endpoint](./dashboard/get-dashboard-ids.md):
+For example, to send a request to the Optimize API's ["Get dashboard IDs"](./dashboard/get-dashboard-ids.md) endpoint:
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
