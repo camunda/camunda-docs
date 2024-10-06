@@ -2,6 +2,7 @@
 id: c8run
 title: "Local installation with Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
+keywords: ["C8Run"]
 description: "Use the Camunda 8 Run single application script to set up a local development environment."
 ---
 
