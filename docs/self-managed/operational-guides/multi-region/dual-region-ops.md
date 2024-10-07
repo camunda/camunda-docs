@@ -54,7 +54,8 @@ Running a dual-region configuration requires users to detect and manage any regi
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-- [zbctl](/apis-tools/community-clients/cli-client/index.md) to interact with the Zeebe cluster.
+- (deprecated) [zbctl](/apis-tools/community-clients/cli-client/index.md) to interact with the Zeebe cluster.
+- `cURL` or similar to interact with the REST API.
 
 ## Terminology
 
@@ -152,6 +153,151 @@ The following alternatives to port-forwarding are possible:
 
 In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
 
+<Tabs groupId="c8-connectivity">
+  <TabsItem value="rest-api" label="REST API">
+
+1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+
+curl -L -X GET 'http://localhost:8080/v2/topology' \
+  -H 'Accept: application/json'
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 4,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 6,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    }
+  ],
+  "clusterSize": 8,
+  "partitionsCount": 8,
+  "replicationFactor": 4,
+  "gatewayVersion": "8.6.0"
+}
+```
+
+  </summary>
+</details>
+
+  </TabsItem>
+  <TabsItem value="zbctl" label="zbctl">
+
 1. Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
 
 ```bash
@@ -197,6 +343,8 @@ Brokers:
 
   </summary>
 </details>
+  </TabsItem>
+</Tabs>
 
 2. Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
@@ -214,6 +362,149 @@ curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Cont
 #### Verification
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the cluster size has decreased to 4, partitions have been redistributed over the remaining brokers, and new leaders have been elected.
+
+<Tabs groupId="c8-connectivity">
+  <TabsItem value="rest-api" label="REST API">
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+
+curl -L -X GET 'http://localhost:8080/v2/topology' \
+  -H 'Accept: application/json'
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 4,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 6,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    }
+  ],
+  "clusterSize": 4,
+  "partitionsCount": 8,
+  "replicationFactor": 2,
+  "gatewayVersion": "8.6.0"
+}
+```
+
+  </summary>
+</details>
+
+  </TabsItem>
+  <TabsItem value="zbctl" label="zbctl">
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -258,6 +549,9 @@ Brokers:
 
   </summary>
 </details>
+
+</TabsItem>
+</Tabs>
 
 You can also use the Zeebe Gateway's REST API to ensure the scaling progress has been completed. For better output readability, we use [jq](https://jqlang.github.io/jq/).
 
@@ -436,6 +730,177 @@ It is expected that the Zeebe broker pods will not reach the "Ready" state since
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the new Zeebe brokers are recognized but yet a full member of the Zeebe cluster.
 
+<Tabs groupId="c8-connectivity">
+  <TabsItem value="rest-api" label="REST API">
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+
+curl -L -X GET 'http://localhost:8080/v2/topology' \
+  -H 'Accept: application/json'
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 1,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 3,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 4,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 5,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 6,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 7,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [],
+      "version": "8.6.0"
+    },
+  ],
+  "clusterSize": 4,
+  "partitionsCount": 8,
+  "replicationFactor": 2,
+  "gatewayVersion": "8.6.0"
+}
+```
+
+  </summary>
+</details>
+
+  </TabsItem>
+  <TabsItem value="zbctl" label="zbctl">
+
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
 zbctl status --insecure --address localhost:26500
@@ -487,6 +952,9 @@ Brokers:
 
   </summary>
 </details>
+
+  </TabsItem>
+</Tabs>
 
 </div>
   </TabItem>
