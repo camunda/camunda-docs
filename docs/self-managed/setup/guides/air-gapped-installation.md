@@ -41,7 +41,7 @@ We currently have a script in the [camunda-helm-respository](https://github.com/
 
 ## Accessing Camunda images from Camunda Docker Registry
 
-Please note that all the required Docker images, available on DockerHub's Camunda and Bitnami organizations, are also provided publicly via Camunda's Docker registry: `registry.camunda.cloud/camunda/<image>` and `registry.camunda.cloud/bitnami/<image>`
+All required Docker images, available on DockerHub's Camunda and Bitnami organizations, are also provided publicly via Camunda's Docker registry: `registry.camunda.cloud/camunda/<image>` and `registry.camunda.cloud/bitnami/<image>`
 
 For example, the Docker image of Zeebe and PostgreSQL can be pulled via DockerHub or via the Camunda's Docker Registry:
 
