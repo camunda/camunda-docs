@@ -75,6 +75,11 @@
         },
         {
           "type": "link",
+          "label": "Encryption at rest",
+          "href": "/docs/8.2/components/concepts/encryption-at-rest/"
+        },
+        {
+          "type": "link",
           "label": "Backups",
           "href": "/docs/8.2/components/concepts/backups/"
         }
@@ -1029,12 +1034,22 @@
 
             {
               "type": "link",
+              "label": "Hugging Face Connector",
+              "href": "/docs/8.2/components/connectors/out-of-the-box-connectors/hugging-face/"
+            },
+            {
+              "type": "link",
               "label": "Kafka Connector",
               "href": "/docs/8.2/components/connectors/out-of-the-box-connectors/kafka/"
             },
 
             {
               "Microsoft": [
+                {
+                  "type": "link",
+                  "label": "Azure OpenAI Connector",
+                  "href": "/docs/8.2/components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                },
                 {
                   "type": "link",
                   "label": "Microsoft Teams Connector",
@@ -1248,11 +1263,6 @@
               "type": "link",
               "label": "Overview and example use case",
               "href": "/docs/8.2/components/tasklist/userguide/using-tasklist/"
-            },
-            {
-              "type": "link",
-              "label": "Updating Tasklist",
-              "href": "/docs/8.2/components/tasklist/userguide/updating-tasklist-cloud/"
             }
           ]
         }

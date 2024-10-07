@@ -87,7 +87,7 @@ The payload size also affects disk space requirements, as described in the next 
 
 The workflow engine itself will store data along every process instance, especially to keep the current state persistent. This is unavoidable. In case there are human tasks, data is also sent to Tasklist and kept there, until tasks are completed.
 
-Furthermore, data is also sent Operate and Optimize, which store data in Elasticsearch. These tools keep historical audit data for some time. The total amount of disk space can be reduced by using **data retention settings**. We typically delete data in Operate after 30 to 90 days, but keep it in Optimize for a longer period of time to allow more analysis. A good rule of thumb is something between 6 and 18 months.
+Furthermore, data is also sent from Operate and Optimize, which store data in Elasticsearch. These tools keep historical audit data for the configured retention times. The total amount of disk space can be reduced by using **data retention settings**. We typically delete data in Operate after 30 to 90 days, but keep it in Optimize for a longer period of time to allow more analysis. A good rule of thumb is something between 6 and 18 months.
 
 :::note
 Elasticsearch needs enough memory available to load a large amount of this data into memory.
@@ -139,23 +139,35 @@ First, calculate your requirements using the information provided above, taking 
 - Throughput: 20,000 process instances / day
 - Disk space: 114 GB
 
-Now you can select a hardware package that can cover these requirements. In this example this fits well into a cluster of size S.
+Now you can select a hardware package that can cover these requirements. In this example this fits well into a cluster of size 2x.
 
 ### Camunda 8 SaaS
 
-Camunda 8 defines three fixed hardware packages you can select from. The table below gives you an indication what requirements you can fulfill with these. If your requirements are above the mentioned numbers, please contact us to discuss a customized sizing.
+Camunda 8 defines four [cluster sizes](/components/concepts/clusters.md#cluster-size) you can select from (1x, 2x, 3x, and 4x) after you have chosen your [cluster type](/components/concepts/clusters.md#cluster-type). The following table gives you an indication of what requirements you can fulfill with each cluster size.
 
-| **\***                                                                   |                               S |                               M |                                L |
-| :----------------------------------------------------------------------- | ------------------------------: | ------------------------------: | -------------------------------: |
-| Max Throughput **Tasks/day**                                             |                           5.9 M |                            23 M |                             43 M |
-| Max Throughput **Tasks/second**                                          |                              65 |                             270 |                              500 |
-| Max Throughput **Process Instances/day**                                 |                           0.5 M |                           2.3 M |                            4.3 M |
-| Max Total Number of Process Instances stored (in Elasticsearch in total) |                           100 k |                           5.4 M |                             15 M |
-| Approx resources provisioned **\*\***                                    | 15 vCPU, 20 GB mem, 640 GB disk | 28 vCPU, 50 GB mem, 640 GB disk | 56 vCPU, 85 GB mem, 1320 GB disk |
+:::note
+Contact your Customer Success Manager if you require a custom cluster size above these requirements.
+:::
 
-**\*** The numbers in the table where measured using Camunda 8 (version 8.0) and [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark). It uses a [ten task process](https://github.com/camunda-community-hub/camunda-8-benchmark/blob/main/src/main/resources/bpmn/typical_process.bpmn). To calculate day-based metrics, an equal distribution over 24 hours is assumed.
+| Cluster size                                                                        |                                 1x |                                  2x |                               3x |                               4x |
+| :---------------------------------------------------------------------------------- | ---------------------------------: | ----------------------------------: | -------------------------------: | -------------------------------: |
+| Max Throughput **Tasks/day** **\***                                                 |                              4.3 M |                               8.6 M |                           12.9 M |                           17.2 M |
+| Max Throughput **Tasks/second** **\***                                              |                                 50 |                                 100 |                              150 |                              200 |
+| Max Throughput **Process Instances/day** **\*\***                                   |                                3 M |                                 6 M |                              9 M |                             12 M |
+| Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** |                               75 k |                               150 k |                            225 k |                            300 k |
+| Approximate resources provisioned **\*\*\*\***                                      | 11 vCPU, 22 GB memory, 64 GB disk. | 22 vCPU, 44 GB memory, 128 GB disk. | 33 vCPU, 66 GB mem, 192 GB disk. | 44 vCPU, 88 GB mem, 256 GB disk. |
 
-**\*\*** These are the resource limits configured in the Kubernetes cluster and are always subject to change.
+The numbers in the table were measured using Camunda 8 (version 8.6), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes Cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/zeebe/benchmarks/project/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) containing a mix of BPMN symbols such as tasks, events and call activities including subprocesses. To calculate day-based metrics, an equal distribution over 24 hours is assumed.
+
+**\*** Tasks (Service Tasks, Send Tasks, User Tasks, and so on) completed per day is the primary metric, as this is easy to measure and has a strong influence on resource consumption. This number assumes a constant load over the day. Tasks/day and Tasks/ second are scaled linearly.
+
+**\*\*** As Tasks are the primary resource driver, the number of process instances supported by a cluster is calculated based on the assumption of an average of 10 tasks per process. Customers can calculate a more accurate process instance estimate using their anticipated number of tasks per process.
+
+**\*\*\*** Total number of process instances within the retention period, regardless of if they are active or finished. This is limited by disk space, CPU, and memory for running and historical process instances available to ElasticSearch. Calculated assuming a typical set of process variables for process instances. Note that it makes a difference if you add one or two strings (requiring ~ 1kb of space) to your process instances, or if you attach a full JSON document containing 1MB, as this data needs to be stored in various places, influencing memory and disk requirements. If this number increases, you can still retain the runtime throughput, but Tasklist, Operate, and/or Optimize may lag behind.
+
+Data retention has an influence on the amount of data that is kept for completed instances in your cluster. The default data retention is set to 30 days, which means that data that is older than 30 days gets removed from Operate and Tasklist. If a process instance is still active, it is fully functioning in runtime, but customers are not able to access historical data older than 30 days from Operate and Tasklist. Data retention is set to 6 months, meaning that data that is older than 6 months will be removed from Optimize. Up to certain limits data retention can be adjusted by Camunda on request. See [Camunda 8 SaaS data retention](/components/concepts/data-retention.md).
+
+**\*\*\*\*** These are the resource limits configured in the Kubernetes cluster and are always subject to change.
 
 You might wonder why the total number of process instances stored is that low. This is related to limited resources provided to Elasticsearch, yielding performance problems with too much data stored there. By increasing the available memory to Elasticsearch you can also increase that number. At the same time, even with this rather low number, you can always guarantee the throughput of the core workflow engine during peak loads, as this performance is not influenced. Also, you can always increase memory for Elasticsearch later on if it is required.
 
@@ -163,7 +175,7 @@ You might wonder why the total number of process instances stored is that low. T
 
 Provisioning Camunda 8 onto your Self-Managed Kubernetes cluster might depend on various factors. For example, most customers already have their own teams providing Elasticsearch for them as a service.
 
-However, the following example shows a possible configuration which is close to a cluster of size S in Camunda 8 SaaS, which can serve as a starting point for your own sizing.
+However, the following example shows a possible configuration which is close to a cluster of size 1x in Camunda 8 SaaS, which can serve as a starting point for your own sizing.
 
 :::note
 Such a cluster can serve roughly 65 tasks per second as a peak load, and it can store up to 100,000 process instances in Elasticsearch (in-flight and history) before running out of disk-space.

@@ -24,7 +24,7 @@ To perform an import and provide the full set of features, Optimize requires a c
 
 ## Camunda 8 specific configuration
 
-For Camunda 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter) from the same Elasticsearch cluster that Optimize used to store it's own data. For the relevant configuration options, refer to the [Camunda 8 import configuration](./system-configuration-platform-8.md).
+For Camunda 8, Optimize is importing process data from exported zeebe records as created by the [Zeebe Elasticsearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter) (or [Zeebe OpenSearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/opensearch-exporter)) from the same cluster that Optimize used to store its own data. For the relevant configuration options, refer to the [Camunda 8 import configuration](./system-configuration-platform-8.md).
 
 ## Recommended additional configurations
 
