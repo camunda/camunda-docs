@@ -15,7 +15,7 @@ The Java client provides a job worker that handles polling for available jobs. T
 
 :::caution REST API limitation
 
-The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via REST API (for example, performing long-polling job activation when activating jobs larger than the maximum message size, or receiving additional job activation requests while the long-polling connection is still open).
+The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the REST API. For example, this applies to performing long-polling job activation when activating jobs larger than the maximum message size, or receiving additional job activation requests while the long-polling connection is still open.
 
 If you encounter this issue, consider switching to the Zeebe gRPC protocol for job activation, or use job
 activation via the REST API with long polling disabled.
