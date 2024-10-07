@@ -71,7 +71,3 @@ Additionally in the Starter Plan, the following applies to **development cluster
 
 - **Cluster is not highly available & includes less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only).
 - **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day as per the [fair usage limits of the Starter plan](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
-
-:::caution
-**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality is limited. For example, you may still execute BPMN timers and BPMN message catch events. To resume your cluster, review [how to resume a cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
-:::

@@ -771,7 +771,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
 ```
 
-2. Open another terminal and use [zbctl](../../../../../apis-tools/cli-client/cli-get-started.md) to print the Zeebe cluster status:
+1. Open another terminal and use [zbctl](/apis-tools/community-clients/cli-client/index.md) to print the Zeebe cluster status:
 
 ```shell
 zbctl status --insecure --address localhost:26500

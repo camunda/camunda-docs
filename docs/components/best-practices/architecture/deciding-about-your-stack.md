@@ -27,7 +27,7 @@ This architecture diagram illustrates the flow of requests from a user's browser
 
 - SaaS simplifies workflow engine integration.
 - Spring Boot is widely adopted for Java application development.
-- Flexible for both on-premise and cloud environments.
+- Flexible for both on-premises and cloud environments.
 
 Discover more in our [getting started guide for microservices orchestration](/guides/getting-started-orchestrate-microservices.md) or the [Spring Zeebe SDK instructions](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
 
