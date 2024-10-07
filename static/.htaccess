@@ -137,6 +137,9 @@ RewriteRule ^optimize/self-managed/optimize-deployment/migration-update/3.13_8.5
 
 RewriteRule ^optimize/self-managed/optimize-deployment/migration-update/instructions/?$ /optimize/self-managed/optimize-deployment/migration-update/camunda-8/instructions/ [R=301,L]
 
+# Updated web-modeler troubleshooting
+RewriteRule ^docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/?$ /docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/ [R=301,L]
+
 # 8.5 content moves vvvv
 # ----------------------
 RewriteRule ^docs/apis-tools/frontend-development/introduction-to-task-applications/?$ /docs/apis-tools/frontend-development/task-applications/introduction-to-task-applications$1 [R=301,L]
