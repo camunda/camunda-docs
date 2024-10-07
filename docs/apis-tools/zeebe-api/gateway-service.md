@@ -216,7 +216,7 @@ Returned if:
 
 Returned if:
 
-- The job was marked as failed. In that case, the related incident must be resolved before the job can be activated again and completed.
+- The job was marked as failed. In that case, the related [incident](/components/concepts/incidents.md) must be resolved before the job can be activated again and completed.
 
 ## `CreateProcessInstance` RPC
 
@@ -861,6 +861,9 @@ Returned if:
 - A mapping instruction refers to an unsupported element (i.e. some elements will be supported later on)
 - A mapping instruction refers to element in unsupported scenarios.
   (i.e. migrating active elements with event subscriptions will be supported later on)
+- A mapping instruction detaches a boundary event from an active element
+- Multiple mapping instructions refer to the same catch event
+- A mapping instruction changes a parallel multi-instance body to a sequential multi-instance body or vice versa
 
 ## `PublishMessage` RPC
 

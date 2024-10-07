@@ -64,7 +64,7 @@ We decided on this stack for the following reasons:
 - All components are open-source and easily available.
 - Camunda Run is the favorite distribution, as it focuses on external tasks, the more modern paradigm also present in Camunda Cloud.
 - Spring Boot is currently the most adopted way of building Java applications.
-- Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
+- Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premises or in the cloud.
 - PostgreSQL has a great track-record for performance.
 
 There are severa; *advantages using the greenfield stack*:
@@ -133,7 +133,7 @@ Create your **development project**
 | Application point of view on process engine | Remote Server | Library | Library |
 | Possible communication types with services | Remote | Java InVM, Remote | Java InVM, Remote |
 | Programming language | Polyglot (Java, NodeJs, C#, ...) | Java | Java |
-| Use when | **Default**, if there is no reason against it. Especially if your architecture or applications are not Java based. | You want a single deployment including the engine. | You use a supported application server and prefer to seperate engine installation from application development. |
+| Use when | **Default**, if there is no reason against it. Especially if your architecture or applications are not Java based. | You want a single deployment including the engine. | You use a supported application server and prefer to separate engine installation from application development. |
 |  | [Learn More](https://docs.camunda.org/manual/latest/introduction/architecture/#standalone-remote-process-engine-server) | [Learn More](https://docs.camunda.org/manual/latest/introduction/architecture/#embedded-process-engine) | [Learn More](https://docs.camunda.org/manual/latest/introduction/architecture/#shared-container-managed-process-engine) |
 
 In essence, the general recommendation is:

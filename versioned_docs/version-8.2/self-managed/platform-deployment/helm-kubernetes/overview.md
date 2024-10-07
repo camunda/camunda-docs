@@ -20,7 +20,7 @@ You can install Camunda 8 on your Kubernetes environment of choice, e.g.:
 
 ## Officially supported platforms
 
-With the right configuration, Camunda 8 can be deployed on any Kubernetes distribution (Cloud or on-premise). However, we officially test and support a [specific list of platforms](./platforms/platforms.md).
+With the right configuration, Camunda 8 can be deployed on any Kubernetes distribution (Cloud or on-premises). However, we officially test and support a [specific list of platforms](./platforms/platforms.md).
 
 ## Versioning
 

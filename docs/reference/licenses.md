@@ -6,31 +6,29 @@ description: "Licensing information for components of Camunda 8"
 
 ## Licensing
 
-This page contains licensing information for all components of Camunda 8.
+This page contains licensing information for all Camunda 8 Components version 8.6 and higher.
 
-### Zeebe
+### Zeebe, Operate, Tasklist, Identity, and Optimize
 
-Licenses and license information for Zeebe can be found in the Zeebe project [README](https://github.com/camunda/camunda#license).
+The source code for Zeebe, Operate, Tasklist, Identity, and Optimize is licensed to our users and customers under the [Camunda License v1](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-license).
 
-### Operate, Tasklist, Identity, Optimize
+The compiled software of these components is distributed under a proprietary license, which can be either the [Camunda Self-Managed Non-Production license](https://legal.camunda.com/#self-managed-non-production-terms) or the Camunda Self-Managed Enterprise Edition license (a copy of which you obtain when you contact Camunda). To use the software in production, [purchase the Camunda Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 
-Operate, Tasklist, Identity, and Optimize are licensed to our users and customers under a proprietary license. The proprietary license can be either the [Camunda Self-Managed Free Edition license](https://legal.camunda.com/licensing-and-other-legal-terms#legal-terms-camunda-platform-c8-self-managed-free-edition-and-beta-offerings) or the Camunda Self-Managed Enterprise Edition license (a copy you obtain when you contact Camunda). Note that while the Camunda Self-Managed Free Edition is indeed free, it only allows usage of the software in non-production environments. To use the software in production, [purchase the Camunda Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/). This licensing information also applies to web apps and APIs.
+### Camunda Connectors
 
-### Connectors
+The Connector SDK, REST Connector, Connector Runtime Docker image, and Connectors Bundle Docker image are licensed under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0). The source code of all other Connectors provided by Camunda out of the box is licensed under the [Camunda License v1](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-license).
 
-The Connector SDK, REST Connector, Connector Runtime Docker image, and Connectors Bundle Docker image are licensed under the [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0). All other Connectors provided by Camunda out of the box are licensed to our users and customers under the same proprietary license as the one defined for Operate, Tasklist, Identity, and Optimize above.
+The compiled software is distributed under a proprietary license, which can be either the [Camunda Self-Managed Non-Production license](https://legal.camunda.com/#self-managed-non-production-terms) or the Camunda Self-Managed Enterprise Edition license (a copy of which you obtain when you contact Camunda). To use the software in production, [purchase the Camunda Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 
-### Web Modeler
+### Web Modeler and Console
 
-Web Modeler is licensed under the [Camunda License 1.0](https://legal.camunda.com/#camunda-license).
+The source code for the Web Modeler and Console is licensed to our users and customers under a proprietary license and is only available to users or customers on demand.
+
+The compiled software of these components is distributed under a proprietary license, which can be either the [Camunda Self-Managed Non-Production license](https://legal.camunda.com/#self-managed-non-production-terms) or the Camunda Self-Managed Enterprise Edition license (a copy of which you obtain when you contact Camunda). To use the software in production, [purchase the Camunda Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 
 ### Desktop Modeler
 
-The source code of Desktop Modeler is licensed under the MIT license as stated in the [`LICENSE` file](https://github.com/camunda/camunda-modeler/blob/master/LICENSE) in the root of the source code repository. This file is also shipped as `LICENSE.camunda-modeler.txt` with each modeler distribution.
-
-### Console
-
-Console is licensed under the proprietary Camunda Self-Managed Enterprise Edition license (a copy you obtain when you contact Camunda).
+The source code of Desktop Modeler is licensed under the MIT license as stated in the [LICENSE file](https://github.com/camunda/camunda-modeler/blob/master/LICENSE) in the root of the source code repository. This file is also shipped as `LICENSE.camunda-modeler.txt` with each modeler distribution.
 
 ### Camunda 8 documentation
 

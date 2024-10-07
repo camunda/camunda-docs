@@ -38,7 +38,7 @@ When installing the [camunda-platform](https://github.com/camunda/camunda-platfo
 
 Before deploying Camunda using Helm you need the following:
 
-- [Kubernetes cluster](./overview.md#kubernetes-environments): either local, cloud platform, or on-premise.
+- [Kubernetes cluster](./overview.md#kubernetes-environments): either local, cloud platform, or on-premises.
 - [Helm](https://helm.sh/docs/intro/install/) binary.
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) binary.
 
