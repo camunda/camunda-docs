@@ -18,15 +18,10 @@ RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 # ----------------------
 
 # Move Go and CLI client to community section
-RewriteRule ^docs/next/apis-tools/cli-client/(.*)$ /docs/next/apis-tools/community-clients/cli-client/$1 [R=301,L]
-RewriteRule ^docs/next/apis-tools/go-client/(.*)$ /docs/next/apis-tools/community-clients/go-client/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/cli-client/(.*)$ /docs/next/apis-tools/community-clients/cli-client/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/go-client/(.*)$ /docs/next/apis-tools/community-clients/go-client/$1 [R=301,L]
 
 # Remove rename, resume, update, and delete a cluster
-RewriteRule ^docs/next/components/console/manage-clusters/rename-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/resume-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/update-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-clusters/delete-cluster/?$ /docs/next/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
-
 RewriteRule ^docs/components/console/manage-clusters/rename-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
 RewriteRule ^docs/components/console/manage-clusters/resume-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
 RewriteRule ^docs/components/console/manage-clusters/update-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
@@ -43,7 +38,6 @@ RewriteRule ^docs/apis-tools/community-clients/spring/?$ /docs/apis-tools/spring
 RewriteRule ^docs/apis-tools/console-sm-api/(.*)$ /docs/apis-tools/administration-sm-api/$1 [R=301,L]
 
 #remove SM Architecture page
-RewriteRule ^docs/next/self-managed/platform-architecture/overview/?$ /docs/next/self-managed/about-self-managed/$1 [R=301,L]
 RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-managed/about-self-managed/$1 [R=301,L]
 RewriteRule ^docs/8.5/self-managed/platform-architecture/overview/?$ /docs/8.5/self-managed/about-self-managed/$1 [R=301,L]
 RewriteRule ^docs/8.4/self-managed/platform-architecture/overview/?$ /docs/8.4/self-managed/about-self-managed/$1 [R=301,L]
