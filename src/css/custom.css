@@ -185,6 +185,13 @@ svg.implemented:hover [stroke="#333"] {
   margin-left: 0;
   margin-bottom: 1.5rem;
 }
+.theme-doc-version-badge {
+  margin-left: 0;
+  margin-bottom: 0.5rem !important;
+}
+.openapi__method-endpoint .badge {
+  margin-bottom: 0;
+}
 .badge--beginner {
   background-color: #ff8b00;
   color: #ffffff;
