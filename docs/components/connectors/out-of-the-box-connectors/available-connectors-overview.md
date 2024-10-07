@@ -32,6 +32,7 @@ import TabItem from "@theme/TabItem";
 - [Amazon SageMaker Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Interact with the [Amazon SageMaker service](https://aws.amazon.com/sagemaker/) from your BPMN process.
 - [Amazon SNS Outbound Connector](/components/connectors/out-of-the-box-connectors/amazon-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/amazon-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
+- [Amazon Textract Connector](components/connectors/out-of-the-box-connectors/amazon-textract.md) - Interact with the [Amazon Textract Service](https://aws.amazon.com/textract/) from your BPMN process.
 - [Asana Connector](/components/connectors/out-of-the-box-connectors/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
 - [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [AWS Lambda Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
