@@ -1,0 +1,55 @@
+---
+id: resolve-incident
+title: "Resolve incident"
+description: "Marks the incident as resolved; most likely a call to Update job will be necessary to reset the job’s retries, followed by this call."
+sidebar_label: "Resolve incident"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV81y2zYQfhUMTsnUFpXUSV31pHGc1m2SemS5Pbg6gORKhA0SLABK1nA409fo6/VJuguQMvXjcQ499KCDRgSwv/i+BRY1d2Jh+eiOXxWJTKFwfHbCU7CJkaWTuuAj/lmYB8tcBky2MkxYZsBqtYT0B5Zr65iSD6DWTLBEKMWcZrdlKhywex2zlcSpGFgBCVgrzJrWUR+ct4oi//z1N1l0RoI9YXOtlF5BymKUzKT1Ngd/FPyEl8KIHBwYirnmBQ4wwi6uX2CNMpKCLoXL8NvAn5U0kPKRMxXsZobyTM+3UwuhUWoD1LdJBrngo5q7dRlcOViAwaW5NrlwYer9GW+aGbmzpS4sWNJ4Ozyjv22X074vTC3HzcVMexs64M0JPxsOD+uWRi9ROWW4u4IMFNqxpVAypXATjeEhhqgqylLJRJBqhEqxgvybe0t26l5W2w7G7DpIshSckIrp+B4SD3cQjNGxLNjd5OMF+/7s3XezV5lzpR1F0Wq1Gph5cgqpdNoMtFlEOKQfyb0eMAzeAKa7JiaIFMXQp1CUUAnGIfDMlpDIuUwIAxdy9cHQ1gf4WxBCWESHjfITRBuoLNKpWPSRqozkuxwYs9vJFfN4yPkaFfZde525qBTZELGu3ChWonggoJx06qDTXS+2ynOifsu3bQdoyDrhKvsi0759u2ebaPHTdHrNggmW6BSwhkyondYRJZHLQuZVzkfILhyJxzB6Pxw2ZJMQ/4pMCgaPJabvqbWbDpIj14hzsOYTkwXGVST/FTLayIXc9YuOnrDgLYk/hIyapvEF9VIxrqTLto4COh3aApvrqjgW2LHAjgX2bIG9O3RjYS60y4Z4CMbglukkqQxeyGyVSeXNU0/Q+abrGqw7Vtqx0o6VdrjScBEb4Eyn1ORi5+2bYux1RzzqLi4b1b07rIl8Z1n5UBAcMMuufa4M7hKvQw01SP06Q4vNqC61cU20JICWwkiBMXg8aTnUWschpbE5z0Ic+1jSAvXoXY4XIseLVLBzNrm8mbIf8YWwEmu/t+Ry2/T58Hx40CqJPmNxfH3FQoaBib3ToTNLZX7QbBD+GsO+17eAJ5l06xtSC9sTgzBgxhXBsWFI689bp3EQwpnw8bHjzc+/Tz30sphrr95SYD8QQgUhDJEPB2/26YbBUtUkOkddf3Qi5XyDI3qJJaqyjhI64Xi+Ar5byG/7purEPoUV9lvwyN4MCJTAnO7EXKDlKh6guygJapv/WOk4yoUsotaFjS7Gn2+/fBiffrq6uPxyc3mKFgfu0fnkidG5KHpxTMKzaNOV7SZbP90U/6uXaou+g0cX4RmDj9Km3ba6Ldi7zbvVovxo+xHbq1nkWqi7O17XsbBwa1TT0DRelmaN87OnMvV1nUpL33hEzIWyu8/e/o69mrQP5Nfs5cfwwZTaSVGs/WGhKhrh5wOmsf0yb2YonoFIkf0UZZAYJwmUrqf77G1PRbc5+q5/vaFy+RfLSsf3
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Resolve incident</h1>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/incidents/{incidentKey}/resolution"}
+></MethodEndpoint>
+
+Marks the incident as resolved; most likely a call to Update job will be necessary to reset the job’s retries, followed by this call.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"incidentKey","in":"path","required":true,"description":"Key of the incident to resolve.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
+
+The incident is marked as resolved.
+
+</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+The provided data is not valid.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The incident with the incidentKey is not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
