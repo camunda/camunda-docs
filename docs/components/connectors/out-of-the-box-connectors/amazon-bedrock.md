@@ -5,7 +5,7 @@ title: Amazon Bedrock Connector
 description: Interact with the Amazon Bedrock Connector from your BPMN process.
 ---
 
-The **Amazon SageMaker Connector** is an outbound Connector that allows you to interact with
+The **Amazon Bedrock Connector** is an outbound Connector that allows you to interact with
 [Amazon Bedrock](https://aws.amazon.com/bedrock/) from your BPMN process.
 
 ## Prerequisites
