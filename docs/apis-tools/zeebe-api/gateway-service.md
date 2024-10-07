@@ -866,7 +866,7 @@ Returned if:
 - Two catch events in the source are mapped to the same catch event in the target
 - A catch event in the source is mapped to a different type of catch event in the target
 - A message catch event in the source process instance is not fully distributed
-- Parallel multi-instance body is mapped to a sequential multi-instance body and vice versa
+- A mapping instruction changes a parallel multi-instance body to a sequential multi-instance body or vice versa
 
 ## `PublishMessage` RPC
 
