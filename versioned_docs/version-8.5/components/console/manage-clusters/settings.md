@@ -35,7 +35,7 @@ You can set the cluster to automatically update to newer versions of Camunda 8 w
 - Disable this setting if you do not want the cluster to automatically update. You must manually update the cluster.
 
 :::tip
-For more information on updating clusters, see [update your cluster](/components/console/manage-clusters/update-cluster.md).
+For more information on updating clusters, see [update your cluster](/components/console/manage-clusters/manage-cluster.md#update-a-cluster).
 :::
 
 ## Enforce user task restrictions
@@ -51,7 +51,7 @@ For more information on user task access restrictions, see [user task access res
 
 ## Delete this cluster
 
-You can _permanently_ delete the selected cluster. See [delete your cluster](/components/console/manage-clusters/delete-cluster.md).
+You can _permanently_ delete the selected cluster. See [delete your cluster](/components/console/manage-clusters/manage-cluster.md#delete-a-cluster).
 
 :::caution
 Deleting a cluster is permanent. You cannot reuse a cluster after it has been deleted.

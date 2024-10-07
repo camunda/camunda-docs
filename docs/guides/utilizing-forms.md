@@ -83,7 +83,7 @@ You can now monitor your instances in [Operate](../components/operate/operate-in
 
 :::info
 Linked Camunda Forms will automatically be deployed along with the diagram.
-As linked forms are always resolved to their latest version, make sure you don't accidentally deploy a diagram.
+As linked forms are resolved to their latest version (unless you change the [binding type](/components/modeler/web-modeler/advanced-modeling/form-linking.md#camunda-form-linked)), make sure you don't accidentally deploy a diagram.
 
 When deploying to a Camunda 8 cluster with a version lower than 8.4, forms linked to user tasks or none start events will be automatically embedded into the user task to guarantee backwards compatibility.
 Read more about the different ways to reference Camunda Forms in the [user task forms reference](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).

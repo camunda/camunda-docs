@@ -50,10 +50,16 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 - **Artifact ID change**:
   - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
 
+### Deprecation: Zeebe Go client & CLI client (zbctl)
+
+The Zeebe Go Client and CLI client (zbctl) will be [officially deprecated](https://camunda.com/blog/2024/09/deprecating-zbctl-and-go-clients/) with the 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and CLI utility will not be released starting with Camunda 8.6, will no longer receive new features, and will be transitioned to a community-maintained status.
+
+The documentation of the Zeebe Go Client and CLI client (zbctl) moved to the [community clients section](/apis-tools/community-clients/index.md).
+
 ### Camunda 8 SaaS - Required cluster update
 
 :::caution
-By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/update-cluster.md) to the following versions at a **minimum**:
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/manage-cluster.md#update-a-cluster) to the following versions at a **minimum**:
 
 - **8.2+gen27**
 - **8.3+gen11**
@@ -64,7 +70,7 @@ By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [upda
 
 auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
 
-You minimally need to take the following [update](/components/console/manage-clusters/update-cluster.md) path:
+You minimally need to take the following [update](/components/console/manage-clusters/manage-cluster.md#update-a-cluster) path:
 
 - 8.0.x -> 8.2+gen27
 - 8.1.x -> 8.2+gen27
@@ -77,22 +83,9 @@ If you do not update the cluster by August 30th 2024, we will update the cluster
 
 Camunda 8 Self-Managed clusters are not affected by this.
 
-### Zeebe repo rename impacts Go client
+### Support for Amazon OpenSearch for Optimize
 
-The Camunda 8 Github repository was renamed from `http://github.com/camunda/zeebe` to `http://github.com/camunda/camunda`, impacting the Zeebe Go client path.
-
-Starting in 8.6.0, the Zeebe Go client path should reflect the renamed repo as follows:
-
-```go
-
-module example.com/mymodule
-
-require (
-    github.com/camunda/camunda/clients/go/v8 v8.x.y
-    ...
-)
-
-```
+This release extends the OpenSearch features supported by Optimize. Full support is committed for the next release in January 2025.
 
 ### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
@@ -115,9 +108,68 @@ The `CorrelationResult` record has been changed compared to the previous version
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
 
-### Separated Ingress deprecation warning
+### Flow control enabled by default in Saas
+
+Flow control is now enabled by default in Camunda 8.6 SaaS. This change ensures the cluster is protected from excessive load and can maintain a stable state.
+
+These new configuration defaults are tailored to the cluster size and optimized for a stable performance. However, the cluster might reject requests if the load is too high with this change. The error message for this is `Failed to write client request to partition X, because the write limit is exhausted`. If the error persists, this may be a sign of underlining issues, or a need to adjust the cluster size.
+
+For more information on how to configure flow control, visit the [flow control documentation](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md).
+
+### Camunda 8 Self-Managed
+
+#### Helm chart - Separated Ingress deprecation
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+
+#### Helm chart - `global.multiregion.installationType` deprecation
+
+The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
+
+#### Helm chart - Elasticsearch nodes number
+
+The default value of Elasticsearch deployment pods has changed from 2 to 3, and an affinity setting has been added to avoid scheduling Elasticsearch pods on the same Kubernetes worker.
+
+### Camunda Optimize artifact and Docker tag separation
+
+Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two distinct versions, and versioning between Camunda 7 and Camunda 8 is no longer interchangeable:
+
+- **Before Camunda 8.6**: Versions like `8.x` and `3.x` (used for Camunda 7) could sometimes be used interchangeably.
+- **From Camunda 8.6 onwards**: `8.6 != 3.14`. Each version corresponds strictly to its platform:
+  - **Camunda 7**: Uses the `3.x` versioning scheme and the `latest` Docker tag.
+  - **Camunda 8**: Uses the `8.x` versioning scheme and the `8-latest` Docker tag.
+
+#### Action required:
+
+- **Camunda 7 Users**: Continue using `3.x` versions and the `latest` Docker tag.
+- **Camunda 8 Users**: If you haven't already done so, update your configurations to use `8.x` versions and the `8-latest` Docker tag.
+
+Make sure to update your Docker configurations accordingly to ensure compatibility.
+
+### New base path for Operate and Tasklist web applications
+
+We are introducing a new base path for both the Operate and Tasklist **web applications**. This change applies to both Self-Managed and SaaS environments.
+
+#### For Self-Managed
+
+- The new base path for Operate is `/operate`, and for Tasklist, it is `/tasklist`.
+- For a [Separated Ingress](/self-managed/setup/guides/ingress-setup.md?ingress=separated) configuration:
+  - for Operate, the full URL will be `{operate-host}/operate`. Any calls to `{operate-host}` will automatically be redirected to `{operate-host}/operate`
+  - for Tasklist, the full URL will be `{tasklist-host}/tasklist`. Any calls to `{tasklist-host}` will automatically be redirected to `{tasklist-host}/tasklist`.
+- For a [Combined Ingress](/self-managed/setup/guides/ingress-setup.md?ingress=combined) configuration:
+  - for Operate, the full URL will be `{common-host}/{operate-contextPath}/operate`. Any calls to `{common-host}/{operate-contextPath}` will be automatically redirected to `{common-host}/{operate-contextPath}/operate`.
+  - for Tasklist, the full URL will be `{common-host}/{tasklist-contextPath}/tasklist`. Any calls to `{common-host}/{tasklist-contextPath}` will be automatically redirected to `{common-host}/{tasklist-contextPath}/tasklist`.
+
+#### For SaaS
+
+- The full URL for Operate is now structured as `https://{region}.operate.camunda.io/{clusterId}/operate`.
+- The full URL for Tasklist is now structured as `https://{region}.tasklist.camunda.io/{clusterId}/tasklist`.
+- Any calls to `https://{region}.operate.camunda.io/{clusterId}` will be redirected to `https://{region}.operate.camunda.io/{clusterId}/operate`.
+- Any calls to `https://{region}.tasklist.camunda.io/{clusterId}` will be redirected to `https://{region}.tasklist.camunda.io/{clusterId}/tasklist`.
+
+:::note
+**API URLs** for both Operate and Tasklist remain **unchanged**.
+:::
 
 ## Camunda 8.5
 
@@ -161,7 +213,7 @@ This release contains the following limitations:
 
 ### Changes in supported environments
 
-- Raised minimum Go version to 1.21 for the [Zeebe Go client](/apis-tools/go-client/index.md)
+- Raised minimum Go version to 1.21 for the Zeebe Go client
 
 ### Camunda SaaS: New generation naming scheme
 

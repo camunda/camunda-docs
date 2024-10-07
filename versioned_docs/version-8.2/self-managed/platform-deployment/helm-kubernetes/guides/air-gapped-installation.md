@@ -25,13 +25,18 @@ The following images must be available in your air-gapped environment:
   - `web-modeler-ee/modeler-webapp`
   - `web-modeler-ee/modeler-websockets`
 
-Please note that all the required Docker images, available on DockerHub's Camunda organization, are also provided publicly via Camunda's Docker registry: `registry.camunda.cloud/camunda/<image>`
+## Accessing Camunda images from Camunda Docker Registry
 
-For example, the Docker image of Zeebe can be pulled via DockerHub or via the Camunda's Docker Registry:
+Please note that all the required Docker images, available on DockerHub's Camunda and Bitnami organizations, are also provided publicly via Camunda's Docker registry: `registry.camunda.cloud/camunda/<image>` and `registry.camunda.cloud/bitnami/<image>`
 
-```bash
+For example, the Docker image of Zeebe and PostgreSQL can be pulled via DockerHub or via the Camunda's Docker Registry:
+
+```shell
 docker pull camunda/zeebe:latest
 docker pull registry.camunda.cloud/camunda/zeebe:latest
+
+docker pull bitnami/keycloak:latest
+docker pull registry.camunda.cloud/bitnami/keycloak:latest
 ```
 
 ## Required Helm charts

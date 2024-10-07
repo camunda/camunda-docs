@@ -369,6 +369,42 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers?dryRun=true'
 -d '["0", "1", "2", "3"]'
 ```
 
+##### Replication factor
+
+The replication factor for all partitions can be changed with the `replicationFactor` request parameter. If not specified, the replication factor remains unchanged.
+
+The new replicas are assigned to the brokers based on the round robin partition distribution strategy.
+
+```
+curl --request POST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' \
+-H 'Content-Type: application/json' \
+-d '["0", "1", "2", "3"]'
+```
+
+##### Force remove brokers
+
+:::caution
+This is a dangerous operation and must be used with caution. When not used correctly, split-brain scenarios or unhealthy, unrecoverable clusters may result.
+:::
+
+Usually, changes can only be made to a cluster when all brokers are up. When some brokers are unreachable, you may want to remove them from the cluster. You can force remove a set of brokers by setting the request parameter `force` to `true`.
+
+This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md/). Any deviations from the described process can result in the cluster being unusable.
+
+:::note
+Do not send more than one force request at a time.
+:::
+
+The following request force removes all brokers that are _not_ provided in the request body:
+
+```
+curl --request POST 'http://localhost:9600/actuator/cluster/brokers?force=true' \
+-H 'Content-Type: application/json' \
+-d '["0", "1", "2"]'
+```
+
+This operation does not re-distribute the partitions that were in the removed brokers. As a result, the resulting cluster will have a reduced number of replicas for the affected partitions.
+
 #### Response
 
 The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):

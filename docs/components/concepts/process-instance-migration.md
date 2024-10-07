@@ -6,12 +6,15 @@ description: "Use process instance migration to change the process definition of
 
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
+While doing so, we aim to interfere as little as possible with the process instance state during the migration.
+For example, a migrated active user task remains assigned to the same user.
+This principle applies to all parts of the process instance.
 
 :::tip
 To repair a broken process instance without making changes to the process definition, use [process instance modification](./process-instance-modification.md) instead.
 :::
 
-Use the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) to change the process model of a running process instance.
+Use the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/camunda-api-rest/specifications/migrate-process-instance.api.mdx) to change the process model of a running process instance.
 
 :::note
 You can also migrate your process instances using Operate's UI by following [the user guide](../operate/userguide/process-instance-migration.md).
@@ -92,7 +95,7 @@ Simply cancel the service task instance, and add a new instance of the service t
 
 ## Correcting mistakes in a process instance
 
-Process instance migration can also be used to correct mistakes that led to an incident in a process instance.
+Process instance migration can also be used to correct mistakes that led to an [incident](/components/concepts/incidents.md) in a process instance.
 
 Let's consider an example.
 
@@ -141,6 +144,113 @@ The called process instance is not changed when migrating the call activity.
 
 You can migrate a called process instance in the same way as a regular process instance.
 
+## Dealing with catch events
+
+An exception to changing the process instance state is specific to catch events.
+This is necessary to ensure that the process instance can be executed according to the new process definition.
+It allows you to add or remove catch events from an active element.
+At the same time, you can leave an existing catch event unchanged.
+This section explains how to deal with catch events when migrating a process instance.
+
+You decide what happens to the associated event subscription through the mapping instructions for the catch events:
+
+- Migrate catch events: if a catch event is mapped, the associated subscription is migrated.
+- Remove catch events: if a catch event in the source process is not mapped, then the associated subscription is closed during migration.
+- Add catch events: if a catch event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
+
+### Migrate catch events
+
+Catch events can be migrated by providing a mapping instruction between the source and the target catch event.
+Providing a mapping between catch events ensures that the event subscription in the source process is preserved after the migration.
+In the following section we will discuss situations where mapping a catch event may or may not be useful.
+Let's explain both mapping and non-mapping scenarios with examples.
+
+#### A mapping instruction is provided between the catch events
+
+An active user task has been waiting for a timer boundary event.
+The timer boundary event is defined as a duration of one week.
+The user task has not been completed and has already spent five days waiting for the timer.
+
+![The process instance is waiting at the active user task A with a timer boundary event attached.](assets/process-instance-migration/migration-catch-event-source.png)
+
+Now we want to [change an inactive part of the process](#changing-the-process-instance-flow-for-inactive-parts) by adding a user task after the timer boundary event.
+Instead of waiting for the full time defined by the target process' timer boundary event, we only want to wait for the remaining two days.
+To achieve this for the example above, the mapping between active user tasks `A` -> `A` and timer boundary events `Timer1` -> `Timer2` must be provided.
+This ensures the timer is migrated (_the associated subscription is migrated_) and the duration is preserved.
+Assuming that the timer boundary event is defined as 2 weeks duration in the target process, the process instance will look as follows after the migration:
+
+![The process instance is waiting at the active user task A with the migrated timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target.png)
+
+Mapping catch events applies to other event types as well.
+For example, if you want to keep the message name the same for a message event subprocess, you should map the start event of the event subprocess when migrating the process instance.
+Another example would be to preserve a signal name for an intermediate signal catch event attached to an event-based gateway. In this case, you should map the signal catch event to the one in the target while migrating the process instance.
+
+#### No mapping instruction is provided between the catch events
+
+Before moving forward with the example, there are two important scenarios to consider because they affect the output after the migration:
+
+- The catch event in the source process is identical to the catch event in the target process.
+- There are changes between these catch events, for example, the message name is different in the target.
+
+Let's consider again the same example above:
+
+An active user task has been waiting for a timer boundary event.
+The timer boundary event is defined as a duration of one week.
+The user task has not been completed and has already spent five days waiting for the timer.
+
+![The process instance is waiting at the active user task A with a timer boundary event attached.](assets/process-instance-migration/migration-catch-event-source.png)
+
+In the first scenario, the catch event in the source process is identical to the catch event in the target process:
+
+This time we want to reset the timer and wait for the full week again.
+To achieve this for the example above, only a mapping between active user tasks `A` -> `A` must be provided.
+This will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
+After the migration the process instance will look like following:
+
+![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-identical-target-trigger-updated.png)
+
+In the second scenario, there are changes between these catch events:
+
+Now, we want to reset the timer and wait for two weeks as in the target process definition.
+To achieve this for the example above, only a mapping between active user tasks `A` -> `A` must be provided.
+This will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
+After the migration the process instance will look as follows:
+
+![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target-trigger-updated.png)
+
+Same as above, omitting the mapping instruction for catch events applies to other event types as well.
+For example, if you want to change the message name for a message event subprocess start event, you must omit mapping the message start event when migrating the process instance.
+Another example would be to update a signal name for an intermediate signal catch event, you must omit mapping the signal catch event when to the one in the target while migrating the process instance.
+
+### Add or remove catch events
+
+You can also add or remove catch events.
+
+Let's consider a process instance awaiting at a service task `A`.
+
+![The process instance is waiting at the active service task A without any boundary events attached.](assets/process-instance-migration/migration-boundary-event_before.png)
+
+You can migrate it to a process definition where a message event subprocess with message start event `M` is added to the process.
+To do so, you only have to map element `A` to element `A` in the target process.
+After migrating active element `A`, the process instance is newly subscribed to the message boundary event `M` (_a new subscription is opened_).
+
+![After migrating, the process instance is subscribed to the newly introduced message event subprocess start event.](assets/process-instance-migration/migration-catch-event-target-added.png)
+
+Likewise, you can migrate the process instance back to the previous process definition where no message event subprocess is defined.
+To do so, you only have to map element `A` to element `A` again.
+After migrating active element `A`, the process instance is no longer subscribed to the message start event `M` (_associated subscription is closed_).
+
+![After migrating back, the process instance is no longer subscribed to the message boundary event](assets/process-instance-migration/migration-boundary-event_before.png)
+
+Likewise, adding and removing catch events applies to all other supported catch event types as well.
+For instance, an intermediate signal catch event can be added or removed in the same way as the message event subprocess in the example above.
+
+:::tip
+Currently, a mapping instruction must be provided between catch events to migrate message catch events if the target catch event has the same message name.
+Therefore, it is not possible to re-create message catch events with the same message name in the target process definition.
+While we're working on resolving this, you can migrate this case by providing a mapping between the boundary events.
+:::
+
 ## Process definitions and versions
 
 So far, we've only discussed migrating a process instance to a new version of its process definition.
@@ -176,43 +286,57 @@ You can use [process instance modification](./process-instance-modification.md) 
 This results in new keys for the service task as well as the job.
 :::
 
-## Dealing with attached boundary events
+## Internal Execution
 
-You can migrate active elements with boundary events attached.
-You decide what happens to the associated event subscription through the mapping instructions for the boundary events:
+In the following example, we will explain the internal execution steps of process instance migration.
+It is recommended that you read these steps to fully understand the power of process instance migration.
 
-- If a boundary event is mapped, the associated subscription is migrated. Please note, this case is not yet supported.
-- If a boundary event in the source process is not mapped, then the associated subscription is closed during migration.
-- If a boundary event of the target process is not the target of a mapping instruction, then a new subscription is opened during migration.
+Migration of a process instance consists of the following steps:
 
-Let's consider a process instance awaiting at a service task `A`.
+- Validation
+- Migration of process instance, and global variables
+- Migration of each active element (including associated jobs, incidents, local variables, and event subscriptions)
 
-![The process instance is waiting at the active service task A without any boundary events attached.](assets/process-instance-migration/migration-boundary-event_before.png)
+If any of the steps fail, the migration is rejected and a rejection message that explains the reason is returned.
+For example, if a mapping is not provided for an active element, the migration is rejected with an error message indicating that the mapping is missing.
+As a result, the process instance will not be migrated and remains in its current state.
+The migration runs in a **transactional** manner, meaning that it is migrating all active elements or nothing.
 
-You can migrate it to a process definition where a message boundary event `M` is attached to the service task `A`.
-To do so, you only have to map element `A` to element `A` in the target process.
-After migrating active element `A`, the process instance is newly subscribed to the message boundary event `M`.
+### Validation
 
-![After migrating, the process instance is subscribed to the newly introduced message boundary event.](assets/process-instance-migration/migration-boundary-event_after.png)
+The migration plan is validated before the migration is executed.
+The validation starts with validating the mapping instructions provided in the migration plan.
+For example, the validation checks if the source element ID refers to an existing element in the process instance's process definition.
+Later, while attempting to migrate each active element, each limitation mentioned in the [limitations section](#limitations) is validated.
+For example, the flow scope of an active element is validated to ensure that it is not changed during migration.
 
-Likewise, you can migrate the process instance back to the previous process definition where no boundary event is attached to the service task `A`.
-To do so, you only have to map element `A` to element `A` again.
-After migrating active element `A`, the process instance is no longer subscribed to the message boundary event `M`.
+### Migration of process instance, and global variables
 
-![After migrating back, the process instance is no longer subscribed to the message boundary event](assets/process-instance-migration/migration-boundary-event_before.png)
+After all validations are successful, the migration of the outermost active element which is the process instance itself is started.
+At this point, the process instance's `processDefinitionKey`, `bpmnProcessId`, and `version` properties are updated to the target process definition.
+The global variables are also migrated to the target process definition.
 
+### Migration of each active element
+
+The execution of the migration is done in a breadth-first manner.
+The first active child instance of the process instance is migrated followed by the migration of the next active child instance.
+Later, the migration of the active child instances of each active child instance is executed.
+In this stage, jobs, incidents, local variables, and event subscriptions contained in each active element is also migrated.
+
+While traversing each active element, the migration plan is used to determine the target element for each active element.
+For each active element, `processDefinitionKey`, `bpmnProcessId`, `elementId`, `version` properties are updated to the target process definition.
+
+#### Migration of catch event subscriptions
+
+The following operations are performed in respective order for each active element as the execution continues to migrate each active element:
+
+- If a catch event exists in the source process instance and is not part of the migration plan, the subscription to the catch event is removed.
+- If a catch event exists in the target process definition and is not part of the migration plan, a new subscription is created for the catch event.
+- If a catch event in the source process is mapped to a catch event in the target process, the subscription is migrated.
+
+While migrating each catch event subscriptions, the catch event's `processDefinitionKey`, `bpmnProcessId`, `elementId` properties are updated to the target process definition.
 :::note
-At this time, you cannot provide mapping instructions for boundary events yet.
-Additionally, only message boundary events are supported in process instance migrations.
-Other types of boundary events will be supported in future versions.
-:::
-
-:::tip
-Currently, you cannot migrate an active element with a message boundary event attached to an element that also has a message boundary event attached with the same message name.
-While we're working on resolving this, a workaround is available by splitting the migration into two steps:
-
-First migrate the process instance to a process model where the element is without a message boundary event.
-Once the process instance is successfully migrated, you can migrate the process instance to a process model where the message boundary event is attached to the element again.
+It is **possible** to change the interrupting status during catch event subscription migration.
 :::
 
 ## Limitations
@@ -227,33 +351,268 @@ In the following cases, the process instance can't apply the migration plan and 
 - The migration plan can only map each `sourceElementId` once.
 - A mapping instruction's `sourceElementId` must refer to an element existing in the process instance's process definition.
 - A mapping instruction's `targetElementId` must refer to an element existing in the target process definition.
+- Catch event limitations:
+  - A mapping instruction cannot detach a catch event from an active element.
+    For example, a service task `A` has timer boundary event `T1` and will be migrated to the service task `B` has timer boundary event `T2`.
+    If a mapping instruction between `A` -> `B` is provided, a mapping instruction for `T1` can only refer to `T2`.
+  - Each catch event can only be the target of a mapping instruction once.
+  - Two catch events in the source cannot be mapped to the same catch event in the target.
+  - A catch event in the source cannot be mapped to a different type of catch event in the target.
+  - The message subscription for the message catch event in the source process instance needs to be fully distributed before the migration.
+- Multi-instance body limitations:
+  - Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
+  - It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
 
 The following limitations exist that may be supported in future versions:
 
-- Only elements of the following types can be migrated:
-  - A process instance
-  - A service task
-  - A user task
-  - An embedded subprocess
-  - A call activity
-- Elements with a boundary event in the source and/or target process definition can only be be migrated for boundary events of type:
-  - Message
+- Only [supported BPMN elements](#supported-bpmn-elements) can be migrated.
 - The following scenarios cannot be migrated:
-  - A process instance that contains an event subprocess
-  - A target process definition that contains an event subprocess
   - An element that becomes nested in a newly added subprocess
   - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
-- Mapping instructions cannot change the task implementation, e.g. from a job worker user task to a Zeebe user task
-- Mapping instructions cannot map boundary events
+- Mapping instructions cannot change the task implementation, e.g. from a job worker user task to a Zeebe User Task
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance
 
-A full overview of error codes can be found in the [migration command](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc).
+A full overview of error codes can be found in the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/camunda-api-rest/specifications/migrate-process-instance.api.mdx).
 
 :::tip
 If your specific case is not (yet) supported by process instance migration, you can use [cancel process instance](../../apis-tools/zeebe-api/gateway-service.md#cancelprocessinstance-rpc) and [create and start at a user-defined element](./process-instance-creation.md#create-and-start-at-a-user-defined-element) to recreate your process instance in the other process definition.
 Note that this results in new keys for the process instance and its associated variables, element instances, and other entities.
 :::
+
+### Supported BPMN elements
+
+The following BPMN elements are supported by the migration tool.
+
+#### Subprocesses
+
+import EmbeddedSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/embedded-subprocess.svg';
+import CallActivitySvg from '../modeler/bpmn/assets/bpmn-symbols/call-activity.svg';
+import EventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/event-subprocess.svg'
+
+<div className="bpmn-symbol-container">
+    <a href="../../modeler/bpmn/embedded-subprocesses/">
+        <EmbeddedSubprocessSvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/call-activities/">
+        <CallActivitySvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/event-subprocesses/">
+        <EventSubprocessSvg className="implemented" />
+    </a>
+</div>
+
+#### Tasks
+
+import ServiceTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/service-task.svg'
+import UserTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/user-task.svg'
+import ReceiveTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/receive-task.svg'
+import SendTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/send-task.svg'
+import BusinessRuleTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/business-rule-task.svg'
+import ScriptTaskSvg from '../modeler/bpmn/assets/bpmn-symbols/script-task.svg'
+
+<div className="bpmn-symbol-container">
+    <a href="../../modeler/bpmn/service-tasks/">
+        <ServiceTaskSvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/user-tasks/">
+        <UserTaskSvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/receive-tasks/">
+        <ReceiveTaskSvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/send-tasks/">
+        <SendTaskSvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/business-rule-tasks/">
+        <BusinessRuleTaskSvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/script-tasks/">
+        <ScriptTaskSvg className="implemented" />
+    </a>
+</div>
+
+#### Gateways
+
+import ExclusiveGatewaySvg from '../modeler/bpmn/assets/bpmn-symbols/exclusive-gateway.svg'
+import EventBasedGatewaySvg from '../modeler/bpmn/assets/bpmn-symbols/event-based-gateway.svg'
+
+<div className="bpmn-symbol-container">
+    <a href="../../modeler/bpmn/exclusive-gateways/">
+        <ExclusiveGatewaySvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/event-based-gateways/">
+        <EventBasedGatewaySvg className="implemented" />
+    </a>
+</div>
+
+#### Markers
+
+import MultiInstanceParallelSvg from '../modeler/bpmn/assets/bpmn-symbols/multi-instance-parallel.svg'
+import MultiInstanceSequentialSvg from '../modeler/bpmn/assets/bpmn-symbols/multi-instance-sequential.svg'
+
+<div className="bpmn-symbol-container">
+    <a href="../../modeler/bpmn/multi-instance/">
+        <MultiInstanceParallelSvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/multi-instance/">
+        <MultiInstanceSequentialSvg className="implemented" />
+    </a>
+</div>
+
+#### Events
+
+import MessageStartEventSvg from '../modeler/bpmn/assets/bpmn-symbols/message-start-event.svg'
+import MessageEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/message-event-subprocess.svg'
+import MessageEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/message-event-subprocess-non-interrupting.svg'
+import MessageCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/message-catch-event.svg'
+import MessageBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/message-boundary-event.svg'
+import MessageBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/message-boundary-event-non-interrupting.svg'
+
+import TimerEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-event-subprocess.svg'
+import TimerEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-event-subprocess-non-interrupting.svg'
+import TimerCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-catch-event.svg'
+import TimerBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-boundary-event.svg'
+import TimerBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/timer-boundary-event-non-interrupting.svg'
+
+import ErrorEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/error-event-subprocess.svg'
+import ErrorBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/error-boundary-event.svg'
+import ErrorEndEventSvg from '../modeler/bpmn/assets/bpmn-symbols/error-end-event.svg'
+
+import SignalEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-event-subprocess.svg'
+import SignalEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-event-subprocess-non-interrupting.svg'
+import SignalCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-catch-event.svg'
+import SignalBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-boundary-event.svg'
+import SignalBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-boundary-event-non-interrupting.svg'
+
+<table className="bpmn-coverage-event-table">
+  <thead>
+      <tr>
+        <th>Type</th>
+        <th colspan="2">Start</th>
+        <th colspan="4">Intermediate</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Event Subprocess</th>
+        <th>Event Subprocess non-interrupting</th>
+        <th>Catch</th>
+        <th>Boundary</th>
+        <th>Boundary non-interrupting</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td>
+            <a href="../../modeler/bpmn/message-events/">Message</a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/message-events/">
+                <MessageEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/message-events/">
+                <MessageEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/message-events/">
+                <MessageCatchEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/message-events/">
+                <MessageBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/message-events/">
+                <MessageBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../modeler/bpmn/timer-events/">Timer</a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/timer-events/">
+                <TimerEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/timer-events/">
+                <TimerEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/timer-events/">
+                <TimerCatchEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/timer-events/">
+                <TimerBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/timer-events/">
+                <TimerBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../modeler/bpmn/error-events/">Error</a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/error-events/">
+                <ErrorEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="../../modeler/bpmn/error-events/">
+                <ErrorBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../modeler/bpmn/signal-events/">Signal</a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/signal-events/">
+                <SignalEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/signal-events/">
+                <SignalEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/signal-events/">
+                <SignalCatchEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/signal-events/">
+                <SignalBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/signal-events/">
+                <SignalBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+    </tr>
+
+  </tbody>
+</table>
 
 ## Use at your own risk
 

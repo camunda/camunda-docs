@@ -48,7 +48,7 @@ the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
 
 - Camunda 8 (login with email, Google, GitHub): `email`
-- Default Basic Auth (elasticsearch): `username`
+- Default Basic Auth (Elasticsearch): `username`
 - IAM: `username`
 
 :::note

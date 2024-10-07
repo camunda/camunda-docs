@@ -20,15 +20,14 @@ Usually, the `processId` is defined as a [static value](/components/concepts/exp
 
 The `bindingType` attribute determines which version of the called process is instantiated:
 
-- `latest`: the latest deployed version at the moment the call activity is activated.
-- `deployment`: the version that was deployed together with the currently running version of the calling process.
+- `latest`: The latest deployed version at the moment the call activity is activated.
+- `deployment`: The version that was deployed together with the currently running version of the calling process.
+- `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.
 
 To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
 :::note
-
 If the `bindingType` attribute is not specified, `latest` is used as the default.
-
 :::
 
 ## Boundary events
@@ -61,13 +60,33 @@ By disabling this attribute, variables existing at higher scopes are no longer c
 
 ### XML representation
 
-A call activity with static process id, propagation of all child variables turned on, and `deployment` binding:
+A call activity with static process id, propagation of all child variables turned on, and no explicit binding type (`latest` is used implicitly):
 
 ```xml
 <bpmn:callActivity id="Call_Activity" name="Call Process A">
   <bpmn:extensionElements>
-    <zeebe:calledElement processId="child-process-a" bindingType="deployment"
-                         propagateAllChildVariables="true" />
+    <zeebe:calledElement processId="child-process-a" propagateAllChildVariables="true" />
+  </bpmn:extensionElements>
+</bpmn:callActivity>
+```
+
+A call activity with the `deployment` binding type:
+
+```xml
+<bpmn:callActivity id="Call_Activity" name="Call Process A">
+  <bpmn:extensionElements>
+    <zeebe:calledElement processId="child-process-a" bindingType="deployment" />
+  </bpmn:extensionElements>
+</bpmn:callActivity>
+```
+
+A call activity with the `versionTag` binding type:
+
+```xml
+<bpmn:callActivity id="Call_Activity" name="Call Process A">
+  <bpmn:extensionElements>
+    <zeebe:calledElement processId="child-process-a"
+                         bindingType="versionTag" versionTag="v1.0" />
   </bpmn:extensionElements>
 </bpmn:callActivity>
 ```

@@ -15,6 +15,7 @@ The following operations are currently available:
 
 - [Rebalancing](/self-managed/zeebe-deployment/operations/rebalancing.md)
 - [Pause and resume exporting](#exporting-api)
+- [Enable and disable exporter](#exporters-api)
 
 ## Exporting API
 
@@ -60,4 +61,70 @@ POST actuator/exporting/pause?soft=true
 When all partitions soft pause exporting, a successful response is received. If the request fails, some partitions may have soft paused exporting. Therefore, either retry until success or revert the partial soft pause by resuming the export.
 
 </TabItem>
+</Tabs>
+
+## Exporters API
+
+The Exporters API is used for [dual region deployment](/self-managed/operational-guides/multi-region/dual-region-ops.md/) operations, and allows for enabling and disabling configured exporters. By default, all configured exporters are enabled.
+
+When **enabled**, records are exported to the exporter. The log is compacted only after the records are exported. When **disabled**, records are _not_ exported to the exporter, and the log will be compacted.
+
+The OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+
+<Tabs groupId="exporters" defaultValue="enable" queryString values={[{label: 'Enable an exporter', value: 'enable' },{label: 'Disable an exporter', value: 'disable' }, {label: 'Monitor', value: 'monitor'}]} >
+
+<TabItem value="enable">
+
+When enabling an exporter, the exporter must be already configured in the cluster. To initialize an exporter's state, an existing exporter's ID can be provided in the optional `initializeFrom` field. Both exporters must be of the same type.
+
+To enable a previously disabled exporter, send the following request to the gateway's management API:
+
+```
+POST actuator/exporters/{exporterId}/enable
+{
+    initializeFrom: {anotherExporterId}
+}
+```
+
+New records written after the exporter is enabled will be exported to this exporter.
+
+</TabItem>
+
+<TabItem value="disable">
+
+To disable an exporter, send the following request to the gateway's management API:
+
+```
+POST actuator/exporters/{exporterId}/disable
+```
+
+After disabling the exporter, no records will be exported to this exporter. Other exporters continue exporting.
+
+</TabItem>
+
+<TabItem value="monitor">
+
+Both enable and disable requests are processed asynchronously. To monitor the status of the exporters, send the following request to the gateway's management API:
+
+```
+GET actuator/exporters/
+```
+
+The response is a JSON object that lists all configured exporters with their status:
+
+```json
+[
+  {
+    "exporterId": "elasticsearch0",
+    "status": "ENABLED"
+  },
+  {
+    "exporterId": "elasticsearch1",
+    "status": "DISABLED"
+  }
+]
+```
+
+</TabItem>
+
 </Tabs>
