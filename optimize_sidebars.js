@@ -922,6 +922,10 @@ module.exports = {
                   "AWS SQS Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-sqs/"
                 ),
+                docsLink(
+                  "AWS Textract Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-textract/"
+                ),
               ],
             },
 
