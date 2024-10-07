@@ -47,7 +47,7 @@ Using external tasks comes with the following advantages:
 
 - **Temporal decoupling**: The pattern can replace a message queue between the service task (the "consumer") and the service implementation (the "provider"). It can eliminate the need for operating a dedicated message bus while keeping the decoupling that messaging would provide.
 
-- **Polyglott architectures**: The pattern can be used to integrate .NET based services, for example, when it might not be that easy to write Java delegates to call them. Service implementations are possible in any language that can be used to interact with a REST API.
+- **Polyglot architectures**: The pattern can be used to integrate .NET based services, for example, when it might not be that easy to write Java delegates to call them. Service implementations are possible in any language that can be used to interact with a REST API.
 
 - **Better scaling**: The pattern allows you to start and stop workers as you like, and run as many of them as you need. By doing so, you can scale each service task (or to be precise, each "topic") individually.
 

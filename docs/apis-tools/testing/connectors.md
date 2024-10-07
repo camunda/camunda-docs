@@ -197,7 +197,7 @@ public class MyProcessTest {
 :::tip
 You might need to wrap the invocation of the Connector in a retry loop, for example, by using [Awaitility](http://www.awaitility.org/).
 
-There can be a delay between verifying that the Connnectors event is active and opening the Connectors inbound subscription.
+There can be a delay between verifying that the Connectors event is active and opening the Connectors inbound subscription.
 :::
 
 ## Custom Connectors
