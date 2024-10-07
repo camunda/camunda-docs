@@ -8,7 +8,7 @@
 - Optimize
 - Identity
 - Web Modeler
-- Console [<span class="badge badge--enterprise-only">Enterprise only</span>](/reference/licenses.md/#console)
+- Console
 
 All components except Web Modeler and Console are single Java applications. Depending on your needs, you might not need all of the above components to successfully use Camunda 8.
 
