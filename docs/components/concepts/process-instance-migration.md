@@ -177,7 +177,7 @@ Now we want to [change an inactive part of the process](#changing-the-process-in
 Instead of waiting for the full time defined by the target process' timer boundary event, we only want to wait for the remaining two days.
 To achieve this for the example above, the mapping between active user tasks `A` -> `A` and timer boundary events `Timer1` -> `Timer2` must be provided.
 This ensures the timer is migrated (_the associated subscription is migrated_) and the duration is preserved.
-Assuming that the timer boundary event is defined as 2 weeks duration in the target process, the process instance will look like following after the migration:
+Assuming that the timer boundary event is defined as 2 weeks duration in the target process, the process instance will look as follows after the migration:
 
 ![The process instance is waiting at the active user task A with the migrated timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target.png)
 
@@ -187,10 +187,10 @@ Another example would be to preserve a signal name for an intermediate signal ca
 
 #### No mapping instruction is provided between the catch events
 
-Before moving forward with the example, there are two scenarios important to consider because they affect the output after the migration:
+Before moving forward with the example, there are two important scenarios to consider because they affect the output after the migration:
 
-- The catch event in the source process is identical to the catch event in the target process
-- There are changes between these catch events e.g. message name is different in the target
+- The catch event in the source process is identical to the catch event in the target process.
+- There are changes between these catch events, for example, the message name is different in the target.
 
 Let's consider again the same example above:
 
@@ -200,7 +200,7 @@ The user task has not been completed and has already spent five days waiting for
 
 ![The process instance is waiting at the active user task A with a timer boundary event attached.](assets/process-instance-migration/migration-catch-event-source.png)
 
-First scenario, the catch event in the source process is identical to the catch event in the target process:
+In the first scenario, the catch event in the source process is identical to the catch event in the target process:
 
 This time we want to reset the timer and wait for the full week again.
 To achieve this for the example above, only a mapping between active user tasks `A` -> `A` must be provided.
@@ -209,12 +209,12 @@ After the migration the process instance will look like following:
 
 ![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-identical-target-trigger-updated.png)
 
-Second scenario, there are changes between these catch events:
+In the second scenario, there are changes between these catch events:
 
 Now, we want to reset the timer and wait for two weeks as in the target process definition.
 To achieve this for the example above, only a mapping between active user tasks `A` -> `A` must be provided.
 This will cancel the timer (_associated subscription is closed_) and create a new one (_a new subscription is opened_).
-After the migration the process instance will look like following:
+After the migration the process instance will look as follows:
 
 ![The process instance is waiting at the active user task A with a new timer boundary event attached.](assets/process-instance-migration/migration-catch-event-different-target-trigger-updated.png)
 
@@ -288,10 +288,10 @@ This results in new keys for the service task as well as the job.
 
 ## Internal Execution
 
-In the following, we will explain the internal execution steps of process instance migration.
-It is recommended to read these steps to fully understand the power of process instance migration.
+In the following example, we will explain the internal execution steps of process instance migration.
+It is recommended that you read these steps to fully understand the power of process instance migration.
 
-Migration of a process instance consists of following steps:
+Migration of a process instance consists of the following steps:
 
 - Validation
 - Migration of mapped active elements
@@ -324,17 +324,19 @@ For each active element, `processDefinitionKey`, `bpmnProcessId`, `elementId`, `
 
 ### Unsubscribing/subscribing from/to catch events
 
-Following operations are performed in respective order for each active element as the execution continues to migrate each active element:
+The following operations are performed in respective order for each active element as the execution continues to migrate each active element:
 
-- If a catch event exists in the source process instance and not part of the migration plan, the subscription to the catch event is removed.
-- If a catch event exists in the target process definition and not part of the migration plan, a new subscription is created for the catch event.
+- If a catch event exists in the source process instance and is not part of the migration plan, the subscription to the catch event is removed.
+- If a catch event exists in the target process definition and is not part of the migration plan, a new subscription is created for the catch event.
 
 ### Migrating catch events subscriptions
 
 After removing and adding subscriptions to catch events, the migration continues with migrating the catch events per active element.
 If a catch event in the source process is mapped to a catch event in the target process, the subscription is migrated.
 As done for each active element, the catch event's `processDefinitionKey`, `bpmnProcessId`, `elementId` properties are updated to the target process definition.
-Please note that, it is **possible** to change the interrupting status of the catch event during migration.
+:::note
+It is **possible** to change the interrupting status of the catch event during migration.
+:::
 
 ## Limitations
 
@@ -350,12 +352,12 @@ In the following cases, the process instance can't apply the migration plan and 
 - A mapping instruction's `targetElementId` must refer to an element existing in the target process definition.
 - Catch event limitations:
   - A mapping instruction cannot detach a catch event from an active element.
-    E.g. a service task `A` has timer boundary event `T1` and will be migrated to the service task `B` has timer boundary event `T2`.
+    For example, a service task `A` has timer boundary event `T1` and will be migrated to the service task `B` has timer boundary event `T2`.
     If a mapping instruction between `A` -> `B` is provided, a mapping instruction for `T1` can only refer to `T2`.
   - Each catch event can only be the target of a mapping instruction once.
   - Two catch events in the source cannot be mapped to the same catch event in the target.
   - A catch event in the source cannot be mapped to a different type of catch event in the target.
-  - The message subscription for the message catch event in the source process instance needs to be fully distributed before the migration
+  - The message subscription for the message catch event in the source process instance needs to be fully distributed before the migration.
 - Multi-instance body limitations:
   - Each child instance of a multi-instance body should be migrated separately because they belong to another process instance.
   - It is not possible to migrate a parallel multi-instance body to a sequential multi-instance body and vice versa.
