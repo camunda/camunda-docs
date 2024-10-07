@@ -54,11 +54,11 @@ or `elasticsearch-startup.bat` on Windows:
 .\elasticsearch-startup.bat
 ```
 
-#### Production distribution without database
+#### Production distribution without a database
 
 This distribution is intended to be used in production. To install it, take the following steps:
 
-1. [Download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without database.
+1. [Download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without a database.
 2. [Configure the database connection](./configuration/getting-started.md#elasticsearchopensearch-configuration) to connect to your pre-installed Elasticsearch/OpenSearch instance and [configure the Camunda 7 connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine.
 3. Start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
 
@@ -90,7 +90,7 @@ After that, [configure the database connection](./configuration/getting-started.
 #### Getting started with the Optimize Docker image
 
 :::note
-Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are now supported, please refer to the [Camunda 7](https://github.com/camunda/issues/issues/705) and [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
+Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are currently supported, please refer to the [Camunda 7](https://github.com/camunda/issues/issues/705) and [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 :::
 
 ##### Full local setup
@@ -122,14 +122,14 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
-Alternatively for OpenSearch:
+Alternatively, for OpenSearch:
 
 ```
 docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
            -e OPTIMIZE_CAMUNDABPM_REST_URL=http://yourCamBpm.org/engine-rest \
            -e CAMUNDA_OPTIMIZE_DATABASE=opensearch \
            -e CAMUNDA_OPTIMIZE_OPENSEARCH_HOST=yourOpenSearchHost \
-           -e CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT=9200 \
+           -e CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT=9205 \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
