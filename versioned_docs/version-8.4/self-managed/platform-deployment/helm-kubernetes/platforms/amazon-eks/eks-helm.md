@@ -13,8 +13,8 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 ## Prerequisites
 
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide.
-- [Helm (3.13+)](https://helm.sh/docs/intro/install/)
-- [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Helm (3.16+)](https://helm.sh/docs/intro/install/)
+- [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](../../../../../../apis-tools/cli-client/) or [Camunda Modeler](https://camunda.com/download/modeler/).
 
 ## Considerations
@@ -50,13 +50,13 @@ export DOMAIN_NAME=camunda.example.com
 # The e-mail to register with Let's Encrypt
 export MAIL=admin@camunda.example.com
 # The Ingress-Nginx Helm Chart version
-export INGRESS_HELM_CHART_VERSION="4.10.1"
+export INGRESS_HELM_CHART_VERSION="4.11.2"
 # The External DNS Helm Chart version
-export EXTERNAL_DNS_HELM_CHART_VERSION="1.14.4"
+export EXTERNAL_DNS_HELM_CHART_VERSION="1.15.0"
 # The Cert-Manager Helm Chart version
-export CERT_MANAGER_HELM_CHART_VERSION="1.14.5"
+export CERT_MANAGER_HELM_CHART_VERSION="1.15.3"
 # The Camunda 8 Helm Chart version
-export CAMUNDA_HELM_CHART_VERSION="9.3.4"
+export CAMUNDA_HELM_CHART_VERSION="9.4.1"
 ```
 
 Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
@@ -108,7 +108,7 @@ Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having follow
 :::warning
 If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
 
-In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.14.2/initial-design/#ownership) to learn more about DNS record ownership.
+In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.15.0/#note) to learn more about DNS record ownership.
 :::
 
 ```shell
@@ -314,20 +314,20 @@ zbctl status --insecure
 Cluster size: 3
 Partitions count: 3
 Replication factor: 3
-Gateway version: 8.4.7
+Gateway version: 8.4.12
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
-    Version: 8.4.7
+    Version: 8.4.12
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
   Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
-    Version: 8.4.7
+    Version: 8.4.12
     Partition 1 : Leader, Healthy
     Partition 2 : Leader, Healthy
     Partition 3 : Follower, Healthy
   Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
-    Version: 8.4.7
+    Version: 8.4.12
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy
