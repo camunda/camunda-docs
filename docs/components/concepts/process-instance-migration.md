@@ -95,7 +95,7 @@ Simply cancel the service task instance, and add a new instance of the service t
 
 ## Correcting mistakes in a process instance
 
-Process instance migration can also be used to correct mistakes that led to an incident in a process instance.
+Process instance migration can also be used to correct mistakes that led to an [incident](/components/concepts/incidents.md) in a process instance.
 
 Let's consider an example.
 

@@ -2,7 +2,8 @@
 id: c8run
 title: "Local installation with Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "Use the Camunda 8 Run packaged distribution to set up a local development environment."
+keywords: ["C8Run"]
+description: "Use the Camunda 8 Run single application script to set up a local development environment."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -12,7 +13,7 @@ import TabItem from "@theme/TabItem";
 Camunda 8 Run is not supported for production use.
 :::
 
-The Camunda 8 Run packaged distribution allows you to get started with a local development environment. This page guides you through setting up and configuring Camunda 8 on a local or virtual machine.
+The Camunda 8 Run script allows you to install and start a simplified, single-application Camunda configuration in a local development environment. This page guides you through using Camunda 8 Run on a local or virtual machine.
 
 Camunda 8 Run includes the following:
 
@@ -25,7 +26,7 @@ Camunda 8 Run includes the following:
 ## Prerequisites
 
 - OpenJDK 21+
-- Desktop Modeler
+- [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
@@ -35,7 +36,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.0-alpha3) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.0-alpha5) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 
@@ -60,19 +61,21 @@ All Camunda 8 Run components can be accessed using the username/password combina
 
 Tasklist and Operate are available at:
 
-- Tasklist: `http://localhost:8080/tasklist`
-- Operate: `http://localhost:8080/operate`
+- Tasklist: http://localhost:8080/tasklist
+- Operate: http://localhost:8080/operate
 
 The following components do not have a web interface, but the URLs may be required for additional configuration:
 
-- Zeebe Gateway: `http://localhost:26500`
-- Connectors: `http://localhost:8085`
+- Zeebe Gateway: http://localhost:26500
+- Connectors: http://localhost:8085
 
 :::note
 The Connectors URL displays a login page, but cannot be logged into.
 :::
 
 ### Deploy diagrams from Desktop Modeler
+
+Make sure you have installed [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) before continuing.
 
 To [deploy diagrams](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, the following configuration is required:
 

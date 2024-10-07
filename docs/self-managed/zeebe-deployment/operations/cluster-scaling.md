@@ -369,11 +369,11 @@ curl --request POST 'http://localhost:9600/actuator/cluster/brokers?dryRun=true'
 -d '["0", "1", "2", "3"]'
 ```
 
-##### Replication Factor
+##### Replication factor
 
 The replication factor for all partitions can be changed with the `replicationFactor` request parameter. If not specified, the replication factor remains unchanged.
 
-The new replicas will be assigned to the brokers based on the round robin partition distribution strategy.
+The new replicas are assigned to the brokers based on the round robin partition distribution strategy.
 
 ```
 curl --request POST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' \
