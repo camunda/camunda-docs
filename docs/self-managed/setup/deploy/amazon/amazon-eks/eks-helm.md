@@ -13,10 +13,10 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 ## Prerequisites
 
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide.
-- [Helm (3.13+)](https://helm.sh/docs/intro/install/)
-- [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/), or the [REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
+- [Helm (3.16+)](https://helm.sh/docs/intro/install/)
+- [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 
 ## Considerations
 
@@ -51,13 +51,13 @@ export DOMAIN_NAME=camunda.example.com
 # The e-mail to register with Let's Encrypt
 export MAIL=admin@camunda.example.com
 # The Ingress-Nginx Helm Chart version
-export INGRESS_HELM_CHART_VERSION="4.10.1"
+export INGRESS_HELM_CHART_VERSION="4.11.2"
 # The External DNS Helm Chart version
-export EXTERNAL_DNS_HELM_CHART_VERSION="1.14.4"
+export EXTERNAL_DNS_HELM_CHART_VERSION="1.15.0"
 # The Cert-Manager Helm Chart version
-export CERT_MANAGER_HELM_CHART_VERSION="1.14.5"
+export CERT_MANAGER_HELM_CHART_VERSION="1.15.3"
 # The Camunda 8 Helm Chart version
-export CAMUNDA_HELM_CHART_VERSION="10.0.5"
+export CAMUNDA_HELM_CHART_VERSION="11.0.0"
 ```
 
 Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
@@ -109,7 +109,7 @@ Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having follow
 :::warning
 If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
 
-In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.14.2/initial-design/#ownership) to learn more about DNS record ownership.
+In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.15.0/#note) to learn more about DNS record ownership.
 :::
 
 ```shell
@@ -225,15 +225,11 @@ helm upgrade --install \
   --set tasklist.contextPath="/tasklist" \
   --set optimize.contextPath="/optimize" \
   --set zeebeGateway.ingress.grpc.enabled=true \
-  --set zeebeGateway.ingress.grpc.host=zeebe-grpc.$DOMAIN_NAME \
+  --set zeebeGateway.ingress.grpc.host=zeebe.$DOMAIN_NAME \
   --set zeebeGateway.ingress.grpc.tls.enabled=true \
   --set zeebeGateway.ingress.grpc.tls.secretName=zeebe-c8-tls-grpc \
   --set-string 'zeebeGateway.ingress.grpc.annotations.kubernetes\.io\/tls-acme=true' \
-  --set zeebeGateway.ingress.rest.enabled=true \
-  --set zeebeGateway.ingress.rest.host=zeebe-rest.$DOMAIN_NAME \
-  --set zeebeGateway.ingress.rest.tls.enabled=true \
-  --set zeebeGateway.ingress.rest.tls.secretName=zeebe-c8-tls-rest \
-  --set-string 'zeebeGateway.ingress.rest.annotations.kubernetes\.io\/tls-acme=true'
+  --set zeebeGateway.contextPath="/zeebe"
 ```
 
 The annotation `kubernetes.io/tls-acme=true` is [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -424,11 +420,12 @@ After following the installation instructions in the [zbctl docs](/apis-tools/co
 Export the following environment variables:
 
 ```shell
-export ZEEBE_ADDRESS=zeebe-grpc.$DOMAIN_NAME:443
+export ZEEBE_ADDRESS=zeebe.$DOMAIN_NAME:443
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
 export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
+export ZEEBE_TOKEN_SCOPE='camunda-identity'
 ```
 
   </TabItem>
@@ -449,6 +446,7 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
+export ZEEBE_TOKEN_SCOPE='camunda-identity'
 ```
 
   </TabItem>

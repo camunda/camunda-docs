@@ -13,9 +13,9 @@ This guide provides a user-friendly approach for setting up and managing Amazon 
 ## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
-- [AWS CLI (2.11+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
-- [eksctl (0.163+)](https://eksctl.io/getting-started/), a CLI tool for creating and managing Amazon EKS clusters.
-- [kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
+- [AWS CLI (2.17+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
+- [eksctl (0.191+)](https://eksctl.io/getting-started/), a CLI tool for creating and managing Amazon EKS clusters.
+- [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
 
 ## Considerations
 
@@ -33,7 +33,7 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 Following this guide results in the following:
 
-- An Amazon EKS 1.28 Kubernetes cluster with four nodes.
+- An Amazon EKS 1.30 Kubernetes cluster with four nodes.
 - Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
@@ -80,7 +80,7 @@ export PG_PASSWORD=camundarocks123
 # The default database name created within Postgres. Can directly be consumed by the Helm chart
 export DEFAULT_DB_NAME=camunda
 # The PostgreSQL version
-export POSTGRESQL_VERSION=15.4
+export POSTGRESQL_VERSION=15.8
 
 # Optional
 # Default node type for the Kubernetes cluster
@@ -119,7 +119,7 @@ apiVersion: eksctl.io/v1alpha5
 metadata:
   name: ${CLUSTER_NAME:-camunda-cluster} # e.g. camunda-cluster
   region: ${REGION:-eu-central-1} # e.g. eu-central-1
-  version: "1.28"
+  version: "1.30"
 availabilityZones:
   - ${REGION:-eu-central-1}c # e.g. eu-central-1c, the minimal is two distinct Availability Zones (AZs) within the region
   - ${REGION:-eu-central-1}b
@@ -187,7 +187,7 @@ vpc:
   nat:
     gateway: HighlyAvailable
 secretsEncryption:
-  keyARN: ${KMS_KEY}
+  keyARN: ${KMS_ARN}
 EOF
 ```
 
@@ -286,7 +286,7 @@ The same can also be achieved by using `kubectl` and manually adding the mapping
 kubectl edit configmap aws-auth -n kube-system
 ```
 
-For detailed examples, review the [documentation provided by AWS](https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html/).
+For detailed examples, review the [documentation provided by AWS](https://docs.aws.amazon.com/eks/latest/userguide/auth-configmap.html).
 
   </p>
 </details>
