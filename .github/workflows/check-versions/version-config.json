@@ -2,21 +2,21 @@
   {
     "version": "next",
     "source": "docs/",
-    "suggestions": ["versioned_docs/version-8.5/"]
+    "suggestions": ["versioned_docs/version-8.6/"]
   },
   {
     "version": "current (main docs)",
-    "source": "versioned_docs/version-8.5/",
+    "source": "versioned_docs/version-8.6/",
     "suggestions": ["docs/"]
   },
   {
     "version": "next",
     "source": "optimize/",
-    "suggestions": ["optimize_versioned_docs/version-3.13.0/"]
+    "suggestions": ["optimize_versioned_docs/version-3.14.0/"]
   },
   {
     "version": "current",
-    "source": "optimize_versioned_docs/version-3.13.0/",
+    "source": "optimize_versioned_docs/version-3.14.0/",
     "suggestions": ["optimize/"]
   }
 ]
