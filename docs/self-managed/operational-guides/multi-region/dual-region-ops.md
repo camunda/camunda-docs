@@ -300,7 +300,6 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 
 1. Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
 
-
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
 zbctl status --insecure --address localhost:26500
