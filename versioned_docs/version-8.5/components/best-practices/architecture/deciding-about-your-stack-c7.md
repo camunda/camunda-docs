@@ -64,7 +64,7 @@ We decided on this stack for the following reasons:
 - All components are open source and easily available.
 - Camunda Run is the favorite distribution, as it focuses on external tasks, the more modern paradigm also present in Camunda 8.
 - Spring Boot is currently the most adopted way of building Java applications.
-- Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premise or in the cloud.
+- Spring Boot applications are easy to customize as well as easy to roll out into test and production environments, either on-premises or in the cloud.
 - PostgreSQL has a great track-record for performance.
 
 There are several _advantages using the greenfield stack_:
