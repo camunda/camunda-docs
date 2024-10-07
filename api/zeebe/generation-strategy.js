@@ -1,3 +1,4 @@
+const replace = require("replace-in-file");
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 
 const outputDir = "docs/apis-tools/zeebe-api-rest/specifications";

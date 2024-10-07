@@ -32,4 +32,9 @@ When Optimize is running with its language set to one with characters that it ca
 
 ## Update issues
 
-Always check the [migration and update instructions](./../migration-update/instructions.md) for the versions you are migrating, often this section already documents the problem you are experiencing along with the solution.
+Always check the migration and update instructions for the version you are migrating from:
+
+- For Camunda 7, refer to the [Camunda 7 migration guide](./../migration-update/camunda-8/instructions.md).
+- For Camunda 8, refer to the [Camunda 8 migration guide](./../migration-update/camunda-8/instructions.md).
+
+These guides often document known issues along with their solutions, which might already address the problem you're encountering.

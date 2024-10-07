@@ -80,6 +80,11 @@
         },
         {
           "type": "link",
+          "label": "Encryption at rest",
+          "href": "/docs/components/concepts/encryption-at-rest/"
+        },
+        {
+          "type": "link",
           "label": "Outbound Connectors vs. job workers",
           "href": "/docs/components/concepts/outbound-connectors-job-workers/"
         },
@@ -205,6 +210,11 @@
               "type": "link",
               "label": "Manage IP allowlists",
               "href": "/docs/components/console/manage-clusters/manage-ip-allowlists/"
+            },
+            {
+              "type": "link",
+              "label": "Create backup",
+              "href": "/docs/components/console/manage-clusters/create-backups/"
             },
             {
               "type": "link",
@@ -411,6 +421,11 @@
               "type": "link",
               "label": "Start a new process instance",
               "href": "/docs/components/modeler/desktop-modeler/start-instance/"
+            },
+            {
+              "type": "link",
+              "label": "Use Connectors",
+              "href": "/docs/components/modeler/desktop-modeler/use-connectors/"
             },
 
             {
@@ -964,6 +979,11 @@
                 },
                 {
                   "type": "link",
+                  "label": "Expression field",
+                  "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-expression/"
+                },
+                {
+                  "type": "link",
                   "label": "Image view",
                   "href": "/docs/components/modeler/forms/form-element-library/forms-element-library-image/"
                 },
@@ -1188,12 +1208,22 @@
 
             {
               "type": "link",
+              "label": "Hugging Face Connector",
+              "href": "/docs/components/connectors/out-of-the-box-connectors/hugging-face/"
+            },
+            {
+              "type": "link",
               "label": "Kafka Connector",
               "href": "/docs/components/connectors/out-of-the-box-connectors/kafka/"
             },
 
             {
               "Microsoft": [
+                {
+                  "type": "link",
+                  "label": "Azure OpenAI Connector",
+                  "href": "/docs/components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                },
                 {
                   "type": "link",
                   "label": "Microsoft Teams Connector",
@@ -1276,6 +1306,11 @@
               "type": "link",
               "label": "REST Connector",
               "href": "/docs/components/connectors/protocol/rest/"
+            },
+            {
+              "type": "link",
+              "label": "SOAP Connector",
+              "href": "/docs/components/connectors/protocol/soap/"
             }
           ]
         },
@@ -2107,6 +2142,11 @@
               "type": "link",
               "label": "Authentication",
               "href": "/docs/apis-tools/web-modeler-api/authentication/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/apis-tools/web-modeler-api/tutorial/"
             }
           ]
         },
@@ -2147,6 +2187,11 @@
               "type": "link",
               "label": "Authentication",
               "href": "/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/apis-tools/zeebe-api-rest/zeebe-api-tutorial/"
             },
 
             {
@@ -2754,7 +2799,7 @@
                     },
                     {
                       "type": "link",
-                      "label": "Dual-region setup",
+                      "label": "Dual-region setup (EKS)",
                       "href": "/docs/self-managed/setup/deploy/amazon/amazon-eks/dual-region/"
                     },
                     {
@@ -2844,7 +2889,7 @@
             },
             {
               "type": "link",
-              "label": "Using AWS managed OpenSearch",
+              "label": "Using Amazon OpenSearch Service",
               "href": "/docs/self-managed/setup/guides/using-existing-opensearch/"
             },
             {
@@ -2895,21 +2940,6 @@
               "type": "link",
               "label": "Update 8.2 to 8.3",
               "href": "/docs/self-managed/operational-guides/update-guide/820-to-830/"
-            },
-            {
-              "type": "link",
-              "label": "Update 8.1 to 8.2",
-              "href": "/docs/self-managed/operational-guides/update-guide/810-to-820/"
-            },
-            {
-              "type": "link",
-              "label": "Update 8.0 to 8.1",
-              "href": "/docs/self-managed/operational-guides/update-guide/800-to-810/"
-            },
-            {
-              "type": "link",
-              "label": "Update 1.3 to 8.0",
-              "href": "/docs/self-managed/operational-guides/update-guide/130-to-800/"
             },
 
             {
@@ -3105,6 +3135,11 @@
                   "type": "link",
                   "label": "Interceptors",
                   "href": "/docs/self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
+                },
+                {
+                  "type": "link",
+                  "label": "Job streaming",
+                  "href": "/docs/self-managed/zeebe-deployment/zeebe-gateway/job-streaming/"
                 }
               ]
             },
@@ -3634,6 +3669,11 @@
                       "type": "link",
                       "label": "Logging",
                       "href": "/docs/self-managed/modeler/web-modeler/configuration/logging/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "SSL",
+                      "href": "/docs/self-managed/modeler/web-modeler/configuration/ssl/"
                     }
                   ]
                 },
