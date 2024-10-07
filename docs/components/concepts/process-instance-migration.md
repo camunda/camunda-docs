@@ -294,10 +294,8 @@ It is recommended that you read these steps to fully understand the power of pro
 Migration of a process instance consists of the following steps:
 
 - Validation
-- Migration of mapped active elements
-- Unsubscribing from catch events
-- Subscribing to catch events
-- Migrating catch events subscriptions
+- Migration of process instance, and global variables
+- Migration of each active element (including associated jobs, incidents, local variables, and event subscriptions)
 
 If any of the steps fail, the migration is rejected and a rejection message that explains the reason is returned.
 For example, if a mapping is not provided for an active element, the migration is rejected with an error message indicating that the mapping is missing.
@@ -312,30 +310,33 @@ For example, the validation checks if the source element ID refers to an existin
 Later, while attempting to migrate each active element, each limitation mentioned in the [limitations section](#limitations) is validated.
 For example, the flow scope of an active element is validated to ensure that it is not changed during migration.
 
-### Migration of mapped active elements
+### Migration of process instance, and global variables
 
-The execution of the migration is done in a depth-first manner.
 After all validations are successful, the migration of the outermost active element which is the process instance itself is started.
-Later, the first active child instance of the process instance is migrated followed by the migration of its active child instances.
-In this stage, jobs, incidents and variables contained in each active element is also migrated.
+At this point, the process instance's `processDefinitionKey`, `bpmnProcessId`, and `version` properties are updated to the target process definition.
+The global variables are also migrated to the target process definition.
+
+### Migration of each active element
+
+The execution of the migration is done in a breadth-first manner.
+The first active child instance of the process instance is migrated followed by the migration of the next active child instance.
+Later, the migration of the active child instances of each active child instance is executed.
+In this stage, jobs, incidents, local variables, and event subscriptions contained in each active element is also migrated.
 
 While traversing each active element, the migration plan is used to determine the target element for each active element.
 For each active element, `processDefinitionKey`, `bpmnProcessId`, `elementId`, `version` properties are updated to the target process definition.
 
-### Unsubscribing/subscribing from/to catch events
+#### Migration of catch event subscriptions
 
 The following operations are performed in respective order for each active element as the execution continues to migrate each active element:
 
 - If a catch event exists in the source process instance and is not part of the migration plan, the subscription to the catch event is removed.
 - If a catch event exists in the target process definition and is not part of the migration plan, a new subscription is created for the catch event.
+- If a catch event in the source process is mapped to a catch event in the target process, the subscription is migrated.
 
-### Migrating catch events subscriptions
-
-After removing and adding subscriptions to catch events, the migration continues with migrating the catch events per active element.
-If a catch event in the source process is mapped to a catch event in the target process, the subscription is migrated.
-As done for each active element, the catch event's `processDefinitionKey`, `bpmnProcessId`, `elementId` properties are updated to the target process definition.
+While migrating each catch event subscriptions, the catch event's `processDefinitionKey`, `bpmnProcessId`, `elementId` properties are updated to the target process definition.
 :::note
-It is **possible** to change the interrupting status of the catch event during migration.
+It is **possible** to change the interrupting status during catch event subscription migration.
 :::
 
 ## Limitations
