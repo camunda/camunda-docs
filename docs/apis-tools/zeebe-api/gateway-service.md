@@ -861,9 +861,8 @@ Returned if:
 - A mapping instruction refers to an unsupported element (i.e. some elements will be supported later on)
 - A mapping instruction refers to element in unsupported scenarios.
   (i.e. migrating active elements with event subscriptions will be supported later on)
-- Multiple mapping instructions target the same catch event
 - A mapping instruction detaches a boundary event from an active element
-- Two catch events in the source are mapped to the same catch event in the target
+- Multiple mapping instructions refer to the same catch event
 - A catch event in the source is mapped to a different type of catch event in the target
 - A message catch event in the source process instance is not fully distributed
 - A mapping instruction changes a parallel multi-instance body to a sequential multi-instance body or vice versa
