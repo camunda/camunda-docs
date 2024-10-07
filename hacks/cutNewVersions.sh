@@ -2,10 +2,10 @@
 set -e
 
 # Before running this script make sure these versions are correct!
-NEW_DOCS_VERSION="8.5"
-PREVIOUS_DOCS_VERSION="8.4"
-NEW_OPTIMIZE_VERSION="3.13.0"
-PREVIOUS_OPTIMIZE_VERSION="3.12.0"
+NEW_DOCS_VERSION="8.6"
+PREVIOUS_DOCS_VERSION="8.5"
+NEW_OPTIMIZE_VERSION="3.14.0"
+PREVIOUS_OPTIMIZE_VERSION="3.13.0"
 
 echo "1/6 Creating version $NEW_DOCS_VERSION of main docs..."
 npm run docusaurus docs:version $NEW_DOCS_VERSION
@@ -27,7 +27,7 @@ git commit -m "release: the big commit"
 
 # now start committing the small stuff
 # if there are uncommitted changes to this file, commit it:
-fi [ -n "$(git status --porcelain ./hacks/cutNewVersions.sh)" ]; then
+if [ -n "$(git status --porcelain ./hacks/cutNewVersions.sh)" ]; then
   git add ./hacks/cutNewVersions.sh
   git commit -m "chore: update versions in cutNewVersions.sh"
 fi
