@@ -430,22 +430,6 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 
 ## Troubleshooting
 
-### Versions used
-
-This page was created based on the following versions available and may work with newer releases of mentioned software.
-
-| Software                                                                                                                                              | Version      |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| AWS Aurora PostgreSQL                                                                                                                                 | 13 / 14 / 15 |
-| [AWS JDBC Driver Wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper)                                                                       | 2.3.1        |
-| AWS OpenSearch                                                                                                                                        | 2.5          |
-| [AWS SDK Dependencies](#dependencies)                                                                                                                 | 2.21.x       |
-| KeyCloak                                                                                                                                              | 21.x / 22.x  |
-| [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/5.9.0)                                                                 | 5.29.0       |
-| [Terraform Amazon EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/19.15.3)                                            | 19.20.0      |
-| [Terraform IAM Roles Module](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/5.28.0/submodules/iam-role-for-service-accounts-eks) | 5.32.0       |
-| [Terraform PostgreSQL Provider](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs)                                              | 1.21.0       |
-
 ### Instance Metadata Service (IMDS)
 
 [Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) is a default fallback for the AWS SDK due to the [default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html). Within the context of Amazon EKS, it means a pod will automatically assume the role of a node. This can hide many problems, including whether IRSA was set up correctly or not, since it will fall back to IMDS in case of failure and hide the actual error.
