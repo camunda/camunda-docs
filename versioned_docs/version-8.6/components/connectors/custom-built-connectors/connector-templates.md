@@ -7,8 +7,10 @@ description: Learn how to modify BPMN elements with Connector templates to creat
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-**Connector templates** are JSON configuration files, which customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md).
+Connectors are available [out-of-the-box (OOTB)](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and come with [Connector templates](/components/connectors/manage-connector-templates.md) which customize how a BPMN element is shown,
+and how it can be configured by process developers. Connector templates are a specific kind of [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), which can also be used when creating custom Connectors via the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
+
+Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) provides Connectors by Camunda partners and community contributors.
 
 Before developing one, you'll need to decide what you would like to achieve with your Connector. Currently, the options are:
 
@@ -440,6 +442,566 @@ a simple JSON configuration:
 ```
 
 </TabItem>
+</Tabs>
+
+## Inbound boundary event Connector templates
+
+You can, for example, allow the user to model and configure the following **HTTP webhook Connector** for boundary events by providing
+a simple JSON configuration:
+
+<Tabs groupId="connectorTemplateInbound" defaultValue="process" values={
+[
+{label: 'Process modeling view', value: 'process' },
+{label: 'Connector template configuration', value: 'json' }
+]
+}>
+
+<TabItem value='process'>
+
+![Webhook Inbound boundary Connector Example.png](img/custom-connector-template-inbound-boundary.png)
+
+</TabItem>
+
+<TabItem value='json'>
+
+```json
+{
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "Webhook Boundary Event Connector",
+  "id": "io.camunda.connectors.webhook.WebhookConnectorBoundary.v1",
+  "description": "Configure webhook to receive callbacks",
+  "documentationRef": "https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/",
+  "version": 11,
+  "category": {
+    "id": "connectors",
+    "name": "Connectors"
+  },
+  "appliesTo": ["bpmn:BoundaryEvent"],
+  "elementType": {
+    "value": "bpmn:BoundaryEvent",
+    "eventDefinition": "bpmn:MessageEventDefinition"
+  },
+  "groups": [
+    {
+      "id": "endpoint",
+      "label": "Webhook configuration"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentication"
+    },
+    {
+      "id": "authorization",
+      "label": "Authorization"
+    },
+    {
+      "id": "webhookResponse",
+      "label": "Webhook response"
+    },
+    {
+      "id": "activation",
+      "label": "Activation"
+    },
+    {
+      "id": "correlation",
+      "label": "Correlation",
+      "tooltip": "Learn more about message correlation in the <a href=\"https://docs.camunda.io/docs/components/concepts/messages/#message-correlation-overview\">documentation</a>."
+    },
+    {
+      "id": "output",
+      "label": "Output mapping"
+    }
+  ],
+  "properties": [
+    {
+      "value": "io.camunda:webhook:1",
+      "binding": {
+        "name": "inbound.type",
+        "type": "zeebe:property"
+      },
+      "type": "Hidden"
+    },
+    {
+      "id": "inbound.method",
+      "label": "Webhook method",
+      "description": "Select HTTP method",
+      "optional": false,
+      "value": "any",
+      "group": "endpoint",
+      "binding": {
+        "name": "inbound.method",
+        "type": "zeebe:property"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "Any",
+          "value": "any"
+        },
+        {
+          "name": "GET",
+          "value": "get"
+        },
+        {
+          "name": "POST",
+          "value": "post"
+        },
+        {
+          "name": "PUT",
+          "value": "put"
+        },
+        {
+          "name": "DELETE",
+          "value": "delete"
+        }
+      ]
+    },
+    {
+      "id": "inbound.context",
+      "label": "Webhook ID",
+      "description": "The webhook ID is a part of the URL",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true,
+        "pattern": {
+          "value": "^[a-zA-Z0-9]+([-_][a-zA-Z0-9]+)*$",
+          "message": "can only contain letters, numbers, or single underscores/hyphens and cannot begin or end with an underscore/hyphen"
+        }
+      },
+      "group": "endpoint",
+      "binding": {
+        "name": "inbound.context",
+        "type": "zeebe:property"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.shouldValidateHmac",
+      "label": "HMAC authentication",
+      "description": "Choose whether HMAC verification is enabled. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#make-your-http-webhook-connector-for-receiving-messages-executable' target='_blank'>See documentation</a> and <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#example' target='_blank'>example</a> that explains how to use HMAC-related fields",
+      "optional": false,
+      "value": "disabled",
+      "group": "authentication",
+      "binding": {
+        "name": "inbound.shouldValidateHmac",
+        "type": "zeebe:property"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "Enabled",
+          "value": "enabled"
+        },
+        {
+          "name": "Disabled",
+          "value": "disabled"
+        }
+      ]
+    },
+    {
+      "id": "inbound.hmacSecret",
+      "label": "HMAC secret key",
+      "description": "Shared secret key",
+      "optional": true,
+      "feel": "optional",
+      "group": "authentication",
+      "binding": {
+        "name": "inbound.hmacSecret",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.shouldValidateHmac",
+        "equals": "enabled",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.hmacHeader",
+      "label": "HMAC header",
+      "description": "Name of header attribute that will contain the HMAC value",
+      "optional": true,
+      "feel": "optional",
+      "group": "authentication",
+      "binding": {
+        "name": "inbound.hmacHeader",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.shouldValidateHmac",
+        "equals": "enabled",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.hmacAlgorithm",
+      "label": "HMAC algorithm",
+      "description": "Choose HMAC algorithm",
+      "optional": false,
+      "value": "sha_256",
+      "group": "authentication",
+      "binding": {
+        "name": "inbound.hmacAlgorithm",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.shouldValidateHmac",
+        "equals": "enabled",
+        "type": "simple"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "SHA-1",
+          "value": "sha_1"
+        },
+        {
+          "name": "SHA-256",
+          "value": "sha_256"
+        },
+        {
+          "name": "SHA-512",
+          "value": "sha_512"
+        }
+      ]
+    },
+    {
+      "id": "inbound.hmacScopes",
+      "label": "HMAC scopes",
+      "description": "Set HMAC scopes for calculating signature data. See <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/' target='_blank'>documentation</a>",
+      "optional": true,
+      "feel": "required",
+      "group": "authentication",
+      "binding": {
+        "name": "inbound.hmacScopes",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.shouldValidateHmac",
+        "equals": "enabled",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.auth.type",
+      "label": "Authorization type",
+      "description": "Choose the authorization type",
+      "value": "NONE",
+      "group": "authorization",
+      "binding": {
+        "name": "inbound.auth.type",
+        "type": "zeebe:property"
+      },
+      "type": "Dropdown",
+      "choices": [
+        {
+          "name": "None",
+          "value": "NONE"
+        },
+        {
+          "name": "Basic",
+          "value": "BASIC"
+        },
+        {
+          "name": "API key",
+          "value": "APIKEY"
+        },
+        {
+          "name": "JWT",
+          "value": "JWT"
+        }
+      ]
+    },
+    {
+      "id": "inbound.auth.username",
+      "label": "Username",
+      "description": "Username for basic authentication",
+      "optional": false,
+      "feel": "optional",
+      "group": "authorization",
+      "binding": {
+        "name": "inbound.auth.username",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.auth.type",
+        "equals": "BASIC",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.auth.password",
+      "label": "Password",
+      "description": "Password for basic authentication",
+      "optional": false,
+      "feel": "optional",
+      "group": "authorization",
+      "binding": {
+        "name": "inbound.auth.password",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.auth.type",
+        "equals": "BASIC",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.auth.apiKey",
+      "label": "API key",
+      "description": "Expected API key",
+      "optional": false,
+      "feel": "optional",
+      "group": "authorization",
+      "binding": {
+        "name": "inbound.auth.apiKey",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.auth.type",
+        "equals": "APIKEY",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.auth.apiKeyLocator",
+      "label": "API key locator",
+      "description": "A FEEL expression that extracts API key from the request. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#how-to-configure-api-key-authorization'>See documentation</a>",
+      "optional": false,
+      "value": "=split(request.headers.authorization, \" \")[2]",
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "required",
+      "group": "authorization",
+      "binding": {
+        "name": "inbound.auth.apiKeyLocator",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.auth.type",
+        "equals": "APIKEY",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.auth.jwt.jwkUrl",
+      "label": "JWK URL",
+      "description": "Well-known URL of JWKs",
+      "optional": false,
+      "feel": "optional",
+      "group": "authorization",
+      "binding": {
+        "name": "inbound.auth.jwt.jwkUrl",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.auth.type",
+        "equals": "JWT",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.auth.jwt.permissionsExpression",
+      "label": "JWT role property expression",
+      "description": "Expression to extract the roles from the JWT token. <a href='https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/http-webhook/#how-to-extract-roles-from-jwt-data'>See documentation</a>",
+      "optional": false,
+      "feel": "required",
+      "group": "authorization",
+      "binding": {
+        "name": "inbound.auth.jwt.permissionsExpression",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.auth.type",
+        "equals": "JWT",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.auth.jwt.requiredPermissions",
+      "label": "Required roles",
+      "description": "List of roles to test JWT roles against",
+      "optional": false,
+      "feel": "required",
+      "group": "authorization",
+      "binding": {
+        "name": "inbound.auth.jwt.requiredPermissions",
+        "type": "zeebe:property"
+      },
+      "condition": {
+        "property": "inbound.auth.type",
+        "equals": "JWT",
+        "type": "simple"
+      },
+      "type": "String"
+    },
+    {
+      "id": "inbound.responseExpression",
+      "label": "Response expression",
+      "description": "Expression used to generate the HTTP response",
+      "optional": true,
+      "feel": "required",
+      "group": "webhookResponse",
+      "binding": {
+        "name": "inbound.responseExpression",
+        "type": "zeebe:property"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "inbound.verificationExpression",
+      "label": "One time verification response expression",
+      "description": "Specify condition and response. Learn more in the <a href='https://docs.camunda.io/docs/components/connectors/protocol/http-webhook/#verification-expression' target='_blank'>documentation</a>",
+      "optional": true,
+      "feel": "required",
+      "group": "webhookResponse",
+      "binding": {
+        "name": "inbound.verificationExpression",
+        "type": "zeebe:property"
+      },
+      "type": "Text"
+    },
+    {
+      "id": "activationCondition",
+      "label": "Activation condition",
+      "description": "Condition under which the Connector triggers. Leave empty to catch all events",
+      "optional": true,
+      "feel": "required",
+      "group": "activation",
+      "binding": {
+        "name": "activationCondition",
+        "type": "zeebe:property"
+      },
+      "type": "String"
+    },
+    {
+      "id": "consumeUnmatchedEvents",
+      "label": "Consume unmatched events",
+      "value": true,
+      "group": "activation",
+      "binding": {
+        "name": "consumeUnmatchedEvents",
+        "type": "zeebe:property"
+      },
+      "tooltip": "Unmatched events are rejected by default, allowing the upstream service to handle the error. Check this box to consume unmatched events and return a success response",
+      "type": "Boolean"
+    },
+    {
+      "id": "correlationKeyProcess",
+      "label": "Correlation key (process)",
+      "description": "Sets up the correlation key from process variables",
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "required",
+      "group": "correlation",
+      "binding": {
+        "name": "correlationKey",
+        "type": "bpmn:Message#zeebe:subscription#property"
+      },
+      "type": "String"
+    },
+    {
+      "id": "correlationKeyPayload",
+      "label": "Correlation key (payload)",
+      "description": "Extracts the correlation key from the incoming message payload",
+      "constraints": {
+        "notEmpty": true
+      },
+      "feel": "required",
+      "group": "correlation",
+      "binding": {
+        "name": "correlationKeyExpression",
+        "type": "zeebe:property"
+      },
+      "type": "String"
+    },
+    {
+      "id": "messageIdExpression",
+      "label": "Message ID expression",
+      "description": "Expression to extract unique identifier of a message",
+      "optional": true,
+      "feel": "required",
+      "group": "correlation",
+      "binding": {
+        "name": "messageIdExpression",
+        "type": "zeebe:property"
+      },
+      "type": "String"
+    },
+    {
+      "id": "messageTtl",
+      "label": "Message TTL",
+      "description": "Time-to-live for the message in the broker (ISO-8601 duration)",
+      "optional": true,
+      "constraints": {
+        "notEmpty": false,
+        "pattern": {
+          "value": "^(PT.*|)$",
+          "message": "must be an ISO-8601 duration"
+        }
+      },
+      "feel": "optional",
+      "group": "correlation",
+      "binding": {
+        "name": "messageTtl",
+        "type": "zeebe:property"
+      },
+      "type": "String"
+    },
+    {
+      "id": "messageNameUuid",
+      "generatedValue": {
+        "type": "uuid"
+      },
+      "group": "correlation",
+      "binding": {
+        "name": "name",
+        "type": "bpmn:Message#property"
+      },
+      "type": "Hidden"
+    },
+    {
+      "id": "resultVariable",
+      "label": "Result variable",
+      "description": "Name of variable to store the response in",
+      "group": "output",
+      "binding": {
+        "name": "resultVariable",
+        "type": "zeebe:property"
+      },
+      "type": "String"
+    },
+    {
+      "id": "resultExpression",
+      "label": "Result expression",
+      "description": "Expression to map the response into process variables",
+      "feel": "required",
+      "group": "output",
+      "binding": {
+        "name": "resultExpression",
+        "type": "zeebe:property"
+      },
+      "type": "Text"
+    }
+  ],
+  "icon": {
+    "contents": "data:image/svg+xml;base64,PHN2ZyBpZD0naWNvbicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB3aWR0aD0nMTgnIGhlaWdodD0nMTgnIHZpZXdCb3g9JzAgMCAzMiAzMic+CiAgPGRlZnM+CiAgICA8c3R5bGU+LmNscy0xIHsgZmlsbDogbm9uZTsgfTwvc3R5bGU+CiAgPC9kZWZzPgogIDxwYXRoCiAgICBkPSdNMjQsMjZhMywzLDAsMSwwLTIuODE2NC00SDEzdjFhNSw1LDAsMSwxLTUtNVYxNmE3LDcsMCwxLDAsNi45Mjg3LDhoNi4yNTQ5QTIuOTkxNCwyLjk5MTQsMCwwLDAsMjQsMjZaJy8+CiAgPHBhdGgKICAgIGQ9J00yNCwxNmE3LjAyNCw3LjAyNCwwLDAsMC0yLjU3LjQ4NzNsLTMuMTY1Ni01LjUzOTVhMy4wNDY5LDMuMDQ2OSwwLDEsMC0xLjczMjYuOTk4NWw0LjExODksNy4yMDg1Ljg2ODYtLjQ5NzZhNS4wMDA2LDUuMDAwNiwwLDEsMS0xLjg1MSw2Ljg0MThMMTcuOTM3LDI2LjUwMUE3LjAwMDUsNy4wMDA1LDAsMSwwLDI0LDE2WicvPgogIDxwYXRoCiAgICBkPSdNOC41MzIsMjAuMDUzN2EzLjAzLDMuMDMsMCwxLDAsMS43MzI2Ljk5ODVDMTEuNzQsMTguNDcsMTMuODYsMTQuNzYwNywxMy44OSwxNC43MDhsLjQ5NzYtLjg2ODItLjg2NzctLjQ5N2E1LDUsMCwxLDEsNi44MTItMS44NDM4bDEuNzMxNSwxLjAwMmE3LjAwMDgsNy4wMDA4LDAsMSwwLTEwLjM0NjIsMi4wMzU2Yy0uNDU3Ljc0MjctMS4xMDIxLDEuODcxNi0yLjA3MzcsMy41NzI4WicvPgogIDxyZWN0IGlkPSdfVHJhbnNwYXJlbnRfUmVjdGFuZ2xlXycgZGF0YS1uYW1lPScmbHQ7VHJhbnNwYXJlbnQgUmVjdGFuZ2xlJmd0OycgY2xhc3M9J2Nscy0xJwogICAgd2lkdGg9JzMyJyBoZWlnaHQ9JzMyJy8+Cjwvc3ZnPg=="
+  }
+}
+```
+
+</TabItem>
+
 </Tabs>
 
 ## Outbound Connector templates
