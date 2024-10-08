@@ -139,7 +139,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 <dependency>
    <groupId>io.camunda</groupId>
    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-   <version>8.5.0</version>
+   <version>8.6.0</version>
 </dependency>
 ```
 
