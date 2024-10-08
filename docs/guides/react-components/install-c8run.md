@@ -1,7 +1,7 @@
 ### Prerequisites
 
 :::warning
-Due to a bug in 8.6, cookie authentication is required to use Camunda 8 Run with the [Camunda REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+Due to a bug in 8.6, cookie authentication is required to use the Tasklist, Operate, and Zeebe APIs included in Camunda 8 Run. For an example of authenticating via cookie, see the [Operate API documentation](/apis-tools/operate-api//authentication.md#authentication-via-cookie-self-managed-only).
 :::
 
 - OpenJDK 21+
