@@ -6,7 +6,7 @@ description: Use the Amazon Comprehend Connector to extract insights from the co
 ---
 
 :::info
-The **Amazon Comprehend Connector** is available for `8.6.0` or later.
+The **Amazon Comprehend Connector** is available for `8.7.0` or later.
 :::
 
 The **Amazon Comprehend Connector** allows you to integrate your BPMN service with [Amazon Comprehend](https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html), a service which extracts insights about the content of documents, such as personal identifiable information and key phrases.

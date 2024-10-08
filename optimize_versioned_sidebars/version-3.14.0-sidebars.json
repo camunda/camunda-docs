@@ -1160,11 +1160,6 @@
                 },
                 {
                   "type": "link",
-                  "label": "AWS Comprehend Connector",
-                  "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-comprehend/"
-                },
-                {
-                  "type": "link",
                   "label": "AWS DynamoDB Connector",
                   "href": "/docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
                 },
