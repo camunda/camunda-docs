@@ -27,6 +27,7 @@ Review the Camunda 8 Helm chart [version matrix](https://helm.camunda.io/camunda
 You can also view all chart versions and application versions via the Helm CLI:
 
 ```shell
+helm repo update
 helm search repo camunda/camunda-platform --versions
 ```
 
@@ -40,7 +41,7 @@ Configuration adjustments may be required when upgrading to a new version of the
 
 <Tabs groupId="upgrades" defaultValue="8.6" queryString values={
 [
-{label: 'From Camunda 8.6 to 8.7', value: '8.6', },
+{label: 'From Camunda 8.5 to 8.6', value: '8.6', },
 {label: 'From Camunda 8.4 to 8.5', value: '8.5', },
 {label: 'From Camunda 8.3 to 8.4', value: '8.4', },
 {label: 'From Camunda 8.2 to 8.3', value: '8.3', },
@@ -81,6 +82,15 @@ The following keys were deprecated in 8.5, and their removal has been delayed un
 #### Separated Ingress deprecation warning
 
 The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. If using a separated Ingress, switch to a [combined Ingress](/self-managed/setup/guides/ingress-setup.md) to ensure a smooth upgrade experience.
+
+#### OpenShift Changes
+
+We added the `global.compatibility.openshift.adaptSecurityContext` variable in the values.yaml that can be used to set the following possible values:
+
+- `force`: The `runAsUser` and `fsGroup` values will be null in all components.
+- `disabled`: The `runAsUser` and `fsGroup` values will not be modified (default).
+
+With this change, there is no need to do extra steps with the post-renderer. You can install the chart as normal. Please refer to the [Red Hat OpenShift document](/self-managed/setup/deploy/openshift/redhat-openshift.md) for more information.
 
 </TabItem>
 
@@ -566,6 +576,7 @@ export POSTGRESQL_SECRET=$(kubectl get secret "camunda-postgresql" -o jsonpath="
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
+helm repo update
 helm upgrade camunda camunda/camunda-platform \
   # Uncomment if Console is enabled.
   # --set global.identity.auth.console.existingSecret=$CONSOLE_SECRET \
@@ -590,6 +601,7 @@ For more details on the Keycloak upgrade path, see the [Keycloak upgrade guide](
 If you have **disabled** Camunda Identity and the related authentication mechanism, Camunda can be upgraded with the following command:
 
 ```shell
+helm repo update
 helm upgrade camunda
 ```
 
