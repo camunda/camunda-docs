@@ -7,8 +7,10 @@ description: Learn how to modify BPMN elements with Connector templates to creat
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-**Connector templates** are JSON configuration files, which customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md).
+Connectors are available [out-of-the-box (OOTB)](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and come with [Connector templates](/components/connectors/manage-connector-templates.md) which customize how a BPMN element is shown,
+and how it can be configured by process developers. Connector templates are a specific kind of [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), which can also be used when creating custom Connectors via the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
+
+Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) provides Connectors by Camunda partners and community contributors.
 
 Before developing one, you'll need to decide what you would like to achieve with your Connector. Currently, the options are:
 
