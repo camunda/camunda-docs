@@ -6,9 +6,9 @@ description: "Important announcements including deprecation & removal notices"
 
 ## Camunda 8.6
 
-Scheduled release date: 8th of Oct 2024
+Release date: 8th of Oct 2024
 
-Scheduled end of maintenance: 14th of April 2026
+End of maintenance: 14th of April 2026
 
 ### License key changes
 
@@ -97,7 +97,17 @@ Version changes are made to supported environments:
 
 To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
 
-### Breaking changes in the Connector SDK
+### Connectors
+
+#### Deprecation: None start event element templates for Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound Connectors
+
+The [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) element templates for the out-of-the-box Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound Connectors have been deprecated in Camunda Modeler.
+
+Users can no longer select these templates when creating a new none start event element in Camunda Modeler. Existing none start event elements with these templates will continue to work as expected, but users are encouraged to migrate to the [message start event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) element templates for these Connectors.
+
+Message start event element templates are better suited for the message-based communication these Connectors provide, and offer more flexibility and features compared to the none start event element templates, such as the ability to define a message ID and a correlation key for idempotency. Read more in the [inbound Connectors documentation](/components/connectors/use-connectors/inbound.md) and the [messaging concepts documentation](/components/concepts/messages.md#message-uniqueness).
+
+#### Breaking changes in the Connector SDK
 
 The `void correlate(Object variables)` method in the `InboundConnectorContext` interface has been removed, following the deprecation in 8.4.0. Use the `CorrelationResult correlateWithResult(Object variables)` method instead.
 
