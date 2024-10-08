@@ -27,6 +27,7 @@ Review the Camunda 8 Helm chart [version matrix](https://helm.camunda.io/camunda
 You can also view all chart versions and application versions via the Helm CLI:
 
 ```shell
+helm repo update
 helm search repo camunda/camunda-platform --versions
 ```
 
