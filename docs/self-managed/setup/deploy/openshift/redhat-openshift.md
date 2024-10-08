@@ -48,8 +48,8 @@ Depending on your OpenShift cluster's Security Context Constraints (SCCs) config
 By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies.
 The `global.compatibility.openshift.adaptSecurityContext` variable in your values.yaml can be used to set the following possible values:
 
-- `force`: all `runAsUser` and `fsGroup` values will be set to null.
-- `disabled`: this is the default value. In this case, no fields will be modified.
+- `force`:The runAsUser and fsGroup values will be null in all components.
+- `disabled`:The runAsUser and fsGroup values will not be modified (default).
 
 To deploy Camunda 8 on OpenShift:
 
