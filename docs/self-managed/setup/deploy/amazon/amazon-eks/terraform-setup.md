@@ -45,7 +45,7 @@ Following this tutorial and steps will result in:
 
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
+- A [managed Aurora PostgreSQL 15.8](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
 - An OpenSearch domain created and configured for use with the Camunda 8 platform, leveraging the capabilities of [AWS OpenSearch Service](https://aws.amazon.com/opensearch-service/).
 
 ## Provisioning the Complete Infrastructure for Camunda 8 on AWS
@@ -202,8 +202,8 @@ locals {
 }
 
 module "postgresql" {
-  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=2.1.0"
-  engine_version             = "15.4"
+  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=2.6.0"
+  engine_version             = "15.8"
   auto_minor_version_upgrade = false
   cluster_name               = "${locals.aurora_cluster_name}"
   default_database_name      = "camunda"
