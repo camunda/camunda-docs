@@ -576,6 +576,7 @@ export POSTGRESQL_SECRET=$(kubectl get secret "camunda-postgresql" -o jsonpath="
 After exporting all secrets into environment variables, run the following upgrade command:
 
 ```shell
+helm repo update
 helm upgrade camunda camunda/camunda-platform \
   # Uncomment if Console is enabled.
   # --set global.identity.auth.console.existingSecret=$CONSOLE_SECRET \
@@ -600,6 +601,7 @@ For more details on the Keycloak upgrade path, see the [Keycloak upgrade guide](
 If you have **disabled** Camunda Identity and the related authentication mechanism, Camunda can be upgraded with the following command:
 
 ```shell
+helm repo update
 helm upgrade camunda
 ```
 
