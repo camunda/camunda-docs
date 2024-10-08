@@ -37,7 +37,7 @@ Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
 - [OpenJDK 21+](https://openjdk.org/install/)
-- [Camunda 8 Desktop Modeler](https://camunda.com/download/modeler/) and [Camunda 8 Run<br/>](https://camunda.com/download/modeler/)_If you've already signed up for a Self-Managed account, you can find the download links in your welcome email._
+- Camunda 8 Desktop Modeler and Camunda 8 Run
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
