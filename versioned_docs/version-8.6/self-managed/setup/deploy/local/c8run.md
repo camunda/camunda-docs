@@ -25,6 +25,10 @@ Camunda 8 Run includes the following:
 
 ## Prerequisites
 
+:::warning
+Due to a bug in 8.6, cookie authentication is required to use Camunda 8 Run with the [Camunda REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+:::
+
 - OpenJDK 21+
 - [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
 
