@@ -87,8 +87,8 @@ The separated Ingress Helm configuration has been deprecated in 8.6, and will be
 
 We added the `global.compatibility.openshift.adaptSecurityContext` variable in the values.yaml that can be used to set the following possible values:
 
-- `force`:The runAsUser and fsGroup values will be null in all components.
-- `disabled`:The runAsUser and fsGroup values will not be modified (default).
+- `force`: The runAsUser and fsGroup values will be null in all components.
+- `disabled`: The runAsUser and fsGroup values will not be modified (default).
 
 With this change, there is no need to do extra steps with the post-renderer. You can install the chart as normal. Please refer to the [Red Hat OpenShift document](/self-managed/setup/deploy/openshift/redhat-openshift.md) for more information.
 
