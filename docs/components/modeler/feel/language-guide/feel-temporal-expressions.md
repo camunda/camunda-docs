@@ -431,3 +431,6 @@ duration("PT2H30M").minutes
 duration("P6M").months
 // 6
 ```
+### More Examples
+
+[Temporal Expression Examples](https://camunda.github.io/feel-scala/docs/learn/samples/temporal-samples)
