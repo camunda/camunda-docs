@@ -25,12 +25,10 @@ Camunda 8 Run includes the following:
 
 ## Prerequisites
 
-:::warning
-Due to a bug in 8.6, cookie authentication is required to use the Tasklist, Operate, and Zeebe APIs included in Camunda 8 Run. For an example of authenticating via cookie, see the [Operate API documentation](/apis-tools/operate-api//authentication.md#authentication-via-cookie-self-managed-only).
-:::
-
 - OpenJDK 21+
 - [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
+
+To use Camunda 8 Run with the Camunda REST API, cookie authentication is also required. See the [Operate API documentation](/apis-tools/operate-api/authentication.md#authentication-via-cookie-self-managed-only) for an example of cookie authentication.
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.

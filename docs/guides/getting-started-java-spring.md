@@ -133,11 +133,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 </repositories>
 ```
 
-2. Add the following dependency your `pom.xml` file, as a child of the `<dependencies>` element:
-
-:::warning
-Due to a bug in 8.6, use the Spring Zeebe SDK version `8.5.0`.
-:::
+2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
 
 ```
 <dependency>

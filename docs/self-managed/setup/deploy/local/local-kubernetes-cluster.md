@@ -71,10 +71,6 @@ Depending on your machine hardware and internet connection speed, the services m
 
 ## Connecting to Camunda 8 components
 
-:::warning
-Due to a bug in 8.6, cookie authentication is required to use the Tasklist, Operate, and Zeebe APIs. For an example of authenticating via cookie, see the [Operate API documentation](/apis-tools/operate-api//authentication.md#authentication-via-cookie-self-managed-only).
-:::
-
 Camunda services deployed in a Kubernetes cluster are not accessible from outside the cluster. To connect to your Camunda 8 cluster, use either port-forwarding or Kubernetes Ingress.
 
 :::note
