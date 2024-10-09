@@ -53,7 +53,7 @@
 }
 
 .featuresSection {
-  padding: 0 2rem;
+  padding: 0;
 }
 
 .featuresImage {
@@ -64,8 +64,15 @@
 .featuresTitle {
   line-height: 1.4;
   font-size: 24px;
+  padding: 0 2rem;
 }
 
 .featuresDescription {
   line-height: 1.4;
+  padding: 0 2rem;
+}
+
+.featuresLink {
+  height: 250px;
+  padding-top: 1rem;
 }

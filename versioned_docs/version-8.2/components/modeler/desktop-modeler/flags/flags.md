@@ -4,6 +4,9 @@ title: Flags
 description: "Flags allow you to control the availability of certain features within Desktop Modeler."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Flags allow you to control the availability of certain features within Desktop Modeler.
 
 ## Configuring Flags
@@ -18,9 +21,38 @@ Place a `flags.json` file inside the `resources` folder of your local [`{USER_DA
 
 Pass flags via the command line when starting the application.
 
+<Tabs groupId="os" defaultValue="windows" queryString values={
+[
+{label: 'Windows', value: 'windows' },
+{label: 'macOS', value: 'macos' },
+{label: 'Linux', value: 'linux' }
+]
+}>
+
+<TabItem value='windows'>
+
+```plain
+"Camunda Modeler.exe" --disable-plugins
 ```
+
+</TabItem>
+
+<TabItem value='macos'>
+
+```plain
 camunda-modeler --disable-plugins
 ```
+
+</TabItem>
+
+<TabItem value='linux'>
+
+```plain
+camunda-modeler --disable-plugins
+```
+
+</TabItem>
+</Tabs>
 
 Flags passed as command line arguments take precedence over those configured via a configuration file.
 

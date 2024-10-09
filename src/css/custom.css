@@ -482,8 +482,12 @@ span.callout + p::after {
   background-image: url("/static/img/hero-bg.png");
 }
 
-/* hide tabs when needed */
+/* Remove badges from sidebar */
+a.table-of-contents__link.toc-highlight > span.badge {
+  display: none;
+}
 
+/* hide tabs when needed */
 .tabs-hidden {
   display: none;
 }

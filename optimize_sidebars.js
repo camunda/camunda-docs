@@ -20,6 +20,10 @@ module.exports = {
         docsLink("Processes", "components/concepts/processes/"),
         docsLink("Job workers", "components/concepts/job-workers/"),
         docsLink(
+          "Execution listeners",
+          "components/concepts/execution-listeners/"
+        ),
+        docsLink(
           "Process instance creation",
           "components/concepts/process-instance-creation/"
         ),
@@ -38,6 +42,10 @@ module.exports = {
           "components/concepts/process-instance-migration/"
         ),
         docsLink("Data retention", "components/concepts/data-retention/"),
+        docsLink(
+          "Encryption at rest",
+          "components/concepts/encryption-at-rest/"
+        ),
         docsLink(
           "Outbound Connectors vs. job workers",
           "components/concepts/outbound-connectors-job-workers/"
@@ -123,20 +131,8 @@ module.exports = {
               "components/console/manage-clusters/create-cluster/"
             ),
             docsLink(
-              "Rename your cluster",
-              "components/console/manage-clusters/rename-cluster/"
-            ),
-            docsLink(
-              "Resume your cluster",
-              "components/console/manage-clusters/resume-cluster/"
-            ),
-            docsLink(
-              "Update your cluster",
-              "components/console/manage-clusters/update-cluster/"
-            ),
-            docsLink(
-              "Delete your cluster",
-              "components/console/manage-clusters/delete-cluster/"
+              "Manage your cluster",
+              "components/console/manage-clusters/manage-cluster/"
             ),
             docsLink(
               "Manage API clients",
@@ -149,6 +145,10 @@ module.exports = {
             docsLink(
               "Manage IP allowlists",
               "components/console/manage-clusters/manage-ip-allowlists/"
+            ),
+            docsLink(
+              "Create backup",
+              "components/console/manage-clusters/create-backups/"
             ),
             docsLink(
               "Manage secrets",
@@ -221,6 +221,7 @@ module.exports = {
               "Context pad",
               "components/modeler/web-modeler/context-pad/"
             ),
+            docsLink("Git sync", "components/modeler/web-modeler/git-sync/"),
             docsLink(
               "Import diagram",
               "components/modeler/web-modeler/import-diagram/"
@@ -233,14 +234,28 @@ module.exports = {
               "Run or publish your process",
               "components/modeler/web-modeler/run-or-publish-your-process/"
             ),
-            docsLink(
-              "Process applications",
-              "components/modeler/web-modeler/process-applications/"
-            ),
-            docsLink(
-              "Visit the Camunda Marketplace",
-              "components/modeler/web-modeler/camunda-marketplace/"
-            ),
+
+            {
+              "Process applications": [
+                docsLink(
+                  "Process application development lifecycle",
+                  "components/modeler/web-modeler/process-application-pipeline/"
+                ),
+                docsLink(
+                  "Create a process application",
+                  "components/modeler/web-modeler/create-a-process-application/"
+                ),
+                docsLink(
+                  "Deploy and run your process application",
+                  "components/modeler/web-modeler/deploy-process-application/"
+                ),
+                docsLink(
+                  "Process application versioning",
+                  "components/modeler/web-modeler/process-application-versioning/"
+                ),
+              ],
+            },
+
             {
               Collaboration: [
                 docsLink(
@@ -266,6 +281,10 @@ module.exports = {
               ],
             },
 
+            docsLink(
+              "Camunda Marketplace",
+              "components/modeler/web-modeler/camunda-marketplace/"
+            ),
             docsLink(
               "Milestones",
               "components/modeler/web-modeler/milestones/"
@@ -293,10 +312,19 @@ module.exports = {
                   "Publish processes via a form",
                   "components/modeler/web-modeler/advanced-modeling/publish-public-processes/"
                 ),
-                docsLink(
-                  "Refactoring suggestions",
-                  "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/"
-                ),
+
+                {
+                  "AI features": [
+                    docsLink(
+                      "Refactoring suggestions",
+                      "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/"
+                    ),
+                    docsLink(
+                      "Camunda Docs AI",
+                      "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/"
+                    ),
+                  ],
+                },
               ],
             },
 
@@ -324,6 +352,14 @@ module.exports = {
             docsLink(
               "Start a new process instance",
               "components/modeler/desktop-modeler/start-instance/"
+            ),
+            docsLink(
+              "Use Connectors",
+              "components/modeler/desktop-modeler/use-connectors/"
+            ),
+            docsLink(
+              "Variables",
+              "components/modeler/desktop-modeler/variables/"
             ),
 
             {
@@ -852,9 +888,20 @@ module.exports = {
               "Automation Anywhere Connector",
               "components/connectors/out-of-the-box-connectors/automation-anywhere/"
             ),
-
+            docsLink(
+              "Email Connector",
+              "components/connectors/out-of-the-box-connectors/email/"
+            ),
             {
               AWS: [
+                docsLink(
+                  "AWS Bedrock Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-bedrock/"
+                ),
+                docsLink(
+                  "AWS Comprehend Connector",
+                  "/components/connectors/out-of-the-box-connectors/amazon-comprehend/"
+                ),
                 docsLink(
                   "AWS DynamoDB Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
@@ -878,6 +925,10 @@ module.exports = {
                 docsLink(
                   "AWS SQS Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-sqs/"
+                ),
+                docsLink(
+                  "AWS Textract Connector",
+                  "components/connectors/out-of-the-box-connectors/amazon-textract/"
                 ),
               ],
             },
@@ -920,7 +971,6 @@ module.exports = {
               "Hugging Face Connector",
               "components/connectors/out-of-the-box-connectors/hugging-face/"
             ),
-
             docsLink(
               "Kafka Connector",
               "components/connectors/out-of-the-box-connectors/kafka/"
@@ -960,12 +1010,16 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/salesforce/"
             ),
             docsLink(
+              "SendGrid Connector",
+              "components/connectors/out-of-the-box-connectors/sendgrid/"
+            ),
+            docsLink(
               "Slack Connector",
               "components/connectors/out-of-the-box-connectors/slack/"
             ),
             docsLink(
-              "SendGrid Connector",
-              "components/connectors/out-of-the-box-connectors/sendgrid/"
+              "SQL Connector",
+              "components/connectors/out-of-the-box-connectors/sql/"
             ),
             docsLink(
               "Twilio Connector",
@@ -1135,13 +1189,27 @@ module.exports = {
               "Delete resources",
               "components/operate/userguide/delete-resources/"
             ),
-            docsLink(
-              "Process instance modification",
-              "components/operate/userguide/process-instance-modification/"
-            ),
+
+            {
+              "Process instance modification": [
+                docsLink(
+                  "Process instance modification",
+                  "components/operate/userguide/process-instance-modification/"
+                ),
+                docsLink(
+                  "Process instance batch modification",
+                  "components/operate/userguide/process-instance-batch-modification/"
+                ),
+              ],
+            },
+
             docsLink(
               "Process instance migration",
               "components/operate/userguide/process-instance-migration/"
+            ),
+            docsLink(
+              "Monitor operation status",
+              "components/operate/userguide/monitor-operation-status/"
             ),
           ],
         },
@@ -1162,16 +1230,24 @@ module.exports = {
               "components/tasklist/userguide/using-tasklist/"
             ),
             docsLink(
-              "Getting started",
-              "components/tasklist/userguide/tasklist-get-started/"
+              "Managing tasks",
+              "components/tasklist/userguide/managing-tasks/"
             ),
             docsLink(
               "Using filters",
               "components/tasklist/userguide/using-filters/"
             ),
             docsLink(
+              "Defining task priorities",
+              "components/tasklist/userguide/defining-task-priorities/"
+            ),
+            docsLink(
               "Starting processes",
               "components/tasklist/userguide/starting-processes/"
+            ),
+            docsLink(
+              "Localization",
+              "components/tasklist/userguide/tasklist-localization/"
             ),
           ],
         },
@@ -1458,6 +1534,314 @@ module.exports = {
         },
 
         {
+          "Administration API (Self-Managed)": [
+            docsLink(
+              "Overview",
+              "apis-tools/administration-sm-api/administration-sm-api-overview/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/administration-sm-api/administration-sm-api-authentication/"
+            ),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/administration-sm-api/specifications/sm-admin-api/"
+                ),
+
+                {
+                  "Usage Metrics": [
+                    docsLink(
+                      "Get usage metrics for clusters",
+                      "apis-tools/administration-sm-api/specifications/get-usage-metrics/"
+                    ),
+                  ],
+                },
+
+                {
+                  Clusters: [
+                    docsLink(
+                      "Get current clusters",
+                      "apis-tools/administration-sm-api/specifications/get-clusters/"
+                    ),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
+          "Camunda 8 API (REST)": [
+            docsLink(
+              "Overview",
+              "apis-tools/camunda-api-rest/camunda-api-rest-overview/"
+            ),
+            docsLink(
+              "Authentication",
+              "apis-tools/camunda-api-rest/camunda-api-rest-authentication/"
+            ),
+
+            {
+              Specifications: [
+                docsLink(
+                  "Introduction",
+                  "apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/"
+                ),
+
+                {
+                  Cluster: [
+                    docsLink(
+                      "Get cluster topology",
+                      "apis-tools/camunda-api-rest/specifications/get-cluster-topology/"
+                    ),
+                  ],
+                },
+
+                {
+                  License: [
+                    docsLink(
+                      "Get status of Camunda license",
+                      "apis-tools/camunda-api-rest/specifications/get-status-of-camunda-license/"
+                    ),
+                  ],
+                },
+
+                {
+                  Job: [
+                    docsLink(
+                      "Activate jobs",
+                      "apis-tools/camunda-api-rest/specifications/activate-jobs/"
+                    ),
+                    docsLink(
+                      "Fail job",
+                      "apis-tools/camunda-api-rest/specifications/fail-job/"
+                    ),
+                    docsLink(
+                      "Report error for job",
+                      "apis-tools/camunda-api-rest/specifications/report-error-for-job/"
+                    ),
+                    docsLink(
+                      "Complete job",
+                      "apis-tools/camunda-api-rest/specifications/complete-job/"
+                    ),
+                    docsLink(
+                      "Update a job",
+                      "apis-tools/camunda-api-rest/specifications/update-a-job/"
+                    ),
+                  ],
+                },
+
+                {
+                  Incident: [
+                    docsLink(
+                      "Resolve incident",
+                      "apis-tools/camunda-api-rest/specifications/resolve-incident/"
+                    ),
+                    docsLink(
+                      "Query incidents (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-incidents-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  "User task": [
+                    docsLink(
+                      "Complete user task",
+                      "apis-tools/camunda-api-rest/specifications/complete-user-task/"
+                    ),
+                    docsLink(
+                      "Assign user task",
+                      "apis-tools/camunda-api-rest/specifications/assign-user-task/"
+                    ),
+                    docsLink(
+                      "Update user task",
+                      "apis-tools/camunda-api-rest/specifications/update-user-task/"
+                    ),
+                    docsLink(
+                      "Unassign user task",
+                      "apis-tools/camunda-api-rest/specifications/unassign-user-task/"
+                    ),
+                    docsLink(
+                      "Query user tasks (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-user-tasks-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  Clock: [
+                    docsLink(
+                      "Pin internal clock",
+                      "apis-tools/camunda-api-rest/specifications/pin-internal-clock/"
+                    ),
+                    docsLink(
+                      "Reset internal clock",
+                      "apis-tools/camunda-api-rest/specifications/reset-internal-clock/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Process instance": [
+                    docsLink(
+                      "Create process instance",
+                      "apis-tools/camunda-api-rest/specifications/create-process-instance/"
+                    ),
+                    docsLink(
+                      "Query process instances (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-process-instances-alpha/"
+                    ),
+                    docsLink(
+                      "Migrate process instance",
+                      "apis-tools/camunda-api-rest/specifications/migrate-process-instance/"
+                    ),
+                    docsLink(
+                      "Modify process instance",
+                      "apis-tools/camunda-api-rest/specifications/modify-process-instance/"
+                    ),
+                    docsLink(
+                      "Cancel process instance",
+                      "apis-tools/camunda-api-rest/specifications/cancel-process-instance/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Flow node Instance": [
+                    docsLink(
+                      "Query flow node instances (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-flow-node-instances-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Decision definition": [
+                    docsLink(
+                      "Query decision definitions (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-decision-definitions-alpha/"
+                    ),
+                    docsLink(
+                      "Get decision definition XML (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Decision requirements": [
+                    docsLink(
+                      "Query decision requirements (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/query-decision-requirements-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  Decision: [
+                    docsLink(
+                      "Evaluate decision",
+                      "apis-tools/camunda-api-rest/specifications/evaluate-decision/"
+                    ),
+                  ],
+                },
+
+                {
+                  Authorization: [
+                    docsLink(
+                      "Patch authorization",
+                      "apis-tools/camunda-api-rest/specifications/patch-authorization/"
+                    ),
+                  ],
+                },
+
+                {
+                  User: [
+                    docsLink(
+                      "Create a user",
+                      "apis-tools/camunda-api-rest/specifications/create-user/"
+                    ),
+                    docsLink(
+                      "Query users (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/find-all-users/"
+                    ),
+                  ],
+                },
+
+                {
+                  Message: [
+                    docsLink(
+                      "Publish a message",
+                      "apis-tools/camunda-api-rest/specifications/publish-a-message/"
+                    ),
+                    docsLink(
+                      "Correlate a message",
+                      "apis-tools/camunda-api-rest/specifications/correlate-a-message/"
+                    ),
+                  ],
+                },
+
+                {
+                  Documents: [
+                    docsLink(
+                      "Upload document (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/upload-document-alpha/"
+                    ),
+                    docsLink(
+                      "Download document (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/download-document-alpha/"
+                    ),
+                    docsLink(
+                      "Delete document (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/delete-document-alpha/"
+                    ),
+                    docsLink(
+                      "Create document link (alpha)",
+                      "apis-tools/camunda-api-rest/specifications/create-document-link-alpha/"
+                    ),
+                  ],
+                },
+
+                {
+                  Resource: [
+                    docsLink(
+                      "Deploy resources",
+                      "apis-tools/camunda-api-rest/specifications/deploy-resources/"
+                    ),
+                    docsLink(
+                      "Delete resource",
+                      "apis-tools/camunda-api-rest/specifications/delete-resource/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Element instance": [
+                    docsLink(
+                      "Update element instance variables",
+                      "apis-tools/camunda-api-rest/specifications/update-element-instance-variables/"
+                    ),
+                  ],
+                },
+
+                {
+                  Signal: [
+                    docsLink(
+                      "Broadcast signal",
+                      "apis-tools/camunda-api-rest/specifications/broadcast-signal/"
+                    ),
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
           "Operate API (REST)": [
             docsLink("Overview", "apis-tools/operate-api/overview/"),
             docsLink(
@@ -1722,6 +2106,7 @@ module.exports = {
               "Authentication",
               "apis-tools/web-modeler-api/authentication/"
             ),
+            docsLink("Tutorial", "apis-tools/web-modeler-api/tutorial/"),
           ],
         },
 
@@ -1737,58 +2122,6 @@ module.exports = {
               "Deprecated RPCs",
               "apis-tools/zeebe-api/deprecated-rpcs/"
             ),
-          ],
-        },
-
-        {
-          "Zeebe API (REST)": [
-            docsLink(
-              "Overview",
-              "apis-tools/zeebe-api-rest/zeebe-api-rest-overview/"
-            ),
-            docsLink(
-              "Authentication",
-              "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
-            ),
-
-            {
-              Specifications: [
-                docsLink(
-                  "Introduction",
-                  "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api/"
-                ),
-
-                {
-                  Cluster: [
-                    docsLink(
-                      "Get cluster topology",
-                      "apis-tools/zeebe-api-rest/specifications/get-cluster-topology/"
-                    ),
-                  ],
-                },
-
-                {
-                  "User task": [
-                    docsLink(
-                      "Complete a user task",
-                      "apis-tools/zeebe-api-rest/specifications/complete-a-user-task/"
-                    ),
-                    docsLink(
-                      "Assign a user task",
-                      "apis-tools/zeebe-api-rest/specifications/assign-a-user-task/"
-                    ),
-                    docsLink(
-                      "Update a user task",
-                      "apis-tools/zeebe-api-rest/specifications/update-a-user-task/"
-                    ),
-                    docsLink(
-                      "Unassign a user task",
-                      "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task/"
-                    ),
-                  ],
-                },
-              ],
-            },
           ],
         },
 
@@ -1943,6 +2276,62 @@ module.exports = {
                 },
               ],
             },
+
+            {
+              "Zeebe API (REST)": [
+                docsLink(
+                  "Overview",
+                  "apis-tools/zeebe-api-rest/zeebe-api-rest-overview/"
+                ),
+                docsLink(
+                  "Authentication",
+                  "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
+                ),
+                docsLink(
+                  "Tutorial",
+                  "apis-tools/zeebe-api-rest/zeebe-api-tutorial/"
+                ),
+
+                {
+                  Specifications: [
+                    docsLink(
+                      "Introduction",
+                      "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api/"
+                    ),
+
+                    {
+                      Cluster: [
+                        docsLink(
+                          "Get cluster topology",
+                          "apis-tools/zeebe-api-rest/specifications/get-cluster-topology/"
+                        ),
+                      ],
+                    },
+
+                    {
+                      "User task": [
+                        docsLink(
+                          "Complete a user task",
+                          "apis-tools/zeebe-api-rest/specifications/complete-a-user-task/"
+                        ),
+                        docsLink(
+                          "Assign a user task",
+                          "apis-tools/zeebe-api-rest/specifications/assign-a-user-task/"
+                        ),
+                        docsLink(
+                          "Update a user task",
+                          "apis-tools/zeebe-api-rest/specifications/update-a-user-task/"
+                        ),
+                        docsLink(
+                          "Unassign a user task",
+                          "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task/"
+                        ),
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -1950,27 +2339,6 @@ module.exports = {
 
     {
       Clients: [
-        {
-          "CLI client": [
-            docsLink("Quick reference", "apis-tools/cli-client/"),
-            docsLink(
-              "Getting started with the CLI client",
-              "apis-tools/cli-client/cli-get-started/"
-            ),
-          ],
-        },
-
-        {
-          "Go client": [
-            docsLink("Quick reference", "apis-tools/go-client/"),
-            docsLink(
-              "Getting started with the Go client",
-              "apis-tools/go-client/go-get-started/"
-            ),
-            docsLink("Job worker", "apis-tools/go-client/job-worker/"),
-          ],
-        },
-
         {
           "Java client": [
             docsLink("Quick reference", "apis-tools/java-client/"),
@@ -2041,6 +2409,26 @@ module.exports = {
                 docsLink("Rust", "apis-tools/community-clients/rust/"),
                 docsLink("Spring", "apis-tools/community-clients/spring/"),
                 docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
+                {
+                  "CLI client": [
+                    docsLink("Quick reference", "apis-tools/cli-client/"),
+                    docsLink(
+                      "Getting started with the CLI client",
+                      "apis-tools/cli-client/cli-get-started/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Go client": [
+                    docsLink("Quick reference", "apis-tools/go-client/"),
+                    docsLink(
+                      "Getting started with the Go client",
+                      "apis-tools/go-client/go-get-started/"
+                    ),
+                    docsLink("Job worker", "apis-tools/go-client/job-worker/"),
+                  ],
+                },
               ],
             },
           ],
@@ -2132,6 +2520,7 @@ module.exports = {
 
   "Self-Managed": [
     docsLink("Camunda 8 Self-Managed", "self-managed/about-self-managed/"),
+
     {
       Setup: [
         docsLink("Overview", "self-managed/setup/overview/"),
@@ -2142,6 +2531,10 @@ module.exports = {
           Deploy: [
             {
               Local: [
+                docsLink(
+                  "Camunda 8 Run",
+                  "self-managed/setup/deploy/local/c8run/"
+                ),
                 docsLink(
                   "Local Kubernetes cluster",
                   "self-managed/setup/deploy/local/local-kubernetes-cluster/"
@@ -2171,7 +2564,7 @@ module.exports = {
                       "self-managed/setup/deploy/amazon/amazon-eks/eks-helm/"
                     ),
                     docsLink(
-                      "Dual-region setup",
+                      "Dual-region setup (EKS)",
                       "self-managed/setup/deploy/amazon/amazon-eks/dual-region/"
                     ),
                     docsLink(
@@ -2243,11 +2636,11 @@ module.exports = {
               "self-managed/setup/guides/using-existing-elasticsearch/"
             ),
             docsLink(
-              "Using AWS managed OpenSearch",
+              "Using Amazon OpenSearch Service",
               "self-managed/setup/guides/using-existing-opensearch/"
             ),
             docsLink(
-              "Configure DB client custom headers",
+              "Configure custom headers",
               "self-managed/setup/guides/configure-db-custom-headers/"
             ),
             docsLink(
@@ -2295,18 +2688,6 @@ module.exports = {
               "Update 8.2 to 8.3",
               "self-managed/operational-guides/update-guide/820-to-830/"
             ),
-            docsLink(
-              "Update 8.1 to 8.2",
-              "self-managed/operational-guides/update-guide/810-to-820/"
-            ),
-            docsLink(
-              "Update 8.0 to 8.1",
-              "self-managed/operational-guides/update-guide/800-to-810/"
-            ),
-            docsLink(
-              "Update 1.3 to 8.0",
-              "self-managed/operational-guides/update-guide/130-to-800/"
-            ),
 
             {
               Elasticsearch: [
@@ -2332,6 +2713,7 @@ module.exports = {
           "Configure multi-tenancy",
           "self-managed/operational-guides/configure-multi-tenancy/"
         ),
+
         {
           "Backup and restore": [
             docsLink(
@@ -2356,6 +2738,10 @@ module.exports = {
         docsLink(
           "Configure components",
           "self-managed/operational-guides/application-configs/"
+        ),
+        docsLink(
+          "Configure flow control",
+          "self-managed/operational-guides/configure-flow-control/"
         ),
 
         {
@@ -2458,6 +2844,14 @@ module.exports = {
                 docsLink(
                   "Interceptors",
                   "self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
+                ),
+                docsLink(
+                  "Filters",
+                  "self-managed/zeebe-deployment/zeebe-gateway/filters/"
+                ),
+                docsLink(
+                  "Job streaming",
+                  "self-managed/zeebe-deployment/zeebe-gateway/job-streaming/"
                 ),
               ],
             },
@@ -2637,6 +3031,10 @@ module.exports = {
               "self-managed/tasklist-deployment/tasklist-configuration/"
             ),
             docsLink(
+              "Custom styling",
+              "self-managed/tasklist-deployment/tasklist-custom-styling/"
+            ),
+            docsLink(
               "Data retention",
               "self-managed/tasklist-deployment/data-retention/"
             ),
@@ -2715,28 +3113,44 @@ module.exports = {
             "self-managed/optimize-deployment/reimport",
             {
               "Migration & update": [
-                "self-managed/optimize-deployment/migration-update/instructions",
-                "self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5",
-                "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4",
-                "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3",
-                "self-managed/optimize-deployment/migration-update/3.9-to-3.10",
-                "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9",
-                "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1",
-                "self-managed/optimize-deployment/migration-update/3.7-to-3.8",
-                "self-managed/optimize-deployment/migration-update/3.6-to-3.7",
-                "self-managed/optimize-deployment/migration-update/3.5-to-3.6",
-                "self-managed/optimize-deployment/migration-update/3.4-to-3.5",
-                "self-managed/optimize-deployment/migration-update/3.3-to-3.4",
-                "self-managed/optimize-deployment/migration-update/3.2-to-3.3",
-                "self-managed/optimize-deployment/migration-update/3.1-to-3.2",
-                "self-managed/optimize-deployment/migration-update/3.0-to-3.1",
-                "self-managed/optimize-deployment/migration-update/2.7-to-3.0",
-                "self-managed/optimize-deployment/migration-update/2.6-to-2.7",
-                "self-managed/optimize-deployment/migration-update/2.5-to-2.6",
-                "self-managed/optimize-deployment/migration-update/2.4-to-2.5",
-                "self-managed/optimize-deployment/migration-update/2.3-to-2.4",
-                "self-managed/optimize-deployment/migration-update/2.2-to-2.3",
-                "self-managed/optimize-deployment/migration-update/2.1-to-2.2",
+                {
+                  "Camunda 8": [
+                    "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
+                    "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
+                    "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
+                    "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
+                    "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3",
+                    "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10",
+                    "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
+                    "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
+                    "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8",
+                  ],
+                  "Camunda 7": [
+                    "self-managed/optimize-deployment/migration-update/camunda-7/instructions",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.13-to-3.14",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.12-to-3.13",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.11-to-3.12",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.10-to-3.11",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.9-to-3.10",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.9-preview-1-to-3.9",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.8-to-3.9-preview-1",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.7-to-3.8",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.6-to-3.7",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.5-to-3.6",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.4-to-3.5",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.3-to-3.4",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.2-to-3.3",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.1-to-3.2",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/3.0-to-3.1",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/2.7-to-3.0",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/2.6-to-2.7",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/2.5-to-2.6",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/2.4-to-2.5",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/2.3-to-2.4",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/2.2-to-2.3",
+                    "self-managed/optimize-deployment/migration-update/camunda-7/2.1-to-2.2",
+                  ],
+                },
               ],
             },
 
@@ -2932,8 +3346,8 @@ module.exports = {
                       "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/"
                     ),
                     docsLink(
-                      "Login issues",
-                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                      "Missing data",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/"
                     ),
                   ],
                 },

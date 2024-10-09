@@ -61,7 +61,11 @@ function Feature({ imageUrl, url, title, description }) {
         styles.featuresSection
       )}
     >
-      <Link to={useBaseUrl(url)} title={title}>
+      <Link
+        to={useBaseUrl(url)}
+        title={title}
+        className={clsx(styles.featuresLink)}
+      >
         {imgUrl && (
           <div className="text--center">
             <img className={styles.featuresImage} src={imgUrl} alt={title} />
