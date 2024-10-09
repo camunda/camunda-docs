@@ -87,7 +87,7 @@ For the failback procedure, the recreated region must not include any active Cam
 
 ### Prerequisites
 
-The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
+The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region/tree/stable/8.6) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
 
 Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
 
