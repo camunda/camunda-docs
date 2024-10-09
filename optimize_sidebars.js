@@ -899,6 +899,10 @@ module.exports = {
                   "components/connectors/out-of-the-box-connectors/amazon-bedrock/"
                 ),
                 docsLink(
+                  "AWS Comprehend Connector",
+                  "/components/connectors/out-of-the-box-connectors/amazon-comprehend/"
+                ),
+                docsLink(
                   "AWS DynamoDB Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
                 ),

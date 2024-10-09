@@ -7,6 +7,8 @@ description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a p
 <!-- Image source: https://docs.google.com/presentation/d/1w1KUsvx4r6RS7DAozx6X65BtLJcIxU6ve_y3bYFcfYk/edit?usp=sharing -->
 
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 :::caution
 Review our [dual-region concept documentation](./../../../../concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
@@ -21,9 +23,9 @@ This guide requires you to have previously completed or reviewed the steps taken
 ## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create resources within AWS.
-- [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
-- [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [Terraform (1.9.x)](https://developer.hashicorp.com/terraform/downloads)
+- [Helm (3.16+)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
+- [Kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
 
 ## Considerations
 
@@ -79,7 +81,7 @@ Using the same namespace names on both clusters won't work as CoreDNS won't be a
 
 The dot is required to export those variables to your shell and not a spawned subshell.
 
-```shell
+```shell reference
 https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh
 ```
 
@@ -113,9 +115,9 @@ Do not store sensitive information (credentials) in your Terraform files.
 
 This file is using [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allows abstracting resources into reusable components.
 
-The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) is publicly available. It's advisable to review this module before usage.
+The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module/tree/2.5.0/modules/eks-cluster) is publicly available. It's advisable to review this module before usage.
 
-There are various other input options to customize the cluster setup further. See the [module documentation](https://github.com/camunda/camunda-tf-eks-module) for additional details.
+There are various other input options to customize the cluster setup further. See the [module documentation](https://github.com/camunda/camunda-tf-eks-module/tree/2.5.0/modules/eks-cluster) for additional details.
 
 This contains the declaration of the two clusters. One of them has an explicit provider declaration, as otherwise everything is deployed to the default AWS provider, which is limited to a single region.
 
@@ -504,6 +506,267 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
+<Tabs groupId="c8-connectivity">
+  <TabItem value="rest-api" label="REST API">
+
+```shell
+kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080
+```
+
+2. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
+
+```
+curl -L -X GET 'http://localhost:8080/v2/topology' \
+  -H 'Accept: application/json'
+```
+
+3. Make sure that your output contains all eight brokers from the two regions:
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```shell
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 1,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 3,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 4,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 5,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 6,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 7,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    }
+  ],
+  "clusterSize": 8,
+  "partitionsCount": 8,
+  "replicationFactor": 4,
+  "gatewayVersion": "8.6.0"
+}
+```
+
+  </summary>
+</details>
+
+  </TabItem>
+  <TabItem value="zbctl" label="zbctl">
+
 ```shell
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
 ```
@@ -524,52 +787,52 @@ zbctl status --insecure --address localhost:26500
 Cluster size: 8
 Partitions count: 8
 Replication factor: 4
-Gateway version: 8.5.0
+Gateway version: 8.6.0
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 1 : Follower, Healthy
     Partition 6 : Follower, Healthy
     Partition 7 : Follower, Healthy
     Partition 8 : Follower, Healthy
   Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 1 : Follower, Healthy
     Partition 2 : Leader, Healthy
     Partition 7 : Follower, Healthy
     Partition 8 : Follower, Healthy
   Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 1 : Leader, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy
     Partition 8 : Follower, Healthy
   Broker 3 - camunda-zeebe-1.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
     Partition 4 : Leader, Healthy
   Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
     Partition 4 : Follower, Healthy
     Partition 5 : Leader, Healthy
   Broker 5 - camunda-zeebe-2.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 3 : Follower, Healthy
     Partition 4 : Follower, Healthy
     Partition 5 : Follower, Healthy
     Partition 6 : Follower, Healthy
   Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 4 : Follower, Healthy
     Partition 5 : Follower, Healthy
     Partition 6 : Leader, Healthy
     Partition 7 : Leader, Healthy
   Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.5.0
+    Version: 8.6.0
     Partition 5 : Follower, Healthy
     Partition 6 : Follower, Healthy
     Partition 7 : Follower, Healthy
@@ -578,3 +841,6 @@ Brokers:
 
   </summary>
 </details>
+
+  </TabItem>
+</Tabs>
