@@ -149,12 +149,16 @@ Due to a bug in 8.6, use the Spring Zeebe SDK version `8.5.0`.
 
 ### Configure the Zeebe client
 
-Open your `src/main/resources/application.properties` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
+Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
 
 ```
-zeebe.client.broker.grpcAddress=http://127.0.0.1:26500
-zeebe.client.broker.restAddress=http://127.0.0.1:8080
-zeebe.client.security.plaintext=true
+camunda:
+  client:
+    mode: self-managed
+    zeebe:
+      enabled: true
+      grpc-address: http://127.0.0.1:26500
+      rest-address: http://127.0.0.1:8080
 ```
 
 ### Create a worker
