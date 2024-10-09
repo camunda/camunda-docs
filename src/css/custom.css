@@ -185,6 +185,10 @@ svg.implemented:hover [stroke="#333"] {
   margin-left: 0;
   margin-bottom: 1.5rem;
 }
+h3 .badge:nth-of-type(1) {
+  margin-left: 0;
+  margin-bottom: 0rem;
+}
 .theme-doc-version-badge {
   margin-left: 0;
   margin-bottom: 0.5rem !important;
