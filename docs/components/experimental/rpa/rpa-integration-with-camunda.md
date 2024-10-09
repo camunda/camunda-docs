@@ -66,9 +66,9 @@ Refer to the [Camunda library documentation](/components/experimental/rpa/camund
 ### Deployment
 
 Once your script is finalized and tested, take the following steps:
-Select the **Deploy** icon next to the **Run** icon in the footer of Desktop Modeler to deploy this to the RPA runner.
 
-Ensure the script name used during deployment matches the name referenced within your BPMN.
+1. Select the **Deploy** icon next to the **Run** icon in the footer of Desktop Modeler to deploy this to the RPA runner.
+2. Ensure the script name used during deployment matches the name referenced within your BPMN.
 
 ### Using Robot scripts in a process
 
