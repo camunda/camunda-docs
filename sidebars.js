@@ -694,8 +694,6 @@ module.exports = {
         id: "components/experimental/experimental",
       },
       items: [
-        "components/experimental/feature1",
-        "components/experimental/feature2",
         "components/experimental/feature3",
         "components/experimental/feature4",
       ],
