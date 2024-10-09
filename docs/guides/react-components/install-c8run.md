@@ -1,11 +1,9 @@
 ### Prerequisites
 
-:::caution
-Cookie authentication is required to use the Camunda 8 REST API included in Camunda 8 Run. For an example of cookie authentication, see the [Operate API documentation](/apis-tools/operate-api/authentication.md#authentication-via-cookie-self-managed-only).
-:::
-
 - OpenJDK 21+
 - [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
+
+To use Camunda 8 Run with the Camunda REST API, cookie authentication is also required. See the [Operate API documentation](/apis-tools/operate-api/authentication.md#authentication-via-cookie-self-managed-only) for an example of cookie authentication.
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
