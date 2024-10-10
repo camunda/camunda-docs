@@ -47,12 +47,6 @@ module.exports = {
       ],
     },
     {
-      "Working with SAP": [
-        "guides/sap/guide1-sap-e2e",
-        "guides/sap/guide2-sap-e2e",
-      ],
-    },
-    {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
         "guides/migrating-from-camunda-7/conceptual-differences",
