@@ -204,20 +204,20 @@ eksctl create cluster --config-file cluster.yaml
 
 ### (Optional) IAM access management
 
-The access concerning Kubernetes is split into two layers. One being the IAM permissions allowing general Amazon EKS usage, like accessing the Amazon EKS UI, generating the Amazon EKS access via the AWS CLI, etc. The other being the cluster access itself determining which access the user should have within the Kubernetes cluster.
+Kubernetes access is divided into two distinct layers. The **first layer** involves **AWS IAM permissions**, which enable basic Amazon EKS functionalities such as using the Amazon EKS UI and generating Amazon EKS access through the AWS CLI. The **second layer** provides **cluster access**, determining the user's permissions within the Kubernetes cluster.
 
-Therefore, we first have to supply the user with the sufficient IAM permissions and afterward assign the user a role within the Kubernetes cluster.
+As a result, we must initially grant the user adequate AWS IAM permissions and subsequently assign them a specific role within the Kubernetes cluster for proper access management.
 
 <!-- Multiline code not supported in raw HTML. Classes are automatically injected by Docusaurus) -->
 <details>
-  <summary><h4>IAM Permissions</h4></summary>
+  <summary><h4>First Layer: IAM Permissions</h4></summary>
   <p>
 
 A minimum set of permissions is required to gain access to an Amazon EKS cluster. These two permissions allow a user to execute `aws eks update-kubeconfig` to update the local `kubeconfig` with cluster access to the Amazon EKS cluster.
 
 The policy should look as follows and can be restricted further to specific Amazon EKS clusters if required:
 
-```shell
+```json
 cat <<EOF >./policy-eks.json
 {
     "Version": "2012-10-17",
@@ -248,7 +248,7 @@ The created policy `BasicEKSPermissions` has to be assigned to a group, a role, 
 
 <!-- Multiline code not supported in raw HTML. Classes are automatically injected by Docusaurus) -->
 <details>
-  <summary><h4>Cluster Access</h4></summary>
+  <summary><h4>Second Layer: Cluster Access</h4></summary>
   <p>
 
 By default, the user creating the Amazon EKS cluster has admin access. To allow other users to access it, we have to adjust the `aws-auth` configmap. This can either be done manually via `kubectl` or via `eksctl`. In the following sections, we explain how to do this.
