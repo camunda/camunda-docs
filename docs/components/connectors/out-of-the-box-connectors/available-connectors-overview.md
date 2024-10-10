@@ -27,6 +27,8 @@ import TabItem from "@theme/TabItem";
 
 ## Outbound Connectors
 
+- [Amazon Bedrock Connector](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) - Interact with [Amazon Bedrock](https://aws.amazon.com/bedrock/) from your BPMN process to experiment with and evaluate foundation models (FMs) from leading AI companies.
+- [Amazon Comprehend Connector](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md) - Interact with the [Amazon Comprehend service](https://aws.amazon.com/comprehend/) from your BPMN process.
 - [Amazon DynamoDB Connector](/components/connectors/out-of-the-box-connectors/amazon-dynamodb.md) - Interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
 - [Amazon EventBridge Service Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Send events using [Amazon EventBridge service](https://aws.amazon.com/eventbridge/) within your BPMN process.
 - [Amazon SageMaker Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Interact with the [Amazon SageMaker service](https://aws.amazon.com/sagemaker/) from your BPMN process.
