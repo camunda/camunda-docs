@@ -691,14 +691,20 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Experimental",
+      label: "Experimental features",
       link: {
         type: "doc",
         id: "components/experimental/experimental",
       },
       items: [
-        "components/experimental/feature3",
-        "components/experimental/feature4",
+        {
+          type: "category",
+          label: "Robotic Process Automation (RPA)",
+          items: [
+            "components/experimental/rpa/rpa-integration-with-camunda",
+            "components/experimental/rpa/camunda-rpa-framework-library",
+          ],
+        },
       ],
     },
   ],

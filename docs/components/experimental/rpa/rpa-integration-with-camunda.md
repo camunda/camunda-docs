@@ -34,7 +34,7 @@ Desktop Modeler version 5.29.0 or higher is required for this plugin. Until its 
 
 ### Installation
 
-For more information on plugin installation, visit the [plugin installation guide](/components/modeler/desktop-modeler/plugins.md).
+For more information on plugin installation, visit the [plugin installation guide](/components/modeler/desktop-modeler/plugins/plugins.md).
 
 To install the RPA plugin, take the following steps:
 
