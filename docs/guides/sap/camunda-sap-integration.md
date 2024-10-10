@@ -9,7 +9,7 @@ Camunda's SAP integration consists of several features that can be used independ
 - [SAP OData outbound Connector](./odata-connector.md): interact with an S/4HANA or ECC System via OData v2 + v4 APIs, directly from your BPMN model.
 - [SAP RFC outbound Connector](./rfc-connector.md): Query BAPIs and remote-enabled function modules on SAP ECC systems.
 - [SAP BTP integration](./btp-integration.md)
-  - Use Tasklist's forms as Fiori UI
+  - Use Tasklist's forms in the Fiori UI
   - Operate BTP services from BPMN tasks
   - Inbound proxy endpoint to start process instances of BPMN models, including custom variables
 
