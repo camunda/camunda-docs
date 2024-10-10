@@ -1,7 +1,7 @@
 ---
 id: odata-connector
-title: SAP OData outbound Connector
-description: "Set up your Camunda 8 account to get started."
+title: SAP OData Connector
+description: "The SAP OData Connector is a protocol and outbound Connector that runs as a Docker image on the SAP Business Technology Platform (BTP)."
 ---
 
 The SAP OData Connector is a protocol and outbound [Connector](/components/connectors/introduction.md) that runs as a Docker image on the SAP Business Technology Platform (BTP).

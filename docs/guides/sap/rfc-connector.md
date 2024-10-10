@@ -1,42 +1,47 @@
-# SAP RFC protocol outbound connector
+---
+id: rfc-connector
+title: SAP RFC Connector
+description: "The SAP RFC outbound Connector is a Java Spring Boot application that runs on BTP."
+---
 
-The SAP RFC protocol outbound connector (or short: SAP RFC connector) is a Java Spring Boot application that runs on BTP. It connects to Camunda 8 SaaS, and utilizes BTP's Destination  and Connectivity concept to query an SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
+The SAP RFC protocol outbound Connector is a protocol and outbound Connector. This Connector is a Java Spring Boot application that runs on SAP Business Technology Platform (BTP). It connects to Camunda 8 SaaS, and utilizes BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
 
-> [!IMPORTANT]
->
-> The connector is in alpha phase available upon request - please use the https://camunda.com/contact to get in touch.
+:::note Important!
+This Connector is an alpha feature available upon request. Visit [https://camunda.com/contact](https://camunda.com/contact) to contact us.
 
-## For the impatient User
+## Quickstart
 
-Here's a BPMN visualization of the steps necessary to get going with the SAP RFC connector:
+For a standard overview of the steps involved in the SAP RFC Connector, examine the diagram below:
 
-(embed diagram from https://modeler.camunda.io/share/5b375c7c-1ad7-46c3-bc17-36ff3230c166)
+![RFC overview](./img/rfc-overview.png)
 
 ## Prerequisites
 
-The Connector integrates into a standard BTP landscape and doesn't need any proprietary setup.
+This Connector integrates into a standard BTP landscape and doesn't require any proprietary setup.
 
-Yet a minimum set of SAP infrastructure requirements need to be in place for the SAP OData connector docker image to run:
+However, a minimum set of SAP infrastructure requirements must be in place for the SAP OData Connector Docker image to run:
 
-- [Cloud Foundry cli](https://github.com/cloudfoundry/cli) with [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine doing the deployment
-- BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [Space created](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces)
-- minimum [1GB storage quota, 2 GB runtime memory](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-space-quota-plans)
-- [Entitlements](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-entitlements-and-quotas-using-cockpit) for
-
+- [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine doing the deployment.
+- BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [space created](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
+- A minimum of [1GB storage quota, 2 GB runtime memory](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-space-quota-plans).
+- [Entitlements](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-entitlements-and-quotas-using-cockpit) for:
   - [Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all), `lite` plan (to connect to the SAP is on-premises)
   - [Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?service_plan=lite&region=all&commercialModel=btpea), `lite` plan
   - [Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all), `application` plan
-- one or more instance- or subaccount-level destinations, pointing to the SAP systems to communicate with.
-  ![btp-destination-rfc](./images/btp-destination-rfc.png)
-  :warning: check that `Additional Properties` are set on the Destination are aligned with those of your Cloud Connector or remote SAP System
+- One or more instance- or subaccount-level destinations, pointing to the SAP systems to communicate with.
+  ![btp-destination-rfc](./img/btp-destination-rfc.png)
+
+:::warning
+Ensure `Additional Properties` set on the Destination are aligned with those of your Cloud Connector or remote SAP System.
+:::
 
 ## Deployment to BTP
 
-Unlike all other Camunda connectors, the SAP RFC connector needs to be deployed as a Java Application. Sole reason is that it uses SAP's JCo Java library to connect via RFC to the configured SAP System. The JCo library's license prohibits redistribution. So we can't prebuild for you, but you need to build the application yourself. But hang on, we've prepared a long way for you already, so you're already on the finishing straight :)
+Unlike other Camunda Connectors, the SAP RFC Connector must be deployed as a Java application. This is because it uses SAP's JCo Java library to connect via RFC to the configured SAP system. The JCo library's license prohibits redistribution, so we can't prebuild it for you, and you will need to build the application yourself.
 
-### Building the Java Application
+### Building the Java application
 
-In the application folder, navigate to `src/main/resources/application.properties` and put in the credentials for the cluster the SAP RFC connector should connect to.
+In the application folder, navigate to `src/main/resources/application.properties` and put in the credentials for the cluster the SAP RFC Connector should connect to:
 
 ```properties
 zeebe.client.cloud.region=xxx
@@ -62,17 +67,13 @@ modules:
       ZEEBE_CLIENT_CLOUD_REGION: 'zzz'
 ```
 
+Adjust any property describing an infrastructure setting to your requirements. For example, if a pre-existing destination instance is to be used, adjust the respective resource name. Otherwise, the deployment will create any of the services listed in `resources` for you.
 
+Then, build the deployable archive via `$> mbt build`.
 
-Also, adjust any property describing an infrastructure setting to your requirements. For example, if a pre-existing destination instance is to be used, adjust the respective resource name. Otherwise, the deployment will create any of the services listed in `resources` for you.
+### Deploying the Java application
 
-Then, build the deployable archive via
-
-`$> mbt build`
-
-### Deploying the Java Application
-
-Log into the desired BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
+Log in to the desired BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
 
 ```shell
 $> cf login
@@ -80,7 +81,7 @@ API endpoint: https://api.cf. ...
 ...
 ```
 
-Then deploy the SAP RFC connector via the `cf-cli`. Note that this requires t[he "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on. 
+Then, deploy the SAP RFC Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on.
 
 ```shell
 $> cf deploy mta_archives/*.mtar # append the -f flag to shortcircuit ongoing deployments
@@ -91,43 +92,40 @@ Application "sap-rfc-connector" started and available at "some.url.hana.ondemand
 
 ### Deployment in Camunda 8 SaaS
 
-If using the Web Modeler,  [import the SAP RFC connector's Element Template](https://docs.camunda.io/docs/components/connectors/manage-connector-templates/#importing-existing-connector-templates) contained in the repository in `element-templates/sap-rfc-connector.json` for use at design time.
+If using the Web Modeler, [import the SAP RFC Connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) contained in the repository in `element-templates/sap-rfc-connector.json` for design use.
 
+![sap-rfc-connector-task-in-model](./img/sap-rfc-connector-task-in-model.png)
 
+If using Desktop Modeler, [follow the standard importing procedure](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
-![sap-rfc-connector-task-in-model](./images/sap-rfc-connector-task-in-model.png)
+## Working with the SAP RFC Connector in Camunda Modeler
 
-If using the Desktop Modeler, [follow the standard importing procedure](https://docs.camunda.io/docs/components/modeler/desktop-modeler/element-templates/configuring-templates/).
+### Modeling options
 
-## Working with the SAP RFC connector in Camunda Modeler
+Modeling the SAP RFC Connector task is similar to any other Camunda Connector. When the BPMN task is selected, the properties panel in the modeler shows the respective options.
 
-### Modeling Options
-
-The modeling of the "SAP RFC connector" task is similar to any other Camunda connector. When the BPMN task is selected, the properties pane in the modeler shows the respective options. 
-
-![sap-rfc-connector-task-in-model](./images/sap-rfc-connector-element-template.png)
+![sap-rfc-connector-task-in-model](./img/sap-rfc-connector-element-template.png)
 
 First, choose whether to call a `BAPI` or a Function Module (`FM`).
 
-Then, provide the `exporting`-, `importing-` and `tables`-parameter as lists of objects. 
-All object entries in the list look similar to `[{name:"param", type:"type"}]`, pointing to the parameter name of the BAPI/FM and its type. Example: `[{name:"PERSON_IN_CHARGE_FROM", type:"BAPI0012_GEN-PERS_IN_CHRG"}]`.
+Then, provide the `exporting`-, `importing-`, and `tables` parameters as lists of objects.
 
-For those with experience in `ABAP`, the configuration options sound familiar.
+All object entries in the list look similar to `[{name:"param", type:"type"}]`, pointing to the parameter name of the BAPI/FM and its type. For example, `[{name:"PERSON_IN_CHARGE_FROM", type:"BAPI0012_GEN-PERS_IN_CHRG"}]`.
+
+For those with experience in `ABAP`, the configuration options are similar.
 
 ### Sending variables to the RFC target
 
-The `exporting parameter` is what is sent to the RFC target. The object structure generally looks like
+The `exporting parameter` is sent to the RFC target. The object structure generally looks like `[{name: "param", type: "type", value: <value> }]`.
 
-`[{name: "param", type: "type", value: <value> }]`
-
-Example: 
+Example:
 
 ```json
 [
   {
-    name: "CONTROLLINGAREA", 
-    type: "BAPI0012_GEN-CO_AREA", 
-    value: "1000"
+    "name": "CONTROLLINGAREA",
+    "type": "BAPI0012_GEN-CO_AREA",
+    "value": "1000"
   }
 ]
 ```
@@ -141,17 +139,15 @@ This corresponds with the BAPI's/FM's `importing` definition, meaning it imports
 
 ### Receiving variables from the RFC target
 
-`Importing parameter` is what is expected back from the RFC target. They are configured in the same "list of objects" style pattern in the element template as the other parameters and generally look like:
-
-`[{name: "param", type: "type"}]`
+`Importing parameter` is what is expected back from the RFC target. They are configured in the same "list of objects" style pattern in the element template as the other parameters and generally look like `[{name: "param", type: "type"}]`.
 
 Example:
 
 ```json
 [
   {
-    name: "DETAIL_DATA", 
-    type: " BAPI1079_DETAIL"
+    "name": "DETAIL_DATA",
+    "type": " BAPI1079_DETAIL"
   }
 ]
 ```
@@ -163,42 +159,40 @@ This corresponds with the BAPI's/FM's `exporting` definition, meaning it exports
 *"             VALUE(DETAIL_DATA) LIKE  BAPI1079_DETAIL
 ```
 
-
-
 ### Special cases: sending and/or receving a "table" and a "changing" structure
 
 #### tables
 
 The `tables parameter` can be both "exporting" and "importing".
 
-> [!WARNING]
->
-> Sending tables as tabular data to an RFC target is not supported yet.
+:::warning
+Sending tables as tabular data to an RFC target is not yet supported.
+:::
 
 ```json
 {
-  name: "COSTCENTERLIST",
-  type: "BAPI0012_CCLIST"
+  "name": "COSTCENTERLIST",
+  "type": "BAPI0012_CCLIST"
 }
 ```
 
-The above example is an object parameter in the `tables parameter` section that describes an result table to be received back from the RFC call. In conforms with the BAPI `BAPI_COSTCENTER_GETLIST1` parameter definition on the SAP system:
+The above example is an object parameter in the `tables parameter` section that describes a result table to be received back from the RFC call. In conforms with the BAPI `BAPI_COSTCENTER_GETLIST1` parameter definition on the SAP system:
 
 ```ABAP
 *"  TABLES
 *"      COSTCENTERLIST STRUCTURE  BAPI0012_CCLIST
 ```
 
-Same goes for the return structure `BAPIRET2` that denotes the result status of the RFC call. Configured as
+The same is applicable for the return structure `BAPIRET2` that denotes the result status of the RFC call:
 
 ```json
 {
-  name: "BAPIRET2",
-  isReturn: true
+  "name": "BAPIRET2",
+  "isReturn": true
 }
 ```
 
-It aligns with the BAPI definition:
+This aligns with the BAPI definition:
 
 ```ABAP
 *"  TABLES
@@ -208,35 +202,33 @@ It aligns with the BAPI definition:
 
 #### changing
 
-A `changing parameter` is a variable received by an RFC target that is processed, changed and returned back. It is only available for `FM`-type RFC targets in the SAP RFC connector. The overall structure is
-
-`[{name: "param", type: "type", value: <value> }]`
+A `changing parameter` is a variable received by a RFC target that is processed, changed, and returned back. It is only available for `FM`-type RFC targets in the SAP RFC Connector. The overall structure is `[{name: "param", type: "type", value: <value> }]`.
 
 Example:
 
 ```json
 [
   {
-    name: "CV_RESULT", 
-    type: "I", 
-    value: "100"
+    "name": "CV_RESULT",
+    "type": "I",
+    "value": "100"
   }
 ]
 ```
 
-The value `100` is sent to the Fuction Module, might be changed on the SAP system and sent back as `CV_RESULT` again.
+The value `100` is sent to the Fuction Module and sent back as `CV_RESULT`.
 
 ## Query result structure
 
 ### BAPI
 
-The result of a call to a BAPI holds this JSON structure:
+The result of a call to a BAPI holds the following JSON structure:
 
 ```json
-{ 
+{
   tables: [
   	{ ... }
-	], 
+	],
   importing: {
     { ... }
   }
@@ -249,13 +241,13 @@ The result of a call to a BAPI holds this JSON structure:
 
 ### Function Module
 
-The result of a call to a Function Module holds this JSON structure:
+The result of a call to a Function Module holds the following JSON structure:
 
 ```json
-{ 
+{
   tables: [
   	{ ... }
-	], 
+	],
   importing: [
     { ... }
   ],
@@ -273,8 +265,7 @@ The result of a call to a Function Module holds this JSON structure:
 
 ## Error handling
 
-(same as the section in the OData connector, please insert with adjusted wording.
-The error codes can be one of
+The SAP RFC Connector allows handling of query errors directly in the model. This means an RFC error is relayed to the process instance in the reserved variables `bpmnError` and `error` and can be processed accordingly:
 
 ```
 DESTINATION_ERROR,
@@ -283,5 +274,3 @@ REQUEST_SERIALIZATION_ERROR,
 JCO_RUNTIME_ERROR,
 GENERIC_ERROR
 ```
-
-)
