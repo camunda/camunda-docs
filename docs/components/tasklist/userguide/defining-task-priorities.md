@@ -42,7 +42,7 @@ The priority value determines the task's importance relative to other tasks.
 
 After the process is fully defined and all configurations are complete, the process can be deployed and started. The priority values are now associated with each user task within the process.
 
-### 4. Task Priority in Tasklist
+### 4. View Task Priority in Tasklist
 
 Tasklist users can view the tasks assigned to them within their task list. Each task card displays the assigned priority label, ensuring users have a clear understanding of the task's importance and priority.
 
