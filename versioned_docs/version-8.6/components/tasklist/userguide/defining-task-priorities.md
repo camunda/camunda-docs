@@ -12,7 +12,7 @@ You can add prioritization to [User Task elements](/components/modeler/bpmn/user
 - A higher priority value indicates higher importance.
 
 :::note
-Task priority is supported only for User Tasks with the _Zeebe user task_ implementation type.
+Task priority is supported only for user tasks with the _Zeebe user task_ implementation type.
 :::
 
 When displayed in Tasklist, priority values are mapped to the following default labels:
