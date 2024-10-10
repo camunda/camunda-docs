@@ -36,7 +36,7 @@ Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deplo
 
 In this setup, a single Ingress/domain is used to access Camunda 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
-![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 ```yaml
 # Chart values for the Camunda 8 Helm chart in combined Ingress setup.
@@ -121,7 +121,7 @@ Once deployed, you can access the Camunda 8 components on:
 
 In this configuration, every Camunda 8 component is assigned its own Ingress and Domain. The use of a context path is unnecessary because the default base path `/` is used for each Ingress/Domain. In this setup, you only need to provide the Ingress settings and specify the Identity authentication redirect URLs.
 
-![Camunda 8 Self-Managed Architecture Diagram - Separated Ingress](../../../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram - Separated Ingress](../../../assets/camunda-platform-8-self-managed-architecture-diagram-separated-ingress.png)
 
 ```yaml
 # Chart values for the Camunda 8 Helm chart in combined Ingress setup.

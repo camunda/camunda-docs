@@ -82,7 +82,7 @@ For the **failback** procedure, your recreated region cannot contain any active 
 
 :::
 
-The following procedures are building on top of the work done in the [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) about deploying Camunda 8 to two Kubernetes clusters in different regions. We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them to your setup.
+The following procedures are building on top of the work done in the [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) about deploying Camunda 8 to two Kubernetes clusters in different regions. We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region/tree/stable/8.5) repository and previously completed changes in the `camunda-values.yml` to adjust them to your setup.
 
 Ensure you have followed [deploy Camunda 8 to the clusters](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) to have Camunda 8 installed and configured for a dual-region setup.
 
@@ -149,6 +149,8 @@ One of the regions is lost, meaning Zeebe:
 
 For the failover procedure, ensure the lost region does not accidentally reconnect. You should be sure it is lost, and if so, look into measures to prevent it from reconnecting. For example, by utilizing the suggested solution below to isolate your active environment.
 
+It's crucial to ensure the isolation of the environments because, during the operational procedure, we will have duplicate Zeebe broker IDs, which would collide if not correctly isolated and if the other region came accidentally on again.
+
 #### How to get there
 
 Depending on your architecture, possible approaches are:
@@ -183,9 +185,9 @@ The newly deployed Zeebe brokers will be running in the failover mode. This will
 
 #### How to get there
 
-In the case **Region 1** was lost: in the previously cloned repository [c8-multi-region](https://github.com/camunda/c8-multi-region), navigate to the folder [aws/dual-region/kubernetes/region0](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/region0/). This contains the example Helm values yaml `camunda-values-failover.yml` containing the required overlay for the **failover** mode.
+In the case **Region 1** was lost: in the previously cloned repository [c8-multi-region](https://github.com/camunda/c8-multi-region/tree/stable/8.5), navigate to the folder [aws/dual-region/kubernetes/region0](https://github.com/camunda/c8-multi-region/tree/stable/8.5/aws/dual-region/kubernetes/region0/). This contains the example Helm values yaml `camunda-values-failover.yml` containing the required overlay for the **failover** mode.
 
-In the case when your **Region 0** was lost, instead go to the folder [aws/dual-region/kubernetes/region1](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/region1/) for the `camunda-values-failover.yml` file.
+In the case when your **Region 0** was lost, instead go to the folder [aws/dual-region/kubernetes/region1](https://github.com/camunda/c8-multi-region/tree/stable/8.5/aws/dual-region/kubernetes/region1/) for the `camunda-values-failover.yml` file.
 
 The chosen `camunda-values-failover.yml` requires adjustments before installing the Helm chart and the same has to be done for the base `camunda-values.yml` in `aws/dual-region/kubernetes`.
 
@@ -193,7 +195,7 @@ The chosen `camunda-values-failover.yml` requires adjustments before installing 
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the previously mentioned Helm values files. It will use the exported environment variables of the environment prerequisites for namespaces and regions. Additionally, you have to pass in whether your region 0 or 1 was lost.
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/stable/8.5/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the previously mentioned Helm values files. It will use the exported environment variables of the environment prerequisites for namespaces and regions. Additionally, you have to pass in whether your region 0 or 1 was lost.
 
 ```bash
 ./generate_zeebe_helm_values.sh failover
@@ -585,7 +587,7 @@ kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deplo
 kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-tasklist --replicas 0
 ```
 
-2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl:
+2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api):
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -870,7 +872,7 @@ Your `camunda-values-failover.yml` and base `camunda-values.yml` require adjustm
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values again. You only have to copy and replace them within the previously mentioned Helm values files. It will use the exported environment variables of the environment prerequisites for namespaces and regions.
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/stable/8.5/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values again. You only have to copy and replace them within the previously mentioned Helm values files. It will use the exported environment variables of the environment prerequisites for namespaces and regions.
 
 ```bash
 ./generate_zeebe_helm_values.sh failback
