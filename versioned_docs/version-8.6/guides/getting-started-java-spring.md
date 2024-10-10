@@ -6,7 +6,7 @@ description: "Use Spring Boot and the Spring Zeebe SDK to interact with your loc
 keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 ---
 
-import Install from './react-components/install-c8run.md'
+import Install from './react-components/\_install-c8run.md'
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span><br /><br />
