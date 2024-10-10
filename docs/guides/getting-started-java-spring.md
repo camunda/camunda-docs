@@ -117,7 +117,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 1. Copy the following code snippet into the `pom.xml` file of your Spring project, below properties and above dependencies:
 
-```
+```xml
 <repositories>
    <repository>
       <releases>
@@ -135,7 +135,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
 
-```
+```xml
 <dependency>
    <groupId>io.camunda</groupId>
    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
@@ -147,7 +147,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
 
-```
+```yaml
 camunda:
   client:
     mode: self-managed

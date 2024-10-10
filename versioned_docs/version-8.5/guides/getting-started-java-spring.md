@@ -120,7 +120,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 1. Copy the following code snippet into the `pom.xml` file of your Spring project, below properties and above dependencies:
 
-```
+```xml
 <repositories>
    <repository>
       <releases>
@@ -138,7 +138,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
 
-```
+```xml
 <dependency>
    <groupId>io.camunda</groupId>
    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
