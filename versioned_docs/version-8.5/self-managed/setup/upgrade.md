@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the **next major version**.
+When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the next **major** version of the chart.
 :::
 
 Upgrading between minor versions of the Camunda Helm chart may require [configuration changes](#update-your-configuration). To upgrade between patch versions or when no configuration changes are required, see the [`helm upgrade`](#identity-disabled) instructions.
