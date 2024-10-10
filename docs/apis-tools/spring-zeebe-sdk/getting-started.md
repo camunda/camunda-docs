@@ -134,6 +134,7 @@ camunda:
       rest-address: http://localhost:8080
       prefer-rest-over-grpc: false
       audience: zeebe-api
+      scope: zeebe-scope
 ```
 
 ## Obtain the Zeebe client
