@@ -26,15 +26,18 @@ See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for spec
 
 ### Deployment API
 
-You can define a `maxMessageSize` in the [Gateway](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration. The default value is 4MB.
-Accordingly, the [Deploy resources](./specifications/deploy-resources.api.mdx) REST endpoint by default allows uploading single files and overall data of up to 4MB. You can adjust this configuration via the following properties:
+You can change the `maxMessageSize` default value of 4MB in the [Gateway](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
+
+If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/deploy-resources.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
+
+You can adjust this configuration via the following properties:
 
 ```properties
 spring.servlet.multipart.max-file-size=4MB
 spring.servlet.multipart.max-request-size=4MB
 ```
 
-If you define a different `maxMessageSize`, we recommend configuring the values of the above properties accordingly.
+For example, if you increase the `maxMessageSize` to 10MB, increase these property values to 10MB as well.
 
 ### Query API
 
