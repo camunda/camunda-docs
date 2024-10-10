@@ -4,7 +4,7 @@ title: SAP RFC Connector
 description: "The SAP RFC outbound Connector is a Java Spring Boot application that runs on BTP."
 ---
 
-The SAP RFC protocol outbound Connector is a protocol and outbound Connector. This Connector is a Java Spring Boot application that runs on SAP Business Technology Platform (BTP). It connects to Camunda 8 SaaS, and utilizes BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
+The SAP RFC Connector is a protocol and outbound Connector. This Connector is a Java Spring Boot application that runs on SAP Business Technology Platform (BTP). It connects to Camunda 8 SaaS, and utilizes BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
 
 :::note Important!
 This Connector is an alpha feature available upon request. Visit [https://camunda.com/contact](https://camunda.com/contact) to contact us.
