@@ -192,7 +192,8 @@ h3 .badge:nth-of-type(1) {
   margin-left: 0;
   margin-bottom: 0.5rem !important;
 }
-.openapi__method-endpoint .badge {
+.openapi__method-endpoint .badge,
+.openapi__method-endpoint .badge:nth-of-type(1) {
   margin-bottom: 0;
 }
 .badge--beginner {
@@ -223,6 +224,7 @@ h3 .badge:nth-of-type(1) {
 .badge--long {
   background-color: #0075ff;
   color: #ffffff;
+  vertical-align: middle;
 }
 
 .badge--platform {
@@ -563,6 +565,9 @@ h2.openapi-tabs__response-header {
 .openapi-tabs__mime-container {
   padding-top: 0;
 }
+.openapi-tabs__response-list-container.tabs {
+  border-bottom: 0;
+}
 /* Second level page heading modifications for home page */
 .hero__title {
   border-bottom: 0;
@@ -591,6 +596,7 @@ h3 .badge--long {
   margin-bottom: 0;
   font-size: 12px;
   margin-left: 5px;
+  vertical-align: middle;
 }
 /* Third level page heading */
 h3 .badge--long:nth-of-type(1) {
