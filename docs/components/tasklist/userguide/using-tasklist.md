@@ -68,6 +68,8 @@ From the task detail page you can switch to the **Process** tab. This provides a
 
 :::note
 The diagram indicates the version of the process instance in which the task was initiated.
+
+This feature is available for diagrams deployed on version 8.6 or higher.
 :::
 
 #### Resource-based access (RBA)
