@@ -42,7 +42,7 @@ This command sets a variable named `customerName` with the value `John Doe` in t
 
 ## Example usage
 
-The following example demonstrates a script that solves the first challenge at [rpachallenge.com](rpachallenge.com) and returns the result message to Camunda:
+The following example demonstrates a script that solves the first challenge at [rpachallenge.com](https://rpachallenge.com/) and returns the result message to Camunda:
 
 ```powershell
 *** Settings ***
