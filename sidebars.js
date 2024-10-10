@@ -689,6 +689,21 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Experimental features",
+      link: {
+        type: "doc",
+        id: "components/experimental/experimental",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Robotic Process Automation (RPA)",
+          items: [],
+        },
+      ],
+    },
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",
