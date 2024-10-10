@@ -143,6 +143,18 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Variable",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/query-process-and-local-variables-alpha",
+        label: "Query process and local variables (alpha)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "Clock",
     items: [
       {
@@ -168,6 +180,18 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/search-process-definitions-alpha",
         label: "Search process definitions (alpha)",
         className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-process-definition-by-key-alpha",
+        label: "Get process definition by key (alpha)",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-process-definition-xml-alpha",
+        label: "Get process definition XML (alpha)",
+        className: "api-method get",
       },
     ],
   },
