@@ -547,6 +547,9 @@ h2.openapi__method-endpoint-path {
 h2.openapi-tabs__response-header {
   border-bottom: none;
 }
+h2#request {
+  border-bottom: none;
+}
 .anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#request {
   border-bottom: none;
   padding-top: 10px;
