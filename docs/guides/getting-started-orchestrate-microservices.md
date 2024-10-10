@@ -13,9 +13,9 @@ import clsx from "clsx";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CreateCluster from '../components/react-components/create-cluster.md';
-import SmPrereqs from './react-components/sm-prerequisites.md'
-import SaasPrereqs from './react-components/saas-prerequisites.md'
-import Install from './react-components/install-plain-java.md'
+import SmPrereqs from './react-components/\_sm-prerequisites.md'
+import SaasPrereqs from './react-components/\_saas-prerequisites.md'
+import Install from './react-components/\_install-plain-java.md'
 
 Using Camunda 8, you can orchestrate the microservices necessary to achieve your end-to-end automated business process. Whether you have existing microservices or are looking to build out your microservices, this guide will help you understand how you can start your microservice orchestration journey with Camunda 8.
 
