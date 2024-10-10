@@ -1,12 +1,15 @@
-# SAP BTP integration
+---
+id: btp-integration
+title: SAP BTP integration
+description: "Learn about the Camunda SAP Business Technology Platform (BTP) integration, an artifact run on BTP."
+---
 
-The Camunda SAP BTP integration is an artifact run on BTP. It connects to Camunda 8 SaaS, and 
+The Camunda SAP Business Technology Platform (BTP) integration is an artifact run on BTP. This connects to Camunda 8 SaaS to achieve the following:
 
-- provides a generic Fiori app for starting BPMN processes and displaying Camunda Forms in the Fiori design language
-- exposes selected BTP services to BPMN tasks - and vice versa
-- provides a generic endpoint to start BPMN processes with
+- Provides a generic Fiori app for starting BPMN processes and displaying Camunda Forms in the Fiori design language.
+- Exposes selected BTP services to BPMN tasks and vice versa.
+- Provides a generic endpoint to start BPMN processes with.
 
-> [!IMPORTANT]
->
-> The BTP integration is in alpha phase available upon request - please use the https://camunda.com/contact to get in touch.
-
+:::note Important!
+The BTP integration is an alpha feature available upon request. Visit [https://camunda.com/contact](https://camunda.com/contact) to contact us.
+:::
