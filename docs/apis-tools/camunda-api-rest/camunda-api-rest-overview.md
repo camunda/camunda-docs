@@ -24,6 +24,18 @@ For Self-Managed, the host and port depend on your configuration. The context pa
 
 See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Camunda 8 REST API.
 
+## Deployment API
+
+You can define a `maxMessageSize` in the [Gateway](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration. The default value is 4MB.
+Accordingly, the [Deploy resources](./specifications/deploy-resources.api.mdx) REST endpoint by default allows uploading single files and overall data of up to 4MB. You can adjust this configuration via the following properties:
+
+```properties
+spring.servlet.multipart.max-file-size=4MB
+spring.servlet.multipart.max-request-size=4MB
+```
+
+If you define a different `maxMessageSize`, we recommend configuring the values of the above properties accordingly.
+
 ### Query API
 
 :::warning
