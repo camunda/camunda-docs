@@ -1,0 +1,165 @@
+diff --git a/backend/src/main/resources/localization/en.json b/backend/src/main/resources/localization/en.json
+index b5df6a771..4f81c6834 100644
+--- a/backend/src/main/resources/localization/en.json
++++ b/backend/src/main/resources/localization/en.json
+@@ -3,6 +3,7 @@
+   "navigation": {
+     "homepage": "Home",
+     "analysis": "Analysis",
++    "processes": "Processes",
+     "events": "Event Based Processes",
+     "telemetry": "Telemetry Settings",
+     "logout": "Logout",
+@@ -160,6 +161,45 @@
+     "empty": "There are no items created yet",
+     "welcome": "Welcome"
+   },
++  "processes": {
++    "title": "Processes",
++    "empty": "There are no processes imported yet",
++    "owner": "Owner",
++    "timeGoal": "Goal: Time",
++    "displayData": "Goals display data from instances",
++    "endedThisMonth": "ended in the last 30 days",
++    "setGoal": "Set Goal",
++    "editGoal": "Edit Goal",
++    "goals": "Goals",
++    "goalRemoved": "Goals removed from '{processName}' process",
++    "addOwner": "Add Owner",
++    "editOwner": "Edit Owner",
++    "addProcessOwner": "Add Process Owner",
++    "ownerInfo": "The process owner is responsible for business metrics for the process. You can use the process owner to sort and filter processes.",
++    "ownerRemoveWarning": "The '{owner}' Owner will be removed from the process",
++    "noData": "No Data",
++    "timeGoals": {
++      "label": "Time goals",
++      "configure": "Configure duration goals",
++      "setDuration": "Set a duration goal by setting a percentage of process instances that should take less than a certain duration to complete.",
++      "availableGoals": "You can use duration goals to track how many instances are fully automated (target duration) or meet your service level agreements (SLAs).",
++      "targetDuration": "Target",
++      "slaDuration": "SLA",
++      "instancesTake": "of process instances take",
++      "instancesTook": "of instances took less than",
++      "lessThan": "less than",
++      "displayGoal": "Display goal",
++      "durationDistribution": "Duration distribution",
++      "durationDistributionInfo": "This chart shows durations for process instances ending in the current month.",
++      "saveGoals": "Save Goals",
++      "updateGoals": "Update Goals",
++      "resultPreview": "Result Preview:",
++      "instancesThisMonth": "Instances ended in the last 30 days",
++      "noInstances": "No instances occured in the time range.",
++      "setGoals": "Set goals for expected durations.",
++      "resultInfo": "This preview displays each goal's status based on its current configuration."
++    }
++  },
+   "events": {
+     "new": "New Process",
+     "autogenerate": "Autogenerate",
+@@ -313,6 +353,7 @@
+       "userTask": "User Task",
+       "count": "Count",
+       "duration": "Duration",
++      "percentage": "Percentage",
+       "multi": "Count and Duration",
+       "evaluationCount": "Evaluation Count",
+       "variable": "Variable",
+@@ -398,7 +439,15 @@
+       "process": "Process Definition",
+       "process-plural": "Process Definitions",
+       "decision": "Decision Definition",
+-      "decision-plural": "Decision Definitions"
++      "decision-plural": "Decision Definitions",
++      "variables": {
++        "rename": "Rename Variables",
++        "variableName": "Variable Name",
++        "type": "Type",
++        "newName": "New Name",
++        "renameInfo": "You may provide a UI-only alias to override each over your variable names.",
++        "renameWarning": "Warning! Changes will update across all reports using this process definition. This can affect other users."
++      }
+     },
+     "noDefinitionMessage": {
+       "process": "Select a <b>Process Definition</b>.",
+@@ -474,21 +523,23 @@
+       },
+       "aggregation": {
+         "userTaskLegend": "User Task Duration",
+-        "durationLegend": "Duration aggregations",
++        "durationLegend": "Basic aggregations",
+         "variableLegend": "Variable aggregations",
++        "percentileLegend": "Percentile aggregations",
+         "sum": "Sum",
+         "min": "Minimum",
+         "avg": "Average",
+         "median": "Median",
+         "max": "Maximum",
+-        "multiProcessWarning": "Reports that are grouped by process cannot display median aggregations."
++        "p50": "P50 (median)"
+       },
+       "aggregationShort": {
+         "sum": "Sum",
+         "min": "Min",
+         "avg": "Avg",
+         "median": "Med",
+-        "max": "Max"
++        "max": "Max",
++        "percentile": "P{value}"
+       },
+       "userTaskDuration": {
+         "idle": "Idle",
+@@ -557,7 +608,8 @@
+     "runningEndedFlowNodeWarning": "Only completed flow nodes are considered when grouping by End Date. Therefore, adding 'running' flow node status filter will show no results",
+     "missingVariable": "Missing variable",
+     "nonExistingVariable": "Variable does not exist",
+-    "nonExistingFlowNode": "Flow Node(s) does not exist"
++    "nonExistingFlowNode": "Flow Node(s) does not exist",
++    "percentageOfInstances": "% of total instances that match the filter"
+   },
+   "dashboard": {
+     "label": "Dashboard",
+@@ -836,6 +888,7 @@
+     "for": "for",
+     "download": "Download",
+     "view": "View",
++    "viewDocumentation": "View documentation",
+     "process": {
+       "label": "Process",
+       "label-plural": "Processes"
+@@ -979,6 +1032,7 @@
+           "completedOrCanceledFlowNodesOnly": "Completed or Canceled",
+           "includesOpenIncident": "Open",
+           "includesResolvedIncident": "Resolved",
++          "includesClosedIncident": "Closed",
+           "doesNotIncludeIncident": "No"
+         },
+         "modalLabels": {
+@@ -994,6 +1048,7 @@
+           "completedOrCanceledFlowNodesOnly": "Completed or Canceled",
+           "includesOpenIncident": "Open Incidents",
+           "includesResolvedIncident": "Resolved Incidents",
++          "includesClosedIncident": "Closed Incidents",
+           "doesNotIncludeIncident": "Without Incidents"
+         }
+       },
+@@ -1209,7 +1264,9 @@
+         "process": "Process",
+         "processEvents": "process events",
+         "ingestedEvents": "Events",
+-        "items": "Items"
++        "items": "Items",
++        "goals": "Goals",
++        "owner": "Owner"
+       },
+       "permanent": "The '{name}' {type} will be permanently deleted.",
+       "noUndo": "Warning: This action cannot be undone.",
+@@ -1244,7 +1301,8 @@
+     },
+     "csvLimit": {
+       "Warning": "Warning: CSV will not contain all requested data",
+-      "info": "This download will contain the first {exportLimit} of {totalCount} records. Filter your data, use the data export API, or ask your administrator to increase the system limit to resolve this issue."
++      "info": "This download will contain the first {exportLimit} of {totalCount} records. Filter your data, or ask your administrator to increase the system limit to resolve this issue.",
++      "exportApi": "You can also use the <a href='{docsLink}'>data export API</a> to export larger amounts of data from Optimize."
+     },
+     "unit": {
+       "automatic": "automatic",

@@ -23,11 +23,15 @@ The `start position` starts at the index `1`. The last position is `-1`.
 ```feel
 substring("foobar", 3)
 // "obar"
+
+substring("foobar", -2)
+// "ar"
 ```
 
 ## substring(string, start position, length)
 
-Returns a substring of the given value starting at `start position`.
+Returns a substring of the given value, starting at `start position` with the given `length`. If `length` is greater than
+the remaining characters of the value, it returns all characters from `start position` until the end.
 
 **Function signature**
 
@@ -42,6 +46,12 @@ The `start position` starts at the index `1`. The last position is `-1`.
 ```feel
 substring("foobar", 3, 3)
 // "oba"
+
+substring("foobar", -3, 2)
+// "ba"
+
+substring("foobar", 3, 10)
+// "obar"
 ```
 
 ## string length(string)

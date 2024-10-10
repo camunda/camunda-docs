@@ -28,7 +28,7 @@ For example: Courses selected include `steak`, `pasta` and `salad`.
 
 ![An inclusive gateway has decided to take the steps to cook pasta, stir-fry steak, and prepare salad.](assets/inclusive-gateway-2.png)
 
-If no condition is fulfilled, it takes the **default flow** of the gateway. Note that the default flow is not expected to have a condition, and is therefore not evaluated. If no condition is fulfilled and the gateway has no default flow, an incident is created.
+If no condition is fulfilled, it takes the **default flow** of the gateway. Note that the default flow is not expected to have a condition, and is therefore not evaluated. If no condition is fulfilled and the gateway has no default flow, an [incident](/components/concepts/incidents.md) is created.
 
 For example: No courses selected then the default flow is taken.
 

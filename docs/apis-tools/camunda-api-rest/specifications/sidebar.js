@@ -73,6 +73,18 @@ module.exports = [
         label: "Resolve incident",
         className: "api-method post",
       },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/query-incidents-alpha",
+        label: "Query incidents (alpha)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-incident-by-key-alpha",
+        label: "Get incident by key (alpha)",
+        className: "api-method get",
+      },
     ],
   },
   {
@@ -93,6 +105,12 @@ module.exports = [
       },
       {
         type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/return-user-task-by-a-user-task-key",
+        label: "Return user task by a user task key.",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/update-user-task",
         label: "Update user task",
         className: "api-method patch",
@@ -105,8 +123,50 @@ module.exports = [
       },
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-user-tasks-experimental",
-        label: "Query user tasks (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-user-tasks-alpha",
+        label: "Query user tasks (alpha)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "User Task",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/return-user-task-form",
+        label: "Return user task form",
+        className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Clock",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/pin-internal-clock-alpha",
+        label: "Pin internal clock (alpha)",
+        className: "api-method put",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/reset-internal-clock-alpha",
+        label: "Reset internal clock (alpha)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Process definition",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/search-process-definitions-alpha",
+        label: "Search process definitions (alpha)",
         className: "api-method post",
       },
     ],
@@ -117,9 +177,63 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-process-instances-experimental",
-        label: "Query process instances (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/create-process-instance",
+        label: "Create process instance",
         className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-process-instance-alpha",
+        label: "Get process instance (alpha)",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/query-process-instances-alpha",
+        label: "Query process instances (alpha)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/cancel-process-instance",
+        label: "Cancel process instance",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/migrate-process-instance",
+        label: "Migrate process instance",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/modify-process-instance",
+        label: "Modify process instance",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Flow node Instance",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/query-flow-node-instances-alpha",
+        label: "Query flow node instances (alpha)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Flow node instance",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-flow-node-instance-by-key-alpha",
+        label: "Get flow node instance by key (alpha)",
+        className: "api-method get",
       },
     ],
   },
@@ -129,8 +243,26 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-decision-definitions-experimental",
-        label: "Query decision definitions (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-decision-definitions-alpha",
+        label: "Query decision definitions (alpha)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-decision-definition-by-key-alpha",
+        label: "Get decision definition by key (alpha)",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-alpha",
+        label: "Get decision definition XML (alpha)",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/evaluate-decision",
+        label: "Evaluate decision",
         className: "api-method post",
       },
     ],
@@ -141,9 +273,51 @@ module.exports = [
     items: [
       {
         type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/query-decision-requirements-experimental",
-        label: "Query decision requirements (experimental)",
+        id: "apis-tools/camunda-api-rest/specifications/query-decision-requirements-alpha",
+        label: "Query decision requirements (alpha)",
         className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-decision-requirements-by-key-alpha",
+        label: "Get decision requirements by key (alpha)",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-decision-requirements-xml-alpha",
+        label: "Get decision requirements XML (alpha).",
+        className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Decision instance",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/query-decision-instances-alpha",
+        label: "Query decision instances (alpha)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-decision-instance-by-key-alpha",
+        label: "Get decision instance by key (alpha)",
+        className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Authorization",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/patch-authorization",
+        label: "Patch authorization",
+        className: "api-method patch",
       },
     ],
   },
@@ -157,6 +331,12 @@ module.exports = [
         label: "Create a user",
         className: "api-method post",
       },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/find-all-users",
+        label: "Query users (alpha)",
+        className: "api-method post",
+      },
     ],
   },
   {
@@ -165,8 +345,86 @@ module.exports = [
     items: [
       {
         type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/publish-a-message",
+        label: "Publish a message",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/correlate-a-message",
         label: "Correlate a message",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Documents",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/upload-document-alpha",
+        label: "Upload document (alpha)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/download-document-alpha",
+        label: "Download document (alpha)",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-document-alpha",
+        label: "Delete document (alpha)",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-document-link-alpha",
+        label: "Create document link (alpha)",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Resource",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/deploy-resources",
+        label: "Deploy resources",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-resource",
+        label: "Delete resource",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Element instance",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/update-element-instance-variables",
+        label: "Update element instance variables",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Signal",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/broadcast-signal",
+        label: "Broadcast signal",
         className: "api-method post",
       },
     ],

@@ -1,7 +1,7 @@
 ---
 id: about-modeler
 title: About Modeler
-description: "Any executable process needs a BPMN diagram designed and configured beforehand. Camunda offers Web Modeler and Desktop Modeler to design and implement these."
+description: "Camunda offers Web Modeler and Desktop Modeler to design and implement any executable process using BPMN."
 keywords: ["process mapping tool"]
 ---
 

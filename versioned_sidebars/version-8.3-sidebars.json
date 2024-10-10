@@ -62,6 +62,7 @@
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
