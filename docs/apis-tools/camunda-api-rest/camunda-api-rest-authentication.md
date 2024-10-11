@@ -142,7 +142,14 @@ Access tokens expire according to the `expires_in` property of a successful auth
 ## Authentication via cookie (Self-Managed only)
 
 :::note
-When authenticating via cookie, note that Cross-Site Request Forgery (CSRF) protection must be disabled to allow this method of authentication. In a Camunda Self-Managed cluster, set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`.
+When authenticating via cookie, note that Cross-Site Request Forgery (CSRF) protection must be disabled to allow this method of authentication. In a Camunda Self-Managed cluster, set the following configuration properties:
+
+```sh
+CAMUNDA_REST_QUERY_ENABLED=true
+CAMUNDA_OPERATE_CSRFPREVENTIONENABLED=false
+CAMUNDA_TASKLIST_CSRFPREVENTIONENABLED=false
+```
+
 :::
 
 Another way to access the Camunda 8 REST API in a Self-Managed cluster is to send cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the following steps:
