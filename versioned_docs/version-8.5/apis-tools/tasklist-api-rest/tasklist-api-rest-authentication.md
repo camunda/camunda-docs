@@ -8,9 +8,9 @@ description: "Describes authentication options that can be used to access Taskli
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Tasklist API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and pass it in each request.
+All Tasklist API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-## Generating a token
+## Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -21,7 +21,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
 
 1. [Create client credentials](/guides/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
 2. Add permissions to this client for **Tasklist**.
-3. Upon creating the client, capture the following values required to generate a token:
+3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
    | ------------------------ | -------------------------------- | -------------------------------------------- |
@@ -30,7 +30,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
    | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
    | Tasklist REST Address    | `CAMUNDA_TASKLIST_BASE_URL`      | -                                            |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::tip
+   :::caution
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
 4. Execute an authentication request to the token issuer:
@@ -42,7 +42,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
        --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
        --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -52,7 +52,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
@@ -69,7 +69,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
    --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -79,7 +79,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 See the [Tasklist Configuration - Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md#identity) documentation for more information about this authentication method.
 
@@ -87,11 +87,11 @@ See the [Tasklist Configuration - Authentication](/self-managed/tasklist-deploym
 
 </Tabs>
 
-## Using a token
+## Use a token
 
-Include the captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
-For example, to call the Tasklist API's ["Search tasks" endpoint](./specifications/search-tasks.api.mdx), send the following request against the target Tasklist environment:
+For example, to send a request to the Tasklist API's ["Search tasks"](./specifications/search-tasks.api.mdx) endpoint:
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -124,7 +124,7 @@ curl --request POST ${CAMUNDA_TASKLIST_BASE_URL}/v1/tasks/search \
    --data-raw '{}'
 ```
 
-A successful response would include [matching tasks](./specifications/search-tasks.api.mdx). For example:
+A successful response includes [matching tasks](./specifications/search-tasks.api.mdx). For example:
 
 ```json
 [

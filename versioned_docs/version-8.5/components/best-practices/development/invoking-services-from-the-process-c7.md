@@ -28,7 +28,7 @@ In most cases, you should use a pull approach, where external worker threads que
 
 There are two patterns available to glue your code to a process model:
 
-- **Push:** The process engine actively issues a **service call** (or executes a **script**) via the mechanisms described below. The workflow engie pushes the work.
+- **Push:** The process engine actively issues a **service call** (or executes a **script**) via the mechanisms described below. The workflow engine pushes the work.
 - **Pull:** External worker threads query the process engine API for **external tasks**, and they pull the work. Then, they do the actual work and notify the process engine of works completion.
 
 ### External tasks
@@ -47,11 +47,11 @@ Using external tasks comes with the following advantages:
 
 - **Temporal decoupling**: The pattern can replace a message queue between the service task (the "consumer") and the service implementation (the "provider"). It can eliminate the need for operating a dedicated message bus while keeping the decoupling that messaging would provide.
 
-- **Polyglott architectures**: The pattern can be used to integrate .NET based services, for example, when it might not be that easy to write Java delegates to call them. Service implementations are possible in any language that can be used to interact with a REST API.
+- **Poyglot architectures**: The pattern can be used to integrate .NET based services, for example, when it might not be that easy to write Java delegates to call them. Service implementations are possible in any language that can be used to interact with a REST API.
 
 - **Better scaling**: The pattern allows you to start and stop workers as you like, and run as many of them as you need. By doing so, you can scale each service task (or to be precise, each "topic") individually.
 
-- **Connect cloud and on-premise**: The pattern supports you in running Camunda somewhere in the cloud (as our customers often do), because you can still have services on-premise, as they can now query their work via REST over SSL, which is also quite firewall-friendly.
+- **Connect cloud and on-premises**: The pattern supports you in running Camunda somewhere in the cloud (as our customers often do), because you can still have services on-premises, as they can now query their work via REST over SSL, which is also quite firewall-friendly.
 
 - **Avoid timeouts**: The pattern allows you to asynchronously call long-running services, which eventually block for hours (and would therefore cause transaction and connection timeouts when being called synchronously).
 
@@ -121,7 +121,7 @@ One advantage of using Java delegates is that, if you develop in Java, this is a
 
 ### General recommendation
 
-In general, we _recommend to use external tasks_ to apply a general architecture and mindset, that allows to [leverage Camunda 8 easier](/guides/migrating-from-camunda-7/migration-readiness.md#prepare-for-smooth-migrations). This typically outweights the following downsides of external tasks:
+In general, we _recommend to use external tasks_ to apply a general architecture and mindset, that allows to [leverage Camunda 8 easier](/guides/migrating-from-camunda-7/migration-readiness.md#prepare-for-smooth-migrations). This typically outweighs the following downsides of external tasks:
 
 - A slightly increased complexity for Java projects, because they have to handle separate Java clients.
 - A slightly increased overhead compared to Java delegates, as all communication with the engine is remote, even if it runs in the same Java VM.

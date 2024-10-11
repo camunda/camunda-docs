@@ -93,6 +93,7 @@
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/backups"
       ],
       "Console": [

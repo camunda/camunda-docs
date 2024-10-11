@@ -6,20 +6,15 @@ description: "Use Spring Boot and the Spring Zeebe SDK to interact with your loc
 keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 ---
 
-import SmPrereqs from './react-components/sm-prerequisites.md'
-import Install from './react-components/install-plain-java.md'
+import Install from './react-components/install-c8run.md'
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span><br /><br />
 
-:::note
-This tutorial is not intended for production purposes.
-:::
-
 In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
 :::note
-This guide specifically uses Java and Spring because the two, in combination with Camunda 8, is our default technology stack recommendation. Learn more in the [Java greenfield documentation](/components/best-practices/architecture/deciding-about-your-stack.md#the-java-greenfield-stack).
+This guide specifically uses Java and Spring because the two, in combination with Camunda 8, is our [default technology stack recommendation](/components/best-practices/architecture/deciding-about-your-stack.md#the-java-greenfield-stack).
 :::
 
 By the end of this tutorial, you'll be able to use Spring and Java code with Zeebe to:
@@ -36,18 +31,26 @@ For example, in this guide we will outline a BPMN model to receive a payment req
 While stepping through this guide, you can visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code to check your work.
 :::
 
-<SmPrereqs/>
+## Prerequisites
 
-## Step 1: Install Camunda 8 Self-Managed
+Before getting started, ensure you have the following in your local environment:
 
-<Install/>
+- Access to your preferred code editor or IDE
+- [OpenJDK 21+](https://openjdk.org/install/)
+- [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
 
-## Step 2: Create a new Spring Boot project
+:::note
+After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
+
+If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
+:::
+
+## Step 1: Create a new Spring Boot project
 
 Next, create a new Spring Boot project:
 
 1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
-2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.3.0).
+2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.3.3).
 3. Under **Project Metadata**, configure the following:
    1. **Group**: `io.camunda.demo`
    2. **Artifact**: `process_payments`
@@ -60,27 +63,30 @@ Next, create a new Spring Boot project:
 4. Click **Generate**.
 5. Download the project, extract the `.zip` file, and add the contents to your desired location.
 6. Open this project in your preferred code editor.
-7. Run `mvn spring-boot:run` in your terminal to confirm your Spring project builds.
+7. From within the extracted directory, run `mvn spring-boot:run` in your terminal to confirm your Spring project builds.
 8. (Optional) Run `git init` if you'd like to commit milestones along the way, and add a `.gitignore` file containing `target/` to ignore build artifacts.
 
-## Step 3: Create a new BPMN diagram
+## Step 2: Create a new BPMN diagram
 
 Next, we'll create a BPMN diagram to represent the transaction model shown at the beginning of this guide:
 
 1. Open Desktop Modeler.
-2. Click **Create a new diagram** in Camunda 8, and name your diagram `Process payments` with an id of `process-payments`.
-3. Add a start event, and name it `Payment request received`.
-4. Append a task named `Prepare transaction`.
-5. Click the wrench-shaped change type context menu icon to change the type of task to a script task, and configure the following properties:
-   1. **Implementation**: `FEEL expression`
+2. Click **Create a new diagram** in Camunda 8.
+3. In the Properties panel, under the General section:
+   - Name your diagram `Process payments`
+   - Set the ID to `process-payments`
+4. Add a start event, and name it `Payment request received`.
+5. Append a task named `Prepare transaction`.
+6. Click the wrench-shaped change type context menu icon to change the type of task to a script task, and configure the following properties:
+   1. **Implementation**: `FEEL expression` [What is FEEL?](/components/modeler/feel/what-is-feel.md)
    2. **Script/Result variable**: `totalWithTax`
    3. **Script/FEEL expression**: `total * 1.1` (this represents the tax applied to the transaction.)
-6. Append a task named `Charge credit card`.
-7. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Type** to `charge-credit-card`.
-8. Append an end event named `Payment executed`.
-9. Save this BPMN file to your Spring project in `src/main/resources`, and name it `process-payments.bpmn`.
+7. Append a task named `Charge credit card`.
+8. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Type** to `charge-credit-card`.
+9. Append an end event named `Payment executed`.
+10. Save this BPMN file to your Spring project in `src/main/resources`, and name it `process-payments.bpmn`.
 
-## Step 4: Deploy your process
+## Step 3: Deploy your process
 
 To deploy your process, take the following steps:
 
@@ -91,7 +97,7 @@ To deploy your process, take the following steps:
 
 When you open Operate at http://localhost:8080/operate/, you should now note the process deployed to your local Self-Managed setup.
 
-## Step 5: Run your process from Modeler
+## Step 4: Run your process from Modeler
 
 To run your process, take the following steps:
 
@@ -101,7 +107,7 @@ To run your process, take the following steps:
 
 From Operate, you should now notice a process instance running. You'll notice the process instance is waiting at **Charge credit card**, because we'll need to configure a job worker.
 
-## Step 6: Implement a service task
+## Step 5: Implement a service task
 
 To implement a service task, take the following steps:
 
@@ -127,24 +133,28 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 </repositories>
 ```
 
-2. Add the following dependency your `pom.xml` file, as a child of the `<dependencies>` element:
+2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
 
 ```
 <dependency>
    <groupId>io.camunda</groupId>
    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-   <version>8.5.0</version>
+   <version>8.6.0</version>
 </dependency>
 ```
 
 ### Configure the Zeebe client
 
-Open your `src/main/resources/application.properties` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
+Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
 
 ```
-zeebe.client.broker.grpcAddress=http://127.0.0.1:26500
-zeebe.client.broker.restAddress=http://127.0.0.1:8080
-zeebe.client.security.plaintext=true
+camunda:
+  client:
+    mode: self-managed
+    zeebe:
+      enabled: true
+      grpc-address: http://127.0.0.1:26500
+      rest-address: http://127.0.0.1:8080
 ```
 
 ### Create a worker
@@ -185,7 +195,7 @@ To check your work, visit our [sample repository](https://github.com/camunda/cam
 
 In your terminal, run `mvn spring-boot:run`, where you should see the `charging credit card` output. In Operate, refresh if needed, and note the payment has executed.
 
-## Step 7: Start a process instance
+## Step 6: Start a process instance
 
 To start a process instance programmatically, take the following steps:
 
@@ -245,7 +255,7 @@ To check your work, visit our [sample repository](https://github.com/camunda/cam
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run, and note the instance history in Operate.
 
-## Step 8: Deploy the process
+## Step 7: Deploy the process
 
 To deploy your process, take the following steps:
 

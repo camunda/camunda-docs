@@ -36,64 +36,62 @@ This procedure has been updated in the Camunda 8.6 release. The procedure used i
 
 ## Introduction
 
-This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region, and how to ultimately do a full recovery to restore the dual-region setup. The operational procedure builds on top of the [dual-region AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
+This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region and how to ultimately do a full recovery to restore the dual-region setup. The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
 
 Before proceeding with the operational procedure, thoroughly review and understand the contents of the [dual-region concept page](./../../concepts/multi-region/dual-region.md). This page outlines various limitations and requirements pertinent to the procedure, which are crucial for successful execution.
 
 ## Disclaimer
 
-:::danger
+:::caution
 
-Running dual-region setups requires the users to be able to detect any regional failures and to implement the necessary operational procedure for failover and failback, matching their environments. The example blueprint procedure is described below.
+Running a dual-region configuration requires users to detect and manage any regional failures, and implement the operational procedure for failover and failback that matches their environment.
 
 :::
 
 ## Prerequisites
 
-- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
+- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region concept](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-- [zbctl](./../../../apis-tools/cli-client/index.md) to interact with the Zeebe cluster.
+- (deprecated) [zbctl](/apis-tools/community-clients/cli-client/index.md) to interact with the Zeebe cluster.
+- `cURL` or similar to interact with the REST API.
 
 ## Terminology
 
 - **Surviving region**
   - A surviving region refers to a region within a dual-region setup that remains operational and unaffected by a failure or disaster that affects other regions.
 - **Lost region**
-  - A lost region refers to a region within a dual-region setup that becomes unavailable or unusable due to a failure or disaster.
+  - A lost region is a region within a dual-region setup that becomes unavailable or unusable due to a failure or disaster.
 - **Recreated region**
-  - A recreated region refers to a region within a dual-region setup that was previously lost but has been restored or recreated to resume its operational state.
-  - We assume this region contains no Camunda 8 deployments or related persistent volumes. Ensure this is the case before executing the **failover** procedure.
+  - A recreated region is a region within a dual-region setup that was previously lost but has been restored or recreated to resume its operational state.
+  - We assume this region does not contain Camunda 8 deployments or related persistent volumes. Ensure this is the case before executing the failover procedure.
 
 ## Procedure
 
-We handle the loss of both active and passive regions using the same procedure. For clarity, this section focuses on the scenario where the passive region is lost while the active region remains operational.
+We use the same procedure to handle the loss of both active and passive regions. For clarity, this section focuses on the scenario where the passive region is lost while the active region remains operational. The same procedure will be valid in case of active region loss.
 
-#### Key Steps to Handle Passive Region Loss
+**Temporary Loss Scenario:** If a region loss is temporary — such as from transient network issues — Zeebe can handle this situation without initiating recovery procedures, provided there is sufficient free space on the persistent disk. However, processing may halt due to a loss of quorum during this time.
 
-1. **Traffic Rerouting:** Reroute traffic to the surviving active region using DNS. (Details on how to manage DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
-2. **Temporary Loss Scenario:** If the region loss is temporary (for example, due to network issues), Zeebe can survive this loss but may stop processing due to quorum loss. This could lead to persistent disk filling up before data is lost.
-3. **Procedure Phases**
-   - **Failover Phase:** Temporarily restores Camunda 8 functionality by removing the lost brokers and handling the export to the unreachable Elasticsearch instance.
-   - **Failback Phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
+#### Key steps to handle passive region loss
 
-:::warning
+1. **Traffic rerouting:** Use DNS to reroute traffic to the surviving active region. (Details on managing DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
+2. **Failover phase:** Temporarily restores Camunda 8 functionality by removing the lost brokers and handling the export to the unreachable Elasticsearch instance.
+3. **Failback phase:** Fully restores the failed region to its original functionality. This phase requires the region to be ready for the redeployment of Camunda 8.
 
-For the **failback** procedure, your recreated region cannot contain any active Camunda 8 deployments or leftover persistent volumes related to Camunda 8 or its Elasticsearch instance. You must start from a clean slate and not bring old data from the lost region, as states may have diverged.
+:::caution
+
+For the failback procedure, the recreated region must not include any active Camunda 8 deployments or residual persistent volumes associated with Camunda 8 or its Elasticsearch instance. It is essential to initiate a clean deployment to prevent data replication and state conflicts.
 
 :::
 
-The following procedures are building on top of the work done in the [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) about deploying Camunda 8 to two Kubernetes clusters in different regions. We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them to your setup.
+### Prerequisites
 
-Ensure you have followed [deploy Camunda 8 to the clusters](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) to have Camunda 8 installed and configured for a dual-region setup.
+The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
 
-### Environment prerequisites
+Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
 
-Ensure you have followed [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) to have the general environment variables set up already.
-
-We will try to refrain from always mentioning both possible scenarios (losing either region 0 or region 1). Instead, we generalized the commands and require you to do a one-time setup to configure environment variables to help execute the procedure based on the surviving and to be recreated region.
-
+We will avoid referencing both scenarios of losing either Region 0 or Region 1. Instead, we have generalized the commands and require a one-time setup to configure environment variables, enabling you to execute the procedure based on the surviving region and the one that needs to be recreated.
 Depending on which region you lost, select the correct tab below and export those environment variables to your terminal for a smoother procedure execution:
 
 <Tabs queryString="lost-region">
@@ -123,7 +121,9 @@ export REGION_RECREATED=region1
   </TabItem>
 </Tabs>
 
-### Failover
+### Failover phase
+
+The Failover phase outlines steps for removing lost brokers, redistributing load, disabling Elasticsearch export to a failed region, and restoring user interaction with Camunda 8 to ensure smooth recovery and continued functionality.
 
 <Tabs queryString="failover">
   <TabItem value="step1" label="Step 1" default>
@@ -137,23 +137,168 @@ desired={<Five viewBox="140 40 680 500" />}
 
 <div>
 
-| **Current State**                                                                                                                                                                                                                                                                                                                                                                                                                     | **Desired State**                                                                                                                                                                                     |
+| **Current state**                                                                                                                                                                                                                                                                                                                                                                                                                     | **Desired state**                                                                                                                                                                                     |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | You have ensured that you fully lost a region and want to start the temporary recovery. <br /> <br /> One of the regions is lost, meaning Zeebe: <br /> - No data has been lost thanks to Zeebe data replication. <br /> - Is unable to process new requests due to losing the quorum <br /> - Stops exporting new data to Elasticsearch in the lost region <br /> - Stops exporting new data to Elasticsearch in the survived region | The lost brokers have been removed from the Zeebe cluster. <br /> <br /> Continued processing is enabled, and new brokers in the failback procedure will only join the cluster with our intervention. |
 
-#### How to get there
+#### Procedure
 
-You will port-forward the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
+Start with creating a port-forward to the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
 
 The following alternatives to port-forwarding are possible:
 
-- if it's exposed to the outside, one can skip port-forwarding and use the URL directly
-- one can [`exec`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) into an existing pod (such as Elasticsearch), and `curl` from there
-- or temporarily [`run`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_run/) an Ubuntu pod in the cluster to `curl` from there
+- if Zeebe Gateway is exposed to the outside of the Kubernetes cluster, you can skip port-forwarding and use the URL directly
+- [`exec`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) into an existing pod (such as Elasticsearch), and execute `curl` commands from inside of the pod
+- [`run`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_run/) an Ubuntu pod in the cluster to execute `curl` commands from inside the Kubernetes cluster
 
-In our example, we went with port-forwarding to a local host, but other alternatives can also be used.
+In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
 
-1. Use the [zbctl client](../../../apis-tools/cli-client/index.md) to retrieve list of remaining brokers
+<Tabs groupId="c8-connectivity">
+  <TabsItem value="rest-api" label="REST API">
+
+1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+
+curl -L -X GET 'http://localhost:8080/v2/topology' \
+  -H 'Accept: application/json'
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 4,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 6,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    }
+  ],
+  "clusterSize": 8,
+  "partitionsCount": 8,
+  "replicationFactor": 4,
+  "gatewayVersion": "8.6.0"
+}
+```
+
+  </summary>
+</details>
+
+  </TabsItem>
+  <TabsItem value="zbctl" label="zbctl">
+
+1. Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -198,8 +343,10 @@ Brokers:
 
   </summary>
 </details>
+  </TabsItem>
+</Tabs>
 
-2. Portforward the service of the Zeebe Gateway for the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
+2. Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -215,6 +362,149 @@ curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Cont
 #### Verification
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the cluster size has decreased to 4, partitions have been redistributed over the remaining brokers, and new leaders have been elected.
+
+<Tabs groupId="c8-connectivity">
+  <TabsItem value="rest-api" label="REST API">
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+
+curl -L -X GET 'http://localhost:8080/v2/topology' \
+  -H 'Accept: application/json'
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 4,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 6,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    }
+  ],
+  "clusterSize": 4,
+  "partitionsCount": 8,
+  "replicationFactor": 2,
+  "gatewayVersion": "8.6.0"
+}
+```
+
+  </summary>
+</details>
+
+  </TabsItem>
+  <TabsItem value="zbctl" label="zbctl">
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -260,7 +550,10 @@ Brokers:
   </summary>
 </details>
 
-You can also use the Zeebe Gateway's REST API to ensure the scaling progress has been completed. For better readability of the output, it is recommended to use [jq](https://jqlang.github.io/jq/).
+</TabsItem>
+</Tabs>
+
+You can also use the Zeebe Gateway's REST API to ensure the scaling progress has been completed. For better output readability, we use [jq](https://jqlang.github.io/jq/).
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -297,20 +590,20 @@ desired={<Six viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**             | **Current State**                                                                                                                                           | **Desired State**                                                                                                                 |
+| **Details**             | **Current state**                                                                                                                                           | **Desired state**                                                                                                                 |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **Zeebe Configuration** | Zeebe brokers in the surviving region are still configured to point to the Elasticsearch instance of the lost region. Zeebe cannot continue exporting data. | Elasticsearch exporter to the failed region has been disabled in the Zeebe cluster. Zeebe can export data to Elasticsearch again. |
-| **User Interaction**    | Regular interaction with Camunda 8 is not restored.                                                                                                         | Regular interaction with Camunda 8 is restored, marking the conclusion of the temporary recovery.                                 |
+| **Zeebe configuration** | Zeebe brokers in the surviving region are still configured to point to the Elasticsearch instance of the lost region. Zeebe cannot continue exporting data. | Elasticsearch exporter to the failed region has been disabled in the Zeebe cluster. Zeebe can export data to Elasticsearch again. |
+| **User interaction**    | Regular interaction with Camunda 8 is not restored.                                                                                                         | Regular interaction with Camunda 8 is restored, marking the conclusion of the temporary recovery.                                 |
 
-#### How to get there
+#### Procedure
 
-1. Portforward the service of the Zeebe Gateway for the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
+1. Port-forward the service of the Zeebe Gateway for the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
 ```
 
-2. List all exporters to find the corresponding ID. Alternatively, you can check your `camunda-values.yml` file, which lists the exporters as those had to be configured explicitly.
+2. List all exporters to find the corresponding ID. Alternatively, you can check your Helm chart `camunda-values.yml` file, which lists the exporters as those that had to be configured explicitly.
 
 ```bash
 curl -XGET 'http://localhost:9600/actuator/exporters'
@@ -327,7 +620,7 @@ curl -XGET 'http://localhost:9600/actuator/exporters'
   </summary>
 </details>
 
-2. Based on the Exporter APIs you will send a request to the Zeebe Gateway to disable the Elasticsearch exporter to the lost region.
+2. Based on the Exporter APIs you will send a request to the Zeebe Gateway to disable the Elasticsearch exporter connected with the lost region.
 
 ```bash
 curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/disable'
@@ -379,7 +672,7 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
   </TabItem>
 </Tabs>
 
-### Failback
+### Failback phase
 
 <Tabs queryString="failback">
   <TabItem value="step1" label="Step 1" default>
@@ -393,18 +686,18 @@ desired={<Eight viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**              | **Current State**                                                                                                   | **Desired State**                                                                                                |
+| **Details**              | **Current state**                                                                                                   | **Desired state**                                                                                                |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | **Camunda 8**            | A standalone region with a fully functional Camunda 8 setup, including Zeebe, Operate, Tasklist, and Elasticsearch. | Restore dual-region functionality by deploying Camunda 8 (Zeebe and Elasticsearch) to the newly restored region. |
 | **Operate and Tasklist** | Operate and Tasklist are operational in the standalone region.                                                      | Operate and Tasklist need to stay disabled to avoid interference during the database backup and restore process. |
 
-#### How to get there
+#### Procedure
 
-From your initial dual-region deployment, your base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` should still be present.
+This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy Dual-region Camunda clusters.
 
-In particular, the values `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL` should point to their respective regions. The placeholder in `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints of both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
+Ensure that the values for `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL` correctly point to their respective regions. The placeholder in `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
 
-In addition, the following Helm command will disable Operate and Tasklist since those will only be enabled at the end of the full region restore. It's required to keep them disabled in the newly created region due to their Elasticsearch importers.
+Additionally, execute the following Helm command to disable Operate and Tasklist. These components will only be enabled at the end of the region recovery. Keeping them disabled in the newly created region is necessary to avoid data duplication by their Elasticsearch importers.
 
 From the terminal context of `aws/dual-region/kubernetes` execute:
 
@@ -421,21 +714,192 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 
 #### Verification
 
-The following command will show the deployed pods of the newly created region.
-
-Depending on your chosen `clusterSize`, you should see that half of the amount are spawned in Zeebe brokers.
-
-For example, in the case of `clusterSize: 8`, you find four Zeebe brokers in the newly created region.
-
-:::warning
-It is expected that the Zeebe broker pods don't become ready as they're not yet part of a Zeebe cluster, therefore not considered healthy by the Kubernetes readiness probe.
-:::
+The following command will show the pods deployed in the newly created region.
 
 ```bash
 kubectl --context $CLUSTER_RECREATED get pods -n $CAMUNDA_NAMESPACE_RECREATED
 ```
 
+Half of the amount of your set `clusterSize` is used to spawn Zeebe brokers.
+
+For example, in the case of `clusterSize: 8`, four Zeebe brokers are provisioned in the newly created region.
+
+:::warning
+It is expected that the Zeebe broker pods will not reach the "Ready" state since they are not yet part of a Zeebe cluster and, therefore, not considered healthy by the readiness probe.
+:::
+
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the new Zeebe brokers are recognized but yet a full member of the Zeebe cluster.
+
+<Tabs groupId="c8-connectivity">
+  <TabsItem value="rest-api" label="REST API">
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+
+curl -L -X GET 'http://localhost:8080/v2/topology' \
+  -H 'Accept: application/json'
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 1,
+      "host": "camunda-zeebe-0.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 2,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 1,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 2,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 8,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 3,
+      "host": "camunda-zeebe-1.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 4,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 2,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 3,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 4,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "follower",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 5,
+      "host": "camunda-zeebe-2.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 6,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
+      "port": 26501,
+      "partitions": [
+        {
+          "partitionId": 4,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 5,
+          "role": "leader",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 6,
+          "role": "follower",
+          "health": "healthy"
+        },
+        {
+          "partitionId": 7,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.6.0"
+    },
+    {
+      "nodeId": 7,
+      "host": "camunda-zeebe-3.camunda-zeebe.camunda-paris",
+      "port": 26501,
+      "partitions": [],
+      "version": "8.6.0"
+    },
+  ],
+  "clusterSize": 4,
+  "partitionsCount": 8,
+  "replicationFactor": 2,
+  "gatewayVersion": "8.6.0"
+}
+```
+
+  </summary>
+</details>
+
+  </TabsItem>
+  <TabsItem value="zbctl" label="zbctl">
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -489,6 +953,9 @@ Brokers:
   </summary>
 </details>
 
+  </TabsItem>
+</Tabs>
+
 </div>
   </TabItem>
   <TabItem value="step2" label="Step 2">
@@ -502,18 +969,18 @@ desired={<Nine viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**              | **Current State**                                                                                                                                                                                                                                                  | **Desired State**                                                                                                                                                                                                       |
+| **Details**              | **Current state**                                                                                                                                                                                                                                                  | **Desired state**                                                                                                                                                                                                       |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Camunda 8**            | Functioning Zeebe cluster within a single region: <br/> Working Camunda 8 installation in the surviving region <br/> Non-participating Camunda 8 installation in the recreated region. <br /> Currently exporting data to Elasticsearch from the surviving region. | Preparing the newly created region to take over and restore the dual-region setup. Stop Zeebe exporters to prevent new data from being exported to Elasticsearch, allowing for the creation of an Elasticsearch backup. |
 | **Operate and Tasklist** | Operate and Tasklist are operational in the surviving region.                                                                                                                                                                                                      | Temporarily scale down Operate and Tasklist to zero replicas, preventing user interaction with Camunda 8 and ensuring no new data is imported to Elasticsearch.                                                         |
 
 :::note
 
-This **does not** affect the processing of process instances in any way. The impact is that process information about the affected instances might not be visible in Operate and Tasklist.
+This step **does not** affect the process instances in any way. Process information may not be visible in Operate and Tasklist running in the affected instance.
 
 :::
 
-#### How to get there
+#### Procedure
 
 1. Disable Operate and Tasklist by scaling to 0:
 
@@ -557,10 +1024,10 @@ desired={<Ten viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**              | **Current State**                                                                                                        | **Desired State**                                                                                                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8**            | Not reachable by end-users and not processing any new process instances. This state allows for data backup without loss. | Remain unreachable by end-users and not processing any new instances.                                                                                                             |
-| **Elasticsearch Backup** | No backup is in progress.                                                                                                | Backup of Elasticsearch in the surviving region is initiated and being restored in the recreated region, containing all necessary data. Backup process may take time to complete. |
+| **Details**              | **Current State**                                                                                                        | **Desired State**                                                                                                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8**            | Not reachable by end-users and not processing any new process instances. This state allows for data backup without loss. | Remain unreachable by end-users and not processing any new instances.                                                                                                                 |
+| **Elasticsearch Backup** | No backup is in progress.                                                                                                | Backup of Elasticsearch in the surviving region is initiated and being restored in the recreated region, containing all necessary data. The backup process may take time to complete. |
 
 #### How to get there
 
@@ -568,7 +1035,7 @@ This builds on top of the [AWS setup](/self-managed/setup/deploy/amazon/amazon-e
 
 :::info
 
-The procedure works for other cloud providers and bare metal. You have to adjust the AWS S3-specific part depending on your chosen backup source for Elasticsearch. Consult the [Elasticsearch documentation on snapshot and restore](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) to learn more about this, and specifically the [different supported types](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types) by Elasticsearch.
+The procedure works for other Cloud providers and bare metal. You have to adjust the AWS S3-specific part depending on your chosen backup source for Elasticsearch. Consult the [Elasticsearch documentation on snapshot and restore](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) to learn more about this, and specifically the [different supported types](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html#ess-repo-types) by Elasticsearch.
 
 :::
 
@@ -713,7 +1180,7 @@ kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $E
 
 The example output above should be the same since it's the same backup.
 
-7. Restore Elasticsearch backup in the new region namespace `CAMUNDA_NAMESPACE_RECREATED`. Depending on the amount of data, this operation will take a while to complete.
+7. Restore Elasticsearch backup in the new region namespace `CAMUNDA_NAMESPACE_RECREATED`. Depending on the amount of data, this operation may take a while to complete.
 
 ```bash
 kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPOST 'http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true'
@@ -729,7 +1196,7 @@ kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $E
   <summary>Example output</summary>
   <summary>
 
-The important part being the `state: "SUCCESS"` and that `done` and `total` are equal. **This is only an example and the values will differ for you.**
+**This is only an example, and the values will differ for you.** Ensure you see `state: "SUCCESS"`, and that the properties `done` and `total` have equal values.
 
 ```json
 {
@@ -785,14 +1252,14 @@ desired={<Eleven viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**              | **Current State**                                              | **Desired State**                                                                                                       |
-| ------------------------ | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Camunda 8**            | Remain unreachable by end-users while restoring functionality. | Enable Operate and Tasklist in both the surviving and recreated regions to allow user interaction with Camunda 8 again. |
-| **Elasticsearch Backup** | Backup has been created and restored to the recreated region.  | N/A                                                                                                                     |
+| **Details**              | **Current state**                                               | **Desired state**                                                                                                       |
+| ------------------------ | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| **Camunda 8**            | Remains unreachable by end-users while restoring functionality. | Enable Operate and Tasklist in both the surviving and recreated regions to allow user interaction with Camunda 8 again. |
+| **Elasticsearch Backup** | Backup has been created and restored to the recreated region.   | N/A                                                                                                                     |
 
-#### How to get there
+#### Procedure
 
-The base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` contains the adjustments for Elasticsearch and the Zeebe initial brokers, meaning we just have to reapply / upgrade the release to enable and deploy Operate and Tasklist.
+The base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` contains the adjustments for Elasticsearch and the Zeebe initial brokers. This means we just have to reapply/upgrade the Helm release to enable and deploy Operate and Tasklist.
 
 1. Upgrade the normal Camunda environment in `CAMUNDA_NAMESPACE_SURVIVING` and `REGION_SURVIVING` to deploy Operate and Tasklist:
 
@@ -818,7 +1285,7 @@ helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
 
 #### Verification
 
-For Operate and Tasklist, you can confirm that the deployments have successfully deployed by listing those and indicating `1/1` ready. The same command can be applied for the `CLUSTER_RECREATED` and `CAMUNDA_NAMESPACE_RECREATED`:
+For Operate and Tasklist, you can confirm that the deployments have been successfully deployed by listing those and indicating `1/1` ready. The same command can be applied for the `CLUSTER_RECREATED` and `CAMUNDA_NAMESPACE_RECREATED`:
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING get deployments -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -832,7 +1299,7 @@ kubectl --context $CLUSTER_SURVIVING get deployments -n $CAMUNDA_NAMESPACE_SURVI
   </TabItem>
   <TabItem value="step5" label="Step 5">
 
-#### Initialize new Zeebe exporter to recreated region
+#### Initialize new Zeebe exporter to the recreated region
 
 <StateContainer
 current={<Eleven viewBox="140 40 680 500" />}
@@ -841,7 +1308,7 @@ desired={<Twelve viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**   | **Current State**                                   | **Desired State**                                                                                                                                                                                                                            |
+| **Details**   | **Current state**                                   | **Desired state**                                                                                                                                                                                                                            |
 | ------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Camunda 8** | Reachable to end-users, but not exporting any data. | Start a new exporter to the recreated region.<br /> Ensure that both Elasticsearch instances are populated for data redundancy. <br /> Separate the initialization step (asynchronous) and confirm completion before resuming the exporters. |
 
@@ -874,9 +1341,9 @@ curl -XGET 'http://localhost:9600/actuator/exporters'
   </summary>
 </details>
 
-Via the already port-forwarded Zeebe Gateway, you can also check the status of the change by using the Cluster API.
+You can also check the status of the change using the Cluster API via the already port-forwarded Zeebe Gateway.
 
-**Ensure it says "COMPLETED" before proceeding with the next step.**
+**Ensure the status is "COMPLETED" before proceeding with the next step.**
 
 ```bash
 curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
@@ -911,9 +1378,9 @@ desired={<Thirteen viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**   | **Current State**                                                                                                                                  | **Desired State**                                                                          |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| **Camunda 8** | Reachable to end-users, but currently not exporting any data. Exporters are enabled for both regions, with the operation confirmed to be completed | Reactivate existing exporters that will allow Zeebe to export data to Elasticsearch again. |
+| **Details**   | **Current state**                                                                                                                                   | **Desired state**                                                                          |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Camunda 8** | Reachable to end-users, but currently not exporting any data. Exporters are enabled for both regions, with the operation confirmed to be completed. | Reactivate existing exporters that will allow Zeebe to export data to Elasticsearch again. |
 
 #### How to get there
 
@@ -928,7 +1395,7 @@ curl -i localhost:9600/actuator/exporting/resume -XPOST
 
 #### Verification
 
-For the reactivating the exporters, there's currently no API available to confirm this. Only the response code of `204` indicates a successful resumption. This is a synchronous operation.
+There is currently no API available to confirm the reactivation of the exporters. Only the response code `204` indicates a successful resumption. This is a synchronous operation.
 
 </div>
   </TabItem>
@@ -943,10 +1410,10 @@ desired={<Fourteen viewBox="140 40 680 500" />}
 
 <div>
 
-| **Details**          | **Current State**                                                                                                                  | **Desired State**                                                                             |
+| **Details**          | **Current state**                                                                                                                  | **Desired state**                                                                             |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | **Camunda 8**        | Running in two regions, but not yet utilizing all Zeebe brokers. Operate and Tasklist redeployed, Elasticsearch exporters enabled. | Fully functional Camunda 8 setup utilizing both regions, recovering all dual-region benefits. |
-| **User Interaction** | Users can interact with Camunda 8 again.                                                                                           | Dual-region functionality is restored, maximizing reliability and performance benefits.       |
+| **User interaction** | Users can interact with Camunda 8 again.                                                                                           | Dual-region functionality is restored, maximizing reliability and performance benefits.       |
 
 #### How to get there
 
@@ -1061,3 +1528,5 @@ Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-paris.svc:26501
 </div>
   </TabItem>
 </Tabs>
+
+In conclusion, adhering to this updated operational procedure ensures a structured and efficient recovery process for maintaining operational continuity in dual-region deployments. Please remain cautious in managing dual-region environments and be prepared to implement the outlined steps for successful failover and failback.
