@@ -29,7 +29,6 @@ The following images must be available in your air-gapped environment:
 - [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak)
 - [bitnami/os-shell](https://hub.docker.com/r/bitnami/os-shell/)
 - [bitnami/elasticsearch](https://hub.docker.com/r/bitnami/elasticsearch/)
-- [bitnami/kibana](https://hub.docker.com/r/bitnami/kibana/)
 - Web Modeler images (only available from [Camunda's private registry](/self-managed/setup/deploy/other/docker.md#web-modeler)):
   - `web-modeler-ee/modeler-restapi`
   - `web-modeler-ee/modeler-webapp`
