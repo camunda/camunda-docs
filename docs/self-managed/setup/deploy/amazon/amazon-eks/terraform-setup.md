@@ -25,6 +25,8 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
   - This simplifies the setup by not relying on explicit credentials and instead creating a mapping between IAM roles and Kubernetes service account based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without having to supply explicit credentials.
+    Voici la correction du texte :
+  - Usage of IRSA is recommended to use as it's an [EKS best practice](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
 
 ### Considerations
 
@@ -236,7 +238,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
   </TabItem>
   <TabItem value="irsa" label="IRSA" default>
 
-In addition to using standard username and password authentication, you can opt to use **IRSA (IAM Roles for Service Accounts)** for secure, role-based access to your Aurora database. This method allows your EKS workloads to assume IAM roles without needing to manage AWS credentials directly.
+In addition to using standard username and password authentication, you can opt to use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) for secure, role-based access to your Aurora database. This method allows your EKS workloads to assume IAM roles without needing to manage AWS credentials directly.
 
 **Note**: Using IRSA is optional. If preferred, you can continue using traditional password-based authentication for database access.
 
@@ -265,6 +267,12 @@ You can further customize the Aurora cluster setup through various input options
 
 The OpenSearch module creates an OpenSearch domain intended to be used by the Camunda platform. OpenSearch is a powerful alternative to ElasticSearch. For more information on how to use OpenSearch with Camunda, refer to the [Camunda documentation](./self-managed/setup/guides/using-existing-opensearch/).
 
+:::note Available since Camunda 8.4
+
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch Service](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+
+:::
+
 #### Step 1: Create a Configuration File for OpenSearch
 
 1. In the folder where your `config.tf` file resides, create a new file named `opensearch.tf`.
@@ -272,6 +280,11 @@ The OpenSearch module creates an OpenSearch domain intended to be used by the Ca
 
 <Tabs>
   <TabItem value="standard" label="Standard" default>
+
+:::caution Optimize compatibility with OpenSearch
+
+**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
+:::
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/opensearch.tf
@@ -281,7 +294,14 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
   
   <TabItem value="irsa" label="IRSA" default>
 
-In addition to traditional username and password authentication, you can also use **IRSA (IAM Roles for Service Accounts)** to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
+:::caution Optimize compatibility with OpenSearch
+
+**Authentification:** Optimize does not work with the IRSA method, it will use standard basic auth (username and password).
+
+**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
+:::
+
+In addition to traditional username and password authentication, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
 
 **Note**: Using IRSA is optional. If you prefer, you can continue using password-based access to your OpenSearch domain.
 
@@ -379,13 +399,13 @@ The following commands will export the required outputs as environment variables
 
 ```bash
 # PostgreSQL Credentials (replace with your own values)
-export DB_USERNAME="secret_user"
-export DB_PASSWORD="secretvalue%23"
+export DB_USERNAME="<your username set in the postgres module>"
+export DB_PASSWORD="<your password set in the postgres module>"
 export DB_NAME="camunda"
 
 # OpenSearch Credentials (replace with your own values)
-export OPENSEARCH_MASTER_USER="secret_user"
-export OPENSEARCH_MASTER_PASSWORD="secretvalue%23"
+export OPENSEARCH_MASTER_USER="<your opensearch user set in the module>"
+export OPENSEARCH_MASTER_PASSWORD="<your opensearch password set in the module>"
 
 # Retrieve outputs from modules
 export CERT_MANAGER_IRSA_ARN=$(terraform output -raw cert_manager_arn)
@@ -454,36 +474,50 @@ Here is the manifest file and instructions for applying it.
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/irsa-postgres-create-db.yml
 ```
 
-#### Environment Variables to Replace
-
 Before applying the manifest, you need to replace the placeholders in the manifest with the actual values.
-
-- **AURORA_ENDPOINT**: The endpoint of your Aurora database.
-- **AURORA_PORT**: The port on which your Aurora database listens (usually 5432 for PostgreSQL).
-- **AURORA_DB_NAME**: The name of the database.
-- **AURORA_MASTER_USERNAME**: The username of the master (admin) account for your database.
-- **AURORA_MASTER_PASSWORD**: The password for the master account.
-- **AURORA_USERNAME_IRSA**: The username for the IRSA user that will be created.
-
-#### Steps to Apply
 
 1. **Create a copy of the manifest**: Save the above manifest to a file, for example, `irsa-postgres-create-db.yml`.
 
 2. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the manifest.
 
 ```bash
-export AURORA_ENDPOINT=<your_aurora_endpoint>
+export AURORA_ENDPOINT=$(terraform output -raw postgres_endpoint)
 export AURORA_PORT=5432
-export AURORA_DB_NAME=<your_db_name>
-export AURORA_MASTER_USERNAME=<your_master_username>
-export AURORA_MASTER_PASSWORD=<your_master_password>
-export AURORA_USERNAME_IRSA=<desired_irsa_user>
+export AURORA_DB_NAME="$DB_NAME"
+
+# PostgreSQL Credentials (replace with your own values from the #postgresql-module-setup step)
+export AURORA_USERNAME="<your username set in the module>"
+export AURORA_PASSWORD="<your password set in the module>"
+
+export AURORA_USERNAME_IRSA="<your irsa user set by aurora_irsa_username>"
 ```
 
-3. **Apply the manifest using `envsubst`**: Use `envsubst` to replace the variables in the manifest and apply it to your Kubernetes cluster.
+2. **Create the Secret Using Environment Variables**:
 
 ```bash
-envsubst < irsa-postgres-create-db.yml | kubectl apply -f -
+kubectl create secret generic irsa-db-secret \
+  --from-literal=AURORA_ENDPOINT="$AURORA_ENDPOINT" \
+  --from-literal=AURORA_PORT="$AURORA_PORT" \
+  --from-literal=AURORA_DB_NAME="$AURORA_DB_NAME" \
+  --from-literal=AURORA_USERNAME="$AURORA_USERNAME" \
+  --from-literal=AURORA_PASSWORD="$AURORA_PASSWORD" \
+  --from-literal=AURORA_USERNAME_IRSA="$AURORA_USERNAME_IRSA"
+```
+
+This command creates a secret named `irsa-db-secret` and dynamically populates it with the values from your environment variables.
+
+After running the above command, you can verify that the secret was created successfully by using:
+
+```bash
+kubectl get secret irsa-db-secret -o yaml
+```
+
+This should display the secret with the base64 encoded values.
+
+3. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
+
+```bash
+kubectl apply -f irsa-postgres-create-db.yml
 ```
 
 4. **Verify the Job's completion**: Once the job is created, you can monitor its progress using:
@@ -500,7 +534,14 @@ Once the job shows as `Completed`, the IRSA user will have been successfully cre
 kubectl logs job/postgres-client
 ```
 
-TODO: finish and complete this creation step with outputs from terraform
+6. **Cleanup the resources:**
+
+```bash
+kubectl delete job postgres-client
+kubectl delete secret irsa-db-secret
+```
+
+By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
   </TabItem>
 </Tabs>
