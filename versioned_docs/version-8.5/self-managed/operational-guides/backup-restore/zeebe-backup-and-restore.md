@@ -177,7 +177,7 @@ The `backupId` cannot be reused, even if the backup corresponding to the backup 
 <details>
   <summary>Example request</summary>
 
-```
+```shell
 curl --request POST 'http://localhost:9600/actuator/backups' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": "100" }'
@@ -220,7 +220,7 @@ GET actuator/backups/{backupId}
 <details>
   <summary>Example request</summary>
 
-```
+```shell
 curl --request GET 'http://localhost:9600/actuator/backups/100'
 ```
 
@@ -293,7 +293,7 @@ GET actuator/backups
 <details>
   <summary>Example request</summary>
 
-```
+```shell
 curl --request GET 'http://localhost:9600/actuator/backups'
 ```
 
@@ -371,7 +371,7 @@ DELETE actuator/backups/{backupId}
 <details>
   <summary>Example request</summary>
 
-```
+```shell
 curl --request DELETE 'http://localhost:9600/actuator/backups/100'
 ```
 
