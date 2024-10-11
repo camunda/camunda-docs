@@ -36,7 +36,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.0) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.1) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 
@@ -132,13 +132,14 @@ Some endpoints in the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-
 1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
 
 ```shell
-curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
+curl -f --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
+   --cookie-jar cookie.txt
 ```
 
 2. Send the cookie (as a header) in each API request. In this case, the topology of your Zeebe cluster:
 
 ```shell
-curl -b cookie.txt -X GET 'http://localhost:8080/v2/topology' -H 'Content-Type: application/json'
+curl -f --cookie  cookie.txt  localhost:8080/v2/topology
 ```
 
 </TabItem>
