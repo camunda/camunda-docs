@@ -61,9 +61,3 @@ Additionally, the following applies to **development clusters**:
 
 - **Cluster is not high-available & less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only).
 - **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day.
-
-:::caution
-
-**Cluster auto-pause** is not yet available. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will work, including BPMN timers and BPMN message catch events.
-
-:::

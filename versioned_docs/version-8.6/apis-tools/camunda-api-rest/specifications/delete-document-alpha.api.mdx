@@ -1,0 +1,56 @@
+---
+id: delete-document-alpha
+title: "Delete document (alpha)"
+description: "Delete a document from the Camunda 8 cluster."
+sidebar_label: "Delete document (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV0tv4zYQ/isETwnqSN5ttk11M2Jv62K7CBKnPSQ50NLY4q5EakkqjiHov3eGlPyK06ZoT0UOiSVx+H3z5rDhTiwtT+74WKd1CcpZ/jDgGdjUyMpJrXjCx1CAAyZY1smwhdElczmwS1HWKhPsgqVFbR2Y6F7dqyRJlHZwr2a5tAxUVmmJu/BZKCaKKhdsAcLVBiI2dSytjUHUYs20wn+2riptnBeW6qyEUpv1lts6bWBwr1a5THPCRCpWgiC1tGGV0VmdkuasthB5Ze4VH/BKGFGiHYbMbbjCF7Sth51mKCLJ2kq4HJ8NfKulgYwnztRw6JIZ2j4dM73wXtjo5jTLvLMiRLBpDqXgScPduiIu64xUS962gw29N2bL/a0Gs94jX4jCvpbdg2112F+kkP21Vg/EayutLFhafz8c0s9z6g3mStiOK8OopSlYu6iLYh3xdsDPh+d/t1263Cu5lI+gyCICpHAuNGZV5MOWauVQmKBEVRUyFQQVY5jnBZTffbGE2+yYtU84YldBEhV1QhZMz79A6pjXnATnqLtU7O764yX76fzDjw8nuXOVTeJ4tVpFZpGeQSbRsZE2yxhf6Y/kTiOGxqC/S7Fmc6yODMWQUxSUghUYJ8EyW0EqFzKlqJClndqMfB/s66IQ1KI03WzexugwVgOOmV4KdAqvjeSH6TFit9dTJjN0m1ysccNzar9nIeqCMMRc1y6ZF0J9pcA56YqjpIcsti5LgaXZ5eE+AQJZhzW+YwbmuIMlmF398dP3759hU5r8MptdsQDBUp2Br25HDaUjIiNKqWRZlzw5Hw7xTTyFtx+Gw5YwKeKvsEQxeKrQfJ9ah+ZgcpRUVwHNGyYV6qXS/yoy2silPOSNqE/0seBdEo+DRW1Lax+O1eeIeiY2OcpDMAZdplPfXzOGDbPw8FSnPTd1GrDurdbeau2t1l6qNVzEySHXGQ0M/rzz8wTOCQmP++PMxs12mGjppAXz2E8btUHf8CZUTosJ3+TaujZpaNJp40cKy6MwUiCzjyIthwrrM6fQqSj852MRpAWaKXrLtoPZ9eRmxn4WDlYiHMxEuQ99MbwYHkUl0RcQR1dTFiwM+bfTE3pYKu6jsEH4NcB+KrGAHUy69Q1tC+6ZgzBgRjWFYJMXHZ9Hp/cghF/Cw8c+W379Y+YDLtVC++1d4J8rQlHBEAbNh9G750mGylKtpLrEvb5hYqL5wUYcGY5xP3ZVwAmLeLsZsBf7FFbY74GRvYsoKCFz+j65ROR6HiFdnIZtm995oedxKaSKOwobX45+u/08Hp19ml5OPt9MzhAxck/OG19hwpRC7ejRjfmb8ezET+qnhzY322Pif3Iz6NLHwZOLsTXhJN52fm+6Kr/b3BMsyic7lwZMz1Cqd7xp5sLCrSnalj6HWZ6KP5OW6vqFaX7Xn/9msD9qxVdY790yHkVRkxSnuuobzj9U8uS6u52cstdcg47q1X0Uar2rVK/vjn/bB5TOQWRYyKRmEBjhXaNyO1tfHFfIzk3vHk8+TWYTTP8/AQwvKiQ=
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Delete document (alpha)</h1>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/documents/{documentId}"}
+></MethodEndpoint>
+
+Delete a document from the Camunda 8 cluster.
+
+:::note
+This endpoint is an alpha feature. It currently only supports an in-memory document store,
+which is not meant for production use.
+:::
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"documentId","in":"path","required":true,"description":"The ID of the document to delete.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"storeId","in":"query","required":false,"description":"The ID of the document store to delete the document from.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+The document was deleted successfully.
+
+</div><div></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The document with the given ID was not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

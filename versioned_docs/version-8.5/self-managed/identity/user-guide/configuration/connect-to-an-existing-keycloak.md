@@ -18,6 +18,12 @@ Clients in Camunda 8 SaaS and applications in Camunda 8 Self-Managed provide a s
 
 ## Steps
 
+:::caution Keycloak URLs
+As of the 8.5.3 release, Identity uses the Keycloak frontend URL instead of the backend URL. This change may affect you if you have blocked the Keycloak frontend URL from other services (including Camunda applications), and can potentially impact Identity's functionality.
+
+To avoid connectivity issues, ensure your Keycloak frontend URL is accessible by adjusting your network, firewall, or security settings as needed. This adjustment is crucial to maintain the integration with Keycloak and ensure compatibility.
+:::
+
 To connect Identity to an existing Keycloak instance, take the following steps:
 
 1. Log in to your Keycloak Admin Console.

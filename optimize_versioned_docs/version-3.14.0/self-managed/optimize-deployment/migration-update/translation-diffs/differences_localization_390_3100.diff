@@ -1,0 +1,320 @@
+diff --git a/backend/src/main/resources/localization/en.json b/backend/src/main/resources/localization/en.json
+index 50aed4cec..456d79926 100644
+--- a/backend/src/main/resources/localization/en.json
++++ b/backend/src/main/resources/localization/en.json
+@@ -1,9 +1,9 @@
+ {
++  "companyName": "Camunda",
+   "appName": "Optimize",
++  "appFullName": "Camunda Optimize",
+   "navigation": {
+-    "homepage": "Home",
+     "analysis": "Analysis",
+-    "processes": "Processes",
+     "events": "Event Based Processes",
+     "telemetry": "Telemetry Settings",
+     "logout": "Logout",
+@@ -11,9 +11,28 @@
+     "logoutSuccess": "You logged out successfully.",
+     "configLoadingError": "An error occurred while loading the UI configurations",
+     "userGuide": "User Guide",
+-    "help": "Help"
++    "help": "Help",
++    "profile": "Profile",
++    "appSwitcher": "App Switcher",
++    "dashboards": "Dashboards",
++    "collections": "Collections",
++    "apps": {
++      "zeebe": "Zeebe",
++      "operate": "Operate",
++      "console": "Console",
++      "tasklist": "Tasklist",
++      "optimize": "Optimize",
++      "modeler": "Modeler"
++    },
++    "privacyPolicy": "Privacy policy",
++    "termsOfUse": "Terms of use",
++    "imprint": "Imprint",
++    "academy": "Camunda Academy",
++    "feedback": "Feedback and Support",
++    "slack": "Slack Community Channel"
+   },
+   "login": {
++    "label": "Log in",
+     "appName": "Optimize",
+     "username": "Username",
+     "password": "Password",
+@@ -31,6 +50,7 @@
+     "timezone": "Date and Time displayed in local timezone:"
+   },
+   "license": {
++    "label": "License",
+     "licensedFor": "Licensed for",
+     "validUntil": "Valid until",
+     "redirectMessage": "You will be redirected to login page shortly. <a href=\"./\">Click here to go to login page immediately</a>",
+@@ -137,7 +157,6 @@
+       "manager-description": "Full rights editing Collection and Users",
+       "existing-identity": "A user or a group with this id already exists",
+       "inCollection": "in this collection",
+-      "missingAuthorizationsWarning": "Some data may be hidden from users due to missing authorizations.",
+       "deleteWarning": "The '{name}' {type} will be removed from the Collection."
+     },
+     "sources": {
+@@ -162,12 +181,17 @@
+     "empty": "There are no items created yet",
+     "contactEditor": "Please contact an Optimize editor to create new items",
+     "contactManager": "Please contact the collection manager to create new items",
+-    "welcome": "Welcome"
++    "welcome": "Welcome",
++    "emptyState": {
++      "title": "Start by creating a Dashboard",
++      "description": "Click Create New Dashboard to get insights into business processes"
++    }
+   },
+   "processes": {
+     "label": "process",
+     "label-plural": "processes",
+-    "list": "Processes List",
++    "adoptionDashboard": "Adoption Dashboard",
++    "defaultDashboardAndKPI": "Process Default Dashboards and KPIs",
+     "empty": "There are no processes imported yet",
+     "owner": "Owner",
+     "processOwner": "Process Owner",
+@@ -180,8 +204,9 @@
+     "goalRemoved": "Goals removed from '{processName}' process",
+     "ownerInfo": "The process owner is responsible for business metrics for the process. You can use the process owner to sort and filter processes.",
+     "ownerRemoveWarning": "The '{owner}' Owner will be removed from the process",
+-    "processOverview": "Processes Overview",
+     "configureProcess": "Configure Process",
++    "createDefaultDashboard": "Create New Default Dashboard",
++    "createDashboardMessage": "There is no dashboard for this process yet. Would you like Optimize to automatically create a dashboard based on a process template for you?",
+     "emailDigest": "Email Digest",
+     "digestInfo": "The process digest sends periodic emails with the existing KPI status to the Process Owner. By default, the digest will be sent every Monday at 9:00 AM (To change the default send time, please contact your administrator).",
+     "digestConfigured": "Your process digest has been successfully configured. An email has been sent to {name}.",
+@@ -318,6 +343,8 @@
+   "report": {
+     "label": "Report",
+     "label-plural": "Reports",
++    "textReport": "Text Report",
++    "externalUrl": "External URL",
+     "create": "Create Report",
+     "createNew": "Create New Report",
+     "new": "New Report",
+@@ -330,6 +357,7 @@
+     "displayName": "Display Name",
+     "displayNamePlaceholder": "Add optional display name",
+     "noSources": "No Data Sources",
++    "copyTooltip": "Copy {entity} to compare and analyze variants.<br/><a href='{docsLink}' target='_blank' rel='noopener noreferrer'>Documentation</a>",
+     "templates": {
+       "blank": "Blank report",
+       "p75Duration": "KPI: 75th Percentile Duration",
+@@ -400,6 +428,13 @@
+       "hour": "Hour",
+       "searchForVariable": "Search for variable…"
+     },
++    "sorting": {
++      "label": "Sorting Order",
++      "order": {
++        "asc": "Ascending",
++        "desc": "Descending"
++      }
++    },
+     "visualization": {
+       "label": "Visualization",
+       "number": "Number",
+@@ -439,6 +474,11 @@
+       "exceededInstances": "Exceeded-instances-{name}",
+       "noValueAvailable": "No actual value available.<br/>Cannot compare target and actual value."
+     },
++    "updateReportPreview": {
++      "switchLabel": "Update Preview Automatically",
++      "buttonLabel": "Run",
++      "cannotUpdate": "This function only works with automatic preview update turned on"
++    },
+     "invalidCombinationError": "Cannot display data for the given report settings. Please choose another combination!",
+     "noDataNotice": "No data",
+     "errorNotice": "Error loading data",
+@@ -518,7 +558,10 @@
+         "inputVariable": "InputVar",
+         "outputVariable": "OutputVar",
+         "objectVariable": "Object Variable",
+-        "numberOfOpenIncidents": "Open Incidents Count"
++        "numberOfOpenIncidents": "Open Incidents Count",
++        "numberOfIncidents": "Incidents Count",
++        "numberOfUserTasks": "Executed User Tasks Count",
++        "flowNodeDuration": "Dur"
+       },
+       "pageError": "Only the first 10,000 instances can be displayed"
+     },
+@@ -598,16 +641,18 @@
+         "legend": "Line points",
+         "enableMarkers": "Enable point markers"
+       },
+-      "stackedBars": {
++      "display": {
+         "legend": "Display",
+-        "enableStackedBars": "Stacked bars"
++        "enableStackedBars": "Stacked bars",
++        "horizontalBars": "Horizontal bars"
+       },
+       "limitPrecision": {
+         "legend": "Custom Precision",
+         "numberOf": {
+           "digits": "No. of digits",
+           "units": "No. of units"
+-        }
++        },
++        "tooltip": "Precision of values displayed in the chart tooltips."
+       },
+       "includeTableColumn": "Table columns to include",
+       "includeNewVariables": "Display data from new variables",
+@@ -707,14 +752,17 @@
+       "durationSLI": "Process Duration SLI Tracking"
+     },
+     "addButton": {
+-      "addReport": "Add a Report",
++      "addTile": "Add a Tile",
+       "optimizeReport": "Optimize Report",
+       "addReportLabel": "Add Report",
++      "addTileLabel": "Add Tile",
+       "selectReportPlaceholder": "Select a Report",
+       "noReports": "No reports have been created",
+-      "externalUrl": "External URL",
+-      "newReport": "New Report from a template"
++      "externalWebsite": "External Website",
++      "newReport": "New Report from a template",
++      "text": "Text"
+     },
++    "textReportEditNotification": "This is a feature we plan to build",
+     "noAuthorization": "Missing authorization",
+     "noReportAccess": "No access to report",
+     "filter": {
+@@ -874,7 +922,7 @@
+     "copy": "Copy",
+     "addACopy": "Add a copy",
+     "export": "Export",
+-    "importJSON": "Import JSON",
++    "importReportDashboard": "Import Report/Dashboard",
+     "change": "Change",
+     "copyName": "Copy {name}",
+     "copyLabel": "copy",
+@@ -920,6 +968,7 @@
+     "viewMore": "View More",
+     "viewLess": "View Less",
+     "configure": "Configure",
++    "new": "New",
+     "process": {
+       "label": "Process",
+       "label-plural": "Processes"
+@@ -1111,7 +1160,11 @@
+         "flowNodeSelection": "Flow Node Selection",
+         "flowNodeDate": "Flow Node Date",
+         "flowNodeStartDate": "Flow Node Start Date",
+-        "flowNodeEndDate": "Flow Node End Date"
++        "flowNodeEndDate": "Flow Node End Date",
++        "variable-plural": "Variables",
++        "inputVariable-plural": "Input Variables",
++        "outputVariable-plural": "Output Variables",
++        "flowNodeDuration-plural": "Flow Nodes Duration"
+       },
+       "list": {
+         "appliedTo": "Applied to",
+@@ -1420,6 +1473,7 @@
+     "notAuthorizedError": "Could not authenticate you, please check your credentials.",
+     "notFoundError": "The server could not find the requested resource.",
+     "badRequestError": "The server was unable to process the request.",
++    "elasticsearchConnectionError": "The server has encountered Elasticsearch connection issues.",
+     "nonTenantScopeCompliantConflict": "Could not apply action due to conflicts with the collection data source. The definition for the report is available in the data source yet at least one tenant defined in the report is not available in the data source.",
+     "nonDefinitionScopeCompliantConflict": "Could not apply action due to conflicts with the collection data source. The report definition is not defined in the data source.",
+     "invalidLicenseError": "Invalid license provided.",
+@@ -1431,6 +1485,89 @@
+     "importDefinitionDoesNotExist": "Import failed because the imported entity requires definitions that don't exist.",
+     "importIndexVersionMismatch": "Import failed because the data structure of the imported entities do not match the current data structure. Please migrate the data in your source Optimize before exporting to ensure the Optimize Version matches.",
+     "importDefinitionForbidden": "Import failed because you are not authorized to access some of the required definitions for the imported entity.",
+-    "importFileInvalid": "Import failed because the provided file was invalid. Only JSON files exported from Optimize can be imported."
++    "importFileInvalid": "Import failed because the provided file was invalid. Only JSON files exported from Optimize can be imported.",
++    "invalidAlertEmailAddresses": "Users with the following email addresses are not available for receiving alerts: {invalidAlertEmails}"
++  },
++  "textEditor": {
++    "toolbar": {
++      "history": {
++        "undo": "Undo",
++        "redo": "Redo"
++      },
++      "align": {
++        "label": "Align",
++        "left": "Left",
++        "center": "Center",
++        "right": "Right"
++      },
++      "styles": {
++        "bold": "Bold",
++        "italic": "Italic",
++        "underline": "Underline",
++        "strikethrough": "Strikethrough",
++        "code": "Code"
++      },
++      "blockStyles": {
++        "bullet": "Bulleted List",
++        "code": "Code Block",
++        "h1": "Heading 1",
++        "h2": "Heading 2",
++        "h3": "Heading 3",
++        "number": "Numbered List",
++        "paragraph": "Normal",
++        "quote": "Quote Block"
++      },
++      "insert": {
++        "label": "Insert",
++        "horizontalRule": "Horizontal Rule",
++        "image": "Image",
++        "link": "Link"
++      }
++    },
++    "plugins": {
++      "images": {
++        "title": "Insert Image",
++        "urlLabel": "Image URL",
++        "urlPlaceholder": "https://picture/some-picture.jpg",
++        "altTextLabel": "Image name (optional)",
++        "altTextPlaceholder": "Some picture"
++      },
++      "link": {
++        "title": "Insert Link",
++        "urlLabel": "Link URL",
++        "urlPlaceholder": "https://example.com",
++        "altTextLabel": "Display text (optional)",
++        "altTextPlaceholder": "Link to example.com"
++      }
++    }
++  },
++  "managementDashboard": {
++    "dashboardName": "Adoption Dashboard",
++    "report": {
++      "processInstanceUsage": "Process Instance Usage",
++      "incidentFreeRate": "Overall Incident-Free Rate",
++      "automationRate": "Automation Rate (<1 hour)",
++      "longRunningInstances": "Long-Running Process Instances",
++      "automationCandidates": "Automation Candidates",
++      "activeBottlenecks": "Active Bottlenecks"
++    }
++  },
++  "instantDashboard": {
++    "dashboardName": "Process performance overview",
++    "kpiDashboardName": "KPI Dashboard",
++    "report": {
++      "percentSLAMet": "% SLA Met",
++      "flownodeDuration": "Which process steps take too much time? (To Do: Add Target values for these process steps)",
++      "controlChart": "Is my process within control?",
++      "activeIncidentsHeatmap": "Where are the active incidents?",
++      "percentNoIncidents": "Incident-Free Rate",
++      "incidentDurationHeatmap": "Where are the worst incidents?",
++      "p99Duration": "99th Percentile Duration",
++      "incidentDurationTrend": "Are we improving incident handling?",
++      "30DayThroughput": "Throughput (30-day rolling)",
++      "p75Duration": "75th Percentile Duration",
++      "instanceTrends": "How frequently is this process run?",
++      "flownodeFrequency": "How often is each process step run?"
++    }
+   }
+ }
