@@ -40,12 +40,12 @@ The backup API can be reached via the Actuator management port, which by default
 Before you can use the backup and restore feature:
 
 1. The [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
-2. Operate and Tasklist must be configured with the repository name using either of the following configuration options:
+2. Operate and Tasklist must be configured with the repository name using one of the following configuration options:
 
 <Tabs groupId="config" defaultValue="yaml" values={
 [
 {label: 'YAML file', value: 'yaml', },
-{label: 'Environment Variable', value: 'env', },
+{label: 'Environment variables', value: 'env', },
 ]
 }>
 
@@ -124,7 +124,7 @@ Response:
 
 Example request:
 
-```
+```shell
 curl --request POST 'http://localhost:8080/actuator/backups' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": 123 }'
@@ -164,7 +164,7 @@ Response:
 
 For example, the request could look like this:
 
-```
+```shell
 curl 'http://localhost:8080/actuator/backups/123'
 ```
 
@@ -217,7 +217,7 @@ Response:
 
 For example, the request could look like this:
 
-```
+```shell
 curl 'http://localhost:8080/actuator/backups'
 ```
 
@@ -252,7 +252,7 @@ To restore the backup with a known backup id, you must restore all the snapshots
 
 Example of Elasticsearch query:
 
-```
+```shell
 curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_123_8.1.0-snapshot_part_1_of_6/_restore?wait_for_completion=true`
 ```
 

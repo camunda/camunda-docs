@@ -58,7 +58,7 @@ POST actuator/backups
 
 ### Example request
 
-```
+```shell
 curl --request POST 'http://localhost:8092/actuator/backups' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": 123456 }'
@@ -101,8 +101,8 @@ GET actuator/backup
 
 ### Example request
 
-```
-curl ---request GET 'http://localhost:8092/actuator/backups/123456'
+```shell
+curl --request GET 'http://localhost:8092/actuator/backups/123456'
 ```
 
 ### Example response
@@ -161,8 +161,8 @@ DELETE actuator/backups/{backupId}
 
 ### Example request
 
-```
-curl ---request DELETE 'http://localhost:8092/actuator/backups/123456'
+```shell
+curl --request DELETE 'http://localhost:8092/actuator/backups/123456'
 ```
 
 ## Restore backup
@@ -184,6 +184,6 @@ To restore a given backup, the following steps must be performed:
 
 Example Elasticsearch request:
 
-```
+```shell
 curl --request POST `http://localhost:9200/_snapshot/repository_name/camunda_optimize_123456_3.9.0_part_1_of_2/_restore?wait_for_completion=true`
 ```
