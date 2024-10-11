@@ -12,7 +12,7 @@ keywords:
 <span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
 
 import clsx from "clsx";
-import SaasPrereqs from './react-components/saas-prerequisites.md'
+import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 
 This guide will walk you through working with a REST Connector task as a first time Camunda 8 SaaS user. The REST Connector is a [protocol Connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
 
