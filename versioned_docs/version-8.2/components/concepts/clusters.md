@@ -27,7 +27,7 @@ Free Trial clusters have the same functionality as a production cluster, but are
 
 Once you sign up for a Free Trial, you are able to create one production cluster for the time of your trial.
 
-When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your free trial is deleted, and you cannot create new clusters.
+When your Free Trial plan expires, you are automatically transferred to the Free plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your free trial is deleted, and you cannot create new clusters.
 
 ### Auto-pause
 
@@ -52,7 +52,7 @@ To prevent auto-pause, you can:
 
 Development clusters are recommended for development, testing, proof of concepts, and demos.
 
-Professional Plan users have the option to create **development clusters**, offering free execution for development. Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
+Professional plan users have the option to create **development clusters**, offering free execution for development. Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
 
 Additionally, the following applies to **development clusters**:
 

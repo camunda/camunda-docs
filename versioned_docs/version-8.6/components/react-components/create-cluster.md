@@ -16,7 +16,7 @@ Zeebe must show a status of **Healthy** to properly deploy your model.
 
 ## Development clusters
 
-Starter Plan users have one **development cluster**, with free execution for development, included in their plan.
+Starter plan users have one **development cluster**, with free execution for development, included in their plan.
 Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 
