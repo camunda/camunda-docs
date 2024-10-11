@@ -9,7 +9,7 @@ keywords:
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import clsx from "clsx";
 import SaasPrereqs from './react-components/saas-prerequisites.md'

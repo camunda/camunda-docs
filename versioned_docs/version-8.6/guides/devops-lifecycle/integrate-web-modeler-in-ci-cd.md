@@ -9,10 +9,8 @@ keywords:
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-<p>
-  <span class="badge badge--intermediate">Intermediate</span>
-  <span class="badge badge--medium">Time estimate: 1 hour</span>
-</p>
+<span class="badge badge--intermediate">Intermediate</span>
+<span class="badge badge--medium">Time estimate: 1 hour</span>
 
 [Web Modeler](../../components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
