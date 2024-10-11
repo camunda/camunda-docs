@@ -13,6 +13,6 @@ Camunda's SAP integration consists of several features that can be used independ
   - Operate BTP services from BPMN tasks
   - Inbound proxy endpoint to start process instances of BPMN models, including custom variables
 
-These features run in the customer's scope on [https://www.sap.com/products/technology-platform.html](https://www.sap.com/products/technology-platform.html). They do not require a proprietary Camunda-related setup, and instead re-use an existing infrastructure with minimal prerequisites. This shared resource usage is cost-effective and aids both your and Camunda's sustainability effort.
+These features run in the customer's [SAP BTP instance](https://www.sap.com/products/technology-platform.html). They do not require a proprietary Camunda-related setup, and instead re-use an existing infrastructure with minimal prerequisites. This shared resource usage is cost-effective and aids both your and Camunda's sustainability effort.
 
 ![SAP integration overview](./img/sap-integration-overview.png)

@@ -22,9 +22,7 @@ For a standard overview of the steps involved in the SAP OData Connector, examin
 
 ## Prerequisites
 
-This Connector integrates into a standard BTP landscape and doesn't require any proprietary setup.
-
-However, a minimum set of SAP infrastructure requirements must be in place for the SAP OData Connector Docker image to run:
+To run the SAP OData Connector Docker image, the following SAP infrastructure setup is required:
 
 - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine doing the deployment.
 - BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [space created](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
@@ -33,12 +31,8 @@ However, a minimum set of SAP infrastructure requirements must be in place for t
   - [Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all), `lite` plan (to connect to the SAP is on-premises)
   - [Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?service_plan=lite&region=all&commercialModel=btpea), `lite` plan
 - One or more instance- or subaccount-level destinations, pointing to the SAP systems to communicate with.
-  ![sample BTP destination configuration](/Users/volker.buzek/git/camunda/camunda-docs/docs/guides/sap/images/btp-destination.png)
-
-:::warning
-Ensure `Additional Properties` are correctly set on the Destination.
-
-Here's a recommended set of properties:
+  ![sample BTP destination configuration](./img/btp-destination.png)
+- Ensure `Additional Properties` are correctly set on the Destination. For example:
 
 ```json
 HTML5.DynamicDestination: true
@@ -48,21 +42,17 @@ WebIDESystem: <SAP system ID>
 WebIDEUsage: odata_gen
 ```
 
-:::
-
 :::warning
 Currently, only `BasicAuthentication` is supported on the Destination by the SAP OData Connector.
 :::
 
 ## Deployment to BTP
 
-A descriptor file is all that's required to deploy the SAP OData Connector to a space in a BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in BTP's Cloud Foundry environment to describe the application that needs deployment.
+A descriptor file is required to deploy the SAP OData Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment. Take the following steps:
 
-Adjust the values to match those of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
-
-Adjust the names of the BTP destination- and connectivity-instances to your liking - both will be created automatically for you upon deployment. If instances in your subaccount of any of the two services exist, they will not be replaced, but reused.
-
-After creating the `mtad.yaml` file, log into the desired BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
+1. Adjust the values to match those of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
+2. Adjust the names of the SAP BTP destination and connectivity instances to your liking - both will be created automatically for you upon deployment. If instances in your subaccount of any of the two services exist, they will be reused.
+3. After creating the `mtad.yaml` file, log into the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
 
 ```shell
 $> cf login
@@ -70,7 +60,7 @@ API endpoint: https://api.cf. ...
 ...
 ```
 
-Then, deploy the SAP OData Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on.
+4. Deploy the SAP OData Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on:
 
 ```shell
 $> cf deploy ./ # append the -f flag to shortcircuit ongoing deployments
@@ -81,11 +71,11 @@ Application "sap-odata-connector" started and available at "some.url.hana.ondema
 
 ## Deployment in Camunda 8 SaaS
 
-If using Web Modeler, [import the SAP OData Connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) for design use.
+- If using Web Modeler, [import the SAP OData Connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) for design use.
 
 ![sample BPMN diagram with SAP OData connector](./img/sap-odata-connector-task-in-model.png)
 
-If using Desktop Modeler, [follow the standard importing procedure](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
+- If using Desktop Modeler, [follow the standard importing procedure](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
 
 ## Working with the SAP OData Connector in Camunda Modeler
 
@@ -94,16 +84,12 @@ If using Desktop Modeler, [follow the standard importing procedure](/components/
 Modeling the SAP OData Connector task is similar to any other Camunda Connector. When the BPMN task is selected, the properties panel in Modeler shows the respective options.
 
 :::note
-The configuration options will dynamically change with the selected HTTP method and the OData protocol version. For example, a `payload` field is only displayed when the HTTP method is other than "GET".
+The configuration options will dynamically change with the selected HTTP method and the OData protocol version. For example, a `payload` field is only displayed when the HTTP method is something other than "GET".
 :::
 
 ![SAP OData connector element template](./img/sap-odata-connector-element-template.png)
 
 Specifying the `BTP destination name` allows for re-using existing Destinations from the subaccount or instance level. Authentication and authorizations are maintained at that level, and that is why it's not necessary to maintain credentials for the Connector.
-
-:::note
-Currently, only `BasicAuthentication` is supported on the Destination by the SAP OData Connector.
-:::
 
 ### Advanced capabilities
 
@@ -135,7 +121,7 @@ The query result can either be mapped to a single result variable or worked on [
 
 The SAP OData Connector allows handling of query errors directly in the model. This means an OData error is relayed to the process instance in the reserved variables `bpmnError` and `error` and can be processed accordingly.
 
-Equip the Connector task with an error handling expression such as:
+1. Equip the Connector task with an error handling expression such as:
 
 ```js
 if error.code = "400" then
@@ -152,7 +138,7 @@ else
 
 ![image-20241010160419616](./img/odata-connector-error-expression.png)
 
-Specifically note the third parameter to `bpmnError`:
+2. Specifically note the third parameter to `bpmnError`:
 
 ```js
 { errorMessage: error.message, errorCode: error.code }
@@ -160,7 +146,7 @@ Specifically note the third parameter to `bpmnError`:
 
 This relays the error message and code to the next step in the process flow.
 
-Then, equip the BPMN task with an error boundary event:
+3. Equip the BPMN task with an error boundary event:
 
 ![error boundary event on SAP OData connector](./img/sap-odata-connector-task-error-handling2.png)
 
