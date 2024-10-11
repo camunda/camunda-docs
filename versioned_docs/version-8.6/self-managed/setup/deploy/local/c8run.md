@@ -113,13 +113,17 @@ To authenticate and begin making requests, take the following steps:
 1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
 
 ```shell
-curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
+curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
+  --cookie-jar cookie.txt
 ```
 
 2. Send the cookie (as a header) in each API request. In this case, request all process definitions:
 
 ```shell
-curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -d '{}'
+curl --request POST 'http://localhost:8080/v1/process-definitions/search'  \
+  --cookie cookie.txt \
+  --header 'Content-Type: application/json' \
+  --data-raw '{}`
 ```
 
 </TabItem>
@@ -132,14 +136,14 @@ Some endpoints in the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-
 1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
 
 ```shell
-curl -f --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
-   --cookie-jar cookie.txt
+curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
+  --cookie-jar cookie.txt
 ```
 
 2. Send the cookie (as a header) in each API request. In this case, the topology of your Zeebe cluster:
 
 ```shell
-curl -f --cookie  cookie.txt  localhost:8080/v2/topology
+curl --cookie  cookie.txt  localhost:8080/v2/topology
 ```
 
 </TabItem>
