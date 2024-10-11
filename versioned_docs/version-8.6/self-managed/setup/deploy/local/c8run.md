@@ -98,6 +98,54 @@ To add a custom Connector:
 
 Once configured correctly, your Connectors are available for use in Modeler.
 
+## Use Camunda APIs
+
+Camunda 8 Run authenticates with the [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate](/docs/apis-tools/operate-api/overview.md), and [Zeebe](/apis-tools/zeebe-api/grpc.md) APIs, as well as the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), by including cookie headers in each request. This cookie can be obtained by using the API endpoint `/api/login`.
+
+To authenticate and begin making requests, take the following steps:
+
+<Tabs groupId="api" defaultValue="v1" queryString values={
+[
+{label: 'Tasklist, Operate, and Zeebe', value: 'v1' },
+{label: 'Camunda 8 REST API', value: 'v2' },
+]}>
+
+<TabItem value='v1'>
+
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
+
+```shell
+curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
+```
+
+2. Send the cookie (as a header) in each API request. In this case, request all process definitions:
+
+```shell
+curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -d '{}'
+```
+
+</TabItem>
+<TabItem value='v2'>
+
+:::caution
+Some endpoints in the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) are considered [alpha features](/reference/alpha-features.md), and are still in development.
+:::
+
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
+
+```shell
+curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
+```
+
+2. Send the cookie (as a header) in each API request. In this case, the topology of your Zeebe cluster:
+
+```shell
+curl -b cookie.txt -X GET 'http://localhost:8080/v2/topology' -H 'Content-Type: application/json'
+```
+
+</TabItem>
+</Tabs>
+
 ## Shut down Camunda 8 Run
 
 To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
