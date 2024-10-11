@@ -187,7 +187,8 @@ You have now designed the process. To allow the user to make the decision, you m
 
 - You do not need to save your process diagram as Web Modeler automatically saves every change you make.
 - You can also create [milestones](/components/modeler/web-modeler/milestones.md) to save a version snapshot of your BPMN or DMN diagram at any time.
-  :::
+
+:::
 
 1. Select the user task you created in **[Step 1](#step-1-create-a-new-process)**.
 1. Click the blue **Link Form** icon in the context pad, and click **Create new form**.
