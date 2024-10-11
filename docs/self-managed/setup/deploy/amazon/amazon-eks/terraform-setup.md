@@ -1,6 +1,6 @@
 ---
 id: eks-terraform
-title: "Deploy an EKS cluster with Terraform"
+title: "Deploy an EKS cluster with Terraform (stable)"
 description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module for a quick Camunda 8 setup."
 ---
 
@@ -8,6 +8,8 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 This guide offers a detailed tutorial for deploying an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
+
+It is recommended to use this guide for building a robust and sustainable infrastructure over time. However, for a quicker trial or proof of concept, using the [eksctl](./eksctl.md) method may suffice.
 
 This is designed to help leverage the power of IaC to streamline and reproduce a Cloud infrastructure setup. By walking through the essentials of setting up an Amazon EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database and an OpenSearch domain (alternative to ElasticSearch), this guide explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
 
