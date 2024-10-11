@@ -123,7 +123,7 @@ curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo
 curl --request POST 'http://localhost:8080/v1/process-definitions/search'  \
   --cookie cookie.txt \
   --header 'Content-Type: application/json' \
-  --data-raw '{}`
+  --data-raw '{}'
 ```
 
 </TabItem>
