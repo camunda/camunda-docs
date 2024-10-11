@@ -1,6 +1,6 @@
 ---
-id: camunda-rpa-framework-library
-title: Camunda RPA framework library
+id: rpa-framework-library
+title: RPA framework library
 description: "Learn how Camunda offers a custom library for the RPA framework, providing out-of-the-box functionality to manipulate Camunda variables within RPA scripts."
 ---
 
@@ -8,9 +8,9 @@ Camunda offers a custom library for the **robotic process automation (RPA)** fra
 
 ## Including the Camunda library
 
-To use Camunda-provided keywords, add the Camunda library in the [Camunda RPA runtime documentation](/components/experimental/rpa/rpa-integration-with-camunda.md) to your Robot file:
+To use Camunda-provided keywords, import the Camunda library into your Robot file. The Camunda library is only available within the [Camunda RPA runtime](/components/experimental/rpa/rpa-integration-with-camunda.md).
 
-```powershell
+```robot
 *** Settings ***
 Library             Camunda
 
@@ -23,8 +23,8 @@ To set a process variable in Camunda from within an RPA script, use the keyword 
 
 ### Syntax
 
-```powershell
-Set Output Variable	{variable_name}	{value}
+```robot
+Set Output Variable	{variableName}	{value}
 ```
 
 ### Parameters
@@ -34,7 +34,7 @@ Set Output Variable	{variable_name}	{value}
 
 ### Example
 
-```powershell
+```robot
 Set Output Variable	customerName	John Doe
 ```
 
@@ -44,7 +44,7 @@ This command sets a variable named `customerName` with the value `John Doe` in t
 
 The following example demonstrates a script that solves the first challenge at [rpachallenge.com](https://rpachallenge.com/) and returns the result message to Camunda:
 
-```powershell
+```robot
 *** Settings ***
 Documentation       Robot to solve the first challenge at rpachallenge.com,
 ...                 which consists of filling a form that randomly rearranges

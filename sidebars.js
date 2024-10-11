@@ -700,10 +700,11 @@ module.exports = {
         {
           type: "category",
           label: "Robotic Process Automation (RPA)",
-          items: [
-            "components/experimental/rpa/rpa-integration-with-camunda",
-            "components/experimental/rpa/camunda-rpa-framework-library",
-          ],
+          link: {
+            type: "doc",
+            id: "components/experimental/rpa/rpa-integration",
+          },
+          items: ["components/experimental/rpa/rpa-framework-library"],
         },
       ],
     },

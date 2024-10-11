@@ -1,23 +1,22 @@
 ---
-id: rpa-integration-with-camunda
-title: RPA integration with Camunda
+id: rpa-integration
+title: RPA integration
 description: "Learn how Camunda enables orchestration of simple robotic process automation (RPA) tasks within Camunda 8 based on the RPA Framework."
 ---
 
-Camunda enables orchestration of simple **robotic process automation (RPA)** tasks within Camunda 8 based on the [RPA Framework](https://rpaframework.org/). The RPA integration consists of two primary components: RPA runtime and the Camunda Desktop Modeler plugin.
+Camunda enables orchestration of simple **robotic process automation (RPA)** tasks within Camunda 8 based on the [RPA Framework](https://rpaframework.org/). The RPA integration consists of two primary components: RPA runtime and the [Camunda Desktop Modeler](/components/modeler/about-modeler.md) plugin.
 
 ## RPA runtime
 
-The RPA runtime facilitates the execution of your RPA scripts and is suitable for both local testing and script execution from your Camunda SaaS cluster.
+The RPA runtime facilitates the execution of your RPA scripts and is suitable for both local testing and script execution from your Camunda SaaS [cluster](//guides/create-cluster.md).
 
 - **For a full development setup**: Visit the [Camunda Prototype RPA Worker GitHub repository](https://github.com/camunda/rpa-runtime).
 - **For a Windows setup without Python**: Take the following steps:
-
-1. Download the [RPA runner repository](https://github.com/camunda/rpa-runtime/archive/refs/heads/main.zip) from GitHub.
-2. Unzip the file and navigate to the `rpa-runtime-main` repository folder.
-3. Execute `setup.ps1` using PowerShell. If permission issues arise, alter your Execution Policy with the command `Set-ExecutionPolicy RemoteSigned`.
-4. Enter your credentials into the .env file. Refer to [the documentation on how to create credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
-5. Start the RPA worker locally by running `start.ps1` in PowerShell. To stop the worker, close the PowerShell terminal.
+  1. Download the [RPA runner repository](https://github.com/camunda/rpa-runtime/archive/refs/heads/main.zip) from GitHub.
+  2. Unzip the file and navigate to the `rpa-runtime-main` repository folder.
+  3. Execute `setup.ps1` using PowerShell. If permission issues arise, alter your Execution Policy with the command `Set-ExecutionPolicy RemoteSigned`.
+  4. Enter your credentials into the .env file. Refer to [the documentation on how to create credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
+  5. Start the RPA worker locally by running `start.ps1` in PowerShell. To stop the worker, close the PowerShell terminal.
 
 ### Directories
 
