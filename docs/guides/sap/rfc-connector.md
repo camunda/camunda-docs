@@ -99,7 +99,7 @@ Application "sap-rfc-connector" started and available at "some.url.hana.ondemand
 
 ### Modeling options
 
-Modeling the SAP RFC Connector task is similar to any other Camunda Connector. When the BPMN task is selected, the properties panel in the modeler shows the respective options.
+To use the **SAP RFC Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
 
 ![sap-rfc-connector-task-in-model](./img/sap-rfc-connector-element-template.png)
 
