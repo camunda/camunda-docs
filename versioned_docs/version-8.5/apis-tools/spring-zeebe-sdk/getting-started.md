@@ -128,7 +128,7 @@ Example environment variables to be set to configure gRPC and REST connection:
 
 ```properties
 ZEEBE_GRPC_ADDRESS=http://127.0.0.1:26500/
-ZEEBE_REST_ADDRESS=http://127.0.0.1:8083/
+ZEEBE_REST_ADDRESS=http://127.0.0.1:8080/
 ```
 
 Properties to be set using this approach:
