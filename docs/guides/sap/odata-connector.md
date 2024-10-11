@@ -117,7 +117,7 @@ The result of any query, be it reading or writing to the SAP system, is in JSON 
 
 ![the output mapping of the SAP OData element template](./img/sap-odata-connector-element-template-result.png)
 
-The query result can either be mapped to a single result variable or worked on [via FEEL with an expression](https://docs.camunda.io/docs/next/components/connectors/use-connectors/#result-expression). The same is applicable to `getResponse`, as a result variable contains the described query JSON in its entirety. The result expression `{getStatusCode: statusCode}` would only hold the HTTP status code in the `getStatusCode` process variable.
+The query result can either be mapped to a single result variable or worked on [via FEEL with an expression](/components/connectors/use-connectors.md#result-expression). The same is applicable to `getResponse`, as a result variable contains the described query JSON in its entirety. The result expression `{getStatusCode: statusCode}` would only hold the HTTP status code in the `getStatusCode` process variable.
 
 ### Error handling
 
