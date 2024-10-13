@@ -1,6 +1,6 @@
 ---
 id: connector-types
-title: Types of Connectors
+title: Connector types
 description: "Connectors come in type and subtypes that describe their functionality."
 ---
 

@@ -302,19 +302,36 @@ module.exports = {
       ],
     },
     {
-      Connectors: [
-        "components/connectors/introduction-to-connectors",
-        "components/connectors/connector-types",
+      type: "category",
+      label: "Connectors",
+      link: {
+        type: "doc",
+        id: "components/connectors/introduction-to-connectors",
+      },
+      items: [
         {
-          "Use Connectors": [
+          type: "category",
+          label: "Get started",
+          link: {
+            type: "doc",
+            id: "components/connectors/connectors-start",
+          },
+          items: [
             "components/connectors/use-connectors/index",
+            "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
+            "components/connectors/manage-connector-templates",
           ],
         },
         {
-          "Out-of-the-box Connectors": [
-            "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+          type: "category",
+          label: "Connectors A-Z",
+          link: {
+            type: "doc",
+            id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+          },
+          items: [
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
@@ -342,6 +359,8 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-sheets",
               ],
             },
+            "components/connectors/protocol/graphql",
+            "components/connectors/protocol/http-webhook",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
@@ -353,10 +372,13 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
+            "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
+            "components/connectors/protocol/rest",
             "components/connectors/out-of-the-box-connectors/salesforce",
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/protocol/soap",
             "components/connectors/out-of-the-box-connectors/sql",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
@@ -364,22 +386,23 @@ module.exports = {
           ],
         },
         {
-          "Protocol Connectors": [
-            "components/connectors/protocol/graphql",
-            "components/connectors/protocol/http-webhook",
-            "components/connectors/protocol/polling",
-            "components/connectors/protocol/rest",
-            "components/connectors/protocol/soap",
-          ],
-        },
-        "components/connectors/manage-connector-templates",
-        {
-          "Building custom Connectors": [
+          type: "category",
+          label: "Custom Connectors",
+          link: {
+            type: "doc",
+            id: "components/connectors/custom-built-connectors/build-connector",
+          },
+          items: [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
             {
-              "Update guide": [
-                "components/connectors/custom-built-connectors/update-guide/introduction",
+              type: "category",
+              label: "Connector SDK updates",
+              link: {
+                type: "doc",
+                id: "components/connectors/custom-built-connectors/update-guide/introduction",
+              },
+              items: [
                 "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
                 "components/connectors/custom-built-connectors/update-guide/090-to-0100",
                 "components/connectors/custom-built-connectors/update-guide/080-to-090",
@@ -395,6 +418,8 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
       Zeebe: [
         "components/zeebe/zeebe-overview",
         {

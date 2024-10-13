@@ -1,6 +1,6 @@
 ---
 id: connector-templates
-title: Connector templates
+title: Custom Connector templates
 description: Learn how to modify BPMN elements with Connector templates to create custom modeling experiences.
 ---
 
