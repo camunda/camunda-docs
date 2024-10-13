@@ -7,7 +7,7 @@ description: "Use Modeler to design and deploy a process."
 import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 <details>
    <summary>Have you signed up for Camunda yet?</summary>

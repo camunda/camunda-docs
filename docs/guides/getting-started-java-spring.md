@@ -9,7 +9,7 @@ keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 import Install from './react-components/\_install-c8run.md'
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">1 hour</span><br /><br />
+<span class="badge badge--medium">1 hour</span>
 
 In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
