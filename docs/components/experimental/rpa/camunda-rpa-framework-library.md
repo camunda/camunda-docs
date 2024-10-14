@@ -8,7 +8,7 @@ Camunda offers a custom library for the **robotic process automation (RPA)** fra
 
 ## Import the Camunda library
 
-To use Camunda-provided keywords, import the Camunda library into your Robot file. The Camunda library is only available within the [Camunda RPA runtime](/components/experimental/rpa/rpa-integration-with-camunda.md).
+To use Camunda-provided keywords, import the Camunda library into your **Robot** file. The Camunda library is only available within the [Camunda RPA runtime](/components/experimental/rpa/rpa-integration-with-camunda.md).
 
 ```robot
 *** Settings ***
