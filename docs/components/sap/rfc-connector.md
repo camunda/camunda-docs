@@ -49,7 +49,7 @@ zeebe.client.cloud.clientSecret=zzz
 camunda.connector.polling.enabled=false
 ```
 
-2. Copy the deployment descriptor `mta.yaml.example` to `mta.yaml` and fill in the same credentials in the `modules.properties` scope:
+2. Copy the deployment descriptor `mta.yaml.example` to `mta.yaml` and enter the same credentials in the `modules.properties` scope:
 
 ```yaml
 _schema-version: 3.3.0
