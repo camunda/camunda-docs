@@ -95,7 +95,7 @@ Specifying the `BTP destination name` allows you to reuse existing Destinations 
 
 In addition to the basic OData settings such as Service, Entity, EntitySet, Method, and OData version, the **Advanced** section allows you to fine tune `GET` queries to the SAP method with all standard parameters.
 
-For example, supplying `$filter` and `$select` parameters help in reducing data transferred over the wire, while `$expand` helps in retrieving additional entities with a single query.
+For example, supplying `$filter` and `$select` parameters helps in reducing data transferred over the wire, while `$expand` helps in retrieving additional entities with a single query.
 
 ![Advanced options of the SAP OData connector element template](./img/sap-odata-connector-element-template-advanced.png)
 
