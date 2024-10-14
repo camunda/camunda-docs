@@ -1,0 +1,27 @@
+/* Remove borders and background from the table */
+.no-border-table {
+  border-collapse: collapse;
+  width: 100%;
+  background: none;
+}
+
+.no-border-table th,
+.no-border-table td {
+  border: none;
+  background: none;
+  padding: 8px;
+}
+
+.no-border-table th {
+  text-align: left;
+}
+
+.no-border-table tr {
+  border: none;
+  background: none;
+}
+
+.no-border-cell {
+  border: none;
+  background: none;
+}
