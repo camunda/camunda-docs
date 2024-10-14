@@ -8,7 +8,7 @@ Camunda enables orchestration of simple **robotic process automation (RPA)** tas
 
 ## RPA runtime
 
-You can use the RPA runtime to run your RPA scripts for both local testing or from your Camunda SaaS [cluster](//guides/create-cluster.md).
+You can use the RPA runtime to run your RPA scripts for both local testing or from your Camunda SaaS [cluster](/guides/create-cluster.md).
 
 - **For a full development setup**: Visit the [Camunda Prototype RPA Worker GitHub repository](https://github.com/camunda/rpa-runtime).
 - **For a Windows setup without Python**: Take the following steps:
@@ -48,7 +48,7 @@ You can now open and edit `.robot` files in Desktop Modeler.
 
 To create or edit a `.robot` file, use the welcome page or file dialog in Modeler.
 
-The editor allows for script development, with all RPA Framework libraries listed in the [RPA Framework documentation](https://rpaframework.org/#libraries). Camunda also offers a [Camunda library extension](/components/experimental/rpa/camunda-rpa-framework-library.md) to integrate with Camunda and return variables from your RPA scripts, for example.
+The editor allows for script development, with all RPA Framework libraries listed in the [RPA Framework documentation](https://rpaframework.org/#libraries). Camunda also offers a [Camunda library extension](/components/early-access/experimental/rpa/camunda-rpa-framework-library.md) to integrate with Camunda and return variables from your RPA scripts, for example.
 
 Currently, only a single `.robot` file is supported, and adding custom Python files or libraries is not possible.
 
