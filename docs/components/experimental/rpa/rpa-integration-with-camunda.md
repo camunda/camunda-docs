@@ -48,7 +48,7 @@ You can now open and edit `.robot` files in Desktop Modeler.
 
 To create or edit a `.robot` file, use the welcome page or file dialog in Modeler.
 
-The editor allows for script development, with all RPA Framework libraries listed [here](https://rpaframework.org/#libraries). Camunda also offers a [Camunda library extension](/components/experimental/rpa/camunda-rpa-framework-library.md) to integrate with Camunda and return variables from your RPA scripts, for example.
+The editor allows for script development, with all RPA Framework libraries listed in the [RPA Framework documentation](https://rpaframework.org/#libraries). Camunda also offers a [Camunda library extension](/components/experimental/rpa/camunda-rpa-framework-library.md) to integrate with Camunda and return variables from your RPA scripts, for example.
 
 Currently, only a single `.robot` file is supported, and adding custom Python files or libraries is not possible.
 
