@@ -709,8 +709,10 @@ module.exports = {
           type: "category",
           label: "Alpha features",
           items: [
-            "components/early-access/alpha/feature3",
-            "components/early-access/alpha/feature4",
+            "components/early-access/alpha/sap/sap-integration",
+            "components/early-access/alpha/sap/odata-connector",
+            "components/early-access/alpha/sap/rfc-connector",
+            "components/early-access/alpha/sap/btp-integration",
           ],
         },
       ],
