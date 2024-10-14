@@ -35,7 +35,7 @@ To run the SAP RFC Connector Docker image, the following SAP infrastructure setu
 
 ## Deployment to BTP
 
-Unlike other Camunda Connectors, the SAP RFC Connector must be deployed as a Java application. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. The JCo library's license prohibits redistribution, so we can't prebuild it for you, and you will need to build the application yourself.
+Unlike other Camunda Connectors, the SAP RFC Connector must be deployed as a Java application. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. You must build the application yourself as the JCo library's license prohibits redistribution, so Camunda cannot pre-build it for you.
 
 ### Building the Java application
 
