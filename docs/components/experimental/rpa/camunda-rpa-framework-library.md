@@ -6,7 +6,7 @@ description: "Learn how Camunda offers a custom library for the RPA framework, p
 
 Camunda offers a custom library for the **robotic process automation (RPA)** framework, providing out-of-the-box functionality to manipulate [Camunda variables](/components/concepts/variables.md) within RPA scripts.
 
-## Including the Camunda library
+## Import the Camunda library
 
 To use Camunda-provided keywords, import the Camunda library into your Robot file. The Camunda library is only available within the [Camunda RPA runtime](/components/experimental/rpa/rpa-integration-with-camunda.md).
 
