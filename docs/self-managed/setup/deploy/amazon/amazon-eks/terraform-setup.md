@@ -310,13 +310,6 @@ As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Ama
 <Tabs>
   <TabItem value="standard" label="Standard" default>
 
-<!-- TODO : move this part in the installation step -->
-
-:::caution Optimize compatibility with OpenSearch
-
-**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
-:::
-
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/opensearch.tf
 ```
@@ -324,13 +317,6 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
   </TabItem>
   
   <TabItem value="irsa" label="IRSA">
-
-:::caution Optimize compatibility with OpenSearch
-
-**Authentification:** Optimize does not work with the IRSA method, it will use standard basic auth (username and password).
-
-**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
-:::
 
 In addition to traditional username and password authentication, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
 

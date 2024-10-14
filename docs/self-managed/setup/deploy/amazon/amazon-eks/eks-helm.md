@@ -18,16 +18,23 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 
-<!-- TODO: for IRSA postgres, adjust with the creation of a database -->
-<!-- TODO: also reference usage of SM C8 Check for IRSA -->
-
 ## Considerations
 
 While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
 Multi-tenancy is disabled by default and is not covered further in this guide. If you decide to enable it, you may use the same PostgreSQL instance and add an extra database for multi-tenancy purposes.
 
+:::caution Optimize compatibility with OpenSearch
+
+**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
+:::
+
 ### Architecture
+
+<!-- TODO: add steps to indicates that Aurora is optional and how can it be disabled -->
+<!-- TODO: add steps to indicates that OpenSearch is optional and how can it be disabled -->
+
+<!-- TODO: update Arch to include Aurora and OpenSearch both text and diagram -->
 
 Note the [existing architecture](../../../../about-self-managed.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
 
@@ -80,6 +87,12 @@ done
   <TabItem value="irsa" label="IRSA Auth" default>
   
 When using IRSA authentication, some following environment variables must be set and contain valid values.
+
+:::caution Optimize compatibility with OpenSearch
+
+**Authentification:** Optimize does not work with the IRSA method, it will use standard basic auth (username and password).
+
+:::
 
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
@@ -162,7 +175,8 @@ Consider setting `domainFilters` via `--set` to restrict access to certain hoste
 Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having followed the [eksctl](./eksctl.md#policy-for-external-dns) or [Terraform](./terraform-setup.md#outputs) guide.
 :::
 
-:::warning
+:::warning Uniqueness of txtOwnerId for DNS
+
 If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
 
 In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.15.0/#note) to learn more about DNS record ownership.
@@ -266,7 +280,7 @@ The following makes use of the [combined Ingress setup](/self-managed/setup/guid
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-domain.yml
 ```
 
-:::warning
+:::warning Exposure of the Zeebe Gateway
 
 Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
 
@@ -295,7 +309,7 @@ The following makes use of the [combined Ingress setup](/self-managed/setup/guid
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-domain.yml
 ```
 
-:::warning
+:::warning Exposure of the Zeebe Gateway
 
 Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
 
@@ -350,6 +364,94 @@ This command:
 - Applies the configuration from `generated-values.yml`.
 
 **Note for domain installation:** the annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
+
+<details>
+<summary>Understand how each component interacts with IRSA</summary>
+<summary>
+
+##### Web Modeler
+
+Since Web Modeler RestAPI uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
+Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
+
+##### Keycloak
+
+:::caution Only available from v21+
+
+IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards. This may require you to adjust the version used in the Camunda Helm Chart.
+
+:::
+
+From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
+
+Furthermore, the [official Keycloak documentation](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql) also provides detailed instructions for utilizing Amazon Aurora PostgreSQL.
+
+A custom Keycloak container image containing necessary configurations is conveniently accessible on Docker Hub at [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak). This image, built upon the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak), incorporates the required wrapper for seamless integration.
+
+###### Container image sources
+
+The sources of the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [GitHub](https://github.com/camunda/keycloak). In this repository, the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) is assembled in the `Dockerfile`.
+
+Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnami/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
+
+###### Keycloak image configuration
+
+Bitnami Keycloak container image configuration is available at [hub.docker.com/bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak).
+
+##### Identity
+
+Identity uses PostgreSQL, we need to configure `identity` to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](../../../../identity/deployment/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details.
+Identity already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
+
+##### Amazon OpenSearch Service
+
+###### Internal Database configuration
+
+The default setup is sufficient for Amazon OpenSearch Service clusters without `fine-grained access control`.
+
+`Fine-grained access control` adds another layer of security to OpenSearch, requiring you to add a mapping between the IAM role and the internal OpenSearch role. Visit the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html) on `fine-grained access control`.
+
+There are different ways to configure the mapping within Amazon OpenSearch Service:
+
+- Via a [Terraform module](https://registry.terraform.io/modules/idealo/opensearch/aws/latest) in case your OpenSearch instance is exposed.
+- Via the [OpenSearch dashboard](https://opensearch.org/docs/latest/security/access-control/users-roles/).
+
+<details>
+
+<summary>Via the REST API</summary>
+
+To authorize the IAM role in OpenSearch for access, follow these steps:
+
+**_Note that this example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled._** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
+
+Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
+
+```bash
+curl -sS -u "<OS_DOMAIN_USER>:<OS_DOMAIN_PASSWORD>" \
+    -X PATCH \
+    "https://<OS_ENDPOINT>/_opendistro/_security/api/rolesmapping/all_access?pretty" \
+    -H 'Content-Type: application/json' \
+    -d'
+[
+  {
+    "op": "add",
+    "path": "/backend_roles",
+    "value": ["<ROLE_NAME>"]
+  }
+]
+'
+```
+
+- Replace `<OS_DOMAIN_USER>` and `<OS_DOMAIN_PASSWORD>` with your OpenSearch domain admin credentials.
+- Replace `<OS_ENDPOINT>` with your OpenSearch endpoint URL.
+- Replace `<ROLE_NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
+
+</details>
+
+The important part is assigning the `iam_role_arn` of the previously created `opensearch_role` to an internal role within Amazon OpenSearch Service. For example, `all_access` on the Amazon OpenSearch Service side is a good candidate, or if required, extra roles can be created with more restrictive access.
+
+</summary>
+</details>
 
 ### Verify connectivity to Camunda 8
 
