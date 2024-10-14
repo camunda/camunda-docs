@@ -17,7 +17,7 @@ Library             Camunda
 # More Libraries here ...
 ```
 
-## Using keywords and setting variables
+## Use keywords and set variables
 
 To set a process variable in Camunda from within an RPA script, use the keyword `Set Output Variable`. This keyword sets an output variable to be returned from the RPA worker to Camunda. Learn more about [variable propagation](/components/concepts/variables.md#inputoutput-variable-mappings).
 
