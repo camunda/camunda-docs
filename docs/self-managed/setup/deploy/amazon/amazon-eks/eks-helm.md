@@ -53,6 +53,56 @@ export REGION="$AWS_REGION"
 export CAMUNDA_HELM_CHART_VERSION="11.0.0"
 ```
 
+<Tabs groupId="auth">
+
+  <TabItem value="basic" label="Basic Auth" default>
+  
+When using Basic authentication (username and password), some following environment variables must be set and contain valid values.
+
+Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
+
+```bash
+# List of required environment variables
+required_vars=("PG_USERNAME" "PG_PASSWORD" "OPENSEARCH_MASTER_USER" "OPENSEARCH_MASTER_PASSWORD" "DB_HOST" "DEFAULT_DB_NAME" "OPENSEARCH_HOST")
+
+# Loop through each variable and check if it is set and not empty
+for var in "${required_vars[@]}"; do
+  if [[ -z "${!var}" ]]; then
+    echo "Error: $var is not set or is empty"
+  else
+    echo "$var is set to '${!var}'"
+  fi
+done
+```
+
+  </TabItem>
+
+  <TabItem value="irsa" label="IRSA Auth" default>
+  
+When using IRSA authentication, some following environment variables must be set and contain valid values.
+
+Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
+
+```bash
+# List of required environment variables
+required_vars=("PG_USERNAME" "DEFAULT_DB_NAME" "DB_HOST" "DB_ROLE_ARN" "OPENSEARCH_HOST" "OPENSEARCH_ROLE_ARN" "CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME" "CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME" "CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME" "CAMUNDA_ZEEBE_SERVICE_ACCOUNT_NAME" "CAMUNDA_OPERATE_SERVICE_ACCOUNT_NAME" "CAMUNDA_TASKLIST_SERVICE_ACCOUNT_NAME" "CAMUNDA_OPTIMIZE_SERVICE_ACCOUNT_NAME")
+
+# Loop through each variable and check if it is set and not empty
+for var in "${required_vars[@]}"; do
+  if [[ -z "${!var}" ]]; then
+    echo "Error: $var is not set or is empty"
+  else
+    echo "$var is set to '${!var}'"
+  fi
+done
+```
+
+  </TabItem>
+
+</Tabs>
+
+You can follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md#export-values-for-the-helm-chart) to set it correctly.
+
 <Tabs groupId="domain">
   <TabItem value="with" label="With Domain" default>
 
@@ -74,10 +124,6 @@ Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform
 
 - EXTERNAL_DNS_IRSA_ARN
 - CERT_MANAGER_IRSA_ARN
-- DB_HOST
-- PG_USERNAME
-- PG_PASSWORD
-- DEFAULT_DB_NAME
 - REGION
 
 ### DNS set up
@@ -204,74 +250,106 @@ Without a domain, you will need to use [kubectl port-forward to access the Camun
 
 For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [guides](/self-managed/setup/guides/guides.md).
 
+Depending of your installation path, you may use different settings.
+For having easy and reproductable installations, we will use yaml files to configure the chart.
+
+#### 1. Create the `values.yml` File
+
+Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
+
 <Tabs groupId="domain">
-  <TabItem value="with" label="With Domain" default>
+  <TabItem value="with-domain-std" label="With Domain Basic Auth" default>
 
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
+```hcl reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-domain.yml
+```
+
 :::warning
 
-Publicly exposing the Zeebe Gateway without authorization enabled can lead to severe security risks. Consider disabling the Ingress for the Zeebe Gateway by setting the `zeebeGateway.ingress.grpc.enabled` and `zeebeGateway.ingress.rest.enabled` to `false`.
+Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
 
-By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access, making it unnecessary to expose Zeebe externally.
+- `zeebeGateway.ingress.grpc.enabled`
+- `zeebeGateway.ingress.rest.enabled`
+
+By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access to Zeebe, making it unnecessary to expose the gateway externally.
 
 :::
 
-```shell
-helm upgrade --install \
-  camunda camunda-platform \
-  --repo https://helm.camunda.io \
-  --version $CAMUNDA_HELM_CHART_VERSION \
-  --namespace camunda \
-  --create-namespace \
-  --set identityKeycloak.postgresql.enabled=false \
-  --set identityKeycloak.externalDatabase.host=$DB_HOST \
-  --set identityKeycloak.externalDatabase.user=$PG_USERNAME \
-  --set identityKeycloak.externalDatabase.password=$PG_PASSWORD \
-  --set identityKeycloak.externalDatabase.database=$DEFAULT_DB_NAME \
-  --set global.ingress.enabled=true \
-  --set global.ingress.host=$DOMAIN_NAME \
-  --set global.ingress.tls.enabled=true \
-  --set global.ingress.tls.secretName=camunda-c8-tls \
-  --set-string 'global.ingress.annotations.kubernetes\.io\/tls-acme=true' \
-  --set global.identity.auth.publicIssuerUrl="https://$DOMAIN_NAME/auth/realms/camunda-platform" \
-  --set global.identity.auth.operate.redirectUrl="https://$DOMAIN_NAME/operate" \
-  --set global.identity.auth.tasklist.redirectUrl="https://$DOMAIN_NAME/tasklist" \
-  --set global.identity.auth.optimize.redirectUrl="https://$DOMAIN_NAME/optimize" \
-  --set identity.contextPath="/identity" \
-  --set identity.fullURL="https://$DOMAIN_NAME/identity" \
-  --set operate.contextPath="/operate" \
-  --set tasklist.contextPath="/tasklist" \
-  --set optimize.contextPath="/optimize" \
-  --set zeebeGateway.ingress.grpc.enabled=true \
-  --set zeebeGateway.ingress.grpc.host=zeebe.$DOMAIN_NAME \
-  --set zeebeGateway.ingress.grpc.tls.enabled=true \
-  --set zeebeGateway.ingress.grpc.tls.secretName=zeebe-c8-tls-grpc \
-  --set-string 'zeebeGateway.ingress.grpc.annotations.kubernetes\.io\/tls-acme=true' \
-  --set zeebeGateway.contextPath="/zeebe"
-```
-
-The annotation `kubernetes.io/tls-acme=true` is [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
-
   </TabItem>
-  <TabItem value="without" label="Without Domain">
 
-```shell
-helm upgrade --install \
-  camunda camunda-platform \
-  --repo https://helm.camunda.io \
-  --version $CAMUNDA_HELM_CHART_VERSION \
-  --namespace camunda \
-  --create-namespace \
-  --set identityKeycloak.postgresql.enabled=false \
-  --set identityKeycloak.externalDatabase.host=$DB_HOST \
-  --set identityKeycloak.externalDatabase.user=$PG_USERNAME \
-  --set identityKeycloak.externalDatabase.password=$PG_PASSWORD \
-  --set identityKeycloak.externalDatabase.database=$DEFAULT_DB_NAME
+  <TabItem value="without-domain-std" label="Without Domain Basic Auth">
+
+```hcl reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-no-domain.yml
 ```
 
   </TabItem>
+
+  <TabItem value="with-domain-irsa" label="With Domain IRSA Auth" default>
+
+The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+
+```hcl reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-domain.yml
+```
+
+:::warning
+
+Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
+
+- `zeebeGateway.ingress.grpc.enabled`
+- `zeebeGateway.ingress.rest.enabled`
+
+By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access to Zeebe, making it unnecessary to expose the gateway externally.
+
+:::
+
+  </TabItem>
+
+  <TabItem value="without-domain-irsa" label="Without Domain IRSA Auth">
+
+```hcl reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-no-domain.yml
+```
+
+  </TabItem>
+
 </Tabs>
+
+#### 2. Substitute Environment Variables
+
+Once you've prepared the `values.yml` file, use the `envsubst` command to substitute the environment variables with their actual values. Run the following command:
+
+```bash
+envsubst < values.yml > generated-values.yml
+```
+
+This will generate a new file `generated-values.yml` with the environment-specific values.
+
+#### 3. Install Camunda 8 Using Helm
+
+Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Here's the command:
+
+```bash
+helm upgrade --install \
+  camunda camunda-platform \
+  --repo https://helm.camunda.io \
+  --version $CAMUNDA_HELM_CHART_VERSION \
+  --namespace camunda \
+  --create-namespace \
+  -f generated-values.yml
+```
+
+This command:
+
+- Installs (or upgrades) the Camunda 8 platform using the Helm chart.
+- Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
+- References the namespace `camunda`, creating it if it doesn't exist.
+- Applies the configuration from `generated-values.yml`.
+
+**Note for domain installation:** the annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
 
 ### Verify connectivity to Camunda 8
 

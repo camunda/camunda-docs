@@ -465,7 +465,7 @@ export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
 
 ```bash
 # PostgreSQL Credentials (replace with your own values)
-export DB_IRSA_USERNAME="$(terraform console <<<local.aurora_irsa_username | jq -r)"
+export PG_USERNAME="$(terraform console <<<local.aurora_irsa_username | jq -r)"
 export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
 
 # Retrieve outputs from modules
@@ -477,6 +477,15 @@ export DB_ROLE_ARN="$(terraform output -raw aurora_role_arn)"
 
 export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
 export OPENSEARCH_ROLE_ARN="$(terraform output -raw opensearch_role_arn)"
+
+export CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_webmodeler_service_account | jq -r)"
+export CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_identity_service_account | jq -r)"
+export CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_keycloak_service_account | jq -r)"
+
+export CAMUNDA_ZEEBE_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_zeebe_service_account | jq -r)"
+export CAMUNDA_OPERATE_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_operate_service_account | jq -r)"
+export CAMUNDA_TASKLIST_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_tasklist_service_account | jq -r)"
+export CAMUNDA_OPTIMIZE_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_optimize_service_account | jq -r)"
 ```
 
 :::note IRSA Users
