@@ -15,7 +15,7 @@ You can use the RPA runtime to run your RPA scripts for both local testing or fr
   1. Download the [RPA runner repository](https://github.com/camunda/rpa-runtime/archive/refs/heads/main.zip) from GitHub.
   2. Unzip the file and navigate to the `rpa-runtime-main` repository folder.
   3. Execute `setup.ps1` using PowerShell. If permission issues arise, alter your Execution Policy with the command `Set-ExecutionPolicy RemoteSigned`.
-  4. Enter your credentials into the .env file. Refer to [the documentation on how to create credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
+  4. Enter your credentials into the `.env` file. See [how to create credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
   5. Start the RPA worker locally by running `start.ps1` in PowerShell. To stop the worker, close the PowerShell terminal.
 
 ### Directories
