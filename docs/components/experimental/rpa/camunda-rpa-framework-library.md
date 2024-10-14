@@ -4,7 +4,7 @@ title: RPA framework library
 description: "Learn how Camunda offers a custom library for the RPA framework, providing out-of-the-box functionality to manipulate Camunda variables within RPA scripts."
 ---
 
-Camunda offers a custom library for the **robotic process automation (RPA)** framework, providing out-of-the-box functionality to manipulate [Camunda variables](/components/concepts/variables.md) within RPA scripts.
+Camunda offers a custom library for the **robotic process automation (RPA)** framework, that allows you to manipulate [Camunda variables](/components/concepts/variables.md) within RPA scripts.
 
 ## Import the Camunda library
 
