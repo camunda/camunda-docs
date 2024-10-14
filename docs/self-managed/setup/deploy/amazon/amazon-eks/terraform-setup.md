@@ -131,9 +131,22 @@ This S3 bucket will now securely store your Terraform state files with versionin
 
 Once the S3 bucket is created, configure your `config.tf` file to use the S3 backend for managing the Terraform state:
 
+<Tabs>
+  <TabItem value="standard" label="Standard" default>
+
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/config.tf
 ```
+
+  </TabItem>
+  <TabItem value="irsa" label="IRSA" default>
+
+```hcl reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/config.tf
+```
+
+  </TabItem>
+</Tabs>
 
 #### 3. Initialize Terraform
 
@@ -401,9 +414,9 @@ The following commands will export the required outputs as environment variables
 
 ```bash
 # PostgreSQL Credentials (replace with your own values)
-export DB_USERNAME="<your username set in the postgres module>"
-export DB_PASSWORD="<your password set in the postgres module>"
-export DB_NAME="camunda"
+export PG_USERNAME="<your username set in the postgres module>"
+export PG_PASSWORD="<your password set in the postgres module>"
+export DEFAULT_DB_NAME="camunda"
 
 # OpenSearch Credentials (replace with your own values)
 export OPENSEARCH_MASTER_USER="<your opensearch user set in the module>"
@@ -425,7 +438,7 @@ export OPENSEARCH_HOST=$(terraform output -raw opensearch_endpoint)
 ```bash
 # PostgreSQL Credentials (replace with your own values)
 export DB_IRSA_USERNAME="replace with the value of locals.aurora_irsa_username"
-export DB_NAME="camunda"
+export DEFAULT_DB_NAME="camunda"
 
 # Retrieve outputs from modules
 export CERT_MANAGER_IRSA_ARN=$(terraform output -raw cert_manager_arn)
