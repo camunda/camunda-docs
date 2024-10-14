@@ -8,7 +8,7 @@ Camunda enables orchestration of simple **robotic process automation (RPA)** tas
 
 ## RPA runtime
 
-The RPA runtime facilitates the execution of your RPA scripts and is suitable for both local testing and script execution from your Camunda SaaS [cluster](//guides/create-cluster.md).
+You can use the RPA runtime to run your RPA scripts for both local testing or from your Camunda SaaS [cluster](//guides/create-cluster.md).
 
 - **For a full development setup**: Visit the [Camunda Prototype RPA Worker GitHub repository](https://github.com/camunda/rpa-runtime).
 - **For a Windows setup without Python**: Take the following steps:
