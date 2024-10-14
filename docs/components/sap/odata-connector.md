@@ -101,7 +101,7 @@ For example, supplying `$filter` and `$select` parameters helps in reducing data
 
 ### Query result structure
 
-The result of any query, be it reading or writing to the SAP system, is in JSON format and holds the following structure:
+The result of any query, whether it is reading or writing to the SAP system, is in JSON format in the following structure:
 
 ```json
 {
