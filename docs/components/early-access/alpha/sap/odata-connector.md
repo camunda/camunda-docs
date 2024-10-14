@@ -81,7 +81,7 @@ Application "sap-odata-connector" started and available at "some.url.hana.ondema
 
 ### Modeling options
 
-To use the **SAP OData Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+To use the **SAP OData Connector** in your process, either change the type of existing task by clicking on it and using the **wrench-shaped** change type context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](../../../connectors/use-connectors/index.md) to learn more.
 
 :::note
 The configuration options will dynamically change with the selected HTTP method and the OData protocol version. For example, a `payload` field is only displayed when the HTTP method is something other than "GET".
@@ -117,7 +117,7 @@ The result of any query, whether it is reading or writing to the SAP system, is 
 
 ![the output mapping of the SAP OData element template](./img/sap-odata-connector-element-template-result.png)
 
-The query result can either be mapped to a single result variable or worked on [via FEEL with an expression](/components/connectors/use-connectors.md#result-expression). The same is applicable to `getResponse`, as a result variable contains the described query JSON in its entirety. The result expression `{getStatusCode: statusCode}` would only hold the HTTP status code in the `getStatusCode` process variable.
+The query result can either be mapped to a single result variable or worked on [via FEEL with an expression](/components/connectors/use-connectors/index.md#result-expression). The same is applicable to `getResponse`, as a result variable contains the described query JSON in its entirety. The result expression `{getStatusCode: statusCode}` would only hold the HTTP status code in the `getStatusCode` process variable.
 
 ### Error handling
 
