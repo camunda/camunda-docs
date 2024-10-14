@@ -14,7 +14,7 @@ This Connector is an alpha feature available upon request. Visit [https://camund
 
 ## Overview
 
-For a standard overview of the steps involved in the SAP RFC Connector, examine the diagram below:
+For a standard overview of the steps involved in the SAP RFC Connector, see the following diagram:
 
 ![RFC overview](./img/rfc-overview.png)
 
