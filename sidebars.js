@@ -701,8 +701,8 @@ module.exports = {
           type: "category",
           label: "Experimental features",
           items: [
-            "components/early-access/experimental/feature1",
-            "components/early-access/experimental/feature2",
+            "components/experimental/rpa/rpa-integration",
+            "components/experimental/rpa/rpa-framework-library",
           ],
         },
         {
