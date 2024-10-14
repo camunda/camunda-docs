@@ -24,6 +24,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create any resources within AWS.
 - [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
 - [Kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some terraform variables.
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
   - This simplifies the setup by not relying on explicit credentials and instead creating a mapping between IAM roles and Kubernetes service account based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without having to supply explicit credentials.
@@ -139,7 +140,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 ```
 
   </TabItem>
-  <TabItem value="irsa" label="IRSA" default>
+  <TabItem value="irsa" label="IRSA">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/config.tf
@@ -171,9 +172,22 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-eks-module) 
 1. **Create a `cluster.tf` file** in the same directory as your `config.tf` file.
 2. **Add the following content** to your newly created `cluster.tf` file to utilize the provided module:
 
+<Tabs>
+  <TabItem value="standard" label="Standard" default>
+
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/cluster.tf
 ```
+
+  </TabItem>
+  <TabItem value="irsa" label="IRSA">
+
+```hcl reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/cluster.tf
+```
+
+  </TabItem>
+</Tabs>
 
 3. **Configure User Access to the Cluster**
 
@@ -251,7 +265,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 ```
 
   </TabItem>
-  <TabItem value="irsa" label="IRSA" default>
+  <TabItem value="irsa" label="IRSA">
 
 In addition to using standard username and password authentication, you can opt to use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) for secure, role-based access to your Aurora database. This method allows your EKS workloads to assume IAM roles without needing to manage AWS credentials directly.
 
@@ -296,6 +310,8 @@ As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Ama
 <Tabs>
   <TabItem value="standard" label="Standard" default>
 
+<!-- TODO : move this part in the installation step -->
+
 :::caution Optimize compatibility with OpenSearch
 
 **Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
@@ -307,7 +323,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 
   </TabItem>
   
-  <TabItem value="irsa" label="IRSA" default>
+  <TabItem value="irsa" label="IRSA">
 
 :::caution Optimize compatibility with OpenSearch
 
@@ -350,10 +366,22 @@ You can further customize the OpenSearch cluster setup using various input optio
 1. In the directory containing your `config.tf` file, create an additional file named `output.tf`.
 2. Paste the following content into `output.tf` to expose the necessary variables:
 
+<Tabs>
+  <TabItem value="standard" label="Standard" default>
+
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/output.tf
 ```
 
+  </TabItem>
+  <TabItem value="irsa" label="IRSA">
+
+```hcl reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/output.tf
+```
+
+  </TabItem>
+</Tabs>
 These outputs will allow you to easily reference the **cert-manager** ARN, **external-dns** ARN, and the endpoints for both **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
 
 ### Execution
@@ -414,41 +442,41 @@ The following commands will export the required outputs as environment variables
 
 ```bash
 # PostgreSQL Credentials (replace with your own values)
-export PG_USERNAME="<your username set in the postgres module>"
-export PG_PASSWORD="<your password set in the postgres module>"
-export DEFAULT_DB_NAME="camunda"
+export PG_USERNAME="$(terraform console <<<local.aurora_master_username | jq -r)"
+export PG_PASSWORD="$(terraform console <<<local.aurora_master_password | jq -r)"
+export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
 
 # OpenSearch Credentials (replace with your own values)
-export OPENSEARCH_MASTER_USER="<your opensearch user set in the module>"
-export OPENSEARCH_MASTER_PASSWORD="<your opensearch password set in the module>"
+export OPENSEARCH_MASTER_USER="$(terraform console <<<local.opensearch_master_username | jq -r)"
+export OPENSEARCH_MASTER_PASSWORD="$(terraform console <<<local.opensearch_master_password | jq -r)"
 
 # Retrieve outputs from modules
-export CERT_MANAGER_IRSA_ARN=$(terraform output -raw cert_manager_arn)
-export EXTERNAL_DNS_IRSA_ARN=$(terraform output -raw external_dns_arn)
+export CERT_MANAGER_IRSA_ARN="$(terraform output -raw cert_manager_arn)"
+export EXTERNAL_DNS_IRSA_ARN="$(terraform output -raw external_dns_arn)"
 
-export DB_HOST=$(terraform output -raw postgres_endpoint)
+export DB_HOST="$(terraform output -raw postgres_endpoint)"
 
-export OPENSEARCH_HOST=$(terraform output -raw opensearch_endpoint)
+export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
 ```
 
   </TabItem>
   
-  <TabItem value="irsa" label="IRSA" default>
+  <TabItem value="irsa" label="IRSA">
 
 ```bash
 # PostgreSQL Credentials (replace with your own values)
-export DB_IRSA_USERNAME="replace with the value of locals.aurora_irsa_username"
-export DEFAULT_DB_NAME="camunda"
+export DB_IRSA_USERNAME="$(terraform console <<<local.aurora_irsa_username | jq -r)"
+export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
 
 # Retrieve outputs from modules
-export CERT_MANAGER_IRSA_ARN=$(terraform output -raw cert_manager_arn)
-export EXTERNAL_DNS_IRSA_ARN=$(terraform output -raw external_dns_arn)
+export CERT_MANAGER_IRSA_ARN="$(terraform output -raw cert_manager_arn)"
+export EXTERNAL_DNS_IRSA_ARN="$(terraform output -raw external_dns_arn)"
 
-export DB_HOST=$(terraform output -raw postgres_endpoint)
-export DB_ROLE_ARN=$(terraform output -raw aurora_role_arn)
+export DB_HOST="$(terraform output -raw postgres_endpoint)"
+export DB_ROLE_ARN="$(terraform output -raw aurora_role_arn)"
 
-export OPENSEARCH_HOST=$(terraform output -raw opensearch_endpoint)
-export OPENSEARCH_ROLE_ARN=$(terraform output -raw opensearch_role_arn)
+export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
+export OPENSEARCH_ROLE_ARN="$(terraform output -raw opensearch_role_arn)"
 ```
 
 :::note IRSA Users
@@ -477,7 +505,7 @@ For a standard installation, it is **not necessary to create a database manually
 This choice is up to you, depending on your infrastructure and security preferences.
 
   </TabItem>
-  <TabItem value="irsa" label="IRSA" default>
+  <TabItem value="irsa" label="IRSA">
 
 When using **IAM Roles for Service Accounts (IRSA)**, you need to create a dedicated database user for IRSA access. Follow these steps to create the database user and configure access.
 
@@ -498,13 +526,13 @@ Before applying the manifest, you need to replace the placeholders in the manife
 ```bash
 export AURORA_ENDPOINT=$(terraform output -raw postgres_endpoint)
 export AURORA_PORT=5432
-export AURORA_DB_NAME="$DB_NAME"
+export AURORA_DB_NAME="$DEFAULT_DB_NAME"
 
 # PostgreSQL Credentials (replace with your own values from the #postgresql-module-setup step)
-export AURORA_USERNAME="<your username set in the module>"
-export AURORA_PASSWORD="<your password set in the module>"
+export AURORA_USERNAME="$(terraform console <<<local.aurora_master_username | jq -r)"
+export AURORA_PASSWORD="$(terraform console <<<local.aurora_master_password | jq -r)"
 
-export AURORA_USERNAME_IRSA="<your irsa user set by aurora_irsa_username>"
+export AURORA_USERNAME_IRSA="$(terraform console <<<local.aurora_irsa_username | jq -r)"
 ```
 
 2. **Create the Secret Using Environment Variables**:
@@ -538,7 +566,7 @@ kubectl apply -f irsa-postgres-create-db.yml
 4. **Verify the Job's completion**: Once the job is created, you can monitor its progress using:
 
 ```bash
-kubectl get jobs
+kubectl get job/create-irsa-user-db
 ```
 
 Once the job shows as `Completed`, the IRSA user will have been successfully created.
@@ -546,13 +574,13 @@ Once the job shows as `Completed`, the IRSA user will have been successfully cre
 5. **Check logs for confirmation**: You can view the logs of the job to confirm that the user was created and privileges were granted successfully:
 
 ```bash
-kubectl logs job/postgres-client
+kubectl logs job/create-irsa-user-db
 ```
 
 6. **Cleanup the resources:**
 
 ```bash
-kubectl delete job postgres-client
+kubectl delete job create-irsa-user-db
 kubectl delete secret irsa-db-secret
 ```
 

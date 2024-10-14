@@ -47,8 +47,16 @@ The following are the required environment variables with some example values:
 
 ```shell
 # Your standard region that you host AWS resources in
-export REGION=eu-central-1
-# Following two environment variables can be skipped if you don't have a domain
+export REGION="$AWS_REGION"
+
+# The Camunda 8 Helm Chart version
+export CAMUNDA_HELM_CHART_VERSION="11.0.0"
+```
+
+<Tabs groupId="domain">
+  <TabItem value="with" label="With Domain" default>
+
+```shell
 # The domain name that you intend to use
 export DOMAIN_NAME=camunda.example.com
 # The e-mail to register with Let's Encrypt
@@ -59,8 +67,7 @@ export INGRESS_HELM_CHART_VERSION="4.11.2"
 export EXTERNAL_DNS_HELM_CHART_VERSION="1.15.0"
 # The Cert-Manager Helm Chart version
 export CERT_MANAGER_HELM_CHART_VERSION="1.15.3"
-# The Camunda 8 Helm Chart version
-export CAMUNDA_HELM_CHART_VERSION="11.0.0"
+
 ```
 
 Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
@@ -184,12 +191,21 @@ spec:
 EOF
 ```
 
+</TabItem>
+
+<TabItem value="without" label="Without Domain">
+
+Without a domain, you will need to use [kubectl port-forward to access the Camunda 8 platform](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+
+</TabItem>
+</Tabs>
+
 ### Deploy Camunda 8 via Helm charts
 
 For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [guides](/self-managed/setup/guides/guides.md).
 
 <Tabs groupId="domain">
-  <TabItem value="with" label="With Domain">
+  <TabItem value="with" label="With Domain" default>
 
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
@@ -266,12 +282,12 @@ Instead of creating a confidential application, a machine-to-machine (M2M) appli
 This reveals a `client-id` and `client-secret` that can be used to connect to the Camunda 8 cluster.
 
 <Tabs groupId="c8-connectivity">
-  <TabItem value="rest-api" label="REST API">
+  <TabItem value="rest-api" label="REST API" default>
 
 For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
 <Tabs groupId="domain">
-  <TabItem value="with" label="With Domain">
+  <TabItem value="with" label="With Domain" default>
 
 Export the following environment variables:
 
@@ -418,7 +434,7 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS}/v2/topology"
 After following the installation instructions in the [zbctl docs](/apis-tools/community-clients/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
 
 <Tabs groupId="domain">
-  <TabItem value="with" label="With Domain">
+  <TabItem value="with" label="With Domain" default>
 
 Export the following environment variables:
 
@@ -527,7 +543,7 @@ kubectl port-forward services/camunda-keycloak 18080:80
 Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
 <Tabs groupId="domain">
-  <TabItem value="with" label="With Domain">
+  <TabItem value="with" label="With Domain" default>
 
 The following values are required for the OAuth authentication:
 
