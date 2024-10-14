@@ -6,10 +6,10 @@ description: "Use Spring Boot and the Spring Zeebe SDK to interact with your loc
 keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 ---
 
-import Install from './react-components/install-c8run.md'
+import Install from './react-components/\_install-c8run.md'
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">1 hour</span><br /><br />
+<span class="badge badge--medium">1 hour</span>
 
 In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
@@ -117,7 +117,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 1. Copy the following code snippet into the `pom.xml` file of your Spring project, below properties and above dependencies:
 
-```
+```xml
 <repositories>
    <repository>
       <releases>
@@ -135,11 +135,11 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
 
-```
+```xml
 <dependency>
    <groupId>io.camunda</groupId>
    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-   <version>8.6.0</version>
+   <version>8.6.3</version>
 </dependency>
 ```
 
@@ -147,7 +147,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
 
-```
+```yaml
 camunda:
   client:
     mode: self-managed

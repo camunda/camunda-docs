@@ -691,16 +691,27 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Experimental features",
+      label: "Early access",
       link: {
         type: "doc",
-        id: "components/experimental/experimental",
+        id: "components/early-access/overview",
       },
       items: [
         {
           type: "category",
-          label: "Robotic Process Automation (RPA)",
-          items: [],
+          label: "Experimental features",
+          items: [
+            "components/early-access/experimental/feature1",
+            "components/early-access/experimental/feature2",
+          ],
+        },
+        {
+          type: "category",
+          label: "Alpha features",
+          items: [
+            "components/early-access/alpha/feature3",
+            "components/early-access/alpha/feature4",
+          ],
         },
       ],
     },
