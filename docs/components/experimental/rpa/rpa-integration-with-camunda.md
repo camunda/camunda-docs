@@ -58,7 +58,7 @@ To test your script, select the “Play” icon in the bottom left corner of Des
 
 ![RPA testing example](../img/testing-rpa.png)
 
-You can now run the script with the expected input from the process on your local RPA runtime. Once the script finishes, you can see a more detailed view of the run by selecting the **Show log** button.
+You can now run the script with the expected input from the process on your local RPA runtime. Once the script completes, select **Show log** to see a more detailed view of the run.
 
 Refer to the [Camunda library documentation](/components/experimental/rpa/camunda-rpa-framework-library.md) for information on returning variables from your RPA script to your process.
 
