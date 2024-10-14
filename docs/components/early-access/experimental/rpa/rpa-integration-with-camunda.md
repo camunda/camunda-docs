@@ -76,7 +76,7 @@ To integrate the script within your process, take the following steps:
 1. In a Camunda 8 Desktop Modeler diagram, create a task if you have not already done so, and change the task to an RPA task by selecting the wrench-shaped change type context menu icon.
 2. Use the properties panel to configure the script name and input mappings. The script name should correspond with the deployed script name. For input mappings, specify the required script inputs or set the mapping to null to use process variables directly.
 
-![rpa task example in Desktop Modeler](../img/rpa-task-example.png)
+![rpa task example in Desktop Modeler](./img/rpa-task-example.png)
 
 :::note
 Have questions, a bug report, or an idea for improvement? Visit the [open issue tracker](https://github.com/camunda/rpa-runtime/issues/new/choose) on GitHub.
