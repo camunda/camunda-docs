@@ -16,7 +16,7 @@ This Connector is an alpha feature and available upon request. Visit [https://ca
 
 ## Overview
 
-For a standard overview of the steps involved in the SAP OData Connector, examine the diagram below:
+For a standard overview of the steps involved in the SAP OData Connector, see the following diagram:
 
 ![OData steps](./img/odata-steps.png)
 
