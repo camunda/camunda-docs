@@ -691,20 +691,27 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Experimental features",
+      label: "Early access",
       link: {
         type: "doc",
-        id: "components/experimental/experimental",
+        id: "components/early-access/overview",
       },
       items: [
         {
           type: "category",
-          label: "Robotic Process Automation (RPA)",
-          link: {
-            type: "doc",
-            id: "components/experimental/rpa/rpa-integration",
-          },
-          items: ["components/experimental/rpa/rpa-framework-library"],
+          label: "Experimental features",
+          items: [
+            "components/experimental/rpa/rpa-integration",
+            "components/experimental/rpa/rpa-framework-library",
+          ],
+        },
+        {
+          type: "category",
+          label: "Alpha features",
+          items: [
+            "components/early-access/alpha/feature3",
+            "components/early-access/alpha/feature4",
+          ],
         },
       ],
     },
