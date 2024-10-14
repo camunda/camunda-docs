@@ -56,7 +56,7 @@ Currently, only a single `.robot` file is supported, and adding custom Python fi
 
 To test your script, select the **Play** icon in the bottom left corner of Desktop Modeler to access the **Robot Testing** tab.
 
-![RPA testing example](../img/testing-rpa.png)
+![RPA testing example](./img/testing-rpa.png)
 
 You can now run the script with the expected input from the process on your local RPA runtime. Once the script completes, select **Show log** to see a more detailed view of the run.
 
