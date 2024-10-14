@@ -34,7 +34,7 @@ To deploy and run your process, you must create a [cluster](/components/concepts
 
 ## Development clusters
 
-Starter Plan users have one **development cluster**, with free execution for development included in their plan.
+Starter plan users have one **development cluster**, with free execution for development included in their plan.
 Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 
@@ -51,4 +51,3 @@ Additionally, you can tag your cluster for `dev`, `test`, `stage`, or `prod`. As
 Only organization owners or users with the **Admin** role in Console can deploy from Web Modeler to `prod` clusters.
 Users without **Admin** roles can deploy only on `dev`, `test`, or `stage` clusters.
 :::
-
