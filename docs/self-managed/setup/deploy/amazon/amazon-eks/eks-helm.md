@@ -277,7 +277,7 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-domain.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/helm-values/values-domain.yml
 ```
 
 :::warning Exposure of the Zeebe Gateway
@@ -291,12 +291,62 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
 
 :::
 
+##### Reference the credentials in secrets
+
+Before installing the Helm chart, you need to create a Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
+
+To create the secrets, run the following commands:
+
+```bash
+# ensure that the namespace exists
+kubectl create namespace camunda
+
+kubectl create secret generic identity-keycloak-secret \
+  --namespace camunda \
+  --from-literal=host=${DB_HOST} \
+  --from-literal=user=${PG_USERNAME} \
+  --from-literal=password=${PG_PASSWORD} \
+  --from-literal=database=${DEFAULT_DB_NAME} \
+  --from-literal=port=5432
+```
+
+```bash
+kubectl create secret generic opensearch-secret \
+  --namespace camunda \
+  --from-literal=password=${OPENSEARCH_MASTER_PASSWORD}
+```
+
   </TabItem>
 
   <TabItem value="without-domain-std" label="Without Domain Basic Auth">
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/helm-values/values-no-domain.yml
+```
+
+##### Reference the credentials in secrets
+
+Before installing the Helm chart, you need to create a Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
+
+To create the secrets, run the following commands:
+
+```bash
+# ensure that the namespace exists
+kubectl create namespace camunda
+
+kubectl create secret generic identity-keycloak-secret \
+  --namespace camunda \
+  --from-literal=host=${DB_HOST} \
+  --from-literal=user=${PG_USERNAME} \
+  --from-literal=password=${PG_PASSWORD} \
+  --from-literal=database=${DEFAULT_DB_NAME} \
+  --from-literal=port=5432
+```
+
+```bash
+kubectl create secret generic opensearch-secret \
+  --namespace camunda \
+  --from-literal=password=${OPENSEARCH_MASTER_PASSWORD}
 ```
 
   </TabItem>
