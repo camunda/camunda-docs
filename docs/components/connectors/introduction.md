@@ -8,6 +8,7 @@ keywords: [bridge, reusable component, low code]
 import "./out-of-the-box-connectors/connectors-table.css";
 import IconPlayImg from './img/icon-play.png';
 import IconConnectorImg from './img/icon-connectors.png';
+import IconConnectorTypesImg from './img/icon-connector-types.png';
 
 Camunda 8 Connectors allow you to easily connect your processes to external systems, applications, and data.
 
@@ -26,7 +27,7 @@ Connectors are often configured as a [BPMN process](/components/concepts/process
 Learn more about how to use Connectors in your processes and about the different types of Connector available.
 
 <div class="connector-grid">
-  <a href="path/to/connector1" class="connector-card">
+  <a href="../connectors-start" class="connector-card">
     <img src={IconPlayImg} alt="Connector 1" class="connector-card-image"/>
     <h3>Get started</h3>
     <p>Description for Connector 1.</p>
@@ -37,7 +38,7 @@ Learn more about how to use Connectors in your processes and about the different
     <p>Description for Connector 2.</p>
   </a>
   <a href="path/to/connector3" class="connector-card">
-    <img src={IconConnectorImg} alt="Connector 3" class="connector-card-image"/>
+    <img src={IconConnectorTypesImg} alt="Connector 3" class="connector-card-image"/>
     <h3>Connector types</h3>
     <p>Description for Connector 3.</p>
   </a>
