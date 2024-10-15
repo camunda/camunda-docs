@@ -66,7 +66,7 @@ the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
 
 - Camunda 8 (login with email, Google, GitHub): `email`
-- Default Basic Auth (elasticsearch): `username`
+- Default Basic Auth (Elasticsearch): `username`
 - IAM: `username`
 
 These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed. For more information, see [Tasklist Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md).

@@ -17,8 +17,8 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 ## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create any resources within AWS.
-- [Terraform (1.7+)](https://developer.hashicorp.com/terraform/downloads)
-- [Kubectl (1.28+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
+- [Kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
   - This simplifies the setup by not relying on explicit credentials and instead creating a mapping between IAM roles and Kubernetes service account based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without having to supply explicit credentials.
@@ -43,7 +43,7 @@ Following this tutorial and steps will result in:
 
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
+- A [managed Aurora PostgreSQL 15.8](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
 
 ## Installing Amazon EKS cluster with Terraform
 
@@ -61,7 +61,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.65"
+      version = "~> 5.69"
     }
   }
 }
@@ -110,14 +110,14 @@ This module creates the basic layout that configures AWS access and Terraform.
 
 The following will use [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allows abstracting resources into reusable components.
 
-The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) is publicly available. It's advisable to review this module before usage.
+The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module/tree/2.5.0/modules/eks-cluster) is publicly available. It's advisable to review this module before usage.
 
 1. In the folder where your `config.tf` resides, create an additional `cluster.tf`.
 2. Paste the following content into the newly created `cluster.tf` file to make use of the provided module:
 
 ```hcl
 module "eks_cluster" {
-  source = "git::https://github.com/camunda/camunda-tf-eks-module//modules/eks-cluster?ref=2.1.0"
+  source = "git::https://github.com/camunda/camunda-tf-eks-module//modules/eks-cluster?ref=2.5.0"
 
   region  = "eu-central-1" # change to your AWS region
   name    = "cluster-name" # change to name of your choosing
@@ -128,7 +128,7 @@ module "eks_cluster" {
 }
 ```
 
-There are various other input options to customize the cluster setup further; see the [module documentation](https://github.com/camunda/camunda-tf-eks-module).
+There are various other input options to customize the cluster setup further; see the [module documentation](https://github.com/camunda/camunda-tf-eks-module/tree/2.5.0/modules/eks-cluster).
 
 ### PostgreSQL module
 
@@ -142,8 +142,8 @@ We separated the cluster and PostgreSQL modules from each other to allow more cu
 
 ```hcl
 module "postgresql" {
-  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=2.1.0"
-  engine_version             = "15.4"
+  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=2.5.0"
+  engine_version             = "15.8"
   auto_minor_version_upgrade = false
   cluster_name               = "cluster-name-postgresql" # change "cluster-name" to your name
   default_database_name      = "camunda"

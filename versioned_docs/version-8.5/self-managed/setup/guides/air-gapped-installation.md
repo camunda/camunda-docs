@@ -25,7 +25,7 @@ The following images must be available in your air-gapped environment:
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
-- [bitnami/postgres](https://hub.docker.com/r/bitnami/postgresql)
+- [bitnami/postgresql](https://hub.docker.com/r/bitnami/postgresql)
 - [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak)
 - [bitnami/os-shell](https://hub.docker.com/r/bitnami/os-shell/)
 - [bitnami/elasticsearch](https://hub.docker.com/r/bitnami/elasticsearch/)
@@ -39,13 +39,18 @@ The following images must be available in your air-gapped environment:
 
 We currently have a script in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) that will assist in pulling and saving Docker images.
 
-Please note that all the required Docker images, available on DockerHub's Camunda organization, are also provided publicly via Camunda's Docker registry: `registry.camunda.cloud/camunda/<image>`
+## Accessing Camunda images from Camunda Docker Registry
 
-For example, the Docker image of Zeebe can be pulled via DockerHub or via the Camunda's Docker Registry:
+Please note that all the required Docker images, available on DockerHub's Camunda and Bitnami organizations, are also provided publicly via Camunda's Docker registry: `registry.camunda.cloud/camunda/<image>` and `registry.camunda.cloud/bitnami/<image>`
+
+For example, the Docker image of Zeebe and PostgreSQL can be pulled via DockerHub or via the Camunda's Docker Registry:
 
 ```shell
 docker pull camunda/zeebe:latest
 docker pull registry.camunda.cloud/camunda/zeebe:latest
+
+docker pull bitnami/postgresql:latest
+docker pull registry.camunda.cloud/bitnami/postgresql:latest
 ```
 
 ## Required Helm charts
@@ -134,50 +139,58 @@ helm repo update
 In a custom values file, it is possible to override the image repository and the image tag.
 
 ```yaml
+global:
+  image:
+    registry: example.jfrog.io
 zeebe:
   image:
-    repository: example.jfrog.io/camunda/zeebe
+    repository: camunda/zeebe
     # e.g. work with the latest versions in development
     tag: latest
 zeebeGateway:
   image:
-    repository: example.jfrog.io/camunda/zeebe
-    tag: latest
+    repository: camunda/zeebe
 elasticsearch:
-  image: example.jfrog.io/elastic/elasticsearch
-  imageTag: 7.16.3
+  image:
+    registry: example.jfrog.io
+    repository: bitnami/os-shell
+  sysctlImage:
+    registry: example.jfrog.io
+    repository: bitnami/elasticsearch
 identity:
   image:
-    repository: example.jfrog.io/camunda/identity
+    repository: camunda/identity
     ...
 identityKeycloak:
   image:
-    repository: example.jfrog.io/bitnami/keycloak
+    registry: example.jfrog.io
+    repository: bitnami/keycloak
     ...
   postgresql:
     image:
-      repository: example.jfrog.io/bitnami/postgres
+      registry: example.jfrog.io
+      repository: bitnami/postgresql
+
       ...
 operate:
   image:
-    repository: example.jfrog.io/camunda/operate
+    repository: camunda/operate
     ...
 tasklist:
   image:
-    repository: example.jfrog.io/camunda/tasklist
+    repository: camunda/tasklist
     ...
 optimize:
   image:
-    repository: example.jfrog.io/camunda/optimize
+    repository: camunda/optimize
     ...
 connectors:
   image:
-    repository: example.jfrog.io/camunda/connectors-bundle
+    repository: camunda/connectors-bundle
     ...
 webModeler:
   image:
     # registry and tag will be used for all three Web Modeler images
-    registry: example.jfrog.io
     tag: latest
   restapi:
     image:
@@ -191,7 +204,8 @@ webModeler:
   ...
 postgresql:
   image:
-    repository: example.jfrog.io/bitnami/postgres
+    registry: example.jfrog.io
+    repository: bitnami/postgresql
   ...
 ```
 
