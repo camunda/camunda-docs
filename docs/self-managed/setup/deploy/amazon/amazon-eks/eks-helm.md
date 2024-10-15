@@ -503,6 +503,13 @@ The important part is assigning the `iam_role_arn` of the previously created `op
 </summary>
 </details>
 
+:::info Enable Enterprise Components
+
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, please refer to the official documentation:  
+[Configuring Enterprise Components and Connectors](../../../install.md#configuring-enterprise-components-and-connectors).
+
+:::
+
 ### Verify connectivity to Camunda 8
 
 First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
