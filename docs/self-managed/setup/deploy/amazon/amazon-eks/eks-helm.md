@@ -62,7 +62,7 @@ export CAMUNDA_HELM_CHART_VERSION="11.0.0"
 
 <Tabs groupId="auth">
 
-  <TabItem value="basic" label="Basic Auth" default>
+  <TabItem value="basic" label="Standard" default>
   
 When using Basic authentication (username and password), some following environment variables must be set and contain valid values.
 
@@ -84,7 +84,7 @@ done
 
   </TabItem>
 
-  <TabItem value="irsa" label="IRSA Auth" default>
+  <TabItem value="irsa" label="IRSA" default>
   
 When using IRSA authentication, some following environment variables must be set and contain valid values.
 
@@ -266,7 +266,7 @@ For having easy and reproductable installations, we will use yaml files to confi
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
 <Tabs groupId="domain">
-  <TabItem value="with-domain-std" label="With Domain Basic Auth" default>
+  <TabItem value="with-domain-std" label="Standard with Domain" default>
 
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
@@ -313,7 +313,7 @@ kubectl create secret generic webmodeler-postgres-secret \
 
   </TabItem>
 
-  <TabItem value="without-domain-std" label="Without Domain Basic Auth">
+  <TabItem value="without-domain-std" label="Standard without Domain">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/helm-values/values-no-domain.yml
@@ -347,7 +347,7 @@ kubectl create secret generic webmodeler-postgres-secret \
 
   </TabItem>
 
-  <TabItem value="with-domain-irsa" label="With Domain IRSA Auth" default>
+  <TabItem value="with-domain-irsa" label="IRSA with Domain" default>
 
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
@@ -368,7 +368,7 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
 
   </TabItem>
 
-  <TabItem value="without-domain-irsa" label="Without Domain IRSA Auth">
+  <TabItem value="without-domain-irsa" label="IRSA without Domain">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-no-domain.yml
