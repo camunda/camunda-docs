@@ -248,6 +248,15 @@ For more details, refer to the [official upgrade guide](https://github.com/terra
 
 ### PostgreSQL Module Setup
 
+:::info Optional module
+
+If you don't want to use this module, you can skip this section.
+However, please note that you may need to adjust the following instructions to remove references to this module.
+
+If you choose not to use this module, you'll need to either provide a managed PostgreSQL service or use the internal deployment in Kubernetes.
+
+:::
+
 The default PostgreSQL instance and database (`camunda`) created by this module is primarily intended for use with Keycloak. After the instance is set up, you may manually add additional databases for Identity multi-tenancy if needed, though this guide will not cover those steps, as the default configuration disables multi-tenancy.
 
 We separated the cluster and PostgreSQL modules to offer you more customization options.
@@ -293,6 +302,14 @@ Once the IRSA configuration is complete, make sure to **record the IAM role name
 You can further customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/aurora/README.md) for more details on other customization options.
 
 ### OpenSearch Module Setup
+
+:::info Optional module
+
+If you don't want to use this module, you can skip this section.
+However, please note that you may need to adjust the following instructions to remove references to this module.
+
+If you choose not to use this module, you'll need to either provide a managed ElasticSearch or OpenSearch service or use the internal deployment in Kubernetes.
+:::
 
 The OpenSearch module creates an OpenSearch domain intended to be used by the Camunda platform. OpenSearch is a powerful alternative to ElasticSearch. For more information on how to use OpenSearch with Camunda, refer to the [Camunda documentation](./self-managed/setup/guides/using-existing-opensearch/).
 
@@ -349,25 +366,8 @@ You can further customize the OpenSearch cluster setup using various input optio
 
 **Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as database endpoints and other necessary configurations for Helm setup.
 
-1. In the directory containing your `config.tf` file, create an additional file named `output.tf`.
-2. Paste the following content into `output.tf` to expose the necessary variables:
+Each module that you have previously setup contains at the end the definition of the outputs. You can adjust them to your needs.
 
-<Tabs>
-  <TabItem value="standard" label="Standard" default>
-
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/output.tf
-```
-
-  </TabItem>
-  <TabItem value="irsa" label="IRSA">
-
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/output.tf
-```
-
-  </TabItem>
-</Tabs>
 These outputs will allow you to easily reference the **cert-manager** ARN, **external-dns** ARN, and the endpoints for both **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
 
 ### Execution
@@ -421,27 +421,25 @@ kubectl get nodes
 
 After configuring and deploying your infrastructure with Terraform, follow these instructions to export key values for use in Helm charts to deploy [Camunda 8 on Kubernetes](./eks-helm.md).
 
-The following commands will export the required outputs as environment variables. These values will be necessary for deploying Camunda services with Helm charts:
+The following commands will export the required outputs as environment variables. You may need to omit some if you have chosen not to use certain modules. These values will be necessary for deploying Camunda 8 with Helm charts:
 
 <Tabs>
   <TabItem value="standard" label="Standard" default>
 
 ```bash
-# PostgreSQL Credentials (replace with your own values)
-export PG_USERNAME="$(terraform console <<<local.aurora_master_username | jq -r)"
-export PG_PASSWORD="$(terraform console <<<local.aurora_master_password | jq -r)"
-export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
-
-# OpenSearch Credentials (replace with your own values)
-export OPENSEARCH_MASTER_USER="$(terraform console <<<local.opensearch_master_username | jq -r)"
-export OPENSEARCH_MASTER_PASSWORD="$(terraform console <<<local.opensearch_master_password | jq -r)"
-
-# Retrieve outputs from modules
+# EKS Cluster
 export CERT_MANAGER_IRSA_ARN="$(terraform output -raw cert_manager_arn)"
 export EXTERNAL_DNS_IRSA_ARN="$(terraform output -raw external_dns_arn)"
 
+# PostgreSQL
+export PG_USERNAME="$(terraform console <<<local.aurora_master_username | jq -r)"
+export PG_PASSWORD="$(terraform console <<<local.aurora_master_password | jq -r)"
+export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
 export DB_HOST="$(terraform output -raw postgres_endpoint)"
 
+# OpenSearch
+export OPENSEARCH_MASTER_USER="$(terraform console <<<local.opensearch_master_username | jq -r)"
+export OPENSEARCH_MASTER_PASSWORD="$(terraform console <<<local.opensearch_master_password | jq -r)"
 export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
 ```
 
@@ -450,24 +448,24 @@ export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
   <TabItem value="irsa" label="IRSA">
 
 ```bash
-# PostgreSQL Credentials (replace with your own values)
-export PG_USERNAME="$(terraform console <<<local.aurora_irsa_username | jq -r)"
-export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
-
-# Retrieve outputs from modules
+# EKS Cluster
 export CERT_MANAGER_IRSA_ARN="$(terraform output -raw cert_manager_arn)"
 export EXTERNAL_DNS_IRSA_ARN="$(terraform output -raw external_dns_arn)"
 
+# PostgreSQL
+export PG_USERNAME="$(terraform console <<<local.aurora_irsa_username | jq -r)"
+
+export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
 export DB_HOST="$(terraform output -raw postgres_endpoint)"
+
 export DB_ROLE_ARN="$(terraform output -raw aurora_role_arn)"
-
-export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
-export OPENSEARCH_ROLE_ARN="$(terraform output -raw opensearch_role_arn)"
-
 export CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_webmodeler_service_account | jq -r)"
 export CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_identity_service_account | jq -r)"
 export CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_keycloak_service_account | jq -r)"
 
+# OpenSearch
+export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
+export OPENSEARCH_ROLE_ARN="$(terraform output -raw opensearch_role_arn)"
 export CAMUNDA_ZEEBE_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_zeebe_service_account | jq -r)"
 export CAMUNDA_OPERATE_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_operate_service_account | jq -r)"
 export CAMUNDA_TASKLIST_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_tasklist_service_account | jq -r)"
