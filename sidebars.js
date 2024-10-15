@@ -392,9 +392,9 @@ module.exports = {
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
-            "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
             "components/connectors/manage-connector-templates",
+            "components/connectors/custom-built-connectors/connector-sdk",
             {
               type: "category",
               label: "Connector SDK updates",
