@@ -426,6 +426,12 @@ After updating the kubeconfig, you can verify your connection to the cluster wit
 kubectl get nodes
 ```
 
+Then ensure that a namespace exists for camunda
+
+```shell
+kubectl create namespace camunda
+```
+
 ### Export Values for the Helm Chart
 
 After configuring and deploying your infrastructure with Terraform, follow these instructions to export key values for use in Helm charts to deploy [Camunda 8 on Kubernetes](./eks-helm.md).
@@ -508,38 +514,16 @@ Ensure that you use the actual values you passed to the Terraform module during 
 
 ### Create the Database and associated access
 
-<!-- TODO: explain that the deployment of Camunda 8 requires a dedicated db for each component -->
-
 As you now have a database, you need to create dedicated databases for each Camunda component and an associated user that have a configured access. Follow these steps to create the database users and configure access.
 
-<Tabs>
-  <TabItem value="standard" label="Standard" default>
+You can access the created database in two ways:
 
-For a standard installation, it is **not necessary to create a database manually**, as it is created by default. However, you need to ensure that access to the database happens within the **same network**. This is critical for security and performance. For administrative operations, you have two options:
+1. **Bastion Host**: Set up a bastion host within the same network to securely access the database.
+2. **Pod within the EKS Cluster**: Alternatively, deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database.
 
-<!-- TODO: detail database creation for each database -->
+The choice depends on your infrastructure setup and security preferences. In this tutorial, we'll use a pod within the EKS cluster to configure the database.
 
-1. **Bastion Host**: You can set up a bastion host in the same network to access the database securely.
-2. **Access Pod within EKS Cluster**: Alternatively, you can create a pod in your EKS cluster with the necessary tools to access the database.
-
-This choice is up to you, depending on your infrastructure and security preferences.
-
-  </TabItem>
-  <TabItem value="irsa" label="IRSA">
-
-This is a **Kubernetes Job** that connects to the database and creates the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
-
-Here is the manifest file and instructions for applying it.
-
-```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/irsa-postgres-create-db.yml
-```
-
-Before applying the manifest, you need to replace the placeholders in the manifest with the actual values.
-
-1. **Create a copy of the manifest**: Save the above manifest to a file, for example, `irsa-postgres-create-db.yml`.
-
-2. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the manifest.
+1. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the setup manifest.
 
 ```bash
 export AURORA_ENDPOINT=$(terraform output -raw postgres_endpoint)
@@ -551,10 +535,52 @@ export AURORA_USERNAME="$(terraform console <<<local.aurora_master_username | jq
 export AURORA_PASSWORD="$(terraform console <<<local.aurora_master_password | jq -r)"
 ```
 
-2. **Create the Secret Using Environment Variables**:
+A **Kubernetes Job** will connects to the database and creates the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
+
+2. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
+
+<Tabs>
+  <TabItem value="standard" label="Standard" default>
+
+```yaml reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/setup-postgres-create-db.yml
+```
+
+Before applying the manifest, you need to replace the placeholders in the manifest with the actual values.
+
+3. **Create the Secret Using Environment Variables**:
 
 ```bash
-kubectl create secret generic irsa-db-secret \
+kubectl create secret generic setup-db-secret --namespace camunda \
+  --from-literal=AURORA_ENDPOINT="$AURORA_ENDPOINT" \
+  --from-literal=AURORA_PORT="$AURORA_PORT" \
+  --from-literal=AURORA_DB_NAME="$AURORA_DB_NAME" \
+  --from-literal=AURORA_USERNAME="$AURORA_USERNAME" \
+  --from-literal=AURORA_PASSWORD="$AURORA_PASSWORD" \
+  --from-literal=DB_KEYCLOAK_NAME="$DB_KEYCLOAK_NAME" \
+  --from-literal=DB_KEYCLOAK_USERNAME="$DB_KEYCLOAK_USERNAME" \
+  --from-literal=DB_KEYCLOAK_PASSWORD="$DB_KEYCLOAK_PASSWORD" \
+  --from-literal=DB_IDENTITY_NAME="$DB_IDENTITY_NAME" \
+  --from-literal=DB_IDENTITY_USERNAME="$DB_IDENTITY_USERNAME" \
+  --from-literal=DB_IDENTITY_PASSWORD="$DB_IDENTITY_PASSWORD" \
+  --from-literal=DB_WEBMODELER_NAME="$DB_WEBMODELER_NAME" \
+  --from-literal=DB_WEBMODELER_USERNAME="$DB_WEBMODELER_USERNAME" \
+  --from-literal=DB_WEBMODELER_PASSWORD="$DB_WEBMODELER_PASSWORD"
+```
+
+  </TabItem>
+  <TabItem value="irsa" label="IRSA">
+
+```yaml reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/setup-postgres-create-db.yml
+```
+
+Before applying the manifest, you need to replace the placeholders in the manifest with the actual values.
+
+3. **Create the Secret Using Environment Variables**:
+
+```bash
+kubectl create secret generic setup-db-secret --namespace camunda \
   --from-literal=AURORA_ENDPOINT="$AURORA_ENDPOINT" \
   --from-literal=AURORA_PORT="$AURORA_PORT" \
   --from-literal=AURORA_DB_NAME="$AURORA_DB_NAME" \
@@ -571,12 +597,15 @@ kubectl create secret generic irsa-db-secret \
   --from-literal=CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME="$CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME"
 ```
 
-This command creates a secret named `irsa-db-secret` and dynamically populates it with the values from your environment variables.
+  </TabItem>
+</Tabs>
+
+This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
 
 After running the above command, you can verify that the secret was created successfully by using:
 
 ```bash
-kubectl get secret irsa-db-secret -o yaml
+kubectl get secret setup-db-secret -o yaml --namespace camunda
 ```
 
 This should display the secret with the base64 encoded values.
@@ -584,34 +613,31 @@ This should display the secret with the base64 encoded values.
 3. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
 ```bash
-kubectl apply -f irsa-postgres-create-db.yml
+kubectl apply -f setup-postgres-create-db.yml --namespace camunda
 ```
 
 4. **Verify the Job's completion**: Once the job is created, you can monitor its progress using:
 
 ```bash
-kubectl get job/create-irsa-user-db
+kubectl get job/create-setup-user-db --namespace camunda --watch
 ```
 
-Once the job shows as `Completed`, the IRSA users will have been successfully created.
+Once the job shows as `Completed`, the users and databases will have been successfully created.
 
 5. **Check logs for confirmation**: You can view the logs of the job to confirm that the users were created and privileges were granted successfully:
 
 ```bash
-kubectl logs job/create-irsa-user-db
+kubectl logs job/create-setup-user-db --namespace camunda
 ```
 
 6. **Cleanup the resources:**
 
 ```bash
-kubectl delete job create-irsa-user-db
-kubectl delete secret irsa-db-secret
+kubectl delete job create-setup-user-db --namespace camunda
+kubectl delete secret setup-db-secret --namespace camunda
 ```
 
 By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
-
-  </TabItem>
-</Tabs>
 
 ## 3. Install Camunda 8 using the Helm Chart
 

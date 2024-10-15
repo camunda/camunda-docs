@@ -292,9 +292,6 @@ Before installing the Helm chart, you need to create a Kubernetes secrets to sto
 To create the secrets, run the following commands:
 
 ```bash
-# ensure that the namespace exists
-kubectl create namespace camunda
-
 # create a secret to reference external database credentials if you use it
 kubectl create secret generic identity-keycloak-secret \
   --namespace camunda \
@@ -329,9 +326,6 @@ Before installing the Helm chart, you need to create a Kubernetes secrets to sto
 To create the secrets, run the following commands:
 
 ```bash
-# ensure that the namespace exists
-kubectl create namespace camunda
-
 # create a secret to reference external database credentials if you use it
 kubectl create secret generic identity-keycloak-secret \
   --namespace camunda \
