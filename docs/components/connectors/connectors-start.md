@@ -4,8 +4,6 @@ title: Get started
 description: "Connectors come in type and subtypes that describe their functionality."
 ---
 
-import SearchableTable from './connectors-table.js';
-
 Connectors are categorized by the direction data flows into or out of Camunda 8.
 
 Out-of-the-box (OOTB) Connectors accelerate solution implementation by providing pre-built, ready-to-use Connectors to popular external systems. Learn more about [Connector types](/components/connectors/connector-types.md)
@@ -16,6 +14,8 @@ All Connectors are available for Camunda 8 SaaS and [Self-Managed](/self-managed
 
 Beginners to Connectors may want to get familiar with Connectors using a [guide to configuring out-of-the-box Connectors](/guides/configuring-out-of-the-box-connector.md).
 
-## Search Connectors
+To learn more about using Connectors, see [configuring out-of-the-box Connectors](/guides/configuring-out-of-the-box-connector.md).
 
-<SearchableTable />
+In addition to this section on Connectors, we recommend reviewing [Connector secrets](/components/console/manage-clusters/manage-secrets.md).
+
+## Search Connectors

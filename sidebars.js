@@ -321,7 +321,6 @@ module.exports = {
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
-            "components/connectors/manage-connector-templates",
           ],
         },
         {
@@ -395,6 +394,7 @@ module.exports = {
           items: [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
+            "components/connectors/manage-connector-templates",
             {
               type: "category",
               label: "Connector SDK updates",

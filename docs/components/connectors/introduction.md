@@ -5,15 +5,49 @@ description: "A Connector is a reusable building block that performs the integra
 keywords: [bridge, reusable component, low code]
 ---
 
-A **Connector** is a reusable building block that performs the integration with an external system.
+import "./out-of-the-box-connectors/connectors-table.css";
+import IconPlayImg from './img/icon-play.png';
+import IconConnectorImg from './img/icon-connectors.png';
 
-Most processes require interaction with systems outside of Camunda to orchestrate and complete work.
+Camunda 8 Connectors allow you to easily connect your processes to external systems, applications, and data.
 
-- In **human task orchestration**, actors are notified of pending or completed processes through communication tools such as [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) for example in onboarding flow.
-- In **business processes**, records are created or updated in enterprise business systems.
-- In **microservices orchestration**, processes communicate through events pushed to a common systems through infrastructure such as [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md).
+## What are connectors?
 
-Connectors are often represented as tasks in a [BPMN process](/components/concepts/processes.md), which can be configured with parameters specific for the external system. As such, it can remove the need to write custom programming code for integration.
+A **Connector** is a reusable building block used to integrate with an external system.
+
+- In human task orchestration, you might use the [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connectors to notify people of pending or completed processes, such as in an onboarding flow.
+- In business processes, records are created or updated in enterprise business systems.
+- In microservices orchestration, processes communicate through events pushed to a common systems through infrastructure using the [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) Connector.
+
+Connectors are often configured as a [BPMN process](/components/concepts/processes.md) **task** with the parameters required for integrating to the external system already set up. This helps remove the need for you to write custom integration programming code.
+
+## Get started with Connectors
+
+Learn more about how to use Connectors in your processes and about the different types of Connector available.
+
+<div class="connector-grid">
+  <a href="path/to/connector1" class="connector-card">
+    <img src={IconPlayImg} alt="Connector 1" class="connector-card-image"/>
+    <h3>Get started</h3>
+    <p>Description for Connector 1.</p>
+  </a>
+  <a href="path/to/connector2" class="connector-card">
+    <img src={IconConnectorImg} alt="Connector 2" class="connector-card-image"/>
+    <h3>How to use Connectors</h3>
+    <p>Description for Connector 2.</p>
+  </a>
+  <a href="path/to/connector3" class="connector-card">
+    <img src={IconConnectorImg} alt="Connector 3" class="connector-card-image"/>
+    <h3>Connector types</h3>
+    <p>Description for Connector 3.</p>
+  </a>
+</div>
+
+## Connectors A-Z
+
+text
+
+## Custom Connectors
 
 Connectors offer a multilayer coding experience, enabling users with a variety of technical abilities to be successful when integrating with external systems.
 

@@ -1,6 +1,6 @@
 ---
 id: build-connector
-title: Create a custom Connector
+title: Custom Connectors
 description: Manage your Connector templates in Web Modeler.
 ---
 

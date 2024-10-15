@@ -1,6 +1,6 @@
 ---
 id: manage-connector-templates
-title: Manage Connector templates
+title: Manage Connector templates in Modeler
 description: Manage your Connector templates in Web Modeler.
 ---
 
