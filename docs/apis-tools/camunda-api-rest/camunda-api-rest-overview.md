@@ -52,4 +52,4 @@ or the environment variable `CAMUNDA_REST_QUERY_ENABLED` to `true`.
 
 [camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
 [resource authorizations]: /self-managed/concepts/access-control/resource-authorizations.md
-[alpha feature]: /reference/alpha-features.md
+[alpha feature]: /components/early-access/alpha/alpha-features.md
