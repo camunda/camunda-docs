@@ -441,9 +441,18 @@ export CERT_MANAGER_IRSA_ARN="$(terraform output -raw cert_manager_arn)"
 export EXTERNAL_DNS_IRSA_ARN="$(terraform output -raw external_dns_arn)"
 
 # PostgreSQL
-export PG_USERNAME="$(terraform console <<<local.aurora_master_username | jq -r)"
-export PG_PASSWORD="$(terraform console <<<local.aurora_master_password | jq -r)"
-export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
+export DB_KEYCLOAK_NAME="$(terraform console <<<local.camunda_database_keycloak | jq -r)"
+export DB_KEYCLOAK_USERNAME="$(terraform console <<<local.camunda_keycloak_db_username | jq -r)"
+export DB_KEYCLOAK_PASSWORD="$(terraform console <<<local.camunda_keycloak_db_password | jq -r)"
+
+export DB_IDENTITY_NAME="$(terraform console <<<local.camunda_database_identity | jq -r)"
+export DB_IDENTITY_USERNAME="$(terraform console <<<local.camunda_identity_db_username | jq -r)"
+export DB_IDENTITY_PASSWORD="$(terraform console <<<local.camunda_identity_db_password | jq -r)"
+
+export DB_WEBMODELER_NAME="$(terraform console <<<local.camunda_database_webmodeler | jq -r)"
+export DB_WEBMODELER_USERNAME="$(terraform console <<<local.camunda_webmodeler_db_username | jq -r)"
+export DB_WEBMODELER_PASSWORD="$(terraform console <<<local.camunda_webmodeler_db_password | jq -r)"
+
 export DB_HOST="$(terraform output -raw postgres_endpoint)"
 
 # OpenSearch
@@ -460,15 +469,20 @@ export CERT_MANAGER_IRSA_ARN="$(terraform output -raw cert_manager_arn)"
 export EXTERNAL_DNS_IRSA_ARN="$(terraform output -raw external_dns_arn)"
 
 # PostgreSQL
-export PG_USERNAME="$(terraform console <<<local.aurora_irsa_username | jq -r)"
-
-export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
-export DB_HOST="$(terraform output -raw postgres_endpoint)"
-
-export DB_ROLE_ARN="$(terraform output -raw aurora_role_arn)"
-export CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_webmodeler_service_account | jq -r)"
-export CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_identity_service_account | jq -r)"
+export DB_KEYCLOAK_NAME="$(terraform console <<<local.camunda_database_keycloak | jq -r)"
+export DB_KEYCLOAK_USERNAME="$(terraform console <<<local.camunda_keycloak_db_username | jq -r)"
 export CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_keycloak_service_account | jq -r)"
+
+export DB_IDENTITY_NAME="$(terraform console <<<local.camunda_database_identity | jq -r)"
+export DB_IDENTITY_USERNAME="$(terraform console <<<local.camunda_identity_db_username | jq -r)"
+export CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_identity_service_account | jq -r)"
+
+export DB_WEBMODELER_NAME="$(terraform console <<<local.camunda_database_webmodeler | jq -r)"
+export DB_WEBMODELER_USERNAME="$(terraform console <<<local.camunda_webmodeler_db_username | jq -r)"
+export CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_webmodeler_service_account | jq -r)"
+
+export DB_HOST="$(terraform output -raw postgres_endpoint)"
+export DB_ROLE_ARN="$(terraform output -raw aurora_role_arn)"
 
 # OpenSearch
 export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
@@ -494,10 +508,16 @@ Ensure that you use the actual values you passed to the Terraform module during 
 
 ### Create the Database and associated access
 
+<!-- TODO: explain that the deployment of Camunda 8 requires a dedicated db for each component -->
+
+As you now have a database, you need to create dedicated databases for each Camunda component and an associated user that have a configured access. Follow these steps to create the database users and configure access.
+
 <Tabs>
   <TabItem value="standard" label="Standard" default>
 
 For a standard installation, it is **not necessary to create a database manually**, as it is created by default. However, you need to ensure that access to the database happens within the **same network**. This is critical for security and performance. For administrative operations, you have two options:
+
+<!-- TODO: detail database creation for each database -->
 
 1. **Bastion Host**: You can set up a bastion host in the same network to access the database securely.
 2. **Access Pod within EKS Cluster**: Alternatively, you can create a pod in your EKS cluster with the necessary tools to access the database.
@@ -507,9 +527,7 @@ This choice is up to you, depending on your infrastructure and security preferen
   </TabItem>
   <TabItem value="irsa" label="IRSA">
 
-When using **IAM Roles for Service Accounts (IRSA)**, you need to create a dedicated database user for IRSA access. Follow these steps to create the database user and configure access.
-
-This is a **Kubernetes Job** that connects to the database and creates the necessary user with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
+This is a **Kubernetes Job** that connects to the database and creates the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
 
 Here is the manifest file and instructions for applying it.
 
@@ -531,8 +549,6 @@ export AURORA_DB_NAME="$DEFAULT_DB_NAME"
 # PostgreSQL Credentials (replace with your own values from the #postgresql-module-setup step)
 export AURORA_USERNAME="$(terraform console <<<local.aurora_master_username | jq -r)"
 export AURORA_PASSWORD="$(terraform console <<<local.aurora_master_password | jq -r)"
-
-export AURORA_USERNAME_IRSA="$(terraform console <<<local.aurora_irsa_username | jq -r)"
 ```
 
 2. **Create the Secret Using Environment Variables**:
@@ -544,7 +560,15 @@ kubectl create secret generic irsa-db-secret \
   --from-literal=AURORA_DB_NAME="$AURORA_DB_NAME" \
   --from-literal=AURORA_USERNAME="$AURORA_USERNAME" \
   --from-literal=AURORA_PASSWORD="$AURORA_PASSWORD" \
-  --from-literal=AURORA_USERNAME_IRSA="$AURORA_USERNAME_IRSA"
+  --from-literal=DB_KEYCLOAK_NAME="$DB_KEYCLOAK_NAME" \
+  --from-literal=DB_KEYCLOAK_USERNAME="$DB_KEYCLOAK_USERNAME" \
+  --from-literal=CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME="$CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME" \
+  --from-literal=DB_IDENTITY_NAME="$DB_IDENTITY_NAME" \
+  --from-literal=DB_IDENTITY_USERNAME="$DB_IDENTITY_USERNAME" \
+  --from-literal=CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME="$CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME" \
+  --from-literal=DB_WEBMODELER_NAME="$DB_WEBMODELER_NAME" \
+  --from-literal=DB_WEBMODELER_USERNAME="$DB_WEBMODELER_USERNAME" \
+  --from-literal=CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME="$CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME"
 ```
 
 This command creates a secret named `irsa-db-secret` and dynamically populates it with the values from your environment variables.
@@ -569,9 +593,9 @@ kubectl apply -f irsa-postgres-create-db.yml
 kubectl get job/create-irsa-user-db
 ```
 
-Once the job shows as `Completed`, the IRSA user will have been successfully created.
+Once the job shows as `Completed`, the IRSA users will have been successfully created.
 
-5. **Check logs for confirmation**: You can view the logs of the job to confirm that the user was created and privileges were granted successfully:
+5. **Check logs for confirmation**: You can view the logs of the job to confirm that the users were created and privileges were granted successfully:
 
 ```bash
 kubectl logs job/create-irsa-user-db
