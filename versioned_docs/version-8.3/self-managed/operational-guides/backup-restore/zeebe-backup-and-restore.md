@@ -26,7 +26,7 @@ Even when the underlying storage bucket is the same, backups from one are not co
 
 ### S3 backup store
 
-To store your backups in any S3 compatible storage system such as [AWS S3] or [MinIO], set the backup store to `S3` and tell Zeebe how to connect to your bucket. This configuration can be set in your Zeebe [`config/application.yaml`](/docs//self-managed/zeebe-deployment/configuration/configuration.md):
+To store your backups in any S3 compatible storage system such as [AWS S3] or [MinIO], set the backup store to `S3` and tell Zeebe how to connect to your bucket. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md):
 
 ```yaml
 zeebe:
@@ -83,7 +83,7 @@ zeebe.broker.data.backup.s3.compression: zstd # or use environment variable ZEEB
 
 ### GCS backup store
 
-To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use. This configuration can be set in your Zeebe [`config/application.yaml`](/docs//self-managed/zeebe-deployment/configuration/configuration.md):
+To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md):
 
 ```yaml
 zeebe:
