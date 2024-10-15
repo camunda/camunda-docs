@@ -7,7 +7,7 @@ keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesTop from './img/form-values-top.png';

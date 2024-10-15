@@ -7,7 +7,7 @@ keywords: [microservices, orchestration, getting-started]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 25 minutes</span><br /><br />
+<span class="badge badge--medium">Time estimate: 25 minutes</span>
 
 import clsx from "clsx";
 import Tabs from '@theme/Tabs';
