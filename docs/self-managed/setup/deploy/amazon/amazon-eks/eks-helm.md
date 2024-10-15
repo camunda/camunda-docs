@@ -70,7 +70,7 @@ Once you have set the environment variables, you can verify that they are correc
 
 ```bash
 # List of required environment variables
-required_vars=("PG_USERNAME" "PG_PASSWORD" "OPENSEARCH_MASTER_USER" "OPENSEARCH_MASTER_PASSWORD" "DB_HOST" "DEFAULT_DB_NAME" "OPENSEARCH_HOST")
+required_vars=("PG_USERNAME" "PG_PASSWORD" "DB_HOST" "DEFAULT_DB_NAME" "OPENSEARCH_HOST")
 
 # Loop through each variable and check if it is set and not empty
 for var in "${required_vars[@]}"; do
@@ -87,12 +87,6 @@ done
   <TabItem value="irsa" label="IRSA Auth" default>
   
 When using IRSA authentication, some following environment variables must be set and contain valid values.
-
-:::caution Optimize compatibility with OpenSearch
-
-**Authentification:** Optimize does not work with the IRSA method, it will use standard basic auth (username and password).
-
-:::
 
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
@@ -301,6 +295,7 @@ To create the secrets, run the following commands:
 # ensure that the namespace exists
 kubectl create namespace camunda
 
+# create a secret to reference external database credentials if you use it
 kubectl create secret generic identity-keycloak-secret \
   --namespace camunda \
   --from-literal=host=${DB_HOST} \
@@ -308,12 +303,11 @@ kubectl create secret generic identity-keycloak-secret \
   --from-literal=password=${PG_PASSWORD} \
   --from-literal=database=${DEFAULT_DB_NAME} \
   --from-literal=port=5432
-```
 
-```bash
-kubectl create secret generic opensearch-secret \
+# create a secret to reference external Postgres for Camunda 8
+kubectl create secret generic postgres-c8-secret \
   --namespace camunda \
-  --from-literal=password=${OPENSEARCH_MASTER_PASSWORD}
+  --from-literal=password=${PG_PASSWORD}
 ```
 
   </TabItem>
@@ -334,6 +328,7 @@ To create the secrets, run the following commands:
 # ensure that the namespace exists
 kubectl create namespace camunda
 
+# create a secret to reference external database credentials if you use it
 kubectl create secret generic identity-keycloak-secret \
   --namespace camunda \
   --from-literal=host=${DB_HOST} \
@@ -341,12 +336,11 @@ kubectl create secret generic identity-keycloak-secret \
   --from-literal=password=${PG_PASSWORD} \
   --from-literal=database=${DEFAULT_DB_NAME} \
   --from-literal=port=5432
-```
 
-```bash
-kubectl create secret generic opensearch-secret \
+# create a secret to reference external Postgres for Camunda 8
+kubectl create secret generic postgres-c8-secret \
   --namespace camunda \
-  --from-literal=password=${OPENSEARCH_MASTER_PASSWORD}
+  --from-literal=password=${PG_PASSWORD}
 ```
 
   </TabItem>
@@ -382,7 +376,52 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 
 </Tabs>
 
-#### 2. Substitute Environment Variables
+#### 2. Configure your deployment
+
+##### Enable Enterprise Components
+
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, please refer to the official documentation:  
+[Configuring Enterprise Components and Connectors](../../../install.md#configuring-enterprise-components-and-connectors).
+
+##### Using Internal Elasticsearch instead of the Managed OpenSearch
+
+If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment.
+This configuration disables OpenSearch and enables the internal kubernetes Elasticsearch deployment:
+
+```yaml
+global:
+  elasticsearch:
+    enabled: true
+  opensearch:
+    enabled: false
+
+elasticsearch:
+  enabled: true
+```
+
+##### Using Internal PostgreSQL instead of the Managed Aurora
+
+If you prefer not to use an external PostgreSQL service, you can switch to the internal PostgreSQL deployment. In this case, you will need to configure the Helm chart as follows and remove certain configurations related to the external database and service account:
+
+```yaml
+identityKeycloak:
+  postgresql:
+    enabled: true
+
+  # Removed external database configuration
+  # externalDatabase:
+  #   ...
+
+  # Removed service account and annotations
+  # serviceAccount:
+  #   ...
+
+  # Removed extra environment variables for external database driver
+  # extraEnvVars:
+  #   ...
+```
+
+##### Fill your deployment with actual values
 
 Once you've prepared the `values.yml` file, use the `envsubst` command to substitute the environment variables with their actual values. Run the following command:
 
@@ -502,13 +541,6 @@ The important part is assigning the `iam_role_arn` of the previously created `op
 
 </summary>
 </details>
-
-:::info Enable Enterprise Components
-
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, please refer to the official documentation:  
-[Configuring Enterprise Components and Connectors](../../../install.md#configuring-enterprise-components-and-connectors).
-
-:::
 
 ### Verify connectivity to Camunda 8
 

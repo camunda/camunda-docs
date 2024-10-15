@@ -327,6 +327,15 @@ As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Ama
 <Tabs>
   <TabItem value="standard" label="Standard" default>
 
+:::caution Network based security
+
+The standard deployment for OpenSearch relies on the first layer of security, which is the Network.
+
+While this setup allows easy access, it may expose sensitive data. To enhance security, consider implementing IAM Roles for Service Accounts (IRSA) to restrict access to the OpenSearch cluster, providing a more secure environment.
+
+For more information, see the [Amazon OpenSearch Service Fine-Grained Access Control documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-access-policies).
+:::
+
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/opensearch.tf
 ```
@@ -353,10 +362,10 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 
 Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration) and the **AWS Account ID** (from `module.eks_cluster.aws_caller_identity_account_id`). You will need these to annotate the Kubernetes service account in the next step.
 
+This configuration will deploy an OpenSearch domain with advanced security enabled. You must provide your own username (`advanced_security_master_user_name`) and password for the master user (`advanced_security_master_user_password`).
+
 </TabItem>
 </Tabs>
-
-This configuration will deploy an OpenSearch domain with advanced security enabled. You must provide your own username (`advanced_security_master_user_name`) and password for the master user (`advanced_security_master_user_password`).
 
 #### Step 2: Additional Customization
 
@@ -438,8 +447,6 @@ export DEFAULT_DB_NAME="$(terraform console <<<local.camunda_database | jq -r)"
 export DB_HOST="$(terraform output -raw postgres_endpoint)"
 
 # OpenSearch
-export OPENSEARCH_MASTER_USER="$(terraform console <<<local.opensearch_master_username | jq -r)"
-export OPENSEARCH_MASTER_PASSWORD="$(terraform console <<<local.opensearch_master_password | jq -r)"
 export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
 ```
 
