@@ -8,7 +8,7 @@ This guide explores the streamlined process of deploying Camunda 8 Self-Managed 
 
 [Eksctl](https://eksctl.io/) is a common CLI tool for quickly creating and managing your Amazon EKS clusters and is [officially endorsed](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) by Amazon.
 
-While this guide is suitable for testing purposes, building a robust, scalable, and reproducible infrastructure is better achieved using Infrastructure as Code (IaC) tools like describes the [Terraform Guide](./terraform-setup.md), which offers more flexibility and control over the cloud environment.
+While this guide is suitable for testing purposes, building a robust, scalable, and reproducible infrastructure is better achieved using Infrastructure as Code (IaC) tools like those described in the [Terraform Guide](./terraform-setup.md), which offers more flexibility and control over your Cloud environment.
 
 This guide provides a user-friendly approach for setting up and managing Amazon EKS clusters. It covers everything from the prerequisites, such as AWS IAM role configuration, to creating a fully functional Amazon EKS cluster and a managed Aurora PostgreSQL instance. Ideal for those seeking a practical and efficient method to deploy Camunda 8 on AWS, this guide provides detailed instructions for setting up the necessary environment and AWS IAM configurations.
 
@@ -27,7 +27,7 @@ To try out Camunda 8 or develop against it, consider signing up for our [SaaS of
 
 While the guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
-:::warning Cost Management
+:::warning Cost management
 
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 
@@ -43,7 +43,7 @@ Following this guide results in the following:
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
-- An OpenSearch domain created and configured for use with the Camunda 8 platform, leveraging the capabilities of [AWS OpenSearch Service](https://aws.amazon.com/opensearch-service/).
+- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform..
 
 This basic cluster setup is required to continue with the Helm set up as described in our [AWS Helm guide](./eks-helm.md).
 
@@ -298,13 +298,13 @@ For detailed examples, review the [documentation provided by AWS](https://docs.a
   </p>
 </details>
 
-## PostgreSQL Database
+## PostgreSQL database
 
 Creating a PostgreSQL database can be accomplished through various methods, such as using the AWS Management Console or the AWS CLI. This guide focuses on providing a reproducible setup using the CLI. For information on creating PostgreSQL using the UI, refer to the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html).
 
 The resulting PostgreSQL instance and the default database `camunda` is intended for use with Keycloak. Additional databases can be manually added post-creation for Identity with multi-tenancy, although this guide will not cover that process as the default for multi-tenancy is disabled.
 
-### Steps to Create a PostgreSQL Database
+### Steps to create a PostgreSQL database
 
 1. **Identify the VPC associated with the Amazon EKS cluster:**
 
@@ -408,7 +408,7 @@ The resulting PostgreSQL instance and the default database `camunda` is intended
        --db-instance-identifier $RDS_NAME
    ```
 
-### Verifying Connectivity Between the Amazon EKS Cluster and the PostgreSQL Database
+### Verifying connectivity between the Amazon EKS Cluster and the PostgreSQL database
 
 1. **Retrieve the writer endpoint of the DB cluster:**
 
@@ -443,13 +443,13 @@ The resulting PostgreSQL instance and the default database `camunda` is intended
 
    Verify that the connection is successful.
 
-## OpenSearch Domain
+## OpenSearch domain
 
 Creating an OpenSearch domain can be accomplished in various ways. This guide provides a reproducible setup using the AWS CLI. For additional information on using the AWS Management Console, refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/index/).
 
 The resulting OpenSearch domain is intended for use with the Camunda platform.
 
-### Step-by-Step Setup
+### Step-by-step setup
 
 1. **Identify the VPC associated with the Amazon EKS cluster:**
 
@@ -525,9 +525,9 @@ The resulting OpenSearch domain is intended for use with the Camunda platform.
 
    This endpoint will be used to connect to your OpenSearch domain.
 
-### Verifying Connectivity from Within the EKS Cluster
+### Verifying connectivity from within the EKS cluster
 
-To verify that the OpenSearch domain is accessible only from within your Amazon EKS cluster, follow these steps:
+To verify that the OpenSearch domain is accessible from within your Amazon EKS cluster, follow these steps:
 
 1. **Deploy a temporary pod to test connectivity:**
 
@@ -547,7 +547,7 @@ To verify that the OpenSearch domain is accessible only from within your Amazon 
 
    If everything is set up correctly, you should receive a response from the OpenSearch service.
 
-You have successfully set up an OpenSearch domain that is accessible only from within your Amazon EKS cluster. Be sure to customize security group rules and CIDR ranges according to your environment's requirements. For further details, refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/index/).
+You have successfully set up an OpenSearch domain that is accessible from within your Amazon EKS cluster. Be sure to customize security group rules and CIDR ranges according to your environment's requirements. For further details, refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/index/).
 
 ## Prerequisites for Camunda 8 installation
 
@@ -696,6 +696,8 @@ The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like
 Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
 ### StorageClass
+
+<!-- TODO: in recent versions, gp3 is the new standard, this part should be updated -->
 
 We recommend using gp3 volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)). It is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
 

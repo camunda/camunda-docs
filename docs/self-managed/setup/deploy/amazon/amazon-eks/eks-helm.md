@@ -31,9 +31,6 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 ### Architecture
 
-<!-- TODO: add steps to indicates that Aurora is optional and how can it be disabled -->
-<!-- TODO: add steps to indicates that OpenSearch is optional and how can it be disabled -->
-
 <!-- TODO: update Arch to include Aurora and OpenSearch both text and diagram -->
 
 Note the [existing architecture](../../../../about-self-managed.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
@@ -60,7 +57,7 @@ export REGION="$AWS_REGION"
 export CAMUNDA_HELM_CHART_VERSION="11.0.0"
 ```
 
-<Tabs groupId="auth">
+<Tabs groupId="env">
 
   <TabItem value="basic" label="Standard" default>
   
@@ -249,7 +246,7 @@ EOF
 
 <TabItem value="without" label="Without Domain">
 
-Without a domain, you will need to use [kubectl port-forward to access the Camunda 8 platform](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+Without a domain, you will need to use [kubectl port-forward to access the Camunda platform](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
 </TabItem>
 </Tabs>
@@ -265,7 +262,7 @@ For having easy and reproductable installations, we will use yaml files to confi
 
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
-<Tabs groupId="domain">
+<Tabs groupId="values">
   <TabItem value="with-domain-std" label="Standard with Domain" default>
 
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
@@ -385,10 +382,13 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, please refer to the official documentation:  
 [Configuring Enterprise Components and Connectors](../../../install.md#configuring-enterprise-components-and-connectors).
 
-##### Using Internal Elasticsearch instead of the Managed OpenSearch
+##### Using internal Elasticsearch instead of the managed OpenSearch
 
 If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment.
 This configuration disables OpenSearch and enables the internal kubernetes Elasticsearch deployment:
+
+<details>
+<summary>Show configuration changes to disable external OpenSearch usage</summary>
 
 ```yaml
 global:
@@ -401,27 +401,56 @@ elasticsearch:
   enabled: true
 ```
 
-##### Using Internal PostgreSQL instead of the Managed Aurora
+</details>
+
+##### Using internal PostgreSQL instead of the managed Aurora
 
 If you prefer not to use an external PostgreSQL service, you can switch to the internal PostgreSQL deployment. In this case, you will need to configure the Helm chart as follows and remove certain configurations related to the external database and service account:
+
+<details>
+<summary>Show configuration changes to disable external database usage</summary>
 
 ```yaml
 identityKeycloak:
   postgresql:
     enabled: true
 
-  # Removed external database configuration
+  # Remove external database configuration
   # externalDatabase:
   #   ...
 
-  # Removed service account and annotations
+  # Remove service account and annotations
   # serviceAccount:
   #   ...
 
-  # Removed extra environment variables for external database driver
+  # Remove extra environment variables for external database driver
   # extraEnvVars:
   #   ...
+
+webModeler:
+  # Remove this part
+
+  # restapi:
+  #     externalDatabase:
+  #         url: jdbc:aws-wrapper:postgresql://${DB_HOST}:5432/${DB_WEBMODELER_NAME}
+  #         user: ${DB_WEBMODELER_USERNAME}
+  #         existingSecret: webmodeler-postgres-secret
+  #         existingSecretPasswordKey: password
+
+identity:
+  # Remove this part
+
+  # externalDatabase:
+  #     enabled: true
+  #     host: ${DB_HOST}
+  #     port: 5432
+  #     username: ${DB_IDENTITY_USERNAME}
+  #     database: ${DB_IDENTITY_NAME}
+  #     existingSecret: identity-postgres-secret
+  #     existingSecretPasswordKey: password
 ```
+
+</details>
 
 ##### Fill your deployment with actual values
 
@@ -433,7 +462,7 @@ envsubst < values.yml > generated-values.yml
 
 This will generate a new file `generated-values.yml` with the environment-specific values.
 
-#### 3. Install Camunda 8 Using Helm
+#### 3. Install Camunda 8 using Helm
 
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Here's the command:
 
@@ -443,13 +472,12 @@ helm upgrade --install \
   --repo https://helm.camunda.io \
   --version $CAMUNDA_HELM_CHART_VERSION \
   --namespace camunda \
-  --create-namespace \
   -f generated-values.yml
 ```
 
 This command:
 
-- Installs (or upgrades) the Camunda 8 platform using the Helm chart.
+- Installs (or upgrades) the Camunda platform using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - References the namespace `camunda`, creating it if it doesn't exist.
 - Applies the configuration from `generated-values.yml`.
@@ -496,7 +524,7 @@ Identity already comes fitted with the [aws-advanced-jdbc-wrapper](https://githu
 
 ##### Amazon OpenSearch Service
 
-###### Internal Database configuration
+###### Internal database configuration
 
 The default setup is sufficient for Amazon OpenSearch Service clusters without `fine-grained access control`.
 
@@ -557,7 +585,7 @@ This reveals a `client-id` and `client-secret` that can be used to connect to th
 
 For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
-<Tabs groupId="domain">
+<Tabs groupId="domain-connectivity">
   <TabItem value="with" label="With Domain" default>
 
 Export the following environment variables:
@@ -704,7 +732,7 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS}/v2/topology"
 
 After following the installation instructions in the [zbctl docs](/apis-tools/community-clients/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
 
-<Tabs groupId="domain">
+<Tabs groupId="domain-connectivity-zbctl">
   <TabItem value="with" label="With Domain" default>
 
 Export the following environment variables:
@@ -813,7 +841,7 @@ kubectl port-forward services/camunda-keycloak 18080:80
 
 Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
-<Tabs groupId="domain">
+<Tabs groupId="domain-connectivity-modeler">
   <TabItem value="with" label="With Domain" default>
 
 The following values are required for the OAuth authentication:
