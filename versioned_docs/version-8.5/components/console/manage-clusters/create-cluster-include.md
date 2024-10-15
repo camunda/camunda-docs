@@ -19,7 +19,7 @@ To deploy and run your process, you must create a cluster in Camunda 8.
 
 ## Development clusters
 
-Starter Plan users have one **development cluster**, with free execution for development included in their plan.
+Starter plan users have one **development cluster**, with free execution for development included in their plan.
 Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 
@@ -48,7 +48,3 @@ Users without **Admin** roles can deploy only on `dev`, `test`, or `stage` clust
 ![cluster-healthy](./img/cluster-overview-new-cluster-healthy.png)
 
 3. After the cluster is created, click on the cluster name to visit the cluster detail page.
-
-:::note
-**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality is limited. For example, you may still execute BPMN timers and BPMN message catch events. To resume your cluster, review [how to resume a cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
-:::

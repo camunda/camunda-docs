@@ -1,0 +1,63 @@
+---
+id: get-usage-metrics
+title: "Get usage metrics for clusters"
+description: "Returns usage metrics for a specific cluster for a given time range. The usage metrics are aggregated over the time range and include number of started process instances, executed decision instances, and assigned task users."
+sidebar_label: "Get usage metrics for clusters"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlV9tu4zYQ/RVCTy3g2O4NWARFgXTRXaRo2sXGQQsEeRhTY5kbidSSlLOGoH/vDClZsi0b2zZBH/YlkcThmTO3Q7pOTIkWvDL6Ok0ukwz9nYMMb9BbJV0ySSy60miHLrmsk2/nc/6XopNWlbyL9vzxSGbSaI/a8yqUZa5kwJx9cGxSJ06usQB+Ki179CoCqpT/+m2JBOTIp84IbB9/sUahUgJXK4VWmJXw9EXmlfNop0kzYUyJzl1r50HLiHyMUXFgooiRiZWxgsytx1S0+4XqAKbJ5ICoNx7yAVddFUu0ZEY4BVDcSWqqZY6j7KMxMz/mAMKVKCk0KRia4mk46R8rZZGSc996fph0ns3yA0pPfiBNFTuB/N2A6gpyh2SsfM7Wr6l2Jsfbm6u0UPqqVNNhffuMNcxbKseN8E/TiJ9QVpzHDuELT6QH93jn0H52AsE5lWlKIO+kddr6vyaOUhIZtUPqsXDHc9rsMgnWwnbUb4iF5hV8iM2JNWxQLBH1IGhzqlZDHi9Tt8WuVIcMSJlGhGVsSoYFfxmWb4x9HeWOaDLR7+ffHfcWWS1VSkLJlflhTKlv0W7QXjhSU4HWGhui3rd5j76y2p3vk1Z828+Z2lA9vSpQWNAZTsVxm4NFAVlmMQNWCkM8goz3uwTolISDoNNhv57U6Mk53ZkEtBNz5SFzXOKQYtEddVQ6R3hW+S0t1skSibOlx4eGlkqwQLGEob4fnWqtPlZnDiryq9iWjCzPiiY4eg1t1vedtxV1RX9aHkxcMxlzHVIUMklPRdk5HqbWibvfr/8a2CgtCpXnikI2OnUn2AXkswSPxWdfnk5QRqrOSxAm3P9Il2pNdV6b9jbEIgB+TS8z4NG8gFLNQmtfFLs7kgtzFTujsiTSSR1dNpezWb02zjeXdWmsb8h4A1YB+Q6KymtxTldQ5UwsNxLy8HlMT3mBQ+1SdvXuWkTv8SJEPvbhXs1fzUeR2PQESp+uHmftfTmKE41HkUIyu5m6ZbsYdDdZu/ZuwQMUv7cGk/bhTVe0X/9cBMVSemXC9n31FLc3Iugn0zgieyWDfjDLUElFQxUuqYE08e9RWCS4oHHjN9P5dN5ecUGG/MYiM21HFX56eppKKCqdwlSaglNIF2CkSzPbtp35W/tlcrA5NdLtdisT3mcWV2iRhGzWArlZCLyk8hegB7Bv0Y9Idas57jAJdX9P/yKEPraXx09+VuagwskY0l+3U32f7KaaK7M319S8cTzvk7pegsM7mzcNf46iE84B5XiW092BfjLdX71vRelr8ZnHxSj7R9x2p8YG8ooNkiCx/5bI8xweZ7h2Z8jz0H2Og+MM2Xh+9FQfer0ONwFqCYQ0XAvqdgvrSjkM8Oj3796Z8vaXBV8KK+6+nQAeCF5A7+7WejvA/vHnYCAW5hH1T0lH2/Mr+SHJ/Rs/aYl5
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/administration-sm-api/specifications/sm-administration-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get usage metrics for clusters</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/admin-api/usage-metrics"}
+></MethodEndpoint>
+
+Returns usage metrics for a specific cluster for a given time range. The usage metrics are aggregated over the time range and include number of started process instances, executed decision instances, and assigned task users.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"description":"The unique identifier of the cluster","in":"query","name":"id","required":true,"schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"description":"The start timestamp of the time range as UNIX timestamp in milliseconds","in":"query","name":"start","required":true,"schema":{"format":"double","type":"number"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"description":"The end timestamp of the time range as UNIX timestamp in milliseconds","in":"query","name":"end","required":true,"schema":{"format":"double","type":"number"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+Ok
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"id"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The identifier of the cluster."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>processInstances</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+The usage metrics for started process instances.
+
+</div><SchemaItem collapsible={false} name={"total"} required={true} schemaName={"double"} qualifierMessage={undefined} schema={{"type":"number","format":"double","description":"The number of usage metrics for a specific type."}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>decisionInstances</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+The usage metrics for executed decision instances.
+
+</div><SchemaItem collapsible={false} name={"total"} required={true} schemaName={"double"} qualifierMessage={undefined} schema={{"type":"number","format":"double","description":"The number of usage metrics for a specific type."}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>taskUsers</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__required"}>required</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+The usage metrics for assigned task users.
+
+</div><SchemaItem collapsible={false} name={"total"} required={true} schemaName={"double"} qualifierMessage={undefined} schema={{"type":"number","format":"double","description":"The number of usage metrics for a specific type."}}></SchemaItem><SchemaItem collapsible={false} name={"assignees"} required={true} schemaName={"string[]"} qualifierMessage={undefined} schema={{"items":{"type":"string"},"type":"array","description":"The users that tasks have been assigned to."}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"id\": \"string\",\n  \"processInstances\": {\n    \"total\": 0\n  },\n  \"decisionInstances\": {\n    \"total\": 0\n  },\n  \"taskUsers\": {\n    \"total\": 0,\n    \"assignees\": [\n      \"string\"\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
+
+Forbidden
+
+</div><div></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+Server-side error
+
+</div><div></div></TabItem></ApiTabs></div></div>

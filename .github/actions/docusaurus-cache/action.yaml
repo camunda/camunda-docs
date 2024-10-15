@@ -1,0 +1,15 @@
+name: "Cache Docusaurus"
+description: "Cache Docusaurus for faster application rebuilds."
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/cache@v4
+      with:
+        path: |
+          ${{ github.workspace }}/.docusaurus
+          ${{ github.workspace }}/**/.cache
+        key: |
+          ${{ runner.os }}-docusaurus-${{ hashFiles('**/package-lock.json', '**/npm-shrinkwrap.json', '**/yarn.lock', '**/pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+        restore-keys: |
+          ${{ runner.os }}-docusaurus-${{ hashFiles('**/package-lock.json', '**/npm-shrinkwrap.json', '**/yarn.lock', '**/pnpm-lock.yaml') }}
