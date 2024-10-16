@@ -66,8 +66,10 @@ When using Basic authentication (username and password), some following environm
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
 ```bash
+# This script should be executed with bash
+
 # List of required environment variables
-required_vars=("DB_HOST" "DB_KEYCLOAK_NAME" "DB_KEYCLOAK_USERNAME" "DB_KEYCLOAK_PASSWORD" "DB_IDENTITY_NAME" "DB_IDENTITY_USERNAME" "DB_IDENTITY_PASSWORD" "DB_WEBMODELER_NAME" "DB_WEBMODELER_USERNAME" "DB_WEBMODELER_PASSWORD" "OPENSEARCH_HOST")
+required_vars=("DB_HOST" "DB_KEYCLOAK_NAME" "OPENSEARCH_MASTER_USER" "OPENSEARCH_MASTER_PASSWORD" "DB_KEYCLOAK_USERNAME" "DB_KEYCLOAK_PASSWORD" "DB_IDENTITY_NAME" "DB_IDENTITY_USERNAME" "DB_IDENTITY_PASSWORD" "DB_WEBMODELER_NAME" "DB_WEBMODELER_USERNAME" "DB_WEBMODELER_PASSWORD" "OPENSEARCH_HOST")
 
 # Loop through each variable and check if it is set and not empty
 for var in "${required_vars[@]}"; do
@@ -88,6 +90,8 @@ When using IRSA authentication, some following environment variables must be set
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
 ```bash
+# This script should be executed with bash
+
 # List of required environment variables
 required_vars=("DB_HOST" "DB_ROLE_ARN" "CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME" "DB_WEBMODELER_NAME" "DB_WEBMODELER_USERNAME" "CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME" "DB_IDENTITY_NAME" "DB_IDENTITY_USERNAME" "DB_KEYCLOAK_NAME" "DB_KEYCLOAK_USERNAME" "CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME" "OPENSEARCH_HOST" "OPENSEARCH_ROLE_ARN"  "CAMUNDA_ZEEBE_SERVICE_ACCOUNT_NAME" "CAMUNDA_OPERATE_SERVICE_ACCOUNT_NAME" "CAMUNDA_TASKLIST_SERVICE_ACCOUNT_NAME" "CAMUNDA_OPTIMIZE_SERVICE_ACCOUNT_NAME")
 
@@ -295,7 +299,7 @@ kubectl create secret generic identity-keycloak-secret \
   --from-literal=host=${DB_HOST} \
   --from-literal=user=${DB_KEYCLOAK_USERNAME} \
   --from-literal=password=${DB_KEYCLOAK_PASSWORD} \
-  --from-literal=database=${DB_KEYCLOAK_PASSWORD} \
+  --from-literal=database=${DB_KEYCLOAK_NAME} \
   --from-literal=port=5432
 
 # create a secret to reference external Postgres for each component of Camunda 8
@@ -306,6 +310,10 @@ kubectl create secret generic identity-postgres-secret \
 kubectl create secret generic webmodeler-postgres-secret \
   --namespace camunda \
   --from-literal=password=${DB_WEBMODELER_PASSWORD}
+
+kubectl create secret generic opensearch-secret \
+  --namespace camunda \
+  --from-literal=password=${OPENSEARCH_MASTER_PASSWORD}
 ```
 
   </TabItem>
@@ -340,6 +348,10 @@ kubectl create secret generic identity-postgres-secret \
 kubectl create secret generic webmodeler-postgres-secret \
   --namespace camunda \
   --from-literal=password=${DB_WEBMODELER_PASSWORD}
+
+kubectl create secret generic opensearch-secret \
+  --namespace camunda \
+  --from-literal=password=${OPENSEARCH_MASTER_PASSWORD}
 ```
 
   </TabItem>
