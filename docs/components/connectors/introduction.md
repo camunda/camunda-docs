@@ -46,7 +46,7 @@ Learn more about how to use Connectors in your processes and about the different
 
 ## Connectors A-Z
 
-Ready to start using Connectors in your processes? Explore our extensive library of prebuilt Camunda 8 SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md) Connectors.
+Ready to start using Connectors in your processes? Explore our library of prebuilt Camunda 8 Connectors.
 
 **[Explore Connectors A-Z >](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)**
 
@@ -85,19 +85,19 @@ Ready to start using Connectors in your processes? Explore our extensive library
 Build and deploy your own Connectors using Connector templates or the Connector SDK.
 
 <div class="connector-grid">
-  <a href="../connectors-start" class="connector-card" title="Get started with Connectors">
-    <img src={IconConnectorCustomImg} alt="Get started" class="connector-card-image"/>
+  <a href="../custom-built-connectors/build-connector" class="connector-card" title="Custom Connectors">
+    <img src={IconConnectorCustomImg} alt="Custom Connectors icon" class="connector-card-image"/>
     <h3>Custom Connectors</h3>
-    <p>Start integrating Connectors into your processes today.</p>
+    <p>Learn how to build and deploy your own custom Connectors.</p>
   </a>
-  <a href="../custom-built-connectors/connector-templates" class="connector-card" title="Connector types">
-    <img src={IconConnectorTemplateImg} alt="Connector types" class="connector-card-image"/>
+  <a href="../custom-built-connectors/connector-templates" class="connector-card" title="Connector templates">
+    <img src={IconConnectorTemplateImg} alt="Connector templates icon" class="connector-card-image"/>
     <h3>Connector templates</h3>
     <p>Create and work with connector templates.</p>
   </a>
-    <a href="../use-connectors" class="connector-card" title="How to use Connectors">
-    <img src={IconConnectorSdkImg} alt="How to use Connectors" class="connector-card-image"/>
+    <a href="../custom-built-connectors/connector-sdk" class="connector-card" title="Connector SDK">
+    <img src={IconConnectorSdkImg} alt="Connector SDK icon" class="connector-card-image"/>
     <h3>Connector SDK</h3>
-    <p>How to create a Connector Task and use secrets.</p>
+    <p> Use the Connector SDK to develop custom Connectors in Java.</p>
   </a>
 </div>

@@ -317,8 +317,8 @@ module.exports = {
             id: "components/connectors/connectors-start",
           },
           items: [
-            "components/connectors/use-connectors/index",
             "components/connectors/connector-types",
+            "components/connectors/use-connectors/index",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
           ],

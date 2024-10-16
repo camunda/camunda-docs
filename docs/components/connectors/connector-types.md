@@ -6,10 +6,6 @@ description: "Connectors come in type and subtypes that describe their functiona
 
 Connectors are categorized by the direction data flows into or out of Camunda 8.
 
-:::note
-Looking for pre-built, [Out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)?
-:::
-
 ## Outbound Connectors
 
 Outbound Connectors allow workflows to trigger external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.

@@ -1,6 +1,6 @@
 ---
 id: inbound
-title: Inbound Connectors
+title: Use Inbound Connectors
 description: Learn how to use inbound Connectors
 ---
 
