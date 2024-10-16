@@ -466,16 +466,16 @@ envsubst < values.yml > generated-values.yml
 
 Starting from **Camunda 8.6**, you need to store various passwords in a Kubernetes secret, which will be consumed by the Helm chart. Below is an example of how to set up the required secret:
 
-You can use `openssl` to generate random base64-encoded secrets and store them in environment variables:
+You can use `openssl` to generate random secrets and store them in environment variables:
 
 ```bash
-export CONNECTORS_SECRET=$(openssl rand -base64 16)
-export CONSOLE_SECRET=$(openssl rand -base64 16)
-export OPERATE_SECRET=$(openssl rand -base64 16)
-export OPTIMIZE_SECRET=$(openssl rand -base64 16)
-export TASKLIST_SECRET=$(openssl rand -base64 16)
-export ZEEBE_SECRET=$(openssl rand -base64 16)
-export ADMIN_PASSWORD=$(openssl rand -base64 16)
+export CONNECTORS_SECRET=$(openssl rand -hex 16)
+export CONSOLE_SECRET=$(openssl rand -hex 16)
+export OPERATE_SECRET=$(openssl rand -hex 16)
+export OPTIMIZE_SECRET=$(openssl rand -hex 16)
+export TASKLIST_SECRET=$(openssl rand -hex 16)
+export ZEEBE_SECRET=$(openssl rand -hex 16)
+export ADMIN_PASSWORD=$(openssl rand -hex 16)
 ```
 
 Next, use these environment variables in the `kubectl` command to create the secret.
