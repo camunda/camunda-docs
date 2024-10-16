@@ -155,7 +155,6 @@ The **GitHub Connector** currently supports the following operations.
 - **Owner:** The account owner of the repository. The name is not case-sensitive.
 - **Repository:** The name of the repository. The name is not case-sensitive.
 - **Release ID:** The unique identifier of the release.
-<!-- I was unsure about these references. To follow up with author. -->
 - **Body:** Text describing the contents of the tag.
 - **Tag name:** The name of the tag.
 - **Release name:** The name of the release
