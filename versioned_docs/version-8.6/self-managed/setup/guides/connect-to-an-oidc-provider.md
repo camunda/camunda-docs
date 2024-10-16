@@ -184,7 +184,7 @@ global:
       zeebe:
         clientId: <Client ID from Step 2>
         audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 53>
+        existingSecret: <Client secret from Step 5>
         tokenScope: "<Client ID from Step 2>/.default"
       webModeler:
         clientId: <Client ID from Step 2>
