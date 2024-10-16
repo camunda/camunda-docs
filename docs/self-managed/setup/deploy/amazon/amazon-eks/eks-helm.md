@@ -59,7 +59,7 @@ export CAMUNDA_HELM_CHART_VERSION="11.0.0"
 
 <Tabs groupId="env">
 
-  <TabItem value="basic" label="Standard" default>
+  <TabItem value="standard" label="Standard" default>
   
 When using Basic authentication (username and password), some following environment variables must be set and contain valid values.
 
@@ -464,7 +464,41 @@ Once you've prepared the `values.yml` file, use the `envsubst` command to substi
 envsubst < values.yml > generated-values.yml
 ```
 
-This will generate a new file `generated-values.yml` with the environment-specific values.
+Starting from **Camunda 8.6**, you need to store various passwords in a Kubernetes secret, which will be consumed by the Helm chart. Below is an example of how to set up the required secret:
+
+You can use `openssl` to generate random base64-encoded secrets and store them in environment variables:
+
+```bash
+export CONNECTORS_SECRET=$(openssl rand -base64 16)
+export CONSOLE_SECRET=$(openssl rand -base64 16)
+export OPERATE_SECRET=$(openssl rand -base64 16)
+export OPTIMIZE_SECRET=$(openssl rand -base64 16)
+export TASKLIST_SECRET=$(openssl rand -base64 16)
+export ZEEBE_SECRET=$(openssl rand -base64 16)
+export ADMIN_PASSWORD=$(openssl rand -base64 16)
+```
+
+Next, use these environment variables in the `kubectl` command to create the secret.
+
+Note:
+
+- The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, please provide those values.
+- The `smtp-password` should be replaced with the appropriate external value.
+
+```bash
+kubectl create secret generic identity-secret-for-components \
+  --namespace camunda \
+  --from-literal=connectors-secret=$CONNECTORS_SECRET \
+  --from-literal=console-secret=$CONSOLE_SECRET \
+  --from-literal=operate-secret=$OPERATE_SECRET \
+  --from-literal=optimize-secret=$OPTIMIZE_SECRET \
+  --from-literal=tasklist-secret=$TASKLIST_SECRET \
+  --from-literal=zeebe-secret=$ZEEBE_SECRET \
+  --from-literal=admin-password=$ADMIN_PASSWORD \
+  --from-literal=postgres-password="" \
+  --from-literal=password="" \
+  --from-literal=smtp-password=""
+```
 
 #### 3. Install Camunda 8 using Helm
 
@@ -607,8 +641,8 @@ export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-p
 This requires to port-forward the Zeebe Gateway and Keycloak to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward services/camunda-zeebe-gateway 8080:8080
-kubectl port-forward services/camunda-keycloak 18080:80
+kubectl port-forward services/camunda-zeebe-gateway 8080:8080 --namespace camunda
+kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
 Export the following environment variables:
@@ -756,8 +790,8 @@ export ZEEBE_TOKEN_SCOPE='camunda-identity'
 This requires to port-forward the Zeebe Gateway and Keycloak to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward services/camunda-zeebe-gateway 26500:26500
-kubectl port-forward services/camunda-keycloak 18080:80
+kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
+kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
 Export the following environment variables:
@@ -821,15 +855,15 @@ If you want to access the other services and their UI, you can port-forward thos
 
 ```shell
 Identity:
-> kubectl port-forward svc/camunda-identity 8080:80
+> kubectl port-forward svc/camunda-identity 8080:80 --namespace camunda
 Operate:
-> kubectl port-forward svc/camunda-operate  8081:80
+> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
 Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8082:80
+> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
 Optimize:
-> kubectl port-forward svc/camunda-optimize 8083:80
+> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
 Connectors:
-> kubectl port-forward svc/camunda-connectors 8088:8080
+> kubectl port-forward svc/camunda-connectors 8088:8080 --namespace camunda
 ```
 
 :::note
@@ -837,7 +871,7 @@ Keycloak must be port-forwarded at all times as it is required to authenticate.
 :::
 
 ```shell
-kubectl port-forward services/camunda-keycloak 18080:80
+kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
   </TabItem>
@@ -865,8 +899,8 @@ Audience=zeebe-api # the default for Camunda 8 Self-Managed
 This requires to port-forward the Zeebe Gateway and Keycloak to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward services/camunda-zeebe-gateway 26500:26500
-kubectl port-forward services/camunda-keycloak 18080:80
+kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
+kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
 The following values are required for the OAuth authentication:
@@ -884,15 +918,15 @@ If you want to access the other services and their UI, you can port-forward thos
 
 ```shell
 Identity:
-> kubectl port-forward svc/camunda-identity 8080:80
+> kubectl port-forward svc/camunda-identity 8080:80 --namespace camunda
 Operate:
-> kubectl port-forward svc/camunda-operate  8081:80
+> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
 Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8082:80
+> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
 Optimize:
-> kubectl port-forward svc/camunda-optimize 8083:80
+> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
 Connectors:
-> kubectl port-forward svc/camunda-connectors 8088:8080
+> kubectl port-forward svc/camunda-connectors 8088:8080 --namespace camunda
 ```
 
 :::note
@@ -900,7 +934,7 @@ Keycloak must be port-forwarded at all times as it is required to authenticate.
 :::
 
 ```shell
-kubectl port-forward services/camunda-keycloak 18080:80
+kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
   </TabItem>
