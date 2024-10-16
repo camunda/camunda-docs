@@ -239,7 +239,7 @@ curl --request GET 'http://localhost:9600/actuator/backups/100'
 
 When the response is 200 OK, the response body consists of a JSON object describing the state of the backup.
 
-- `backupId`: Id in the request.
+- `backupId`: ID in the request.
 - `state`: Gives the overall status of the backup. The state can be one of the following:
   - `COMPLETED` if all partitions have completed the backup.
   - `FAILED` if at least one partition has failed. In this case, `failureReason` contains a string describing the reason for failure.
