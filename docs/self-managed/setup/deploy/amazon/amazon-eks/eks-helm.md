@@ -517,7 +517,6 @@ This command:
 
 - Installs (or upgrades) the Camunda platform using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
-- References the namespace `camunda`, creating it if it doesn't exist.
 - Applies the configuration from `generated-values.yml`.
 
 **Note for domain installation:** the annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
