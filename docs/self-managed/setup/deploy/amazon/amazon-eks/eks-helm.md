@@ -16,6 +16,8 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 
 - [Helm (3.16+)](https://helm.sh/docs/intro/install/)
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
+- [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 
 ## Considerations
@@ -613,9 +615,44 @@ The important part is assigning the `iam_role_arn` of the previously created `op
 
 First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
-This can be done by following the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md) followed by the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
-Instead of creating a confidential application, a machine-to-machine (M2M) application is required to be created.
-This reveals a `client-id` and `client-secret` that can be used to connect to the Camunda 8 cluster.
+**Generating an M2M Token Using Identity:**
+
+You can generate an M2M token by following the steps outlined in the [Identity Getting Started Guide](/self-managed/identity/getting-started/install-identity.md), along with the [Incorporating Applications Documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+Below is an extract of the necessary instructions:
+
+<Tabs groupId="generate-client-id">
+  <TabItem value="with" label="With Domain" default>
+
+1. Open Identity in your browser at `https://${DOMAIN_NAME}/identity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Use `demo` as both the username and password.
+3. Click on "Add Application," select `M2M` as the type, and assign a name like "test."
+4. Select the newly created application and retrieve the `client-id` and `client-secret` values.
+
+<!-- prevent error during compilation!-->
+  </TabItem>
+  
+  <TabItem value="without" label="Without Domain">
+
+This requires to port-forward the Identity and Keycloak to be able to connect to the cluster.
+
+```shell
+kubectl port-forward services/camunda-identity 8069:80 --namespace camunda
+kubectl port-forward services/camunda-keycloak 8070:80 --namespace camunda
+```
+
+1. Open Identity in your browser at `http://localhost:8069`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Use `demo` as both the username and password.
+3. Click on "Add Application," select `M2M` as the type, and assign a name like "test."
+4. Select the newly created application and retrieve the `client-id` and `client-secret` values.
+
+<!-- prevent error during compilation!-->
+  </TabItem>
+</Tabs>
+
+```shell
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+```
 
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
@@ -629,45 +666,40 @@ Export the following environment variables:
 
 ```shell
 export ZEEBE_ADDRESS=zeebe-rest.$DOMAIN_NAME
-export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
   </TabItem>
   <TabItem value="without" label="Without Domain">
 
-This requires to port-forward the Zeebe Gateway and Keycloak to be able to connect to the cluster.
+This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
 
 ```shell
 kubectl port-forward services/camunda-zeebe-gateway 8080:8080 --namespace camunda
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
 Export the following environment variables:
 
 ```shell
 export ZEEBE_ADDRESS=localhost:8080
-export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:8070/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
   </TabItem>
 
 </Tabs>
 
-Generate a temporary token to access the REST API:
+Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token.
+
+<!-- TODO: this part seems to be broken: {"type":"about:blank","title":"Unauthorized","status":401,"detail":"the provided claims are invalid","instance":"/v2/topology"} -->
 
 ```shell
-curl --location --request POST "${ZEEBE_AUTHORIZATION_SERVER_URL}" \
+export TOKEN=$(curl --location --request POST "${ZEEBE_AUTHORIZATION_SERVER_URL}" \
 --header "Content-Type: application/x-www-form-urlencoded" \
 --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
 --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}" \
---data-urlencode "grant_type=client_credentials"
+--data-urlencode "grant_type=client_credentials" | jq '.access_token' -r)
 ```
-
-Capture the value of the `access_token` property and store it as your token.
 
 Use the stored token, in our case `TOKEN`, to use the REST API to print the cluster topology.
 
@@ -776,8 +808,6 @@ Export the following environment variables:
 
 ```shell
 export ZEEBE_ADDRESS=zeebe.$DOMAIN_NAME:443
-export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
 export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
 export ZEEBE_TOKEN_SCOPE='camunda-identity'
@@ -786,20 +816,17 @@ export ZEEBE_TOKEN_SCOPE='camunda-identity'
   </TabItem>
   <TabItem value="without" label="Without Domain">
 
-This requires to port-forward the Zeebe Gateway and Keycloak to be able to connect to the cluster.
+This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
 
 ```shell
 kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
 Export the following environment variables:
 
 ```shell
 export ZEEBE_ADDRESS=localhost:26500
-export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:8070/auth/realms/camunda-platform/protocol/openid-connect/token
 export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
 export ZEEBE_TOKEN_SCOPE='camunda-identity'
 ```
@@ -809,6 +836,8 @@ export ZEEBE_TOKEN_SCOPE='camunda-identity'
 </Tabs>
 
 Executing the following command will result in a successful connection to the Zeebe cluster...
+
+<!-- TODO: this part seems to be broken for insecure as it skips the authentification -->
 
 ```shell
 zbctl status
@@ -854,15 +883,15 @@ If you want to access the other services and their UI, you can port-forward thos
 
 ```shell
 Identity:
-> kubectl port-forward svc/camunda-identity 8080:80 --namespace camunda
+> kubectl port-forward svc/camunda-identity 8069:80 --namespace camunda
 Operate:
-> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
+> kubectl port-forward svc/camunda-operate  8071:80 --namespace camunda
 Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
+> kubectl port-forward svc/camunda-tasklist 8072:80 --namespace camunda
 Optimize:
-> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
+> kubectl port-forward svc/camunda-optimize 8073:80 --namespace camunda
 Connectors:
-> kubectl port-forward svc/camunda-connectors 8088:8080 --namespace camunda
+> kubectl port-forward svc/camunda-connectors 8078:8080 --namespace camunda
 ```
 
 :::note
@@ -870,7 +899,7 @@ Keycloak must be port-forwarded at all times as it is required to authenticate.
 :::
 
 ```shell
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
+kubectl port-forward services/camunda-keycloak 8070:80 --namespace camunda
 ```
 
   </TabItem>
@@ -895,11 +924,10 @@ Audience=zeebe-api # the default for Camunda 8 Self-Managed
   </TabItem>
   <TabItem value="without" label="Without Domain">
 
-This requires to port-forward the Zeebe Gateway and Keycloak to be able to connect to the cluster.
+This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
 
 ```shell
 kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
 The following values are required for the OAuth authentication:
@@ -909,7 +937,7 @@ The following values are required for the OAuth authentication:
 Cluster endpoint=http://localhost:26500
 Client ID='client-id' # retrieve the value from the identity page of your created m2m application
 Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
-OAuth Token URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+OAuth Token URL=http://localhost:8070/auth/realms/camunda-platform/protocol/openid-connect/token
 Audience=zeebe-api # the default for Camunda 8 Self-Managed
 ```
 
@@ -917,15 +945,15 @@ If you want to access the other services and their UI, you can port-forward thos
 
 ```shell
 Identity:
-> kubectl port-forward svc/camunda-identity 8080:80 --namespace camunda
+> kubectl port-forward svc/camunda-identity 8069:80 --namespace camunda
 Operate:
-> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
+> kubectl port-forward svc/camunda-operate  8071:80 --namespace camunda
 Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
+> kubectl port-forward svc/camunda-tasklist 8072:80 --namespace camunda
 Optimize:
-> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
+> kubectl port-forward svc/camunda-optimize 8073:80 --namespace camunda
 Connectors:
-> kubectl port-forward svc/camunda-connectors 8088:8080 --namespace camunda
+> kubectl port-forward svc/camunda-connectors 8078:8080 --namespace camunda
 ```
 
 :::note
@@ -933,7 +961,7 @@ Keycloak must be port-forwarded at all times as it is required to authenticate.
 :::
 
 ```shell
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
+kubectl port-forward services/camunda-keycloak 8070:80 --namespace camunda
 ```
 
   </TabItem>
