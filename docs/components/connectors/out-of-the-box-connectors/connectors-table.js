@@ -426,8 +426,8 @@ const SearchableTable = () => {
         </table>
       ) : (
         <p className="connector-no-results">
-          No Connectors found for that search term. Try a different search, or
-          check{" "}
+          No Connectors found for that search term and type. Try a different
+          search, remove the type, or check your spelling.
         </p>
       )}
     </div>

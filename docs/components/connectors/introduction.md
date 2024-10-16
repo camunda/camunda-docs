@@ -30,7 +30,7 @@ Learn more about how to use Connectors in your processes and about the different
   <a href="../connectors-start" class="connector-card" title="Get started with Connectors">
     <img src={IconPlayImg} alt="Get started"/>
     <h3>Get started</h3>
-    <p>Start integrating Connectors into your processes today.</p>
+    <p>Learn more about Connectors.</p>
   </a>
   <a href="../use-connectors" class="connector-card" title="How to use Connectors">
     <img src={IconConnectorImg} alt="How to use Connectors"/>

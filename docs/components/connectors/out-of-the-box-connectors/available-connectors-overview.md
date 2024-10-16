@@ -11,5 +11,5 @@ Explore prebuilt Camunda 8 SaaS and [Self-Managed](/self-managed/connectors-depl
 <SearchableTable />
 
 :::tip
-Don't see the Connector you need? Build your own [custom Connector](/components/connectors/custom-built-connectors/build-connector.md), or browse the [Camunda MarketPlace](https://marketplace.camunda.com/) for Connectors developed by Camunda, Partners, and the Community.
+Don't see the Connector you need? Build your own [custom Connector](/components/connectors/custom-built-connectors/build-connector.md), or explore the [Camunda MarketPlace](https://marketplace.camunda.com/) for more Connectors developed by Camunda, Partners, and the Community.
 :::

@@ -71,6 +71,7 @@ td.no-border-cell-img {
 
 .connector-no-results {
   padding-top: 20px;
+  color: red;
 }
 
 .connector-grid {
