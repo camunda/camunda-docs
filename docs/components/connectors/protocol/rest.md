@@ -47,18 +47,18 @@ You can configure the connector to go through a proxy server by setting the foll
 
 There are 3 properties you can set to specify the proxy that will be used by the http protocol handler:
 
-- http.proxyHost: the host name of the proxy server
-- http.proxyPort: the port number, the default value being 80.
-- http.nonProxyHosts:a list of hosts that should be reached directly, bypassing the proxy. This is a list of patterns separated by `|`. The patterns may start or end with a `*` for wildcards. Any host matching one of these patterns will be reached through a direct connection instead of through a proxy.
+- `http.proxyHost`: the host name of the proxy server
+- `http.proxyPort`: the port number, the default value being 80.
+- `http.nonProxyHosts`: a list of hosts that should be reached directly, bypassing the proxy. This is a list of patterns separated by `|`. The patterns may start or end with a `*` for wildcards. Any host matching one of these patterns will be reached through a direct connection instead of through a proxy.
 
 #### HTTPS
 
 The https (http over SSL) protocol handler has its own set of properties:
 
-- https.proxyHost
-- https.proxyPort
+- `https.proxyHost`
+- `https.proxyPort`
 
-As you probably guessed these work in the exact same manner as their http counterparts, so we won't go into much detail except to mention that the default port number, this time, is 443 and that for the "non proxy hosts" list, the HTTPS protocol handler will use the same as the http handler (i.e. http.nonProxyHosts).
+As you probably guessed these work in the exact same manner as their http counterparts, so we won't go into much detail except to mention that the default port number, this time, is 443 and that for the "non proxy hosts" list, the HTTPS protocol handler will use the same as the http handler (i.e. `http.nonProxyHosts`).
 
 ### Authentication
 
