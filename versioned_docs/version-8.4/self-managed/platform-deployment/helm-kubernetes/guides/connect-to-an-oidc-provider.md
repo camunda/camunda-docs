@@ -124,8 +124,8 @@ Ensure you register a new application for each component.
 ```
     CAMUNDA_IDENTITY_TYPE=MICROSOFT
     CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
-    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
     CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
     CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 5>
     CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 2>
@@ -139,13 +139,13 @@ Ensure you register a new application for each component.
 global:
   identity:
     auth:
-      issuer: https://login.microsoftonline.com/<Tenant ID>/v2.0
+      issuer: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
       # this is used for container to container communication
-      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
+      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/oauth2/v2.0/token
+      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/discovery/v2.0/keys
       type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Tenant ID>/v2.0
+      publicIssuerUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
       operate:
         clientId: <Client ID from Step 2>
         audience: <Client ID from Step 2>
