@@ -45,8 +45,8 @@ You can use Camunda 8 to orchestrate processes with human tasks of any complexit
 
 This guide introduces you to the basics of human task orchestration. You will create a simple process to decide on what to eat for dinner, and drive the process flow according to that decision.
 
-- Select **Self-Managed** to see an example using Camunda 8 Run and Desktop Modeler.
-- Select **SaaS** to see an example using Camunda 8 SaaS and Web Modeler.
+- Select **Desktop** to see an example using Camunda 8 Run and Desktop Modeler in a local development environment.
+- Select **Web** to see an example using Camunda 8 SaaS and Web Modeler.
 
 :::note
 For a video-based learning experience and a more complex example, see [Getting Started with Human Workflow](https://bit.ly/3PJJocB).
@@ -54,8 +54,8 @@ For a video-based learning experience and a more complex example, see [Getting S
 
 <Tabs groupId="install" defaultValue="saas" queryString values={
 [
-{label: 'Self-Managed', value: 'sm' },
-{label: 'SaaS', value: 'saas' },
+{label: 'Desktop', value: 'sm' },
+{label: 'Web', value: 'saas' },
 ]}>
 <TabItem value="sm">
 
@@ -75,7 +75,7 @@ For a video-based learning experience and a more complex example, see [Getting S
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-In this SaaS example, you will learn how to:
+In this example, you will learn how to:
 
 - Create and run your first process with a human in the loop.
 - Build a BPMN diagram using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
@@ -113,10 +113,9 @@ First, create the BPMN diagram file and project.
 
 1. Open Web Modeler, and click **New project**.
 1. Select **Create process application** to [create a new process application](/components/modeler/web-modeler/process-applications.md).
-
-   - Name the process application. For example, `Decide for Dinner`.
-   - Select a development cluster to use during development. If you have not already defined your [development stage and cluster](/components/modeler/web-modeler/process-application-pipeline.md#deployment-pipeline-stages), you are prompted to do so. Click **Define stages** to begin this process.
-   - Select **Create** to create the process application and the main process BPMN diagram.
+1. Name the process application. For example, `Decide for Dinner`.
+1. Select a development cluster to use during development. If you have not already defined your [development stage and cluster](/components/modeler/web-modeler/process-application-pipeline.md#deployment-pipeline-stages), you are prompted to do so. Click **Define stages** to begin this process.
+1. Select **Create** to create the process application and the main process BPMN diagram.
 
 1. Once created, click the process name to open the main process BPMN diagram.
 
@@ -191,7 +190,7 @@ You have now designed the process. To allow the user to make the decision, you m
 :::
 
 1. Select the user task you created in **[Step 1](#step-1-create-a-new-process)**.
-1. Click the blue **Link Form** icon in the context pad, and click **Create new form**.
+1. Click the blue **Link Form** icon in the [context pad](/components/modeler/web-modeler/context-pad.md), and click **Create new form**.
 1. A form is created and opened in the form editor. The form is automatically named and linked to the user task.
 1. Click and drag a **Text view** component (found under Presentation) into the empty form.
 
@@ -281,7 +280,7 @@ Your process is now ready to run. Given its human-centric nature, it is well sui
 Human-centric processes involving user tasks seamlessly unfold within Tasklist, offering a cost-effective orchestration solution for human work with forms. However, the versatility of these processes extends beyond Tasklist, encompassing various alternative methods and applications. For instance, users can be redirected to external applications to fulfill tasks, bespoke task applications can be developed for any domain, or interactions with the physical world can be captured through event signals from sensors and IoT devices.
 :::
 
-### Deploy and test run
+First, you must deploy and test run the process.
 
 :::note
 Ensure your installation of [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) is running prior to deploying your process.
@@ -298,7 +297,7 @@ Ensure your installation of [Camunda 8 Run](/self-managed/setup/deploy/local/c8r
 
 4. Click **Run** to run your process with the provided variables.
 
-### Check successful start in Operate
+Next, check for a successful start in Operate.
 
 1. Open Operate at `http://localhost:8080/operate`, and select **Processes** from the top bar.
 2. In the **Process** panel, use the **Name** drop-down to select your process.
@@ -306,7 +305,7 @@ Ensure your installation of [Camunda 8 Run](/self-managed/setup/deploy/local/c8r
 
    <img src={OperateHumanTasks} alt="Process instance monitoring in Operate." />
 
-## Step 4: Complete a user task
+Finally, check that you can complete a user task in Tasklist.
 
 When the process instance arrives at the user task, a new user task instance is created at Zeebe. The process instance stops at this point and waits until the user task is completed. Applications like Tasklist can be used by humans to complete these tasks. In this last step, you will open Tasklist to run the user task you created.
 
