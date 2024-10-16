@@ -27,6 +27,39 @@ To make the **REST Connector** executable, choose the required authentication ty
 All the mandatory and non-mandatory fields will be covered in the upcoming sections. Depending on the authentication selection you make, more fields might be required. We will also cover this in the next section.
 :::
 
+### Proxy configuration
+
+:::note
+Only available in Self-Managed.
+:::
+
+#### Set the environment variable
+
+To set the properties explained below, you can use the `JAVA_OPTS` environment variable:
+
+```
+JAVA_OPTS=-Dhttp.proxyHost=proxy -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=OTHER_DOMAIN
+```
+
+#### HTTP
+
+You can configure the connector to go through a proxy server by setting the following standard JVM properties.
+
+There are 3 properties you can set to specify the proxy that will be used by the http protocol handler:
+
+- http.proxyHost: the host name of the proxy server
+- http.proxyPort: the port number, the default value being 80.
+- http.nonProxyHosts:a list of hosts that should be reached directly, bypassing the proxy. This is a list of patterns separated by `|`. The patterns may start or end with a `*` for wildcards. Any host matching one of these patterns will be reached through a direct connection instead of through a proxy.
+
+#### HTTPS
+
+The https (http over SSL) protocol handler has its own set of properties:
+
+- https.proxyHost
+- https.proxyPort
+
+As you probably guessed these work in the exact same manner as their http counterparts, so we won't go into much detail except to mention that the default port number, this time, is 443 and that for the "non proxy hosts" list, the HTTPS protocol handler will use the same as the http handler (i.e. http.nonProxyHosts).
+
 ### Authentication
 
 You can choose among the available authentication type according to your authentication requirements.
