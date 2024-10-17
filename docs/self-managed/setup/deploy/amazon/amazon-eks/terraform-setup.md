@@ -133,7 +133,7 @@ This S3 bucket will now securely store your Terraform state files with versionin
 
 Once the S3 bucket is created, configure your `config.tf` file to use the S3 backend for managing the Terraform state:
 
-<Tabs groupId="config-tf">
+<Tabs groupId="env">
   <TabItem value="standard" label="Standard" default>
 
 ```hcl reference
@@ -173,7 +173,7 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-eks-module) 
 1. **Create a `cluster.tf` file** in the same directory as your `config.tf` file.
 2. **Add the following content** to your newly created `cluster.tf` file to utilize the provided module:
 
-<Tabs groupId="cluster-tf">
+<Tabs groupId="env">
   <TabItem value="standard" label="Standard" default>
 
 ```hcl reference
@@ -265,7 +265,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
 1. In the directory where your `config.tf` file resides, create a new file named `db.tf`.
 2. Add the following content to `db.tf` to use the provided PostgreSQL module:
 
-<Tabs groupId="db-tf">
+<Tabs groupId="env">
   <TabItem value="standard" label="Standard" default>
 
 ```hcl reference
@@ -323,7 +323,7 @@ As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Ama
 1. In the folder where your `config.tf` file resides, create a new file named `opensearch.tf`.
 2. Add the following content to `opensearch.tf` to make use of the provided OpenSearch module:
 
-<Tabs groupId="opensearch-tf">
+<Tabs groupId="env">
   <TabItem value="standard" label="Standard" default>
 
 :::caution Network based security
@@ -435,7 +435,7 @@ After configuring and deploying your infrastructure with Terraform, follow these
 
 The following commands will export the required outputs as environment variables. You may need to omit some if you have chosen not to use certain modules. These values will be necessary for deploying Camunda 8 with Helm charts:
 
-<Tabs groupId="export-help-values">
+<Tabs groupId="env">
   <TabItem value="standard" label="Standard" default>
 
 ```bash reference
@@ -482,7 +482,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 
 A **Kubernetes job** will connects to the database and creates the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
 
-<Tabs groupId="create-db">
+<Tabs groupId="env">
   <TabItem value="standard" label="Standard" default>
 
 2. **Create a secret that references the environment variables**:

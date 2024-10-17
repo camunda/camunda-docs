@@ -541,7 +541,7 @@ First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 You can generate an M2M token by following the steps outlined in the [Identity Getting Started Guide](/self-managed/identity/getting-started/install-identity.md), along with the [Incorporating Applications Documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 Below is an extract of the necessary instructions:
 
-<Tabs groupId="generate-client-id">
+<Tabs groupId="domain">
   <TabItem value="with" label="With Domain" default>
 
 1. Open Identity in your browser at `https://${DOMAIN_NAME}/identity`. You will be redirected to Keycloak and prompted to log in with a username and password.
@@ -580,7 +580,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
-<Tabs groupId="domain-connectivity">
+<Tabs groupId="domain">
   <TabItem value="with" label="With Domain" default>
 
 Export the following environment variables:
@@ -722,7 +722,7 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS}/v2/topology"
 
 After following the installation instructions in the [zbctl docs](/apis-tools/community-clients/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
 
-<Tabs groupId="domain-connectivity-zbctl">
+<Tabs groupId="domain">
   <TabItem value="with" label="With Domain" default>
 
 Export the following environment variables:
@@ -828,7 +828,7 @@ kubectl port-forward services/camunda-keycloak 8070:80 --namespace camunda
 
 Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
-<Tabs groupId="domain-connectivity-modeler">
+<Tabs groupId="domain">
   <TabItem value="with" label="With Domain" default>
 
 The following values are required for the OAuth authentication:
