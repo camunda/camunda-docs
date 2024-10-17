@@ -41,7 +41,7 @@ The existing Helm charts use the Elasticsearch configurations by default. The He
 
 **Zeebe**: Configure the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md).
 
-**Operate**, **Tasklist** and **Optimize**: These components use the same parameters for both Elasticsearch and OpenSearch. Replace the `elasticsearch` part of the relevant configuration key with `opensearch`, together with its appropriate value.
+**Operate**, **Tasklist**, and **Optimize**: These components use the same parameters for both Elasticsearch and OpenSearch. Replace the `elasticsearch` part of the relevant configuration key with `opensearch`, together with its appropriate value.
 
 For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSEARCH_URL`. In the case of Optimize, please make sure all variables have the proper `CAMUNDA_OPTIMIZE` prefix, i.e. `OPTIMIZE_ELASTICSEARCH_HTTP_PORT` becomes `CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT`.
 
