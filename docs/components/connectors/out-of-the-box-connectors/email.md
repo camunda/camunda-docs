@@ -5,6 +5,13 @@ sidebar_label: Email Connector
 description: The Email Connector allows you to connect your BPMN service with different email protocol.
 ---
 
+import Tabs from "@theme/Tabs"; import TabItem from "@theme/TabItem";
+
+<Tabs groupId="email" defaultValue="outbound" queryString
+values={[{label: 'Email Outbound Connector', value: 'outbound' }, {label: 'Email Inbound Connector', value: 'inbound' }]}>
+
+<TabItem value='outbound'>
+
 The **Email Connector** is an outbound Connector that allows you to connect your BPMN service with any email POP3, IMAP
 or SMTP server.
 
@@ -565,3 +572,184 @@ The example below shows the expected JSON response after an email has been succe
   "to": "TEST"
 }
 ```
+
+</TabItem>
+
+<TabItem value='inbound'>
+
+## Prerequisites
+
+:::caution
+This inbound connector only supports working with IMAP server.
+:::
+
+To use the **Email Inbound Connector**, you must have an IMAP server available to connect to.
+
+:::note
+Use Camunda secrets to avoid exposing your sensitive data as plain text.
+See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+:::
+
+## Authentication
+
+You can authenticate to a mail server as follows.
+
+### Simple Authentication
+
+This method allows the user to connect to any IMAP server using an email address and password.
+
+#### Parameters
+
+| Parameter  | Description                                                                                                                                                                |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
+| `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
+
+### Listener information
+
+This inbound connector creates a new process each time a new email is received.
+
+- `Folder`: (Optional) This parameter defines the folder that the inbound connector will monitor. If not specified, the default folder is set to INBOX.
+- `Polling Wait Time`: This parameter sets the interval between each polling operation. Please [refer to the documentation](https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/#time-duration) on time duration for the correct format.
+- `Polling Configuration`: This section contains settings related to the polling behavior of the connector.
+  - `Poll All Emails`: When enabled, the connector polls every email found in the specified folder.
+    - `Move to Another Folder After Processing`: If selected, this option moves each processed email to a designated folder.
+      - `Folder`: Here, you need to specify the target folder where processed emails will be moved.
+    - `Delete After Processing`: If this option is chosen, each email will be permanently deleted after processing.
+  - `Poll Unseen Emails`: When enabled, the connector polls only the emails that have not been marked as read in the specified folder.
+    - `Move to Another Folder After Processing`: Select this to move each processed unseen email to a different folder.
+      - `Folder`: Specify the target folder for the processed unseen emails to be moved to.
+    - `Delete After Processing`: If enabled, unseen emails will be deleted from the folder after they are processed.
+    - `Mark as Read After Processing`: When this option is selected, each unseen email will be marked as read once it has been processed.
+
+#### Response Structure
+
+The task returns a JSON object containing detailed information about the email:
+
+- `messageId`: The unique identifier corresponding to the email message.
+- `fromAddress`: the email addresses of the sender.
+- `headers` : A list containing the email's headers
+- `subject`: The subject line of the email.
+- `size`: The size of the email in bytes.
+- `plainTextBody`: The plain text version of the email's content.
+- `htmlBody`: The HTML version of the email's content, provided it exists.
+- `receivedDateTime`: the email's reception datetime
+
+#### Example Response
+
+The following example JSON response shows the data structure produced when an email triggers the creation of a process
+instance:
+
+```json
+{
+  "messageId": "messageId",
+  "fromAddress": "example@camunda.com",
+  "subject": "Urgent Test",
+  "size": 65646,
+  "plainTextBody": "Hey how are you?\r\n",
+  "htmlBody": "<html>Hello</html>",
+  "headers": [
+    {
+      "header": "header1",
+      "value": "example"
+    },
+    {
+      "header": "header2",
+      "value": "test"
+    }
+  ],
+  "sentDate": "2024-08-19T06:54:28Z"
+}
+```
+
+This response includes essential email details such as the `messageId`, sender addresses, subject, size, and the content
+of the email both in plain text and HTML format. This information can be used by the process for various workflows, such
+as prioritizing tasks, content analysis, and automated responses.
+
+#### Activation condition
+
+The optional **Activation condition** field allows you to specify a Friendly Enough Expression
+Language [FEEL](/components/modeler/feel/what-is-feel/) expression to control when the Email
+Inbound Connector should trigger a process instance. This condition acts as a filter, allowing the process to be
+initiated only when certain criteria are met by the incoming email.
+
+For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the
+subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email
+received by the connector.
+
+#### Correlation
+
+The **Correlation** section allows you to configure the message correlation parameters.
+
+##### Correlation key
+
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This
+  corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This
+  expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming email
+message contains `value:{correlationKey:myValue}`, your correlation key settings will look like this:
+
+- **Correlation key (process)**: `=myCorrelationKey`
+- **Correlation key (payload)**: `=message.plainTextBody.correlationKey`
+
+You can also use the key of the message to accomplish this in the **Correlation key (payload)** field with `=key`.
+
+:::info
+To learn more about correlation keys, see [messages](../../../concepts/messages).
+:::
+
+##### Message ID expression
+
+The optional **Message ID expression** field allows you to extract the message ID from the incoming message.
+
+- The message ID serves as a unique identifier for the message and is used for message correlation.
+- This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+In most cases, you do not need to configure the **Message ID expression**. However, it is useful if you want to ensure
+message deduplication or achieve a certain message correlation behavior.
+
+:::info
+To learn more about how message IDs influence message correlation,
+see [messages](../../../concepts/messages#message-correlation-overview).
+:::
+
+For example, if you want to set the message ID to the value of the `messageId` field in the incoming message, you can
+configure the **Message ID expression** as follows:
+
+```
+= message.messageId
+```
+
+##### Message TTL
+
+The optional **Message TTL** field allows you to set the time-to-live (TTL) for the correlated messages.
+
+- TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it
+  cannot be correlated immediately).
+- The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour.
+
+:::info
+To learn more about the TTL concept in Zeebe, see [message correlation](../../../concepts/messages#message-buffering).
+:::
+
+#### Deduplication
+
+The **Deduplication** section allows you to configure the Connector deduplication parameters.
+
+- **Connector deduplication** is a mechanism in the Connector Runtime that determines how many email listeners are
+  created if there are multiple occurrences of the **Email Listener Connector** in a BPMN diagram. This is different to
+  **message deduplication**.
+- By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription
+  properties only result in one subscription.
+
+To customize the deduplication behavior, select the **Manual mode** checkbox and configure the custom deduplication ID.
+
+:::info
+To learn more about deduplication, see [deduplication](../use-connectors/inbound.md#connector-deduplication).
+:::
+
+</TabItem>
+
+</Tabs>
