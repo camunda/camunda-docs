@@ -465,7 +465,7 @@ To authenticate and authorize access to PostgreSQL and OpenSearch, **you do not 
 
 Ensure that you use the actual values you passed to the Terraform module during the setup of PostgreSQL and OpenSearch.
 
-### Create the database and associated access
+### Configure the database and associated access
 
 As you now have a database, you need to create dedicated databases for each Camunda component and an associated user that have a configured access. Follow these steps to create the database users and configure access.
 
@@ -565,6 +565,87 @@ kubectl delete secret setup-db-secret --namespace camunda
 ```
 
 By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+
+### Configure OpenSearch fine grained access controle
+
+As you now have an OpenSearch domain, you need to configure the related access for each Camunda component.
+
+You can access the created OpenSearch domain in two ways:
+
+1. **Bastion host**: Set up a bastion host within the same network to securely access the OpenSearch domain.
+2. **Pod within the EKS cluster**: Alternatively, deploy a pod in your EKS cluster equipped with the necessary tools to connect to the OpenSearch domain.
+
+The choice depends on your infrastructure setup and security preferences. In this tutorial, we'll use a pod within the EKS cluster to configure the domain.
+
+<Tabs groupId="env">
+  <TabItem value="standard" label="Standard" default>
+
+The standard installation comes already pre-configured, you don't need to perform any other extra-steps.
+
+  </TabItem>
+  <TabItem value="irsa" label="IRSA">
+
+1. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the setup manifest.
+
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/procedure/vars-create-os.sh
+```
+
+A **Kubernetes job** will connects to the OpenSearch dommain and configure it..
+
+2. **Create a secret that references the environment variables**:
+
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/procedure/create-setup-os-secret.sh
+```
+
+This command creates a secret named `setup-os-secret` and dynamically populates it with the values from your environment variables.
+
+After running the above command, you can verify that the secret was created successfully by using:
+
+```bash
+kubectl get secret setup-os-secret -o yaml --namespace camunda
+```
+
+This should display the secret with the base64 encoded values.
+
+3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-opensearch-fgac.yml`.
+
+```yaml reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/setup-opensearch-fgac.yml
+```
+
+3. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the OpenSearch domain credentials.
+
+```bash
+kubectl apply -f setup-opensearch-fgac.yml --namespace camunda
+```
+
+4. **Verify the job's completion**: Once the job is created, you can monitor its progress using:
+
+```bash
+kubectl get job/setup-opensearch-fgac --namespace camunda --watch
+```
+
+Once the job shows as `Completed`, the OpenSearch domain is configured correctly for fine grained access control.
+
+5. **Check logs for confirmation**: You can view the logs of the job to confirm that the privileges were granted successfully:
+
+```bash
+kubectl logs job/setup-opensearch-fgac --namespace camunda
+```
+
+```bash
+kubectl delete job setup-opensearch-fgac --namespace camunda
+kubectl delete secret setup-os-secret --namespace camunda
+```
+
+By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+
+  </TabItem>
+</Tabs>
+
+6. **Cleanup the resources:**
 
 ## 3. Install Camunda 8 using the Helm chart
 

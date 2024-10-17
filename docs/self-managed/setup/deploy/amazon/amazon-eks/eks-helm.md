@@ -426,8 +426,6 @@ Note:
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/create-identity-secret.sh
 ```
 
-ins
-
 #### 3. Install Camunda 8 using Helm
 
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Here's the command:
@@ -547,7 +545,8 @@ Below is an extract of the necessary instructions:
 1. Open Identity in your browser at `https://${DOMAIN_NAME}/identity`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
 3. Click on "Add Application," select `M2M` as the type, and assign a name like "test."
-4. Select the newly created application and retrieve the `client-id` and `client-secret` values.
+4. Select the newly created application, go to "Access to APIs" and click on the "Assign permissions" then select "Zeebe API" with "write" permission.
+5. Retrieve the `client-id` and `client-secret` values from the application details
 
 <!-- prevent error during compilation!-->
   </TabItem>
@@ -564,7 +563,8 @@ kubectl port-forward services/camunda-keycloak 8070:80 --namespace camunda
 1. Open Identity in your browser at `http://localhost:8069`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
 3. Click on "Add Application," select `M2M` as the type, and assign a name like "test."
-4. Select the newly created application and retrieve the `client-id` and `client-secret` values.
+4. Select the newly created application, go to "Access to APIs" and click on the "Assign permissions" then select "Zeebe API" with "write" permission.
+5. Retrieve the `client-id` and `client-secret` values from the application details
 
 <!-- prevent error during compilation!-->
   </TabItem>
