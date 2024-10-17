@@ -4,8 +4,9 @@ title: "User tasks"
 description: "A user task is used to model work that needs to be done by a human actor."
 ---
 
-A user task is used to model work that needs to be done by a human actor. When
-the process instance arrives at such a user task, a new user task instance is created at Zeebe.
+A user task is used to model work that needs to be done by a human and is assisted by a business process execution engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+
+When the process instance arrives at a user task, a new user task instance is created at Zeebe.
 The process instance stops at this point and waits until the user task instance is completed.
 When the user task instance is completed, the process instance continues.
 
@@ -125,7 +126,7 @@ Depending on your use case, two different types of form references can be used:
    - `deployment`: The version that was deployed together with the currently running version of the process.
    - `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.
 
-   To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+   To learn more about choosing binding types, see [choosing the resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
    :::note
    If the `bindingType` attribute is not specified, `latest` is used as the default.

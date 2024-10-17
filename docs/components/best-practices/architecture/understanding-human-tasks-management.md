@@ -12,13 +12,13 @@ description: "Use Camunda task management features or implement your requirement
 
 ## Using task assignment features
 
-The lifecycle of human tasks (like assigning, delegating, and completing tasks) is mostly a generic issue. There is no need to model common aspects into all your processes, if often makes models unreadable. Use Camunda task management features or implement your requirements in a generic way.
+The lifecycle of human task orchestration (like assigning, delegating, and completing tasks) is mostly a generic issue. There is no need to model common aspects into all your processes, if often makes models unreadable. Use Camunda task management features or implement your requirements in a generic way.
 
 ![Task assignment](understanding-human-tasks-management-assets/human-tasks.png)
 
 So every task can be assigned to either a group of people, or a specific individual. An individual can 'claim' a task, indicating that they are picking the task from the pool (to avoid multiple people working on the same task).
 
-As a general rule, you should assign human tasks in your business process to _groups of people_ instead of specific individuals.
+As a general rule, you should assign human tasks, like [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) or [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), in your business process to _groups of people_ instead of specific individuals.
 
 ```xml
 <bpmn:userTask id="task_approve_vacation">
@@ -51,11 +51,11 @@ While assigning users to groups is advised, it's not the only option. You could 
 
 ## Deciding about your task list frontend
 
-If you have human tasks in your process, you must make up your mind on how exactly you want to let your users work on their tasks and interact with the workflow engine. You have basically three options:
+If you are orchestrating human tasks in your process, you must make up your mind on how exactly you want to let your users work on their tasks and interact with the workflow engine. You have basically three options:
 
 - [Camunda Tasklist](/components/tasklist/introduction-to-tasklist.md): The Tasklist application shipped with Camunda. This works out-of-the-box and has a low development effort. However, it is limited in terms of customizability and how much you can influence the user experience.
 
-- Custom task list application: You can develop a custom task list and adapt this to your needs without compromises. Human tasks are shown inside your custom application, following your style guide and usability concept. You will use the [Camunda Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in the background. This is very flexible, but requires additional development work.
+- Custom task list application: You can develop a custom task list and adapt this to your needs without compromises. User tasks are shown inside your custom application, following your style guide and usability concept. You will use the [Camunda Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in the background. This is very flexible, but requires additional development work.
 
 - Third party tasklist: If our organization already has a task list application rolled out to the field, you might want to use this for tasks created by Camunda. You will need to develop some synchronization mechanism. The upside of this approach is that your end users might not even notice that you introduce a new workflow engine.
 

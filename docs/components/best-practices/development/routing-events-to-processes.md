@@ -87,7 +87,7 @@ This could end with a successful income confirmation. However, it could also end
 
 <span className="callout">3</span>
 
-In this case, a **conditional event** watching this data (e.g. a process variable changed by the human task) triggers and causes the process to reconsider the consequences of the new findings.
+In this case, a **conditional event** watching this data (e.g. a process variable changed by the user task) triggers and causes the process to reconsider the consequences of the new findings.
 
 :::caution Camunda 8
 Camunda 8 does not yet [support a **conditional event**](/components/modeler/bpmn/bpmn-coverage.md).

@@ -13,7 +13,7 @@ Task applications are the interface between humans and Camunda processes to orch
 
 ## What are task applications?
 
-Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) (also referred to as a **human task**) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
+Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) (for [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md)) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
 
 - Listing available tasks and allowing users to select a task to work on.
 - Providing filter and search options for users so they can more easily find the right next task to work on.
@@ -121,7 +121,7 @@ flowchart
     end
 ```
 
-The lifecycle of human tasks is mostly a generic issue. There is no need to model common aspects into all your processes, as this often makes models unreadable. Use Camunda task management features or implement your requirements in a generic way.
+The lifecycle of human task orchestration is mostly a generic issue. There is no need to model common aspects into all your processes, as this often makes models unreadable. Use Camunda task management features or implement your requirements in a generic way.
 
 Learn how to define and implement your task lifecycle on the [user task lifecycle](./02-user-task-lifecycle.md) page.
 
@@ -131,7 +131,7 @@ Every task can be assigned to either a group of people, or a specific individual
 
 <img src={TaskAssignmentImg} className={styles.noShadow} style={{width: 600}} alt="Task assignment in group and personal queues" />
 
-As a general rule, you should assign human tasks in your business process to groups of people instead of specific individuals. This avoids bottlenecks (such as high workloads on single individuals or employees being on sick leave) and can greatly improve your process performance.
+As a general rule, you should assign user tasks in your business process to groups of people instead of specific individuals. This avoids bottlenecks (such as high workloads on single individuals or employees being on sick leave) and can greatly improve your process performance.
 
 In the [XML of a user task](/components/modeler/bpmn/user-tasks/user-tasks.md#xml-representations), this is represented as follows:
 

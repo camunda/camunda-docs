@@ -238,6 +238,8 @@ The handler must return a job completion function - `fail`, `complete`, or `forw
 
 Our process has a [human task](/guides/getting-started-orchestrate-human-tasks.md) after the [service task](/guides/getting-started-orchestrate-microservices.md). The service task worker will complete the service task job, and we will complete the human task using the Tasklist API client.
 
+<!--- I think we mean user task in this case, correct? --->
+
 Add the following code beneath the service worker code:
 
 ```typescript
