@@ -29,7 +29,7 @@ While updating brokers, leadership for partitions will rotate which may cause br
 
 The procedure to do a rolling update of Zeebe brokers is the following:
 
-1. Pick the broker with the highest id that runs the old version.
+1. Pick the broker with the highest ID that runs the old version.
 2. Shut down the broker.
 3. Update the broker software to the new version.
 4. Start the broker and wait for it to become ready and healthy.
