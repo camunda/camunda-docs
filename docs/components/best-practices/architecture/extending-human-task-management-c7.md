@@ -83,7 +83,7 @@ Now you can use a task _filter_ with criteria checking the follow-up date and if
 
 ### Enforcing deadlines for tasks
 
-There are different ways of enforcing deadlines for Human Tasks. Typical actions for overdue tasks are:
+There are different ways of enforcing deadlines with human task orchestration. Typical actions for overdue tasks are:
 
 - Sending reminder mails
 - Changing the assignee/group
