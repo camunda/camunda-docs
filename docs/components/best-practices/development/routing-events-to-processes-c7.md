@@ -387,7 +387,7 @@ If messages are exchanged between different processes deployed in the workflow e
 
 <span className="callout">1</span>
 
-Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN id in Java using a JavaDelegate:
+Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN ID in Java using a JavaDelegate:
 
 ```java
 public class SendOrderReceivedMessageDelegate implements JavaDelegate {
