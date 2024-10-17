@@ -26,7 +26,7 @@ Even when the underlying storage bucket is the same, backups from one are not co
 
 ### S3 backup store
 
-To store your backups in any S3 compatible storage system such as [AWS S3] or [MinIO], set the backup store to `S3` and tell Zeebe how to connect to your bucket:
+To store your backups in any S3 compatible storage system such as [AWS S3] or [MinIO], set the backup store to `S3` and tell Zeebe how to connect to your bucket. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md):
 
 ```yaml
 zeebe:
@@ -83,7 +83,7 @@ zeebe.broker.data.backup.s3.compression: zstd # or use environment variable ZEEB
 
 ### GCS backup store
 
-To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use:
+To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use. This configuration can be set in your Zeebe [`config/application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md):
 
 ```yaml
 zeebe:
@@ -138,7 +138,7 @@ The `backupId` cannot be reused, even if the backup corresponding to the backup 
 <details>
   <summary>Example request</summary>
 
-```
+```shell
 curl --request POST 'http://localhost:9600/actuator/backups' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": "100" }'
@@ -181,7 +181,7 @@ GET actuator/backups/{backupId}
 <details>
   <summary>Example request</summary>
 
-```
+```shell
 curl --request GET 'http://localhost:9600/actuator/backups/100'
 ```
 
@@ -254,7 +254,7 @@ GET actuator/backups
 <details>
   <summary>Example request</summary>
 
-```
+```shell
 curl --request GET 'http://localhost:9600/actuator/backups'
 ```
 
@@ -332,7 +332,7 @@ DELETE actuator/backups/{backupId}
 <details>
   <summary>Example request</summary>
 
-```
+```shell
 curl --request DELETE 'http://localhost:9600/actuator/backups/100'
 ```
 
