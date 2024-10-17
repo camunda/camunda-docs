@@ -32,7 +32,7 @@ Each single importer/archiver node must be configured using the following config
 | ----------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | camunda.operate.clusterNode.partitionIds  | Array of Zeebe partition ids this Importer (or Archiver) node must be responsible for. | Empty array, meaning all partitions data is loaded. |
 | camunda.operate.clusterNode.nodeCount     | Total amount of Importer (or Archiver) nodes in the cluster.                           | 1                                                   |
-| camunda.operate.clusterNode.currentNodeId | Id of current Importer (or Archiver) node, starting from 0.                            | 0                                                   |
+| camunda.operate.clusterNode.currentNodeId | ID of current Importer (or Archiver) node, starting from 0.                            | 0                                                   |
 
 It's enough to configure either `partitionIds` or a pair of `nodeCount` and `currentNodeId`. If you provide `nodeCount` and `currentNodeId`, each node will automatically guess the Zeebe partitions they're responsible for.
 

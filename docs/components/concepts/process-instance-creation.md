@@ -14,7 +14,7 @@ Camunda 8 supports the following ways to create a process instance:
 
 ## Commands
 
-A process instance is created by sending a command specifying the BPMN process id, or the unique key of the process.
+A process instance is created by sending a command specifying the BPMN process ID, or the unique key of the process.
 
 There are two commands to create a process instance, outlined in the sections below.
 
@@ -22,7 +22,7 @@ There are two commands to create a process instance, outlined in the sections be
 
 A process that has a [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) is started explicitly using **[CreateProcessInstance](/apis-tools/zeebe-api/gateway-service.md#createprocessinstance-rpc)**.
 
-This command creates a new process instance and immediately responds with the process instance id. The execution of the process occurs after the response is sent.
+This command creates a new process instance and immediately responds with the process instance ID. The execution of the process occurs after the response is sent.
 
 ![create-process](assets/create-process.png)
 
@@ -112,7 +112,7 @@ To start the process instance at a user-defined element, you need to provide sta
 By default, the instruction starts before the given element. This means input mappings of that element are applied as usual.
 
 Multiple instructions can be provided to start the process instance at more than one element.
-You can activate the same element multiple times inside the created process instance by referring to the same element id in more than one instruction.
+You can activate the same element multiple times inside the created process instance by referring to the same element ID in more than one instruction.
 
 :::note
 Start instructions have the same [limitations as process instance modification](/components/concepts/process-instance-modification.md#limitations), e.g., it is not possible to start at a sequence flow.

@@ -103,6 +103,7 @@ Example of configuring the connection to a Self-Managed Zeebe cluster:
 ```properties
 zeebe.client.cloud.clientId=your-client-id
 zeebe.client.cloud.clientSecret=your-client-secret
+zeebe.client.cloud.scope=your-scope # optional
 zeebe.client.cloud.authUrl=http://localhost:18080/auth/realms/your-realm/protocol/openid-connect/token
 zeebe.client.broker.grpcAddress=http://localhost:26500
 zeebe.client.broker.restAddress=http://localhost:8080
