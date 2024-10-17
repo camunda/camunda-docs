@@ -168,7 +168,7 @@ camunda.operate:
 To connect to a secured (https) OpenSearch instance, you normally need to only set the URL protocol
 part to `https` instead of `http`. A secured OpenSearch instance also needs `username` and `password`.
 
-To use AWS Credentials instead of basic auth when connecting to Amazon OpenSearch Services `awsEnabled` has to be set.
+To use AWS credentials instead of basic auth when connecting to Amazon OpenSearch Services, `awsEnabled` must be set.
 
 The other SSL settings should only be used in case of connection problems; for example, in disabling host verification.
 
@@ -188,7 +188,7 @@ Either set `host` and `port` (deprecated), or `url` (recommended).
 | camunda.operate.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch | -                     |
 | camunda.operate.opensearch.ssl.selfSigned      | Certificate was self-signed            | false                 |
 | camunda.operate.opensearch.ssl.verifyHostname  | Should the hostname be validated       | false                 |
-| camunda.operate.opensearch.awsEnabled          | Should AWS Credentials be used         | false                 |
+| camunda.operate.opensearch.awsEnabled          | Should AWS credentials be used         | false                 |
 
 #### Settings for shards and replicas
 

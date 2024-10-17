@@ -9,7 +9,9 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the **next major version**.
+When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the next **major** version of the chart.
+
+For example, if the current Helm chart version is 10.x.x, and the latest next major version is 11.0.1, the recommended upgrade is to 11.0.1 (not 11.0.0).
 :::
 
 Upgrading between minor versions of the Camunda Helm chart may require [configuration changes](#update-your-configuration). To upgrade between patch versions or when no configuration changes are required, see the [`helm upgrade`](#identity-disabled) instructions.
@@ -53,8 +55,6 @@ Configuration adjustments may be required when upgrading to a new version of the
 As of this Helm chart version, the image tags for all components are independent, and do not reference the global image tag. The value of the key `global.image.tag` is `null`, and each component now sets its own version.
 
 With this change, Camunda applications no longer require a unified patch version. For example, a given installation may use Zeebe version 8.5.1, and Operate version 8.5.2. Note that only the patch version can differ between components.
-
-The key `global.image.tag` is deprecated and it will be removed in the Camunda 8.6 release.
 
 <h3>Helm chart 10.0.2+</h3>
 

@@ -20,7 +20,7 @@ For details on supported environments (e.g. Java or Elasticsearch versions), see
 
 ## Deployment options
 
-- [**Helm/Kubernetes**](./helm-kubernetes/deploy.md): We recommend using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production. With the right configuration, Camunda 8 Self-Managed can be deployed on any Certified Kubernetes distribution (cloud or on-premise). We also officially support a variety of providers like [Red Hat OpenShift](./helm-kubernetes/platforms/redhat-openshift.md) and [Amazon EKS](./helm-kubernetes/platforms/amazon-eks.md).
+- [**Helm/Kubernetes**](./helm-kubernetes/deploy.md): We recommend using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production. With the right configuration, Camunda 8 Self-Managed can be deployed on any Certified Kubernetes distribution (cloud or on-premises). We also officially support a variety of providers like [Red Hat OpenShift](./helm-kubernetes/platforms/redhat-openshift.md) and [Amazon EKS](./helm-kubernetes/platforms/amazon-eks.md).
 - [**Docker**](../platform-deployment/docker.md): Component [Docker images](https://hub.docker.com/u/camunda) are available for use in production on Linux systems. Windows or macOS are only supported for development environments.
 - [**Manual**](../platform-deployment/manual.md): The Java applications can run on a local or virtual machine if it provides a supported Java Virtual Machine (JVM). This allows you to run Camunda on virtual machines or bare metal and offers a significant amount of flexibility. However, you will need to configure the details for the components to interact correctly yourself. We consider this a last resort. Note that Windows/Mac is **not** supported for production usage of Zeebe.
 

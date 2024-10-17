@@ -13,7 +13,7 @@ End of maintenance: 14th of October 2025
 ### Camunda 8 SaaS - Required cluster update
 
 :::caution
-By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/update-cluster.md) to the following versions at a **minimum**:
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/manage-cluster.md#update-a-cluster) to the following versions at a **minimum**:
 
 - **8.2+gen27**
 - **8.3+gen11**
@@ -24,7 +24,7 @@ By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [upda
 
 auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
 
-You minimally need to take the following [update](/components/console/manage-clusters/update-cluster.md) path:
+You minimally need to take the following [update](/components/console/manage-clusters/manage-cluster.md#update-a-cluster) path:
 
 - 8.0.x -> 8.2+gen27
 - 8.1.x -> 8.2+gen27
@@ -102,6 +102,12 @@ Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/iss
 Timestamps which were previously serialized as `ISO8061` strings are now serialized as integer values.
 
 Until a fix is delivered in 8.5.1, workarounds include not deserializing timestamp values from affected APIs, or deserializing them as integers.
+
+### Identity Keycloak URL changes
+
+Identity now uses the Keycloak frontend URL instead of the backend URL. This change may affect you if you have blocked the Keycloak frontend URL from other services (including Camunda applications), and can potentially impact Identity's functionality.
+
+To avoid connectivity issues, ensure your Keycloak frontend URL is accessible by adjusting your network, firewall, or security settings as needed. This adjustment is crucial to maintain the integration with Keycloak and ensure compatibility.
 
 ## Camunda 8.4
 
