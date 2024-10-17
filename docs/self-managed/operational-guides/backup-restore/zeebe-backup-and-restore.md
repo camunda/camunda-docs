@@ -101,7 +101,8 @@ zeebe:
 ```
 
 The bucket specified with `bucketName` **must already exist**, Zeebe will not try to create one for you.
-To prevent misconfiguration, Zeebe will check at startup that the specified bucket exists and can be accessed.
+To prevent misconfiguration, Zeebe will check at startup that the specified bucket exists and can be accessed, but
+it will not prevent Zeebe to start up.
 
 Setting a `basePath` is not required but useful if you want to use the same bucket for multiple Zeebe clusters.
 When `basePath` is set, Zeebe will only create and access objects under this path.
