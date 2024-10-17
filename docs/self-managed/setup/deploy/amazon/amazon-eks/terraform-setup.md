@@ -258,8 +258,6 @@ If you choose not to use this module, you'll need to either provide a managed Po
 
 :::
 
-The default PostgreSQL instance and database (`camunda`) created by this module is primarily intended for use with Keycloak. After the instance is set up, you may manually add additional databases for Identity multi-tenancy if needed, though this guide will not cover those steps, as the default configuration disables multi-tenancy.
-
 We separated the cluster and PostgreSQL modules to offer you more customization options.
 
 #### Step 1: create a configuration file for the database
@@ -293,7 +291,7 @@ Here’s how to define the IAM role trust policy and access policy for Aurora:
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/db.tf
 ```
 
-Once the IRSA configuration is complete, make sure to **record the IAM role name** (from the `iam_aurora_role_name` configuration) and the **AWS Account ID** (from `module.eks_cluster.aws_caller_identity_account_id`), as these will be required to annotate the Kubernetes service accounts during the helm configuration.
+Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_aurora_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
 
 </TabItem>
 </Tabs>
@@ -309,10 +307,10 @@ You can further customize the Aurora cluster setup through various input options
 If you don't want to use this module, you can skip this section.
 However, please note that you may need to adjust the following instructions to remove references to this module.
 
-If you choose not to use this module, you'll need to either provide a managed ElasticSearch or OpenSearch service or use the internal deployment in Kubernetes.
+If you choose not to use this module, you'll need to either provide a managed Elasticsearch or OpenSearch service or use the internal deployment by the Camunda Helm chart in Kubernetes.
 :::
 
-The OpenSearch module creates an OpenSearch domain intended to be used by the Camunda platform. OpenSearch is a powerful alternative to ElasticSearch. For more information on how to use OpenSearch with Camunda, refer to the [Camunda documentation](./self-managed/setup/guides/using-existing-opensearch/).
+The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](./self-managed/setup/guides/using-existing-opensearch/).
 
 :::note Available since Camunda 8.4
 
@@ -342,7 +340,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
   
   <TabItem value="irsa" label="IRSA">
 
-In addition to traditional username and password authentication, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
+In addition to standard authentication that uses anonynous user and rely on the network for the access control, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
 
 **Note**: Using IRSA is optional. If you prefer, you can continue using password-based access to your OpenSearch domain.
 
@@ -358,7 +356,9 @@ Here's an example of how to define the IAM role trust policy and access policy f
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/opensearch.tf
 ```
 
-Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration) and the **AWS Account ID** (from `module.eks_cluster.aws_caller_identity_account_id`). You will need these to annotate the Kubernetes service account in the next step.
+Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
+
+As the OpenSearch domain has advanced security enabled and [fine-grained access control](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html), we will later use your provided master username (`advanced_security_master_user_name`) and password (`advanced_security_master_user_password`) to perform the initial setup of the security component, allowing the created IRSA role to access the domain.
 
 </TabItem>
 </Tabs>
@@ -413,7 +413,7 @@ Depending on the installation path you have chosen, you can find the reference f
 You can gain access to the Amazon EKS cluster via the `AWS CLI` using the following command:
 
 ```shell
-aws eks --region "$AWS_REGION" update-kubeconfig --name <clusterName>
+aws eks --region "$AWS_REGION" update-kubeconfig --name <clusterName> --alias <clusterName>
 ```
 
 After updating the kubeconfig, you can verify your connection to the cluster with kubectl:
@@ -422,7 +422,8 @@ After updating the kubeconfig, you can verify your connection to the cluster wit
 kubectl get nodes
 ```
 
-Then ensure that a namespace exists for camunda
+Then ensure that a namespace exists for camunda.
+In the following procedure, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ```shell
 kubectl create namespace camunda
@@ -437,62 +438,16 @@ The following commands will export the required outputs as environment variables
 <Tabs groupId="export-help-values">
   <TabItem value="standard" label="Standard" default>
 
-```bash
-# EKS Cluster
-export CERT_MANAGER_IRSA_ARN="$(terraform output -raw cert_manager_arn)"
-export EXTERNAL_DNS_IRSA_ARN="$(terraform output -raw external_dns_arn)"
-
-# PostgreSQL
-export DB_KEYCLOAK_NAME="$(terraform console <<<local.camunda_database_keycloak | jq -r)"
-export DB_KEYCLOAK_USERNAME="$(terraform console <<<local.camunda_keycloak_db_username | jq -r)"
-export DB_KEYCLOAK_PASSWORD="$(terraform console <<<local.camunda_keycloak_db_password | jq -r)"
-
-export DB_IDENTITY_NAME="$(terraform console <<<local.camunda_database_identity | jq -r)"
-export DB_IDENTITY_USERNAME="$(terraform console <<<local.camunda_identity_db_username | jq -r)"
-export DB_IDENTITY_PASSWORD="$(terraform console <<<local.camunda_identity_db_password | jq -r)"
-
-export DB_WEBMODELER_NAME="$(terraform console <<<local.camunda_database_webmodeler | jq -r)"
-export DB_WEBMODELER_USERNAME="$(terraform console <<<local.camunda_webmodeler_db_username | jq -r)"
-export DB_WEBMODELER_PASSWORD="$(terraform console <<<local.camunda_webmodeler_db_password | jq -r)"
-
-export DB_HOST="$(terraform output -raw postgres_endpoint)"
-
-# OpenSearch
-export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/export-helm-values.sh
 ```
 
   </TabItem>
   
   <TabItem value="irsa" label="IRSA">
 
-```bash
-# EKS Cluster
-export CERT_MANAGER_IRSA_ARN="$(terraform output -raw cert_manager_arn)"
-export EXTERNAL_DNS_IRSA_ARN="$(terraform output -raw external_dns_arn)"
-
-# PostgreSQL
-export DB_KEYCLOAK_NAME="$(terraform console <<<local.camunda_database_keycloak | jq -r)"
-export DB_KEYCLOAK_USERNAME="$(terraform console <<<local.camunda_keycloak_db_username | jq -r)"
-export CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_keycloak_service_account | jq -r)"
-
-export DB_IDENTITY_NAME="$(terraform console <<<local.camunda_database_identity | jq -r)"
-export DB_IDENTITY_USERNAME="$(terraform console <<<local.camunda_identity_db_username | jq -r)"
-export CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_identity_service_account | jq -r)"
-
-export DB_WEBMODELER_NAME="$(terraform console <<<local.camunda_database_webmodeler | jq -r)"
-export DB_WEBMODELER_USERNAME="$(terraform console <<<local.camunda_webmodeler_db_username | jq -r)"
-export CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_webmodeler_service_account | jq -r)"
-
-export DB_HOST="$(terraform output -raw postgres_endpoint)"
-export DB_ROLE_ARN="$(terraform output -raw aurora_role_arn)"
-
-# OpenSearch
-export OPENSEARCH_HOST="$(terraform output -raw opensearch_endpoint)"
-export OPENSEARCH_ROLE_ARN="$(terraform output -raw opensearch_role_arn)"
-export CAMUNDA_ZEEBE_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_zeebe_service_account | jq -r)"
-export CAMUNDA_OPERATE_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_operate_service_account | jq -r)"
-export CAMUNDA_TASKLIST_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_tasklist_service_account | jq -r)"
-export CAMUNDA_OPTIMIZE_SERVICE_ACCOUNT_NAME="$(terraform console <<<local.camunda_optimize_service_account | jq -r)"
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/procedure/export-helm-values.sh
 ```
 
 :::note IRSA users
@@ -521,80 +476,20 @@ The choice depends on your infrastructure setup and security preferences. In thi
 
 1. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the setup manifest.
 
-```bash
-export AURORA_ENDPOINT=$(terraform output -raw postgres_endpoint)
-export AURORA_PORT=5432
-export AURORA_DB_NAME="$DEFAULT_DB_NAME"
-
-# PostgreSQL Credentials (replace with your own values from the #postgresql-module-setup step)
-export AURORA_USERNAME="$(terraform console <<<local.aurora_master_username | jq -r)"
-export AURORA_PASSWORD="$(terraform console <<<local.aurora_master_password | jq -r)"
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/vars-create-db.sh
 ```
 
 A **Kubernetes job** will connects to the database and creates the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
 
-2. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
-
 <Tabs groupId="create-db">
   <TabItem value="standard" label="Standard" default>
 
-```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/setup-postgres-create-db.yml
+2. **Create a secret that references the environment variables**:
+
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/create-setup-db-secret.sh
 ```
-
-Before applying the manifest, you need to replace the placeholders in the manifest with the actual values.
-
-3. **Create the secret using environment variables**:
-
-```bash
-kubectl create secret generic setup-db-secret --namespace camunda \
-  --from-literal=AURORA_ENDPOINT="$AURORA_ENDPOINT" \
-  --from-literal=AURORA_PORT="$AURORA_PORT" \
-  --from-literal=AURORA_DB_NAME="$AURORA_DB_NAME" \
-  --from-literal=AURORA_USERNAME="$AURORA_USERNAME" \
-  --from-literal=AURORA_PASSWORD="$AURORA_PASSWORD" \
-  --from-literal=DB_KEYCLOAK_NAME="$DB_KEYCLOAK_NAME" \
-  --from-literal=DB_KEYCLOAK_USERNAME="$DB_KEYCLOAK_USERNAME" \
-  --from-literal=DB_KEYCLOAK_PASSWORD="$DB_KEYCLOAK_PASSWORD" \
-  --from-literal=DB_IDENTITY_NAME="$DB_IDENTITY_NAME" \
-  --from-literal=DB_IDENTITY_USERNAME="$DB_IDENTITY_USERNAME" \
-  --from-literal=DB_IDENTITY_PASSWORD="$DB_IDENTITY_PASSWORD" \
-  --from-literal=DB_WEBMODELER_NAME="$DB_WEBMODELER_NAME" \
-  --from-literal=DB_WEBMODELER_USERNAME="$DB_WEBMODELER_USERNAME" \
-  --from-literal=DB_WEBMODELER_PASSWORD="$DB_WEBMODELER_PASSWORD"
-```
-
-  </TabItem>
-  <TabItem value="irsa" label="IRSA">
-
-```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/setup-postgres-create-db.yml
-```
-
-Before applying the manifest, you need to replace the placeholders in the manifest with the actual values.
-
-3. **Create the secret using environment variables**:
-
-```bash
-kubectl create secret generic setup-db-secret --namespace camunda \
-  --from-literal=AURORA_ENDPOINT="$AURORA_ENDPOINT" \
-  --from-literal=AURORA_PORT="$AURORA_PORT" \
-  --from-literal=AURORA_DB_NAME="$AURORA_DB_NAME" \
-  --from-literal=AURORA_USERNAME="$AURORA_USERNAME" \
-  --from-literal=AURORA_PASSWORD="$AURORA_PASSWORD" \
-  --from-literal=DB_KEYCLOAK_NAME="$DB_KEYCLOAK_NAME" \
-  --from-literal=DB_KEYCLOAK_USERNAME="$DB_KEYCLOAK_USERNAME" \
-  --from-literal=CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME="$CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME" \
-  --from-literal=DB_IDENTITY_NAME="$DB_IDENTITY_NAME" \
-  --from-literal=DB_IDENTITY_USERNAME="$DB_IDENTITY_USERNAME" \
-  --from-literal=CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME="$CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME" \
-  --from-literal=DB_WEBMODELER_NAME="$DB_WEBMODELER_NAME" \
-  --from-literal=DB_WEBMODELER_USERNAME="$DB_WEBMODELER_USERNAME" \
-  --from-literal=CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME="$CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME"
-```
-
-  </TabItem>
-</Tabs>
 
 This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
 
@@ -605,6 +500,40 @@ kubectl get secret setup-db-secret -o yaml --namespace camunda
 ```
 
 This should display the secret with the base64 encoded values.
+
+3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
+
+```yaml reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/setup-postgres-create-db.yml
+```
+
+  </TabItem>
+  <TabItem value="irsa" label="IRSA">
+
+2. **Create a secret that references the environment variables**:
+
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/procedure/create-setup-db-secret.sh
+```
+
+This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
+
+After running the above command, you can verify that the secret was created successfully by using:
+
+```bash
+kubectl get secret setup-db-secret -o yaml --namespace camunda
+```
+
+This should display the secret with the base64 encoded values.
+
+3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
+
+```yaml reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/setup-postgres-create-db.yml
+```
+
+  </TabItem>
+</Tabs>
 
 3. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 

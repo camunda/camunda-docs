@@ -19,6 +19,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
 
 ## Considerations
 
@@ -51,12 +52,8 @@ To streamline the execution of the subsequent commands, it is recommended to exp
 
 The following are the required environment variables with some example values:
 
-```shell
-# Your standard region that you host AWS resources in
-export REGION="$AWS_REGION"
-
-# The Camunda 8 Helm Chart version
-export CAMUNDA_HELM_CHART_VERSION="11.0.0"
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/chart-env.sh
 ```
 
 <Tabs groupId="env">
@@ -67,20 +64,8 @@ When using Basic authentication (username and password), some following environm
 
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
-```bash
-# This script is compatible with bash only
-
-# List of required environment variables
-required_vars=("DB_HOST" "DB_KEYCLOAK_NAME" "DB_KEYCLOAK_USERNAME" "DB_KEYCLOAK_PASSWORD" "DB_IDENTITY_NAME" "DB_IDENTITY_USERNAME" "DB_IDENTITY_PASSWORD" "DB_WEBMODELER_NAME" "DB_WEBMODELER_USERNAME" "DB_WEBMODELER_PASSWORD" "OPENSEARCH_HOST")
-
-# Loop through each variable and check if it is set and not empty
-for var in "${required_vars[@]}"; do
-  if [[ -z "${!var}" ]]; then
-    echo "Error: $var is not set or is empty"
-  else
-    echo "$var is set to '${!var}'"
-  fi
-done
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/check-env-variables.sh
 ```
 
   </TabItem>
@@ -91,20 +76,8 @@ When using IRSA authentication, some following environment variables must be set
 
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
-```bash
-# This script is compatible with bash only
-
-# List of required environment variables
-required_vars=("DB_HOST" "DB_ROLE_ARN" "CAMUNDA_WEBMODELER_SERVICE_ACCOUNT_NAME" "DB_WEBMODELER_NAME" "DB_WEBMODELER_USERNAME" "CAMUNDA_IDENTITY_SERVICE_ACCOUNT_NAME" "DB_IDENTITY_NAME" "DB_IDENTITY_USERNAME" "DB_KEYCLOAK_NAME" "DB_KEYCLOAK_USERNAME" "CAMUNDA_KEYCLOAK_SERVICE_ACCOUNT_NAME" "OPENSEARCH_HOST" "OPENSEARCH_ROLE_ARN"  "CAMUNDA_ZEEBE_SERVICE_ACCOUNT_NAME" "CAMUNDA_OPERATE_SERVICE_ACCOUNT_NAME" "CAMUNDA_TASKLIST_SERVICE_ACCOUNT_NAME" "CAMUNDA_OPTIMIZE_SERVICE_ACCOUNT_NAME")
-
-# Loop through each variable and check if it is set and not empty
-for var in "${required_vars[@]}"; do
-  if [[ -z "${!var}" ]]; then
-    echo "Error: $var is not set or is empty"
-  else
-    echo "$var is set to '${!var}'"
-  fi
-done
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/procedure/check-env-variables.sh
 ```
 
   </TabItem>
@@ -290,28 +263,12 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
 
 ##### Reference the credentials in secrets
 
-Before installing the Helm chart, you need to create a Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
+Before installing the Helm chart, you need to create Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
 
 To create the secrets, run the following commands:
 
-```bash
-# create a secret to reference external database credentials if you use it
-kubectl create secret generic identity-keycloak-secret \
-  --namespace camunda \
-  --from-literal=host=${DB_HOST} \
-  --from-literal=user=${DB_KEYCLOAK_USERNAME} \
-  --from-literal=password=${DB_KEYCLOAK_PASSWORD} \
-  --from-literal=database=${DB_KEYCLOAK_NAME} \
-  --from-literal=port=5432
-
-# create a secret to reference external Postgres for each component of Camunda 8
-kubectl create secret generic identity-postgres-secret \
-  --namespace camunda \
-  --from-literal=password=${DB_IDENTITY_PASSWORD}
-
-kubectl create secret generic webmodeler-postgres-secret \
-  --namespace camunda \
-  --from-literal=password=${DB_WEBMODELER_PASSWORD}
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -324,28 +281,12 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 
 ##### Reference the credentials in secrets
 
-Before installing the Helm chart, you need to create a Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
+Before installing the Helm chart, you need to create Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
 
 To create the secrets, run the following commands:
 
-```bash
-# create a secret to reference external database credentials if you use it
-kubectl create secret generic identity-keycloak-secret \
-  --namespace camunda \
-  --from-literal=host=${DB_HOST} \
-  --from-literal=user=${DB_KEYCLOAK_USERNAME} \
-  --from-literal=password=${DB_KEYCLOAK_PASSWORD} \
-  --from-literal=database=${DB_KEYCLOAK_NAME} \
-  --from-literal=port=5432
-
-# create a secret to reference external Postgres for each component of Camunda 8
-kubectl create secret generic identity-postgres-secret \
-  --namespace camunda \
-  --from-literal=password=${DB_IDENTITY_PASSWORD}
-
-kubectl create secret generic webmodeler-postgres-secret \
-  --namespace camunda \
-  --from-literal=password=${DB_WEBMODELER_PASSWORD}
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -470,14 +411,8 @@ Starting from **Camunda 8.6**, you need to store various passwords in a Kubernet
 
 You can use `openssl` to generate random secrets and store them in environment variables:
 
-```bash
-export CONNECTORS_SECRET=$(openssl rand -hex 16)
-export CONSOLE_SECRET=$(openssl rand -hex 16)
-export OPERATE_SECRET=$(openssl rand -hex 16)
-export OPTIMIZE_SECRET=$(openssl rand -hex 16)
-export TASKLIST_SECRET=$(openssl rand -hex 16)
-export ZEEBE_SECRET=$(openssl rand -hex 16)
-export ADMIN_PASSWORD=$(openssl rand -hex 16)
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/generate-passwords.sh
 ```
 
 Next, use these environment variables in the `kubectl` command to create the secret.
@@ -487,32 +422,18 @@ Note:
 - The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, please provide those values.
 - The `smtp-password` should be replaced with the appropriate external value.
 
-```bash
-kubectl create secret generic identity-secret-for-components \
-  --namespace camunda \
-  --from-literal=connectors-secret=$CONNECTORS_SECRET \
-  --from-literal=console-secret=$CONSOLE_SECRET \
-  --from-literal=operate-secret=$OPERATE_SECRET \
-  --from-literal=optimize-secret=$OPTIMIZE_SECRET \
-  --from-literal=tasklist-secret=$TASKLIST_SECRET \
-  --from-literal=zeebe-secret=$ZEEBE_SECRET \
-  --from-literal=admin-password=$ADMIN_PASSWORD \
-  --from-literal=postgres-password="" \
-  --from-literal=password="" \
-  --from-literal=smtp-password=""
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/create-identity-secret.sh
 ```
+
+ins
 
 #### 3. Install Camunda 8 using Helm
 
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Here's the command:
 
-```bash
-helm upgrade --install \
-  camunda camunda-platform \
-  --repo https://helm.camunda.io \
-  --version $CAMUNDA_HELM_CHART_VERSION \
-  --namespace camunda \
-  -f generated-values.yml
+```bash reference
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/install-chart.sh
 ```
 
 This command:
