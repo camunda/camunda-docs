@@ -1,6 +1,6 @@
 ---
 id: eks-terraform
-title: "Deploy an EKS cluster with Terraform (stable)"
+title: "Deploy an EKS cluster with Terraform (permanent)"
 description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module for a quick Camunda 8 setup."
 ---
 
@@ -62,6 +62,8 @@ Following this tutorial and steps will result in:
 ### Terraform prerequisites
 
 To manage the infrastructure for Camunda 8 on AWS using Terraform, we need to set up Terraform's backend to store the state file remotely in an S3 bucket. This ensures secure and persistent storage of the state file.
+
+If you are an advanced user, you may want to handle this part differently and use a different backend. The backend setup provided is an example for new users.
 
 #### 0. Set Up AWS authentication
 
