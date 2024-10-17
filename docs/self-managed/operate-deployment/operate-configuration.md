@@ -20,7 +20,7 @@ By default, the configuration for Operate is stored in a YAML file (`application
 
   To define an environment variable, convert the configuration property to uppercase, remove any dashes, and replace any delimiters (`.`) with `_`. For example, the property `camunda.operate.elasticsearch.clustername` is represented by the environment variable `CAMUNDA_OPERATE_ELASTICSEARCH_CLUSTERNAME`.
 
-- As a Spring Boot application, Identity supports any standard
+- As a Spring Boot application, Operate supports any standard
   [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 
 The following parts are configurable:

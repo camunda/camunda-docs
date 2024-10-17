@@ -14,10 +14,6 @@ For more information on Self-Managed configuration options, see [configuring com
 
 ## Environment variables
 
-:::note
-Underscores in environment variables correspond to configuration file key levels.
-:::
-
 | Environment variable                 | Description                                                                         | Default value                                                                                                                                                            |
 | ------------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `IDENTITY_AUTH_PROVIDER_BACKEND_URL` | Used to support container to container communication.                               | http://localhost:18080/auth/realms/camunda-platform                                                                                                                      |

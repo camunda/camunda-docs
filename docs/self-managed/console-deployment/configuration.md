@@ -5,11 +5,7 @@ sidebar_label: "Configuration"
 description: "Read details on the configuration variables of Console Self-Managed."
 ---
 
-:::note
-Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
-:::
-
-Console can be configured using environment variables, configuration parameters, or a combination of both. When configuring your Console setup, keep in mind the following:
+Console Self-Managed can be configured using environment variables, configuration parameters, or a combination of both. When configuring your Console setup, keep in mind the following:
 
 - If both configuration files and environment variables are present, environment variables overwrite settings in configuration files.
 - The existing configuration is applied at startup, and changes made to the configuration will not be applied at runtime.
@@ -82,8 +78,7 @@ console:
 
 ## Configure an OpenID Connect (OIDC) provider
 
-By default, Console uses Keycloak to provide authentication.
-You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
+By default, Console uses Keycloak to provide authentication. Use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
 
 ## Monitoring
 
