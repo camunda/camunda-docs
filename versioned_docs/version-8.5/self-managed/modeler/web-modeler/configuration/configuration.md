@@ -116,6 +116,9 @@ Refer to the [advanced SSL configuration guide](./ssl.md) for additional details
 | `RESTAPI_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the `restapi` application.                                              | `modeler-restapi`                                                | -             |
 | `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                 | `8081`                                                           | `8081`        |
 | `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.              | `8091`                                                           | `8091`        |
+| `http_proxy`              | Specifies the proxy server to be used for outgoing HTTP requests.                                                                      | `http://proxy.example.com:8080`                                  | -             |
+| `https_proxy`             | Specifies the proxy server to be used for outgoing HTTPS requests.                                                                     | `https://secureproxy.example.com:443`                            | -             |
+| `no_proxy`                | A comma-separated list of domain names or IP addresses for which the proxy should be bypassed.                                         | `localhost,127.0.0.1,.example.com`                               | -             |
 
 ### Feature Flags
 
@@ -158,10 +161,13 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 
 ### Logging
 
-| Environment variable | Description                            | Example value                |
-| -------------------- | -------------------------------------- | ---------------------------- |
-| `LOG_FILE_PATH`      | [optional]<br/>Path to log file output | `/full/path/to/log/file.log` |
+| Environment variable | Description                                  | Example value                |
+| -------------------- | -------------------------------------------- | ---------------------------- |
+| `LOG_FILE_PATH`      | [optional]<br/>Path to log file output       | `/full/path/to/log/file.log` |
+| `LOG_LEVEL_CLIENT`   | [optional]<br/>Log level for the client      | `DEBUG`                      |
+| `LOG_LEVEL_WEBAPP`   | [optional]<br/>Log level for the node server | `DEBUG`                      |
 
+The `LOG_LEVEL_*` options can be found [here](../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
 
 ### SSL
