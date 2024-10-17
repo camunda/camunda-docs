@@ -76,7 +76,7 @@ console:
       value: online
 ```
 
-## Configure an OpenID Connect (OIDC) provider
+## Configure an OpenID Connect (OIDC) provider other than Keycloak
 
 By default, Console uses Keycloak to provide authentication. Use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
 
