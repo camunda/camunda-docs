@@ -3,16 +3,25 @@ id: operate-configuration
 title: Configuration
 ---
 
-As a Spring Boot application, Operate supports any standard
-[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
+Operate can be configured using environment variables, configuration parameters, or a combination of both. When configuring your Operate setup, keep in mind the following:
+
+- If both configuration files and environment variables are present, environment variables overwrite settings in configuration files.
+- The existing configuration is applied at startup, and changes made to the configuration will not be applied at runtime.
+
+For more information on Self-Managed configuration options, see [configuring components](/self-managed/operational-guides/application-configs.md).
+
+## Configuration options
 
 By default, the configuration for Operate is stored in a YAML file (`application.yml`). All Operate-related settings are prefixed with `camunda.operate`.
 
-:::note
-Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables). To define an environment variable, convert the configuration property to uppercase, remove any dashes, and replace any delimiters (`.`) with `_`.
+### Alternate configuration methods
 
-For example, the property `camunda.operate.elasticsearch.clustername` is represented by the environment variable `CAMUNDA_OPERATE_ELASTICSEARCH_CLUSTERNAME`.
-:::
+- Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables).
+
+  To define an environment variable, convert the configuration property to uppercase, remove any dashes, and replace any delimiters (`.`) with `_`. For example, the property `camunda.operate.elasticsearch.clustername` is represented by the environment variable `CAMUNDA_OPERATE_ELASTICSEARCH_CLUSTERNAME`.
+
+- As a Spring Boot application, Operate supports any standard
+  [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 
 The following parts are configurable:
 
