@@ -32,15 +32,15 @@ Learn more about how to use Connectors in your processes and about the different
     <h3>Get started</h3>
     <p>Learn more about Connectors.</p>
   </a>
+    <a href="../connector-types" class="connector-card" title="Connector types">
+    <img src={IconConnectorTypesImg} alt="Connector types"/>
+    <h3>Connector types</h3>
+    <p>Different types of Connector include <a href="../use-connectors/inbound" title="Inbound Connectors">Inbound</a>, <a href="../use-connectors/outbound" title="Outbound Connectors">Outbound</a>, and Protocol.</p>
+  </a>
   <a href="../use-connectors" class="connector-card" title="How to use Connectors">
     <img src={IconConnectorImg} alt="How to use Connectors"/>
     <h3>How to use Connectors</h3>
     <p>How to create a Connector Task and use secrets.</p>
-  </a>
-  <a href="../connector-types" class="connector-card" title="Connector types">
-    <img src={IconConnectorTypesImg} alt="Connector types"/>
-    <h3>Connector types</h3>
-    <p>Different types of Connector include <a href="../use-connectors/inbound" title="Inbound Connectors">Inbound</a>, <a href="../use-connectors/outbound" title="Outbound Connectors">Outbound</a>, and Protocol.</p>
   </a>
 </div>
 
