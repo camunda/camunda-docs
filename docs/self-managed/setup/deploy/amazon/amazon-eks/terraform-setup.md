@@ -635,6 +635,8 @@ Once the job shows as `Completed`, the OpenSearch domain is configured correctly
 kubectl logs job/setup-opensearch-fgac --namespace camunda
 ```
 
+6. **Cleanup the resources:**
+
 ```bash
 kubectl delete job setup-opensearch-fgac --namespace camunda
 kubectl delete secret setup-os-secret --namespace camunda
@@ -644,8 +646,6 @@ By running these commands, you will clean up both the job and the secret, ensuri
 
   </TabItem>
 </Tabs>
-
-6. **Cleanup the resources:**
 
 ## 3. Install Camunda 8 using the Helm chart
 

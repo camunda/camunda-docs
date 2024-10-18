@@ -404,7 +404,11 @@ identity:
 Once you've prepared the `values.yml` file, use the `envsubst` command to substitute the environment variables with their actual values. Run the following command:
 
 ```bash
+# generate the final values
 envsubst < values.yml > generated-values.yml
+
+# print the result
+cat generated-values.yml
 ```
 
 Starting from **Camunda 8.6**, you need to store various passwords in a Kubernetes secret, which will be consumed by the Helm chart. Below is an example of how to set up the required secret:
@@ -439,6 +443,21 @@ This command:
 - Installs (or upgrades) the Camunda platform using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
+
+You can track the progress of the installation using the following command:
+
+```bash
+watch -n 5 '
+  kubectl get pods -n camunda --output=wide;
+  if [ $(kubectl get pods -n camunda --field-selector=status.phase!=Running -o name | wc -l) -eq 0 ] &&
+     [ $(kubectl get pods -n camunda -o json | jq -r ".items[] | select(.status.containerStatuses[]?.ready == false)" | wc -l) -eq 0 ];
+  then
+    echo "All pods are Running and Healthy - Installation completed!";
+  else
+    echo "Some pods are not Running or Healthy";
+  fi
+'
+```
 
 **Note for domain installation:** the annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
 
