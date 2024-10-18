@@ -106,7 +106,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/return-user-task-by-a-user-task-key",
-        label: "Return user task by a user task key.",
+        label: "Return user task by a user task key",
         className: "api-method get",
       },
       {
@@ -114,6 +114,12 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/update-user-task",
         label: "Update user task",
         className: "api-method patch",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/return-user-task-form",
+        label: "Return user task form",
+        className: "api-method get",
       },
       {
         type: "doc",
@@ -131,18 +137,6 @@ module.exports = [
   },
   {
     type: "category",
-    label: "User Task",
-    items: [
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/return-user-task-form",
-        label: "Return user task form",
-        className: "api-method get",
-      },
-    ],
-  },
-  {
-    type: "category",
     label: "Variable",
     items: [
       {
@@ -150,6 +144,12 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/query-process-and-local-variables-alpha",
         label: "Query process and local variables (alpha)",
         className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/return-variable-by-a-variable-key",
+        label: "Return variable by a variable key",
+        className: "api-method get",
       },
     ],
   },
@@ -239,7 +239,7 @@ module.exports = [
   },
   {
     type: "category",
-    label: "Flow node Instance",
+    label: "Flow node instance",
     items: [
       {
         type: "doc",
@@ -247,12 +247,6 @@ module.exports = [
         label: "Query flow node instances (alpha)",
         className: "api-method post",
       },
-    ],
-  },
-  {
-    type: "category",
-    label: "Flow node instance",
-    items: [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-flow-node-instance-by-key-alpha",
@@ -310,7 +304,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-decision-requirements-xml-alpha",
-        label: "Get decision requirements XML (alpha).",
+        label: "Get decision requirements XML (alpha)",
         className: "api-method get",
       },
     ],
