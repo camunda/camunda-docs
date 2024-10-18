@@ -1,6 +1,6 @@
 ---
 id: manage-ip-allowlists
-title: Manage IP allowlists
+title: IP allowlists
 description: "If your organization works within Camunda's Enterprise plan, you can restrict access to clusters with an IP allowlist."
 keywords: [whitelist, allowlist, ip whitelist, ip allowlist]
 ---
