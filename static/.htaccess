@@ -17,6 +17,9 @@ RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 # 8.6 content moves vvvv
 # ----------------------
 
+# Move alpha features to components
+RewriteRule ^docs/reference/alpha-features/?$ /docs/components/early-access/alpha/alpha-features/$1 [R=301,L]
+
 # Remove the Getting Started partials as full pages
 RewriteRule ^docs/guides/react-components/sm-prerequisites/?$ /docs/guides/$1 [R=301,L]
 RewriteRule ^docs/guides/react-components/saas-prerequisites/?$ /docs/guides/$1 [R=301,L]
