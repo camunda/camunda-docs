@@ -5,12 +5,13 @@ description: "How to perform a backup and restore of Operate and Tasklist data."
 keywords: ["backup", "backups"]
 ---
 
-:::note
+:::warning breaking changes!
 This release introduces breaking changes, including:
 
 - The [get backup state API and response codes](#get-backup-state-api).
-- The utilized URL has changed. For example, `curl 'http://localhost:8080/actuator/backups'` rather than the previously used `backup`.
+- The utilized URL has changed. For example, `curl 'http://localhost:9600/actuator/backups'` rather than the previously used `backup`.
 - `backupId` must be of integer type now instead of string, which is in sync with Zeebe `backupId` requirements.
+- The actuator endpoints (including backup) changed to use port 9600 instead of 8080. You will need to update your applications to use port 9600.
 
 :::
 
@@ -29,7 +30,7 @@ camunda_operate_123_8.1.0_part_6_of_6
 Operate provides an API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
 
 :::note
-The backup API can be reached via the Actuator management port, which by default is the same as application HTTP port (and in turn defaults to 8080). The port may be reconfigured with the help of `management.server.port` configuration parameter.
+The backup API can be reached via the Actuator management port, which by default is the same as application HTTP port (and in turn defaults to 9600). The port may be reconfigured with the help of `management.server.port` configuration parameter.
 :::
 
 ## Prerequisites
@@ -87,7 +88,7 @@ Response:
 Example request:
 
 ```
-curl --request POST 'http://localhost:8080/actuator/backups' \
+curl --request POST 'http://localhost:9600/actuator/backups' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": 123 }'
 ```
@@ -127,7 +128,7 @@ Response:
 For example, the request could look like this:
 
 ```
-curl 'http://localhost:8080/actuator/backups/123'
+curl 'http://localhost:9600/actuator/backups/123'
 ```
 
 Example response:
@@ -180,7 +181,7 @@ Response:
 For example, the request could look like this:
 
 ```
-curl 'http://localhost:8080/actuator/backups'
+curl 'http://localhost:9600/actuator/backups'
 ```
 
 Response will contain JSON with array of objects representing state of each backup (see [get backup state API endpoint](#get-backup-state-api)).
