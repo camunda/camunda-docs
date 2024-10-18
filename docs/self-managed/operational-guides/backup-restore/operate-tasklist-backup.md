@@ -6,7 +6,7 @@ keywords: ["backup", "backups"]
 ---
 
 :::warning breaking changes!
-In this release, the actuator endpoints (including backup) changed to use port 9600 instead of 8080. You will need to update your applications to use port 9600.
+As of the Camunda 8.6 release, the `/actuator` endpoints (including `/backups`) now default to port 9600. Ensure your `management.server.port` configuration parameter is correctly set before continuing.
 :::
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
