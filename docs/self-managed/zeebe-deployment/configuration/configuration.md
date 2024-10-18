@@ -5,21 +5,14 @@ sidebar_label: "Overview"
 description: "Let's analyze how to configure Zeebe."
 ---
 
-Zeebe can be configured through the following:
+Zeebe can be configured using environment variables, configuration parameters, or a combination of both. When configuring your Zeebe setup, keep in mind the following:
 
-- Configuration files
-- Environment variables
-- A mix of both
+- If both configuration files and environment variables are present, environment variables overwrite settings in configuration files.
+- The existing configuration is applied at startup, and changes made to the configuration will not be applied at runtime.
 
-If both configuration files and environment variables are present, environment variables overwrite settings in configuration files.
+For more information on Self-Managed configuration options, see [configuring components](/self-managed/operational-guides/application-configs.md).
 
-To make small changes to the configuration, we recommend using environment variables.
-
-To make big changes to the configuration, we recommend using a configuration file.
-
-The configuration is applied during startup of Zeebe. It is not possible to change the configuration at runtime.
-
-## Default configuration
+## Configuration options
 
 The default configuration is located in `config/application.yaml`. This configuration contains the most common configuration settings for a standalone broker. It also lists the corresponding environment variable for each setting.
 
@@ -27,7 +20,7 @@ The default configuration is located in `config/application.yaml`. This configur
 The default configuration is not suitable for a standalone gateway node. To run a standalone gateway node, take a look at [the gateway configuration](gateway.md) or `/config/gateway.yaml.template`.
 :::
 
-## Configuration file templates
+### Configuration file templates
 
 We provide templates that contain all possible configuration settings, along with explanations for each setting, though you may find it easier to search through our [broker](broker.md) and [gateway](gateway.md) configuration documentation to adjust the templates:
 
@@ -40,7 +33,7 @@ We provide templates that contain all possible configuration settings, along wit
 These templates also include the corresponding environment variables to use for every setting.
 :::
 
-## Editing the configuration
+### Edit the configuration
 
 You can either start from scratch or start from the configuration templates listed above.
 
@@ -75,7 +68,7 @@ When it comes to editing individual settings, two data types are worth mentionin
   - Human-friendly format: `15s` (or `m, h`)
   - Machine-friendly format: either duration in milliseconds as long, or [ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations) format (e.g. `PT15S`)
 
-## Passing configuration files to Zeebe
+### Pass configuration files to Zeebe
 
 Rename the configuration file to `application.yaml` and place it in the following location:
 
@@ -83,7 +76,7 @@ Rename the configuration file to `application.yaml` and place it in the followin
 ./config/application.yaml
 ```
 
-### Other ways to specify the configuration file
+#### Other ways to specify the configuration file
 
 Zeebe uses Spring Boot for its configuration parsing. All other ways to [configure a Spring Boot application](https://docs.spring.io/spring-boot/reference/features/external-config.html) should also work. In particular, you can use:
 
@@ -104,7 +97,7 @@ export SPRING_CONFIG_LOCATION='classpath:/,file:./[path to config file]'
 
 This will ensure the defaults defined in the classpath resources will be used (unless explicitly overwritten by the configuration file you provide). If you omit the defaults defined in the classpath, some features may be disabled or will not be configured properly.
 
-## Verifying configuration
+### Verify the configuration
 
 Start Zeebe to verify the configuration was applied. If the configuration could be read, Zeebe will expose it via the monitoring port at [http://localhost:9600/actuator/configprops/zeebe](http://localhost:9600/actuator/configprops/zeebe). This will show you both the resolved configuration and its inputs.
 
