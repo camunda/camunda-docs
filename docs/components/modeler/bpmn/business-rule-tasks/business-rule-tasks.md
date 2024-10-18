@@ -48,7 +48,7 @@ The `bindingType` attribute determines which version of the called decision is e
 - `deployment`: The version that was deployed together with the currently running version of the process.
 - `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.
 
-To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+To learn more about choosing binding types, see [choosing the resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
 :::note
 If the `bindingType` attribute is not specified, `latest` is used as the default.

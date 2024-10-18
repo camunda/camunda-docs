@@ -92,7 +92,7 @@ The following is **not** possible:
 
 ![User Task](../../components/modeler/bpmn/assets/bpmn-symbols/user-task.svg)
 
-Human task management is also available in Camunda 8, but uses a different Tasklist user interface and API.
+[Human task management](/guides/getting-started-orchestrate-human-tasks.md) is also available in Camunda 8, but uses a different Tasklist user interface and API.
 
 In Camunda 7, you have [different ways to provide forms for user tasks](https://docs.camunda.org/manual/latest/user-guide/task-forms/):
 
