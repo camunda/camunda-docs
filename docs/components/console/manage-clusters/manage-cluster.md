@@ -64,7 +64,7 @@ You can decide if you want to have [automated updates](/reference/auto-updates.m
 You can increase or decrease the [cluster size](/components/concepts/clusters.md#cluster-size) at any time. For example, increase the cluster size to improve performance and add capacity, or decrease the cluster size to free up reservations for another cluster.
 
 1. Open the cluster details by clicking on the cluster name.
-1. Select the **Edit cluster size** link next to the cluster type.
+1. Select **Resize cluster** next to the cluster type.
 1. Select the new cluster size from the available sizes.
 1. Click **Confirm** to apply your changes, or **Cancel** to close the modal without resizing the cluster.
 
