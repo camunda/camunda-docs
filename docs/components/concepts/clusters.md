@@ -12,8 +12,8 @@ When [creating a cluster in SaaS](/components/console/manage-clusters/create-clu
 
 Prior to 8.6, clusters were configured by hardware size (S, M, L).
 
-- To learn more about clusters prior to 8.6, see previous documentation versions.
-- To learn more about migrating your existing clusters to the newer model, contact your Customer Success Manager.
+- This documentation covers the SaaS cluster model introduced in 8.6. To learn more about clusters prior to 8.6, see previous documentation versions.
+- To learn how you can migrate your existing clusters to the newer model, contact your Customer Success Manager.
 
 :::
 
