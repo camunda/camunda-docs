@@ -66,7 +66,7 @@ You can increase or decrease the [cluster size](/components/concepts/clusters.md
 1. Open the cluster details by clicking on the cluster name.
 1. Select **Resize cluster** next to the cluster type.
 1. Select the new cluster size from the available sizes.
-1. Click **Confirm** to apply your changes, or **Cancel** to close the modal without resizing the cluster.
+1. Click **Confirm** to resize the cluster, or **Cancel** to close the modal without resizing the cluster.
 
 :::note
 Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
@@ -74,8 +74,8 @@ Contact your Customer Success Manager to increase the cluster size beyond the ma
 
 ## Delete a cluster
 
-:::note
-This action cannot be undone.
+:::caution
+Deleting a cluster is **permanent** and cannot be undone.
 :::
 
 A cluster can be deleted at any time. To delete your cluster, navigate to the **Clusters** tab in the top navigation and click **Delete** to the far right of the cluster name.
