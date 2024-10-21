@@ -4,7 +4,7 @@ title: Manage your cluster
 description: "Follow these steps to rename, resume, update, or delete your cluster."
 ---
 
-Read through the following sections to rename, resume, update, or delete your cluster.
+Learn how to rename, resume, update, resize, or delete your cluster.
 
 ## Rename a cluster
 
@@ -58,6 +58,19 @@ When an update is available, an **Update** button will appear. This button is no
 ### Automated cluster updates
 
 You can decide if you want to have [automated updates](/reference/auto-updates.md) to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
+
+## Resize a cluster
+
+You can increase or decrease the [cluster size](/components/concepts/clusters.md#cluster-size) at any time. For example, increase the cluster size to improve performance and add capacity, or decrease the cluster size to free up reservations for another cluster.
+
+1. Open the cluster details by clicking on the cluster name.
+1. Select the **Edit cluster size** link next to the cluster type.
+1. Select the new cluster size from the available sizes.
+1. Click **Confirm** to apply your changes, or **Cancel** to close the modal without resizing the cluster.
+
+:::note
+Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
+:::
 
 ## Delete a cluster
 
