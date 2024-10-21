@@ -227,7 +227,7 @@ Your process is now complete and ready for validation.
 
 Now you have created and designed the form, you must link it to your process.
 
-1. Open the process you created in **[Step 1](#step-1-create-a-new-process)** by clicking on the process file's name in the top bar.
+1. Open the process you created in **[Step 1](#step-1-create-and-design-a-process)** by clicking on the process file's name in the top bar.
 2. Select the user task, and open the **Form** menu in the properties panel.
 3. In the Form menu, enter the **Form ID** for the form you created in **[Step 2](#step-2-design-a-form)**.
 
