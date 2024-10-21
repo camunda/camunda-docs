@@ -18,12 +18,6 @@ Otherwise, if it is intended to connect to Amazon OpenSearch Service with basic 
 
 ## Values file
 
-:::caution
-
-The migration step within Optimize is currently not supported with OpenSearch. Disable the migration as shown in the example below.
-
-:::
-
 The following values can be configured in the Camunda 8 Self-Managed Helm chart in order to use Amazon OpenSearch Service:
 
 ### Connecting to Amazon OpenSearch Service with basic auth
@@ -41,10 +35,6 @@ global:
       protocol: https
       host: opensearch.example.com
       port: 443
-
-optimize:
-  migration:
-    enabled: false
 
 elasticsearch:
   enabled: false

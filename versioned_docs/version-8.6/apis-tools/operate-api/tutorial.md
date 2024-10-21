@@ -124,7 +124,7 @@ body,
 ```js
 async function fetchDiagram() {
   return fetch(
-    // Replace {PROCESS_DEFINITION_ID} with a process definition id.
+    // Replace {PROCESS_DEFINITION_ID} with a process definition ID.
     // http://localhost:3030 is the URL of the Proxy server, which should stay the same.
     "http://localhost:3030/v1/process-definitions/{PROCESS_DEFINITION_ID}/xml",
     {
@@ -180,12 +180,12 @@ async function fetchDiagram() {
 
 ## Show statistics on the diagram
 
-1. Add a new function to the `api.js` file that fetches the flow node statistics for a specified process instance id:
+1. Add a new function to the `api.js` file that fetches the flow node statistics for a specified process instance ID:
 
 ```js
 async function fetchStatistics() {
   return fetch(
-    // Replace {PROCESS_INSTANCE_ID} with a process instance id.
+    // Replace {PROCESS_INSTANCE_ID} with a process instance ID.
     // http://localhost:3030 is the URL of the proxy server, which should stay the same.
     "http://localhost:3030/v1/process-instances/{PROCESS_INSTANCE_ID}/statistics",
     {
@@ -230,12 +230,12 @@ fetchStatistics()
 
 ## Highlight processed sequence flows on the diagram
 
-1. Add a new function to the `api.js` file that fetches the processed sequence flows for a specified process instance id:
+1. Add a new function to the `api.js` file that fetches the processed sequence flows for a specified process instance ID:
 
 ```js
 async function fetchSequenceFlows() {
   return fetch(
-    // Replace {PROCESS_INSTANCE_ID} with a process instance id.
+    // Replace {PROCESS_INSTANCE_ID} with a process instance ID.
     // http://localhost:3030 is the URL of the Proxy server, which should stay the same.
     "http://localhost:3030/v1/process-instances/{PROCESS_INSTANCE_ID}/sequence-flows",
     {

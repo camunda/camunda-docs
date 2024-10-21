@@ -18,7 +18,7 @@ Ensure you [authenticate](./tasklist-api-rest-authentication.md) before accessin
 For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
 
 :::note
-Find your region and cluster id under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
+Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 
 For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Tasklist component.
 :::
@@ -34,7 +34,7 @@ A detailed API description is also available as a Swagger UI at `https://${base-
 For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/swagger-ui/index.html`, and for Self-Managed installations: [`http://localhost:8080/swagger-ui/index.html`](http://localhost:8080/swagger-ui/index.html).
 
 :::note
-Find your region and cluster id under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
+Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 :::
 
 ## API in Postman

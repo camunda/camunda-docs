@@ -689,6 +689,34 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Early access",
+      link: {
+        type: "doc",
+        id: "components/early-access/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Experimental features",
+          items: [
+            "components/early-access/experimental/rpa/rpa-integration",
+            "components/early-access/experimental/rpa/rpa-framework-library",
+          ],
+        },
+        {
+          type: "category",
+          label: "Alpha features",
+          items: [
+            "components/early-access/alpha/sap/sap-integration",
+            "components/early-access/alpha/sap/odata-connector",
+            "components/early-access/alpha/sap/rfc-connector",
+            "components/early-access/alpha/sap/btp-integration",
+          ],
+        },
+      ],
+    },
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",

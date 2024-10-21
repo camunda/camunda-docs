@@ -23,23 +23,14 @@ module.exports = {
   // do not delete the following 'noIndex' line as it is modified for production
   noIndex: true,
   plugins: [
-    //        ["@edno/docusaurus2-graphql-doc-generator",
-    //          {
-    //            schema: "http://localhost:8080/tasklist/graphql",
-    //            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-    //            baseURL: "apis-tools/tasklist-api",
-    //            linkRoot: "/docs/",
-    //            loaders: {
-    //              UrlLoader: "@graphql-tools/url-loader"
-    //            }
-    //          },
-    //        ],
     // This custom Osano plugin must precede the gtm-plugin.
     "./static/plugins/osano",
     [
-      require.resolve("docusaurus-gtm-plugin"),
+      "./static/plugins/gtm",
       {
-        id: "GTM-KQGNSTS", // GTM Container ID
+        containerId: "GTM-KQGNSTS",
+        tagManagerUrl:
+          process.env.TAG_MANAGER_URL || "https://ssgtm.camunda.io",
       },
     ],
     "./static/plugins/bpmn-js",
@@ -178,6 +169,11 @@ module.exports = {
     },
   ],
   themeConfig: {
+    docs: {
+      sidebar: {
+        autoCollapseCategories: true,
+      },
+    },
     announcementBar: {
       id: "camunda8",
       content:
@@ -186,6 +182,7 @@ module.exports = {
       textColor: "#000",
       isCloseable: true,
     },
+
     prism: {
       additionalLanguages: ["java", "protobuf", "csharp"],
     },

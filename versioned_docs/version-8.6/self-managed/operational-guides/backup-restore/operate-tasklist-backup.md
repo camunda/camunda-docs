@@ -15,7 +15,7 @@ This release introduces breaking changes, including:
 :::
 
 Operate stores its data over multiple indices in Elasticsearch. Backup of Operate data includes several
-Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an id of `123` may contain the following Elasticsearch snapshots:
+Elasticsearch snapshots containing sets of Operate indices. Each backup is identified by `backupId`. For example, a backup with an ID of `123` may contain the following Elasticsearch snapshots:
 
 ```
 camunda_operate_123_8.1.0_part_1_of_6
@@ -79,8 +79,8 @@ Response:
 
 | Code             | Description                                                                                                                                                                                                                                |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 200 OK           | Backup was successfully started, snapshots will be created asynchronously. List of snapshots is returned in the response body (see example below). This list must be persisted together with the backup id to be able to restore it later. |
-| 400 Bad Request  | In case something is wrong with `backupId`, e.g. the same backup id already exists.                                                                                                                                                        |
+| 200 OK           | Backup was successfully started, snapshots will be created asynchronously. List of snapshots is returned in the response body (see example below). This list must be persisted together with the backup ID to be able to restore it later. |
+| 400 Bad Request  | In case something is wrong with `backupId`, e.g. the same backup ID already exists.                                                                                                                                                        |
 | 500 Server Error | All other errors, e.g. ES returned error response when attempting to create a snapshot.                                                                                                                                                    |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.                                                                                                                                                               |
 
@@ -120,7 +120,7 @@ Response:
 | Code             | Description                                                                             |
 | ---------------- | --------------------------------------------------------------------------------------- |
 | 200 OK           | Backup state could be determined and is returned in the response body.                  |
-| 404 Not Found    | Backup with given id does not exist.                                                    |
+| 404 Not Found    | Backup with given ID does not exist.                                                    |
 | 500 Server Error | All other errors, e.g. ES returned error response when attempting to execute the query. |
 | 502 Bad Gateway  | Elasticsearch is not accessible, the request can be retried when it is back.            |
 

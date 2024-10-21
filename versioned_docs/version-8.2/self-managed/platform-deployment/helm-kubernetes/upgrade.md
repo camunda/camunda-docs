@@ -5,13 +5,11 @@ sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
-To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
-
-:::caution
-
-Ensure to review the [instructions for specific version](#version-update-instructions) before starting the actual upgrade.
-
+:::note
+When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the next **minor** version of the chart.
 :::
+
+To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind. Review the [instructions for a specific version](#version-update-instructions) before starting the actual upgrade.
 
 ### Upgrading where Identity disabled
 

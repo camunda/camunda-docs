@@ -278,7 +278,7 @@ The last step is to create a process instance.
 
 There are two options for creating a process instance:
 
-- For long-running processes, use `createProcessInstance`, which returns as soon as the process instance is created with the process instance id.
+- For long-running processes, use `createProcessInstance`, which returns as soon as the process instance is created with the process instance ID.
 - For the shorter-running process we are using, use `createProcessInstanceWithResult`, which awaits the completion of the process and returns with the final variable values.
 
 1. Locate the following line in the `main` function:
