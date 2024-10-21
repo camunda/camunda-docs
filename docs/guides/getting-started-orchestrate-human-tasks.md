@@ -189,7 +189,7 @@ You have now designed the process. To allow the user to make the decision, you m
 
 :::
 
-1. Select the user task you created in **[Step 1](#step-1-create-a-new-process)**.
+1. Select the user task you created in **[Step 1](#step-1-create-and-design-a-process)**.
 1. Click the blue **Link Form** icon in the [context pad](/components/modeler/web-modeler/context-pad.md), and click **Create new form**.
 1. A form is created and opened in the form editor. The form is automatically named and linked to the user task.
 1. Click and drag a **Text view** component (found under Presentation) into the empty form.
