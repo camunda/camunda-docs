@@ -318,7 +318,7 @@ Using the Zeebe or Tasklist API, many other ways to complete a user task are pos
 1. Open Tasklist at `http://localhost:8080/tasklist`.
 
 2. On the left, you will notice a list of **tasks**. There should be one open task `Decide what's for dinner`. Click this task to open it in the detail view.
-3. In the detail view, the form you created in **[Step 2](#step-2-design-a-form)** appears. It is read only since this task is currently unassigned. You have to claim the task to work on it. Next to **Assignee**, click **Assign to me** to claim the task.
+3. In the detail view, the form you created in **[Step 2](#step-2-design-and-link-a-form)** appears. It is read only since this task is currently unassigned. You have to claim the task to work on it. Next to **Assignee**, click **Assign to me** to claim the task.
 4. Select one of the radio options.
 5. Click **Complete Task** to submit the form.
 
