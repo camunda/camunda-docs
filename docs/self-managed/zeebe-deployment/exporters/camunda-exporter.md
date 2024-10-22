@@ -44,7 +44,7 @@ The exporter can be configured by providing `args`. The table below explains all
 options, and the default values for these options:
 
 | Option       | Description                                                              | Default |
-|--------------|--------------------------------------------------------------------------|---------|
+| ------------ | ------------------------------------------------------------------------ | ------- |
 | connect      | Refer to [Connect](#connect) for the connection configuration options.   |         |
 | index        | Refer to [Index](#index) for the index configuration options.            |         |
 | bulk         | Refer to [Bulk](#bulk) for the bulk configuration options.               |         |
@@ -62,7 +62,7 @@ versions of Elasticsearch and/or Opensearch are supported in a Camunda 8 Self-Ma
 :::
 
 | Option         | Description                                                                                                                   | Default                     |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------|
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
 | type           | the type of the underlying search engine to export to. Accepted values are `elasticsearch` or `opensearch`.                   | elasticsearch               |
 | clusterName    | The name of the elasticsearch/opensearch cluster to export to.                                                                | elasticsearch               |
 | dateFormat     | Defines a custom date format that should be used for fetching date data from the engine (should be the same as in the engine) | yyyy-MM-dd'T'HH:mm:ss.SSSZZ |
@@ -77,7 +77,7 @@ versions of Elasticsearch and/or Opensearch are supported in a Camunda 8 Self-Ma
 <TabItem value="security">
 
 | Option          | Description                                                                                       | Default |
-|-----------------|---------------------------------------------------------------------------------------------------|---------|
+| --------------- | ------------------------------------------------------------------------------------------------- | ------- |
 | enabled         | If `true`, enables the security (ssl) features for the exporter.                                  | false   |
 | certificatePath | The file path to the SSL certificate used for secure communication with Elasticsearch/Opensearch. |         |
 | verifyHostname  | If `true`, the hostname of the SSL certificate will be validated.                                 | true    |
@@ -88,7 +88,7 @@ versions of Elasticsearch and/or Opensearch are supported in a Camunda 8 Self-Ma
 <TabItem value="index">
 
 | Option                | Description                                                                                                                                                                                 | Default |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | prefix                | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                     |         |
 | numberOfShards        | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                   | 3       |
 | numberOfReplicas      | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for each new record index created.           | 0       |
@@ -105,14 +105,13 @@ updates by default. The size of the batch, along with how often it should be flu
 size) can be controlled by configuration.
 
 | Option | Description                                                                                                                                                    | Default |
-|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | delay  | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `5`     |
 | size   | The amount of records a batch should have before we flush the batch                                                                                            | `1000`  |
 
 With the default configuration, the exporter will aggregate records and flush them to Elasticsearch/Opensearch:
 
-1. When it has aggregated 1000 records.
-    2. Five seconds have elapsed since the last flush (regardless of how many records were aggregated).
+1. When it has aggregated 1000 records. 2. Five seconds have elapsed since the last flush (regardless of how many records were aggregated).
 
 </TabItem>
 
@@ -124,7 +123,7 @@ When enabled, this creates an Index Lifecycle Management (ILM) Policy that delet
 All index templates created by this exporter apply the created ILM Policy.
 
 | Option     | Description                                                                  | Default |
-|------------|------------------------------------------------------------------------------|---------|
+| ---------- | ---------------------------------------------------------------------------- | ------- |
 | enabled    | If `true` the ILM Policy is created and applied to the index templates       | `false` |
 | minimumAge | Specifies how old the data must be, before the data is deleted as a duration | `30d`   |
 | policyName | The name of the created and applied ILM policy                               |         |
