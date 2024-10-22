@@ -209,9 +209,9 @@ camunda.operate:
       selfSigned: true
 ```
 
-## Zeebe broker connection
+## Zeebe Broker connection
 
-Operate needs a connection to the Zeebe broker to start the import and execute user operations.
+Operate needs a connection to the Zeebe Broker to start the import and execute user operations.
 
 ### Settings to connect
 

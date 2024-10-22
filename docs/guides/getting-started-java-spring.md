@@ -145,7 +145,7 @@ See our documentation on [adding the Spring Zeebe SDK to your project](/apis-too
 
 ### Configure the Zeebe client
 
-Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
+Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe Broker:
 
 ```yaml
 camunda:
