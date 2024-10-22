@@ -209,10 +209,9 @@ Additionally, you can choose to unpack the content of your `response` into multi
 
 ## Error handling
 
-In case of an error, the REST Connector will throw an error.
-You can see the error response in the `error` variable in Operate (click on the REST Connector in Operate to see this variable).
+If an error occurs, the Connector throws an error and includes the error response in the `error` variable in Operate. Click on the REST Connector in Operate to see this variable.
 
-Here's an example of what the `error` variable might look like:
+The following example shows the `error` variable in an error response:
 
 ```json
 {
@@ -236,7 +235,7 @@ Here's an example of what the `error` variable might look like:
 }
 ```
 
-You can handle this error using an Error Boundary Event along with the following error expression:
+You can handle this error using an Error Boundary Event and the following error expression:
 
 ```json
 if matches(error.code, "400") and error.variables.response.body.temp = 36
@@ -244,8 +243,7 @@ then bpmnError("Too hot", error.variables.response.body.message, error.variables
 else null
 ```
 
-In this example, notice how we passed `error.variables.response.body` as the third argument to the `bpmnError` function. This allows you to pass additional information about the error to the error boundary event.<br/>
-Here, `message`, `temperature` and `booleanField` fields from the error response will be passed to the error boundary event.
+In this example, passing `error.variables.response.body` as the third argument to the `bpmnError` function allows you to pass additional information about the error to the error boundary event. For example, the `message`, `temperature` and `booleanField` fields from the error response are passed to the error boundary event.
 
 ## OData support
 
