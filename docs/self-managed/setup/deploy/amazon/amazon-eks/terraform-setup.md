@@ -63,7 +63,16 @@ Following this tutorial and steps will result in:
 
 #### Variants
 
-We support two variants of this architecture: the first, **Standard Installation**, utilizes a username and password connection for the Camunda components (or simply relies on network isolation for certain components). The second variant employs **IRSA** (IAM Roles for Service Accounts) and uses service accounts to perform authentication with IAM policies.
+We support two variants of this architecture:
+
+- The first, **Standard Installation**, utilizes a username and password connection for the Camunda components (or simply relies on network isolation for certain components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
+
+- The second variant, **IRSA** (IAM Roles for Service Accounts), uses service accounts to perform authentication with IAM policies. This approach offers stronger security and better integration with AWS services, as it eliminates the need to manage credentials manually. It is especially beneficial in environments with strict security requirements, where fine-grained access control and dynamic role-based access are essential.
+
+##### How to Choose:
+
+- If you prefer a simpler setup with basic authentication or network isolation, and your security needs are moderate, the **Standard Installation** is a suitable choice.
+- If you require enhanced security, dynamic role-based access management, and want to leverage AWS’s identity services for fine-grained control, the **IRSA** variant is the better option.
 
 Both can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 
