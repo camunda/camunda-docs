@@ -150,7 +150,6 @@ cloudWatch:
   clusterLogging: {}
 iam:
   vpcResourceControllerPolicy: true
-  withOIDC: true # enables and configures OIDC for IAM Roles for Service Accounts (IRSA)
 addons:
   - name: vpc-cni
     resolveConflicts: overwrite
@@ -182,7 +181,6 @@ managedNodeGroups:
   - amiFamily: AmazonLinux2
     desiredCapacity: ${NODE_COUNT:-4} # number of default nodes spawned if no cluster autoscaler is used
     disableIMDSv1: true
-    disablePodIMDS: true
     iam:
       withAddonPolicies:
         albIngress: true
@@ -234,6 +232,8 @@ EOF
 With eksctl you can execute the previously created file as follows and takes 25-30 minutes.
 
 ```shell
+cat cluster.yaml
+
 eksctl create cluster --config-file cluster.yaml
 ```
 
@@ -352,6 +352,52 @@ In the following procedure, we reference the `camunda` namespace to create some 
 kubectl create namespace camunda
 ```
 
+### Check Existing StorageClasses
+
+To see the available **StorageClasses** in your Kubernetes cluster, use the following command:
+
+```bash
+kubectl describe storageclass
+```
+
+This command will display a list of defined StorageClasses, including which one is set as default.
+
+#### StorageClass
+
+To check if `gp3` is set as the default StorageClass, you can look for the annotation `storageclass.kubernetes.io/is-default-class: "true"` in the output of the previous command. If `gp3` is not installed or not set as default StorageClass, you need to install it and set it as default.
+
+We recommend using **gp3** volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)).
+It may be necessary to create the StorageClass, as the default configuration only includes **gp2**. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
+
+#### Create `gp3` StorageClass
+
+1. **Create the `gp3` StorageClass.**
+
+```shell
+cat << EOF | kubectl apply -f -
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp3
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+EOF
+```
+
+2. **Modify the `gp2` StorageClass to mark it as a non-default StorageClass:**
+
+```shell
+kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+```
+
+After executing these commands, you will have a `gp3` StorageClass set as the default and the `gp2` StorageClass marked as non-default, provided that **gp2** was already present. Ensure to verify the changes again by running the `kubectl get storageclass` command.
+
 ## 3. PostgreSQL database
 
 Creating a PostgreSQL database can be accomplished through various methods, such as using the AWS Management Console or the AWS CLI. This guide focuses on providing a reproducible setup using the CLI. For information on creating PostgreSQL using the UI, refer to the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html).
@@ -416,22 +462,22 @@ export DB_WEBMODELER_PASSWORD="CHANGE-ME-PLEASE"
 2. **Create a security group within the VPC to allow connections to the Aurora PostgreSQL instance:**
 
    ```shell
-   export GROUP_ID=$(aws ec2 create-security-group \
+   export GROUP_ID_AURORA=$(aws ec2 create-security-group \
      --group-name aurora-postgres-sg \
      --description "Security Group to allow the Amazon EKS cluster $CLUSTER_NAME to connect to Aurora PostgreSQL $RDS_NAME" \
      --vpc-id $VPC_ID \
      --output text)
 
-   echo "GROUP_ID=$GROUP_ID"
+   echo "GROUP_ID_AURORA=$GROUP_ID_AURORA"
    ```
 
-The variable `GROUP_ID` contains the output (the value should look like this: `sg-1234567890`).
+The variable `GROUP_ID_AURORA` contains the output (the value should look like this: `sg-1234567890`).
 
 3. **Create a security ingress rule to allow access to PostgreSQL:**
 
    ```shell
    aws ec2 authorize-security-group-ingress \
-     --group-id $GROUP_ID \
+     --group-id $GROUP_ID_AURORA \
      --protocol tcp \
      --port 5432 \
      --cidr $CIDR
@@ -471,7 +517,7 @@ The variable `SUBNET_IDS` contains the output values of the private subnets (the
        --engine-version $POSTGRESQL_VERSION \
        --master-username $AURORA_USERNAME \
        --master-user-password $AURORA_PASSWORD \
-       --vpc-security-group-ids $GROUP_ID \
+       --vpc-security-group-ids $GROUP_ID_AURORA \
        --availability-zones $(echo $ZONES) \
        --db-subnet-group-name camunda-postgres
    ```
@@ -592,6 +638,30 @@ By running these commands, you will clean up both the job and the secret, ensuri
 
 ## 4. OpenSearch domain
 
+Creating an OpenSearch domain can be accomplished through various methods, such as using the AWS Management Console or the AWS CLI. This guide focuses on providing a reproducible setup using the CLI. For information on creating an OpenSearch domain using the UI, refer to the [AWS OpenSearch documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/create-managed-domain.html).
+
+The resulting OpenSearch domain is intended for use with the Camunda platform, the following components utilize OpenSearch:
+
+- Zeebe
+- Operate
+- Tasklist
+- Optimize
+
+:::info Optional service
+
+If you don't want to use the Amazon OpenSearch managed service for OpenSearch, you can skip this section.
+However, please note that you may need to adjust the following instructions to remove references to it.
+
+If you choose not to use this service, you'll need to either provide a managed OpenSearch or Elasticsearch service or use the internal deployment by the Camunda Helm chart in Kubernetes.
+
+:::
+
+:::note Available since Camunda 8.4
+
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch Service](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+
+:::
+
 ### Configuration
 
 ```shell
@@ -601,9 +671,13 @@ By running these commands, you will clean up both the job and the secret, ensuri
 export OPENSEARCH_NAME=camunda-opensearch
 ```
 
-Creating an OpenSearch domain can be accomplished in various ways. This guide provides a reproducible setup using the AWS CLI. For additional information on using the AWS Management Console, refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/index/).
+:::caution Network based security
 
-The resulting OpenSearch domain is intended for use with the Camunda platform.
+The standard deployment for OpenSearch relies on the first layer of security, which is the Network.
+While this setup allows easy access, it may expose sensitive data. To enhance security, consider implementing IAM Roles for Service Accounts (IRSA) to restrict access to the OpenSearch cluster, providing a more secure environment.
+For more information, see the [Amazon OpenSearch Service Fine-Grained Access Control documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-access-policies).
+
+:::
 
 ### Step-by-step setup
 
@@ -613,6 +687,8 @@ The resulting OpenSearch domain is intended for use with the Camunda platform.
    export VPC_ID=$(aws ec2 describe-vpcs \
      --query "Vpcs[?Tags[?Key=='alpha.eksctl.io/cluster-name']|[?Value=='$CLUSTER_NAME']].VpcId" \
      --output text)
+
+   echo "VPC_ID=$VPC_ID"
    ```
 
    The variable `VPC_ID` contains the output value required for the next steps (the value should look like this: `vpc-1234567890`).
@@ -620,26 +696,28 @@ The resulting OpenSearch domain is intended for use with the Camunda platform.
 2. **Create a security group within the VPC to allow connections to the OpenSearch domain:**
 
    ```shell
-   export GROUP_ID=$(aws ec2 create-security-group \
+   export GROUP_ID_OPENSEARCH=$(aws ec2 create-security-group \
      --group-name opensearch-sg \
-     --description "Security Group to allow internal connections to OpenSearch" \
+     --description "Security Group to allow internal connections From EKS $CLUSTER_NAME to OpenSearch $OPENSEARCH_NAME" \
      --vpc-id $VPC_ID \
      --output text)
+
+   echo "GROUP_ID_OPENSEARCH=$GROUP_ID_OPENSEARCH"
    ```
 
-   The variable `GROUP_ID` contains the output (the value should look like this: `sg-1234567890`).
+   The variable `GROUP_ID_OPENSEARCH` contains the output (the value should look like this: `sg-1234567890`).
 
 3. **Create a security ingress rule to allow access to OpenSearch over HTTPS (port 443) from within the VPC:**
 
    ```shell
    aws ec2 authorize-security-group-ingress \
-     --group-id $GROUP_ID \
+     --group-id $GROUP_ID_OPENSEARCH \
      --protocol tcp \
      --port 443 \
      --cidr $CIDR  # Replace with the CIDR range of your EKS cluster, e.g., <EKS_CIDR_BLOCK>
    ```
 
-   Ensure that the CIDR range is appropriate for your environment.
+   Ensure that the CIDR range is appropriate for your environment. Please note that OpenSearch uses `443` as the https transport port.
 
 4. **Retrieve the private subnets of the VPC:**
 
@@ -648,6 +726,11 @@ The resulting OpenSearch domain is intended for use with the Camunda platform.
      --filter Name=vpc-id,Values=$VPC_ID \
      --query "Subnets[?Tags[?Key=='aws:cloudformation:logical-id']|[?contains(Value, 'Private')]].SubnetId" \
      --output text | expand -t 1)
+
+   # format it with coma
+   export SUBNET_IDS=$(echo "$SUBNET_IDS" | sed 's/ /,/g')
+
+   echo "SUBNET_IDS=$SUBNET_IDS"
    ```
 
    The variable `SUBNET_IDS` now contains the output values of the private subnets (the value should look like this: `subnet-0123456789 subnet-1234567890`).
@@ -655,28 +738,43 @@ The resulting OpenSearch domain is intended for use with the Camunda platform.
 5. **Create the OpenSearch domain:**
 
    ```shell
-   export OPENSEARCH_DOMAIN_NAME=<your-domain-name>  # Replace with your desired domain name
-
-   aws opensearch create-domain --domain-name $OPENSEARCH_DOMAIN_NAME \
-     --elasticsearch-version 2.15 \
+   aws opensearch create-domain --domain-name $OPENSEARCH_NAME \
+     --engine-version OpenSearch_2.15 \
+     --cluster-config  "InstanceType=t3.medium.search,InstanceCount=3,ZoneAwarenessEnabled=true,ZoneAwarenessConfig={AvailabilityZoneCount=3}" \
      --node-to-node-encryption-options Enabled=true \
+     --ebs-options "EBSEnabled=true,VolumeType=gp3,VolumeSize=50,Iops=3000,Throughput=125" \
      --encryption-at-rest-options Enabled=true \
-     --vpc-options SubnetIds=[${SUBNET_IDS}],SecurityGroupIds=[${GROUP_ID}]
-
-     # TODO: add password and user
-     # TODO: use opensearch, not elastic
+     --access-policies "{ \"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": { \"AWS\": \"*\" }, \"Action\": \"es:*\", \"Resource\": \"arn:aws:es:$REGION:*:domain/$OPENSEARCH_NAME/*\" }]}" \
+     --vpc-options "SubnetIds=${SUBNET_IDS},SecurityGroupIds=${GROUP_ID_OPENSEARCH}"
    ```
+
+- **Domain Name**: `$OPENSEARCH_NAME` is the name of the OpenSearch domain being created.
+- **Engine Version**: Uses OpenSearch version `2.15`.
+- **Cluster Configuration**:
+  - `InstanceType=t3.medium.search` specifies the instance type for the domain.
+  - `InstanceCount=3` creates a cluster with 3 instances.
+  - `ZoneAwarenessEnabled=true` and `ZoneAwarenessConfig={AvailabilityZoneCount=3}` enable zone awareness and spread the instances across 3 availability zones to improve fault tolerance.
+- **Node-to-Node Encryption**: Encryption for traffic between nodes in the OpenSearch cluster is enabled (`Enabled=true`).
+- **EBS Options**:
+  - `EBSEnabled=true` enables Elastic Block Store (EBS) for storage.
+  - `VolumeType=gp3` specifies the volume type as `gp3` with 50 GiB of storage.
+  - `Iops=3000` and `Throughput=125` set the IOPS and throughput for the storage.
+- **Encryption at Rest**: Data stored in the domain is encrypted at rest (`Enabled=true`).
+- **Access Policies**: The default access policy allows all actions (`es:*`) on resources within the domain for any AWS account (`"Principal": { "AWS": "*" }`). This is scoped to the OpenSearch domain resources using the `arn:aws:es:$REGION:*:domain/$OPENSEARCH_NAME/*` resource ARN.
+- **VPC Options**: The domain is deployed within the specified VPC, restricted to the provided subnets (`SubnetIds=${SUBNET_IDS}`) and associated security group (`SecurityGroupIds=${GROUP_ID_OPENSEARCH}`).
+
+This configuration creates a secure OpenSearch domain with encryption both in transit (between nodes) and at rest, zonal fault tolerance, and sufficient storage performance using `gp3` volumes. The access is restricted to resources in the VPC of the EKS cluster and is governed by the specified security group.
 
 6. **Wait for the OpenSearch domain to be active:**
 
    ```shell
-   aws opensearch wait domain-active --domain-name $OPENSEARCH_DOMAIN_NAME
+   while [ "$(aws opensearch describe-domain --domain-name $OPENSEARCH_NAME --query 'DomainStatus.Processing' --output text)" != "False" ]; do echo "Waiting for OpenSearch domain to become availablen this can up to take 20-30 minutes..."; sleep 30; done && echo "OpenSearch domain is now available\!"
    ```
 
 7. **Retrieve the endpoint of the OpenSearch domain:**
 
    ```shell
-   export OPENSEARCH_ENDPOINT=$(aws opensearch describe-domains --domain-names $OPENSEARCH_DOMAIN_NAME --query "DomainStatusList[0].Endpoint" --output text)
+   export OPENSEARCH_ENDPOINT=$(aws opensearch describe-domains --domain-names $OPENSEARCH_NAME --query "DomainStatusList[0].Endpoints.vpc" --output text)
    ```
 
    This endpoint will be used to connect to your OpenSearch domain.
@@ -687,23 +785,17 @@ To verify that the OpenSearch domain is accessible from within your Amazon EKS c
 
 1. **Deploy a temporary pod to test connectivity:**
 
-   Create a temporary pod using a lightweight image, like `curlimages/curl`, to test the connection to OpenSearch.
+   Create a temporary pod using the `amazonlinux` image in the `camunda` namespace, install `curl`, and test the connection to OpenSearch—all in a single command:
 
-   ```shell
-   kubectl run curl-opensearch --rm -i --tty --image curlimages/curl -- sh
+   ```bash
+   kubectl run amazonlinux-opensearch -n camunda --rm -i --tty --image amazonlinux -- sh -c "curl -XGET https://$OPENSEARCH_ENDPOINT/_cluster/health"
    ```
 
-2. **Within the pod, test connectivity to the OpenSearch domain:**
+2. **Verify the response:**
 
-   Once inside the pod, use the following command to test the connection to the OpenSearch endpoint:
+   If everything is set up correctly, you should receive a response from the OpenSearch service indicating its health status.
 
-   ```shell
-   curl -XGET https://$OPENSEARCH_ENDPOINT
-   ```
-
-   If everything is set up correctly, you should receive a response from the OpenSearch service.
-
-You have successfully set up an OpenSearch domain that is accessible from within your Amazon EKS cluster. Be sure to customize security group rules and CIDR ranges according to your environment's requirements. For further details, refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/index/).
+You have successfully set up an OpenSearch domain that is accessible from within your Amazon EKS cluster. For further details, refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/index/).
 
 ## Prerequisites for Camunda 8 installation
 
@@ -850,36 +942,3 @@ export CERT_MANAGER_IRSA_ARN=$(aws iam list-roles \
 The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/cert-manager-irsa`).
 
 Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
-
-### StorageClass
-
-<!-- TODO: in recent versions, gp3 is the new standard, this part should be updated -->
-
-We recommend using gp3 volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)). It is necessary to create the StorageClass as the default configuration only includes `gp2`. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
-
-The following steps create the `gp3` StorageClass:
-
-1. Create `gp3` StorageClass.
-
-```shell
-cat << EOF | kubectl apply -f -
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ebs-sc
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-provisioner: ebs.csi.aws.com
-parameters:
-  type: gp3
-reclaimPolicy: Retain
-volumeBindingMode: WaitForFirstConsumer
-EOF
-```
-
-2. Modify the `gp2` storage class to mark it as a non-default storage class:
-
-```shell
-kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
-```

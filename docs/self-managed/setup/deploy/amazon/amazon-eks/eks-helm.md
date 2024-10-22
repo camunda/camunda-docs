@@ -631,8 +631,6 @@ export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:8070/auth/realms/camunda-
 
 Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token.
 
-<!-- TODO: this part seems to be broken: {"type":"about:blank","title":"Unauthorized","status":401,"detail":"the provided claims are invalid","instance":"/v2/topology"} -->
-
 ```shell
 export TOKEN=$(curl --location --request POST "${ZEEBE_AUTHORIZATION_SERVER_URL}" \
 --header "Content-Type: application/x-www-form-urlencoded" \
@@ -776,8 +774,6 @@ export ZEEBE_TOKEN_SCOPE='camunda-identity'
 </Tabs>
 
 Executing the following command will result in a successful connection to the Zeebe cluster...
-
-<!-- TODO: this part seems to be broken for insecure as it skips the authentification -->
 
 ```shell
 zbctl status
