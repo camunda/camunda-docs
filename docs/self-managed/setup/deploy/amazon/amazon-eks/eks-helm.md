@@ -7,13 +7,15 @@ description: "Set up the Camunda 8 environment with Helm and an optional DNS set
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This guide offers a comprehensive guide for installing the Camunda 8 Helm chart on your pre-existing AWS Kubernetes EKS cluster. Additionally, it includes instructions for setting up an optional DNS configuration.
+This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing AWS Kubernetes EKS cluster. It also includes instructions for setting up optional DNS configurations and other optional AWS-managed services, such as OpenSearch and PostgreSQL.
+
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
-## Prerequisites
+## Introduction
+
+### Requirements
 
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide.
-
 - [Helm (3.16+)](https://helm.sh/docs/intro/install/)
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
@@ -21,7 +23,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
 
-## Considerations
+### Considerations
 
 While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 

@@ -11,7 +11,7 @@ This guide offers a detailed tutorial for deploying an Amazon Web Services (AWS)
 
 It is recommended to use this guide for building a robust and sustainable infrastructure over time. However, for a quicker trial or proof of concept, using the [eksctl](./eksctl.md) method may suffice.
 
-This is designed to help leverage the power of IaC to streamline and reproduce a Cloud infrastructure setup. By walking through the essentials of setting up an Amazon EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database and an OpenSearch domain (alternative to ElasticSearch), this guide explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
+This guide is designed to help leverage the power of Infrastructure as Code (IaC) to streamline and reproduce a Cloud infrastructure setup. By walking through the essentials of setting up an Amazon EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database and an OpenSearch domain (as an alternative to ElasticSearch), this guide explains how to use Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts. It utilizes AWS-managed services when available, providing these as an optional convenience that you can choose to use or not.
 
 :::tip
 
@@ -19,7 +19,9 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 
 :::
 
-## 0. Prerequisites
+## 0. Introduction
+
+### Requirements
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create any resources within AWS.
 - [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
@@ -55,7 +57,7 @@ Following this tutorial and steps will result in:
 
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
+- A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda platform.
 - A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform.
 - (optional) [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
