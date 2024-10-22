@@ -56,7 +56,16 @@ Following this tutorial and steps will result in:
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
-- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform..
+- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform.
+- (optional) [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
+  - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
+  - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
+
+#### Variants
+
+We support two variants of this architecture: the first, **Standard Installation**, utilizes a username and password connection for the Camunda components (or simply relies on network isolation for certain components). The second variant employs **IRSA** (IAM Roles for Service Accounts) and uses service accounts to perform authentication with IAM policies.
+
+Both can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 
 ## 1. Provisioning the complete infrastructure for Camunda 8 on AWS
 

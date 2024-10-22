@@ -43,12 +43,16 @@ Following this guide results in the following:
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
-- [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
+- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform..
+- [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured and [Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
-- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform..
 
 This basic cluster setup is required to continue with the Helm set up as described in our [AWS Helm guide](./eks-helm.md).
+
+#### Variants
+
+We refer to this architecture as **Standard Installation**, which can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 
 ## 1. Provisioning the complete infrastructure for Camunda 8 on AWS
 
@@ -397,6 +401,182 @@ kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.ku
 ```
 
 After executing these commands, you will have a `gp3` StorageClass set as the default and the `gp2` StorageClass marked as non-default, provided that **gp2** was already present. Ensure to verify the changes again by running the `kubectl get storageclass` command.
+
+### Requirements for a domain deployment
+
+If you plan to deploy Camunda using an external domain associated with an external certificate, you will need to set up some IAM policies to allow both **external-dns** and **cert-manager** to interact with Route 53, which controls the DNS.
+
+By default, the cluster uses **Pod Identity** to manage IAM roles for your applications. This means that service accounts are associated with IAM roles, allowing your pods to securely access AWS resources without hardcoding credentials. For more information on configuring Pod Identity, refer to the [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
+
+Additionally, to [enable OpenID Connect (OIDC) and IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) on your cluster, you can use the following commands:
+
+1. **OIDC Issuer:**
+
+   First, ensure that your EKS cluster is set up with an OIDC provider. The following command should show you the OIDC issuer:
+
+   ```bash
+   aws eks describe-cluster --name $CLUSTER_NAME --query "cluster.identity.oidc.issuer" --output text
+   ```
+
+2. **Create an OIDC provider:**
+
+   Now that OIDC is enabled, you can create an OIDC provider using the following command:
+
+   ```bash
+   eksctl utils associate-iam-oidc-provider --region "$REGION" --cluster "$CLUSTER_NAME" --approve
+   ```
+
+#### Policy for external-dns
+
+The following instructions are based on the [external-dns](https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](./eks-helm.md).
+
+The following relies on the previously mentioned feature around IAM Roles for Service Accounts (IRSA) to simplify the external-dns setup.
+
+The IAM policy document below allows external-dns to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we will call the policy `AllowExternalDNSUpdates`.
+
+You may fine-tune the policy to permit updates only to explicit Hosted Zone IDs.
+
+```shell
+cat <<EOF >./policy-dns.json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["route53:ChangeResourceRecordSets"],
+      "Resource": ["arn:aws:route53:::hostedzone/*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ListHostedZones",
+        "route53:ListResourceRecordSets",
+        "route53:ListTagsForResource"
+      ],
+      "Resource": ["*"]
+    }
+  ]
+}
+EOF
+```
+
+Create AWS IAM policy with the AWS CLI:
+
+```shell
+aws iam create-policy --policy-name "AllowExternalDNSUpdates" --policy-document file://policy-dns.json
+
+# example: arn:aws:iam::XXXXXXXXXXXX:policy/AllowExternalDNSUpdates
+export EXTERNAL_DNS_POLICY_ARN=$(aws iam list-policies \
+ --query 'Policies[?PolicyName==`AllowExternalDNSUpdates`].Arn' \
+ --output text)
+
+echo "EXTERNAL_DNS_POLICY_ARN=$EXTERNAL_DNS_POLICY_ARN"
+```
+
+The `EXTERNAL_DNS_POLICY_ARN` will be used in the next step to create a role mapping between the Kubernetes Service Account and AWS IAM Service Account.
+
+Using `eksctl` allows us to create the required role mapping for external-dns.
+
+```shell
+eksctl create iamserviceaccount \
+  --cluster $CLUSTER_NAME \
+  --name "external-dns" \
+  --namespace "external-dns" \
+  --attach-policy-arn $EXTERNAL_DNS_POLICY_ARN \
+  --role-name="external-dns-irsa" \
+  --role-only \
+  --approve
+```
+
+```shell
+export EXTERNAL_DNS_IRSA_ARN=$(aws iam list-roles \
+  --query "Roles[?RoleName=='external-dns-irsa'].Arn" \
+  --output text)
+
+echo "EXTERNAL_DNS_IRSA_ARN=$EXTERNAL_DNS_IRSA_ARN"
+```
+
+The variable `EXTERNAL_DNS_IRSA_ARN` contains the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/external-dns-irsa`).
+
+Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
+
+#### Policy for cert-manager
+
+The following instructions are taken from the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](./eks-helm.md).
+
+The following relies on the previously mentioned feature around IAM Roles for Service Accounts (IRSA) to simplify the cert-manager setup.
+
+The IAM policy document below allows cert-manager to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we call the policy `AllowCertManagerUpdates`.
+
+If you prefer, you may fine-tune the policy to permit updates only to explicit Hosted Zone IDs.
+
+```shell
+cat <<EOF >./policy-cert.json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "route53:GetChange",
+      "Resource": "arn:aws:route53:::change/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "route53:ChangeResourceRecordSets",
+        "route53:ListResourceRecordSets"
+      ],
+      "Resource": "arn:aws:route53:::hostedzone/*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "route53:ListHostedZonesByName",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+```
+
+Create AWS IAM policy with the AWS CLI:
+
+```shell
+aws iam create-policy --policy-name "AllowCertManagerUpdates" --policy-document file://policy-cert.json
+
+# example: arn:aws:iam::XXXXXXXXXXXX:policy/AllowCertManagerUpdates
+export CERT_MANAGER_POLICY_ARN=$(aws iam list-policies \
+ --query 'Policies[?PolicyName==`AllowCertManagerUpdates`].Arn' \
+ --output text)
+
+echo "CERT_MANAGER_POLICY_ARN=$CERT_MANAGER_POLICY_ARN"
+```
+
+The `CERT_MANAGER_POLICY_ARN` is used in the next step to create a role mapping between the Amazon EKS Service Account and the AWS IAM Service Account.
+
+Using `eksctl` allows us to create the required role mapping for cert-manager.
+
+```shell
+eksctl create iamserviceaccount \
+  --cluster=$CLUSTER_NAME \
+  --name="cert-manager" \
+  --namespace="cert-manager" \
+  --attach-policy-arn=$CERT_MANAGER_POLICY_ARN \
+  --role-name="cert-manager-irsa" \
+  --role-only \
+  --approve
+```
+
+```shell
+export CERT_MANAGER_IRSA_ARN=$(aws iam list-roles \
+  --query "Roles[?RoleName=='cert-manager-irsa'].Arn" \
+  --output text)
+
+echo "CERT_MANAGER_IRSA_ARN=$CERT_MANAGER_IRSA_ARN"
+```
+
+The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/cert-manager-irsa`).
+
+Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
 ## 3. PostgreSQL database
 
@@ -774,7 +954,9 @@ This configuration creates a secure OpenSearch domain with encryption both in tr
 7. **Retrieve the endpoint of the OpenSearch domain:**
 
    ```shell
-   export OPENSEARCH_ENDPOINT=$(aws opensearch describe-domains --domain-names $OPENSEARCH_NAME --query "DomainStatusList[0].Endpoints.vpc" --output text)
+   export OPENSEARCH_HOST=$(aws opensearch describe-domains --domain-names $OPENSEARCH_NAME --query "DomainStatusList[0].Endpoints.vpc" --output text)
+
+   echo "OPENSEARCH_HOST=$OPENSEARCH_HOST"
    ```
 
    This endpoint will be used to connect to your OpenSearch domain.
@@ -788,7 +970,7 @@ To verify that the OpenSearch domain is accessible from within your Amazon EKS c
    Create a temporary pod using the `amazonlinux` image in the `camunda` namespace, install `curl`, and test the connection to OpenSearch—all in a single command:
 
    ```bash
-   kubectl run amazonlinux-opensearch -n camunda --rm -i --tty --image amazonlinux -- sh -c "curl -XGET https://$OPENSEARCH_ENDPOINT/_cluster/health"
+   kubectl run amazonlinux-opensearch -n camunda --rm -i --tty --image amazonlinux -- sh -c "curl -XGET https://$OPENSEARCH_HOST/_cluster/health"
    ```
 
 2. **Verify the response:**
@@ -797,148 +979,6 @@ To verify that the OpenSearch domain is accessible from within your Amazon EKS c
 
 You have successfully set up an OpenSearch domain that is accessible from within your Amazon EKS cluster. For further details, refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/index/).
 
-## Prerequisites for Camunda 8 installation
+## 3. Install Camunda 8 using the Helm chart
 
-### Policy for external-dns
-
-The following instructions are based on the [external-dns](https://github.com/kubernetes-sigs/external-dns/blob/master/docs/tutorials/aws.md) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](./eks-helm.md).
-
-The following relies on the previously mentioned feature around IAM Roles for Service Accounts (IRSA) to simplify the external-dns setup.
-
-The IAM policy document below allows external-dns to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we will call the policy `AllowExternalDNSUpdates`.
-
-You may fine-tune the policy to permit updates only to explicit Hosted Zone IDs.
-
-```shell
-cat <<EOF >./policy-dns.json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": ["route53:ChangeResourceRecordSets"],
-      "Resource": ["arn:aws:route53:::hostedzone/*"]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "route53:ListHostedZones",
-        "route53:ListResourceRecordSets",
-        "route53:ListTagsForResource"
-      ],
-      "Resource": ["*"]
-    }
-  ]
-}
-EOF
-```
-
-Create AWS IAM policy with the AWS CLI:
-
-```shell
-aws iam create-policy --policy-name "AllowExternalDNSUpdates" --policy-document file://policy-dns.json
-
-# example: arn:aws:iam::XXXXXXXXXXXX:policy/AllowExternalDNSUpdates
-export EXTERNAL_DNS_POLICY_ARN=$(aws iam list-policies \
- --query 'Policies[?PolicyName==`AllowExternalDNSUpdates`].Arn' \
- --output text)
-```
-
-The `EXTERNAL_DNS_POLICY_ARN` will be used in the next step to create a role mapping between the Kubernetes Service Account and AWS IAM Service Account.
-
-Using `eksctl` allows us to create the required role mapping for external-dns.
-
-```shell
-eksctl create iamserviceaccount \
-  --cluster $CLUSTER_NAME \
-  --name "external-dns" \
-  --namespace "external-dns" \
-  --attach-policy-arn $EXTERNAL_DNS_POLICY_ARN \
-  --role-name="external-dns-irsa" \
-  --role-only \
-  --approve
-```
-
-```shell
-export EXTERNAL_DNS_IRSA_ARN=$(aws iam list-roles \
-  --query "Roles[?RoleName=='external-dns-irsa'].Arn" \
-  --output text)
-```
-
-The variable `EXTERNAL_DNS_IRSA_ARN` contains the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/external-dns-irsa`).
-
-Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
-
-### Policy for cert-manager
-
-The following instructions are taken from the [cert-manager](https://cert-manager.io/docs/configuration/acme/dns01/route53/) guide concerning the AWS setup and only covers the required IAM setup. The Helm chart will be installed in the [follow-up guide](./eks-helm.md).
-
-The following relies on the previously mentioned feature around IAM Roles for Service Accounts (IRSA) to simplify the cert-manager setup.
-
-The IAM policy document below allows cert-manager to update Route53 resource record sets and hosted zones. You need to create this policy in AWS IAM first. In our example, we call the policy `AllowCertManagerUpdates`.
-
-If you prefer, you may fine-tune the policy to permit updates only to explicit Hosted Zone IDs.
-
-```shell
-cat <<EOF >./policy-cert.json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": "route53:GetChange",
-      "Resource": "arn:aws:route53:::change/*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "route53:ChangeResourceRecordSets",
-        "route53:ListResourceRecordSets"
-      ],
-      "Resource": "arn:aws:route53:::hostedzone/*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": "route53:ListHostedZonesByName",
-      "Resource": "*"
-    }
-  ]
-}
-EOF
-```
-
-Create AWS IAM policy with the AWS CLI:
-
-```shell
-aws iam create-policy --policy-name "AllowCertManagerUpdates" --policy-document file://policy-cert.json
-
-# example: arn:aws:iam::XXXXXXXXXXXX:policy/AllowCertManagerUpdates
-export CERT_MANAGER_POLICY_ARN=$(aws iam list-policies \
- --query 'Policies[?PolicyName==`AllowCertManagerUpdates`].Arn' \
- --output text)
-```
-
-The `CERT_MANAGER_POLICY_ARN` is used in the next step to create a role mapping between the Amazon EKS Service Account and the AWS IAM Service Account.
-
-Using `eksctl` allows us to create the required role mapping for cert-manager.
-
-```shell
-eksctl create iamserviceaccount \
-  --cluster=$CLUSTER_NAME \
-  --name="cert-manager" \
-  --namespace="cert-manager" \
-  --attach-policy-arn=$CERT_MANAGER_POLICY_ARN \
-  --role-name="cert-manager-irsa" \
-  --role-only \
-  --approve
-```
-
-```shell
-export CERT_MANAGER_IRSA_ARN=$(aws iam list-roles \
-  --query "Roles[?RoleName=='cert-manager-irsa'].Arn" \
-  --output text)
-```
-
-The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like this: `arn:aws:iam::XXXXXXXXXXXX:role/cert-manager-irsa`).
-
-Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
+Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on Kubernetes](./eks-helm.md) for detailed instructions on deploying the platform to your Kubernetes cluster.

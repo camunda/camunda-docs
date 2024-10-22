@@ -7,7 +7,7 @@ description: "Learn how to configure IAM roles for service accounts (IRSA) withi
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<!-- TODO: also reference usage of SM C8 Check for IRSA -->
+<!-- TODO: future work reference usage of SM C8 Check for IRSA -->
 
 ## Instance Metadata Service (IMDS)
 
