@@ -2,31 +2,26 @@
 id: camunda-exporter
 title: "Camunda exporter"
 sidebar_label: "Camunda Exporter"
-description: "The common camunda exporter exporting zeebe records to harmonized web-apps indices ."
+description: "The Camunda exporter exporting aggregated data to harmonized web-apps indices."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The Camunda Exporter replaces the old Elasticsearch and Opensearch exporters. Previously, these exporters mainly
-exported raw records from Zeebe streams into several indices. Camunda webapps (e.g., Operate, Tasklist) then imported
-and transformed these records into useful forms. The Camunda Exporter aims to write records directly into
-Elasticsearch/Opensearch in the form needed by the webapps, eliminating the need for additional importing or
-transformation. This increases process instance throughput and reduces the latency of changes appearing
-in Operate and Tasklist webapps by cutting off the importer from the data pipeline.
+The Camunda Exporter is designed to export Zeebe records directly into Elasticsearch/Opensearch in the form needed by
+Camunda webapps (e.g., Operate, Tasklist). Previously, the Elasticsearch and Opensearch exporters mainly exported raw
+records from Zeebe streams into several indices, which were then imported and transformed by the webapps. The Camunda
+Exporter eliminates the need for additional importing or transformation, increasing process instance throughput and
+reducing the latency of changes appearing in Operate and Tasklist webapps by cutting off the importer from the data
+pipeline.
 
 :::note
 The indexes are created as required, and will not be created twice if they already exist. However, once disabled, they
-will not be deleted (that is up to the administrator.) Similarly, data is never deleted by the exporter, and must be
-deleted by the administrator when it is safe to do so.
+will not be deleted (that is up to the administrator.)
 A [retention](#retention) policy can be configured to automatically delete data after a certain number of days.
 :::
 
 ## Configuration
-
-:::note
-As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPath`.
-:::
 
 The exporter can be enabled by configuring it with the `classpath` in the broker settings.
 
@@ -39,6 +34,10 @@ exporters:
     args:
     # Refer to the table below for the available args options
 ```
+
+:::note
+As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPath`.
+:::
 
 The exporter can be configured by providing `args`. The table below explains all the different
 options, and the default values for these options:
@@ -94,8 +93,8 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 | Option                | Description                                                                                                                                                                                 | Default |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | prefix                | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                     |         |
-| numberOfShards        | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                   | 3       |
-| numberOfReplicas      | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for each new record index created.           | 0       |
+| numberOfShards        | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each created index.                              | 3       |
+| numberOfReplicas      | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for created index.                           | 0       |
 | variableSizeThreshold | Defines a threshold for variable size. Variables exceeding this threshold are split into two properties: `FULL_VALUE` (full content, not indexed) and `VALUE` (truncated content, indexed). | 8191    |
 | shardsByIndexName     | A map where the key is the index name and the value is the number of shards, allowing you to override the default `numberOfShards` setting for specific indices.                            |         |
 | replicasByIndexName   | A map where the key is the index name and the value is the number of replicas, allowing you to override the default `numberOfReplicas` setting for specific indices.                        |         |
@@ -115,7 +114,9 @@ size) can be controlled by configuration.
 
 With the default configuration, the exporter will aggregate records and flush them to Elasticsearch/Opensearch:
 
-1. When it has aggregated 1000 records. 2. Five seconds have elapsed since the last flush (regardless of how many records were aggregated).
+1. When it has aggregated 1000 records.
+2. Five seconds have elapsed since the last flush (regardless of how many
+   records were aggregated).
 
 </TabItem>
 
