@@ -94,7 +94,8 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 <Tabs groupId="db" defaultValue="elasticsearch" values={
 [
 {label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'OpenSearch', value: 'opensearch' }
+{label: 'OpenSearch', value: 'opensearch' },
+{label: 'Camunda Exporter', value: 'camundaExporter' }
 ]
 }>
 
@@ -114,6 +115,20 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 - ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_ID=my-plugin
 - ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
 - ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
+```
+
+</TabItem>
+
+<TabItem value='camundaExporter'>
+
+:::note
+Notice that you might have named your camunda exporter differently in the broker config. Here, we assumed you gave it the name `camundaExporter`.Please adjust the environment variables accordingly.
+:::
+
+```yaml
+- ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_INTERCEPTORPLUGINS_0_ID=my-plugin
+- ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
 ```
 
 </TabItem>
