@@ -72,6 +72,10 @@ versions of Elasticsearch and/or Opensearch are supported in a Camunda 8 Self-Ma
 | password       | Password used to authenticate                                                                                                 |                             |
 | security       | Refer to [Security](#security) for security configuration                                                                     |                             |
 
+:::note
+If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/auth/credentials/DefaultCredentialsProvider.html) is used for authentication. For more details on configuring credentials, refer to the [AWS SDK documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html#credentials-default).
+:::
+
 </TabItem>
 
 <TabItem value="security">
