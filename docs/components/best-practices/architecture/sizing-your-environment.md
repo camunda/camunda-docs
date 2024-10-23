@@ -85,7 +85,7 @@ The payload size also affects disk space requirements, as described in the next 
 
 ### Disk space
 
-The workflow engine itself will store data along every process instance, especially to keep the current state persistent. This is unavoidable. In case there are human tasks, data is also sent to Tasklist and kept there, until tasks are completed.
+The workflow engine itself will store data along every process instance, especially to keep the current state persistent. This is unavoidable. In case there are user tasks, data is also sent to Tasklist and kept there, until tasks are completed.
 
 Furthermore, data is also sent from Operate and Optimize, which store data in Elasticsearch. These tools keep historical audit data for the configured retention times. The total amount of disk space can be reduced by using **data retention settings**. We typically delete data in Operate after 30 to 90 days, but keep it in Optimize for a longer period of time to allow more analysis. A good rule of thumb is something between 6 and 18 months.
 
