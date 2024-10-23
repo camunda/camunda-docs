@@ -438,7 +438,9 @@ Depending on the installation path you have chosen, you can find the reference f
 You can gain access to the Amazon EKS cluster via the `AWS CLI` using the following command:
 
 ```shell
-aws eks --region "$AWS_REGION" update-kubeconfig --name <clusterName> --alias <clusterName>
+export CLUSTER_NAME="$(terraform console <<<local.eks_cluster_name | jq -r)"
+
+aws eks --region "$AWS_REGION" update-kubeconfig --name "$CLUSTER_NAME" --alias "$CLUSTER_NAME"
 ```
 
 After updating the kubeconfig, you can verify your connection to the cluster with kubectl:
