@@ -152,6 +152,8 @@ exporters:
   # An example configuration for the camunda exporter:
   #
   # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_..."
+  # To convert a YAML formatted variable to an environment variable, start with the top-level property and separate every nested property with an underscore (_).
+  # For example, the property "zeebe.broker.exporters.camundaExporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
   #
   camundaExporter:
     className: io.camunda.exporter.CamundaExporter
