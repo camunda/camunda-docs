@@ -36,7 +36,7 @@ message ActivateJobsRequest {
   // if the requestTimeout = 0, a default timeout is used.
   // if the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated.
   int64 requestTimeout = 6;
-  // a list of tenant IDs for which to activate jobs
+  // a list of IDs of tenants for which to activate jobs
   repeated string tenantIds = 7;
 }
 ```
@@ -160,8 +160,6 @@ message CancelProcessInstanceRequest {
   // the process instance key (as, for example, obtained from
   // CreateProcessInstanceResponse)
   int64 processInstanceKey = 1;
-  // a reference key chosen by the user and will be part of all records resulting from this operation
-  optional uint64 operationReference = 2;
 }
 ```
 
@@ -254,10 +252,8 @@ message CreateProcessInstanceRequest {
   // will start at the start event. If non-empty the process instance will apply start
   // instructions after it has been created
   repeated ProcessInstanceCreationStartInstruction startInstructions = 5;
-  // the tenant ID of the process definition
+  // the tenant id of the process definition
   string tenantId = 6;
-  // a reference key chosen by the user and will be part of all records resulting from this operation
-  optional uint64 operationReference = 7;
 }
 
 message ProcessInstanceCreationStartInstruction {
@@ -279,7 +275,7 @@ message ProcessInstanceCreationStartInstruction {
 ```protobuf
 message CreateProcessInstanceResponse {
   // the key of the process definition which was used to create the process instance
-  int64 processKey = 1;
+  int64 processDefinitionKey = 1;
   // the BPMN process ID of the process definition which was used to create the process
   // instance
   string bpmnProcessId = 2;
@@ -288,7 +284,7 @@ message CreateProcessInstanceResponse {
   // the unique identifier of the created process instance; to be used wherever a request
   // needs a process instance key (e.g. CancelProcessInstanceRequest)
   int64 processInstanceKey = 4;
-  // the tenant ID of the created process instance
+  // the tenant identifier of the created process instance
   string tenantId = 5;
 }
 ```
@@ -309,21 +305,24 @@ Start instructions have the same [limitations as process instance modification](
 ### Input: `CreateProcessInstanceWithResultRequest`
 
 ```protobuf
-message CreateProcessInstanceRequest {
-   CreateProcessInstanceRequest request = 1;
-   // timeout (in ms). the request will be closed if the process is not completed before
-   // the requestTimeout.
-   // if requestTimeout = 0, uses the generic requestTimeout configured in the gateway.
-   int64 requestTimeout = 2;
+message CreateProcessInstanceWithResultRequest {
+  CreateProcessInstanceRequest request = 1;
+  // timeout (in ms). the request will be closed if the process is not completed
+  // before the requestTimeout.
+  // if requestTimeout = 0, uses the generic requestTimeout configured in the gateway.
+  int64 requestTimeout = 2;
+  // list of names of variables to be included in `CreateProcessInstanceWithResultResponse.variables`
+  // if empty, all visible variables in the root scope will be returned.
+  repeated string fetchVariables = 3;
 }
 ```
 
 ### Output: `CreateProcessInstanceWithResultResponse`
 
 ```protobuf
-message CreateProcessInstanceResponse {
+message CreateProcessInstanceWithResultResponse {
   // the key of the process definition which was used to create the process instance
-  int64 processKey = 1;
+  int64 processDefinitionKey = 1;
   // the BPMN process ID of the process definition which was used to create the process
   // instance
   string bpmnProcessId = 2;
@@ -332,9 +331,10 @@ message CreateProcessInstanceResponse {
   // the unique identifier of the created process instance; to be used wherever a request
   // needs a process instance key (e.g. CancelProcessInstanceRequest)
   int64 processInstanceKey = 4;
-  // consisting of all visible variables to the root scope
+  // JSON document
+  // consists of visible variables in the root scope
   string variables = 5;
-  // the tenant ID of the process definition
+  // the tenant identifier of the process definition
   string tenantId = 6;
 }
 ```
@@ -400,7 +400,7 @@ message EvaluateDecisionRequest {
   // [{ "a": 1, "b": 2 }] would not be a valid argument, as the root of the
   // JSON document is an array and not an object.
   string variables = 3;
-  // the tenant ID of the decision
+  // the tenant identifier of the decision
   string tenantId = 4;
 }
 ```
@@ -435,7 +435,7 @@ message EvaluateDecisionResponse {
   string failedDecisionId = 9;
   // an optional message describing why the decision which was evaluated failed
   string failureMessage = 10;
-  // the tenant ID of the evaluated decision
+  // the tenant identifier of the evaluated decision
   string tenantId = 11;
   // the unique key identifying this decision evaluation
   int64 decisionInstanceKey = 12;
@@ -461,7 +461,7 @@ message EvaluatedDecision {
   repeated MatchedDecisionRule matchedRules = 7;
   // the decision inputs that were evaluated within this decision evaluation
   repeated EvaluatedDecisionInput evaluatedInputs = 8;
-  // the tenant ID of the evaluated decision
+  // the tenant identifier of the evaluated decision
   string tenantId = 9;
 }
 
@@ -524,12 +524,12 @@ Note that this is an atomic call, i.e. either all resources are deployed, or non
 message DeployResourceRequest {
   // list of resources to deploy
   repeated Resource resources = 1;
-  // the tenant ID of the resources to deploy
+  // the tenant id of the resources to deploy
   string tenantId = 2;
 }
 
 message Resource {
-  // the resource name, e.g. myProcess.bpmn, myDecision.dmn or myForm.form
+  // the resource name, e.g. myProcess.bpmn or myDecision.dmn
   string name = 1;
   // the file content as a UTF8-encoded string
   bytes content = 2;
@@ -544,7 +544,7 @@ message DeployResourceResponse {
   int64 key = 1;
   // a list of deployed resources, e.g. processes
   repeated Deployment deployments = 2;
-  // the tenant ID of the deployed resources
+  // the tenant id of the deployed resources
   string tenantId = 3;
 }
 
@@ -573,7 +573,7 @@ message ProcessMetadata {
   // the resource name (see: ProcessRequestObject.name) from which this process was
   // parsed
   string resourceName = 4;
-  // the tenant ID of the deployed process
+  // the tenant id of the deployed process
   string tenantId = 5;
 }
 
@@ -594,7 +594,7 @@ message DecisionMetadata {
   // the assigned key of the decision requirements graph that this decision is
   // part of
   int64 decisionRequirementsKey = 6;
-  // the tenant ID of the deployed decision
+  // the tenant id of the deployed decision
   string tenantId = 7;
 }
 
@@ -612,7 +612,7 @@ message DecisionRequirementsMetadata {
   // the resource name (see: Resource.name) from which this decision
   // requirements was parsed
   string resourceName = 5;
-  // the tenant ID of the deployed decision requirements
+  // the tenant id of the deployed decision requirements
   string tenantId = 6;
 }
 
@@ -626,7 +626,7 @@ message FormMetadata {
   int64 formKey = 3;
   // the resource name
   string resourceName = 4;
-  // the tenant ID of the deployed form
+  // the tenant id of the deployed form
   string tenantId = 5;
 }
 ```
@@ -725,8 +725,6 @@ message ModifyProcessInstanceRequest {
   repeated ActivateInstruction activateInstructions = 2;
   // instructions describing which elements should be terminated
   repeated TerminateInstruction terminateInstructions = 3;
-  // a reference key chosen by the user and will be part of all records resulting from this operation
-  optional uint64 operationReference = 4;
 
   message ActivateInstruction {
     // the ID of the element that should be activated
@@ -807,8 +805,7 @@ message MigrateProcessInstanceRequest {
   int64 processInstanceKey = 1;
   // the migration plan that defines target process and element mappings
   MigrationPlan migrationPlan = 2;
-  // a reference key chosen by the user and will be part of all records resulting from this operation
-  optional uint64 operationReference = 3;
+
   message MigrationPlan {
     // the key of process definition to migrate the process instance to
     int64 targetProcessDefinitionKey = 1;
@@ -886,7 +883,7 @@ message PublishMessageRequest {
   // the message variables as a JSON document; to be valid, the root of the document must be an
   // object, e.g. { "a": "foo" }. [ "foo" ] would not be valid.
   string variables = 5;
-  // the tenant ID of the message
+  // the tenant id of the message
   string tenantId = 6;
 }
 ```
@@ -897,7 +894,7 @@ message PublishMessageRequest {
 message PublishMessageResponse {
   // the unique ID of the message that was published
   int64 key = 1;
-  // the tenant ID of the message
+  // the tenant id of the message
   string tenantId = 2;
 }
 ```
@@ -935,8 +932,6 @@ problem, followed by this call.
 message ResolveIncidentRequest {
   // the unique ID of the incident to resolve
   int64 incidentKey = 1;
-  // a reference key chosen by the user and will be part of all records resulting from this operation
-  optional uint64 operationReference = 2;
 }
 ```
 
@@ -979,8 +974,6 @@ message SetVariablesRequest {
   // be unchanged, and scope 2 will now be `{ "bar" : 1, "foo" 5 }`. if local was false, however,
   // then scope 1 would be `{ "foo": 5 }`, and scope 2 would be `{ "bar" : 1 }`.
   bool local = 3;
-  // a reference key chosen by the user and will be part of all records resulting from this operation
-  optional uint64 operationReference = 4;
 }
 ```
 
@@ -1103,12 +1096,14 @@ message Partition {
   enum PartitionBrokerRole {
     LEADER = 0;
     FOLLOWER = 1;
+    INACTIVE = 2;
   }
 
   // Describes the current health of the partition
   enum PartitionBrokerHealth {
     HEALTHY = 0;
     UNHEALTHY = 1;
+    DEAD = 2;
   }
 
   // the unique ID of this partition
@@ -1137,8 +1132,6 @@ message UpdateJobRetriesRequest {
   int64 jobKey = 1;
   // the new amount of retries for the job; must be positive
   int32 retries = 2;
-  // a reference key chosen by the user and will be part of all records resulting from this operation
-  optional uint64 operationReference = 3;
 }
 ```
 
@@ -1177,8 +1170,6 @@ message UpdateJobTimeoutRequest {
   int64 jobKey = 1;
   // the duration of the new timeout in ms, starting from the current moment
   int64 timeout = 2;
-  // a reference key chosen by the user and will be part of all records resulting from this operation
-  optional uint64 operationReference = 3;
 }
 ```
 
@@ -1210,11 +1201,9 @@ Returned if:
 
 ```protobuf
 message DeleteResourceRequest {
-  // The key of the resource that should be deleted. This can be the key
-  // of a process definition, the key of a decision requirements definition or the key of a form definition.
+  // The key of the resource that should be deleted. This can either be the key
+  // of a process definition, the key of a decision requirements definition or the key of a form.
   int64 resourceKey = 1;
-  // a reference key chosen by the user and will be part of all records resulting from this operation
-  optional uint64 operationReference = 2;
 }
 ```
 
