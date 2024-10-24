@@ -18,6 +18,7 @@ RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 # ----------------------
 
 # Move alpha features to components
+RewriteRule ^docs/next/reference/alpha-features/?$ /docs/next/components/early-access/alpha/alpha-features/$1 [R=301,L]
 RewriteRule ^docs/reference/alpha-features/?$ /docs/components/early-access/alpha/alpha-features/$1 [R=301,L]
 
 # Remove the Getting Started partials as full pages
