@@ -337,9 +337,9 @@ If you choose not to use this module, you'll need to either provide a managed El
 
 The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](./self-managed/setup/guides/using-existing-opensearch/).
 
-:::note Available since Camunda 8.4
+:::note Migration to OpenSearch is not supported
 
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch Service](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+Please note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from previous Camunda versions or Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
 
 :::
 
@@ -360,6 +360,8 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/opensearch.tf
 ```
+
+<!-- Closing comment for compilation-->
 
   </TabItem>
   
@@ -534,8 +536,11 @@ This should display the secret with the base64 encoded values.
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/setup-postgres-create-db.yml
 ```
 
-  </TabItem>
-  <TabItem value="irsa" label="IRSA">
+  <!-- Closing comment for compilation2-->
+
+</TabItem>
+
+<TabItem value="irsa" label="IRSA">
 
 2. **Create a secret that references the environment variables**:
 
@@ -559,16 +564,18 @@ This should display the secret with the base64 encoded values.
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/setup-postgres-create-db.yml
 ```
 
+<!-- Closing comment for compilation-->
+
   </TabItem>
 </Tabs>
 
-3. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
+4. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
 ```bash
 kubectl apply -f setup-postgres-create-db.yml --namespace camunda
 ```
 
-4. **Verify the job's completion**: Once the job is created, you can monitor its progress using:
+5. **Verify the job's completion**: Once the job is created, you can monitor its progress using:
 
 ```bash
 kubectl get job/create-setup-user-db --namespace camunda --watch
@@ -576,13 +583,13 @@ kubectl get job/create-setup-user-db --namespace camunda --watch
 
 Once the job shows as `Completed`, the users and databases will have been successfully created.
 
-5. **Check logs for confirmation**: You can view the logs of the job to confirm that the users were created and privileges were granted successfully:
+6. **Check logs for confirmation**: You can view the logs of the job to confirm that the users were created and privileges were granted successfully:
 
 ```bash
 kubectl logs job/create-setup-user-db --namespace camunda
 ```
 
-6. **Cleanup the resources:**
+7. **Cleanup the resources:**
 
 ```bash
 kubectl delete job create-setup-user-db --namespace camunda
@@ -640,13 +647,13 @@ This should display the secret with the base64 encoded values.
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/setup-opensearch-fgac.yml
 ```
 
-3. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the OpenSearch domain credentials.
+4. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the OpenSearch domain credentials.
 
 ```bash
 kubectl apply -f setup-opensearch-fgac.yml --namespace camunda
 ```
 
-4. **Verify the job's completion**: Once the job is created, you can monitor its progress using:
+5. **Verify the job's completion**: Once the job is created, you can monitor its progress using:
 
 ```bash
 kubectl get job/setup-opensearch-fgac --namespace camunda --watch
@@ -654,13 +661,13 @@ kubectl get job/setup-opensearch-fgac --namespace camunda --watch
 
 Once the job shows as `Completed`, the OpenSearch domain is configured correctly for fine grained access control.
 
-5. **Check logs for confirmation**: You can view the logs of the job to confirm that the privileges were granted successfully:
+6. **Check logs for confirmation**: You can view the logs of the job to confirm that the privileges were granted successfully:
 
 ```bash
 kubectl logs job/setup-opensearch-fgac --namespace camunda
 ```
 
-6. **Cleanup the resources:**
+7. **Cleanup the resources:**
 
 ```bash
 kubectl delete job setup-opensearch-fgac --namespace camunda
@@ -669,7 +676,7 @@ kubectl delete secret setup-os-secret --namespace camunda
 
 By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## 3. Install Camunda 8 using the Helm chart

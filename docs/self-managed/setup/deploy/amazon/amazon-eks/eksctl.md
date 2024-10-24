@@ -357,13 +357,11 @@ kubectl create namespace camunda
 
 ### Check Existing StorageClasses
 
-To see the available **StorageClasses** in your Kubernetes cluster, use the following command:
+To see the available **StorageClasses** in your Kubernetes cluster, including which one is set as default, use the following command:
 
 ```bash
 kubectl describe storageclass
 ```
-
-This command will display a list of defined StorageClasses, including which one is set as default.
 
 #### StorageClass
 
@@ -393,6 +391,9 @@ volumeBindingMode: WaitForFirstConsumer
 EOF
 ```
 
+Please note that the `ebs-sc` StorageClass relies on the `ebs.csi.aws.com` provisioner, which is provided by the **aws-ebs-csi-driver** addon. This addon was installed during the cluster creation.
+For more information, refer to the [official AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
+
 2. **Modify the `gp2` StorageClass to mark it as a non-default StorageClass:**
 
 ```shell
@@ -409,17 +410,28 @@ By default, the cluster uses **Pod Identity** to manage IAM roles for your appli
 
 Additionally, to [enable OpenID Connect (OIDC) and IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) on your cluster, you can use the following commands:
 
-1. **OIDC Issuer:**
+1. **Determine the OIDC issuer ID for your cluster:**
 
    First, ensure that your EKS cluster is set up with an OIDC provider. The following command should show you the OIDC issuer:
 
    ```bash
-   aws eks describe-cluster --name $CLUSTER_NAME --query "cluster.identity.oidc.issuer" --output text
+   export oidc_id=$(aws eks describe-cluster --name "$CLUSTER_NAME" --query "cluster.identity.oidc.issuer" --output text)
+   echo "$oidc_id"
    ```
 
-2. **Create an OIDC provider:**
+   Determine whether an IAM OIDC provider with your cluster’s issuer ID is already in your account.
 
-   Now that OIDC is enabled, you can create an OIDC provider using the following command:
+   ```bash
+   aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
+   ```
+
+   If output is returned, then you already have an IAM OIDC provider for your cluster and you can skip the next step.
+
+   If no output is returned, then you must create an IAM OIDC provider for your cluster.
+
+2. **Create an IAM OIDC identity provider:**
+
+   You can create an IAM OIDC identity provider for your cluster with the following command:
 
    ```bash
    eksctl utils associate-iam-oidc-provider --region "$REGION" --cluster "$CLUSTER_NAME" --approve
@@ -592,9 +604,9 @@ If you choose not to use this service, you'll need to either provide a managed P
 
 The following components use the PostgreSQL database:
 
-- keycloak
-- identity
-- webmodeler
+- Keycloak
+- Identity
+- WebM odeler
 
 ### Configuration
 
@@ -821,10 +833,10 @@ Creating an OpenSearch domain can be accomplished through various methods, such 
 
 The resulting OpenSearch domain is intended for use with the Camunda platform, the following components utilize OpenSearch:
 
-- Zeebe
 - Operate
-- Tasklist
 - Optimize
+- Tasklist
+- Zeebe
 
 :::info Optional service
 
@@ -835,9 +847,9 @@ If you choose not to use this service, you'll need to either provide a managed O
 
 :::
 
-:::note Available since Camunda 8.4
+:::note Migration to OpenSearch is not supported
 
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch Service](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+Please note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from previous Camunda versions or Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
 
 :::
 
@@ -942,7 +954,7 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
 - **Access Policies**: The default access policy allows all actions (`es:*`) on resources within the domain for any AWS account (`"Principal": { "AWS": "*" }`). This is scoped to the OpenSearch domain resources using the `arn:aws:es:$REGION:*:domain/$OPENSEARCH_NAME/*` resource ARN.
 - **VPC Options**: The domain is deployed within the specified VPC, restricted to the provided subnets (`SubnetIds=${SUBNET_IDS}`) and associated security group (`SecurityGroupIds=${GROUP_ID_OPENSEARCH}`).
 
-This configuration creates a secure OpenSearch domain with encryption both in transit (between nodes) and at rest, zonal fault tolerance, and sufficient storage performance using `gp3` volumes. The access is restricted to resources in the VPC of the EKS cluster and is governed by the specified security group.
+  This configuration creates a secure OpenSearch domain with encryption both in transit (between nodes) and at rest, zonal fault tolerance, and sufficient storage performance using `gp3` volumes. The access is restricted to resources in the VPC of the EKS cluster and is governed by the specified security group.
 
 6. **Wait for the OpenSearch domain to be active:**
 
