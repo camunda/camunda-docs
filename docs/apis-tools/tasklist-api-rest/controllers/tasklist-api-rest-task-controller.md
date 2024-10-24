@@ -168,7 +168,7 @@ curl -X 'PATCH' \
 
 ### Unassign task
 
-Unassign a task with the provided id. This returns the task.
+Unassign a task with the provided ID. This returns the task.
 
 #### URL
 

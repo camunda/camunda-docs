@@ -31,7 +31,7 @@ Zeebe's state. As a result, it is not possible to create new process instances f
 to create one will result in a `NOT_FOUND` exception. Deleting a process definition also deletes historical data.
 
 Zeebe will **never** reuse a process version. When deleting a process definition, it keeps track of the version number.
-Deploying a new process with the same id will increment the version as usual.
+Deploying a new process with the same ID will increment the version as usual.
 
 ### Deleting the latest version
 
@@ -53,8 +53,8 @@ new `latest` instead.
 
 ### Call activities
 
-A [call activity](/components/modeler/bpmn/call-activities/call-activities.md) references a process by id. It's
-possible that all process definitions for this process id are deleted. In this case, Zeebe creates an [incident](/components/concepts/incidents.md) on the
+A [call activity](/components/modeler/bpmn/call-activities/call-activities.md) references a process by ID. It's
+possible that all process definitions for this process ID are deleted. In this case, Zeebe creates an [incident](/components/concepts/incidents.md) on the
 call activity, informing you that the process cannot be not found.
 
 ### Limitations
@@ -74,5 +74,5 @@ a `NOT_FOUND` exception. Deleting a DRG also deletes historical data.
 ### Business rule tasks
 
 A [business rule task](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md) references a decision
-by id. It's possible that all versions of this decision are deleted. When this happens, an incident is created on the
-business rule task with the message that no decision with the given decision id is found.
+by ID. It's possible that all versions of this decision are deleted. When this happens, an incident is created on the
+business rule task with the message that no decision with the given decision ID is found.

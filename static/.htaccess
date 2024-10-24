@@ -119,7 +119,6 @@ RewriteRule ^docs/8.5/components/modeler/web-modeler/launch-cloud-modeler/?$ /do
 RewriteRule ^docs/8.4/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.4/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.3/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 RewriteRule ^docs/8.2/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.2/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
-RewriteRule ^docs/1.3/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/1.3/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 
 ## optimize splitting of upgrade guides
 RewriteRule ^optimize/self-managed/optimize-deployment/migration-update/2.1-to-2.2/?$ /optimize/self-managed/optimize-deployment/migration-update/camunda-7/2.1-to-2.2/ [R=301,L]
@@ -506,7 +505,6 @@ RewriteRule ^optimize/components/userguide/processes/ /optimize/components/userg
 RewriteRule ^docs/apis-clients/working-with-apis-clients/?$ /docs/apis-tools/working-with-apis-tools/ [R=301,L]
 RewriteRule ^docs/apis-clients(.*)$ /docs/apis-tools$1 [R=301,L]
 RewriteRule ^optimize/apis-clients(.*)$ /optimize/apis-tools$1 [R=301,L]
-RewriteRule ^docs/1.3/apis-clients(.*)$ /docs/1.3/apis-tools$1 [R=301,L]
 
 # Identity Authorizations
 RewriteRule ^docs/next/self-managed/identity/user-guide/groups/creating-authorizations-for-a-group/(.*)$ /docs/next/self-managed/identity/user-guide/authorizations/managing-resource-authorizations/ [R=301,L]
@@ -566,8 +564,6 @@ RewriteRule ^docs/next/self-managed/platform-deployment/kubernetes/(.*)$ /docs/n
 RewriteRule ^docs/guides/implementing-connectors/(.*)$ /docs/guides/configuring-out-of-the-box-connectors/$1 [R=301,L]
 RewriteRule ^docs/guides/implementing-connectors$ /docs/guides/configuring-out-of-the-box-connectors/ [R=301,L]
 
-RewriteRule ^docs/1.3/self-managed/overview/(.*)$ /docs/1.3/self-managed/about-self-managed/$1 [R=301,L]
-RewriteRule ^docs/1.3/self-managed/overview$ /docs/1.3/self-managed/about-self-managed/ [R=301,L]
 RewriteRule ^docs/self-managed/overview/(.*)$ /docs/self-managed/about-self-managed/$1 [R=301,L]
 RewriteRule ^docs/self-managed/overview$ /docs/self-managed/about-self-managed/ [R=301,L]
 
@@ -587,8 +583,6 @@ RewriteRule ^docs/self-managed/operate-deployment/authentication/(.*)$ /docs/sel
 RewriteRule ^docs/self-managed/identity/troubleshooting/?$ /docs/self-managed/identity/troubleshooting/troubleshoot-identity/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/getting-started/?$ /docs/self-managed/identity/getting-started/install-identity/ [R=301,L]
 
-RewriteRule ^docs/1.3/components/overview/(.*)$ /docs/1.3/components/components-overview/$1 [R=301,L]
-RewriteRule ^docs/1.3/components/overview$ /docs/1.3/components/components-overview/ [R=301,L]
 RewriteRule ^docs/components/overview/(.*)$ /docs/components/components-overview/$1 [R=301,L]
 RewriteRule ^docs/components/overview$ /docs/components/components-overview/ [R=301,L]
 
@@ -612,8 +606,6 @@ RewriteRule ^docs/components/console/troubleshooting$ /docs/components/console/c
 RewriteRule ^docs/components/best-practices/overview/(.*)$ /docs/components/best-practices/best-practices-overview/$1 [R=301,L]
 RewriteRule ^docs/components/best-practices/overview$ /docs/components/best-practices/best-practices-overview [R=301,L]
 
-RewriteRule ^docs/1.3/apis-clients/overview/(.*)$ /docs/1.3/apis-tools/working-with-apis-tools/$1 [R=301,L]
-RewriteRule ^docs/1.3/apis-clients/overview$ /docs/1.3/apis-tools/working-with-apis-tools [R=301,L]
 RewriteRule ^docs/apis-clients/overview/(.*)$ /docs/apis-tools/working-with-apis-tools/$1 [R=301,L]
 RewriteRule ^docs/apis-clients/overview$ /docs/apis-tools/working-with-apis-tools [R=301,L]
 RewriteRule ^docs/apis-clients/tasklist-api/tutorial/(.*)$ /docs/apis-clients/tasklist-api/tasklist-api-tutorial/$1 [R=301,L]
@@ -859,17 +851,14 @@ RewriteRule ^docs/self-managed/optimize-deployment/(.*)$ /optimize/self-managed/
 RewriteRule ^docs/next/apis-clients/optimize-api/(.*)$ /optimize/next/apis-clients/optimize-api/$1 [R=301,L]
 RewriteRule ^docs/apis-clients/optimize-api/(.*)$ /optimize/apis-clients/optimize-api/$1 [R=301,L]
 
-## optimize extraction for version 3.7.0:
-RewriteRule ^docs/1.3/components/optimize/what-is-optimize(\/?)$ /optimize/3.7.0/components/what-is-optimize/ [R=301,L]
-RewriteRule ^docs/1.3/components/optimize/userguide/(.*)$ /optimize/3.7.0/components/userguide/$1 [R=301,L]
-RewriteRule ^docs/1.3/self-managed/optimize-deployment/(.*)$ /optimize/3.7.0/self-managed/optimize-deployment/$1 [R=301,L]
-
 ## Archived versions. Note that the URL is adjusted to staging in the publish-stage workflow.
 RewriteRule ^docs/0.25/(.*)$ https://unsupported.docs.camunda.io/0.25/docs/$1 [R=301,L]
 RewriteRule ^docs/0.26/(.*)$ https://unsupported.docs.camunda.io/0.26/docs/$1 [R=301,L]
 RewriteRule ^docs/1.0/(.*)$ https://unsupported.docs.camunda.io/1.0/docs/$1 [R=301,L]
 RewriteRule ^docs/1.1/(.*)$ https://unsupported.docs.camunda.io/1.1/docs/$1 [R=301,L]
 RewriteRule ^docs/1.2/(.*)$ https://unsupported.docs.camunda.io/1.2/docs/$1 [R=301,L]
+RewriteRule ^docs/1.3/(.*)$ https://unsupported.docs.camunda.io/1.3/docs/$1 [R=301,L]
+RewriteRule ^optimize/3.7.0/(.*)$ https://unsupported.docs.camunda.io/1.3/optimize/$1 [R=301,L]
 RewriteRule ^docs/8.0/(.*)$ https://unsupported.docs.camunda.io/8.0/docs/$1 [R=301,L]
 RewriteRule ^optimize/3.8.0/(.*)$ https://unsupported.docs.camunda.io/8.0/optimize/$1 [R=301,L]
 RewriteRule ^docs/8.1/(.*)$ https://unsupported.docs.camunda.io/8.1/docs/$1 [R=301,L]
