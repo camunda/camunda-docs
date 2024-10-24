@@ -14,7 +14,7 @@ You can configure the Connector runtime environment in the following ways:
 
 ## Connecting to Zeebe
 
-In general, the Connector Runtime will respect all properties known to [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe).
+In general, the Connector Runtime will respect all properties known to the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 
 <Tabs groupId="configuration" defaultValue="saas" queryString values={
 [
