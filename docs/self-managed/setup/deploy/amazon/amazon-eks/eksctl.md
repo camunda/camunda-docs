@@ -795,7 +795,7 @@ This should display the secret with the base64 encoded values.
 3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
 
 ```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/setup-postgres-create-db.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/setup-postgres-create-db.yml
 ```
 
 3. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.

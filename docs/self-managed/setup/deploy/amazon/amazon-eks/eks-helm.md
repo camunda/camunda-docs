@@ -55,7 +55,7 @@ To streamline the execution of the subsequent commands, it is recommended to exp
 The following are the required environment variables with some example values:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/chart-env.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/chart-env.sh
 ```
 
 <Tabs groupId="env">
@@ -67,7 +67,7 @@ When using Standard authentication (network based or username and password), spe
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/check-env-variables.sh
 ```
 
   </TabItem>
@@ -79,7 +79,7 @@ When using IRSA authentication, specific environment variables need to be set wi
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/procedure/check-env-variables.sh
 ```
 
   </TabItem>
@@ -249,7 +249,7 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/helm-values/values-domain.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/helm-values/values-domain.yml
 ```
 
 :::warning Exposure of the Zeebe Gateway
@@ -270,7 +270,7 @@ Before installing the Helm chart, you need to create Kubernetes secrets to store
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -278,7 +278,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
   <TabItem value="without-domain-std" label="Standard without Domain">
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/helm-values/values-no-domain.yml
 ```
 
 ##### Reference the credentials in secrets
@@ -288,7 +288,7 @@ Before installing the Helm chart, you need to create Kubernetes secrets to store
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -298,7 +298,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-domain.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/helm-values/values-domain.yml
 ```
 
 :::warning Exposure of the Zeebe Gateway
@@ -317,7 +317,7 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
   <TabItem value="without-domain-irsa" label="IRSA without Domain">
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6-irsa/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/helm-values/values-no-domain.yml
 ```
 
   </TabItem>
@@ -422,7 +422,7 @@ Starting from **Camunda 8.6**, the Helm chart deprecated the automatic generatio
 You will need to store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/generate-passwords.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/generate-passwords.sh
 ```
 
 Next, use these environment variables in the `kubectl` command to create the secret.
@@ -433,7 +433,7 @@ Note:
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by WebModeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/create-identity-secret.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/create-identity-secret.sh
 ```
 
 #### 3. Install Camunda 8 using Helm
@@ -441,7 +441,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Here's the command:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/install-chart.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/install-chart.sh
 ```
 
 This command:
