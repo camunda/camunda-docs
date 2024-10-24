@@ -1,6 +1,6 @@
 ---
 id: eks-eksctl
-title: "Deploy an EKS cluster with eksctl (fast-try)"
+title: "Deploy an EKS cluster with eksctl (quickstart)"
 description: "Deploy an Amazon Kubernetes cluster (EKS) with eksctl with step-by-step guidance."
 ---
 
@@ -52,7 +52,7 @@ This basic cluster setup is required to continue with the Helm set up as describ
 
 #### Variants
 
-We refer to this architecture as **Standard Installation**, which can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
+We refer to this architecture as **Standard Installation** ([more informations](./terraform-setup.md#variants)), which can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 
 ## 1. Provisioning the complete infrastructure for Camunda 8 on AWS
 
@@ -71,11 +71,10 @@ Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, and outpu
 
 :::caution Ownership of the created resources
 
-A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters created. It is recommended to create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html), ensuring that the resources are managed and owned by that user.
+A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters. It is recommended to create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) to ensure that the resources are managed and owned by that specific user.
+This ensures that the user maintains admin access to Kubernetes and associated resources unless those resources are explicitly deleted.
 
 [Create access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables to use with the AWS CLI and `eksctl`
-
-This means that the user will always have admin access on Kubernetes unless you delete it.
 
 :::
 
