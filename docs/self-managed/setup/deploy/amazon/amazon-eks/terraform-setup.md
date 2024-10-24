@@ -90,7 +90,6 @@ If you are an advanced user, you may want to handle this part differently and us
 
 The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. Before you can use the provider, you must authenticate it using your AWS credentials.
 You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods.
-Here are a few options to authenticate:
 
 - **(Recommended)** Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). If you have configured your AWS CLI, Terraform will automatically detect and use those credentials.
 
@@ -367,7 +366,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
   
   <TabItem value="irsa" label="IRSA">
 
-In addition to standard authentication that uses anonynous user and rely on the network for the access control, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
+In addition to standard authentication, which uses anonymous users and relies on the network for access control, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
 
 **Note**: Using IRSA is optional. If you prefer, you can continue using password-based access to your OpenSearch domain.
 
@@ -536,7 +535,7 @@ This should display the secret with the base64 encoded values.
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/setup-postgres-create-db.yml
 ```
 
-  <!-- Closing comment for compilation2-->
+<!-- Closing comment for compilation2-->
 
 </TabItem>
 

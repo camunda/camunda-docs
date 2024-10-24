@@ -12,7 +12,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 
 ## Prerequisites
 
-- A Kubernetes cluster; see the [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide.
+- A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
 
 - [Helm (3.16+)](https://helm.sh/docs/intro/install/)
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
