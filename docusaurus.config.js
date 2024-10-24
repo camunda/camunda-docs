@@ -170,7 +170,7 @@ module.exports = {
   ],
   themeConfig: {
     colorMode: {
-      defaultMode: "dark",
+      defaultMode: "light",
     },
     docs: {
       sidebar: {
