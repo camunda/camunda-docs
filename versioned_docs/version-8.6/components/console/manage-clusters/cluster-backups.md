@@ -1,6 +1,6 @@
 ---
 id: create-backups
-title: Create backup
+title: Backups
 description: "If your organization works within Camunda's Enterprise plan, you can create cluster backups."
 ---
 
