@@ -17,6 +17,9 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-color-primary-light: #d94a02;
   --ifm-color-primary-lighter: #e34d02;
   --ifm-color-primary-lightest: #fc5806;
+  --ifm-breadcrumb-item-background-active: none;
+  --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
+  --ifm-menu-color: var(--ifm-color-emphasis-800);
 }
 
 .docusaurus-highlight-code-line {
@@ -25,6 +28,9 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
+
+/* Import IBM Plex Sans font */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 body {
   font-family:
@@ -171,10 +177,25 @@ svg.implemented:hover [stroke="#333"] {
   text-align: center;
 }
 
+/* Badge padding and styles */
 .badge {
-  margin-left: 5px;
+  margin-left: 10px;
 }
-
+.badge:nth-of-type(1) {
+  margin-left: 0;
+  margin-bottom: 1.5rem;
+}
+h3 .badge:nth-of-type(1) {
+  margin-bottom: 0rem;
+}
+.theme-doc-version-badge {
+  margin-left: 0;
+  margin-bottom: 0.5rem !important;
+}
+.openapi__method-endpoint .badge,
+.openapi__method-endpoint .badge:nth-of-type(1) {
+  margin-bottom: 0;
+}
 .badge--beginner {
   background-color: #ff8b00;
   color: #ffffff;
@@ -203,17 +224,16 @@ svg.implemented:hover [stroke="#333"] {
 .badge--long {
   background-color: #0075ff;
   color: #ffffff;
+  vertical-align: middle;
 }
 
 .badge--platform {
   background-color: #fc5d0d;
   color: #ffffff;
-  margin-bottom: 1em;
 }
 .badge--cloud {
   background-color: #26d07c;
   color: #000000;
-  margin-bottom: 1em;
 }
 
 .badge--beta {
@@ -370,17 +390,19 @@ span.callout + p::after {
   width: 100%;
 }
 
+/* Add space and thin border to images, remove drop shadow */
 .theme-doc-markdown img {
   border-style: solid;
-  border-color: lightgray;
+  border-color: #dedede;
   border-width: 1px;
-  box-shadow: 4px 4px 4px 1px lightgray;
   height: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 20px;
 }
 
 .theme-doc-markdown table img {
   border: none;
-  box-shadow: none;
 }
 
 /* Unsupported versions in the versions selector */
@@ -460,7 +482,6 @@ span.callout + p::after {
 .openapi-tabs__code-container-inner .openapi-tabs__code-item.active span {
   color: var(--ifm-color-primary);
 }
-
 .openapi-explorer__playground-editor pre {
   font-size: var(--openapi-explorer-font-size-code);
 }
@@ -476,7 +497,7 @@ span.callout + p::after {
   color: transparent;
 }
 
-/* Revamping docs homepage */
+/* Homepage hero image */
 
 .hero--primary {
   background-image: url("/static/img/hero-bg.png");
@@ -490,4 +511,157 @@ a.table-of-contents__link.toc-highlight > span.badge {
 /* hide tabs when needed */
 .tabs-hidden {
   display: none;
+}
+
+/* Page titles */
+.markdown h1:first-child {
+  font-weight: 600;
+  font-size: 2.5rem;
+}
+h1 {
+  padding-top: 10px;
+  font-family: "IBM Plex Sans", "sans-serif";
+}
+h1.openapi__heading {
+  margin-bottom: calc(
+    var(--ifm-h1-vertical-rhythm-bottom) * var(--ifm-leading)
+  ) !important;
+}
+/* Main page headings */
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+  font-family: "IBM Plex Sans", sans-serif;
+  border-bottom: 1px solid #dedede;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+/* API reference modifications for new H2 style */
+h2.openapi__method-endpoint-path {
+  border-bottom: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+h2.openapi-tabs__response-header {
+  border-bottom: none;
+}
+h2#request {
+  border-bottom: none;
+}
+.anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#request {
+  border-bottom: none;
+  padding-top: 10px;
+  font-size: 28px;
+  padding-bottom: 0;
+}
+.anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#responses {
+  border-bottom: none;
+  padding-top: 10px;
+  font-size: 28px;
+  padding-bottom: 0;
+}
+.openapi-tabs__response-header-section {
+  padding-top: 1rem !important;
+}
+.openapi-tabs__mime-container {
+  padding-top: 0;
+}
+.openapi-tabs__response-list-container.tabs {
+  border-bottom: 0;
+}
+.openapi-tabs__schema-list-container.tabs {
+  border-bottom: none;
+}
+/* Second level page heading modifications for home page */
+.hero__title {
+  border-bottom: 0;
+  padding-top: 0px;
+  margin-bottom: 20px;
+  padding-bottom: 0px;
+}
+/* Second level page heading */
+h3 {
+  margin-bottom: 0.8rem;
+  margin-top: 2.2rem;
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+/* Second level page heading modifications for home page cards */
+h3.featuresTitle_src-pages-styles-module,
+h3.featuresTitle_lAgg {
+  font-size: 1.6rem;
+  margin-top: 0;
+}
+h3.openapi-markdown__details-summary-header-params,
+h3.openapi-markdown__details-summary-header-body {
+  margin-top: 0;
+}
+h3 .badge--long {
+  margin-bottom: 0;
+  font-size: 12px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+/* Third level page heading */
+h3 .badge--long:nth-of-type(1) {
+  margin-left: 5px;
+}
+h4 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+/* API reference modifications for new H3 style */
+h4.openapi-security__summary-header {
+  margin-top: 0;
+}
+
+/* Add spacing around tables */
+.markdown table {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+table {
+  padding-top: 15px;
+}
+/* Add spacing around list code blocks */
+li .theme-code-block {
+  margin-top: 20px;
+}
+/* Add spacing around lists */
+ul ul,
+ol ol,
+ol ul,
+ul ol {
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
+}
+/* Reduce weight of menu items */
+.menu__link {
+  font-weight: var(--ifm-font-weight-normal);
+}
+/* Highlight tabs */
+.tabs {
+  border-bottom: 1px solid #dedede;
+}
+.tabs__item--active {
+  background-color: #f7f7f7;
+}
+.tabs__item:hover {
+  background-color: #f7f7f7;
+}
+.openapi-tabs__response-list-container {
+  border-bottom: none;
+}
+.openapi-tabs__schema-list-container {
+  border-bottom: none;
+}
+
+/* lighter menu font  */
+.menu__list-item-collapsible .menu__link:hover,
+.menu__list-item-collapsible .menu__link--active,
+.menu__link--active:not(.menu__link--sublist) {
+  font-weight: 600;
 }

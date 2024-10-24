@@ -386,7 +386,7 @@ This section contains all cluster related configurations, to setup a zeebe clust
 
 | Field                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Example Value                              |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| nodeId               | Specifies the unique id of this broker node in a cluster. The id should be between 0 and number of nodes in the cluster (exclusive). This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_NODEID`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | 0                                          |
+| nodeId               | Specifies the unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive). This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_NODEID`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | 0                                          |
 | partitionsCount      | Controls the number of partitions, which should exist in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 1                                          |
 | replicationFactor    | Controls the replication factor, which defines the count of replicas per partition. The replication factor cannot be greater than the number of nodes in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR`.                                                                                                                                                                                                                                                                                                                                                                                                                                              | 1                                          |
 | clusterSize          | Specifies the zeebe cluster size. This value is used to determine which broker is responsible for which partition. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERSIZE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                                          |
@@ -471,6 +471,26 @@ membership:
   suspectProbes: 3
   failureTimeout: 10s
   syncInterval: 10s
+```
+
+### zeebe.broker.cluster.configManager.gossip
+
+Configure the parameters used to propagate the dynamic cluster configuration across brokers and gateways.
+
+| Field              | Description                                                                                                                                                                                                    | ExampleValue |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| syncDelay          | Sets the interval between two synchronization requests to other members of the cluster. This setting can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCDELAY | 10s          |
+| syncRequestTimeout | Sets the timeout for the synchronization requests. This setting can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCREQUESTTIMEOUT                             | 2s           |
+| gossipFanout       | Sets the number of cluster members the configuration is gossiped to. This setting can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CONFIGMANAGER_GOSSIP_GOSSIPFANOUT                 | 2            |
+
+#### YAML snippet
+
+```yaml
+configManager:
+  gossip:
+    syncDelay: 10s
+    syncRequestTimeout: 2s
+    gossipFanout: 2
 ```
 
 ### zeebe.broker.cluster.messageCompression
@@ -820,7 +840,7 @@ processing: maxCommandsInBatch = 100
 
 ### Experimental configuration
 
-See the experimental section of the [broker.yaml.template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L733).
+See the experimental section of the [broker.yaml.template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L883).
 
 Be aware that all configuration's which are part of the experimental section are subject to change and can be dropped at any time.
 

@@ -21,9 +21,9 @@ This guide requires you to have previously completed or reviewed the steps taken
 ## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create resources within AWS.
-- [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
-- [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [Terraform (1.7.x)](https://developer.hashicorp.com/terraform/downloads)
+- [Helm (3.16+)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
+- [Kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
 
 ## Considerations
 
@@ -81,7 +81,7 @@ In addition to namespaces for Camunda installations, create the namespaces for f
 
 The dot is required to export those variables to your shell and not a spawned subshell.
 
-```shell
+```shell reference
 https://github.com/camunda/c8-multi-region/blob/stable/8.5/aws/dual-region/scripts/export_environment_prerequisites.sh
 ```
 
@@ -115,9 +115,9 @@ Do not store sensitive information (credentials) in your Terraform files.
 
 This file is using [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allows abstracting resources into reusable components.
 
-The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module) is publicly available. It's advisable to review this module before usage.
+The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module/tree/2.5.0/modules/eks-cluster) is publicly available. It's advisable to review this module before usage.
 
-There are various other input options to customize the cluster setup further. See the [module documentation](https://github.com/camunda/camunda-tf-eks-module) for additional details.
+There are various other input options to customize the cluster setup further. See the [module documentation](https://github.com/camunda/camunda-tf-eks-module/tree/2.5.0/modules/eks-cluster) for additional details.
 
 This contains the declaration of the two clusters. One of them has an explicit provider declaration, as otherwise everything is deployed to the default AWS provider, which is limited to a single region.
 
