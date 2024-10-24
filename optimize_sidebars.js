@@ -1068,6 +1068,7 @@ module.exports = {
             ),
             docsLink(
               "Connector templates",
+              "components/connectors/custom-built-connectors/connector-template-generator",
               "components/connectors/custom-built-connectors/connector-templates/"
             ),
 
