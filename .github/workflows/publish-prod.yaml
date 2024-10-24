@@ -24,6 +24,8 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
+          DOCS_SITE_URL: https://stage.unsupported.docs.camunda.io
+          DOCS_SITE_BASE_URL: /1.3/
       - name: Get Github Actions IP
         id: ip
         uses: haythem/public-ip@v1.3
