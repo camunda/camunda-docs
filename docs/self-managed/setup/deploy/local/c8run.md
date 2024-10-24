@@ -130,7 +130,7 @@ curl --request POST 'http://localhost:8080/v1/process-definitions/search'  \
 <TabItem value='v2'>
 
 :::note
-Some endpoints in the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) are considered [alpha features](/reference/alpha-features.md), and are still in development.
+Some endpoints in the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) are considered [alpha features](/components/early-access/alpha/alpha-features.md), and are still in development.
 :::
 
 1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
