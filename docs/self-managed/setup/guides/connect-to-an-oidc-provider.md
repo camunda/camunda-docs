@@ -103,7 +103,7 @@ global:
 </TabItem>
 </Tabs>
 
-:::warning
+:::note
 Once set, you cannot update your initial claim name and value using environment or Helm values. You must change these values directly in the database.
 :::
 
