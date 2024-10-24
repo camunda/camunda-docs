@@ -8,11 +8,11 @@ module.exports = {
   tagline:
     "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed.",
   // url: "https://camunda-cloud.github.io",
-  url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
+  url: process.env.DOCS_SITE_URL || "https://unsupported.docs.camunda.io",
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
   customFields: {
-    canonicalUrlRoot: "https://docs.camunda.io",
+    canonicalUrlRoot: "https://unsupported.docs.camunda.io",
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -41,23 +41,14 @@ module.exports = {
         path: "optimize",
         routeBasePath: "optimize",
         beforeDefaultRemarkPlugins: [versionedLinks],
-        sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+        lastVersion: "3.7.0",
+        includeCurrentVersion: false,
         versions: {
-          "3.14.0": {
-            label: "8.6 / 3.14.0",
-          },
-          "3.13.0": {
-            label: "8.5 / 3.13.0",
-            banner: "none",
-          },
-          "3.12.0": {
-            label: "8.4 / 3.12.0",
-            banner: "none",
-          },
-          "3.11.0": {
-            label: "8.3 / 3.11.0",
-            banner: "none",
+          "3.7.0": {
+            label: "3.7.0",
+            path: "/",
+            noIndex: true,
+            banner: "unmaintained",
           },
         },
       },
@@ -177,10 +168,10 @@ module.exports = {
     announcementBar: {
       id: "camunda8",
       content:
-        '📣 <b><a target="_blank" rel="noopener noreferrer" href="https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=banner">Sign up</a></b> for a free account to start orchestrating your business processes today.',
-      backgroundColor: "#14D890",
-      textColor: "#000",
-      isCloseable: true,
+        '🚨 This version of Camunda 8 is no longer actively maintained. For up-to-date documentation, see <b><a target="_blank" rel="noopener noreferrer" href="https://docs.camunda.io">the latest version</a></b>.',
+      backgroundColor: "#FFC600",
+      textColor: "#434343",
+      isCloseable: false,
     },
 
     prism: {
@@ -194,23 +185,8 @@ module.exports = {
       },
       items: [
         {
-          type: "docsVersionDropdown",
+          type: "docsVersion",
           position: "left",
-          dropdownItemsAfter: [
-            {
-              type: "html",
-              value: '<hr class="dropdown-separator">',
-            },
-            {
-              type: "html",
-              className: "dropdown-unsupported-versions",
-              value: "<b>Unsupported versions</b>",
-            },
-            ...unsupportedVersions.map((version) => ({
-              label: version.label,
-              href: `https://unsupported.docs.camunda.io/${version.urlSuffix}/`,
-            })),
-          ],
         },
         {
           type: "doc",
@@ -260,12 +236,8 @@ module.exports = {
               to: "meta",
             },
             {
-              label: "Camunda Help Center",
-              to: "docs/reference/camunda-help-center",
-            },
-            {
               label: "Try free",
-              href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
+              href: "https://signup.camunda.com/accounts?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
               label: "Contact",
@@ -277,7 +249,7 @@ module.exports = {
           title: "Community",
           items: [
             {
-              html: `<a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src= "/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
+              html: `<a href="https://twitter.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/1.3/img/twitter.svg" alt="Camunda on Twitter" class="footer-logos" /></a> <a href="https://github.com/camunda" target="_blank" rel="noreferrer noopener"><img src="/1.3/img/github-mark-white.svg" alt="Camunda on GitHub" class="footer-logos" /></a>`,
             },
             {
               label: "Forum",
@@ -341,12 +313,6 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Camunda`,
     },
-    algolia: {
-      // These keys are for our new standalone algolia instance!
-      apiKey: "d701d38126d1a43866047d3ab97680d1",
-      appId: "6KYF3VMCXZ",
-      indexName: "camunda",
-    },
     languageTabs: [
       {
         highlight: "bash",
@@ -408,48 +374,25 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+          lastVersion: "1.3",
+          includeCurrentVersion: false,
           beforeDefaultRemarkPlugins: [versionedLinks],
-          // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
-            8.5: {
-              banner: "none",
-            },
-            8.4: {
-              banner: "none",
-            },
-            8.3: {
-              banner: "none",
+            1.3: {
+              label: "1.3",
+              path: "/",
+              noIndex: true,
+              banner: "unmaintained",
             },
           },
-          docLayoutComponent: "@theme/DocPage",
-          docItemComponent: "@theme/ApiItem",
         },
         blog: false,
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },
         sitemap: {
-          changefreq: "weekly",
-          priority: 0.5,
-          ignorePatterns: [
-            "/docs/**/assets/**",
-            "/docs/**/tags/**",
-            "/docs/next/**",
-            "/docs/1.3/**",
-            "/docs/8.2/**",
-            "/docs/8.3/**",
-            "/docs/8.4/**",
-            "/docs/8.5/**",
-            "/optimize/3.7.0/**",
-            "/optimize/3.10.0/**",
-            "/optimize/3.11.0/**",
-            "/optimize/3.12.0/**",
-            "/optimize/3.13.0/**",
-            "/optimize/next/**",
-          ],
+          // exclude everything from sitemap
+          ignorePatterns: ["**"],
         },
       },
     ],

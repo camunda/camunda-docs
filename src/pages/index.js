@@ -38,7 +38,7 @@ const features = [
   {
     title: "Best practice",
     imageUrl: "img/home-bp.png",
-    url: "/docs/components/best-practices/best-practices-overview/",
+    url: "/docs/components/best-practices/",
     description:
       "Level up your BPMN and DMN skills, including insights from consulting and the community.",
   },
@@ -134,45 +134,6 @@ function Home() {
             </div>
           </section>
         )}
-        <div className={clsx("hero hero--secondary", styles.heroBanner)}>
-          <div className="container">
-            <h2 className="hero__title">What's new</h2>
-            <p className="hero__subtitle">
-              Check out some of our latest features
-            </p>
-            <div className={styles.buttons}>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case",
-                  styles.getStarted
-                )}
-                to={useBaseUrl(
-                  "docs/apis-tools/spring-zeebe-sdk/getting-started/"
-                )}
-              >
-                Spring Zeebe SDK
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/reference/release-notes/")}
-              >
-                Release notes
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/apis-tools/node-js-sdk/")}
-              >
-                Node.js SDK
-              </Link>
-            </div>
-          </div>
-        </div>
       </main>
     </Layout>
   );
