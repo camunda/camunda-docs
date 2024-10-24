@@ -44,7 +44,7 @@ LOG_FILE_PATH=/full/path/to/log/file.log
 
 ### Configuring log levels
 
-To control the verbosity of the logs, adjust the environment variables `LOG_LEVEL_CLIENT` (client) and `LOG_LEVEL_WEBAPP` (Node.js server).
+To control the verbosity of the logs, adjust the environment variables `LOG_LEVEL_CLIENT` (browser client) and `LOG_LEVEL_WEBAPP` (Node.js server).
 
 ```properties
 LOG_LEVEL_CLIENT=DEBUG
