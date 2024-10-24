@@ -15,7 +15,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 
 ### Requirements
 
-- A Kubernetes cluster; see the [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide.
+- A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
 - [Helm (3.16+)](https://helm.sh/docs/intro/install/)
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
@@ -62,7 +62,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 
   <TabItem value="standard" label="Standard" default>
   
-When using Basic authentication (username and password), some following environment variables must be set and contain valid values.
+When using Standard authentication (network based or username and password), specific environment variables need to be set with valid values.
 
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
@@ -74,7 +74,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 
   <TabItem value="irsa" label="IRSA" default>
   
-When using IRSA authentication, some following environment variables must be set and contain valid values.
+When using IRSA authentication, specific environment variables need to be set with valid values.
 
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
@@ -237,7 +237,7 @@ Without a domain, you will need to use [kubectl port-forward to access the Camun
 For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [guides](/self-managed/setup/guides/guides.md).
 
 Depending of your installation path, you may use different settings.
-For having easy and reproductable installations, we will use yaml files to configure the chart.
+For easy and reproducible installations, we will use yaml files to configure the chart.
 
 #### 1. Create the `values.yml` File
 
@@ -413,9 +413,13 @@ envsubst < values.yml > generated-values.yml
 cat generated-values.yml
 ```
 
-Starting from **Camunda 8.6**, you need to store various passwords in a Kubernetes secret, which will be consumed by the Helm chart. Below is an example of how to set up the required secret:
+:::info Camunda Helm chart no longer automatically generates passwords
 
-You can use `openssl` to generate random secrets and store them in environment variables:
+Starting from **Camunda 8.6**, the Helm chart deprecated the automatic generation of secrets, and this feature has been fully removed in **Camunda 8.7**.
+
+:::
+
+You will need to store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
 
 ```bash reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/generate-passwords.sh
@@ -426,7 +430,7 @@ Next, use these environment variables in the `kubectl` command to create the sec
 Note:
 
 - The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, please provide those values.
-- The `smtp-password` should be replaced with the appropriate external value.
+- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by WebModeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.6/procedure/create-identity-secret.sh
@@ -577,11 +581,11 @@ Below is an extract of the necessary instructions:
 This requires to port-forward the Identity and Keycloak to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward services/camunda-identity 8069:80 --namespace camunda
-kubectl port-forward services/camunda-keycloak 8070:80 --namespace camunda
+kubectl port-forward services/camunda-identity 8080:80 --namespace camunda
+kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
-1. Open Identity in your browser at `http://localhost:8069`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
 3. Click on "Add Application," select `M2M` as the type, and assign a name like "test."
 4. Select the newly created application, go to "Access to APIs" and click on the "Assign permissions" then select "Zeebe API" with "write" permission.
@@ -624,7 +628,7 @@ Export the following environment variables:
 
 ```shell
 export ZEEBE_ADDRESS=localhost:8080
-export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:8070/auth/realms/camunda-platform/protocol/openid-connect/token
+export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
   </TabItem>
@@ -766,7 +770,7 @@ Export the following environment variables:
 
 ```shell
 export ZEEBE_ADDRESS=localhost:26500
-export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:8070/auth/realms/camunda-platform/protocol/openid-connect/token
+export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
 export ZEEBE_TOKEN_SCOPE='camunda-identity'
 ```
@@ -821,15 +825,15 @@ If you want to access the other services and their UI, you can port-forward thos
 
 ```shell
 Identity:
-> kubectl port-forward svc/camunda-identity 8069:80 --namespace camunda
+> kubectl port-forward svc/camunda-identity 8080:80 --namespace camunda
 Operate:
-> kubectl port-forward svc/camunda-operate  8071:80 --namespace camunda
+> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
 Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8072:80 --namespace camunda
+> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
 Optimize:
-> kubectl port-forward svc/camunda-optimize 8073:80 --namespace camunda
+> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
 Connectors:
-> kubectl port-forward svc/camunda-connectors 8078:8080 --namespace camunda
+> kubectl port-forward svc/camunda-connectors 8086:8080 --namespace camunda
 ```
 
 :::note
@@ -837,7 +841,7 @@ Keycloak must be port-forwarded at all times as it is required to authenticate.
 :::
 
 ```shell
-kubectl port-forward services/camunda-keycloak 8070:80 --namespace camunda
+kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
   </TabItem>
@@ -875,7 +879,7 @@ The following values are required for the OAuth authentication:
 Cluster endpoint=http://localhost:26500
 Client ID='client-id' # retrieve the value from the identity page of your created m2m application
 Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
-OAuth Token URL=http://localhost:8070/auth/realms/camunda-platform/protocol/openid-connect/token
+OAuth Token URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 Audience=zeebe-api # the default for Camunda 8 Self-Managed
 ```
 
@@ -883,15 +887,15 @@ If you want to access the other services and their UI, you can port-forward thos
 
 ```shell
 Identity:
-> kubectl port-forward svc/camunda-identity 8069:80 --namespace camunda
+> kubectl port-forward svc/camunda-identity 8080:80 --namespace camunda
 Operate:
-> kubectl port-forward svc/camunda-operate  8071:80 --namespace camunda
+> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
 Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8072:80 --namespace camunda
+> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
 Optimize:
-> kubectl port-forward svc/camunda-optimize 8073:80 --namespace camunda
+> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
 Connectors:
-> kubectl port-forward svc/camunda-connectors 8078:8080 --namespace camunda
+> kubectl port-forward svc/camunda-connectors 8086:8080 --namespace camunda
 ```
 
 :::note
@@ -899,7 +903,7 @@ Keycloak must be port-forwarded at all times as it is required to authenticate.
 :::
 
 ```shell
-kubectl port-forward services/camunda-keycloak 8070:80 --namespace camunda
+kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
   </TabItem>
