@@ -91,7 +91,7 @@ First, port-forward each of the components. Use a separate terminal for each com
 
 ## Connecting to the workflow engine
 
-To interact with the Camunda workflow engine via Zeebe Gateway using [zbctl](/apis-tools/community-clients/cli-client/cli-get-started.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe gateway as follows:
+To interact with the Camunda workflow engine via the Zeebe Gateway using [zbctl](/apis-tools/community-clients/cli-client/cli-get-started.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe Gateway as follows:
 
 ```sh
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
@@ -169,7 +169,7 @@ Make sure all pods are running with the `kubectl get pods --namespace ingress-ng
 
 ## Ingress configuration in Camunda 8 Helm charts
 
-In this document, we will use the combined Ingress configuration. However, there is one quirk with this particular setup to be aware of - Zeebe Gateway uses gRPC, which uses HTTP/2. This means the Zeebe Gateway has to use its own subdomain `zeebe.camunda.local` instead of context path (such as `/zeebe`).
+In this document, we will use the combined Ingress configuration. However, there is one quirk with this particular setup to be aware of - the Zeebe Gateway uses gRPC, which uses HTTP/2. This means the Zeebe Gateway has to use its own subdomain `zeebe.camunda.local` instead of context path (such as `/zeebe`).
 
 Add the following values to `camunda-platform-core-kind-values.yaml` to allow Camunda 8 components to be discovered by the Ingress controller.
 

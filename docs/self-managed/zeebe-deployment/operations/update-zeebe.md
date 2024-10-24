@@ -19,7 +19,7 @@ Refer to the [update guide](/self-managed/operational-guides/update-guide/introd
 
 A **rolling update** ensures the Zeebe cluster stays available by updating brokers and gateways one by one instead of all at once.
 
-There are three parties to a rolling update: the Zeebe brokers, Zeebe gateways, and the clients.
+There are three parts to a rolling update: the Zeebe Broker, Zeebe Gateway, and clients.
 
 We recommend updating brokers first, then gateways, and finally clients. This ensures clients don't use new APIs that are not yet supported by the brokers or gateways.
 
@@ -49,7 +49,7 @@ The snapshot period is five minutes by default but is [configurable via `snapsho
 If your Zeebe deployment is managed by our [Helm charts](/self-managed/setup/install.md), the rolling update procedure is already automated.
 
 :::note
-Zeebe brokers are managed by a [`StatefulSet`](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies). Zeebe gateways are managed by a []`Deployment`](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment).
+Zeebe brokers are managed by a [`StatefulSet`](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies). Zeebe Gateways are managed by a [`Deployment`](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment).
 :::
 
 #### Updating brokers

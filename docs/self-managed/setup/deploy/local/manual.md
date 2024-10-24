@@ -70,7 +70,7 @@ For **Windows users**, take the following steps:
 4. Navigate to the `bin` folder.
 5. Start the broker by double-clicking on the `broker.bat` file.
 
-Once the Zeebe broker has started, it should produce the following output:
+Once the Zeebe Broker has started, it should produce the following output:
 
 ```log
 23:39:13.246 [] [main] INFO  io.camunda.zeebe.broker.system - Scheduler configuration: Threads{cpu-bound: 2, io-bound: 2}.

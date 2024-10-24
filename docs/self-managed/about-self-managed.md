@@ -38,4 +38,4 @@ In this configuration, Camunda 8 Self-Managed can be accessed as follows:
 - Identity, Operate, Optimize, Tasklist, Modeler: `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler]`
   - Web Modeler also exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used by the application itself and should not be accessed by users directly.
 - Keycloak authentication: `https://camunda.example.com/auth`
-- Zeebe gateway: `grpc://zeebe.camunda.example.com`
+- Zeebe Gateway: `grpc://zeebe.camunda.example.com`

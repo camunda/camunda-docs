@@ -4,7 +4,7 @@ title: "Disk space"
 description: "Understand how Zeebe uses the local disk for storage of its persistent data, and configuring Zeebe settings for the disk usage watermarks."
 ---
 
-Zeebe uses the local disk for storage of its persistent data. Therefore, if the Zeebe broker runs out of disk space, the system is in an invalid state as the broker cannot update its state.
+Zeebe uses the local disk for storage of its persistent data. Therefore, if the Zeebe Broker runs out of disk space, the system is in an invalid state as the broker cannot update its state.
 
 To prevent the system from reaching an unrecoverable state, Zeebe expects a minimum size of free disk space available. If this limit is violated, the broker rejects new requests to allow the operations team to free more disk space, and allows the broker to continue to update its state.
 

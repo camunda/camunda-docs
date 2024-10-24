@@ -16,7 +16,7 @@ A broker is an instance of a Zeebe installation which executes processes and man
 
 ### Client
 
-A client interacts with the Zeebe broker on behalf of the business application. Clients poll for work from the broker.
+A client interacts with the Zeebe Broker on behalf of the business application. Clients poll for work from the broker.
 
 - [Architecture](/components/zeebe/technical-concepts/architecture.md#clients)
 

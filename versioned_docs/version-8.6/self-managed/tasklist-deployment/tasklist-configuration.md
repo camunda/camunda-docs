@@ -136,9 +136,9 @@ camunda.tasklist:
       selfSigned: true
 ```
 
-## Zeebe broker connection
+## Zeebe Broker connection
 
-Tasklist needs a connection to Zeebe broker to start the import.
+Tasklist needs a connection to the Zeebe Broker to start the import.
 
 ### Settings to connect
 

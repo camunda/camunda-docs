@@ -98,11 +98,11 @@ Amazon OpenSearch is **not supported** in dual-region configurations.
 - Required open ports between the two regions:
   - **9200** for Elasticsearch (for cross-region data pushed by Zeebe).
   - **26500** for communication to the Zeebe Gateway from clients/workers.
-  - **26501** and **26502** for communication between Zeebe brokers and Zeebe Gateway.
+  - **26501** and **26502** for communication between Zeebe brokers and the Zeebe Gateway.
 
 ### Zeebe cluster configuration
 
-The following Zeebe brokers and replication configuration is supported:
+The following Zeebe brokers and replication configuration are supported:
 
 - `clusterSize` must be a multiple of **2** and at least **4** to evenly distribute brokers across the two regions.
 - `replicationFactor` must be **4** to ensure even partition distribution across regions.

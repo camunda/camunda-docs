@@ -19,7 +19,7 @@ Additionally, it will need to communicate with other nodes (mostly brokers) in t
 To join the cluster, it will also need at least one initial contact point, typically a broker, configured via `zeebe.gateway.cluster.initialContactPoints: [127.0.0.1:26502]`.
 
 :::note
-You can use all broker connections instead of one to make the startup process of the Zeebe gateway more resilient.
+You can use all broker connections instead of one to make the startup process of the Zeebe Gateway more resilient.
 :::
 
 The relevant [configuration](../configuration/configuration.md) settings are:

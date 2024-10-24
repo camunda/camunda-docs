@@ -120,7 +120,7 @@ Using your throughput and retention settings, you can now calculate the required
 
 ## Understanding sizing and scalability behavior
 
-Spinning up a Camunda 8 Cluster means you run multiple components that all need resources in the background, like the Zeebe broker, Elasticsearch (as the database for Operate, Tasklist, and Optimize), Operate, Tasklist, and Optimize. All those components need to be equipped with resources.
+Spinning up a Camunda 8 Cluster means you run multiple components that all need resources in the background, like the Zeebe Broker, Elasticsearch (as the database for Operate, Tasklist, and Optimize), Operate, Tasklist, and Optimize. All those components need to be equipped with resources.
 
 All components are clustered to provide high-availability, fault-tolerance and resiliency.
 

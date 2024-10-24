@@ -147,7 +147,7 @@ Start with creating a port-forward to the `Zeebe Gateway` in the surviving regio
 
 The following alternatives to port-forwarding are possible:
 
-- if Zeebe Gateway is exposed to the outside of the Kubernetes cluster, you can skip port-forwarding and use the URL directly
+- If the Zeebe Gateway is exposed to the outside of the Kubernetes cluster, you can skip port-forwarding and use the URL directly
 - [`exec`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) into an existing pod (such as Elasticsearch), and execute `curl` commands from inside of the pod
 - [`run`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_run/) an Ubuntu pod in the cluster to execute `curl` commands from inside the Kubernetes cluster
 
