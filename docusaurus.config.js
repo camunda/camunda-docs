@@ -169,6 +169,9 @@ module.exports = {
     },
   ],
   themeConfig: {
+    colorMode: {
+      defaultMode: "light",
+    },
     docs: {
       sidebar: {
         autoCollapseCategories: true,
