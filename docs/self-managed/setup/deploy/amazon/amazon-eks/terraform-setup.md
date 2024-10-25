@@ -24,6 +24,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 ### Requirements
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create any resources within AWS.
+- [AWS CLI (2.17+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
 - [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
@@ -125,30 +126,33 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 
 1. **Open your terminal** and ensure the AWS CLI is installed and configured.
 
-2. **Run the following command** to create the S3 bucket, using the previously set `AWS_REGION` environment variable:
+2. **Run the following command** to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
 
    ```bash
-   aws s3api create-bucket --bucket my-eks-tf-state --region $AWS_REGION \
-     --create-bucket-configuration LocationConstraint=$AWS_REGION
+   # Replace "my-eks-tf-state" with your unique bucket name
+   export S3_TF_BUCKET_NAME="my-eks-tf-state"
+
+   aws s3api create-bucket --bucket "$S3_TF_BUCKET_NAME" --region "$AWS_REGION" \
+     --create-bucket-configuration LocationConstraint="$AWS_REGION"
    ```
 
 3. **Enable versioning** on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash
-   aws s3api put-bucket-versioning --bucket my-eks-tf-state --versioning-configuration Status=Enabled --region $AWS_REGION
+   aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region $AWS_REGION
    ```
 
 4. **Secure the bucket** by blocking public access:
 
    ```bash
-   aws s3api put-public-access-block --bucket my-eks-tf-state --public-access-block-configuration \
+   aws s3api put-public-access-block --bucket "$S3_TF_BUCKET_NAME" --public-access-block-configuration \
      "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region $AWS_REGION
    ```
 
 5. **Verify versioning** is enabled on the bucket:
 
    ```bash
-   aws s3api get-bucket-versioning --bucket my-eks-tf-state --region $AWS_REGION
+   aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region $AWS_REGION
    ```
 
 This S3 bucket will now securely store your Terraform state files with versioning enabled.
@@ -176,10 +180,16 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 
 #### 3. Initialize Terraform
 
-Once your `config.tf` and authentication are set up, you can initialize your Terraform project. This will configure the backend and download the necessary provider plugins:
+Once your `config.tf` and authentication are set up, you can initialize your Terraform project.
+In the previous steps, you have configured a dedicated S3 Bucket (`S3_TF_BUCKET_NAME`) to store your state, we will now configure the key that will be used by our config.
+This will configure the backend and download the necessary provider plugins:
 
 ```bash
-terraform init
+export S3_TF_BUCKET_KEY="camunda-terraform/terraform.tfstate"
+
+echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
+
+terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
 ```
 
 Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
