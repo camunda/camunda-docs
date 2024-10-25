@@ -1077,6 +1077,7 @@ For example, you can spin up a custom client with the
 ```java
 import io.camunda.connector.MyConnectorFunction;
 import io.camunda.connector.runtime.core.outbound.ConnectorJobHandler;
+import io.camunda.connector.validation.impl.DefaultValidationProvider;
 import io.camunda.zeebe.client.ZeebeClient;
 
 public class Main {
