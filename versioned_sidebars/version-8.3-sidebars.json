@@ -62,6 +62,7 @@
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -968,7 +969,6 @@
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      "Architecture": ["self-managed/platform-architecture/overview"],
       "Installation": [
         "self-managed/platform-deployment/overview",
         {
@@ -1033,9 +1033,6 @@
           },
           "items": [
             "self-managed/operational-guides/update-guide/820-to-830",
-            "self-managed/operational-guides/update-guide/810-to-820",
-            "self-managed/operational-guides/update-guide/800-to-810",
-            "self-managed/operational-guides/update-guide/130-to-800",
             {
               "Elasticsearch": [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8"

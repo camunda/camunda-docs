@@ -12,6 +12,10 @@ PRs can be labeled “hold” by engineering teams for any reason, including ong
 
 PRs labeled “bug” will be merged and released as immediately as possible.
 
+### Preview sites
+
+Adding a “deploy” label to a PR will trigger a deployment of the PR to a preview site. The preview site will be linked in the PR description.
+
 ## Not all PRs require an issue
 
 In the spirit of "Always Progress", if you are confident you know what change needs to be made a separate issue on the topic is not required. However, if you have an idea that needs to go into the backlog, creating an issue instead of a PR is the best way to go.
@@ -182,9 +186,9 @@ Keep the following guidelines in mind when creating Zeebe diagrams:
 
 **Operate**
 
-Find [automation code here](https://github.com/camunda/operate/tree/master/client/e2e-playwright/docs-screenshots). These test files must be adjusted to change screenshots.
+Find [automation code here](https://github.com/camunda/camunda/tree/main/operate/client/e2e-playwright/docs-screenshots). These test files must be adjusted to change screenshots.
 
-A new screenshot run can be triggered manually using [GitHub actions](https://github.com/camunda/operate/tree/master/client/e2e-playwright/docs-screenshots).
+A new screenshot run can be triggered manually using [GitHub actions](https://github.com/camunda/camunda/tree/main/operate/client/e2e-playwright/docs-screenshots).
 The screenshots can then be downloaded from the workflow.
 
 **Tasklist**

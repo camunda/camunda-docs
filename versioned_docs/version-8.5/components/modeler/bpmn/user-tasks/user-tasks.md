@@ -19,10 +19,10 @@ Version 8.4 and below are limited to the job worker implementation.
 
 ## Define a user task
 
-You define a user task by adding the `zeebe:userTask` extension element. This marks the user task as a **Zeebe user task**.
-Omitting the `zeebe:userTask` extension element defines the user task to use the [job worker implementation](#job-worker-implementation).
+A user task is marked as a **Zeebe user task** by the `zeebe:userTask` extension element. Without the `zeebe:userTask` extension element, the user task behaves like a [service task](#job-worker-implementation).
 
-Regardless of the implementation type, you can define assignments, scheduling, variable mappings, and a form for the user task.
+You can define assignments, scheduling, variable mappings, and a form for the user task as detailed in the following sections.
+
 The [job worker implementation](#job-worker-implementation) section details the differences and limitations of job worker-based user tasks.
 
 ### Assignments
@@ -49,7 +49,7 @@ the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
 
 - Camunda 8 (login with email, Google, GitHub): `email`
-- Default Basic Auth (elasticsearch): `username`
+- Default Basic Auth (Elasticsearch): `username`
 - IAM: `username`
 
 These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed. For more information, see [Tasklist Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md).

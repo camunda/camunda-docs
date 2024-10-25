@@ -11,6 +11,10 @@ keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 
 In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation.
 
+:::note
+This guide specifically uses Java and Spring because the two, in combination with Camunda 8, is our default technology stack recommendation. Learn more in the [Java greenfield documentation](/components/best-practices/architecture/deciding-about-your-stack.md#the-java-greenfield-stack).
+:::
+
 By the end of this tutorial, you'll be able to use Spring and Java code with Zeebe to:
 
 - Deploy a process model.
@@ -20,6 +24,10 @@ By the end of this tutorial, you'll be able to use Spring and Java code with Zee
 For example, in this guide we will outline a BPMN model to receive a payment request, prepare a transaction, charge a credit card, and execute a payment:
 
 ![example BPMN model to receive a payment request, prepare a transaction, charge a credit card, and execute a payment](./img/prepare-transaction-example.png)
+
+:::note
+While stepping through this guide, you can visit our [sample repository](https://github.com/camunda/camunda-8-get-started-spring/blob/main/src/main/java/io/camunda/demo/process_payments/ChargeCreditCardWorker.java) with the completed code to check your work.
+:::
 
 :::note
 This tutorial is not intended for production purposes.
@@ -108,33 +116,13 @@ To implement a service task, take the following steps:
 
 ### Configure Spring Boot Starter
 
-See our documentation on [adding the Spring Zeebe SDK to your project](/apis-tools/spring-zeebe-sdk/getting-started.md#add-the-spring-zeebe-sdk-to-your-project) for more details, also described below:
+Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
-1. Copy the following code snippet into the `pom.xml` file of your Spring project, below properties and above dependencies:
-
-```
-<repositories>
-   <repository>
-      <releases>
-         <enabled>true</enabled>
-      </releases>
-      <snapshots>
-         <enabled>false</enabled>
-      </snapshots>
-      <id>identity</id>
-      <name>Camunda Identity</name>
-      <url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
-   </repository>
-</repositories>
-```
-
-2. Add the following dependency to your `pom.xml` file:
-
-```
+```xml
 <dependency>
-   <groupId>io.camunda</groupId>
-   <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-   <version>8.5.0</version>
+    <groupId>io.camunda</groupId>
+    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+    <version>8.5.x</version>
 </dependency>
 ```
 
@@ -190,11 +178,27 @@ In your terminal, run `mvn spring-boot:run`, where you should see the `charging 
 
 To start a process instance programmatically, take the following steps:
 
-1. In `ProcessPaymentsApplication.java`, convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
+1. In `ProcessPaymentsApplication.java`, add the following dependencies after the package definition:
+
+```java
+package io.camunda.demo.process_payments;
+
+import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import io.camunda.zeebe.client.ZeebeClient;
+import io.camunda.zeebe.spring.client.annotation.Deployment;
+```
+
+2. Convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
 
 ```java
 @SpringBootApplication
-@Deployment(resources = "classpath:process-payments.bpmn")
 public class ProcessPaymentsApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
@@ -208,19 +212,19 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 }
 ```
 
-2. Implement an overriding `run` method in `ProcessPaymentsApplication`. When the application runs, it will create a new `process-payments` process instance, of the latest version, with specified variables, and send it to our local Self-Managed instance:
+3. Implement an overriding `run` method in `ProcessPaymentsApplication`. When the application runs, it will create a new `process-payments` process instance, of the latest version, with specified variables, and send it to our local Self-Managed instance:
 
 ```java
 	@Override
 	public void run(final String... args) {
-		var processDefinitionKey = "process-payments";
+		var bpmnProcessId = "process-payments";
 		var event = zeebeClient.newCreateInstanceCommand()
-				.bpmnProcessId(processDefinitionKey)
+				.bpmnProcessId(bpmnProcessId)
 				.latestVersion()
 				.variables(Map.of("total", 100))
 				.send()
 				.join();
-		LOG.info(String.format("started a process: %d", event.getProcessInstanceKey()));
+		LOG.info("started a process instance: {}", event.getProcessInstanceKey());
 	}
 ```
 
@@ -235,6 +239,12 @@ Re-run the application in your terminal with `mvn spring-boot:run` to see the pr
 To deploy your process, take the following steps:
 
 1. Decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
+
+```java
+@SpringBootApplication
+@Deployment(resources = "classpath:process-payments.bpmn")
+```
+
 2. In Desktop Modeler, change the tax amount calculated to `total * 1.2` under **FEEL expression** and save your changes.
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run. In Operate, note the new version `2` when filtering process instances, and the tax amount has increased for the most recent process instance.

@@ -41,7 +41,7 @@ the feature can be found in [the multi-tenancy documentation](../concepts/multi-
 For those running a Self-Managed Camunda 8 environment, configuring multi-tenancy in Tasklist requires specific settings:
 
 | Name                                   | Description                                                                                                                                                              | Default value |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| :------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
 | camunda.tasklist.multi-tenancy.enabled | Activates the multi-tenancy feature within the Tasklist app. This setting can also be overridden using the environment variable `CAMUNDA_TASKLIST_MULTITENANCY_ENABLED`. | false         |
 
 ### Troubleshooting
@@ -71,35 +71,36 @@ host verification.
 You may need to import the certificate into JVM runtime.
 :::
 
-| Name                                               | Description                               | Default value         |
-| -------------------------------------------------- | ----------------------------------------- | --------------------- |
-| camunda.tasklist.elasticsearch.indexPrefix         | Prefix for index names                    | tasklist              |
-| camunda.tasklist.elasticsearch.clusterName         | Clustername of Elasticsearch              | elasticsearch         |
-| camunda.tasklist.elasticsearch.url                 | URL of Elasticsearch REST API             | http://localhost:9200 |
-| camunda.tasklist.elasticsearch.username            | Username to access Elasticsearch REST API | -                     |
-| camunda.tasklist.elasticsearch.password            | Password to access Elasticsearch REST API | -                     |
-| camunda.tasklist.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -                     |
-| camunda.tasklist.elasticsearch.ssl.selfSigned      | Certificate was self signed               | false                 |
-| camunda.tasklist.elasticsearch.ssl.verifyHostname  | Should the hostname be validated          | false                 |
+| Name                                               | Description                                | Default value         |
+| :------------------------------------------------- | :----------------------------------------- | :-------------------- |
+| camunda.tasklist.elasticsearch.indexPrefix         | Prefix for index names.                    | tasklist              |
+| camunda.tasklist.elasticsearch.clusterName         | Clustername of Elasticsearch.              | elasticsearch         |
+| camunda.tasklist.elasticsearch.url                 | URL of Elasticsearch REST API.             | http://localhost:9200 |
+| camunda.tasklist.elasticsearch.username            | Username to access Elasticsearch REST API. | -                     |
+| camunda.tasklist.elasticsearch.password            | Password to access Elasticsearch REST API. | -                     |
+| camunda.tasklist.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch. | -                     |
+| camunda.tasklist.elasticsearch.ssl.selfSigned      | Certificate was self-signed.               | false                 |
+| camunda.tasklist.elasticsearch.ssl.verifyHostname  | Should the hostname be validated.          | false                 |
 
 For OpenSearch we also have similar configurations:
 
-| Name                                            | Description                            | Default value         |
-| ----------------------------------------------- | -------------------------------------- | --------------------- |
-| camunda.tasklist.opensearch.indexPrefix         | Prefix for index names                 | tasklist              |
-| camunda.tasklist.opensearch.clusterName         | Clustername of OpenSearch              | opensearch            |
-| camunda.tasklist.opensearch.url                 | URL of OpenSearch REST API             | http://localhost:9200 |
-| camunda.tasklist.opensearch.username            | Username to access OpenSearch REST API | -                     |
-| camunda.tasklist.opensearch.password            | Password to access OpenSearch REST API | -                     |
-| camunda.tasklist.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch | -                     |
-| camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self-signed            | false                 |
-| camunda.tasklist.opensearch.ssl.verifyHostname  | Should the hostname be validated       | false                 |
+| Name                                            | Description                                                                                                                                                                                                                                                                        | Default value         |
+| :---------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------- |
+| camunda.tasklist.opensearch.indexPrefix         | Prefix for index names.                                                                                                                                                                                                                                                            | tasklist              |
+| camunda.tasklist.opensearch.clusterName         | Cluster name of OpenSearch.                                                                                                                                                                                                                                                        | opensearch            |
+| camunda.tasklist.opensearch.url                 | URL of OpenSearch REST API.                                                                                                                                                                                                                                                        | http://localhost:9200 |
+| camunda.tasklist.opensearch.username            | Username to access OpenSearch REST API.                                                                                                                                                                                                                                            | -                     |
+| camunda.tasklist.opensearch.password            | Password to access OpenSearch REST API.                                                                                                                                                                                                                                            | -                     |
+| camunda.tasklist.opensearch.awsEnabled          | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | false                 |
+| camunda.tasklist.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch.                                                                                                                                                                                                                                            | -                     |
+| camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self-signed.                                                                                                                                                                                                                                                       | false                 |
+| camunda.tasklist.opensearch.ssl.verifyHostname  | Should the hostname be validated.                                                                                                                                                                                                                                                  | false                 |
 
-It's important to mention that by default Tasklist is always going to try to connect to Elasticsearch. To define what database is going to be used, the configuration below is mandatory (if this configuration is missed, Elasticsearch is the selected database):
+By default, Tasklist always tries to connect to Elasticsearch. To define the database to use, the configuration below is mandatory (if this configuration is missed, Elasticsearch is used as the selected database):
 
-| Name                      | Description                                                                                   | Default value |
-| ------------------------- | --------------------------------------------------------------------------------------------- | ------------- |
-| camunda.tasklist.database | Database that Tasklist is going to connect - valid values are `elasticsearch` or `opensearch` | elasticsearch |
+| Name                      | Description                                                                                    | Default value |
+| :------------------------ | :--------------------------------------------------------------------------------------------- | :------------ |
+| camunda.tasklist.database | Database that Tasklist is going to connect - valid values are `elasticsearch` or `opensearch`. | elasticsearch |
 
 ### Settings for shards and replicas
 
@@ -108,7 +109,7 @@ Tasklist creates the template with index settings named `tasklist-<version>_temp
 The following configuration parameters define the settings:
 
 | Name                                            | Description                                                    | Default value |
-| ----------------------------------------------- | -------------------------------------------------------------- | ------------- |
+| :---------------------------------------------- | :------------------------------------------------------------- | :------------ |
 | camunda.tasklist.elasticsearch.numberOfShards   | How many shards Elasticsearch uses for all Tasklist indices.   | 1             |
 | camunda.tasklist.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Tasklist indices. | 0             |
 
@@ -136,7 +137,7 @@ Tasklist needs a connection to Zeebe broker to start the import.
 ### Settings to connect
 
 | Name                                   | Description                                                                                                         | Default value   |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------- |
+| :------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------- |
 | camunda.tasklist.zeebe.gatewayAddress  | Gateway address that points to Zeebe as hostname and port.                                                          | localhost:26500 |
 | camunda.tasklist.zeebe.secure          | Connection should be secure via Transport Layer Security (TLS).                                                     | false           |
 | camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | -               |
@@ -166,16 +167,16 @@ Therefore, settings for this Elasticsearch or OpenSearch connection must be defi
 
 See also [settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance).
 
-| Name                                                    | Description                                                | Default value         |
-| ------------------------------------------------------- | ---------------------------------------------------------- | --------------------- |
-| camunda.tasklist.zeebeElasticsearch.clusterName         | Cluster name of Elasticsearch                              | elasticsearch         |
-| camunda.tasklist.zeebeElasticsearch.url                 | URL of Elasticsearch REST API                              | http://localhost:9200 |
-| camunda.tasklist.zeebeElasticsearch.prefix              | Index prefix as configured in Zeebe Elasticsearch exporter | zeebe-record          |
-| camunda.tasklist.zeebeElasticsearch.username            | Username to access Elasticsearch REST API                  | -                     |
-| camunda.tasklist.zeebeElasticsearch.password            | Password to access Elasticsearch REST API                  | -                     |
-| camunda.tasklist.zeebeElasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch                  | -                     |
-| camunda.tasklist.zeebeElasticsearch.ssl.selfSigned      | Certificate was self signed                                | false                 |
-| camunda.tasklist.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated                           | false                 |
+| Name                                                    | Description                                                 | Default value         |
+| :------------------------------------------------------ | :---------------------------------------------------------- | :-------------------- |
+| camunda.tasklist.zeebeElasticsearch.clusterName         | Cluster name of Elasticsearch.                              | elasticsearch         |
+| camunda.tasklist.zeebeElasticsearch.url                 | URL of Elasticsearch REST API.                              | http://localhost:9200 |
+| camunda.tasklist.zeebeElasticsearch.prefix              | Index prefix as configured in Zeebe Elasticsearch exporter. | zeebe-record          |
+| camunda.tasklist.zeebeElasticsearch.username            | Username to access Elasticsearch REST API.                  | -                     |
+| camunda.tasklist.zeebeElasticsearch.password            | Password to access Elasticsearch REST API.                  | -                     |
+| camunda.tasklist.zeebeElasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch.                  | -                     |
+| camunda.tasklist.zeebeElasticsearch.ssl.selfSigned      | Certificate was self-signed.                                | false                 |
+| camunda.tasklist.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated.                           | false                 |
 
 ### Snippet from application.yml
 
@@ -305,9 +306,9 @@ curl 'http://localhost:8080/actuator/loggers/io.camunda.tasklist' -i -X POST \
 
 If more than one Camunda Tasklist instance is accessible by users for a failover scenario, for example, persistent sessions must be configured for all instances. This enables distributed sessions among all instances and users do not lose their session when being routed to another instance.
 
-| Name                                         | Description                                               | Default value |
-| -------------------------------------------- | --------------------------------------------------------- | ------------- |
-| camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch | false         |
+| Name                                         | Description                                                | Default value |
+| :------------------------------------------- | :--------------------------------------------------------- | :------------ |
+| camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch. | false         |
 
 ## Example of application.yml file
 

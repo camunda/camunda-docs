@@ -64,6 +64,7 @@
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -94,10 +95,7 @@
         {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
-            "components/console/manage-clusters/rename-cluster",
-            "components/console/manage-clusters/resume-cluster",
-            "components/console/manage-clusters/update-cluster",
-            "components/console/manage-clusters/delete-cluster",
+            "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
@@ -136,7 +134,7 @@
           "Web Modeler": [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
-            "components/modeler/web-modeler/new-context-pad",
+            "components/modeler/web-modeler/context-pad",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -176,6 +174,7 @@
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/use-connectors",
             {
               "type": "category",
               "label": "Element templates",
@@ -505,41 +504,41 @@
         {
           "type": "link",
           "label": "What is Optimize?",
-          "href": "/optimize/components/what-is-optimize/"
+          "href": "/optimize/3.13.0/components/what-is-optimize/"
         },
         {
           "User guide": [
             {
               "type": "link",
               "label": "Collections, dashboards, and reports",
-              "href": "/optimize/components/userguide/collections-dashboards-reports/"
+              "href": "/optimize/3.13.0/components/userguide/collections-dashboards-reports/"
             },
             {
               "type": "link",
               "label": "User permissions",
-              "href": "/optimize/components/userguide/user-permissions/"
+              "href": "/optimize/3.13.0/components/userguide/user-permissions/"
             },
             {
               "type": "link",
               "label": "Data sources",
-              "href": "/optimize/components/userguide/data-sources/"
+              "href": "/optimize/3.13.0/components/userguide/data-sources/"
             },
             {
               "Dashboards": [
                 {
                   "type": "link",
                   "label": "Creating dashboards",
-                  "href": "/optimize/components/userguide/creating-dashboards/"
+                  "href": "/optimize/3.13.0/components/userguide/creating-dashboards/"
                 },
                 {
                   "type": "link",
                   "label": "Edit mode",
-                  "href": "/optimize/components/userguide/edit-mode/"
+                  "href": "/optimize/3.13.0/components/userguide/edit-mode/"
                 },
                 {
                   "type": "link",
                   "label": "View mode",
-                  "href": "/optimize/components/userguide/view-mode/"
+                  "href": "/optimize/3.13.0/components/userguide/view-mode/"
                 }
               ]
             },
@@ -548,102 +547,102 @@
                 {
                   "type": "link",
                   "label": "Process dashboards",
-                  "href": "/optimize/components/userguide/process-dashboards/"
+                  "href": "/optimize/3.13.0/components/userguide/process-dashboards/"
                 },
                 {
                   "type": "link",
                   "label": "Instant process dashboards",
-                  "href": "/optimize/components/userguide/instant-process-dashboards/"
+                  "href": "/optimize/3.13.0/components/userguide/instant-process-dashboards/"
                 }
               ]
             },
             {
               "type": "link",
               "label": "Creating reports",
-              "href": "/optimize/components/userguide/creating-reports/"
+              "href": "/optimize/3.13.0/components/userguide/creating-reports/"
             },
             {
               "type": "link",
               "label": "Combined process reports",
-              "href": "/optimize/components/userguide/combined-process-reports/"
+              "href": "/optimize/3.13.0/components/userguide/combined-process-reports/"
             },
             {
               "type": "link",
               "label": "Process KPIs",
-              "href": "/optimize/components/userguide/process-KPIs/"
+              "href": "/optimize/3.13.0/components/userguide/process-KPIs/"
             },
             {
               "Process analysis": [
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/optimize/components/userguide/process-analysis/process-analysis-overview/"
+                  "href": "/optimize/3.13.0/components/userguide/process-analysis/process-analysis-overview/"
                 },
                 {
                   "type": "link",
                   "label": "Task analysis",
-                  "href": "/optimize/components/userguide/process-analysis/task-analysis/"
+                  "href": "/optimize/3.13.0/components/userguide/process-analysis/task-analysis/"
                 },
                 {
                   "type": "link",
                   "label": "Branch analysis",
-                  "href": "/optimize/components/userguide/process-analysis/branch-analysis/"
+                  "href": "/optimize/3.13.0/components/userguide/process-analysis/branch-analysis/"
                 },
                 {
                   "type": "link",
                   "label": "User task analytics",
-                  "href": "/optimize/components/userguide/process-analysis/user-task-analytics/"
+                  "href": "/optimize/3.13.0/components/userguide/process-analysis/user-task-analytics/"
                 },
                 {
                   "Report analysis": [
                     {
                       "type": "link",
                       "label": "Report process analysis",
-                      "href": "/optimize/components/userguide/process-analysis/report-analysis/overview/"
+                      "href": "/optimize/3.13.0/components/userguide/process-analysis/report-analysis/overview/"
                     },
                     {
                       "Edit mode": [
                         {
                           "type": "link",
                           "label": "Overview",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/edit-mode/"
+                          "href": "/optimize/3.13.0/components/userguide/process-analysis/report-analysis/edit-mode/"
                         },
                         {
                           "type": "link",
                           "label": "Select process definitions",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/select-process-definitions/"
+                          "href": "/optimize/3.13.0/components/userguide/process-analysis/report-analysis/select-process-definitions/"
                         },
                         {
                           "type": "link",
                           "label": "Define reports",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/define-reports/"
+                          "href": "/optimize/3.13.0/components/userguide/process-analysis/report-analysis/define-reports/"
                         },
                         {
                           "type": "link",
                           "label": "Measures",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/measures/"
+                          "href": "/optimize/3.13.0/components/userguide/process-analysis/report-analysis/measures/"
                         },
                         {
                           "type": "link",
                           "label": "Compare target values",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/compare-target-values/"
+                          "href": "/optimize/3.13.0/components/userguide/process-analysis/report-analysis/compare-target-values/"
                         },
                         {
                           "type": "link",
                           "label": "Process instance parts",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/process-instance-parts/"
+                          "href": "/optimize/3.13.0/components/userguide/process-analysis/report-analysis/process-instance-parts/"
                         },
                         {
                           "type": "link",
                           "label": "Configure reports",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/configure-reports/"
+                          "href": "/optimize/3.13.0/components/userguide/process-analysis/report-analysis/configure-reports/"
                         }
                       ]
                     },
                     {
                       "type": "link",
                       "label": "View mode",
-                      "href": "/optimize/components/userguide/process-analysis/report-analysis/view-mode/"
+                      "href": "/optimize/3.13.0/components/userguide/process-analysis/report-analysis/view-mode/"
                     }
                   ]
                 },
@@ -652,32 +651,32 @@
                     {
                       "type": "link",
                       "label": "Overview",
-                      "href": "/optimize/components/userguide/process-analysis/filters/"
+                      "href": "/optimize/3.13.0/components/userguide/process-analysis/filters/"
                     },
                     {
                       "type": "link",
                       "label": "Metadata filters",
-                      "href": "/optimize/components/userguide/process-analysis/metadata-filters/"
+                      "href": "/optimize/3.13.0/components/userguide/process-analysis/metadata-filters/"
                     },
                     {
                       "type": "link",
                       "label": "Instance state filters",
-                      "href": "/optimize/components/userguide/process-analysis/instance-state-filters/"
+                      "href": "/optimize/3.13.0/components/userguide/process-analysis/instance-state-filters/"
                     },
                     {
                       "type": "link",
                       "label": "Flow node filters",
-                      "href": "/optimize/components/userguide/process-analysis/flow-node-filters/"
+                      "href": "/optimize/3.13.0/components/userguide/process-analysis/flow-node-filters/"
                     },
                     {
                       "type": "link",
                       "label": "Process instance filters",
-                      "href": "/optimize/components/userguide/process-analysis/process-instance-filters/"
+                      "href": "/optimize/3.13.0/components/userguide/process-analysis/process-instance-filters/"
                     },
                     {
                       "type": "link",
                       "label": "Variable filters",
-                      "href": "/optimize/components/userguide/process-analysis/variable-filters/"
+                      "href": "/optimize/3.13.0/components/userguide/process-analysis/variable-filters/"
                     }
                   ]
                 }
@@ -688,17 +687,17 @@
                 {
                   "type": "link",
                   "label": "Overview",
-                  "href": "/optimize/components/userguide/decision-analysis/decision-analysis-overview/"
+                  "href": "/optimize/3.13.0/components/userguide/decision-analysis/decision-analysis-overview/"
                 },
                 {
                   "type": "link",
                   "label": "Single report",
-                  "href": "/optimize/components/userguide/decision-analysis/decision-report/"
+                  "href": "/optimize/3.13.0/components/userguide/decision-analysis/decision-report/"
                 },
                 {
                   "type": "link",
                   "label": "Filters",
-                  "href": "/optimize/components/userguide/decision-analysis/decision-filter/"
+                  "href": "/optimize/3.13.0/components/userguide/decision-analysis/decision-filter/"
                 }
               ]
             },
@@ -707,37 +706,37 @@
                 {
                   "type": "link",
                   "label": "Alerts",
-                  "href": "/optimize/components/userguide/additional-features/alerts/"
+                  "href": "/optimize/3.13.0/components/userguide/additional-features/alerts/"
                 },
                 {
                   "type": "link",
                   "label": "Event-based processes",
-                  "href": "/optimize/components/userguide/additional-features/event-based-processes/"
+                  "href": "/optimize/3.13.0/components/userguide/additional-features/event-based-processes/"
                 },
                 {
                   "type": "link",
                   "label": "Export and import",
-                  "href": "/optimize/components/userguide/additional-features/export-import/"
+                  "href": "/optimize/3.13.0/components/userguide/additional-features/export-import/"
                 },
                 {
                   "type": "link",
                   "label": "Footer",
-                  "href": "/optimize/components/userguide/additional-features/footer/"
+                  "href": "/optimize/3.13.0/components/userguide/additional-features/footer/"
                 },
                 {
                   "type": "link",
                   "label": "Variable labeling",
-                  "href": "/optimize/components/userguide/additional-features/variable-labeling/"
+                  "href": "/optimize/3.13.0/components/userguide/additional-features/variable-labeling/"
                 },
                 {
                   "type": "link",
                   "label": "Process variants comparison",
-                  "href": "/optimize/components/userguide/additional-features/process-variants-comparison/"
+                  "href": "/optimize/3.13.0/components/userguide/additional-features/process-variants-comparison/"
                 },
                 {
                   "type": "link",
                   "label": "Machine learning-ready data set",
-                  "href": "/optimize/components/userguide/additional-features/ml-dataset/"
+                  "href": "/optimize/3.13.0/components/userguide/additional-features/ml-dataset/"
                 }
               ]
             }
@@ -1000,29 +999,29 @@
             {
               "type": "link",
               "label": "Overview",
-              "href": "/optimize/apis-tools/optimize-api/overview/"
+              "href": "/optimize/3.13.0/apis-tools/optimize-api/overview/"
             },
             {
               "type": "link",
               "label": "Authentication",
-              "href": "/optimize/apis-tools/optimize-api/optimize-api-authentication/"
+              "href": "/optimize/3.13.0/apis-tools/optimize-api/optimize-api-authentication/"
             },
             {
               "type": "link",
               "label": "Tutorial",
-              "href": "/optimize/apis-tools/optimize-api/optimize-api-tutorial/"
+              "href": "/optimize/3.13.0/apis-tools/optimize-api/optimize-api-tutorial/"
             },
             {
               "Configuration": [
                 {
                   "type": "link",
                   "label": "Enable sharing",
-                  "href": "/optimize/apis-tools/optimize-api/configuration/enable-sharing/"
+                  "href": "/optimize/3.13.0/apis-tools/optimize-api/configuration/enable-sharing/"
                 },
                 {
                   "type": "link",
                   "label": "Disable sharing",
-                  "href": "/optimize/apis-tools/optimize-api/configuration/disable-sharing/"
+                  "href": "/optimize/3.13.0/apis-tools/optimize-api/configuration/disable-sharing/"
                 }
               ]
             },
@@ -1031,17 +1030,17 @@
                 {
                   "type": "link",
                   "label": "Get dashboard IDs",
-                  "href": "/optimize/apis-tools/optimize-api/dashboard/get-dashboard-ids/"
+                  "href": "/optimize/3.13.0/apis-tools/optimize-api/dashboard/get-dashboard-ids/"
                 },
                 {
                   "type": "link",
                   "label": "Delete dashboards",
-                  "href": "/optimize/apis-tools/optimize-api/dashboard/delete-dashboard/"
+                  "href": "/optimize/3.13.0/apis-tools/optimize-api/dashboard/delete-dashboard/"
                 },
                 {
                   "type": "link",
                   "label": "Export dashboard definitions",
-                  "href": "/optimize/apis-tools/optimize-api/dashboard/export-dashboard-definitions/"
+                  "href": "/optimize/3.13.0/apis-tools/optimize-api/dashboard/export-dashboard-definitions/"
                 }
               ]
             },
@@ -1050,49 +1049,49 @@
                 {
                   "type": "link",
                   "label": "Get report IDs",
-                  "href": "/optimize/apis-tools/optimize-api/report/get-report-ids/"
+                  "href": "/optimize/3.13.0/apis-tools/optimize-api/report/get-report-ids/"
                 },
                 {
                   "type": "link",
                   "label": "Delete reports",
-                  "href": "/optimize/apis-tools/optimize-api/report/delete-report/"
+                  "href": "/optimize/3.13.0/apis-tools/optimize-api/report/delete-report/"
                 },
                 {
                   "type": "link",
                   "label": "Export report definitions",
-                  "href": "/optimize/apis-tools/optimize-api/report/export-report-definitions/"
+                  "href": "/optimize/3.13.0/apis-tools/optimize-api/report/export-report-definitions/"
                 },
                 {
                   "type": "link",
                   "label": "Export report result data",
-                  "href": "/optimize/apis-tools/optimize-api/report/get-data-export/"
+                  "href": "/optimize/3.13.0/apis-tools/optimize-api/report/get-data-export/"
                 }
               ]
             },
             {
               "type": "link",
               "label": "Event ingestion",
-              "href": "/optimize/apis-tools/optimize-api/event-ingestion/"
+              "href": "/optimize/3.13.0/apis-tools/optimize-api/event-ingestion/"
             },
             {
               "type": "link",
               "label": "External variable ingestion",
-              "href": "/optimize/apis-tools/optimize-api/external-variable-ingestion/"
+              "href": "/optimize/3.13.0/apis-tools/optimize-api/external-variable-ingestion/"
             },
             {
               "type": "link",
               "label": "Health readiness",
-              "href": "/optimize/apis-tools/optimize-api/health-readiness/"
+              "href": "/optimize/3.13.0/apis-tools/optimize-api/health-readiness/"
             },
             {
               "type": "link",
               "label": "Import entities",
-              "href": "/optimize/apis-tools/optimize-api/import-entities/"
+              "href": "/optimize/3.13.0/apis-tools/optimize-api/import-entities/"
             },
             {
               "type": "link",
               "label": "Variable labeling",
-              "href": "/optimize/apis-tools/optimize-api/variable-labeling/"
+              "href": "/optimize/3.13.0/apis-tools/optimize-api/variable-labeling/"
             }
           ]
         },
@@ -1180,8 +1179,7 @@
                 }
               ]
             },
-            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks",
-            "apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial"
+            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks"
           ]
         },
         {
@@ -1204,6 +1202,7 @@
           "Zeebe API (REST)": [
             "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
             "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication",
+            "apis-tools/zeebe-api-rest/zeebe-api-tutorial",
             {
               "Specifications": [
                 {
@@ -1373,7 +1372,6 @@
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      "Architecture": ["self-managed/platform-architecture/overview"],
       "Setup": [
         "self-managed/setup/overview",
         "self-managed/setup/install",
@@ -1455,9 +1453,6 @@
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
-            "self-managed/operational-guides/update-guide/810-to-820",
-            "self-managed/operational-guides/update-guide/800-to-810",
-            "self-managed/operational-guides/update-guide/130-to-800",
             {
               "Elasticsearch": [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8"
@@ -1536,7 +1531,8 @@
             {
               "Zeebe Gateway": [
                 "self-managed/zeebe-deployment/zeebe-gateway/overview",
-                "self-managed/zeebe-deployment/zeebe-gateway/interceptors"
+                "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                "self-managed/zeebe-deployment/zeebe-gateway/job-streaming"
               ]
             },
             {
@@ -1615,295 +1611,302 @@
             {
               "type": "link",
               "label": "Installation",
-              "href": "/optimize/self-managed/optimize-deployment/install-and-start/"
+              "href": "/optimize/3.13.0/self-managed/optimize-deployment/install-and-start/"
             },
             {
               "type": "link",
               "label": "Version policy",
-              "href": "/optimize/self-managed/optimize-deployment/version-policy/"
+              "href": "/optimize/3.13.0/self-managed/optimize-deployment/version-policy/"
             },
+
             {
               "Configuration": [
                 {
                   "type": "link",
                   "label": "Getting started",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/getting-started/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/getting-started/"
                 },
+
                 {
                   "System configuration": [
                     {
                       "type": "link",
                       "label": "Overview",
-                      "href": "/optimize/self-managed/optimize-deployment/configuration/system-configuration/"
+                      "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/system-configuration/"
                     },
                     {
                       "type": "link",
                       "label": "Camunda 8 system configuration",
-                      "href": "/optimize/self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
+                      "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
                     },
                     {
                       "type": "link",
                       "label": "Camunda 7 system configuration",
-                      "href": "/optimize/self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
+                      "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
                     },
                     {
                       "type": "link",
                       "label": "Event-based process system configuration",
-                      "href": "/optimize/self-managed/optimize-deployment/configuration/event-based-process-configuration/"
+                      "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/event-based-process-configuration/"
                     }
                   ]
                 },
+
                 {
                   "type": "link",
                   "label": "Logging",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/logging/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/logging/"
                 },
                 {
                   "type": "link",
                   "label": "Optimize license key",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/optimize-license/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/optimize-license/"
                 },
                 {
                   "type": "link",
                   "label": "Security instructions",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/security-instructions/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/security-instructions/"
                 },
                 {
                   "type": "link",
-                  "label": "Shared Elasticsearch cluster",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
+                  "label": "Shared Elasticsearch/OpenSearch cluster",
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
                 },
                 {
                   "type": "link",
                   "label": "History cleanup",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/history-cleanup/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/history-cleanup/"
                 },
                 {
                   "type": "link",
                   "label": "Localization",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/localization/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/localization/"
                 },
                 {
                   "type": "link",
                   "label": "Object and list variable support",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/object-variables/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/object-variables/"
                 },
                 {
                   "type": "link",
                   "label": "Clustering",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/clustering/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/clustering/"
                 },
                 {
                   "type": "link",
                   "label": "Webhooks",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/webhooks/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/webhooks/"
                 },
                 {
                   "type": "link",
                   "label": "Authorization management",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/authorization-management/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/authorization-management/"
                 },
                 {
                   "type": "link",
                   "label": "User access management",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/user-management/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/user-management/"
                 },
                 {
                   "type": "link",
                   "label": "Multi-tenancy",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/multi-tenancy/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/multi-tenancy/"
                 },
                 {
                   "type": "link",
                   "label": "Multiple process engines",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/multiple-engines/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/multiple-engines/"
                 },
                 {
                   "type": "link",
                   "label": "Event-based processes",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/setup-event-based-processes/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/setup-event-based-processes/"
                 },
                 {
                   "type": "link",
                   "label": "Telemetry",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/telemetry/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/telemetry/"
                 },
                 {
                   "type": "link",
                   "label": "Common problems",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/common-problems/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/configuration/common-problems/"
                 }
               ]
             },
+
             {
               "Plugins": [
                 {
                   "type": "link",
                   "label": "Optimize plugin system",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/plugin-system/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/plugins/plugin-system/"
                 },
                 {
                   "type": "link",
                   "label": "Business key import customization",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/businesskey-import-plugin/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/plugins/businesskey-import-plugin/"
                 },
                 {
                   "type": "link",
                   "label": "Decision inputs and outputs import customization",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/decision-import-plugin/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/plugins/decision-import-plugin/"
                 },
                 {
                   "type": "link",
                   "label": "Elasticsearch header",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/elasticsearch-header/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/plugins/elasticsearch-header/"
                 },
                 {
                   "type": "link",
                   "label": "Engine REST filter",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/engine-rest-filter-plugin/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/plugins/engine-rest-filter-plugin/"
                 },
                 {
                   "type": "link",
                   "label": "Single sign on",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/single-sign-on/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/plugins/single-sign-on/"
                 },
                 {
                   "type": "link",
                   "label": "Variable import customization",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/variable-import-plugin/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/plugins/variable-import-plugin/"
                 }
               ]
             },
+
             {
               "type": "link",
               "label": "Camunda engine data reimport",
-              "href": "/optimize/self-managed/optimize-deployment/reimport/"
+              "href": "/optimize/3.13.0/self-managed/optimize-deployment/reimport/"
             },
+
             {
               "Migration & update": [
                 {
                   "type": "link",
                   "label": "Instructions",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/instructions/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/instructions/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (8.4/3.12 to 8.5/3.13)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (8.3/3.11 to 8.4/3.12)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.10 to 8.3/3.11)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.9.x to 3.10)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.9-preview-x to 3.9.x)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.8.x to 3.9.x-preview-1)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.7.x to 3.8.x)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.7-to-3.8/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.7-to-3.8/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.6 to 3.7.x)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.6-to-3.7/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.6-to-3.7/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.5 to 3.6)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.5-to-3.6/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.5-to-3.6/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.4 to 3.5)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.4-to-3.5/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.4-to-3.5/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.3 to 3.4)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.3-to-3.4/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.3-to-3.4/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.2 to 3.3)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.2-to-3.3/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.2-to-3.3/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.1 to 3.2)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.1-to-3.2/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.1-to-3.2/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (3.0 to 3.1)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/3.0-to-3.1/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/3.0-to-3.1/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (2.7 to 3.0)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/2.7-to-3.0/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/2.7-to-3.0/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (2.6 to 2.7)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/2.6-to-2.7/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/2.6-to-2.7/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (2.5 to 2.6)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/2.5-to-2.6/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/2.5-to-2.6/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (2.4 to 2.5)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/2.4-to-2.5/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/2.4-to-2.5/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (2.3 to 2.4)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/2.3-to-2.4/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/2.3-to-2.4/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (2.2 to 2.3)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/2.2-to-2.3/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/2.2-to-2.3/"
                 },
                 {
                   "type": "link",
                   "label": "Update notes (2.1 to 2.2)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/2.1-to-2.2/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/migration-update/2.1-to-2.2/"
                 }
               ]
             },
+
             {
               "Advanced features": [
                 {
                   "type": "link",
                   "label": "Engine data deletion",
-                  "href": "/optimize/self-managed/optimize-deployment/advanced-features/engine-data-deletion/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/advanced-features/engine-data-deletion/"
                 },
                 {
                   "type": "link",
                   "label": "Data import",
-                  "href": "/optimize/self-managed/optimize-deployment/advanced-features/import-guide/"
+                  "href": "/optimize/3.13.0/self-managed/optimize-deployment/advanced-features/import-guide/"
                 }
               ]
             }
@@ -1985,7 +1988,8 @@
                   "Troubleshooting": [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login"
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration"
                   ]
                 }
               ]

@@ -120,7 +120,7 @@ To configure the embedded gateway, see [Gateway config docs](/self-managed/zeebe
 
 | Field  | Description                                                                                                                                               | Example value |
 | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enable | Enable the embedded gateway to start on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | False         |
+| enable | Enable the embedded gateway to start on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | false         |
 
 #### YAML snippet
 
@@ -158,7 +158,7 @@ network:
 
 | Field                | Description                                                                                                                                                                                 | Example Value |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`. | False         |
+| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`. | false         |
 | certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH`.                       |               |
 | privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH`.                          |               |
 
@@ -246,7 +246,7 @@ data:
 
 | Field              | Description                                                                                                                                                                                                                                                                                                                                  | Example Value |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enableMonitoring   | Configure disk monitoring to prevent getting into a non-recoverable state due to out of disk space. When monitoring is enabled, the broker rejects commands and pause replication when the required freeSpace is not available. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_ENABLEMONITORING` | True          |
+| enableMonitoring   | Configure disk monitoring to prevent getting into a non-recoverable state due to out of disk space. When monitoring is enabled, the broker rejects commands and pause replication when the required freeSpace is not available. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_ENABLEMONITORING` | true          |
 | monitoringInterval | Sets the interval at which the disk usage is monitored. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_MONITORINGINTERVAL`                                                                                                                                                                       | 1s            |
 
 #### YAML snippet
@@ -312,7 +312,7 @@ You can use any S3 compatible storage, including, but not limited to, Amazon S3.
 | accessKey            | Configure access credentials. If either accessKey or secretKey is not provided, it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain), not based on your S3 compatible storage provider. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY`.                                                                                                                                                              |               |
 | secretKey            | This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY`.                                                                                                                                                                                                                                                                                                                                                                                                                                           |               |
 | apiCallTimeout       | Configure a maximum duration for all S3 client API calls. Lower values will ensure that failed or slow API calls don't block other backups but may increase the risk that backups can't be stored if uploading parts of the backup takes longer than the configured timeout. Amazon S3 users can refer [here](https://github.com/aws/aws-sdk-java-v2/blob/master/docs/BestPractices.md#utilize-timeout-configurations). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT`.              | PT180S        |
-| forcePathStyleAccess | When enabled, forces the s3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the s3 compatible storage cannot support virtual-hosted-style. Refer to your S3 compatible storage provider or the [Amazon S3 docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html) for more information. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS`. | False         |
+| forcePathStyleAccess | When enabled, forces the s3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the s3 compatible storage cannot support virtual-hosted-style. Refer to your S3 compatible storage provider or the [Amazon S3 docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html) for more information. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS`. | false         |
 | compression          | When set to an algorithm such as 'zstd', enables compression of backup contents. When not set or set to 'none', backup content is not compressed. Enabling compression reduces the required storage space for backups in S3 but also increases the impact on CPU and disk utilization while taking a backup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`                                                                                                                             | none          |
 | basePath             | When set, all objects in the bucket will use this prefix. Must be non-empty and not start or end with '/'. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH`.                                                                                                                                                                                                                            |
 
@@ -386,7 +386,7 @@ This section contains all cluster related configurations, to setup a zeebe clust
 
 | Field                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Example Value                              |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| nodeId               | Specifies the unique id of this broker node in a cluster. The id should be between 0 and number of nodes in the cluster (exclusive). This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_NODEID`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | 0                                          |
+| nodeId               | Specifies the unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive). This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_NODEID`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | 0                                          |
 | partitionsCount      | Controls the number of partitions, which should exist in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 1                                          |
 | replicationFactor    | Controls the replication factor, which defines the count of replicas per partition. The replication factor cannot be greater than the number of nodes in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR`.                                                                                                                                                                                                                                                                                                                                                                                                                                              | 1                                          |
 | clusterSize          | Specifies the zeebe cluster size. This value is used to determine which broker is responsible for which partition. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERSIZE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                                          |
@@ -428,7 +428,7 @@ cluster:
 | Field     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Example Value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | flush     | Configures how often data is explicitly flushed to disk. By default, for a given partition, data is flushed on every leader commit, and every follower append. This is to ensure consistency across all replicas. Disabling this can cause inconsistencies, and at worst, data corruption or data loss scenarios. The default behavior is optimized for safety, and flushing occurs on every leader commit and follower append in a synchronous fashion. You can introduce a delay to reduce the performance penalty of flushing via `delayTime`. |               |
-| enabled   | If false, explicit flushing of the Raft log is disabled, and flushing only occurs right before a snapshot is taken. You should only disable explicit flushing if you are willing to accept potential data loss at the expense of performance. Before disabling it, try the delayed options, which provide a trade-off between safety and performance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_FLUSH_ENABLED`.                                                                               | True          |
+| enabled   | If false, explicit flushing of the Raft log is disabled, and flushing only occurs right before a snapshot is taken. You should only disable explicit flushing if you are willing to accept potential data loss at the expense of performance. Before disabling it, try the delayed options, which provide a trade-off between safety and performance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_FLUSH_ENABLED`.                                                                               | true          |
 | delayTime | If the delay is > 0, then flush requests are delayed by at least the given period. It is recommended that you find the smallest delay here with which you achieve your performance goals. It's also likely that anything above 30s is not useful, as this is the typical default flush interval for the Linux OS. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_FLUSH_DELAYTIME`.                                                                                                                 | 0s            |
 
 #### YAML snippet
@@ -446,9 +446,9 @@ Configure parameters for SWIM protocol which is used to propagate cluster member
 
 | Field             | Example Value                                                                                                                                                                                                                                                                                                                                         | Description |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| broadcastUpdates  | Configure whether to broadcast member updates to all members. If set to false updates will be gossiped among the members. If set to true the network traffic may increase but it reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`. | False       |
-| broadcastDisputes | Configure whether to broadcast disputes to all members. If set to true the network traffic may increase but it reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES`.                                                                  | True        |
-| notifySuspect     | Configure whether to notify a suspect node on state changes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`.                                                                                                                                                                      | False       |
+| broadcastUpdates  | Configure whether to broadcast member updates to all members. If set to false updates will be gossiped among the members. If set to true the network traffic may increase but it reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTUPDATES`. | false       |
+| broadcastDisputes | Configure whether to broadcast disputes to all members. If set to true the network traffic may increase but it reduce the time to detect membership changes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_BROADCASTDISPUTES`.                                                                  | true        |
+| notifySuspect     | Configure whether to notify a suspect node on state changes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_NOTIFYSUSPECT`.                                                                                                                                                                      | false       |
 | gossipInterval    | Sets the interval at which the membership updates are sent to a random member. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPINTERVAL`.                                                                                                                                                   | 250ms       |
 | gossipFanout      | Sets the number of members to which membership updates are sent at each gossip interval. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_GOSSIPFANOUT`.                                                                                                                                           | 2           |
 | probeInterval     | Sets the interval at which to probe a random member. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_MEMBERSHIP_PROBEINTERVAL`.                                                                                                                                                                              | 1s          |
@@ -471,6 +471,26 @@ membership:
   suspectProbes: 3
   failureTimeout: 10s
   syncInterval: 10s
+```
+
+### zeebe.broker.cluster.configManager.gossip
+
+Configure the parameters used to propagate the dynamic cluster configuration across brokers and gateways.
+
+| Field              | Description                                                                                                                                                                                                    | ExampleValue |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| syncDelay          | Sets the interval between two synchronization requests to other members of the cluster. This setting can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCDELAY | 10s          |
+| syncRequestTimeout | Sets the timeout for the synchronization requests. This setting can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCREQUESTTIMEOUT                             | 2s           |
+| gossipFanout       | Sets the number of cluster members the configuration is gossiped to. This setting can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CONFIGMANAGER_GOSSIP_GOSSIPFANOUT                 | 2            |
+
+#### YAML snippet
+
+```yaml
+configManager:
+  gossip:
+    syncDelay: 10s
+    syncRequestTimeout: 2s
+    gossipFanout: 2
 ```
 
 ### zeebe.broker.cluster.messageCompression
@@ -512,12 +532,166 @@ threads:
   ioThreadCount: 2
 ```
 
+### zeebe.broker.flowControl.request
+
+Replaces the deprecated `zeebe.broker.backpressure` configuration.
+
+| Field       | Description                                                                                                                                                                                                                                                                                                                                                      | Example Value |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled     | Set this to enable flow control for user requests. When enabled the broker rejects user requests when the number of inflight requests is greater than than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ENABLED`. | true          |
+| algorithm   | The algorithm configures which algorithm to use for the flow control. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_ALGORITHM`.                                                                                                           | aimd          |
+| useWindowed | If enabled, will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_USEWINDOWED`.                          | false         |
+
+#### YAML snippet
+
+```yaml
+flowControl:
+  request:
+    enabled: true
+    algorithm: aimd
+    useWindowed: false
+```
+
+### zeebe.broker.flowControl.request.aimd
+
+| Field          | Description                                                                                                                                                                                                                                             | Example Value |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| requestTimeout | The limit will be reduced if the observed latency is greater than the requestTimeout. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_AIMD_REQUESTTIMEOUT`.                                        | 200ms         |
+| initialLimit   | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment `ZEEBE_BROKER_FLOWCONTROL_REQUEST_AIMD_INITIALLIMIT`.                    | 100           |
+| minLimit       | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_AIMD_MINLIMIT`.                                                                                                                 | 1             |
+| maxLimit       | The maximum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL__REQUEST_AIMD_MAXLIMIT`.                                                                                                                | 1000          |
+| backoffRatio   | The backoffRatio is a double value x such that x is between 0 and 1. It determines the factor by which the limit is decreased. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_AIMD_BACKOFFRATIO`. | 0.9           |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: aimd
+  aimd:
+    requestTimeout: 200ms
+    initialLimit: 100
+    minLimit: 1
+    maxLimit: 1000
+    backoffRatio: 0.9
+```
+
+### zeebe.broker.flowControl.request.fixed
+
+| Field | Description                                                                                                                           | Example Value |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| limit | Set a fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_FIXED_LIMIT`. | 20            |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: fixed
+  fixed:
+    limit: 20
+```
+
+### zeebe.broker.flowControl.request.vegas
+
+| Field        | Description                                                                                                                                                                                                                                    | Example Value |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_VEGAS_INITIALLIMIT`. | 20            |
+| alpha        | The limit is increased if the queue size is less than this value. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_VEGAS_ALPHA`.                                                           | 3             |
+| beta         | The limit is decreased if the queue size is greater than this value. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_VEGAS_BETA`.                                                         | 6             |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: vegas
+  vegas:
+    initialLimit: 20
+    alpha: 3
+    beta: 6
+```
+
+### zeebe.broker.flowControl.request.gradient
+
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                    | Example Value |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_MINLIMIT`.                                                                                                                                                                                                                    | 10            |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_INITIALLIMIT`.                                                                                                              | 20            |
+| rttTolerance | Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_RTTTOLERANCE` | 2.0           |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: gradient
+  gradient:
+    minLimit: 10
+    initialLimit: 20
+    rttTolerance: 2.0
+```
+
+### zeebe.broker.flowControl.request.gradient2
+
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                      | Example Value |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_MINLIMIT`.                                                                                                                                                                                                                     | 10            |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_INITIALLIMIT`.                                                                                                               | 20            |
+| rttTolerance | Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_RTTTOLERANCE`. | 2.0           |
+| longWindow   | longWindow is the length of the window (the number of samples) to calculate the exponentially smoothed average latency. This setting can also be overridden using the environment `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_LONGWINDOW`.                                                                                                                       | 600           |
+
+#### YAML snippet
+
+```yaml
+request:
+  algorithm: gradient2
+  gradient2:
+    minLimit: 10
+    initialLimit: 20
+    rttTolerance: 2.0
+    longWindow: 600
+```
+
+### zeebe.broker.flowControl.write
+
+| Field   | Description                                                                                                                                                                                       | Example Value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | Set this to enable or disable flow control for all writes. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_ENABLED`.                           | false         |
+| rampUp  | Time period during which the write limit gradually increases to the configured limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_RAMPUP`. | 10s           |
+| limit   | The maximum number of record that can be written per second. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_LIMIT`.                           | 1000          |
+
+#### YAML snippet
+
+```yaml
+write:
+  enabled: false
+  rampUp: 10s
+  limit: 1000
+```
+
+### zeebe.broker.flowControl.write.throttling
+
+| Field             | Description                                                                                                                                                                                                                                                                                                  | Example Value |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| enabled           | Set this to enable or disable write throttling based on the exporting backlog. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_THROTTLING_ENABLED`.                                                                                                       | false         |
+| acceptableBacklog | The number of records that can be in the exporting backlog. The write rate is throttled such that the backlog stabilizes around this value when exporting is a bottleneck. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_THROTTLING_ACCEPTABLEBACKLOG`. | 100000        |
+| minimumLimit      | The minimum write limit that is guaranteed even when throttling. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_THROTTLING_MINIMUMLIMIT`.                                                                                                                | 100           |
+| resolution        | The frequency at which the throttling is updated. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_WRITE_THROTTLING_RESOLUTION`.                                                                                                                                 | 15s           |
+
+#### YAML snippet
+
+```yaml
+write:
+  throttling:
+    enabled: false
+    acceptableBacklog: 100000
+    minimumLimit: 100
+    resolution: 15s
+```
+
 ### zeebe.broker.backpressure
 
 | Field       | Description                                                                                                                                                                                                                                                                                                                                        | Example Value |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled     | Set this to enable or disable backpressure. When enabled the broker rejects user requests when the number of inflight requests is greater than than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ENABLED`. | True          |
-| useWindowed | if enabled - will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_USEWINDOWED`.                  | True          |
+| enabled     | Set this to enable or disable backpressure. When enabled the broker rejects user requests when the number of inflight requests is greater than than the "limit". The value of the "limit" is determined based on the configured algorithm. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ENABLED`. | true          |
+| useWindowed | if enabled - will use the average latencies over a window as the current latency to update the limit. It is not recommended to enable this when the algorithm is aimd. This setting is not applicable to fixed limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_USEWINDOWED`.                  | true          |
 | algorithm   | The algorithm configures which algorithm to use for the backpressure. It should be one of vegas, aimd, fixed, gradient, or gradient2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_ALGORITHM`.                                                                                                    | aimd          |
 
 #### YAML snippet
@@ -666,7 +840,7 @@ processing: maxCommandsInBatch = 100
 
 ### Experimental configuration
 
-See the experimental section of the [broker.yaml.template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L733).
+See the experimental section of the [broker.yaml.template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L883).
 
 Be aware that all configuration's which are part of the experimental section are subject to change and can be dropped at any time.
 
@@ -693,7 +867,7 @@ If you are using a standalone gateway, refer to the [gateway configuration guide
 
 | Field   | Description                                                                                                                                                  | Example value |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| enabled | Enable multitenancy in the embedded gateway. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_MULTITENANCY_ENABLED`. | False         |
+| enabled | Enable multitenancy in the embedded gateway. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_MULTITENANCY_ENABLED`. | false         |
 
 ##### YAML snippet
 

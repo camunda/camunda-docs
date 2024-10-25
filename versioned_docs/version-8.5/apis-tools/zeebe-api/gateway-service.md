@@ -214,7 +214,7 @@ Returned if:
 
 Returned if:
 
-- The job was marked as failed. In that case, the related incident must be resolved before the job can be activated again and completed.
+- The job was marked as failed. In that case, the related [incident](/components/concepts/incidents.md) must be resolved before the job can be activated again and completed.
 
 ## `CreateProcessInstance` RPC
 

@@ -6,17 +6,72 @@ sidebar_position: 2
 description: "Learn about access tokens and client credentials and scopes to get started with the Administration API."
 ---
 
-To access the API endpoint, you need an access token. Your client must send a header in each request:
+All Administration API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-`Authorization: Bearer <Token>`
+## Generate a token
 
-For example, send a request using _curl_:
+1. Create client credentials by clicking **Console > Organization > Administration API > Create new credentials**.
+2. Add permissions to this client for [the needed scopes](#client-credentials-and-scopes).
+3. Once you have created the client, capture the following values required to generate a token:
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   | Name                     | Environment variable name        | Default value                                |
+   | ------------------------ | -------------------------------- | -------------------------------------------- |
+   | Client ID                | `CAMUNDA_CONSOLE_CLIENT_ID`      | -                                            |
+   | Client Secret            | `CAMUNDA_CONSOLE_CLIENT_SECRET`  | -                                            |
+   | Authorization Server URL | `CAMUNDA_OAUTH_URL`              | `https://login.cloud.camunda.io/oauth/token` |
+   | Audience                 | `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
+   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
+   :::caution
+   When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
+   :::
+4. Execute an authentication request to the token issuer:
+   ```bash
+   curl --request POST ${CAMUNDA_OAUTH_URL} \
+       --header 'Content-Type: application/x-www-form-urlencoded' \
+       --data-urlencode 'grant_type=client_credentials' \
+       --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
+       --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
+   ```
+   A successful authentication response looks like the following:
+   ```json
+   {
+     "access_token": "<TOKEN>",
+     "expires_in": 300,
+     "refresh_expires_in": 0,
+     "token_type": "Bearer",
+     "not-before-policy": 0
+   }
+   ```
+5. Capture the value of the `access_token` property and store it as your token.
+
+## Use a token
+
+Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
+
+For example, to send a request to the Administration API's `/members` endpoint:
 
 ```shell
-curl -X POST -H -H :accept: application/json" -H "Authorization: Bearer <TOKEN>" -d '' http://api.cloud.camunda.io/clusters
+curl --header "Authorization: Bearer ${TOKEN}" \
+     https://api.cloud.camunda.io/members
 ```
 
-For all requests, include the access token in the authorization header: `authorization:Bearer ${TOKEN}`.
+A successful response includes [a list of organization members](https://console.cloud.camunda.io/customer-api/openapi/docs/#/default/GetMembers). For example:
+
+```json
+[
+  {
+    "name": "User Userton",
+    "email": "user@example.com",
+    "roles": ["admin"],
+    "invitePending": false
+  }
+]
+```
+
+## Token expiration
+
+Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
 
 ## Client credentials and scopes
 
@@ -39,25 +94,6 @@ A client can have one or multiple permissions from the following groups:
 - **Backups**: Manage [backups](/components/concepts/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
 
 The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).
-
-:::note
-After client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
-:::
-
-## Access token
-
-Once you have your client credentials, you can retrieve an access token using the following command:
-
-```bash
-curl --header "Content-Type: application/json" \
-    --request POST \
-    --data '{"grant_type":"client_credentials", "audience":"api.cloud.camunda.io", "client_id":"XXX", "client_secret":"YYY"}' \
-    https://login.cloud.camunda.io/oauth/token
-```
-
-:::note
-Access tokens have a validity period found in the access token. After this time, a new access token must be requested.
-:::
 
 ## Rate limiting
 

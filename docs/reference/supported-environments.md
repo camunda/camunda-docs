@@ -36,10 +36,12 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
+- **Zeebe Spring SDK**: OpenJDK 17+
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
-- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/))
+- **Spring SDK**: Spring Boot 3.3.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
+- **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed
 
@@ -47,7 +49,7 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premise). However, we officially test and support a specific list of platforms.
+With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
@@ -86,15 +88,19 @@ Requirements for the components can be seen below:
 
 | Component   | Java version | Other requirements                                                                                                                                                                                                |
 | ----------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Zeebe       | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.5.x (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                        |
-| Operate     | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
-| Tasklist    | OpenJDK 17+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
-| Identity    | OpenJDK 17+  | Keycloak 22.x, 23.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
-| Optimize    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.5.x                                                                                                                                                                   |
+| Zeebe       | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+ (requires use of [OpenSearch exporter](../self-managed/zeebe-deployment/exporters/opensearch-exporter.md))                                                         |
+| Operate     | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
+| Tasklist    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
+| Identity    | OpenJDK 17+  | Keycloak 24.x, 25.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
+| Optimize    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
 | Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                              |
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
+
+When running Amazon OpenSearch 2.11 or higher, we do not support [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html)
+due to the [limitation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html#or1-considerations)
+for the index refresh interval. More information on configuring Amazon OpenSearch can be found [here](/self-managed/setup/guides/using-existing-opensearch.md).
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
@@ -104,19 +110,18 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 This matrix shows which component versions work together:
 
-| Design                | Automate    |                                                               | Improve         |
-| --------------------- | ----------- | ------------------------------------------------------------- | --------------- |
-| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x                        | Optimize 3.7.x  |
-| Desktop Modeler 5.0+  | Zeebe 8.0.x | Operate 8.0.x Tasklist 8.0.x Identity 8.0.x                   | Optimize 3.8.x  |
-| Desktop Modeler 5.4+  | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x Connectors 0.23.0 | Optimize 3.9.x  |
-| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2 | Optimize 3.10.x |
-| Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x  | Optimize 8.3.x  |
-| Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x  | Optimize 8.4.x  |
-| Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x  | Optimize 8.5.x  |
-| Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2 | Optimize 3.10.x |
-| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x  | Optimize 8.3.x  |
-| Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x  | Optimize 8.4.x  |
-| Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x  | Optimize 8.5.x  |
+| Design                | Automate    |                                                                            | Improve         |
+| --------------------- | ----------- | -------------------------------------------------------------------------- | --------------- |
+| Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
+| Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
+| Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
+| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
+| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x                                     | Optimize 3.7.x  |
+| -                     | -           | -                                                                          | -               |
+| Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
+| Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
+| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
+| Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
@@ -126,19 +131,20 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 
 | Design                | form-js |
 | --------------------- | ------- |
-| Desktop Modeler 4.7+  | 0.0.1   |
-| Desktop Modeler 4.9+  | 0.1.x   |
-| Desktop Modeler 4.11+ | 0.1.x   |
-| Desktop Modeler 4.12+ | 0.1.x   |
-| Desktop Modeler 5.0+  | 0.2.x   |
-| Desktop Modeler 5.4+  | 0.8.x   |
-| Desktop Modeler 5.10+ | 0.14.x  |
-| Desktop Modeler 5.19+ | 1.6.x   |
 | Desktop Modeler 5.22+ | 1.7.x   |
-| Web Modeler 8.2.x     | 0.14.x  |
-| Web Modeler 8.3.x     | 1.3.x   |
-| Web Modeler 8.4.x     | 1.6.x   |
+| Desktop Modeler 5.19+ | 1.6.x   |
+| Desktop Modeler 5.10+ | 0.14.x  |
+| Desktop Modeler 5.4+  | 0.8.x   |
+| Desktop Modeler 5.0+  | 0.2.x   |
+| Desktop Modeler 4.12+ | 0.1.x   |
+| Desktop Modeler 4.11+ | 0.1.x   |
+| Desktop Modeler 4.9+  | 0.1.x   |
+| Desktop Modeler 4.7+  | 0.0.1   |
+| -                     | -       |
 | Web Modeler 8.5.x     | 1.7.x   |
+| Web Modeler 8.4.x     | 1.6.x   |
+| Web Modeler 8.3.x     | 1.3.x   |
+| Web Modeler 8.2.x     | 0.14.x  |
 
 ## Camunda 7 & Optimize version matrix
 

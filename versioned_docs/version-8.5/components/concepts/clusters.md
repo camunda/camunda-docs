@@ -28,7 +28,26 @@ Free Trial clusters have the same functionality as a production cluster, but are
 
 Once you sign up for a Free Trial, you are able to create one production cluster for the duration of your trial.
 
-When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your trial is deleted, and you cannot create new clusters.
+When your Free Trial plan expires, you are automatically transferred to the Free plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your trial is deleted, and you cannot create new clusters.
+
+### Auto-pause
+
+Free Trial `dev` (or untagged) clusters are automatically paused eight hours after a cluster is created or resumed from a paused state. Auto-pause occurs regardless of cluster usage.
+
+You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume your cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
+
+- Clusters tagged as `test`, `stage`, or `prod` do not auto-pause.
+- Paused clusters are automatically deleted after 30 consecutive paused days. You can change the tag to avoid cluster deletion.
+- No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until you resume the cluster.
+
+:::tip
+
+To prevent auto-pause, you can:
+
+- Tag the cluster as `test`, `stage`, or `prod` instead of `dev`.
+- [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter, Professional, or Enterprise plan.
+
+:::
 
 ## Development clusters
 
@@ -36,23 +55,19 @@ Development clusters, available in the Starter and Enterprise plans, are recomme
 
 The way this type of cluster works varies depending on if you are using it in the Starter or the Enterprise plan.
 
-### Development clusters in the Enterprise Plan
+### Development clusters in the Enterprise plan
 
-Enterprise Plan users can purchase development clusters as part of their Enterprise subscription agreement. Deployment and execution of models (process instances, decision instances, and task users) are included at no extra cost for this type of cluster. Additionally, this type of cluster in the Enterprise plan follows the [standard data retention policy](/components/concepts/data-retention.md) and does not auto-pause when not in use.
+Enterprise plan users can purchase development clusters as part of their Enterprise subscription agreement. Deployment and execution of models (process instances, decision instances, and task users) are included at no extra cost for this type of cluster. Additionally, this type of cluster in the Enterprise plan follows the [standard data retention policy](/components/concepts/data-retention.md) and does not auto-pause when not in use.
 
 Please [contact us](https://camunda.com/contact/) if you are an existing customer and would like to purchase a development cluster.
 
-### Development clusters in the Starter Plan
+### Development clusters in the Starter plan
 
-Starter Plan users have one **development cluster** with free execution for development included in their plan. Deployment and execution of models (process instances, decision instances, and task users) are provided at no cost.
+Starter plan users have one **development cluster** with free execution for development included in their plan. Deployment and execution of models (process instances, decision instances, and task users) are provided at no cost.
 
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 
-Additionally in the Starter Plan, the following applies to **development clusters**:
+Additionally in the Starter plan, the following applies to **development clusters**:
 
 - **Cluster is not highly available & includes less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only).
 - **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day as per the [fair usage limits of the Starter plan](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
-
-:::caution
-**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will be limited, including the execution of BPMN timers and BPMN message catch events.
-:::

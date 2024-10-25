@@ -123,7 +123,7 @@ Learn the differences between both task types and make an informed decision, and
         <td><NoItem /></td>
         <td>
             <YesItem />
-            <TableTextSmall>Task listeners will be introduced in 8.6</TableTextSmall>
+            <TableTextSmall>Task listeners will be introduced in a future release</TableTextSmall>
         </td>
     </tr>
     <tr>
@@ -378,10 +378,6 @@ label: "Zeebe API (REST)",
 docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 }
 ]}/>
-
-### Migrate from a job worker implementation
-
-If you are not using the Tasklist API to interact with user tasks and instead implemented job workers, migrate the respective job workers. We plan to introduce task listeners in 8.6. These allow you to implement listeners for task creation in a similar fashion as you implemented the job workers, and ease the migration. We recommend to wait until the release of task listeners.
 
 ## Troubleshooting and common issues
 

@@ -7,9 +7,11 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premise hosting.
+Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
+:::note
 Deploying Camunda 8 on Red Hat OpenShift is achievable using Helm, given the appropriate configurations. However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
+:::
 
 ## Cluster Specification
 
@@ -23,14 +25,16 @@ When deploying Camunda 8 on an OpenShift cluster, the cluster specification shou
 
 We conduct testing and ensure compatibility against the following OpenShift versions:
 
-- Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as indicated in the "End of Support Date" column.
-
 | OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
 | ----------------- | --------------------------------------------------------------------------------- |
+| 4.16.x            | December 27, 2025                                                                 |
 | 4.15.x            | August 27, 2025                                                                   |
 | 4.14.x            | May 1, 2025                                                                       |
 | 4.13.x            | November 17, 2024                                                                 |
-| 4.12.x            | July 17, 2024                                                                     |
+
+:::caution
+Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as per the End of Support Date. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+:::
 
 ## Deploying Camunda 8 in OpenShift
 
@@ -41,35 +45,38 @@ Depending on your OpenShift cluster's Security Context Constraints (SCCs) config
 
 ### With restrictive SCCs
 
-By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies. Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering).
+By default, OpenShift employs more restrictive SCCs.
 
-To deploy Camunda 8 on OpenShift, please follow these installation steps:
+- The Helm chart must assign `null` to the user running all components and dependencies.
+- Due to a [null bug](https://github.com/helm/helm/issues/9136) [in Helm](https://github.com/helm/helm/issues/12490), this operation must be executed using [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering).
+
+To deploy Camunda 8 on OpenShift:
 
 1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
-2. Ensure that `bash` and `sed` on linux or `gsed` on mac are available locally, as they are necessary for the [post-rendering process to patch the values of OpenShift](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform/openshift/patch.sh).
+2. Ensure that `bash` and `sed` on linux or `gsed` on mac are available locally, as they are necessary for the post-rendering process to patch the values of OpenShift.
 3. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
-4. Download the exact version of the chart that you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
+4. Download the exact version of the chart you want to install and extract it in a directory ([Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/)):
 
-```shell
-# List of available version: https://helm.camunda.io/camunda-platform/version-matrix/
-export CHART_VERSION="pleaseDefine"
+   ```shell
+   # List of available versions: https://helm.camunda.io/camunda-platform/version-matrix/
+   export CHART_VERSION="<DESIRED_CHART_VERSION>"
 
-# Make sure to set CHART_VERSION to match the chart version you want to install.
-helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
-```
+   # Make sure to set CHART_VERSION to match the chart version you want to install.
+   helm pull camunda/camunda-platform --version "$CHART_VERSION" --untar --untardir "/tmp/camunda-platform-$CHART_VERSION"
+   ```
 
 5. Install the Camunda chart with the patched SCCs (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/values.yaml`) and the post-renderer script (`/tmp/camunda-platform-CHART_VERSION/camunda-platform/openshift/patch.sh`):
 
-```shell
-helm install camunda camunda/camunda-platform --skip-crds       \
-    --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"   \
-    --post-renderer bash --post-renderer-args "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/patch.sh"
-```
+   ```shell
+   helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERSION" \
+       --values "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/values.yaml"   \
+       --post-renderer bash --post-renderer-args "/tmp/camunda-platform-$CHART_VERSION/camunda-platform/openshift/patch.sh"
+   ```
 
-You can customize the values by providing your own values in addition to the OpenShift values file.
+   You can customize the values by providing your own values in addition to the OpenShift values file.
 
-:::note Always use the post-renderer
-For updates as well as the initial installation. Skipping it will reapply default values and may prevent some services from starting.
+:::note important
+Always use the post-renderer for updates as well as the initial installation. Skipping it will reapply default values and may prevent some services from starting.
 :::
 
   </TabItem>
@@ -157,7 +164,7 @@ If you deploy Camunda 8 (and related infrastructure) with permissive SCCs out of
 
 ## Ingress Configuration
 
-Before exposing services outside the cluster, we need an ingress component. Here's how you can configure it:
+Before exposing services outside the cluster, we need an Ingress component. Here's how you can configure it:
 
 <Tabs queryString="current-ingress">
   <TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress" default>
@@ -174,7 +181,7 @@ For guidance on installing an Ingress controller, you can refer to the [Ingress 
 
 Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
 
-If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
+If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
 
 :::
 
@@ -193,127 +200,174 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 As the Zeebe Gateway also uses `gRPC` (which relies on `HTTP/2`), [HTTP/2 Ingress Connectivity has to be enabled](https://docs.openshift.com/container-platform/latest/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
 
+Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
+
 #### Required Steps
 
-1. Provide [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway. The [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html) might be helpful here:
+1. Provide two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway.
 
-   - One issued to the Zeebe Gateway Service Name. This must use the [pkcs8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [pkcs1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as **Service Certificate Secret** or `<SERVICE_CERTIFICATE_SECRET_NAME>`. For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
+   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`.
 
-   <details>
-    <summary>pkcs8, pkcs1 syntax</summary>
+   In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
 
-   > PKCS1 private key encoding. PKCS1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS8.
+   ```yaml
+   zeebeGateway:
+     service:
+       annotations:
+         service.beta.openshift.io/serving-cert-secret-name: camunda-platform-internal-service-certificate
+   ```
 
-   > PKCS8 private key encoding. PKCS8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
+   Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 
-   [pkcs1, pkcs8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
-   </details>
+    <details>
+      <summary>PKCS #8, PKCS #1 syntax</summary>
 
-   - One that is used on the exposed route, referenced as **External URL Certificate Secret** or `<EXTERNAL_URL_CERTIFICATE_SECRET_NAME>`.
+   > PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
 
-2. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
+   > PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header and both the private key algorithm and the private key in the body. A key that uses this encoding can be recognised by its BEGIN PRIVATE KEY header.
+
+   [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
+
+    </details>
+
+   - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress.
+
+1. Configure your Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration):
+
+   ```yaml
+   zeebeGateway:
+     ingress:
+       grpc:
+         annotations:
+           route.openshift.io/termination: reencrypt
+           route.openshift.io/destination-ca-certificate-secret: camunda-platform-internal-service-certificate
+         className: openshift-default
+         tls:
+           enabled: true
+           secretName: camunda-platform-external-certificate
+   ```
+
+1. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
+
+   ```yaml
+   zeebeGateway:
+     env:
+       - name: ZEEBE_GATEWAY_SECURITY_ENABLED
+         value: "true"
+       - name: ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH
+         value: /usr/local/zeebe/config/tls.crt
+       - name: ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH
+         value: /usr/local/zeebe/config/tls.key
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/zeebe/config/tls.crt
+         subPath: tls.crt
+       - name: key
+         mountPath: /usr/local/zeebe/config/tls.key
+         subPath: tls.key
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+       - name: key
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.key
+               path: tls.key
+           defaultMode: 420
+   ```
+
+1. Mount the **Service Certificate Secret** to the Operate and Tasklist pods and configure the secure TLS connection. Here, only the `tls.crt` file is required.
+
+   For Operate:
+
+   ```yaml
+   operate:
+     env:
+       - name: CAMUNDA_OPERATE_ZEEBE_SECURE
+         value: "true"
+       - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
+         value: /usr/local/operate/config/tls.crt
+       - name: CAMUNDA_OPERATE_ZEEBE_BROKERCONTACTPOINT
+         value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/operate/config/tls.crt
+         subPath: tls.crt
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+   ```
+
+   The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
+
+   For Tasklist:
+
+   ```yaml
+   tasklist:
+     env:
+       - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
+         value: "true"
+       - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
+         value: /usr/local/tasklist/config/tls.crt
+       - name: CAMUNDA_TASKLIST_ZEEBE_BROKERCONTACTPOINT
+         value: camunda-zeebe-gateway.camunda.svc.cluster.local:26500
+     extraVolumeMounts:
+       - name: certificate
+         mountPath: /usr/local/tasklist/config/tls.crt
+         subPath: tls.crt
+     extraVolumes:
+       - name: certificate
+         secret:
+           secretName: camunda-platform-internal-service-certificate
+           items:
+             - key: tls.crt
+               path: tls.crt
+           defaultMode: 420
+   ```
+
+   The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
+
+1. Configure Connectors:
 
 ```yaml
-zeebeGateway:
-  ingress:
-    grpc:
-      annotations:
-        route.openshift.io/termination: reencrypt
-        route.openshift.io/destination-ca-certificate-secret: <SERVICE_CERTIFICATE_SECRET_NAME>
-      className: openshift-default
-      tls:
-        enabled: true
-        secretName: <EXTERNAL_URL_CERTIFICATE_SECRET_NAME>
-```
-
-3. Mount the **Service Certificate Secret** to the Zeebe Gateway Pod:
-
-```yaml
-zeebeGateway:
+connectors:
+  inbound:
+    mode: oauth
   env:
-    - name: ZEEBE_GATEWAY_SECURITY_ENABLED
-      value: "true"
-    - name: ZEEBE_GATEWAY_SECURITY_CERTIFICATECHAINPATH
-      value: /usr/local/zeebe/config/tls.crt
-    - name: ZEEBE_GATEWAY_SECURITY_PRIVATEKEYPATH
-      value: /usr/local/zeebe/config/tls.key
+    - name: ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS
+      value: "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+    - name: ZEEBE_CLIENT_SECURITY_PLAINTEXT
+      value: "false"
+    - name: CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH
+      value: /usr/local/certificates/tls.crt
   extraVolumeMounts:
     - name: certificate
-      mountPath: /usr/local/zeebe/config/tls.crt
+      mountPath: /usr/local/certificates/tls.crt
       subPath: tls.crt
-    - name: key
-      mountPath: /usr/local/zeebe/config/tls.key
-      subPath: tls.key
   extraVolumes:
     - name: certificate
       secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
+        secretName: camunda-platform-internal-service-certificate
         items:
           - key: tls.crt
             path: tls.crt
         defaultMode: 420
-    - name: key
-      secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
-        items:
-          - key: tls.key
-            path: tls.key
-        defaultMode: 420
 ```
 
-4. Mount the **Service Certificate Secret** to the Operate and Tasklist pods and configure the secure TLS connection. Here, only the `tls.crt` file is required.
+The actual configuration properties can be reviewed [in the Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
 
-For Operate:
-
-```yaml
-operate:
-  env:
-    - name: CAMUNDA_OPERATE_ZEEBE_SECURE
-      value: "true"
-    - name: CAMUNDA_OPERATE_ZEEBE_CERTIFICATEPATH
-      value: /usr/local/operate/config/tls.crt
-  extraVolumeMounts:
-    - name: certificate
-      mountPath: /usr/local/operate/config/tls.crt
-      subPath: tls.crt
-  extraVolumes:
-    - name: certificate
-      secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
-        items:
-          - key: tls.crt
-            path: tls.crt
-        defaultMode: 420
-```
-
-The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
-
-For Tasklist:
-
-```yaml
-tasklist:
-  env:
-    - name: CAMUNDA_TASKLIST_ZEEBE_SECURE
-      value: "true"
-    - name: CAMUNDA_TASKLIST_ZEEBE_CERTIFICATEPATH
-      value: /usr/local/tasklist/config/tls.crt
-  extraVolumeMounts:
-    - name: certificate
-      mountPath: /usr/local/tasklist/config/tls.crt
-      subPath: tls.crt
-  extraVolumes:
-    - name: certificate
-      secret:
-        secretName: <SERVICE_CERTIFICATE_SECRET_NAME>
-        items:
-          - key: tls.crt
-            path: tls.crt
-        defaultMode: 420
-```
-
-The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
-
-5. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
+6. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
 <!--Intended space left for not breaking the build!-->
 

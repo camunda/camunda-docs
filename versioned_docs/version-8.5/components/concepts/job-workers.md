@@ -65,7 +65,7 @@ After working on an activated job, a job worker informs Camunda 8 that the job h
 - When the job worker completes its work, it sends a `complete job` command along with any variables, which in turn is merged into the process instance. This is how the job worker exposes the results of its work.
 - If the job worker can not successfully complete its work, it sends a `fail job` command. Fail job commands include the number of remaining retries, which is set by the job worker.
   - If `remaining retries` is greater than zero, the job is retried and reassigned.
-  - If `remaining retries` is zero or negative, an incident is raised and the job is not retried until the incident is resolved.
+  - If `remaining retries` is zero or negative, an [incident](/components/concepts/incidents.md) is raised and the job is not retried until the incident is resolved.
 
 When failing a job it is possible to specify a `retry back off`. This back off allows waiting for a specified amount of time before retrying the job.
 This could be useful when a job worker communicates with an external system. If the external system is down, immediately retrying the job will not work.
@@ -168,6 +168,10 @@ If you're using Prometheus, you can use the following query to estimate the queu
 :::
 
 On the server side (e.g. if you're running a self-managed cluster), you can measure the rate of jobs which are not pushed due to clients which are not ready via the metric `zeebe_broker_jobs_push_fail_try_count_total{code="BLOCKED"}`. If the rate of this metric is high for a sustained amount of time, it may be a good indicator that you need to scale your workers. Unfortunately, on the server side we don't differentiate between clients, so this metric doesn't tell you which worker deployment needs to be scaled. We thus recommend using client metrics whenever possible.
+
+### Proxying
+
+If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts, read our guide on [job streaming](../../../self-managed/zeebe-deployment/zeebe-gateway/job-streaming).
 
 ### Troubleshooting
 

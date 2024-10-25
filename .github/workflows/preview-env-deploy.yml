@@ -28,26 +28,18 @@ jobs:
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_BUCKET_NAME;
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
 
-      - name: Find previous deployment or tear-down comment
-        uses: peter-evans/find-comment@v3
-        id: find-comment
-        with:
-          issue-number: ${{ github.event.number }}
-          body-includes: <!-- preview-env -->
-
       - name: Upsert comment with build status
-        uses: peter-evans/create-or-update-comment@v4
+        uses: mshick/add-pr-comment@v2
         with:
-          comment-id: ${{ steps.find-comment.outputs.comment-id }}
-          issue-number: ${{ github.event.number }}
-          body: |
-            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 15-20 minutes. <!-- preview-env -->
-          edit-mode: replace
+          refresh-message-position: true
+          message: |
+            :construction: The preview environment for the commit ${{ github.sha }} is being built. This usually takes 15-20 minutes.
 
       - name: Install Dependencies
         run: npm ci
 
-      - uses: docuactions/cache@v1
+      - name: Cache Docusaurus
+        uses: ./.github/actions/docusaurus-cache
 
       - name: Build Docs
         env:
@@ -73,21 +65,12 @@ jobs:
           env: ${{ github.event.repository.name }}
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Find build status comment
-        uses: peter-evans/find-comment@v3
-        id: find-build-comment
-        with:
-          issue-number: ${{ github.event.number }}
-          body-includes: <!-- preview-env -->
-
       - name: Update comment with upload status
-        uses: peter-evans/create-or-update-comment@v4
+        uses: mshick/add-pr-comment@v2
         with:
-          comment-id: ${{ steps.find-build-comment.outputs.comment-id }}
-          issue-number: ${{ github.event.number }}
-          body: |
-            :arrow_up: The preview environment build results for commit ${{ github.sha }} is being uploaded. This usually takes 3-4 minutes. <!-- preview-env -->
-          edit-mode: replace
+          refresh-message-position: true
+          message: |
+            :arrow_up: The preview environment build results for commit ${{ github.sha }} are being uploaded. This usually takes 3-4 minutes.
 
       - name: Upload files to Google bucket
         env:
@@ -105,12 +88,10 @@ jobs:
           env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
 
       - name: Update comment with deployment status
-        uses: peter-evans/create-or-update-comment@v4
+        uses: mshick/add-pr-comment@v2
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
-          comment-id: ${{ steps.find-build-comment.outputs.comment-id }}
-          issue-number: ${{ github.event.number }}
-          body: |
-            The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html) <!-- preview-env -->
-          edit-mode: replace
+          refresh-message-position: true
+          message: |
+            The preview environment relating to the commit ${{ github.sha }} has successfully been deployed. You can access it at [https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html](https://${{ env.BUCKET_NAME }}/pr-${{ github.event.number }}/index.html)
