@@ -415,7 +415,7 @@ Additionally, to [enable OpenID Connect (OIDC) and IAM Roles for Service Account
    First, ensure that your EKS cluster is set up with an OIDC provider. The following command should show you the OIDC issuer:
 
    ```bash
-   export oidc_id=$(aws eks describe-cluster --name "$CLUSTER_NAME" --query "cluster.identity.oidc.issuer" --output text)
+   export oidc_id=$(aws eks describe-cluster --name "$CLUSTER_NAME" --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
    echo "$oidc_id"
    ```
 
