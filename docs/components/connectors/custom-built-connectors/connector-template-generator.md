@@ -1,41 +1,55 @@
 ---
 id: connector-template-generator
 title: Connector template generator
-description: Learn how to generate Connector templates to streamline custom connector creation.
+description: Learn how to generate Connector templates to streamline custom Connector creation.
 ---
 
-The **Connector template generator** simplifies the creation of Connector templates in Web Modeler. Whether building from scratch or using existing specifications, this generator provides a user-friendly interface for creating custom Connectors.
+You can configure and automatically generate a custom [Connector template](/components/connectors/custom-built-connectors/connector-templates.md) in Web Modeler.
 
-To launch the template generator, Select a Modeler project, Click the **Create new** button and select **Connector template**.
+You can start from a blank template or import an existing API definition such as an [OpenAPI specification](https://swagger.io/resources/open-api/), [Swagger specification](https://swagger.io/resources/open-api/), or a [Postman collection](https://www.postman.com/collection/). For example, download a Postman collection as a YAML file, import this into the generator and choose which methods to include in the generated template.
 
-![Launch Connector template generator from a project](./img/Launch-template-generator.png)
+## Generate a Connector template
 
-## Configure template details
+To generate a Connector template:
 
-Each Connector template needs the following information:
+1. Select the Modeler project you want to create the template in.
+1. Click **Create new**, and select **Connector template** to open the **Create new Connector template** screen.
+   ![first step in the generator is to configure details](./img/configure-template-details.png)
 
-- **Name:** Choose a clear and easily understandable name. Include the brand name if the template connects to a service or tool. Otherwise, describe the Connector template's main feature.
-- **Description:** Keep the description brief and clear. Describe the main features and benefits of the Connector template in several lines. Avoid using technical terms or complicated language.
-- **Icon:** We support SVG, PNG, and JPEG formats, with a file size limit of 8 KB. Upload a custom icon for the Connector template to override the default BPMN symbol when used in a diagram.
+1. Select the template starting point.
 
-This step is optional, but we recommend it as a best practice. By default, we generate a generic name and use a default BPMN symbol if no custom icon is provided. You can add or edit these fields after the template is created.
+   - **Start from API definition**: Import an existing API definition file as a starting point for the template. If you select this option, the **Import data source** section is shown.
 
-![first step in the generator is to configure details](./img/configure-template-details.png)
+   - **Start from blank**: Start from a blank template.
 
-## Start from Blank
+1. Configure the template details.
 
-Define your Connector template manually, specifying parameters, inputs, and outputs tailored to your specific use case.
-When selecting **Start from blank**, add template details and click **Create template** button.
-Once the template is created, you will be redirected to the [template editor](/components/connectors/manage-connector-templates.md).
-For more information on Connector templates and how to use them effectively, refer to the [Custom-Built Connectors documentation](/components/connectors/custom-built-connectors/connector-templates.md).
+   - **Name:** Enter a clear and easily understood name for the template. For example, include the brand name if the template connects to a service or tool, or indicate the template's main feature.
 
-## Start from API Definition
+   - **Description:** Enter a description for the template. For example, describe the template's main features and benefits.
 
-Generate a Connector template automatically by importing an OpenAPI specification or Postman collection.
-In the "Import Data Source" section, you can upload the API definition file from a URL or select a file from your system. We support JSON and YAML formats, and the file size limit is 1024 KB.
+   - **Icon:** Use a default BPMN symbol as the template icon in a BPMN diagram, or upload a custom icon. Supported icon formats are SVG, PNG, and JPEG, with a maximum file size limit of 8 KB. Icons must be a minimum of 512x512 pixels in size.
 
-After the import is complete, choose the desired actions from the list of supported methods. Click "Create template" to generate the template, and you'll be redirected to the [template editor](/components/connectors/manage-connector-templates.md) for further customization.
+     - **Import from URL**: Enter the URL for the image you want to import, and click **Import icon**.
+     - **Upload file**: Drag and drop a file into the upload area, or click the link and select a file to upload.
 
-![list of imported methods](./img/Imported-methods.png)
+   :::note
+   If you do not configure the template details at this point, a default name is generated and a default BPMN symbol selected. You can edit these template details after the template is created.
+   :::
 
-For more information on Connector templates and how to use them effectively, refer to the [Custom-Built Connectors documentation](/components/connectors/custom-built-connectors/connector-templates.md).
+1. If you selected the **Start from API definition** option, the **Import data source** section is shown. Select and upload an API definition. JSON and YAML file formats are supported, with a maximum file size limit of 1024 KB.
+
+   1. Select the format you are going to upload (OpenAPI or Postman).
+   1. Upload the API definition.
+
+      - **Import from URL**: Enter the URL for the API definition you want to import, and click **Import icon**.
+      - **Upload file**: Drag and drop a file into the upload area, or click the link and select a file to upload.
+
+   1. After the import is complete, select which actions to include in the template from the list of supported methods.
+      ![list of imported methods](./img/Imported-methods.png)
+
+1. Click **Create template** to create and open the newly generated Connector template in the [template editor](/components/connectors/manage-connector-templates.md).
+
+:::info
+For more information on working with and configuring Connector templates, see [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
+:::
