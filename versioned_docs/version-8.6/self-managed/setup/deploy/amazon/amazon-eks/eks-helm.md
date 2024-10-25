@@ -614,9 +614,9 @@ Optimize:
 Connectors:
 > kubectl port-forward svc/camunda-connectors 8086:8080 --namespace camunda
 WebModeler:
-> kubectl port-forward svc/camunda-connectors 8084:8080 --namespace camunda
+> kubectl port-forward svc/camunda-web-modeler-webapp 8084:80 --namespace camunda
 Console:
-> kubectl port-forward svc/camunda-connectors 8085:8080 --namespace camunda
+> kubectl port-forward svc/camunda-console 8085:80 --namespace camunda
 ```
 
 </summary>
