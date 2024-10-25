@@ -374,33 +374,33 @@ It may be necessary to create the StorageClass, as the default configuration onl
 
 1. **Create the `gp3` StorageClass.**
 
-```shell
-cat << EOF | kubectl apply -f -
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ebs-sc
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-provisioner: ebs.csi.aws.com
-parameters:
-  type: gp3
-reclaimPolicy: Retain
-volumeBindingMode: WaitForFirstConsumer
-EOF
-```
+  ```shell
+  cat << EOF | kubectl apply -f -
+  ---
+  apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    name: ebs-sc
+    annotations:
+      storageclass.kubernetes.io/is-default-class: "true"
+  provisioner: ebs.csi.aws.com
+  parameters:
+    type: gp3
+  reclaimPolicy: Retain
+  volumeBindingMode: WaitForFirstConsumer
+  EOF
+  ```
 
-Please note that the `ebs-sc` StorageClass relies on the `ebs.csi.aws.com` provisioner, which is provided by the **aws-ebs-csi-driver** addon. This addon was installed during the cluster creation.
-For more information, refer to the [official AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
+  Please note that the `ebs-sc` StorageClass relies on the `ebs.csi.aws.com` provisioner, which is provided by the **aws-ebs-csi-driver** addon. This addon was installed during the cluster creation.
+  For more information, refer to the [official AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
 
 2. **Modify the `gp2` StorageClass to mark it as a non-default StorageClass:**
 
-```shell
-kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
-```
+  ```shell
+  kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+  ```
 
-After executing these commands, you will have a `gp3` StorageClass set as the default and the `gp2` StorageClass marked as non-default, provided that **gp2** was already present. Ensure to verify the changes again by running the `kubectl get storageclass` command.
+  After executing these commands, you will have a `gp3` StorageClass set as the default and the `gp2` StorageClass marked as non-default, provided that **gp2** was already present. Ensure to verify the changes again by running the `kubectl get storageclass` command.
 
 ### Requirements for a domain deployment
 
@@ -740,10 +740,10 @@ The variable `SUBNET_IDS` contains the output values of the private subnets (the
 
 9. **Wait for changes to be applied:**
 
-```shell
-aws rds wait db-instance-available \
-    --db-instance-identifier $RDS_NAME
-```
+  ```shell
+  aws rds wait db-instance-available \
+      --db-instance-identifier $RDS_NAME
+  ```
 
 ### Create the databases
 
@@ -753,79 +753,79 @@ We will also use this step to verify connectivity to the database from the creat
 
 1. **Retrieve the writer endpoint of the DB cluster:**
 
-```shell
-export DB_HOST=$(aws rds describe-db-cluster-endpoints \
-  --db-cluster-identifier $RDS_NAME \
-  --query "DBClusterEndpoints[?EndpointType=='WRITER'].Endpoint" \
-  --output text)
+  ```shell
+  export DB_HOST=$(aws rds describe-db-cluster-endpoints \
+    --db-cluster-identifier $RDS_NAME \
+    --query "DBClusterEndpoints[?EndpointType=='WRITER'].Endpoint" \
+    --output text)
 
-echo "DB_HOST=$DB_HOST"
-```
+  echo "DB_HOST=$DB_HOST"
+  ```
 
 2. **Create a secret that references the environment variables**:
 
-```bash
-kubectl create secret generic setup-db-secret --namespace camunda \
-  --from-literal=AURORA_ENDPOINT="$DB_HOST" \
-  --from-literal=AURORA_PORT="5432" \
-  --from-literal=AURORA_DB_NAME="postgres" \
-  --from-literal=AURORA_USERNAME="$AURORA_USERNAME" \
-  --from-literal=AURORA_PASSWORD="$AURORA_PASSWORD" \
-  --from-literal=DB_KEYCLOAK_NAME="$DB_KEYCLOAK_NAME" \
-  --from-literal=DB_KEYCLOAK_USERNAME="$DB_KEYCLOAK_USERNAME" \
-  --from-literal=DB_KEYCLOAK_PASSWORD="$DB_KEYCLOAK_PASSWORD" \
-  --from-literal=DB_IDENTITY_NAME="$DB_IDENTITY_NAME" \
-  --from-literal=DB_IDENTITY_USERNAME="$DB_IDENTITY_USERNAME" \
-  --from-literal=DB_IDENTITY_PASSWORD="$DB_IDENTITY_PASSWORD" \
-  --from-literal=DB_WEBMODELER_NAME="$DB_WEBMODELER_NAME" \
-  --from-literal=DB_WEBMODELER_USERNAME="$DB_WEBMODELER_USERNAME" \
-  --from-literal=DB_WEBMODELER_PASSWORD="$DB_WEBMODELER_PASSWORD"
-```
+  ```bash
+  kubectl create secret generic setup-db-secret --namespace camunda \
+    --from-literal=AURORA_ENDPOINT="$DB_HOST" \
+    --from-literal=AURORA_PORT="5432" \
+    --from-literal=AURORA_DB_NAME="postgres" \
+    --from-literal=AURORA_USERNAME="$AURORA_USERNAME" \
+    --from-literal=AURORA_PASSWORD="$AURORA_PASSWORD" \
+    --from-literal=DB_KEYCLOAK_NAME="$DB_KEYCLOAK_NAME" \
+    --from-literal=DB_KEYCLOAK_USERNAME="$DB_KEYCLOAK_USERNAME" \
+    --from-literal=DB_KEYCLOAK_PASSWORD="$DB_KEYCLOAK_PASSWORD" \
+    --from-literal=DB_IDENTITY_NAME="$DB_IDENTITY_NAME" \
+    --from-literal=DB_IDENTITY_USERNAME="$DB_IDENTITY_USERNAME" \
+    --from-literal=DB_IDENTITY_PASSWORD="$DB_IDENTITY_PASSWORD" \
+    --from-literal=DB_WEBMODELER_NAME="$DB_WEBMODELER_NAME" \
+    --from-literal=DB_WEBMODELER_USERNAME="$DB_WEBMODELER_USERNAME" \
+    --from-literal=DB_WEBMODELER_PASSWORD="$DB_WEBMODELER_PASSWORD"
+  ```
 
-This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
+  This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
 
-After running the above command, you can verify that the secret was created successfully by using:
+  After running the above command, you can verify that the secret was created successfully by using:
 
-```bash
-kubectl get secret setup-db-secret -o yaml --namespace camunda
-```
+  ```bash
+  kubectl get secret setup-db-secret -o yaml --namespace camunda
+  ```
 
-This should display the secret with the base64 encoded values.
+  This should display the secret with the base64 encoded values.
 
 3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
 
-```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/setup-postgres-create-db.yml
-```
+  ```yaml reference
+  https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/setup-postgres-create-db.yml
+  ```
 
 3. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
-```bash
-kubectl apply -f setup-postgres-create-db.yml --namespace camunda
-```
+  ```bash
+  kubectl apply -f setup-postgres-create-db.yml --namespace camunda
+  ```
 
 4. **Verify the job's completion**: Once the job is created, you can monitor its progress using:
 
-```bash
-kubectl get job/create-setup-user-db --namespace camunda --watch
-```
+  ```bash
+  kubectl get job/create-setup-user-db --namespace camunda --watch
+  ```
 
-Once the job shows as `Completed`, the users and databases will have been successfully created.
+  Once the job shows as `Completed`, the users and databases will have been successfully created.
 
 5. **Check logs for confirmation**: You can view the logs of the job to confirm that the users were created and privileges were granted successfully:
 
-```bash
-kubectl logs job/create-setup-user-db --namespace camunda
-```
+  ```bash
+  kubectl logs job/create-setup-user-db --namespace camunda
+  ```
 
 6. **Cleanup the resources:**
 
-```bash
-kubectl delete job create-setup-user-db --namespace camunda
-kubectl delete secret setup-db-secret --namespace camunda
-```
+  ```bash
+  kubectl delete job create-setup-user-db --namespace camunda
+  kubectl delete secret setup-db-secret --namespace camunda
+  ```
 
-By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+  By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
 ## 4. OpenSearch domain
 
