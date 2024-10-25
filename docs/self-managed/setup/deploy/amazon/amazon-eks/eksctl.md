@@ -745,6 +745,8 @@ aws rds wait db-instance-available \
     --db-instance-identifier $RDS_NAME
 ```
 
+This command will wait until the instance is ready.
+
 ### Create the databases
 
 Now that you have a database, you need to create dedicated databases for each Camunda component along with associated users that have configured access.
