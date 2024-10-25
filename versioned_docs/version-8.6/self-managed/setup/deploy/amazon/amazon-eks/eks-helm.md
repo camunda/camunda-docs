@@ -415,7 +415,7 @@ cat generated-values.yml
 
 :::info Camunda Helm chart no longer automatically generates passwords
 
-Starting from **Camunda 8.6**, the Helm chart deprecated the automatic generation of secrets, and this feature has been fully removed in **Camunda 8.7**.
+Starting from **Camunda 8.6**, the Helm chart deprecated the automatic generation of secrets, and this feature has been fully removed in **Camunda 8.6**.
 
 :::
 
@@ -573,10 +573,14 @@ Below is an extract of the necessary instructions:
 4. Select the newly created application, go to "Access to APIs" and click on the "Assign permissions" then select "Zeebe API" with "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
-<!-- prevent error during compilation!-->
-  </TabItem>
+```shell
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+```
+
+</TabItem>
   
-  <TabItem value="without" label="Without Domain">
+<TabItem value="without" label="Without Domain">
 
 This requires to port-forward the Identity and Keycloak to be able to connect to the cluster.
 
@@ -591,14 +595,31 @@ kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 4. Select the newly created application, go to "Access to APIs" and click on the "Assign permissions" then select "Zeebe API" with "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
-<!-- prevent error during compilation!-->
-  </TabItem>
-</Tabs>
-
 ```shell
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
+
+<details>
+<summary>If you want to access the other services and their UI, you can port-forward those as well:</summary>
+<summary>
+
+```shell
+Operate:
+> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
+Tasklist:
+> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
+Optimize:
+> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
+Connectors:
+> kubectl port-forward svc/camunda-connectors 8086:8080 --namespace camunda
+```
+
+</summary>
+</details>
+
+</TabItem>
+</Tabs>
 
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
@@ -821,29 +842,6 @@ Brokers:
 
 For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/community-clients/cli-client/cli-get-started.md).
 
-If you want to access the other services and their UI, you can port-forward those as well:
-
-```shell
-Identity:
-> kubectl port-forward svc/camunda-identity 8080:80 --namespace camunda
-Operate:
-> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
-Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
-Optimize:
-> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
-Connectors:
-> kubectl port-forward svc/camunda-connectors 8086:8080 --namespace camunda
-```
-
-:::note
-Keycloak must be port-forwarded at all times as it is required to authenticate.
-:::
-
-```shell
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
-```
-
   </TabItem>
     <TabItem value="modeler" label="Modeler">
 
@@ -881,29 +879,6 @@ Client ID='client-id' # retrieve the value from the identity page of your create
 Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
 OAuth Token URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 Audience=zeebe-api # the default for Camunda 8 Self-Managed
-```
-
-If you want to access the other services and their UI, you can port-forward those as well:
-
-```shell
-Identity:
-> kubectl port-forward svc/camunda-identity 8080:80 --namespace camunda
-Operate:
-> kubectl port-forward svc/camunda-operate  8081:80 --namespace camunda
-Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8082:80 --namespace camunda
-Optimize:
-> kubectl port-forward svc/camunda-optimize 8083:80 --namespace camunda
-Connectors:
-> kubectl port-forward svc/camunda-connectors 8086:8080 --namespace camunda
-```
-
-:::note
-Keycloak must be port-forwarded at all times as it is required to authenticate.
-:::
-
-```shell
-kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 ```
 
   </TabItem>
