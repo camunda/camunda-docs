@@ -1727,22 +1727,13 @@
             {
               "Zeebe clients": [
                 "apis-tools/community-clients/c-sharp",
+                "apis-tools/community-clients/cli-client",
+                "apis-tools/community-clients/go-client",
                 "apis-tools/community-clients/micronaut",
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
                 "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/quarkus",
-                {
-                  "CLI client": [
-                    "apis-tools/community-clients/cli-client/index",
-                    "apis-tools/community-clients/cli-client/cli-get-started"
-                  ],
-                  "Go client": [
-                    "apis-tools/community-clients/go-client/index",
-                    "apis-tools/community-clients/go-client/go-get-started",
-                    "apis-tools/community-clients/go-client/job-worker"
-                  ]
-                }
+                "apis-tools/community-clients/quarkus"
               ]
             }
           ]
