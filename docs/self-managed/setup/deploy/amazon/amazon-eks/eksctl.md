@@ -740,12 +740,12 @@ The variable `SUBNET_IDS` contains the output values of the private subnets (the
 
 9. **Wait for changes to be applied:**
 
-```shell
-aws rds wait db-instance-available \
-    --db-instance-identifier $RDS_NAME
-```
+  ```shell
+  aws rds wait db-instance-available \
+      --db-instance-identifier $RDS_NAME
+  ```
 
-This command will wait until the instance is ready.
+  This command will wait until the instance is ready.
 
 ### Create the databases
 
