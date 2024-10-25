@@ -4,7 +4,7 @@ title: Getting started with the Go client
 sidebar_label: "Getting started with the Go client"
 ---
 
-::: Heads up!
+:::note Heads up!
 This project is now community-supported.
 
 See [announcement](reference/announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.

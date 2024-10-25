@@ -5,7 +5,7 @@ sidebar_label: "Quick reference"
 description: "Learn how to use the community-supported CLI client and command line interface `zbctl` to interact with Camunda 8 and test a connection."
 ---
 
-::: Heads up!
+:::note Heads up!
 This project is now community-supported.
 
 See [announcement](reference/announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.

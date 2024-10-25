@@ -5,7 +5,7 @@ description: "Let's take a deeper look at job workers to handle jobs."
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
-::: Heads up!
+:::note Heads up!
 This project is now community-supported.
 
 See [announcement](reference/announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
