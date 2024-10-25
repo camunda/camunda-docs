@@ -632,7 +632,7 @@ For a detailed guide on generating and using a token, please conduct the relevan
 Export the following environment variables:
 
 ```shell
-export ZEEBE_ADDRESS=https://$DOMAIN_NAME/zeebe
+export ZEEBE_ADDRESS_REST=https://$DOMAIN_NAME/zeebe
 export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
@@ -648,7 +648,7 @@ kubectl port-forward services/camunda-zeebe-gateway 8080:8080 --namespace camund
 Export the following environment variables:
 
 ```shell
-export ZEEBE_ADDRESS=localhost:8080
+export ZEEBE_ADDRESS_REST=http://localhost:8080
 export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
@@ -669,7 +669,7 @@ export TOKEN=$(curl --location --request POST "${ZEEBE_AUTHORIZATION_SERVER_URL}
 Use the stored token, in our case `TOKEN`, to use the REST API to print the cluster topology.
 
 ```shell
-curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS}/v2/topology"
+curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS_REST}/v2/topology"
 ```
 
 ...and results in the following output:
