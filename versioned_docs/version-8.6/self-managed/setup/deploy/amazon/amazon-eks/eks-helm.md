@@ -632,7 +632,7 @@ For a detailed guide on generating and using a token, please conduct the relevan
 Export the following environment variables:
 
 ```shell
-export ZEEBE_ADDRESS=zeebe-rest.$DOMAIN_NAME
+export ZEEBE_ADDRESS=https://$DOMAIN_NAME/zeebe
 export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
