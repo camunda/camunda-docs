@@ -224,7 +224,15 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
   </TabItem>
 </Tabs>
 
-3. **Configure user access to the cluster**
+3. **Initialize Terraform for this module**
+
+Since you have added a module, you need to [initialize it](#3-initialize-terraform) using the Terraform command:
+
+```bash
+terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+```
+
+4. **Configure user access to the cluster**
 
 By default, the user who creates the Amazon EKS cluster has administrative access.
 
@@ -277,7 +285,7 @@ For more details, refer to the [official upgrade guide](https://github.com/terra
 </p>
 </details>
 
-4. **Customize the cluster setup:**
+5. **Customize the cluster setup:**
 
    The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, please refer to the [EKS module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/eks-cluster/README.md).
 
@@ -294,10 +302,10 @@ If you choose not to use this module, you'll need to either provide a managed Po
 
 We separated the cluster and PostgreSQL modules to offer you more customization options.
 
-#### Step 1: create a configuration file for the database
+#### Steps to set up the Aurora PostgreSQL module module:
 
-1. In the directory where your `config.tf` file resides, create a new file named `db.tf`.
-2. Add the following content to `db.tf` to use the provided PostgreSQL module:
+1. **Create a `db.tf` file** in the same directory as your `config.tf` file.
+2. **Add the following content** to your newly created `db.tf` file to utilize the provided module:
 
 <Tabs groupId="env">
   <TabItem value="standard" label="Standard" default>
@@ -330,7 +338,15 @@ Once the IRSA configuration is complete, ensure you **record the IAM role name**
 </TabItem>
 </Tabs>
 
-#### Step 3: additional customization
+3. **Initialize Terraform for this module**
+
+Since you have added a module, you need to [initialize it](#3-initialize-terraform) using the Terraform command:
+
+```bash
+terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+```
+
+5. **Customize the Aurora cluster setup:**
 
 You can further customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/aurora/README.md) for more details on other customization options.
 
@@ -352,10 +368,10 @@ Please note that using Amazon OpenSearch Service requires [setting up a new Camu
 
 :::
 
-#### Step 1: create a configuration file for OpenSearch
+#### Steps to set up the OpenSearch domain module:
 
-1. In the folder where your `config.tf` file resides, create a new file named `opensearch.tf`.
-2. Add the following content to `opensearch.tf` to make use of the provided OpenSearch module:
+1. **Create a `opensearch.tf` file** in the same directory as your `config.tf` file.
+2. **Add the following content** to your newly created `opensearch.tf` file to utilize the provided module:
 
 <Tabs groupId="env">
   <TabItem value="standard" label="Standard" default>
@@ -399,7 +415,15 @@ As the OpenSearch domain has advanced security enabled and [fine-grained access 
 </TabItem>
 </Tabs>
 
-#### Step 2: Additional customization
+3. **Initialize Terraform for this module**
+
+Since you have added a module, you need to [initialize it](#3-initialize-terraform) using the Terraform command:
+
+```bash
+terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+```
+
+4. **Customize the cluster setup:**
 
 You can further customize the OpenSearch cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/opensearch/README.md).
 
