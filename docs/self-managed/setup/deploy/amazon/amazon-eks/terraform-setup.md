@@ -139,20 +139,20 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 3. **Enable versioning** on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash
-   aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region $AWS_REGION
+   aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region "$AWS_REGION"
    ```
 
 4. **Secure the bucket** by blocking public access:
 
    ```bash
    aws s3api put-public-access-block --bucket "$S3_TF_BUCKET_NAME" --public-access-block-configuration \
-     "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region $AWS_REGION
+     "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region "$AWS_REGION"
    ```
 
 5. **Verify versioning** is enabled on the bucket:
 
    ```bash
-   aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region $AWS_REGION
+   aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region "$AWS_REGION"
    ```
 
 This S3 bucket will now securely store your Terraform state files with versioning enabled.
