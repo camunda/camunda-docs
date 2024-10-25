@@ -16,7 +16,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 
 - [Helm (3.16+)](https://helm.sh/docs/intro/install/)
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via the [Camunda 8 API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 
 ## Considerations
 
@@ -410,116 +410,8 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS}/v2/topology"
 </details>
 
   </TabItem>
-  <TabItem value="zbctl" label="zbctl">
 
-After following the installation instructions in the [zbctl docs](/apis-tools/community-clients/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
-
-<Tabs groupId="domain">
-  <TabItem value="with" label="With Domain">
-
-Export the following environment variables:
-
-```shell
-export ZEEBE_ADDRESS=zeebe.$DOMAIN_NAME:443
-export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
-export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
-export ZEEBE_TOKEN_SCOPE='camunda-identity'
-```
-
-  </TabItem>
-  <TabItem value="without" label="Without Domain">
-
-This requires to port-forward the Zeebe Gateway and Keycloak to be able to connect to the cluster.
-
-```shell
-kubectl port-forward services/camunda-zeebe-gateway 26500:26500
-kubectl port-forward services/camunda-keycloak 18080:80
-```
-
-Export the following environment variables:
-
-```shell
-export ZEEBE_ADDRESS=localhost:26500
-export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
-export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
-export ZEEBE_TOKEN_SCOPE='camunda-identity'
-```
-
-  </TabItem>
-
-</Tabs>
-
-Executing the following command will result in a successful connection to the Zeebe cluster...
-
-```shell
-zbctl status
-# or in the case of port-forwarding (without domain)
-zbctl status --insecure
-```
-
-...and results in the following output:
-
-<details>
-  <summary>Example output</summary>
-  <summary>
-
-```shell
-Cluster size: 3
-Partitions count: 3
-Replication factor: 3
-Gateway version: 8.6.0
-Brokers:
-  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-  Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
-    Version: 8.6.0
-    Partition 1 : Leader, Healthy
-    Partition 2 : Leader, Healthy
-    Partition 3 : Follower, Healthy
-  Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-```
-
-  </summary>
-</details>
-
-For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/community-clients/cli-client/cli-get-started.md).
-
-If you want to access the other services and their UI, you can port-forward those as well:
-
-```shell
-Identity:
-> kubectl port-forward svc/camunda-identity 8080:80
-Operate:
-> kubectl port-forward svc/camunda-operate  8081:80
-Tasklist:
-> kubectl port-forward svc/camunda-tasklist 8082:80
-Optimize:
-> kubectl port-forward svc/camunda-optimize 8083:80
-Connectors:
-> kubectl port-forward svc/camunda-connectors 8088:8080
-```
-
-:::note
-Keycloak must be port-forwarded at all times as it is required to authenticate.
-:::
-
-```shell
-kubectl port-forward services/camunda-keycloak 18080:80
-```
-
-  </TabItem>
-    <TabItem value="modeler" label="Modeler">
+  <TabItem value="modeler" label="Modeler">
 
 Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 

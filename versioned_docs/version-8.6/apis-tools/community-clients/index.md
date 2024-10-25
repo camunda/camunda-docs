@@ -30,10 +30,10 @@ In addition to the core Camunda-maintained clients, there are a number of commun
 
 - [Ballerina](https://github.com/camunda-community-hub/ballerina-zeebe)
 - [C#](c-sharp.md)
-- [CLI](cli-client/index.md)
+- [CLI](cli-client.md)
 - [Delphi](https://github.com/camunda-community-hub/DelphiZeeBeClient)
 - [EJB](https://github.com/camunda-community-hub/zeebe-ejb-client)
-- [Go](go-client/index.md)
+- [Go](go-client.md)
 - [Micronaut](https://github.com/camunda-community-hub/micronaut-zeebe-client)
 - [Python](python.md)
 - [Ruby](ruby.md)

@@ -54,8 +54,7 @@ Running a dual-region configuration requires users to detect and manage any regi
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-- (deprecated) [zbctl](/apis-tools/community-clients/cli-client/index.md) to interact with the Zeebe cluster.
-- `cURL` or similar to interact with the REST API.
+- `cURL` or similar to interact with the [Camunda 8 API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
 ## Terminology
 
@@ -87,7 +86,7 @@ For the failback procedure, the recreated region must not include any active Cam
 
 ### Prerequisites
 
-The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region/tree/stable/8.6) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
+The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
 
 Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
 
@@ -152,9 +151,6 @@ The following alternatives to port-forwarding are possible:
 - [`run`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_run/) an Ubuntu pod in the cluster to execute `curl` commands from inside the Kubernetes cluster
 
 In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
-
-<Tabs groupId="c8-connectivity">
-  <TabsItem value="rest-api" label="REST API">
 
 1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
 
@@ -295,58 +291,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
   </summary>
 </details>
 
-  </TabsItem>
-  <TabsItem value="zbctl" label="zbctl">
-
-1. Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
-
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
-zbctl status --insecure --address localhost:26500
-```
-
-<details>
-  <summary>Example output</summary>
-  <summary>
-
-```bash
-Cluster size: 8
-Partitions count: 8
-Replication factor: 4
-Gateway version: 8.6.0
-Brokers:
-  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Leader, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 8 : Leader, Healthy
-  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Leader, Healthy
-```
-
-  </summary>
-</details>
-  </TabsItem>
-</Tabs>
-
-2. Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
+1. Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING

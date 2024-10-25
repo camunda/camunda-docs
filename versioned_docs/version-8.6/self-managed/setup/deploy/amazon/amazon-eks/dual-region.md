@@ -55,13 +55,13 @@ There are two regions (`REGION_0` and `REGION_1`), each with its own Kubernetes 
 To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables within your terminal.
 Additionally, it is recommended to manifest those changes for future interactions with the dual-region setup.
 
-1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region/tree/stable/8.6):
+1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region):
 
 ```shell
-git clone -b stable/8.6 https://github.com/camunda/c8-multi-region.git
+git clone https://github.com/camunda/c8-multi-region.git
 ```
 
-2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/c8-multi-region/blob/stable/8.6/aws/dual-region/scripts/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
+2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
 3. You must adjust these environment variable values within the script to your needs.
 
 :::caution
@@ -82,7 +82,7 @@ Using the same namespace names on both clusters won't work as CoreDNS won't be a
 The dot is required to export those variables to your shell and not a spawned subshell.
 
 ```shell reference
-https://github.com/camunda/c8-multi-region/blob/stable/8.6/aws/dual-region/scripts/export_environment_prerequisites.sh
+https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh
 ```
 
 ## Installing Amazon EKS clusters with Terraform
@@ -147,7 +147,7 @@ This file contains various variable definitions for both [local](https://develop
 
 ### Preparation
 
-1. Adjust any values in the [variables.tf](https://github.com/camunda/c8-multi-region/blob/stable/8.6/aws/dual-region/terraform/variables.tf) file to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
+1. Adjust any values in the [variables.tf](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/terraform/variables.tf) file to your liking. For example, the target regions and their name or CIDR blocks of each cluster.
 2. Make sure that any adjustments are reflected in your [environment prerequisites](#environment-prerequisites) to ease the [in-cluster setup](#in-cluster-setup).
 3. Set up the authentication for the `AWS` provider.
 
@@ -222,11 +222,11 @@ You are configuring the CoreDNS from the cluster in **Region 0** to resolve cert
 1. Expose `kube-dns`, the in-cluster DNS resolver via an internal load-balancer in each cluster:
 
 ```shell
-kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/stable/8.6/aws/dual-region/kubernetes/internal-dns-lb.yml
-kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/stable/8.6/aws/dual-region/kubernetes/internal-dns-lb.yml
+kubectl --context $CLUSTER_0 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
+kubectl --context $CLUSTER_1 apply -f https://raw.githubusercontent.com/camunda/c8-multi-region/main/aws/dual-region/kubernetes/internal-dns-lb.yml
 ```
 
-2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/stable/8.6/aws/dual-region/scripts/generate_core_dns_entry.sh) in the folder `aws/dual-region/scripts/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
+2. Execute the script [generate_core_dns_entry.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_core_dns_entry.sh) in the folder `aws/dual-region/scripts/` of the repository to help you generate the CoreDNS config. Make sure that you have previously exported the [environment prerequisites](#environment-prerequisites) since the script builds on top of it.
 
 ```shell
 ./generate_core_dns_entry.sh
@@ -340,9 +340,9 @@ kubectl --context $CLUSTER_1 logs -f deployment/coredns -n kube-system
 
 ### Test DNS chaining
 
-The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/stable/8.6/aws/dual-region/scripts/test_dns_chaining.sh) within the folder `aws/dual-region/scripts/` of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
+The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh) within the folder `aws/dual-region/scripts/` of the repository will help to test that the DNS chaining is working by using nginx pods and services to ping each other.
 
-1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/stable/8.6/aws/dual-region/scripts/test_dns_chaining.sh). Make sure you have previously exported the [environment prerequisites](#environment-prerequisites) as the script builds on top of it.
+1. Execute the [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/test_dns_chaining.sh). Make sure you have previously exported the [environment prerequisites](#environment-prerequisites) as the script builds on top of it.
 
 ```shell
 ./test_dns_chaining.sh
@@ -365,7 +365,7 @@ export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
 export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
 ```
 
-2. From the folder `aws/dual-region/scripts` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/stable/8.6/aws/dual-region/scripts/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
+2. From the folder `aws/dual-region/scripts` of the repository, execute the script [create_elasticsearch_secrets.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/create_elasticsearch_secrets.sh). This will use the exported environment variables from **Step 1** to create the required secret within the Camunda namespaces. Those have previously been defined and exported via the [environment prerequisites](#environment-prerequisites).
 
 ```shell
 ./create_elasticsearch_secrets.sh
@@ -439,7 +439,7 @@ The base `camunda-values.yml` in `aws/dual-region/kubernetes` requires adjustmen
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
 - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/stable/8.6/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
 
 ```shell
 ./generate_zeebe_helm_values.sh
@@ -506,14 +506,11 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
-<Tabs groupId="c8-connectivity">
-  <TabItem value="rest-api" label="REST API">
-
 ```shell
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080
 ```
 
-2. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
+1. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
 
 ```
 curl -L -X GET 'http://localhost:8080/v2/topology' \
@@ -763,84 +760,3 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 
   </summary>
 </details>
-
-  </TabItem>
-  <TabItem value="zbctl" label="zbctl">
-
-```shell
-kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
-```
-
-1. Open another terminal and use [zbctl](/apis-tools/community-clients/cli-client/index.md) to print the Zeebe cluster status:
-
-```shell
-zbctl status --insecure --address localhost:26500
-```
-
-3. Make sure that your output contains all eight brokers from the two regions:
-
-<details>
-  <summary>Example output</summary>
-  <summary>
-
-```shell
-Cluster size: 8
-Partitions count: 8
-Replication factor: 4
-Gateway version: 8.6.0
-Brokers:
-  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Leader, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Leader, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 3 - camunda-zeebe-1.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 4 : Leader, Healthy
-  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Leader, Healthy
-  Broker 5 - camunda-zeebe-2.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-    Partition 3 : Follower, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Leader, Healthy
-    Partition 7 : Leader, Healthy
-  Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Leader, Healthy
-```
-
-  </summary>
-</details>
-
-  </TabItem>
-</Tabs>

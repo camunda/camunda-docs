@@ -91,7 +91,7 @@ First, port-forward each of the components. Use a separate terminal for each com
 
 ## Connecting to the workflow engine
 
-To interact with the Camunda workflow engine via Zeebe Gateway using [zbctl](/apis-tools/community-clients/cli-client/cli-get-started.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe gateway as follows:
+To interact with the Camunda workflow engine via Zeebe Gateway using the [Camunda 8 API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe gateway as follows:
 
 ```sh
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500

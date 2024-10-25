@@ -506,14 +506,11 @@ helm install $HELM_RELEASE_NAME camunda/camunda-platform \
 
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
-<Tabs groupId="c8-connectivity">
-  <TabItem value="rest-api" label="REST API">
-
 ```shell
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080
 ```
 
-2. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
+1. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
 
 ```
 curl -L -X GET 'http://localhost:8080/v2/topology' \
@@ -763,84 +760,3 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 
   </summary>
 </details>
-
-  </TabItem>
-  <TabItem value="zbctl" label="zbctl">
-
-```shell
-kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
-```
-
-1. Open another terminal and use [zbctl](/apis-tools/community-clients/cli-client/index.md) to print the Zeebe cluster status:
-
-```shell
-zbctl status --insecure --address localhost:26500
-```
-
-3. Make sure that your output contains all eight brokers from the two regions:
-
-<details>
-  <summary>Example output</summary>
-  <summary>
-
-```shell
-Cluster size: 8
-Partitions count: 8
-Replication factor: 4
-Gateway version: 8.6.0
-Brokers:
-  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Leader, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Leader, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 3 - camunda-zeebe-1.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 4 : Leader, Healthy
-  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Leader, Healthy
-  Broker 5 - camunda-zeebe-2.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-    Partition 3 : Follower, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Leader, Healthy
-    Partition 7 : Leader, Healthy
-  Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Leader, Healthy
-```
-
-  </summary>
-</details>
-
-  </TabItem>
-</Tabs>
