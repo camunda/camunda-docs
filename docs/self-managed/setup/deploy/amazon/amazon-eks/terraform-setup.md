@@ -237,8 +237,8 @@ terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=
 By default, the user who creates the Amazon EKS cluster has administrative access.
 
 <details>
-   <summary>Grant cluster access to other users</summary>
-   <p>
+  <summary>Grant cluster access to other users</summary>
+  <p>
 
 If you want to grant access to other users, you can configure this by using the `access_entries` input.
 
@@ -656,7 +656,7 @@ The standard installation comes already pre-configured, you don't need to perfor
 https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/procedure/vars-create-os.sh
 ```
 
-A **Kubernetes job** will connects to the OpenSearch dommain and configure it..
+A **Kubernetes job** will connects to the OpenSearch dommain and configure it.
 
 2. **Create a secret that references the environment variables**:
 
