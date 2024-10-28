@@ -71,9 +71,9 @@ If you encounter errors during Helm chart installation, such as type mismatches 
 
 Kubernetes clusters running versions 1.29 to 1.31 may experience DNS disruptions during complete node restarts, such as during upgrades or evictions, particularly if the cluster's DNS resolver pods are affected.
 
-This issue is specifically noticeable for Zeebe (Netty), as it will no longer be able to form a cluster due to receiving improper DNS responses. This occurs because Zeebe continues to communicate with a non-existent DNS resolver, caused by improper cleanup of conntrack entries for UDP connections.
+This issue is specifically noticeable for Zeebe (Netty), as it will no longer be able to form a cluster because of improper DNS responses. This occurs because Zeebe continues to communicate with a non-existent DNS resolver, caused by improper cleanup of conntrack entries for UDP connections.
 
-Details on this issue, can be found in [this Kubernetes issue](https://github.com/kubernetes/kubernetes/issues/125467) and has been resolved in the following patch releases:
+Details on this issue can be found in [this Kubernetes issue](https://github.com/kubernetes/kubernetes/issues/125467) and has been resolved in the following patch releases:
 
 - Kubernetes 1.29.10
 - Kubernetes 1.30.6
