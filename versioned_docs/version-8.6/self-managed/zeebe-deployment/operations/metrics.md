@@ -51,7 +51,7 @@ All Zeebe-related metrics have a `zeebe_`-prefix.
 
 Most metrics have the following common label:
 
-- `partition`: Cluster-unique id of the partition
+- `partition`: Cluster-unique ID of the partition
 
 :::note
 Both brokers and gateways expose their respective metrics. The brokers have an optional metrics exporter that can be enabled for maximum insight.
@@ -91,7 +91,7 @@ The health of partitions in a broker can be monitored by the metric `zeebe_healt
 ## Grafana
 
 Zeebe comes with a pre-built dashboard, available in the repository:
-[monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/zeebe.json).
+[monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/stable/8.6/monitor/grafana/zeebe.json).
 
 [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) it into your Grafana instance and select the correct Prometheus data source (important if you have more than one). You will then be greeted with the following dashboard, which displays a healthy cluster topology, general throughput metrics, handled requests, exported events per second, disk and memory usage, and more.
 

@@ -79,7 +79,7 @@ message ActivatedJob {
   // JSON document, computed at activation time, consisting of all visible variables to
   // the task scope
   string variables = 13;
-  // the id of the tenant that owns the job
+  // the ID of the tenant that owns the job
   string tenantId = 14;
 }
 ```
@@ -118,7 +118,7 @@ message BroadcastSignalRequest {
   // the signal variables as a JSON document; to be valid, the root of the document must be an
   // object, e.g. { "a": "foo" }. [ "foo" ] would not be valid.
   string variables = 2;
-  // the id of the tenant that owns the signal.
+  // the ID of the tenant that owns the signal.
   string tenantId = 3;
 }
 ```
@@ -129,7 +129,7 @@ message BroadcastSignalRequest {
 message BroadcastSignalResponse {
   // the unique ID of the signal that was broadcasted.
   int64 key = 1;
-  // the tenant id of the signal that was broadcasted.
+  // the tenant ID of the signal that was broadcasted.
   string tenantId = 2;
 }
 ```
@@ -466,7 +466,7 @@ message EvaluatedDecision {
 }
 
 message EvaluatedDecisionInput {
-  // the id of the evaluated decision input
+  // the ID of the evaluated decision input
   string inputId = 1;
   // the name of the evaluated decision input
   string inputName = 2;
@@ -475,7 +475,7 @@ message EvaluatedDecisionInput {
 }
 
 message EvaluatedDecisionOutput {
-  // the id of the evaluated decision output
+  // the ID of the evaluated decision output
   string outputId = 1;
   // the name of the evaluated decision output
   string outputName = 2;
@@ -484,7 +484,7 @@ message EvaluatedDecisionOutput {
 }
 
 message MatchedDecisionRule {
-  // the id of the matched rule
+  // the ID of the matched rule
   string ruleId = 1;
   // the index of the matched rule
   int32 ruleIndex = 2;
@@ -729,7 +729,7 @@ message ModifyProcessInstanceRequest {
   optional uint64 operationReference = 4;
 
   message ActivateInstruction {
-    // the id of the element that should be activated
+    // the ID of the element that should be activated
     string elementId = 1;
     // the key of the ancestor scope the element instance should be created in;
     // set to -1 to create the new element instance within an existing element
@@ -746,13 +746,13 @@ message ModifyProcessInstanceRequest {
     // "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
     // valid argument, as the root of the JSON document is an array and not an object.
     string variables = 1;
-    // the id of the element in which scope the variables should be created;
+    // the ID of the element in which scope the variables should be created;
     // leave empty to create the variables in the global scope of the process instance
     string scopeId = 2;
   }
 
   message TerminateInstruction {
-    // the id of the element that should be terminated
+    // the ID of the element that should be terminated
     int64 elementInstanceKey = 1;
   }
 }
@@ -779,11 +779,11 @@ Returned if:
 Returned if:
 
 - At least one activate instruction is invalid. An activate instruction is considered invalid if:
-  - The process doesn't contain an element with the given id.
+  - The process doesn't contain an element with the given ID.
   - A flow scope of the given element can't be created.
   - The given element has more than one active instance of its flow scope.
 - At least one variable instruction is invalid. A variable instruction is considered invalid if:
-  - The process doesn't contain an element with the given scope id.
+  - The process doesn't contain an element with the given scope ID.
   - The given element doesn't belong to the activating element's flow scope.
   - The given variables are not a valid JSON document.
 - At least one terminate instruction is invalid. A terminate instruction is considered invalid if:
@@ -817,9 +817,9 @@ message MigrateProcessInstanceRequest {
   }
 
   message MappingInstruction {
-    // the element id to migrate from
+    // the element ID to migrate from
     string sourceElementId = 1;
-    // the element id to migrate into
+    // the element ID to migrate into
     string targetElementId = 2;
   }
 }
@@ -1300,7 +1300,7 @@ message ActivatedJob {
   // JSON document, computed at activation time, consisting of all visible variables to
   // the task scope
   string variables = 13;
-  // the id of the tenant that owns the job
+  // the ID of the tenant that owns the job
   string tenantId = 14;
 }
 ```

@@ -170,9 +170,9 @@ POST actuator/backups
 }
 ```
 
-A `backupId` is an integer and must be greater than the id of previous backups that are completed, failed, or deleted.
+A `backupId` is an integer and must be greater than the ID of previous backups that are completed, failed, or deleted.
 Zeebe does not take two backups with the same ids. If a backup fails, a new `backupId` must be provided to trigger a new backup.
-The `backupId` cannot be reused, even if the backup corresponding to the backup id is deleted.
+The `backupId` cannot be reused, even if the backup corresponding to the backup ID is deleted.
 
 <details>
   <summary>Example request</summary>
@@ -191,7 +191,7 @@ curl --request POST 'http://localhost:9600/actuator/backups' \
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | 202 Accepted     | A Backup has been successfully scheduled. To determine if the backup process was completed, refer to the GET API.        |
 | 400 Bad Request  | Indicates issues with the request, for example when the `backupId` is not valid or backup is not enabled on the cluster. |
-| 409 Conflict     | Indicates a backup with the same `backupId` or a higher id already exists.                                               |
+| 409 Conflict     | Indicates a backup with the same `backupId` or a higher ID already exists.                                               |
 | 500 Server Error | All other errors. Refer to the returned error message for more details.                                                  |
 | 502 Bad Gateway  | Zeebe has encountered issues while communicating to different brokers.                                                   |
 | 504 Timeout      | Zeebe failed to process the request within a pre-determined timeout.                                                     |
