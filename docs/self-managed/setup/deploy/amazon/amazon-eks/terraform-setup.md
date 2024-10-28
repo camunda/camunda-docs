@@ -44,6 +44,12 @@ To try out Camunda 8 or develop against it, consider signing up for our [SaaS of
 
 For the simplicity of this guide, certain best practices will be provided with links to additional documents, enabling you to explore the topic in more detail.
 
+:::info Module Update Notice (November 2024)
+
+Please note that the modules referenced in this guide have been updated recently from **v2** to **v3**. For more information, refer to our [migration guide from v2 to v3](https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/guides/MIGRATION_GUIDE_v2_to_v3.md).
+
+:::
+
 :::warning Cost management
 
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
