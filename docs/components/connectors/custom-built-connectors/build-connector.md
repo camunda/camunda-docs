@@ -10,7 +10,11 @@ You can build your own custom Connectors.
 
 ## Connector templates
 
-### Build a connector template
+### Build a Connector template
+
+### Generate a Connector template
+
+### Manage Connector templates
 
 ## Connector SDK
 

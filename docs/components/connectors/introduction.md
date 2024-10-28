@@ -13,14 +13,16 @@ import AmazonEventbridgeImg from "./img/connector-amazon-eventbridge.png";
 import IconConnectorSdkImg from './img/icon-connector-sdk.png';
 import IconConnectorTemplateImg from './img/icon-connector-template.png';
 import IconConnectorCustomImg from './img/icon-connector-custom.png';
+import OverviewImg from './img/connector-overview.png';
 
-Camunda 8 Connectors are reusable building blocks you can use to connect processes to external systems, applications, and data.
+<p><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}}/>Camunda 8 Connectors are reusable building blocks you can use to connect processes to external systems, applications, and data.</p>
 
-- In human task orchestration, you might use the [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connectors to notify people of pending or completed processes, such as in an onboarding flow.
-- In business processes, records are created or updated in enterprise business systems.
-- In microservices orchestration, processes communicate through events pushed to a common systems through infrastructure using the [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) Connector.
+For example:
 
-Connectors are often configured as a [BPMN process](/components/concepts/processes.md) **task**, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
+- You can use the [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connectors to notify people of pending or completed processes, such as in a human task orchestration onboarding flow.
+- In microservices orchestration, use the [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) Connector to incorporate real-time messaging in your automated processes.
+
+Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
 ## Get started with Connectors
 
