@@ -62,7 +62,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/
 
   <TabItem value="standard" label="Standard" default>
   
-When using Standard authentication (network based or username and password), specific environment variables need to be set with valid values.
+When using standard authentication (network based or username and password), specific environment variables must be set with valid values.
 
 Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
 
