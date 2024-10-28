@@ -6,7 +6,7 @@ description: A form element to select files
 
 A form element to select files.
 
-![Form Filepicker Symbol](/img/form-icons/form-filepicker.svg)
+<img src="/img/form-icons/form-filepicker.svg" alt="Form Filepicker Symbol" />
 
 ### Configurable properties
 
