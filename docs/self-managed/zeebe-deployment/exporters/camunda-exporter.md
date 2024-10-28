@@ -1,31 +1,25 @@
 ---
 id: camunda-exporter
-title: "Camunda exporter"
+title: "Camunda Exporter"
 sidebar_label: "Camunda Exporter"
-description: "The Camunda exporter exporting aggregated data to harmonized web-apps indices."
+description: "Use the Camunda Exporter to export Zeebe records to Elasticsearch/OpenSearch without additional importers or data transformations."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The Camunda Exporter is designed to export Zeebe records directly into Elasticsearch/Opensearch in the form needed by
-Camunda webapps (e.g., Operate, Tasklist). Previously, the Elasticsearch and Opensearch exporters mainly exported raw
-records from Zeebe streams into several indices, which were then imported and transformed by the webapps. The Camunda
-Exporter eliminates the need for additional importing or transformation, increasing process instance throughput and
-reducing the latency of changes appearing in Operate and Tasklist webapps by cutting off the importer from the data
-pipeline.
+The Camunda Exporter exports Zeebe records directly to Elasticsearch/OpenSearch. Unlike the Elasticsearch and OpenSearch exporters, records are exported in the format required by Operate and Tasklist, and configuring additional importers or data transformations is not required.
+
+Using the Camunda Exporter can increase process instance throughput, and can reduce the latency of changes appearing in Operate and Tasklist.
 
 :::note
-The indexes are created as required, and will not be created twice if they already exist. However, once disabled, they
-will not be deleted (that is up to the administrator.)
-A [retention](#retention) policy can be configured to automatically delete data after a certain number of days.
+When exporting, indexes are created as required, and will not be created twice if they already exist. However, once disabled, they
+will not be deleted (that is up to the administrator.) A [retention](./camunda-exporter.md?configuration=retention#options) policy can be configured to automatically delete data after a certain number of days.
 :::
 
 ## Configuration
 
-The exporter can be enabled by configuring it with the `classpath` in the broker settings.
-
-For example:
+Enable the exporter by configuring the `className` in your [broker configuration](/docs/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokerexporters):
 
 ```yaml
 exporters:
@@ -39,16 +33,17 @@ exporters:
 As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPath`.
 :::
 
-The exporter can be configured by providing `args`. The table below explains all the different
-options, and the default values for these options:
+Configure the exporter by providing `args`. See the tables below for configuration options and default values, or review the [example YAML configuration](#example).
 
-| Option       | Description                                                              | Default |
-| ------------ | ------------------------------------------------------------------------ | ------- |
-| connect      | Refer to [Connect](#connect) for the connection configuration options.   |         |
-| index        | Refer to [Index](#index) for the index configuration options.            |         |
-| bulk         | Refer to [Bulk](#bulk) for the bulk configuration options.               |         |
-| retention    | Refer to [Retention](#retention) for the retention configuration options |         |
-| createSchema | If `true` missing indexes will be created automatically.                 | true    |
+| Option       | Description                                                                                                         | Default |
+| ------------ | ------------------------------------------------------------------------------------------------------------------- | ------- |
+| connect      | Refer to [Connect](./camunda-exporter.md?configuration=connect#options) for the connection configuration options.   |         |
+| index        | Refer to [Index](./camunda-exporter.md?configuration=index#options) for the index configuration options.            |         |
+| bulk         | Refer to [Bulk](./camunda-exporter.md?configuration=bulk#options) for the bulk configuration options.               |         |
+| retention    | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for the retention configuration options |         |
+| createSchema | If `true` missing indexes will be created automatically.                                                            | true    |
+
+### Options
 
 <Tabs groupId="configuration" defaultValue="index" queryString
 values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'security' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' }]} >
@@ -57,19 +52,19 @@ values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'secur
 
 :::note
 Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which
-versions of Elasticsearch and/or Opensearch are supported in a Camunda 8 Self-Managed setup.
+versions of Elasticsearch and/or OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
 | Option         | Description                                                                                                                   | Default                     |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
 | type           | the type of the underlying search engine to export to. Accepted values are `elasticsearch` or `opensearch`.                   | elasticsearch               |
-| clusterName    | The name of the elasticsearch/opensearch cluster to export to.                                                                | elasticsearch               |
+| clusterName    | The name of the Elasticsearch/OpenSearch cluster to export to.                                                                | elasticsearch               |
 | dateFormat     | Defines a custom date format that should be used for fetching date data from the engine (should be the same as in the engine) | yyyy-MM-dd'T'HH:mm:ss.SSSZZ |
 | socketTimeout  | Defines the socket timeout in milliseconds, which is the timeout for waiting for data.                                        |                             |
 | connectTimeout | Determines the timeout in milliseconds until a connection is established.                                                     |                             |
-| username       | Username used to authenticate                                                                                                 |                             |
-| password       | Password used to authenticate                                                                                                 |                             |
-| security       | Refer to [Security](#security) for security configuration                                                                     |                             |
+| username       | Username used to authenticate.                                                                                                |                             |
+| password       | Password used to authenticate.                                                                                                |                             |
+| security       | Refer to [Security](./camunda-exporter.md?configuration=security#options) for security configuration.                         |                             |
 
 :::note
 If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/auth/credentials/DefaultCredentialsProvider.html) is used for authentication. For more details on configuring credentials, refer to the [AWS SDK documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html#credentials-default).
@@ -82,7 +77,7 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 | Option          | Description                                                                                       | Default |
 | --------------- | ------------------------------------------------------------------------------------------------- | ------- |
 | enabled         | If `true`, enables the security (ssl) features for the exporter.                                  | false   |
-| certificatePath | The file path to the SSL certificate used for secure communication with Elasticsearch/Opensearch. |         |
+| certificatePath | The file path to the SSL certificate used for secure communication with Elasticsearch/OpenSearch. |         |
 | verifyHostname  | If `true`, the hostname of the SSL certificate will be validated.                                 | true    |
 | selfSigned      | If `true`, allows the use of self-signed SSL certificates.                                        | false   |
 
@@ -103,16 +98,16 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 <TabItem value="bulk">
 
-To avoid too many expensive requests to the Elasticsearch/Opensearch cluster, the exporter performs batch
+To avoid too many expensive requests to the Elasticsearch/OpenSearch cluster, the exporter performs batch
 updates by default. The size of the batch, along with how often it should be flushed (regardless of
 size) can be controlled by configuration.
 
 | Option | Description                                                                                                                                                    | Default |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | delay  | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `5`     |
-| size   | The amount of records a batch should have before we flush the batch                                                                                            | `1000`  |
+| size   | The amount of records a batch should have before we flush the batch.                                                                                           | `1000`  |
 
-With the default configuration, the exporter will aggregate records and flush them to Elasticsearch/Opensearch:
+With the default configuration, the exporter will aggregate records and flush them to Elasticsearch/OpenSearch:
 
 1. When it has aggregated 1000 records.
 2. Five seconds have elapsed since the last flush (regardless of how many
@@ -127,11 +122,11 @@ When enabled, this creates an Index Lifecycle Management (ILM) Policy that delet
 `minimumAge`.
 All index templates created by this exporter apply the created ILM Policy.
 
-| Option     | Description                                                                  | Default |
-| ---------- | ---------------------------------------------------------------------------- | ------- |
-| enabled    | If `true` the ILM Policy is created and applied to the index templates       | `false` |
-| minimumAge | Specifies how old the data must be, before the data is deleted as a duration | `30d`   |
-| policyName | The name of the created and applied ILM policy                               |         |
+| Option     | Description                                                                   | Default |
+| ---------- | ----------------------------------------------------------------------------- | ------- |
+| enabled    | If `true` the ILM Policy is created and applied to the index templates.       | `false` |
+| minimumAge | Specifies how old the data must be, before the data is deleted as a duration. | `30d`   |
+| policyName | The name of the created and applied ILM policy.                               |         |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds
