@@ -46,7 +46,7 @@ For the simplicity of this guide, certain best practices will be provided with l
 
 :::info Module Update Notice (November 2024)
 
-Please note that the modules referenced in this guide have been updated recently from **v2** to **v3**. For more information, refer to our [migration guide from v2 to v3](https://github.com/camunda/camunda-tf-eks-module/blob/main/guides/MIGRATION_GUIDE_v2_to_v3.md).
+Modules referenced in this guide have been updated recently from **v2** to **v3**. For more information, refer to our [migration guide from v2 to v3](https://github.com/camunda/camunda-tf-eks-module/blob/main/guides/MIGRATION_GUIDE_v2_to_v3.md).
 
 :::
 
@@ -282,8 +282,8 @@ In this configuration:
 
 For a full list of available policies, refer to the [AWS EKS Access Policies documentation](https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html).
 
-:::info
-Please note that starting from version 2.x.x of this module, direct mappings through `aws_auth_roles` and `aws_auth_users` are no longer supported. If you are upgrading from version [1.x.x](https://github.com/camunda/camunda-tf-eks-module/releases/tag/1.0.3), you will need to fork the module and follow AWS's official instructions for managing the `aws-auth` ConfigMap.
+:::info Module deprecation notice
+Starting from version 2.x.x of this module, direct mappings through `aws_auth_roles` and `aws_auth_users` are no longer supported. If you are upgrading from version [1.x.x](https://github.com/camunda/camunda-tf-eks-module/releases/tag/1.0.3), you will need to fork the module and follow AWS's official instructions for managing the `aws-auth` ConfigMap.
 
 For more details, refer to the [official upgrade guide](https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/docs/UPGRADE-20.0.md).
 :::
@@ -370,7 +370,7 @@ The OpenSearch module creates an OpenSearch domain intended for Camunda platform
 
 :::note Migration to OpenSearch is not supported
 
-Please note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from previous Camunda versions or Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
+Using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from previous Camunda versions or Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
 
 :::
 
@@ -474,7 +474,7 @@ Depending on the installation path you have chosen, you can find the reference f
 
 ## 2. Preparation for Camunda 8 installation
 
-### Access the created EKS Cluster
+### Access the created EKS cluster
 
 You can gain access to the Amazon EKS cluster via the `AWS CLI` using the following command:
 
@@ -490,7 +490,7 @@ After updating the kubeconfig, you can verify your connection to the cluster wit
 kubectl get nodes
 ```
 
-Then ensure that a namespace exists for camunda.
+Ensure a namespace exists for Camunda.
 In the following procedure, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ```shell

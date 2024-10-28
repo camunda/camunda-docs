@@ -239,7 +239,7 @@ For more configuration options, refer to the [Helm chart documentation](https://
 Depending of your installation path, you may use different settings.
 For easy and reproducible installations, we will use yaml files to configure the chart.
 
-#### 1. Create the `values.yml` File
+#### 1. Create the `values.yml` file
 
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
@@ -429,7 +429,7 @@ Next, use these environment variables in the `kubectl` command to create the sec
 
 Note:
 
-- The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, please provide those values.
+- The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, you must provide those values.
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by WebModeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference

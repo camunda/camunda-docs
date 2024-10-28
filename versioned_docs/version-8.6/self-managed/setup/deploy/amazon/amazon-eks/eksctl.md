@@ -334,7 +334,7 @@ For detailed examples, review the [documentation provided by AWS](https://docs.a
   </p>
 </details>
 
-### Access the created EKS Cluster
+### Access the created EKS cluster
 
 You can gain access to the Amazon EKS cluster via the `AWS CLI` using the following command:
 
@@ -348,14 +348,14 @@ After updating the kubeconfig, you can verify your connection to the cluster wit
 kubectl get nodes
 ```
 
-Then ensure that a namespace exists for camunda.
+Ensure a namespace exists for Camunda.
 In the following procedure, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ```shell
 kubectl create namespace camunda
 ```
 
-### Check Existing StorageClasses
+### Check existing StorageClasses
 
 To see the available **StorageClasses** in your Kubernetes cluster, including which one is set as default, use the following command:
 
@@ -391,7 +391,7 @@ volumeBindingMode: WaitForFirstConsumer
 EOF
 ```
 
-Please note that the `ebs-sc` StorageClass relies on the `ebs.csi.aws.com` provisioner, which is provided by the **aws-ebs-csi-driver** addon. This addon was installed during the cluster creation.
+This manifest defines an `ebs-sc` StorageClass to be created. This StorageClass uses the `ebs.csi.aws.com` provisioner, which is supplied by the **aws-ebs-csi-driver** addon installed during cluster creation.
 For more information, refer to the [official AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
 
 2. **Modify the `gp2` StorageClass to mark it as a non-default StorageClass:**
@@ -400,7 +400,7 @@ For more information, refer to the [official AWS documentation](https://docs.aws
 kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
 ```
 
-After executing these commands, you will have a `gp3` StorageClass set as the default and the `gp2` StorageClass marked as non-default, provided that **gp2** was already present. Ensure to verify the changes again by running the `kubectl get storageclass` command.
+After executing these commands, you will have a `gp3` StorageClass set as the default and the `gp2` StorageClass marked as non-default, provided that **gp2** was already present. Verify the changes again by running the `kubectl get storageclass` command.
 
 ### Requirements for a domain deployment
 
@@ -851,7 +851,7 @@ If you choose not to use this service, you'll need to either provide a managed O
 
 :::note Migration to OpenSearch is not supported
 
-Please note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from previous Camunda versions or Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
+Using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from previous Camunda versions or Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
 
 :::
 
