@@ -252,6 +252,12 @@ The following makes use of the [combined Ingress setup](/self-managed/setup/guid
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/helm-values/values-domain.yml
 ```
 
+:::info Cert-manager annotation for domain installation
+
+The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
+
+:::
+
 :::warning Exposure of the Zeebe Gateway
 
 Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
@@ -300,6 +306,12 @@ The following makes use of the [combined Ingress setup](/self-managed/setup/guid
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/helm-values/values-domain.yml
 ```
+
+:::info Cert-manager annotation for domain installation
+
+The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
+
+:::
 
 :::warning Exposure of the Zeebe Gateway
 
@@ -430,7 +442,7 @@ Next, use these environment variables in the `kubectl` command to create the sec
 Note:
 
 - The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, you must provide those values.
-- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by WebModeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
+- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/create-identity-secret.sh
@@ -465,15 +477,13 @@ watch -n 5 '
 '
 ```
 
-**Note for domain installation:** the annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
-
 <details>
 <summary>Understand how each component interacts with IRSA</summary>
 <summary>
 
 ##### Web Modeler
 
-Since Web Modeler RestAPI uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
+As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 ##### Keycloak
@@ -524,8 +534,6 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
 
 To authorize the IAM role in OpenSearch for access, follow these steps:
 
-**_Note that this example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled._** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
-
 Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
 
 ```bash
@@ -548,6 +556,12 @@ curl -sS -u "<OS_DOMAIN_USER>:<OS_DOMAIN_PASSWORD>" \
 - Replace `<OS_ENDPOINT>` with your OpenSearch endpoint URL.
 - Replace `<ROLE_NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
 
+:::note Security of basic auth usage
+
+**This example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
+
+:::
+
 </details>
 
 The important part is assigning the `iam_role_arn` of the previously created `opensearch_role` to an internal role within Amazon OpenSearch Service. For example, `all_access` on the Amazon OpenSearch Service side is a good candidate, or if required, extra roles can be created with more restrictive access.
@@ -561,7 +575,7 @@ First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
 **Generating an M2M Token Using Identity:**
 
-You can generate an M2M token by following the steps outlined in the [Identity Getting Started Guide](/self-managed/identity/getting-started/install-identity.md), along with the [Incorporating Applications Documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+You can generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md), along with the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 Below is an extract of the necessary instructions:
 
 <Tabs groupId="domain">
@@ -569,8 +583,8 @@ Below is an extract of the necessary instructions:
 
 1. Open Identity in your browser at `https://${DOMAIN_NAME}/identity`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
-3. Click on "Add Application," select `M2M` as the type, and assign a name like "test."
-4. Select the newly created application, go to "Access to APIs" and click on the "Assign permissions" then select "Zeebe API" with "write" permission.
+3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Zeebe API** with "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell
@@ -591,8 +605,8 @@ kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 
 1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
-3. Click on "Add Application," select `M2M` as the type, and assign a name like "test."
-4. Select the newly created application, go to "Access to APIs" and click on the "Assign permissions" then select "Zeebe API" with "write" permission.
+3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Zeebe API** with "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell

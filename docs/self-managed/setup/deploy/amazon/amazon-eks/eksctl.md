@@ -52,7 +52,7 @@ This basic cluster setup is required to continue with the Helm set up as describ
 
 #### Variants
 
-We refer to this architecture as **Standard Installation** ([more informations](./terraform-setup.md#variants)), which can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
+We refer to this architecture as [**standard installation**](./terraform-setup.md#variants), which can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 
 ## 1. Provisioning the complete infrastructure for Camunda 8 on AWS
 
@@ -82,7 +82,7 @@ This ensures that the user maintains admin access to Kubernetes and associated r
 
 The [eksctl](https://eksctl.io/) is a tool that allows the creation of clusters via a single command, but this doesn't support all configuration options. Therefore, we're supplying a YAML file that can be used with the CLI to create the cluster preconfigured with various settings.
 
-This [installation guide](https://eksctl.io/installation/) explains how to install it.
+Review the [installation guide](https://eksctl.io/installation/) for additional details.
 
 ### Configure your infrastructure
 
