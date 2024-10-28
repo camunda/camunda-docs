@@ -73,7 +73,7 @@ CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
 <Tabs groupId="config" className="tabs-hidden" defaultValue="yaml" values={
 [
 {label: 'YAML file', value: 'yaml', },
-{label: 'Environment Variable', value: 'env', },
+{label: 'Environment variables', value: 'env', },
 ]
 }>
 
