@@ -122,7 +122,7 @@ operate:
 
 ## Default properties set by the helm chart
 
-Before supplying a configuration, it's helpful to know what the default configuration is so you can start from a working configuration and then update the values you want. Use the following command to generate the default configuration, substituting in the name of your release:
+The `helm template` command generates the application's default configuration, allowing you to only update the values required by your setup. Use the following command to generate the default configuration, substituting in the name of your release:
 
 ```bash
 helm template <your-release-name> \
