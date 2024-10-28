@@ -46,7 +46,7 @@ For the simplicity of this guide, certain best practices will be provided with l
 
 :::info Module Update Notice (November 2024)
 
-Please note that the modules referenced in this guide have been updated recently from **v2** to **v3**. For more information, refer to our [migration guide from v2 to v3](https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/guides/MIGRATION_GUIDE_v2_to_v3.md).
+Please note that the modules referenced in this guide have been updated recently from **v2** to **v3**. For more information, refer to our [migration guide from v2 to v3](https://github.com/camunda/camunda-tf-eks-module/blob/main/guides/MIGRATION_GUIDE_v2_to_v3.md).
 
 :::
 
@@ -171,14 +171,14 @@ Once the S3 bucket is created, configure your `config.tf` file to use the S3 bac
   <TabItem value="standard" label="Standard" default>
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/config.tf
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/config.tf
 ```
 
   </TabItem>
   <TabItem value="irsa" label="IRSA">
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/config.tf
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/config.tf
 ```
 
   </TabItem>
@@ -217,14 +217,14 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-eks-module) 
   <TabItem value="standard" label="Standard" default>
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/cluster.tf
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/cluster.tf
 ```
 
   </TabItem>
   <TabItem value="irsa" label="IRSA">
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/cluster.tf
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/cluster.tf
 ```
 
   </TabItem>
@@ -317,7 +317,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
   <TabItem value="standard" label="Standard" default>
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/db.tf
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/db.tf
 ```
 
   </TabItem>
@@ -336,7 +336,7 @@ The Aurora module uses outputs from the EKS cluster module to configure the IRSA
 Here’s how to define the IAM role trust policy and access policy for Aurora:
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/db.tf
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/db.tf
 ```
 
 Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_aurora_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
@@ -389,7 +389,7 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
 :::
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/opensearch.tf
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/opensearch.tf
 ```
 
 <!-- Closing comment for compilation-->
@@ -411,7 +411,7 @@ To configure IRSA for OpenSearch, the OpenSearch module uses outputs from the EK
 Here's an example of how to define the IAM role trust policy and access policy for OpenSearch, this configuration will deploy an OpenSearch domain with advanced security enabled:
 
 ```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/opensearch.tf
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/opensearch.tf
 ```
 
 Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
@@ -469,8 +469,8 @@ At this point, Terraform will create the Amazon EKS cluster with all the necessa
 
 Depending on the installation path you have chosen, you can find the reference files used on this page:
 
-- **Standard Installation:** [Reference Files](https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/)
-- **IRSA Installation:** [Reference Files](https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/)
+- **Standard Installation:** [Reference Files](https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/)
+- **IRSA Installation:** [Reference Files](https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/)
 
 ## 2. Preparation for Camunda 8 installation
 
@@ -507,7 +507,7 @@ The following commands will export the required outputs as environment variables
   <TabItem value="standard" label="Standard" default>
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/export-helm-values.sh
 ```
 
   </TabItem>
@@ -515,7 +515,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
   <TabItem value="irsa" label="IRSA">
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/export-helm-values.sh
 ```
 
 :::note IRSA users
@@ -545,7 +545,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
 1. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the setup manifest.
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/vars-create-db.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/vars-create-db.sh
 ```
 
 A **Kubernetes job** will connects to the database and creates the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
@@ -556,7 +556,7 @@ A **Kubernetes job** will connects to the database and creates the necessary use
 2. **Create a secret that references the environment variables**:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/procedure/create-setup-db-secret.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/create-setup-db-secret.sh
 ```
 
 This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -572,7 +572,7 @@ This should display the secret with the base64 encoded values.
 3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
 
 ```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7/setup-postgres-create-db.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/setup-postgres-create-db.yml
 ```
 
 <!-- Closing comment for compilation2-->
@@ -584,7 +584,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/exa
 2. **Create a secret that references the environment variables**:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/procedure/create-setup-db-secret.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/create-setup-db-secret.sh
 ```
 
 This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -600,7 +600,7 @@ This should display the secret with the base64 encoded values.
 3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
 
 ```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/setup-postgres-create-db.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/setup-postgres-create-db.yml
 ```
 
 <!-- Closing comment for compilation-->
@@ -659,7 +659,7 @@ The standard installation comes already pre-configured, you don't need to perfor
 1. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the setup manifest.
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/procedure/vars-create-os.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/vars-create-os.sh
 ```
 
 A **Kubernetes job** will connects to the OpenSearch dommain and configure it.
@@ -667,7 +667,7 @@ A **Kubernetes job** will connects to the OpenSearch dommain and configure it.
 2. **Create a secret that references the environment variables**:
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/procedure/create-setup-os-secret.sh
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/create-setup-os-secret.sh
 ```
 
 This command creates a secret named `setup-os-secret` and dynamically populates it with the values from your environment variables.
@@ -683,7 +683,7 @@ This should display the secret with the base64 encoded values.
 3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-opensearch-fgac.yml`.
 
 ```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/feature/opensearch-doc/examples/camunda-8.7-irsa/setup-opensearch-fgac.yml
+https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/setup-opensearch-fgac.yml
 ```
 
 4. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the OpenSearch domain credentials.
