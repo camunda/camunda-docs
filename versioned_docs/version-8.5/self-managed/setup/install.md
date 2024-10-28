@@ -48,7 +48,7 @@ For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSE
 Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch) and [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) configuration documentation for additional component configuration parameters to update.
 :::
 
-![Camunda 8 Self-Managed Architecture Diagram](../platform-architecture/assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+![Camunda 8 Self-Managed Architecture Diagram](../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
 When installing the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, all components shown on the architectural diagram above are installed.
 
@@ -180,7 +180,7 @@ To enable Kubernetes to pull the images from this registry, first [create an ima
 
 ```shell
 kubectl create secret docker-registry registry-camunda-cloud \
-  --namespace=<NAMESPACE>
+  --namespace=<NAMESPACE> \
   --docker-server=registry.camunda.cloud \
   --docker-username=<DOCKER_USER> \
   --docker-password=<DOCKER_PASSWORD> \

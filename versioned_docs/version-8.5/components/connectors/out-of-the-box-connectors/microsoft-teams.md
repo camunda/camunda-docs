@@ -14,16 +14,15 @@ relevant [permissions](https://support.microsoft.com/en-us/office/manage-team-se
 or the registered application in the [Azure Active Directory](https://aad.portal.azure.com/) (visit [how to register the app](https://learn.microsoft.com/en-us/graph/auth-register-app-v2) for more information) alongside
 the relevant [Microsoft Graph API permissions](https://learn.microsoft.com/en-us/graph/permissions-reference).
 
-Some methods can use [protected Microsoft Teams APIs](https://learn.microsoft.com/en-us/graph/teams-protected-apis). Read more on [how to request access to protected APIs](https://learn.microsoft.com/en-us/graph/teams-protected-apis#request-access-to-protected-apis).
-
 :::note
 Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a Microsoft Teams Connector task
 
-To use the **Microsoft Teams Connector** in your process, either change the type of existing task by clicking on it and
-using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Microsoft Teams Connector executable
 

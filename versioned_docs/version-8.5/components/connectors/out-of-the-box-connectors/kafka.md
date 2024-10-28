@@ -25,7 +25,9 @@ Use Camunda secrets to avoid exposing your sensitive data as plain text. Follow 
 
 ## Create a Kafka Producer Connector task
 
-To use the **Kafka Producer Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Kafka Producer Connector for publishing messages executable
 
@@ -214,7 +216,7 @@ To make your **Kafka Consumer Connector** executable, take the following steps:
 7. In the **Kafka** section, you can set the **Offsets** for the partition. The number of offsets specified should match the number of partitions on the current topic.
 8. In the **Kafka** section, you can set the **Auto offset reset** which tells the Connector what strategy to use when there is no initial offset in Kafka or if the specified offsets do not exist on the server.
 9. (For **Avro (experimental)**) In the **Message deserialization** section, input the schema that defines the message structure into the **Avro schema** field.
-10. In the **Activation** section, you can set the **Activation Condition**. Based on this condition, we either start a process instance or do nothing if the condition is not met. For example, `=(value.itemId = "a4f6j2")`. Leave this field empty to trigger your webhook every time.
+10. In the **Activation** section, you can set the **Activation Condition**. This condition filters if the process step triggers when a Kafka message is consumed. For example, `=(value.itemId = "a4f6j2")` will only trigger the start event or continue the catch event if the Kafka message has a matching itemId in the incoming message payload. Leave this field empty to trigger your process every time.
 
 When using the **Kafka Consumer Connector** with an **Intermediate Catch Event**, fill in the **Correlation key (process)** and **Correlation key (payload)**.
 
@@ -225,6 +227,8 @@ For example, given that your correlation key is defined with `myCorrelationKey` 
 
 - **Correlation key (process)**: `=myCorrelationKey`
 - **Correlation key (payload)**: `=value.correlationKey`
+
+You can also use the key of the message to accomplish this in the **Correlation key (payload)** field with `=key`.
 
 Learn more about correlation keys in the [messages guide](../../../concepts/messages).
 

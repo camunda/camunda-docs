@@ -4,14 +4,22 @@
 To deploy and run your process, you must create a cluster in Camunda 8.
 
 1. To create a cluster, navigate to **Console**, click the **Clusters** tab, and click **Create new cluster**.
-2. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation. Additionally, select your region. Click **Create cluster**.
-3. Your cluster will take a few moments to create. Check the status on the **Clusters** page or by clicking into the cluster itself and looking at the **Applications** section.
+1. Name your cluster. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation.
+1. Select your [region](/reference/regions.md).
+1. Select your [encryption at rest protection level](/components/concepts/encryption-at-rest.md) (enterprise only).
+1. Click **Create cluster**.
+1. Your cluster will take a few moments to create. Check the status on the **Clusters** page or by clicking into the cluster itself and looking at the **Applications** section.
 
-Even while the cluster shows a status **Creating**, you can still proceed to begin modeling.
+:::note
+
+- If you haven't created a cluster yet, the **Clusters** page will be empty.
+- Even while the cluster shows a status **Creating**, you can still proceed to begin modeling.
+
+:::
 
 ## Development clusters
 
-Starter Plan users have one **development cluster**, with free execution for development included in their plan.
+Starter plan users have one **development cluster**, with free execution for development included in their plan.
 Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 

@@ -37,7 +37,7 @@ In this example, all service tasks from version 1 of `orderProcess` are each map
 ![operate-view-process-filters](./img/process-instance-migration/map-elements.png)
 
 :::note
-It is currently only possible to map service tasks, user tasks, subprocesses, and call activities. Mapping subprocesses to a different scope or mapping event subprocesses is not yet supported by Zeebe. To learn about all limitations, visit the [concepts section](/components/concepts/process-instance-migration.md#limitations).
+It is currently only possible to map service tasks, user tasks, subprocesses, call activities, and child instances. Mapping subprocesses to a different scope or mapping event subprocesses is not yet supported by Zeebe. To learn about all limitations, visit the [concepts section](/components/concepts/process-instance-migration.md#limitations).
 :::
 
 6. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.

@@ -65,7 +65,6 @@
         }
       ]
     },
-    "guides/migrating-from-cawemo",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
@@ -94,6 +93,7 @@
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/backups"
       ],
       "Console": [
@@ -931,7 +931,6 @@
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      "Architecture": ["self-managed/platform-architecture/overview"],
       "Installation": [
         "self-managed/platform-deployment/overview",
         {

@@ -1,0 +1,7 @@
+:root {
+  --feedback-primary-color: #fc5806;
+}
+
+.button--icon {
+  line-height: 1em;
+}

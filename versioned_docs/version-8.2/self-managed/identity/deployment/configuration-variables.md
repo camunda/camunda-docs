@@ -5,9 +5,8 @@ sidebar_label: "Configuration variables"
 description: "Learn more about core configuration, component configuration, database configuration, and feature flags."
 ---
 
-As Identity is a Spring Boot application, you may use the standard
-Spring [configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-external-config)
-methods.
+As a Spring Boot application, Identity supports any standard
+[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 
 ### Core configuration
 

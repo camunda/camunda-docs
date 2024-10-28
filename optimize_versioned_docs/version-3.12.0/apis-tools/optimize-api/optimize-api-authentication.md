@@ -62,4 +62,4 @@ If the authentication is successful, the authentication server sends back the ac
 
 ## Use it in Postman
 
-Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/20317927-9d9314a2-4cff-40ab-90ea-98e28ca1f81c?action=share&creator=11465105).
+Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/24684262-a1103c05-7ed8-4fd4-8716-9005583ce23a?action=share&creator=26079299).

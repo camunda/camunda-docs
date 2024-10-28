@@ -79,7 +79,7 @@ message ActivatedJob {
   // JSON document, computed at activation time, consisting of all visible variables to
   // the task scope
   string variables = 13;
-  // the id of the tenant that owns the job
+  // the ID of the tenant that owns the job
   string tenantId = 14;
 }
 ```
@@ -118,7 +118,7 @@ message BroadcastSignalRequest {
   // the signal variables as a JSON document; to be valid, the root of the document must be an
   // object, e.g. { "a": "foo" }. [ "foo" ] would not be valid.
   string variables = 2;
-  // the id of the tenant that owns the signal.
+  // the ID of the tenant that owns the signal.
   string tenantId = 3;
 }
 ```
@@ -129,7 +129,7 @@ message BroadcastSignalRequest {
 message BroadcastSignalResponse {
   // the unique ID of the signal that was broadcasted.
   int64 key = 1;
-  // the tenant id of the signal that was broadcasted.
+  // the tenant ID of the signal that was broadcasted.
   string tenantId = 2;
 }
 ```
@@ -160,6 +160,8 @@ message CancelProcessInstanceRequest {
   // the process instance key (as, for example, obtained from
   // CreateProcessInstanceResponse)
   int64 processInstanceKey = 1;
+  // a reference key chosen by the user and will be part of all records resulting from this operation
+  optional uint64 operationReference = 2;
 }
 ```
 
@@ -214,7 +216,7 @@ Returned if:
 
 Returned if:
 
-- The job was marked as failed. In that case, the related incident must be resolved before the job can be activated again and completed.
+- The job was marked as failed. In that case, the related [incident](/components/concepts/incidents.md) must be resolved before the job can be activated again and completed.
 
 ## `CreateProcessInstance` RPC
 
@@ -254,6 +256,8 @@ message CreateProcessInstanceRequest {
   repeated ProcessInstanceCreationStartInstruction startInstructions = 5;
   // the tenant ID of the process definition
   string tenantId = 6;
+  // a reference key chosen by the user and will be part of all records resulting from this operation
+  optional uint64 operationReference = 7;
 }
 
 message ProcessInstanceCreationStartInstruction {
@@ -471,7 +475,7 @@ message EvaluatedDecisionInput {
 }
 
 message EvaluatedDecisionOutput {
-  // the id of the evaluated decision output
+  // the ID of the evaluated decision output
   string outputId = 1;
   // the name of the evaluated decision output
   string outputName = 2;
@@ -480,7 +484,7 @@ message EvaluatedDecisionOutput {
 }
 
 message MatchedDecisionRule {
-  // the id of the matched rule
+  // the ID of the matched rule
   string ruleId = 1;
   // the index of the matched rule
   int32 ruleIndex = 2;
@@ -721,9 +725,11 @@ message ModifyProcessInstanceRequest {
   repeated ActivateInstruction activateInstructions = 2;
   // instructions describing which elements should be terminated
   repeated TerminateInstruction terminateInstructions = 3;
+  // a reference key chosen by the user and will be part of all records resulting from this operation
+  optional uint64 operationReference = 4;
 
   message ActivateInstruction {
-    // the id of the element that should be activated
+    // the ID of the element that should be activated
     string elementId = 1;
     // the key of the ancestor scope the element instance should be created in;
     // set to -1 to create the new element instance within an existing element
@@ -740,13 +746,13 @@ message ModifyProcessInstanceRequest {
     // "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
     // valid argument, as the root of the JSON document is an array and not an object.
     string variables = 1;
-    // the id of the element in which scope the variables should be created;
+    // the ID of the element in which scope the variables should be created;
     // leave empty to create the variables in the global scope of the process instance
     string scopeId = 2;
   }
 
   message TerminateInstruction {
-    // the id of the element that should be terminated
+    // the ID of the element that should be terminated
     int64 elementInstanceKey = 1;
   }
 }
@@ -773,11 +779,11 @@ Returned if:
 Returned if:
 
 - At least one activate instruction is invalid. An activate instruction is considered invalid if:
-  - The process doesn't contain an element with the given id.
+  - The process doesn't contain an element with the given ID.
   - A flow scope of the given element can't be created.
   - The given element has more than one active instance of its flow scope.
 - At least one variable instruction is invalid. A variable instruction is considered invalid if:
-  - The process doesn't contain an element with the given scope id.
+  - The process doesn't contain an element with the given scope ID.
   - The given element doesn't belong to the activating element's flow scope.
   - The given variables are not a valid JSON document.
 - At least one terminate instruction is invalid. A terminate instruction is considered invalid if:
@@ -801,7 +807,8 @@ message MigrateProcessInstanceRequest {
   int64 processInstanceKey = 1;
   // the migration plan that defines target process and element mappings
   MigrationPlan migrationPlan = 2;
-
+  // a reference key chosen by the user and will be part of all records resulting from this operation
+  optional uint64 operationReference = 3;
   message MigrationPlan {
     // the key of process definition to migrate the process instance to
     int64 targetProcessDefinitionKey = 1;
@@ -810,9 +817,9 @@ message MigrateProcessInstanceRequest {
   }
 
   message MappingInstruction {
-    // the element id to migrate from
+    // the element ID to migrate from
     string sourceElementId = 1;
-    // the element id to migrate into
+    // the element ID to migrate into
     string targetElementId = 2;
   }
 }
@@ -854,6 +861,9 @@ Returned if:
 - A mapping instruction refers to an unsupported element (i.e. some elements will be supported later on)
 - A mapping instruction refers to element in unsupported scenarios.
   (i.e. migrating active elements with event subscriptions will be supported later on)
+- A mapping instruction detaches a boundary event from an active element
+- Multiple mapping instructions refer to the same catch event
+- A mapping instruction changes a parallel multi-instance body to a sequential multi-instance body or vice versa
 
 ## `PublishMessage` RPC
 
@@ -925,6 +935,8 @@ problem, followed by this call.
 message ResolveIncidentRequest {
   // the unique ID of the incident to resolve
   int64 incidentKey = 1;
+  // a reference key chosen by the user and will be part of all records resulting from this operation
+  optional uint64 operationReference = 2;
 }
 ```
 
@@ -967,6 +979,8 @@ message SetVariablesRequest {
   // be unchanged, and scope 2 will now be `{ "bar" : 1, "foo" 5 }`. if local was false, however,
   // then scope 1 would be `{ "foo": 5 }`, and scope 2 would be `{ "bar" : 1 }`.
   bool local = 3;
+  // a reference key chosen by the user and will be part of all records resulting from this operation
+  optional uint64 operationReference = 4;
 }
 ```
 
@@ -1123,6 +1137,8 @@ message UpdateJobRetriesRequest {
   int64 jobKey = 1;
   // the new amount of retries for the job; must be positive
   int32 retries = 2;
+  // a reference key chosen by the user and will be part of all records resulting from this operation
+  optional uint64 operationReference = 3;
 }
 ```
 
@@ -1161,6 +1177,8 @@ message UpdateJobTimeoutRequest {
   int64 jobKey = 1;
   // the duration of the new timeout in ms, starting from the current moment
   int64 timeout = 2;
+  // a reference key chosen by the user and will be part of all records resulting from this operation
+  optional uint64 operationReference = 3;
 }
 ```
 
@@ -1195,6 +1213,8 @@ message DeleteResourceRequest {
   // The key of the resource that should be deleted. This can be the key
   // of a process definition, the key of a decision requirements definition or the key of a form definition.
   int64 resourceKey = 1;
+  // a reference key chosen by the user and will be part of all records resulting from this operation
+  optional uint64 operationReference = 2;
 }
 ```
 
@@ -1280,7 +1300,7 @@ message ActivatedJob {
   // JSON document, computed at activation time, consisting of all visible variables to
   // the task scope
   string variables = 13;
-  // the id of the tenant that owns the job
+  // the ID of the tenant that owns the job
   string tenantId = 14;
 }
 ```

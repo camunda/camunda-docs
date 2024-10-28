@@ -72,7 +72,7 @@ Don't want to build the process yourself? Click this button to create it from a 
       className={clsx(
          "button button--outline button--secondary button--lg"
       )}
-      href="https://modeler.cloud.camunda.io/tutorial/quick-start-api-orchestration?utm_source=docs.camunda.io.gettingstarted">
+      href="https://marketplace.camunda.com/en-US/apps/437126/api-orchestration-quick-start">
       Open model in Camunda 8
    </a>
    <a

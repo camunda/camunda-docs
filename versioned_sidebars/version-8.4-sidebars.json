@@ -34,7 +34,6 @@
         }
       ]
     },
-    "guides/migrating-from-cawemo",
     {
       "Migrate from Camunda 7": [
         "guides/migrating-from-camunda-7/index",
@@ -64,6 +63,7 @@
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -1277,7 +1277,6 @@
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      "Architecture": ["self-managed/platform-architecture/overview"],
       "Installation": [
         "self-managed/platform-deployment/overview",
         {
@@ -1349,9 +1348,6 @@
           "items": [
             "self-managed/operational-guides/update-guide/830-to-840",
             "self-managed/operational-guides/update-guide/820-to-830",
-            "self-managed/operational-guides/update-guide/810-to-820",
-            "self-managed/operational-guides/update-guide/800-to-810",
-            "self-managed/operational-guides/update-guide/130-to-800",
             {
               "Elasticsearch": [
                 "self-managed/operational-guides/update-guide/elasticsearch/7-to-8"
@@ -1407,7 +1403,8 @@
             {
               "Zeebe Gateway": [
                 "self-managed/zeebe-deployment/zeebe-gateway/overview",
-                "self-managed/zeebe-deployment/zeebe-gateway/interceptors"
+                "self-managed/zeebe-deployment/zeebe-gateway/interceptors",
+                "self-managed/zeebe-deployment/zeebe-gateway/job-streaming"
               ]
             },
             {

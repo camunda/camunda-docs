@@ -36,9 +36,11 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
+- **Zeebe Spring SDK**: OpenJDK 17+
 - **Zeebe Go Client**: Go 1.13+
 - **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
+- **Spring SDK**: Spring Boot 3.2.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/))
 
 ## Camunda 8 Self-Managed
@@ -47,7 +49,7 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premise). However, we officially test and support a specific list of platforms.
+With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
@@ -56,7 +58,7 @@ The following are tested and supported deployment options for Kubernetes, Docker
   - [Amazon EKS](/self-managed/setup/deploy/amazon/amazon-eks/amazon-eks.md)
   - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md)
   - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md) (4.11+)
+- [Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md)
 - [Docker](/self-managed/setup/deploy/other/docker.md) (`linux/amd64`)
 - [Manual](/self-managed/setup/deploy/local/manual.md)
 
@@ -104,19 +106,19 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 This matrix shows which component versions work together:
 
-| Design                | Automate    |                                                               | Improve         |
-| --------------------- | ----------- | ------------------------------------------------------------- | --------------- |
-| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x                        | Optimize 3.7.x  |
-| Desktop Modeler 5.0+  | Zeebe 8.0.x | Operate 8.0.x Tasklist 8.0.x Identity 8.0.x                   | Optimize 3.8.x  |
-| Desktop Modeler 5.4+  | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x Connectors 0.23.0 | Optimize 3.9.x  |
-| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2 | Optimize 3.10.x |
-| Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x  | Optimize 8.3.x  |
-| Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x  | Optimize 8.4.x  |
-| Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x  | Optimize 8.5.x  |
-| Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2 | Optimize 3.10.x |
-| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x  | Optimize 8.3.x  |
-| Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x  | Optimize 8.4.x  |
-| Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x  | Optimize 8.5.x  |
+| Design                | Automate    |                                                                            | Improve         |
+| --------------------- | ----------- | -------------------------------------------------------------------------- | --------------- |
+| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x                                     | Optimize 3.7.x  |
+| Desktop Modeler 5.0+  | Zeebe 8.0.x | Operate 8.0.x Tasklist 8.0.x Identity 8.0.x                                | Optimize 3.8.x  |
+| Desktop Modeler 5.4+  | Zeebe 8.1.x | Operate 8.1.x Tasklist 8.1.x Identity 8.1.x Connectors 0.23.0              | Optimize 3.9.x  |
+| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
+| Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
+| Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
+| Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
+| Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
+| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
+| Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
+| Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.

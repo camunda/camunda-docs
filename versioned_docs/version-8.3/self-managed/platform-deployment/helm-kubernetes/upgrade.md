@@ -5,13 +5,11 @@ sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
-To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
-
-:::caution
-
-Ensure to review the [instructions for specific version](#version-update-instructions) before starting the actual upgrade.
-
+:::note
+When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the next **minor** version of the chart.
 :::
+
+To upgrade to a more recent version of the Camunda Helm charts, review the [instructions for a specific version](#version-update-instructions).
 
 ### Upgrading where Identity disabled
 
@@ -89,13 +87,19 @@ helm upgrade camunda camunda/camunda-platform\
 If you have specified on the first installation certain values, you have to specify them again on the upgrade either via `--set` or the values file and the `-f` flag.
 :::
 
-For more details on the Keycloak upgrade path, you can also read the [Bitnami Keycloak upgrade guide](https://docs.bitnami.com/kubernetes/apps/keycloak/administration/upgrade/).
+For more details on the Keycloak upgrade path, you can also read the [Keycloak Upgrading Guide](https://www.keycloak.org/docs/latest/upgrading/).
 
 ## Helm CLI version
 
 For a smooth upgrade, always use the same Helm CLI version corresponding with the chart version that shows in the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
 ## Version update instructions
+
+### v8.3.14+
+
+As of this Helm chart version, the image tags for all components are independent, and do not reference the global image tag. The value of the key `global.image.tag` is `null`, and each component now sets its own version.
+
+With this change, Camunda applications no longer require a unified patch version. For example, a given installation may use Zeebe version 8.3.1, and Operate version 8.3.2. Note that only the patch version can differ between components.
 
 ### v8.3.1
 

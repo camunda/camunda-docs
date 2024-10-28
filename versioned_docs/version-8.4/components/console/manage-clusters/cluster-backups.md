@@ -30,10 +30,7 @@ To create a manual backup, take the following steps:
 To create a scheduled backup, take the following steps:
 
 1. Select the **Backups** tab.
-2. Click **Create schedule**.
-
-![cluster-details](./img/cluster-detail-backups.png)
-
+2. Click **Set up schedule**.
 3. Use the dropdown to schedule the frequency for backups - daily or weekly.
 4. Select the time of day you would like backups to be taken at this frequency.
 5. Click **Create schedule**.

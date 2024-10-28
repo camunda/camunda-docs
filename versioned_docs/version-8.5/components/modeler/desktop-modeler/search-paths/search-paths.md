@@ -51,4 +51,18 @@ Resources in the user data directory will be found by all Camunda Modeler instan
                         └── index.js
 ```
 
+### Example (macOS)
+
+```
+└── Library
+    └── Application Support
+        └── camunda-modeler
+            └── resources
+                ├── element-templates
+                |   └── my-element-templates.json
+                └── plugins
+                    └── my-plugin
+                        └── index.js
+```
+
 It is possible to change the user data directory using the `--user-data-dir` option via when starting Camunda Modeler from the command line. Refer to the [flags documentation](../flags) on how to configure the application with a flags file.

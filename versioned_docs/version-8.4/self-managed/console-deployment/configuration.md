@@ -9,7 +9,11 @@ description: "Read details on the configuration variables of Console Self-Manage
 Console Self-Managed is available only to [Enterprise customers](../../reference/licenses.md#console).
 :::
 
-Console Self-Managed can be configured using environment variables and configuration parameters:
+Console Self-Managed can be configured using environment variables and configuration parameters.
+
+:::note
+Underscores in environment variables correspond to configuration file key levels.
+:::
 
 ## Environment variables
 
@@ -59,7 +63,7 @@ console:
       values: true
 ```
 
-## Montioring
+## Monitoring
 
 To help understand how Console operates, we expose the following endpoints by default:
 

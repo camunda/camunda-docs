@@ -22,6 +22,33 @@ End of maintenance: 8th of October 2024
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.2.0)
 [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)
 
+### Camunda 8 SaaS - Required cluster update
+
+:::caution
+By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be updated to the following versions at a **minimum**:
+
+- **8.2+gen27**
+- **8.3+gen11**
+- **8.4+gen7**
+- **8.5+gen2**
+
+:::
+
+auth0 announced an End-Of-Life for one of the functionalities that is being utilized by previous automation clusters. The new versions are not using this functionality anymore. This update ensures your cluster will work seamlessly after auth0 deactivates the feature in production.
+
+You minimally need to take the following update path:
+
+- 8.0.x -> 8.2+gen27
+- 8.1.x -> 8.2+gen27
+- 8.2.x -> 8.2+gen27
+- 8.3.x -> 8.3+gen11
+- 8.4.x -> 8.4+gen7
+- 8.5.x -> 8.5+gen2
+
+If you do not update the cluster by August 30th 2024, we will update the cluster for you. **Without an update, you would lose access to your cluster.**
+
+Camunda 8 Self-Managed clusters are not affected by this.
+
 ### Update from Web Modeler 8.2 to a later minor version
 
 Web Modeler versions 8.2.7 to 8.2.12 are affected by [camunda/issues#677](https://github.com/camunda/issues/issues/677).

@@ -26,8 +26,8 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 
 - A platform to host a version control system (VCS) such as GitHub or GitLab.
 - An existing pipeline or a plan to set one up using tools like [CircleCI](https://circleci.com/) or [Jenkins](https://www.jenkins.io/), cloud platforms such as [Azure DevOps Pipelines](https://azure.microsoft.com/de-de/products/devops), or built-in solutions of VCS platforms like [GitHub Actions](https://github.com/features/actions) or [GitLab's DevSecOps Lifecycle](https://about.gitlab.com/stages-devops-lifecycle/).
-- Make yourself familiar with the [Web Modeler API](/apis-tools/web-modeler-api/index.md) through the [OpenAPI documentation](https://modeler.cloud.camunda.io/swagger-ui/index.html).
-- Understand how [clusters](/docs/next/components/concepts/clusters/) work in Camunda 8.
+- Make yourself familiar with the [Web Modeler API](/apis-tools/web-modeler-api/index.md) through the [OpenAPI documentation](https://modeler.camunda.io/swagger-ui/index.html).
+- Understand how [clusters](/components/concepts/clusters.md) work in Camunda 8.
 - Ensure you’ve [created a Camunda 8 account](/guides/create-account.md), or installed [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 
 ## Setup
@@ -78,7 +78,7 @@ Synchronize files between Web Modeler and version control systems (VCS) and vice
 
 For automatic file synchronization, consider maintaining a secondary system of record for mapping Web Modeler projects to VCS repositories. This system also monitors the project-to-repository mapping and update timestamps.
 
-To listen to changes in Web Modeler, you currently need to implement a polling approach that compares the update dates with the last sync dates recorded. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with this payload to identify recently updated files:
+To listen to changes in Web Modeler, you currently need to implement a polling approach that compares the update dates with the last sync dates recorded. Use the `POST /api/v1/files/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Files/searchFiles) with this payload to identify recently updated files:
 
 ```json title="POST /api/v1/files/search"
 {
@@ -91,7 +91,7 @@ To listen to changes in Web Modeler, you currently need to implement a polling a
 }
 ```
 
-For real-time synchronization, employ a polling approach comparing update dates with last sync dates. Use the `POST /api/v1/files/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Files/searchFiles) with the following payload to discover recently updated files, and compare the `updated` date with your last sync date:
+For real-time synchronization, employ a polling approach comparing update dates with last sync dates. Use the `POST /api/v1/files/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Files/searchFiles) with the following payload to discover recently updated files, and compare the `updated` date with your last sync date:
 
 ```json title="POST /api/v1/files/search"
 {
@@ -115,7 +115,7 @@ Real-time synchronization isn't always what you need. Consider Web Modeler as a 
 
 A milestone reflects a state of a file in Web Modeler with a certain level of qualification, such as being ready for deployment. You can use this property to trigger deployments when a certain milestone is created.
 
-Currently, you have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to find recently created milestones:
+Currently, you have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to find recently created milestones:
 
 ```json title="POST /api/v1/milestones/search"
 {
@@ -143,7 +143,7 @@ You will receive a response similar to this, where the `fileId` indicates the fi
 }
 ```
 
-You have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) and compare the `created` date with your last sync date to identify recent additions:
+You have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) and compare the `created` date with your last sync date to identify recent additions:
 
 ```json title="POST /api/v1/milestones/search"
 {
@@ -237,10 +237,10 @@ For unit tests, select a test framework suitable for your environment. If workin
 
 ### Review stage
 
-During reviews, use the Modeler API again to [add collaborators](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator), or [create links to visual diffs of your milestones](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones), and automatically paste them into your GitHub or GitLab pull or merge requests.
+During reviews, use the Modeler API again to [add collaborators](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator), or [create links to visual diffs of your milestones](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones), and automatically paste them into your GitHub or GitLab pull or merge requests.
 This provides you the freedom to let reviews happen where you want them, and even include business by sharing the diff links with them in an automated fashion.
 
-After review, use the `DELETE /api/v1/projects/{projectId}/collaborators/email` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Collaborators/deleteCollaborator) to remove collaborators again.
+After review, use the `DELETE /api/v1/projects/{projectId}/collaborators/email` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/deleteCollaborator) to remove collaborators again.
 
 #### Create a link to a visual diff for reviews
 
@@ -248,7 +248,7 @@ Use milestones to indicate a state for review. Use the `POST /api/v1/milestones`
 
 While it is possible to do a diff of your diagrams by comparing the XML in your VCS system, this is often not very convenient, and lacks insight into process flow changes. This approach is also less effective when involving business stakeholders in the review.
 
-The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/v1/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST /api/v1/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones), utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
+The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/v1/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST /api/v1/milestones/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones), utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
 
 ![Visual diff of two milestones](img/visual-diff.png)
 

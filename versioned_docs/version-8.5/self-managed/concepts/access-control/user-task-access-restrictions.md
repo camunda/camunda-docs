@@ -7,6 +7,7 @@ description: "Control the level of access a user or group has to perform tasks i
 
 :::caution
 User task access restrictions are enabled by default and can be disabled using environment variables. This feature is controlled in the required component, see [Identity feature flags](../../../../self-managed/identity/deployment/configuration-variables/#feature-flags).
+This configuration does not affect API users. When retrieving tasks using the APIs, all tasks are returned.
 :::
 
 User task access restrictions allow you to control the level of access a [user](/self-managed/identity/user-guide/roles/add-assign-role.md) or

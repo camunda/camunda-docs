@@ -6,53 +6,83 @@ description: "Learn more about the clusters available in your Camunda 8 plan."
 
 A [cluster](../../guides/create-cluster.md) is a provided group of production-ready nodes that run Camunda 8.
 
-- **Enterprise** plan customers can create as many production or development clusters as they want based on their Enterprise agreement.
-- **Starter** plan customers are limited based on the [fair usage limits of the plan](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
+When [creating a cluster in SaaS](/components/console/manage-clusters/create-cluster.md), you can choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance, uptime, and disaster recovery guarantees.
 
-Production clusters come in three sizes: small (S), medium (M), and large (L). To learn more about the size of cluster best suited for your use case, refer to our [Best Practices](/components/best-practices/best-practices-overview.md) for more information on [sizing your runtime environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
+:::note
 
-The following table shows each plan and available type or size of cluster:
+Prior to 8.6, clusters were configured by hardware size (S, M, L).
 
-|            | Development | Production - S | Production - M | Production - L |
-| ---------- | ----------- | -------------- | -------------- | -------------- |
-| Free Trial | \-          | X              | \-             | \-             |
-| Free       | \-          | \-             | \-             | \-             |
-| Starter    | X           | X              | \-             | \-             |
-| Enterprise | X           | X              | X              | X              |
+- This documentation covers the SaaS cluster model introduced in 8.6. To learn more about clusters prior to 8.6, see previous documentation versions.
+- To learn how you can migrate your existing clusters to the newer model, contact your Customer Success Manager.
 
-When you deploy and execute your [BPMN](/components/modeler/bpmn/bpmn.md) or [DMN](/components/modeler/dmn/dmn.md) models on a production cluster, this might impact your monthly (Starter) or annual (Enterprise) total fee, meaning the more you execute your models, the higher your total fee may be.
+:::
 
-## Free Trial cluster
+## Cluster type
 
-Free Trial clusters have the same functionality as a production cluster, but are size small and only available during your trial period. You cannot convert a Free Trial cluster to a different kind of cluster.
+The cluster type defines the level of availability and uptime for the cluster.
+
+You can choose from three different cluster types:
+
+- **Basic**: A cluster for non-production use, including experimentation, early development, and basic use cases that do not require a guaranteed high uptime.
+- **Standard**: A production-ready cluster with guaranteed higher uptime.
+- **Advanced**: A production-ready cluster with guaranteed minimal disruption and the highest uptime.
+
+### Cluster availability and uptime
+
+| Type                                                                          | Basic                                                                                  | Standard                                                  | Advanced                                                                              |
+| :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :------------------------------------------------------------------------------------ |
+| Usage                                                                         | Non-production use, including experimentation, early development, and basic use cases. | Production-ready use cases with guaranteed higher uptime. | Production-ready use cases with guaranteed minimal disruption and the highest uptime. |
+| Uptime Percentage<br/> (Core Automation Cluster<strong>\*</strong>)           | 99%                                                                                    | 99.5%                                                     | 99.9%                                                                                 |
+| RTO/RPO<strong>\*\*</strong><br/>(Core Automation Cluster<strong>\*</strong>) | RTO: 8 hours<br/>RPO: 24 hours                                                         | RTO: 2 hours<br/>RPO: 4 hours                             | RTO: < 1 hour<br/>RPO: < 1 hour                                                       |
+
+<p><strong>* Core Automation Cluster</strong> means the components critical for automating processes and decisions, such as Zeebe, Operate, Tasklist, Optimize, and Connectors.</p>
+<p><strong>**  RTO (Recovery Time Objective)</strong> means the maximum allowable time that a system or application can be down after a failure or disaster before it must be restored. It defines the target time to get the system back up and running. <strong>RPO (Recovery Point Objective)</strong> means the maximum acceptable amount of data loss measured in time. It indicates the point in time to which data must be restored to resume normal operations after a failure. It defines how much data you can afford to lose. The RTO/RPO figures shown in the table are provided on a best-effort basis and are not guaranteed.</p>
+
+:::info
+See [Camunda Enterprise General Terms](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-enterprise-general-terms) for term definitions for **Monthly Uptime Percentage** and **Downtime**.
+:::
+
+## Cluster size
+
+The cluster size defines the cluster performance and capacity.
+
+After you have chosen your cluster type, choose the cluster size that best meets your cluster environment requirements.
+
+To learn more about choosing your cluster size, see [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
+
+- You can choose from four cluster sizes: 1x, 2x, 3x, and 4x.
+- Larger cluster sizes include increased performance and capacity, allowing you to serve more workload.
+- Increased usage such as higher throughput or longer data retention requires a larger cluster size.
+- Each size increase uses one of your available cluster reservations. For example, purchasing two HWP advanced reservations for your production cluster allows you to configure two clusters of size 1x, or one cluster of size 2x.
+- You can change the cluster size at any time. See [resize a cluster](/components/console/manage-clusters/manage-cluster.md#resize-a-cluster).
+
+:::note
+Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
+:::
+
+## Free Trial clusters
+
+Free Trial clusters have the same functionality as a production cluster, but are of a Basic type and 1x size, and only available during your trial period. You cannot convert a Free Trial cluster to a different type of cluster.
 
 Once you sign up for a Free Trial, you are able to create one production cluster for the duration of your trial.
 
-When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your trial is deleted, and you cannot create new clusters.
+When your Free Trial plan expires, you are automatically transferred to the Free plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your trial is deleted, and you cannot create new clusters.
 
-## Development clusters
+### Auto-pause
 
-Development clusters, available in the Starter and Enterprise plans, are recommended for development, testing, proof of concepts, and demos.
+Free Trial `dev` (or untagged) clusters are automatically paused eight hours after a cluster is created or resumed from a paused state. Auto-pause occurs regardless of cluster usage.
 
-The way this type of cluster works varies depending on if you are using it in the Starter or the Enterprise plan.
+You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume your cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
 
-### Development clusters in the Enterprise Plan
+- Clusters tagged as `test`, `stage`, or `prod` do not auto-pause.
+- Paused clusters are automatically deleted after 30 consecutive paused days. You can change the tag to avoid cluster deletion.
+- No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until you resume the cluster.
 
-Enterprise Plan users can purchase development clusters as part of their Enterprise subscription agreement. Deployment and execution of models (process instances, decision instances, and task users) are included at no extra cost for this type of cluster. Additionally, this type of cluster in the Enterprise plan follows the [standard data retention policy](/docs/components/concepts/data-retention.md) and does not auto-pause when not in use.
+:::tip
 
-Please [contact us](https://camunda.com/contact/) if you are an existing customer and would like to purchase a development cluster.
+To prevent auto-pause, you can:
 
-### Development clusters in the Starter Plan
+- Tag the cluster as `test`, `stage`, or `prod` instead of `dev`.
+- [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
 
-Starter Plan users have one **development cluster** with free execution for development included in their plan. Deployment and execution of models (process instances, decision instances, and task users) are provided at no cost.
-
-Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
-
-Additionally in the Starter Plan, the following applies to **development clusters**:
-
-- **Cluster is not highly available & includes less hardware**: Reduced hardware resources and availability compared to production cluster (for example, one Zeebe node only).
-- **Shorter history of processes and decisions**: Data retention in Operate, Optimize, and Tasklist is reduced to one day. For example, pending or historical process instances are deleted after one day as per the [fair usage limits of the Starter plan](https://camunda.com/legal/fair-usage-limits-for-starter-plan/).
-
-:::caution
-**Cluster auto-pause** is not yet available and only applies to non-Enterprise clusters. Development clusters will be paused if they go unused for two hours. When a cluster is paused, not all functionality will be limited, including the execution of BPMN timers and BPMN message catch events.
 :::

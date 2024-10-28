@@ -13,10 +13,16 @@ In this guide, we'll demonstrate how to connect Identity to your existing Keyclo
 - A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/23.0.1/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak.
 
 :::note
-Clients in Camunda 8 SaaS and applications in Camunda 8 Self-Managed provide a similar purpose. One key difference is that for Camunda 8 SaaS, you can set up specific [client connection credentials](/docs/guides/setup-client-connection-credentials.md), whereas in Identity, an application is created with credentials automatically assigned.
+Clients in Camunda 8 SaaS and applications in Camunda 8 Self-Managed provide a similar purpose. One key difference is that for Camunda 8 SaaS, you can set up specific [client connection credentials](/guides/setup-client-connection-credentials.md), whereas in Identity, an application is created with credentials automatically assigned.
 :::
 
 ## Steps
+
+:::caution Keycloak URLs
+As of the 8.5.3 release, Identity uses the Keycloak frontend URL instead of the backend URL. This change may affect you if you have blocked the Keycloak frontend URL from other services (including Camunda applications), and can potentially impact Identity's functionality.
+
+To avoid connectivity issues, ensure your Keycloak frontend URL is accessible by adjusting your network, firewall, or security settings as needed. This adjustment is crucial to maintain the integration with Keycloak and ensure compatibility.
+:::
 
 To connect Identity to an existing Keycloak instance, take the following steps:
 
@@ -26,7 +32,7 @@ To connect Identity to an existing Keycloak instance, take the following steps:
 3. Select **Clients** in the navigation menu, and click the **Create** button to create a new client.
 4. Enter a client ID and click **Next**.
    :::note What client ID should I use?
-   By default, Identity uses the Client ID `camunda-identity`, so we recommend using this too. If you choose a different client ID, this will need to be set in the Identity application [environment variables](/docs/self-managed/identity/deployment/configuration-variables.md).
+   By default, Identity uses the Client ID `camunda-identity`, so we recommend using this too. If you choose a different client ID, this will need to be set in the Identity application [environment variables](/self-managed/identity/deployment/configuration-variables.md).
    :::
    ![keycloak-admin-client-add-1](../img/keycloak-admin-client-add-1.png)
 5. Toggle **Client authentication** to `on`, select **Service accounts roles** and click **Next**.
@@ -42,16 +48,16 @@ To connect Identity to an existing Keycloak instance, take the following steps:
    Identity is designed to allow users to manage the various entities related to Camunda. To achieve this, it requires specific access to the realm.
    :::
 10. Navigate to the **Credentials** tab and copy the client secret.
-11. Set the `IDENTITY_CLIENT_SECRET` [environment variable](/docs/self-managed/identity/deployment/configuration-variables.md) with the value from **Step 9**.
-12. Set the `KEYCLOAK_REALM` [environment variable](/docs/self-managed/identity/deployment/configuration-variables.md) to the realm you selected in **Step 2**.
+11. Set the `IDENTITY_CLIENT_SECRET` [environment variable](/self-managed/identity/deployment/configuration-variables.md) with the value from **Step 9**.
+12. Set the `KEYCLOAK_REALM` [environment variable](/self-managed/identity/deployment/configuration-variables.md) to the realm you selected in **Step 2**.
     :::tip
     If you are using a specific realm, you need to set additional variables to use the intended realm.
-    See the [environment variables](/docs/self-managed/identity/deployment/configuration-variables.md) page for details of Keycloak-specific variables to consider.
+    See the [environment variables](/self-managed/identity/deployment/configuration-variables.md) page for details of Keycloak-specific variables to consider.
     :::
 13. Start Identity.
 
 :::note What does Identity create when starting?
-Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/docs/self-managed/identity/deployment/starting-configuration.md).
+Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/self-managed/identity/deployment/starting-configuration.md).
 :::
 
 ## Considerations

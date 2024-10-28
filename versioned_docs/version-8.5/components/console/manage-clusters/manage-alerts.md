@@ -41,11 +41,11 @@ Webhook alerts contain a JSON body with following structure:
 {
   "clusterName": "cluster-name",
   "clusterId": "88d32bfc-4f8e-4dd3-9ae2-adfee281e223",
-  "operateBaseUrl": "https://console.cloud.camunda.io/org/2b3bc239-ad5b-4eef-80e0-6ef5139ed66a/cluster/88d32bfc-4f8e-4dd3-9ae2-adfee281e223/operate",
-  "clusterUrl": "https://console.cloud.camunda.io/org/2b3bc239-ad5b-4eef-80e0-6ef5139ed66a/cluster/88d32bfc-4f8e-4dd3-9ae2-adfee281e223",
+  "operateBaseUrl": "https://console.camunda.io/org/2b3bc239-ad5b-4eef-80e0-6ef5139ed66a/cluster/88d32bfc-4f8e-4dd3-9ae2-adfee281e223/operate",
+  "clusterUrl": "https://console.camunda.io/org/2b3bc239-ad5b-4eef-80e0-6ef5139ed66a/cluster/88d32bfc-4f8e-4dd3-9ae2-adfee281e223",
   "alerts": [
     {
-      "operateUrl": "https://console.cloud.camunda.io/org/2b3bc239-ad5b-4eef-80e0-6ef5139ed66a/cluster/88d32bfc-4f8e-4dd3-9ae2-adfee281e223/operate/#/instances/2251799829404548",
+      "operateUrl": "https://console.camunda.io/org/2b3bc239-ad5b-4eef-80e0-6ef5139ed66a/cluster/88d32bfc-4f8e-4dd3-9ae2-adfee281e223/operate/#/instances/2251799829404548",
       "processInstanceId": "1234567890123456",
       "errorMessage": "something went wrong",
       "errorType": "JOB_NO_RETRIES",

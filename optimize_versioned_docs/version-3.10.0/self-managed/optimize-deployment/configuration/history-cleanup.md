@@ -63,7 +63,7 @@ historyCleanup:
     perProcessDefinitionConfig:
       'MyProcessDefinitionKey':
         ttl: 'P2M'
-        processDataCleanupMode: 'variables'
+        cleanupMode: 'variables'
 ```
 
 ### Decision data cleanup
@@ -115,7 +115,7 @@ historyCleanup:
     perProcessDefinitionConfig:
       'VeryConfidentProcess':
         ttl: 'P1M'
-        processDataCleanupMode: 'all'
+        cleanupMode: 'all'
       'KeepTwoMonthsProcess':
         ttl: 'P2M'
   decisionDataCleanup:

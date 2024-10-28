@@ -22,6 +22,10 @@ To configure an alert, take the following steps:
 In Camunda 7 and Camunda 8 Self-Managed, you must configure the email service to receive notifications. See the [technical guide](/self-managed/optimize-deployment/configuration/system-configuration.md#email) for which properties need to be defined.
 :::
 
+:::note
+Only known users in Console (SaaS) and Identity (Self-Managed) can receive Optimize alert emails.
+:::
+
 Note that alerts can only be created for reports which are visualized as a single number and are in the same collection as the alert. Visit the [reports section](../creating-reports.md) on how to define single-number reports.
 
 4. Set a threshold which defines when an alert should be triggered. A notification is sent to the configured email address or webhook as soon as a report value hits the threshold. If reminder notifications are enabled, the alert will continue to send notifications for as long as the value is above (or below, as defined) the threshold.

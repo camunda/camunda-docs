@@ -7,10 +7,6 @@ description: "Let's learn about Camunda Forms, how to use them, how to model the
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 15 minutes</span>
 
-:::note
-The initial release of Camunda Forms includes a debut minimal feature set, which will be expanded with upcoming versions.
-:::
-
 ## Overview
 
 The Camunda Forms feature allows you to easily design and configure forms. Once configured, they can be connected to a user task or start event to implement a task form in your application.

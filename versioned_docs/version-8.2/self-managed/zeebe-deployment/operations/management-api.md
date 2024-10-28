@@ -40,6 +40,8 @@ POST actuator/exporting/pause?soft=true
 
 When all partitions soft pause exporting, a successful response is received. If the request fails, some partitions may have soft paused exporting. Therefore, either retry until success or revert the partial soft pause by resuming the export.
 
+The soft pause feature is only available from 8.2.27 onwards.
+
 ### Resume exporting
 
 After exporting is paused, it must eventually be resumed. Otherwise, the cluster could become unavailable. To resume exporting, send the following request to the gateway's management endpoint:

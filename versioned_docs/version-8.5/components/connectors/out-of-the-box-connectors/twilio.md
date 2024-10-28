@@ -28,7 +28,9 @@ Use Camunda secrets to store your account SID and auth token so you don't expose
 
 ## Create a Twilio Connector task
 
-To use the Twilio Connector in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide to using Connectors](https://docs.camunda.org/manual/latest/user-guide/process-engine/connectors/) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Twilio Connector executable
 

@@ -24,6 +24,12 @@ for more information on how to customize the logback configuration for specific 
 Enabling `DEBUG` logging for the `restapi` component can be useful for troubleshooting purposes, e.g. for
 [debugging Zeebe connection issues](../troubleshooting/troubleshoot-zeebe-connection.md#how-can-i-debug-log-grpc--zeebe-communication).
 
+By default, Web Modeler's `restapi` component logs in JSON. For a more readable logging format, activate the Spring profile using the following:
+
+```properties
+SPRING_PROFILES_INCLUDE=default-logging
+```
+
 ## Logging configuration for the `webapp` component
 
 By default, the `webapp` component logs to the Docker container's standard output.
@@ -35,6 +41,16 @@ To enable additional log output to a file, adjust the following environment vari
 ```
 LOG_FILE_PATH=/full/path/to/log/file.log
 ```
+
+### Configuring log levels
+
+To control the verbosity of the logs, adjust the environment variables `LOG_LEVEL_CLIENT` (browser client) and `LOG_LEVEL_WEBAPP` (Node.js server).
+
+```properties
+LOG_LEVEL_CLIENT=DEBUG
+```
+
+The `LOG_LEVEL_*` options can be found [here](../../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
 
 ## Logging configuration for the `websocket` component
 

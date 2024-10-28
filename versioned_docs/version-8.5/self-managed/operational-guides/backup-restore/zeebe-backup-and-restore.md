@@ -15,7 +15,7 @@ The backup management API is a custom endpoint `backups`, available via [Spring 
 To use the backup feature in Zeebe, you must choose which external storage system you will use.
 Make sure to set the same configuration on all brokers in your cluster.
 
-Zeebe supports [S3](#s3-backup-store) and [Google Cloud Storage (GCS)](#gcs-backup-store) for external storage.
+Zeebe supports [S3](#s3-backup-store), [Google Cloud Storage (GCS)](#gcs-backup-store), and [Azure](#azure-backup-store) for external storage.
 
 :::caution
 Backups created with one store are not available or restorable from another store.
@@ -82,6 +82,10 @@ zeebe.broker.data.backup.s3.compression: zstd # or use environment variable ZEEB
 [commons-compress]: https://commons.apache.org/proper/commons-compress/
 
 ### GCS backup store
+
+:::note
+The GCS backup strategy utilizes the [Google Cloud Storage REST API](https://cloud.google.com/storage/docs/request-endpoints).
+:::
 
 To store your backups in Google Cloud Storage (GCS), choose the `GCS` backup store and tell Zeebe which bucket to use:
 

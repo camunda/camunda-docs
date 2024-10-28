@@ -9,7 +9,13 @@ Review our [list of existing inbound Connectors](/components/connectors/out-of-t
 
 ## Creating the Connector event
 
-Inbound Connectors are modeled as **catch events** in BPMN. Connectors that trigger a process instance are modeled as **start events**, and Connectors that send messages to an already running process instance are modeled as **intermediate catch events**.
+Inbound Connectors are modeled as **catch events** in BPMN. Connectors that create a new process instance are modeled as **start events**, and Connectors that send messages to an already running process instance are modeled as **intermediate catch events**. It is also possible to create new processes by using a **message start event** and to use inbound Connectors via **boundary events**.
+
+:::info
+If **idempotency** is a concern for the process creation and reprocessing of messages should never lead to a duplicate process instance creation, use the **message start event** element for an inbound Connector as it relies on publishing a message.
+
+Unlike plain **start event** elements, **message start events** support the **Message ID expression** property that allows to derive a unique value from the connector output that will be used by Zeebe to [guarantee uniqueness](/components/concepts/messages.md#message-uniqueness) in case other messages are published that use the same **Message ID**.
+:::
 
 When you **deploy** such a BPMN diagram with an inbound Connector, the Connector becomes ready to receive incoming requests. The outcome depends on the Connector type:
 

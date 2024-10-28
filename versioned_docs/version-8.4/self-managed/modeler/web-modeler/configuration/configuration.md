@@ -114,13 +114,14 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 
 ### Identity / Keycloak
 
-| Environment variable    | Description                                                                                                               | Example value                                                                     | Default value |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
-| `OAUTH2_CLIENT_ID`      | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                      | `web-modeler`                                                                     | -             |
-| `OAUTH2_JWKS_URL`       | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification). | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
-| `OAUTH2_TOKEN_AUDIENCE` | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                    | `web-modeler`                                                                     | -             |
-| `OAUTH2_TOKEN_ISSUER`   | URL of the token issuer (used for JWT validation).                                                                        | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
-| `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                 | `http://identity:8080`                                                            | -             |
+| Environment variable                      | Description                                                                                                                                                                                                                                                         | Example value                                                                     | Default value |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| `OAUTH2_CLIENT_ID`                        | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                                                                                                                                                                | `web-modeler`                                                                     | -             |
+| `OAUTH2_CLIENT_FETCH_REQUEST_CREDENTIALS` | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies. | `include`                                                                         | -             |
+| `OAUTH2_JWKS_URL`                         | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                                                                                                                                           | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
+| `OAUTH2_TOKEN_AUDIENCE`                   | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                                                                                                                                                              | `web-modeler`                                                                     | -             |
+| `OAUTH2_TOKEN_ISSUER`                     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                  | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
+| `IDENTITY_BASE_URL`                       | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                           | `http://identity:8080`                                                            | -             |
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance or connect a custom OpenID Connect (OIDC) authentication provider.
 
@@ -143,10 +144,13 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 
 ### Logging
 
-| Environment variable | Description                            | Example value                |
-| -------------------- | -------------------------------------- | ---------------------------- |
-| `LOG_FILE_PATH`      | [optional]<br/>Path to log file output | `/full/path/to/log/file.log` |
+| Environment variable | Description                                     | Example value                |
+| -------------------- | ----------------------------------------------- | ---------------------------- |
+| `LOG_FILE_PATH`      | [optional]<br/>Path to log file output          | `/full/path/to/log/file.log` |
+| `LOG_LEVEL_CLIENT`   | [optional]<br/>Log level for the client         | `DEBUG`                      |
+| `LOG_LEVEL_WEBAPP`   | [optional]<br/>Log level for the Node.js server | `DEBUG`                      |
 
+The `LOG_LEVEL_*` options can be found [here](../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
 
 ## Configuration of the `websocket` component

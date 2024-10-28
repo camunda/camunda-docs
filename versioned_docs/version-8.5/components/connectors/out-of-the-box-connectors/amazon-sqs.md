@@ -30,7 +30,9 @@ Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Re
 
 ## Create an Amazon SQS Connector task
 
-To use the **Amazon SQS Connector** in your process, either change the type of existing task by clicking on it and using the wrench-shaped **Change type** context menu icon, or create a new Connector task by using the **Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Amazon SQS Connector for sending messages executable
 

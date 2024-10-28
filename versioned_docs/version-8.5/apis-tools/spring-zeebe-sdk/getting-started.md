@@ -14,29 +14,13 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 ## Add the Spring Zeebe SDK to your project
 
-Add the following repository and Maven dependency to your Spring Boot Starter project:
-
-```xml
-<repositories>
-    <repository>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-        <id>identity</id>
-        <name>Camunda Identity</name>
-        <url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
-    </repository>
-</repositories>
-```
+Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
 ```xml
 <dependency>
-  <groupId>io.camunda</groupId>
-  <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-  <version>8.5.0</version>
+    <groupId>io.camunda</groupId>
+    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+    <version>8.5.x</version>
 </dependency>
 ```
 
@@ -90,8 +74,51 @@ zeebe.client.cloud.region=bru-2
 You can also configure the connection to a Self-Managed Zeebe broker:
 
 ```properties
-zeebe.client.broker.grpcAddress=https://127.0.0.1:26500
-zeebe.client.broker.restAddress=https://127.0.0.1:8080
+zeebe.client.cloud.clientId=xxx
+zeebe.client.cloud.clientSecret=xxx
+zeebe.client.cloud.authUrl=xxx
+zeebe.client.broker.grpcAddress=xxx
+zeebe.client.broker.restAddress=xxx
+zeebe.client.security.plaintext=true
+```
+
+Example of configuring the connection to a Self-Managed Zeebe cluster:
+
+```properties
+zeebe.client.cloud.clientId=your-client-id
+zeebe.client.cloud.clientSecret=your-client-secret
+zeebe.client.cloud.authUrl=http://localhost:18080/auth/realms/your-realm/protocol/openid-connect/token
+zeebe.client.broker.grpcAddress=http://localhost:26500
+zeebe.client.broker.restAddress=http://localhost:8080
+zeebe.client.security.plaintext=true
+```
+
+:::note
+The `zeebe.client.cloud.authUrl` property above is the Keycloak token endpoint.
+:::
+
+You can also configure the connection to a Self-Managed Zeebe cluster using environment variables and specifying your
+gateway address:
+
+Environment variable to be set using this approach:
+
+```properties
+ZEEBE_AUTHORIZATION_SERVER_URL=xxx
+ZEEBE_CLIENT_ID=xxx
+ZEEBE_CLIENT_SECRET=xxx
+```
+
+Example environment variables to be set to configure gRPC and REST connection:
+
+```properties
+ZEEBE_GRPC_ADDRESS=http://127.0.0.1:26500/
+ZEEBE_REST_ADDRESS=http://127.0.0.1:8080/
+```
+
+Properties to be set using this approach:
+
+```properties
+zeebe.client.broker.gateway-address=http://127.0.0.1:26500
 zeebe.client.security.plaintext=true
 ```
 
@@ -100,13 +127,6 @@ You can enforce the right connection mode, for example if multiple contradicting
 ```properties
 zeebe.client.connection-mode=CLOUD
 zeebe.client.connection-mode=ADDRESS
-```
-
-You can specify credentials in the following way:
-
-```properties
-common.clientId=xxx
-common.clientSecret=xxx
 ```
 
 ## Obtain the Zeebe client

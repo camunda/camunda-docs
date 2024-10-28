@@ -4,11 +4,7 @@ title: "Metrics"
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
-When operating a distributed system like Zeebe, it is important to put proper monitoring in place.
-
-To facilitate this, Zeebe exposes an extensive set of metrics.
-
-Zeebe exposes metrics over an embedded HTTP server.
+When operating a distributed system like Zeebe, it is important to put proper monitoring in place. To facilitate this, Zeebe exposes an extensive set of metrics over an embedded HTTP server.
 
 ## Types of metrics
 
@@ -17,8 +13,7 @@ Zeebe exposes metrics over an embedded HTTP server.
 
 ## Metrics format
 
-Zeebe exposes metrics directly in Prometheus text format.
-Read details of the format in the [Prometheus documentation][prom-format].
+Zeebe exposes metrics directly in the [Prometheus text format][prom-format].
 
 **Example:**
 
@@ -30,13 +25,13 @@ zeebe_stream_processor_records_total{action="processed",partition="1",} 20320.0
 zeebe_stream_processor_records_total{action="skipped",partition="1",} 2153.0
 ```
 
-## Configuring metrics
+## Enable additional metrics
 
-Configure the HTTP server to export the metrics in the [configuration file](../configuration/configuration.md).
+Metrics are exported by default. To enable execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](../configuration/configuration.md).
 
-## Connecting Prometheus
+## Connect Prometheus
 
-As explained, Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
+Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
 
 Add the following entry to your `prometheus.yml`:
 
@@ -96,7 +91,7 @@ The health of partitions in a broker can be monitored by the metric `zeebe_healt
 ## Grafana
 
 Zeebe comes with a pre-built dashboard, available in the repository:
-[monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/zeebe.json).
+[monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/stable/8.3/monitor/grafana/zeebe.json).
 
 [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) it into your Grafana instance and select the correct Prometheus data source (important if you have more than one). You will then be greeted with the following dashboard, which displays a healthy cluster topology, general throughput metrics, handled requests, exported events per second, disk and memory usage, and more.
 

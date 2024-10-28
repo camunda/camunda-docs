@@ -30,8 +30,8 @@ Each pipeline is unique. The Web Modeler API offers flexibility to tailor integr
 
 - A platform to host a version control system (VCS) such as GitHub or GitLab.
 - An existing pipeline or a plan to set one up using tools like [CircleCI](https://circleci.com/) or [Jenkins](https://www.jenkins.io/), cloud platforms such as [Azure DevOps Pipelines](https://azure.microsoft.com/de-de/products/devops), or built-in solutions of VCS platforms like [GitHub Actions](https://github.com/features/actions) or [GitLab's DevSecOps Lifecycle](https://about.gitlab.com/stages-devops-lifecycle/).
-- Make yourself familiar with the [Web Modeler API](/apis-tools/web-modeler-api/index.md) through the [OpenAPI documentation](https://modeler.cloud.camunda.io/swagger-ui/index.html).
-- Understand how [clusters](/docs/next/components/concepts/clusters/) work in Camunda 8.
+- Make yourself familiar with the [Web Modeler API](/apis-tools/web-modeler-api/index.md) through the [OpenAPI documentation](https://modeler.camunda.io/swagger-ui/index.html).
+- Understand how [clusters](/components/concepts/clusters.md) work in Camunda 8.
 - Ensure you’ve [created a Camunda 8 account](/guides/create-account.md), or installed [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 
 ## Setup
@@ -168,7 +168,7 @@ Use milestones to indicate a state for review. Use the `POST /api/beta/milestone
 
 While it is possible to do a diff of your diagrams by comparing the XML in your VCS system, this is often not very convenient, and lacks insight into process flow changes. This approach is also less effective when involving business stakeholders in the review.
 
-The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/beta/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST /api/beta/milestones/search` [endpoint](https://modeler.cloud.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) available from Web Modeler 8.3, utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
+The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/beta/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST /api/beta/milestones/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) available from Web Modeler 8.3, utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
 
 ![Visual diff of two milestones](img/visual-diff.png)
 

@@ -80,6 +80,11 @@
         },
         {
           "type": "link",
+          "label": "Encryption at rest",
+          "href": "/docs/8.4/components/concepts/encryption-at-rest/"
+        },
+        {
+          "type": "link",
           "label": "Outbound Connectors vs. job workers",
           "href": "/docs/8.4/components/concepts/outbound-connectors-job-workers/"
         },
@@ -205,6 +210,11 @@
               "type": "link",
               "label": "Manage IP allowlists",
               "href": "/docs/8.4/components/console/manage-clusters/manage-ip-allowlists/"
+            },
+            {
+              "type": "link",
+              "label": "Create backup",
+              "href": "/docs/8.4/components/console/manage-clusters/create-backups/"
             },
             {
               "type": "link",
@@ -1152,12 +1162,22 @@
 
             {
               "type": "link",
+              "label": "Hugging Face Connector",
+              "href": "/docs/8.4/components/connectors/out-of-the-box-connectors/hugging-face/"
+            },
+            {
+              "type": "link",
               "label": "Kafka Connector",
               "href": "/docs/8.4/components/connectors/out-of-the-box-connectors/kafka/"
             },
 
             {
               "Microsoft": [
+                {
+                  "type": "link",
+                  "label": "Azure OpenAI Connector",
+                  "href": "/docs/8.4/components/connectors/out-of-the-box-connectors/azure-open-ai/"
+                },
                 {
                   "type": "link",
                   "label": "Microsoft Teams Connector",
@@ -2499,16 +2519,6 @@
     },
 
     {
-      "Architecture": [
-        {
-          "type": "link",
-          "label": "Overview",
-          "href": "/docs/8.4/self-managed/platform-architecture/overview/"
-        }
-      ]
-    },
-
-    {
       "Installation": [
         {
           "type": "link",
@@ -2669,21 +2679,6 @@
               "label": "Update 8.2 to 8.3",
               "href": "/docs/8.4/self-managed/operational-guides/update-guide/820-to-830/"
             },
-            {
-              "type": "link",
-              "label": "Update 8.1 to 8.2",
-              "href": "/docs/8.4/self-managed/operational-guides/update-guide/810-to-820/"
-            },
-            {
-              "type": "link",
-              "label": "Update 8.0 to 8.1",
-              "href": "/docs/8.4/self-managed/operational-guides/update-guide/800-to-810/"
-            },
-            {
-              "type": "link",
-              "label": "Update 1.3 to 8.0",
-              "href": "/docs/8.4/self-managed/operational-guides/update-guide/130-to-800/"
-            },
 
             {
               "Elasticsearch": [
@@ -2816,6 +2811,11 @@
                   "type": "link",
                   "label": "Interceptors",
                   "href": "/docs/8.4/self-managed/zeebe-deployment/zeebe-gateway/interceptors/"
+                },
+                {
+                  "type": "link",
+                  "label": "Job streaming",
+                  "href": "/docs/8.4/self-managed/zeebe-deployment/zeebe-gateway/job-streaming/"
                 }
               ]
             },

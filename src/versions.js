@@ -16,6 +16,10 @@
 const versionMappings = [
   // 👋 When cutting a new version, add a new mapping here!
   {
+    docsVersion: "8.6",
+    optimizeVersion: "3.14.0",
+  },
+  {
     docsVersion: "8.5",
     optimizeVersion: "3.13.0",
   },
@@ -31,10 +35,6 @@ const versionMappings = [
     docsVersion: "8.2",
     optimizeVersion: "3.10.0",
   },
-  {
-    docsVersion: "1.3",
-    optimizeVersion: "3.7.0",
-  },
 ];
 
 /** @type {Array<UnsupportedVersion>} */
@@ -44,6 +44,7 @@ const unsupportedVersions = [
   //   `urlSuffix` gets appended to the target `unsupported.docs.camunda.io/` URL.
   { label: "8.1 / 3.9.0", urlSuffix: "8.1" },
   { label: "8.0 / 3.8.0", urlSuffix: "8.0" },
+  { label: "1.3 / 3.7.0", urlSuffix: "1.3" },
   { label: "1.2", urlSuffix: "1.2" },
   { label: "1.1", urlSuffix: "1.1" },
   { label: "1.0", urlSuffix: "1.0" },

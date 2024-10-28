@@ -16,9 +16,9 @@ and a model deployed with [Inference API](https://huggingface.co/docs/api-infere
 
 ## Create a Hugging Face Connector task
 
-To use the **Hugging Face Connector** in your process, either change the type of existing task by clicking on it
-and using the wrench-shaped **Change type** context menu icon, or create a new Connector task using the
-**Append Connector** context menu. Follow our [guide on using Connectors](/components/connectors/use-connectors/index.md) to learn more.
+import ConnectorTask from '../../../components/react-components/connector-task.md'
+
+<ConnectorTask/>
 
 ## Make your Hugging Face Connector executable
 

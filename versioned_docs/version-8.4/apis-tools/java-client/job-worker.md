@@ -185,6 +185,17 @@ To avoid your workers being overloaded with too many jobs, e.g. running out of m
 If the worker blocks longer than the job's deadline, the job will **not** be passed to the worker, but will be dropped. As it will time out on the broker side, it will be pushed again.
 :::
 
+#### Proxying
+
+If you're using a reverse proxy or a load balancer between your worker and your gateway, you may need to configure additional parameters to ensure the job stream is not closed unexpectedly with an error. If you observe regular 504 timeouts, read our guide on [job streaming](../../../self-managed/zeebe-deployment/zeebe-gateway/job-streaming).
+
+By default, the Java job workers have a stream timeout of one hour. You can overwrite this by calling the `streamTimeout` of the job worker builder:
+
+```java
+final JobWorkerBuilderStep3 builder = ...;
+builder.streamTimeout(Duration.ofMinutes(30));
+```
+
 ## Multi-tenancy
 
 You can configure a job worker to pick up jobs belonging to one or more tenants. When using the builder, you can configure

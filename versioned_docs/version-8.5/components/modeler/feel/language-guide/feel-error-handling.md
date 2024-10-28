@@ -36,8 +36,8 @@ a.b > 10
 ```
 
 To handle `null` values explicitly, use
-a [null-check](/docs/components/modeler/feel/language-guide/feel-boolean-expressions.md#null-check) or the
-function [`get or else()`](/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean.md#get-or-elsevalue-default).
+a [null-check](/components/modeler/feel/language-guide/feel-boolean-expressions.md#null-check) or the
+function [`get or else()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean.md#get-or-elsevalue-default).
 
 ```feel
 a != null and a.b > 10
@@ -49,7 +49,7 @@ get or else(a, "prio-99")
 
 By default, the evaluation of an expression doesn't fail but returns `null`. If there is a special need to fail the
 evaluation under a certain condition, use the
-function [`assert()`](/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean.md#assertvalue-condition).
+function [`assert()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean.md#assertvalue-condition).
 
 ```feel
 assert(a, a != null)

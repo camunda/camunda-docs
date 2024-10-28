@@ -75,12 +75,10 @@ click Rest "../../../tasklist-api-rest/tasklist-api-rest-overview"
 click Job "../../../tasklist-api-rest/migrate-to-zeebe-user-tasks"
 click ZeebeTasks "../../../tasklist-api-rest/migrate-to-zeebe-user-tasks"
 click ZeebeRest "../../../zeebe-api-rest/zeebe-api-rest-overview"
-click B "../../../tasklist-api-rest/tasklist-api-rest-tutorial"
 ```
 
 Follow these resources to learn more about the individual components:
 
-- Create a simple backend in the [Tasklist API tutorial](/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial.md).
 - Familiarize yourself with the [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) for task, variable, and form retrieval, and to run operations on job-based user tasks.
 - Learn how to use the [Zeebe API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md) to run operations on Zeebe-based user tasks.
 - Understand how to design, embed, and customize [forms](/apis-tools/frontend-development/03-forms/01-introduction-to-forms.md).

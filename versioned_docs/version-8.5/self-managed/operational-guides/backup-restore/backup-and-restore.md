@@ -38,7 +38,7 @@ To back up a Camunda 8 cluster, execute the following sequential steps:
 4. Wait until the backup `x` of Optimize is complete. See [how to monitor an Optimize backup](/self-managed/operational-guides/backup-restore/optimize-backup.md).
 5. Wait until the backup `x` of Operate is complete. See [how to monitor an Operate backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
 6. Wait until the backup `x` of Tasklist is complete. See [how to monitor a Tasklist backup](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
-7. Soft pause exporting in Zeebe. See [Zeebe management API](self-managed/zeebe-deployment/operations/management-api.md).
+7. Soft pause exporting in Zeebe (this feature is only available from 8.5.1, otherwise use Pause exporting). See [Zeebe management API](self-managed/zeebe-deployment/operations/management-api.md).
 8. Take a backup `x` of the exported Zeebe records in Elasticsearch using the Elasticsearch Snapshots API.
 
 ```

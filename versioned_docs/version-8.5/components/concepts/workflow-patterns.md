@@ -28,7 +28,7 @@ The most basic workflow patterns are (excuse the play on words) around the basic
 
 Refer to [Workflow Pattern 1: Sequence](http://www.workflowpatterns.com/patterns/control/basic/wcp1.php): "A task in a process is enabled after the completion of a preceding task in the same process."
 
-This is implemented by a [sequence flow](/docs/components/modeler/bpmn/bpmn-primer.md#sequence-flow-controlling-the-flow-of-execution) connecting two activities:
+This is implemented by a [sequence flow](/components/modeler/bpmn/bpmn-primer.md#sequence-flow-controlling-the-flow-of-execution) connecting two activities:
 
 <div bpmn="workflow-patterns/sequence.bpmn" callouts="BeforeSequenceFlow1" />
 

@@ -5,7 +5,7 @@ tags:
 description: "Create visual process models to better understand, discuss, and remember processes so models are easy to read and understand."
 ---
 
-We create visual process models to better understand, discuss, and remember processes. Hence, it is crucial that models are easy to read and understand. The single most important thing is to to use well-chosen labels.
+We create visual process models to better understand, discuss, and remember processes. Hence, it is crucial that models are easy to read and understand. The single most important thing is to use well-chosen labels.
 
 ## Essential practices
 
@@ -267,7 +267,7 @@ A common idea is to model retry behavior into your process models. This _should 
 
 <div bpmn="best-practices/creating-readable-process-models-assets/retry-anti-pattern.bpmn" thumbs="down" />
 
-All operations use cases put into the model can be handled via Camunda tooling, e.g. by [retrying](/docs/components/concepts/job-workers/#completing-or-failing-jobs) or [Camunda Operate](/docs/components/operate/operate-introduction/).
+All operations use cases put into the model can be handled via Camunda tooling, e.g. by [retrying](/components/concepts/job-workers.md#completing-or-failing-jobs) or [Camunda Operate](/components/operate/operate-introduction.md).
 
 ### Using collaboration diagrams
 

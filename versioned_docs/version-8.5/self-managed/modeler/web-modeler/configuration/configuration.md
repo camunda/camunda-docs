@@ -66,11 +66,11 @@ Web Modeler integrates with Identity and Keycloak for authentication and authori
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform` |
 | `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL`              | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:8080/auth/realms/camunda-platform`         |
 
-Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance or connect a custom OpenID Connect (OIDC) authentication provider.
+Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### Zeebe Client
 
-Web Modeler uses the [Zeebe Java client](/docs/apis-tools/java-client/index.md) to connect to Zeebe.
+Web Modeler uses the [Zeebe Java client](/apis-tools/java-client/index.md) to connect to Zeebe.
 To customize the client configuration, you can provide optional environment variables.
 
 | Environment variable          | Description                                                                                              | Example value                    | Default Value                |
@@ -91,6 +91,20 @@ For more details, [see the Zeebe connection troubleshooting section](/self-manag
 
 Refer to the [advanced logging configuration guide](./logging.md#logging-configuration-for-the-restapi-component) for additional details on how to customize the `restapi` logging output.
 
+### SSL
+
+| Environment variable                            | Description                                                                          | Example value                        | Default value |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------ | ------------- |
+| `SERVER_SSL_ENABLED`                            | [optional]<br/>Whether to enable SSL support.                                        | `true`                               | `false`       |
+| `SERVER_SSL_CERTIFICATE`                        | [optional]<br/>Path to a PEM-encoded SSL certificate file.                           | `file:/full/path/to/certificate.pem` | -             |
+| `SERVER_SSL_CERTIFICATE_PRIVATE_KEY`            | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.       | `file:/full/path/to/key.pem`         | -             |
+| `MANAGEMENT_SERVER_SSL_ENABLED`                 | [optional]<br/>Whether to enable SSL support for the management server routes.       | `true`                               | `false`       |
+| `MANAGEMENT_SERVER_SSL_CERTIFICATE`             | [optional]<br/>Path to a PEM-encoded SSL certificate file.                           | `file:/full/path/to/certificate.pem` | -             |
+| `MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.       | `file:/full/path/to/key.pem`         | -             |
+| `RESTAPI_PUSHER_SSL_ENABLED`                    | [optional]<br/>Whether to enable communication via SSL to the `websocket` component. | `true`                               | `false`       |
+
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
+
 ## Configuration of the `webapp` component
 
 ### General
@@ -103,6 +117,20 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 | `RESTAPI_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the regular API endpoints.                 | `8081`                                                           | `8081`        |
 | `RESTAPI_MANAGEMENT_PORT` | [Internal](#notes-on-host-names-and-port-numbers) port number on which the `restapi` serves the management API endpoints.              | `8091`                                                           | `8091`        |
 
+### Proxy
+
+These settings are useful when the application needs to make outgoing network requests in environments that require traffic to pass through a proxy server.
+
+| Environment variable | Description                                                                                    | Example value                         | Default value |
+| -------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------- | ------------- |
+| `http_proxy`         | Specifies the proxy server to be used for outgoing HTTP requests.                              | `http://proxy.example.com:8080`       | -             |
+| `https_proxy`        | Specifies the proxy server to be used for outgoing HTTPS requests.                             | `https://secureproxy.example.com:443` | -             |
+| `no_proxy`           | A comma-separated list of domain names or IP addresses for which the proxy should be bypassed. | `localhost,127.0.0.1,.example.com`    | -             |
+
+:::note
+The proxy-related environment variables are lowercase because they follow a widely accepted convention used in many system environments and tools.
+:::
+
 ### Feature Flags
 
 | Environment variable            | Description                                                                                                                                                                                                                                                    | Example value | Default value |
@@ -114,15 +142,16 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 
 ### Identity / Keycloak
 
-| Environment variable    | Description                                                                                                               | Example value                                                                     | Default value |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
-| `OAUTH2_CLIENT_ID`      | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                      | `web-modeler`                                                                     | -             |
-| `OAUTH2_JWKS_URL`       | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification). | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
-| `OAUTH2_TOKEN_AUDIENCE` | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                    | `web-modeler`                                                                     | -             |
-| `OAUTH2_TOKEN_ISSUER`   | URL of the token issuer (used for JWT validation).                                                                        | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
-| `IDENTITY_BASE_URL`     | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                 | `http://identity:8080`                                                            | -             |
+| Environment variable                      | Description                                                                                                                                                                                                                                                         | Example value                                                                     | Default value |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| `OAUTH2_CLIENT_ID`                        | Client ID of the Web Modeler application configured in Identity;<br/>_must be set to_ `web-modeler`.                                                                                                                                                                | `web-modeler`                                                                     | -             |
+| `OAUTH2_CLIENT_FETCH_REQUEST_CREDENTIALS` | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies. | `include`                                                                         | -             |
+| `OAUTH2_JWKS_URL`                         | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                                                                                                                                           | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
+| `OAUTH2_TOKEN_AUDIENCE`                   | Expected token audience (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                                                                                                                                                              | `web-modeler`                                                                     | -             |
+| `OAUTH2_TOKEN_ISSUER`                     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                  | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
+| `IDENTITY_BASE_URL`                       | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                           | `http://identity:8080`                                                            | -             |
 
-Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to set up secure connections to an external Identity instance or connect a custom OpenID Connect (OIDC) authentication provider.
+Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### WebSocket
 
@@ -143,11 +172,31 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 
 ### Logging
 
-| Environment variable | Description                            | Example value                |
-| -------------------- | -------------------------------------- | ---------------------------- |
-| `LOG_FILE_PATH`      | [optional]<br/>Path to log file output | `/full/path/to/log/file.log` |
+| Environment variable | Description                                     | Example value                |
+| -------------------- | ----------------------------------------------- | ---------------------------- |
+| `LOG_FILE_PATH`      | [optional]<br/>Path to log file output          | `/full/path/to/log/file.log` |
+| `LOG_LEVEL_CLIENT`   | [optional]<br/>Log level for the client         | `DEBUG`                      |
+| `LOG_LEVEL_WEBAPP`   | [optional]<br/>Log level for the Node.js server | `DEBUG`                      |
 
+The `LOG_LEVEL_*` options can be found [here](../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
+
+### SSL
+
+| Environment variable             | Description                                                                                            | Example value                   | Default value |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------- | ------------- |
+| `SSL_ENABLED`                    | [optional]<br/>Whether to enable SSL support.                                                          | `true`                          | `false`       |
+| `SSL_CERT`                       | [optional]<br/>Path to a PEM-encoded SSL certificate file.                                             | `/full/path/to/certificate.pem` | -             |
+| `SSL_KEY`                        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.                         | `/full/path/to/key.pem`         | -             |
+| `SSL_PASSPHRASE`                 | [optional]<br/>Passphrase for the private key file.                                                    | `change-me`                     | -             |
+| `MANAGEMENT_SSL_ENABLED`         | [optional]<br/>Whether to enable SSL support for management server routes.                             | `true`                          | `false`       |
+| `MANAGEMENT_SSL_CERT`            | [optional]<br/>Path to a PEM-encoded SSL certificate file.                                             | `/full/path/to/certificate.pem` | -             |
+| `MANAGEMENT_SSL_KEY`             | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.                         | `/full/path/to/key.pem`         | -             |
+| `MANAGEMENT_SSL_PASSPHRASE`      | [optional]<br/>Passphrase for the private key file.                                                    | `change-me`                     | -             |
+| `RESTAPI_SSL_ENABLED`            | [optional]<br/>Whether to enable communication via SSL to the `restapi` component.                     | `true`                          | `false`       |
+| `RESTAPI_MANAGEMENT_SSL_ENABLED` | [optional]<br/>Whether to enable communication via SSL to the `restapi` component's management routes. | `true`                          | `false`       |
+
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
 ## Configuration of the `websocket` component
 
@@ -167,6 +216,16 @@ The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web
 | `LOG_CHANNEL`        | [optional]<br/>Log channel driver, see [Laravel documentation](https://laravel.com/docs/10.x/logging#available-channel-drivers) | `single`      | `stack`       |
 
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-websocket-component) for additional details on how to customize the `websocket` logging output.
+
+### SSL
+
+| Environment variable    | Description                                                                    | Example value                   | Default Value |
+| ----------------------- | ------------------------------------------------------------------------------ | ------------------------------- | ------------- |
+| `PUSHER_SSL_CERT`       | [optional]<br/>Path to a PEM-encoded SSL certificate file.                     | `/full/path/to/certificate.pem` | -             |
+| `PUSHER_SSL_KEY`        | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate. | `/full/path/to/key.pem`         | -             |
+| `PUSHER_SSL_PASSPHRASE` | [optional]<br/>Passphrase for the private key file.                            | `change-me`                     | -             |
+
+Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
 ## Notes on host names and port numbers
 

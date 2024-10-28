@@ -3,7 +3,7 @@ title: "Writing good workers"
 description: "Service tasks within Camunda 8 require you to set a task type and implement job workers who perform whatever needs to be performed."
 ---
 
-[Service tasks](/docs/components/modeler/bpmn/service-tasks/) within Camunda 8 require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes that you might want to:
+[Service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md) within Camunda 8 require you to set a task type and implement [job workers](/components/concepts/job-workers.md) who perform whatever needs to be performed. This describes that you might want to:
 
 1. Write all glue code in one application, separating different classes or functions for the different task types.
 2. Think about idempotency and read or write as little data as possible from/to the process.
@@ -53,7 +53,7 @@ In this case, you would spread your workers into different applications. Most of
 
 ## Thinking about transactions, exceptions and idempotency of workers
 
-Make sure to visit [Dealing With Problems and Exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding how workers deal with transactions and exceptions to the happy path.
+Visit [dealing with problems and exceptions](../dealing-with-problems-and-exceptions/) to gain a better understanding of how workers deal with transactions and exceptions to the happy path, and find more details on how to write idempotent workers.
 
 ## Data minimization in workers
 
@@ -62,7 +62,7 @@ If performance or efficiency matters in your scenario, there are two rules about
 1. Minimize what data you read for your job. In your job client, you can define which process variables you will need in your worker, and only these will be read and transferred, saving resources on the broker as well as network bandwidth.
 2. Minimize what data you write on job completion. You should explicitly not transmit the input variables of a job upon completion, which might happen easily if you simply reuse the map of variables you received as input for submitting the result.
 
-Not transmitting all variables saves resources and bandwidth, but serves another purpose as well: upon job completion, these variables are written to the process and might overwrite existing variables. If you have parallel paths in your process (e.g. [parallel gateway](/docs/components/modeler/bpmn//parallel-gateways/), [multiple instance](/docs/components/modeler/bpmn/multi-instance/)) this can lead to race conditions that you need to think about. The less data you write, the smaller the problem.
+Not transmitting all variables saves resources and bandwidth, but serves another purpose as well: upon job completion, these variables are written to the process and might overwrite existing variables. If you have parallel paths in your process (e.g. [parallel gateway](/components/modeler/bpmn/parallel-gateways/parallel-gateways.md), [multiple instance](/components/modeler/bpmn/multi-instance/multi-instance.md)) this can lead to race conditions that you need to think about. The less data you write, the smaller the problem.
 
 ## Scaling workers
 
@@ -240,12 +240,12 @@ These observations yield the following recommendations:
 
 ### Node.js client
 
-Using the [Node.js client](https://github.com/camunda/camunda-platform-get-started/tree/master/nodejs), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
+Using the [Node.js client](https://github.com/camunda/camunda-8-js-sdk), your worker code will look like this, assuming that you use Axios to do rest calls (but of course any other library is fine as well):
 
 ```js
 zbc.createWorker({
   taskType: "rest",
-  taskHandler: (job, _, worker) => {
+  taskHandler: (job) => {
     console.log("Invoke REST call...");
     axios
       .get(PAYMENT_URL)
@@ -264,7 +264,7 @@ zbc.createWorker({
 
 This is **reactive code**. And a really interesting observation is that reactive programming is so deep in the JavaScript language that it is impossible to write blocking code, even code that looks blocking is still [executed in a non-blocking fashion](https://github.com/berndruecker/camunda-cloud-clients-parallel-job-execution/blob/main/results/nodejs-blocking.log).
 
-Node.js code scales pretty well and there is no specific thread pool defined or necessary. The Camunda 8 Node.js client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L28).
+Node.js code scales pretty well and there is no specific thread pool defined or necessary. The Camunda 8 Node.js client library also [uses reactive programming internally](https://github.com/camunda-community-hub/zeebe-client-node-js/blob/master/src/zb/ZBWorker.ts#L27).
 
 This makes the recommendation very straight-forward:
 

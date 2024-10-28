@@ -1,7 +1,7 @@
 ---
 id: automating-a-process-using-bpmn
 title: Design a process using BPMN
-description: A quickstart on how to use BPMN, an easy-to-adopt visual modeling language, together with Camunda to automate your business processes.
+description: A quickstart on how to use BPMN, a visual modeling language, together with Camunda to automate your business processes.
 keywords: [workflow, modeling]
 ---
 

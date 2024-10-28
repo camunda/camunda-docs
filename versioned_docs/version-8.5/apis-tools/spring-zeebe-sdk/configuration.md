@@ -166,7 +166,7 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job) {
 }
 ```
 
-Ideally, you **don't** use blocking behavior like `send().join()`, as this is a blocking call to wait for the issues command to be executed on the workflow engine. While this is very straightforward to use and produces easy-to-read code, blocking code is limited in terms of scalability.
+Ideally, you **don't** use blocking behavior like `send().join()`, as this is a blocking call to wait for the issued command to be executed on the workflow engine. While this is very straightforward to use and produces easy-to-read code, blocking code is limited in terms of scalability.
 
 This is why the worker above showed a different pattern (using `exceptionally`). Often, you might also want to use the `whenComplete` callback:
 
@@ -218,14 +218,6 @@ public void handleJobFoo() {
 
 ## Additional configuration options
 
-### Configuring Self-Managed Zeebe connection
-
-```properties
-zeebe.client.broker.grpcAddress=http://127.0.0.1:26500
-zeebe.client.broker.restAddress=http://127.0.0.1:8080
-zeebe.client.security.plaintext=true
-```
-
 ### Configure different cloud environments
 
 If you don't connect to the Camunda 8 SaaS production environment, you might have to also adjust these properties:
@@ -255,7 +247,7 @@ zeebe.client.worker.max-jobs-active=32
 zeebe.client.worker.threads=1
 ```
 
-For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/ZeebeClientConfigurationProperties.java).
+For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/ZeebeClientConfigurationProperties.java).
 
 :::note
 We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.
@@ -332,6 +324,46 @@ You can override this property as well:
 
 ```properties
 zeebe.client.worker.override.tenant-ids=myThirdTenant
+```
+
+### Override authority
+
+The alternative authority to use, commonly in the form `host` or `host:port`:
+
+```properties
+zeebe.client.security.overrideAuthority=host:port
+```
+
+### CA certificate
+
+Path to a root CA certificate to be used instead of the certificate in the default store:
+
+```properties
+zeebe.client.security.certPath=host:port
+```
+
+### Message time to live
+
+The time-to-live which is used when none is provided for a message (default 1H):
+
+```properties
+zeebe.client.message.timeToLive=PT2H
+```
+
+### Max message size
+
+A custom maxMessageSize allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
+
+```properties
+zeebe.client.message.maxMessage-size=3
+```
+
+### Keep alive
+
+Time interval between keep alive messages sent to the gateway (default is 45s):
+
+```properties
+zeebe.client.broker.keepAlive=PT60S
 ```
 
 ## Observing metrics

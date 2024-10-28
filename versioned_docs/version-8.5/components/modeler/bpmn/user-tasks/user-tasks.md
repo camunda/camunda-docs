@@ -19,10 +19,10 @@ Version 8.4 and below are limited to the job worker implementation.
 
 ## Define a user task
 
-You define a user task by adding the `zeebe:userTask` extension element. This marks the user task as a **Zeebe user task**.
-Omitting the `zeebe:userTask` extension element defines the user task to use the [job worker implementation](#job-worker-implementation).
+A user task is marked as a **Zeebe user task** by the `zeebe:userTask` extension element. Without the `zeebe:userTask` extension element, the user task behaves like a [service task](#job-worker-implementation).
 
-Regardless of the implementation type, you can define assignments, scheduling, variable mappings, and a form for the user task.
+You can define assignments, scheduling, variable mappings, and a form for the user task as detailed in the following sections.
+
 The [job worker implementation](#job-worker-implementation) section details the differences and limitations of job worker-based user tasks.
 
 ### Assignments
@@ -39,7 +39,7 @@ attributes can be specified simultaneously:
 Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](docs/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.
 :::
 
-Typically, the assignee, candidate users, and candidate groups are defined as [static values](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
+Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
 `sales, operations`), but they can also be defined as
 [expressions](/components/concepts/expressions.md) (e.g. `= book.author` and `= remove(reviewers, book.author)` and `= reviewer_roles`). The expressions are evaluated on activating the user task and must result in a
 `string` for the assignee and a `list of strings` for the candidate users and a `list of strings` for the candidate groups.
@@ -49,7 +49,7 @@ the value of the `assignee` must be the user's **unique identifier**.
 The unique identifier depends on the authentication method used to login to Tasklist:
 
 - Camunda 8 (login with email, Google, GitHub): `email`
-- Default Basic Auth (elasticsearch): `username`
+- Default Basic Auth (Elasticsearch): `username`
 - IAM: `username`
 
 These assignees are not related to user restrictions, which is related to the visibility of the task in Tasklist for Self-Managed. For more information, see [Tasklist Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md).
@@ -108,7 +108,7 @@ Depending on your use case, two different types of form references can be used:
    of the task's `zeebe:formDefinition` extension element (see the [XML representation](#camunda-form-linked)).
    Form ID references always refer to the latest deployed version of the Camunda Form.
 
-   You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/docs/components/modeler/forms/camunda-forms-reference.md)
+   You can read more about Camunda Forms in the [Camunda Forms guide](/guides/utilizing-forms.md) or the [Camunda Forms reference](/components/modeler/forms/camunda-forms-reference.md)
    to explore all configuration options for form elements.
 
 2. A **custom form reference** can specify any custom identifier in the user task using the `externalReference`

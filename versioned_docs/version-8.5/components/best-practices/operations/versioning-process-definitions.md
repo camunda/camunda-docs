@@ -33,8 +33,9 @@ Run versions _in parallel_ for
 
 ### Migrating process instances to a new version
 
-:::caution Camunda 7 only
-Camunda 8 does not yet support process instance migrations as described here. This feature is currently in development and will be available soon.
+:::caution Camunda 8
+This description is Camunda 7 specific, but with Camunda 8 you can migrate process instances in a similar fashion.
+Read more about the concept in Camunda 8 [here](../../concepts/process-instance-migration.md).
 :::
 
 _Migrate_ running instances to the newest definition when:
@@ -45,7 +46,7 @@ _Migrate_ running instances to the newest definition when:
 Migrating process instances can be achieved either programmatically or by using the operations tooling. _Programmatically_, you need to _create a migration plan_ that describes how process instances are to be migrated from one process definition to another.
 
 ```java
-// Sample code from Camunda 7.x, this feature is not yet available in Camunda 8:
+// Sample code from Camunda 7.x:
 MigrationPlan migrationPlan = processEngine.getRuntimeService()
   .createMigrationPlan("exampleProcess:1", "exampleProcess:2")
     .mapActivities("assessCreditWorthiness", "assessCreditWorthiness")
@@ -147,7 +148,7 @@ Having said this, we want to emphasize that the engine is perfectly fine with ha
 ### Using call activities to influence versioning behaviour of pieces
 
 :::caution Camunda 8
-With Camunda 8 you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/docs/components/modeler/bpmn/call-activities/).
+With Camunda 8 you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/components/modeler/bpmn/call-activities/call-activities.md).
 :::
 
 When calling separately modeled subprocesses (i.e. _Call Activities_), the default behavior of the process engine is to call the _latest_ deployed version of that subprocess. You can change this default 'binding' behavior to call a _specific_ version or the version which was _deployed_ together with the parent process.

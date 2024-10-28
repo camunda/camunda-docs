@@ -95,7 +95,7 @@ While filtering, the entries of the current context element can be accessed by t
     b: 10
   }
 ][b > 7]
-// {a: "p2", b: 10}
+// [{a: "p2", b: 10}]
 ```
 
 ### Projection

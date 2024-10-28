@@ -6,7 +6,7 @@ description: Learn how to use Connectors in Web Modeler by creating a Connector 
 
 Any task can be transformed into a Connector task. This guide details the basic functionality all Connectors share.
 
-Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation. Additionally, learn how you can visit the [Camunda Marketplace](/docs/components/modeler/web-modeler/camunda-marketplace.md) to add Connectors from your BPMN diagram.
+Find the available Connectors in Camunda 8 SaaS and how to use them in detail in the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) documentation. Additionally, learn how you can visit the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) to add Connectors from your BPMN diagram.
 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. [Model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with Web Modeler.
@@ -136,9 +136,9 @@ In that case, you could declare `Result Expression` as follows:
 
 ```
 = {
-  berlinWeather: response.current_weather.temperature,
-  berlinWindSpeed: response.current_weather.windspeed,
-  berlinWeatherInFahrenheit: response.current_weather.temperature * 1.8 + 32
+  berlinWeather: response.body.current_weather.temperature,
+  berlinWindSpeed: response.body.current_weather.windspeed,
+  berlinWeatherInFahrenheit: response.body.current_weather.temperature * 1.8 + 32
 }
 ```
 
@@ -165,7 +165,11 @@ indicate internal website errors, which is why the website team is informed.
 
 The **Error Expression** property requires a [FEEL](/components/modeler/feel/what-is-feel.md) expression that yields a BPMN error object in the end. The BPMN error object can be an empty [context](/components/modeler/feel/language-guide/feel-data-types.md#context),
 [null](/components/modeler/feel/language-guide/feel-data-types.md#null), or a context containing at least a non-empty `errorType` and a non-empty `code` if the error type is `bpmnError`. You can use all available functionality provided by FEEL to produce this result.
-Use the provided FEEL function [`bpmnError`](#function-bpmnerror) to conveniently create a BPMN error object and the provided FEEL function [`jobError`](#function-jobError) to conveniently create a fail job object.
+
+Use the provided FEEL functions:
+
+- [`bpmnError`](#function-bpmnerror) to create a BPMN error object. This triggers a [ThrowError call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow engine.
+- [`jobError`](#function-jobError) to create a fail job object. This triggers a [FailJob call](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to the workflow engine.
 
 The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
 

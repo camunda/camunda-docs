@@ -27,11 +27,14 @@ import TabItem from "@theme/TabItem";
 
 ## Outbound Connectors
 
+- [Amazon Bedrock Connector](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) - Interact with [Amazon Bedrock](https://aws.amazon.com/bedrock/) from your BPMN process to experiment with and evaluate foundation models (FMs) from leading AI companies.
+- [Amazon Comprehend Connector](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md) - Interact with the [Amazon Comprehend service](https://aws.amazon.com/comprehend/) from your BPMN process.
 - [Amazon DynamoDB Connector](/components/connectors/out-of-the-box-connectors/amazon-dynamodb.md) - Interact with [Amazon DynamoDB NoSQL database service](https://aws.amazon.com/dynamodb/) within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.
 - [Amazon EventBridge Service Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Send events using [Amazon EventBridge service](https://aws.amazon.com/eventbridge/) within your BPMN process.
 - [Amazon SageMaker Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Interact with the [Amazon SageMaker service](https://aws.amazon.com/sagemaker/) from your BPMN process.
 - [Amazon SNS Outbound Connector](/components/connectors/out-of-the-box-connectors/amazon-sns.md) - Send messages to [Amazon Simple Notification Service](https://aws.amazon.com/sns/) from your BPMN process.
 - [Amazon SQS Connector](/components/connectors/out-of-the-box-connectors/amazon-sqs.md) - Send messages to [Amazon Simple Queue Service](https://aws.amazon.com/sqs/) from your BPMN process.
+- [Amazon Textract Connector](components/connectors/out-of-the-box-connectors/amazon-textract.md) - Interact with the [Amazon Textract Service](https://aws.amazon.com/textract/) from your BPMN process.
 - [Asana Connector](/components/connectors/out-of-the-box-connectors/asana.md) - Manage [Asana](https://asana.com/) projects and tasks from your BPMN process.
 - [Automation Anywhere Connector](/components/connectors/out-of-the-box-connectors/automation-anywhere.md) - Orchestrate your [Automation Anywhere](https://www.automationanywhere.com/) queue from your BPMN process.
 - [AWS Lambda Connector](/components/connectors/out-of-the-box-connectors/aws-lambda.md) - Invoke [AWS Lambda Functions](https://aws.amazon.com/lambda/) from your BPMN process.
@@ -53,6 +56,7 @@ import TabItem from "@theme/TabItem";
 - [Salesforce Connector](/components/connectors/out-of-the-box-connectors/salesforce.md) - Manage your Salesforce instance from your BPMN process.
 - [SendGrid Connector](/components/connectors/out-of-the-box-connectors/sendgrid.md) - Quickly send emails from your BPMN processes.
 - [Slack outbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Send messages to channels or users in your [Slack](https://slack.com) workspace from your BPMN process.
+- [SQL Connector](/components/connectors/out-of-the-box-connectors/sql.md) - Connect your BPMN process with SQL databases (Microsoft SQL Server, PostgreSQL, MySQL).
 - [Twilio Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Send and get SMS messages with [Twilio](https://www.twilio.com) service from your BPMN process.
 - [UiPath Connector](/components/connectors/out-of-the-box-connectors/uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
 - [WhatsApp Connector](/components/connectors/out-of-the-box-connectors/whatsapp.md) - Send messages with [WhatsApp Business](https://business.whatsapp.com/) from your BPMN process.
@@ -82,6 +86,7 @@ import TabItem from "@theme/TabItem";
 - [HTTP Webhook Connector](/components/connectors/protocol/http-webhook.md) - Start a process instance with your custom webhook configuration.
 - [Polling Connector](/components/connectors/protocol/polling.md) - The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.
 - [REST Connector](/components/connectors/protocol/rest.md) - Make a request to a REST API and use the response in the next steps of your process.
+- [SOAP Connector](/components/connectors/protocol/soap.md) - Connect your BPMN process with Simple Object Access Protocol ([SOAP](https://en.wikipedia.org/wiki/SOAP)) services and interact with SOAP service endpoints.
 
 </TabItem>
 

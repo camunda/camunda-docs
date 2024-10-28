@@ -27,7 +27,9 @@
     "api:generate": "node ./api/generate-api-docs.js",
     "api:generate:operate": "npm run api:generate operate",
     "api:generate:tasklist": "npm run api:generate tasklist",
-    "api:generate:zeebe": "npm run api:generate zeebe"
+    "api:generate:zeebe": "npm run api:generate zeebe",
+    "api:generate:consolesm": "npm run api:generate consolesm",
+    "api:generate:camunda": "npm run api:generate camunda"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.1",
@@ -39,10 +41,10 @@
     "@saucelabs/theme-github-codeblock": "^0.2.3",
     "clsx": "^1.2.1",
     "docusaurus": "^1.14.7",
-    "docusaurus-gtm-plugin": "0.0.2",
     "docusaurus-plugin-openapi-docs": "^2.0.4",
     "docusaurus-theme-openapi-docs": "^2.0.4",
     "mixpanel-browser": "^2.47.0",
+    "pushfeedback-react": "^0.1.30",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-player": "^2.11.0",
