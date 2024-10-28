@@ -331,10 +331,8 @@ module.exports = {
             id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
           },
           items: [
-            "components/connectors/out-of-the-box-connectors/asana",
-            "components/connectors/out-of-the-box-connectors/automation-anywhere",
             {
-              AWS: [
+              "Amazon AWS": [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
@@ -346,6 +344,8 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/asana",
+            "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
             "components/connectors/out-of-the-box-connectors/email",

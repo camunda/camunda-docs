@@ -1,6 +1,6 @@
 ---
 id: amazon-bedrock
-sidebar_label: AWS Bedrock Connector
+sidebar_label: Amazon Bedrock
 title: Amazon Bedrock Connector
 description: Interact with the Amazon Bedrock Connector from your BPMN process.
 ---

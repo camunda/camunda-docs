@@ -19,12 +19,12 @@ import OverviewImg from './img/connector-overview.png';
 
 For example:
 
-- You can use the [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connectors to notify people of pending or completed processes, such as in a human task orchestration onboarding flow.
+- Use the [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
 - In microservices orchestration, use the [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) Connector to incorporate real-time messaging in your automated processes.
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
-## Get started with Connectors
+## Get started
 
 Learn more about how to use Connectors in your processes and about the different types of Connector available.
 
@@ -52,7 +52,7 @@ Ready to start using Connectors in your processes? Explore our library of prebui
 
 **[Explore Connectors A-Z >](/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)**
 
-#### Popular Connectors
+<!-- #### Popular Connectors
 
 <div class="connector-small-grid">
   <a href="path/to/connector1" class="connector-small-link">
@@ -75,12 +75,7 @@ Ready to start using Connectors in your processes? Explore our library of prebui
       <img src={AmazonEventbridgeImg} alt="Get started"/>Amazon Eventbridge
     </div>
   </a>
-  <a href="path/to/connector5" class="connector-small-link">
-    <div class="connector-small">
-      <img src={AmazonEventbridgeImg} alt="Get started"/>Amazon Eventbridge
-    </div>
-  </a>
-</div>
+</div> -->
 
 ## Custom Connectors
 
