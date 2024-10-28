@@ -708,6 +708,10 @@ module.exports = {
         {
           type: "category",
           label: "Alpha features",
+          link: {
+            type: "doc",
+            id: "components/early-access/alpha/alpha-features",
+          },
           items: [
             "components/early-access/alpha/sap/sap-integration",
             "components/early-access/alpha/sap/odata-connector",
@@ -917,7 +921,6 @@ module.exports = {
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
-    "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",

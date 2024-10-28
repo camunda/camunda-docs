@@ -14,6 +14,9 @@ RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 # ----------------------
 # None here yet, but please place them here when you have them.
 
+# Move alpha features to components
+RewriteRule ^docs/next/reference/alpha-features/?$ /docs/next/components/early-access/alpha/alpha-features/$1 [R=301,L]
+
 # 8.6 content moves vvvv
 # ----------------------
 
