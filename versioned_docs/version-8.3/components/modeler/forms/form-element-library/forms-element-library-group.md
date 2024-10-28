@@ -6,7 +6,7 @@ description: Learn about the group form element to group multiple form elements
 
 The group element serves as a container to group various form elements together. It allows for nesting of fields and assists in organizing complex forms.
 
-![Form Group Symbol](/img/form-icons/form-group.svg)
+<img src="/img/form-icons/form-group.svg" alt="Form Group Symbol" />
 
 ### Configurable properties
 

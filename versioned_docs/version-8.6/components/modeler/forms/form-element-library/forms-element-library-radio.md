@@ -6,7 +6,7 @@ description: A form element to select a value from set options
 
 A radio group allowing the user to select one of multiple data options for small datasets.
 
-![Form Radio Symbol](/img/form-icons/form-radio.svg)
+<img src="/img/form-icons/form-radio.svg" alt="Form Radio Symbol" />
 
 ### Configurable properties
 

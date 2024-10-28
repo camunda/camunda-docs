@@ -6,7 +6,7 @@ description: Learn about the datetime form element to read and edit date and tim
 
 A component allowing the user to read and edit date and time data.
 
-<img src="/img/form-icons/form-datetime.svg" alt="Form Time Symbol" />
+<img src="/img/form-icons/form-datetime.svg" alt="Form Datetime Symbol" />
 
 ## Configurable properties
 

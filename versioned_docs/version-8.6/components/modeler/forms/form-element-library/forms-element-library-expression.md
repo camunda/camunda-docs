@@ -6,7 +6,7 @@ description: A form element to compute form state
 
 An expression field allowing the user to compute new data based on form state.
 
-![Form Expression Field Symbol](/img/form-icons/form-expression.svg)
+<img src="/img/form-icons/form-expression.svg" alt="Form Expression Field Symbol" />
 
 ### Configurable properties
 
