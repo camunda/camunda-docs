@@ -36,7 +36,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 ### Architecture
 
-<!-- TODO: update Arch to include Aurora and OpenSearch both text and diagram -->
+<!-- TODO: update Arch to include Aurora and OpenSearch both text and diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) -->
 
 Note the [existing architecture](../../../../about-self-managed.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
 

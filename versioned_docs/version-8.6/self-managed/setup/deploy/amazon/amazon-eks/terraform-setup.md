@@ -58,7 +58,7 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 ### Outcome
 
-<!-- TODO : add architecture diagram --->
+<!-- TODO : add architecture diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) --->
 
 Following this tutorial and steps will result in:
 
