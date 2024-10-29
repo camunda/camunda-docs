@@ -19,19 +19,19 @@ import OverviewImg from './img/connector-overview.png';
 
 For example:
 
-- Use the [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
-- In microservices orchestration, use the [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) Connector to incorporate real-time messaging in your automated processes.
+- Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
+- In microservices orchestration, use a [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) Connector to add real-time messaging to your automated processes.
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
-## Get started
+## Get started with Connectors
 
 Learn more about how to use Connectors in your processes and about the different types of Connector available.
 
 <div class="connector-grid">
   <a href="../connectors-start" class="connector-card" title="Get started with Connectors">
     <img src={IconPlayImg} alt="Get started"/>
-    <h3>Get started</h3>
+    <h3>Get started with Connectors</h3>
     <p>Learn more about Connectors.</p>
   </a>
     <a href="../connector-types" class="connector-card" title="Connector types">
