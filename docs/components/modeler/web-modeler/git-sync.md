@@ -49,10 +49,13 @@ An organization administration account (or project administrator in Camunda Self
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **Client ID:** Found in your GitHub App's settings page.
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
-   - **GitHub repository URL:** The URL of the repository you would like to sync with.
+   - **GitHub repository URL:** The base URL of the repository you would like to sync with. It must not contain the `.git` extension nor the path to a folder. (Example: https://github.com/camunda/example-repo)
    - **Branch name:** The branch name to use for merging and managing changes.
+   - **(Optional) Path:** The path to the folder containing your process application files. If left blank, Web Modeler will sync with the root of the repository. This path will automatically be created if it does not exist.
 
-3. Click **Save Configuration**.
+3. Test your configuration by clicking **Open repository**. It will open the repository with the provided branch and optional path in a new tab.
+
+4. Click **Save Configuration**.
 
 :::note
 When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
@@ -86,6 +89,34 @@ Existing GitHub configurations can be edited from the gear icon beside the **Syn
 - **Project administrators - Self-Managed:** Edit and update all configuration options.
 - **Project administrators - SaaS:** Edit and update only the **GitHub repository URL** and **branch name**.
 - **Project editors:** Cannot make changes to the GitHub configuration.
+
+## Advanced Use Cases
+
+The Git sync feature is designed to be flexible and can accommodate a variety of development workflows. Below are some advanced use cases that Git sync supports.
+
+### Working with Monorepos
+
+:::note
+If you are using Git sync to work with monorepos, it is recommended that you pull changes regularly, as the GitHub API is limited to a fixed amount of files and commits per synchronization action.
+See the troubleshooting guide for more information.
+:::
+
+A monorepo is a single repository that contains more than one logical project, each possibly having disparate workflows and release cadences.
+
+To set up Git sync with a monorepo, you can specify the **path** to your project during the configuration. This allows you to keep multiple projects in one repository, each with its own sync configuration.
+
+### Parallel Feature Development
+
+Git sync supports parallel development of features by allowing multiple process applications to be connected to different feature branches. This enables teams to work on multiple features simultaneously without interfering with each other's work.
+
+To use Git sync for parallel feature development, follow these steps:
+
+1. Create a new process application in the Modeler for each active feature branch you wish to develop.
+2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
+3. Work on your feature within the Modeler, and use the Sync with GitHub button to pull and push changes as needed.
+4. Once the feature is complete and merged into the main branch, the process application associated with the feature branch can be deleted.
+
+To perform hotfixes or patches of production or production-bound processes, sync a copy of a process application to the `main` branch.
 
 ## Troubleshooting
 
