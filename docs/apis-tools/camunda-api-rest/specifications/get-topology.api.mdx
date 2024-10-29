@@ -1,0 +1,48 @@
+---
+id: get-topology
+title: "Get cluster topology"
+description: "Obtains the current topology of the cluster the gateway is part of."
+sidebar_label: "Get cluster topology"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1Vttu2zgQ/RWCT13AtdzuS5A3r5MGXnTbIEl3gQ38QMljmS0lqiTl1BX87ztDUpZiK4kDdIEAsXg5Z4Zz5tJwJ3LLz+/5TNXWgeGLEdcVGOGkLudLfs5zcHe60krnWz7iS7CZkRXt4t7n1AlZWubWwLLaGCgdc/Ew06uwHoD971w4eBBbJi2rhHF4ZIyYBmylSwtoR8PfTyb07//gyXTp8CbBi6pSMvNOJl8tcTTcZmsoxDH5HQK2JhKZ6KgNfK/BOgJ32wrwsE6/QubwuzL0jE4Gr1Kjv4Gxx+BTpqQlA1k8gvYLx4SB1nJcQDeidz0mYYygiJS1UiJVuORMDSMuHRQDRNdGbyQuMVmutCm86wz/RCRmpV7Cy47QKZLF0CPVpcTnYG8eJJpMyNHo3zw2m18wZPbxCZQ9NomRyVF9Ix6MC0u/v+e7EV9r64YJaacUBXhcAyJD2nyYwDqDewRXafMEHO2cAPWcrRQzSZDPhro7xQpRihyWzLMGTdJXGaJ+xN0G/dVB3lOyfXReFff9/ReCj0FuJbu/cuLbGU0iPsS+8F8phOS/ESvH6GCb9dEJippgudxAOcgbwz/iUNYFlTsFYhntUEo/+J+yFJlDCL4g1YFQbv2SPW0xCqdbo06yIFyhYNZl93uJdiE/GoAI9B78ugXjtLrBEiFDvTqOQXyMeGZA/T3YP/zZOerEL8dUvZU/B2JA2Gh1iti9QiXLft09JciHxepRwsx0XT6RmB13L3OoRNoKU3XJRGa0tb/AmjYFkeADakGbYXuwkaxkXhvM1N4NtvJXYpEbrNmvsSX2sL+fC3iMdKu7fwFSYFfh4pD2Dkh6cmhb/E1sdCiKHe0X4NY6jgFUFATlBE9cNxFYMBvf2u4bXhuFu03opLvzJGmoRO/OGyqtu2RDjm6EkWSDLytdbV+JWtF7KJ0J5ZcPh41HFT96PBNFXS4FO2M3l7d3neuP6nwLfTY5mwyi+sI/jDi9nrPgoQftzwgt7Nq5ahA2HD4FeLdb0ENiNZFue0vX4tgAqHIzrUMhitGMfB6dvsMhXAk/PrTK+vOfO5/a1Av89RjqY0N4r67wyfjdkTdkLMk60wXe9XrH7kidBKtuh9cTPCYFkIxoZBBFn/Zj2GFR2OzdmIISlEOuWZRNjsh1Oka6JAvX9v9TpdOkwGkwiRQ2mU3/+vLpYvr243x2+en28i0ijt0P552vUDDYY3t2XIHrZsUnBtummxV/0ewZY+fgh0sqhYCkJu90E5Pqnu+tWbRDzz1vmlRY+GLUbkfL2GLNFtcXXR7RV+hX1NAoC7/BlmKWZVA5n3Cq9rPD4cxLotvn99UlqeU/kMov3Q==
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get cluster topology</h1>
+
+<MethodEndpoint method={"get"} path={"/topology"}></MethodEndpoint>
+
+Obtains the current topology of the cluster the gateway is part of.
+
+## Request
+
+<div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+Obtains the current topology of the cluster the gateway is part of.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>brokers</strong><span className={"openapi-schema__name"}> object[]</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__nullable"}>nullable</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+A list of brokers that are part of this cluster.
+
+</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"nodeId"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The unique (within a cluster) node ID for the broker.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"host"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The hostname for reaching the broker.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"port"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The port for reaching the broker.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>partitions</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+A list of partitions managed or replicated on this broker.
+
+</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"partitionId"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The unique ID of this partition.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"role"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`leader`, `follower`, `inactive`]"} schema={{"description":"Describes the Raft role of the broker for a given partition.","type":"string","enum":["leader","follower","inactive"]}}></SchemaItem><SchemaItem collapsible={false} name={"health"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`healthy`, `unhealthy`, `dead`]"} schema={{"description":"Describes the current health of the partition.","type":"string","enum":["healthy","unhealthy","dead"]}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The broker version.","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={false} name={"clusterSize"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The number of brokers in the cluster.","type":"integer","format":"int32","nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"partitionsCount"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The number of partitions are spread across the cluster.","type":"integer","format":"int32","nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"replicationFactor"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The configured replication factor for this cluster.","type":"integer","format":"int32","nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"gatewayVersion"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The version of the Zeebe Gateway.","type":"string","nullable":true}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"brokers\": [\n    {\n      \"nodeId\": 0,\n      \"host\": \"string\",\n      \"port\": 0,\n      \"partitions\": [\n        {\n          \"partitionId\": 0,\n          \"role\": \"leader\",\n          \"health\": \"healthy\"\n        }\n      ],\n      \"version\": \"string\"\n    }\n  ],\n  \"clusterSize\": 0,\n  \"partitionsCount\": 0,\n  \"replicationFactor\": 0,\n  \"gatewayVersion\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

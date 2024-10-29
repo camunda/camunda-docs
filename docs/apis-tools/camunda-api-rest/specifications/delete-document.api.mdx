@@ -1,12 +1,12 @@
 ---
-id: resolve-incident
-title: "Resolve incident"
-description: "Marks the incident as resolved; most likely a call to Update job will be necessary to reset the job’s retries, followed by this call."
-sidebar_label: "Resolve incident"
+id: delete-document
+title: "Delete document (alpha)"
+description: "Delete a document from the Camunda 8 cluster."
+sidebar_label: "Delete document (alpha)"
 hide_title: true
 hide_table_of_contents: true
-api: eJztV8ty2zYU/RUMV8lUJpXUSV11pXGcVm2SemS5XbhagOSVCBskWACUrOFwpr/R3+uX9F6AlKmHx1l00YUWGpHEfR2cc/GoA8uXJhjdBZMiESkUNpgPAlWC5laoYpIGo0CDUXIFW4NBkIJJtCjJAsc/c/1gmM2AidaEccNar/QHlitjmRQPIDeMs4RLyaxit2XKLbB7FbO1wE8xsAISMIbrDY2jP1gXFU3++etvimi1ADNgCyWlWkPKYrTMhHExwz8KrKzkmudgQROmOijwBSvs6voFNmgjqOiS2wyfNfxZCQ0I0+oK9pGhPVOLXWi+NIIWor9JMsh5MKoDuyl9KgtL0Di0UDrn1n96fx40zZzSmVIVBgx5vB2e099uylk/F0LLcXIRaW9Cw6AZBOfD4XHfUqsVOqcMZ5dTgEJZtuJSpFRuorA8pBBdeVlKkTiWI3SKJeTf3BuKU/dQ7SYYs2tvyVKwXEim4ntIHN3eMMbEomB304+X7Pvzd9/NX2XWlmYURev1OtSL5AxSYZUOlV5G+Eo/snsdMixeA8LdkBJ4imaYk0sChGq0SDwzJSRiIRLiwHqsrhiaek9/S4Ivi+SwdX6iaEuVQTkVyz5TlRYH6h6z2+mEOT7EYoMOh6mdz4JXkmLwWFV2FEtePBBRVlh5NOl+FlPlOUm/1dtuAgxkLLeVeVFp3749iE2y+Gk2u2Y+BEtUCthD2vdOm4hA5KIQeZUHI1QXvvFH//Z+OGwoJjH+FUgKBo8lwnfS2oeD4sgV8uyjOWCiwLqK5L9iRmmxFPt5MdETF0Er4g8eUdM0rqFeasa1sNnOUkCrQ9tgC1UVpwY7NdipwZ5tsHfHdizEQrOsSYegNU6ZSpJK44bM1pmQLjydCbrctF2DsadOO3XaqdOOdxoO4gE4U3RyL/Hk7Q7FeNYdBVG3cZmo7u1hTeROlpUrBckBveqOz5XGWQpq30MNSr/OMGIzqkulbROtiKAV14JjDY5PGva91mlIKjycZ76OQy5pgM7oHcZLnuNGytkFm17dzNiPeENY842bW0q5G/pieDE8GpVMn4k4vp4wj9Arsbc6dGGpzY+G9cZfE9id9Q3gSibs5obc/PTEwDXocUV0bBXS5nPR6d0b4Rf/8LHTzc+/zxz1olgo595K4LAQYgUp9JUPwzeHcsNiqWsSlaOvWzpRcu6Aw3vAElkZS4AGAa6vgPcWytveqTqzT36E/eYzsjchkeKV062YS4xcxSGmixLvtv2PpYqjnIsialOY6HL8+fbLh/HZp8nl1ZebqzOMGNpH68CTonNe9OqY+mvR9lS2D7Z+2in+VzfVln0LjzbCNQYvpU07bXXbsHfbe6tB+9HuJbbXs6g133d3QV3H3MCtlk1Dn3Gz1Bv8Pn9qU9fXqTD0jEvEgkuzf+3tz9iraXtBfs1evgwfhdR+5MXGLRayojd8fEAYuzfzZo7mGfAU1U9VeotxkkBpe77P7vbUdNul7/rXG2qXfwHYIdOR
-sidebar_class_name: "post api-method"
+api: eJztV0tz2zYQ/isYnuypTCqp0zq8aSylVcfNeGy5Odg+gORKREICDABa1nD437sLkHq7dac9dXywRQKL/fbx7XLRBJYvTBDfB2OV1iVIGzwOAlWB5lYoOc2COMigAAvr/QEumFSLigRwe+y2GWdZJ8HmWpXM5sAueVnLjLMLlha1saDDB/kg4ziWysKDnOXCMJBZpQSewmcuGS+qnLM5cFtrCNnUsrTWGrUWK6Yk/jN1VSltnbCQZyWUSq822MYqDYMHucxFmpNOhGIlcDJLaVZpldUpWc5qA6Ez5kGiTxXXvEQ/NAWjCSS+kOudWozDIBDkbcVtjs8avtdCA4bH6hr2QzJD36djpuYuCmvbrGI+liFqMGkOJQ/iJrCrirCM1UIugrYdrOGdMxvs7zXo1Q74nBfmtehO2caG3U1K2V9b9Ui4plLSgKH998Mh/RxCr3UuuemwMsxamoIx87ooVmHQDoLz4fnfHRc2d0YuxBNI8ogUUjrnClkVurSlSloiJariVVWI1NE2wjQnBZQ/fDWkt9lyaxdwxK69JBpquSiYSr5CapmznAQTtF1Idn/z6ZJ9PP/w8+NJbm1l4ihaLpehnqdnkAkMbKj0IsJX+iO505ChMxjvkq9YgtWRoRhi8oIoiOVlBRhmKkjFXKSUFfK0M5tR7L1/XRa8WUTT9eFNjvZzNQiQ6SXHoAS1Fgf1OmJ3N1MmMgybmK/wwCG0OzPndUE6eKJqGycFl98ocVbY4ijoPoqpy5JjaXY83AVARcZijW+5gRy3sAC9bT8u/fj+QDfR5NfZ7Jp5FSxVGbjqttRQOiByohRSlHUZxOfDIb7xZ//203DYkk7K+Cs8kQyeK3TfUWvfHSRHSXXltTnHhES7ZPpfZUZpsRD7uCH1iT4XQUfisfeobWnvw7H6HFHPxCZHPAStMWQqdf01Y9gwC6ee6rTHpk4Dxr7V2lutvdXaS7WGmzg55GozK7l5AueEOIj6z5mJms0w0dKXFvRTP23UGmMTNL5yWiR8kytj27ihSaeNnigtT1wLjsgui7TtK6xnTqFSXrjlYxmkDZopes82g9nN5HbGfuEWltx/mAlyV/XF8GJ4VCuJvqBxdD1l3kPPv62e0Kul4j6q1gu/RrGbSgxgBxN2dUvHfHgS4Br0qKYUrHnR4Tnt9O6FcMU/fOrZ8tuXmUu4kHPljneJPzSEsoIp9JYPw3eHJENjqVZSVeJZ1zCRaG6w4UeGYzyPXRVwwiLcbgbsxa78DvvDI7J3ISXFM6fvkwvUXCchwkWpP7b+TQqVRCUXMuogTHQ5+v3u83h0djW9nHy+nZyhxtA+W+d8hYQpudyyoxvz1+PZiZvUT/d9bjafif/JzaCjj4VnG2Frwkm87eLedFV+v74nGJSPty4NSE9fqvdB0yTcwJ0u2paW/SxPxZ8JQ3X9wjS/Hc9/M9gf9eIbrHZuGU+8qEkqoLrqG84/NPLkprudnLLXXIOO2tUtcrnaNqq3dyu+7SNK58AzLGQy0wuM8K5R2a2jL44r5Oe6d48nV5PZBOn/J1Z3NM8=
+sidebar_class_name: "delete api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
@@ -25,28 +25,29 @@ import Markdown from "@theme/Markdown";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 
-<h1 className={"openapi__heading"}>Resolve incident</h1>
+<h1 className={"openapi__heading"}>Delete document (alpha)</h1>
 
 <MethodEndpoint
-  method={"post"}
-  path={"/incidents/{incidentKey}/resolution"}
+  method={"delete"}
+  path={"/documents/{documentId}"}
 ></MethodEndpoint>
 
-Marks the incident as resolved; most likely a call to Update job will be necessary to reset the job’s retries, followed by this call.
+Delete a document from the Camunda 8 cluster.
+
+:::note
+This endpoint is an alpha feature. It currently only supports an in-memory document store,
+which is not meant for production use.
+:::
 
 ## Request
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"incidentKey","in":"path","required":true,"description":"Key of the incident to resolve.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"documentId","in":"path","required":true,"description":"The ID of the document to delete.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"storeId","in":"query","required":false,"description":"The ID of the document store to delete the document from.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
 
-The incident is marked as resolved.
+The document was deleted successfully.
 
-</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
+</div><div></div></TabItem><TabItem label={"404"} value={"404"}><div>
 
-The provided data is not valid.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-The incident with the incidentKey is not found.
+The document with the given ID was not found.
 
 </div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
 
