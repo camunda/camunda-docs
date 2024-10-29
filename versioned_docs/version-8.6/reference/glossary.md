@@ -82,6 +82,12 @@ In a clustered environment, a broker which is not a leader is a follower of a gi
 
 - [Clustering](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol)
 
+### Human task
+
+Camunda 8 allows you to orchestrate processes with human tasks, which may be [user tasks](#user-task) or [manual tasks](#manual-task).
+
+- [Human task orchestration](/guides/getting-started-orchestrate-human-tasks.md)
+
 ### Hybrid mode
 
 Hybrid mode, or a hybrid Self-Managed distribution, allows you to run a separate instance of the Connectors runtime in a Self-Managed or local fashion. This instance can be attached to either a SaaS cluster, or another Self-Managed cluster with its own Connector runtime.
@@ -142,6 +148,14 @@ In a clustered environment, one broker (the leader) is responsible for process e
 The log is comprised of an ordered sequence of records written to persistent storage. The log is appended-only and is stored on disk within the broker.
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
+
+### Manual task
+
+A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
+
+Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) which define an actionable task assisted by a business process execution engine or software application.
+
+- [Manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md)
 
 ### Message
 
@@ -243,6 +257,12 @@ Soft pause exporting is a feature that allows you to continue exporting records 
 An [inbound Connector](#inbound-connector) that subscribes to a message queue.
 
 This way, a Camunda workflow can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound Connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
+
+### User task
+
+A user task is used to model work that needs to be done by a human and is assisted by a business process execution engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+
+- [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
 
 ### Webhook Connector
 

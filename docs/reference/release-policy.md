@@ -18,7 +18,7 @@ It is important to understand the different ways the term "alpha" is used in the
 
 ### Alpha feature
 
-Refers to a feature or component released as an alpha version, in an early state for you to test and participate in development by sharing your feedback before the feature reaches [general availability (GA)](alpha-features.md#general-availability-ga). Some alpha features require turning on for your cluster before you can use them. See [alpha features](alpha-features.md).
+Refers to a feature or component released as an alpha version, in an early state for you to test and participate in development by sharing your feedback before the feature reaches [general availability (GA)](/components/early-access/alpha/alpha-features.md#general-availability-ga). Some alpha features require turning on for your cluster before you can use them. See [alpha features](/components/early-access/alpha/alpha-features.md).
 
 ### Alpha release
 
@@ -26,7 +26,7 @@ Refers to a release made available between minor versions that allows you to pre
 
 :::note
 
-- An alpha release can also be made available where the entire version is an alpha with [alpha limitations](alpha-features.md#alpha).
+- An alpha release can also be made available where the entire version is an alpha with [alpha limitations](/components/early-access/alpha/alpha-features.md#alpha).
 - Additionally, "Alpha channel" refers to the channel you can use when provisioning a SaaS cluster. See [alpha channel](#alpha-channel).
 
 :::
@@ -50,7 +50,7 @@ You can provision cluster components using one of two channels, following the [C
 
 #### Stable channel
 
-You can use the **Stable** channel to access [general availability](alpha-features.md#general-availability-ga) features for cluster components.
+You can use the **Stable** channel to access [general availability](/components/early-access/alpha/alpha-features.md#general-availability-ga) features for cluster components.
 
 - Provides the latest feature and patch releases ready for most users at minimal risk.
 - Releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
@@ -58,7 +58,7 @@ You can use the **Stable** channel to access [general availability](alpha-featur
 
 #### Alpha channel
 
-You can use the **Alpha** channel to access [alpha features](alpha-features.md) and patch releases for cluster components.
+You can use the **Alpha** channel to access [alpha features](/components/early-access/alpha/alpha-features.md) and patch releases for cluster components.
 
 - Provides alpha releases to preview and prepare for the next stable release.
 - Alpha releases provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Use an alpha release to test the upcoming minor release with your infrastructure.
