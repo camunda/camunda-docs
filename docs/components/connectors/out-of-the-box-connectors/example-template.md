@@ -7,7 +7,7 @@ description: Interact with the Example Connector from your BPMN process.
 
 import AmazonEventbridgeImg from "../img/connector-amazon-eventbridge.png";
 
-<p><img src={AmazonEventbridgeImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,paddingRight:20,margin:0,float: 'right', width: '100px'}}/>Connect your BPMN service with Asana to get and create Asana tasks and projects.</p>
+<p><img src={AmazonEventbridgeImg} alt="Get started" style={{border: '1px solid #ddd', borderRadius: '8px', padding: '5px', marginLeft: '20px', marginRight: '20', marginTop: '0', float: 'right', width: '95px'}}/>Connect your BPMN service with Asana to get and create Asana tasks and projects.</p>
 
 | Connector type | Compatibility                       | Camunda Marketplace                                                                       |
 | :------------- | :---------------------------------- | :---------------------------------------------------------------------------------------- |
@@ -22,25 +22,23 @@ For example, use this Connector to:
 - Enhance processes with generative AI
 - Add another use case
 
-### BPM events
-
 This Connector is typically used with the following BPMN events:
 
 - [Message events](https://docs.camunda.io/docs/next/components/modeler/bpmn/message-events/)
 
-## How to use this Connector
-
-To use and run this Connector in your processes:
-
-- Add the Connector to your BPMN diagram (as a Message event for example)
-- Configure Authentication to connect to your Asana instance.
-- Select the operation you require
-
-### Prerequisites
+## Prerequisites
 
 Requirements for using this Connector are as follows:
 
 - A Kafka instance with a configured bootstrap server.
+
+## How to use this Connector
+
+To use this Connector in your processes:
+
+- [Apply the Connector to a task or event](/components/connectors/use-connectors/outbound.md).
+- Configure the Connector [Authentication](#authentication) to connect to your Asana instance.
+- Select and configure the Connector [Operation](#operations) to execute.
 
 ## Authentication
 

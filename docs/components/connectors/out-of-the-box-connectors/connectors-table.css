@@ -9,7 +9,7 @@
 .no-border-table td {
   border: none;
   background: none;
-  padding: 8px;
+  padding: 12px;
   width: auto;
 }
 .no-border-table th {
@@ -50,6 +50,10 @@ td.no-border-cell-img {
 .connector-image {
   display: flex;
   align-items: center; /* Center image vertically */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0px;
+  background-color: #fff;
 }
 
 .connector-name {
