@@ -338,15 +338,14 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-
 
 #### 2. Configure your deployment
 
-##### Enable Enterprise Components
+##### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, please refer to the official documentation:  
-[Configuring Enterprise Components and Connectors](../../../install.md#configuring-enterprise-components-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and Connectors](../../../install.md#configuring-enterprise-components-and-connectors).
 
 ##### Using internal Elasticsearch instead of the managed OpenSearch
 
 If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment.
-This configuration disables OpenSearch and enables the internal kubernetes Elasticsearch deployment:
+This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
 
 <details>
 <summary>Show configuration changes to disable external OpenSearch usage</summary>
@@ -439,8 +438,6 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/
 
 Next, use these environment variables in the `kubectl` command to create the secret.
 
-Note:
-
 - The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, you must provide those values.
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
@@ -490,13 +487,13 @@ Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://gi
 
 :::caution Only available from v21+
 
-IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards. This may require you to adjust the version used in the Camunda Helm Chart.
+IAM Roles for Service Accounts can only be implemented with Keycloak 21+. This may require you to adjust the version used in the Camunda Helm chart.
 
 :::
 
 From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
 
-Furthermore, the [official Keycloak documentation](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql) also provides detailed instructions for utilizing Amazon Aurora PostgreSQL.
+The [official Keycloak documentation](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql) also provides detailed instructions for utilizing Amazon Aurora PostgreSQL.
 
 A custom Keycloak container image containing necessary configurations is conveniently accessible on Docker Hub at [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak). This image, built upon the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak), incorporates the required wrapper for seamless integration.
 
@@ -573,7 +570,7 @@ The important part is assigning the `iam_role_arn` of the previously created `op
 
 First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
-**Generating an M2M Token Using Identity:**
+**Generating an M2M token using Identity:**
 
 You can generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md), along with the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 Below is an extract of the necessary instructions:

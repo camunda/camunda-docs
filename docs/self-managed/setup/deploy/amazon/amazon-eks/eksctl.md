@@ -8,7 +8,7 @@ This guide explores the streamlined process of deploying Camunda 8 Self-Managed 
 
 [Eksctl](https://eksctl.io/) is a common CLI tool for quickly creating and managing your Amazon EKS clusters and is [officially endorsed](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) by Amazon.
 
-While this guide is suitable for testing purposes, building a robust, scalable, and reproducible infrastructure is better achieved using Infrastructure as Code (IaC) tools like those described in the [Terraform Guide](./terraform-setup.md), which offers more flexibility and control over your Cloud environment.
+While this guide is suitable for testing purposes, building a robust, scalable, and reproducible infrastructure is better achieved using Infrastructure as Code (IaC) tools like those described in the [Terraform Guide](./terraform-setup.md), which offers more flexibility and control over your cloud environment.
 
 This guide provides a user-friendly approach for setting up and managing Amazon EKS clusters. It covers everything from the prerequisites, such as AWS IAM role configuration, to creating a fully functional Amazon EKS cluster and a managed Aurora PostgreSQL instance. Ideal for those seeking a practical and efficient method to deploy Camunda 8 on AWS, this guide provides detailed instructions for setting up the necessary environment and AWS IAM configurations.
 
@@ -596,7 +596,7 @@ Creating a PostgreSQL database can be accomplished through various methods, such
 :::info Optional service
 
 If you don't want to use the Amazon RDS Aurora managed service for PostgreSQL, you can skip this section.
-However, please note that you may need to adjust the following instructions to remove references to it.
+However, note that you may need to adjust the following instructions to remove references to it.
 
 If you choose not to use this service, you'll need to either provide a managed PostgreSQL service or use the internal deployment by the Camunda Helm chart in Kubernetes.
 
@@ -606,7 +606,7 @@ The following components use the PostgreSQL database:
 
 - Keycloak
 - Identity
-- WebM odeler
+- Web Modeler
 
 ### Configuration
 
@@ -751,7 +751,7 @@ This command will wait until the instance is ready.
 
 Now that you have a database, you need to create dedicated databases for each Camunda component along with associated users that have configured access.
 
-We will also use this step to verify connectivity to the database from the created EKS cluster. The creation of the databases will be performed by spawning a pod job in the Kubernetes cluster, using the master user to create the different databases.
+We will also use this step to verify connectivity to the database from the created EKS cluster. The creation of the databases will be performed by spawning a pod job in the Kubernetes cluster, using the main user to create the different databases.
 
 1. **Retrieve the writer endpoint of the DB cluster:**
 
@@ -843,7 +843,7 @@ The resulting OpenSearch domain is intended for use with the Camunda platform, t
 :::info Optional service
 
 If you don't want to use the Amazon OpenSearch managed service for OpenSearch, you can skip this section.
-However, please note that you may need to adjust the following instructions to remove references to it.
+However, note that you may need to adjust the following instructions to remove references to it.
 
 If you choose not to use this service, you'll need to either provide a managed OpenSearch or Elasticsearch service or use the internal deployment by the Camunda Helm chart in Kubernetes.
 
@@ -910,7 +910,7 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
      --cidr $CIDR  # Replace with the CIDR range of your EKS cluster, e.g., <EKS_CIDR_BLOCK>
    ```
 
-   Ensure that the CIDR range is appropriate for your environment. Please note that OpenSearch uses `443` as the https transport port.
+   Ensure that the CIDR range is appropriate for your environment. OpenSearch uses `443` as the https transport port.
 
 4. **Retrieve the private subnets of the VPC:**
 
