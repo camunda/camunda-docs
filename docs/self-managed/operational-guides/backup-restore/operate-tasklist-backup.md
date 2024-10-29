@@ -119,20 +119,11 @@ Response:
 
 Example request:
 
-<<<<<<< HEAD
-
 ```shell
-curl --request POST 'http://localhost:8080/actuator/backups' \
-=======
-```
-
 curl --request POST 'http://localhost:9600/actuator/backups' \
-
-> > > > > > > main
-> > > > > > > -H 'Content-Type: application/json' \
-> > > > > > > -d '{ "backupId": 123 }'
-
-````
+-H 'Content-Type: application/json' \
+-d '{ "backupId": 123 }'
+```
 
 Example response:
 
@@ -147,7 +138,7 @@ Example response:
     "camunda_operate_123_8.2.0_part_6_of_6"
   ]
 }
-````
+```
 
 ## Get backup state API
 
@@ -168,18 +159,9 @@ Response:
 
 For example, the request could look like this:
 
-<<<<<<< HEAD
-
 ```shell
-curl 'http://localhost:8080/actuator/backups/123'
-=======
-```
-
 curl 'http://localhost:9600/actuator/backups/123'
-
-> > > > > > > main
-
-````
+```
 
 Example response:
 
@@ -199,7 +181,7 @@ Example response:
     <..>
   ]
 }
-````
+```
 
 Possible **states** of the backup:
 
@@ -230,17 +212,8 @@ Response:
 
 For example, the request could look like this:
 
-<<<<<<< HEAD
-
 ```shell
-curl 'http://localhost:8080/actuator/backups'
-=======
-```
-
 curl 'http://localhost:9600/actuator/backups'
-
-> > > > > > > main
-
 ```
 
 Response will contain JSON with array of objects representing state of each backup (see [get backup state API endpoint](#get-backup-state-api)).
@@ -253,7 +226,7 @@ To delete all the Elasticsearch snapshots associated with the specific backup id
 
 DELETE actuator/backups/123
 
-````
+```
 
 Response:
 
@@ -278,7 +251,7 @@ Example of Elasticsearch query:
 
 ```shell
 curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_123_8.1.0-snapshot_part_1_of_6/_restore?wait_for_completion=true`
-````
+```
 
 To summarize, the process may look as follows:
 
