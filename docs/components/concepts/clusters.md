@@ -70,7 +70,7 @@ When your Free Trial plan expires, you are automatically transferred to the Free
 
 ### Auto-pause
 
-Free Trial clusters are automatically paused after a certain period of inactivity. Auto-pause occurs regardless of cluster usage.
+Free Trial clusters are automatically paused after a period of inactivity. Auto-pause occurs regardless of cluster usage.
 
 You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume your cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
 
