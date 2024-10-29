@@ -1,5 +1,9 @@
 # Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
 
+# Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
+
+# Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
+
 openapi: "3.0.3"
 info:
   title: Camunda 8 REST API
@@ -889,7 +893,7 @@ paths:
         To change the time, the clock must be pinned again with a new timestamp.
 
         :::note
-        This endpoint is an [alpha feature](/reference/alpha-features.md) and may be subject to change
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
         in future releases.
         :::
       requestBody:
@@ -926,7 +930,7 @@ paths:
         normal behavior after it has been pinned to a specific time.
 
         :::note
-        This endpoint is an [alpha feature](/reference/alpha-features.md) and may be subject to change
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
         in future releases.
       responses:
         "204":
