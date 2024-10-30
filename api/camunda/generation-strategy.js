@@ -13,6 +13,7 @@ function preGenerateDocs() {
     ...addDisclaimer(originalSpec),
     ...redefineCreateProcessInstanceRequest(originalSpec),
     ...redefineEvaluateDecisionRequest(originalSpec),
+    ...addLinksForAlphas(),
   ];
 
   replace.sync({
@@ -27,12 +28,12 @@ function postGenerateDocs() {
 }
 
 function addDisclaimer(originalSpec) {
+  // Make this a repeatable task by checking if it's run already.
   if (
     originalSpec.includes(
       "Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation."
     )
   ) {
-    // Make this a repeatable task by checking if it's run already.
     console.log("skipping addDisclaimer...");
     return [];
   }
@@ -216,6 +217,18 @@ function redefineEvaluateDecisionRequest(originalSpec) {
     EvaluateDecisionRequestBase:
       type: object
       properties:`,
+    },
+  ];
+}
+
+function addLinksForAlphas() {
+  // This task is inherently repeatable, because the `match` is replaced by something that won't match again.
+
+  // Adds links to the Camunda Alpha REST API documentation, so that they don't have to live in the upstream spec.
+  return [
+    {
+      from: /endpoint is an alpha feature/g,
+      to: "endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md)",
     },
   ];
 }
