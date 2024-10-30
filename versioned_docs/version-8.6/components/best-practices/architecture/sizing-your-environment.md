@@ -120,7 +120,7 @@ Using your throughput and retention settings, you can now calculate the required
 
 ## Understanding sizing and scalability behavior
 
-Spinning up a Camunda 8 Cluster means you run multiple components that all need resources in the background, like the Zeebe broker, Elasticsearch (as the database for Operate, Tasklist, and Optimize), Operate, Tasklist, and Optimize. All those components need to be equipped with resources.
+Spinning up a Camunda 8 Cluster means you run multiple components that all need resources in the background, like the Zeebe Broker, Elasticsearch (as the database for Operate, Tasklist, and Optimize), Operate, Tasklist, and Optimize. All those components need to be equipped with resources.
 
 All components are clustered to provide high-availability, fault-tolerance and resiliency.
 
@@ -146,7 +146,7 @@ Now you can select a hardware package that can cover these requirements. In this
 Camunda 8 defines four [cluster sizes](/components/concepts/clusters.md#cluster-size) you can select from (1x, 2x, 3x, and 4x) after you have chosen your [cluster type](/components/concepts/clusters.md#cluster-type). The following table gives you an indication of what requirements you can fulfill with each cluster size.
 
 :::note
-Contact your Customer Success Manager if you require a custom cluster size above these requirements.
+Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
 :::
 
 | Cluster size                                                                        |                                 1x |                                  2x |                               3x |                               4x |

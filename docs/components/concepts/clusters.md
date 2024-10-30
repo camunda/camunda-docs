@@ -12,8 +12,8 @@ When [creating a cluster in SaaS](/components/console/manage-clusters/create-clu
 
 Prior to 8.6, clusters were configured by hardware size (S, M, L).
 
-- To learn more about clusters prior to 8.6, see previous documentation versions.
-- To learn more about migrating your existing clusters to the newer model, contact your Customer Success Manager.
+- This documentation covers the SaaS cluster model introduced in 8.6. To learn more about clusters prior to 8.6, see previous documentation versions.
+- To learn how you can migrate your existing clusters to the newer model, contact your Customer Success Manager.
 
 :::
 
@@ -35,7 +35,7 @@ You can choose from three different cluster types:
 | Uptime Percentage<br/> (Core Automation Cluster<strong>\*</strong>)           | 99%                                                                                    | 99.5%                                                     | 99.9%                                                                                 |
 | RTO/RPO<strong>\*\*</strong><br/>(Core Automation Cluster<strong>\*</strong>) | RTO: 8 hours<br/>RPO: 24 hours                                                         | RTO: 2 hours<br/>RPO: 4 hours                             | RTO: < 1 hour<br/>RPO: < 1 hour                                                       |
 
-<p><strong>* Core Automation Cluster</strong> means the components critical for automating processes and decisions, such as Zeebe, Operate, Tasklist, Optimize and Connectors.</p>
+<p><strong>* Core Automation Cluster</strong> means the components critical for automating processes and decisions, such as Zeebe, Operate, Tasklist, Optimize, and Connectors.</p>
 <p><strong>**  RTO (Recovery Time Objective)</strong> means the maximum allowable time that a system or application can be down after a failure or disaster before it must be restored. It defines the target time to get the system back up and running. <strong>RPO (Recovery Point Objective)</strong> means the maximum acceptable amount of data loss measured in time. It indicates the point in time to which data must be restored to resume normal operations after a failure. It defines how much data you can afford to lose. The RTO/RPO figures shown in the table are provided on a best-effort basis and are not guaranteed.</p>
 
 :::info
@@ -46,7 +46,7 @@ See [Camunda Enterprise General Terms](https://legal.camunda.com/licensing-and-o
 
 The cluster size defines the cluster performance and capacity.
 
-After you have chosen your cluster type, you can choose the cluster size that best meets your cluster environment requirements.
+After you have chosen your cluster type, choose the cluster size that best meets your cluster environment requirements.
 
 To learn more about choosing your cluster size, see [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).
 
@@ -54,14 +54,10 @@ To learn more about choosing your cluster size, see [sizing your environment](/c
 - Larger cluster sizes include increased performance and capacity, allowing you to serve more workload.
 - Increased usage such as higher throughput or longer data retention requires a larger cluster size.
 - Each size increase uses one of your available cluster reservations. For example, purchasing two HWP advanced reservations for your production cluster allows you to configure two clusters of size 1x, or one cluster of size 2x.
+- You can change the cluster size at any time. See [resize a cluster](/components/console/manage-clusters/manage-cluster.md#resize-a-cluster).
 
 :::note
-
-Contact your Customer Success Manager to:
-
-- Increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
-- Increase the cluster size of an existing cluster.
-
+Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
 :::
 
 ## Free Trial clusters

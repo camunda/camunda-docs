@@ -1596,7 +1596,7 @@ module.exports = {
                   Cluster: [
                     docsLink(
                       "Get cluster topology",
-                      "apis-tools/camunda-api-rest/specifications/get-cluster-topology/"
+                      "apis-tools/camunda-api-rest/specifications/get-topology/"
                     ),
                   ],
                 },
