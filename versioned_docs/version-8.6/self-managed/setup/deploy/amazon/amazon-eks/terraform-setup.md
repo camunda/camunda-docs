@@ -19,7 +19,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 
 :::
 
-## 0. Introduction
+## 1. Introduction
 
 ### Requirements
 
@@ -85,7 +85,7 @@ We support two variants of this architecture:
 
 Both can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 
-## 1. Provisioning the complete infrastructure for Camunda 8 on AWS
+## 2. Provisioning the complete infrastructure for Camunda 8 on AWS
 
 ### Terraform prerequisites
 
@@ -93,7 +93,7 @@ To manage the infrastructure for Camunda 8 on AWS using Terraform, we need to se
 
 If you are an advanced user, you may want to handle this part differently and use a different backend. The backend setup provided is an example for new users.
 
-#### 0. Set Up AWS authentication
+#### 1. Set Up AWS authentication
 
 The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. Before you can use the provider, you must authenticate it using your AWS credentials.
 You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods.
@@ -116,7 +116,7 @@ A user who creates resources in AWS will always retain administrative access to 
 
 :::
 
-#### 1. Create an S3 bucket for Terraform state management
+#### 2. Create an S3 bucket for Terraform state management
 
 Before setting up Terraform, you need to create an S3 bucket that will store the state file. This is important for collaboration and to prevent issues like state file corruption.
 
@@ -163,7 +163,7 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 
 This S3 bucket will now securely store your Terraform state files with versioning enabled.
 
-#### 2. Create a `config.tf` with the following setup
+#### 3. Create a `config.tf` with the following setup
 
 Once the S3 bucket is created, configure your `config.tf` file to use the S3 backend for managing the Terraform state:
 
@@ -184,7 +184,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-
   </TabItem>
 </Tabs>
 
-#### 3. Initialize Terraform
+#### 4. Initialize Terraform
 
 Once your `config.tf` and authentication are set up, you can initialize your Terraform project.
 In the previous steps, you have configured a dedicated S3 Bucket (`S3_TF_BUCKET_NAME`) to store your state, we will now configure the key that will be used by our config.
@@ -474,7 +474,7 @@ Depending on the installation path you have chosen, you can find the reference f
 - **Standard installation:** [Reference Files](https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/)
 - **IRSA Installation:** [Reference Files](https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/)
 
-## 2. Preparation for Camunda 8 installation
+## 3. Preparation for Camunda 8 installation
 
 ### Access the created EKS cluster
 
@@ -716,6 +716,6 @@ By running these commands, you will clean up both the job and the secret, ensuri
 </TabItem>
 </Tabs>
 
-## 3. Install Camunda 8 using the Helm chart
+## 4. Install Camunda 8 using the Helm chart
 
 Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on Kubernetes](./eks-helm.md) for detailed instructions on deploying the platform to your Kubernetes cluster.

@@ -12,7 +12,7 @@ While this guide is suitable for testing purposes, building a robust, scalable, 
 
 This guide provides a user-friendly approach for setting up and managing Amazon EKS clusters. It covers everything from the prerequisites, such as AWS IAM role configuration, to creating a fully functional Amazon EKS cluster and a managed Aurora PostgreSQL instance. Ideal for those seeking a practical and efficient method to deploy Camunda 8 on AWS, this guide provides detailed instructions for setting up the necessary environment and AWS IAM configurations.
 
-## 0. Prerequisites
+## 1. Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
@@ -54,7 +54,7 @@ This basic cluster setup is required to continue with the Helm set up as describ
 
 We refer to this architecture as [**standard installation**](./terraform-setup.md#variants), which can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 
-## 1. Provisioning the complete infrastructure for Camunda 8 on AWS
+## 2. Provisioning the complete infrastructure for Camunda 8 on AWS
 
 ### Set Up AWS authentication
 
@@ -89,7 +89,7 @@ Review the [installation guide](https://eksctl.io/installation/) for additional 
 In this guide, we will set up multiple environment variables to configure the components.
 Each component starts with a section that configures the different variables according to your needs.
 
-## 2. EKS cluster
+## 3. EKS cluster
 
 ### Configuration
 
@@ -589,7 +589,7 @@ The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like
 
 Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
-## 3. PostgreSQL database
+## 4. PostgreSQL database
 
 Creating a PostgreSQL database can be accomplished through various methods, such as using the AWS Management Console or the AWS CLI. This guide focuses on providing a reproducible setup using the CLI. For information on creating PostgreSQL using the UI, refer to the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html).
 
@@ -829,7 +829,7 @@ kubectl delete secret setup-db-secret --namespace camunda
 
 By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
-## 4. OpenSearch domain
+## 5. OpenSearch domain
 
 Creating an OpenSearch domain can be accomplished through various methods, such as using the AWS Management Console or the AWS CLI. This guide focuses on providing a reproducible setup using the CLI. For information on creating an OpenSearch domain using the UI, refer to the [AWS OpenSearch documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/create-managed-domain.html).
 
@@ -992,6 +992,6 @@ To verify that the OpenSearch domain is accessible from within your Amazon EKS c
 
 You have successfully set up an OpenSearch domain that is accessible from within your Amazon EKS cluster. For further details, refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/index/).
 
-## 3. Install Camunda 8 using the Helm chart
+## 6. Install Camunda 8 using the Helm chart
 
 Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on Kubernetes](./eks-helm.md) for detailed instructions on deploying the platform to your Kubernetes cluster.
