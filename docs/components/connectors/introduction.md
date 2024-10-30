@@ -24,14 +24,14 @@ For example:
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
-## Get started with Connectors
+## Get started using Connectors
 
 Learn how to start using Connectors in your processes and about the different types of Connector available.
 
 <div class="connector-grid">
   <a href="../connectors-start" class="connector-card" title="Get started with Connectors">
     <img src={IconPlayImg} alt="Get started"/>
-    <h3>Get started with Connectors</h3>
+    <h3>Get started using Connectors</h3>
     <p>Learn how to start using Connectors in your processes.</p>
   </a>
     <a href="../connector-types" class="connector-card" title="Connector types">

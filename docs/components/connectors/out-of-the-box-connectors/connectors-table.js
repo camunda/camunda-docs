@@ -11,7 +11,15 @@ const SearchableTable = () => {
 
   const connectors = [
     {
-      name: "Amazon Bedrock Connector",
+      name: "Example",
+      description:
+        "Interact with Amazon Bedrock from your BPMN process to experiment with and evaluate foundation models (FMs) from leading AI companies.",
+      type: "Outbound",
+      link: "../example-template",
+      image: AmazonEventbridgeImg,
+    },
+    {
+      name: "Amazon Bedrock",
       description:
         "Interact with Amazon Bedrock from your BPMN process to experiment with and evaluate foundation models (FMs) from leading AI companies.",
       type: "Outbound",
@@ -19,7 +27,7 @@ const SearchableTable = () => {
       image: AmazonBedrockImg,
     },
     {
-      name: "Amazon Comprehend Connector",
+      name: "Amazon Comprehend",
       description:
         "Interact with the Amazon Comprehend service from your BPMN process.",
       type: "Outbound",
@@ -27,7 +35,7 @@ const SearchableTable = () => {
       image: AmazonBedrockImg,
     },
     {
-      name: "Amazon DynamoDB Connector",
+      name: "Amazon DynamoDB",
       description:
         "Interact with Amazon DynamoDB NoSQL database service within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.",
       type: "Outbound",

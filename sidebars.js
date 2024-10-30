@@ -311,7 +311,7 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Get started with Connectors",
+          label: "Get started using Connectors",
           link: {
             type: "doc",
             id: "components/connectors/connectors-start",

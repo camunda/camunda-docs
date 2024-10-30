@@ -1,6 +1,6 @@
 ---
 id: connectors-start
-title: Get started
+title: Get started using Connectors
 description: "Connectors come in type and subtypes that describe their functionality."
 ---
 
