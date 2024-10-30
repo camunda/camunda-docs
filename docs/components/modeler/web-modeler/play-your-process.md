@@ -153,6 +153,8 @@ For more information about terms, refer to our [licensing and terms page](https:
 
 Although Play is compatible with cluster versions 8.5.1 and above, we fully support and recommend using versions 8.6.0 or higher.
 
+Play currently doesn't support execution listeners. As a workaround, you can skip the element using [modifications](#modify-a-process-instance).
+
 ### Camunda 8 SaaS
 
 In Camunda 8 SaaS, Play is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
