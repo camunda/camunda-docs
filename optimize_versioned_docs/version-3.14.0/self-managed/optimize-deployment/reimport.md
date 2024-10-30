@@ -16,6 +16,7 @@ When triggering a reimport, all existing event-based processes get unpublished a
 You then have to manually publish event-based processes after you have restarted Optimize.
 :::
 
+Please note, this functionality is only available when using Optimize with ElasticSearch as a database.
 To reimport engine data, perform the following
 steps:
 
