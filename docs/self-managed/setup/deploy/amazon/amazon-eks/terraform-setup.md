@@ -214,20 +214,20 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-eks-module) 
 1. Add the following content to your newly created `cluster.tf` file to utilize the provided module:
 
   <Tabs groupId="env">
-    <TabItem value="standard" label="Standard" default>
+  <TabItem value="standard" label="Standard" default>
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/cluster.tf
 ```
 
-    </TabItem>
-    <TabItem value="irsa" label="IRSA">
+  </TabItem>
+  <TabItem value="irsa" label="IRSA">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/cluster.tf
 ```
 
-    </TabItem>
+  </TabItem>
 
   </Tabs>
 
