@@ -168,20 +168,20 @@ This S3 bucket will now securely store your Terraform state files with versionin
 Once the S3 bucket is created, configure your `config.tf` file to use the S3 backend for managing the Terraform state:
 
 <Tabs groupId="env">
-  <TabItem value="standard" label="Standard" default>
+<TabItem value="standard" label="Standard" default>
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/config.tf
 ```
 
-  </TabItem>
-  <TabItem value="irsa" label="IRSA">
+</TabItem>
+<TabItem value="irsa" label="IRSA">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/config.tf
 ```
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 #### Initialize Terraform
@@ -213,25 +213,24 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-eks-module) 
 1. Create a `cluster.tf` file in the same directory as your `config.tf` file.
 1. Add the following content to your newly created `cluster.tf` file to utilize the provided module:
 
-  <Tabs groupId="env">
-  <TabItem value="standard" label="Standard" default>
+<Tabs groupId="env">
+<TabItem value="standard" label="Standard" default>
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/cluster.tf
 ```
 
-  </TabItem>
-  <TabItem value="irsa" label="IRSA">
+</TabItem>
+<TabItem value="irsa" label="IRSA">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/cluster.tf
 ```
 
-  </TabItem>
+</TabItem>
+</Tabs>
 
-  </Tabs>
-
-1. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
+2. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
 
 ```bash
 terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
