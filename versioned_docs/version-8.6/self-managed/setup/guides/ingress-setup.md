@@ -13,7 +13,7 @@ The separated Ingress configuration has been deprecated in version 8.6. To ensur
 
 Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:
 
-1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda 8 web applications using a single domain. Each application has a sub-path e.g. `camunda.example.com/operate`, and `camunda.example.com/optimize` and another Ingress which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
+1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda 8 web applications using a single domain. Each application has a sub-path e.g. `camunda.example.com/operate`, and `camunda.example.com/optimize` and another Ingress which uses gRPC protocol for the Zeebe Gateway e.g. `zeebe.camunda.example.com`.
 2. **Separated setup:** In this setup, each component has its own Ingress/host e.g. `operate.camunda.example.com`, `optimize.camunda.example.com`, `zeebe.camunda.example.com`, etc.
 
 There are no significant differences between the two setups. Rather, they both offer flexibility for different workflows.
@@ -38,7 +38,7 @@ Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deplo
 
 <TabItem value='combined'>
 
-In this setup, a single Ingress/domain is used to access Camunda 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
+In this setup, a single Ingress/domain is used to access Camunda 8 web applications, and another for the Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
 ![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
