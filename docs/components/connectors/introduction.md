@@ -26,13 +26,13 @@ Connectors are often configured as a [BPMN process](/components/concepts/process
 
 ## Get started with Connectors
 
-Learn more about how to use Connectors in your processes and about the different types of Connector available.
+Learn how to start using Connectors in your processes and about the different types of Connector available.
 
 <div class="connector-grid">
   <a href="../connectors-start" class="connector-card" title="Get started with Connectors">
     <img src={IconPlayImg} alt="Get started"/>
     <h3>Get started with Connectors</h3>
-    <p>Learn more about Connectors.</p>
+    <p>Learn how to start using Connectors in your processes.</p>
   </a>
     <a href="../connector-types" class="connector-card" title="Connector types">
     <img src={IconConnectorTypesImg} alt="Connector types"/>

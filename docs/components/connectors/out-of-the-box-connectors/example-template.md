@@ -7,7 +7,7 @@ description: Interact with the Example Connector from your BPMN process.
 
 import AmazonEventbridgeImg from "../img/connector-amazon-eventbridge.png";
 
-<p><img src={AmazonEventbridgeImg} alt="Get started" style={{border: '1px solid #ddd', borderRadius: '8px', padding: '5px', marginLeft: '20px', marginRight: '20', marginTop: '0', float: 'right', width: '95px'}}/>Connect your BPMN service with Asana to get and create Asana tasks and projects.</p>
+<p><img src={AmazonEventbridgeImg} alt="Get started" style={{border: '3px solid #ddd', borderRadius: '8px', padding: '5px', marginLeft: '20px', marginRight: '20', marginTop: '0', float: 'right', width: '95px'}}/>Connect your BPMN service with Asana to get and create Asana tasks and projects.</p>
 
 <span class="badge badge--medium">SaaS and Self-Managed</span><span class="badge badge--medium">Version compatibility: 8.4, 8.5, 8.6</span><span class="badge badge--beginner">Outbound Connector</span>
 
