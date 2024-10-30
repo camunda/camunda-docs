@@ -1,7 +1,7 @@
 ---
 id: what-is-feel
 title: What is FEEL?
-description: "FEEL is a part of DMN specification of the Object Management Group."
+description: "Learn more about using Friendly Enough Expression Language (FEEL) in Camunda. FEEL is a part of the DMN specification of the Object Management Group (OMG)."
 ---
 
 import { MarkerCamundaExtension } from "@site/src/mdx/MarkerCamundaExtension";
