@@ -1,0 +1,60 @@
+---
+id: get-document
+title: "Download document (alpha)"
+description: "Download a document from the Camunda 8 cluster."
+sidebar_label: "Download document (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV99v2zYQ/lcIPSWYI7lduqV+M5K089AVQeKsD0keKOlssZVIlaTiCIb+992RkizHdpdhexoSIIklHu/77qfv1oHlSxNM7oILlVQFSBs8jAJVguZWKDlLg0mwBNsfjoIUTKJFSad4dqFWMlc8ZZylrQxbaFUwmwE750UlU87OWJJXxoIO7+W9nEwmUlm4l/NMGAYyLZXAW/iZS8bzMuNsAdxWGkI2syyptEatec2UxD+mKkulrRMW8qSAQul6g22s0jC6l6tMJBnpRChWACdaSrNSq7RKiDurDISOzL1Eq0queQFIkXyxDiQ+oHWdWnTDKBBkb8lthp81fK+EBvSO1RU8d8ocbZ9dMLVwXui5WYWfvbtC1GGSDAoeTNaBrUtCM1YLuQyaZtQTcOZs0L9XoOst+AXPzUvxnbIhi+1jCtuPeT0QsimVNGDo/O14TP92wXudK256NEgxeEkCxiyqPK8JKlHSUlahEl6WuUhc0kUqsWBPEBZ4QWeHGI0CjGnB8X4QC8nRNQ3+jILT8enf8RI2c9YvxSNIchYxpVxZKEzZ0OXEAXaYQ3EOxU9fDekdstsGnLIrL8lSsFzkTMVfIbGMXOIEY/SIkOzu+sM5e3/67teHo8za0kyiaLVahXqRnEAqMGah0ssIH+mX5I5DhsZgKAtesxgYT1EMMXlO+Y2lawUYZkpIxEIkFHCytKXNyIXevtaZnhbVQH954+ofuLzSYqcdTNnt9YyJFN0mFjVe2IV2dxa8ykkHj1VlJ3HO5bcAA2eFzfeCPkcxVVFgvLsU3wZARcZiAxmYgeVjYQl6yB9f/fx2RzelyW/z+RXzKliiUnCtw1K3aoHIiEJIUVSYn6fjMT7xJ//0y3jckE6K+AsskQyeSjTfpdZzczA5CipZr80ZJiTyksl/FRmlxVI8xw2pBXWxCNokvvAW+QJ7t6/wp9SQsYNSHoLW6DKVuOadMuzGuVNP1d9hUxMDY19r7bXWXmvtUK3hIY4lmWrnMDep4AQyCaLuu8xE682Y0tD3N+jHbo6pNDomWPuyaTDb15kytpmsaYZqokeKySPXgiOsCyEd+/Lq0iZXCc/d633howOaVTqzNiPf9eXNnH3kFla8du4kyG3VZ+Oz8V6tJHpA4/RqxryFPvkGDaFTS5W9V60XfoliN+sYwPYlbH1D17x7YuAa9LSiEPRJ0eI57fTshfCN//ChS5Xfv8xdtIVcKHe9jfouEYoKhtAzH4dvdjMMyVKhJKrAu65bYpa5qYbvGbvxPrZUwLmNcNvZshP75E/Ynx6RvQkpKD5zuia5RM1VHCJclPhr/f84V3FUcCGjFsJE59M/bj9fTE8+zc4vP99cnqDG0D5ZZ3yJCVNwOeDRrxD9dHbktoDj51avN98S/5u9o00hC082wt6EU37T+n7dVvpdv4UYlJ8MVhJMUV+ud8F6HXMDtzpvGnrt9wRqAKkwVNsHNoWhR//d0rDXjm9Qb+0wjzyvSCqg6urazj+keXTd7j7H7GVr1l5m7Usu6yGtjvHAx80DSmeA24t2RL3AFNeY0g6uHtxeyNK+gX+8pAbwF/sQV9E=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Download document (alpha)</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/documents/{documentId}"}
+></MethodEndpoint>
+
+Download a document from the Camunda 8 cluster.
+
+:::note
+This endpoint is an alpha feature. It currently only supports an in-memory document store,
+which is not meant for production use.
+:::
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"documentId","in":"path","required":true,"description":"The ID of the document to download.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"storeId","in":"query","required":false,"description":"The ID of the document store to download the document from.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+The document was downloaded successfully.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/octet-stream"} value={"application/octet-stream"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
+
+string
+
+</div></ul></details></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The document with the given ID was not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

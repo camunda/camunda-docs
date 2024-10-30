@@ -1,0 +1,73 @@
+---
+id: get-process-definition-xml
+title: "Get process definition XML (alpha)"
+description: "Returns process definition as XML."
+sidebar_label: "Get process definition XML (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtz2zYQ/isY9mJPLVJJndTlTWM7qVs747HltjO2DiC5FJGQAAOAeoyG/z27ICnJEjXJIb3poBEB7nu/XWKx8iyfGi989u61isEYlkAqpLBCSW9y5qkSNKfFTeKF3hRsS3a1pvrv7tY78xIwsRalYwu9B7CVloaVezIZNww5/Bf5IsMwlMrCixxnwjCQSamEtAyfOdLlZcZZChwlAW4kDGmRiEc5JAwFXfKikglncV4ZC9owVVmmUmYzYJFaoIZHALd67kgv2MP145iN7m+YmoGeCZhPTgJeCjOwSuUmiBvCAW4NNBi7tzHo+Pwi+eVrBXpJr05fZKo0SyuN6jR6a7nIje88fJEYnZJrXgBZiZFeeRIXGKVyN5R/wxKJBUWw5DbDZw1fK6EBY291BbthHqNz3BgxlRiSL7Ds3N8P+xmbZyLOGI+toRRwVkmB9jORgLQiFWg2uWApEy27j/pNnEHBvXDl2WVJNmOCYAoaXyF5wW2z9f7cq+sJmWtKJQ0Y4ng7HNLfvsmY/8OWUvpNFdNuWuX5kmmHJUh8F8lYoQHSOotgYYNFkdPznp3GaiGnaFVdn6El5/2W9KifY3RShUlnEeIpUWAc8DI+gxa4PVaUOaesfc+O80MR6bGDMo+AYylCCZ1ndwrLoEUW49rxzDB7CRPShbKLPYI/We6ZycsyF7Gr5AA5sYiKXz8btWP0a8tG7L6hbPUyFX2G2BJ+GsKo0f788OGS/XH+7vfJSWZtacIgmM/nvk7jASTCKu0rPQ1wST+iO/UZeo0+FHzJIsRwkjineU5eYcexAsNuSogRmTGzqsOKM4Yi2/jXxrgxi8pszbzJwG4mtoBbabHXuUbs6eGmq4olMuyrdjwpr3KSwSNsO2GUc/nFwwxbYfNepbtaTFUUXG9X7JYCFGQsNj7z3cL77e2ebMLTn+PxPWtEsFgl8Kq2SRE5USDUiqrwQoQlrviiWb0fDmuSSRn/AU8kgwXCXzpo7bqD4Cg2uHWOCYl2yfhnZUZpMRW7elHRJhdeC+KrxqOuEg90hAQxZ1wfEDZzMqdiBtJ1V2oN1AtcezhW5LEijxX58yryXd+3EX2hKGvCIWiNIVNxXGk8ENF5Jl9/ODvd7UfzWGvHWjvW2qFaw5c4i2SqHejceILDRugFbTUNNsdQE6z6ppTanbsxTzgMdUNNpTFg3qoppxqrYJUpY+twVSpt62BGuZpxLWiAc6ml103ZdXDKVcxzt92XVnpBk1Pn7s5U95FbmPOlCzOpfC36Yngx7JVKpAck0pzYeNiAcqtRdGKp4nvFNsQ/ItgNTgawrQm7fCS2JjwR4JlCjypKzRosrT4nndYNEe40Dx86CP3179ihQOBg6thbNOwbQlnBFDaWD/03+8hDY6mAYlUgr+uiiD53POJbjrVjOJUWtlrAYw/pbSfdjuy2ecP+aTSyNz4lpUFO1zynKLmKfFTXTd/r/yhXUVDgqBW0KkxwObp7+nQ1GtzeXF5/erweoETfLqxzvkTAFFxu2fERbN+sRQPpibtwON11f7X5jBxvNXZuNVpMbk3AdZvMVdtSnr2eloKc4YGrD+oqWA1NZ3j2VquIG3jSeV3TtrMM9yebRuI6TyKMi58Xpjw3u7ck2xk8eWjvU07Z/3930huedpPLpWuHeUUrfEQLDt0I1RPky4AnWOjkbkM6imMo7ZaQ9XUI9ZN1g/94TY3gG9h06oM=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get process definition XML (alpha)</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/process-definitions/{processDefinitionKey}/xml"}
+></MethodEndpoint>
+
+Returns process definition as XML.
+
+:::note
+This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+for further details.
+:::
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"processDefinitionKey","in":"path","required":true,"description":"The assigned key of the process definition, which acts as a unique identifier for this process.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+The XML of the process definition is successfully returned.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"text/xml"} value={"text/xml"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
+
+string
+
+</div></ul></details></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"204"} value={"204"}><div>
+
+The process definition was found but does not have XML.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"text/plain"} value={"text/plain"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
+
+string
+
+</div></ul></details></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+The process definition request failed. More details are provided in the response body.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The decision with the given key was not found. More details are provided in the response body.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
