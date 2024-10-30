@@ -2,6 +2,7 @@
 id: cli-get-started
 title: Getting started with the CLI client
 sidebar_label: "Getting started with the CLI client"
+description: "Start using the community-supported CLI client and command line interface `zbctl` to interact with Camunda 8."
 ---
 
 In this tutorial, you will learn how to use the [community-supported](https://github.com/camunda-community-hub) `zbctl` CLI client to interact with Camunda 8.
