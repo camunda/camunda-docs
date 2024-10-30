@@ -394,8 +394,6 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/opensearch.tf
 ```
 
-<!-- Closing comment for compilation-->
-
   </TabItem>
   
   <TabItem value="irsa" label="IRSA">
@@ -546,7 +544,7 @@ You can access the created database in two ways:
 
 The choice depends on your infrastructure setup and security preferences. In this tutorial, we'll use a pod within the EKS cluster to configure the database.
 
-3. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the setup manifest.
+1. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the setup manifest.
 
 ```bash reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/vars-create-db.sh
@@ -579,8 +577,6 @@ This should display the secret with the base64 encoded values.
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/setup-postgres-create-db.yml
 ```
 
-<!-- Closing comment for compilation2-->
-
 </TabItem>
 
 <TabItem value="irsa" label="IRSA">
@@ -606,8 +602,6 @@ This should display the secret with the base64 encoded values.
 ```yaml reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/setup-postgres-create-db.yml
 ```
-
-<!-- Closing comment for compilation-->
 
   </TabItem>
 </Tabs>
