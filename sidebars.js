@@ -311,7 +311,7 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Get started using Connectors",
+          label: "Get started with Connectors",
           link: {
             type: "doc",
             id: "components/connectors/connectors-start",
@@ -325,7 +325,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Connectors A-Z",
+          label: "Camunda Connectors",
           link: {
             type: "doc",
             id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",

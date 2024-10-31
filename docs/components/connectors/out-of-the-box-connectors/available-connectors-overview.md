@@ -1,12 +1,12 @@
 ---
 id: available-connectors-overview
-title: Connectors A-Z
+title: Camunda Connectors
 description: Take a closer look at the Connectors available in Camunda 8.
 ---
 
 import SearchableTable from './connectors-table.js';
 
-Explore prebuilt Camunda 8 SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md) Connectors.
+Explore our library of prebuilt Camunda Connectors for SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
 
 <SearchableTable />
 
