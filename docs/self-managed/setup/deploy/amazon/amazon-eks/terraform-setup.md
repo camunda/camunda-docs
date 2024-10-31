@@ -211,32 +211,32 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-eks-module) 
 #### Set up the EKS cluster module
 
 1. Create a `cluster.tf` file in the same directory as your `config.tf` file.
-1. Add the following content to your newly created `cluster.tf` file to utilize the provided module:
+2. Add the following content to your newly created `cluster.tf` file to utilize the provided module:
 
-<Tabs groupId="env">
-<TabItem value="standard" label="Standard" default>
+   <Tabs groupId="env">
+   <TabItem value="standard" label="Standard" default>
 
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/cluster.tf
-```
+   ```hcl reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/cluster.tf
+   ```
 
-</TabItem>
-<TabItem value="irsa" label="IRSA">
+   </TabItem>
+   <TabItem value="irsa" label="IRSA">
 
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/cluster.tf
-```
+   ```hcl reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/cluster.tf
+   ```
 
-</TabItem>
-</Tabs>
+   </TabItem>
+   </Tabs>
 
-2. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
+3. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
 
-```bash
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
-```
+   ```bash
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+   ```
 
-1. Configure user access to the cluster. By default, the user who creates the Amazon EKS cluster has administrative access.
+4. Configure user access to the cluster. By default, the user who creates the Amazon EKS cluster has administrative access.
 
    <details>
      <summary>Grant cluster access to other users</summary>
@@ -287,7 +287,7 @@ terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=
    </p>
    </details>
 
-1. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/eks-cluster/README.md).
+5. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/eks-cluster/README.md).
 
 ### PostgreSQL module setup
 
@@ -412,9 +412,9 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
 
 1. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
 
-```bash
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
-```
+   ```bash
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+   ```
 
 1. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/opensearch/README.md).
 
@@ -438,15 +438,15 @@ We strongly recommend managing sensitive information such as the OpenSearch, Aur
 
 2. Plan the configuration files:
 
-```bash
-terraform plan -out cluster.plan # describe what will be created
-```
+   ```bash
+   terraform plan -out cluster.plan # describe what will be created
+   ```
 
 3. After reviewing the plan, you can confirm and apply the changes.
 
-```bash
-terraform apply cluster.plan     # apply the creation
-```
+   ```bash
+   terraform apply cluster.plan     # apply the creation
+   ```
 
 Terraform will now create the Amazon EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes for each component.
 
