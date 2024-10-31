@@ -339,7 +339,7 @@ Allow users to fetch a list of emails from a specified folder, with customizable
 | `Max Emails to read` | Specify the maximum number of emails to retrieve. This parameter determines the cap on the number of emails the task will return.                                                                                                                 |
 | `Sort emails by`     | <p>Choose the field by which to sort the emails. Supported sorting fields are:</p><p><ul><li>`Sent date`: Sorts emails by the date and time they were sent.</li><li>`Size`: Sorts emails by the size of the email.</li></ul></p>                  |
 | `Sort order`         | <p>Define the sort order:</p><p><ul><li>`ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.</li><li>`DESC`: Descending order, from the most recent or largest value to the oldest or smallest.</li></ul></p> |
-| `Folder`             | (Optional) the folder to list emails from, default is `INBOX`.                                                                                                                                                                                    |
+| `Folder`             | (Optional) the folder to list emails from, default is `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`)                                                                                             |
 
 #### Sorting and Limiting Behavior
 
@@ -385,10 +385,10 @@ Retrieve an email's details based on the specified `messageId`.
 
 #### Parameters
 
-| Parameter   | Description                                                                                                               |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------ |
-| `MessageId` | The unique identifier of the email that must be read.                                                                     |
-| `Folder`    | (Optional) Specifies the folder from which the email should be retrieved. If not provided, the default folder is `INBOX`. |
+| Parameter   | Description                                                                                                                                                                                                      |
+| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MessageId` | The unique identifier of the email that must be read.                                                                                                                                                            |
+| `Folder`    | (Optional) Specifies the folder from which the email should be retrieved. If not provided, the default folder is `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`) |
 
 #### Response Structure
 
@@ -435,10 +435,10 @@ Delete an email from a specified folder, using the email's unique `messageId`.
 
 #### Parameters
 
-| Parameter   | Description                                                                                                                                             |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `MessageId` | The identifier of the email message to delete.                                                                                                          |
-| `Folder`    | (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied, the default folder is assumed to be `INBOX`. |
+| Parameter   | Description                                                                                                                                                                                                                                    |
+| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MessageId` | The identifier of the email message to delete.                                                                                                                                                                                                 |
+| `Folder`    | (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied, the default folder is assumed to be `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`) |
 
 #### Response Structure
 
@@ -469,7 +469,8 @@ A search query is represented as a JSON object. Below is an example of a JSON ob
 using an AND and OR operator to combine multiple conditions:
 
 - `Folder`: (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied,
-  the default folder is assumed to be `INBOX`.
+  the default folder is assumed to be `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or
+  `inside.folder`)
 - `Criteria`: _See below_
 
 ```json
@@ -547,11 +548,11 @@ Enable users to transfer an email from one folder to another, streamlining inbox
 
 #### Parameters
 
-| Parameter       | Description                                                                                                                                                                                                                                           |
-| :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `MessageId`     | The identifier of the email that needs to be moved.                                                                                                                                                                                                   |
-| `Source folder` | (Optional) The folder from which the email will be moved. If not specified, the default is INBOX.                                                                                                                                                     |
-| `Target folder` | The destination folder where the email is placed. To specify a new folder or a nested hierarchy, use a dot-separated path (for example, 'Archive' or 'Projects.2023.January'). The system automatically creates any non-existent folders in the path. |
+| Parameter       | Description                                                                                                                                                                                                                                                     |
+| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MessageId`     | The identifier of the email that needs to be moved.                                                                                                                                                                                                             |
+| `Source folder` | (Optional) The folder from which the email will be moved. If not specified, the default is INBOX. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`)                                                                        |
+| `Target folder` | The destination folder where the email is placed. To specify a new folder or a nested hierarchy, use `.` or `/` separated path (for example, 'Archive/test' or 'Projects.2023.January'). The system automatically creates any non-existent folders in the path. |
 
 #### Response Structure
 
@@ -609,18 +610,32 @@ This method allows the user to connect to any IMAP server using an email address
 
 This inbound connector creates a new process each time a new email is received.
 
-- `Folder`: (Optional) This parameter defines the folder that the inbound connector will monitor. If not specified, the default folder is set to INBOX.
-- `Polling Wait Time`: This parameter sets the interval between each polling operation. Please [refer to the documentation](https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/#time-duration) on time duration for the correct format.
+- `Folder`: (Optional) This parameter defines the folder that the inbound connector will monitor. If not specified, the
+  default folder is set to INBOX. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or
+  `inside.folder`)
+- `Polling Wait Time`: This parameter sets the interval between each polling operation.
+  Please [refer to the documentation](https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/#time-duration)
+  on time duration for the correct format.
 - `Polling Configuration`: This section contains settings related to the polling behavior of the connector.
   - `Poll All Emails`: When enabled, the connector polls every email found in the specified folder.
-    - `Move to Another Folder After Processing`: If selected, this option moves each processed email to a designated folder.
-      - `Folder`: Here, you need to specify the target folder where processed emails will be moved.
+    - `Move to Another Folder After Processing`: If selected, this option moves each processed email to a designated
+      folder.
+      - `Folder`: Here, you need to specify the target folder where processed emails will be moved. To specify a
+        new folder or a nested hierarchy, use `.` or `/` separated path (for example, 'Archive/test' or '
+        Projects.2023.January'). The system automatically creates any non-existent folders in the path.
     - `Delete After Processing`: If this option is chosen, each email will be permanently deleted after processing.
-  - `Poll Unseen Emails`: When enabled, the connector polls only the emails that have not been marked as read in the specified folder.
-    - `Move to Another Folder After Processing`: Select this to move each processed unseen email to a different folder.
-      - `Folder`: Specify the target folder for the processed unseen emails to be moved to.
+  - `Poll Unseen Emails`: When enabled, the connector polls only the emails that have not been marked as read in the
+    specified folder.
+    - `Move to Another Folder After Processing`: Select this to move each processed unseen email to a different
+      folder.
+      - `Folder`: Specify the target folder for the processed unseen emails to be moved to. To specify a new
+        folder or a nested hierarchy, use `.` or `/` separated path (for example, '
+        Archive/test' or 'Projects.2023.January'). The system automatically creates any non-existent folders in
+        the
+        path.
     - `Delete After Processing`: If enabled, unseen emails will be deleted from the folder after they are processed.
-    - `Mark as Read After Processing`: When this option is selected, each unseen email will be marked as read once it has been processed.
+    - `Mark as Read After Processing`: When this option is selected, each unseen email will be marked as read once
+      it has been processed.
 
 #### Response Structure
 
