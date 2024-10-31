@@ -340,11 +340,11 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
 
 3. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
 
-```bash
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
-```
+   ```bash
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+   ```
 
-1. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/aurora/README.md) for more details on other customization options.
+4. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/aurora/README.md) for more details on other customization options.
 
 ### OpenSearch module setup
 
@@ -526,17 +526,17 @@ You can access the created database in two ways:
 1. Set up a bastion host within the same network to securely access the database.
 2. Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database.
 
-The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the EKS cluster to configure the database.
+   The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the EKS cluster to configure the database.
 
-1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
+3. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
-```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/vars-create-db.sh
-```
+   ```bash reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/vars-create-db.sh
+   ```
 
-A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
+   A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
 
-1. Create a secret that references the environment variables:
+4. Create a secret that references the environment variables:
 
    <Tabs groupId="env">
      <TabItem value="standard" label="Standard" default>
@@ -576,7 +576,7 @@ A **Kubernetes job** will connect to the database and create the necessary users
    </TabItem>
    </Tabs>
 
-1. Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
+5. Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
 
    <Tabs groupId="env" queryString values={
    [
@@ -599,15 +599,15 @@ A **Kubernetes job** will connect to the database and create the necessary users
    </TabItem>
    </Tabs>
 
-1. Apply the manifest:
+6. Apply the manifest:
 
-```bash
-kubectl apply -f setup-postgres-create-db.yml --namespace camunda
-```
+   ```bash
+   kubectl apply -f setup-postgres-create-db.yml --namespace camunda
+   ```
 
-Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
+   Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
-1. Once the job is created, monitor its progress using:
+7. Once the job is created, monitor its progress using:
 
    ```bash
    kubectl get job/create-setup-user-db --namespace camunda --watch
@@ -615,18 +615,18 @@ Once the secret is created, the **Job** manifest from the previous step can cons
 
    Once the job shows as `Completed`, the users and databases will have been successfully created.
 
-1. View the logs of the job to confirm that the users were created and privileges were granted successfully:
+8. View the logs of the job to confirm that the users were created and privileges were granted successfully:
 
-```bash
-kubectl logs job/create-setup-user-db --namespace camunda
-```
+   ```bash
+   kubectl logs job/create-setup-user-db --namespace camunda
+   ```
 
-1. Clean up the resources:
+9. Clean up the resources:
 
-```bash
-kubectl delete job create-setup-user-db --namespace camunda
-kubectl delete secret setup-db-secret --namespace camunda
-```
+   ```bash
+   kubectl delete job create-setup-user-db --namespace camunda
+   kubectl delete secret setup-db-secret --namespace camunda
+   ```
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
@@ -651,62 +651,62 @@ The standard installation comes already pre-configured, and no additional steps 
 
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
-```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/vars-create-os.sh
-```
+   ```bash reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/vars-create-os.sh
+   ```
 
-A **Kubernetes job** will connect to the OpenSearch dommain and configure it.
+   A **Kubernetes job** will connect to the OpenSearch dommain and configure it.
 
 1. Create a secret that references the environment variables:
 
-```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/create-setup-os-secret.sh
-```
+   ```bash reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/create-setup-os-secret.sh
+   ```
 
-This command creates a secret named `setup-os-secret` and dynamically populates it with the values from your environment variables.
+   This command creates a secret named `setup-os-secret` and dynamically populates it with the values from your environment variables.
 
-After running the above command, you can verify that the secret was created successfully by using:
+   After running the above command, you can verify that the secret was created successfully by using:
 
-```bash
-kubectl get secret setup-os-secret -o yaml --namespace camunda
-```
+   ```bash
+   kubectl get secret setup-os-secret -o yaml --namespace camunda
+   ```
 
-This should display the secret with the base64 encoded values.
+   This should display the secret with the base64 encoded values.
 
 1. Save the following manifest to a file, for example, `setup-opensearch-fgac.yml`.
 
-```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/setup-opensearch-fgac.yml
-```
+   ```yaml reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/setup-opensearch-fgac.yml
+   ```
 
 1. Apply the manifest:
 
-```bash
-kubectl apply -f setup-opensearch-fgac.yml --namespace camunda
-```
+   ```bash
+   kubectl apply -f setup-opensearch-fgac.yml --namespace camunda
+   ```
 
-Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the OpenSearch domain credentials.
+   Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the OpenSearch domain credentials.
 
 1. Once the job is created, monitor its progress using:
 
-```bash
-kubectl get job/setup-opensearch-fgac --namespace camunda --watch
-```
+   ```bash
+   kubectl get job/setup-opensearch-fgac --namespace camunda --watch
+   ```
 
-Once the job shows as `Completed`, the OpenSearch domain is configured correctly for fine grained access control.
+   Once the job shows as `Completed`, the OpenSearch domain is configured correctly for fine grained access control.
 
 1. View the logs of the job to confirm that the privileges were granted successfully:
 
-```bash
-kubectl logs job/setup-opensearch-fgac --namespace camunda
-```
+   ```bash
+   kubectl logs job/setup-opensearch-fgac --namespace camunda
+   ```
 
 1. Clean up the resources:
 
-```bash
-kubectl delete job setup-opensearch-fgac --namespace camunda
-kubectl delete secret setup-os-secret --namespace camunda
-```
+   ```bash
+   kubectl delete job setup-opensearch-fgac --namespace camunda
+   kubectl delete secret setup-os-secret --namespace camunda
+   ```
 
 Running these commands will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 

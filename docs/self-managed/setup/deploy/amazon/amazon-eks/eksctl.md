@@ -372,32 +372,32 @@ If `gp3` is not installed, or is not set as the default StorageClass, complete t
 
 1. Create the `gp3` StorageClass:
 
-```shell
-cat << EOF | kubectl apply -f -
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ebs-sc
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-provisioner: ebs.csi.aws.com
-parameters:
-  type: gp3
-reclaimPolicy: Retain
-volumeBindingMode: WaitForFirstConsumer
-EOF
-```
+   ```shell
+   cat << EOF | kubectl apply -f -
+   ---
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: ebs-sc
+     annotations:
+       storageclass.kubernetes.io/is-default-class: "true"
+   provisioner: ebs.csi.aws.com
+   parameters:
+     type: gp3
+   reclaimPolicy: Retain
+   volumeBindingMode: WaitForFirstConsumer
+   EOF
+   ```
 
-This manifest defines an `ebs-sc` StorageClass to be created. This StorageClass uses the `ebs.csi.aws.com` provisioner, which is supplied by the **aws-ebs-csi-driver** addon installed during cluster creation. For more information, refer to the [official AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
+   This manifest defines an `ebs-sc` StorageClass to be created. This StorageClass uses the `ebs.csi.aws.com` provisioner, which is supplied by the **aws-ebs-csi-driver** addon installed during cluster creation. For more information, refer to the [official AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
 
 2. Modify the `gp2` StorageClass to mark it as a non-default StorageClass:
 
-```shell
-kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
-```
+   ```shell
+   kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+   ```
 
-1. Verify the changes by running the `kubectl get storageclass` command.
+3. Verify the changes by running the `kubectl get storageclass` command.
 
 After executing these commands, you will have a `gp3` StorageClass set as the default and the `gp2` StorageClass marked as non-default, provided that **gp2** was already present.
 
@@ -413,28 +413,28 @@ To [enable OpenID Connect (OIDC) and IAM Roles for Service Accounts (IRSA)](http
 
 1. Determine the OIDC issuer ID for your cluster.
 
-First, ensure that your EKS cluster is set up with an OIDC provider. The following command should show you the OIDC issuer:
+   First, ensure that your EKS cluster is set up with an OIDC provider. The following command should show you the OIDC issuer:
 
-```bash
-export oidc_id=$(aws eks describe-cluster --name "$CLUSTER_NAME" --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
-echo "$oidc_id"
-```
+   ```bash
+   export oidc_id=$(aws eks describe-cluster --name "$CLUSTER_NAME" --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
+   echo "$oidc_id"
+   ```
 
-Determine whether an IAM OIDC provider with your cluster’s issuer ID is already in your account:
+   Determine whether an IAM OIDC provider with your cluster’s issuer ID is already in your account:
 
-```bash
-aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
-```
+   ```bash
+   aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
+   ```
 
-If output is returned, then you already have an IAM OIDC provider for your cluster and you can skip the next step.
+   If output is returned, then you already have an IAM OIDC provider for your cluster and you can skip the next step.
 
-If no output is returned, then you must create an IAM OIDC provider for your cluster.
+   If no output is returned, then you must create an IAM OIDC provider for your cluster.
 
 1. Create an IAM OIDC identity provider for your cluster with the following command:
 
-```bash
-eksctl utils associate-iam-oidc-provider --region "$REGION" --cluster "$CLUSTER_NAME" --approve
-```
+   ```bash
+   eksctl utils associate-iam-oidc-provider --region "$REGION" --cluster "$CLUSTER_NAME" --approve
+   ```
 
 #### Policy for external-dns
 
@@ -685,7 +685,7 @@ export DB_WEBMODELER_PASSWORD="CHANGE-ME-PLEASE"
    echo "SUBNET_IDS=$SUBNET_IDS"
    ```
 
-The variable `SUBNET_IDS` contains the output values of the private subnets (the value should look like this: `subnet-0123456789 subnet-1234567890 subnet-9876543210`).
+   The variable `SUBNET_IDS` contains the output values of the private subnets (the value should look like this: `subnet-0123456789 subnet-1234567890 subnet-9876543210`).
 
 5. Create a database subnet group to associate PostgreSQL within the existing VPC:
 
