@@ -272,7 +272,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/
 
 </TabItem>
 
-<TabItem value="without-domain-std" label="Standard Without domain">
+<TabItem value="without-domain-std" label="Standard without domain">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/helm-values/values-no-domain.yml
@@ -315,7 +315,7 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
 
   </TabItem>
 
-  <TabItem value="without-domain-irsa" label="IRSA Without domain">
+  <TabItem value="without-domain-irsa" label="IRSA without domain">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/helm-values/values-no-domain.yml

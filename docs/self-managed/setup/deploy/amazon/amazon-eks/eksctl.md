@@ -957,15 +957,15 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
    - **Access Policies**: The default access policy allows all actions (`es:*`) on resources within the domain for any AWS account (`"Principal": { "AWS": "*" }`). This is scoped to the OpenSearch domain resources using the `arn:aws:es:$REGION:*:domain/$OPENSEARCH_NAME/*` resource ARN.
    - **VPC Options**: The domain is deployed within the specified VPC, restricted to the provided subnets (`SubnetIds=${SUBNET_IDS}`) and associated security group (`SecurityGroupIds=${GROUP_ID_OPENSEARCH}`).
 
-This configuration creates a secure OpenSearch domain with encryption both in transit (between nodes) and at rest, zonal fault tolerance, and sufficient storage performance using `gp3` volumes. The access is restricted to resources in the VPC of the EKS cluster and is governed by the specified security group.
+   This configuration creates a secure OpenSearch domain with encryption both in transit (between nodes) and at rest, zonal fault tolerance, and sufficient storage performance using `gp3` volumes. The access is restricted to resources in the VPC of the EKS cluster and is governed by the specified security group.
 
-1. Wait for the OpenSearch domain to be active:
+6. Wait for the OpenSearch domain to be active:
 
    ```shell
    while [ "$(aws opensearch describe-domain --domain-name $OPENSEARCH_NAME --query 'DomainStatus.Processing' --output text)" != "False" ]; do echo "Waiting for OpenSearch domain to become availablen this can up to take 20-30 minutes..."; sleep 30; done && echo "OpenSearch domain is now available\!"
    ```
 
-1. Retrieve the endpoint of the OpenSearch domain:
+7. Retrieve the endpoint of the OpenSearch domain:
 
    ```shell
    export OPENSEARCH_HOST=$(aws opensearch describe-domains --domain-names $OPENSEARCH_NAME --query "DomainStatusList[0].Endpoints.vpc" --output text)
