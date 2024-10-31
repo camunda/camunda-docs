@@ -14,7 +14,7 @@ This search functionality allows users to:
 
 ## Open the search bar
 
-Press `ctrl`+`k`, `⌘`+`k`, or click the magnifier in the top navigation bar to open the search bar.
+Press `Ctrl+K`, `⌘+K`, or click the magnifier in the top navigation bar to open the search bar.
 
 ![Open the search bar](./img/open_console_search.png)
 

@@ -1,0 +1,55 @@
+---
+id: pin-clock
+title: "Pin internal clock (alpha)"
+description: "Set a precise, static time for the Zeebe engine’s internal clock."
+sidebar_label: "Pin internal clock (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV91u2zYUfhVCVw3mWG6XdpnvvDTdMrRFkDgrMCcXtHRssZFIjaTiGIaBvcZeb0+y75BS7MQO1osBu0mCOBZ5eP6+7xwdrhIv5y4ZTpKT0mS3yU0vMTVZ6ZXRZ3kyTGql404vycllVtW8hY1L8kKK2lKmHPWE8ziTCa8qEjNjhS9I/E40JUF6rjT9/edfTijtyWpZioxV9q/1l4J0EA0LQjkBe5rynlBeWKqk0k5IH0RcDVMzRXk0InUuckNOaANH8jupM4LGsRFZIfWcwhmW7G0ZqBrnBXyKVoScw4BYKF8gFE2LII9IqhqarvVwOIRygtICnpHOa4MI2EupxUSWdSHFjKRvLN28SjNT1UaT9i4lacvlocwyci4NcvHzsJV2/So/CBFUcsn+uGb6lTLE2Xl/reHYrGFh5KEk6XAoeHStAYWlPxo4+pPJl8lwFR6VJeDlbUO9JDNItPa8Jeu6VFnAM/3qGLlV4rICqeVvflkTsDTBOvTWltH3ilzY7bLBD4/RHyOldC/ZZQYDzlJtskJUqizBBziQO45mUSisbgBwhWnKfANBH0ZbJ5gcc7JYAH8q6ePSu6Nkve5tRTjZcgts9cqXfDqQ9Fzpi5gZHIrHHDBxMZw3g6P9gUTXFtIBh4DZrCnLZUcSRLGHfnsjBkIJrB4NBvsNdVFseCZqaWVFKAumVaWcU3ouUD8q8EzTHNDdEafpGVAB2bSk6rtdcB/bH4nzKCly8lKVIoIuEHUUnMIvRDW5+HAifjx6+8PNq8L72g3TdLFY9O0sO6RceWP7xs5TPPIfyx30BWIDT1suyxxisIky39CpS1/WpbN1WzD4/cDpf+Fi2H1grPMWidrmSmPVTo8aiauLM6FypE3NlpzZHdPhzEw2JeuQU9P44bSU+pZxbLm1a/SpFddUlbRLYWZ7DEARN8dmK4xnuP79mx3dzJpfxuNzEVWIzORdf+VmGQ1xEJXSqmqqZAjy4Unex6d3g8GadTLi3xAJSH1fI/xArafhgByVAc5RWwgM7dlz4/2PkDFW4V3xxG4/NICuzlsSv48RxSp/u6/eEMvD64asRcpMljWWqw9NqQzqudY7221Lfam0l0p7qbT9lYZNvKoKE+bCJjBH+gIPadaOiI7sHVmeJ1dwBnlIVrFK1iD3qjDOr4er2li/Tu8YgjtplYSVgBhvx2rqWAKtsgzL+9DiDY2XZxfFiawanUtxLC5OL8fiZ+lpIZche2zyserjwfFgr1YWfUbj6PxMxAgj17bqv1PLhbxXbRT+FsXr9Q0nEr1K+eUlH4vpmWKqJDtqOOMPHGjtBe38HIWwEr986Jjx65dxAJd718VmeDy9xwzSVt5m2BsEvs1MXG7nqx2PGT5gHUMc9F/vMg9RcQFhMMbZ0EXBvnba3ujLSgzlHHkvQaslTGtsl4HdMvsx7ojfokXxus/oRYp1zXMOzc20D3NpFo89/J+WZprybSJtTbj0ZPTp6vP70eHHs5PTz5enh9DY9/c+ZKkGsyqpt/zAZPnk9iJehZH+4GnYq83r4+WO9H/ekdoK8XTvU3RaFUbzwJhV27cmSdZdemPvmSSr1RRqrmy5XvMyCsXihjW52bQqfoKigmSOQuNGd0tLZmpE/XDMZlm8bNj8zv1r3etOjBB77Z+RfTRscEd46LznV2Ou7/bqV+E1hUUrF3wtxOcwucZvwvd4VhRaR1hfJXjdzBs5Z/moln/+AVp6kVs=
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Pin internal clock (alpha)</h1>
+
+<MethodEndpoint method={"put"} path={"/clock"}></MethodEndpoint>
+
+Set a precise, static time for the Zeebe engine’s internal clock.
+When the clock is pinned, it remains at the specified time and does not advance.
+To change the time, the clock must be pinned again with a new timestamp.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+:::
+
+## Request
+
+<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"timestamp"} required={true} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The exact time in epoch milliseconds to which the clock should be pinned.","type":"integer","format":"int64"}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
+
+The clock was successfully pinned to the specified time in epoch milliseconds.
+
+</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+The required timestamp parameter is missing or it is negative.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
