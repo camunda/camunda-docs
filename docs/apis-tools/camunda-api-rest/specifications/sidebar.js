@@ -10,13 +10,19 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/update-authorization",
-        label: "Patch authorization",
+        label: "Update authorization",
         className: "api-method patch",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-authorizations",
         label: "Query authorizations (alpha)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/find-user-authorizations",
+        label: "Query user authorizations (alpha)",
         className: "api-method post",
       },
     ],
@@ -64,7 +70,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-decision-definition",
-        label: "Get decision definition by key (alpha)",
+        label: "Get decision definition (alpha)",
         className: "api-method get",
       },
       {
@@ -94,7 +100,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-decision-instance",
-        label: "Get decision instance by key (alpha)",
+        label: "Get decision instance (alpha)",
         className: "api-method get",
       },
     ],
@@ -112,7 +118,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-decision-requirements",
-        label: "Get decision requirements by key (alpha)",
+        label: "Get decision requirements (alpha)",
         className: "api-method get",
       },
       {
@@ -178,7 +184,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-flow-node-instance",
-        label: "Get flow node instance by key (alpha)",
+        label: "Get flow node instance (alpha)",
         className: "api-method get",
       },
     ],
@@ -202,7 +208,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-incident",
-        label: "Get incident by key (alpha)",
+        label: "Get incident (alpha)",
         className: "api-method get",
       },
     ],
@@ -238,7 +244,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/update-job",
-        label: "Update a job",
+        label: "Update job",
         className: "api-method patch",
       },
     ],
@@ -250,7 +256,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-license",
-        label: "Get status of Camunda license",
+        label: "Get license status",
         className: "api-method get",
       },
     ],
@@ -262,13 +268,13 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/publish-message",
-        label: "Publish a message",
+        label: "Publish message",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/correlate-message",
-        label: "Correlate a message",
+        label: "Correlate message",
         className: "api-method post",
       },
     ],
@@ -280,13 +286,13 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-process-definitions",
-        label: "Search process definitions (alpha)",
+        label: "Query process definitions (alpha)",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-process-definition",
-        label: "Get process definition by key (alpha)",
+        label: "Get process definition (alpha)",
         className: "api-method get",
       },
       {
@@ -298,7 +304,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-start-process-form",
-        label: "Get start process form",
+        label: "Get process start form (alpha)",
         className: "api-method get",
       },
     ],
@@ -382,7 +388,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/create-user",
-        label: "Create a user",
+        label: "Create user",
         className: "api-method post",
       },
       {
@@ -412,7 +418,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-user-task",
-        label: "Return user task by a user task key",
+        label: "Get user task (alpha)",
         className: "api-method get",
       },
       {
@@ -424,7 +430,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-user-task-form",
-        label: "Return user task form",
+        label: "Get user task form (alpha)",
         className: "api-method get",
       },
       {
@@ -442,7 +448,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-user-task-variables",
-        label: "Query user tasks variables (alpha)",
+        label: "Query user task variables (alpha)",
         className: "api-method post",
       },
     ],
@@ -454,13 +460,13 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-variables",
-        label: "Query process and local variables (alpha)",
+        label: "Query variables (alpha)",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-variable",
-        label: "Return variable by a variable key",
+        label: "Get variable (alpha)",
         className: "api-method get",
       },
     ],
