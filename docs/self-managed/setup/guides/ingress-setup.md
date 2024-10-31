@@ -1,22 +1,17 @@
 ---
 id: ingress-setup
-title: "Combined and separated Ingress setup"
-description: "Camunda 8 Self-Managed combined and separated Ingress setup"
+title: "Ingress setup"
+description: "Camunda 8 Self-Managed Ingress setup and example configuration."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::caution
-The separated Ingress configuration has been deprecated in version 8.6. To ensure a smooth upgrade experience for new installations, we recommend using the **combined Ingress setup**.
+The separated Ingress configuration has been removed in version 8.7. The below instructions refer to the **combined Ingress setup**.
 :::
 
-Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress. There are two ways to do this:
-
-1. **Combined setup:** In this setup, there are two Ingress objects: one Ingress object for all Camunda 8 web applications using a single domain. Each application has a sub-path e.g. `camunda.example.com/operate`, and `camunda.example.com/optimize` and another Ingress which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
-2. **Separated setup:** In this setup, each component has its own Ingress/host e.g. `operate.camunda.example.com`, `optimize.camunda.example.com`, `zeebe.camunda.example.com`, etc.
-
-There are no significant differences between the two setups. Rather, they both offer flexibility for different workflows.
+Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress with a **combined setup.** In this configuration, there are two Ingress objects: one Ingress object for all Camunda 8 web applications using a single domain. Each application has a sub-path e.g. `camunda.example.com/operate`, and `camunda.example.com/optimize` and another Ingress which uses gRPC protocol for Zeebe Gateway e.g. `zeebe.camunda.example.com`.
 
 :::note
 Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deploys Ingress resources. Hence, this Ingress setup will not work without an Ingress controller running in your cluster.
