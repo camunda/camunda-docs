@@ -237,7 +237,7 @@ For easy and reproducible installations, we will use yaml files to configure the
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
 <Tabs groupId="values">
-  <TabItem value="with-domain-std" label="Standard " default>
+  <TabItem value="with-domain-std" label="Standard with domain" default>
 
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
@@ -290,7 +290,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/
 
   </TabItem>
 
-  <TabItem value="with-domain-irsa" label="IRSA " default>
+  <TabItem value="with-domain-irsa" label="IRSA with domain" default>
 
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
