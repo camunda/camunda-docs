@@ -355,7 +355,7 @@ If you don't want to use this module, you can skip this section. However, you ma
 If you choose not to use this module, you'll need to either provide a managed Elasticsearch or OpenSearch service or use the internal deployment by the Camunda Helm chart in Kubernetes.
 :::
 
-The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](./self-managed/setup/guides/using-existing-opensearch/).
+The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/setup/guides/using-existing-opensearch/).
 
 :::note Migration to OpenSearch is not supported
 
