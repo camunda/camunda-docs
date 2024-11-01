@@ -158,7 +158,7 @@ If an element of the list `a` doesn't contain an entry with the key `b`, the res
 
 Validate journal entries and return all violations.
 
-```js
+```feel
 {
   check1: {
     error: "Document Type invalid for current year posting",
