@@ -142,7 +142,7 @@ every x in [1,2], y in [2,3] satisfies x < y
 Return the first packaging element which unit is "Palette".
 
 ```js
-data.attribute.packaging[(unit = "Palette")][1];
+data.attribute.packaging[unit = "Palette"][1]
 ```
 
 ### Group a List
