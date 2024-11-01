@@ -1,6 +1,6 @@
 ---
 id: outbound
-title: Use Outbound Connectors
+title: Use an Outbound Connector
 description: Learn how to use outbound Connectors
 ---
 

@@ -318,9 +318,19 @@ module.exports = {
           },
           items: [
             "components/connectors/connector-types",
-            "components/connectors/use-connectors/index",
-            "components/connectors/use-connectors/inbound",
-            "components/connectors/use-connectors/outbound",
+
+            {
+              type: "category",
+              label: "How to use Connectors",
+              link: {
+                type: "doc",
+                id: "components/connectors/use-connectors/index",
+              },
+              items: [
+                "components/connectors/use-connectors/inbound",
+                "components/connectors/use-connectors/outbound",
+              ],
+            },
           ],
         },
         {
