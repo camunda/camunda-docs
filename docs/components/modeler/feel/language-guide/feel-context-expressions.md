@@ -168,7 +168,7 @@ Validate journal entries and return all violations.
     error: "Document Type invalid for current year posting",
     violations: collection[ledgerType = "GP" and foreignAmount != null]
   },
-  result: ([check1, check2])[count(violations) > 0]
+  result: [check1, check2][count(violations) > 0]
 }
 ```
 
