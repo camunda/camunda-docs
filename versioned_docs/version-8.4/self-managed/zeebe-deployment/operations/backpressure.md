@@ -10,14 +10,14 @@ When a broker receives a client request, it is written to the **event stream** f
 If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command.
 If the broker keeps accepting new requests from the client, the backlog increases and the processing latency can grow beyond an acceptable time.
 
+To avoid such problems, Zeebe employs a backpressure mechanism. When the broker receives more requests than it can process with an acceptable latency, it rejects some requests (see [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
+
 :::note
 When [multi-tenancy](./../../concepts/multi-tenancy.md) is enabled in Camunda 8, a large number of concurrent requests
 may also lead to issues with Camunda Identity. In such cases, it is recommended to enable and configure the management of
-Identity requests in the Zeebe Gateway. This will allow Zeebe to employ a backpressure mechanism against these requests.
-For more information, see the [Zeebe Gateway experimental configuration documentation](./../configuration/gateway.md#experimental-configuration).
+Identity requests in the Zeebe Gateway. This allows Zeebe to employ a backpressure mechanism against these requests.
+For more information, see the Zeebe Gateway [experimental configuration documentation](./../configuration/gateway.md#experimental-configuration).
 :::
-
-To avoid such problems, Zeebe employs a backpressure mechanism. When the broker receives more requests than it can process with an acceptable latency, it rejects some requests (see [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
 
 ### Terminology
 
