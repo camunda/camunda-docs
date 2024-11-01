@@ -151,9 +151,9 @@ This section explains why you might not see the **Play** tab, and any additional
 
 For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
 
-Although Play is compatible with cluster versions 8.5.1 and above, we fully support and recommend using versions 8.6.0 or higher.
+**Version compatibility:** Although Play is compatible with cluster versions 8.5.1 and above, Camunda fully supports and recommends using versions 8.6.0 or higher.
 
-Play currently doesn't support execution listeners. As a workaround, you can skip the element using [modifications](#modify-a-process-instance).
+**Execution listeners:** Play does not currently support [execution listeners](/components/concepts/execution-listeners.md). As a workaround, you can skip the element using [modifications](#modify-a-process-instance).
 
 ### Camunda 8 SaaS
 
