@@ -6,8 +6,6 @@ description: "Learn more about how you can use FEEL list expressions, including 
 
 You can use the following FEEL list expressions. Examples are provided to show common use cases.
 
-## List expressions
-
 ### Literal
 
 Creates a new list of the given elements. The elements can be of any type.
@@ -137,27 +135,27 @@ every x in [1,2], y in [2,3] satisfies x < y
 
 ## Examples
 
-### Filter a List and Return the First Element
+### Filter list and return the first element
 
 Return the first packaging element which unit is "Palette".
 
-```js
+```feel
 data.attribute.packaging[unit = "Palette"][1]
 ```
 
-### Group a List
+### Group list
 
 Group the given list of invoices by their person.
 
 Each invoice has a person. The persons are extracted from the invoices and are used as a filter for the list.
 
-```js
+```feel
 for p in distinct values(invoices.person) return invoices[person = p]
 ```
 
 #### Evaluation context
 
-```js
+```feel
 {"invoices":[
   {"id":1, "person":"A", "amount": 10},
   {"id":2, "person":"A", "amount": 20},
@@ -170,7 +168,7 @@ for p in distinct values(invoices.person) return invoices[person = p]
 
 #### Evaluation result
 
-```js
+```feel
 [
   [
     { id: 1, person: "A", amount: 10 },
@@ -185,13 +183,13 @@ for p in distinct values(invoices.person) return invoices[person = p]
 ];
 ```
 
-### Merge two Lists
+### Merge two lists
 
 Merge two given lists. Each list contains context values with the same structure. Each context has an `id` entry that identifies the value.
 
 The result is a list that contains all context values grouped by the identifier.
 
-```js
+```feel
  {
    ids: union(x.files.id,y.files.id),
    getById: function (files,fileId) get or else(files[id=fileId][1], {}),
@@ -199,9 +197,9 @@ The result is a list that contains all context values grouped by the identifier.
  }.merge
 ```
 
-#### Input
+#### Evaluation context
 
-```js
+```feel
 {
  "x": {"files": [
    {"id":1, "content":"a"},
@@ -214,9 +212,9 @@ The result is a list that contains all context values grouped by the identifier.
 }
 ```
 
-#### Output
+#### Evaluation result
 
-```js
+```feel
 [
   { id: 1, content: "a2" },
   { id: 2, content: "b" },

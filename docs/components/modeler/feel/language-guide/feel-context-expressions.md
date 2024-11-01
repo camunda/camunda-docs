@@ -6,8 +6,6 @@ description: "Learn more about how you can use FEEL context expressions, includi
 
 You can use the following FEEL context expressions. Examples are provided to show common use cases.
 
-## Context expressions
-
 ### Literal
 
 Creates a new context with the given entries.
@@ -154,7 +152,7 @@ If an element of the list `a` doesn't contain an entry with the key `b`, the res
 
 ## Examples
 
-### Validate Data
+### Validate data
 
 Validate journal entries and return all violations.
 
@@ -172,11 +170,11 @@ Validate journal entries and return all violations.
 }
 ```
 
-### Structure a Calculation
+### Structure calculation
 
 Calculate the minimum age of a given list of birthdays.
 
-```js
+```feel
 {
   age: function(birthday) (today() - birthday).years,
   ages: for birthday in birthdays return age(birthday),
