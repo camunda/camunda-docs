@@ -92,7 +92,8 @@ POST `/api/ingestion/variable`
 
 Request Body:
 
-     [
+```
+    [
       {
           "id": "7689fced-2639-4408-9de1-cf8f72769f43",
           "name": "address",
@@ -110,6 +111,7 @@ Request Body:
           "processDefinitionKey": "orderProcess"
       }
     ]
+```
 
 ### Response
 

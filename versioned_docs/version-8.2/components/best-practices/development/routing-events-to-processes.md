@@ -419,10 +419,11 @@ public class InvoiceMDB implements MessageListener {
 
 The provided REST API can be directly used to communicate with the workflow engine remotely.
 
-```
 POST /process-definition/key/invoice/start
 
 Request body:
+
+```
 {
   "variables": {
       "invoiceId" : {"value" : "123456", "type": "String"}
