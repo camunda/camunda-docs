@@ -155,7 +155,7 @@ Each invoice has a person. The persons are extracted from the invoices and are u
 for p in distinct values(invoices.person) return invoices[person = p]
 ```
 
-#### Input
+#### Evaluation context
 
 ```js
 {"invoices":[
@@ -168,7 +168,7 @@ for p in distinct values(invoices.person) return invoices[person = p]
 ]}
 ```
 
-#### Output
+#### Evaluation result
 
 ```js
 [
@@ -194,11 +194,8 @@ The result is a list that contains all context values grouped by the identifier.
 ```js
  {
    ids: union(x.files.id,y.files.id),
-   getById: function (files,fileId)
-     if (count(files[id=fileId]) > 0)
-     then files[id=fileId][1]
-     else {},
-   merge: for id in ids return put all(getById(x.files, id), getById(y.files, id))
+   getById: function (files,fileId) get or else(files[id=fileId][1], {}),
+   merge: for id in ids return context merge(getById(x.files, id), getById(y.files, id))
  }.merge
 ```
 

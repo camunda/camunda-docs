@@ -467,8 +467,7 @@ Return the duration between now and the next Tuesday at 08:00.
 
 ```js
 (for x in 1..7
-  return date and time(today(),time("08:00:00Z"))
-    + duration("P"+string(x)+"D")
+  return date and time(today(),@"08:00:00Z") + @"P1D" * x
 )[day of week(item) = "Tuesday"][1] - now()
 ```
 
@@ -478,8 +477,8 @@ Return the duration between now and the next time it is 09:00 in the Europe/Berl
 
 ```js
 {
-  time: time("09:00:00@Europe/Berlin"),
-  date: if (time(now()) < time) then today() else today() + duration("P1D"),
+  time: @"09:00:00@Europe/Berlin",
+  date: if time(now()) < time then today() else today() + @"P1D",
   duration: date and time(date, time) - now()
 }.duration
 ```
@@ -490,8 +489,7 @@ Return the next day that is not a weekend at 00:00.
 
 ```js
 (for x in 1..3
-  return date and time(today(),time("00:00:00Z"))
-    + duration("P"+string(x)+"D")
+  return date and time(today(),@"00:00:00Z") + @"P1D" * x
 )[not(day of week(item) in ("Saturday","Sunday"))][1]
 ```
 
@@ -526,7 +524,7 @@ for d in dates return {
 Return the current point in time as a Unix timestamp.
 
 ```js
-(now() - date and time("1970-01-01T00:00Z")) / duration("PT1S") * 1000
+(now() - @"1970-01-01T00:00Z") / @"PT1S" * 1000
 ```
 
 #### Output
