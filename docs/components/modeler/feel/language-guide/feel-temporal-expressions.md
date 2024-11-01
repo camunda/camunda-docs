@@ -442,7 +442,7 @@ duration("P6M").months
 Check if a date is at least 6 months before another date.
 
 ```js
-date1 < date2 + duration("P6M");
+date1 < date2 + @"P6M"
 ```
 
 ### Calculate the Age
