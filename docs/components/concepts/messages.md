@@ -52,7 +52,7 @@ zbctl publish message "Money collected" --correlationKey "order-123" --ttl 1h
 
 ## Message cardinality
 
-A message is correlated only _once_ to a process (based on the BPMN process id), across all versions of this process. If multiple subscriptions for the same process are opened (by multiple process instances or within one instance), the message is correlated only to one of the subscriptions.
+A message is correlated only _once_ to a process (based on the BPMN process ID), across all versions of this process. If multiple subscriptions for the same process are opened (by multiple process instances or within one instance), the message is correlated only to one of the subscriptions.
 
 When subscriptions are opened for different processes, the message is correlated to _all_ the subscriptions.
 
@@ -60,14 +60,14 @@ A message is _not_ correlated to a message start event subscription if an instan
 
 ## Message uniqueness
 
-A message can have an optional message id — a unique id to ensure the message is published and processed only once (i.e. idempotency). The id can be any string; for example, a request id, a tracking number, or the offset/position in a message queue.
+A message can have an optional message ID — a unique ID to ensure the message is published and processed only once (i.e. idempotency). The ID can be any string; for example, a request ID, a tracking number, or the offset/position in a message queue.
 
-A message is rejected and not correlated if a message with the same name, the same correlation key, and the same id is already buffered. After the message is discarded from the buffer, a message with the same name, correlation key, and id can be published again.
+A message is rejected and not correlated if a message with the same name, the same correlation key, and the same ID is already buffered. After the message is discarded from the buffer, a message with the same name, correlation key, and ID can be published again.
 
-The uniqueness check is disabled when no message id is set.
+The uniqueness check is disabled when no message ID is set.
 
 <details>
-   <summary>Publish message with id via zbctl</summary>
+   <summary>Publish message with ID via zbctl</summary>
    <p>
 
 ```
@@ -134,7 +134,7 @@ The first message creates a new process instance. The following messages are dis
 
 Publishing a message is a fire-and-forget action. As a user, you do not know if the correlation is a success.
 
-To know if a published message was correlated (and to which process instance), use the [message correlation endpoint](../../apis-tools/camunda-api-rest/specifications/correlate-a-message.api.mdx).
+To know if a published message was correlated (and to which process instance), use the [message correlation endpoint](../../apis-tools/camunda-api-rest/specifications/correlate-message.api.mdx).
 
 The message correlation endpoint works similarly to the message publish endpoint. However, the message correlation endpoint does not support [message buffering](#message-buffering). Any message published using this endpoint is either immediately correlated, or not correlated at all. This is due to the synchronous nature of requiring a response.
 

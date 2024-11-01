@@ -87,7 +87,7 @@ For the failback procedure, the recreated region must not include any active Cam
 
 ### Prerequisites
 
-The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
+The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region/tree/stable/8.6) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
 
 Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
 
@@ -147,7 +147,7 @@ Start with creating a port-forward to the `Zeebe Gateway` in the surviving regio
 
 The following alternatives to port-forwarding are possible:
 
-- if Zeebe Gateway is exposed to the outside of the Kubernetes cluster, you can skip port-forwarding and use the URL directly
+- If the Zeebe Gateway is exposed to the outside of the Kubernetes cluster, you can skip port-forwarding and use the URL directly
 - [`exec`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_exec/) into an existing pod (such as Elasticsearch), and execute `curl` commands from inside of the pod
 - [`run`](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_run/) an Ubuntu pod in the cluster to execute `curl` commands from inside the Kubernetes cluster
 

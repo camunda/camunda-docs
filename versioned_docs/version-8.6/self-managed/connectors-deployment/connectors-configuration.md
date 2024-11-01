@@ -54,8 +54,8 @@ Zeebe:
 
 | Environment variable                                | Purpose                                                                        |
 | :-------------------------------------------------- | :----------------------------------------------------------------------------- |
-| `CAMUNDA_CLIENT_ZEEBE_BASEURL` (required)           | The base URL of the Zeebe broker (HTTPS)                                       |
-| `CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH` (optional) | The file location of the certificate to be used to connect to the Zeebe broker |
+| `CAMUNDA_CLIENT_ZEEBE_BASEURL` (required)           | The base URL of the Zeebe Broker (HTTPS)                                       |
+| `CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH` (optional) | The file location of the certificate to be used to connect to the Zeebe Broker |
 
 ```bash
 ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=127.0.0.1:26500
@@ -225,7 +225,7 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 The Connector Runtime supports multiple tenants for inbound and outbound Connectors.
 A single Connector Runtime can serve a single tenant or can be configured to serve
-multiple tenants. By default, the runtime uses the `<default>` tenant id for all
+multiple tenants. By default, the runtime uses the `<default>` tenant ID for all
 Zeebe related operations like handling Jobs and publishing Messages.
 
 :::info
@@ -242,7 +242,7 @@ for the configuration of multi-tenancy.
 
 | Name                                       | Description                                                     | Default value |
 | ------------------------------------------ | --------------------------------------------------------------- | ------------- |
-| ZEEBE_CLIENT_DEFAULT-TENANT-ID             | The default tenant id used to communicate with Zeebe            | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT-TENANT-ID             | The default tenant ID used to communicate with Zeebe            | `<default>`   |
 | ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS | The default tenants ids (comma separated) used to activate jobs | `<default>`   |
 
 If you are using an embedded version of the Connector Runtime you can specify the tenant information
@@ -260,14 +260,14 @@ If support for a different tenant or multiple tenants should be enabled, the ten
 to be configured individually using the following environment variables.
 
 If you want to use outbound Connectors for a single tenant that is different
-from the `<default>` tenant you can specify a different default tenant id using:
+from the `<default>` tenant you can specify a different default tenant ID using:
 
 ```bash
 ZEEBE_CLIENT_DEFAULT-TENANT-ID=tenant1
 ```
 
-This will change the default tenant id used for fetching jobs and publishing messages
-to the tenant id `tenant1`.
+This will change the default tenant ID used for fetching jobs and publishing messages
+to the tenant ID `tenant1`.
 
 :::note
 Please keep in mind that inbound Connectors will still be enabled for
@@ -275,7 +275,7 @@ all tenants that the Connector Runtime client has access to.
 :::
 
 If you want to run the Connector Runtime in a setup where a single runtime
-serves multiple tenants you have to add each tenant id to the list of the default job workers:
+serves multiple tenants you have to add each tenant ID to the list of the default job workers:
 
 ```bash
 ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS=tenant1, tenant2

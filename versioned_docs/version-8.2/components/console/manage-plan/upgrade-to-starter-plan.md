@@ -1,6 +1,6 @@
 ---
 id: upgrade-to-starter-plan
-title: Upgrade to a Starter Plan
+title: Upgrade to a Starter plan
 description: "Want to upgrade to a Starter plan? Follow these steps."
 ---
 

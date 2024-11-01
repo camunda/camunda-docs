@@ -7,7 +7,7 @@ keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesTop from './img/form-values-top.png';
@@ -27,8 +27,8 @@ import NavigationHistoryImg from './img/modeler-navigation-history.png';
 import clsx from "clsx";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import SaasPrereqs from './react-components/saas-prerequisites.md'
-import Install from './react-components/install-c8run.md'
+import SaasPrereqs from './react-components/\_saas-prerequisites.md'
+import Install from './react-components/\_install-c8run.md'
 
 Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 

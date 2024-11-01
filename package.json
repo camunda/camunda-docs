@@ -41,7 +41,6 @@
     "@saucelabs/theme-github-codeblock": "^0.2.3",
     "clsx": "^1.2.1",
     "docusaurus": "^1.14.7",
-    "docusaurus-gtm-plugin": "0.0.2",
     "docusaurus-plugin-openapi-docs": "^2.0.4",
     "docusaurus-theme-openapi-docs": "^2.0.4",
     "mixpanel-browser": "^2.47.0",

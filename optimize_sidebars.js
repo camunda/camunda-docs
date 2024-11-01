@@ -899,6 +899,10 @@ module.exports = {
                   "components/connectors/out-of-the-box-connectors/amazon-bedrock/"
                 ),
                 docsLink(
+                  "AWS Comprehend Connector",
+                  "/components/connectors/out-of-the-box-connectors/amazon-comprehend/"
+                ),
+                docsLink(
                   "AWS DynamoDB Connector",
                   "components/connectors/out-of-the-box-connectors/amazon-dynamodb/"
                 ),
@@ -1591,7 +1595,7 @@ module.exports = {
                   Cluster: [
                     docsLink(
                       "Get cluster topology",
-                      "apis-tools/camunda-api-rest/specifications/get-cluster-topology/"
+                      "apis-tools/camunda-api-rest/specifications/get-topology/"
                     ),
                   ],
                 },

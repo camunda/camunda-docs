@@ -320,6 +320,7 @@ module.exports = {
             {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
+                "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
@@ -688,6 +689,38 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Early access",
+      link: {
+        type: "doc",
+        id: "components/early-access/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Experimental features",
+          items: [
+            "components/early-access/experimental/rpa/rpa-integration",
+            "components/early-access/experimental/rpa/rpa-framework-library",
+          ],
+        },
+        {
+          type: "category",
+          label: "Alpha features",
+          link: {
+            type: "doc",
+            id: "components/early-access/alpha/alpha-features",
+          },
+          items: [
+            "components/early-access/alpha/sap/sap-integration",
+            "components/early-access/alpha/sap/odata-connector",
+            "components/early-access/alpha/sap/rfc-connector",
+            "components/early-access/alpha/sap/btp-integration",
+          ],
+        },
+      ],
+    },
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",
@@ -888,7 +921,6 @@ module.exports = {
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
-    "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",
@@ -979,6 +1011,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/860-to-870",
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
@@ -1519,6 +1552,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
                   ],
                 },
               ],

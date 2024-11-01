@@ -12,8 +12,8 @@ When [creating a cluster in SaaS](/components/console/manage-clusters/create-clu
 
 Prior to 8.6, clusters were configured by hardware size (S, M, L).
 
-- To learn more about clusters prior to 8.6, see previous documentation versions.
-- To learn more about migrating your existing clusters to the newer model, contact your Customer Success Manager.
+- This documentation covers the SaaS cluster model introduced in 8.6. To learn more about clusters prior to 8.6, see previous documentation versions.
+- To learn how you can migrate your existing clusters to the newer model, contact your Customer Success Manager.
 
 :::
 
@@ -54,14 +54,10 @@ To learn more about choosing your cluster size, see [sizing your environment](/c
 - Larger cluster sizes include increased performance and capacity, allowing you to serve more workload.
 - Increased usage such as higher throughput or longer data retention requires a larger cluster size.
 - Each size increase uses one of your available cluster reservations. For example, purchasing two HWP advanced reservations for your production cluster allows you to configure two clusters of size 1x, or one cluster of size 2x.
+- You can change the cluster size at any time. See [resize a cluster](/components/console/manage-clusters/manage-cluster.md#resize-a-cluster).
 
 :::note
-
-Contact your Customer Success Manager to:
-
-- Increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
-- Increase the cluster size of an existing cluster.
-
+Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
 :::
 
 ## Free Trial clusters
@@ -70,7 +66,7 @@ Free Trial clusters have the same functionality as a production cluster, but are
 
 Once you sign up for a Free Trial, you are able to create one production cluster for the duration of your trial.
 
-When your Free Trial plan expires, you are automatically transferred to the Free Plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your trial is deleted, and you cannot create new clusters.
+When your Free Trial plan expires, you are automatically transferred to the Free plan. This plan allows you to model BPMN and DMN collaboratively, but does not support execution of your models. Any cluster created during your trial is deleted, and you cannot create new clusters.
 
 ### Auto-pause
 

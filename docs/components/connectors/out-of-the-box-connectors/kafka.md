@@ -71,7 +71,7 @@ In the **Message** section, set the **Key** and the **Value** that will be sent 
 ## Schema strategies
 
 :::caution
-Use Schema strategies with caution, as this is an [alpha feature](/reference/alpha-features.md). Functionality may not be comprehensive and could change.
+Use Schema strategies with caution, as this is an [alpha feature](/components/early-access/alpha/alpha-features.md). Functionality may not be comprehensive and could change.
 :::
 
 This Connector supports different schema strategies, offering a compact, fast, and binary data exchange format for Kafka messages.

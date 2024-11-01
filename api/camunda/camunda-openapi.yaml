@@ -25,11 +25,34 @@ servers:
         default: http
         description: The schema of the Camunda 8 REST API server.
 
+tags:
+  - name: Authorization
+  - name: Clock
+  - name: Cluster
+  - name: Decision definition
+  - name: Decision instance
+  - name: Decision requirements
+  - name: Document
+  - name: Element instance
+  - name: Flow node instance
+  - name: Incident
+  - name: Job
+  - name: License
+  - name: Message
+  - name: Process definition
+  - name: Process instance
+  - name: Resource
+  - name: Signal
+  - name: User
+  - name: User task
+  - name: Variable
+
 paths:
   /topology:
     get:
       tags:
         - Cluster
+      operationId: getTopology
       summary: Get cluster topology
       description: Obtains the current topology of the cluster the gateway is part of.
       responses:
@@ -39,11 +62,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TopologyResponse"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
   /license:
     get:
       tags:
         - License
-      summary: Get status of Camunda license
+      operationId: getLicense
+      summary: Get license status
       description: Obtains the status of the current Camunda license
       responses:
         "200":
@@ -52,10 +83,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LicenseResponse"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
   /jobs/activation:
     post:
       tags:
         - Job
+      operationId: activateJobs
       summary: Activate jobs
       description: |
         Iterate through all known partitions and activate jobs up to the requested maximum.
@@ -90,6 +129,7 @@ paths:
     post:
       tags:
         - Job
+      operationId: failJob
       summary: Fail job
       description: |
         Mark the job as failed
@@ -143,6 +183,7 @@ paths:
     post:
       tags:
         - Job
+      operationId: reportJobError
       summary: Report error for job
       description: |
         Reports a business error (i.e. non-technical) that occurs while processing a job.
@@ -196,6 +237,7 @@ paths:
     post:
       tags:
         - Job
+      operationId: completeJob
       summary: Complete job
       description: |
         Complete a job with the given payload, which allows completing the associated service task.
@@ -249,7 +291,8 @@ paths:
     patch:
       tags:
         - Job
-      summary: Update a job
+      operationId: updateJob
+      summary: Update job
       description: Update a job with the given key.
       parameters:
         - name: jobKey
@@ -301,6 +344,7 @@ paths:
     post:
       tags:
         - Incident
+      operationId: resolveIncident
       summary: Resolve incident
       description: >
         Marks the incident as resolved; most likely a call to Update job will be necessary
@@ -339,6 +383,7 @@ paths:
     post:
       tags:
         - User task
+      operationId: completeUserTask
       summary: Complete user task
       description: Completes a user task with the given key.
       parameters:
@@ -392,6 +437,7 @@ paths:
     post:
       tags:
         - User task
+      operationId: assignUserTask
       summary: Assign user task
       description: Assigns a user task with the given key to the given assignee.
       parameters:
@@ -441,9 +487,62 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
   /user-tasks/{userTaskKey}:
+    get:
+      tags:
+        - User task
+      operationId: getUserTask
+      summary: Get user task (alpha)
+      description: |
+        Get the user task by the user task key.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: userTaskKey
+          in: path
+          required: true
+          description: The user task key.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The user task is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserTaskItem"
+        "400":
+          description: >
+            The provided data is not valid.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: The user task with the given key was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
     patch:
       tags:
         - User task
+      operationId: updateUserTask
       summary: Update user task
       description: Update a user task with the given key.
       parameters:
@@ -492,10 +591,71 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+  /user-tasks/{userTaskKey}/form:
+    get:
+      tags:
+        - User task
+      operationId: getUserTaskForm
+      summary: Get user task form (alpha)
+      description: |
+        Get the form of a user task.
+
+        Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
+        Furthermore, this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: userTaskKey
+          in: path
+          required: true
+          description: The user task key.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The form is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormItem"
+        "204":
+          description: >
+            The user task was found, but no form is associated with it.
+        "400":
+          description: "Bad request"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: "Not found"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: "Internal server error"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
   /user-tasks/{userTaskKey}/assignee:
     delete:
       tags:
         - User task
+      operationId: unassignUserTask
       summary: Unassign user task
       description: Removes the assignee of a task with the given key.
       parameters:
@@ -542,14 +702,17 @@ paths:
     post:
       tags:
         - User task
+      operationId: findUserTasks
       summary: Query user tasks (alpha)
       description: |
         Search for user tasks based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       requestBody:
         required: false
@@ -560,7 +723,7 @@ paths:
       responses:
         "200":
           description: >
-            The user task search successful response.
+            The user task search result.
           content:
             application/json:
               schema:
@@ -580,11 +743,166 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+  /user-tasks/{userTaskKey}/variables:
+    post:
+      tags:
+        - User task
+      operationId: findUserTaskVariables
+      summary: Query user task variables (alpha)
+      description: |
+        Search for user task variables based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: userTaskKey
+          in: path
+          required: true
+          description: The key of the user task.
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserTaskVariableSearchQueryRequest"
+      responses:
+        "200":
+          description: >
+            The user task variables search response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VariableSearchQueryResponse"
+        "400":
+          description: >
+            The user task variables search query failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+
+  /variables/search:
+    post:
+      tags:
+        - Variable
+      operationId: findVariables
+      summary: Query variables (alpha)
+      description: |
+        Search for process and local variables based on given criteria.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VariableSearchQueryRequest"
+      responses:
+        "200":
+          description: >
+            The variable search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VariableSearchQueryResponse"
+        "400":
+          description: >
+            The user task search query failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /variables/{variableKey}:
+    get:
+      tags:
+        - Variable
+      operationId: getVariable
+      summary: Get variable (alpha)
+      description: |
+        Get the variable by the variable key.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: variableKey
+          in: path
+          required: true
+          description: The variable key.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The variable is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VariableItem"
+        "400":
+          description: "Bad request"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: "Not found"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: "Internal server error"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
   /clock:
     put:
       tags:
         - Clock
+      operationId: pinClock
       summary: Pin internal clock (alpha)
       description: |
         Set a precise, static time for the Zeebe engine’s internal clock.
@@ -592,7 +910,7 @@ paths:
         To change the time, the clock must be pinned again with a new timestamp.
 
         :::note
-        This endpoint is an [alpha feature](/reference/alpha-features.md) and may be subject to change
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
         in future releases.
         :::
       requestBody:
@@ -621,6 +939,7 @@ paths:
     post:
       tags:
         - Clock
+      operationId: resetClock
       summary: Reset internal clock (alpha)
       description: |
         Resets the Zeebe engine’s internal clock to the current system time, enabling it to tick in real-time.
@@ -628,7 +947,7 @@ paths:
         normal behavior after it has been pinned to a specific time.
 
         :::note
-        This endpoint is an [alpha feature](/reference/alpha-features.md) and may be subject to change
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
         in future releases.
       responses:
         "204":
@@ -639,11 +958,233 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+  /process-definitions/search:
+    post:
+      tags:
+        - Process definition
+      operationId: findProcessDefinitions
+      summary: Query process definitions (alpha)
+      description: |
+        Search for process definitions based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessDefinitionSearchQueryRequest"
+      responses:
+        "200":
+          description: >
+            The process definition search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessDefinitionSearchQueryResponse"
+        "400":
+          description: >
+            The process definition search query failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /process-definitions/{processDefinitionKey}:
+    get:
+      tags:
+        - Process definition
+      operationId: getProcessDefinition
+      summary: Get process definition (alpha)
+      description: |
+        Returns process definition as JSON.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: processDefinitionKey
+          in: path
+          required: true
+          description: The assigned key of the process definition, which acts as a unique identifier for this process definition.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The process definition is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessDefinitionItem"
+        "400":
+          description: >
+            The process definition request failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: >
+            The process definition with the given key was not found.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /process-definitions/{processDefinitionKey}/xml:
+    get:
+      tags:
+        - Process definition
+      operationId: getProcessDefinitionXML
+      summary: Get process definition XML (alpha)
+      description: |
+        Returns process definition as XML.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: processDefinitionKey
+          in: path
+          required: true
+          description: The assigned key of the process definition, which acts as a unique identifier for this process.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The XML of the process definition is successfully returned.
+          content:
+            text/xml:
+              schema:
+                type: string
+        "204":
+          description: >
+            The process definition was found but does not have XML.
+          content:
+            text/plain:
+              schema:
+                type: string
+        "400":
+          description: >
+            The process definition request failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: >
+            The decision with the given key was not found.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /process-definitions/{processDefinitionsKey}/form:
+    get:
+      tags:
+        - Process definition
+      operationId: getStartProcessForm
+      summary: Get process start form (alpha)
+      description: |
+        Get the start form of a process.
+
+        Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
+        Furthermore, this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: processDefinitionsKey
+          in: path
+          required: true
+          description: The process key.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The form is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FormItem"
+        "204":
+          description: >
+            The process was found, but no form is associated with it.
+        "400":
+          description: "Bad request"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          description: "Unauthorized"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: "Not found"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: "Internal server error"
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
   /process-instances:
     post:
       tags:
         - Process instance
+      operationId: createProcessInstance
       summary: Create process instance
       description: |
         Creates and starts an instance of the specified process.
@@ -685,18 +1226,76 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+  /process-instances/{processInstanceKey}:
+    get:
+      tags:
+        - Process instance
+      operationId: getProcessInstance
+      summary: Get process instance (alpha)
+      description: |
+        Get the process instance by the process instance key.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The process instance key.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: The process instance is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessInstanceItem"
+        "400":
+          description: The provided data is not valid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          description: The request lacks valid authentication credentials.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: The process instance with the given key was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
   /process-instances/search:
     post:
       tags:
         - Process instance
+      operationId: findProcessInstances
       summary: Query process instances (alpha)
       description: |
         Search for process instances based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       requestBody:
         required: false
@@ -706,23 +1305,21 @@ paths:
               $ref: "#/components/schemas/ProcessInstanceSearchQueryRequest"
       responses:
         "200":
-          description: >
-            The Process Instance Search successful response.
+          description: The process instance search result.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProcessInstanceSearchQueryResponse"
         "400":
           description: >
-            The Process Instance Search Query failed.
+            The process instance search query failed.
             More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
-          description: >
-            An internal error occurred while processing the request.
+          description: An internal error occurred while processing the request.
           content:
             application/problem+json:
               schema:
@@ -731,6 +1328,7 @@ paths:
     post:
       tags:
         - Process instance
+      operationId: cancelProcessInstance
       summary: Cancel process instance
       description: Cancels a running process instance.
       parameters:
@@ -772,6 +1370,7 @@ paths:
     post:
       tags:
         - Process instance
+      operationId: migrateProcessInstance
       summary: Migrate process instance
       description: |
         Migrates a process instance to a new process definition.
@@ -820,6 +1419,7 @@ paths:
     post:
       tags:
         - Process instance
+      operationId: modifyProcessInstance
       summary: Modify process instance
       description: |
         Modifies a running process instance.
@@ -867,15 +1467,18 @@ paths:
   /flownode-instances/search:
     post:
       tags:
-        - Flow node Instance
+        - Flow node instance
+      operationId: findFlowNodeInstances
       summary: Query flow node instances (alpha)
       description: |
         Search for flow node instances based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       requestBody:
         required: false
@@ -886,14 +1489,69 @@ paths:
       responses:
         "200":
           description: >
-            The Flow node instance search successful response.
+            The flow node instance search result.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/FlowNodeInstanceSearchQueryResponse"
         "400":
           description: >
-            The Flow node instance Search Query failed.
+            The Flow node instance search query failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /flownode-instances/{flownodeInstanceKey}:
+    get:
+      tags:
+        - Flow node instance
+      operationId: getFlowNodeInstance
+      summary: Get flow node instance (alpha)
+      description: |
+        Returns flow node instance as JSON.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: flownodeInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the flow node instance, which acts as a unique identifier for this flow node instance.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The flow node instance is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlowNodeInstanceItem"
+        "400":
+          description: >
+            The flow node instance request failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: >
+            The flow node instance with the given key was not found.
             More details are provided in the response body.
           content:
             application/problem+json:
@@ -910,14 +1568,17 @@ paths:
     post:
       tags:
         - Decision definition
+      operationId: findDecisionDefinitions
       summary: Query decision definitions (alpha)
       description: |
         Search for decision definitions based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       requestBody:
         required: false
@@ -928,14 +1589,69 @@ paths:
       responses:
         "200":
           description: >
-            The Decision Definition Search successful response.
+            The decision definition search result.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/DecisionDefinitionSearchQueryResponse"
         "400":
           description: >
-            The Decision Definition Search Query failed.
+            The decision definition search query failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /decision-definitions/{decisionDefinitionKey}:
+    get:
+      tags:
+        - Decision definition
+      operationId: getDecisionDefinition
+      summary: Get decision definition (alpha)
+      description: |
+        Returns a decision definition by key.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: decisionDefinitionKey
+          in: path
+          required: true
+          description: The assigned key of the decision definition, which acts as a unique identifier for this decision.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The decision definition is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DecisionDefinitionItem"
+        "400":
+          description: >
+            The decision definition request failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: >
+            The decision with the given key was not found.
             More details are provided in the response body.
           content:
             application/problem+json:
@@ -952,14 +1668,17 @@ paths:
     get:
       tags:
         - Decision definition
+      operationId: getDecisionDefinitionXML
       summary: Get decision definition XML (alpha)
       description: |
         Returns decision definition as XML.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       parameters:
         - name: decisionDefinitionKey
@@ -979,7 +1698,7 @@ paths:
                 type: string
         "400":
           description: >
-            The Decision Definition Get XML failed.
+            The decision definition request failed.
             More details are provided in the response body.
           content:
             application/problem+json:
@@ -1004,14 +1723,17 @@ paths:
     post:
       tags:
         - Decision requirements
+      operationId: findDecisionRequirements
       summary: Query decision requirements (alpha)
       description: |
         Search for decision requirements based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       requestBody:
         required: false
@@ -1022,28 +1744,152 @@ paths:
       responses:
         "200":
           description: >
-            The decision requirements search successful response.
+            The decision requirements search result.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/DecisionRequirementsSearchQueryResponse"
         "400":
           description: >
-            The decision requirements search query failed.
+            The search query failed.
             More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /decision-requirements/{decisionRequirementsKey}:
+    get:
+      tags:
+        - Decision requirements
+      operationId: getDecisionRequirements
+      summary: Get decision requirements (alpha)
+      description: |
+        Returns Decision Requirements as JSON.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: decisionRequirementsKey
+          in: path
+          required: true
+          description: The assigned key of the decision requirements, which acts as a unique identifier for this decision requirements.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The decision requirements is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DecisionRequirementsItem"
+        "400":
+          description: >
+            The decision requirements request failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: >
+            The decision requirements with the given key was not found.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /decision-requirements/{decisionRequirementsKey}/xml:
+    get:
+      tags:
+        - Decision requirements
+      operationId: getDecisionRequirementsXML
+      summary: Get decision requirements XML (alpha)
+      description: |
+        Returns decision requirements as XML.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: decisionRequirementsKey
+          in: path
+          required: true
+          description: The assigned key of the decision requirements, which acts as a unique identifier for this decision.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The XML of the decision requirements is successfully returned.
+          content:
+            text/xml:
+              schema:
+                type: string
+        "400":
+          description: >
+            The decision requirements request failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: >
+            The decision requirements with the given key was not found.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
 
   /decision-instances/search:
     post:
       tags:
         - Decision instance
+      operationId: findDecisionInstances
       summary: Query decision instances (alpha)
       description: |
         Search for decision instances based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       requestBody:
         required: false
@@ -1054,7 +1900,7 @@ paths:
       responses:
         "200":
           description: >
-            The decision instance search successful response.
+            The decision instance search result.
           content:
             application/json:
               schema:
@@ -1075,10 +1921,67 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
 
+  /decision-instances/{decisionInstanceKey}:
+    get:
+      tags:
+        - Decision instance
+      operationId: getDecisionInstance
+      summary: Get decision instance (alpha)
+      description: |
+        Returns a decision instance.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      parameters:
+        - name: decisionInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the decision instance, which acts as a unique identifier for this decision instance.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: >
+            The decision instance is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DecisionInstanceGetQueryResponse"
+        "400":
+          description: >
+            The decision instance request failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: >
+            The decision instance with the given key was not found.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+
   /decision-definitions/evaluation:
     post:
       tags:
         - Decision definition
+      operationId: evaluateDecision
       summary: Evaluate decision
       description: |
         Evaluates a decision.
@@ -1128,11 +2031,174 @@ paths:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
 
+  /authorizations/{ownerKey}:
+    patch:
+      tags:
+        - Authorization
+      operationId: updateAuthorization
+      summary: Update authorization
+      description: Manage the permissions assigned to the authorization.
+      parameters:
+        - name: ownerKey
+          in: path
+          required: true
+          description: The key of the owner of the authorization.
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizationPatchRequest"
+        required: true
+      responses:
+        "202":
+          description: |
+            The authorization was patched successfully.
+        "400":
+          description: |
+            The authorization could not be patched.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          description: |
+            The request to patch the authorization was unauthorized.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "403":
+          description: |
+            The request to patch an authorization was denied.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: |
+            The owner was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "409":
+          description: |
+            The request to add or remove permissions to an authorization was in conflict.
+            More details are provided in the response body.
+        "500":
+          description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /authorizations/search:
+    post:
+      tags:
+        - Authorization
+      summary: Query authorizations (alpha)
+      description: |
+        Search for authorizations based on given criteria.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      operationId: findAuthorizations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizationSearchQueryRequest"
+        required: true
+      responses:
+        "200":
+          description: The authorization search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationSearchResponse"
+        "400":
+          description: >
+            The authorization search query failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+
+  /users:
+    post:
+      tags:
+        - User
+      operationId: createUser
+      summary: Create user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRequest"
+        required: true
+      responses:
+        "202":
+          description: |
+            The user was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCreateResponse"
+        "400":
+          description: |
+            The user could not be created.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "401":
+          description: |
+            The request to create a user was unauthorized.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "403":
+          description: |
+            The request to create a user was denied.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+
   /messages/publication:
     post:
       tags:
         - Message
-      summary: Publish a message
+      operationId: publishMessage
+      summary: Publish message
       description: |
         Publishes a single message.
         Messages are published to specific partitions computed from their correlation keys.
@@ -1167,7 +2233,8 @@ paths:
     post:
       tags:
         - Message
-      summary: Correlate a message
+      operationId: correlateMessage
+      summary: Correlate message
       description: |
         Publishes a message and correlates it to a subscription.
         If correlation is successful it will return the first process instance key the message correlated with.
@@ -1212,14 +2279,17 @@ paths:
   /documents:
     post:
       tags:
-        - Documents
+        - Document
+      operationId: createDocument
       summary: Upload document (alpha)
       description: |
         Upload a document to the Camunda 8 cluster.
 
+        Note that this currently only supports an in-memory document store, which is not meant for production use.
+
         :::note
-        This endpoint is an alpha feature. It currently only supports an in-memory document store,
-        which is not meant for production use.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       parameters:
         - name: storeId
@@ -1270,14 +2340,17 @@ paths:
   /documents/{documentId}:
     get:
       tags:
-        - Documents
+        - Document
+      operationId: getDocument
       summary: Download document (alpha)
       description: |
         Download a document from the Camunda 8 cluster.
 
+        Note that this currently only supports an in-memory document store, which is not meant for production use.
+
         :::note
-        This endpoint is an alpha feature. It currently only supports an in-memory document store,
-        which is not meant for production use.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       parameters:
         - name: documentId
@@ -1316,14 +2389,17 @@ paths:
                 $ref: "#/components/schemas/ProblemDetail"
     delete:
       tags:
-        - Documents
+        - Document
+      operationId: deleteDocument
       summary: Delete document (alpha)
       description: |
         Delete a document from the Camunda 8 cluster.
 
+        Note that this currently only supports an in-memory document store, which is not meant for production use.
+
         :::note
-        This endpoint is an alpha feature. It currently only supports an in-memory document store,
-        which is not meant for production use.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       parameters:
         - name: documentId
@@ -1358,14 +2434,17 @@ paths:
   /document/{documentId}/links:
     post:
       tags:
-        - Documents
+        - Document
+      operationId: createDocumentLink
       summary: Create document link (alpha)
       description: |
         Create a link to a document in the Camunda 8 cluster.
 
+        Note that this currently only supports an in-memory document store, which is not meant for production use.
+
         :::note
-        This endpoint is an alpha feature. It currently only supports an in-memory document store,
-        which is not meant for production use.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       parameters:
         - name: documentId
@@ -1405,16 +2484,18 @@ paths:
     post:
       tags:
         - User
-      summary: "Query users (alpha)"
+      operationId: findUsers
+      summary: Query users (alpha)
       description: |
         Search for users based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
-      operationId: "findAllUsers"
       requestBody:
         content:
           application/json:
@@ -1423,37 +2504,75 @@ paths:
         required: true
       responses:
         "200":
-          description: "OK"
+          description: The user search result.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserSearchResponse"
         "400":
-          description: "Bad request"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "401":
-          description: "Unauthorized"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "403":
-          description: "Forbidden"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "404":
-          description: "Not found"
+          description: >
+            The user search query failed.
+            More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "500":
-          description: "Internal server error"
+          description: >
+            An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+
+  /users/{userKey}/authorizations/search:
+    post:
+      tags:
+        - Authorization
+      summary: "Query user authorizations (alpha)"
+      description: |
+        Search for user authorizations based on given criteria.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
+        :::note
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
+        :::
+      operationId: "findUserAuthorizations"
+      parameters:
+        - name: userKey
+          in: path
+          required: true
+          description: The key of the userKey of the authorization.
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthorizationSearchQueryRequest"
+        required: true
+      responses:
+        "200":
+          description: The user authorization search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizationSearchResponse"
+        "400":
+          description: >
+            The user authorization search query failed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: >
+            An internal error occurred while processing the request.
           content:
             application/problem+json:
               schema:
@@ -1463,14 +2582,17 @@ paths:
     post:
       tags:
         - Incident
+      operationId: findIncidents
       summary: Query incidents (alpha)
       description: |
         Search for incidents based on given criteria.
 
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       requestBody:
         required: false
@@ -1481,7 +2603,7 @@ paths:
       responses:
         "200":
           description: >
-            The incident search successful response.
+            The incident search result.
           content:
             application/json:
               schema:
@@ -1490,24 +2612,6 @@ paths:
           description: >
             The incident search query failed.
             More details are provided in the response body.
-        "401":
-          description: "Unauthorized"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "403":
-          description: "Forbidden"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-        "404":
-          description: "Not found"
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
         "500":
           description: "Internal server error"
           content:
@@ -1518,13 +2622,17 @@ paths:
     get:
       tags:
         - Incident
-      summary: Get incident by key (alpha)
+      operationId: getIncident
+      summary: Get incident (alpha)
       description: |
         Returns incident as JSON.
+
+        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        The Camunda 8 API (REST) Overview page provides further details.
+
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
-        for further details.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+        in future releases.
         :::
       parameters:
         - name: incidentKey
@@ -1544,7 +2652,7 @@ paths:
                 $ref: "#/components/schemas/IncidentItem"
         "400":
           description: >
-            The incident Get failed.
+            The incident request failed.
             More details are provided in the response body.
           content:
             application/problem+json:
@@ -1569,6 +2677,7 @@ paths:
     post:
       tags:
         - Resource
+      operationId: createDeployment
       summary: Deploy resources
       description: |
         Deploys one or more resources (e.g. processes, decision models, or forms).
@@ -1591,7 +2700,7 @@ paths:
                   type: string
                   description: The tenant to deploy the resources to.
               required:
-                - resource
+                - resources
       responses:
         "200":
           description: The resources are deployed.
@@ -1610,6 +2719,7 @@ paths:
     post:
       tags:
         - Resource
+      operationId: deleteResource
       summary: Delete resource
       description: |
         Deletes a deployed resource.
@@ -1658,6 +2768,7 @@ paths:
     post:
       tags:
         - Element instance
+      operationId: createElementInstanceVariables
       summary: Update element instance variables
       description: |
         Updates all the variables of a particular scope (for example, process instance, flow element instance) with the given variable data.
@@ -1699,6 +2810,7 @@ paths:
     post:
       tags:
         - Signal
+      operationId: broadcastSignal
       summary: Broadcast signal
       description: Broadcasts a signal.
       requestBody:
@@ -1743,6 +2855,11 @@ components:
       properties:
         filter:
           $ref: "#/components/schemas/UserTaskFilterRequest"
+    UserTaskVariableSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      description: User task search query request.
+      type: object
     UserTaskSearchQueryResponse:
       allOf:
         - $ref: "#/components/schemas/SearchQueryResponse"
@@ -1757,29 +2874,44 @@ components:
       description: User task filter request.
       type: object
       properties:
-        key:
+        userTaskKey:
           type: integer
+          description: The key for this user task.
           format: int64
         state:
           type: string
+          description: The state of the user task.
+          enum:
+            - CREATED
+            - COMPLETED
+            - CANCELED
+            - FAILED
         assignee:
           type: string
+          description: The assignee of the user task.
         elementId:
           type: string
+          description: The element ID of the user task.
         candidateGroup:
           type: string
+          description: The candidate group for this user task.
         candidateUser:
           type: string
+          description: The candidate user for this user task.
         processDefinitionKey:
           type: integer
+          description: The key of the process definition.
           format: int64
         processInstanceKey:
           type: integer
+          description: The key of the process instance.
           format: int64
-        tenantIds:
+        tenantId:
           type: string
+          description: Tenant ID of this user task.
         processDefinitionId:
           type: string
+          description: The ID of the process definition.
         variables:
           type: array
           items:
@@ -1789,63 +2921,89 @@ components:
       properties:
         name:
           type: string
+          description: Name of the variable.
         value:
           type: string
+          description: The value of the variable.
     UserTaskItem:
       type: object
       properties:
-        key:
+        userTaskKey:
           type: integer
+          description: The key for this user task.
           format: int64
         state:
           type: string
+          description: The state of the user task.
+          enum:
+            - CREATED
+            - COMPLETED
+            - CANCELED
+            - FAILED
         assignee:
           type: string
+          description: The assignee of the user task.
         elementId:
           type: string
+          description: The element ID of the user task.
         elementInstanceKey:
           type: integer
+          description: The key of the element instance.
           format: int64
-        candidateGroup:
+        candidateGroups:
           type: array
+          description: The candidate groups for this user task.
           items:
             type: string
-        candidateUser:
+        candidateUsers:
           type: array
+          description: The candidate users for this user task.
           items:
             type: string
         processDefinitionId:
           type: string
+          description: The ID of the process definition.
         processDefinitionKey:
           type: integer
+          description: The key of the process definition.
           format: int64
         processInstanceKey:
           type: integer
+          description: The key of the process instance.
           format: int64
         formKey:
           type: integer
+          description: The key of the form.
           format: int64
         creationDate:
           type: string
+          description: The creation date of a user task.
           format: date-time
         completionDate:
           type: string
+          description: The completion date of a user task.
           format: date-time
         followUpDate:
           type: string
+          description: The follow date of a user task.
           format: date-time
         dueDate:
           type: string
+          description: The due date of a user task.
           format: date-time
-        tenantIds:
+        tenantId:
           type: string
+          description: Tenant ID of this user task.
         externalFormReference:
           type: string
+          description: The external form reference.
         processDefinitionVersion:
           type: integer
+          description: The version of the process definition.
           format: int32
         customHeaders:
           type: object
+          description: Custom headers for the user task.
           additionalProperties:
             type: string
         priority:
@@ -1854,7 +3012,154 @@ components:
           minimum: 0
           maximum: 100
           default: 50
+    VariableSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      description: Variable search query request.
+      type: object
+      properties:
+        filter:
+          $ref: "#/components/schemas/VariableFilterRequest"
+    VariableFilterRequest:
+      description: Variable filter request.
+      type: object
+      properties:
+        variableKey:
+          description: The key for this variable.
+          type: integer
+          format: int64
+        name:
+          description: Name of the variable.
+          type: string
+        value:
+          description: The value of the variable.
+          type: string
+        scopeKey:
+          description: The key of the scope of this variable.
+          type: integer
+          format: int64
+        processInstanceKey:
+          description: The key of the process instance of this variable.
+          type: integer
+          format: int64
+        tenantId:
+          description: Tenant ID of this variable.
+          type: string
+        isTruncated:
+          description: Whether the value is truncated or not.
+          type: boolean
+    VariableSearchQueryResponse:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      description: Variable search query response.
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/VariableItem"
+    VariableItem:
+      description: Variable search response item.
+      type: object
+      properties:
+        variableKey:
+          description: The key for this variable.
+          type: integer
+          format: int64
+        name:
+          description: Name of this variable.
+          type: string
+        value:
+          description: Value of this variable.
+          type: string
+        fullValue:
+          description: Full value of this variable.
+          type: string
+        scopeKey:
+          description: The key of the scope of this variable.
+          type: integer
+          format: int64
+        processInstanceKey:
+          description: The key of the process instance of this variable.
+          type: integer
+          format: int64
+        tenantId:
+          description: Tenant ID of this variable.
+          type: string
+        isTruncated:
+          description: Whether the value is truncated or not.
+          type: boolean
+    ProcessDefinitionSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        filter:
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionFilterRequest"
+    ProcessDefinitionFilterRequest:
+      type: object
+      properties:
+        processDefinitionKey:
+          description: The key for this process definition.
+          type: integer
+          format: int64
+        name:
+          description: Name of this process definition.
+          type: string
+        resourceName:
+          description: Resource name of this process definition.
+          type: string
+        version:
+          description: Version of this process definition.
+          type: integer
+          format: int32
+        versionTag:
+          description: Version tag of this process definition.
+          type: string
+        processDefinitionId:
+          description: Process definition ID of this process definition.
+          type: string
+        tenantId:
+          description: Tenant ID of this process definition.
+          type: string
+    ProcessDefinitionSearchQueryResponse:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessDefinitionItem"
+    ProcessDefinitionItem:
+      type: object
+      properties:
+        processDefinitionKey:
+          description: The key for this process definition.
+          type: integer
+          format: int64
+        name:
+          description: Name of this process definition.
+          type: string
+        resourceName:
+          description: Resource name for this process definition.
+          type: string
+        version:
+          description: Version of this process definition.
+          type: integer
+          format: int32
+        versionTag:
+          description: Version tag of this process definition.
+          type: string
+        processDefinitionId:
+          description: Process definition ID of this process definition.
+          type: string
+        tenantId:
+          description: Tenant ID of this process definition.
+          type: string
     ProcessInstanceSearchQueryRequest:
+      description: Process instance search request.
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -1863,58 +3168,71 @@ components:
           allOf:
             - $ref: "#/components/schemas/ProcessInstanceFilterRequest"
     ProcessInstanceFilterRequest:
+      description: Process instance search filter.
       type: object
       properties:
-        running:
-          type: boolean
-        active:
-          type: boolean
-        incidents:
-          type: boolean
-        finished:
-          type: boolean
-        completed:
-          type: boolean
-        canceled:
-          type: boolean
-        retriesLeft:
-          type: boolean
-        errorMessage:
+        processInstanceKey:
+          type: integer
+          description: The key of this process instance.
+          format: int64
+        processDefinitionId:
           type: string
-        activityId:
+          description: The process definition ID.
+        processDefinitionName:
           type: string
+          description: The process definition name.
+        processDefinitionVersion:
+          type: integer
+          description: The process definition version.
+          format: int32
+        processDefinitionVersionTag:
+          type: string
+          description: The process definition version tag.
+        processDefinitionKey:
+          type: integer
+          description: The process definition key.
+          format: int64
+        parentProcessInstanceKey:
+          type: integer
+          description: The parent process instance key.
+          format: int64
+        parentFlowNodeInstanceKey:
+          type: integer
+          description: The parent flow node instance key.
+          format: int64
+        treePath:
+          type: string
+          description: The path of keys to this process instance, separated by '/'.
         startDate:
           type: string
+          description: The start date.
           format: date-time
         endDate:
           type: string
+          description: The end date.
           format: date-time
-        bpmnProcessId:
-          type: string
-          description: The bpmn process ID.
-        processDefinitionVersion:
-          type: integer
-          format: int32
-        variable:
-          allOf:
-            - $ref: "#/components/schemas/ProcessInstanceVariableFilterRequest"
-        batchOperationId:
-          type: string
-        parentProcessInstanceKey:
-          type: integer
-          format: int64
+        state:
+          $ref: "#/components/schemas/ProcessInstanceStateEnum"
+        hasIncident:
+          type: boolean
+          description: Whether this process instance has a related incident or not.
         tenantId:
           type: string
+          description: The tenant ID.
     ProcessInstanceVariableFilterRequest:
+      description: Process instance variable filter.
       type: object
       properties:
         name:
           type: string
+          description: The variable name.
         values:
           type: array
+          description: The variable values.
           items:
             type: string
     ProcessInstanceSearchQueryResponse:
+      description: Process instance search response.
       allOf:
         - $ref: "#/components/schemas/SearchQueryResponse"
       type: object
@@ -1924,59 +3242,63 @@ components:
           items:
             $ref: "#/components/schemas/ProcessInstanceItem"
     ProcessInstanceItem:
+      description: Process instance search response item.
       type: object
       properties:
-        key:
+        processInstanceKey:
           type: integer
+          description: The key of this process instance.
           format: int64
+        processDefinitionId:
+          type: string
+          description: The process definition ID.
         processDefinitionName:
           type: string
-          description: The process name.
+          description: The process definition name.
         processDefinitionVersion:
           type: integer
+          description: The process definition version.
           format: int32
-        bpmnProcessId:
+        processDefinitionVersionTag:
           type: string
-        parentKey:
+          description: The process definition version tag.
+        processDefinitionKey:
           type: integer
+          description: The process definition key.
+          format: int64
+        parentProcessInstanceKey:
+          type: integer
+          description: The parent process instance key.
           format: int64
         parentFlowNodeInstanceKey:
           type: integer
+          description: The parent flow node instance key.
           format: int64
+        treePath:
+          type: string
+          description: The path of keys to this process instance, separated by '/'.
         startDate:
           type: string
+          description: The start date.
           format: date-time
         endDate:
           type: string
+          description: The end date.
           format: date-time
         state:
-          type: string
-          enum:
-            - ACTIVE
-            - INCIDENT
-            - COMPLETED
-            - CANCELED
-            - UNKNOWN
-            - UNSPECIFIED
-        incident:
+          $ref: "#/components/schemas/ProcessInstanceStateEnum"
+        hasIncident:
           type: boolean
-        hasActiveOperation:
-          type: boolean
-        processDefinitionKey:
-          type: integer
-          format: int64
+          description: Whether this process instance has a related incident or not.
         tenantId:
           type: string
-        rootInstanceId:
-          type: string
-        operations:
-          type: array
-          items:
-            $ref: "#/components/schemas/OperationItem"
-        callHierarchy:
-          type: array
-          items:
-            $ref: "#/components/schemas/ProcessInstanceReferenceItem"
+          description: The tenant ID.
+    ProcessInstanceStateEnum:
+      description: The state, one of ACTIVE, COMPLETED, CANCELED.
+      enum:
+        - ACTIVE
+        - COMPLETED
+        - CANCELED
     CancelProcessInstanceRequest:
       type: object
       nullable: true
@@ -2003,40 +3325,73 @@ components:
       properties:
         flowNodeInstanceKey:
           type: integer
-          description: The key of this flow node instance.
+          description: The assigned key, which acts as a unique identifier for this flow node instance.
           format: int64
         processInstanceKey:
           type: integer
-          description: The process instance key.
+          description: The process instance key associated to this flow node instance.
           format: int64
         processDefinitionKey:
           type: integer
-          description: The process definition key.
+          description: The process definition key associated to this flow node instance.
           format: int64
+        processDefinitionId:
+          description: The process definition ID associated to this flow node instance.
+          type: string
         state:
+          description: State of flow node instance as defined set of values.
           type: string
-          description: The state, one of ACTIVE, COMPLETED, TERMINATED.
+          enum:
+            - ACTIVE
+            - COMPLETED
+            - TERMINATED
         type:
+          description: Type of flow node as defined set of values.
           type: string
-          description: The flow node type
+          enum:
+            - UNSPECIFIED
+            - PROCESS
+            - SUB_PROCESS
+            - EVENT_SUB_PROCESS
+            - START_EVENT
+            - INTERMEDIATE_CATCH_EVENT
+            - INTERMEDIATE_THROW_EVENT
+            - BOUNDARY_EVENT
+            - END_EVENT
+            - SERVICE_TASK
+            - RECEIVE_TASK
+            - USER_TASK
+            - MANUAL_TASK
+            - TASK
+            - EXCLUSIVE_GATEWAY
+            - INCLUSIVE_GATEWAY
+            - PARALLEL_GATEWAY
+            - EVENT_BASED_GATEWAY
+            - SEQUENCE_FLOW
+            - MULTI_INSTANCE_BODY
+            - CALL_ACTIVITY
+            - BUSINESS_RULE_TASK
+            - SCRIPT_TASK
+            - SEND_TASK
+            - UNKNOWN
         flowNodeId:
           type: string
-          description: The flow node id
+          description: The flow node ID for this flow node instance.
         flowNodeName:
           type: string
-          description: The flow node name
+          description: The flow node name.
         treePath:
           type: string
-          description: The path of keys from process instance to this flow node instance separated by '/'
-        incident:
+          description: The path of keys from process instance to this flow node instance separated by '/'.
+        hasIncident:
           type: boolean
-          description: Shows whether this flow node instance has an incident related to
+          description: Shows whether this flow node instance has an incident related to.
         incidentKey:
           type: integer
-          description: The key of incident if field incident is true
+          description: The key of incident if field incident is true.
           format: int64
         tenantId:
-          description: The tenant id
+          description: The tenant ID.
           type: string
     FlowNodeInstanceSearchQueryResponse:
       allOf:
@@ -2052,33 +3407,78 @@ components:
       properties:
         flowNodeInstanceKey:
           type: integer
+          description: The assigned key, which acts as a unique identifier for this flow node instance.
           format: int64
         processInstanceKey:
+          description: The process instance key associated to this flow node instance.
           type: integer
           format: int64
         processDefinitionKey:
+          description: The process definition key associated to this flow node instance.
           type: integer
           format: int64
+        processDefinitionId:
+          description: The process definition ID associated to this flow node instance.
+          type: string
         startDate:
+          description: Date when flow node instance started.
           type: string
+          format: date-time
         endDate:
+          description: Date when flow node instance finished.
           type: string
+          format: date-time
         flowNodeId:
-          type: string
-        flowNodeName:
+          description: The flow node ID for this flow node instance.
           type: string
         treePath:
+          description: The path from process instance leading to this flow node instance.
           type: string
         type:
+          description: Type of flow node as defined set of values.
           type: string
+          enum:
+            - UNSPECIFIED
+            - PROCESS
+            - SUB_PROCESS
+            - EVENT_SUB_PROCESS
+            - START_EVENT
+            - INTERMEDIATE_CATCH_EVENT
+            - INTERMEDIATE_THROW_EVENT
+            - BOUNDARY_EVENT
+            - END_EVENT
+            - SERVICE_TASK
+            - RECEIVE_TASK
+            - USER_TASK
+            - MANUAL_TASK
+            - TASK
+            - EXCLUSIVE_GATEWAY
+            - INCLUSIVE_GATEWAY
+            - PARALLEL_GATEWAY
+            - EVENT_BASED_GATEWAY
+            - SEQUENCE_FLOW
+            - MULTI_INSTANCE_BODY
+            - CALL_ACTIVITY
+            - BUSINESS_RULE_TASK
+            - SCRIPT_TASK
+            - SEND_TASK
+            - UNKNOWN
         state:
+          description: State of flow node instance as defined set of values.
           type: string
-        incident:
+          enum:
+            - ACTIVE
+            - COMPLETED
+            - TERMINATED
+        hasIncident:
+          description: Shows whether this flow node instance has an incident. If true also an incidentKey is provided.
           type: boolean
         incidentKey:
+          description: Incident key associated with this flow node instance.
           type: integer
           format: int64
         tenantId:
+          description: The tenant ID of the incident.
           type: string
     DecisionDefinitionSearchQueryRequest:
       allOf:
@@ -2097,8 +3497,8 @@ components:
           description: The assigned key, which acts as a unique identifier for this decision definition.
         decisionDefinitionId:
           type: string
-          description: The DMN id of the decision definition.
-        decisionDefinitionName:
+          description: The DMN ID of the decision definition.
+        name:
           type: string
           description: The DMN name of the decision definition.
         version:
@@ -2107,14 +3507,14 @@ components:
           description: The assigned version of the decision definition.
         decisionRequirementsId:
           type: string
-          description: the DMN id of the decision requirements graph that the decision definition is part of.
+          description: the DMN ID of the decision requirements graph that the decision definition is part of.
         decisionRequirementsKey:
           type: integer
           format: int64
           description: The assigned key of the decision requirements graph that the decision definition is part of.
         tenantId:
           type: string
-          description: The tenant id of the decision definition.
+          description: The tenant ID of the decision definition.
     IncidentSearchQueryRequest:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -2126,7 +3526,7 @@ components:
     IncidentFilterRequest:
       type: object
       properties:
-        key:
+        incidentKey:
           type: integer
           format: int64
           description: The assigned key, which acts as a unique identifier for this incident.
@@ -2136,7 +3536,7 @@ components:
           description: The process definition key associated to this incident.
         processDefinitionId:
           type: string
-          description: The bpmn process id associated to this incident.
+          description: The process definition ID associated to this incident.
         processInstanceKey:
           type: integer
           format: int64
@@ -2162,7 +3562,7 @@ components:
           description: Error message which describes the error in more detail.
         flowNodeId:
           type: string
-          description: The flow node id associated to this incident.
+          description: The flow node ID associated to this incident.
         flowNodeInstanceKey:
           type: integer
           format: int64
@@ -2187,7 +3587,7 @@ components:
           type: string
           description: The path from process instance via flow node ids and flow node instance keys leading to this incident.
         tenantId:
-          description: The tenant id of the incident.
+          description: The tenant ID of the incident.
           type: string
     IncidentSearchQueryResponse:
       allOf:
@@ -2201,7 +3601,7 @@ components:
     IncidentItem:
       type: object
       properties:
-        key:
+        incidentKey:
           type: integer
           format: int64
           description: The assigned key, which acts as a unique identifier for this incident.
@@ -2211,7 +3611,7 @@ components:
           description: The process definition key associated to this incident.
         processDefinitionId:
           type: string
-          description: The bpmn process id associated to this incident.
+          description: The process definition ID associated to this incident.
         processInstanceKey:
           type: integer
           format: int64
@@ -2237,7 +3637,7 @@ components:
           description: Error message which describes the error in more detail.
         flowNodeId:
           type: string
-          description: The flow node id associated to this incident.
+          description: The flow node ID associated to this incident.
         flowNodeInstanceKey:
           type: integer
           format: int64
@@ -2262,7 +3662,7 @@ components:
           type: string
           description: The path from process instance via flow node ids and flow node instance keys leading to this incident.
         tenantId:
-          description: The tenant id of the incident.
+          description: The tenant ID of the incident.
           type: string
     OperationItem:
       description: " Operation"
@@ -2325,8 +3725,8 @@ components:
           description: The assigned key, which acts as a unique identifier for this decision definition.
         decisionDefinitionId:
           type: string
-          description: The DMN id of the decision definition.
-        decisionDefinitionName:
+          description: The DMN ID of the decision definition.
+        name:
           type: string
           description: The DMN name of the decision definition.
         version:
@@ -2335,14 +3735,64 @@ components:
           description: The assigned version of the decision definition.
         decisionRequirementsId:
           type: string
-          description: the DMN id of the decision requirements graph that the decision definition is part of.
+          description: the DMN ID of the decision requirements graph that the decision definition is part of.
         decisionRequirementsKey:
           type: integer
           format: int64
           description: The assigned key of the decision requirements graph that the decision definition is part of.
         tenantId:
           type: string
-          description: The tenant id of the decision definition.
+          description: The tenant ID of the decision definition.
+    PermissionTypeEnum:
+      description: Specifies the type of permissions.
+      enum:
+        - CREATE
+        - READ
+        - READ_INSTANCE
+        - READ_USER_TASK
+        - UPDATE
+        - DELETE
+        - DELETE_PROCESS
+        - DELETE_DRD
+        - DELETE_FORM
+    ResourceTypeEnum:
+      description: The type of resource to add/remove permissions to/from.
+      enum:
+        - AUTHORIZATION
+        - MAPPING_RULE
+        - MESSAGE
+        - BATCH
+        - APPLICATION
+        - SYSTEM
+        - TENANT
+        - DEPLOYMENT
+        - PROCESS_DEFINITION
+        - DECISION_REQUIREMENTS_DEFINITION
+        - DECISION_DEFINITION
+        - GROUP
+        - USER
+        - ROLE
+    OwnerTypeEnum:
+      description: The type of the owner of permissions.
+      enum:
+        - USER
+        - ROLE
+        - GROUP
+        - MAPPING
+        - UNSPECIFIED
+    PermissionDTO:
+      type: object
+      properties:
+        permissionType:
+          description: Specifies the type of permissions.
+          type: object
+          allOf:
+            - $ref: "#/components/schemas/PermissionTypeEnum"
+        resourceIds:
+          type: array
+          description: A list of resource IDs the permission relates to.
+          items:
+            type: string
     AuthorizationPatchRequest:
       type: object
       properties:
@@ -2353,38 +3803,66 @@ components:
             - ADD
             - REMOVE
         resourceType:
-          description: The type of resource to add/remove perissions to/from.
-          enum:
-            - AUTHORIZATION
-            - MESSAGE
-            - JOB
-            - APPLICATION
-            - TENANT
-            - DEPLOYMENT
-            - PROCESS_DEFINITION
-            - USER_TASK
-            - DECISION_REQUIREMENTS_DEFINITION
-            - DECISION_DEFINITION
-            - USER_GROUP
-            - USER
-            - ROLE
+          description: The type of resource to add/remove permissions to/from.
+          type: object
+          allOf:
+            - $ref: "#/components/schemas/ResourceTypeEnum"
         permissions:
           type: array
           description: The permissions to add/remove.
           items:
-            properties:
-              permissionType:
-                description: Specifies the type of permissions.
-                enum:
-                  - CREATE
-                  - READ
-                  - UPDATE
-                  - DELETE
-              resourceIds:
-                type: array
-                description: A list of resource IDs the permission relates to.
-                items:
-                  type: string
+            $ref: "#/components/schemas/PermissionDTO"
+    AuthorizationSearchQueryRequest:
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      type: object
+      properties:
+        filter:
+          allOf:
+            - $ref: "#/components/schemas/AuthorizationFilterRequest"
+    AuthorizationFilterRequest:
+      type: object
+      properties:
+        ownerType:
+          description: The type of the owner of permissions.
+          type: object
+          allOf:
+            - $ref: "#/components/schemas/OwnerTypeEnum"
+        ownerKey:
+          description: The id of the owner of permissions.
+          type: integer
+          format: int64
+    AuthorizationResponse:
+      type: "object"
+      properties:
+        ownerKey:
+          description: The id of the owner of permissions.
+          type: integer
+          format: int64
+        ownerType:
+          description: The type of the owner of permissions.
+          type: object
+          allOf:
+            - $ref: "#/components/schemas/OwnerTypeEnum"
+        resourceType:
+          description: The type of resource that owner have permissions.
+          type: object
+          allOf:
+            - $ref: "#/components/schemas/ResourceTypeEnum"
+        permissions:
+          type: array
+          description: The permissions.
+          items:
+            $ref: "#/components/schemas/PermissionDTO"
+    AuthorizationSearchResponse:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthorizationResponse"
     UserRequest:
       type: "object"
       properties:
@@ -2697,7 +4175,7 @@ components:
     ActivatedJob:
       type: object
       properties:
-        key:
+        jobKey:
           description: the key, a unique identifier for the job
           type: integer
           format: int64
@@ -2959,7 +4437,7 @@ components:
           type: integer
           format: int64
           description: The assigned key, which acts as a unique identifier for this decision requirements.
-        decisionRequirementsName:
+        name:
           type: string
           description: The DMN name of the decision requirements.
         version:
@@ -2968,7 +4446,7 @@ components:
           description: The assigned version of the decision requirements.
         decisionRequirementsId:
           type: string
-          description: the DMN id of the decision requirements.
+          description: the DMN ID of the decision requirements.
         tenantId:
           type: string
           description: The tenant ID of the decision requirements.
@@ -2988,7 +4466,7 @@ components:
           type: integer
           format: int64
           description: The assigned key, which acts as a unique identifier for this decision requirements.
-        decisionRequirementsName:
+        name:
           type: string
           description: The DMN name of the decision requirements.
         version:
@@ -2997,7 +4475,7 @@ components:
           description: The assigned version of the decision requirements.
         decisionRequirementsId:
           type: string
-          description: the DMN id of the decision requirements.
+          description: The DMN ID of the decision requirements.
         resourceName:
           type: string
           description: The name of the resource from which this decision requirements was parsed.
@@ -3174,16 +4652,19 @@ components:
     DecisionInstanceFilterRequest:
       type: object
       properties:
-        key:
+        decisionInstanceKey:
           type: integer
           format: int64
           description: The key of the decision instance.
         state:
           $ref: "#/components/schemas/DecisionInstanceStateEnum"
-          description: The state of the decision instance.
         evaluationFailure:
           type: string
           description: The evaluation failure of the decision instance.
+        evaluationDate:
+          type: string
+          description: The evaluation date of the decision instance.
+          format: date-time
         processDefinitionKey:
           type: integer
           format: int64
@@ -3207,8 +4688,7 @@ components:
           format: int32
           description: The version of the decision.
         decisionDefinitionType:
-          $ref: "#/components/schemas/DecisionInstanceTypeEnum"
-          description: The type of the decision.
+          $ref: "#/components/schemas/DecisionDefinitionTypeEnum"
         tenantId:
           type: string
           description: The tenant ID of the decision instance.
@@ -3225,13 +4705,12 @@ components:
     DecisionInstanceItem:
       type: object
       properties:
-        key:
+        decisionInstanceKey:
           type: integer
           format: int64
           description: The key of the decision instance.
         state:
           $ref: "#/components/schemas/DecisionInstanceStateEnum"
-          description: The state of the decision instance.
         evaluationDate:
           type: string
           format: date-time
@@ -3262,8 +4741,7 @@ components:
           format: int32
           description: The version of the decision.
         decisionDefinitionType:
-          $ref: "#/components/schemas/DecisionInstanceTypeEnum"
-          description: The type of the decision.
+          $ref: "#/components/schemas/DecisionDefinitionTypeEnum"
         result:
           type: string
           description: The result of the decision instance.
@@ -3271,20 +4749,38 @@ components:
           type: string
           description: The tenant ID of the decision instance.
 
-    DecisionInstanceTypeEnum:
+    DecisionInstanceGetQueryResponse:
+      allOf:
+        - $ref: "#/components/schemas/DecisionInstanceItem"
+        - type: object
+          properties:
+            evaluatedInputs:
+              type: array
+              items:
+                $ref: "#/components/schemas/EvaluatedDecisionInputItem"
+              description: |
+                The evaluated inputs of the decision instance.
+            matchedRules:
+              type: array
+              items:
+                $ref: "#/components/schemas/MatchedDecisionRuleItem"
+              description: |
+                The matched rules of the decision instance.
+
+    DecisionDefinitionTypeEnum:
+      description: The type of the decision.
       enum:
-        - DECISION
         - DECISION_TABLE
         - LITERAL_EXPRESSION
-        - RELATION
         - UNSPECIFIED
         - UNKNOWN
     DecisionInstanceStateEnum:
+      description: The state of the decision instance.
       enum:
         - EVALUATED
         - FAILED
-        - UNKNOWN
         - UNSPECIFIED
+        - UNKNOWN
 
     MessageCorrelationRequest:
       type: object
@@ -3371,7 +4867,7 @@ components:
     DocumentReference:
       type: object
       properties:
-        documentType:
+        camunda.document.type:
           type: string
           description: Document discriminator. Always set to "camunda".
           enum:
@@ -3386,7 +4882,6 @@ components:
           $ref: "#/components/schemas/DocumentMetadata"
     DocumentMetadata:
       type: object
-      additionalProperties: true
       properties:
         contentType:
           type: string
@@ -3402,14 +4897,19 @@ components:
           type: integer
           format: int64
           description: The size of the document in bytes.
+        customProperties:
+          type: object
+          description: Custom properties of the document.
+          additionalProperties: true
+
     DocumentLinkRequest:
       type: object
       properties:
-        expiresAt:
-          type: string
-          format: date-time
-          description: The date and time when the link expires.
-          nullable: true
+        timeToLive:
+          type: integer
+          format: int64
+          description: The time-to-live of the document link in ms.
+          default: 3600000 # 1 hour
     DocumentLink:
       type: object
       properties:
@@ -3510,7 +5010,7 @@ components:
           type: integer
           format: int32
           description: The assigned decision requirements version.
-        decisionRequirementsName:
+        name:
           type: string
           description: The DMN name of the decision requirements, as parsed during deployment.
         tenantId:
@@ -3845,6 +5345,26 @@ components:
         tenantId:
           description: The tenant ID of the signal that was broadcast.
           type: string
+    FormItem:
+      type: object
+      properties:
+        formKey:
+          description: The key of the form.
+          type: integer
+          format: int64
+        tenantId:
+          description: The tenant ID of the form.
+          type: string
+        bpmnId:
+          description: The BPMN ID of the form.
+          type: string
+        schema:
+          description: The schema of the form.
+          type: object
+        version:
+          description: The version of the form.
+          type: integer
+          format: int64
 
   securitySchemes:
     bearerAuth:
