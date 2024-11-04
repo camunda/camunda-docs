@@ -13,7 +13,7 @@ function preGenerateDocs() {
     ...addDisclaimer(originalSpec),
     ...redefineCreateProcessInstanceRequest(originalSpec),
     ...redefineEvaluateDecisionRequest(originalSpec),
-    ...addLinksForAlphas(),
+    ...addFrequentlyLinkedDocs(),
   ];
 
   replace.sync({
@@ -221,11 +221,15 @@ function redefineEvaluateDecisionRequest(originalSpec) {
   ];
 }
 
-function addLinksForAlphas() {
+function addFrequentlyLinkedDocs() {
   // This task is inherently repeatable, because the `match` is replaced by something that won't match again.
 
   // Adds links to the Camunda Alpha REST API documentation, so that they don't have to live in the upstream spec.
   return [
+    {
+      from: /The Camunda 8 API \(REST\) Overview page/g,
+      to: "The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)",
+    },
     {
       from: /endpoint is an alpha feature/g,
       to: "endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md)",
