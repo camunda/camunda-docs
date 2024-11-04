@@ -34,7 +34,7 @@ When your Free Trial plan expires, you are automatically transferred to the Free
 
 Free Trial clusters are automatically paused after a period of inactivity. Auto-pause occurs regardless of cluster usage.
 
-You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume your cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
+You can resume a paused cluster at any time, which typically takes five to ten minutes to complete. See [resume a cluster](/components/console/manage-clusters/manage-cluster.md#resume-a-cluster).
 
 - Clusters tagged as `dev` (or untagged) auto-pause eight hours after the cluster is created or resumed from a paused state.
 - Clusters tagged as `test`, `stage`, or `prod` auto-pause if there is no cluster activity for 48 hours.
