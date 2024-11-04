@@ -10,9 +10,10 @@ function preGenerateDocs() {
   console.log("adjusting C8 spec file...");
 
   const specUpdates = [
-    addDisclaimer(),
+    ...addDisclaimer(originalSpec),
     ...redefineCreateProcessInstanceRequest(originalSpec),
     ...redefineEvaluateDecisionRequest(originalSpec),
+    ...addFrequentlyLinkedDocs(),
   ];
 
   replace.sync({
@@ -26,14 +27,26 @@ function postGenerateDocs() {
   removeDuplicateVersionBadge(`${outputDir}/camunda-8-rest-api.info.mdx`);
 }
 
-function addDisclaimer() {
+function addDisclaimer(originalSpec) {
+  // Make this a repeatable task by checking if it's run already.
+  if (
+    originalSpec.includes(
+      "Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation."
+    )
+  ) {
+    console.log("skipping addDisclaimer...");
+    return [];
+  }
+
   // Adds a disclaimer to the very beginning of the file, so that people know this isn't the true spec.
-  return {
-    from: /^/,
-    to: `# Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
+  return [
+    {
+      from: /^/,
+      to: `# Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
 
 `,
-  };
+    },
+  ];
 }
 
 function redefineCreateProcessInstanceRequest(originalSpec) {
@@ -204,6 +217,22 @@ function redefineEvaluateDecisionRequest(originalSpec) {
     EvaluateDecisionRequestBase:
       type: object
       properties:`,
+    },
+  ];
+}
+
+function addFrequentlyLinkedDocs() {
+  // This task is inherently repeatable, because the `match` is replaced by something that won't match again.
+
+  // Adds links to the Camunda Alpha REST API documentation, so that they don't have to live in the upstream spec.
+  return [
+    {
+      from: /The Camunda 8 API \(REST\) Overview page/g,
+      to: "The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)",
+    },
+    {
+      from: /endpoint is an alpha feature/g,
+      to: "endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md)",
     },
   ];
 }
