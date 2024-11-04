@@ -83,7 +83,7 @@ Following this tutorial and steps will result in:
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
 
-## 1. Provision the complete infrastructure for Camunda 8 on AWS
+## 1. Configure AWS and initialize Terraform
 
 ### Terraform prerequisites
 
