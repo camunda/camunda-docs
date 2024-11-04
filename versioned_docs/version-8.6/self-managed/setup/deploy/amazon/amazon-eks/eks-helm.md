@@ -459,6 +459,12 @@ This command:
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
 
+:::note
+
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
+
+:::
+
 You can track the progress of the installation using the following command:
 
 ```bash

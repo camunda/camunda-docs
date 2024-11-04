@@ -11,10 +11,6 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
-:::note
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
-:::
-
 ## Requirements
 
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
@@ -446,6 +442,12 @@ This command:
 - Installs (or upgrades) the Camunda platform using the Helm chart.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from `generated-values.yml`.
+
+:::note
+
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
+
+:::
 
 You can track the progress of the installation using the following command:
 
