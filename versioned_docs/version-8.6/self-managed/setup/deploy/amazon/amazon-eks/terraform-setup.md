@@ -19,9 +19,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 
 :::
 
-## 1. Introduction
-
-### Requirements
+## Requirements
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create any resources within AWS.
 - [AWS CLI (2.17+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
@@ -56,6 +54,21 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 :::
 
+### Variants
+
+We support two variants of this architecture:
+
+- The first, **standard installation**, utilizes a username and password connection for the Camunda components (or simply relies on network isolation for certain components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
+
+- The second variant, **IRSA** (IAM Roles for Service Accounts), uses service accounts to perform authentication with IAM policies. This approach offers stronger security and better integration with AWS services, as it eliminates the need to manage credentials manually. It is especially beneficial in environments with strict security requirements, where fine-grained access control and dynamic role-based access are essential.
+
+#### How to choose
+
+- If you prefer a simpler setup with basic authentication or network isolation, and your security needs are moderate, the **standard installation** is a suitable choice.
+- If you require enhanced security, dynamic role-based access management, and want to leverage AWS’s identity services for fine-grained control, the **IRSA** variant is the better option.
+
+Both can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
+
 ### Outcome
 
 <!-- TODO : add architecture diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) --->
@@ -70,43 +83,30 @@ Following this tutorial and steps will result in:
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
 
-#### Variants
-
-We support two variants of this architecture:
-
-- The first, **standard installation**, utilizes a username and password connection for the Camunda components (or simply relies on network isolation for certain components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
-
-- The second variant, **IRSA** (IAM Roles for Service Accounts), uses service accounts to perform authentication with IAM policies. This approach offers stronger security and better integration with AWS services, as it eliminates the need to manage credentials manually. It is especially beneficial in environments with strict security requirements, where fine-grained access control and dynamic role-based access are essential.
-
-##### How to choose
-
-- If you prefer a simpler setup with basic authentication or network isolation, and your security needs are moderate, the **standard installation** is a suitable choice.
-- If you require enhanced security, dynamic role-based access management, and want to leverage AWS’s identity services for fine-grained control, the **IRSA** variant is the better option.
-
-Both can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
-
-## 2. Provisioning the complete infrastructure for Camunda 8 on AWS
+## 1. Provision the complete infrastructure for Camunda 8 on AWS
 
 ### Terraform prerequisites
 
 To manage the infrastructure for Camunda 8 on AWS using Terraform, we need to set up Terraform's backend to store the state file remotely in an S3 bucket. This ensures secure and persistent storage of the state file.
 
-If you are an advanced user, you may want to handle this part differently and use a different backend. The backend setup provided is an example for new users.
+:::note
+Advanced users may want to handle this part differently and use a different backend. The backend setup provided is an example for new users.
+:::
 
-#### 1. Set Up AWS authentication
+#### Set up AWS authentication
 
 The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. Before you can use the provider, you must authenticate it using your AWS credentials.
 You can further change the region and other preferences and explore different [authentication](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication-and-configuration) methods.
 
-- **(Recommended)** Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). If you have configured your AWS CLI, Terraform will automatically detect and use those credentials.
+We recommend using the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html). If you have configured your AWS CLI, Terraform will automatically detect and use those credentials.
 
-  To configure the AWS CLI:
+To configure the AWS CLI:
 
-  ```bash
-  aws configure
-  ```
+```bash
+aws configure
+```
 
-  Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format which can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format. These can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
 
 :::caution Ownership of the created resources
 
@@ -116,11 +116,11 @@ A user who creates resources in AWS will always retain administrative access to 
 
 :::
 
-#### 2. Create an S3 bucket for Terraform state management
+#### Create an S3 bucket for Terraform state management
 
 Before setting up Terraform, you need to create an S3 bucket that will store the state file. This is important for collaboration and to prevent issues like state file corruption.
 
-You can optionally set the region as an environment variable upfront to avoid repeating it in each command:
+To start, set the region as an environment variable upfront to avoid repeating it in each command:
 
 ```bash
 export AWS_REGION=<your-region>
@@ -130,9 +130,9 @@ Replace `<your-region>` with your chosen AWS region (for example, `eu-central-1`
 
 Now, follow these steps to create the S3 bucket with versioning enabled:
 
-1. **Open your terminal** and ensure the AWS CLI is installed and configured.
+1. Open your terminal and ensure the AWS CLI is installed and configured.
 
-2. **Run the following command** to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
+2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
 
    ```bash
    # Replace "my-eks-tf-state" with your unique bucket name
@@ -142,20 +142,20 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
      --create-bucket-configuration LocationConstraint="$AWS_REGION"
    ```
 
-3. **Enable versioning** on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
+3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash
    aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region "$AWS_REGION"
    ```
 
-4. **Secure the bucket** by blocking public access:
+4. Secure the bucket by blocking public access:
 
    ```bash
    aws s3api put-public-access-block --bucket "$S3_TF_BUCKET_NAME" --public-access-block-configuration \
      "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region "$AWS_REGION"
    ```
 
-5. **Verify versioning** is enabled on the bucket:
+5. Verify versioning is enabled on the bucket:
 
    ```bash
    aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region "$AWS_REGION"
@@ -163,32 +163,32 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 
 This S3 bucket will now securely store your Terraform state files with versioning enabled.
 
-#### 3. Create a `config.tf` with the following setup
+#### Create a `config.tf` with the following setup
 
 Once the S3 bucket is created, configure your `config.tf` file to use the S3 backend for managing the Terraform state:
 
 <Tabs groupId="env">
-  <TabItem value="standard" label="Standard" default>
+<TabItem value="standard" label="Standard" default>
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/config.tf
 ```
 
-  </TabItem>
-  <TabItem value="irsa" label="IRSA">
+</TabItem>
+<TabItem value="irsa" label="IRSA">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/config.tf
 ```
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-#### 4. Initialize Terraform
+#### Initialize Terraform
 
-Once your `config.tf` and authentication are set up, you can initialize your Terraform project.
-In the previous steps, you have configured a dedicated S3 Bucket (`S3_TF_BUCKET_NAME`) to store your state, we will now configure the key that will be used by our config.
-This will configure the backend and download the necessary provider plugins:
+Once your `config.tf` and authentication are set up, you can initialize your Terraform project. The previous steps configured a dedicated S3 Bucket (`S3_TF_BUCKET_NAME`) to store your state, and the following creates a bucket key that will be used by your configuration.
+
+Configure the backend and download the necessary provider plugins:
 
 ```bash
 export S3_TF_BUCKET_KEY="camunda-terraform/terraform.tfstate"
@@ -210,160 +210,147 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-eks-module) 
 
 #### Set up the EKS cluster module
 
-1. **Create a `cluster.tf` file** in the same directory as your `config.tf` file.
-2. **Add the following content** to your newly created `cluster.tf` file to utilize the provided module:
+1. Create a `cluster.tf` file in the same directory as your `config.tf` file.
+2. Add the following content to your newly created `cluster.tf` file to utilize the provided module:
 
-<Tabs groupId="env">
-  <TabItem value="standard" label="Standard" default>
+   <Tabs groupId="env">
+   <TabItem value="standard" label="Standard" default>
 
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/cluster.tf
-```
+   ```hcl reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/cluster.tf
+   ```
 
-  </TabItem>
-  <TabItem value="irsa" label="IRSA">
+   </TabItem>
+   <TabItem value="irsa" label="IRSA">
 
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/cluster.tf
-```
+   ```hcl reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/cluster.tf
+   ```
 
-  </TabItem>
-</Tabs>
+   </TabItem>
+   </Tabs>
 
-3. **Initialize Terraform for this module**
+3. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
 
-Since you have added a module, you need to [initialize it](#3-initialize-terraform) using the Terraform command:
+   ```bash
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+   ```
 
-```bash
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
-```
+4. Configure user access to the cluster. By default, the user who creates the Amazon EKS cluster has administrative access.
 
-4. **Configure user access to the cluster**
+   <details>
+     <summary>Grant cluster access to other users</summary>
+     <p>
 
-By default, the user who creates the Amazon EKS cluster has administrative access.
+   If you want to grant access to other users, you can configure this by using the `access_entries` input.
 
-<details>
-  <summary>Grant cluster access to other users</summary>
-  <p>
+   Amazon EKS access management is divided into two distinct layers:
 
-If you want to grant access to other users, you can configure this by using the `access_entries` input.
+   - The **first layer** involves **AWS IAM permissions**, which allow basic Amazon EKS functionalities such as interacting with the Amazon EKS UI and generating EKS access through the AWS CLI. The module handles this part for you by creating the necessary IAM roles and policies.
 
-Amazon EKS access management is divided into two distinct layers:
+   - The **second layer** controls **cluster access** within Kubernetes, defining the user's permissions inside the cluster (for example, policy association). This can be configured directly through the module's `access_entries` input.
 
-- The **first layer** involves **AWS IAM permissions**, which allow basic Amazon EKS functionalities such as interacting with the Amazon EKS UI and generating EKS access through the AWS CLI. The module handles this part for you by creating the necessary IAM roles and policies.
+   To manage user access, use the `access_entries` configuration, introduced in module version [2.0.0](https://github.com/camunda/camunda-tf-eks-module/releases/tag/2.0.0):
 
-- The **second layer** controls **cluster access** within Kubernetes, defining the user's permissions inside the cluster (for example, policy association). This can be configured directly through the module's `access_entries` input.
+   ```hcl
+   access_entries = {
+     example = {
+       kubernetes_groups = []
+       principal_arn     = "<arn>"
 
-To manage user access, use the `access_entries` configuration, introduced in module version [2.0.0](https://github.com/camunda/camunda-tf-eks-module/releases/tag/2.0.0):
+       policy_associations = {
+         example = {
+           policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
+           access_scope = {
+             namespaces = ["default"]
+             type       = "namespace"
+           }
+         }
+       }
+     }
+   }
+   ```
 
-```hcl
-access_entries = {
-  example = {
-    kubernetes_groups = []
-    principal_arn     = "<arn>"
+   In this configuration:
 
-    policy_associations = {
-      example = {
-        policy_arn   = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSViewPolicy"
-        access_scope = {
-          namespaces = ["default"]
-          type       = "namespace"
-        }
-      }
-    }
-  }
-}
-```
+   - Replace `principal_arn` with the ARN of the IAM user or role.
+   - Use `policy_associations` to define policies for fine-grained access control.
 
-In this configuration:
+   For a full list of available policies, refer to the [AWS EKS Access Policies documentation](https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html).
 
-- Replace `principal_arn` with the ARN of the IAM user or role.
-- Use `policy_associations` to define policies for fine-grained access control.
+   :::info Module deprecation notice
+   Starting from version 2.x.x of this module, direct mappings through `aws_auth_roles` and `aws_auth_users` are no longer supported. If you are upgrading from version [1.x.x](https://github.com/camunda/camunda-tf-eks-module/releases/tag/1.0.3), you will need to fork the module and follow AWS's official instructions for managing the `aws-auth` ConfigMap.
 
-For a full list of available policies, refer to the [AWS EKS Access Policies documentation](https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html).
+   For more details, refer to the [official upgrade guide](https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/docs/UPGRADE-20.0.md).
+   :::
 
-:::info Module deprecation notice
-Starting from version 2.x.x of this module, direct mappings through `aws_auth_roles` and `aws_auth_users` are no longer supported. If you are upgrading from version [1.x.x](https://github.com/camunda/camunda-tf-eks-module/releases/tag/1.0.3), you will need to fork the module and follow AWS's official instructions for managing the `aws-auth` ConfigMap.
+   </p>
+   </details>
 
-For more details, refer to the [official upgrade guide](https://github.com/terraform-aws-modules/terraform-aws-eks/blob/master/docs/UPGRADE-20.0.md).
-:::
-
-</p>
-</details>
-
-5. **Customize the cluster setup:**
-
-   The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/eks-cluster/README.md).
+5. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [EKS module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/eks-cluster/README.md).
 
 ### PostgreSQL module setup
 
 :::info Optional module
 
-If you don't want to use this module, you can skip this section.
-However, note that you may need to adjust the following instructions to remove references to this module.
+If you don't want to use this module, you can skip this section. However, you may need to adjust the remaining instructions to remove references to this module.
 
-If you choose not to use this module, you'll need to either provide a managed PostgreSQL service or use the internal deployment by the Camunda Helm chart in Kubernetes.
-
+If you choose not to use this module, you must either provide a managed PostgreSQL service or use the internal deployment by the Camunda Helm chart in Kubernetes.
 :::
 
 We separated the cluster and PostgreSQL modules to offer you more customization options.
 
 #### Set up the Aurora PostgreSQL module
 
-1. **Create a `db.tf` file** in the same directory as your `config.tf` file.
-2. **Add the following content** to your newly created `db.tf` file to utilize the provided module:
+1. Create a `db.tf` file in the same directory as your `config.tf` file.
+2. Add the following content to your newly created `db.tf` file to utilize the provided module:
 
-<Tabs groupId="env">
-  <TabItem value="standard" label="Standard" default>
+   <Tabs groupId="env">
+     <TabItem value="standard" label="Standard" default>
 
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/db.tf
-```
+   ```hcl reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/db.tf
+   ```
 
-  </TabItem>
-  <TabItem value="irsa" label="IRSA">
+     </TabItem>
+     <TabItem value="irsa" label="IRSA">
 
-In addition to using standard username and password authentication, you can opt to use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) for secure, role-based access to your Aurora database. This method allows your EKS workloads to assume IAM roles without needing to manage AWS credentials directly.
+   In addition to using standard username and password authentication, you can opt to use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) for secure, role-based access to your Aurora database. This method allows your EKS workloads to assume IAM roles without needing to manage AWS credentials directly.
 
-:::note
-Using IRSA is optional. If preferred, you can continue using traditional password-based authentication for database access.
-:::
+   :::note
+   Using IRSA is optional. If preferred, you can continue using traditional password-based authentication for database access.
+   :::
 
-If you choose to use IRSA, you’ll need to take note of the **IAM role** created for Aurora and the **AWS Account ID**, as these will be used later to annotate the Kubernetes service account.
+   If you choose to use IRSA, you’ll need to take note of the **IAM role** created for Aurora and the **AWS Account ID**, as these will be used later to annotate the Kubernetes service account.
 
-##### Aurora IRSA role and policy
+   ##### Aurora IRSA role and policy
 
-The Aurora module uses outputs from the EKS cluster module to configure the IRSA role and policy. Below are the required parameters:
+   The Aurora module uses outputs from the EKS cluster module to configure the IRSA role and policy. Below are the required parameters:
 
-Here’s how to define the IAM role trust policy and access policy for Aurora:
+   Here’s how to define the IAM role trust policy and access policy for Aurora:
 
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/db.tf
-```
+   ```hcl reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/db.tf
+   ```
 
-Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_aurora_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
+   Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_aurora_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
 
-</TabItem>
-</Tabs>
+   </TabItem>
+   </Tabs>
 
-3. **Initialize Terraform for this module**
+3. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
 
-Since you have added a module, you need to [initialize it](#3-initialize-terraform) using the Terraform command:
+   ```bash
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+   ```
 
-```bash
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
-```
-
-5. **Customize the Aurora cluster setup:**
-
-You can further customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/aurora/README.md) for more details on other customization options.
+4. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/aurora/README.md) for more details on other customization options.
 
 ### OpenSearch module setup
 
 :::info Optional module
 
-If you don't want to use this module, you can skip this section.
-However, note that you may need to adjust the following instructions to remove references to this module.
+If you don't want to use this module, you can skip this section. However, you may need to adjust the remaining instructions to remove references to this module.
 
 If you choose not to use this module, you'll need to either provide a managed Elasticsearch or OpenSearch service or use the internal deployment by the Camunda Helm chart in Kubernetes.
 :::
@@ -378,70 +365,66 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
 
 #### Set up the OpenSearch domain module
 
-1. **Create a `opensearch.tf` file** in the same directory as your `config.tf` file.
-2. **Add the following content** to your newly created `opensearch.tf` file to utilize the provided module:
+1. Create a `opensearch.tf` file in the same directory as your `config.tf` file.
+1. Add the following content to your newly created `opensearch.tf` file to utilize the provided module:
 
-<Tabs groupId="env">
-  <TabItem value="standard" label="Standard" default>
+   <Tabs groupId="env">
+     <TabItem value="standard" label="Standard" default>
 
-:::caution Network based security
-The standard deployment for OpenSearch relies on the first layer of security, which is the Network.
-While this setup allows easy access, it may expose sensitive data. To enhance security, consider implementing IAM Roles for Service Accounts (IRSA) to restrict access to the OpenSearch cluster, providing a more secure environment.
-For more information, see the [Amazon OpenSearch Service Fine-Grained Access Control documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-access-policies).
-:::
+   :::caution Network based security
+   The standard deployment for OpenSearch relies on the first layer of security, which is the Network.
+   While this setup allows easy access, it may expose sensitive data. To enhance security, consider implementing IAM Roles for Service Accounts (IRSA) to restrict access to the OpenSearch cluster, providing a more secure environment.
+   For more information, see the [Amazon OpenSearch Service Fine-Grained Access Control documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-access-policies).
+   :::
 
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/opensearch.tf
-```
+   ```hcl reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/opensearch.tf
+   ```
 
-  </TabItem>
-  
-  <TabItem value="irsa" label="IRSA">
+     </TabItem>
+     
+     <TabItem value="irsa" label="IRSA">
 
-In addition to standard authentication, which uses anonymous users and relies on the network for access control, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
+   In addition to standard authentication, which uses anonymous users and relies on the network for access control, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
 
-:::note
-Using IRSA is optional. If you prefer, you can continue using password-based access to your OpenSearch domain.
-:::
+   :::note
+   Using IRSA is optional. If you prefer, you can continue using password-based access to your OpenSearch domain.
+   :::
 
-If you choose to use IRSA, you’ll need to take note of the **IAM role name** created for OpenSearch and the **AWS Account ID**, as these will be required later to annotate the Kubernetes service account.
+   If you choose to use IRSA, you’ll need to take note of the **IAM role name** created for OpenSearch and the **AWS Account ID**, as these will be required later to annotate the Kubernetes service account.
 
-##### OpenSearch IRSA role and policy
+   ##### OpenSearch IRSA role and policy
 
-To configure IRSA for OpenSearch, the OpenSearch module uses outputs from the EKS cluster module to define the necessary IAM role and policies.
+   To configure IRSA for OpenSearch, the OpenSearch module uses outputs from the EKS cluster module to define the necessary IAM role and policies.
 
-Here's an example of how to define the IAM role trust policy and access policy for OpenSearch, this configuration will deploy an OpenSearch domain with advanced security enabled:
+   Here's an example of how to define the IAM role trust policy and access policy for OpenSearch, this configuration will deploy an OpenSearch domain with advanced security enabled:
 
-```hcl reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/opensearch.tf
-```
+   ```hcl reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/opensearch.tf
+   ```
 
-Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
+   Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
 
-As the OpenSearch domain has advanced security enabled and [fine-grained access control](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html), we will later use your provided master username (`advanced_security_master_user_name`) and password (`advanced_security_master_user_password`) to perform the initial setup of the security component, allowing the created IRSA role to access the domain.
+   As the OpenSearch domain has advanced security enabled and [fine-grained access control](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html), we will later use your provided master username (`advanced_security_master_user_name`) and password (`advanced_security_master_user_password`) to perform the initial setup of the security component, allowing the created IRSA role to access the domain.
 
-</TabItem>
-</Tabs>
+   </TabItem>
+   </Tabs>
 
-3. **Initialize Terraform for this module**
+1. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
 
-Since you have added a module, you need to [initialize it](#3-initialize-terraform) using the Terraform command:
+   ```bash
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
+   ```
 
-```bash
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
-```
+1. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/opensearch/README.md).
 
-4. **Customize the cluster setup:**
-
-You can further customize the OpenSearch cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/opensearch/README.md).
-
-### Outputs
+### Define outputs
 
 **Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as database endpoints and other necessary configurations for Helm setup.
 
-Each module that you have previously setup contains at the end the definition of the outputs. You can adjust them to your needs.
+Each module that you have previously set up contains an output definition at the end of the file. You can adjust them to your needs.
 
-These outputs will allow you to easily reference the **cert-manager** ARN, **external-dns** ARN, and the endpoints for both **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
+Outputs allow you to easily reference the **cert-manager** ARN, **external-dns** ARN, and the endpoints for both **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
 
 ### Execution
 
@@ -455,17 +438,17 @@ We strongly recommend managing sensitive information such as the OpenSearch, Aur
 
 2. Plan the configuration files:
 
-```bash
-terraform plan -out cluster.plan # describe what will be created
-```
+   ```bash
+   terraform plan -out cluster.plan # describe what will be created
+   ```
 
 3. After reviewing the plan, you can confirm and apply the changes.
 
-```bash
-terraform apply cluster.plan     # apply the creation
-```
+   ```bash
+   terraform apply cluster.plan     # apply the creation
+   ```
 
-At this point, Terraform will create the Amazon EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes for each component.
+Terraform will now create the Amazon EKS cluster with all the necessary configurations. The completion of this process may require approximately 20-30 minutes for each component.
 
 ### Reference files
 
@@ -474,7 +457,7 @@ Depending on the installation path you have chosen, you can find the reference f
 - **Standard installation:** [Reference Files](https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/)
 - **IRSA Installation:** [Reference Files](https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/)
 
-## 3. Preparation for Camunda 8 installation
+## 2. Preparation for Camunda 8 installation
 
 ### Access the created EKS cluster
 
@@ -486,18 +469,19 @@ export CLUSTER_NAME="$(terraform console <<<local.eks_cluster_name | jq -r)"
 aws eks --region "$AWS_REGION" update-kubeconfig --name "$CLUSTER_NAME" --alias "$CLUSTER_NAME"
 ```
 
-After updating the kubeconfig, you can verify your connection to the cluster with kubectl:
+After updating the kubeconfig, you can verify your connection to the cluster with `kubectl`:
 
 ```shell
 kubectl get nodes
 ```
 
-Ensure a namespace exists for Camunda.
-In the following procedure, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+Create a namespace for Camunda:
 
 ```shell
 kubectl create namespace camunda
 ```
+
+In the remainder of the guide, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ### Export values for the Helm chart
 
@@ -539,101 +523,112 @@ As you now have a database, you need to create dedicated databases for each Camu
 
 You can access the created database in two ways:
 
-1. **Bastion host**: Set up a bastion host within the same network to securely access the database.
-2. **Pod within the EKS cluster**: Alternatively, deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database.
+1. Set up a bastion host within the same network to securely access the database.
+2. Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database.
 
-The choice depends on your infrastructure setup and security preferences. In this tutorial, we'll use a pod within the EKS cluster to configure the database.
+The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the EKS cluster to configure the database.
 
-1. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the setup manifest.
+1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
-```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/vars-create-db.sh
-```
+   ```bash reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/vars-create-db.sh
+   ```
 
-A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
+   A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
 
-<Tabs groupId="env">
-  <TabItem value="standard" label="Standard" default>
+2. Create a secret that references the environment variables:
 
-2. **Create a secret that references the environment variables**:
+   <Tabs groupId="env">
+     <TabItem value="standard" label="Standard" default>
 
-```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/create-setup-db-secret.sh
-```
+   ```bash reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/create-setup-db-secret.sh
+   ```
 
-This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
+   This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
 
-After running the above command, you can verify that the secret was created successfully by using:
+   After running the above command, you can verify that the secret was created successfully by using:
 
-```bash
-kubectl get secret setup-db-secret -o yaml --namespace camunda
-```
+   ```bash
+   kubectl get secret setup-db-secret -o yaml --namespace camunda
+   ```
 
-This should display the secret with the base64 encoded values.
+   This should display the secret with the base64 encoded values.
 
-3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
+   </TabItem>
 
-```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/setup-postgres-create-db.yml
-```
+   <TabItem value="irsa" label="IRSA">
 
-</TabItem>
+   ```bash reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/procedure/create-setup-db-secret.sh
+   ```
 
-<TabItem value="irsa" label="IRSA">
+   This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
 
-2. **Create a secret that references the environment variables**:
+   After running the above command, you can verify that the secret was created successfully by using:
 
-```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/procedure/create-setup-db-secret.sh
-```
+   ```bash
+   kubectl get secret setup-db-secret -o yaml --namespace camunda
+   ```
 
-This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
+   This should display the secret with the base64 encoded values.
 
-After running the above command, you can verify that the secret was created successfully by using:
+   </TabItem>
+   </Tabs>
 
-```bash
-kubectl get secret setup-db-secret -o yaml --namespace camunda
-```
+3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`.
 
-This should display the secret with the base64 encoded values.
+   <Tabs groupId="env" queryString values={
+   [
+   {label: 'Standard', value: 'standard' },
+   {label: 'IRSA', value: 'irsa' },
+   ]}>
+   <TabItem value="standard">
 
-3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
+   ```yaml reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/setup-postgres-create-db.yml
+   ```
 
-```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/setup-postgres-create-db.yml
-```
+   </TabItem>
+   <TabItem value="irsa">
 
-  </TabItem>
-</Tabs>
+   ```yaml reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/setup-postgres-create-db.yml
+   ```
 
-4. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
+   </TabItem>
+   </Tabs>
 
-```bash
-kubectl apply -f setup-postgres-create-db.yml --namespace camunda
-```
+4. Apply the manifest:
 
-5. **Verify the job's completion**: Once the job is created, you can monitor its progress using:
+   ```bash
+   kubectl apply -f setup-postgres-create-db.yml --namespace camunda
+   ```
 
-```bash
-kubectl get job/create-setup-user-db --namespace camunda --watch
-```
+   Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
-Once the job shows as `Completed`, the users and databases will have been successfully created.
+5. Once the job is created, monitor its progress using:
 
-6. **Check logs for confirmation**: You can view the logs of the job to confirm that the users were created and privileges were granted successfully:
+   ```bash
+   kubectl get job/create-setup-user-db --namespace camunda --watch
+   ```
 
-```bash
-kubectl logs job/create-setup-user-db --namespace camunda
-```
+   Once the job shows as `Completed`, the users and databases will have been successfully created.
 
-7. **Cleanup the resources:**
+6. View the logs of the job to confirm that the users were created and privileges were granted successfully:
 
-```bash
-kubectl delete job create-setup-user-db --namespace camunda
-kubectl delete secret setup-db-secret --namespace camunda
-```
+   ```bash
+   kubectl logs job/create-setup-user-db --namespace camunda
+   ```
 
-By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+7. Clean up the resources:
+
+   ```bash
+   kubectl delete job create-setup-user-db --namespace camunda
+   kubectl delete secret setup-db-secret --namespace camunda
+   ```
+
+Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
 ### Configure OpenSearch fine grained access controle
 
@@ -641,81 +636,83 @@ As you now have an OpenSearch domain, you need to configure the related access f
 
 You can access the created OpenSearch domain in two ways:
 
-1. **Bastion host**: Set up a bastion host within the same network to securely access the OpenSearch domain.
-2. **Pod within the EKS cluster**: Alternatively, deploy a pod in your EKS cluster equipped with the necessary tools to connect to the OpenSearch domain.
+1. Set up a bastion host within the same network to securely access the OpenSearch domain.
+2. Alternatively, deploy a pod in your EKS cluster equipped with the necessary tools to connect to the OpenSearch domain.
 
 The choice depends on your infrastructure setup and security preferences. In this tutorial, we'll use a pod within the EKS cluster to configure the domain.
 
 <Tabs groupId="env">
   <TabItem value="standard" label="Standard" default>
 
-The standard installation comes already pre-configured, you don't need to perform any other extra-steps.
+The standard installation comes already pre-configured, and no additional steps are required.
 
   </TabItem>
   <TabItem value="irsa" label="IRSA">
 
-1. **Set the environment variables**: In your terminal, set the necessary environment variables that will be substituted in the setup manifest.
+1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
-```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/procedure/vars-create-os.sh
-```
+   ```bash reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/procedure/vars-create-os.sh
+   ```
 
-A **Kubernetes job** will connects to the OpenSearch dommain and configure it.
+   A **Kubernetes job** will connect to the OpenSearch dommain and configure it.
 
-2. **Create a secret that references the environment variables**:
+1. Create a secret that references the environment variables:
 
-```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/procedure/create-setup-os-secret.sh
-```
+   ```bash reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/procedure/create-setup-os-secret.sh
+   ```
 
-This command creates a secret named `setup-os-secret` and dynamically populates it with the values from your environment variables.
+   This command creates a secret named `setup-os-secret` and dynamically populates it with the values from your environment variables.
 
-After running the above command, you can verify that the secret was created successfully by using:
+   After running the above command, you can verify that the secret was created successfully by using:
 
-```bash
-kubectl get secret setup-os-secret -o yaml --namespace camunda
-```
+   ```bash
+   kubectl get secret setup-os-secret -o yaml --namespace camunda
+   ```
 
-This should display the secret with the base64 encoded values.
+   This should display the secret with the base64 encoded values.
 
-3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-opensearch-fgac.yml`.
+1. Save the following manifest to a file, for example, `setup-opensearch-fgac.yml`.
 
-```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/setup-opensearch-fgac.yml
-```
+   ```yaml reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/setup-opensearch-fgac.yml
+   ```
 
-4. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the OpenSearch domain credentials.
+1. Apply the manifest:
 
-```bash
-kubectl apply -f setup-opensearch-fgac.yml --namespace camunda
-```
+   ```bash
+   kubectl apply -f setup-opensearch-fgac.yml --namespace camunda
+   ```
 
-5. **Verify the job's completion**: Once the job is created, you can monitor its progress using:
+   Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the OpenSearch domain credentials.
 
-```bash
-kubectl get job/setup-opensearch-fgac --namespace camunda --watch
-```
+1. Once the job is created, monitor its progress using:
 
-Once the job shows as `Completed`, the OpenSearch domain is configured correctly for fine grained access control.
+   ```bash
+   kubectl get job/setup-opensearch-fgac --namespace camunda --watch
+   ```
 
-6. **Check logs for confirmation**: You can view the logs of the job to confirm that the privileges were granted successfully:
+   Once the job shows as `Completed`, the OpenSearch domain is configured correctly for fine grained access control.
 
-```bash
-kubectl logs job/setup-opensearch-fgac --namespace camunda
-```
+1. View the logs of the job to confirm that the privileges were granted successfully:
 
-7. **Clean up the resources:**
+   ```bash
+   kubectl logs job/setup-opensearch-fgac --namespace camunda
+   ```
 
-```bash
-kubectl delete job setup-opensearch-fgac --namespace camunda
-kubectl delete secret setup-os-secret --namespace camunda
-```
+1. Clean up the resources:
 
-By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+   ```bash
+   kubectl delete job setup-opensearch-fgac --namespace camunda
+   kubectl delete secret setup-os-secret --namespace camunda
+   ```
+
+Running these commands will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
 </TabItem>
 </Tabs>
 
-## 4. Install Camunda 8 using the Helm chart
+## 3. Install Camunda 8 using the Helm chart
 
 Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on Kubernetes](./eks-helm.md) for detailed instructions on deploying the platform to your Kubernetes cluster.
