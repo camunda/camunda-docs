@@ -526,9 +526,9 @@ You can access the created database in two ways:
 1. Set up a bastion host within the same network to securely access the database.
 2. Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database.
 
-   The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the EKS cluster to configure the database.
+The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the EKS cluster to configure the database.
 
-3. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
+1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
    ```bash reference
    https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/vars-create-db.sh
@@ -536,7 +536,7 @@ You can access the created database in two ways:
 
    A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
 
-4. Create a secret that references the environment variables:
+2. Create a secret that references the environment variables:
 
    <Tabs groupId="env">
      <TabItem value="standard" label="Standard" default>
@@ -576,7 +576,7 @@ You can access the created database in two ways:
    </TabItem>
    </Tabs>
 
-5. Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
+3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`.
 
    <Tabs groupId="env" queryString values={
    [
@@ -599,7 +599,7 @@ You can access the created database in two ways:
    </TabItem>
    </Tabs>
 
-6. Apply the manifest:
+4. Apply the manifest:
 
    ```bash
    kubectl apply -f setup-postgres-create-db.yml --namespace camunda
@@ -607,7 +607,7 @@ You can access the created database in two ways:
 
    Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
-7. Once the job is created, monitor its progress using:
+5. Once the job is created, monitor its progress using:
 
    ```bash
    kubectl get job/create-setup-user-db --namespace camunda --watch
@@ -615,13 +615,13 @@ You can access the created database in two ways:
 
    Once the job shows as `Completed`, the users and databases will have been successfully created.
 
-8. View the logs of the job to confirm that the users were created and privileges were granted successfully:
+6. View the logs of the job to confirm that the users were created and privileges were granted successfully:
 
    ```bash
    kubectl logs job/create-setup-user-db --namespace camunda
    ```
 
-9. Clean up the resources:
+7. Clean up the resources:
 
    ```bash
    kubectl delete job create-setup-user-db --namespace camunda

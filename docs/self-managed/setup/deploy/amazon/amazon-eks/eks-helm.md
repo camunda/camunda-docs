@@ -84,7 +84,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-
 
 </Tabs>
 
-## Optional Ingress Setup
+## (Optional) Ingress Setup
 
 :::info Domain or domainless installation
 
