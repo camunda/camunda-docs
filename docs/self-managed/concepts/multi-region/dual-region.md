@@ -149,9 +149,9 @@ This means the Zeebe stretch cluster will not have a quorum when half of its bro
 
 The [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) looks in detail at a recovery from a region loss and how to long-term fully re-establish the lost region.
 
-::caution
+:::caution
 Customers are expected to proactively monitor for regional failures and take ownership of executing the necessary [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md) to ensure smooth recovery and failover.
-::
+:::
 
 ### Active region loss
 
