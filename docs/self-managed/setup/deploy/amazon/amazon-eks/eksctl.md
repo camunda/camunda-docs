@@ -24,6 +24,9 @@ This guide provides a user-friendly approach for setting up and managing Amazon 
 
 This is a basic setup to get started with Camunda 8 but does not reflect a high performance setup. For a better starting point towards production, we recommend utilizing [Infrastructure as Code tooling](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code) and following our [Terraform guide](./terraform-setup.md).
 
+We refer to this architecture as the **standard installation**, which can be set up with or without a **domain** ([Ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
+The standard installation utilizes a username and password connection for the Camunda components (or simply relies on network isolation for certain components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
+
 To try out Camunda 8 or develop against it, consider signing up for our [SaaS offering](https://camunda.com/platform/), or if you already have an Amazon EKS cluster, consider skipping to the [Helm guide](./eks-helm.md).
 
 While the guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
@@ -33,10 +36,6 @@ While the guide is primarily tailored for UNIX systems, it can also be run under
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 
 :::
-
-### Variants
-
-We refer to this architecture as the [standard installation](./terraform-setup.md#variants), which can be set up with or without a **domain** ([Ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
 
 ### Outcome
 
