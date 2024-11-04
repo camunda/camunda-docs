@@ -8,11 +8,11 @@ description: "Learn about this component and contact point of the Zeebe cluster 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The Zeebe Gateway is a component of the Zeebe cluster; it can be considered the contact point for the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster. For more information about the Zeebe broker, visit our [additional documentation](../../../components/zeebe/technical-concepts/architecture.md#brokers).
+The Zeebe Gateway is a component of the Zeebe cluster; it can be considered the contact point for the Zeebe cluster which allows Zeebe clients to communicate with Zeebe brokers inside a Zeebe cluster. For more information about the Zeebe Broker, visit our [additional documentation](../../../components/zeebe/technical-concepts/architecture.md#brokers).
 
-To summarize, the Zeebe broker is the main part of the Zeebe cluster, which does all the heavy work like processing, replicating, exporting, and everything based on partitions. The Zeebe Gateway acts as a load balancer and router between Zeebe’s processing partitions.
+To summarize, the Zeebe Broker is the main part of the Zeebe cluster, which does all the heavy work like processing, replicating, exporting, and everything based on partitions. The Zeebe Gateway acts as a load balancer and router between Zeebe’s processing partitions.
 
-![Zeebe gateway overview](assets/zeebe-gateway-overview.png)
+![Zeebe Gateway overview](assets/zeebe-gateway-overview.png)
 
 To interact with the Zeebe cluster, the Zeebe client sends a command to the gateway either as a gRPC message (to port `26500` by default), or a plain HTTP request to its REST API (to port `8080` by default). Given the gateway supports gRPC as well as an OpenAPI spec, the user can use several clients in different languages to interact with the Zeebe cluster. For more information, read our [overview](../../../apis-tools/working-with-apis-tools.md).
 
@@ -42,7 +42,7 @@ The Zeebe Gateway can be run in two different ways: embedded and standalone.
 
 <TabItem value="embedded">
 
-Running the gateway in embedded mode means it will run as part of the Zeebe broker. The broker will accept gRPC client messages via the embedded gateway and distribute the translated requests inside the cluster. This means the request accepted by the embedded gateway does not necessarily go to the same broker, where the embedded gateway is running.
+Running the gateway in embedded mode means it will run as part of the Zeebe Broker. The broker will accept gRPC client messages via the embedded gateway and distribute the translated requests inside the cluster. This means the request accepted by the embedded gateway does not necessarily go to the same broker, where the embedded gateway is running.
 
 The embedded gateway is useful for development and testing purposes, and to reduce the burden of deploying and running multiple applications. For example, in [zeebe-process-test](https://github.com/camunda/zeebe-process-test) an embedded gateway is used to accept the client commands and write directly to the engine.
 

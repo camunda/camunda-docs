@@ -125,7 +125,7 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 
 ### Configure the Zeebe client
 
-Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
+Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe Broker:
 
 ```yaml
 camunda:
