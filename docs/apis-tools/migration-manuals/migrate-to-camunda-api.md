@@ -63,7 +63,7 @@ V2 endpoint to use: POST /v2/user-tasks/search
 Input adjustments:
 
 - Filter attribute `assigned (boolean)` removed
-  - Use filter attribute `assignee` with condition `{ “$exists”: false }`
+  - Use filter attribute `assignee` with condition `{ "$exists": false }`
 - Filter attribute `assignees (string[])` removed
   - Use filter attribute `assignee` with condition `{ “$in”: [ “xyz”, ... ] }`
 - Filter attribute `taskDefinitionId` renamed
