@@ -80,5 +80,5 @@ You can resume a paused cluster at any time, which typically takes five to ten m
 - No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until you resume the cluster.
 
 :::tip
-To prevent auto-pause, [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
+To prevent auto-pause, [upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
 :::
