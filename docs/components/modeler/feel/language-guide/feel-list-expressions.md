@@ -180,7 +180,7 @@ for p in distinct values(invoices.person) return invoices[person = p]
     { id: 5, person: "B", amount: 15 },
     { id: 6, person: "B", amount: 25 },
   ],
-];
+]
 ```
 
 ### Merge two lists
@@ -219,5 +219,5 @@ The result is a list that contains all context values grouped by the identifier.
   { id: 1, content: "a2" },
   { id: 2, content: "b" },
   { id: 3, content: "c" },
-];
+]
 ```

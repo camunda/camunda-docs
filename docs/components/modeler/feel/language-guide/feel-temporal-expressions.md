@@ -508,13 +508,13 @@ for d in dates return {
 #### Evaluation context
 
 ```feel
-["2021-04-21T07:25:06.000Z", "2021-04-22T07:25:06.000Z"];
+["2021-04-21T07:25:06.000Z", "2021-04-22T07:25:06.000Z"]
 ```
 
 #### Evaluation result
 
 ```feel
-["21-Apr-2021", "22-Apr-2021"];
+["21-Apr-2021", "22-Apr-2021"]
 ```
 
 ### Create a Unix timestamp
@@ -528,5 +528,5 @@ Return the current point in time as a Unix timestamp.
 #### Evaluation result
 
 ```feel
-1618200039000;
+1618200039000
 ```
