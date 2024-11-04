@@ -8,11 +8,11 @@ This guide explores the streamlined process of deploying Camunda 8 Self-Managed 
 
 [Eksctl](https://eksctl.io/) is a common CLI tool for quickly creating and managing your Amazon EKS clusters and is [officially endorsed](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html) by Amazon.
 
-While this guide is suitable for testing purposes, building a robust, scalable, and reproducible infrastructure is better achieved using Infrastructure as Code (IaC) tools like those described in the [Terraform Guide](./terraform-setup.md), which offers more flexibility and control over your cloud environment.
+While this guide is suitable for testing purposes, building a robust, scalable, and reproducible infrastructure is better achieved using Infrastructure as Code (IaC) tools like those described in the [Terraform guide](./terraform-setup.md), which offers more flexibility and control over your cloud environment.
 
 This guide provides a user-friendly approach for setting up and managing Amazon EKS clusters. It covers everything from the prerequisites, such as AWS IAM role configuration, to creating a fully functional Amazon EKS cluster and a managed Aurora PostgreSQL instance. Ideal for those seeking a practical and efficient method to deploy Camunda 8 on AWS, this guide provides detailed instructions for setting up the necessary environment and AWS IAM configurations.
 
-## 1. Prerequisites
+## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
@@ -34,11 +34,15 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 :::
 
+### Variants
+
+We refer to this architecture as the [standard installation](./terraform-setup.md#variants), which can be set up with or without a **domain** ([Ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
+
 ### Outcome
 
 <!-- TODO : add architecture diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) --->
 
-Following this guide results in the following:
+This guide results in the following:
 
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
@@ -50,15 +54,11 @@ Following this guide results in the following:
 
 This basic cluster setup is required to continue with the Helm set up as described in our [AWS Helm guide](./eks-helm.md).
 
-#### Variants
+## 1. Provision the complete infrastructure for Camunda 8 on AWS
 
-We refer to this architecture as [**standard installation**](./terraform-setup.md#variants), which can be set up with or without a **Domain** ([ingress](https://docs.aws.amazon.com/eks/latest/userguide/alb-ingress.html)).
+### Set up AWS authentication
 
-## 2. Provisioning the complete infrastructure for Camunda 8 on AWS
-
-### Set Up AWS authentication
-
-Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html).
+Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) to run the following commands:
 
 ```bash
 # set your region
@@ -67,20 +67,20 @@ export AWS_REGION="eu-central-1"
 aws configure
 ```
 
-Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, and output format which can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, and output format. These can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
 
 :::caution Ownership of the created resources
 
 A user who creates resources in AWS will always retain administrative access to those resources, including any Kubernetes clusters. It is recommended to create a dedicated [AWS IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) to ensure that the resources are managed and owned by that specific user.
 This ensures that the user maintains admin access to Kubernetes and associated resources unless those resources are explicitly deleted.
 
-[Create access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables to use with the AWS CLI and `eksctl`
+[Create access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` variables to use with the AWS CLI and `eksctl`.
 
 :::
 
-### Setup eksctl
+### Set up eksctl
 
-The [eksctl](https://eksctl.io/) is a tool that allows the creation of clusters via a single command, but this doesn't support all configuration options. Therefore, we're supplying a YAML file that can be used with the CLI to create the cluster preconfigured with various settings.
+[eksctl](https://eksctl.io/) is a tool that allows the creation of clusters via a single command, but does not support all configuration options. This setup supplies a YAML file that can be used with the CLI to create the cluster preconfigured with various settings.
 
 Review the [installation guide](https://eksctl.io/installation/) for additional details.
 
@@ -89,7 +89,7 @@ Review the [installation guide](https://eksctl.io/installation/) for additional 
 In this guide, we will set up multiple environment variables to configure the components.
 Each component starts with a section that configures the different variables according to your needs.
 
-## 3. EKS cluster
+## 2. EKS cluster
 
 ### Configuration
 
@@ -291,7 +291,7 @@ The created policy `BasicEKSPermissions` has to be assigned to a group, a role, 
 
 By default, the user creating the Amazon EKS cluster has admin access. To allow other users to access it, we have to adjust the `aws-auth` configmap. This can either be done manually via `kubectl` or via `eksctl`. In the following sections, we explain how to do this.
 
-##### eksctl
+#### eksctl
 
 With `eksctl`, you can create an AWS IAM user to Kubernetes role mapping with the following command:
 
@@ -321,7 +321,7 @@ eksctl create iamidentitymapping \
 
 More information about usage and other configuration options can be found in the [eksctl documentation](https://eksctl.io/usage/iam-identity-mappings/).
 
-##### kubectl
+#### kubectl
 
 The same can also be achieved by using `kubectl` and manually adding the mapping as part of the `mapRoles` or `mapUsers` section.
 
@@ -336,81 +336,82 @@ For detailed examples, review the [documentation provided by AWS](https://docs.a
 
 ### Access the created EKS cluster
 
-You can gain access to the Amazon EKS cluster via the `AWS CLI` using the following command:
+Access the Amazon EKS cluster via the `AWS CLI` using the following command:
 
 ```shell
 aws eks --region "$REGION" update-kubeconfig --name "$CLUSTER_NAME" --alias "$CLUSTER_NAME"
 ```
 
-After updating the kubeconfig, you can verify your connection to the cluster with kubectl:
+After updating the kubeconfig, verify your connection to the cluster with `kubectl`:
 
 ```shell
 kubectl get nodes
 ```
 
-Ensure a namespace exists for Camunda.
-In the following procedure, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+Create a namespace for Camunda:
 
 ```shell
 kubectl create namespace camunda
 ```
 
+In the remainder of the guide, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+
 ### Check existing StorageClasses
 
-To see the available **StorageClasses** in your Kubernetes cluster, including which one is set as default, use the following command:
+We recommend using **gp3** volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)). It may be necessary to create the `gp3` StorageClass, as the default configuration only includes **gp2**. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
+
+To see the available StorageClasses in your Kubernetes cluster, including which one is set as default, use the following command:
 
 ```bash
 kubectl describe storageclass
 ```
 
-#### StorageClass
+To check if `gp3` is set as the default StorageClass, look for the annotation `storageclass.kubernetes.io/is-default-class: "true"` in the output of the previous command.
 
-To check if `gp3` is set as the default StorageClass, you can look for the annotation `storageclass.kubernetes.io/is-default-class: "true"` in the output of the previous command. If `gp3` is not installed or not set as default StorageClass, you need to install it and set it as default.
+If `gp3` is not installed, or is not set as the default StorageClass, complete the following steps to install it and set it as default:
 
-We recommend using **gp3** volumes with Camunda 8 (see [volume performance](./amazon-eks.md#volume-performance)).
-It may be necessary to create the StorageClass, as the default configuration only includes **gp2**. For detailed information, refer to the [AWS documentation](https://aws.amazon.com/ebs/general-purpose/).
+1. Create the `gp3` StorageClass:
 
-#### Create `gp3` StorageClass
+   ```shell
+   cat << EOF | kubectl apply -f -
+   ---
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: ebs-sc
+     annotations:
+       storageclass.kubernetes.io/is-default-class: "true"
+   provisioner: ebs.csi.aws.com
+   parameters:
+     type: gp3
+   reclaimPolicy: Retain
+   volumeBindingMode: WaitForFirstConsumer
+   EOF
+   ```
 
-1. **Create the `gp3` StorageClass.**
+   This manifest defines an `ebs-sc` StorageClass to be created. This StorageClass uses the `ebs.csi.aws.com` provisioner, which is supplied by the **aws-ebs-csi-driver** addon installed during cluster creation. For more information, refer to the [official AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
 
-```shell
-cat << EOF | kubectl apply -f -
----
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ebs-sc
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-provisioner: ebs.csi.aws.com
-parameters:
-  type: gp3
-reclaimPolicy: Retain
-volumeBindingMode: WaitForFirstConsumer
-EOF
-```
+2. Modify the `gp2` StorageClass to mark it as a non-default StorageClass:
 
-This manifest defines an `ebs-sc` StorageClass to be created. This StorageClass uses the `ebs.csi.aws.com` provisioner, which is supplied by the **aws-ebs-csi-driver** addon installed during cluster creation.
-For more information, refer to the [official AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
+   ```shell
+   kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+   ```
 
-2. **Modify the `gp2` StorageClass to mark it as a non-default StorageClass:**
+3. Verify the changes by running the `kubectl get storageclass` command.
 
-```shell
-kubectl patch storageclass gp2 -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
-```
+After executing these commands, you will have a `gp3` StorageClass set as the default and the `gp2` StorageClass marked as non-default, provided that **gp2** was already present.
 
-After executing these commands, you will have a `gp3` StorageClass set as the default and the `gp2` StorageClass marked as non-default, provided that **gp2** was already present. Verify the changes again by running the `kubectl get storageclass` command.
-
-### Requirements for a domain deployment
+### Domain deployment requirements
 
 If you plan to deploy Camunda using an external domain associated with an external certificate, you will need to set up some IAM policies to allow both **external-dns** and **cert-manager** to interact with Route 53, which controls the DNS.
 
 By default, the cluster uses **Pod Identity** to manage IAM roles for your applications. This means that service accounts are associated with IAM roles, allowing your pods to securely access AWS resources without hardcoding credentials. For more information on configuring Pod Identity, refer to the [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
 
-Additionally, to [enable OpenID Connect (OIDC) and IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) on your cluster, you can use the following commands:
+#### Enable OIDC and IAM roles for Service Accounts (IRSA)
 
-1. **Determine the OIDC issuer ID for your cluster:**
+To [enable OpenID Connect (OIDC) and IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html) on your cluster, complete the following steps:
+
+1. Determine the OIDC issuer ID for your cluster.
 
    First, ensure that your EKS cluster is set up with an OIDC provider. The following command should show you the OIDC issuer:
 
@@ -419,7 +420,7 @@ Additionally, to [enable OpenID Connect (OIDC) and IAM Roles for Service Account
    echo "$oidc_id"
    ```
 
-   Determine whether an IAM OIDC provider with your cluster’s issuer ID is already in your account.
+   Determine whether an IAM OIDC provider with your cluster’s issuer ID is already in your account:
 
    ```bash
    aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
@@ -427,9 +428,7 @@ Additionally, to [enable OpenID Connect (OIDC) and IAM Roles for Service Account
 
    If output is returned, an IAM OIDC provider is already set up for your cluster, so you can skip the next step. If no output is returned, you will need to set up an IAM OIDC provider for your cluster.
 
-2. **Create an IAM OIDC identity provider:**
-
-   You can create an IAM OIDC identity provider for your cluster with the following command:
+1. Create an IAM OIDC identity provider for your cluster with the following command:
 
    ```bash
    eksctl utils associate-iam-oidc-provider --region "$REGION" --cluster "$CLUSTER_NAME" --approve
@@ -484,7 +483,7 @@ echo "EXTERNAL_DNS_POLICY_ARN=$EXTERNAL_DNS_POLICY_ARN"
 
 The `EXTERNAL_DNS_POLICY_ARN` will be used in the next step to create a role mapping between the Kubernetes Service Account and AWS IAM Service Account.
 
-Using `eksctl` allows us to create the required role mapping for external-dns.
+Use `eksctl` to create the required role mapping for external-dns:
 
 ```shell
 eksctl create iamserviceaccount \
@@ -562,7 +561,7 @@ echo "CERT_MANAGER_POLICY_ARN=$CERT_MANAGER_POLICY_ARN"
 
 The `CERT_MANAGER_POLICY_ARN` is used in the next step to create a role mapping between the Amazon EKS Service Account and the AWS IAM Service Account.
 
-Using `eksctl` allows us to create the required role mapping for cert-manager.
+Use `eksctl` to create the required role mapping for cert-manager:
 
 ```shell
 eksctl create iamserviceaccount \
@@ -587,7 +586,7 @@ The variable `CERT_MANAGER_IRSA_ARN` will contain the `arn` (it should look like
 
 Alternatively, you can deploy the Helm chart first and then use `eksctl` with the option `--override-existing-serviceaccounts` instead of `--role-only` to reconfigure the created service account.
 
-## 4. PostgreSQL database
+## 3. PostgreSQL database
 
 Creating a PostgreSQL database can be accomplished through various methods, such as using the AWS Management Console or the AWS CLI. This guide focuses on providing a reproducible setup using the CLI. For information on creating PostgreSQL using the UI, refer to the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html).
 
@@ -634,9 +633,9 @@ export DB_WEBMODELER_USERNAME="webmodeler-pg"
 export DB_WEBMODELER_PASSWORD="CHANGE-ME-PLEASE"
 ```
 
-### Setup
+### Step-by-step setup
 
-1. **Identify the VPC associated with the Amazon EKS cluster:**
+1. Identify the VPC associated with the Amazon EKS cluster:
 
    ```shell
    export VPC_ID=$(aws ec2 describe-vpcs \
@@ -648,7 +647,7 @@ export DB_WEBMODELER_PASSWORD="CHANGE-ME-PLEASE"
 
    The variable `VPC_ID` contains the output value required for the next step (the value should look like this: `vpc-1234567890`).
 
-2. **Create a security group within the VPC to allow connections to the Aurora PostgreSQL instance:**
+2. Create a security group within the VPC to allow connections to the Aurora PostgreSQL instance:
 
    ```shell
    export GROUP_ID_AURORA=$(aws ec2 create-security-group \
@@ -660,9 +659,9 @@ export DB_WEBMODELER_PASSWORD="CHANGE-ME-PLEASE"
    echo "GROUP_ID_AURORA=$GROUP_ID_AURORA"
    ```
 
-The variable `GROUP_ID_AURORA` contains the output (the value should look like this: `sg-1234567890`).
+   The variable `GROUP_ID_AURORA` contains the output (the value should look like this: `sg-1234567890`).
 
-3. **Create a security ingress rule to allow access to PostgreSQL:**
+3. Create a security ingress rule to allow access to PostgreSQL:
 
    ```shell
    aws ec2 authorize-security-group-ingress \
@@ -673,7 +672,7 @@ The variable `GROUP_ID_AURORA` contains the output (the value should look like t
      # The CIDR range should match the value in the `cluster.yaml`
    ```
 
-4. **Retrieve subnets of the VPC to create a database subnet group:**
+4. Retrieve subnets of the VPC to create a database subnet group:
 
    ```shell
    export SUBNET_IDS=$(aws ec2 describe-subnets \
@@ -684,9 +683,9 @@ The variable `GROUP_ID_AURORA` contains the output (the value should look like t
    echo "SUBNET_IDS=$SUBNET_IDS"
    ```
 
-The variable `SUBNET_IDS` contains the output values of the private subnets (the value should look like this: `subnet-0123456789 subnet-1234567890 subnet-9876543210`).
+   The variable `SUBNET_IDS` contains the output values of the private subnets (the value should look like this: `subnet-0123456789 subnet-1234567890 subnet-9876543210`).
 
-5. **Create a database subnet group to associate PostgreSQL within the existing VPC:**
+5. Create a database subnet group to associate PostgreSQL within the existing VPC:
 
    ```shell
    aws rds create-db-subnet-group \
@@ -695,7 +694,7 @@ The variable `SUBNET_IDS` contains the output values of the private subnets (the
        --subnet-ids $(echo "$SUBNET_IDS")
    ```
 
-6. **Create a PostgreSQL cluster within a private subnet of the VPC:**
+6. Create a PostgreSQL cluster within a private subnet of the VPC:
 
    For the latest Camunda-supported PostgreSQL engine version, check our [documentation](../../../../../reference/supported-environments.md#camunda-8-self-managed).
 
@@ -713,14 +712,14 @@ The variable `SUBNET_IDS` contains the output values of the private subnets (the
 
    More configuration options can be found in the [AWS documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/create-db-cluster.html).
 
-7. **Wait for the PostgreSQL cluster to be ready:**
+7. Wait for the PostgreSQL cluster to be ready:
 
    ```shell
    aws rds wait db-cluster-available \
        --db-cluster-identifier $RDS_NAME
    ```
 
-8. **Create a database instance within the DB cluster:**
+8. Create a database instance within the DB cluster:
 
    Ensure that the `engine-version` matches the previously created PostgreSQL cluster.
 
@@ -736,14 +735,14 @@ The variable `SUBNET_IDS` contains the output values of the private subnets (the
 
    More configuration options can be found in the [AWS documentation](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/rds/create-db-instance.html).
 
-9. **Wait for changes to be applied:**
+9. Wait for changes to be applied:
 
-```shell
-aws rds wait db-instance-available \
-    --db-instance-identifier $RDS_NAME
-```
+   ```shell
+   aws rds wait db-instance-available \
+       --db-instance-identifier $RDS_NAME
+   ```
 
-This command will wait until the instance is ready.
+   This command will wait until the instance is ready.
 
 ### Create the databases
 
@@ -751,83 +750,85 @@ Now that you have a database, you need to create dedicated databases for each Ca
 
 We will also use this step to verify connectivity to the database from the created EKS cluster. The creation of the databases will be performed by spawning a pod job in the Kubernetes cluster, using the main user to create the different databases.
 
-1. **Retrieve the writer endpoint of the DB cluster:**
+1. Retrieve the writer endpoint of the DB cluster:
 
-```shell
-export DB_HOST=$(aws rds describe-db-cluster-endpoints \
-  --db-cluster-identifier $RDS_NAME \
-  --query "DBClusterEndpoints[?EndpointType=='WRITER'].Endpoint" \
-  --output text)
+   ```shell
+   export DB_HOST=$(aws rds describe-db-cluster-endpoints \
+     --db-cluster-identifier $RDS_NAME \
+     --query "DBClusterEndpoints[?EndpointType=='WRITER'].Endpoint" \
+     --output text)
 
-echo "DB_HOST=$DB_HOST"
-```
+   echo "DB_HOST=$DB_HOST"
+   ```
 
-2. **Create a secret that references the environment variables**:
+2. Create a secret that references the environment variables:
 
-```bash
-kubectl create secret generic setup-db-secret --namespace camunda \
-  --from-literal=AURORA_ENDPOINT="$DB_HOST" \
-  --from-literal=AURORA_PORT="5432" \
-  --from-literal=AURORA_DB_NAME="postgres" \
-  --from-literal=AURORA_USERNAME="$AURORA_USERNAME" \
-  --from-literal=AURORA_PASSWORD="$AURORA_PASSWORD" \
-  --from-literal=DB_KEYCLOAK_NAME="$DB_KEYCLOAK_NAME" \
-  --from-literal=DB_KEYCLOAK_USERNAME="$DB_KEYCLOAK_USERNAME" \
-  --from-literal=DB_KEYCLOAK_PASSWORD="$DB_KEYCLOAK_PASSWORD" \
-  --from-literal=DB_IDENTITY_NAME="$DB_IDENTITY_NAME" \
-  --from-literal=DB_IDENTITY_USERNAME="$DB_IDENTITY_USERNAME" \
-  --from-literal=DB_IDENTITY_PASSWORD="$DB_IDENTITY_PASSWORD" \
-  --from-literal=DB_WEBMODELER_NAME="$DB_WEBMODELER_NAME" \
-  --from-literal=DB_WEBMODELER_USERNAME="$DB_WEBMODELER_USERNAME" \
-  --from-literal=DB_WEBMODELER_PASSWORD="$DB_WEBMODELER_PASSWORD"
-```
+   ```bash
+   kubectl create secret generic setup-db-secret --namespace camunda \
+     --from-literal=AURORA_ENDPOINT="$DB_HOST" \
+     --from-literal=AURORA_PORT="5432" \
+     --from-literal=AURORA_DB_NAME="postgres" \
+     --from-literal=AURORA_USERNAME="$AURORA_USERNAME" \
+     --from-literal=AURORA_PASSWORD="$AURORA_PASSWORD" \
+     --from-literal=DB_KEYCLOAK_NAME="$DB_KEYCLOAK_NAME" \
+     --from-literal=DB_KEYCLOAK_USERNAME="$DB_KEYCLOAK_USERNAME" \
+     --from-literal=DB_KEYCLOAK_PASSWORD="$DB_KEYCLOAK_PASSWORD" \
+     --from-literal=DB_IDENTITY_NAME="$DB_IDENTITY_NAME" \
+     --from-literal=DB_IDENTITY_USERNAME="$DB_IDENTITY_USERNAME" \
+     --from-literal=DB_IDENTITY_PASSWORD="$DB_IDENTITY_PASSWORD" \
+     --from-literal=DB_WEBMODELER_NAME="$DB_WEBMODELER_NAME" \
+     --from-literal=DB_WEBMODELER_USERNAME="$DB_WEBMODELER_USERNAME" \
+     --from-literal=DB_WEBMODELER_PASSWORD="$DB_WEBMODELER_PASSWORD"
+   ```
 
-This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
+   This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
 
-After running the above command, you can verify that the secret was created successfully by using:
+   After running the above command, you can verify that the secret was created successfully by using:
 
-```bash
-kubectl get secret setup-db-secret -o yaml --namespace camunda
-```
+   ```bash
+   kubectl get secret setup-db-secret -o yaml --namespace camunda
+   ```
 
-This should display the secret with the base64 encoded values.
+   This should display the secret with the base64 encoded values.
 
-3. **Create a copy of the manifest**: Save the above manifest to a file, for example, `setup-postgres-create-db.yml`.
+3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`:
 
-```yaml reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/setup-postgres-create-db.yml
-```
+   ```yaml reference
+   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/setup-postgres-create-db.yml
+   ```
 
-3. **Apply the manifest**: Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
+4. Apply the manifest:
 
-```bash
-kubectl apply -f setup-postgres-create-db.yml --namespace camunda
-```
+   ```bash
+   kubectl apply -f setup-postgres-create-db.yml --namespace camunda
+   ```
 
-4. **Verify the job's completion**: Once the job is created, you can monitor its progress using:
+   Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
 
-```bash
-kubectl get job/create-setup-user-db --namespace camunda --watch
-```
+5. Once the job is created, monitor its progress using:
 
-Once the job shows as `Completed`, the users and databases will have been successfully created.
+   ```bash
+   kubectl get job/create-setup-user-db --namespace camunda --watch
+   ```
 
-5. **Check logs for confirmation**: You can view the logs of the job to confirm that the users were created and privileges were granted successfully:
+   Once the job shows as `Completed`, the users and databases will have been successfully created.
 
-```bash
-kubectl logs job/create-setup-user-db --namespace camunda
-```
+6. View the logs of the job to confirm that the users were created and privileges were granted successfully:
 
-6. **Cleanup the resources:**
+   ```bash
+   kubectl logs job/create-setup-user-db --namespace camunda
+   ```
 
-```bash
-kubectl delete job create-setup-user-db --namespace camunda
-kubectl delete secret setup-db-secret --namespace camunda
-```
+7. Cleanup the resources:
 
-By running these commands, you will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+   ```bash
+   kubectl delete job create-setup-user-db --namespace camunda
+   kubectl delete secret setup-db-secret --namespace camunda
+   ```
 
-## 5. OpenSearch domain
+   Running these commands will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+
+## 4. OpenSearch domain
 
 Creating an OpenSearch domain can be accomplished through various methods, such as using the AWS Management Console or the AWS CLI. This guide focuses on providing a reproducible setup using the CLI. For information on creating an OpenSearch domain using the UI, refer to the [AWS OpenSearch documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/create-managed-domain.html).
 
@@ -866,13 +867,13 @@ export OPENSEARCH_NAME=camunda-opensearch
 
 The standard deployment for OpenSearch relies on the first layer of security, which is the Network.
 While this setup allows easy access, it may expose sensitive data. To enhance security, consider implementing IAM Roles for Service Accounts (IRSA) to restrict access to the OpenSearch cluster, providing a more secure environment.
-For more information, see the [Amazon OpenSearch Service Fine-Grained Access Control documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-access-policies).
+For more information, see the [Amazon OpenSearch Service fine-grained access control documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-access-policies).
 
 :::
 
 ### Step-by-step setup
 
-1. **Identify the VPC associated with the Amazon EKS cluster:**
+1. Identify the VPC associated with the Amazon EKS cluster:
 
    ```shell
    export VPC_ID=$(aws ec2 describe-vpcs \
@@ -884,7 +885,7 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
 
    The variable `VPC_ID` contains the output value required for the next steps (the value should look like this: `vpc-1234567890`).
 
-2. **Create a security group within the VPC to allow connections to the OpenSearch domain:**
+2. Create a security group within the VPC to allow connections to the OpenSearch domain:
 
    ```shell
    export GROUP_ID_OPENSEARCH=$(aws ec2 create-security-group \
@@ -898,7 +899,7 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
 
    The variable `GROUP_ID_OPENSEARCH` contains the output (the value should look like this: `sg-1234567890`).
 
-3. **Create a security ingress rule to allow access to OpenSearch over HTTPS (port 443) from within the VPC:**
+3. Create a security ingress rule to allow access to OpenSearch over HTTPS (port 443) from within the VPC:
 
    ```shell
    aws ec2 authorize-security-group-ingress \
@@ -910,7 +911,7 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
 
    Ensure that the CIDR range is appropriate for your environment. OpenSearch uses `443` as the https transport port.
 
-4. **Retrieve the private subnets of the VPC:**
+4. Retrieve the private subnets of the VPC:
 
    ```shell
    export SUBNET_IDS=$(aws ec2 describe-subnets \
@@ -926,7 +927,7 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
 
    The variable `SUBNET_IDS` now contains the output values of the private subnets (the value should look like this: `subnet-0123456789 subnet-1234567890`).
 
-5. **Create the OpenSearch domain:**
+5. Create the OpenSearch domain:
 
    ```shell
    aws opensearch create-domain --domain-name $OPENSEARCH_NAME \
@@ -939,30 +940,30 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
      --vpc-options "SubnetIds=${SUBNET_IDS},SecurityGroupIds=${GROUP_ID_OPENSEARCH}"
    ```
 
-- **Domain Name**: `$OPENSEARCH_NAME` is the name of the OpenSearch domain being created.
-- **Engine Version**: Uses OpenSearch version `2.15`.
-- **Cluster Configuration**:
-  - `InstanceType=t3.medium.search` specifies the instance type for the domain.
-  - `InstanceCount=3` creates a cluster with 3 instances.
-  - `ZoneAwarenessEnabled=true` and `ZoneAwarenessConfig={AvailabilityZoneCount=3}` enable zone awareness and spread the instances across 3 availability zones to improve fault tolerance.
-- **Node-to-Node Encryption**: Encryption for traffic between nodes in the OpenSearch cluster is enabled (`Enabled=true`).
-- **EBS Options**:
-  - `EBSEnabled=true` enables Elastic Block Store (EBS) for storage.
-  - `VolumeType=gp3` specifies the volume type as `gp3` with 50 GiB of storage.
-  - `Iops=3000` and `Throughput=125` set the IOPS and throughput for the storage.
-- **Encryption at Rest**: Data stored in the domain is encrypted at rest (`Enabled=true`).
-- **Access Policies**: The default access policy allows all actions (`es:*`) on resources within the domain for any AWS account (`"Principal": { "AWS": "*" }`). This is scoped to the OpenSearch domain resources using the `arn:aws:es:$REGION:*:domain/$OPENSEARCH_NAME/*` resource ARN.
-- **VPC Options**: The domain is deployed within the specified VPC, restricted to the provided subnets (`SubnetIds=${SUBNET_IDS}`) and associated security group (`SecurityGroupIds=${GROUP_ID_OPENSEARCH}`).
+   - **Domain Name**: `$OPENSEARCH_NAME` is the name of the OpenSearch domain being created.
+   - **Engine Version**: Uses OpenSearch version `2.15`.
+   - **Cluster Configuration**:
+     - `InstanceType=t3.medium.search` specifies the instance type for the domain.
+     - `InstanceCount=3` creates a cluster with 3 instances.
+     - `ZoneAwarenessEnabled=true` and `ZoneAwarenessConfig={AvailabilityZoneCount=3}` enable zone awareness and spread the instances across 3 availability zones to improve fault tolerance.
+   - **Node-to-Node Encryption**: Encryption for traffic between nodes in the OpenSearch cluster is enabled (`Enabled=true`).
+   - **EBS Options**:
+     - `EBSEnabled=true` enables Elastic Block Store (EBS) for storage.
+     - `VolumeType=gp3` specifies the volume type as `gp3` with 50 GiB of storage.
+     - `Iops=3000` and `Throughput=125` set the IOPS and throughput for the storage.
+   - **Encryption at Rest**: Data stored in the domain is encrypted at rest (`Enabled=true`).
+   - **Access Policies**: The default access policy allows all actions (`es:*`) on resources within the domain for any AWS account (`"Principal": { "AWS": "*" }`). This is scoped to the OpenSearch domain resources using the `arn:aws:es:$REGION:*:domain/$OPENSEARCH_NAME/*` resource ARN.
+   - **VPC Options**: The domain is deployed within the specified VPC, restricted to the provided subnets (`SubnetIds=${SUBNET_IDS}`) and associated security group (`SecurityGroupIds=${GROUP_ID_OPENSEARCH}`).
 
-  This configuration creates a secure OpenSearch domain with encryption both in transit (between nodes) and at rest, zonal fault tolerance, and sufficient storage performance using `gp3` volumes. The access is restricted to resources in the VPC of the EKS cluster and is governed by the specified security group.
+   This configuration creates a secure OpenSearch domain with encryption both in transit (between nodes) and at rest, zonal fault tolerance, and sufficient storage performance using `gp3` volumes. The access is restricted to resources in the VPC of the EKS cluster and is governed by the specified security group.
 
-6. **Wait for the OpenSearch domain to be active:**
+6. Wait for the OpenSearch domain to be active:
 
    ```shell
    while [ "$(aws opensearch describe-domain --domain-name $OPENSEARCH_NAME --query 'DomainStatus.Processing' --output text)" != "False" ]; do echo "Waiting for OpenSearch domain to become availablen this can up to take 20-30 minutes..."; sleep 30; done && echo "OpenSearch domain is now available\!"
    ```
 
-7. **Retrieve the endpoint of the OpenSearch domain:**
+7. Retrieve the endpoint of the OpenSearch domain:
 
    ```shell
    export OPENSEARCH_HOST=$(aws opensearch describe-domains --domain-names $OPENSEARCH_NAME --query "DomainStatusList[0].Endpoints.vpc" --output text)
@@ -972,11 +973,11 @@ For more information, see the [Amazon OpenSearch Service Fine-Grained Access Con
 
    This endpoint will be used to connect to your OpenSearch domain.
 
-### Verifying connectivity from within the EKS cluster
+### Verify connectivity from within the EKS cluster
 
 To verify that the OpenSearch domain is accessible from within your Amazon EKS cluster, follow these steps:
 
-1. **Deploy a temporary pod to test connectivity:**
+1. Deploy a temporary pod to test connectivity:
 
    Create a temporary pod using the `amazonlinux` image in the `camunda` namespace, install `curl`, and test the connection to OpenSearch—all in a single command:
 
@@ -984,12 +985,12 @@ To verify that the OpenSearch domain is accessible from within your Amazon EKS c
    kubectl run amazonlinux-opensearch -n camunda --rm -i --tty --image amazonlinux -- sh -c "curl -XGET https://$OPENSEARCH_HOST/_cluster/health"
    ```
 
-2. **Verify the response:**
+2. Verify the response:
 
    If everything is set up correctly, you should receive a response from the OpenSearch service indicating its health status.
 
 You have successfully set up an OpenSearch domain that is accessible from within your Amazon EKS cluster. For further details, refer to the [OpenSearch documentation](https://opensearch.org/docs/latest/index/).
 
-## 6. Install Camunda 8 using the Helm chart
+## 5. Install Camunda 8 using the Helm chart
 
 Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on Kubernetes](./eks-helm.md) for detailed instructions on deploying the platform to your Kubernetes cluster.
