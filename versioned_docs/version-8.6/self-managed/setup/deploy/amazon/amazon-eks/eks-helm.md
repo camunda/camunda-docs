@@ -1,7 +1,7 @@
 ---
 id: eks-helm
 title: "Install Camunda 8 on an EKS cluster"
-description: "Set up the Camunda 8 environment with Helm and an optional DNS setup on Amazon EKS."
+description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Amazon EKS."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -11,9 +11,7 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
-## Introduction
-
-### Requirements
+## Requirements
 
 - A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
 - [Helm (3.16+)](https://helm.sh/docs/intro/install/)
@@ -34,7 +32,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 **Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
 :::
 
-### Architecture
+## Architecture
 
 <!-- TODO: update Arch to include Aurora and OpenSearch both text and diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) -->
 
@@ -44,13 +42,11 @@ Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/
 
 ![Camunda 8 Self-Managed AWS Architecture Diagram](./assets/camunda-8-self-managed-architecture-aws.png)
 
-## Usage
-
-In the following, we're using `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
-
-### Environment prerequisites
+## Export environment variables
 
 To streamline the execution of the subsequent commands, it is recommended to export multiple environment variables.
+
+### Export the AWS region and Helm chart version
 
 The following are the required environment variables with some example values:
 
@@ -58,66 +54,73 @@ The following are the required environment variables with some example values:
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/chart-env.sh
 ```
 
-<Tabs groupId="env">
+### Export database values
 
-  <TabItem value="standard" label="Standard" default>
-  
-When using standard authentication (network based or username and password), specific environment variables must be set with valid values.
+When using either standard authentication (network based or username and password) or IRSA authentication, specific environment variables must be set with valid values. Follow the guide for either [eksctl](./eksctl.md#configuration-1) or [Terraform](./terraform-setup.md#export-values-for-the-helm-chart) to set them correctly.
 
-Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
+Verify the configuration of your environment variables by running the following loop:
+
+<Tabs groupId="env" defaultValue="standard" queryString values={
+[
+{label: 'Standard authentication', value: 'standard' },
+{label: 'IRSA authentication', value: 'irsa' },
+]}>
+
+<TabItem value="standard">
 
 ```bash reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/check-env-variables.sh
 ```
 
-  </TabItem>
+</TabItem>
 
-  <TabItem value="irsa" label="IRSA" default>
-  
-When using IRSA authentication, specific environment variables need to be set with valid values.
-
-Once you have set the environment variables, you can verify that they are correctly configured by running the following loop:
+<TabItem value="irsa">
 
 ```bash reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/procedure/check-env-variables.sh
 ```
 
-  </TabItem>
+</TabItem>
 
 </Tabs>
 
-You can follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md#export-values-for-the-helm-chart) to set it correctly.
+## (Optional) Ingress Setup
 
-<Tabs groupId="domain">
-  <TabItem value="with" label="With Domain" default>
+:::info Domain or domainless installation
 
-```shell
-# The domain name that you intend to use
-export DOMAIN_NAME=camunda.example.com
-# The e-mail to register with Let's Encrypt
-export MAIL=admin@camunda.example.com
-# The Ingress-Nginx Helm Chart version
-export INGRESS_HELM_CHART_VERSION="4.11.2"
-# The External DNS Helm Chart version
-export EXTERNAL_DNS_HELM_CHART_VERSION="1.15.0"
-# The Cert-Manager Helm Chart version
-export CERT_MANAGER_HELM_CHART_VERSION="1.15.3"
+If you do not have a domain name, external access to Camunda 8 web endpoints from outside the AWS VPC will not be possible. In this case, you may skip the DNS setup and proceed directly to [deploying Camunda 8 via Helm charts](#deploy-camunda-8-via-helm-charts).
 
-```
+Alternatively, you can use `kubectl port-forward` to access the Camunda platform without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
 
-Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
-
-- EXTERNAL_DNS_IRSA_ARN
-- CERT_MANAGER_IRSA_ARN
-- REGION
-
-### DNS set up
-
-:::info
-If you don't have a domain name, you cannot access Camunda 8 web endpoints from outside the AWS VPC. Therefore, you can skip the DNS set up and continue with deploying [Camunda 8](#deploy-camunda-8-via-helm-charts).
+Throughout the rest of this installation guide, we will refer to configurations as **"With domain"** or **"Without domain"** depending on whether the application is exposed via a domain.
 :::
 
-#### ingress-nginx
+In this section, we provide an optional setup guide for configuring an Ingress with TLS and DNS management, allowing you to access your application through a specified domain. If you haven't set up an Ingress, refer to the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) for more details. In Kubernetes, an Ingress is an API object that manages external access to services in a cluster, typically over HTTP, and can also handle TLS encryption for secure connections.
+
+To monitor your Ingress setup using Amazon CloudWatch, you may also find the official AWS guide on [monitoring nginx workloads with CloudWatch Container Insights and Prometheus](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-Sample-Workloads-nginx.html) helpful. Additionally, for detailed steps on exposing Kubernetes applications with the nginx ingress controller, refer to the [official AWS tutorial](https://aws.amazon.com/fr/blogs/containers/exposing-kubernetes-applications-part-3-nginx-ingress-controller/).
+
+### Export Values
+
+Set the following values for your Ingress configuration:
+
+```shell
+# The domain name you intend to use
+export DOMAIN_NAME=camunda.example.com
+# The email address for Let's Encrypt registration
+export MAIL=admin@camunda.example.com
+# Helm chart versions for Ingress components
+export INGRESS_HELM_CHART_VERSION="4.11.2"
+export EXTERNAL_DNS_HELM_CHART_VERSION="1.15.0"
+export CERT_MANAGER_HELM_CHART_VERSION="1.15.3"
+```
+
+Additionally, obtain these values by following the guide for either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md), as they will be needed in later steps:
+
+- `EXTERNAL_DNS_IRSA_ARN`
+- `CERT_MANAGER_IRSA_ARN`
+- `REGION`
+
+### ingress-nginx
 
 [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) is an open-source Kubernetes Ingress controller that provides a way to manage external access to services within a Kubernetes cluster. It acts as a reverse proxy and load balancer, routing incoming traffic to the appropriate services based on rules defined in the Ingress resource.
 
@@ -135,7 +138,7 @@ helm upgrade --install \
   --create-namespace
 ```
 
-#### external-dns
+### external-dns
 
 [External-dns](https://github.com/kubernetes-sigs/external-dns) is a Kubernetes add-on that automates the management of DNS records for external resources, such as load balancers or Ingress controllers. It monitors the Kubernetes resources and dynamically updates the DNS provider with the appropriate DNS records.
 
@@ -168,7 +171,7 @@ helm upgrade --install \
   --create-namespace
 ```
 
-#### cert-manager
+### cert-manager
 
 [Cert-manager](https://cert-manager.io/) is an open-source Kubernetes add-on that automates the management and issuance of TLS certificates. It integrates with various certificate authorities (CAs) and provides a straightforward way to obtain, renew, and manage SSL/TLS certificates for your Kubernetes applications.
 
@@ -223,41 +226,30 @@ spec:
 EOF
 ```
 
-</TabItem>
-
-<TabItem value="without" label="Without Domain">
-
-Without a domain, you will need to use [kubectl port-forward to access the Camunda platform](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
-
-</TabItem>
-</Tabs>
-
-### Deploy Camunda 8 via Helm charts
+## Deploy Camunda 8 via Helm charts
 
 For more configuration options, refer to the [Helm chart documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Additionally, explore our existing resources on the [Camunda 8 Helm chart](/self-managed/setup/install.md) and [guides](/self-managed/setup/guides/guides.md).
 
 Depending of your installation path, you may use different settings.
 For easy and reproducible installations, we will use yaml files to configure the chart.
 
-#### 1. Create the `values.yml` file
+### 1. Create the `values.yml` file
 
 Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
 <Tabs groupId="values">
-  <TabItem value="with-domain-std" label="Standard with Domain" default>
+  <TabItem value="with-domain-std" label="Standard with domain" default>
 
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+
+:::info Cert-manager annotation for domain installation
+The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
+:::
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/helm-values/values-domain.yml
 ```
 
-:::info Cert-manager annotation for domain installation
-
-The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
-
-:::
-
 :::warning Exposure of the Zeebe Gateway
 
 Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
@@ -269,9 +261,9 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
 
 :::
 
-##### Reference the credentials in secrets
+#### Reference the credentials in secrets
 
-Before installing the Helm chart, you need to create Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
+Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
 
 To create the secrets, run the following commands:
 
@@ -279,17 +271,17 @@ To create the secrets, run the following commands:
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/create-external-db-secrets.sh
 ```
 
-  </TabItem>
+</TabItem>
 
-  <TabItem value="without-domain-std" label="Standard without Domain">
+<TabItem value="without-domain-std" label="Standard without domain">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/helm-values/values-no-domain.yml
 ```
 
-##### Reference the credentials in secrets
+#### Reference the credentials in secrets
 
-Before installing the Helm chart, you need to create Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
+Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials and the OpenSearch authentication credentials.
 
 To create the secrets, run the following commands:
 
@@ -299,19 +291,17 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/
 
   </TabItem>
 
-  <TabItem value="with-domain-irsa" label="IRSA with Domain" default>
+  <TabItem value="with-domain-irsa" label="IRSA with domain" default>
 
 The following makes use of the [combined Ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+
+:::info Cert-manager annotation for domain installation
+The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
+:::
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/helm-values/values-domain.yml
 ```
-
-:::info Cert-manager annotation for domain installation
-
-The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
-
-:::
 
 :::warning Exposure of the Zeebe Gateway
 
@@ -326,7 +316,7 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
 
   </TabItem>
 
-  <TabItem value="without-domain-irsa" label="IRSA without Domain">
+  <TabItem value="without-domain-irsa" label="IRSA without domain">
 
 ```hcl reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-irsa/helm-values/values-no-domain.yml
@@ -336,16 +326,15 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-
 
 </Tabs>
 
-#### 2. Configure your deployment
+### 2. Configure your deployment
 
-##### Enable Enterprise components
+#### Enable Enterprise components
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and Connectors](../../../install.md#configuring-enterprise-components-and-connectors).
 
-##### Using internal Elasticsearch instead of the managed OpenSearch
+#### Use internal Elasticsearch instead of the managed OpenSearch
 
-If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment.
-This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
+If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment. This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
 
 <details>
 <summary>Show configuration changes to disable external OpenSearch usage</summary>
@@ -363,7 +352,7 @@ elasticsearch:
 
 </details>
 
-##### Using internal PostgreSQL instead of the managed Aurora
+#### Use internal PostgreSQL instead of the managed Aurora
 
 If you prefer not to use an external PostgreSQL service, you can switch to the internal PostgreSQL deployment. In this case, you will need to configure the Helm chart as follows and remove certain configurations related to the external database and service account:
 
@@ -412,9 +401,9 @@ identity:
 
 </details>
 
-##### Fill your deployment with actual values
+#### Fill your deployment with actual values
 
-Once you've prepared the `values.yml` file, use the `envsubst` command to substitute the environment variables with their actual values. Run the following command:
+Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash
 # generate the final values
@@ -426,17 +415,17 @@ cat generated-values.yml
 
 :::info Camunda Helm chart no longer automatically generates passwords
 
-Starting from **Camunda 8.6**, the Helm chart deprecated the automatic generation of secrets, and this feature has been fully removed in **Camunda 8.6**.
+Starting from **Camunda 8.6**, the Helm chart deprecated the automatic generation of secrets, and this feature has been fully removed in **Camunda 8.7**.
 
 :::
 
-You will need to store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
+Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
 
 ```bash reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/generate-passwords.sh
 ```
 
-Next, use these environment variables in the `kubectl` command to create the secret.
+Use these environment variables in the `kubectl` command to create the secret.
 
 - The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, you must provide those values.
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
@@ -445,9 +434,9 @@ Next, use these environment variables in the `kubectl` command to create the sec
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/create-identity-secret.sh
 ```
 
-#### 3. Install Camunda 8 using Helm
+### 3. Install Camunda 8 using Helm
 
-Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Here's the command:
+Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
 
 ```bash reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/install-chart.sh
@@ -484,12 +473,12 @@ watch -n 5 '
 <summary>Understand how each component interacts with IRSA</summary>
 <summary>
 
-##### Web Modeler
+#### Web Modeler
 
 As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
-##### Keycloak
+#### Keycloak
 
 :::caution Only available from v21+
 
@@ -501,88 +490,81 @@ From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing
 
 The [official Keycloak documentation](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql) also provides detailed instructions for utilizing Amazon Aurora PostgreSQL.
 
-A custom Keycloak container image containing necessary configurations is conveniently accessible on Docker Hub at [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak). This image, built upon the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak), incorporates the required wrapper for seamless integration.
+A custom Keycloak container image containing necessary configurations is accessible on Docker Hub at [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak). This image, built upon the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak), incorporates the required wrapper for seamless integration.
 
-###### Container image sources
+#### Container image sources
 
 The sources of the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [GitHub](https://github.com/camunda/keycloak). In this repository, the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) is assembled in the `Dockerfile`.
 
 Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnami/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
 
-###### Keycloak image configuration
+##### Keycloak image configuration
 
 Bitnami Keycloak container image configuration is available at [hub.docker.com/bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak).
 
 ##### Identity
 
-Identity uses PostgreSQL, we need to configure `identity` to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](../../../../identity/deployment/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details.
-Identity already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
+Identity uses PostgreSQL, and `identity` is configured to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](../../../../identity/deployment/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details. Identity includes the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
-##### Amazon OpenSearch Service
+#### Amazon OpenSearch Service
 
-###### Internal database configuration
+##### Internal database configuration
 
-The default setup is sufficient for Amazon OpenSearch Service clusters without `fine-grained access control`.
+The default setup is sufficient for Amazon OpenSearch Service clusters without **fine-grained access control**.
 
-`Fine-grained access control` adds another layer of security to OpenSearch, requiring you to add a mapping between the IAM role and the internal OpenSearch role. Visit the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html) on `fine-grained access control`.
+Fine-grained access control adds another layer of security to OpenSearch, requiring you to add a mapping between the IAM role and the internal OpenSearch role. Visit the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html) on fine-grained access control.
 
 There are different ways to configure the mapping within Amazon OpenSearch Service:
 
 - Via a [Terraform module](https://registry.terraform.io/modules/idealo/opensearch/aws/latest) in case your OpenSearch instance is exposed.
 - Via the [OpenSearch dashboard](https://opensearch.org/docs/latest/security/access-control/users-roles/).
+- Via the **REST API**. To authorize the IAM role in OpenSearch for access, follow these steps:
 
-<details>
+  Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
 
-<summary>Via the REST API</summary>
+  ```bash
+  curl -sS -u "<OS_DOMAIN_USER>:<OS_DOMAIN_PASSWORD>" \
+      -X PATCH \
+      "https://<OS_ENDPOINT>/_opendistro/_security/api/rolesmapping/all_access?pretty" \
+      -H 'Content-Type: application/json' \
+      -d'
+  [
+    {
+      "op": "add",
+      "path": "/backend_roles",
+      "value": ["<ROLE_NAME>"]
+    }
+  ]
+  '
+  ```
 
-To authorize the IAM role in OpenSearch for access, follow these steps:
+  - Replace `<OS_DOMAIN_USER>` and `<OS_DOMAIN_PASSWORD>` with your OpenSearch domain admin credentials.
+  - Replace `<OS_ENDPOINT>` with your OpenSearch endpoint URL.
+  - Replace `<ROLE_NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
 
-Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
+  :::note Security of basic auth usage
 
-```bash
-curl -sS -u "<OS_DOMAIN_USER>:<OS_DOMAIN_PASSWORD>" \
-    -X PATCH \
-    "https://<OS_ENDPOINT>/_opendistro/_security/api/rolesmapping/all_access?pretty" \
-    -H 'Content-Type: application/json' \
-    -d'
-[
-  {
-    "op": "add",
-    "path": "/backend_roles",
-    "value": ["<ROLE_NAME>"]
-  }
-]
-'
-```
+  **This example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
 
-- Replace `<OS_DOMAIN_USER>` and `<OS_DOMAIN_PASSWORD>` with your OpenSearch domain admin credentials.
-- Replace `<OS_ENDPOINT>` with your OpenSearch endpoint URL.
-- Replace `<ROLE_NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
+  :::
 
-:::note Security of basic auth usage
-
-**This example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
-
-:::
-
-</details>
-
-The important part is assigning the `iam_role_arn` of the previously created `opensearch_role` to an internal role within Amazon OpenSearch Service. For example, `all_access` on the Amazon OpenSearch Service side is a good candidate, or if required, extra roles can be created with more restrictive access.
+Ensure that the `iam_role_arn` of the previously created `opensearch_role` is assigned to an internal role within Amazon OpenSearch Service. For example, `all_access` on the Amazon OpenSearch Service side is a good candidate, or if required, extra roles can be created with more restrictive access.
 
 </summary>
 </details>
 
-### Verify connectivity to Camunda 8
+## Verify connectivity to Camunda 8
 
 First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
-**Generating an M2M token using Identity:**
+### Generate an M2M token using Identity
 
-You can generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md), along with the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
-Below is an extract of the necessary instructions:
+Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/identity/getting-started/install-identity.md), along with the [incorporating applications documentation](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+
+Below is a summary of the necessary instructions:
 
 <Tabs groupId="domain">
-  <TabItem value="with" label="With Domain" default>
+  <TabItem value="with" label="With domain" default>
 
 1. Open Identity in your browser at `https://${DOMAIN_NAME}/identity`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
@@ -597,9 +579,9 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 </TabItem>
   
-<TabItem value="without" label="Without Domain">
+<TabItem value="without" label="Without domain">
 
-This requires to port-forward the Identity and Keycloak to be able to connect to the cluster.
+Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
 
 ```shell
 kubectl port-forward services/camunda-identity 8080:80 --namespace camunda
@@ -618,7 +600,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 ```
 
 <details>
-<summary>If you want to access the other services and their UI, you can port-forward those as well:</summary>
+<summary>To access the other services and their UIs, port-forward those Components as well:</summary>
 <summary>
 
 ```shell
@@ -642,13 +624,15 @@ Console:
 </TabItem>
 </Tabs>
 
+### Use the token
+
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
 For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
 <Tabs groupId="domain">
-  <TabItem value="with" label="With Domain" default>
+  <TabItem value="with" label="With domain" default>
 
 Export the following environment variables:
 
@@ -658,7 +642,7 @@ export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-p
 ```
 
   </TabItem>
-  <TabItem value="without" label="Without Domain">
+  <TabItem value="without" label="Without domain">
 
 This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
 
@@ -788,7 +772,7 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS_REST}/v2/topolog
 After following the installation instructions in the [zbctl docs](/apis-tools/community-clients/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
 
 <Tabs groupId="domain">
-  <TabItem value="with" label="With Domain" default>
+  <TabItem value="with" label="With domain" default>
 
 Export the following environment variables:
 
@@ -799,8 +783,8 @@ export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
 export ZEEBE_TOKEN_SCOPE='camunda-identity'
 ```
 
-  </TabItem>
-  <TabItem value="without" label="Without Domain">
+</TabItem>
+<TabItem value="without" label="Without domain">
 
 This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
 
@@ -817,7 +801,7 @@ export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
 export ZEEBE_TOKEN_SCOPE='camunda-identity'
 ```
 
-  </TabItem>
+</TabItem>
 
 </Tabs>
 
@@ -864,55 +848,55 @@ Brokers:
 For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/community-clients/cli-client/cli-get-started.md).
 
   </TabItem>
-    <TabItem value="modeler" label="Modeler">
+    <TabItem value="modeler" label="Desktop Modeler">
 
 Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
-<Tabs groupId="domain">
-  <TabItem value="with" label="With Domain" default>
+<Tabs groupId="domain" defaultValue="with" queryString values={
+[
+{label: 'With domain', value: 'with' },
+{label: 'Without domain', value: 'without' },
+]}>
+
+<TabItem value="with">
 
 The following values are required for the OAuth authentication:
 
-```shell
-# Make sure to manually replace #DOMAIN_NAME with your actual domain since Modeler can't access the shell context
-Cluster endpoint=https://zeebe.$DOMAIN_NAME
-Client ID='client-id' # retrieve the value from the identity page of your created m2m application
-Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
-OAuth Token URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
-Audience=zeebe-api # the default for Camunda 8 Self-Managed
-```
+- **Cluster endpoint:** `https://zeebe.$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
 
-  </TabItem>
-  <TabItem value="without" label="Without Domain">
+</TabItem>
 
-This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
+<TabItem value="without">
+
+This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
 
 ```shell
 kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
 ```
 
-The following values are required for the OAuth authentication:
+The following values are required for OAuth authentication:
 
-```shell
-# Make sure to manually replace #DOMAIN_NAME with your actual domain since Modeler can't access the shell context
-Cluster endpoint=http://localhost:26500
-Client ID='client-id' # retrieve the value from the identity page of your created m2m application
-Client Secret='client-secret' # retrieve the value from the identity page of your created m2m application
-OAuth Token URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-Audience=zeebe-api # the default for Camunda 8 Self-Managed
-```
+- **Cluster endpoint:** `http://localhost:26500`
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
-### Testing installation with payment example application
+## Test the installation with payment example application
 
 To test your installation with the deployment of a sample application, refer to the [installing payment example guide](../../../guides/installing-payment-example.md).
 
-### Advanced topics
+## Advanced topics
 
 The following are some advanced configuration topics to consider for your cluster:
 
