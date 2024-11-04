@@ -6,10 +6,6 @@ description: "An overview of all possible configuration options in Optimize."
 
 All distributions of Camunda Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements. To do that, have a look into the folder named `config` which contains a file called `environment-config.yaml` with values that override the default Optimize properties.
 
-:::note
-When converting configuration properties to environment variables, ensure the `CAMUNDA_OPTIMIZE_` prefix is used (for example, `CAMUNDA_OPTIMIZE_API_ACCESSTOKEN`). To define an environment variable, convert the configuration property to uppercase, remove any dashes, and replace any delimiters (`.`) with `_`.
-:::
-
 You can see a sample configuration file with all possible configuration fields
 and their default values [here](service-config.yaml).
 
@@ -202,19 +198,14 @@ This section details everything related to building the connection to OpenSearch
 You can define a number of connection points in a cluster. Therefore, everything under `opensearch.connection.nodes` is a list of nodes Optimize can connect to. If you have built an OpenSearch cluster with several nodes, it is recommended to define several connection points so if one node fails, Optimize is still able to talk to the cluster.
 :::
 
-| YAML path                                             | Default value | Description                                                                                                                                                          |
-| ----------------------------------------------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| opensearch.connection.timeout                         | 10000         | Maximum time without connection to OpenSearch that Optimize should wait until a timeout triggers.                                                                    |
-| opensearch.connection.responseConsumerBufferLimitInMb | 100           | Maximum size of the OpenSearch response consumer heap buffer. This can be increased to resolve errors from OpenSearch relating to the entity content being too long. |
-| opensearch.connection.pathPrefix                      |               | The path prefix under which OpenSearch is available.                                                                                                                 |
-| opensearch.connection.nodes[*].host                   | localhost     | The address/hostname under which the OpenSearch node is available.                                                                                                   |
-| opensearch.connection.nodes[*].httpPort               | 9205          | A port number used by OpenSearch to accept HTTP connections.                                                                                                         |
-| opensearch.connection.proxy.enabled                   | false         | Whether an HTTP proxy should be used for requests to OpenSearch.                                                                                                     |
-| opensearch.connection.proxy.host                      | null          | The proxy host to use, must be set if `opensearch.connection.proxy.enabled = true`.                                                                                  |
-| opensearch.connection.proxy.port                      | null          | The proxy port to use, must be set if `opensearch.connection.proxy.enabled = true`.                                                                                  |
-| opensearch.connection.proxy.sslEnabled                | false         | Whether this proxy is using a secured connection (HTTPS).                                                                                                            |
-| opensearch.connection.skipHostnameVerification        | false         | Determines whether the hostname verification should be skipped.                                                                                                      |
-| opensearch.connection.awsEnabled                      | false         | Determines if AWS credentials shall be used for authentication                                                                                                       |
+| YAML path                                      | Default value | Description                                                                                       |
+| ---------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------- |
+| opensearch.connection.timeout                  | 10000         | Maximum time without connection to OpenSearch that Optimize should wait until a timeout triggers. |
+| opensearch.connection.pathPrefix               |               | The path prefix under which OpenSearch is available.                                              |
+| opensearch.connection.nodes[*].host            | localhost     | The address/hostname under which the OpenSearch node is available.                                |
+| opensearch.connection.nodes[*].httpPort        | 9205          | A port number used by OpenSearch to accept HTTP connections.                                      |
+| opensearch.connection.skipHostnameVerification | false         | Determines whether the hostname verification should be skipped.                                   |
+| opensearch.connection.awsEnabled               | false         | Determines if AWS credentials shall be used for authentication                                    |
 
 #### Index settings
 
@@ -232,8 +223,8 @@ Define a secured connection to be able to communicate with a secured OpenSearch 
 
 | YAML path                                       | Default value | Description                                                                                                                                                                                                                                                  |
 | ----------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| opensearch.security.username                    |               | The basic authentication (x-pack) username.                                                                                                                                                                                                                  |
-| opensearch.security.password                    |               | The basic authentication (x-pack) password.                                                                                                                                                                                                                  |
+| opensearch.security.username                    |               | The basic authentication username.                                                                                                                                                                                                                           |
+| opensearch.security.password                    |               | The basic authentication password.                                                                                                                                                                                                                           |
 | opensearch.security.ssl.enabled                 | false         | Used to enable or disable TLS/SSL for the HTTP connection.                                                                                                                                                                                                   |
 | opensearch.security.ssl.certificate             |               | The path to a PEM encoded file containing the certificate (or certificate chain) that will be presented to clients when they connect.                                                                                                                        |
 | opensearch.security.ssl.certificate_authorities | [ ]           | A list of paths to PEM encoded CA certificate files that should be trusted, for example ['/path/to/ca.crt']. <br /><br />NOTE: if you are using a public CA that is already trusted by the Java runtime, you do not need to set the certificate_authorities. |

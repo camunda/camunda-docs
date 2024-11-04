@@ -52,7 +52,7 @@ The gateway is stateless and sessionless, and gateways can be added as necessary
 
 ## Brokers
 
-The Zeebe broker is the distributed workflow engine that tracks the state of active process instances.
+The Zeebe Broker is the distributed workflow engine that tracks the state of active process instances.
 
 Brokers can be partitioned for horizontal scalability and replicated for fault tolerance. A Zeebe deployment often consists of more than one broker.
 
