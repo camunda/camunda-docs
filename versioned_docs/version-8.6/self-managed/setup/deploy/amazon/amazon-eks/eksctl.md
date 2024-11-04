@@ -53,7 +53,7 @@ This guide results in the following:
 
 This basic cluster setup is required to continue with the Helm set up as described in our [AWS Helm guide](./eks-helm.md).
 
-## 1. Provision the complete infrastructure for Camunda 8 on AWS
+## 1. Configure AWS and eksctl
 
 ### Set up AWS authentication
 
