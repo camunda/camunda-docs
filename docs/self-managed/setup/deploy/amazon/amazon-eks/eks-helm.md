@@ -1,7 +1,7 @@
 ---
 id: eks-helm
 title: "Install Camunda 8 on an EKS cluster"
-description: "Set up the Camunda 8 environment with Helm and an optional DNS setup on Amazon EKS."
+description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Amazon EKS."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -84,36 +84,41 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-
 
 </Tabs>
 
-### Export domain values
+## Optional Ingress Setup
 
-:::note
-Without a domain, you will need to use [kubectl port-forward to access the Camunda platform](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+:::info Domain or domainless installation
+
+If you do not have a domain name, external access to Camunda 8 web endpoints from outside the AWS VPC will not be possible. In this case, you may skip the DNS setup and proceed directly to [deploying Camunda 8 via Helm charts](#deploy-camunda-8-via-helm-charts).
+
+Alternatively, you can use `kubectl port-forward` to access the Camunda platform without a domain or Ingress configuration. For more information, see the [kubectl port-forward documentation](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_port-forward/).
+
+Throughout the rest of this installation guide, we will refer to configurations as **"With Domain"** or **"Without Domain"** depending on whether the application is exposed via a domain.
 :::
 
+In this section, we provide an optional setup guide for configuring an Ingress with TLS and DNS management, allowing you to access your application through a specified domain. If you haven't set up an Ingress, refer to the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) for more details. In Kubernetes, an Ingress is an API object that manages external access to services in a cluster, typically over HTTP, and can also handle TLS encryption for secure connections.
+
+To monitor your Ingress setup using Amazon CloudWatch, you may also find the official AWS guide on [monitoring nginx workloads with CloudWatch Container Insights and Prometheus](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-Sample-Workloads-nginx.html) helpful. Additionally, for detailed steps on exposing Kubernetes applications with the nginx ingress controller, refer to the [official AWS tutorial](https://aws.amazon.com/fr/blogs/containers/exposing-kubernetes-applications-part-3-nginx-ingress-controller/).
+
+### Export Values
+
+Set the following values for your Ingress configuration:
+
 ```shell
-# The domain name that you intend to use
+# The domain name you intend to use
 export DOMAIN_NAME=camunda.example.com
-# The e-mail to register with Let's Encrypt
+# The email address for Let's Encrypt registration
 export MAIL=admin@camunda.example.com
-# The Ingress-Nginx Helm Chart version
+# Helm chart versions for Ingress components
 export INGRESS_HELM_CHART_VERSION="4.11.2"
-# The External DNS Helm Chart version
 export EXTERNAL_DNS_HELM_CHART_VERSION="1.15.0"
-# The Cert-Manager Helm Chart version
 export CERT_MANAGER_HELM_CHART_VERSION="1.15.3"
 ```
 
-Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
+Additionally, obtain these values by following the guide for either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md), as they will be needed in later steps:
 
-- EXTERNAL_DNS_IRSA_ARN
-- CERT_MANAGER_IRSA_ARN
-- REGION
-
-## DNS set up
-
-:::info
-If you don't have a domain name, you cannot access Camunda 8 web endpoints from outside the AWS VPC. Therefore, you can skip the DNS set up and continue with deploying [Camunda 8](#deploy-camunda-8-via-helm-charts).
-:::
+- `EXTERNAL_DNS_IRSA_ARN`
+- `CERT_MANAGER_IRSA_ARN`
+- `REGION`
 
 ### ingress-nginx
 

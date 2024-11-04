@@ -426,9 +426,7 @@ To [enable OpenID Connect (OIDC) and IAM Roles for Service Accounts (IRSA)](http
    aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4
    ```
 
-   If output is returned, then you already have an IAM OIDC provider for your cluster and you can skip the next step.
-
-   If no output is returned, then you must create an IAM OIDC provider for your cluster.
+   If output is returned, an IAM OIDC provider is already set up for your cluster, so you can skip the next step. If no output is returned, you will need to set up an IAM OIDC provider for your cluster.
 
 1. Create an IAM OIDC identity provider for your cluster with the following command:
 
