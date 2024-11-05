@@ -5,9 +5,9 @@ description: "Interact with Zeebe clusters. Run user task state operations for Z
 ---
 
 :::warning Deprecation notice
-The Zeebe REST API has been deprecated. With `8.6`, Camunda introduced the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to manage and query process entities such as processes, decisions, forms, and user tasks.
+The Zeebe REST API has been deprecated. Camunda introduced the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) with `8.6` to manage and query process entities such as processes, decisions, forms, and user tasks.
 
-Camunda has also introduced [Zeebe user tasks](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md) to build more advanced functionalities, replacing job worker-based user tasks.
+Camunda also introduced [Zeebe user tasks](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md) to build more advanced functionalities, replacing job worker-based user tasks.
 :::
 
 ## Introduction
