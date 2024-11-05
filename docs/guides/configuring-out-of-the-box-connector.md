@@ -1,6 +1,6 @@
 ---
 id: configuring-out-of-the-box-connectors
-title: Integrate out-of-the-box Connectors
+title: Integrate a Camunda Connector
 description: "Ready to use out of the box, Connectors help automate complex business processes by inserting them into BPMN diagrams."
 keywords: [connector, modeling, connectors, low-code, no-code]
 ---
