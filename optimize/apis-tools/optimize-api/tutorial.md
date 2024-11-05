@@ -31,7 +31,7 @@ To set up your credentials, create an `.env` file which will be protected by the
 
 These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
 
-:::note Can't find your environment variables?
+:::tip Can't find your environment variables?
 When you create new client credentials as a [prerequisite](#prerequisites), your environment variables appear in a pop-up window. Your environment variables may appear as `CAMUNDA_CLIENT_ID`, `CAMUNDA_CLIENT_SECRET`, and `CAMUNDA_OPTIMIZE_BASE_URL`.
 :::
 
