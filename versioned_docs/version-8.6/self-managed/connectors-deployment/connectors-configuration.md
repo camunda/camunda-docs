@@ -223,7 +223,8 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 ## Multi-tenancy
 
-The Connector Runtime supports multiple tenants for inbound and outbound Connectors.
+The Connector Runtime supports multiple tenants for inbound and outbound Connectors. These are configurable in [Identity](/self-managed/identity/user-guide/tenants/managing-tenants.md).
+
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the default tenant ID for all
 Zeebe-related operations like handling jobs and publishing messages.
@@ -275,7 +276,7 @@ To run the Connector Runtime in a setup where a single runtime
 serves multiple tenants, add each tenant ID to the list of the default job workers:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS=`myTenant, myTenant`
+ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS=`myTenant, otherTenant`
 ```
 
 In this case, the `ZEEBE_CLIENT_DEFAULT-TENANT-ID` will **not** be used for the
