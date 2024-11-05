@@ -91,11 +91,11 @@ Learn the differences between both task types and make an informed decision, and
         <td>
             <div>Partially</div>
             <TableTextSmall>Queries, GET tasks, forms, variables</TableTextSmall>
-            <TableTextSmall>ℹ  Currently, you must use Zeebe and Tasklist APIs to use Zeebe user tasks</TableTextSmall>
+            <TableTextSmall>ℹ  Currently, you must use the Camunda 8 and Tasklist APIs to use Zeebe user tasks</TableTextSmall>
         </td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Supports Zeebe API</th>
+        <th style={{ textAlign: "end" }}>Supports Camunda 8 API</th>
         <td><NoItem /></td>
         <td>
             <YesItem />
@@ -243,7 +243,7 @@ You can also operate both task types at the same time in the same application ut
 
 The major changes are:
 
-- Create and maintain new, additional secrets for the Zeebe REST API.
+- Create and maintain new, additional secrets for the Camunda 8 API.
 - Call dedicated endpoints on separate components (Zeebe vs. Tasklist) for all state modifications on tasks for the respective task types.
 - Manage new request/response objects.
 
