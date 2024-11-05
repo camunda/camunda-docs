@@ -902,6 +902,11 @@ module.exports = {
         },
       ],
     },
+    {
+      "Migration manuals": [
+        "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks",
+      ],
+    },
   ],
 
   Reference: [

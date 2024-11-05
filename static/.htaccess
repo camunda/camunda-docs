@@ -12,7 +12,9 @@ RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 
 # 8.7 content moves vvvv
 # ----------------------
-# None here yet, but please place them here when you have them.
+
+# Move migrating to Zeebe user tasks
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest//migrate-to-zeebe-user-tasks/?$ /docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
 
 # Move alpha features to components
 RewriteRule ^docs/next/reference/alpha-features/?$ /docs/next/components/early-access/alpha/alpha-features/$1 [R=301,L]

@@ -5,6 +5,12 @@ sidebar_position: 1
 description: "Build applications for human-centered processes by querying human tasks, assigning users, and completing tasks with the Tasklist API."
 ---
 
+:::note
+Camunda introduced [Zeebe user tasks](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md) with `8.5` to build more advanced functionalities, replacing job worker-based user tasks. If you use Zeebe user tasks with `8.5`, task management endpoints in the Tasklist API will not work.
+
+To manage Zeebe user tasks Camunda has introduced the [Zeebe REST API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md), though you can still query Zeebe user tasks with Tasklist API.
+:::
+
 ## Introduction
 
 The Tasklist API is a REST API designed to build task applications for human-centered processes. The API allows you to query user tasks, assign users to these tasks, and complete these tasks.
