@@ -258,7 +258,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Query user tasks</th>
         <td>
-            <a href="../specifications/search-tasks">
+            <a href="../../tasklist-api-rest/specifications/search-tasks">
                 <code>POST /tasks/search</code>
             </a>
         </td>
@@ -271,7 +271,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Get user task</th>
         <td>
-            <a href="../specifications/get-task-by-id/">
+            <a href="../../tasklist-api-rest/specifications/get-task-by-id/">
                 <code>GET /tasks/:taskId</code>
             </a>
         </td>
@@ -284,11 +284,11 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
         <td>
-            <a href="../specifications/get-variable-by-id/">
+            <a href="../../tasklist-api-rest/specifications/get-variable-by-id/">
                 <code>GET /variables/:variableId</code>
             </a>
             <br/>
-            <a href="../specifications/search-task-variables/">
+            <a href="../../tasklist-api-rest/specifications/search-task-variables/">
                 <code>POST /tasks/:taskId/variables/search</code>
             </a>
         </td>
@@ -297,7 +297,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Get task form</th>
         <td>
-            <a href="../specifications/get-form/">
+            <a href="../../tasklist-api-rest/specifications/get-form/">
                 <code>GET /forms/:formId</code>
             </a>
         </td>
@@ -310,12 +310,12 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Assign a task</th>
         <td>
-            <a href="../specifications/assign-task/">
+            <a href="../../tasklist-api-rest/specifications/assign-task/">
                 <code>PATCH /tasks/:taskId/assign</code>
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/assign-a-user-task">
+            <a href="../../camunda-api-rest/specifications/assign-user-task">
                 <code>POST /user-tasks/:userTaskKey/assignment</code>
             </a>
         </td>
@@ -323,12 +323,12 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Unassign a task</th>
         <td>
-            <a href="../specifications/unassign-task/">
+            <a href="../../tasklist-api-rest/specifications/unassign-task/">
                 <code>PATCH /tasks/:taskId/unassign</code>
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/unassign-a-user-task">
+            <a href="../../camunda-api-rest/specifications/unassign-user-task">
                 <code>DELETE /user-tasks/:userTaskKey/assignee</code>
             </a>
         </td>
@@ -336,13 +336,13 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Complete task</th>
         <td>
-            <a href="../specifications/complete-task/">
+            <a href="../../tasklist-api-rest/specifications/complete-task/">
                 <code>PATCH /tasks/:taskId/complete</code>
             </a>
         </td>
         <td>
-            <a href="../../zeebe-api-rest/specifications/complete-a-user-task">
-                <code>POST /user-tasks/:taskKey/completion</code>
+            <a href="../../camunda-api-rest/specifications/complete-user-task">
+                <code>POST /user-tasks/:userTaskKey/completion</code>
             </a>
         </td>
     </tr>
@@ -350,7 +350,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
         <th style={{ textAlign: "end" }}>Update task</th>
         <td>-</td>
         <td>
-            <a href="../../camunda-api-rest/specifications/update-a-user-task">
+            <a href="../../camunda-api-rest/specifications/update-user-task">
                 <code>PATCH /user-tasks/:userTaskKey</code>
             </a>
         </td>
@@ -358,7 +358,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Save and retrieve draft variables</th>
         <td>
-            <a href="../specifications/save-draft-task-variables/">
+            <a href="../../tasklist-api-rest/specifications/save-draft-task-variables/">
                 <code>POST /tasks/:taskId/variables</code>
             </a>
         </td>
