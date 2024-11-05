@@ -39,7 +39,7 @@ const SearchableTable = () => {
       description:
         "Interact with Amazon DynamoDB NoSQL database service within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.",
       type: "Outbound",
-      link: "../amazon-dynamodb.md",
+      link: "../amazon-dynamodb/",
       image: AmazonBedrockImg,
     },
     {
@@ -47,7 +47,7 @@ const SearchableTable = () => {
       description:
         "Send events using Amazon EventBridge service within your BPMN process.",
       type: "Outbound",
-      link: "../amazon-eventbridge.md",
+      link: "../amazon-eventbridge/",
       image: AmazonEventbridgeImg,
     },
     {
@@ -55,7 +55,7 @@ const SearchableTable = () => {
       description:
         "Start a BPMN process instance triggered by an Amazon EventBridge service event.",
       type: "Inbound",
-      link: "../amazon-eventbridge.md",
+      link: "../amazon-eventbridge/",
       image: AmazonBedrockImg,
     },
     {
@@ -63,7 +63,7 @@ const SearchableTable = () => {
       description:
         "Interact with the Amazon SageMaker service from your BPMN process.",
       type: "Outbound",
-      link: "../amazon-sagemaker.md",
+      link: "../amazon-sagemaker/",
       image: AmazonBedrockImg,
     },
     {
@@ -71,7 +71,7 @@ const SearchableTable = () => {
       description:
         "Trigger your BPMN process with an Amazon Simple Notification Service notification via HTTPS.",
       type: "Inbound",
-      link: "../amazon-sns.md",
+      link: "../amazon-sns/",
       image: AmazonBedrockImg,
     },
     {
@@ -79,7 +79,7 @@ const SearchableTable = () => {
       description:
         "Send messages to Amazon Simple Notification Service from your BPMN process.",
       type: "Outbound",
-      link: "../amazon-sns.md",
+      link: "../amazon-sns/",
       image: AmazonBedrockImg,
     },
     {
@@ -87,7 +87,7 @@ const SearchableTable = () => {
       description:
         "Send messages to Amazon Simple Queue Service from your BPMN process.",
       type: "Outbound",
-      link: "../amazon-sqs.md",
+      link: "../amazon-sqs/",
       image: AmazonBedrockImg,
     },
     {
@@ -95,7 +95,7 @@ const SearchableTable = () => {
       description:
         "Receive messages from Amazon Simple Queue Service (SQS) in your BPMN process.",
       type: "Inbound",
-      link: "../amazon-sqs.md",
+      link: "../amazon-sqs/",
       image: AmazonBedrockImg,
     },
     {
@@ -103,14 +103,14 @@ const SearchableTable = () => {
       description:
         "Interact with the Amazon Textract Service from your BPMN process.",
       type: "Outbound",
-      link: "../amazon-textract.md",
+      link: "../amazon-textract/",
       image: AmazonBedrockImg,
     },
     {
       name: "Asana Connector",
       description: "Manage Asana projects and tasks from your BPMN process.",
       type: "Outbound",
-      link: "../asana.md",
+      link: "../asana/",
       image: AsanaImg,
     },
     {
@@ -118,21 +118,21 @@ const SearchableTable = () => {
       description:
         "Orchestrate your Automation Anywhere queue from your BPMN process.",
       type: "Outbound",
-      link: "../automation-anywhere.md",
+      link: "../automation-anywhere/",
       image: AmazonBedrockImg,
     },
     {
       name: "AWS Lambda Connector",
       description: "Invoke AWS Lambda Functions from your BPMN process.",
       type: "Outbound",
-      link: "../aws-lambda.md",
+      link: "../aws-lambda/",
       image: AmazonBedrockImg,
     },
     {
       name: "Azure OpenAI",
       description: "Interact with Azure OpenAI from your BPMN process.",
       type: "Outbound",
-      link: "../azure-open-ai.md",
+      link: "../azure-open-ai/",
       image: AmazonBedrockImg,
     },
     {
@@ -140,14 +140,14 @@ const SearchableTable = () => {
       description:
         "Orchestrate your Blue Prism queue items from your BPMN process.",
       type: "Outbound",
-      link: "../blueprism.md",
+      link: "../blueprism/",
       image: AmazonBedrockImg,
     },
     {
       name: "Camunda Operate Connector",
       description: "Fetch process execution data from Camunda Operate.",
       type: "Outbound",
-      link: "../operate.md",
+      link: "../operate/",
       image: AmazonBedrockImg,
     },
     {
@@ -155,28 +155,28 @@ const SearchableTable = () => {
       description:
         "Create addresses, parcels, and shipments, as well as purchase and verify shipments with EasyPost from your BPMN process.",
       type: "Outbound",
-      link: "../easypost.md",
+      link: "../easypost/",
       image: AmazonBedrockImg,
     },
     {
       name: "GitHub Connector",
       description: "Manage GitHub issues and releases from your BPMN process.",
       type: "Outbound",
-      link: "../github.md",
+      link: "../github/",
       image: AmazonBedrockImg,
     },
     {
       name: "GitHub Webhook Connector",
       description: "Start a process instance triggered by a GitHub event.",
       type: "Inbound",
-      link: "../github.md",
+      link: "../github/",
       image: AmazonBedrockImg,
     },
     {
       name: "GitLab Connector",
       description: "Manage GitLab issues and releases from your BPMN process.",
       type: "Outbound",
-      link: "../gitlab.md",
+      link: "../gitlab/",
       image: AmazonBedrockImg,
     },
     {
@@ -184,7 +184,7 @@ const SearchableTable = () => {
       description:
         "Create folders or files from a Google Drive template from your BPMN process.",
       type: "Outbound",
-      link: "../googledrive.md",
+      link: "../googledrive/",
       image: AmazonBedrockImg,
     },
     {
@@ -192,7 +192,7 @@ const SearchableTable = () => {
       description:
         "Validate addresses, retrieve postal addresses, and calculate distances with Google Maps Platform Service from your BPMN process.",
       type: "Outbound",
-      link: "../google-maps-platform.md",
+      link: "../google-maps-platform/",
       image: AmazonBedrockImg,
     },
     {
@@ -200,7 +200,7 @@ const SearchableTable = () => {
       description:
         "Allows you to work with an existing or new empty spreadsheet on Google Drive from your BPMN process.",
       type: "Outbound",
-      link: "../google-sheets.md",
+      link: "../google-sheets/",
       image: AmazonBedrockImg,
     },
     {
@@ -208,7 +208,7 @@ const SearchableTable = () => {
       description:
         "Execute a GraphQL query or mutation from your BPMN process.",
       type: "Outbound",
-      link: "../graphql.md",
+      link: "../graphql/",
       image: AmazonBedrockImg,
     },
     {
@@ -216,28 +216,28 @@ const SearchableTable = () => {
       description:
         "Start a process instance with your custom webhook configuration.",
       type: "Outbound",
-      link: "../http-webhook.md",
+      link: "../http-webhook/",
       image: AmazonBedrockImg,
     },
     {
       name: "Hugging Face Connector",
       description: "Interact with Hugging Face models from your BPMN process.",
       type: "Outbound",
-      link: "../hugging-face.md",
+      link: "../hugging-face/",
       image: AmazonBedrockImg,
     },
     {
       name: "Kafka Consumer Connector",
       description: "Consume messages from Kafka from your BPMN process.",
       type: "Inbound",
-      link: "../kafka.md",
+      link: "../kafka/",
       image: AmazonBedrockImg,
     },
     {
       name: "Kafka Producer Connector",
       description: "Produce messages to Kafka from your BPMN process.",
       type: "Outbound",
-      link: "../kafka.md",
+      link: "../kafka/",
       image: AmazonBedrockImg,
     },
     {
@@ -245,21 +245,21 @@ const SearchableTable = () => {
       description:
         "Interactions with Microsoft 365 mail from your BPMN process.",
       type: "Outbound",
-      link: "../microsoft-o365-mail.md",
+      link: "../microsoft-o365-mail/",
       image: AmazonBedrockImg,
     },
     {
       name: "Microsoft Teams Connector",
       description: "Interactions with Microsoft Teams from your BPMN process.",
       type: "Outbound",
-      link: "../microsoft-teams.md",
+      link: "../microsoft-teams/",
       image: AmazonBedrockImg,
     },
     {
       name: "OpenAI Connector",
       description: "Interact with ChatGPT and OpenAI Moderation API.",
       type: "Outbound",
-      link: "../openai.md",
+      link: "../openai/",
       image: AmazonBedrockImg,
     },
     {
@@ -267,21 +267,21 @@ const SearchableTable = () => {
       description:
         "The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.",
       type: "Outbound",
-      link: "../polling.md",
+      link: "../polling/",
       image: AmazonBedrockImg,
     },
     {
       name: "RabbitMQ Consumer Connector",
       description: "Receive messages from RabbitMQ in your BPMN process.",
       type: "Inbound",
-      link: "../rabbitmq-outbound.md",
+      link: "../rabbitmq-outbound/",
       image: AmazonBedrockImg,
     },
     {
       name: "RabbitMQ Producer Connector",
       description: "Send messages to RabbitMQ from your BPMN process.",
       type: "Outbound",
-      link: "../rabbitmq-outbound.md",
+      link: "../rabbitmq-outbound/",
       image: AmazonBedrockImg,
     },
     {
@@ -289,21 +289,21 @@ const SearchableTable = () => {
       description:
         "Make a request to a REST API and use the response in the next steps of your process.",
       type: "Outbound",
-      link: "../rest.md",
+      link: "../rest/",
       image: AmazonBedrockImg,
     },
     {
       name: "Salesforce Connector",
       description: "Manage your Salesforce instance from your BPMN process.",
       type: "Outbound",
-      link: "../salesforce.md",
+      link: "../salesforce/",
       image: AmazonBedrockImg,
     },
     {
       name: "SendGrid Connector",
       description: "Quickly send emails from your BPMN processes.",
       type: "Outbound",
-      link: "../sendgrid.md",
+      link: "../sendgrid/",
       image: AmazonBedrockImg,
     },
     {
@@ -311,7 +311,7 @@ const SearchableTable = () => {
       description:
         "Trigger a Slack bot to start a BPMN process with an event or a slash command.",
       type: "Inbound",
-      link: "../slack.md",
+      link: "../slack/",
       image: AmazonBedrockImg,
     },
     {
@@ -319,7 +319,7 @@ const SearchableTable = () => {
       description:
         "Send messages to channels or users in your Slack workspace from your BPMN process.",
       type: "Outbound",
-      link: "../slack.md",
+      link: "../slack/",
       image: AmazonBedrockImg,
     },
     {
@@ -327,7 +327,7 @@ const SearchableTable = () => {
       description:
         "Connect your BPMN process with Simple Object Access Protocol (SOAP) services and interact with SOAP service endpoints.",
       type: "Outbound",
-      link: "../soap.md",
+      link: "../soap/",
       image: AmazonBedrockImg,
     },
     {
@@ -335,7 +335,7 @@ const SearchableTable = () => {
       description:
         "Connect your BPMN process with SQL databases (Microsoft SQL Server, PostgreSQL, MySQL).",
       type: "Outbound",
-      link: "../sql.md",
+      link: "../sql/",
       image: AmazonBedrockImg,
     },
     {
@@ -343,7 +343,7 @@ const SearchableTable = () => {
       description:
         "Send and get SMS messages with Twilio service from your BPMN process.",
       type: "Outbound",
-      link: "../twilio.md",
+      link: "../twilio/",
       image: AmazonBedrockImg,
     },
     {
@@ -351,14 +351,14 @@ const SearchableTable = () => {
       description:
         "Start a process instance triggered by a Twilio webhook. Can be used as an intermediate Connector in existing processes.",
       type: "Inbound",
-      link: "../twilio.md",
+      link: "../twilio/",
       image: AmazonBedrockImg,
     },
     {
       name: "UiPath Connector",
       description: "Orchestrate your UiPath Bots with Camunda.",
       type: "Outbound",
-      link: "../uipath.md",
+      link: "../uipath/",
       image: AmazonBedrockImg,
     },
     {
@@ -366,7 +366,7 @@ const SearchableTable = () => {
       description:
         "Send messages with WhatsApp Business from your BPMN process.",
       type: "Outbound",
-      link: "../whatsapp.md",
+      link: "../whatsapp/",
       image: AmazonBedrockImg,
     },
   ];
