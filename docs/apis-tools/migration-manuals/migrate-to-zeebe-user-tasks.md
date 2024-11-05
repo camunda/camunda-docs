@@ -6,14 +6,14 @@ description: "Learn how to migrate job worker-based user tasks to Zeebe-based ta
 
 import DocCardList from '@theme/DocCardList';
 import FormViewer from "@site/src/mdx/FormViewer";
-import YesItem from "./assets/react-components/YesItem";
-import NoItem from "./assets/react-components/NoItem";
-import TableTextSmall from "./assets/react-components/TableTextSmall";
-import userTaskMigrationDecisionHelperForm from "./assets/forms/userTaskMigrationDecisionHelperForm.js";
-import "./assets/css/condensedTable.module.css";
-import styles from "./assets/css/cleanImages.module.css";
-import APIArchitectureImg from './assets/img/api-architecture.png';
-import ZeebeTaskSelectionImg from './assets/img/zeebe-user-task-selection.png';
+import YesItem from "../tasklist-api-rest/assets/react-components/YesItem";
+import NoItem from "../tasklist-api-rest/assets/react-components/NoItem";
+import TableTextSmall from "../tasklist-api-rest/assets/react-components/TableTextSmall";
+import userTaskMigrationDecisionHelperForm from "../tasklist-api-rest/assets/forms/userTaskMigrationDecisionHelperForm.js";
+import "../tasklist-api-rest/assets/css/condensedTable.module.css";
+import styles from "../tasklist-api-rest/assets/css/cleanImages.module.css";
+import APIArchitectureImg from '../tasklist-api-rest/assets/img/api-architecture.png';
+import ZeebeTaskSelectionImg from '../tasklist-api-rest/assets/img/zeebe-user-task-selection.png';
 
 Camunda 8.5 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
 Zeebe user tasks have several benefits, including:
