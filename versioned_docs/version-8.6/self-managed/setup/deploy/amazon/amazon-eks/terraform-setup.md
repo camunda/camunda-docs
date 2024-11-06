@@ -630,7 +630,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
-### Configure OpenSearch fine grained access controle
+### Configure OpenSearch fine grained access control
 
 As you now have an OpenSearch domain, you need to configure the related access for each Camunda component.
 
