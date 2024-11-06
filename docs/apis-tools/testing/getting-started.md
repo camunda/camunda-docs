@@ -277,7 +277,7 @@ The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. 
 - `tc.camunda` - The Camunda Docker container
 - `tc.connectors` - The Connectors Docker container
 - `tc.elasticsearch` - The Elasticsearch Docker container
-- `org.testcontainers` - The Testconainers framework
+- `org.testcontainers` - The Testcontainers framework
 
 For most cases, the log level `warn` (warning) is sufficient.
 

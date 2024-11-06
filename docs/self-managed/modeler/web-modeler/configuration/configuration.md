@@ -20,24 +20,25 @@ import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 ### Clusters
 
-Clusters configured using the following options can be selected when deploying from Web Modeler. If no clusters are configured, your cluster information can be provided at the time of the deployment. The Camunda 8 [Docker Compose distribution](/self-managed/setup/deploy/local/docker-compose.md) provides a local Zeebe cluster configured by default.
+Clusters configured using the following options can be selected when deploying from Web Modeler. If no clusters are configured, your cluster information can be provided at the time of the deployment. The Camunda 8 [Helm](/docs/self-managed/setup/install.md) and [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
 
 To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 
-| Environment variable                                 | Description                                                    | Example value                       |
-| ---------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------- |
-| `CAMUNDA_MODELER_CLUSTERS_0_NAME`                    | The name of your cluster.                                      | `test cluster 1`                    |
-| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`                 | The Camunda version used by this cluster.                      | `8.6.0`                             |
-| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION`          | The authentication to use with your cluster.                   | `OAUTH`, `NONE`                     |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC`          | The address where your cluster can be reached.                 | `grpcs://zeebe-1.example.com:26500` |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST`          | The address where the Zeebe REST API can be reached.           | `https://zeebe-1.example.com:8080`  |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`             | The address where Operate can be reached.                      | `https://operate-1.example.com`     |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`            | The address where Tasklist can be reached.                     | `https://tasklist-1.example.com`    |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer.                              | `https://auth.example.com/token`    |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | A comma-separated list of the scopes to use with this cluster. | `test-scope`                        |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The permission name for Zeebe.                                 | `zeebe-api`                         |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The permission name for Operate.                               | `operate-api`                       |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist.                              | `tasklist-api`                      |
+| Environment variable | Description | Example value |
+| -------------------- | ----------- | ------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_ID` | A unique identifier to use for your cluster. | `test-cluster-1` |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME` | The name of your cluster. | `test cluster 1` |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION` | The Camunda version used by this cluster. | `8.6.0` |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` | The authentication to use with your cluster. | `OAUTH`, `NONE` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC` | The address where your cluster can be reached. | `grpcs://zeebe-1.example.com:26500` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST` | The address where the Zeebe REST API can be reached. | `https://zeebe-1.example.com:8080` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE` | The address where Operate can be reached. | `https://operate-1.example.com` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST` | The address where Tasklist can be reached. | `https://tasklist-1.example.com` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL` | The address of your token issuer. | `https://auth.example.com/token` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE` | A comma-separated list of the scopes to use with this cluster. | `test-scope` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE` | The permission name for Zeebe. | `zeebe-api` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE` | The permission name for Operate. | `operate-api` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist. | `tasklist-api` |
 
 ### Database
 
@@ -83,11 +84,13 @@ The `restapi` component sends certain events (e.g. "file updated", "comment adde
 
 Web Modeler integrates with Identity and Keycloak for authentication and authorization (using OAuth 2.0 + OpenID Connect) as well as user management.
 
-| Environment variable                                   | Description                                                                                                                                                                                                                                                                             | Example value                                               |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| `CAMUNDA_IDENTITY_BASEURL`                             | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                                               | `http://identity:8080`                                      |
-| `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform` |
-| `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL`              | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:8080/auth/realms/camunda-platform`         |
+| Environment variable                                       | Description                                                                                                                                                                                                                                                                             | Example value                                                                             |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `CAMUNDA_IDENTITY_BASEURL`                                 | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                                               | `http://identity:8080`                                                                    |
+| `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL`                  | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:8080/auth/realms/camunda-platform`                                       |
+| `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI`     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform`                               |
+| `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI`    | [optional] URL of the JWK Set endpoint (used for JWT validation). Only necessary if URL cannot be derived from the OIDC configuration endpoint.                                                                                                                                         | `https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs` |
+| `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWS_ALGORITHMS` | [optional] List of trusted JWS algorithms used for JWT validation. Only necessary if the algorithms cannot be derived from the JWK Set response.                                                                                                                                        | `ES256`                                                                                   |
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
