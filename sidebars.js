@@ -1150,6 +1150,7 @@ module.exports = {
               },
               items: [
                 "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
+                "self-managed/zeebe-deployment/exporters/camunda-exporter",
                 "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                 "self-managed/zeebe-deployment/exporters/opensearch-exporter",
               ],
