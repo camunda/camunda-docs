@@ -19,7 +19,7 @@ Process instances can be migrated from one specific process definition version t
 ![operate-migrate-button](./img/process-instance-migration/migrate-button.png)
 
 :::note
-It is only possible to migrate running process instances, meaning instances in active or incident state. All other process instances will not be part of the migration plan and will be ignored. Please visit the concepts section to learn about [all limitations](/components/concepts/process-instance-migration.md#limitations).
+It is only possible to migrate running process instances, meaning instances in an active or incident state. All other process instances will not be part of the migration plan and will be ignored. Learn more about [all limitations](/components/concepts/process-instance-migration.md#limitations).
 :::
 
 The migration view features three areas: the source process diagram (top left), the target process diagram (top right) and the flow node mapping (bottom panel).
@@ -37,7 +37,7 @@ In this example, all service tasks from version 1 of `orderProcess` are each map
 ![operate-view-process-filters](./img/process-instance-migration/map-elements.png)
 
 :::note
-It is currently only possible to map elements whose migration is supported by Zeebe. Visit the concepts section to learn about all [supported elements](/components/concepts/process-instance-migration.md#supported-bpmn-elements).
+It is currently only possible to map elements with migration supported by Zeebe. Learn more about [supported elements](/components/concepts/process-instance-migration.md#supported-bpmn-elements).
 :::
 
 6. (Optional) Click on a flow node in the diagram or on a source flow node row in the bottom panel to see how flow nodes are mapped.
