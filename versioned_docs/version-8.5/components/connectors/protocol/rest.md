@@ -57,7 +57,7 @@ Select the **REST Connector** and fill out the following properties under the **
    - **Headers**: The API key will be included in the request headers.
 3. Specify your API key details:
    - **API key name**: Enter the parameter name expected by the API (e.g., apiKey).
-   - **API key value**: Reference the secret you created for your API key (e.g., {{secrets.REST_API_KEY_SECRET}}).
+   - **API key value**: Reference the secret you created for your API key (e.g., `{{secrets.REST_API_KEY_SECRET}}`).
 
 ### REST Connector (Basic)
 

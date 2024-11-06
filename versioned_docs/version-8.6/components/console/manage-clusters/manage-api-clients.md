@@ -1,6 +1,6 @@
 ---
 id: manage-api-clients
-title: Manage API clients
+title: API clients
 description: "Let's create a client and manage our API clients."
 ---
 

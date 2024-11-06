@@ -523,8 +523,8 @@ As you now have a database, you need to create dedicated databases for each Camu
 
 You can access the created database in two ways:
 
-1. Set up a bastion host within the same network to securely access the database.
-2. Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database.
+1. **Bastion host:** Set up a bastion host within the same network to securely access the database.
+2. **Pod within the EKS cluster:** Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database.
 
 The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the EKS cluster to configure the database.
 
@@ -630,14 +630,14 @@ The choice depends on your infrastructure setup and security preferences. In thi
 
 Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
 
-### Configure OpenSearch fine grained access controle
+### Configure OpenSearch fine grained access control
 
 As you now have an OpenSearch domain, you need to configure the related access for each Camunda component.
 
 You can access the created OpenSearch domain in two ways:
 
-1. Set up a bastion host within the same network to securely access the OpenSearch domain.
-2. Alternatively, deploy a pod in your EKS cluster equipped with the necessary tools to connect to the OpenSearch domain.
+1. **Bastion host:** Set up a bastion host within the same network to securely access the OpenSearch domain.
+2. **Pod within the EKS cluster:** Alternatively, deploy a pod in your EKS cluster equipped with the necessary tools to connect to the OpenSearch domain.
 
 The choice depends on your infrastructure setup and security preferences. In this tutorial, we'll use a pod within the EKS cluster to configure the domain.
 
