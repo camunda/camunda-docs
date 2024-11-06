@@ -52,8 +52,8 @@ Zeebe:
 
 | Environment variable                                | Purpose                                                                        |
 | :-------------------------------------------------- | :----------------------------------------------------------------------------- |
-| `CAMUNDA_CLIENT_ZEEBE_BASEURL` (required)           | The base URL of the Zeebe broker (HTTPS)                                       |
-| `CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH` (optional) | The file location of the certificate to be used to connect to the Zeebe broker |
+| `CAMUNDA_CLIENT_ZEEBE_BASEURL` (required)           | The base URL of the Zeebe Broker (HTTPS)                                       |
+| `CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH` (optional) | The file location of the certificate to be used to connect to the Zeebe Broker |
 
 ```bash
 ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=127.0.0.1:26500

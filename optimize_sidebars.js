@@ -1068,6 +1068,7 @@ module.exports = {
             ),
             docsLink(
               "Connector templates",
+              "components/connectors/custom-built-connectors/connector-template-generator",
               "components/connectors/custom-built-connectors/connector-templates/"
             ),
 
@@ -1595,7 +1596,7 @@ module.exports = {
                   Cluster: [
                     docsLink(
                       "Get cluster topology",
-                      "apis-tools/camunda-api-rest/specifications/get-cluster-topology/"
+                      "apis-tools/camunda-api-rest/specifications/get-topology/"
                     ),
                   ],
                 },

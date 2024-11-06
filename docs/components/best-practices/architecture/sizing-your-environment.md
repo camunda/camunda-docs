@@ -120,7 +120,7 @@ Using your throughput and retention settings, you can now calculate the required
 
 ## Understanding sizing and scalability behavior
 
-Spinning up a Camunda 8 Cluster means you run multiple components that all need resources in the background, like the Zeebe broker, Elasticsearch (as the database for Operate, Tasklist, and Optimize), Operate, Tasklist, and Optimize. All those components need to be equipped with resources.
+Spinning up a Camunda 8 Cluster means you run multiple components that all need resources in the background, like the Zeebe Broker, Elasticsearch (as the database for Operate, Tasklist, and Optimize), Operate, Tasklist, and Optimize. All those components need to be equipped with resources.
 
 All components are clustered to provide high-availability, fault-tolerance and resiliency.
 
@@ -146,14 +146,14 @@ Now you can select a hardware package that can cover these requirements. In this
 Camunda 8 defines four [cluster sizes](/components/concepts/clusters.md#cluster-size) you can select from (1x, 2x, 3x, and 4x) after you have chosen your [cluster type](/components/concepts/clusters.md#cluster-type). The following table gives you an indication of what requirements you can fulfill with each cluster size.
 
 :::note
-Contact your Customer Success Manager if you require a custom cluster size above these requirements.
+Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
 :::
 
 | Cluster size                                                                        |                                 1x |                                  2x |                               3x |                               4x |
 | :---------------------------------------------------------------------------------- | ---------------------------------: | ----------------------------------: | -------------------------------: | -------------------------------: |
-| Max Throughput **Tasks/day** **\***                                                 |                              4.3 M |                               8.6 M |                           12.9 M |                           17.2 M |
-| Max Throughput **Tasks/second** **\***                                              |                                 50 |                                 100 |                              150 |                              200 |
-| Max Throughput **Process Instances/day** **\*\***                                   |                                3 M |                                 6 M |                              9 M |                             12 M |
+| Max Throughput **Tasks/day** **\***                                                 |                                9 M |                                18 M |                             27 M |                             36 M |
+| Max Throughput **Tasks/second** **\***                                              |                                100 |                                 200 |                              300 |                              400 |
+| Max Throughput **Process Instances/day** **\*\***                                   |                              432 k |                               864 k |                          1.296 k |                          1.728 k |
 | Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** |                               75 k |                               150 k |                            225 k |                            300 k |
 | Approximate resources provisioned **\*\*\*\***                                      | 11 vCPU, 22 GB memory, 64 GB disk. | 22 vCPU, 44 GB memory, 128 GB disk. | 33 vCPU, 66 GB mem, 192 GB disk. | 44 vCPU, 88 GB mem, 256 GB disk. |
 

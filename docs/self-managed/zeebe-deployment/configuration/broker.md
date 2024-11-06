@@ -2,7 +2,7 @@
 id: broker-config
 title: "Broker configuration"
 sidebar_label: "Broker configuration"
-description: "Let's analyze how to configure the Zeebe broker"
+description: "Let's analyze how to configure the Zeebe Broker"
 ---
 
 A complete broker configuration template is available in the [Zeebe repo](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template).
@@ -825,6 +825,10 @@ An example configuration for the Elasticsearch exporter can be found [here](../e
 ### zeebe.broker.exporters.opensearch (OpenSearch Exporter)
 
 An example configuration for the OpenSearch exporter can be found [here](../exporters/opensearch-exporter.md#example).
+
+### zeebe.broker.exporters.camundaExporter (Camunda Exporter)
+
+An example configuration for the Camunda exporter can be found [here](../exporters/camunda-exporter.md#example).
 
 ### zeebe.broker.processing
 

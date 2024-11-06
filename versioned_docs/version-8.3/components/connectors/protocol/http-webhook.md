@@ -83,7 +83,7 @@ Please refer to the [update guide](/components/connectors/custom-built-connector
   - Set the **API Key** property to the expected value of the API key.
   - Set the **API Key locator** property that will be evaluated against the incoming request to extract the API key. [See the example](#how-to-configure-api-key-authorization).
 
-- **[JWT authorization](https://jwt.io/)** - The token should be in the _Authorization_ header of the request in the format of Bearer {JWT_TOKEN}.
+- **[JWT authorization](https://jwt.io/)** - The token should be in the _Authorization_ header of the request in the format of Bearer `{JWT_TOKEN}`.
 
   - Set JWK URL which is used as a well-known public URL to fetch the [JWKs](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets).
   - Set JWT role property expression which will be evaluated against the content of the JWT to extract the list of roles. See more details on extracting roles from JWT data [here](#how-to-extract-roles-from-jwt-data).

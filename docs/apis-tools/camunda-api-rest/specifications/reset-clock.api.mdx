@@ -1,0 +1,50 @@
+---
+id: reset-clock
+title: "Reset internal clock (alpha)"
+description: "Resets the Zeebe engine’s internal clock to the current system time, enabling it to tick in real-time."
+sidebar_label: "Reset internal clock (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVt1u2zYUfhVCVw0WS26XbpnvjDTdMnRtkDgbsCQXlHRksZFIjaTiGIaBvcZeb0+y75By7MQp0IsBu5kBWyZ5zvedf2qVeDl3yeQ6OWlMcZfcHiamIyu9MvqsTCaJJUc+nh0mJbnCqo4PcXTBR074msTvRDkJ0nOl6e8//3JCaU9Wy0YUrCq8CWJFby1pL9zSeWqFVy0dQkvmjdJzoXyQU5BXWliSzYgl0hs9q5UTj3YJLHpHVd+IylgI+t5qBggUA9+N1sa2MCCnWt4ryMkKJjFJLR12SYtOaU0lk0rhOipUpQoxUN7oyWSijaeBnXTZGXjF5FKLa9l0tRQVSZDT7ausMG1nNJxzGUnbLEeyKMi5LMjF39Eg7dK2PABIKVq5hCXC9flnKoL3RS31HJwIQNWzMNxrSDoo3WhkANqgwTKZrJI34yN+PM3K7DEIC/jp+mAGYtUsRcjlJhc7OUiT9WHydjzeB5vqbSbJWkTRFCGJpVjUqiHRWcP4m+hb+qMn51NYWhgoas+YsusaVYTcZVDIG2q/+eyYYJW4oqZWvsAszqOkKMlL1QgTYwSfomAOGxCl64v3J+KHo7ff376qve/cJMsWi0Vqq2JEpfLGpsbOMyz5y3IHqUCIENgh+LKEGDjhIWxDjXlFbqccYrQGs4VfdhQzwf9gZzQL660yOxNPN8/EeYsQQariokRQkt6qvYaaiquLM6FKhE1Vy01Mn1AHnUr2DWPI3PR+kjdS33EGvfLNi6TPWVzfttIuhaleIACQ86jTHTcSroE52V37sfXtmz1sLr6fZrNzESFEYUoKTeq5hwYidqJVWrV9m0yOxmOs5ENcfTcerxmTM/4VnmhBDx3cj2PhmTsojtYgzxEtOKY07NLFv5UZYxUG3jNeEG1zkQxF/C56tOYP3CVfGx6unXGhdKSvscpC22ahS7HryN6T5dm8gk0IR7KKzbJGja9qqK4nq85Yv87uORP30ipM0lh/fBybalMswJZNHQn3k8YHWra0ceZEtr0upTgWF6eXM/Gj9LSQyxBEpnwKfTw+Hr+IyqJfQJyen4noYSy5nTGwgeV+fhE2Cn8N8Hp9y4HEyFJ+eclqMTw5ZjTZac9xfyyFgS+g8zoKYSf+eb8pkJ9/m4UcK12ZoD7ket8QzgpSGC0fp6/36wrGcnvg9oBumJGorYXyNa6kLV7R9BjWlhsHg5Qw/5mX87VD+yGeiF8jo3idclJi5WxG4xzIfZ6CLiui2uMzb0yetVLpbKBw2cn0l6uP76ajD2cnpx8vT0dATP2DD85z6bZS79gRXgeeX/yvws138Nzx1fZ6+P814j94jRgq3tODzzBAleYeDKWyGqbRdVIML31xHqGP4ky5TlarHEhXtlmveRs3vl1i/3Y7gngFwJpkiQbiAXZHSy53ONP5MKuang344psB9+3jmDz/dMkd9w9VKLov
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Reset internal clock (alpha)</h1>
+
+<MethodEndpoint method={"post"} path={"/clock/reset"}></MethodEndpoint>
+
+Resets the Zeebe engine’s internal clock to the current system time, enabling it to tick in real-time.
+This operation is useful for returning the clock to
+normal behavior after it has been pinned to a specific time.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+
+## Request
+
+<div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
+
+The clock was successfully reset to the system time.
+
+</div><div></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
