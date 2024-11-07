@@ -1,4 +1,4 @@
-name: Sync Camunda REST API v2
+name: Sync Camunda REST API
 
 on:
   schedule:
