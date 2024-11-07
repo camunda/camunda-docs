@@ -8,9 +8,9 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 ## Version compatibility
 
-| Camunda Spring SDK version | JDK    | Camunda version | Bundled Spring Boot version |
-| -------------------------- | ------ | --------------- | --------------------------- |
-| 8.5.x                      | \>= 17 | 8.5.x           | 3.2.x                       |
+| Camunda Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| -------------------------- | ---- | --------------- | --------------------------- |
+| 8.5.x                      | ≥ 17 | 8.5.x           | 3.2.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 

@@ -115,7 +115,7 @@ At this point, Camunda is not aware of any specific attack vector in Tasklist al
 
 #### How to determine if the installation is affected
 
-You are Tasklist version (8.0.3 >= version <= 8.0.7) or <= 8.1.2
+You are Tasklist version (8.0.3 ≥ version ≤ 8.0.7) or ≤ 8.1.2
 
 #### Solution
 
@@ -142,7 +142,7 @@ At this point, Camunda is not aware of any specific attack vector in Zeebe, Oper
 
 #### How to determine if the installation is affected
 
-You are using Zeebe, Operate or Tasklist version <= 1.2.11 or <= 1.3.6
+You are using Zeebe, Operate or Tasklist version ≤ 1.2.11 or ≤ 1.3.6
 
 #### Solution
 
@@ -168,7 +168,7 @@ At this point, Camunda is not aware of any specific attack vector in Zeebe, Oper
 
 #### How to determine if the installation is affected
 
-You are using Zeebe, Operate or Tasklist version <= 1.2.8 or <= 1.1.9
+You are using Zeebe, Operate or Tasklist version ≤ 1.2.8 or ≤ 1.1.9
 
 #### Solution
 
@@ -194,7 +194,7 @@ Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bu
 
 #### How to determine if the installation is affected
 
-You are using IAM version <= 1.2.8
+You are using IAM version ≤ 1.2.8
 
 #### Solution
 
@@ -219,7 +219,7 @@ At this point, Camunda is not aware of any specific attack vector in Zeebe, Oper
 
 #### How to determine if the installation is affected
 
-You are using Zeebe, Operate or Tasklist version <= 1.2.7 or <= 1.1.8
+You are using Zeebe, Operate or Tasklist version ≤ 1.2.7 or ≤ 1.1.8
 
 #### Solution
 
@@ -248,7 +248,7 @@ At this point, Camunda is not aware of any specific attack vector in IAM allowin
 
 #### How to determine if the installation is affected
 
-You are using IAM version <= 1.2.7
+You are using IAM version ≤ 1.2.7
 
 #### Solution
 
@@ -273,7 +273,7 @@ At this point, Camunda is not aware of any specific attack vector in Zeebe, Oper
 
 #### How to determine if the installation is affected
 
-You are using Zeebe, Operate or Tasklist version <= 1.2.6 or <= 1.1.7
+You are using Zeebe, Operate or Tasklist version ≤ 1.2.6 or ≤ 1.1.7
 
 #### Solution
 
@@ -302,7 +302,7 @@ At this point, Camunda is not aware of any specific attack vector in IAM allowin
 
 #### How to determine if the installation is affected
 
-You are using IAM version <= 1.2.6
+You are using IAM version ≤ 1.2.6
 
 #### Solution
 
@@ -327,7 +327,7 @@ At this point, Camunda is not aware of any specific attack vector in Zeebe, Oper
 
 #### How to determine if the installation is affected
 
-You are using Zeebe, Operate or Tasklist version <= 1.2.5 or <= 1.1.6
+You are using Zeebe, Operate or Tasklist version ≤ 1.2.5 or ≤ 1.1.6
 
 #### Solution
 
@@ -357,7 +357,7 @@ Still, Camunda recommends applying fixes as mentioned in the Solution section be
 
 #### How to determine if the installation is affected
 
-You are using IAM version <= 1.2.5
+You are using IAM version ≤ 1.2.5
 
 #### Solution
 
