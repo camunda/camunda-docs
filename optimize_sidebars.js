@@ -2624,7 +2624,7 @@ module.exports = {
               "self-managed/setup/guides/accessing-components-without-ingress/"
             ),
             docsLink(
-              "Combined and separated Ingress setup",
+              "Ingress setup",
               "self-managed/setup/guides/ingress-setup/"
             ),
             docsLink(
