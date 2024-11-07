@@ -48,12 +48,12 @@ You can find the complete usage details in the [c8-sm-checks repository](https:/
 ```bash
 Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p COMPONENTS_PG] [-l COMPONENTS_OS] [-s]
 Options:
-  -h                              Display help message
-  -n NAMESPACE                    Specify the namespace to check (default: `camunda`)
-  -e EXCLUDE_COMPONENTS           Exclude specific components from checks (comma-separated list)
-  -p COMPONENTS_PG                List of PostgreSQL components to check (comma-separated, overrides default list)
-  -l COMPONENTS_OS                List of OpenSearch components to check (comma-separated, overrides default list)
-  -s                              Skip pod spawning for network flow verification
+  -h                              Display this help message
+  -n NAMESPACE                    Specify the namespace to use
+  -e EXCLUDE_COMPONENTS           Comma-separated list of components to exclude from the check (reference of the component is the root key used in the chart)
+  -p COMPONENTS_PG                Comma-separated list of components to check IRSA for PostgreSQL (overrides default list)
+  -l COMPONENTS_OS                Comma-separated list of components to check IRSA for OpenSearch (overrides default list)
+  -s                              Disable pod spawn for IRSA and network flow verification
 ```
 
 **Example Command:**
