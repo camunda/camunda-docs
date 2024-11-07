@@ -959,6 +959,7 @@ module.exports = {
                     "self-managed/setup/deploy/amazon/amazon-eks/irsa",
                   ],
                 },
+                "self-managed/setup/deploy/amazon/aws-ec2",
                 "self-managed/setup/deploy/amazon/aws-marketplace",
               ],
               "Microsoft (Azure)": [

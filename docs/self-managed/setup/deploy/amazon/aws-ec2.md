@@ -1,6 +1,6 @@
 ---
 id: aws-ec2
-title: "Install Camunda 8 on EC2"
+title: "Amazon EC2"
 description: "Learn how to install Camunda 8 on AWS EC2 instances."
 ---
 
@@ -16,7 +16,7 @@ The architecture as depicted focuses on a three-node setup distributed over 3 [a
   https://drive.google.com/file/d/1TA0EDhZYmnpq9kM5L6u9oftndaCQoDD0/view?usp=sharing
 -->
 
-![AWS EC2 Architecture](../assets/aws-ec2-arch.png)
+![AWS EC2 Architecture](../../assets/aws-ec2-arch.png)
 
 The setup consists of:
 
@@ -173,7 +173,7 @@ cd camunda-deployment-references/aws/ec2/scripts
 There are certain features hidden behind a feature flag. Those are the following:
 
 - `CLOUDWATCH_ENABLED`: The default is false. If set to true will install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
-- `SECURITY`: The default is false. If set to true will use self-signed certificates to secure cluster communication, based on the procedure described in the [documentation](../../zeebe-deployment/security/secure-cluster-communication.md). This requires a manual step as a prerequisite as described below in step 3.
+- `SECURITY`: The default is false. If set to true will use self-signed certificates to secure cluster communication, based on the procedure described in the [documentation](/self-managed/zeebe-deployment/security/secure-cluster-communication.md). This requires a manual step as a prerequisite as described below in step 3.
 
 Additionally, certain variables can be configured in the `camunda-install.sh` script to overwrite the default for Camunda and Java versions:
 
@@ -183,7 +183,7 @@ Additionally, certain variables can be configured in the `camunda-install.sh` sc
 
 Setting those as environment variables will not take effect since the scripts are executed on the remote host with no access to your local environment.
 
-3. (optional) Security
+1. (optional) Security
 
 If you decide to enable `SECURITY`, please execute the `generate-self-signed-cert-authority.sh` script to once create a certificate authority. It would be wise to save those somewhere securely as you'll require those if you want to upgrade or change configs in an automated way. Worst case, you'll have to recreate the certificate authority certs via the script and all manually created client certificates.
 
