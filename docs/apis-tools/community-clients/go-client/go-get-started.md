@@ -2,6 +2,7 @@
 id: go-get-started
 title: Getting started with the Go client
 sidebar_label: "Getting started with the Go client"
+description: "Get started with this tutorial that shows you how to interact with Camunda 8 using the community-supported Go client in a Go application."
 ---
 
 import Tabs from "@theme/Tabs";

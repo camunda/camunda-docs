@@ -8,35 +8,19 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 ## Version compatibility
 
-| Camunda Spring SDK version | JDK    | Camunda version | Bundled Spring Boot version |
-| -------------------------- | ------ | --------------- | --------------------------- |
-| 8.5.x                      | \>= 17 | 8.5.x           | 3.2.x                       |
+| Camunda Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| -------------------------- | ---- | --------------- | --------------------------- |
+| 8.5.x                      | ≥ 17 | 8.5.x           | 3.2.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 
-Add the following repository and Maven dependency to your Spring Boot Starter project:
-
-```xml
-<repositories>
-    <repository>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-        <id>identity</id>
-        <name>Camunda Identity</name>
-        <url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
-    </repository>
-</repositories>
-```
+Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
 ```xml
 <dependency>
-  <groupId>io.camunda</groupId>
-  <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-  <version>8.5.0</version>
+    <groupId>io.camunda</groupId>
+    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+    <version>8.5.x</version>
 </dependency>
 ```
 
@@ -103,7 +87,6 @@ Example of configuring the connection to a Self-Managed Zeebe cluster:
 ```properties
 zeebe.client.cloud.clientId=your-client-id
 zeebe.client.cloud.clientSecret=your-client-secret
-zeebe.client.cloud.scope=your-scope # optional
 zeebe.client.cloud.authUrl=http://localhost:18080/auth/realms/your-realm/protocol/openid-connect/token
 zeebe.client.broker.grpcAddress=http://localhost:26500
 zeebe.client.broker.restAddress=http://localhost:8080

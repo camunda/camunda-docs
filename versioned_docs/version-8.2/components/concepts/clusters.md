@@ -31,21 +31,17 @@ When your Free Trial plan expires, you are automatically transferred to the Free
 
 ### Auto-pause
 
-Free Trial `dev` (or untagged) clusters are automatically paused eight hours after a cluster is created or resumed from a paused state. Auto-pause occurs regardless of cluster usage.
+Free Trial clusters are automatically paused after a period of inactivity. Auto-pause occurs regardless of cluster usage.
 
 You can resume a paused cluster at any time, which typically takes five to ten minutes to complete.
 
-- Clusters tagged as `test`, `stage`, or `prod` do not auto-pause.
-- Paused clusters are automatically deleted after 30 consecutive paused days. You can change the tag to avoid cluster deletion.
+- Clusters tagged as `dev` (or untagged) auto-pause eight hours after the cluster is created or resumed from a paused state.
+- Clusters tagged as `test`, `stage`, or `prod` auto-pause if there is no cluster activity for 48 hours.
+- Paused `dev` (or untagged) clusters are automatically deleted after 30 consecutive paused days. You can change the tag to avoid cluster deletion.
 - No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until you resume the cluster.
 
 :::tip
-
-To prevent auto-pause, you can:
-
-- Tag the cluster as `test`, `stage`, or `prod` instead of `dev`.
-- [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter, Professional, or Enterprise plan.
-
+To prevent auto-pause, [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
 :::
 
 ## Development clusters
