@@ -1,8 +1,11 @@
 ---
 id: migrate-to-camunda-api
 title: Migrate to the Camunda 8 API
-description: "Create and manage clusters, and interact with Camunda 8 management API programmatically without using the Camunda 8 Console."
+description: "Migrate from Camunda's V1 component REST APIs to the V2 Camunda 8 REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
 ---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 This document offers a comprehensive guide to migrate from Camunda's V1 component REST APIs (the Tasklist REST API, for example) to the V2 [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
@@ -14,14 +17,23 @@ This section considers all public endpoints existing in the component REST APIs 
 
 ### General changes
 
-**Changes for all endpoints:**
+<Tabs groupId="endpoints" defaultValue="all-endpoints" queryString values={
+[
+{label: 'All endpoints', value: 'all-endpoints', },
+{label: 'Endpoints querying for data', value: 'query-endpoints', },
+]
+}>
+
+<TabItem value='all-endpoints'>
 
 - The new API can be found at `<cluster>/v2/…>` instead of `<cluster>/v1/…>`.
-- All endpoints are no longer separated by component concerns and all endpoints receive similar support. For example, process definitions, user tasks, and users, authorizations were previously spread across separate Tasklist, Operate, and Identity APIs.
+- All endpoints are no longer separated by component concerns and all endpoints receive similar support. For example, process definitions, user tasks, and user authorizations were previously spread across separate Tasklist, Operate, and Identity APIs.
 - Naming, response codes, and type handling have been streamlined for all endpoints to provide a consistent UX.
 - Endpoints with similar concerns (variable search, for example) have been consolidated into single endpoints.
 
-**Changes for endpoints that query for data:**
+</TabItem>
+
+<TabItem value='query-endpoints'>
 
 - Unified search request structure.
   - Attributes `filter`, `page`, and `sort` on root level.
@@ -32,6 +44,10 @@ This section considers all public endpoints existing in the component REST APIs 
   - Attributes `items` and `page` on root level.
   - List of endpoint-specific response items in `items` attribute.
   - Page information in `page` attribute, for example the attributes `totalItems`, `firstSortValues`, and `lastSortValues` to use in `searchBefore` and `searchAfter` in follow-up requests.
+
+</TabItem>
+
+</Tabs>
 
 <!--- TBD since currently in progress: Filter attributes can use Advanced Search capabilities depending on their type. TBD: We need to see how much of this we manage to implement with 8.7 (which endpoints, which attributes, which types). --->
 
@@ -45,22 +61,23 @@ The following conventions apply to all attributes:
 - The `bpmnProcessId` is now called `processDefinitionId` to be easily relatable to the entity (process definition) and the accompanying `processDefinitionKey`.
 - The `decisionKey` and `dmnDecisionKey` are now aligned to `decisionDefinitionKey`, the `decisionId` and `dmnDecisionId` to `decisionDefinitionId`. Similar to the `processDefinitionId`, those attributes are now related to the entity `decisionDefinition`.
 
-### Operate
-
-<V1 endpoint>
-V2 endpoint to use:
-Input adjustments:
-<change>
-
-Output adjustments
-<change>
+<!--- Insert Operate section with V1 endpoint and V2 endpoint to use with input/output adjustments --->
 
 ### Tasklist
 
-Search Tasks - POST /v1/tasks/search
-V2 endpoint to use: POST /v2/user-tasks/search
+#### Search tasks
 
-Input adjustments:
+- **V1 endpoint**: `POST /v1/tasks/search`
+- **V2 endpoint**: `POST /v2/user-tasks/search`
+
+<Tabs groupId="tasklist" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments', },
+{label: 'Output adjustments', value: 'output-adjustments', },
+]
+}>
+
+<TabItem value='input-adjustments'>
 
 - Filter attribute `assigned (boolean)` removed
   - Use filter attribute `assignee` with condition `{ "$exists": false }`
@@ -73,23 +90,18 @@ Input adjustments:
 - Filter attribute `candidateUsers (string[])` removed
   - Use filter attribute `candidateUser` with condition `{ “$in”: [ “xyz”, ... ] }`
 
-Output adjustments
-<change>
+</TabItem>
 
-<V1 endpoint>
-V2 endpoint to use:
+<TabItem value='output-adjustments'>
 
-Input adjustments:
-<change>
+<!--- TODO: insert output adjustments --->
 
-Output adjustments
-<change>
+</TabItem>
 
-## Open questions
+</Tabs>
 
-[Name] - [Question]
-[Details]
+<!--- TODO: insert output adjustments --->
 
-## Related resources
+<!--- TODO: open questions and related resources --->
 
 <!--- TODO: insert link to C8 REST API guidelines --->
