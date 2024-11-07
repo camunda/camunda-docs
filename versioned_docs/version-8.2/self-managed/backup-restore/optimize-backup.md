@@ -25,7 +25,7 @@ Optimize provides an API to trigger a backup and retrieve information about a gi
 The following prerequisites must be set up before using the backup API:
 
 1. A snapshot repository of your choice must be registered with Elasticsearch.
-2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable or by adding it to your Optimize configuration:
+2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable or by adding it to your Optimize [`environment-config.yaml`]($optimize$/self-managed/optimize-deployment/configuration/system-configuration/):
 
 ```yaml
 backup:

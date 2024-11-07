@@ -1,606 +1,174 @@
 ---
 id: irsa
-title: "IAM roles for service accounts"
+title: "Troubleshooting IAM Roles for Service Accounts (IRSA)"
 description: "Learn how to configure IAM roles for service accounts (IRSA) within AWS to authenticate workloads."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-IAM roles for service accounts (IRSA) is a way within AWS to authenticate workloads in Amazon EKS (Kubernetes), for example, to execute signed requests against AWS services. This is a replacement for basic auth and is generally considered a [best practice by AWS](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
+## IRSA configuration validation of a Camunda 8 helm deployment
 
-The following considers the managed services by AWS and provided examples are in Terraform syntax.
+The [c8-sm-checks](/self-managed/operational-guides/troubleshooting/troubleshooting.md#anomaly-detection-scripts) utility is designed to validate IAM Roles for Service Accounts ([IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) configuration in EKS Kubernetes clusters on AWS. It ensures that key components in a Camunda 8 deployment, such as PostgreSQL and OpenSearch, are properly configured to securely interact with AWS resources via the appropriate IAM roles.
 
-## Aurora PostgreSQL
+### IRSA check script
 
-[Aurora PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraPostgreSQL.html) is a managed AWS PostgreSQL–compatible service.
+The `/checks/kube/aws-irsa.sh` script verifies IRSA setup in your AWS Kubernetes environment by performing two types of checks:
 
-### Setup
+1. **Configuration Verification**: Ensures key IRSA configurations are correctly set, using specific checks on IAM roles, policies, and mappings to service accounts.
+2. **Namespace Commands and Job Execution**: Runs commands within the specified namespace using Kubernetes jobs (if necessary) to verify network and access configurations.
 
-When using the Terraform provider of [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest) with the resource [aws_rds_cluster](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster) to create a new rational database (RDS) or Aurora cluster, supply the argument `iam_database_authentication_enabled = true` to enable the IAM roles functionality. See the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html) for availability and limitations.
+This utility is non-intrusive and will not alter any deployment settings.
+If the `-s` flag is provided, the script skips spawning debugging pods for network flow verification, which can be helpful if pod creation is restricted or not required for troubleshooting.
 
-#### AWS policy
+:::info Compatibility with Helm Deployments
 
-An AWS policy (later assigned to a role) is required to allow assuming a database user within a managed database. See the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html) for policy details.
+The script relies on Helm chart values and is compatible only with deployments installed or updated through standard Helm commands. It will not work with other deployment methods, such as those using `helm template` (e.g., [ArgoCD](https://argo-cd.readthedocs.io/en/latest/faq/#after-deploying-my-helm-application-with-argo-cd-i-cannot-see-it-with-helm-ls-and-other-helm-commands)).
 
-<Tabs>
-  <TabItem value="terraform" label="Terraform" default>
+Compatibility is confirmed for [Camunda Helm chart releases version 11 and above](https://artifacthub.io/packages/helm/camunda/camunda-platform).
 
-To create the AWS policy using Terraform, you can define it with the [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) resource. Here’s an example configuration:
+:::
 
-```json
-resource "aws_iam_policy" "rds_policy" {
-  name = "rds-policy"
+#### Key features
 
-  policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Effect": "Allow",
-        "Action": [
-          "rds-db:connect"
-        ],
-        "Resource": [
-          "arn:aws:rds-db:<REGION>:<ACCOUNT-ID>:dbuser:<DB-RESOURCE-ID>/<DB-USERNAME>"
-        ]
-      }
-    ]
-  })
-}
-```
+- **Helm values retrieval**: Extracts deployment values using Helm to ensure all required configurations are set.
+- **EKS and OIDC configuration check**: Confirms that EKS is configured with IAM and OIDC, matching the minimum required version for IRSA compatibility.
+- **Service account role validation**: For each specified component, verifies that the service account exists and has the correct IAM role annotations.
+- **Network access verification**: Ensures that PostgreSQL (Aurora) or OpenSearch instances are accessible from within the cluster. This step involves an `nmap` scan through a Kubernetes job. Use the `-s` option to skip this step if network flow verification is unnecessary.
+- **IRSA value check**: Validates that the Helm deployment values are correctly configured to use IRSA for secure service interactions with AWS.
+- **Aurora PostgreSQL and OpenSearch IAM configuration**: Confirms that these services support IAM login, ensuring secure access configurations.
+- **Access and Trust Policy verification**: Checks that access and trust policies are correctly set. Note that the script performs basic checks; if issues arise with these policies, further manual verification may be needed.
+- **Service Account Role association test**: Tests that the IAM role association with the service account is functioning as expected by spawning a job with the specified service account and validating the resulting ARN. This step can also be skipped using the `-s` option.
+- **OpenSearch Access Policy check**: Validates that the OpenSearch access policy is configured correctly to support secure connections from the cluster.
 
-Replace `<REGION>`, `<ACCOUNT-ID>`, `<DB-RESOURCE-ID>`, and `<DB-USERNAME>` with the appropriate values for your AWS environment.
+#### Example usage
 
-  </TabItem>
-  
-  <TabItem value="aws-cli" label="AWS CLI">
-
-To create the AWS policy using the AWS CLI, use the `aws iam create-policy` command:
+You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks). Below is a quick reference for common usage options:
 
 ```bash
-aws iam create-policy \
-  --policy-name rds-policy \
-  --policy-document '{
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Effect": "Allow",
-        "Action": [
-          "rds-db:connect"
-        ],
-        "Resource": [
-          "arn:aws:rds-db:<REGION>:<ACCOUNT-ID>:dbuser:<DB-RESOURCE-ID>/<DB-USERNAME>"
-        ]
-      }
-    ]
-  }'
+Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p COMPONENTS_PG] [-l COMPONENTS_OS] [-s]
+Options:
+  -h                              Display this help message
+  -n NAMESPACE                    Specify the namespace to use
+  -e EXCLUDE_COMPONENTS           Comma-separated list of components to exclude from the check (reference of the component is the root key used in the chart)
+  -p COMPONENTS_PG                Comma-separated list of components to check IRSA for PostgreSQL (overrides default list)
+  -l COMPONENTS_OS                Comma-separated list of components to check IRSA for OpenSearch (overrides default list)
+  -s                              Disable pod spawn for IRSA and network flow verification
 ```
 
-Replace `<REGION>`, `<ACCOUNT-ID>`, `<DB-RESOURCE-ID>`, and `<DB-USERNAME>` with the appropriate values for your AWS environment.
-
-  </TabItem>
-</Tabs>
-
-#### IAM to Kubernetes mapping
-
-<Tabs>
-  <TabItem value="terraform" label="Terraform" default>
-
-To assign the policy to a role for IAM role to service account mapping in Amazon EKS, use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks):
-
-```json
-module "aurora_role" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  role_name = "aurora-role"
-
-  role_policy_arns = {
-    policy = aws_iam_policy.rds_policy.arn
-  }
-
-  oidc_providers = {
-    main = {
-      provider_arn               = "arn:aws:iam::<ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>"
-      namespace_service_accounts = ["<AURORA-NAMESPACE>:<AURORA-SERVICEACCOUNT>"]
-    }
-  }
-}
-```
-
-This Terraform snippet creates a role that allows the service account `<AURORA-SERVICEACCOUNT>` within the `<AURORA-NAMESPACE>` to assume the user `<DB-USERNAME>` within the database `<DB-RESOURCE-ID>`. The output of the `aurora_role` module includes the `iam_role_arn`, which you need to annotate the service account.
-
-  </TabItem>
-
-  <TabItem value="aws-cli" label="AWS CLI">
-
-To assign the policy to a role using the AWS CLI, follow these steps:
-
-1. **Create the IAM role**:
+**Example Command:**
 
 ```bash
-aws iam create-role \
-  --role-name aurora-role \
-  --assume-role-policy-document '{
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Effect": "Allow",
-        "Principal": {
-          "Federated": "arn:aws:iam::<ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>"
-        },
-        "Action": "sts:AssumeRoleWithWebIdentity",
-        "Condition": {
-          "StringEquals": {
-            "oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>:sub": "system:serviceaccount:<AURORA-NAMESPACE>:<AURORA-SERVICEACCOUNT>"
-          }
-        }
-      }
-    ]
-  }'
+./checks/kube/aws-irsa.sh -n camunda-primary -p "identity,webModeler" -l "zeebe,operate"
 ```
 
-2. **Attach the policy to the role**:
+In this example, the script will check **`identity`** and **`webModeler`** components (references of the component name in the helm chart) for Aurora PostgreSQL access and **`zeebe`** and **`operate`** components for OpenSearch access in the `camunda-primary` namespace.
 
-```bash
-aws iam attach-role-policy \
-  --role-name aurora-role \
-  --policy-arn arn:aws:iam::<ACCOUNT-ID>:policy/rds-policy
+#### Script output overview
+
+The script offers detailed output to confirm that each component is properly configured for IRSA. Below is an outline of the checks it performs and the expected output format:
+
+**Example Output:**
+
+```
+[OK] AWS CLI version 2.15.20 is compatible and user is logged in.
+[OK] AWS environment detected. Proceeding with the script.
+[INFO] Chart camunda-platform is deployed in namespace camunda-primary.
+[INFO] Retrieved values for Helm deployment: camunda-platform-11.0.1.
+[FAIL] The service account keycloak-sa does not have a valid eks.amazonaws.com/role-arn annotation. You must add it in the chart, see https://docs.camunda.io/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm/
+[FAIL] RoleArn name for component 'identityKeycloak' is empty. Skipping verification.
 ```
 
-  </TabItem>
-</Tabs>
+The script highlights errors with the `[FAIL]` prefix, and these are directed to `stderr` for easier filtering. We recommend capturing `stderr` output to quickly identify failed configurations.
 
-Annotate the service account with the `iam_role_arn`:
+If the script returns a false positive—indicating success when issues are actually present—manually review each output line to ensure reported configuration details (like Role ARNs or annotations) are accurate. For example, ensure that each service account has the correct Role ARN and associated permissions to avoid undetected issues.
 
-```yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT-ID>:role/aurora-role
-  name: <AURORA-SERVICEACCOUNT>
-  namespace: <AURORA-NAMESPACE>
-```
+### Advanced troubleshooting for IRSA configuration
 
-Replace `<ACCOUNT-ID>`, `<REGION>`, `<EKS-ID>`, `<AURORA-NAMESPACE>`, `<AURORA-SERVICEACCOUNT>`, and `<DB-USERNAME>` with the appropriate values for your AWS environment.
+The troubleshooting script provides essential checks but may not capture all potential issues, particularly those related to IAM policies and configurations. If IRSA is not functioning as expected and no errors are flagged by the script, follow the steps below for deeper troubleshooting.
 
-#### Database configuration
+#### Spawn a debug pod to simulate the pod environment
 
-The setup required on the Aurora PostgreSQL side is to create the user and assign the required permissions to it. The following is an example when connected to the PostgreSQL database, and can also be realized by using a [Terraform PostgreSQL Provider](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs). See the [AWS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL) for reference concerning Aurora specific configurations.
+To troubleshoot in an environment identical to your pod, deploy a debug pod with the necessary service account. Here are examples of debug manifests you can customize for your needs:
 
-```SQL
-# create user and grant rds_iam role, which requires the user to login via IAM authentication over password
-CREATE USER "<DB-USERNAME>";
-GRANT rds_iam TO "<DB-USERNAME>";
+- [OpenSearch client pod](https://github.com/camunda/camunda-tf-eks-module/blob/main/modules/fixtures/opensearch-client.yml)
+- [PostgreSQL client pod](https://github.com/camunda/camunda-tf-eks-module/blob/main/modules/fixtures/postgres-client.yml)
 
-# create some database and grant the user all privileges to it
-CREATE DATABASE "some-db";
-GRANT ALL privileges on database "some-db" to "<DB-USERNAME>";
-```
+1. Adapt the manifests to use the specific `serviceAccountName` (e.g., `aurora-access-sa`) you want to test.
+2. Insert a sleep timer in the command to allow time to exec into the pod for live debugging.
+3. Create the pod with the `kubectl apply` command:
+   ```bash
+   kubectl apply -f debug-client.yaml
+   ```
+4. Once the pod is running, connect to it with a bash shell (make sure to adjust the app label with your value):
+   ```bash
+   kubectl exec -it $(kubectl get pods -l app=REPLACE-WITH-LABEL -o jsonpath='{.items[0].metadata.name}') -- /bin/bash
+   ```
+5. Inside the pod, display all environment variables to check for IAM and AWS configurations:
+   ```bash
+   env
+   ```
+   This command will print out all environment variables, including those related to IRSA.
+   Inside the pod, validate that key environment variables are correctly injected:
+   - `AWS_WEB_IDENTITY_TOKEN_FILE`: Path to the token (JWT) file for WebIdentity.
+   - `AWS_ROLE_ARN`: ARN of the associated IAM role.
+   - `AWS_REGION`, `AWS_STS_REGIONAL_ENDPOINTS`, and other AWS configuration variables.
 
-### Keycloak
+To ensure that IRSA and role associations are functioning:
 
-:::caution
-IAM Roles for Service Accounts can only be implemented with Keycloak 21 onwards. This may require you to adjust the version used in the Camunda Helm Chart.
-:::
+- Check that the expected `AWS_ROLE_ARN` and token are present.
+- Decode the JWT token to validate the correct trust relationship with the service account and namespace.
 
-From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing use of a custom wrapper like the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) to utilize the features of IRSA. This is a wrapper around the default JDBC driver, but takes care of signing the requests.
+#### Verify OpenSearch fine-grained access control (fgac) configuration
 
-Furthermore, the [official Keycloak documentation](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql) also provides detailed instructions for utilizing Amazon Aurora PostgreSQL.
+For OpenSearch clusters, ensure [fine-grained access control](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html) is set up to allow the role’s access to the cluster. If you deployed OpenSearch with the [terraform reference architecture implementation for EKS](terraform-setup.md), fgac should already be configured. For manual deployments, follow the process outlined in the [OpenSearch configuration guide](terraform-setup.md#configure-opensearch-fine-grained-access-control) to apply similar controls.
 
-A custom Keycloak container image containing necessary configurations is conveniently accessible on Docker Hub at [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak). This image, built upon the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak), incorporates the required wrapper for seamless integration.
+#### Confirm PostgreSQL IAM role access
 
-#### Container image sources
+Verify that PostgreSQL roles are correctly configured to support IAM-based authentication. The database user should have the `rds_iam` role to allow IAM authentication. If the setup was automated with the [terraform reference architecture implementation for EKS](terraform-setup.md), the necessary access configuration should already be in place. For manual configurations, refer to [PostgreSQL configuration instructions](terraform-setup.md#configure-the-database-and-associated-access).
 
-The sources of the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [GitHub](https://github.com/camunda/keycloak). In this repository, the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) is assembled in the `Dockerfile`.
+To test connectivity:
 
-Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnami/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
+- Run a manual connection test using the [PostgreSQL client manifest](https://raw.githubusercontent.com/camunda/camunda-tf-eks-module/refs/heads/main/modules/fixtures/postgres-client.yml).
+- Use `psql` within the pod to verify the correct roles are assigned. Run:
+  ```bash
+  SELECT * FROM pg_roles WHERE rolname='<your-username>';
+  ```
+  Confirm that `rds_iam` is listed among the assigned roles.
 
-#### Keycloak image configuration
+#### Validate IAM Policies for each role
 
-Bitnami Keycloak container image configuration is available at [hub.docker.com/bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak).
+Both trust and permission policies are crucial in configuring IAM Roles for Service Accounts (IRSA) in AWS. Each IAM role should have policies that precisely permit necessary actions and correctly trust the relevant Kubernetes service accounts associated with your components.
 
-#### Kubernetes configuration
+##### AssumeRole policies
 
-As an example, configure the following environment variables to enable IRSA:
+In AWS, [AssumeRole](https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) allows a user or service to assume a role and temporarily gain permissions to execute specific actions. Each role needs an **AssumeRole policy** that precisely matches AWS requirements for the specific services and actions your components perform.
 
-```yaml
-# The AWS wrapper is not capable of XA transactions
-- name: KEYCLOAK_EXTRA_ARGS
-  value: "--db-driver=software.amazon.jdbc.Driver --transaction-xa-enabled=false --log-level=INFO,software.amazon.jdbc:INFO"
+For each IAM role, ensure the **trust policy** includes:
 
-# Enable the AWS IAM plugin
-- name: KEYCLOAK_JDBC_PARAMS
-  value: "wrapperPlugins=iam"
-- name: KEYCLOAK_JDBC_DRIVER
-  value: "aws-wrapper:postgresql"
+1. The correct `Service` field, allowing the pod’s service account to assume the role.
+2. An `Action` for `sts:AssumeRoleWithWebIdentity`, as IRSA uses WebIdentity to enable IAM role assumption.
 
-# Configure database
-- name: KEYCLOAK_DATABASE_USER
-  value: db-user-name
-- name: KEYCLOAK_DATABASE_NAME
-  value: db-name
-- name: KEYCLOAK_DATABASE_HOST
-  value: db-host
-- name: KEYCLOAK_DATABASE_PORT
-  value: 5432
+Verify that the policy is configured according to [AWS’s role trust policy guidelines](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html) for Kubernetes IRSA.
 
-# Ref: https://www.keycloak.org/server/configuration-metrics
-- name: KEYCLOAK_ENABLE_STATISTICS
-  value: "true"
+##### Trust policies
 
-# Needed to see if Keycloak is healthy: https://www.keycloak.org/server/health
-- name: KEYCLOAK_ENABLE_HEALTH_ENDPOINTS
-  value: "true"
-```
+For each role, verify that the [trust policy syntax is correct](https://aws.amazon.com/fr/blogs/security/how-to-use-trust-policies-with-iam-roles/), allowing the appropriate service accounts to assume the role. Refer to AWS’s [trust policy validation tool](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html) for [accurate syntax and configuration](https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html).
 
-:::note
-Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
-:::
+##### Permission policies
 
-##### Helm chart
+Each IAM role should also have appropriate permission policies attached. These policies define what actions the role can perform on AWS resources. Verify that permission policies:
 
-For a Helm-based deployment, you can directly configure these settings using Helm values. Below is an example of how you can incorporate these settings into your Helm chart deployment:
+- Are configured correctly to allow the necessary operations for your resources (e.g., read and write access to S3 buckets or access to RDS).
+- Align with your security model by only granting the minimum required permissions.
 
-```yaml
-identityKeycloak:
-  postgresql:
-    enabled: false
-  image: docker.io/camunda/keycloak:25 # use a supported and updated version listed at https://hub.docker.com/r/camunda/keycloak/tags
-  extraEnvVars:
-    - name: KEYCLOAK_EXTRA_ARGS
-      value: "--db-driver=software.amazon.jdbc.Driver --transaction-xa-enabled=false --log-level=INFO,software.amazon.jdbc:INFO"
-    - name: KEYCLOAK_JDBC_PARAMS
-      value: "wrapperPlugins=iam"
-    - name: KEYCLOAK_JDBC_DRIVER
-      value: "aws-wrapper:postgresql"
-  externalDatabase:
-    host: "aurora.rds.your.domain"
-    port: 5432
-    user: keycloak
-    database: keycloak
-```
+The AWS’s [policy simulator](https://policysim.aws.amazon.com/) is a valuable tool for testing how permissions are applied and for spotting misconfigurations.
 
-:::note
-For additional details, refer to the [Camunda 8 Helm deployment documentation](/self-managed/setup/install.md).
-:::
+#### If issues persist
 
-### Web Modeler
+If issues remain unresolved, compare your configuration with Camunda’s [reference architecture](terraform-setup.md) deployed with Terraform. This setup has been validated to work with IRSA and contains the correct permissions. By comparing it to your setup, you may identify discrepancies that are causing your issues.
 
-Since Web Modeler RestAPI uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
-Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
-
-#### Kubernetes configuration
-
-As an example, configure the following environment variables
-
-```yaml
-- name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
-  value: software.amazon.jdbc.Driver
-- name: SPRING_DATASOURCE_URL
-  value: jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?wrapperPlugins=iam
-- name: SPRING_DATASOURCE_USERNAME
-  value: db-user-name
-```
-
-:::note
-Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
-:::
-
-### Identity
-
-Since Identity uses PostgreSQL, configure `identity` to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](../../../../identity/deployment/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details.
-Identity already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
-
-#### Kubernetes configuration
-
-As an example, configure the following environment variables
-
-```yaml
-- name: SPRING_DATASOURCE_DRIVER_CLASS_NAME
-  value: software.amazon.jdbc.Driver
-- name: SPRING_DATASOURCE_URL
-  value: jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?wrapperPlugins=iam
-- name: SPRING_DATASOURCE_USERNAME
-  value: db-user-name
-```
-
-:::note
-Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
-:::
-
-## Amazon OpenSearch Service
-
-[Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service/) is a managed OpenSearch service provided by AWS, which is a distributed search and analytics engine built on Apache Lucene.
-
-:::note
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch Service](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
-:::
-
-:::caution
-
-Optimize is not supported using the IRSA method. However, Optimize can be utilized by supplying a username and password. The migration step must also be disabled. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
-
-:::
-
-### Setup
-
-For Amazon OpenSearch Service, the most common use case is the use of `fine-grained access control`.
-
-When using the Terraform provider of [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest) with the resource [opensearch_domain](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain) to create a new Amazon OpenSearch Service cluster, supply the arguments:
-
-- `advanced_security_options.enabled = true`
-- `advanced_security_options.anonymous_auth_enabled = false` to activate `fine-grained access control`.
-
-Without `fine-grained access control`, anonymous access is enabled and would be sufficient to supply an IAM role with the right policy to allow access. In our case, we'll have a look at `fine-grained access control` and the use without it can be derived from this more complex example.
-
-#### AWS Policy
-
-An AWS policy, which later is assigned to a role, is required to allow general access to Amazon OpenSearch Service. See the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html) for the explanation of the policy.
-
-<Tabs>
-  <TabItem value="terraform" label="Terraform" default>
-
-To create an AWS policy for Amazon OpenSearch Service using Terraform, you can use the [aws_iam_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) resource. Here’s an example configuration:
-
-```json
-resource "aws_iam_policy" "opensearch_policy" {
-  name = "opensearch_policy"
-
-  policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "es:DescribeElasticsearchDomains",
-          "es:DescribeElasticsearchInstanceTypeLimits",
-          "es:DescribeReservedElasticsearchInstanceOfferings",
-          "es:DescribeReservedElasticsearchInstances",
-          "es:GetCompatibleElasticsearchVersions",
-          "es:ListDomainNames",
-          "es:ListElasticsearchInstanceTypes",
-          "es:ListElasticsearchVersions",
-          "es:DescribeElasticsearchDomain",
-          "es:DescribeElasticsearchDomainConfig",
-          "es:ESHttpGet",
-          "es:ESHttpHead",
-          "es:GetUpgradeHistory",
-          "es:GetUpgradeStatus",
-          "es:ListTags",
-          "es:AddTags",
-          "es:RemoveTags",
-          "es:ESHttpDelete",
-          "es:ESHttpPost",
-          "es:ESHttpPut"
-        ],
-        "Resource" : [
-          "arn:aws:es:<REGION>:<ACCOUNT-ID>:domain/<DOMAIN-NAME>/*"
-        ]
-      }
-    ]
-  })
-}
-```
-
-Replace `<REGION>`, `<ACCOUNT-ID>`, and `<DOMAIN-NAME>` with the appropriate values for your Amazon OpenSearch Service domain.
-
-  </TabItem>
-
-  <TabItem value="aws-cli" label="AWS CLI">
-
-To create an AWS policy for Amazon OpenSearch Service using the AWS CLI, you use the `aws iam create-policy` command:
-
-```bash
-aws iam create-policy \
-  --policy-name opensearch_policy \
-  --policy-document '{
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : [
-          "es:DescribeElasticsearchDomains",
-          "es:DescribeElasticsearchInstanceTypeLimits",
-          "es:DescribeReservedElasticsearchInstanceOfferings",
-          "es:DescribeReservedElasticsearchInstances",
-          "es:GetCompatibleElasticsearchVersions",
-          "es:ListDomainNames",
-          "es:ListElasticsearchInstanceTypes",
-          "es:ListElasticsearchVersions",
-          "es:DescribeElasticsearchDomain",
-          "es:DescribeElasticsearchDomainConfig",
-          "es:ESHttpGet",
-          "es:ESHttpHead",
-          "es:GetUpgradeHistory",
-          "es:GetUpgradeStatus",
-          "es:ListTags",
-          "es:AddTags",
-          "es:RemoveTags",
-          "es:ESHttpDelete",
-          "es:ESHttpPost",
-          "es:ESHttpPut"
-        ],
-        "Resource" : [
-          "arn:aws:es:<REGION>:<ACCOUNT-ID>:domain/<DOMAIN-NAME>/*"
-        ]
-      }
-    ]
-  }'
-```
-
-Replace `<REGION>`, `<ACCOUNT-ID>`, and `<DOMAIN-NAME>` with the appropriate values for your Amazon OpenSearch Service domain.
-
-  </TabItem>
-</Tabs>
-
-#### IAM to Kubernetes mapping
-
-To assign the policy to a role for the IAM role to service account mapping in Amazon EKS:
-
-<Tabs>
-  <TabItem value="terraform" label="Terraform" default>
-
-You can use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks):
-
-```json
-module "opensearch_role" {
-  source    = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  role_name = "opensearch-role"
-
-  role_policy_arns = {
-    policy = aws_iam_policy.opensearch_policy.arn
-  }
-
-  oidc_providers = {
-    main = {
-      provider_arn               = "arn:aws:iam::<ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>"
-      namespace_service_accounts = ["<NAMESPACE>:<SERVICE-ACCOUNT>"]
-    }
-  }
-}
-```
-
-This Terraform configuration allows the service account `<SERVICE-ACCOUNT>` within the namespace `<NAMESPACE>` to access the Amazon OpenSearch Service for the cluster `<DOMAIN-NAME>`. The output of the `opensearch_role` module includes the `iam_role_arn` needed to annotate the service account.
-
-Annotate the service account with the `iam_role_arn` output.
-
-  </TabItem>
-
-  <TabItem value="aws-cli" label="AWS CLI">
-
-To assign the policy to a role using the AWS CLI, follow these steps:
-
-1. **Create the IAM role**:
-
-```bash
-aws iam create-role \
-  --role-name opensearch-role \
-  --assume-role-policy-document '{
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Effect": "Allow",
-        "Principal": {
-          "Federated": "arn:aws:iam::<ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>"
-        },
-        "Action": "sts:AssumeRoleWithWebIdentity",
-        "Condition": {
-          "StringEquals": {
-            "oidc.eks.<REGION>.amazonaws.com/id/<EKS-ID>:sub": "system:serviceaccount:<NAMESPACE>:<SERVICE-ACCOUNT>"
-          }
-        }
-      }
-    ]
-  }'
-```
-
-2. **Attach the policy to the role**:
-
-```bash
-aws iam attach-role-policy \
-  --role-name opensearch-role \
-  --policy-arn arn:aws:iam::<ACCOUNT-ID>:policy/opensearch_policy
-```
-
-  </TabItem>
-</Tabs>
-
-Annotate the service account with the `iam_role_arn`:
-
-```yaml
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::<ACCOUNT-ID>:role/opensearch-role
-  name: <SERVICE-ACCOUNT>
-  namespace: <NAMESPACE>
-```
-
-Replace `<ACCOUNT-ID>`, `<REGION>`, `<NAMESPACE>`, and `<SERVICE-ACCOUNT>` with the appropriate values for your Amazon OpenSearch Service and EKS setup.
-
-This step is required to be repeated for Tasklist and Zeebe, to grant their service accounts access to OpenSearch.
-
-#### Database configuration
-
-This setup is sufficient for Amazon OpenSearch Service clusters without `fine-grained access control`.
-
-`Fine-grained access control` adds another layer of security to OpenSearch, requiring you to add a mapping between the IAM role and the internal OpenSearch role. Visit the [AWS documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html) on `fine-grained access control`.
-
-There are different ways to configure the mapping within Amazon OpenSearch Service:
-
-- Via a [Terraform module](https://registry.terraform.io/modules/idealo/opensearch/aws/latest) in case your OpenSearch instance is exposed.
-- Via the [OpenSearch dashboard](https://opensearch.org/docs/latest/security/access-control/users-roles/).
-
-<details>
-
-<summary>Via the REST API</summary>
-
-To authorize the IAM role in OpenSearch for access, follow these steps:
-
-**_Note that this example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled._** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
-
-Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
-
-```bash
-curl -sS -u "<OS_DOMAIN_USER>:<OS_DOMAIN_PASSWORD>" \
-    -X PATCH \
-    "https://<OS_ENDPOINT>/_opendistro/_security/api/rolesmapping/all_access?pretty" \
-    -H 'Content-Type: application/json' \
-    -d'
-[
-  {
-    "op": "add",
-    "path": "/backend_roles",
-    "value": ["<ROLE_NAME>"]
-  }
-]
-'
-```
-
-- Replace `<OS_DOMAIN_USER>` and `<OS_DOMAIN_PASSWORD>` with your OpenSearch domain admin credentials.
-- Replace `<OS_ENDPOINT>` with your OpenSearch endpoint URL.
-- Replace `<ROLE_NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
-
-</details>
-
-The important part is assigning the `iam_role_arn` of the previously created `opensearch_role` to an internal role within Amazon OpenSearch Service. For example, `all_access` on the Amazon OpenSearch Service side is a good candidate, or if required, extra roles can be created with more restrictive access.
-
-### Camunda 8 Self-Managed Helm chart configuration
-
-The following is an example configuration that can be used to configure the Camunda 8 Self-Managed Helm chart to use the feature set of IRSA for the Amazon OpenSearch Service Exporter:
-
-```yaml
-global:
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-    aws:
-      enabled: true
-    url:
-      protocol: https
-      host: aws.opensearch.example.com
-      port: 443
-
-elasticsearch:
-  enabled: false
-
-optimize:
-  enabled: false
-```
-
-:::note
-Amazon OpenSearch Service listens on port 443 opposed to the usual port 9200.
-:::
-
-:::note
-Don't forget to set the `serviceAccountName` of the deployment/statefulset to the created service account with the IRSA annotation.
-:::
-
-## Troubleshooting
-
-### Instance Metadata Service (IMDS)
+## Instance Metadata Service (IMDS)
 
 [Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) is a default fallback for the AWS SDK due to the [default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html). Within the context of Amazon EKS, it means a pod will automatically assume the role of a node. This can hide many problems, including whether IRSA was set up correctly or not, since it will fall back to IMDS in case of failure and hide the actual error.
 
@@ -617,3 +185,9 @@ eks_managed_node_group_defaults {
 ```
 
 Overall, this will disable the role assumption of the node for the Kubernetes pod. Depending on the resulting error within Operate, Zeebe, and Web-Modeler, you'll get a clearer error, which is helpful to debug the error more easily.
+
+:::note Enabled by default in the terraform reference architecture of EKS
+
+In the [reference architecture with terraform](terraform-setup.md), this setting is configured like that by default.
+
+:::

@@ -42,6 +42,16 @@ To enable additional log output to a file, adjust the following environment vari
 LOG_FILE_PATH=/full/path/to/log/file.log
 ```
 
+### Configuring log levels
+
+To control the verbosity of the logs, adjust the environment variables `LOG_LEVEL_CLIENT` (browser client) and `LOG_LEVEL_WEBAPP` (Node.js server).
+
+```properties
+LOG_LEVEL_CLIENT=DEBUG
+```
+
+The `LOG_LEVEL_*` options can be found [here](../../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
+
 ## Logging configuration for the `websocket` component
 
 By default, the `websocket` component logs to the Docker container's standard output.

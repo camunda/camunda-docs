@@ -2,7 +2,7 @@
 id: gateway-config
 title: "Gateway configuration"
 sidebar_label: "Gateway configuration"
-description: "Analyze how to configure the Zeebe gateway, including byte sizes, time units, paths, and sample YAML snippets."
+description: "Analyze how to configure the Zeebe Gateway, including byte sizes, time units, paths, and sample YAML snippets."
 ---
 
 The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/camunda/blob/main/dist/src/main/config/gateway.yaml.template).
@@ -206,6 +206,26 @@ membership:
   suspectProbes: 3
   failureTimeout: 10s
   syncInterval: 10s
+```
+
+### zeebe.gateway.cluster.configManager.gossip
+
+Configure the parameters used to propagate the dynamic cluster configuration across brokers and gateways.
+
+| Field              | Description                                                                                                                                                                                                     | ExampleValue |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| syncDelay          | Sets the interval between two synchronization requests to other members of the cluster. This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCDELAY | 10s          |
+| syncRequestTimeout | Sets the timeout for the synchronization requests. This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCREQUESTTIMEOUT                             | 2s           |
+| gossipFanout       | Sets the number of cluster members the configuration is gossiped to. This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_CONFIGMANAGER_GOSSIP_GOSSIPFANOUT                 | 2            |
+
+#### YAML snippet
+
+```yaml
+configManager:
+  gossip:
+    syncDelay: 10s
+    syncRequestTimeout: 2s
+    gossipFanout: 2
 ```
 
 ### zeebe.gateway.cluster.security
