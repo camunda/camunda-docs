@@ -53,9 +53,12 @@ For **basic authentication**, input your username and password:
 
 For **OAuth**, input the credentials for your OAuth provider, as configured in your Zeebe [environment variables](/self-managed/zeebe-deployment/security/client-authorization.md#oauthcredentialsprovider):
 
-:::note
-The OAuth URL needs to contain the full path to the token endpoint, i.e. `https://<keycloak base url>/auth/realms/camunda-platform/protocol/openid-connect/token`.
-:::
+| Name            | Description                                                        | Example value                                                                             |
+| --------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Client ID       | The name of your Zeebe client, found in your Identity console.     | `zeebe`                                                                                   |
+| Client secret   | The password of your Zeebe client, found in your Identity console. | `zecret`                                                                                  |
+| OAuth token url | The full path to the token endpoint.                               | `https://<keycloak base url>/auth/realms/camunda-platform/protocol/openid-connect/token`. |
+| OAuth audience  | The permission name for Zeebe.                                     | `zeebe-api`                                                                               |
 
 ![oauth configuration](./img/deploy-with-oauth.png)
 
