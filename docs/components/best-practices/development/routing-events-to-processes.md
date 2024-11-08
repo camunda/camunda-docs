@@ -87,7 +87,7 @@ This could end with a successful income confirmation. However, it could also end
 
 <span className="callout">3</span>
 
-In this case, a **conditional event** watching this data (e.g. a process variable changed by the human task) triggers and causes the process to reconsider the consequences of the new findings.
+In this case, a **conditional event** watching this data (e.g. a process variable changed by the user task) triggers and causes the process to reconsider the consequences of the new findings.
 
 :::caution Camunda 8
 Camunda 8 does not yet [support a **conditional event**](/components/modeler/bpmn/bpmn-coverage.md).
@@ -102,7 +102,7 @@ Most events actually occur somewhere external to the workflow engine and need to
 - Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
 - Using Connectors: Configure a Connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
 
-### Starting process instance by BPMN process id
+### Starting process instance by BPMN process ID
 
 If you have only one starting point (none start event) in your process definition, you reference the process definition by the ID in the BPMN XML file.
 
@@ -210,7 +210,7 @@ If messages are exchanged between different processes deployed in the workflow e
 
 <span className="callout">1</span>
 
-Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN id in Java:
+Use some simple code on the sending side to route the message to a new process instance, e.g. by starting a new process instance by the BPMN ID in Java:
 
 ```java
 @JobWorker(type="routeInput")

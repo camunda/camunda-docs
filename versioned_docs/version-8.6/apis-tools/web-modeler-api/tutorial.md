@@ -26,11 +26,15 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 
 ## Set up authentication
 
-If you're interested in how we use a library to handle auth for our code, or to get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client id and client secret. Then, we return the actual token that can be passed as an authorization header in each request.
+If you're interested in how we use a library to handle auth for our code, or to get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client ID and client secret. Then, we return the actual token that can be passed as an authorization header in each request.
 
 To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. You will need to add your `MODELER_CLIENT_ID`, `MODELER_CLIENT_SECRET`, `MODELER_AUDIENCE`, which is `modeler.cloud.camunda.io` in a Camunda 8 SaaS environment, and `MODELER_BASE_URL`, which is `https://modeler.camunda.io/api/v1`.
 
 These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
+
+:::tip Can't find your environment variables?
+When you create new client credentials as a [prerequisite](#prerequisites), your environment variables appear in a pop-up window. Your environment variables may appear as `CAMUNDA_CONSOLE_CLIENT_ID`, `CAMUNDA_CONSOLE_CLIENT_SECRET`, and `CAMUNDA_CONSOLE_OAUTH_AUDIENCE`.
+:::
 
 Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 

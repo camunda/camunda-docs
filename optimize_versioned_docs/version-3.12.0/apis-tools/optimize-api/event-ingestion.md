@@ -168,6 +168,7 @@ POST `/api/ingestion/event/batch`
 
 ##### Request Body:
 
+```
      [
        {
           "specversion": "1.0",
@@ -184,6 +185,7 @@ POST `/api/ingestion/event/batch`
           }
       }
     ]
+```
 
 #### Response
 

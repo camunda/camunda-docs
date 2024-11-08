@@ -32,7 +32,7 @@ Each single importer/archiver node must be configured using the following config
 | ------------------------------------------ | -------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | camunda.tasklist.clusterNode.partitionIds  | Array of Zeebe partition ids this importer (or archiver) node must be responsible for. | Empty array, meaning all partitions data is loaded. |
 | camunda.tasklist.clusterNode.nodeCount     | Total amount of Importer (or archiver) nodes in the cluster.                           | 1                                                   |
-| camunda.tasklist.clusterNode.currentNodeId | Id of current Importer (or archiver) node, starting from 0.                            | 0                                                   |
+| camunda.tasklist.clusterNode.currentNodeId | ID of current Importer (or archiver) node, starting from 0.                            | 0                                                   |
 
 It's enough to configure either `partitionIds` or a pair of `nodeCount` and `currentNodeId`. If you provide `nodeCount` and `currentNodeId`, each node will automatically guess the Zeebe partitions they're responsible for.
 
@@ -86,7 +86,7 @@ You can further parallelize archiver and/or importer within one node using the f
 | camunda.tasklist.importer.threadsCount | Number of threads in which data will be imported. | 3             |
 
 :::note
-Parallelization of import and archiving within one node will also happen based on Zeebe partitions, meaning only configurations with (number of nodes) \* (threadsCount) <= (total number of Zeebe partitions) will make sense. Too many threads and nodes will still work, but some of them will be idle.
+Parallelization of import and archiving within one node will also happen based on Zeebe partitions, meaning only configurations with (number of nodes) \* (threadsCount) ≤ (total number of Zeebe partitions) will make sense. Too many threads and nodes will still work, but some of them will be idle.
 :::
 
 ## Archive period

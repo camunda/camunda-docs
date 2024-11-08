@@ -117,7 +117,7 @@ For more information, visit the [Identity documentation](/self-managed/concepts/
 
 ## Use Identity JWT token to access Tasklist API
 
-Tasklist provides a [GraphQL API](/apis-tools/tasklist-api/tasklist-api-overview.md) under the endpoint `/graphql`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
+Tasklist provides a [REST API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) under the endpoint `/v1`. Clients can access this API using a JWT access token in an authorization header `Authorization: Bearer <JWT>`.
 
 :::note
 Be aware a JWT token is intended to be used for M2M communication and is therefore issued for the relevant application, not for the user.
@@ -127,7 +127,7 @@ Be aware a JWT token is intended to be used for M2M communication and is therefo
 
 1. [Add an application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
 2. [Add permissions to an application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for Tasklist API.
-3. Obtain a token to access the GraphQL API.
+3. Obtain a token to access the REST API.
    You will need:
    - `client_id` and `client_secret` from Identity application you created.
    - URL of the authorization server will look like: `http://<keycloak_host>:<port>/auth/realms/camunda-platform/protocol/openid-connect/token`, where host and port reference Keycloak URL (e.g. `localhost:18080`).
@@ -157,7 +157,7 @@ Take the `access_token` value from the response object and store it as your toke
 4. Send the token as an authorization header in each request. In this case, request all tasks.
 
 ```shell
-curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" -d '{"query": "{tasks(query:{}){id name}}"}' http://localhost:8080/graphql
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <TOKEN>" http://localhost:8080/v1/tasks/search
 ```
 
 ### User task access restrictions

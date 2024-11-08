@@ -284,7 +284,7 @@ The **Result Expression** allows you to access specific attributes from the resp
 }
 ```
 
-In this example, we are using the **Result Expression** to extract the **ID** and **price** attributes from the response variable and assign them to the id and price process variables, respectively. You can then use these variables in subsequent steps of your process.
+In this example, we are using the **Result Expression** to extract the **ID** and **price** attributes from the response variable and assign them to the ID and price process variables, respectively. You can then use these variables in subsequent steps of your process.
 
 :::note
 The syntax for accessing attributes in the **Result Expression** may vary depending on the structure of your response object. You can refer to the [FEEL Context Expression](/components/modeler/feel/language-guide/feel-context-expressions.md) documentation for more information on how to use the **Result Expression**.

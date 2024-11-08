@@ -155,7 +155,7 @@ When compiling your class, you need to make sure all compile-time dependencies
 are provided. In the example above, that means we need the `grpc-api` and
 `slf4j-api` libraries available when compiling.
 
-Since the interceptor will be running inside the Zeebe gateway, the language
+Since the interceptor will be running inside the Zeebe Gateway, the language
 level of the compiled code must be the same as Zeebe's (i.e. currently JDK 21) or lower. This example thus assumes you're using version 21 of `javac`.
 
 ```sh

@@ -153,8 +153,8 @@ The **GitHub Connector** currently supports the following operations.
 
 - **GitHub API:** [Update a release](https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#update-a-release).
 - **Owner:** The account owner of the repository. The name is not case-sensitive.
-- **Repo:** The name of the repository. The name is not case-sensitive.
-- **Release id:** The unique identifier of the release.
+- **Repository:** The name of the repository. The name is not case-sensitive.
+- **Release ID:** The unique identifier of the release.
 - **Body:** Text describing the contents of the tag.
 - **Tag name:** The name of the tag.
 - **Release name:** The name of the release
@@ -164,8 +164,8 @@ The **GitHub Connector** currently supports the following operations.
 
 - **GitHub API:** [Delete a release](https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#delete-a-release).
 - **Owner:** The account owner of the repository. The name is not case-sensitive.
-- **Repo:** The name of the repository. The name is not case-sensitive.
-- **Release id:** The unique identifier of the release.
+- **Repository:** The name of the repository. The name is not case-sensitive.
+- **Release ID:** The unique identifier of the release.
 
 #### List releases
 

@@ -63,20 +63,20 @@ operate:
         # Cluster name
         clusterName: elasticsearch
         # Host
-        host: cpt-elasticsearch
+        host: <your-release-name>-elasticsearch
         # Transport port
         port: 9200
         numberOfShards: 3
       # Zeebe instance
       zeebe:
         # Broker contact point
-        brokerContactPoint: "cpt-zeebe-gateway:26500"
+        brokerContactPoint: "<your-release-name>-zeebe-gateway:26500"
       # ELS instance to export Zeebe data to
       zeebeElasticsearch:
         # Cluster name
         clusterName: elasticsearch
         # Host
-        host: cpt-elasticsearch
+        host: <your-release-name>-elasticsearch
         # Transport port
         port: 9200
         # Index prefix, configured in Zeebe Elasticsearch exporter
@@ -122,27 +122,27 @@ operate:
 
 ## Default properties set by the helm chart
 
-Before you supply a configuration, it's helpful to know what the default configuration is so you can start from a working configuration and then update the values you want:
+The `helm template` command generates the application's default configuration, allowing you to only update the values required by your setup. Use the following command to generate the default configuration, substituting in the name of your release:
 
 ```bash
-helm template \
+helm template <your-release-name> \
     -f values.yaml \
     camunda/camunda-platform \
     --show-only templates/operate/configmap.yaml
 ```
 
-`--show-only` will allow you to print out the `configmap` to the console:
+The `--show-only` flag prints out the `configmap` to the console:
 
 ```yaml
 # Source: camunda-platform/templates/operate/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cpt-operate
+  name: <your-release-name>-operate
   labels:
     app: camunda-platform
     app.kubernetes.io/name: camunda-platform
-    app.kubernetes.io/instance: cpt
+    app.kubernetes.io/instance: <your-release-name>
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: camunda-platform
     helm.sh/chart: camunda-platform-9.3.1
@@ -160,25 +160,26 @@ data:
         oauth2:
           resourceserver:
             jwt:
-              issuer-uri: "http://cpt-keycloak:80/auth/realms/camunda-platform"
-              jwk-set-uri: "http://cpt-keycloak:80/auth/realms/camunda-platform/protocol/openid-connect/certs"
+              issuer-uri: "http://<your-release-name>-keycloak:80/auth/realms/camunda-platform"
+              jwk-set-uri: "http://<your-release-name>-keycloak:80/auth/realms/camunda-platform/protocol/openid-connect/certs"
 
     camunda:
       identity:
         clientId: "operate"
         audience: "operate-api"
+        baseUrl: "http://<your-release-name>-identity:80"
 
     # Operate configuration file
     camunda.operate:
       identity:
-        redirectRootUrl: "https://dev.jlscode.com"
+        redirectRootUrl: "http://localhost:8081"
 
       # ELS instance to store Operate data
       elasticsearch:
         # Cluster name
         clusterName: elasticsearch
         # Host
-        host: cpt-elasticsearch
+        host: <your-release-name>-elasticsearch
         # Transport port
         port: 9200
       # Zeebe instance
@@ -190,7 +191,7 @@ data:
         # Cluster name
         clusterName: elasticsearch
         # Host
-        host: cpt-elasticsearch
+        host: <your-release-name>-elasticsearch
         # Transport port
         port: 9200
         # Index prefix, configured in Zeebe Elasticsearch exporter

@@ -193,7 +193,7 @@ npm run build
 
 When creating a plugin, you can place the directory containing your plugin in the aforementioned `resources/plugins` directory.
 
-Plugins will be loaded on application startup (menu plugins) or reload (style and modeling tool plugins). To reload the application, open the developer tools F12 and press `CtrlOrCmd + R`. This will clear all unsaved diagrams.
+Plugins will be loaded on application startup (menu plugins) or reload (style and modeling tool plugins). To reload the application, open the developer tools F12 and press `Ctrl+R` or `Cmd+R`. This will clear all unsaved diagrams.
 
 ## Additional resources
 

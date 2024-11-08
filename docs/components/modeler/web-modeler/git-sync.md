@@ -49,10 +49,13 @@ An organization administration account (or project administrator in Camunda Self
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **Client ID:** Found in your GitHub App's settings page.
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
-   - **GitHub repository URL:** The URL of the repository you would like to sync with.
+   - **GitHub repository URL:** The base URL of the repository you want to sync with, for example `https://github.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
    - **Branch name:** The branch name to use for merging and managing changes.
+   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
 
-3. Click **Save Configuration**.
+3. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
+
+4. Click **Save Configuration**.
 
 :::note
 When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
@@ -87,6 +90,37 @@ Existing GitHub configurations can be edited from the gear icon beside the **Syn
 - **Project administrators - SaaS:** Edit and update only the **GitHub repository URL** and **branch name**.
 - **Project editors:** Cannot make changes to the GitHub configuration.
 
+## Advanced use cases
+
+Git sync supports a variety of development workflows, including the following advanced use cases.
+
+### Monorepos
+
+A monorepo is a single repository containing multiple logical projects that each have disparate workflows and release cadences.
+
+To set up Git sync with a monorepo, you can specify the **path** to your project during the configuration. This allows you to keep multiple projects in one repository, each with its own sync configuration.
+
+:::note
+If you are using Git sync to work with monorepos, you should pull changes regularly, as the GitHub API is limited to a fixed amount of files and commits per synchronization action. See [troubleshooting](#troubleshooting) for more information.
+:::
+
+### Parallel feature development
+
+Git sync supports parallel feature development by allowing multiple process applications to be connected to different feature branches. This allows teams to work on multiple features simultaneously without interfering with each other's work.
+
+To use Git sync for parallel feature development:
+
+1. Create a new [process application](/docs/components/modeler/web-modeler/create-a-process-application.md) in Modeler for each active feature branch you want to develop.
+2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
+3. Work on your feature in Modeler, using **Sync with GitHub** to pull and push changes as needed.
+4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.
+
+To perform hotfixes or patches of production or production-bound processes, sync a copy of the process application to the `main` branch.
+
+:::caution
+Creating multiple copies of a process application can complicate navigation and deployment if you have multiple files with the same ID in a project. To avoid this, you can create copies of the process application in different projects.
+:::
+
 ## Troubleshooting
 
 - Duplicate file names are not allowed for the same file type.
@@ -95,3 +129,4 @@ Existing GitHub configurations can be edited from the gear icon beside the **Syn
 - When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
+- A single synchronization action is limited to incorporating a maximum of 250 commits or making changes to up to 300 files, regardless of whether these changes affect the Web Modeler files directly. Be aware that Web Modeler does not provide a notification when these thresholds are exceeded. Should you encounter this limitation, it may be necessary to initiate a fresh synchronization. A fresh synchronization fetches all the files in the repository without relying on the incremental changes, thus bypassing the limitations. This can be achieved by either changing the branch or modifying the GitHub repository URL.
