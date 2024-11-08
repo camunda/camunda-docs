@@ -35,38 +35,38 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
 4. Select your authentication method, and input the required credentials:
 
-<Tabs groupId="auth" defaultValue="basic" queryString values={
-[
-{label: 'Basic', value: 'basic' },
-{label: 'OAuth', value: 'oauth' }
-]}>
+   <Tabs groupId="auth" defaultValue="basic" queryString values={
+   [
+   {label: 'Basic', value: 'basic' },
+   {label: 'OAuth', value: 'oauth' }
+   ]}>
 
-<TabItem value='basic'>
+   <TabItem value='basic'>
 
-For **basic authentication**, input your username and password:
+   For **basic authentication**, input your username and password:
 
-![basic auth configuration](./img/deploy-with-basic-auth.png)
+   ![basic auth configuration](./img/deploy-with-basic-auth.png)
 
-</TabItem>
+   </TabItem>
 
-<TabItem value='oauth'>
+   <TabItem value='oauth'>
 
-For **OAuth**, input the credentials for your OAuth provider, as configured in your Zeebe [environment variables](/self-managed/zeebe-deployment/security/client-authorization.md#oauthcredentialsprovider):
+   For **OAuth**, input the credentials for your OAuth provider. These are configured as part of the default [Helm installation](/self-managed/setup/install.md) and can be discovered in [Identity](/docs/self-managed/identity/what-is-identity.md), or are set by Zeebe [environment variables](/self-managed/zeebe-deployment/security/client-authorization.md#environment-variables).
 
-| Name            | Description                                                        | Example value                                                                             |
-| --------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| Client ID       | The name of your Zeebe client, found in your Identity console.     | `zeebe`                                                                                   |
-| Client secret   | The password of your Zeebe client, found in your Identity console. | `zecret`                                                                                  |
-| OAuth token url | The full path to the token endpoint.                               | `https://<keycloak base url>/auth/realms/camunda-platform/protocol/openid-connect/token`. |
-| OAuth audience  | The permission name for Zeebe.                                     | `zeebe-api`                                                                               |
+   ![oauth configuration](./img/deploy-with-oauth.png)
 
-![oauth configuration](./img/deploy-with-oauth.png)
+   | Name            | Description                          | Example value                                                                             |
+   | --------------- | ------------------------------------ | ----------------------------------------------------------------------------------------- |
+   | Client ID       | The name of your Zeebe client.       | `zeebe`                                                                                   |
+   | Client secret   | The password of your Zeebe client.   | `zecret`                                                                                  |
+   | OAuth token url | The full path to the token endpoint. | `https://<keycloak base url>/auth/realms/camunda-platform/protocol/openid-connect/token`. |
+   | OAuth audience  | The permission name for Zeebe.       | `zeebe-api`                                                                               |
 
-</TabItem>
-</Tabs>
+   </TabItem>
+   </Tabs>
 
-1. Select the **Remember** checkbox if you want to locally store the connection information.
+5. Select the **Remember** checkbox if you want to locally store the connection information.
 
-2. Click **Deploy** to perform the deployment.
+6. Click **Deploy** to perform the deployment.
 
 ![deployment successful](./img/deploy-success.png)
