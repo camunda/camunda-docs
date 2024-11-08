@@ -39,7 +39,7 @@ Click **Create GitHub App** to finish.
 ### [Configure GitHub in Web Modeler](#configure-github-in-web-modeler)
 
 :::note
-An organization administration account (or aa user with `Web Modeler Admin` role in Camunda Self-Managed) is required for the initial GitHub configuration.
+An organization administration account (or a user with `Web Modeler Admin` role in Camunda Self-Managed) is required for the initial GitHub configuration.
 :::
 
 :::note
