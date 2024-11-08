@@ -81,6 +81,7 @@ GET `/api/public/export/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62/result/json?
 
 ##### Response content
 
+```
     {
       "searchRequestId": "FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ",
       "numberOfRecordsInResponse": 2,
@@ -113,6 +114,7 @@ GET `/api/public/export/report/e6c5aaa1-6a18-44e7-8480-d562d511ba62/result/json?
           }
       ]
     }
+```
 
 ##### Response
 
@@ -130,6 +132,7 @@ Note here the use of the query parameter `searchRequestId` to retrieve further p
 
 ##### Response content
 
+```
     {
       "searchRequestId": "FGluY2x1ZGVfY29udGV4dF91dWlkDXF1ZXJ",
       "numberOfRecordsInResponse": 2,
@@ -162,6 +165,7 @@ Note here the use of the query parameter `searchRequestId` to retrieve further p
           }
       ]
     }
+```
 
 ##### Response
 

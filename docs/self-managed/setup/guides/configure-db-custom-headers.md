@@ -89,16 +89,17 @@ Include the plugin parameters in each component's `application.yaml`, or pass th
 
 The following examples add the new `my-plugin` JAR to the `application.yaml` for Zeebe, Operate, and Tasklist:
 
-#### Configure Zeebe Exporter
-
 <Tabs groupId="db" defaultValue="elasticsearch" values={
 [
 {label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'OpenSearch', value: 'opensearch' }
+{label: 'OpenSearch', value: 'opensearch' },
+{label: 'Camunda Exporter', value: 'camundaExporter' }
 ]
 }>
 
 <TabItem value='elasticsearch'>
+
+#### Configure Zeebe Exporter
 
 ```yaml
 - ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INTERCEPTORPLUGINS_0_ID=my-plugin
@@ -106,29 +107,7 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 - ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
 ```
 
-</TabItem>
-
-<TabItem value='opensearch'>
-
-```yaml
-- ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_ID=my-plugin
-- ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-```
-
-</TabItem>
-</Tabs>
-
 #### Configure Operate Importer
-
-<Tabs groupId="db" defaultValue="elasticsearch" values={
-[
-{label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'OpenSearch', value: 'opensearch' }
-]
-}>
-
-<TabItem value='elasticsearch'>
 
 ```yaml
 - CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
@@ -139,32 +118,7 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 - CAMUNDA_OPERATE_ELASTICSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
 ```
 
-</TabItem>
-
-<TabItem value='opensearch'>
-
-```yaml
-- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-```
-
-</TabItem>
-</Tabs>
-
 #### Configure Tasklist Importer
-
-<Tabs groupId="db" defaultValue="elasticsearch" values={
-[
-{label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'OpenSearch', value: 'opensearch' }
-]
-}>
-
-<TabItem value='elasticsearch'>
 
 ```yaml
 - CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
@@ -175,36 +129,11 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 - CAMUNDA_TASKLIST_ELASTICSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
 ```
 
-</TabItem>
-
-<TabItem value='opensearch'>
-
-```yaml
-- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-```
-
-</TabItem>
-</Tabs>
-
 #### Configure Optimize Importer
 
 :::note
 Due to technical limitations, Optimize currently allows registering up to 5 plugins.
 :::
-
-<Tabs groupId="db" defaultValue="elasticsearch" values={
-[
-{label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'OpenSearch', value: 'opensearch' }
-]
-}>
-
-<TabItem value='elasticsearch'>
 
 ```yaml
 - CAMUNDA_OPTIMIZE_ELASTICSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
@@ -216,10 +145,62 @@ Due to technical limitations, Optimize currently allows registering up to 5 plug
 
 <TabItem value='opensearch'>
 
+#### Configure Zeebe Exporter
+
+```yaml
+- ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_ID=my-plugin
+- ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
+```
+
+#### Configure Operate Importer
+
+```yaml
+- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
+- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
+- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
+- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
+```
+
+#### Configure Tasklist Importer
+
+```yaml
+- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
+- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
+- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
+- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
+```
+
+#### Configure Optimize Importer
+
+:::note
+Due to technical limitations, Optimize currently allows registering up to 5 plugins.
+:::
+
 ```yaml
 - CAMUNDA_OPTIMIZE_OPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
 - CAMUNDA_OPTIMIZE_OPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
 - CAMUNDA_OPTIMIZE_OPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
+```
+
+</TabItem>
+
+<TabItem value='camundaExporter'>
+
+#### Configure Zeebe Exporter
+
+:::note
+The following configuration uses the default name `camundaExporter`. To use a custom name, update `CAMUNDAEXPORTER` in the provided environment variables to match the name defined in your exporter [configuration](/self-managed/zeebe-deployment/exporters/camunda-exporter.md).
+:::
+
+```yaml
+- ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_INTERCEPTORPLUGINS_0_ID=my-plugin
+- ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
+- ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
 ```
 
 </TabItem>

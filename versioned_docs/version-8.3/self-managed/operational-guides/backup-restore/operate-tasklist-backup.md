@@ -5,6 +5,9 @@ description: "How to perform a backup and restore of Operate and Tasklist data."
 keywords: ["backup", "backups"]
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 :::note
 This release introduces breaking changes, including:
 
@@ -37,32 +40,67 @@ The backup API can be reached via the Actuator management port, which by default
 Before you can use the backup and restore feature:
 
 1. The [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
-2. Operate and Tasklist must be configured with the repository name using the following configuration parameters:
+2. Operate and Tasklist must be configured with the repository name using one of the following configuration options:
+
+<Tabs groupId="config" defaultValue="yaml" values={
+[
+{label: 'YAML file', value: 'yaml', },
+{label: 'Environment variables', value: 'env', },
+]
+}>
+
+<TabItem value='yaml'>
+
+#### Operate
 
 ```yaml
-for Operate:
 camunda:
   operate:
     backup:
       repositoryName: <es snapshot repository name>
+```
 
-for Tasklist:
+</TabItem>
+
+<TabItem value='env'>
+
+#### Operate
+
+```
+CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
+```
+
+</TabItem>
+</Tabs>
+
+#### Tasklist
+
+<Tabs groupId="config" className="tabs-hidden" defaultValue="yaml" values={
+[
+{label: 'YAML file', value: 'yaml', },
+{label: 'Environment variables', value: 'env', },
+]
+}>
+
+<TabItem value='yaml'>
+
+```yaml
 camunda:
   tasklist:
     backup:
       repositoryName: <es snapshot repository name>
 ```
 
-or with environmental variables:
+</TabItem>
+
+<TabItem value='env'>
 
 ```
-for Operate:
-CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-
-for Tasklist:
 CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-
 ```
+
+</TabItem>
+</Tabs>
 
 ## Create backup API
 

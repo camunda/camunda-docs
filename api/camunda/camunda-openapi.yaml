@@ -495,8 +495,8 @@ paths:
       description: |
         Get the user task by the user task key.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -601,8 +601,8 @@ paths:
         Get the form of a user task.
 
         Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
-        Furthermore, this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Furthermore, this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -707,8 +707,8 @@ paths:
       description: |
         Search for user tasks based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -752,8 +752,8 @@ paths:
       description: |
         Search for user task variables based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -806,8 +806,8 @@ paths:
       description: |
         Search for process and local variables based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -851,8 +851,8 @@ paths:
       description: |
         Get the variable by the variable key.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -967,8 +967,8 @@ paths:
       description: |
         Search for process definitions based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1012,8 +1012,8 @@ paths:
       description: |
         Returns process definition as JSON.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1067,8 +1067,8 @@ paths:
       description: |
         Returns process definition as XML.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1130,8 +1130,8 @@ paths:
         Get the start form of a process.
 
         Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
-        Furthermore, this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Furthermore, this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1235,8 +1235,8 @@ paths:
       description: |
         Get the process instance by the process instance key.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1290,8 +1290,8 @@ paths:
       description: |
         Search for process instances based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1473,8 +1473,8 @@ paths:
       description: |
         Search for flow node instances based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1518,8 +1518,8 @@ paths:
       description: |
         Returns flow node instance as JSON.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1573,8 +1573,8 @@ paths:
       description: |
         Search for decision definitions based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1618,8 +1618,8 @@ paths:
       description: |
         Returns a decision definition by key.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1673,8 +1673,8 @@ paths:
       description: |
         Returns decision definition as XML.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1728,8 +1728,8 @@ paths:
       description: |
         Search for decision requirements based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1773,8 +1773,8 @@ paths:
       description: |
         Returns Decision Requirements as JSON.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1828,8 +1828,8 @@ paths:
       description: |
         Returns decision requirements as XML.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1884,8 +1884,8 @@ paths:
       description: |
         Search for decision instances based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -1930,8 +1930,8 @@ paths:
       description: |
         Returns a decision instance.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -2105,8 +2105,8 @@ paths:
       description: |
         Search for authorizations based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -2489,8 +2489,8 @@ paths:
       description: |
         Search for users based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -2533,8 +2533,8 @@ paths:
       description: |
         Search for user authorizations based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -2587,8 +2587,8 @@ paths:
       description: |
         Search for incidents based on given criteria.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
@@ -2627,8 +2627,8 @@ paths:
       description: |
         Returns incident as JSON.
 
-        Note that this endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
-        The Camunda 8 API (REST) Overview page provides further details.
+        Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+        The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change

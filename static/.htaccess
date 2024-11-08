@@ -17,6 +17,11 @@ RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 # Move alpha features to components
 RewriteRule ^docs/next/reference/alpha-features/?$ /docs/next/components/early-access/alpha/alpha-features/$1 [R=301,L]
 
+# Remove outdated message correlation guide
+RewriteRule ^docs/next/guides/message-correlation/?$ /docs/guides/$1 [R=301,L]
+RewriteRule ^docs/guides/message-correlation/?$ /docs/guides/$1 [R=301,L]
+RewriteRule ^docs/8.5/guides/message-correlation/?$ /docs/guides/$1 [R=301,L]
+
 # Remove the Getting Started partials as full pages
 RewriteRule ^docs/guides/react-components/sm-prerequisites/?$ /docs/guides/$1 [R=301,L]
 RewriteRule ^docs/guides/react-components/saas-prerequisites/?$ /docs/guides/$1 [R=301,L]

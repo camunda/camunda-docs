@@ -50,7 +50,7 @@ If you do not wish to specify the username and password in plaintext within the 
 
 ```yaml
 global:
-  opensearcn:
+  opensearch:
     auth:
       existingSecret: secretName
       existingSecretKey: secretKey
