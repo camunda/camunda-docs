@@ -4,7 +4,7 @@ title: Git sync
 description: Connect Web Modeler to your Git repositories to keep your projects synced.
 ---
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub, and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+Organization owners and administrators can connect their Web Modeler process applications to GitHub and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
 Once the connection is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
 
@@ -48,9 +48,9 @@ When using a self-hosted GitHub instance, ensure the environment variable `CAMUN
 
 1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect repository**.
 
-2. Select the **GitHub**'s tile (if not already), located at the top of the modal.
+2. Select the **GitHub** tile (if not already selected), located at the top of the modal.
 
-3. Provide the following information in the GitHub Configuration modal:
+3. Provide the following information in the **Configure GitHub** modal:
 
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, Application ID is required.)
@@ -77,9 +77,14 @@ When successful, your project will display a new **Sync with GitHub** button.
 
 Web Modeler requires a project access token to sync changes with your GitLab repository.
 
-Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#create-a-project-access-token) to generate a new project access token for your repository:
+Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#create-a-project-access-token) to generate a new project access token for your repository with the following configuration:
 
-- Ensure to give the following permissions to the token: `api, read_repository, write_repository, read_registry, write_registry`
+- Enable the following [**scopes**](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#scopes-for-a-project-access-token):
+  - `api`
+  - `read_repository`
+  - `write_repository`
+  - `read_registry`
+  - `write_registry`
 
 ### Get the project ID
 
@@ -89,14 +94,14 @@ Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settin
 ### Configure GitLab in Web Modeler
 
 :::note
-An organization administration account (or aa user with `Web Modeler Admin` role in Camunda Self-Managed) is required for the initial GitHub configuration.
+An organization administration account (or a user with `Web Modeler Admin` role in Camunda Self-Managed) is required for the initial GitHub configuration.
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to GitLab, and click **Connect repository**.
 
-2. Select the **GitLab**'s tile, located at the top of the modal.
+2. Select the **GitLab** tile, located at the top of the modal.
 
-3. Provide the following information in the GitHub Configuration modal:
+3. Provide the following information in the **Configure GitLab** modal:
 
    - **Project access token:** The token generated in the GitLab project settings.
    - **Project ID:** The ID copied from the GitLab project settings.
@@ -140,10 +145,10 @@ Existing Git configurations can be edited from the gear icon beside the **Sync w
 
 ## Change Git provider
 
-In the event that you need to switch from GitHub to GitLab, or vice versa, you can update your configuration by following these steps:
+To switch from GitHub to GitLab, or vice versa, update your configuration with the following steps:
 
-1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with GitHub**, or **Sync with GitLab** button, and clicking the **Delete provider connection** button at the bottom of the modal.
-2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider following the steps outlined in the [Connect to GitHub](#connect-to-github) or [Connect to GitLab](#connect-to-gitlab) sections.
+1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with GitHub** or **Sync with GitLab** button, and clicking the **Delete provider connection** button at the bottom of the modal.
+2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined in the [Connect to GitHub](#connect-to-github) or [Connect to GitLab](#connect-to-gitlab) sections.
 
 ## Advanced use cases
 
