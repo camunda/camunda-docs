@@ -2,8 +2,15 @@
 id: email
 title: Email Connector
 sidebar_label: Email Connector
-description: The Email Connector allows you to connect your BPMN service with different email protocol.
+description: The Email Connector allows you to connect your BPMN service with different email protocols such as SMTP, POP3 or IMAP.
 ---
+
+import Tabs from "@theme/Tabs"; import TabItem from "@theme/TabItem";
+
+<Tabs groupId="email" defaultValue="outbound" queryString
+values={[{label: 'Email Outbound Connector', value: 'outbound' }, {label: 'Email Inbound Connector', value: 'inbound' }]}>
+
+<TabItem value='outbound'>
 
 The **Email Connector** is an outbound Connector that allows you to connect your BPMN service with any email POP3, IMAP
 or SMTP server.
@@ -332,7 +339,7 @@ Allow users to fetch a list of emails from a specified folder, with customizable
 | `Max Emails to read` | Specify the maximum number of emails to retrieve. This parameter determines the cap on the number of emails the task will return.                                                                                                                 |
 | `Sort emails by`     | <p>Choose the field by which to sort the emails. Supported sorting fields are:</p><p><ul><li>`Sent date`: Sorts emails by the date and time they were sent.</li><li>`Size`: Sorts emails by the size of the email.</li></ul></p>                  |
 | `Sort order`         | <p>Define the sort order:</p><p><ul><li>`ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.</li><li>`DESC`: Descending order, from the most recent or largest value to the oldest or smallest.</li></ul></p> |
-| `Folder`             | (Optional) the folder to list emails from, default is `INBOX`.                                                                                                                                                                                    |
+| `Folder`             | (Optional) the folder to list emails from, default is `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`)                                                                                             |
 
 #### Sorting and Limiting Behavior
 
@@ -378,23 +385,23 @@ Retrieve an email's details based on the specified `messageId`.
 
 #### Parameters
 
-| Parameter   | Description                                                                                                               |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------ |
-| `MessageId` | The unique identifier of the email that must be read.                                                                     |
-| `Folder`    | (Optional) Specifies the folder from which the email should be retrieved. If not provided, the default folder is `INBOX`. |
+| Parameter   | Description                                                                                                                                                                                                      |
+| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MessageId` | The unique identifier of the email that must be read.                                                                                                                                                            |
+| `Folder`    | (Optional) Specifies the folder from which the email should be retrieved. If not provided, the default folder is `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`) |
 
 #### Response Structure
 
 The task returns a JSON object containing detailed information about the email:
 
-- `messageId`: The unique identifier corresponding to the email message.
-- `fromAddress`: the email addresses of the sender.
-- `headers` : A list containing the email's headers
+- `messageId`: The unique identifier of the email message.
+- `fromAddress`: The email addresses of the sender.
+- `headers` : A list of the email headers.
 - `subject`: The subject line of the email.
-- `size`: The size of the email in bytes.
-- `plainTextBody`: The plain text version of the email's content.
-- `htmlBody`: The HTML version of the email's content, provided it exists.
-- `receivedDateTime`: the email's reception datetime
+- `size`: The size of the email (in bytes).
+- `plainTextBody`: The plain text version of the email content.
+- `htmlBody`: The HTML version of the email content, if it exists.
+- `receivedDateTime`: The date and time the email was received.
 
 #### Example Response
 
@@ -428,10 +435,10 @@ Delete an email from a specified folder, using the email's unique `messageId`.
 
 #### Parameters
 
-| Parameter   | Description                                                                                                                                             |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `MessageId` | The identifier of the email message to delete.                                                                                                          |
-| `Folder`    | (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied, the default folder is assumed to be `INBOX`. |
+| Parameter   | Description                                                                                                                                                                                                                                    |
+| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MessageId` | The identifier of the email message to delete.                                                                                                                                                                                                 |
+| `Folder`    | (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied, the default folder is assumed to be `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`) |
 
 #### Response Structure
 
@@ -462,7 +469,8 @@ A search query is represented as a JSON object. Below is an example of a JSON ob
 using an AND and OR operator to combine multiple conditions:
 
 - `Folder`: (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied,
-  the default folder is assumed to be `INBOX`.
+  the default folder is assumed to be `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or
+  `inside.folder`)
 - `Criteria`: _See below_
 
 ```json
@@ -540,11 +548,11 @@ Enable users to transfer an email from one folder to another, streamlining inbox
 
 #### Parameters
 
-| Parameter       | Description                                                                                                                                                                                                                                           |
-| :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `MessageId`     | The identifier of the email that needs to be moved.                                                                                                                                                                                                   |
-| `Source folder` | (Optional) The folder from which the email will be moved. If not specified, the default is INBOX.                                                                                                                                                     |
-| `Target folder` | The destination folder where the email is placed. To specify a new folder or a nested hierarchy, use a dot-separated path (for example, 'Archive' or 'Projects.2023.January'). The system automatically creates any non-existent folders in the path. |
+| Parameter       | Description                                                                                                                                                                                                                                                     |
+| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MessageId`     | The identifier of the email that needs to be moved.                                                                                                                                                                                                             |
+| `Source folder` | (Optional) The folder from which the email will be moved. If not specified, the default is INBOX. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`)                                                                        |
+| `Target folder` | The destination folder where the email is placed. To specify a new folder or a nested hierarchy, use `.` or `/` separated path (for example, 'Archive/test' or 'Projects.2023.January'). The system automatically creates any non-existent folders in the path. |
 
 #### Response Structure
 
@@ -565,3 +573,172 @@ The example below shows the expected JSON response after an email has been succe
   "to": "TEST"
 }
 ```
+
+</TabItem>
+
+<TabItem value='inbound'>
+
+The Email Inbound Connector is an inbound Connector that allows you to connect your BPMN service with any email IMAP server.
+
+:::caution
+This inbound connector only supports working with IMAP server.
+:::
+
+## Prerequisites
+
+To use the **Email Inbound Connector**, you must have an IMAP server available to connect to.
+
+:::note
+Use Camunda secrets to avoid exposing your sensitive data as plain text.
+See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
+:::
+
+## Authentication
+
+You can authenticate to a mail server as follows.
+
+### Simple Authentication
+
+This method allows the user to connect to any IMAP server using an email address and password.
+
+#### Parameters
+
+| Parameter  | Description                                                                                                                                                                |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
+| `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
+
+## Listener information
+
+This inbound connector creates a new process each time a new email is received.
+
+| Parameter               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :---------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Folder`                | <p>(Optional) Define the folder the inbound connector will monitor.</p><p><ul><li>If not specified, the default folder is set to `INBOX`.</li><li>For subfolders, use `.` or `/` separated path (for example, `inside/folder` or `inside.folder`)</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `Polling Wait Time`     | Set the interval between each polling operation. See [timer events](/docs/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for more information on time duration and correct format.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `Polling Configuration` | <p>This section contains settings related to the polling behavior of the connector.</p><p><ul><li><code>Poll All Emails</code>: Poll every email found in the specified folder.<ul><li><p><code>Move to Another Folder After Processing</code>: Move processed emails to a specific folder.</p><ul><li><p><code>Folder</code>: Specify the target folder to move processed emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</p></li></ul></li><li><p><code>Delete After Processing</code>: Permanently delete each email after processing.</p></li></ul></li></ul><ul><li>`Poll Unseen Emails`: Poll only emails not marked as read in the specified folder.<ul><li><p>`Move to Another Folder After Processing`: Move processed unseen emails to a specific folder.</p><ul><li>`Folder`: Specify the target folder to move processed unseen emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</li></ul></li><li><p>`Delete After Processing`: Permanently delete unseen emails from the folder after processing.</p></li><li><p>`Mark as Read After Processing`: Mark each unseen email as read after it is processed.</p></li></ul></li></ul></p> |
+
+## Response Structure
+
+The task returns a JSON object containing detailed information about the email:
+
+- `messageId`: The unique identifier of the email message.
+- `fromAddress`: The email addresses of the sender.
+- `headers` : A list of the email headers.
+- `subject`: The subject line of the email.
+- `size`: The size of the email (in bytes).
+- `plainTextBody`: The plain text version of the email content.
+- `htmlBody`: The HTML version of the email content, if it exists.
+- `receivedDateTime`: The date and time the email was received.
+
+#### Example Response
+
+The following example JSON response shows the data structure produced when an email triggers the creation of a process
+instance:
+
+```json
+{
+  "messageId": "messageId",
+  "fromAddress": "example@camunda.com",
+  "subject": "Urgent Test",
+  "size": 65646,
+  "plainTextBody": "Hey how are you?\r\n",
+  "htmlBody": "<html>Hello</html>",
+  "headers": [
+    {
+      "header": "header1",
+      "value": "example"
+    },
+    {
+      "header": "header2",
+      "value": "test"
+    }
+  ],
+  "sentDate": "2024-08-19T06:54:28Z"
+}
+```
+
+This response includes essential email details such as the `messageId`, sender addresses, subject, size, and the content
+of the email both in plain text and HTML format. This information can be used by the process for various workflows, such
+as prioritizing tasks, content analysis, and automated responses.
+
+## Activation condition
+
+The optional **Activation condition** field allows you to specify a Friendly Enough Expression Language ([FEEL](/components/modeler/feel/what-is-feel.md)) expression to control when this Connector should trigger a process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are met by the incoming email.
+
+For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email received by the connector.
+
+## Correlation
+
+The **Correlation** section allows you to configure the message correlation parameters.
+
+### Correlation key
+
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This
+  corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This
+  expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+
+For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming email
+message contains `value:{correlationKey:myValue}`, your correlation key settings will look like this:
+
+- **Correlation key (process)**: `=myCorrelationKey`
+- **Correlation key (payload)**: `=message.plainTextBody.correlationKey`
+
+You can also use the key of the message to accomplish this in the **Correlation key (payload)** field with `=key`.
+
+:::info
+To learn more about correlation keys, see [messages](../../../concepts/messages).
+:::
+
+### Message ID expression
+
+The optional **Message ID expression** field allows you to extract the message ID from the incoming message.
+
+- The message ID serves as a unique identifier for the message and is used for message correlation.
+- This expression is evaluated in the Connector Runtime and the result used to correlate the message.
+
+In most cases, you do not need to configure the **Message ID expression**. However, it is useful if you want to ensure
+message deduplication or achieve a specific message correlation behavior.
+
+:::info
+To learn more about how message IDs influence message correlation,
+see [messages](../../../concepts/messages#message-correlation-overview).
+:::
+
+For example, if you want to set the message ID to the value of the `messageId` field in the incoming message, you can
+configure the **Message ID expression** as follows:
+
+```
+= message.messageId
+```
+
+### Message TTL
+
+The optional **Message TTL** field allows you to set the time-to-live (TTL) for the correlated messages.
+
+- TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it
+  cannot be correlated immediately).
+- The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour.
+
+:::info
+To learn more about TTL in Zeebe, see [message correlation](../../../concepts/messages#message-buffering).
+:::
+
+## Deduplication
+
+The **Deduplication** section allows you to configure the Connector deduplication parameters.
+
+- **Connector deduplication** is a mechanism in the Connector Runtime that determines how many email listeners are created if there are multiple occurrences of the **Email Listener Connector** in a BPMN diagram. This is different to **message deduplication**.
+
+- By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription properties only result in one subscription.
+
+To customize the deduplication behavior, select the **Manual mode** checkbox and configure the custom deduplication ID.
+
+:::info
+To learn more about deduplication, see [deduplication](../use-connectors/inbound.md#connector-deduplication).
+:::
+
+</TabItem>
+
+</Tabs>
