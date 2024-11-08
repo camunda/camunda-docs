@@ -394,14 +394,14 @@ Retrieve an email's details based on the specified `messageId`.
 
 The task returns a JSON object containing detailed information about the email:
 
-- `messageId`: The unique identifier corresponding to the email message.
-- `fromAddress`: the email addresses of the sender.
-- `headers` : A list containing the email's headers
+- `messageId`: The unique identifier of the email message.
+- `fromAddress`: The email addresses of the sender.
+- `headers` : A list of the email headers.
 - `subject`: The subject line of the email.
-- `size`: The size of the email in bytes.
-- `plainTextBody`: The plain text version of the email's content.
-- `htmlBody`: The HTML version of the email's content, provided it exists.
-- `receivedDateTime`: the email's reception datetime
+- `size`: The size of the email (in bytes).
+- `plainTextBody`: The plain text version of the email content.
+- `htmlBody`: The HTML version of the email content, if it exists.
+- `receivedDateTime`: The date and time the email was received.
 
 #### Example Response
 
@@ -578,11 +578,13 @@ The example below shows the expected JSON response after an email has been succe
 
 <TabItem value='inbound'>
 
-## Prerequisites
+The Email Inbound Connector is an inbound Connector that allows you to connect your BPMN service with any email IMAP server.
 
 :::caution
 This inbound connector only supports working with IMAP server.
 :::
+
+## Prerequisites
 
 To use the **Email Inbound Connector**, you must have an IMAP server available to connect to.
 
@@ -606,49 +608,28 @@ This method allows the user to connect to any IMAP server using an email address
 | `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
 | `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
 
-### Listener information
+## Listener information
 
 This inbound connector creates a new process each time a new email is received.
 
-- `Folder`: (Optional) This parameter defines the folder that the inbound connector will monitor. If not specified, the
-  default folder is set to INBOX. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or
-  `inside.folder`)
-- `Polling Wait Time`: This parameter sets the interval between each polling operation.
-  Please [refer to the documentation](https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/#time-duration)
-  on time duration for the correct format.
-- `Polling Configuration`: This section contains settings related to the polling behavior of the connector.
-  - `Poll All Emails`: When enabled, the connector polls every email found in the specified folder.
-    - `Move to Another Folder After Processing`: If selected, this option moves each processed email to a designated
-      folder.
-      - `Folder`: Here, you need to specify the target folder where processed emails will be moved. To specify a
-        new folder or a nested hierarchy, use `.` or `/` separated path (for example, 'Archive/test' or '
-        Projects.2023.January'). The system automatically creates any non-existent folders in the path.
-    - `Delete After Processing`: If this option is chosen, each email will be permanently deleted after processing.
-  - `Poll Unseen Emails`: When enabled, the connector polls only the emails that have not been marked as read in the
-    specified folder.
-    - `Move to Another Folder After Processing`: Select this to move each processed unseen email to a different
-      folder.
-      - `Folder`: Specify the target folder for the processed unseen emails to be moved to. To specify a new
-        folder or a nested hierarchy, use `.` or `/` separated path (for example, '
-        Archive/test' or 'Projects.2023.January'). The system automatically creates any non-existent folders in
-        the
-        path.
-    - `Delete After Processing`: If enabled, unseen emails will be deleted from the folder after they are processed.
-    - `Mark as Read After Processing`: When this option is selected, each unseen email will be marked as read once
-      it has been processed.
+| Parameter               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Folder`                | <p>(Optional) Define the folder the inbound connector will monitor.</p><p><ul><li>If not specified, the default folder is set to `INBOX`.</li><li>For subfolders, use `.` or `/` separated path (for example, `inside/folder` or `inside.folder`)</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `Polling Wait Time`     | Set the interval between each polling operation. See [timer events](https://docs.camunda.io/docs/components/modeler/bpmn/timer-events/#time-duration) for more information on time duration and correct format.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `Polling Configuration` | <p>This section contains settings related to the polling behavior of the connector.</p><p><ul><li><code>Poll All Emails</code>: Poll every email found in the specified folder.<ul><li><p><code>Move to Another Folder After Processing</code>: Move processed emails to a specific folder.</p><ul><li><p><code>Folder</code>: Specify the target folder to move processed emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</p></li></ul></li><li><p><code>Delete After Processing</code>: Permanently delete each email after processing.</p></li></ul></li></ul><ul><li>`Poll Unseen Emails`: Poll only emails not marked as read in the specified folder.<ul><li><p>`Move to Another Folder After Processing`: Move processed unseen emails to a specific folder.</p><ul><li>`Folder`: Specify the target folder to move processed unseen emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</li></ul></li><li><p>`Delete After Processing`: Permananetly delete unseen emails from the folder after processing.</p></li><li><p>`Mark as Read After Processing`: Mark each unseen email as read after it is processed.</p></li></ul></li></ul></p> |
 
-#### Response Structure
+## Response Structure
 
 The task returns a JSON object containing detailed information about the email:
 
-- `messageId`: The unique identifier corresponding to the email message.
-- `fromAddress`: the email addresses of the sender.
-- `headers` : A list containing the email's headers
+- `messageId`: The unique identifier of the email message.
+- `fromAddress`: The email addresses of the sender.
+- `headers` : A list of the email headers.
 - `subject`: The subject line of the email.
-- `size`: The size of the email in bytes.
-- `plainTextBody`: The plain text version of the email's content.
-- `htmlBody`: The HTML version of the email's content, provided it exists.
-- `receivedDateTime`: the email's reception datetime
+- `size`: The size of the email (in bytes).
+- `plainTextBody`: The plain text version of the email content.
+- `htmlBody`: The HTML version of the email content, if it exists.
+- `receivedDateTime`: The date and time the email was received.
 
 #### Example Response
 
@@ -681,22 +662,17 @@ This response includes essential email details such as the `messageId`, sender a
 of the email both in plain text and HTML format. This information can be used by the process for various workflows, such
 as prioritizing tasks, content analysis, and automated responses.
 
-#### Activation condition
+## Activation condition
 
-The optional **Activation condition** field allows you to specify a Friendly Enough Expression
-Language [FEEL](/components/modeler/feel/what-is-feel/) expression to control when the Email
-Inbound Connector should trigger a process instance. This condition acts as a filter, allowing the process to be
-initiated only when certain criteria are met by the incoming email.
+The optional **Activation condition** field allows you to specify a Friendly Enough Expression Language ([FEEL](/components/modeler/feel/what-is-feel/)) expression to control when this Connector should trigger a process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are met by the incoming email.
 
-For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the
-subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email
-received by the connector.
+For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email received by the connector.
 
-#### Correlation
+## Correlation
 
 The **Correlation** section allows you to configure the message correlation parameters.
 
-##### Correlation key
+### Correlation key
 
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This
   corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
@@ -715,15 +691,15 @@ You can also use the key of the message to accomplish this in the **Correlation 
 To learn more about correlation keys, see [messages](../../../concepts/messages).
 :::
 
-##### Message ID expression
+### Message ID expression
 
 The optional **Message ID expression** field allows you to extract the message ID from the incoming message.
 
 - The message ID serves as a unique identifier for the message and is used for message correlation.
-- This expression is evaluated in the Connector Runtime and the result is used to correlate the message.
+- This expression is evaluated in the Connector Runtime and the result used to correlate the message.
 
 In most cases, you do not need to configure the **Message ID expression**. However, it is useful if you want to ensure
-message deduplication or achieve a certain message correlation behavior.
+message deduplication or achieve a specific message correlation behavior.
 
 :::info
 To learn more about how message IDs influence message correlation,
@@ -737,7 +713,7 @@ configure the **Message ID expression** as follows:
 = message.messageId
 ```
 
-##### Message TTL
+### Message TTL
 
 The optional **Message TTL** field allows you to set the time-to-live (TTL) for the correlated messages.
 
@@ -746,18 +722,16 @@ The optional **Message TTL** field allows you to set the time-to-live (TTL) for 
 - The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour.
 
 :::info
-To learn more about the TTL concept in Zeebe, see [message correlation](../../../concepts/messages#message-buffering).
+To learn more about TTL in Zeebe, see [message correlation](../../../concepts/messages#message-buffering).
 :::
 
-#### Deduplication
+## Deduplication
 
 The **Deduplication** section allows you to configure the Connector deduplication parameters.
 
-- **Connector deduplication** is a mechanism in the Connector Runtime that determines how many email listeners are
-  created if there are multiple occurrences of the **Email Listener Connector** in a BPMN diagram. This is different to
-  **message deduplication**.
-- By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription
-  properties only result in one subscription.
+- **Connector deduplication** is a mechanism in the Connector Runtime that determines how many email listeners are created if there are multiple occurrences of the **Email Listener Connector** in a BPMN diagram. This is different to **message deduplication**.
+
+- By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription properties only result in one subscription.
 
 To customize the deduplication behavior, select the **Manual mode** checkbox and configure the custom deduplication ID.
 
