@@ -1,6 +1,6 @@
 # Configuration
 
-This documentation is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator. Soon, Docusaurus 3!
+This documentation is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
 
 The framework is [well documented](https://v2.docusaurus.io/docs/) and is used by many (open source) Projects.
 
