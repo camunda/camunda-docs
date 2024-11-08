@@ -215,7 +215,7 @@ This is a bidirectional Connector which contains a Kafka listener for forwarding
 
 ### Out-of-the-box Connectors
 
-On top of the Camunda maintained connectors, there are additional connectors maintained by the community (made up of consultants, partners, customers, and enthusiastic individuals). You can find a list of Connectors in the [Camunda Marketplace](https://marketplace.camunda.com/).
+As well as Camunda-maintained Connectors, additional Connectors are maintained by the community (made up of consultants, partners, customers, and enthusiastic individuals). You can find a list of Connectors in the [Camunda Marketplace](https://marketplace.camunda.com/).
 
 ### Reusing your own integration logic by extracting Connectors
 
