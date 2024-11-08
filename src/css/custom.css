@@ -20,6 +20,8 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-breadcrumb-item-background-active: none;
   --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
   --ifm-menu-color: var(--ifm-color-emphasis-800);
+  --ifm-heading-font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont,
+    Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
 }
 
 .docusaurus-highlight-code-line {
@@ -520,7 +522,6 @@ a.table-of-contents__link.toc-highlight > span.badge {
 }
 h1 {
   padding-top: 10px;
-  font-family: "IBM Plex Sans", "sans-serif";
 }
 h1.openapi__heading {
   margin-bottom: calc(
@@ -531,7 +532,6 @@ h1.openapi__heading {
 h2 {
   font-size: 28px;
   font-weight: 600;
-  font-family: "IBM Plex Sans", sans-serif;
   border-bottom: 1px solid #dedede;
   padding-top: 20px;
   margin-bottom: 20px;

@@ -33,6 +33,10 @@ To set up your credentials, create an `.env` file which will be protected by the
 
 These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
 
+:::tip Can't find your environment variables?
+When you create new client credentials as a [prerequisite](#prerequisites), your environment variables appear in a pop-up window. Your environment variables may appear as `CAMUNDA_CONSOLE_CLIENT_ID`, `CAMUNDA_CONSOLE_CLIENT_SECRET`, `CAMUNDA_CONSOLE_OAUTH_AUDIENCE`, and `CAMUNDA_CONSOLE_BASE_URL`. Locate your `CLUSTER_ID` in Console by navigating to **Clusters**. Scroll down and copy your **Cluster Id** under **Cluster Details**.
+:::
+
 Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 
 :::note

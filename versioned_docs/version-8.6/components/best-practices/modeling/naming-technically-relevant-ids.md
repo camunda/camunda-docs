@@ -36,7 +36,7 @@ The following table provides you with a guideline that we would use in a context
 
 ### Editing IDs with Camunda Modeler
 
-We recommend using Camunda Modeler's properties panel to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process id:
+We recommend using Camunda Modeler's properties panel to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process ID:
 
 ![Properties Panel](naming-technically-relevant-ids-assets/camunda-modeler-properties-panel.png)
 
@@ -77,13 +77,13 @@ Elements in the diagram interchange section (DI) reference identifiers from abov
 
 Changing IDs can potentially break your tests or even process logic if done at a late stage of development. Therefore, consider using meaningful IDs right from the beginning and perform the renaming as part of the modeling.
 
-### Aligning the BPMN file name with the process id
+### Aligning the BPMN file name with the process ID
 
 It is a good practice to _align_ the _file name_ of your BPMN models with the _process id_ of the executable process that is inside the file.
 
 ![BPMN file name](naming-technically-relevant-ids-assets/aligning-the-bpmn-file-names.png)
 
-## Generating id constants classes
+## Generating ID constants classes
 
 If you have lots of process, case, and decision definitions with lots of IDs, consider generating constant classes (e.g. via XSLT) directly from your BPMN or DMN XML files. For example, this can be used for testing.
 
