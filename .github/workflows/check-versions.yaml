@@ -37,7 +37,7 @@ jobs:
         if: ${{ env.MESSAGES != '' }}
         with:
           message: |
-            :wave: :robot: :thinking: Hello, ${github.event.commits[0].author.name}! Did you make your changes in all the right places? 
+            :wave: :robot: :thinking: Hello, ${{ github.event.commits[0].author.name }}! Did you make your changes in all the right places? 
 
             ${{ env.MESSAGES }}
 
