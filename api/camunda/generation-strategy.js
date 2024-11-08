@@ -13,6 +13,7 @@ function preGenerateDocs() {
     ...addDisclaimer(originalSpec),
     ...redefineCreateProcessInstanceRequest(originalSpec),
     ...redefineEvaluateDecisionRequest(originalSpec),
+    ...addAlphaAdmonition(), // needs to go before addFrequentlyLinkedDocs
     ...addFrequentlyLinkedDocs(),
   ];
 
@@ -217,6 +218,23 @@ function redefineEvaluateDecisionRequest(originalSpec) {
     EvaluateDecisionRequestBase:
       type: object
       properties:`,
+    },
+  ];
+}
+
+function addAlphaAdmonition() {
+  // This task is inherently repeatable, because the `match` is replaced by something that won't match again.
+
+  return [
+    {
+      // Matches an empty line, followed by an alpha warning, with these capture groups:
+      //  $1: the blank line before the warning
+      //  $2: the indentation before the warning
+      //  $3: the warning text
+      from: /^([^\S\n]*\n)([^\S\n]*)(This endpoint is an alpha feature and may be subject to change\n[\s]*in future releases.\n)/gm,
+
+      // Surrounds the warning with `:::note` and `:::`, creating an admonition.
+      to: "$1$2:::note\n$2$3$2:::\n",
     },
   ];
 }

@@ -86,7 +86,7 @@ You can further parallelize archiver and/or importer within one node using the f
 | camunda.tasklist.importer.threadsCount | Number of threads in which data will be imported. | 3             |
 
 :::note
-Parallelization of import and archiving within one node will also happen based on Zeebe partitions, meaning only configurations with (number of nodes) \* (threadsCount) <= (total number of Zeebe partitions) will make sense. Too many threads and nodes will still work, but some of them will be idle.
+Parallelization of import and archiving within one node will also happen based on Zeebe partitions, meaning only configurations with (number of nodes) \* (threadsCount) ≤ (total number of Zeebe partitions) will make sense. Too many threads and nodes will still work, but some of them will be idle.
 :::
 
 ## Archive period

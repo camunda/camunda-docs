@@ -14,8 +14,6 @@ You can configure the Connector runtime environment in the following ways:
 
 ## Connecting to Zeebe
 
-In general, the Connector Runtime will respect all properties known to [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe).
-
 <Tabs groupId="configuration" defaultValue="saas" queryString values={
 [
 {label: 'SaaS', value: 'saas' },
@@ -29,10 +27,10 @@ In general, the Connector Runtime will respect all properties known to [Spring Z
 To use Camunda 8 SaaS specify the connection properties:
 
 ```bash
-ZEEBE_CLIENT_CLOUD_CLUSTER-ID=xxx
-ZEEBE_CLIENT_CLOUD_CLIENT-ID=xxx
-ZEEBE_CLIENT_CLOUD_CLIENT-SECRET=xxx
-ZEEBE_CLIENT_CLOUD_REGION=bru-2
+CAMUNDA_CLIENT_CLUSTER-ID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENT-ID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENT-SECRET=xxx
+CAMUNDA_CLIENT_REGION=bru-2
 ```
 
 You can further configure separate connection properties for Camunda Operate (otherwise it will use the properties configured for Zeebe above):
