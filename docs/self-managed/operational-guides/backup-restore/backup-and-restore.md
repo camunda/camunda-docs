@@ -24,7 +24,7 @@ Zeebe stores its backup to an external storage and must be configured before the
 
 ### Backup process
 
-The backup of each component and the backup of a Camunda 8 cluster is identified by an id. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Operate, and backup `x` of Tasklist. The backup id must be an integer and greater than the previous backups.
+The backup of each component and the backup of a Camunda 8 cluster is identified by an id. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Operate, and backup `x` of Tasklist. The backup ID must be an integer and greater than the previous backups.
 
 :::note
 We recommend using the timestamp as the backup id.

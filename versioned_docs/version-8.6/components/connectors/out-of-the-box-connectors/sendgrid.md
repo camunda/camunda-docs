@@ -95,7 +95,7 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
 4. Set **Receiver Name** to `Your Name`.
 5. Set **Receiver Email** to `Your email address`.
 6. Log in to your SendGrid account and navigate to [the Dynamic Template you created](#configure-a-dynamic-template).
-7. Copy the id of the template and paste it in the **Template ID field**.
+7. Copy the ID of the template and paste it in the **Template ID field**.
 8. Provide the test data in the **Template Data** field as a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md):
 
 ```text

@@ -1,6 +1,6 @@
 ---
 id: manage-alerts
-title: Manage alerts
+title: Alerts
 description: "Camunda 8 can notify you when process instances stop with an error."
 ---
 

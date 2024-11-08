@@ -1,0 +1,44 @@
+---
+id: get-license
+title: "Get license status"
+description: "Obtains the status of the current Camunda license"
+sidebar_label: "Get license status"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVk1z2zYQ/SsYntqpTCpp0rq6aRzHdSdNPLbcHFwfQBASkYAACywtazj8790FSOrTbabTg0YCsHhvd9/uQm0CfOWT2UPyQQlpvEweJ4mtpeOgrLkuklmykjCcTZJCeuFUTYd49CkHroxnUErmgUPjmV2GlWickwbYBa8aU3CmRwQnfW3xJ5K2yevplL5eRh1w9tGPUYU1gHYExusa94P/2RdPiG3iRSkrfky1QLDBIQIfIXH3r0Z6SBEbNrVEW5t/kQJwXTtKEKgYwhPXqhgSdEzgGsnUSa+Z8ixcnrAl1z6YWbRzaxVC6mlza7XkBjdMozXPNW4G+26S9EiLYHlI/VlpjWFA40ygH2gJl/UxbF7OaE/vwSmzSjpkAwVEPlTKbZ83PKPTt6eknBumUBhnuGbSOeuYFUHSgq1LpYMfQnqPFMGNIet/mpc1xSuYhOqHf9N2zm6iJSskFpRmUUDGPYuGOXqhDHu4fX/Bfnnz9ufH70qA2s+ybL1ep24pzmShwLrUulWGS/qQ3fcpw7pxklV8w3LJeIFmyIkxbkuD+VoKtVSCgQ2h9W6H9Mf4/rmuoBd1X4dJsrSu4piUpHHqqCHn7P72mqkC06aWmyGre9ThzpI3mjB4bhuY5Zqbr8lW4WPSQxbfVBV3Y/XsEyBQbNcdJKqClXS7/uPWj6+PsKkjf10sboaOF7aQDO8gD/ZLT0RBVMqoqqmS2ZvpFFf8Oa5+mk47wiTFvyESw+RzjeGH0joMB4ujsqhzRAuB4VwCbsT/pYx1aqUOedO9buuL+F2MqIvNVkkobT+cqXI4lLjItt3rpXuSjgZ7i+5gJpI29kmH5d2W1kM3a2vroMueSIQn7hTNlqAZHcd+GupEW8F12D6lFx0YXsnDYXLObi/vFuyKg1zzTcgfUe5Dn0/PpydRyfQFxPnNNYsRxmrbmQADLLXySdho/C3AXfdIicR5pWBzR9dienLJnXTzhnI+VkHPF9DD2A5GuBN/vB9q47fPiyCvMksbrvcyHztCqqCE0fNp+uq4pNBZ6gxhK7wbxiOW1VpBie/YFk/oxgMFNL4XxEt67dD2M539ERnZq5REiZUzTMUVIjd5inSZiNfG71zbPKvw1R5K0GcX89/vP76bn324vrj8eHd5hogpPEMIvsaCqbjZ8eNKwvhA9cPjINx2+x78p/8dvU4gnyHDjleGKicE2Pb98zDmB3WPPfCQtG3Ovbx3uutoG58nt8H9x23L0AqhSskLFJwa7qvckDxCyBpCb+mGqI/+mFB9jZ18dUmF8Td2BEzQ
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Get license status</h1>
+
+<MethodEndpoint method={"get"} path={"/license"}></MethodEndpoint>
+
+Obtains the status of the current Camunda license
+
+## Request
+
+<div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+Obtains the current status of the Camunda license
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"validLicense"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"True if the Camunda license is valid, false if otherwise","type":"boolean","nullable":false}}></SchemaItem><SchemaItem collapsible={false} name={"licenseType"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Will return the license type property of the Camunda license","type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"validLicense\": true,\n  \"licenseType\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

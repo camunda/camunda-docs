@@ -23,7 +23,7 @@ By default, Camunda 8 SaaS cluster data at rest is protected with a provider-man
 
 Enterprise customers requiring a higher level of protection can select a dedicated Camunda-managed software or hardware (HSM) encryption key when creating a new cluster. The encryption key is managed by Camunda using Google Cloud Key Management Service (KMS).
 
-- You can only select the encryption type when [creating a cluster](/docs/components/console/manage-clusters/create-cluster.md). You cannot change the encryption type after cluster creation.
+- You can only select the encryption type when [creating a cluster](/components/console/manage-clusters/create-cluster.md). You cannot change the encryption type after cluster creation.
 - You can configure encryption keys on a per-cluster basis so that each cluster has a dedicated encryption key. Encryption keys can be configured for all cluster versions.
 - You can view cluster encryption key details in **Cluster Details** on the **Console Overview** tab.
 

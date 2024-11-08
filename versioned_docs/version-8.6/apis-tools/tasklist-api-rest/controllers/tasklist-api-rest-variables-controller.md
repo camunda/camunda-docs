@@ -10,7 +10,7 @@ The Variables API controller provides an API to query variables.
 
 ### Get variable
 
-Get the variable details by variable id.
+Get the variable details by variable ID.
 
 #### URL
 
