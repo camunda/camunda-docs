@@ -6,7 +6,7 @@ description: Learn about the table form element to render tabular data.
 
 This is an element allowing the user to render tabular data.
 
-![Form table Symbol](/img/form-icons/form-table.svg)
+<img src="/img/form-icons/form-table.svg" alt="Form Table Symbol" />
 
 ## Configurable properties
 

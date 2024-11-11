@@ -6,7 +6,7 @@ description: A form element to display static information.
 
 A text component allowing to display static information to the user.
 
-![Form Text Symbol](/img/form-icons/form-text.svg)
+<img src="/img/form-icons/form-text.svg" alt="Form Text Symbol" />
 
 ## Configurable properties
 

@@ -6,7 +6,7 @@ description: Learn about the text area form element to read and edit multiline t
 
 A text area allowing the user to read and edit multiline textual data.
 
-![Form Textarea Symbol](/img/form-icons/form-textArea.svg)
+<img src="/img/form-icons/form-textArea.svg" alt="Form Textarea Symbol" />
 
 ## Configurable properties
 
