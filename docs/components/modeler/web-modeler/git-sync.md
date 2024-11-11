@@ -95,10 +95,9 @@ Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settin
 
 - Enable the following [**scopes**](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#scopes-for-a-project-access-token):
   - `api`
+  - `read_api`
   - `read_repository`
   - `write_repository`
-  - `read_registry`
-  - `write_registry`
 
 <h3> Get the project ID </h3>
 
