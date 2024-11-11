@@ -5,6 +5,9 @@ description: "How to perform a backup and restore of Operate and Tasklist data."
 keywords: ["backup", "backups"]
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 :::warning breaking changes!
 As of the Camunda 8.6 release, the `/actuator` endpoints (including `/backups`) now default to port 9600. Ensure your `management.server.port` configuration parameter is correctly set before continuing.
 :::
@@ -32,32 +35,67 @@ The backup API can be reached via the Actuator management port, which by default
 Before you can use the backup and restore feature:
 
 1. The [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
-2. Operate and Tasklist must be configured with the repository name using the following configuration parameters:
+2. Operate and Tasklist must be configured with the repository name using one of the following configuration options:
+
+<Tabs groupId="config" defaultValue="yaml" values={
+[
+{label: 'YAML file', value: 'yaml', },
+{label: 'Environment variables', value: 'env', },
+]
+}>
+
+<TabItem value='yaml'>
+
+#### Operate
 
 ```yaml
-for Operate:
 camunda:
   operate:
     backup:
       repositoryName: <es snapshot repository name>
+```
 
-for Tasklist:
+</TabItem>
+
+<TabItem value='env'>
+
+#### Operate
+
+```
+CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
+```
+
+</TabItem>
+</Tabs>
+
+#### Tasklist
+
+<Tabs groupId="config" className="tabs-hidden" defaultValue="yaml" values={
+[
+{label: 'YAML file', value: 'yaml', },
+{label: 'Environment variables', value: 'env', },
+]
+}>
+
+<TabItem value='yaml'>
+
+```yaml
 camunda:
   tasklist:
     backup:
       repositoryName: <es snapshot repository name>
 ```
 
-or with environmental variables:
+</TabItem>
+
+<TabItem value='env'>
 
 ```
-for Operate:
-CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-
-for Tasklist:
 CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<es snapshot repository name>
-
 ```
+
+</TabItem>
+</Tabs>
 
 ## Create backup API
 
@@ -81,7 +119,7 @@ Response:
 
 Example request:
 
-```
+```shell
 curl --request POST 'http://localhost:9600/actuator/backups' \
 -H 'Content-Type: application/json' \
 -d '{ "backupId": 123 }'
@@ -121,7 +159,7 @@ Response:
 
 For example, the request could look like this:
 
-```
+```shell
 curl 'http://localhost:9600/actuator/backups/123'
 ```
 
@@ -174,7 +212,7 @@ Response:
 
 For example, the request could look like this:
 
-```
+```shell
 curl 'http://localhost:9600/actuator/backups'
 ```
 
@@ -185,7 +223,9 @@ Response will contain JSON with array of objects representing state of each back
 To delete all the Elasticsearch snapshots associated with the specific backup id, the following endpoint may be used:
 
 ```
+
 DELETE actuator/backups/123
+
 ```
 
 Response:
@@ -209,7 +249,7 @@ To restore the backup with a known backup id, you must restore all the snapshots
 
 Example of Elasticsearch query:
 
-```
+```shell
 curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_123_8.1.0-snapshot_part_1_of_6/_restore?wait_for_completion=true`
 ```
 

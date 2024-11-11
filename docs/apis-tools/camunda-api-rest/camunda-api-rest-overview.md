@@ -28,7 +28,7 @@ See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for spec
 
 You can change the `maxMessageSize` default value of 4MB in the [Gateway](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.
 
-If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/deploy-resources.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
+If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/create-deployment.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
 
 You can adjust this configuration via the following properties:
 
@@ -52,4 +52,4 @@ or the environment variable `CAMUNDA_REST_QUERY_ENABLED` to `true`.
 
 [camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
 [resource authorizations]: /self-managed/concepts/access-control/resource-authorizations.md
-[alpha feature]: /reference/alpha-features.md
+[alpha feature]: /components/early-access/alpha/alpha-features.md

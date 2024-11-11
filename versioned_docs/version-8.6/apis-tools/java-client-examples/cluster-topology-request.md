@@ -11,7 +11,7 @@ This example shows which broker is leader and follower for which partition. This
 
 ## Prerequisites
 
-Run the Zeebe broker with endpoints, `localhost:8080` (default REST) and `localhost:26500` (default gRPC).
+Run the Zeebe Broker with endpoints `localhost:8080` (default REST) and `localhost:26500` (default gRPC).
 
 ## TopologyViewer.java
 

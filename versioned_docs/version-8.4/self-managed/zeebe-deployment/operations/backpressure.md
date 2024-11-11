@@ -12,6 +12,13 @@ If the broker keeps accepting new requests from the client, the backlog increase
 
 To avoid such problems, Zeebe employs a backpressure mechanism. When the broker receives more requests than it can process with an acceptable latency, it rejects some requests (see [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
 
+:::note
+When [multi-tenancy](./../../concepts/multi-tenancy.md) is enabled in Camunda 8, a large number of concurrent requests
+may also lead to issues with Camunda Identity. In such cases, it is recommended to enable and configure the management of
+Identity requests in the Zeebe Gateway. This allows Zeebe to employ a backpressure mechanism against these requests.
+For more information, see the Zeebe Gateway [experimental configuration documentation](./../configuration/gateway.md#experimental-configuration).
+:::
+
 ### Terminology
 
 - **RTT** - Round-Trip Time, known as the time between when the request is accepted by the broker and when the response to the request is sent back to the gateway.

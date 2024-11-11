@@ -91,7 +91,7 @@ First, port-forward each of the components. Use a separate terminal for each com
 
 ## Connecting to the workflow engine
 
-To interact with the Camunda workflow engine via Zeebe Gateway using [zbctl](/apis-tools/community-clients/cli-client/cli-get-started.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe gateway as follows:
+To interact with the Camunda workflow engine via Zeebe Gateway using [zbctl](/apis-tools/community-clients/cli-client/cli-get-started.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe Gateway as follows:
 
 ```sh
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
@@ -109,9 +109,7 @@ To get a full list of the deployed Camunda components and their network properti
 
 <TabItem value="ingress">
   
-Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed using Kubernetes Ingress.
-
-In this example, we will use a combined Ingress configuration. For more information, refer to [combined and separated Ingress setup](/self-managed/setup/guides/ingress-setup.md).
+Camunda 8 Self-Managed has multiple web applications and gRPC services. These can be accessed using Kubernetes Ingress. For more information, refer to the [Ingress setup guide](/self-managed/setup/guides/ingress-setup.md).
 
 ## Prerequisites
 

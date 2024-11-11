@@ -16,7 +16,7 @@ CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https:
 - Elasticsearch
 
 :::warning Disclaimer
-For Camunda 8.6, CPT is in an [alpha version](/reference/alpha-features.md#alpha).
+For Camunda 8.6, CPT is in an [alpha version](/components/early-access/alpha/alpha-features.md#alpha).
 
 For a full-featured testing library, take a look at [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
 :::
@@ -277,7 +277,7 @@ The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. 
 - `tc.camunda` - The Camunda Docker container
 - `tc.connectors` - The Connectors Docker container
 - `tc.elasticsearch` - The Elasticsearch Docker container
-- `org.testcontainers` - The Testconainers framework
+- `org.testcontainers` - The Testcontainers framework
 
 For most cases, the log level `warn` (warning) is sufficient.
 

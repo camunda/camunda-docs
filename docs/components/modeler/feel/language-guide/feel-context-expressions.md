@@ -1,15 +1,22 @@
 ---
 id: feel-context-expressions
 title: Context expressions
-description: "This document outlines context expressions and examples."
+description: "Learn more about how you can use FEEL context expressions, including examples that show common use cases for FEEL context expressions."
 ---
+
+You can use the following FEEL context expressions. Examples are provided to show common use cases.
 
 ### Literal
 
-Creates a new context with the given entries. Each entry has a key and a value. The key is either a
-name or a string. The value can be any type.
+Creates a new context with the given entries.
 
-Refer to the [naming conventions](./feel-variables.md#variable-names) for valid key names.
+- Each entry has a key and a value.
+- The key is either a name or a string.
+- The value can be any type.
+
+:::info
+For valid key names, see [naming conventions](./feel-variables.md#variable-names).
+:::
 
 ```feel
 {
@@ -111,8 +118,7 @@ accessed by their key.
 a.b
 ```
 
-Extracts the entries with the key `b` of the list of context elements `a` (i.e. a projection). It
-returns a list containing the values of the context elements with the key `b`.
+Extracts the entries with the key `b` of the list of context elements `a` (that is, a projection). It returns a list containing the values of the context elements with the key `b`.
 
 ```feel
 [
@@ -128,8 +134,7 @@ returns a list containing the values of the context elements with the key `b`.
 // ["p1", "p2"]
 ```
 
-If an element of the list `a` doesn't contain an entry with the key `b`, the result contains `null`
-of this element.
+If an element of the list `a` doesn't contain an entry with the key `b`, the result contains `null` of this element.
 
 ```feel
 [
@@ -143,4 +148,36 @@ of this element.
   }
 ].b
 // [5, null]
+```
+
+## Examples
+
+### Validate data
+
+Validate journal entries and return all violations.
+
+```feel
+{
+  check1: {
+    error: "Document Type invalid for current year posting",
+    violations: collection[documentType = "S2" and glDate > startFiscalYear]
+  },
+  check2: {
+    error: "Document Type invalid for current year posting",
+    violations: collection[ledgerType = "GP" and foreignAmount != null]
+  },
+  result: [check1, check2][count(violations) > 0]
+}
+```
+
+### Structure calculation
+
+Calculate the minimum age of a given list of birthdays.
+
+```feel
+{
+  age: function(birthday) (today() - birthday).years,
+  ages: for birthday in birthdays return age(birthday),
+  minAge: min(ages)
+}.minAge
 ```

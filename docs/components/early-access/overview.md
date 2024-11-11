@@ -20,7 +20,7 @@ These features may be unstable, and subject to significant changes or removal.
 
 ## Alpha features
 
-[Alpha features](/reference/alpha-features.md) are more developed and closer to becoming part of the product but may not yet be fully optimized or supported. Selected Camunda features and components are released as alpha versions to provide early access. By testing these features, you have the opportunity to participate in their development by sharing feedback before they reach General Availability (GA).
+[Alpha features](/components/early-access/alpha/alpha-features.md) are more developed and closer to becoming part of the product but may not yet be fully optimized or supported. Selected Camunda features and components are released as alpha versions to provide early access. By testing these features, you have the opportunity to participate in their development by sharing feedback before they reach [general availability](/components/early-access/alpha/alpha-features.md#general-availability-ga).
 
 ## What to expect
 

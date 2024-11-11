@@ -14,8 +14,13 @@ RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 # ----------------------
 # None here yet, but please place them here when you have them.
 
-# 8.6 content moves vvvv
-# ----------------------
+# Move alpha features to components
+RewriteRule ^docs/next/reference/alpha-features/?$ /docs/next/components/early-access/alpha/alpha-features/$1 [R=301,L]
+
+# Remove outdated message correlation guide
+RewriteRule ^docs/next/guides/message-correlation/?$ /docs/guides/$1 [R=301,L]
+RewriteRule ^docs/guides/message-correlation/?$ /docs/guides/$1 [R=301,L]
+RewriteRule ^docs/8.5/guides/message-correlation/?$ /docs/guides/$1 [R=301,L]
 
 # Remove the Getting Started partials as full pages
 RewriteRule ^docs/guides/react-components/sm-prerequisites/?$ /docs/guides/$1 [R=301,L]
@@ -23,6 +28,11 @@ RewriteRule ^docs/guides/react-components/saas-prerequisites/?$ /docs/guides/$1 
 RewriteRule ^docs/guides/react-components/install-plain-java/?$ /docs/guides/$1 [R=301,L]
 RewriteRule ^docs/guides/react-components/install-docker-compose/?$ /docs/guides/$1 [R=301,L]
 RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/$1 [R=301,L]
+
+# TODO at time of release: account for API spec moves in https://github.com/camunda/camunda-docs/pull/4534 (there are many)
+
+# 8.6 content moves vvvv
+# ----------------------
 
 # Move Go and CLI client to community section
 RewriteRule ^docs/apis-tools/cli-client/(.*)$ /docs/next/apis-tools/community-clients/cli-client/$1 [R=301,L]
