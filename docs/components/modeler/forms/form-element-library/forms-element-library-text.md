@@ -6,7 +6,7 @@ description: A form element to display simple Markdown-powered text.
 
 A Markdown-powered text component allowing to display simple information to the user.
 
-![Form Text Symbol](/img/form-icons/form-text.svg)
+<img src="/img/form-icons/form-text.svg" alt="Form Text Symbol" />
 
 ## Configurable properties
 

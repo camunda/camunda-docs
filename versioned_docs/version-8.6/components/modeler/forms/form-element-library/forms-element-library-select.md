@@ -6,7 +6,7 @@ description: A form element to select a value from set options
 
 A Select dropdown allowing the user to select one of multiple data option from larger datasets.
 
-![Form Select Symbol](/img/form-icons/form-select.svg)
+<img src="/img/form-icons/form-select.svg" alt="Form Select Symbol" />
 
 ### Configurable properties
 

@@ -6,7 +6,7 @@ description: A form element to read and edit textual data
 
 A text field allowing the user to read and edit textual data.
 
-![Form Text Field Symbol](/img/form-icons/form-textField.svg)
+<img src="/img/form-icons/form-textField.svg" alt="Form Text Field Symbol" />
 
 ### Configurable properties
 

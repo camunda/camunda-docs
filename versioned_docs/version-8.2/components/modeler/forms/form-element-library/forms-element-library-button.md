@@ -6,7 +6,7 @@ description: A form element to trigger form actions
 
 A button allowing the user to trigger form actions.
 
-![Form Button Symbol](/img/form-icons/form-button.svg)
+<img src="/img/form-icons/form-button.svg" alt="Form Button Symbol" />
 
 ### Configurable properties
 

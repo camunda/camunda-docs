@@ -12,7 +12,7 @@ Every iFrame component is a sandbox. This means that the content of the iFrame i
 
 :::
 
-![Form iFrame Symbol](/img/form-icons/form-iframe.svg)
+<img src="/img/form-icons/form-iframe.svg" alt="Form iframe Symbol" />
 
 ## Configurable properties
 
