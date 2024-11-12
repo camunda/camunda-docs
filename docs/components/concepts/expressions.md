@@ -1,7 +1,7 @@
 ---
 id: expressions
 title: "Expressions"
-description: "Expressions can be used to access variables and calculate values dynamically."
+description: "Expressions can be used to access variables and calculate values dynamically. This is useful when automating a process using BPMN and orchestrating human tasks."
 ---
 
 Expressions can be used to access variables and calculate values dynamically.
