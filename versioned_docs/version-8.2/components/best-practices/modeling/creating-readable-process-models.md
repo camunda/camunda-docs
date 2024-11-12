@@ -107,13 +107,13 @@ Make your models easier to understand by modeling _explicitly_, which most often
 
 #### Using gateways instead of conditional flows
 
-Model splitting the process flow by always using _gateway symbols_ like <img src="/img/bpmn-elements/inclusive-gateway.svg" className="inline-image" /> instead of conditional flows <img src="/img/bpmn-elements/conditional-flow.svg" className="inline-image" />.
+Model splitting the process flow by always using _gateway symbols_ like <img src="/static/img/bpmn-elements/inclusive-gateway.svg" className="inline-image" /> instead of conditional flows <img src="/static/img/bpmn-elements/conditional-flow.svg" className="inline-image" />.
 
 <div bpmn="best-practices/creating-readable-process-models-assets/explicit-gateways-instead-of-conditional-flows.bpmn" callouts="inclusive_gateway" />
 
 <span className="callout">1</span>
 
-For example, you could've left out this inclusive gateway by drawing two outgoing sequence flows directly out of the preceding task **Choose menu** and attaching conditions to those sequence flows (becoming conditional sequence flows <img src="/img/bpmn-elements/conditional-flow.svg" className="inline-image" />). However, experience shows that readers understand the flow semantics of gateways better, which is why we do not make use of this possibility.
+For example, you could've left out this inclusive gateway by drawing two outgoing sequence flows directly out of the preceding task **Choose menu** and attaching conditions to those sequence flows (becoming conditional sequence flows <img src="/static/img/bpmn-elements/conditional-flow.svg" className="inline-image" />). However, experience shows that readers understand the flow semantics of gateways better, which is why we do not make use of this possibility.
 
 #### Modeling start and end events
 
