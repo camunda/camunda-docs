@@ -4,6 +4,12 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda 8.7
+
+Release date: TBD
+
+End of maintenance: TBD
+
 ## Camunda 8.6
 
 Release date: 8th of Oct 2024
