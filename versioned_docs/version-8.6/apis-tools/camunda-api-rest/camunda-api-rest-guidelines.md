@@ -1,12 +1,10 @@
 ---
 id: camunda-api-rest-guidelines
 title: "Guidelines"
-description: "Learn about the basic guidelines , structures, and conventions of the Camunda 8 REST API."
+description: "Learn about the basic guidelines, structures, and conventions of the Camunda 8 REST API."
 ---
 
-# API guidelines
-
-As outlined below in this document, we follow a mix of proposed standards and best practices for RESTful design and implementation consistently across all components. This ensures customers working across all component APIs have a consistent and expected experience without having to study our API reference material or perform “validation testing” to see how our APIs respond.
+Camunda follows a mix of proposed standards and best practices for RESTful design and consistent implementation across all components. This ensures customers working across all component APIs have a consistent and expected experience without having to study our API reference material or perform “validation testing” to see how our APIs respond.
 
 ## Naming conventions
 
@@ -14,16 +12,16 @@ Naming should be simple, intuitive, and consistent across Camunda 8 APIs. This i
 
 The API overall applies the following naming conventions:
 
-- We favor **nouns** over verbs, e.g. _assignment_ over _assign_.
-- For top-level resources, we use plural terms, e.g. _user-tasks_.
-- In path parameters, we use **kebab-case** for multiple words. Use a hyphen (-) where a space would exist, e.g. _user-tasks_.
-- In query parameters, we use **camelCase** for multiple words. Always capitalize the first letter of words after the first. The first letter in the first word must be lowercase, e.g. _userTaskKey_.
+- **Nouns** over verbs, for example, _assignment_ over _assign_.
+- For top-level resources, use plural terms, for example, _user-tasks_.
+- In path parameters, use **kebab-case** for multiple words. Use a hyphen (-) where a space would exist, for example, _user-tasks_.
+- In query parameters, use **camelCase** for multiple words. Always capitalize the first letter of words after the first. The first letter in the first word must be lowercase, for example, _userTaskKey_.
 
-All of this can be observed in the following endpoint example:
+These conventions can be observed in the following endpoint example:
 
 > POST /user-tasks/{userTaskKey}/**assignment**
 
-When working with IDs or similar short two or three-letter words or acronyms, don’t capitalize all letters, only capitalize the first letter. If standalone, all letters should be lowercase.
+When working with IDs or similar short 2- or 3-letter words or acronyms, don’t capitalize all letters, only capitalize the first letter. If standalone, all letters should be lowercase.
 
 | term | usage                                      |
 | ---- | ------------------------------------------ |
@@ -33,24 +31,24 @@ When working with IDs or similar short two or three-letter words or acronyms, do
 
 Identifiers follow a naming rule, in parameters and data attributes alike:
 
-- Unique technical identifiers are suffixed with **key**, e.g. _userTaskKey_, _processInstanceKey_, _userKey_. They are numeric values in most cases.
-- Other identifiers, e.g. copied identifiers from the BPMN XML, can be arbitrarily named but are usually suffixed with **id**, e.g. _processDefinitionId_.
+- Unique technical identifiers are suffixed with **key**, for example, _userTaskKey_, _processInstanceKey_, _userKey_. They are numeric values in most cases.
+- Other identifiers, such as copied identifiers from the BPMN XML, can be arbitrarily named but are usually suffixed with **id**, for example, _processDefinitionId_.
 
 ## Versioning
 
-We use the term “major version number” from [semantic versioning](https://semver.org/), but do not follow semantic versioning for APIs outright. Instead, we provide updates to the API in place and only increment the version number when a major, breaking change happens.
+Camunda uses the term “major version number” from [semantic versioning](https://semver.org/), but do not follow semantic versioning for APIs outright. Instead, Camunda provides updates to the API in place and only increment the version number when a major, breaking change happens.
 
 Adding attributes and endpoints are not considered breaking changes. Breaking changes can potentially break an integration. See [GitHub’s REST documentation](https://docs.github.com/en/rest/about-the-rest-api/breaking-changes?apiVersion=2022-11-28#about-breaking-changes-in-the-rest-api) for a comprehensive summary of breaking changes. No migration is required unless there is a breaking change.
 
-The API version number does not match the product version (8.x.x). An API’s version is rather defined by the API version number and the product version, e.g. “_POST /v2/user-tasks/search_ in Camunda 8.7.0”.
+The API version number does not match the product version (8.x.x). An API’s version is rather defined by the API version number and the product version, for example, “_POST /v2/user-tasks/search_ in Camunda 8.7.0”.
 
-We do API versioning rather than endpoint versioning, i.e., the version changes for all endpoints if there is a breaking change in at least one endpoint. Multiple versions of an API can exist in a product version to allow for a migration period, e.g. “POST /v2/user-tasks/search and POST /v3/user-tasks/search in Camunda 8.7.0”.
+Camunda does API versioning rather than endpoint versioning, for example, the version changes for all endpoints if there is a breaking change in at least one endpoint. Multiple versions of an API can exist in a product version to allow for a migration period, for example, “POST /v2/user-tasks/search and POST /v3/user-tasks/search in Camunda 8.7.0”.
 
 ## HTTP status codes & error handling
 
-Handling errors has to be consistent across all endpoints, using well-known HTTP status codes and clear descriptions. This includes the information about errors and the use of a problem details object.
+Handling errors must be consistent across all endpoints, using well-known HTTP status codes and clear descriptions. This includes the information about errors and the use of a problem details object.
 
-We follow the proposed standard from [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) for problem details. The problem object contains at least the following members:
+Camunda follows the proposed standard from [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) for problem details. The problem object contains at least the following members:
 
 - Type
 - Status
@@ -58,7 +56,7 @@ We follow the proposed standard from [RFC 9457](https://www.rfc-editor.org/rfc/r
 - Detail
 - Instance
 
-We use the following error codes and descriptions across our APIs:
+Camunda uses the following error codes and descriptions across our APIs:
 
 - 200 OK
 - 204 No Content
@@ -75,7 +73,7 @@ We use the following error codes and descriptions across our APIs:
 - 412 Precondition failed
   - The client should check the cluster status.
 - 429 Rate Limited Exceeded
-  - The client exceeds a defined limit of requests, e.g. Zeebe signaling backpressure due to more requests than the broker can currently process
+  - The client exceeds a defined limit of requests, for example, Zeebe signaling backpressure due to more requests than the broker can currently process
 - 500 Internal Server Error
   - Generic error that contains further description in the problem detail.
 
@@ -83,7 +81,7 @@ Each error code should have clear guidance in the documentation and API referenc
 
 ## Data fetching
 
-Most resources provide at least one endpoint to fetch related data. Most of those endpoints provide data with near-real time consistency that is queried from exported records, if records for the respective resource are exported by the engine. If resources are not based on exported records, e.g. license data or topology information, the data returned by those endpoints can reflect real time insights or static content.
+Most resources provide at least one endpoint to fetch related data. Most of those endpoints provide data with near-real time consistency queried from exported records, if records for the respective resource are exported by the engine. If resources are not based on exported records, for example license data or topology information, the data returned by those endpoints can reflect real time insights or static content.
 
 For most resources, there are search endpoints to query by POST method and a given query request object where applicable. The structure of such query requests always follows the same schema and so does the response, always returning a list of items matching the query criteria.
 
@@ -233,7 +231,7 @@ POST /v2/user-tasks/search
 }
 ```
 
-This yields the next 3 user task items after the last one from the first search request’s result.
+This yields the next three user task items after the last one from the first search request’s result.
 
 ## Date values
 
