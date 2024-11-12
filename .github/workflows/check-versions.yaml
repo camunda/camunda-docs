@@ -37,7 +37,7 @@ jobs:
         if: ${{ env.MESSAGES != '' }}
         with:
           message: |
-            :wave: :robot: :thinking: Hello! Did you make your changes in all the right places? 
+            :wave: :robot: :thinking: Hello, @${{ github.actor }}! Did you make your changes in all the right places? 
 
             ${{ env.MESSAGES }}
 
