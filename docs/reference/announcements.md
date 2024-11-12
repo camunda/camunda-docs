@@ -4,6 +4,12 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda 8.7
+
+### Process publishing limitation in Web Modeler
+
+As of `8.7`, publishing public processes using a form is no longer supported. Either disable process publishing or use an [alternative method for process publishing](/components/modeler/web-modeler/run-or-publish-your-process.md#publishing-a-process).
+
 ## Camunda 8.6
 
 Release date: 8th of Oct 2024

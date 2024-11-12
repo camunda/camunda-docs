@@ -44,20 +44,6 @@ There could be multiple reasons why you are not seeing any process in the **Proc
 
 For all the above scenarios, contact your administrator to understand why no processes are displayed.
 
-## Start public processes via form
+## Publishing your process
 
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
-
-Tasklist offers a convenient method to start processes with a form using a public URL. This functionality relies on process configuration performed in [Web Modeler](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md), enabling users to create and manage processes.
-
-In scenarios where processes can be triggered through a form, Tasklist hosts the form on a URL that is accessible to all users, eliminating the need for authentication. By submitting the form, the associated process is launched. This feature proves advantageous when you want to expose processes to users outside your organization, as it allows anyone to start a process.
-
-### Usage
-
-#### Process configuration and deployment
-
-To enable the public exposure of a process, the first step involves configuring it to be initiated via a form. This configuration is performed during the process design phase using [Web Modeler](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md).
-
-#### Accessing and submitting the form
-
-Once the process has been published, a URL will be generated in Tasklist. This URL can be accessed by any user without authentication requirements. Through this endpoint a form is presented and upon submission the associated process is started with the form values being provided as inputs to the process.
+As of `8.7`, publishing public processes using a form is no longer supported. Either disable process publishing or use an [alternative method for process publishing](/components/modeler/web-modeler/run-or-publish-your-process.md#publishing-a-process).

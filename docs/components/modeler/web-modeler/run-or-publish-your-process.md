@@ -98,10 +98,6 @@ After the process instance has been started, you will receive a notification wit
 Starting an instance from Web Modeler [deploys](#deploy-a-process) recent changes to the target cluster, which changes future runs of this process definition in case it has already been deployed and used. Existing process instances are not affected.
 :::
 
-:::tip
-By [linking a Camunda Form to a start event](/components/modeler/web-modeler/advanced-modeling/form-linking.md), process instances can be started with the form's input [via a public form](#publish-via-a-public-form) (SaaS only) or directly [in Tasklist](#publish-to-tasklist).
-:::
-
 ### Schedule via timer
 
 You can also schedule a process to run at a specific time or interval using timers. Timers can be added to one or multiple start events of your process.
@@ -133,6 +129,10 @@ You can also define the success of your processes by setting key performance ind
 
 ## Publishing a process
 
+:::note
+As of `8.7`, publishing public processes using a public form is no longer supported. Either disable process publishing or use an alternative method for process publishing as outlined below.
+:::
+
 Publishing a process means that you make it available to other users inside and outside of Camunda 8. Once published, other users can access and start instances of the process.
 
 You have the following options to publish a process:
@@ -148,9 +148,6 @@ You have the following options to publish a process:
   - [Deploy to run programmatically](#deploy-to-run-programmatically)
   - [Publish via webhook](#publish-via-webhook)
   - [Publish to Tasklist](#publish-to-tasklist)
-  - [Publish via a public form](#publish-via-a-public-form)
-    - [Deploy process to the public](#deploy-process-to-the-public)
-    - [Get the public link and share it](#get-the-public-link-and-share-it)
   - [Listen to message or signal events](#listen-to-message-or-signal-events)
   - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
   - [Missing client credentials](#missing-client-credentials)
@@ -198,36 +195,6 @@ To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) 
 <img src={TasklistProcessesImg} style={{width: 800}} alt="Processes published to Tasklist" />
 
 To learn more about publishing processes to Tasklist, refer to our [documentation on Tasklist](../../tasklist/userguide/using-tasklist.md#processes).
-
-### Publish via a public form
-
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
-
-Publishing a process via a public form allows you to share your process with external users who can start instances of the process without requiring access to Camunda 8. This feature is particularly useful when you want to gather data or initiate a process from users who are not part of your organization or do not have direct access to Camunda. It also allows you to rapidly test a process with your peers in a development environment.
-
-<img src={PublicFormImg} alt="A public form" />
-
-To publish a process via a public form, you first need to [link a Camunda Form](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) to the process' start event, then you can follow these steps:
-
-#### Deploy process to the public
-
-1. Open the **Publication** section in the **properties panel** (not the tab of the same name) and activate the toggle.
-
-<img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
-
-2. Click **Deploy** to [deploy](#deploy-a-process) the process and to activate the public form.
-
-Once the process is deployed, a public URL for the form is generated on the target cluster.
-
-#### Get the public link and share it
-
-You can access the URL in the **Publication** tab of the **properties panel**, and share it with any user via email, social media, or any other communication channel.
-
-<img src={PublicLinkImg} style={{width: 400}} alt="Sharing a public link" />
-
-When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda 8, using the submitted data as input.
-
-For further configuration and how to unpublish a process again, refer to the [full documentation](./advanced-modeling/publish-public-processes.md).
 
 ### Listen to message or signal events
 

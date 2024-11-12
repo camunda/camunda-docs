@@ -308,11 +308,6 @@ module.exports = {
                   "Form linking",
                   "components/modeler/web-modeler/advanced-modeling/form-linking/"
                 ),
-                docsLink(
-                  "Publish processes via a form",
-                  "components/modeler/web-modeler/advanced-modeling/publish-public-processes/"
-                ),
-
                 {
                   "AI features": [
                     docsLink(
