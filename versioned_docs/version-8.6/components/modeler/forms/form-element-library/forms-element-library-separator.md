@@ -6,7 +6,7 @@ description: Learn about this layout element to add a visual separation between 
 
 A **separator** element is used to create a visual separation between two elements.
 
-![Form Spacer Symbol](/img/form-icons/form-separator.svg)
+<img src="/img/form-icons/form-separator.svg" alt="Form Separator Symbol" />
 
 ## Usage
 

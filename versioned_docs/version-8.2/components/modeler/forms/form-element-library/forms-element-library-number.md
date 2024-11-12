@@ -6,7 +6,7 @@ description: A form element to read and edit numeric data
 
 A number field allowing the user to read and edit numeric data.
 
-![Form Number Symbol](/img/form-icons/form-number.svg)
+<img src="/img/form-icons/form-number.svg" alt="Form Number Symbol" />
 
 ### Configurable properties
 

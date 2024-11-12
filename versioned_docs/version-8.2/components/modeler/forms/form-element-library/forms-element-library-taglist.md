@@ -6,7 +6,7 @@ description: A form element to select multiple values from set options
 
 A complex and searchable tag based component providing multi-selection for large datasets.
 
-![Form Taglist Symbol](/img/form-icons/form-taglist.svg)
+<img src="/img/form-icons/form-taglist.svg" alt="Form Taglist Symbol" />
 
 ### Configurable properties
 

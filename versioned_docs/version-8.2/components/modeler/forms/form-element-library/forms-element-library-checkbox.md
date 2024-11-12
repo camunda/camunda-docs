@@ -6,7 +6,7 @@ description: A form element to read and edit boolean data
 
 A checkbox allowing the user to read and edit boolean data.
 
-![Form Checkbox Symbol](/img/form-icons/form-checkbox.svg)
+<img src="/img/form-icons/form-checkbox.svg" alt="Form Checkbox Symbol" />
 
 ### Configurable properties
 

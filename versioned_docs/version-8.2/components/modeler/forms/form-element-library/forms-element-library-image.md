@@ -6,7 +6,7 @@ description: Learn about the image view form element to display an image.
 
 An element allowing the user to display images.
 
-![Form Image Symbol](/img/form-icons/form-image.svg)
+<img src="/img/form-icons/form-image.svg" alt="Form Image Symbol" />
 
 ## Configurable properties
 

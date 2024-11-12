@@ -6,7 +6,7 @@ description: A form element to select one or multiple values from set options
 
 A set of checkbox options providing data multi-selection for small datasets.
 
-![Form Checklist Symbol](/img/form-icons/form-checklist.svg)
+<img src="/img/form-icons/form-checkbox.svg" alt="Form Checkbox Symbol" />
 
 ### Configurable properties
 

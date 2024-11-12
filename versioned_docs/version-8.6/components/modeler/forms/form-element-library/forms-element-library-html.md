@@ -6,7 +6,7 @@ description: A form element to display HTML content.
 
 A flexible display component designed to quickly render HTML content for the user.
 
-![Form HTML Symbol](/img/form-icons/form-html.svg)
+<img src="/img/form-icons/form-html.svg" alt="Form HTML Symbol" />
 
 ## Configurable properties
 
