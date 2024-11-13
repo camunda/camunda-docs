@@ -935,31 +935,25 @@ module.exports = {
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      Setup: [
+      type: "category",
+      label: "Get started",
+      items: [
+        "self-managed/setup/deploy/local/c8run",
+        "self-managed/setup/deploy/local/local-kubernetes-cluster",
+        "self-managed/setup/deploy/local/docker-compose",
+        "self-managed/setup/deploy/local/manual",
+      ],
+    },
+    {
+      "Production setup": [
         "self-managed/setup/overview",
         {
           type: "category",
-          label: "Installation",
+          label: "Install",
           items: [
-            {
-              type: "category",
-              label: "Production options",
-              items: [
-                "self-managed/setup/install",
-                "self-managed/setup/deploy/other/docker",
-                "self-managed/setup/deploy/local/manual",
-              ],
-            },
-            {
-              type: "category",
-              label: "Local options",
-              items: [
-                "self-managed/setup/deploy/local/c8run",
-                "self-managed/setup/deploy/local/local-kubernetes-cluster",
-                "self-managed/setup/deploy/local/docker-compose",
-                "self-managed/setup/deploy/local/manual",
-              ],
-            },
+            "self-managed/setup/install",
+            "self-managed/setup/deploy/other/docker",
+            "self-managed/setup/deploy/local/manual",
           ],
         },
         {
@@ -997,7 +991,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Guides",
+          label: "Configure",
           link: {
             type: "doc",
             id: "self-managed/setup/guides/guides",
