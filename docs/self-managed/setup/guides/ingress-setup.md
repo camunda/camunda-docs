@@ -28,12 +28,6 @@ In this setup, a single Ingress/domain is used to access Camunda 8 web applicati
 
 ![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
-:::note
-**Operate, Tasklist, Optimize, Modeler, Connectors, Console:** The Ingress path value for each Component (`global.identity.auth.<component>.redirectUrl`) should match the `contextPath` for that Component.
-
-**Zeebe:** `zeebeGateway.ingress.rest.path` should match `zeebe.contextPath`.
-:::
-
 ```yaml
 # Chart values for the Camunda 8 Helm chart in combined Ingress setup.
 
@@ -93,11 +87,6 @@ zeebeGateway:
       enabled: true
       className: nginx
       host: "zeebe.camunda.example.com"
-    rest:
-      enabled: true
-      className: nginx
-      host: "camunda.example.com"
-      path: "/zeebe"
 ```
 
 :::note Web Modeler
