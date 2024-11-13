@@ -15,8 +15,7 @@ RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 # None here yet, but please place them here when you have them.
 
 # Remove Connector update guides entirely
-RewriteRule ^docs/components/connectors/custom-built-connectors/update-guide/(.*)$ /docs/components/connectors/custom-built-connectors/connector-sdk/$1 [R=301,L]
-RewriteRule ^docs/next/components/connectors/custom-built-connectors/update-guide/(.*)$ /docs/next/components/connectors/custom-built-connectors/connector-sdk/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/custom-built-connectors/update-guide/(.*)$ /docs/components/connectors/custom-built-connectors/connector-sdk/ [R=301,L]
 
 # Move alpha features to components
 RewriteRule ^docs/next/reference/alpha-features/?$ /docs/next/components/early-access/alpha/alpha-features/$1 [R=301,L]
