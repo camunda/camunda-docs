@@ -937,20 +937,35 @@ module.exports = {
     {
       Setup: [
         "self-managed/setup/overview",
-        "self-managed/setup/install",
-        "self-managed/setup/upgrade",
         {
           type: "category",
-          label: "Deploy",
+          label: "Installation",
           items: [
             {
-              Local: [
+              type: "category",
+              label: "Production options",
+              items: [
+                "self-managed/setup/install",
+                "self-managed/setup/deploy/other/docker",
+                "self-managed/setup/deploy/local/manual",
+              ],
+            },
+            {
+              type: "category",
+              label: "Local options",
+              items: [
                 "self-managed/setup/deploy/local/c8run",
                 "self-managed/setup/deploy/local/local-kubernetes-cluster",
                 "self-managed/setup/deploy/local/docker-compose",
                 "self-managed/setup/deploy/local/manual",
               ],
             },
+          ],
+        },
+        {
+          type: "category",
+          label: "Deploy",
+          items: [
             {
               "Amazon (AWS)": [
                 {
@@ -977,10 +992,6 @@ module.exports = {
               "Red Hat (OpenShift)": [
                 "self-managed/setup/deploy/openshift/redhat-openshift",
               ],
-              Other: [
-                "self-managed/setup/deploy/other/docker",
-                "self-managed/setup/deploy/local/manual",
-              ],
             },
           ],
         },
@@ -1005,6 +1016,7 @@ module.exports = {
             "self-managed/setup/guides/installing-payment-app-example",
           ],
         },
+        "self-managed/setup/upgrade",
       ],
       "Operational guides": [
         {
