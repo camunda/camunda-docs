@@ -17,18 +17,15 @@ sed -i '' "/tags:/a\\
 sed -i '' "s/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 
 # 3. publish-stage:
-sed -i '' '/Disable Indexing/{N; d;}' .github/workflows/publish-stage.yaml
 
 #   a. replace `branches: - main` with `branches: - unsupported/{version}`
 sed -i '' "s/- \"main\"/- \"unsupported\/$ARCHIVED_VERSION\"/" .github/workflows/publish-stage.yaml
 
-#   b. remove `disable indexing` step
-
-#   c. add `unsupported.` to docs URLs
+#   b. add `unsupported.` to docs URLs
 sed -i '' 's/https:\/\/docs.camunda.io/https:\/\/unsupported.docs.camunda.io/' .github/workflows/publish-stage.yaml
 sed -i '' 's/https:\/\/stage.docs.camunda.io/https:\/\/stage.unsupported.docs.camunda.io/' .github/workflows/publish-stage.yaml
 
-#   d. replace `${{ secrets.AWS_STAGE_PUBLISH_PATH }}` with `${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}/{version}`
+#   c. replace `${{ secrets.AWS_STAGE_PUBLISH_PATH }}` with `${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}/{version}`
 sed -i '' "s/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-stage.yaml
 
 
