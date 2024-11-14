@@ -35,6 +35,10 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-footer-title-color: var(--ifm-color-white);
   --ifm-navbar-link-color: rgb(198, 198, 198);
   --ifm-menu-color: rgb(198, 198, 198);
+  --ifm-color-secondary-contrast-background: rgb(38, 38, 38);
+  --ifm-color-secondary-dark: rgb(100, 100, 100);
+  --ifm-table-border-color: rgb(60, 60, 60);
+  --ifm-toc-border-color: rgb(50, 50, 50);
 }
 /* Styling one class specially in dark mode */
 [data-theme="dark"] .hero__subtitle {
@@ -42,7 +46,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 }
 [data-theme="dark"] .footer--dark {
   background-color: rgb(22, 22, 22);
-  border-top: 1px solid rgb(68, 73, 80);
+  border-top: 1px solid rgb(50, 50, 50);
   padding-top: 40px;
 }
 [data-theme="dark"] h2 {
@@ -60,7 +64,62 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   padding: 0;
   border: 0;
 }
+[data-theme="dark"] .callout {
+  background-color: #135cda;
+  color: white;
+}
+[data-theme="dark"] code {
+  background-color: #3d475c;
+}
+[data-theme="dark"] .hero--secondary {
+  background-color: rgb(22, 22, 22);
+  margin-bottom: 2rem;
+}
+[data-theme="dark"] .tabs__item--active {
+  background-color: #3d475c;
+  color: rgb(198, 198, 198);
+}
+[data-theme="dark"] .tabs__item:hover {
+  background-color: #3d475c;
+  color: rgb(198, 198, 198);
+}
+[data-theme="dark"] .tabs__item {
+  color: rgb(198, 198, 198);
+}
+[data-theme="dark"] .tabs {
+  border-bottom: 1px solid #7b9df9;
+}
 
+[data-theme="dark"] .get-started-use-case {
+  background-color: rgb(20, 216, 144);
+  color: #000 !important;
+}
+[data-theme="dark"] .get-started-use-case:hover {
+  background-color: transparent;
+  border-color: rgb(20, 216, 144);
+  color: rgb(20, 216, 144) !important;
+}
+[data-theme="dark"] .get-started-use-case-2 {
+  background-color: transparent;
+  border-color: rgb(20, 216, 144);
+  color: rgb(20, 216, 144) !important;
+}
+[data-theme="dark"] .get-started-use-case-2:hover {
+  background-color: rgb(20, 216, 144);
+  color: #000 !important;
+}
+
+.get-started-use-case-2:hover {
+  background-color: #000;
+  color: #fff !important;
+  border-color: #000;
+  transform: translateY(-4px);
+  transition: all 0.3s ease;
+}
+
+.pagination-nav {
+  margin-bottom: 2rem;
+}
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
   display: block;

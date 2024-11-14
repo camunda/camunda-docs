@@ -49,7 +49,7 @@
 }
 
 [data-theme="dark"] .featuresBlock {
-  padding: 1rem 0 5rem 0;
+  padding: 1rem 0 2rem 0;
 }
 
 [data-theme="dark"] .featuresDescription {
@@ -67,8 +67,14 @@
   padding: 0;
 }
 [data-theme="dark"] .featuresSection {
-  background-color: rgb(38, 38, 38);
-  border: 1px solid rgb(56, 56, 56);
+  background-color: transparent;
+  border: 1px solid rgb(50, 50, 50);
+  box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
+}
+[data-theme="dark"] .featuresSection:hover {
+  background-color: transparent;
+  border: 1px solid var(--ifm-color-primary);
+  box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
 }
 
 .featuresImage {
