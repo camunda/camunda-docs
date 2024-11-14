@@ -2573,6 +2573,16 @@ module.exports = {
                       "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                     ),
                   ],
+                  ROSA: [
+                    docsLink(
+                      "Deploy a ROSA cluster with Terraform",
+                      "self-managed/setup/deploy/amazon/openshift/terraform/"
+                    ),
+                    docsLink(
+                      "Install Camunda 8 on an Red Hat OpenShift cluster on AWS",
+                      "self-managed/setup/deploy/amazon/openshift/openshift-helm/"
+                    ),
+                  ],
                 },
 
                 docsLink(

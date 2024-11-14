@@ -968,7 +968,27 @@ module.exports = {
                     "self-managed/setup/deploy/amazon/amazon-eks/irsa",
                   ],
                 },
-                "self-managed/setup/deploy/amazon/aws-marketplace",
+                {
+                  type: "category",
+                  label: "ROSA",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/setup/deploy/amazon/openshift/openshift-helm",
+                  },
+                  items: [
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                    "self-managed/setup/deploy/amazon/openshift/openshift-helm",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Amazon MarketPlace",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/setup/deploy/amazon/aws-marketplace",
+                  },
+                  items: [],
+                },
               ],
               "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks",
