@@ -21,7 +21,7 @@ security:
   authentication:
     mode: identity
     identity:
-      issuerBackendUrl: http://keycloak:8080/auth/realms/camunda-platform
+      issuerBackendUrl: http://keycloak:18080/auth/realms/camunda-platform
       audience: zeebe-api
       type: keycloak
 ```
