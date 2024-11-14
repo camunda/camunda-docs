@@ -4,7 +4,6 @@
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.
  */
-
 .heroBanner {
   padding: 3.5rem 0;
   text-align: center;
@@ -45,6 +44,18 @@
   width: 100%;
 }
 
+.featuresBlock {
+  padding: 2rem 0;
+}
+
+[data-theme="dark"] .featuresBlock {
+  padding: 1rem 0 5rem 0;
+}
+
+[data-theme="dark"] .featuresDescription {
+  color: rgb(198, 198, 198);
+}
+
 .featuresGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -54,6 +65,10 @@
 
 .featuresSection {
   padding: 0;
+}
+[data-theme="dark"] .featuresSection {
+  background-color: rgb(38, 38, 38);
+  border: 1px solid rgb(56, 56, 56);
 }
 
 .featuresImage {

@@ -22,6 +22,45 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-menu-color: var(--ifm-color-emphasis-800);
 }
 
+/* Dark mode */
+[data-theme="dark"]:root {
+  --ifm-color-primary: #78a9ff;
+  --ifm-background-color: rgb(22, 22, 22);
+  --ifm-background-surface-color: rgb(22, 22, 22);
+  --ifm-font-color-base: rgb(244, 244, 244);
+  --ifm-heading-color: rgb(244, 244, 244);
+  --ifm-footer-background-color: red;
+  --ifm-footer-color: red;
+  --ifm-footer-link-color: var(--ifm-color-secondary);
+  --ifm-footer-title-color: var(--ifm-color-white);
+  --ifm-navbar-link-color: rgb(198, 198, 198);
+  --ifm-menu-color: rgb(198, 198, 198);
+}
+/* Styling one class specially in dark mode */
+[data-theme="dark"] .hero__subtitle {
+  color: rgb(244, 244, 244);
+}
+[data-theme="dark"] .footer--dark {
+  background-color: rgb(22, 22, 22);
+  border-top: 1px solid rgb(68, 73, 80);
+  padding-top: 40px;
+}
+[data-theme="dark"] h2 {
+  border-bottom: 1px solid #48484a;
+}
+[data-theme="dark"] .hero__title {
+  border-bottom: none;
+}
+[data-theme="dark"] .hero--primary {
+  background-image: url("/static/img/hero-bg-dark.png");
+  padding-bottom: 2rem;
+}
+[data-theme="dark"] .theme-doc-markdown img {
+  background-color: white;
+  padding: 0;
+  border: 0;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
   display: block;
