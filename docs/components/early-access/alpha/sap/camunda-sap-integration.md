@@ -17,7 +17,7 @@ These features run in the customer's [SAP BTP instance](https://www.sap.com/prod
 
 ![SAP integration overview](./img/sap-integration-overview.png)
 
-## Technical requirements 
+## Technical requirements - SAP
 
 Generally speaking, Camunda's SAP integration has ony few technical requirements. 
 
