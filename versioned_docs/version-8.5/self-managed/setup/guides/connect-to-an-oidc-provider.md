@@ -34,7 +34,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 <h3>Steps</h3>
 
 1. In your OIDC provider, create an application for each of the components you want to connect. The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
-2. For all components except Web Modeler, the application has to be of confidential access type, which is known in Keycloak as setting Client authentication to On. For Web Modeler, which is a single page web application, the application has to be of public access type. This is setting the Client authentication to Off in Keycloak.
+2. For all components except Web Modeler, the application has to be of confidential access type. For Web Modeler, which is a single page web application, the application has to be of public access type.
 3. Make a note of the following values for each application you create:
    - Client ID
    - Client secret
