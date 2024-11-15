@@ -35,12 +35,14 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-footer-title-color: var(--ifm-color-white);
   --ifm-navbar-link-color: rgb(198, 198, 198);
   --ifm-menu-color: rgb(198, 198, 198);
-  --ifm-color-secondary-contrast-background: rgb(38, 38, 38);
+  --ifm-color-secondary-contrast-background: rgb(50, 50, 50);
   --ifm-color-secondary-dark: rgb(100, 100, 100);
   --ifm-table-border-color: rgb(60, 60, 60);
   --ifm-toc-border-color: rgb(50, 50, 50);
+  --ifm-tabs-padding-vertical: 10px;
+  --ifm-tabs-padding-horizontal: 15px;
 }
-/* Styling one class specially in dark mode */
+
 [data-theme="dark"] .hero__subtitle {
   color: rgb(244, 244, 244);
 }
@@ -75,21 +77,25 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   background-color: rgb(22, 22, 22);
   margin-bottom: 2rem;
 }
-[data-theme="dark"] .tabs__item--active {
-  background-color: #3d475c;
-  color: rgb(198, 198, 198);
-}
-[data-theme="dark"] .tabs__item:hover {
-  background-color: #3d475c;
-  color: rgb(198, 198, 198);
-}
 [data-theme="dark"] .tabs__item {
   color: rgb(198, 198, 198);
+  border: 3px solid var(--ifm-color-emphasis-200);
+  background-color: transparent;
+  margin-right: 10px;
 }
-[data-theme="dark"] .tabs {
-  border-bottom: 1px solid #7b9df9;
+[data-theme="dark"] .tabs__item--active {
+  border-radius: var(--ifm-global-radius);
+  border: 3px solid #78a9ff;
+  background-color: transparent;
+}
+[data-theme="dark"] .tabs__item:hover {
+  background-color: var(--ifm-color-emphasis-200);
+  color: rgb(198, 198, 198);
 }
 
+[data-theme="dark"] .tabs {
+  border-bottom: 0;
+}
 [data-theme="dark"] .get-started-use-case {
   background-color: rgb(20, 216, 144);
   color: #000 !important;
@@ -108,14 +114,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   background-color: rgb(20, 216, 144);
   color: #000 !important;
 }
-
-.get-started-use-case-2:hover {
-  background-color: #000;
-  color: #fff !important;
-  border-color: #000;
-  transform: translateY(-4px);
-  transition: all 0.3s ease;
-}
+/* End Dark mode */
 
 .pagination-nav {
   margin-bottom: 2rem;
