@@ -220,15 +220,35 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    rosa whoami
    ```
 
-1. Verify your AWS quotas, run the following command to ensure sufficient quotas:
+1. Verify your AWS quotas:
 
    ```bash
-   rosa verify quota
+   rosa verify quota --region="$AWS_REGION"
    ```
 
-   If quotas are insufficient, check [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs) and [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas) for more information.
+   **Note**: This may fail due to organizational policies.
 
-1. Make sure the `oc` CLI is installed. If not, install it following the [official ROSA oc installation guide](https://docs.openshift.com/rosa/cli_reference/openshift_cli/getting-started-cli.html#cli-getting-started):
+1. Create the required account roles:
+
+   ```bash
+   rosa create account-roles --mode auto
+   ```
+
+1. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
+
+   - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
+   - Choose **Get started**.
+   - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
+   - Choose **Enable ROSA**.
+
+   **Note**: Only a single AWS account can be associated with a Red Hat account for service billing.
+
+1. Verify your AWS quotas, and if quotas are insufficient, consult the following:
+
+   - [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
+   - [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas)
+
+1. Ensure the `oc` CLI is installed. If it’s not already installed, follow the [official ROSA oc installation guide](https://docs.openshift.com/rosa/cli_reference/openshift_cli/getting-started-cli.html#cli-getting-started):
 
    ```bash
    rosa verify openshift-client
