@@ -6,7 +6,7 @@ description: A form element to read and edit boolean data
 
 A checkbox allowing the user to read and edit boolean data.
 
-![Form Checkbox Symbol](/img/form-icons/form-checkbox.svg)
+<img src="/img/form-icons/form-checkbox.svg" alt="Form Checkbox Symbol" />
 
 ### Configurable properties
 
@@ -18,7 +18,7 @@ A checkbox allowing the user to read and edit boolean data.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the checkbox.
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: Checkbox must contain a value.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 
 ### Datatypes
 

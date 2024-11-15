@@ -75,7 +75,7 @@ provider "aws" {
 
 :::note
 
-It's recommended to use a different backend than `local`. More information can be found in the [Terraform documentation](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
+It's recommended to use a different backend than `local`. More information can be found in the [Terraform documentation](https://developer.hashicorp.com/terraform/language/backend).
 
 :::
 

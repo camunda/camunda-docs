@@ -24,6 +24,7 @@ module.exports = {
         lib_dir + "forms-element-library-iframe",
         lib_dir + "forms-element-library-table",
         lib_dir + "forms-element-library-expression",
+        lib_dir + "forms-element-library-filepicker",
         lib_dir + "forms-element-library-image",
         lib_dir + "forms-element-library-spacer",
         lib_dir + "forms-element-library-separator",

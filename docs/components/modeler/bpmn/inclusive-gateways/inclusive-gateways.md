@@ -1,10 +1,10 @@
 ---
 id: inclusive-gateways
 title: "Inclusive gateway"
-description: "An inclusive gateway (or OR-gateway) allows you to make multiple decisions based on data."
+description: "Learn more about inclusive gateways, which allow for making multiple decisions based on data or process instance variables, and can be diverging or converging."
 ---
 
-The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data, or process instance variables. Inclusive gateways can be diverging (a sequence flow is split into multiple paths) or converging (split paths are merged before continuing).
+The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data or process instance variables. Inclusive gateways can be diverging (a sequence flow is split into multiple paths) or converging (split paths are merged before continuing).
 
 ![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta,stir-fry steak, prepare salad, or any combination of these.](assets/inclusive-gateway.png)
 

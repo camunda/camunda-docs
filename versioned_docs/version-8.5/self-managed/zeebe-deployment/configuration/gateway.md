@@ -431,3 +431,9 @@ If you are using an embedded gateway, refer to the [broker configuration guide](
 multiTenancy:
   enabled: true
 ```
+
+### Experimental configuration
+
+See the experimental section of the [gateway.yaml.template](https://github.com/camunda/camunda/blob/stable/8.5/dist/src/main/config/gateway.yaml.template#L298).
+
+Be aware that all configuration properties which are part of the experimental section are subject to change and can be dropped at any time.

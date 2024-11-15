@@ -949,6 +949,7 @@ paths:
         :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
         in future releases.
+        :::
       responses:
         "204":
           description: The clock was successfully reset to the system time.
@@ -2889,6 +2890,10 @@ components:
         assignee:
           type: string
           description: The assignee of the user task.
+        priority:
+          type: integer
+          format: int32
+          description: The priority of the user task.
         elementId:
           type: string
           description: The element ID of the user task.
@@ -3962,6 +3967,14 @@ components:
         licenseType:
           description: Will return the license type property of the Camunda license
           type: string
+        isCommercial:
+          description: Will be false when a license contains a non-commerical=true property
+          type: boolean
+        expiresAt:
+          description: The date when the Camunda license expires
+          type: string
+          format: date-time
+          nullable: true
     BrokerInfo:
       description: Provides information on a broker node.
       type: object

@@ -6,7 +6,7 @@ description: Learn about the datetime form element to read and edit date and tim
 
 A component allowing the user to read and edit date and time data.
 
-![Form Datetime Symbol](/img/form-icons/form-datetime.svg)
+<img src="/img/form-icons/form-datetime.svg" alt="Form Datetime Symbol" />
 
 ## Configurable properties
 
@@ -18,7 +18,7 @@ A component allowing the user to read and edit date and time data.
 - **Use 24h**: Enables 24-hour time format.
 - **Disabled**: Disables the checkbox, for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the datetime component.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 - **Time format**: Defines the time data format. This can either be **UTC offset**, **UTC normalized**, or **No timezone**.
 - **Time interval**: Defines the steps of time that can be selected in the time input field.
 - **Disallow past dates**: Enables the restriction to not allow past dates.
