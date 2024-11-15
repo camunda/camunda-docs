@@ -78,6 +78,9 @@ You can resume a paused cluster at any time, which typically takes five to ten m
 - Clusters tagged as `test`, `stage`, or `prod` auto-pause if there is no cluster activity for 48 hours.
 - Paused `dev` (or untagged) clusters are automatically deleted after 30 consecutive paused days. You can change the tag to avoid cluster deletion.
 - No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until you resume the cluster.
+- Disk space will be cleared when a trial cluster is suspended. 
+  - Cluster settings such as API Clients, connector secrets and IP-Whitelist are retained.
+  - Processes will need to be redeployed to the cluster.
 
 :::tip
 To prevent auto-pause, [upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
