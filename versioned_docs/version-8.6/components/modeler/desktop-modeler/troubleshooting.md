@@ -171,6 +171,20 @@ DEBUG=* ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-m
 </TabItem>
 </Tabs>
 
+## Desktop Modeler does not start on Ubuntu 24 / modern Linux
+
+Modern Linux operating systems introduce restrictions on user namespaces, a sandboxing (isolation) mechanism the modeler uses.
+
+The effect that you see is an error message like the following at the start of the application:
+
+```sh
+$ ./camunda-modeler
+[46193:1114/170934.837319:FATAL:setuid_sandbox_host.cc(163)] The SUID sandbox helper binary was found, but is not configured correctly. Rather than run without sandboxing I'm aborting now. You need to make sure that [...]/camunda-modeler-[...]-linux-x64/chrome-sandbox is owned by root and has mode 4755.
+zsh: trace trap (core dumped)  ./camunda-modeler
+```
+
+To remedy this you have to configure your system to allow the sandboxing (again) or disable the sandbox altogether (dangerous, not recommended). [This resource](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478581677) explains the available options in depth.
+
 ## Other questions?
 
 Head over to the [Modeler category on the forum](https://forum.camunda.io/c/modeler/6) to receive help from the community.
