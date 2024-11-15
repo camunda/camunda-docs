@@ -38,7 +38,7 @@ This setup provides a foundational starting point for working with Camunda 8, th
 
 Terraform can seem complex at first. If you're interested in understanding what each component does, consider trying out the [Red Hat OpenShift on AWS UI-based tutorial](https://docs.redhat.com/en/documentation_red_hat_openshift_service_on_aws/4/html/getting_started/rosa-quickstart-guide-ui#rosa-quickstart-creating-a-cluster). This guide will show you what resources are created and how they interact with each other.
 
-Certain resources, such as the PostgreSQL database and OpenSearch, use the same definitions as described in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide.
+If you require managed services for PostgreSQL Aurora or OpenSearch, you can refer to the definitions provided in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide. However, please note that these configurations may need adjustments to fit your specific requirements and have not been tested. By default, this guide assumes that the database services (PostgreSQL and OpenSearch) integrated into the default chart will be used.
 
 For testing Camunda 8 or developing against it, you might consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have a Red Hat OpenShift cluster on AWS, you can skip ahead to the [Helm setup guide](./openshift-helm.md).
 
@@ -68,8 +68,6 @@ Following this tutorial and steps will result in:
 
 - A [Red Hat OpenShift with Hosted Control Plane](https://www.redhat.com/en/topics/containers/what-are-hosted-control-planes#rosa-with-hcp) cluster running the latest ROSA version with three nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda platform.
-- A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform.
 
 ## 1. Configure AWS and initialize Terraform
 
@@ -177,11 +175,64 @@ Terraform will connect to the S3 bucket to manage the state file, ensuring remot
 
 ### OpenShift cluster module setup
 
-This module establishes the foundational configuration for AWS access and Terraform.
+This module sets up the foundational configuration for AWS access and Terraform usage.
 
-We will utilize [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, streamlining our infrastructure management.
+We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, simplifying infrastructure management.
 
-The [Camunda-provided module](https://github.com/camunda/camunda-tf-rosa) is publicly available and offers a robust starting point for deploying an Red Hat OpenShift cluster on AWS with Hosted Control Plane. It is highly recommended to review this module prior to implementation to understand its structure and capabilities.
+The [Camunda-provided module](https://github.com/camunda/camunda-tf-rosa) is publicly available and serves as a robust starting point for deploying a Red Hat OpenShift cluster on AWS using a Hosted Control Plane. It is highly recommended to review this module before implementation to understand its structure and capabilities.
+
+Please note that this module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html). It is presented as an example for running Camunda 8 in ROSA. For advanced use cases or custom setups, we encourage you to use the official module, which includes vendor-supported features.
+
+#### Set up ROSA authentication
+
+To set up a ROSA cluster, certain prerequisites must be configured on your AWS account. Below is an excerpt from the [official ROSA planning prerequisites checklist](https://docs.openshift.com/rosa/rosa_planning/rosa-cloud-expert-prereq-checklist.html):
+
+1. Verify that your AWS account is correctly configured:
+
+   ```bash
+   aws sts get-caller-identity
+   ```
+
+1. Check if the ELB service role exists:
+
+   ```bash
+   aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing"
+   ```
+
+   If it doesn't exist, create it:
+
+   ```bash
+   aws iam create-service-linked-role --aws-service-name "elasticloadbalancing.amazonaws.com"
+   ```
+
+1. Create a Red Hat Hybrid Cloud Console account if you don’t already have one: [Red Hat Hybrid Cloud Console](https://console.redhat.com/).
+
+1. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
+
+1. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
+
+1. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
+
+   ```bash
+   rosa login --token=<yourToken>
+
+   # Verify the login
+   rosa whoami
+   ```
+
+1. Verify your AWS quotas, run the following command to ensure sufficient quotas:
+
+   ```bash
+   rosa verify quota
+   ```
+
+   If quotas are insufficient, check [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs) and [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas) for more information.
+
+1. Make sure the `oc` CLI is installed. If not, install it following the [official ROSA oc installation guide](https://docs.openshift.com/rosa/cli_reference/openshift_cli/getting-started-cli.html#cli-getting-started):
+
+   ```bash
+   rosa verify openshift-client
+   ```
 
 #### Set up the ROSA cluster module
 
@@ -202,81 +253,11 @@ The [Camunda-provided module](https://github.com/camunda/camunda-tf-rosa) is pub
 
 5. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-tf-rosa/blob/v1.3.0/modules/rosa-hcp/README.md).
 
-### PostgreSQL module setup
-
-:::info Optional module
-
-If you don't want to use this module, you can skip this section. However, you may need to adjust the remaining instructions to remove references to this module.
-
-If you choose not to use this module, you must either provide a managed PostgreSQL service or use the internal deployment by the Camunda Helm chart in Kubernetes.
-:::
-
-We separated the cluster and PostgreSQL modules to offer you more customization options.
-
-#### Set up the Aurora PostgreSQL module
-
-1. Create a `db.tf` file in the same directory as your `config.tf` file.
-2. Add the following content to your newly created `db.tf` file to utilize the provided module:
-
-   ```hcl reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/db.tf
-   ```
-
-3. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
-
-   ```bash
-   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
-   ```
-
-4. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/aurora/README.md) for more details on other customization options.
-
-### OpenSearch module setup
-
-:::info Optional module
-
-If you don't want to use this module, you can skip this section. However, you may need to adjust the remaining instructions to remove references to this module.
-
-If you choose not to use this module, you'll need to either provide a managed Elasticsearch or OpenSearch service or use the internal deployment by the Camunda Helm chart in Kubernetes.
-:::
-
-The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/setup/guides/using-existing-opensearch.md).
-
-:::note Migration to OpenSearch is not supported
-
-Using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from previous Camunda versions or Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
-
-:::
-
-#### Set up the OpenSearch domain module
-
-1. Create a `opensearch.tf` file in the same directory as your `config.tf` file.
-1. Add the following content to your newly created `opensearch.tf` file to utilize the provided module:
-
-   :::caution Network based security
-   The standard deployment for OpenSearch relies on the first layer of security, which is the Network.
-   While this setup allows easy access, it may expose sensitive data. To enhance security, consider implementing IAM Roles for Service Accounts (IRSA) to restrict access to the OpenSearch cluster, providing a more secure environment.
-   For more information, see the [Amazon OpenSearch Service Fine-Grained Access Control documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html#fgac-access-policies).
-   :::
-
-   ```hcl reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/opensearch.tf
-   ```
-
-1. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
-
-   ```bash
-   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
-   ```
-
-1. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/opensearch/README.md).
-
 ### Define outputs
 
-**Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as database endpoints and other necessary configurations for Helm setup.
+**Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as cluster endpoints and other necessary configurations for Helm setup.
 
 Each module that you have previously set up contains an output definition at the end of the file. You can adjust them to your needs.
-
-Outputs allow you to easily reference the **cert-manager** ARN, **external-dns** ARN, and the endpoints for both **PostgreSQL** and **OpenSearch** in subsequent steps or scripts, streamlining your deployment process.
 
 ### Execution
 
@@ -312,124 +293,53 @@ Depending on the installation path you have chosen, you can find the reference f
 
 ### Access the created OpenShift cluster
 
-<!--  TODO: adapt this part of OpenShift -->
+You can access the created OpenShift cluster using the following steps:
 
-You can gain access to the Amazon EKS cluster via the `AWS CLI` using the following command:
-
-```shell
-export CLUSTER_NAME="$(terraform console <<<local.eks_cluster_name | jq -r)"
-
-aws eks --region "$AWS_REGION" update-kubeconfig --name "$CLUSTER_NAME" --alias "$CLUSTER_NAME"
-```
-
-After updating the kubeconfig, you can verify your connection to the cluster with `kubectl`:
+Set up the required environment variables:
 
 ```shell
-kubectl get nodes
+export CLUSTER_NAME="$(terraform console <<<local.rosa_cluster_name | jq -r)"
+export CLUSTER_API_URL=$(rosa list clusters --output json | jq ".[] | select(.name == \"$CLUSTER_NAME\") | .api.url" -r)
+export CLUSTER_ADMIN_USERNAME="$(terraform console <<<local.rosa_admin_username | jq -r)"
+export CLUSTER_ADMIN_PASSWORD="$(terraform console <<<local.rosa_admin_password | jq -r)"
 ```
 
-Create a namespace for Camunda:
+Log in to the OpenShift cluster as the administrator:
 
 ```shell
-kubectl create namespace camunda
+oc login -u "$CLUSTER_ADMIN_USERNAME" "$CLUSTER_API_URL" -p "$CLUSTER_ADMIN_PASSWORD"
 ```
 
-In the remainder of the guide, we reference the `camunda` namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+Clean up and configure the kubeconfig context:
+
+```shell
+oc config rename-context $(oc config current-context) "$CLUSTER_NAME"
+oc config use-context "$CLUSTER_NAME"
+```
+
+Verify your connection to the cluster with `oc`:
+
+```shell
+oc get nodes
+```
+
+Create a project for Camunda using `oc`:
+
+```shell
+oc new-project camunda
+```
+
+In the remainder of the guide, the `camunda` namespace part of the camunda project will be referenced to create the required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
 ### Export values for the Helm chart
 
-After configuring and deploying your infrastructure with Terraform, follow these instructions to export key values for use in Helm charts to deploy [Camunda 8 on Kubernetes](#).
+After configuring and deploying your infrastructure with Terraform, follow these instructions to export key values for use in Helm charts to deploy [Camunda 8 on OpenShift](./openshift-helm.md).
 
 The following commands will export the required outputs as environment variables. You may need to omit some if you have chosen not to use certain modules. These values will be necessary for deploying Camunda 8 with Helm charts:
 
-```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/export-helm-values.sh
-```
+<!-- TODO: adapt this part for cert-manager and external dns in OpenShift -->
 
 Ensure that you use the actual values you passed to the Terraform module during the setup of PostgreSQL and OpenSearch.
-
-### Configure the database and associated access
-
-As you now have a database, you need to create dedicated databases for each Camunda component and an associated user that have a configured access. Follow these steps to create the database users and configure access.
-
-You can access the created database in two ways:
-
-1. **Bastion host:** Set up a bastion host within the same network to securely access the database.
-2. **Pod within the OpenShift cluster:** Deploy a pod in your OpenShift cluster equipped with the necessary tools to connect to the database.
-
-The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the OpenShift cluster to configure the database.
-
-1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
-
-   ```bash reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/vars-create-db.sh
-   ```
-
-   A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
-
-2. Create a secret that references the environment variables:
-
-   ```bash reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/procedure/create-setup-db-secret.sh
-   ```
-
-   This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
-
-   After running the above command, you can verify that the secret was created successfully by using:
-
-   ```bash
-   kubectl get secret setup-db-secret -o yaml --namespace camunda
-   ```
-
-   This should display the secret with the base64 encoded values.
-
-3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`.
-
-   ```yaml reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6/setup-postgres-create-db.yml
-   ```
-
-4. Apply the manifest:
-
-   ```bash
-   kubectl apply -f setup-postgres-create-db.yml --namespace camunda
-   ```
-
-   Once the secret is created, the **Job** manifest from the previous step can consume this secret to securely access the database credentials.
-
-5. Once the job is created, monitor its progress using:
-
-   ```bash
-   kubectl get job/create-setup-user-db --namespace camunda --watch
-   ```
-
-   Once the job shows as `Completed`, the users and databases will have been successfully created.
-
-6. View the logs of the job to confirm that the users were created and privileges were granted successfully:
-
-   ```bash
-   kubectl logs job/create-setup-user-db --namespace camunda
-   ```
-
-7. Clean up the resources:
-
-   ```bash
-   kubectl delete job create-setup-user-db --namespace camunda
-   kubectl delete secret setup-db-secret --namespace camunda
-   ```
-
-Running these commands cleans up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
-
-### Configure OpenSearch fine grained access control
-
-As you now have an OpenSearch domain, you need to configure the related access for each Camunda component.
-
-You can access the created OpenSearch domain in two ways:
-
-1. **Bastion host:** Set up a bastion host within the same network to securely access the OpenSearch domain.
-2. **Pod within the OpenShift cluster:** Alternatively, deploy a pod in your OpenShift cluster equipped with the necessary tools to connect to the OpenSearch domain.
-
-The choice depends on your infrastructure setup and security preferences.
 
 ## 3. Install Camunda 8 using the Helm chart
 
