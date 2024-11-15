@@ -28,7 +28,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - [AWS CLI (2.17+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
 - [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [ROSA CLI (1.30+)](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html/getting_started/rosa-quickstart-guide-ui#rosa-getting-started-environment-setup_rosa-quickstart-guide-ui) to interact with the cluster.
+- [ROSA CLI](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html/getting_started/rosa-quickstart-guide-ui#rosa-getting-started-environment-setup_rosa-quickstart-guide-ui) to interact with the cluster.
 - [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
 - This guide uses GNU/Bash for all the shell commands listed.
 
@@ -40,7 +40,7 @@ Terraform can seem complex at first. If you're interested in understanding what 
 
 If you require managed services for PostgreSQL Aurora or OpenSearch, you can refer to the definitions provided in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide. However, please note that these configurations may need adjustments to fit your specific requirements and have not been tested. By default, this guide assumes that the database services (PostgreSQL and OpenSearch) integrated into the default chart will be used.
 
-For testing Camunda 8 or developing against it, you might consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have a Red Hat OpenShift cluster on AWS, you can skip ahead to the [Helm setup guide](./openshift-helm.md).
+For testing Camunda 8 or developing against it, you might consider signing up for our [SaaS offering](https://camunda.com/platform/). If you already have a Red Hat OpenShift cluster on AWS, you can skip ahead to the [Helm setup guide](/self-managed/setup/deploy/openshift/redhat-openshift.md).
 
 To keep this guide concise, we provide links to additional documentation covering best practices, allowing you to explore each topic in greater depth.
 
@@ -66,7 +66,7 @@ Unlike the [EKS Terraform setup](../amazon-eks/terraform-setup.md), we currently
 
 Following this tutorial and steps will result in:
 
-- A [Red Hat OpenShift with Hosted Control Plane](https://www.redhat.com/en/topics/containers/what-are-hosted-control-planes#rosa-with-hcp) cluster running the latest ROSA version with three nodes ready for Camunda 8 installation.
+- A [Red Hat OpenShift with Hosted Control Plane](https://www.redhat.com/en/topics/containers/what-are-hosted-control-planes#rosa-with-hcp) cluster running the latest ROSA version with five nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 
 ## 1. Configure AWS and initialize Terraform
@@ -118,7 +118,7 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
 
 1. Open your terminal and ensure the AWS CLI is installed and configured.
 
-2. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
+1. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
 
    ```bash
    # Replace "my-rosa-tf-state" with your unique bucket name
@@ -128,20 +128,20 @@ Now, follow these steps to create the S3 bucket with versioning enabled:
      --create-bucket-configuration LocationConstraint="$AWS_REGION"
    ```
 
-3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
+1. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash
    aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region "$AWS_REGION"
    ```
 
-4. Secure the bucket by blocking public access:
+1. Secure the bucket by blocking public access:
 
    ```bash
    aws s3api put-public-access-block --bucket "$S3_TF_BUCKET_NAME" --public-access-block-configuration \
      "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region "$AWS_REGION"
    ```
 
-5. Verify versioning is enabled on the bucket:
+1. Verify versioning is enabled on the bucket:
 
    ```bash
    aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region "$AWS_REGION"
@@ -175,7 +175,7 @@ Terraform will connect to the S3 bucket to manage the state file, ensuring remot
 
 ### OpenShift cluster module setup
 
-This module sets up the foundational configuration for AWS access and Terraform usage.
+This module sets up the foundational configuration for ROSA HCP and Terraform usage.
 
 We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, simplifying infrastructure management.
 
@@ -239,6 +239,15 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 1. Create a `cluster.tf` file in the same directory as your `config.tf` file.
 2. Add the following content to your newly created `cluster.tf` file to utilize the provided module:
 
+   :::note Configure your cluster
+
+   Please customize the cluster name, availability zones, and the token with the values you previously retrieved from the Red Hat Console.
+   Additionally, provide a secure username and password for the cluster administrator.
+
+   By default, this cluster will be accessible from the internet. If you prefer to restrict access, please refer to the official documentation of the module.
+
+   :::
+
    ```hcl reference
    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/cluster.tf
    ```
@@ -249,7 +258,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
    ```
 
-4. Configure user access to the cluster. By default, the user who creates the OpenShift cluster has administrative access, if you want to grant access to other users, please follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html).
+4. Configure user access to the cluster. By default, the user who creates the OpenShift cluster has administrative access, if you want to grant access to other users, please follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster is created.
 
 5. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-tf-rosa/blob/v1.3.0/modules/rosa-hcp/README.md).
 
@@ -299,12 +308,18 @@ Set up the required environment variables:
 
 ```shell
 export CLUSTER_NAME="$(terraform console <<<local.rosa_cluster_name | jq -r)"
-export CLUSTER_API_URL=$(rosa list clusters --output json | jq ".[] | select(.name == \"$CLUSTER_NAME\") | .api.url" -r)
+export CLUSTER_API_URL=$(terraform output -raw openshift_api_url)
 export CLUSTER_ADMIN_USERNAME="$(terraform console <<<local.rosa_admin_username | jq -r)"
 export CLUSTER_ADMIN_PASSWORD="$(terraform console <<<local.rosa_admin_password | jq -r)"
 ```
 
-Log in to the OpenShift cluster as the administrator:
+If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
+
+```shell
+rosa grant user cluster-admin --cluster="$CLUSTER_NAME" --user="$CLUSTER_ADMIN_USERNAME"
+```
+
+Log in to the OpenShift cluster:
 
 ```shell
 oc login -u "$CLUSTER_ADMIN_USERNAME" "$CLUSTER_API_URL" -p "$CLUSTER_ADMIN_PASSWORD"
@@ -331,16 +346,6 @@ oc new-project camunda
 
 In the remainder of the guide, the `camunda` namespace part of the camunda project will be referenced to create the required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
-### Export values for the Helm chart
-
-After configuring and deploying your infrastructure with Terraform, follow these instructions to export key values for use in Helm charts to deploy [Camunda 8 on OpenShift](./openshift-helm.md).
-
-The following commands will export the required outputs as environment variables. You may need to omit some if you have chosen not to use certain modules. These values will be necessary for deploying Camunda 8 with Helm charts:
-
-<!-- TODO: adapt this part for cert-manager and external dns in OpenShift -->
-
-Ensure that you use the actual values you passed to the Terraform module during the setup of PostgreSQL and OpenSearch.
-
 ## 3. Install Camunda 8 using the Helm chart
 
-Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on OpenShift](./openshift-helm.md) for detailed instructions on deploying the platform to your OpenShift cluster.
+Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md) for detailed instructions on deploying the platform to your OpenShift cluster.

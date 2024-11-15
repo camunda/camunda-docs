@@ -973,11 +973,10 @@ module.exports = {
                   label: "ROSA",
                   link: {
                     type: "doc",
-                    id: "self-managed/setup/deploy/amazon/openshift/openshift-helm",
+                    id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
                   },
                   items: [
                     "self-managed/setup/deploy/amazon/openshift/terraform-setup",
-                    "self-managed/setup/deploy/amazon/openshift/openshift-helm",
                   ],
                 },
                 {

@@ -4,22 +4,26 @@ title: "Red Hat OpenShift"
 description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 ---
 
+<!-- (!) Note: please keep this guide aligned with docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
-:::note
-Deploying Camunda 8 on Red Hat OpenShift is achievable using Helm, given the appropriate configurations. However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
-:::
+Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appropriate configurations.
+
+However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
 
 ## Cluster Specification
 
 When deploying Camunda 8 on an OpenShift cluster, the cluster specification should align with your specific requirements and workload characteristics. Here's a suggested configuration to begin with:
 
-- **Instance type:** 4 vCPUs (x86_64, >3.1 GHz), 16 GiB Memory (for example, [m5.xlarge on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
+- **Instance type:** 4 vCPUs (x86_64, >3.1 GHz), 16 GiB Memory (for example, [mi6.xlarge on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
 - **Number of dedicated nodes:** 4
 - **Volume type:** SSD volumes (with between 1000 and 3000 IOPS per volume, and a throughput of 1,000 MB/s per volume, for instance, [gp3 on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
+
+If you need to set up an OpenShift cluster on a cloud provider, we recommend our [guide to deploying a ROSA cluster](/self-managed/setup/deploy/amazon/openshift/terraform-setup.md).
 
 ### Supported Versions
 
@@ -27,52 +31,139 @@ We conduct testing and ensure compatibility against the following OpenShift vers
 
 | OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
 | ----------------- | --------------------------------------------------------------------------------- |
+| 4.17.x            | June 27, 2025                                                                     |
 | 4.16.x            | December 27, 2025                                                                 |
 | 4.15.x            | August 27, 2025                                                                   |
 | 4.14.x            | May 1, 2025                                                                       |
-| 4.13.x            | November 17, 2024                                                                 |
 
-:::caution
+:::caution Older versions are not guaranteed
+
 Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as per the End of Support Date. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+
 :::
 
-## Deploying Camunda 8 in OpenShift
+## Requirements
+
+- [Helm (3.16+)](https://helm.sh/docs/intro/install/)
+- [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
+- [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
+- A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
+
+## Deploying Camunda 8 via Helm charts
+
+### 1. Create the `values.yml` file
+
+Start by creating a `values.yml` file to store the configuration for your environment. This file will contain key-value pairs that will be substituted using `envsubst`. You can find a reference example of this file here:
 
 Depending on your OpenShift cluster's Security Context Constraints (SCCs) configuration, the deployment process may vary.
+By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies.
+
+<!-- TODO: add ingress configuration, route configuration and domainless configuration -->
 
 <Tabs queryString="current-scc">
-<TabItem value="w-scc" label="Security Context Constraints (SCCs)" default>
+<TabItem value="w-scc" label="Restrictive SCCs" default>
 
-### With restrictive SCCs
-
-By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies.
 The `global.compatibility.openshift.adaptSecurityContext` variable in your values.yaml can be used to set the following possible values:
 
 - `force`: The `runAsUser` and `fsGroup` values will be null in all components.
 - `disabled`: The `runAsUser` and `fsGroup` values will not be modified (default).
 
-To deploy Camunda 8 on OpenShift:
-
-1. Install [Helm and other CLI tools](/self-managed/setup/install.md#prerequisites).
-2. Install the [Camunda Helm chart repository](/self-managed/setup/install.md#helm-repository).
-3. Set `global.compatibility.openshift.adaptSecurityContext` to `force`
-
-```shell
-helm install camunda camunda/camunda-platform --skip-crds \
-  --set global.compatibility.openshift.adaptSecurityContext=force
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/values-no-domain-scc.yml
 ```
 
 </TabItem>
 <TabItem value="no-scc" label="Permissive SCCs">
 
-### With permissive SCCs
-
 To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/values-no-domain-no-scc.yml
+```
 
 </TabItem>
 </Tabs>
 
+### 2. Configure your deployment
+
+#### Enable Enterprise components
+
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and Connectors](/self-managed/setup/install.md#configuring-enterprise-components-and-connectors).
+
+<!-- TODO: Here document route usage vs ingress usage -->
+
+#### Fill your deployment with actual values
+
+Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
+
+```bash
+# generate the final values
+envsubst < values.yml > generated-values.yml
+
+# print the result
+cat generated-values.yml
+```
+
+:::info Camunda Helm chart no longer automatically generates passwords
+
+Starting from **Camunda 8.6**, the Helm chart deprecated the automatic generation of secrets, and this feature has been fully removed in **Camunda 8.7**.
+
+:::
+
+Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/generate-passwords.sh
+```
+
+Use these environment variables in the `kubectl` command to create the secret.
+
+- The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, you must provide those values.
+- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/create-identity-secret.sh
+```
+
+### 3. Install Camunda 8 using Helm
+
+Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/install-chart.sh
+```
+
+This command:
+
+- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
+- Applies the configuration from `generated-values.yml`.
+
+:::note
+
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/setup/upgrade.md) or any other component upgrades.
+
+:::
+
+You can track the progress of the installation using the following command:
+
+```bash
+watch -n 5 '
+  kubectl get pods -n camunda --output=wide;
+  if [ $(kubectl get pods -n camunda --field-selector=status.phase!=Running -o name | wc -l) -eq 0 ] &&
+     [ $(kubectl get pods -n camunda -o json | jq -r ".items[] | select(.status.containerStatuses[]?.ready == false)" | wc -l) -eq 0 ];
+  then
+    echo "All pods are Running and Healthy - Installation completed!";
+  else
+    echo "Some pods are not Running or Healthy";
+  fi
+'
+```
+
 ## Available Configurations of OpenShift Components
+
+<!-- TODO: rework this part, it should introduced as an explaination and should not contains any setup part -->
 
 ### Security Context Constraints (SCCs)
 
@@ -145,33 +236,13 @@ If you deploy Camunda 8 (and related infrastructure) with permissive SCCs out of
   </TabItem>
 </Tabs>
 
-## Ingress Configuration
+### Ingress Configuration
 
 Before exposing services outside the cluster, we need an Ingress component. Here's how you can configure it:
 
 <Tabs queryString="current-ingress">
-  <TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress" default>
 
-### Using Kubernetes Ingress
-
-[Routes](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html) serve as OpenShift's default Ingress implementation.
-
-If you find that its features aren't suitable for your needs, or if you prefer to use a Kubernetes-native Ingress controller, such as the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), [you have that option](https://www.redhat.com/en/blog/a-guide-to-using-routes-ingress-and-gateway-apis-in-kubernetes-without-vendor-lock-in).
-
-For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/setup/guides/ingress-setup.md).
-
-:::note Difference between ingress-nginx and NGINX Ingress
-
-Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
-
-If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
-
-:::
-
-  </TabItem>
-    <TabItem value="openshift-routes" label="Using OpenShift Routes" >
-
-### Using OpenShift Routes
+<TabItem value="openshift-routes" label="Using OpenShift Routes" default>
 
 [Routes](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html) expose services externally by linking a URL to a service within the cluster. [OpenShift supports both the standard Kubernetes Ingress and routes](https://docs.openshift.com/container-platform/latest/networking/ingress-operator.html), giving cluster users the flexibility to choose.
 
@@ -356,7 +427,29 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
 <!--Intended space left for not breaking the build!-->
   </TabItem>
+
+  <TabItem value="kubernetes-ingress" label="Using Kubernetes Ingress">
+
+[Routes](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html) serve as OpenShift's default Ingress implementation.
+
+If you find that its features aren't suitable for your needs, or if you prefer to use a Kubernetes-native Ingress controller, such as the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), [you have that option](https://www.redhat.com/en/blog/a-guide-to-using-routes-ingress-and-gateway-apis-in-kubernetes-without-vendor-lock-in).
+
+For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/setup/guides/ingress-setup.md).
+
+:::note Difference between ingress-nginx and NGINX Ingress
+
+Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
+
+If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
+
+:::
+
+  </TabItem>
 </Tabs>
+
+## Verify connectivity to Camunda 8
+
+Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8)
 
 ## Pitfalls to avoid
 

@@ -4,6 +4,8 @@ title: "Install Camunda 8 on an EKS cluster"
 description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Amazon EKS."
 ---
 
+<!-- (!) Note: please keep this guide aligned with docs/self-managed/setup/deploy/openshift/redhat-openshift.md -->
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
@@ -30,6 +32,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 :::caution Optimize compatibility with OpenSearch
 
 **Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
+
 :::
 
 ## Architecture
