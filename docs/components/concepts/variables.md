@@ -1,7 +1,7 @@
 ---
 id: variables
 title: "Variables"
-description: "Variables are part of a process instance and represent the data of the instance."
+description: "Variables are part of process instances and represent their data. Leverage the scope of variables and customize how they are merged into process instances."
 ---
 
 Variables are part of a process instance and represent the data of the instance.
