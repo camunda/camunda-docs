@@ -266,7 +266,7 @@ For additional details, refer to the [Camunda 8 Helm deployment documentation](/
 
 ### Web Modeler
 
-Since Web Modeler RestAPI uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
+As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Kubernetes configuration
@@ -538,8 +538,6 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
 
 To authorize the IAM role in OpenSearch for access, follow these steps:
 
-**_Note that this example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled._** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
-
 Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
 
 ```bash
@@ -561,6 +559,12 @@ curl -sS -u "<OS_DOMAIN_USER>:<OS_DOMAIN_PASSWORD>" \
 - Replace `<OS_DOMAIN_USER>` and `<OS_DOMAIN_PASSWORD>` with your OpenSearch domain admin credentials.
 - Replace `<OS_ENDPOINT>` with your OpenSearch endpoint URL.
 - Replace `<ROLE_NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
+
+:::note Security of basic auth usage
+
+**This example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
+
+:::
 
 </details>
 

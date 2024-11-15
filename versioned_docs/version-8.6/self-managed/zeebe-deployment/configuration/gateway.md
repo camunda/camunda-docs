@@ -2,7 +2,7 @@
 id: gateway-config
 title: "Gateway configuration"
 sidebar_label: "Gateway configuration"
-description: "Analyze how to configure the Zeebe gateway, including byte sizes, time units, paths, and sample YAML snippets."
+description: "Analyze how to configure the Zeebe Gateway, including byte sizes, time units, paths, and sample YAML snippets."
 ---
 
 The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/camunda/blob/main/dist/src/main/config/gateway.yaml.template).
@@ -484,3 +484,9 @@ If you are using an embedded gateway, refer to the [broker configuration guide](
 multiTenancy:
   enabled: true
 ```
+
+### Experimental configuration
+
+See the experimental section of the [gateway.yaml.template](https://github.com/camunda/camunda/blob/stable/8.6/dist/src/main/config/gateway.yaml.template#L298).
+
+Be aware that all configuration properties which are part of the experimental section are subject to change and can be dropped at any time.

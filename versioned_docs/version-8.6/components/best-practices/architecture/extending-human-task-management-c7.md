@@ -83,7 +83,7 @@ Now you can use a task _filter_ with criteria checking the follow-up date and if
 
 ### Enforcing deadlines for tasks
 
-There are different ways of enforcing deadlines for Human Tasks. Typical actions for overdue tasks are:
+There are different ways of enforcing deadlines with human task orchestration. Typical actions for overdue tasks are:
 
 - Sending reminder mails
 - Changing the assignee/group
@@ -96,7 +96,7 @@ There are different ways of enforcing deadlines for Human Tasks. Typical actions
 | Bulk actions possible (e.g. one mail with a list of all due tasks) |                                                                                                |                                                                                            | yes                                                                                   |                                                                          |
 | No custom component required                                       | yes                                                                                            | yes                                                                                        | Querying has to be done by external trigger or BPMN process                           | yes                                                                      |
 | Use when                                                           | The escalation is business relevant and has to be visible in the process model                 | Overdue tasks can be easily monitored via tasklist application, actions are taken manually | Sophisticated, automated actions should take place                                    | A timely escalation mechanism is desired                                 |
-| Don’t use when…​                                                   | Each and every User Task has a due date and explicit modeling would clutter your process model | You need an action to be executed automatically                                            | You do not want to run your own scheduling infrastructure                             | The escalation should be visible in the process model                    |
+| Don’t use when…​                                                   | Each and every user task has a due date and explicit modeling would clutter your process model | You need an action to be executed automatically                                            | You do not want to run your own scheduling infrastructure                             | The escalation should be visible in the process model                    |
 
 #### Modeling an escalation
 
@@ -176,7 +176,7 @@ In case you need _dynamically calculated values_ or specific _fields derived fro
 
 - using task variables as a kind of _caching_ mechanism,
 - being filled by "calculating" the values using _expression language_
-- e.g. by means of an _I/O Mapping_ of a User Task:
+- e.g. by means of an _I/O Mapping_ of a user task:
 
 ```xml
 <task id="..." name="Create new payment">
@@ -268,6 +268,6 @@ If you target a _TaskInfoEntity_:
 
 If you target a _ProcessInstanceInfoEntity_:
 
-- Create a new instance by an _ExecutionListener_ on the process instance start event. The process instance ID might not yet be known at this time. So either you create your own ID and set it as a process variable (to SQL "join" on this later), or you can add a safe point before the listener triggers to make sure the process instance was committed to the database.
+- Create a new instance by an _ExecutionListener_ on the process instance start event. The process instance id might not yet be known at this time. So either you create your own id and set it as a process variable (to SQL "join" on this later), or you can add a safe point before the listener triggers to make sure the process instance was committed to the database.
 
 - Decide when you have to update information in the entity, this depends on various factors (like amount of data, frequency of changes, way of changing data, ...).

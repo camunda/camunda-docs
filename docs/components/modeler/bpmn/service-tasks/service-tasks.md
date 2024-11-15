@@ -1,7 +1,7 @@
 ---
 id: service-tasks
 title: "Service tasks"
-description: "A service task represents a work item in the process with a specific type."
+description: "Learn more about service tasks which represent a work item in the process with a specific type. When a service task is entered, a corresponding job is created."
 ---
 
 A service task represents a work item in the process with a specific type.

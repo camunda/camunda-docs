@@ -1,7 +1,7 @@
 ---
 id: timer-events
 title: "Timer events"
-description: "Timer events are events triggered by a defined timer."
+description: "Learn about events triggered by a timer, including timer start events, intermediate timer catch events, and interrupting/non-interrupting timer boundary events."
 ---
 
 Timer events are events triggered by a defined timer.

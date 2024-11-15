@@ -4,18 +4,15 @@ title: "Manual tasks"
 description: "A manual task defines a task that is external to the BPM engine."
 ---
 
-A manual task defines a task that is external to the BPM engine. This is used to model work that is done
-by somebody who the engine does not need to know of and there is no known system or UI interface.
-
-For the engine, a manual task is handled as a pass-through activity, automatically continuing the
-process at the moment the process instance arrives.
+A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
 
 ![task](assets/manual-task.png)
 
-Manual tasks have no real benefit for automating processes. Manual tasks instead provide insights into the tasks
-that are performed outside of the process engine.
+Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) which define an actionable task assisted by a business process execution engine or software application.
 
-## Additional resources
+Within the engine and BPMN model, a manual task is handled as a pass-through activity, automatically continuing the process at the moment the process instance arrives.
+
+Manual tasks provide insights into the tasks performed outside the process engine, aiding in modeling a process, though no linked automation process is utilized.
 
 ### XML representation
 

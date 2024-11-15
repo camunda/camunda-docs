@@ -6,7 +6,7 @@ description: A form element to select multiple values from set options
 
 A complex and searchable tag based component providing multi-selection for large datasets.
 
-![Form Taglist Symbol](/img/form-icons/form-taglist.svg)
+<img src="/img/form-icons/form-taglist.svg" alt="Form Taglist Symbol" />
 
 ### Configurable properties
 
@@ -14,7 +14,7 @@ A complex and searchable tag based component providing multi-selection for large
 - **Field description**: Description provided below the taglist.
 - **Key**: Binds the field to a form variable, see [data binding docs](../configuration/forms-config-data-binding.md).
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the taglist.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: Taglist must contain a value.
 - **Options source**: Taglists can be configured with an options source defining the individual choices your user can make, see [options source docs](../configuration/forms-config-options.md).

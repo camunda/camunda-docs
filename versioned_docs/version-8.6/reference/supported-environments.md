@@ -30,15 +30,13 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Desktop Modeler
 
 - Windows 10 / 11
-- Mac OS 12 / 13 / 14
+- Mac OS 12 / 13 / 14 / 15
 - Ubuntu LTS (latest)
 
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Zeebe Spring SDK**: OpenJDK 17+
-- **Zeebe Go Client**: Go 1.13+
-- **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
 - **Spring SDK**: Spring Boot 3.3.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
