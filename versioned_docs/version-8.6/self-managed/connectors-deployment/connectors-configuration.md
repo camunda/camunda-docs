@@ -226,7 +226,7 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 The Connector Runtime supports multiple tenants for inbound and outbound Connectors. These are configurable in [Identity](/self-managed/identity/user-guide/tenants/managing-tenants.md).
 
 A single Connector Runtime can serve a single tenant or can be configured to serve
-multiple tenants. By default, the runtime uses the default tenant ID for all
+multiple tenants. By default, the runtime uses the tenant ID `<default>` for all
 Zeebe-related operations like handling jobs and publishing messages.
 
 :::info
@@ -239,10 +239,10 @@ the configured Connector Runtime client has access to. This can be configured in
 
 The Connector Runtime uses the following environment variables to configure multi-tenancy:
 
-| Name                                       | Description                                                    | Default value |
-| ------------------------------------------ | -------------------------------------------------------------- | ------------- |
-| ZEEBE_CLIENT_DEFAULT-TENANT-ID             | The default tenant ID used to communicate with Zeebe           | `myTenant`    |
-| ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS | The default tenant IDs (comma separated) used to activate jobs | `myTenant`    |
+| Name                                       | Description                                                                                                                                                                              | Default value |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| ZEEBE_CLIENT_DEFAULT-TENANT-ID             | The default tenant ID used to communicate with Zeebe. Changing this value will set a new default tenant ID used for fetching jobs and publishing messages .                              | `myTenant`    |
+| ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS | The default tenant IDs (comma separated) used to activate jobs. To run the Connector Runtime in a setup where a single runtime serves multiple tenants, add each tenant ID to this list. | `myTenant`    |
 
 If you are using an embedded version of the Connector Runtime, you can specify the tenant information in your Spring configuration like in this example `application.properties` file:
 
