@@ -15,7 +15,7 @@ The group element serves as a container to group various form elements together.
 - **Show outline**: Can be toggled on and off to display a separating outline around the group
 - **Vertical alignment**: Determines the alignment of items in the list.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the group.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 
 ### Usage
 

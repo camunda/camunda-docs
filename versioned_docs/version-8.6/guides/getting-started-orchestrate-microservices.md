@@ -1,7 +1,7 @@
 ---
 id: orchestrate-microservices
 title: Get started with microservice orchestration
-sidebar_label: Get started with microservice orchestration
+sidebar_label: Microservices
 description: "Orchestrate microservices for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
 ---

@@ -1,7 +1,7 @@
 ---
 id: orchestrate-apis
 title: Get started with API orchestration
-sidebar_label: Get started with API orchestration
+sidebar_label: APIs
 description: "Use Connectors to build low code process automation solutions"
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]

@@ -53,6 +53,10 @@ You can also edit literal expressions. Just as with decision tables, in the deci
 
 ## Business knowledge models
 
+:::caution
+Viewing the result of BKM evaluation is currently not supported in Operate.
+:::
+
 A _business knowledge model_ (BKM) is a reusable function containing a piece of decision logic. Typically, a BKM instantiates business logic that is required in multiple decisions, such as a common computation. For example, an amortization formula might be used in different loan application processes.
 
 You can make BKM elements executable using literal expressions written in FEEL, in almost the same way you would create a decision using a literal expression. A BKM literal expression can optionally accept parameters to be used as inputs to the FEEL expression, and it returns a single result whose name is the same as the BKM element name. Once you’ve created a BKM, it appears in autosuggestions when you’re using literal expressions to create decision logic.
