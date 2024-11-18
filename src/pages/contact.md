@@ -26,7 +26,7 @@ There are a few different channels you can reach us based on your needs:
 
 - For **security-related issues**, review our [security notices](../docs/reference/notices) for the most up-to-date information on known issues and steps to report a vulnerability so we can solve the problem as quickly as possible. Do not use GitHub for security-related issues.
 
-- **Feedback and support** can be submitted or requested via JIRA by following our [Enterprise support process](https://docs.camunda.org/enterprise/support/). All users can also find feedback and support options in the Help Center or [Camunda community forum](https://forum.camunda.io/).
+- **Feedback and support** can be submitted or requested via JIRA by following our [Enterprise support process](https://camunda.com/services/enterprise-support-guide/). All users can also find feedback and support options in the Help Center or [Camunda community forum](https://forum.camunda.io/).
 
 - For sales inquiries, information about Camunda 8 performance and benchmarking, or anything not listed above, use our [Contact Us](https://camunda.com/contact/) form.
 
@@ -43,4 +43,4 @@ Need assistance locating your Camunda 8 credentials? You can obtain these creden
 6. (Optional) Add more details, such as the priority level or authorized support contacts.
 7. Click **Create** at the bottom of the pop-up **Create Issue** box.
 
-After completing these steps, your request is generated. Find additional details on submitting a self-service help request [here](https://docs.camunda.org/enterprise/support/#self-service-help-request).
+After completing these steps, your request is generated. Find additional details on submitting a self-service help request [here](https://camunda.com/services/enterprise-support-guide/).
