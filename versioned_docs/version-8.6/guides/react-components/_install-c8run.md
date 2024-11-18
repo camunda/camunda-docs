@@ -18,7 +18,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 When successful, a new Operate window automatically opens.
 
 :::note
-If Camunda 8 Run fails to start, run the [shutdown script](/self-managed/setup/deploy/local/c8run.md/#shut-down-camunda-8-run) to end the current processes, then run the start script again.
+If Camunda 8 Run fails to start, run the [shutdown script](/self-managed/setup/deploy/local/c8run.md#shut-down-camunda-8-run) to end the current processes, then run the start script again.
 :::
 
 For more information and local configuration options, see the [Camunda 8 Run installation guide](/self-managed/setup/deploy/local/c8run.md).

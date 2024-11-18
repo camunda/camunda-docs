@@ -371,6 +371,42 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Role",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-role",
+        label: "Create role",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-role",
+        label: "Get role",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/update-role",
+        label: "Update role",
+        className: "api-method patch",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-role",
+        label: "Delete role",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/search-roles",
+        label: "Query roles",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "Signal",
     items: [
       {
@@ -396,6 +432,12 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/find-users",
         label: "Query users (alpha)",
         className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-user",
+        label: "Delete user",
+        className: "api-method delete",
       },
     ],
   },
