@@ -35,7 +35,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 1. In your OIDC provider, create an application for each of the components you want to connect. The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
 2. For all Components, ensure the appropriate application type is used:
-   - **Operate, Tasklist, Optimize, Identity:** Web apps requiring confidential access/a confidential client
+   - **Operate, Tasklist, Optimize, Identity:** Web applications requiring confidential access/a confidential client
    - **Modeler, Console:** Single-page applications requiring public access/a public client
 3. Make a note of the following values for each application you create:
    - Client ID
