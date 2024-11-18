@@ -46,8 +46,6 @@ To keep this guide concise, we provide links to additional documentation coverin
 
 :::warning Cost management
 
-Here’s the corrected version:
-
 Following this guide will incur costs on your cloud provider account and your Red Hat account, specifically for the managed OpenShift service, OpenShift worker nodes running in EC2, the hosted control plane, Elastic Block Storage (EBS), and Route 53. For more details, refer to [ROSA AWS pricing](https://aws.amazon.com/rosa/pricing/) and the [AWS Pricing Calculator](https://calculator.aws/#/) as total costs vary by region.
 
 :::
