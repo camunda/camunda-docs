@@ -173,9 +173,7 @@ DEBUG=* ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-m
 
 ## Desktop Modeler does not start on Ubuntu 24 / modern Linux
 
-Modern Linux operating systems introduce restrictions on user namespaces, a sandboxing (isolation) mechanism the modeler uses.
-
-The effect that you see is an error message like the following at the start of the application:
+Modern Linux operating systems introduce restrictions on user namespaces, a sandboxing (isolation) mechanism the modeler uses. The effect that you see is an error message like the following at the start of the application:
 
 ```sh
 $ ./camunda-modeler
