@@ -173,7 +173,7 @@ DEBUG=* ZEEBE_NODE_LOG_LEVEL=DEBUG GRPC_VERBOSITY=DEBUG GRPC_TRACE=all camunda-m
 
 ## Desktop Modeler does not start on Ubuntu 24 / modern Linux
 
-Modern Linux operating systems introduce restrictions on user namespaces, a sandboxing (isolation) mechanism the modeler uses. The effect that you see is an error message like the following at the start of the application:
+Modern Linux operating systems introduce restrictions on user namespaces, a sandboxing (isolation) mechanism Modeler uses. You may see an error message when you start the application:
 
 ```sh
 $ ./camunda-modeler
@@ -181,7 +181,7 @@ $ ./camunda-modeler
 zsh: trace trap (core dumped)  ./camunda-modeler
 ```
 
-To remedy this configure your system to allow the app to use sandboxing. The recommended option is to do this is by [creating an AppArmor profile](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478458250). If you don't have the necessary permissions to do this, you may choose to disable the sandbox (dangerous, not recommended). [This resource](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478581677) explains different available options in depth.
+To remedy this, configure your system to allow sandboxing by [creating an AppArmor profile](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478458250), or review [this issue](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478581677) for an in-depth explanation of available options. If you don't have the necessary permissions to permit sandboxing, you may choose to disable the sandbox, though this is not recommended.
 
 ## Other questions?
 
