@@ -1091,6 +1091,7 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        "self-managed/concepts/reference-architecture",
       ],
     },
     {
