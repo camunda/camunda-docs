@@ -191,20 +191,20 @@ completion.</p>
 			<th class="tableblock halign-center valign-middle" colspan="5">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/static/img/bpmn-elements/task-service.svg" alt="task service" />
+						<img src="../../../../static/img/bpmn-elements/task-service.svg" alt="task service" />
 					</span>
 					<span class="image">
-						<img src="/static/img/bpmn-elements/message-intermediate-send.svg" alt="message intermediate send" />
+						<img src="../../../../static/img/bpmn-elements/message-intermediate-send.svg" alt="message intermediate send" />
 					</span>
 					<span class="image">
-						<img src="/static/img/bpmn-elements/task-send.svg" alt="task send" />
+						<img src="../../../../static/img/bpmn-elements/task-send.svg" alt="task send" />
 					</span>
 				</p>
 			</th>
 			<th class="tableblock halign-center valign-middle">
 				<p class="tableblock">
 					<span class="image">
-						<img src="/static/img/bpmn-elements/task-script.svg" alt="task script" />
+						<img src="../../../../static/img/bpmn-elements/task-script.svg" alt="task script" />
 					</span>
 				</p>
 			</th>
@@ -717,7 +717,7 @@ To call a **SAP** system, you have the following options:
 
 A script task...
 
-<img src="/static/img/bpmn-elements/task-script.svg" />
+<img src="../../../../static/img/bpmn-elements/task-script.svg" />
 
 &nbsp;...is defined by specifying the script and the `scriptFormat`.
 

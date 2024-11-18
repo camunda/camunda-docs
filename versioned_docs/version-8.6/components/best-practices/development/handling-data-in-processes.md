@@ -67,7 +67,7 @@ In Camunda, you do _not_ declare process variables in the process model. This al
 
 Consult the [docs about variables](/components/concepts/variables.md#variable-values) to learn more.
 
-Camunda does not treat BPMN **data objects** (<img src="/static/img/bpmn-elements/data-object.svg" width="60" />) as process variables. We recommend using them occasionally _for documentation_, but you need to [avoid excessive usage of data objects](../../modeling/creating-readable-process-models#avoiding-excessive-usage-of-data-objects).
+Camunda does not treat BPMN **data objects** (<img src="../../../../../static/img/bpmn-elements/data-object.svg" width="60" />) as process variables. We recommend using them occasionally _for documentation_, but you need to [avoid excessive usage of data objects](../../modeling/creating-readable-process-models#avoiding-excessive-usage-of-data-objects).
 
 ## Storing just the relevant data
 
