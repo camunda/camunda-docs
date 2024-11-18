@@ -183,7 +183,28 @@ $ ./camunda-modeler
 zsh: trace trap (core dumped)  ./camunda-modeler
 ```
 
-To remedy this you have to configure your system to allow the sandboxing (again) or disable the sandbox altogether (dangerous, not recommended). [This resource](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478581677) explains the available options in depth.
+To remedy this configure your system to allow the app to use sandboxing. The recommended option is to do this through an AppArmor profile such as the following:
+
+```
+abi <abi/4.0>,
+include <tunables/global>
+
+profile camunda-modeler /@{HOME}/path-to-camunda-modeler-executable flags=(unconfined) {
+  userns,
+
+  include if exists <local/camunda-modeler>
+}
+```
+
+Adjust the path to the `camunda-modeler` executable and save this in your AppArmor profile directory, i.e. as `/etc/apparmor.d/camunda-modeler`.
+
+For the changes to take effect, reload the `apparmor` service:
+
+```
+sudo systemctl reload apparmor.service
+```
+
+If you don't have the necessary permissions to do this, you may choose to disable the sandbox (dangerous, not recommended). [This resource](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478581677) explains the available options in depth.
 
 ## Other questions?
 
