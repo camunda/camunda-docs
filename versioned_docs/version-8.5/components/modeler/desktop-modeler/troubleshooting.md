@@ -202,7 +202,7 @@ For the changes to take effect, reload the `apparmor` service:
 sudo systemctl reload apparmor.service
 ```
 
-If you don't have the necessary permissions to do this, you may choose to disable the sandbox (dangerous, not recommended). [This resource](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478581677) explains the available options in depth.
+If you don't have the necessary permissions to do this, you may choose to disable the sandbox (dangerous, not recommended). [This resource](https://github.com/camunda/camunda-modeler/issues/4695#issuecomment-2478581677) explains different available options in depth.
 
 ## Other questions?
 
