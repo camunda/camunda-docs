@@ -10,6 +10,10 @@ Release date: TBD
 
 End of maintenance: TBD
 
+### Southeast Asia now available for SaaS customers
+
+SaaS customers can now create automation clusters in the Singapore (asia-southeast1) region, ensuring lower latency and improved processing speed for organizations operating in southeast Asian countries.
+
 ## Camunda 8.6
 
 Release date: 8th of Oct 2024
