@@ -64,7 +64,7 @@ Unlike the [EKS Terraform setup](../amazon-eks/terraform-setup.md), we currently
 
 Following this tutorial and steps will result in:
 
-- A [Red Hat OpenShift with Hosted Control Plane](https://www.redhat.com/en/topics/containers/what-are-hosted-control-planes#rosa-with-hcp) cluster running the latest ROSA version with five nodes ready for Camunda 8 installation.
+- A [Red Hat OpenShift with Hosted Control Plane](https://www.redhat.com/en/topics/containers/what-are-hosted-control-planes#rosa-with-hcp) cluster running the latest ROSA version with six nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 
 ## 1. Configure AWS and initialize Terraform
@@ -207,12 +207,22 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
 1. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
 
+1. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
+
+   - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
+   - Choose **Get started**.
+   - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
+   - Choose **Enable ROSA**.
+
+   **Note**: Only a single AWS account can be associated with a Red Hat account for service billing.
+
 1. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
 
 1. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
 
    ```bash
-   rosa login --token=<yourToken>
+   export RHCS_TOKEN="<yourToken>"
+   rosa login --token="$RHCS_TOKEN"
 
    # Verify the login
    rosa whoami
@@ -232,15 +242,6 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    rosa create account-roles --mode auto
    ```
 
-1. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
-
-   - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
-   - Choose **Get started**.
-   - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
-   - Choose **Enable ROSA**.
-
-   **Note**: Only a single AWS account can be associated with a Red Hat account for service billing.
-
 1. Verify your AWS quotas, and if quotas are insufficient, consult the following:
 
    - [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
@@ -259,8 +260,10 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
    :::note Configure your cluster
 
-   Please customize the cluster name, availability zones, and the token with the values you previously retrieved from the Red Hat Console.
+   Please customize the cluster name, availability zones, with the values you previously retrieved from the Red Hat Console.
    Additionally, provide a secure username and password for the cluster administrator.
+
+   Ensure that you have set the environment `RHCS_TOKEN` is set with your [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa).
 
    By default, this cluster will be accessible from the internet. If you prefer to restrict access, please refer to the official documentation of the module.
 
