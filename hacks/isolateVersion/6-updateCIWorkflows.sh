@@ -13,10 +13,13 @@ sed -i '' "/tags:/a\\
       - \"$ARCHIVED_VERSION.[0-9]+\"
 " .github/workflows/publish-prod.yaml
 
-#   c. replace the main docs remote_path with this isolated version's remote_path.
+#   c. add `unsupported.` to docs URLs
+sed -i '' 's/https:\/\/docs.camunda.io/https:\/\/unsupported.docs.camunda.io/' .github/workflows/publish-prod.yaml
+
+#   d. replace the main docs remote_path with this isolated version's remote_path.
 sed -i '' "s/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 
-#   d. update `DOCS_SITE_BASE_URL` to specify isolated version
+#   e. update `DOCS_SITE_BASE_URL` to specify isolated version
 sed -i '' "s/DOCS_SITE_BASE_URL: \//DOCS_SITE_BASE_URL: \/$ARCHIVED_VERSION\/\"/" docusaurus.config.js
 
 # 3. publish-stage:
