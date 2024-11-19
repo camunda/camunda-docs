@@ -221,7 +221,7 @@ module.exports = {
         {
           type: "doc",
           docId: "components/components-overview",
-          label: "Components",
+          label: "Concepts",
           position: "left",
         },
         {
