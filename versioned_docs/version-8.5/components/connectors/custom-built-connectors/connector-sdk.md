@@ -1049,8 +1049,9 @@ For example, you can spin up a custom client with the
 [Zeebe Java client](/apis-tools/java-client/index.md) as follows:
 
 ```java
-import io.camunda.connector.MyConnectorFunction
-import io.camunda.connector.runtime.jobworker.outbound.ConnectorJobHandler;
+import io.camunda.connector.MyConnectorFunction;
+import io.camunda.connector.runtime.core.outbound.ConnectorJobHandler;
+import io.camunda.connector.validation.impl.DefaultValidationProvider;
 import io.camunda.zeebe.client.ZeebeClient;
 
 public class Main {
@@ -1061,7 +1062,7 @@ public class Main {
 
     zeebeClient.newWorker()
         .jobType("io.camunda:template:1")
-        .handler(new ConnectorJobHandler(new MyConnectorFunction()))
+        .handler(new ConnectorJobHandler(new MyConnectorFunction(), new DefaultValidationProvider()))
         .name("MESSAGE")
         .fetchVariables("authentication", "message")
         .open();
@@ -1076,5 +1077,5 @@ it with your job handler implementation that handles invoking the Connector func
 
 Your custom job handler needs to create a `OutboundConnectorContext` that the Connector
 function can use to handle variables, secrets, and Connector results. You can extend the
-provided `io.camunda.connector.impl.outbound.AbstractConnectorContext` to quickly gain access
+provided `io.camunda.connector.runtime.core.AbstractConnectorContext` to quickly gain access
 to most of the common context operations.
