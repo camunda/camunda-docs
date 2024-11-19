@@ -39,6 +39,10 @@ Kubernetes is a powerful orchestration platform for containerized applications. 
 
 For organizations that prefer traditional infrastructure, reference architectures for bare metal or virtual machines (VMs) offer a structured approach to system deployment. These architectures provide best practices for setting up physical servers or VMs, configuring networks, and managing storage. They are suitable for environments where control, and security are critical, and where containerization may not be feasible or necessary.
 
+### Local Development
+
+While both options are suitable for trying out Camunda 8 locally, you might also consider exploring [Camunda 8 Run](./../setup/deploy/local/c8run.md) for a more developer focused experience.
+
 ## Helping Customers Decide
 
 Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements. Here are some guidelines to help you decide:
@@ -57,3 +61,37 @@ For more information and guides, have a look at the specific reference for [Kube
   - Best for teams with expertise in managing physical servers or virtual machines.
 
 For more information and guides, have a look at the specific reference for [Manual](#TODO).
+
+## Architecture
+
+<!-- TODO: include overview, Hamza had good pictures on this topic -->
+
+### Orchestration Cluster vs Management Cluster
+
+When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and a management cluster. Both play crucial roles in the deployment and operation of applications, but they serve different purposes and include distinct components.
+
+#### Orchestration Cluster
+
+We refer to the orchestration or automation cluster to the core of Camunda.
+
+The included components are:
+
+- [Zeebe](./../../components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
+- [Operate](./../../components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
+- [Tasklist](./../../components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
+- [Optimize](#TODO): An analytics tool for generating reports and insights based on workflow data.
+- [Identity](./../identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Connectors](./../../components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
+
+The orchestration cluster in itself is isolated and each of the above components have a 1:1 relation. So a single Operate instance can only talk to a single Zeebe instance as the data is dependent.
+
+#### Management Cluster
+
+The management cluster is designed to oversee and manage multiple orchestration clusters. It offers tools and interfaces for administrators and developers to monitor clusters and create BPMN models. The management cluster operates independently from the orchestration cluster and can function without requiring an orchestration cluster.
+
+The included components are:
+
+- [Console](./../../components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters. It provides insights into cluster health, performance, and configuration.
+- [Web Modeler](#TODO): A web-based tool for designing and deploying workflow models. It allows users to create, test, and deploy models to any connected orchestration cluster.
+
+The management cluster supports a 1:many relationship, meaning a single Console instance can manage multiple orchestration clusters, and the Web Modeler can deploy models to any available cluster.
