@@ -218,9 +218,30 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 1. Configure all other applications running inside the cluster and connecting to the Zeebe Gateway to also use TLS.
 
 1. Set up the global configuration to enable the single Ingress definition with the host. Update your configuration file as shown below:
+
    ```yaml reference
    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/domain.yml
    ```
+
+1. Deploy routes for each service to ensure they are accessible externally. These routes will be configured with default ports, allowing seamless communication with the services. To proceed, you need to reference the manifest that contains all the routes for the platform.
+
+To implement these routes, first copy the contents of the provided manifest into a file named `routes.yml`:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/manifests/routes.yml
+```
+
+Once this file is created, you can apply the routes to the `camunda` namespace. Use the following command to apply the routes:
+
+```bash
+# replace the domain
+envsubst < routes.yml > generated-routes.yml
+
+# setup the routes
+oc apply -f generated-routes.yml -n camunda
+```
+
+This command will create the routes and make them available to the services in the specified namespace. However, it is important to note that the routes will not be functional until the Helm deployment is completed in the subsequent steps. The Helm chart must be successfully deployed and the services up and running before the routes can be accessed and used.
 
 <!--Intended space left for not breaking the build!-->
 
