@@ -20,7 +20,7 @@ sed -i '' 's/https:\/\/docs.camunda.io/https:\/\/unsupported.docs.camunda.io/' .
 sed -i '' "s/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-prod.yaml
 
 #   e. update `DOCS_SITE_BASE_URL` to specify isolated version
-sed -i '' "s/DOCS_SITE_BASE_URL: \//DOCS_SITE_BASE_URL: \/$ARCHIVED_VERSION\/\"/" .github/workflows/publish-prod.yaml
+sed -i '' "s/DOCS_SITE_BASE_URL: \//DOCS_SITE_BASE_URL: \/$ARCHIVED_VERSION\//" .github/workflows/publish-prod.yaml
 
 # 3. publish-stage:
 
@@ -35,7 +35,7 @@ sed -i '' 's/https:\/\/stage.docs.camunda.io/https:\/\/stage.unsupported.docs.ca
 sed -i '' "s/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH }}/remote_path: \${{ secrets.AWS_STAGE_PUBLISH_PATH_UNSUPPORTED }}\/$ARCHIVED_VERSION/g" .github/workflows/publish-stage.yaml
 
 #   d. update `DOCS_SITE_BASE_URL` to specify isolated version
-sed -i '' "s/DOCS_SITE_BASE_URL: \//DOCS_SITE_BASE_URL: \/$ARCHIVED_VERSION\/\"/" .github/workflows/publish-stage.yaml
+sed -i '' "s/DOCS_SITE_BASE_URL: \//DOCS_SITE_BASE_URL: \/$ARCHIVED_VERSION\//" .github/workflows/publish-stage.yaml
 
 git add .github/workflows
 git commit -m "archiving($ARCHIVED_VERSION): update CI workflows"
