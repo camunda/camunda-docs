@@ -79,11 +79,11 @@ If the authorization is successful, the authorization server sends back the acce
 
 ## Authentication for Self-Managed cluster
 
-The authentication is described in [Tasklist Configuration - Authentication](/docs/self-managed/tasklist-deployment/tasklist-authentication/#identity).
+The authentication is described in [Tasklist Configuration - Authentication](/self-managed/tasklist-deployment/tasklist-authentication/#identity).
 
 ## Obtaining the Tasklist schema
 
-To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](/docs/apis-tools/tasklist-api/generated.md).
+To obtain the Tasklist GraphQL schema, send a request to the endpoint with a GraphQL introspection query as described [here](https://graphql.org/learn/introspection/), or use the [generated API documentation](/apis-tools/tasklist-api/generated.md).
 
 There are also several [tools to explore GraphQL APIs](https://altair.sirmuel.design).
 

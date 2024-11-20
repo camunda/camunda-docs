@@ -126,7 +126,7 @@ null = null
 :::tip
 
 The built-in
-function [is defined()](/docs/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean.md#is-definedvalue) can be
+function [is defined()](/components/modeler/feel/builtin-functions/feel-built-in-functions-boolean.md#is-definedvalue) can be
 used to differentiate between a value that is `null` and a variable or context entry that doesn't
 exist.
 
@@ -240,7 +240,7 @@ duration("PT4H") instance of days and time duration
 
 ### Unary-tests/in
 
-Evaluates a [unary-tests](/docs/components/modeler/feel/language-guide/feel-unary-tests) with the given value. The keyword `in` separates the value from the unary-tests.
+Evaluates a [unary-tests](/components/modeler/feel/language-guide/feel-unary-tests) with the given value. The keyword `in` separates the value from the unary-tests.
 
 ```feel
 5 in (3..7)

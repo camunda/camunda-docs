@@ -78,7 +78,7 @@ worker.
 
 A message can be referenced by one or more message events. It must define the name of the message (e.g. `Money collected`) and the `correlationKey` expression (e.g. `= orderId`). If the message is only referenced by message start events, the `correlationKey` is not required.
 
-Usually, the name of the message is defined as a [static value](/docs/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `order canceled`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). If the expression belongs to a message start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the message event. The evaluation must result in a `string`.
+Usually, the name of the message is defined as a [static value](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `order canceled`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "order " + awaitingAction`). If the expression belongs to a message start event of the process, it is evaluated on deploying the process. Otherwise, it is evaluated on activating the message event. The evaluation must result in a `string`.
 
 The `correlationKey` is an expression that usually [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the process instance that holds the correlation key of the message. The expression is evaluated on activating the message event and must result either in a `string` or in a `number`.
 

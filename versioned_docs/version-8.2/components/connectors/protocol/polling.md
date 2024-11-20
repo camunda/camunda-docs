@@ -38,20 +38,20 @@ If the HTTP Polling Connector encounters an execution exception while polling, i
 
 ### Authentication
 
-Navigate to the **Authentication** section and select your desired **Authentication type** (e.g., Basic, OAuth). Refer to the [Authentication section of the REST Connector documentation](docs/components/connectors/protocol/rest.md#authentication) for a comprehensive guide.
+Navigate to the **Authentication** section and select your desired **Authentication type** (e.g., Basic, OAuth). Refer to the [Authentication section of the REST Connector documentation](/components/connectors/protocol/rest.md#authentication) for a comprehensive guide.
 
 ### HTTP polling configuration
 
 - **Method**: Choose the HTTP method for your request, e.g., GET, POST, PUT.
 - **URL**: Enter the URL of the targeted HTTP endpoint.
-- **Headers** (Optional): Input required headers as per the external service. Learn more about headers in the [REST Connector headers](docs/components/connectors/protocol/rest.md#http-headers) section.
-- **Query Parameters** (Optional): Add necessary query parameters for the endpoint. More details can be found in the [REST Connector query parameters](docs/components/connectors/protocol/rest.md#query-parameters) section.
+- **Headers** (Optional): Input required headers as per the external service. Learn more about headers in the [REST Connector headers](/components/connectors/protocol/rest.md#http-headers) section.
+- **Query Parameters** (Optional): Add necessary query parameters for the endpoint. More details can be found in the [REST Connector query parameters](/components/connectors/protocol/rest.md#query-parameters) section.
 - **Interval** (Optional): Set the frequency for polling the endpoint in ISO 8601 durations format. The default interval is 50 seconds. Review [how to configure a time duration](../../modeler/bpmn/timer-events/timer-events.md#time-duration) for details.
-- **Connection Timeout**: Define how long (in seconds) the Connector waits before timing out. Further information on this can be found [here](docs/components/connectors/protocol/rest.md#connection-timeout).
+- **Connection Timeout**: Define how long (in seconds) the Connector waits before timing out. Further information on this can be found [here](/components/connectors/protocol/rest.md#connection-timeout).
 
 ### Payload configuration (optional)
 
-In the **Payload** section, you can include a **request body**. Learn more about this [here](docs/components/connectors/protocol/rest.md#request-body).
+In the **Payload** section, you can include a **request body**. Learn more about this [here](/components/connectors/protocol/rest.md#request-body).
 
 ### Condition to proceed
 
@@ -79,7 +79,7 @@ For more information about correlation keys, review the [messages guide](../../.
 
 ## Handling HTTP Connector responses
 
-The response from any HTTP Connector contains the status, headers, and body. Learn more about the response structure [here](docs/components/connectors/protocol/rest.md#response).
+The response from any HTTP Connector contains the status, headers, and body. Learn more about the response structure [here](/components/connectors/protocol/rest.md#response).
 
 To structure and utilize the response:
 
@@ -162,7 +162,7 @@ Whenever the stock level of this particular product goes below 10 units, the BPM
 
 ## Next steps
 
-- Dive deeper into the [REST Connector](docs/components/connectors/protocol/rest.md) to understand its capabilities and configurations.
+- Dive deeper into the [REST Connector](/components/connectors/protocol/rest.md) to understand its capabilities and configurations.
 - Explore [other Connectors available](../out-of-the-box-connectors/available-connectors-overview.md) in Camunda to integrate with various systems and services.
 - Get a comprehensive understanding of how to use Connectors in your BPMN processes [here](../use-connectors/index.md).
 - Learn about the specifics of inbound Connectors and how they can be used [here](../use-connectors/inbound.md).
