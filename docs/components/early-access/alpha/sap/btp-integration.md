@@ -11,5 +11,5 @@ The Camunda SAP Business Technology Platform (BTP) integration is an artifact ru
 - A generic endpoint to start BPMN processes with.
 
 :::note Important!
-The SAP BTP integration is an alpha feature available upon request. Visit [/reference/contact.md](/reference/contact.md) to contact us.
+The SAP BTP integration is an alpha feature available upon request. Visit [our contact page](/reference/contact.md) to contact us.
 :::
