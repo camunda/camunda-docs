@@ -29,6 +29,67 @@ It's important to note that reference architectures are not a one-size-fits-all 
 
 We recognize that deviations from the reference architecture are unavoidable. However, such changes will introduce additional complexity, making troubleshooting more difficult. When modifications are required, ensure they are well-documented to facilitate future maintenance and support more quickly.
 
+## Architecture
+
+<!-- TODO: include overview, Hamza had good pictures on this topic -->
+
+### Orchestration Cluster vs Management Cluster
+
+When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and a management cluster. Both play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
+
+#### Orchestration Cluster
+
+We refer to the orchestration or automation cluster to the core of Camunda.
+
+The included components are:
+
+- [Zeebe](./../../components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
+- [Operate](./../../components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
+- [Tasklist](./../../components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
+- [Optimize](#TODO): An analytics tool for generating reports and insights based on workflow data.
+- [Identity](./../identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Connectors](./../../components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
+
+The orchestration cluster in itself is isolated and each of the above components have a 1:1 relation. So a single Operate instance can only talk to a single Zeebe instance as the data is dependent.
+
+#### Management Cluster
+
+The management cluster is designed to oversee and manage multiple orchestration clusters. It offers tools and interfaces for administrators and developers to monitor clusters and create BPMN models. The management cluster operates independently from the orchestration cluster and can function without requiring an orchestration cluster.
+
+The included components are:
+
+- [Console](./../../components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters.
+- [Web Modeler](#TODO): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
+- [Identity](./../identity/what-is-identity.md): A service for managing user authentication and authorization.
+
+The management cluster supports a 1:many relationship, meaning a single Console instance can manage multiple orchestration clusters, and the Web Modeler can deploy models to any available cluster.
+
+:::note
+
+Identity is listed twice because there are two distinct Identity components: one within the application layer and another for the management cluster. These components are disjoint from each other. For production setups, it is recommended to use an external identity provider. However, it is possible to use the management Identity as an OIDC provider for the application Identity.
+
+:::
+
+### High Availability (HA)
+
+High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. Generally all components are equipped to be run in a highly available manner. Some components do need extra considerations when run in HA mode.
+
+Following should be considered when choosing high availability:
+
+- **Increased Uptime**: Ensures that services remain available even during hardware or software failures.
+- **Fault Tolerance**: Reduces the risk of a single point of failure by distributing workloads across multiple nodes.
+- **Increased Performance**: Zeebe scales both vertically and horizontally.
+- **Cost**: Higher costs due to the need for additional hardware, software, and maintenance.
+- **Complexity**: Requires more sophisticated infrastructure and management, increasing the complexity of the system.
+
+While high availability is one part of the increased fault tolerance and resilience, you should also consider regional or zonal placement of your workloads.
+
+If you run infrastructure on cloud providers, you are often met with different regions and zones. For ideal high availability you should consider a minimum setup of 3 zones within a region as this will guarantee that in case of a zonal failure that the remaining two workloads can still process data. For more information on how Zeebe handles fault tolerance, have a look at the [raft consensus chapter](./../../components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
+
+You can run Camunda also just with a single instance for various reasons but be sure to make [regular backups](./../zeebe-deployment/operations/backups.md) as your resilience is limited.
+
+In the end it depends on your uptime requirements, budget, criticality of the workflow engine, and performance requirements.
+
 ## Use Cases
 
 ### Kubernetes
@@ -58,40 +119,7 @@ For more information and guides, have a look at the specific reference for [Kube
 - **Manual (Bare Metal / VMs)**:
   - Suitable for organizations requiring control.
   - Ideal for environments where security and compliance are critical.
+  - Applicable for high availability but requires more planning ahead.
   - Best for teams with expertise in managing physical servers or virtual machines.
 
 For more information and guides, have a look at the specific reference for [Manual](#TODO).
-
-## Architecture
-
-<!-- TODO: include overview, Hamza had good pictures on this topic -->
-
-### Orchestration Cluster vs Management Cluster
-
-When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and a management cluster. Both play crucial roles in the deployment and operation of applications, but they serve different purposes and include distinct components.
-
-#### Orchestration Cluster
-
-We refer to the orchestration or automation cluster to the core of Camunda.
-
-The included components are:
-
-- [Zeebe](./../../components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
-- [Operate](./../../components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
-- [Tasklist](./../../components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
-- [Optimize](#TODO): An analytics tool for generating reports and insights based on workflow data.
-- [Identity](./../identity/what-is-identity.md): A service for managing user authentication and authorization.
-- [Connectors](./../../components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
-
-The orchestration cluster in itself is isolated and each of the above components have a 1:1 relation. So a single Operate instance can only talk to a single Zeebe instance as the data is dependent.
-
-#### Management Cluster
-
-The management cluster is designed to oversee and manage multiple orchestration clusters. It offers tools and interfaces for administrators and developers to monitor clusters and create BPMN models. The management cluster operates independently from the orchestration cluster and can function without requiring an orchestration cluster.
-
-The included components are:
-
-- [Console](./../../components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters. It provides insights into cluster health, performance, and configuration.
-- [Web Modeler](#TODO): A web-based tool for designing and deploying workflow models. It allows users to create, test, and deploy models to any connected orchestration cluster.
-
-The management cluster supports a 1:many relationship, meaning a single Console instance can manage multiple orchestration clusters, and the Web Modeler can deploy models to any available cluster.
