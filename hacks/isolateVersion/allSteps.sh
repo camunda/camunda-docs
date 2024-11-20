@@ -2,8 +2,8 @@
 set -e # exit at first error
 
 # Before running this script make sure these versions are correct!
-ARCHIVED_VERSION="8.1"
-ARCHIVED_OPTIMIZE_VERSION="3.9.0"
+ARCHIVED_VERSION="8.2"
+ARCHIVED_OPTIMIZE_VERSION="3.10.0"
 
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'

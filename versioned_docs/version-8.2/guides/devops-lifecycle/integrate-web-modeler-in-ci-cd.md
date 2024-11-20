@@ -82,7 +82,7 @@ Synchronize files between Web Modeler and version control systems (VCS) and vice
 
 For automatic file synchronization, consider maintaining a secondary system of record for mapping Web Modeler projects to VCS repositories. This system also monitors the project-to-repository mapping and update timestamps.
 
-To listen to changes, starting from 8.3 Web Modeler offers a polling approach that compares the update dates with the last sync dates recorded, see [the 8.3 documentation](/versioned_docs/version-8.3/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md#sync-files-with-version-control).
+To listen to changes, starting from 8.3 Web Modeler offers a polling approach that compares the update dates with the last sync dates recorded, see [the 8.3 documentation](https://docs.camunda.io/docs/8.3/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd/#sync-files-with-version-control).
 
 Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [milestones](/components/modeler/web-modeler/milestones.md).
 
@@ -90,7 +90,7 @@ Real-time synchronization isn't always what you need. Consider Web Modeler as a 
 
 A milestone reflects a state of a file in Web Modeler with a certain level of qualification, such as being ready for deployment. You can use this property to trigger deployments when a certain milestone is created.
 
-Starting from 8.3, Web Modeler offers a polling approach to listen to milestone creation, see [the 8.3 documentation](/versioned_docs/version-8.3/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md#listening-to-milestone-creation).
+Starting from 8.3, Web Modeler offers a polling approach to listen to milestone creation, see [the 8.3 documentation](https://docs.camunda.io/docs/8.3/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd/#listening-to-milestone-creation).
 
 To retrieve the content of this particular milestone, use the `GET /api/beta/milestones/:id` endpoint. To obtain the latest edit state of the file, use the `GET /api/beta/files/:id` endpoint. This endpoint also provides the `projectId` necessary for the `POST /api/beta/projects/search` endpoint offered from Web Modeler 8.3 on if you want to push the full project via the pipeline.
 
@@ -132,7 +132,7 @@ To maintain a single source of truth, avoid multiple Web Modeler instances for d
 
 #### Automate deployment of linked resources/dependencies
 
-Pipeline-driven deployment can be executed for a single file or an entire project. A separate system of record, maintained outside Web Modeler, can handle finer-grained dependency management. Fetch the full project for a file using the `GET /api/beta/files/:id` endpoint to acquire the project's `projectId`. Subsequently, use the `POST /api/beta/files/search` offered starting from Web Modeler 8.3 on to retrieve all project files, see [the 8.3 documentation](/versioned_docs/version-8.3/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md#automate-deployment-of-linked-resourcesdependencies).
+Pipeline-driven deployment can be executed for a single file or an entire project. A separate system of record, maintained outside Web Modeler, can handle finer-grained dependency management. Fetch the full project for a file using the `GET /api/beta/files/:id` endpoint to acquire the project's `projectId`. Subsequently, use the `POST /api/beta/files/search` offered starting from Web Modeler 8.3 on to retrieve all project files, see [the 8.3 documentation](https://docs.camunda.io/docs/8.3/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd/#automate-deployment-of-linked-resourcesdependencies).
 
 To retrieve the actual file `content`, iterate over the response and fetch it via `GET /api/beta/files/:id`. Parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve job worker types. Utilizing a job worker registry mapping, deploy these workers along with the process if required.
 
