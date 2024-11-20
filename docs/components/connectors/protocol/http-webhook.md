@@ -308,7 +308,9 @@ not only the response body, but also the headers and the HTTP status returned by
 the Connector.
 :::
 
-A response expression can be used to return data after the webhook has been invoked. You can use FEEL to return the body, headers, and the HTTP status to the client invoking
+#### Use the request
+
+A response expression can be used to return data after the webhook has been invoked. You can use FEEL to return the request body, headers, and the HTTP status to the client invoking
 the Webhook Connector endpoint.
 
 For example, given a webhook request with the payload body:
@@ -354,6 +356,9 @@ When working with `request` data, use the following references to access data:
 
 You can also use FEEL expressions to modify the data you return.
 
+#### Use the correlation object
+
+When using the Webhook Connector with a start event that correlates a message, you can access the correlation object in the response expression.
 In addition to the `request` object you have access to the `correlation` result.
 
 The data available via the `correlation` object depends on the type of BPMN element you are using the Webhook Connector with.
@@ -377,5 +382,41 @@ newly create process instance key when accessing the `correlation` object:
 {
   "processInstanceKey": 6755399441144562,
   "tenantId": "<default>"
+}
+```
+
+#### Use the created documents
+
+:::note
+When sending a Multipart request, the Webhook Connector will automatically store the request parts in the configured document store.
+:::
+
+You can access the created documents both in the **response expression** and the **result expression**.<br/>
+The `documents` object contains the created documents references.
+
+Here is a response expression example:
+
+```json
+{
+  "body": {
+      "message": "Document created",
+      "documents": documents
+  }
+}
+```
+
+`documents` is a list that might be empty. Each item comes in the form (example values):
+
+```json
+{
+  "storeId": "in-memory",
+  "documentId": "2b7215da-12b1-4374-8743-85d6854fcba5",
+  "metadata": {
+    "size": 405551,
+    "expiresAt": null,
+    "fileName": "my-image.jpg",
+    "customProperties": null,
+    "contentType": "image/jpeg"
+  }
 }
 ```
