@@ -14,7 +14,7 @@ Access the value of a variable by its variable name.
 a + b
 ```
 
-If the value of the variable is a context, a [context entry can be accessed](/components/modeler/feel/language-guide/feel-context-expressions#get-entrypath) by its key.
+If the value of the variable is a context, a [context entry can be accessed](/components/modeler/feel/language-guide/feel-context-expressions.md#get-entrypath) by its key.
 
 ```feel
 a.b
@@ -22,7 +22,7 @@ a.b
 
 :::tip
 
-Use a [null-check](/components/modeler/feel/language-guide/feel-boolean-expressions#null-check) if the variable can be `null` or is optional.
+Use a [null-check](/components/modeler/feel/language-guide/feel-boolean-expressions.md#null-check) if the variable can be `null` or is optional.
 
 ```feel
 a != null and a.b > 10
