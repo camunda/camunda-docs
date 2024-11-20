@@ -13,6 +13,8 @@ Whether you are reading the docs to understand how Camunda 8 works, or helping w
 
 ## Structure
 
+<!-- NEEDS ATTENTION -->
+
 Camunda 8 docs are structured in such a way that the documentation is SaaS-first, meaning you will be introduced to the following based on how they are used in Camunda 8 SaaS:
 
 - Guides: Step-by-step material to get started with Camunda 8.
@@ -100,7 +102,7 @@ keywords: [microservices, orchestration, getting-started]
 ---
 ```
 
-Take a look at Docusaurs' [guidance on headers and Markdown features](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-front-matter) for more details.
+Take a look at Docusaurus' [guidance on headers and Markdown features](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#markdown-front-matter) for more details.
 
 - id: The id is what connects a specific unique file id to the Docusaurus sidebar, not just the filename. To avoid confusion between the file and the sidebar id, we recommend making both of these the same. For example, a filename may be `learn-about-camunda.md` and therefore we may name the id `learn-about-camunda`.
 - title: The title is what will be shown as the header of the page once clicked on. Note that all titles are to be in sentence-case structure, according to the [Camunda style guide](https://camunda.com/brand/writing-style-guide/). Note that search engines typically display 50-60 characters of a title, so ensure your title does not exceed this.
