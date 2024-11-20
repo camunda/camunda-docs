@@ -22,14 +22,14 @@ jobs:
         run: npm ci
       - name: Cache Docusaurus
         uses: ./.github/actions/docusaurus-cache
-      - name: Update URL
-        run: 'sed -i ''s!url: "https://docs.camunda.io"!url: "https://stage.docs.camunda.io"!g'' docusaurus.config.js'
       - name: Update redirects for environment
         run: "sed -i 's!https://unsupported.docs.camunda.io!https://stage.unsupported.docs.camunda.io!g' ./static/.htaccess"
       - name: Build
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
+          DOCS_SITE_URL: https://stage.docs.camunda.io
+          DOCS_SITE_BASE_URL: /
       - name: Get Github Actions IP
         id: ip
         uses: haythem/public-ip@v1.3
