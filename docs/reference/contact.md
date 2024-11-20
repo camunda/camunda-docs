@@ -1,4 +1,5 @@
 ---
+id: contact
 title: Contact
 description: Contact Camunda, submit feedback, find support using the Camunda community forum, note bug reports and feature requests, and review security notices.
 keywords:
@@ -15,8 +16,6 @@ keywords:
     enterprise-support,
   ]
 ---
-
-# Contact
 
 There are a few different channels you can reach us based on your needs:
 
