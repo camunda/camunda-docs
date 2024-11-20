@@ -240,9 +240,9 @@ a {
   border: 1px solid rgb(0, 157, 154);
 }
 [data-theme="dark"] .badge--cloud {
-  background-color: rgb(0, 83, 154);
+  background-color: rgb(0, 93, 93);
   color: rgb(186, 230, 255);
-  border: 1px solid rgb(17, 146, 232);
+  border: 1px solid rgb(0, 157, 154);
 }
 [data-theme="dark"] .badge--medium {
   background-color: rgb(0, 83, 154);
