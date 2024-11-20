@@ -30,7 +30,7 @@ For Azure AD, you will need to provide:
 
 - The domain used for the login email addresses
 - The Microsoft Azure AD domain
-- The generated client id
+- The generated client ID
 - The client secret value
 
 To generate the client on your end, you will need to use the Camunda **Redirect URL** `https://weblogin.cloud.camunda.io/login/callback `. Ensure you attach the user permissions `Users > User.Read`.
@@ -43,7 +43,7 @@ Default organizations for external identity providers are only available for org
 
 By setting up an external identity provider, it is possible to configure up to 10 default organizations. The following information must be added in the ticket so that the support team can configure the default organizations:
 
-- Organization Id
+- Organization ID
 - Default organization roles
 
 If a user logs in with the configured connection, the user is automatically assigned to these organizations with the corresponding roles.
