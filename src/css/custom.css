@@ -43,6 +43,10 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-tabs-padding-horizontal: 15px;
 }
 
+a {
+  text-decoration: none;
+}
+
 [data-theme="dark"] .hero__subtitle {
   color: rgb(244, 244, 244);
 }
@@ -114,6 +118,143 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   background-color: rgb(20, 216, 144);
   color: #000 !important;
 }
+
+/* Dark Mode > Link underlines for AA accessibility */
+
+[data-theme="dark"] p a {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff6b;
+}
+[data-theme="dark"] li a {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff6b;
+}
+[data-theme="dark"] td a {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff6b;
+}
+[data-theme="dark"] p a:hover {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff;
+}
+[data-theme="dark"] li a:hover {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff;
+}
+[data-theme="dark"] td a:hover {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff;
+}
+[data-theme="dark"] .alert a {
+  text-decoration: underline;
+  text-decoration-color: #e1e1e16b;
+}
+[data-theme="dark"] .alert a:hover {
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+[data-theme="dark"] .menu__link {
+  text-decoration: none;
+}
+[data-theme="dark"] .menu__link:hover {
+  text-decoration: none;
+}
+[data-theme="dark"] .table-of-contents__link {
+  text-decoration: none;
+}
+[data-theme="dark"] .footer__link-item {
+  text-decoration: none;
+}
+[data-theme="dark"]
+  .openapi-tabs__schema-list-container
+  .openapi-tabs__schema-item {
+  border: 3px solid var(--ifm-toc-border-color);
+}
+[data-theme="dark"]
+  .openapi-tabs__code-container-inner
+  .openapi-tabs__code-item.active {
+  border: 3px solid var(--ifm-color-primary);
+}
+[data-theme="dark"] .openapi-tabs__response-code-item:hover:not(.active) {
+  border: 3px solid var(--ifm-toc-border-color);
+}
+
+/* Dark Mode > Cards */
+
+[data-theme="dark"] .card {
+  background-color: #202229;
+  border: 1px solid rgb(50, 50, 50);
+  box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
+}
+[data-theme="dark"] .card:hover {
+  background-color: transparent;
+  border: 1px solid var(--ifm-color-primary);
+  box-shadow: 0px 8px 16px 4px rgba(120, 169, 255, 0.2);
+}
+
+/* Dark mode > Badges */
+
+[data-theme="dark"] .badge--beginner {
+  background-color: rgb(154 78 0);
+  color: rgb(225 217 205);
+  border: 1px solid rgb(157 120 0);
+}
+[data-theme="dark"] .badge--intermediate {
+  background-color: rgb(154 78 0);
+  color: rgb(225 217 205);
+  border: 1px solid rgb(157 120 0);
+}
+[data-theme="dark"] .badge--advanced {
+  background-color: rgb(154 78 0);
+  color: rgb(225 217 205);
+  border: 1px solid rgb(157 120 0);
+}
+[data-theme="dark"] .badge--platform {
+  background-color: rgb(154 78 0);
+  color: rgb(225 217 205);
+  border: 1px solid rgb(157 120 0);
+}
+[data-theme="dark"] .badge--medium {
+  background-color: rgb(0, 93, 93);
+  color: rgb(186, 230, 255);
+  border: 1px solid rgb(0, 157, 154);
+}
+[data-theme="dark"] .badge--short {
+  background-color: rgb(0, 93, 93);
+  color: rgb(186, 230, 255);
+  border: 1px solid rgb(0, 157, 154);
+}
+[data-theme="dark"] .badge--beta {
+  background-color: rgb(0, 93, 93);
+  color: rgb(186, 230, 255);
+  border: 1px solid rgb(0, 157, 154);
+}
+[data-theme="dark"] .badge--alpha {
+  background-color: rgb(0, 93, 93);
+  color: rgb(186, 230, 255);
+  border: 1px solid rgb(0, 157, 154);
+}
+[data-theme="dark"] .badge--enterprise-only {
+  background-color: rgb(0, 93, 93);
+  color: rgb(186, 230, 255);
+  border: 1px solid rgb(0, 157, 154);
+}
+[data-theme="dark"] .badge--cloud {
+  background-color: rgb(0, 83, 154);
+  color: rgb(186, 230, 255);
+  border: 1px solid rgb(17, 146, 232);
+}
+[data-theme="dark"] .badge--medium {
+  background-color: rgb(0, 83, 154);
+  color: rgb(186, 230, 255);
+  border: 1px solid rgb(17, 146, 232);
+}
+[data-theme="dark"] .badge--long {
+  background-color: rgb(0, 83, 154);
+  color: rgb(186, 230, 255);
+  border: 1px solid rgb(17, 146, 232);
+}
+
 /* End Dark mode */
 
 .pagination-nav {
