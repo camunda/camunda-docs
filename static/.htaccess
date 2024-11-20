@@ -7,122 +7,122 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 Options -Indexes -MultiViews
 
 #remove SM Architecture page
-RewriteRule ^docs/8.2/self-managed/platform-architecture/overview/?$ /docs/8.2/self-managed/about-self-managed/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /8.2/docs/self-managed/about-self-managed/$1 [R=301,L]
 
 # remove unsupported versions
-RewriteRule ^docs/8.2/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /8.2/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /8.2/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /8.2/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
 # Remove Cawemo
-RewriteRule ^docs/8.2/guides/migrating-from-cawemo/?$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
+RewriteRule ^docs/guides/migrating-from-cawemo/?$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
 
 # Remove updating-tasklist pages
-RewriteRule ^docs/8.2/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/tasklist-deployment/updating-tasklist/?$ /docs/8.2/guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/updating-tasklist-cloud/?$ /8.2/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/updating-tasklist/?$ /8.2/docs/guides/update-guide/introduction/$1 [R=301,L]
 
 # Remove "new web modeler" page, re-route to launch-web-modeler rather than launch-cloud-modeler
-RewriteRule ^docs/8.2/components/modeler/web-modeler/new-web-modeler/?$ /docs/8.2/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/8.2/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/new-web-modeler/?$ /8.2/docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/launch-cloud-modeler/?$ /8.2/docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
 
 # Remove updating-operate pages
-RewriteRule ^docs/8.2/components/operate/userguide/updating-operate/?$ /docs/8.2/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/operate-deployment/updating-operate/?$ /docs/8.2/guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /8.2/docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/updating-operate/?$ /8.2/docs/guides/update-guide/introduction/$1 [R=301,L]
 
 # Rename whitelist to allowlist
-RewriteRule ^docs/8.2/components/console/manage-clusters/manage-ip-whitelists/?$ /docs/8.2/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-clusters/manage-ip-whitelists/?$ /8.2/docs/components/console/manage-clusters/manage-ip-allowlists/$1 [R=301,L]
 
 # Move install-zeebe-exporters
-RewriteRule ^docs/8.2/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /docs/8.2/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/install-zeebe-exporters/?$ /8.2/docs/self-managed/zeebe-deployment/exporters/install-zeebe-exporters/$1 [R=301,L]
 
 # Rename Console API
-RewriteRule ^docs/8.2/apis-tools/console-api-reference/?$ /docs/8.2/apis-tools/administration-api-reference/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/console-api-reference/?$ /8.2/docs/apis-tools/administration-api-reference/$1 [R=301,L]
 
 # Remove Operate feedback page
-RewriteRule ^docs/8.2/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
+RewriteRule ^docs/components/operate/userguide/operate-feedback-and-questions/?$ /contact/$1 [R=301,L]
 
 # Redirect to Connectors overview upon deprecation of Power Automate Connector
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/8.2/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/power-automate/?$ /8.2/docs/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,L]
 
 # Early access to alpha features
-RewriteRule ^docs/8.2/reference/early-access/?$ /docs/8.2/reference/alpha-features/ [R=301,L]
+RewriteRule ^docs/reference/early-access/?$ /8.2/docs/reference/alpha-features/ [R=301,L]
 
 # Condense Connectors
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/github/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/kafka/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/rabbitmq/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/slack/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/twilio-webhook/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/twilio/$1 [R=301,L]
 
 # Branding redirects
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /docs/8.2/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-dynamodb/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge-webhook/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-sns/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-sns-inbound/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/(.*)$ /8.2/docs/components/connectors/out-of-the-box-connectors/amazon-sqs-inbound/$1 [R=301,L]
 
 # Remove orphaned Tasklist page
-RewriteRule ^docs/8.2/self-managed/tasklist-deployment/tasklist-api/(.*)$ /docs/8.2/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-api/(.*)$ /8.2/docs/apis-tools/tasklist-api/tasklist-api-overview/$1 [R=301,L]
 
 # Rename Modeler Camunda 8
-RewriteRule ^docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/(.*)$ /8.2/docs/components/modeler/desktop-modeler/connect-to-camunda-8/$1 [R=301,L]
 
 # Rename Concepts Camunda 8
-RewriteRule ^docs/8.2/components/concepts/what-is-camunda-platform-8/(.*)$ /docs/8.2/components/concepts/what-is-camunda-8/$1 [R=301,L]
+RewriteRule ^docs/components/concepts/what-is-camunda-platform-8/(.*)$ /8.2/docs/components/concepts/what-is-camunda-8/$1 [R=301,L]
 
 # Renaming Guides
-RewriteRule ^docs/8.2/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-platform-7(.*)$ /docs/guides/migrating-from-camunda-7$1 [R=301,L]
 
 # rename Professional Plan to Starter Plan
-RewriteRule ^docs/8.2/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /docs/8.2/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/console/manage-plan/cancel-professional-subscription/(.*)$ /docs/8.2/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/upgrade-to-professional-plan/(.*)$ /8.2/docs/components/console/manage-plan/upgrade-to-starter-plan/$1 [R=301,L]
+RewriteRule ^docs/components/console/manage-plan/cancel-professional-subscription/(.*)$ /8.2/docs/components/console/manage-plan/cancel-starter-subscription/$1 [R=301,L]
 
 # rename Desktop Modeler reference to Camunda Cloud
-RewriteRule ^docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /docs/8.2/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/connect-to-camunda-cloud/(.*)$ /8.2/docs/components/modeler/desktop-modeler/connect-to-camunda-platform-8/$1 [R=301,L]
 
 # API Endpoints to API Orchestration
-RewriteRule ^docs/8.2/guides/orchestrate-api-endpoints(.*)$ /docs/8.2/guides/orchestrate-apis$1 [R=301,L]
+RewriteRule ^docs/guides/orchestrate-api-endpoints(.*)$ /8.2/docs/guides/orchestrate-apis$1 [R=301,L]
 
 # Modeler start instance and deploy page renaming and merging 8.2
-RewriteRule ^docs/8.2/components/modeler/web-modeler/start-instance/?$ /docs/8.2/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
-RewriteRule ^docs/8.2/components/modeler/web-modeler/save-and-deploy/?$ /docs/8.2/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
+RewriteRule ^docs/components/modeler/web-modeler/start-instance/?$ /8.2/docs/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /8.2/docs/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
 
 # deduplication of Web Modeler API
-RewriteRule ^docs/8.2/self-managed/modeler/web-modeler/api/(.*)$ /docs/8.2/apis-tools/web-modeler-api/index/$1 [R=301,L]
+RewriteRule ^docs/self-managed/modeler/web-modeler/api/(.*)$ /8.2/docs/apis-tools/web-modeler-api/index/$1 [R=301,L]
 
 # connectors restructure 8.2
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/rest/(.*)$ /docs/8.2/components/connectors/protocol/rest/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /docs/8.2/components/connectors/protocol/graphql/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /docs/8.2/components/connectors/protocol/http-webhook/$1 [R=301,L]
-RewriteRule ^docs/8.2/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /docs/8.2/components/connectors/manage-connector-templates/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rest/(.*)$ /8.2/docs/components/connectors/protocol/rest/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/graphql/(.*)$ /8.2/docs/components/connectors/protocol/graphql/$1 [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/http-webhook/(.*)$ /8.2/docs/components/connectors/protocol/http-webhook/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/advanced-modeling/manage-connector-templates/(.*)$ /8.2/docs/components/connectors/manage-connector-templates/$1 [R=301,L]
 
 # identity restructure 8.2
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/connect-to-an-existing-keycloak/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/managing-user-access/(.*)$ /docs/8.2/self-managed/identity/user-guide/authorizations/managing-user-access/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/generating-m2m-tokens/(.*)$ /docs/8.2/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/making-identity-production-ready/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/making-identity-production-ready/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/configure-logging/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/configure-logging/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/configure-external-identity-provider-and-logging/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/configure-external-identity-provider/(.*)$ /docs/8.2/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-role-to-a-user/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-permission-to-a-role/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-a-role/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/assigning-a-permission-to-an-application/?(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-a-permission/(.*)$ /docs/8.2/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-an-api/(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/adding-an-application/(.*)$ /docs/8.2/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/groups/creating-a-group/(.*)$ /docs/8.2/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/groups/assigning-users-to-a-group/(.*)$ /docs/8.2/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
-RewriteRule ^docs/8.2/self-managed/identity/user-guide/groups/assigning-roles-to-a-group/(.*)$ /docs/8.2/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/connect-to-an-existing-keycloak/(.*)$ /8.2/docs/self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/managing-user-access/(.*)$ /8.2/docs/self-managed/identity/user-guide/authorizations/managing-user-access/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/generating-m2m-tokens/(.*)$ /8.2/docs/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/making-identity-production-ready/(.*)$ /8.2/docs/self-managed/identity/user-guide/configuration/making-identity-production-ready/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configure-logging/(.*)$ /8.2/docs/self-managed/identity/user-guide/configuration/configure-logging/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider-and-logging/(.*)$ /8.2/docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configure-external-identity-provider-and-logging/(.*)$ /8.2/docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/configure-external-identity-provider/(.*)$ /8.2/docs/self-managed/identity/user-guide/configuration/configure-external-identity-provider/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-role-to-a-user/(.*)$ /8.2/docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-permission-to-a-role/(.*)$ /8.2/docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-a-role/(.*)$ /8.2/docs/self-managed/identity/user-guide/roles/add-assign-role/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/assigning-a-permission-to-an-application/?(.*)$ /8.2/docs/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-a-permission/(.*)$ /8.2/docs/self-managed/identity/user-guide/roles/add-assign-permission/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-an-api/(.*)$ /8.2/docs/self-managed/identity/user-guide/additional-features/adding-an-api/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/adding-an-application/(.*)$ /8.2/docs/self-managed/identity/user-guide/additional-features/incorporate-applications/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/groups/creating-a-group/(.*)$ /8.2/docs/self-managed/identity/user-guide/groups/create-group/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/groups/assigning-users-to-a-group/(.*)$ /8.2/docs/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
+RewriteRule ^docs/self-managed/identity/user-guide/groups/assigning-roles-to-a-group/(.*)$ /8.2/docs/self-managed/identity/user-guide/groups/assign-users-roles-to-group/$1 [R=301,L]
 
 # consolidation of Zeebe Gateway configuration
-RewriteRule ^docs/8.2/self-managed/zeebe-gateway-deployment/zeebe-gateway/(.*)$ /docs/8.2/self-managed/zeebe-deployment/zeebe-gateway/overview/$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-gateway-deployment/zeebe-gateway/(.*)$ /8.2/docs/self-managed/zeebe-deployment/zeebe-gateway/overview/$1 [R=301,L]
 
 # Add yaml mime type
 AddType text/vnd.yaml   yaml
