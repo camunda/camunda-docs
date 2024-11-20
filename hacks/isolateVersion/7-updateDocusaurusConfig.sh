@@ -3,9 +3,6 @@ notify "Updating docusaurus.config.js..."
 # Update `url` to include `unsupported`
 sed -i '' "s/docs.camunda.io/unsupported.docs.camunda.io/" docusaurus.config.js
 
-# Update `baseUrl` to specify isolated version
-sed -i '' "s/baseUrl: \"\\/\"/baseUrl: \"\/$ARCHIVED_VERSION\/\"/" docusaurus.config.js
-
 # Update footer social icons based on the new baseUrl
 sed -i '' "s/src= \"\/img\//src=\"\/$ARCHIVED_VERSION\/img\//g" docusaurus.config.js
 

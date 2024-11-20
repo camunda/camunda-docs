@@ -3,16 +3,18 @@ const { unsupportedVersions } = require("./src/versions");
 
 const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
 
+const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
+
 module.exports = {
   title: "Camunda 8 Docs",
   tagline:
     "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed.",
   // url: "https://camunda-cloud.github.io",
-  url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
+  url: docsSiteUrl,
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
   customFields: {
-    canonicalUrlRoot: "https://docs.camunda.io",
+    canonicalUrlRoot: docsSiteUrl,
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
