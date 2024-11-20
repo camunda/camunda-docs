@@ -23,72 +23,7 @@ module.exports = {
       ],
     },
     {
-      Design: [
-        "guides/automating-a-process-using-bpmn",
-        "guides/create-decision-tables-using-dmn",
-        "guides/utilizing-forms",
-      ],
-      Automate: [
-        "guides/create-cluster",
-        "guides/setting-up-development-project",
-        "guides/setup-client-connection-credentials",
-        "guides/configuring-out-of-the-box-connectors",
-        "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors",
-      ],
-      Improve: [
-        "guides/improve-processes-with-optimize",
-        {
-          "DevOps lifecycle": [
-            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
-          ],
-        },
-      ],
-    },
-    {
-      "Migrate from Camunda 7": [
-        "guides/migrating-from-camunda-7/index",
-        "guides/migrating-from-camunda-7/conceptual-differences",
-        "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-7/adjusting-source-code",
-      ],
-    },
-  ],
-  Components: [
-    "components/components-overview",
-    {
-      Concepts: [
-        "components/concepts/what-is-camunda-8",
-        "components/concepts/clusters",
-        "components/concepts/processes",
-        "components/concepts/job-workers",
-        "components/concepts/execution-listeners",
-        "components/concepts/process-instance-creation",
-        "components/concepts/messages",
-        "components/concepts/signals",
-        "components/concepts/incidents",
-        "components/concepts/variables",
-        "components/concepts/expressions",
-        "components/concepts/workflow-patterns",
-        "components/concepts/process-instance-modification",
-        "components/concepts/process-instance-migration",
-        "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
-        "components/concepts/outbound-connectors-job-workers",
-        "components/concepts/backups",
-        "components/concepts/resource-deletion",
-        "components/concepts/resource-authorizations",
-        {
-          "Access control": [
-            "components/concepts/access-control/user-groups",
-            "components/concepts/access-control/user-task-access-restrictions",
-          ],
-        },
-      ],
-      Console: [
-        "components/console/introduction-to-console",
+      Manage: [
         {
           "Manage your organization": [
             "components/console/manage-organization/organization-settings",
@@ -132,185 +67,18 @@ module.exports = {
           ],
         },
       ],
-    },
-    {
-      type: "category",
-      label: "Modeler",
-      link: {
-        type: "doc",
-        id: "components/modeler/about-modeler",
-      },
-      items: [
-        {
-          "Web Modeler": [
-            "components/modeler/web-modeler/launch-web-modeler",
-            "components/modeler/web-modeler/model-your-first-diagram",
-            "components/modeler/web-modeler/context-pad",
-            "components/modeler/web-modeler/git-sync",
-            "components/modeler/web-modeler/import-diagram",
-            "components/modeler/web-modeler/fix-problems-in-your-diagram",
-            "components/modeler/web-modeler/run-or-publish-your-process",
-            {
-              type: "category",
-              label: "Process applications",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/process-applications",
-              },
-              items: [
-                "components/modeler/web-modeler/process-application-pipeline",
-                "components/modeler/web-modeler/create-a-process-application",
-                "components/modeler/web-modeler/deploy-process-application",
-                "components/modeler/web-modeler/process-application-versioning",
-              ],
-            },
-            {
-              Collaboration: [
-                "components/modeler/web-modeler/collaboration",
-                "components/modeler/web-modeler/collaborate-with-modes",
-                "components/modeler/web-modeler/design-your-process",
-                "components/modeler/web-modeler/implement-your-process",
-                "components/modeler/web-modeler/play-your-process",
-              ],
-            },
-            "components/modeler/web-modeler/camunda-marketplace",
-            "components/modeler/web-modeler/milestones",
-            "components/modeler/web-modeler/token-simulation",
-            {
-              "Advanced modeling": [
-                "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
-                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
-                "components/modeler/web-modeler/advanced-modeling/form-linking",
-                "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
-                {
-                  "AI features": [
-                    "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
-                    "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai",
-                  ],
-                },
-              ],
-            },
-            "components/modeler/web-modeler/file-download",
-          ],
-        },
-        {
-          type: "category",
-          label: "Desktop Modeler",
-          link: {
-            type: "doc",
-            id: "components/modeler/desktop-modeler/index",
-          },
-          items: [
-            "components/modeler/desktop-modeler/install-the-modeler",
-            "components/modeler/desktop-modeler/model-your-first-diagram",
-            "components/modeler/desktop-modeler/connect-to-camunda-8",
-            "components/modeler/desktop-modeler/start-instance",
-            "components/modeler/desktop-modeler/use-connectors",
-            "components/modeler/desktop-modeler/variables",
-            {
-              type: "category",
-              label: "Element templates",
-              link: {
-                type: "doc",
-                id: "components/modeler/desktop-modeler/element-templates/about-templates",
-              },
-              items: [
-                "components/modeler/desktop-modeler/element-templates/configuring-templates",
-                "components/modeler/desktop-modeler/element-templates/using-templates",
-                "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
-                "components/modeler/desktop-modeler/element-templates/additional-resources",
-              ],
-            },
-            {
-              "Additional configuration": [
-                "components/modeler/desktop-modeler/flags/flags",
-                "components/modeler/desktop-modeler/plugins/plugins",
-                "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
-                "components/modeler/desktop-modeler/search-paths/search-paths",
-                "components/modeler/desktop-modeler/telemetry/telemetry",
-              ],
-            },
-            "components/modeler/desktop-modeler/troubleshooting",
-          ],
-        },
-        {
-          BPMN: [
-            "components/modeler/bpmn/modeler-bpmn",
-            "components/modeler/bpmn/bpmn-primer",
-            "components/modeler/bpmn/bpmn-coverage",
-            "components/modeler/bpmn/data-flow",
-            {
-              Tasks: [
-                "components/modeler/bpmn/tasks",
-                "components/modeler/bpmn/service-tasks/service-tasks",
-                "components/modeler/bpmn/user-tasks/user-tasks",
-                "components/modeler/bpmn/receive-tasks/receive-tasks",
-                "components/modeler/bpmn/business-rule-tasks/business-rule-tasks",
-                "components/modeler/bpmn/script-tasks/script-tasks",
-                "components/modeler/bpmn/send-tasks/send-tasks",
-                "components/modeler/bpmn/manual-tasks/manual-tasks",
-                "components/modeler/bpmn/undefined-tasks/undefined-tasks",
-              ],
-            },
-            {
-              Gateways: [
-                "components/modeler/bpmn/gateways",
-                "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
-                "components/modeler/bpmn/parallel-gateways/parallel-gateways",
-                "components/modeler/bpmn/event-based-gateways/event-based-gateways",
-                "components/modeler/bpmn/inclusive-gateways/inclusive-gateways",
-              ],
-            },
-            {
-              Events: [
-                "components/modeler/bpmn/events",
-                "components/modeler/bpmn/none-events/none-events",
-                "components/modeler/bpmn/message-events/message-events",
-                "components/modeler/bpmn/signal-events/signal-events",
-                "components/modeler/bpmn/timer-events/timer-events",
-                "components/modeler/bpmn/error-events/error-events",
-                "components/modeler/bpmn/escalation-events/escalation-events",
-                "components/modeler/bpmn/terminate-events/terminate-events",
-                "components/modeler/bpmn/link-events/link-events",
-                "components/modeler/bpmn/compensation-events/compensation-events",
-              ],
-            },
-            {
-              Subprocesses: [
-                "components/modeler/bpmn/subprocesses",
-                "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
-                "components/modeler/bpmn/call-activities/call-activities",
-                "components/modeler/bpmn/event-subprocesses/event-subprocesses",
-              ],
-            },
-            {
-              Markers: [
-                "components/modeler/bpmn/markers",
-                "components/modeler/bpmn/multi-instance/multi-instance",
-                "components/modeler/bpmn/compensation-handler/compensation-handler",
-              ],
-            },
-          ],
-        },
-        require("./docs/components/modeler/dmn/sidebar-schema"),
-        require("./docs/components/modeler/feel/sidebar-schema"),
-        require("./docs/components/modeler/forms/sidebar-schema"),
-        "components/modeler/data-handling",
-        require("./docs/components/modeler/reference/sidebar-schema"),
+      Design: [
+        "guides/automating-a-process-using-bpmn",
+        "guides/create-decision-tables-using-dmn",
+        "guides/utilizing-forms",
       ],
-    },
-    {
-      Connectors: [
-        "components/connectors/introduction-to-connectors",
-        "components/connectors/connector-types",
-        {
-          "Use Connectors": [
-            "components/connectors/use-connectors/index",
-            "components/connectors/use-connectors/inbound",
-            "components/connectors/use-connectors/outbound",
-          ],
-        },
+      Automate: [
+        "guides/create-cluster",
+        "guides/setting-up-development-project",
+        "guides/setup-client-connection-credentials",
+        "guides/configuring-out-of-the-box-connectors",
+        "guides/use-connectors-in-hybrid-mode",
+        "guides/host-custom-connectors",
         {
           "Out-of-the-box Connectors": [
             "components/connectors/out-of-the-box-connectors/available-connectors-overview",
@@ -373,31 +141,7 @@ module.exports = {
         },
         "components/connectors/manage-connector-templates",
         {
-          "Building custom Connectors": [
-            "components/connectors/custom-built-connectors/connector-sdk",
-            "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-template-generator",
-          ],
-        },
-      ],
-      Zeebe: [
-        "components/zeebe/zeebe-overview",
-        {
-          "Technical concepts": [
-            "components/zeebe/technical-concepts/technical-concepts-overview",
-            "components/zeebe/technical-concepts/architecture",
-            "components/zeebe/technical-concepts/clustering",
-            "components/zeebe/technical-concepts/partitions",
-            "components/zeebe/technical-concepts/internal-processing",
-            "components/zeebe/technical-concepts/process-lifecycles",
-            "components/zeebe/technical-concepts/protocols",
-          ],
-        },
-      ],
-      Operate: [
-        "components/operate/operate-introduction",
-        {
-          "User guide": [
+          "Operate user guide": [
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
@@ -413,11 +157,8 @@ module.exports = {
             "components/operate/userguide/monitor-operation-status",
           ],
         },
-      ],
-      Tasklist: [
-        "components/tasklist/introduction-to-tasklist",
         {
-          "User guide": [
+          "Tasklist user guide": [
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/userguide/managing-tasks",
             "components/tasklist/userguide/using-filters",
@@ -427,11 +168,10 @@ module.exports = {
           ],
         },
       ],
-      Optimize: [
-        optimizeLink("What is Optimize?", "components/what-is-optimize/"),
-
+      Improve: [
+        "guides/improve-processes-with-optimize",
         {
-          "User guide": [
+          "Optimize user guide": [
             optimizeLink(
               "Collections, dashboards, and reports",
               "components/userguide/collections-dashboards-reports/"
@@ -623,8 +363,91 @@ module.exports = {
             },
           ],
         },
+        {
+          "DevOps lifecycle": [
+            "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
+          ],
+        },
       ],
-      "Best Practices": [
+    },
+    {
+      "Migrate from Camunda 7": [
+        "guides/migrating-from-camunda-7/index",
+        "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-readiness",
+        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
+        "guides/migrating-from-camunda-7/adjusting-dmn-models",
+        "guides/migrating-from-camunda-7/adjusting-source-code",
+      ],
+    },
+  ],
+  Concepts: [
+    "components/components-overview",
+    {
+      Concepts: [
+        "components/concepts/clusters",
+        "components/concepts/processes",
+        "components/concepts/job-workers",
+        "components/concepts/execution-listeners",
+        "components/concepts/process-instance-creation",
+        "components/concepts/messages",
+        "components/concepts/signals",
+        "components/concepts/incidents",
+        "components/concepts/variables",
+        "components/concepts/expressions",
+        "components/concepts/workflow-patterns",
+        "components/concepts/process-instance-modification",
+        "components/concepts/process-instance-migration",
+        "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
+        "components/concepts/outbound-connectors-job-workers",
+        "components/concepts/backups",
+        "components/concepts/resource-deletion",
+        "components/concepts/resource-authorizations",
+        {
+          "Access control": [
+            "components/concepts/access-control/user-groups",
+            "components/concepts/access-control/user-task-access-restrictions",
+          ],
+        },
+      ],
+    },
+    {
+      "Orchestration cluster": {
+        Connectors: [
+          "components/connectors/introduction-to-connectors",
+          "components/connectors/connector-types",
+          {
+            "Use Connectors": [
+              "components/connectors/use-connectors/index",
+              "components/connectors/use-connectors/inbound",
+              "components/connectors/use-connectors/outbound",
+            ],
+          },
+          {
+            "Building custom Connectors": [
+              "components/connectors/custom-built-connectors/connector-sdk",
+              "components/connectors/custom-built-connectors/connector-templates",
+              "components/connectors/custom-built-connectors/connector-template-generator",
+            ],
+          },
+        ],
+        Zeebe: [
+          "components/zeebe/technical-concepts/technical-concepts-overview",
+          "components/zeebe/technical-concepts/architecture",
+          "components/zeebe/technical-concepts/clustering",
+          "components/zeebe/technical-concepts/partitions",
+          "components/zeebe/technical-concepts/internal-processing",
+          "components/zeebe/technical-concepts/process-lifecycles",
+          "components/zeebe/technical-concepts/protocols",
+        ],
+        Operate: ["components/operate/operate-introduction"],
+        Tasklist: ["components/tasklist/introduction-to-tasklist"],
+        Optimize: [
+          optimizeLink("What is Optimize?", "components/what-is-optimize/"),
+        ],
+      },
+      "Best practices": [
         "components/best-practices/best-practices-overview",
         {
           "Project management": [
