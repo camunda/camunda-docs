@@ -38,9 +38,8 @@ You can resume a paused cluster at any time, which typically takes five to ten m
 - Clusters tagged as `dev` (or untagged) auto-pause eight hours after the cluster is created or resumed from a paused state.
 - Clusters tagged as `test`, `stage`, or `prod` auto-pause if there is no cluster activity for 48 hours.
 - Cluster disk space is cleared when a trial cluster is paused.
-    - You will need to redeploy processes to the cluster once it is resumed from a paused state.
-    - Cluster configuration settings (for example, API Clients, Connector secrets, and IP allowlists) are saved so you can easily resume a cluster.
-
+  - You will need to redeploy processes to the cluster once it is resumed from a paused state.
+  - Cluster configuration settings (for example, API Clients, Connector secrets, and IP allowlists) are saved so you can easily resume a cluster.
 
 :::tip
 To prevent auto-pause, [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
