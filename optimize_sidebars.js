@@ -2563,6 +2563,10 @@ module.exports = {
                   "Red Hat OpenShift",
                   "self-managed/setup/deploy/openshift/redhat-openshift/"
                 ),
+                docsLink(
+                  "Dual-Region",
+                  "self-managed/setup/deploy/openshift/redhat-openshift-dual-region/"
+                ),
               ],
             },
 
