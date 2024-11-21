@@ -27,7 +27,7 @@ For general deployment pitfalls, visit the [deployment troubleshooting guide](..
 To have proper performance in Camunda 8, the persistent volumes attached to Zeebe should have around 1,000-3,000 IOPS. The `Premium SSD v2` volumes deliver a consistent baseline IOPS performance
 of 3,000 IOPS and is the recommended choice due to their cost-effectiveness.
 
-Older disk options at Azure like `Premium SSD` and `Standard SSD` scale their performance by increasing disk size, so you may end up with unused disk space and a higher monthly cost just to satisfy the base performance. While they are capable of temporarily increasing their performance, this may not be sufficient to your use case and may negatively impact your experience with Camunda 8.
+Older disk options at Azure like `Premium SSD` and `Standard SSD` scale their performance by increasing disk size, and may result in unused disk space and a higher monthly cost to satisfy the base performance requirements. While they are capable of temporarily increasing their performance, this may not be sufficient to your use case and may negatively impact your experience with Camunda 8.
 
 #### Example
 
@@ -37,7 +37,7 @@ Older disk options at Azure like `Premium SSD` and `Standard SSD` scale their pe
 | Standard SSD (E30) | 1,000         | 500 (1,000)                | $76.80          | $0.0768      |
 | Premium SSD v2     | 256           | 3,000                      | $20.74          | $0.081       |
 
-For an overview and pricing for your particular region, please conduct the [Azure pricing calculator](https://azure.microsoft.com/en-us/pricing/details/managed-disks).
+For an overview and pricing for your particular region, see the [Azure pricing calculator](https://azure.microsoft.com/en-us/pricing/details/managed-disks).
 
 ### Zeebe Ingress
 
