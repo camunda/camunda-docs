@@ -172,7 +172,7 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job) {
 
 You can also control auto-completion in your configuration.
 
-You can do this globally:
+**Globally:**
 
 ```yaml
 camunda:
@@ -182,7 +182,7 @@ camunda:
         auto-complete: false
 ```
 
-You can do this per worker:
+**Per worker:**
 
 ```yaml
 camunda:
