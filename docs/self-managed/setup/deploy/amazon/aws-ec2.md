@@ -4,7 +4,19 @@ title: "Amazon EC2"
 description: "Learn how to install Camunda 8 on AWS EC2 instances."
 ---
 
-This guide provides a detailed walkthrough for installing the Camunda 8 monorepo architecture on AWS EC2 instances. It focuses on managed services by AWS and their cloud offering. Finally, you will verify that the connection to your Self-Managed Camunda 8 environment is working.
+This guide provides a detailed walkthrough for installing the Camunda 8 single JAR on AWS EC2 instances. It focuses on managed services by AWS and their cloud offering. Finally, you will verify that the connection to your Self-Managed Camunda 8 environment is working.
+
+## Disclaimer
+
+:::caution
+This guide is not limited to AWS but is built around the available tools and services that AWS offers. The scripts and ideas behind it can easily be adjusted for any other cloud provider and use case.
+:::
+
+:::caution
+Following this guide will incur costs on your Cloud provider account, namely for the EC2 instances, and OpenSearch. More information can be found on AWS and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
+:::
+
+<!-- TODO: add calculator specific for this setup -->
 
 ## Architecture
 
@@ -74,6 +86,10 @@ git clone https://github.com/camunda/camunda-deployment-references.git
 
 ### Infrastructure
 
+:::note
+While the below Terraform related infrastructure could be consumed as a module, our goal is to provide an easy to use example implementation that's flexible to extend to your own needs without the potential limitations of a module. Therefore, we recommend not to use it as a module as we are not guaranteeing compatibility.
+:::
+
 1. Go to directory
 
 ```
@@ -121,6 +137,20 @@ Ensure to have exported an environment variable with your desired region `AWS_RE
 Do not store sensitive information (credentials) in your Terraform files.
 :::
 
+Besides the importance of the mentioned authentication above, you will need to add the provider to the Terraform files. It's a technical limitation on our side as we're using the same files for testing and Terraform does not allow to define the provider twice.
+
+Thus, you will need to add the following to the `config.tf`:
+
+```hcl
+provider "aws" {}
+```
+
+E.g. can be done via a simple `curl` or manually:
+
+```shell
+echo 'provider "aws" {}' >> config.tf
+```
+
 4. Initialize Terraform
 
 Initialize the Terraform working directory. This step downloads the necessary provider plugins.
@@ -137,7 +167,7 @@ Apply the Terraform configuration to create the resources.
 terraform apply
 ```
 
-The execution takes roughly 1h15min of which the majority of time ~ 1h is solely the creation of a managed highly available OpenSearch cluster.
+The execution takes roughly 30 minutes of which the majority of time ~ 25 minutes is solely the creation of a managed highly available OpenSearch cluster.
 
 6. Access outputs
 
@@ -149,7 +179,7 @@ terraform output aws_opensearch_domain
 
 7. (optional) Connect to remote machines via Bastion host
 
-The EC2 instances are not public and have to be reached via the Bastion host.
+The EC2 instances are not public and have to be reached via a Bastion host.
 Alternatively one can utilize the [AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) to connect securely to a private VPC. This is not covered here as the setup requires a lot more manual user interaction.
 
 ```
@@ -227,3 +257,29 @@ TODO: We can give more guidance when 8.6 is more stable. The current state is th
 ### Verify connectivity to Camunda 8
 
 TODO: Ideally we have a single page to link to "dry principle" as we keep repeating ourselves.
+
+<!-- Optional stuff, just keeping it here for now -->
+
+## Deployment Model
+
+<!--
+Deployment Topology
+Describe whether the architecture is single-region, multi-region, or hybrid.
+Configuration Guidelines
+Best practices for configuring the environment for optimal performance and reliability.
+Automation and CI/CD Pipelines
+Suggested tooling and workflows for automated deployments and updates.
+-->
+
+## Scalability and Performance Considerations
+
+<!--
+Maybe we have some information on this in the docs
+
+Scalability Patterns
+Recommended patterns for scaling compute, storage, and networking resources.
+Load Balancing and Caching
+Best practices for distributing traffic and caching data to enhance performance.
+Performance Optimization Tips
+Tips for optimizing performance across different components.
+-->
