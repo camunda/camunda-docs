@@ -75,6 +75,10 @@ RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optim
 # Unversioned redirect: disabled blog, redirect to index page.
 RewriteRule ^blog/ / [R=301,L]
 
+# Product links that I don't think we can ever remove
+RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
+RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
+
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
