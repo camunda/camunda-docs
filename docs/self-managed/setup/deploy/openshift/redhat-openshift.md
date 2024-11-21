@@ -186,7 +186,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/zeebe-gateway-route.yml
    ```
 
-   The domain used by Zeebe Gateway gRPC is a subdomain of `$DOMAIN_NAME`.
+The domain used by the Zeebe Gateway for gRPC is different from the one used for the rest, namely `$DOMAIN_NAME`, to avoid any conflicts. It is also important to note that the port used for gRPC is `443`.
 
 1. **Operate:** mount the **Service Certificate Secret** to the Operate pod and configure the secure TLS connection. Here, only the `tls.crt` file is required.
 
@@ -228,7 +228,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 To implement these routes, first copy the contents of the provided manifest into a file named `routes.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/manifests/routes.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/manifests/routes.yml
 ```
 
 Once this file is created, you can apply the routes to the `camunda` namespace. Use the following command to apply the routes:
@@ -312,8 +312,6 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-
 
 Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and Connectors](/self-managed/setup/install.md#configuring-enterprise-components-and-connectors).
 
-<!-- TODO: Here document route usage vs ingress usage -->
-
 #### Fill your deployment with actual values
 
 Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
@@ -385,6 +383,8 @@ watch -n 5 '
 ## Verify connectivity to Camunda 8
 
 Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8)
+
+<!-- TODO: modify instructions to test with zbctl as the domain is slighty different -->
 
 ## Pitfalls to avoid
 
