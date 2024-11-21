@@ -10,8 +10,11 @@
 #
 # Redirects in this file are sorted in this order: 
 #  1. Universal rules that pertain to all content.
-#  2. Broad version redirects, for redirecting an entire version regardless of page.
+#     These redirects have no anticipated removal. 
+#  2. Broad version (or unversioned) redirects. 
+#     These redirects have no anticipated removal. 
 #  3. Specific content moves, in newest-to-oldest order of version in which they are introduced.
+#     These redirects will be removed when their introduced version is no longer supported.
 #  
 #  If you're adding a redirect for a specific page or section, 
 #   you likely want to do that in #3.
@@ -43,8 +46,11 @@ AddType text/plain      graphqls
 # Add diff mime type
 AddType text/plain      diff
 
+# workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
+RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg|graphqls|diff))/$ /$1 [R=301,L]
+
 ##################################################################################
-# 2. Broad version redirects
+# 2. Broad version (or unversioned) redirects
 ##################################################################################
 
 # For linking from our apps - redirect URLs with the current version to URLs with no version
@@ -65,6 +71,9 @@ RewriteRule ^docs/8.1/(.*)$ https://unsupported.docs.camunda.io/8.1/docs/$1 [R=3
 RewriteRule ^optimize/3.9.0/(.*)$ https://unsupported.docs.camunda.io/8.1/optimize/$1 [R=301,L]
 RewriteRule ^docs/8.2/(.*)$ https://unsupported.docs.camunda.io/8.2/docs/$1 [R=301,L]
 RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optimize/$1 [R=301,L]
+
+# Unversioned redirect: disabled blog, redirect to index page.
+RewriteRule ^blog/ / [R=301,L]
 
 ##################################################################################
 # 3. Specific content moves
