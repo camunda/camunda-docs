@@ -65,9 +65,7 @@ The included components are:
 The management cluster supports a 1:many relationship, meaning a single Console instance can manage multiple orchestration clusters, and the Web Modeler can deploy models to any available cluster.
 
 :::note
-
 Identity is listed twice because there are two distinct Identity components: one within the application layer and another for the management cluster. These components are disjoint from each other. For production setups, it is recommended to use an external identity provider. However, it is possible to use the management Identity as an OIDC provider for the application Identity.
-
 :::
 
 ### High Availability (HA)
@@ -122,4 +120,4 @@ For more information and guides, have a look at the specific reference for [Kube
   - Applicable for high availability but requires more planning ahead.
   - Best for teams with expertise in managing physical servers or virtual machines.
 
-For more information and guides, have a look at the specific reference for [Manual](#TODO).
+For more information and guides, have a look at the specific reference for [Manual](./../setup/deploy/local/manual.md).

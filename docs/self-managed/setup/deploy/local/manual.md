@@ -91,40 +91,12 @@ Some ports can be overwritten and are not definitive, you may conduct the [docum
 
 Our recommendation is to use an external managed offer as we will not go into detail on how to manage and maintain your database.
 
-## Deployment Model
-
-<!--
-Deployment Topology
-Describe whether the architecture is single-region, multi-region, or hybrid.
-Configuration Guidelines
-Best practices for configuring the environment for optimal performance and reliability.
-Automation and CI/CD Pipelines
-Suggested tooling and workflows for automated deployments and updates.
--->
-
-## Scalability and Performance Considerations
-
-<!--
-Maybe we have some information on this in the docs
-
-Scalability Patterns
-Recommended patterns for scaling compute, storage, and networking resources.
-Load Balancing and Caching
-Best practices for distributing traffic and caching data to enhance performance.
-Performance Optimization Tips
-Tips for optimizing performance across different components.
--->
-
-## Sizing Guidelines
-
 ## Running Camunda 8
 
 :::warning
-
 The following is a general approach on running Camunda 8 with the single JAR. It provides a basic framework that can be adapted to various specific use cases. This does not reflect a production ready setup.
 
 For a more detailed example and specific implementation, please refer to the [reference implementation](#reference-implementations).
-
 :::
 
 ### Download the artifacts
@@ -138,9 +110,7 @@ All Connector-related resources are available on [Maven Central](https://search.
 As outline in the architecture, Camunda 8 uses Elasticsearch as its underlying data store. Therefore you have to download and run Elasticsearch.
 
 :::note
-
 Please ensure to check compatibility of [supported environments](./../../../../reference/supported-environments.md) for your self-managed installation.
-
 :::
 
 To run Elasticsearch, execute the following commands:
