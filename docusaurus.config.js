@@ -271,7 +271,7 @@ module.exports = {
             },
             {
               label: "Contact",
-              to: "contact",
+              to: "docs/reference/contact",
             },
           ],
         },

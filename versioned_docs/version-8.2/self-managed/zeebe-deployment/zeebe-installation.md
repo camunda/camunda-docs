@@ -24,4 +24,4 @@ New to BPMN and want to learn more before moving forward? [Visit our Get Started
 
 ## Additional resources
 
-If you have questions or feedback, we encourage you to visit the [GitHub issue tracker](https://github.com/camunda/camunda/issues) and [contact us](/contact).
+If you have questions or feedback, we encourage you to visit the [GitHub issue tracker](https://github.com/camunda/camunda/issues) and [contact us](/reference/contact.md).

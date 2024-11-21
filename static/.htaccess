@@ -14,6 +14,9 @@ RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 # ----------------------
 # None here yet, but please place them here when you have them.
 
+# Move contact page
+RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
+
 # Remove Connector update guides entirely
 RewriteRule ^docs/components/connectors/custom-built-connectors/update-guide/(.*)$ /docs/components/connectors/custom-built-connectors/connector-sdk/ [R=301,L]
 
