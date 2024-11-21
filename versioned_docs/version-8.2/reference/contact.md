@@ -27,7 +27,7 @@ There are a few different channels you can reach us based on your needs:
 
 - **Feedback and support** can be submitted or requested via JIRA by following our [Enterprise support process](https://camunda.com/services/enterprise-support-guide/). All users can also find feedback and support options in the Help Center or [Camunda community forum](https://forum.camunda.io/).
 
-- For sales inquiries, information about Camunda 8 performance and benchmarking, or anything not listed above, use our [Contact Us](/reference/contact.md) form.
+- For sales inquiries, information about Camunda 8 performance and benchmarking, or anything not listed above, use our [Contact Us](https://camunda.com/contact/) form.
 
 ## Locating Camunda 8 credentials
 
