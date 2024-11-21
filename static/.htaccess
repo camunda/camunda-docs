@@ -1,3 +1,31 @@
+# Welcome to the redirect party! 
+#  ____  ____  ____  __  ____  ____  ___  ____    ____   __   ____  ____  _  _  _   
+# (  _ \(  __)(    \(  )(  _ \(  __)/ __)(_  _)  (  _ \ / _\ (  _ \(_  _)( \/ )/ \  
+#  )   / ) _)  ) D ( )(  )   / ) _)( (__   )(     ) __//    \ )   /  )(   )  / \_/  
+# (__\_)(____)(____/(__)(__\_)(____)\___) (__)   (__)  \_/\_/(__\_) (__) (__/  (_)  
+#
+# Please read this guide before adding new redirects.
+#
+##################################################################################
+#
+# Redirects in this file are sorted in this order: 
+#  1. Universal rules that pertain to all content.
+#  2. Broad version redirects, for redirecting an entire version regardless of page.
+#  3. Specific content moves, in newest-to-oldest order of version in which they are introduced.
+#  
+#  If you're adding a redirect for a specific page or section, 
+#   you likely want to do that in #3.
+#  That means that you want to find the banner comment identifying that version,
+#    and add your redirect below that comment.
+# 
+# For help writing rules, see https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule.
+#
+################################################################################## 
+
+##################################################################################
+# 1. Universal rules
+##################################################################################
+
 # Redirect to https
 RewriteEngine on
 RewriteCond %{SERVER_PORT} !^443$
@@ -6,13 +34,43 @@ RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # Disable directory listing and multi views
 Options -Indexes -MultiViews
 
+# Add yaml mime type
+AddType text/vnd.yaml   yaml
+# Add bpmn mime type
+AddType text/xml        bpmn
+# Add graphql scheme mime type
+AddType text/plain      graphqls
+# Add diff mime type
+AddType text/plain      diff
+
+##################################################################################
+# 2. Broad version redirects
+##################################################################################
+
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.6/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
 
-# 8.7 content moves vvvv
-# ----------------------
-# None here yet, but please place them here when you have them.
+## Archived versions. Note that the URL is adjusted to staging in the publish-stage workflow.
+RewriteRule ^docs/0.25/(.*)$ https://unsupported.docs.camunda.io/0.25/docs/$1 [R=301,L]
+RewriteRule ^docs/0.26/(.*)$ https://unsupported.docs.camunda.io/0.26/docs/$1 [R=301,L]
+RewriteRule ^docs/1.0/(.*)$ https://unsupported.docs.camunda.io/1.0/docs/$1 [R=301,L]
+RewriteRule ^docs/1.1/(.*)$ https://unsupported.docs.camunda.io/1.1/docs/$1 [R=301,L]
+RewriteRule ^docs/1.2/(.*)$ https://unsupported.docs.camunda.io/1.2/docs/$1 [R=301,L]
+RewriteRule ^docs/1.3/(.*)$ https://unsupported.docs.camunda.io/1.3/docs/$1 [R=301,L]
+RewriteRule ^optimize/3.7.0/(.*)$ https://unsupported.docs.camunda.io/1.3/optimize/$1 [R=301,L]
+RewriteRule ^docs/8.0/(.*)$ https://unsupported.docs.camunda.io/8.0/docs/$1 [R=301,L]
+RewriteRule ^optimize/3.8.0/(.*)$ https://unsupported.docs.camunda.io/8.0/optimize/$1 [R=301,L]
+RewriteRule ^docs/8.1/(.*)$ https://unsupported.docs.camunda.io/8.1/docs/$1 [R=301,L]
+RewriteRule ^optimize/3.9.0/(.*)$ https://unsupported.docs.camunda.io/8.1/optimize/$1 [R=301,L]
+
+##################################################################################
+# 3. Specific content moves
+##################################################################################
+
+#---------------------------------------------------------------------------------
+#   8.7: content moves introduced prior to the release of version 8.7.
+#---------------------------------------------------------------------------------
 
 # Move contact page
 RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
@@ -37,8 +95,9 @@ RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/$1 [R=3
 
 # TODO at time of release: account for API spec moves in https://github.com/camunda/camunda-docs/pull/4534 (there are many)
 
-# 8.6 content moves vvvv
-# ----------------------
+#---------------------------------------------------------------------------------
+#   8.6: content moves introduced prior to the release of version 8.6.
+#---------------------------------------------------------------------------------
 
 # Move Go and CLI client to community section
 RewriteRule ^docs/apis-tools/cli-client/(.*)$ /docs/next/apis-tools/community-clients/cli-client/$1 [R=301,L]
@@ -152,8 +211,10 @@ RewriteRule ^optimize/self-managed/optimize-deployment/migration-update/instruct
 # Updated web-modeler troubleshooting
 RewriteRule ^docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/?$ /docs/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/ [R=301,L]
 
-# 8.5 content moves vvvv
-# ----------------------
+#---------------------------------------------------------------------------------
+#   8.5: content moves introduced prior to the release of version 8.5.
+#---------------------------------------------------------------------------------
+
 RewriteRule ^docs/apis-tools/frontend-development/introduction-to-task-applications/?$ /docs/apis-tools/frontend-development/task-applications/introduction-to-task-applications$1 [R=301,L]
 RewriteRule ^docs/components/operate/userguide/updating-operate/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
 
@@ -236,7 +297,10 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/power-automate
 RewriteRule ^docs/8.4/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/8.4/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,L]
 RewriteRule ^docs/8.3/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/8.3/components/connectors/out-of-the-box-connectors/available-connectors-overview/ [R=301,L]
 
-# 8.4 content moves
+#---------------------------------------------------------------------------------
+#   8.4: content moves introduced prior to the release of version 8.4.
+#---------------------------------------------------------------------------------
+
 RewriteRule ^docs/apis-tools/web-modeler-api/?$ /docs/apis-tools/web-modeler-api/overview/ [R=301,L]
 RewriteRule ^optimize/apis-tools/optimize-api/optimize-api-authorization/(.*)$ /optimize/apis-tools/optimize-api/optimize-api-authentication/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/grpc/?$ /docs/apis-tools/zeebe-api/overview/ [R=301,L]
@@ -249,7 +313,10 @@ RewriteRule ^docs/components/operate/userguide/updating-operate-cloud/?$ /docs/s
 RewriteRule ^docs/reference/early-access/?$ /docs/reference/alpha-features/ [R=301,L]
 RewriteRule ^docs/8.3/reference/early-access/?$ /docs/8.3/reference/alpha-features/ [R=301,L]
 
-# 8.3 content moves
+#---------------------------------------------------------------------------------
+#   8.3: content moves introduced prior to the release of version 8.3.
+#---------------------------------------------------------------------------------
+
 RewriteRule ^docs/guides/update-guide/connectors/(.*)$ /docs/components/connectors/custom-built-connectors/update-guide/$1 [R=301,L]
 RewriteRule ^docs/guides/update-guide/(.*)$ /docs/self-managed/operational-guides/update-guide/$1 [R=301,L]
 RewriteRule ^docs/self-managed/backup-restore/(.*)$ /docs/self-managed/operational-guides/backup-restore/$1 [R=301,L]
@@ -363,24 +430,4 @@ RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/compon
 RewriteRule ^docs/next/components/modeler/web-modeler/start-instance/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
 
-## Archived versions. Note that the URL is adjusted to staging in the publish-stage workflow.
-RewriteRule ^docs/0.25/(.*)$ https://unsupported.docs.camunda.io/0.25/docs/$1 [R=301,L]
-RewriteRule ^docs/0.26/(.*)$ https://unsupported.docs.camunda.io/0.26/docs/$1 [R=301,L]
-RewriteRule ^docs/1.0/(.*)$ https://unsupported.docs.camunda.io/1.0/docs/$1 [R=301,L]
-RewriteRule ^docs/1.1/(.*)$ https://unsupported.docs.camunda.io/1.1/docs/$1 [R=301,L]
-RewriteRule ^docs/1.2/(.*)$ https://unsupported.docs.camunda.io/1.2/docs/$1 [R=301,L]
-RewriteRule ^docs/1.3/(.*)$ https://unsupported.docs.camunda.io/1.3/docs/$1 [R=301,L]
-RewriteRule ^optimize/3.7.0/(.*)$ https://unsupported.docs.camunda.io/1.3/optimize/$1 [R=301,L]
-RewriteRule ^docs/8.0/(.*)$ https://unsupported.docs.camunda.io/8.0/docs/$1 [R=301,L]
-RewriteRule ^optimize/3.8.0/(.*)$ https://unsupported.docs.camunda.io/8.0/optimize/$1 [R=301,L]
-RewriteRule ^docs/8.1/(.*)$ https://unsupported.docs.camunda.io/8.1/docs/$1 [R=301,L]
-RewriteRule ^optimize/3.9.0/(.*)$ https://unsupported.docs.camunda.io/8.1/optimize/$1 [R=301,L]
 
-# Add yaml mime type
-AddType text/vnd.yaml   yaml
-# Add bpmn mime type
-AddType text/xml        bpmn
-# Add graphql scheme mime type
-AddType text/plain      graphqls
-# Add diff mime type
-AddType text/plain      diff
