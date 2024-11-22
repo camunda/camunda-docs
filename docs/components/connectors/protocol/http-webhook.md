@@ -310,8 +310,7 @@ the Connector.
 
 #### Use the request
 
-A response expression can be used to return data after the webhook has been invoked. You can use FEEL to return the request body, headers, and the HTTP status to the client invoking
-the Webhook Connector endpoint.
+You can use a response expression to return data after the webhook has been invoked. You can use FEEL to return the request body, headers, and the HTTP status to the client invoking the Webhook Connector endpoint.
 
 For example, given a webhook request with the payload body:
 
@@ -322,7 +321,7 @@ For example, given a webhook request with the payload body:
 }
 ```
 
-You can return `myValue1` in a new key `myCustomKey` with a response body expression that may look like this:
+You can return `myValue1` in a new key `myCustomKey` with a response body expression such as:
 
 ```json
 ={
@@ -330,7 +329,7 @@ You can return `myValue1` in a new key `myCustomKey` with a response body expres
 }
 ```
 
-The default HTTP status code is `200`. You can change it by providing a `statusCode` key in your expression:
+The default HTTP status code is `200`. You can change it by including a `statusCode` key in your expression:
 
 ```json
 ={
@@ -339,7 +338,7 @@ The default HTTP status code is `200`. You can change it by providing a `statusC
 }
 ```
 
-Headers are also supported by using the `headers` key in the response expression:
+Headers are also supported, using the `headers` key in the response expression:
 
 ```json
 ={
@@ -356,15 +355,14 @@ When working with `request` data, use the following references to access data:
 
 You can also use FEEL expressions to modify the data you return.
 
-#### Use the correlation object
+#### Use the `correlation` object
 
-When using the Webhook Connector with a start event that correlates a message, you can access the correlation object in the response expression.
+When using the Webhook Connector with a start event that correlates a message, you can access the `correlation` object in the response expression.
 In addition to the `request` object you have access to the `correlation` result.
 
 The data available via the `correlation` object depends on the type of BPMN element you are using the Webhook Connector with.
 
-A start event with a message definition uses message publishing internally to correlate an incoming
-request with Zeebe. A successful correlation will therefore lead to a published message and the `correlation` object will contain the following properties:
+A start event with a message definition uses message publishing internally to correlate an incoming request with Zeebe. A successful correlation will therefore lead to a published message and the `correlation` object will contain the following properties:
 
 ```json
 {
@@ -385,9 +383,9 @@ newly create process instance key when accessing the `correlation` object:
 }
 ```
 
-#### Use the created documents
+#### Use the `documents` object
 
-You can access created documents in both the **response expression** and the **result expression**.
+You can access created documents in both the response expression and the result expression.
 
 The `documents` object contains the references for created documents.
 
@@ -402,7 +400,7 @@ The `documents` object contains the references for created documents.
 }
 ```
 
-If the `documents` list is not empty, each document item is returned in the following format (example values provided).
+If the `documents` list is not empty, document items are returned in the following format (example values provided):
 
 ```json
 {
