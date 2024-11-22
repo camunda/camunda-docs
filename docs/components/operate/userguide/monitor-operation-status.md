@@ -14,7 +14,7 @@ First, go to the processes view in Operate by clicking **Processes** in the top 
 If you don't have any operations, the operations panel will show "No operations have been created yet."
 :::
 
-Select an operation from the list by clicking on the operation id. Notice that the operation is set as a filter:
+Select an operation from the list by clicking on the operation ID. Notice that the operation is set as a filter:
 
 ![operate-view-process-filters](./img/monitor-operation-state/expanded-operations-panel.png)
 

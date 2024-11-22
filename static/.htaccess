@@ -72,8 +72,20 @@ RewriteRule ^optimize/3.9.0/(.*)$ https://unsupported.docs.camunda.io/8.1/optimi
 RewriteRule ^docs/8.2/(.*)$ https://unsupported.docs.camunda.io/8.2/docs/$1 [R=301,L]
 RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optimize/$1 [R=301,L]
 
-# Unversioned redirect: disabled blog, redirect to index page.
+# Timeless classics. 
+# rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
+## index pages are not served as /index/ anymore but /index.html
+RewriteRule ^(.*)/index/$ /$1 [R=301,L]
+## tags do not exist anymore, redirect to main page
+RewriteRule ^(.*)/tags/$ / [R=301,L]
+## duplicate sections at the end where removed
+RewriteRule ^(.*)/(.+)/\2/?$ /$1/$2 [R=301,L]
+# disabled blog, redirect to index page.
 RewriteRule ^blog/ / [R=301,L]
+
+# Product links that I don't think we can ever remove
+RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
+RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
 
 ##################################################################################
 # 3. Specific content moves

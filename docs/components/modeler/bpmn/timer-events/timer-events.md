@@ -12,7 +12,7 @@ Timer events are events triggered by a defined timer.
 
 A process can have one or more timer start events (besides other types of start events). Each of the timer events must have either a time date or time cycle definition.
 
-When a process is deployed, it schedules a timer for each timer start event. Scheduled timers of the previous version of the process (based on the BPMN process id) are canceled.
+When a process is deployed, it schedules a timer for each timer start event. Scheduled timers of the previous version of the process (based on the BPMN process ID) are canceled.
 
 When a timer is triggered, a new process instance is created and the corresponding timer start event is activated.
 
