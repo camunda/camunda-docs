@@ -387,14 +387,11 @@ newly create process instance key when accessing the `correlation` object:
 
 #### Use the created documents
 
-:::note
-When sending a Multipart request, the Webhook Connector will automatically store the request parts in the configured document store.
-:::
+You can access created documents in both the **response expression** and the **result expression**.
 
-You can access the created documents both in the **response expression** and the **result expression**.<br/>
-The `documents` object contains the created documents references.
+The `documents` object contains the references for created documents.
 
-Here is a response expression example:
+**Example response expression**
 
 ```json
 {
@@ -405,7 +402,7 @@ Here is a response expression example:
 }
 ```
 
-`documents` is a list that might be empty. Each item comes in the form (example values):
+If the `documents` list is not empty, each document item is returned in the following format (example values provided).
 
 ```json
 {
@@ -420,3 +417,7 @@ Here is a response expression example:
   }
 }
 ```
+
+:::note
+Request parts are automatically stored in the configured document store when sending a multipart request.
+:::
