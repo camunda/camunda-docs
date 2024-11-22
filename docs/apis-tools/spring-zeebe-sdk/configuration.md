@@ -181,6 +181,7 @@ camunda:
       defaults:
         auto-complete: false
 ```
+
 **Per worker:**
 ```yaml
 camunda:
