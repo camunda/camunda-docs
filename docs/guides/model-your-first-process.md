@@ -21,7 +21,7 @@ In Camunda 8, you have two options to design and deploy a process, but for the p
 1. From Modeler, click **New project**.
 2. Name your project and select **Create new > BPMN diagram**.
    ![blank project create bpmn diagram](./img/blank-project.png)
-3. Give your model a descriptive name, and then give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen.
+3. Give your model a descriptive name, and then give your model a descriptive ID within the **General** tab inside the properties panel on the right side of the screen.
 4. Create a task by dragging the rectangular task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task.
 5. Name the task by double-clicking the task or using the properties panel.
 6. Create an end event by dragging the end event icon from the palette, or by clicking the existing start event and clicking the end event icon.

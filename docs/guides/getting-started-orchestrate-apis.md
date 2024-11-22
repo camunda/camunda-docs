@@ -33,7 +33,7 @@ To use a **REST Connector** in your process, follow the steps below:
 
 1. Create a BPMN diagram. To do this, click **New project** within Modeler.
 2. Name your project and select **Create new > BPMN diagram**.
-3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use `API Orchestration Tutorial` for the name and `api-orchestration-tutorial` for the id.
+3. Give your model a descriptive name and ID. On the right side of the page, expand the **General** section of the properties panel to find the name and ID fields. For this guide, we'll use `API Orchestration Tutorial` for the name and `api-orchestration-tutorial` for the ID.
 4. Use Web Modeler to design a BPMN flow with a Connector. Create a Connector by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
 5. Change the task type by clicking the wrench icon and select **REST Outbound Connector** in the **Connectors** section. Alternatively, you can directly choose a **REST Outbound Connector** by using the context pad.
 
