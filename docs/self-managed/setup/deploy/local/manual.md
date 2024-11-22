@@ -29,21 +29,56 @@ Before you begin with the self-managed single JAR setup, please consider the com
 
 - The focus is on the orchestration cluster. This includes the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe. AS well as the Connectors runtime.
 - General guidance and examples are with focus on **unix** users but can be adapted by Windows users with the use of e.g. [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
-
-## Target User
-
-<!-- Maybe talk about target users, e.g. facing more mid-size companies for a more sophisticated solution Kubernetes -->
+- The `Optimize importer` is still based on the old architecture and is not suitable for high availability and needs to only run once.
 
 ## Architecture
 
-<!-- TODO: include picture when I get access to the draw.io stuff from Hamza. Afterwards describe it
--->
+<!-- TODO: include picture when I get access to the draw.io stuff from Hamza. Afterwards describe it -->
+
+<!-- Pictures are as mentioned for now just placeholders --->
+
+![Single JAR](./img/placeholder-manual-single.drawio.png)
+
+The above depiction showcases a simple use case of a single machine with a single Camunda deployment of the single JAR.
 
 The single jar and manual way of deploying Camunda can be used for either simple architectures or high availability setups. Be aware that maintaining such setups is a lot more work compared to a solution like Kubernetes.
 
+Compared to the generalized architecture depicted in the [reference architecture](#TODO), the `Optimize importer` can be enabled as part of the single JAR.
+
+:::caution
+When scaling from a single machine to multiple machine, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
+:::
+
+### High availability
+
+![HA JAR](./img/placeholder-manual-ha.drawio.png)
+
+The above depiction showcases a minimum of three machines for a high availability setup. Two machines would be too little for high availability as no master can be elected in case of a machine failure. Consider having a read through the [clustering chapter](./../../../../components/zeebe/technical-concepts/clustering.md) to learn more about the raft protocol.
+
 ### Components
 
-<!-- Components and how they interact, could be just a subpart of the Architecture -->
+The orchestration core is packaged as a single JAR file and includes the following components:
+
+- **Zeebe**
+- **Operate**
+- **Tasklist**
+- **Optimize**
+- **Identity**
+
+The core facilitates:
+
+1. **gRPC communication**: For client workers.
+2. **HTTP endpoints**: Used by the REST API and Web UI.
+
+Both types of endpoints can be routed through a load balancer to maintain availability, ensuring that the system remains accessible even if a machine becomes unavailable. While using a load balancer is optional, it is recommended for enhanced availability and security. Alternatively, you can expose static machines, ports, and IPs directly. However, direct exposure is generally discouraged due to security concerns.
+
+Connectors expose additional HTTP endpoints for handling incoming webhooks, which can also be routed through the same http load balancer.
+
+The orchestration components rely on **Elasticsearch** or **OpenSearch** as their data store.
+
+Components within the orchestration core communicate seamlessly, particularly:
+
+- **Zeebe brokers** exchange data over gRPC endpoints for efficient inter-broker communication.
 
 ## Requirements
 
@@ -257,4 +292,4 @@ A local setup of Web Modeler in Camunda 8 is not yet supported out-of-the-box, u
 
 Designed and tested for default setups with the minimum required sizing in mind while supporting high availability.
 
-- [AWS EC2](#TODO)
+- [AWS EC2](./../amazon/aws-ec2.md)

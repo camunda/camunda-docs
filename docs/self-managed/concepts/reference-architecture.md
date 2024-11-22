@@ -33,6 +33,8 @@ We recognize that deviations from the reference architecture are unavoidable. Ho
 
 <!-- TODO: include overview, Hamza had good pictures on this topic -->
 
+![Camunda Architecture](./img/placeholder.png)
+
 ### Orchestration Cluster vs Management Cluster
 
 When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and a management cluster. Both play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
@@ -67,6 +69,19 @@ The management cluster supports a 1:many relationship, meaning a single Console 
 :::note
 Identity is listed twice because there are two distinct Identity components: one within the application layer and another for the management cluster. These components are disjoint from each other. For production setups, it is recommended to use an external identity provider. However, it is possible to use the management Identity as an OIDC provider for the application Identity.
 :::
+
+### Databases
+
+Databases are meant to be supplied from the outside, rather than being bundled with Camunda. This approach offers several advantages:
+
+- **Flexibility**: Allows you to choose the database technology that best fits your needs and existing infrastructure while choosing one of the [supported environments](./../../reference/supported-environments.md#component-requirements).
+- **Scalability**: External databases can be scaled independently of the Camunda components, providing better performance and resource management.
+- **Maintenance**: Simplifies the maintenance and upgrade processes, as database management can be handled separately.
+- **Compliance**: Ensures that you can adhere to specific data governance and compliance requirements.
+
+While some guides go into detail on how to deploy those along Camunda, the recommendation is to maintain this outside of Camunda.
+
+By decoupling databases from Camunda, you can achieve greater control and customization over your data storage and management strategies.
 
 ### High Availability (HA)
 

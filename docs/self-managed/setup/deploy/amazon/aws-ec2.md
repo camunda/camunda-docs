@@ -260,20 +260,18 @@ TODO: Ideally we have a single page to link to "dry principle" as we keep repeat
 
 <!-- Optional stuff, just keeping it here for now -->
 
+<!--
 ## Deployment Model
 
-<!--
 Deployment Topology
 Describe whether the architecture is single-region, multi-region, or hybrid.
 Configuration Guidelines
 Best practices for configuring the environment for optimal performance and reliability.
 Automation and CI/CD Pipelines
 Suggested tooling and workflows for automated deployments and updates.
--->
 
 ## Scalability and Performance Considerations
 
-<!--
 Maybe we have some information on this in the docs
 
 Scalability Patterns
