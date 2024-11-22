@@ -105,7 +105,7 @@ The platform and tools are usable in your environment right away, with full publ
 
 ## Next steps
 
-- To request information about Camunda 8 performance and benchmarking, see our [Contact](/contact/) page.
+- To request information about Camunda 8 performance and benchmarking, see our [Contact](/reference/contact.md) page.
 - [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
 - [Create a Camunda 8 account](/guides/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)
