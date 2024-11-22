@@ -10,6 +10,10 @@ Release date: TBD
 
 End of maintenance: TBD
 
+### Zeebe REST API removal
+
+The deprecated Zeebe REST API was removed. Customers who did not yet migrate can use [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+
 ### Southeast Asia now available for SaaS customers
 
 SaaS customers can now create orchestration clusters in the [Singapore (asia-southeast1) region](/reference/regions.md), ensuring lower latency and improved processing speed for organizations operating in southeast Asian countries.
