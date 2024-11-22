@@ -40,7 +40,7 @@ We recommend using Camunda Modeler's properties panel to edit technical identifi
 
 ![Properties Panel](naming-technically-relevant-ids-assets/camunda-modeler-properties-panel.png)
 
-We especially do not recommend editing identifiers in the XML directly, as it might accidently corrupt your BPMN file. You have to keep the identifiers in the section about the graphical layout (so called "DI" for diagram interchange) further down in sync with the execution semantics at the top of the XML.
+We especially do not recommend editing identifiers in the XML directly, as it might accidentally corrupt your BPMN file. You have to keep the identifiers in the section about the graphical layout (so called "DI" for diagram interchange) further down in sync with the execution semantics at the top of the XML.
 
 However, we include an XML example of all those identifiers mentioned for illustration:
 
@@ -89,4 +89,4 @@ If you have lots of process, case, and decision definitions with lots of IDs, co
 
 ## Using a Camunda Modeler plugin to generate meaningful ids
 
-You can use [this modeler plugin community extension](https://github.com/camunda-community-hub/camunda-modeler-plugin-rename-technical-ids) to automatically convert your ids to comply with our best practices. Of course, you could also use this as a basis to create your own modeler plugin to generate ids that follow your custom naming conventions. Or, you could implement a similar plugin to implement checks if all relavant ids follow your naming conventions.
+You can use [this modeler plugin community extension](https://github.com/camunda-community-hub/camunda-modeler-plugin-rename-technical-ids) to automatically convert your IDs to comply with our best practices. Of course, you could also use this as a basis to create your own modeler plugin to generate IDs that follow your custom naming conventions. Or, you could implement a similar plugin to implement checks if all relavant IDs follow your naming conventions.

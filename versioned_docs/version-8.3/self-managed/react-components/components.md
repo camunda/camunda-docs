@@ -15,6 +15,6 @@ Camunda 8 Self-Managed users may also use [Desktop Modeler](../../components/mod
 
 :::note
 
-To obtain or retrieve your Camunda 8 credentials for Enterprise licenses, visit the [contact page](/contact).
+To obtain or retrieve your Camunda 8 credentials for Enterprise licenses, visit the [contact page](/reference/contact.md).
 
 :::
