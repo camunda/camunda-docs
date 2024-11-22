@@ -14,7 +14,7 @@ When the created process instance is completed, the call activity is left and th
 
 ## Defining the called process
 
-A call activity must define the BPMN process id of the called process as `processId`.
+A call activity must define the BPMN process ID of the called process as `processId`.
 
 Usually, the `processId` is defined as a [static value](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `shipping-process`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "shipping-" + tenantId`). The expression is evaluated on activating the call activity and must result in a `string`.
 
