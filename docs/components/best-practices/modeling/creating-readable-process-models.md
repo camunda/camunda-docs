@@ -107,7 +107,7 @@ Make your models easier to understand by modeling _explicitly_, which most often
 
 #### Using gateways instead of conditional flows
 
-Model splitting the process flow by always using _gateway symbols_ like <img src="/img/bpmn-elements/inclusive-gateway.svg" className="inline-image" /> instead of conditional flows <img src="/img/bpmn-elements/conditional-flow.svg" className="inline-image" />.
+Model splitting the process flow by always using _gateway symbols_ <img src="/img/bpmn-elements/inclusive-gateway.svg" className="inline-image" /> instead of conditional flows <img src="/img/bpmn-elements/conditional-flow.svg" className="inline-image" />.
 
 <div bpmn="best-practices/creating-readable-process-models-assets/explicit-gateways-instead-of-conditional-flows.bpmn" callouts="inclusive_gateway" />
 
