@@ -149,6 +149,10 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
 
+### Management cluster
+
+The management cluster includes Console, Identity, and Web Modeler, existing alongside the orchestration cluster.
+
 ### Manual task
 
 A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
@@ -162,6 +166,10 @@ Manual tasks are part of [human task orchestration](/guides/getting-started-orch
 A message contains information to be delivered to interested parties during execution of a process instance. Messages can be published via Kafka or Zeebe’s internal messaging system. Messages are associated with timestamp and other constraints such as time-to-live (TTL).
 
 - [Messages](/components/concepts/messages.md)
+
+### Orchestration cluster
+
+An orchestration cluster includes Zeebe, Operate, Tasklist, and Optimize, existing alongside the management cluster.
 
 ### Outbound Connector
 
