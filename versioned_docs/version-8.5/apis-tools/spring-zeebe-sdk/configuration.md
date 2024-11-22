@@ -179,6 +179,7 @@ camunda:
 ```
 
 **Per worker:**
+
 ```yaml
 camunda:
   client:
