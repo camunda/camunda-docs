@@ -935,87 +935,66 @@ module.exports = {
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
-      type: "category",
-      label: "Get started",
-      items: [
-        "self-managed/setup/deploy/local/c8run",
-        "self-managed/setup/deploy/local/local-kubernetes-cluster",
-        "self-managed/setup/deploy/local/docker-compose",
-        "self-managed/setup/deploy/local/manual",
-      ],
-    },
-    {
-      "Production setup": [
+      Install: [
         "self-managed/setup/overview",
         {
+          type: "doc",
+          label: "Helm",
+          id: "self-managed/setup/install",
+        },
+        "self-managed/setup/deploy/other/docker",
+        "self-managed/setup/deploy/local/manual",
+        {
           type: "category",
-          label: "Install",
+          label: "Local",
           items: [
-            "self-managed/setup/install",
-            "self-managed/setup/deploy/other/docker",
+            "self-managed/setup/deploy/local/c8run",
+            "self-managed/setup/deploy/local/local-kubernetes-cluster",
+            "self-managed/setup/deploy/local/docker-compose",
             "self-managed/setup/deploy/local/manual",
           ],
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Deploy",
+      items: [
         {
-          type: "category",
-          label: "Deploy",
-          items: [
+          "Amazon (AWS)": [
             {
-              "Amazon (AWS)": [
-                {
-                  type: "category",
-                  label: "Amazon EKS",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
-                  },
-                  items: [
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
-                    "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
-                    "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
-                    "self-managed/setup/deploy/amazon/amazon-eks/irsa",
-                  ],
-                },
-                "self-managed/setup/deploy/amazon/aws-marketplace",
-              ],
-              "Microsoft (Azure)": [
-                "self-managed/setup/deploy/azure/microsoft-aks",
-              ],
-              "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
-              "Red Hat (OpenShift)": [
-                "self-managed/setup/deploy/openshift/redhat-openshift",
+              type: "category",
+              label: "Amazon EKS",
+              link: {
+                type: "doc",
+                id: "self-managed/setup/deploy/amazon/amazon-eks/amazon-eks",
+              },
+              items: [
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+                "self-managed/setup/deploy/amazon/amazon-eks/irsa",
               ],
             },
+            "self-managed/setup/deploy/amazon/aws-marketplace",
+          ],
+          "Microsoft (Azure)": [
+            "self-managed/setup/deploy/azure/microsoft-aks",
+          ],
+          "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
+          "Red Hat (OpenShift)": [
+            "self-managed/setup/deploy/openshift/redhat-openshift",
           ],
         },
-        {
-          type: "category",
-          label: "Configure",
-          link: {
-            type: "doc",
-            id: "self-managed/setup/guides/guides",
-          },
-          items: [
-            "self-managed/setup/guides/accessing-components-without-ingress",
-            "self-managed/setup/guides/ingress-setup",
-            "self-managed/setup/guides/using-existing-keycloak",
-            "self-managed/setup/guides/using-existing-elasticsearch",
-            "self-managed/setup/guides/using-existing-opensearch",
-            "self-managed/setup/guides/configure-db-custom-headers",
-            "self-managed/setup/guides/connect-to-an-oidc-provider",
-            "self-managed/setup/guides/air-gapped-installation",
-            "self-managed/setup/guides/running-custom-connectors",
-            "self-managed/setup/guides/multi-namespace-deployment",
-            "self-managed/setup/guides/installing-payment-app-example",
-          ],
-        },
-        "self-managed/setup/upgrade",
       ],
-      "Operational guides": [
+    },
+    {
+      Upgrade: [
+        "self-managed/setup/upgrade",
         {
           type: "category",
-          label: "Update guide",
+          label: "Update by version",
           link: {
             type: "doc",
             id: "self-managed/operational-guides/update-guide/introduction",
@@ -1038,6 +1017,31 @@ module.exports = {
             },
           ],
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Configure",
+      link: {
+        type: "doc",
+        id: "self-managed/setup/guides/guides",
+      },
+      items: [
+        "self-managed/setup/guides/accessing-components-without-ingress",
+        "self-managed/setup/guides/ingress-setup",
+        "self-managed/setup/guides/using-existing-keycloak",
+        "self-managed/setup/guides/using-existing-elasticsearch",
+        "self-managed/setup/guides/using-existing-opensearch",
+        "self-managed/setup/guides/configure-db-custom-headers",
+        "self-managed/setup/guides/connect-to-an-oidc-provider",
+        "self-managed/setup/guides/air-gapped-installation",
+        "self-managed/setup/guides/running-custom-connectors",
+        "self-managed/setup/guides/multi-namespace-deployment",
+        "self-managed/setup/guides/installing-payment-app-example",
+      ],
+    },
+    {
+      "Operational guides": [
         "self-managed/operational-guides/configure-multi-tenancy",
         {
           type: "category",
