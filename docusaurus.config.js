@@ -194,6 +194,7 @@ module.exports = {
       logo: {
         alt: "Camunda 8 Docs",
         src: "img/black-C.png",
+        srcDark: "img/light-C.png",
       },
       items: [
         {
