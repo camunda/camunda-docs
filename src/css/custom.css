@@ -161,6 +161,7 @@ a {
 }
 [data-theme="dark"] .table-of-contents__link {
   text-decoration: none;
+  color: rgb(198, 198, 198);
 }
 [data-theme="dark"] .footer__link-item {
   text-decoration: none;
