@@ -812,7 +812,7 @@ module.exports = {
       ],
     },
     {
-      "Clients and SDKs": [
+      "Clients & SDKs": [
         {
           "Java client": [
             "apis-tools/java-client/index",
