@@ -4,10 +4,6 @@ title: "BPMN coverage"
 description: "List of BPMN symbols supported in Modelers"
 ---
 
-:::note
-`DataObject` and `DataStore`, like other BPMN standard IO mappings, are supported by Camunda for modeling purposes only.
-:::
-
 export const Highlight = ({children, color}) => (
 <span style={{ backgroundColor: color, borderRadius: '5px', color: '#fff', padding: '0.2rem', }}>
 {children}
