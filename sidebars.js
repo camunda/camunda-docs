@@ -812,7 +812,7 @@ module.exports = {
       ],
     },
     {
-      Clients: [
+      "Clients and SDKs": [
         {
           "Java client": [
             "apis-tools/java-client/index",
@@ -861,15 +861,15 @@ module.exports = {
           ],
         },
         "apis-tools/build-your-own-client",
-      ],
-    },
-    {
-      SDKs: [
-        "apis-tools/node-js-sdk",
         {
-          "Spring Zeebe": [
-            "apis-tools/spring-zeebe-sdk/getting-started",
-            "apis-tools/spring-zeebe-sdk/configuration",
+          SDKs: [
+            "apis-tools/node-js-sdk",
+            {
+              "Spring Zeebe": [
+                "apis-tools/spring-zeebe-sdk/getting-started",
+                "apis-tools/spring-zeebe-sdk/configuration",
+              ],
+            },
           ],
         },
       ],
