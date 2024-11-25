@@ -141,7 +141,7 @@ import CompensationSvg from './assets/bpmn-symbols/compensation.svg'
 ## Data
 
 :::note
-`DataObject` and `DataStore` are supported by Camunda for modeling purposes only. Camunda does not support any additional data features the BPMN standard defines.
+`DataObject` and `DataStore`, like other BPMN standard IO mappings, are supported by Camunda for modeling purposes only.
 :::
 
 import DataObjectSvg from './assets/bpmn-symbols/data-object.svg'
