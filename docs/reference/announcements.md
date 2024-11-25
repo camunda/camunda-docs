@@ -12,7 +12,7 @@ End of maintenance: TBD
 
 ### Zeebe REST API removal
 
-The deprecated Zeebe REST API was removed. Customers who did not yet migrate can use [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+The deprecated Zeebe REST API was removed. Customers who did not yet migrate can use the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
 ### Southeast Asia now available for SaaS customers
 
