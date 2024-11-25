@@ -12,7 +12,7 @@ Message events are events which reference a message; they are used to wait until
 
 A process can have one or more message start events (besides other types of start events). Each of the message events must have a unique message name.
 
-When a process is deployed, it creates a message subscription for each message start event. Message subscriptions of the previous version of the process (based on the BPMN process id) are closed.
+When a process is deployed, it creates a message subscription for each message start event. Message subscriptions of the previous version of the process (based on the BPMN process ID) are closed.
 
 ### Message correlation
 

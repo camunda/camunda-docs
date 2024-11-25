@@ -46,14 +46,17 @@ Compatibility is confirmed for [Camunda Helm chart releases version 11 and above
 You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks). Below is a quick reference for common usage options:
 
 ```bash
-Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p COMPONENTS_PG] [-l COMPONENTS_OS] [-s]
+Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p] [-l] [-s]
 Options:
   -h                              Display this help message
-  -n NAMESPACE                    Specify the namespace to use
-  -e EXCLUDE_COMPONENTS           Comma-separated list of components to exclude from the check (reference of the component is the root key used in the chart)
-  -p COMPONENTS_PG                Comma-separated list of components to check IRSA for PostgreSQL (overrides default list)
-  -l COMPONENTS_OS                Comma-separated list of components to check IRSA for OpenSearch (overrides default list)
-  -s                              Disable pod spawn for IRSA and network flow verification
+  -n NAMESPACE                    Specify the namespace to use (required)
+  -e EXCLUDE_COMPONENTS           Comma-separated list of Components to exclude from the check (reference of the component is the root key used in the chart)
+  -p                              Comma-separated list of Components to check IRSA for PostgreSQL (overrides default list: identityKeycloak,identity,webModeler)
+  -l                              Comma-separated list of Components to check IRSA for OpenSearch (overrides default list: zeebe,operate,tasklist,optimize)
+  -s                              Disable pod spawn for IRSA and connectivity verification.
+                                  By default, the script spawns jobs in the specified namespace to perform
+                                  IRSA checks and network connectivity tests. These jobs use the amazonlinux:latest
+                                  image and scan with nmap to verify connectivity.
 ```
 
 **Example Command:**

@@ -4,11 +4,11 @@ title: "Multi-namespace deployment"
 description: "Deploy Camunda 8 Self-Managed across several namespaces for better resource management and environment separation."
 ---
 
-Camunda 8 Self-Managed offers flexible deployment options that allow it to span multiple namespaces. This setup consists of a management cluster, which includes the Console, Identity, and Web Modeler components, along with several automation clusters (including Zeebe, Operate, Tasklist, and Optimize).
+Camunda 8 Self-Managed offers flexible deployment options that allow it to span multiple namespaces. This setup consists of a management cluster, which includes the Console, Identity, and Web Modeler components, along with several orchestration clusters (including Zeebe, Operate, Tasklist, and Optimize).
 
 For this configuration, each namespace is set up independently through Helm, with deployments classified into two types: management and automation. Each type has a specific values file designed for its deployment requirements.
 
-Below, we illustrate multi-namespace Camunda deployment: one namespace will be dedicated to the management cluster, and the other two will be used for the automation cluster.
+Below, we illustrate multi-namespace Camunda deployment: one namespace will be dedicated to the management cluster, and the other two will be used for the orchestration cluster.
 
 ## Management deployment
 
@@ -63,7 +63,7 @@ helm install camunda camunda/camunda-platform \
 
 ## Team One deployment
 
-Let's create a Camunda automation cluster that can be owned and managed by Team One and will be deployed into namespace `camunda-team01`. This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the Management deployment:
+Let's create a Camunda orchestration cluster that can be owned and managed by Team One and will be deployed into namespace `camunda-team01`. This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the Management deployment:
 
 ```yaml
 # File: camunda-team01.yaml

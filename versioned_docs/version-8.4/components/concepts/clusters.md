@@ -56,7 +56,7 @@ The way this type of cluster works varies depending on if you are using it in th
 
 Enterprise plan users can purchase development clusters as part of their Enterprise subscription agreement. Deployment and execution of models (process instances, decision instances, and task users) are included at no extra cost for this type of cluster. Additionally, this type of cluster in the Enterprise plan follows the [standard data retention policy](/docs/components/concepts/data-retention.md) and does not auto-pause when not in use.
 
-Please [contact us](https://camunda.com/contact/) if you are an existing customer and would like to purchase a development cluster.
+Please [contact us](/reference/contact.md) if you are an existing customer and would like to purchase a development cluster.
 
 ### Development clusters in the Starter plan
 

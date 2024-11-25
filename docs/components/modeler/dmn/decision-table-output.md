@@ -27,9 +27,9 @@ XML element.
 
 ```
 
-## Output id
+## Output ID
 
-The output id is a unique identifier of the decision table output. It is used by Camunda to reference the
+The output ID is a unique identifier of the decision table output. It is used by Camunda to reference the
 output clause. Therefore, it is required. It is set as the `id` attribute of the `output` XML element.
 
 ```xml
@@ -75,7 +75,7 @@ a [dependent decision](decision-requirements-graph.md#required-decisions) nor in
 
 :::tip
 
-If the decision table has only one output then it is recommended that the [decision id](decision-table.md#decision-id)
+If the decision table has only one output then it is recommended that the [decision ID](decision-table.md#decision-id)
 is used as the output name.
 
 The decision result can be accessed in a [dependent decision](decision-requirements-graph.md#required-decisions) by its
