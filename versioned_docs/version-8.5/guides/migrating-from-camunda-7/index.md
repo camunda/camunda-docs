@@ -53,4 +53,4 @@ As described earlier in this guide, migration is an ongoing topic and this guide
 - Discuss workload migrations (operations)
 - Eventual consistency
 
-[Reach out to us](/contact/) to discuss your specific migration use case.
+[Reach out to us](/reference/contact.md) to discuss your specific migration use case.

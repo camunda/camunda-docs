@@ -32,7 +32,7 @@ To learn more about using alpha features, see [enabling alpha features](/compone
 :::note
 
 - Alpha features can also be included in a minor version (stable) release.
-- Although there is no maintenance service, customers can still provide feedback through designated support channels, depending on their SLAs. These channels include filing issues in the respective [GitHub repositories](https://github.com/camunda) and submitting questions and suggestions by [contacting us](/contact).
+- Although there is no maintenance service, customers can still provide feedback through designated support channels, depending on their SLAs. These channels include filing issues in the respective [GitHub repositories](https://github.com/camunda) and submitting questions and suggestions by [contacting us](/reference/contact.md).
 - Alpha releases can also have **limited availability**, such as features that are only available to enterprise customers.
 
 :::

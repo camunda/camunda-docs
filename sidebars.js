@@ -905,6 +905,7 @@ module.exports = {
         "reference/release-notes/850",
       ],
     },
+    "reference/contact",
     "reference/supported-environments",
     "reference/dependencies",
     "reference/camunda-help-center",

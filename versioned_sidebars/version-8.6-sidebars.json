@@ -1779,6 +1779,7 @@
       },
       "items": ["reference/release-notes/860", "reference/release-notes/850"]
     },
+    "reference/contact",
     "reference/supported-environments",
     "reference/dependencies",
     "reference/camunda-help-center",
