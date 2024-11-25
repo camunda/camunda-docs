@@ -1,7 +1,6 @@
-\*\*\*\*---
+---
 id: introduction
 title: Introduction
-
 ---
 
 These documents guide you through the process of updating your Camunda 8
