@@ -47,6 +47,10 @@ a {
   text-decoration: none;
 }
 
+[data-theme="dark"] .DocSearch-Button {
+  border: 1px solid #48484a;
+}
+
 [data-theme="dark"] .hero__subtitle {
   color: rgb(244, 244, 244);
 }
