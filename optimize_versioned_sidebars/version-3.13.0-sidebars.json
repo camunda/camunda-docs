@@ -2663,13 +2663,6 @@
           ]
         }
       ]
-    },
-    {
-      "Migration manuals": {
-        "type": "link",
-        "label": "Migrate to Zeebe user tasks",
-        "href": "/docs/8.5/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/"
-      }
     }
   ],
   "Self-Managed": [

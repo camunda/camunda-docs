@@ -3001,13 +3001,6 @@
           ]
         }
       ]
-    },
-    {
-      "Migration manuals": {
-        "type": "link",
-        "label": "Migrate to Zeebe user tasks",
-        "href": "/docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
-      }
     }
   ],
   "Self-Managed": [
