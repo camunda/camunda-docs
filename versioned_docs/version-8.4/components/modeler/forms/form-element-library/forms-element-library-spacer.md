@@ -6,7 +6,7 @@ description: Learn about this layout element to add vertical space between eleme
 
 A **spacer** element is used to create a defined amount of vertical space between two elements.
 
-![Form Spacer Symbol](/img/form-icons/form-spacer.svg)
+<img src="/img/form-icons/form-spacer.svg" alt="Form Spacer Symbol" />
 
 ## Configurable properties
 

@@ -60,7 +60,7 @@ This approach requires you to manually execute the update script. You can perfor
 
 - Open up a terminal, change to the root directory of your **new** Optimize version and run the following command: `./upgrade/upgrade.sh` on Linux or `./upgrade/upgrade.bat` on Windows. For OpenSearch installations, please make sure to set the environment variable `CAMUNDA_OPTIMIZE_DATABASE=opensearch` before executing the update script.
 - During the execution the executable will output a warning to ask you to back-up your database data. Type `yes` to confirm that you have backed up the data.
-- Feel free to [file a support case](https://docs.camunda.org/enterprise/support/) if any errors occur during the migration process.
+- Feel free to [file a support case](https://camunda.com/services/enterprise-support-guide/) if any errors occur during the migration process.
 - To get more verbose information about the update, you can adjust the logging level as it is described in the [configuration documentation](./../../configuration/logging.md).
 
 #### 3.2 Automatic update execution (Optimize >3.2.0)

@@ -14,7 +14,7 @@ module.exports = {
         "guides/getting-started-java-spring",
         "guides/model-your-first-process",
         {
-          "By use case": [
+          "Orchestration use cases": [
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices",
@@ -377,21 +377,6 @@ module.exports = {
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
             "components/connectors/custom-built-connectors/connector-template-generator",
-            {
-              "Update guide": [
-                "components/connectors/custom-built-connectors/update-guide/introduction",
-                "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
-                "components/connectors/custom-built-connectors/update-guide/090-to-0100",
-                "components/connectors/custom-built-connectors/update-guide/080-to-090",
-                "components/connectors/custom-built-connectors/update-guide/070-to-080",
-                "components/connectors/custom-built-connectors/update-guide/060-to-070",
-                "components/connectors/custom-built-connectors/update-guide/050-to-060",
-                "components/connectors/custom-built-connectors/update-guide/040-to-050",
-                "components/connectors/custom-built-connectors/update-guide/030-to-040",
-                "components/connectors/custom-built-connectors/update-guide/020-to-030",
-                "components/connectors/custom-built-connectors/update-guide/010-to-020",
-              ],
-            },
           ],
         },
       ],
@@ -919,8 +904,13 @@ module.exports = {
         type: "doc",
         id: "reference/release-notes/release-notes",
       },
-      items: ["reference/release-notes/860", "reference/release-notes/850"],
+      items: [
+        "reference/release-notes/870",
+        "reference/release-notes/860",
+        "reference/release-notes/850",
+      ],
     },
+    "reference/contact",
     "reference/supported-environments",
     "reference/dependencies",
     "reference/camunda-help-center",
@@ -1155,6 +1145,7 @@ module.exports = {
               },
               items: [
                 "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
+                "self-managed/zeebe-deployment/exporters/camunda-exporter",
                 "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                 "self-managed/zeebe-deployment/exporters/opensearch-exporter",
               ],

@@ -47,9 +47,9 @@ Therefore, if you are not using the [ingress-nginx controller](https://github.co
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via different methods. One such method is the [combined Ingress setup](self-managed/setup/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](self-managed/setup/guides/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
-For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured. If you want to use Camunda Identity with HTTP, use a [separate Ingress setup](self-managed/setup/guides/ingress-setup.md#separated-ingress-setup) (applications such as Operate, Optimize, etc, can still be accessed in a combined setup).
+For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
 :::note
 Due to limitations, the Identity `contextPath` approach is unavailable when using a browser in Incognito mode.
@@ -151,6 +151,12 @@ This script verifies connectivity to a Zeebe instance using HTTP/2 and gRPC prot
 ```
 
 Find more information on [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-process-application/kube/README.md#4-generating-an-m2m-token-for-our-application).
+
+### IRSA configuration check
+
+The AWS EKS IRSA configuration scripts are focused on verifying the correct setup of IAM Roles for Service Accounts (IRSA) within your Kubernetes deployment on AWS. These scripts ensure that your Kubernetes service accounts are correctly associated with IAM roles, allowing components like PostgreSQL, OpenSearch, and others in your deployment to securely interact with AWS resources.
+
+For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/setup/deploy/amazon/amazon-eks/irsa.md#irsa-check-script).
 
 ### Interpretation of the results
 

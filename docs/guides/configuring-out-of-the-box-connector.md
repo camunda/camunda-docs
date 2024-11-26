@@ -1,6 +1,6 @@
 ---
 id: configuring-out-of-the-box-connectors
-title: Configure an out-of-the-box Connector
+title: Integrate a Camunda Connector
 description: "Ready to use out of the box, Connectors help automate complex business processes by inserting them into BPMN diagrams."
 keywords: [connector, modeling, connectors, low-code, no-code]
 ---
@@ -39,7 +39,7 @@ Once logged in to your Camunda 8 account, take the following steps:
 1. From Modeler, click **New project > Create new > BPMN diagram**.
 2. Name your project by replacing the **New Project** text at the top of the page. In this example, we'll name ours `Expense process`.
 3. Select **Create new > BPMN diagram**.
-4. Give your model a descriptive name by replacing the **New BPMN Diagram** text at the top of the page. Then, give your model a descriptive id within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Submit expense` with an id of `submitting-expense`.
+4. Give your model a descriptive name by replacing the **New BPMN Diagram** text at the top of the page. Then, give your model a descriptive ID within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Submit expense` with an ID of `submitting-expense`.
 
 ## Build a BPMN diagram
 

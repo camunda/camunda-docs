@@ -152,6 +152,12 @@ This script verifies connectivity to a Zeebe instance using HTTP/2 and gRPC prot
 
 Find more information on [how to register your application on Identity](https://github.com/camunda-community-hub/camunda-8-examples/blob/main/payment-example-process-application/kube/README.md#4-generating-an-m2m-token-for-our-application).
 
+### IRSA configuration check
+
+The AWS EKS IRSA configuration scripts are focused on verifying the correct setup of IAM Roles for Service Accounts (IRSA) within your Kubernetes deployment on AWS. These scripts ensure that your Kubernetes service accounts are correctly associated with IAM roles, allowing components like PostgreSQL, OpenSearch, and others in your deployment to securely interact with AWS resources.
+
+For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/setup/deploy/amazon/amazon-eks/irsa.md#irsa-check-script).
+
 ### Interpretation of the results
 
 Each script produces an output indicating the status of individual checks, which can be either `[OK]`, which signals a healthy status, or `[FAIL]`, which signals an unhealthy status.
