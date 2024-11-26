@@ -134,6 +134,9 @@ a {
   text-decoration: underline;
   text-decoration-color: #78a9ff6b;
 }
+[data-theme="dark"] li a.osano-footer-link-docu {
+  text-decoration: none;
+}
 [data-theme="dark"] td a {
   text-decoration: underline;
   text-decoration-color: #78a9ff6b;
@@ -168,7 +171,14 @@ a {
   text-decoration: none;
   color: rgb(198, 198, 198);
 }
+[data-theme="dark"] .table-of-contents__link:hover {
+  text-decoration: none;
+  color: rgb(244, 244, 244);
+}
 [data-theme="dark"] .footer__link-item {
+  text-decoration: none;
+}
+[data-theme="dark"] li a.dropdown__link {
   text-decoration: none;
 }
 [data-theme="dark"]
