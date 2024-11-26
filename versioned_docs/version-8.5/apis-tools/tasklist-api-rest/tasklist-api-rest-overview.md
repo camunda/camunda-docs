@@ -6,7 +6,7 @@ description: "Build applications for human-centered processes by querying human 
 ---
 
 :::note
-Camunda introduced [Zeebe user tasks](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md) with `8.5` to build more advanced functionalities. If you use Zeebe user tasks with `8.5`, task management endpoints in the Tasklist API will not work.
+Camunda introduced [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md) with `8.5` to build more advanced functionalities. If you use Zeebe user tasks with `8.5`, task management endpoints in the Tasklist API will not work.
 
 To manage Zeebe user tasks Camunda has introduced the [Zeebe REST API](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md), though you can still query Zeebe user tasks with the Tasklist API.
 :::

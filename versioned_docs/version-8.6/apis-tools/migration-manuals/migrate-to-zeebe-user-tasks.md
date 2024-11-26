@@ -6,14 +6,14 @@ description: "Learn how to migrate job worker-based user tasks to Zeebe-based ta
 
 import DocCardList from '@theme/DocCardList';
 import FormViewer from "@site/src/mdx/FormViewer";
-import YesItem from "./assets/react-components/YesItem";
-import NoItem from "./assets/react-components/NoItem";
-import TableTextSmall from "./assets/react-components/TableTextSmall";
-import userTaskMigrationDecisionHelperForm from "./assets/forms/userTaskMigrationDecisionHelperForm.js";
-import "./assets/css/condensedTable.module.css";
-import styles from "./assets/css/cleanImages.module.css";
-import APIArchitectureImg from './assets/img/api-architecture.png';
-import ZeebeTaskSelectionImg from './assets/img/zeebe-user-task-selection.png';
+import YesItem from "../tasklist-api-rest/assets/react-components/YesItem";
+import NoItem from "../tasklist-api-rest/assets/react-components/NoItem";
+import TableTextSmall from "../tasklist-api-rest/assets/react-components/TableTextSmall";
+import userTaskMigrationDecisionHelperForm from "../tasklist-api-rest/assets/forms/userTaskMigrationDecisionHelperForm.js";
+import "../tasklist-api-rest/assets/css/condensedTable.module.css";
+import styles from "../tasklist-api-rest/assets/css/cleanImages.module.css";
+import APIArchitectureImg from '../tasklist-api-rest/assets/img/api-architecture.png';
+import ZeebeTaskSelectionImg from '../tasklist-api-rest/assets/img/zeebe-user-task-selection.png';
 
 Camunda 8.5 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
 Zeebe user tasks have several benefits, including:
@@ -91,11 +91,11 @@ Learn the differences between both task types and make an informed decision, and
         <td>
             <div>Partially</div>
             <TableTextSmall>Queries, GET tasks, forms, variables</TableTextSmall>
-            <TableTextSmall>ℹ  Currently, you must use Zeebe and Tasklist APIs to use Zeebe user tasks</TableTextSmall>
+            <TableTextSmall>ℹ  Currently, you must use the Camunda 8 and Tasklist APIs to use Zeebe user tasks</TableTextSmall>
         </td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Supports Zeebe API</th>
+        <th style={{ textAlign: "end" }}>Supports Camunda 8 API</th>
         <td><NoItem /></td>
         <td>
             <YesItem />
@@ -181,29 +181,29 @@ We recommend you migrate process-by-process, allowing you to thoroughly test the
 
 Repeat these steps for all user tasks in the process. Then, deploy the process to your development cluster and test it by running the process and ensuring your custom task applications work.
 
-## Use the new Zeebe Task API
+## Use the new Camunda 8 API
 
 :::note
 The Tasklist REST API is not deprecated, and you still need it for queries on both task types.
 :::
 
-Operations on Zeebe user tasks which modify the task state have to be performed using the new Zeebe REST API. However, queries and adjacent operations still require the Tasklist REST API. The following table provides a breakdown of which operations are supported in which API, and for which user tasks.
+Operations on Zeebe user tasks which modify the task state have to be performed using the new [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md). However, queries and adjacent operations still require the [Tasklist REST API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md). The following table provides a breakdown of which operations are supported in which API, and for which user tasks.
 
 <table style={{ textAlign: "center" }}>
     <tr>
         <th style={{ textAlign: "end" }}>Operation</th>
         <th>Tasklist API</th>
-        <th>Zeebe Task API (8.5)</th>
+        <th>Camunda 8 API</th>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Query tasks</th>
+        <th style={{ textAlign: "end" }}>Query user task</th>
         <td><span style={{ color: "green" }}>✔</span> All types</td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
+        <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Get task</th>
+        <th style={{ textAlign: "end" }}>Get user task</th>
         <td><span style={{ color: "green" }}>✔</span> All types</td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
+        <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
@@ -211,9 +211,9 @@ Operations on Zeebe user tasks which modify the task state have to be performed 
         <td style={{color: "gray"}}>← Use Tasklist API</td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Get task form</th>
+        <th style={{ textAlign: "end" }}>Get user task form</th>
         <td><span style={{ color: "green" }}>✔</span> All types</td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
+        <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Change task assignment</th>
@@ -231,7 +231,7 @@ Operations on Zeebe user tasks which modify the task state have to be performed 
         <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Safe and retrieve draft variables</th>
+        <th style={{ textAlign: "end" }}>Save and retrieve draft variables</th>
         <td><span style={{ color: "green" }}>✔</span> All types</td>
         <td style={{color: "gray"}}>← Use Tasklist API</td>
     </tr>
@@ -243,7 +243,7 @@ You can also operate both task types at the same time in the same application ut
 
 The major changes are:
 
-- Create and maintain new, additional secrets for the Zeebe REST API.
+- Create and maintain new, additional secrets for the Camunda 8 API.
 - Call dedicated endpoints on separate components (Zeebe vs. Tasklist) for all state modifications on tasks for the respective task types.
 - Manage new request/response objects.
 
@@ -253,34 +253,42 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Operation</th>
         <th>Tasklist API</th>
-        <th>Zeebe Task API (8.5)</th>
+        <th>Camunda 8 API</th>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Query tasks</th>
+        <th style={{ textAlign: "end" }}>Query user tasks</th>
         <td>
-            <a href="../specifications/search-tasks">
+            <a href="../../tasklist-api-rest/specifications/search-tasks">
                 <code>POST /tasks/search</code>
             </a>
         </td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
+        <td>
+            <a href="../../camunda-api-rest/specifications/assign-user-task">
+                <code>POST /user-tasks/:userTaskKey/assignment</code>
+            </a>
+        </td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Get task</th>
+        <th style={{ textAlign: "end" }}>Get user task</th>
         <td>
-            <a href="../specifications/get-task-by-id/">
+            <a href="../../tasklist-api-rest/specifications/get-task-by-id/">
                 <code>GET /tasks/:taskId</code>
             </a>
         </td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
+        <td>
+            <a href="../../camunda-api-rest/specifications/get-user-task">
+                <code>GET /user-tasks/:userTaskKey</code>
+            </a>
+        </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
         <td>
-            <a href="../specifications/get-variable-by-id/">
+            <a href="../../tasklist-api-rest/specifications/get-variable-by-id/">
                 <code>GET /variables/:variableId</code>
             </a>
             <br/>
-            <a href="../specifications/search-task-variables/">
+            <a href="../../tasklist-api-rest/specifications/search-task-variables/">
                 <code>POST /tasks/:taskId/variables/search</code>
             </a>
         </td>
@@ -289,48 +297,52 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Get task form</th>
         <td>
-            <a href="../specifications/get-form/">
+            <a href="../../tasklist-api-rest/specifications/get-form/">
                 <code>GET /forms/:formId</code>
             </a>
         </td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
+        <td>
+            <a href="../../camunda-api-rest/specifications/get-user-task-form">
+                <code>GET /user-tasks/:userTaskKey/form</code>
+            </a>
+        </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Assign a task</th>
         <td>
-            <a href="../specifications/assign-task/">
+            <a href="../../tasklist-api-rest/specifications/assign-task/">
                 <code>PATCH /tasks/:taskId/assign</code>
             </a>
         </td>
         <td>
-            <a href="../../zeebe-api-rest/specifications/assign-a-user-task">
-                <code>POST /user-tasks/:taskKey/assignment</code>
+            <a href="../../camunda-api-rest/specifications/assign-user-task">
+                <code>POST /user-tasks/:userTaskKey/assignment</code>
             </a>
         </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Unassign a task</th>
         <td>
-            <a href="../specifications/unassign-task/">
+            <a href="../../tasklist-api-rest/specifications/unassign-task/">
                 <code>PATCH /tasks/:taskId/unassign</code>
             </a>
         </td>
         <td>
-            <a href="../../zeebe-api-rest/specifications/unassign-a-user-task">
-                <code>DELETE /user-tasks/:taskKey/assignee</code>
+            <a href="../../camunda-api-rest/specifications/unassign-user-task">
+                <code>DELETE /user-tasks/:userTaskKey/assignee</code>
             </a>
         </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Complete task</th>
         <td>
-            <a href="../specifications/complete-task/">
+            <a href="../../tasklist-api-rest/specifications/complete-task/">
                 <code>PATCH /tasks/:taskId/complete</code>
             </a>
         </td>
         <td>
-            <a href="../../zeebe-api-rest/specifications/complete-a-user-task">
-                <code>POST /user-tasks/:taskKey/completion</code>
+            <a href="../../camunda-api-rest/specifications/complete-user-task">
+                <code>POST /user-tasks/:userTaskKey/completion</code>
             </a>
         </td>
     </tr>
@@ -338,15 +350,15 @@ The following table outlines the respective endpoints. Click the endpoints to fo
         <th style={{ textAlign: "end" }}>Update task</th>
         <td>-</td>
         <td>
-            <a href="../../zeebe-api-rest/specifications/update-a-user-task">
-                <code>PATCH /user-tasks/:taskKey</code>
+            <a href="../../camunda-api-rest/specifications/update-user-task">
+                <code>PATCH /user-tasks/:userTaskKey</code>
             </a>
         </td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Safe and retrieve draft variables</th>
+        <th style={{ textAlign: "end" }}>Save and retrieve draft variables</th>
         <td>
-            <a href="../specifications/save-draft-task-variables/">
+            <a href="../../tasklist-api-rest/specifications/save-draft-task-variables/">
                 <code>POST /tasks/:taskId/variables</code>
             </a>
         </td>
@@ -373,9 +385,9 @@ docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
 type:"link",
-href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/",
-label: "Zeebe API (REST)",
-docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
+href:"/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/",
+label: "Camunda 8 API (REST)",
+docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 }
 ]}/>
 
@@ -383,6 +395,6 @@ docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 
 If your task application does not work properly after migration, check the following:
 
-- **The endpoints return specific error messages when you run them on the wrong task type**: Ensure to call the right endpoint for the right task type, c.f. above [table](#use-the-new-zeebe-task-api).
+- **The endpoints return specific error messages when you run them on the wrong task type**: Ensure to call the right endpoint for the right task type, c.f. above [table](#use-the-new-camunda-8-api).
 - **Forms do not appear**: Ensure you have extracted embedded forms, if any, and [transformed them into linked forms](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked), before you change the task type implementation.
 - **Task update operation does not work**: The update operation is only available to Zeebe user tasks.
