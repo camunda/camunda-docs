@@ -7,5 +7,6 @@ module.exports = {
     {
       Specifications: require("./specifications/sidebar.js"),
     },
+    "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks",
   ],
 };

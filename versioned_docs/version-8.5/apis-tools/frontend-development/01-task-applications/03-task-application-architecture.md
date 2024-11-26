@@ -6,7 +6,7 @@ description: "Understand and decide on the architecture of your task application
 
 A typical task application architecture consists of a task application frontend, a backend-for-frontend, and one or more data sources or services that contain business data relevant for the application users to perform their work. The backend implements Camunda Zeebe and Tasklist clients to retrieve and interact with tasks via Camunda APIs. For historical process instance data, Operate is also required.
 
-Depending on the user task implementation type (job-based vs Zeebe user task) you use in your processes, you need to run either the Tasklist or Zeebe client to run operations on task. Task, form, and variable retrieval happens via the Tasklist API. Learn more about the differences of the task implementation types in the [migration guide for Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md).
+Depending on the user task implementation type (job-based vs Zeebe user task) you use in your processes, you need to run either the Tasklist or Zeebe client to run operations on task. Task, form, and variable retrieval happens via the Tasklist API. Learn more about the differences of the task implementation types in the [migration guide for Zeebe user tasks](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md).
 
 :::tip
 Starting a completely new project? Use only Zeebe user tasks to simplify your implementation.
@@ -72,8 +72,8 @@ style Tasklist stroke:#10c95d,color:#000
 
 click Forms "../../forms/introduction-to-forms"
 click Rest "../../../tasklist-api-rest/tasklist-api-rest-overview"
-click Job "../../../migration-manuals/migrate-to-zeebe-user-tasks"
-click ZeebeTasks "../../../migration-manuals/migrate-to-zeebe-user-tasks"
+click Job "../../../tasklist-api-rest/migrate-to-zeebe-user-tasks"
+click ZeebeTasks "../../../tasklist-api-rest/migrate-to-zeebe-user-tasks"
 click ZeebeRest "../../../zeebe-api-rest/zeebe-api-rest-overview"
 ```
 
