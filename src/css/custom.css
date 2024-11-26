@@ -46,6 +46,9 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 a {
   text-decoration: none;
 }
+[data-theme="dark"] .token .tag {
+  color: red !important;
+}
 
 [data-theme="dark"] .DocSearch-Button {
   border: 1px solid #48484a;
@@ -80,7 +83,7 @@ a {
   color: white;
 }
 [data-theme="dark"] code {
-  background-color: #3d475c;
+  background-color: rgb(44 51 66);
 }
 [data-theme="dark"] .hero--secondary {
   background-color: rgb(3, 6, 11);

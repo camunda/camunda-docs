@@ -188,6 +188,8 @@ module.exports = {
 
     prism: {
       additionalLanguages: ["java", "protobuf", "csharp"],
+      theme: require("prism-react-renderer/themes/palenight"),
+      darkTheme: require("prism-react-renderer/themes/dracula"),
     },
     navbar: {
       title: "Camunda 8 Docs",
