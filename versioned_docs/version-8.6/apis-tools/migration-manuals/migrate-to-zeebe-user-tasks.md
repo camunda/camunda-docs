@@ -269,19 +269,6 @@ The following table outlines the respective endpoints. Click the endpoints to fo
         </td>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Get user task</th>
-        <td>
-            <a href="../../tasklist-api-rest/specifications/get-task-by-id/">
-                <code>GET /tasks/:taskId</code>
-            </a>
-        </td>
-        <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task">
-                <code>GET /user-tasks/:userTaskKey</code>
-            </a>
-        </td>
-    </tr>
-    <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
         <td>
             <a href="../../tasklist-api-rest/specifications/get-variable-by-id/">
@@ -293,19 +280,6 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td style={{color: "gray"}}>← Use Tasklist API</td>
-    </tr>
-    <tr>
-        <th style={{ textAlign: "end" }}>Get task form</th>
-        <td>
-            <a href="../../tasklist-api-rest/specifications/get-form/">
-                <code>GET /forms/:formId</code>
-            </a>
-        </td>
-        <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task-form">
-                <code>GET /user-tasks/:userTaskKey/form</code>
-            </a>
-        </td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Assign a task</th>
