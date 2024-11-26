@@ -67,8 +67,8 @@
   padding: 0;
 }
 [data-theme="dark"] .featuresSection {
-  background-color: #202229;
-  border: 1px solid rgb(50, 50, 50);
+  background-color: rgb(19, 23, 28);
+  border: 1px solid rgb(40, 40, 40);
   box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
 }
 [data-theme="dark"] .featuresSection:hover {

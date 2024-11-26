@@ -25,8 +25,8 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 /* Dark mode */
 [data-theme="dark"]:root {
   --ifm-color-primary: #78a9ff;
-  --ifm-background-color: rgb(22, 22, 22);
-  --ifm-background-surface-color: rgb(22, 22, 22);
+  --ifm-background-color: rgb(3, 6, 11);
+  --ifm-background-surface-color: rgb(3, 6, 11);
   --ifm-font-color-base: rgb(244, 244, 244);
   --ifm-heading-color: rgb(244, 244, 244);
   --ifm-footer-background-color: red;
@@ -51,7 +51,7 @@ a {
   color: rgb(244, 244, 244);
 }
 [data-theme="dark"] .footer--dark {
-  background-color: rgb(22, 22, 22);
+  background-color: rgb(3, 6, 11);
   border-top: 1px solid rgb(50, 50, 50);
   padding-top: 40px;
 }
@@ -64,6 +64,7 @@ a {
 [data-theme="dark"] .hero--primary {
   background-image: url("/static/img/hero-bg-dark.png");
   padding-bottom: 2rem;
+  background-color: rgb(3, 6, 11);
 }
 [data-theme="dark"] .theme-doc-markdown img {
   background-color: white;
@@ -78,7 +79,7 @@ a {
   background-color: #3d475c;
 }
 [data-theme="dark"] .hero--secondary {
-  background-color: rgb(22, 22, 22);
+  background-color: rgb(3, 6, 11);
   margin-bottom: 2rem;
 }
 [data-theme="dark"] .tabs__item {
