@@ -964,6 +964,10 @@ module.exports = {
                   "Google Sheets Connector",
                   "components/connectors/out-of-the-box-connectors/google-sheets/"
                 ),
+                docsLink(
+                  "Google Gemini Connector",
+                  "components/connectors/out-of-the-box-connectors/google-gemini/"
+                ),
               ],
             },
 
