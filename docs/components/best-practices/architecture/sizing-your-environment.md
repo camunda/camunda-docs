@@ -155,7 +155,7 @@ Contact your Customer Success Manager to increase the cluster size beyond the ma
 | Max Throughput **Tasks/second** **\***                                              |                                100 |                                 200 |                              300 |                              400 |
 | Max Throughput **Process Instances/day** **\*\***                                   |                              432 k |                               864 k |                          1.296 k |                          1.728 k |
 | Max Total Number of Process Instances stored (in Elasticsearch in total) **\*\*\*** |                               75 k |                               150 k |                            225 k |                            300 k |
-| Approximate resources provisioned **\*\*\*\***                                      | 11 vCPU, 22 GB memory, 64 GB disk. | 22 vCPU, 44 GB memory, 128 GB disk. | 33 vCPU, 66 GB mem, 192 GB disk. | 44 vCPU, 88 GB mem, 256 GB disk. |
+| Approximate resources provisioned **\*\*\*\***                                      | 11 vCPU, 22 GB memory, 192 GB disk. | 22 vCPU, 44 GB memory, 384 GB disk. | 33 vCPU, 66 GB mem, 576 GB disk. | 44 vCPU, 88 GB mem, 768 GB disk. |
 
 The numbers in the table were measured using Camunda 8 (version 8.6), [the benchmark project](https://github.com/camunda-community-hub/camunda-8-benchmark) running on its own Kubernetes Cluster, and using a [realistic process](https://github.com/camunda/camunda/blob/main/zeebe/benchmarks/project/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) containing a mix of BPMN symbols such as tasks, events and call activities including subprocesses. To calculate day-based metrics, an equal distribution over 24 hours is assumed.
 
@@ -164,6 +164,7 @@ The numbers in the table were measured using Camunda 8 (version 8.6), [the bench
 **\*\*** As Tasks are the primary resource driver, the number of process instances supported by a cluster is calculated based on the assumption of an average of 10 tasks per process. Customers can calculate a more accurate process instance estimate using their anticipated number of tasks per process.
 
 **\*\*\*** Total number of process instances within the retention period, regardless of if they are active or finished. This is limited by disk space, CPU, and memory for running and historical process instances available to ElasticSearch. Calculated assuming a typical set of process variables for process instances. Note that it makes a difference if you add one or two strings (requiring ~ 1kb of space) to your process instances, or if you attach a full JSON document containing 1MB, as this data needs to be stored in various places, influencing memory and disk requirements. If this number increases, you can still retain the runtime throughput, but Tasklist, Operate, and/or Optimize may lag behind.
+The provisioned disk size is calculated as the sum of the disk size used by Zeebe and Elasticsearch.
 
 The max throughput numbers should be considered as peak loads, and the data retention configuration considered when defining the amount of data kept for completed instances in your cluster. See [Camunda 8 SaaS data retention](/components/concepts/data-retention.md) for the default retention times for Zeebe, Tasklist, Operate and Optimize.
 
