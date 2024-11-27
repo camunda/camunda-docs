@@ -824,6 +824,11 @@ h2#request {
 .openapi-tabs__mime-container {
   padding-top: 0;
 }
+ul.openapi-tabs__mime-list-container,
+ul.openapi-tabs__schema-list-container,
+ul.openapi-tabs__response-list-container {
+  overflow-x: auto;
+}
 .openapi-tabs__response-list-container.tabs {
   border-bottom: 0;
 }
