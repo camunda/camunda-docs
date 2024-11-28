@@ -12,25 +12,30 @@ Updates on versioning changes, end of maintenance updates, security, and other i
 | :--------------------- | :--------------------------- | :--------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
 | 11 February 2025       | 11 August 2026               | [8.7 release notes](/reference/release-notes/870.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
 
-### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+### API and SDK updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Camunda 8.7 introduces the following important API updates.
+Camunda 8.7 introduces the following key API updates.
+
+#### New and updated
 
 - Camunda 8 REST API for querying and permission management:
   - New Query endpoints for process entities to replace component APIs (Tasklist, Operate).
   - New endpoints to manage and query users and resource permissions in an orchestration cluster.
   - Support for resource-based authorizations to enable fine-grained permissions.
   - Alignment of API terminology so technical assets have an identical, easily-understood, descriptive property name.
-- Query API advanced search for building advanced filters.
-- SDK updates: Zeebe Java Client and Spring SDK become the new Camunda clients, including a refreshed client structure to enhance the developer experience, introduce new features, and maintain compatibility with current codebases.
-- Deprecation: Operate API and Tasklist API:
+- New Advanced Search for Query API for building advanced, fine-grained filters.
+- The Zeebe Java Client and Spring SDK become the new Camunda clients, including a refreshed client structure to enhance the developer experience, introduce new features, and maintain compatibility with current codebases.
+
+#### Deprecated
+
+- Operate API and Tasklist API:
   - The deprecation process begins for the Operate and Tasklist REST API. These APIs are still available with Camunda 8.7 and 8.8, but not recommended for new implementations. Starting in Camunda 8.9, these APIs will be completely removed.
   - With the 8.7 release, you can begin migrating to the Camunda 8 REST API for querying to prepare for this change.
-- Deprecation: Job-based User Tasks querying:
+- Job-based User Tasks querying:
   - User tasks can be implemented with two different task types: the `Job-worker` and `Camunda User Task` (formerly known as `Zeebe User Task`).
   - To streamline the development of process applications, we recommend using `Camunda User Tasks` in your process definitions. Starting with 8.7, Camunda modelers will automatically apply the `Camunda user task` and show a warning message for each job worker user task.
-  - The `Job-worker` user tasks will be available for querying until the 8.9 release. With 8.9 and later, customers can use the `Job-worker` implementation of user tasks as standard jobs with headers to enable open architecture and composable solutions.
-- Deprecation: Zeebe gRPC API endpoints:
+  - The `Job-worker` user tasks are available for querying until the 8.9 release. With 8.9 and later, customers can use the `Job-worker` implementation of user tasks as standard jobs with headers to enable open architecture and composable solutions.
+- Zeebe gRPC API endpoints:
   - Several Zeebe gRPC endpoints are deprecated. Key gRPC endpoints necessary for high-throughput and low-latency applications will remain available to ensure peak performance for specific use cases.
   - Based on benchmark comparisons between REST and gRPC, the final list of retained gRPC endpoints will be confirmed with the 8.7 release. Selected endpoints will remain active, with the others scheduled for removal in the 8.9 release.
 - Removal of Tasklist GraphQl API from the product once the Tasklist GraphQl API deprecation completes.
