@@ -12,21 +12,21 @@ Important announcements and key updates for upcoming and previous Camunda 8 rele
 | :--------------------- | :--------------------------- | :--------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
 | 11 February 2025       | 11 August 2026               | [8.7 release notes](/reference/release-notes/870.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
 
-Important Camunda 8.7 release announcements are summarized as follows:
+Important announcements for the Camunda 8.7 release are summarized as follows:
 
 - [API updates](#api-updates-saasself-managed) (Self-Managed and SaaS)
-- [Camunda Java client and Camunda Spring SDK](#camunda-java-client-and-camunda-spring-sdk-self-managed) (Self-Managed)
 - [Identity management updates](#identity-management-updates-saasself-managed) (Self-Managed and SaaS)
 - [Installation and deployment updates](#installation-and-deployment-updates-self-managed) (Self-Managed)
+- [Camunda Java client and Camunda Spring SDK](#camunda-java-client-and-camunda-spring-sdk-self-managed) (Self-Managed)
 - [Southeast Asia region for SaaS customers](#southeast-asia-region-for-saas-customers-saas) (SaaS)
 
 :::info
 
-The following blog posts provide more information on the changes included in the 8.7 release:
+The following blog posts also provide more information on the changes included in the 8.7 release:
 
-- Upcoming Camunda 8 API Changes, see Upcoming API Changes in Camunda 8.
-- Identity enhancements, see Introducing Enhanced Identity Management in Camunda 8.7.
-- Installation and deployment updates, see Streamlined Deployment with 8.7.
+- Upcoming API Changes in Camunda 8.
+- Introducing Enhanced Identity Management in Camunda 8.7.
+- Streamlined Deployment with 8.7.
 
 :::
 
@@ -65,7 +65,34 @@ With the 8.7 release, several [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) endpoi
 
 #### Deprecated: Tasklist GraphQL API
 
-The [Tasklist GraphQL API](/apis-tools/tasklist-api/tasklist-api-overview.md) will be removed from the product once it has been fully deprecated in 8.7.
+The [Tasklist GraphQL API](/apis-tools/tasklist-api/tasklist-api-overview.md) will be removed from the product once it has been fully deprecated in the 8.7 release.
+
+### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda 8.7 introduces significant enhancements to the Identity service, designed to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
+
+#### Cluster-Level Identity Management
+
+- Cluster-Level Identity Management
+- Decoupling from Keycloak (Self-Managed only)
+- New Resource-Based Permissions
+- Enhanced REST API Endpoints
+
+### Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda 8.7 introduces a streamlined architecture, consolidating core components like Zeebe, Operate, and Tasklist into a single deployable unit, simplifying deployment and management. Enhanced deployment options are also included, such as new Kubernetes Helm guides, deployment reference architectures, and improved support for professional developers with Camunda 8 Run.
+
+You can download the alpha release of the unified package as an executable Java application (Camunda Orchestration Core) or a Docker image, which is available in our GitHub Repository.
+
+#### Helm charts
+
+New migration guides are provided with version 8.7 to support you when migrating from a previous Camunda version.
+
+If you are not using the Camunda supported Helm charts for deployment, you will need to update your configuration for 8.7.
+
+#### Exporters/importers
+
+Content - new exporter apps include/replace the functionality from Tasklist and Operate
 
 ### Camunda Java client and Camunda Spring SDK <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -87,33 +114,6 @@ The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality 
 | New package structure                           | Package `io.camunda.client`: Contains the new `CamundaClient` and all 8.7 features.                                                                                                                                                                                                                                |
 | Refactored properties and environment variables | <p><ul><li><p>All old Java client property names are refactored to more general ones. For example, `zeebe.client.tenantId` to `camunda.client.tenantId`.</p></li><li><p>Similarly, environment variables are renamed following the same concept: `ZEEBE_REST_ADDRESS` to `CAMUNDA_REST_ADDRESS`.</p></li></ul></p> |
 | Artifact ID change                              | The `artifactId` changes from `zeebe-client-java` to `camunda-client-java`.                                                                                                                                                                                                                                        |
-
-### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-Camunda 8.7 introduces significant enhancements to the Identity service, designed to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
-
-#### Cluster-Level Identity Management
-
-- Cluster-Level Identity Management
-- Decoupling from Keycloak (Self-Managed only)
-- New Resource-Based Permissions
-- Enhanced REST API Endpoints
-
-### Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-Camunda 8.7 introduces a streamlined architecture, consolidating core components like Zeebe, Operate, and Tasklist into a single deployable unit, simplifying deployment and management.
-
-Enhanced deployment options are also included, such as new Kubernetes Helm guides, deployment reference architectures, and improved support for professional developers with Camunda 8 Run.
-
-#### Helm charts
-
-New migration guides are provided with version 8.7 to support you when migrating from a previous Camunda version.
-
-If you are not using the Camunda supported Helm charts for deployment, you will need to update your configuration for 8.7.
-
-#### Exporters/importers
-
-Content - new exporter apps include/replace the functionality from Tasklist and Operate
 
 ### Southeast Asia region for SaaS customers <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
