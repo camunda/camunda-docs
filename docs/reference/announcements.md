@@ -4,19 +4,23 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
-Important announcements for upcoming and past Camunda 8 releases.
+Updates on versioning changes, end of maintenance updates, security, and other important announcements for upcoming and previous Camunda 8 releases.
 
 ## Camunda 8.7
 
-| Scheduled release date | Scheduled end of maintenance | Release notes |
-| ---------------------- | ---------------------------- | ------------- |
-| 11 February 2025       | 11 August 2026               |               |
+| Scheduled release date | Scheduled end of maintenance | Release notes                                        | Blog                                                                                            |
+| :--------------------- | :--------------------------- | :--------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| 11 February 2025       | 11 August 2026               | [8.7 release notes](/reference/release-notes/870.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
 
-Release date: TBD
+### Camunda 8 API
 
-End of maintenance: TBD
+As part of our ongoing effort to streamline and unify Camunda 8, the following changes are being made
 
-### Southeast Asia now available for SaaS customers
+### Identity
+
+### Architecture
+
+### Southeast Asia now available for SaaS customers <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
 SaaS customers can now create orchestration clusters in the [Singapore (asia-southeast1) region](/reference/regions.md), ensuring lower latency and improved processing speed for organizations operating in southeast Asian countries.
 
