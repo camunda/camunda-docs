@@ -4,7 +4,7 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
-Updates on versioning changes, end of maintenance updates, security, and other important announcements for upcoming and previous Camunda 8 releases.
+Stay up to date with key updates and important announcements for upcoming and previous Camunda 8 releases.
 
 ## Camunda 8.7
 
