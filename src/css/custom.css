@@ -187,6 +187,9 @@ svg.implemented:hover [stroke="#333"] {
   margin-left: 0;
   margin-bottom: 1.5rem;
 }
+h2 .badge:nth-of-type(1) {
+  margin-bottom: 0rem;
+}
 h3 .badge:nth-of-type(1) {
   margin-bottom: 0rem;
 }
@@ -587,6 +590,16 @@ h2#request {
   padding-top: 0px;
   margin-bottom: 20px;
   padding-bottom: 0px;
+}
+h2 .badge--long {
+  margin-bottom: 0;
+  font-size: 12px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+/* Third level page heading */
+h2 .badge--long:nth-of-type(1) {
+  margin-left: 5px;
 }
 /* Second level page heading */
 h3 {
