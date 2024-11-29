@@ -19,19 +19,19 @@ Important changes and updates for Camunda 8 releases that customers should be aw
 Camunda 8.7 is scheduled for release on 11 February, 2024.
 
 <div class="double-column-layout">
-  <div class="double-column">
+<div class="double-column">
 
 **[8.7 Announcements](/reference/announcements/870.md)**
 
-  </div>
-  <div class="double-column-2">
+</div>
+<div class="double-column-2">
 
 - [API updates](/reference/announcements/870.md#api-updates-saasself-managed)
 - [Identity management updates](/reference/announcements/870.md#identity-management-updates-saasself-managed)
 - [Installation and deployment updates](/reference/announcements/870.md#installation-and-deployment-updates-self-managed)
 - [Camunda Java client and Camunda Spring SDK](/reference/announcements/870.md#camunda-java-client-and-camunda-spring-sdk-self-managed)
 
-  </div>
+</div>
 </div>
 
 ## Camunda 8.6
@@ -39,12 +39,12 @@ Camunda 8.7 is scheduled for release on 11 February, 2024.
 Camunda 8.6 was released on 8 October, 2024.
 
 <div class="double-column-layout">
-  <div class="double-column">
+<div class="double-column">
 
 **[8.6 Announcements](/reference/announcements/860.md)**
 
-  </div>
-  <div class="double-column-2">
+</div>
+<div class="double-column-2">
 
 - [License key changes](/reference/announcements/860.md#license-key-changes)
 - [Zeebe Java client](/reference/announcements/860.md#zeebe-java-client)
@@ -58,7 +58,7 @@ Camunda 8.6 was released on 8 October, 2024.
 - [Camunda Optimize artifact and Docker tag separation](/reference/announcements/860.md#camunda-optimize-artifact-and-docker-tag-separation)
 - [New base path for Operate and Tasklist web applications](/reference/announcements/860.md#new-base-path-for-operate-and-tasklist-web-applications)
 
-  </div>
+</div>
 </div>
 
 ## Camunda 8.5-8.2
