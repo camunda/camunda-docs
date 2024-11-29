@@ -686,3 +686,21 @@ ul ol {
 .menu__link--active:not(.menu__link--sublist) {
   font-weight: 600;
 }
+
+.double-column-layout {
+  display: flex;
+}
+
+.double-column {
+  flex: 1;
+}
+
+.double-column-2 {
+  flex: 3;
+}
+
+@media (max-width: 768px) {
+  .double-column-layout {
+    flex-direction: column;
+  }
+}
