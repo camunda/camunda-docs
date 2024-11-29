@@ -591,14 +591,18 @@ h2#request {
   margin-bottom: 20px;
   padding-bottom: 0px;
 }
-h2 .badge--long {
+h2 .badge--long,
+h2 .badge--beginner,
+h2 .badge--cloud {
   margin-bottom: 0;
   font-size: 12px;
   margin-left: 5px;
   vertical-align: middle;
 }
 /* Third level page heading */
-h2 .badge--long:nth-of-type(1) {
+h2 .badge--long:nth-of-type(1),
+h2 .badge--beginner:nth-of-type(1),
+h2 .badge--cloud:nth-of-type(1) {
   margin-left: 5px;
 }
 /* Second level page heading */
