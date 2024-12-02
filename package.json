@@ -71,7 +71,7 @@
     "lint-staged": "^14.0.1",
     "playwright": "^1.49.0",
     "prettier": "3.3.3",
-    "replace-in-file": "^7.1.0",
+    "replace-in-file": "^8.2.0",
     "swc-loader": "^0.2.3"
   },
   "lint-staged": {
