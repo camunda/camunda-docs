@@ -88,11 +88,6 @@ The following keys were deprecated in 8.5, and their removal has been delayed un
 |               | `global.elasticsearch.host`        | `global.elasticsearch.url.host`     |
 |               | `global.elasticsearch.port`        | `global.elasticsearch.url.port`     |
 
-| Component   | Old Key      | New Key                |
-| ----------- | ------------ | ---------------------- |
-| Web Modeler |
-|             | `postgresql` | `webModelerPostgresql` |
-
 #### Identity
 
 The Camunda Identity component was formerly a sub-chart of the Camunda Helm chart. Now, it is part of the parent Camunda Helm chart.
