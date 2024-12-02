@@ -85,7 +85,7 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
    2. **Script/Result variable**: `totalWithTax`
    3. **Script/FEEL expression**: `total * 1.1` (this represents the tax applied to the transaction.)
 6. Append a task named `Charge credit card`.
-7. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Type** to `charge-credit-card`.
+7. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Type** to `"charge-credit-card"`.
 8. Append an end event named `Payment executed`.
 9. Save this BPMN file to your Spring project in `src/main/resources`, and name it `process-payments.bpmn`.
 
