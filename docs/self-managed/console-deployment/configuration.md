@@ -51,11 +51,13 @@ To enable usage collection, configure the parameters described in the next secti
 
 To enable telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker username) needed to send telemetry data to Camunda.
 
-| Parameter        | Description                                                                         | Example value   |
-| ---------------- | ----------------------------------------------------------------------------------- | --------------- |
-| `customerId`     | Unique identifier of the customer. This is also a Camunda Docker registry user name | `customername`  |
-| `installationId` | Unique installation ID of the current customer installation                         | `my-deployment` |
-| `telemetry`      | Telemetry config for Console Self-Managed: `disabled`, `online` or `download`       | `online`        |
+| Parameter                            | Description                                                                                                                                               | Example value                 |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `customerId`                         | Unique identifier of the customer. This is also a Camunda Docker registry user name                                                                       | `customername`                |
+| `installationId`                     | Unique installation ID of the current customer installation                                                                                               | `my-deployment`               |
+| `telemetry`                          | Telemetry config for Console Self-Managed: `disabled`, `online` or `download`                                                                             | `online`                      |
+| `managed.releases.tags`              | Assign cluster tags to indicate what type of cluster it is. Default tags are `dev`, `stage`, `test` or `prod`, but you can assign any custom tag as well. | `- dev` (list of strings)     |
+| `managed.releases.custom-properties` | List of custom properties you can add to your cluster with custom descriptions and custom links on your cluster details page.                             | see custom properties section |
 
 Console environment variables could be set in Helm. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 For example:
@@ -69,6 +71,53 @@ console:
       values: my-deployment
     - name: CAMUNDA_CONSOLE_TELEMETRY
       value: online
+```
+
+### Override Configuration parameters
+
+The problem with the configuration parameters is that they replace the complete configuration. If only the `customerId` is to be changed, the complete configuration must still be added.
+
+This is no longer the case with the override parameters. A subset of parameters can be set so that individual parameters can be adjusted. If a parameter needs to be changed for a specific cluster, the `name` and `namespace` fields must be set with the exact values so that correlations can be made accordingly.
+
+The following example changes the `customerId` and the `tags` for a specific cluster:
+
+```yaml
+console:
+  overrideConfiguration:
+    camunda:
+      console:
+        customerId: "new-customer-id"
+        managed:
+          releases:
+            - name: camunda-platform
+              namespace: camunda-platform
+              tags:
+                - production
+```
+
+### Custom Properties
+
+Custom properties are useful to add custom information to the cluster details page in console. You can mutliple custom properties, and each custom property contains a description and multiple links.
+
+The following example shows one custom property for a cluster:
+
+```yaml
+console:
+  overrideConfiguration:
+    camunda:
+      console:
+        customerId: "new-customer-id"
+        managed:
+          releases:
+            - name: camunda-platform
+              namespace: camunda-platform
+              custom-properties:
+                - description: "Useful links to Camunda resources."
+                  links:
+                    - name: "Camunda Blog"
+                      url: "https://camunda.com/blog/"
+                    - name: "Camunda Docs"
+                      url: "https://docs.camunda.io"
 ```
 
 ## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
