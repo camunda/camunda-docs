@@ -691,20 +691,18 @@ ul ol {
   font-weight: 600;
 }
 
-.double-column-layout {
+/* double column div layout  */
+.double-column-container {
   display: flex;
 }
-
-.double-column {
+.double-column-left {
   flex: 1;
 }
-
-.double-column-2 {
+.double-column-right {
   flex: 3;
 }
-
 @media (max-width: 768px) {
-  .double-column-layout {
+  .double-column-container {
     flex-direction: column;
   }
 }
