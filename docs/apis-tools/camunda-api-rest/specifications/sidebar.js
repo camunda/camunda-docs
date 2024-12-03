@@ -419,6 +419,30 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Tenant",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-tenant",
+        label: "Create tenant",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/update-tenant",
+        label: "Update tenant",
+        className: "api-method patch",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-tenant",
+        label: "Delete tenant",
+        className: "api-method delete",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "User",
     items: [
       {

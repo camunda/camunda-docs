@@ -407,6 +407,14 @@ span.callout + p::after {
   border: none;
 }
 
+/* Use for inline images within text, such as BPMN symbols */
+.theme-doc-markdown img.inline-image {
+  border: none;
+  max-height: 1.8rem;
+  margin: 0;
+  padding: 0;
+}
+
 /* Unsupported versions in the versions selector */
 .dropdown-separator {
   margin: 0.3rem 0;
