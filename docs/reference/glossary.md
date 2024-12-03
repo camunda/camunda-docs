@@ -4,6 +4,10 @@ title: "Glossary"
 description: "This section defines common terminology referenced within the documentation."
 ---
 
+### Automation cluster
+
+See [orchestration cluster](#orchestration-cluster).
+
 ### Bridge
 
 Synonym to "[Connector](#connector)".
@@ -165,7 +169,9 @@ A message contains information to be delivered to interested parties during exec
 
 ### Orchestration cluster
 
-An orchestration cluster includes Zeebe, Operate, Tasklist, and Optimize, existing alongside the management cluster.
+An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and Connectors. Previously [automation cluster](#automation-cluster).
+
+### Orchestration core
 
 ### Outbound Connector
 
