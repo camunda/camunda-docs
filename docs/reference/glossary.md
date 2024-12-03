@@ -149,10 +149,6 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
 
-### Management cluster
-
-The management cluster includes Console, Identity, and Web Modeler, existing alongside the orchestration cluster.
-
 ### Manual task
 
 A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
