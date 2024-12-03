@@ -56,6 +56,4 @@ Only indices containing dates in their suffix may be deleted.
 
 OpenSearch does not support the Index Lifecycle Management (ILM) Policy, and instead uses Index State Management (ISM). The same environment variables that are used to activate ILM on Elasticsearch can be used to activate ISM on OpenSearch.
 
-```yaml
-As of the 8.4 release, Tasklist is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
-```
+As of the 8.4 release, Tasklist is compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.

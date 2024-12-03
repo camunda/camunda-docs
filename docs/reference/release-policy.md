@@ -18,7 +18,7 @@ It is important to understand the different ways the term "alpha" is used in the
 
 ### Alpha feature
 
-Refers to a feature or component released as an alpha version, in an early state for you to test and participate in development by sharing your feedback before the feature reaches [general availability (GA)](/components/early-access/alpha/alpha-features.md#general-availability-ga). Some alpha features require turning on for your cluster before you can use them. See [alpha features](/components/early-access/alpha/alpha-features.md).
+Refers to a feature or component released as an alpha version, in an early state for you to test and participate in development by sharing your feedback before the feature reaches [general availability](#general-availability-ga). Some alpha features require turning on for your cluster before you can use them. See [alpha features](/components/early-access/alpha/alpha-features.md).
 
 ### Alpha release
 
@@ -30,6 +30,18 @@ Refers to a release made available between minor versions that allows you to pre
 - Additionally, "Alpha channel" refers to the channel you can use when provisioning a SaaS cluster. See [alpha channel](#alpha-channel).
 
 :::
+
+## General availability (GA)
+
+Once features and components are released and considered stable, they become generally available.
+
+Stable features and components are:
+
+- Ready for production use for most users with minimal risk.
+- Supported by [L1 Priority-level support](https://camunda.com/services/enterprise-support-guide/) for production use.
+- Fully documented.
+
+A release or component is considered stable if it has passed all verification and test stages and can be released to production.
 
 ## SaaS provisioning
 
@@ -50,7 +62,7 @@ You can provision cluster components using one of two channels, following the [C
 
 #### Stable channel
 
-You can use the **Stable** channel to access [general availability](/components/early-access/alpha/alpha-features.md#general-availability-ga) features for cluster components.
+You can use the **Stable** channel to access [general availability](#general-availability-ga) features for cluster components.
 
 - Provides the latest feature and patch releases ready for most users at minimal risk.
 - Releases follow semantic versioning and can be updated to the next minor or patch release without data loss.
