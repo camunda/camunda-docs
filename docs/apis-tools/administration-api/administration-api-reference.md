@@ -6,10 +6,6 @@ description: "Create and manage clusters, and interact with Camunda 8 management
 sidebar_position: 1
 ---
 
-:::note
-To migrate from Camunda's V1 component REST APIs to the V2 [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), review [migrating to the Camunda 8 API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
-:::
-
 The Camunda 8 management API provides a programmatic interface for managing Camunda clusters and API clients. It offers endpoints for various operations, including cluster backup, creation, and deletion, as well as client and member management. The API also allows for IP allowlisting and secret management.
 
 A detailed API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/) via Swagger. With a valid access token, this offers an interactive API experience against your Camunda 8 cluster.
