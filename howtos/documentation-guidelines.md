@@ -167,6 +167,10 @@ In an effort to automate screenshots across Camunda 8 documentation, the followi
 Given the following procedures, teams will respond to screenshot updates and suggestions from community members by manually adjusting appropriate screenshots.
 :::
 
+:::note
+When generating screenshots, remove any personal identifiable information. If a username must be included, ensure this is "My organization".
+:::
+
 **Modeler**
 Visit the [Modeler screenshot automation repo](https://github.com/camunda/camunda-docs-modeler-screenshots/blob/main/README.md) for details on updating screenshots and scripting new screenshots.
 
