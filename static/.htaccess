@@ -95,6 +95,9 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
 
+# Remove Zeebe REST API
+RewriteRule ^docs/next/apis-tools/zeebe-api-rest/specifications/?$ /docs/next/apis-tools/camunda-api-rest/specifications/$1 [R=301,L]
+
 # Move contact page
 RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 
