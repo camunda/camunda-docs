@@ -95,6 +95,14 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
 
+# Remove Tasklist GraphQL API
+RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/tasklist-api/(.*)$ /docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/$1 [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/tasklist-api/(.*)$ /docs/8.6/apis-tools/camunda-api-rest/camunda-api-rest-overview/$1 [R=301,L]
+RewriteRule ^docs/8.5/apis-tools/tasklist-api/(.*)$ /docs/8.5/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
+RewriteRule ^docs/8.4/apis-tools/tasklist-api/(.*)$ /docs/8.4/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
+RewriteRule ^docs/8.3/apis-tools/tasklist-api/(.*)$ /docs/8.3/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
+
 # Move contact page
 RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 

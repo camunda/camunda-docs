@@ -127,7 +127,7 @@ export default {
       components: [
         {
           content:
-            '<style>\n.decision-item {\n  font-size: 16px; \n  margin-top: 0px;\n}\n\n.info-text {\n  font-size: 12px;\n  margin-top: 4px;\n  color: #2e2e2;\n}\n</style>\n\n<div class="decision-item">\n  Do you run or develop a custom task application, or plan to do so?\n</div>\n<div class="info-text">\nA custom task application means you are using the <a href="https://docs.camunda.io/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/">Tasklist API</a> (REST or GraphQL) or <a href="https://docs.camunda.io/docs/next/self-managed/concepts/exporters/">custom exporters</a> to manage user tasks.\n</div>',
+            '<style>\n.decision-item {\n  font-size: 16px; \n  margin-top: 0px;\n}\n\n.info-text {\n  font-size: 12px;\n  margin-top: 4px;\n  color: #2e2e2;\n}\n</style>\n\n<div class="decision-item">\n  Do you run or develop a custom task application, or plan to do so?\n</div>\n<div class="info-text">\nA custom task application means you are using the <a href="https://docs.camunda.io/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/">Tasklist REST API</a> or <a href="https://docs.camunda.io/docs/next/self-managed/concepts/exporters/">custom exporters</a> to manage user tasks.\n</div>',
           label: "HTML",
           type: "html",
           layout: {

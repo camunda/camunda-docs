@@ -27,7 +27,9 @@ As a general rule, you should assign human tasks, like [user tasks](/components/
   </bpmn:extensionElements>
 ```
 
-Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. Refer to [`claimTask`](../../../apis-tools/tasklist-api/mutations/claim-task.mdx).
+Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. Refer to `claimTask`.
+
+<!--- To rework. --->
 
 ```graphql
 claimTask(
