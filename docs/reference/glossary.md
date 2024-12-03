@@ -173,6 +173,8 @@ An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and Connec
 
 ### Orchestration core
 
+An orchestration core or orchestration cluster core includes Zeebe, Operate, Tasklist, Optimize, and Identity.
+
 ### Outbound Connector
 
 Outbound [Connectors](#connector) in Camunda 8 allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
