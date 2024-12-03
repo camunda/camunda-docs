@@ -45,7 +45,7 @@ The single jar and manual way of deploying Camunda can be used for either simple
 
 Compared to the generalized architecture depicted in the [reference architecture](#TODO), the `Optimize importer` can be enabled as part of the single JAR.
 
-:::caution
+:::note
 When scaling from a single machine to multiple machine, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 :::
 
