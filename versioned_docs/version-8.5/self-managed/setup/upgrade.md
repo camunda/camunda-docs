@@ -9,7 +9,9 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the **next major version**.
+When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the next **major** version of the chart.
+
+For example, if the current Helm chart version is 10.x.x, and the latest next major version is 11.0.1, the recommended upgrade is to 11.0.1 (not 11.0.0).
 :::
 
 Upgrading between minor versions of the Camunda Helm chart may require [configuration changes](#update-your-configuration). To upgrade between patch versions or when no configuration changes are required, see the [`helm upgrade`](#identity-disabled) instructions.
@@ -66,9 +68,7 @@ Ensure to use Helm CLI with version `3.14.3` or more. The upgrade could fail to 
 
 #### Deprecation notes
 
-The following keys in the values file have been changed in Camunda Helm chart v10.0.2. For compatibility, the keys are deprecated in the Camunda release cycle 8.5 and will be removed in the Camunda 8.6 release (October 2024).
-
-We highly recommend updating the keys in your values file rather than waiting until the 8.6 release.
+The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7 (January 2025). We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
 
 | Component     | Old Key                            | New Key                             |
 | ------------- | ---------------------------------- | ----------------------------------- |
@@ -87,13 +87,6 @@ We highly recommend updating the keys in your values file rather than waiting un
 |               | `global.elasticsearch.protocol`    | `global.elasticsearch.url.protocol` |
 |               | `global.elasticsearch.host`        | `global.elasticsearch.url.host`     |
 |               | `global.elasticsearch.port`        | `global.elasticsearch.url.port`     |
-
-Also, the Web Modeler PostgreSQL key will be changed in the 8.6 release (the new key `webModelerPostgresql` will not work in any chart using Camunda 8.5).
-
-| Component   | Old Key      | New Key                |
-| ----------- | ------------ | ---------------------- |
-| Web Modeler |
-|             | `postgresql` | `webModelerPostgresql` |
 
 #### Identity
 

@@ -31,7 +31,7 @@ Given the above process, a successful execution yields the following records in 
 <table>
     <tr>
         <th>Intent</th>
-        <th>Element id</th>
+        <th>Element ID</th>
         <th>Element type</th>
     </tr>
     <tr>

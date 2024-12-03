@@ -36,11 +36,11 @@ The following table provides you with a guideline that we would use in a context
 
 ### Editing IDs with Camunda Modeler
 
-We recommend using Camunda Modeler's properties panel to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process id:
+We recommend using Camunda Modeler's properties panel to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process ID:
 
 ![Properties Panel](naming-technically-relevant-ids-assets/camunda-modeler-properties-panel.png)
 
-We especially do not recommend editing identifiers in the XML directly, as it might accidently corrupt your BPMN file. You have to keep the identifiers in the section about the graphical layout (so called "DI" for diagram interchange) further down in sync with the execution semantics at the top of the XML.
+We especially do not recommend editing identifiers in the XML directly, as it might accidentally corrupt your BPMN file. You have to keep the identifiers in the section about the graphical layout (so called "DI" for diagram interchange) further down in sync with the execution semantics at the top of the XML.
 
 However, we include an XML example of all those identifiers mentioned for illustration:
 
@@ -77,16 +77,16 @@ Elements in the diagram interchange section (DI) reference identifiers from abov
 
 Changing IDs can potentially break your tests or even process logic if done at a late stage of development. Therefore, consider using meaningful IDs right from the beginning and perform the renaming as part of the modeling.
 
-### Aligning the BPMN file name with the process id
+### Aligning the BPMN file name with the process ID
 
 It is a good practice to _align_ the _file name_ of your BPMN models with the _process id_ of the executable process that is inside the file.
 
 ![BPMN file name](naming-technically-relevant-ids-assets/aligning-the-bpmn-file-names.png)
 
-## Generating id constants classes
+## Generating ID constants classes
 
 If you have lots of process, case, and decision definitions with lots of IDs, consider generating constant classes (e.g. via XSLT) directly from your BPMN or DMN XML files. For example, this can be used for testing.
 
 ## Using a Camunda Modeler plugin to generate meaningful ids
 
-You can use [this modeler plugin community extension](https://github.com/camunda-community-hub/camunda-modeler-plugin-rename-technical-ids) to automatically convert your ids to comply with our best practices. Of course, you could also use this as a basis to create your own modeler plugin to generate ids that follow your custom naming conventions. Or, you could implement a similar plugin to implement checks if all relavant ids follow your naming conventions.
+You can use [this modeler plugin community extension](https://github.com/camunda-community-hub/camunda-modeler-plugin-rename-technical-ids) to automatically convert your IDs to comply with our best practices. Of course, you could also use this as a basis to create your own modeler plugin to generate IDs that follow your custom naming conventions. Or, you could implement a similar plugin to implement checks if all relavant IDs follow your naming conventions.

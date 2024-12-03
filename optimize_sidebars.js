@@ -1068,57 +1068,9 @@ module.exports = {
             ),
             docsLink(
               "Connector templates",
+              "components/connectors/custom-built-connectors/connector-template-generator",
               "components/connectors/custom-built-connectors/connector-templates/"
             ),
-
-            {
-              "Update guide": [
-                docsLink(
-                  "Connector SDK updates",
-                  "components/connectors/custom-built-connectors/update-guide/introduction/"
-                ),
-                docsLink(
-                  "Update 0.10 to 0.11",
-                  "components/connectors/custom-built-connectors/update-guide/0100-to-0110/"
-                ),
-                docsLink(
-                  "Update 0.9 to 0.10",
-                  "components/connectors/custom-built-connectors/update-guide/090-to-0100/"
-                ),
-                docsLink(
-                  "Update 0.8 to 0.9",
-                  "components/connectors/custom-built-connectors/update-guide/080-to-090/"
-                ),
-                docsLink(
-                  "Update 0.7 to 0.8",
-                  "components/connectors/custom-built-connectors/update-guide/070-to-080/"
-                ),
-                docsLink(
-                  "Update 0.6 to 0.7",
-                  "components/connectors/custom-built-connectors/update-guide/060-to-070/"
-                ),
-                docsLink(
-                  "Update 0.5 to 0.6",
-                  "components/connectors/custom-built-connectors/update-guide/050-to-060/"
-                ),
-                docsLink(
-                  "Update 0.4 to 0.5",
-                  "components/connectors/custom-built-connectors/update-guide/040-to-050/"
-                ),
-                docsLink(
-                  "Update 0.3 to 0.4",
-                  "components/connectors/custom-built-connectors/update-guide/030-to-040/"
-                ),
-                docsLink(
-                  "Update 0.2 to 0.3",
-                  "components/connectors/custom-built-connectors/update-guide/020-to-030/"
-                ),
-                docsLink(
-                  "Update 0.1 to 0.2",
-                  "components/connectors/custom-built-connectors/update-guide/010-to-020/"
-                ),
-              ],
-            },
           ],
         },
       ],
@@ -1595,7 +1547,7 @@ module.exports = {
                   Cluster: [
                     docsLink(
                       "Get cluster topology",
-                      "apis-tools/camunda-api-rest/specifications/get-cluster-topology/"
+                      "apis-tools/camunda-api-rest/specifications/get-topology/"
                     ),
                   ],
                 },
@@ -2624,7 +2576,7 @@ module.exports = {
               "self-managed/setup/guides/accessing-components-without-ingress/"
             ),
             docsLink(
-              "Combined and separated Ingress setup",
+              "Ingress setup",
               "self-managed/setup/guides/ingress-setup/"
             ),
             docsLink(

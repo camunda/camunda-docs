@@ -10,7 +10,7 @@ Opting-in to Camunda alpha terms currently only applies to Enterprise SaaS subsc
 Customers in other subscriptions can still turn on/off these settings directly from Console.  
 :::
 
-If you aren't already familiar with accessing **alpha features**, learn more in our [alpha feature documentation](/reference/alpha-features.md).
+If you aren't already familiar with accessing **alpha features**, learn more in our [alpha feature documentation](/components/early-access/alpha/alpha-features.md).
 
 Alpha terms typically refer to the specific terms and conditions that govern the use and testing of this software during its alpha phase. These terms outline the rights, responsibilities, and limitations of both the software provider (Camunda) and the users (alpha testers or early adopters) during the testing and evaluation period.
 

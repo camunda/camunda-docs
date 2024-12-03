@@ -170,6 +170,29 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job) {
 }
 ```
 
+You can also control auto-completion in your configuration.
+
+**Globally:**
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        auto-complete: false
+```
+
+**Per worker:**
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      override:
+        foo:
+          auto-complete: false
+```
+
 Ideally, you **don't** use blocking behavior like `send().join()`, as this is a blocking call to wait for the issued command to be executed on the workflow engine. While this is very straightforward to use and produces easy-to-read code, blocking code is limited in terms of scalability.
 
 This is why the worker above showed a different pattern (using `exceptionally`). Often, you might also want to use the `whenComplete` callback:
@@ -357,7 +380,7 @@ camunda:
       execution-threads: 1
 ```
 
-For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/ZeebeClientConfigurationProperties.java).
+For a full set of configuration options, see [CamundaClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/CamundaClientProperties.java).
 
 :::note
 We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.

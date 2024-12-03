@@ -6,7 +6,7 @@
         "guides/getting-started-java-spring",
         "guides/model-your-first-process",
         {
-          "By use case": [
+          "Orchestration use cases": [
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices"
@@ -25,7 +25,6 @@
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/message-correlation",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors"
       ],
@@ -101,10 +100,10 @@
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings"
           ]
         },
@@ -475,21 +474,7 @@
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
-            {
-              "Update guide": [
-                "components/connectors/custom-built-connectors/update-guide/introduction",
-                "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
-                "components/connectors/custom-built-connectors/update-guide/090-to-0100",
-                "components/connectors/custom-built-connectors/update-guide/080-to-090",
-                "components/connectors/custom-built-connectors/update-guide/070-to-080",
-                "components/connectors/custom-built-connectors/update-guide/060-to-070",
-                "components/connectors/custom-built-connectors/update-guide/050-to-060",
-                "components/connectors/custom-built-connectors/update-guide/040-to-050",
-                "components/connectors/custom-built-connectors/update-guide/030-to-040",
-                "components/connectors/custom-built-connectors/update-guide/020-to-030",
-                "components/connectors/custom-built-connectors/update-guide/010-to-020"
-              ]
-            }
+            "components/connectors/custom-built-connectors/connector-template-generator"
           ]
         }
       ],
@@ -1794,6 +1779,7 @@
       },
       "items": ["reference/release-notes/860", "reference/release-notes/850"]
     },
+    "reference/contact",
     "reference/supported-environments",
     "reference/dependencies",
     "reference/camunda-help-center",
@@ -2485,7 +2471,8 @@
                   "Troubleshooting": [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data"
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration"
                   ]
                 }
               ]

@@ -2,7 +2,7 @@
 id: working-with-apis-tools
 title: "Working with APIs & tools"
 sidebar_label: "Working with APIs & tools"
-description: "Interact programmatically with Camunda 8 using official Zeebe client libraries and APIs."
+description: "Learn more about the integration concepts involved in using the Camunda Zeebe client libraries, APIs, and SDKs to interact programmatically with Camunda 8."
 ---
 
 import DocCardList from '@theme/DocCardList';

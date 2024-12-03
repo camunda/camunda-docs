@@ -7,12 +7,6 @@ description: Start a process instance with your custom webhook configuration, tr
 
 The **HTTP Webhook Connector** is an inbound Connector that allows you to start a BPMN process instance triggered by external HTTP call.
 
-:::note
-If you have used the HTTP Webhook Connector with a self-managed Camunda 8 configuration before the
-Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template.
-Please refer to the [update guide](/components/connectors/custom-built-connectors/update-guide/060-to-070.md) for more details.
-:::
-
 ## Create an HTTP Webhook Connector event
 
 1. Start building your BPMN diagram. You can use HTTP Webhook Connector with either **Start Event** or **Intermediate Catch Event** building blocks.
@@ -83,7 +77,7 @@ Please refer to the [update guide](/components/connectors/custom-built-connector
   - Set the **API Key** property to the expected value of the API key.
   - Set the **API Key locator** property that will be evaluated against the incoming request to extract the API key. [See the example](#how-to-configure-api-key-authorization).
 
-- **[JWT authorization](https://jwt.io/)** - The token should be in the _Authorization_ header of the request in the format of Bearer {JWT_TOKEN}.
+- **[JWT authorization](https://jwt.io/)** - The token should be in the _Authorization_ header of the request in the format of Bearer `{JWT_TOKEN}`.
 
   - Set JWK URL which is used as a well-known public URL to fetch the [JWKs](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets).
   - Set JWT role property expression which will be evaluated against the content of the JWT to extract the list of roles. See more details on extracting roles from JWT data [here](#how-to-extract-roles-from-jwt-data).
@@ -314,8 +308,9 @@ not only the response body, but also the headers and the HTTP status returned by
 the Connector.
 :::
 
-A response expression can be used to return data after the webhook has been invoked. You can use FEEL to return the body, headers, and the HTTP status to the client invoking
-the Webhook Connector endpoint.
+#### Use the request
+
+You can use a response expression to return data after the webhook has been invoked. You can use FEEL to return the request body, headers, and the HTTP status to the client invoking the Webhook Connector endpoint.
 
 For example, given a webhook request with the payload body:
 
@@ -326,7 +321,7 @@ For example, given a webhook request with the payload body:
 }
 ```
 
-You can return `myValue1` in a new key `myCustomKey` with a response body expression that may look like this:
+You can return `myValue1` in a new key `myCustomKey` with a response body expression such as:
 
 ```json
 ={
@@ -334,7 +329,7 @@ You can return `myValue1` in a new key `myCustomKey` with a response body expres
 }
 ```
 
-The default HTTP status code is `200`. You can change it by providing a `statusCode` key in your expression:
+The default HTTP status code is `200`. You can change it by including a `statusCode` key in your expression:
 
 ```json
 ={
@@ -343,7 +338,7 @@ The default HTTP status code is `200`. You can change it by providing a `statusC
 }
 ```
 
-Headers are also supported by using the `headers` key in the response expression:
+Headers are also supported, using the `headers` key in the response expression:
 
 ```json
 ={
@@ -360,12 +355,14 @@ When working with `request` data, use the following references to access data:
 
 You can also use FEEL expressions to modify the data you return.
 
+#### Use the `correlation` object
+
+When using the Webhook Connector with a start event that correlates a message, you can access the `correlation` object in the response expression.
 In addition to the `request` object you have access to the `correlation` result.
 
 The data available via the `correlation` object depends on the type of BPMN element you are using the Webhook Connector with.
 
-A start event with a message definition uses message publishing internally to correlate an incoming
-request with Zeebe. A successful correlation will therefore lead to a published message and the `correlation` object will contain the following properties:
+A start event with a message definition uses message publishing internally to correlate an incoming request with Zeebe. A successful correlation will therefore lead to a published message and the `correlation` object will contain the following properties:
 
 ```json
 {
@@ -385,3 +382,40 @@ newly create process instance key when accessing the `correlation` object:
   "tenantId": "<default>"
 }
 ```
+
+#### Use the `documents` object
+
+You can access created documents in both the response expression and the result expression.
+
+The `documents` object contains the references for created documents.
+
+**Example response expression**
+
+```json
+{
+  "body": {
+      "message": "Document created",
+      "documents": documents
+  }
+}
+```
+
+If the `documents` list is not empty, document items are returned in the following format (example values provided):
+
+```json
+{
+  "storeId": "in-memory",
+  "documentId": "2b7215da-12b1-4374-8743-85d6854fcba5",
+  "metadata": {
+    "size": 405551,
+    "expiresAt": null,
+    "fileName": "my-image.jpg",
+    "customProperties": null,
+    "contentType": "image/jpeg"
+  }
+}
+```
+
+:::note
+Request parts are automatically stored in the configured document store when sending a multipart request.
+:::

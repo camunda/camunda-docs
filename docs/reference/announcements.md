@@ -4,6 +4,16 @@ title: "Announcements"
 description: "Important announcements including deprecation & removal notices"
 ---
 
+## Camunda 8.7
+
+Release date: TBD
+
+End of maintenance: TBD
+
+### Southeast Asia now available for SaaS customers
+
+SaaS customers can now create orchestration clusters in the [Singapore (asia-southeast1) region](/reference/regions.md), ensuring lower latency and improved processing speed for organizations operating in southeast Asian countries.
+
 ## Camunda 8.6
 
 Release date: 8th of Oct 2024

@@ -27,6 +27,40 @@ To make the **REST Connector** executable, choose the required authentication ty
 All the mandatory and non-mandatory fields will be covered in the upcoming sections. Depending on the authentication selection you make, more fields might be required. We will also cover this in the next section.
 :::
 
+### Configure a proxy server in Self-Managed
+
+If you are using Camunda Self-Managed, you can configure this Connector to use an HTTP or HTTPS proxy server.
+
+You can do this using the `JAVA_OPTS` environment variable. For example:
+
+```
+JAVA_OPTS=-Dhttp.proxyHost=proxy -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=OTHER_DOMAIN
+```
+
+#### HTTP
+
+To specify the proxy as an HTTP protocol handler, set the following standard JVM properties:
+
+| Property             | Description                                                                                                                                                                                                                                                                                                          |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http.proxyHost`     | The host name of the proxy server.                                                                                                                                                                                                                                                                                   |
+| `http.proxyPort`     | The port number (default is 80).                                                                                                                                                                                                                                                                                     |
+| `http.nonProxyHosts` | <p>A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>&#124</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
+
+#### HTTPS
+
+To specify the proxy as an HTTPS (HTTP over SSL) protocol handler, set the following standard JVM properties:
+
+| Property             | Description                                                                                                                                                                                                                                                                                                          |
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `https.proxyHost`    | The host name of the proxy server.                                                                                                                                                                                                                                                                                   |
+| `https.proxyPort`    | The port number (default is 443).                                                                                                                                                                                                                                                                                    |
+| `http.nonProxyHosts` | <p>A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>&#124</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
+
+:::note
+The HTTPS protocol handler also uses the `http.nonProxyHosts` property to specify non-proxy hosts.
+:::
+
 ### Authentication
 
 You can choose among the available authentication type according to your authentication requirements.
@@ -57,7 +91,7 @@ Select the **REST Connector** and fill out the following properties under the **
    - **Headers**: The API key will be included in the request headers.
 3. Specify your API key details:
    - **API key name**: Enter the parameter name expected by the API (e.g., apiKey).
-   - **API key value**: Reference the secret you created for your API key (e.g., {{secrets.REST_API_KEY_SECRET}}).
+   - **API key value**: Reference the secret you created for your API key (e.g., `{{secrets.REST_API_KEY_SECRET}}`).
 
 ### REST Connector (Basic)
 
@@ -206,6 +240,44 @@ Additionally, you can choose to unpack the content of your `response` into multi
     weather: response.body.weather[1].main
 }
 ```
+
+## Error handling
+
+If an error occurs, the Connector throws an error and includes the error response in the `error` variable in Operate. Click on the REST Connector in Operate to see this variable.
+
+The following example shows the `error` variable in an error response:
+
+```json
+{
+  "code": "400",
+  "variables": {
+    "response": {
+      "headers": {
+        "Content-Length": "70",
+        "Date": "Thu, 17 Oct 2024 09:31:51 GMT",
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "temperature": 36,
+        "message": "My custom error message",
+        "booleanField": true
+      }
+    }
+  },
+  "message": "Bad Request",
+  "type": "io.camunda.connector.api.error.ConnectorException"
+}
+```
+
+You can handle this error using an Error Boundary Event and the following error expression:
+
+```json
+if matches(error.code, "400") and error.variables.response.body.temp = 36
+then bpmnError("Too hot", error.variables.response.body.message, error.variables.response.body)
+else null
+```
+
+In this example, passing `error.variables.response.body` as the third argument to the `bpmnError` function allows you to pass additional information about the error to the error boundary event. For example, the `message`, `temperature` and `booleanField` fields from the error response are passed to the error boundary event.
 
 ## OData support
 

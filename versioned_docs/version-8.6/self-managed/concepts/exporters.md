@@ -66,7 +66,24 @@ heavy work during instantiation/configuration.
 
 ### Metrics
 
-The exporter is provided with a Micrometer [MeterRegistry](https://docs.micrometer.io/micrometer/reference/concepts/registry.html) in the `Exporter#configure(Context)` method through the configuration. Any metrics to be exported should interact with the registry.
+The exporter is provided with a Micrometer [MeterRegistry](https://docs.micrometer.io/micrometer/reference/concepts/registry.html) in the `Exporter#configure(Context)` method through the configuration. Any metrics to be exported should interact with the registry, for example:
+
+```java
+public class SomeExporter implements Exporter {
+    @Override
+    public void configure(final Context context) {
+        // ...
+        registry = context.getMeterRegistry();
+        // ...
+    }
+
+    public void flush() {
+        try (final var ignored = Timer.resource(registry, "meter.name")) {
+            exportBulk();
+        }
+    }
+}
+```
 
 When an exporter is validated, it is only provided with an in-memory register which is then discarded.
 
