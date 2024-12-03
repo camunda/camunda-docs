@@ -42,10 +42,6 @@ If the attribute `propagateAllChildVariables` is set (default: `true`), all vari
 
 It's recommended to disable the attribute `propagateAllChildVariables` or define output mappings if the call activity is in a parallel flow (e.g. when it is marked as [parallel multi-instance](../multi-instance/multi-instance.md#variable-mappings)). Otherwise, variables can be accidentally overridden when they are changed in the parallel flow.
 
-By default, all variables of the call activity scope are copied to the created process instance. This can be limited to copying only the local variables of the call activity, by setting the attribute `propagateAllParentVariables` to `false`.
-
-By disabling this attribute, variables existing at higher scopes are no longer copied. If the attribute `propagateAllParentVariables` is set (default: `true`), all variables are propagated to the child process instance.
-
 ## Additional resources
 
 ### XML representation
