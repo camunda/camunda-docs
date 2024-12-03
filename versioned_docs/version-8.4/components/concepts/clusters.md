@@ -38,8 +38,9 @@ You can resume a paused cluster at any time, which typically takes five to ten m
 
 - Clusters tagged as `dev` (or untagged) auto-pause eight hours after the cluster is created or resumed from a paused state.
 - Clusters tagged as `test`, `stage`, or `prod` auto-pause if there is no cluster activity for 48 hours.
-- Paused `dev` (or untagged) clusters are automatically deleted after 30 consecutive paused days. You can change the tag to avoid cluster deletion.
-- No data is lost while a cluster is paused. All execution and configuration is saved, but cluster components such as Zeebe and Operate are temporarily disabled until you resume the cluster.
+- Cluster disk space is cleared when a trial cluster is paused.
+  - You will need to redeploy processes to the cluster once it is resumed from a paused state.
+  - Cluster configuration settings (for example, API Clients, Connector secrets, and IP allowlists) are saved so you can easily resume a cluster.
 
 :::tip
 To prevent auto-pause, [Upgrade your Free Trial plan](https://camunda.com/pricing/) to a Starter or Enterprise plan.
@@ -55,7 +56,7 @@ The way this type of cluster works varies depending on if you are using it in th
 
 Enterprise plan users can purchase development clusters as part of their Enterprise subscription agreement. Deployment and execution of models (process instances, decision instances, and task users) are included at no extra cost for this type of cluster. Additionally, this type of cluster in the Enterprise plan follows the [standard data retention policy](/docs/components/concepts/data-retention.md) and does not auto-pause when not in use.
 
-Please [contact us](https://camunda.com/contact/) if you are an existing customer and would like to purchase a development cluster.
+Please [contact us](/reference/contact.md) if you are an existing customer and would like to purchase a development cluster.
 
 ### Development clusters in the Starter plan
 

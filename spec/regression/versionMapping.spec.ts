@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 test("main docs cross-link to optimize docs", async ({ page }) => {
-  await page.goto("/docs/components/");
+  await page.goto("/docs/reference/release-policy/");
 
-  await expect(page).toHaveTitle(/Overview Components \| Camunda 8 Docs/);
+  await expect(page).toHaveTitle(/Release policy \| Camunda 8 Docs/);
 
   // This is a link known to cross over to $optimize$.
   await page
@@ -16,15 +16,16 @@ test("main docs cross-link to optimize docs", async ({ page }) => {
 });
 
 test("optimize docs cross-link to main docs", async ({ page }) => {
-  await page.goto(
-    "/optimize/apis-tools/optimize-api/optimize-api-authentication/"
-  );
+  await page.goto("/optimize/components/what-is-optimize/");
 
-  await expect(page).toHaveTitle(/Authentication \| Camunda 8 Docs/);
+  await expect(page).toHaveTitle(/What is Optimize\? \| Camunda 8 Docs/);
 
   // This is a link known to cross over to $docs$.
-  await page.getByRole("link", { name: "building your own client" }).click();
+  await page
+    .getByRole("article")
+    .getByRole("link", { name: "Modeler" })
+    .click();
 
   // The `$docs$` should be transformed to `docs` in the target URL.
-  await expect(page.url()).toContain("/docs/apis-tools/build-your-own-client/");
+  await expect(page.url()).toContain("/docs/components/modeler/about-modeler/");
 });
