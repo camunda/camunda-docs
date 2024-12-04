@@ -259,13 +259,69 @@ ssh -L 26500:${CAMUNDA_IP}:26500 -L 8080:${CAMUNDA_IP}:8080 -L 9090:${CAMUNDA_IP
 
 6. **(optional) turn off bastion host**
 
-### Upgrade Camunda 8
+If you've used the bastion host for access, you can turn it off when it's no longer needed for direct access to the EC2 instances.
 
-TODO: We can give more guidance when 8.6 is more stable. The current state is that rerunning the script is sufficient to replace libs and restart apps.
+To do this, set the `enable_jump_host` variable to `false` in the `variables.tf` file and reapply Terraform.
 
 ### Verify connectivity to Camunda 8
 
-TODO: Ideally we have a single page to link to "dry principle" as we keep repeating ourselves.
+Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+
+For retrieving the Camunda endpoint you can do the following:
+
+1. Go to the Terraform folder
+
+```
+cd camunda-deployment-references/aws/ec2/terraform
+```
+
+2. Retrieve the Application Load Balancer output
+
+```
+terraform output -raw alb_endpoint
+```
+
+3. Use the REST API to communicate with Camunda
+
+With the endpoint you can follow the example as outlined in [the documentation](/apis-tools/camunda-api-rest/camunda-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
+
+### Upgrade Camunda 8
+
+:::info
+Upgrading directly from a Camunda 8.6 release to 8.7 is not supported and cannot be performed.
+:::
+
+To update to a new patch release, the recommended approach is as follows:
+
+1. Remove the `jars` folder: This step ensures that outdated dependencies from previous versions are completely removed.
+2. Overwrite remaining files: Replace the existing files with those from the downloaded patch release package.
+3. Restart Camunda 8.
+
+The update process can be automated using the `all-in-one-install.sh` script, which performs the following steps:
+
+- Detects an existing Camunda 8 installation.
+- Deletes the jars folder to clear outdated dependencies.
+- Overwrites the remaining files with the updated version.
+- Regenerates configuration files.
+- Restarts the application to apply the updates.
+
+### Monitoring
+
+Our default way of exposing metrics is in the Prometheus format, please conduct the general [metrisc related documentation](/self-managed/zeebe-deployment/operations/metrics.md) to learn more how to scrape Camunda 8.
+
+In an AWS environment, you can leverage CloudWatch not only for log collection but also for gathering [Prometheus metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-metrics.html). It's important to note that while Camunda natively supports Grafana and Prometheus, integrating CloudWatch for metric visualization is possible but requires additional configuration.
+
+### Backups
+
+Please conduct the general topic of backups in the [documentation](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+
+With AWS as chosen platform you can utilize [S3](https://aws.amazon.com/s3/) for the backups both for Zeebe and Elasticsearch.
+
+If you are using a managed OpenSearch domain instead, you should check out the [official documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshots.html) on creating backups and snapshots in OpenSearch.
+
+### Troubleshooting
+
+Please conduct the general topic of troubleshooting in the [documentation](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
 <!-- Optional stuff, just keeping it here for now -->
 
