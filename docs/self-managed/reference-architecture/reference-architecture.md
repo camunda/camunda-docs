@@ -1,6 +1,7 @@
 ---
 id: reference-architecture
-title: "Reference Architecture"
+title: "Reference Architecture Overview"
+sidebar_label: "Overview"
 description: "Learn about the self-managed reference architectures and how they can help you get started."
 ---
 
@@ -45,12 +46,12 @@ We refer to the orchestration or automation cluster to the core of Camunda.
 
 The included components are:
 
-- [Zeebe](./../../components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
-- [Operate](./../../components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
-- [Tasklist](./../../components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
+- [Zeebe](/components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
+- [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
 - [Optimize](#TODO): An analytics tool for generating reports and insights based on workflow data.
-- [Identity](./../identity/what-is-identity.md): A service for managing user authentication and authorization.
-- [Connectors](./../../components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
+- [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
 
 The orchestration cluster in itself is isolated and each of the above components have a 1:1 relation. So a single Operate instance can only talk to a single Zeebe instance as the data is dependent.
 
@@ -60,9 +61,9 @@ The management cluster is designed to oversee and manage multiple orchestration 
 
 The included components are:
 
-- [Console](./../../components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters.
+- [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters.
 - [Web Modeler](#TODO): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
-- [Identity](./../identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 
 The management cluster supports a 1:many relationship, meaning a single Console instance can manage multiple orchestration clusters, and the Web Modeler can deploy models to any available cluster.
 
@@ -74,7 +75,7 @@ Identity is listed twice because there are two distinct Identity components: one
 
 Databases are meant to be supplied from the outside, rather than being bundled with Camunda. This approach offers several advantages:
 
-- **Flexibility**: Allows you to choose the database technology that best fits your needs and existing infrastructure while choosing one of the [supported environments](./../../reference/supported-environments.md#component-requirements).
+- **Flexibility**: Allows you to choose the database technology that best fits your needs and existing infrastructure while choosing one of the [supported environments](/reference/supported-environments.md#component-requirements).
 - **Scalability**: External databases can be scaled independently of the Camunda components, providing better performance and resource management.
 - **Maintenance**: Simplifies the maintenance and upgrade processes, as database management can be handled separately.
 - **Compliance**: Ensures that you can adhere to specific data governance and compliance requirements.
@@ -97,9 +98,9 @@ Following should be considered when choosing high availability:
 
 While high availability is one part of the increased fault tolerance and resilience, you should also consider regional or zonal placement of your workloads.
 
-If you run infrastructure on cloud providers, you are often met with different regions and zones. For ideal high availability you should consider a minimum setup of 3 zones within a region as this will guarantee that in case of a zonal failure that the remaining two workloads can still process data. For more information on how Zeebe handles fault tolerance, have a look at the [raft consensus chapter](./../../components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
+If you run infrastructure on cloud providers, you are often met with different regions and zones. For ideal high availability you should consider a minimum setup of 3 zones within a region as this will guarantee that in case of a zonal failure that the remaining two workloads can still process data. For more information on how Zeebe handles fault tolerance, have a look at the [raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
 
-You can run Camunda also just with a single instance for various reasons but be sure to make [regular backups](./../zeebe-deployment/operations/backups.md) as your resilience is limited.
+You can run Camunda also just with a single instance for various reasons but be sure to make [regular backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md) as your resilience is limited.
 
 In the end it depends on your uptime requirements, budget, criticality of the workflow engine, and performance requirements.
 
@@ -115,7 +116,7 @@ For organizations that prefer traditional infrastructure, reference architecture
 
 ### Local Development
 
-While both options are suitable for trying out Camunda 8 locally, you might also consider exploring [Camunda 8 Run](./../setup/deploy/local/c8run.md) for a more developer focused experience.
+While both options are suitable for trying out Camunda 8 locally, you might also consider exploring [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) for a more developer focused experience.
 
 ## Helping Customers Decide
 
@@ -135,4 +136,4 @@ For more information and guides, have a look at the specific reference for [Kube
   - Applicable for high availability but requires more planning ahead.
   - Best for teams with expertise in managing physical servers or virtual machines.
 
-For more information and guides, have a look at the specific reference for [Manual](./../setup/deploy/local/manual.md).
+For more information and guides, have a look at the specific reference for [Manual](./manual/manual-overview).
