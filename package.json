@@ -32,8 +32,8 @@
     "api:generate:camunda": "npm run api:generate camunda"
   },
   "dependencies": {
-    "@auth0/auth0-react": "^2.2.1",
-    "@bpmn-io/form-js": "^1.7.3",
+    "@auth0/auth0-react": "^2.2.4",
+    "@bpmn-io/form-js": "^1.12.0",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
     "@docusaurus/theme-mermaid": "^2.4.1",
