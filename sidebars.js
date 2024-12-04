@@ -959,7 +959,6 @@ module.exports = {
                     "self-managed/setup/deploy/amazon/amazon-eks/irsa",
                   ],
                 },
-                "self-managed/setup/deploy/amazon/aws-ec2",
                 "self-managed/setup/deploy/amazon/aws-marketplace",
               ],
               "Microsoft (Azure)": [
@@ -1079,7 +1078,6 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
-        "self-managed/concepts/reference-architecture",
       ],
     },
     {
@@ -1560,6 +1558,17 @@ module.exports = {
                 "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
               ],
             },
+          ],
+        },
+      ],
+    },
+    {
+      "Reference Architecture": [
+        "self-managed/reference-architecture/reference-architecture",
+        {
+          Manual: [
+            "self-managed/reference-architecture/manual/manual-overview",
+            "self-managed/reference-architecture/manual/aws-ec2",
           ],
         },
       ],

@@ -1,7 +1,7 @@
 ---
-id: manual-ref
-title: "Manual single jar"
-sidebar_label: "Manual Ref"
+id: manual-overview
+title: "Manual Overview"
+sidebar_label: "Overview"
 ---
 
 <!-- Could also be called manual? -->
@@ -43,7 +43,7 @@ The above depiction showcases a simple use case of a single machine with a singl
 
 The single jar and manual way of deploying Camunda can be used for either simple architectures or high availability setups. Be aware that maintaining such setups is a lot more work compared to a solution like Kubernetes.
 
-Compared to the generalized architecture depicted in the [reference architecture](#TODO), the `Optimize importer` can be enabled as part of the single JAR.
+Compared to the generalized architecture depicted in the [reference architecture](../reference-architecture.md#architecture), the `Optimize importer` can be enabled as part of the single JAR.
 
 :::note
 When scaling from a single machine to multiple machine, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
@@ -53,7 +53,7 @@ When scaling from a single machine to multiple machine, ensure that the `Optimiz
 
 ![HA JAR](./img/placeholder-manual-ha.drawio.png)
 
-The above depiction showcases a minimum of three machines for a high availability setup. Two machines would be too little for high availability as no master can be elected in case of a machine failure. Consider having a read through the [clustering chapter](./../../../../components/zeebe/technical-concepts/clustering.md) to learn more about the raft protocol.
+The above depiction showcases a minimum of three machines for a high availability setup. Two machines would be too little for high availability as no master can be elected in case of a machine failure. Consider having a read through the [clustering chapter](/components/zeebe/technical-concepts/clustering.md) to learn more about the raft protocol.
 
 ### Components
 
@@ -86,7 +86,7 @@ Before implementing a reference architecture, review the requirements and guidan
 
 ### Infrastructure
 
-Any of the following are just suggestions for the minimum viable setup, the sizing heavily depends on your use cases and usage. It is recommended to understand the documentation on [sizing your environment](./../../../../components/best-practices/architecture/sizing-your-environment.md) and run benchmarking to confirm your required needs.
+Any of the following are just suggestions for the minimum viable setup, the sizing heavily depends on your use cases and usage. It is recommended to understand the documentation on [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and run benchmarking to confirm your required needs.
 
 #### Host
 
@@ -118,11 +118,11 @@ Some ports can be overwritten and are not definitive, you may conduct the [docum
 
 ### Application
 
-- Java Virtual Machine, see [supported environments](./../../../../reference/supported-environments.md) for version details.
+- Java Virtual Machine, see [supported environments](/reference/supported-environments.md) for version details.
 
 ### Database
 
-- Elasticsearch / OpenSearch, see [supported environments](./../../../../reference/supported-environments.md) for version details.
+- Elasticsearch / OpenSearch, see [supported environments](/reference/supported-environments.md) for version details.
 
 Our recommendation is to use an external managed offer as we will not go into detail on how to manage and maintain your database.
 
@@ -130,4 +130,4 @@ Our recommendation is to use an external managed offer as we will not go into de
 
 Designed and tested for default setups with the minimum required sizing in mind while supporting high availability.
 
-- [AWS EC2](./../amazon/aws-ec2.md)
+- [AWS EC2](./aws-ec2.md)

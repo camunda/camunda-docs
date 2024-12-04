@@ -28,7 +28,7 @@ The architecture as depicted focuses on a standard deployment consisting of a th
   https://drive.google.com/file/d/1TA0EDhZYmnpq9kM5L6u9oftndaCQoDD0/view?usp=sharing
 -->
 
-![AWS EC2 Architecture](../../assets/aws-ec2-arch.png)
+![AWS EC2 Architecture](./img/aws-ec2-arch.png)
 
 The setup consists of:
 
@@ -62,12 +62,8 @@ Alternatively, one can run the same setup with a single AWS EC2 instance as well
 
 ## Considerations
 
-- TODO: reference official limitations as outlined as part of [this announcement](https://camunda.slack.com/archives/C02GZDWP45T/p1720033663512759)
-- Current state:
-  - Identity?
-  - Optimize?
-  - Tasklist? Alpha3 was initially broken
-  - Highly available, some stuff but not everything, e.g. importers / archivers
+- TODO: reference official limitations if there are any
+- The Optimize importer is not highly available and must only run once
 
 ## Outcome
 
@@ -122,7 +118,7 @@ It's recommended to use a different backend than `local` as it is just meant for
 
 More information on alternatives can be found in the [Terraform documentation](https://developer.hashicorp.com/terraform/language/backend).
 
-- In the `config.tf` change the `backend "local"` to e.g. [s3](https://developer.hashicorp.com/terraform/language/backend/s3) or any other non `local` one that fits your organization.
+- In the `config.tf` change the `backend "local"` to e.g. [AWS 3](https://developer.hashicorp.com/terraform/language/backend/s3) or any other non `local` one that fits your organization.
 
 4. **Configure Terraform AWS provider**
 
