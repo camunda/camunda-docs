@@ -5,74 +5,294 @@ description: "Update a user task with the given key."
 sidebar_label: "Update user task"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWW1v2zYQ/isHftmbLMtZsnb65qVdm27rgsTZgCUBQktnm61EanyJYxj678ORki2/pMm67psLBHXMe+PdPQ+Z45JZPjUsvWZXBjVYbj6y24ipCjW3QsmznKXMVTm3SAIjWo9YjibToiIBlrIrvwwcXGsC5sLOwM4QpuIeJXzERcwiVnHNS7SoyeGSSV4iWW/s/oILFjFBFituZyxiGv92QmPOUqsdbrsdzZAMg5p4T2vnVkGImHyabIYlZ+mS2UVF7oS0OEXNIjZRuuQ2fPXDMavr2+ASjf1J5QvSWUcw4YXBiGVKWpSW1nhVFSLzWep/MBTSctebGn/AzNLeNeXUCjS0ms24nKJBb2hzW+8uf38PQS2kMcjmYW/cWi3GziLc88KhiW/kjaRMTFRRqLmQ07WIgYxLGCPw/IMzFvO2LMIAyrxSQtoIeJ4Lcs2LjuaNnIuiIF0xlUpjnpKfb+Eu4zIXlNs3WrnK3EEPNO0DxguotLoXuQ9BApaVXUAhjN3Uoy56vlru8BW3+JT8pdVCTr1GyMNV9S/VKi2UFnZBKqWQonQlJBGU/MF/HCRJBDlOuCssnCSUjPOOvaYJlcFu9n22OdxJVxR3oV6gNKhSWEt6wkJF4el7Sjj1cIXaCF+plZmvTNBcFZobI6YSkYorlX2yvs6gx8fQ64UualdjMumljdPUL0pr6ju8R2kBS2GMUBImSnfchtaNbySLdrqctsrHBbaIXTfXeaf/w9omIppKd6BjfHW6OKX+6VlR4g4FUWJyh+CJqCEE2mkMF0/WP96Juyaf6zb6DzEFMz1XfbnINpHUiY1rzRd7oyA4ke+VqidL8/xwyAAFIyyWZjcd9afCDETxmXFOvfL/GmiL/CePiO+P9gbd6m8EySLWsAhLE9LyzMHSkyRiDaewlEhlO546YlZY+pWdrs6IOmI8Cy63T4shZM5YVUIQaFjGzjgdHoHBeZahMWJcIEy0KjsHpYe5IYp0hWckv77BHyDkvQqHXAxnEyDGCXnHPCIG815aZrQKbprbwg3bYIgVcB7fb3u/CNeJi3AQs7omGY2mUtIEqjhKjncTMdq4Asy5ae4AORjnEzBxRbGIKZfHSfKk/s79pUO3jeEYflMaIUfLRWGAa1xlBoT02m3YMFb5IuTjkQtEpdW4wPK73YvEdr3Pg2Tjt70pcANBcBy8X1/8fAo/Hp+8uP16Zm1l0n5/Pp/HepL1MBdW6VjpaV9PMvohuW9iGM1QI5R8Ec6U1bVgTdRgKszERGRUaX9gNcFQlfefCJssH1Y/QadOix2UDeHq4gxEjtKKyYL6dMc162CM8bFyNh0XXH5k6/7adbrtxbiy5HoF5E0HdcSM5daZz+WJt6PROQQTkKkc/anqsdY42iCN46TLFD8kSU02qeLP2IkEfKgKLn1rbW9HSCjXfes3JqSxXGZfqjJKi6nY9huzLtabJn4VdhQwfvwMWO/CkpBOuJwoJ/P4ALADwA4AexRgP34GwIRpT7O5VnLqM4yQOa1R2mJxOAUPID2A9MuB9GTf5XQogbKsqQ9RaxoiZB6BOcxnovDm/SW/8d1MsQ5YO2DtgLXHsFZHrEQ7U3kYOGczP6G2M5ayPp2IPToRTX/ZmU/XNFCmeV0zwXa6YClbBujUab+/nClj63RZKW3r/j3V5Z5rQX/w+jLScoBY2zqFynjhv95XQlqgMXm7tVNeOplzeAkXry9H8IZbnPPwVy253DT9MnmZ7B9ZKG0fsTg8P4Oww9CAHVJozRK695oNws8x7EftBjNHg5NLUgvpGSPXqIeOirBqjMaft06/ByEWNR9+btvl3Z8jX3EitIv1GP/1Ay+rAMfNqXs7cGRHydFxbzDoJS9GR4N0MEhPkvjFSfIX2x4Dfkpyeyx33Tb07Z5ZWHdxPX86STqDns7ISsiJ8vloB0M7maU2o9GxV0ziwS5szs88+jNVlk76I0BO2wH12l5W0BxZEy8UIkNpfNqad5pW7NewAn8EjzCIqcsCFFrmnwo7c+M4U2U/C2qr/8eFGvdLLmS/cWH6p8Pfrt6/GvZ+PTt9/f7ydW8QJ7F9sL6alTK25LITR/PctLq0bm92uT7xnv801fSaxQfbrwouJCXe72nZkMI1W5MCi1jafba6jRpkX7PlcswNXumirunrvx3qBUuvb9dE4JkjF4Y+rx+WHt3C1xfNG9Q38LwXr71baWevcuEpqXD0G4vYR1xsPcHVt3XEZshz1D7SIHEa4umNyM7aws4bWB21GsMsw8o+Irtx+SAyWDHx+XB0+pbA3bzAlSonZc3n9CDI5yxlN+yGQlc+WZ43/PdLVnA5dXxK8sEw/fsHOdcFHA==
+api: eJztWW1v2zYQ/isHftmbLCtZsqb65qVdm67tgsTZgCUBSktnm61EqnyJYxj678ORki2/pMm67psLBHXMe+PdPQ+Z44JZPjEsvWZXBjVYbj6x24ipCjW3QsmznKXMVTm3SAJDWo9YjibToiIBlrIrvwwcXGsCZsJOwU4RJuIOJXzCecwiVnHNS7SoyeGCSV4iWW/s/o5zFjFBFitupyxiGj87oTFnqdUON90Op0iGQY29p5VzqyBETD5NNsWSs3TB7Lwid0JanKBmERsrXXIbvvrliNX1bXCJxv6q8jnprCIY88JgxDIlLUpLa7yqCpH5LPU/Ggppse1NjT5iZmnvmnJqBRpazaZcTtCgN7S+rTeXf7yHoBbSGGTzsDdurRYjZxHueOHQxDfyRlImxqoo1EzIyUrEQMYljBB4/tEZi3lbFmEAZV4pIW0EPM8FueZFR/NGzkRRkK6YSKUxT8nPj/Ah4zIXlNtXWrnKfIAeaNoHjOZQaXUnch+CBCwrO4dCGLuuR130dLXc4Qtu8TH5S6uFnHiNkIer6l+qVVooLeycVEohRelKSCIo+b3/eJAkEeQ45q6wcJxQMs479pomVAa72ffZ5vBBuqL4EOoFSoMqhbWkJyxUFJ6+o4RTD1eojfCVWpr5zgTNZaG5MWIiEam4UtlH6+sMenwMvF7oonY1JpNe2jhN/aK0pr7DO5QWsBTGCCVhrHTHbWjd+EayaKvLaat8VGCL2FVznXf6P6ytI6KpdAc6xleni1Pqn54VJW5RECUmdwieiBpCoJ3GcPFo/eOtuGvyuWqj/xBTMNNz1beLbB1Jndi41ny+MwqCE/leqnqyNE8PhwxQMMJiabbTUX8pzEAUXxnnxCv/r4G2yH/0iPj5cGfQrf5akCxiDYuwNCEtzxwsPU4i1nAKS4lUNuOpI2aFpV/Z6fKMqCPGs+By87QYQOaMVSUEgYZl7JTT4REYnGcZGiNGBcJYq7JzUHqYG6JIV3hG8utr/AFC3qlwyMVwNgZinJB3zCNiMO+lZUar4Ka5LdywNYZYAufh/bb3i3CduAgHMatrktFoKiVNoIrD5Gg7EcO1K8CMm+YOkINxPgFjVxTzmHJ5lCSP6m/dXzp02xiO4Z3SCDlaLgoDXOMyMyCk127DhpHK5yEfD1wgKq1GBZY/bV8kNut9HiQbv+1NgRsIgqPg/frit1N4fnT87Pb7qbWVSfv92WwW63HWw1xYpWOlJ309zuiH5H6IYThFjVDyeThTlteCFVGDqTATY5FRpf2B1QRDVd59IqyzfFj9Ap06LbZQNoCrizMQOUorxnPq0y3XrIMxxkfK2XRUcPmJrfpr2+mmF+PKkuslkNcd1BEzlltnvpYnXg+H5xBMQKZy9Keqx1rjaI00jpIuU/ySJDXZpIo/YScS8L4quPSttbkdIaFc9a3fmJDGcpl9q8ooLSZi02/MulhvmvhF2FHA+NETYL0NS0I64XKsnMzjPcD2ANsD7EGAPf8KgAnTnmYzreTEZxghc1qjtMV8fwruQboH6bcD6fGuy+lAAmVZUx+i1jREyDwCc5hNReHN+0t+47uZYu2xtsfaHmsPYa2OWIl2qvIwcM6mfkJtpyxlfToRe3Qimv6iM5+uaaBM87pmgu10wVK2CNCp035/MVXG1umiUtrW/Tuqyx3Xgv7g9WWk5QCxtnUKlfHCf72rhLRAY/J2a6e8dDLncAIXLy+H8IpbnPHwVy25XDd9kpwku0cWStsHLA7OzyDsMDRghxRas4TunWaD8FMM+1G7wczR4OSS1EJ6Rsg16oGjIiwbo/HnrdPvQYhFzYff2nZ589fQV5wI7WI1xn95z8sqwHF96t4OHNlhcnjUS571Dp8PD47T44P08CROnh38zTbHgF+S3BzLXbcNfbtjFtZdXM2fjpPOoKczshJyrHw+2sHQVmapzWh07BWT+GAbNudnHv2ZKksn/REgJ+2AemUvK2iOrIkXCpGhND5tzTtNK/Y2rMCfwSMcxNRlAQot80+EnbpRnKmynwW15f+jQo36JRey37gw/dPBu6v3Lwa9t2enL99fvuwdxEls762vZqWMLbnsxNE8Ny0vrZubXaxOvKc/TTW9ZvHe9quCC0mJ93taNKRwzVakwCKWdp+tbqMG2ddssRhxg1e6qGv6+rNDPWfp9e2KCDxz5MLQ59XD0oNb+P6ieYP6AZ724rVzK+3sVc49JRWOfmMR+4TzjSe4+raO2BR5jtpHGiROQzy9IdlZWdh6A6ujVmOQZVjZB2TXLh9EBksmPh8MT18TuJsXuFLlpKz5jB4E+SyErXyiPGf47xas4HLi+IRkg1H69w+3NwRC
 sidebar_class_name: "patch api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Update user task</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update user task"}
+></Heading>
 
 <MethodEndpoint
   method={"patch"}
   path={"/user-tasks/{userTaskKey}"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Update a user task with the given key.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"userTaskKey","in":"path","required":true,"description":"The key of the user task to update.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>changeset</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__nullable"}>nullable</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task to update.",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
 
-JSON object with changed task attribute values.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            changeset: {
+              description:
+                "JSON object with changed task attribute values.\n\nThe following attributes can be adjusted with this endpoint, additional attributes\nwill be ignored:\n\n* `candidateGroups` - reset by providing an empty list\n* `candidateUsers` - reset by providing an empty list\n* `dueDate` - reset by providing an empty String\n* `followUpDate` - reset by providing an empty String\n* `priority` - minimum 0, maximum 100, default 50\n\nProviding any of those attributes with a `null` value or omitting it preserves\nthe persisted attribute's value.\n\nThe assignee cannot be adjusted with this endpoint, use the Assign task endpoint.\nThis ensures correct event emission for assignee changes.\n",
+              type: "object",
+              nullable: true,
+              additionalProperties: true,
+              properties: {
+                dueDate: {
+                  type: "string",
+                  format: "date-time",
+                  description:
+                    "The due date of the task. Reset by providing an empty String.",
+                  nullable: true,
+                },
+                followUpDate: {
+                  type: "string",
+                  format: "date-time",
+                  description:
+                    "The follow-up date of the task. Reset by providing an empty String.",
+                  nullable: true,
+                },
+                candidateUsers: {
+                  type: "array",
+                  description:
+                    "The list of candidate users of the task. Reset by providing an empty list.",
+                  items: { type: "string" },
+                  nullable: true,
+                },
+                candidateGroups: {
+                  type: "array",
+                  description:
+                    "The list of candidate groups of the task. Reset by providing an empty list.",
+                  items: { type: "string" },
+                  nullable: true,
+                },
+                priority: {
+                  type: "integer",
+                  format: "int32",
+                  description: "The priority of the task.",
+                  minimum: 0,
+                  default: 50,
+                  maximum: 100,
+                  nullable: true,
+                },
+              },
+              title: "Changeset",
+            },
+            action: {
+              description:
+                'A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "update".\n',
+              type: "string",
+              nullable: true,
+            },
+          },
+          title: "UserTaskUpdateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-The following attributes can be adjusted with this endpoint, additional attributes
-will be ignored:
-
-- `candidateGroups` - reset by providing an empty list
-- `candidateUsers` - reset by providing an empty list
-- `dueDate` - reset by providing an empty String
-- `followUpDate` - reset by providing an empty String
-- `priority` - minimum 0, maximum 100, default 50
-
-Providing any of those attributes with a `null` value or omitting it preserves
-the persisted attribute's value.
-
-The assignee cannot be adjusted with this endpoint, use the Assign task endpoint.
-This ensures correct event emission for assignee changes.
-
-</div><SchemaItem collapsible={false} name={"dueDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time","description":"The due date of the task. Reset by providing an empty String.","nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"followUpDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time","description":"The follow-up date of the task. Reset by providing an empty String.","nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The list of candidate users of the task. Reset by providing an empty list.","items":{"type":"string"},"nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The list of candidate groups of the task. Reset by providing an empty list.","items":{"type":"string"},"nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"priority"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `<= 100`"} schema={{"type":"integer","format":"int32","description":"The priority of the task.","minimum":0,"default":50,"maximum":100,"nullable":true}}></SchemaItem><SchemaItem name={"property name*"} required={false} schemaName={"any"} qualifierMessage={undefined} schema={{"description":"JSON object with changed task attribute values.\n\nThe following attributes can be adjusted with this endpoint, additional attributes\nwill be ignored:\n\n* `candidateGroups` - reset by providing an empty list\n* `candidateUsers` - reset by providing an empty list\n* `dueDate` - reset by providing an empty String\n* `followUpDate` - reset by providing an empty String\n* `priority` - minimum 0, maximum 100, default 50\n\nProviding any of those attributes with a `null` value or omitting it preserves\nthe persisted attribute's value.\n\nThe assignee cannot be adjusted with this endpoint, use the Assign task endpoint.\nThis ensures correct event emission for assignee changes.\n","type":"object","nullable":true,"additionalProperties":true,"properties":{"dueDate":{"type":"string","format":"date-time","description":"The due date of the task. Reset by providing an empty String.","nullable":true},"followUpDate":{"type":"string","format":"date-time","description":"The follow-up date of the task. Reset by providing an empty String.","nullable":true},"candidateUsers":{"type":"array","description":"The list of candidate users of the task. Reset by providing an empty list.","items":{"type":"string"},"nullable":true},"candidateGroups":{"type":"array","description":"The list of candidate groups of the task. Reset by providing an empty list.","items":{"type":"string"},"nullable":true},"priority":{"type":"integer","format":"int32","description":"The priority of the task.","minimum":0,"default":50,"maximum":100,"nullable":true}},"title":"Changeset"}} collapsible={false} discriminator={false}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"action"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to \"update\".\n","type":"string","nullable":true}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
-
-The user task was updated successfully.
-
-</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The user task with the given key cannot be updated. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-The user task with the given key was not found.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"409"} value={"409"}><div>
-
-The user task with the given key is in the wrong state currently. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The user task was updated successfully." },
+    "400": {
+      description:
+        "The user task with the given key cannot be updated. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The user task with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The user task with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

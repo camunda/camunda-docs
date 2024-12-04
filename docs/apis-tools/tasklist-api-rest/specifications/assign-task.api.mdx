@@ -5,55 +5,290 @@ description: "Assign a task with `taskId` to `assignee` or the active user. Retu
 sidebar_label: "Assign a task"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "patch api-method"
 info_path: docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Assign a task</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Assign a task"}
+></Heading>
 
 <MethodEndpoint
   method={"patch"}
   path={"/v1/tasks/{taskId}/assign"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Assign a task with `taskId` to `assignee` or the active user. Returns the task.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"taskId","in":"path","description":"The ID of the task.","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}><div style={{"marginTop":"1rem","marginBottom":"1rem"}}>
+<ParamsDetails
+  parameters={[
+    {
+      name: "taskId",
+      in: "path",
+      description: "The ID of the task.",
+      required: true,
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
-When using REST API with JWT authentication token following request body parameters may be used.
+<RequestSchema
+  title={"Body"}
+  body={{
+    description:
+      "When using REST API with JWT authentication token following request body parameters may be used.",
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            assignee: {
+              type: "string",
+              description:
+                "When using a JWT token, the assignee parameter is NOT optional when called directly from the API.\nThe system will not be able to detect the assignee from the JWT token, therefore the assignee parameter needs to be\nexplicitly passed in this instance.",
+            },
+            allowOverrideAssignment: {
+              type: "boolean",
+              description:
+                "When `true` the task that is already assigned may be assigned again. Otherwise the task\nmust be first unassigned and only then assigned again.",
+              default: true,
+            },
+          },
+          description:
+            "Request params used to assign the task to assignee or current user.",
+          title: "TaskAssignRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"When using a JWT token, the assignee parameter is NOT optional when called directly from the API.\nThe system will not be able to detect the assignee from the JWT token, therefore the assignee parameter needs to be\nexplicitly passed in this instance."}}></SchemaItem><SchemaItem collapsible={false} name={"allowOverrideAssignment"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean","description":"When `true` the task that is already assigned may be assigned again. Otherwise the task\nmust be first unassigned and only then assigned again.","default":true}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-On success returned.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The unique identifier of the task."}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the task."}}></SchemaItem><SchemaItem collapsible={false} name={"taskDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"User task ID from the BPMN definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the process."}}></SchemaItem><SchemaItem collapsible={false} name={"creationDate"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"When was the task created (renamed equivalent of `Task.creationTime` field)."}}></SchemaItem><SchemaItem collapsible={false} name={"completionDate"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"When was the task completed (renamed equivalent of `Task.completionTime` field)."}}></SchemaItem><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The username/id of who is assigned to the task."}}></SchemaItem><SchemaItem collapsible={false} name={"taskState"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`, `FAILED`]"} schema={{"type":"string","description":"The state of the task.","readOnly":true,"enum":["CREATED","COMPLETED","CANCELED","FAILED"]}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to the task form."}}></SchemaItem><SchemaItem collapsible={false} name={"formId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to the ID of a deployed form. If the form is not deployed, this property is null."}}></SchemaItem><SchemaItem collapsible={false} name={"formVersion"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"Reference to the version of a deployed form. If the form is not deployed, this property is null.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"isFormEmbedded"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean","description":"Is the form embedded for this task? If there is no form, this property is null."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to process definition (renamed equivalent of `Task.processDefinitionId` field)."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to process instance id (renamed equivalent of `Task.processInstanceId` field)."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID associated with the task."}}></SchemaItem><SchemaItem collapsible={false} name={"dueDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The due date for the task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"followUpDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The follow-up date for the task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate groups for the task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate users for the task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"implementation"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`JOB_WORKER`, `ZEEBE_USER_TASK`]"} schema={{"type":"string","enum":["JOB_WORKER","ZEEBE_USER_TASK"]}}></SchemaItem><SchemaItem collapsible={false} name={"priority"} required={false} schemaName={"integer"} qualifierMessage={"**Possible values:** `[0,100]`"} schema={{"description":"The priority of a user task. The higher the value the higher the priority. Applicable only for Zeebe user tasks.","type":"integer","minimum":0,"maximum":100,"default":50}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"taskDefinitionId\": \"string\",\n  \"processName\": \"string\",\n  \"creationDate\": \"string\",\n  \"completionDate\": \"string\",\n  \"assignee\": \"string\",\n  \"taskState\": \"CREATED\",\n  \"formKey\": \"string\",\n  \"formId\": \"string\",\n  \"formVersion\": 0,\n  \"isFormEmbedded\": true,\n  \"processDefinitionKey\": \"string\",\n  \"processInstanceKey\": \"string\",\n  \"tenantId\": \"string\",\n  \"dueDate\": \"2024-08-16T13:54:01.392Z\",\n  \"followUpDate\": \"2024-08-16T13:54:01.392Z\",\n  \"candidateGroups\": [\n    \"string\"\n  ],\n  \"candidateUsers\": [\n    \"string\"\n  ],\n  \"implementation\": \"JOB_WORKER\",\n  \"priority\": 50\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-An error is returned when the task is not active (not in the CREATED state).<br/>An error is returned when task was already assigned, except the case when JWT authentication token used and `allowOverrideAssignment = true`.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","description":"An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A string that provides a brief description of the error that occurred."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error instance UUID for lookup (e.g., in log messages)."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-An error is returned when user doesn't have the permission to assign another user to this task.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","description":"An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A string that provides a brief description of the error that occurred."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error instance UUID for lookup (e.g., in log messages)."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-An error is returned when the task with the `taskId` is not found.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","description":"An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A string that provides a brief description of the error that occurred."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error instance UUID for lookup (e.g., in log messages)."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "On success returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              id: {
+                type: "string",
+                description: "The unique identifier of the task.",
+              },
+              name: { type: "string", description: "The name of the task." },
+              taskDefinitionId: {
+                type: "string",
+                description: "User task ID from the BPMN definition.",
+              },
+              processName: {
+                type: "string",
+                description: "The name of the process.",
+              },
+              creationDate: {
+                type: "string",
+                description:
+                  "When was the task created (renamed equivalent of `Task.creationTime` field).",
+              },
+              completionDate: {
+                type: "string",
+                description:
+                  "When was the task completed (renamed equivalent of `Task.completionTime` field).",
+              },
+              assignee: {
+                type: "string",
+                description: "The username/id of who is assigned to the task.",
+              },
+              taskState: {
+                type: "string",
+                description: "The state of the task.",
+                readOnly: true,
+                enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+              },
+              formKey: {
+                type: "string",
+                description: "Reference to the task form.",
+              },
+              formId: {
+                type: "string",
+                description:
+                  "Reference to the ID of a deployed form. If the form is not deployed, this property is null.",
+              },
+              formVersion: {
+                type: "integer",
+                description:
+                  "Reference to the version of a deployed form. If the form is not deployed, this property is null.",
+                format: "int64",
+              },
+              isFormEmbedded: {
+                type: "boolean",
+                description:
+                  "Is the form embedded for this task? If there is no form, this property is null.",
+              },
+              processDefinitionKey: {
+                type: "string",
+                description:
+                  "Reference to process definition (renamed equivalent of `Task.processDefinitionId` field).",
+              },
+              processInstanceKey: {
+                type: "string",
+                description:
+                  "Reference to process instance id (renamed equivalent of `Task.processInstanceId` field).",
+              },
+              tenantId: {
+                type: "string",
+                description: "The tenant ID associated with the task.",
+              },
+              dueDate: {
+                type: "string",
+                description: "The due date for the task.",
+                format: "date-time",
+              },
+              followUpDate: {
+                type: "string",
+                description: "The follow-up date for the task.",
+                format: "date-time",
+              },
+              candidateGroups: {
+                type: "array",
+                description: "The candidate groups for the task.",
+                items: { type: "string" },
+              },
+              candidateUsers: {
+                type: "array",
+                description: "The candidate users for the task.",
+                items: { type: "string" },
+              },
+              implementation: {
+                type: "string",
+                enum: ["JOB_WORKER", "ZEEBE_USER_TASK"],
+              },
+              priority: {
+                description:
+                  "The priority of a user task. The higher the value the higher the priority. Applicable only for Zeebe user tasks.",
+                type: "integer",
+                minimum: 0,
+                maximum: 100,
+                default: 50,
+              },
+            },
+            title: "TaskResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "An error is returned when the task is not active (not in the CREATED state).<br/>An error is returned when task was already assigned, except the case when JWT authentication token used and `allowOverrideAssignment = true`.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description:
+        "An error is returned when user doesn't have the permission to assign another user to this task.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "An error is returned when the task with the `taskId` is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
