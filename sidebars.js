@@ -839,12 +839,6 @@ module.exports = {
             "apis-tools/community-clients/index",
             {
               "Zeebe clients": [
-                "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/micronaut",
-                "apis-tools/community-clients/python",
-                "apis-tools/community-clients/ruby",
-                "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/quarkus",
                 {
                   "CLI client": [
                     "apis-tools/community-clients/cli-client/index",

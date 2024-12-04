@@ -2347,20 +2347,11 @@ module.exports = {
 
             {
               "Zeebe clients": [
-                docsLink("C#", "apis-tools/community-clients/c-sharp/"),
                 docsLink(
                   "JavaScript/Node.js",
                   "apis-tools/community-clients/javascript/"
                 ),
-                docsLink(
-                  "Micronaut",
-                  "apis-tools/community-clients/micronaut/"
-                ),
-                docsLink("Python", "apis-tools/community-clients/python/"),
-                docsLink("Ruby", "apis-tools/community-clients/ruby/"),
-                docsLink("Rust", "apis-tools/community-clients/rust/"),
                 docsLink("Spring", "apis-tools/community-clients/spring/"),
-                docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
                 {
                   "CLI client": [
                     docsLink("Quick reference", "apis-tools/cli-client/"),
