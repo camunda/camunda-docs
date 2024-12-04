@@ -234,9 +234,9 @@ The actual configuration properties can be reviewed [in the Connectors configura
 
 1. Set up the global configuration to enable the single Ingress definition with the host. Update your configuration file as shown below:
 
-   ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/domain.yml
-   ```
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/domain.yml
+```
 
 1. Deploy routes for each service to ensure they are accessible externally. These routes will be configured with default ports, allowing seamless communication with the services. To proceed, you need to reference the manifest that contains all the routes for the platform.
 

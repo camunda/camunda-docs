@@ -167,8 +167,8 @@ In the example below, a TLS certificate is generated for the Zeebe Gateway servi
 
 Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 
-      <details>
-        <summary>PKCS #8, PKCS #1 syntax</summary>
+  <details>
+    <summary>PKCS #8, PKCS #1 syntax</summary>
 
 > PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
 
@@ -176,7 +176,7 @@ Another option is [Cert Manager](https://docs.openshift.com/container-platform/l
 
 [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
 
-      </details>
+  </details>
 
 - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
@@ -220,10 +220,9 @@ The actual configuration properties can be reviewed [in the Connectors configura
 
 1. Set up the global configuration to enable the single Ingress definition with the host. Update your configuration file as shown below:
 
-
-    ```yaml reference
-    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/domain.yml
-    ```
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/domain.yml
+```
 
 1. Deploy routes for each service to ensure they are accessible externally. These routes will be configured with default ports, allowing seamless communication with the services. To proceed, you need to reference the manifest that contains all the routes for the platform.
 
