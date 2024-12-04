@@ -890,6 +890,7 @@ module.exports = {
     {
       "Migration manuals": [
         "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-camunda-api",
       ],
     },
   ],
