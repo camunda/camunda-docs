@@ -60,7 +60,11 @@ Unlike the [EKS Terraform setup](../amazon-eks/terraform-setup.md), we currently
 
 ### Outcome
 
-<!-- TODO : add architecture diagram --->
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+
+_Infrastructure diagram for a single region ROSA setup (click on the image to open the PDF version)_
+[![Infrastructure Diagram ROSA Single-Region](./assets/rosa-single-region.jpg)](./assets/rosa-single-region.pdf)
 
 Following this tutorial and steps will result in:
 
