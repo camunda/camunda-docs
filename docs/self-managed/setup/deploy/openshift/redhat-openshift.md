@@ -373,7 +373,11 @@ watch -n 5 '
 
 Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8)
 
-<!-- TODO: modify instructions to test with zbctl as the domain is slighty different -->
+:::caution Domain name for gRPC Zeebe
+
+In this setup, the domain used for gRPC communication with Zeebe is slightly different from the one in the guide. Instead of using `zeebe.$DOMAIN_NAME`, you need to use `zeebe-$DOMAIN_NAME`.
+
+:::
 
 ## Pitfalls to avoid
 
