@@ -372,11 +372,6 @@ label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
-type:"link",
-href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/",
-label: "Zeebe API (REST)",
-docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
-}
 ]}/>
 
 ## Troubleshooting and common issues
