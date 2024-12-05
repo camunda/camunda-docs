@@ -812,64 +812,62 @@ module.exports = {
       ],
     },
     {
-      Clients: [
+      "Clients & SDKs": [
         {
-          "Java client": [
-            "apis-tools/java-client/index",
-            "apis-tools/java-client/job-worker",
-            "apis-tools/java-client/logging",
-            "apis-tools/java-client/zeebe-process-test",
+          SDKs: [
+            "apis-tools/node-js-sdk",
             {
-              Examples: [
-                "apis-tools/java-client-examples/index",
-                "apis-tools/java-client-examples/process-deploy",
-                "apis-tools/java-client-examples/process-instance-create",
-                "apis-tools/java-client-examples/process-instance-create-nonblocking",
-                "apis-tools/java-client-examples/process-instance-create-with-result",
-                "apis-tools/java-client-examples/decision-evaluate",
-                "apis-tools/java-client-examples/job-worker-open",
-                "apis-tools/java-client-examples/data-pojo",
-                "apis-tools/java-client-examples/cluster-topology-request",
+              "Spring Zeebe": [
+                "apis-tools/spring-zeebe-sdk/getting-started",
+                "apis-tools/spring-zeebe-sdk/configuration",
               ],
             },
           ],
         },
         {
-          "Community clients": [
-            "apis-tools/community-clients/index",
+          Clients: [
             {
-              "Zeebe clients": [
-                "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/micronaut",
-                "apis-tools/community-clients/python",
-                "apis-tools/community-clients/ruby",
-                "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/quarkus",
+              "Java client": [
+                "apis-tools/java-client/index",
+                "apis-tools/java-client/job-worker",
+                "apis-tools/java-client/logging",
+                "apis-tools/java-client/zeebe-process-test",
                 {
-                  "CLI client": [
-                    "apis-tools/community-clients/cli-client/index",
-                    "apis-tools/community-clients/cli-client/cli-get-started",
-                  ],
-                  "Go client": [
-                    "apis-tools/community-clients/go-client/index",
-                    "apis-tools/community-clients/go-client/go-get-started",
-                    "apis-tools/community-clients/go-client/job-worker",
+                  Examples: [
+                    "apis-tools/java-client-examples/index",
+                    "apis-tools/java-client-examples/process-deploy",
+                    "apis-tools/java-client-examples/process-instance-create",
+                    "apis-tools/java-client-examples/process-instance-create-nonblocking",
+                    "apis-tools/java-client-examples/process-instance-create-with-result",
+                    "apis-tools/java-client-examples/decision-evaluate",
+                    "apis-tools/java-client-examples/job-worker-open",
+                    "apis-tools/java-client-examples/data-pojo",
+                    "apis-tools/java-client-examples/cluster-topology-request",
                   ],
                 },
               ],
             },
-          ],
-        },
-        "apis-tools/build-your-own-client",
-      ],
-    },
-    {
-      SDKs: [
-        "apis-tools/node-js-sdk",
-        {
-          "Spring Zeebe": [
-            "apis-tools/spring-zeebe-sdk/getting-started",
-            "apis-tools/spring-zeebe-sdk/configuration",
+            {
+              "Community clients": [
+                "apis-tools/community-clients/index",
+                {
+                  "Zeebe clients": [
+                    {
+                      "CLI client": [
+                        "apis-tools/community-clients/cli-client/index",
+                        "apis-tools/community-clients/cli-client/cli-get-started",
+                      ],
+                      "Go client": [
+                        "apis-tools/community-clients/go-client/index",
+                        "apis-tools/community-clients/go-client/go-get-started",
+                        "apis-tools/community-clients/go-client/job-worker",
+                      ],
+                    },
+                  ],
+                },
+                "apis-tools/build-your-own-client",
+              ],
+            },
           ],
         },
       ],
