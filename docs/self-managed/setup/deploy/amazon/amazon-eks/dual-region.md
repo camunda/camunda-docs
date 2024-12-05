@@ -386,7 +386,7 @@ unset AWS_SECRET_ACCESS_KEY_ES
 
 :::caution Bucket vulnerable to region outages
 
-The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html). If this region becomes unavailable, you will need to create a new bucket in a different region and reconfigure your Elasticsearch cluster with the new bucket.
+The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html). If that region becomes unavailable and you want to restore to a different region or S3 services remain disrupted, you must create a new bucket in another region and reconfigure your Elasticsearch cluster to use the new bucket.
 
 :::
 
