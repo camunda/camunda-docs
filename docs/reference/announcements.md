@@ -30,7 +30,7 @@ Furthermore, new indices have been created to integrate Identity into the system
 The exporter is able to consume Zeebe records (mostly events created by the engine), aggregate data, and store the related data into shared and harmonized indices. Archiving of data is done in the background coupled to the exporter (but not blocking the exporter's progress). Indices can be located in either ElasticSearch or Opensearch. Our web components (Tasklist and Operate) should then use the new harmonized indices to show data to the user.
 
 The picture above is a simplified version of the actual work we are doing. For example, Tasklist + Operate Importers are still needed, for old data to be imported, but the Camunda exporter should write all new data into ES/OS. After old indices are drained importers can be turned off.
-The Archiver, which takes care of the archiving of completed process instances, will be moved into the Zeebe system as well, to reduce the installation complexity and have a better scaling and replication factor (based on partitions). 
+The Archiver, which takes care of the archiving of completed process instances, will be moved into the Zeebe system as well, to reduce the installation complexity and have a better scaling and replication factor (based on partitions).
 
 All of this should help us to achieve a more streamlined architecture, better performance of the Camunda platform, and stability (especially with regards to ES/OS).
 
