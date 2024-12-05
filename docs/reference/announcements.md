@@ -22,7 +22,7 @@ Camunda is harmonizing our index structure and usage.
 - With this change, several Operate indices can and will be used by Tasklist.
 - New indices have been created to integrate Identity into the system.
 
-![harmonized-indices](./img/harmonized-indices-miro.png)
+![harmonized-indices](./img/harmonized-indices-schema.png)
 
 #### Camunda Exporter
 
