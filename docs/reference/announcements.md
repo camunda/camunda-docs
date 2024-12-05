@@ -16,11 +16,16 @@ We are introducing a new Camunda Exporter to bring the importer and archiving lo
 
 #### Harmonized Schema
 
-TBD;
+As we had unnecessary duplications over several indices, due to the previous architecture, we were able to harmonize our index structure and usage.
+
+![harmonized-indices](./img/harmonized-indices-miro.png)
+
+This means several Operate indices, can and will be used by Tasklist now as well.
+Furthermore, new indices have been created to integrate Identity into the system, more details on this later (see Identity re-architecture).
 
 #### Camunda Exporter
 
-
+![camunda-exporter-target](./img/camunda-exporter-target.png)
 
 The exporter is able to consume Zeebe records (mostly events created by the engine), aggregate data, and store the related data into shared and harmonized indices. Archiving of data is done in the background coupled to the exporter (but not blocking the exporter's progress). Indices can be located in either ElasticSearch or Opensearch. Our web components (Tasklist and Operate) should then use the new harmonized indices to show data to the user.
 
