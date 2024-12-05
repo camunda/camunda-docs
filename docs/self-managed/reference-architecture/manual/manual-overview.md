@@ -19,7 +19,7 @@ With the Single JAR approach, all necessary components are bundled into a single
 
 Other deployment options, such as containerized deployments or managed services, might offer more convenience and automation. However, the Single JAR method gives you the flexibility to tailor the deployment to your exact needs, which can be beneficial for complex or highly customized environments.
 
-We will later go into the details but be aware that not everything is part of this Single JAR. Have a look at the documentation on the orchestration and management cluster separation. <!-- TODO: add a link reference from reference arch  -->
+We will later go into the details but be aware that not everything is part of this Single JAR. Have a look at [the documentation](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) on the orchestration and management cluster separation.
 
 ## Before You Start
 
@@ -33,9 +33,7 @@ Before you begin with the self-managed single JAR setup, please consider the com
 
 ## Architecture
 
-<!-- TODO: include picture when I get access to the draw.io stuff from Hamza. Afterwards describe it -->
-
-<!-- Pictures are as mentioned for now just placeholders --->
+<!-- TODO: switch placeholder pictures to the new miro approach of Léo -->
 
 ![Single JAR](./img/placeholder-manual-single.drawio.png)
 

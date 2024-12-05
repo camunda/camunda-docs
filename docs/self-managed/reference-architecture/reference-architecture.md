@@ -25,11 +25,11 @@ It's important to note that reference architectures are not a one-size-fits-all 
 
 ## Support Considerations
 
-We recognize that deviations from the reference architecture are unavoidable. However, such changes will introduce additional complexity, making troubleshooting more difficult. When modifications are required, ensure they are well-documented to facilitate future maintenance and support more quickly. Camunda publishes [supported environments](/docs/reference/supported-environments/) information to help you navigate supported configurations.
+We recognize that deviations from the reference architecture are unavoidable. However, such changes will introduce additional complexity, making troubleshooting more difficult. When modifications are required, ensure they are well-documented to facilitate future maintenance and support more quickly. Camunda publishes [supported environments](/reference/supported-environments.md) information to help you navigate supported configurations.
 
 ## Architecture
 
-<!-- TODO: include overview, Hamza had good pictures on this topic -->
+<!-- TODO: include the overview that Andrey has done -->
 
 ![Camunda Architecture](./img/placeholder.png)
 
@@ -57,7 +57,7 @@ The orchestration cluster is central to Camunda's workflow automation, which foc
 The Web Modeler and Console are designed to oversee and manage multiple orchestration clusters. It offers tools and interfaces for administrators and developers to monitor clusters and create BPMN models. The management cluster operates independently from the orchestration cluster and can function without requiring an orchestration cluster.
 
 - [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters.
-- [Web Modeler](/docs/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
+- [Web Modeler](/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 
 :::note
@@ -117,7 +117,11 @@ Choosing the right reference architecture depends on various factors such as the
   - Best for teams with experience in managing containerized environments.
   - A steeper learning curve but offers scalable and highly resilient platform.
 
-For more information and guides, have a look at the specific reference for [Kubernetes](#TODO).
+For more information and guides, have a look at the specific reference for [Kubernetes](/self-managed/setup/install/).
+
+:::note
+This is a work in progress as we update the existing documentation to provide better general guidance on the topic. In the meantime, for Kubernetes-related information, it's best to refer to the cloud provider-specific documentation under "Setup/Install/Deploy."
+:::
 
 - **Manual (Bare Metal / VMs)**:
   - Suitable for organizations requiring use of IaaS, bare metal and other traditional infrastructures.
