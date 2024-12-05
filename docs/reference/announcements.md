@@ -33,7 +33,7 @@ The exporter can consume Zeebe records (mostly events created by the engine), ag
 
 The following diagram shows a simplified version of this work.
 
-![camunda-exporter-target](./img/camunda-exporter-target.png)
+![camunda-exporter-target](./img/target-camunda-exporter.png)
 
 - For example, Tasklist and Operate Importers are still required for old data to be imported, but the Camunda exporter writes all new data into ES/OS. After old indices are drained, importers can be turned off.
 
