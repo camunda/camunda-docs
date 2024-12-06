@@ -10,7 +10,7 @@ Currently, we make these regions available for customers on the Trial, Starter, 
 
 :::note
 
-- Console and Web Modeler components are currently hosted in the EU. [Contact us](/reference/contact.md) if you have additional questions.
+- Management cluster components (Console and Web Modeler) are currently hosted in GCP (EU). [Contact us](/reference/contact.md) if you have additional questions.
 - Running on a Trial or Starter plan and want to try a different region, or interested in other regions or cloud providers? [Contact us](/reference/contact.md) as we are able to make additional regions available on request.
 
 :::
@@ -40,7 +40,3 @@ The following AWS regions are currently supported in Camunda 8 SaaS for Trial pl
 | North America, Virginia (us-east-1) | _Not available_          |
 
 To learn more about each region code/location, refer to [AWS regions and availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
-
-:::note
-Only the orchestration cluster is hosted in the AWS region. Management cluster components (Console and Web Modeler) are hosted in the EU on GCP.
-:::
