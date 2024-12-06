@@ -270,7 +270,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../tasklist-api-rest/specifications/find-user-task-variables">
+            <a href="../../tasklist-api-rest/specifications/search-task-variables">
                 <code>POST /tasks/:taskId/variables/search</code>
             </a>
         </td>

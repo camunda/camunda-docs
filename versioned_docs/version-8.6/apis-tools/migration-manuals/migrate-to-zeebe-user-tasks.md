@@ -236,58 +236,6 @@ The following table outlines the respective endpoints. Click the endpoints to fo
         <th>Camunda 8 API</th>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Query user tasks</th>
-        <td>
-            <a href="../../tasklist-api-rest/specifications/search-tasks">
-                <code>POST /tasks/search</code>
-            </a>
-        </td>
-        <td>
-            <a href="../../camunda-api-rest/specifications/find-user-tasks">
-                <code>POST /user-tasks/search</code>
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <th style={{ textAlign: "end" }}>Get user task</th>
-        <td>
-            <a href="../../tasklist-api-rest/specifications/get-task-by-id/">
-                <code>GET /tasks/:taskId</code>
-            </a>
-        </td>
-        <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task">
-                <code>GET /user-tasks/:userTaskKey</code>
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <th style={{ textAlign: "end" }}>Retrieve task variables</th>
-        <td>
-            <a href="../../tasklist-api-rest/specifications/get-variable-by-id/">
-                <code>GET /variables/:variableId</code>
-            </a>
-        </td>
-        <td>
-            <a href="../../tasklist-api-rest/specifications/find-user-task-variables">
-                <code>POST /tasks/:taskId/variables/search</code>
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <th style={{ textAlign: "end" }}>Get task form</th>
-        <td>
-            <a href="../../tasklist-api-rest/specifications/get-form/">
-                <code>GET /forms/:formId</code>
-            </a>
-        </td>
-        <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task-form">
-                <code>GET /user-tasks/:userTaskKey/form</code>
-            </a>
-        </td>
-    </tr>
-    <tr>
         <th style={{ textAlign: "end" }}>Assign a task</th>
         <td>
             <a href="../../tasklist-api-rest/specifications/assign-task/">
