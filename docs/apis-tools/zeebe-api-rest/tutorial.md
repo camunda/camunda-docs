@@ -1,10 +1,10 @@
 ---
 id: zeebe-api-tutorial
 title: Tutorial
-description: "New to the Zeebe API? Step through our tutorial to assign and unassign a user to and from a Zeebe user task."
+description: "New to the Zeebe API? Step through our tutorial to assign and unassign a user to and from a Camunda user task."
 ---
 
-In this tutorial, we'll step through examples to highlight the capabilities of the Zeebe API, such as assigning and unassigning a user to and from a Zeebe user task.
+In this tutorial, we'll step through examples to highlight the capabilities of the Zeebe API, such as assigning and unassigning a user to and from a Camunda user task.
 
 ## Prerequisites
 
@@ -34,7 +34,7 @@ Examine the existing `.env.example` file for an example of how your `.env` file 
 
 :::note
 
-In this tutorial, we will execute arguments to assign and unassign a user to and from a Zeebe user task. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
+In this tutorial, we will execute arguments to assign and unassign a user to and from a Camunda user task. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
 
 :::
 

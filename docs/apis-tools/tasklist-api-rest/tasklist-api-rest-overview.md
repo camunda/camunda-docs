@@ -2,7 +2,7 @@
 id: tasklist-api-rest-overview
 title: "Overview"
 sidebar_position: 1
-description: "Build applications for human-centered processes by querying user tasks, assigning users, and completing tasks with the Tasklist API."
+description: "Build applications for human-centered processes by querying user tasks, assigning users, and completing tasks with the Camunda API."
 ---
 
 :::note
