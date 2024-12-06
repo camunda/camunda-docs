@@ -1023,6 +1023,7 @@ module.exports = {
           ],
         },
         "self-managed/operational-guides/configure-multi-tenancy",
+        "self-managed/operational-guides/production-guide",
         {
           type: "category",
           label: "Backup and restore",
