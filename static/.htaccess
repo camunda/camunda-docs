@@ -95,6 +95,14 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
 
+# Remove community clients
+RewriteRule ^docs/apis-tools/community-clients/c-sharp/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/community-clients/micronaut/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/community-clients/python/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/community-clients/quarkus/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/community-clients/ruby/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/community-clients/rust/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
+
 # Move contact page
 RewriteRule ^contact/?$ /docs/reference/contact/ [R=301,L]
 
