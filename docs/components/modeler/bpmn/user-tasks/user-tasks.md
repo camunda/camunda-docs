@@ -12,21 +12,19 @@ When the user task instance is completed, the process instance continues.
 
 ![user-task](assets/user-task.png)
 
-## User task implementation types
-
-A default user task implementation type is the **Camunda user task** with the `zeebe:userTask` extension element.
-It is the recommended implementation type that is introduced on Camunda version 8.6.
-
-Alternatively, user tasks can be implemented with **Job workers** by removing the `zeebe:userTask` extension element.
-Refer to the [Job worker implementation](#job-worker-implementation) section for details.
-
-## Camunda user tasks
-
-Camunda user tasks support assignments, scheduling, task updates, variable mappings, and a form for a user task as detailed in the following sections.
-
-:::note
-The Camunda user task implementation type was previously referred to as the **Zeebe user task**.
+:::info
+Camunda 8 also supports the implementation of user tasks with a [service task](/components/modeler/bpmn/service-tasks/service-tasks.md)-like behavior.
+Refer to the [job worker implementation](#job-worker-implementation) section below.
+Version 8.4 and below are limited to the job worker implementation.
 :::
+
+## Define a user task
+
+A user task is marked as a **Zeebe user task** by the `zeebe:userTask` extension element. Without the `zeebe:userTask` extension element, the user task behaves like a [service task](#job-worker-implementation).
+
+You can define assignments, scheduling, variable mappings, and a form for the user task as detailed in the following sections.
+
+The [job worker implementation](#job-worker-implementation) section details the differences and limitations of job worker-based user tasks.
 
 ### Assignments
 
@@ -100,7 +98,7 @@ To set the priority of a user task, specify the priority in the `priority` attri
 
 ### Variable mappings
 
-By default, all Camunda user task variables are merged into the process instance. This
+By default, all Zeebe user task variables are merged into the process instance. This
 behavior can be customized by defining an output mapping at the user task.
 
 Input mappings can be used to transform the variables into a different format.
@@ -160,19 +158,16 @@ configuration parameters for tasklist applications.
 
 ## Job worker implementation
 
-A user task does not have to be managed by Zeebe. Instead, you can also use Job workers to implement a custom user task logic.
-
-Note that you will lose all the task lifecycle and state management features that Zeebe provides and will have to implement them yourself. Use job workers only in case you require a very specific implementation of user tasks that can't be implemented on top of Camunda user tasks.
+A user task does not have to be managed by Zeebe. Instead, you can also use
+job workers to implement a custom user task logic. Note that you will lose all the task lifecycle and state management features that Zeebe provides and will have to implement them yourself. Use job workers only in case you require a very specific implementation of user tasks that can't be implemented on top of Zeebe user tasks.
 
 :::info
-Camunda version 8.4 and lower support only user tasks with the Job worker implementation.
-
-If you started using Camunda 8 with version 8.4 or a lower version and upgraded to 8.5 or newer, your user tasks are probably implemented as Job workers. Refer to the [migration guide](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md) to find a detailed list of the differences between the task implementation types and learn how to migrate to Camunda user tasks.
+If you started using Camunda 8 with version 8.4 or a lower version and upgraded to 8.5 or newer, your user tasks are probably implemented as job workers. Refer to the [migration guide](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md) to find a detailed list of the differences between the task implementation types and learn how to migrate to Zeebe user tasks.
 :::
 
-You can define a Job worker implementation for a user task by removing its `zeebe:userTask` extension element.
+You can define a job worker implementation for a user task by removing its `zeebe:userTask` extension element.
 
-User tasks with a Job worker implementation behave exactly like [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md). The differences between these task
+User tasks with a job worker implementation behave exactly like [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md). The differences between these task
 types are the visual representation (i.e. the task marker) and the semantics for the model.
 
 When a process instance enters a user task with job worker implementation, it creates
@@ -195,9 +190,9 @@ This also limits available metrics and reporting for such user tasks to what is 
 All user task-specific data like assignments and scheduling information is provided in the job as
 [task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers).
 
-You cannot use the Camunda 8 API to work on user tasks based on job workers.
+You cannot use the Camunda 8 Zeebe User Task API to work on user tasks based on job workers.
 Overall, you are limiting those user tasks to the capabilities of [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md).
-Camunda user task-specific features are not available to those user tasks.
+Zeebe user task-specific features are not available to those user tasks.
 
 ## Additional resources
 
