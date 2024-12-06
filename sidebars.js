@@ -339,6 +339,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/googledrive",
                 "components/connectors/out-of-the-box-connectors/google-maps-platform",
                 "components/connectors/out-of-the-box-connectors/google-sheets",
+                "components/connectors/out-of-the-box-connectors/google-gemini",
               ],
             },
             "components/connectors/out-of-the-box-connectors/hugging-face",
