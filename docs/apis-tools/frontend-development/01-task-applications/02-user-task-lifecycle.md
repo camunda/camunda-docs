@@ -78,7 +78,7 @@ Make sure that you create your own validation logic that matches your use case.
 
 ## Implement the life cycle with the task API
 
-To implement task life cycle operations with the Camunda REST API, call the respective endpoints:
+To implement task life cycle operations with the task API, call the respective endpoints:
 
 - [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx) or [`DELETE /user-tasks/:userTaskKey/assignee`](/apis-tools/camunda-api-rest/specifications/unassign-user-task.api.mdx) to change task assignment.
 - [`PATCH /user-tasks/:userTaskKey`](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx) to update a task.
