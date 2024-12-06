@@ -289,6 +289,7 @@ module.exports = {
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
                 "components/modeler/bpmn/compensation-handler/compensation-handler",
+                "components/modeler/bpmn/ad-hoc/ad-hoc",
               ],
             },
           ],
