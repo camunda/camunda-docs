@@ -935,6 +935,14 @@ module.exports = {
   "Self-Managed": [
     "self-managed/about-self-managed",
     {
+      type: "category",
+      label: "Get started",
+      items: [
+        "self-managed/setup/deploy/local/c8run",
+        "self-managed/setup/deploy/local/local-kubernetes-cluster",
+      ],
+    },
+    {
       Install: [
         "self-managed/setup/overview",
         {
@@ -944,21 +952,11 @@ module.exports = {
         },
         "self-managed/setup/deploy/other/docker",
         "self-managed/setup/deploy/local/manual",
-        {
-          type: "category",
-          label: "Local",
-          items: [
-            "self-managed/setup/deploy/local/c8run",
-            "self-managed/setup/deploy/local/local-kubernetes-cluster",
-            "self-managed/setup/deploy/local/docker-compose",
-            "self-managed/setup/deploy/local/manual",
-          ],
-        },
       ],
     },
     {
       type: "category",
-      label: "Deploy",
+      label: "Reference architecture",
       items: [
         {
           "Amazon (AWS)": [
