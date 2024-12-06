@@ -78,7 +78,7 @@ Make sure that you create your own validation logic that matches your use case.
 
 ## Implement the life cycle with the task API
 
-To implement task life cycle operations with the Zeebe task API, call the respective endpoints:
+To implement task life cycle operations with the task API, call the respective endpoints:
 
 - [`POST /user-tasks/:taskKey/assignment`](/apis-tools/zeebe-api-rest/specifications/assign-a-user-task.api.mdx) or [`DELETE /user-tasks/:taskKey/assignee`](/apis-tools/zeebe-api-rest/specifications/unassign-a-user-task.api.mdx) to change task assignment.
 - [`PATCH /user-tasks/:taskKey`](/apis-tools/zeebe-api-rest/specifications/update-a-user-task.api.mdx) to update a task.

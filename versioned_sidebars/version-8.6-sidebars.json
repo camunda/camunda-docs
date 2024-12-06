@@ -1592,8 +1592,7 @@
                   ]
                 }
               ]
-            },
-            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks"
+            }
           ]
         },
         {
@@ -1765,8 +1764,14 @@
           ]
         }
       ]
+    },
+    {
+      "Migration manuals": [
+        "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks"
+      ]
     }
   ],
+
   "Reference": [
     "reference/overview",
     "reference/announcements",
