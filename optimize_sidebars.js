@@ -2518,6 +2518,12 @@ module.exports = {
                       "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                     ),
                   ],
+                  ROSA: [
+                    docsLink(
+                      "Deploy a ROSA cluster with Terraform",
+                      "self-managed/setup/deploy/amazon/openshift/terraform/"
+                    ),
+                  ],
                 },
 
                 docsLink(
@@ -2550,6 +2556,10 @@ module.exports = {
                 docsLink(
                   "Red Hat OpenShift",
                   "self-managed/setup/deploy/openshift/redhat-openshift/"
+                ),
+                docsLink(
+                  "Dual-Region",
+                  "self-managed/setup/deploy/openshift/redhat-openshift-dual-region/"
                 ),
               ],
             },
