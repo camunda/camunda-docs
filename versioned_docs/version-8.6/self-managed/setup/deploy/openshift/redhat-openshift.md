@@ -167,8 +167,8 @@ In the example below, a TLS certificate is generated for the Zeebe Gateway servi
 
 Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 
-  <details>
-    <summary>PKCS #8, PKCS #1 syntax</summary>
+    <details>
+      <summary>PKCS #8, PKCS #1 syntax</summary>
 
 > PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
 
@@ -176,7 +176,7 @@ Another option is [Cert Manager](https://docs.openshift.com/container-platform/l
 
 [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
 
-  </details>
+    </details>
 
 - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
@@ -187,7 +187,7 @@ Update your `values.yml` file with the following:
 https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.6/procedure/install/helm-values/zeebe-gateway-route.yml
 ```
 
-The domain used by the Zeebe Gateway for gRPC is different from the one used for the rest, namely `$DOMAIN_NAME`, to avoid any conflicts. It is also important to note that the port used for gRPC is `443`.
+The domain used by the Zeebe Gateway for gRPC is `zeebe-$DOMAIN_NAME` which different from the one used for the rest, namely `$DOMAIN_NAME`, to avoid any conflicts. It is also important to note that the port used for gRPC is `443`.
 
 1. **Operate:** mount the **Service Certificate Secret** to the Operate pod and configure the secure TLS connection. Here, only the `tls.crt` file is required.
 
