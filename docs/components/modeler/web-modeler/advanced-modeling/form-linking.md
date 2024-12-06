@@ -90,7 +90,7 @@ To correct any instances affected by this issue, we recommend the following step
 ### Camunda Form (embedded)
 
 :::info
-Embedded forms are supported only by Job worker-based user tasks and are not available for the [Camunda user task implementation type](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-implementation-types).
+Embedded forms are supported only by job worker-based user tasks and are not available for the [Zeebe user task implementation type](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-implementation-types).
 :::
 
 When choosing **Camunda Form (embedded)** as type you have the option to directly paste the form's JSON schema into the **Form JSON configuration** field of the properties panel.
