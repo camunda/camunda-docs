@@ -370,8 +370,7 @@ type:"link",
 href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
 label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
-},
-{
+}
 ]}/>
 
 ## Troubleshooting and common issues
