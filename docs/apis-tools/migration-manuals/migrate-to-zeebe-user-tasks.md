@@ -1,7 +1,7 @@
 ---
 id: migrate-to-zeebe-user-tasks
-title: Migrate to Zeebe user tasks
-description: "Learn how to migrate job worker-based user tasks to Zeebe-based tasks."
+title: Migrate to Camunda user tasks
+description: "Learn how to migrate Job worker-based user tasks to Camunda user tasks."
 ---
 
 import DocCardList from '@theme/DocCardList';
@@ -12,42 +12,31 @@ import TableTextSmall from "../tasklist-api-rest/assets/react-components/TableTe
 import userTaskMigrationDecisionHelperForm from "../tasklist-api-rest/assets/forms/userTaskMigrationDecisionHelperForm.js";
 import "../tasklist-api-rest/assets/css/condensedTable.module.css";
 import styles from "../tasklist-api-rest/assets/css/cleanImages.module.css";
-import APIArchitectureImg from '../tasklist-api-rest/assets/img/api-architecture.png';
 import ZeebeTaskSelectionImg from '../tasklist-api-rest/assets/img/zeebe-user-task-selection.png';
 
-Camunda 8.5 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
-Zeebe user tasks have several benefits, including:
+Camunda 8.5 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task.
+
+Camunda user tasks have several benefits, compared to Job worked-based user tasks. It includes:
 
 - Running directly on the automation engine for high performance.
 - Removing dependencies and round trips to Tasklist.
-- A more powerful API that supports the full task lifecycle.
+- A powerful API that supports the full task lifecycle.
 
 In this guide, you will learn:
 
 - Under which circumstances and when you should migrate.
 - How to estimate the impact on a project.
-- The steps you need to take for a successful migration without interrupting your operations.
+- Steps you need to take for a successful migration without interrupting your operations.
 
 ## Decide on your migration path
 
-Zeebe user tasks require migration of the user tasks in both your diagrams and the task API.
+Camunda user tasks require migration of the user tasks in both your diagrams and the task API.
 
 With this in mind, you can migrate at your own pace. If you should migrate now or later, and what is required to migrate depends on your current setup and future plans.
 
-Use the following decision helper questionnaire to figure out what's right for you:
-
-<FormViewer schema={ userTaskMigrationDecisionHelperForm } customStyles={{
-    border: "none",
-    padding: "0px",
-    maxWidth: "unset",
-    background: "transparent",
-    width: "calc(100% + 42px)",
-    marginLeft: "-28px"
-}} />
-
 ### Task type differences
 
-Learn the differences between both task types and make an informed decision, and understand the new capabilities of Zeebe user tasks. Refer to this table for important high-level differences of the two task types:
+Learn the differences between both task types and make an informed decision, and understand the new capabilities of Camunda user tasks. Refer to this table for important high-level differences of the two task types:
 
 <table>
     <tr>
@@ -57,8 +46,8 @@ Learn the differences between both task types and make an informed decision, and
             <TableTextSmall>Existing implementation</TableTextSmall>
         </th>
         <th>
-            <div>Zeebe user tasks</div>
-            <TableTextSmall>Recommended for new projects</TableTextSmall>
+            <div>Camunda user tasks</div>
+            <TableTextSmall>Recommended for existing and new projects</TableTextSmall>
         </th>
     </tr>
     <tr>
@@ -91,7 +80,7 @@ Learn the differences between both task types and make an informed decision, and
         <td>
             <div>Partially</div>
             <TableTextSmall>Queries, GET tasks, forms, variables</TableTextSmall>
-            <TableTextSmall>ℹ  Currently, you must use the Camunda 8 and Tasklist APIs to use Zeebe user tasks</TableTextSmall>
+            <TableTextSmall>ℹ  Currently, you must use the Camunda 8 and Tasklist APIs to use Camunda user tasks</TableTextSmall>
         </td>
     </tr>
     <tr>
@@ -123,7 +112,6 @@ Learn the differences between both task types and make an informed decision, and
         <td><NoItem /></td>
         <td>
             <YesItem />
-            <TableTextSmall>Task listeners will be introduced in a future release</TableTextSmall>
         </td>
     </tr>
     <tr>
@@ -146,10 +134,9 @@ Learn the differences between both task types and make an informed decision, and
         <th style={{ textAlign: "end" }}>Recommendations</th>
         <td>
             <TableTextSmall>You can continue to use this task type on existing projects when you have a custom task application running on it and do not require any of the above features.</TableTextSmall>
-            <TableTextSmall>Refer to the <a href="#decide-on-your-migration-path">decision helper</a> above for a tailored recommendation.</TableTextSmall>
         </td>
         <td>
-            <TableTextSmall>Use this task type on any new projects when you run Tasklist.</TableTextSmall>
+            <TableTextSmall>Recommended for existing and new projects when you run Tasklist.</TableTextSmall>
             <TableTextSmall>Migrate existing projects and task applications/clients to this task type when you require one of the features above, or the following use cases:</TableTextSmall>
             <TableTextSmall>
                 <ul>
@@ -161,12 +148,11 @@ Learn the differences between both task types and make an informed decision, and
                     <li>Enrich tasks with business data</li>
                 </ul>
             </TableTextSmall>
-            <TableTextSmall>Refer to the <a href="#decide-on-your-migration-path">decision helper</a> above for a tailored recommendation.</TableTextSmall>
         </td>
     </tr>
 </table>
 
-## Switch the implementation type of your user tasks
+## Switch the implementation type of user tasks
 
 We recommend you migrate process-by-process, allowing you to thoroughly test the processes in your test environments or via your [CI/CD](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md). To do this, take the following steps:
 
@@ -175,19 +161,19 @@ We recommend you migrate process-by-process, allowing you to thoroughly test the
 3. Check if the task has an embedded form.
    - If a form is embedded, [transform it into a linked form](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked) before you change the task type implementation. Press `Ctrl+Z` or `⌘+Z` to undo if you accidentally removed your embedded form.
 4. Open the **Implementation** section in the properties panel.
-5. Click the **Type** dropdown and select **Zeebe user task**. The linked form or external form reference will be preserved.
+5. Click the **Type** dropdown and select **Camunda user task**. The linked form or external form reference will be preserved.
 
 <img src={ZeebeTaskSelectionImg} className={styles.noShadow} style={{width: 341}} alt="Task Type Selection" />
 
 Repeat these steps for all user tasks in the process. Then, deploy the process to your development cluster and test it by running the process and ensuring your custom task applications work.
 
-## Use the new Camunda 8 API
+## Use Camunda 8 API
 
 :::note
-The Tasklist REST API is not deprecated, and you still need it for queries on both task types.
+The Tasklist REST API is deprecated and will be deleted with the 8.9 release.
 :::
 
-Operations on Zeebe user tasks which modify the task state have to be performed using the new [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md). However, queries and adjacent operations still require the [Tasklist REST API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md). The following table provides a breakdown of which operations are supported in which API, and for which user tasks.
+The following table provides a breakdown of which operations are supported in which API, and for which user tasks.
 
 <table style={{ textAlign: "center" }}>
     <tr>
@@ -196,56 +182,51 @@ Operations on Zeebe user tasks which modify the task state have to be performed 
         <th>Camunda 8 API</th>
     </tr>
     <tr>
+        <th></th>
+        <td style={{color: "gray"}}>Deprecated on 8.7</td>
+        <td style={{color: "gray"}}>Supported from 8.6+</td>
+    </tr>
+    <tr>
         <th style={{ textAlign: "end" }}>Query user task</th>
-        <td><span style={{ color: "green" }}>✔</span> All types</td>
-        <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Job worker-based user tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Camunda user tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Get user task</th>
-        <td><span style={{ color: "green" }}>✔</span> All types</td>
-        <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Job worker-based user tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Camunda user tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
-        <td><span style={{ color: "green" }}>✔</span> All types</td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
+        <td><span style={{ color: "green" }}>✔</span> Job worker-based user tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Camunda user tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Get user task form</th>
-        <td><span style={{ color: "green" }}>✔</span> All types</td>
-        <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Job worker-based user tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Camunda user tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Change task assignment</th>
-        <td><span style={{ color: "green" }}>✔</span> Job worker-based tasks</td>
-        <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Job worker-based user tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Camunda user tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Complete task</th>
-        <td><span style={{ color: "green" }}>✔</span> Job worker-based tasks</td>
-        <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Job worker-based user tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Camunda user tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Update task</th>
         <td>-</td>
-        <td><span style={{ color: "green" }}>✔</span> Zeebe tasks</td>
+        <td><span style={{ color: "green" }}>✔</span> Camunda user tasks</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Save and retrieve draft variables</th>
-        <td><span style={{ color: "green" }}>✔</span> All types</td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
+        <td><span style={{ color: "green" }}>✔</span> Job worker-based user tasks</td>
+        <td style={{color: "gray"}}> -</td>
     </tr>
 </table>
-
-You can also operate both task types at the same time in the same application utilizing both APIs. We recommend this for a smooth migration, but you should eventually update all processes to use the new task type to use all benefits. The following image illustrates how to route API calls to the respective APIs:
-
-<img src={APIArchitectureImg} className={styles.noShadow} style={{width: 800}} alt="Task API Architecture" />
-
-The major changes are:
-
-- Create and maintain new, additional secrets for the Camunda 8 API.
-- Call dedicated endpoints on separate components (Zeebe vs. Tasklist) for all state modifications on tasks for the respective task types.
-- Manage new request/response objects.
 
 The following table outlines the respective endpoints. Click the endpoints to follow to the API documentation and inspect the differences in the request and response objects.
 
@@ -263,8 +244,8 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/assign-user-task">
-                <code>POST /user-tasks/:userTaskKey/assignment</code>
+            <a href="../../camunda-api-rest/specifications/find-user-tasks">
+                <code>POST /user-tasks/search</code>
             </a>
         </td>
     </tr>
@@ -287,12 +268,12 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             <a href="../../tasklist-api-rest/specifications/get-variable-by-id/">
                 <code>GET /variables/:variableId</code>
             </a>
-            <br/>
-            <a href="../../tasklist-api-rest/specifications/search-task-variables/">
+        </td>
+        <td>
+            <a href="../../tasklist-api-rest/specifications/find-user-task-variables">
                 <code>POST /tasks/:taskId/variables/search</code>
             </a>
         </td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Get task form</th>
@@ -348,7 +329,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Update task</th>
-        <td>-</td>
+        <td style={{color: "gray"}}>-</td>
         <td>
             <a href="../../camunda-api-rest/specifications/update-user-task">
                 <code>PATCH /user-tasks/:userTaskKey</code>
@@ -362,7 +343,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
                 <code>POST /tasks/:taskId/variables</code>
             </a>
         </td>
-        <td style={{color: "gray"}}>← Use Tasklist API</td>
+        <td style={{color: "gray"}}>-</td>
     </tr>
 </table>
 
@@ -397,4 +378,4 @@ If your task application does not work properly after migration, check the follo
 
 - **The endpoints return specific error messages when you run them on the wrong task type**: Ensure to call the right endpoint for the right task type, c.f. above [table](#use-the-new-camunda-8-api).
 - **Forms do not appear**: Ensure you have extracted embedded forms, if any, and [transformed them into linked forms](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-form-linked), before you change the task type implementation.
-- **Task update operation does not work**: The update operation is only available to Zeebe user tasks.
+- **Task update operation does not work**: The update operation is only available to Camunda user tasks.

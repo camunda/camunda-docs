@@ -12,7 +12,6 @@ import TableTextSmall from "./assets/react-components/TableTextSmall";
 import userTaskMigrationDecisionHelperForm from "./assets/forms/userTaskMigrationDecisionHelperForm.js";
 import "./assets/css/condensedTable.module.css";
 import styles from "./assets/css/cleanImages.module.css";
-import APIArchitectureImg from './assets/img/api-architecture.png';
 import ZeebeTaskSelectionImg from './assets/img/zeebe-user-task-selection.png';
 
 Camunda 8.5 introduces a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
