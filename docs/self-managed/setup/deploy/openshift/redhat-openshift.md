@@ -163,12 +163,12 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
 - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also use in the other components such as Operate, Tasklist.
 
-In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
+  In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
 
-Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
+  Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 
-    <details>
-      <summary>PKCS #8, PKCS #1 syntax</summary>
+<details>
+  <summary>PKCS #8, PKCS #1 syntax</summary>
 
 > PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
 
@@ -176,7 +176,7 @@ Another option is [Cert Manager](https://docs.openshift.com/container-platform/l
 
 [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
 
-    </details>
+</details>
 
 - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
@@ -186,13 +186,17 @@ Another option is [Cert Manager](https://docs.openshift.com/container-platform/l
 
   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
 
-Update your `values.yml` file with the following:
+  Update your `values.yml` file with the following:
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/core-route.yml
 ```
 
-The actual configuration properties can be reviewed: - [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection). - [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection). - [in the Zeebe Gateway configuration documentation](/self-managed/zeebe-deployment/configuration/gateway.md).
+The actual configuration properties can be reviewed:
+
+- [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection),
+- [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection),
+- [in the Zeebe Gateway configuration documentation](/self-managed/zeebe-deployment/configuration/gateway.md).
 
 1. **Connectors:** update your `values.yml` file with the following:
 
