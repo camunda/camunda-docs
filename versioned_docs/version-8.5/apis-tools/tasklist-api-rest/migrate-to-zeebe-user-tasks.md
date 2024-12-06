@@ -13,6 +13,7 @@ import userTaskMigrationDecisionHelperForm from "./assets/forms/userTaskMigratio
 import "./assets/css/condensedTable.module.css";
 import styles from "./assets/css/cleanImages.module.css";
 import ZeebeTaskSelectionImg from './assets/img/zeebe-user-task-selection.png';
+import APIArchitectureImg from './assets/img/api-architecture.png';
 
 Camunda 8.5 introduces a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
 Zeebe user tasks have several benefits, including:
