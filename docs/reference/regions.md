@@ -11,7 +11,7 @@ The following regions are available for customers on Trial, Starter, and Enterpr
 :::note
 
 - Management cluster components (Console and Web Modeler) are currently hosted in GCP (EU). [Contact us](/reference/contact.md) if you have additional questions.
-- Single-tenant clusters can run on a dedicated GCP or AWS infrastructure.
+- Single-tenant clusters run on a dedicated GCP or AWS infrastructure.
 
 :::
 
