@@ -79,7 +79,57 @@ The problem with the configuration parameters is that they replace the complete 
 
 This is no longer the case with the override parameters. A subset of parameters can be set so that individual parameters can be adjusted. If a parameter needs to be changed for a specific cluster, the `name` and `namespace` fields must be set with the exact values so that correlations can be made accordingly.
 
-The following example changes the `customerId` and the `tags` for a specific cluster:
+#### Example
+
+Given the following configuration provided by helm:
+
+```yaml
+camunda:
+  console:
+    customerId: customer-id
+    installationId: camunda-platform-id-dev-console-sm-main
+    telemetry: disabled
+    managed:
+      method: plain
+      releases:
+        - name: camunda-platform
+          namespace: camunda-platform-namespace
+          version: 9.1.2
+          components:
+            - name: Console
+              id: console
+              version: ...
+              url: https://...
+              readiness: https://...
+              metrics: https://...
+            - name: Keycloak
+              id: keycloak
+              version: ...
+              url: https://...
+            - name: Identity
+              id: identity
+              version: ...
+              url: https://...
+              readiness: https://...
+              metrics: https://...
+            - name: WebModeler WebApp
+              id: webModelerWebApp
+              version: ...
+              url: https://...
+            - name: Zeebe Gateway
+              id: zeebeGateway
+              version: ...
+              urls:
+                grpc: grpc://...
+                http: https://...
+              readiness: https://...
+              metrics: https://...
+            - name: Zeebe
+              id: zeebe
+              version: ...
+```
+
+The following example of an `overrideConfiguration` changes the `customerId` and adds `tags` and `custom-properties` for a cluster with name `camunda-platform` in namespace `camunda-platform-namespace`:
 
 ```yaml
 console:
@@ -90,9 +140,18 @@ console:
         managed:
           releases:
             - name: camunda-platform
-              namespace: camunda-platform
+              namespace: camunda-platform-namespace
               tags:
                 - production
+              custom-properties:
+                - description: "This is a custom description of the cluster."
+                  links:
+                    - name: "Camunda"
+                      url: "https://camunda.com"
+                    - name: "Camunda Docs"
+                      url: "https://docs.camunda.io"
+                    - name: "Grafana"
+                      url: "https://..."
 ```
 
 ### Custom Properties
