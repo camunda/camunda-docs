@@ -13,7 +13,7 @@ To understand the difference between an alpha feature and an alpha release, see 
 
 ## Alpha
 
-Selected Camunda features and components are released as **alpha** versions. We release these in an early state for you to test and participate in development by sharing your feedback before they reach [general availability (GA)](#general-availability-ga).
+Selected Camunda features and components are released as **alpha** versions. We release these in an early state for you to test and participate in development by sharing your feedback before they reach [general availability](/reference/release-policy.md#general-availability-ga).
 
 Limitations of alpha features and components include:
 
@@ -33,21 +33,6 @@ To learn more about using alpha features, see [enabling alpha features](/compone
 
 - Alpha features can also be included in a minor version (stable) release.
 - Although there is no maintenance service, customers can still provide feedback through designated support channels, depending on their SLAs. These channels include filing issues in the respective [GitHub repositories](https://github.com/camunda) and submitting questions and suggestions by [contacting us](/reference/contact.md).
+- Alpha releases can also have **limited availability**, such as features that are only available to enterprise customers.
 
-:::
-
-## General availability (GA)
-
-Once features and components are released and considered stable, they become generally available.
-
-Stable features and components are:
-
-- Ready for production use for most users with minimal risk.
-- Supported by [L1 Priority-level support](https://camunda.com/services/enterprise-support-guide/) for production use.
-- Fully documented.
-
-A release or component is considered stable if it has passed all verification and test stages and can be released to production.
-
-:::note
-Alpha releases can also have **limited availability**, such as features that are only available to enterprise customers.
 :::
