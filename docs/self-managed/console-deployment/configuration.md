@@ -129,7 +129,7 @@ camunda:
               version: ...
 ```
 
-The following example of an `overrideConfiguration` changes the `customerId` and adds `tags` and `custom-properties` for a cluster with name `camunda-platform` in namespace `camunda-platform-namespace`:
+The following example of an `overrideConfiguration` changes the `customerId` and adds `tags` and `custom-properties` for the cluster with name `camunda-platform` in namespace `camunda-platform-namespace`:
 
 ```yaml
 console:
