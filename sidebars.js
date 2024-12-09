@@ -1562,5 +1562,16 @@ module.exports = {
         },
       ],
     },
+    {
+      "Reference Architecture": [
+        "self-managed/reference-architecture/reference-architecture",
+        {
+          Manual: [
+            "self-managed/reference-architecture/manual/manual-overview",
+            "self-managed/reference-architecture/manual/aws-ec2",
+          ],
+        },
+      ],
+    },
   ],
 };
