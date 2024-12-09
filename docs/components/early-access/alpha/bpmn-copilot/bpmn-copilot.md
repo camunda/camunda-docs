@@ -22,10 +22,10 @@ Creating a BPMN process diagram with the BPMN copilot will overwrite existing wo
 To use the BPMN copilot in Web Modeler, take the following steps:
 
 1. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
-2. Click **New project > Create new > BPMN diagram**. If you are opted in to test this feature, the Camunda copilot chat window will pop up.
+2. Click **New project > Create new > BPMN diagram**. If you have opted in to test this feature, the Camunda copilot chat window will pop up.
 
 ![bpmn copilot chat window](./img/bpmn-copilot-chat.png)
 
-3. In the chat box, enter your prompt. This prompt should be a simple, clear, and concise request based on the BPMN diagram you would like to generate. For example, "Generate a mortgage loan process diagram". For more information, you can also ask questions like "How do I design a process?".
-4. Wait for your diagram to generate. This takes about a minute to produce. Once complete, the copilot will then respond with an outline of the process it has created.
+3. In the chat box, enter your prompt. This prompt should be a simple, clear, and concise request describing the BPMN diagram you would like to generate. For example, "Generate a mortgage loan process diagram". For more information, you can also ask questions like "How do I design a process?"
+4. Wait for your diagram to generate; this takes about 50 seconds. Once complete, the copilot will then respond with an outline of the process it created.
 5. Review the generated diagram. If the diagram is not exact, you can continue chatting with the BPMN copilot by requesting changes or rephrasing your request. For example, "add exceptions". The new diagram will overwrite existing work, but the BPMN copilot will automatically generate a [milestone](/components/modeler/web-modeler/milestones.md) of the previous version, so you can return or revert to it anytime.
