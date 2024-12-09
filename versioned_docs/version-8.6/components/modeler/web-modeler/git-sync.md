@@ -68,10 +68,6 @@ When successful, your project will display a new **Sync with GitHub** button.
 
 ## Sync with GitHub
 
-:::note
-File synchronization only happens at the root level of the remote repository. Files contained in subfolders will not be synchronized.
-:::
-
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected GitHub repository at any time.
 
 1. In your connected process application, click **Sync with GitHub**.
