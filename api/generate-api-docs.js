@@ -2,13 +2,11 @@ const { execSync } = require("child_process");
 
 // More strategies to come, for other APIs.
 const operate = require("./operate/generation-strategy");
-const zeebe = require("./zeebe/generation-strategy");
 const tasklist = require("./tasklist/generation-strategy");
 const consolesm = require("./console-sm/generation-strategy");
 const camunda = require("./camunda/generation-strategy");
 const apiStrategies = {
   operate,
-  zeebe,
   tasklist,
   consolesm,
   camunda,
