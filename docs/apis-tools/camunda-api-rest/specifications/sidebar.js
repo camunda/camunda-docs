@@ -419,6 +419,42 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Tenant",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-tenant",
+        label: "Create tenant",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/update-tenant",
+        label: "Update tenant",
+        className: "api-method patch",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-tenant",
+        label: "Get tenant",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-tenant",
+        label: "Delete tenant",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/search-tenants",
+        label: "Query tenants",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "User",
     items: [
       {
@@ -510,6 +546,18 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/get-variable",
         label: "Get variable (alpha)",
         className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Mapping Rule",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-mapping-rule",
+        label: "Create mapping rule",
+        className: "api-method post",
       },
     ],
   },

@@ -12,6 +12,10 @@ If you are a **[Web Modeler Self-Managed](/self-managed/modeler/web-modeler/inst
 
 ## Browse Marketplace Connectors
 
+:::note
+Connectors created by partners or the community are not part of the commercial Camunda product. Camunda does not support these Connectors as part of its commercial services to enterprise customers. Please evaluate each client to make sure it meets your requirements before using.
+:::
+
 To navigate to the Camunda Marketplace, take the following steps:
 
 1. Log in to your Camunda account.
