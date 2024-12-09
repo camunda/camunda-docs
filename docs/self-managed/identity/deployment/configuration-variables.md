@@ -5,10 +5,14 @@ sidebar_label: "Configuration variables"
 description: "Learn more about core configuration, component configuration, database configuration, and feature flags."
 ---
 
-As a Spring Boot application, Identity supports any standard
-[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
+Identity can be configured using environment variables, configuration parameters, or a combination of both. When configuring your Identity setup, keep in mind the following:
 
-## Core configuration
+- If both configuration files and environment variables are present, environment variables overwrite settings in configuration files.
+- The existing configuration is applied at startup, and changes made to the configuration will not be applied at runtime.
+
+For more information on Self-Managed configuration options, see [configuring components](/self-managed/operational-guides/application-configs.md).
+
+## Environment variables
 
 | Environment variable                 | Description                                                                         | Default value                                                                                                                                                            |
 | ------------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -26,6 +30,13 @@ As a Spring Boot application, Identity supports any standard
 | `KEYCLOAK_SETUP_REALM`               | The realm that the setup user is in.                                                | master                                                                                                                                                                   |
 | `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak.         | admin-cli                                                                                                                                                                |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use.                                            | http://localhost:18080/auth                                                                                                                                              |
+
+### Alternate configuration methods
+
+- Console environment variables can also be set via Helm using the `console.env` key. For more information, see the available [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#identity-parameters).
+
+- As a Spring Boot application, Identity supports any standard
+  [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 
 ## License configuration
 
