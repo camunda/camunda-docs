@@ -171,6 +171,9 @@ module.exports = {
     },
   ],
   themeConfig: {
+    colorMode: {
+      defaultMode: "light",
+    },
     docs: {
       sidebar: {
         autoCollapseCategories: true,
@@ -187,12 +190,15 @@ module.exports = {
 
     prism: {
       additionalLanguages: ["java", "protobuf", "csharp"],
+      theme: require("prism-react-renderer/themes/palenight"),
+      darkTheme: require("prism-react-renderer/themes/dracula"),
     },
     navbar: {
       title: "Camunda 8 Docs",
       logo: {
         alt: "Camunda 8 Docs",
         src: "img/black-C.png",
+        srcDark: "img/light-C.png",
       },
       items: [
         {
