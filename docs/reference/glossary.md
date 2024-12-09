@@ -4,6 +4,10 @@ title: "Glossary"
 description: "This section defines common terminology referenced within the documentation."
 ---
 
+### Automation cluster
+
+See [orchestration cluster](#orchestration-cluster).
+
 ### Bridge
 
 Synonym to "[Connector](#connector)".
@@ -162,6 +166,14 @@ Manual tasks are part of [human task orchestration](/guides/getting-started-orch
 A message contains information to be delivered to interested parties during execution of a process instance. Messages can be published via Kafka or Zeebe’s internal messaging system. Messages are associated with timestamp and other constraints such as time-to-live (TTL).
 
 - [Messages](/components/concepts/messages.md)
+
+### Orchestration cluster
+
+An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and Connectors. Previously [automation cluster](#automation-cluster).
+
+### Orchestration core
+
+An orchestration core or orchestration cluster core includes Zeebe, Operate, Tasklist, Optimize, and Identity.
 
 ### Outbound Connector
 
