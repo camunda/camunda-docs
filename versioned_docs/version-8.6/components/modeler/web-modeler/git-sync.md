@@ -36,10 +36,14 @@ Click **Create GitHub App** to finish.
 3. Select **Only select repositories**, and choose the repository to sync with Web Modeler.
 4. Once redirected to your application's installation page, copy the **Installation ID** located at the end of the page's URL: `https://github.com/settings/installations/{installation_id}`.
 
-### Configure GitHub in Web Modeler
+### [Configure GitHub in Web Modeler](#configure-github-in-web-modeler)
 
 :::note
 An organization administration account (or project administrator in Camunda Self-Managed) is required for the initial GitHub configuration.
+:::
+
+:::note
+When using a self-hosted GitHub instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL` is set to the API URL of your self-hosted GitHub instance. It usually looks like `http(s)://HOSTNAME/api/v3`. Refer to [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose the correct enterprise server version.
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect GitHub**.
@@ -47,7 +51,7 @@ An organization administration account (or project administrator in Camunda Self
 2. Provide the following information in the GitHub Configuration modal:
 
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
-   - **Client ID:** Found in your GitHub App's settings page.
+   - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, you **have** to use Application ID)
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
    - **GitHub repository URL:** The base URL of the repository you want to sync with, for example `https://github.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
    - **Branch name:** The branch name to use for merging and managing changes.
@@ -96,3 +100,4 @@ Existing GitHub configurations can be edited from the gear icon beside the **Syn
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
 - A single synchronization action is limited to incorporating a maximum of 250 commits or making changes to up to 300 files, regardless of whether these changes affect the Web Modeler files directly. Be aware that Web Modeler does not provide a notification when these thresholds are exceeded. Should you encounter this limitation, it may be necessary to initiate a fresh synchronization. A fresh synchronization fetches all the files in the repository without relying on the incremental changes, thus bypassing the limitations. This can be achieved by either changing the branch or modifying the GitHub repository URL.
+- Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler [configuration](#configure-github-in-web-modeler) for more details.
