@@ -964,6 +964,10 @@ module.exports = {
                   "Google Sheets Connector",
                   "components/connectors/out-of-the-box-connectors/google-sheets/"
                 ),
+                docsLink(
+                  "Google Gemini Connector",
+                  "components/connectors/out-of-the-box-connectors/google-gemini/"
+                ),
               ],
             },
 
@@ -2043,11 +2047,6 @@ module.exports = {
                 },
               ],
             },
-
-            docsLink(
-              "Migrate to Zeebe user tasks",
-              "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
-            ),
           ],
         },
 
