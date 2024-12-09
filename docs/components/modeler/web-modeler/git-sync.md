@@ -52,10 +52,6 @@ Click **Create GitHub App** to finish.
 <h3> Configure GitHub in Web Modeler </h3>
 
 :::note
-An organization administration account (or a user with `Web Modeler Admin` role in Camunda Self-Managed) is required for the initial GitHub configuration.
-:::
-
-:::note
 When using a self-hosted GitHub instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL` is set to the API URL of your self-hosted GitHub instance. It usually looks like `http(s)://HOSTNAME/api/v3`. Refer to [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose the correct enterprise server version.
 :::
 
@@ -87,9 +83,13 @@ When successful, your project will display a new **Sync with GitHub** button.
 </TabItem>
 <TabItem value='gitlab'>
 
-<h3> Create a new project access token </h3>
+<h3> Create a new access token </h3>
 
-Web Modeler requires a project access token to sync changes with your GitLab repository.
+Web Modeler requires an access token to sync changes with your GitLab repository. You can use the following options:
+
+- **Project access token** (Recommended)
+- Group access token
+- Personal access token
 
 Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#create-a-project-access-token) to generate a new project access token for your repository with the following configuration:
 
@@ -107,7 +107,7 @@ Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settin
 <h3> Configure GitLab in Web Modeler </h3>
 
 :::note
-An organization administration account (or a user with `Web Modeler Admin` role in Camunda Self-Managed) is required for the initial GitHub configuration.
+When using a self-hosted GitLab instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL` is set to the API URL of your self-hosted GitLab instance. It usually looks like `http(s)://HOSTNAME/api/v4`.
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to GitLab, and click **Connect repository**.
@@ -116,11 +116,11 @@ An organization administration account (or a user with `Web Modeler Admin` role 
 
 3. Provide the following information in the **Configure GitLab** modal:
 
-   - **Project access token:** The token generated in the GitLab project settings.
+   - **Access token:** The generated project, group or personal access token.
    - **Project ID:** The ID copied from the GitLab project settings.
    - **GitLab repository URL:** The base URL of the repository you want to sync with, for example `https://gilab.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
    - **Branch name:** The branch name to use for merging and managing changes.
-   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is **not** automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -137,10 +137,6 @@ When successful, your project will display a new **Sync with GitLab** button.
 
 ## Sync with remote repository
 
-:::note
-File synchronization only happens at the root level of the remote repository. Files contained in subfolders will not be synchronized.
-:::
-
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
 1. In your connected process application, click **Sync with GitHub** or **Sync with GitLab**.
@@ -153,11 +149,7 @@ Once the pull is complete and any merge conflicts are resolved, Web Modeler will
 
 ## Manage existing configurations
 
-Existing Git configurations can be edited from the gear icon beside the **Sync with GitHub**, or **Sync with GitLab** button. Permission to update these settings are limited by the roles within your organization and project.
-
-- **Organization owners/administrators:** Edit and update all configuration options.
-- **Users with `Web Modeler Admin` role - Self-Managed:** Edit and update all configuration options.
-- **Project administrators, and Project editors:** Cannot make changes to the GitHub configuration.
+Existing Git configurations can be edited from the gear icon beside the **Sync with GitHub**, or **Sync with GitLab** button. Permission to update these settings are limited to **project administrators**.
 
 ## Change Git provider
 
@@ -205,5 +197,5 @@ Creating multiple copies of a process application can complicate navigation and 
 - When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
-- A single synchronization action is limited to incorporating a maximum of 250 commits or making changes to up to 300 files, regardless of whether these changes affect the Web Modeler files directly. Be aware that Web Modeler does not provide a notification when these thresholds are exceeded. Should you encounter this limitation, it may be necessary to initiate a fresh synchronization. A fresh synchronization fetches all the files in the repository without relying on the incremental changes, thus bypassing the limitations. This can be achieved by either changing the branch or modifying the GitHub repository URL.
-- Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler [configuration](#configure-github-in-web-modeler) for more details.
+- Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler configuration part for your [git host](#connect-to-a-remote-repository) for more details.
+- **(GitHub specific)** A single synchronization action is limited to incorporating a maximum of 250 commits or making changes to up to 300 files, regardless of whether these changes affect the Web Modeler files directly. Be aware that Web Modeler does not provide a notification when these thresholds are exceeded. Should you encounter this limitation, it may be necessary to initiate a fresh synchronization. A fresh synchronization fetches all the files in the repository without relying on the incremental changes, thus bypassing the limitations. This can be achieved by either changing the branch or modifying the GitHub repository URL.
