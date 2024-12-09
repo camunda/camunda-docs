@@ -699,10 +699,31 @@ module.exports = {
             id: "components/early-access/alpha/alpha-features",
           },
           items: [
-            "components/early-access/alpha/sap/sap-integration",
-            "components/early-access/alpha/sap/odata-connector",
-            "components/early-access/alpha/sap/rfc-connector",
-            "components/early-access/alpha/sap/btp-integration",
+            {
+              type: "category",
+              label: "SAP",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/sap/sap-integration",
+              },
+              items: [
+                "components/early-access/alpha/sap/sap-integration",
+                "components/early-access/alpha/sap/odata-connector",
+                "components/early-access/alpha/sap/rfc-connector",
+                "components/early-access/alpha/sap/btp-integration",
+              ],
+            },
+            {
+              type: "category",
+              label: "BPMN copilot",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+              },
+              items: [
+                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+              ],
+            },
           ],
         },
       ],
