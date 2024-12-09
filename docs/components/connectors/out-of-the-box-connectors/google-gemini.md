@@ -9,7 +9,7 @@ description: The Gemini large language models (LLMs) that are used by Gemini for
 The **Google Gemini Connector** is available for `8.7.0` or later.
 :::
 
-The **Google Gemini Connector** in an outbound Connector that allows you to access to Gemini multimodal models from Google, capable of understanding virtually any input, combining different types of information in BPMN process.
+The **Google Gemini Connector** is an outbound Connector that allows you to access Gemini multimodal models from Google. It is capable of understanding virtually any input, and can combine different types of information in a BPMN process.
 
 ## Create a Google Gemini Connector task
 
@@ -19,126 +19,129 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your Google Gemini Connector executable
 
-To execute the Google Gemini Connector, ensure all mandatory fields are correctly filled.
+To execute this Connector, ensure all mandatory fields are correctly filled.
 
 :::note
 All the mandatory and non-mandatory fields and required settings depending on the operation selection you choose are covered in the upcoming sections.
 :::
 
-## 1. Authentication
+## Authentication
 
-Choose an authentication type from the **Type** dropdown. For details on the different authentication types, refer to the [appendix](#google-authentication-types).
+Choose an authentication type from the **Type** dropdown. For details on authentication types, see [Google authentication types](#google-authentication-types).
 
-## 2. Project ID
+## Project ID
 
-Input your google cloud project identifier.
+Enter your google cloud project identifier.
 
-## 3. Region
+## Region
 
-Input region where you project located (for example, `us-central1 (lowa)`, `us-west1 (Oregon)`).
+Enter the region where your project is located. For example, `us-central1 (lowa)`, `us-west1 (Oregon)`.
 
-## 4. Model
+## Model
 
-Select model from dropdown, list of supported models below.
+Select a model from the dropdown. The following models are currently supported:
 
-- _gemini-1.5-flash-001_
-- _gemini-1.5-flash-002_
-- _gemini-1.5-pro-001_
-- _gemini-1.5-pro-002_
-- _gemini-1.0-pro-001_
-- _gemini-1.0-pro-002_
-- _gemini-1.0-pro-vision-001_
+- gemini-1.5-flash-001
+- gemini-1.5-flash-002
+- gemini-1.5-pro-001
+- gemini-1.5-pro-002
+- gemini-1.0-pro-001
+- gemini-1.0-pro-002
+- gemini-1.0-pro-vision-001
 
-## 5. Prompt
+## Prompt
 
-Prompt should be inserted as feel expression where you can provide text and media.
+Enter a prompt as a FEEL expression, providing text and media.
 
-- If you want to provide text to gemini, then expression should contains key _"text"_ and text data. Like _"text"_ : _"your text"_
-- If you want to provide media to gemini, then expression should contains key _"mime"_ and mime type text, key _"uri"_ and media uri.
-  Like _"mime"_: _"mime type"_, _"uri"_: _"your uri"_.
+- To provide text to Gemini, your expression should contain key _"text"_ and text data. For example, _"text"_ : _"your text"_
+- To provide media to Gemini, your expression should contain key _"mime"_ and mime type text, and key _"uri"_ and media URI. For example, _"mime"_: _"mime type"_, _"uri"_: _"your URI"_.
 
-**Example:**
+For example:
 
 ```feel
 = [{"text": "who is this video about"},
 {"mime": "video/*", "uri": "https://youtu.be/..."}]
 ```
 
-## 6. System instructions
+## System instructions
 
-Input system instructions as string. System instructions inform how the model should respond. More info [here](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/system-instructions?hl=en).
+Enter system instructions as a string, to determine how the model should respond.
 
-## 7. Grounding
+To learn more about system instructions, refer to [Google system instructions](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/prompts/system-instructions?hl=en).
 
-Grounding connects model output to verifiable sources of information. This is useful in situations where accuracy and reliability are important. [Learn more about grounding](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=en).
+## Grounding
 
-If you want to use grounding, select the _Grounding_ checkbox and input the path to the data store.
+Grounding connects the model output to the verifiable sources of information.
 
-## 8. Safety Filter Settings
+- This is useful in situations where accuracy and reliability are important.
+- To use grounding, select the _Grounding_ checkbox and input the path to the data store.
 
-You can adjust the likelihood of receiving a model response that could contain harmful content. Content is blocked based on the probability that it's harmful.
-[Learn more](https://cloud.google.com/vertex-ai/docs/generative-ai/learn/responsible-ai?hl=en#safety_filters_and_attributes).
+To learn more about grounding, refer to [Google grounding overview](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview?hl=en).
 
-If you want to use safety filter settings, select the _Safety Filter Settings_ checkbox and select the desired level from dropdown.
+## Safety Filter Settings
 
-:::note
-By default, all filters are set to OFF.
-:::
+You can adjust the likelihood of receiving a model response which might contain harmful content.
 
-## 9. Add stop sequence
+- Content is blocked based on the probability that it is harmful.
+- To use safety filter settings, select the _Safety Filter Settings_ checkbox and select the desired level from dropdown.
+- By default, all filters are set to OFF.
 
-A stop sequence is a series of characters (including spaces) that stops response generation if the model encounters it.
-Stop sequence should be inserted as list of string.
+To learn more about safety filters, refer to [Google responsible AI safety filters and settings](https://cloud.google.com/vertex-ai/docs/generative-ai/learn/responsible-ai?hl=en#safety_filters_and_attributes).
 
-**Example:**
+## Add stop sequence
+
+A stop sequence is a series of characters (including spaces) that stops response generation if encountered by the model.
+
+The stop sequence should be inserted as a string list.
+
+For example:
 
 ```feel
 = ["text 1", "text 2"]
 ```
 
-## 10. Temperature
+## Temperature
 
-**Temperature** controls the randomness in token selection.
+The **Temperature** controls the randomness in token selection.
 
-- A lower temperature is good when you expect a true or correct response. A temperature of 0 means the highest probability token is usually selected.
+- A lower temperature is good when you expect a true or correct response. A temperature of `0` means the highest probability token is usually selected.
 - A higher temperature can lead to diverse or unexpected results. Some models have a higher temperature max to encourage more random responses.
 
-## 11. Output token limit
+## Output token limit
 
-**Output token limit** determines the maximum amount of text output from one prompt. A token is approximately four characters.
+The **Output token limit** Determines the maximum amount of text output from a single prompt. A token is approximately four characters.
 
-## 12. Seed
+## Seed
 
-Setting a **Seed** value is useful when you make repeated requests and want the same model response.
+Setting a **Seed** value is useful if you make repeated requests and want the same model response.
 
-Deterministic outcome isn’t guaranteed. Changing the model or other settings can cause variations in the response
-even when you use the same seed value.
+Deterministic outcome isn’t guaranteed. Changing the model or other settings can cause variations in the response even when you use the same seed value.
 
-## 13. Top-K
+## Top-K
 
-**Top-K** specifies the number of candidate tokens when the model is selecting an output token.
-Use a lower value for less random responses and a higher value for more random responses.
+The **Top-K** specifies the number of candidate tokens when the model is selecting an output token.
 
-:::note
-Only _gemini-1.0-pro-vision-001_ model supports Top-K .
-:::
+- Use a lower value for less random responses and a higher value for more random responses.
+- Only the _gemini-1.0-pro-vision-001_ model supports Top-K.
 
-## 14. Top-P
+## Top-P
 
-**Top-P** changes how the model selects tokens for output. Tokens are selected from most probable to least until the sum of their probabilities equals the top-p value.
-For example, if tokens A, B, and C have a probability of .3, .2, and .1 and the top-p value is .5, then the model will select either A or B as the next token (using temperature).
-For the least variable results, set top-P to 0.
+The **Top-P** changes how the model selects tokens for output.
 
-## 15 Functional call description
+- Tokens are selected from the most probable to the least probable, until the sum of their probabilities equals the top-p value.
+- For example, if tokens A, B, and C have a probability of .3, .2, and .1 and the top-p value is .5, then the model will select either A or B as the next token (using temperature).
+- For the least variable results, set top-P to 0.
 
-**Function calling** is a feature of Gemini models that makes it easier for developers to get structured data outputs from generative models.
-**Functional call description** must be provided in fell format. [More info here](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/function-calling).
+## Functional call description
 
-:::note
-It is important that all types must be registered with capslock.
-:::
+**Function calling** is a feature of Gemini models that makes it easier to get structured data outputs from generative models.
 
-**Example:**
+- The **Functional call description** must be provided in fell format.
+- It is important that all types must be registered with capslock.
+
+To learn more about function calling, refer to [Google function calling](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/function-calling).
+
+For example:
 
 ```fell
 [
@@ -173,18 +176,21 @@ It is important that all types must be registered with capslock.
 
 ### Google authentication types
 
-The **Google Gemini Connector** currently supports two methods for authentication and authorization: based on short-lived JWT bearer token, and based on refresh token.
+The **Google Gemini Connector** currently supports two methods for authentication and authorization:
 
-Google supports multiple ways to obtain both. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) to get up-to-date instructions or refer to the examples below.
+- Based on a short-lived JWT bearer token.
+- Based on a refresh token.
 
-#### Example 1: Obtaining JWT bearer token with a service account
+Google supports multiple ways to obtain both types of token. Refer to the [official Google OAuth documentation](https://developers.google.com/identity/protocols/oauth2) for current instructions, or see the examples below.
+
+#### Example 1: Obtain JWT bearer token with a service account
 
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
 For production usage, follow the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/service-account).
 :::
 
-Assuming you have created a service account and downloaded a JSON file with keys, run the following Python 3 snippet that prints the JWT token in the terminal:
+Assuming you have created a service account and downloaded a JSON file with keys, run the following Python 3 snippet to print the JWT token in the terminal:
 
 ```python
 import google.auth
@@ -201,14 +207,14 @@ credentials.refresh(auth_req)
 print(credentials.token)
 ```
 
-#### Example 2: Obtaining bearer and refresh tokens with OAuth client
+#### Example 2: Obtain bearer and refresh token with OAuth client
 
 :::warning
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
 For production usage, follow the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/web-server).
 :::
 
-Assuming you have created an OAuth client, you can download key files from the Google [Console](https://console.cloud.google.com/apis/credentials). Run the following Python 3 snippet that prints the refresh token in the terminal:
+Assuming you have created an OAuth client, you can download key files from the Google [Console](https://console.cloud.google.com/apis/credentials). Run the following Python 3 snippet to print the refresh token in the terminal:
 
 ```python
 from google_auth_oauthlib.flow import InstalledAppFlow
