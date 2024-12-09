@@ -33,7 +33,7 @@ You can authenticate to a mail server as follows.
 This method allows the user to connect to any SMTP, POP3 or IMAP server using an email address and password.
 
 | Parameter  | Description                                                                                                                                                                |
-|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
 | `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
 
@@ -45,7 +45,7 @@ their local computer, where they can be read, managed, or archived even without 
 simple download-and-delete model, meaning emails are typically removed from the server once they are retrieved.
 
 | Field                    | Description                                                                                            |
-|:-------------------------|:-------------------------------------------------------------------------------------------------------|
+| :----------------------- | :----------------------------------------------------------------------------------------------------- |
 | `POP3 host`              | The host URL of the POP3 server.                                                                       |
 | `POP3 port`              | The host port of the POP3 server.                                                                      |
 | `Cryptographic protocol` | Defines how the connection to the server is secured, `TLS`, `SSL` or `None`. Default is typically TLS. |
@@ -57,7 +57,7 @@ Allow users to fetch a list of emails from the `INBOX` folder, with customizable
 #### Parameters
 
 | Parameter            | Description                                                                                                                                                                                                                                       |
-|:---------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `Max Emails to read` | Specify the maximum number of emails to retrieve. This parameter determines the cap on the number of emails the task will return.                                                                                                                 |
 | `Sort emails by`     | <p>Choose the field by which to sort the emails. Supported sorting fields are:</p><p><ul><li>`Sent date`: Sorts emails by the date and time they were sent.</li><li>`Size`: Sorts emails by the size of the email.</li></ul></p>                  |
 | `Sort order`         | <p>Define the sort order:</p><p><ul><li>`ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.</li><li>`DESC`: Descending order, from the most recent or largest value to the oldest or smallest.</li></ul></p> |
@@ -84,16 +84,16 @@ Example of a returned JSON array:
 ```json
 [
   {
-    "messageId":"RandomId",
-    "fromAddress":"msa@communication.microsoft.com",
-    "subject":"Example",
-    "size":99865
+    "messageId": "RandomId",
+    "fromAddress": "msa@communication.microsoft.com",
+    "subject": "Example",
+    "size": 99865
   },
   {
-    "messageId":"RandomId2",
-    "fromAddress":"example@camunda.com",
-    "subject":"Example",
-    "size":48547
+    "messageId": "RandomId2",
+    "fromAddress": "example@camunda.com",
+    "subject": "Example",
+    "size": 48547
   }
 ]
 ```
@@ -109,7 +109,7 @@ Reading an email using POP3 protocol will delete the email
 #### Parameters
 
 | Parameter   | Description                                                                                                 |
-|:------------|:------------------------------------------------------------------------------------------------------------|
+| :---------- | :---------------------------------------------------------------------------------------------------------- |
 | `MessageId` | The identifier of the email message you wish to read. Provide this to locate and return the specific email. |
 
 #### Response Structure
@@ -132,33 +132,35 @@ Below is an example of the JSON response returned when a specific email is read:
 
 ```json
 {
-  "messageId":"MessageId",
-  "fromAddress":"example@camunda.com",
-  "subject":"Example Subject",
-  "size":99865,
-  "plainTextBody":"Any text content",
-  "htmlBody":"<html>Any Html Content</html>",
-  "headers":[
+  "messageId": "MessageId",
+  "fromAddress": "example@camunda.com",
+  "subject": "Example Subject",
+  "size": 99865,
+  "plainTextBody": "Any text content",
+  "htmlBody": "<html>Any Html Content</html>",
+  "headers": [
     {
-      "header":"header1",
-      "value":"example"
+      "header": "header1",
+      "value": "example"
     },
     {
-      "header":"header2",
-      "value":"test"
+      "header": "header2",
+      "value": "test"
     }
   ],
-  "attachments":[
+  "attachments": [
     {
-      "storeId":"in-memory",
-      "documentId":"20f1fd6a-d8ea-403b-813c-e281c1193495",
-      "metadata":{
-        "contentType":"image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp", "size":311032,
-        "fileName":"305a4816-b3df-4724-acd3-010478a54add.webp"
-      }, "documentType":"camunda"
+      "storeId": "in-memory",
+      "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
+      "metadata": {
+        "contentType": "image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
+        "size": 311032,
+        "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
+      },
+      "documentType": "camunda"
     }
   ],
-  "receivedDateTime":"2024-08-19T06:54:28Z"
+  "receivedDateTime": "2024-08-19T06:54:28Z"
 }
 ```
 
@@ -169,7 +171,7 @@ Delete (remove) an email from the server, using the specific `messageId` assigne
 #### Parameters
 
 | Parameter   | Description                                    |
-|:------------|:-----------------------------------------------|
+| :---------- | :--------------------------------------------- |
 | `MessageId` | The identifier of the email message to delete. |
 
 #### Response Structure
@@ -185,8 +187,8 @@ The following JSON response shows the result of a successful deletion request:
 
 ```json
 {
-  "deleted":true,
-  "messageId":"MessageId"
+  "deleted": true,
+  "messageId": "MessageId"
 }
 ```
 
@@ -203,22 +205,22 @@ using an AND and OR operator to combine multiple conditions:
 
 ```json
 {
-  "operator":"AND",
-  "criteria":[
+  "operator": "AND",
+  "criteria": [
     {
-      "field":"FROM",
-      "value":"example@camunda.com"
+      "field": "FROM",
+      "value": "example@camunda.com"
     },
     {
-      "operator":"OR",
-      "criteria":[
+      "operator": "OR",
+      "criteria": [
         {
-          "field":"SUBJECT",
-          "value":"urgent"
+          "field": "SUBJECT",
+          "value": "urgent"
         },
         {
-          "field":"SUBJECT",
-          "value":"important"
+          "field": "SUBJECT",
+          "value": "important"
         }
       ]
     }
@@ -232,8 +234,8 @@ A simpler query without logical operators might look like the following example:
 
 ```json
 {
-  "field":"FROM",
-  "value":"example@camunda.com"
+  "field": "FROM",
+  "value": "example@camunda.com"
 }
 ```
 
@@ -265,8 +267,8 @@ The following is an example of a returned response:
 
 ```json
 [
-  {"messageId":"MessageId", "subject":"Important"},
-  {"messageId":"MessageId2", "subject":"Urgent"}
+  { "messageId": "MessageId", "subject": "Important" },
+  { "messageId": "MessageId2", "subject": "Urgent" }
 ]
 ```
 
@@ -278,7 +280,7 @@ email messages to their final destination. SMTP operates on a push model, where 
 the receiving server for delivery to the appropriate mailbox.
 
 | Field                    | Description                                                                                            |
-|:-------------------------|:-------------------------------------------------------------------------------------------------------|
+| :----------------------- | :----------------------------------------------------------------------------------------------------- |
 | `SMTP host`              | The host URL of the SMTP server.                                                                       |
 | `SMTP port`              | The host port of the SMTP server.                                                                      |
 | `Cryptographic protocol` | Defines how the connection to the server is secured, `TLS`, `SSL` or `None`. Default is typically TLS. |
@@ -290,14 +292,14 @@ Allow users to send an email from the connected email account.
 #### Parameters
 
 | Parameter            | Description                                                                                                                                                                                                                                                                                   |
-|:---------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `From`               | Specify the sender's email address(es). This can be a single email address (for example, 'example@camunda.com'), a comma-separated list of addresses, or a Friendly Enough Expression Language (FEEL) expression returning a list of email addresses (for example, =["example@camunda.com"]). |
 | `To`                 | Defines the email recipient(s). Similar to the `From` parameter, this can be a single email address, a comma-separated list, or a FEEL expression (for example, =["example@camunda.com"]).                                                                                                    |
 | `Cc`                 | (Optional) Specify the email address(es) to include in the **Carbon Copy (CC)** field. The format is the same as the **From** and **To** fields, and can include a single address, a list, or a FEEL expression.                                                                              |
 | `Bcc`                | (Optional) Specify the email address(es) to include in the **Blind Carbon Copy (BCC)** field. It follows the same format as the **CC** field and ensures that BCC recipients are not visible to other recipients.                                                                             |
 | `Headers`            | Feel expression containing all the desired headers to be added to the email's headers. cf. `{ "customHeaders" : "new header value" }`                                                                                                                                                         |
-| `Subject`            | The email subject line.                                                                                                                                                                                                                                                                       | 
-| `Content Type`       | The content type of the email.                                                                                                                                                                                                                                                                |  
+| `Subject`            | The email subject line.                                                                                                                                                                                                                                                                       |
+| `Content Type`       | The content type of the email.                                                                                                                                                                                                                                                                |
 | `Email Text Content` | The text content of the email. It must only be filled if Content type was `PLAIN` or `HTML & PlainText`.                                                                                                                                                                                      |
 | `Html Text Content`  | The html content of the email. It must only be filled if Content type was `HTLM` or `HTML & PlainText`.                                                                                                                                                                                       |
 | `Attachment`         | One or a list of document reference.                                                                                                                                                                                                                                                          |
@@ -320,8 +322,8 @@ The following is an example of a successful send email operation:
 
 ```json
 {
-  "subject":"Example Subject",
-  "sent":true
+  "subject": "Example Subject",
+  "sent": true
 }
 ```
 
@@ -338,7 +340,7 @@ offline modes, synchronizes email across devices, and allows manipulation of mai
 well as messages (read, delete, or flag) directly on the server.
 
 | Field                    | Description                                                                                            |
-|:-------------------------|:-------------------------------------------------------------------------------------------------------|
+| :----------------------- | :----------------------------------------------------------------------------------------------------- |
 | `IMAP host`              | The host URL of the IMAP server.                                                                       |
 | `IMAP port`              | The host port of the IMAP server.                                                                      |
 | `Cryptographic protocol` | Defines how the connection to the server is secured, `TLS`, `SSL` or `None`. Default is typically TLS. |
@@ -350,7 +352,7 @@ Allow users to fetch a list of emails from a specified folder, with customizable
 #### Parameters
 
 | Parameter            | Description                                                                                                                                                                                                                                       |
-|:---------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `Max Emails to read` | Specify the maximum number of emails to retrieve. This parameter determines the cap on the number of emails the task will return.                                                                                                                 |
 | `Sort emails by`     | <p>Choose the field by which to sort the emails. Supported sorting fields are:</p><p><ul><li>`Sent date`: Sorts emails by the date and time they were sent.</li><li>`Size`: Sorts emails by the size of the email.</li></ul></p>                  |
 | `Sort order`         | <p>Define the sort order:</p><p><ul><li>`ASC`: Ascending order, from the oldest or smallest value to the most recent or largest.</li><li>`DESC`: Descending order, from the most recent or largest value to the oldest or smallest.</li></ul></p> |
@@ -380,16 +382,16 @@ Example of a returned JSON array:
 ```json
 [
   {
-    "messageId":"RandomId",
-    "fromAddress":"msa@communication.microsoft.com",
-    "subject":"Example",
-    "size":99865
+    "messageId": "RandomId",
+    "fromAddress": "msa@communication.microsoft.com",
+    "subject": "Example",
+    "size": 99865
   },
   {
-    "messageId":"RandomId2",
-    "fromAddress":"example@camunda.com",
-    "subject":"Example",
-    "size":48547
+    "messageId": "RandomId2",
+    "fromAddress": "example@camunda.com",
+    "subject": "Example",
+    "size": 48547
   }
 ]
 ```
@@ -401,7 +403,7 @@ Retrieve an email's details based on the specified `messageId`.
 #### Parameters
 
 | Parameter   | Description                                                                                                                                                                                                      |
-|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `MessageId` | The unique identifier of the email that must be read.                                                                                                                                                            |
 | `Folder`    | (Optional) Specifies the folder from which the email should be retrieved. If not provided, the default folder is `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`) |
 
@@ -425,31 +427,35 @@ The following JSON structure shows an expected response after a successful email
 
 ```json
 {
-  "messageId":"MessageId",
-  "fromAddress":"example@camunda.com",
-  "subject":"Example Subject",
-  "size":99865,
-  "plainTextBody":"Any text content",
-  "htmlBody":"<html>Any Html Content</html>",
-  "headers":[
+  "messageId": "MessageId",
+  "fromAddress": "example@camunda.com",
+  "subject": "Example Subject",
+  "size": 99865,
+  "plainTextBody": "Any text content",
+  "htmlBody": "<html>Any Html Content</html>",
+  "headers": [
     {
-      "header":"header1",
-      "value":"example"
+      "header": "header1",
+      "value": "example"
     },
     {
-      "header":"header2",
-      "value":"test"
+      "header": "header2",
+      "value": "test"
     }
   ],
-  "attachments":[
+  "attachments": [
     {
-      "storeId":"in-memory", "documentId":"20f1fd6a-d8ea-403b-813c-e281c1193495", "metadata":{
-      "contentType":"image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp", "size":311032,
-      "fileName":"305a4816-b3df-4724-acd3-010478a54add.webp"
-    }, "documentType":"camunda"
+      "storeId": "in-memory",
+      "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
+      "metadata": {
+        "contentType": "image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
+        "size": 311032,
+        "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
+      },
+      "documentType": "camunda"
     }
   ],
-  "receivedDateTime":"2024-08-19T06:54:28Z"
+  "receivedDateTime": "2024-08-19T06:54:28Z"
 }
 ```
 
@@ -460,7 +466,7 @@ Delete an email from a specified folder, using the email's unique `messageId`.
 #### Parameters
 
 | Parameter   | Description                                                                                                                                                                                                                                    |
-|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `MessageId` | The identifier of the email message to delete.                                                                                                                                                                                                 |
 | `Folder`    | (Optional) Specifies the folder from which the email should be deleted. If this parameter is not supplied, the default folder is assumed to be `INBOX`. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`) |
 
@@ -477,8 +483,8 @@ The following is an example of the JSON response confirming successful email del
 
 ```json
 {
-  "deleted":true,
-  "messageId":"MessageId"
+  "deleted": true,
+  "messageId": "MessageId"
 }
 ```
 
@@ -499,22 +505,22 @@ using an AND and OR operator to combine multiple conditions:
 
 ```json
 {
-  "operator":"AND",
-  "criteria":[
+  "operator": "AND",
+  "criteria": [
     {
-      "field":"FROM",
-      "value":"example@camunda.com"
+      "field": "FROM",
+      "value": "example@camunda.com"
     },
     {
-      "operator":"OR",
-      "criteria":[
+      "operator": "OR",
+      "criteria": [
         {
-          "field":"SUBJECT",
-          "value":"urgent"
+          "field": "SUBJECT",
+          "value": "urgent"
         },
         {
-          "field":"SUBJECT",
-          "value":"important"
+          "field": "SUBJECT",
+          "value": "important"
         }
       ]
     }
@@ -528,8 +534,8 @@ A simpler query without logical operators might look like the following example:
 
 ```json
 {
-  "field":"FROM",
-  "value":"example@camunda.com"
+  "field": "FROM",
+  "value": "example@camunda.com"
 }
 ```
 
@@ -561,8 +567,8 @@ The following is an example returned response:
 
 ```json
 [
-  {"messageId":"MessageId", "subject":"Important"},
-  {"messageId":"MessageId2", "subject":"Urgent"}
+  { "messageId": "MessageId", "subject": "Important" },
+  { "messageId": "MessageId2", "subject": "Urgent" }
 ]
 ```
 
@@ -573,7 +579,7 @@ Enable users to transfer an email from one folder to another, streamlining inbox
 #### Parameters
 
 | Parameter       | Description                                                                                                                                                                                                                                                     |
-|:----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `MessageId`     | The identifier of the email that needs to be moved.                                                                                                                                                                                                             |
 | `Source folder` | (Optional) The folder from which the email will be moved. If not specified, the default is INBOX. For subfolders, use `.` or `/` separated path (ex: `inside/folder` or `inside.folder`)                                                                        |
 | `Target folder` | The destination folder where the email is placed. To specify a new folder or a nested hierarchy, use `.` or `/` separated path (for example, 'Archive/test' or 'Projects.2023.January'). The system automatically creates any non-existent folders in the path. |
@@ -592,9 +598,9 @@ The example below shows the expected JSON response after an email has been succe
 
 ```json
 {
-  "messageId":"VE1P191MB1101730EEA31B2FEAB320143919A2@VE1P191MB1101.EURP191.PROD.OUTLOOK.COM",
-  "from":"INBOX",
-  "to":"TEST"
+  "messageId": "VE1P191MB1101730EEA31B2FEAB320143919A2@VE1P191MB1101.EURP191.PROD.OUTLOOK.COM",
+  "from": "INBOX",
+  "to": "TEST"
 }
 ```
 
@@ -629,7 +635,7 @@ This method allows the user to connect to any IMAP server using an email address
 #### Parameters
 
 | Parameter  | Description                                                                                                                                                                |
-|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
 | `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
 
@@ -638,7 +644,7 @@ This method allows the user to connect to any IMAP server using an email address
 This inbound connector creates a new process each time a new email is received.
 
 | Parameter               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-|:------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :---------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Folder`                | <p>(Optional) Define the folder the inbound connector will monitor.</p><p><ul><li>If not specified, the default folder is set to `INBOX`.</li><li>For subfolders, use `.` or `/` separated path (for example, `inside/folder` or `inside.folder`)</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | `Polling Wait Time`     | Set the interval between each polling operation. See [timer events](/docs/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for more information on time duration and correct format.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `Polling Configuration` | <p>This section contains settings related to the polling behavior of the connector.</p><p><ul><li><code>Poll All Emails</code>: Poll every email found in the specified folder.<ul><li><p><code>Move to Another Folder After Processing</code>: Move processed emails to a specific folder.</p><ul><li><p><code>Folder</code>: Specify the target folder to move processed emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</p></li></ul></li><li><p><code>Delete After Processing</code>: Permanently delete each email after processing.</p></li></ul></li></ul><ul><li>`Poll Unseen Emails`: Poll only emails not marked as read in the specified folder.<ul><li><p>`Move to Another Folder After Processing`: Move processed unseen emails to a specific folder.</p><ul><li>`Folder`: Specify the target folder to move processed unseen emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</li></ul></li><li><p>`Delete After Processing`: Permanently delete unseen emails from the folder after processing.</p></li><li><p>`Mark as Read After Processing`: Mark each unseen email as read after it is processed.</p></li></ul></li></ul></p> |
@@ -664,34 +670,35 @@ instance:
 
 ```json
 {
-  "messageId":"messageId",
-  "fromAddress":"example@camunda.com",
-  "subject":"Urgent Test",
-  "size":65646,
-  "plainTextBody":"Hey how are you?\r\n",
-  "htmlBody":"<html>Hello</html>",
-  "headers":[
+  "messageId": "messageId",
+  "fromAddress": "example@camunda.com",
+  "subject": "Urgent Test",
+  "size": 65646,
+  "plainTextBody": "Hey how are you?\r\n",
+  "htmlBody": "<html>Hello</html>",
+  "headers": [
     {
-      "header":"header1",
-      "value":"example"
+      "header": "header1",
+      "value": "example"
     },
     {
-      "header":"header2",
-      "value":"test"
+      "header": "header2",
+      "value": "test"
     }
   ],
-  "attachments":[
+  "attachments": [
     {
-      "storeId":"in-memory",
-      "documentId":"20f1fd6a-d8ea-403b-813c-e281c1193495",
-      "metadata":{
-        "contentType":"image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
-        "size":311032,
-        "fileName":"305a4816-b3df-4724-acd3-010478a54add.webp"
-      }, "documentType":"camunda"
+      "storeId": "in-memory",
+      "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
+      "metadata": {
+        "contentType": "image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
+        "size": 311032,
+        "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
+      },
+      "documentType": "camunda"
     }
   ],
-  "receivedDateTime":"2024-08-19T06:54:28Z"
+  "receivedDateTime": "2024-08-19T06:54:28Z"
 }
 ```
 
