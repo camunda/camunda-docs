@@ -20,12 +20,14 @@ Camunda 8 Run includes the following:
 - Zeebe
 - Operate
 - Tasklist
+- Identity
 - Connectors
 - Elasticsearch
 
 ## Prerequisites
 
-- OpenJDK 21+
+- **OpenJDK 21+**: Required for running Camunda 8 as a Java application.
+- **Docker [v. TBD]**: Required for running Camunda 8 via Docker Compose.
 - [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
 
 :::note
@@ -38,7 +40,9 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha1) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
-3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
+3. Start Camunda 8 Run by running one of the following in your terminal:
+   - `./start.sh`: start Camunda 8 Run as a Java application.
+   - `./start.sh --docker`: start Camunda 8 Run via Docker Compose.
 
 When successful, a new Operate window automatically opens.
 
@@ -50,12 +54,21 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 The following command line arguments are available:
 
-| Argument     | Description                                                                                                                                  |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config`   | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md). _Not available on Windows._ |
-| `--detached` | Starts Camunda 8 Run as a detached process. The process is detached by default on Windows.                                                   |
+| Argument                  | Description                                                                                                                           |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `--config <path>`         | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                      |
+| `--detached`              | Starts Camunda 8 Run as a detached process.                                                                                           |
+| `--username <arg>`        | Configure the first user’s username to `<arg>`.                                                                                       |
+| `--password <arg>`        | Configure the first user’s password to `<arg>`.                                                                                       |
+| `--keystore <arg>`        | Configure the TLS certificate for HTTPS. If not specified, use HTTP. For more information, see [enabling TLS](#enable-tls).           |
+| `--port <arg>`            | Configure the Camunda core port to the value provided (default: 8080).                                                                |
+| `--log-level <arg>`       | Set a different log level for the Camunda core.                                                                                       |
+| `--docker`                | Download and run the Camunda Docker Compose distribution. Any additional options are not supported at this time, and will be ignored. |
+| `--disable-elasticsearch` | Do not start the built-in ElasticSearch. Ensure another ElasticSearch instance is provided via `--config`.                            |
 
-## Access Camunda components
+## Work with Camunda 8 Run
+
+### Access Camunda components
 
 All Camunda 8 Run components can be accessed using the username/password combination `demo`/`demo`.
 
@@ -63,6 +76,7 @@ Tasklist and Operate are available at:
 
 - Tasklist: http://localhost:8080/tasklist
 - Operate: http://localhost:8080/operate
+- Identity:
 
 The following components do not have a web interface, but the URLs may be required for additional configuration:
 
@@ -96,7 +110,7 @@ To add a custom Connector:
 
 Once configured correctly, your Connectors are available for use in Modeler.
 
-## Use Camunda APIs
+### Use Camunda APIs
 
 Camunda 8 Run authenticates with the [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate](/docs/apis-tools/operate-api/overview.md), and [Zeebe](/apis-tools/zeebe-api/grpc.md) APIs, as well as the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), by including cookie headers in each request. This cookie can be obtained by using the API endpoint `/api/login`.
 
@@ -152,3 +166,21 @@ curl --cookie  cookie.txt  localhost:8080/v2/topology
 ## Shut down Camunda 8 Run
 
 To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
+
+## Advanced options
+
+### Enable TLS
+
+TLS can be enabled by providing a local file keystore using the `--keystore` argument at startup. Camunda 8 Run accepts .JKS certificate files.
+
+### Access metrics
+
+Metrics are enabled in Camunda 8 Run by default, and can be accessed at [#todo]. For more information, see the Zeebe [Prometheus metrics](/docs/self-managed/zeebe-deployment/operations/metrics.md) documentation.
+
+### Environment variables
+
+Advanced configuration options can be provided via environment variables.
+
+| Variable       | Description                                                      |
+| -------------- | ---------------------------------------------------------------- |
+| `ES_JAVA_OPTS` | #TODO The options this allows you to override for ElasticSearch. |
