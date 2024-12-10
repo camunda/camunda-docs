@@ -122,6 +122,7 @@ Scenarios can be run from the process definition page using the **Run all scenar
 - Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play or in a different browser.
 - Call activities are not supported; therefore, scenarios containing them cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
+- Similar to process instances, scenarios do not run in isolation. For instance, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously may lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
 
 ## Modify a process instance
 
