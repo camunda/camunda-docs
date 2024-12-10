@@ -23,7 +23,7 @@ This section of the Camunda Deployment Reference Architectures provides guidance
 
 Other deployment options, such as containerized deployments or managed services, might offer more convenience and automation. However, VM based deployment gives you the flexibility to tailor the deployment to your exact needs, which can be beneficial for regualted or highly customized environments.
 
-For documentation on the orchestration cluster, Web Modeler and Console separation, refer to  [the documentation](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console)
+For documentation on the orchestration cluster, Web Modeler and Console separation, refer to [the documentation](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console)
 
 ## Reference implementations
 
@@ -43,9 +43,7 @@ Before you begin with the self-managed single JAR setup, please consider the com
 
 ## Architecture
 
-<!-- TODO: switch placeholder pictures to the new miro approach of Léo -->
-
-![Single JAR](./img/placeholder-manual-single.drawio.png)
+![Single JAR](./img/manual-single.jpg)
 
 This above diagram illustrates a single-machine deployment using the single JAR package. While simple and effective for lightweight setups, scaling to multiple machines requires careful planning.
 
@@ -59,7 +57,7 @@ When scaling from a single machine to multiple machine, ensure that the `Optimiz
 
 ### High availability (HA)
 
-![HA JAR](./img/placeholder-manual-ha.drawio.png)
+![HA JAR](./img/manual-ha.jpg)
 
 For high availability, a minimum of three machines is recommended to ensure fault tolerance and enable master election in case of failures. Refer to the [clustering chapter](/components/zeebe/technical-concepts/clustering.md) to learn more about the raft protocol and clustering concepts.
 
