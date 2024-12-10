@@ -4,6 +4,9 @@ title: "Guidelines"
 description: "Learn about the basic guidelines, structures, and conventions of the Camunda 8 REST API."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Camunda follows a mix of proposed standards and best practices for RESTful design and consistent implementation across all components.
 
 ## Naming conventions
@@ -19,7 +22,7 @@ The API overall applies the following naming conventions:
 
 These conventions can be observed in the following endpoint example:
 
-`POST /user-tasks/{userTaskKey}/**assignment**`
+`POST /user-tasks/{userTaskKey}/assignment`
 
 For IDs or similar short 2- or 3-letter words or acronyms, Camunda only capitalizes the first letter. If standalone, all letters are lowercase.
 
@@ -29,7 +32,7 @@ For IDs or similar short 2- or 3-letter words or acronyms, Camunda only capitali
 | URL  | `url` (standalone) or `externalUrl`        |
 | UUID | `uuid` (standalone) or `clusterUuid`       |
 
-Identifiers follow a naming rule, in parameters and data attributes alike:
+Identifiers follow a naming rule in parameters and data attributes alike:
 
 - Unique technical identifiers are suffixed with **key**, for example, `userTaskKey`, `processInstanceKey`, or `userKey`. These are numeric values in most cases.
 - Other identifiers, such as copied identifiers from the BPMN XML, may be arbitrarily named but are usually suffixed with **id**, for example, `processDefinitionId`.
@@ -38,7 +41,9 @@ Identifiers follow a naming rule, in parameters and data attributes alike:
 
 Camunda uses the term “major version number” from [semantic versioning](https://semver.org/), but does not follow semantic versioning for APIs outright. Instead, Camunda provides updates to the API in place and only increments the version number for a major, breaking change.
 
-Adding attributes and endpoints are not considered breaking changes. Breaking changes can potentially break an integration. See [GitHub’s REST documentation](https://docs.github.com/en/rest/about-the-rest-api/breaking-changes?apiVersion=2022-11-28#about-breaking-changes-in-the-rest-api) for a comprehensive summary of breaking changes. No migration is required unless there is a breaking change.
+:::note
+New attributes and endpoints are not considered breaking changes.
+:::
 
 The API version number does not match the product version (8.x.x). An API’s version is rather defined by the API version number and the product version, for example, `_POST /v2/user-tasks/search_ in Camunda 8.7.0`.
 
@@ -58,26 +63,18 @@ Camunda follows the proposed standard from [RFC 9457](https://www.rfc-editor.org
 
 Camunda uses the following error codes and descriptions across our APIs:
 
-- 200 OK
-- 204 No Content
-- 400 Bad Request
-  - Generic error that contains further description in the problem detail.
-- 401 Unauthorized
-  - The client is not authenticated yet.
-  - The client should try again with a modified Authorization header.
-- 403 Forbidden
-  - The client has incorrect or insufficient permissions for the request.
-- 404 Not Found
-- 409 Conflict
-  - The request is trying to modify a resource that is currently not in the right state.
-- 412 Precondition failed
-  - The client should check the cluster status.
-- 429 Rate Limited Exceeded
-  - The client exceeds a defined limit of requests, for example, Zeebe signaling backpressure due to more requests than the broker can currently process
-- 500 Internal Server Error
-  - Generic error that contains further description in the problem detail.
-
-Each error code has clear guidance in the documentation and API reference for how they should be handled. The problem detail object can provide guidance as well.
+| Error code | Meaning                                                                                                                                                                    |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 200        | OK                                                                                                                                                                         |
+| 204        | No content                                                                                                                                                                 |
+| 400        | Bad request. Generic error that contains further description in the problem detail.                                                                                        |
+| 401        | Unauthorized. The client is not authenticated yet. The client should try again with a modified authorization header.                                                       |
+| 403        | Forbidden. The client has incorrect or insufficient permissions for the request.                                                                                           |
+| 404        | Not found                                                                                                                                                                  |
+| 409        | Conflict. The request is trying to modify a resource that is currently not in the right state.                                                                             |
+| 412        | Precondition failed. The client should check the cluster status.                                                                                                           |
+| 429        | Rate limit exceeded. The client exceeds a defined limit of requests, for example, Zeebe signaling backpressure due to more requests than the broker can currently process. |
+| 500        | Internal server error. Generic error that contains further description in the problem detail.                                                                              |
 
 ## Data fetching
 
@@ -95,11 +92,21 @@ Search endpoints can also be used to directly access entity instances with a uni
 
 Query requests consist of the components for **filter**, **sort**, and **page**.
 
-The **filter** object defines which fields should match. Only items that match the given fields will be returned. The available fields vary by object and are described in the respective search endpoint. Filtering by a unique identifier is usually available in filtering options. Beyond that, the filter options don’t have to comprise all the returned items’ attributes.
+<Tabs groupId="requestComponents" defaultValue="filter" queryString values={[{label: 'Filter', value: 'filter', },{label: 'Sort', value: 'sort', },{label: 'Page', value: 'page', },]} >
+<TabItem value="filter">
+The filter object defines which fields should match. Only items that match the given fields will be returned. The available fields vary by object and are described in the respective search endpoint. Filtering by a unique identifier is usually available in filtering options. Beyond that, the filter options don’t have to comprise all the returned items’ attributes.
+</TabItem>
+<TabItem value="sort">
+The sort object specifies which fields of the object should be sorted and whether they are sorted in ascending (ASC) or descending (DESC) order.
+</TabItem>
+<TabItem value="page">
+The page object details how to slice the result set. An initial search request can omit the page object or define the limit. This specifies the maximum number of results to retrieve per request. Subsequent requests can use the value of the returned firstItemSortValues and lastItemSortValues of the [search responses](#search-responses) to page through the items by copying that array into one of the attributes searchAfter or searchBefore.
+</TabItem>
+</Tabs>
 
-The **sort** object specifies which fields of the object should be sorted and whether they are sorted in ascending (ASC) or descending (DESC) order.
-
-The **page** object details how to slice the result set. An initial search request can omit the page object or define the `limit`. This specifies the maximum number of results to retrieve per request. Subsequent requests can use the value of the returned `firstItemSortValues` and `lastItemSortValues` of the [search responses](#search-responses) to page through the items by copying that array into one of the attributes `searchAfter` or `searchBefore`.
+<details>
+  <summary><h4>Example</h4></summary>
+  <p>
 
 ```
 {
@@ -117,6 +124,9 @@ The **page** object details how to slice the result set. An initial search reque
   }
 }
 ```
+
+  </p>
+</details>
 
 ### Search responses
 
@@ -156,9 +166,11 @@ The `firstSortValues` field lists the criteria identifying the **first** entry o
 
 Querying for the first three user tasks with certain criteria sorted by state could look as follows:
 
-```
-POST /v2/user-tasks/search
+<details>
+  <summary><h4>POST /v2/user-tasks/search</h4></summary>
+  <p>
 
+```
 {
   "filter": {
     "assignee": "demo",
@@ -175,11 +187,16 @@ POST /v2/user-tasks/search
 }
 ```
 
+  </p>
+</details>
+
 This could yield the following example result:
 
-```
-200 OK
+<details>
+  <summary><h4>200 OK</h4></summary>
+  <p>
 
+```
 {
   "items": [
     {
@@ -209,11 +226,16 @@ This could yield the following example result:
 }
 ```
 
+  </p>
+</details>
+
 A follow-up request to receive the next three items could then look as follows:
 
-```
-POST /v2/user-tasks/search
+<details>
+  <summary><h4>POST /v2/user-tasks/search</h4></summary>
+  <p>
 
+```
 {
   "filter": {
     "assignee": "demo",
@@ -230,6 +252,9 @@ POST /v2/user-tasks/search
   }
 }
 ```
+
+  </p>
+</details>
 
 This yields the next three user task items after the last one from the first search request’s result.
 
