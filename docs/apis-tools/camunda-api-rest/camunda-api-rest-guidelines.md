@@ -93,14 +93,23 @@ Search endpoints can also be used to directly access entity instances with a uni
 Query requests consist of the components for **filter**, **sort**, and **page**.
 
 <Tabs groupId="requestComponents" defaultValue="filter" queryString values={[{label: 'Filter', value: 'filter', },{label: 'Sort', value: 'sort', },{label: 'Page', value: 'page', },]} >
+
 <TabItem value="filter">
+
 The filter object defines which fields should match. Only items that match the given fields will be returned. The available fields vary by object and are described in the respective search endpoint. Filtering by a unique identifier is usually available in filtering options. Beyond that, the filter options don’t have to comprise all the returned items’ attributes.
+
 </TabItem>
+
 <TabItem value="sort">
+
 The sort object specifies which fields of the object should be sorted and whether they are sorted in ascending (ASC) or descending (DESC) order.
+
 </TabItem>
+
 <TabItem value="page">
+
 The page object details how to slice the result set. An initial search request can omit the page object or define the limit. This specifies the maximum number of results to retrieve per request. Subsequent requests can use the value of the returned firstItemSortValues and lastItemSortValues of the [search responses](#search-responses) to page through the items by copying that array into one of the attributes searchAfter or searchBefore.
+
 </TabItem>
 </Tabs>
 
@@ -135,6 +144,7 @@ To provide an easy yet expressive way for users to search for and filter resourc
 For example, this allows searching using logical (and, in) and comparison operators (greater than, less than). The list of supported advanced filter operators is described below. Examples of advanced operators are shown in the [search example](#search-example).
 
 <Tabs groupId="advancedSearch" defaultValue="conditionalOperators" queryString values={[{label: 'Conditional operators', value: 'conditionalOperators', },{label: 'Logical operators', value: 'logicalOperators', },{label: 'Variable filtering', value: 'variableFiltering', },]} >
+
 <TabItem value="conditionalOperators">
 
 | Operator | Syntax                                    | Description                                                                                                                                                   |
@@ -150,6 +160,7 @@ For example, this allows searching using logical (and, in) and comparison operat
 | $in      | field: { "$in": [ value1, value2, ... ] } | Filter where field is equal to any of the values in the provided array.                                                                                       |
 
 </TabItem>
+
 <TabItem value="logicalOperators">
 
 | Operator | Syntax                                                      | Description                                                                                                               |
@@ -158,6 +169,7 @@ For example, this allows searching using logical (and, in) and comparison operat
 | and      | { field: { "$lt": value1 }, field: { "$gt": value2 }, ... } | All conditions outside of $or operators will be considered as combined by an and operator. There is no explicit operator. |
 
 </TabItem>
+
 <TabItem value="variableFiltering">
 
 Search endpoints can support filtering by variable values. This allows querying for process-related resources based on the values of specific variables that exist in their respective scope. For example, user task search supports filtering using the variables object and defining filter criteria for specific variables.

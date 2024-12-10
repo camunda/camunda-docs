@@ -93,7 +93,9 @@ Search endpoints can also be used to directly access entity instances with a uni
 Query requests consist of the components for **filter**, **sort**, and **page**.
 
 <Tabs groupId="requestComponents" defaultValue="filter" queryString values={[{label: 'Filter', value: 'filter', },{label: 'Sort', value: 'sort', },{label: 'Page', value: 'page', },]} >
+
 <TabItem value="filter">
+
 The filter object defines which fields should match. Only items that match the given fields will be returned. The available fields vary by object and are described in the respective search endpoint. Filtering by a unique identifier is usually available in filtering options. Beyond that, the filter options don’t have to comprise all the returned items’ attributes.
 </TabItem>
 <TabItem value="sort">
