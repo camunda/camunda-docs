@@ -22,13 +22,11 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 The architecture as depicted focuses on a standard deployment consisting of a three-node setup distributed over 3 [availability zones](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html) within an AWS region, as well as an OpenSearch domain with the same conditions. The focus is on a highly available setup and redundancy in case a zone should fail.
 
-<!--
-  The diagram can be found in the folder (InfraEx - Arch - AWS)
-  https://drive.google.com/drive/u/0/folders/1-4mLeGDSw8i10wfLo32AQAG4ynJFwT99
-  https://drive.google.com/file/d/1TA0EDhZYmnpq9kM5L6u9oftndaCQoDD0/view?usp=sharing
--->
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
 
-![AWS EC2 Architecture](./img/aws-ec2-arch.png)
+_Infrastructure diagram for a 3 node EC2 architecture (click on the image to open the PDF version)_
+[![AWS EC2 Architecture](./img/aws-ec2-arch.jpg)](./img/aws-ec2-arch.pdf)
 
 The setup consists of:
 
