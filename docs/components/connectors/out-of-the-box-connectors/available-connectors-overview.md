@@ -47,6 +47,7 @@ import TabItem from "@theme/TabItem";
 - [Google Drive Connector](/components/connectors/out-of-the-box-connectors/googledrive.md) - Create folders or files from a [Google Drive](https://www.google.com/drive/) template from your BPMN process.
 - [Google Maps Platform Connector](/components/connectors/out-of-the-box-connectors/google-maps-platform.md) - Validate addresses, retrieve postal addresses, and calculate distances with [Google Maps Platform Service](https://mapsplatform.google.com/) from your BPMN process
 - [Google Sheets Connector](/components/connectors/out-of-the-box-connectors/google-sheets.md) - Allows you to work with an existing or new empty spreadsheet on [Google Drive](https://drive.google.com/) from your BPMN process.
+- [Google Gemini Connector](/components/connectors/out-of-the-box-connectors/google-gemini.md) - Allows you to work with an existing or new empty spreadsheet on [Google Drive](https://drive.google.com/) from your BPMN process.
 - [Hugging Face Connector](/components/connectors/out-of-the-box-connectors/hugging-face.md) - Interact with [Hugging Face](https://huggingface.co/) models from your BPMN process.
 - [Kafka Producer Connector](/components/connectors/out-of-the-box-connectors/kafka.md) - Produce messages to [Kafka](https://kafka.apache.org/) from your BPMN process.
 - [Microsoft Teams Connector](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) - Interactions with [Microsoft Teams](https://www.microsoft.com/microsoft-teams/) from your BPMN process.
