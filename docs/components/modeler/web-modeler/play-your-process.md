@@ -92,6 +92,37 @@ Play's rewind operation currently does not support the following elements:
 - Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
 - Play rewinds processes by initiating a new instance and executing each element. However, if any element behaves differently from the previous execution, such as a Connector returning a different result, the rewind may fail.
 
+## Scenarios
+
+You can validate your process by creating scenarios for different paths, ensuring that it continues to function as expected after any changes to your diagram. Scenarios let you replay and confirm that the process completes correctly with the pre-defined actions and variables.
+
+### Saving a scenario
+
+After executing a path in your process, you can save it as a scenario by clicking the **Save scenario** button in the process instance header. To view your saved scenarios, navigate to the process definition page by clicking the **View all** button under the Scenarios column in the process instance header.
+
+![save scenario](img/play-save-scenario.png)
+
+### Scenario coverage
+
+Scenario coverage is calculated as the percentage of flow nodes in your process that are covered. This includes all elements, events, and gateways. For example, if 8 out of 10 flow nodes are covered, the coverage will be 80%.
+On the process definition page, covered paths are highlighted in blue. You can also click on individual scenarios to view their specific coverage.
+
+![save scenario](img/play-coverage.png)
+
+Once a process instance is completed, the process instance header will display how much your process scenario coverage would increase if this path were saved as a scenario.
+
+### Running a scenario
+
+Scenarios can be run from the process definition page using the **Run all scenarios** button, or by clicking the **Run scenario** button with the play icon for each individual scenario. The result of a scenario execution will be marked as **Completed** or **Failed.** Failed scenarios must be manually updated by clicking the **manually complete and update the scenario** button, especially when changes are made to your diagram that require further user input—such as when a new flow node is added to a previously saved scenario path.
+
+![save scenario](img/play-scenario-runs.png)
+
+### Limitations
+
+- Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play or in a different browser.
+- Call activities are not supported; therefore, scenarios containing them cannot be executed successfully.
+- Scenario paths that include process modifications are not supported.
+
 ## Modify a process instance
 
 There are two main reasons to modify a process instance in Play:
