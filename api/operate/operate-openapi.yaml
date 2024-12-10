@@ -11,25 +11,34 @@ info:
     url: https://docs.camunda.io/docs/reference/licenses/
   version: 1.0.0
 servers:
-- url: http://localhost:8081
-  description: Generated server url
+  - url: "{schema}://{host}:{port}"
+    variables:
+      host:
+        default: localhost
+        description: The hostname of the API server.
+      port:
+        default: "8080"
+        description: The port of the API server.
+      schema:
+        default: http
+        description: The schema of the API server.
 tags:
-- name: ProcessDefinition
-  description: Process Definition API
-- name: DecisionDefinition
-  description: Decision Definition API
-- name: DecisionInstance
-  description: Decision Instance API
-- name: FlownodeInstance
-  description: Flownode Instance API
-- name: Variable
-  description: Variable API
-- name: ProcessInstance
-  description: Process Instance API
-- name: DecisionRequirements
-  description: Decision Requirements API
-- name: Incident
-  description: Incident API
+  - name: ProcessDefinition
+    description: Process Definition API
+  - name: DecisionDefinition
+    description: Decision Definition API
+  - name: DecisionInstance
+    description: Decision Instance API
+  - name: FlownodeInstance
+    description: Flownode Instance API
+  - name: Variable
+    description: Variable API
+  - name: ProcessInstance
+    description: Process Instance API
+  - name: DecisionRequirements
+    description: Decision Requirements API
+  - name: Incident
+    description: Incident API
 paths:
   "/v1/variables/search":
     post:
