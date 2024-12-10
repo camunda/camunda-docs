@@ -2,8 +2,7 @@
 openapi: 3.0.1
 info:
   title: Operate Public API
-  description:
-    To access active and completed process instances in Operate for monitoring
+  description: To access active and completed process instances in Operate for monitoring
     and troubleshooting
   contact:
     url: https://www.camunda.com
@@ -12,39 +11,30 @@ info:
     url: https://docs.camunda.io/docs/reference/licenses/
   version: 1.0.0
 servers:
-  - url: "{schema}://{host}:{port}"
-    variables:
-      host:
-        default: localhost
-        description: The hostname of the API server.
-      port:
-        default: "8080"
-        description: The port of the API server.
-      schema:
-        default: http
-        description: The schema of the API server.
+- url: http://localhost:8081
+  description: Generated server url
 tags:
-  - name: ProcessDefinition
-    description: Process Definition API
-  - name: DecisionDefinition
-    description: Decision Definition API
-  - name: DecisionInstance
-    description: Decision Instance API
-  - name: FlownodeInstance
-    description: Flownode Instance API
-  - name: Variable
-    description: Variable API
-  - name: ProcessInstance
-    description: Process Instance API
-  - name: DecisionRequirements
-    description: Decision Requirements API
-  - name: Incident
-    description: Incident API
+- name: ProcessDefinition
+  description: Process Definition API
+- name: DecisionDefinition
+  description: Decision Definition API
+- name: DecisionInstance
+  description: Decision Instance API
+- name: FlownodeInstance
+  description: Flownode Instance API
+- name: Variable
+  description: Variable API
+- name: ProcessInstance
+  description: Process Instance API
+- name: DecisionRequirements
+  description: Decision Requirements API
+- name: Incident
+  description: Incident API
 paths:
   "/v1/variables/search":
     post:
       tags:
-        - Variable
+      - Variable
       summary: Search variables for process instances
       operationId: search
       requestBody:
@@ -58,71 +48,68 @@ paths:
                 description: Returns all variables (default return list size is 10)
                 value: {}
               Size:
-                description: "Returns 20 variables "
+                description: 'Returns 20 variables '
                 value:
                   size: 20
               Filter and sort:
-                description:
-                  Returns all variables with 'processInstanceKey' '9007199254741196'
+                description: Returns all variables with 'processInstanceKey' '9007199254741196'
                   sorted ascending by name
                 value:
                   filter:
-                    processInstanceKey: "9007199254741196"
+                    processInstanceKey: '9007199254741196'
                   sort:
-                    - field: name
-                      order: ASC
+                  - field: name
+                    order: ASC
               Paging:
-                description:
-                  "Returns next variables for 'processInstanceKey' ascending
-                  by 'name'. (Copy value of 'sortValues' field of previous results) "
+                description: 'Returns next variables for ''processInstanceKey'' ascending
+                  by ''name''. (Copy value of ''sortValues'' field of previous results) '
                 value:
                   filter:
-                    processInstanceKey: "9007199254741196"
+                    processInstanceKey: '9007199254741196'
                   sort:
-                    - field: name
-                      order: ASC
+                  - field: name
+                    order: ASC
                   searchAfter:
-                    - small
-                    - 9007199254741200
-        required: true
+                  - small
+                  - 9007199254741200
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultsVariable"
-        "400":
+        '400':
           description: Data invalid
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Not Found
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/process-instances/search":
     post:
       tags:
-        - ProcessInstance
+      - ProcessInstance
       summary: Search process instances
       operationId: search_1
       requestBody:
@@ -133,80 +120,76 @@ paths:
               "$ref": "#/components/schemas/QueryProcessInstance"
             examples:
               All:
-                description:
-                  Returns all process instances (default return list size
+                description: Returns all process instances (default return list size
                   is 10)
                 value: {}
               Sorted by field:
                 description: Returns process instances sorted ascending by bpmnProcessId
                 value:
                   sort:
-                    - field: bpmnProcessId
-                      order: ASC
+                  - field: bpmnProcessId
+                    order: ASC
               Sorted and paged with size:
-                description:
-                  "Returns max 3 process instances after 'bigVarProcess'
+                description: "Returns max 3 process instances after 'bigVarProcess'
                   and key 6755399441055870 sorted ascending by bpmnProcessId \nTo
                   get the next page copy the value of 'sortValues' into 'searchAfter'
                   value.\nSort specification should match the searchAfter specification"
                 value:
                   size: 3
                   sort:
-                    - field: bpmnProcessId
-                      order: ASC
+                  - field: bpmnProcessId
+                    order: ASC
                   searchAfter:
-                    - bigVarProcess
-                    - 6755399441055870
+                  - bigVarProcess
+                  - 6755399441055870
               Filtered and sorted:
-                description:
-                  Returns max 50 process instances, filtered by processVersion
+                description: Returns max 50 process instances, filtered by processVersion
                   of 2 sorted ascending by bpmnProcessId
                 value:
                   filter:
                     processVersion: 2
                   size: 50
                   sort:
-                    - field: bpmnProcessId
-                      order: ASC
-        required: true
+                  - field: bpmnProcessId
+                    order: ASC
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultsProcessInstance"
-        "400":
+        '400':
           description: Data invalid
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Not Found
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/process-definitions/search":
     post:
       tags:
-        - ProcessDefinition
+      - ProcessDefinition
       summary: Search process definitions
       operationId: search_2
       requestBody:
@@ -227,79 +210,76 @@ paths:
                 description: Search process instances and sort by name
                 value:
                   sort:
-                    - field: name
-                      order: ASC
+                  - field: name
+                    order: ASC
               Sort and size:
-                description:
-                  Search process instances, sort descending by name list
+                description: Search process instances, sort descending by name list
                   size of 5
                 value:
                   size: 5
                   sort:
-                    - field: name
-                      order: DESC
+                  - field: name
+                    order: DESC
               Sort and page:
-                description:
-                  "Search process instances,sort by name and page results
+                description: "Search process instances,sort by name and page results
                   of size 5. \n To get the next page copy the value of 'sortValues'
                   into 'searchAfter' value.\nSort specification should match the searchAfter
                   specification"
                 value:
                   size: 5
                   sort:
-                    - field: name
-                      order: ASC
+                  - field: name
+                    order: ASC
                   searchAfter:
-                    - Called Process
-                    - "2251799813687281"
-              "Filter and sort ":
+                  - Called Process
+                  - '2251799813687281'
+              'Filter and sort ':
                 description: Filter by version and sort by bpmnProcessId
                 value:
                   filter:
                     version: 1
                   size: 50
                   sort:
-                    - field: bpmnProcessId
-                      order: ASC
-        required: true
+                  - field: bpmnProcessId
+                    order: ASC
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultsProcessDefinition"
-        "400":
+        '400':
           description: Data invalid
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Not Found
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/incidents/search":
     post:
       tags:
-        - Incident
+      - Incident
       summary: Search incidents
       operationId: search_3
       requestBody:
@@ -320,87 +300,82 @@ paths:
                 description: Returns incidents sorted descending by 'creationTime'
                 value:
                   sort:
-                    - field: creationTime
-                      order: DESC
+                  - field: creationTime
+                    order: DESC
               Filter by field:
-                description:
-                  Returns incidents filtered by 'type'. Field 'message'
+                description: Returns incidents filtered by 'type'. Field 'message'
                   can't be used for filter and sort
                 value:
                   filter:
                     type: UNHANDLED_ERROR_EVENT
               Filter and sort:
-                description:
-                  Filter by 'type' and 'processDefinitionKey', sorted descending
+                description: Filter by 'type' and 'processDefinitionKey', sorted descending
                   by 'creationTime'.
                 value:
                   filter:
                     type: CALLED_ELEMENT_ERROR
-                    processDefinitionKey: "2251799813686167"
+                    processDefinitionKey: '2251799813686167'
                   sort:
-                    - field: creationTime
-                      order: DESC
+                  - field: creationTime
+                    order: DESC
               Page by key:
-                description:
-                  Returns paged by using previous returned 'sortValues'
+                description: Returns paged by using previous returned 'sortValues'
                   value (array).
                 value:
                   searchAfter:
-                    - 2251799813687785
+                  - 2251799813687785
               Filter, sort and page:
-                description:
-                  Returns incidents filtered by 'type' and 'processDefinitionKey',
+                description: Returns incidents filtered by 'type' and 'processDefinitionKey',
                   sorted descending by 'creationTime' and paged from previous 'sortValues'
                   value.
                 value:
                   filter:
                     type: CALLED_ELEMENT_ERROR
-                    processDefinitionKey: "2251799813686167"
+                    processDefinitionKey: '2251799813686167'
                   sort:
-                    - field: creationTime
-                      order: DESC
+                  - field: creationTime
+                    order: DESC
                   searchAfter:
-                    - 1646904085499
-                    - 9007199254743288
-        required: true
+                  - 1646904085499
+                  - 9007199254743288
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultsIncident"
-        "400":
+        '400':
           description: Data invalid
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Not Found
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/flownode-instances/search":
     post:
       tags:
-        - FlownodeInstance
+      - FlownodeInstance
       summary: Search flownode-instances
       operationId: search_4
       requestBody:
@@ -411,8 +386,7 @@ paths:
               "$ref": "#/components/schemas/QueryFlowNodeInstance"
             examples:
               All:
-                description:
-                  Returns all flownode instances (default return list size
+                description: Returns all flownode instances (default return list size
                   is 10).
                 value: {}
               Return 20 items:
@@ -423,8 +397,8 @@ paths:
                 description: Returns flownode instances sorted descending by 'endDate'
                 value:
                   sort:
-                    - field: endDate
-                      order: DESC
+                  - field: endDate
+                    order: DESC
               Filter by field:
                 description: Returns flownode instances filtered by 'incident'.
                 value:
@@ -436,68 +410,65 @@ paths:
                   filter:
                     incident: true
                   sort:
-                    - field: startDate
-                      order: DESC
+                  - field: startDate
+                    order: DESC
               Page by key:
-                description:
-                  Returns paged by using previous returned 'sortValues'
+                description: Returns paged by using previous returned 'sortValues'
                   value (array). Choose an existing key from previous searches to
                   try this.
                 value:
                   searchAfter:
-                    - 2251799813687785
+                  - 2251799813687785
               Filter, sort and page:
-                description:
-                  Returns flownode instances filtered by 'incident' , sorted
+                description: Returns flownode instances filtered by 'incident' , sorted
                   ascending by 'startDate' and paged from previous 'sortValues' value.
                 value:
                   filter:
                     incident: true
                   sort:
-                    - field: startDate
-                      order: ASC
+                  - field: startDate
+                    order: ASC
                   searchAfter:
-                    - 1646904085499
-                    - 9007199254743288
-        required: true
+                  - 1646904085499
+                  - 9007199254743288
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultsFlowNodeInstance"
-        "400":
+        '400':
           description: Data invalid
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Not Found
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/drd/search":
     post:
       tags:
-        - DecisionRequirements
+      - DecisionRequirements
       summary: Search decision requirements
       operationId: search_5
       requestBody:
@@ -511,8 +482,7 @@ paths:
                 description: All decision requirements (default size is 10)
                 value: {}
               Size of returned list:
-                description:
-                  Search decision requirements and return list of size
+                description: Search decision requirements and return list of size
                   5
                 value:
                   size: 5
@@ -520,17 +490,16 @@ paths:
                 description: Search decision requirements and sort ascending by name
                 value:
                   sort:
-                    - field: name
-                      order: ASC
+                  - field: name
+                    order: ASC
               Sort and size:
-                description:
-                  Search decision requirements, sort descending by name,
+                description: Search decision requirements, sort descending by name,
                   and return list of size 5
                 value:
                   size: 5
                   sort:
-                    - field: name
-                      order: DESC
+                  - field: name
+                    order: DESC
               Sort and page:
                 description: |-
                   Search decision requirements, sort ascending by name, and return page of size 5.
@@ -539,59 +508,58 @@ paths:
                 value:
                   size: 5
                   sort:
-                    - field: name
-                      order: ASC
+                  - field: name
+                    order: ASC
                   searchAfter:
-                    - Invoice Business Decisions
-                    - "2251799813686550"
-              "Filter and sort ":
+                  - Invoice Business Decisions
+                  - '2251799813686550'
+              'Filter and sort ':
                 description: Filter by version and sort by decisionRequirementsId
                 value:
                   filter:
                     version: 1
                   size: 50
                   sort:
-                    - field: decisionRequirementsId
-                      order: ASC
-        required: true
+                  - field: decisionRequirementsId
+                    order: ASC
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultsDecisionRequirements"
-        "400":
+        '400':
           description: Data invalid
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Not Found
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/decision-instances/search":
     post:
       tags:
-        - DecisionInstance
+      - DecisionInstance
       summary: Search decision instances
       operationId: search_6
       requestBody:
@@ -612,17 +580,16 @@ paths:
                 description: Search decision instances and sort ascending by decisionName
                 value:
                   sort:
-                    - field: decisionName
-                      order: ASC
+                  - field: decisionName
+                    order: ASC
               Sort and size:
-                description:
-                  Search decision instances, sort descending by decisionName,
+                description: Search decision instances, sort descending by decisionName,
                   and return list of size 5
                 value:
                   size: 5
                   sort:
-                    - field: decisionName
-                      order: DESC
+                  - field: decisionName
+                    order: DESC
               Sort and page:
                 description: |-
                   Search decision instances, sort ascending by decisionName, and return page of size 5.
@@ -631,59 +598,58 @@ paths:
                 value:
                   size: 5
                   sort:
-                    - field: decisionName
-                      order: ASC
+                  - field: decisionName
+                    order: ASC
                   searchAfter:
-                    - Invoice Classification
-                    - "2251799813686550"
-              "Filter and sort ":
+                  - Invoice Classification
+                  - '2251799813686550'
+              'Filter and sort ':
                 description: Filter by decisionVersion and sort by decisionId
                 value:
                   filter:
                     decisionVersion: 1
                   size: 50
                   sort:
-                    - field: decisionId
-                      order: ASC
-        required: true
+                  - field: decisionId
+                    order: ASC
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultsDecisionInstance"
-        "400":
+        '400':
           description: Data invalid
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Not Found
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/decision-definitions/search":
     post:
       tags:
-        - DecisionDefinition
+      - DecisionDefinition
       summary: Search decision definitions
       operationId: search_7
       requestBody:
@@ -704,17 +670,16 @@ paths:
                 description: Search decision definitions and sort ascending by name
                 value:
                   sort:
-                    - field: name
-                      order: ASC
+                  - field: name
+                    order: ASC
               Sort and size:
-                description:
-                  Search decision definitions, sort descending by name,
+                description: Search decision definitions, sort descending by name,
                   and return list of size 5
                 value:
                   size: 5
                   sort:
-                    - field: name
-                      order: DESC
+                  - field: name
+                    order: DESC
               Sort and page:
                 description: |-
                   Search decision definitions, sort ascending by name, and return page of size 5.
@@ -723,216 +688,214 @@ paths:
                 value:
                   size: 5
                   sort:
-                    - field: name
-                      order: ASC
+                  - field: name
+                    order: ASC
                   searchAfter:
-                    - Decide the Dish
-                    - "2251799813686550"
-              "Filter and sort ":
+                  - Decide the Dish
+                  - '2251799813686550'
+              'Filter and sort ':
                 description: Filter by version and sort by decisionId
                 value:
                   filter:
                     version: 1
                   size: 50
                   sort:
-                    - field: decisionId
-                      order: ASC
-        required: true
+                  - field: decisionId
+                    order: ASC
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ResultsDecisionDefinition"
-        "400":
+        '400':
           description: Data invalid
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Not Found
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/variables/{key}":
     get:
       tags:
-        - Variable
+      - Variable
       summary: Get variable by key
       operationId: byKey
       parameters:
-        - name: key
-          in: path
-          description: Key of variable
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of variable
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Variable"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/process-instances/{key}":
     get:
       tags:
-        - ProcessInstance
+      - ProcessInstance
       summary: Get process instance by key
       operationId: byKey_1
       parameters:
-        - name: key
-          in: path
-          description: Key of process instance
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of process instance
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ProcessInstance"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
     delete:
       tags:
-        - ProcessInstance
+      - ProcessInstance
       summary: Delete process instance and all dependant data by key
       operationId: delete
       parameters:
-        - name: key
-          in: path
-          description: Key of process instance
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of process instance
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ChangeStatus"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/process-instances/{key}/statistics":
     get:
       tags:
-        - ProcessInstance
+      - ProcessInstance
       summary: Get flow node statistic by process instance id
       operationId: getStatistics
       parameters:
-        - name: key
-          in: path
-          description: Key of process instance
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of process instance
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
-          description:
-            Success. Returns statistics for the given process instance,
+        '200':
+          description: Success. Returns statistics for the given process instance,
             grouped by flow nodes
           content:
             application/json:
@@ -940,49 +903,49 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/FlowNodeStatistics"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/process-instances/{key}/sequence-flows":
     get:
       tags:
-        - ProcessInstance
+      - ProcessInstance
       summary: Get sequence flows of process instance by key
       operationId: sequenceFlowsByKey
       parameters:
-        - name: key
-          in: path
-          description: Key of process instance
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of process instance
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             "*/*":
@@ -990,416 +953,416 @@ paths:
                 type: array
                 items:
                   type: string
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/process-definitions/{key}":
     get:
       tags:
-        - ProcessDefinition
+      - ProcessDefinition
       summary: Get process definition by key
       operationId: byKey_2
       parameters:
-        - name: key
-          in: path
-          description: Key of process definition
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of process definition
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ProcessDefinition"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/process-definitions/{key}/xml":
     get:
       tags:
-        - ProcessDefinition
+      - ProcessDefinition
       summary: Get process definition as XML by key
       operationId: xmlByKey
       parameters:
-        - name: key
-          in: path
-          description: Key of process definition
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of process definition
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             text/xml:
               schema:
                 type: string
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/incidents/{key}":
     get:
       tags:
-        - Incident
+      - Incident
       summary: Get incident by key
       operationId: byKey_3
       parameters:
-        - name: key
-          in: path
-          description: Key of incident
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of incident
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Incident"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/flownode-instances/{key}":
     get:
       tags:
-        - FlownodeInstance
+      - FlownodeInstance
       summary: Get flow node instance by key
       operationId: byKey_4
       parameters:
-        - name: key
-          in: path
-          description: Key of flownode instance
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of flownode instance
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/FlowNodeInstance"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/drd/{key}":
     get:
       tags:
-        - DecisionRequirements
+      - DecisionRequirements
       summary: Get decision requirements by key
       operationId: byKey_5
       parameters:
-        - name: key
-          in: path
-          description: Key of decision requirements
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of decision requirements
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/DecisionRequirements"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/drd/{key}/xml":
     get:
       tags:
-        - DecisionRequirements
+      - DecisionRequirements
       summary: Get decision requirements as XML by key
       operationId: xmlByKey_1
       parameters:
-        - name: key
-          in: path
-          description: Key of decision requirements
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of decision requirements
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             text/xml:
               schema:
                 type: string
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/decision-instances/{id}":
     get:
       tags:
-        - DecisionInstance
+      - DecisionInstance
       summary: Get decision instance by id
       operationId: byId
       parameters:
-        - name: id
-          in: path
-          description: Id of decision instance
-          required: true
-          schema:
-            type: string
+      - name: id
+        in: path
+        description: Id of decision instance
+        required: true
+        schema:
+          type: string
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/DecisionInstance"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
   "/v1/decision-definitions/{key}":
     get:
       tags:
-        - DecisionDefinition
+      - DecisionDefinition
       summary: Get decision definition by key
       operationId: byKey_6
       parameters:
-        - name: key
-          in: path
-          description: Key of decision definition
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: key
+        in: path
+        description: Key of decision definition
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
-        "200":
+        '200':
           description: Success
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/DecisionDefinition"
-        "400":
+        '400':
           description: Invalid request
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "403":
+        '403':
           description: Forbidden
           content:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/Error"
-        "404":
+        '404':
           description: Requested resource not found
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
-        "500":
+        '500':
           description: API application error
           content:
             application/problem+json:
               schema:
                 "$ref": "#/components/schemas/Error"
       security:
-        - bearer-key: []
-        - cookie: []
+      - bearer-key: []
+      - cookie: []
 components:
   schemas:
     Error:
@@ -1438,8 +1401,8 @@ components:
         order:
           type: string
           enum:
-            - ASC
-            - DESC
+          - ASC
+          - DESC
     Variable:
       type: object
       properties:
@@ -1483,6 +1446,8 @@ components:
         processVersion:
           type: integer
           format: int32
+        processVersionTag:
+          type: string
         bpmnProcessId:
           type: string
         parentKey:
@@ -1498,9 +1463,11 @@ components:
         state:
           type: string
           enum:
-            - ACTIVE
-            - COMPLETED
-            - CANCELED
+          - ACTIVE
+          - COMPLETED
+          - CANCELED
+        incident:
+          type: boolean
         processDefinitionKey:
           type: integer
           format: int64
@@ -1549,6 +1516,8 @@ components:
         version:
           type: integer
           format: int32
+        versionTag:
+          type: string
         bpmnProcessId:
           type: string
         tenantId:
@@ -1598,18 +1567,19 @@ components:
         type:
           type: string
           enum:
-            - UNSPECIFIED
-            - UNKNOWN
-            - IO_MAPPING_ERROR
-            - JOB_NO_RETRIES
-            - CONDITION_ERROR
-            - EXTRACT_VALUE_ERROR
-            - CALLED_ELEMENT_ERROR
-            - UNHANDLED_ERROR_EVENT
-            - MESSAGE_SIZE_EXCEEDED
-            - CALLED_DECISION_ERROR
-            - DECISION_EVALUATION_ERROR
-            - FORM_NOT_FOUND
+          - UNSPECIFIED
+          - UNKNOWN
+          - IO_MAPPING_ERROR
+          - JOB_NO_RETRIES
+          - EXECUTION_LISTENER_NO_RETRIES
+          - CONDITION_ERROR
+          - EXTRACT_VALUE_ERROR
+          - CALLED_ELEMENT_ERROR
+          - UNHANDLED_ERROR_EVENT
+          - MESSAGE_SIZE_EXCEEDED
+          - CALLED_DECISION_ERROR
+          - DECISION_EVALUATION_ERROR
+          - FORM_NOT_FOUND
         message:
           type: string
         creationTime:
@@ -1617,10 +1587,10 @@ components:
         state:
           type: string
           enum:
-            - ACTIVE
-            - MIGRATED
-            - RESOLVED
-            - PENDING
+          - ACTIVE
+          - MIGRATED
+          - RESOLVED
+          - PENDING
         jobKey:
           type: integer
           format: int64
@@ -1682,37 +1652,37 @@ components:
         type:
           type: string
           enum:
-            - UNSPECIFIED
-            - PROCESS
-            - SUB_PROCESS
-            - EVENT_SUB_PROCESS
-            - START_EVENT
-            - INTERMEDIATE_CATCH_EVENT
-            - INTERMEDIATE_THROW_EVENT
-            - BOUNDARY_EVENT
-            - END_EVENT
-            - SERVICE_TASK
-            - RECEIVE_TASK
-            - USER_TASK
-            - MANUAL_TASK
-            - TASK
-            - EXCLUSIVE_GATEWAY
-            - INCLUSIVE_GATEWAY
-            - PARALLEL_GATEWAY
-            - EVENT_BASED_GATEWAY
-            - SEQUENCE_FLOW
-            - MULTI_INSTANCE_BODY
-            - CALL_ACTIVITY
-            - BUSINESS_RULE_TASK
-            - SCRIPT_TASK
-            - SEND_TASK
-            - UNKNOWN
+          - UNSPECIFIED
+          - PROCESS
+          - SUB_PROCESS
+          - EVENT_SUB_PROCESS
+          - START_EVENT
+          - INTERMEDIATE_CATCH_EVENT
+          - INTERMEDIATE_THROW_EVENT
+          - BOUNDARY_EVENT
+          - END_EVENT
+          - SERVICE_TASK
+          - RECEIVE_TASK
+          - USER_TASK
+          - MANUAL_TASK
+          - TASK
+          - EXCLUSIVE_GATEWAY
+          - INCLUSIVE_GATEWAY
+          - PARALLEL_GATEWAY
+          - EVENT_BASED_GATEWAY
+          - SEQUENCE_FLOW
+          - MULTI_INSTANCE_BODY
+          - CALL_ACTIVITY
+          - BUSINESS_RULE_TASK
+          - SCRIPT_TASK
+          - SEND_TASK
+          - UNKNOWN
         state:
           type: string
           enum:
-            - ACTIVE
-            - COMPLETED
-            - TERMINATED
+          - ACTIVE
+          - COMPLETED
+          - TERMINATED
         incident:
           type: boolean
         tenantId:
@@ -1807,10 +1777,10 @@ components:
         state:
           type: string
           enum:
-            - FAILED
-            - EVALUATED
-            - UNKNOWN
-            - UNSPECIFIED
+          - FAILED
+          - EVALUATED
+          - UNKNOWN
+          - UNSPECIFIED
         evaluationDate:
           type: string
         evaluationFailure:
@@ -1833,10 +1803,10 @@ components:
         decisionType:
           type: string
           enum:
-            - DECISION_TABLE
-            - LITERAL_EXPRESSION
-            - UNSPECIFIED
-            - UNKNOWN
+          - DECISION_TABLE
+          - LITERAL_EXPRESSION
+          - UNSPECIFIED
+          - UNKNOWN
         result:
           type: string
         evaluatedInputs:
