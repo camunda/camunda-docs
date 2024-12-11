@@ -213,6 +213,10 @@ Secrets are currently not supported in the body of a **REST Connector**.
 
 ## Response
 
+:::note
+Starting from version 8.7.0, the REST Connector supports storing the response as a document.
+:::
+
 The HTTP response will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result variable**.
 
 The following fields are available in the `response` variable:
@@ -220,6 +224,15 @@ The following fields are available in the `response` variable:
 - **status**: Response status
 - **body**: Response body of your request
 - **headers**: Response headers
+- **document**: When the `Store response` checkbox is selected, this field will represent the stored document:
+  - **documentId**: The ID of the stored document
+  - **storeId**: The store ID
+  - **metadata**: Metadata of the stored document (if available)
+    - **size**: Size of the stored document in bytes
+    - **expiresAt**: Expiration date of the stored document
+    - **fileName**: Name of the stored document
+    - **customProperties**: Custom properties of the stored document
+    - **contentType**: Content type of the stored document
 
 ## Output mapping
 
@@ -237,7 +250,8 @@ Additionally, you can choose to unpack the content of your `response` into multi
 = {
     actual_temp: response.body.main.temp,
     feel_temp: response.body.main.feels_like,
-    weather: response.body.weather[1].main
+    weather: response.body.weather[1].main,
+    weather_report_id: response.document.documentId
 }
 ```
 
