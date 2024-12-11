@@ -51,8 +51,8 @@ Compared to the generalized architecture depicted in the [reference architecture
 
 ### High Availability (HA)
 
-:::note
-When scaling from a single machine to multiple machine, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
+:::warning Non-HA Optimize importer
+When scaling from a single machine to multiple machines, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 :::
 
 ### High availability (HA)
@@ -112,7 +112,7 @@ Any of the following are just suggestions for the minimum viable setup, the sizi
   - **26502**: Inter-broker communication.
 - Load balancer for distributing traffic (if required)
 
-:::note
+:::info Customizing ports
 Some ports can be overwritten and are not definitive, you may conduct the [documentation](#TODO) to see how it can be done for the different components, in case you want to use a different port. Or in our example `Connectors` and `Web UIs` overlap on 8080 due to which we moved connectors to a different port.
 :::
 
