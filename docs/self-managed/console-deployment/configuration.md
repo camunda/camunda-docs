@@ -5,10 +5,6 @@ sidebar_label: "Configuration"
 description: "Read details on the configuration variables of Console Self-Managed."
 ---
 
-:::note
-Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
-:::
-
 Console Self-Managed can be configured using environment variables and configuration parameters.
 
 :::note
