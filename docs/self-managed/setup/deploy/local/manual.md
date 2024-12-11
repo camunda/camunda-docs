@@ -9,7 +9,7 @@ This page guides you through the manual installation of the Camunda 8 on a local
 ## Prerequisites
 
 - Operating system:
-  - Linux (x86_64)
+  - Linux
   - Windows/macOS (development only, not supported for production)
 - Java Virtual Machine, see [supported environments](/reference/supported-environments.md) for version details
 - Elasticsearch, see [supported environments](/reference/supported-environments.md) for version details

@@ -6,13 +6,17 @@ description: "Learn how to install Camunda 8 on AWS EC2 instances."
 
 This guide provides a detailed walkthrough for installing the Camunda 8 single JAR on AWS EC2 instances. It focuses on managed services by AWS and their cloud offering. Finally, you will verify that the connection to your Self-Managed Camunda 8 environment is working.
 
+This guide focuses on setting up the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. The Web Modeler and Console are not covered in this manual deployment approach. These components are supported on Kubernetes and should be [deployed using Kubernetes](/self-managed/setup/install.md/#install-web-modeler).
+
 ## Disclaimer
 
-:::note
+:::note Using other Cloud provider
 This guide is not limited to AWS but is built around the available tools and services that AWS offers. The scripts and ideas behind it can easily be adjusted for any other cloud provider and use case.
+
+However, if you wish to use this guide with a different cloud provider, please note that you will be responsible for configuring and maintaining the resulting infrastructure. Our support is limited to questions related to the guide itself, not to the specific tools and services of the chosen cloud provider.
 :::
 
-:::note
+:::warning Cost management
 Following this guide will incur costs on your Cloud provider account, namely for the EC2 instances, and OpenSearch. More information can be found on AWS and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
@@ -32,7 +36,7 @@ The setup consists of:
 
 - [Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) (VPC) is a logically isolated virtual network.
   - a [Private Subnet](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html), which does not have direct access to the internet and can not easily be reached.
-    - three [EC2](https://aws.amazon.com/ec2/) instances, one within each availability zone, which will run Camunda 8.
+    - three [EC2](https://aws.amazon.com/ec2/) instances using Ubuntu, one within each availability zone, which will run Camunda 8.
     - a [managed OpenSearch](https://aws.amazon.com/what-is/opensearch/) cluster stretched over the three availability zones.
   - a [Public Subnet](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html), which allows direct access to the Internet via an [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html).
     - (optional) an [Application Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html) (ALB) is used to expose the WebUIs like Operate, Tasklist, and Connectors, as well as the REST API to the outside world. This is done using sticky sessions as generally requests are distributed round-robin across all EC2 instances.
@@ -45,7 +49,7 @@ The setup consists of:
 
 Both types of subnets are distributed over three availability zones of a single AWS region, allowing for a highly available setup.
 
-:::note
+:::note Single Deployment
 Alternatively, one can run the same setup with a single AWS EC2 instance as well but should be aware that in case of a zone failure, their whole setup would be unreachable.
 :::
 
@@ -61,7 +65,7 @@ Alternatively, one can run the same setup with a single AWS EC2 instance as well
 ## Considerations
 
 - TODO: reference official limitations if there are any
-- The Optimize importer is not highly available and must only run once
+- The Optimize importer is not highly available and must only run once within the whole setup.
 
 ## Outcome
 
@@ -70,24 +74,24 @@ The EC2 instances come with an extra disk meant for Camunda to ensure that the c
 
 ## Get started
 
-1. **Clone the reference architecture GitHub repository** to directly reuse and extend the existing Terraform example base.
+1. **Download the reference architecture GitHub repository** to directly reuse and extend the existing Terraform example base.
    The idea is to provide an easy to use example implementation that's flexible to extend to your own needs without the potential limitations of a Terraform module.
 
-```
-git clone https://github.com/camunda/camunda-deployment-references.git
+```sh
+wget https://github.com/camunda/camunda-deployment-references/archive/refs/heads/main.zip
 ```
 
 ### Infrastructure
 
-:::note
+:::note Terraform infrastructure example
 We do not recommend using the below Terraform related infrastructure as module as we do not guarantee compatibility.
 Therefore, we recommend extending or reusing some elements of the Terraform example to ensure compatibility with your environments.
 :::
 
 1. **Go to directory**
 
-```
-cd camunda-deployment-references/aws/ec2/terraform
+```sh
+cd camunda-deployment-references-main/aws/ec2/terraform
 ```
 
 2. **Configure Variables**
@@ -103,12 +107,6 @@ variable "cidr_blocks" {
   default = "10.0.1.0/24"
 }
 ```
-
-Alternatively, you can also define variables from the CLI by adding `-var "myvar=value"` to the command.
-
-For example `terraform apply -var "prefix=camunda"`.
-
-Be aware that you will have to manually supply those every time you apply or plan; therefore, consider using the `variables.tf` to persist the change.
 
 3. **Configure alternative Terraform backend**
 
@@ -130,7 +128,7 @@ More information on alternatives can be found in the [Terraform documentation](h
 
    E.g. can be done via a simple `script` or manually:
 
-   ```shell
+   ```sh
    echo 'provider "aws" {}' >> config.tf
    ```
 
@@ -146,9 +144,9 @@ More information on alternatives can be found in the [Terraform documentation](h
 
    Ensure you have set the `AWS_REGION` either as environment variable or in the Terraform AWS provider to deploy the infrastructure in your desired region. AWS resources are region bound on creation.
 
-   :::warning
-   Do not store sensitive information (credentials) in your Terraform files.
-   :::
+:::note Secret management
+We strongly recommend managing sensitive information using a secure secrets management solution like HashiCorp Vault. For details on how to inject secrets directly into Terraform via Vault, see the [Terraform Vault Secrets Injection Guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
+:::
 
 5. **Initialize Terraform**
 
@@ -160,10 +158,16 @@ terraform init
 
 6. **Deploy the Infrastructure**
 
-Apply the Terraform configuration to create the resources.
+Plan the configuration files:
 
 ```sh
-terraform apply
+terraform plan -out infrastructure.plan # describe what will be created
+```
+
+After reviewing the plan, you can confirm and apply the changes.
+
+```sh
+terraform apply infrastructure.plan # apply the creation
 ```
 
 The execution takes roughly 30 minutes of which the majority of time ~ 25 minutes is solely the creation of a managed highly available OpenSearch cluster.
@@ -181,7 +185,7 @@ terraform output aws_opensearch_domain
 The EC2 instances are not public and have to be reached via a Bastion host.
 Alternatively one can utilize the [AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) to connect securely to a private VPC. This is not covered here as the setup requires a lot more manual user interaction.
 
-```
+```sh
 export BASTION_HOST=$(terraform output -raw bastion_ip)
 # retrieves the first IP from the camunda_ips array
 export CAMUNDA_IP=$(tf output -json camunda_ips | jq -r '.[0]')
@@ -195,8 +199,8 @@ ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 
 The script directory contains bash scripts that can be used to install and configure Camunda 8.
 
-```
-cd camunda-deployment-references/aws/ec2/scripts
+```sh
+cd camunda-deployment-references-main/aws/ec2/scripts
 ```
 
 2. **Advanced configuration options**
@@ -218,7 +222,7 @@ Setting those as environment variables will not take effect since the scripts ar
 
 If you decide to enable `SECURITY`, please execute the `generate-self-signed-cert-authority.sh` script to once create a certificate authority. It would be wise to save those somewhere securely as you'll require those if you want to upgrade or change configs in an automated way. Worst case, you'll have to recreate the certificate authority certs via the script and all manually created client certificates.
 
-:::note
+:::note Self-signed certificates for testing
 Self-signed certificates are advocated for development and testing purposes. Check the [documentation](/self-managed/zeebe-deployment/security/secure-cluster-communication.md) on secure cluster communication to learn more about PEM certificates.
 :::
 
@@ -234,6 +238,8 @@ During the first installation, you will be asked to confirm the connection to ea
 
 5. **How to connect and use Camunda 8**
 
+We distinguish between the Application Load Balancer (ALB) and the Network Load Balancer (NLB) as follows: The ALB is designed for handling Web UIs, such as Operate, Tasklist, Optimize, and Connectors. In contrast, the NLB is intended for managing the gRPC endpoint of the Zeebe Gateway. This is due to the difference of protocols with ALB focusing on HTTP and NLB on TCP.
+
 Via the Terraform output `alb_endpoint` one can access Operate or on port `9090` the Connectors instance.
 
 Via the Terraform output `nlb_endpoint` one can access the gRPC endpoint of the Zeebe gateway.
@@ -242,11 +248,11 @@ The two endpoints above use the publicly assigned hostname of AWS. One may add t
 
 Alternatively, if you have decided not to expose your environment, you can use the jump host to access relevant services on your local machine via port-forwarding.
 
-For a more enterprise grade solution, you can utilize the [AWS Client VPN](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) instead to reach the private subnet within the VPC. The setup requires a lot of extra work and certificates, but one can follow the [getting started tutorial by AWS](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html).
+For an enterprise grade solution, you can utilize the [AWS Client VPN](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) instead to reach the private subnet within the VPC. The setup requires a lot of extra work and certificates, but one can follow the [getting started tutorial by AWS](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html).
 
 The following can be executed from within the Terraform folder to bind the remote ports to your local machine.
 
-```
+```sh
 export BASTION_HOST=$(terraform output -raw bastion_ip)
 # retrieves the first IP from the camunda_ips array
 export CAMUNDA_IP=$(tf output -json camunda_ips | jq -r '.[0]')
@@ -269,13 +275,13 @@ For retrieving the Camunda endpoint you can do the following:
 
 1. Go to the Terraform folder
 
-```
-cd camunda-deployment-references/aws/ec2/terraform
+```sh
+cd camunda-deployment-references-main/aws/ec2/terraform
 ```
 
 2. Retrieve the Application Load Balancer output
 
-```
+```sh
 terraform output -raw alb_endpoint
 ```
 
@@ -285,7 +291,7 @@ With the endpoint you can follow the example as outlined in [the documentation](
 
 ### Upgrade Camunda 8
 
-:::info
+:::info Direct upgrade not supported
 Upgrading directly from a Camunda 8.6 release to 8.7 is not supported and cannot be performed.
 :::
 

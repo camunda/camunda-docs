@@ -66,7 +66,7 @@ The Web Modeler and Console are designed to oversee and manage multiple orchestr
 - [Web Modeler](/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 
-:::note
+:::note External identity provider recommended
 The orchestration cluster has its own integrated Identity component, while Web Modeler and Console run separate and dedicated Identity deployment. For production environments, using an external identity provider is recommended.
 :::
 
@@ -103,7 +103,11 @@ Kubernetes is a powerful orchestration platform for containerized applications. 
 
 <!-- TODO add link or card for AWS ref arch -->
 
-### Manual (Bare Metal / VMs)
+### Containers
+
+Containers, such as Docker, offer a middle ground between the manual JAR and Kubernetes approaches. They provide a lightweight, portable, and consistent runtime environment, making it easier to develop, test, and deploy applications across different environments. Containers encapsulate an application and its dependencies, ensuring that it runs reliably regardless of where it is deployed.
+
+### Manual JAR (Bare Metal / VMs)
 
 For organizations that prefer traditional infrastructure, reference architectures for bare metal or virtual machines (VMs) offer a structured approach to system deployment. These architectures provide best practices for setting up physical servers or VMs, configuring networks, and managing storage using Infrastructure as Service cloud roviders. They are suitable for environments where containerization or use of Kubernetes services may not be feasible.
 
@@ -117,19 +121,28 @@ While both options are suitable for trying out Camunda 8 locally, you might also
 
 Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements. Here are some guidelines to help you decide:
 
+:::note Documentation Update in Progress
+This is a work in progress as we update the existing documentation to provide better general guidance on the topic. In the meantime, for Kubernetes and Docker related information, we are guiding to older documentation.
+:::
+
 - **Kubernetes**:
   - Ideal for organizations adopting containerization and microservices, see [Cloud Native computing foundation](https://www.cncf.io/).
   - Suitable for dynamic scaling and high availability.
   - Best for teams with experience in managing containerized environments.
   - A steeper learning curve but offers scalable and highly resilient platform.
 
-For more information and guides, have a look at the specific reference for [Kubernetes](/self-managed/setup/install/).
+For more information and guides, have a look at the specific reference for [Kubernetes](/self-managed/setup/install.md).
 
-:::note
-This is a work in progress as we update the existing documentation to provide better general guidance on the topic. In the meantime, for Kubernetes-related information, it's best to refer to the cloud provider-specific documentation under "Setup/Install/Deploy."
-:::
+- **Containers**:
 
-- **Manual (Bare Metal / VMs)**:
+  - Advisable as a middle ground between manual JAR and Kubernetes. Profit from containerization while not having the whole overhead of Kubernetes.
+  - Containers can run on any system that supports the container runtime, ensuring consistency across development, testing, and production environments.
+  - Each container runs in its own isolated environment, which helps prevent conflicts between applications and improves security.
+  - Containers can be easily scaled up or down to handle varying workloads, providing flexibility in resource management.
+
+For more information and guides, have a look at the specific reference for [Containers](/self-managed/setup/deploy/other/docker.md).
+
+- **Manual JAR (Bare Metal / VMs)**:
   - Suitable for organizations requiring use of IaaS, bare metal and other traditional infrastructures.
   - Ideal for traditional setups needing highly customized security, strict data residency, or industry-specific regulatory compliance.
   - Applicable for high availability but requires more detailed planning.
