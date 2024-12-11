@@ -1924,6 +1924,220 @@
           ]
         },
         {
+          "Tasklist API (GraphQL)": [
+            {
+              "type": "link",
+              "label": "Schema Documentation",
+              "href": "/docs/8.4/apis-tools/tasklist-api/"
+            },
+            {
+              "type": "link",
+              "label": "Overview",
+              "href": "/docs/8.4/apis-tools/tasklist-api/tasklist-api-overview/"
+            },
+            {
+              "type": "link",
+              "label": "Authentication",
+              "href": "/docs/8.4/apis-tools/tasklist-api/tasklist-api-authentication/"
+            },
+            {
+              "type": "link",
+              "label": "Tutorial",
+              "href": "/docs/8.4/apis-tools/tasklist-api/tasklist-api-tutorial/"
+            },
+            {
+              "type": "link",
+              "label": "GraphQL to REST API migration",
+              "href": "/docs/8.4/apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
+            },
+
+            {
+              "Directives": [
+                {
+                  "type": "link",
+                  "label": "deprecated",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/directives/deprecated/"
+                },
+                {
+                  "type": "link",
+                  "label": "include",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/directives/include/"
+                },
+                {
+                  "type": "link",
+                  "label": "skip",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/directives/skip/"
+                },
+                {
+                  "type": "link",
+                  "label": "specifiedBy",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/directives/specified-by/"
+                }
+              ]
+            },
+
+            {
+              "Enums": [
+                {
+                  "type": "link",
+                  "label": "Sort",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/enums/sort/"
+                },
+                {
+                  "type": "link",
+                  "label": "TaskSortFields",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/enums/task-sort-fields/"
+                },
+                {
+                  "type": "link",
+                  "label": "TaskState",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/enums/task-state/"
+                }
+              ]
+            },
+
+            {
+              "Inputs": [
+                {
+                  "type": "link",
+                  "label": "DateFilter",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/inputs/date-filter-input/"
+                },
+                {
+                  "type": "link",
+                  "label": "TaskOrderBy",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/inputs/task-order-by/"
+                },
+                {
+                  "type": "link",
+                  "label": "TaskQuery",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/inputs/task-query/"
+                },
+                {
+                  "type": "link",
+                  "label": "VariableInput",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/inputs/variable-input/"
+                }
+              ]
+            },
+
+            {
+              "Mutations": [
+                {
+                  "type": "link",
+                  "label": "claimTask",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/mutations/claim-task/"
+                },
+                {
+                  "type": "link",
+                  "label": "completeTask",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/mutations/complete-task/"
+                },
+                {
+                  "type": "link",
+                  "label": "deleteProcessInstance",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/mutations/delete-process-instance/"
+                },
+                {
+                  "type": "link",
+                  "label": "unclaimTask",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/mutations/unclaim-task/"
+                }
+              ]
+            },
+
+            {
+              "Objects": [
+                {
+                  "type": "link",
+                  "label": "Form",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/objects/form/"
+                },
+                {
+                  "type": "link",
+                  "label": "Task",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/objects/task/"
+                },
+                {
+                  "type": "link",
+                  "label": "User",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/objects/user/"
+                },
+                {
+                  "type": "link",
+                  "label": "Variable",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/objects/variable/"
+                }
+              ]
+            },
+
+            {
+              "Queries": [
+                {
+                  "type": "link",
+                  "label": "currentUser",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/queries/current-user/"
+                },
+                {
+                  "type": "link",
+                  "label": "form",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/queries/form/"
+                },
+                {
+                  "type": "link",
+                  "label": "task",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/queries/task/"
+                },
+                {
+                  "type": "link",
+                  "label": "tasks",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/queries/tasks/"
+                },
+                {
+                  "type": "link",
+                  "label": "variable",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/queries/variable/"
+                },
+                {
+                  "type": "link",
+                  "label": "variables",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/queries/variables/"
+                }
+              ]
+            },
+
+            {
+              "Scalars": [
+                {
+                  "type": "link",
+                  "label": "DateTime",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/scalars/datetime/"
+                },
+                {
+                  "type": "link",
+                  "label": "Boolean",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/scalars/boolean/"
+                },
+                {
+                  "type": "link",
+                  "label": "ID",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/scalars/id/"
+                },
+                {
+                  "type": "link",
+                  "label": "Int",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/scalars/int/"
+                },
+                {
+                  "type": "link",
+                  "label": "String",
+                  "href": "/docs/8.4/apis-tools/tasklist-api/scalars/string/"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "Tasklist API (REST)": [
             {
               "type": "link",
