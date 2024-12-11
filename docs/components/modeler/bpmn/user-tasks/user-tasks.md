@@ -167,7 +167,7 @@ Note that you will lose all the task lifecycle and state management features tha
 :::info
 Camunda version 8.4 and lower support only user tasks with the Job worker implementation.
 
-If you started using Camunda 8 with version 8.4 or a lower version and upgraded to 8.5 or newer, your user tasks are probably implemented as Job workers. Refer to the [migration guide](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md) to find a detailed list of the differences between the task implementation types and learn how to migrate to Camunda user tasks.
+If you started using Camunda 8 with version 8.4 or lower version and upgraded to 8.5 or newer, your user tasks are probably implemented as Job workers. Refer to the [migration guide](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md) to find a detailed list of the differences between the task implementation types and learn how to migrate to Camunda user tasks.
 :::
 
 You can define a Job worker implementation for a user task by removing its `zeebe:userTask` extension element.
