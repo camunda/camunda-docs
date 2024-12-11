@@ -87,9 +87,7 @@ The presence of routes is rooted in their specification predating Ingress. The f
 
 To use these routes for the Zeebe Gateway, configure this through Ingress as well.
 
-#### Prerequisite
-
-##### Setting Up the application domain for Camunda 8
+#### Setting Up the application domain for Camunda 8
 
 The route created by OpenShift will use a domain to provide access to the platform. By default, you can use the OpenShift applications domain, but any other domain supported by the router can also be used.
 
@@ -109,7 +107,7 @@ echo "Camunda 8 will be reachable from $DOMAIN_NAME"
 
 If you choose to use a custom domain instead, ensure it is supported by your router configuration and replace the example domain with your desired domain. For more details on configuring custom domains in OpenShift, refer to the official [custom domain OpenShift documentation](https://docs.openshift.com/dedicated/applications/deployments/osd-config-custom-domains-applications.html).
 
-##### Checking if HTTP/2 is enabled
+#### Checking if HTTP/2 is enabled
 
 As the Zeebe Gateway also uses `gRPC` (which relies on `HTTP/2`), [HTTP/2 Ingress Connectivity must be enabled](https://docs.openshift.com/container-platform/latest/networking/ingress-operator.html#nw-http2-haproxy_configuring-ingress).
 
@@ -153,7 +151,7 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 
 </details>
 
-##### Configure Route TLS
+#### Configure Route TLS
 
 Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
 
