@@ -195,7 +195,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    aws sts get-caller-identity
    ```
 
-1. Check if the ELB service role exists:
+1. Check if the ELB service role exists, as if you have never created a load balancer in your AWS account, the role for Elastic Load Balancing (ELB) might not exist yet:
 
    ```bash
    aws iam get-role --role-name "AWSServiceRoleForElasticLoadBalancing"
@@ -277,6 +277,14 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/cluster.tf
    ```
 
+   :::caution Camunda Terraform module
+
+   This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
+
+   We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-tf-rosa/blob/v2.0.0/modules/rosa-hcp/README.md) for more information.
+
+   :::
+
 3. [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
 
    ```bash
@@ -285,7 +293,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
 4. Configure user access to the cluster. By default, the user who creates the OpenShift cluster has administrative access, if you want to grant access to other users, please follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster is created.
 
-5. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-tf-rosa/blob/v1.3.0/modules/rosa-hcp/README.md).
+5. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-tf-rosa/blob/v2.0.0/modules/rosa-hcp/README.md).
 
 ### Define outputs
 
