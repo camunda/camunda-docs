@@ -11,9 +11,8 @@ The Base Production Setup provides a simplified and streamlined 3-pod deployment
 
 ## Architecture Overview
 
-Below is the high-level architecture diagram for the Base Production Setup:
-
-[Architecture Diagram Placeholder]
+Below is the high-level architecture diagram for the base production setup _(click on the image to open the PDF version)_:
+[![Infrastructure Diagram ROSA Single-Region](./assets/smarch.jpg)](./assets/smarch.pdf)
 
 - Supported Components:
   Camunda Platform Core Applications: Zeebe, Tasklist, Operate
