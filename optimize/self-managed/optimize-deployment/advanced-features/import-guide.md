@@ -14,17 +14,17 @@ In general, the import assumes the following setup:
 
 - A Camunda engine from which Optimize imports the data.
 - The Optimize backend, where the data is transformed into an appropriate format for efficient data analysis.
-- [Elasticsearch](https://www.elastic.co/guide/index.html), which is the database Optimize persists all formatted data to.
+- [Elasticsearch (ES)](https://www.elastic.co/guide/index.html) or [OpenSearch (OS)](https://opensearch.org/), which serves as the database that Optimize uses to persist all of its formatted data.
 
 The following depicts the setup and how the components communicate with each other:
 
 ![Optimize Import Structure](img/Optimize-Structure.png)
 
-Optimize queries the engine data using a dedicated Optimize REST-API within the engine, transforms the data, and stores it in its own Elasticsearch database such that it can be quickly and easily queried by Optimize when evaluating reports or performing analyses. The reason for having a dedicated REST endpoint for Optimize is performance: the default REST-API adds a lot of complexity to retrieve the data from the engine database, which can result in low performance for large data sets.
+Optimize queries the engine data using a dedicated Optimize REST-API within the engine, transforms the data, and stores it in its own database such that it can be quickly and easily queried by Optimize when evaluating reports or performing analyses. The reason for having a dedicated REST endpoint for Optimize is performance: the default REST-API adds a lot of complexity to retrieve the data from the engine database, which can result in low performance for large data sets.
 
 Note the following limitations regarding the data in Optimize's database:
 
-- The data is only a near real-time representation of the engine database. This means Elasticsearch may not contain the data of the most recent time frame, e.g. the last two minutes, but all the previous data should be synchronized.
+- The data is only a near real-time representation of the engine database. This means the database may not contain the data of the most recent time frame, e.g. the last two minutes, but all the previous data should be synchronized.
 - Optimize only imports the data it needs for its analysis. The rest is omitted and won't be available for further investigation. Currently, Optimize imports:
   - The history of the activity instances
   - The history of the process instances
@@ -47,7 +47,7 @@ This section gives an overview of how fast Optimize imports certain data sets. T
 
 It is very likely that these metrics change for different data sets because the speed of the import depends on how the data is distributed.
 
-The import is also affected by how the involved components are set up. For instance, if you deploy the Camunda engine on a different machine than Optimize and Elasticsearch to provide both applications with more computation resources, the process is likely to speed up. If the Camunda engine and Optimize are physically far away from each other, the network latency might slow down the import.
+The import is also affected by how the involved components are set up. For instance, if you deploy the Camunda engine on a different machine than Optimize and Elasticsearch/OpenSearch to provide both applications with more computation resources, the process is likely to speed up. If the Camunda engine and Optimize are physically far away from each other, the network latency might slow down the import.
 
 ### Setup
 
@@ -135,7 +135,7 @@ During execution, the following steps are performed:
    2. Map entities and add an import job
 3. [Execute the import](#execute-the-import).
    1. Poll a job
-   2. Persist the new entities to Elasticsearch
+   2. Persist the new entities to the database
 
 ### Start an import round
 
@@ -175,21 +175,21 @@ First, the `ImportScheduler` retrieves the newest index, which identifies the la
 
 #### Map entities and add an import job
 
-All fetched entities are mapped to a representation that allows Optimize to query the data very quickly. Subsequently, an import job is created and added to the queue to persist the data in Elasticsearch.
+All fetched entities are mapped to a representation that allows Optimize to query the data very quickly. Subsequently, an import job is created and added to the queue to persist the data in the database.
 
 ### Execute the import
 
 Full aggregation of the data is performed by a dedicated `ImportJobExecutor` for each entity type, which waits for `ImportJob` instances to be added to the execution queue. As soon as a job is in the queue, the executor:
 
 - Polls the job with the new Optimize entities
-- Persists the new entities to Elasticsearch
+- Persists the new entities to the database
 
 The data from the engine and Optimize do not have a one-to-one relationship, i.e., one entity type in Optimize may consist of data aggregated from different data types of the engine. For example, the historic process instance is first mapped to an Optimize `ProcessInstance`. However, for the heatmap analysis it is also necessary for `ProcessInstance` to contain all activities that were executed in the process instance.
 
-Therefore, the Optimize `ProcessInstance` is an aggregation of the engine's historic process instance and other related data: historic activity instance data, user task data, and variable data are all [nested documents](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html) within Optimize's `ProcessInstance` representation.
+Therefore, the Optimize `ProcessInstance` is an aggregation of the engine's historic process instance and other related data: historic activity instance data, user task data, and variable data are all nested documents ([ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html) / [OS](https://opensearch.org/docs/latest/field-types/supported-field-types/nested/)) within Optimize's `ProcessInstance` representation.
 
 :::note
-Optimize uses [nested documents](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html), the above mentioned data is an example of documents that are nested within Optimize's `ProcessInstance` index.
+Optimize uses nested documents ([ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html) / [OS](https://opensearch.org/docs/latest/field-types/supported-field-types/nested/)), the above mentioned data is an example of documents that are nested within Optimize's `ProcessInstance` index.
 
 Elasticsearch and OpenSearch apply restrictions regarding how many objects can be nested within one document. If your data includes too many nested documents, you may experience import failures. To avoid this, you can temporarily increase the nested object limit in Optimize's [index configuration](./../configuration/system-configuration.md#index-settings). Note that this might cause memory errors.
 :::
@@ -205,7 +205,7 @@ import:
   # Number of threads being used to process the import jobs per data type that are writing
   # data to the database.
   elasticsearchJobExecutorThreadCount: 1
-  # Adjust the queue size of the import jobs per data type that store data to elasticsearch.
+  # Adjust the queue size of the import jobs per data type that store data to the database.
   # A too large value might cause memory problems.
   elasticsearchJobExecutorQueueSize: 5
 ```
