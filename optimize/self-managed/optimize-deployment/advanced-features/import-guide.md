@@ -191,15 +191,19 @@ Therefore, the Optimize `ProcessInstance` is an aggregation of the engine's hist
 :::note
 Optimize uses [nested documents](https://www.elastic.co/guide/en/elasticsearch/reference/current/nested.html), the above mentioned data is an example of documents that are nested within Optimize's `ProcessInstance` index.
 
-Elasticsearch applies restrictions regarding how many objects can be nested within one document. If your data includes too many nested documents, you may experience import failures. To avoid this, you can temporarily increase the nested object limit in Optimize's [index configuration](./../configuration/system-configuration.md#index-settings). Note that this might cause memory errors.
+Elasticsearch and OpenSearch apply restrictions regarding how many objects can be nested within one document. If your data includes too many nested documents, you may experience import failures. To avoid this, you can temporarily increase the nested object limit in Optimize's [index configuration](./../configuration/system-configuration.md#index-settings). Note that this might cause memory errors.
 :::
 
 Import executions per engine entity are actually independent from another. Each follows a [producer-consumer-pattern](https://dzone.com/articles/producer-consumer-pattern), where the type specific `ImportService` is the single producer and a dedicated single `ImportJobExecutor` is the consumer of its import jobs, decoupled by a queue. So, both are executed in different threads. To adjust the processing speed of the executor, the queue size and the number of threads that process the import jobs can be configured:
 
+:::note
+Although the parameters below include `ElasticSearch` in their name, they apply to both ElasticSearch and OpenSearch installations. For backward compatibility reasons, the parameters have not been renamed.
+:::
+
 ```yaml
 import:
   # Number of threads being used to process the import jobs per data type that are writing
-  # data to elasticsearch.
+  # data to the database.
   elasticsearchJobExecutorThreadCount: 1
   # Adjust the queue size of the import jobs per data type that store data to elasticsearch.
   # A too large value might cause memory problems.
