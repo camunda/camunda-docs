@@ -44,6 +44,10 @@ type:"link", href:"/docs/8.5/apis-tools/java-client/", label: "Java client", doc
 }
 ]}/>
 
+:::note
+Other components in Camunda 8, such as [Tasklist API (GraphQL)](../apis-tools/tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
+:::
+
 ## Learn about Camunda Components and their APIs
 
 Camunda 8 components have APIs to enable polyglot developers to work with in their programming language of choice. Below are links to available component APIs.
