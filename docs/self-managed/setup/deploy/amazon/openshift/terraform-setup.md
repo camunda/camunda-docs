@@ -102,7 +102,7 @@ You can further change the region and other preferences and explore different [a
 
   Enter your `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, region, and output format. These can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
 
-- For production environments, we recommend the use of a dedicated IAM user and [create access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+- For production environments, we recommend the use of a dedicated IAM user. Create [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for the new IAM user via the console, and export them as `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
 
 #### Create an S3 bucket for Terraform state management
 
@@ -264,7 +264,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
    :::note Configure your cluster
 
-   Please customize the cluster name, availability zones, with the values you previously retrieved from the Red Hat Console.
+   Customize the cluster name, availability zones, with the values you previously retrieved from the Red Hat Console.
    Additionally, provide a secure username and password for the cluster administrator.
 
    Ensure that you have set the environment `RHCS_TOKEN` is set with your [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa).
@@ -291,7 +291,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
    ```
 
-4. Configure user access to the cluster. By default, the user who creates the OpenShift cluster has administrative access, if you want to grant access to other users, please follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster is created.
+4. Configure user access to the cluster. By default, the user who creates the OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster is created.
 
 5. Customize the cluster setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-tf-rosa/blob/v2.0.0/modules/rosa-hcp/README.md).
 
