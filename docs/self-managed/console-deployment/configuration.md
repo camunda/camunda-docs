@@ -156,7 +156,7 @@ console:
 
 ### Custom Properties
 
-Custom properties are useful to add custom information to the cluster details page in console. You can mutliple custom properties, and each custom property contains a description and multiple links.
+Custom properties are useful to add custom information to the cluster details page in console. A custom property contains a description and multiple links.
 
 The following example shows one custom property for a cluster:
 
