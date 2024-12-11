@@ -26,3 +26,19 @@ Below is the high-level architecture diagram for the Base Production Setup:
   The Optimize importer requires to be in a separate pod.
 
 ## Step-by-Step Installation Guide
+
+### TLS (terminated at ingress)
+
+### DNS setup (exposing your domain)
+
+### Deploying with OIDC
+
+### External Elasticsearch
+
+### External PostgreSQL
+
+(all external charts should be disabled)
+
+### Upgrading the chart (disable secret generation on upgrades)
+
+Make sure auto-generated secrets are mentioned by default in all relevant components.
