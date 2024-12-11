@@ -4,6 +4,8 @@ title: "Deploy an EKS cluster with Terraform (advanced)"
 description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module for a quick Camunda 8 setup."
 ---
 
+<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md. The user should have a similar experience when reading both guides. -->
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 

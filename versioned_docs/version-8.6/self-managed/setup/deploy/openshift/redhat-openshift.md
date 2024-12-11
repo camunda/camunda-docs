@@ -4,7 +4,7 @@ title: "Red Hat OpenShift"
 description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 ---
 
-<!-- (!) Note: please keep this guide aligned with docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md -->
+<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md. The user should have a similar experience when reading both guides. -->
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

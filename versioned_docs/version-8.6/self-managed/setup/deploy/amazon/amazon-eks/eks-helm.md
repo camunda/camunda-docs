@@ -4,6 +4,8 @@ title: "Install Camunda 8 on an EKS cluster"
 description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Amazon EKS."
 ---
 
+<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/setup/deploy/openshift/redhat-openshift.md. The user should have a similar experience when reading both guides. -->
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 

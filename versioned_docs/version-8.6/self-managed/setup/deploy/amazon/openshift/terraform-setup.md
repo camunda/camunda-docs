@@ -4,7 +4,7 @@ title: "Deploy a ROSA HCP Cluster with Terraform"
 description: "Deploy Red Hat OpenShift on AWS using a Terraform module for a quick Camunda 8 setup."
 ---
 
-<!-- (!) Note: Please ensure consistency between this page and ../amazon-eks/terraform-setup.md -->
+<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with ../amazon-eks/terraform-setup.md. The user should have a similar experience when reading both guides. -->
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
