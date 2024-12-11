@@ -131,11 +131,11 @@ During execution, the following steps are performed:
 
 1. [Start an import round](#start-an-import-round).
 2. [Prepare the import](#prepare-the-import).
-3. Poll a new page
-4. Map entities and add an import job
-5. [Execute the import](#execute-the-import).
-6. Poll a job
-7. Persist the new entities to the database
+   1. Poll a new page
+   2. Map entities and add an import job
+3. [Execute the import](#execute-the-import).
+   1. Poll a job
+   2. Persist the new entities to the database
 
 ### Start an import round
 
