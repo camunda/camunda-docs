@@ -118,6 +118,10 @@ The first message creates a new process instance. The following messages are cor
 
 When the instance ends and messages with the same correlation key are not correlated yet, a new process instance is created.
 
+:::note
+You may also use TTL to wait for messages that may arrive earlier when combining start events and intermediate catch events.
+:::
+
 ### Single instance
 
 **Problem**: Create exactly one instance of a process
