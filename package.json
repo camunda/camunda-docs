@@ -32,8 +32,8 @@
     "api:generate:camunda": "npm run api:generate camunda"
   },
   "dependencies": {
-    "@auth0/auth0-react": "^2.2.1",
-    "@bpmn-io/form-js": "^1.7.3",
+    "@auth0/auth0-react": "^2.2.4",
+    "@bpmn-io/form-js": "^1.12.0",
     "@docusaurus/core": "^2.4.1",
     "@docusaurus/preset-classic": "^2.4.1",
     "@docusaurus/theme-mermaid": "^2.4.1",
@@ -71,7 +71,7 @@
     "lint-staged": "^14.0.1",
     "playwright": "^1.49.0",
     "prettier": "3.3.3",
-    "replace-in-file": "^8.2.0",
+    "replace-in-file": "^7.2.0",
     "swc-loader": "^0.2.3"
   },
   "lint-staged": {

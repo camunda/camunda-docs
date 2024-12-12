@@ -13,7 +13,7 @@ Camunda extensions found in the [Camunda Community Hub](https://github.com/camun
 :::
 
 :::tip
-Camunda now officially supports the [Javascript SDK](/apis-tools/node-js-sdk.md) and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+Camunda now officially supports the [JavaScript SDK](/apis-tools/node-js-sdk.md) and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 :::
 
 In addition to the core Camunda-maintained clients, there are a number of community-maintained component libraries:
@@ -29,16 +29,16 @@ In addition to the core Camunda-maintained clients, there are a number of commun
 <TabItem value='zeebe'>
 
 - [Ballerina](https://github.com/camunda-community-hub/ballerina-zeebe)
-- [C#](c-sharp.md)
+- [C#](https://github.com/camunda-community-hub/zeebe-client-csharp)
 - [CLI](cli-client/index.md)
 - [Delphi](https://github.com/camunda-community-hub/DelphiZeeBeClient)
 - [EJB](https://github.com/camunda-community-hub/zeebe-ejb-client)
 - [Go](go-client/index.md)
 - [Micronaut](https://github.com/camunda-community-hub/micronaut-zeebe-client)
-- [Python](python.md)
-- [Ruby](ruby.md)
-- [Rust](rust.md)
-- [Quarkus](quarkus.md)
+- [Python](https://gitlab.com/stephane.ludwig/zeebe_python_grpc)
+- [Quarkus](https://github.com/quarkiverse/quarkus-zeebe)
+- [Ruby](https://github.com/zeebe-io/zeebe-client-ruby)
+- [Rust](https://github.com/camunda-community-hub/zeebest)
 
 </TabItem>
 
