@@ -52,8 +52,8 @@ In Java code, instantiate the client as follows:
             .build();
 
     try (ZeebeClient client = ZeebeClient.newClientBuilder()
-            .grpcAddress(zeebeGrpc)
-            .restAddress(zeebeRest)
+            .grpcAddress(URI.create(zeebeGrpc))
+            .restAddress(URI.create(zeebeRest))
             .credentialsProvider(credentialsProvider)
             .build()) {
       client.newTopologyRequest().send().join();
