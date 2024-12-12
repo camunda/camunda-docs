@@ -89,10 +89,6 @@ After that, [configure the database connection](./configuration/getting-started.
 
 #### Getting started with the Optimize Docker image
 
-:::note
-Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are currently supported, please refer to the [Camunda 7](https://github.com/camunda/issues/issues/705) and [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
-:::
-
 ##### Full local setup
 
 To start the Optimize Docker image and connect to an already locally running Camunda 7 as well as Elasticsearch instance you could run the following command:
