@@ -31,10 +31,6 @@ const versionMappings = [
     docsVersion: "8.3",
     optimizeVersion: "3.11.0",
   },
-  {
-    docsVersion: "8.2",
-    optimizeVersion: "3.10.0",
-  },
 ];
 
 /** @type {Array<UnsupportedVersion>} */
@@ -42,6 +38,7 @@ const unsupportedVersions = [
   // 👋 When archiving a version, move it from the above array into here, and edit it!
   //   `label` appears in the top navbar version selector.
   //   `urlSuffix` gets appended to the target `unsupported.docs.camunda.io/` URL.
+  { label: "8.2 / 3.10.0", urlSuffix: "8.2" },
   { label: "8.1 / 3.9.0", urlSuffix: "8.1" },
   { label: "8.0 / 3.8.0", urlSuffix: "8.0" },
   { label: "1.3 / 3.7.0", urlSuffix: "1.3" },

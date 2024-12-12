@@ -6,7 +6,7 @@ description: "Organize and order your tasks with clear prioritization."
 
 import styles from "./styles.module.css";
 
-You can add prioritization to [User Task elements](/components/modeler/bpmn/user-tasks/user-tasks.md) by specifying a priority value for a user task. This determines the task's importance in relation to other tasks within processes.
+You can add prioritization to [user task elements](/components/modeler/bpmn/user-tasks/user-tasks.md) by specifying a priority value for a user task. This determines the task's importance in relation to other tasks within processes.
 
 - The task priority is an **integer** value ranging from 0 to 100, with a default value of 50.
 - A higher priority value indicates higher importance.

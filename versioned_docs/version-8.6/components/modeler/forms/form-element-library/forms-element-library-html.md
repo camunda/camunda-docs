@@ -6,13 +6,13 @@ description: A form element to display HTML content.
 
 A flexible display component designed to quickly render HTML content for the user.
 
-![Form HTML Symbol](/img/form-icons/form-html.svg)
+<img src="/img/form-icons/form-html.svg" alt="Form HTML Symbol" />
 
 ## Configurable properties
 
 - **Content**: This property accepts HTML content. Define it using [templating syntax](../configuration/forms-config-templating-syntax.md) or as plaintext HTML. The rendered content is sanitized for security reasons, see below for details.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to conditionally hide the HTML content.
-- **Columns**: Space the field will use inside its row. The **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. The **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 
 ## Our security and sanitation strategy
 

@@ -12,7 +12,7 @@ Every iframe component is a sandbox. This means that the content of the iframe i
 
 :::
 
-![Form iframe Symbol](/img/form-icons/form-iframe.svg)
+<img src="/img/form-icons/form-iframe.svg" alt="Form iframe Symbol" />
 
 ## Configurable properties
 
@@ -30,7 +30,7 @@ Every iframe component is a sandbox. This means that the content of the iframe i
   - **Top level navigation**: Gives the iframe permission to change the URL of the parent page, navigating away entirely from it.
   - **Storage access by user**: Controls access of local storage based on user interactions, may be expected in addition to allow same origin on certain browsers for functionality depending on storage.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the iframe.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 
 ## Security advisory
 

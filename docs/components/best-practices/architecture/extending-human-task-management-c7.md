@@ -268,6 +268,6 @@ If you target a _TaskInfoEntity_:
 
 If you target a _ProcessInstanceInfoEntity_:
 
-- Create a new instance by an _ExecutionListener_ on the process instance start event. The process instance id might not yet be known at this time. So either you create your own id and set it as a process variable (to SQL "join" on this later), or you can add a safe point before the listener triggers to make sure the process instance was committed to the database.
+- Create a new instance by an _ExecutionListener_ on the process instance start event. The process instance ID might not yet be known at this time. So either you create your own ID and set it as a process variable (to SQL "join" on this later), or you can add a safe point before the listener triggers to make sure the process instance was committed to the database.
 
 - Decide when you have to update information in the entity, this depends on various factors (like amount of data, frequency of changes, way of changing data, ...).

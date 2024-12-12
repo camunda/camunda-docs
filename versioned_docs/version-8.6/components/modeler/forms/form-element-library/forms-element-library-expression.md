@@ -6,7 +6,7 @@ description: A form element to compute form state
 
 An expression field allowing the user to compute new data based on form state.
 
-![Form Expression Field Symbol](/img/form-icons/form-expression.svg)
+<img src="/img/form-icons/form-expression.svg" alt="Form Expression Field Symbol" />
 
 ### Configurable properties
 
@@ -14,7 +14,7 @@ An expression field allowing the user to compute new data based on form state.
 - **Target value**: Defines an [expression](../../feel/language-guide/feel-expressions-introduction.md) to evaluate.
 - **Compute on**: Defines when the expression should be evaluated. Either whenever the result changes, or only on form submission.
 - **Deactivate if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to disable the expression.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 
 :::info
 
