@@ -80,8 +80,8 @@ Please note that several field names in request body and response were changed i
 
 - in request body:
 
-  - [`TaskQuery.processDefinitionId`](docs/apis-tools/tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessdefinitionidbcodestring-) ⇒ [`TaskSearchRequest.processDefinitionKey`](docs/apis-tools/tasklist-api-rest/schemas/requests/task-search-request.mdx#code-style-fontweight-normal-tasksearchrequestbprocessdefinitionkeybcodestring)
-  - [`TaskQuery.processInstanceId`](docs/apis-tools/tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessinstanceidbcodestring-) ⇒ [`TaskSearchRequest.processInstanceKey`](docs/apis-tools/tasklist-api-rest/schemas/requests/task-search-request.mdx#code-style-fontweight-normal-tasksearchrequestbprocessinstancekeybcodestring)
+  - [`TaskQuery.processDefinitionId`](/apis-tools/tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessdefinitionidbcodestring-) ⇒ [`TaskSearchRequest.processDefinitionKey`](/apis-tools/tasklist-api-rest/schemas/requests/task-search-request.mdx#code-style-fontweight-normal-tasksearchrequestbprocessdefinitionkeybcodestring)
+  - [`TaskQuery.processInstanceId`](/apis-tools/tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessinstanceidbcodestring-) ⇒ [`TaskSearchRequest.processInstanceKey`](/apis-tools/tasklist-api-rest/schemas/requests/task-search-request.mdx#code-style-fontweight-normal-tasksearchrequestbprocessinstancekeybcodestring)
 
 - in response:
   - [`Task.creationTime`](/apis-tools/tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbcreationtimebcodestring--) ⇒ [`TaskSearchResponse.creationDate`](/apis-tools/tasklist-api-rest/schemas/responses/task-search-response.mdx#code-style-fontweight-normal-tasksearchresponsebcreationdatebcodestring-)
@@ -152,9 +152,9 @@ curl -X 'GET' \
 
 :::note
 
-Note that `processDefinitionKey` query parameter in HTTP request represents the same value as [`form.processDefinitionId`](docs/apis-tools/tasklist-api/queries/form.mdx#code-style-fontweight-normal-formbprocessdefinitionidbcodestring--),
-and in REST API response [`FormResponse.processDefinitionKey`](docs/apis-tools/tasklist-api-rest/schemas/responses/form-response.mdx#code-style-fontweight-normal-formresponsebprocessdefinitionkeybcodestring-) field
-is the renamed equivalent of [`Form.processDefinitionId`](docs/apis-tools/tasklist-api/objects/form.mdx#code-style-fontweight-normal-formbprocessdefinitionidbcodestring--).
+Note that `processDefinitionKey` query parameter in HTTP request represents the same value as [`form.processDefinitionId`](/apis-tools/tasklist-api/queries/form.mdx#code-style-fontweight-normal-formbprocessdefinitionidbcodestring--),
+and in REST API response [`FormResponse.processDefinitionKey`](/apis-tools/tasklist-api-rest/schemas/responses/form-response.mdx#code-style-fontweight-normal-formresponsebprocessdefinitionkeybcodestring-) field
+is the renamed equivalent of [`Form.processDefinitionId`](/apis-tools/tasklist-api/objects/form.mdx#code-style-fontweight-normal-formbprocessdefinitionidbcodestring--).
 
 :::
 
