@@ -28,7 +28,7 @@ This section includes deployment reference architectures for manual setups:
 
 ## Before You Start
 
-Before you begin with the self-managed single JAR setup, please consider the complexity and operational overhead involved. Self-managing your deployment requires a good understanding of infrastructure, networking, and application management. If you are looking for a simpler and more managed solution, you might want to explore [our SaaS offerings](https://camunda.com/platform/) first. SaaS can significantly reduce the burden of maintenance and allow you to focus more on your core business needs.
+Before starting with the self-managed single JAR setup, consider evaluating your deployment platform options (Kubernetes / Docker) based on your familiarity with these platforms. Self-managing your deployment requires a solid understanding of infrastructure, networking, and application management. If you prefer a simpler and more managed solution, you may want to explore [our SaaS offerings](https://camunda.com/platform/). SaaS can significantly reduce maintenance efforts, allowing you to focus on your core business needs.
 
 ## Limitations
 
