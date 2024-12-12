@@ -73,7 +73,7 @@ with a limit of one email, the task will return the most recently sent email.
 The task returns a list of emails in JSON format. Each email object contains the following information:
 
 - `messageId`: A unique identifier for the email message.
-- `fromAddress`: the email addresses of the sender.
+- `fromAddress`: The email addresses of the sender.
 - `subject`: The subject line of the email.
 - `size`: The size of the email (in bytes).
 
@@ -117,14 +117,14 @@ Reading an email using POP3 protocol will delete the email
 The task returns a JSON object containing detailed information about the email:
 
 - `messageId`: The unique identifier corresponding to the email message.
-- `fromAddress`: the email addresses of the sender.
+- `fromAddress`: The email addresses of the sender.
 - `headers` : A list containing the email's headers
 - `subject`: The subject line of the email.
 - `size`: The size of the email in bytes.
 - `plainTextBody`: The plain text version of the email's content.
-- `htmlBody`: The HTML version of the email's content, provided it exists.
-- `attachments`: A list of all the email's attachments, as document reference
-- `receivedDateTime`: the email's reception datetime
+- `htmlBody`: The HTML version of the email's content (if content exists).
+- `attachments`: A list of all the email's attachments, provided as a document reference.
+- `receivedDateTime`: The email's reception datetime
 
 #### Example Response
 
@@ -300,9 +300,9 @@ Allow users to send an email from the connected email account.
 | `Headers`            | Feel expression containing all the desired headers to be added to the email's headers. cf. `{ "customHeaders" : "new header value" }`                                                                                                                                                         |
 | `Subject`            | The email subject line.                                                                                                                                                                                                                                                                       |
 | `Content Type`       | The content type of the email.                                                                                                                                                                                                                                                                |
-| `Email Text Content` | The text content of the email. It must only be filled if Content type was `PLAIN` or `HTML & PlainText`.                                                                                                                                                                                      |
-| `Html Text Content`  | The html content of the email. It must only be filled if Content type was `HTLM` or `HTML & PlainText`.                                                                                                                                                                                       |
-| `Attachment`         | One or a list of document reference.                                                                                                                                                                                                                                                          |
+| `Email Text Content` | The text content of the email. This must only be provided if the `Content Type` is `PLAIN` or `HTML & PlainText`.                                                                                                                                                                             |
+| `Html Text Content`  | The HTML content of the email. This must only be provided if the `Content Type` is `HTML` or `HTML & PlainText`.                                                                                                                                                                              |
+| `Attachment`         | The document reference, either for a single document or as a list for multiple documents.                                                                                                                                                                                                     |
 
 :::info
 To learn more about Friendly Enough Expression Language (FEEL) expression,
@@ -418,7 +418,7 @@ The task returns a JSON object containing detailed information about the email:
 - `size`: The size of the email (in bytes).
 - `plainTextBody`: The plain text version of the email content.
 - `htmlBody`: The HTML version of the email content, if it exists.
-- `attachments`: A list of all the email's attachments, as document reference
+- `attachments`: A list of all the email's attachments, provided as a document reference.
 - `receivedDateTime`: The date and time the email was received.
 
 #### Example Response
