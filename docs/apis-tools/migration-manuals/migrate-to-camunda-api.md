@@ -85,16 +85,25 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Filter attribute `assigned (boolean)` removed
-  - Use filter attribute `assignee` with condition `{ "$exists": false }`
-- Filter attribute `assignees (string[])` removed
-  - Use filter attribute `assignee` with condition `{ “$in”: [ “xyz”, ... ] }`
-- Filter attribute `taskDefinitionId` renamed
-  - Use filter attribute `elementId`
-- Filter attribute `candidateGroups (string[])` removed
-  - Use filter attribute `candidateGroup` with condition `{ “$in”: [ “xyz”, ... ] }`
-- Filter attribute `candidateUsers (string[])` removed
-  - Use filter attribute `candidateUser` with condition `{ “$in”: [ “xyz”, ... ] }`
+- Request structure changes as outlined above.
+- `assigned (boolean)` removed
+  - **V2:** Use `assignee` with `{ "$exists": false }`
+- `assignees (string[])` removed
+  - **V2:** Use `assignee` with `{ "$in": [ "xyz", ... ] }`
+- `taskDefinitionId` renamed
+  - **V2:** Use `elementId`
+- `candidateGroups (string[])` removed
+  - **V2:** Use `candidateGroup` with `{ "$in": [ "xyz", ... ] }`
+- `taskVariables` renamed
+  - **V2:** Use `variables`
+- `candidateUsers (string[])` removed
+  - **V2:** Use `candidateUser` with `{ "$in": [ "xyz", ... ] }`
+- `tenantIds (string[])` removed
+  - **V2:** Use `tenantIds` with `{ "$in": [ "xyz", ... ] }`
+- `implementation` removed
+  - **V2:** Only Camunda user tasks returned
+- `includeVariables` removed
+  - **V2:** Variables not included by default; use `GET /v2/user-tasks/{key}/variables/search` to retrieve them.
 
 </TabItem>
 
@@ -119,6 +128,267 @@ The following conventions apply to all attributes:
 
 </TabItem>
 
+</Tabs>
+
+---
+
+#### Get User Task
+
+- **V1 endpoint**: `GET /v1/tasks/{taskId}`
+- **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}`
+
+<Tabs groupId="get-user-task" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+Same output adjustments as **Search Tasks**.
+
+</TabItem>
+</Tabs>
+
+---
+
+#### Assign User Task
+
+- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/assign`
+- **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/assignment`
+
+<Tabs groupId="assign-user-task" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- `allowOverrideAssignment` renamed to `allowOverride`
+- `action` attribute added (defaults to `"assign"` if not provided)
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- V1 returned `200` with the User Task body
+- V2 returns `204` (No Content)
+
+</TabItem>
+</Tabs>
+
+---
+
+#### Unassign User Task
+
+- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/unassign`
+- **V2 endpoint**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
+
+<Tabs groupId="unassign-user-task" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+No input adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- V1 returned `200` with the User Task body
+- V2 returns `204` (No Content)
+
+</TabItem>
+</Tabs>
+
+---
+
+#### Complete User Task
+
+- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/complete`
+- **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/completion`
+
+<Tabs groupId="complete-user-task" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- `action` attribute added (defaults to `"complete"` if not provided)
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- V1 returned `200` with the User Task body
+- V2 returns `204` (No Content)
+
+</TabItem>
+</Tabs>
+
+---
+
+#### Save Task Draft Variables
+
+- **V1 endpoint**: `POST /v1/tasks/{taskId}/variables`
+- **V2 endpoint**: Not supported
+
+<Tabs groupId="save-task-draft-vars" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+Not applicable, as this feature is not supported in V2.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+Not applicable, as this feature is not supported in V2.
+
+</TabItem>
+</Tabs>
+
+---
+
+#### Update User Task
+
+- **V1 endpoint**: No direct V1 equivalent
+- **V2 endpoint**: `PATCH /v2/user-tasks/{userTaskKey}`
+
+<Tabs groupId="update-user-task" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+This is a new endpoint in V2, no V1 adjustments.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+Refer to the documentation for which attributes can be updated:  
+[Update User Task Documentation](https://docs.camunda.io/docs/next/apis-tools/camunda-api-rest/specifications/update-user-task/)
+
+</TabItem>
+</Tabs>
+
+---
+
+#### Search Variables by a Task
+
+- **V1 endpoint**: `POST /v1/tasks/{taskId}/variables/search`
+- **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}/variables`
+
+<Tabs groupId="search-vars-by-task" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- `includeVariables` removed
+  - **V2:** Returns all variables associated with the user task.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Unified response structure.
+- Variables associated with both process and user task scopes returned with `scopeKey`.
+- `draft` removed (no draft variables).
+- `id` replaced with `variableKey`.
+
+</TabItem>
+</Tabs>
+
+### Forms
+
+#### Get Form
+
+- **V1 endpoint**: `GET /v1/forms/{formId}`
+- **V2 endpoints**:
+  - `GET /v2/user-tasks/{userTaskKey}/form`
+  - `GET /v2/process-definitions/{processDefinitionKey}/form`
+
+<Tabs groupId="get-form" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- No input parameters in V2; all input attributes removed.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Embedded forms no longer returned; only supported for user tasks.
+- `isDeleted` and `processDefinitionKey` removed.
+- `id` renamed to `formKey`.
+- `title` renamed to `bpmnId`.
+
+</TabItem>
+</Tabs>
+
+### Variables
+
+#### Get Variable by ID
+
+- **V1 endpoint**: `GET /v1/variables/{variableId}`
+- **V2 endpoint**: `POST /v2/variables/search`
+
+<Tabs groupId="get-variable-by-id" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Transitioned from GET to POST with filtering options.
+- Unified request structure as above.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Unified response structure.
+- Variables associated with both process and user task scopes returned with `scopeKey`.
+- `draft` removed.
+- `id` replaced with `variableKey`.
+
+</TabItem>
 </Tabs>
 
 <!--- TODO: insert output adjustments --->
