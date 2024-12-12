@@ -96,7 +96,7 @@ Play's rewind operation currently does not support the following elements:
 
 Scenarios accelerate manual testing by providing a no-code way of quickly re-running processes while tracking your test coverage.
 
-You can validate your process by creating and rerunning scenarios for different paths, ensuring that it continues to function as expected after any changes to your diagram. Scenarios let you replay and confirm that the process completes correctly with the pre-defined actions and variables. Although scenarios are quick to develop and use for non-developers, our [best practices](https://docs.camunda.io/docs/next/components/best-practices/development/testing-process-definitions/) suggest using specialized test libraries in your CI/CD pipeline.
+You can validate your process by creating and rerunning scenarios for different paths, ensuring that it continues to function as expected after any changes to your diagram. Scenarios let you replay and confirm that the process completes correctly with the pre-defined actions and variables. Although scenarios are quick to develop and use for non-developers, our [best practices](/components/best-practices/development/testing-process-definitions) suggest using specialized test libraries in your CI/CD pipeline.
 
 ### Saving a scenario
 
