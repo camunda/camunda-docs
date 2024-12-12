@@ -79,11 +79,16 @@ For more information on Ingress setup, please refer to our [ingress setup guide]
 
 ### Deploying with OpenID Connect Provider
 
-Please refer to the [Connect to an OpenID Connect provider](http://localhost:3000/docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/)
+Please refer to the following guides:
+
+- [Connect to an OpenID Connect provider](http://localhost:3000/docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/)
+- Connect to existing Keycloak:
+  - [Configuration of the Camunda Helm Chart](/docs/self-managed/setup/guides/using-existing-keycloak/)
+  - [Configuration of Keycloak](/docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/)
 
 ### External Databases
 
-To make it easy for testing, the Camunda Helm Chart provides external charts for Databases such as Elasticsearch and PostgresQL. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Elasticsearch dependency chart, elasti-cloud on GCP may be used, and instead of the PostgresQL dependency chart, you could use the Amazon Aurora PostgreSQL.
+To make it easy for testing, the Camunda Helm Chart provides external charts for Databases such as Elasticsearch and PostgresQL. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Elasticsearch dependency chart, elastic-cloud on GCP may be used, and instead of the PostgresQL dependency chart, you could use Amazon Aurora PostgreSQL.
 
 We have a number of guides on connecting to external databases with the Camunda Helm Chart:
 
