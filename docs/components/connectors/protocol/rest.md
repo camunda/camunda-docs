@@ -221,18 +221,18 @@ The HTTP response will be available in a temporary local `response` variable. Th
 
 The following fields are available in the `response` variable:
 
-- **status**: Response status
-- **body**: Response body of your request
-- **headers**: Response headers
-- **document**: When the `Store response` checkbox is selected, this field will represent the stored document:
-  - **documentId**: The ID of the stored document
-  - **storeId**: The store ID
-  - **metadata**: Metadata of the stored document (if available)
-    - **size**: Size of the stored document in bytes
-    - **expiresAt**: Expiration date of the stored document
-    - **fileName**: Name of the stored document
-    - **customProperties**: Custom properties of the stored document
-    - **contentType**: Content type of the stored document
+- **status**: Response status.
+- **body**: Response body of your request.
+- **headers**: Response headers.
+- **document**: If the `Store response` checkbox is selected, this field represents the stored document:
+  - **documentId**: The ID of the stored document.
+  - **storeId**: The store ID.
+  - **metadata**: Metadata of the stored document (if available).
+    - **size**: Size of the stored document (in bytes).
+    - **expiresAt**: Expiration date of the stored document.
+    - **fileName**: Name of the stored document.
+    - **customProperties**: Custom properties of the stored document.
+    - **contentType**: Content type of the stored document.
 
 ## Output mapping
 
