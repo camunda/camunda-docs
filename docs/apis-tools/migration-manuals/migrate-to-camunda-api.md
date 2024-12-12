@@ -100,7 +100,22 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-<!--- TODO: insert output adjustments --->
+- Response structure changes as outlined in [General changes](#general-changes).
+- The attribute `id` renamed to `userTaskKey`.
+- The attribute `taskDefinitionId` renamed to `elementId`.
+- The attribute `taskState` renamed to `state`.
+- The attribute `processName` renamed to `processDefinitionId`.
+- The following attributes were added:
+  - `customHeaders`
+  - `externalFormReference`
+  - `processDefinitionVersion`
+- The following attributes were removed:
+  - `isFirst` - Used to identify if the task was the first in the process.
+  - `variables` - Use Search Variables in order to retrieve variables from a user task.
+  - `implementation` - On V2, only user tasks are returned.
+  - `isFormEmbedded` - User tasks do not support embedded forms.
+  - `formVersion` - For user tasks, use the `formKey` to retrieve form data.
+  - `formId` - For user tasks, use the `formKey` to retrieve form data.
 
 </TabItem>
 
