@@ -292,7 +292,7 @@ This is a new endpoint in V2, no V1 adjustments.
 <TabItem value='output-adjustments'>
 
 Refer to the documentation for which attributes can be updated:  
-[Update User Task Documentation](https://docs.camunda.io/docs/next/apis-tools/camunda-api-rest/specifications/update-user-task/)
+[Update User Task Documentation](docs/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx)
 
 </TabItem>
 </Tabs>
