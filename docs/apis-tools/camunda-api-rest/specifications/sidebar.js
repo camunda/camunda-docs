@@ -5,6 +5,18 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Authentication",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-authentication",
+        label: "Get current user",
+        className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "Authorization",
     items: [
       {
@@ -191,6 +203,54 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Group",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-group",
+        label: "Create group",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-group",
+        label: "Get group",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/update-group",
+        label: "Update group",
+        className: "api-method patch",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-group",
+        label: "Delete group",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/add-user-to-group",
+        label: "Assign a user to a group",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/unassign-user-from-group",
+        label: "Unassign a user from a group",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/search-groups",
+        label: "Query groups",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "Incident",
     items: [
       {
@@ -258,6 +318,30 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/get-license",
         label: "Get license status",
         className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Mapping rule",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-mapping-rule",
+        label: "Create mapping rule",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-mapping-rule",
+        label: "Delete a mapping rule",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/find-mappings",
+        label: "Query mappings",
+        className: "api-method post",
       },
     ],
   },
@@ -447,6 +531,42 @@ module.exports = [
       },
       {
         type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/assign-user-to-tenant",
+        label: "Assign a user to a tenant",
+        className: "api-method put",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/remove-user-from-tenant",
+        label: "Remove a user from a tenant",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/assign-mapping-rule-to-tenant",
+        label: "Assign a mapping rule to a tenant",
+        className: "api-method put",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/remove-mapping-rule-from-tenant",
+        label: "Remove a mapping rule from a tenant",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/assign-group-to-tenant",
+        label: "Assign a group to a tenant",
+        className: "api-method put",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/remove-group-from-tenant",
+        label: "Remove a group from a tenant",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/search-tenants",
         label: "Query tenants",
         className: "api-method post",
@@ -546,18 +666,6 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/get-variable",
         label: "Get variable (alpha)",
         className: "api-method get",
-      },
-    ],
-  },
-  {
-    type: "category",
-    label: "Mapping Rule",
-    items: [
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/create-mapping-rule",
-        label: "Create mapping rule",
-        className: "api-method post",
       },
     ],
   },
