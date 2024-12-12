@@ -47,13 +47,13 @@ To enable usage collection, configure the parameters described in the next secti
 
 To enable telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker username) needed to send telemetry data to Camunda.
 
-| Parameter                            | Description                                                                                                                                               | Example value                 |
-| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `customerId`                         | Unique identifier of the customer. This is also a Camunda Docker registry user name                                                                       | `customername`                |
-| `installationId`                     | Unique installation ID of the current customer installation                                                                                               | `my-deployment`               |
-| `telemetry`                          | Telemetry config for Console Self-Managed: `disabled`, `online` or `download`                                                                             | `online`                      |
-| `managed.releases.tags`              | Assign cluster tags to indicate what type of cluster it is. Default tags are `dev`, `stage`, `test` or `prod`, but you can assign any custom tag as well. | `- dev` (list of strings)     |
-| `managed.releases.custom-properties` | List of custom properties you can add to your cluster with custom descriptions and custom links on your cluster details page.                             | see custom properties section |
+| Parameter                            | Description                                                                                                                                          | Example value                 |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `customerId`                         | Unique identifier of the customer. This is also a Camunda Docker registry username.                                                                  | `customername`                |
+| `installationId`                     | Unique installation ID of the current customer installation.                                                                                         | `my-deployment`               |
+| `telemetry`                          | Telemetry config for Console Self-Managed: `disabled`, `online`, or `download`.                                                                      | `online`                      |
+| `managed.releases.tags`              | Assign cluster tags to indicate what type of cluster it is. Default tags are `dev`, `stage`, `test`, or `prod`, but users can assign any custom tag. | `- dev` (list of strings)     |
+| `managed.releases.custom-properties` | List of custom properties users can add to their cluster with custom descriptions and custom links on the cluster details page.                      | See custom properties section |
 
 Console environment variables could be set in Helm. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 For example:
@@ -69,15 +69,15 @@ console:
       value: online
 ```
 
-### Override Configuration parameters
+### Override configuration parameters
 
-The problem with the configuration parameters is that they replace the complete configuration. If only the `customerId` is to be changed, the complete configuration must still be added.
+Configuration parameters formerly replaced the complete configuration. Even if you only changed the `customerId`, the complete configuration still had to be added.
 
-This is no longer the case with the override parameters. A subset of parameters can be set so that individual parameters can be adjusted. If a parameter needs to be changed for a specific cluster, the `name` and `namespace` fields must be set with the exact values so that correlations can be made accordingly.
+This is no longer the case with the override parameters. A subset of parameters can be set so individual parameters can be adjusted. If a parameter must be changed for a specific cluster, the `name` and `namespace` fields must be set with the exact values so correlations can be made accordingly.
 
 #### Example
 
-Given the following configuration provided by helm:
+Given the following configuration provided by Helm:
 
 ```yaml
 camunda:
@@ -150,9 +150,9 @@ console:
                       url: "https://..."
 ```
 
-### Custom Properties
+### Custom properties
 
-Custom properties are useful to add custom information to the cluster details page in console. A custom property contains a description and multiple links.
+Custom properties are useful to add custom information to the **Cluster details** page in Console. A custom property contains a description and multiple links.
 
 The following example shows one custom property for a cluster:
 
