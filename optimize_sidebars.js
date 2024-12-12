@@ -2530,7 +2530,7 @@ module.exports = {
                 ),
                 docsLink(
                   "Amazon EC2",
-                  "self-managed/setup/deploy/amazon/amazon-ec2/"
+                  "self-managed/setup/deploy/amazon/aws-ec2/"
                 ),
               ],
             },
@@ -3316,6 +3316,15 @@ module.exports = {
                 ),
               ],
             },
+          ],
+        },
+        {
+          "Reference Architecture": [
+            docsLink("Overview", "self-managed/reference-architecture/"),
+            docsLink(
+              "Manual JAR",
+              "self-managed/reference-architecture/manual/"
+            ),
           ],
         },
       ],
