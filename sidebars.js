@@ -960,6 +960,7 @@ module.exports = {
                   ],
                 },
                 "self-managed/setup/deploy/amazon/aws-marketplace",
+                "self-managed/setup/deploy/amazon/aws-ec2",
               ],
               "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks",
@@ -1565,12 +1566,7 @@ module.exports = {
     {
       "Reference Architecture": [
         "self-managed/reference-architecture/reference-architecture",
-        {
-          Manual: [
-            "self-managed/reference-architecture/manual/manual-overview",
-            "self-managed/reference-architecture/manual/aws-ec2",
-          ],
-        },
+        "self-managed/reference-architecture/manual/manual",
       ],
     },
   ],

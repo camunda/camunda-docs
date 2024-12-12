@@ -1,18 +1,13 @@
 ---
-id: manual-overview
-title: "Manual Deployment option overview"
-sidebar_label: "Overview"
+id: manual
+title: "Manual JAR deployment overview"
+sidebar_label: Manual JAR
 description: "Camunda 8 Manual (Java) deployment Reference architecture home "
 ---
 
-<!-- Could also be called manual? -->
+<!-- Moving target, may be renamed, etc. -->
 
-<!-- Moving target, may be renamed, different focus, etc. -->
-
-<!-- Day 1 vs Day 2 operations? -->
-<!-- Installation vs Operations -->
-
-# Reference Architectures Overview: Manual Deployment
+# Reference Architectures Overview: Manual JAR Deployment
 
 This section of the Camunda Deployment Reference Architectures provides guidance on deploying Camunda Platform as a standalone Java application. This deployment method is ideal for users who prefer manual deployment on bare metal servers or virtual machines (VMs), offering full control over the environment and configuration. It is particularly suited for scenarios with specific infrastructure requirements or highly customized setups.
 
@@ -21,7 +16,7 @@ This section of the Camunda Deployment Reference Architectures provides guidance
 - **Single application JAR**: Starting from Camunda 8.7, all core components (Zeebe, Tasklist, Operate, Optimize, and Identity) are bundled into a single JAR file. This simplifies deployment by reducing the number of artifacts to manage.
 - **Full Control**: Users are responsible for all aspects of deployment, including installation, configuration, scaling, and maintenance. This offers maximum flexibility for custom environments.
 
-Other deployment options, such as containerized deployments or managed services, might offer more convenience and automation. However, VM based deployment gives you the flexibility to tailor the deployment to your exact needs, which can be beneficial for regualted or highly customized environments.
+Other deployment options, such as containerized deployments or managed services, might offer more convenience and automation. However, VM based deployment gives you the flexibility to tailor the deployment to your exact needs, which can be beneficial for regulated or highly customized environments.
 
 For documentation on the orchestration cluster, Web Modeler and Console separation, refer to [the documentation](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console)
 
@@ -29,7 +24,7 @@ For documentation on the orchestration cluster, Web Modeler and Console separati
 
 This section includes deployment reference architectures for manual setups:
 
-- [Aamazon EC2 deployment](./aws-ec2.md) - is a standard production setups with support for high availability.
+- [Aamazon EC2 deployment](/self-managed/setup/deploy/amazon/aws-ec2.md) - is a standard production setups with support for high availability.
 
 ## Before You Start
 
@@ -51,7 +46,7 @@ Compared to the generalized architecture depicted in the [reference architecture
 
 ### High Availability (HA)
 
-:::warning Non-HA Optimize importer
+:::caution Non-HA Optimize importer
 When scaling from a single machine to multiple machines, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 :::
 
@@ -96,9 +91,14 @@ Any of the following are just suggestions for the minimum viable setup, the sizi
 
 #### Minimum Requirements Per Host
 
-- CPU: 4 cores (amd64/arm64)
+- Modern CPU: 4 cores
 - Memory: 8 GB RAM
 - Storage: 32 GB SSD (**1,000** IOPS recommended; avoid burstable disk types)
+
+Suggested instance types from cloud providers:
+
+- AWS: [m7i](https://aws.amazon.com/ec2/instance-types/m7i/) series
+- GCP: [n1](https://cloud.google.com/compute/docs/general-purpose-machines#n1_machines) series
 
 #### Networking
 
@@ -113,7 +113,7 @@ Any of the following are just suggestions for the minimum viable setup, the sizi
 - Load balancer for distributing traffic (if required)
 
 :::info Customizing ports
-Some ports can be overwritten and are not definitive, you may conduct the [documentation](#TODO) to see how it can be done for the different components, in case you want to use a different port. Or in our example `Connectors` and `Web UIs` overlap on 8080 due to which we moved connectors to a different port.
+Some ports can be overwritten and are not definitive, you may conduct the documentation of each component to see how it can be done, in case you want to use a different port. Or in our example `Connectors` and `Web UIs` overlap on 8080 due to which we moved connectors to a different port.
 :::
 
 ### Application

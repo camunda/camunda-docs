@@ -25,11 +25,9 @@ It's important to note that reference architectures are not a one-size-fits-all 
 
 ## Support Considerations
 
-We recognize that deviations from the reference architecture are unavoidable. However, such changes will introduce additional complexity, making troubleshooting more difficult. When modifications are required, ensure they are well-documented to facilitate future maintenance and support more quickly. Camunda publishes [supported environments](/reference/supported-environments.md) information to help you navigate supported configurations.
+We recognize that deviations from the reference architecture are unavoidable. However, such changes will introduce additional complexity, making troubleshooting more difficult. When modifications are required, ensure they are well-documented to facilitate future maintenance and troubleshooting more quickly. Camunda publishes [supported environments](/reference/supported-environments.md) information to help you navigate supported configurations.
 
 ## Architecture
-
-<!-- TODO: include the overview that Andrey has done -->
 
 ### Orchestration Cluster
 
@@ -60,7 +58,7 @@ The orchestration cluster is central to Camunda's workflow automation, which foc
 
 #### Web Modeler and Console
 
-The Web Modeler and Console are designed to oversee and manage multiple orchestration clusters. It offers tools and interfaces for administrators and developers to monitor clusters and create BPMN models. The management cluster operates independently from the orchestration cluster and can function without requiring an orchestration cluster.
+The Web Modeler and Console are designed to oversee and manage multiple orchestration clusters. It offers tools and interfaces for administrators and developers to monitor clusters and create BPMN models. The management cluster operates independently of the orchestration cluster and can function without requiring an orchestration cluster.
 
 - [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters.
 - [Web Modeler](/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
@@ -72,7 +70,7 @@ The orchestration cluster has its own integrated Identity component, while Web M
 
 ### Databases
 
-Databases can be deployed as part of the Camunda clusters, but using externally managed database services offers several advantages:
+Databases can be deployed as part of the Camunda clusters, but using external databases or managed services offers several advantages:
 
 - **Flexibility**: Allows you to choose the database technology that best fits your needs and existing infrastructure while choosing one of the [supported environments](/reference/supported-environments.md#component-requirements).
 - **Scalability**: External databases can be scaled independently of the Camunda components, providing better performance and resource management.
@@ -148,4 +146,4 @@ For more information and guides, have a look at the specific reference for [Cont
   - Applicable for high availability but requires more detailed planning.
   - Best for teams with expertise in managing physical servers or virtual machines.
 
-For more information and guides, have a look at the specific reference for [Manual](./manual/manual-overview).
+For more information and guides, have a look at the specific reference for [Manual](./manual/manual.md).

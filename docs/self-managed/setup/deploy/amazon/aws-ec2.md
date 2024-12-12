@@ -30,7 +30,7 @@ The architecture as depicted focuses on a standard deployment consisting of a th
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
 
 _Infrastructure diagram for a 3 node EC2 architecture (click on the image to open the PDF version)_
-[![AWS EC2 Architecture](./img/aws-ec2-arch.jpg)](./img/aws-ec2-arch.pdf)
+[![AWS EC2 Architecture](./assets/aws-ec2-arch.jpg)](./assets/aws-ec2-arch.pdf)
 
 The setup consists of:
 
@@ -57,7 +57,7 @@ Alternatively, one can run the same setup with a single AWS EC2 instance as well
 
 - An AWS account to create any resources within AWS.
   - On a high level, permissions are required on the **ec2**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **es** level.
-  - For a more fine-grained view of the permissions, check this [example policy](#TODO).
+  - For a more fine-grained view of the permissions, check this [example policy](https://github.com/camunda/camunda-deployment-references/blob/main/aws/ec2/example/policy.json).
 - Terraform (1.7+)
 - Unix based Operating System (OS) with ssh and sftp
   - Windows may be used with [Cygwin](https://www.cygwin.com/) or [Windows WSL](https://learn.microsoft.com/en-us/windows/wsl/install) but has not been tested
