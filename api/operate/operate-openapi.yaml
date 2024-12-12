@@ -84,7 +84,6 @@ paths:
                   searchAfter:
                     - small
                     - 9007199254741200
-        required: true
       responses:
         "200":
           description: Success
@@ -168,7 +167,6 @@ paths:
                   sort:
                     - field: bpmnProcessId
                       order: ASC
-        required: true
       responses:
         "200":
           description: Success
@@ -261,7 +259,6 @@ paths:
                   sort:
                     - field: bpmnProcessId
                       order: ASC
-        required: true
       responses:
         "200":
           description: Success
@@ -362,7 +359,6 @@ paths:
                   searchAfter:
                     - 1646904085499
                     - 9007199254743288
-        required: true
       responses:
         "200":
           description: Success
@@ -459,7 +455,6 @@ paths:
                   searchAfter:
                     - 1646904085499
                     - 9007199254743288
-        required: true
       responses:
         "200":
           description: Success
@@ -553,7 +548,6 @@ paths:
                   sort:
                     - field: decisionRequirementsId
                       order: ASC
-        required: true
       responses:
         "200":
           description: Success
@@ -645,7 +639,6 @@ paths:
                   sort:
                     - field: decisionId
                       order: ASC
-        required: true
       responses:
         "200":
           description: Success
@@ -737,7 +730,6 @@ paths:
                   sort:
                     - field: decisionId
                       order: ASC
-        required: true
       responses:
         "200":
           description: Success
@@ -1483,6 +1475,8 @@ components:
         processVersion:
           type: integer
           format: int32
+        processVersionTag:
+          type: string
         bpmnProcessId:
           type: string
         parentKey:
@@ -1501,6 +1495,8 @@ components:
             - ACTIVE
             - COMPLETED
             - CANCELED
+        incident:
+          type: boolean
         processDefinitionKey:
           type: integer
           format: int64
@@ -1549,6 +1545,8 @@ components:
         version:
           type: integer
           format: int32
+        versionTag:
+          type: string
         bpmnProcessId:
           type: string
         tenantId:
@@ -1602,6 +1600,7 @@ components:
             - UNKNOWN
             - IO_MAPPING_ERROR
             - JOB_NO_RETRIES
+            - EXECUTION_LISTENER_NO_RETRIES
             - CONDITION_ERROR
             - EXTRACT_VALUE_ERROR
             - CALLED_ELEMENT_ERROR
