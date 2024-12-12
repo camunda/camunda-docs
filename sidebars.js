@@ -339,6 +339,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/googledrive",
                 "components/connectors/out-of-the-box-connectors/google-maps-platform",
                 "components/connectors/out-of-the-box-connectors/google-sheets",
+                "components/connectors/out-of-the-box-connectors/google-gemini",
               ],
             },
             "components/connectors/out-of-the-box-connectors/hugging-face",
@@ -894,7 +895,19 @@ module.exports = {
 
   Reference: [
     "reference/overview",
-    "reference/announcements",
+    {
+      type: "category",
+      label: "Announcements",
+      link: {
+        type: "doc",
+        id: "reference/announcements",
+      },
+      items: [
+        "reference/announcements/announcements-870",
+        "reference/announcements/announcements-860",
+        "reference/announcements/announcements-850",
+      ],
+    },
     {
       type: "category",
       label: "Release notes",
