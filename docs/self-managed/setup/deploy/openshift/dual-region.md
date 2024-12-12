@@ -1,57 +1,71 @@
 ---
-id: redhat-openshift
-title: "Red Hat OpenShift"
-description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
+id: redhat-openshift-dual-region
+title: "Dual Region"
+description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift in two regions"
 ---
-
-<!-- (!) Note: please keep this guide aligned with docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md -->
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
+This guide is designed to assist users aiming to deploy Camunda 8 in a dual-region setup on Red Hat OpenShift.
 
-Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appropriate configurations.
+The primary goal is to configure and integrate **two OpenShift clusters** for use in the dual-region reference architecture. This setup leverages specific components to address key challenges, and users are encouraged to exercise discretion regarding their use.
+While this guide does not cover exhaustive configurations, it aims to provide the key steps needed to achieve the desired outcome.
 
-However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
+To enable intercommunication between regions, we will utilize [ACM Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) and [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner). Failover will be managed through DNS configurations, while access to the platform will be ensured via OpenShift Routes.
 
-## Cluster Specification
+Additionally, depending on whether your OpenShift clusters are managed on a cloud provider or deployed on-premises, certain aspects of the configuration might require adaptation.
 
-When deploying Camunda 8 on an OpenShift cluster, the cluster specification should align with your specific requirements and workload characteristics. Here's a suggested configuration to begin with:
+:::caution Dual-region limits and constraints
 
-- **Instance type:** 4 vCPUs (x86_64, >3.1 GHz), 16 GiB Memory (for example, [mi7.xlarge on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
-- **Number of dedicated nodes:** 4
-- **Volume type:** SSD volumes (with between 1000 and 3000 IOPS per volume, and a throughput of 1,000 MB/s per volume, for instance, [gp3 on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
-
-If you need to set up an OpenShift cluster on a cloud provider, we recommend our [guide to deploying a ROSA cluster](/self-managed/setup/deploy/amazon/openshift/terraform-setup.md).
-
-### Supported Versions
-
-We conduct testing and ensure compatibility against the following OpenShift versions:
-
-| OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
-| ----------------- | --------------------------------------------------------------------------------- |
-| 4.17.x            | June 27, 2025                                                                     |
-| 4.16.x            | December 27, 2025                                                                 |
-| 4.15.x            | August 27, 2025                                                                   |
-| 4.14.x            | May 1, 2025                                                                       |
-
-:::caution Older versions are not guaranteed
-
-Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as per the End of Support Date. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+Please review our [dual-region concept documentation](./../../../concepts/multi-region/dual-region.md) to understand the limitations and constraints of this blueprint before proceeding.
 
 :::
 
+## High Level Design
+
+<!-- TODO: Add a diagram -->
+<!-- TODO: reference dns same clusters -->
+
 ## Requirements
 
-- [Helm (3.16+)](https://helm.sh/docs/intro/install/)
-- [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
-- [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
-- [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
-- A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
+- You need access to the [Advanced Cluster Management operator](https://www.redhat.com/en/technologies/management/advanced-cluster-management) and the [Submariner operator](https://catalog.redhat.com/software/container-stacks/detail/5f0c67b7ce85fb9e399f3a12).
+- The clusters must be separated by a reasonable latency as outlined in the [installation environment guidelines](/self-managed/concepts/multi-region/dual-region/#installation-environment).
+- Each of your OpenShift clusters must meet at least the minimum capacity requirements for a cluster. Refer to the [cluster specification guide](./redhat-openshift.md##cluster-specification) for details on resource allocation and infrastructure needs.
+- Administrative privileges are required for both clusters to perform configurations and operator deployments.
+- A reliable means of communication between the two clusters is necessary. Ensure that each cluster can establish network connections with the other.
+- The version of your OpenShift clusters must be included in the [supported versions list](./redhat-openshift.md#supported-versions).
 
-## Deploying Camunda 8 via Helm charts
+---
+
+### CLI Requirements
+
+In addition to the general prerequisites outlined above, the following CLI tools are required for interacting with the clusters and deploying Camunda 8, these are the same CLI tools required as mentioned in the [OpenShift Guide](redhat-openshift.md#requirements).
+
+Some steps in this guide may require additional CLI tools, which will be specified as needed.
+
+## Setup the clusters
+
+### Referencing the clusters
+
+- Have access to the cluster from your cli
+- reference the region and the name of each cluster
+
+### Networking of the clusters
+
+- Allow clusters to communicate between each other
+
+## Setup Advanced Cluster Management
+
+Needed to coordinate the deployment of cross cluster resources
+
+## Setup Submariner
+
+Needed to make services discoverable from each cluster and to access it
+
+## Deploying Camunda 8 via Helm charts in dual region
+
+### Setup the S3 bucket supporting failover
 
 ### Configure your deployment
 
@@ -167,8 +181,8 @@ In the example below, a TLS certificate is generated for the Zeebe Gateway servi
 
 Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 
-  <details>
-    <summary>PKCS #8, PKCS #1 syntax</summary>
+      <details>
+        <summary>PKCS #8, PKCS #1 syntax</summary>
 
 > PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
 
@@ -176,7 +190,7 @@ Another option is [Cert Manager](https://docs.openshift.com/container-platform/l
 
 [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
 
-  </details>
+      </details>
 
 - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
@@ -223,6 +237,26 @@ The actual configuration properties can be reviewed [in the Connectors configura
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/domain.yml
 ```
+
+1. Deploy routes for each service to ensure they are accessible externally. These routes will be configured with default ports, allowing seamless communication with the services. To proceed, you need to reference the manifest that contains all the routes for the platform.
+
+To implement these routes, first copy the contents of the provided manifest into a file named `routes.yml`:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/manifests/routes.yml
+```
+
+Once this file is created, you can apply the routes to the `camunda` namespace. Use the following command to apply the routes:
+
+```bash
+# replace the domain
+envsubst < routes.yml > generated-routes.yml
+
+# setup the routes
+oc apply -f generated-routes.yml -n camunda
+```
+
+This command will create the routes and make them available to the services in the specified namespace. However, it is important to note that the routes will not be functional until the Helm deployment is completed in the subsequent steps. The Helm chart must be successfully deployed and the services up and running before the routes can be accessed and used.
 
 <!--Intended space left for not breaking the build!-->
 
@@ -328,15 +362,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-
 
 ### Install Camunda 8 using Helm
 
-Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm.
-
-The following are the required environment variables with some example values:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/chart-env.sh
-```
-
-Then run the following command:
+Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/install-chart.sh
@@ -368,6 +394,8 @@ watch -n 5 '
   fi
 '
 ```
+
+### Export Camunda 8 services using Submariner
 
 ## Verify connectivity to Camunda 8
 
