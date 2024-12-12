@@ -94,7 +94,9 @@ Play's rewind operation currently does not support the following elements:
 
 ## Scenarios
 
-You can validate your process by creating scenarios for different paths, ensuring that it continues to function as expected after any changes to your diagram. Scenarios let you replay and confirm that the process completes correctly with the pre-defined actions and variables.
+Scenarios accelerate manual testing by providing a no-code way of quickly re-running processes while tracking your test coverage.
+
+You can validate your process by creating and rerunning scenarios for different paths, ensuring that it continues to function as expected after any changes to your diagram. Scenarios let you replay and confirm that the process completes correctly with the pre-defined actions and variables. Although scenarios are quick to develop and use for non-developers, our [best practices](https://docs.camunda.io/docs/next/components/best-practices/development/testing-process-definitions/) suggest using specialized test libraries in your CI/CD pipeline.
 
 ### Saving a scenario
 
@@ -119,7 +121,7 @@ Scenarios can be run from the process definition page using the **Run all scenar
 
 ### Limitations {#scenarios-limitations}
 
-- Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play or in a different browser.
+- Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play, in a different browser, or by a collaborator.
 - Call activities are not supported; therefore, scenarios containing them cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
 - Similar to process instances, scenarios do not run in isolation. For instance, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously may lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
