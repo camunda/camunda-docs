@@ -60,7 +60,7 @@ Here is an example REST Ingress setup for the Core Camunda component.
 ```yaml
 core:
   ingress:
-    grpc:
+    rest:
       enabled: true
       className: nginx
       host: "zeebe-rest.camunda.example.com"
@@ -96,6 +96,8 @@ We have a number of guides on connecting to external databases with the Camunda 
 - [Using Amazon OpenSearch Service](/docs/self-managed/setup/guides/using-existing-opensearch/)
   - [Using Amazon OpenSearch Service through IRSA (only applicable if you are running Camunda Platform on EKS)](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
 - [Running Web Modeler on Amazon Aurora PostgreSQL](/docs/self-managed/modeler/web-modeler/configuration/database/#running-web-modeler-on-amazon-aurora-postgresql)
+
+### Scalability
 
 ### Upgrading the chart (disable secret generation on upgrades)
 
