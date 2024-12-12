@@ -117,7 +117,7 @@ Scenarios can be run from the process definition page using the **Run all scenar
 
 ![save scenario](img/play-scenario-runs.png)
 
-### Limitations
+### Limitations {#scenarios-limitations}
 
 - Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play or in a different browser.
 - Call activities are not supported; therefore, scenarios containing them cannot be executed successfully.
@@ -143,7 +143,7 @@ Unlike in [Operate](/components/operate/userguide/process-instance-modification.
 
 ![modify process instance](img/play-modifications.png)
 
-### Limitations
+### Limitations {#modifications-limitations}
 
 Rewinding a process instance that has modifications applied to is currently not supported. Additionally, some elements do not support specific modifications:
 
@@ -209,7 +209,7 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
-### Limitations
+### Limitations {#self-managed-limitations}
 
 - Play does not support multi-tenancy.
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
