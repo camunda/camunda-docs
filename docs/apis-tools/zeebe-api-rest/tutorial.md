@@ -41,7 +41,7 @@ In this tutorial, we will execute arguments to assign and unassign a user to and
 ## Assign a Camunda user task (POST)
 
 :::note
-In this tutorial, you will capture a **Camunda user task** ID to assign and unassign users in this API. Camunda 8.5 introduced this new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type, and these Camunda user tasks are different from job worker-based user tasks. See more details on task type differences in the [migrating to Camunda user tasks documentation](/apis-tools/migration-manuals/migrate-to-Camunda-user-tasks.md#task-type-differences).
+In this tutorial, you will capture a **Camunda user task** ID to assign and unassign users in this API. Camunda 8.5 introduced this new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type, and these Camunda user tasks are different from job worker-based user tasks. See more details on task type differences in the [migrating to Camunda user tasks documentation](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md#task-type-differences).
 :::
 
 First, let's script an API call to assign a Camunda user task.
