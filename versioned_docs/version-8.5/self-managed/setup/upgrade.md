@@ -58,7 +58,7 @@ With this change, Camunda applications no longer require a unified patch version
 
 <h3>Helm chart 10.0.2+</h3>
 
-The upgrade path for Camunda Helm Chart v9.x.x is to the latest patch version of v10. Any minor or patch version after 10.0.2 can be used. It is not possible to upgrade from v9.x.x to v10.0.0 or v10.0.1.
+The upgrade path for Camunda Helm Chart v9.x.x is to the latest patch version of v10. Any minor or patch version after (and including) 10.0.2 can be used. It is not possible to upgrade from v9.x.x to v10.0.0 or v10.0.1.
 
 The Camunda Helm chart v10.0.2 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
 
