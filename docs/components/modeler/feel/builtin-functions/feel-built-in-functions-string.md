@@ -397,7 +397,7 @@ to base64("FEEL")
 
 <MarkerCamundaExtension></MarkerCamundaExtension>
 
-Returns `true` if the given string is blank (i.e. empty or contains only whitespaces). 
+Returns `true` if the given string is blank (i.e. empty or contains only whitespaces).
 
 **Function signature**
 
