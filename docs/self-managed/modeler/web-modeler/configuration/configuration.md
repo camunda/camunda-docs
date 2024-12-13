@@ -20,7 +20,7 @@ import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 ### Clusters
 
-Clusters configured using the following options can be selected when deploying from Web Modeler. If no clusters are configured, your cluster information can be provided at the time of the deployment. The Camunda 8 [Helm](/docs/self-managed/setup/install.md) and [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
+Clusters configured using the following options can be selected when deploying from Web Modeler. If no clusters are configured, you will not be able to preform any actions that require a cluster (for example, deploy, start an instance, or Play a process). The Camunda 8 [Helm](/self-managed/setup/install.md) and [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
 
 To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 
