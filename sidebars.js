@@ -165,6 +165,15 @@ module.exports = {
               ],
             },
             {
+              type: "category",
+              label: "Intelligent document processing",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp",
+              },
+              items: ["components/modeler/web-modeler/idp/idp-applications"],
+            },
+            {
               Collaboration: [
                 "components/modeler/web-modeler/collaboration",
                 "components/modeler/web-modeler/collaborate-with-modes",
