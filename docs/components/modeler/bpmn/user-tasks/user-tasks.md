@@ -168,7 +168,7 @@ To define a Job worker implementation for a user task, simply remove the `zeebe:
 - Model semantics: The interpretation and purpose in the process model differ.
 
 :::info
-The Job worker implementation for user tasks is deprecated. We recommend using [Camunda user tasks](#camunda-user-tasks) instead for enhanced functionality and adherence to best practices. For a detailed comparison of task implementation types and guidance on migrating to Camunda user tasks, see the [migration guide](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md).
+The Job worker implementation for user tasks is deprecated. We recommend using [Camunda user tasks](#camunda-user-tasks) instead for enhanced functionality and adherence to best practices. For a detailed comparison of task implementation types and guidance on migrating to Camunda user tasks, see the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md).
 :::
 
 When a process instance reaches a user task with a Job worker implementation:

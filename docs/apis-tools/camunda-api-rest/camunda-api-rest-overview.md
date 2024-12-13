@@ -11,7 +11,7 @@ Ensure you [authenticate](./camunda-api-rest-authentication.md) before accessing
 :::
 
 :::note
-The Camunda 8 REST API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md), which may still appear as such in your XML content).
+The Camunda 8 REST API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as such in your XML content).
 :::
 
 ## Context paths

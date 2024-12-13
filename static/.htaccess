@@ -96,7 +96,7 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 #---------------------------------------------------------------------------------
 
 # Move migrating to Zeebe user tasks
-RewriteRule ^docs/next/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
 RewriteRule ^docs/8.6/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/8.6/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
 
