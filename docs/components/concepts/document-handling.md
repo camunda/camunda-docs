@@ -14,7 +14,7 @@ Whether you are working across Connectors, Modeler, Forms, Operate, or Tasklist,
 - Support for the local file system as a storage option for development and testing purposes to set up and manage documents in local environments.
 - Preview, track, and manage documents associated with process instances.
 
-Below, learn about capabilities with document handling for each related component:
+Below, learn about capabilities of document handling for each related component:
 
 ## Console
 
