@@ -1,10 +1,10 @@
 ---
 id: zeebe-api-tutorial
 title: Tutorial
-description: "New to the Zeebe API? Step through our tutorial to assign and unassign a user to and from a Zeebe user task."
+description: "New to the Zeebe API? Step through our tutorial to assign and unassign a user to and from a Camunda user task."
 ---
 
-In this tutorial, we'll step through examples to highlight the capabilities of the Zeebe API, such as assigning and unassigning a user to and from a Zeebe user task.
+In this tutorial, we'll step through examples to highlight the capabilities of the Zeebe API, such as assigning and unassigning a user to and from a job worker-based user task managed by Camunda, also known as a Camunda user task.
 
 ## Prerequisites
 
@@ -34,17 +34,17 @@ Examine the existing `.env.example` file for an example of how your `.env` file 
 
 :::note
 
-In this tutorial, we will execute arguments to assign and unassign a user to and from a Zeebe user task. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
+In this tutorial, we will execute arguments to assign and unassign a user to and from a Camunda user task. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
 
 :::
 
-## Assign a Zeebe user task (POST)
+## Assign a Camunda user task (POST)
 
 :::note
-In this tutorial, you will capture a **Zeebe user task** ID to assign and unassign users in this API. Camunda 8.5 introduced this new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type, and these Zeebe user tasks are different from job worker-based user tasks. See more details on task type differences in the [migrating to Zeebe user tasks documentation](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md#task-type-differences).
+In this tutorial, you will capture a **Camunda user task** ID to assign and unassign users in this API. Camunda 8.5 introduced this new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type, and these Camunda user tasks are different from job worker-based user tasks. See more details on task type differences in the [migrating to Camunda user tasks documentation](/apis-tools/migration-manuals/migrate-to-Camunda-user-tasks.md#task-type-differences).
 :::
 
-First, let's script an API call to assign a Zeebe user task.
+First, let's script an API call to assign a Camunda user task.
 
 To do this, take the following steps:
 
@@ -71,7 +71,7 @@ async function assignUser([userTaskKey, assignee]) {
 
 `const zeebeApiUrl = process.env.ZEEBE_BASE_URL`
 
-5. On the next line, script the API endpoint to assign a Zeebe user task.:
+5. On the next line, script the API endpoint to assign a Camunda user task.:
 
 ```javascript
 const url = `${ZeebeApiUrl}/user-tasks/${userTaskKey}/assignment`;
@@ -114,7 +114,7 @@ try {
 }
 ```
 
-8. In your terminal, run `node cli.js zeebe assign <task id> <assignee@assignee.com>`, where `<task id>` is the Zeebe user task ID you've captured from Tasklist, and `<assignee@assignee.com>` is the assignee's email address. Include your own email address if you would like to see these results in your user interface.
+1. In your terminal, run `node cli.js zeebe assign <task id> <assignee@assignee.com>`, where `<task id>` is the Camunda user task ID you've captured from Tasklist, and `<assignee@assignee.com>` is the assignee's email address. Include your own email address if you would like to see these results in your user interface.
 
 :::note
 This `assign` command is connected to the `assignUser` function at the bottom of the `zeebe.js` file, and executed by the `cli.js` file. While we will assign and unassign users in this tutorial, you may add additional arguments depending on the API calls you would like to make.
@@ -122,9 +122,9 @@ This `assign` command is connected to the `assignUser` function at the bottom of
 
 If you have a valid user and task ID, the assignment will now output. If you have an invalid API name or action name, or no arguments provided, or improper/insufficient credentials configured, an error message will output as outlined in the `cli.js` file. If no action is provided, it will default to "assign" everywhere, except when unassigning a user.
 
-## Unassign a Zeebe user task (DELETE)
+## Unassign a Camunda user task (DELETE)
 
-To unassign a user from a Zeebe user task, you can use the same Zeebe user task ID from the previous exercise and take the following steps:
+To unassign a user from a Camunda user task, you can use the same Camunda user task ID from the previous exercise and take the following steps:
 
 1. Outline your function, similar to the steps above:
 
@@ -171,7 +171,7 @@ try {
 }
 ```
 
-4. In your terminal, run `node cli.js zeebe unassign <task id>`, where `<task id>` is the Zeebe user task ID.
+4. In your terminal, run `node cli.js zeebe unassign <task id>`, where `<task id>` is the Camunda user task ID.
 
 ## If you get stuck
 

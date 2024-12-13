@@ -10,6 +10,10 @@ The Camunda 8 REST API is a REST API designed to interact with a Camunda 8 clust
 Ensure you [authenticate](./camunda-api-rest-authentication.md) before accessing the Camunda 8 REST API.
 :::
 
+:::note
+The Camunda 8 REST API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md), which may still appear as such in your XML content).
+:::
+
 ## Context paths
 
 For SaaS: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`, and for Self-Managed installations: `http://localhost:8080/v2/`.
