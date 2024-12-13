@@ -57,8 +57,8 @@ When using Java, most customers use Spring Boot. While this is a common setup fo
 ### Technical setup using Spring
 
 :::caution
-Spring support with Zeebe Process Test uses the community-supported Spring Zeebe SDK.
-Spring support is not available for Camunda 8.6+.
+Spring support with Zeebe Process Test uses the community-maintained project Spring Zeebe.
+The new Camunda Spring SDK (Camunda 8.6+) is not supported. You could still use the testing library but without hooking into the Spring lifecycle.
 :::
 
 :::caution JUnit 5
