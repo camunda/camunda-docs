@@ -18,15 +18,6 @@ For example, you might use IDP to extract data from invoices and other document 
 
 <img src={IdpOverviewImg} alt="An overview of intelligent document processing" />
 
-### Supported documents
-
-- IDP currently only supports data extraction and processing of PDF documents.
-- PDF documents must not be password protected.
-
-### Document storage
-
-Uploaded documents are stored in Web Modeler, not your cluster.
-
 ## Get started with IDP
 
 To start using IDP in your processes:
@@ -35,8 +26,9 @@ To start using IDP in your processes:
 
 1. Create and publish an IDP project:
 
-   - Create a [Document extraction](idp/idp-document-extraction.md) project to identify and extract data from a single type of document (for example, an invoice).
-   - Create a [Document automation](idp/idp-document-automation.md) project to automatically extract data from larger, more complex documents (for example, a multi-page PDF document made up of many types of documents and data). This project type is based on and requires one or more linked document extraction project(s).
+   - Create a [document extraction](idp/idp-document-extraction.md) project to identify and extract data from a single type of document (for example, an invoice).
+
+   - Create a [document automation](idp/idp-document-automation.md) project to automatically extract data from larger, more complex documents (for example, a multi-page PDF document made up of many types of documents and data). This project type is based on and requires one or more linked document extraction project(s).
 
 1. [Integrate IDP into your processes](idp/idp-integrate.md) by adding your published projects to a BPMN diagram.
 
@@ -47,4 +39,6 @@ To start using IDP in your processes:
 
 :::
 
-## IDP for Self-Managed
+## Configure IDP for Self-Managed
+
+What is the path for Self-Managed?

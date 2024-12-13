@@ -184,7 +184,6 @@ module.exports = {
                 id: "components/modeler/web-modeler/idp",
               },
               items: [
-                "components/modeler/web-modeler/idp/idp-key-concepts",
                 "components/modeler/web-modeler/idp/idp-applications",
                 {
                   type: "category",
@@ -200,6 +199,8 @@ module.exports = {
                 },
                 "components/modeler/web-modeler/idp/idp-document-automation",
                 "components/modeler/web-modeler/idp/idp-integrate",
+                "components/modeler/web-modeler/idp/idp-key-concepts",
+                "components/modeler/web-modeler/idp/idp-reference",
               ],
             },
             {
