@@ -109,7 +109,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [General changes](#general-changes).
+- Response structure changes as outlined in [general changes](#general-changes).
 - The attribute `id` renamed to `userTaskKey`.
 - The attribute `taskDefinitionId` renamed to `elementId`.
 - The attribute `taskState` renamed to `state`.
@@ -120,7 +120,7 @@ The following conventions apply to all attributes:
   - `processDefinitionVersion`
 - The following attributes were removed:
   - `isFirst` - Used to identify if the task was the first in the process.
-  - `variables` - Use Search Variables in order to retrieve variables from a user task.
+  - `variables` - Use search variables to retrieve variables from a user task.
   - `implementation` - On V2, only user tasks are returned.
   - `isFormEmbedded` - User tasks do not support embedded forms.
   - `formVersion` - For user tasks, use the `formKey` to retrieve form data.
@@ -132,7 +132,7 @@ The following conventions apply to all attributes:
 
 ---
 
-#### Get User Task
+#### Get user task
 
 - **V1 endpoint**: `GET /v1/tasks/{taskId}`
 - **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}`
@@ -152,14 +152,14 @@ No input adjustments.
 
 <TabItem value='output-adjustments'>
 
-Same output adjustments as **Search Tasks**.
+Same output adjustments as **Search tasks**.
 
 </TabItem>
 </Tabs>
 
 ---
 
-#### Assign User Task
+#### Assign user task
 
 - **V1 endpoint**: `PATCH /v1/tasks/{taskId}/assign`
 - **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/assignment`
@@ -180,7 +180,7 @@ Same output adjustments as **Search Tasks**.
 
 <TabItem value='output-adjustments'>
 
-- V1 returned `200` with the User Task body
+- V1 returned `200` with the user task body
 - V2 returns `204` (No Content)
 
 </TabItem>
@@ -188,7 +188,7 @@ Same output adjustments as **Search Tasks**.
 
 ---
 
-#### Unassign User Task
+#### Unassign user task
 
 - **V1 endpoint**: `PATCH /v1/tasks/{taskId}/unassign`
 - **V2 endpoint**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
@@ -208,7 +208,7 @@ No input adjustments.
 
 <TabItem value='output-adjustments'>
 
-- V1 returned `200` with the User Task body
+- V1 returned `200` with the user task body
 - V2 returns `204` (No Content)
 
 </TabItem>
@@ -216,7 +216,7 @@ No input adjustments.
 
 ---
 
-#### Complete User Task
+#### Complete user task
 
 - **V1 endpoint**: `PATCH /v1/tasks/{taskId}/complete`
 - **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/completion`
@@ -236,7 +236,7 @@ No input adjustments.
 
 <TabItem value='output-adjustments'>
 
-- V1 returned `200` with the User Task body
+- V1 returned `200` with the user task body
 - V2 returns `204` (No Content)
 
 </TabItem>
@@ -244,7 +244,7 @@ No input adjustments.
 
 ---
 
-#### Save Task Draft Variables
+#### Save task draft variables
 
 - **V1 endpoint**: `POST /v1/tasks/{taskId}/variables`
 - **V2 endpoint**: Not supported
@@ -271,7 +271,7 @@ Not applicable, as this feature is not supported in V2.
 
 ---
 
-#### Update User Task
+#### Update user task
 
 - **V1 endpoint**: No direct V1 equivalent
 - **V2 endpoint**: `PATCH /v2/user-tasks/{userTaskKey}`
@@ -291,15 +291,14 @@ This is a new endpoint in V2, no V1 adjustments.
 
 <TabItem value='output-adjustments'>
 
-Refer to the documentation for which attributes can be updated:  
-[Update User Task Documentation](docs/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx)
+Refer to [the documentation](docs/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx) for which attributes can be updated:
 
 </TabItem>
 </Tabs>
 
 ---
 
-#### Search Variables by a Task
+#### Search variables by a task
 
 - **V1 endpoint**: `POST /v1/tasks/{taskId}/variables/search`
 - **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}/variables`
@@ -330,7 +329,7 @@ Refer to the documentation for which attributes can be updated:
 
 ### Forms
 
-#### Get Form
+#### Get form
 
 - **V1 endpoint**: `GET /v1/forms/{formId}`
 - **V2 endpoints**:
@@ -362,7 +361,7 @@ Refer to the documentation for which attributes can be updated:
 
 ### Variables
 
-#### Get Variable by ID
+#### Get variable by ID
 
 - **V1 endpoint**: `GET /v1/variables/{variableId}`
 - **V2 endpoint**: `POST /v2/variables/search`
