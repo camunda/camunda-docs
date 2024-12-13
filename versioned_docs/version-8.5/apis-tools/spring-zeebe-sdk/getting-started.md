@@ -129,6 +129,14 @@ zeebe.client.connection-mode=CLOUD
 zeebe.client.connection-mode=ADDRESS
 ```
 
+### Configuring OAuth Scope (Optional)
+
+The OAuth scope can be configured via the following [client environment variable](self-managed/zeebe-deployment/security/client-authorization.md#environment-variables) only:
+
+```
+ZEEBE_TOKEN_SCOPE=xxx
+```
+
 ## Obtain the Zeebe client
 
 You can inject the Zeebe client and work with it to create new workflow instances, for example:
