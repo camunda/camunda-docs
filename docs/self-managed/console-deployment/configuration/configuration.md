@@ -5,10 +5,6 @@ sidebar_label: "Overview"
 description: "Read details on the configuration variables of Console Self-Managed."
 ---
 
-:::note
-Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
-:::
-
 Console Self-Managed can be configured using environment variables and configuration parameters.
 
 :::note
@@ -23,10 +19,10 @@ Underscores in environment variables correspond to configuration file key levels
 | `KEYCLOAK_INTERNAL_BASE_URL`                    | Internal Base URL for Keycloak                                                                                                                                                                                                                                                     | http://camunda-platform-keycloak:80/auth |
 | `KEYCLOAK_REALM`                                | Realm for Keycloak                                                                                                                                                                                                                                                                 | camunda-platform                         |
 | `CAMUNDA_IDENTITY_AUDIENCE`                     | Audience for Console client                                                                                                                                                                                                                                                        | console                                  |
-| `CAMUNDA_IDENTITY_CLIENT_ID`                    | Client Id for Console client                                                                                                                                                                                                                                                       | console                                  |
+| `CAMUNDA_IDENTITY_CLIENT_ID`                    | Client ID for Console client                                                                                                                                                                                                                                                       | console                                  |
 | `CAMUNDA_CONSOLE_CONTEXT_PATH`                  | Context path for Console                                                                                                                                                                                                                                                           | console                                  |
 | `CAMUNDA_CONSOLE_CUSTOMERID`                    | Unique identifier of the customer                                                                                                                                                                                                                                                  | `customer-id`                            |
-| `CAMUNDA_CONSOLE_INSTALLATIONID`                | Unique installation id of the current customer installation                                                                                                                                                                                                                        | `installation-id`                        |
+| `CAMUNDA_CONSOLE_INSTALLATIONID`                | Unique installation ID of the current customer installation                                                                                                                                                                                                                        | `installation-id`                        |
 | `CAMUNDA_CONSOLE_TELEMETRY`                     | Telemetry config for Console Self-Managed: `disabled`, `online`, or `download`                                                                                                                                                                                                     | `online`                                 |
 | `CAMUNDA_CONSOLE_DISABLE_AUTH`                  | Disables authentication for Console. With this option, set users don't have to log in to use Console and API requests can be executed without an Authorization header. <br /> By disabling authentication all `CAMUNDA_IDENTITY`, variables won't be used.                         | `true`                                   |
 | `CAMUNDA_LICENSE_KEY`                           | Your Camunda 8 license key, if your installation requires a license. For Helm installations, license keys can be configured globally in your `values.yaml` file. See the [Helm installation documentation](/self-managed/setup/install.md#configure-license-key) for more details. | N/A                                      |
@@ -59,11 +55,13 @@ To enable usage collection, configure the parameters described in the next secti
 
 To enable telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker username) needed to send telemetry data to Camunda.
 
-| Parameter        | Description                                                                         | Example value   |
-| ---------------- | ----------------------------------------------------------------------------------- | --------------- |
-| `customerId`     | Unique identifier of the customer. This is also a Camunda Docker registry user name | `customername`  |
-| `installationId` | Unique installation id of the current customer installation                         | `my-deployment` |
-| `telemetry`      | Telemetry config for Console Self-Managed: `disabled`, `online` or `download`       | `online`        |
+| Parameter                            | Description                                                                                                                                          | Example value                 |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `customerId`                         | Unique identifier of the customer. This is also a Camunda Docker registry username.                                                                  | `customername`                |
+| `installationId`                     | Unique installation ID of the current customer installation.                                                                                         | `my-deployment`               |
+| `telemetry`                          | Telemetry config for Console Self-Managed: `disabled`, `online`, or `download`.                                                                      | `online`                      |
+| `managed.releases.tags`              | Assign cluster tags to indicate what type of cluster it is. Default tags are `dev`, `stage`, `test`, or `prod`, but users can assign any custom tag. | `- dev` (list of strings)     |
+| `managed.releases.custom-properties` | List of custom properties users can add to their cluster with custom descriptions and custom links on the cluster details page.                      | See custom properties section |
 
 Console environment variables could be set in Helm. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 For example:
@@ -79,12 +77,118 @@ console:
       value: online
 ```
 
+### Override configuration parameters
+
+Configuration parameters formerly replaced the complete configuration. Even if you only changed the `customerId`, the complete configuration still had to be added.
+
+This is no longer the case with the override parameters. A subset of parameters can be set so individual parameters can be adjusted. If a parameter must be changed for a specific cluster, the `name` and `namespace` fields must be set with the exact values so correlations can be made accordingly.
+
+#### Example
+
+Given the following configuration provided by Helm:
+
+```yaml
+camunda:
+  console:
+    customerId: customer-id
+    installationId: camunda-platform-id-dev-console-sm-main
+    telemetry: disabled
+    managed:
+      method: plain
+      releases:
+        - name: camunda-platform
+          namespace: camunda-platform-namespace
+          version: 9.1.2
+          components:
+            - name: Console
+              id: console
+              version: ...
+              url: https://...
+              readiness: https://...
+              metrics: https://...
+            - name: Keycloak
+              id: keycloak
+              version: ...
+              url: https://...
+            - name: Identity
+              id: identity
+              version: ...
+              url: https://...
+              readiness: https://...
+              metrics: https://...
+            - name: WebModeler WebApp
+              id: webModelerWebApp
+              version: ...
+              url: https://...
+            - name: Zeebe Gateway
+              id: zeebeGateway
+              version: ...
+              urls:
+                grpc: grpc://...
+                http: https://...
+              readiness: https://...
+              metrics: https://...
+            - name: Zeebe
+              id: zeebe
+              version: ...
+```
+
+The following example of an `overrideConfiguration` changes the `customerId` and adds `tags` and `custom-properties` for the cluster with name `camunda-platform` in namespace `camunda-platform-namespace`:
+
+```yaml
+console:
+  overrideConfiguration:
+    camunda:
+      console:
+        customerId: "new-customer-id"
+        managed:
+          releases:
+            - name: camunda-platform
+              namespace: camunda-platform-namespace
+              tags:
+                - production
+              custom-properties:
+                - description: "This is a custom description of the cluster."
+                  links:
+                    - name: "Camunda"
+                      url: "https://camunda.com"
+                    - name: "Camunda Docs"
+                      url: "https://docs.camunda.io"
+                    - name: "Grafana"
+                      url: "https://..."
+```
+
+### Custom properties
+
+Custom properties are useful to add custom information to the **Cluster details** page in Console. A custom property contains a description and multiple links.
+
+The following example shows one custom property for a cluster:
+
+```yaml
+console:
+  overrideConfiguration:
+    camunda:
+      console:
+        customerId: "new-customer-id"
+        managed:
+          releases:
+            - name: camunda-platform
+              namespace: camunda-platform
+              custom-properties:
+                - description: "Useful links to Camunda resources."
+                  links:
+                    - name: "Camunda Blog"
+                      url: "https://camunda.com/blog/"
+                    - name: "Camunda Docs"
+                      url: "https://docs.camunda.io"
+```
+
 ## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
 
 By default, Console uses Keycloak to provide authentication.
 You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/setup/guides/connect-to-an-oidc-provider.md).
 
-## Montioring
+## Monitoring
 
 To help understand how Console operates, we expose the following endpoints by default:
 

@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 All Camunda 8 REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
-## Generating a token
+## Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -21,7 +21,7 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
 
 1. [Create client credentials](/guides/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
 2. Add permissions to this client for **Zeebe**.
-3. Upon creating the client, capture the following values required to generate a token:
+3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    | Name                     | Environment variable name        | Default value                                |
    | ------------------------ | -------------------------------- | -------------------------------------------- |
@@ -31,7 +31,7 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
    | Audience                 | `ZEEBE_TOKEN_AUDIENCE`           | `zeebe.camunda.io`                           |
    | Zeebe REST Address       | `ZEEBE_REST_ADDRESS`             | -                                            |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::tip
+   :::caution
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
    :::
 4. Execute an authentication request to the token issuer:
@@ -43,7 +43,7 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
        --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
        --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -53,7 +53,7 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
@@ -70,7 +70,7 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
    --data-urlencode "client_secret=${CLIENT_SECRET}" \
    --data-urlencode 'grant_type=client_credentials'
    ```
-5. A successful authentication response looks like the following:
+   A successful authentication response looks like the following:
    ```json
    {
      "access_token": "<TOKEN>",
@@ -80,13 +80,13 @@ All Camunda 8 REST API requests require authentication. To authenticate, generat
      "not-before-policy": 0
    }
    ```
-6. Capture the value of the `access_token` property and store it as your token.
+5. Capture the value of the `access_token` property and store it as your token.
 
 </TabItem>
 
 </Tabs>
 
-## Using a token
+## Use a token
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
@@ -121,7 +121,7 @@ curl --header "Authorization: Bearer ${TOKEN}" \
      ${ZEEBE_REST_ADDRESS}/v2/topology
 ```
 
-A successful response includes [information about the cluster](/apis-tools/camunda-api-rest/specifications/get-cluster-topology.api.mdx). For example:
+A successful response includes [information about the cluster](/apis-tools/camunda-api-rest/specifications/get-topology.api.mdx). For example:
 
 ```json
 {

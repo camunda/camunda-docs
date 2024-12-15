@@ -8,7 +8,7 @@ The supported environments page lists browsers, operating systems, clients, depl
 
 **If the particular technology is not listed, we cannot resolve issues caused by the usage of that unlisted technology.**
 
-You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/contact) to work with Consulting services.
+You may [raise a feature request](/reference/contact.md) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/reference/contact.md) to work with Consulting services.
 
 Recommendations are denoted with [recommended], however, other listed options are supported as well.
 
@@ -30,7 +30,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Desktop Modeler
 
 - Windows 10 / 11
-- Mac OS 12 / 13 / 14
+- Mac OS 12 / 13 / 14 / 15
 - Ubuntu LTS (latest)
 
 ## Clients
@@ -49,7 +49,7 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premise). However, we officially test and support a specific list of platforms.
+With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 

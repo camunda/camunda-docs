@@ -42,20 +42,20 @@ attribute on the `decision` element.
 
 ![Decision Id](assets/decision-literal-expression/decision-id.png)
 
-The id is the technical identifier of the decision. It is set in the `id`
+The ID is the technical identifier of the decision. It is set in the `id`
 attribute on the `decision` element.
 
-Each decision should have an unique id when it is deployed to Camunda.
+Each decision should have an unique ID when it is deployed to Camunda.
 
 :::caution
 
-The decision id may not contain any special characters or symbols (e.g. whitespace, dashes, etc.).
+The decision ID may not contain any special characters or symbols (e.g. whitespace, dashes, etc.).
 
-The decision id can be any alphanumeric string including the `_` symbol. For a combination of words, it's recommended to
+The decision ID can be any alphanumeric string including the `_` symbol. For a combination of words, it's recommended to
 use the `camelCase` or the `snake_case` format. The `kebab-case` format is not allowed because it contains the
 operator `-`.
 
-If the decision id contain a special character or symbol then the decision result can't be accessed in
+If the decision ID contain a special character or symbol then the decision result can't be accessed in
 a [dependent decision](decision-requirements-graph.md#required-decisions).
 
 :::
@@ -116,7 +116,7 @@ a [dependent decision](decision-requirements-graph.md#required-decisions).
 
 :::tip
 
-It is recommended to use the decision id as the variable name.
+It is recommended to use the decision ID as the variable name.
 
 In contrast to decision tables, the result of a decision literal expression can be accessed in
 a [dependent decision](decision-requirements-graph.md#required-decisions) by its variable name instead of its decision

@@ -3,16 +3,18 @@ const { unsupportedVersions } = require("./src/versions");
 
 const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
 
+const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
+
 module.exports = {
   title: "Camunda 8 Docs",
   tagline:
     "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed.",
   // url: "https://camunda-cloud.github.io",
-  url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
+  url: docsSiteUrl,
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
   customFields: {
-    canonicalUrlRoot: "https://docs.camunda.io",
+    canonicalUrlRoot: docsSiteUrl,
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -23,23 +25,14 @@ module.exports = {
   // do not delete the following 'noIndex' line as it is modified for production
   noIndex: true,
   plugins: [
-    //        ["@edno/docusaurus2-graphql-doc-generator",
-    //          {
-    //            schema: "http://localhost:8080/tasklist/graphql",
-    //            rootPath: "./docs/", // docs will be generated under (rootPath/baseURL)
-    //            baseURL: "apis-tools/tasklist-api",
-    //            linkRoot: "/docs/",
-    //            loaders: {
-    //              UrlLoader: "@graphql-tools/url-loader"
-    //            }
-    //          },
-    //        ],
     // This custom Osano plugin must precede the gtm-plugin.
     "./static/plugins/osano",
     [
-      require.resolve("docusaurus-gtm-plugin"),
+      "./static/plugins/gtm",
       {
-        id: "GTM-KQGNSTS", // GTM Container ID
+        containerId: "GTM-KQGNSTS",
+        tagManagerUrl:
+          process.env.TAG_MANAGER_URL || "https://ssgtm.camunda.io",
       },
     ],
     "./static/plugins/bpmn-js",
@@ -53,8 +46,12 @@ module.exports = {
         sidebarPath: require.resolve("./optimize_sidebars.js"),
         editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
         versions: {
+          "3.14.0": {
+            label: "8.6 / 3.14.0",
+          },
           "3.13.0": {
             label: "8.5 / 3.13.0",
+            banner: "none",
           },
           "3.12.0": {
             label: "8.4 / 3.12.0",
@@ -62,13 +59,6 @@ module.exports = {
           },
           "3.11.0": {
             label: "8.3 / 3.11.0",
-            banner: "none",
-          },
-          "3.10.0": {
-            banner: "none",
-          },
-          // surprising, yes, but true: 3.9 should show unsupported banner, but 3.7 should not.
-          "3.7.0": {
             banner: "none",
           },
         },
@@ -181,6 +171,11 @@ module.exports = {
     },
   ],
   themeConfig: {
+    docs: {
+      sidebar: {
+        autoCollapseCategories: true,
+      },
+    },
     announcementBar: {
       id: "camunda8",
       content:
@@ -189,6 +184,7 @@ module.exports = {
       textColor: "#000",
       isCloseable: true,
     },
+
     prism: {
       additionalLanguages: ["java", "protobuf", "csharp"],
     },
@@ -275,7 +271,7 @@ module.exports = {
             },
             {
               label: "Contact",
-              to: "contact",
+              to: "docs/reference/contact",
             },
           ],
         },
@@ -420,13 +416,13 @@ module.exports = {
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
+            8.5: {
+              banner: "none",
+            },
             8.4: {
               banner: "none",
             },
             8.3: {
-              banner: "none",
-            },
-            8.2: {
               banner: "none",
             },
           },
@@ -444,14 +440,12 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/1.3/**",
-            "/docs/8.2/**",
             "/docs/8.3/**",
             "/docs/8.4/**",
-            "/optimize/3.7.0/**",
-            "/optimize/3.10.0/**",
+            "/docs/8.5/**",
             "/optimize/3.11.0/**",
             "/optimize/3.12.0/**",
+            "/optimize/3.13.0/**",
             "/optimize/next/**",
           ],
         },

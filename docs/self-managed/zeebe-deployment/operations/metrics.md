@@ -31,7 +31,7 @@ Metrics are exported by default. To enable execution metrics, set the `ZEEBE_BRO
 
 ## Connect Prometheus
 
-As explained, Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
+Zeebe exposes the metrics over an HTTP server. The default port is `9600`.
 
 Add the following entry to your `prometheus.yml`:
 
@@ -51,7 +51,7 @@ All Zeebe-related metrics have a `zeebe_`-prefix.
 
 Most metrics have the following common label:
 
-- `partition`: Cluster-unique id of the partition
+- `partition`: Cluster-unique ID of the partition
 
 :::note
 Both brokers and gateways expose their respective metrics. The brokers have an optional metrics exporter that can be enabled for maximum insight.

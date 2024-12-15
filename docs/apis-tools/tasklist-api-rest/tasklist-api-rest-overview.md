@@ -2,8 +2,12 @@
 id: tasklist-api-rest-overview
 title: "Overview"
 sidebar_position: 1
-description: "Build applications for human-centered processes by querying human tasks, assigning users, and completing tasks with the Tasklist API."
+description: "Build applications for human-centered processes by querying user tasks, assigning users, and completing tasks with the Tasklist API."
 ---
+
+:::note
+To migrate from Camunda's V1 component REST APIs to the V2 [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), review [migrating to the Camunda 8 API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+:::
 
 ## Introduction
 
@@ -18,7 +22,7 @@ Ensure you [authenticate](./tasklist-api-rest-authentication.md) before accessin
 For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
 
 :::note
-Find your region and cluster id under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
+Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 
 For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Tasklist component.
 :::
@@ -34,7 +38,7 @@ A detailed API description is also available as a Swagger UI at `https://${base-
 For SaaS: `https://${REGION}.tasklist.camunda.io:443/${CLUSTER_ID}/swagger-ui/index.html`, and for Self-Managed installations: [`http://localhost:8080/swagger-ui/index.html`](http://localhost:8080/swagger-ui/index.html).
 
 :::note
-Find your region and cluster id under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
+Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 :::
 
 ## API in Postman

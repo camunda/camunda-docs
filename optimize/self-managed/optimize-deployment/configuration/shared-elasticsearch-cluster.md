@@ -18,10 +18,6 @@ The following illustration demonstrates this use case with two Optimize instance
 Changing the value of `*.settings.index.prefix` after an instance was already running results in new indexes being created with the new prefix value. There is no support in migrating data between indexes based on different prefixes.
 :::
 
-:::note
-OpenSearch support is currently only available for `ccsm` mode. Moreover, OpenSearch support in Optimize is limited to data import and the raw data report. The remaining functionality will be delivered with upcoming patches.
-:::
-
 \* Elasticsearch index prefix settings path: `es.settings.index.prefix`<br/> \* OpenSearch index prefix settings path: `opensearch.settings.index.prefix`
 
 ![Shared Elasticsearch Cluster Setup](img/shared-elasticsearch-cluster.png)

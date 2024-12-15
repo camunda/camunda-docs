@@ -12,7 +12,7 @@ The events **Desktop Modeler** sends share a similar payload which usually (but 
 
 - **event name**: The name of the event triggered (e.g. `diagram:opened`)
 - **application version**: The version of Desktop Modeler being used (e.g. Version 5.0.0)
-- **editor id**: A randomly generated id assigned to your Desktop Modeler installation
+- **editor id**: A randomly generated ID assigned to your Desktop Modeler installation
 
 ## Definition of events
 
@@ -106,7 +106,7 @@ Currently, these containers are:
 
 The event supplies:
 
-- The `parent` container id to locate the application section
+- The `parent` container ID to locate the application section
 - The button label or link text (generalized as label) for identification of what was specifically clicked
 - A type to differentiate buttons, internal links, and external links
 - The link target (optional for external links)

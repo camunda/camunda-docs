@@ -1,7 +1,7 @@
 ---
 id: orchestrate-apis
 title: Get started with API orchestration
-sidebar_label: Get started with API orchestration
+sidebar_label: APIs
 description: "Use Connectors to build low code process automation solutions"
 keywords:
   [api endpoints, orchestration, getting started, user guide, connectors]
@@ -9,10 +9,10 @@ keywords:
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import clsx from "clsx";
-import SaasPrereqs from './react-components/saas-prerequisites.md'
+import SaasPrereqs from './react-components/\_saas-prerequisites.md'
 
 This guide will walk you through working with a REST Connector task as a first time Camunda 8 SaaS user. The REST Connector is a [protocol Connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md#protocol-connectors), where you can make a request to a REST API and use the response in the next steps of your process.
 
@@ -33,7 +33,7 @@ To use a **REST Connector** in your process, follow the steps below:
 
 1. Create a BPMN diagram. To do this, click **New project** within Modeler.
 2. Name your project and select **Create new > BPMN diagram**.
-3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use `API Orchestration Tutorial` for the name and `api-orchestration-tutorial` for the id.
+3. Give your model a descriptive name and ID. On the right side of the page, expand the **General** section of the properties panel to find the name and ID fields. For this guide, we'll use `API Orchestration Tutorial` for the name and `api-orchestration-tutorial` for the ID.
 4. Use Web Modeler to design a BPMN flow with a Connector. Create a Connector by dragging the rectangular task element from the palette, or click the existing start event and the displayed task element to the right of the start event.
 5. Change the task type by clicking the wrench icon and select **REST Outbound Connector** in the **Connectors** section. Alternatively, you can directly choose a **REST Outbound Connector** by using the context pad.
 

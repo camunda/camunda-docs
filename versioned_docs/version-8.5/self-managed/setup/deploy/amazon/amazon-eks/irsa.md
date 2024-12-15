@@ -55,7 +55,7 @@ Replace `<REGION>`, `<ACCOUNT-ID>`, `<DB-RESOURCE-ID>`, and `<DB-USERNAME>` with
   
   <TabItem value="aws-cli" label="AWS CLI">
 
-To create the AWS policy using the AWS CLI, you can use the `aws iam create-policy` command. Here’s an example:
+To create the AWS policy using the AWS CLI, use the `aws iam create-policy` command:
 
 ```bash
 aws iam create-policy \
@@ -86,7 +86,7 @@ Replace `<REGION>`, `<ACCOUNT-ID>`, `<DB-RESOURCE-ID>`, and `<DB-USERNAME>` with
 <Tabs>
   <TabItem value="terraform" label="Terraform" default>
 
-To assign the policy to a role for IAM role to service account mapping in Amazon EKS, you can use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks). Here’s an example configuration:
+To assign the policy to a role for IAM role to service account mapping in Amazon EKS, use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks):
 
 ```json
 module "aurora_role" {
@@ -114,7 +114,7 @@ This Terraform snippet creates a role that allows the service account `<AURORA-S
 
 To assign the policy to a role using the AWS CLI, follow these steps:
 
-1. **Create the IAM Role**:
+1. **Create the IAM role**:
 
 ```bash
 aws iam create-role \
@@ -138,7 +138,7 @@ aws iam create-role \
   }'
 ```
 
-2. **Attach the Policy to the Role**:
+2. **Attach the policy to the role**:
 
 ```bash
 aws iam attach-role-policy \
@@ -149,7 +149,7 @@ aws iam attach-role-policy \
   </TabItem>
 </Tabs>
 
-You need to annotate the service account with the `iam_role_arn`. Here is an example YAML configuration:
+Annotate the service account with the `iam_role_arn`:
 
 ```yaml
 apiVersion: v1
@@ -266,7 +266,7 @@ For additional details, refer to the [Camunda 8 Helm deployment documentation](/
 
 ### Web Modeler
 
-Since Web Modeler RestAPI uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
+As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Kubernetes configuration
@@ -388,7 +388,7 @@ Replace `<REGION>`, `<ACCOUNT-ID>`, and `<DOMAIN-NAME>` with the appropriate val
 
   <TabItem value="aws-cli" label="AWS CLI">
 
-To create an AWS policy for Amazon OpenSearch Service using the AWS CLI, you can use the `aws iam create-policy` command. Here’s an example:
+To create an AWS policy for Amazon OpenSearch Service using the AWS CLI, use the `aws iam create-policy` command:
 
 ```bash
 aws iam create-policy \
@@ -440,7 +440,7 @@ To assign the policy to a role for the IAM role to service account mapping in Am
 <Tabs>
   <TabItem value="terraform" label="Terraform" default>
 
-You can use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks). Here’s an example configuration:
+You can use a Terraform module like [iam-role-for-service-accounts-eks](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/latest/submodules/iam-role-for-service-accounts-eks):
 
 ```json
 module "opensearch_role" {
@@ -470,7 +470,7 @@ Annotate the service account with the `iam_role_arn` output.
 
 To assign the policy to a role using the AWS CLI, follow these steps:
 
-1. **Create the IAM Role**:
+1. **Create the IAM role**:
 
 ```bash
 aws iam create-role \
@@ -494,7 +494,7 @@ aws iam create-role \
   }'
 ```
 
-2. **Attach the Policy to the Role**:
+2. **Attach the policy to the role**:
 
 ```bash
 aws iam attach-role-policy \
@@ -505,7 +505,7 @@ aws iam attach-role-policy \
   </TabItem>
 </Tabs>
 
-You need to annotate the service account with the `iam_role_arn`. Here is an example YAML configuration:
+Annotate the service account with the `iam_role_arn`:
 
 ```yaml
 apiVersion: v1
@@ -538,8 +538,6 @@ There are different ways to configure the mapping within Amazon OpenSearch Servi
 
 To authorize the IAM role in OpenSearch for access, follow these steps:
 
-**_Note that this example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled._** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
-
 Use the following `curl` command to update the OpenSearch internal database and authorize the IAM role for access. Replace placeholders with your specific values:
 
 ```bash
@@ -561,6 +559,12 @@ curl -sS -u "<OS_DOMAIN_USER>:<OS_DOMAIN_PASSWORD>" \
 - Replace `<OS_DOMAIN_USER>` and `<OS_DOMAIN_PASSWORD>` with your OpenSearch domain admin credentials.
 - Replace `<OS_ENDPOINT>` with your OpenSearch endpoint URL.
 - Replace `<ROLE_NAME>` with the IAM role name created by Terraform, which is output by the `opensearch_role` module.
+
+:::note Security of basic auth usage
+
+**This example uses basic authentication (username and password), which may not be the best practice for all scenarios, especially if fine-grained access control is enabled.** The endpoint used in this example is not exposed by default, so consult your OpenSearch documentation for specifics on enabling and securing this endpoint.
+
+:::
 
 </details>
 
@@ -599,22 +603,6 @@ Don't forget to set the `serviceAccountName` of the deployment/statefulset to th
 :::
 
 ## Troubleshooting
-
-### Versions used
-
-This page was created based on the following versions available and may work with newer releases of mentioned software.
-
-| Software                                                                                                                                              | Version      |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| AWS Aurora PostgreSQL                                                                                                                                 | 13 / 14 / 15 |
-| [AWS JDBC Driver Wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper)                                                                       | 2.3.1        |
-| AWS OpenSearch                                                                                                                                        | 2.5          |
-| [AWS SDK Dependencies](#dependencies)                                                                                                                 | 2.21.x       |
-| KeyCloak                                                                                                                                              | 21.x / 22.x  |
-| [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/5.9.0)                                                                 | 5.29.0       |
-| [Terraform Amazon EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/19.15.3)                                            | 19.20.0      |
-| [Terraform IAM Roles Module](https://registry.terraform.io/modules/terraform-aws-modules/iam/aws/5.28.0/submodules/iam-role-for-service-accounts-eks) | 5.32.0       |
-| [Terraform PostgreSQL Provider](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs)                                              | 1.21.0       |
 
 ### Instance Metadata Service (IMDS)
 

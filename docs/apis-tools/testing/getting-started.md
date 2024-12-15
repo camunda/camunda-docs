@@ -11,13 +11,12 @@ import TabItem from "@theme/TabItem";
 
 CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https://java.testcontainers.org/). It provides a managed isolated runtime to execute your process tests on your local machine. The runtime uses the Camunda Docker images and includes the following components:
 
-- Zeebe
-- Operate
-- Tasklist
+- Camunda (Zeebe, Operate, Tasklist)
 - Connectors
+- Elasticsearch
 
 :::warning Disclaimer
-For Camunda 8.6, CPT is in an [alpha version](/reference/alpha-features.md#alpha), for preview, for example.
+For Camunda 8.6, CPT is in an [alpha version](/components/early-access/alpha/alpha-features.md#alpha).
 
 For a full-featured testing library, take a look at [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
 :::
@@ -198,13 +197,13 @@ io:
       test:
         # Change the version of the Camunda Docker image
         camundaVersion: 8.6.0
-        # Change the Zeebe Docker image
-        zeebe-docker-image-name: camunda/zeebe
-        # Set additional Zeebe environment variables
-        zeebe-env-vars:
+        # Change the Camunda Docker image
+        camunda-docker-image-name: camunda/camunda
+        # Set additional Camunda environment variables
+        camunda-env-vars:
           env_1: value_1
-        # Expose addition Zeebe ports
-        zeebeExposedPorts:
+        # Expose addition Camunda ports
+        camundaExposedPorts:
           - 4567
         # Enable Connectors
         connectors-enabled: true
@@ -275,12 +274,10 @@ public class MyProcessTest {
 The test runtime uses [SLF4J](https://www.slf4j.org/) as the logging framework. If needed, you can enable the logging for the following packages:
 
 - `io.camunda.process.test` - The test runtime
-- `tc.zeebe` - The Zeebe Docker container
-- `tc.operate` - The Operate Docker container
-- `tc.tasklist` - The Tasklist Docker container
+- `tc.camunda` - The Camunda Docker container
 - `tc.connectors` - The Connectors Docker container
 - `tc.elasticsearch` - The Elasticsearch Docker container
-- `org.testcontainers` - The Testconainers framework
+- `org.testcontainers` - The Testcontainers framework
 
 For most cases, the log level `warn` (warning) is sufficient.
 

@@ -66,7 +66,7 @@ in terms of tenant assignment, Operate - Zeebe connection must be secured. Check
 
 ### Troubleshooting multi-tenancy in Operate
 
-If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-latest/README.md#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
+If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.5/README.md#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
 
 If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/identity/what-is-identity.md), users will not have any tenant authorizations in Operate
 and will not be able to access the data of any tenants in Operate.
@@ -152,7 +152,7 @@ camunda.operate:
 To connect to a secured (https) OpenSearch instance, you normally need to only set the URL protocol
 part to `https` instead of `http`. A secured OpenSearch instance also needs `username` and `password`.
 
-To use AWS Credentials instead of basic auth when connecting to Amazon OpenSearch Services `awsEnabled` has to be set.
+To use AWS credentials instead of basic auth when connecting to Amazon OpenSearch Services, `awsEnabled` must be set.
 
 The other SSL settings should only be used in case of connection problems; for example, in disabling host verification.
 
@@ -172,7 +172,7 @@ Either set `host` and `port` (deprecated), or `url` (recommended).
 | camunda.operate.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch | -                     |
 | camunda.operate.opensearch.ssl.selfSigned      | Certificate was self-signed            | false                 |
 | camunda.operate.opensearch.ssl.verifyHostname  | Should the hostname be validated       | false                 |
-| camunda.operate.opensearch.awsEnabled          | Should AWS Credentials be used         | false                 |
+| camunda.operate.opensearch.awsEnabled          | Should AWS credentials be used         | false                 |
 
 #### Settings for shards and replicas
 

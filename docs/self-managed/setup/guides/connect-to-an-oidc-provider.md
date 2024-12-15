@@ -34,11 +34,14 @@ configuration](#component-specific-configuration) to ensure the components are c
 <h3>Steps</h3>
 
 1. In your OIDC provider, create an application for each of the components you want to connect. The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
-2. Make a note of the following values for each application you create:
+2. For all Components, ensure the appropriate application type is used:
+   - **Operate, Tasklist, Optimize, Identity:** Web applications requiring confidential access/a confidential client
+   - **Web Modeler, Console:** Single-page applications requiring public access/a public client
+3. Make a note of the following values for each application you create:
    - Client ID
    - Client secret
    - Audience
-3. Set the following environment variables for the component you are configuring an app for:
+4. Set the following environment variables for the component you are configuring an app for:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
 <TabItem value="env">
@@ -103,7 +106,7 @@ global:
 </TabItem>
 </Tabs>
 
-:::warning
+:::note
 Once set, you cannot update your initial claim name and value using environment or Helm values. You must change these values directly in the database.
 :::
 
@@ -123,8 +126,8 @@ Ensure you register a new application for each component.
 1. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each** component you would like to connect.
 2. Navigate to the new application's **Overview** page, and make note of the **Client ID**.
 3. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
-   - **Web**: Operate, Tasklist, Optimize
-   - **Single-page application**: Modeler
+   - **Web**: Operate, Tasklist, Optimize, Identity
+   - **Single-page application**: Modeler, Console
 4. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
 5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use.
 6. Set the following environment variables for the component you are configuring an app for:
@@ -135,8 +138,8 @@ Ensure you register a new application for each component.
 ```
     CAMUNDA_IDENTITY_TYPE=MICROSOFT
     CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
-    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
     CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
     CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 5>
     CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 2>
@@ -152,13 +155,13 @@ Ensure you register a new application for each component.
 global:
   identity:
     auth:
-      issuer: https://login.microsoftonline.com/<Tenant ID>/v2.0
+      issuer: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
       # this is used for container to container communication
-      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
+      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/oauth2/v2.0/token
+      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/discovery/v2.0/keys
       type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Tenant ID>/v2.0
+      publicIssuerUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
       identity:
         clientId: <Client ID from Step 2>
         existingSecret: <Client secret from Step 5>
@@ -184,7 +187,7 @@ global:
       zeebe:
         clientId: <Client ID from Step 2>
         audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 53>
+        existingSecret: <Client secret from Step 5>
         tokenScope: "<Client ID from Step 2>/.default"
       webModeler:
         clientId: <Client ID from Step 2>

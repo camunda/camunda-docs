@@ -32,7 +32,7 @@ You can create a new milestone either from your diagram or the milestone history
 
   ![milestones create via the breadcrumb menu](img/milestones/web-modeler-milestone-create-via-breadcrumb-highlight.png)
 
-- From the milestone history, hover over the the latest version in the **Milestones** panel and select **Create a new milestone**.
+- From the milestone history, hover over the draft in the **Milestones** panel and select **Create a new milestone**.
 
   ![milestones create via icon](img/milestones/web-modeler-milestone-create-via-icon-highlight.png)
 

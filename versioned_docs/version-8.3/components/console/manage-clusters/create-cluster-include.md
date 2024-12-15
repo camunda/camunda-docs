@@ -19,7 +19,7 @@ To deploy and run your process, you must create a cluster in Camunda 8.
 
 ## Development clusters
 
-Starter Plan users have one **development cluster**, with free execution for development included in their plan.
+Starter plan users have one **development cluster**, with free execution for development included in their plan.
 Deployment and execution of models (process instances, decision instances, and task users) is provided at no cost.
 Additional clusters can be purchased through your [billing reservations](/components/console/manage-plan/update-billing-reservations.md).
 

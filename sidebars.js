@@ -14,7 +14,7 @@ module.exports = {
         "guides/getting-started-java-spring",
         "guides/model-your-first-process",
         {
-          "By use case": [
+          "Orchestration use cases": [
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices",
@@ -33,7 +33,6 @@ module.exports = {
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/message-correlation",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
       ],
@@ -107,15 +106,12 @@ module.exports = {
         {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
-            "components/console/manage-clusters/rename-cluster",
-            "components/console/manage-clusters/resume-cluster",
-            "components/console/manage-clusters/update-cluster",
-            "components/console/manage-clusters/delete-cluster",
+            "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings",
           ],
         },
@@ -323,16 +319,19 @@ module.exports = {
             {
               AWS: [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
+                "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
                 "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
                 "components/connectors/out-of-the-box-connectors/aws-lambda",
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/easy-post",
+            "components/connectors/out-of-the-box-connectors/email",
             "components/connectors/out-of-the-box-connectors/github",
             "components/connectors/out-of-the-box-connectors/gitlab",
             {
@@ -340,6 +339,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/googledrive",
                 "components/connectors/out-of-the-box-connectors/google-maps-platform",
                 "components/connectors/out-of-the-box-connectors/google-sheets",
+                "components/connectors/out-of-the-box-connectors/google-gemini",
               ],
             },
             "components/connectors/out-of-the-box-connectors/hugging-face",
@@ -377,21 +377,7 @@ module.exports = {
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
-            {
-              "Update guide": [
-                "components/connectors/custom-built-connectors/update-guide/introduction",
-                "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
-                "components/connectors/custom-built-connectors/update-guide/090-to-0100",
-                "components/connectors/custom-built-connectors/update-guide/080-to-090",
-                "components/connectors/custom-built-connectors/update-guide/070-to-080",
-                "components/connectors/custom-built-connectors/update-guide/060-to-070",
-                "components/connectors/custom-built-connectors/update-guide/050-to-060",
-                "components/connectors/custom-built-connectors/update-guide/040-to-050",
-                "components/connectors/custom-built-connectors/update-guide/030-to-040",
-                "components/connectors/custom-built-connectors/update-guide/020-to-030",
-                "components/connectors/custom-built-connectors/update-guide/010-to-020",
-              ],
-            },
+            "components/connectors/custom-built-connectors/connector-template-generator",
           ],
         },
       ],
@@ -689,6 +675,38 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Early access",
+      link: {
+        type: "doc",
+        id: "components/early-access/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Experimental features",
+          items: [
+            "components/early-access/experimental/rpa/rpa-integration",
+            "components/early-access/experimental/rpa/rpa-framework-library",
+          ],
+        },
+        {
+          type: "category",
+          label: "Alpha features",
+          link: {
+            type: "doc",
+            id: "components/early-access/alpha/alpha-features",
+          },
+          items: [
+            "components/early-access/alpha/sap/sap-integration",
+            "components/early-access/alpha/sap/odata-connector",
+            "components/early-access/alpha/sap/rfc-connector",
+            "components/early-access/alpha/sap/btp-integration",
+          ],
+        },
+      ],
+    },
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",
@@ -795,66 +813,62 @@ module.exports = {
       ],
     },
     {
-      Clients: [
+      "Clients & SDKs": [
         {
-          "CLI client": [
-            "apis-tools/cli-client/index",
-            "apis-tools/cli-client/cli-get-started",
-          ],
-        },
-        {
-          "Go client (Deprecated)": [
-            "apis-tools/go-client/index",
-            "apis-tools/go-client/go-get-started",
-            "apis-tools/go-client/job-worker",
-          ],
-        },
-        {
-          "Java client": [
-            "apis-tools/java-client/index",
-            "apis-tools/java-client/job-worker",
-            "apis-tools/java-client/logging",
-            "apis-tools/java-client/zeebe-process-test",
+          SDKs: [
+            "apis-tools/node-js-sdk",
             {
-              Examples: [
-                "apis-tools/java-client-examples/index",
-                "apis-tools/java-client-examples/process-deploy",
-                "apis-tools/java-client-examples/process-instance-create",
-                "apis-tools/java-client-examples/process-instance-create-nonblocking",
-                "apis-tools/java-client-examples/process-instance-create-with-result",
-                "apis-tools/java-client-examples/decision-evaluate",
-                "apis-tools/java-client-examples/job-worker-open",
-                "apis-tools/java-client-examples/data-pojo",
-                "apis-tools/java-client-examples/cluster-topology-request",
+              "Spring Zeebe": [
+                "apis-tools/spring-zeebe-sdk/getting-started",
+                "apis-tools/spring-zeebe-sdk/configuration",
               ],
             },
           ],
         },
         {
-          "Community clients": [
-            "apis-tools/community-clients/index",
+          Clients: [
             {
-              "Zeebe clients": [
-                "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/micronaut",
-                "apis-tools/community-clients/python",
-                "apis-tools/community-clients/ruby",
-                "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/quarkus",
+              "Java client": [
+                "apis-tools/java-client/index",
+                "apis-tools/java-client/job-worker",
+                "apis-tools/java-client/logging",
+                "apis-tools/java-client/zeebe-process-test",
+                {
+                  Examples: [
+                    "apis-tools/java-client-examples/index",
+                    "apis-tools/java-client-examples/process-deploy",
+                    "apis-tools/java-client-examples/process-instance-create",
+                    "apis-tools/java-client-examples/process-instance-create-nonblocking",
+                    "apis-tools/java-client-examples/process-instance-create-with-result",
+                    "apis-tools/java-client-examples/decision-evaluate",
+                    "apis-tools/java-client-examples/job-worker-open",
+                    "apis-tools/java-client-examples/data-pojo",
+                    "apis-tools/java-client-examples/cluster-topology-request",
+                  ],
+                },
               ],
             },
-          ],
-        },
-        "apis-tools/build-your-own-client",
-      ],
-    },
-    {
-      SDKs: [
-        "apis-tools/node-js-sdk",
-        {
-          "Spring Zeebe": [
-            "apis-tools/spring-zeebe-sdk/getting-started",
-            "apis-tools/spring-zeebe-sdk/configuration",
+            {
+              "Community clients": [
+                "apis-tools/community-clients/index",
+                {
+                  "Zeebe clients": [
+                    {
+                      "CLI client": [
+                        "apis-tools/community-clients/cli-client/index",
+                        "apis-tools/community-clients/cli-client/cli-get-started",
+                      ],
+                      "Go client": [
+                        "apis-tools/community-clients/go-client/index",
+                        "apis-tools/community-clients/go-client/go-get-started",
+                        "apis-tools/community-clients/go-client/job-worker",
+                      ],
+                    },
+                  ],
+                },
+                "apis-tools/build-your-own-client",
+              ],
+            },
           ],
         },
       ],
@@ -872,11 +886,29 @@ module.exports = {
         },
       ],
     },
+    {
+      "Migration manuals": [
+        "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-camunda-api",
+      ],
+    },
   ],
 
   Reference: [
     "reference/overview",
-    "reference/announcements",
+    {
+      type: "category",
+      label: "Announcements",
+      link: {
+        type: "doc",
+        id: "reference/announcements",
+      },
+      items: [
+        "reference/announcements/announcements-870",
+        "reference/announcements/announcements-860",
+        "reference/announcements/announcements-850",
+      ],
+    },
     {
       type: "category",
       label: "Release notes",
@@ -884,14 +916,18 @@ module.exports = {
         type: "doc",
         id: "reference/release-notes/release-notes",
       },
-      items: ["reference/release-notes/860", "reference/release-notes/850"],
+      items: [
+        "reference/release-notes/870",
+        "reference/release-notes/860",
+        "reference/release-notes/850",
+      ],
     },
+    "reference/contact",
     "reference/supported-environments",
     "reference/dependencies",
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
-    "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",
@@ -982,6 +1018,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/860-to-870",
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
@@ -1125,6 +1162,7 @@ module.exports = {
               },
               items: [
                 "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
+                "self-managed/zeebe-deployment/exporters/camunda-exporter",
                 "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                 "self-managed/zeebe-deployment/exporters/opensearch-exporter",
               ],
@@ -1294,94 +1332,144 @@ module.exports = {
 
             {
               "Migration & update": [
-                optimizeLink(
-                  "Instructions",
-                  "self-managed/optimize-deployment/migration-update/instructions/"
-                ),
-                optimizeLink(
-                  "Update notes (8.4/3.12 to 8.5/3.13)",
-                  "self-managed/optimize-deployment/migration-update/3.12_8.4-to-3.13_8.5/"
-                ),
-                optimizeLink(
-                  "Update notes (8.3/3.11 to 8.4/3.12)",
-                  "self-managed/optimize-deployment/migration-update/3.11_8.3-to-3.12_8.4/"
-                ),
-                optimizeLink(
-                  "Update notes (3.10 to 8.3/3.11)",
-                  "self-managed/optimize-deployment/migration-update/3.10-to-3.11_8.3/"
-                ),
-                optimizeLink(
-                  "Update notes (3.9.x to 3.10)",
-                  "self-managed/optimize-deployment/migration-update/3.9-to-3.10/"
-                ),
-                optimizeLink(
-                  "Update notes (3.9-preview-x to 3.9.x)",
-                  "self-managed/optimize-deployment/migration-update/3.9-preview-1-to-3.9/"
-                ),
-                optimizeLink(
-                  "Update notes (3.8.x to 3.9.x-preview-1)",
-                  "self-managed/optimize-deployment/migration-update/3.8-to-3.9-preview-1/"
-                ),
-                optimizeLink(
-                  "Update notes (3.7.x to 3.8.x)",
-                  "self-managed/optimize-deployment/migration-update/3.7-to-3.8/"
-                ),
-                optimizeLink(
-                  "Update notes (3.6 to 3.7.x)",
-                  "self-managed/optimize-deployment/migration-update/3.6-to-3.7/"
-                ),
-                optimizeLink(
-                  "Update notes (3.5 to 3.6)",
-                  "self-managed/optimize-deployment/migration-update/3.5-to-3.6/"
-                ),
-                optimizeLink(
-                  "Update notes (3.4 to 3.5)",
-                  "self-managed/optimize-deployment/migration-update/3.4-to-3.5/"
-                ),
-                optimizeLink(
-                  "Update notes (3.3 to 3.4)",
-                  "self-managed/optimize-deployment/migration-update/3.3-to-3.4/"
-                ),
-                optimizeLink(
-                  "Update notes (3.2 to 3.3)",
-                  "self-managed/optimize-deployment/migration-update/3.2-to-3.3/"
-                ),
-                optimizeLink(
-                  "Update notes (3.1 to 3.2)",
-                  "self-managed/optimize-deployment/migration-update/3.1-to-3.2/"
-                ),
-                optimizeLink(
-                  "Update notes (3.0 to 3.1)",
-                  "self-managed/optimize-deployment/migration-update/3.0-to-3.1/"
-                ),
-                optimizeLink(
-                  "Update notes (2.7 to 3.0)",
-                  "self-managed/optimize-deployment/migration-update/2.7-to-3.0/"
-                ),
-                optimizeLink(
-                  "Update notes (2.6 to 2.7)",
-                  "self-managed/optimize-deployment/migration-update/2.6-to-2.7/"
-                ),
-                optimizeLink(
-                  "Update notes (2.5 to 2.6)",
-                  "self-managed/optimize-deployment/migration-update/2.5-to-2.6/"
-                ),
-                optimizeLink(
-                  "Update notes (2.4 to 2.5)",
-                  "self-managed/optimize-deployment/migration-update/2.4-to-2.5/"
-                ),
-                optimizeLink(
-                  "Update notes (2.3 to 2.4)",
-                  "self-managed/optimize-deployment/migration-update/2.3-to-2.4/"
-                ),
-                optimizeLink(
-                  "Update notes (2.2 to 2.3)",
-                  "self-managed/optimize-deployment/migration-update/2.2-to-2.3/"
-                ),
-                optimizeLink(
-                  "Update notes (2.1 to 2.2)",
-                  "self-managed/optimize-deployment/migration-update/2.1-to-2.2/"
-                ),
+                {
+                  "Camunda 7": [
+                    optimizeLink(
+                      "Instructions",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/instructions/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.13 to 3.14)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.13-to-3.14/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.12 to 3.13)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.12-to-3.13/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.11 to 3.12)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.11-to-3.12/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.10 to 3.11)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.10-to-3.11/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.9.x to 3.10)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.9-to-3.10/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.9-preview-x to 3.9.x)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.9-preview-1-to-3.9/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.8.x to 3.9.x-preview-1)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.8-to-3.9-preview-1/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.7.x to 3.8.x)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.7-to-3.8/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.6 to 3.7.x)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.6-to-3.7/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.5 to 3.6)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.5-to-3.6/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.4 to 3.5)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.4-to-3.5/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.3 to 3.4)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.3-to-3.4/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.2 to 3.3)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.2-to-3.3/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.1 to 3.2)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.1-to-3.2/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.0 to 3.1)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/3.0-to-3.1/"
+                    ),
+                    optimizeLink(
+                      "Update notes (2.7 to 3.0)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/2.7-to-3.0/"
+                    ),
+                    optimizeLink(
+                      "Update notes (2.6 to 2.7)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/2.6-to-2.7/"
+                    ),
+                    optimizeLink(
+                      "Update notes (2.5 to 2.6)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/2.5-to-2.6/"
+                    ),
+                    optimizeLink(
+                      "Update notes (2.4 to 2.5)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/2.4-to-2.5/"
+                    ),
+                    optimizeLink(
+                      "Update notes (2.3 to 2.4)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/2.3-to-2.4/"
+                    ),
+                    optimizeLink(
+                      "Update notes (2.2 to 2.3)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/2.2-to-2.3/"
+                    ),
+                    optimizeLink(
+                      "Update notes (2.1 to 2.2)",
+                      "self-managed/optimize-deployment/migration-update/camunda-7/2.1-to-2.2/"
+                    ),
+                  ],
+                  "Camunda 8": [
+                    optimizeLink(
+                      "Instructions",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/instructions/"
+                    ),
+                    optimizeLink(
+                      "Update notes (8.5 to 8.6)",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/8.5-to-8.6/"
+                    ),
+                    optimizeLink(
+                      "Update notes (8.4 to 8.5)",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/8.4-to-8.5/"
+                    ),
+                    optimizeLink(
+                      "Update notes (8.4 to 8.4)",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/8.4-to-8.4/"
+                    ),
+                    optimizeLink(
+                      "Update notes (8.3 to 8.4)",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/8.3-to-8.4/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.10 to 8.3)",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-8.3/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.9.x to 3.10)",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.9-preview-x to 3.9.x)",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.8.x to 3.9.x-preview-1)",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1/"
+                    ),
+                    optimizeLink(
+                      "Update notes (3.7.x to 3.8.x)",
+                      "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8/"
+                    ),
+                  ],
+                },
               ],
             },
 
@@ -1476,7 +1564,8 @@ module.exports = {
                   Troubleshooting: [
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
                   ],
                 },
               ],

@@ -1,0 +1,58 @@
+---
+id: delete-document
+title: "Delete document (alpha)"
+description: "Delete a document from the Camunda 8 cluster."
+sidebar_label: "Delete document (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV0tz4zYM/iscnpKpInm32XarmyfJtu5sM5mstz0kOdAUZHGXDy0JJvF49N87oCTbSZw2fRxz8EMiiA/gB4DAmqNYBl5e8VMnowGL/CbjrgUvUDk7q3jJK9CAsFnPeAVBetWSAC/5aVpmglWDBKu9MwwbYCfCRFsJ9p5JHQOCz6/ttT13CAwbgQwbFZiM3oNFvWLO6hULsW2dx8CEZcoeGTDOr7a6AzoPGbtrlGyYCsw6ZAYEoTrPWu+qKMkwFgMktLIsrUO4tnMCA1u1TlmkrcKyK6HbRrAaBEYPNweFdKZ1FiyGAoTXqyMhJYRQJLn++2iQDrmpDpmwFTNixRbAQlx8AYkMHZONsEu4tsqyOpIw86BBBAh5suja8oy3wgsDCJ7Of82tMECnPXg6q3jGFR1wK7DhGffwLSoPFS/RR3jMwrwBNjtlrk4HvzkudKynL+cZD7IBI3i55rhqCSugV3bJuy7bwKfz3WJ/i+BXD8BrocNL0ZOyrQ0PFylK/tqqG8INrbMBAq2/nUzo5yn0RuedCANWxUJM1NVR61XOu4wfT47/brvCJhm5VLdgySNSSCFWu2irPNEmnUXKg3LNRdtqJVOmFK13Cw3muy+B9K533HoIOGUXvSSrAIXSzPVRkywnwQVUTFl2dfnhhP10/O7Hm4MGsQ1lUdzd3eW+lkdQKXQ+d35Z+FrSh+QOczZvwMMYjqKqFGEKTWnRgkcFgYUWpKqVJFbI08FsRmff+zew0JtFYbrZvOXoMVcZr503AnnJo1dPSsSUfb6cMVWBRVWvlF0+hU57ahE16RALF7FcaGG/EnGoUO8FfYwSojHCr8Y4fAjQZTygwLjjBlcWYQl+135l8fu3T3RTmPwyn1+wXgWTroJUcVIJG4DICaOsMtHw8ngyybgR9/3TD5NJRzqJ8Rd4Yhnct1rYFFqP3VGWGcqrXltyTNmAwsr/ixnn1VI9xs2pToxc8CGIT3uPuo7W3u3LzymVcQRPcQjeO8+cTCW/oiKuk3rK0xGbKg0EfM2111x7zbXncq3LuAFs3LY9S/0ENrzkxXidhWK9bSY6umnB347dRvSal3zdZ05XFsW6cQG7ck3NV1fcEi23wiux0H0w0nKfYWPkaCeFTq/3MUgL1FOMnm17wcuzT3P2s0C4E/3FTJAPVb+fvJ/s1Uqiz2icXsxY72Effzs1YVRLyb1XbS/8EsWpKwkgo1e4+kTb+uNZgPDgp5Eo2MTFgJe003MvxLPhz4cxWn79Y54IV7Z2aftA/FNDiBXwobd8kr95GmQXs5Qr0hkTbSqYdtk3NmJPP84zrpUEG1I4Dz3gKPaxX2G/94jsTU6k9JEz1smlwiYuculMIfttm9+FdovCCGWLASIUJ9PfPp+fTo8+zk7Ozj+dHb3JJzneY3K+dQGNsDt2DJPFpj07SP334WOf19tr4nUY+bfDyBCxCPdYtFooSzmUqF4PheVqM5oEnvFyZ065yYbqcMXX64UI8NnrrqPX/fhA9aZSgUrJMwPELoX/ZZbY68VXWD0YbG6FjiTFKZXHGvcPjTy4HAaiQ/aSyWuvXcNLYVe7Ro327pxvd9NlvAFRgU9m9gJTKaHFna3Pdkjk5+a6OD37eDY/4133J+uLijc=
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Delete document (alpha)</h1>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/documents/{documentId}"}
+></MethodEndpoint>
+
+Delete a document from the Camunda 8 cluster.
+
+Note that this currently only supports an in-memory document store, which is not meant for production use.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+:::
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"documentId","in":"path","required":true,"description":"The ID of the document to delete.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"storeId","in":"query","required":false,"description":"The ID of the document store to delete the document from.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+The document was deleted successfully.
+
+</div><div></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The document with the given ID was not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

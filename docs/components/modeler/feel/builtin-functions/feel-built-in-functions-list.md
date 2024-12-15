@@ -621,3 +621,30 @@ is empty([])
 is empty([1,2,3])
 // false
 ```
+
+## partition(list， size)
+
+<MarkerCamundaExtension></MarkerCamundaExtension>
+
+Returns consecutive sublists of a list, each of the same size (the final list may be smaller).
+
+If `size` is less than `0`, it returns `null`.
+
+**Function signature**
+
+```feel
+partition(list: list, size: number): list
+```
+
+**Examples**
+
+```feel
+partition([1,2,3,4,5], 2)
+// [[1,2], [3,4], [5]]
+
+partition([], 2)
+// []
+
+partition([1,2], 0)
+// null
+```

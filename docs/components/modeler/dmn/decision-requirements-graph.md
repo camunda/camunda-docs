@@ -47,9 +47,9 @@ The name describes the DRG. It is set as the `name` attribute on the `definition
 
 ![Decision Requirements Graph Id](assets/decision-requirements-graph/drg-id.png)
 
-The id is the technical identifier of the DRG. It is set in the `id` attribute on the `definitions` element.
+The ID is the technical identifier of the DRG. It is set in the `id` attribute on the `definitions` element.
 
-Each DRG should have an unique id when it is deployed to Camunda.
+Each DRG should have an unique ID when it is deployed to Camunda.
 
 ```xml
 
@@ -66,7 +66,7 @@ Each DRG should have an unique id when it is deployed to Camunda.
 ![Decision](assets/decision-requirements-graph/decision.png)
 
 A decision requirements graph can have one or more decisions. A decision has a [name](decision-table.md#decision-name)
-which is shown in the DRD and an [id](decision-table.md#decision-id). The decision logic inside the decision must be
+which is shown in the DRD and an [ID](decision-table.md#decision-id). The decision logic inside the decision must be
 either a [decision table](decision-table.md) or a [decision literal expression](decision-literal-expression.md).
 
 A decision is represented by a `decision` element inside the `definitions` XML element.
@@ -89,15 +89,15 @@ A decision is represented by a `decision` element inside the `definitions` XML e
 A decision can have one or more required decisions which it depends on.
 
 A required decision is represented by a `requiredDecision` element inside an `informationRequirement` XML element. It
-has a `href` attribute and the value starts with `#` followed by the [decision id](decision-table.md#decision-id) of the
+has a `href` attribute and the value starts with `#` followed by the [decision ID](decision-table.md#decision-id) of the
 required decision.
 
 :::tip
 
-The result of a required decision can be accessed in the dependent decision by its decision id.
+The result of a required decision can be accessed in the dependent decision by its decision ID.
 
 If the required decision is a decision table and has more than one output then the output values are grouped under the
-decision id and can be accessed by their [output names](decision-table-output.md#output-name) (
+decision ID and can be accessed by their [output names](decision-table-output.md#output-name) (
 e.g. `decisionId.outputName`). The structure of the result depends on the decision
 table [hit policy](decision-table-hit-policy.md).
 

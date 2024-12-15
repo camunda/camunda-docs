@@ -12,11 +12,20 @@ When updating from one minor version to the next, you do not need to update to e
 
 Depending on your amount of data, run a minor version for at least 24 hours before updating to the next version.
 
-:::note
-Versions prior to Camunda 8 are listed below and identified as Camunda Cloud versions.
-:::
-
 There is a dedicated update guide for each version:
+
+### [Camunda 8.6 to Camunda 8.7](../860-to-870)
+
+Update from 8.6.x to 8.7.0
+
+[Release notes](/reference/release-notes/870.md)
+
+### [Camunda 8.5 to Camunda 8.6](../850-to-860)
+
+Update from 8.5.x to 8.6.0
+
+[Release notes](/reference/release-notes/860.md) |
+[Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/)
 
 ### [Camunda 8.4 to Camunda 8.5](../840-to-850)
 

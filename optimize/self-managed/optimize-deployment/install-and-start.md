@@ -54,12 +54,12 @@ or `elasticsearch-startup.bat` on Windows:
 .\elasticsearch-startup.bat
 ```
 
-#### Production distribution without Elasticsearch
+#### Production distribution without a database
 
 This distribution is intended to be used in production. To install it, take the following steps:
 
-1. [Download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without Elasticsearch.
-2. [Configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda 7 connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine.
+1. [Download](https://docs.camunda.org/enterprise/download/#camunda-optimize) the production archive, which contains all the required files to startup Camunda Optimize without a database.
+2. [Configure the database connection](./configuration/getting-started.md#elasticsearchopensearch-configuration) to connect to your pre-installed Elasticsearch/OpenSearch instance and [configure the Camunda 7 connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine.
 3. Start your Optimize instance by running the script `optimize-startup.sh` on Linux and Mac:
 
 ```bash
@@ -85,7 +85,7 @@ Password: ******
 Login Succeeded
 ```
 
-After that, [configure the Elasticsearch connection](./configuration/getting-started.md#elasticsearch-configuration) to connect to your pre-installed Elasticsearch instance and [configure the Camunda connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one Elasticsearch node, you can use environment variables instead of mounting configuration files into the Docker container:
+After that, [configure the database connection](./configuration/getting-started.md#elasticsearchopensearch-configuration) to connect to your pre-installed Elasticsearch/OpenSearch instance and [configure the Camunda connection](./configuration/getting-started.md#camunda-platform-7-configuration) to connect Optimize to your running engine. For very simple use cases with only one Camunda Engine and one database node, you can use environment variables instead of mounting configuration files into the Docker container:
 
 #### Getting started with the Optimize Docker image
 
@@ -98,7 +98,15 @@ docker run -d --name optimize --network host \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
-##### Connect to remote Camunda 7 and Elasticsearch
+If you wish to connect to an OpenSearch database instead, please make sure to additionally set the environment variable `CAMUNDA_OPTIMIZE_DATABASE` to `opensearch`.
+
+```
+docker run -d --name optimize --network host \
+           -e CAMUNDA_OPTIMIZE_DATABASE=opensearch \
+           registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
+```
+
+##### Connect to remote Camunda 7 and database
 
 If, however, your Camunda 7 as well as Elasticsearch instance reside on a different host, you may provide their destination via the corresponding environment variables:
 
@@ -110,20 +118,42 @@ docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
            registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
 ```
 
+Alternatively, for OpenSearch:
+
+```
+docker run -d --name optimize -p 8090:8090 -p 8091:8091 \
+           -e OPTIMIZE_CAMUNDABPM_REST_URL=http://yourCamBpm.org/engine-rest \
+           -e CAMUNDA_OPTIMIZE_DATABASE=opensearch \
+           -e CAMUNDA_OPTIMIZE_OPENSEARCH_HOST=yourOpenSearchHost \
+           -e CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT=9205 \
+           registry.camunda.cloud/optimize-ee/optimize:{{< currentVersionAlias >}}
+```
+
 #### Available environment variables
 
 There is only a limited set of configuration keys exposed via environment variables. These mainly serve the purpose of testing and exploring Optimize. For production configurations, we recommend following the setup in documentation on [configuration using a `environment-config.yaml` file](#configuration-using-a-yaml-file).
 
-The most important environment variables you may have to configure are related to the connection to the Camunda 7 REST API, as well as Elasticsearch:
+The most important environment variables you may have to configure are related to the connection to the Camunda 7 REST API, as well as Elasticsearch/OpenSearch:
 
 - `OPTIMIZE_CAMUNDABPM_REST_URL`: The base URL that will be used for connections to the Camunda Engine REST API (default: `http://localhost:8080/engine-rest`)
 - `OPTIMIZE_CAMUNDABPM_WEBAPPS_URL`: The endpoint where to find the Camunda web apps for the given engine (default: `http://localhost:8080/camunda`)
+
+For an ElasticSearch installation:
+
 - `OPTIMIZE_ELASTICSEARCH_HOST`: The address/hostname under which the Elasticsearch node is available (default: `localhost`)
 - `OPTIMIZE_ELASTICSEARCH_HTTP_PORT`: The port number used by Elasticsearch to accept HTTP connections (default: `9200`)
 - `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_USERNAME`: The username for authentication in environments where a secured Elasticsearch connection is configured.
 - `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD`: The password for authentication in environments where a secured Elasticsearch connection is configured.
 
-A complete sample can be found within [Connect to remote Camunda 7 and Elasticsearch](#connect-to-remote-camunda-platform-7-and-elasticsearch).
+For an OpenSearch installation:
+
+- `CAMUNDA_OPTIMIZE_DATABASE`: The database type to connect to, in this case `opensearch` (default: `elasticsearch`)
+- `CAMUNDA_OPTIMIZE_OPENSEARCH_HOST`: The address/hostname under which the OpenSearch node is available (default: `localhost`)
+- `CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT`: The port number used by OpenSearch to accept HTTP connections (default: `9205`)
+- `CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_USERNAME`: The username for authentication in environments where a secured OpenSearch connection is configured.
+- `CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_PASSWORD`: The password for authentication in environments where a secured OpenSearch connection is configured.
+
+A complete sample can be found within [Connect to remote Camunda 7 and database](#connect-to-remote-camunda-7-and-database).
 
 Furthermore, there are also environment variables specific to the [event-based process](components/userguide/additional-features/event-based-processes.md) feature you may make use of:
 
@@ -176,4 +206,4 @@ Then, you can use the users from the Camunda 7 to log in to Optimize. For detail
 
 ## Next steps
 
-To get started configuring the Optimize web container, Elasticsearch, Camunda 7, Camunda 8, and more, visit the [getting started section](./configuration/getting-started.md) of our configuration documentation.
+To get started configuring the Optimize web container, Elasticsearch/OpenSearch, Camunda 7, Camunda 8, and more, visit the [getting started section](./configuration/getting-started.md) of our configuration documentation.

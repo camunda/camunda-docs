@@ -1,4 +1,5 @@
 const expandVersionedUrl = require("./expandVersionedUrl");
+const { versionMappings } = require("../versions");
 
 describe("expandVersionedUrl", () => {
   describe("unexpandable URLs", () => {
@@ -13,6 +14,8 @@ describe("expandVersionedUrl", () => {
     );
   });
 
+  const [currentVersionMapping, olderVersionMapping] = versionMappings;
+
   describe("when source is from optimize docs", () => {
     const targetUrl = "$docs$/some/thing";
 
@@ -23,12 +26,12 @@ describe("expandVersionedUrl", () => {
       ],
 
       [
-        "/Users/monkeypants/camunda-docs/optimize_versioned_docs/version-3.10.0/what-is-optimize.md",
+        `/Users/monkeypants/camunda-docs/optimize_versioned_docs/version-${currentVersionMapping.optimizeVersion}/what-is-optimize.md`,
         "/docs/some/thing",
       ],
       [
-        "/Users/monkeypants/camunda-docs/optimize_versioned_docs/version-3.7.0/what-is-optimize.md",
-        "/docs/1.3/some/thing",
+        `/Users/monkeypants/camunda-docs/optimize_versioned_docs/version-${olderVersionMapping.optimizeVersion}/what-is-optimize.md`,
+        `/docs/${olderVersionMapping.docsVersion}/some/thing`,
       ],
     ])("when in %s it expands to %s", (sourcePath, expandedUrl) => {
       expect(expandVersionedUrl(targetUrl, sourcePath)).toEqual(expandedUrl);
@@ -44,12 +47,12 @@ describe("expandVersionedUrl", () => {
         "/optimize/next/some/thing",
       ],
       [
-        "/Users/monkeypants/camunda-docs/versioned_docs/version-8.2/what-is-optimize.md",
+        `/Users/monkeypants/camunda-docs/versioned_docs/version-${currentVersionMapping.docsVersion}/what-is-optimize.md`,
         "/optimize/some/thing",
       ],
       [
-        "/Users/monkeypants/camunda-docs/versioned_docs/version-1.3/what-is-optimize.md",
-        "/optimize/3.7.0/some/thing",
+        `/Users/monkeypants/camunda-docs/versioned_docs/version-${olderVersionMapping.docsVersion}/what-is-optimize.md`,
+        `/optimize/${olderVersionMapping.optimizeVersion}/some/thing`,
       ],
     ])("when in %s it expands to %s", (sourcePath, expandedUrl) => {
       expect(expandVersionedUrl(targetUrl, sourcePath)).toEqual(expandedUrl);
