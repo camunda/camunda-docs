@@ -10,7 +10,7 @@ When using IDP it is helpful to understand the following key concepts and terms.
 
 ## Structured and unstructured documents
 
-When creating a document extraction project, your choice of [extraction method](idp-document-extraction.md#create-extraction-project) depends on whether your documents contain structured or unstructured data.
+Your choice of [extraction method](idp-document-extraction.md#create-extraction-project) depends on whether your documents contain structured or unstructured data.
 
 ### Structured documents
 

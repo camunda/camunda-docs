@@ -17,3 +17,5 @@ IDP currently supports processing and data extraction for the following types of
 ## Document storage
 
 Uploaded documents are stored in Web Modeler, not your cluster.
+
+## Extraction field types

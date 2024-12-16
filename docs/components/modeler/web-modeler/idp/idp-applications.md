@@ -6,14 +6,14 @@ description: "You can import a BPMN or DMN diagram at any time with Web Modeler.
 
 import IdpApplicationImg from './img/idp-application.png';
 
-An **IDP application** is a type of folder you create and manage your [document extraction](idp-document-extraction.md) and [document automation](idp-document-automation.md) projects in.
+Create and manage your [document extraction](idp-document-extraction.md) and [document automation](idp-document-automation.md) projects in an **IDP application** folder.
 
 <img src={IdpApplicationImg} alt="IDP application screen" />
 
 - IDP applications and projects are only fully operational when linked to a healthy, active cluster. You can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster when required.
 - You can only select a cluster that supports Camunda document handling (8.7+).
-- You cannot change the cluster chosen for an IDP application after it has been created.
-- Using a development cluster is recommended as best practice.
+- You cannot change the selected cluster of an IDP application after it has been created.
+- Camunda recommends using a development cluster as best practice.
 
 ## Create an IDP application
 

@@ -29,9 +29,10 @@ To create an extraction project:
 
 1. Click **Create** to create and open the new extraction project.
 1. Configure and publish the project:
+
    - See [Extract structured data](idp-structured-extraction.md) to learn how to configure and publish a structured data extraction project.
    - See [Extract unstructured data](idp-unstructured-extraction.md) to learn how to configure and publish an unstructured data extraction project.
 
 :::info
-Not sure what extraction method to use? See [Structured and unstructured documents](idp-key-concepts.md) to help determine what kind of document(s) you will be processing.
+Not sure what extraction method to use? See [structured and unstructured documents](idp-key-concepts.md) to help determine what kind of document(s) you will be processing.
 :::
