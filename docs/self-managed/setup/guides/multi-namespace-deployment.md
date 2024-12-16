@@ -64,13 +64,9 @@ global:
       publicIssuerUrl: "https://camunda-main.example.com/auth/realms/camunda-platform"
       connectors:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      operate:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      tasklist:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
       optimize:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      zeebe:
+      core:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
     service:
       url: "http://camunda-main-identity.camunda-main.svc.cluster.local:80/identity"
@@ -109,13 +105,7 @@ global:
       publicIssuerUrl: "https://camunda-main.example.com/auth/realms/camunda-platform"
       connectors:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      operate:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      tasklist:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      optimize:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      zeebe:
+      core:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
     service:
       url: "http://camunda-main-identity.camunda-main.svc.cluster.local:80/identity"
