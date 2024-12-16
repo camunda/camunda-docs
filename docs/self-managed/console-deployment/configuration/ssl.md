@@ -31,7 +31,7 @@ Enable and configure SSL by setting the following properties:
 | `SERVER_SSL_ENABLED`                 | To enable SSL, set to `true`.                                                                                                                                      | `true`                               |
 | `SERVER_SSL_CERTIFICATE`             | The path to a PEM-encoded SSL certificate file. Ensure the provided path is accessible from the container (for example, via a mounted volume).                     | `file:/full/path/to/certificate.pem` |
 | `SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | The path to a PEM-encoded private key file for the SSL certificate. Ensure the provided path is accessible from the container (for example, via a mounted volume). | `file:/full/path/to/key.pem`         |
-| `SERVER_SSL_PASSPHRASE`              | _Optional._ A passphrase for the private key.                                                                                                                      | `passphrase`                         |
+| `SERVER_SSL_PASSPHRASE`              | _Optional_ A passphrase for the private key.                                                                                                                       | `passphrase`                         |
 
 SSL can be configured separately for the management routes using the `MANAGEMENT_` properties:
 
@@ -40,11 +40,11 @@ SSL can be configured separately for the management routes using the `MANAGEMENT
 | `MANAGEMENT_SERVER_SSL_ENABLED`                 | To enable SSL, set to `true`.                                                                                                                                      | `true`                               |
 | `MANAGEMENT_SERVER_SSL_CERTIFICATE`             | The path to a PEM-encoded SSL certificate file. Ensure the provided path is accessible from the container (for example, via a mounted volume).                     | `file:/full/path/to/certificate.pem` |
 | `MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | The path to a PEM-encoded private key file for the SSL certificate. Ensure the provided path is accessible from the container (for example, via a mounted volume). | `file:/full/path/to/key.pem`         |
-| `MANAGEMENT_SERVER_SSL_PASSPHRASE`              | _Optional._ A passphrase for the private key.                                                                                                                      | `passphrase`                         |
+| `MANAGEMENT_SERVER_SSL_PASSPHRASE`              | _Optional_ A passphrase for the private key.                                                                                                                       | `passphrase`                         |
 
 ## (Optional) Provide a custom certificate
 
-If you are using a custom (self-signed) TLS certificate in Console or Identity, you need to make Console accept the certificate.
+If you are using a custom (self-signed) TLS certificate in Console or Identity, configure Console to accept the certificate.
 
 Provide the path to the certificate file via the environment variable `NODE_EXTRA_CA_CERTS`:
 
