@@ -37,6 +37,6 @@ To start using IDP in your processes:
 
 :::
 
-## Configure IDP for Self-Managed
+## IDP for Self-Managed
 
 What do Self-Managed users need to know and do?
