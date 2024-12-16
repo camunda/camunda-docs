@@ -6,13 +6,13 @@ description: "Deploy Camunda 8 Self-Managed across several namespaces for better
 
 Camunda 8 Self-Managed offers flexible deployment options that allow it to span multiple namespaces. This setup consists of a management cluster, which includes the Console, Identity, and Web Modeler components, along with several orchestration clusters (including Zeebe, Operate, Tasklist, and Optimize).
 
-For this configuration, each namespace is set up independently through Helm, with deployments classified into two types: management and automation. Each type has a specific values file designed for its deployment requirements.
+For this configuration, each namespace is set up independently through Helm, with deployments classified into two types: `Web Modeler and Console` and `Camunda Orchestration Cluster`. Each type has a specific values file designed for its deployment requirements.
 
-Below, we illustrate multi-namespace Camunda deployment: one namespace will be dedicated to the management cluster, and the other two will be used for the orchestration cluster.
+Below, we illustrate multi-namespace Camunda deployment: one namespace will be dedicated to the `Web Modeler and Console` cluster, and the other two will be used for the `Camunda Orchestration cluster`.
 
-## Management deployment
+## Web Modeler and Console deployment
 
-This deployment includes centralized Identity and Web Modeler only. Identity allows the other two deployments to authenticate against Keycloak. Web Modeler is a central tool for designing and deploying business process diagrams across all your automation deployments.
+This deployment includes Identity, Web Modeler, and Console. Identity allows the other two deployments to authenticate against Keycloak. Web Modeler is a central tool for designing and deploying business process diagrams across all your automation deployments. Console enables you to get a high-level view of your `Camunda Orchestration` clusters.
 Create the following Management deployment Helm values file.
 
 ```yaml
@@ -52,7 +52,7 @@ helm install camunda camunda/camunda-platform \
 
 ## Team One deployment
 
-Let's create a Camunda orchestration cluster that can be owned and managed by Team One and will be deployed into namespace `camunda-team01`. This deployment includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the Management deployment:
+Let's create a Camunda orchestration cluster that can be owned and managed by Team One and will be deployed into namespace `camunda-team01`. This deployment includes Core, and Optimize, and authenticates against Keycloak in the Management deployment:
 
 ```yaml
 # File: camunda-team01.yaml
@@ -93,7 +93,7 @@ helm template camunda camunda/camunda-platform \
 
 ## Team Two deployment
 
-This deployment uses namespace `camunda-team02`, includes Zeebe, Operate, Tasklist, and Optimize, and authenticates against Keycloak in the management deployment:
+This deployment uses namespace `camunda-team02`, includes Core, and Optimize, and authenticates against Keycloak in the management deployment:
 
 ```yaml
 # File: camunda-team02.yaml
@@ -134,7 +134,7 @@ helm install camunda camunda/camunda-platform \
 
 To use Camunda Console Self-Managed in a multi-namespace setup, obtain Helm deployment configuration for all namespaces/deployments you would like Console to manage.
 
-Update Management deployment to deploy Console Self-Managed. For more details, visit this [Installation guide](/self-managed/setup/install.md#install-console).
+Update `Web Modeler and Console` deployment to deploy Console Self-Managed. For more details, visit this [Installation guide](/self-managed/setup/install.md#install-console).
 
 Assuming Camunda clusters have been deployed using the above examples, run the following script to get the release information for all deployments.
 
