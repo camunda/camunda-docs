@@ -15,9 +15,9 @@ Document extraction projects form the basis for using IDP in your end-to-end pro
 - Create a separate document extraction project for each type of document you want to categorize and extract data from, such as an invoice, a report, identity document, and so on.
 - Once published, extraction projects can be added to your processes, or linked to a [document automation](idp-document-automation.md) project.
 
-## Create extraction project
+## Create document extraction project
 
-To create an extraction project:
+To create a document extraction project:
 
 1. In your IDP application, select **Create new** > **Document extraction** to open the **Create an extraction project** modal.
    <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="600px"/>

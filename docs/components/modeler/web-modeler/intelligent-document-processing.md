@@ -6,13 +6,11 @@ description: "You can import a BPMN or DMN diagram at any time with Web Modeler.
 
 import IdpOverviewImg from './img/idp-overview-diagram.png';
 
-Camunda intelligent document processing (IDP) uses artificial intelligence (AI) and machine learning (ML) to classify, extract, and process data from your structured and unstructured documents.
+Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes.
 
 ## About IDP
 
-Use IDP to integrate automated document processing into your end-to-end processes.
-
-IDP can identify, extract, and organize specific pieces of data from your structured and unstructured PDF documents into a structured format you can use in your BPMN diagrams.
+IDP uses artificial intelligence (AI) and machine learning (ML) to identify, extract, and organize data from your structured and unstructured documents into a structured format you can use in your processes.
 
 For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
 
@@ -41,4 +39,4 @@ To start using IDP in your processes:
 
 ## Configure IDP for Self-Managed
 
-What is the path for Self-Managed?
+What do Self-Managed users need to know and do?

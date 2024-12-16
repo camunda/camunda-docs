@@ -6,7 +6,7 @@ description: "You can import a BPMN or DMN diagram at any time with Web Modeler.
 
 import IdpApplicationImg from './img/idp-application.png';
 
-Create and manage your [document extraction](idp-document-extraction.md) and [document automation](idp-document-automation.md) projects in an **IDP application** folder.
+Create and manage your IDP projects in an **IDP application** folder.
 
 <img src={IdpApplicationImg} alt="IDP application screen" />
 

@@ -14,7 +14,7 @@ import IdpExtractionFieldsImg from './img/idp-extraction-fields-unstructured.png
 import IdpValidationResultsImg from './img/idp-validation-results.png';
 import IdpPublishProjectImg from './img/idp-publish-unstructured-project.png';
 
-Use this extraction method to extract data from unstructured documents.
+Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
 
 ## Data extraction steps
 
@@ -22,7 +22,7 @@ Complete the following steps to configure and publish an unstructured data extra
 
 1. [Upload documents](#step-1-upload-documents): Upload a set of sample documents to use for training the extraction model.
 1. [Extract fields](#step-2-extract-fields): Add and configure the [extraction fields](idp-key-concepts.md#extraction-fields) you want to use to extract data.
-1. [Evaluate extraction](#step-3-evaluate-extraction): Test the data extraction using your uploaded document(s) and evaluate the extraction results.
+1. [Validate extraction](#step-3-validate-extraction): Test the data extraction using your uploaded document(s) and evaluate the extraction results.
 1. [Publish](#step-4-publish): Publish the project to make it available for use in your processes and [document automation](idp-document-automation.md) projects.
 
 <!-- Configure and publish your project on the **Unstructured data extraction** screen.
