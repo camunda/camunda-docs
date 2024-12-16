@@ -105,6 +105,17 @@ The next recommended step is to setup a multi-namespace deployemnt. A [guide](/d
 
 Here are some points to keep in mind when considering scalability:
 
+- To scale the Core component, the following values can be modified:
+
+```yaml
+core:
+  clusterSize: "3"
+  partitionCount: "3"
+  replicationFactor: "3"
+```
+
+The `core.clusterSize` refers to the amount of borkers, the `core.partitionCount` refers to how each [partition](/docs/components/zeebe/technical-concepts/partitions/) is setup in the cluster, and the `core.replicationFactor` refers to the [number of nodes](/docs/components/zeebe/technical-concepts/partitions/#replication).
+
 - Check the resource (CPU and memory) limits set and make sure they are reasonable. We recommend to disable the CPU limits unless you have a good usecase. For example, the resource limits can be changed for the core component by modifying the following values:
 
 ```yaml
@@ -119,18 +130,7 @@ core:
 ```
 
 - If you would like to run benchmarks on the platform then please refer to our [community project](https://github.com/camunda-community-hub/camunda-8-benchmark)
-- To scale the core component, the following values can be modified:
-
-```yaml
-core:
-  clusterSize: "3"
-  partitionCount: "3"
-  replicationFactor: "3"
-```
-
-The `clusterSize` refers to the amount of borkers, the `partitionCount` refers to how each [partition](/docs/components/zeebe/technical-concepts/partitions/) is setup in the cluster, and the `replicationFactor` refers to the [number of nodes](/docs/components/zeebe/technical-concepts/partitions/#replication).
-
-- It is possible to set a podDisruptionBudget. For example you can modify the following values for the core component:
+- It is possible to set a `podDisruptionBudget`. For example you can modify the following values for the Core component:
 
 ```yaml
 core:
@@ -140,8 +140,7 @@ core:
     maxUnavailable: 1
 ```
 
-- The namespace has a LimitRange
-
+- It is possible to set a LimitRange on the namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/) on setting a LimitRange.
 - Use horizontal pod autoscaler where appropriate
 - Use Vertical pod autoscaler where appropriate
 
