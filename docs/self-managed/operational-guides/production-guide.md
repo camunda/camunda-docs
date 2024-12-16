@@ -26,7 +26,7 @@ Below is the high-level architecture diagram for the base production setup _(cli
 
 ## Step-by-Step Installation Guide
 
-### TLS setup with your DNS (terminated at ingress)
+### TLS setup with your DNS hostname (terminated at ingress)
 
 In order to access the Camunda Platform through HTTPS ingress, you have to enable TLS. To do that, you must also specify a TLS secret. Here is an example values.yaml configuration:
 
@@ -75,7 +75,7 @@ The certificate must be an X.509 certificate, issued by a trusted Certificate Au
 Also, the certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure ingress resources.
 Please reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
 
-For more information on Ingress setup, please refer to our [ingress setup guide](http://localhost:3000/docs/next/self-managed/setup/guides/ingress-setup/)
+For more information on the Ingress setup, please refer to our [ingress setup guide](http://localhost:3000/docs/next/self-managed/setup/guides/ingress-setup/)
 
 ### Deploying with OpenID Connect Provider
 
@@ -98,6 +98,62 @@ We have a number of guides on connecting to external databases with the Camunda 
 - [Running Web Modeler on Amazon Aurora PostgreSQL](/docs/self-managed/modeler/web-modeler/configuration/database/#running-web-modeler-on-amazon-aurora-postgresql)
 
 ### Scalability
+
+Here are some points to keep in mind when considering scalability:
+
+- Check the resource limits set and make sure they are reasonable
+- Able to run benchmarks (not absolutely required, but this is nice to have and shows that customers truly understand zeebe)
+- Able to scale zeebe horizontally (add/remove brokers) (if needed)
+- Set Pod disruption budgets
+- Disable CPU limits — unless you have a good use case
+- The namespace has a LimitRange
+- Use horizontal pod autoscaler where appropriate
+- Use Vertical pod autoscaler where appropriate
+
+### Reliability
+
+Here are some points to keep in mind when consider reliability:
+
+- Check node affinity and tolerations.
+- Version Management: Stay on a stable Camunda and Kubernetes version and follow Camunda’s release notes for security patches or critical updates.
+- Secrets should be created prior to installing the helm chart so they can be referenced as existingSecrets when installing the helm chart.
+- Familiar with upgrades. Ideally, customers should have already performed an upgrade in the lower environment before going to production.
+- Containers do not store any state in their local filesystem. State should be stored in PVs
+- Mount Secrets as volumes, not enviroment variables
+- Always asses the kubernetes object version and be weary of alpha or beta versions.
+- Namespaces have ResourceQuotas
+
+### Security
+
+Here are some points to keep in mind when considering security:
+
+- Disable auto-mounting of the default ServiceAccount
+- ServiceAccount tokens are for applications and controllers only. End users should not be given these tokens
+- Enable network policies
+- Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes
+- Enable Pod Security Policies
+- Use read-only root filesystem
+- Disable privelaged containers
+- Only allow deploying containers only from known registries: https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e
+- Use approved domain names for the ingress hostname: https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes
+
+### Observability
+
+Here are some points to keep in mind when considering observability:
+
+- Setup observability with Prometheus and Grafana
+- Nice to have a retention and archival strategy for logs
+- Have a log aggregation tool.
+- Audit logs: Enable audit logging for Camunda components to track user actions, especially for sensitive data or configuration changes.
+
+### Component settings
+
+- Tasklist, Operate, and Optimize should have cleanup enabled (Index Lifecycle Management?)
+- ILM policies could be set for Elasticsearch and ISM policies for OpenSearch
+- Retention time is a setting in the helm chart with default values from the SaaS setup.
+- Optimize: disable ObjectVariable import by default (save space in Elasticsearch). Add a setting to enable it explicitly on demand.
+- In general, the SaaS setup should be considered for the component settings.
+- Elasticsearch performance tuning
 
 ### Upgrading the chart (disable secret generation on upgrades)
 
