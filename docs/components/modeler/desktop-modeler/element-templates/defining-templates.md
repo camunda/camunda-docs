@@ -79,7 +79,7 @@ The JSON schema versioning is backward-compatible, meaning that all versions inc
 
 ## Execution platform compatibility
 
-You can define template compatibility with different execution platforms using `engines` property.
+You can define template compatibility with different execution platforms using the `engines` property.
 
 This property is a dictionary object, where the execution platform names are the keys, and the [semantic version](https://semver.org/) ranges are the values.
 
@@ -91,7 +91,7 @@ For example, the following `engines` definition specifies that the template is c
 }
 ```
 
-Compatibility is only validated if the platform version is provided by both the template and the modeler. In the example below, the template is compatible with specific versions of both the Desktop and Web modelers, but it requires Camunda version 8.6 or higher for both:
+Compatibility is only validated if the platform version is provided by both the template and the modeler. In the example below, the template is compatible with specific versions of both Desktop and Web Modeler, but it requires Camunda version 8.6 or higher for both:
 
 ```json
 "engines": {
@@ -101,7 +101,7 @@ Compatibility is only validated if the platform version is provided by both the 
 }
 ```
 
-You can also use this feature to explicitly specify a template’s incompatibility with a platform. For instance, the following template is incompatible with all versions of the Web Modeler:
+You can also use this feature to explicitly specify a template’s incompatibility with a platform. For instance, the following template is incompatible with all versions of Web Modeler:
 
 ```json
 "engines": {
@@ -109,7 +109,7 @@ You can also use this feature to explicitly specify a template’s incompatibili
 }
 ```
 
-If no engines are specified, template is considered compatible with any execution platform version.
+If no engines are specified, the template is considered compatible with any execution platform version.
 
 ## Supported BPMN types
 
