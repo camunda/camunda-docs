@@ -79,7 +79,7 @@ The JSON schema versioning is backward-compatible, meaning that all versions inc
 
 ## Execution platform compatibility
 
-You can define template compatibility with different execution platforms using `engines` property. 
+You can define template compatibility with different execution platforms using `engines` property.
 
 This property is a dictionary object, where the execution platform names are the keys, and the [semantic version](https://semver.org/) ranges are the values.
 
@@ -110,7 +110,6 @@ You can also use this feature to explicitly specify a template’s incompatibili
 ```
 
 If no engines are specified, template is considered compatible with any execution platform version.
-
 
 ## Supported BPMN types
 
