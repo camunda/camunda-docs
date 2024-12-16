@@ -54,8 +54,8 @@ These events include the following properties:
 
 - `diagramType`: BPMN, DMN, or Form
 - Engine profile:
-  - `executionPlatform`: \<target platform\>
-  - `executionPlatformVersion`: \<target platform version\>
+  - `executionPlatform`: &lt;target platform\>
+  - `executionPlatformVersion`: &lt;target platform version\>
 
 ### Deployment and start instance events
 
@@ -68,8 +68,8 @@ The `Deployment Event` and `Start Instance` have the following properties:
 
 - `diagramType`: BPMN, DMN, or Form
 - Engine profile:
-  - `executionPlatform`: \<target platform\>
-  - `executionPlatformVersion`: \<target platform version\>
+  - `executionPlatform`: &lt;target platform\>
+  - `executionPlatformVersion`: &lt;target platform version\>
 
 In the event of an unsuccessful deployment, an `error` property will be present in the payload containing an error code.
 
@@ -82,7 +82,7 @@ If provided, as is the case when deploying to a Zeebe-based platform, the payloa
 If the target engine profile is set in the diagram, the payload will also contain it.
 
 ```json
- "executionPlatform": "\<target platform>"
+ "executionPlatform": "<target platform>"
 ```
 
 ### Tracked click events
