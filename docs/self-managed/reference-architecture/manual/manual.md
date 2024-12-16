@@ -7,18 +7,16 @@ description: "Camunda 8 Manual (Java) deployment Reference architecture home "
 
 <!-- Moving target, may be renamed, etc. -->
 
-# Reference Architectures Overview: Manual JAR Deployment
+This reference architecture provides guidance on deploying Camunda 8 Self-Managed as a standalone Java application. This deployment method is ideal for users who prefer manual deployment on bare metal servers or virtual machines (VMs), offering full control over the environment and configuration. It is particularly suited for scenarios with specific infrastructure requirements or highly customized setups.
 
-This section of the Camunda Deployment Reference Architectures provides guidance on deploying Camunda Platform as a standalone Java application. This deployment method is ideal for users who prefer manual deployment on bare metal servers or virtual machines (VMs), offering full control over the environment and configuration. It is particularly suited for scenarios with specific infrastructure requirements or highly customized setups.
-
-## Key Features
+## Key features
 
 - **Single application JAR**: Starting from Camunda 8.7, all core components (Zeebe, Tasklist, Operate, Optimize, and Identity) are bundled into a single JAR file. This simplifies deployment by reducing the number of artifacts to manage.
-- **Full Control**: Users are responsible for all aspects of deployment, including installation, configuration, scaling, and maintenance. This offers maximum flexibility for custom environments.
+- **Full control**: Users are responsible for all aspects of deployment, including installation, configuration, scaling, and maintenance. This offers maximum flexibility for custom environments.
 
 Other deployment options, such as containerized deployments or managed services, might offer more convenience and automation. However, VM based deployment gives you the flexibility to tailor the deployment to your exact needs, which can be beneficial for regulated or highly customized environments.
 
-For documentation on the orchestration cluster, Web Modeler and Console separation, refer to [the documentation](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console)
+For documentation on the orchestration cluster, Web Modeler and Console separation, refer to the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
 
 ## Reference implementations
 
@@ -32,8 +30,8 @@ Before starting with the self-managed single JAR setup, consider evaluating your
 
 ## Limitations
 
-- The focus is on the orchestration cluster. This includes the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe. AS well as the Connectors runtime.
-- General guidance and examples will focus on **unix** users but can be adapted by Windows users with the use of e.g. [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
+- The focus is on the orchestration cluster. This includes the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe, as well as the Connectors runtime.
+- General guidance and examples focuses on **unix** users, but can be adapted by Windows users with options like [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
 - The deployment of `Optimize` is still based on the old architecture and must run on a single node.
 
 ## Architecture
@@ -50,11 +48,9 @@ Compared to the generalized architecture depicted in the [reference architecture
 When scaling from a single machine to multiple machines, ensure that the `Optimize importer` is enabled on only one machine and disabled on the others. Enabling it on multiple machines will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 :::
 
-### High availability (HA)
-
 ![HA JAR](./img/manual-ha.jpg)
 
-For high availability, a minimum of three machines is recommended to ensure fault tolerance and enable master election in case of failures. Refer to the [clustering chapter](/components/zeebe/technical-concepts/clustering.md) to learn more about the raft protocol and clustering concepts.
+For high availability, a minimum of three machines is recommended to ensure fault tolerance and enable master election in case of failures. Refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md) to learn more about the raft protocol and clustering concepts.
 
 ### Components
 
