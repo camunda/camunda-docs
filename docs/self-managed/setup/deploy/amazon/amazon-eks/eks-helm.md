@@ -4,6 +4,8 @@ title: "Install Camunda 8 on an EKS cluster"
 description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Amazon EKS."
 ---
 
+<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/setup/deploy/openshift/terraform-setup.md. The user should have a similar experience when reading both guides. -->
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
@@ -30,6 +32,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 :::caution Optimize compatibility with OpenSearch
 
 **Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
+
 :::
 
 ## Architecture
@@ -569,7 +572,7 @@ Below is a summary of the necessary instructions:
 1. Open Identity in your browser at `https://${DOMAIN_NAME}/identity`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
-4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Zeebe API** with "write" permission.
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell
@@ -591,7 +594,7 @@ kubectl port-forward services/camunda-keycloak 18080:80 --namespace camunda
 1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
-4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Zeebe API** with "write" permission.
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell
