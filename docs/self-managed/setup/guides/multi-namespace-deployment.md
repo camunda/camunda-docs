@@ -26,24 +26,13 @@ global:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
       connectors:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
-      operate:
+      core:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
-        redirectUrl: "https://camunda-team01.example.com/operate,https://camunda-team02.example.com/operate"
-      tasklist:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-        redirectUrl: "https://camunda-team01.example.com/tasklist,https://camunda-team02.example.com/tasklist"
+        redirectUrl: "https://camunda-team01.example.com/core,https://camunda-team02.example.com/core"
       optimize:
         existingSecret: <APP_MACHINE2MACHINE_SECRET>
         redirectUrl: "https://camunda-team01.example.com/optimize,https://camunda-team02.example.com/optimize"
-      zeebe:
-        existingSecret: <APP_MACHINE2MACHINE_SECRET>
-zeebe:
-  enabled: false
-zeebeGateway:
-  enabled: false
-operate:
-  enabled: false
-tasklist:
+core:
   enabled: false
 optimize:
   enabled: false
