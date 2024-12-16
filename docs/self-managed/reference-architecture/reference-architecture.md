@@ -1,35 +1,37 @@
 ---
 id: reference-architecture
-title: "Reference Architecture Overview"
+title: "Reference architecture overview"
 sidebar_label: "Overview"
-description: "Learn about the self-managed reference architectures and how they can help you get started."
+description: "Learn about the Self-Managed reference architectures and how they can help you get started."
 ---
 
-Reference architectures provide a comprehensive blueprint for designing and implementing scalable, robust, and adaptable systems. Our reference architectures are published here, and they offer guidance to help enterprise architects, developers, and IT managers streamline deployments and improve system reliability.
+Reference architectures provide a comprehensive blueprint for designing and implementing scalable, robust, and adaptable systems. The reference architectures published here offer guidance to help enterprise architects, developers, and IT managers streamline deployments and improve system reliability.
 
-## Target User
+## Overview
 
-- **Enterprise Architects**: To design and plan the overall system structure.
+Reference architectures are not a one-size-fits-all solution, and each organization has unique requirements and constraints that may necessitate modifications to the provided blueprints.
+
+While these reference architectures offer a solid foundation and best practices, they should be adapted to fit the specific needs of your project. Use them as a starting point to start your Camunda 8 implementation process, but be prepared to make adjustments to ensure they align with your goals and infrastructure.
+
+### Target users
+
+- **Enterprise architects**: To design and plan the overall system structure.
 - **Developers**: To understand the components and their interactions.
-- **IT Managers**: To ensure the system meets business requirements and is maintainable.
+- **IT managers**: To ensure the system meets business requirements and is maintainable.
 
-Key Benefits:
+### Key benefits
 
-- **Accelerated Deployment**: Predefined best practices and guidelines simplify the deployment process, reducing the time and effort required to set up a reliable workflow automation solution.
+- **Accelerated deployment**: Predefined best practices and guidelines simplify the deployment process, reducing the time and effort required to set up a reliable workflow automation solution.
 - **Consistency**: Ensures consistency across deployments by standardizing system components and their configurations, which helps reduce the risk of errors and simplifies maintenance.
-- **Enhanced Security**: Reference architectures incorporate best practices for securing Camunda 8 deployments, ensuring that sensitive data and processes are protected through standard security measures like encryption, authentication, and access controls.
+- **Enhanced security**: Reference architectures incorporate best practices for securing Camunda 8 deployments, ensuring that sensitive data and processes are protected through standard security measures like encryption, authentication, and access controls.
 
-## Customization and Flexibility
+### Support considerations
 
-It's important to note that reference architectures are not a one-size-fits-all solution. Each organization has unique requirements and constraints that may necessitate modifications to the provided blueprints. While these reference architectures offer a solid foundation and best practices, they should be adapted to fit the specific needs of your project. Use them as a starting point to start your Camunda 8 implementation process, but be prepared to make adjustments to ensure they align with your goals and infrastructure.
-
-## Support Considerations
-
-We recognize that deviations from the reference architecture are unavoidable. However, such changes will introduce additional complexity, making troubleshooting more difficult. When modifications are required, ensure they are well-documented to facilitate future maintenance and troubleshooting more quickly. Camunda publishes [supported environments](/reference/supported-environments.md) information to help you navigate supported configurations.
+Deviations from the reference architecture are unavoidable. However, such changes will introduce additional complexity, making troubleshooting more difficult. When modifications are required, ensure they are well-documented to facilitate future maintenance and troubleshooting more quickly. Camunda publishes [supported environment](/reference/supported-environments.md) information to help you navigate supported configurations.
 
 ## Architecture
 
-### Orchestration Cluster
+### Orchestration cluster
 
 ![Orchestration Cluster](./img/orchestration-cluster.jpg)
 
@@ -37,13 +39,13 @@ We recognize that deviations from the reference architecture are unavoidable. Ho
 
 ![Web Modeler and Console](./img/management-cluster.jpg)
 
-### Orchestration Cluster vs Web Modeler and Console
+### Orchestration cluster vs Web Modeler and Console
 
-When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and Web Modeler and Console self-managed. These components play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
+When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and Web Modeler and Console Self-Managed. These components play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
 
 #### Orchestration Cluster
 
-We refer to the orchestration or automation cluster to the core of Camunda.
+The orchestration cluster is the core of Camunda.
 
 The included components are:
 
@@ -58,15 +60,16 @@ The orchestration cluster is central to Camunda's workflow automation, which foc
 
 #### Web Modeler and Console
 
-The Web Modeler and Console are designed to oversee and manage multiple orchestration clusters. It offers tools and interfaces for administrators and developers to monitor clusters and create BPMN models. The management cluster operates independently of the orchestration cluster and can function without requiring an orchestration cluster.
+Web Modeler and Console are designed to oversee and manage multiple orchestration clusters. It offers tools and interfaces for administrators and developers to monitor clusters and create BPMN models. The management cluster operates independently of the orchestration cluster and can function without requiring an orchestration cluster.
 
 - [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple orchestration clusters.
 - [Web Modeler](/self-managed/modeler/web-modeler/installation.md): A web-based tool for designing and deploying workflow models to any available orchestration cluster.
+
+Additionally, Web Modeler and Console require the following:
+
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 
-:::note External identity provider recommended
-The orchestration cluster has its own integrated Identity component, while Web Modeler and Console run separate and dedicated Identity deployment. For production environments, using an external identity provider is recommended.
-:::
+Unlike the orchestration cluster, Web Modeler and Console run a separate and dedicated Identity deployment. For production environments, using an external [identity provider](/docs/self-managed/setup/guides/connect-to-an-oidc-provider.md) is recommended.
 
 ### Databases
 
@@ -81,9 +84,9 @@ While some guides go into detail on how to deploy databases together with Camund
 
 By decoupling databases from Camunda, you gain greater control and customization over your data storage and management strategies.
 
-### High Availability (HA)
+### High availability (HA)
 
-High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. Generally all components are equipped to be run in a highly available manner. Some components do need extra considerations when run in HA mode.
+High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. While all components are equipped to be run in a highly available manner, some components need extra considerations when run in HA mode.
 
 <!-- TODO Describe Optimize and Connectors limitations or point to resource for more -->
 
@@ -93,7 +96,7 @@ If you run infrastructure on cloud providers, you are often met with different r
 
 If running a single instance is preferred, make sure to implement [regular backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md) since resilience will be limited.
 
-## Camunda 8 Deployment Reference architectures
+## Camunda 8 deployment reference architectures
 
 ### Kubernetes
 
@@ -105,9 +108,9 @@ Kubernetes is a powerful orchestration platform for containerized applications. 
 
 Containers, such as Docker, offer a middle ground between the manual JAR and Kubernetes approaches. They provide a lightweight, portable, and consistent runtime environment, making it easier to develop, test, and deploy applications across different environments. Containers encapsulate an application and its dependencies, ensuring that it runs reliably regardless of where it is deployed.
 
-### Manual JAR (Bare Metal / VMs)
+### Manual JAR (bare metal/virtual machines)
 
-For organizations that prefer traditional infrastructure, reference architectures for bare metal or virtual machines (VMs) offer a structured approach to system deployment. These architectures provide best practices for setting up physical servers or VMs, configuring networks, and managing storage using Infrastructure as Service cloud roviders. They are suitable for environments where containerization or use of Kubernetes services may not be feasible.
+For organizations that prefer traditional infrastructure, reference architectures for bare metal or virtual machines (VMs) offer a structured approach to system deployment. These architectures provide best practices for setting up physical servers or VMs, configuring networks, and managing storage using Infrastructure as Service cloud providers. They are suitable for environments where containerization or use of Kubernetes services may not be feasible.
 
 <!-- TODO add link or card for AWS EC2 -->
 

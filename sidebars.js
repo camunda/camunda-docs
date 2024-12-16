@@ -1010,6 +1010,14 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      "Reference architecture": [
+        "self-managed/reference-architecture/reference-architecture",
+        "self-managed/reference-architecture/manual/manual",
+      ],
+    },
+    {
       "Operational guides": [
         {
           type: "category",
@@ -1578,12 +1586,6 @@ module.exports = {
             },
           ],
         },
-      ],
-    },
-    {
-      "Reference Architecture": [
-        "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual",
       ],
     },
   ],

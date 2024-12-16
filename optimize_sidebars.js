@@ -2621,7 +2621,12 @@ module.exports = {
         },
       ],
     },
-
+    {
+      "Reference Architecture": [
+        docsLink("Overview", "self-managed/reference-architecture/"),
+        docsLink("Manual JAR", "self-managed/reference-architecture/manual/"),
+      ],
+    },
     {
       "Operational guides": [
         {
@@ -3316,15 +3321,6 @@ module.exports = {
                 ),
               ],
             },
-          ],
-        },
-        {
-          "Reference Architecture": [
-            docsLink("Overview", "self-managed/reference-architecture/"),
-            docsLink(
-              "Manual JAR",
-              "self-managed/reference-architecture/manual/"
-            ),
           ],
         },
       ],
