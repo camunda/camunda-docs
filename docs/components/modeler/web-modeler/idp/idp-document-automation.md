@@ -4,7 +4,7 @@ title: Document automation
 description: "You can import a BPMN or DMN diagram at any time with Web Modeler."
 ---
 
-Create a document automation project to automatically classify and extract data from documents based on one or more linked document extraction model(s).
+Create a document automation project to automatically classify and extract data based on linked document extraction models.
 
 ## About document automation
 
@@ -20,6 +20,12 @@ For example, if you want to process large multi-page PDFs containing multiple do
 
 To create a document automation project:
 
-1. [Add projects]: Link one or more document extraction projects to help the system analyze and categorize your documents.
-1. [Test classification] Select an LLM and test the document classification results.
-1. [Publish]: Publish the project to make it available to use in your document processing BPMN diagrams.
+Content...
+
+## Document automation steps
+
+Complete the following steps to configure and publish an unstructured data extraction project:
+
+1. [Step 1: Add projects]: Link one or more document extraction projects to help the system analyze and categorize your documents.
+1. [Step 2: Test classification] Select an LLM and test the document classification results.
+1. [Step 3: Publish]: Publish the project to make it available to use in your document processing BPMN diagrams.
