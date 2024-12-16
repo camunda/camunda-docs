@@ -97,16 +97,51 @@ We have a number of guides on connecting to external databases with the Camunda 
   - [Using Amazon OpenSearch Service through IRSA (only applicable if you are running Camunda Platform on EKS)](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
 - [Running Web Modeler on Amazon Aurora PostgreSQL](/docs/self-managed/modeler/web-modeler/configuration/database/#running-web-modeler-on-amazon-aurora-postgresql)
 
+### Multi-namespace Deployment
+
+The next recommended step is to setup a multi-namespace deployemnt. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
+
 ### Scalability
 
 Here are some points to keep in mind when considering scalability:
 
-- Check the resource limits set and make sure they are reasonable
-- Able to run benchmarks (not absolutely required, but this is nice to have and shows that customers truly understand zeebe)
-- Able to scale zeebe horizontally (add/remove brokers) (if needed)
-- Set Pod disruption budgets
-- Disable CPU limits — unless you have a good use case
+- Check the resource (CPU and memory) limits set and make sure they are reasonable. We recommend to disable the CPU limits unless you have a good usecase. For example, the resource limits can be changed for the core component by modifying the following values:
+
+```yaml
+core:
+  resources:
+    requests:
+      cpu: 800m
+      memory: 1200Mi
+    limits:
+      cpu: null
+      memory: 1920Mi
+```
+
+- If you would like to run benchmarks on the platform then please refer to our [community project](https://github.com/camunda-community-hub/camunda-8-benchmark)
+- To scale the core component, the following values can be modified:
+
+```yaml
+core:
+  clusterSize: "3"
+  partitionCount: "3"
+  replicationFactor: "3"
+```
+
+The `clusterSize` refers to the amount of borkers, the `partitionCount` refers to how each [partition](/docs/components/zeebe/technical-concepts/partitions/) is setup in the cluster, and the `replicationFactor` refers to the [number of nodes](/docs/components/zeebe/technical-concepts/partitions/#replication).
+
+- It is possible to set a podDisruptionBudget. For example you can modify the following values for the core component:
+
+```yaml
+core:
+  podDisruptionBudget:
+    enabled: false
+    minAvailable: null
+    maxUnavailable: 1
+```
+
 - The namespace has a LimitRange
+
 - Use horizontal pod autoscaler where appropriate
 - Use Vertical pod autoscaler where appropriate
 
