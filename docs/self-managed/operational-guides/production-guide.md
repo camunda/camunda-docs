@@ -7,7 +7,32 @@ description: "Learn how to set up the helm chart in a production setting."
 
 ## Overview
 
-The Base Production Setup provides a simplified and streamlined 3-pod deployment architecture for core Camunda 8 applications. This setup minimizes complexity while offering a reliable foundation for most production use cases.
+This guide provides a simplified and streamlined 3-pod deployment architecture for core Camunda 8 applications using the Camunda Helm Chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
+
+The goal of this guide is to give you a **scenario-based, production focused, step-by-step guide** for setting up the Camunda Helm Chart. By following this guide, you should be thoroughly familiar with all of the necessary requirements for having a production ready Camunda Helm Chart.
+
+## Prerequisites
+
+Before proceeding with the setup, ensure the following requirements are met:
+
+- **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access.
+- **Helm**: Helm CLI installed
+- **DNS Configuration**: Access to configure DNS for your domain to point to the Kubernetes cluster ingress.
+- **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
+- **External Dependencies**: Provision the following external dependencies:
+  - **Amazon Aurora PostgreSQL**: For persistent data storage.
+  - **Elastic Cloud on GCP**: For indexing and analytics.
+  - **Azure Active Directory**: For authentication and authorization.
+- **NGTINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
+- **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
+- **Namespace Configuration**: Plan and create namespaces with appropriate resource quotas and LimitRanges for the Camunda Helm Chart.
+- **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment.
+  <!-- - **Network and Security Policies**: -->
+  <!--   - Enable and configure network policies to restrict pod communication. -->
+  <!--   - Apply Pod Security Policies or Pod Security Standards (if supported by your cluster). -->
+  <!-- - **Service Account**: Create a dedicated ServiceAccount for Camunda applications with limited permissions. -->
+
+Ensure all prerequisites are in place to avoid issues during installation or scaling in a production environment.
 
 ## Architecture Overview
 
@@ -24,7 +49,9 @@ Below is the high-level architecture diagram for the base production setup _(cli
 - Other Notes:
   The Optimize importer requires to be in a separate pod.
 
-## Step-by-Step Installation Guide
+# Step-by-Step Production Guide
+
+## Installation and Configuration
 
 ### TLS setup with your DNS hostname (terminated at ingress)
 
@@ -39,7 +66,7 @@ global:
       secretName: camunda-platform
 ```
 
-There is a separate ingress configuration for the core based on REST or GRPC:
+There is a separate ingress configuration for the core, based on GRPC:
 
 Here is an example GRPC Ingress setup for the Core Camunda component.
 
@@ -55,20 +82,6 @@ core:
         secretName: camunda-platform-core-grpc
 ```
 
-Here is an example REST Ingress setup for the Core Camunda component.
-
-```yaml
-core:
-  ingress:
-    rest:
-      enabled: true
-      className: nginx
-      host: "zeebe-rest.camunda.example.com"
-      tls:
-        enabled: true
-        secretName: camunda-platform-core-rest
-```
-
 Please refer to the [kuberntes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) on how to make a TLS secret
 
 The certificate must be an X.509 certificate, issued by a trusted Certificate Authority.
@@ -77,7 +90,7 @@ Please reach out to your DNS provider if you are unsure on how to create a TLS c
 
 For more information on the Ingress setup, please refer to our [ingress setup guide](http://localhost:3000/docs/next/self-managed/setup/guides/ingress-setup/)
 
-### Deploying with OpenID Connect Provider
+### Integrate with an Identity Provider (Azure Active Directory)
 
 Please refer to the following guides:
 
@@ -86,7 +99,7 @@ Please refer to the following guides:
   - [Configuration of the Camunda Helm Chart](/docs/self-managed/setup/guides/using-existing-keycloak/)
   - [Configuration of Keycloak](/docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/)
 
-### External Databases
+### Connect External Databases
 
 To make it easy for testing, the Camunda Helm Chart provides external charts for Databases such as Elasticsearch and PostgresQL. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Elasticsearch dependency chart, elastic-cloud on GCP may be used, and instead of the PostgresQL dependency chart, you could use Amazon Aurora PostgreSQL.
 
@@ -101,7 +114,7 @@ We have a number of guides on connecting to external databases with the Camunda 
 
 The next recommended step is to setup a multi-namespace deployemnt. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
 
-### Scalability
+## Scaling and Performance
 
 Here are some points to keep in mind when considering scalability:
 
@@ -144,7 +157,7 @@ core:
 - Use horizontal pod autoscaler where appropriate
 - Use Vertical pod autoscaler where appropriate
 
-### Reliability
+## Reliability Best Practices
 
 Here are some points to keep in mind when consider reliability:
 
@@ -157,7 +170,7 @@ Here are some points to keep in mind when consider reliability:
 - Always asses the kubernetes object version and be weary of alpha or beta versions.
 - Namespaces have ResourceQuotas
 
-### Security
+## Security Guidelines
 
 Here are some points to keep in mind when considering security:
 
@@ -171,7 +184,7 @@ Here are some points to keep in mind when considering security:
 - Only allow deploying containers only from known registries: https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e
 - Use approved domain names for the ingress hostname: https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes
 
-### Observability
+## Observability and Monitoring
 
 Here are some points to keep in mind when considering observability:
 
@@ -180,7 +193,7 @@ Here are some points to keep in mind when considering observability:
 - Have a log aggregation tool.
 - Audit logs: Enable audit logging for Camunda components to track user actions, especially for sensitive data or configuration changes.
 
-### Component settings
+## Application-Specific Configurations
 
 - Tasklist, Operate, and Optimize should have cleanup enabled (Index Lifecycle Management?)
 - ILM policies could be set for Elasticsearch and ISM policies for OpenSearch
@@ -189,6 +202,6 @@ Here are some points to keep in mind when considering observability:
 - In general, the SaaS setup should be considered for the component settings.
 - Elasticsearch performance tuning
 
-### Upgrading the chart (disable secret generation on upgrades)
+## Upgrade and Maintenance
 
 Make sure auto-generated secrets are mentioned by default in all relevant components.
