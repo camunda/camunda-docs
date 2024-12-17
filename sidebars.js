@@ -804,11 +804,6 @@ module.exports = {
         require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
-        {
-          Deprecated: [
-            require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
-          ],
-        },
       ],
     },
     {
@@ -1097,7 +1092,12 @@ module.exports = {
           Console: [
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
-            "self-managed/console-deployment/configuration",
+            {
+              Configuration: [
+                "self-managed/console-deployment/configuration/configuration",
+                "self-managed/console-deployment/configuration/ssl",
+              ],
+            },
             "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [

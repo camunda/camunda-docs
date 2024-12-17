@@ -29,8 +29,8 @@ Set Output Variable	{variableName}	{value}
 
 ### Parameters
 
-- {variable_name}: The name of the variable you want to set or update.
-- {value}: The value you want to assign to the variable.
+- \{variable_name}: The name of the variable you want to set or update.
+- \{value}: The value you want to assign to the variable.
 
 ### Example
 

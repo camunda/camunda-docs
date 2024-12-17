@@ -98,6 +98,12 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 # Remove Tasklist GraphQL API
 RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
 
+# Remove Zeebe REST API
+RewriteRule ^docs/next/apis-tools/zeebe-api-rest/specifications/?$ /docs/next/apis-tools/camunda-api-rest/specifications/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/?$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/?$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-authentication/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-tutorial/?$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/$1 [R=301,L]
+
 # Move migrating to Zeebe user tasks
 RewriteRule ^docs/next/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
