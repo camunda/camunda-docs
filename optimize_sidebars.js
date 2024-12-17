@@ -1230,7 +1230,6 @@ module.exports = {
               ],
             },
             "components/userguide/creating-reports",
-            "components/userguide/combined-process-reports",
             "components/userguide/process-KPIs",
 
             {
@@ -1272,17 +1271,8 @@ module.exports = {
             },
 
             {
-              "Decision analysis": [
-                "components/userguide/decision-analysis/decision-analysis-overview",
-                "components/userguide/decision-analysis/decision-report",
-                "components/userguide/decision-analysis/decision-filter",
-              ],
-            },
-
-            {
               "Additional features": [
                 "components/userguide/additional-features/alerts",
-                "components/userguide/additional-features/event-based-processes",
                 "components/userguide/additional-features/export-import",
                 "components/userguide/additional-features/footer",
                 "components/userguide/additional-features/variable-labeling",
@@ -2974,23 +2964,16 @@ module.exports = {
                   "System configuration": [
                     "self-managed/optimize-deployment/configuration/system-configuration",
                     "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
-                    "self-managed/optimize-deployment/configuration/event-based-process-configuration",
                   ],
                 },
                 "self-managed/optimize-deployment/configuration/logging",
-                "self-managed/optimize-deployment/configuration/optimize-license",
                 "self-managed/optimize-deployment/configuration/security-instructions",
                 "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
                 "self-managed/optimize-deployment/configuration/history-cleanup",
                 "self-managed/optimize-deployment/configuration/localization",
                 "self-managed/optimize-deployment/configuration/object-variables",
                 "self-managed/optimize-deployment/configuration/clustering",
-                "self-managed/optimize-deployment/configuration/webhooks",
-                "self-managed/optimize-deployment/configuration/authorization-management",
-                "self-managed/optimize-deployment/configuration/user-management",
                 "self-managed/optimize-deployment/configuration/multi-tenancy",
-                "self-managed/optimize-deployment/configuration/multiple-engines",
-                "self-managed/optimize-deployment/configuration/setup-event-based-processes",
                 "self-managed/optimize-deployment/configuration/common-problems",
               ],
             },
@@ -3015,7 +2998,6 @@ module.exports = {
             {
               "Advanced features": [
                 "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
-                "self-managed/optimize-deployment/advanced-features/import-guide",
               ],
             },
           ],
