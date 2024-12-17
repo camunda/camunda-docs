@@ -78,7 +78,7 @@ The following secionts will help you fill out the content for `my-values.yaml`:
 
 ### Ingress TLS and Hostname setup for HTTPS Connections
 
-In order to access the Camunda Platform through HTTPS ingress, you have to enable TLS. To do that, you require three things:
+In order to access the Camunda Platform through HTTPS with ingress, you have to enable TLS. To do that, you require three things:
 
 1. A public registered domain that has configurable DNS records. In our example we will use `camunda.example.com` as the domain.
 2. A TLS certificate created from your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. Also, the certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure ingress resources. Please reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
@@ -112,6 +112,48 @@ core:
 For more information on the Ingress setup, please refer to our [ingress setup guide](http://localhost:3000/docs/next/self-managed/setup/guides/ingress-setup/)
 
 ### Integrate with an Identity Provider (Azure Active Directory)
+
+Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use Azure Active Directory. Here is the values.yaml configuration:
+
+```yaml
+global:
+  identity:
+    auth:
+      type: "MICROSOFT"
+      issuer: "https://login.microsoftonline.com/abc/v2.0"
+      issuerBackendUrl: "https://login.microsoftonline.com/abc/v2.0"
+      tokenUrl: "https://login.microsoftonline.com/abc/oauth2/v2.0/token"
+      jwksUrl: "https://login.microsoftonline.com/abc/discovery/v2.0/keys"
+      identity:
+        clientId: "111"
+        existingSecret: "password-string-literal"
+        audience: "abc111"
+        redirectUrl: "https://identity.camunda.example.com"
+        initialClaimName: "email"
+        initialClaimValue: test.user@camunda.com
+      optimize:
+        clientId: "222"
+        existingSecret: "password-string-literal"
+        audience: "abc222"
+        redirectUrl: "https://optimize.camunda.example.com"
+      core:
+        clientId: "333"
+        existingSecret: "password-string-literal"
+        audience: "abc333"
+        tokenScope: "abc333/.default"
+        redirectUrl: "https://core.camunda.example.com"
+      console:
+        clientId: "444"
+        audience: "abc444"
+        wellKnown: https://login.microsoftonline.com/abc/v2.0/.well-known/openid-configuration
+        existingSecret: "password-string-literal"
+        redirectUrl: "https://console.camunda.example.com"
+      webModeler:
+        clientId: "555"
+        clientApiAudience: "abc555"
+        publicApiAudience: "abc555"
+        redirectUrl: "https://modeler.camunda.example.com"
+```
 
 Please refer to the following guides:
 
