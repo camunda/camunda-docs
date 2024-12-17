@@ -11,7 +11,7 @@ This page provides an overview of how to secure a Camunda Optimize installation.
 
 This guide also identifies areas where we consider security issues to be relevant for the Camunda Optimize product and list those in the subsequent sections. Compliance for those areas is ensured based on common industry best practices and influenced by security requirements of standards like OWASP Top 10 and others.
 
-<Tabs groupId="security" defaultValue="c7" queryString values={
+<Tabs groupId="security" queryString values={
 [
 {label: 'Optimize', value: 'optimize' },
 {label: 'Database', value: 'database' }
