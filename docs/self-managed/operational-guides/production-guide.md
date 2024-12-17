@@ -113,7 +113,7 @@ For more information on the Ingress setup, please refer to our [ingress setup gu
 
 ### Integrate with an Identity Provider (Azure Active Directory)
 
-Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use Azure Active Directory. Here is the values.yaml configuration:
+Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use Azure Active Directory. Here is an example configuration to add to your `my-values.yaml` file:
 
 ```yaml
 global:
