@@ -8,12 +8,10 @@ This guide provides a detailed walkthrough for installing the Camunda 8 single J
 
 This guide focuses on setting up the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. The Web Modeler and Console are not covered in this manual deployment approach. These components are supported on Kubernetes and should be [deployed using Kubernetes](/self-managed/setup/install.md/#install-web-modeler).
 
-## Disclaimer
-
 :::note Using other Cloud provider
-This guide is not limited to AWS but is built around the available tools and services that AWS offers. The scripts and ideas behind it can easily be adjusted for any other cloud provider and use case.
+This guide is built around the available tools and services that AWS offers, but is not limited to AWS. The scripts and ideas included can be adjusted for any other cloud provider and use case.
 
-However, if you wish to use this guide with a different cloud provider, please note that you will be responsible for configuring and maintaining the resulting infrastructure. Our support is limited to questions related to the guide itself, not to the specific tools and services of the chosen cloud provider.
+When using this guide with a different cloud provider, note that you will be responsible for configuring and maintaining the resulting infrastructure. Our support is limited to questions related to the guide itself, not to the specific tools and services of the chosen cloud provider.
 :::
 
 :::warning Cost management
@@ -53,7 +51,7 @@ Both types of subnets are distributed over three availability zones of a single 
 Alternatively, the same setup can run with a single AWS EC2 instance, but be aware that in case of a zone failure, the whole setup would be unreachable.
 :::
 
-## Prerequisites
+## Requirements
 
 - An AWS account to create any resources within AWS.
   - On a high level, permissions are required on the **ec2**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **es** level.
@@ -64,7 +62,6 @@ Alternatively, the same setup can run with a single AWS EC2 instance, but be awa
 
 ### Considerations
 
-- TODO: reference official limitations if there are any
 - The Optimize importer is not highly available and must only run once within the whole setup.
 
 ### Outcome
@@ -72,7 +69,12 @@ Alternatively, the same setup can run with a single AWS EC2 instance, but be awa
 The outcome is a fully working Camunda orchestration cluster running in a high availability setup using AWS EC2 and utilizing a managed OpenSearch domain.
 The EC2 instances come with an extra disk meant for Camunda to ensure that the content is separated from the operating system.
 
-## Get started
+## Create required infrastructure
+
+:::note Terraform infrastructure example
+We do not recommend using the below Terraform related infrastructure as module as we do not guarantee compatibility.
+Therefore, we recommend extending or reusing some elements of the Terraform example to ensure compatibility with your environments.
+:::
 
 1. **Download the reference architecture GitHub repository** to directly reuse and extend the existing Terraform example base.
    The idea is to provide an easy to use example implementation that's flexible to extend to your own needs without the potential limitations of a Terraform module.
@@ -81,20 +83,13 @@ The EC2 instances come with an extra disk meant for Camunda to ensure that the c
 wget https://github.com/camunda/camunda-deployment-references/archive/refs/heads/main.zip
 ```
 
-### Infrastructure
-
-:::note Terraform infrastructure example
-We do not recommend using the below Terraform related infrastructure as module as we do not guarantee compatibility.
-Therefore, we recommend extending or reusing some elements of the Terraform example to ensure compatibility with your environments.
-:::
-
-1. **Go to directory**
+2. **Go to directory**
 
 ```sh
 cd camunda-deployment-references-main/aws/ec2/terraform
 ```
 
-2. **Configure Variables**
+3. **Configure Variables**
 
 Edit the `variables.tf` file to customize the settings such as the prefix for resource names and CIDR blocks. Example:
 
@@ -108,7 +103,7 @@ variable "cidr_blocks" {
 }
 ```
 
-3. **Configure alternative Terraform backend**
+4. **Configure alternative Terraform backend**
 
 It's recommended to use a different backend than `local` as it is just meant for testing and development purposes. The state would be saved locally and does not allow to easily share it with colleagues.
 
@@ -116,7 +111,7 @@ More information on alternatives can be found in the [Terraform documentation](h
 
 - In the `config.tf` change the `backend "local"` to e.g. [AWS 3](https://developer.hashicorp.com/terraform/language/backend/s3) or any other non `local` one that fits your organization.
 
-4. **Configure Terraform AWS provider**
+5. **Configure Terraform AWS provider**
 
    1. **Add the [Terraform AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) in the `config.tf`**
 
@@ -148,7 +143,7 @@ More information on alternatives can be found in the [Terraform documentation](h
 We strongly recommend managing sensitive information using a secure secrets management solution like HashiCorp Vault. For details on how to inject secrets directly into Terraform via Vault, see the [Terraform Vault Secrets Injection Guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
 :::
 
-5. **Initialize Terraform**
+6. **Initialize Terraform**
 
 Initialize the Terraform working directory. This step downloads the necessary provider plugins.
 
@@ -156,7 +151,7 @@ Initialize the Terraform working directory. This step downloads the necessary pr
 terraform init
 ```
 
-6. **Deploy the Infrastructure**
+7. **Deploy the Infrastructure**
 
 Plan the configuration files:
 
@@ -172,7 +167,7 @@ terraform apply infrastructure.plan # apply the creation
 
 The execution takes roughly 30 minutes of which the majority of time ~ 25 minutes is solely the creation of a managed highly available OpenSearch cluster.
 
-7. **Access outputs**
+8. **Access outputs**
 
 After the infrastructure is created, you can access the outputs defined in `outputs.tf`. For example, to get the OpenSearch endpoint:
 
@@ -180,7 +175,7 @@ After the infrastructure is created, you can access the outputs defined in `outp
 terraform output aws_opensearch_domain
 ```
 
-8. **(optional) Connect to remote machines via Bastion host**
+9. **(optional) Connect to remote machines via Bastion host**
 
 The EC2 instances are not public and have to be reached via a Bastion host.
 Alternatively one can utilize the [AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) to connect securely to a private VPC. This is not covered here as the setup requires a lot more manual user interaction.
@@ -193,7 +188,7 @@ export CAMUNDA_IP=$(tf output -json camunda_ips | jq -r '.[0]')
 ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 ```
 
-### Deploy Camunda 8
+## Deploy Camunda 8
 
 1. **Go to the script directory**
 
@@ -267,7 +262,7 @@ If you've used the bastion host for access, you can turn it off when it's no lon
 
 To do this, set the `enable_jump_host` variable to `false` in the `variables.tf` file and reapply Terraform.
 
-### Verify connectivity to Camunda 8
+## Verify connectivity to Camunda 8
 
 Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
@@ -289,7 +284,7 @@ terraform output -raw alb_endpoint
 
 With the endpoint you can follow the example as outlined in [the documentation](/apis-tools/camunda-api-rest/camunda-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
 
-### Upgrade Camunda 8
+## Upgrade Camunda 8
 
 :::info Direct upgrade not supported
 Upgrading directly from a Camunda 8.6 release to 8.7 is not supported and cannot be performed.
@@ -309,13 +304,13 @@ The update process can be automated using the `all-in-one-install.sh` script, wh
 - Regenerates configuration files.
 - Restarts the application to apply the updates.
 
-### Monitoring
+## Monitoring
 
 Our default way of exposing metrics is in the Prometheus format, please conduct the general [metrisc related documentation](/self-managed/zeebe-deployment/operations/metrics.md) to learn more how to scrape Camunda 8.
 
 In an AWS environment, you can leverage CloudWatch not only for log collection but also for gathering [Prometheus metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-metrics.html). It's important to note that while Camunda natively supports Grafana and Prometheus, integrating CloudWatch for metric visualization is possible but requires additional configuration.
 
-### Backups
+## Backups
 
 Please conduct the general topic of backups in the [documentation](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
@@ -323,7 +318,7 @@ With AWS as chosen platform you can utilize [S3](https://aws.amazon.com/s3/) for
 
 If you are using a managed OpenSearch domain instead, you should check out the [official documentation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshots.html) on creating backups and snapshots in OpenSearch.
 
-### Troubleshooting
+## Troubleshooting
 
 Please conduct the general topic of troubleshooting in the [documentation](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 

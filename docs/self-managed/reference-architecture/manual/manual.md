@@ -28,11 +28,11 @@ This section includes deployment reference architectures for manual setups:
 
 Before starting with the self-managed single JAR setup, consider evaluating your deployment platform options (Kubernetes / Docker) based on your familiarity with these platforms. Self-managing your deployment requires a solid understanding of infrastructure, networking, and application management. If you prefer a simpler and more managed solution, you may want to explore [our SaaS offerings](https://camunda.com/platform/). SaaS can significantly reduce maintenance efforts, allowing you to focus on your core business needs.
 
-## Limitations
+## Considerations
 
-- The focus is on the orchestration cluster. This includes the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe, as well as the Connectors runtime.
+- This overview page focuses on deploying the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster), the single JAR compromised of Identity, Operate, Optimize, Tasklist, and Zeebe, as well as the Connectors runtime. Web Modeler and Console deployments are not included.
 - General guidance and examples focuses on **unix** users, but can be adapted by Windows users with options like [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) or included `batch` files.
-- The deployment of `Optimize` is still based on the old architecture and must run on a single node.
+- The Optimize importer is not highly available and must only run once within the whole setup.
 
 ## Architecture
 
@@ -40,7 +40,7 @@ Before starting with the self-managed single JAR setup, consider evaluating your
 
 This above diagram illustrates a single-machine deployment using the single JAR package. While simple and effective for lightweight setups, scaling to multiple machines requires careful planning.
 
-Compared to the generalized architecture depicted in the [reference architecture](../reference-architecture.md#architecture), the `Optimize importer` can be enabled as part of the single JAR.
+Compared to the generalized architecture depicted in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#architecture), the `Optimize importer` can be enabled as part of the single JAR.
 
 ### High Availability (HA)
 
