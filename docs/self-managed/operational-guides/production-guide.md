@@ -53,9 +53,37 @@ Below is the high-level architecture diagram for the base production setup _(cli
 
 ## Installation and Configuration
 
-### TLS setup with your DNS hostname (terminated at ingress)
+#### Namespace Setup
 
-In order to access the Camunda Platform through HTTPS ingress, you have to enable TLS. To do that, you must also specify a TLS secret. Here is an example values.yaml configuration:
+To get started, create two namespace:
+
+```bash
+kubectl create namespace management
+kubectl create namespace orchestration
+```
+
+Within the `management` namespace, we will install Identity, Console, and all the Web Modeler components, . Within the `orchestration` namespace, we will install the Camunda Orchestration Core componennt, along with Connectors and Optimize importer. We do not have to worry about installing each component separately since that will be handled by the Helm Chart automatically.
+
+#### Installing the Helm Chart
+
+The Camunda Helm Chart can be installed using the following command:
+
+```bash
+# This will install the latest Camunda Helm chart with the latest applications/dependencies.
+helm install camunda camunda/camunda-platform \
+    --values my-values.yaml
+```
+
+The following secionts will help you fill out the content for `my-values.yaml`:
+
+### Ingress TLS and Hostname setup for HTTPS Connections
+
+In order to access the Camunda Platform through HTTPS ingress, you have to enable TLS. To do that, you require two things:
+
+1. a TLS certificate. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. Also, the certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure ingress resources. Please reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
+2. A TLS secret created from your TLS certificate. Please refer to the [kuberntes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) on how to make a TLS secret
+
+Here is an example values.yaml configuration :
 
 ```yaml
 global:
@@ -66,9 +94,7 @@ global:
       secretName: camunda-platform
 ```
 
-There is a separate ingress configuration for the core, based on GRPC:
-
-Here is an example GRPC Ingress setup for the Core Camunda component.
+There is a separate ingress configuration for the core, based on GRPC. Here is an example GRPC Ingress setup for the Core Camunda component:
 
 ```yaml
 core:
@@ -81,12 +107,6 @@ core:
         enabled: true
         secretName: camunda-platform-core-grpc
 ```
-
-Please refer to the [kuberntes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) on how to make a TLS secret
-
-The certificate must be an X.509 certificate, issued by a trusted Certificate Authority.
-Also, the certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure ingress resources.
-Please reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
 
 For more information on the Ingress setup, please refer to our [ingress setup guide](http://localhost:3000/docs/next/self-managed/setup/guides/ingress-setup/)
 
@@ -110,9 +130,14 @@ We have a number of guides on connecting to external databases with the Camunda 
   - [Using Amazon OpenSearch Service through IRSA (only applicable if you are running Camunda Platform on EKS)](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
 - [Running Web Modeler on Amazon Aurora PostgreSQL](/docs/self-managed/modeler/web-modeler/configuration/database/#running-web-modeler-on-amazon-aurora-postgresql)
 
-### Multi-namespace Deployment
+## Application-Specific Configurations
 
-The next recommended step is to setup a multi-namespace deployemnt. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
+- Tasklist, Operate, and Optimize should have cleanup enabled (Index Lifecycle Management?)
+- ILM policies could be set for Elasticsearch and ISM policies for OpenSearch
+- Retention time is a setting in the helm chart with default values from the SaaS setup.
+- Optimize: disable ObjectVariable import by default (save space in Elasticsearch). Add a setting to enable it explicitly on demand.
+- In general, the SaaS setup should be considered for the component settings.
+- Elasticsearch performance tuning
 
 ## Scaling and Performance
 
@@ -193,15 +218,12 @@ Here are some points to keep in mind when considering observability:
 - Have a log aggregation tool.
 - Audit logs: Enable audit logging for Camunda components to track user actions, especially for sensitive data or configuration changes.
 
-## Application-Specific Configurations
-
-- Tasklist, Operate, and Optimize should have cleanup enabled (Index Lifecycle Management?)
-- ILM policies could be set for Elasticsearch and ISM policies for OpenSearch
-- Retention time is a setting in the helm chart with default values from the SaaS setup.
-- Optimize: disable ObjectVariable import by default (save space in Elasticsearch). Add a setting to enable it explicitly on demand.
-- In general, the SaaS setup should be considered for the component settings.
-- Elasticsearch performance tuning
-
 ## Upgrade and Maintenance
 
 Make sure auto-generated secrets are mentioned by default in all relevant components.
+
+## Other Concepts to take note of
+
+### Multi-namespace Deployment
+
+The next recommended step is to setup a multi-namespace deployemnt. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
