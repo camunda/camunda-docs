@@ -78,12 +78,13 @@ The following secionts will help you fill out the content for `my-values.yaml`:
 
 ### Ingress TLS and Hostname setup for HTTPS Connections
 
-In order to access the Camunda Platform through HTTPS ingress, you have to enable TLS. To do that, you require two things:
+In order to access the Camunda Platform through HTTPS ingress, you have to enable TLS. To do that, you require three things:
 
-1. a TLS certificate. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. Also, the certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure ingress resources. Please reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
-2. A TLS secret created from your TLS certificate. Please refer to the [kuberntes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) on how to make a TLS secret
+1. A public registered domain that has configurable DNS records. In our example we will use `camunda.example.com` as the domain.
+2. A TLS certificate created from your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. Also, the certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure ingress resources. Please reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
+3. A TLS secret created from your TLS certificate. In our example, we will use a secret called `camunda-platform`. Please refer to the [kuberntes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) on how to make a TLS secret
 
-Here is an example values.yaml configuration :
+Here is an example values.yaml configuration using the domain and TLS secret mentioned above:
 
 ```yaml
 global:
@@ -94,7 +95,7 @@ global:
       secretName: camunda-platform
 ```
 
-There is a separate ingress configuration for the core, based on GRPC. Here is an example GRPC Ingress setup for the Core Camunda component:
+Optionally, there is a separate ingress configuration for the core, based on GRPC. Here is an example GRPC Ingress setup for the Core Camunda component:
 
 ```yaml
 core:
