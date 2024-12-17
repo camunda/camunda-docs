@@ -26,6 +26,10 @@ You can define assignments, scheduling, variable mappings, and a form for the us
 
 The [job worker implementation](#job-worker-implementation) section details the differences and limitations of job worker-based user tasks.
 
+:::note
+With 8.6, job worker-based user tasks are now deprecated. While these are currently still supported, consider [migrating to Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md).
+:::
+
 ### Assignments
 
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.

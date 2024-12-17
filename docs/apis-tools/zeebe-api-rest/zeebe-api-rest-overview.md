@@ -1,7 +1,7 @@
 ---
 id: zeebe-api-rest-overview
 title: "Overview"
-description: "Interact with Zeebe clusters. Run user task state operations for Zeebe user tasks."
+description: "Interact with Zeebe clusters. Run user task state operations for Camunda user tasks."
 ---
 
 ## Introduction
