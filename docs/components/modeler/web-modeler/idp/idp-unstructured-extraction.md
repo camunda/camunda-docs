@@ -70,8 +70,8 @@ On the **Extract fields** tab, add the data [extraction fields](idp-key-concepts
 Add an extraction field for each piece of data you want to extract from your document(s).
 
 1. Click **Add field**.
-1. **Field name**: Enter a name for the field, for example “invoice_id”.
-1. **Type**: Select the type of data the field will be populated with. For example, “Number” for a monetary field (“invoice_amount”), .
+1. **Field name**: Enter a name for the field, for example “invoice_id”. The name format should follow FEEL naming convention, for example it is case sensitive and should not include spaces. See [FEEL variable names](/components/modeler/feel/language-guide/feel-variables.md#variable-names).
+1. **Type**: Select the data type the field will be populated with. For example, “Number” for a monetary field (“invoice_amount”). See [extraction field data types](idp-reference.md#extraction-field-data-types).
 1. **Prompt**: Enter a clear and specific prompt to guide the LLM in accurately extracting data. For example, for an "invoice_date" field you might use "The date the invoice was issued".
 1. Click **Add** to add the field.
 1. Repeat the process until you have added all your required extraction fields. You can edit and delete fields at any time.

@@ -20,9 +20,9 @@ For SaaS, uploaded documents are stored in Web Modeler itself, not your cluster.
 
 Storage limit?
 
-## Extraction field types
+## Extraction field data types
 
-You can use any of the following field types when creating an extraction field.
+You can use any of the following data types when creating an extraction field.
 
 | Field type | Description |
 | :--------- | :---------- |
