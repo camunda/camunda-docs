@@ -158,9 +158,6 @@ global:
 If you would like some more guidance relating to authentication, then please refer to the following guides:
 
 - [Connect to an OpenID Connect provider](http://localhost:3000/docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/)
-- Connect to existing Keycloak:
-  - [Configuration of the Camunda Helm Chart](/docs/self-managed/setup/guides/using-existing-keycloak/)
-  - [Configuration of Keycloak](/docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/)
 
 ### Connect External Databases
 
@@ -190,7 +187,7 @@ elasticsearch:
 #### Connecting to Amazon Aurora PostgreSQL
 
 ```yaml
-
+placeholder for external postgresql connections
 ```
 
 You can see that we have globally enabled all internal component configuration for Elasticsearch through `global.elasticsearch.enabled` and we have disable internal Elasticsearch through `elasticsearch.enabled`.
@@ -299,3 +296,9 @@ Make sure auto-generated secrets are mentioned by default in all relevant compon
 ### Multi-namespace Deployment
 
 The next recommended step is to setup a multi-namespace deployemnt. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
+
+### Keycloak
+
+- Connect to existing Keycloak:
+  - [Configuration of the Camunda Helm Chart](/docs/self-managed/setup/guides/using-existing-keycloak/)
+  - [Configuration of Keycloak](/docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/)
