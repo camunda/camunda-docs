@@ -155,7 +155,7 @@ global:
         redirectUrl: "https://modeler.camunda.example.com"
 ```
 
-Please refer to the following guides:
+If you would like some more guidance relating to authentication, then please refer to the following guides:
 
 - [Connect to an OpenID Connect provider](http://localhost:3000/docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/)
 - Connect to existing Keycloak:
@@ -164,9 +164,38 @@ Please refer to the following guides:
 
 ### Connect External Databases
 
-To make it easy for testing, the Camunda Helm Chart provides external charts for Databases such as Elasticsearch and PostgresQL. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Elasticsearch dependency chart, elastic-cloud on GCP may be used, and instead of the PostgresQL dependency chart, you could use Amazon Aurora PostgreSQL.
+The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as Bitnami Elasticsearch Helm Chart and Bitnami PostgresQL Helm Chart. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Elasticsearch dependency chart, we will use elastic-cloud on GCP, and instead of the PostgresQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
-We have a number of guides on connecting to external databases with the Camunda Helm Chart:
+It is assumed that you already have elastic-cloud and Amazon Aurora PostgreSQL setup and ready to go.
+
+#### Connecting to elastic-cloud on GCP:
+
+```yaml
+global:
+  elasticsearch:
+    enabled: true
+    external: true
+    auth:
+      username: elastic
+      password: pass
+    url:
+      protocol: http
+      host: elastic-cloud.example.com
+      port: 443
+
+elasticsearch:
+  enabled: false
+```
+
+#### Connecting to Amazon Aurora PostgreSQL
+
+```yaml
+
+```
+
+You can see that we have globally enabled all internal component configuration for Elasticsearch through `global.elasticsearch.enabled` and we have disable internal Elasticsearch through `elasticsearch.enabled`.
+
+If you would like further information, we have a number of guides on connecting to external databases with the Camunda Helm Chart:
 
 - [Using existing Elasticsearch](/docs/self-managed/setup/guides/using-existing-elasticsearch/)
 - [Using Amazon OpenSearch Service](/docs/self-managed/setup/guides/using-existing-opensearch/)
