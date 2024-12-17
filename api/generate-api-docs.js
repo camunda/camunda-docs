@@ -21,7 +21,7 @@ function runCommand(command) {
 // API name must be passed in as an arg.
 const api = process.argv[2];
 if (api === undefined) {
-  const validAPIs = string.join(apiStrategies.join, ", ");
+  const validAPIs = Object.keys(apiStrategies).join(", ");
   console.log(`Please specify an API name. Valid names: ${validAPIs}`);
   process.exit();
 }
@@ -29,7 +29,7 @@ if (api === undefined) {
 // The API name must be recognized.
 const strategy = apiStrategies[api];
 if (strategy === undefined) {
-  const validAPIs = string.join(apiStrategies.join, ", ");
+  const validAPIs = Object.keys(apiStrategies).join(", ");
   console.error(`Invalid API name ${api}. Valid names: ${validAPIs}`);
   process.exit();
 }
