@@ -302,7 +302,8 @@ Each interceptor should be configured with the values described below:
         </tr>
         <tr>
             <td>className</td>
-            <td>Entry point of the interceptor, a class which must:
+            <td>
+              Entry point of the interceptor, a class which must:
               <li>implement <a href="https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html">io.grpc.ServerInterceptor</a></li>
               <li>have public visibility</li>
               <li>have a public default constructor (i.e. no-arg constructor)</li>
