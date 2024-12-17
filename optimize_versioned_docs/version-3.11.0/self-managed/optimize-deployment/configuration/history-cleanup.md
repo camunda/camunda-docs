@@ -86,7 +86,7 @@ historyCleanup:
 
 ### Ingested event cleanup
 
-The age of ingested event data is determined by the [`time`](../../../apis-tools/optimize-api/event-ingestion.md#request-body) field provided for each event at the time of ingestion.
+The age of ingested event data is determined by the [`time`](##request-body) field provided for each event at the time of ingestion.
 
 To enable the cleanup of event data, the `historyCleanup.ingestedEventCleanup.enabled` property needs to be set to `true`.
 

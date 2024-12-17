@@ -2915,7 +2915,6 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/history-cleanup",
                 "self-managed/optimize-deployment/configuration/localization",
                 "self-managed/optimize-deployment/configuration/object-variables",
-                "self-managed/optimize-deployment/configuration/clustering",
                 "self-managed/optimize-deployment/configuration/multi-tenancy",
                 "self-managed/optimize-deployment/configuration/common-problems",
               ],

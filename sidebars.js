@@ -1220,10 +1220,6 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/object-variables/"
                 ),
                 optimizeLink(
-                  "Clustering",
-                  "self-managed/optimize-deployment/configuration/clustering/"
-                ),
-                optimizeLink(
                   "Multi-tenancy",
                   "self-managed/optimize-deployment/configuration/multi-tenancy/"
                 ),
