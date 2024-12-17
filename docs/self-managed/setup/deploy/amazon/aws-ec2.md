@@ -16,9 +16,9 @@ When using this guide with a different cloud provider, note that you will be res
 
 :::warning Cost management
 Following this guide will incur costs on your Cloud provider account, namely for the EC2 instances, and OpenSearch. More information can be found on AWS and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
-:::
 
-<!-- TODO: add calculator specific for this setup -->
+To get an estimate, you can refer to this [example calculation](https://calculator.aws/#/estimate?id=8ce855e2d02d182c4910ec8b4ea2dbf42ea5fd1d), which can be further optimized to suit your specific use cases.
+:::
 
 ## Architecture
 
