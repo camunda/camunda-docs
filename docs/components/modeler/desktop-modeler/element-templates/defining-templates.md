@@ -77,9 +77,9 @@ For example, given the following `$schema` definition, the application takes `0.
 
 The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
 
-## Execution platform compatibility
+## Template compatibility
 
-You can define template compatibility with different execution platforms using the `engines` property.
+You can define template compatibility with execution platforms and applications using the `engines` property.
 
 This property is a dictionary object, where the execution platform names are the keys, and the [semantic version](https://semver.org/) ranges are the values.
 
@@ -91,13 +91,13 @@ For example, the following `engines` definition specifies that the template is c
 }
 ```
 
-Compatibility is only validated if the platform version is provided by both the template and the modeler. In the example below, the template is compatible with specific versions of both Desktop and Web Modeler, but it requires Camunda version 8.6 or higher for both:
+Compatibility is only validated if the platform version is provided by both the template and the modeler. In the example below, the template is compatible with specified versions of both Desktop and Web Modeler, but it requires Camunda version 8.6 or higher for both:
 
 ```json
 "engines": {
   "camunda": ">8.5",
-  "camundaDesktopModeler": "5.30",
-  "camundaWebModeler": "8.6.5"
+  "camundaDesktopModeler": ">=5.30",
+  "camundaWebModeler": "^8.5.5"
 }
 ```
 
