@@ -83,7 +83,7 @@ Additionally, visit our documentation on [Operate](../self-managed/operate-deplo
 
 ### SDKs
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
+<DocCardList items={[{type:"link", href:"/docs/8.5/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
 {
 type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js SDK", docId:"apis-tools/node-js-sdk"
 },
