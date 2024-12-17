@@ -32,18 +32,6 @@ Over time, various client-side security mechanisms have been developed to protec
 
 Optimize adds several of these headers which can be fine-tuned in the [configuration](./system-configuration.md#security) to ensure appropriate security.
 
-## Authentication
-
-<span class="badge badge--platform">Camunda 7 only</span>
-
-Authentication controls who can access Optimize. Read all about how to restrict the application access in the [user access management guide](./user-management.md).
-
-## Authorization
-
-<span class="badge badge--platform">Camunda 7 only</span>
-
-Authorization controls what data a user can access and change in Optimize once authenticated. Authentication is a prerequisite to authorization. Read all about how to restrict the data access in the [authorization management guide](./authorization-management.md).
-
 </TabItem>
 
 <TabItem value='database'>
