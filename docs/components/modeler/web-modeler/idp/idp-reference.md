@@ -6,16 +6,22 @@ description: "You can import a BPMN or DMN diagram at any time with Web Modeler.
 
 The following technical reference information is provided for IDP.
 
-## Supported document types
+## Document file formats
 
-IDP currently supports processing and data extraction for the following types of document.
+IDP currently only supports data extraction from the following document file formats.
 
-| Document Type | Description                                                                                                              |
-| :------------ | :----------------------------------------------------------------------------------------------------------------------- |
-| PDF           | <p><ul><li><p>PDF documents must not be password protected.</p></li><li>Maximum document file size is 4MB.</li></ul></p> |
+| File format | Description                                                                                                       |
+| :---------- | :---------------------------------------------------------------------------------------------------------------- |
+| PDF         | <p><ul><li>PDF documents must not be password protected.</li><li>Maximum document file size is 4MB.</li></ul></p> |
 
 ## Document storage
 
-Uploaded documents are stored in Web Modeler, not your cluster.
+For SaaS, uploaded documents are stored in Web Modeler itself, not your cluster.
 
 ## Extraction field types
+
+You can use any of the following field types when creating an extraction field.
+
+| Field type | Description |
+| :--------- | :---------- |
+| Number     | ...         |

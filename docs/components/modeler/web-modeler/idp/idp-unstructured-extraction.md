@@ -22,8 +22,8 @@ Complete the following steps to configure and publish an unstructured data extra
 
 1. [Upload documents](#step-1-upload-documents): Upload a set of sample documents to use for training the extraction model.
 1. [Extract fields](#step-2-extract-fields): Add and configure the [extraction fields](idp-key-concepts.md#extraction-fields) you want to use to extract data.
-1. [Validate extraction](#step-3-validate-extraction): Test the data extraction using your uploaded document(s) and evaluate the extraction results.
-1. [Publish](#step-4-publish): Publish the project to make it available for use in your processes and [document automation](idp-document-automation.md) projects.
+1. [Validate extraction](#step-3-validate-extraction): Test and evaluate the data extraction results using your uploaded documents.
+1. [Publish](#step-4-publish): Publish the project to make it available for use [in your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
 
 <!-- Configure and publish your project on the **Unstructured data extraction** screen.
 
@@ -35,7 +35,7 @@ Use the tabs to navigate between configuration steps at any time.
 
 ## Step 1: Upload documents
 
-Start by uploading a set of sample PDF documents that represent the specific document type you want to extract data from. You will use these documents to test your data extraction in the next steps.
+Start by uploading a set of sample PDF documents that represent the specific document type you want to extract data from. You will use these documents throughout the data extraction process.
 
 <img src={IdpUploadDocumentsUnstructuredImg} alt="Unstructured data extraction screen" />
 
@@ -52,7 +52,9 @@ Start by uploading a single model sample document that contains all the data fie
 
 - If a single document doesn’t include all the data fields you require, upload multiple documents to cover all the variations for the document type. The number and range of sample documents you need to upload depends on the complexity of your unstructured data and your requirements.
 
-- For example, you should upload as a minimum a single sample document for each variation of a document type. This may provide enough extraction accuracy if it is an exact representation of the specific type of document. However, it is more likely that you will need to upload multiple sample documents to ensure extraction accuracy.
+- For example, you must upload at least one sample document for each variation of a document type. This may provide enough extraction accuracy if it is an exact representation of the specific type of document, with no variations in layout or content. However, it is more likely that you will need to upload multiple sample documents to ensure extraction accuracy.
+
+- When choosing your sample documents, variation is important to ensure the system captures the full range of document types it will encounter. As a general guideline, Camunda recommends starting with three to five documents, and uploading more as needed to represent the full range of possible data types.
 
 ## Step 2: Extract fields
 
@@ -83,7 +85,7 @@ Add an extraction field for each piece of data you want to extract from your doc
 
 ### Extract data and save as a test case
 
-Once you have set up your extraction fields, you can select an LLM foundation model and test it to see what data is extracted.
+Once you have set up your extraction fields, you can select an LLM foundation model and test the data extraction.
 
 1. **Extraction model**: Select the LLM foundation model you want to use.
 1. Select the document you want to test the data extraction against.
@@ -106,7 +108,7 @@ Once you have set up your extraction fields, you can select an LLM foundation mo
 
 ## Step 3: Validate extraction
 
-On the **Validate extraction** tab, you can validate and test your configured data extraction against all your uploaded documents. This step evaluates the accuracy of the data extraction, using your chosen LLM foundation model and extraction fields/prompts.
+On the **Validate extraction** tab, validate and test your configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by an LLM foundation model using your extraction fields.
 
 <img src={IdpValidationResultsImg} alt="Validate extraction screen" />
 
@@ -128,11 +130,11 @@ Search and filter the results if you want to work with specific documents or ext
 
 ### Validation status
 
-| Icon                                                                        | Status  | Description                                                                                                                      |
-| :-------------------------------------------------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------- |
-| <img src={IdpIconPassImg} alt="Pass icon" className="inline-image" />       | Pass    | The document validation passed with accurate and expected results.                                                               |
-| <img src={IdpIconCautionImg} alt="Caution icon" className="inline-image" /> | Caution | A test case is missing for comparison. Click **Save test case** to...                                                            |
-| <img src={IdpIconFailImg} alt="Fail icon" className="inline-image" />       | Fail    | The validation results do not match the expected output for this document. Click **Review document** to investigate and resolve. |
+| Icon                                                                        | Status  | Description                                                                                                                     |
+| :-------------------------------------------------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------ |
+| <img src={IdpIconPassImg} alt="Pass icon" className="inline-image" />       | Pass    | The document validation passed with accurate and expected results.                                                              |
+| <img src={IdpIconCautionImg} alt="Caution icon" className="inline-image" /> | Caution | A test case is missing for comparison. Click **Save test case** to...                                                           |
+| <img src={IdpIconFailImg} alt="Fail icon" className="inline-image" />       | Fail    | The validation results do not match the expected output for the document. Click **Review document** to investigate and resolve. |
 
 #### Example
 
@@ -144,11 +146,11 @@ The following example shows the results of a partially successful extraction.
 
 ## Step 4: Publish
 
-On the **Publish** tab, publish the document extraction project to make it available for [integration into your processes](idp-integrate.md) or [document automation](idp-document-automation.md) projects.
+On the **Publish** tab, publish the project to make it available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
 
 <img src={IdpPublishProjectImg} alt="Publish project screen" />
 
-1. The unpublished project is shown with a “Draft” Status. Click **Publish** to open the **Publish Extraction Project** modal.
+1. Unpublished projects are shown with a “Draft” **Status**. Click **Publish** to open the **Publish Extraction Project** modal.
 1. Enter a version name and description for the project and click **Publish**.
 1. The project is published and now available to use [in your processes](idp-integrate.md) or [document automation](idp-document-automation.md) projects.
 

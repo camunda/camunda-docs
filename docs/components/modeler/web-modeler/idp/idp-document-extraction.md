@@ -6,14 +6,15 @@ description: "You can import a BPMN or DMN diagram at any time with Web Modeler.
 
 import IdpExtractionProjectModalImg from './img/idp-create-extraction-project-modal.png';
 
-Create a document extraction project to identify and extract specific data from your structured and unstructured documents.
+Extract data from a single type of structured or unstructured document.
 
 ## About document extraction
 
 Document extraction projects form the basis for using IDP in your end-to-end processes.
 
 - Create a separate document extraction project for each type of document you want to categorize and extract data from, such as an invoice, a report, identity document, and so on.
-- Once published, extraction projects can be added to your processes, or linked to a [document automation](idp-document-automation.md) project.
+
+- Once published, extraction projects can be [integrated into your processes](idp-integrate.md) or linked to a [document automation](idp-document-automation.md) project.
 
 ## Create document extraction project
 

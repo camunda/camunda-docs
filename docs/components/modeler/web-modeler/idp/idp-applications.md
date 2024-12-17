@@ -10,11 +10,6 @@ Create and manage your IDP projects in an **IDP application** folder.
 
 <img src={IdpApplicationImg} alt="IDP application screen" />
 
-- IDP applications and projects are only fully operational when linked to a healthy, active cluster. You can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster when required.
-- You can only select a cluster that supports Camunda document handling (8.7+).
-- You cannot change the selected cluster of an IDP application after it has been created.
-- Camunda recommends using a development cluster as best practice.
-
 ## Create an IDP application
 
 To create an IDP application:
@@ -28,4 +23,11 @@ To create an IDP application:
    :::
 
 1. Click **Create** to create the IDP application.
-1. You can now add and create [document extraction](idp-document-extraction.md) and [document automation](idp-document-automation.md) projects in your IDP application.
+1. You can now create [document extraction](idp-document-extraction.md) and [document automation](idp-document-automation.md) projects in your IDP application.
+
+## IDP application clusters
+
+- IDP applications and projects are only fully operational when linked to a healthy, active cluster. You can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster when required.
+- You can only select a cluster that supports Camunda document handling (8.7+).
+- You cannot change the cluster of an IDP application after it has been created.
+- Camunda recommends using a development cluster for your IDP applications.
