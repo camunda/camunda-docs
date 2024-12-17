@@ -377,10 +377,6 @@ module.exports = {
                   "components/modeler/desktop-modeler/element-templates/defining-templates/"
                 ),
                 docsLink(
-                  "Defining templates in Camunda 7",
-                  "components/modeler/desktop-modeler/element-templates/c7-defining-templates/"
-                ),
-                docsLink(
                   "Additional resources",
                   "components/modeler/desktop-modeler/element-templates/additional-resources/"
                 ),
@@ -1418,51 +1414,6 @@ module.exports = {
             ),
           ],
         },
-
-        {
-          "Camunda 7 specific": [
-            docsLink(
-              "Deciding about your Camunda 7 stack",
-              "components/best-practices/architecture/deciding-about-your-stack-c7/"
-            ),
-            docsLink(
-              "Sizing your Camunda 7 environment",
-              "components/best-practices/architecture/sizing-your-environment-c7/"
-            ),
-            docsLink(
-              "Invoking services from a Camunda 7 process",
-              "components/best-practices/development/invoking-services-from-the-process-c7/"
-            ),
-            docsLink(
-              "Understanding Camunda 7 transaction handling",
-              "components/best-practices/development/understanding-transaction-handling-c7/"
-            ),
-            docsLink(
-              "Testing process definitions in Camunda 7",
-              "components/best-practices/development/testing-process-definitions-c7/"
-            ),
-            docsLink(
-              "Routing events to processes in Camunda 7",
-              "components/best-practices/development/routing-events-to-processes-c7/"
-            ),
-            docsLink(
-              "Operating Camunda 7",
-              "components/best-practices/operations/operating-camunda-c7/"
-            ),
-            docsLink(
-              "Performance tuning Camunda 7",
-              "components/best-practices/operations/performance-tuning-camunda-c7/"
-            ),
-            docsLink(
-              "Securing Camunda 7",
-              "components/best-practices/operations/securing-camunda-c7/"
-            ),
-            docsLink(
-              "Extending human task management in Camunda 7",
-              "components/best-practices/architecture/extending-human-task-management-c7/"
-            ),
-          ],
-        },
       ],
     },
   ],
@@ -1832,10 +1783,6 @@ module.exports = {
 
                 {
                   DecisionDefinition: [
-                    docsLink(
-                      "Search decision definitions",
-                      "apis-tools/operate-api/specifications/search-7/"
-                    ),
                     docsLink(
                       "Get decision definition by key",
                       "apis-tools/operate-api/specifications/by-key-6/"
@@ -3027,7 +2974,6 @@ module.exports = {
                   "System configuration": [
                     "self-managed/optimize-deployment/configuration/system-configuration",
                     "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
-                    "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
                     "self-managed/optimize-deployment/configuration/event-based-process-configuration",
                   ],
                 },
@@ -3048,19 +2994,6 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/common-problems",
               ],
             },
-
-            {
-              Plugins: [
-                "self-managed/optimize-deployment/plugins/plugin-system",
-                "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
-                "self-managed/optimize-deployment/plugins/decision-import-plugin",
-                "self-managed/optimize-deployment/plugins/elasticsearch-header",
-                "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
-                "self-managed/optimize-deployment/plugins/single-sign-on",
-                "self-managed/optimize-deployment/plugins/variable-import-plugin",
-              ],
-            },
-            "self-managed/optimize-deployment/reimport",
             {
               "Migration & update": [
                 {
@@ -3074,31 +3007,6 @@ module.exports = {
                     "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
                     "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
                     "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8",
-                  ],
-                  "Camunda 7": [
-                    "self-managed/optimize-deployment/migration-update/camunda-7/instructions",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.13-to-3.14",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.12-to-3.13",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.11-to-3.12",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.10-to-3.11",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.9-to-3.10",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.9-preview-1-to-3.9",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.8-to-3.9-preview-1",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.7-to-3.8",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.6-to-3.7",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.5-to-3.6",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.4-to-3.5",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.3-to-3.4",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.2-to-3.3",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.1-to-3.2",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.0-to-3.1",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.7-to-3.0",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.6-to-2.7",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.5-to-2.6",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.4-to-2.5",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.3-to-2.4",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.2-to-2.3",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.1-to-2.2",
                   ],
                 },
               ],

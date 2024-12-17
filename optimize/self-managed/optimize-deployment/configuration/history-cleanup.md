@@ -18,12 +18,6 @@ There are four types of history cleanup:
 
 By default, all four types of history cleanup are disabled. They can be enabled individually by config and the cleanup is applied accordingly.
 
-:::note Note for Camunda 7 users
-By default, history cleanup is disabled in Optimize when running in Camunda 7. Before enabling it, you should consider the type of cleanup and time to live period that fits to your needs. Otherwise, historic data intended for analysis might get lost irreversibly.
-
-The default [engine history cleanup](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/#history-cleanup) in Camunda 7 works differently than the one in Optimize due to the possible cleanup strategies. The current implementation in Optimize is equivalent to the [end time strategy](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/#end-time-based-strategy) of the Engine.
-:::
-
 ## Setup
 
 The most important settings are `cronTrigger` and `ttl`; their global default configuration is the following:

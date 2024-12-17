@@ -13,23 +13,10 @@ This guide also identifies areas where we consider security issues to be relevan
 
 <Tabs groupId="security" defaultValue="c7" queryString values={
 [
-{label: 'Camunda 7', value: 'c7' },
 {label: 'Optimize', value: 'optimize' },
 {label: 'Database', value: 'database' }
 ]
 }>
-
-<TabItem value='c7'>
-
-<span class="badge badge--platform">Camunda 7 only</span>
-
-:::note Important!
-Optimize does not operate on its own, but needs the Camunda 7 engine to import the data from and Elasticsearch to store the data. A detailed description of the setup can be found in the [architecture overview](../advanced-features/import-guide.md) guide.
-:::
-
-The BPMN with its process engine is a full standalone application which has a dedicated [security](https://docs.camunda.org/manual/latest/user-guide/security/) guide. The sections that are of major importance for the communication with Optimize are: [enabling authentication for the REST API](https://docs.camunda.org/manual/latest/user-guide/security/#enabling-authentication-for-the-rest-api/#enabling-authentication-for-the-rest-api) and [enabling SSL/HTTPS](https://docs.camunda.org/manual/latest/user-guide/security/#enabling-authentication-for-the-rest-api).
-
-</TabItem>
 
 <TabItem value='optimize'>
 

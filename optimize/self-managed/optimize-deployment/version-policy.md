@@ -4,6 +4,8 @@ title: "Version policy"
 description: "Learn about the versioning policy for Camunda Optimize."
 ---
 
+<-- Does this need to be separate from the [C8 release policy](https://docs.camunda.io/docs/reference/release-policy/)? -->
+
 Camunda Optimize versions are denoted as X.Y.Z as well as by an optional [pre-release](https://semver.org/spec/v2.0.0.html#spec-item-9) version being either '-alpha-[0-9]' or '-preview-[0-9]'. X is the [major version](https://semver.org/spec/v2.0.0.html#spec-item-4), Y is the [minor version](https://semver.org/spec/v2.0.0.html#spec-item-7), Z is the [patch version](https://semver.org/spec/v2.0.0.html#spec-item-6) as defined by the [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) specification.
 
 ## Release cadence
