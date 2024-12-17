@@ -259,7 +259,7 @@ object with a field and a value.
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
 
-:::note
+:::
 
 #### Example Response
 
@@ -559,7 +559,7 @@ object with a field and a value.
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
 
-:::note
+:::
 
 #### Example Response
 
