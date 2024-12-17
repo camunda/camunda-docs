@@ -18,6 +18,8 @@ IDP currently only supports data extraction from the following document file for
 
 For SaaS, uploaded documents are stored in Web Modeler itself, not your cluster.
 
+Storage limit?
+
 ## Extraction field types
 
 You can use any of the following field types when creating an extraction field.
