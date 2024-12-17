@@ -254,23 +254,6 @@ Settings influencing the process digest feature.
 | ------------------ | --------------- | -------------------------------------------------------------------- |
 | digest.cronTrigger | 0 0 9 \* \* MON | Cron expression to define when enabled email digests are to be sent. |
 
-### Alert notification webhooks
-
-<span class="badge badge--platform">Camunda 7 only</span>
-
-Settings for webhooks which can receive custom alert notifications. You can configure multiple webhooks which will be available to select from when creating or editing alerts. Each webhook configuration should have a unique human readable name which will appear in the Optimize UI.
-
-| YAML path                                                 | Default value | Description                                                                                                                                                                                                                                         |
-| --------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| webhookAlerting.webhooks.$\{webhookName}.url              |               | The URL of the webhook.                                                                                                                                                                                                                             |
-| webhookAlerting.webhooks.$\{webhookName}.headers          |               | A map of the headers of the request to be sent to the webhook.                                                                                                                                                                                      |
-| webhookAlerting.webhooks.$\{webhookName}.httpMethod       |               | The HTTP Method of the request to be sent to the webhook.                                                                                                                                                                                           |
-| webhookAlerting.webhooks.$\{webhookName}.defaultPayload   |               | The payload of the request to be sent to the webhook. This should include placeholder keys that allow you to define dynamic content. See [Alert Webhook Payload Placeholders](../webhooks#alert-webhook-payload-placeholders) for available values. |
-| webhookAlerting.webhooks.$\{webhookName}.proxy.enabled    |               | Whether an HTTP proxy should be used for requests to the webhook URL.                                                                                                                                                                               |
-| webhookAlerting.webhooks.$\{webhookName}.proxy.host       |               | The proxy host to use, must be set if webhookAlerting.webhooks.$\{webhookName}.proxy.enabled = true.                                                                                                                                                |
-| webhookAlerting.webhooks.$\{webhookName}.proxy.port       |               | The proxy port to use, must be set if webhookAlerting.webhooks.$\{webhookName}.proxy.enabled = true.                                                                                                                                                |
-| webhookAlerting.webhooks.$\{webhookName}.proxy.sslEnabled |               | Whether this proxy is using a secured connection (HTTPS). Must be set if webhookAlerting.webhooks.$\{webhookName}.proxy.enabled = true.                                                                                                             |
-
 ### History cleanup settings
 
 Settings for automatic cleanup of historic process/decision instances based on their end time.

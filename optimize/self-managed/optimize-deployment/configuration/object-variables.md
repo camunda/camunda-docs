@@ -27,10 +27,6 @@ Similarly, the "contains" filter matches process instances whose list variable c
 
 The value of list properties within objects as well as variables which are lists of objects rather than primitives can be inspected in the raw object variable value column accessible in raw data reports.
 
-## Variable plugins
-
-Any configured [variable plugins](../../plugins/variable-import-plugin) are applied _before_ Optimize creates the flattened property "sub variables", meaning the configured plugins have access to the raw JSON object variables only. Any modifications applied to the JSON object variables will then be persisted to the "sub variables" when Optimize flattens the resulting objects in the next step of the import cycle.
-
 ## Optimize configuration
 
 <!-- This section needs attention-->
