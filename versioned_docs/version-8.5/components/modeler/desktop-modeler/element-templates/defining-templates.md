@@ -54,7 +54,7 @@ Example:
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
 - `version : Integer`: Optional version of the template. If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
-- `engines : Object`: Optional dictionary of execution platforms compatible with the template. Execution platform version is specified with semantic versions range.
+- `engines : Object`: Optional dictionary of environments compatible with the template. Environment version is specified with semantic versions range.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
