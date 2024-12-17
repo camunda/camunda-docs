@@ -113,7 +113,7 @@ historyCleanup:
 ```
 
 :::note
-The ingested event cleanup does not cascade down to potentially existing [event-based processes](components/userguide/additional-features/event-based-processes.md) that may contain data originating from ingested events. To make sure data of ingested events is also removed from event-based processes, you need to enable the [Process Data Cleanup](#process-data-cleanup) as well.
+The ingested event cleanup does not cascade down to potentially existing [event-based processes](#) that may contain data originating from ingested events. To make sure data of ingested events is also removed from event-based processes, you need to enable the [Process Data Cleanup](#process-data-cleanup) as well.
 :::
 
 </TabItem>

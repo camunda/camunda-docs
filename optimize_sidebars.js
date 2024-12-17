@@ -1906,7 +1906,6 @@ module.exports = {
                 "apis-tools/optimize-api/report/get-data-export",
               ],
             },
-            "apis-tools/optimize-api/event-ingestion",
             "apis-tools/optimize-api/external-variable-ingestion",
             "apis-tools/optimize-api/health-readiness",
             "apis-tools/optimize-api/import-entities",
