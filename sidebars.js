@@ -471,10 +471,6 @@ module.exports = {
               "Creating reports",
               "components/userguide/creating-reports/"
             ),
-            optimizeLink(
-              "Combined process reports",
-              "components/userguide/combined-process-reports/"
-            ),
             optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
 
             {
@@ -574,31 +570,10 @@ module.exports = {
             },
 
             {
-              "Decision analysis": [
-                optimizeLink(
-                  "Overview",
-                  "components/userguide/decision-analysis/decision-analysis-overview/"
-                ),
-                optimizeLink(
-                  "Single report",
-                  "components/userguide/decision-analysis/decision-report/"
-                ),
-                optimizeLink(
-                  "Filters",
-                  "components/userguide/decision-analysis/decision-filter/"
-                ),
-              ],
-            },
-
-            {
               "Additional features": [
                 optimizeLink(
                   "Alerts",
                   "components/userguide/additional-features/alerts/"
-                ),
-                optimizeLink(
-                  "Event-based processes",
-                  "components/userguide/additional-features/event-based-processes/"
                 ),
                 optimizeLink(
                   "Export and import",
@@ -1218,24 +1193,12 @@ module.exports = {
                       "Camunda 8 system configuration",
                       "self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
                     ),
-                    optimizeLink(
-                      "Camunda 7 system configuration",
-                      "self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
-                    ),
-                    optimizeLink(
-                      "Event-based process system configuration",
-                      "self-managed/optimize-deployment/configuration/event-based-process-configuration/"
-                    ),
                   ],
                 },
 
                 optimizeLink(
                   "Logging",
                   "self-managed/optimize-deployment/configuration/logging/"
-                ),
-                optimizeLink(
-                  "Optimize license key",
-                  "self-managed/optimize-deployment/configuration/optimize-license/"
                 ),
                 optimizeLink(
                   "Security instructions",
@@ -1262,28 +1225,8 @@ module.exports = {
                   "self-managed/optimize-deployment/configuration/clustering/"
                 ),
                 optimizeLink(
-                  "Webhooks",
-                  "self-managed/optimize-deployment/configuration/webhooks/"
-                ),
-                optimizeLink(
-                  "Authorization management",
-                  "self-managed/optimize-deployment/configuration/authorization-management/"
-                ),
-                optimizeLink(
-                  "User access management",
-                  "self-managed/optimize-deployment/configuration/user-management/"
-                ),
-                optimizeLink(
                   "Multi-tenancy",
                   "self-managed/optimize-deployment/configuration/multi-tenancy/"
-                ),
-                optimizeLink(
-                  "Multiple process engines",
-                  "self-managed/optimize-deployment/configuration/multiple-engines/"
-                ),
-                optimizeLink(
-                  "Event-based processes",
-                  "self-managed/optimize-deployment/configuration/setup-event-based-processes/"
                 ),
                 optimizeLink(
                   "Common problems",
@@ -1478,10 +1421,6 @@ module.exports = {
                 optimizeLink(
                   "Engine data deletion",
                   "self-managed/optimize-deployment/advanced-features/engine-data-deletion/"
-                ),
-                optimizeLink(
-                  "Data import",
-                  "self-managed/optimize-deployment/advanced-features/import-guide/"
                 ),
               ],
             },
