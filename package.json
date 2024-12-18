@@ -28,7 +28,7 @@
     "api:generate:operate": "npm run api:generate operate",
     "api:generate:tasklist": "npm run api:generate tasklist",
     "api:generate:zeebe": "npm run api:generate zeebe",
-    "api:generate:consolesm": "npm run api:generate consolesm",
+    "api:generate:adminsm": "npm run api:generate adminsm",
     "api:generate:camunda": "npm run api:generate camunda"
   },
   "dependencies": {

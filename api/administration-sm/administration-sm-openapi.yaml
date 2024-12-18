@@ -155,8 +155,8 @@ components:
       scheme: bearer
       bearerFormat: JWT
 info:
-  title: Console SM Admin API
-  description: Access the administration API of Console SM.
+  title: Administration API (Self-Managed)
+  description: Access the administration API of Console Self-Managed.
   version: 1.0.0
   contact:
     url: https://www.camunda.com
