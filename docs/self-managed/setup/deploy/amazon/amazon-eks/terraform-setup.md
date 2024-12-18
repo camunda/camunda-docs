@@ -420,7 +420,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
 
 :::tip
 
-The instance type `m7i.large.search` in the above example is just a suggestion and can be changed at your discretion depending on your needs.
+The instance type `m7i.large.search` in the above example is a suggestion, and can be changed depending on your needs.
 
 :::
 
