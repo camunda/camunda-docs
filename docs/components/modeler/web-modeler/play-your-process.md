@@ -94,37 +94,51 @@ Play's rewind operation currently does not support the following elements:
 
 ## Scenarios
 
-Scenarios accelerate manual testing by providing a no-code way of quickly re-running processes while tracking your test coverage.
+Use scenarios to quickly rerun processes while tracking test coverage.
 
-You can validate your process by creating and rerunning scenarios for different paths, ensuring that it continues to function as expected after any changes to your diagram. Scenarios let you replay and confirm that the process completes correctly with the pre-defined actions and variables. Although scenarios are quick to develop and use for non-developers, our [best practices](/components/best-practices/development/testing-process-definitions) suggest using specialized test libraries in your CI/CD pipeline.
+For example, you can validate your process by creating and rerunning scenarios for different paths to check the process works as expected after any diagram changes are made. Scenarios allow you to replay and confirm that a process completes correctly with the predefined actions and variables.
 
-### Saving a scenario
+:::note
+Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions) recommend using specialized test libraries in your CI/CD pipeline.
+:::
 
-After executing a path in your process, you can save it as a scenario by clicking the **Save scenario** button in the process instance header. To view your saved scenarios, navigate to the process definition page by clicking the **View all** button under the Scenarios column in the process instance header.
+### Save scenario
 
-![save scenario](img/play-save-scenario.png)
+To save a scenario:
+
+1. Execute a path in your process.
+1. Click **Save scenario** in the process instance header.
+
+![Save a scenario](img/play-save-scenario.png)
+
+:::tip
+To view your saved scenarios click **View all** beneath the Scenarios column in the process instance header.
+:::
 
 ### Scenario coverage
 
-Scenario coverage is calculated as the percentage of flow nodes in your process that are covered. This includes all elements, events, and gateways. For example, if 8 out of 10 flow nodes are covered, the coverage will be 80%.
-On the process definition page, covered paths are highlighted in blue. You can also click on individual scenarios to view their specific coverage.
+Scenario coverage is calculated as the percentage of flow nodes in your process that are covered, including all elements, events, and gateways. For example, the coverage is 80% if eight out of ten flow nodes are covered.
 
-![save scenario](img/play-coverage.png)
+- On the process definition page, covered paths are highlighted in blue. Click on individual scenarios to view their specific coverage.
+- Once a process instance is completed, the process instance header shows how much your process scenario coverage would increase if the path was saved as a scenario.
 
-Once a process instance is completed, the process instance header will display how much your process scenario coverage would increase if this path were saved as a scenario.
+![Scenario coverage](img/play-coverage.png)
 
-### Running a scenario
+### Run scenario
 
-Scenarios can be run from the process definition page using the **Run all scenarios** button, or by clicking the **Run scenario** button with the play icon for each individual scenario. The result of a scenario execution will be marked as **Completed** or **Failed.** Failed scenarios must be manually updated by clicking the **manually complete and update the scenario** button, especially when changes are made to your diagram that require further user input—such as when a new flow node is added to a previously saved scenario path.
+You can run scenarios on the process definition page by clicking either the **Run all scenarios** button or the **Run scenario** button with the play icon for each individual scenario.
 
-![save scenario](img/play-scenario-runs.png)
+- Scenario execution results are marked with either a **Completed** or **Failed** status.
+- You must manually update a failed scenario by clicking **manually complete and update the scenario**, especially if diagram changes are made that require further user input (such as when a new flow node is added to a previously saved scenario path).
+
+![Run a scenario on the process definition page](img/play-scenario-runs.png)
 
 ### Limitations {#scenarios-limitations}
 
 - Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play, in a different browser, or by a collaborator.
-- Call activities are not supported; therefore, scenarios containing them cannot be executed successfully.
+- Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
-- Similar to process instances, scenarios do not run in isolation. For instance, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously may lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
+- Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
 
 ## Modify a process instance
 
