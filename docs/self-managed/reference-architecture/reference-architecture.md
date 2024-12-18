@@ -96,9 +96,22 @@ If running a single instance is preferred, make sure to implement [regular backu
 
 ## Camunda 8 deployment reference architectures
 
+Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements.
+
+:::note Documentation Update in Progress
+This is a work in progress the existing documentation is updated to provide better general guidance on the topic. The Kubernetes and Docker documentation may point to older guides.
+:::
+
 ### Kubernetes
 
 Kubernetes is a powerful orchestration platform for containerized applications. Using a reference architecture for Kubernetes can help organizations deploy and manage their applications more effectively. It provides guidelines for setting up clusters, managing workloads, and ensuring high availability and scalability. This approach is ideal for organizations looking to leverage the benefits of containerization and self-healing capabilities.
+
+- Ideal for organizations adopting containerization and microservices, see [Cloud Native computing foundation](https://www.cncf.io/).
+- Suitable for dynamic scaling and high availability.
+- Best for teams with experience in managing containerized environments.
+- A steeper learning curve but offers scalable and highly resilient platform.
+
+For more information and guides, see the reference for [Kubernetes](/self-managed/setup/install.md).
 
 <!-- TODO add link or card for AWS ref arch -->
 
@@ -106,45 +119,26 @@ Kubernetes is a powerful orchestration platform for containerized applications. 
 
 Containers, such as Docker, offer a middle ground between the manual JAR and Kubernetes approaches. They provide a lightweight, portable, and consistent runtime environment, making it easier to develop, test, and deploy applications across different environments. Containers encapsulate an application and its dependencies, ensuring that it runs reliably regardless of where it is deployed.
 
+- Advisable as a middle ground between manual JAR and Kubernetes. Profit from containerization while not having the whole overhead of Kubernetes.
+- Containers can run on any system that supports the container runtime, ensuring consistency across development, testing, and production environments.
+- Each container runs in its own isolated environment, which helps prevent conflicts between applications and improves security.
+- Containers can be easily scaled up or down to handle varying workloads, providing flexibility in resource management.
+
+For more information and guides, see the reference for [containers](/self-managed/setup/deploy/other/docker.md).
+
 ### Manual JAR (bare metal/virtual machines)
 
 For organizations that prefer traditional infrastructure, reference architectures for bare metal or virtual machines (VMs) offer a structured approach to system deployment. These architectures provide best practices for setting up physical servers or VMs, configuring networks, and managing storage using Infrastructure as Service cloud providers. They are suitable for environments where containerization or use of Kubernetes services may not be feasible.
 
+- Suitable for organizations requiring use of IaaS, bare metal, and other traditional infrastructures.
+- Ideal for traditional setups needing highly customized security, strict data residency, or industry-specific regulatory compliance.
+- Applicable for high availability but requires more detailed planning.
+- Best for teams with expertise in managing physical servers or virtual machines.
+
+For more information and guides, see the reference for [manual setups](./manual/manual.md).
+
 <!-- TODO add link or card for AWS EC2 -->
 
-### Local Development
+### Local development
 
-While both options are suitable for trying out Camunda 8 locally, you might also consider exploring [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) for a developer focused experience.
-
-## Helping Customers Decide
-
-Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements. Here are some guidelines to help you decide:
-
-:::note Documentation Update in Progress
-This is a work in progress as we update the existing documentation to provide better general guidance on the topic. In the meantime, for Kubernetes and Docker related information, we are guiding to older documentation.
-:::
-
-- **Kubernetes**:
-  - Ideal for organizations adopting containerization and microservices, see [Cloud Native computing foundation](https://www.cncf.io/).
-  - Suitable for dynamic scaling and high availability.
-  - Best for teams with experience in managing containerized environments.
-  - A steeper learning curve but offers scalable and highly resilient platform.
-
-For more information and guides, have a look at the specific reference for [Kubernetes](/self-managed/setup/install.md).
-
-- **Containers**:
-
-  - Advisable as a middle ground between manual JAR and Kubernetes. Profit from containerization while not having the whole overhead of Kubernetes.
-  - Containers can run on any system that supports the container runtime, ensuring consistency across development, testing, and production environments.
-  - Each container runs in its own isolated environment, which helps prevent conflicts between applications and improves security.
-  - Containers can be easily scaled up or down to handle varying workloads, providing flexibility in resource management.
-
-For more information and guides, have a look at the specific reference for [Containers](/self-managed/setup/deploy/other/docker.md).
-
-- **Manual JAR (Bare Metal / VMs)**:
-  - Suitable for organizations requiring use of IaaS, bare metal and other traditional infrastructures.
-  - Ideal for traditional setups needing highly customized security, strict data residency, or industry-specific regulatory compliance.
-  - Applicable for high availability but requires more detailed planning.
-  - Best for teams with expertise in managing physical servers or virtual machines.
-
-For more information and guides, have a look at the specific reference for [Manual](./manual/manual.md).
+While the above options are suitable for trying out Camunda 8 locally, [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) provides a simplified, developer-focused experience.
