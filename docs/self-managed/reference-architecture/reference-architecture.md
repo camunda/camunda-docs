@@ -1,6 +1,6 @@
 ---
 id: reference-architecture
-title: "Reference architecture overview"
+title: "Camunda 8 reference architectures"
 sidebar_label: "Overview"
 description: "Learn about the Self-Managed reference architectures and how they can help you get started."
 ---
@@ -94,13 +94,13 @@ If you run infrastructure on cloud providers, you are often met with different r
 
 If running a single instance is preferred, make sure to implement [regular backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md) since resilience will be limited.
 
-## Camunda 8 deployment reference architectures
-
-Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements.
+## Available reference architectures
 
 :::note Documentation Update in Progress
-This is a work in progress the existing documentation is updated to provide better general guidance on the topic. The Kubernetes and Docker documentation may point to older guides.
+This is a work in progress as the existing documentation is updated to provide better general guidance on the topic. The Kubernetes and Docker documentation may point to older guides.
 :::
+
+Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements. The following guides are available to help choose and guide deployments:
 
 ### Kubernetes
 
