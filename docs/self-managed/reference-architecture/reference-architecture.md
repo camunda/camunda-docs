@@ -106,7 +106,7 @@ Choosing the right reference architecture depends on various factors such as the
 
 Kubernetes is a powerful orchestration platform for containerized applications. Using a reference architecture for Kubernetes can help organizations deploy and manage their applications more effectively. It provides guidelines for setting up clusters, managing workloads, and ensuring high availability and scalability. This approach is ideal for organizations looking to leverage the benefits of containerization and self-healing capabilities.
 
-- Ideal for organizations adopting containerization and microservices, see [Cloud Native computing foundation](https://www.cncf.io/).
+- Ideal for organizations adopting containerization and microservices (see [Cloud Native computing foundation](https://www.cncf.io/)).
 - Suitable for dynamic scaling and high availability.
 - Best for teams with experience in managing containerized environments.
 - A steeper learning curve but offers scalable and highly resilient platform.

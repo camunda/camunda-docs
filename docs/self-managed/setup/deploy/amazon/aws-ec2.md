@@ -8,7 +8,7 @@ This guide provides a detailed walkthrough for installing the Camunda 8 single J
 
 This guide focuses on setting up the [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) for Camunda 8. The Web Modeler and Console are not covered in this manual deployment approach. These components are supported on Kubernetes and should be [deployed using Kubernetes](/self-managed/setup/install.md/#install-web-modeler).
 
-:::note Using other Cloud provider
+:::note Using other Cloud providers
 This guide is built around the available tools and services that AWS offers, but is not limited to AWS. The scripts and ideas included can be adjusted for any other cloud provider and use case.
 
 When using this guide with a different cloud provider, note that you will be responsible for configuring and maintaining the resulting infrastructure. Our support is limited to questions related to the guide itself, not to the specific tools and services of the chosen cloud provider.
@@ -69,29 +69,30 @@ Alternatively, the same setup can run with a single AWS EC2 instance, but be awa
 The outcome is a fully working Camunda orchestration cluster running in a high availability setup using AWS EC2 and utilizing a managed OpenSearch domain.
 The EC2 instances come with an extra disk meant for Camunda to ensure that the content is separated from the operating system.
 
-## Create required infrastructure
+## 1. Create the required infrastructure
 
 :::note Terraform infrastructure example
 We do not recommend using the below Terraform related infrastructure as module as we do not guarantee compatibility.
 Therefore, we recommend extending or reusing some elements of the Terraform example to ensure compatibility with your environments.
 :::
 
-1. **Download the reference architecture GitHub repository** to directly reuse and extend the existing Terraform example base.
-   The idea is to provide an easy to use example implementation that's flexible to extend to your own needs without the potential limitations of a Terraform module.
+### Download the reference architecture GitHub repository
+
+The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module.
 
 ```sh
 wget https://github.com/camunda/camunda-deployment-references/archive/refs/heads/main.zip
 ```
 
-2. **Go to directory**
+### Update the configuration files
+
+1. Navigate to the new directory:
 
 ```sh
 cd camunda-deployment-references-main/aws/ec2/terraform
 ```
 
-3. **Configure Variables**
-
-Edit the `variables.tf` file to customize the settings such as the prefix for resource names and CIDR blocks. Example:
+2. Edit the `variables.tf` file to customize the settings, such as the prefix for resource names and CIDR blocks:
 
 ```hcl
 variable "prefix" {
@@ -103,82 +104,77 @@ variable "cidr_blocks" {
 }
 ```
 
-4. **Configure alternative Terraform backend**
+3. In `config.tf`, configure a new Terraform backend by updating `backend "local"` to [AWS 3](https://developer.hashicorp.com/terraform/language/backend/s3) (or any other non-`local` backend that fits your organization).
 
-It's recommended to use a different backend than `local` as it is just meant for testing and development purposes. The state would be saved locally and does not allow to easily share it with colleagues.
-
-More information on alternatives can be found in the [Terraform documentation](https://developer.hashicorp.com/terraform/language/backend).
-
-- In the `config.tf` change the `backend "local"` to e.g. [AWS 3](https://developer.hashicorp.com/terraform/language/backend/s3) or any other non `local` one that fits your organization.
-
-5. **Configure Terraform AWS provider**
-
-   1. **Add the [Terraform AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) in the `config.tf`**
-
-   It's a technical limitation on our side as we're using the same files for testing and Terraform does not allow to define the provider twice.
-
-   ```hcl
-   provider "aws" {}
-   ```
-
-   E.g. can be done via a simple `script` or manually:
-
-   ```sh
-   echo 'provider "aws" {}' >> config.tf
-   ```
-
-   2. **Configure authentication**
-
-   The [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) is required to create resources in AWS. You must configure the provider with the proper credentials before using it. You can further change the region and other preferences and explore different authentication methods.
-
-   There are several ways to authenticate the AWS provider.
-
-   - (Testing/development) Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) to configure access. Terraform will automatically default to AWS CLI configuration when present.
-   - (CI/CD) Set environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, which can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
-   - (Enterprise grade security) Use an [AWS IAM role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#assuming-an-iam-role)
-
-   Ensure you have set the `AWS_REGION` either as environment variable or in the Terraform AWS provider to deploy the infrastructure in your desired region. AWS resources are region bound on creation.
-
-:::note Secret management
-We strongly recommend managing sensitive information using a secure secrets management solution like HashiCorp Vault. For details on how to inject secrets directly into Terraform via Vault, see the [Terraform Vault Secrets Injection Guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
+:::note
+`local` is meant for testing and development purposes. The state is saved locally, and does not allow to easily share it with colleagues. More information on alternatives can be found in the [Terraform documentation](https://developer.hashicorp.com/terraform/language/backend).
 :::
 
-6. **Initialize Terraform**
+### Configure the Terraform AWS provider
 
-Initialize the Terraform working directory. This step downloads the necessary provider plugins.
+1. Add the [Terraform AWS provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) in the `config.tf`:
+
+```hcl
+provider "aws" {}
+```
+
+This can be done via a simple script or manually:
+
+```sh
+echo 'provider "aws" {}' >> config.tf
+```
+
+:::note
+This is a current technical limitation, as the same files are used for testing. Terraform does not allow defining the provider twice.
+:::
+
+1. Configure authentication to allow the [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) to create resources in AWS. You must configure the provider with the proper credentials before using it. You can further change the region and other preferences and explore different authentication methods.
+
+There are several ways to authenticate the AWS provider:
+
+     - **Testing/development**: Use the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) to configure access. Terraform will automatically default to AWS CLI configuration when present.
+     - **CI/CD**: Set the environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`, which can be retrieved from the [AWS Console](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+     - **Enterprise grade security**: Use an [AWS IAM role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#assuming-an-iam-role).
+
+Ensure you have set the `AWS_REGION` either as environment variable or in the Terraform AWS provider to deploy the infrastructure in your desired region. AWS resources are region bound on creation.
+
+:::note Secret management
+We strongly recommend managing sensitive information using a secure secrets management solution like HashiCorp Vault. For details on how to inject secrets directly into Terraform via Vault, see the [Terraform Vault secrets injection guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
+:::
+
+### Initialize and deploy Terraform
+
+1. Initialize the Terraform working directory. This step downloads the necessary provider plugins:
 
 ```sh
 terraform init
 ```
 
-7. **Deploy the Infrastructure**
-
-Plan the configuration files:
+1. Plan the configuration files:
 
 ```sh
 terraform plan -out infrastructure.plan # describe what will be created
 ```
 
-After reviewing the plan, you can confirm and apply the changes.
+1. After reviewing the plan, confirm and apply the changes:
 
 ```sh
 terraform apply infrastructure.plan # apply the creation
 ```
 
-The execution takes roughly 30 minutes of which the majority of time ~ 25 minutes is solely the creation of a managed highly available OpenSearch cluster.
+The execution takes roughly 30 minutes. Around 25 minutes is solely for the creation of a managed highly available OpenSearch cluster.
 
-8. **Access outputs**
+1. After the infrastructure is created, access the outputs defined in `outputs.tf` using `terraform output`.
 
-After the infrastructure is created, you can access the outputs defined in `outputs.tf`. For example, to get the OpenSearch endpoint:
+For example, to retrieve the OpenSearch endpoint:
 
 ```sh
 terraform output aws_opensearch_domain
 ```
 
-9. **(optional) Connect to remote machines via Bastion host**
+### Connect to remote machines via Bastion host (optional)
 
-The EC2 instances are not public and have to be reached via a Bastion host.
-Alternatively one can utilize the [AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) to connect securely to a private VPC. This is not covered here as the setup requires a lot more manual user interaction.
+The EC2 instances are not public and have to be reached via a Bastion host. Alternatively, utilize the [AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) to connect securely to a private VPC. This step is not described, as setup requires specific manual user interaction.
 
 ```sh
 export BASTION_HOST=$(terraform output -raw bastion_ip)
@@ -188,64 +184,65 @@ export CAMUNDA_IP=$(tf output -json camunda_ips | jq -r '.[0]')
 ssh -J admin@${BASTION_HOST} admin@${CAMUNDA_IP}
 ```
 
-## Deploy Camunda 8
+## 2. Deploy Camunda 8
 
-1. **Go to the script directory**
+### Configure and run the installation script
 
-The script directory contains bash scripts that can be used to install and configure Camunda 8.
+1. Navigate to the script directory:
 
 ```sh
 cd camunda-deployment-references-main/aws/ec2/scripts
 ```
 
-2. **Advanced configuration options**
+The script directory contains bash scripts that can be used to install and configure Camunda 8.
 
-There are certain script features hidden behind a feature flag. Those are the following:
+2. Configure any script features using the following environment variables:
 
-- `CLOUDWATCH_ENABLED`: The default is false. If set to true will install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
-- `SECURITY`: The default is false. If set to true will use self-signed certificates to secure cluster communication, based on the procedure described in the [documentation](/self-managed/zeebe-deployment/security/secure-cluster-communication.md). This requires a manual step as a prerequisite as described below in step 3.
+   - `CLOUDWATCH_ENABLED`: The default is false. If set to true will install the CloudWatch agent on each EC2 instance and export Camunda logs and Prometheus metrics to AWS CloudWatch.
+   - `SECURITY`: The default is false. If set to true will use self-signed certificates to secure cluster communication, based on the procedure described in the [documentation](/self-managed/zeebe-deployment/security/secure-cluster-communication.md). This requires a manual step as a prerequisite as described below in step 3.
 
-Additionally, certain variables can be configured in the `camunda-install.sh` script to overwrite the default for Camunda and Java versions:
+3. Configure any variables in the `camunda-install.sh` script to overwrite the default for Camunda and Java versions:
 
-- `OPENJDK_VERSION`: The Temurin Java version.
-- `CAMUNDA_VERSION`: The Camunda 8 version.
-- `CAMUNDA_CONNECTORS_VERSION`: The Camunda 8 connectors version.
+   - `OPENJDK_VERSION`: The Temurin Java version.
+   - `CAMUNDA_VERSION`: The Camunda 8 version.
+   - `CAMUNDA_CONNECTORS_VERSION`: The Camunda 8 connectors version.
 
-Setting those as environment variables will not take effect since the scripts are executed on the remote host with no access to your local environment.
+   :::note
+   The above variables must be set in `camunda-install.sh` . They cannot be set as environment variables.
+   :::
 
-3. **(optional) Security**
+4. Execute the `SECURITY` script (optional):
 
-If you decide to enable `SECURITY`, please execute the `generate-self-signed-cert-authority.sh` script to once create a certificate authority. It would be wise to save those somewhere securely as you'll require those if you want to upgrade or change configs in an automated way. Worst case, you'll have to recreate the certificate authority certs via the script and all manually created client certificates.
+If `SECURITY` was enabled in step 2, execute the `generate-self-signed-cert-authority.sh` script to create a certificate authority.
+
+This certificate should be saved somewhere securely, as it will be required to upgrade or change configuations in an automated way. If the certificate is lost, recreate the certificate authority via the script and all manually created client certificates.
 
 :::note Self-signed certificates for testing
 Self-signed certificates are advocated for development and testing purposes. Check the [documentation](/self-managed/zeebe-deployment/security/secure-cluster-communication.md) on secure cluster communication to learn more about PEM certificates.
 :::
 
-4. **Execute script `all-in-one-install.sh`**
+1. Execute the `all-in-one-install.sh` script.
 
-Run the `all-in-one-install.sh` script.
-
-It will install all required dependencies. Additionally, it configures Camunda 8 to run in a highly available setup by using a managed OpenSearch instance.
+This script installs all required dependencies. Additionally, it configures Camunda 8 to run in a highly available setup by using a managed OpenSearch instance.
 
 The script will pull all required IPs and other information from the Terraform state via Terraform outputs.
 
 During the first installation, you will be asked to confirm the connection to each EC2 instance by typing `yes`.
 
-5. **How to connect and use Camunda 8**
+### Connect and use Camunda 8
 
-We distinguish between the Application Load Balancer (ALB) and the Network Load Balancer (NLB) as follows: The ALB is designed for handling Web UIs, such as Operate, Tasklist, Optimize, and Connectors. In contrast, the NLB is intended for managing the gRPC endpoint of the Zeebe Gateway. This is due to the difference of protocols with ALB focusing on HTTP and NLB on TCP.
+The Application Load Balancer (ALB) and the Network Load Balancer (NLB) can be accessed via the following Terraform outputs:
 
-Via the Terraform output `alb_endpoint` one can access Operate or on port `9090` the Connectors instance.
+- `terraform output alb_endpoint`: Access Operate (or the Connectors instance on port `9090`). The ALB is designed for handling Web UIs, such as Operate, Tasklist, Optimize, and Connectors.
+- `terraform output nlb_endpoint`: Access the gRPC endpoint of the Zeebe gateway. The NLB is intended for managing the gRPC endpoint of the Zeebe Gateway. This is due to the difference of protocols with ALB focusing on HTTP and NLB on TCP.
 
-Via the Terraform output `nlb_endpoint` one can access the gRPC endpoint of the Zeebe gateway.
-
-The two endpoints above use the publicly assigned hostname of AWS. One may add their domain via CNAME records or use [Route53](https://aws.amazon.com/route53/) to map to the load balancers, allowing them to easily enable SSL. This will require extra work in the Terraform blueprint as it listens to HTTP by default.
+The two endpoints above use the publicly assigned hostname of AWS. Add your domain via CNAME records or use [Route53](https://aws.amazon.com/route53/) to map to the load balancers, allowing them to easily enable SSL. This will require extra work in the Terraform blueprint as it listens to HTTP by default.
 
 Alternatively, if you have decided not to expose your environment, you can use the jump host to access relevant services on your local machine via port-forwarding.
 
-For an enterprise grade solution, you can utilize the [AWS Client VPN](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) instead to reach the private subnet within the VPC. The setup requires a lot of extra work and certificates, but one can follow the [getting started tutorial by AWS](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html).
+For an enterprise grade solution, you can utilize the [AWS Client VPN](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html) instead to reach the private subnet within the VPC. The setup requires extra work and certificates, described in the [getting started tutorial by AWS](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html).
 
-The following can be executed from within the Terraform folder to bind the remote ports to your local machine.
+The following can be executed from within the Terraform folder to bind the remote ports to your local machine:
 
 ```sh
 export BASTION_HOST=$(terraform output -raw bastion_ip)
@@ -256,35 +253,35 @@ export CAMUNDA_IP=$(tf output -json camunda_ips | jq -r '.[0]')
 ssh -L 26500:${CAMUNDA_IP}:26500 -L 8080:${CAMUNDA_IP}:8080 -L 9090:${CAMUNDA_IP}:9090 admin@${BASTION_HOST}
 ```
 
-6. **(optional) turn off bastion host**
+### Turn off bastion host (optional)
 
-If you've used the bastion host for access, you can turn it off when it's no longer needed for direct access to the EC2 instances.
+If you used the [bastion host](#turn-off-bastion-host-optional) for access, it can be turned off when longer needed for direct access to the EC2 instances.
 
-To do this, set the `enable_jump_host` variable to `false` in the `variables.tf` file and reapply Terraform.
+To turn off the bastion host, set the `enable_jump_host` variable to `false` in the `variables.tf` file, and reapply Terraform.
 
-## Verify connectivity to Camunda 8
+## 3. Verify connectivity to Camunda 8
 
 Using Terraform, you can obtain the HTTP endpoint of the Application Load Balancer and interact with Camunda through the [REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
 
-For retrieving the Camunda endpoint you can do the following:
-
-1. Go to the Terraform folder
+1. Navigate to the Terraform folder:
 
 ```sh
 cd camunda-deployment-references-main/aws/ec2/terraform
 ```
 
-2. Retrieve the Application Load Balancer output
+2. Retrieve the Application Load Balancer output:
 
 ```sh
 terraform output -raw alb_endpoint
 ```
 
-3. Use the REST API to communicate with Camunda
+3. Use the REST API to communicate with Camunda:
 
-With the endpoint you can follow the example as outlined in [the documentation](/apis-tools/camunda-api-rest/camunda-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
+Follow the example in the [REST API documentation](/apis-tools/camunda-api-rest/camunda-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
 
-## Upgrade Camunda 8
+## Manage Camunda 8
+
+### Upgrade Camunda 8
 
 :::info Direct upgrade not supported
 Upgrading directly from a Camunda 8.6 release to 8.7 is not supported and cannot be performed.
@@ -304,13 +301,13 @@ The update process can be automated using the `all-in-one-install.sh` script, wh
 - Regenerates configuration files.
 - Restarts the application to apply the updates.
 
-## Monitoring
+### Monitoring
 
 Our default way of exposing metrics is in the Prometheus format, please conduct the general [metrisc related documentation](/self-managed/zeebe-deployment/operations/metrics.md) to learn more how to scrape Camunda 8.
 
 In an AWS environment, you can leverage CloudWatch not only for log collection but also for gathering [Prometheus metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-metrics.html). It's important to note that while Camunda natively supports Grafana and Prometheus, integrating CloudWatch for metric visualization is possible but requires additional configuration.
 
-## Backups
+### Backups
 
 Please conduct the general topic of backups in the [documentation](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
 
