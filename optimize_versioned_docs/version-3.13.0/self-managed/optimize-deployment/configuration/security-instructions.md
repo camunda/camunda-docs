@@ -55,7 +55,7 @@ Authentication controls who can access Optimize. Read all about how to restrict 
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-Authorization controls what data a user can access and change in Optimize once authenticated. Authentication is a prerequisite to authorization. Read all about how to restrict the data access in the [authorization management guide](./authorization-management.md).
+Authorization controls what data a user can access and change in Optimize once authenticated. Authentication is a prerequisite to authorization. Read all about how to restrict the data access in the [authorization management guide](#).
 
 </TabItem>
 

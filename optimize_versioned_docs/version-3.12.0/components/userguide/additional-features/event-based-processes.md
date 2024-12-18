@@ -15,12 +15,12 @@ Once the event-based process feature is correctly configured, you will see a new
 :::note
 When Camunda activity events are used in event-based processes, Camunda admin authorizations are not inherited for the event-based process. The authorization to use an event-based process is solely managed via the access management of event-based processes when [publishing an event-based process](#publishing-an-event-based-process) or at any time via the [edit access option](#event-based-process-list---edit-access) in the event-based process list.
 
-Visit our [technical guide](/self-managed/optimize-deployment/configuration/setup-event-based-processes.md) on authorization management and event-based processes for the reasoning behind this behavior.
+Visit our [technical guide](/#) on authorization management and event-based processes for the reasoning behind this behavior.
 :::
 
 ## Set up
 
-You need to set up the event-based processes feature to make use of this feature. See the [technical guide](/self-managed/optimize-deployment/configuration/setup-event-based-processes.md) for more information.
+You need to set up the event-based processes feature to make use of this feature. See the [technical guide](/#) for more information.
 
 ## Event-based process list
 
@@ -104,7 +104,7 @@ Defining the `group` property when ingesting the events will allow selecting eve
 
 These are events generated from an existing Camunda BPMN process. Only processes for which Optimize has imported at least one event will be visible for selection. This means the process has to have at least one instance and Optimize has to have been configured to import data from that process.
 
-See the [technical guide](/self-managed/optimize-deployment/configuration/setup-event-based-processes.md#use-camunda-activity-event-sources-for-event-based-processes) for more information on how this is configured.
+See the [technical guide](/##use-camunda-activity-event-sources-for-event-based-processes) for more information on how this is configured.
 
 To add such events, provide the following details:
 
