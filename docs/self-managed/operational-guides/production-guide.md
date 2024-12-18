@@ -255,7 +255,6 @@ core:
       memory: 1920Mi
 ```
 
-- If you would like to run benchmarks on the platform then please refer to our [community project](https://github.com/camunda-community-hub/camunda-8-benchmark)
 - It is possible to set a `podDisruptionBudget`. For example you can modify the following values for the Core component:
 
 ```yaml
@@ -313,11 +312,11 @@ Here is the full and complete values.yaml consider all the above topics.
 (make sure to the values.yaml in a multinamespace setting and configure console likewise)
 ```
 
-## Upgrade and Maintenance
+## Other Concepts to take note of
+
+### Upgrade and Maintenance
 
 Make sure auto-generated secrets are mentioned by default in all relevant components.
-
-## Other Concepts to take note of
 
 ### Multi-namespace Deployment
 
@@ -328,3 +327,7 @@ The next recommended step is to setup a multi-namespace deployemnt. A [guide](/d
 - Here are the guides related to connecting to existing Keycloak:
   - [Configuration of the Camunda Helm Chart](/docs/self-managed/setup/guides/using-existing-keycloak/)
   - [Configuration of Keycloak](/docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/)
+
+### Running benchmarks
+
+If you would like to run benchmarks on the platform then please refer to our [community project](https://github.com/camunda-community-hub/camunda-8-benchmark)
