@@ -9,6 +9,10 @@ description: "Camunda 8 Manual (Java) deployment Reference architecture home "
 
 This reference architecture provides guidance on deploying Camunda 8 Self-Managed as a standalone Java application. This deployment method is ideal for users who prefer manual deployment on bare metal servers or virtual machines (VMs), offering full control over the environment and configuration. It is particularly suited for scenarios with specific infrastructure requirements or highly customized setups.
 
+:::note
+This method of deployment requires a solid understanding of infrastructure, networking, and application management. Consider evaluating your [deployment platform options](../reference-architecture.md) based on your familiarity and need. If you prefer a simpler and managed solution, [Camunda 8 SaaS](https://camunda.com/platform/) can significantly reduce maintenance efforts, allowing you to focus on your core business needs.
+:::
+
 ## Key features
 
 - **Single application JAR**: Starting from Camunda 8.7, all core components (Zeebe, Tasklist, Operate, Optimize, and Identity) are bundled into a single JAR file. This simplifies deployment by reducing the number of artifacts to manage.
@@ -22,11 +26,7 @@ For documentation on the orchestration cluster, Web Modeler and Console separati
 
 This section includes deployment reference architectures for manual setups:
 
-- [Aamazon EC2 deployment](/self-managed/setup/deploy/amazon/aws-ec2.md) - is a standard production setups with support for high availability.
-
-## Before You Start
-
-Before starting with the self-managed single JAR setup, consider evaluating your deployment platform options (Kubernetes / Docker) based on your familiarity with these platforms. Self-managing your deployment requires a solid understanding of infrastructure, networking, and application management. If you prefer a simpler and more managed solution, you may want to explore [our SaaS offerings](https://camunda.com/platform/). SaaS can significantly reduce maintenance efforts, allowing you to focus on your core business needs.
+- [Amazon EC2 deployment](/self-managed/setup/deploy/amazon/aws-ec2.md) - a standard production setup with support for high availability.
 
 ## Considerations
 
