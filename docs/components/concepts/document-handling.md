@@ -5,39 +5,52 @@ description: "Learn more about integration, secure management, and efficient sto
 keywords: ["document handling"]
 ---
 
-Offering a more comprehensive approach to document handling, Camunda now allows for easier integration, secure management, and efficient storage and retrieval of documents across both development and production environments.
+Offering a more comprehensive approach to document handling, Camunda now provides efficient storage and retrieval of documents across both development and production environments.
 
-Whether you are working across Connectors, Modeler, Forms, Operate, or Tasklist, document handling may be beneficial for users who want the following:
+Whether you are working across Connectors, Modeler, or Tasklist, document handling may be beneficial for users who want the following:
 
 - [AWS S3](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution, and to ensure storage is properly isolated and managed for each environment.
-- Set document limitations and access permissions, ensuring compliance and secure handling of sensitive documents within workflows.
 - Support for the local file system as a storage option for development and testing purposes to set up and manage documents in local environments.
 - Preview, track, and manage documents associated with process instances.
 
-Below, learn about capabilities of document handling for each related component:
-
-## Console
-
-A cluster version 8.7 and above will have a default cloud storage created for users.
-Users with the management permissions in Console (admin, operations engineer) can connect a cluster to an external AWS S3 storage, which will replace the default storage.
-On Self-Managed, non-production environment users with the management permissions in Console can setup a local file storage pointing to a folder on their device.
+Below, learn about capabilities of document handling for the related components:
 
 ## Modeler
 
-When modeling a process, a user task can be configured to support files.
+A [form](/components/modeler/forms/camunda-forms-reference.md) can display documents with the [document preview component](/components/modeler/forms/form-element-library/form-element-library-document-preview.md):
 
-Form picker component in forms will be extended to support multiple files (currently it supports picking only a single file).
+![document preview for form](./assets/document-preview.png)
+
+With the [filepicker form element](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md), you may also [upload multiple files at once](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties). This can be dynamically set using an [expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md).
 
 ## Connectors
 
-Inbound (Webhook) and outbound (REST, IDP-related) connectors support documents
+### Inbound (webhook) Connectors
+
+[Access created documents](/components/connectors/protocol/http-webhook.md) in both the response expression and the result expression, where the `documents` object contains the references for created documents.
+
+![example payload inbound webhook connector](./assets/inbound-webhook-document.png)
+
+### Outbound (REST and IDP-related) Connectors
+
+For REST and IDP-related Connectors, you may include a **Request body** under **Payload** in the properties panel to send with your request.
+
+![example REST configuration](./assets/rest-outbound-document.png)
 
 ## Tasklist
 
-Tasklist users can access, preview, and download files related to a user task.
+Tasklist users may view and download files displayed in the task's form.
+
+:::note
+If you change the **Document URL** under **Download settings**, this feature will not work for public start forms because there is no valid session.
+:::
+
+![document preview settings](./assets/document-preview-settings.png)
 
 ## Document limitations
 
-Maximum file size
-File expiration time, Time-to-live (TTL) policy of a file
-Storage space limit of the default file storage
+Document handling maintains the following guidelines:
+
+- **Maximum file size**: 10 MB per file.
+- **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.
+- **Storage space limit/default file storage**: Storage for your cluster is 500 MB.
