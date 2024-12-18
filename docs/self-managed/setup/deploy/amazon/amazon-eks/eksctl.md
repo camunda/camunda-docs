@@ -958,17 +958,17 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
 
 :::tip
 
-The instance type `m7i.large.search` in the above example is just a suggestion and can be changed at your discretion depending on your needs.
+The instance type `m7i.large.search` in the above example is a suggestion, and can be changed depending on your needs.
 
 :::
 
-6. Wait for the OpenSearch domain to be active:
+1. Wait for the OpenSearch domain to be active:
 
    ```shell
    while [ "$(aws opensearch describe-domain --domain-name $OPENSEARCH_NAME --query 'DomainStatus.Processing' --output text)" != "False" ]; do echo "Waiting for OpenSearch domain to become availablen this can up to take 20-30 minutes..."; sleep 30; done && echo "OpenSearch domain is now available\!"
    ```
 
-7. Retrieve the endpoint of the OpenSearch domain:
+2. Retrieve the endpoint of the OpenSearch domain:
 
    ```shell
    export OPENSEARCH_HOST=$(aws opensearch describe-domains --domain-names $OPENSEARCH_NAME --query "DomainStatusList[0].Endpoints.vpc" --output text)
