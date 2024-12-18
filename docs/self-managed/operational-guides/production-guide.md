@@ -23,7 +23,7 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **Amazon Aurora PostgreSQL**: For persistent data storage.
   - **Elastic Cloud on GCP**: For indexing and analytics.
   - **Azure Active Directory**: For authentication and authorization.
-- **NGTINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
+- **NGINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
 - **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
 - **Namespace Configuration**: Plan and create namespaces with appropriate resource quotas and LimitRanges for the Camunda Helm Chart.
 - **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment.
@@ -184,15 +184,25 @@ elasticsearch:
   enabled: false
 ```
 
-#### Connecting to Amazon Aurora PostgreSQL
-
-```yaml
-placeholder for external postgresql connections
-```
-
 You can see that we have globally enabled all internal component configuration for Elasticsearch through `global.elasticsearch.enabled` and we have disable internal Elasticsearch through `elasticsearch.enabled`.
 
-If you would like further information, we have a number of guides on connecting to external databases with the Camunda Helm Chart:
+#### Connecting to Amazon Aurora PostgreSQL
+
+In our scenario, there are two components that use PostgreSQL to store data: Identity and Web Modeler:
+
+:::note
+If you decide to use internal Keycloak then that would also use PostgreSQL but we are not not using internal Keycloak for this scnenario.
+:::
+
+Here is how to configure Web Modeler and Idnetity with external PostgreSQL
+
+```yaml
+placeholder for external postgresql connections values.yaml insert
+```
+
+Please make sure you correctly define the protocol, host, and port.
+
+If you would like further information on connecting to external databases, we have a number of guides on doing so with the Camunda Helm Chart:
 
 - [Using existing Elasticsearch](/docs/self-managed/setup/guides/using-existing-elasticsearch/)
 - [Using Amazon OpenSearch Service](/docs/self-managed/setup/guides/using-existing-opensearch/)
@@ -201,9 +211,18 @@ If you would like further information, we have a number of guides on connecting 
 
 ## Application-Specific Configurations
 
-- Tasklist, Operate, and Optimize should have cleanup enabled (Index Lifecycle Management?)
-- ILM policies could be set for Elasticsearch and ISM policies for OpenSearch
-- Retention time is a setting in the helm chart with default values from the SaaS setup.
+At this point you are able to connect to your platform through HTTPS, correctly authenticate users using Azure Active Directory, and have connected to external databases such as Elastic-cloud and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment:
+
+- Elasticsearch configuration for the core component:
+  - It is important to have Index Lifecycle Management for Elasticsearch. Here is an example:
+  - Retention time is a setting in the helm chart with default values from the SaaS setup.
+
+```yaml
+[
+  placeholder for configuring Elasticsearch lifecycle policies on the core component,
+]
+```
+
 - Optimize: disable ObjectVariable import by default (save space in Elasticsearch). Add a setting to enable it explicitly on demand.
 - In general, the SaaS setup should be considered for the component settings.
 - Elasticsearch performance tuning
@@ -243,13 +262,11 @@ core:
 core:
   podDisruptionBudget:
     enabled: false
-    minAvailable: null
+    minAvailable: 0
     maxUnavailable: 1
 ```
 
 - It is possible to set a LimitRange on the namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/) on setting a LimitRange.
-- Use horizontal pod autoscaler where appropriate
-- Use Vertical pod autoscaler where appropriate
 
 ## Reliability Best Practices
 
@@ -306,8 +323,8 @@ Make sure auto-generated secrets are mentioned by default in all relevant compon
 
 The next recommended step is to setup a multi-namespace deployemnt. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
 
-### Keycloak
+### Connect to existing Keycloak
 
-- Connect to existing Keycloak:
+- Here are the guides related to connecting to existing Keycloak:
   - [Configuration of the Camunda Helm Chart](/docs/self-managed/setup/guides/using-existing-keycloak/)
   - [Configuration of Keycloak](/docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/)
