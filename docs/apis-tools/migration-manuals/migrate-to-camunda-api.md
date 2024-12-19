@@ -129,7 +129,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Attributes attribute `id` was removed
+- Attributes attribute `id` has been removed.
 - The attribute `key` was replaced to `decisionRequirementsKey`
 
 </TabItem>
@@ -150,13 +150,13 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- The request parameters attribute remains the same.
+- The request parameters attributes remain unchanged.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Attributes attribute `id` was removed
+- Attributes attribute `id` has been removed.
 - The attribute `key` was replaced to `decisionRequirementsKey`
 
 </TabItem>
@@ -168,7 +168,7 @@ The following conventions apply to all attributes:
 - **V1 endpoint**: `GET /v1/drd/:key/xml`
 - **V2 endpoint**: `GET /v2/decision-requirements/:decisionRequirementsKey/xml`
 
-The endpoint attributes remains the same.
+There are no changes to the request or response for this endpoint.
 
 <!--- TODO: insert output adjustments --->
 
