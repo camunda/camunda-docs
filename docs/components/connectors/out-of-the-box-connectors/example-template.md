@@ -37,7 +37,7 @@ To use this Connector in your processes:
 
 This Connector is typically used with the following BPMN events:
 
-- [Message events](https://docs.camunda.io/docs/next/components/modeler/bpmn/message-events/)
+- [Message events](/components/modeler/bpmn/message-events/)
 
 </details>
 

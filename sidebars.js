@@ -406,36 +406,7 @@ module.exports = {
             "components/connectors/custom-built-connectors/connector-templates",
             "components/connectors/manage-connector-templates",
             "components/connectors/custom-built-connectors/connector-template-generator",
-            {
-              type: "category",
-              label: "Connector SDK",
-              link: {
-                type: "doc",
-                id: "components/connectors/custom-built-connectors/connector-sdk",
-              },
-              items: [
-                {
-                  type: "category",
-                  label: "Connector SDK updates",
-                  link: {
-                    type: "doc",
-                    id: "components/connectors/custom-built-connectors/update-guide/introduction",
-                  },
-                  items: [
-                    "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
-                    "components/connectors/custom-built-connectors/update-guide/090-to-0100",
-                    "components/connectors/custom-built-connectors/update-guide/080-to-090",
-                    "components/connectors/custom-built-connectors/update-guide/070-to-080",
-                    "components/connectors/custom-built-connectors/update-guide/060-to-070",
-                    "components/connectors/custom-built-connectors/update-guide/050-to-060",
-                    "components/connectors/custom-built-connectors/update-guide/040-to-050",
-                    "components/connectors/custom-built-connectors/update-guide/030-to-040",
-                    "components/connectors/custom-built-connectors/update-guide/020-to-030",
-                    "components/connectors/custom-built-connectors/update-guide/010-to-020",
-                  ],
-                },
-              ],
-            },
+            "components/connectors/custom-built-connectors/connector-sdk",
           ],
         },
       ],

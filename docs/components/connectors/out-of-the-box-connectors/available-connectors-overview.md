@@ -75,4 +75,3 @@ Beginners to Connectors may want to get familiar with Connectors using a [guide 
 In addition to this section on Connectors, we recommend reviewing [Connector secrets](/components/console/manage-clusters/manage-secrets.md).
 
 If you want to build **custom Connectors**, head over to our [Connector SDK guide](/components/connectors/custom-built-connectors/connector-sdk.md).
-
