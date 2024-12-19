@@ -24,12 +24,12 @@ import AutomationImg from "./img/connector-automation.png";
 
 <p><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}}/>Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
 
-For example:
-
 - Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
 - In microservices orchestration, use a [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) connector to add real-time messaging to your automated processes.
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
+
+**[> Find a Camunda connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)**
 
 ## Get started
 
@@ -49,7 +49,7 @@ Learn how to start using connectors in your processes and about the different ty
     <a href="../out-of-the-box-connectors/available-connectors-overview" class="connector-card" title="Get started with Connectors">
     <img src={IconConnectorImg} alt="How to use Connectors"/>
     <h3>Camunda connectors</h3>
-    <p>Explore our library of prebuilt Camunda connectors.</p>
+    <p>Explore the docs for our library of prebuilt Camunda connectors.</p>
   </a>
 </div>
 

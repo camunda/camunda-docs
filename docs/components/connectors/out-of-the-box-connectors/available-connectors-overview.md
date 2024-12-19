@@ -1,6 +1,6 @@
 ---
 id: available-connectors-overview
-title: Camunda Connectors
+title: Camunda connectors
 description: Take a closer look at the Connectors available in Camunda 8.
 ---
 

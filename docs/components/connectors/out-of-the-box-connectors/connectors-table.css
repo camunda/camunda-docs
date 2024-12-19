@@ -36,7 +36,7 @@ td.no-border-cell-img {
 .no-border-cell-img img {
   border: none;
   background: none;
-  padding: 5px;
+  padding: 8px;
   margin: 0;
   width: 50px;
 }
@@ -50,10 +50,8 @@ td.no-border-cell-img {
 .connector-image {
   display: flex;
   align-items: center; /* Center image vertically */
-  border: 3px solid #ddd;
-  border-radius: 8px;
+  border: 0;
   padding: 0px;
-  background-color: #fff;
 }
 
 .connector-name {
