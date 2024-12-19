@@ -1,29 +1,20 @@
 ---
 id: available-connectors-overview
-title: Overview
+title: Camunda Connectors
 description: Take a closer look at the Connectors available in Camunda 8.
 ---
 
-Out-of-the-box (OOTB) Connectors accelerate solution implementation by providing pre-built, ready-to-use Connectors to popular external systems. Learn more about [Connector types](/components/connectors/connector-types.md)
+import SearchableTable from './connectors-table.js';
 
-Each Connector has a dedicated page with relevant configuration.
+Explore our library of prebuilt Camunda Connectors for SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
 
-All Connectors are available for Camunda 8 SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
+<SearchableTable />
 
+:::tip
+Don't see the Connector you need? Build your own [custom Connector](/components/connectors/custom-built-connectors/build-connector.md), or explore the [Camunda MarketPlace](https://marketplace.camunda.com/) for more Connectors developed by Camunda, Partners, and the Community.
+:::
+=======
 Beginners to Connectors may want to get familiar with Connectors using a [guide to configuring out-of-the-box Connectors](/guides/configuring-out-of-the-box-connector.md).
-
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
-<Tabs groupId="ootb" defaultValue="outbound" queryString values={
-[
-{label: 'Outbound', value: 'outbound', },
-{label: 'Inbound', value: 'inbound', },
-{label: 'Protocol', value: 'protocol', },
-]
-}>
-
-<TabItem value='outbound'>
 
 ## Outbound Connectors
 
@@ -62,10 +53,6 @@ import TabItem from "@theme/TabItem";
 - [UiPath Connector](/components/connectors/out-of-the-box-connectors/uipath.md) - Orchestrate your [UiPath](https://cloud.uipath.com) Bots with Camunda.
 - [WhatsApp Connector](/components/connectors/out-of-the-box-connectors/whatsapp.md) - Send messages with [WhatsApp Business](https://business.whatsapp.com/) from your BPMN process.
 
-</TabItem>
-
-<TabItem value='inbound'>
-
 ## Inbound Connectors
 
 - [Amazon EventBridge Webhook Connector](/components/connectors/out-of-the-box-connectors/amazon-eventbridge.md) - Start a BPMN process instance triggered by an [Amazon EventBridge service event](https://aws.amazon.com/eventbridge/).
@@ -77,10 +64,6 @@ import TabItem from "@theme/TabItem";
 - [Slack inbound Connector](/components/connectors/out-of-the-box-connectors/slack.md) - Trigger a [Slack](https://slack.com) bot to start a BPMN process with an event or a slash command
 - [Twilio Webhook Connector](/components/connectors/out-of-the-box-connectors/twilio.md) - Start a process instance triggered by a [Twilio webhook](https://www.twilio.com/docs/usage/webhooks). Can be used as an intermediate Connector in existing processes.
 
-</TabItem>
-
-<TabItem value='protocol'>
-
 ## Protocol Connectors
 
 - [GraphQL Connector](/components/connectors/protocol/graphql.md) - Execute a [GraphQL](https://graphql.org/) query or mutation from your BPMN process.
@@ -88,10 +71,6 @@ import TabItem from "@theme/TabItem";
 - [Polling Connector](/components/connectors/protocol/polling.md) - The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.
 - [REST Connector](/components/connectors/protocol/rest.md) - Make a request to a REST API and use the response in the next steps of your process.
 - [SOAP Connector](/components/connectors/protocol/soap.md) - Connect your BPMN process with Simple Object Access Protocol ([SOAP](https://en.wikipedia.org/wiki/SOAP)) services and interact with SOAP service endpoints.
-
-</TabItem>
-
-</Tabs>
 
 In addition to this section on Connectors, we recommend reviewing [Connector secrets](/components/console/manage-clusters/manage-secrets.md).
 

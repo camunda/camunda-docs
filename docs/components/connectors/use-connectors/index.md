@@ -1,6 +1,6 @@
 ---
 id: index
-title: Using Connectors
+title: How to use Connectors
 description: Learn how to use Connectors in Web Modeler by creating a Connector task, configuring a Connector, and reviewing potential errors.
 ---
 
