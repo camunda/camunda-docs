@@ -98,11 +98,11 @@ Amazon OpenSearch is **not supported** in dual-region configurations.
 - Required open ports between the two regions:
   - **9200** for Elasticsearch (for cross-region data pushed by Zeebe).
   - **26500** for communication to the Zeebe Gateway from clients/workers.
-  - **26501** and **26502** for communication between Zeebe brokers and Zeebe Gateway.
+  - **26501** and **26502** for communication between Zeebe brokers and the Zeebe Gateway.
 
 ### Zeebe cluster configuration
 
-The following Zeebe brokers and replication configuration is supported:
+The following Zeebe brokers and replication configuration are supported:
 
 - `clusterSize` must be a multiple of **2** and at least **4** to evenly distribute brokers across the two regions.
 - `replicationFactor` must be **4** to ensure even partition distribution across regions.
@@ -120,7 +120,7 @@ The following Zeebe brokers and replication configuration is supported:
 | Connectors Deployment          | Connectors can be deployed in a dual-region setup, but attention to [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) is required to avoid event duplication. In a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.                                                                                                                                  |
 | Connectors                     | If you are running Connectors and have a process with an inbound connector deployed in a dual-region setup, consider the following: <ul><li> when you want to delete the process deployment, delete it via Operate (not zbctl), otherwise the inbound connector won't deregister.</li><li>if you have multiple Operate instances running, then perform the delete operation in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).</li></ul> |
 | Zeebe Cluster Scaling          | Not supported.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Web Modeler                    | Web Modeler is a standalone component that is not covered in this guide. Modelling applications can operate independently outside of the automation clusters.                                                                                                                                                                                                                                                                                                                           |
+| Web Modeler                    | Web Modeler is a standalone component that is not covered in this guide. Modelling applications can operate independently outside of the orchestration clusters.                                                                                                                                                                                                                                                                                                                        |
 
 ### Infrastructure and deployment platform considerations
 
@@ -149,9 +149,9 @@ This means the Zeebe stretch cluster will not have a quorum when half of its bro
 
 The [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md) looks in detail at a recovery from a region loss and how to long-term fully re-establish the lost region.
 
-::caution
+:::caution
 Customers are expected to proactively monitor for regional failures and take ownership of executing the necessary [operational procedures](./../../operational-guides/multi-region/dual-region-ops.md) to ensure smooth recovery and failover.
-::
+:::
 
 ### Active region loss
 

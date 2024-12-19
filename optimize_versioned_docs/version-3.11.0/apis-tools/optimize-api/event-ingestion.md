@@ -108,43 +108,45 @@ POST `/api/ingestion/event/batch`
 
 ##### Request body
 
-     [
-       {
-          "specversion": "1.0",
-          "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca341",
-          "source": "order-service",
-          "type": "orderCreated",
-          "time": "2020-01-01T10:00:00.000Z",
-          "traceid": "id1",
-          "group": "shop",
-          "data": {
-              "numberField": 1,
-              "stringField": "example"
-          }
-      },
-      {
-          "specversion": "1.0",
-          "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca342",
-          "source": "order-service",
-          "type": "orderValidated",
-          "time": "2020-01-01T10:00:10.000Z",
-          "traceid": "id1",
-          "group": "shop",
-          "data": {
-              "numberField": 1,
-              "stringField": "example"
-          }
-      },
-      {
-          "specversion": "1.0",
-          "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca343",
-          "source": "shipping-service",
-          "type": "packageShipped",
-          "traceid": "id1",
-          "group": "shop",
-          "time": "2020-01-01T10:00:20.000Z"
-      }
-    ]
+```json
+[
+  {
+    "specversion": "1.0",
+    "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca341",
+    "source": "order-service",
+    "type": "orderCreated",
+    "time": "2020-01-01T10:00:00.000Z",
+    "traceid": "id1",
+    "group": "shop",
+    "data": {
+      "numberField": 1,
+      "stringField": "example"
+    }
+  },
+  {
+    "specversion": "1.0",
+    "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca342",
+    "source": "order-service",
+    "type": "orderValidated",
+    "time": "2020-01-01T10:00:10.000Z",
+    "traceid": "id1",
+    "group": "shop",
+    "data": {
+      "numberField": 1,
+      "stringField": "example"
+    }
+  },
+  {
+    "specversion": "1.0",
+    "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca343",
+    "source": "shipping-service",
+    "type": "packageShipped",
+    "traceid": "id1",
+    "group": "shop",
+    "time": "2020-01-01T10:00:20.000Z"
+  }
+]
+```
 
 #### Response
 
@@ -168,6 +170,7 @@ POST `/api/ingestion/event/batch`
 
 ##### Request Body:
 
+```
      [
        {
           "specversion": "1.0",
@@ -184,6 +187,7 @@ POST `/api/ingestion/event/batch`
           }
       }
     ]
+```
 
 #### Response
 

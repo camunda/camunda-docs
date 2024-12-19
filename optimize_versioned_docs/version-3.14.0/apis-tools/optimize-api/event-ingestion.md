@@ -48,7 +48,7 @@ The following request headers have to be provided with every ingest request:
 | Name                                                                             | Type                                                                           | Constraints | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [specversion](https://github.com/cloudevents/spec/blob/v1.0/spec.md#specversion) | String                                                                         | REQUIRED    | The version of the CloudEvents specification, which the event uses, must be `1.0`. See [CloudEvents - Version 1.0 - specversion](https://github.com/cloudevents/spec/blob/v1.0/spec.md#specversion).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| [id](https://github.com/cloudevents/spec/blob/v1.0/spec.md#id)                   | String                                                                         | REQUIRED    | Uniquely identifies an event, see [CloudEvents - Version 1.0 - id](https://github.com/cloudevents/spec/blob/v1.0/spec.md#id).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| [ID](https://github.com/cloudevents/spec/blob/v1.0/spec.md#id)                   | String                                                                         | REQUIRED    | Uniquely identifies an event, see [CloudEvents - Version 1.0 - ID](https://github.com/cloudevents/spec/blob/v1.0/spec.md#id).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | [source](https://github.com/cloudevents/spec/blob/v1.0/spec.md#source-1)         | String                                                                         | REQUIRED    | Identifies the context in which an event happened, see [CloudEvents - Version 1.0 - source](https://github.com/cloudevents/spec/blob/v1.0/spec.md#source-1). A use-case could be if you have conflicting types across different sources. For example, a `type:OrderProcessed` originating from both `order-service` and `shipping-service`. In this case, the `source` field provides means to clearly separate between the origins of a particular event. Note: The triplet of `type`, `source`, and `group` will be used as a unique identifier for classes of events.                                                                                                                                                                                                                                                                                                                                                                                                   |
 | [type](https://github.com/cloudevents/spec/blob/v1.0/spec.md#type)               | String                                                                         | REQUIRED    | This attribute contains a value describing the type of event related to the originating occurrence, see [CloudEvents - Version 1.0 - type](https://github.com/cloudevents/spec/blob/v1.0/spec.md#type). Note: The triplet of `type`, `source`, and `group` will be used as a unique identifier for classes of events. The value `camunda` cannot be used for this field.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | [time](https://github.com/cloudevents/spec/blob/v1.0/spec.md#type)               | [Timestamp](https://github.com/cloudevents/spec/blob/v1.0/spec.md#type-system) | OPTIONAL    | Timestamp of when the occurrence happened, see [CloudEvents - Version 1.0 - time](https://github.com/cloudevents/spec/blob/v1.0/spec.md#time). String encoding: [RFC 3339](https://tools.ietf.org/html/rfc3339). If not present, a default value of the time the event was received will be created.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -108,43 +108,45 @@ POST `/api/ingestion/event/batch`
 
 ##### Request body
 
-     [
-       {
-          "specversion": "1.0",
-          "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca341",
-          "source": "order-service",
-          "type": "orderCreated",
-          "time": "2020-01-01T10:00:00.000Z",
-          "traceid": "id1",
-          "group": "shop",
-          "data": {
-              "numberField": 1,
-              "stringField": "example"
-          }
-      },
-      {
-          "specversion": "1.0",
-          "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca342",
-          "source": "order-service",
-          "type": "orderValidated",
-          "time": "2020-01-01T10:00:10.000Z",
-          "traceid": "id1",
-          "group": "shop",
-          "data": {
-              "numberField": 1,
-              "stringField": "example"
-          }
-      },
-      {
-          "specversion": "1.0",
-          "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca343",
-          "source": "shipping-service",
-          "type": "packageShipped",
-          "traceid": "id1",
-          "group": "shop",
-          "time": "2020-01-01T10:00:20.000Z"
-      }
-    ]
+```json
+[
+  {
+    "specversion": "1.0",
+    "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca341",
+    "source": "order-service",
+    "type": "orderCreated",
+    "time": "2020-01-01T10:00:00.000Z",
+    "traceid": "id1",
+    "group": "shop",
+    "data": {
+      "numberField": 1,
+      "stringField": "example"
+    }
+  },
+  {
+    "specversion": "1.0",
+    "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca342",
+    "source": "order-service",
+    "type": "orderValidated",
+    "time": "2020-01-01T10:00:10.000Z",
+    "traceid": "id1",
+    "group": "shop",
+    "data": {
+      "numberField": 1,
+      "stringField": "example"
+    }
+  },
+  {
+    "specversion": "1.0",
+    "id": "1edc4160-74e5-4ffc-af59-2d281cf5aca343",
+    "source": "shipping-service",
+    "type": "packageShipped",
+    "traceid": "id1",
+    "group": "shop",
+    "time": "2020-01-01T10:00:20.000Z"
+  }
+]
+```
 
 #### Response
 
@@ -156,7 +158,7 @@ The API allows you to update any previously ingested cloud event by ingesting an
 
 The following request would update the first cloud event that got ingested in the [ingest three cloud events sample](#ingest-cloud-events). Note that on an update, the cloud event needs to be provided as a whole; it's not possible to perform partial updates through this API.
 
-In this example, an additional field `newField` is added to the data block of the cloud event with the id `1edc4160-74e5-4ffc-af59-2d281cf5aca341`.
+In this example, an additional field `newField` is added to the data block of the cloud event with the ID `1edc4160-74e5-4ffc-af59-2d281cf5aca341`.
 
 #### Request
 
@@ -168,6 +170,7 @@ POST `/api/ingestion/event/batch`
 
 ##### Request Body:
 
+```
      [
        {
           "specversion": "1.0",
@@ -184,6 +187,7 @@ POST `/api/ingestion/event/batch`
           }
       }
     ]
+```
 
 #### Response
 

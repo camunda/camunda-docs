@@ -144,10 +144,13 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 
 ### Logging
 
-| Environment variable | Description                            | Example value                |
-| -------------------- | -------------------------------------- | ---------------------------- |
-| `LOG_FILE_PATH`      | [optional]<br/>Path to log file output | `/full/path/to/log/file.log` |
+| Environment variable | Description                                     | Example value                |
+| -------------------- | ----------------------------------------------- | ---------------------------- |
+| `LOG_FILE_PATH`      | [optional]<br/>Path to log file output          | `/full/path/to/log/file.log` |
+| `LOG_LEVEL_CLIENT`   | [optional]<br/>Log level for the client         | `DEBUG`                      |
+| `LOG_LEVEL_WEBAPP`   | [optional]<br/>Log level for the Node.js server | `DEBUG`                      |
 
+The `LOG_LEVEL_*` options can be found [here](../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
 
 ## Configuration of the `websocket` component

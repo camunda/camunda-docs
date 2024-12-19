@@ -4,40 +4,24 @@ title: Getting started
 description: "Leverage Zeebe APIs (gRPC and REST) in your Spring Boot project."
 ---
 
-This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Zeebe SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
+This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Zeebe SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
 
-| Camunda Spring SDK version | JDK    | Camunda version | Bundled Spring Boot version |
-| -------------------------- | ------ | --------------- | --------------------------- |
-| 8.5.x                      | \>= 17 | 8.5.x           | 3.2.x                       |
-| 8.6.x                      | \>= 17 | 8.6.x           | 3.2.x                       |
+| Camunda Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| -------------------------- | ---- | --------------- | --------------------------- |
+| 8.5.x                      | ≥ 17 | 8.5.x           | 3.2.x                       |
+| 8.6.x                      | ≥ 17 | 8.6.x           | 3.2.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 
-Add the following repository and Maven dependency to your Spring Boot Starter project:
-
-```xml
-<repositories>
-    <repository>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-        <id>identity</id>
-        <name>Camunda Identity</name>
-        <url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
-    </repository>
-</repositories>
-```
+Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
 ```xml
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-    <version>8.6.3</version>
+    <version>8.6.x</version>
 </dependency>
 ```
 
@@ -134,6 +118,7 @@ camunda:
       rest-address: http://localhost:8080
       prefer-rest-over-grpc: false
       audience: zeebe-api
+      scope: # optional
 ```
 
 ## Obtain the Zeebe client

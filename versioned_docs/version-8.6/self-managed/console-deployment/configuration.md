@@ -5,10 +5,6 @@ sidebar_label: "Configuration"
 description: "Read details on the configuration variables of Console Self-Managed."
 ---
 
-:::note
-Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
-:::
-
 Console Self-Managed can be configured using environment variables and configuration parameters.
 
 :::note
@@ -23,10 +19,10 @@ Underscores in environment variables correspond to configuration file key levels
 | `KEYCLOAK_INTERNAL_BASE_URL`     | Internal Base URL for Keycloak                                                                                                                                                                                                                                                     | http://camunda-platform-keycloak:80/auth |
 | `KEYCLOAK_REALM`                 | Realm for Keycloak                                                                                                                                                                                                                                                                 | camunda-platform                         |
 | `CAMUNDA_IDENTITY_AUDIENCE`      | Audience for Console client                                                                                                                                                                                                                                                        | console                                  |
-| `CAMUNDA_IDENTITY_CLIENT_ID`     | Client Id for Console client                                                                                                                                                                                                                                                       | console                                  |
+| `CAMUNDA_IDENTITY_CLIENT_ID`     | Client ID for Console client                                                                                                                                                                                                                                                       | console                                  |
 | `CAMUNDA_CONSOLE_CONTEXT_PATH`   | Context path for Console                                                                                                                                                                                                                                                           | console                                  |
 | `CAMUNDA_CONSOLE_CUSTOMERID`     | Unique identifier of the customer                                                                                                                                                                                                                                                  | `customer-id`                            |
-| `CAMUNDA_CONSOLE_INSTALLATIONID` | Unique installation id of the current customer installation                                                                                                                                                                                                                        | `installation-id`                        |
+| `CAMUNDA_CONSOLE_INSTALLATIONID` | Unique installation ID of the current customer installation                                                                                                                                                                                                                        | `installation-id`                        |
 | `CAMUNDA_CONSOLE_TELEMETRY`      | Telemetry config for Console Self-Managed: `disabled`, `online`, or `download`                                                                                                                                                                                                     | `online`                                 |
 | `CAMUNDA_CONSOLE_DISABLE_AUTH`   | Disables authentication for Console. With this option, set users don't have to log in to use Console and API requests can be executed without an Authorization header. <br /> By disabling authentication all `CAMUNDA_IDENTITY`, variables won't be used.                         | `true`                                   |
 | `CAMUNDA_LICENSE_KEY`            | Your Camunda 8 license key, if your installation requires a license. For Helm installations, license keys can be configured globally in your `values.yaml` file. See the [Helm installation documentation](/self-managed/setup/install.md#configure-license-key) for more details. | N/A                                      |
@@ -54,7 +50,7 @@ To enable telemetry, the following parameters need to be configured. Camunda wil
 | Parameter        | Description                                                                         | Example value   |
 | ---------------- | ----------------------------------------------------------------------------------- | --------------- |
 | `customerId`     | Unique identifier of the customer. This is also a Camunda Docker registry user name | `customername`  |
-| `installationId` | Unique installation id of the current customer installation                         | `my-deployment` |
+| `installationId` | Unique installation ID of the current customer installation                         | `my-deployment` |
 | `telemetry`      | Telemetry config for Console Self-Managed: `disabled`, `online` or `download`       | `online`        |
 
 Console environment variables could be set in Helm. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).

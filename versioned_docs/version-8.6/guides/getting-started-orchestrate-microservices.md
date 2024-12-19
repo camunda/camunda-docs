@@ -1,7 +1,7 @@
 ---
 id: orchestrate-microservices
 title: Get started with microservice orchestration
-sidebar_label: Get started with microservice orchestration
+sidebar_label: Microservices
 description: "Orchestrate microservices for visibility and resilience."
 keywords: [microservices, orchestration, getting-started]
 ---
@@ -32,7 +32,7 @@ You must have access to a Camunda 8 SaaS account.
 
 Additionally, you need the following:
 
-- Java >= 8
+- Java ≥ 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
 - Download and unzip or clone the [repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/orchestrate-microservices/worker-java`

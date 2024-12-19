@@ -6,7 +6,7 @@ description: Learn about the dynamic list form element to dynamically manage a l
 
 The **dynamic list** element is designed to dynamically manage a list of form elements. It enables users to add or remove items from the list and is particularly useful in scenarios where the number of items in a list is not fixed.
 
-![Dynamic List Symbol](/img/form-icons/form-dynamiclist.svg)
+<img src="/img/form-icons/form-dynamiclist.svg" alt="Dynamic List Symbol" />
 
 ## Configurable properties
 

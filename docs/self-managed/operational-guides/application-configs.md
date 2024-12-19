@@ -63,20 +63,20 @@ operate:
         # Cluster name
         clusterName: elasticsearch
         # Host
-        host: cpt-elasticsearch
+        host: <your-release-name>-elasticsearch
         # Transport port
         port: 9200
         numberOfShards: 3
       # Zeebe instance
       zeebe:
         # Broker contact point
-        brokerContactPoint: "cpt-zeebe-gateway:26500"
+        brokerContactPoint: "<your-release-name>-zeebe-gateway:26500"
       # ELS instance to export Zeebe data to
       zeebeElasticsearch:
         # Cluster name
         clusterName: elasticsearch
         # Host
-        host: cpt-elasticsearch
+        host: <your-release-name>-elasticsearch
         # Transport port
         port: 9200
         # Index prefix, configured in Zeebe Elasticsearch exporter
@@ -122,37 +122,34 @@ operate:
 
 ## Default properties set by the helm chart
 
-Before you supply a configuration, it's helpful to know what the default configuration is so you can start from a working configuration and then update the values you want:
+The `helm template` command generates the application's default configuration, allowing you to only update the values required by your setup. Use the following command to generate the default configuration, substituting in the name of your release:
 
 ```bash
-helm template \
+helm template <your-release-name> \
     -f values.yaml \
     camunda/camunda-platform \
     --show-only templates/operate/configmap.yaml
 ```
 
-`--show-only` will allow you to print out the `configmap` to the console:
+The `--show-only` flag prints out the `configmap` to the console:
 
 ```yaml
 # Source: camunda-platform/templates/operate/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cpt-operate
+  name: <your-release-name>-operate-configuration
   labels:
     app: camunda-platform
     app.kubernetes.io/name: camunda-platform
-    app.kubernetes.io/instance: cpt
+    app.kubernetes.io/instance: <your-release-name>
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/part-of: camunda-platform
-    helm.sh/chart: camunda-platform-9.3.1
-    app.kubernetes.io/version: "8.4.5"
+    helm.sh/chart: camunda-platform-10.3.2
     app.kubernetes.io/component: operate
+    app.kubernetes.io/version: "8.5.5"
 data:
   application.yml: |
-    server:
-      servlet:
-        context-path: "/operate"
     spring:
       profiles:
         active: "identity-auth"
@@ -160,41 +157,46 @@ data:
         oauth2:
           resourceserver:
             jwt:
-              issuer-uri: "http://cpt-keycloak:80/auth/realms/camunda-platform"
-              jwk-set-uri: "http://cpt-keycloak:80/auth/realms/camunda-platform/protocol/openid-connect/certs"
+              issuer-uri: "http://<your-release-name>-keycloak:80/auth/realms/camunda-platform"
+              jwk-set-uri: "http://<your-release-name>-keycloak:80/auth/realms/camunda-platform/protocol/openid-connect/certs"
 
     camunda:
       identity:
         clientId: "operate"
         audience: "operate-api"
+        baseUrl: "http://<your-release-name>-identity:80"
 
     # Operate configuration file
     camunda.operate:
       identity:
-        redirectRootUrl: "https://dev.jlscode.com"
+        redirectRootUrl: "http://localhost:8081"
 
       # ELS instance to store Operate data
       elasticsearch:
         # Cluster name
         clusterName: elasticsearch
         # Host
-        host: cpt-elasticsearch
+        host: <your-release-name>-elasticsearch
         # Transport port
         port: 9200
-      # Zeebe instance
-      zeebe:
-        # Broker contact point
-        brokerContactPoint: "cpt-zeebe-gateway:26500"
+        # Elasticsearch full url
+        url: "http://<your-release-name>-elasticsearch:9200"
       # ELS instance to export Zeebe data to
       zeebeElasticsearch:
         # Cluster name
         clusterName: elasticsearch
         # Host
-        host: cpt-elasticsearch
+        host: <your-release-name>-elasticsearch
         # Transport port
         port: 9200
         # Index prefix, configured in Zeebe Elasticsearch exporter
         prefix: zeebe-record
+        # Elasticsearch full url
+        url: "http://<your-release-name>-elasticsearch:9200"
+      # Zeebe instance
+      zeebe:
+        # Broker contact point
+        brokerContactPoint: "<your-release-name>-zeebe-gateway:26500"
     logging:
       level:
         ROOT: INFO
@@ -207,14 +209,14 @@ Then, take the contents under `application.yml` and put it under the `operate.co
 
 ## Where to search for configuration options
 
-- [Zeebe Broker](docs/self-managed/zeebe-deployment/configuration/broker.md)
-- [Zeebe Gateway](docs/self-managed/zeebe-deployment/configuration/gateway.md)
-- [Operate](docs/self-managed/operate-deployment/operate-configuration.md)
-- [Tasklist](docs/self-managed/tasklist-deployment/tasklist-configuration.md)
-- [Web Modeler](docs/self-managed/modeler/web-modeler/configuration/configuration.md)
-- [Console](docs/self-managed/console-deployment/configuration.md)
-- [Connectors](docs/self-managed/connectors-deployment/connectors-configuration.md)
-- [Identity](docs/self-managed/identity/deployment/configuration-variables.md)
+- [Zeebe Broker](/self-managed/zeebe-deployment/configuration/broker.md)
+- [Zeebe Gateway](/self-managed/zeebe-deployment/configuration/gateway.md)
+- [Operate](/self-managed/operate-deployment/operate-configuration.md)
+- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md)
+- [Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md)
+- [Console](/self-managed/console-deployment/configuration/configuration.md)
+- [Connectors](/self-managed/connectors-deployment/connectors-configuration.md)
+- [Identity](/self-managed/identity/deployment/configuration-variables.md)
 - [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration)
 
 ## Limitations

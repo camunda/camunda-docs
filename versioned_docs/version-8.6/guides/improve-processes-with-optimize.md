@@ -1,7 +1,7 @@
 ---
 id: improve-processes-with-optimize
 title: Improve processes with Optimize
-sidebar_label: Improve processes with Optimize
+sidebar_label: Analyze processes with Optimize
 description: "Leverage data collected during process execution, analyze bottlenecks, and examine areas for improvement."
 ---
 

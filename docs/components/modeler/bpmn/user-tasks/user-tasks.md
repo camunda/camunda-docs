@@ -4,8 +4,9 @@ title: "User tasks"
 description: "A user task is used to model work that needs to be done by a human actor."
 ---
 
-A user task is used to model work that needs to be done by a human actor. When
-the process instance arrives at such a user task, a new user task instance is created at Zeebe.
+A user task is used to model work that needs to be done by a human and is assisted by a business process execution engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+
+When the process instance arrives at a user task, a new user task instance is created at Zeebe.
 The process instance stops at this point and waits until the user task instance is completed.
 When the user task instance is completed, the process instance continues.
 
@@ -125,7 +126,7 @@ Depending on your use case, two different types of form references can be used:
    - `deployment`: The version that was deployed together with the currently running version of the process.
    - `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.
 
-   To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+   To learn more about choosing binding types, see [choosing the resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
    :::note
    If the `bindingType` attribute is not specified, `latest` is used as the default.
@@ -161,7 +162,7 @@ A user task does not have to be managed by Zeebe. Instead, you can also use
 job workers to implement a custom user task logic. Note that you will lose all the task lifecycle and state management features that Zeebe provides and will have to implement them yourself. Use job workers only in case you require a very specific implementation of user tasks that can't be implemented on top of Zeebe user tasks.
 
 :::info
-If you started using Camunda 8 with version 8.4 or a lower version and upgraded to 8.5 or newer, your user tasks are probably implemented as job workers. Refer to the [migration guide](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md) to find a detailed list of the differences between the task implementation types and learn how to migrate to Zeebe user tasks.
+If you started using Camunda 8 with version 8.4 or a lower version and upgraded to 8.5 or newer, your user tasks are probably implemented as job workers. Refer to the [migration guide](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md) to find a detailed list of the differences between the task implementation types and learn how to migrate to Zeebe user tasks.
 :::
 
 You can define a job worker implementation for a user task by removing its `zeebe:userTask` extension element.

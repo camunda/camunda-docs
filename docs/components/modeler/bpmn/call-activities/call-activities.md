@@ -14,7 +14,7 @@ When the created process instance is completed, the call activity is left and th
 
 ## Defining the called process
 
-A call activity must define the BPMN process id of the called process as `processId`.
+A call activity must define the BPMN process ID of the called process as `processId`.
 
 Usually, the `processId` is defined as a [static value](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `shipping-process`), but it can also be defined as [expression](/components/concepts/expressions.md) (e.g. `= "shipping-" + tenantId`). The expression is evaluated on activating the call activity and must result in a `string`.
 
@@ -24,7 +24,7 @@ The `bindingType` attribute determines which version of the called process is in
 - `deployment`: The version that was deployed together with the currently running version of the calling process.
 - `versionTag`: The latest deployed version that is annotated with the version tag specified in the `versionTag` attribute.
 
-To learn more about choosing binding types, see [Choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+To learn more about choosing binding types, see [choosing the resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 
 :::note
 If the `bindingType` attribute is not specified, `latest` is used as the default.
@@ -41,10 +41,6 @@ When an interrupting boundary event is triggered, the call activity and the crea
 When a non-interrupting boundary event is triggered, the created process instance is not affected. The activities at the outgoing path have no access to the variables of the created process instance since they are bound to the other process instance.
 
 ## Variable mappings
-
-By default, all variables of the call activity scope are copied to the created process instance. This can be limited to copying only the local variables of the call activity, by setting the attribute `propagateAllParentVariables` to `false`.
-
-By disabling this attribute, variables existing at higher scopes are no longer copied. If the attribute `propagateAllParentVariables` is set (default: `true`), all variables are propagated to the child process instance.
 
 Input mappings can be used to create new local variables in the scope of the call activity. These variables are also copied to the created process instance.
 

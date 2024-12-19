@@ -14,7 +14,7 @@ module.exports = {
         "guides/getting-started-java-spring",
         "guides/model-your-first-process",
         {
-          "By use case": [
+          "Orchestration use cases": [
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices",
@@ -33,7 +33,6 @@ module.exports = {
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/message-correlation",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
       ],
@@ -109,10 +108,10 @@ module.exports = {
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings",
           ],
         },
@@ -367,6 +366,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/googledrive",
                 "components/connectors/out-of-the-box-connectors/google-maps-platform",
                 "components/connectors/out-of-the-box-connectors/google-sheets",
+                "components/connectors/out-of-the-box-connectors/google-gemini",
               ],
             },
             "components/connectors/protocol/graphql",
@@ -405,6 +405,7 @@ module.exports = {
           items: [
             "components/connectors/custom-built-connectors/connector-templates",
             "components/connectors/manage-connector-templates",
+            "components/connectors/custom-built-connectors/connector-template-generator",
             {
               type: "category",
               label: "Connector SDK",
@@ -734,6 +735,38 @@ module.exports = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Early access",
+      link: {
+        type: "doc",
+        id: "components/early-access/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Experimental features",
+          items: [
+            "components/early-access/experimental/rpa/rpa-integration",
+            "components/early-access/experimental/rpa/rpa-framework-library",
+          ],
+        },
+        {
+          type: "category",
+          label: "Alpha features",
+          link: {
+            type: "doc",
+            id: "components/early-access/alpha/alpha-features",
+          },
+          items: [
+            "components/early-access/alpha/sap/sap-integration",
+            "components/early-access/alpha/sap/odata-connector",
+            "components/early-access/alpha/sap/rfc-connector",
+            "components/early-access/alpha/sap/btp-integration",
+          ],
+        },
+      ],
+    },
   ],
   "APIs & Tools": [
     "apis-tools/working-with-apis-tools",
@@ -834,70 +867,67 @@ module.exports = {
         {
           Deprecated: [
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
-            require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
           ],
         },
       ],
     },
     {
-      Clients: [
+      "Clients & SDKs": [
         {
-          "Java client": [
-            "apis-tools/java-client/index",
-            "apis-tools/java-client/job-worker",
-            "apis-tools/java-client/logging",
-            "apis-tools/java-client/zeebe-process-test",
+          SDKs: [
+            "apis-tools/node-js-sdk",
             {
-              Examples: [
-                "apis-tools/java-client-examples/index",
-                "apis-tools/java-client-examples/process-deploy",
-                "apis-tools/java-client-examples/process-instance-create",
-                "apis-tools/java-client-examples/process-instance-create-nonblocking",
-                "apis-tools/java-client-examples/process-instance-create-with-result",
-                "apis-tools/java-client-examples/decision-evaluate",
-                "apis-tools/java-client-examples/job-worker-open",
-                "apis-tools/java-client-examples/data-pojo",
-                "apis-tools/java-client-examples/cluster-topology-request",
+              "Spring Zeebe": [
+                "apis-tools/spring-zeebe-sdk/getting-started",
+                "apis-tools/spring-zeebe-sdk/configuration",
               ],
             },
           ],
         },
         {
-          "Community clients": [
-            "apis-tools/community-clients/index",
+          Clients: [
             {
-              "Zeebe clients": [
-                "apis-tools/community-clients/c-sharp",
-                "apis-tools/community-clients/micronaut",
-                "apis-tools/community-clients/python",
-                "apis-tools/community-clients/ruby",
-                "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/quarkus",
+              "Java client": [
+                "apis-tools/java-client/index",
+                "apis-tools/java-client/job-worker",
+                "apis-tools/java-client/logging",
+                "apis-tools/java-client/zeebe-process-test",
                 {
-                  "CLI client": [
-                    "apis-tools/community-clients/cli-client/index",
-                    "apis-tools/community-clients/cli-client/cli-get-started",
-                  ],
-                  "Go client": [
-                    "apis-tools/community-clients/go-client/index",
-                    "apis-tools/community-clients/go-client/go-get-started",
-                    "apis-tools/community-clients/go-client/job-worker",
+                  Examples: [
+                    "apis-tools/java-client-examples/index",
+                    "apis-tools/java-client-examples/process-deploy",
+                    "apis-tools/java-client-examples/process-instance-create",
+                    "apis-tools/java-client-examples/process-instance-create-nonblocking",
+                    "apis-tools/java-client-examples/process-instance-create-with-result",
+                    "apis-tools/java-client-examples/decision-evaluate",
+                    "apis-tools/java-client-examples/job-worker-open",
+                    "apis-tools/java-client-examples/data-pojo",
+                    "apis-tools/java-client-examples/cluster-topology-request",
                   ],
                 },
               ],
             },
-          ],
-        },
-        "apis-tools/build-your-own-client",
-      ],
-    },
-    {
-      SDKs: [
-        "apis-tools/node-js-sdk",
-        {
-          "Spring Zeebe": [
-            "apis-tools/spring-zeebe-sdk/getting-started",
-            "apis-tools/spring-zeebe-sdk/configuration",
+            {
+              "Community clients": [
+                "apis-tools/community-clients/index",
+                {
+                  "Zeebe clients": [
+                    {
+                      "CLI client": [
+                        "apis-tools/community-clients/cli-client/index",
+                        "apis-tools/community-clients/cli-client/cli-get-started",
+                      ],
+                      "Go client": [
+                        "apis-tools/community-clients/go-client/index",
+                        "apis-tools/community-clients/go-client/go-get-started",
+                        "apis-tools/community-clients/go-client/job-worker",
+                      ],
+                    },
+                  ],
+                },
+                "apis-tools/build-your-own-client",
+              ],
+            },
           ],
         },
       ],
@@ -915,11 +945,29 @@ module.exports = {
         },
       ],
     },
+    {
+      "Migration manuals": [
+        "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-camunda-api",
+      ],
+    },
   ],
 
   Reference: [
     "reference/overview",
-    "reference/announcements",
+    {
+      type: "category",
+      label: "Announcements",
+      link: {
+        type: "doc",
+        id: "reference/announcements",
+      },
+      items: [
+        "reference/announcements/announcements-870",
+        "reference/announcements/announcements-860",
+        "reference/announcements/announcements-850",
+      ],
+    },
     {
       type: "category",
       label: "Release notes",
@@ -927,14 +975,18 @@ module.exports = {
         type: "doc",
         id: "reference/release-notes/release-notes",
       },
-      items: ["reference/release-notes/860", "reference/release-notes/850"],
+      items: [
+        "reference/release-notes/870",
+        "reference/release-notes/860",
+        "reference/release-notes/850",
+      ],
     },
+    "reference/contact",
     "reference/supported-environments",
     "reference/dependencies",
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
-    "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
     "reference/release-policy",
@@ -1025,6 +1077,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/860-to-870",
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
             "self-managed/operational-guides/update-guide/830-to-840",
@@ -1104,7 +1157,12 @@ module.exports = {
           Console: [
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
-            "self-managed/console-deployment/configuration",
+            {
+              Configuration: [
+                "self-managed/console-deployment/configuration/configuration",
+                "self-managed/console-deployment/configuration/ssl",
+              ],
+            },
             "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [
@@ -1163,6 +1221,7 @@ module.exports = {
               },
               items: [
                 "self-managed/zeebe-deployment/exporters/install-zeebe-exporters",
+                "self-managed/zeebe-deployment/exporters/camunda-exporter",
                 "self-managed/zeebe-deployment/exporters/elasticsearch-exporter",
                 "self-managed/zeebe-deployment/exporters/opensearch-exporter",
               ],
@@ -1565,6 +1624,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
                   ],
                 },
               ],

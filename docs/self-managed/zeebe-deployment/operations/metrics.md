@@ -51,7 +51,7 @@ All Zeebe-related metrics have a `zeebe_`-prefix.
 
 Most metrics have the following common label:
 
-- `partition`: Cluster-unique id of the partition
+- `partition`: Cluster-unique ID of the partition
 
 :::note
 Both brokers and gateways expose their respective metrics. The brokers have an optional metrics exporter that can be enabled for maximum insight.

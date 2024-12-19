@@ -1,7 +1,7 @@
 ---
 id: node-js-sdk
 title: Node.js
-description: Get started with the official Camunda 8 JavaScript SDK for Node.js, available via npm.
+description: Get started with the official Camunda 8 JavaScript SDK for Node.js.
 ---
 
 As of 8.5.0, the official [Camunda 8 JavaScript SDK for Node.js](https://github.com/camunda/camunda-8-js-sdk) is available via [npm](https://www.npmjs.com/package/@camunda8/sdk).
@@ -234,20 +234,20 @@ This will start a service task worker that runs in an asynchronous loop, invokin
 
 The handler must return a job completion function - `fail`, `complete`, or `forward`. This is enforced by the type system and ensures you do not write code that does not have code paths that do not respond to Zeebe after taking a job. The `job.complete` function can take an object that represents variables to update.
 
-### Create a programmatic human task worker
+### Create a programmatic user task worker
 
-Our process has a [human task](/guides/getting-started-orchestrate-human-tasks.md) after the [service task](/guides/getting-started-orchestrate-microservices.md). The service task worker will complete the service task job, and we will complete the human task using the Tasklist API client.
+Our process has a [user task](/guides/getting-started-orchestrate-human-tasks.md) after the [service task](/guides/getting-started-orchestrate-microservices.md). The service task worker will complete the service task job, and we will complete the user task using the Tasklist API client.
 
 Add the following code beneath the service worker code:
 
 ```typescript
-console.log(`Starting human task poller...`);
+console.log(`Starting user task poller...`);
 setInterval(async () => {
   const res = await tasklist.searchTasks({
     state: "CREATED",
   });
   if (res.length > 0) {
-    console.log(`[Tasklist] fetched ${res.length} human tasks`);
+    console.log(`[Tasklist] fetched ${res.length} user tasks`);
     res.forEach(async (task) => {
       console.log(
         `[Tasklist] claiming task ${task.id} from process ${task.processInstanceKey}`
@@ -258,19 +258,19 @@ setInterval(async () => {
         allowOverrideAssignment: true,
       });
       console.log(
-        `[Tasklist] servicing human task ${t.id} from process ${t.processInstanceKey}`
+        `[Tasklist] servicing user task ${t.id} from process ${t.processInstanceKey}`
       );
       await tasklist.completeTask(t.id, {
-        humanTaskStatus: "Got done",
+        userTaskStatus: "Got done",
       });
     });
   } else {
-    console.log("No human tasks found");
+    console.log("No user tasks found");
   }
 }, 3000);
 ```
 
-We now have an asynchronously polling service worker and an asynchronously polling human task worker.
+We now have an asynchronously polling service worker and an asynchronously polling user task worker.
 
 The last step is to create a process instance.
 
@@ -278,7 +278,7 @@ The last step is to create a process instance.
 
 There are two options for creating a process instance:
 
-- For long-running processes, use `createProcessInstance`, which returns as soon as the process instance is created with the process instance id.
+- For long-running processes, use `createProcessInstance`, which returns as soon as the process instance is created with the process instance ID.
 - For the shorter-running process we are using, use `createProcessInstanceWithResult`, which awaits the completion of the process and returns with the final variable values.
 
 1. Locate the following line in the `main` function:
@@ -295,11 +295,11 @@ console.log(
 const p = await zeebe.createProcessInstanceWithResult({
   bpmnProcessId: `c8-sdk-demo`,
   variables: {
-    humanTaskStatus: "Needs doing",
+    userTaskStatus: "Needs doing",
   },
 });
 console.log(`[Zeebe] Finished Process Instance ${p.processInstanceKey}`);
-console.log(`[Zeebe] humanTaskStatus is "${p.variables.humanTaskStatus}"`);
+console.log(`[Zeebe] userTaskStatus is "${p.variables.userTaskStatus}"`);
 console.log(
   `[Zeebe] serviceTaskOutcome is "${p.variables.serviceTaskOutcome}"`
 );
@@ -315,14 +315,14 @@ You should see a output similar to the following:
 
 ```
 Creating worker...
-Starting human task poller...
+Starting user task poller...
 [Zeebe] Deployed process c8-sdk-demo
 [Zeebe Worker] handling job of type service-task
-[Tasklist] fetched 1 human tasks
+[Tasklist] fetched 1 user tasks
 [Tasklist] claiming task 2251799814895765 from process 2251799814900881
-[Tasklist] servicing human task 2251799814895765 from process 2251799814900881
+[Tasklist] servicing user task 2251799814895765 from process 2251799814900881
 [Zeebe] Finished Process Instance 2251799814900881
-[Zeebe] humanTaskStatus is "Got done"
+[Zeebe] userTaskStatus is "Got done"
 [Zeebe] serviceTaskOutcome is "We did it!"
 ```
 

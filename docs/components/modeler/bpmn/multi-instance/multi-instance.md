@@ -1,7 +1,7 @@
 ---
 id: multi-instance
 title: "Multi-instance"
-description: "A multi-instance activity is executed multiple times - once for each element of a given collection."
+description: "Learn about multi-instance activities like service tasks and receive tasks. These can be executed multiple times - once for each element of a given collection."
 ---
 
 A multi-instance activity is executed multiple times - once for each element of a given collection (like a _foreach_ loop in a programming language).

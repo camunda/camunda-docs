@@ -10,7 +10,7 @@ description: "Camunda Desktop and Web Modeler both offer the same Modeling exper
 
 Camunda Desktop and Web Modeler both offer the same Modeling experience for DMN 1.3 models: Modeling starts in the Decision Requirements Diagram (DRD) view. From there, you can add DMN elements from the palette on the left side by dragging and dropping them onto the diagram canvas.
 
-Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of an element in place. Use the properties panel on the right side to change the name or id of the DMN diagram.
+Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. Using the wrench icon in the context menu, you can change the type of an element in place. Use the properties panel on the right side to change the name or ID of the DMN diagram.
 
 ## Demo
 
@@ -52,6 +52,10 @@ Jump between decision tables or literal expressions in your decision requirement
 You can also edit literal expressions. Just as with decision tables, in the decision requirement diagram view, click the blue icon to _drill-down_ into the literal expression view and start editing.
 
 ## Business knowledge models
+
+:::caution
+Viewing the result of BKM evaluation is currently not supported in Operate.
+:::
 
 A _business knowledge model_ (BKM) is a reusable function containing a piece of decision logic. Typically, a BKM instantiates business logic that is required in multiple decisions, such as a common computation. For example, an amortization formula might be used in different loan application processes.
 
