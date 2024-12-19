@@ -15,7 +15,7 @@ import IconConnectorTemplateImg from './img/icon-connector-template.png';
 import IconConnectorCustomImg from './img/icon-connector-custom.png';
 import OverviewImg from './img/connector-overview.png';
 
-<p><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}}/>Camunda 8 Connectors are reusable building blocks you can use to connect processes to external systems, applications, and data.</p>
+<p><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}}/>Camunda 8 Connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
 
 For example:
 
