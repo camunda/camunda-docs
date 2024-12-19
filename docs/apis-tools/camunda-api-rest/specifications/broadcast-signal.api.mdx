@@ -5,52 +5,286 @@ description: "Broadcasts a signal."
 sidebar_label: "Broadcast signal"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWN9v2zYQ/lcIPm2YIrld2nV6c9N0S9ulQeJuD6kfTtLZYiuRKknFMQT978ORki1bThYMK7AHBzBiWaf78X33keI13MLS8PiW34ilhILPA64q1GCFkhcZj3miFWQpGNsZBDxDk2pRkQWP+ev+vmHAjLMJecA1fqvR2NcqW/O4cZdCY8Zjq2sMeKqkRWnpFlRVIVIXMPpiyGfDTZpjCfTNrivkMVfJF0wtD3ilKT0r0Dg7F+8SSqSr3cRmOTIJJTK1YDbHLjdmFduURIl2AYzVQi55G/A70AKSwgeALBPkD4qrQWBfwzhcF2LjgQGB8u7m4yXzBQwCdhW1AbcoQVoC+1AJF2/6ArwdszlYplbSDKo6UEgbDEC/HSI1D7gVtiBjz+mGwmtPGm9b/7iplDQeiOeTyeH8uppXYHZx/dcMQ1F8XPD4dj/YazDItvSzhdJslL/PeAzzfuM8jnmH9Bb6vncI+lGlY+AfhNenR5Xwdn64md/j+nBStRTfavxuSTmbIVN3MgtTKGuZQQiVCL/i2oSyLhPUP41ZzLDSmILdSvzI63fkVUiLS9Q84AulS7D+p5enT0nz0nH4HtfmaZx7AA5wfmT4/6Jcsjp9aIWutLoTGWYsAwtMGCaVZXdQiOyRdbrSKimwPKj0YYApu/KWLEMLoug2Otr5vGGCGROS3V6/PWO/nr74Zf5Dbm1l4iharVahXqQnmAmrdKj0MtKLlD5k92PIZjlqZCWsWYJsuxMPW8lUmIqFSGlbt75WlwyBGH6W/9xN7m6zB/pAVbUWo1eeKft0fcFEhtKKxVrI5Ti0e2YBdUE+IFG1jZMC5Fe+pXMcdD+KqcsS9Lrvmt0AbcCNBVsPynhgVfj5+cg3tcXvs9kV8y5YqjJ0srS5MH0gKqIUUpR1yePTySTgJdz7q5eTSUs+ifEnVCIZ3lcFSNda++UIyUqlsesfV5iQxoJM/ytmlBZLsR833JFW18RvfEW9oE4ffeXplLRQtTwq6aiko5IeVNKLQ1vTVDJCWVMfotZKM5WmtdaYsVUuCuc+RWP62N2J0vfiUWtHrR21NtZaG/ASba5oclMp41oHbM5jHvldy0Sbl00ecIP6DrVx7+y1LnjMGy+ZNo6iJlfGtnFTKW3b6I742JmN0G0vrb5lCpVCkfuwY+roxnAgc+YPGuwVuz6/mbHfwOIK1g5KCrnr+tXk1eSgVzJ9wOP06oL5Cn3jDRaD3i2p+qBbb/wUxy2dBwymtRZ2fUOPeXgSBI16WhP6m4bo4jnvdO2NeNB9edu3ybu/Zo5pWsiut6O083soKy/D4ehr22dDgnZGS4MBl5AL5VLqumhcHDlCbTwak/DZuGOvLpzwUlWWtXSrr1yylbA5gwFYaVEbSyAFvBAp0lklbrj0OfdmH/wd9qePyJ6FRLTvxn7RXQqb10mYqjLqjqeb/0mhkqgEIaMuhInOpn98unwzPflwcXZ+eXN+8iychPbeOkBJFCXIQR6b81T3XrdfbLPdbB4adnbkWry3UVWAkASzq6Dp5NcP4AxRvRHgPOhEdMubJgGDn3TRtvTztxr1mse38y2ldNUGPEfIUDvFfqUDJz/z2Z3MKAkyL2pKZjR0a4P+iWmaYmUftZ0P1pGrjzczSrsb5ZYqo2c0rGjMCyse88/8M+c0OCYPrvnd7w0vQC5rWJK990t/fwNDZMq8
+api: eJztWF1v2zYU/SsEnzZMkdwu7Tq9uWm6pR9pkLjbQ+aHK+naYiuRKknFMQT99+GSki1bThYMK7AHBzBiWVf345x7SPE23MLS8PiW34ilhILPA64q1GCFkhcZj3miFWQpGNsZBDxDk2pRkQWP+ev+vmHAjLMJecA1fqvR2NcqW/O4cZdCY8Zjq2sMeKqkRWnpFlRVIVIXMPpiyGfDTZpjCfTNrivkMVfJF0wtD3ilKT0r0Dg7F+8SSqSr3cRmOTIJJTK1YDbHLjdmFduURIl2AYzVQi55G/A70AKSwgeALBPkD4qrQWBfwzhcF2LjgQGB8u7m0yXzBQwCdhW1AbcoQVoC+1AJF2/6ArwdszlYplbSDKo6UEgbDEC/HSI1D7gVtiBjz+mGwmtPGm9b/7iplDQeiOeTyeH8uppXYHZx/dcMQ1F8WvD4dj/YazDItvSzhdJslL/PeAzzfuM8jnmH9Bb6vncI+lGlY+AfhNenR5Xwdn64md/j+nBStRTfavxuSTmbIVN3MgtTKGuZQQiVCL/i2oSyLhPUP41ZzLDSmILdSvzI63fkVUiLS9Q84AulS7D+p5enT0nz0nH4HtfmaZx7AA5wfmT4/6Jcsjp9aIWutLoTGWYsAwtMGCaVZXdQiOyRdbrSKimwPKj0YYApu/KWLEMLoug2Otr5vGGCGROS3V6/PWO/nr74Zf5Dbm1l4iharVahXqQnmAmrdKj0MtKLlD5k92PIZjlqZCWsWYJsuxMPW8lUmIqFSGlbt75WlwyBGP4l/7mb3N1mD/SBqmotRq88U/b5+oKJDKUVi7WQy3Fo98wC6oJ8QKJqGycFyK98S+c46H4UU5cl6HXfNbsB2oAbC7YelPHAqvDz85FvaovfZ7Mr5l2wVGXoZGlzYfpAVEQppCjrksenk0nAS7j3Vy8nk5Z8EuNPqEQyvK8KkK619ssRkpVKY9c/rjAhjQWZ/lfMKC2WYj9uuCOtronf+Ip6QZ0++srTKWmhanlU0lFJRyU9qKQXh7amqWSEsqY+RK2VZipNa60xY6tcFM59isb0sbsTpe/Fo9aOWjtqbay1NuAl2lzR5KZSxrUO2JzHPPK7lok2L5s84Ab1HWrj3tlrXfCYN14ybRxFTa6MbeOmUtq20R3xsTMbodteWn3LFCqFIvdhx9TRjeFA5swfNNgrdn1+M2O/gcUVrB2UFHLX9avJq8lBr2T6gMfp1QXzFfrGGywGvVtS9UG33vgpjls6DxhMay3s+oYe8/AkCBr1tCb0Nw3RxXPe6dob8aD78rZvk3d/zhzTtJBdb0dp5/dQVl6Gw9HXts+GBO2MlgYDLiEXyqXUddG4OHKE2ng0JuGzccdeXTjhpaosa+lWX7lkK2FzBgOw0qI2lkAKeCFSpLNK3HDpc+7NPvg77A8fkT0LiWjfjf2iuxQ2r5MwVWXUHU83/5NCJVEJQkZdCBOdTT9+vnwzPflwcXZ+eXN+8iychPbeOkBJFCXIQR6b81T3XrdfbLPdbB4adnbkWry3UVWAkASzq6Dp5NcP4AxRvRHgPOhEdMubJgGDn3XRtvTztxr1mse38y2ldNUGPEfIUDvFfqUDJz/z2Z3MKAkyL2pKZjR0a4P+iWmaYmUftZ0P1pGrTzczSrsb5ZYqo2c0rGjMCysec05DY3raNb77reEFyGUNS7L1PunvbytLycA=
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Broadcast signal</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Broadcast signal"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/signals/broadcast"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/signals/broadcast"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Broadcasts a signal.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"signalName"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The name of the signal to broadcast.","type":"string"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>variables</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-The signal variables as a JSON object.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            signalName: {
+              description: "The name of the signal to broadcast.",
+              type: "string",
+            },
+            variables: {
+              additionalProperties: true,
+              description: "The signal variables as a JSON object.",
+              type: "object",
+            },
+            tenantId: {
+              description: "The ID of the tenant that owns the signal.",
+              type: "string",
+            },
+          },
+          required: ["signalName"],
+          title: "SignalBroadcastRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><SchemaItem name={"property name*"} required={false} schemaName={"any"} qualifierMessage={undefined} schema={{"additionalProperties":true,"description":"The signal variables as a JSON object.","type":"object"}} collapsible={false} discriminator={false}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The ID of the tenant that owns the signal.","type":"string"}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The signal was broadcast.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID of the signal that was broadcast.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"signalKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The unique ID of the signal that was broadcast.","type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"signalKey\": \"string\",\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID of the signal that was broadcast.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"signalKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The unique ID of the signal that was broadcast.","type":"integer","format":"int64"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"signalKey\": 0,\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID of the signal that was broadcast.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"signalKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The unique ID of the signal that was broadcast.","type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"signalKey\": \"string\",\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The provided data is not valid.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-The signal is not found.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The signal was broadcast.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for SignalBroadcastResponse.",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description:
+                      "The tenant ID of the signal that was broadcast.",
+                    type: "string",
+                  },
+                },
+                title: "SignalBroadcastResponseBase",
+              },
+            ],
+            properties: {
+              signalKey: {
+                description: "The unique ID of the signal that was broadcast.",
+                type: "string",
+              },
+            },
+            title: "SignalBroadcastResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for SignalBroadcastResponse.",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description:
+                      "The tenant ID of the signal that was broadcast.",
+                    type: "string",
+                  },
+                },
+                title: "SignalBroadcastResponseBase",
+              },
+            ],
+            properties: {
+              signalKey: {
+                description: "The unique ID of the signal that was broadcast.",
+                type: "integer",
+                format: "int64",
+              },
+            },
+            title: "SignalBroadcastResponseNumberKeys",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for SignalBroadcastResponse.",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description:
+                      "The tenant ID of the signal that was broadcast.",
+                    type: "string",
+                  },
+                },
+                title: "SignalBroadcastResponseBase",
+              },
+            ],
+            properties: {
+              signalKey: {
+                description: "The unique ID of the signal that was broadcast.",
+                type: "string",
+              },
+            },
+            title: "SignalBroadcastResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The signal is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -6,7 +6,7 @@ function removeDuplicateVersionBadge(generatedInfoFilePath) {
   console.log("removing duplicate version badge...");
   replace.sync({
     files: generatedInfoFilePath,
-    from: /^.*Version: .*$/m,
+    from: /<span[^>]*\s*children=\{"Version: [^"]*"\}\s*>\n<\/span>\n/m,
     to: "",
   });
 }
