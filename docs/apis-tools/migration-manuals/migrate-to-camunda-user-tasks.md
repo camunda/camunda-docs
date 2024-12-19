@@ -16,7 +16,7 @@ import CamundaUserTaskSelectionImg from '../tasklist-api-rest/assets/img/camunda
 
 Camunda 8.5 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Camunda user task.
 
-Camunda user tasks have several benefits, compared to Job worked-based user tasks. It includes:
+Camunda user tasks have several benefits compared to Job worked-based user tasks, including:
 
 - Running directly on the automation engine for high performance.
 - Removing dependencies and round trips to Tasklist.
@@ -36,7 +36,7 @@ With this in mind, you can migrate at your own pace. If you should migrate now o
 
 ### Task type differences
 
-Learn the differences between both task types and make an informed decision, and understand the new capabilities of Camunda user tasks. Refer to this table for important high-level differences of the two task types:
+To make an informed decision, you should understand the differences between both task types and the new capabilities of Camunda user tasks. Refer to this table for important high-level differences between the two task types:
 
 <table>
     <tr>

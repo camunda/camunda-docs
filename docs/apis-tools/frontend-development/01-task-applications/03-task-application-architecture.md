@@ -6,7 +6,7 @@ description: "Understand and decide on the architecture of your task application
 
 A typical task application architecture consists of a task application frontend, a backend-for-frontend, and one or more data sources or services that contain business data relevant for the application users to perform their work. The backend implements Camunda Zeebe and Tasklist clients to retrieve and interact with tasks via Camunda APIs. For historical process instance data, Operate is also required.
 
-Depending on the user task implementation type (Job worker-based vs Camunda user task) you use in your processes, you need to run either the Tasklist or Zeebe client to run operations on task. Task, form, and variable retrieval happens via the API. Learn more about the differences of the task implementation types in the [migration guide for Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md).
+Depending on the user task implementation type (job worker-based vs Camunda user task) you use in your processes, you need to run either the Tasklist or Zeebe client to run operations on tasks. Task, form, and variable retrieval happens via the API. Learn more about the differences of the task implementation types in the [migration guide for Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md).
 
 :::tip
 Starting a new project? Use Camunda user tasks to simplify your implementation.
@@ -79,7 +79,7 @@ click ZeebeRest "../../../zeebe-api-rest/zeebe-api-rest-overview"
 
 Follow these resources to learn more about the individual components:
 
-- Learn how to use the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx) for task, variable, and form retrieval, and to run operations on job worker-based user tasks managed by Camunda, also known as Camunda user tasks.
+- Learn how to use the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx) for task, variable, and form retrieval, and to run operations on Camunda user tasks.
 - Familiarize yourself with the [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) to run operations on Job worker-based user tasks.
 - Understand how to design, embed, and customize [forms](/apis-tools/frontend-development/03-forms/01-introduction-to-forms.md).
 - Understand how this architecture fits into the overall Camunda architecture with the [Java greenfield stack](/components/best-practices/architecture/deciding-about-your-stack.md).
