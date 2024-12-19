@@ -49,18 +49,18 @@ module.exports = {
           "3.14.0": {
             label: "8.6 / 3.14.0",
           },
-          "3.13.0": {
-            label: "8.5 / 3.13.0",
-            banner: "none",
-          },
-          "3.12.0": {
-            label: "8.4 / 3.12.0",
-            banner: "none",
-          },
-          "3.11.0": {
-            label: "8.3 / 3.11.0",
-            banner: "none",
-          },
+          // "3.13.0": {
+          //   label: "8.5 / 3.13.0",
+          //   banner: "none",
+          // },
+          // "3.12.0": {
+          //   label: "8.4 / 3.12.0",
+          //   banner: "none",
+          // },
+          // "3.11.0": {
+          //   label: "8.3 / 3.11.0",
+          //   banner: "none",
+          // },
         },
       },
     ],
@@ -398,17 +398,17 @@ module.exports = {
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
-            8.5: {
-              banner: "none",
-            },
-            8.4: {
-              banner: "none",
-            },
-            8.3: {
-              banner: "none",
-            },
+            // 8.5: {
+            //   banner: "none",
+            // },
+            // 8.4: {
+            //   banner: "none",
+            // },
+            // 8.3: {
+            //   banner: "none",
+            // },
           },
-          docLayoutComponent: "@theme/DocPage",
+          // docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
         blog: false,
