@@ -12,9 +12,9 @@ Document automation allows you to automatically extract data from complex PDF do
 
 For example, if you want to process large multi-page PDFs containing multiple document types (invoices, reports, forms), you can create a document automation project to extract the specific data you want.
 
-- You must link at least one [document extraction](idp-document-extraction.md) project so the LLM can accurately analyze, classify, and extract document data.
-- Choose and test different LLM models to find the one that best suits your budget and accuracy requirements.
-- Document classification involves automatically categorizing documents into predefined classes/types, based on their content.
+- You must link at least one [document extraction](idp-document-extraction.md) project for the LLM model to accurately analyze, classify, and extract data.
+- Choose and test different LLM models to find the model that best suits your budget and accuracy requirements.
+- Document classification automatically categorizes documents into predefined classes/types, based on their content.
 
 ## Create document automation project
 

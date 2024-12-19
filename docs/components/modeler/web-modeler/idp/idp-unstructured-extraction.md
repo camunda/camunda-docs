@@ -48,11 +48,11 @@ To upload your sample document(s):
 
 ### Document upload guidelines
 
-Start by uploading a single model sample document that contains all the data fields you want to extract for this type of document.
+Start by uploading a sample document that contains all the data fields you want to extract for this type of document.
 
-- If a single document doesn’t include all the data fields you require, upload multiple documents to cover all the variations for the document type. The number and range of sample documents you need to upload depends on the complexity of your unstructured data and your requirements.
+- If a single document doesn’t include all the data fields you require, upload multiple documents to cover all variations of the document type. The number and range of documents you need to upload depends on the complexity of your unstructured data and your requirements.
 
-- For example, you must upload at least one sample document for each variation of a document type. This may provide enough extraction accuracy if it is an exact representation of the specific type of document, with no variations in layout or content. However, it is more likely that you will need to upload multiple sample documents to ensure extraction accuracy.
+- For example, you must upload at least one sample document for each variation of a document type. This should provide enough extraction accuracy if it is an exact representation of the specific type of document, with no variations in layout or content. However, it is more likely that you will need to upload multiple documents to ensure acceptable extraction accuracy.
 
 - When choosing your sample documents, variation is important to ensure the system captures the full range of document types it will encounter. As a general guideline, Camunda recommends starting with three to five documents, and uploading more as needed to represent the full range of possible data types.
 
@@ -85,14 +85,14 @@ Add an extraction field for each piece of data you want to extract from your doc
 
 ### Extract data and save as a test case
 
-Once you have set up your extraction fields, you can select an LLM foundation model and test the data extraction.
+Once you have set up your extraction fields, you can select an LLM model and test the data extraction.
 
-1. **Extraction model**: Select the LLM foundation model you want to use.
+1. **Extraction model**: Select the LLM model you want to use.
 1. Select the document you want to test the data extraction against.
 1. Click **Extract document**.
 1. The **Extraction fields** are populated with the extracted document data.
    - Check the extracted data is accurate and matches what you require from the document.
-   - For incorrect field results, edit the field **Prompt** and retry the data extraction until the results match what you want.
+   - For incorrect field results, edit the field **Prompt** and retry the data extraction until the results are accurate.
    - Add additional fields as required during testing.
 1. Click **Save as test case** to save the results as a test case.
 1. (Optional) Test different LLM models with this test case to compare results and determine which model produces the most accurate extraction.
@@ -101,31 +101,31 @@ Once you have set up your extraction fields, you can select an LLM foundation mo
 
 :::tip
 
-- You will achieve different results with different models. Test different models until you find the one that best suits your budget and accuracy requirements.
+- You will achieve different results with different LLM models. Test different models until you find the one that best suits your budget and accuracy requirements.
 - You can save and overwrite the test case at any time with your latest results.
 
 :::
 
 ## Step 3: Validate extraction
 
-On the **Validate extraction** tab, validate and test your configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by an LLM foundation model using your extraction fields.
+On the **Validate extraction** tab, validate and test your configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by the LLM model, using your extraction fields and prompts.
 
 <img src={IdpValidationResultsImg} alt="Validate extraction screen" />
 
-1. **Project extraction model**: Select the LLM foundation model you want to use for validation.
+1. **Project extraction model**: Select the LLM model to use for validation.
 1. Click **Test all documents** to run the extraction validation against all your uploaded sample documents.
 1. The extraction validation results are shown in the **Testcase results** column.
-   - A [validation status](#validation-status) summary is shown for each field to indicate the accuracy of the data extracted from each document. For example, if the extracted value was as expected for a document, it is shown as a “Pass”.
-   - Click on a field to expand the details and see detailed results for individual documents.
-   - Click Run failed test case(s) to
-1. If your evaluation results are not successful, try the following and run the validation again:
-   - Change the LLM foundation model to try and obtain more accurate results with a different model.
-   - Edit the field prompt. Select the three vertical dots on a field to open the actions menu and select **Edit prompt**.
-   - Go back to previous steps and edit your data extraction configuration, or upload more sample documents.
+   - A [validation status](#validation-status) summary is shown for each field to indicate the accuracy of the data extracted from each document. For example, if the extracted value matches the expected test case output, it is shown as a “Pass”.
+   - Click on a field to expand the detailed results for each individual document.
+   - Click **Run failed test case**(s) to...
+1. If your evaluation results are not successful, try the following and rerun the validation:
+   - Change the LLM model to try and obtain more accurate results with a different model.
+   - Edit field prompts. Select the three vertical dots on a field to open the actions menu and select **Edit prompt**.
+   - Go back to a previous step and edit your data extraction configuration, or upload more sample documents.
 1. Once you are satisfied that your data extraction configuration is accurate, you can publish the project. Select the **Publish** tab.
 
 :::tip
-Search and filter the results if you want to work with specific documents or extraction fields.
+Search and filter the results to work with specific documents or extraction fields.
 :::
 
 ### Validation status
@@ -150,10 +150,10 @@ On the **Publish** tab, publish the project to make it available for [integratio
 
 <img src={IdpPublishProjectImg} alt="Publish project screen" />
 
-1. Unpublished projects are shown with a “Draft” **Status**. Click **Publish** to open the **Publish Extraction Project** modal.
+1. Click **Publish** to open the **Publish Extraction Project** modal.
 1. Enter a version name and description for the project and click **Publish**.
-1. The project is published and now available to use [in your processes](idp-integrate.md) or [document automation](idp-document-automation.md) projects.
+1. The project is published and becomes available to use [in your processes](idp-integrate.md) or [document automation](idp-document-automation.md) projects.
 
 :::note
-Projects only become available in your processes or document automation projects once published.
+Projects only become available in your processes or document automation projects once published. Unpublished projects are shown with a “Draft” **Status**.
 :::
