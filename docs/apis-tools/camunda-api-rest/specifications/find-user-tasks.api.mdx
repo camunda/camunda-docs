@@ -5,128 +5,1107 @@ description: "Search for user tasks based on given criteria."
 sidebar_label: "Query user tasks"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query user tasks</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query user tasks"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/user-tasks/search"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/search"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Search for user tasks based on given criteria.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-Sort field criteria.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  description: "Sort field criteria.",
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: {
+                            description: "The field to sort by.",
+                            type: "string",
+                          },
+                          order: {
+                            description:
+                              "The order in which to sort the related field.",
+                            enum: ["ASC", "DESC"],
+                            default: "ASC",
+                            title: "SortOrderEnum",
+                          },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        searchAfter: {
+                          description:
+                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          description:
+                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          description: "User task search query request.",
+          type: "object",
+          properties: {
+            filter: {
+              description: "The user task search filters.",
+              allOf: [
+                {
+                  description: "User task filter request.",
+                  type: "object",
+                  properties: {
+                    userTaskKey: {
+                      type: "integer",
+                      description: "The key for this user task.",
+                      format: "int64",
+                    },
+                    state: {
+                      type: "string",
+                      description: "The state of the user task.",
+                      enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                    },
+                    assignee: {
+                      description: "The assignee of the user task.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            { type: "string" },
+                            {
+                              description: "Advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n",
+                                  type: "string",
+                                },
+                              },
+                              title: "AdvancedStringFilter",
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    priority: {
+                      description: "The priority of the user task.",
+                      allOf: [
+                        {
+                          description:
+                            "Integer property with advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            { type: "integer", format: "int32" },
+                            {
+                              description: "Advanced integer (int32) filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "integer", format: "int32" },
+                                },
+                              },
+                              title: "AdvancedIntegerFilter",
+                            },
+                          ],
+                          title: "IntegerFilterProperty",
+                        },
+                      ],
+                    },
+                    elementId: {
+                      type: "string",
+                      description: "The element ID of the user task.",
+                    },
+                    candidateGroup: {
+                      description: "The candidate group for this user task.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            { type: "string" },
+                            {
+                              description: "Advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n",
+                                  type: "string",
+                                },
+                              },
+                              title: "AdvancedStringFilter",
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    candidateUser: {
+                      description: "The candidate user for this user task.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            { type: "string" },
+                            {
+                              description: "Advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $like: {
+                                  description:
+                                    "Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n",
+                                  type: "string",
+                                },
+                              },
+                              title: "AdvancedStringFilter",
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      description: "The key of the process definition.",
+                      format: "int64",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      description: "The key of the process instance.",
+                      format: "int64",
+                    },
+                    tenantId: {
+                      type: "string",
+                      description: "Tenant ID of this user task.",
+                    },
+                    processDefinitionId: {
+                      type: "string",
+                      description: "The ID of the process definition.",
+                    },
+                    elementInstanceKey: {
+                      type: "integer",
+                      description: "The key of the element instance.",
+                      format: "int64",
+                    },
+                    processInstanceVariables: {
+                      type: "array",
+                      description:
+                        "Process Instance variables associated with the user task.",
+                      items: {
+                        type: "object",
+                        properties: {
+                          name: {
+                            type: "string",
+                            description: "Name of the variable.",
+                          },
+                          value: {
+                            type: "string",
+                            description: "The value of the variable.",
+                          },
+                        },
+                        title: "UserTaskVariableFilterRequest",
+                      },
+                    },
+                    localVariables: {
+                      type: "array",
+                      description:
+                        "Local variables associated with the user task.",
+                      items: {
+                        type: "object",
+                        properties: {
+                          name: {
+                            type: "string",
+                            description: "Name of the variable.",
+                          },
+                          value: {
+                            type: "string",
+                            description: "The value of the variable.",
+                          },
+                        },
+                        title: "UserTaskVariableFilterRequest",
+                      },
+                    },
+                  },
+                  title: "UserTaskFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "UserTaskSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The field to sort by.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination criteria.
-
-</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-User task filter request.
-
-</div><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key for this user task.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`, `FAILED`]"} schema={{"type":"string","description":"The state of the user task.","enum":["CREATED","COMPLETED","CANCELED","FAILED"]}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>assignee</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The assignee of the user task.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-string
-
-</div></TabItem><TabItem label={"AdvancedStringFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"$like"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n","type":"string"}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>priority</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The priority of the user task.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-integer
-
-</div></TabItem><TabItem label={"AdvancedIntegerFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$gt"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Greater than comparison with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$gte"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Greater than or equal comparison with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$lt"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Lower than comparison with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$lte"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Lower than or equal comparison with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"int32[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"integer","format":"int32"}}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={false} name={"elementId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The element ID of the user task."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>candidateGroup</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The candidate group for this user task.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-string
-
-</div></TabItem><TabItem label={"AdvancedStringFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"$like"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n","type":"string"}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>candidateUser</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The candidate user for this user task.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-string
-
-</div></TabItem><TabItem label={"AdvancedStringFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"$like"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n","type":"string"}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process definition.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Tenant ID of this user task."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the element instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>processInstanceVariables</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Process Instance variables associated with the user task.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Name of the variable."}}></SchemaItem><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The value of the variable."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>localVariables</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Local variables associated with the user task.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Name of the variable."}}></SchemaItem><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The value of the variable."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The user task search result.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching user tasks.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key of the user task.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the element instance."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the form."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"userTaskKey\": \"string\",\n      \"elementInstanceKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"formKey\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"CREATED\",\n      \"assignee\": \"string\",\n      \"elementId\": \"string\",\n      \"candidateGroups\": [\n        \"string\"\n      ],\n      \"candidateUsers\": [\n        \"string\"\n      ],\n      \"processDefinitionId\": \"string\",\n      \"creationDate\": \"2024-12-19T15:07:40.079Z\",\n      \"completionDate\": \"2024-12-19T15:07:40.079Z\",\n      \"followUpDate\": \"2024-12-19T15:07:40.079Z\",\n      \"dueDate\": \"2024-12-19T15:07:40.079Z\",\n      \"tenantId\": \"string\",\n      \"externalFormReference\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"customHeaders\": {},\n      \"priority\": 50\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching user tasks.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key of the user task.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the element instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process definition.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the form.","format":"int64"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"userTaskKey\": 0,\n      \"elementInstanceKey\": 0,\n      \"processDefinitionKey\": 0,\n      \"processInstanceKey\": 0,\n      \"formKey\": 0,\n      \"name\": \"string\",\n      \"state\": \"CREATED\",\n      \"assignee\": \"string\",\n      \"elementId\": \"string\",\n      \"candidateGroups\": [\n        \"string\"\n      ],\n      \"candidateUsers\": [\n        \"string\"\n      ],\n      \"processDefinitionId\": \"string\",\n      \"creationDate\": \"2024-12-19T15:07:40.081Z\",\n      \"completionDate\": \"2024-12-19T15:07:40.081Z\",\n      \"followUpDate\": \"2024-12-19T15:07:40.081Z\",\n      \"dueDate\": \"2024-12-19T15:07:40.081Z\",\n      \"tenantId\": \"string\",\n      \"externalFormReference\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"customHeaders\": {},\n      \"priority\": 50\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching user tasks.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key of the user task.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the element instance."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the form."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"userTaskKey\": \"string\",\n      \"elementInstanceKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"formKey\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"CREATED\",\n      \"assignee\": \"string\",\n      \"elementId\": \"string\",\n      \"candidateGroups\": [\n        \"string\"\n      ],\n      \"candidateUsers\": [\n        \"string\"\n      ],\n      \"processDefinitionId\": \"string\",\n      \"creationDate\": \"2024-12-19T15:07:40.082Z\",\n      \"completionDate\": \"2024-12-19T15:07:40.082Z\",\n      \"followUpDate\": \"2024-12-19T15:07:40.082Z\",\n      \"dueDate\": \"2024-12-19T15:07:40.082Z\",\n      \"tenantId\": \"string\",\n      \"externalFormReference\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"customHeaders\": {},\n      \"priority\": 50\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The user task search query failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user task search result.\n",
+      content: {
+        "application/json": {
+          schema: {
+            description: "User task search query response.",
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching user tasks.",
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for UserTaskItem.",
+                      type: "object",
+                      properties: {
+                        name: {
+                          type: "string",
+                          description: "The name for this user task.",
+                        },
+                        state: {
+                          type: "string",
+                          description: "The state of the user task.",
+                          enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                        },
+                        assignee: {
+                          description: "The assignee of the user task.",
+                          type: "string",
+                        },
+                        elementId: {
+                          type: "string",
+                          description: "The element ID of the user task.",
+                        },
+                        candidateGroups: {
+                          type: "array",
+                          description:
+                            "The candidate groups for this user task.",
+                          items: { type: "string" },
+                        },
+                        candidateUsers: {
+                          type: "array",
+                          description:
+                            "The candidate users for this user task.",
+                          items: { type: "string" },
+                        },
+                        processDefinitionId: {
+                          type: "string",
+                          description: "The ID of the process definition.",
+                        },
+                        creationDate: {
+                          type: "string",
+                          description: "The creation date of a user task.",
+                          format: "date-time",
+                        },
+                        completionDate: {
+                          type: "string",
+                          description: "The completion date of a user task.",
+                          format: "date-time",
+                        },
+                        followUpDate: {
+                          type: "string",
+                          description: "The follow date of a user task.",
+                          format: "date-time",
+                        },
+                        dueDate: {
+                          type: "string",
+                          description: "The due date of a user task.",
+                          format: "date-time",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description: "Tenant ID of this user task.",
+                        },
+                        externalFormReference: {
+                          type: "string",
+                          description: "The external form reference.",
+                        },
+                        processDefinitionVersion: {
+                          type: "integer",
+                          description: "The version of the process definition.",
+                          format: "int32",
+                        },
+                        customHeaders: {
+                          type: "object",
+                          description: "Custom headers for the user task.",
+                          additionalProperties: { type: "string" },
+                        },
+                        priority: {
+                          type: "integer",
+                          description:
+                            "The priority of a user task. The higher the value the higher the priority.",
+                          minimum: 0,
+                          maximum: 100,
+                          default: 50,
+                        },
+                      },
+                      title: "UserTaskItemBase",
+                    },
+                  ],
+                  properties: {
+                    userTaskKey: {
+                      description: "The key of the user task.",
+                      type: "string",
+                    },
+                    elementInstanceKey: {
+                      type: "string",
+                      description: "The key of the element instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    formKey: {
+                      type: "string",
+                      description: "The key of the form.",
+                    },
+                  },
+                  title: "UserTaskItem",
+                },
+              },
+            },
+            title: "UserTaskSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            description:
+              "User task search query response. Key attributes as numeric values.",
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching user tasks.",
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for UserTaskItem.",
+                      type: "object",
+                      properties: {
+                        name: {
+                          type: "string",
+                          description: "The name for this user task.",
+                        },
+                        state: {
+                          type: "string",
+                          description: "The state of the user task.",
+                          enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                        },
+                        assignee: {
+                          description: "The assignee of the user task.",
+                          type: "string",
+                        },
+                        elementId: {
+                          type: "string",
+                          description: "The element ID of the user task.",
+                        },
+                        candidateGroups: {
+                          type: "array",
+                          description:
+                            "The candidate groups for this user task.",
+                          items: { type: "string" },
+                        },
+                        candidateUsers: {
+                          type: "array",
+                          description:
+                            "The candidate users for this user task.",
+                          items: { type: "string" },
+                        },
+                        processDefinitionId: {
+                          type: "string",
+                          description: "The ID of the process definition.",
+                        },
+                        creationDate: {
+                          type: "string",
+                          description: "The creation date of a user task.",
+                          format: "date-time",
+                        },
+                        completionDate: {
+                          type: "string",
+                          description: "The completion date of a user task.",
+                          format: "date-time",
+                        },
+                        followUpDate: {
+                          type: "string",
+                          description: "The follow date of a user task.",
+                          format: "date-time",
+                        },
+                        dueDate: {
+                          type: "string",
+                          description: "The due date of a user task.",
+                          format: "date-time",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description: "Tenant ID of this user task.",
+                        },
+                        externalFormReference: {
+                          type: "string",
+                          description: "The external form reference.",
+                        },
+                        processDefinitionVersion: {
+                          type: "integer",
+                          description: "The version of the process definition.",
+                          format: "int32",
+                        },
+                        customHeaders: {
+                          type: "object",
+                          description: "Custom headers for the user task.",
+                          additionalProperties: { type: "string" },
+                        },
+                        priority: {
+                          type: "integer",
+                          description:
+                            "The priority of a user task. The higher the value the higher the priority.",
+                          minimum: 0,
+                          maximum: 100,
+                          default: 50,
+                        },
+                      },
+                      title: "UserTaskItemBase",
+                    },
+                  ],
+                  properties: {
+                    userTaskKey: {
+                      description: "The key of the user task.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    elementInstanceKey: {
+                      type: "integer",
+                      description: "The key of the element instance.",
+                      format: "int64",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      description: "The key of the process definition.",
+                      format: "int64",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      description: "The key of the process instance.",
+                      format: "int64",
+                    },
+                    formKey: {
+                      type: "integer",
+                      description: "The key of the form.",
+                      format: "int64",
+                    },
+                  },
+                  title: "UserTaskItemNumberKeys",
+                },
+              },
+            },
+            title: "UserTaskSearchQueryResponseNumberKeys",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            description: "User task search query response.",
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching user tasks.",
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for UserTaskItem.",
+                      type: "object",
+                      properties: {
+                        name: {
+                          type: "string",
+                          description: "The name for this user task.",
+                        },
+                        state: {
+                          type: "string",
+                          description: "The state of the user task.",
+                          enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                        },
+                        assignee: {
+                          description: "The assignee of the user task.",
+                          type: "string",
+                        },
+                        elementId: {
+                          type: "string",
+                          description: "The element ID of the user task.",
+                        },
+                        candidateGroups: {
+                          type: "array",
+                          description:
+                            "The candidate groups for this user task.",
+                          items: { type: "string" },
+                        },
+                        candidateUsers: {
+                          type: "array",
+                          description:
+                            "The candidate users for this user task.",
+                          items: { type: "string" },
+                        },
+                        processDefinitionId: {
+                          type: "string",
+                          description: "The ID of the process definition.",
+                        },
+                        creationDate: {
+                          type: "string",
+                          description: "The creation date of a user task.",
+                          format: "date-time",
+                        },
+                        completionDate: {
+                          type: "string",
+                          description: "The completion date of a user task.",
+                          format: "date-time",
+                        },
+                        followUpDate: {
+                          type: "string",
+                          description: "The follow date of a user task.",
+                          format: "date-time",
+                        },
+                        dueDate: {
+                          type: "string",
+                          description: "The due date of a user task.",
+                          format: "date-time",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description: "Tenant ID of this user task.",
+                        },
+                        externalFormReference: {
+                          type: "string",
+                          description: "The external form reference.",
+                        },
+                        processDefinitionVersion: {
+                          type: "integer",
+                          description: "The version of the process definition.",
+                          format: "int32",
+                        },
+                        customHeaders: {
+                          type: "object",
+                          description: "Custom headers for the user task.",
+                          additionalProperties: { type: "string" },
+                        },
+                        priority: {
+                          type: "integer",
+                          description:
+                            "The priority of a user task. The higher the value the higher the priority.",
+                          minimum: 0,
+                          maximum: 100,
+                          default: 50,
+                        },
+                      },
+                      title: "UserTaskItemBase",
+                    },
+                  ],
+                  properties: {
+                    userTaskKey: {
+                      description: "The key of the user task.",
+                      type: "string",
+                    },
+                    elementInstanceKey: {
+                      type: "string",
+                      description: "The key of the element instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    formKey: {
+                      type: "string",
+                      description: "The key of the form.",
+                    },
+                  },
+                  title: "UserTaskItem",
+                },
+              },
+            },
+            title: "UserTaskSearchQueryResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The user task search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
