@@ -12,6 +12,10 @@ import AutomationImg from "../img/connector-automation.png";
 import AzureaiImg from "../img/connector-openai.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
+import EasypostImg from "../img/connector-easypost.png";
+import GithubImg from "../img/connector-github.png";
+import GitlabImg from "../img/connector-gitlab.png";
+import GoogleDriveImg from "../img/connector-google-drive.png";
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -164,28 +168,28 @@ const SearchableTable = () => {
         "Create addresses, parcels, and shipments, as well as purchase and verify shipments with EasyPost from your BPMN process.",
       type: "Outbound",
       link: "../easypost/",
-      image: AmazonBedrockImg,
+      image: EasypostImg,
     },
     {
       name: "GitHub Connector",
       description: "Manage GitHub issues and releases from your BPMN process.",
       type: "Outbound",
       link: "../github/",
-      image: AmazonBedrockImg,
+      image: GithubImg,
     },
     {
       name: "GitHub Webhook Connector",
       description: "Start a process instance triggered by a GitHub event.",
       type: "Inbound",
       link: "../github/",
-      image: AmazonBedrockImg,
+      image: GithubImg,
     },
     {
       name: "GitLab Connector",
       description: "Manage GitLab issues and releases from your BPMN process.",
       type: "Outbound",
       link: "../gitlab/",
-      image: AmazonBedrockImg,
+      image: GitlabImg,
     },
     {
       name: "Google Drive Connector",
@@ -193,7 +197,7 @@ const SearchableTable = () => {
         "Create folders or files from a Google Drive template from your BPMN process.",
       type: "Outbound",
       link: "../googledrive/",
-      image: AmazonBedrockImg,
+      image: GoogleDriveImg,
     },
     {
       name: "Google Maps Platform Connector",

@@ -29,7 +29,7 @@ import AutomationImg from "./img/connector-automation.png";
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
-**[> Find a Camunda connector](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)**
+**[Find a Camunda connector >](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)**
 
 ## Get started
 
