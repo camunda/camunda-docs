@@ -13,9 +13,14 @@ import IconConnectorSdkImg from './img/icon-connector-sdk.png';
 import IconConnectorTemplateImg from './img/icon-connector-template.png';
 import IconConnectorCustomImg from './img/icon-connector-custom.png';
 import OverviewImg from './img/connector-overview.png';
+import MarketplaceImg from "./img/icon-marketplace.png";
 import AmazonEventbridgeImg from "./img/connector-amazon-eventbridge.png";
 import OpenaiImg from "./img/connector-openai.png";
-import MarketplaceImg from "./img/icon-marketplace.png";
+import AwsLambdaImg from "./img/connector-aws-lambda.png";
+import RestImg from "./img/connector-rest.png";
+import GraphqlImg from "./img/connector-graphql.png";
+import AsanaImg from "./img/connector-asana.png";
+import AutomationImg from "./img/connector-automation.png";
 
 <p><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}}/>Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
 
@@ -26,7 +31,7 @@ For example:
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
-## Get started with connectors
+## Get started
 
 Learn how to start using connectors in your processes and about the different types of connector.
 
@@ -70,60 +75,47 @@ Build and deploy your own connectors using connector templates or the connector 
   </a>
 </div>
 
-## Popular Connectors
+## Popular connectors
+
+Learn more about how to use some of our most popular connectors.
 
 <div class="connector-grid">
-  <a href="../custom-built-connectors/build-connector" class="connector-card" title="OpenAI connector">
+  <a href="../out-of-the-box-connectors/openai" class="connector-card" title="OpenAI">
     <img src={OpenaiImg} alt="OpenAI icon" class="connector-card-image"/>
     <h3>OpenAI</h3>
     <p>Add ChatGPT and OpenAI's Moderation API to your business processes.</p>
   </a>
-  <a href="../custom-built-connectors/connector-templates" class="connector-card" title="Connector templates">
-    <img src={IconConnectorTemplateImg} alt="Connector templates icon" class="connector-card-image"/>
-    <h3>Connector templates</h3>
-    <p>Create and work with connector templates.</p>
+  <a href="../out-of-the-box-connectors/aws-lambda" class="connector-card" title="AWS Lambda">
+    <img src={AwsLambdaImg} alt="AWS Lambda icon" class="connector-card-image"/>
+    <h3>Amazon AWS Lambda</h3>
+    <p>Connect processes to AWS Lambda to invoke serverless functions.</p>
   </a>
-    <a href="../custom-built-connectors/connector-sdk" class="connector-card" title="Connector SDK">
-    <img src={IconConnectorSdkImg} alt="Connector SDK icon" class="connector-card-image"/>
-    <h3>Connector SDK</h3>
-    <p>Use the SDK to create your own custom Java connectors.</p>
+    <a href="../protocol/rest" class="connector-card" title="Connector SDK">
+    <img src={RestImg} alt="Rest connector icon" class="connector-card-image"/>
+    <h3>Rest connector</h3>
+    <p>Connect, interact, and sync your processes with any RESTful service.</p>
   </a>
 </div>
 
 <div class="connector-small-grid">
-  <a href="path/to/connector1" class="connector-small-link">
+  <a href="../protocol/graphql" class="connector-small-link">
     <div class="connector-small">
-      <img src={AmazonEventbridgeImg} alt="Get started"/>Amazon Eventbridge
+      <img src={GraphqlImg} alt="GraphQL connector"/>GraphQL
     </div>
   </a>
-  <a href="path/to/connector2" class="connector-small-link">
+  <a href="../out-of-the-box-connectors/asana" class="connector-small-link">
     <div class="connector-small">
-      <img src={AmazonEventbridgeImg} alt="Get started"/>Amazon Eventbridge
+      <img src={AsanaImg} alt="Asana connector"/>Asana
     </div>
   </a>
-  <a href="path/to/connector3" class="connector-small-link">
+  <a href="../out-of-the-box-connectors/automation-anywhere" class="connector-small-link">
     <div class="connector-small">
-      <img src={AmazonEventbridgeImg} alt="Get started"/>Amazon Eventbridge
-    </div>
-  </a>
-  <a href="path/to/connector4" class="connector-small-link">
-    <div class="connector-small">
-      <img src={AmazonEventbridgeImg} alt="Get started"/>Amazon 
-    </div>
-  </a>
-    <a href="path/to/connector4" class="connector-small-link">
-    <div class="connector-small">
-      <img src={AmazonEventbridgeImg} alt="Get started"/>Amazon 
-    </div>
-  </a>
-    <a href="path/to/connector4" class="connector-small-link">
-    <div class="connector-small">
-      <img src={AmazonEventbridgeImg} alt="Get started"/>Amazon 
+      <img src={AutomationImg} alt="Automation Anywhere connector"/>Automation Anywhere
     </div>
   </a>
 </div>
 
-<div class="banner-column-container" style={{background: '#000'}} >
+<div class="banner-column-container">
 <div class="banner-column-left">
 
 <a title="Explore Camunda Marketplace" href="https://marketplace.camunda.com/"><img src={MarketplaceImg} alt="Get started" /></a>

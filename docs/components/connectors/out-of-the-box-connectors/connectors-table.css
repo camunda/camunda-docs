@@ -198,6 +198,7 @@ a.connector-small-link {
   border-radius: 4px;
   margin-top: 60px;
   margin-bottom: 30px;
+  background-color: #000;
 }
 .banner-column-left {
   flex: 1;
