@@ -41,6 +41,12 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 ## Outcome
 
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+
+_Infrastructure diagram for a dual-region EKS setup (click on the image to open the PDF version)_
+[![Infrastructure Diagram EKS Dual-Region](./assets/eks-dual-region.jpg)](./assets/eks-dual-region.pdf)
+
 Completion of this tutorial will result in:
 
 - Two Amazon EKS Kubernetes clusters in two different geographic regions with each four nodes ready for the Camunda 8 dual-region installation.
@@ -378,6 +384,12 @@ export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key
 unset AWS_ACCESS_KEY_ES
 unset AWS_SECRET_ACCESS_KEY_ES
 ```
+
+:::caution Bucket vulnerable to region outages
+
+The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html). If that region becomes unavailable and you want to restore to a different region or S3 services remain disrupted, you must create a new bucket in another region and reconfigure your Elasticsearch cluster to use the new bucket.
+
+:::
 
 ### Camunda 8 Helm chart prerequisites
 
