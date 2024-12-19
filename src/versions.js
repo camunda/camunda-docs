@@ -19,18 +19,18 @@ const versionMappings = [
     docsVersion: "8.6",
     optimizeVersion: "3.14.0",
   },
-  {
-    docsVersion: "8.5",
-    optimizeVersion: "3.13.0",
-  },
-  {
-    docsVersion: "8.4",
-    optimizeVersion: "3.12.0",
-  },
-  {
-    docsVersion: "8.3",
-    optimizeVersion: "3.11.0",
-  },
+  // {
+  //   docsVersion: "8.5",
+  //   optimizeVersion: "3.13.0",
+  // },
+  // {
+  //   docsVersion: "8.4",
+  //   optimizeVersion: "3.12.0",
+  // },
+  // {
+  //   docsVersion: "8.3",
+  //   optimizeVersion: "3.11.0",
+  // },
 ];
 
 /** @type {Array<UnsupportedVersion>} */
