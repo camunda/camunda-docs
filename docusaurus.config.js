@@ -104,24 +104,6 @@ module.exports = {
       // Zeebe REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
-        id: "api-zeebe-openapi",
-        docsPluginId: "default",
-        config: {
-          zeebe: {
-            specPath: "api/zeebe/zeebe-openapi.yaml",
-            outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-            },
-            hideSendButton: true,
-          },
-        },
-      },
-    ],
-    [
-      // Zeebe REST API docs generation
-      "docusaurus-plugin-openapi-docs",
-      {
         id: "api-consolesm-openapi",
         docsPluginId: "default",
         config: {

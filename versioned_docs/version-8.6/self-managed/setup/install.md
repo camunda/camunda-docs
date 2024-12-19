@@ -34,7 +34,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler).
 - **Console**: Deploys Camunda Console Self-Managed.
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console) as the Console is only available to enterprise customers.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console).
 
 :::note Amazon OpenSearch Helm support
 The existing Helm charts use the Elasticsearch configurations by default. The Helm charts can still be used to connect to Amazon OpenSearch Service. Refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
@@ -280,11 +280,11 @@ global:
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users.
 :::
 
-## Configuring Enterprise components and Connectors
+## Configuring Web Modeler, Console, and Connectors
 
-### Enterprise components secret
+### Web Modeler and Console secrets
 
-Enterprise components such as Console are published in Camunda's private Docker registry (registry.camunda.cloud) and are exclusive to enterprise customers. These components are not available in public repositories.
+The Console and Web Modeler Components are published in Camunda's private Docker registry (registry.camunda.cloud) and are under a [proprietary license](/reference/licenses.md#web-modeler-and-console). These components are not available in public repositories.
 
 To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
 
@@ -339,7 +339,7 @@ To set up Web Modeler, you need to provide the following required configuration 
 - Configure the database connection
   - Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
   - _Option 1_: Set `postgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
-  - _Option 2_: Set `postgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
+  - _Option 2_: Set `postgresql.enabled: false` and configure a connection to an external database (see the second example below).
 
 We recommend specifying these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look as follows:
 
@@ -376,11 +376,11 @@ For more details, check [Web Modeler Helm values](https://artifacthub.io/package
 
 ### Install Console
 
-Console Self-Managed is an [Enterprise component](/reference/licenses.md#console), which means it is disabled by default in the Camunda 8 Helm chart since it requires an Enterprise license to access the Camunda container registry.
+Console Self-Managed is disabled by default in the Camunda 8 Helm chart, as it requires a [proprietary license](/reference/licenses.md#web-modeler-and-console) to access the Camunda container registry.
 
 To install Console, two steps are required:
 
-1. [Create a secret with Camunda registry credentials](#enterprise-components-secret).
+1. [Create a secret with Camunda registry credentials](#web-modeler-console-secrets).
 2. Enable Console, and reference the created Kubernetes secret object via Helm values.
 
 ```yaml
