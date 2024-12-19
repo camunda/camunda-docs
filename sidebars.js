@@ -310,31 +310,20 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Get started with Connectors",
+          label: "How to use connectors",
           link: {
             type: "doc",
-            id: "components/connectors/connectors-start",
+            id: "components/connectors/use-connectors/index",
           },
           items: [
             "components/connectors/connector-types",
-
-            {
-              type: "category",
-              label: "How to use Connectors",
-              link: {
-                type: "doc",
-                id: "components/connectors/use-connectors/index",
-              },
-              items: [
-                "components/connectors/use-connectors/inbound",
-                "components/connectors/use-connectors/outbound",
-              ],
-            },
+            "components/connectors/use-connectors/inbound",
+            "components/connectors/use-connectors/outbound",
           ],
         },
         {
           type: "category",
-          label: "Camunda Connectors",
+          label: "Camunda connectors",
           link: {
             type: "doc",
             id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
@@ -397,15 +386,24 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Custom Connectors",
+          label: "Custom connectors",
           link: {
             type: "doc",
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
-            "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/manage-connector-templates",
-            "components/connectors/custom-built-connectors/connector-template-generator",
+            {
+              type: "category",
+              label: "Connector templates",
+              link: {
+                type: "doc",
+                id: "components/connectors/custom-built-connectors/connector-templates",
+              },
+              items: [
+                "components/connectors/custom-built-connectors/connector-template-generator",
+                "components/connectors/manage-connector-templates",
+              ],
+            },
             "components/connectors/custom-built-connectors/connector-sdk",
           ],
         },

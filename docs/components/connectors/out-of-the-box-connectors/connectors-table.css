@@ -134,11 +134,11 @@ a.connector-card {
 }
 
 .connector-small-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 25px;
   margin-bottom: 30px;
-  margin-top: 20px;
 }
 
 .connector-small {
@@ -147,7 +147,7 @@ a.connector-card {
   padding: 10px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-  width: fit-content;
+
   margin-bottom: 4px;
 }
 .connector-small img {
@@ -168,14 +168,60 @@ a.connector-small-link {
   color: inherit;
 }
 
+@media (max-width: 1200px) {
+  .connector-small-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 1024px) {
   .connector-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .connector-small-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .connector-grid {
     grid-template-columns: 1fr;
+  }
+  .connector-small-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* double column div layout  */
+.banner-column-container {
+  display: flex;
+  border-radius: 4px;
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+.banner-column-left {
+  flex: 1;
+  padding: 40px 10px 40px 30px;
+}
+.banner-column-right {
+  flex: 3;
+  padding: 40px 30px 40px 0px;
+  color: white;
+}
+.banner-column-left img {
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 160px;
+}
+@media (max-width: 768px) {
+  .banner-column-container {
+    flex-direction: column;
+  }
+  .banner-column-right {
+    padding: 0px 30px 40px 30px;
+  }
+  .banner-column-left {
+    padding: 40px 30px 20px 30px;
   }
 }
