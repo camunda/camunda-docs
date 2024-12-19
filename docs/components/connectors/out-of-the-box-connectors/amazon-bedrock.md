@@ -111,14 +111,15 @@ Ensure the model is available in your region, that your model can invoke the `Co
 :::
 
 - `New Message` is either the first message (to start a conversation) or is the next message from an already started conversation.
+- `Documents` this is a list of documents that will be part of your **new message**. To work with documents it is necessary
+  to upload them first, one of the possible ways is to use REST api, more information [here](https://docs.camunda.io/docs/apis-tools/camunda-api-rest/specifications/upload-document-alpha/).
+  Then the result of the endpoint must be assigned to a variable in **Start Process Instance**. So we can use the list of these variables in the **Documents** field.
 - `Message History` is the history of the conversation that should always be passed. If not set, this will be a new conversation.
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.
 2. Use **Result Expression** to map fields from the response into process variables.
 
-The response contains two elements:
-
-- `messageHistory` is the full history of the previous message, from user and assistant, including the latest message written by the assistant.
-- `newMessage` is the latest message written by the assistant.
+The **Response** is a list of consecutive messages of the user and the assistant. Important, the current implementation
+supports the assistant's responses only in text format.
 
 Ideally, the message's history must transit within the process and be the input of this `Converse` task with the new message.
