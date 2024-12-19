@@ -75,9 +75,9 @@ Build and deploy your own connectors using connector templates or the connector 
   </a>
 </div>
 
-## Popular connectors
+## Featured connectors
 
-Learn more about how to use some of our most popular connectors.
+Learn more about how to use some of our newest and most popular connectors.
 
 <div class="connector-grid">
   <a href="../out-of-the-box-connectors/openai" class="connector-card" title="OpenAI">

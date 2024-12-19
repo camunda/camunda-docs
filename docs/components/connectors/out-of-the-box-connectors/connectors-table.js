@@ -16,6 +16,9 @@ import EasypostImg from "../img/connector-easypost.png";
 import GithubImg from "../img/connector-github.png";
 import GitlabImg from "../img/connector-gitlab.png";
 import GoogleDriveImg from "../img/connector-google-drive.png";
+import GoogleMapsImg from "../img/connector-google-maps.png";
+import GoogleSheetsImg from "../img/connector-google-sheets.png";
+import GraphqlImg from "../img/connector-graphql.png";
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -205,7 +208,7 @@ const SearchableTable = () => {
         "Validate addresses, retrieve postal addresses, and calculate distances with Google Maps Platform Service from your BPMN process.",
       type: "Outbound",
       link: "../google-maps-platform/",
-      image: AmazonBedrockImg,
+      image: GoogleMapsImg,
     },
     {
       name: "Google Sheets Connector",
@@ -213,7 +216,7 @@ const SearchableTable = () => {
         "Allows you to work with an existing or new empty spreadsheet on Google Drive from your BPMN process.",
       type: "Outbound",
       link: "../google-sheets/",
-      image: AmazonBedrockImg,
+      image: GoogleSheetsImg,
     },
     {
       name: "GraphQL Connector",
@@ -221,7 +224,7 @@ const SearchableTable = () => {
         "Execute a GraphQL query or mutation from your BPMN process.",
       type: "Outbound",
       link: "../graphql/",
-      image: AmazonBedrockImg,
+      image: GraphqlImg,
     },
     {
       name: "HTTP Webhook Connector",
