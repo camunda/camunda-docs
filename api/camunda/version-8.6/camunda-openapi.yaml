@@ -547,7 +547,7 @@ paths:
         Search for user tasks based on given criteria.
 
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -694,7 +694,7 @@ paths:
         Search for process instances based on given criteria.
 
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -873,7 +873,7 @@ paths:
         Search for flow node instances based on given criteria.
 
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -915,7 +915,7 @@ paths:
         Search for decision definitions based on given criteria.
 
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -957,7 +957,7 @@ paths:
         Returns decision definition as XML.
 
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -1009,7 +1009,7 @@ paths:
         Search for decision requirements based on given criteria.
 
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -1041,7 +1041,7 @@ paths:
         Search for decision instances based on given criteria.
 
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -1218,7 +1218,7 @@ paths:
         Upload a document to the Camunda 8 cluster.
 
         :::note
-        This endpoint is an alpha feature. It currently only supports an in-memory document store,
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md). It currently only supports an in-memory document store,
         which is not meant for production use.
         :::
       parameters:
@@ -1276,7 +1276,7 @@ paths:
         Download a document from the Camunda 8 cluster.
 
         :::note
-        This endpoint is an alpha feature. It currently only supports an in-memory document store,
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md). It currently only supports an in-memory document store,
         which is not meant for production use.
         :::
       parameters:
@@ -1322,7 +1322,7 @@ paths:
         Delete a document from the Camunda 8 cluster.
 
         :::note
-        This endpoint is an alpha feature. It currently only supports an in-memory document store,
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md). It currently only supports an in-memory document store,
         which is not meant for production use.
         :::
       parameters:
@@ -1364,7 +1364,7 @@ paths:
         Create a link to a document in the Camunda 8 cluster.
 
         :::note
-        This endpoint is an alpha feature. It currently only supports an in-memory document store,
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md). It currently only supports an in-memory document store,
         which is not meant for production use.
         :::
       parameters:
@@ -1410,7 +1410,7 @@ paths:
         Search for users based on given criteria.
 
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -1468,7 +1468,7 @@ paths:
         Search for incidents based on given criteria.
 
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
@@ -1522,7 +1522,7 @@ paths:
       description: |
         Returns incident as JSON.
         :::note
-        This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+        This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
         See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
         for further details.
         :::
