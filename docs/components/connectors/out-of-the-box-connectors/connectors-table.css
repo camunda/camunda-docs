@@ -252,6 +252,7 @@ a.connector-small-link {
   font-size: 85%;
   font-weight: var(--ifm-font-weight-bold);
   line-height: 1;
+  color: #777;
 }
 
 .badge--default:hover {
