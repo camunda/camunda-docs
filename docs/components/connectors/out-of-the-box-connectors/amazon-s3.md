@@ -74,7 +74,7 @@ Upload a document. The incoming document must be a reference from the previous p
 #### Parameters
 
 | Parameter    | Description                                                                                                                                      |
-|:-------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `AWS bucket` | The targeted AWS S3 bucket where the document should be uploaded.                                                                                |
 | `AWS key`    | (Optional) The key of the document that uniquely identifies the object in an Amazon S3 bucket. Will fallback to the document filename if not set |
 | `Document`   | The document that should be uploaded to S3, provided as a FEEL expression with the document reference.                                           |
@@ -98,9 +98,9 @@ The following example shows a successful send upload operation response:
 
 ```json
 {
-  "bucket":"Example Subject",
-  "key":true,
-  "link":"https://mybucket.s3.amazonaws.com/test"
+  "bucket": "Example Subject",
+  "key": true,
+  "link": "https://mybucket.s3.amazonaws.com/test"
 }
 ```
 
@@ -111,7 +111,7 @@ Download the document from AWS S3.
 #### Parameters
 
 | Parameter         | Description                                                                                                                 |
-|:------------------|:----------------------------------------------------------------------------------------------------------------------------|
+| :---------------- | :-------------------------------------------------------------------------------------------------------------------------- |
 | `AWS bucket`      | The targeted AWS S3 bucket that the document should be downloaded from.                                                     |
 | `AWS key`         | The key of the document that uniquely identifies the object in an Amazon S3 bucket.                                         |
 | `Create document` | Either `false` or `true`. If `false`, no document is created and the output is inserted as JSON, text, or base64 raw bytes. |
@@ -128,12 +128,12 @@ The following JSON response is returned after a successful document download ope
 - `bucket`: Echoes back the bucket of the uploaded document.
 - `key`: Echoes back the unique key of the uploaded document.
 - `element`: Represents the document in the workflow. The behavior changes based on the `Create document` setting:
-    - If `Create document` is set to `false`:
-        - For `String` content type: `element` will contain the string content of the document.
-        - For `Json` content type: `element` will contain the JSON content of the document.
-        - For other content types: `element` will contain the raw bytes of the document, encoded in base64.
-    - If `Create document` is set to `true`:
-        - `element` will contain a document reference, rather than the document content itself.
+  - If `Create document` is set to `false`:
+    - For `String` content type: `element` will contain the string content of the document.
+    - For `Json` content type: `element` will contain the JSON content of the document.
+    - For other content types: `element` will contain the raw bytes of the document, encoded in base64.
+  - If `Create document` is set to `true`:
+    - `element` will contain a document reference, rather than the document content itself.
 
 #### Example Response
 
@@ -141,19 +141,19 @@ The following examples show a successful download operation response:
 
 ```json
 {
-  "bucket":"Example Subject",
-  "key":true,
-  "document":{
-    "storeId":"in-memory",
-    "documentId":"20f1fd6a-d8ea-403b-813c-e281c1193495",
-    "metadata":{
-      "contentType":"image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
-      "size":311032,
-      "fileName":"305a4816-b3df-4724-acd3-010478a54add.webp"
+  "bucket": "Example Subject",
+  "key": true,
+  "document": {
+    "storeId": "in-memory",
+    "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
+    "metadata": {
+      "contentType": "image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
+      "size": 311032,
+      "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
     },
-    "camunda.document.type":"camunda"
+    "camunda.document.type": "camunda"
   },
-  "content":null
+  "content": null
 }
 ```
 
@@ -161,12 +161,12 @@ or
 
 ```json
 {
-  "bucket":"Example Subject",
-  "key":true,
-  "document":null,
-  "content":{
-    "json":{
-      "testKey":"testValue"
+  "bucket": "Example Subject",
+  "key": true,
+  "document": null,
+  "content": {
+    "json": {
+      "testKey": "testValue"
     }
   }
 }
@@ -179,7 +179,7 @@ Delete the document from AWS S3.
 #### Parameters
 
 | Parameter    | Description                                                                         |
-|:-------------|:------------------------------------------------------------------------------------|
+| :----------- | :---------------------------------------------------------------------------------- |
 | `AWS bucket` | The targeted AWS S3 bucket that the document should be deleted from.                |
 | `AWS key`    | The key of the document that uniquely identifies the object in an Amazon S3 bucket. |
 
@@ -201,7 +201,7 @@ The following example shows a successful deletion operation response:
 
 ```json
 {
-  "bucket":"Example Subject",
-  "key":"document.txt"
+  "bucket": "Example Subject",
+  "key": "document.txt"
 }
 ```
