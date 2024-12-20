@@ -156,7 +156,7 @@ This S3 bucket will now securely store your Terraform state files with versionin
 Once the S3 bucket is created, configure your `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.6/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.6/config.tf
 ```
 
 #### Initialize Terraform
@@ -274,7 +274,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.6/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.6/cluster.tf
    ```
 
    :::caution Camunda Terraform module
