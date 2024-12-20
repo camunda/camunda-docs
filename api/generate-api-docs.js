@@ -5,11 +5,13 @@ const operate = require("./operate/generation-strategy");
 const tasklist = require("./tasklist/generation-strategy");
 const adminsm = require("./administration-sm/generation-strategy");
 const camunda = require("./camunda/generation-strategy");
+const zeebe = require("./zeebe/generation-strategy");
 const apiStrategies = {
   operate,
   tasklist,
   adminsm,
   camunda,
+  zeebe,
 };
 
 // API name must be passed in as an arg.
@@ -30,6 +32,12 @@ if (strategy === undefined) {
 
 // Version is an optional argument. If not provided, we assume "vNext".
 const requestedVersion = process.argv[3];
+
+// Hack: zeebe API is removed at version 8.7, don't allow regeneration in vNext.
+if (requestedAPI === "zeebe" && requestedVersion === undefined) {
+  console.error("Zeebe API docs are no longer in active development.");
+  process.exit();
+}
 
 // Find the corresponding configuration in docusaurus.config.js.
 const configs = loadAPIConfigs();

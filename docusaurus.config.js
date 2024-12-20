@@ -185,6 +185,36 @@ module.exports = {
         },
       },
     ],
+    [
+      // Zeebe REST API docs generation (removed at v8.7)
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-zeebe-openapi",
+        docsPluginId: "default",
+        config: {
+          zeebe: {
+            specPath: "inactive",
+            outputDir: "inactive",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
+          },
+        },
+      },
+    ],
   ],
   scripts: [
     {
