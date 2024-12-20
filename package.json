@@ -28,7 +28,7 @@
     "api:generate:operate": "npm run api:generate operate",
     "api:generate:tasklist": "npm run api:generate tasklist",
     "api:generate:zeebe": "npm run api:generate zeebe",
-    "api:generate:consolesm": "npm run api:generate consolesm",
+    "api:generate:adminsm": "npm run api:generate adminsm",
     "api:generate:camunda": "npm run api:generate camunda"
   },
   "dependencies": {
@@ -71,7 +71,7 @@
     "lint-staged": "^14.0.1",
     "playwright": "^1.49.0",
     "prettier": "3.3.3",
-    "replace-in-file": "^8.2.0",
+    "replace-in-file": "^7.2.0",
     "swc-loader": "^0.2.3"
   },
   "lint-staged": {

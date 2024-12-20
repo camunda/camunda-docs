@@ -2227,62 +2227,6 @@ module.exports = {
                 },
               ],
             },
-
-            {
-              "Zeebe API (REST)": [
-                docsLink(
-                  "Overview",
-                  "apis-tools/zeebe-api-rest/zeebe-api-rest-overview/"
-                ),
-                docsLink(
-                  "Authentication",
-                  "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
-                ),
-                docsLink(
-                  "Tutorial",
-                  "apis-tools/zeebe-api-rest/zeebe-api-tutorial/"
-                ),
-
-                {
-                  Specifications: [
-                    docsLink(
-                      "Introduction",
-                      "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api/"
-                    ),
-
-                    {
-                      Cluster: [
-                        docsLink(
-                          "Get cluster topology",
-                          "apis-tools/zeebe-api-rest/specifications/get-cluster-topology/"
-                        ),
-                      ],
-                    },
-
-                    {
-                      "User task": [
-                        docsLink(
-                          "Complete a user task",
-                          "apis-tools/zeebe-api-rest/specifications/complete-a-user-task/"
-                        ),
-                        docsLink(
-                          "Assign a user task",
-                          "apis-tools/zeebe-api-rest/specifications/assign-a-user-task/"
-                        ),
-                        docsLink(
-                          "Update a user task",
-                          "apis-tools/zeebe-api-rest/specifications/update-a-user-task/"
-                        ),
-                        docsLink(
-                          "Unassign a user task",
-                          "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task/"
-                        ),
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
           ],
         },
       ],
@@ -2534,6 +2478,10 @@ module.exports = {
                   "Install AWS Marketplace",
                   "self-managed/setup/deploy/amazon/aws-marketplace/"
                 ),
+                docsLink(
+                  "Amazon EC2",
+                  "self-managed/setup/deploy/amazon/aws-ec2/"
+                ),
               ],
             },
 
@@ -2623,7 +2571,12 @@ module.exports = {
         },
       ],
     },
-
+    {
+      "Reference Architecture": [
+        docsLink("Overview", "self-managed/reference-architecture/"),
+        docsLink("Manual JAR", "self-managed/reference-architecture/manual/"),
+      ],
+    },
     {
       "Operational guides": [
         {

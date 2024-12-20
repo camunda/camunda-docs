@@ -56,15 +56,19 @@ When using Java, most customers use Spring Boot. While this is a common setup fo
 
 ### Technical setup using Spring
 
+:::caution
+Spring support with Zeebe Process Test uses the community-maintained project Spring Zeebe.
+The new Camunda Spring SDK (Camunda 8.6+) is not supported. You could still use the testing library but without hooking into the Spring lifecycle.
+:::
+
 :::caution JUnit 5
 You need to use JUnit 5. Ensure you use JUnit 5 in every test class: the `@Test` annotation you import needs to be `org.junit.jupiter.api.Test`.
 :::
 
 1. Use [_JUnit 5_](http://junit.org) as unit test framework.
-2. Use the [Spring Zeebe SDK](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
-3. Use `@ZeebeSpringTest` to ramp up an in-memory process engine.
-4. Use annotations from [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/) to check whether your expectations about the state of the process are met.
-5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) to mock service methods and verify that services are called as expected.
+2. Use `@ZeebeSpringTest` to ramp up an in-memory process engine.
+3. Use annotations from [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/) to check whether your expectations about the state of the process are met.
+4. Use mocking of your choice, e.g. [Mockito](http://mockito.org) to mock service methods and verify that services are called as expected.
 
 A test can now look like the following example. The complete source code is available on [GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java):
 

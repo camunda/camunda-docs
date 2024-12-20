@@ -807,7 +807,6 @@ module.exports = {
         {
           Deprecated: [
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
-            require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
           ],
         },
       ],
@@ -896,7 +895,19 @@ module.exports = {
 
   Reference: [
     "reference/overview",
-    "reference/announcements",
+    {
+      type: "category",
+      label: "Announcements",
+      link: {
+        type: "doc",
+        id: "reference/announcements",
+      },
+      items: [
+        "reference/announcements/announcements-870",
+        "reference/announcements/announcements-860",
+        "reference/announcements/announcements-850",
+      ],
+    },
     {
       type: "category",
       label: "Release notes",
@@ -979,6 +990,7 @@ module.exports = {
                   },
                   items: [],
                 },
+                "self-managed/setup/deploy/amazon/aws-ec2",
               ],
               "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks",
@@ -1016,6 +1028,14 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      "Reference architecture": [
+        "self-managed/reference-architecture/reference-architecture",
+        "self-managed/reference-architecture/manual/manual",
+      ],
+    },
+    {
       "Operational guides": [
         {
           type: "category",
@@ -1105,7 +1125,12 @@ module.exports = {
           Console: [
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
-            "self-managed/console-deployment/configuration",
+            {
+              Configuration: [
+                "self-managed/console-deployment/configuration/configuration",
+                "self-managed/console-deployment/configuration/ssl",
+              ],
+            },
             "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [

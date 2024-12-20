@@ -234,7 +234,7 @@ To set up Web Modeler, you need to provide the following required configuration 
 - Configure the database connection
   - Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
   - _Option 1_: Set `postgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
-  - _Option 2_: Set `postgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
+  - _Option 2_: Set `postgresql.enabled: false` and configure a connection to an external database (see the second example below).
 
 We recommend specifying these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look as follows:
 

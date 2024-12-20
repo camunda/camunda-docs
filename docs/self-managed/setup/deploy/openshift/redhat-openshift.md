@@ -36,9 +36,9 @@ We conduct testing and ensure compatibility against the following OpenShift vers
 | 4.15.x            | August 27, 2025                                                                   |
 | 4.14.x            | May 1, 2025                                                                       |
 
-:::caution Older versions are not guaranteed
+:::caution Versions compatibility
 
-Compatibility is not guaranteed for OpenShift versions no longer supported by Red Hat, as per the End of Support Date. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support life cycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
 
 :::
 
