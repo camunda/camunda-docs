@@ -122,38 +122,38 @@ global:
   identity:
     auth:
       type: "MICROSOFT"
-      issuer: "https://login.microsoftonline.com/abc/v2.0"
-      issuerBackendUrl: "https://login.microsoftonline.com/abc/v2.0"
-      tokenUrl: "https://login.microsoftonline.com/abc/oauth2/v2.0/token"
-      jwksUrl: "https://login.microsoftonline.com/abc/discovery/v2.0/keys"
+      issuer: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0"
+      issuerBackendUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0"
+      tokenUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token"
+      jwksUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys"
       identity:
-        clientId: "111"
+        clientId: "00000000-0000-0000-0000-000000000000"
         existingSecret: "password-string-literal"
-        audience: "abc111"
+        audience: "00000000-0000-0000-0000-000000000000"
         redirectUrl: "https://identity.camunda.example.com"
         initialClaimName: "email"
         initialClaimValue: test.user@camunda.com
       optimize:
-        clientId: "222"
+        clientId: "00000000-0000-0000-0000-000000000000"
         existingSecret: "password-string-literal"
-        audience: "abc222"
+        audience: "00000000-0000-0000-0000-000000000000"
         redirectUrl: "https://optimize.camunda.example.com"
       core:
-        clientId: "333"
+        clientId: "00000000-0000-0000-0000-000000000000"
         existingSecret: "password-string-literal"
-        audience: "abc333"
-        tokenScope: "abc333/.default"
+        audience: "00000000-0000-0000-0000-000000000000"
+        tokenScope: "00000000-0000-0000-0000-000000000000/.default"
         redirectUrl: "https://core.camunda.example.com"
       console:
-        clientId: "444"
-        audience: "abc444"
-        wellKnown: https://login.microsoftonline.com/abc/v2.0/.well-known/openid-configuration
+        clientId: "00000000-0000-0000-0000-000000000000"
+        wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
+        audience: "00000000-0000-0000-0000-000000000000"
         existingSecret: "password-string-literal"
         redirectUrl: "https://console.camunda.example.com"
       webModeler:
-        clientId: "555"
-        clientApiAudience: "abc555"
-        publicApiAudience: "abc555"
+        clientId: "00000000-0000-0000-0000-000000000000"
+        clientApiAudience: "00000000-0000-0000-0000-000000000000"
+        publicApiAudience: "00000000-0000-0000-0000-000000000000"
         redirectUrl: "https://modeler.camunda.example.com"
 ```
 
@@ -207,7 +207,7 @@ Here is how to configure Web Modeler with external Amazon Aurora PostgreSQL:
 Placeholder for external postgresql connection for web-modeler.
 ```
 
-Please make sure you correctly define the protocol, host, and port.
+Please make sure to correctly define the protocol, host, and port.
 
 If you would like further information on connecting to external databases, we have a number of guides on doing so with the Camunda Helm Chart:
 
