@@ -2466,6 +2466,12 @@ module.exports = {
                       "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                     ),
                   ],
+                  ROSA: [
+                    docsLink(
+                      "Deploy a ROSA cluster with Terraform",
+                      "self-managed/setup/deploy/amazon/openshift/terraform/"
+                    ),
+                  ],
                 },
 
                 docsLink(
