@@ -224,11 +224,6 @@ a.connector-small-link {
   }
 }
 
-.badge:nth-of-type(1) {
-  margin-left: 0;
-  margin-bottom: 5px;
-}
-
 .fade-in-top-image {
   opacity: 0;
   transform: translateY(-20px);
@@ -275,4 +270,9 @@ a.connector-small-link {
 .badge--active--inbound {
   background-color: rgb(255, 139, 0);
   color: #fff;
+}
+
+.connector-type .badge:nth-of-type(1) {
+  margin-left: 0;
+  margin-bottom: 5px;
 }
