@@ -305,7 +305,6 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-
 
 Use these environment variables in the `kubectl` command to create the secret.
 
-- The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, you must provide those values.
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
