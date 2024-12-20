@@ -402,8 +402,8 @@ const SearchableTable = () => {
     setSearchTerm(event.target.value);
   };
 
-  const handleFilterType = (event) => {
-    setFilterType(event.target.value);
+  const handleFilterType = (type) => {
+    setFilterType(type);
   };
 
   const filteredConnectors = connectors.filter((connector) => {
@@ -423,18 +423,34 @@ const SearchableTable = () => {
         value={searchTerm}
         onChange={handleSearch}
         className="connector-input-box"
-        style={{ marginRight: "15px" }}
+        style={{ marginRight: "20px" }}
       />
-      Filter by connector type:&nbsp;&nbsp;
-      <select
-        value={filterType}
-        onChange={handleFilterType}
-        style={{ marginRight: "10px" }}
-      >
-        <option value="All">All</option>
-        <option value="Inbound">Inbound</option>
-        <option value="Outbound">Outbound</option>
-      </select>
+      <div className="filter-badges">
+        <span
+          className={`badge--default ${
+            filterType === "All" ? "badge--active" : ""
+          }`}
+          onClick={() => handleFilterType("All")}
+        >
+          All
+        </span>
+        <span
+          className={`badge--default ${
+            filterType === "Inbound" ? "badge--active--inbound" : ""
+          }`}
+          onClick={() => handleFilterType("Inbound")}
+        >
+          Inbound
+        </span>
+        <span
+          className={`badge--default ${
+            filterType === "Outbound" ? "badge--active--outbound" : ""
+          }`}
+          onClick={() => handleFilterType("Outbound")}
+        >
+          Outbound
+        </span>
+      </div>
       <span style={{ fontSize: "14px" }}>
         <a href="../../connector-types">About connector types</a>
       </span>

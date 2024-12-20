@@ -241,3 +241,38 @@ a.connector-small-link {
     transform: translateY(0);
   }
 }
+
+.filter-badges {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.badge--default {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background-color: #eee;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 85%;
+  font-weight: var(--ifm-font-weight-bold);
+  line-height: 1;
+}
+
+.badge--default:hover {
+  background-color: #ccc;
+}
+
+.badge--active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.badge--active--outbound {
+  background-color: #0ba7b9;
+  color: #fff;
+}
+.badge--active--inbound {
+  background-color: rgb(255, 139, 0);
+  color: #fff;
+}
