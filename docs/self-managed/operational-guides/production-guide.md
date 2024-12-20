@@ -318,15 +318,9 @@ Here is the full and complete values.yaml consider all the above topics.
 
 Make sure auto-generated secrets are mentioned by default in all relevant components.
 
-### Multi-namespace Deployment
+### Adding more Orchestration clusters
 
 The next recommended step is to setup a multi-namespace deployemnt. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
-
-### Connect to existing Keycloak
-
-- Here are the guides related to connecting to existing Keycloak:
-  - [Configuration of the Camunda Helm Chart](/docs/self-managed/setup/guides/using-existing-keycloak/)
-  - [Configuration of Keycloak](/docs/next/self-managed/identity/user-guide/configuration/configure-external-identity-provider/)
 
 ### Running benchmarks
 
