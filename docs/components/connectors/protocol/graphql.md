@@ -1,7 +1,7 @@
 ---
 id: graphql
 title: GraphQL Connector
-sidebar_label: GraphQL Connector
+sidebar_label: GraphQL
 description: Execute a GraphQL query or mutation from your BPMN process.
 ---
 

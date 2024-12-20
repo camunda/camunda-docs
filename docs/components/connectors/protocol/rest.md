@@ -1,6 +1,7 @@
 ---
 id: rest
 title: REST Connector
+sidebar_label: REST
 description: Make a request to a REST API and use the response in the next steps of your process.
 ---
 

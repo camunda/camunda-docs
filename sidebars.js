@@ -329,7 +329,6 @@ module.exports = {
             id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
           },
           items: [
-            "components/connectors/out-of-the-box-connectors/example-template",
             {
               "Amazon AWS": [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
