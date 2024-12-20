@@ -92,6 +92,50 @@ ZeebeClient client =
         .build();
 ```
 
+### X.509 authorizers
+
+Several identity providers, such as Keycloak, support client X.509 authorizers as an alternative to client credentials
+flow.
+
+As a prerequisite, you need to have proper keystore and truststore configured, so that: (1) both Spring Zeebe application
+and identity provider share the same CA trust certificates; (2) both Spring Zeebe and identity provider own certificates
+signed by trusted CA; (3) your Spring Zeebe application own certificate has proper `Distinguished Name` (DN), e.g.
+`CN=My Zeebe Client, OU=Camunda Users, O=Best Company, C=DE`; (4) your application DN registered in the identity provider
+client authorization details.
+
+In that case, configuring `OAuthCredentialsProvider` might look like this
+
+```java
+final OAuthCredentialsProvider provider =
+        new OAuthCredentialsProviderBuilder()
+            .clientId("myClient")
+            .clientSecret("")
+            .audience("myClient-aud")
+            .authorizationServerUrl(ZEEBE_AUTHORIZATION_SERVER_URL)
+            .keystorePath(Paths.get("/path/to/keystore.p12"))
+            .keystorePassword("password")
+            .keystoreKeyPassword("password")
+            .truststorePath(Paths.get("/path/to/truststore.jks"))
+            .truststorePassword("password")
+            .build();
+```
+
+Or via environment variables
+
+```bash
+export ZEEBE_CLIENT_ID='[Client ID]'
+export ZEEBE_CLIENT_SECRET=''
+export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
+export ZEEBE_SSL_CLIENT_KEYSTORE_PATH='[Keystore path]'
+export ZEEBE_SSL_CLIENT_KEYSTORE_SECRET='[Keystore password]'
+export ZEEBE_SSL_CLIENT_KEYSTORE_KEY_SECRET='[Keystore material password]'
+export ZEEBE_SSL_CLIENT_TRUSTSTORE_PATH='[Truststore path]'
+export ZEEBE_SSL_CLIENT_TRUSTSTORE_SECRET='[Truststore password]'
+```
+
+Please refer your identity provider reference page on how to configure X.509 authentication, for example,
+[Keycloak](https://www.keycloak.org/server/mutual-tls).
+
 ## Javadoc
 
 The official Java client library API documentation can be found [here](https://javadoc.io/doc/io.camunda/zeebe-client-java). These are standard Javadocs, so your favorite JVM IDE will be able to install them locally as well.
