@@ -49,18 +49,18 @@ module.exports = {
           "3.14.0": {
             label: "8.6 / 3.14.0",
           },
-          "3.13.0": {
-            label: "8.5 / 3.13.0",
-            banner: "none",
-          },
-          "3.12.0": {
-            label: "8.4 / 3.12.0",
-            banner: "none",
-          },
-          "3.11.0": {
-            label: "8.3 / 3.11.0",
-            banner: "none",
-          },
+          // "3.13.0": {
+          //   label: "8.5 / 3.13.0",
+          //   banner: "none",
+          // },
+          // "3.12.0": {
+          //   label: "8.4 / 3.12.0",
+          //   banner: "none",
+          // },
+          // "3.11.0": {
+          //   label: "8.3 / 3.11.0",
+          //   banner: "none",
+          // },
         },
       },
     ],
@@ -78,6 +78,18 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/operate/version-8.6/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -96,6 +108,18 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/tasklist/version-8.6/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -114,6 +138,19 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath:
+                  "api/administration-sm/version-8.6/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -132,6 +169,48 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/camunda/version-8.6/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
+          },
+        },
+      },
+    ],
+    [
+      // Zeebe REST API docs generation (removed at v8.7)
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-zeebe-openapi",
+        docsPluginId: "default",
+        config: {
+          zeebe: {
+            specPath: "inactive",
+            outputDir: "inactive",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -398,17 +477,17 @@ module.exports = {
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
-            8.5: {
-              banner: "none",
-            },
-            8.4: {
-              banner: "none",
-            },
-            8.3: {
-              banner: "none",
-            },
+            // 8.5: {
+            //   banner: "none",
+            // },
+            // 8.4: {
+            //   banner: "none",
+            // },
+            // 8.3: {
+            //   banner: "none",
+            // },
           },
-          docLayoutComponent: "@theme/DocPage",
+          // docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
         blog: false,

@@ -1,0 +1,249 @@
+openapi: 3.0.0
+components:
+  examples: {}
+  headers: {}
+  parameters: {}
+  requestBodies: {}
+  responses: {}
+  schemas:
+    ConsoleSMAdminApi.UsageMetricsInstances:
+      properties:
+        total:
+          type: number
+          format: double
+          description: The number of usage metrics for a specific type.
+      required:
+        - total
+      type: object
+      additionalProperties: false
+    ConsoleSMAdminApi.UsageMetricsTaskUsers:
+      properties:
+        total:
+          type: number
+          format: double
+          description: The number of usage metrics for a specific type.
+        assignees:
+          items:
+            type: string
+          type: array
+          description: The users that tasks have been assigned to.
+      required:
+        - total
+        - assignees
+      type: object
+      additionalProperties: false
+    ConsoleSMAdminApi.UsageMetricsForCluster:
+      properties:
+        id:
+          type: string
+          description: The identifier of the cluster.
+        processInstances:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsInstances"
+          description: The usage metrics for started process instances.
+        decisionInstances:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsInstances"
+          description: The usage metrics for executed decision instances.
+        taskUsers:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsTaskUsers"
+          description: The usage metrics for assigned task users.
+      required:
+        - id
+        - processInstances
+        - decisionInstances
+        - taskUsers
+      type: object
+      additionalProperties: false
+    ConsoleSMAdminApi.Status:
+      type: string
+      enum:
+        - healthy
+        - unhealthy
+        - unknown
+    ConsoleSMAdminApi.ClusterType:
+      type: string
+      enum:
+        - automation
+        - management
+    ConsoleSMAdminApi.AppType:
+      type: string
+      enum:
+        - zeebe-broker
+        - zeebe-gateway
+        - operate
+        - tasklist
+        - optimize
+        - modeler
+        - console
+        - identity
+        - unknown
+    ConsoleSMAdminApi.App:
+      properties:
+        type:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.AppType"
+          description:
+            What application is running in the cluster, like Zeebe, Operate,
+            Tasklist, ...
+        id:
+          type: string
+          description: Unique identifier of the application
+        status:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.Status"
+          description: Indicates if an application is healthy or not
+        url:
+          type: string
+          description: The public URL of the application
+        generation:
+          type: string
+          description: This is the current version of the running application
+        readiness:
+          type: string
+          description: The readiness URL of the application
+        metrics:
+          type: string
+          description: The metrics URL of the application
+      required:
+        - type
+        - id
+        - status
+        - url
+        - generation
+      type: object
+      additionalProperties: false
+    ConsoleSMAdminApi.Cluster:
+      properties:
+        uuid:
+          type: string
+          description: Unique identifier of the cluster
+        name:
+          type: string
+          description: Name of the cluster
+        namespace:
+          type: string
+          description: Namespace the cluster is running in.
+        status:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.Status"
+          description: Indicates if a cluster is healthy or not
+        generation:
+          type: string
+          description: This is the current version of the running cluster
+        type:
+          $ref: "#/components/schemas/ConsoleSMAdminApi.ClusterType"
+          description:
+            We're distinguishing between automation and management clusters.
+            Management clusters include applications that act globally in an
+            installed context, like Console or Modeler. Automation clusters are
+            the Zeebe clusters including applications like Operate, Tasklist and
+            Optimize.
+        apps:
+          items:
+            $ref: "#/components/schemas/ConsoleSMAdminApi.App"
+          type: array
+          description: The list of applications running in the cluster
+      required:
+        - uuid
+        - name
+        - namespace
+        - status
+        - generation
+        - type
+        - apps
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+info:
+  title: Administration API (Self-Managed)
+  description: Access the administration API of Console Self-Managed.
+  version: 1.0.0
+  contact:
+    url: https://www.camunda.com
+  license:
+    name: License
+    url: https://docs.camunda.io/docs/reference/licenses/
+paths:
+  /admin-api/usage-metrics:
+    get:
+      operationId: getUsageMetrics
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConsoleSMAdminApi.UsageMetricsForCluster"
+        "403":
+          description: Forbidden
+        "500":
+          description: Server-side error
+      description: Returns usage metrics for a specific cluster for a given time
+        range. The usage metrics are aggregated over the time range and include
+        number of started process instances, executed decision instances, and
+        assigned task users.
+      summary: Get usage metrics for clusters
+      tags:
+        - Usage Metrics
+      security:
+        - bearer: []
+      parameters:
+        - description: The unique identifier of the cluster
+          in: query
+          name: id
+          required: true
+          schema:
+            type: string
+        - description:
+            The start timestamp of the time range as UNIX timestamp in
+            milliseconds
+          in: query
+          name: start
+          required: true
+          schema:
+            format: double
+            type: number
+        - description: The end timestamp of the time range as UNIX timestamp in milliseconds
+          in: query
+          name: end
+          required: true
+          schema:
+            format: double
+            type: number
+  /admin-api/clusters:
+    get:
+      operationId: getClusters
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ConsoleSMAdminApi.Cluster"
+                type: array
+        "403":
+          description: Forbidden
+        "500":
+          description: Server-side error
+      description:
+        Returns a list of all automation and management clusters. Each
+        cluster entry contains the running apps and their status.
+      summary: Get current clusters
+      tags:
+        - Clusters
+      security:
+        - bearer: []
+      parameters: []
+servers:
+  - url: "{schema}://{host}:{port}"
+    variables:
+      host:
+        default: localhost
+        description: The hostname of the API server.
+      port:
+        default: "8080"
+        description: The port of the API server.
+      schema:
+        default: http
+        description: The schema of the API server.
