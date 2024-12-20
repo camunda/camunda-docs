@@ -169,6 +169,18 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/camunda/version-8.6/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
