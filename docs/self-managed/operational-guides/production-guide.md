@@ -24,6 +24,8 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **Amazon OpenSearch**: For indexing and analytics.
   - **Azure Active Directory**: For authentication and authorization.
 - **NGINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
+- **AWS Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups.
+- **s3 Bucket** - This will also be used to store backups of the Camunda cluster. This s3 bucket must also be configured with OpenSearch to take backups.
 - **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
 - **Namespace Configuration**: Plan and create namespaces with appropriate resource quotas and LimitRanges for the Camunda Helm Chart.
 - **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment. Have a look at our [sizing guide](/docs/next/components/best-practices/architecture/sizing-your-environment/#camunda-8-self-managed) for more information.
@@ -222,17 +224,21 @@ At this point you are able to connect to your platform through HTTPS, correctly 
 
 We will continue our journey in adding to the `production-values.yaml`. Here is what you should consider for Camunda component level configurations:
 
-### Enabling Index Lifecycle Management (ILM) Policies for Amazon OpenSearch
+### Enabling Index Lifecycle Management (ILM) Policy for Amazon OpenSearch
 
-- Amazon OpenSearch configuration for the core component:
-- It is important to have Index Lifecycle Management for Amazon OpenSearch. Here is an example:
-- Retention time is a setting in the helm chart with default values from the SaaS setup.
+An ILM policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
+
+Here is how the ILM policy can be configured for the core component:
 
 ```yaml
-[
-  placeholder for configuring OpenSearch lifecycle policies on the core component,
-]
+core:
+  retention:
+    enabled: true
+    minimumAge: 30d
+    policyName: core-record-retention-policy
 ```
+
+If you would like more information on configuring ILM policy. Please refer to [our guide](/docs/next/self-managed/operate-deployment/data-retention/).
 
 ### Configuring Backups for Camunda Components
 
