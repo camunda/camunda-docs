@@ -21,4 +21,4 @@ To receive service status updates:
 
 ## Support
 
-Support can be requested by subscription or enterprise customers via [JIRA](https://jira.camunda.com/projects/SUPPORT/). Otherwise, [contact us](/contact). For more information about Enterprise support and additional support resources, see [Enterprise Support](https://camunda.com/services/support/).
+Support can be requested by subscription or enterprise customers via [JIRA](https://jira.camunda.com/projects/SUPPORT/). Otherwise, [contact us](/reference/contact.md). For more information about Enterprise support and additional support resources, see [Enterprise Support](https://camunda.com/services/support/).

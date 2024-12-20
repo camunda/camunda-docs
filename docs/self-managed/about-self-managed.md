@@ -1,7 +1,7 @@
 ---
 id: about-self-managed
 title: "Camunda 8 Self-Managed"
-description: "Camunda 8 Self-Managed is a self-hosted alternative to using Camunda 8 SaaS."
+description: "Step through everything you need to download, configure, and work with components of Camunda 8 Self-Managed, a self-hosted alternative to using Camunda 8 SaaS."
 ---
 
 import Components from './react-components/components.md'

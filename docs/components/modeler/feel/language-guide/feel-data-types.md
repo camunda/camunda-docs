@@ -70,7 +70,7 @@ date("2017-03-10")
 
 ### Time
 
-A local or zoned time. The time can have an offset or time zone id.
+A local or zoned time. The time can have an offset or time zone ID.
 
 - Format: `HH:mm:ss` / `HH:mm:ss+/-HH:mm` / `HH:mm:ss@ZoneId`
 - Java Type: `java.time.LocalTime` / `java.time.OffsetTime`
@@ -89,7 +89,7 @@ time("10:31:10@Europe/Paris")
 
 ### Date-time
 
-A date with a local or zoned time component. The time can have an offset or time zone id.
+A date with a local or zoned time component. The time can have an offset or time zone ID.
 
 - Format: `yyyy-MM-dd'T'HH:mm:ss` / `yyyy-MM-dd'T'HH:mm:ss+/-HH:mm` / `yyyy-MM-dd'T'HH:mm:ss@ZoneId`
 - Java Type: `java.time.LocalDateTime` / `java.time.DateTime`

@@ -18,8 +18,8 @@ Broadcasting a signal iterates over the available subscriptions. If the name of 
 name of the signal start event, the process instance is created.
 
 Signal subscriptions only exist for the latest version of a process definition. Deploying a new version of the same
-process (based on the BPMN process id) will delete the old signal subscription. A new subscription is opened for the
-new deployed process definition. When the latest version of a process is deleted, the signal subscription is also deleted. If the previous version of the same process (based on the BPMN process id) contains a signal start event, a new subscription
+process (based on the BPMN process ID) will delete the old signal subscription. A new subscription is opened for the
+new deployed process definition. When the latest version of a process is deleted, the signal subscription is also deleted. If the previous version of the same process (based on the BPMN process ID) contains a signal start event, a new subscription
 is opened for it.
 
 ## Signal intermediate catch events

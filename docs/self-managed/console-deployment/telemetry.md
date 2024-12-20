@@ -24,7 +24,7 @@ The telemetry feature categorizes the collected data into general Camunda data a
 
 ### How to enable telemetry
 
-By default, the telemetry configuration is set to `disabled`. Telemetry can be activated by setting the appropriate configuration in the Camunda 8 Helm chart or setting the appropriate environment variables in the Console configuration. Refer to [Console configuration](./configuration.md) for more information.
+By default, the telemetry configuration is set to `disabled`. Telemetry can be activated by setting the appropriate configuration in the Camunda 8 Helm chart or setting the appropriate environment variables in the Console configuration. Refer to [Console configuration](./configuration/configuration.md) for more information.
 
 ### Telemetry configuration options explained
 

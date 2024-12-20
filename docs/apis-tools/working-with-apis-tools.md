@@ -2,7 +2,7 @@
 id: working-with-apis-tools
 title: "Working with APIs & tools"
 sidebar_label: "Working with APIs & tools"
-description: "Learn more about the integration concepts involved in using the official Camunda Zeebe client libraries, APIs, and SDKs to interact programmatically with Camunda 8."
+description: "Learn more about the integration concepts involved in using the Camunda Zeebe client libraries, APIs, and SDKs to interact programmatically with Camunda 8."
 ---
 
 import DocCardList from '@theme/DocCardList';
@@ -44,6 +44,10 @@ Other components in Camunda 8, such as [Tasklist API (GraphQL)](../apis-tools/ta
 
 ## Learn about Camunda Components and their APIs
 
+:::note
+To migrate from Camunda's V1 component REST APIs to the V2 [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), review [migrating to the Camunda 8 API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+:::
+
 Camunda 8 components have APIs to enable polyglot developers to work with in their programming language of choice. Below are links to available component APIs.
 
 ![Architecture diagram for Camunda including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
@@ -72,6 +76,9 @@ Additionally, visit our documentation on [Operate](../self-managed/operate-deplo
 ### SDKs
 
 <DocCardList items={[{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
+{
+type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js", docId:"apis-tools/node-js-sdk"
+},
 ]}/>
 
 ### Postman

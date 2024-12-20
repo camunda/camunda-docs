@@ -8,7 +8,7 @@ The supported environments page lists browsers, operating systems, clients, depl
 
 **If the particular technology is not listed, we cannot resolve issues caused by the usage of that unlisted technology.**
 
-You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/contact) to work with Consulting services.
+You may [raise a feature request](/reference/contact.md) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/reference/contact.md) to work with Consulting services.
 
 Recommendations are denoted with [recommended], however, other listed options are supported as well.
 
@@ -110,6 +110,7 @@ This matrix shows which component versions work together:
 
 | Design                | Automate    |                                                                            | Improve         |
 | --------------------- | ----------- | -------------------------------------------------------------------------- | --------------- |
+| Desktop Modeler 5.28+ | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.6.x | Optimize 8.6.x  |
 | Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
 | Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
 | Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |

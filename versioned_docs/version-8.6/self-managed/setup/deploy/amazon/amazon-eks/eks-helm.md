@@ -330,7 +330,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.6-
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and Connectors](../../../install.md#configuring-enterprise-components-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](../../../install.md#configuring-web-modeler-console-and-connectors).
 
 #### Use internal Elasticsearch instead of the managed OpenSearch
 

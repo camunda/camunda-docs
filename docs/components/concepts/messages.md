@@ -12,7 +12,7 @@ A message is not sent to a process instance directly. Instead, the message corre
 
 ![Message Correlation](assets/message-correlation.png)
 
-A subscription is opened when a process instance awaits a message; for example, when entering a message catch event. The message name is defined either statically in the process (e.g. `Money collected`) or dynamically as an expression. The correlation key is defined dynamically as an expression (e.g. `= orderId`). The expressions are evaluated on activating the message catch event. The results of the evaluations are used as message name and as correlation key of the subscription (e.g. `"order-123"`).
+A subscription is opened when a process instance awaits a message; for example, when entering a message catch event. The message name is defined either statically in the process (e.g. `Money collected`) or dynamically as an expression. The correlation key is defined dynamically as an expression (for example, `= orderId`). The expressions are evaluated on activating the message catch event. The results of the evaluations are used as message name and as correlation key of the subscription (e.g. `"order-123"`).
 
 When a message is published and the message name and correlation key match to a subscription, the message is correlated to the corresponding process instance. If no proper subscription is opened, the message is discarded.
 
@@ -81,7 +81,7 @@ zbctl publish message "Money collected" --correlationKey "order-123" --messageId
 
 By combining the principles of message correlation, message uniqueness, and message buffering, very different behaviors can be achieved. Please note that a message name is mandatory, so it is omitted from the table.
 
-| Correlation key | Message Id | Time to live | Receiver type      | Behavior                                                                                                                                                                                        |
+| Correlation key | Message ID | Time to live | Receiver type      | Behavior                                                                                                                                                                                        |
 | --------------- | ---------- | ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | set             | not set    | set to 0     | Start event        | A new instance is started if no instance with the correlation key set at start is active, see [single instance](./#single-instance).                                                            |
 | set             | not set    | set to 0     | Intermediate event | The message is correlated if a matching subscription is active.                                                                                                                                 |
@@ -117,6 +117,10 @@ The messages are published with a `TTL > 0` and a correlation key that groups th
 The first message creates a new process instance. The following messages are correlated to the same process instance if they have the same correlation key.
 
 When the instance ends and messages with the same correlation key are not correlated yet, a new process instance is created.
+
+:::note
+You may also use TTL to wait for messages that may arrive earlier when combining [start events and intermediate catch events](/docs/components/modeler/bpmn/events.md).
+:::
 
 ### Single instance
 
