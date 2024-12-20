@@ -9,10 +9,11 @@ import AmazonSqsImg from "../img/connector-amazon-sqs.png";
 import AmazonLambdaImg from "../img/connector-aws-lambda.png";
 import AsanaImg from "../img/connector-asana.png";
 import AutomationImg from "../img/connector-automation.png";
-import AzureaiImg from "../img/connector-openai.png";
+import AzureaiImg from "../img/connector-azure-openai.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
 import EasypostImg from "../img/connector-easypost.png";
+import EmailImg from "../img/connector-email.png";
 import GithubImg from "../img/connector-github.png";
 import GitlabImg from "../img/connector-gitlab.png";
 import GoogleDriveImg from "../img/connector-google-drive.png";
@@ -68,14 +69,14 @@ const SearchableTable = () => {
       description:
         "Send events using Amazon EventBridge service within your processes.",
       type: "Outbound",
-      link: "../amazon-eventbridge/",
+      link: "../amazon-eventbridge/?awseventbridge=outbound",
       image: AmazonEventbridgeImg,
     },
     {
       name: "Amazon EventBridge Webhook",
       description: "Start a process instance triggered by Amazon EventBridge.",
       type: "Inbound",
-      link: "../amazon-eventbridge/",
+      link: "../amazon-eventbridge/?awseventbridge=inbound",
       image: AmazonEventbridgeImg,
     },
     {
@@ -97,28 +98,28 @@ const SearchableTable = () => {
       name: "Amazon SNS inbound",
       description: "Trigger your process with an Amazon SNS notification.",
       type: "Inbound",
-      link: "../amazon-sns/",
+      link: "../amazon-sns/?amazonsns=inbound",
       image: AmazonSnsImg,
     },
     {
       name: "Amazon SNS outbound",
       description: "Send messages to Amazon SNS from your processes.",
       type: "Outbound",
-      link: "../amazon-sns/",
+      link: "../amazon-sns/?amazonsns=outbound",
       image: AmazonSnsImg,
     },
     {
       name: "Amazon SQS",
       description: "Send messages to Amazon SQS from your processes.",
       type: "Outbound",
-      link: "../amazon-sqs/",
+      link: "../amazon-sqs/?amazonsqs=outbound",
       image: AmazonSqsImg,
     },
     {
       name: "Amazon SQS",
       description: "Receive messages from Amazon SQS in your processes.",
       type: "Inbound",
-      link: "../amazon-sqs/",
+      link: "../amazon-sqs/?amazonsqs=inbound",
       image: AmazonSqsImg,
     },
     {
@@ -175,17 +176,32 @@ const SearchableTable = () => {
       image: EasypostImg,
     },
     {
+      name: "Email",
+      description:
+        "Connect your BPMN service to an email POP3, IMAP or SMTP server.",
+      type: "Outbound",
+      link: "../email/?email=outbound",
+      image: EmailImg,
+    },
+    {
+      name: "Email",
+      description: "Connect your BPMN service to an email IMAP server.",
+      type: "Inbound",
+      link: "../email/?email=inbound",
+      image: EmailImg,
+    },
+    {
       name: "GitHub",
       description: "Manage GitHub issues and releases from your processes.",
       type: "Outbound",
-      link: "../github/",
+      link: "../github/?github=outbound",
       image: GithubImg,
     },
     {
       name: "GitHub Webhook",
       description: "Start a process instance triggered by a GitHub event.",
       type: "Inbound",
-      link: "../github/",
+      link: "../github/?github=inbound",
       image: GithubImg,
     },
     {
@@ -244,14 +260,14 @@ const SearchableTable = () => {
       name: "Kafka Consumer",
       description: "Consume messages from Kafka from your processes.",
       type: "Inbound",
-      link: "../kafka/",
+      link: "../kafka/?kafka=inbound",
       image: KafkaImg,
     },
     {
       name: "Kafka Producer",
       description: "Produce messages to Kafka from your processes.",
       type: "Outbound",
-      link: "../kafka/",
+      link: "../kafka/?kafka=outbound",
       image: KafkaImg,
     },
     {
@@ -287,14 +303,14 @@ const SearchableTable = () => {
       name: "RabbitMQ Consumer",
       description: "Receive messages from RabbitMQ in your processes.",
       type: "Inbound",
-      link: "../rabbitmq-outbound/",
+      link: "../rabbitmq/?rabbitmq=inbound",
       image: RabbitmqImg,
     },
     {
       name: "RabbitMQ Producer",
       description: "Send messages to RabbitMQ from your processes.",
       type: "Outbound",
-      link: "../rabbitmq-outbound/",
+      link: "../rabbitmq/?rabbitmq=outbound",
       image: RabbitmqImg,
     },
     {
@@ -324,7 +340,7 @@ const SearchableTable = () => {
       description:
         "Trigger a Slack bot to start a process with an event or slash command.",
       type: "Inbound",
-      link: "../slack/",
+      link: "../slack/?slack=inbound",
       image: SlackImg,
     },
     {
@@ -332,7 +348,7 @@ const SearchableTable = () => {
       description:
         "Send messages to Slack workspace channels or users from your processes.",
       type: "Outbound",
-      link: "../slack/",
+      link: "../slack/?slack=outbound",
       image: SlackImg,
     },
     {
@@ -356,14 +372,14 @@ const SearchableTable = () => {
       description:
         "Send and get SMS messages with Twilio service from your processes.",
       type: "Outbound",
-      link: "../twilio/",
+      link: "../twilio/?twilio=outbound",
       image: TwilioImg,
     },
     {
       name: "Twilio Webhook",
       description: "Start a process instance triggered by a Twilio webhook.",
       type: "Inbound",
-      link: "../twilio/",
+      link: "../twilio/?twilio=inbound",
       image: TwilioImg,
     },
     {
@@ -407,13 +423,21 @@ const SearchableTable = () => {
         value={searchTerm}
         onChange={handleSearch}
         className="connector-input-box"
+        style={{ marginRight: "15px" }}
       />
-      &nbsp;&nbsp;&nbsp;&nbsp;Connector type:&nbsp;&nbsp;
-      <select value={filterType} onChange={handleFilterType}>
+      Filter by connector type:&nbsp;&nbsp;
+      <select
+        value={filterType}
+        onChange={handleFilterType}
+        style={{ marginRight: "10px" }}
+      >
         <option value="All">All</option>
         <option value="Inbound">Inbound</option>
         <option value="Outbound">Outbound</option>
       </select>
+      <span style={{ fontSize: "14px" }}>
+        <a href="../../connector-types">About connector types</a>
+      </span>
       {filteredConnectors.length > 0 ? (
         <div className="connector-grid">
           {filteredConnectors.map((connector, index) => (

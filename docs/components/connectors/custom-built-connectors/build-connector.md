@@ -6,7 +6,7 @@ description: Manage your Connector templates in Web Modeler.
 
 import ConnectorArchitectureImg from "./img/diagram-connectors.png";
 
-You can build your own custom Connectors.
+Can't find the Connector you need? Build your own custom connector using connector templates or the SDK.
 
 ## About custom Connectors
 
