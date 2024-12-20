@@ -22,6 +22,8 @@ import GraphqlImg from "./img/connector-graphql.png";
 import AsanaImg from "./img/connector-asana.png";
 import AutomationImg from "./img/connector-automation.png";
 
+import Marketplace from './react-components/\_banner-marketplace.md'
+
 <p><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}}/>Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
 
 - Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
@@ -54,7 +56,7 @@ New to connectors? Learn how to start using connectors in your processes and abo
 </div>
 
 :::info
-Get started quickly by learning how to [integrate a Camunda connector](/guides/configuring-out-of-the-box-connector.md).
+Get started quickly by learning how you can [integrate the Sendgrid connector](/guides/configuring-out-of-the-box-connector.md).
 :::
 
 ## Custom connectors
@@ -119,17 +121,4 @@ Get help with some of our newest and most popular connectors.
   </a>
 </div>
 
-<div class="banner-column-container">
-<div class="banner-column-left">
-
-<a title="Explore Camunda Marketplace" href="https://marketplace.camunda.com/"><img src={MarketplaceImg} alt="Get started" /></a>
-
-</div>
-<div class="banner-column-right">
-
-Visit the Camunda Marketplace to explore connectors built by the Camunda Engineering team, our global network of partners, and our active developer community.
-
-<a class="button button--outline button--secondary button--md sign-up" style={{marginLeft: '0'}} title="Explore Camunda Marketplace" href="https://marketplace.camunda.com/">Explore Camunda Marketplace</a>
-
-</div>
-</div>
+<Marketplace/>
