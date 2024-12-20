@@ -42,17 +42,8 @@ const SearchableTable = () => {
 
   const connectors = [
     {
-      name: "Example",
-      description:
-        "Interact with Amazon Bedrock from your BPMN process to experiment with and evaluate foundation models (FMs) from leading AI companies.",
-      type: "Outbound",
-      link: "../example-template",
-      image: AsanaImg,
-    },
-    {
       name: "Amazon Bedrock",
-      description:
-        "Interact with Amazon Bedrock from your BPMN process to experiment with and evaluate foundation models (FMs) from leading AI companies.",
+      description: "Interact with Amazon Bedrock from your processes.",
       type: "Outbound",
       link: "../amazon-bedrock",
       image: AmazonBedrockImg,
@@ -60,15 +51,14 @@ const SearchableTable = () => {
     {
       name: "Amazon Comprehend",
       description:
-        "Interact with the Amazon Comprehend service from your BPMN process.",
+        "Interact with the Amazon Comprehend service from your processes.",
       type: "Outbound",
       link: "../amazon-comprehend",
       image: AmazonBedrockImg,
     },
     {
       name: "Amazon DynamoDB",
-      description:
-        "Interact with Amazon DynamoDB NoSQL database service within your BPMN process, enabling you to store and retrieve data from tables, as well as perform queries and scans.",
+      description: "Interact with the Amazon DynamoDB NoSQL database service.",
       type: "Outbound",
       link: "../amazon-dynamodb/",
       image: AmazonDynamoImg,
@@ -76,92 +66,87 @@ const SearchableTable = () => {
     {
       name: "Amazon EventBridge Service",
       description:
-        "Send events using Amazon EventBridge service within your BPMN process.",
+        "Send events using Amazon EventBridge service within your processes.",
       type: "Outbound",
       link: "../amazon-eventbridge/",
       image: AmazonEventbridgeImg,
     },
     {
       name: "Amazon EventBridge Webhook",
-      description:
-        "Start a BPMN process instance triggered by an Amazon EventBridge service event.",
+      description: "Start a process instance triggered by Amazon EventBridge.",
       type: "Inbound",
       link: "../amazon-eventbridge/",
       image: AmazonEventbridgeImg,
     },
     {
-      name: "AWS Lambda Connector",
-      description: "Invoke AWS Lambda Functions from your BPMN process.",
+      name: "AWS Lambda",
+      description: "Invoke AWS Lambda Functions from your processes.",
       type: "Outbound",
       link: "../aws-lambda/",
       image: AmazonLambdaImg,
     },
     {
-      name: "Amazon SageMaker Connector",
+      name: "Amazon SageMaker",
       description:
-        "Interact with the Amazon SageMaker service from your BPMN process.",
+        "Interact with the Amazon SageMaker service from your processes.",
       type: "Outbound",
       link: "../amazon-sagemaker/",
       image: AmazonBedrockImg,
     },
     {
-      name: "Amazon SNS inbound Connector",
-      description:
-        "Trigger your BPMN process with an Amazon Simple Notification Service notification via HTTPS.",
+      name: "Amazon SNS inbound",
+      description: "Trigger your process with an Amazon SNS notification.",
       type: "Inbound",
       link: "../amazon-sns/",
       image: AmazonSnsImg,
     },
     {
-      name: "Amazon SNS Outbound Connector",
-      description:
-        "Send messages to Amazon Simple Notification Service from your BPMN process.",
+      name: "Amazon SNS outbound",
+      description: "Send messages to Amazon SNS from your processes.",
       type: "Outbound",
       link: "../amazon-sns/",
       image: AmazonSnsImg,
     },
     {
-      name: "Amazon SQS Connector",
-      description:
-        "Send messages to Amazon Simple Queue Service from your BPMN process.",
+      name: "Amazon SQS",
+      description: "Send messages to Amazon SQS from your processes.",
       type: "Outbound",
       link: "../amazon-sqs/",
       image: AmazonSqsImg,
     },
     {
-      name: "Amazon SQS Connector",
-      description:
-        "Receive messages from Amazon Simple Queue Service (SQS) in your BPMN process.",
+      name: "Amazon SQS",
+      description: "Receive messages from Amazon SQS in your processes.",
       type: "Inbound",
       link: "../amazon-sqs/",
       image: AmazonSqsImg,
     },
     {
-      name: "Amazon Textract Connector",
+      name: "Amazon Textract",
       description:
-        "Interact with the Amazon Textract Service from your BPMN process.",
+        "Interact with the Amazon Textract Service from your processes.",
       type: "Outbound",
       link: "../amazon-textract/",
       image: AmazonBedrockImg,
     },
     {
       name: "Asana Connector",
-      description: "Manage Asana projects and tasks from your BPMN process.",
+      description: "Manage Asana projects and tasks from your processes.",
       type: "Outbound",
       link: "../asana/",
       image: AsanaImg,
     },
     {
-      name: "Automation Anywhere Connector",
+      name: "Automation Anywhere",
       description:
-        "Orchestrate your Automation Anywhere queue from your BPMN process.",
+        "Orchestrate your Automation Anywhere queue from your processes.",
       type: "Outbound",
       link: "../automation-anywhere/",
       image: AutomationImg,
     },
     {
       name: "Azure OpenAI",
-      description: "Interact with Azure OpenAI from your BPMN process.",
+      description: "Interact with Azure OpenAI from your processes.",
       type: "Outbound",
       link: "../azure-open-ai/",
       image: AzureaiImg,
@@ -169,81 +154,79 @@ const SearchableTable = () => {
     {
       name: "Blue Prism",
       description:
-        "Orchestrate your Blue Prism queue items from your BPMN process.",
+        "Orchestrate your Blue Prism queue items from your processes.",
       type: "Outbound",
       link: "../blueprism/",
       image: BluePrismImg,
     },
     {
-      name: "Camunda Operate Connector",
+      name: "Camunda Operate",
       description: "Fetch process execution data from Camunda Operate.",
       type: "Outbound",
       link: "../operate/",
       image: CamundaImg,
     },
     {
-      name: "Easy Post Connector",
+      name: "EasyPost",
       description:
-        "Create addresses, parcels, and shipments, as well as purchase and verify shipments with EasyPost from your BPMN process.",
+        "Create EasyPost addresses, parcels, shipments from your processes.",
       type: "Outbound",
       link: "../easypost/",
       image: EasypostImg,
     },
     {
-      name: "GitHub Connector",
-      description: "Manage GitHub issues and releases from your BPMN process.",
+      name: "GitHub",
+      description: "Manage GitHub issues and releases from your processes.",
       type: "Outbound",
       link: "../github/",
       image: GithubImg,
     },
     {
-      name: "GitHub Webhook Connector",
+      name: "GitHub Webhook",
       description: "Start a process instance triggered by a GitHub event.",
       type: "Inbound",
       link: "../github/",
       image: GithubImg,
     },
     {
-      name: "GitLab Connector",
-      description: "Manage GitLab issues and releases from your BPMN process.",
+      name: "GitLab",
+      description: "Manage GitLab issues and releases from your processes.",
       type: "Outbound",
       link: "../gitlab/",
       image: GitlabImg,
     },
     {
-      name: "Google Drive Connector",
-      description:
-        "Create folders or files from a Google Drive template from your BPMN process.",
+      name: "Google Drive",
+      description: "Create folders or files from Google Drive templates.",
       type: "Outbound",
       link: "../googledrive/",
       image: GoogleDriveImg,
     },
     {
-      name: "Google Maps Platform Connector",
+      name: "Google Maps Platform",
       description:
-        "Validate addresses, retrieve postal addresses, and calculate distances with Google Maps Platform Service from your BPMN process.",
+        "Validate addresses, retrieve postal addresses, and calculate distances.",
       type: "Outbound",
       link: "../google-maps-platform/",
       image: GoogleMapsImg,
     },
     {
-      name: "Google Sheets Connector",
+      name: "Google Sheets",
       description:
-        "Allows you to work with an existing or new empty spreadsheet on Google Drive from your BPMN process.",
+        "Work with spreadsheets on Google Drive from your processes.",
       type: "Outbound",
       link: "../google-sheets/",
       image: GoogleSheetsImg,
     },
     {
-      name: "GraphQL Connector",
-      description:
-        "Execute a GraphQL query or mutation from your BPMN process.",
+      name: "GraphQL",
+      description: "Execute a GraphQL query or mutation from your processes.",
       type: "Outbound",
       link: "../graphql/",
       image: GraphqlImg,
     },
     {
-      name: "HTTP Webhook Connector",
+      name: "HTTP Webhook",
       description:
         "Start a process instance with your custom webhook configuration.",
       type: "Outbound",
@@ -251,151 +234,148 @@ const SearchableTable = () => {
       image: WebhookImg,
     },
     {
-      name: "Hugging Face Connector",
-      description: "Interact with Hugging Face models from your BPMN process.",
+      name: "Hugging Face",
+      description: "Interact with Hugging Face models from your processes.",
       type: "Outbound",
       link: "../hugging-face/",
       image: HuggingFaceImg,
     },
     {
-      name: "Kafka Consumer Connector",
-      description: "Consume messages from Kafka from your BPMN process.",
+      name: "Kafka Consumer",
+      description: "Consume messages from Kafka from your processes.",
       type: "Inbound",
       link: "../kafka/",
       image: KafkaImg,
     },
     {
-      name: "Kafka Producer Connector",
-      description: "Produce messages to Kafka from your BPMN process.",
+      name: "Kafka Producer",
+      description: "Produce messages to Kafka from your processes.",
       type: "Outbound",
       link: "../kafka/",
       image: KafkaImg,
     },
     {
-      name: "Microsoft 365 Connector",
-      description:
-        "Interactions with Microsoft 365 mail from your BPMN process.",
+      name: "Microsoft 365",
+      description: "Interactions with Microsoft 365 mail from your processes.",
       type: "Outbound",
       link: "../microsoft-o365-mail/",
       image: Microsoft365Img,
     },
     {
-      name: "Microsoft Teams Connector",
-      description: "Interactions with Microsoft Teams from your BPMN process.",
+      name: "Microsoft Teams",
+      description: "Interactions with Microsoft Teams from your processes.",
       type: "Outbound",
       link: "../microsoft-teams/",
       image: MicrosoftTeamsImg,
     },
     {
-      name: "OpenAI Connector",
+      name: "OpenAI",
       description: "Interact with ChatGPT and OpenAI Moderation API.",
       type: "Outbound",
       link: "../openai/",
       image: OpenaiImg,
     },
     {
-      name: "Polling Connector",
+      name: "Polling",
       description:
-        "The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.",
+        "Poll an endpoint at regular intervals, enabling periodic data fetching.",
       type: "Outbound",
       link: "../../protocol/polling/",
       image: RestImg,
     },
     {
-      name: "RabbitMQ Consumer Connector",
-      description: "Receive messages from RabbitMQ in your BPMN process.",
+      name: "RabbitMQ Consumer",
+      description: "Receive messages from RabbitMQ in your processes.",
       type: "Inbound",
       link: "../rabbitmq-outbound/",
       image: RabbitmqImg,
     },
     {
-      name: "RabbitMQ Producer Connector",
-      description: "Send messages to RabbitMQ from your BPMN process.",
+      name: "RabbitMQ Producer",
+      description: "Send messages to RabbitMQ from your processes.",
       type: "Outbound",
       link: "../rabbitmq-outbound/",
       image: RabbitmqImg,
     },
     {
-      name: "REST Connector",
+      name: "REST",
       description:
-        "Make a request to a REST API and use the response in the next steps of your process.",
+        "Send a request to a REST API and use the response in your processes.",
       type: "Outbound",
       link: "../../protocol/rest/",
       image: RestImg,
     },
     {
-      name: "Salesforce Connector",
-      description: "Manage your Salesforce instance from your BPMN process.",
+      name: "Salesforce",
+      description: "Manage your Salesforce instance from your processes.",
       type: "Outbound",
       link: "../salesforce/",
       image: SalesforceImg,
     },
     {
-      name: "SendGrid Connector",
-      description: "Quickly send emails from your BPMN processes.",
+      name: "SendGrid",
+      description: "Quickly send emails from your processes.",
       type: "Outbound",
       link: "../sendgrid/",
       image: SendgridImg,
     },
     {
-      name: "Slack inbound Connector",
+      name: "Slack inbound",
       description:
-        "Trigger a Slack bot to start a BPMN process with an event or a slash command.",
+        "Trigger a Slack bot to start a process with an event or slash command.",
       type: "Inbound",
       link: "../slack/",
       image: SlackImg,
     },
     {
-      name: "Slack outbound Connector",
+      name: "Slack outbound",
       description:
-        "Send messages to channels or users in your Slack workspace from your BPMN process.",
+        "Send messages to Slack workspace channels or users from your processes.",
       type: "Outbound",
       link: "../slack/",
       image: SlackImg,
     },
     {
-      name: "SOAP Connector",
+      name: "SOAP",
       description:
-        "Connect your BPMN process with Simple Object Access Protocol (SOAP) services and interact with SOAP service endpoints.",
+        "Connect with Simple Object Access Protocol (SOAP) services.",
       type: "Outbound",
       link: "../../protocol/soap/",
       image: SoapImg,
     },
     {
-      name: "SQL Connector",
+      name: "SQL",
       description:
-        "Connect your BPMN process with SQL databases (Microsoft SQL Server, PostgreSQL, MySQL).",
+        "Connect with SQL databases (Microsoft SQL Server, PostgreSQL, MySQL).",
       type: "Outbound",
       link: "../sql/",
       image: SqlImg,
     },
     {
-      name: "Twilio Connector",
+      name: "Twilio",
       description:
-        "Send and get SMS messages with Twilio service from your BPMN process.",
+        "Send and get SMS messages with Twilio service from your processes.",
       type: "Outbound",
       link: "../twilio/",
       image: TwilioImg,
     },
     {
-      name: "Twilio Webhook Connector",
-      description:
-        "Start a process instance triggered by a Twilio webhook. Can be used as an intermediate Connector in existing processes.",
+      name: "Twilio Webhook",
+      description: "Start a process instance triggered by a Twilio webhook.",
       type: "Inbound",
       link: "../twilio/",
       image: TwilioImg,
     },
     {
-      name: "UiPath Connector",
+      name: "UiPath",
       description: "Orchestrate your UiPath Bots with Camunda.",
       type: "Outbound",
       link: "../uipath/",
       image: UipathImg,
     },
     {
-      name: "WhatsApp Connector",
-      description:
-        "Send messages with WhatsApp Business from your BPMN process.",
+      name: "WhatsApp",
+      description: "Send messages with WhatsApp Business from your processes.",
       type: "Outbound",
       link: "../whatsapp/",
       image: WhatsappImg,
@@ -435,35 +415,39 @@ const SearchableTable = () => {
         <option value="Outbound">Outbound</option>
       </select>
       {filteredConnectors.length > 0 ? (
-        <table className="no-border-table">
-          <thead>
-            <tr>
-              <th>Connector</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredConnectors.map((connector, index) => (
-              <tr key={index}>
-                <td className="no-border-cell-img">
-                  <div className="connector-cell">
-                    <div className="connector-image">
-                      <img src={connector.image} alt={connector.name} />
-                    </div>
-                    <div className="connector-name">
-                      <a href={connector.link}>{connector.name}</a>
-                    </div>
-                  </div>
-                </td>
-                <td className="no-border-cell">{connector.description}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="connector-grid">
+          {filteredConnectors.map((connector, index) => (
+            <a key={index} href={connector.link} className="connector-card">
+              <div className="connector-card-image">
+                <img src={connector.image} alt={connector.name} />
+              </div>
+              <div className="connector-name">
+                <h3>{connector.name}</h3>
+              </div>
+              <div className="connector-description">
+                <p>{connector.description}</p>
+              </div>
+              <div className="connector-type">
+                <span
+                  className={`badge ${
+                    connector.type === "Inbound"
+                      ? "badge--beginner"
+                      : connector.type === "Outbound"
+                      ? "badge--medium"
+                      : "badge--default"
+                  }`}
+                  style={{ marginTop: "10px" }}
+                >
+                  {connector.type}
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
       ) : (
         <p className="connector-no-results">
-          No Connectors found for that search term and type. Try a different
-          search, remove the type, or check your spelling.
+          No Connectors found for that search term or type. Try a different
+          search, remove the type filter, or check your spelling.
         </p>
       )}
     </div>

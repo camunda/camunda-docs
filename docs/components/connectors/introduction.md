@@ -53,6 +53,10 @@ New to connectors? Learn how to start using connectors in your processes and abo
   </a>
 </div>
 
+:::info
+Get started quickly by learning how to [integrate a Camunda connector](/guides/configuring-out-of-the-box-connector.md).
+:::
+
 ## Custom connectors
 
 Build and deploy your own connectors using connector templates and the connector SDK.

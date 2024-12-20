@@ -104,7 +104,6 @@ a.connector-card {
 }
 
 .connector-card img {
-  max-width: 40px;
   height: 40px;
   border: none;
   margin-bottom: 10px;
@@ -223,4 +222,9 @@ a.connector-small-link {
   .banner-column-left {
     padding: 40px 30px 20px 30px;
   }
+}
+
+.badge:nth-of-type(1) {
+  margin-left: 0;
+  margin-bottom: 5px;
 }
