@@ -71,10 +71,10 @@ The Camunda Helm Chart can be installed using the following command:
 ```bash
 # This will install the latest Camunda Helm chart with the latest applications/dependencies.
 helm install camunda camunda/camunda-platform \
-    --values my-values.yaml
+    --values production-values.yaml
 ```
 
-The following secionts will help you fill out the content for `my-values.yaml`:
+The following secionts will help you fill out the content for `production-values.yaml`:
 
 ### Ingress TLS and Hostname setup for HTTPS Connections
 
@@ -89,6 +89,8 @@ Here is an example values.yaml configuration using the domain and TLS secret men
 ```yaml
 global:
   ingress:
+    enabled: true
+    className: nginx
     host: "camunda.example.com"
     tls:
       enabled: true
@@ -113,7 +115,7 @@ For more information on the Ingress setup, please refer to our [ingress setup gu
 
 ### Integrate with an Identity Provider (Azure Active Directory)
 
-Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use Azure Active Directory. Here is an example configuration to add to your `my-values.yaml` file:
+Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use Azure Active Directory. Here is an example configuration to add to your `production-values.yaml` file:
 
 ```yaml
 global:
@@ -163,7 +165,9 @@ If you would like some more guidance relating to authentication, then please ref
 
 The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as Bitnami Elasticsearch Helm Chart and Bitnami PostgresQL Helm Chart. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
-It is assumed that you already have OpenSearch and Amazon Aurora PostgreSQL setup and ready to go with a username, password, and URL.
+In our scenario the Core component, and the Optimize importer communicates with a singular Amazon OpenSearch instance. On the other hand, the identity and web-modeler component are connected to seperate Amazon Aurora PostgreSQL instances.
+
+It is assumed that you already have one Amazon OpenSearch instance and two Amazon Aurora PostgreSQL instances setup and ready to go with a username, password, and URL.
 
 #### Connecting to Amazon OpenSearch:
 
@@ -187,14 +191,20 @@ elasticsearch:
 
 You can see that we have globally disabled all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false` and also disable internal Elasticsearch through `elasticsearch.enabled: false`.
 
-#### Connecting to Amazon Aurora PostgreSQL
+#### Connecting to Amazon Aurora PostgreSQL for Identity:
 
-In our scenario, there are two components that use PostgreSQL to store data: Identity and Web Modeler:
-
-Here is how to configure Web Modeler and Idnetity with external PostgreSQL
+Here is how to configure Identity with external Amazon Aurora PostgreSQL:
 
 ```yaml
-placeholder for external postgresql connections values.yaml insert
+Placeholder for external postgresql connection for identity.
+```
+
+#### Connecting to Amazon Aurora PostgreSQL for Web Modeler:
+
+Here is how to configure Web Modeler with external Amazon Aurora PostgreSQL:
+
+```yaml
+Placeholder for external postgresql connection for web-modeler.
 ```
 
 Please make sure you correctly define the protocol, host, and port.
@@ -211,8 +221,11 @@ If you would like further information on connecting to external databases, we ha
 At this point you are able to connect to your platform through HTTPS, correctly authenticate users using Azure Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment:
 
 - Amazon OpenSearch configuration for the core component:
-  - It is important to have Index Lifecycle Management for Amazon OpenSearch. Here is an example:
-  - Retention time is a setting in the helm chart with default values from the SaaS setup.
+
+### Enabling Index Lifecycle Management (ILM) Policies for Amazon OpenSearch
+
+- It is important to have Index Lifecycle Management for Amazon OpenSearch. Here is an example:
+- Retention time is a setting in the helm chart with default values from the SaaS setup.
 
 ```yaml
 [
@@ -220,9 +233,9 @@ At this point you are able to connect to your platform through HTTPS, correctly 
 ]
 ```
 
+### Configuring Backups for Camunda Components
+
 - Optimize: disable ObjectVariable import by default (save space in OpenSearch). Add a setting to enable it explicitly on demand.
-- In general, the SaaS setup should be considered for the component settings.
-- OpenSearch performance tuning
 
 ## Scaling and Performance
 
