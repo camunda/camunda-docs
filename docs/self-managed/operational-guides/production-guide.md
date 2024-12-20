@@ -218,12 +218,13 @@ If you would like further information on connecting to external databases, we ha
 
 ## Application-Specific Configurations
 
-At this point you are able to connect to your platform through HTTPS, correctly authenticate users using Azure Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment:
+At this point you are able to connect to your platform through HTTPS, correctly authenticate users using Azure Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment.
 
-- Amazon OpenSearch configuration for the core component:
+We will continue our journey in adding to the `production-values.yaml`. Here is what you should consider for Camunda component level configurations:
 
 ### Enabling Index Lifecycle Management (ILM) Policies for Amazon OpenSearch
 
+- Amazon OpenSearch configuration for the core component:
 - It is important to have Index Lifecycle Management for Amazon OpenSearch. Here is an example:
 - Retention time is a setting in the helm chart with default values from the SaaS setup.
 
@@ -235,9 +236,17 @@ At this point you are able to connect to your platform through HTTPS, correctly 
 
 ### Configuring Backups for Camunda Components
 
+```yaml
+[placeholder for configuring backups.]
+```
+
+### Other points to note
+
 - Optimize: disable ObjectVariable import by default (save space in OpenSearch). Add a setting to enable it explicitly on demand.
 
 ## Scaling and Performance
+
+At this point you should already have a solid base to run your platform in a production setting. The rest of this guide gives you general Kubernetes based guidance on configuration for long-term maintenance.
 
 Here are some points to keep in mind when considering scalability:
 
