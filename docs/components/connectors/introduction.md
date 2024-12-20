@@ -29,11 +29,11 @@ import AutomationImg from "./img/connector-automation.png";
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
-**[Find a Camunda connector >](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)**
+<a class="button button--outline button--secondary button--md button--hero get-started" title="Find a Camunda connector" href="../out-of-the-box-connectors/available-connectors-overview" style={{marginBottom: '40px'}}>Find a Camunda connector ></a>
 
 ## Get started
 
-Learn how to start using connectors in your processes and about the different types of connector.
+New to connectors? Learn how to start using connectors in your processes and about the different types of connector.
 
 <div class="connector-grid">
   <a href="../use-connectors" class="connector-card" title="How to use Connectors">
@@ -55,7 +55,7 @@ Learn how to start using connectors in your processes and about the different ty
 
 ## Custom connectors
 
-Build and deploy your own connectors using connector templates or the connector SDK.
+Build and deploy your own connectors using connector templates and the connector SDK.
 
 <div class="connector-grid">
   <a href="../custom-built-connectors/build-connector" class="connector-card" title="Custom Connectors">
@@ -77,7 +77,7 @@ Build and deploy your own connectors using connector templates or the connector 
 
 ## Featured connectors
 
-Learn more about how to use some of our newest and most popular connectors.
+Get help with some of our newest and most popular connectors.
 
 <div class="connector-grid">
   <a href="../out-of-the-box-connectors/openai" class="connector-card" title="OpenAI">
@@ -125,7 +125,7 @@ Learn more about how to use some of our newest and most popular connectors.
 
 Visit the Camunda Marketplace to explore connectors built by the Camunda Engineering team, our global network of partners, and our active developer community.
 
-<a class="button button--outline button--secondary button--md button--hero get-started" title="Explore Camunda Marketplace" href="https://marketplace.camunda.com/">Explore Camunda Marketplace</a>
+<a class="button button--outline button--secondary button--md sign-up" style={{marginLeft: '0'}} title="Explore Camunda Marketplace" href="https://marketplace.camunda.com/">Explore Camunda Marketplace</a>
 
 </div>
 </div>

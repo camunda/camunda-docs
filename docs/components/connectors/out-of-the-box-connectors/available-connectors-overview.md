@@ -6,7 +6,7 @@ description: Take a closer look at the Connectors available in Camunda 8.
 
 import SearchableTable from './connectors-table.js';
 
-Explore our library of prebuilt Camunda Connectors for SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
+Get help with our library of prebuilt Camunda Connectors for SaaS and [Self-Managed](/self-managed/connectors-deployment/install-and-start.md).
 
 <SearchableTable />
 

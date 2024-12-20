@@ -19,6 +19,22 @@ import GoogleDriveImg from "../img/connector-google-drive.png";
 import GoogleMapsImg from "../img/connector-google-maps.png";
 import GoogleSheetsImg from "../img/connector-google-sheets.png";
 import GraphqlImg from "../img/connector-graphql.png";
+import WebhookImg from "../img/connector-webhook.png";
+import HuggingFaceImg from "../img/connector-hugging-face.png";
+import KafkaImg from "../img/connector-kafka.png";
+import Microsoft365Img from "../img/connector-365.png";
+import MicrosoftTeamsImg from "../img/connector-teams.png";
+import OpenaiImg from "../img/connector-openai.png";
+import RestImg from "../img/connector-rest.png";
+import RabbitmqImg from "../img/connector-rabbitmq.png";
+import SalesforceImg from "../img/connector-salesforce.png";
+import SendgridImg from "../img/connector-sendgrid.png";
+import SlackImg from "../img/connector-slack.png";
+import SoapImg from "../img/connector-soap.png";
+import SqlImg from "../img/connector-sql.png";
+import TwilioImg from "../img/connector-twilio.png";
+import UipathImg from "../img/connector-uipath.png";
+import WhatsappImg from "../img/connector-whatsapp.png";
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -231,29 +247,29 @@ const SearchableTable = () => {
       description:
         "Start a process instance with your custom webhook configuration.",
       type: "Outbound",
-      link: "../http-webhook/",
-      image: AmazonBedrockImg,
+      link: "../../protocol/http-webhook/",
+      image: WebhookImg,
     },
     {
       name: "Hugging Face Connector",
       description: "Interact with Hugging Face models from your BPMN process.",
       type: "Outbound",
       link: "../hugging-face/",
-      image: AmazonBedrockImg,
+      image: HuggingFaceImg,
     },
     {
       name: "Kafka Consumer Connector",
       description: "Consume messages from Kafka from your BPMN process.",
       type: "Inbound",
       link: "../kafka/",
-      image: AmazonBedrockImg,
+      image: KafkaImg,
     },
     {
       name: "Kafka Producer Connector",
       description: "Produce messages to Kafka from your BPMN process.",
       type: "Outbound",
       link: "../kafka/",
-      image: AmazonBedrockImg,
+      image: KafkaImg,
     },
     {
       name: "Microsoft 365 Connector",
@@ -261,65 +277,65 @@ const SearchableTable = () => {
         "Interactions with Microsoft 365 mail from your BPMN process.",
       type: "Outbound",
       link: "../microsoft-o365-mail/",
-      image: AmazonBedrockImg,
+      image: Microsoft365Img,
     },
     {
       name: "Microsoft Teams Connector",
       description: "Interactions with Microsoft Teams from your BPMN process.",
       type: "Outbound",
       link: "../microsoft-teams/",
-      image: AmazonBedrockImg,
+      image: MicrosoftTeamsImg,
     },
     {
       name: "OpenAI Connector",
       description: "Interact with ChatGPT and OpenAI Moderation API.",
       type: "Outbound",
       link: "../openai/",
-      image: AmazonBedrockImg,
+      image: OpenaiImg,
     },
     {
       name: "Polling Connector",
       description:
         "The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.",
       type: "Outbound",
-      link: "../polling/",
-      image: AmazonBedrockImg,
+      link: "../../protocol/polling/",
+      image: RestImg,
     },
     {
       name: "RabbitMQ Consumer Connector",
       description: "Receive messages from RabbitMQ in your BPMN process.",
       type: "Inbound",
       link: "../rabbitmq-outbound/",
-      image: AmazonBedrockImg,
+      image: RabbitmqImg,
     },
     {
       name: "RabbitMQ Producer Connector",
       description: "Send messages to RabbitMQ from your BPMN process.",
       type: "Outbound",
       link: "../rabbitmq-outbound/",
-      image: AmazonBedrockImg,
+      image: RabbitmqImg,
     },
     {
       name: "REST Connector",
       description:
         "Make a request to a REST API and use the response in the next steps of your process.",
       type: "Outbound",
-      link: "../rest/",
-      image: AmazonBedrockImg,
+      link: "../../protocol/rest/",
+      image: RestImg,
     },
     {
       name: "Salesforce Connector",
       description: "Manage your Salesforce instance from your BPMN process.",
       type: "Outbound",
       link: "../salesforce/",
-      image: AmazonBedrockImg,
+      image: SalesforceImg,
     },
     {
       name: "SendGrid Connector",
       description: "Quickly send emails from your BPMN processes.",
       type: "Outbound",
       link: "../sendgrid/",
-      image: AmazonBedrockImg,
+      image: SendgridImg,
     },
     {
       name: "Slack inbound Connector",
@@ -327,7 +343,7 @@ const SearchableTable = () => {
         "Trigger a Slack bot to start a BPMN process with an event or a slash command.",
       type: "Inbound",
       link: "../slack/",
-      image: AmazonBedrockImg,
+      image: SlackImg,
     },
     {
       name: "Slack outbound Connector",
@@ -335,15 +351,15 @@ const SearchableTable = () => {
         "Send messages to channels or users in your Slack workspace from your BPMN process.",
       type: "Outbound",
       link: "../slack/",
-      image: AmazonBedrockImg,
+      image: SlackImg,
     },
     {
       name: "SOAP Connector",
       description:
         "Connect your BPMN process with Simple Object Access Protocol (SOAP) services and interact with SOAP service endpoints.",
       type: "Outbound",
-      link: "../soap/",
-      image: AmazonBedrockImg,
+      link: "../../protocol/soap/",
+      image: SoapImg,
     },
     {
       name: "SQL Connector",
@@ -351,7 +367,7 @@ const SearchableTable = () => {
         "Connect your BPMN process with SQL databases (Microsoft SQL Server, PostgreSQL, MySQL).",
       type: "Outbound",
       link: "../sql/",
-      image: AmazonBedrockImg,
+      image: SqlImg,
     },
     {
       name: "Twilio Connector",
@@ -359,7 +375,7 @@ const SearchableTable = () => {
         "Send and get SMS messages with Twilio service from your BPMN process.",
       type: "Outbound",
       link: "../twilio/",
-      image: AmazonBedrockImg,
+      image: TwilioImg,
     },
     {
       name: "Twilio Webhook Connector",
@@ -367,14 +383,14 @@ const SearchableTable = () => {
         "Start a process instance triggered by a Twilio webhook. Can be used as an intermediate Connector in existing processes.",
       type: "Inbound",
       link: "../twilio/",
-      image: AmazonBedrockImg,
+      image: TwilioImg,
     },
     {
       name: "UiPath Connector",
       description: "Orchestrate your UiPath Bots with Camunda.",
       type: "Outbound",
       link: "../uipath/",
-      image: AmazonBedrockImg,
+      image: UipathImg,
     },
     {
       name: "WhatsApp Connector",
@@ -382,7 +398,7 @@ const SearchableTable = () => {
         "Send messages with WhatsApp Business from your BPMN process.",
       type: "Outbound",
       link: "../whatsapp/",
-      image: AmazonBedrockImg,
+      image: WhatsappImg,
     },
   ];
 
