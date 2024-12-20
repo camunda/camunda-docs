@@ -1,10 +1,3 @@
-//sjhsjhsjh:
-// 0. [x] collect version from args
-// 1. [x] pull in version config from docusaurusconfig
-// 2. [x] protect against nonexisting versions
-// 3. Call correct drex commands given version info
-// 4. pass config into pre/postGenerateDocs
-
 const { execSync } = require("child_process");
 
 // Each API has a custom strategy, for modifying the schema or generated docs.
