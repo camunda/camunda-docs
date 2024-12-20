@@ -1,7 +1,7 @@
 ---
 id: gitlab
 title: GitLab Connector
-sidebar_label: GitLab Connector
+sidebar_label: GitLab
 description: Manage GitLab issues and releases from your BPMN process. Learn about creating a GitLab Connector task and get started.
 ---
 

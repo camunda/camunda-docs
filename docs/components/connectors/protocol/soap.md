@@ -1,7 +1,7 @@
 ---
 id: soap
 title: SOAP Connector
-sidebar_label: SOAP Connector
+sidebar_label: SOAP
 description: The SOAP Connector allows you to connect your BPMN process with SOAP services.
 ---
 
