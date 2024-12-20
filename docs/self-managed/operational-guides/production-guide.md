@@ -21,12 +21,12 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
   - **Amazon Aurora PostgreSQL**: For persistent data storage.
-  - **Elastic Cloud on GCP**: For indexing and analytics.
+  - **Amazon OpenSearch**: For indexing and analytics.
   - **Azure Active Directory**: For authentication and authorization.
 - **NGINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
 - **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
 - **Namespace Configuration**: Plan and create namespaces with appropriate resource quotas and LimitRanges for the Camunda Helm Chart.
-- **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment.
+- **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment. Have a look at our [sizing guide](/docs/next/components/best-practices/architecture/sizing-your-environment/#camunda-8-self-managed) for more information.
   <!-- - **Network and Security Policies**: -->
   <!--   - Enable and configure network policies to restrict pod communication. -->
   <!--   - Apply Pod Security Policies or Pod Security Standards (if supported by your cluster). -->
@@ -161,38 +161,35 @@ If you would like some more guidance relating to authentication, then please ref
 
 ### Connect External Databases
 
-The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as Bitnami Elasticsearch Helm Chart and Bitnami PostgresQL Helm Chart. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Elasticsearch dependency chart, we will use elastic-cloud on GCP, and instead of the PostgresQL dependency chart, we will use Amazon Aurora PostgreSQL.
+The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as Bitnami Elasticsearch Helm Chart and Bitnami PostgresQL Helm Chart. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
-It is assumed that you already have elastic-cloud and Amazon Aurora PostgreSQL setup and ready to go.
+It is assumed that you already have OpenSearch and Amazon Aurora PostgreSQL setup and ready to go with a username, password, and URL.
 
-#### Connecting to elastic-cloud on GCP:
+#### Connecting to Amazon OpenSearch:
 
 ```yaml
 global:
   elasticsearch:
+    enabled: false
+  opensearch:
     enabled: true
-    external: true
     auth:
-      username: elastic
+      username: user
       password: pass
     url:
-      protocol: http
-      host: elastic-cloud.example.com
+      protocol: https
+      host: opensearch.example.com
       port: 443
 
 elasticsearch:
   enabled: false
 ```
 
-You can see that we have globally enabled all internal component configuration for Elasticsearch through `global.elasticsearch.enabled` and we have disable internal Elasticsearch through `elasticsearch.enabled`.
+You can see that we have globally disabled all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false` and also disable internal Elasticsearch through `elasticsearch.enabled: false`.
 
 #### Connecting to Amazon Aurora PostgreSQL
 
 In our scenario, there are two components that use PostgreSQL to store data: Identity and Web Modeler:
-
-:::note
-If you decide to use internal Keycloak then that would also use PostgreSQL but we are not not using internal Keycloak for this scnenario.
-:::
 
 Here is how to configure Web Modeler and Idnetity with external PostgreSQL
 
@@ -211,21 +208,21 @@ If you would like further information on connecting to external databases, we ha
 
 ## Application-Specific Configurations
 
-At this point you are able to connect to your platform through HTTPS, correctly authenticate users using Azure Active Directory, and have connected to external databases such as Elastic-cloud and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment:
+At this point you are able to connect to your platform through HTTPS, correctly authenticate users using Azure Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment:
 
-- Elasticsearch configuration for the core component:
-  - It is important to have Index Lifecycle Management for Elasticsearch. Here is an example:
+- Amazon OpenSearch configuration for the core component:
+  - It is important to have Index Lifecycle Management for Amazon OpenSearch. Here is an example:
   - Retention time is a setting in the helm chart with default values from the SaaS setup.
 
 ```yaml
 [
-  placeholder for configuring Elasticsearch lifecycle policies on the core component,
+  placeholder for configuring OpenSearch lifecycle policies on the core component,
 ]
 ```
 
-- Optimize: disable ObjectVariable import by default (save space in Elasticsearch). Add a setting to enable it explicitly on demand.
+- Optimize: disable ObjectVariable import by default (save space in OpenSearch). Add a setting to enable it explicitly on demand.
 - In general, the SaaS setup should be considered for the component settings.
-- Elasticsearch performance tuning
+- OpenSearch performance tuning
 
 ## Scaling and Performance
 
@@ -242,7 +239,11 @@ core:
 
 The `core.clusterSize` refers to the amount of borkers, the `core.partitionCount` refers to how each [partition](/docs/components/zeebe/technical-concepts/partitions/) is setup in the cluster, and the `core.replicationFactor` refers to the [number of nodes](/docs/components/zeebe/technical-concepts/partitions/#replication).
 
-- Check the resource (CPU and memory) limits set and make sure they are reasonable. We recommend to disable the CPU limits unless you have a good usecase. For example, the resource limits can be changed for the core component by modifying the following values:
+:::note
+The `core.partitionCount` does not support dynamic scaling. You will not be able to modify it on future upgrades.
+:::
+
+- Check the resource (CPU and memory) limits set and make sure they are reasonable. For example, the resource limits can be changed for the core component by modifying the following values:
 
 ```yaml
 core:
@@ -251,10 +252,17 @@ core:
       cpu: 800m
       memory: 1200Mi
     limits:
-      cpu: null
+      cpu: 2000m
       memory: 1920Mi
 ```
 
+- It is possible to set a LimitRange on the namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/) on setting a LimitRange.
+
+## Reliability Best Practices
+
+Here are some points to keep in mind when considering reliability:
+
+- Check node affinity and tolerations.
 - It is possible to set a `podDisruptionBudget`. For example you can modify the following values for the Core component:
 
 ```yaml
@@ -265,13 +273,6 @@ core:
     maxUnavailable: 1
 ```
 
-- It is possible to set a LimitRange on the namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/) on setting a LimitRange.
-
-## Reliability Best Practices
-
-Here are some points to keep in mind when consider reliability:
-
-- Check node affinity and tolerations.
 - Version Management: Stay on a stable Camunda and Kubernetes version and follow Camunda’s release notes for security patches or critical updates.
 - Secrets should be created prior to installing the helm chart so they can be referenced as existingSecrets when installing the helm chart.
 - Familiar with upgrades. Ideally, customers should have already performed an upgrade in the lower environment before going to production.
