@@ -78,6 +78,18 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/operate/version-8.6/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
