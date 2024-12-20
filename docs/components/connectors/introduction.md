@@ -30,31 +30,31 @@ import AzureaiImg from "./img/connector-azure-openai.png";
 
 import Marketplace from './react-components/\_banner-marketplace.md'
 
-<p><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}}/>Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
+<p><a title="Find a Camunda connector" href="../out-of-the-box-connectors/available-connectors-overview"><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}} className="fade-in-top-image"/></a>Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
 
 - Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
 - In microservices orchestration, use a [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) connector to add real-time messaging to your automated processes.
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
-<a class="button button--outline button--secondary button--md button--hero get-started" title="Find a Camunda connector" href="./out-of-the-box-connectors/available-connectors-overview" style={{marginBottom: '40px'}}>Find a Camunda connector ></a>
+<a class="button button--outline button--secondary button--md button--hero get-started" title="Find a Camunda connector" href="../out-of-the-box-connectors/available-connectors-overview" style={{marginBottom: '40px'}}>Find a Camunda connector ></a>
 
 ## Get started
 
 New to connectors? Learn how to start using connectors in your processes and about the different types of connector.
 
 <div class="connector-grid">
-  <a href="./use-connectors" class="connector-card" title="How to use Connectors">
+  <a href="../use-connectors" class="connector-card" title="How to use Connectors">
       <img src={IconPlayImg} alt="Get started"/>
     <h3>How to use Connectors</h3>
     <p>Create a connector task and start using connector secrets.</p>
   </a>
-    <a href="./connector-types" class="connector-card" title="Connector types">
+    <a href="../connector-types" class="connector-card" title="Connector types">
     <img src={IconConnectorTypesImg} alt="Connector types"/>
     <h3>Connector types</h3>
     <p>Learn about <a href="./use-connectors/inbound" title="Inbound Connectors">Inbound</a> and <a href="./use-connectors/outbound" title="Outbound Connectors">Outbound</a> connector types.</p>
   </a>
-    <a href="./out-of-the-box-connectors/available-connectors-overview" class="connector-card" title="Get started with Connectors">
+    <a href="../out-of-the-box-connectors/available-connectors-overview" class="connector-card" title="Get started with Connectors">
     <img src={IconConnectorImg} alt="How to use Connectors"/>
     <h3>Camunda connectors</h3>
     <p>Explore the docs for our library of prebuilt Camunda connectors.</p>
@@ -70,17 +70,17 @@ Get started quickly by learning how you can [integrate the Sendgrid connector](/
 Build and deploy your own connectors using connector templates and the connector SDK.
 
 <div class="connector-grid">
-  <a href="./custom-built-connectors/build-connector" class="connector-card" title="Custom Connectors">
+  <a href="../custom-built-connectors/build-connector" class="connector-card" title="Custom Connectors">
     <img src={IconConnectorCustomImg} alt="Custom Connectors icon" class="connector-card-image"/>
     <h3>Custom connectors</h3>
     <p>Learn how to build and deploy your own custom connectors.</p>
   </a>
-  <a href="./custom-built-connectors/connector-templates" class="connector-card" title="Connector templates">
+  <a href="../custom-built-connectors/connector-templates" class="connector-card" title="Connector templates">
     <img src={IconConnectorTemplateImg} alt="Connector templates icon" class="connector-card-image"/>
     <h3>Connector templates</h3>
     <p>Create, generate, and manage connector templates.</p>
   </a>
-    <a href="./custom-built-connectors/connector-sdk" class="connector-card" title="Connector SDK">
+    <a href="../custom-built-connectors/connector-sdk" class="connector-card" title="Connector SDK">
     <img src={IconConnectorSdkImg} alt="Connector SDK icon" class="connector-card-image"/>
     <h3>Connector SDK</h3>
     <p>Use the SDK to create your own custom Java connectors.</p>
@@ -99,17 +99,17 @@ Get started with our newest and most popular connectors.
 <TabItem value="popular">
 
 <div class="connector-grid">
-  <a href="./out-of-the-box-connectors/openai" class="connector-card" title="OpenAI">
+  <a href="../out-of-the-box-connectors/openai" class="connector-card" title="OpenAI">
     <img src={OpenaiImg} alt="OpenAI icon" class="connector-card-image"/>
     <h3>OpenAI</h3>
     <p>Add ChatGPT and OpenAI's Moderation API to your business processes.</p>
   </a>
-  <a href="./out-of-the-box-connectors/aws-lambda" class="connector-card" title="AWS Lambda">
+  <a href="../out-of-the-box-connectors/aws-lambda" class="connector-card" title="AWS Lambda">
     <img src={AwsLambdaImg} alt="AWS Lambda icon" class="connector-card-image"/>
     <h3>Amazon AWS Lambda</h3>
     <p>Connect processes to AWS Lambda to invoke serverless functions.</p>
   </a>
-    <a href="./protocol/rest" class="connector-card" title="Connector SDK">
+    <a href="../protocol/rest" class="connector-card" title="Connector SDK">
     <img src={RestImg} alt="Rest connector icon" class="connector-card-image"/>
     <h3>Rest connector</h3>
     <p>Connect, interact, and sync your processes with any RESTful service.</p>
@@ -117,17 +117,17 @@ Get started with our newest and most popular connectors.
 </div>
 
 <div class="connector-small-grid">
-  <a href="./protocol/graphql" class="connector-small-link">
+  <a href="../protocol/graphql" class="connector-small-link">
     <div class="connector-small">
       <img src={GraphqlImg} alt="GraphQL connector"/>GraphQL
     </div>
   </a>
-  <a href="./out-of-the-box-connectors/asana" class="connector-small-link">
+  <a href="../out-of-the-box-connectors/asana" class="connector-small-link">
     <div class="connector-small">
       <img src={AsanaImg} alt="Asana connector"/>Asana
     </div>
   </a>
-  <a href="./out-of-the-box-connectors/automation-anywhere" class="connector-small-link">
+  <a href="../out-of-the-box-connectors/automation-anywhere" class="connector-small-link">
     <div class="connector-small">
       <img src={AutomationImg} alt="Automation Anywhere connector"/>Automation Anywhere
     </div>
@@ -138,17 +138,17 @@ Get started with our newest and most popular connectors.
 <TabItem value="new">
 
 <div class="connector-grid">
-  <a href="./out-of-the-box-connectors/email/?email=inbound" class="connector-card" title="Email connector">
+  <a href="../out-of-the-box-connectors/email/?email=inbound" class="connector-card" title="Email connector">
     <img src={EmailImg} alt="Email connector icon" class="connector-card-image"/>
     <h3>Email inbound</h3>
     <p>Connect your BPMN service to an email IMAP server.</p>
   </a>
-  <a href="./out-of-the-box-connectors/email/?email=outbound" class="connector-card" title="Email connector">
+  <a href="../out-of-the-box-connectors/email/?email=outbound" class="connector-card" title="Email connector">
     <img src={EmailImg} alt="Email connector icon" class="connector-card-image"/>
     <h3>Email outbound</h3>
     <p>Connect your BPMN service to an email POP3, IMAP or SMTP server.</p>
   </a>
-  <a href="./out-of-the-box-connectors/amazon-bedrock" class="connector-card" title="Amazon Bedrock">
+  <a href="../out-of-the-box-connectors/amazon-bedrock" class="connector-card" title="Amazon Bedrock">
     <img src={BedrockImg} alt="Amazon Bedrock icon" class="connector-card-image"/>
     <h3>Amazon Bedrock</h3>
     <p>Interact with Amazon Bedrock from your processes.</p>
@@ -156,17 +156,17 @@ Get started with our newest and most popular connectors.
 </div>
 
 <div class="connector-small-grid">
-  <a href="./out-of-the-box-connectors/sql" class="connector-small-link">
+  <a href="../out-of-the-box-connectors/sql" class="connector-small-link">
     <div class="connector-small">
       <img src={SqlImg} alt="SQL connector"/>SQL
     </div>
   </a>
-  <a href="./out-of-the-box-connectors/amazon-sagemaker" class="connector-small-link">
+  <a href="../out-of-the-box-connectors/amazon-sagemaker" class="connector-small-link">
     <div class="connector-small">
       <img src={BedrockImg} alt="Sagemaker connector"/>Amazon Sagemaker
     </div>
   </a>
-  <a href="./out-of-the-box-connectors/azure-open-ai" class="connector-small-link">
+  <a href="../out-of-the-box-connectors/azure-open-ai" class="connector-small-link">
     <div class="connector-small">
       <img src={AzureaiImg} alt="Azure OpenAI connector"/>Azure OpenAI
     </div>

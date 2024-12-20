@@ -228,3 +228,16 @@ a.connector-small-link {
   margin-left: 0;
   margin-bottom: 5px;
 }
+
+.fade-in-top-image {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInTop 2s forwards;
+}
+
+@keyframes fadeInTop {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

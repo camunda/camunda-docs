@@ -7,7 +7,7 @@ description: Take a closer look at the Connectors available in Camunda 8.
 import SearchableTable from './connectors-table.js';
 import Marketplace from '../react-components/\_banner-marketplace.md'
 
-Explore the docs for our library of prebuilt Camunda connectors.
+Find technical documentation for our library of prebuilt Camunda connectors.
 
 <SearchableTable />
 
