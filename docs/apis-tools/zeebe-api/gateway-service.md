@@ -191,6 +191,48 @@ message CompleteJobRequest {
   int64 jobKey = 1;
   // a JSON document representing the variables in the current task scope
   string variables = 2;
+  // The result of the completed job as determined by the worker.
+  // Please note, this functionality is currently supported only by User Task Listeners
+  optional JobResult result = 3;
+}
+
+message JobResult{
+  // Indicates whether the worker denies the work, i.e. explicitly doesn't approve it.
+  // For example, a User Task Listener can deny the completion of a user task by setting this flag to true.
+  // In this example, the completion of a task is represented by a job that the worker can complete as denied.
+  // As a result, the completion request is rejected and the task remains active.
+  // Defaults to false.
+  optional bool denied = 1;
+  // Attributes that were corrected by the worker.
+  // The following attributes can be corrected, additional attributes will be ignored:
+  //   * `assignee` - reset by providing an empty String
+  //   * `dueDate` - reset by providing an empty String
+  //   * `followUpDate` - reset by providing an empty String
+  //   * `candidateGroups` - reset by providing an empty list
+  //   * `candidateUsers` - reset by providing an empty list
+  //   * `priority` - minimum 0, maximum 100, default 50
+  //  Omitting any of the attributes will preserve the persisted attribute's value.
+  optional JobResultCorrections corrections = 2;
+}
+
+message JobResultCorrections {
+  // The assignee of the task.
+  optional string assignee = 1;
+  // The due date of the task.
+  optional string dueDate = 2;
+  // The follow-up date of the task.
+  optional string followUpDate = 3;
+  // The list of candidate users of the task.
+  optional StringList candidateUsers = 4;
+  // The list of candidate groups of the task.
+  optional StringList candidateGroups = 5;
+  // The priority of the task.
+  optional int32 priority = 6;
+}
+
+message StringList {
+  // Wrapper around a list of string values.
+  repeated string values = 1;
 }
 ```
 
