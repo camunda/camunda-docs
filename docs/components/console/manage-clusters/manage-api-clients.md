@@ -41,7 +41,7 @@ When the rate limit is triggered, the client will receive an HTTP 429 response. 
 ## Create a client
 
 :::caution
-In **8.7** Clusters, the Client Scopes will be managed through the cluster Identity component. The only scope that is still managed in Console is the Cluster **Secrets** scope. To learn more about managing Clients in **8.7** Clusters please refer to the [Identity](/components/identity/manage-api-clients.md) Documentation.
+With **8.7** clusters, the client scopes are now managed through the [Identity](/components/identity/manage-api-clients.md) component. The only scope still managed in Console is the cluster **Secrets** scope. To learn more about managing clients in **8.7** clusters, refer to the [Identity](/components/identity/manage-api-clients.md) documentation.
 :::
 
 Currently, Camunda 8 SaaS supports the following scopes:
