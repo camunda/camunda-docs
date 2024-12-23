@@ -37,6 +37,11 @@ attributes can be specified simultaneously:
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
 :::info
+The assignee attribute must adhere to the userId field’s case-sensitivity requirements.
+Note that in SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
+:::
+
+:::info
 Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](docs/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.
 :::
 
