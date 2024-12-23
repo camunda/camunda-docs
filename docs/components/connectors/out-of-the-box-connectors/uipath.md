@@ -1,6 +1,7 @@
 ---
 id: uipath
 title: UiPath Connector
+sidebar_label: UiPath
 description: Orchestrate your UiPath Bots with Camunda to create new queue items and get the result from it.
 ---
 

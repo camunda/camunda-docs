@@ -1,7 +1,7 @@
 ---
 id: github
 title: GitHub Connector
-sidebar_label: GitHub Connector
+sidebar_label: GitHub
 description: Manage GitHub issues and releases from your BPMN process.
 ---
 

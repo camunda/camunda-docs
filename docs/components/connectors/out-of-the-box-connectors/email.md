@@ -1,7 +1,7 @@
 ---
 id: email
 title: Email Connector
-sidebar_label: Email Connector
+sidebar_label: Email
 description: The Email Connector allows you to connect your BPMN service with different email protocols such as SMTP, POP3 or IMAP.
 ---
 
