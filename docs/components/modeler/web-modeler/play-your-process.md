@@ -14,7 +14,7 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
 
-In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default. If no configuration is found, you are prompted to [manually enter your cluster details](#use-play-with-camunda-self-managed).
+In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
 A Play environment is then started that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
 
@@ -162,10 +162,6 @@ Additionally, within their organization, users need to have a [role](/components
 
 ### Camunda 8 Self-Managed
 
-:::note
-To use Play with Docker, ensure OAuth is enabled for your configured components. The `docker-compose-core.yaml` file in the Camunda [platform repository](https://github.com/camunda/camunda-platform) does not provide authentication, and cannot be used with Play.
-:::
-
 In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/modeler/web-modeler/configuration/configuration.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
 
 Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-alpha), or running the 8.6.0-alpha [Docker Compose](https://github.com/camunda/camunda-platform/tree/main/docker-compose/camunda-8.6) configuration.
@@ -180,21 +176,6 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 ## Use Play with Camunda Self-Managed
 
 After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
-
-If no cluster is configured, Web Modeler requests the following cluster details to use for deployment:
-
-| Name              | Description                                     | Example value                                                                      |
-| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Cluster endpoint  | Address where your cluster can be reached       | `http://zeebe:26500`                                                               |
-| Operate base url  | Address where Operate can be reached            | `http://operate:8080`                                                              |
-| Operate audience  | Permission name for Operate                     | `operate-api`                                                                      |
-| Tasklist base url | Address where Tasklist can be reached           | `http://tasklist:8080`                                                             |
-| Tasklist audience | Permission name for Tasklist                    | `tasklist-api`                                                                     |
-| Zeebe rest url    | Address where the Zeebe REST API can be reached | `http://zeebe:8080`                                                                |
-| Client ID         | Name of your registered client                  | `zeebe`                                                                            |
-| Client secret     | Password for your registered client             | `zecret`                                                                           |
-| OAuth token url   | Token issuer server                             | `http://keycloak:18080/auth/realms/camunda-platform/protocol/openid-connect/token` |
-| OAuth audience    | Permission name for Zeebe                       | `zeebe-api`                                                                        |
 
 ### Limitations
 
