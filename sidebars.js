@@ -80,6 +80,7 @@ module.exports = {
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
+        "components/concepts/document-handling",
         {
           "Access control": [
             "components/concepts/access-control/user-groups",
