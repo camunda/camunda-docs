@@ -399,10 +399,19 @@ containerSecurityContext:
 
 Here are some points to keep in mind when considering observability:
 
-- Setup observability with Prometheus and Grafana
-- Nice to have a retention and archival strategy for logs
-- Have a log aggregation tool.
-- Audit logs: Enable audit logging for Camunda components to track user actions, especially for sensitive data or configuration changes.
+- It is possible to enable Prometheus on the Camunda Helm Chart. This can be added to your `production-values.yaml`:
+
+```yaml
+prometheusServiceMonitor:
+  enabled: false
+```
+
+- A tool such as [Loki](https://grafana.com/oss/loki/) could be used for the retention and archival of logs. It can also be used to aggregate logs.
+- It is possible to enable audit logging for Camunda components to track user actions, especially for sensitive data or configuration changes. Here is an example configuration for the `production-values.yaml`:
+
+```yaml
+[placeholder to configure audit logs]
+```
 
 ## Bringing it All Together
 
