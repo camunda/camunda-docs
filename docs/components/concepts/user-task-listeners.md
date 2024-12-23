@@ -50,7 +50,9 @@ If multiple user task listeners of the same `eventType` (such as multiple `assig
 
 ## Implement a user task listener
 
-User task listeners are implemented using job workers, similar to execution listeners and service task jobs. The job worker processes the task listener job, applies corrections, and may optionally deny the operation.
+User task listeners are implemented using [job workers](/components/concepts/job-workers.md), similar to execution listeners and service task jobs. The job worker processes the task listener job, applies corrections, and may optionally deny the operation.
+
+See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for an example of how to create a job worker and handler that can also process user task listener jobs.
 
 ### Accessing user task data
 
@@ -58,11 +60,56 @@ User task-specific data, such as `assignee` and `priority`, is accessible throug
 
 ### Correcting user task data
 
-User task listeners can correct user task data before the lifecycle transition completes. Corrections are applied when all user task listeners for the operation have completed. The corrected data will be accessible to the subsequent listeners within the same operation.
+User task listeners can correct user task data before the lifecycle transition is finalized. Corrections allow user task listeners to update specific attributes of the user task, such as the assignee, due date, follow-up date, candidate users, candidate groups, and priority. These corrections are applied after all task listeners for the current operation have successfully completed.
+
+If an operation is denied by a listener, no corrections are applied to the user task.
+
+Below is an example of how to correct the user task data form a job worker for the user task listener job:
+
+```java
+final JobHandler completeTaskListenerJobWithCorrectionsHandler =
+    (jobClient, job) ->
+        jobClient
+            .newCompleteCommand(job)
+            // highlight-start
+            .withResult(
+                new CompleteJobResult()
+                    .correctAssignee("john_doe") // assigns the user task to 'john_doe'
+                    .correctDueDate(null) // preserves the current 'dueDate' of the user task
+                    .correctFollowUpDate("") // clears the 'followUpDate'
+                    .correctCandidateUsers(List.of("alice", "bob")) // assigns candidate users
+                    .correctCandidateGroups(List.of()) // clears the candidate groups
+                    .correctPriority(80)) // sets the priority to 80
+            // highlight-end
+            .send();
+
+client.newWorker()
+    .jobType("user-task-listener-completion") // type of the user task listener job
+    .handler(completeTaskListenerJobWithCorrectionsHandler)
+    .open();
+```
 
 ### Denying the operation
 
-User task listeners can deny a user task operation. Denying an operation rolls back the lifecycle transition and discards any corrections made by preceding listeners.
+User task listeners can deny a user task operation, such as assignment or completion, effectively preventing the lifecycle transition from completing. When an operation is denied:
+
+- **Lifecycle rollback**: The transition is rolled back to the previous state.
+- **Corrections discarded**: Any corrections made by preceding listeners within the same operation are discarded.
+- **Task state preserved**: The user task retains its state and data as if the operation was never attempted.
+
+This capability is particularly useful for implementing validation logic or enforcing business rules before allowing a user task operation to proceed.
+
+Below is an example of how to deny a user task operation from a job worker while completing the user task listener job:
+
+```java
+final JobHandler denyUserTaskOperationHandler =
+    (jobClient, job) ->
+        jobClient
+            .newCompleteCommand(job)
+            // highlight-next-line
+            .withResult(r -> r.deny(true))
+            .send();
+```
 
 ## Expression evaluation and incident behavior
 
