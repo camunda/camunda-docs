@@ -66,11 +66,22 @@ Play is being rebuilt and progressively rolled out to more users. See [Play limi
 
 ## Review
 
-After validation is complete, you can release a version of your process application for review and approval.
+After validation is complete, you can mark a version of your process application for review.
 
-- Use [process application versioning](process-application-versioning.md) to track and review changes across the files and assets in the process application. You can [compare milestones](/docs/components/modeler/web-modeler/milestones.md#compare-milestones) to visually review changes between two versions of a BPMN file, or view code changes for other files.
-- Use comments to make review collaboration easier.
-- Approvers can add a comment to the main process diagram to indicate that a review is complete and that the process application is ready to be promoted to the next stage.
+- Use [process application versioning](process-application-versioning.md) to track and review changes across the files and assets in the process application.
+  You can [compare milestones](/docs/components/modeler/web-modeler/milestones.md#compare-milestones) to visually review changes between two versions of a BPMN file, or view code changes for other files.
+- You can request a review for the newest version of the process application from the version history page of the main process.
+- Collaborators with edit permission will see a notification on the main process diagram when a review has been requested.
+- Reviewers can view the changes, leave a comment, request changes, or approve the process application version.
+- After a review has been submitted, the process application version is marked as reviewed and the review status is shown in the version history. A User can go back and edit the review at any point in time.
+
+This review capability is most useful for reviews on a business level.
+For technical reviews it can make sense to use [Git Sync](git-sync.md) to put changes into a technical context with related code changes.
+
+:::info
+Currently anyone who has edit permissions on a process application can perform a review. Users can also review their own changes.
+There can only be one open review at a time for a process application.
+:::
 
 ## Promote
 
