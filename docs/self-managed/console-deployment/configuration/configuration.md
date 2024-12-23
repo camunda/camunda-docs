@@ -41,6 +41,20 @@ Console environment variables could be set in Helm via the `console.env` key. Fo
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on Console startup or functionality. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
+### Proxy
+
+These settings are useful when the application needs to make outgoing network requests in environments that require traffic to pass through a proxy server.
+
+| Environment variable | Description                                                                                    | Example value                         | Default value |
+| -------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------- | ------------- |
+| `http_proxy`         | Specifies the proxy server to be used for outgoing HTTP requests.                              | `http://proxy.example.com:8080`       | -             |
+| `https_proxy`        | Specifies the proxy server to be used for outgoing HTTPS requests.                             | `https://secureproxy.example.com:443` | -             |
+| `no_proxy`           | A comma-separated list of domain names or IP addresses for which the proxy should be bypassed. | `localhost,127.0.0.1,.example.com`    | -             |
+
+:::note
+The proxy-related environment variables are lowercase because they follow a widely accepted convention used in many system environments and tools.
+:::
+
 ## Telemetry
 
 You can enable telemetry and usage collection to help us improve our product by sending several telemetry metrics to Camunda. The information we collect will contribute to continuous product enhancement and help us understand how Camunda is used. We do not collect sensitive information and limit data points to several metrics. For more information, you can download collected data set metrics from the telemetry page at anytime.
