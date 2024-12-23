@@ -108,7 +108,7 @@ The following conventions apply to all attributes:
 
 ### Operate
 
-#### Search Decision Requirements
+#### Search decision requirements
 
 - **V1 endpoint**: `POST /v1/drd/search`
 - **V2 endpoint**: `POST /v2/decision-requirements/search`
@@ -136,7 +136,7 @@ The following conventions apply to all attributes:
 
 </Tabs>
 
-#### Get Decision Requirements by Key
+#### Get decision requirements by key
 
 - **V1 endpoint**: `GET /v1/drd/:key`
 - **V2 endpoint**: `GET /v2/decision-requirements/:decisionRequirementsKey`
