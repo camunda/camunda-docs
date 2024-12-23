@@ -65,6 +65,7 @@ module.exports = {
         "components/concepts/processes",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
+        "components/concepts/user-task-listeners",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
