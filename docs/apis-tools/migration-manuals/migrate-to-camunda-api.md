@@ -106,6 +106,70 @@ The following conventions apply to all attributes:
 
 </Tabs>
 
+### Operate
+
+#### Search decision requirements
+
+- **V1 endpoint**: `POST /v1/drd/search`
+- **V2 endpoint**: `POST /v2/decision-requirements/search`
+
+<Tabs groupId="post-decision-requirements" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments', },
+{label: 'Output adjustments', value: 'output-adjustments', },
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Filter attribute `id` and `key` removed
+  - Use filter attribute `decisionRequirementsKey`
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Attributes attribute `id` has been removed.
+- The attribute `key` was replaced to `decisionRequirementsKey`
+
+</TabItem>
+
+</Tabs>
+
+#### Get decision requirements by key
+
+- **V1 endpoint**: `GET /v1/drd/:key`
+- **V2 endpoint**: `GET /v2/decision-requirements/:decisionRequirementsKey`
+
+<Tabs groupId="get-decision-requirements" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments', },
+{label: 'Output adjustments', value: 'output-adjustments', },
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- The request parameters attributes remain unchanged.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Attributes attribute `id` has been removed.
+- The attribute `key` was replaced to `decisionRequirementsKey`
+
+</TabItem>
+
+</Tabs>
+
+#### Get decision requirements as XML by key
+
+- **V1 endpoint**: `GET /v1/drd/:key/xml`
+- **V2 endpoint**: `GET /v2/decision-requirements/:decisionRequirementsKey/xml`
+
+There are no changes to the request or response for this endpoint.
+
 <!--- TODO: insert output adjustments --->
 
 <!--- TODO: open questions and related resources --->
