@@ -56,7 +56,40 @@ See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for
 
 ### Accessing user task data
 
-User task-specific data, such as `assignee` and `priority`, is accessible through the job headers.
+User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job. The following properties can be retrieved using predefined header names from the `Protocol` class:
+
+| Property          | Header name                                       |
+| ----------------- | ------------------------------------------------- |
+| `action`          | `Protocol.USER_TASK_ACTION_HEADER_NAME`           |
+| `assignee`        | `Protocol.USER_TASK_ASSIGNEE_HEADER_NAME`         |
+| `candidateGroups` | `Protocol.USER_TASK_CANDIDATE_GROUPS_HEADER_NAME` |
+| `candidateUsers`  | `Protocol.USER_TASK_CANDIDATE_USERS_HEADER_NAME`  |
+| `dueDate`         | `Protocol.USER_TASK_DUE_DATE_HEADER_NAME`         |
+| `followUpDate`    | `Protocol.USER_TASK_FOLLOW_UP_DATE_HEADER_NAME`   |
+| `formKey`         | `Protocol.USER_TASK_FORM_KEY_HEADER_NAME`         |
+| `userTaskKey`     | `Protocol.USER_TASK_KEY_HEADER_NAME`              |
+| `priority`        | `Protocol.USER_TASK_PRIORITY_HEADER_NAME`         |
+
+Below is an example of accessing the `assignee` value from the headers:
+
+```java
+import io.camunda.zeebe.protocol.Protocol;
+
+final JobHandler userTaskListenerHandler =
+    (jobClient, job) -> {
+        // Access the 'assignee' from the job headers
+        // highlight-start
+        final String assignee = job.getCustomHeaders()
+            .get(Protocol.USER_TASK_ASSIGNEE_HEADER_NAME);
+        // highlight-end
+
+        System.out.println("The assignee for this user task is: " + assignee);
+
+        // remaining job handler logic
+    };
+```
+
+Each header provides user task metadata that can be leveraged to customize the behavior of the user task listener job. Use these headers to retrieve necessary information about the user task in your job handler implementation.
 
 ### Correcting user task data
 
@@ -64,7 +97,7 @@ User task listeners can correct user task data before the lifecycle transition i
 
 If an operation is denied by a listener, no corrections are applied to the user task.
 
-Below is an example of how to correct the user task data form a job worker for the user task listener job:
+Below is an example of how to correct the user task data form a job worker while completing the user task listener job:
 
 ```java
 final JobHandler completeTaskListenerJobWithCorrectionsHandler =
@@ -77,7 +110,7 @@ final JobHandler completeTaskListenerJobWithCorrectionsHandler =
                     .correctAssignee("john_doe") // assigns the user task to 'john_doe'
                     .correctDueDate(null) // preserves the current 'dueDate' of the user task
                     .correctFollowUpDate("") // clears the 'followUpDate'
-                    .correctCandidateUsers(List.of("alice", "bob")) // assigns candidate users
+                    .correctCandidateUsers(List.of("alice", "bob")) // sets candidate users
                     .correctCandidateGroups(List.of()) // clears the candidate groups
                     .correctPriority(80)) // sets the priority to 80
             // highlight-end
@@ -91,9 +124,10 @@ client.newWorker()
 
 ### Denying the operation
 
-User task listeners can deny a user task operation, such as assignment or completion, effectively preventing the lifecycle transition from completing. When an operation is denied:
+User task listeners can deny a user task operation, such as assignment or completion, effectively preventing the lifecycle transition from completing.
 
-- **Lifecycle rollback**: The transition is rolled back to the previous state.
+When an operation is denied:
+
 - **Corrections discarded**: Any corrections made by preceding listeners within the same operation are discarded.
 - **Task state preserved**: The user task retains its state and data as if the operation was never attempted.
 
@@ -106,8 +140,10 @@ final JobHandler denyUserTaskOperationHandler =
     (jobClient, job) ->
         jobClient
             .newCompleteCommand(job)
-            // highlight-next-line
-            .withResult(r -> r.deny(true))
+            // highlight-start
+            .withResult()
+            .deny(true)
+            // highlight-end
             .send();
 ```
 
