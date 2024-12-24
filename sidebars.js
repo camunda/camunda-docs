@@ -330,6 +330,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/blueprism",
+            "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/easy-post",
             "components/connectors/out-of-the-box-connectors/email",
             "components/connectors/out-of-the-box-connectors/github",

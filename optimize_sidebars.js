@@ -938,6 +938,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/blueprism/"
             ),
             docsLink(
+              "Box Connector",
+              "components/connectors/out-of-the-box-connectors/box/"
+            ),
+            docsLink(
               "EasyPost Connector",
               "components/connectors/out-of-the-box-connectors/easy-post/"
             ),
