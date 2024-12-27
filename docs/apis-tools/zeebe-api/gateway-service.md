@@ -197,7 +197,7 @@ message CompleteJobRequest {
 }
 
 message JobResult{
-  // Indicates whether the worker denies the work, for example, explicitly doesn't approve it.
+  // Indicates whether the worker denies the work, or explicitly doesn't approve it.
   // For example, a user task listener can deny the completion of a user task by setting this flag to true.
   // In this example, the completion of a task is represented by a job that the worker can complete as denied.
   // As a result, the completion request is rejected and the task remains active.
