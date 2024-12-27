@@ -94,14 +94,15 @@ ZeebeClient client =
 
 ### X.509 authorizers
 
-Several identity providers, such as Keycloak, support client X.509 authorizers as an alternative to client credentials
-flow.
+Several identity providers, such as Keycloak, support client X.509 authorizers as an alternative to client credentials flow.
 
-As a prerequisite, you need to have proper keystore and truststore configured, so that: (1) both Spring Zeebe application
-and identity provider share the same CA trust certificates; (2) both Spring Zeebe and identity provider own certificates
-signed by trusted CA; (3) your Spring Zeebe application own certificate has proper `Distinguished Name` (DN), e.g.
-`CN=My Zeebe Client, OU=Camunda Users, O=Best Company, C=DE`; (4) your application DN registered in the identity provider
-client authorization details.
+As a prerequisite, ensure you have proper KeyStore and TrustStore configured, so that:
+
+- Both the Spring Zeebe application and identity provider share the same CA trust certificates.
+- Both the Spring Zeebe and identity provider own certificates signed by trusted CA.
+- Your Spring Zeebe application own certificate has proper `Distinguished Name` (DN), e.g.
+  `CN=My Zeebe Client, OU=Camunda Users, O=Best Company, C=DE`.
+- Your application DN registered in the identity provider client authorization details.
 
 In that case, configuring `OAuthCredentialsProvider` might look like this
 
@@ -120,7 +121,7 @@ final OAuthCredentialsProvider provider =
             .build();
 ```
 
-Or via environment variables
+Or via environment variables:
 
 ```bash
 export ZEEBE_CLIENT_ID='[Client ID]'
@@ -133,8 +134,7 @@ export ZEEBE_SSL_CLIENT_TRUSTSTORE_PATH='[Truststore path]'
 export ZEEBE_SSL_CLIENT_TRUSTSTORE_SECRET='[Truststore password]'
 ```
 
-Please refer your identity provider reference page on how to configure X.509 authentication, for example,
-[Keycloak](https://www.keycloak.org/server/mutual-tls).
+Refer to your identity provider documentation on how to configure X.509 authentication. For example, [Keycloak](https://www.keycloak.org/server/mutual-tls).
 
 ## Javadoc
 

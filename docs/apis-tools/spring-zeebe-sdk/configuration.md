@@ -512,7 +512,7 @@ camunda:
 
 ### Custom identity provider security context
 
-If you require configuring SSL context exclusively for identity provider:
+If you require configuring SSL context exclusively for your identity provider:
 
 ```yaml
 camunda:
@@ -525,15 +525,15 @@ camunda:
       truststore-password: password
 ```
 
-- **keystore-path**: path to client's keystore; can be both in JKS or PKCS12 formats
-- **keystore-password**: keystore password
-- **keystore-key-password**: key material password
-- **truststore-path**: path to client's truststore
-- **truststore-password**: truststore password
+- **keystore-path**: Path to client's KeyStore; can be both in JKS or PKCS12 formats
+- **keystore-password**: KeyStore password
+- **keystore-key-password**: Key material password
+- **truststore-path**: Path to client's TrustStore
+- **truststore-password**: TrustStore password
 
-When the properties are not specified, the default SSL context will be applied, thus if you configure application with
+When the properties are not specified, the default SSL context is applied. For example, if you configure an application with
 `javax.net.ssl.*` or `spring.ssl.*`, the latter is applied. If both `camunda.client.auth.*` and either `javax.net.ssl.*`
-or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` will take precedence.
+or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes precedence.
 
 ## Observing metrics
 
@@ -562,17 +562,17 @@ Access them via [http://localhost:8080/actuator/metrics/](http://localhost:8080/
 
 ## Using identity provider X.509 authorizers
 
-Several identity providers, such as Keycloak, support client X.509 authorizers as an alternative to client credentials
-flow.
+Several identity providers, such as Keycloak, support client X.509 authorizers as an alternative to client credentials flow.
 
-As a prerequisite, you need to have proper keystore and truststore configured, so that: (1) both Spring Zeebe application
-and identity provider share the same CA trust certificates; (2) both Spring Zeebe and identity provider own certificates
-signed by trusted CA; (3) your Spring Zeebe application own certificate has proper `Distinguished Name` (DN), e.g.
-`CN=My Zeebe Client, OU=Camunda Users, O=Best Company, C=DE`; (4) your application DN registered in the identity provider
-client authorization details.
+As a prerequisite, ensure you have proper KeyStore and TrustStore configured, so that:
 
-Once prerequisites are satisfied, your Spring Zeebe application has to be configured either via global SSL context, or
+- Both the Spring Zeebe application and identity provider share the same CA trust certificates.
+- Both the Spring Zeebe and identity provider own certificates signed by trusted CA.
+- Your Spring Zeebe application own certificate has proper `Distinguished Name` (DN), e.g.
+  `CN=My Zeebe Client, OU=Camunda Users, O=Best Company, C=DE`.
+- Your application DN registered in the identity provider client authorization details.
+
+Once prerequisites are satisfied, your Spring Zeebe application must be configured either via global SSL context, or
 with [identity provider exclusive context](#custom-identity-provider-security-context).
 
-Please refer your identity provider reference page on how to configure X.509 authentication, for example,
-[Keycloak](https://www.keycloak.org/server/mutual-tls).
+Refer to your identity provider documentation on how to configure X.509 authentication. For example, [Keycloak](https://www.keycloak.org/server/mutual-tls).
