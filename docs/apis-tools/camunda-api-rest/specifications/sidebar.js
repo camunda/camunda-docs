@@ -599,6 +599,18 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Usage metrics",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-usage-metrics",
+        label: "Get usage metrics",
+        className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "User task",
     items: [
       {
