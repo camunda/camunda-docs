@@ -931,7 +931,7 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
    ```shell
    aws opensearch create-domain --domain-name $OPENSEARCH_NAME \
      --engine-version OpenSearch_2.15 \
-     --cluster-config  "InstanceType=t3.medium.search,InstanceCount=3,ZoneAwarenessEnabled=true,ZoneAwarenessConfig={AvailabilityZoneCount=3}" \
+     --cluster-config  "InstanceType=m7i.large.search,InstanceCount=3,ZoneAwarenessEnabled=true,ZoneAwarenessConfig={AvailabilityZoneCount=3}" \
      --node-to-node-encryption-options Enabled=true \
      --ebs-options "EBSEnabled=true,VolumeType=gp3,VolumeSize=50,Iops=3000,Throughput=125" \
      --encryption-at-rest-options Enabled=true \
@@ -942,7 +942,7 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
    - **Domain Name**: `$OPENSEARCH_NAME` is the name of the OpenSearch domain being created.
    - **Engine Version**: Uses OpenSearch version `2.15`.
    - **Cluster Configuration**:
-     - `InstanceType=t3.medium.search` specifies the instance type for the domain.
+     - `InstanceType=m7i.large.search` specifies the instance type for the domain.
      - `InstanceCount=3` creates a cluster with 3 instances.
      - `ZoneAwarenessEnabled=true` and `ZoneAwarenessConfig={AvailabilityZoneCount=3}` enable zone awareness and spread the instances across 3 availability zones to improve fault tolerance.
    - **Node-to-Node Encryption**: Encryption for traffic between nodes in the OpenSearch cluster is enabled (`Enabled=true`).
@@ -955,6 +955,12 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
    - **VPC Options**: The domain is deployed within the specified VPC, restricted to the provided subnets (`SubnetIds=${SUBNET_IDS}`) and associated security group (`SecurityGroupIds=${GROUP_ID_OPENSEARCH}`).
 
    This configuration creates a secure OpenSearch domain with encryption both in transit (between nodes) and at rest, zonal fault tolerance, and sufficient storage performance using `gp3` volumes. The access is restricted to resources in the VPC of the EKS cluster and is governed by the specified security group.
+
+:::tip
+
+The instance type `m7i.large.search` in the above example is a suggestion, and can be changed depending on your needs.
+
+:::
 
 6. Wait for the OpenSearch domain to be active:
 
