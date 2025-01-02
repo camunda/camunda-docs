@@ -1,10 +1,10 @@
 ---
 id: user-task-listeners
 title: "User task listeners"
-description: "User task listeners allow users to react to specific user task lifecycle events by executing custom logic."
+description: "User task listeners allow users to react to specific user task lifecycle events by executing custom Java code, enabling dynamic handling of user tasks."
 ---
 
-A user task listener (UTL) allows users to react to specific user task lifecycle events by executing custom logic.
+A user task listener allows users to react to specific user task lifecycle events by executing custom Java code, enabling dynamic handling of user tasks.
 
 ## About user task listeners
 
@@ -159,7 +159,7 @@ If a user task listener job fails or its expression evaluation raises an inciden
 
 There are two types of incidents for task listeners:
 
-- **Expression evaluation failure**: Raised when a property expression (e.g., `type`) fails to evaluate.
+- **Expression evaluation failure**: Raised when a property expression (for example, `type`) fails to evaluate.
 - **Job failure**: Raised when a user task listener job exhausts all retries.
 
 ## Limitations
