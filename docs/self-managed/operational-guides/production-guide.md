@@ -519,7 +519,7 @@ elasticsearch:
 
 ### Upgrade and Maintenance
 
-Make sure auto-generated secrets are mentioned by default in all relevant components.
+Make sure secrets are not auto-generated on upgrade.
 
 ### Adding more Orchestration clusters
 
