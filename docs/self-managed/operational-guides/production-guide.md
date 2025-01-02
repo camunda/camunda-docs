@@ -417,15 +417,18 @@ prometheusServiceMonitor:
 ```
 
 - A tool such as [Loki](https://grafana.com/oss/loki/) could be used for the retention and archival of logs. It can also be used to aggregate logs.
-- It is possible to enable audit logging for Camunda components to track user actions, especially for sensitive data or configuration changes. Here is an example configuration for the `production-values.yaml`:
+- It is possible to enable audit logging for Camunda components to track user actions, especially for sensitive data or configuration changes. Here is an example configuration to change the log level of optimize within the core components. This can be added in your `production-values.yaml`:
 
 ```yaml
-[placeholder to configure audit logs]
+core:
+  env:
+    - name: "OPTIMIZE_LOG_LEVEL"
+      value: "TRACE"
 ```
 
 ## Bringing it All Together
 
-Here is the full `production-values.yaml` consider all the above topics.
+Here is the full `production-values.yaml` considering all the above topics.
 
 ```yaml
 # make sure to the values.yaml in a multinamespace setting and configure console likewise
