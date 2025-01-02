@@ -5,91 +5,836 @@ description: "Search for user authorizations based on given criteria."
 sidebar_label: "Query user authorizations"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query user authorizations</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query user authorizations"}
+></Heading>
 
 <MethodEndpoint
   method={"post"}
   path={"/users/{userKey}/authorizations/search"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Search for user authorizations based on given criteria.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"userKey","in":"path","required":true,"description":"The key of the userKey of the authorization.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails
+  parameters={[
+    {
+      name: "userKey",
+      in: "path",
+      required: true,
+      description: "The key of the userKey of the authorization.",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
 
-Sort field criteria.
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  description: "Sort field criteria.",
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: {
+                            description: "The field to sort by.",
+                            type: "string",
+                          },
+                          order: {
+                            description:
+                              "The order in which to sort the related field.",
+                            enum: ["ASC", "DESC"],
+                            default: "ASC",
+                            title: "SortOrderEnum",
+                          },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        searchAfter: {
+                          description:
+                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          description:
+                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            filter: {
+              description: "The authorization search filters.",
+              allOf: [
+                {
+                  description: "Authorization search filter.",
+                  type: "object",
+                  properties: {
+                    ownerType: {
+                      description: "The type of the owner of permissions.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description: "The type of the owner of permissions.",
+                          enum: [
+                            "USER",
+                            "ROLE",
+                            "GROUP",
+                            "MAPPING",
+                            "UNSPECIFIED",
+                          ],
+                          title: "OwnerTypeEnum",
+                        },
+                      ],
+                    },
+                    ownerKey: {
+                      description: "The id of the owner of permissions.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                  },
+                  title: "AuthorizationFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "AuthorizationSearchQueryRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
 
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The field to sort by.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination criteria.
-
-</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Authorization search filter.
-
-</div><SchemaItem collapsible={false} name={"ownerType"} required={false} schemaName={"object"} qualifierMessage={"**Possible values:** [`USER`, `ROLE`, `GROUP`, `MAPPING`, `UNSPECIFIED`]"} schema={{"description":"The type of the owner of permissions.","type":"object","enum":["USER","ROLE","GROUP","MAPPING","UNSPECIFIED"],"title":"OwnerTypeEnum"}}></SchemaItem><SchemaItem collapsible={false} name={"ownerKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The id of the owner of permissions.","type":"integer","format":"int64"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The user authorization search result.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching authorizations.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"ownerKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The id of the owner of permissions.","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"ownerKey\": \"string\",\n      \"ownerType\": {},\n      \"resourceType\": {},\n      \"permissions\": [\n        {\n          \"permissionType\": {},\n          \"resourceIds\": [\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching authorizations.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"ownerKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The id of the owner of permissions.","type":"integer","format":"int64"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"ownerKey\": 0,\n      \"ownerType\": {},\n      \"resourceType\": {},\n      \"permissions\": [\n        {\n          \"permissionType\": {},\n          \"resourceIds\": [\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching authorizations.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"ownerKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The id of the owner of permissions.","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"ownerKey\": \"string\",\n      \"ownerType\": {},\n      \"resourceType\": {},\n      \"permissions\": [\n        {\n          \"permissionType\": {},\n          \"resourceIds\": [\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The user authorization search query failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user authorization search result.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching authorizations.",
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        ownerType: {
+                          description: "The type of the owner of permissions.",
+                          type: "object",
+                          allOf: [
+                            {
+                              description:
+                                "The type of the owner of permissions.",
+                              enum: [
+                                "USER",
+                                "ROLE",
+                                "GROUP",
+                                "MAPPING",
+                                "UNSPECIFIED",
+                              ],
+                              title: "OwnerTypeEnum",
+                            },
+                          ],
+                        },
+                        resourceType: {
+                          description:
+                            "The type of resource that owner have permissions.",
+                          type: "object",
+                          allOf: [
+                            {
+                              description:
+                                "The type of resource to add/remove permissions to/from.",
+                              enum: [
+                                "AUTHORIZATION",
+                                "MAPPING_RULE",
+                                "MESSAGE",
+                                "BATCH",
+                                "APPLICATION",
+                                "SYSTEM",
+                                "TENANT",
+                                "DEPLOYMENT",
+                                "PROCESS_DEFINITION",
+                                "DECISION_REQUIREMENTS_DEFINITION",
+                                "DECISION_DEFINITION",
+                                "GROUP",
+                                "USER",
+                                "ROLE",
+                              ],
+                              title: "ResourceTypeEnum",
+                            },
+                          ],
+                        },
+                        permissions: {
+                          type: "array",
+                          description: "The permissions.",
+                          items: {
+                            type: "object",
+                            properties: {
+                              permissionType: {
+                                description:
+                                  "Specifies the type of permissions.",
+                                type: "object",
+                                allOf: [
+                                  {
+                                    description:
+                                      "Specifies the type of permissions.",
+                                    enum: [
+                                      "ACCESS",
+                                      "CREATE",
+                                      "CREATE_PROCESS_INSTANCE",
+                                      "CREATE_DECISION_INSTANCE",
+                                      "READ",
+                                      "READ_PROCESS_INSTANCE",
+                                      "READ_USER_TASK",
+                                      "READ_DECISION_INSTANCE",
+                                      "UPDATE",
+                                      "UPDATE_PROCESS_INSTANCE",
+                                      "UPDATE_USER_TASK",
+                                      "DELETE",
+                                      "DELETE_PROCESS",
+                                      "DELETE_DRD",
+                                      "DELETE_FORM",
+                                      "DELETE_PROCESS_INSTANCE",
+                                    ],
+                                    title: "PermissionTypeEnum",
+                                  },
+                                ],
+                              },
+                              resourceIds: {
+                                type: "array",
+                                description:
+                                  "A list of resource IDs the permission relates to.",
+                                uniqueItems: true,
+                                items: { type: "string" },
+                              },
+                            },
+                            title: "PermissionDTO",
+                          },
+                        },
+                      },
+                      title: "AuthorizationResponseBase",
+                    },
+                  ],
+                  properties: {
+                    ownerKey: {
+                      description: "The id of the owner of permissions.",
+                      type: "string",
+                    },
+                  },
+                  title: "AuthorizationResponse",
+                },
+              },
+            },
+            title: "AuthorizationSearchResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching authorizations.",
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        ownerType: {
+                          description: "The type of the owner of permissions.",
+                          type: "object",
+                          allOf: [
+                            {
+                              description:
+                                "The type of the owner of permissions.",
+                              enum: [
+                                "USER",
+                                "ROLE",
+                                "GROUP",
+                                "MAPPING",
+                                "UNSPECIFIED",
+                              ],
+                              title: "OwnerTypeEnum",
+                            },
+                          ],
+                        },
+                        resourceType: {
+                          description:
+                            "The type of resource that owner have permissions.",
+                          type: "object",
+                          allOf: [
+                            {
+                              description:
+                                "The type of resource to add/remove permissions to/from.",
+                              enum: [
+                                "AUTHORIZATION",
+                                "MAPPING_RULE",
+                                "MESSAGE",
+                                "BATCH",
+                                "APPLICATION",
+                                "SYSTEM",
+                                "TENANT",
+                                "DEPLOYMENT",
+                                "PROCESS_DEFINITION",
+                                "DECISION_REQUIREMENTS_DEFINITION",
+                                "DECISION_DEFINITION",
+                                "GROUP",
+                                "USER",
+                                "ROLE",
+                              ],
+                              title: "ResourceTypeEnum",
+                            },
+                          ],
+                        },
+                        permissions: {
+                          type: "array",
+                          description: "The permissions.",
+                          items: {
+                            type: "object",
+                            properties: {
+                              permissionType: {
+                                description:
+                                  "Specifies the type of permissions.",
+                                type: "object",
+                                allOf: [
+                                  {
+                                    description:
+                                      "Specifies the type of permissions.",
+                                    enum: [
+                                      "ACCESS",
+                                      "CREATE",
+                                      "CREATE_PROCESS_INSTANCE",
+                                      "CREATE_DECISION_INSTANCE",
+                                      "READ",
+                                      "READ_PROCESS_INSTANCE",
+                                      "READ_USER_TASK",
+                                      "READ_DECISION_INSTANCE",
+                                      "UPDATE",
+                                      "UPDATE_PROCESS_INSTANCE",
+                                      "UPDATE_USER_TASK",
+                                      "DELETE",
+                                      "DELETE_PROCESS",
+                                      "DELETE_DRD",
+                                      "DELETE_FORM",
+                                      "DELETE_PROCESS_INSTANCE",
+                                    ],
+                                    title: "PermissionTypeEnum",
+                                  },
+                                ],
+                              },
+                              resourceIds: {
+                                type: "array",
+                                description:
+                                  "A list of resource IDs the permission relates to.",
+                                uniqueItems: true,
+                                items: { type: "string" },
+                              },
+                            },
+                            title: "PermissionDTO",
+                          },
+                        },
+                      },
+                      title: "AuthorizationResponseBase",
+                    },
+                  ],
+                  properties: {
+                    ownerKey: {
+                      description: "The id of the owner of permissions.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                  },
+                  title: "AuthorizationResponseNumberKeys",
+                },
+              },
+            },
+            title: "AuthorizationSearchResponseNumberKeys",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching authorizations.",
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        ownerType: {
+                          description: "The type of the owner of permissions.",
+                          type: "object",
+                          allOf: [
+                            {
+                              description:
+                                "The type of the owner of permissions.",
+                              enum: [
+                                "USER",
+                                "ROLE",
+                                "GROUP",
+                                "MAPPING",
+                                "UNSPECIFIED",
+                              ],
+                              title: "OwnerTypeEnum",
+                            },
+                          ],
+                        },
+                        resourceType: {
+                          description:
+                            "The type of resource that owner have permissions.",
+                          type: "object",
+                          allOf: [
+                            {
+                              description:
+                                "The type of resource to add/remove permissions to/from.",
+                              enum: [
+                                "AUTHORIZATION",
+                                "MAPPING_RULE",
+                                "MESSAGE",
+                                "BATCH",
+                                "APPLICATION",
+                                "SYSTEM",
+                                "TENANT",
+                                "DEPLOYMENT",
+                                "PROCESS_DEFINITION",
+                                "DECISION_REQUIREMENTS_DEFINITION",
+                                "DECISION_DEFINITION",
+                                "GROUP",
+                                "USER",
+                                "ROLE",
+                              ],
+                              title: "ResourceTypeEnum",
+                            },
+                          ],
+                        },
+                        permissions: {
+                          type: "array",
+                          description: "The permissions.",
+                          items: {
+                            type: "object",
+                            properties: {
+                              permissionType: {
+                                description:
+                                  "Specifies the type of permissions.",
+                                type: "object",
+                                allOf: [
+                                  {
+                                    description:
+                                      "Specifies the type of permissions.",
+                                    enum: [
+                                      "ACCESS",
+                                      "CREATE",
+                                      "CREATE_PROCESS_INSTANCE",
+                                      "CREATE_DECISION_INSTANCE",
+                                      "READ",
+                                      "READ_PROCESS_INSTANCE",
+                                      "READ_USER_TASK",
+                                      "READ_DECISION_INSTANCE",
+                                      "UPDATE",
+                                      "UPDATE_PROCESS_INSTANCE",
+                                      "UPDATE_USER_TASK",
+                                      "DELETE",
+                                      "DELETE_PROCESS",
+                                      "DELETE_DRD",
+                                      "DELETE_FORM",
+                                      "DELETE_PROCESS_INSTANCE",
+                                    ],
+                                    title: "PermissionTypeEnum",
+                                  },
+                                ],
+                              },
+                              resourceIds: {
+                                type: "array",
+                                description:
+                                  "A list of resource IDs the permission relates to.",
+                                uniqueItems: true,
+                                items: { type: "string" },
+                              },
+                            },
+                            title: "PermissionDTO",
+                          },
+                        },
+                      },
+                      title: "AuthorizationResponseBase",
+                    },
+                  ],
+                  properties: {
+                    ownerKey: {
+                      description: "The id of the owner of permissions.",
+                      type: "string",
+                    },
+                  },
+                  title: "AuthorizationResponse",
+                },
+              },
+            },
+            title: "AuthorizationSearchResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The user authorization search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
