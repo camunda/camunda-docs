@@ -1,7 +1,7 @@
 ---
 id: polling
 title: HTTP Polling Connector
-sidebar_label: HTTP Polling Connector
+sidebar_label: HTTP Polling
 description: The HTTP Polling Connector polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes.
 ---
 

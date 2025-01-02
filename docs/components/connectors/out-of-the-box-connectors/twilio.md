@@ -1,7 +1,7 @@
 ---
 id: twilio
 title: Twilio Connector
-sidebar_label: Twilio Connector
+sidebar_label: Twilio
 description: Integrate your BPMN service with Twilio's messaging API to send SMS messages, get messages, and more.
 ---
 
