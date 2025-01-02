@@ -28,7 +28,7 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **s3 Bucket** - This will be used to store backups of the Camunda cluster. This s3 bucket must be configured with OpenSearch to take backups.
 - **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
 - **Namespace Configuration**: Plan and create namespaces with appropriate resource quotas and LimitRanges for the Camunda Helm Chart.
-- **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment. Have a look at our [sizing guide](/docs/next/components/best-practices/architecture/sizing-your-environment/#camunda-8-self-managed) for more information.
+- **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment. Have a look at our [sizing guide](/components/best-practices/architecture/sizing-your-environment.md/#camunda-8-self-managed) for more information.
 
 Ensure all prerequisites are in place to avoid issues during installation or upgrading in a production environment.
 
@@ -107,7 +107,7 @@ core:
         secretName: camunda-platform-core-grpc
 ```
 
-For more information on the Ingress setup, please refer to our [ingress setup guide](http://localhost:3000/docs/next/self-managed/setup/guides/ingress-setup/)
+For more information on the Ingress setup, please refer to our [ingress setup guide](/self-managed/setup/guides/ingress-setup.md)
 
 ### Identity Provider Integration:
 
@@ -155,7 +155,7 @@ global:
 
 If you would like some more guidance relating to authentication, then please refer to the following guides:
 
-- [Connect to an OpenID Connect provider](http://localhost:3000/docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/)
+- [Connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md)
 
 ### Connect External Databases
 
@@ -223,10 +223,10 @@ The `existingSecret` can be used to specify an existing Kubernetes secret with t
 
 If you would like further information on connecting to external databases, we have a number of guides on doing so with the Camunda Helm Chart:
 
-- [Using existing Elasticsearch](/docs/self-managed/setup/guides/using-existing-elasticsearch/)
-- [Using Amazon OpenSearch Service](/docs/self-managed/setup/guides/using-existing-opensearch/)
-  - [Using Amazon OpenSearch Service through IRSA (only applicable if you are running Camunda Platform on EKS)](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
-- [Running Web Modeler on Amazon Aurora PostgreSQL](/docs/self-managed/modeler/web-modeler/configuration/database/#running-web-modeler-on-amazon-aurora-postgresql)
+- [Using existing Elasticsearch](/self-managed/setup/guides/using-existing-elasticsearch.md)
+- [Using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md)
+  - [Using Amazon OpenSearch Service through IRSA (only applicable if you are running Camunda Platform on EKS)](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
+- [Running Web Modeler on Amazon Aurora PostgreSQL](/self-managed/modeler/web-modeler/configuration/database.md/#running-web-modeler-on-amazon-aurora-postgresql)
 
 ## Application-Specific Configurations
 
@@ -248,11 +248,11 @@ core:
     policyName: core-record-retention-policy
 ```
 
-If you would like more information on configuring ILM policy. Please refer to [our guide](/docs/next/self-managed/operate-deployment/data-retention/).
+If you would like more information on configuring ILM policy. Please refer to [our guide](/self-managed/operate-deployment/data-retention.md).
 
 ### Configuring Backups
 
-In order to configure backups, please refer to the [backup guide](/docs/next/self-managed/operational-guides/backup-restore/backup-and-restore/) for self-managed
+In order to configure backups, please refer to the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for self-managed
 
 ## Scaling and Performance
 
@@ -269,7 +269,7 @@ core:
   replicationFactor: "3"
 ```
 
-The `core.clusterSize` refers to the amount of brokers, the `core.partitionCount` refers to how each [partition](/docs/components/zeebe/technical-concepts/partitions/) is setup in the cluster, and the `core.replicationFactor` refers to the [number of nodes](/docs/components/zeebe/technical-concepts/partitions/#replication).
+The `core.clusterSize` refers to the amount of brokers, the `core.partitionCount` refers to how each [partition](/docs/components/zeebe/technical-concepts/partitions.md) is setup in the cluster, and the `core.replicationFactor` refers to the [number of nodes](/docs/components/zeebe/technical-concepts/partitions.md/#replication).
 
 :::note
 The `core.partitionCount` does not support dynamic scaling. You will not be able to modify it on future upgrades.
@@ -324,7 +324,7 @@ A secret called `camunda-credentials` will be generated. It will include all the
 The `camunda-credentials` generated secret will not be deleted if the helm chart is uninstalled
 :::
 
-- When upgrading the Camunda Helm Chart, make sure to read the [upgrade guide](http://localhost:3000/docs/next/self-managed/operational-guides/update-guide/introduction/) before upgrading and perform the upgrade on a test environment first before attempting in production.
+- When upgrading the Camunda Helm Chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) before upgrading and perform the upgrade on a test environment first before attempting in production.
 - Make sure to not store any state or important, long term business data in the local file system of the container. A pod is transient, if the pod is restarted then the data will get wiped. It is better to create a volume and volume mount instead. Here is some example configuration for the core component to create persistent storage:
 
 ```yaml
@@ -523,7 +523,7 @@ Make sure secrets are not auto-generated on upgrade.
 
 ### Adding more Orchestration clusters
 
-The next recommended step is to setup a multi-namespace deployment. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
+The next recommended step is to setup a multi-namespace deployment. A [guide](/self-managed/setup/guides/multi-namespace-deployment.md) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
 
 ### Running benchmarks
 
