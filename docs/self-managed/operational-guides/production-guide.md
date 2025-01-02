@@ -78,7 +78,7 @@ helm install camunda camunda/camunda-platform \
 
 The following secionts will help you fill out the content for `production-values.yaml`:
 
-### Ingress TLS and Hostname setup for HTTPS Connections
+### Ingress TLS Setup
 
 In order to access the Camunda Platform through HTTPS with ingress, you have to enable TLS. To do that, you require three things:
 
@@ -115,7 +115,7 @@ core:
 
 For more information on the Ingress setup, please refer to our [ingress setup guide](http://localhost:3000/docs/next/self-managed/setup/guides/ingress-setup/)
 
-### Integrate with an Identity Provider (Azure Active Directory)
+### Identity Provider Integration:
 
 Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use Azure Active Directory. Here is an example configuration to add to your `production-values.yaml` file:
 
@@ -193,7 +193,7 @@ elasticsearch:
 
 You can see that we have globally disabled all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false` and also disable internal Elasticsearch through `elasticsearch.enabled: false`.
 
-#### Connecting to Amazon Aurora PostgreSQL for Identity:
+#### Connecting to External Database for Identity:
 
 Here is how to configure Identity with external Amazon Aurora PostgreSQL:
 
@@ -211,7 +211,7 @@ identity:
 
 Please make sure to correctly define the protocol, host, and port.
 
-#### Connecting to Amazon Aurora PostgreSQL for Web Modeler:
+#### Connecting to External Database for Web Modeler:
 
 Here is how to configure Web Modeler with external Amazon Aurora PostgreSQL:
 
@@ -225,7 +225,7 @@ webModeler:
     existingSecretPasswordKey: "database-password"
 ```
 
-The `webModeler.externalDatabase.existingSecret` can be used to specify an existing Kubernetes secret with the password.
+The `existingSecret` can be used to specify an existing Kubernetes secret with the password.
 
 If you would like further information on connecting to external databases, we have a number of guides on doing so with the Camunda Helm Chart:
 
@@ -240,11 +240,11 @@ At this point you are able to connect to your platform through HTTPS, correctly 
 
 We will continue our journey in adding to the `production-values.yaml`. Here is what you should consider for Camunda component level configurations:
 
-### Enabling Index Lifecycle Management (ILM) Policy for Amazon OpenSearch
+### Index Retention
 
-An ILM policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
+An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
-Here is how the ILM policy can be configured for the core component:
+Here is how the ILM policy can be configured for the core component. This can be added to your `production-values.yaml`:
 
 ```yaml
 core:
@@ -256,15 +256,9 @@ core:
 
 If you would like more information on configuring ILM policy. Please refer to [our guide](/docs/next/self-managed/operate-deployment/data-retention/).
 
-### Configuring Backups for Camunda Components
+### Configuring Backups
 
-```yaml
-[placeholder for configuring backups.]
-```
-
-### Other points to note
-
-- Optimize: disable ObjectVariable import by default (save space in OpenSearch). Add a setting to enable it explicitly on demand.
+In order to configure backups, please refer to the [backup guide](/docs/next/self-managed/operational-guides/backup-restore/backup-and-restore/) for self-managed
 
 ## Scaling and Performance
 
