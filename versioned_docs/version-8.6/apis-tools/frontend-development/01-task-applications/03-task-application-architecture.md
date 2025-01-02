@@ -80,6 +80,6 @@ click ZeebeRest "../../../zeebe-api-rest/zeebe-api-rest-overview"
 Follow these resources to learn more about the individual components:
 
 - Learn how to use the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx) for task, variable, and form retrieval, and to run operations on Zeebe user tasks.
-- Familiarize yourself with the [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) to run operations on job worker-based user tasks.
+- Familiarize yourself with the [Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) to run operations on job worker-based user tasks. However, note that job worker-based user tasks are deprecated with Camunda 8.6. While these are currently still supported, consider [migrating to Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md).
 - Understand how to design, embed, and customize [forms](/apis-tools/frontend-development/03-forms/01-introduction-to-forms.md).
 - Understand how this architecture fits into the overall Camunda architecture with the [Java greenfield stack](/components/best-practices/architecture/deciding-about-your-stack.md).
