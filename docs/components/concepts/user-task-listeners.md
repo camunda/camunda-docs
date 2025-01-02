@@ -27,22 +27,22 @@ User task listeners operate in a blocking manner, meaning the user task lifecycl
 
 You can configure user task listeners per BPMN user task element.
 
-### Supported operations
+### Supported events
 
-Currently, user task listeners support the following operations:
+Currently, user task listeners support the following events:
 
-- **Assigning**: Triggered when a task is assigned to a user.
-- **Completing**: Triggered when a task is completed.
+- **Assigning**: Triggered while assigning a user task.
+- **Completing**: Triggered while completing a user task.
 
 ### User task listener properties
 
 Each user task listener has the following properties:
 
-| Property    | Description                                                                                                       |
-| :---------- | :---------------------------------------------------------------------------------------------------------------- |
-| `eventType` | Specifies the user task operation that triggers the listener. Supported values are `assigning` and `completing` . |
-| `type`      | The name of the job type.                                                                                         |
-| `retries`   | The number of retries for the user task listener job.                                                             |
+| Property    | Description                                                                                                   |
+| :---------- | :------------------------------------------------------------------------------------------------------------ |
+| `eventType` | Specifies the user task event that triggers the listener. Supported values are `assigning` and `completing` . |
+| `type`      | The name of the job type.                                                                                     |
+| `retries`   | The number of retries for the user task listener job.                                                         |
 
 :::note
 If multiple user task listeners of the same `eventType` (such as multiple `assigning` listeners) are defined on the same user task, they are executed sequentially, one after the other, in the order they are defined in the BPMN model.
@@ -166,7 +166,7 @@ There are two types of incidents for task listeners:
 
 User task listeners have the following limitations:
 
-- **Limited operations support**: Currently, only assign and complete operations are supported.
+- **Limited events support**: Currently, only `assigning` and `completing` events are supported.
 - **No variable handling**: User task listener jobs cannot be completed if variables are provided.
 - **No BPMN error throwing**: Throwing BPMN errors from user task listener jobs is not supported.
 
