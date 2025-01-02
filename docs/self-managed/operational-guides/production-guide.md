@@ -24,17 +24,13 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **Amazon OpenSearch**: For indexing and analytics.
   - **Azure Active Directory**: For authentication and authorization.
 - **NGINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
-- **AWS Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups.
-- **s3 Bucket** - This will also be used to store backups of the Camunda cluster. This s3 bucket must also be configured with OpenSearch to take backups.
+- **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups.
+- **s3 Bucket** - This will be used to store backups of the Camunda cluster. This s3 bucket must be configured with OpenSearch to take backups.
 - **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
 - **Namespace Configuration**: Plan and create namespaces with appropriate resource quotas and LimitRanges for the Camunda Helm Chart.
 - **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment. Have a look at our [sizing guide](/docs/next/components/best-practices/architecture/sizing-your-environment/#camunda-8-self-managed) for more information.
-  <!-- - **Network and Security Policies**: -->
-  <!--   - Enable and configure network policies to restrict pod communication. -->
-  <!--   - Apply Pod Security Policies or Pod Security Standards (if supported by your cluster). -->
-  <!-- - **Service Account**: Create a dedicated ServiceAccount for Camunda applications with limited permissions. -->
 
-Ensure all prerequisites are in place to avoid issues during installation or scaling in a production environment.
+Ensure all prerequisites are in place to avoid issues during installation or upgrading in a production environment.
 
 ## Architecture Overview
 
@@ -42,14 +38,12 @@ Below is the high-level architecture diagram for the base production setup _(cli
 [![Infrastructure Diagram ROSA Single-Region](./assets/smarch.jpg)](./assets/smarch.pdf)
 
 - Supported Components:
-  Camunda Platform Core Applications: Zeebe, Tasklist, Operate
+  Camunda Platform Core Applications: Zeebe, Tasklist, Operate, Optimize
 - Ingress Controller (e.g., Nginx)
 - External Dependencies:
-  PostgreSQL (for persistent data storage)
-  Elasticsearch/OpenSearch (for indexing and analytics)
-  Keycloak (for authentication/authorization)
-- Other Notes:
-  The Optimize importer requires to be in a separate pod.
+  - PostgreSQL (for persistent data storage)
+  - OpenSearch (for indexing and analytics)
+  - Keycloak (for authentication/authorization)
 
 # Step-by-Step Production Guide
 
@@ -64,7 +58,7 @@ kubectl create namespace management
 kubectl create namespace orchestration
 ```
 
-Within the `management` namespace, we will install Identity, Console, and all the Web Modeler components, . Within the `orchestration` namespace, we will install the Camunda Orchestration Core componennt, along with Connectors and Optimize importer. We do not have to worry about installing each component separately since that will be handled by the Helm Chart automatically.
+Within the `management` namespace, we will install Identity, Console, and all the Web Modeler components. Within the `orchestration` namespace, we will install the Camunda Orchestration Core component, along with Connectors and Optimize importer. We do not have to worry about installing each component separately since that will be handled by the Helm Chart automatically.
 
 #### Installing the Helm Chart
 
@@ -76,7 +70,7 @@ helm install camunda camunda/camunda-platform \
     --values production-values.yaml
 ```
 
-The following secionts will help you fill out the content for `production-values.yaml`:
+The following sections will help you fill out the content for `production-values.yaml`:
 
 ### Ingress TLS Setup
 
@@ -275,7 +269,7 @@ core:
   replicationFactor: "3"
 ```
 
-The `core.clusterSize` refers to the amount of borkers, the `core.partitionCount` refers to how each [partition](/docs/components/zeebe/technical-concepts/partitions/) is setup in the cluster, and the `core.replicationFactor` refers to the [number of nodes](/docs/components/zeebe/technical-concepts/partitions/#replication).
+The `core.clusterSize` refers to the amount of brokers, the `core.partitionCount` refers to how each [partition](/docs/components/zeebe/technical-concepts/partitions/) is setup in the cluster, and the `core.replicationFactor` refers to the [number of nodes](/docs/components/zeebe/technical-concepts/partitions/#replication).
 
 :::note
 The `core.partitionCount` does not support dynamic scaling. You will not be able to modify it on future upgrades.
@@ -331,7 +325,7 @@ The `camunda-credentials` generated secret will not be deleted if the helm chart
 :::
 
 - When upgrading the Camunda Helm Chart, make sure to read the [upgrade guide](http://localhost:3000/docs/next/self-managed/operational-guides/update-guide/introduction/) before upgrading and perform the upgrade on a test environment first before attempting in production.
-- Make sure to not store any state or important, long term business data in the local file system of the container. A pod is transient, if the pod is restarted then the data will get whiped. It is better to create a volume and volume mount instead. Here is some eaxmple configuration for the core component to create persistent storage:
+- Make sure to not store any state or important, long term business data in the local file system of the container. A pod is transient, if the pod is restarted then the data will get wiped. It is better to create a volume and volume mount instead. Here is some example configuration for the core component to create persistent storage:
 
 ```yaml
 core:
@@ -345,7 +339,7 @@ core:
 ```
 
 <!-- This seems very specific to the application. I might remove this: -->
-<!-- - Mount Secrets as volumes, not enviroment variables -->
+<!-- - Mount Secrets as volumes, not environment variables -->
 
 - It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documenation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so.
 
@@ -378,11 +372,11 @@ optimize:
 
 You should only enable the auto-mounting of a service account token when the application explicitly needs access to the Kubernetes API server or you have created a service account with the exact permissions required for the application and bound it to the pod.
 
-- If you have a usecase for enabling [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) then it is recommended to do so.
+- If you have a use case for enabling [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) then it is recommended to do so.
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
 - It is possible to have a pod security standard that is suitable to the security constraints you might have. This is possible through modifying the Pod Security Admission. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/) in order to do so.
 - By default, the Camunda Helm Chart, uses a read-only root file-system configuration for the pod. It is recommended to keep this default. No addition needs to be made in your `production-values.yaml`.
-- Disable privelaged containers
+- Disable privileged containers
 - It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is a configuration for the core component that can be added to your `production-values.yaml`:
 
 ```yaml
@@ -529,7 +523,7 @@ Make sure auto-generated secrets are mentioned by default in all relevant compon
 
 ### Adding more Orchestration clusters
 
-The next recommended step is to setup a multi-namespace deployemnt. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
+The next recommended step is to setup a multi-namespace deployment. A [guide](/docs/self-managed/setup/guides/multi-namespace-deployment/) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
 
 ### Running benchmarks
 
