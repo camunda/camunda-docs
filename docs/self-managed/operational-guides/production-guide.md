@@ -198,18 +198,34 @@ You can see that we have globally disabled all internal component configuration 
 Here is how to configure Identity with external Amazon Aurora PostgreSQL:
 
 ```yaml
-Placeholder for external postgresql connection for identity.
+identity:
+  externalDatabase:
+    enabled: true
+    host: "external-postgres-host"
+    port: 5432
+    username: "identity_user"
+    database: "identity_db"
+    existingSecret: "identity-db-secret"
+    existingSecretPasswordKey: "database-password"
 ```
+
+Please make sure to correctly define the protocol, host, and port.
 
 #### Connecting to Amazon Aurora PostgreSQL for Web Modeler:
 
 Here is how to configure Web Modeler with external Amazon Aurora PostgreSQL:
 
 ```yaml
-Placeholder for external postgresql connection for web-modeler.
+webModeler:
+  externalDatabase:
+    url: "jdbc:postgresql://external-postgres-host:5432/camunda_db"
+    user: "camunda_user"
+    password: "secure_password"
+    existingSecret: "camunda-db-secret"
+    existingSecretPasswordKey: "database-password"
 ```
 
-Please make sure to correctly define the protocol, host, and port.
+The `webModeler.externalDatabase.existingSecret` can be used to specify an existing Kubernetes secret with the password.
 
 If you would like further information on connecting to external databases, we have a number of guides on doing so with the Camunda Helm Chart:
 
@@ -415,11 +431,97 @@ prometheusServiceMonitor:
 
 ## Bringing it All Together
 
-Here is the full and complete values.yaml consider all the above topics.
+Here is the full `production-values.yaml` consider all the above topics.
 
 ```yaml
-[placeholder for the yaml]
-(make sure to the values.yaml in a multinamespace setting and configure console likewise)
+# make sure to the values.yaml in a multinamespace setting and configure console likewise
+global:
+  ingress:
+    enabled: true
+    className: nginx
+    host: "camunda.example.com"
+    tls:
+      enabled: true
+      secretName: camunda-platform
+  elasticsearch:
+    enabled: false
+  opensearch:
+    enabled: true
+    auth:
+      username: user
+      password: pass
+    url:
+      protocol: https
+      host: opensearch.example.com
+      port: 443
+  identity:
+    auth:
+      type: "MICROSOFT"
+      issuer: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0"
+      issuerBackendUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0"
+      tokenUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token"
+      jwksUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys"
+      identity:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret: "password-string-literal"
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: "https://identity.camunda.example.com"
+        initialClaimName: "email"
+        initialClaimValue: test.user@camunda.com
+      optimize:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret: "password-string-literal"
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: "https://optimize.camunda.example.com"
+      core:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret: "password-string-literal"
+        audience: "00000000-0000-0000-0000-000000000000"
+        tokenScope: "00000000-0000-0000-0000-000000000000/.default"
+        redirectUrl: "https://core.camunda.example.com"
+      console:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
+        audience: "00000000-0000-0000-0000-000000000000"
+        existingSecret: "password-string-literal"
+        redirectUrl: "https://console.camunda.example.com"
+      webModeler:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        clientApiAudience: "00000000-0000-0000-0000-000000000000"
+        publicApiAudience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: "https://modeler.camunda.example.com"
+core:
+  retention:
+  enabled: true
+  minimumAge: 30d
+  policyName: core-record-retention-policy
+  ingress:
+    grpc:
+      enabled: true
+      className: nginx
+      host: "zeebe-grpc.camunda.example.com"
+      tls:
+        enabled: true
+        secretName: camunda-platform-core-grpc
+identity:
+  externalDatabase:
+    enabled: true
+    host: "external-postgres-host"
+    port: 5432
+    username: "identity_user"
+    database: "identity_db"
+    existingSecret: "identity-db-secret"
+    existingSecretPasswordKey: "database-password"
+webModeler:
+  externalDatabase:
+    url: "jdbc:postgresql://external-postgres-host:5432/camunda_db"
+    user: "camunda_user"
+    password: "secure_password"
+    existingSecret: "camunda-db-secret"
+    existingSecretPasswordKey: "database-password"
+
+elasticsearch:
+  enabled: false
 ```
 
 ## Other Concepts to take note of
