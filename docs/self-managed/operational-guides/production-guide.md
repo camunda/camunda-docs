@@ -22,7 +22,7 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **External Dependencies**: Provision the following external dependencies:
   - **Amazon Aurora PostgreSQL**: For persistent data storage.
   - **Amazon OpenSearch**: For indexing and analytics.
-  - **AWS Managed Microsoft Active Directory**: For authentication and authorization.
+  - **AWS Simple Active Directory**: For authentication and authorization.
 - **NGINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups.
 - **s3 Bucket** - This will be used to store backups of the Camunda cluster. This s3 bucket must be configured with OpenSearch to take backups.
@@ -111,7 +111,7 @@ For more information on the Ingress setup, please refer to our [ingress setup gu
 
 ### Identity Provider Integration:
 
-Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use AWS Managed Microsoft Active Directory. Here is an example configuration to add to your `production-values.yaml` file:
+Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use AWS Simple Active Directory. Here is an example configuration to add to your `production-values.yaml` file:
 
 ```yaml
 global:
@@ -230,7 +230,7 @@ If you would like further information on connecting to external databases, we ha
 
 ## Application-Specific Configurations
 
-At this point you are able to connect to your platform through HTTPS, correctly authenticate users using AWS Managed Microsoft Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment.
+At this point you are able to connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment.
 
 We will continue our journey in adding to the `production-values.yaml`. Here is what you should consider for Camunda component level configurations:
 
