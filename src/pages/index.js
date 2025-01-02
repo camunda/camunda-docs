@@ -124,7 +124,7 @@ function Home() {
       </header>
       <main>
         {features && features.length > 0 && (
-          <section className={styles.features}>
+          <section className={(styles.features, styles.featuresBlock)}>
             <div className="container">
               <div className={styles.featuresGrid}>
                 {features.map((props, idx) => (
