@@ -102,6 +102,8 @@ For OpenSearch we also have similar configurations:
 | camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self-signed.                                                                                                                                                                                                                                                       | false                 |
 | camunda.tasklist.opensearch.ssl.verifyHostname  | Should the hostname be validated.                                                                                                                                                                                                                                                  | false                 |
 
+For local development environments, OpenSearch is configured to run on port 9205 by default, enhancing the developer experience by avoiding conflicts with Elasticsearch services.
+
 By default, Tasklist always tries to connect to Elasticsearch. To define the database to use, the configuration below is mandatory (if this configuration is missed, Elasticsearch is used as the selected database):
 
 | Name                      | Description                                                                                    | Default value |
