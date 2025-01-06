@@ -1,7 +1,7 @@
 ---
 id: node-js-sdk
 title: Node.js
-description: Get started with the official Camunda 8 JavaScript SDK for Node.js, available via npm.
+description: Get started with the official Camunda 8 JavaScript SDK for Node.js.
 ---
 
 As of 8.5.0, the official [Camunda 8 JavaScript SDK for Node.js](https://github.com/camunda/camunda-8-js-sdk) is available via [npm](https://www.npmjs.com/package/@camunda8/sdk).

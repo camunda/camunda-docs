@@ -5,12 +5,15 @@ sidebar_label: "Connect to an existing Keycloak instance"
 description: "Learn how to connect Identity to your existing Keycloak instance."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 In this guide, we'll demonstrate how to connect Identity to your existing Keycloak instance.
 
 ## Prerequisites
 
 - Access to your [Keycloak Admin Console](https://www.keycloak.org/docs/23.0.1/server_admin/#using-the-admin-console)
-- A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/23.0.1/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak.
+- A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/latest/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak
 
 :::note
 Clients in Camunda 8 SaaS and applications in Camunda 8 Self-Managed provide a similar purpose. One key difference is that for Camunda 8 SaaS, you can set up specific [client connection credentials](/guides/setup-client-connection-credentials.md), whereas in Identity, an application is created with credentials automatically assigned.
@@ -24,7 +27,15 @@ As of the 8.5.3 release, Identity uses the Keycloak frontend URL instead of the 
 To avoid connectivity issues, ensure your Keycloak frontend URL is accessible by adjusting your network, firewall, or security settings as needed. This adjustment is crucial to maintain the integration with Keycloak and ensure compatibility.
 :::
 
-To connect Identity to an existing Keycloak instance, take the following steps:
+To connect Identity to an existing Keycloak instance, take the following steps for your Camunda installation:
+
+<Tabs groupId="install" defaultValue="non-helm" queryString values={
+[
+{label: 'Non-Helm installations', value: 'non-helm' },
+{label: 'Helm installations', value: 'helm' },
+]}>
+
+<TabItem value='non-helm'>
 
 1. Log in to your Keycloak Admin Console.
 2. Select the realm you would like to connect Identity to. In our example, this is **camunda-platform**.
@@ -55,6 +66,18 @@ To connect Identity to an existing Keycloak instance, take the following steps:
     See the [environment variables](/self-managed/identity/deployment/configuration-variables.md) page for details of Keycloak-specific variables to consider.
     :::
 13. Start Identity.
+
+</TabItem>
+<TabItem value="helm">
+
+1. Log in to your Keycloak Admin Console.
+2. Verify the name of the realm you would like to connect Identity to. In our example, this is **camunda-platform**.
+   ![keycloak-admin-realm-select](../img/keycloak-admin-realm-select.png)
+3. Set the `KEYCLOAK_REALM` [environment variable](/self-managed/identity/deployment/configuration-variables.md) to the realm you selected in **Step 2**.
+4. Start Identity.
+
+</TabItem>
+</Tabs>
 
 :::note What does Identity create when starting?
 Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/self-managed/identity/deployment/starting-configuration.md).
