@@ -41,7 +41,7 @@ Connectors are often configured as a [BPMN process](/components/concepts/process
 
 ## Get started
 
-New to connectors? Learn how to start using connectors in your processes and about the different types of connector.
+New to connectors? Learn about connector types and how to start using connectors in your processes.
 
 <div class="connector-grid">
   <a href="../use-connectors" class="connector-card" title="How to use Connectors">
@@ -57,12 +57,12 @@ New to connectors? Learn how to start using connectors in your processes and abo
     <a href="../out-of-the-box-connectors/available-connectors-overview" class="connector-card" title="Get started with Connectors">
     <img src={IconConnectorImg} alt="How to use Connectors"/>
     <h3>Camunda connectors</h3>
-    <p>Explore the docs for our library of prebuilt Camunda connectors.</p>
+    <p>Find technical documentation for prebuilt Camunda connectors.</p>
   </a>
 </div>
 
 :::info
-Get started quickly by learning how you can [integrate the Sendgrid connector](/guides/configuring-out-of-the-box-connector.md).
+Get started by learning how to [integrate a Camunda 8 connector](/guides/configuring-out-of-the-box-connector.md).
 :::
 
 ## Custom connectors
@@ -94,7 +94,7 @@ Get started with our newest and most popular connectors.
 <Tabs groupId="featured" defaultValue="popular" queryString values={
 [
 {label: 'Popular', value: 'popular' },
-{label: 'New', value: 'new' },
+{label: 'Latest', value: 'new' },
 ]}>
 <TabItem value="popular">
 
