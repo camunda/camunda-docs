@@ -35,7 +35,7 @@
     "@auth0/auth0-react": "^2.2.4",
     "@bpmn-io/form-js": "^1.12.0",
     "@docusaurus/core": "^2.4.1",
-    "@docusaurus/preset-classic": "^2.4.1",
+    "@docusaurus/preset-classic": "^3.7.0",
     "@docusaurus/theme-mermaid": "^2.4.1",
     "@mdx-js/react": "^1.6.22",
     "@saucelabs/theme-github-codeblock": "^0.2.3",
