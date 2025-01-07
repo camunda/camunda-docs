@@ -228,7 +228,7 @@ If you would like further information on connecting to external databases, we ha
   - [Using Amazon OpenSearch Service through IRSA (only applicable if you are running Camunda Platform on EKS)](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
 - [Running Web Modeler on Amazon Aurora PostgreSQL](/self-managed/modeler/web-modeler/configuration/database.md/#running-web-modeler-on-amazon-aurora-postgresql)
 
-## Application-Specific Configurations
+## Camunda Core Configuration
 
 At this point you are able to connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment.
 
