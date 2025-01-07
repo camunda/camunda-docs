@@ -15,4 +15,4 @@ See [the interactive Administration API Self-Managed Explorer][administration-ap
 
 An Open API UI is also available within a running instance of Console Self-Managed at `https://${base-url}/admin-api/openapi/docs`.
 
-[administration-api-explorer]: ./specifications/sm-administration-api.info.mdx
+[administration-api-explorer]: ./specifications/administration-api-self-managed.info.mdx

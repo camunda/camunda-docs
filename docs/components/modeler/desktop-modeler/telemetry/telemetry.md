@@ -54,8 +54,8 @@ These events include the following properties:
 
 - `diagramType`: BPMN, DMN, or Form
 - Engine profile:
-  - `executionPlatform`: <target platform\>
-  - `executionPlatformVersion`: <target platform version\>
+  - `executionPlatform`: &lt;target platform\>
+  - `executionPlatformVersion`: &lt;target platform version\>
 
 In the case of a form, the payload also includes the `formFieldTypes`:
 
@@ -78,8 +78,8 @@ The `Deployment Event` and `Start Instance` have the following properties:
 
 - `diagramType`: BPMN, DMN, or Form
 - Engine profile:
-  - `executionPlatform`: <target platform\>
-  - `executionPlatformVersion`: <target platform version\>
+  - `executionPlatform`: &lt;target platform\>
+  - `executionPlatformVersion`: &lt;target platform version\>
 
 In the event of an unsuccessful deployment, an `error` property will be present in the payload containing an error code.
 
