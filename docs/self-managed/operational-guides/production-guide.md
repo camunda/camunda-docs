@@ -396,8 +396,8 @@ containerSecurityContext:
     type: RuntimeDefault
 ```
 
-- It is best to only pull from a private registry such as [Amazon ECR](https://aws.amazon.com/ecr/) and not pull directly from Docker Hub. This is because it will increase the control you have over the images, will save you from rate limits, and increase performance and reliability. Furthermore, it is possible to restrict your cluster to only pull from known registries, this can be done using [Open Policy Agent](https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e), for example.
-- Open Policy Agent can also be used to have a [whitelist for ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
+- It is recommended to pull images exclusively from a private registry, such as [Amazon ECR](https://aws.amazon.com/ecr/), rather than directly from Docker Hub. Doing so enhances control over the images, avoids rate limits, and improves performance and reliability. Additionally, you can configure your cluster to pull images only from trusted registries. Tools like [Open Policy Agent](https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e) can be used to enforce this restriction.
+- Open Policy Agent can also be used to [whitelist for ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
 
 ## Observability and Monitoring
 
