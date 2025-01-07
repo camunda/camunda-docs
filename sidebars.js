@@ -979,6 +979,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
                   ],
                 },
                 {
