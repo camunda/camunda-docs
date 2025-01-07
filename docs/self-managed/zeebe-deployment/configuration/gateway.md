@@ -410,7 +410,8 @@ Each interceptor should be configured with the values described below:
         </tr>
         <tr>
             <td>className</td>
-            <td>Entry point of the interceptor, a class which must:
+            <td>
+              Entry point of the interceptor, a class which must:
               <li>implement <a href="https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html">io.grpc.ServerInterceptor</a></li>
               <li>have public visibility</li>
               <li>have a public default constructor (i.e. no-arg constructor)</li>
@@ -457,7 +458,8 @@ Each filter should be configured with the values described below:
         </tr>
         <tr>
             <td>className</td>
-            <td>Entry point of the filter, a class which must:
+            <td>
+              Entry point of the filter, a class which must:
               <li>implement <a href="https://www.javadoc.io/doc/jakarta.servlet/jakarta.servlet-api/6.0.0/jakarta.servlet/jakarta/servlet/Filter.html">jakarta.servlet.Filter</a></li>
               <li>have public visibility</li>
               <li>have a public default constructor (i.e. no-arg constructor)</li>
