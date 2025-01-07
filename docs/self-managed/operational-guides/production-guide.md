@@ -38,11 +38,11 @@ Below is the high-level architecture diagram for the base production setup _(cli
 [![Infrastructure Diagram ROSA Single-Region](./assets/smarch.jpg)](./assets/smarch.pdf)
 
 - Supported Components:
-  Camunda Platform Core Applications: Zeebe, Tasklist, Operate, Optimize
+  Camunda Platform Core Components: Zeebe, Tasklist, Operate, Optimize
 - Ingress Controller (e.g., Nginx)
 - External Dependencies:
   - PostgreSQL (for persistent data storage)
-  - OpenSearch (for indexing and analytics)
+  - AWS OpenSearch (for indexing and analytics)
   - Keycloak (for authentication/authorization)
 
 # Step-by-Step Production Guide
@@ -403,7 +403,7 @@ containerSecurityContext:
 
 Here are some points to keep in mind when considering observability:
 
-- It is possible to enable Prometheus on the Camunda Helm Chart. This can be added to your `production-values.yaml`:
+- It is possible to enable integration with Prometheus, a popular monitoring solution, in the Camunda Helm Chart. This can be configured by adding values below to your production-values.yaml:
 
 ```yaml
 prometheusServiceMonitor:
