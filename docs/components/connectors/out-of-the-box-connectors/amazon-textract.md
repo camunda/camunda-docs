@@ -56,10 +56,19 @@ Ensure the region matches the location of your Textract service and S3 buckets t
 
 Select the desired execution type from the **Execution Type** dropdown:
 
-- **Real-time**: Use for single-page PDF documents or smaller files that require immediate text extraction. This method processes the document instantly, allowing you to quickly retrieve the data.
+- **Real-time**: Use for small files that require immediate text extraction. This method processes the document instantly, allowing you to quickly retrieve the data.
+
+  In this mode, you can select the document location using **Document location type** field.
+
+  - S3
+  - Camunda Document
 
   :::note
-  **Real-time** execution only supports single-page PDFs. For multi-page PDFs, consider using **Polling** or **Asynchronous** execution. For more information, refer to [real-time PDF processing](https://aws.amazon.com/about-aws/whats-new/2022/01/amazon-textract-pdf-processing-jpeg-encoded-images/).
+  **Real-time** execution with **S3** document location only supports single-page PDFs. For multi-page PDFs, consider using **Polling** or **Asynchronous** execution. For more information, refer to [real-time PDF processing](https://aws.amazon.com/about-aws/whats-new/2022/01/amazon-textract-pdf-processing-jpeg-encoded-images/).
+  :::
+
+  :::note
+  **Real-time** execution with **Camunda Document** location supports only PNG or JPEG formats.
   :::
 
 - **Polling**: The **Polling** execution type collects data in chunks. After processing the document, it returns a token that allows you to retrieve the next result. This method is ideal for multi-page documents or large files that take longer to process.
@@ -110,6 +119,15 @@ At least one feature type must be selected, and choosing multiple options can pr
 #### Document version (optional)
 
 Specify the **Document Version** if you need to process a specific version of the document. If unspecified, the latest version of the document is processed. Document versioning is useful for tracking changes over time or processing a specific document iteration.
+
+#### Document
+
+Mandatory only for **Real-time** execution with **Camunda Document** location type.
+
+:::note
+To work with document you must upload them first, [using the REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
+:::
 
 ## Response
 
