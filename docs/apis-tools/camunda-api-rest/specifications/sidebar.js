@@ -5,6 +5,18 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Authentication",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-authentication",
+        label: "Get current user",
+        className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "Authorization",
     items: [
       {
@@ -16,13 +28,13 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-authorizations",
-        label: "Query authorizations (alpha)",
+        label: "Query authorizations",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-user-authorizations",
-        label: "Query user authorizations (alpha)",
+        label: "Query user authorizations",
         className: "api-method post",
       },
     ],
@@ -64,19 +76,19 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-decision-definitions",
-        label: "Query decision definitions (alpha)",
+        label: "Query decision definitions",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-decision-definition",
-        label: "Get decision definition (alpha)",
+        label: "Get decision definition",
         className: "api-method get",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-decision-definition-xml",
-        label: "Get decision definition XML (alpha)",
+        label: "Get decision definition XML",
         className: "api-method get",
       },
       {
@@ -94,13 +106,13 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-decision-instances",
-        label: "Query decision instances (alpha)",
+        label: "Query decision instances",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-decision-instance",
-        label: "Get decision instance (alpha)",
+        label: "Get decision instance",
         className: "api-method get",
       },
     ],
@@ -112,19 +124,19 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-decision-requirements",
-        label: "Query decision requirements (alpha)",
+        label: "Query decision requirements",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-decision-requirements",
-        label: "Get decision requirements (alpha)",
+        label: "Get decision requirements",
         className: "api-method get",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-decision-requirements-xml",
-        label: "Get decision requirements XML (alpha)",
+        label: "Get decision requirements XML",
         className: "api-method get",
       },
     ],
@@ -178,14 +190,62 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-flow-node-instances",
-        label: "Query flow node instances (alpha)",
+        label: "Query flow node instances",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-flow-node-instance",
-        label: "Get flow node instance (alpha)",
+        label: "Get flow node instance",
         className: "api-method get",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Group",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-group",
+        label: "Create group",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-group",
+        label: "Get group",
+        className: "api-method get",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/update-group",
+        label: "Update group",
+        className: "api-method patch",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-group",
+        label: "Delete group",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/add-user-to-group",
+        label: "Assign a user to a group",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/unassign-user-from-group",
+        label: "Unassign a user from a group",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/search-groups",
+        label: "Query groups",
+        className: "api-method post",
       },
     ],
   },
@@ -202,13 +262,13 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-incidents",
-        label: "Query incidents (alpha)",
+        label: "Query incidents",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-incident",
-        label: "Get incident (alpha)",
+        label: "Get incident",
         className: "api-method get",
       },
     ],
@@ -263,6 +323,30 @@ module.exports = [
   },
   {
     type: "category",
+    label: "Mapping rule",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-mapping-rule",
+        label: "Create mapping rule",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-mapping-rule",
+        label: "Delete a mapping rule",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/find-mappings",
+        label: "Query mappings",
+        className: "api-method post",
+      },
+    ],
+  },
+  {
+    type: "category",
     label: "Message",
     items: [
       {
@@ -286,25 +370,25 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-process-definitions",
-        label: "Query process definitions (alpha)",
+        label: "Query process definitions",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-process-definition",
-        label: "Get process definition (alpha)",
+        label: "Get process definition",
         className: "api-method get",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-process-definition-xml",
-        label: "Get process definition XML (alpha)",
+        label: "Get process definition XML",
         className: "api-method get",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-start-process-form",
-        label: "Get process start form (alpha)",
+        label: "Get process start form",
         className: "api-method get",
       },
     ],
@@ -322,13 +406,13 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-process-instance",
-        label: "Get process instance (alpha)",
+        label: "Get process instance",
         className: "api-method get",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-process-instances",
-        label: "Query process instances (alpha)",
+        label: "Query process instances",
         className: "api-method post",
       },
       {
@@ -447,6 +531,42 @@ module.exports = [
       },
       {
         type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/assign-user-to-tenant",
+        label: "Assign a user to a tenant",
+        className: "api-method put",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/remove-user-from-tenant",
+        label: "Remove a user from a tenant",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/assign-mapping-rule-to-tenant",
+        label: "Assign a mapping rule to a tenant",
+        className: "api-method put",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/remove-mapping-rule-from-tenant",
+        label: "Remove a mapping rule from a tenant",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/assign-group-to-tenant",
+        label: "Assign a group to a tenant",
+        className: "api-method put",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/remove-group-from-tenant",
+        label: "Remove a group from a tenant",
+        className: "api-method delete",
+      },
+      {
+        type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/search-tenants",
         label: "Query tenants",
         className: "api-method post",
@@ -466,7 +586,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-users",
-        label: "Query users (alpha)",
+        label: "Query users",
         className: "api-method post",
       },
       {
@@ -474,6 +594,18 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/delete-user",
         label: "Delete user",
         className: "api-method delete",
+      },
+    ],
+  },
+  {
+    type: "category",
+    label: "Usage metrics",
+    items: [
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/get-usage-metrics",
+        label: "Get usage metrics",
+        className: "api-method get",
       },
     ],
   },
@@ -496,7 +628,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-user-task",
-        label: "Get user task (alpha)",
+        label: "Get user task",
         className: "api-method get",
       },
       {
@@ -508,7 +640,7 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-user-task-form",
-        label: "Get user task form (alpha)",
+        label: "Get user task form",
         className: "api-method get",
       },
       {
@@ -520,13 +652,13 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-user-tasks",
-        label: "Query user tasks (alpha)",
+        label: "Query user tasks",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-user-task-variables",
-        label: "Query user task variables (alpha)",
+        label: "Query user task variables",
         className: "api-method post",
       },
     ],
@@ -538,26 +670,14 @@ module.exports = [
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/find-variables",
-        label: "Query variables (alpha)",
+        label: "Query variables",
         className: "api-method post",
       },
       {
         type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-variable",
-        label: "Get variable (alpha)",
+        label: "Get variable",
         className: "api-method get",
-      },
-    ],
-  },
-  {
-    type: "category",
-    label: "Mapping Rule",
-    items: [
-      {
-        type: "doc",
-        id: "apis-tools/camunda-api-rest/specifications/create-mapping-rule",
-        label: "Create mapping rule",
-        className: "api-method post",
       },
     ],
   },

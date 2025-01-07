@@ -16,7 +16,7 @@ With the 8.6 release, Camunda 8 Self-Managed requires a license key for producti
 
 Review the following documentation for your components for more information on how to provide the license key to each component as an environment variable:
 
-- [Console](/self-managed/console-deployment/configuration.md#environment-variables)
+- [Console](/self-managed/console-deployment/configuration/configuration.md#environment-variables)
 - [Zeebe](/self-managed/zeebe-deployment/configuration/configuration.md#licensing)
 - [Operate](/self-managed/operate-deployment/operate-configuration.md#licensing)
 - [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#licensing)

@@ -1,0 +1,55 @@
+---
+id: delete-mapping-rule
+title: "Delete a mapping rule"
+description: "Deletes the mapping rule with the given key."
+sidebar_label: "Delete a mapping rule"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV01v4zYQ/SvEnHZRRXK22W2qm5F427TZRZA47SH1gaJGFjcUqSWpOIag/74YUf520BToMQdDJjWcx9F7jx8teD53kD7AF17XUs+ZbRTCLAJTo+VeGn2VQwo5KvQ4xNxSSAQ5OmFlTTGQwmUf4ZgvkVVbudhC+rLvncsn1OwRlzFEUHPLK/RoCbwFzSuEFIaBf+ISIpCUtua+hAgsfm+kxRxSbxvcx56WSHmZKQ7hvWFh8oTqRIkVh7QFv6wJUGqPc7QQQWFsxX3o+nQGXTcjVFcb7dDRiA+jM3ocIu9Wy92AlzPXCIHOFY1Syxi6CM5Gp8dTUHnoPFNcPDr2xJXMGW98idpL0bPAhMWcmlw5qkQY7VF7SsfrWg1RSW1NprD66Zuj3O1WwbugY3YTIlmOnkvFTPYNhWf97Ckww5xJzR5uP1+wX88+/jJ7V3pfuzRJFotFbAtxgrn0xsbGzhNbCPpR3PuYTUu09FWWLEPG81wSJlestqQpL9ExV6OQhRTEDjE2TJsRK/E/GqIVP2FapJf14A17axadt1LPt0lsrDxQ6Jjd314x2X/FYkmMHUD3YwreKMrBM9P4NFNcPxJ5Xnp1FHQfxTVVxe1ajbsAXQTOc9+4fxXhzx8OcpNUfp9Ob1hIwYTJkRXGMl9KtwKiIiqpZdVUkJ6NRhFU/Dm0Po1GHeUkxl9RiWb4XCuugwD3ypGaVcbioJ++MKmd51r8X8wYK+dyHzeGbsMFDCK+DBV1Xdeb7FU+Xa1KmyWn9642nhWm0fmbyd5M9mayl0z2cTQ6onfN6Ctb0iFaaywzQjTWYs4WpVR9etoQV9jDrhe0+Oa1N6+9ee3Qa10EFfrSbE7h/enZl5BCMmxeJ7SluaTd7GUdHXbRPq3O141VkEIb3NOlSdKWxvkubWtjfZc8ETVP3EqeqSBIeh1ctlKPMoKrvvsYi/SCDvGr6i541eics3N2O7mbst+4xwUPp2CC3E19PjofHc1KoS9kHN9csVBh0ODWurBKSwY/mjYEvyZxfw1wKBor/fKOhoXPkyG3aMcN0bDWxoDXZ6d2CIJo+PN5pZg//p72pEtdmH74QP7hRIgVtC7MfBSfHgrt5qr3izBV1eh+0dTzcLjhW4UJ1ThPBUWgpEDtekkPl65V2HV4w/4KiOw0JlKCclZr5Vz6ssliYapEhGHrZ6ZMllRc6mSAcMnF+Mv918vxyfXVxeTr3eTkNB7F/tn3xdfG+YrrrXmEGyTjOwe1/YrbzUbxX6+cA0sen31SKy416aYvrx0M9QA7hoII0q0b6SwaXPEAbZtxh/dWdR11f2/QLiF9mG1M1Lsul47+55AWXLn9a+t2Ke9uhwvue/bqy+zReoZOrpe9o1VDLYjgEZe79+tu1kVQIs/R9nMNAWMhsPZbQ1/ci8kY64XpcnI9mU6g634AaJKdyw==
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Delete a mapping rule</h1>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/mapping-rules/{mappingKey}"}
+></MethodEndpoint>
+
+Deletes the mapping rule with the given key.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"mappingKey","in":"path","required":true,"description":"The key of the mapping rule to delete.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
+
+The mapping rule was deleted successfully.
+
+</div><div></div></TabItem><TabItem label={"401"} value={"401"}><div>
+
+The request lacks valid authentication credentials.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The mapping rule with the mappingKey was not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

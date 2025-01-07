@@ -807,7 +807,6 @@ module.exports = {
         {
           Deprecated: [
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
-            require("./docs/apis-tools/zeebe-api-rest/sidebar-schema"),
           ],
         },
       ],
@@ -971,7 +970,27 @@ module.exports = {
                     "self-managed/setup/deploy/amazon/amazon-eks/irsa",
                   ],
                 },
-                "self-managed/setup/deploy/amazon/aws-marketplace",
+                {
+                  type: "category",
+                  label: "ROSA",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                  },
+                  items: [
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "Amazon MarketPlace",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/setup/deploy/amazon/aws-marketplace",
+                  },
+                  items: [],
+                },
+                "self-managed/setup/deploy/amazon/aws-ec2",
               ],
               "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks",
@@ -1009,6 +1028,14 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      "Reference architecture": [
+        "self-managed/reference-architecture/reference-architecture",
+        "self-managed/reference-architecture/manual/manual",
+      ],
+    },
+    {
       "Operational guides": [
         {
           type: "category",
@@ -1098,7 +1125,12 @@ module.exports = {
           Console: [
             "self-managed/console-deployment/overview",
             "self-managed/console-deployment/installation",
-            "self-managed/console-deployment/configuration",
+            {
+              Configuration: [
+                "self-managed/console-deployment/configuration/configuration",
+                "self-managed/console-deployment/configuration/ssl",
+              ],
+            },
             "self-managed/console-deployment/telemetry",
           ],
           Zeebe: [

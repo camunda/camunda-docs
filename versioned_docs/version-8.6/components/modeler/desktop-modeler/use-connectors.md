@@ -12,7 +12,7 @@ Desktop Modeler automatically fetches and updates [element templates](./element-
 
 ## Automatic Connector template fetching
 
-Automatic Connector template fetching is enabled by default, and notifies you of any updates or errors.
+Automatic Connector template fetching is enabled by default, and notifies you of any updates or errors. The fetch is triggered whenever you start the application, or every 24 hours if the application is not closed.
 
 After an update check has concluded, a notification indicates if the templates are up to date or have been updated:
 
