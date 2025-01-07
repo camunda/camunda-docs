@@ -252,7 +252,7 @@ If you would like more information on configuring ILM policy. Please refer to [o
 
 ### Configuring Backups
 
-In order to configure backups, please refer to the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for self-managed
+In order to configure backups, please refer to the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for self-managed installations.
 
 ## Scaling and Performance
 
