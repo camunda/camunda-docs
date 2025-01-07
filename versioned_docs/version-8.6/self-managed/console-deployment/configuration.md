@@ -5,10 +5,6 @@ sidebar_label: "Configuration"
 description: "Read details on the configuration variables of Console Self-Managed."
 ---
 
-:::note
-Console Self-Managed is available only to [Enterprise customers](/reference/licenses.md#console).
-:::
-
 Console Self-Managed can be configured using environment variables and configuration parameters.
 
 :::note
@@ -35,6 +31,20 @@ Console environment variables could be set in Helm via the `console.env` key. Fo
 
 :::note
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on Console startup or functionality. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
+:::
+
+### Proxy
+
+These settings are useful when the application needs to make outgoing network requests in environments that require traffic to pass through a proxy server.
+
+| Environment variable | Description                                                                                    | Example value                         | Default value |
+| -------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------- | ------------- |
+| `http_proxy`         | Specifies the proxy server to be used for outgoing HTTP requests.                              | `http://proxy.example.com:8080`       | -             |
+| `https_proxy`        | Specifies the proxy server to be used for outgoing HTTPS requests.                             | `https://secureproxy.example.com:443` | -             |
+| `no_proxy`           | A comma-separated list of domain names or IP addresses for which the proxy should be bypassed. | `localhost,127.0.0.1,.example.com`    | -             |
+
+:::note
+The proxy-related environment variables are lowercase because they follow a widely accepted convention used in many system environments and tools.
 :::
 
 ## Telemetry

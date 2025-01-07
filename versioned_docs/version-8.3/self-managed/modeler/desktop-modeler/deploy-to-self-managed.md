@@ -4,6 +4,9 @@ title: Deploy diagram
 description: "Desktop Modeler can directly deploy diagrams and start process instances in Camunda 8 Self-Managed."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Desktop Modeler can directly deploy diagrams and start process instances in Camunda 8 Self-Managed. Follow the steps below to deploy a diagram:
 
 1. Click the rocket-shaped deployment icon:
@@ -30,20 +33,40 @@ Multi-tenancy is only available with authentication enabled [through Identity](/
 
 ![deployment via Camunda 8](./img/deploy-endpoint.png)
 
-4. Select **Basic**, and input your username and password in case your gateway requires basic authentication:
+4. Select your authentication method, and input the required credentials:
+
+<Tabs groupId="auth" defaultValue="basic" queryString values={
+[
+{label: 'Basic', value: 'basic' },
+{label: 'OAuth', value: 'oauth' }
+]}>
+
+  <TabItem value='basic'>
+
+For **basic authentication**, input your username and password:
 
 ![basic auth configuration](./img/deploy-with-basic-auth.png)
 
-5. Select **OAuth**, and input the credentials in case your gateway requires authentication with OAuth:
+  </TabItem>
 
-:::note
-The OAuth URL needs to contain the full path to the token endpoint, i.e. `https://<keycloak base url>/auth/realms/camunda-platform/protocol/openid-connect/token`.
-:::
+  <TabItem value='oauth'>
+
+For **OAuth**, input the credentials for your OAuth provider. These are configured as part of the default [Helm installation](/self-managed/platform-deployment/helm-kubernetes/deploy.md) and can be discovered in [Identity](/self-managed/identity/what-is-identity.md), or are set by Zeebe [environment variables](/self-managed/zeebe-deployment/security/client-authorization.md#environment-variables).
 
 ![oauth configuration](./img/deploy-with-oauth.png)
 
-6. Select the **Remember** checkbox if you want to locally store the connection information.
+| Name            | Description                          | Example value                                                                             |
+| --------------- | ------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Client ID       | The name of your Zeebe client.       | `zeebe`                                                                                   |
+| Client secret   | The password of your Zeebe client.   | `zecret`                                                                                  |
+| OAuth token url | The full path to the token endpoint. | `https://<keycloak base url>/auth/realms/camunda-platform/protocol/openid-connect/token`. |
+| OAuth audience  | The permission name for Zeebe.       | `zeebe-api`                                                                               |
 
-7. Click **Deploy** to perform the deployment.
+  </TabItem>
+  </Tabs>
+
+5. Select the **Remember** checkbox if you want to locally store the connection information.
+
+6. Click **Deploy** to perform the deployment.
 
 ![deployment successful](./img/deploy-success.png)

@@ -4,7 +4,7 @@ title: "Install Camunda 8 on an EKS cluster"
 description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Amazon EKS."
 ---
 
-<!-- (!) Note: please keep this guide aligned with docs/self-managed/setup/deploy/openshift/redhat-openshift.md -->
+<!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/setup/deploy/openshift/terraform-setup.md. The user should have a similar experience when reading both guides. -->
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -333,7 +333,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-
 
 #### Enable Enterprise components
 
-Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Enterprise components and Connectors](../../../install.md#configuring-enterprise-components-and-connectors).
+Some components are not enabled by default in this deployment. For more information on how to configure and enable these components, refer to [configuring Web Modeler, Console, and Connectors](../../../install.md#configuring-web-modeler-console-and-connectors).
 
 #### Use internal Elasticsearch instead of the managed OpenSearch
 
@@ -430,7 +430,6 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/
 
 Use these environment variables in the `kubectl` command to create the secret.
 
-- The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, you must provide those values.
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
