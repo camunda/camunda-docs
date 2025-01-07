@@ -7,7 +7,7 @@ description: "Learn how to set up the helm chart in a production setting."
 
 ## Overview
 
-This guide provides a simplified and streamlined 3-pod deployment architecture for core Camunda 8 applications using the Camunda Helm Chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
+This guide provides a simplified and streamlined architecture for core Camunda 8 applications using the Camunda Helm Chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
 
 The goal of this guide is to give you a **scenario-based, production focused, step-by-step guide** for setting up the Camunda Helm Chart. By following this guide, you should be thoroughly familiar with all of the necessary requirements for having a production ready Camunda Helm Chart.
 
