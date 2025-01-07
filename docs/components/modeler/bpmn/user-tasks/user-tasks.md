@@ -180,7 +180,7 @@ To define a user task listener, include the `zeebe:taskListeners` extension elem
 - The `type` of the listener (job type used by the external worker).
 - The number of `retries` for the user task listener job (defaults to 3 if omitted).
 
-For more details, see [User task listeners](components/concepts/user-task-listeners.md).
+For more details, see [user task listeners](components/concepts/user-task-listeners.md).
 
 ## Job worker implementation
 
