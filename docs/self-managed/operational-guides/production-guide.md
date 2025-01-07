@@ -9,7 +9,7 @@ description: "Learn how to set up the helm chart in a production setting."
 
 This guide provides a simplified and streamlined architecture for core Camunda 8 applications using the Camunda Helm Chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
 
-The goal of this guide is to give you a **scenario-based, production focused, step-by-step guide** for setting up the Camunda Helm Chart. By following this guide, you should be thoroughly familiar with all of the necessary requirements for having a production ready Camunda Helm Chart.
+The goal of this guide is to give you a **scenario-based, production focused, step-by-step guide** for setting up the Camunda Helm Chart. By following this guide, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm Chart.
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **DNS Configuration**: Access to configure DNS for your domain to point to the Kubernetes cluster ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
-  - **Amazon Aurora PostgreSQL**: For persistent data storage.
+  - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component.
   - **Amazon OpenSearch**: For indexing and analytics.
   - **AWS Simple Active Directory**: For authentication and authorization.
 - **NGINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
