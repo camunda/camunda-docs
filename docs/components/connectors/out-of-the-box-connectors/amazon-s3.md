@@ -25,7 +25,7 @@ Use Camunda secrets to store credentials and avoid exposing sensitive informatio
 See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 :::
 
-## Create an Amazon Bedrock Connector task
+## Create an Amazon S3 Connector task
 
 import ConnectorTask from '../../../components/react-components/connector-task.md'
 
