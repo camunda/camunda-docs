@@ -1274,7 +1274,6 @@ module.exports = {
               "Additional features": [
                 "components/userguide/additional-features/alerts",
                 "components/userguide/additional-features/export-import",
-                "components/userguide/additional-features/footer",
                 "components/userguide/additional-features/variable-labeling",
                 "components/userguide/additional-features/process-variants-comparison",
                 "components/userguide/additional-features/ml-dataset",
@@ -2931,7 +2930,6 @@ module.exports = {
                 "self-managed/optimize-deployment/configuration/localization",
                 "self-managed/optimize-deployment/configuration/object-variables",
                 "self-managed/optimize-deployment/configuration/multi-tenancy",
-                "self-managed/optimize-deployment/configuration/common-problems",
               ],
             },
             {
@@ -2949,12 +2947,6 @@ module.exports = {
                     "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8",
                   ],
                 },
-              ],
-            },
-
-            {
-              "Advanced features": [
-                "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
               ],
             },
           ],

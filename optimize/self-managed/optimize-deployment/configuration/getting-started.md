@@ -43,7 +43,3 @@ By default, Optimize is configured with 1GB JVM heap memory. Depending on your s
 ```bash
 OPTIMIZE_JAVA_OPTS=-Xmx2048m
 ```
-
-### Maximum result limits for queries
-
-It's possible that engine queries [consume a lot of memory](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-api/#query-maximum-results-limit). To mitigate this risk, you can [limit the number of results](https://docs.camunda.org/manual/latest/reference/deployment-descriptors/tags/process-engine/#queryMaxResultsLimit) a query can return. If you do this, we recommended setting the value of the `queryMaxResultsLimit` to `10000` so that the Optimize import works without any problems. This value should still be low enough so you don't run into any problems with the previously mentioned heap configurations.

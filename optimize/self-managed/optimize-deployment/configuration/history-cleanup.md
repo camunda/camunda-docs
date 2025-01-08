@@ -38,15 +38,7 @@ For details on the notation, see the [Configuration Description](./system-config
 
 All the remaining settings are entity type specific and will be explained in the following subsections.
 
-<Tabs groupId="cleanup" defaultValue="processdata" queryString values={
-[
-{label: 'Process data', value: 'processdata' },
-{label: 'Decision data', value: 'decisiondata' },
-{label: 'Ingested event', value: 'ingestedevent' }
-]
-}>
-
-<TabItem value='processdata'>
+## Process data
 
 The age of process instance data is determined by the `endTime` field of each process instance. Running instances are never cleaned up.
 
@@ -71,50 +63,6 @@ historyCleanup:
         cleanupMode: 'variables'
 ```
 
-</TabItem>
-
-<TabItem value='decisiondata'>
-
-The age of decision instance data is determined by the `evaluationTime` field of each decision instance.
-
-To enable the cleanup of decision instance data, the `historyCleanup.decisionDataCleanup.enabled` property needs to be set to `true`.
-
-Like for the [Process Data Cleanup](#process-data-cleanup), it is possible to configure a decision definition specific `ttl` using the `perDecisionDefinitionConfig` list.
-
-```
-historyCleanup:
-  ttl: 'P2Y'
-  decisionDataCleanup:
-    enabled: true
-    perDecisionDefinitionConfig:
-      'myDecisionDefinitionKey':
-        ttl: 'P3M'
-```
-
-</TabItem>
-
-<TabItem value='ingestedevent'>
-
-The age of ingested event data is determined by the [`time`](##request-body) field provided for each event at the time of ingestion.
-
-To enable the cleanup of event data, the `historyCleanup.ingestedEventCleanup.enabled` property needs to be set to `true`.
-
-```
-historyCleanup:
-  ttl: 'P2Y'
-  ingestedEventCleanup:
-    enabled: true
-```
-
-<!-- This section needs attention -->
-
-:::note
-The ingested event cleanup does not cascade down to potentially existing [event-based processes](#) that may contain data originating from ingested events. To make sure data of ingested events is also removed from event-based processes, you need to enable the [Process Data Cleanup](#process-data-cleanup) as well.
-:::
-
-</TabItem>
-</Tabs>
-
 ## Example
 
 Here is an example of what a complete cleanup configuration might look like:
@@ -132,13 +80,6 @@ historyCleanup:
         cleanupMode: 'all'
       'KeepTwoMonthsProcess':
         ttl: 'P2M'
-  decisionDataCleanup:
-    enabled: true
-    perDecisionDefinitionConfig:
-      'myDecisionDefinitionKey':
-        ttl: 'P3M'
-  ingestedEventCleanup:
-    enabled: true
 ```
 
 The above configuration results in the following setup:
@@ -149,6 +90,3 @@ The above configuration results in the following setup:
 - The `cleanupMode` performed on all process instances that passed the `ttl` period is just clearing their variable data but keeping the overall instance data like activityInstances.
 - There is a process specific setup for the process definition key `'VeryConfidentProcess'` that has a special `ttl` of one month and those will be deleted completely due the specific `cleanupMode: 'all'` configuration for them.
 - There is another process specific setup for the process definition key `'KeepTwoMonthsProcess'` that has a special `ttl` of two months.
-- The decision data cleanup is enabled.
-- There is a decision definition specific setup for the definition key `myDecisionDefinitionKey` that has a special `ttl` of three months.
-- The ingested event cleanup is enabled.

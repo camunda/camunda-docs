@@ -580,10 +580,6 @@ module.exports = {
                   "components/userguide/additional-features/export-import/"
                 ),
                 optimizeLink(
-                  "Footer",
-                  "components/userguide/additional-features/footer/"
-                ),
-                optimizeLink(
                   "Variable labeling",
                   "components/userguide/additional-features/variable-labeling/"
                 ),
@@ -754,10 +750,6 @@ module.exports = {
               ],
             },
 
-            optimizeLink(
-              "Event ingestion",
-              "apis-tools/optimize-api/event-ingestion/"
-            ),
             optimizeLink(
               "External variable ingestion",
               "apis-tools/optimize-api/external-variable-ingestion/"
@@ -1251,10 +1243,6 @@ module.exports = {
                   "Multi-tenancy",
                   "self-managed/optimize-deployment/configuration/multi-tenancy/"
                 ),
-                optimizeLink(
-                  "Common problems",
-                  "self-managed/optimize-deployment/configuration/common-problems/"
-                ),
               ],
             },
 
@@ -1436,15 +1424,6 @@ module.exports = {
                     ),
                   ],
                 },
-              ],
-            },
-
-            {
-              "Advanced features": [
-                optimizeLink(
-                  "Engine data deletion",
-                  "self-managed/optimize-deployment/advanced-features/engine-data-deletion/"
-                ),
               ],
             },
           ],
