@@ -73,6 +73,16 @@ Run the following command to stop Camunda 8:
 docker compose down -v
 ```
 
+:::caution
+This will also delete any data you created.
+:::
+
+To tear down the environment and keep any data, run the following command:
+
+```shell
+docker compose down
+```
+
 Zeebe, Operate, Tasklist, along with Optimize require a separate network from Identity as you'll see in the docker-compose file.
 
 ## Modeling and process execution
@@ -97,16 +107,6 @@ To tear down the environment (including all data and volumes), run the following
 
 ```shell
 docker compose -f docker-compose-web-modeler.yaml down -v
-```
-
-:::caution
-This will also delete any data you created.
-:::
-
-To tear down the environment and keep any data, run the following command:
-
-```shell
-docker compose -f docker-compose-web-modeler.yaml down
 ```
 
 #### Deploy or execute a process
