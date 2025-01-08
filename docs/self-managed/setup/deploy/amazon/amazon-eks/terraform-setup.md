@@ -418,6 +418,12 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
 
 1. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/opensearch/README.md).
 
+:::tip
+
+The instance type `m7i.large.search` in the above example is a suggestion, and can be changed depending on your needs.
+
+:::
+
 ### Define outputs
 
 **Terraform** allows you to define outputs, which make it easier to retrieve important values generated during execution, such as database endpoints and other necessary configurations for Helm setup.
