@@ -2402,11 +2402,21 @@ module.exports = {
                       "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                     ),
                   ],
+                  ROSA: [
+                    docsLink(
+                      "Deploy a ROSA cluster with Terraform",
+                      "self-managed/setup/deploy/amazon/openshift/terraform/"
+                    ),
+                  ],
                 },
 
                 docsLink(
                   "Install AWS Marketplace",
                   "self-managed/setup/deploy/amazon/aws-marketplace/"
+                ),
+                docsLink(
+                  "Amazon EC2",
+                  "self-managed/setup/deploy/amazon/aws-ec2/"
                 ),
               ],
             },
@@ -2497,7 +2507,12 @@ module.exports = {
         },
       ],
     },
-
+    {
+      "Reference Architecture": [
+        docsLink("Overview", "self-managed/reference-architecture/"),
+        docsLink("Manual JAR", "self-managed/reference-architecture/manual/"),
+      ],
+    },
     {
       "Operational guides": [
         {
