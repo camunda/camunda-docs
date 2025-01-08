@@ -16,7 +16,7 @@ Ensure you [authenticate](./zeebe-api-rest-authentication.md) before accessing t
 
 ### SaaS
 
-Find your region and cluster id under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
+Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 
 Example path: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v1/`
 

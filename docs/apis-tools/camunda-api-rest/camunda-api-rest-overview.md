@@ -12,13 +12,19 @@ Ensure you [authenticate](./camunda-api-rest-authentication.md) before accessing
 
 ## Context paths
 
-For SaaS: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`, and for Self-Managed installations: `http://localhost:8080/v2/`.
+### SaaS
 
-:::note
 Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 
-For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Zeebe component.
-:::
+Example path: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
+
+### Self-Managed
+
+The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/setup/guides/ingress-setup.md). The path used here is the default.
+
+Example path: `http://localhost:8080/v2/`
+
+For SaaS: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`, and for Self-Managed installations: `http://localhost:8080/v2/`.
 
 ## API Explorer
 
