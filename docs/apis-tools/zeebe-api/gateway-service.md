@@ -205,11 +205,11 @@ message JobResult{
   optional bool denied = 1;
   // Attributes that were corrected by the worker.
   // The following attributes can be corrected, additional attributes will be ignored:
-  //   * `assignee` - reset by providing an empty string
-  //   * `dueDate` - reset by providing an empty string
-  //   * `followUpDate` - reset by providing an empty string
-  //   * `candidateGroups` - reset by providing an empty list
-  //   * `candidateUsers` - reset by providing an empty list
+  //   * `assignee` - unset by providing an empty string
+  //   * `dueDate` - unset by providing an empty string
+  //   * `followUpDate` - unset by providing an empty string
+  //   * `candidateGroups` - unset by providing an empty list
+  //   * `candidateUsers` - unset by providing an empty list
   //   * `priority` - minimum 0, maximum 100, default 50
   //  Omitting any of the attributes will preserve the persisted attribute's value.
   optional JobResultCorrections corrections = 2;
