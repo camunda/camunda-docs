@@ -269,13 +269,13 @@ core:
   replicationFactor: "3"
 ```
 
-The `core.clusterSize` refers to the amount of brokers, the `core.partitionCount` refers to how each [partition](/docs/components/zeebe/technical-concepts/partitions.md) is setup in the cluster, and the `core.replicationFactor` refers to the [number of nodes](/docs/components/zeebe/technical-concepts/partitions.md/#replication).
+The `core.clusterSize` refers to the amount of brokers, the `core.partitionCount` refers to how [zeebe partitions](/docs/components/zeebe/technical-concepts/partitions.md) are configured for each cluster, and the `core.replicationFactor` refers to the [number of replicas](/docs/components/zeebe/technical-concepts/partitions.md/#replication) that each partition replicates to.
 
 :::note
 The `core.partitionCount` does not support dynamic scaling. You will not be able to modify it on future upgrades.
 :::
 
-- Check the resource (CPU and memory) limits set and make sure they are reasonable. For example, the resource limits can be changed for the core component by modifying the following values:
+- Check the resource (CPU and memory) limits set and make sure they are appropriate for your workload size. For example, the resource limits can be changed for the core component by modifying the following values:
 
 ```yaml
 core:
@@ -294,7 +294,7 @@ core:
 
 Here are some points to keep in mind when considering reliability:
 
-- Check node affinity and tolerations.
+- Check node affinity and tolerations. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) to modify the node affinity and tolerations.
 - It is possible to set a `podDisruptionBudget`. For example you can modify the following values for the Core component:
 
 ```yaml
