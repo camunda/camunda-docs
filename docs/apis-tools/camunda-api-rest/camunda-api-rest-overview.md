@@ -24,8 +24,6 @@ The context path should match the host and path defined in your Zeebe Gateway [c
 
 Example path: `http://localhost:8080/v2/`
 
-For SaaS: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`, and for Self-Managed installations: `http://localhost:8080/v2/`.
-
 ## API Explorer
 
 See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Camunda 8 REST API.
