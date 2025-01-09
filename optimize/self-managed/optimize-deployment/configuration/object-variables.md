@@ -29,11 +29,7 @@ The value of list properties within objects as well as variables which are lists
 
 ## Optimize configuration
 
-<!-- This section needs attention-->
-
-The import of object variable values is enabled by default and can be disabled using the `import.data.variable.includeObjectVariableValue` [configuration](#).
-
-## Other system configurations
+The import of object variable values is enabled by default and can be disabled using the `import.data.variable.includeObjectVariableValue` configuration.
 
 Depending on where the imported object variables originate, the following configuration is required to ensure that your system produces object variable data that Optimize can import correctly:
 
