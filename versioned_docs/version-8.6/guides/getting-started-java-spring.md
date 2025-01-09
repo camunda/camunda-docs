@@ -50,7 +50,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 Next, create a new Spring Boot project:
 
 1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
-2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.3.3).
+2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.4.1).
 3. Under **Project Metadata**, configure the following:
    1. **Group**: `io.camunda.demo`
    2. **Artifact**: `process_payments`
