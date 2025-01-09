@@ -95,6 +95,9 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
 
+# Remove Tasklist GraphQL API
+RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
+
 # Finalize the renaming of Console SM API to Administration API (Self-Managed)
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/sm-administration-api/?$ /docs/next/apis-tools/administration-sm-api/specifications/administration-api-self-managed/ [R=301,L]
 

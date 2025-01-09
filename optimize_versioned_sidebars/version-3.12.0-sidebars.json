@@ -1923,7 +1923,6 @@
             "apis-tools/optimize-api/variable-labeling"
           ]
         },
-
         {
           "Tasklist API (GraphQL)": [
             {
@@ -2138,7 +2137,6 @@
             }
           ]
         },
-
         {
           "Tasklist API (REST)": [
             {
