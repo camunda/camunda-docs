@@ -93,7 +93,7 @@ For [user task listeners](components/concepts/user-task-listeners.md) job worker
 Job results are used to define:
 
 1. **Corrections**: Updates to specific user task attributes, such as assignee, due date, follow-up date, candidate users, candidate groups, and priority, before the task transition is finalized. For more details, see [Correcting user task data](components/concepts/user-task-listeners.md/#correcting-user-task-data).
-2. **Denial**: Indicates that the operation should be explicitly denied. Denying an operation prevents the task lifecycle transition and discards any corrections made by previous listeners. For more details, see [Denying the operation](components/concepts/user-task-listeners.md/#denying-the-operation).
+2. **Denial**: Indicates that the lifecycle transition should be explicitly denied. Denying the task lifecycle transition rolls back the user task to the previous state, and discards any corrections made by previous listeners. For more details, see [Denying the operation](components/concepts/user-task-listeners.md/#denying-the-operation).
 
 Below is an example of using job result:
 
