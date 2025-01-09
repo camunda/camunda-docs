@@ -1,23 +1,28 @@
 ---
 id: user-task-listeners
 title: "User task listeners"
-description: "User task listeners allow users to react to specific user task lifecycle events by executing custom Java code, enabling dynamic handling of user tasks."
+description: "User task listeners allow users to react to specific user task lifecycle events."
 ---
 
-A user task listener allows users to react to specific user task lifecycle events by executing custom Java code, enabling dynamic handling of user tasks.
+A user task listener allows users to react to specific user task lifecycle events.
 
 ## About user task listeners
 
-User task listeners enable flexibility and control over user task behavior by allowing external logic to react to lifecycle events. This is useful for implementing custom business logic, assigning tasks, or triggering external systems without cluttering the BPMN model. Additionally, user task data can be dynamically altered during execution using the corrections feature, enabling adjustments to key attributes such as assignee, due date, priority and so on, before task state transitions are finalized.
+User task listeners provide flexibility and control over user task behavior:
+
+- They can react to user task lifecycle events, such as assigning and completing.
+- They can access user task data, such as the assignee, to execute task-specific business logic.
+- They can dynamically correct user task data during execution, allowing adjustments to key attributes such as the assignee, due date, and priority.
+- They can deny state transitions, rolling back the task to its previous state, which enables validation of task lifecycle changes.
 
 ### Use cases
 
 User task listeners are useful in the following scenarios:
 
-- Implementing complex user task assignment or reassignment logic
-- Validating user task assignments
-- Notifying users of new task assignments with contextual information
-- Reacting to task completions with custom logic
+- Implementing complex user task assignment or reassignment logic.
+- Validating user task lifecycle changes, e.g. completing with valid variables.
+- Notifying users of new task assignments with contextual information.
+- Reacting to task completions with custom logic.
 
 ### Blocking behavior
 
@@ -31,8 +36,8 @@ You can configure user task listeners per BPMN user task element.
 
 Currently, user task listeners support the following events:
 
-- **Assigning**: Triggered while assigning a user task.
-- **Completing**: Triggered while completing a user task.
+- **Assigning**: Triggered when assigning a user task.
+- **Completing**: Triggered when completing a user task.
 
 ### User task listener properties
 
@@ -50,37 +55,35 @@ If multiple user task listeners of the same `eventType` (such as multiple `assig
 
 ## Implement a user task listener
 
-User task listeners are implemented using [job workers](/components/concepts/job-workers.md), similar to execution listeners and service task jobs. The job worker processes the task listener job, applies corrections, and may optionally deny the operation.
+User task listeners are implemented using [job workers](/components/concepts/job-workers.md), similar to execution listeners and service task jobs. The job worker processes the task listener job, can apply corrections, and may optionally deny the lifecycle transition.
 
 See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for an example of how to create a job worker and handler that can also process user task listener jobs.
 
 ### Accessing user task data
 
-User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job. The following properties can be retrieved using predefined header names from the `Protocol` class:
+User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job. The following properties can be retrieved using reserved header names:
 
-| Property          | Header name                                       |
-| ----------------- | ------------------------------------------------- |
-| `action`          | `Protocol.USER_TASK_ACTION_HEADER_NAME`           |
-| `assignee`        | `Protocol.USER_TASK_ASSIGNEE_HEADER_NAME`         |
-| `candidateGroups` | `Protocol.USER_TASK_CANDIDATE_GROUPS_HEADER_NAME` |
-| `candidateUsers`  | `Protocol.USER_TASK_CANDIDATE_USERS_HEADER_NAME`  |
-| `dueDate`         | `Protocol.USER_TASK_DUE_DATE_HEADER_NAME`         |
-| `followUpDate`    | `Protocol.USER_TASK_FOLLOW_UP_DATE_HEADER_NAME`   |
-| `formKey`         | `Protocol.USER_TASK_FORM_KEY_HEADER_NAME`         |
-| `userTaskKey`     | `Protocol.USER_TASK_KEY_HEADER_NAME`              |
-| `priority`        | `Protocol.USER_TASK_PRIORITY_HEADER_NAME`         |
+| Property          | Header name                        |
+| ----------------- | ---------------------------------- |
+| `action`          | `io.camunda.zeebe:action`          |
+| `assignee`        | `io.camunda.zeebe:assignee`        |
+| `candidateGroups` | `io.camunda.zeebe:candidateGroups` |
+| `candidateUsers`  | `io.camunda.zeebe:candidateUsers`  |
+| `dueDate`         | `io.camunda.zeebe:dueDate`         |
+| `followUpDate`    | `io.camunda.zeebe:followUpDate`    |
+| `formKey`         | `io.camunda.zeebe:formKey`         |
+| `priority`        | `io.camunda.zeebe:priority`        |
+| `userTaskKey`     | `io.camunda.zeebe:userTaskKey`     |
 
-Below is an example of accessing the `assignee` value from the headers:
+Below is an example of accessing the `assignee` value from the headers in Java:
 
 ```java
-import io.camunda.zeebe.protocol.Protocol;
-
 final JobHandler userTaskListenerHandler =
     (jobClient, job) -> {
         // Access the 'assignee' from the job headers
         // highlight-start
         final String assignee = job.getCustomHeaders()
-            .get(Protocol.USER_TASK_ASSIGNEE_HEADER_NAME);
+            .get("io.camunda.zeebe:assignee");
         // highlight-end
 
         System.out.println("The assignee for this user task is: " + assignee);
@@ -93,11 +96,11 @@ Each header provides user task metadata that can be leveraged to customize the b
 
 ### Correcting user task data
 
-User task listeners can correct user task data before the lifecycle transition is finalized. Corrections allow user task listeners to update specific attributes of the user task, such as the assignee, due date, follow-up date, candidate users, candidate groups, and priority. These corrections are applied after all task listeners for the current operation have successfully completed.
+User task listeners can correct user task data before the lifecycle transition is finalized. Corrections allow user task listeners to update specific attributes of the user task, such as the assignee, due date, follow-up date, candidate users, candidate groups, and priority. These corrections are immediately available to any subsequent task listeners and are applied to the user task when the lifecycle transition is finalized, without triggering the `UPDATING` lifecycle event.
 
-If an operation is denied by a listener, no corrections are applied to the user task.
+If a lifecycle transition is denied by a listener, no corrections are applied to the user task.
 
-Below is an example of how to correct the user task data form a job worker while completing the user task listener job:
+Below is an example of how to correct the user task data from a job worker while completing the user task listener job in Java:
 
 ```java
 final JobHandler completeTaskListenerJobWithCorrectionsHandler =
@@ -122,21 +125,21 @@ client.newWorker()
     .open();
 ```
 
-### Denying the operation
+### Denying the lifecycle transition
 
-User task listeners can deny a user task operation, such as assignment or completion, effectively preventing the lifecycle transition from completing.
+User task listeners can deny the user task lifecycle transition belonging to the lifecycle event. For example, it can deny the completion of a task in reaction to the completing event, effectively preventing a user request to complete the task.
 
-When an operation is denied:
+When a lifecycle transition is denied:
 
-- **Corrections discarded**: Any corrections made by preceding listeners within the same operation are discarded.
-- **Task state preserved**: The user task retains its state and data as if the operation was never attempted.
+- **Corrections discarded**: Any corrections made by preceding listeners within the same lifecycle transition are discarded.
+- **Task state preserved**: The user task retains its state and data as if the lifecycle event never occurred.
 
-This capability is particularly useful for implementing validation logic or enforcing business rules before allowing a user task operation to proceed.
+This capability is particularly useful for implementing validation logic or enforcing business rules before allowing a user task lifecycle transition to proceed.
 
-Below is an example of how to deny a user task operation from a job worker while completing the user task listener job:
+Below is an example of how to deny a user task lifecycle transition from a job worker while completing the user task listener job in Java:
 
 ```java
-final JobHandler denyUserTaskOperationHandler =
+final JobHandler denyUserTaskLifecycleTransitionHandler =
     (jobClient, job) ->
         jobClient
             .newCompleteCommand(job)
@@ -155,7 +158,7 @@ User task listener properties, such as job `type` or `retries`, are evaluated ri
 
 ### Incident recovery
 
-If a user task listener job fails or its expression evaluation raises an incident, the operation is paused until the incident is resolved.
+If a user task listener job fails or its expression evaluation raises an incident, the lifecycle transition is paused until the incident is resolved.
 
 There are two types of incidents for task listeners:
 
@@ -177,3 +180,4 @@ User task listeners have the following limitations:
 - [Incidents](/components/concepts/incidents.md)
 - [Expressions](/components/concepts/expressions.md)
 - [Execution listeners](/components/concepts/execution-listeners.md)
+- [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
