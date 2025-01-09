@@ -160,7 +160,8 @@ Only if the increased latency does not work for your use case, for example, beca
 		</tr>
 		<tr>
 			<td class="tableblock halign-center valign-top" colspan="2">
-				<p class="tableblock">Call a named bean or java class implementing the 
+				<p class="tableblock">
+				  Call a named bean or java class implementing the 
 					<code>JavaDelegate</code> interface.
 				</p>
 			</td>
@@ -168,14 +169,17 @@ Only if the increased latency does not work for your use case, for example, beca
 				<p class="tableblock">Evaluate an expression using JUEL.</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">Use a configurable Connector
+				<p class="tableblock">
+				  Use a configurable Connector
 					<br />
 (REST or SOAP services provided out-of-the-box).
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">Pull a service task into an external worker thread and inform process engine of
-completion.</p>
+				<p class="tableblock">
+				  Pull a service task into an external worker thread and inform process engine of
+completion.
+        </p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">Execute a script inside the engine.</p>
@@ -183,7 +187,8 @@ completion.</p>
 		</tr>
     		<tr>
 			<th class="tableblock halign-left valign-top">
-				<p class="tableblock">Use with
+				<p class="tableblock">
+				  Use with
 					<br />
   BPMN elements.
 				</p>
@@ -252,7 +257,8 @@ completion.</p>
 		</tr>
 		<tr>
 			<th class="tableblock halign-left valign-top">
-				<p class="tableblock">Implement
+				<p class="tableblock">
+				  Implement
 					<br />
   via
 				</p>
@@ -261,8 +267,10 @@ completion.</p>
 				<p class="tableblock">Java (in same JVM)</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">Expression Language
-(can reference Java code)</p>
+				<p class="tableblock">
+				  Expression Language
+					(can reference Java code)
+        </p>
 			</td>
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">BPMN configuration</p>
@@ -377,9 +385,11 @@ completion.</p>
 				<p class="tableblock">Configure via</p>
 			</th>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">BPMN Attribute
+				<p class="tableblock">
+				  BPMN Attribute
 					<br />
-					<code>serviceTask
+					<code>
+					  serviceTask
 						<br />
  camunda:
 						<br />
@@ -390,9 +400,11 @@ completion.</p>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">BPMN Attribute
+				<p class="tableblock">
+				  BPMN Attribute
 					<br />
-					<code>serviceTask
+					<code>
+					  serviceTask
 						<br />
   camunda:
 						<br />
@@ -401,9 +413,11 @@ completion.</p>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">BPMN Attribute
+				<p class="tableblock">
+				  BPMN Attribute
 					<br />
-					<code>serviceTask
+					<code>
+					  serviceTask
 						<br />
   camunda:
 						<br />
@@ -412,9 +426,10 @@ completion.</p>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">BPMN Ext. Element+
- 
-					<code>serviceTask
+				<p class="tableblock">
+				  BPMN Ext. Element+
+					<code>
+					  serviceTask
 						<br />
   camunda:
 						<br />
@@ -423,9 +438,11 @@ completion.</p>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">BPMN Attributes
+				<p class="tableblock">
+				  BPMN Attributes
 					<br />
-					<code>serviceTask
+					<code>
+					  serviceTask
 						<br />
   camunda:
 						<br />
@@ -438,13 +455,15 @@ completion.</p>
 				</p>
 			</td>
 			<td class="tableblock halign-center valign-top">
-				<p class="tableblock">BPMN Element
+				<p class="tableblock">
+				  BPMN Element
 					<br />
 					<code>script</code> or
 					<br />
  BPMN Attribute
 					<br />
-					<code>scriptTask
+					<code>
+					  scriptTask
 						<br />
  camunda:
 						<br />

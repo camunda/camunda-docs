@@ -275,7 +275,7 @@ A custom maxMessageSize allows the client to receive larger or smaller responses
 camunda:
   client:
     zeebe:
-      max-message-size: 3
+      max-message-size: 4194304
 ```
 
 ### Request timeout

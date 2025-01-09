@@ -92,6 +92,54 @@ Play's rewind operation currently does not support the following elements:
 - Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
 - Play rewinds processes by initiating a new instance and executing each element. However, if any element behaves differently from the previous execution, such as a Connector returning a different result, the rewind may fail.
 
+## Scenarios
+
+Use scenarios to quickly rerun processes while tracking test coverage.
+
+For example, you can validate your process by creating and rerunning scenarios for different paths to check the process works as expected after any diagram changes are made. Scenarios allow you to replay and confirm that a process completes correctly with the predefined actions and variables.
+
+:::note
+Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline.
+:::
+
+### Save scenario
+
+To save a scenario:
+
+1. Execute a path in your process.
+1. Click **Save scenario** in the process instance header.
+
+![Save a scenario](img/play-save-scenario.png)
+
+:::tip
+To view your saved scenarios click **View all** beneath the Scenarios column in the process instance header.
+:::
+
+### Scenario coverage
+
+Scenario coverage is calculated as the percentage of flow nodes in your process that are covered, including all elements, events, and gateways. For example, the coverage is 80% if eight out of ten flow nodes are covered.
+
+- On the process definition page, covered paths are highlighted in blue. Click on individual scenarios to view their specific coverage.
+- Once a process instance is completed, the process instance header shows how much your process scenario coverage would increase if the path was saved as a scenario.
+
+![Scenario coverage](img/play-coverage.png)
+
+### Run scenario
+
+You can run scenarios on the process definition page by clicking either the **Run all scenarios** button or the **Run scenario** button with the play icon for each individual scenario.
+
+- Scenario execution results are marked with either a **Completed** or **Failed** status.
+- You must manually update a failed scenario by clicking **manually complete and update the scenario**, especially if diagram changes are made that require further user input (such as when a new flow node is added to a previously saved scenario path).
+
+![Run a scenario on the process definition page](img/play-scenario-runs.png)
+
+### Limitations {#scenarios-limitations}
+
+- Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play, in a different browser, or by a collaborator.
+- Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
+- Scenario paths that include process modifications are not supported.
+- Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
+
 ## Modify a process instance
 
 There are two main reasons to modify a process instance in Play:
@@ -111,7 +159,7 @@ Unlike in [Operate](/components/operate/userguide/process-instance-modification.
 
 ![modify process instance](img/play-modifications.png)
 
-### Limitations
+### Limitations {#modifications-limitations}
 
 Rewinding a process instance that has modifications applied to is currently not supported. Additionally, some elements do not support specific modifications:
 
@@ -177,7 +225,7 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
-### Limitations
+### Limitations {#self-managed-limitations}
 
 - Play does not support multi-tenancy.
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
