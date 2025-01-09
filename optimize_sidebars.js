@@ -2917,7 +2917,6 @@ module.exports = {
         {
           Optimize: [
             "self-managed/optimize-deployment/install-and-start",
-            "self-managed/optimize-deployment/version-policy",
             {
               Configuration: [
                 "self-managed/optimize-deployment/configuration/getting-started",

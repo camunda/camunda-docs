@@ -1191,10 +1191,6 @@ module.exports = {
               "Installation",
               "self-managed/optimize-deployment/install-and-start/"
             ),
-            optimizeLink(
-              "Version policy",
-              "self-managed/optimize-deployment/version-policy/"
-            ),
 
             {
               Configuration: [
