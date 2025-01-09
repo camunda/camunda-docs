@@ -557,7 +557,7 @@ prometheusServiceMonitor:
     release: kube-prometheus-stack
 ```
 
-## Other Concepts to take note of
+## Next Steps
 
 ### Upgrade and Maintenance
 
