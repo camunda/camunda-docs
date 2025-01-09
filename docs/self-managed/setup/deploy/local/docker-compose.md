@@ -30,11 +30,11 @@ To start a complete instance of Camunda 8 Self-Managed environment locally:
 docker compose up -d
 ```
 
-1. Wait for the environment to initialize. This may take several minutes. Monitor the logs, especially the Keycloak container log, to ensure the components have started.
+3. Wait for the environment to initialize. This may take several minutes. Monitor the logs, especially the Keycloak container log, to ensure the components have started.
 
 ### Configuration options
 
-Running `docker compose up -d` starts all Camunda components, including Identity. The [Camunda Self-Managed repository](https://github.com/camunda/camunda-self-managed) also contains the additional configuration files for lightweight development.
+Running `docker compose up -d` starts all Camunda components, including Identity. The [Camunda Self-Managed repository](https://github.com/camunda/camunda-self-managed) also contains additional configuration files for lightweight development.
 
 - **docker-compose.yaml:** Contains all Camunda 8 Components for a full stack deployment: Zeebe, Operate, Tasklist, Connectors, Optimize, Identity, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
 - **docker-compose-core.yaml:** Contains Camunda 8 Orchestration cluster components: Zeebe, Tasklist, Operate, and Connectors.
