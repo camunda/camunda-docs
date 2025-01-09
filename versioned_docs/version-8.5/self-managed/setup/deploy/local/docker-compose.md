@@ -57,8 +57,6 @@ The workflow engine Zeebe is available using gRPC at `localhost:26500`.
 docker compose down -v
 ```
 
-Zeebe, Operate, Tasklist, along with Optimize require a separate network from Identity as you'll see in the docker-compose file.
-
 ## Deploy or execute a process
 
 ### CLI
@@ -202,11 +200,3 @@ You need to configure the index patterns in Kibana before you can explore the da
 - Go to `Analytics > Discover` and select the index pattern.
 
 :::
-
-## Troubleshooting
-
-### Running on arm64 based hardware
-
-When using arm64-based hardware like a M1 or M2 Mac the Keycloak container might not start because Bitnami only
-provides amd64-based images for versions < 22. You can build and tag an arm-based
-image locally using the following command. After building and tagging the image you can start the environment.

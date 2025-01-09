@@ -83,8 +83,6 @@ To tear down the environment and keep any data, run the following command:
 docker compose down
 ```
 
-Zeebe, Operate, Tasklist, along with Optimize require a separate network from Identity as you'll see in the docker-compose file.
-
 ## Modeling and process execution
 
 ### Web Modeler
@@ -239,16 +237,3 @@ You need to configure the index patterns in Kibana before you can explore the da
 - Go to `Analytics > Discover` and select the index pattern.
 
 :::
-
-## Troubleshooting
-
-### Running on arm64 based hardware
-
-When using arm64-based hardware (for example, an M1 or M2 Mac), the Keycloak container might not start, as Bitnami only
-provides amd64-based images for versions < 22. You can build and tag an arm-based image locally using the following command:
-
-```shell
-$ DOCKER_BUILDKIT=0 docker build -t bitnami/keycloak:19.0.3 "https://github.com/camunda/camunda-platform.git#8.2.15:.keycloak/"
-```
-
-After building and tagging the image, you can start the environment.
