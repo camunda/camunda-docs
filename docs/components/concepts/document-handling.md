@@ -17,7 +17,7 @@ Below, learn about capabilities of document handling for the related components:
 
 ## Modeler
 
-A [form](/components/modeler/forms/camunda-forms-reference.md) can display documents with the [document preview component](/components/modeler/forms/form-element-library/form-element-library-document-preview.md):
+A [form](/components/modeler/forms/camunda-forms-reference.md) can display documents with the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md):
 
 ![document preview for form](./assets/document-preview.png)
 
