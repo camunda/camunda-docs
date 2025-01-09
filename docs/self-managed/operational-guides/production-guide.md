@@ -27,7 +27,6 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups.
 - **s3 Bucket** - This will be used to store backups of the Camunda cluster. This s3 bucket must be configured with OpenSearch to take backups.
 - **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
-- **Namespace Configuration**: Plan and create namespaces with appropriate resource quotas and LimitRanges for the Camunda Helm Chart.
 - **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment. Have a look at our [sizing guide](/components/best-practices/architecture/sizing-your-environment.md/#camunda-8-self-managed) for more information.
 
 Ensure all prerequisites are in place to avoid issues during installation or upgrading in a production environment.
@@ -374,7 +373,7 @@ You should only enable the auto-mounting of a service account token when the app
 - If you have a use case for enabling [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) then it is recommended to do so.
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
 - It is possible to have a pod security standard that is suitable to the security constraints you might have. This is possible through modifying the Pod Security Admission. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/) in order to do so.
-- By default, the Camunda Helm Chart, uses a read-only root file-system configuration for the pod. It is recommended to keep this default. No addition needs to be made in your `production-values.yaml`.
+- By default, The Camunda Helm Chart is configured by default to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your `production-values.yaml`.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information please visit the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 - It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is a configuration for the core component that can be added to your `production-values.yaml`:
 
