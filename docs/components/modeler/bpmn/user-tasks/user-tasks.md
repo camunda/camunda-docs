@@ -163,7 +163,7 @@ configuration parameters for tasklist applications.
 
 ### User task listeners
 
-User tasks support **user task listeners**, which allow you to execute custom Java code in response to specific user task lifecycle events.
+User tasks support **user task listeners**, which allow you to react to user task lifecycle events.
 
 #### Supported events
 
@@ -174,7 +174,7 @@ Currently, user task listeners can react to the following events:
 
 #### Configuration
 
-To define a user task listener, include the `zeebe:taskListeners` extension element within the user task in your BPMN model. This element can contain one or more `zeebe:taskListener` elements, each specifying the following properties:
+To define a user task listener, include the `zeebe:taskListeners` extension element within the user task in your BPMN model. This element can contain one or more `zeebe:taskListener` elements, each specifying the following attributes:
 
 - The `eventType` that triggers the listener (`"assigning"` or `"completing"`).
 - The `type` of the listener (job type used by the external worker).
