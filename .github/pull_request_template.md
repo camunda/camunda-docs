@@ -2,7 +2,7 @@
 
 <!-- Provide an overview of what to expect in the PR. -->
 <!-- Relate or link the associated epic or task. -->
-<!-- Add `@camunda/tech-writers` as reviewer to pull in a tech writer, or add your embedded tech writer. --> 
+<!-- Add `@camunda/tech-writers` as reviewer to pull in a tech writer, or add your embedded tech writer. -->
 
 ## When should this change go live?
 
