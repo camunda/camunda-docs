@@ -57,7 +57,7 @@ docker pull registry.camunda.cloud/bitnami/postgresql:latest
 
 The [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
 must be available in your air-gapped environment.
-It can be downloaded from GitHub or via the following commands:
+It can be downloaded from [GitHub](https://github.com/camunda/camunda-platform-helm/releases) or via the following commands:
 ```shell
 helm repo add camunda https://helm.camunda.io
 helm repo update
