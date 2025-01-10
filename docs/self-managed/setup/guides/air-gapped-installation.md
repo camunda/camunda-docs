@@ -58,11 +58,13 @@ docker pull registry.camunda.cloud/bitnami/postgresql:latest
 The [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
 must be available in your air-gapped environment.
 It can be downloaded from [GitHub](https://github.com/camunda/camunda-platform-helm/releases) or via the following commands:
+
 ```shell
 helm repo add camunda https://helm.camunda.io
 helm repo update
 helm pull camunda/camunda-platform
 ```
+
 The package is self-contained and already includes the following dependencies:
 - [Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch)
 - [Keycloak Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak)
@@ -70,9 +72,11 @@ The package is self-contained and already includes the following dependencies:
 - [Bitnami Common Helm chart](https://artifacthub.io/packages/helm/bitnami/common)
 
 Install the Helm chart by either making it available on a [private repository](https://helm.sh/docs/topics/chart_repository/) that can be accessed from the air-gapped environment or by providing the downloaded chart archive locally to Helm, e.g.:
+
 ```shell
 helm install camunda ./camunda-platform-11.1.0.tgz
 ```
+
 For supported versions, refer to our [supported environments](/reference/supported-environments.md#camunda-8-self-managed) page.
 
 ## Dependencies explained
