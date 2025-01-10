@@ -1243,11 +1243,6 @@ module.exports = {
                 ),
               ],
             },
-
-            optimizeLink(
-              "Camunda engine data reimport",
-              "self-managed/optimize-deployment/reimport/"
-            ),
           ],
 
           Identity: [
