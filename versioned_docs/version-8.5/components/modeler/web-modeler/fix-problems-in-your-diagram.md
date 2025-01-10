@@ -11,7 +11,7 @@ Based on a set of lint rules, Web Modeler continuously validates implementation 
 ![error panel](img/diagram-errors/error-panel.png)
 
 :::note
-Unexpected errors may occur in Web Modeler if process IDs, decision IDs, or form IDs are greater than 255 characters.
+An error is shown if any process ID, decision ID, or form ID is more than 255 characters in length. To resolve this error, check and shorten any IDs that exceed this character limit.
 :::
 
 ### Engine version selection
