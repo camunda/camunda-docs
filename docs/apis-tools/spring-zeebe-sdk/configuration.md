@@ -319,7 +319,7 @@ camunda:
 
 #### Max metadata size
 
-A custom maxMetadataSize @TODO
+A custom maxMetadataSize allows the client to receive larger or smaller response headers from Camunda:
 
 ```yaml
 camunda:
@@ -403,20 +403,6 @@ camunda:
   client:
     zeebe:
       rest-address: http://localhost:8080
-```
-
-#### Deployment
-
-@TODO not sure if this is used ?
-
-Enable/Disable the deployment
-
-```yaml
-camunda:
-  client:
-    zeebe:
-      deployment:
-        enabled: true
 ```
 
 #### Defaults and Overrides
