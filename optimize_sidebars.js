@@ -938,6 +938,10 @@ module.exports = {
               "components/connectors/out-of-the-box-connectors/blueprism/"
             ),
             docsLink(
+              "Box Connector",
+              "components/connectors/out-of-the-box-connectors/box/"
+            ),
+            docsLink(
               "EasyPost Connector",
               "components/connectors/out-of-the-box-connectors/easy-post/"
             ),
@@ -963,6 +967,10 @@ module.exports = {
                 docsLink(
                   "Google Sheets Connector",
                   "components/connectors/out-of-the-box-connectors/google-sheets/"
+                ),
+                docsLink(
+                  "Google Gemini Connector",
+                  "components/connectors/out-of-the-box-connectors/google-gemini/"
                 ),
               ],
             },
@@ -2043,11 +2051,6 @@ module.exports = {
                 },
               ],
             },
-
-            docsLink(
-              "Migrate to Zeebe user tasks",
-              "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
-            ),
           ],
         },
 
@@ -2228,182 +2231,125 @@ module.exports = {
                 },
               ],
             },
-
-            {
-              "Zeebe API (REST)": [
-                docsLink(
-                  "Overview",
-                  "apis-tools/zeebe-api-rest/zeebe-api-rest-overview/"
-                ),
-                docsLink(
-                  "Authentication",
-                  "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/"
-                ),
-                docsLink(
-                  "Tutorial",
-                  "apis-tools/zeebe-api-rest/zeebe-api-tutorial/"
-                ),
-
-                {
-                  Specifications: [
-                    docsLink(
-                      "Introduction",
-                      "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api/"
-                    ),
-
-                    {
-                      Cluster: [
-                        docsLink(
-                          "Get cluster topology",
-                          "apis-tools/zeebe-api-rest/specifications/get-cluster-topology/"
-                        ),
-                      ],
-                    },
-
-                    {
-                      "User task": [
-                        docsLink(
-                          "Complete a user task",
-                          "apis-tools/zeebe-api-rest/specifications/complete-a-user-task/"
-                        ),
-                        docsLink(
-                          "Assign a user task",
-                          "apis-tools/zeebe-api-rest/specifications/assign-a-user-task/"
-                        ),
-                        docsLink(
-                          "Update a user task",
-                          "apis-tools/zeebe-api-rest/specifications/update-a-user-task/"
-                        ),
-                        docsLink(
-                          "Unassign a user task",
-                          "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task/"
-                        ),
-                      ],
-                    },
-                  ],
-                },
-              ],
-            },
           ],
         },
       ],
     },
 
     {
-      Clients: [
+      "Clients & SDKs": [
         {
-          "Java client": [
-            docsLink("Quick reference", "apis-tools/java-client/"),
-            docsLink("Job worker", "apis-tools/java-client/job-worker/"),
-            docsLink("Logging", "apis-tools/java-client/logging/"),
-            docsLink(
-              "Zeebe Process Test",
-              "apis-tools/java-client/zeebe-process-test/"
-            ),
+          SDKs: [
+            docsLink("Node.js", "apis-tools/node-js-sdk/"),
 
             {
-              Examples: [
-                docsLink("Overview", "apis-tools/java-client-examples/"),
+              "Spring Zeebe": [
                 docsLink(
-                  "Deploy a process",
-                  "apis-tools/java-client-examples/process-deploy/"
+                  "Getting started",
+                  "apis-tools/spring-zeebe-sdk/getting-started/"
                 ),
                 docsLink(
-                  "Create a process instance",
-                  "apis-tools/java-client-examples/process-instance-create/"
-                ),
-                docsLink(
-                  "Create non-blocking process instances",
-                  "apis-tools/java-client-examples/process-instance-create-nonblocking/"
-                ),
-                docsLink(
-                  "Create a process instance with results",
-                  "apis-tools/java-client-examples/process-instance-create-with-result/"
-                ),
-                docsLink(
-                  "Evaluate a decision",
-                  "apis-tools/java-client-examples/decision-evaluate/"
-                ),
-                docsLink(
-                  "Open a job worker",
-                  "apis-tools/java-client-examples/job-worker-open/"
-                ),
-                docsLink(
-                  "Handle variables as POJO",
-                  "apis-tools/java-client-examples/data-pojo/"
-                ),
-                docsLink(
-                  "Request cluster topology",
-                  "apis-tools/java-client-examples/cluster-topology-request/"
+                  "Configuration",
+                  "apis-tools/spring-zeebe-sdk/configuration/"
                 ),
               ],
             },
           ],
         },
-
         {
-          "Community clients": [
-            docsLink("Component clients", "apis-tools/community-clients/"),
-
+          Clients: [
             {
-              "Zeebe clients": [
-                docsLink("C#", "apis-tools/community-clients/c-sharp/"),
+              "Java client": [
+                docsLink("Quick reference", "apis-tools/java-client/"),
+                docsLink("Job worker", "apis-tools/java-client/job-worker/"),
+                docsLink("Logging", "apis-tools/java-client/logging/"),
                 docsLink(
-                  "JavaScript/Node.js",
-                  "apis-tools/community-clients/javascript/"
+                  "Zeebe Process Test",
+                  "apis-tools/java-client/zeebe-process-test/"
                 ),
-                docsLink(
-                  "Micronaut",
-                  "apis-tools/community-clients/micronaut/"
-                ),
-                docsLink("Python", "apis-tools/community-clients/python/"),
-                docsLink("Ruby", "apis-tools/community-clients/ruby/"),
-                docsLink("Rust", "apis-tools/community-clients/rust/"),
-                docsLink("Spring", "apis-tools/community-clients/spring/"),
-                docsLink("Quarkus", "apis-tools/community-clients/quarkus/"),
-                {
-                  "CLI client": [
-                    docsLink("Quick reference", "apis-tools/cli-client/"),
-                    docsLink(
-                      "Getting started with the CLI client",
-                      "apis-tools/cli-client/cli-get-started/"
-                    ),
-                  ],
-                },
 
                 {
-                  "Go client": [
-                    docsLink("Quick reference", "apis-tools/go-client/"),
+                  Examples: [
+                    docsLink("Overview", "apis-tools/java-client-examples/"),
                     docsLink(
-                      "Getting started with the Go client",
-                      "apis-tools/go-client/go-get-started/"
+                      "Deploy a process",
+                      "apis-tools/java-client-examples/process-deploy/"
                     ),
-                    docsLink("Job worker", "apis-tools/go-client/job-worker/"),
+                    docsLink(
+                      "Create a process instance",
+                      "apis-tools/java-client-examples/process-instance-create/"
+                    ),
+                    docsLink(
+                      "Create non-blocking process instances",
+                      "apis-tools/java-client-examples/process-instance-create-nonblocking/"
+                    ),
+                    docsLink(
+                      "Create a process instance with results",
+                      "apis-tools/java-client-examples/process-instance-create-with-result/"
+                    ),
+                    docsLink(
+                      "Evaluate a decision",
+                      "apis-tools/java-client-examples/decision-evaluate/"
+                    ),
+                    docsLink(
+                      "Open a job worker",
+                      "apis-tools/java-client-examples/job-worker-open/"
+                    ),
+                    docsLink(
+                      "Handle variables as POJO",
+                      "apis-tools/java-client-examples/data-pojo/"
+                    ),
+                    docsLink(
+                      "Request cluster topology",
+                      "apis-tools/java-client-examples/cluster-topology-request/"
+                    ),
                   ],
                 },
               ],
             },
-          ],
-        },
 
-        docsLink("Build your own client", "apis-tools/build-your-own-client/"),
-      ],
-    },
+            {
+              "Community clients": [
+                docsLink("Component clients", "apis-tools/community-clients/"),
 
-    {
-      SDKs: [
-        docsLink("Node.js", "apis-tools/node-js-sdk/"),
+                {
+                  "Zeebe clients": [
+                    docsLink(
+                      "JavaScript/Node.js",
+                      "apis-tools/community-clients/javascript/"
+                    ),
+                    docsLink("Spring", "apis-tools/community-clients/spring/"),
+                    {
+                      "CLI client": [
+                        docsLink("Quick reference", "apis-tools/cli-client/"),
+                        docsLink(
+                          "Getting started with the CLI client",
+                          "apis-tools/cli-client/cli-get-started/"
+                        ),
+                      ],
+                    },
 
-        {
-          "Spring Zeebe": [
-            docsLink(
-              "Getting started",
-              "apis-tools/spring-zeebe-sdk/getting-started/"
-            ),
-            docsLink(
-              "Configuration",
-              "apis-tools/spring-zeebe-sdk/configuration/"
-            ),
+                    {
+                      "Go client": [
+                        docsLink("Quick reference", "apis-tools/go-client/"),
+                        docsLink(
+                          "Getting started with the Go client",
+                          "apis-tools/go-client/go-get-started/"
+                        ),
+                        docsLink(
+                          "Job worker",
+                          "apis-tools/go-client/job-worker/"
+                        ),
+                      ],
+                    },
+                  ],
+                },
+                docsLink(
+                  "Build your own client",
+                  "apis-tools/build-your-own-client/"
+                ),
+              ],
+            },
           ],
         },
       ],
@@ -2524,11 +2470,21 @@ module.exports = {
                       "self-managed/setup/deploy/amazon/amazon-eks/irsa/"
                     ),
                   ],
+                  ROSA: [
+                    docsLink(
+                      "Deploy a ROSA cluster with Terraform",
+                      "self-managed/setup/deploy/amazon/openshift/terraform/"
+                    ),
+                  ],
                 },
 
                 docsLink(
                   "Install AWS Marketplace",
                   "self-managed/setup/deploy/amazon/aws-marketplace/"
+                ),
+                docsLink(
+                  "Amazon EC2",
+                  "self-managed/setup/deploy/amazon/aws-ec2/"
                 ),
               ],
             },
@@ -2619,7 +2575,12 @@ module.exports = {
         },
       ],
     },
-
+    {
+      "Reference Architecture": [
+        docsLink("Overview", "self-managed/reference-architecture/"),
+        docsLink("Manual JAR", "self-managed/reference-architecture/manual/"),
+      ],
+    },
     {
       "Operational guides": [
         {

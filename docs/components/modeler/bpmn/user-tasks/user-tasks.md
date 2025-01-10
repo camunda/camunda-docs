@@ -37,6 +37,11 @@ attributes can be specified simultaneously:
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
 :::info
+The assignee attribute must adhere to the userId field’s case-sensitivity requirements.
+Note that in SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
+:::
+
+:::info
 Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](docs/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.
 :::
 
@@ -156,13 +161,34 @@ A user task can define an arbitrary number of `taskHeaders`; they are static
 metadata stored with the user task in Zeebe. The headers can be used as
 configuration parameters for tasklist applications.
 
+### User task listeners
+
+User tasks support **user task listeners**, which allow you to react to user task lifecycle events.
+
+#### Supported events
+
+Currently, user task listeners can react to the following events:
+
+- **Assigning**: Triggered while assigning a user task.
+- **Completing**: Triggered while completing a user task.
+
+#### Configuration
+
+To define a user task listener, include the `zeebe:taskListeners` extension element within the user task in your BPMN model. This element can contain one or more `zeebe:taskListener` elements, each specifying the following attributes:
+
+- The `eventType` that triggers the listener (`"assigning"` or `"completing"`).
+- The `type` of the listener (job type used by the external worker).
+- The number of `retries` for the user task listener job (defaults to 3 if omitted).
+
+For more details, see [user task listeners](components/concepts/user-task-listeners.md).
+
 ## Job worker implementation
 
 A user task does not have to be managed by Zeebe. Instead, you can also use
 job workers to implement a custom user task logic. Note that you will lose all the task lifecycle and state management features that Zeebe provides and will have to implement them yourself. Use job workers only in case you require a very specific implementation of user tasks that can't be implemented on top of Zeebe user tasks.
 
 :::info
-If you started using Camunda 8 with version 8.4 or a lower version and upgraded to 8.5 or newer, your user tasks are probably implemented as job workers. Refer to the [migration guide](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md) to find a detailed list of the differences between the task implementation types and learn how to migrate to Zeebe user tasks.
+If you started using Camunda 8 with version 8.4 or a lower version and upgraded to 8.5 or newer, your user tasks are probably implemented as job workers. Refer to the [migration guide](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md) to find a detailed list of the differences between the task implementation types and learn how to migrate to Zeebe user tasks.
 :::
 
 You can define a job worker implementation for a user task by removing its `zeebe:userTask` extension element.
@@ -280,9 +306,26 @@ A job-based user task with an embedded Camunda Form:
 </bpmn:process>
 ```
 
+#### User task listeners
+
+A user task with user task listeners configured:
+
+```xml
+<bpmn:userTask id="configure" name="Configure">
+  <bpmn:extensionElements>
+    <zeebe:taskListeners>
+      <zeebe:taskListener eventType="assigning" type="assigning-user-task-listener" retries="5" />
+      <zeebe:taskListener eventType="completing" type="completing-user-task-listener" />
+    </zeebe:taskListeners>
+    <zeebe:userTask/>
+  </bpmn:extensionElements>
+</bpmn:userTask>
+```
+
 ### References
 
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
 - [Form linking in Modeler](/components/modeler/web-modeler/advanced-modeling/form-linking.md)
 - [Job handling](/components/concepts/job-workers.md)
 - [Variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings)
+- [User task listeners](/components/concepts/user-task-listeners.md)

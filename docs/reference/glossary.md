@@ -4,6 +4,10 @@ title: "Glossary"
 description: "This section defines common terminology referenced within the documentation."
 ---
 
+### Automation cluster
+
+See [orchestration cluster](#orchestration-cluster).
+
 ### Bridge
 
 Synonym to "[Connector](#connector)".
@@ -163,6 +167,14 @@ A message contains information to be delivered to interested parties during exec
 
 - [Messages](/components/concepts/messages.md)
 
+### Orchestration cluster
+
+An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and Connectors. Previously [automation cluster](#automation-cluster).
+
+### Orchestration core
+
+An orchestration core or orchestration cluster core includes Zeebe, Operate, Tasklist, Optimize, and Identity.
+
 ### Outbound Connector
 
 Outbound [Connectors](#connector) in Camunda 8 allow workflows to trigger with external systems or services, making it possible to integrate workflows with other parts of a business process or system architecture.
@@ -263,6 +275,12 @@ This way, a Camunda workflow can receive messages from an external system or ser
 A user task is used to model work that needs to be done by a human and is assisted by a business process execution engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
 
 - [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
+
+### User task listener
+
+A user task listener allows users to execute custom logic in response to specific user task lifecycle events, such as assigning or completing a task. User task listeners are attached to BPMN user tasks and facilitate validation, custom task assignment, and other operations during user task execution. They operate similarly to job workers, leveraging the same infrastructure for processing external logic.
+
+- [User task listeners](/components/concepts/user-task-listeners.md)
 
 ### Webhook Connector
 

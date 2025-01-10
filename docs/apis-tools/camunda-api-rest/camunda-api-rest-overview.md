@@ -12,13 +12,17 @@ Ensure you [authenticate](./camunda-api-rest-authentication.md) before accessing
 
 ## Context paths
 
-For SaaS: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`, and for Self-Managed installations: `http://localhost:8080/v2/`.
+### SaaS
 
-:::note
 Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 
-For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Zeebe component.
-:::
+Example path: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
+
+### Self-Managed
+
+The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/setup/guides/ingress-setup.md). The path used here is the default.
+
+Example path: `http://localhost:8080/v2/`
 
 ## API Explorer
 
@@ -39,17 +43,4 @@ spring.servlet.multipart.max-request-size=4MB
 
 For example, if you increase the `maxMessageSize` to 10MB, increase these property values to 10MB as well.
 
-### Query API
-
-:::warning
-Query API endpoints do not currently support [resource authorizations][], and can be used to expand user access to restricted resources. If you use resource permissions, allowing public access to those endpoints is not recommended.
-:::
-
-All Query API endpoints contain an `(alpha)` declaration. Those endpoints are not accessible by default in Camunda 8 clusters.
-
-You can enable the [alpha feature][] search endpoints by setting either the configuration property `camunda.rest.query.enabled` to `true`,
-or the environment variable `CAMUNDA_REST_QUERY_ENABLED` to `true`.
-
 [camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
-[resource authorizations]: /self-managed/concepts/access-control/resource-authorizations.md
-[alpha feature]: /components/early-access/alpha/alpha-features.md

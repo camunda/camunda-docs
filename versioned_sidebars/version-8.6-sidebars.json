@@ -1592,8 +1592,7 @@
                   ]
                 }
               ]
-            },
-            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks"
+            }
           ]
         },
         {
@@ -1684,7 +1683,7 @@
       ]
     },
     {
-      "Clients": [
+      "Clients & SDKs": [
         {
           "Java client": [
             "apis-tools/java-client/index",
@@ -1732,16 +1731,16 @@
             }
           ]
         },
-        "apis-tools/build-your-own-client"
-      ]
-    },
-    {
-      "SDKs": [
-        "apis-tools/node-js-sdk",
+        "apis-tools/build-your-own-client",
         {
-          "Spring Zeebe": [
-            "apis-tools/spring-zeebe-sdk/getting-started",
-            "apis-tools/spring-zeebe-sdk/configuration"
+          "SDKs": [
+            "apis-tools/node-js-sdk",
+            {
+              "Spring Zeebe": [
+                "apis-tools/spring-zeebe-sdk/getting-started",
+                "apis-tools/spring-zeebe-sdk/configuration"
+              ]
+            }
           ]
         }
       ]
@@ -1765,8 +1764,14 @@
           ]
         }
       ]
+    },
+    {
+      "Migration manuals": [
+        "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks"
+      ]
     }
   ],
+
   "Reference": [
     "reference/overview",
     "reference/announcements",
@@ -1827,6 +1832,17 @@
                     "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
                     "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
                     "self-managed/setup/deploy/amazon/amazon-eks/irsa"
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "ROSA",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/setup/deploy/amazon/openshift/terraform-setup"
+                  },
+                  "items": [
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup"
                   ]
                 },
                 "self-managed/setup/deploy/amazon/aws-marketplace"

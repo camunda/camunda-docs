@@ -14,7 +14,7 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
 
-In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default. If no configuration is found, you are prompted to [manually enter your cluster details](#use-play-with-camunda-self-managed).
+In Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
 A Play environment is then started that utilizes your selected development cluster in SaaS, or the specified cluster in a Self-Managed setup.
 
@@ -92,6 +92,54 @@ Play's rewind operation currently does not support the following elements:
 - Play rewinds to an element, not to an element instance. For example, if you wanted to rewind your process to a sequential multi-instance service task which ran five times, it will rewind your process to the first instance of that service task.
 - Play rewinds processes by initiating a new instance and executing each element. However, if any element behaves differently from the previous execution, such as a Connector returning a different result, the rewind may fail.
 
+## Scenarios
+
+Use scenarios to quickly rerun processes while tracking test coverage.
+
+For example, you can validate your process by creating and rerunning scenarios for different paths to check the process works as expected after any diagram changes are made. Scenarios allow you to replay and confirm that a process completes correctly with the predefined actions and variables.
+
+:::note
+Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline.
+:::
+
+### Save scenario
+
+To save a scenario:
+
+1. Execute a path in your process.
+1. Click **Save scenario** in the process instance header.
+
+![Save a scenario](img/play-save-scenario.png)
+
+:::tip
+To view your saved scenarios click **View all** beneath the Scenarios column in the process instance header.
+:::
+
+### Scenario coverage
+
+Scenario coverage is calculated as the percentage of flow nodes in your process that are covered, including all elements, events, and gateways. For example, the coverage is 80% if eight out of ten flow nodes are covered.
+
+- On the process definition page, covered paths are highlighted in blue. Click on individual scenarios to view their specific coverage.
+- Once a process instance is completed, the process instance header shows how much your process scenario coverage would increase if the path was saved as a scenario.
+
+![Scenario coverage](img/play-coverage.png)
+
+### Run scenario
+
+You can run scenarios on the process definition page by clicking either the **Run all scenarios** button or the **Run scenario** button with the play icon for each individual scenario.
+
+- Scenario execution results are marked with either a **Completed** or **Failed** status.
+- You must manually update a failed scenario by clicking **manually complete and update the scenario**, especially if diagram changes are made that require further user input (such as when a new flow node is added to a previously saved scenario path).
+
+![Run a scenario on the process definition page](img/play-scenario-runs.png)
+
+### Limitations {#scenarios-limitations}
+
+- Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play, in a different browser, or by a collaborator.
+- Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
+- Scenario paths that include process modifications are not supported.
+- Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
+
 ## Modify a process instance
 
 There are two main reasons to modify a process instance in Play:
@@ -111,7 +159,7 @@ Unlike in [Operate](/components/operate/userguide/process-instance-modification.
 
 ![modify process instance](img/play-modifications.png)
 
-### Limitations
+### Limitations {#modifications-limitations}
 
 Rewinding a process instance that has modifications applied to is currently not supported. Additionally, some elements do not support specific modifications:
 
@@ -162,10 +210,6 @@ Additionally, within their organization, users need to have a [role](/components
 
 ### Camunda 8 Self-Managed
 
-:::note
-To use Play with Docker, ensure OAuth is enabled for your configured components. The `docker-compose-core.yaml` file in the Camunda [platform repository](https://github.com/camunda/camunda-platform) does not provide authentication, and cannot be used with Play.
-:::
-
 In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/modeler/web-modeler/configuration/configuration.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
 
 Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-alpha), or running the 8.6.0-alpha [Docker Compose](https://github.com/camunda/camunda-platform/tree/main/docker-compose/camunda-8.6) configuration.
@@ -181,22 +225,7 @@ Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [He
 
 After selecting the **Play** tab in Self-Managed, you are prompted to select from the clusters defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). The Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
-If no cluster is configured, Web Modeler requests the following cluster details to use for deployment:
-
-| Name              | Description                                     | Example value                                                                      |
-| ----------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Cluster endpoint  | Address where your cluster can be reached       | `http://zeebe:26500`                                                               |
-| Operate base url  | Address where Operate can be reached            | `http://operate:8080`                                                              |
-| Operate audience  | Permission name for Operate                     | `operate-api`                                                                      |
-| Tasklist base url | Address where Tasklist can be reached           | `http://tasklist:8080`                                                             |
-| Tasklist audience | Permission name for Tasklist                    | `tasklist-api`                                                                     |
-| Zeebe rest url    | Address where the Zeebe REST API can be reached | `http://zeebe:8080`                                                                |
-| Client ID         | Name of your registered client                  | `zeebe`                                                                            |
-| Client secret     | Password for your registered client             | `zecret`                                                                           |
-| OAuth token url   | Token issuer server                             | `http://keycloak:18080/auth/realms/camunda-platform/protocol/openid-connect/token` |
-| OAuth audience    | Permission name for Zeebe                       | `zeebe-api`                                                                        |
-
-### Limitations
+### Limitations {#self-managed-limitations}
 
 - Play does not support multi-tenancy.
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.

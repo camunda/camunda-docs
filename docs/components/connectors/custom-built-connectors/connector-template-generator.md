@@ -4,8 +4,6 @@ title: Generate a Connector template
 description: Learn how to generate Connector templates for easier custom Connector creation.
 ---
 
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
-
 You can configure and automatically generate a custom [Connector template](/components/connectors/custom-built-connectors/connector-templates.md) in Web Modeler.
 
 You can start from a blank template or import an existing API definition such as an [OpenAPI specification](https://swagger.io/resources/open-api/), [Swagger specification](https://swagger.io/resources/open-api/), or a [Postman collection](https://www.postman.com/collection/). For example, download a Postman collection as a YAML file, import this into the generator, and choose which methods to include in the generated template.
