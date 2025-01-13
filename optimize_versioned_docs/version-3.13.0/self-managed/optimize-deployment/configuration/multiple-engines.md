@@ -80,7 +80,7 @@ In general, tests have shown that Optimize puts a very low strain on the engine 
 ## Authentication and authorization in the multiple engine setup
 
 When you configure multiple engines in Optimize, each process engine can host different users with a different set of authorizations. If a user is logging in, Optimize will try to authenticate and authorize the user on each configured engine. In case you are not familiar with how
-the authorization/authentication works for a single engine scenario, visit the [User Access Management](./user-management.md) and [Authorization Management](./authorization-management.md) documentation first.
+the authorization/authentication works for a single engine scenario, visit the [User Access Management](./user-management.md) and [Authorization Management](#) documentation first.
 
 To determine if a user is allowed to log in and which resources they are allowed to access within the multiple engine scenario, Optimize uses the following algorithm:
 
