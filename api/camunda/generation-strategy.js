@@ -1,11 +1,9 @@
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 const replace = require("replace-in-file");
-const outputDir = "docs/apis-tools/camunda-api-rest/specifications";
-const specFile = "api/camunda/camunda-openapi.yaml";
 const fs = require("fs");
 
-function preGenerateDocs() {
-  const originalSpec = fs.readFileSync(specFile, "utf8");
+function preGenerateDocs(config) {
+  const originalSpec = fs.readFileSync(config.specPath, "utf8");
 
   console.log("adjusting C8 spec file...");
 
@@ -18,14 +16,16 @@ function preGenerateDocs() {
   ];
 
   replace.sync({
-    files: specFile,
+    files: config.specPath,
     from: specUpdates.map((x) => x.from),
     to: specUpdates.map((x) => x.to),
   });
 }
 
-function postGenerateDocs() {
-  removeDuplicateVersionBadge(`${outputDir}/camunda-8-rest-api.info.mdx`);
+function postGenerateDocs(config) {
+  removeDuplicateVersionBadge(
+    `${config.outputDir}/camunda-8-rest-api.info.mdx`
+  );
 }
 
 function addDisclaimer(originalSpec) {
@@ -256,7 +256,6 @@ function addFrequentlyLinkedDocs() {
 }
 
 module.exports = {
-  outputDir,
   preGenerateDocs,
   postGenerateDocs,
 };

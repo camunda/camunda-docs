@@ -5,52 +5,337 @@ description: "Updates an existing tenant."
 sidebar_label: "Update tenant"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWVtv2zYU/isEn1pMkZw27Tq9uWm6Zm2zIHW2h8QPlHhssaVIlaTiCIb++3BIKZYvuXTrywAHCCyRh+f6fRR1tKSOzS1Nr+gEFFOOTiOqKzDMCa1OOU1pXXHmoJuNKAebG1HhNE3ppZ+0hCkCt8I6oebEedGYRrRihpXgwKCBJVWsBJrSMP8RGhpRgUoq5goaUQPfa2GA09SZGjYtTQogtRLfayCCg3JiJsAQPSOugIFJmxdQMpouqWsqtCaUgzkYGtGZNiVzYej1EW3babAJ1r3VvME1uVYOlMNLVlVS5D4NyVeLLiy3levsK+SYlcpg0pwAi7Mh0Dsp64xQ863cYUQKFgSlNwNp22E+roLGaUSdcBJVhnKE7F+EGGi7vgiT6AdspZUNjr0YjfBn249glyyYJaHenNg6z8HaWS1lg5n917lhUv458wBYt/uWWSCrxJGZNmQ9ruA5Gn8438F7ROtTct6hCG4dGMVkH/vpO9pGP1K6e8q2u0QhFAyZIu52+Y+M+JEAbGMdlAdzUEhX4AShvh7R4x55gWE9bxSPc1bWirOYVSL+Bo2NVV1mYH7ZrjWHykCO1nvW7qv/M6q/2rX+W/l37HoP+3jmK/0RGvs0ZIQU7UDGHgf/r10ARY7uezxURt8IDpxw5hgRlijtyA2Tgj/wZKiMziSUO3eNoYExOQ+ShINjQpJQX8IsCYKZj4pcXbw/Jr8dvfp1+qxwrrJpkiwWi9jM8gPgwmkTazNPzCzHf5R7HpNJAQZIyRqSAWGcC7TJ5BBwtoJczEROnPZV7NwmWIH4Wj0OOz+7XbE74tVGbBVwTC4vTvuDTONPTZum/ZoZqyXqYJmuXZpJpr7RVS0fg8mY2LosmWl6hK4baCNqHXO13bnxDDeOly92QvDDZHJOggqSaw6evK4QtjeEQZRCibIuaXo0GkW0ZLfh7vVo1KJOrPgTIsHzZSWZ8tDaDEcoUmoDHX58YEJZx1T+syqjjZiLTbvrvOpA/C5E1BPq5Tbe32uTCc5BeXiS7gjas4pJqRew59WeV3tePcCro228n2lHZrpWPPBq8Eqj7mb2rNqzas+qe1j1atfxb6xWJ0owRhui87w2BjhZFEJ69dgn6G13j7OAxT3X9lzbc22ba21ES3CF5qH7mRe+WeoKmtIkPLdssrx7H2yxrwnmpu+j1kbSlC4Da9o0SZaFtq5Nl5U2rk1usCQ3zAiWyQBEnA7s6lEjdc6kH95VPZwYvtgeh7d+8oZcnHyZkN+ZgwVrfDbR5LrqN6M3o51aUfQejePzUxIiDNgb7Ae9WiT2TrVB+CmKfcfXQl4b4ZovuCykJwNmwIxrzP8dJjp7XjveByEadRfve6T88ffEFxv3sotVN/nklpVVYGLX9u5A5hE4095Sh49tn7GAYGwIchQfbmPx/NRTKtdlWSu/r6o5WQhXEDbIQS5r6zD2iEqRA77prxzqxT6FGfJXsEgOY6xfAFm/nc6FK+osznWZdC2gu99M6iwpmVBJZ8Imx+PPl2fvxgefTo9Pzr6cHBzGo9jdOp+nSltXMjXwI7QiuvPaZqSDnvwjHxu6ujm4dUklmVCYah/FsuPWVddisTSi6arbMo06glzR5TJjFi6NbFsc/l6DaWh6NV3xKXSwhMVrTtMZk3bzU8XQ5WcXXT/+OXniB4ydYXSDTDWe2rLGOxrRb9gsGjSO2mkb0QIYB+MdDfPHwZ2DCWpZrd/q4rdRv2Kc51C5B2Wngy3sfDw5/oDU6D6jlJrjIsMW+FmHLWhKr+k1Oqx9jjzr/PiSSqbmNZujfFCMf/8AhP03lQ==
+api: eJztWVtv2zYU/isEn1pMkdw27TK9ubmsWbssSJ3tIfMDJR5bbClSJak4gqH/PhxSiuVLLt36MsABAkvk4bl+H0UdLaljc0vTGzoBxZSj04jqCgxzQqtzTlNaV5w56GYjysHmRlQ4TVN67SctYYrAnbBOqDlxXjSmEa2YYSU4MGhgSRUrgaY0zH+EhkZUoJKKuYJG1MC3WhjgNHWmhk1LkwJIrcS3GojgoJyYCTBEz4grYGDS5gWUjKZL6poKrQnlYA6GRnSmTclcGHp3SNt2GmyCde81b3BNrpUD5fCSVZUUuU9D8sWiC8tt5Tr7AjlmpTKYNCfA4mwI9F7KOiPUfCt3GJGCBUHpzUDadpiPm6BxGlEnnESVoRwh+1chBtquL8Ik+gFbaWWDY69HI/zZ9iPYJQtmSag3J7bOc7B2VkvZYGb/dW6YlH/MPADW7b5nFsgqcWSmDVmPK3iOxh/Pd/Ae0fqcnHcogjsHRjHZx35+Qtvoe0r3QNl2lyiEgiFTxN0u/5ER3xOAbayD8mAOCukKnCDU1yN62iMvMKznreJxzspacRazSsRfobGxqssMzE/bteZQGcjRes/affV/RPVXu9Z/K/+OXe9xHy98pT9CY5+HjJCiHcjY4+D/tQugyOFDj4fK6FvBgRPOHCPCEqUduWVS8EeeDJXRmYRy564xNDAml0GScHBMSBLqS5glQTDzUZGbq7Nj8svh25+nLwrnKpsmyWKxiM0sPwAunDaxNvPEzHL8R7mXMZkUYICUrCEZEMa5QJtMDgFnK8jFTOTEaV/Fzm2CFYj/Vk/Dzs9uV+yeeLURWwUck+ur8/4g0/hT06Zpv2bGaok6WKZrl2aSqa90VcunYDImti5LZpoeoesG2ohax1xtd248w43jzeudEPwwmVySoILkmoMnryuE7Q1hEKVQoqxLmh6ORhEt2V24ezcatagTK/6MSPB8WUmmPLQ2wxGKlNpAhx8fmFDWMZX/qMpoI+Zi0+46rzoQn4SIekK92cb7mTaZ4ByUhyfpjqA9q5iUegF7Xu15tefVI7w63Mb7hXZkpmvFA68GrzTqfmbPqj2r9qx6gFVvdx3/xmp1ogRjtCE6z2tjgJNFIaRXj32C3nb3OAtY3HNtz7U917a51ka0BFdoHrqfeeGbpa6gKU3Cc8smy/v3wRb7mmBu+z5qbSRN6TKwpk2TZFlo69p0WWnj2uQWS3LLjGCZDEDE6cCuHjVS50z64V3Vw4nhi+1xeOsnR+Tq9POE/MocLFjjs4km11UfjY5GO7Wi6AMax5fnJEQYsDfYD3q1SOydaoPwcxT7jq+FvDbCNZ9xWUhPBsyAGdeY/3tMdPa8drwPQjTqLs56pPz218QXG/eyq1U3+fSOlVVgYtf27kDmETjT3lKHj22fsYBgbAhyFL/axuLluadUrsuyVn5fVXOyEK4gbJCDXNbWYewRlSIHfNNfOdSLfQoz5M9gkbyKsX4BZP12OheuqLM412XStYDufzOps6RkQiWdCZscj3+/vjgZH3w6Pz69+Hx68Coexe7O+TxV2rqSqYEfoRXRndc2Ix305J/42NDVzcGdSyrJhMJU+yiWHbduuhaLpRFNV92WadQR5IYulxmzcG1k2+LwtxpMQ9Ob6YpPoYMlLF5zms6YtJufKoYuv7jq+vEvyTM/YOwMoxtkqvHUljXe0Yh+xWbRoHHUTtuIFsA4GO9omD8O7hxMUMtq/VYXv436FeM8h8o9KjsdbGGX48nxB6RG9xml1BwXGbbAzzpsEZzVPj+ecX5sSSVT85rNUTYoxb9/ALmeNpk=
 sidebar_class_name: "patch api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Update tenant</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update tenant"}
+></Heading>
 
-<MethodEndpoint method={"patch"} path={"/tenants/{tenantKey}"}></MethodEndpoint>
+<MethodEndpoint
+  method={"patch"}
+  path={"/tenants/{tenantKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Updates an existing tenant.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"tenantKey","in":"path","required":true,"description":"The unique identifier of the tenant.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The new name of the tenant."}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantKey",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
 
-The tenant was updated successfully.
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            name: {
+              type: "string",
+              description: "The new name of the tenant.",
+            },
+          },
+          required: ["name"],
+          title: "TenantUpdateRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The unique external tenant ID"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the tenant."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The unique system-generated internal tenant ID."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"tenantKey\": \"string\",\n  \"tenantId\": \"string\",\n  \"name\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The unique external tenant ID"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the tenant."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The unique system-generated internal tenant ID.","format":"int64"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"tenantKey\": 0,\n  \"tenantId\": \"string\",\n  \"name\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The unique external tenant ID"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the tenant."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The unique system-generated internal tenant ID."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"tenantKey\": \"string\",\n  \"tenantId\": \"string\",\n  \"name\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The provided data is not valid.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-Not found. The tenant was not found.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The tenant was updated successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for TenantUpdateResponse.",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    type: "string",
+                    description: "The unique external tenant ID",
+                  },
+                  name: {
+                    type: "string",
+                    description: "The name of the tenant.",
+                  },
+                },
+                title: "TenantUpdateResponseBase",
+              },
+            ],
+            properties: {
+              tenantKey: {
+                type: "string",
+                description: "The unique system-generated internal tenant ID.",
+              },
+            },
+            title: "TenantUpdateResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for TenantUpdateResponse.",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    type: "string",
+                    description: "The unique external tenant ID",
+                  },
+                  name: {
+                    type: "string",
+                    description: "The name of the tenant.",
+                  },
+                },
+                title: "TenantUpdateResponseBase",
+              },
+            ],
+            properties: {
+              tenantKey: {
+                type: "integer",
+                description: "The unique system-generated internal tenant ID.",
+                format: "int64",
+              },
+            },
+            title: "TenantUpdateResponseNumberKeys",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for TenantUpdateResponse.",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    type: "string",
+                    description: "The unique external tenant ID",
+                  },
+                  name: {
+                    type: "string",
+                    description: "The name of the tenant.",
+                  },
+                },
+                title: "TenantUpdateResponseBase",
+              },
+            ],
+            properties: {
+              tenantKey: {
+                type: "string",
+                description: "The unique system-generated internal tenant ID.",
+              },
+            },
+            title: "TenantUpdateResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found. The tenant was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
