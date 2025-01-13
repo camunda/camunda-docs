@@ -76,15 +76,23 @@ Our best practices, as implemented in Tasklist, are as follows:
 
 Make sure that you create your own validation logic that matches your use case.
 
-## Implement the life cycle with the task API
+## Implement task life cycle with the Camunda 8 API
 
-To implement task life cycle operations with the task API, call the respective endpoints:
+Use the Camunda 8 REST API to implement task life cycle operations. You can find the API specifications [here](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md).
+
+Task life cycle events can be tracked via the following API endpoints:
 
 - [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx) or [`DELETE /user-tasks/:userTaskKey/assignee`](/apis-tools/camunda-api-rest/specifications/unassign-user-task.api.mdx) to change task assignment.
 - [`PATCH /user-tasks/:userTaskKey`](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx) to update a task.
 - [`POST /user-tasks/:userTaskKey/completion`](/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx) to complete a task.
 
-All these endpoints (except `DELETE`) allow you to send a custom `action` attribute via the payload. The `action` attribute carries any arbitrary string and can be used to track any life cycle event, including those mentioned above.
+- Assign user task:
+  - [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx)
+  - [`DELETE /user-tasks/:userTaskKey/assignee`](/apis-tools/camunda-api-rest/specifications/unassign-user-task.api.mdx) is used to unassing a user task.
+- Update user task:
+  - [`PATCH /user-tasks/:taskKey`](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx)
+- Complete user task:
+  - [`POST /user-tasks/:taskKey/completion`](/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx)
 
 #### [`POST /user-tasks/:userTaskKey/assignment`](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx)
 
