@@ -12,7 +12,7 @@ function preGenerateDocs(config) {
     ...redefineCreateProcessInstanceRequest(originalSpec),
     ...redefineEvaluateDecisionRequest(originalSpec),
     ...addAlphaAdmonition(), // needs to go before addFrequentlyLinkedDocs
-    ...addFrequentlyLinkedDocs(),
+    ...addFrequentlyLinkedDocs(config.version),
   ];
 
   replace.sync({
@@ -239,8 +239,19 @@ function addAlphaAdmonition() {
   ];
 }
 
-function addFrequentlyLinkedDocs() {
+function addFrequentlyLinkedDocs(version) {
   // This task is inherently repeatable, because the `match` is replaced by something that won't match again.
+
+  // The path to the alpha doc varies by version.
+  const otherAlphaPaths = {
+    8.6: "/reference/alpha-features.md",
+    8.5: "/reference/alpha-features.md",
+    8.4: "/reference/alpha-features.md",
+    8.3: "/reference/alpha-features.md",
+  };
+  const alphaPath =
+    otherAlphaPaths[version] ||
+    "/components/early-access/alpha/alpha-features.md";
 
   // Adds links to the Camunda Alpha REST API documentation, so that they don't have to live in the upstream spec.
   return [
@@ -250,7 +261,7 @@ function addFrequentlyLinkedDocs() {
     },
     {
       from: /endpoint is an alpha feature/g,
-      to: "endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md)",
+      to: `endpoint is an [alpha feature](${alphaPath})`,
     },
   ];
 }
