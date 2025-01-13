@@ -105,7 +105,7 @@ RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/?
 RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-tutorial/?$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/$1 [R=301,L]
 
 # Move migrating to Zeebe user tasks
-RewriteRule ^docs/next/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
 RewriteRule ^docs/8.6/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/8.6/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
 

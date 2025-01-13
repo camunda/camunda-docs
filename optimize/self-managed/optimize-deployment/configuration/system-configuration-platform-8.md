@@ -43,7 +43,7 @@ To use multi-tenancy, the feature must be enabled across all components.
 | multitenancy.enabled       | false         | Enables the Camunda 8 multi-tenancy feature in Optimize. |
 | security.auth.ccsm.baseUrl | null          | The base URL of Identity.                                |
 
-### Settings related to Camunda 8 Zeebe user tasks
+### Settings related to Camunda user tasks (formerly Zeebe user tasks)
 
 <span class="badge badge--platform">Camunda 8 Self-Managed only</span>
 
