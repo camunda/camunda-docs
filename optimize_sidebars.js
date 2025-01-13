@@ -2475,6 +2475,10 @@ module.exports = {
                       "Deploy a ROSA cluster with Terraform",
                       "self-managed/setup/deploy/amazon/openshift/terraform/"
                     ),
+                    docsLink(
+                      "Dual-region ROSA HCP Cluster with Terraform",
+                      "self-managed/setup/deploy/amazon/openshift/terraform-dual-region/"
+                    ),
                   ],
                 },
 
@@ -2512,6 +2516,10 @@ module.exports = {
                 docsLink(
                   "Red Hat OpenShift",
                   "self-managed/setup/deploy/openshift/redhat-openshift/"
+                ),
+                docsLink(
+                  "Dual-Region",
+                  "self-managed/setup/deploy/openshift/redhat-openshift-dual-region/"
                 ),
               ],
             },
