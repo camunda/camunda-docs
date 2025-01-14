@@ -199,7 +199,7 @@ Package this class and all its dependencies as a JAR, for example `my-secret-pro
 provider implementation. Add this JAR to the runtime environment, depending on your deployment setup.
 Your secret provider will serve secrets as implemented.
 
-For use with [Camunda Helm charts](<[https://docs.camunda.io/docs/next/self-managed/setup/install/](https://artifacthub.io/packages/helm/camunda/camunda-platform)>), you can build an init container to create a volume with your secret provider and then mount in to the connectors pod. You can for example use the following file as input for your helm install command:
+For use with [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform), you can build an init container to create a volume with your secret provider and then mount in to the connectors pod. You can for example use the following file as input for your helm install command:
 
 ```bash
 connectors:
