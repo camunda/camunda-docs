@@ -8,10 +8,10 @@
 
 <!-- PRs merged go to stage.docs.camunda.io first and must be manually released to docs.camunda.io. -->
 
-- [ ] This is a bug fix, security concern, or something that needs **urgent release support**. (apply `bug` or `support` label)
-- [ ] This is already available but undocumented and should be released within a week. (apply `available & undocumented` label)
-- [ ] This is on a **specific schedule** and the assignee will coordinate a release with the DevEx team. (create draft PR and/or apply `hold` label)
-- [ ] This is part of a scheduled **alpha or minor**. (apply alpha or minor label)
+- [ ] This is a bug fix, security concern, or something that needs **urgent release support**. (add `bug` or `support` label)
+- [ ] This is already available but undocumented and should be released within a week. (add `available & undocumented` label)
+- [ ] This is on a **specific schedule** and the assignee will coordinate a release with the DevEx team. (create draft PR and/or add `hold` label)
+- [ ] This is part of a scheduled **alpha or minor**. (add alpha or minor label)
 - [ ] There is **no urgency** with this change (add `low prio` label)
 
 ## PR Checklist
