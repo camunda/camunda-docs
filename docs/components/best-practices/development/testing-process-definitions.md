@@ -67,7 +67,7 @@ You need to use JUnit 5. Ensure you use JUnit 5 in every test class: the `@Test`
 1. Use [_JUnit 5_](http://junit.org) as unit test framework.
 2. Use the [Camunda Spring SDK and its test library](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
 3. Use `@ZeebeSpringTest` to ramp up an in-memory process engine.
-4. Use annotations from [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test/) to check whether your expectations about the state of the process are met.
+4. Use assertions from [zeebe-process-test](../../../apis-tools/java-client/zeebe-process-test.md#assertions) to check whether your expectations about the state of the process are met.
 5. Use mocking of your choice, e.g. [Mockito](http://mockito.org) to mock service methods and verify that services are called as expected.
 
 A test can now look like the following example. The complete source code is available on [GitHub](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java):
