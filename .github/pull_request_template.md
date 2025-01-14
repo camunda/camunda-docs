@@ -27,7 +27,7 @@
 -->
 
 - [ ] I added a DRI, team, or delegate as a reviewer for technical accuracy and grammar/style:
-  - [ ] [engineering team review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process)
+  - [ ] [Engineering team review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process)
   - [ ] [technical writer review](https://github.com/camunda/camunda-docs/blob/main/howtos/documentation-guidelines.md#review-process) via `@camunda/tech-writers` unless working with an embedded writer.
 
 <!-- UNCOMMENT THIS SECTION IF APPLICABLE. Changes to **docs infra**, including updates to workflows and adding new npm packages, must be first discussed via issue or #ask-c8-documentation and linked for context.
