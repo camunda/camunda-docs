@@ -14,6 +14,9 @@ Templates are defined in template descriptor files as a JSON array:
     "id": "sometemplate",
     "description": "some description",
     "version": 1,
+    "engines": {
+      "camunda": "^8.6"
+    },
     "appliesTo": [
       "bpmn:Task"
     ],
@@ -51,6 +54,7 @@ Example:
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
 - `version : Integer`: Optional version of the template. If you add a version to a template, it is considered unique based on its ID and version. Two templates can have the same ID if their version is different.
+- `engines : Object`: Optional dictionary of environments compatible with the template. Environment version is specified with semantic versions range.
 - `appliesTo : Array<String>`: List of BPMN types the template can be applied to.
 - `elementType : Object`: Optional type of the element. If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
 - `properties : Array<Object>`: List of properties of the template.
@@ -72,6 +76,40 @@ For example, given the following `$schema` definition, the application takes `0.
 ```
 
 The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
+
+## Template compatibility
+
+You can define template compatibility with execution platforms and applications using the `engines` property.
+
+This property is a dictionary object, where the execution platform names are the keys, and the [semantic version](https://semver.org/) ranges are the values.
+
+For example, the following `engines` definition specifies that the template is compatible with Camunda 8.6 or higher.
+
+```json
+"engines": {
+  "camunda": ">8.5"
+}
+```
+
+Compatibility is only validated if the platform version is provided by both the template and the modeler. In the example below, the template is compatible with specified versions of both Desktop and Web Modeler, but it requires Camunda version 8.6 or higher for both:
+
+```json
+"engines": {
+  "camunda": ">8.5",
+  "camundaDesktopModeler": ">=5.30",
+  "camundaWebModeler": "^8.5.5"
+}
+```
+
+You can also use this feature to explicitly specify a template’s incompatibility with a platform. For instance, the following template is incompatible with all versions of Web Modeler:
+
+```json
+"engines": {
+  "camundaWebModeler": "0"
+}
+```
+
+If no engines are specified, the template is considered compatible with any execution platform version.
 
 ## Supported BPMN types
 

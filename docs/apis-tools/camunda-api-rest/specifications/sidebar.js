@@ -153,6 +153,12 @@ module.exports = [
       },
       {
         type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-documents",
+        label: "Upload multiple documents (alpha)",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/get-document",
         label: "Download document (alpha)",
         className: "api-method get",
