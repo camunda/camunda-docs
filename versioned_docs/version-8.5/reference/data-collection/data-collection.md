@@ -40,9 +40,9 @@ Camunda collects product usage data from SaaS and Desktop Modeler users to help 
   - SaaS User Actions: Users that opt-in to analytics cookies
     (!!!!!!!!!!!!TO CONFIRM- https://camunda.slack.com/archives/C034F8NA1G8/p1736857938619039!!!!!!!!!!!!!!)
     gain access to in-app tutorials and automatically submit information about the actions they take in Camunda. In addition to the data collected from system actions described above, Camunda collects cursor activity, geographical area, browser information, and basic biographical information like email and name for user actions.
-  - Desktop Modeler User Actions: Users opting into collection of [telemetry data in Desktop Modeler](docs/components/modeler/desktop-modeler/telemetry/) send certain data to Camunda.
+  - Desktop Modeler User Actions: Users opting into collection of [telemetry data in Desktop Modeler](docs/components/modeler/desktop-modeler/telemetry.md) send certain data to Camunda.
 - Shared Data: Data intentionally shared with Camunda, such as survey information, feedback, or bug reports.
-- AI Usage: Camunda's AI features, currently available in SaaS only, collect anonymized inputs, outputs, and feedback to improve their quality. All AI features are clearly labeled as AI features and, with the exception of the AI Form Generator, require opt-in in the Console to [enable AI-powered features](/docs/components/console/manage-organization/enable-alpha-features/#enable-ai-powered-features).
+- AI Usage: Camunda's AI features, currently available in SaaS only, collect anonymized inputs, outputs, and feedback to improve their quality. All AI features are clearly labeled as AI features and, with the exception of the AI Form Generator, require opt-in in the Console to [enable AI-powered features](/docs/components/console/manage-organization/enable-alpha-features/#enable-ai-powered-features.md).
 
 ### Example
 
