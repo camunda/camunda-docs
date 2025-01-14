@@ -51,6 +51,50 @@ Whenever this Java version changes, you'll either have to [switch to the testcon
 </dependency>
 ```
 
+## Camunda Spring SDK Integration
+
+### Camunda Spring SDK Embedded Module
+
+In a setup with the Camunda Spring SDK, you make use of an in-memory test engine and do assertions by adding this Maven dependency:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>spring-boot-starter-camunda-test</artifactId>
+  <version>X.Y.Z</version>
+  <scope>test</scope>
+</dependency>
+```
+
+### Camunda Spring SDK Testcontainers Module
+
+In a setup with the Camunda Spring SDK, you can make use of a testcontainer engine and do assertions by adding this Maven dependency:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>spring-boot-starter-camunda-test-testcontainer</artifactId>
+    <version>X.Y.Z</version>
+  <scope>test</scope>
+</dependency>
+```
+
+### Usage
+
+By adding the `@ZeebeSpringTest` annotation to your spring boot test case, you will have the engine and a client available in your test case.
+
+```java
+@SpringBootTest
+@ZeebeSpringTest
+public class TestMyProcess {
+    private ZeebeTestEngine engine;
+    private ZeebeClient client;
+```
+
+An example test case is [available here](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java).
+
+> Please do not use `zeebeTestEngine.waitForBusyState(...)` to wait for a timer. This will not work as this is also triggered by an incoming job activation.
+
 ## Annotation
 
 Annotate your test class with the `@ZeebeProcessTest` annotation. This annotation will do a couple of things:

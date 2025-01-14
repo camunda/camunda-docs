@@ -165,41 +165,4 @@ See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration
 
 ## Writing test cases
 
-You can start up an in-memory test engine and do assertions by adding this Maven dependency:
-
-```xml
-<dependency>
-  <groupId>io.camunda</groupId>
-  <artifactId>spring-boot-starter-camunda-test</artifactId>
-  <version>8.6.x</version>
-  <scope>test</scope>
-</dependency>
-```
-
-Note that **the test engine requires Java version >= 21**. If you cannot run on this Java version, you can use [Testcontainers](https://www.testcontainers.org/) **instead**. Testcontainers require that you have a Docker installation locally available on the developer machine. Use this dependency:
-
-```xml
-<!--
-  Alternative dependency if you cannot run Java 21, so you will leverage Testcontainer
-  Make sure NOT to have spring-zeebe-test on the classpath in parallel!
--->
-<dependency>
-  <groupId>io.camunda</groupId>
-  <artifactId>spring-boot-starter-camunda-test-testcontainer</artifactId>
-    <version>8.6.x</version>
-  <scope>test</scope>
-</dependency>
-```
-
-Then, start up the test engine in your test case by adding `@ZeebeSpringTest`
-
-```java
-@SpringBootTest
-@ZeebeSpringTest
-public class TestMyProcess {
-  // ...
-```
-
-An example test case is [available here](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java).
-
-> Please do not use `zeebeTestEngine.waitForBusyState(...)` to wait for a timer. This will not work as this is also triggered by an incoming job activation.
+Please refer to the [Zeebe Process Test - Camunda Spring SDK Integration](../java-client/zeebe-process-test.md#camunda-spring-sdk-integration).
