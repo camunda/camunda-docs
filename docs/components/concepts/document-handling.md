@@ -9,11 +9,9 @@ Offering a more comprehensive approach to document handling, Camunda now provide
 
 Whether you are working across Connectors, Modeler, or Tasklist, document handling may be beneficial for users who want the following:
 
+- Use the default cloud storage to support, track, and manage documents.
 - [AWS S3](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution, and to ensure storage is properly isolated and managed for each environment.
 - Support for the local file system as a storage option for development and testing purposes to set up and manage documents in local environments.
-- Preview, track, and manage documents associated with process instances.
-
-Below, learn about capabilities of document handling for the related components:
 
 ## Modeler
 
@@ -31,9 +29,9 @@ With the [filepicker form element](/components/modeler/forms/form-element-librar
 
 ![example payload inbound webhook connector](./assets/inbound-webhook-document.png)
 
-### Outbound (REST and IDP-related) Connectors
+### Outbound (REST and email) Connectors
 
-For REST and IDP-related Connectors, you may include a **Request body** under **Payload** in the properties panel to send with your request.
+For REST and [email](/components/connectors/out-of-the-box-connectors/email.md) Connectors, you may include a **Request body** under **Payload** in the properties panel to send with your request.
 
 ![example REST configuration](./assets/rest-outbound-document.png)
 
@@ -53,4 +51,3 @@ Document handling maintains the following guidelines:
 
 - **Maximum file size**: 10 MB per file.
 - **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.
-- **Storage space limit/default file storage**: Storage for your cluster is 500 MB.
