@@ -92,6 +92,10 @@ The following JSON response is returned after a successful document upload opera
 - `key`: Echoes back the unique key of the uploaded document.
 - `link`: The document link.
 
+:::note
+Starting from version 8.7.0, the Amazon S3 Connector supports storing the response as a document. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
+
 #### Example Response
 
 The following example shows a successful send upload operation response:

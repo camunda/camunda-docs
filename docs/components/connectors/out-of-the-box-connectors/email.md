@@ -126,6 +126,10 @@ The task returns a JSON object containing detailed information about the email:
 - `attachments`: A list of all the email's attachments, provided as a document reference.
 - `receivedDateTime`: The email's reception datetime
 
+:::note
+Starting from version 8.7.0, the email Connector supports storing the response as a document. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
+
 #### Example Response
 
 Below is an example of the JSON response returned when a specific email is read:

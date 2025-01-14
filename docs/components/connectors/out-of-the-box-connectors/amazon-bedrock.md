@@ -126,3 +126,7 @@ The current implementation supports the assistant's responses only in text forma
 :::
 
 Ideally, the message's history must transit within the process and be the input of this `Converse` task with the new message.
+
+:::note
+Starting from version 8.7.0, the Amazon Bedrock Connector supports storing the response as a document. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::

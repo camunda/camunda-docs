@@ -48,6 +48,10 @@ The Box Connector supports two methods for locating items stored in your Box acc
 
 :::
 
+:::note
+Starting from version 8.7.0, the Box Connector supports storing the response as a document. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
+
 ### Create Folder
 
 Creates a new folder in your store.
