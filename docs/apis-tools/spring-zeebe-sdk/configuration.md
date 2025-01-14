@@ -249,11 +249,11 @@ For a full set of configuration options, see [CamundaClientConfigurationProperti
 
 ### Auth
 
-Here you find alternatives to authenticate with the cluster
+Authenticate with the cluster using the following alternative methods:
 
 #### Username & Password
 
-You can also authenticate with the cluster through a simple authentication with username and password
+You can authenticate with the cluster using username and password authentication.
 
 ```yaml
 camunda:
@@ -266,7 +266,7 @@ camunda:
 
 #### Keystore & Truststore
 
-You can also authenticate with the cluster through java's key- and truststore facilities
+You can authenticate with the cluster using Java's Keystore and Truststore.
 
 ```yaml
 camunda:
@@ -282,7 +282,7 @@ camunda:
 
 ### Zeebe
 
-Here you find further zeebe specific configuration options
+You can use the following Zeebe-specific additional configuration options:
 
 #### Execution threads
 
@@ -308,7 +308,7 @@ camunda:
 
 #### Max message size
 
-A custom maxMessageSize allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
+A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 4MB):
 
 ```yaml
 camunda:
@@ -319,7 +319,7 @@ camunda:
 
 #### Max metadata size
 
-A custom maxMetadataSize allows the client to receive larger or smaller response headers from Camunda:
+A custom `maxMetadataSize` allows the client to receive larger or smaller response headers from Camunda:
 
 ```yaml
 camunda:
@@ -407,7 +407,7 @@ camunda:
 
 #### Defaults and Overrides
 
-You can define defaults and overrides for all supported configuration options for a workers.
+You can define defaults and overrides for all supported configuration options for a worker.
 
 ##### Default Task type
 
