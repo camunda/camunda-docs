@@ -11,10 +11,11 @@ respond accordingly.
 
 ## Broadcasting signals
 
-You can broadcast signals in two ways:
+You can broadcast signals in several ways:
 
-- Using Zeebe's [`BroadcastSignal` RPC](/apis-tools/zeebe-api/gateway-service.md#broadcastsignal-rpc)
 - Using a [signal throw event or signal end event](../modeler/bpmn/signal-events/signal-events.md#signal-throw-events)
+- Using the [Camunda 8 API Broadcast signal](/apis-tools/camunda-api-rest/specifications/broadcast-signal.api.mdx) endpoint
+- Using Zeebe's [`BroadcastSignal` RPC](/apis-tools/zeebe-api/gateway-service.md#broadcastsignal-rpc)
 
 ## Signal subscriptions
 

@@ -725,7 +725,7 @@ components:
             - JOB_WORKER
             - ZEEBE_USER_TASK
         priority:
-          description: Rules to filter out tasks by their priority. Applicable only for Zeebe user tasks.
+          description: Rules to filter out tasks by their priority. Applicable only for job worker-based user tasks managed by Camunda.
           type: object
           properties:
             eq:
@@ -859,7 +859,7 @@ components:
             - JOB_WORKER
             - ZEEBE_USER_TASK
         priority:
-          description: The priority of a user task. The higher the value the higher the priority. Applicable only for Zeebe user tasks.
+          description: The priority of a user task. The higher the value the higher the priority. Applicable only for job worker-based user tasks managed by Camunda.
           type: integer
           minimum: 0
           maximum: 100
@@ -957,7 +957,7 @@ components:
             - JOB_WORKER
             - ZEEBE_USER_TASK
         priority:
-          description: The priority of a user task. The higher the value the higher the priority. Applicable only for Zeebe user tasks.
+          description: The priority of a user task. The higher the value the higher the priority. Applicable only for job worker-based user tasks managed by Camunda.
           type: integer
           minimum: 0
           maximum: 100

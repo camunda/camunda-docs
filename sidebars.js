@@ -65,6 +65,7 @@ module.exports = {
         "components/concepts/processes",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
+        "components/concepts/user-task-listeners",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
@@ -327,6 +328,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-s3",
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
             },
@@ -889,7 +891,7 @@ module.exports = {
     },
     {
       "Migration manuals": [
-        "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
         "apis-tools/migration-manuals/migrate-to-camunda-api",
       ],
     },
