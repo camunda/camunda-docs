@@ -349,7 +349,7 @@ If you have a custom `values.yaml`, change the image repository and tag:
 ```yaml
 image:
   repository: bitnami/elasticsearch
-  tag: 8.6.2
+  tag: 8.8.2
 ```
 
 Setting the persistent volume size of the master nodes can't be done using the `volumeClaimTemplate` anymore. It must be done using the master values:

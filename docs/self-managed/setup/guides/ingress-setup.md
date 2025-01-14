@@ -20,13 +20,17 @@ Camunda 8 Helm chart doesn't manage or deploy Ingress controllers, it only deplo
 ## Preparation
 
 - An Ingress controller should be deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but any Ingress controller could be used by setting `ingress.className`.
-- TLS configuration is not handled in the examples because it varies between different workflows. It could be configured directly using `ingress.tls` options or via an external tool like [Cert-Manager](https://github.com/cert-manager/cert-manager) using `ingress.annotations`. For more details, check available [configuration options](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-8.6#configuration).
+- TLS configuration is not handled in the examples because it varies between different workflows. It could be configured directly using `ingress.tls` options or via an external tool like [Cert-Manager](https://github.com/cert-manager/cert-manager) using `ingress.annotations`. For more details, check available [configuration options](https://artifacthub.io/packages/helm/camunda/camunda-platform#configuration).
 
 ## Configuration
 
 In this setup, a single Ingress/domain is used to access Camunda 8 web applications, and another for Zeebe Gateway. By default, all web applications use `/` as a base, so we just need to set the context path, Ingress configuration, and authentication redirect URLs.
 
 ![Camunda 8 Self-Managed Architecture Diagram - Combined Ingress](../../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
+
+:::note
+**Operate, Tasklist, Optimize, Modeler, Connectors, Console:** The Ingress path value for each component (`global.identity.auth.<component>.redirectUrl`) should match the `contextPath` for that component.
+:::
 
 ```yaml
 # Chart values for the Camunda 8 Helm chart in combined Ingress setup.

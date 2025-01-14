@@ -8,7 +8,7 @@ processes. It will start a lightweight in-memory Zeebe engine and provide you wi
 verify your process behaves as expected.
 
 :::note
-As of 8.5.0, Zeebe Process Test does not support the new REST API and related features (e.g. Zeebe user tasks).
+As of 8.5.0, Zeebe Process Test does not support the new REST API and related features (for example, Camunda user tasks).
 :::
 
 ## Prerequisites
