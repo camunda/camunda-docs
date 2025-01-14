@@ -127,7 +127,7 @@ The task returns a JSON object containing detailed information about the email:
 - `receivedDateTime`: The email's reception datetime
 
 :::note
-Starting from version 8.7.0, the email Connector supports storing the response as a document. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the email Connector supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
 :::
 
 #### Example Response
