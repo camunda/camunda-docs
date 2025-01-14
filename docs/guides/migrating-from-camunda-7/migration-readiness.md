@@ -62,10 +62,10 @@ In general, **workflow engine data** is harder to migrate to Camunda 8:
 ## Migration tooling
 
 :::note
-We are currently developing a powerful migration toolset - expect this to be available around the 8.7 release of Camunda. For the time being, you can already rely on some solid migration tools.
+We are currently developing a powerful migration toolset - expect this to be available around the 8.7 release of Camunda. For the time being, you can already rely on several migration tools.
 :::
 
-The [Camunda 7 to Camunda 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration), contains three components that will help you with migration:
+The [Camunda 7 to Camunda 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration) contains three components to help you with migration:
 
 1. [A converter available in different flavors (web app, CLI) to convert BPMN models from Camunda 7 to Camunda 8](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter). This maps possible BPMN elements and technical attributes into the Camunda 8 format and gives you warnings where this is not possible. The result of a conversion is a model with mapped implementation details as well as hints on what changed, needs to be reviewed, or adjusted to function properly in Camunda 8.
 
