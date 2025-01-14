@@ -29,9 +29,16 @@ With the [filepicker form element](/components/modeler/forms/form-element-librar
 
 ![example payload inbound webhook connector](./assets/inbound-webhook-document.png)
 
-### Outbound (REST and email) Connectors
+### Outbound Connectors
 
-For REST and [email](/components/connectors/out-of-the-box-connectors/email.md) Connectors, you may include a **Request body** under **Payload** in the properties panel to send with your request.
+For the following outbound Connectors, you may include a **Request body** under **Payload** in the properties panel to send with your request:
+
+- [REST](/components/connectors/protocol/rest.md)
+- [Email](/components/connectors/out-of-the-box-connectors/email.md)
+- [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md)
+- [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md)
+- [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md)
+- [Box](/components/connectors/out-of-the-box-connectors/box.md)
 
 ![example REST configuration](./assets/rest-outbound-document.png)
 
