@@ -3595,7 +3595,7 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /users/{userKey}:
+  /users/{username}:
     delete:
       tags:
         - User
@@ -3604,13 +3604,12 @@ paths:
       description: |
         Deletes a user.
       parameters:
-        - name: userKey
+        - name: username
           in: path
           required: true
-          description: The key of the user to delete.
+          description: The username of the user to delete.
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "204":
           description: The user was deleted successfully.
@@ -4106,6 +4105,11 @@ components:
         - $ref: "#/components/schemas/SearchQueryRequest"
       description: User task search query request.
       type: object
+      properties:
+        filter:
+          description: The user task variable search filters.
+          allOf:
+            - $ref: "#/components/schemas/VariableUserTaskFilterRequest"
     UserTaskSearchQueryResponse:
       description: User task search query response. Key attributes as numeric values.
       deprecated: true
@@ -4190,6 +4194,14 @@ components:
           description: The user task completion date.
           allOf:
             - $ref: "#/components/schemas/DateTimeFilterProperty"
+        followUpDate:
+          description: The user task follow-up date.
+          allOf:
+            - $ref: "#/components/schemas/DateTimeFilterProperty"
+        dueDate:
+          description: The user task due date.
+          allOf:
+            - $ref: "#/components/schemas/DateTimeFilterProperty"
         processInstanceVariables:
           type: array
           description: Process Instance variables associated with the user task.
@@ -4209,6 +4221,14 @@ components:
         value:
           type: string
           description: The value of the variable.
+    VariableUserTaskFilterRequest:
+      description: The user task variable search filters.
+      type: object
+      properties:
+        name:
+          description: Name of the variable.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
     UserTaskItemBase:
       description: Base properties for UserTaskItem.
       type: object
@@ -5617,9 +5637,23 @@ components:
         email:
           description: The email of the user.
           type: "string"
+    UserCreateBase:
+      type: object
+      properties:
+        username:
+          description: The username of the user.
+          type: "string"
+        name:
+          description: The name of the user.
+          type: "string"
+        email:
+          description: The email of the user.
+          type: "string"
     UserCreateResponse:
       deprecated: true
       type: object
+      allOf:
+        - $ref: "#/components/schemas/UserCreateBase"
       properties:
         userKey:
           description: The key of the created user
@@ -5627,6 +5661,8 @@ components:
           format: int64
     UserCreateResult:
       type: object
+      allOf:
+        - $ref: "#/components/schemas/UserCreateBase"
       properties:
         userKey:
           description: The key of the created user
@@ -6570,11 +6606,11 @@ components:
 
         The following attributes can be corrected, additional attributes will be ignored:
 
-        * `assignee` - reset by providing an empty String
-        * `dueDate` - reset by providing an empty String
-        * `followUpDate` - reset by providing an empty String
-        * `candidateGroups` - reset by providing an empty list
-        * `candidateUsers` - reset by providing an empty list
+        * `assignee` - clear by providing an empty String
+        * `dueDate` - clear by providing an empty String
+        * `followUpDate` - clear by providing an empty String
+        * `candidateGroups` - clear by providing an empty list
+        * `candidateUsers` - clear by providing an empty list
         * `priority` - minimum 0, maximum 100, default 50
 
         Providing any of those attributes with a `null` value or omitting it preserves
@@ -7501,6 +7537,8 @@ components:
           $ref: "#/components/schemas/DeploymentDecisionRequirementsResult"
         form:
           $ref: "#/components/schemas/DeploymentFormResult"
+        resource:
+          $ref: "#/components/schemas/DeploymentResourceResult"
     DeploymentMetadata:
       type: object
       properties:
@@ -7512,6 +7550,8 @@ components:
           $ref: "#/components/schemas/DeploymentDecisionRequirements"
         form:
           $ref: "#/components/schemas/DeploymentForm"
+        resource:
+          $ref: "#/components/schemas/DeploymentResource"
     DeploymentProcessBase:
       description: Base properties for DeploymentProcess.
       type: object
@@ -7683,6 +7723,44 @@ components:
         formKey:
           type: string
           description: The assigned key, which acts as a unique identifier for this form.
+    DeploymentResourceBase:
+      description: Base properties for DeploymentResource.
+      type: object
+      properties:
+        resourceId:
+          type: string
+          description: |
+            The resource ID, as parsed during deployment, together with the version forms a
+            unique identifier for a specific form.
+        version:
+          type: integer
+          format: int32
+          description: The assigned resource version.
+        resourceName:
+          type: string
+          description: The resource name from which this resource was parsed.
+        tenantId:
+          type: string
+          description: The tenant ID of the deployed form.
+    DeploymentResource:
+      description: A deployed Resource.
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/DeploymentResourceBase"
+      properties:
+        resourceKey:
+          type: integer
+          format: int64
+          description: The assigned key, which acts as a unique identifier for this Resource.
+    DeploymentResourceResult:
+      description: A deployed Resource.
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/DeploymentResourceBase"
+      properties:
+        resourceKey:
+          type: string
+          description: The assigned key, which acts as a unique identifier for this Resource.
 
     CreateProcessInstanceRequest:
       type: object
@@ -8033,10 +8111,10 @@ components:
           description: The BPMN ID of the form.
           type: string
         schema:
-          description: The schema of the form.
+          description: The form content.
           type: object
         version:
-          description: The version of the form.
+          description: The version of the the deployed form.
           type: integer
           format: int64
     FormItem:
