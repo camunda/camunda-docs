@@ -51,11 +51,13 @@ Whenever this Java version changes, you'll either have to [switch to the testcon
 </dependency>
 ```
 
-## Camunda Spring SDK Integration
+## Camunda Spring SDK integration
 
-### Camunda Spring SDK Embedded Module
+You can add testing to your Camunda Spring SDK setup as follows.
 
-In a setup with the Camunda Spring SDK, you make use of an in-memory test engine and do assertions by adding this Maven dependency:
+### Camunda Spring SDK embedded module
+
+To integrate an in-memory test engine and use assertions, add the following Maven dependency:
 
 ```xml
 <dependency>
@@ -66,9 +68,9 @@ In a setup with the Camunda Spring SDK, you make use of an in-memory test engine
 </dependency>
 ```
 
-### Camunda Spring SDK Testcontainers Module
+### Camunda Spring SDK testcontainers module
 
-In a setup with the Camunda Spring SDK, you can make use of a testcontainer engine and do assertions by adding this Maven dependency:
+To integrate a testcontainer engine and use assertions, add the following Maven dependency:
 
 ```xml
 <dependency>
@@ -81,7 +83,7 @@ In a setup with the Camunda Spring SDK, you can make use of a testcontainer engi
 
 ### Usage
 
-By adding the `@ZeebeSpringTest` annotation to your spring boot test case, you will have the engine and a client available in your test case.
+Add the `@ZeebeSpringTest` annotation to your Spring Boot test case to make the engine and a client available in your test case.
 
 ```java
 @SpringBootTest
@@ -91,9 +93,11 @@ public class TestMyProcess {
     private ZeebeClient client;
 ```
 
-An example test case is [available here](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java).
+You can find an example test case in the Camunda Community Hub at [Camunda 8 examples](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java).
 
-> Please do not use `zeebeTestEngine.waitForBusyState(...)` to wait for a timer. This will not work as this is also triggered by an incoming job activation.
+:::note
+Do not use `zeebeTestEngine.waitForBusyState(...)` to wait for a timer. This will not work as this is also triggered by an incoming job activation.
+:::
 
 ## Annotation
 
