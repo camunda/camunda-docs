@@ -212,21 +212,14 @@ connectors:
     - name: workdir
       mountPath: /opt/app/file-secret-provider-2.1.2.jar
       subPath: file-secret-provider-2.1.2.jar
-    # Mount the secret
-    - name: workdir
-      mountPath: /opt/app/mysecret.txt
-      subPath: mysecret.txt
   initContainers:
     - name: install
       image: busybox:1.36.1
       command: ["sh", "-c"]
       args:
         # Download a the custom secret provider into the volume
-        # As this secret provider works with files, a file with a secret is created as well
         - |
           wget -O /work-dir/file-secret-provider-2.1.2.jar https://artifacts.camunda.com/artifactory/camunda-consulting/com/camunda/consulting/connector/file-secret-provider/2.1.2/file-secret-provider-2.1.2.jar
-          touch /work-dir/mysecret.txt
-          echo -n "http://info.cern.ch/" >> /work-dir/mysecret.txt
       volumeMounts:
         - name: workdir
           mountPath: "/work-dir"
