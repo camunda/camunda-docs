@@ -162,3 +162,7 @@ public void handleJobFoo(final ActivatedJob job) {
 ```
 
 See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options for job workers.
+
+## Writing test cases
+
+To learn more about writing test cases using Zeebe Process Test, see [Camunda Spring SDK integration](../java-client/zeebe-process-test.md#camunda-spring-sdk-integration).
