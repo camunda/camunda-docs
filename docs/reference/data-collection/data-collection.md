@@ -23,13 +23,13 @@ Camunda collects data through a variety of methods.
 
 ### Contractual Usage
 
-Camunda collects a limited set of contractually-agreed [usage metrics](/docs/reference/data-collection/usage-metrics.md) to evaluate billing. These are summary metrics that contain no sensitive information.
+Camunda collects a limited set of contractually-agreed [usage metrics](/reference/data-collection/usage-metrics.md) to evaluate billing. These are summary metrics that contain no sensitive information.
 
 ### Environment Data
 
 Camunda collects information about customer installations to enable better support and product improvement decisions.
 
-Self-Managed customers may choose to send a very limited set of information through the Console component's telemetry mechanism. View the [telemetry](/docs/self-managed/console-deployment/telemetry.md) page for an example of this data.
+Self-Managed customers may choose to send a very limited set of information through the Console component's telemetry mechanism. View the [telemetry](/self-managed/console-deployment/telemetry.md) page for an example of this data.
 
 ### Usage Data
 
@@ -40,9 +40,9 @@ Camunda collects product usage data from SaaS and Desktop Modeler users to help 
   - SaaS User Actions: Users that opt-in to analytics cookies
     (!!!!!!!!!!!!TO CONFIRM- https://camunda.slack.com/archives/C034F8NA1G8/p1736857938619039!!!!!!!!!!!!!!)
     gain access to in-app tutorials and automatically submit information about the actions they take in Camunda. In addition to the data collected from system actions described above, Camunda collects cursor activity, geographical area, browser information, and basic biographical information like email and name for user actions.
-  - Desktop Modeler User Actions: Users opting into collection of [telemetry data in Desktop Modeler](docs/components/modeler/desktop-modeler/telemetry.md) send certain data to Camunda.
+  - Desktop Modeler User Actions: Users opting into collection of [telemetry data in Desktop Modeler](/components/modeler/desktop-modeler/telemetry/telemetry.md) send certain data to Camunda.
 - Shared Data: Data intentionally shared with Camunda, such as survey information, feedback, or bug reports.
-- AI Usage: Camunda's AI features, currently available in SaaS only, collect anonymized inputs, outputs, and feedback to improve their quality. All AI features are clearly labeled as AI features and, with the exception of the AI Form Generator, require opt-in in the Console to [enable AI-powered features](/docs/components/console/manage-organization/enable-alpha-features/#enable-ai-powered-features.md).
+- AI Usage: Camunda's AI features, currently available in SaaS only, collect anonymized inputs, outputs, and feedback to improve their quality. All AI features are clearly labeled as AI features and, with the exception of the AI Form Generator, require opt-in in the Console to [enable AI-powered features](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features).
 
 ### Example
 
