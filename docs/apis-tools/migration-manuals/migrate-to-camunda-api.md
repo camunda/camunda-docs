@@ -15,13 +15,11 @@ Camunda is streamlining the developer experience by creating a unified REST API 
 The Administration and Web Modeler APIs will not be part of the Camunda 8 REST API, as these are platform APIs outside the cluster’s scope.
 :::
 
-Overtime, there will be a deprecation process for the individual component APIs starting with the former Operate and Tasklist APIs. These will continue to be in the product for the short-term, but it is recommended to begin the adoption of the new API. In addition, we will begin to deprecate several Zeebe gPRC endpoints as well. See [the official blog announcement](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/).
+Over time, there will be a deprecation process for the individual component APIs starting with the former Operate and Tasklist APIs. These will continue to be in the product for the short-term, but it is recommended to begin the adoption of the new API. In addition, we will begin to deprecate several Zeebe gPRC endpoints as well. See [the official blog announcement](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/).
 
-## Migrate endpoints
+This guide considers all public endpoints existing in the component REST APIs and the Camunda 8 API counterparts or required migration changes.
 
-This section considers all public endpoints existing in the component REST APIs and the Camunda 8 API counterparts or required migration changes.
-
-### General changes
+## General endpoint changes
 
 <Tabs groupId="endpoints" defaultValue="all-endpoints" queryString values={
 [
@@ -57,19 +55,88 @@ This section considers all public endpoints existing in the component REST APIs 
 
 <!--- TBD since currently in progress: Filter attributes can use Advanced Search capabilities depending on their type. TBD: We need to see how much of this we manage to implement with 8.7 (which endpoints, which attributes, which types). --->
 
-### Name changes and mappings
+## Name changes and mappings
 
 The following conventions apply to all attributes:
 
 - `key` and `id` fields contain the entity as a prefix, for example, `userTaskKey`, `processDefinitionId`. This applies when referencing other resources like `formKey` in the user task entity, in the respective entities themselves like `userTaskKey` in the user task entity.
 - The full entity is the prefix to avoid confusion, for example `processDefinitionKey` instead of `processKey` (the latter could be interpreted as process instance or process definition).
 - Other attributes of entities themselves have no prefix to avoid clutter, for example version in the process definition entity. In other resources, they have to be referenced with a prefix, like `processDefinitionVersion` in the process instance entity.
-- The `bpmnProcessId` is now called `processDefinitionId` to be easily relatable to the entity (process definition) and the accompanying `processDefinitionKey`.
-- The `decisionKey` and `dmnDecisionKey` are now aligned to `decisionDefinitionKey`, the `decisionId` and `dmnDecisionId` to `decisionDefinitionId`. Similar to the `processDefinitionId`, those attributes are now related to the entity `decisionDefinition`.
+- The `bpmnProcessId` is now called `processDefinitionId` to be easily relatable to the process definition entity, like the `processDefinitionKey`.
+- The `decisionKey` and `dmnDecisionKey` are now aligned to `decisionDefinitionKey`, the `decisionId` and `dmnDecisionId` to `decisionDefinitionId`. Similar to the `processDefinitionId` being related to the process definition, those attributes are now easily relatable to the decision definition entity.
 
 <!--- Insert Operate section with V1 endpoint and V2 endpoint to use with input/output adjustments --->
 
-### Tasklist
+## Tasklist API
+
+### Form
+
+#### Get a form
+
+- **V1 endpoint**: `GET /v1/forms/{formId}`
+- **V2 endpoints**:
+  - `GET /v2/user-tasks/{userTaskKey}/form`
+  - `GET /v2/process-definitions/{processDefinitionKey}/form`
+
+<Tabs groupId="get-form" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- Forms are not directly fetched anymore, they are fetched by user task or process definition to get the respective form data
+- All input attributes removed
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Embedded forms no longer returned; only supported for user tasks.
+- `isDeleted` and `processDefinitionKey` removed.
+- `id` renamed to `formKey`.
+- `title` renamed to `bpmnId`.
+
+</TabItem>
+</Tabs>
+
+### Task
+
+#### Save task draft variables
+
+- **V1 endpoint**: `POST /v1/tasks/{taskId}/variables`
+- **V2 endpoint**: This feature is not supported in V2 anymore. Use [setting variables][] as `local` to the user task's `elementInstanceKey` as a replacement.
+
+#### Search task variables
+
+- **V1 endpoint**: `POST /v1/tasks/{taskId}/variables/search`
+- **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}/variables`
+
+<Tabs groupId="search-vars-by-task" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- `includeVariables` removed
+  - **V2:** Returns all variables associated with the user task.
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- Unified response structure.
+- Variables associated with both process and user task scopes returned with `scopeKey`.
+- `draft` removed (no draft variables).
+- `id` replaced with `variableKey`.
+
+</TabItem>
+</Tabs>
 
 #### Search tasks
 
@@ -85,7 +152,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changes as outlined above.
+- Request structure changed as outlined in [general changes]().
 - `assigned (boolean)` removed
   - **V2:** Use `assignee` with `{ "$exists": false }`
 - `assignees (string[])` removed
@@ -130,14 +197,12 @@ The following conventions apply to all attributes:
 
 </Tabs>
 
----
+#### Unassign user task
 
-#### Get user task
+- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/unassign`
+- **V2 endpoint**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
 
-- **V1 endpoint**: `GET /v1/tasks/{taskId}`
-- **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}`
-
-<Tabs groupId="get-user-task" defaultValue="input-adjustments" queryString values={
+<Tabs groupId="unassign-user-task" defaultValue="input-adjustments" queryString values={
 [
 {label: 'Input adjustments', value: 'input-adjustments'},
 {label: 'Output adjustments', value: 'output-adjustments'},
@@ -152,12 +217,37 @@ No input adjustments.
 
 <TabItem value='output-adjustments'>
 
-Same output adjustments as **Search tasks**.
+- V1 returned `200` with the user task body
+- V2 returns `204` (No Content)
 
 </TabItem>
 </Tabs>
 
----
+#### Complete user task
+
+- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/complete`
+- **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/completion`
+
+<Tabs groupId="complete-user-task" defaultValue="input-adjustments" queryString values={
+[
+{label: 'Input adjustments', value: 'input-adjustments'},
+{label: 'Output adjustments', value: 'output-adjustments'},
+]
+}>
+
+<TabItem value='input-adjustments'>
+
+- `action` attribute added (defaults to `"complete"` if not provided)
+
+</TabItem>
+
+<TabItem value='output-adjustments'>
+
+- V1 returned `200` with the user task body
+- V2 returns `204` (No Content)
+
+</TabItem>
+</Tabs>
 
 #### Assign user task
 
@@ -186,14 +276,12 @@ Same output adjustments as **Search tasks**.
 </TabItem>
 </Tabs>
 
----
+#### Get user task
 
-#### Unassign user task
+- **V1 endpoint**: `GET /v1/tasks/{taskId}`
+- **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}`
 
-- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/unassign`
-- **V2 endpoint**: `DELETE /v2/user-tasks/{userTaskKey}/assignee`
-
-<Tabs groupId="unassign-user-task" defaultValue="input-adjustments" queryString values={
+<Tabs groupId="get-user-task" defaultValue="input-adjustments" queryString values={
 [
 {label: 'Input adjustments', value: 'input-adjustments'},
 {label: 'Output adjustments', value: 'output-adjustments'},
@@ -208,153 +296,7 @@ No input adjustments.
 
 <TabItem value='output-adjustments'>
 
-- V1 returned `200` with the user task body
-- V2 returns `204` (No Content)
-
-</TabItem>
-</Tabs>
-
----
-
-#### Complete user task
-
-- **V1 endpoint**: `PATCH /v1/tasks/{taskId}/complete`
-- **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/completion`
-
-<Tabs groupId="complete-user-task" defaultValue="input-adjustments" queryString values={
-[
-{label: 'Input adjustments', value: 'input-adjustments'},
-{label: 'Output adjustments', value: 'output-adjustments'},
-]
-}>
-
-<TabItem value='input-adjustments'>
-
-- `action` attribute added (defaults to `"complete"` if not provided)
-
-</TabItem>
-
-<TabItem value='output-adjustments'>
-
-- V1 returned `200` with the user task body
-- V2 returns `204` (No Content)
-
-</TabItem>
-</Tabs>
-
----
-
-#### Save task draft variables
-
-- **V1 endpoint**: `POST /v1/tasks/{taskId}/variables`
-- **V2 endpoint**: Not supported
-
-<Tabs groupId="save-task-draft-vars" defaultValue="input-adjustments" queryString values={
-[
-{label: 'Input adjustments', value: 'input-adjustments'},
-{label: 'Output adjustments', value: 'output-adjustments'},
-]
-}>
-
-<TabItem value='input-adjustments'>
-
-Not applicable, as this feature is not supported in V2.
-
-</TabItem>
-
-<TabItem value='output-adjustments'>
-
-Not applicable, as this feature is not supported in V2.
-
-</TabItem>
-</Tabs>
-
----
-
-#### Update user task
-
-- **V1 endpoint**: No direct V1 equivalent
-- **V2 endpoint**: `PATCH /v2/user-tasks/{userTaskKey}`
-
-<Tabs groupId="update-user-task" defaultValue="input-adjustments" queryString values={
-[
-{label: 'Input adjustments', value: 'input-adjustments'},
-{label: 'Output adjustments', value: 'output-adjustments'},
-]
-}>
-
-<TabItem value='input-adjustments'>
-
-This is a new endpoint in V2, no V1 adjustments.
-
-</TabItem>
-
-<TabItem value='output-adjustments'>
-
-Refer to [the documentation](docs/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx) for which attributes can be updated:
-
-</TabItem>
-</Tabs>
-
----
-
-#### Search variables by a task
-
-- **V1 endpoint**: `POST /v1/tasks/{taskId}/variables/search`
-- **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}/variables`
-
-<Tabs groupId="search-vars-by-task" defaultValue="input-adjustments" queryString values={
-[
-{label: 'Input adjustments', value: 'input-adjustments'},
-{label: 'Output adjustments', value: 'output-adjustments'},
-]
-}>
-
-<TabItem value='input-adjustments'>
-
-- `includeVariables` removed
-  - **V2:** Returns all variables associated with the user task.
-
-</TabItem>
-
-<TabItem value='output-adjustments'>
-
-- Unified response structure.
-- Variables associated with both process and user task scopes returned with `scopeKey`.
-- `draft` removed (no draft variables).
-- `id` replaced with `variableKey`.
-
-</TabItem>
-</Tabs>
-
-### Forms
-
-#### Get form
-
-- **V1 endpoint**: `GET /v1/forms/{formId}`
-- **V2 endpoints**:
-  - `GET /v2/user-tasks/{userTaskKey}/form`
-  - `GET /v2/process-definitions/{processDefinitionKey}/form`
-
-<Tabs groupId="get-form" defaultValue="input-adjustments" queryString values={
-[
-{label: 'Input adjustments', value: 'input-adjustments'},
-{label: 'Output adjustments', value: 'output-adjustments'},
-]
-}>
-
-<TabItem value='input-adjustments'>
-
-- No input parameters in V2; all input attributes removed.
-
-</TabItem>
-
-<TabItem value='output-adjustments'>
-
-- Embedded forms no longer returned; only supported for user tasks.
-- `isDeleted` and `processDefinitionKey` removed.
-- `id` renamed to `formKey`.
-- `title` renamed to `bpmnId`.
+Same output adjustments as **Search tasks**.
 
 </TabItem>
 </Tabs>
@@ -395,3 +337,5 @@ Refer to [the documentation](docs/apis-tools/camunda-api-rest/specifications/upd
 <!--- TODO: open questions and related resources --->
 
 <!--- TODO: insert link to C8 REST API guidelines --->
+
+[setting variables]: /apis-tools/camunda-api-rest/specifications/create-element-instance-variables.mdx
