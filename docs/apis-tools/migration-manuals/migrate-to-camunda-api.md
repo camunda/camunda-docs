@@ -94,10 +94,15 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Embedded forms no longer returned; only supported for user tasks.
-- `isDeleted` and `processDefinitionKey` removed.
-- `id` renamed to `formKey`.
-- `title` renamed to `bpmnId`.
+- Embedded forms are no longer returned as Camunda user tasks don't support them.
+- `isDeleted` removed
+  - This information is not served anymore.
+- `processDefinitionKey` removed
+  - The form content is fetched per user task or process definition, so this relational information is not necessary in the context anymore.
+- `id` renamed
+  - Use `formKey` as this refers to the unique system identifier of the form
+- `title` renamed
+  - Use `formId` as this aligns better with the attribute defined in the form schema
 
 </TabItem>
 </Tabs>
