@@ -22,20 +22,6 @@ For Camunda 8, Optimize is importing process data from exported zeebe records as
 
 ## Recommended additional configurations
 
-### Adjust engine heap size
-
-Sending huge process definition diagrams via Rest API might cause the engine to crash if the engine heap size is inadequately limited. Thus, it is recommended to increase the heap size of the engine to at least 2 GB; for example, by adding the following Java command line property when starting the engine:
-
-```bash
--Xmx2048m
-```
-
-For Camunda 7, it is also recommended to decrease the [deployment cache size](https://docs.camunda.org/manual/latest/user-guide/process-engine/deployment-cache/#customize-the-maximum-capacity-of-the-cache) to `500`, e.g. by:
-
-```bash
-<property name="cacheCapacity" value="500" />
-```
-
 ### Adjust Optimize heap size
 
 By default, Optimize is configured with 1GB JVM heap memory. Depending on your setup and actual data, you might still encounter situations where you need more than this default for a seamless operation of Optimize. To increase the maximum heap size, you can set the environment variable `OPTIMIZE_JAVA_OPTS` and provide the desired JVM system properties; for example, for 2GB of Heap:

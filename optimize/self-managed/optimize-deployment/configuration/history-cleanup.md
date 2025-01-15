@@ -9,14 +9,12 @@ import TabItem from "@theme/TabItem";
 
 To satisfy data protection laws or just for general storage management purposes, Optimize provides an automated cleanup functionality.
 
-There are four types of history cleanup:
+There are two types of history cleanup:
 
 - Process data cleanup
-- Decision data cleanup
-- External event cleanup
 - External variable cleanup
 
-By default, all four types of history cleanup are disabled. They can be enabled individually by config and the cleanup is applied accordingly.
+By default, all types of history cleanup are disabled. They can be enabled individually by config and the cleanup is applied accordingly.
 
 ## Setup
 
