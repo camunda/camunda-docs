@@ -81,6 +81,7 @@ module.exports = {
         "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
+        "components/concepts/document-handling",
         {
           "Access control": [
             "components/concepts/access-control/user-groups",
@@ -327,6 +328,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
                 "components/connectors/out-of-the-box-connectors/amazon-sns",
                 "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-s3",
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
             },
@@ -856,7 +858,7 @@ module.exports = {
     },
     {
       "Migration manuals": [
-        "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
         "apis-tools/migration-manuals/migrate-to-camunda-api",
       ],
     },

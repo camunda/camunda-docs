@@ -127,6 +127,8 @@ The network configuration allows configuration of the host and port details for 
 | port                 | Sets the port the gateway binds to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_PORT`.                                                                                                                                                                                                                     | 26500         |
 | minKeepAliveInterval | Sets the minimum keep alive interval. This setting specifies the minimum accepted interval between keep alive pings. This value must be specified as a positive integer followed by 's' for seconds, 'm' for minutes, or 'h' for hours. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MINKEEPALIVEINTERVAL`. | 30s           |
 | maxMessageSize       | Sets the maximum size of the incoming and outgoing messages (i.e. commands and events). Apply the same setting on the broker too, see `ZEEBE_BROKER_NETWORK_MAXMESSAGESIZE`. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MAXMESSAGESIZE`.                                                                  | 4MB           |
+| socketReceiveBuffer  | Sets the size of the socket's receive buffer for the gateway. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_SOCKETRECEIVEBUFFER`.                                                                                                                                                | 4MB           |
+| socketSendBuffer     | Sets the size of the socket's send buffer for the gateway. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_SOCKETSENDBUFFER`.                                                                                                                                                      | 4MB           |
 
 #### YAML snippet
 
@@ -136,6 +138,8 @@ network:
   port: 26500
   minKeepAliveInterval: 30s
   maxMessageSize: 4MB
+  socketReceiveBuffer: 4MB
+  socketSendBuffer: 4MB
 ```
 
 ### zeebe.gateway.cluster

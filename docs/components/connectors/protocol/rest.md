@@ -213,10 +213,6 @@ Secrets are currently not supported in the body of a **REST Connector**.
 
 ## Response
 
-:::note
-Starting from version 8.7.0, the REST Connector supports storing the response as a document.
-:::
-
 The HTTP response will be available in a temporary local `response` variable. This variable can be mapped to the process by specifying the **Result variable**.
 
 The following fields are available in the `response` variable:
@@ -233,6 +229,10 @@ The following fields are available in the `response` variable:
     - **fileName**: Name of the stored document.
     - **customProperties**: Custom properties of the stored document.
     - **contentType**: Content type of the stored document.
+
+:::note
+Starting from version 8.7.0, the REST Connector supports storing the response as a document. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
 
 ## Output mapping
 
