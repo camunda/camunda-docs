@@ -87,8 +87,8 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Forms are not directly fetched anymore, they are fetched by user task or process definition to get the respective form data
-- All input attributes removed
+- You cannot fetch forms directly anymore. Instead, fetch them by user task or process definition to get the respective form data.
+- The respective endpoint only takes the key of the resource the form is related to as input parameter.
 
 </TabItem>
 
@@ -96,13 +96,13 @@ The following conventions apply to all attributes:
 
 - Embedded forms are no longer returned as Camunda user tasks don't support them.
 - `isDeleted` removed
-  - This information is not served anymore.
+  - The endpoint does not serve this information anymore.
 - `processDefinitionKey` removed
-  - The form content is fetched per user task or process definition, so this relational information is not necessary in the context anymore.
+  - You can identify the related entity from the endpoint resource and the provided key parameter, the form response does not contain it additionally anymore.
 - `id` renamed
-  - Use `formKey` as this refers to the unique system identifier of the form
+  - Use `formKey` as this refers to the unique system identifier of the form.
 - `title` renamed
-  - Use `formId` as this aligns better with the attribute defined in the form schema
+  - Use `formId` as this aligns better with the attribute defined in the form schema.
 
 </TabItem>
 </Tabs>
@@ -117,7 +117,7 @@ The following conventions apply to all attributes:
 #### Search task variables
 
 - **V1 endpoint**: `POST /v1/tasks/{taskId}/variables/search`
-- **V2 endpoint**: `GET /v2/user-tasks/{userTaskKey}/variables`
+- **V2 endpoint**: `POST /v2/user-tasks/{userTaskKey}/variables/search`
 
 <Tabs groupId="search-vars-by-task" defaultValue="input-adjustments" queryString values={
 [
@@ -128,17 +128,33 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
+- Request structure changes as outlined in [general changes][].
+- `variableNames` renamed and type changed
+  - Use the `filter` object's `name`, either with a plain string for one exact match or with `{ "$in": [ "xyz", ... ]}`.
 - `includeVariables` removed
-  - **V2:** Returns all variables associated with the user task.
+  - The endpoint returns all variables associated with the user task.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- Unified response structure.
-- Variables associated with both process and user task scopes returned with `scopeKey`.
-- `draft` removed (no draft variables).
-- `id` replaced with `variableKey`.
+- Response structure changes as outlined in [general changes][].
+- `id` renamed
+  - User `variableKey` as this refers to the unique system identifier of the variable.
+- `value` renamed
+  - Use `fullValue` as this represents the full variable value in case the `value` is only a preview due to size constraints. If the `value` is not a preview, the `fullValue` is empty.
+- `previewValue` renamed
+  - Use `value` as this always represents the variable value. This can be a preview value due to size constraints. In that case, the `fullValue` contains the full variable value.
+- `isValueTruncated` renamed
+  - Use `isTruncated` as a replacement
+- `draft` removed
+  - Draft variables are not supported in V2 anymore, see also the [Save draft variables](#save-task-draft-variables) endpoint for further details.
+- `scopeKey` added
+  - Variables belong to a specific scope, e.g., the process instance or the element instance of a user task. This value represents the scope the variables is related to.
+- `processInstanceKey` added
+  - A variable belongs to process instance and this value represents the unique system identifier of that instance.
+- `tenantId` added
+  - Variables can belong to a dedicated tenant and this value represents the one it belongs to. See [multi-tenancy][] for further details.
 
 </TabItem>
 </Tabs>
@@ -157,7 +173,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-- Request structure changed as outlined in [general changes]().
+- Request structure changed as outlined in [general changes][].
 - `assigned (boolean)` removed
   - **V2:** Use `assignee` with `{ "$exists": false }`
 - `assignees (string[])` removed
@@ -181,7 +197,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Response structure changes as outlined in [general changes](#general-changes).
+- Response structure changes as outlined in [general changes][].
 - The attribute `id` renamed to `userTaskKey`.
 - The attribute `taskDefinitionId` renamed to `elementId`.
 - The attribute `taskState` renamed to `state`.
@@ -344,3 +360,5 @@ Same output adjustments as **Search tasks**.
 <!--- TODO: insert link to C8 REST API guidelines --->
 
 [setting variables]: /apis-tools/camunda-api-rest/specifications/create-element-instance-variables.mdx
+[general changes]: #general-endpoint-changes
+[multi-tenancy]: /self-managed/concepts/multi-tenancy.md
