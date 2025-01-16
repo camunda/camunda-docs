@@ -4,6 +4,8 @@ level: warning
 ignorecase: true
 tokens:
   - whitelist
+  - white-listed
+  - white-list
   - abort
   - blackbox
   - blacklist
