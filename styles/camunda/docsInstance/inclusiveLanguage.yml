@@ -1,0 +1,16 @@
+extends: existence
+message: "Non-inclusive terminology used. Review the WCoE for using inclusive language."
+level: warning
+ignorecase: true
+tokens:
+  - whitelist
+  - abort
+  - blackbox
+  - blacklist
+  - cripple
+  - he
+  - she
+  - master
+  - slave
+  - webmaster
+  - whitebox
