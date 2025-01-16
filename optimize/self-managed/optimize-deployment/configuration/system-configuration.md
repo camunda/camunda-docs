@@ -184,7 +184,7 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 
 These settings are only relevant when operating Optimize with OpenSearch.
 
-#### Connection settings
+#### Connection settings OpenSearch
 
 This section details everything related to building the connection to OpenSearch.
 
@@ -197,7 +197,7 @@ You can define a number of connection points in a cluster. Therefore, everything
 | opensearch.connection.timeout                  | 10000         | Maximum time without connection to OpenSearch that Optimize should wait until a timeout triggers. |
 | opensearch.connection.pathPrefix               |               | The path prefix under which OpenSearch is available.                                              |
 | opensearch.connection.nodes[*].host            | localhost     | The address/hostname under which the OpenSearch node is available.                                |
-| opensearch.connection.nodes[*].httpPort        | 9205          | A port number used by OpenSearch to accept HTTP connections.                                      |
+| opensearch.connection.nodes[*].httpPort        | 9200          | A port number used by OpenSearch to accept HTTP connections.                                      |
 | opensearch.connection.skipHostnameVerification | false         | Determines whether the hostname verification should be skipped.                                   |
 | opensearch.connection.awsEnabled               | false         | Determines if AWS credentials shall be used for authentication                                    |
 
