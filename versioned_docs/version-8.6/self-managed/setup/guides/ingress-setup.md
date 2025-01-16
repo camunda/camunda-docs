@@ -44,8 +44,6 @@ In this setup, a single Ingress/domain is used to access Camunda 8 web applicati
 
 :::note
 **Operate, Tasklist, Optimize, Modeler, Connectors, Console:** The Ingress path value for each component (`global.identity.auth.<component>.redirectUrl`) should match the `contextPath` for that component.
-
-**Zeebe:** `zeebeGateway.ingress.rest.path` should match `zeebe.contextPath`.
 :::
 
 ```yaml
@@ -107,11 +105,6 @@ zeebeGateway:
       enabled: true
       className: nginx
       host: "zeebe.camunda.example.com"
-    rest:
-      enabled: true
-      className: nginx
-      host: "camunda.example.com"
-      path: "/zeebe"
 ```
 
 :::note Web Modeler
