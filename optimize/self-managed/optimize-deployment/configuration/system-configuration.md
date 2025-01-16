@@ -129,7 +129,7 @@ Settings related to embedded Jetty container, which serves the Optimize applicat
 
 These settings are only relevant when operating Optimize with Elasticsearch.
 
-#### Connection settings
+#### Elasticsearch connection settings
 
 Everything that is related to building the connection to Elasticsearch.
 
@@ -151,7 +151,7 @@ if one node fails, Optimize is still able to talk to the cluster.
 | es.connection.proxy.sslEnabled                | false         | Whether this proxy is using a secured connection (HTTPS).                                                                                                                 |
 | es.connection.skipHostnameVerification        | false         | Determines whether the hostname verification should be skipped.                                                                                                           |
 
-#### Index settings
+#### Elasticsearch index settings
 
 | YAML path                                | Default value | Description                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ---------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -184,7 +184,7 @@ Define a secured connection to be able to communicate with a secured Elasticsear
 
 These settings are only relevant when operating Optimize with OpenSearch.
 
-#### Connection settings OpenSearch
+#### OpenSearch connection settings
 
 This section details everything related to building the connection to OpenSearch.
 
@@ -201,7 +201,7 @@ You can define a number of connection points in a cluster. Therefore, everything
 | opensearch.connection.skipHostnameVerification | false         | Determines whether the hostname verification should be skipped.                                   |
 | opensearch.connection.awsEnabled               | false         | Determines if AWS credentials shall be used for authentication                                    |
 
-#### Index settings
+#### OpenSearch index settings
 
 | YAML path                                        | Default value | Description                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ------------------------------------------------ | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
