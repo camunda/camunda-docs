@@ -24,8 +24,21 @@ Please review our [dual-region concept documentation](./../../../concepts/multi-
 
 ## High Level Design
 
-<!-- TODO: Add a diagram -->
-<!-- TODO: reference dns same clusters -->
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+
+_Infrastructure diagram for a OpenShift dual-region setup (click on the image to open the PDF version)_
+[![Infrastructure Diagram OpenShift Dual-Region](./assets/openshift-dual-region.jpg)](./assets/openshift-dual-region.pdf)
+
+This High-Level Design describes how the following critical components interact to achieve a Camunda 8 deployment across two regions:
+
+- An S3-compatible solution is used for replicating and taking snapshots of the Elasticsearch database.
+- A DNS entry with an associated domain is used to enable Camunda 8 failover and reroute traffic from one cluster to the other.
+- Firewall and networking components are configured to allow unrestricted communication between the two clusters.
+- Local storage is provided on each OpenShift cluster for persistent data requirements.
+- A non-overlapping network configuration is implemented on the OpenShift clusters. This is a mandatory requirement, as outlined in the [Submariner overlapping guide](https://submariner.io/0.8/getting-started/architecture/globalnet/).
+- [Red Hat OpenShift Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) is used to manage the two clusters and configure Submariner.
+- [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner) is configured on the two clusters to enable cross-namespace and cross-cluster network communication.
 
 ## Requirements
 
@@ -36,11 +49,11 @@ Please review our [dual-region concept documentation](./../../../concepts/multi-
 - A reliable means of communication between the two clusters is necessary. Ensure that each cluster can establish network connections with the other.
 - The version of your OpenShift clusters must be included in the [supported versions list](./redhat-openshift.md#supported-versions).
 
----
-
 ### CLI Requirements
 
 In addition to the general prerequisites outlined above, the following CLI tools are required for interacting with the clusters and deploying Camunda 8, these are the same CLI tools required as mentioned in the [OpenShift Guide](redhat-openshift.md#requirements).
+
+<!-- TODO: be exhaustive on the missing tools -->
 
 Some steps in this guide may require additional CLI tools, which will be specified as needed.
 
@@ -55,11 +68,9 @@ Some steps in this guide may require additional CLI tools, which will be specifi
 
 - Allow clusters to communicate between each other
 
-## Setup Advanced Cluster Management
+## Setup Advanced Cluster Management and Submariner
 
 Needed to coordinate the deployment of cross cluster resources
-
-## Setup Submariner
 
 Needed to make services discoverable from each cluster and to access it
 

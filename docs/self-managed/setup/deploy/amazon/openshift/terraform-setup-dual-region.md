@@ -50,12 +50,17 @@ Following this guide will incur costs on your cloud provider account and your Re
 <!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
 
 _Infrastructure diagram for a dual region ROSA setup (click on the image to open the PDF version)_
-[![Infrastructure Diagram ROSA Single-Region](./assets/rosa-dual-region.jpg)](./assets/rosa-dual-region.pdf)
+[![Infrastructure Diagram ROSA Dual-Region](./assets/rosa-dual-region.jpg)](./assets/rosa-dual-region.pdf)
 
 Following this tutorial and steps will result in:
 
-- A [Red Hat OpenShift with Hosted Control Plane](https://www.redhat.com/en/topics/containers/what-are-hosted-control-planes#rosa-with-hcp) cluster running the latest ROSA version with six nodes ready for Camunda 8 installation in each region.
-- The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+- Two [Red Hat OpenShift with Hosted Control Plane](https://www.redhat.com/en/topics/containers/what-are-hosted-control-planes#rosa-with-hcp) clusters running the latest ROSA version, each with six nodes ready for Camunda 8 installation in separate regions.
+- The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed and configured, enabling the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
+- [VPC Peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) configured to enable cross-region cluster communication.
+- [Route 53](https://aws.amazon.com/en/route53/) configured on [a domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html) with an [active-passive failover](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html), enabling access to Camunda 8 on both clusters.
+- An [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) (S3) bucket for [Elasticsearch backups](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
+- [Red Hat OpenShift Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) used to manage the two clusters and configure Submariner.
+- [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner) configured on the two clusters to enable cross-namespace and cross-cluster network communication.
 
 ## 1. Configure AWS and initialize Terraform
 
@@ -346,6 +351,24 @@ This section outlines the process of setting up communication between two differ
 
 The VPC peering connection enables two VPCs in different regions to connect and exchange traffic as if they were part of the same network, while maintaining security through the application of appropriate security groups.
 
+Please note that, once the VPC peering is created, it becomes a dependency of the cluster, therefore it must be destroyed before removing the cluster's VPCs.
+
+#### Retrieve the peering cluster variables
+
+In order to create the peering of each VPC's cluster, we need to gather some information using the `rosa` and `aws` cli, save the following script as `gather-peering-info.sh` in the OpenShift module folder (where your `cluster_region_1.tf` and `cluster_region_2.tf` files lives).
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/provision/gather-peering-info.sh
+```
+
+Source the script to retrieve the informations from the OpenShift clusters:
+
+```bash
+source gather-peering-info.sh
+```
+
+The script will output the two VPCs configuration at the end. We reference one cluster as the **owner** and the other one as the **accepter**, this is purely for networking naming and has no implication in terms of dependency between each cluster.
+
 #### Create the peering configuration module
 
 Create a new directory, for instance `peering`, located near of your other modules.
@@ -364,24 +387,6 @@ Along the `config.tf` file, create a variable file `variables.tf` that will refe
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/peering/variables.tf
 ```
 
-#### Configure the peering module with the cluster variables
-
-Please note that, once the VPC peering is created, it becomes a dependency of the cluster, therefore it must be destroyed before removing the cluster's VPCs.
-
-In order to create the peering of each VPC's cluster, we need to gather some information using the `rosa` and `aws` cli, save the following script as `gather-peering-info.sh`
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/provision/gather-peering-info.sh
-```
-
-Source the script to retrieve the informations:
-
-```bash
-source gather-peering-info.sh
-```
-
-The script will output the two VPCs configuration at the end. We reference one cluster as the **owner** and the other one as the **accepter**, this is purely for networking naming and has no implication in terms of dependency between each cluster.
-
 #### Initialize Terraform
 
 Once your `config.tf` and authentication are set up, you can initialize your Terraform project. The previous steps configured a dedicated S3 Bucket (`S3_TF_BUCKET_NAME`) to store your state, and the following creates a bucket key that will be used by your configuration.
@@ -398,60 +403,89 @@ terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=
 
 Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
 
+#### Execution
+
+1. Open the terminal and navigate to the Terraform folder (`peering`) containing the `config.tf` file and other `.tf` files. This folder will be used to configure VPC peering between the two regions using [the previously retrieved VPC values](#retrieve-the-peering-cluster-variables).
+
+2. Generate the Terraform execution plan:
+
+   ```bash
+   terraform plan -out peering.plan -var "owner=$(echo "$OWNER_JSON" | jq -c .)" -var "accepter=$(echo "$ACCEPTER_JSON" | jq -c .)"
+   ```
+
+3. After reviewing the execution plan, apply the configuration to create the VPC peering connection:
+
+   ```bash
+   terraform apply peering.plan     # apply the creation
+   ```
+
+   This command will initiate the creation of the peering connection, enabling communication between the two clusters.
+
+For more details, consult the official [AWS VPC Peering documentation](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
+
 ### Reference files
 
 You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7)
 
+## 2. Preparation for Camunda 8 installation
+
+### Access the created OpenShift clusters
+
+You can access the created OpenShift clusters using the following steps:
+
+1.  Set up the required environment variables from the OpenShift module folder (where your `cluster_region_1.tf` and `cluster_region_2.tf` files lives):
+
+    ```shell
+    # Cluster 1
+    export CLUSTER_1_NAME="$(terraform console <<<local.rosa_cluster_1_name | jq -r)"
+    export CLUSTER_1_API_URL=$(terraform output -raw cluster_1_openshift_api_url)
+    export CLUSTER_1_ADMIN_USERNAME="$(terraform console <<<local.rosa_cluster_1_admin_username | jq -r)"
+    export CLUSTER_1_ADMIN_PASSWORD="$(terraform console <<<local.rosa_cluster_1_admin_password | jq -r)"
+
+    # Cluster 2
+    export CLUSTER_2_NAME="$(terraform console <<<local.rosa_cluster_2_name | jq -r)"
+    export CLUSTER_2_API_URL=$(terraform output -raw cluster_2_openshift_api_url)
+    export CLUSTER_2_ADMIN_USERNAME="$(terraform console <<<local.rosa_cluster_2_admin_username | jq -r)"
+    export CLUSTER_2_ADMIN_PASSWORD="$(terraform console <<<local.rosa_cluster_2_admin_password | jq -r)"
+    ```
+
+1.  For each cluster, give cluster administrator role to the created user:
+
+    ```shell
+    rosa grant user cluster-admin --cluster="$CLUSTER_1_NAME" --user="$CLUSTER_1_ADMIN_USERNAME"
+
+    rosa grant user cluster-admin --cluster="$CLUSTER_2_NAME" --user="$CLUSTER_2_ADMIN_USERNAME"
+    ```
+
+1.  Log in to the OpenShift cluster and configure the kubeconfig contexts:
+
+    ```shell
+    # Cluster 1
+    oc login -u "$CLUSTER_1_ADMIN_USERNAME" "$CLUSTER_1_API_URL" -p "$CLUSTER_1_ADMIN_PASSWORD"
+    kubectl config delete-context "$CLUSTER_1_NAME" || true
+    kubectl config rename-context $(oc config current-context) "$CLUSTER_1_NAME"
+
+    # Cluster 2
+    oc login -u "$CLUSTER_2_ADMIN_USERNAME" "$CLUSTER_2_API_URL" -p "$CLUSTER_2_ADMIN_PASSWORD"
+    kubectl config delete-context "$CLUSTER_2_NAME" || true
+    kubectl config rename-context $(oc config current-context) "$CLUSTER_2_NAME"
+    ```
+
+1.  Verify your connection to the clusters with `oc`:
+
+    ```shell
+    oc --context "$CLUSTER_1_NAME" get nodes
+    oc --context "$CLUSTER_2_NAME" get nodes
+    ```
+
+In the remainder of the guide, different namespaces will be created following the needs of the dual-region architecture.
+
 ## 3. Installation of Submariner using Advanced Cluster Management
 
-## 4. Preparation for Camunda 8 installation
+This step is generic, therefore we invite you to follow the procedure described in **[:book: Generic OpenShift Dual-Region for Camunda 8 guide](/self-managed/setup/deploy/openshift/dual-region.md#setup-advanced-cluster-management-and-submariner)**.
 
-### Access the created OpenShift cluster
+## 4. Install Camunda 8 using the Helm chart
 
-You can access the created OpenShift cluster using the following steps:
-
-Set up the required environment variables:
-
-```shell
-export CLUSTER_NAME="$(terraform console <<<local.rosa_cluster_name | jq -r)"
-export CLUSTER_API_URL=$(terraform output -raw openshift_api_url)
-export CLUSTER_ADMIN_USERNAME="$(terraform console <<<local.rosa_admin_username | jq -r)"
-export CLUSTER_ADMIN_PASSWORD="$(terraform console <<<local.rosa_admin_password | jq -r)"
-```
-
-If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
-
-```shell
-rosa grant user cluster-admin --cluster="$CLUSTER_NAME" --user="$CLUSTER_ADMIN_USERNAME"
-```
-
-Log in to the OpenShift cluster:
-
-```shell
-oc login -u "$CLUSTER_ADMIN_USERNAME" "$CLUSTER_API_URL" -p "$CLUSTER_ADMIN_PASSWORD"
-```
-
-Clean up and configure the kubeconfig context:
-
-```shell
-oc config rename-context $(oc config current-context) "$CLUSTER_NAME"
-oc config use-context "$CLUSTER_NAME"
-```
-
-Verify your connection to the cluster with `oc`:
-
-```shell
-oc get nodes
-```
-
-Create a project for Camunda using `oc`:
-
-```shell
-oc new-project camunda
-```
-
-In the remainder of the guide, the `camunda` namespace part of the camunda project will be referenced to create the required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
-
-## 5. Install Camunda 8 using the Helm chart
+<!-- TODO: add the chapter link to the dual-region part -->
 
 Now that you've exported the necessary values, you can proceed with installing Camunda 8 using Helm charts. Follow the guide [Camunda 8 on OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift.md) for detailed instructions on deploying the platform to your OpenShift cluster.
