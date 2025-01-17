@@ -1,7 +1,7 @@
 ---
 id: build-connector
-title: Custom Connectors
-description: Manage your Connector templates in Web Modeler.
+title: Custom connectors
+description: Manage your connector templates in Web Modeler.
 ---
 
 import "../out-of-the-box-connectors/connectors-table.css";
@@ -14,7 +14,7 @@ import IconConnectorGenerateImg from '../img/icon-connector-generate.png';
 import IconConnectorManageImg from '../img/icon-connector-manage.png';
 import Marketplace from '../react-components/\_banner-marketplace.md'
 
-Can't find the Connector you need? Build your own custom connector using connector templates or the SDK.
+Can't find the connector you need? Build your own custom connector using connector templates or the SDK.
 
 ## Connector templates
 
@@ -22,20 +22,20 @@ Connectors use [connector templates](/components/connectors/custom-built-connect
 and how it can be configured by process developers. Connector templates are a specific kind of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md).
 
 <div class="connector-grid">
-  <a href="../use-connectors" class="connector-card" title="About connector templates">
+  <a href="../connector-templates" class="connector-card" title="Connector templates">
       <img src={IconConnectorTemplateImg} alt="Connector templates icon"/>
     <h3>Connector templates</h3>
     <p>Create a connector task and start using connector secrets.</p>
   </a>
-    <a href="../connector-types" class="connector-card" title="Connector types">
-    <img src={IconConnectorGenerateImg} alt="Connector types"/>
+    <a href="../connector-template-generator" class="connector-card" title="Generate a connector template">
+    <img src={IconConnectorGenerateImg} alt="Generate a connector template"/>
     <h3>Generate a connector template</h3>
-    <p>Learn about <a href="../use-connectors/inbound" title="Inbound Connectors">Inbound</a> and <a href="../use-connectors/outbound" title="Outbound Connectors">Outbound</a> connector types.</p>
+    <p>Automatically generate a custom connector template in Web Modeler.</p>
   </a>
-    <a href="../out-of-the-box-connectors/available-connectors-overview" class="connector-card" title="Get started with Connectors">
-    <img src={IconConnectorManageImg} alt="How to use Connectors"/>
+    <a href="../../manage-connector-templates/" class="connector-card" title="Manage connector templates">
+    <img src={IconConnectorManageImg} alt="Manage connector templates"/>
     <h3>Manage connector templates</h3>
-    <p>configure and automatically generate a custom Connector template in Web Modeler.</p>
+    <p>Create and manage connector templates in a Web Modeler project.</p>
   </a>
 </div>
 
@@ -47,23 +47,19 @@ Use the SDK to create your own custom Java connectors.
 
 ## Connector architecture
 
-A Connector consists of two elements - the actual Java code, and the Modeler user interface.
+A connector consists of two elements - the actual Java code, and the Modeler user interface.
 
 <img src={ConnectorArchitectureImg}/>
 
-- The Java code defines the Connector functionality and how it connects to an external system. For example, the [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic) for outbound Connectors.
+- The Java code defines the connector functionality and how it connects to an external system. For example, the [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic) for outbound connectors.
 
-- You use the user interface to interact with the Connector in Modeler. This is defined in a [Connector template](../manage-connector-templates.md) that controls how the BPMN element is shown in Modeler and what configuration options are available for the Connector.
-
-For example:
+- The user interface allows you to interact with the connector in Modeler. This is defined in a [Connector template](../manage-connector-templates.md) that controls how the BPMN element is shown in Modeler and what configuration options are available for the connector.
 
 :::note
 
-- If you are only using prebuilt Connectors in Modeler, you only need to understand how to configure and use a Connector in the Modeler interface, via the Properties panel.
-- Connector templates are a specific type of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md), that can also be used when creating custom Connectors using the [Connector SDK](connector-sdk.md).
+- If you are only using prebuilt connectors in Modeler, you only need to understand how to configure and use a connector in the Modeler interface, via the Properties panel.
+- Connector templates are a specific type of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md), that can also be used when creating custom connectors using the [Connector SDK](connector-sdk.md).
 
 :::
-
-- [Install Connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md)
 
 <Marketplace/>
