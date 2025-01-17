@@ -56,7 +56,7 @@ The Zeebe Go Client and CLI client (zbctl) will be [officially deprecated](https
 
 The documentation of the Zeebe Go Client and CLI client (zbctl) moved to the [community clients section](/apis-tools/community-clients/index.md).
 
-## Spring SDK test support support in 8.6.7
+## Spring SDK test support in 8.6.7
 
 [Testing support for the Spring SDK](../apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
 
