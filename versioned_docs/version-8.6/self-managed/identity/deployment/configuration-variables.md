@@ -27,11 +27,10 @@ As a Spring Boot application, Identity supports any standard
 | `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak.         | admin-cli                                                                                                                                                                |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use.                                            | http://localhost:18080/auth                                                                                                                                              |
 
-
 ## Camunda Identity Configuration
 
 | Environment Variable              | Property         | Description                                                                                                                       | Default Value              |
-|-----------------------------------|------------------|-----------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| --------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | CAMUNDA_IDENTITY_ISSUERBACKENDURL | issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable | -                          |
 | CAMUNDA_IDENTITY_AUDIENCE         | audience         | The required audience of the auth token. This setting can also be overridden using the environment variable                       | -                          |
 | CAMUNDA_IDENTITY_TYPE             | type             | Define what kind of authentication type you will use, Choose between `KEYCLOAK`, `MICROSOFT`, `GENERIC`                           | KEYCLOAK                   |
