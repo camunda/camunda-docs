@@ -7,7 +7,7 @@ keywords: [bridge, reusable component, low code]
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import "./out-of-the-box-connectors/connectors-table.css";
+import "./react-components/\_connectors-table.css";
 import IconPlayImg from './img/icon-play.png';
 import IconConnectorImg from './img/icon-connectors.png';
 import IconConnectorTypesImg from './img/icon-connector-types.png';

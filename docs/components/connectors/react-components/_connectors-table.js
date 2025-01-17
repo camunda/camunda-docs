@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import "./connectors-table.css";
+import "./_connectors-table.css";
 import AmazonBedrockImg from "../img/connector-amazon-bedrock.png";
 import AmazonDynamoImg from "../img/connector-aws-dynamodb.png";
 import AmazonEventbridgeImg from "../img/connector-amazon-eventbridge.png";
@@ -22,7 +22,6 @@ import GoogleDriveImg from "../img/connector-google-drive.png";
 import GoogleMapsImg from "../img/connector-google-maps.png";
 import GoogleSheetsImg from "../img/connector-google-sheets.png";
 import GraphqlImg from "../img/connector-graphql.png";
-import WebhookImg from "../img/connector-webhook.png";
 import HuggingFaceImg from "../img/connector-hugging-face.png";
 import KafkaImg from "../img/connector-kafka.png";
 import Microsoft365Img from "../img/connector-365.png";
@@ -37,6 +36,7 @@ import SoapImg from "../img/connector-soap.png";
 import SqlImg from "../img/connector-sql.png";
 import TwilioImg from "../img/connector-twilio.png";
 import UipathImg from "../img/connector-uipath.png";
+import WebhookImg from "../img/connector-webhook.png";
 import WhatsappImg from "../img/connector-whatsapp.png";
 
 const SearchableTable = () => {
@@ -501,10 +501,24 @@ const SearchableTable = () => {
           ))}
         </div>
       ) : (
-        <p className="connector-no-results">
-          No Connectors found for that search term or type. Try a different
-          search, remove the type filter, or check your spelling.
-        </p>
+        <div>
+          <p className="connector-no-results">
+            Sorry, no connectors were found matching that search term and type.
+          </p>
+          <p className="connector-no-results-list">
+            <ul>
+              <li>Check your spelling.</li>
+              <li>
+                Try a different search term. For example, search for "Amazon"
+                instead of "AWS".
+              </li>
+              <li>
+                Change the type filter. For example, apply the "All" filter to
+                see if the connector exists.
+              </li>
+            </ul>
+          </p>
+        </div>
       )}
     </div>
   );

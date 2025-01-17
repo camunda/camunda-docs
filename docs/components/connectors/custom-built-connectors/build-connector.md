@@ -4,7 +4,7 @@ title: Custom connectors
 description: Manage your connector templates in Web Modeler.
 ---
 
-import "../out-of-the-box-connectors/connectors-table.css";
+import "../react-components/\_connectors-table.css";
 import IconPlayImg from '../img/icon-play.png';
 import IconConnectorImg from '../img/icon-connectors.png';
 import IconConnectorTypesImg from '../img/icon-connector-types.png';
