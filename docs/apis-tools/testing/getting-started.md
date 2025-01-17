@@ -18,7 +18,7 @@ CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https:
 :::warning Disclaimer
 For Camunda 8.6, CPT is in an [alpha version](/components/early-access/alpha/alpha-features.md#alpha).
 
-For a full-featured testing library, take a look at [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
+For a mature testing library, take a look at [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).
 :::
 
 :::note Limitations
