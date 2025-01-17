@@ -126,6 +126,13 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
+              8.5: {
+                specPath: "api/tasklist/version-8.5/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
             },
           },
         },
