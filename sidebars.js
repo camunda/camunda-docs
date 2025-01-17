@@ -1723,6 +1723,24 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
+        {
+          Databases: [
+            "self-managed/concepts/databases/overview",
+            {
+              Elasticsearch: [
+                "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+              ],
+            },
+            {
+              "Relational databases": [
+                "self-managed/concepts/databases/relational-db/database-configuration",
+              ],
+            },
+          ],
+        },
+        "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/mapping-rules",
       ],
     },
     {
