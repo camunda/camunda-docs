@@ -337,7 +337,7 @@ Read more [in the multi-tenancy documentation](../../../self-managed/concepts/mu
 :::note
 For now, multi-tenancy is only supported in combination with Identity.
 To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
-`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#camunda-identity-configuration)
+`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
 as well.
 :::
 
