@@ -33,12 +33,12 @@ A full configuration example authorizing the user `demo` and all members of the 
 ## Use Camunda activity event sources for event based processes
 
 :::note Authorization to event-based processes
-When Camunda activity events are used in event-based processes, Camunda Admin Authorizations are not inherited for the event-based process. The authorization to use an event-based process is solely managed via the access management of event-based processes when [publishing an event-based process](components/userguide/additional-features/event-based-processes.md#publishing-an-event-based-process) or at any time via the [Edit Access Option](components/userguide/additional-features/event-based-processes.md#event-based-process-list---edit-access) in the event-based process List.
+When Camunda activity events are used in event-based processes, Camunda Admin Authorizations are not inherited for the event-based process. The authorization to use an event-based process is solely managed via the access management of event-based processes when [publishing an event-based process](##publishing-an-event-based-process) or at any time via the [Edit Access Option](##event-based-process-list---edit-access) in the event-based process List.
 
-Visit [Authorization Management - event-based process](./authorization-management.md#event-based-processes) for the reasoning behind this behavior.
+Visit [Authorization Management - event-based process](##event-based-processes) for the reasoning behind this behavior.
 :::
 
-To publish event-based processes that include [Camunda Event Sources](components/userguide/additional-features/event-based-processes.md#camunda-events), it is required to set [`engines.${engineAlias}.eventImportEnabled`](./system-configuration-platform-7.md) to `true` for the connected engine the Camunda process originates from.
+To publish event-based processes that include [Camunda Event Sources](##camunda-events), it is required to set [`engines.${engineAlias}.eventImportEnabled`](./system-configuration-platform-7.md) to `true` for the connected engine the Camunda process originates from.
 
 :::note Heads Up!
 You need to [reimport data](./../migration-update/camunda-7/instructions.md#force-reimport-of-engine-data-in-optimize) from this engine to have all historic Camunda events available for event-based processes. Otherwise, only new events will be included.

@@ -22,7 +22,7 @@ Limitations of alpha features and components include:
 - Not necessarily feature-complete.
 - Might lack full documentation.
 - No guaranteed updates to newer releases.
-- Support based on SLAs agreed with you, but bugs are treated with the same priority as feature or help requests. See [Camunda Enterprise Support Guide](https://docs.camunda.org/enterprise/support/).
+- Support based on SLAs agreed with you, but bugs are treated with the same priority as feature or help requests. See [Camunda Enterprise Support Guide](https://camunda.com/services/enterprise-support-guide/).
 - No maintenance service.
 - (SaaS) No availability targets.
 - Released outside the standard [release policy](release-policy.md).
@@ -32,7 +32,7 @@ To learn more about using alpha features, see [enabling alpha features](/compone
 :::note
 
 - Alpha features can also be included in a minor version (stable) release.
-- Although there is no maintenance service, customers can still provide feedback through designated support channels, depending on their SLAs. These channels include filing issues in the respective [GitHub repositories](https://github.com/camunda) and submitting questions and suggestions by [contacting us](/contact).
+- Although there is no maintenance service, customers can still provide feedback through designated support channels, depending on their SLAs. These channels include filing issues in the respective [GitHub repositories](https://github.com/camunda) and submitting questions and suggestions by [contacting us](/reference/contact.md).
 
 :::
 
@@ -43,7 +43,7 @@ Once features and components are released and considered stable, they become gen
 Stable features and components are:
 
 - Ready for production use for most users with minimal risk.
-- Supported by [L1 Priority-level support](https://docs.camunda.org/enterprise/support/#priority-level) for production use.
+- Supported by [L1 Priority-level support](https://camunda.com/services/enterprise-support-guide/) for production use.
 - Fully documented.
 
 A release or component is considered stable if it has passed all verification and test stages and can be released to production.

@@ -19,7 +19,7 @@ While this guide uses code snippets in Java, you do not need to be a Java develo
 ## Prerequisites
 
 - Ensure you have a valid [Camunda 8 account](create-account.md), or sign up if you still need one.
-- Java >= 8
+- Java ≥ 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
 - Download and unzip or clone the [repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/orchestrate-microservices/worker-java`

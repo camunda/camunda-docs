@@ -307,7 +307,8 @@ Each interceptor should be configured with the values described below:
         </tr>
         <tr>
             <td>className</td>
-            <td>Entry point of the interceptor, a class which must:
+            <td>
+              Entry point of the interceptor, a class which must:
               <li>implement <a href="https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html">io.grpc.ServerInterceptor</a></li>
               <li>have public visibility</li>
               <li>have a public default constructor (i.e. no-arg constructor)</li>
@@ -354,3 +355,9 @@ If you are using an embedded gateway, refer to the [broker configuration guide](
 multiTenancy:
   enabled: true
 ```
+
+### Experimental configuration
+
+See the experimental section of the [gateway.yaml.template](https://github.com/camunda/camunda/blob/stable/8.4/dist/src/main/config/gateway.yaml.template#L298).
+
+Be aware that all configuration properties which are part of the experimental section are subject to change and can be dropped at any time.

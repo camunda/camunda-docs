@@ -3,16 +3,18 @@ const { unsupportedVersions } = require("./src/versions");
 
 const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
 
+const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
+
 module.exports = {
   title: "Camunda 8 Docs",
   tagline:
     "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed.",
   // url: "https://camunda-cloud.github.io",
-  url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
+  url: docsSiteUrl,
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
   customFields: {
-    canonicalUrlRoot: "https://docs.camunda.io",
+    canonicalUrlRoot: docsSiteUrl,
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -99,33 +101,15 @@ module.exports = {
       },
     ],
     [
-      // Zeebe REST API docs generation
+      // Administration Self-Managed REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
-        id: "api-zeebe-openapi",
+        id: "api-adminsm-openapi",
         docsPluginId: "default",
         config: {
-          zeebe: {
-            specPath: "api/zeebe/zeebe-openapi.yaml",
-            outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
-            sidebarOptions: {
-              groupPathsBy: "tag",
-            },
-            hideSendButton: true,
-          },
-        },
-      },
-    ],
-    [
-      // Zeebe REST API docs generation
-      "docusaurus-plugin-openapi-docs",
-      {
-        id: "api-consolesm-openapi",
-        docsPluginId: "default",
-        config: {
-          consolesm: {
-            specPath: "api/console-sm/console-sm-openapi.yaml",
-            outputDir: "docs/apis-tools/console-sm-api/specifications",
+          adminsm: {
+            specPath: "api/administration-sm/administration-sm-openapi.yaml",
+            outputDir: "docs/apis-tools/administration-sm-api/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -275,7 +259,7 @@ module.exports = {
             },
             {
               label: "Contact",
-              to: "contact",
+              to: "docs/reference/contact",
             },
           ],
         },
@@ -332,7 +316,7 @@ module.exports = {
               href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
-              html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
+              html: `<a class="footer__link-item" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
             },
             {
               label: "Licenses",
@@ -444,13 +428,9 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/1.3/**",
-            "/docs/8.2/**",
             "/docs/8.3/**",
             "/docs/8.4/**",
             "/docs/8.5/**",
-            "/optimize/3.7.0/**",
-            "/optimize/3.10.0/**",
             "/optimize/3.11.0/**",
             "/optimize/3.12.0/**",
             "/optimize/3.13.0/**",

@@ -6,7 +6,7 @@
         "guides/getting-started-java-spring",
         "guides/model-your-first-process",
         {
-          "By use case": [
+          "Orchestration use cases": [
             "guides/orchestrate-human-tasks",
             "guides/orchestrate-apis",
             "guides/orchestrate-microservices"
@@ -25,7 +25,6 @@
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/message-correlation",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors"
       ],
@@ -101,10 +100,10 @@
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/settings"
           ]
         },
@@ -475,21 +474,7 @@
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
-            {
-              "Update guide": [
-                "components/connectors/custom-built-connectors/update-guide/introduction",
-                "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
-                "components/connectors/custom-built-connectors/update-guide/090-to-0100",
-                "components/connectors/custom-built-connectors/update-guide/080-to-090",
-                "components/connectors/custom-built-connectors/update-guide/070-to-080",
-                "components/connectors/custom-built-connectors/update-guide/060-to-070",
-                "components/connectors/custom-built-connectors/update-guide/050-to-060",
-                "components/connectors/custom-built-connectors/update-guide/040-to-050",
-                "components/connectors/custom-built-connectors/update-guide/030-to-040",
-                "components/connectors/custom-built-connectors/update-guide/020-to-030",
-                "components/connectors/custom-built-connectors/update-guide/010-to-020"
-              ]
-            }
+            "components/connectors/custom-built-connectors/connector-template-generator"
           ]
         }
       ],
@@ -1607,8 +1592,7 @@
                   ]
                 }
               ]
-            },
-            "apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks"
+            }
           ]
         },
         {
@@ -1699,7 +1683,7 @@
       ]
     },
     {
-      "Clients": [
+      "Clients & SDKs": [
         {
           "Java client": [
             "apis-tools/java-client/index",
@@ -1747,16 +1731,16 @@
             }
           ]
         },
-        "apis-tools/build-your-own-client"
-      ]
-    },
-    {
-      "SDKs": [
-        "apis-tools/node-js-sdk",
+        "apis-tools/build-your-own-client",
         {
-          "Spring Zeebe": [
-            "apis-tools/spring-zeebe-sdk/getting-started",
-            "apis-tools/spring-zeebe-sdk/configuration"
+          "SDKs": [
+            "apis-tools/node-js-sdk",
+            {
+              "Spring Zeebe": [
+                "apis-tools/spring-zeebe-sdk/getting-started",
+                "apis-tools/spring-zeebe-sdk/configuration"
+              ]
+            }
           ]
         }
       ]
@@ -1780,8 +1764,14 @@
           ]
         }
       ]
+    },
+    {
+      "Migration manuals": [
+        "apis-tools/migration-manuals/migrate-to-zeebe-user-tasks"
+      ]
     }
   ],
+
   "Reference": [
     "reference/overview",
     "reference/announcements",
@@ -1794,6 +1784,7 @@
       },
       "items": ["reference/release-notes/860", "reference/release-notes/850"]
     },
+    "reference/contact",
     "reference/supported-environments",
     "reference/dependencies",
     "reference/camunda-help-center",
@@ -1841,6 +1832,17 @@
                     "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
                     "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
                     "self-managed/setup/deploy/amazon/amazon-eks/irsa"
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "ROSA",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/setup/deploy/amazon/openshift/terraform-setup"
+                  },
+                  "items": [
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup"
                   ]
                 },
                 "self-managed/setup/deploy/amazon/aws-marketplace"

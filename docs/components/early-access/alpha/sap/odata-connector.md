@@ -11,7 +11,7 @@ This Connector is designed to run in [hybrid mode](/guides/use-connectors-in-hyb
 This Connector works with Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via both OData v2 and v4.
 
 :::note Important!
-This Connector is an alpha feature and available upon request. Visit [https://camunda.com/contact](https://camunda.com/contact) to contact us.
+This Connector is an alpha feature and available upon request. Visit [our contact page](/reference/contact.md) to contact us.
 :::
 
 ## Overview
@@ -168,4 +168,4 @@ If the SAP OData Connector encounters an error, the boundary event will catch th
 
 - Ensure the connection from the Cloud Foundry environment via the destination to the SAP systems works. Using the [Terminal in Business Application Studio](https://community.sap.com/t5/technology-blogs-by-sap/how-to-check-the-connectivity-to-your-backend-system-in-business/ba-p/13479832) is a quick way to verify this.
 - Validate requests first in an API client before trying with the SAP OData Connector in Modeler. Then, copy over to the element template fields. This saves time and reduces potential error.
-- Any payload size <= 2.5MB can be considered safe.
+- Any payload size &lt;= 2.5MB can be considered safe.

@@ -50,8 +50,8 @@ If no version of Java is found, follow your chosen installation's instructions f
 Next, create a new Spring Boot project:
 
 1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
-2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.3.3).
-3. Under **Project Metadata**, configure the following:
+2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.4.1).
+3. Under **Project Metadata**, configure the following or use the [pre-filled shortcut](https://start.spring.io/#!type=maven-project&language=java&packaging=jar&groupId=io.camunda.demo&artifactId=process_payments&name=Process%20payments&description=Process%20payments%20with%20Camunda&packageName=io.camunda.demo.process_payments):
    1. **Group**: `io.camunda.demo`
    2. **Artifact**: `process_payments`
    3. **Name**: `Process payments`
@@ -113,39 +113,19 @@ To implement a service task, take the following steps:
 
 ### Configure Spring Boot Starter
 
-See our documentation on [adding the Spring Zeebe SDK to your project](/apis-tools/spring-zeebe-sdk/getting-started.md#add-the-spring-zeebe-sdk-to-your-project) for more details, also described below:
-
-1. Copy the following code snippet into the `pom.xml` file of your Spring project, below properties and above dependencies:
-
-```xml
-<repositories>
-   <repository>
-      <releases>
-         <enabled>true</enabled>
-      </releases>
-      <snapshots>
-         <enabled>false</enabled>
-      </snapshots>
-      <id>identity</id>
-      <name>Camunda Identity</name>
-      <url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
-   </repository>
-</repositories>
-```
-
-2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
+Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
 ```xml
 <dependency>
-   <groupId>io.camunda</groupId>
-   <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-   <version>8.6.3</version>
+    <groupId>io.camunda</groupId>
+    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+    <version>8.6.x</version>
 </dependency>
 ```
 
 ### Configure the Zeebe client
 
-Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
+Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe Broker:
 
 ```yaml
 camunda:

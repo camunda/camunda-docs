@@ -65,9 +65,9 @@ The importing instance has the [history cleanup enabled](./system-configuration.
 
 In the context of event-based process import and clustering, there are two additional configuration properties to consider carefully.
 
-One is specific to each configured Camunda engine [`engines.${engineAlias}.eventImportEnabled`](./system-configuration-platform-7.md) and controls whether data from this engine is imported as event source data as well for [event-based processes](components/userguide/additional-features/event-based-processes.md). You need to enable this on the same cluster node for which the [`engines.${engineAlias}.importEnabled`](./system-configuration-platform-7.md) configuration flag is set to `true`.
+One is specific to each configured Camunda engine [`engines.${engineAlias}.eventImportEnabled`](./system-configuration-platform-7.md) and controls whether data from this engine is imported as event source data as well for [event-based processes](#). You need to enable this on the same cluster node for which the [`engines.${engineAlias}.importEnabled`](./system-configuration-platform-7.md) configuration flag is set to `true`.
 
-[`eventBasedProcess.eventImport.enabled`](./setup-event-based-processes.md) controls whether the particular cluster node processes events to create event based process instances. This allows you to run a dedicated node that performs this operation, while other nodes might just feed in Camunda activity events.
+[`eventBasedProcess.eventImport.enabled`](#) controls whether the particular cluster node processes events to create event based process instances. This allows you to run a dedicated node that performs this operation, while other nodes might just feed in Camunda activity events.
 
 ### 2. Distributed user sessions - configure shared secret token
 

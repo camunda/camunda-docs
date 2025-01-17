@@ -11,7 +11,7 @@ description: "Let's analyze the prerequisites and code to deploy a process using
 
 ## Prerequisites
 
-Run the Zeebe broker with endpoint `localhost:26500` (default).
+Run the Zeebe Broker with endpoint `localhost:26500` (default).
 
 ## ProcessDeployer.java
 

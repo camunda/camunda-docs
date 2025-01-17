@@ -8,7 +8,7 @@ The supported environments page lists browsers, operating systems, clients, depl
 
 **If the particular technology is not listed, we cannot resolve issues caused by the usage of that unlisted technology.**
 
-You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/contact) to work with Consulting services.
+You may [raise a feature request](/reference/contact.md) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/reference/contact.md) to work with Consulting services.
 
 Recommendations are denoted with [recommended], however, other listed options are supported as well.
 
@@ -30,7 +30,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Desktop Modeler
 
 - Windows 10 / 11
-- Mac OS 12 / 13 / 14
+- Mac OS 12 / 13 / 14 / 15
 - Ubuntu LTS (latest)
 
 ## Clients

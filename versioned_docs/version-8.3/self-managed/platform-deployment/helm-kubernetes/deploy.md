@@ -5,7 +5,7 @@ sidebar_label: "Deploy"
 description: "Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider."
 ---
 
-Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider. The charts are available in [Camunda Helm repository](https://github.com/camunda/camunda-platform-helm) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
+Camunda provides continuously improved Helm charts which are not cloud provider-specific, so you can choose your Kubernetes provider. The charts are available in [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues) if you find any of them.
 
 ## What is Helm?
 
@@ -30,7 +30,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 
 ![Camunda 8 Self-Managed Architecture Diagram](../../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
 
-When installing the [camunda-platform](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform) Helm chart, all the components in this picture are installed.
+When installing the [Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform), all the components in this picture are installed.
 
 ## Install Camunda 8 using Helm
 
@@ -185,7 +185,7 @@ Alternatively, create an image pull secret [from your Docker configuration file]
 
 #### Configure Web Modeler
 
-To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the Helm chart's [README](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform#web-modeler) file):
+To set up Web Modeler, you need to provide the following required configuration values (all available configuration options are described in more detail in the [Helm chart's docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#web-modeler)):
 
 - Enable Web Modeler with `webModeler.enabled: true` (it is disabled by default).
 - Configure the previously created [image pull secret](#create-image-pull-secret) in `webModeler.image.pullSecrets`.

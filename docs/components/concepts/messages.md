@@ -4,7 +4,7 @@ title: "Messages"
 description: "Learn how process instances can respond to incoming messages."
 ---
 
-Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called **[message correlation](/guides/message-correlation.md)**.
+Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called [message correlation](/components/modeler/bpmn/message-events/message-events.md#message-correlation).
 
 ## Message subscriptions
 
@@ -12,7 +12,7 @@ A message is not sent to a process instance directly. Instead, the message corre
 
 ![Message Correlation](assets/message-correlation.png)
 
-A subscription is opened when a process instance awaits a message; for example, when entering a message catch event. The message name is defined either statically in the process (e.g. `Money collected`) or dynamically as an expression. The correlation key is defined dynamically as an expression (e.g. `= orderId`). The expressions are evaluated on activating the message catch event. The results of the evaluations are used as message name and as correlation key of the subscription (e.g. `"order-123"`).
+A subscription is opened when a process instance awaits a message; for example, when entering a message catch event. The message name is defined either statically in the process (e.g. `Money collected`) or dynamically as an expression. The correlation key is defined dynamically as an expression (for example, `= orderId`). The expressions are evaluated on activating the message catch event. The results of the evaluations are used as message name and as correlation key of the subscription (e.g. `"order-123"`).
 
 When a message is published and the message name and correlation key match to a subscription, the message is correlated to the corresponding process instance. If no proper subscription is opened, the message is discarded.
 
@@ -81,7 +81,7 @@ zbctl publish message "Money collected" --correlationKey "order-123" --messageId
 
 By combining the principles of message correlation, message uniqueness, and message buffering, very different behaviors can be achieved. Please note that a message name is mandatory, so it is omitted from the table.
 
-| Correlation key | Message Id | Time to live | Receiver type      | Behavior                                                                                                                                                                                        |
+| Correlation key | Message ID | Time to live | Receiver type      | Behavior                                                                                                                                                                                        |
 | --------------- | ---------- | ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | set             | not set    | set to 0     | Start event        | A new instance is started if no instance with the correlation key set at start is active, see [single instance](./#single-instance).                                                            |
 | set             | not set    | set to 0     | Intermediate event | The message is correlated if a matching subscription is active.                                                                                                                                 |
@@ -118,6 +118,10 @@ The first message creates a new process instance. The following messages are cor
 
 When the instance ends and messages with the same correlation key are not correlated yet, a new process instance is created.
 
+:::note
+You may also use TTL to wait for messages that may arrive earlier when combining [start events and intermediate catch events](/docs/components/modeler/bpmn/events.md).
+:::
+
 ### Single instance
 
 **Problem**: Create exactly one instance of a process
@@ -134,7 +138,7 @@ The first message creates a new process instance. The following messages are dis
 
 Publishing a message is a fire-and-forget action. As a user, you do not know if the correlation is a success.
 
-To know if a published message was correlated (and to which process instance), use the [message correlation endpoint](../../apis-tools/camunda-api-rest/specifications/correlate-a-message.api.mdx).
+To know if a published message was correlated (and to which process instance), use the [message correlation endpoint](../../apis-tools/camunda-api-rest/specifications/correlate-message.api.mdx).
 
 The message correlation endpoint works similarly to the message publish endpoint. However, the message correlation endpoint does not support [message buffering](#message-buffering). Any message published using this endpoint is either immediately correlated, or not correlated at all. This is due to the synchronous nature of requiring a response.
 

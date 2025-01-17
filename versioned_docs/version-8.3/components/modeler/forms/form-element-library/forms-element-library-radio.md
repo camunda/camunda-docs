@@ -6,7 +6,7 @@ description: A form element to select a value from set options
 
 A radio button allowing the user to select one of multiple data option for small datasets.
 
-![Form Radio Symbol](/img/form-icons/form-radio.svg)
+<img src="/img/form-icons/form-radio.svg" alt="Form Radio Symbol" />
 
 ### Configurable properties
 
@@ -18,7 +18,7 @@ A radio button allowing the user to select one of multiple data option for small
 - **Disabled**: Disables the radio component, for use during development.
 - **Options source**: Radio components can be configured with an options source defining the individual choices the component provides, refer to [options source docs](../configuration/forms-config-options.md).
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the radio.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: One radio option must be selected.
 

@@ -20,6 +20,8 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-breadcrumb-item-background-active: none;
   --ifm-breadcrumb-color-active: var(--ifm-font-color-base);
   --ifm-menu-color: var(--ifm-color-emphasis-800);
+  --ifm-heading-font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont,
+    Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
 }
 
 /* Dark mode */
@@ -342,63 +344,10 @@ body {
   transition: all 0.3s ease;
 }
 
-.osano-footer-link-docu {
-  color: var(--ifm-color-link-footer);
-}
-
 .hero--secondary {
   background-color: #14d890;
   background-size: 100%;
   color: #000;
-}
-
-/* Osano Styles  */
-.osano-cm-widget {
-  display: none;
-}
-.osano-cm-widget:focus,
-.osano-cm-widget:hover {
-  opacity: 1;
-  transform: none;
-}
-.osano-cm-widget:active {
-  transform: translateY(1px);
-}
-div.osano-cm-info__info-views.osano-cm-info-views.osano-cm-info-views--position_0
-  > div
-  > ul
-  > li:last-of-type {
-  display: none;
-}
-.osano-cm-button--type_accept {
-  border-radius: 30px;
-  border: 1px solid #000000;
-}
-.osano-cm-button--type_deny {
-  border-radius: 30px;
-}
-.osano-cm-button--type_save {
-  color: #434343;
-  background-color: #f7f7f7;
-  border-radius: 30px;
-  border: 1px solid #434343;
-}
-.osano-cm-button--type_denyAll {
-  color: #434343;
-  background-color: #f7f7f7;
-  border-radius: 30px;
-  border: 1px solid #434343;
-}
-.osano-cm-button--type_deny:hover {
-  color: #434343;
-}
-.osano-cm-button--type_denyAll:hover {
-  color: #434343;
-  background-color: #e6e6e6;
-}
-.osano-cm-button--type_save:hover {
-  color: #434343;
-  background-color: #e6e6e6;
 }
 
 /* style SVG images of the BPMN coverage page */
@@ -441,6 +390,9 @@ svg.implemented:hover [stroke="#333"] {
 .badge:nth-of-type(1) {
   margin-left: 0;
   margin-bottom: 1.5rem;
+}
+h2 .badge:nth-of-type(1) {
+  margin-bottom: 0rem;
 }
 h3 .badge:nth-of-type(1) {
   margin-bottom: 0rem;
@@ -662,6 +614,14 @@ span.callout + p::after {
   border: none;
 }
 
+/* Use for inline images within text, such as BPMN symbols */
+.theme-doc-markdown img.inline-image {
+  border: none;
+  max-height: 1.8rem;
+  margin: 0;
+  padding: 0;
+}
+
 /* Unsupported versions in the versions selector */
 .dropdown-separator {
   margin: 0.3rem 0;
@@ -777,7 +737,6 @@ a.table-of-contents__link.toc-highlight > span.badge {
 }
 h1 {
   padding-top: 10px;
-  font-family: "IBM Plex Sans", "sans-serif";
 }
 h1.openapi__heading {
   margin-bottom: calc(
@@ -788,7 +747,6 @@ h1.openapi__heading {
 h2 {
   font-size: 28px;
   font-weight: 600;
-  font-family: "IBM Plex Sans", sans-serif;
   border-bottom: 1px solid #dedede;
   padding-top: 20px;
   margin-bottom: 20px;
@@ -842,6 +800,20 @@ ul.openapi-tabs__response-list-container {
   margin-bottom: 20px;
   padding-bottom: 0px;
 }
+h2 .badge--long,
+h2 .badge--beginner,
+h2 .badge--cloud {
+  margin-bottom: 0;
+  font-size: 12px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+/* Third level page heading */
+h2 .badge--long:nth-of-type(1),
+h2 .badge--beginner:nth-of-type(1),
+h2 .badge--cloud:nth-of-type(1) {
+  margin-left: 5px;
+}
 /* Second level page heading */
 h3 {
   margin-bottom: 0.8rem;
@@ -865,6 +837,13 @@ h3 .badge--long {
   margin-left: 5px;
   vertical-align: middle;
 }
+h3 .badge--medium {
+  margin-bottom: 0;
+  font-size: 12px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
 /* Third level page heading */
 h3 .badge--long:nth-of-type(1) {
   margin-left: 5px;
@@ -926,4 +905,20 @@ ul ol {
 .menu__list-item-collapsible .menu__link--active,
 .menu__link--active:not(.menu__link--sublist) {
   font-weight: 600;
+}
+
+/* double column div layout  */
+.double-column-container {
+  display: flex;
+}
+.double-column-left {
+  flex: 1;
+}
+.double-column-right {
+  flex: 3;
+}
+@media (max-width: 768px) {
+  .double-column-container {
+    flex-direction: column;
+  }
 }

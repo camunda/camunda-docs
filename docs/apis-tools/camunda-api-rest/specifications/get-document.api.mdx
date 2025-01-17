@@ -1,0 +1,62 @@
+---
+id: get-document
+title: "Download document (alpha)"
+description: "Download a document from the Camunda 8 cluster."
+sidebar_label: "Download document (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtz2zYQ/is7ONlTWlRSp01509hOok6a8ThOe7B9gMiliAQEGGBpmaPhf+8sQD1syYnTdnrywQ8Ri91vH99yV0tBcu5FdiVObd7WaEjcJMI26CQpa6aFyMQcaX2YiAJ97lTDpyITp3ZhtJUFSCgGGSidrYEqhBNZt6aQ8Bpy3XpCN7o21+aDJQSqJAFVykPeOoeGdAfW6A582zTWkQdpQJmjGmvruo1uT9ZhAotK5RUoD8YS1CjZqnXQOFu0OUOD1mOwlmWZsYTX5pKNoSkaqwzxVWngSuqmklCipNbhzUGa27qxBg35FKXT3ZHMc/Q+DXLx99Eg7Ud1cQjSFFDLDmYIvp19xpyALOSVNHO8NspA2bIwONQoPfpRQHRtRCIa6WSNhI7DvxRG1igysfJ0WohEKA5xI6kSiXD4tVUOC5GRa/FhHi4rhOkp2DIEfh0uslAMGRqJRPi8wlqKbCmoa9iaJ6fMXPR9sgYQIryx/rVF190zX0rtn2o/KNtGcf+YK+WpuHJrCA29k776LrZH9e2DXUlf7QAfrMU6XUgPXBktYQGzbp+LRcsGoG1CqGGtV3lopKMd/Q5LdGjygQnKg0NqncECFhWaQRGr3BCL1SoPFcoCXbwS/Y5Xgr1bdKpUeSAvhIKXM41FYMcu7BFMy2/f4/rme7lWIWFSac/5bJy9VQXGM+scFz4rSsITBoaeYKG0Zmo4ZGZgMbo2or/hhPnGGo+eU/RyPOY/u4lZY+X4rwoIC/BtIGXZat1x9Qy5YiWyafTgRWpzQjry5FDWfPZYUSSitK6WJDIxU0a6TvR93yfieHz8PVyKquDvXN2i4fpnpNySStua4O2j6BpnZxrrnz571ruN7r7BCZxHSSiQpNJgY5fhkATBGRagDFxdvDmB345f/XpzUBE1PkvTxWIxcmV+hIUi60bWzVNX5vzDcoehSh2u2pcsCsU2pebkNuhIoQffYM6FwTlnTwfYwCGM/g3BjLC4ra0vb0L9jZC3Tu28VCbw6WIKqkBDquyYBDumw51Stpp1yJltKZtpab4wxUmR3mv0oRXf1rV03Yqc9w30ifAkqd1yQyhDOEe3jV8Z+vnljm4uk3eXl+cQVUBuCxw4yB0hGmInamVU3dYiOx6PE1HLu/jpl/E49CrO+BM8MYB3jZYm0veBO8pAHVpU0BYcU8aTNPl/lRnr1Fw9tDvi7r3KhRiK+DR6FAn2ah/xJ/zaJ3Rch+icdWDzMCJwl1M6qGf2r2wPreaZa89ce+baY1zrE1EjVXaY5sPwSZXIRLp6l/l0uZk8ex7J0N2uRtPWaZGJZaRNn6XpsrKe+mzJk3qf3nJObqVTPDKEFPJxpNeqbLTNpQ6P945g1hOPeSu3NovDxdnHS3grCReyC+Fkk/dVvx6/Hu/VyqKPaJycTyF6GItvqyGs1DKz96qNwk9R3POs4zFvnaLuI1+L4ZmhdOgmLadgXRSDvaCdP0chkQz/vFmVyu9/XYZsK1PacH3I+i4Qzgo6H5GPRy92K+x8GoiS27puTeiWZh6nGrlneROJ0CpH40MtD2P5Sux9PIE/o0V4MeKkxMpZNcm5oqqdjXJbp3m8tv4703aW1lKZdDDh05PJH58+nE6O3k9Pzj58PDt6MRqP6I6C8431VEuzhWO9iK6ns4Owrh0+9Hq5eUs8b6//fHsdqpbwjtJGS2WYRyHdy6G5XK13WS8SkW0ttjfJ0CGuxHI5kx4/Od33/DhudNxzCuXDBrJ/39xO4r9bPff68QW7e5vwrdQtSwneR38M2fN2+b9ul99M6P2vEDZJvdm8vn6w9g4uhiAdwtO+gdmLbngoTbcNa4V6izj9TZ+ImKEANApM8hwb2rr66BbMnq4Hgbdn/CL5GzV//iA=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Download document (alpha)</h1>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/documents/{documentId}"}
+></MethodEndpoint>
+
+Download a document from the Camunda 8 cluster.
+
+Note that this currently only supports an in-memory document store, which is not meant for production use.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+:::
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"documentId","in":"path","required":true,"description":"The ID of the document to download.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Query Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"storeId","in":"query","required":false,"description":"The ID of the document store to download the document from.","schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"contentHash","in":"query","required":false,"schema":{"type":"string"},"description":"The hash of the document content that was computed by the document store during upload. The hash is part of the document reference that is returned when uploading a document. This header is required when hash verification is enabled for the document store. If hash verification is enabled and the client fails to provide the correct hash, the request will be rejected.\n"}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+The document was downloaded successfully.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/octet-stream"} value={"application/octet-stream"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
+
+string
+
+</div></ul></details></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The document with the given ID was not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

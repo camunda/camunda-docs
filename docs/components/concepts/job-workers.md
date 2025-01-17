@@ -1,7 +1,7 @@
 ---
 id: job-workers
 title: "Job workers"
-description: "A job worker is a service capable of performing a particular task in a process."
+description: "Learn more about job workers, a service that can perform a particular task in a process. When this task needs to be performed, this is represented by a job."
 ---
 
 A **job worker** is a service capable of performing a particular task in a process. Each time such a task needs to be performed, this is represented by a **job**.
@@ -83,6 +83,43 @@ There are several advantages when failing a job with variables. Consider the fol
 
 - You can fail a job and raise an incident by setting the job `retries` to zero. In this case, it would be useful to provide some additional details through a variable when the incident is analyzed.
 - If your job worker can split the job into smaller pieces and finish some but not all of these, it can fail the job with variables indicating which parts of the job were successfully finished which weren't. Such a job should be failed with a positive number of retries so another job worker can pick it up again and continue where the other job worker left off. The job can be completed when all parts are finished by a job worker successfully.
+
+:::
+
+### Using job result
+
+Job workers can provide a **job result** for [user task listeners](components/concepts/user-task-listeners.md).
+
+Job results are used to define:
+
+1. **Corrections**: Updates to specific user task attributes, such as assignee, due date, follow-up date, candidate users, candidate groups, and priority, before the task transition is finalized. For more details, see [correcting user task data](components/concepts/user-task-listeners.md/#correcting-user-task-data).
+2. **Denial**: Indicates that the lifecycle transition should be explicitly denied. Denying the task lifecycle transition rolls back the user task to the previous state, and discards any corrections made by previous listeners. For more details, see [denying the operation](components/concepts/user-task-listeners.md/#denying-the-operation).
+
+Below is an example of using job result:
+
+```java
+final JobHandler userTaskListenerHandler =
+    (jobClient, job) -> {
+        boolean shouldDeny = someValidationLogic(job);
+
+        jobClient
+            .newCompleteCommand(job)
+            // highlight-start
+            .withResult(
+                new CompleteJobResult()
+                    .correctAssignee("john_doe")
+                    .correctPriority(42)
+                    .deny(shouldDeny)) // deny based on validation logic
+            // highlight-end
+            .send();
+    };
+```
+
+If both corrections and denial are provided in the same job result (for example, `.correctAssignee(...)` and `.deny(true)`), the job completion command will be rejected. To avoid this, ensure the job is either completed with corrections (without denial set to `true`) or denied (without corrections).
+
+:::info
+
+The `corrections` and `deny` features are currently available only for user task listener jobs.
 
 :::
 

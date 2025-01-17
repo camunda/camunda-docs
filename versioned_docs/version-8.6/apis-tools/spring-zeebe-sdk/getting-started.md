@@ -8,36 +8,20 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 ## Version compatibility
 
-| Camunda Spring SDK version | JDK    | Camunda version | Bundled Spring Boot version |
-| -------------------------- | ------ | --------------- | --------------------------- |
-| 8.5.x                      | \>= 17 | 8.5.x           | 3.2.x                       |
-| 8.6.x                      | \>= 17 | 8.6.x           | 3.2.x                       |
+| Camunda Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| -------------------------- | ---- | --------------- | --------------------------- |
+| 8.5.x                      | ≥ 17 | 8.5.x           | 3.2.x                       |
+| 8.6.x                      | ≥ 17 | 8.6.x           | 3.2.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 
-Add the following repository and Maven dependency to your Spring Boot Starter project:
-
-```xml
-<repositories>
-    <repository>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-        <id>identity</id>
-        <name>Camunda Identity</name>
-        <url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
-    </repository>
-</repositories>
-```
+Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
 ```xml
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-    <version>8.6.3</version>
+    <version>8.6.x</version>
 </dependency>
 ```
 
@@ -178,3 +162,7 @@ public void handleJobFoo(final ActivatedJob job) {
 ```
 
 See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options for job workers.
+
+## Writing test cases
+
+To learn more about writing test cases using Zeebe Process Test, see [Camunda Spring SDK integration](../java-client/zeebe-process-test.md#camunda-spring-sdk-integration).

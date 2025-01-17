@@ -6,7 +6,7 @@ description: "This document analyzes health status checks and responses."
 
 ## Broker
 
-Zeebe broker exposes three HTTP endpoints to query its health status:
+The Zeebe Broker exposes three HTTP endpoints to query its health status:
 
 - Startup check
 - Ready check
@@ -62,7 +62,7 @@ When a broker becomes unhealthy, it's recommended to check the logs to see what 
 
 ## Gateway
 
-Zeebe gateway exposes three HTTP endpoints to query its health status:
+The Zeebe Gateway exposes three HTTP endpoints to query its health status:
 
 - Health status - `http://{zeebe-gateway}:9600/actuator/health`
 - Startup probe - `http://{zeebe-gateway}:9600/actuator/health/startup`

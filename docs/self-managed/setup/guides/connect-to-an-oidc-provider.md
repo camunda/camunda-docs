@@ -34,11 +34,14 @@ configuration](#component-specific-configuration) to ensure the components are c
 <h3>Steps</h3>
 
 1. In your OIDC provider, create an application for each of the components you want to connect. The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
-2. Make a note of the following values for each application you create:
+2. For all Components, ensure the appropriate application type is used:
+   - **Operate, Tasklist, Optimize, Identity:** Web applications requiring confidential access/a confidential client
+   - **Web Modeler, Console:** Single-page applications requiring public access/a public client
+3. Make a note of the following values for each application you create:
    - Client ID
    - Client secret
    - Audience
-3. Set the following environment variables for the component you are configuring an app for:
+4. Set the following environment variables for the component you are configuring an app for:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
 <TabItem value="env">
@@ -103,7 +106,7 @@ global:
 </TabItem>
 </Tabs>
 
-:::warning
+:::note
 Once set, you cannot update your initial claim name and value using environment or Helm values. You must change these values directly in the database.
 :::
 
@@ -124,7 +127,7 @@ Ensure you register a new application for each component.
 2. Navigate to the new application's **Overview** page, and make note of the **Client ID**.
 3. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
    - **Web**: Operate, Tasklist, Optimize, Identity
-   - **Single-page application**: Modeler
+   - **Single-page application**: Modeler, Console
 4. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
 5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use.
 6. Set the following environment variables for the component you are configuring an app for:

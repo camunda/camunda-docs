@@ -6,7 +6,7 @@ description: Learn about the text area form element to read and edit multiline t
 
 A text area allowing the user to read and edit multiline textual data.
 
-![Form Textarea Symbol](/img/form-icons/form-textArea.svg)
+<img src="/img/form-icons/form-textArea.svg" alt="Form Textarea Symbol" />
 
 ## Configurable properties
 
@@ -17,7 +17,7 @@ A text area allowing the user to read and edit multiline textual data.
 - **Read only**: Makes the text area read-only, meaning the user can't change but only read its state. Can be dynamically set using an [expression](../../feel/language-guide/feel-expressions-introduction.md).
 - **Disabled**: Disables the text area; for use during development.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the text area.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: Text area must contain a value.
   - **Minimum length**: Text area must have at least `n` characters.

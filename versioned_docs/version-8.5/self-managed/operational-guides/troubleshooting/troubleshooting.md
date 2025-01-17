@@ -12,7 +12,7 @@ for container to container communication align with the IP ranges Keycloak consi
 [external requests documentation](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes)
 to be external and therefore require SSL.
 
-As the [Camunda Helm Charts](https://github.com/camunda/camunda-platform-helm) currently do
+As the [Camunda Helm Charts](https://artifacthub.io/packages/helm/camunda/camunda-platform) currently do
 not provide support for the distribution of the Keycloak TLS key to the other containers, we recommend viewing the solution available in the
 [Identity documentation](/self-managed/identity/troubleshooting/troubleshoot-identity.md#solution-2-identity-making-requests-from-an-external-ip-address).
 
@@ -66,6 +66,25 @@ A gateway timeout can occur if the headers of a response are too big (for exampl
 ## Helm CLI version and installation failures
 
 If you encounter errors during Helm chart installation, such as type mismatches or other template rendering issues, you may be using an outdated version of the Helm CLI. Helm's handling of data types and template syntax can vary significantly between versions. Ensure you use the Helm CLI version `3.13` or higher.
+
+## DNS disruption issue for Zeebe in Kubernetes clusters (1.29-1.31)
+
+Kubernetes clusters running versions 1.29 to 1.31 may experience DNS disruptions during complete node restarts, such as during upgrades or evictions, particularly if the cluster's DNS resolver pods are affected.
+
+This issue is specifically noticeable for Zeebe (Netty), as it will no longer be able to form a cluster because of improper DNS responses. This occurs because Zeebe continues to communicate with a non-existent DNS resolver, caused by improper cleanup of conntrack entries for UDP connections.
+
+Details on this issue can be found in [this Kubernetes issue](https://github.com/kubernetes/kubernetes/issues/125467) and has been resolved in the following patch releases:
+
+- Kubernetes 1.29.10
+- Kubernetes 1.30.6
+- Kubernetes 1.31.2
+
+Kubernetes versions 1.32 and versions before 1.29 are not affected.
+
+If an immediate cluster upgrade to a fixed version is not possible, the following temporary workarounds can be applied if you encounter DNS issues:
+
+- Restart the `kube-proxy` pod(s)
+- Delete the affected Zeebe pod
 
 ## Anomaly detection scripts
 

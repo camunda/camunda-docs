@@ -121,7 +121,7 @@ curl --header "Authorization: Bearer ${TOKEN}" \
      ${ZEEBE_REST_ADDRESS}/v2/topology
 ```
 
-A successful response includes [information about the cluster](/apis-tools/camunda-api-rest/specifications/get-cluster-topology.api.mdx). For example:
+A successful response includes [information about the cluster](/apis-tools/camunda-api-rest/specifications/get-topology.api.mdx). For example:
 
 ```json
 {

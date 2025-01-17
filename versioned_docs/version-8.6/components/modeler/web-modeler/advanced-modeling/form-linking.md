@@ -89,6 +89,10 @@ To correct any instances affected by this issue, we recommend the following step
 
 ### Camunda Form (embedded)
 
+:::info
+Embedded forms are supported only by job worker-based user tasks and are not available for the [Zeebe user task implementation type](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-implementation-types). However, job worker-based user tasks are now deprecated with 8.6. While these are currently still supported, consider [migrating to Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md).
+:::
+
 When choosing **Camunda Form (embedded)** as type you have the option to directly paste the form's JSON schema into the **Form JSON configuration** field of the properties panel.
 The form will be embedded directly into the BPMN diagram's XML representation.
 

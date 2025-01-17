@@ -170,6 +170,29 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job) {
 }
 ```
 
+You can also control auto-completion in your configuration.
+
+**Globally:**
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        auto-complete: false
+```
+
+**Per worker:**
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      override:
+        foo:
+          auto-complete: false
+```
+
 Ideally, you **don't** use blocking behavior like `send().join()`, as this is a blocking call to wait for the issued command to be executed on the workflow engine. While this is very straightforward to use and produces easy-to-read code, blocking code is limited in terms of scalability.
 
 This is why the worker above showed a different pattern (using `exceptionally`). Often, you might also want to use the `whenComplete` callback:
@@ -222,7 +245,46 @@ public void handleJobFoo() {
 
 ## Additional configuration options
 
-### Execution threads
+For a full set of configuration options, see [CamundaClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/CamundaClientProperties.java).
+
+### Auth
+
+Authenticate with the cluster using the following alternative methods:
+
+#### Username & Password
+
+You can authenticate with the cluster using username and password authentication.
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    auth:
+      username: <your username>
+      password: <your password>
+```
+
+#### Keystore & Truststore
+
+You can authenticate with the cluster using Java's Keystore and Truststore.
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    auth:
+      keystore-path: <your keystore path>
+      keystore-password: <your keystore password>
+      keystore-key-password: <your keystore key password>
+      truststore-path: <your truststore path>
+      truststore-password: <your truststore password>
+```
+
+### Zeebe
+
+You can use the following Zeebe-specific additional configuration options:
+
+#### Execution threads
 
 The number of threads for invocation of job workers. Setting this value to 0 effectively disables subscriptions and workers (default 1):
 
@@ -233,7 +295,7 @@ camunda:
       execution-threads: 2
 ```
 
-### Message time to live
+#### Message time to live
 
 The time-to-live which is used when none is provided for a message (default 1H):
 
@@ -244,18 +306,29 @@ camunda:
       message-time-to-live: PT2H
 ```
 
-### Max message size
+#### Max message size
 
-A custom maxMessageSize allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
+A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 4MB):
 
 ```yaml
 camunda:
   client:
     zeebe:
-      max-message-size: 3
+      max-message-size: 4194304
 ```
 
-### Request timeout
+#### Max metadata size
+
+A custom `maxMetadataSize` allows the client to receive larger or smaller response headers from Camunda:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      max-metadata-size: 4194304
+```
+
+#### Request timeout
 
 The request timeout used if not overridden by the command (default is 10s):
 
@@ -266,7 +339,7 @@ camunda:
       request-timeout: PT20S
 ```
 
-### CA certificate
+#### CA certificate
 
 Path to a root CA certificate to be used instead of the certificate in the default store:
 
@@ -277,7 +350,7 @@ camunda:
       ca-certificate-path: path/to/certificate
 ```
 
-### Keep alive
+#### Keep alive
 
 Time interval between keep alive messages sent to the gateway (default is 45s):
 
@@ -288,7 +361,7 @@ camunda:
       keep-alive: PT60S
 ```
 
-### Override authority
+#### Override authority
 
 The alternative authority to use, commonly in the form `host` or `host:port`:
 
@@ -299,7 +372,7 @@ camunda:
       override-authority: host:port
 ```
 
-### REST over gRPC
+#### REST over gRPC
 
 If true, the client will use REST instead of gRPC whenever possible:
 
@@ -310,7 +383,7 @@ camunda:
       prefer-rest-over-grpc: true
 ```
 
-### gRPC address
+#### gRPC address
 
 Define client gRPC address:
 
@@ -321,7 +394,7 @@ camunda:
       grpc-address: http://localhost:26500
 ```
 
-### REST address
+#### REST address
 
 Define client REST address:
 
@@ -332,7 +405,11 @@ camunda:
       rest-address: http://localhost:8080
 ```
 
-### Default task type
+#### Defaults and Overrides
+
+You can define defaults and overrides for all supported configuration options for a worker.
+
+##### Default Task type
 
 If you build a worker that only serves one thing, it might also be handy to define the worker job type globally and not in the annotation:
 
@@ -344,7 +421,7 @@ camunda:
         type: foo
 ```
 
-### Configure jobs in flight and thread pool
+##### Configure jobs in flight and thread pool
 
 Number of jobs that are polled from the broker to be worked on in this client and thread pool size to handle the jobs:
 
@@ -357,13 +434,11 @@ camunda:
       execution-threads: 1
 ```
 
-For a full set of configuration options, see [ZeebeClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/ZeebeClientConfigurationProperties.java).
-
 :::note
 We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.
 :::
 
-### Disable worker
+##### Disable worker
 
 You can disable workers via the `enabled` parameter of the `@JobWorker` annotation:
 
@@ -403,7 +478,7 @@ camunda:
         enabled: false
 ```
 
-### Overriding `JobWorker` values via configuration file
+##### Overriding `JobWorker` values via configuration file
 
 You can override the `JobWorker` annotation's values, as you can see in the example above where the `enabled` property is overridden:
 
@@ -431,7 +506,7 @@ camunda:
 
 You could also provide a custom class that can customize the `JobWorker` configuration values by implementing the `io.camunda.zeebe.spring.client.annotation.customizer.ZeebeWorkerValueCustomizer` interface.
 
-### Enable job streaming
+##### Enable job streaming
 
 Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
 
@@ -456,7 +531,7 @@ camunda:
           stream-enabled: true
 ```
 
-### Control tenant usage
+##### Control tenant usage
 
 When using multi-tenancy, the Zeebe client will connect to the `<default>` tenant. To control this, you can configure:
 
@@ -487,6 +562,31 @@ camunda:
             - foo
 ```
 
+### Custom identity provider security context
+
+If you require configuring SSL context exclusively for your identity provider:
+
+```yaml
+camunda:
+  client:
+    auth:
+      keystore-path: /path/to/keystore.p12
+      keystore-password: password
+      keystore-key-password: password
+      truststore-path: /path/to/truststore.jks
+      truststore-password: password
+```
+
+- **keystore-path**: Path to client's KeyStore; can be both in JKS or PKCS12 formats
+- **keystore-password**: KeyStore password
+- **keystore-key-password**: Key material password
+- **truststore-path**: Path to client's TrustStore
+- **truststore-password**: TrustStore password
+
+When the properties are not specified, the default SSL context is applied. For example, if you configure an application with
+`javax.net.ssl.*` or `spring.ssl.*`, the latter is applied. If both `camunda.client.auth.*` and either `javax.net.ssl.*`
+or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes precedence.
+
 ## Observing metrics
 
 The Spring Zeebe SDK provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
@@ -511,3 +611,20 @@ management:
 ```
 
 Access them via [http://localhost:8080/actuator/metrics/](http://localhost:8080/actuator/metrics/).
+
+## Using identity provider X.509 authorizers
+
+Several identity providers, such as Keycloak, support client X.509 authorizers as an alternative to client credentials flow.
+
+As a prerequisite, ensure you have proper KeyStore and TrustStore configured, so that:
+
+- Both the Spring Zeebe application and identity provider share the same CA trust certificates.
+- Both the Spring Zeebe and identity provider own certificates signed by trusted CA.
+- Your Spring Zeebe application own certificate has proper `Distinguished Name` (DN), e.g.
+  `CN=My Zeebe Client, OU=Camunda Users, O=Best Company, C=DE`.
+- Your application DN registered in the identity provider client authorization details.
+
+Once prerequisites are satisfied, your Spring Zeebe application must be configured either via global SSL context, or
+with [identity provider exclusive context](#custom-identity-provider-security-context).
+
+Refer to your identity provider documentation on how to configure X.509 authentication. For example, [Keycloak](https://www.keycloak.org/server/mutual-tls).
