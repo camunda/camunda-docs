@@ -39,7 +39,7 @@ As a Spring Boot application, Identity supports any standard
 | CAMUNDA_IDENTITY_JWKS_URL         | jwksUrl          | defines the JWKS URL, which is used by the services to validate the JWT tokens. If nothing set it will use the WellKnownEndpoint  | -                          |
 | CAMUNDA_IDENTITY_CLIENT_ID        | clientId         | defines the client id, which is used by Zeebe in authentication flows.                                                            | -                          |
 | CAMUNDA_IDENTITY_CLIENT_SECRET    | clientSecret     | The client secret for the Identity client.                                                                                        | -                          |
-| CAMUNDA_IDENTITY_AUTH_SCOPEs      | authScopes       | AuthScopes                                                                                                                        | openid email offline_acces |
+| CAMUNDA_IDENTITY_AUTH_SCOPES      | authScopes       | AuthScopes                                                                                                                        | openid email offline_acces |
 
 ## License configuration
 

@@ -27,6 +27,19 @@ As a Spring Boot application, Identity supports any standard
 | `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak.         | admin-cli                                                                                                                                                                |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use.                                            | http://localhost:18080/auth                                                                                                                                              |
 
+## Camunda Identity Configuration
+
+| Environment Variable              | Property         | Description                                                                                                                       | Default Value              |
+| --------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| CAMUNDA_IDENTITY_ISSUERBACKENDURL | issuerBackendUrl | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable | -                          |
+| CAMUNDA_IDENTITY_AUDIENCE         | audience         | The required audience of the auth token. This setting can also be overridden using the environment variable                       | -                          |
+| CAMUNDA_IDENTITY_TYPE             | type             | Define what kind of authentication type you will use, Choose between `KEYCLOAK`, `MICROSOFT`, `GENERIC`                           | KEYCLOAK                   |
+| CAMUNDA_IDENTITY_BASEURL          | baseUrl          | The base url of the Camunda Identity instance. This setting can also be overridden using the environment variable                 | -                          |
+| CAMUNDA_IDENTITY_ISSUER           | issuer           | defines the issuer name, which is used by the services to validate the JWT tokens.                                                | -                          |
+| CAMUNDA_IDENTITY_JWKS_URL         | jwksUrl          | defines the JWKS URL, which is used by the services to validate the JWT tokens. If nothing set it will use the WellKnownEndpoint  | -                          |
+| CAMUNDA_IDENTITY_CLIENT_ID        | clientId         | defines the client id, which is used by Zeebe in authentication flows.                                                            | -                          |
+| CAMUNDA_IDENTITY_CLIENT_SECRET    | clientSecret     | The client secret for the Identity client.                                                                                        | -                          |
+
 ### Component configuration
 
 Identity supports component configuration using preset values. To configure a
