@@ -208,7 +208,7 @@ module.exports = {
         config: {
           zeebe: {
             specPath: "inactive",
-            outputDir: "inactive",
+            outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
