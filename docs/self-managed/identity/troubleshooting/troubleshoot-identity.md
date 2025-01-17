@@ -83,9 +83,9 @@ these options:
 1. Configure the communication between the services (for example in a cluster) to use IP ranges that fall within the
    ranges that Keycloak expects.
 2. If configuring the IP ranges is not an option, it is possible to disable the SSL requirement in Keycloak itself by completing the following steps:
-   1. In the `master` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/23.0.1/server_admin/#_ssl_modes).
+   1. In the `master` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes).
    2. Restart the Identity service.
-   3. In the `camunda-platform` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/23.0.1/server_admin/#_ssl_modes).
+   3. In the `camunda-platform` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes).
    4. Restart the Identity service again. Identity should now start successfully
 
 :::warning
