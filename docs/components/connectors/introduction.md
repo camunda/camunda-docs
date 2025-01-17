@@ -27,6 +27,8 @@ import BedrockImg from "./img/connector-amazon-bedrock.png";
 import EmailImg from "./img/connector-email.png";
 import SqlImg from "./img/connector-sql.png";
 import AzureaiImg from "./img/connector-azure-openai.png";
+import AmazonS3Img from "./img/connector-amazon-s3.png";
+import BoxImg from "./img/connector-box.png";
 
 import Marketplace from './react-components/\_banner-marketplace.md'
 
@@ -89,13 +91,53 @@ Build and deploy your own connectors using connector templates and the connector
 
 ## Featured connectors
 
-Get started with our newest and most popular connectors.
+Get started with our latest and most popular connectors.
 
-<Tabs groupId="featured" defaultValue="popular" queryString values={
+<Tabs groupId="featured" defaultValue="new" queryString values={
 [
-{label: 'Popular', value: 'popular' },
 {label: 'Latest', value: 'new' },
+{label: 'Popular', value: 'popular' },
 ]}>
+<TabItem value="new">
+
+<div class="connector-grid">
+  <a href="../out-of-the-box-connectors/amazon-s3" class="connector-card" title="Amazon S3">
+    <img src={AmazonS3Img} alt="Amazon S3 icon" class="connector-card-image"/>
+    <h3>Amazon S3</h3>
+    <p>Interact with Amazon Bedrock from your processes.</p>
+  </a>
+  <a href="../out-of-the-box-connectors/box" class="connector-card" title="Box connector">
+    <img src={BoxImg} alt="Box connector icon" class="connector-card-image"/>
+    <h3>Box</h3>
+    <p>Connect your BPMN service to the Box storage API.</p>
+  </a>
+  <a href="../out-of-the-box-connectors/email/?email=outbound" class="connector-card" title="Email connector">
+    <img src={EmailImg} alt="Email connector icon" class="connector-card-image"/>
+    <h3>Email outbound</h3>
+    <p>Connect your BPMN service to an email POP3, IMAP or SMTP server.</p>
+  </a>
+</div>
+
+<div class="connector-small-grid">
+  <a href="../out-of-the-box-connectors/email/?email=inbound" class="connector-small-link">
+    <div class="connector-small">
+      <img src={EmailImg} alt="Email inbound connector"/>Email inbound
+    </div>
+  </a>
+  <a href="../out-of-the-box-connectors/amazon-bedrock" class="connector-small-link">
+    <div class="connector-small">
+      <img src={BedrockImg} alt="Amazon Bedrock connector"/>Amazon Bedrock
+    </div>
+  </a>
+  <a href="../out-of-the-box-connectors/sql" class="connector-small-link">
+    <div class="connector-small">
+      <img src={SqlImg} alt="SQL connector"/>SQL
+    </div>
+  </a>
+
+</div>
+
+</TabItem>
 <TabItem value="popular">
 
 <div class="connector-grid">
@@ -135,45 +177,7 @@ Get started with our newest and most popular connectors.
 </div>
 
 </TabItem>
-<TabItem value="new">
 
-<div class="connector-grid">
-  <a href="../out-of-the-box-connectors/email/?email=inbound" class="connector-card" title="Email connector">
-    <img src={EmailImg} alt="Email connector icon" class="connector-card-image"/>
-    <h3>Email inbound</h3>
-    <p>Connect your BPMN service to an email IMAP server.</p>
-  </a>
-  <a href="../out-of-the-box-connectors/email/?email=outbound" class="connector-card" title="Email connector">
-    <img src={EmailImg} alt="Email connector icon" class="connector-card-image"/>
-    <h3>Email outbound</h3>
-    <p>Connect your BPMN service to an email POP3, IMAP or SMTP server.</p>
-  </a>
-  <a href="../out-of-the-box-connectors/amazon-bedrock" class="connector-card" title="Amazon Bedrock">
-    <img src={BedrockImg} alt="Amazon Bedrock icon" class="connector-card-image"/>
-    <h3>Amazon Bedrock</h3>
-    <p>Interact with Amazon Bedrock from your processes.</p>
-  </a>
-</div>
-
-<div class="connector-small-grid">
-  <a href="../out-of-the-box-connectors/sql" class="connector-small-link">
-    <div class="connector-small">
-      <img src={SqlImg} alt="SQL connector"/>SQL
-    </div>
-  </a>
-  <a href="../out-of-the-box-connectors/amazon-sagemaker" class="connector-small-link">
-    <div class="connector-small">
-      <img src={BedrockImg} alt="Sagemaker connector"/>Amazon Sagemaker
-    </div>
-  </a>
-  <a href="../out-of-the-box-connectors/azure-open-ai" class="connector-small-link">
-    <div class="connector-small">
-      <img src={AzureaiImg} alt="Azure OpenAI connector"/>Azure OpenAI
-    </div>
-  </a>
-</div>
-
-</TabItem>
 </Tabs>
 
 <Marketplace/>
