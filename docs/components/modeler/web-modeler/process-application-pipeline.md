@@ -68,7 +68,7 @@ Play is being rebuilt and progressively rolled out to more users. See [Play limi
 
 After validation is complete, you can release a version of your process application for review and approval.
 
-- Use [process application versioning](process-application-versioning.md) to track and review changes across the files and assets in the process application. You can [compare milestones](/docs/components/modeler/web-modeler/milestones.md#compare-milestones) to visually review changes between two versions of a BPMN file, or view code changes for other files.
+- Use [process application versioning](process-application-versioning.md) to track and review changes across the files and assets in the process application. You can [compare versions](/docs/components/modeler/web-modeler/versions.md#compare-versions) to visually review changes between two versions of a BPMN file, or view code changes for other files.
 - Use comments to make review collaboration easier.
 - Approvers can add a comment to the main process diagram to indicate that a review is complete and that the process application is ready to be promoted to the next stage.
 
