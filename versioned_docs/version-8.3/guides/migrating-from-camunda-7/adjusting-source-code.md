@@ -40,7 +40,7 @@ If this affects large parts of your code base, you could write a small abstracti
 
 The "external task topic" from Camunda 7 is directly translated in a "task type name" in Camunda 8, therefore `camunda:topic` gets `zeebe:taskDefinition type` in your BPMN model.
 
-The community-supported [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) picks up your `@ExternalTaskHandler` beans, wraps them into a JobWorker, and subscribes to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
+The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) picks up your `@ExternalTaskHandler` beans, wraps them into a JobWorker, and subscribes to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
 
 ### Service tasks with attached Java code (Java delegates, expressions)
 
@@ -58,7 +58,7 @@ The community-supported [Camunda 7 Adapter](https://github.com/camunda-community
 
 You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
 
-The community-supported [Camunda 7 to Camunda 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
+The [Camunda 7 to Camunda 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
 
 The topic `camunda-7-adapter` is set and the following attributes/elements are migrated and put into a task header:
 

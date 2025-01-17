@@ -245,7 +245,46 @@ public void handleJobFoo() {
 
 ## Additional configuration options
 
-### Execution threads
+For a full set of configuration options, see [CamundaClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/CamundaClientProperties.java).
+
+### Auth
+
+Here you find alternatives to authenticate with the cluster
+
+#### Username & Password
+
+You can also authenticate with the cluster through a simple authentication with username and password
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    auth:
+      username: <your username>
+      password: <your password>
+```
+
+#### Keystore & Truststore
+
+You can also authenticate with the cluster through java's key- and truststore facilities
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    auth:
+      keystore-path: <your keystore path>
+      keystore-password: <your keystore password>
+      keystore-key-password: <your keystore key password>
+      truststore-path: <your truststore path>
+      truststore-password: <your truststore password>
+```
+
+### Zeebe
+
+Here you find further zeebe specific configuration options
+
+#### Execution threads
 
 The number of threads for invocation of job workers. Setting this value to 0 effectively disables subscriptions and workers (default 1):
 
@@ -256,7 +295,7 @@ camunda:
       execution-threads: 2
 ```
 
-### Message time to live
+#### Message time to live
 
 The time-to-live which is used when none is provided for a message (default 1H):
 
@@ -267,7 +306,7 @@ camunda:
       message-time-to-live: PT2H
 ```
 
-### Max message size
+#### Max message size
 
 A custom maxMessageSize allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
 
@@ -275,10 +314,21 @@ A custom maxMessageSize allows the client to receive larger or smaller responses
 camunda:
   client:
     zeebe:
-      max-message-size: 3
+      max-message-size: 4194304
 ```
 
-### Request timeout
+#### Max metadata size
+
+A custom maxMetadataSize allows the client to receive larger or smaller response headers from Camunda:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      max-metadata-size: 4194304
+```
+
+#### Request timeout
 
 The request timeout used if not overridden by the command (default is 10s):
 
@@ -289,7 +339,7 @@ camunda:
       request-timeout: PT20S
 ```
 
-### CA certificate
+#### CA certificate
 
 Path to a root CA certificate to be used instead of the certificate in the default store:
 
@@ -300,7 +350,7 @@ camunda:
       ca-certificate-path: path/to/certificate
 ```
 
-### Keep alive
+#### Keep alive
 
 Time interval between keep alive messages sent to the gateway (default is 45s):
 
@@ -311,7 +361,7 @@ camunda:
       keep-alive: PT60S
 ```
 
-### Override authority
+#### Override authority
 
 The alternative authority to use, commonly in the form `host` or `host:port`:
 
@@ -322,7 +372,7 @@ camunda:
       override-authority: host:port
 ```
 
-### REST over gRPC
+#### REST over gRPC
 
 If true, the client will use REST instead of gRPC whenever possible:
 
@@ -333,7 +383,7 @@ camunda:
       prefer-rest-over-grpc: true
 ```
 
-### gRPC address
+#### gRPC address
 
 Define client gRPC address:
 
@@ -344,7 +394,7 @@ camunda:
       grpc-address: http://localhost:26500
 ```
 
-### REST address
+#### REST address
 
 Define client REST address:
 
@@ -355,7 +405,11 @@ camunda:
       rest-address: http://localhost:8080
 ```
 
-### Default task type
+#### Defaults and Overrides
+
+You can define defaults and overrides for all supported configuration options for a workers.
+
+##### Default Task type
 
 If you build a worker that only serves one thing, it might also be handy to define the worker job type globally and not in the annotation:
 
@@ -367,7 +421,7 @@ camunda:
         type: foo
 ```
 
-### Configure jobs in flight and thread pool
+##### Configure jobs in flight and thread pool
 
 Number of jobs that are polled from the broker to be worked on in this client and thread pool size to handle the jobs:
 
@@ -380,13 +434,11 @@ camunda:
       execution-threads: 1
 ```
 
-For a full set of configuration options, see [CamundaClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/CamundaClientProperties.java).
-
 :::note
 We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.
 :::
 
-### Disable worker
+##### Disable worker
 
 You can disable workers via the `enabled` parameter of the `@JobWorker` annotation:
 
@@ -426,7 +478,7 @@ camunda:
         enabled: false
 ```
 
-### Overriding `JobWorker` values via configuration file
+##### Overriding `JobWorker` values via configuration file
 
 You can override the `JobWorker` annotation's values, as you can see in the example above where the `enabled` property is overridden:
 
@@ -454,7 +506,7 @@ camunda:
 
 You could also provide a custom class that can customize the `JobWorker` configuration values by implementing the `io.camunda.zeebe.spring.client.annotation.customizer.ZeebeWorkerValueCustomizer` interface.
 
-### Enable job streaming
+##### Enable job streaming
 
 Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
 
@@ -479,7 +531,7 @@ camunda:
           stream-enabled: true
 ```
 
-### Control tenant usage
+##### Control tenant usage
 
 When using multi-tenancy, the Zeebe client will connect to the `<default>` tenant. To control this, you can configure:
 

@@ -56,6 +56,14 @@ The Zeebe Go Client and CLI client (zbctl) will be [officially deprecated](https
 
 The documentation of the Zeebe Go Client and CLI client (zbctl) moved to the [community clients section](/apis-tools/community-clients/index.md).
 
+## Spring SDK test support support in 8.6.7
+
+[Testing support for the Spring SDK](../apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
+
+:::note
+This closes the feature gap where the Camunda Spring SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).
+:::
+
 ### Camunda 8 SaaS - Required cluster update
 
 :::caution

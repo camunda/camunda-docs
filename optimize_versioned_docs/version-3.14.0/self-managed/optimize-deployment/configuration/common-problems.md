@@ -8,7 +8,7 @@ This section aims to provide initial help to troubleshoot common issues. This gu
 
 ## Optimize is missing some or all definitions
 
-It is possible that the user you are logged in as does not have the relevant authorizations to view all definitions in Optimize. Refer to the [authorization management section](./authorization-management.md#process-or-decision-definition-related-authorizations) to confirm the user has all required authorizations.
+It is possible that the user you are logged in as does not have the relevant authorizations to view all definitions in Optimize. Refer to the [authorization management section](##process-or-decision-definition-related-authorizations) to confirm the user has all required authorizations.
 
 Another common cause for this type of problem are issues with Optimize's data import, for example due to underlying problems with the engine data. In this case, the Optimize logs should contain more information on what is causing Optimize to not import the definition data correctly. If you are unsure on how to interpret what you find in the logs, create a support ticket.
 
