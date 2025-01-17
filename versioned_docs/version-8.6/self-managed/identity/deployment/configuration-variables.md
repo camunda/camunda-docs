@@ -31,9 +31,8 @@ As a Spring Boot application, Identity supports any standard
 
 These are the names and values which can be used for the identity sdk to ensure proper authentication and authorization with identy.
 
-
 | Environment Variable                | Property                            | Description                                                                                                                       | Default Value              |
-|-------------------------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| ----------------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
 | `CAMUNDA_IDENTITY_ISSUERBACKENDURL` | `camunda.identity.issuerBackendUrl` | The URL to the auth provider backend, used to validate tokens. This setting can also be overridden using the environment variable | -                          |
 | `CAMUNDA_IDENTITY_AUDIENCE`         | `camunda.identity.audience`         | The required audience of the auth token. This setting can also be overridden using the environment variable                       | -                          |
 | `CAMUNDA_IDENTITY_TYPE`             | `camunda.identity.type`             | Define what kind of authentication type you will use, Choose between `KEYCLOAK`, `MICROSOFT`, `GENERIC`                           | KEYCLOAK                   |
