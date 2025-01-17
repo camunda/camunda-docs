@@ -69,7 +69,7 @@ Get started by learning how to [integrate a Camunda 8 connector](/guides/configu
 
 ## Custom connectors
 
-Build and deploy your own connectors using connector templates and the connector SDK.
+Build and deploy your own [custom connectors](../custom-built-connectors/build-connector) using connector templates and the connector SDK.
 
 <div class="connector-grid">
   <a href="../custom-built-connectors/build-connector" class="connector-card" title="Custom Connectors">
