@@ -91,7 +91,7 @@ In the event of a total active region loss, the following data will be lost:
 ## Requirements
 
 - Camunda 8
-  - Minimum [Helm chart version](https://github.com/camunda/camunda-platform-helm) **9.3+**
+  - Minimum [Helm chart version](https://artifacthub.io/packages/helm/camunda/camunda-platform) **9.3+**
   - Minimum component images
     - Elasticsearch **8.9+**
       - OpenSearch (both managed and self-managed) is not supported

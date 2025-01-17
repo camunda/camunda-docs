@@ -310,7 +310,7 @@ module.exports = {
               href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
-              html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
+              html: `<a class="footer__link-item" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
             },
             {
               label: "Licenses",
