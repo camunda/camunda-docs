@@ -7,9 +7,11 @@ import AmazonEventbridgeImg from "../img/connector-amazon-eventbridge.png";
 import AmazonSnsImg from "../img/connector-amazon-sns.png";
 import AmazonSqsImg from "../img/connector-amazon-sqs.png";
 import AmazonLambdaImg from "../img/connector-aws-lambda.png";
+import AmazonS3Img from "../img/connector-amazon-s3.png";
 import AsanaImg from "../img/connector-asana.png";
 import AutomationImg from "../img/connector-automation.png";
 import AzureaiImg from "../img/connector-azure-openai.png";
+import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
 import EasypostImg from "../img/connector-easypost.png";
@@ -95,6 +97,13 @@ const SearchableTable = () => {
       image: AmazonBedrockImg,
     },
     {
+      name: "Amazon S3",
+      description: "Interact with Amazon S3 from your processes.",
+      type: "Outbound",
+      link: "../amazon-s3/",
+      image: AmazonS3Img,
+    },
+    {
       name: "Amazon SNS inbound",
       description: "Trigger your process with an Amazon SNS notification.",
       type: "Inbound",
@@ -159,6 +168,13 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../blueprism/",
       image: BluePrismImg,
+    },
+    {
+      name: "Box",
+      description: "Interact with the Box storage API from your processes.",
+      type: "Outbound",
+      link: "../box/",
+      image: BoxImg,
     },
     {
       name: "Camunda Operate",
