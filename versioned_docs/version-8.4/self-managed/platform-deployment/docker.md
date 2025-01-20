@@ -79,12 +79,14 @@ You can also find more information on the supported [configuration variables](..
 
 ## Docker Compose
 
-A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors Bundle is available in the [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
+A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors Bundle is available via `docker-compose.yaml`..
 Follow the instructions in the [README](https://github.com/camunda/camunda-self-managed#docker-compose).
 
 :::warning
 While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](./helm-kubernetes/overview.md) in production.
 :::
+
+Download the [Camunda 8 Docker Compose artifact](https://github.com/camunda/camunda-self-managed/releases/download/docker-compose-8.4/docker-compose-8.4.zip) and extract it.
 
 This Docker Compose configuration serves two purposes:
 
@@ -97,8 +99,7 @@ We recommend to use [Helm + KIND](./helm-kubernetes/guides/local-kubernetes-clus
 
 ### Web Modeler
 
-An additional Docker Compose configuration to run Web Modeler is also available in the
-[camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose-web-modeler.yaml) repository. Follow the instructions in the [README](https://github.com/camunda/camunda-platform#web-modeler-self-managed) to utilize this configuration.
+An additional Docker Compose configuration to run Web Modeler is also available via `docker-compose-web-modeler.yaml`. It works the same way but runs Web Modeler only.
 
 ## Configuration hints
 
