@@ -62,7 +62,7 @@ The following conventions apply to all attributes:
 - `key` and `id` fields contain the entity as a prefix, for example, `userTaskKey`, `processDefinitionId`. This applies when referencing other resources like `formKey` in the user task entity, in the respective entities themselves like `userTaskKey` in the user task entity.
 - The full entity is the prefix to avoid confusion, for example `processDefinitionKey` instead of `processKey` (the latter could be interpreted as process instance or process definition).
 - Other attributes of entities themselves have no prefix to avoid clutter, for example version in the process definition entity. In other resources, they have to be referenced with a prefix, like `processDefinitionVersion` in the process instance entity.
-- The `bpmnProcessId` is now called `processDefinitionId` to be easily relatable to the process definition entity, like the `processDefinitionKey`.
+- The `bpmnProcessId` and `processName` are now called `processDefinitionId` to be easily relatable to the process definition entity, like the `processDefinitionKey`.
 - The `decisionKey` and `dmnDecisionKey` are now aligned to `decisionDefinitionKey`, the `decisionId` and `dmnDecisionId` to `decisionDefinitionId`. Similar to the `processDefinitionId` being related to the process definition, those attributes are now easily relatable to the decision definition entity.
 
 <!--- Insert Operate section with V1 endpoint and V2 endpoint to use with input/output adjustments --->
@@ -203,6 +203,10 @@ The following conventions apply to all attributes:
   - Filter object keys need a `$` prefix. Additionally, you can use new comparison filter options like `$neq`, `$exists`, and `$in`.
 - `userTaskKey` added
   - Filter for specific user tasks by their unique system identifiers.
+- `processDefinitionId` added
+  - Filter for user tasks by the user-provided unique identifier of the process.
+- `elementInstanceKey` added
+  - Find tasks by the unique system identifier of the instance of the BPMN element that created the user task.
 
 </TabItem>
 
@@ -211,13 +215,13 @@ The following conventions apply to all attributes:
 - Response structure changes as outlined in [general changes][].
   - `sortValues` do not exist per result item. Instead, the `page` object contains `firstSortValues` and `lastSortValues`, referring to the `sortValues` of the first and last item of the result set.
 - `id` renamed
-  - Use `userTaskKey` as this refers to the unique system identifier of the user task.
+  - Use `userTaskKey`, this still refers to the unique system identifier of the user task.
 - `taskDefinitionId` renamed
-  - Use `elementId`.
+  - Use `elementId`, this still refers to the user-provided identifier of the BPMN element that created the user task.
 - `taskState` renamed
   - Use `state`.
 - `processName` renamed
-  - Use `processDefinitionId`.
+  - Use `processDefinitionId`, this still refers to the user-provided identifier of the process.
 - `customHeaders` added
   - TBD
 - `externalFormReference` added
