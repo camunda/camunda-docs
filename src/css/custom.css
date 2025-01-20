@@ -27,12 +27,12 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 /* Dark mode */
 [data-theme="dark"]:root {
   --ifm-color-primary: #78a9ff;
-  --ifm-background-color: rgb(3, 6, 11);
-  --ifm-background-surface-color: rgb(3, 6, 11);
+  --ifm-background-color: #161616;
+  --ifm-background-surface-color: #161616;
   --ifm-font-color-base: rgb(244, 244, 244);
   --ifm-heading-color: rgb(244, 244, 244);
-  --ifm-footer-background-color: red;
-  --ifm-footer-color: red;
+  --ifm-footer-background-color: #161616;
+  --ifm-footer-color: #161616;
   --ifm-footer-link-color: var(--ifm-color-secondary);
   --ifm-footer-title-color: var(--ifm-color-white);
   --ifm-navbar-link-color: rgb(198, 198, 198);
@@ -48,6 +48,16 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 a {
   text-decoration: none;
 }
+
+[data-theme="dark"] .mantine-k0race {
+  border: 1px solid #767676;
+  box-shadow: 0px 8px 16px 4px rgba(120, 169, 255, 0.2);
+}
+
+[data-theme="dark"] .navbar {
+  border-bottom: 1px solid #323232;
+}
+
 [data-theme="dark"] .token .tag {
   color: red !important;
 }
@@ -60,7 +70,7 @@ a {
   color: rgb(244, 244, 244);
 }
 [data-theme="dark"] .footer--dark {
-  background-color: rgb(3, 6, 11);
+  background-color: #161616;
   border-top: 1px solid rgb(50, 50, 50);
   padding-top: 40px;
 }
@@ -73,7 +83,7 @@ a {
 [data-theme="dark"] .hero--primary {
   background-image: url("/static/img/hero-bg-dark.png");
   padding-bottom: 2rem;
-  background-color: rgb(3, 6, 11);
+  background-color: #161616;
 }
 [data-theme="dark"] .theme-doc-markdown img {
   background-color: white;
@@ -88,7 +98,7 @@ a {
   background-color: rgb(44 51 66);
 }
 [data-theme="dark"] .hero--secondary {
-  background-color: rgb(3, 6, 11);
+  background-color: #161616;
   margin-bottom: 2rem;
 }
 [data-theme="dark"] .tabs__item {
@@ -203,8 +213,8 @@ a {
 /* Dark Mode > Cards */
 
 [data-theme="dark"] .card {
-  background-color: #202229;
-  border: 1px solid rgb(50, 50, 50);
+  background-color: rgb(27, 27, 27);
+  border: 1px solid rgb(40, 40, 40);
   box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
 }
 [data-theme="dark"] .card:hover {
