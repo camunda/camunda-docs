@@ -29,7 +29,7 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups.
 - **s3 Bucket** - This will be used to store backups of the Camunda cluster. This s3 bucket must be configured with OpenSearch to take backups.
 - **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
-- **Resource Planning**: Evaluate sufficient CPU, memory, and storage necessary for the deployment. Have a look at our [sizing guide](/components/best-practices/architecture/sizing-your-environment.md/#camunda-8-self-managed) for more information.
+- **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md/#camunda-8-self-managed) and evaluated sufficient CPU, memory and storage necessary for the deployment.
 
 Ensure all prerequisites are in place to avoid issues during installation or upgrading in a production environment.
 
@@ -273,7 +273,7 @@ core:
 The `core.clusterSize` refers to the amount of brokers, the `core.partitionCount` refers to how [zeebe partitions](/docs/components/zeebe/technical-concepts/partitions.md) are configured for each cluster, and the `core.replicationFactor` refers to the [number of replicas](/docs/components/zeebe/technical-concepts/partitions.md/#replication) that each partition replicates to.
 
 :::note
-The `core.partitionCount` does not support dynamic scaling. You will not be able to modify it on future upgrades.
+The `core.partitionCount` does not yet support dynamic scaling. You will not be able to modify it on future upgrades.
 :::
 
 - Check the resource (CPU and memory) limits set and make sure they are appropriate for your workload size. For example, the resource limits can be changed for the core component by modifying the following values:
