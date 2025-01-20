@@ -423,6 +423,7 @@ core:
 Here is the full `production-values.yaml` considering all the above topics.
 
 ```yaml
+##INCOMPLETE
 # make sure to the values.yaml in a multinamespace setting and configure console likewise
 global:
   secrets:
@@ -561,9 +562,11 @@ prometheusServiceMonitor:
 
 ### Upgrade and Maintenance
 
+<!--INCOMPLETE-->
+
 Make sure secrets are not auto-generated on upgrade.
 
-### Adding more Orchestration clusters
+### Adding more Orchestration Clusters
 
 The next recommended step is to setup a multi-namespace deployment. A [guide](/self-managed/setup/guides/multi-namespace-deployment.md) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
 
