@@ -158,7 +158,7 @@ global:
         redirectUrl: "https://modeler.camunda.example.com"
 ```
 
-If you would like some more guidance relating to authentication, refer to the [Connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md) guide
+If you would like some more guidance relating to authentication, refer to the [Connect to an OpenID Connect provider](/docs/self-managed/setup/guides/connect-to-an-oidc-provider/#configuration) guide
 
 ### Connect External Databases
 
