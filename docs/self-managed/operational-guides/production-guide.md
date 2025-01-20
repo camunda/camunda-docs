@@ -25,9 +25,9 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. Have a look at the [Set up the Aurora PostgreSQL module](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/#set-up-the-aurora-postgresql-module) guide.
   - **Amazon OpenSearch**: is used as a datastore for Camunda Orchestration Core components. Have a look at our guide for setting an [OpenSearch domain](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/#4-opensearch-domain)
   - **AWS Simple Active Directory**: For authentication and authorization.
-- **NGINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
-- **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups.
-- **s3 Bucket** - This will be used to store backups of the Camunda cluster. This s3 bucket must be configured with OpenSearch to take backups.
+- **Ingress NGINX**: Ensure the [ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
+- **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups. Have a look at the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
+- **Amazon S3** - This will be used to store backups of the Camunda cluster. Amazon S3 must be configured with OpenSearch to take backups.
 - **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
 - **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md/#camunda-8-self-managed) and evaluated sufficient CPU, memory and storage necessary for the deployment.
 
@@ -40,7 +40,7 @@ Below is the high-level architecture diagram for the base production setup _(cli
 
 - Supported Components:
   Camunda Platform Orchestration Core Components: Zeebe, Tasklist, Operate, Optimize
-- Ingress Controller (e.g., Nginx)
+- Ingress NGINX Controller
 - External Dependencies:
   - PostgreSQL (for persistent data storage)
   - AWS OpenSearch (for indexing and analytics)
@@ -568,7 +568,7 @@ Make sure secrets are not auto-generated on upgrade.
 
 ### Adding more Orchestration Clusters
 
-The next recommended step is to setup a multi-namespace deployment. A [guide](/self-managed/setup/guides/multi-namespace-deployment.md) for this is already available. This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
+The next recommended step is to setup a multi-namespace deployment. To configure multiple Camunda Orchestration Clusters in different namespaces, we recommend you to follow our [guide for our multi-namespace deployments](/self-managed/setup/guides/multi-namespace-deployment.md). This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
 
 ### Running benchmarks
 
