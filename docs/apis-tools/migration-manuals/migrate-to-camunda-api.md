@@ -95,14 +95,12 @@ The following conventions apply to all attributes:
 <TabItem value='output-adjustments'>
 
 - Embedded forms are no longer returned as Camunda user tasks don't support them.
-- `isDeleted` removed
-  - The endpoint does not serve this information anymore.
-- `processDefinitionKey` removed
-  - You can identify the related entity from the endpoint resource and the provided key parameter, the form response does not contain it additionally anymore.
-- `id` renamed
-  - Use `formKey` as this refers to the unique system identifier of the form.
-- `title` renamed
-  - Use `formId` as this aligns better with the attribute defined in the form schema.
+- Renamed atttibutes
+  - `id` - Use `formKey` as this refers to the unique system identifier of the form.
+  - `title` - Use `formId` as this aligns better with the attribute defined in the form schema.
+- Removed attributes
+  - `isDeleted` - The endpoint does not serve this information anymore.
+  - `processDefinitionKey` - You can identify the related entity from the endpoint resource and the provided key parameter, the form response does not contain it additionally anymore.
 
 </TabItem>
 </Tabs>
@@ -129,32 +127,27 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-- `variableNames` renamed and type changed
-  - Use the `filter` object's `name`, either with a plain string for one exact match or with `{ "$in": [ "xyz", ... ]}`.
-- `includeVariables` removed
-  - The endpoint returns all variables associated with the user task.
+- Renamed attributes
+  - `variableNames` - Use the `filter` object's `name`, either with a plain string for one exact match or with `{ "$in": [ "xyz", ... ]}`.
+- Removed attributes
+  - `includeVariables` - The endpoint returns all variables associated with the user task.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
 - Response structure changes as outlined in [general changes][].
-- `id` renamed
-  - Use `variableKey` as this refers to the unique system identifier of the variable.
-- `value` renamed
-  - Use `fullValue` as this represents the full variable value in case the `value` is only a preview due to size constraints. If the `value` is not a preview, the `fullValue` is empty.
-- `previewValue` renamed
-  - Use `value` as this always represents the variable value. This can be a preview value due to size constraints. In that case, the `fullValue` contains the full variable value.
-- `isValueTruncated` renamed
-  - Use `isTruncated` as a replacement
-- `draft` removed
-  - Draft variables are not supported in V2 anymore, see also the [Save draft variables](#save-task-draft-variables) endpoint for further details.
-- `scopeKey` added
-  - Variables belong to a specific scope, e.g., the process instance or the element instance of a user task. This value represents the scope the variables is related to.
-- `processInstanceKey` added
-  - A variable belongs to process instance and this value represents the unique system identifier of that instance.
-- `tenantId` added
-  - Variables can belong to a dedicated tenant and this value represents the one it belongs to. See [multi-tenancy][] for further details.
+- Renamed attributes
+  - `id` - Use `variableKey` as this refers to the unique system identifier of the variable.
+  - `value` - Use `fullValue` as this represents the full variable value in case the `value` is only a preview due to size constraints. If the `value` is not a preview, the `fullValue` is empty.
+  - `previewValue` - Use `value` as this always represents the variable value. This can be a preview value due to size constraints. In that case, the `fullValue` contains the full variable value.
+  - `isValueTruncated` - Use `isTruncated` as a replacement
+- Removed attributes
+  - `draft` - Draft variables are not supported in V2 anymore, see also the [Save draft variables](#save-task-draft-variables) endpoint for further details.
+- Added attributes
+  - `scopeKey` - Variables belong to a specific scope, e.g., the process instance or the element instance of a user task. This value represents the scope the variables is related to.
+  - `processInstanceKey` - A variable belongs to process instance and this value represents the unique system identifier of that instance.
+  - `tenantId` - Variables can belong to a dedicated tenant and this value represents the one it belongs to. See [multi-tenancy][] for further details.
 
 </TabItem>
 </Tabs>
@@ -174,39 +167,29 @@ The following conventions apply to all attributes:
 <TabItem value='input-adjustments'>
 
 - Request structure changes as outlined in [general changes][].
-  - The `pageSize` is the `limit` in the `page` object.
+  - The `pageSize` is now the `limit` in the `page` object.
   - The `searchAfter` and `searchBefore` are in the `page` object.
-  - The `searchAfterOrEqual` and `searchBeforeOrEqual` options have been removed.
-- `assigned` removed
-  - Use `assignee` with `{ "$exists": false }`. Multiple filters can be combined in one attribute.
-- `assignees` removed
-  - Use `assignee` with `{ "$in": [ "xyz", ... ] }`. Multiple filters can be combined in one attribute.
-- `taskDefinitionId` renamed
-  - Use `elementId` as this refers to the user-provided identifier of the BPMN element that created the user task.
-- `candidateGroups` removed
-  - Use `candidateGroup` with `{ "$in": [ "xyz", ... ] }`.
-- `candidateUsers` removed
-  - Use `candidateUser` with `{ "$in": [ "xyz", ... ] }`.
-- `followUpDate` and `dueDate` filter options renamed
-  - Instead of `from` and `to`, use `$gte` and `$lte`. Additionally, you can use new comparison filter options.
-- `taskVariables` split up and renamed
-  - You can define `localVariables` and `processInstanceVariables`.
-  - Local variables match the defined `name` and `value` and exist in the local scope of the BPMN element instance that created the user task.
-  - Process instance variables match the defined `name` and `value` and exist anywhere in the process instance that the user task belongs to.
-- `tenantIds` removed
-  - Use `tenantId` with `{ "$in": [ "xyz", ... ] }`.
-- `includeVariables` removed
-  - The endpoint does not return variables. Use the [Search task variables](#search-task-variables) endpoint to retrieve them.
-- `implementation` removed
-  - The V2 API supports only Camunda user tasks.
-- `priority` filter options renamed
-  - Filter object keys need a `$` prefix. Additionally, you can use new comparison filter options like `$neq`, `$exists`, and `$in`.
-- `userTaskKey` added
-  - Filter for specific user tasks by their unique system identifiers.
-- `processDefinitionId` added
-  - Filter for user tasks by the user-provided unique identifier of the process.
-- `elementInstanceKey` added
-  - Find tasks by the unique system identifier of the instance of the BPMN element that created the user task.
+  - The `searchAfterOrEqual` and `searchBeforeOrEqual` options do not exist.
+- Renamed attributes
+  - `taskDefinitionId` - Use `elementId` as this refers to the user-provided identifier of the BPMN element that created the user task.
+  - `followUpDate` and `dueDate` filter options - Instead of `from` and `to`, use `$gte` and `$lte`. Additionally, you can use new comparison filter options.
+  - `priority` filter options - Filter object keys need a `$` prefix. Additionally, you can use new comparison filter options like `$neq`, `$exists`, and `$in`.
+- Removed attributes
+  - `assigned` - Use `assignee` with `{ "$exists": false }`. Multiple filters can be combined in one attribute.
+  - `assignees` - Use `assignee` with `{ "$in": [ "xyz", ... ] }`. Multiple filters can be combined in one attribute.
+  - `candidateGroups` - Use `candidateGroup` with `{ "$in": [ "xyz", ... ] }`.
+  - `candidateUsers` - Use `candidateUser` with `{ "$in": [ "xyz", ... ] }`.
+  - `taskVariables` split up and renamed
+    - You can define `localVariables` and `processInstanceVariables`.
+    - Local variables match the defined `name` and `value` and exist in the local scope of the BPMN element instance that created the user task.
+    - Process instance variables match the defined `name` and `value` and exist anywhere in the process instance that the user task belongs to.
+  - `tenantIds` - Use `tenantId` with `{ "$in": [ "xyz", ... ] }`.
+  - `includeVariables` - The endpoint does not return variables. Use the [Search task variables](#search-task-variables) endpoint to retrieve them.
+  - `implementation` - The V2 API supports only Camunda user tasks.
+- Added attributes
+  - `userTaskKey` - Filter for specific user tasks by their unique system identifiers.
+  - `processDefinitionId` - Filter for user tasks by the user-provided unique identifier of the process.
+  - `elementInstanceKey` - Find tasks by the unique system identifier of the instance of the BPMN element that created the user task.
 
 </TabItem>
 
@@ -214,32 +197,23 @@ The following conventions apply to all attributes:
 
 - Response structure changes as outlined in [general changes][].
   - `sortValues` do not exist per result item. Instead, the `page` object contains `firstSortValues` and `lastSortValues`, referring to the `sortValues` of the first and last item of the result set.
-- `id` renamed
-  - Use `userTaskKey`, this still refers to the unique system identifier of the user task.
-- `taskDefinitionId` renamed
-  - Use `elementId`, this still refers to the user-provided identifier of the BPMN element that created the user task.
-- `taskState` renamed
-  - Use `state`.
-- `processName` renamed
-  - Use `processDefinitionId`, this still refers to the user-provided identifier of the process.
-- `customHeaders` added
-  - TBD
-- `externalFormReference` added
-  - TBD
-- `processDefinitionVersion` added
-  - TBD
-- `isFirst` removed
-  - Used to identify if the task was the first in the process.
-- `variables` removed
-  - Use search variables to retrieve variables from a user task.
-- `implementation` removed
-  - On V2, only user tasks are returned.
-- `isFormEmbedded` removed
-  - User tasks do not support embedded forms.
-- `formVersion` removed
-  - For user tasks, use the `formKey` to retrieve form data.
-- `formId` removed
-  - For user tasks, use the `formKey` to retrieve form data.
+- Renamed attributes
+  - `id` - Use `userTaskKey`, this still refers to the unique system identifier of the user task.
+  - `formKey` - This now is a unique system identifier, referencing a linked Camunda form in a specific version. Previously, this encoded an embedded form , a linked Camunda form, or an external form reference.
+  - `taskDefinitionId` - Use `elementId`, this still refers to the user-provided identifier of the BPMN element that created the user task.
+  - `taskState` - Use `state`, this still refers to the user task's current state
+  - `processName` - Use `processDefinitionId`, this still refers to the user-provided identifier of the process.
+- Removed attributes
+  - `isFirst` - This used to identify if the task was the first in the process.
+  - `variables` - Use the [Search user task variables endpoint][] to retrieve variables for a user task.
+  - `implementation` - The V2 API supports only Camunda user tasks.
+  - `isFormEmbedded` - The V2 API does not support embedded forms anymore.
+  - `formVersion` - Use the [Get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
+  - `formId` - Use the [Get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
+- Added attributes
+  - `customHeaders` - Any user-provided custom header values provided for the user task.
+  - `externalFormReference` - The user-provided reference to the an external form for the user task. Previously, the `formKey` encoded this value.
+  - `processDefinitionVersion` - The version of the process this user task belongs to.
 
 </TabItem>
 
