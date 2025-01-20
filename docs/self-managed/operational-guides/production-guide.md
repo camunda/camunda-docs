@@ -15,13 +15,15 @@ The goal of this guide is to give you a **scenario-based, production focused, st
 
 Before proceeding with the setup, ensure the following requirements are met:
 
-- **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access.
+- **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access. We are going to use an AWS EKS cluster. Have a look at the following guides:
+  - [Deploy an EKS cluster with Terraform (advanced)](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/)
+  - [Install Camunda 8 on an EKS cluster](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm/)
 - **Helm**: Helm CLI installed
 - **DNS Configuration**: Access to configure DNS for your domain to point to the Kubernetes cluster ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
-  - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component.
-  - **Amazon OpenSearch**: For indexing and analytics.
+  - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. Have a look at the [Set up the Aurora PostgreSQL module](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/#set-up-the-aurora-postgresql-module) guide.
+  - **Amazon OpenSearch**: is used as a datastore for Camunda Orchestration Core components. Have a look at our guide for setting an [OpenSearch domain](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/#4-opensearch-domain)
   - **AWS Simple Active Directory**: For authentication and authorization.
 - **NGINX Ingress Controller**: Ensure the NGINX ingress controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups.
