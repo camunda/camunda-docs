@@ -514,33 +514,53 @@ Please note that, once the VPC peering is created, it becomes a dependency of th
 
 #### Retrieve the peering cluster variables
 
-In order to create the peering of each VPC's cluster, we need to gather some information using the `rosa` and `aws` cli, save the following script as `gather-peering-info.sh` in the OpenShift module folder (where your `cluster_region_1.tf` and `cluster_region_2.tf` files lives).
+To create the peering between each cluster’s VPC, you need to gather some information using the `rosa` and `aws` CLI tools. Follow these steps:
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/provision/gather-peering-info.sh
-```
+1. Open a **new terminal** that will be used for common resources.
 
-Source the script to retrieve the informations from the OpenShift clusters:
+   First, confirm that you're in the parent directory where your cluster modules reside (`region1` and `region2` directories).
 
-```bash
-source gather-peering-info.sh
-```
+   ```bash
+   ls
 
-The script will output the two VPCs configuration at the end. We reference one cluster as the **owner** and the other one as the **accepter**, this is purely for networking naming and has no implication in terms of dependency between each cluster.
+   # Example output:
+   # region1 region2
+   ```
+
+1. Save the following script as `gather-peering-info.sh`
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/provision/gather-peering-info.sh
+   ```
+
+   Once the script is saved, run the following command to source the script and retrieve the necessary information from the OpenShift clusters:
+
+   ```bash
+   source gather-peering-info.sh
+   ```
+
+1. Review the output:
+   - The script will output the configuration of the two VPCs involved in the peering process.
+   - One cluster will be referenced as the **owner**, and the other as the **accepter**. This designation is used solely for networking purposes and does not imply any dependency between the two clusters.
 
 #### Create the peering configuration module
 
-Create a new directory, for instance `peering`, located near of your other modules.
+In the parent directory where your cluster modules reside (`region1` and `region2`), create a new directory called `peering` for the VPC peering configuration:
 
-We will re-use the previously configured S3 bucket to store the state of the peering configuration.
+```bash
+mkdir peering
+cd peering
+```
 
-Configure your `config.tf` file to use the S3 backend for managing the Terraform state:
+We'll re-use the previously configured S3 bucket to store the state of the peering configuration.
+
+Begin by setting up the `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/peering/config.tf
 ```
 
-Along the `config.tf` file, create a variable file `variables.tf` that will reference the variables of this configuration:
+Alongside the `config.tf` file, create a variable file called `variables.tf` to reference the variables for this configuration:
 
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/peering/variables.tf
@@ -548,31 +568,29 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-h
 
 #### Initialize Terraform
 
-Once your `config.tf` and authentication are set up, you can initialize your Terraform project. The previous steps configured a dedicated S3 Bucket (`S3_TF_BUCKET_NAME`) to store your state, and the following creates a bucket key that will be used by your configuration.
-
-Configure the backend and download the necessary provider plugins:
+Once the `config.tf` and `variables.tf` files are set up, configure the backend for Terraform and set the S3 bucket key for the peering state and initialize Terraform to configure the backend and download the necessary provider plugins:
 
 ```bash
-export S3_TF_BUCKET_KEY_PEERING="camunda-terraform/terraform-peering.tfstate"
+export S3_TF_BUCKET_KEY_PEERING="camunda-terraform/peering.tfstate"
 
 echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_PEERING"
 
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY_PEERING"
+terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
 ```
 
-Terraform will connect to the S3 bucket to manage the state file, ensuring remote and persistent storage.
+This command connects Terraform to the S3 bucket for managing the state file, ensuring remote and persistent storage.
 
 #### Execution
 
-1. Open the terminal and navigate to the Terraform folder (`peering`) containing the `config.tf` file and other `.tf` files. This folder will be used to configure VPC peering between the two regions using [the previously retrieved VPC values](#retrieve-the-peering-cluster-variables).
+1. Open a terminal and navigate to the `peering` directory where the `config.tf` file and other `.tf` files are located. This is where [the previously retrieved VPC values](#retrieve-the-peering-cluster-variables).
 
-2. Generate the Terraform execution plan:
+1. Run the following command to generate a plan for the VPC peering configuration. It includes the owner and accepter VPCs using the previously retrieved VPC values:
 
    ```bash
    terraform plan -out peering.plan -var "owner=$(echo "$OWNER_JSON" | jq -c .)" -var "accepter=$(echo "$ACCEPTER_JSON" | jq -c .)"
    ```
 
-3. After reviewing the execution plan, apply the configuration to create the VPC peering connection:
+1. After reviewing the execution plan, apply the configuration to create the VPC peering connection:
 
    ```bash
    terraform apply peering.plan     # apply the creation
@@ -590,41 +608,87 @@ You can find the reference files used on [this page](https://github.com/camunda/
 
 ### Access the created OpenShift clusters
 
-You can access the created OpenShift clusters using the following steps:
+You can now access the created OpenShift clusters.
 
-1.  Set up the required environment variables from the OpenShift module folder (where your `cluster_region_1.tf` and `cluster_region_2.tf` files lives):
+**Terminal for each cluster:**
+
+<Tabs groupId="region" defaultValue="region1" queryString values={
+[
+{label: 'Region 1', value: 'region1' },
+{label: 'Region 2', value: 'region2' },
+]}>
+
+<TabItem value="region1">
+
+1.  Verify that you are in the project directory for **region 1**:
+
+    ```bash
+    pwd
+
+    # Example output:
+    # /home/your-username/camunda/region1
+    ```
+
+1.  Set up the required environment variables from the OpenShift terraform module:
 
     ```shell
-    # Cluster 1
     export CLUSTER_1_NAME="$(terraform console <<<local.rosa_cluster_1_name | jq -r)"
     export CLUSTER_1_API_URL=$(terraform output -raw cluster_1_openshift_api_url)
     export CLUSTER_1_ADMIN_USERNAME="$(terraform console <<<local.rosa_cluster_1_admin_username | jq -r)"
     export CLUSTER_1_ADMIN_PASSWORD="$(terraform console <<<local.rosa_cluster_1_admin_password | jq -r)"
+    ```
 
-    # Cluster 2
+1.  Give cluster administrator role to the created user:
+
+    ```shell
+    rosa grant user cluster-admin --cluster="$CLUSTER_1_NAME" --user="$CLUSTER_1_ADMIN_USERNAME"
+    ```
+
+1.  Log in to the OpenShift cluster and configure the kubeconfig context:
+
+    ```shell
+    oc login -u "$CLUSTER_1_ADMIN_USERNAME" "$CLUSTER_1_API_URL" -p "$CLUSTER_1_ADMIN_PASSWORD"
+    kubectl config delete-context "$CLUSTER_1_NAME" || true
+    kubectl config rename-context $(oc config current-context) "$CLUSTER_1_NAME"
+    ```
+
+1.  Verify your connection to the clusters with `oc`:
+
+    ```shell
+    oc --context "$CLUSTER_1_NAME" get nodes
+    ```
+
+</TabItem>
+
+<TabItem value="region2">
+
+1.  Verify that you are in the project directory for **region 2**:
+
+    ```bash
+    pwd
+
+    # Example output:
+    # /home/your-username/camunda/region2
+    ```
+
+1.  Set up the required environment variables from the OpenShift terraform module:
+
+    ```shell
     export CLUSTER_2_NAME="$(terraform console <<<local.rosa_cluster_2_name | jq -r)"
     export CLUSTER_2_API_URL=$(terraform output -raw cluster_2_openshift_api_url)
     export CLUSTER_2_ADMIN_USERNAME="$(terraform console <<<local.rosa_cluster_2_admin_username | jq -r)"
     export CLUSTER_2_ADMIN_PASSWORD="$(terraform console <<<local.rosa_cluster_2_admin_password | jq -r)"
     ```
 
-1.  For each cluster, give cluster administrator role to the created user:
+1.  Give cluster administrator role to the created user:
 
     ```shell
-    rosa grant user cluster-admin --cluster="$CLUSTER_1_NAME" --user="$CLUSTER_1_ADMIN_USERNAME"
-
     rosa grant user cluster-admin --cluster="$CLUSTER_2_NAME" --user="$CLUSTER_2_ADMIN_USERNAME"
     ```
 
-1.  Log in to the OpenShift cluster and configure the kubeconfig contexts:
+1.  Log in to the OpenShift cluster and configure the kubeconfig context:
 
     ```shell
-    # Cluster 1
-    oc login -u "$CLUSTER_1_ADMIN_USERNAME" "$CLUSTER_1_API_URL" -p "$CLUSTER_1_ADMIN_PASSWORD"
-    kubectl config delete-context "$CLUSTER_1_NAME" || true
-    kubectl config rename-context $(oc config current-context) "$CLUSTER_1_NAME"
-
-    # Cluster 2
     oc login -u "$CLUSTER_2_ADMIN_USERNAME" "$CLUSTER_2_API_URL" -p "$CLUSTER_2_ADMIN_PASSWORD"
     kubectl config delete-context "$CLUSTER_2_NAME" || true
     kubectl config rename-context $(oc config current-context) "$CLUSTER_2_NAME"
@@ -633,9 +697,11 @@ You can access the created OpenShift clusters using the following steps:
 1.  Verify your connection to the clusters with `oc`:
 
     ```shell
-    oc --context "$CLUSTER_1_NAME" get nodes
     oc --context "$CLUSTER_2_NAME" get nodes
     ```
+
+</TabItem>
+</Tabs>
 
 In the remainder of the guide, different namespaces will be created following the needs of the dual-region architecture.
 
