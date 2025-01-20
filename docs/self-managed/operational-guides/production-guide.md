@@ -202,7 +202,7 @@ identity:
     existingSecretPasswordKey: "database-password"
 ```
 
-Please make sure to correctly define the protocol, host, and port.
+Please make sure to correctly define the host, and port.
 
 #### Connecting to External Database for Web Modeler:
 
@@ -274,7 +274,7 @@ The `core.clusterSize` refers to the amount of brokers, the `core.partitionCount
 The `core.partitionCount` does not yet support dynamic scaling. You will not be able to modify it on future upgrades.
 :::
 
-- Check the resource (CPU and memory) limits set and make sure they are appropriate for your workload size. For example, the resource limits can be changed for the core component by modifying the following values:
+- Check the resources (CPU and memory) and make sure they are appropriate for your workload size. For example, the resource limits can be changed for the core component by modifying the following values:
 
 ```yaml
 core:
@@ -289,7 +289,7 @@ core:
 
 - It is possible to set a LimitRange on the namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/) on setting a LimitRange.
 
-## Reliability Best Practices
+## Reliability
 
 Here are some points to keep in mind when considering reliability:
 
@@ -401,11 +401,11 @@ containerSecurityContext:
 
 Here are some points to keep in mind when considering observability:
 
-- It is possible to enable integration with Prometheus, a popular monitoring solution, in the Camunda Helm Chart. This can be configured by adding values below to your production-values.yaml:
+- It is possible to enable integration with Prometheus, a popular monitoring solution, in the Camunda Helm Chart. This can be configured by adding the following configuration below to your `production-values.yaml`:
 
 ```yaml
 prometheusServiceMonitor:
-  enabled: false
+  enabled: true
 ```
 
 - A tool such as [Loki](https://grafana.com/oss/loki/) could be used for the retention and archival of logs. It can also be used to aggregate logs.
@@ -420,7 +420,7 @@ core:
 
 ## Bringing it All Together
 
-Here is the full `production-values.yaml` considering all the above topics.
+Here is a complete example `production-values.yaml` considering all the above topics.
 
 ```yaml
 ##INCOMPLETE
