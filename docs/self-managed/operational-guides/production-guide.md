@@ -71,7 +71,7 @@ helm install camunda camunda/camunda-platform \
     --values production-values.yaml
 ```
 
-The next section will explain various configurations used in `production-values.yaml``
+The next section will explain various configurations used in `production-values.yaml`.
 
 ### Ingress TLS Setup
 
@@ -154,15 +154,13 @@ global:
         redirectUrl: "https://modeler.camunda.example.com"
 ```
 
-If you would like some more guidance relating to authentication, then please refer to the following guides:
-
-- [Connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md)
+If you would like some more guidance relating to authentication, refer to the [Connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md) guide
 
 ### Connect External Databases
 
 The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as Bitnami Elasticsearch Helm Chart and Bitnami PostgresQL Helm Chart. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
-In our scenario the Core component, and the Optimize importer communicates with a singular Amazon OpenSearch instance. On the other hand, the identity and web-modeler component are connected to seperate Amazon Aurora PostgreSQL instances.
+In our scenario the Core component, and the Optimize importer communicate with a singular Amazon OpenSearch instance. On the other hand, the identity and web-modeler component are connected to seperate Amazon Aurora PostgreSQL instances.
 
 It is assumed that you already have one Amazon OpenSearch instance and two Amazon Aurora PostgreSQL instances setup and ready to go with a username, password, and URL.
 
