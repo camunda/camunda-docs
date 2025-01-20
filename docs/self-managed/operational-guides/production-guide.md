@@ -18,16 +18,16 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access. We are going to use an AWS EKS cluster. Have a look at the following guides:
   - [Deploy an EKS cluster with Terraform (advanced)](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/)
   - [Install Camunda 8 on an EKS cluster](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm/)
-- **Helm**: Helm CLI installed
+- **Helm**: Make sure you have the [Helm CLI](https://helm.sh/docs/intro/install/) installed
 - **DNS Configuration**: Access to configure DNS for your domain to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
   - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. Have a look at the [Set up the Aurora PostgreSQL module](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/#set-up-the-aurora-postgresql-module) guide.
   - **Amazon OpenSearch**: is used as a datastore for Camunda Orchestration Core components. Have a look at our guide for setting an [OpenSearch domain](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/#4-opensearch-domain)
-  - **AWS Simple Active Directory**: For authentication and authorization.
+  - **AWS Simple Active Directory**: For simple OIDC authentication in this scenario, we will use [AWS Simple Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html)
 - **Ingress NGINX**: Ensure the [ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups. Have a look at the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
-- **Amazon S3** - This will be used to store backups of the Camunda cluster. Amazon S3 must be configured with OpenSearch to take backups.
+- **Amazon S3** - This will be used to store backups of the Camunda cluster. [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) must be configured with OpenSearch to take backups.
 - **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
 - **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md/#camunda-8-self-managed) and evaluated sufficient CPU, memory and storage necessary for the deployment.
 
