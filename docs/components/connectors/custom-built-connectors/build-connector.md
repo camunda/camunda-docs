@@ -41,19 +41,17 @@ and how it can be configured by process developers. Connector templates are a sp
 
 ## Connector SDK
 
-Use the SDK to create your own custom Java connectors.
-
-**[Get started with the connector SDK >](connector-sdk.md)**
+[Create your own custom Java connectors](connector-sdk.md) using the connector SDK.
 
 ## Connector architecture
 
-A connector consists of two elements - the actual Java code, and the Modeler user interface.
+A connector consists of the actual Java code, and the Modeler user interface.
 
 <img src={ConnectorArchitectureImg}/>
 
-- The Java code defines the connector functionality and how it connects to an external system. For example, the [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic) for outbound connectors.
+1. The Java code defines the connector functionality and how it connects to an external system. For example, the [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic) for outbound connectors.
 
-- The user interface allows you to interact with the connector in Modeler. This is defined in a [Connector template](../manage-connector-templates.md) that controls how the BPMN element is shown in Modeler and what configuration options are available for the connector.
+1. The user interface allows you to interact with the connector in Modeler. This is defined in a [Connector template](../manage-connector-templates.md) that controls how the BPMN element is shown in Modeler and what configuration options are available for the connector.
 
 :::note
 
