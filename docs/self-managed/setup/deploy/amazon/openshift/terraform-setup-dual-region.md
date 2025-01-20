@@ -99,45 +99,52 @@ You can further change the region and other preferences and explore different [a
 
 Before setting up Terraform, you need to create an S3 bucket that will store the state file. This is important for collaboration and to prevent issues like state file corruption.
 
-To start, set the region as an environment variable upfront to avoid repeating it in each command:
+To simplify the process and avoid repeating the region in each command, set your desired AWS region as an environment variable:
 
 ```bash
-export AWS_REGION=<your-region>
+export S3_TF_BUCKET_REGION=<your-region>
 ```
 
-Replace `<your-region>` with your chosen AWS region that will host your bucket (for example, `eu-central-1`).
+Replace `<your-region>` with the AWS region where you want to create the S3 bucket (e.g., `us-east-1`).  
 
-Now, follow these steps to create the S3 bucket with versioning enabled:
+:::note Region of the bucket's state
+
+This region can be different from the regions used for other resources, but it requires to be set explicitly in the backend configuration using the flag: `-backend-config="region=<your-region>"`.
+
+For clarity, this guide explicitly sets the bucket region in all relevant commands.
+:::
+
+
+Steps to create the S3 bucket with versioning enabled:
 
 1. Open your terminal and ensure the AWS CLI is installed and configured.
 
-1. Run the following command to create an S3 bucket for storing your Terraform state. Make sure to use a unique bucket name and set the `AWS_REGION` environment variable beforehand:
+1. Use the following command to create an S3 bucket. Replace `my-rosa-dual-tf-state` with a unique bucket name:
 
    ```bash
-   # Replace "my-rosa-dual-tf-state" with your unique bucket name
    export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
 
-   aws s3api create-bucket --bucket "$S3_TF_BUCKET_NAME" --region "$AWS_REGION" \
-     --create-bucket-configuration LocationConstraint="$AWS_REGION"
+   aws s3api create-bucket --bucket "$S3_TF_BUCKET_NAME" --region "$S3_TF_BUCKET_REGION" \
+     --create-bucket-configuration LocationConstraint="$S3_TF_BUCKET_REGION"
    ```
 
 1. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash
-   aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region "$AWS_REGION"
+   aws s3api put-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --versioning-configuration Status=Enabled --region "$S3_TF_BUCKET_REGION"
    ```
 
 1. Secure the bucket by blocking public access:
 
    ```bash
    aws s3api put-public-access-block --bucket "$S3_TF_BUCKET_NAME" --public-access-block-configuration \
-     "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region "$AWS_REGION"
+     "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true" --region "$S3_TF_BUCKET_REGION"
    ```
 
 1. Verify versioning is enabled on the bucket:
 
    ```bash
-   aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region "$AWS_REGION"
+   aws s3api get-bucket-versioning --bucket "$S3_TF_BUCKET_NAME" --region "$S3_TF_BUCKET_REGION"
    ```
 
 This S3 bucket will now securely store your Terraform state files with versioning enabled.

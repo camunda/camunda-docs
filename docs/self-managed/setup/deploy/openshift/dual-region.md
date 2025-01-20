@@ -70,6 +70,154 @@ Some steps in this guide may require additional CLI tools, which will be specifi
 
 ## Setup Advanced Cluster Management and Submariner
 
+In order to achieve cross-cluster communication, we use the recommanded [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner) solution that is designed to securely connect workloads across multiple Kubernetes clusters. 
+
+The installation of Submariner on OpenShift differs from the standard installation as it requires the usage of [Red Hat Advanced Cluster Management for Kubernetes](https://www.redhat.com/en/technologies/management/advanced-cluster-management). 
+
+:::note Alternative installations
+
+You may achieve the same installation without the usage of Red Hat Advanced Cluster Management for Kubernetes, however, this guide will focus on the official supported deployment of Submariner.
+
+:::
+
+### Advanced Cluster Management
+
+If Red Hat Advanced Cluster Management is not enabled on your cluster, you need to enable it. The following steps are an extract from the [official instructions](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing), which you may want to refer for details of the implementation and associated customizations.
+
+:::caution Non-production use only
+
+The following installation instructions for Advanced Cluster Management are intended for non-production environments.  
+For a production setup, please consult the [official Red Hat Advanced Cluster Management guide](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing).
+  
+:::
+
+:::note Designation of the first cluster  
+
+The first cluster is referred to as `local-cluster`. This designation cannot be changed, as it is a constant name used to reference the [managed hub cluster](https://open-cluster-management.io/docs/concepts/cluster-inventory/managedcluster/).  
+
+:::  
+
+1. Reference each cluster context name:
+
+  ```bash
+  export CLUSTER_1_NAME="cluster_1"  # Replace with your actual context name
+  export CLUSTER_2_NAME="cluster_2"  # Replace with your actual context name
+  ```
+
+1. The following manifest will create a namespace for the management cluster, enable the [open-cluster-management operator](https://open-cluster-management.io/) and the [associated subscription](https://docs.openshift.com/container-platform/4.17/operators/admin/olm-adding-operators-to-cluster.html#olm-installing-operator-from-operatorhub-using-cli_olm-adding-operators-to-a-cluster).
+
+  ```yaml reference
+  https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/install-manifest.yml
+  ```
+  Apply the manifests to enable ACM:
+  ```bash
+  oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/install-manifest.yml
+  ```
+
+  Verify that the installation succeeded after a few seconds:
+  ```bash 
+  oc --context $CLUSTER_1_NAME --namespace open-cluster-management get csv --watch
+  ```
+
+1. With the ACM operator now enabled on the first cluster, the next step is to create the [Multicluster Global Hub](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html-single/install/index#installing-from-the-cli). This feature allows you to import and manage one or more hub clusters from a single central hub cluster.
+
+  In this setup, the first cluster will act as the central hub, managing the second cluster. This capability enables the deployment and management of components on the second cluster directly from the first cluster.
+
+  ```yaml reference
+  https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/multi-cluster-hub.yml
+  ```
+
+  Apply the manifest:
+  ```bash
+  oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/multi-cluster-hub.yml
+  ```
+
+  Wait until the status shows as "Running." This process can take up to 10 minutes:
+  ```bash
+  oc --context $CLUSTER_1_NAME get mch -n open-cluster-management multiclusterhub --watch
+  ```
+
+  :::caution Security consideration
+    - A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
+
+    - A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed. 
+    This is the only local-cluster namespace that can exist.
+
+    - :warning: For security reasons, do not give access to the `local-cluster` namespace to any user that is not a cluster-administrator. 
+  :::
+
+1. With the Multi Cluster Hub created, the last step is to create a `ManagedClusterSet` which is a group of managed clusters. With a `ManagedClusterSet`, you can manage access to all of the managed clusters in the group together
+
+  ```yaml reference
+  https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/managed-cluster-set.yml
+  ```
+
+  Apply the manifest:
+  ```bash
+  oc --context $CLUSTER_1_NAME get mch -A
+
+  oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/managed-cluster-set.yml
+  ```
+
+1. After creating the Managed Cluster Set, the next step is to import clusters into the set.  
+
+   - To import a cluster, you need to template the manifest for each cluster. 
+     
+     Save the following file as `managed-cluster.yml.tpl`:  
+     ```yaml reference
+     https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/managed-cluster.yml.tpl
+     ```  
+
+   - The cluster’s associated addon configuration will be managed using the following manifest. 
+     
+     Save it as `klusterlet-config.yml.tpl`:  
+     ```yaml reference
+     https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/klusterlet-config.yml.tpl
+     ```  
+
+   - To import a cluster, you must store the associated authentication token. 
+     
+     Save the following file as `auto-import-cluster-secret.yml.tpl`:  
+     ```yaml reference
+     https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/auto-import-cluster-secret.yml.tpl
+     ```  
+
+   - Finally, import each cluster into the Managed Cluster Set and verify that they can be reached and managed successfully:
+    ```bash
+    # Import the first cluster
+    SUB1_TOKEN=$(oc --context "$CLUSTER_1_NAME" whoami -t)
+
+    # for the first cluster, the cluster name is hardcoded on purpose
+    CLUSTER_NAME="local-cluster" envsubst < managed-cluster.yml.tpl | oc --context "$CLUSTER_1_NAME" apply -f -
+
+    CLUSTER_NAME="local-cluster" CLUSTER_TOKEN="$SUB1_TOKEN" CLUSTER_API="$(rosa describe cluster --cluster "$CLUSTER_1_NAME" --output json | jq .api.url -r)" envsubst < auto-import-cluster-secret.yml.tpl | oc --context "$CLUSTER_1_NAME" apply -f -
+
+    CLUSTER_NAME="local-cluster" envsubst < klusterlet-config.yml.tpl | oc --context "$CLUSTER_1_NAME" apply -f -
+
+    # List Managed Cluster sets
+    oc --context "$CLUSTER_1_NAME" get managedclusters
+
+    # Import second cluster
+    SUB2_TOKEN=$(oc --context "$CLUSTER_2_NAME" whoami -t)
+
+    CLUSTER_NAME="$CLUSTER_2_NAME" envsubst < managed-cluster.yml.tpl | oc --context "$CLUSTER_1_NAME" apply -f -
+
+    CLUSTER_NAME="$CLUSTER_2_NAME" CLUSTER_TOKEN="$SUB2_TOKEN" CLUSTER_API="$(rosa describe cluster --cluster "$CLUSTER_2_NAME" --output json | jq .api.url -r)" envsubst < auto-import-cluster-secret.yml.tpl | oc --context "$CLUSTER_1_NAME" apply -f -
+    
+    CLUSTER_NAME="$CLUSTER_2_NAME" envsubst < klusterlet-config.yml.tpl | oc --context "$CLUSTER_1_NAME" apply -f -
+
+    oc --context "$CLUSTER_1_NAME" get managedclusters
+    # NAME            HUB ACCEPTED   MANAGED CLUSTER URLS                                 JOINED   AVAILABLE   AGE
+    # cl-oc-2         true           https://api.cl-oc-2.5egh.p3.openshiftapps.com:443    True     True        50s
+    # local-cluster   true           https://api.cl-oc-1.f70c.p3.openshiftapps.com:443   True     True        36m
+    ```
+
+
+### Submariner
+
+The [architecture of Submariner](https://submariner.io/getting-started/architecture/) consists of several components acting together to enable a service located in one cluster to be reached from an other cluster.
+
+
 Needed to coordinate the deployment of cross cluster resources
 
 Needed to make services discoverable from each cluster and to access it
