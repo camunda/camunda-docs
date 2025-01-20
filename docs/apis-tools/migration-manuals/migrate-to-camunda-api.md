@@ -382,6 +382,6 @@ Same output adjustments as **Search tasks**.
 
 <!--- TODO: insert link to C8 REST API guidelines --->
 
-[setting variables]: /apis-tools/camunda-api-rest/specifications/create-element-instance-variables.mdx
+[setting variables]: /apis-tools/camunda-api-rest/specifications/create-element-instance-variables.api.mdx
 [general changes]: #general-endpoint-changes
 [multi-tenancy]: /self-managed/concepts/multi-tenancy.md
