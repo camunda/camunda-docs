@@ -38,13 +38,7 @@ Ensure all prerequisites are in place to avoid issues during installation or upg
 Below is the high-level architecture diagram for the base production setup _(click on the image to open the PDF version)_:
 [![Infrastructure Diagram ROSA Single-Region](./assets/smarch.jpg)](./assets/smarch.pdf)
 
-- Supported Components:
-  Camunda Platform Orchestration Core Components: Zeebe, Tasklist, Operate, Optimize
-- Ingress NGINX Controller
-- External Dependencies:
-  - PostgreSQL (for persistent data storage)
-  - AWS OpenSearch (for indexing and analytics)
-  - Keycloak (for authentication/authorization)
+If you would like to learn more about the architecture setup, please refer to the [About Self Managed](/docs/self-managed/about-self-managed/#architecture) and [Camunda 8 reference architectures](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console) documents.
 
 # Step-by-Step Production Guide
 
@@ -232,7 +226,7 @@ If you would like further information on connecting to external databases, we ha
 
 ## Camunda Core Configuration
 
-At this point you are able to connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment.
+At this point you would be able connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment.
 
 We will continue our journey in adding to the `production-values.yaml`. Here is what you should consider for Camunda component level configurations:
 
