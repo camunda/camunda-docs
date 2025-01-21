@@ -74,8 +74,8 @@ When the Keycloak service is ready for connections, start (or restart) the Ident
 ### Solution 2: Identity making requests from an external IP address
 
 By default, Keycloak requires TLS on requests that originate from what it considers to be an external source. The Keycloak
-documentation for [setting up SSL](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) maintains
-a list of what they consider to be an external IP address under the `external requests` section.
+documentation for [configuring SSL for a realm](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) maintains
+a list of what Keycloak considers to be an external IP address in the `external requests` section.
 
 The solution to this issue will depend largely on your environment. However, as a starting point we would suggest you consider
 these options:
@@ -83,10 +83,10 @@ these options:
 1. Configure the communication between the services (for example in a cluster) to use IP ranges that fall within the
    ranges that Keycloak expects.
 2. If configuring the IP ranges is not an option, it is possible to disable the SSL requirement in Keycloak itself by completing the following steps:
-   1. In the `master` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/22.0.1/server_admin/#_ssl_modes).
+   1. In the `master` realm, set `Require SSL` to `none` by following the steps in [configuring SSL for a realm](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes).
    2. Restart the Identity service.
-   3. In the `camunda-platform` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/22.0.1/server_admin/#_ssl_modes).
-   4. Restart the Identity service again. Identity should now start successfully
+   3. In the `camunda-platform` realm, set `Require SSL` to `none` by following the steps in [configuring SSL for a realm](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes).
+   4. Restart the Identity service again. Identity should now start successfully.
 
 :::warning
 We would only recommend that requirements for SSL are disabled in a development environment.
