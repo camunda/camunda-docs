@@ -49,6 +49,8 @@ This High-Level Design describes how the following critical components interact 
 - A reliable means of communication between the two clusters is necessary. Ensure that each cluster can establish network connections with the other.
 - The version of your OpenShift clusters must be included in the [supported versions list](./redhat-openshift.md#supported-versions).
 
+<!-- TODO: add requirements from https://submariner.io/getting-started/#prerequisites -->
+
 ### CLI Requirements
 
 In addition to the general prerequisites outlined above, the following CLI tools are required for interacting with the clusters and deploying Camunda 8, these are the same CLI tools required as mentioned in the [OpenShift Guide](redhat-openshift.md#requirements).
@@ -97,7 +99,7 @@ The first cluster is referred to as `local-cluster`. This designation cannot be 
 
 :::
 
-1. Reference each cluster context name:
+1. Reference each cluster context name and ensure that each cluster's context name matches the corresponding cluster name. If the context name does not match, you will need to rename it to follow this guide.
 
 ```bash
 export CLUSTER_1_NAME="cluster-region-1"  # Replace with your actual context name
@@ -133,7 +135,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-h
 :::caution Known issue: may not work correctly with the manifest
 The creation of the MultiClusterHub using the manifest can sometimes remain stuck in the installation phase when created this way.
 
-    To avoid this issue, please follow the [official instructions in the OpenShift UI Console](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
+      To avoid this issue, please follow the [official instructions in the OpenShift UI Console](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
 
 :::
 
@@ -149,7 +151,9 @@ Wait until the status shows as "Running." This process can take up to 10 minutes
 oc --context $CLUSTER_1_NAME get mch -n open-cluster-management multiclusterhub --watch
 ```
 
-:::caution Security consideration - A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
+:::caution Security consideration
+
+    - A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
 
     - A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed.
     This is the only local-cluster namespace that can exist.
@@ -231,11 +235,112 @@ oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/
 
 ### Submariner
 
-The [architecture of Submariner](https://submariner.io/getting-started/architecture/) consists of several components acting together to enable a service located in one cluster to be reached from an other cluster.
+The [architecture of Submariner](https://submariner.io/getting-started/architecture/) comprises several components working together to enable direct networking between Pods and Services across different Kubernetes clusters.
 
-Needed to coordinate the deployment of cross cluster resources
+The following diagram illustrates the interaction between the two clusters:
 
-Needed to make services discoverable from each cluster and to access it
+<!-- TODO: add similar diagram https://camo.githubusercontent.com/e47fd6c9d87061b65a001d04faeb0be18d4c7668d745df4dbd752ff4994bc975/68747470733a2f2f6d6561747962797465732e696f2f706f7374732f6f70656e73686966742f6f63702d66656174757265732f6d756c74692d636c75737465722f636f6e6e65637469766974792f7375626d6172696e65725f687533663364303337303338363132383064303237333264653162333764636638625f37323338395f3133323078305f726573697a655f626f785f332e706e67 -->
+
+- Traffic sent from one broker to another cluster can be encrypted by the [Gateway Engine](https://submariner.io/getting-started/architecture/gateway-engine/). In OpenShift, the IPSec protocol is used on port `4500/UDP`, utilizing the [Libreswan](https://libreswan.org/) implementation.
+- A dedicated node in each cluster assumes the [Broker Role](https://submariner.io/getting-started/architecture/broker/), facilitating the exchange of metadata between Gateway Engines in participating clusters. This component is **not responsible for transmitting data**, unlike the Gateway Engine, which handles data transmission between internal networks of different clusters. High availability can be achieved by adding a second dedicated node.
+- Service discovery is managed internally by the [Lighthouse project](https://submariner.io/getting-started/architecture/service-discovery/).
+- The [Route Agent component](https://submariner.io/getting-started/architecture/route-agent/) runs on every node in each participating cluster. It sets up the necessary host network elements on top of the existing Kubernetes CNI plugin.
+
+:::note Handling overlapping CIDRs
+
+This guide does not cover handling overlapping CIDRs. However, this can be achieved using the [Globalnet Controller](https://submariner.io/getting-started/architecture/globalnet/).
+
+:::
+
+Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#advanced-cluster-management) to be configured, with each cluster added to the management cluster.
+
+1. **Ensure Cluster Context Names Match**  
+   _(Skip this step if already completed as part of [Advanced Cluster Management](#advanced-cluster-management).)_  
+   Verify that each cluster's context name matches its corresponding cluster name. If the context name does not match, rename it to align with this guide.
+
+   ```bash
+   export CLUSTER_1_NAME="cluster-region-1"  # Replace with your actual context name
+   export CLUSTER_2_NAME="cluster-region-2"  # Replace with your actual context name
+   ```
+
+2. **Verify Dedicated Broker Nodes**  
+   Confirm that each cluster has nodes labeled for Submariner gateway functionality:
+
+   ```bash
+   oc --context "$CLUSTER_1_NAME" get nodes -l submariner.io/gateway=true
+   oc --context "$CLUSTER_2_NAME" get nodes -l submariner.io/gateway=true
+   ```
+
+   If no nodes are labeled, you need to label at least one node in each cluster. For better reliability, consider dedicating a node as the broker.
+
+   **Assigning Broker Node Labels**  
+   Select the first node and apply the required label:
+
+   ```bash
+   # Cluster 1
+   CLUSTER_1_BROKER_NODE_NAME="$(oc --context $CLUSTER_1_NAME get nodes -o jsonpath='{.items[0].metadata.name}')"
+
+   echo "Using node '$CLUSTER_1_BROKER_NODE_NAME' as the broker for Submariner in cluster '$CLUSTER_1_NAME'."
+   oc --context "$CLUSTER_1_NAME" label node "$CLUSTER_1_BROKER_NODE_NAME" submariner.io/gateway=true
+
+   # Cluster 2
+   CLUSTER_2_BROKER_NODE_NAME="$(oc --context $CLUSTER_2_NAME get nodes -o jsonpath='{.items[0].metadata.name}')"
+
+   echo "Using node '$CLUSTER_2_BROKER_NODE_NAME' as the broker for Submariner in cluster '$CLUSTER_2_NAME'."
+   oc --context "$CLUSTER_2_NAME" label node "$CLUSTER_2_BROKER_NODE_NAME" submariner.io/gateway=true
+   ```
+
+3. Deployment of Submariner on the clusters:
+
+   - Save the following file as `submariner.yml.tpl`:
+
+     ```yaml reference
+     https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/submariner/submariner.yml.tpl
+     ```
+
+     :::note Cluster naming
+
+     In this example, the first cluster is referenced as `local-cluster`. This is because the first cluster is used as the management cluster in this minimal setup.
+
+     If your cluster is named differently, you may need to adapt this file to match your actual cluster name.
+
+     :::
+
+   - Then apply it on the management cluster:
+
+     ```bash
+     envsubst < submariner.yml.tpl | oc --context "$CLUSTER_1_NAME" apply -f -
+     ```
+
+   - Wait for the brokers to become ready. This may take up to 10 minutes. You can check the broker status using the following command:
+
+     ```bash
+     oc --context "$CLUSTER_1_NAME" -n "oc-clusters-broker" describe Broker
+
+     oc --context "$CLUSTER_1_NAME" get managedclusteraddon -A | grep -E 'NAME|submariner'
+
+     # Example output:
+     # NAMESPACE          NAME                          AVAILABLE   DEGRADED   PROGRESSING
+     # cluster-region-2   submariner                    True                   False
+     # local-cluster      submariner                    True                   False
+     ```
+
+4. After Submariner is deployed, verify that the clusters can communicate with each other by using the `subctl` utility. Please note that it may take several minutes before all status indicators are green:
+
+```bash
+subctl show all --contexts "$CLUSTER_1_NAME,$CLUSTER_2_NAME"
+```
+
+  <details>
+    <summary>Example Submariner check successfull output</summary>
+
+    ```text reference
+    https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/submariner/output.txt
+    ```
+
+  </details>
+
+If you don’t have the `subctl` CLI installed, you can follow the [installation instructions here](https://submariner.io/operations/deployment/).
 
 ## Deploying Camunda 8 via Helm charts in dual region
 
