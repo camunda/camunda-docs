@@ -24,7 +24,7 @@ An execution listener is a blocking operation, meaning that the workflow executi
 
 ## Define an execution listener
 
-You can configure execution listeners per BPMN element within a process.
+You can configure execution listeners for individual BPMN elements, such as tasks, events, and gateways, as well as for the overall process and subprocesses.
 
 There are two types of execution listener:
 

@@ -8,7 +8,7 @@ processes. It will start a lightweight in-memory Zeebe engine and provide you wi
 verify your process behaves as expected.
 
 :::note
-As of 8.5.0, Zeebe Process Test does not support the new REST API and related features (e.g. Zeebe user tasks).
+As of 8.5.0, Zeebe Process Test does not support the new REST API and related features (for example, Camunda user tasks).
 :::
 
 ## Prerequisites
@@ -93,6 +93,54 @@ Switching between testcontainers and embedded requires just two steps:
 2. Change the import of `@ZeebeProcessTest`.
    - Testcontainers: `import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;`
    - Embedded: `import io.camunda.zeebe.process.test.extension.ZeebeProcessTest;`
+
+## Camunda Spring SDK integration
+
+You can add testing to your Camunda Spring SDK setup as follows.
+
+### Camunda Spring SDK embedded module
+
+To integrate an in-memory test engine and use assertions, add the following Maven dependency:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>spring-boot-starter-camunda-test</artifactId>
+  <version>X.Y.Z</version>
+  <scope>test</scope>
+</dependency>
+```
+
+### Camunda Spring SDK testcontainers module
+
+To integrate a testcontainer engine and use assertions, add the following Maven dependency:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>spring-boot-starter-camunda-test-testcontainer</artifactId>
+    <version>X.Y.Z</version>
+  <scope>test</scope>
+</dependency>
+```
+
+### Usage
+
+Add the `@ZeebeSpringTest` annotation to your Spring Boot test case to make the engine and a client available in your test case.
+
+```java
+@SpringBootTest
+@ZeebeSpringTest
+public class TestMyProcess {
+    private ZeebeTestEngine engine;
+    private ZeebeClient client;
+```
+
+You can find an example test case in the Camunda Community Hub at [Camunda 8 examples](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java).
+
+:::note
+Do not use `zeebeTestEngine.waitForBusyState(...)` to wait for a timer. This will not work as this is also triggered by an incoming job activation.
+:::
 
 ## Assertions
 

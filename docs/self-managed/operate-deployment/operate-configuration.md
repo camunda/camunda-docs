@@ -73,7 +73,7 @@ in terms of tenant assignment, Operate - Zeebe connection must be secured. Check
 
 ### Troubleshooting multi-tenancy in Operate
 
-If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-8.6#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
+If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
 
 If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/identity/what-is-identity.md), users will not have any tenant authorizations in Operate
 and will not be able to access the data of any tenants in Operate.

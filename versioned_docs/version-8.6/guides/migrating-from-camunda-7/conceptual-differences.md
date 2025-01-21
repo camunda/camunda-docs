@@ -48,10 +48,6 @@ To migrate existing Connectors, consider the following options:
 
 ### Multi-tenancy
 
-:::note
-[Multi-tenancy](/self-managed/concepts/multi-tenancy.md) is currently in development for Camunda 8.
-:::
-
 There are several differences between how [multi-tenancy](/self-managed/concepts/multi-tenancy.md) works in Camunda 7 and Camunda 8:
 
 1. The [one engine per tenant approach from Camunda 7](https://docs.camunda.org/manual/develop/user-guide/process-engine/multi-tenancy/#one-process-engine-per-tenant) isn't possible with Camunda 8. Camunda 8 only provides multi-tenancy through a tenant identifier.

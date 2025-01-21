@@ -91,3 +91,13 @@ The follow-up date defines the latest time you should start working on a task. T
 The priority defines urgency of a task in relation to others.
 
 ![tasklist-task-ordering](img/tasklist-task-ordering.png "Order tasks by dates")
+
+## Document handling
+
+Tasklist users may view and download files displayed in the task's form.
+
+:::note
+If you change the **Document URL** under **Download settings**, this feature will not work for public start forms because there is no valid session.
+:::
+
+See additional details and limitations in [document handling](/components/concepts/document-handling.md).

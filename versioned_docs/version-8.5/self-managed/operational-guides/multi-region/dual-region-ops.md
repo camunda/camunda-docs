@@ -48,7 +48,7 @@ Running dual-region setups requires the users to be able to detect any regional 
 
 - A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
-    - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
+    - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.28.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
 - [zbctl](./../../../apis-tools/cli-client/index.md) to interact with the Zeebe cluster.
 

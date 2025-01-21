@@ -20,3 +20,5 @@ A form element to select files.
 - **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 - **Validation**: Given that one of the following properties is set, the form will only submit when the respective condition is fulfilled. Otherwise, a validation error will be displayed.
   - **Required**: File picker must have a selected file.
+
+Refer to [document handling](/components/concepts/document-handling.md) for additional details and limitations.
