@@ -661,9 +661,10 @@ You can now access the created OpenShift clusters.
 1.  Log in to the OpenShift cluster and configure the kubeconfig context:
 
     ```shell
+    oc config delete-context "$CLUSTER_1_NAME" || true
+
     oc login -u "$CLUSTER_1_ADMIN_USERNAME" "$CLUSTER_1_API_URL" -p "$CLUSTER_1_ADMIN_PASSWORD"
-    kubectl config delete-context "$CLUSTER_1_NAME" || true
-    kubectl config rename-context $(oc config current-context) "$CLUSTER_1_NAME"
+    oc config rename-context $(oc config current-context) "$CLUSTER_1_NAME"
     ```
 
 1.  Verify your connection to the clusters with `oc`:
@@ -703,9 +704,10 @@ You can now access the created OpenShift clusters.
 1.  Log in to the OpenShift cluster and configure the kubeconfig context:
 
     ```shell
+    oc config delete-context "$CLUSTER_2_NAME" || true
+
     oc login -u "$CLUSTER_2_ADMIN_USERNAME" "$CLUSTER_2_API_URL" -p "$CLUSTER_2_ADMIN_PASSWORD"
-    kubectl config delete-context "$CLUSTER_2_NAME" || true
-    kubectl config rename-context $(oc config current-context) "$CLUSTER_2_NAME"
+    oc config rename-context $(oc config current-context) "$CLUSTER_2_NAME"
     ```
 
 1.  Verify your connection to the clusters with `oc`:
