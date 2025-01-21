@@ -370,7 +370,7 @@ You should only enable the auto-mounting of a service account token when the app
 - If you have a use case for enabling [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) then it is recommended to do so.
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
 - It is possible to have a pod security standard that is suitable to the security constraints you might have. This is possible through modifying the Pod Security Admission. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/) in order to do so.
-- By default, The Camunda Helm Chart is configured by default to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your `production-values.yaml`.
+- By default, the Camunda Helm Chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your `production-values.yaml`.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information please visit the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 - It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is a configuration for the core component that can be added to your `production-values.yaml`:
 
