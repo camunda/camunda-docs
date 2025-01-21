@@ -179,6 +179,10 @@ The dual-cluster setup requires managing two distinct clusters in different regi
 
     # set the region, adjust to your needs
     export AWS_REGION='us-east-1'
+
+    # ensure bucket variables are set
+    export S3_TF_BUCKET_REGION=<your-region>
+    export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
     ```
 
 1.  Copy the initial module configuration file `config.tf` into this directory.
@@ -210,6 +214,10 @@ terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=
 
     # set the region, adjust to your needs
     export AWS_REGION='us-east-2'
+
+    # ensure bucket variables are set
+    export S3_TF_BUCKET_REGION=<your-region>
+    export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
     ```
 
 1.  Copy the initial module configuration file `config.tf` into this directory.
@@ -273,6 +281,8 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 1. Install the ROSA CLI from the [OpenShift AWS Console](https://console.redhat.com/openshift/downloads#tool-rosa).
 
 1. Get an API token, go to the [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa), click **Load token**, and save it. Use the token to log in with ROSA CLI:
+
+   **Apply the token in each of your region's terminal**:
 
    ```bash
    export RHCS_TOKEN="<yourToken>"
@@ -571,7 +581,11 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-h
 Once the `config.tf` and `variables.tf` files are set up, configure the backend for Terraform and set the S3 bucket key for the peering state and initialize Terraform to configure the backend and download the necessary provider plugins:
 
 ```bash
-export S3_TF_BUCKET_KEY_PEERING="camunda-terraform/peering.tfstate"
+# ensure bucket variables are set
+export S3_TF_BUCKET_REGION=<your-region>
+export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
+
+export S3_TF_BUCKET_KEY="camunda-terraform/peering.tfstate"
 
 echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_PEERING"
 
