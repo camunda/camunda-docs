@@ -188,7 +188,7 @@ const SearchableTable = () => {
       description:
         "Create EasyPost addresses, parcels, shipments from your processes.",
       type: "Outbound",
-      link: "../easypost/",
+      link: "../easy-post/",
       image: EasypostImg,
     },
     {
@@ -254,7 +254,7 @@ const SearchableTable = () => {
       name: "GraphQL",
       description: "Execute a GraphQL query or mutation from your processes.",
       type: "Outbound",
-      link: "../graphql/",
+      link: "../../protocol/graphql/",
       image: GraphqlImg,
     },
     {
