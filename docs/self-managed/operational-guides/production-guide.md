@@ -162,11 +162,11 @@ If you would like some more guidance relating to authentication, refer to the [C
 
 ### Connect External Databases
 
-The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as Bitnami Elasticsearch Helm Chart and Bitnami PostgresQL Helm Chart. Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
+The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as [Bitnami Elasticsearch Helm Chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and [Bitnami PostgresQL Helm Chart](https://artifacthub.io/packages/helm/bitnami/postgresql). Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
 In our scenario the Core component, and the Optimize importer communicate with a singular Amazon OpenSearch instance. On the other hand, the identity and web-modeler component are connected to seperate Amazon Aurora PostgreSQL instances.
 
-It is assumed that you already have one Amazon OpenSearch instance and two Amazon Aurora PostgreSQL instances setup and ready to go with a username, password, and URL.
+It is expected that you already have one Amazon OpenSearch instance and two Amazon Aurora PostgreSQL instances configured and ready to use, complete with a username, password, and URL. If not, refer to the guides in the prerequisites section.
 
 #### Connecting to Amazon OpenSearch:
 
