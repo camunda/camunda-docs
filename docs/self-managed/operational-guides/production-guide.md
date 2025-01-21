@@ -164,9 +164,9 @@ If you would like some more guidance relating to authentication, refer to the [C
 
 The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as [Bitnami Elasticsearch Helm Chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and [Bitnami PostgresQL Helm Chart](https://artifacthub.io/packages/helm/bitnami/postgresql). Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
-In our scenario the Core component, and the Optimize importer communicate with a singular Amazon OpenSearch instance. On the other hand, the identity and web-modeler component are connected to seperate Amazon Aurora PostgreSQL instances.
+In our scenario the Core component, and the Optimize importer communicate with a singular Amazon OpenSearch instance. On the other hand, the identity and web-modeler components are connected to separate databases on the Amazon Aurora PostgreSQL instances.
 
-It is expected that you already have one Amazon OpenSearch instance and two Amazon Aurora PostgreSQL instances configured and ready to use, complete with a username, password, and URL. If not, refer to the guides in the prerequisites section.
+It is expected that you already have one Amazon OpenSearch instance and two databases on Amazon Aurora PostgreSQL ready to use. Complete with a username, password, and URL. If not, refer to the guides in the prerequisites section.
 
 #### Connecting to Amazon OpenSearch:
 
@@ -216,9 +216,8 @@ Here is how to configure Web Modeler with external Amazon Aurora PostgreSQL:
 webModeler:
   externalDatabase:
     url: "jdbc:postgresql://external-postgres-host:5432/camunda_db"
-    user: "camunda_user"
-    password: "secure_password"
-    existingSecret: "camunda-db-secret"
+    user: "web_modeler_user"
+    existingSecret: "webm-odeler-db-secret"
     existingSecretPasswordKey: "database-password"
 ```
 
@@ -549,7 +548,6 @@ webModeler:
   externalDatabase:
     url: "jdbc:postgresql://external-postgres-host:5432/camunda_db"
     user: "camunda_user"
-    password: "secure_password"
     existingSecret: "camunda-db-secret"
     existingSecretPasswordKey: "database-password"
 
