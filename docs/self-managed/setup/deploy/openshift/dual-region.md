@@ -53,22 +53,28 @@ This High-Level Design describes how the following critical components interact 
 
 ### CLI Requirements
 
-In addition to the general prerequisites outlined above, the following CLI tools are required for interacting with the clusters and deploying Camunda 8, these are the same CLI tools required as mentioned in the [OpenShift Guide](redhat-openshift.md#requirements).
+In addition to the general prerequisites outlined above, the following CLI tools are required for interacting with the clusters and deploying Camunda 8, these are the same CLI tools required as mentioned in the [OpenShift Guide](redhat-openshift.md#requirements):
 
-<!-- TODO: be exhaustive on the missing tools -->
+- [subctl](https://github.com/submariner-io/subctl) a CLI tool used to interact with [Submariner](https://submariner.io/).
 
-Some steps in this guide may require additional CLI tools, which will be specified as needed.
+### OpenShift clusters
 
-## Setup the clusters
+The architecture of your OpenShift clusters may vary depending on your specific configuration. This guide assumes a generic deployment on OpenShift, using a specific cloud provider.
 
-### Referencing the clusters
+If you'd like to replicate the topology used in this guide, follow the [ROSA Dual-Region Guide](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/).
 
-- Have access to the cluster from your cli
-- reference the region and the name of each cluster
+#### Cluster requirements
+
+To deploy infrastructure components successfully, it’s essential that the OpenShift clusters you use have a `cluster-admin` role, which grants full privileges within the cluster. This level of access is necessary for the proper setup and configuration of the infrastructure components.
+
+However, **Camunda 8 deployment does not require cluster-admin access**. For the best security practice and to follow the principle of least privilege, it is recommended to deploy Camunda 8 with a **standard, limited user**. This approach helps minimize security risks by restricting unnecessary administrative privileges.
 
 ### Networking of the clusters
 
-- Allow clusters to communicate between each other
+<!-- TODO: improve this part that is WIP -->
+
+- Submariner requirement
+- S3 access for each server
 
 ## Setup Advanced Cluster Management and Submariner
 
@@ -133,9 +139,10 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-h
 ```
 
 :::caution Known issue: may not work correctly with the manifest
+
 The creation of the MultiClusterHub using the manifest can sometimes remain stuck in the installation phase when created this way.
 
-      To avoid this issue, please follow the [official instructions in the OpenShift UI Console](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
+To avoid this issue, please follow the [official instructions in the OpenShift UI Console](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
 
 :::
 
@@ -153,12 +160,12 @@ oc --context $CLUSTER_1_NAME get mch -n open-cluster-management multiclusterhub 
 
 :::caution Security consideration
 
-    - A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
+- A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
 
-    - A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed.
-    This is the only local-cluster namespace that can exist.
+- A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed.
+  This is the only local-cluster namespace that can exist.
 
-    - :warning: For security reasons, do not give access to the `local-cluster` namespace to any user that is not a cluster-administrator.
+- :warning: For security reasons, do not give access to the `local-cluster` namespace to any user that is not a cluster-administrator.
 
 :::
 
@@ -460,8 +467,8 @@ In the example below, a TLS certificate is generated for the Zeebe Gateway servi
 
 Another option is [Cert Manager](https://docs.openshift.com/container-platform/latest/security/cert_manager_operator/index.html). For more details, review the [OpenShift documentation](https://docs.openshift.com/container-platform/latest/networking/routes/secured-routes.html#nw-ingress-creating-a-reencrypt-route-with-a-custom-certificate_secured-routes).
 
-      <details>
-        <summary>PKCS #8, PKCS #1 syntax</summary>
+<details>
+  <summary>PKCS #8, PKCS #1 syntax</summary>
 
 > PKCS #1 private key encoding. PKCS #1 produces a PEM block that contains the private key algorithm in the header and the private key in the body. A key that uses this can be recognised by its BEGIN RSA PRIVATE KEY or BEGIN EC PRIVATE KEY header. NOTE: This encoding is not supported for Ed25519 keys. Attempting to use this encoding with an Ed25519 key will be ignored and default to PKCS #8.
 
@@ -469,7 +476,7 @@ Another option is [Cert Manager](https://docs.openshift.com/container-platform/l
 
 [PKCS #1, PKCS #8 syntax definitionfrom cert-manager](https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.PrivateKeyEncoding)
 
-      </details>
+</details>
 
 - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
