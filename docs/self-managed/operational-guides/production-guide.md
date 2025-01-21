@@ -301,7 +301,7 @@ core:
     maxUnavailable: 1
 ```
 
-- Version Management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s release notes for security patches or critical updates. A list of our supported versions Camunda Helm Charts can be found on the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)
+- Version Management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/docs/reference/release-notes/) for security patches or critical updates.
 - Secrets should be created prior to installing the Helm Chart so they can be referenced as existing secrets when installing the Helm Chart. In this scenario we are going to auto-generate the secrets. The following can be added to your `production-values.yaml`:
 
 ```yaml
@@ -319,7 +319,7 @@ Please refer to the [Kuberentes documentation](https://kubernetes.io/docs/concep
 The `camunda-credentials` generated secret will not be deleted if the helm chart is uninstalled
 :::
 
-- When upgrading the Camunda Helm Chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version release notes before upgrading and perform the upgrade on a test environment first before attempting in production.
+- When upgrading the Camunda Helm Chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version elease notes before upgrading and perform the upgrade on a test environment first before attempting in production.
 - Make sure to not store any state or important, long term business data in the local file system of the container. A pod is transient, if the pod is restarted then the data will get wiped. It is better to create a volume and volume mount instead. Here is some example configuration for the core component to create persistent storage:
 
 ```yaml
@@ -336,7 +336,7 @@ core:
 <!-- This seems very specific to the application. I might remove this: -->
 <!-- - Mount Secrets as volumes, not environment variables -->
 
-- It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documenation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so.
+- It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documenation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-Level Quotas apply limits to all workloads within a namespace. It ensures aggregate resource consumption by all pods in the namespace do not exceed your desired resource limits.
 
 ## Security Guidelines
 
@@ -372,7 +372,7 @@ You should only enable the auto-mounting of a service account token when the app
 - It is possible to have a pod security standard that is suitable to the security constraints you might have. This is possible through modifying the Pod Security Admission. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/) in order to do so.
 - By default, the Camunda Helm Chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your `production-values.yaml`.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information please visit the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
-- It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is a configuration for the core component that can be added to your `production-values.yaml`:
+- It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is the default configuration for the core component:
 
 ```yaml
 podSecurityContext:
@@ -390,6 +390,8 @@ containerSecurityContext:
   seccompProfile:
     type: RuntimeDefault
 ```
+
+If you would like to add any other security constraints to your `production-values.yaml` then please refer to the official [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 
 - It is recommended to pull images exclusively from a private registry, such as [Amazon ECR](https://aws.amazon.com/ecr/), rather than directly from Docker Hub. Doing so enhances control over the images, avoids rate limits, and improves performance and reliability. Additionally, you can configure your cluster to pull images only from trusted registries. Tools like [Open Policy Agent](https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e) can be used to enforce this restriction.
 - Open Policy Agent can also be used to [whitelist for Ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
