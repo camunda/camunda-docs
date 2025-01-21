@@ -49,10 +49,26 @@ a {
   text-decoration: none;
 }
 
+/* Dark Mode > Kapa AI */
+
 [data-theme="dark"] .mantine-k0race {
   border: 1px solid #767676;
   box-shadow: 0px 8px 16px 4px rgba(120, 169, 255, 0.2);
 }
+
+/* Dark Mode > Search */
+
+[data-theme="dark"] .DocSearch-Modal {
+  background: #161616;
+}
+[data-theme="dark"] .DocSearch-Footer {
+  background: #161616;
+}
+[data-theme="dark"] .DocSearch-Hit a {
+  text-decoration: none;
+}
+
+/* Dark Mode > General */
 
 [data-theme="dark"] .navbar {
   border-bottom: 1px solid #323232;
