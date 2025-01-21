@@ -271,11 +271,11 @@ a.connector-small-link {
 }
 
 .badge--active--outbound {
-  background-color: #0ba7b9;
+  background-color: #007bff;
   color: #fff;
 }
 .badge--active--inbound {
-  background-color: rgb(255, 139, 0);
+  background-color: #007bff;
   color: #fff;
 }
 
