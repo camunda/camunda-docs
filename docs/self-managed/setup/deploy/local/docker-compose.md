@@ -24,7 +24,7 @@ While the [Docker images](/self-managed/setup/deploy/other/docker.md) themselves
 To start a complete instance of Camunda 8 Self-Managed environment locally:
 
 1. Download the [Camunda 8 Docker Compose artifact](https://github.com/camunda/camunda-self-managed/releases/download/docker-compose-alpha/docker-compose-alpha.zip) and extract it.
-2. Enter the extracted directory, and run the following command:
+2. Run the following command in the extracted directory:
 
 ```shell
 docker compose up -d
