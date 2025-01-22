@@ -28,6 +28,8 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
+For Self-Managed environment, the Zeebe API may look like `http://localhost:26500`, or `https://mydomain.com:26500` with OAuth.
+
 When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
 
 Alternatively, use the [described flags](https://www.npmjs.com/package/zbctl#usage) (`--address`, `--clientId`, and `--clientSecret`) with the `zbctl` commands.
