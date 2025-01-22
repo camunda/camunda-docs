@@ -4,7 +4,7 @@ title: SAP RFC Connector
 description: "The SAP RFC Connector is a Java Spring Boot application that runs on SAP BTP."
 ---
 
-The SAP RFC [Connector](/components/connectors/introduction.md) is a [protocol and outbound Connector](/components/connectors/connector-types.md). This Connector is a Java Spring Boot application that runs on SAP Business Technology Platform (BTP).
+The SAP RFC [Connector](/components/connectors/introduction.md) is a [protocol and outbound Connector](/components/connectors/connector-types.md). This Connector is a Java Spring Boot application that runs as a `.war` on SAP Business Technology Platform (BTP).
 
 It connects to Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
 
@@ -20,7 +20,7 @@ For a standard overview of the steps involved in the SAP RFC Connector, see the 
 
 ## Prerequisites
 
-To run the SAP RFC Connector Docker image, the following SAP infrastructure setup is required:
+To run the SAP RFC Connector, the following SAP infrastructure setup is required:
 
 - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
 - SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
@@ -35,42 +35,21 @@ To run the SAP RFC Connector Docker image, the following SAP infrastructure setu
 
 ## Deployment to BTP
 
-Unlike other Camunda Connectors, the SAP RFC Connector must be deployed as a Java application. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. You must build the application yourself as the JCo library's license prohibits redistribution, so Camunda cannot pre-build it for you.
+Unlike other Camunda Connectors, the SAP RFC Connector must be deployed as a Java `.war` archive. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. the JCo library's license prohibits redistribution, but it is available at runtime on BTP and auto-discovered by Camunda's RFC connector.
 
-### Building the Java application
+A descriptor file is required to deploy the SAP RFC Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment.
 
-1. In the application folder, navigate to `src/main/resources/application.properties` and insert the credentials for the cluster the SAP RFC Connector should connect to:
+### Deploying to BTP
 
-```properties
-zeebe.client.cloud.region=xxx
-zeebe.client.cloud.clusterId=guid
-zeebe.client.cloud.clientId=yyy
-zeebe.client.cloud.clientSecret=zzz
-camunda.connector.polling.enabled=false
-```
+1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version.  .  
+   The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
+  Examples:
+  
+    - `rfc-8.6.0.war` is the RFC connector in version `0` for C8 SaaS version `8.6`
+    - `rfc-8.5.1.war` is the RFC connector in version `1` for C8 SaaS version `8.5`
 
-2. Copy the deployment descriptor `mta.yaml.example` to `mta.yaml` and enter the same credentials in the `modules.properties` scope:
-
-```yaml
-_schema-version: 3.3.0
-ID: sap-rfc-connector
-# ...
-modules:
-  - name: sap-rfc-connector
-  # ...
-  	properties:
-			ZEEBE_CLIENT_CLOUD_CLUSTERID: 'guid'
-      ZEEBE_CLIENT_CLOUD_CLIENTID: 'xxx'
-      ZEEBE_CLIENT_CLOUD_CLIENT_SECRET: 'yyy'
-      ZEEBE_CLIENT_CLOUD_REGION: 'zzz'
-```
-
-3. Adjust any property describing an infrastructure setting to your requirements. For example, if a pre-existing destination instance is to be used, adjust the respective resource name. Otherwise, the deployment will create any of the services listed in `resources` for you.
-4. Build the deployable archive via `$> mbt build`.
-
-### Deploying the Java application
-
-1. Log in to the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
+1. Adjust the values for the credentials (Client Id, Client Secret, ...) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
+2. Log in to the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
 
 ```shell
 $> cf login
@@ -81,8 +60,8 @@ API endpoint: https://api.cf. ...
 2. Deploy the SAP RFC Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on.
 
 ```shell
-$> cf deploy mta_archives/*.mtar # append the -f flag to shortcircuit ongoing deployments
-Deploying multi-target app archive <path/to/>.mtar in org <your-org> / space <your-space> as you@example.org ..
+$> cf deploy ./ # append the -f flag to shortcircuit ongoing deployments
+Deploying multi-target app archive /some/path/sap-rfc-connector in org <your-org> / space <your-space> as you@example.org ..
 ...
 Application "sap-rfc-connector" started and available at "some.url.hana.ondemand.com"
 ```
