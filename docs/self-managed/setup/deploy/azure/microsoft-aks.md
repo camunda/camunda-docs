@@ -1,9 +1,8 @@
 ---
-
 id: microsoft-aks
 title: "Microsoft AKS"
 description: "Run Camunda 8 Self-Managed on Microsoft Azure's Kubernetes Service, leveraging its scalability and performance."
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 import DocCardList from '@theme/DocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
