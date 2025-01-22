@@ -7,8 +7,8 @@ swap:
   tomcat: Tomcat
   asana: Asana
   AzureAD: Azure AD
-  back-pressure:
-  back pressure:
+  back-pressure: backpressure
+  back pressure: backpressure
   Camunda Cloud: Camunda 8
   Chat GPT: ChatGPT
   Configmap: ConfigMap
@@ -36,7 +36,7 @@ swap:
   Hybrid Mode: Hybrid mode
   iFrame: iframe
   ingress: Ingress
-  Java Delegate:
+  Java Delegate: Java delegate
   Javascript: JavaScript
   jdk: JDK
   JIRA: Jira
