@@ -576,9 +576,15 @@ Alongside the `config.tf` file, create a variable file called `variables.tf` to 
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/peering/variables.tf
 ```
 
+Finally, create a file called `peering.tf` to reference the peering configuration:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/peering/peering.tf
+```
+
 #### Initialize Terraform
 
-Once the `config.tf` and `variables.tf` files are set up, configure the backend for Terraform and set the S3 bucket key for the peering state and initialize Terraform to configure the backend and download the necessary provider plugins:
+Once the `.tf` files are set up, configure the backend for Terraform and set the S3 bucket key for the peering state and initialize Terraform to configure the backend and download the necessary provider plugins:
 
 ```bash
 # ensure bucket variables are set
@@ -613,6 +619,74 @@ This command connects Terraform to the S3 bucket for managing the state file, en
    This command will initiate the creation of the peering connection, enabling communication between the two clusters.
 
 For more details, consult the official [AWS VPC Peering documentation](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
+
+### S3 module setup
+
+This section outlines the process of creating a [S3 bucket](https://aws.amazon.com/en/s3/) that will be used to to [perform backups of the elasticsearch cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) used by Camunda.
+Read more about the [failover procecure](/self-managed/operational-guides/multi-region/dual-region-operational-procedure/#procedure).
+
+#### Create the peering configuration module
+
+In the parent directory where your cluster modules reside (`region1` and `region2`), create a new directory called `s3-elastic-backup` for the S3 configuration:
+
+```bash
+mkdir s3-elastic-backup
+cd s3-elastic-backup
+```
+
+We'll re-use the previously configured S3 bucket to store the state of the backup bucket configuration.
+
+Begin by setting up the `config.tf` file to use the S3 backend for managing the Terraform state:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/s3-elastic-backup/config.tf
+```
+
+Finally, create a file called `backup-bucket.tf` to reference the elastic backup bucket configuration:
+
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/s3-elastic-backup/backup-bucket.tf
+```
+
+#### Initialize Terraform
+
+Once the `.tf` files are set up, configure the backend for Terraform and set the S3 bucket key for the peering state and initialize Terraform to configure the backend and download the necessary provider plugins:
+
+```bash
+# ensure bucket variables are set
+export S3_TF_BUCKET_REGION=<your-region>
+export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
+
+# set the region of the bucket
+export AWS_REGION='us-east-1'
+
+export S3_TF_BUCKET_KEY="camunda-terraform/backup-bucket.tfstate"
+
+echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_PEERING"
+
+terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
+```
+
+This command connects Terraform to the S3 bucket for managing the state file, ensuring remote and persistent storage.
+The `AWS_REGION` will define the region of the bucket, you can pick one of your cluster region.
+
+#### Execution
+
+1. Open a terminal and navigate to the `s3-elastic-backup` directory where the `config.tf` file and other `.tf` files are located.
+
+1. Run the following command to generate a plan for the S3 bucket configuration. You can edit the default bucket name using `-var=bucket_name=nameOfBucket`
+
+   ```bash
+   terraform plan -out backup-bucket.plan
+   ```
+
+1. After reviewing the execution plan, apply the configuration to create the VPC peering connection:
+
+   ```bash
+   terraform apply backup-bucket.plan     # apply the creation
+   ```
+
+   This command will initiate the creation of the backup bucket.
 
 ### Reference files
 

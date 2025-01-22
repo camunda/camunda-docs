@@ -390,6 +390,8 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 #### Prerequisite
 
+<!-- TODO: add https://medium.com/quark-works/kubernetes-same-domain-ssl-with-dns-verification-using-lets-encrypt-e3e806644bf4 -->
+
 ##### Setting Up the application domain for Camunda 8
 
 The route created by OpenShift will use a domain to provide access to the platform. By default, you can use the OpenShift applications domain, but any other domain supported by the router can also be used.
