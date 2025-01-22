@@ -249,7 +249,7 @@ The following makes use of the [combined Ingress setup](/self-managed/setup/guid
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
 :::
 
-```hcl reference
+```yaml reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/helm-values/values-domain.yml
 ```
 
