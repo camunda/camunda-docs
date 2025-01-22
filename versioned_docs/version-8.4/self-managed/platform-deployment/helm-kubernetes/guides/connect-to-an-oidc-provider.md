@@ -204,7 +204,7 @@ The client should be configured to support `grant_type`:
 To successfully authenticate with Entra ID, you should use the `v2.0` API. This means that
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
-Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entra/identity-platform/reference-microsoft-graph-app-manifest#configure-the-app-manifest-in-the-microsoft-entra-admin-center) to configure the app manifest, and set the [requestedAccessTokenVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#accesstokenacceptedversion-attribute) under `Api:` to `2`:
+Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entra/identity-platform/reference-microsoft-graph-app-manifest#configure-the-app-manifest-in-the-microsoft-entra-admin-center) to configure the app manifest, and set the [requestedAccessTokenVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-microsoft-graph-app-manifest#api-attribute) under `Api:` to `2`:
 
 ```json
     "requestedAccessTokenVersion": 2,
