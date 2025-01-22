@@ -143,9 +143,9 @@ The following conventions apply to all attributes:
   - `previewValue` - Use `value` as this always represents the variable value. This can be a preview value due to size constraints. In that case, the `fullValue` contains the full variable value.
   - `isValueTruncated` - Use `isTruncated` as a replacement
 - Removed attributes
-  - `draft` - Draft variables are not supported in V2 anymore, see also the [Save draft variables](#save-task-draft-variables) endpoint for further details.
+  - `draft` - Draft variables are not supported in V2 anymore, see also the [save draft variables](#save-task-draft-variables) endpoint for further details.
 - Added attributes
-  - `scopeKey` - Variables belong to a specific scope, e.g., the process instance or the element instance of a user task. This value represents the scope the variables is related to.
+  - `scopeKey` - Variables belong to a specific scope, for example, the process instance or the element instance of a user task. This value represents the scope the variables is related to.
   - `processInstanceKey` - A variable belongs to process instance and this value represents the unique system identifier of that instance.
   - `tenantId` - Variables can belong to a dedicated tenant and this value represents the one it belongs to. See [multi-tenancy][] for further details.
 
@@ -184,7 +184,7 @@ The following conventions apply to all attributes:
     - Local variables match the defined `name` and `value` and exist in the local scope of the BPMN element instance that created the user task.
     - Process instance variables match the defined `name` and `value` and exist anywhere in the process instance that the user task belongs to.
   - `tenantIds` - Use `tenantId` with `{ "$in": [ "xyz", ... ] }`.
-  - `includeVariables` - The endpoint does not return variables. Use the [Search task variables](#search-task-variables) endpoint to retrieve them.
+  - `includeVariables` - The endpoint does not return variables. Use the [search task variables](#search-task-variables) endpoint to retrieve them.
   - `implementation` - The V2 API supports only Camunda user tasks.
 - Added attributes
   - `userTaskKey` - Filter for specific user tasks by their unique system identifiers.
@@ -199,20 +199,20 @@ The following conventions apply to all attributes:
   - `sortValues` do not exist per result item. Instead, the `page` object contains `firstSortValues` and `lastSortValues`, referring to the `sortValues` of the first and last item of the result set.
 - Renamed attributes
   - `id` - Use `userTaskKey`, this still refers to the unique system identifier of the user task.
-  - `formKey` - This now is a unique system identifier, referencing a linked Camunda form in a specific version. Previously, this encoded an embedded form , a linked Camunda form, or an external form reference.
+  - `formKey` - This now is a unique system identifier, referencing a linked Camunda form in a specific version. Previously, this encoded an embedded form, a linked Camunda form, or an external form reference.
   - `taskDefinitionId` - Use `elementId`, this still refers to the user-provided identifier of the BPMN element that created the user task.
-  - `taskState` - Use `state`, this still refers to the user task's current state
+  - `taskState` - Use `state`, this still refers to the user task's current state.
   - `processName` - Use `processDefinitionId`, this still refers to the user-provided identifier of the process.
 - Removed attributes
   - `isFirst` - This used to identify if the task was the first in the process.
-  - `variables` - Use the [Search user task variables endpoint][] to retrieve variables for a user task.
+  - `variables` - Use the [search user task variables endpoint][] to retrieve variables for a user task.
   - `implementation` - The V2 API supports only Camunda user tasks.
   - `isFormEmbedded` - The V2 API does not support embedded forms anymore.
-  - `formVersion` - Use the [Get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
-  - `formId` - Use the [Get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
+  - `formVersion` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
+  - `formId` - Use the [get user task form endpoint][] to retrieve form data bound to this user task. The `formKey` references the form of a specific `formId`, linked to this user task in a specific version.
 - Added attributes
   - `customHeaders` - Any user-provided custom header values provided for the user task.
-  - `externalFormReference` - The user-provided reference to the an external form for the user task. Previously, the `formKey` encoded this value.
+  - `externalFormReference` - The user-provided reference to an external form for the user task. Previously, the `formKey` encoded this value.
   - `processDefinitionVersion` - The version of the process this user task belongs to.
 
 </TabItem>
@@ -320,7 +320,7 @@ The following conventions apply to all attributes:
 
 <TabItem value='output-adjustments'>
 
-- Except for the response structure changes, all adjustments from [Search tasks](#search-tasks) apply.
+- Except for the response structure changes, all adjustments from [search tasks](#search-tasks) apply.
 
 </TabItem>
 </Tabs>
