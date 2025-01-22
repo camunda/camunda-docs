@@ -338,14 +338,14 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
 subctl show all --contexts "$CLUSTER_1_NAME,$CLUSTER_2_NAME"
 ```
 
-  <details>
-    <summary>Example Submariner check successfull output</summary>
+<details>
+  <summary>Example Submariner check successfull output</summary>
 
-    ```text reference
-    https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/submariner/output.txt
-    ```
+```text reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/submariner/output.txt
+```
 
-  </details>
+</details>
 
 If you don’t have the `subctl` CLI installed, you can follow the [installation instructions here](https://submariner.io/operations/deployment/).
 

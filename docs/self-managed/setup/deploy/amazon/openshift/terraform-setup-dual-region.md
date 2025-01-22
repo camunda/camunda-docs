@@ -593,7 +593,7 @@ export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
 
 export S3_TF_BUCKET_KEY="camunda-terraform/peering.tfstate"
 
-echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_PEERING"
+echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
 
 terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
 ```
@@ -662,7 +662,7 @@ export AWS_REGION='us-east-1'
 
 export S3_TF_BUCKET_KEY="camunda-terraform/backup-bucket.tfstate"
 
-echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_PEERING"
+echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
 
 terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
 ```
