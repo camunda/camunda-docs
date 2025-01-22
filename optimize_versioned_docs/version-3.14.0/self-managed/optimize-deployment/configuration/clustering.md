@@ -6,70 +6,7 @@ description: "Read about how to run Optimize in a cluster."
 
 This document describes the set up of a Camunda Optimize cluster which is mainly useful in a failover scenario, but also provides means of load-balancing in terms of distributing import and user load.
 
-## Configuration
-
-There are two configuration requirements to address in order to operate Camunda Optimize successfully in a cluster scenario.
-Both of these aspects are explained in detail in the following subsections.
-
-### 1. Import - define importing instance
-
-<span class="badge badge--platform">Camunda 7 only</span>
-
-It is important to configure the cluster in the sense that only one instance at a time is actively importing from a particular Camunda 7 engine.
-
-:::note Warning
-If more than one instance is importing data from one and the same Camunda 7 engine concurrently, inconsistencies can occur.
-:::
-
-The configuration property [`engines.${engineAlias}.importEnabled`](./system-configuration-platform-7.md) allows to disable the import from a particular configured engine.
-
-Given a simple failover cluster consisting of two instances connected to one engine, the engine configurations in the `environment-config.yaml` would look like the following:
-
-**Instance 1 (import from engine `default` enabled):**
-
-```
-...
-engines:
-  'camunda-bpm':
-    name: default
-    rest: 'http://localhost:8080/engine-rest'
-    importEnabled: true
-
-historyCleanup:
-  processDataCleanup:
-    enabled: true
-  decisionDataCleanup:
-    enabled: true
-...
-```
-
-**Instance 2 (import from engine `camunda-bpm` disabled):**
-
-```
-...
-engines:
-  'camunda-bpm':
-    name: default
-    rest: 'http://localhost:8080/engine-rest'
-    importEnabled: false
-...
-```
-
-:::note
-The importing instance has the [history cleanup enabled](./system-configuration.md#history-cleanup-settings). It is strongly recommended all non-importing Optimize instances in the cluster do not enable history cleanup to prevent any conflicts when the [history cleanup](../history-cleanup/) is performed.
-:::
-
-### 1.1 Import - event-based process import
-
-<span class="badge badge--platform">Camunda 7 only</span>
-
-In the context of event-based process import and clustering, there are two additional configuration properties to consider carefully.
-
-One is specific to each configured Camunda engine [`engines.${engineAlias}.eventImportEnabled`](./system-configuration-platform-7.md) and controls whether data from this engine is imported as event source data as well for [event-based processes](#). You need to enable this on the same cluster node for which the [`engines.${engineAlias}.importEnabled`](./system-configuration-platform-7.md) configuration flag is set to `true`.
-
-[`eventBasedProcess.eventImport.enabled`](#) controls whether the particular cluster node processes events to create event based process instances. This allows you to run a dedicated node that performs this operation, while other nodes might just feed in Camunda activity events.
-
-### 2. Distributed user sessions - configure shared secret token
+## Distributed user sessions - configure shared secret token
 
 If more than one Camunda Optimize instance are accessible by users for e.g. a failover scenario a shared secret token needs to be configured for all the instances.
 This enables distributed sessions among all instances and users do not lose their session when being routed to another instance.
