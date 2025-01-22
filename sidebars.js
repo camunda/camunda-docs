@@ -876,6 +876,7 @@ module.exports = {
       },
       items: [
         "reference/announcements/announcements-870",
+        "reference/announcements/announcements-870",
         "reference/announcements/announcements-860",
         "reference/announcements/announcements-850",
       ],
