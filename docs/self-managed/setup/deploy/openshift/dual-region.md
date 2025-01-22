@@ -471,47 +471,26 @@ Ensure that `CLUSTER_1_NAME` is set to the name of your first cluster. In this e
 Once you've prepared each region's value file (`values-region-1.yml` and `values-region-2.yml`) file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash
-envsubst < values-region-1.yml > generated-values-region-1.yml
+ZEEBE_SERVICE_NAME="$REGION_0_ZEEBE_SERVICE_NAME" DOLLAR="\$" envsubst < values-region-1.yml > generated-values-region-1.yml
 cat generated-values-region-1.yml
 
-envsubst < values-region-2.yml > generated-values-region-2.yml
-cat generated-values-region-1.yml
-```
-
-:::info Camunda Helm chart no longer automatically generates passwords
-
-Starting from **Camunda 8.6**, the Helm chart deprecated the automatic generation of secrets, and this feature has been fully removed in **Camunda 8.7**.
-
-:::
-
-Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/generate-passwords.sh
-```
-
-Use these environment variables in the `kubectl` command to create the secret.
-
-- The values for `postgres-password` and `password` are not required if you are using an external database. If you choose not to use an external database, you must provide those values.
-- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/create-identity-secret.sh
+ZEEBE_SERVICE_NAME="$REGION_1_ZEEBE_SERVICE_NAME" DOLLAR="\$" envsubst < values-region-2.yml > generated-values-region-2.yml
+cat generated-values-region-2.yml
 ```
 
 ### Install Camunda 8 using Helm
 
-Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
+With the value files for each region configured, you can now install Camunda 8 using Helm. Execute the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7/procedure/install/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/camunda/install_chart.sh
 ```
 
 This command:
 
-- Installs (or upgrades) the Camunda platform using the Helm chart.
+- Installs (or upgrades) the Camunda platform using the Helm chart on each cluster.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
-- Applies the configuration from `generated-values.yml`.
+- Applies the configuration from the value file.
 
 :::note
 
@@ -519,30 +498,44 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 
 :::
 
-You can track the progress of the installation using the following command:
+#### Export Camunda 8 services using Submariner
+
+Once Camunda is deployed across the two clusters, the next step is to expose each service to Submariner so it can be resolved by the other cluster:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/camunda/export_services_submariner.sh
+```
+
+Alternatively, you can manage each service individually using the `ServiceExport` Custom Resource Definition (CRD).
+
+For each cluster, verify the status of the exported services with this script:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/camunda/verify_exported_services.sh
+```
+
+To monitor the progress of the installation, save and execute the following script:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/camunda/verify_installation_completed.sh
+```
+
+Save it as `verify_installation_completed.sh`, make it executable, and run it:
 
 ```bash
-watch -n 5 '
-  kubectl get pods -n camunda --output=wide;
-  if [ $(kubectl get pods -n camunda --field-selector=status.phase!=Running -o name | wc -l) -eq 0 ] &&
-     [ $(kubectl get pods -n camunda -o json | jq -r ".items[] | select(.status.containerStatuses[]?.ready == false)" | wc -l) -eq 0 ];
-  then
-    echo "All pods are Running and Healthy - Installation completed!";
-  else
-    echo "Some pods are not Running or Healthy";
-  fi
-'
+chmod +x verify_installation_completed.sh
+./verify_installation_completed.sh
 ```
 
 <!-- TODO: add https://medium.com/quark-works/kubernetes-same-domain-ssl-with-dns-verification-using-lets-encrypt-e3e806644bf4 -->
-
-### Export Camunda 8 services using Submariner
 
 ## Verify connectivity to Camunda 8
 
 Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8)
 
 <!-- TODO: modify instructions to test with zbctl as the domain is slighty different -->
+
+## Failover
 
 ## Pitfalls to avoid
 
