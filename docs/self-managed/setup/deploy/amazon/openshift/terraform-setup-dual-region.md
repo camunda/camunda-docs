@@ -623,7 +623,7 @@ For more details, consult the official [AWS VPC Peering documentation](https://d
 ### S3 module setup
 
 This section outlines the process of creating a [S3 bucket](https://aws.amazon.com/en/s3/) that will be used to to [perform backups of the elasticsearch cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) used by Camunda.
-Read more about the [failover procecure](/self-managed/operational-guides/multi-region/dual-region-operational-procedure/#procedure).
+Read more about the [failover procecure](/self-managed/operational-guides/multi-region/dual-region-ops.md#procedure).
 
 #### Create the peering configuration module
 
@@ -695,6 +695,11 @@ The `AWS_REGION` will define the region of the bucket, you can pick one of your 
    export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
    export AWS_ES_BUCKET_NAME=$(terraform output -raw s3_bucket_name)
    export AWS_ES_BUCKET_REGION="$AWS_REGION"
+
+   echo "AWS_ACCESS_KEY_ES=$AWS_ACCESS_KEY_ES"
+   echo "AWS_SECRET_ACCESS_KEY_ES=$AWS_SECRET_ACCESS_KEY_ES"
+   echo "AWS_ES_BUCKET_NAME=$AWS_ES_BUCKET_NAME"
+   echo "AWS_ES_BUCKET_REGION=$AWS_ES_BUCKET_REGION"
    ```
 
    Ensure these variables are securely stored, as they will be needed later in the process.
