@@ -455,7 +455,7 @@ Before deploying, some values in the value files need to be updated. To assist w
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/camunda/generate_zeebe_helm_values.sh
 ```
 
-Then, source the output of the script. You will be prompted to specify the number of Zeebe brokers, which in this setup is set to `4`:
+Then, source the output of the script. You will be prompted to specify the number of Zeebe brokers (total number of Zeebe brokers in both Kubernetes clusters), for a dual-region setup we recommend `8`, resulting in four brokers per region:
 
 ```
 chmod +x generate_zeebe_helm_values.sh
