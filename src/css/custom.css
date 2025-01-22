@@ -29,18 +29,18 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-color-primary: #78a9ff;
   --ifm-background-color: #161616;
   --ifm-background-surface-color: #161616;
-  --ifm-font-color-base: rgb(244, 244, 244);
-  --ifm-heading-color: rgb(244, 244, 244);
+  --ifm-font-color-base: #f4f4f4;
+  --ifm-heading-color: #f4f4f4;
   --ifm-footer-background-color: #161616;
   --ifm-footer-color: #161616;
   --ifm-footer-link-color: var(--ifm-color-secondary);
   --ifm-footer-title-color: var(--ifm-color-white);
-  --ifm-navbar-link-color: rgb(198, 198, 198);
-  --ifm-menu-color: rgb(198, 198, 198);
-  --ifm-color-secondary-contrast-background: rgb(50, 50, 50);
-  --ifm-color-secondary-dark: rgb(100, 100, 100);
-  --ifm-table-border-color: rgb(60, 60, 60);
-  --ifm-toc-border-color: rgb(50, 50, 50);
+  --ifm-navbar-link-color: #c6c6c6;
+  --ifm-menu-color: #c6c6c6;
+  --ifm-color-secondary-contrast-background: #323232;
+  --ifm-color-secondary-dark: #646464;
+  --ifm-table-border-color: #3c3c3c;
+  --ifm-toc-border-color: #323232;
   --ifm-tabs-padding-vertical: 10px;
   --ifm-tabs-padding-horizontal: 15px;
 }
@@ -83,11 +83,11 @@ a {
 }
 
 [data-theme="dark"] .hero__subtitle {
-  color: rgb(244, 244, 244);
+  color: #f4f4f4;
 }
 [data-theme="dark"] .footer--dark {
   background-color: #161616;
-  border-top: 1px solid rgb(50, 50, 50);
+  border-top: 1px solid #323232;
   padding-top: 40px;
 }
 [data-theme="dark"] h2 {
@@ -111,14 +111,14 @@ a {
   color: white;
 }
 [data-theme="dark"] code {
-  background-color: rgb(44 51 66);
+  background-color: #2c3342;
 }
 [data-theme="dark"] .hero--secondary {
   background-color: #161616;
   margin-bottom: 2rem;
 }
 [data-theme="dark"] .tabs__item {
-  color: rgb(198, 198, 198);
+  color: #c6c6c6;
   border: 3px solid var(--ifm-color-emphasis-200);
   background-color: transparent;
   margin-right: 10px;
@@ -130,28 +130,28 @@ a {
 }
 [data-theme="dark"] .tabs__item:hover {
   background-color: var(--ifm-color-emphasis-200);
-  color: rgb(198, 198, 198);
+  color: #c6c6c6;
 }
 
 [data-theme="dark"] .tabs {
   border-bottom: 0;
 }
 [data-theme="dark"] .get-started-use-case {
-  background-color: rgb(20, 216, 144);
+  background-color: #14d890;
   color: #000 !important;
 }
 [data-theme="dark"] .get-started-use-case:hover {
   background-color: transparent;
-  border-color: rgb(20, 216, 144);
-  color: rgb(20, 216, 144) !important;
+  border-color: #14d890;
+  color: #14d890 !important;
 }
 [data-theme="dark"] .get-started-use-case-2 {
   background-color: transparent;
-  border-color: rgb(20, 216, 144);
-  color: rgb(20, 216, 144) !important;
+  border-color: #14d890;
+  color: #14d890 !important;
 }
 [data-theme="dark"] .get-started-use-case-2:hover {
-  background-color: rgb(20, 216, 144);
+  background-color: #14d890;
   color: #000 !important;
 }
 
@@ -200,11 +200,11 @@ a {
 }
 [data-theme="dark"] .table-of-contents__link {
   text-decoration: none;
-  color: rgb(198, 198, 198);
+  color: #c6c6c6;
 }
 [data-theme="dark"] .table-of-contents__link:hover {
   text-decoration: none;
-  color: rgb(244, 244, 244);
+  color: #f4f4f4;
 }
 [data-theme="dark"] .footer__link-item {
   text-decoration: none;
@@ -229,77 +229,77 @@ a {
 /* Dark Mode > Cards */
 
 [data-theme="dark"] .card {
-  background-color: rgb(27, 27, 27);
-  border: 1px solid rgb(40, 40, 40);
-  box-shadow: 0px 8px 16px 4px rgba(0, 0, 0, 0.2);
+  background-color: #1b1b1b;
+  border: 1px solid #282828;
+  box-shadow: 0px 8px 16px 4px #00000033;
 }
 [data-theme="dark"] .card:hover {
   background-color: transparent;
   border: 1px solid var(--ifm-color-primary);
-  box-shadow: 0px 8px 16px 4px rgba(120, 169, 255, 0.2);
+  box-shadow: 0px 8px 16px 4px #78a9ff33;
 }
 
 /* Dark mode > Badges */
 
 [data-theme="dark"] .badge--beginner {
-  background-color: rgb(154 78 0);
-  color: rgb(225 217 205);
-  border: 1px solid rgb(157 120 0);
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
 }
 [data-theme="dark"] .badge--intermediate {
-  background-color: rgb(154 78 0);
-  color: rgb(225 217 205);
-  border: 1px solid rgb(157 120 0);
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
 }
 [data-theme="dark"] .badge--advanced {
-  background-color: rgb(154 78 0);
-  color: rgb(225 217 205);
-  border: 1px solid rgb(157 120 0);
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
 }
 [data-theme="dark"] .badge--platform {
-  background-color: rgb(154 78 0);
-  color: rgb(225 217 205);
-  border: 1px solid rgb(157 120 0);
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
 }
 [data-theme="dark"] .badge--medium {
-  background-color: rgb(0, 93, 93);
-  color: rgb(186, 230, 255);
-  border: 1px solid rgb(0, 157, 154);
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
 }
 [data-theme="dark"] .badge--short {
-  background-color: rgb(0, 93, 93);
-  color: rgb(186, 230, 255);
-  border: 1px solid rgb(0, 157, 154);
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
 }
 [data-theme="dark"] .badge--beta {
-  background-color: rgb(0, 93, 93);
-  color: rgb(186, 230, 255);
-  border: 1px solid rgb(0, 157, 154);
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
 }
 [data-theme="dark"] .badge--alpha {
-  background-color: rgb(0, 93, 93);
-  color: rgb(186, 230, 255);
-  border: 1px solid rgb(0, 157, 154);
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
 }
 [data-theme="dark"] .badge--enterprise-only {
-  background-color: rgb(0, 93, 93);
-  color: rgb(186, 230, 255);
-  border: 1px solid rgb(0, 157, 154);
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
 }
 [data-theme="dark"] .badge--cloud {
-  background-color: rgb(0, 93, 93);
-  color: rgb(186, 230, 255);
-  border: 1px solid rgb(0, 157, 154);
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
 }
 [data-theme="dark"] .badge--medium {
-  background-color: rgb(0, 83, 154);
-  color: rgb(186, 230, 255);
-  border: 1px solid rgb(17, 146, 232);
+  background-color: #00539a;
+  color: #bae6ff;
+  border: 1px solid #1192e8;
 }
 [data-theme="dark"] .badge--long {
-  background-color: rgb(0, 83, 154);
-  color: rgb(186, 230, 255);
-  border: 1px solid rgb(17, 146, 232);
+  background-color: #00539a;
+  color: #bae6ff;
+  border: 1px solid #1192e8;
 }
 
 /* End Dark mode */
@@ -308,7 +308,7 @@ a {
   margin-bottom: 2rem;
 }
 .docusaurus-highlight-code-line {
-  background-color: rgb(72, 77, 91);
+  background-color: #484d5b;
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
