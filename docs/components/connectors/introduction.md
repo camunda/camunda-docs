@@ -46,21 +46,21 @@ Connectors are often configured as a [BPMN process](/components/concepts/process
 New to connectors? Learn about connector types and how to start using connectors in your processes.
 
 <div class="connector-grid">
-  <a href="../use-connectors" class="connector-card" title="How to use Connectors">
-      <img src={IconPlayImg} alt="Get started"/>
-    <h3>How to use Connectors</h3>
-    <p>Create a connector task and start using connector secrets.</p>
-  </a>
-    <a href="../connector-types" class="connector-card" title="Connector types">
-    <img src={IconConnectorTypesImg} alt="Connector types"/>
-    <h3>Connector types</h3>
-    <p>Learn about <a href="../use-connectors/inbound" title="Inbound Connectors">Inbound</a> and <a href="../use-connectors/outbound" title="Outbound Connectors">Outbound</a> connector types.</p>
-  </a>
-    <a href="../out-of-the-box-connectors/available-connectors-overview" class="connector-card" title="Get started with Connectors">
-    <img src={IconConnectorImg} alt="How to use Connectors"/>
-    <h3>Camunda connectors</h3>
-    <p>Find technical documentation for prebuilt Camunda connectors.</p>
-  </a>
+<a href="../use-connectors" class="connector-card" title="How to use Connectors">
+<img src={IconPlayImg} alt="Get started"/>
+<h3>How to use Connectors</h3>
+<p>Create a connector task and start using connector secrets.</p>
+</a>
+<a href="../connector-types" class="connector-card" title="Connector types">
+<img src={IconConnectorTypesImg} alt="Connector types"/>
+<h3>Connector types</h3>
+<p>Learn about <a href="../use-connectors/inbound" title="Inbound Connectors">Inbound</a> and <a href="../use-connectors/outbound" title="Outbound Connectors">Outbound</a> connector types.</p>
+</a>
+<a href="../out-of-the-box-connectors/available-connectors-overview" class="connector-card" title="Get started with Connectors">
+<img src={IconConnectorImg} alt="How to use Connectors"/>
+<h3>Camunda connectors</h3>
+<p>Find technical documentation for prebuilt Camunda connectors.</p>
+</a>
 </div>
 
 :::info
