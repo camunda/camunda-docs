@@ -439,7 +439,6 @@ const SearchableTable = () => {
         value={searchTerm}
         onChange={handleSearch}
         className="connector-input-box"
-        style={{ marginRight: "20px" }}
       />
       <div className="filter-badges">
         <span
@@ -467,7 +466,7 @@ const SearchableTable = () => {
           Outbound
         </span>
       </div>
-      <span style={{ fontSize: "14px" }}>
+      <span className="connector-input-link-about">
         <a href="../../connector-types">About connector types</a>
       </span>
       {filteredConnectors.length > 0 ? (

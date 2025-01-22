@@ -69,6 +69,11 @@ td.no-border-cell-img {
   border: 1px solid #cacaca;
   min-width: 240px;
   padding-left: 6px;
+  margin-right: 20px;
+}
+
+.connector-input-link-about {
+  font-size: 14px;
 }
 
 .connector-no-results {
@@ -258,23 +263,29 @@ a.connector-small-link {
   font-size: 85%;
   font-weight: var(--ifm-font-weight-bold);
   line-height: 1;
-  color: #777;
+  color: #616161;
 }
 
 .badge--default:hover {
-  background-color: #ccc;
+  background-color: #ddd;
 }
 
 .badge--active {
   background-color: #007bff;
   color: #fff;
 }
-
-.badge--active--outbound {
+.badge--active:hover {
   background-color: #007bff;
   color: #fff;
 }
-.badge--active--inbound {
+
+.badge--active--outbound,
+.badge--active--outbound:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+.badge--active--inbound,
+.badge--active--inbound:hover {
   background-color: #007bff;
   color: #fff;
 }
