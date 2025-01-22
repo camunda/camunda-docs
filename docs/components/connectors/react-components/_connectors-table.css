@@ -266,6 +266,18 @@ a.connector-small-link {
   color: #616161;
 }
 
+.badge--outbound {
+  background-color: #0ba7b9;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.badge--inbound {
+  background-color: #ff8b00;
+  color: #fff;
+  margin-top: 10px;
+}
+
 .badge--default:hover {
   background-color: #ddd;
 }

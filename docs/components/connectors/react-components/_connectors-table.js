@@ -484,14 +484,7 @@ const SearchableTable = () => {
               </div>
               <div className="connector-type">
                 <span
-                  className={`badge ${
-                    connector.type === "Inbound"
-                      ? "badge--beginner"
-                      : connector.type === "Outbound"
-                      ? "badge--medium"
-                      : "badge--default"
-                  }`}
-                  style={{ marginTop: "10px" }}
+                  className={`badge badge--${connector.type.toLowerCase()}`}
                 >
                   {connector.type}
                 </span>
