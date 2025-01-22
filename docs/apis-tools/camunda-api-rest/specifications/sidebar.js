@@ -21,9 +21,21 @@ module.exports = [
     items: [
       {
         type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/create-authorization",
+        label: "Create authorization",
+        className: "api-method post",
+      },
+      {
+        type: "doc",
         id: "apis-tools/camunda-api-rest/specifications/update-authorization",
         label: "Update authorization",
         className: "api-method patch",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/delete-authorization",
+        label: "Delete authorization",
+        className: "api-method delete",
       },
       {
         type: "doc",
@@ -600,6 +612,12 @@ module.exports = [
         id: "apis-tools/camunda-api-rest/specifications/delete-user",
         label: "Delete user",
         className: "api-method delete",
+      },
+      {
+        type: "doc",
+        id: "apis-tools/camunda-api-rest/specifications/update-user",
+        label: "Update user",
+        className: "api-method patch",
       },
     ],
   },

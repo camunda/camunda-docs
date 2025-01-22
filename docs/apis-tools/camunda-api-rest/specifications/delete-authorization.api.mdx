@@ -1,0 +1,55 @@
+---
+id: delete-authorization
+title: "Delete authorization"
+description: "Deletes the authorization with the given key."
+sidebar_label: "Delete authorization"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV01v4zYQ/SvEnHZRRXK22W2qm5Fk27TZRZA47SH1gaZGFjcUqSWpOK6g/14MKSf+CpoCPfpgyKSGb2Y075GcDjyfO8jvYdz6ylj5N/fSaJgmYBq0YXBZQA4FKvS4aZRAgU5Y2YRRDufBxjFfIePrlmwhfRWm5/IRNXvAZQoJNNzyGj1aCqADzWuEHDZW/o5LSEASesN9BQlY/N5KiwXk3ra4HcKkQkJnptwThTcspkHOnaiw5pB34JcN+ZXa4xwtJFAaW3Mfpz6dQN9Pya1rjHboaMWH0Qk9dl1vZc3d4LBgrhUCnStbpZYp9AmcjI73Y1CC6DxTXDw49siVLAIuai9FBBYWCxpy5SgVYbRH7QmON40arLLGmpnC+odvjrC7tYw3nY7ZdbRkBXouFTOzbyg8C9GT4QwLJjW7v/l8xn4++fjT9F3lfePyLFssFqktxREW0hubGjvPbCnoR3bvUzap0CKr+ZLNkPGikOSTK9ZYopeX6JhrUMhSCioP1WwIm1FZ0r+IZUOBYljEm+fFL+V7LqPzVur5ehVbK3eoOmZ3N5dMhq9YLqWe77oOa0reKsLgM9P6fKa4fqDieenVXqfbXlxb19w+83HTQZ+A89y37l9Z+OOHHWyiyq+TyTWLEEyYAllpLPOVdCtHlEQttazbGvKT0SiBmj/F0afRqCdMqvgbMtEMnxrFdSTgVjpSs9pYHPgTEpPaea7F/1UZY+VcbvtNoX+pBQwkPo8Z9X0fRPY2oa62p+29J0hYG89K0+rioLWD1g5ae01rH0ejPXzXjL6yJR6itcYyI0RrLRZsUUkV4OlcXPkeDr/IxYPWDlo7aG1Xa30CNfrKvNzLw2XaV5BDtnGEuazbPtJ6uvuifVzdulurIIcuiqjPs6yrjPN93jXG+j57pAo9civ5TEVe0usothWJlBFchel9xaQXdLVfJXnG61YXnJ2ym4vbCfuFe1zweCcml5vQp6PT0V5UMn0FcXx9yWKGkYpr28MKlnS+FzYavwU4dAUORWulX97Ssvh5ZsgtWmqU1igy+AvoNI5GkAx/Pq+I89ufk1B7qUsTlg8c2A2EqoLWxchH6fEu364vg2yEqetWh71Tz+NNh68lJlTrPCWUgJICtQvMHlqxldlVfMP+iB7ZcUpFicxZbZlz6at2lgpTZyIue37OlJllNZc6G1y47Gz85e7r+fjo6vLs4uvtxdFxOkr9kw/JN8b5muu1OGJjuXk72064ezku/nMjOlTJ45PPGsWlJt6E9LpBV/ebbamDBPKdRnWaDOK4h66bcYd3VvU9TX9v0S4hv5++aCmIr5CO/heQl1y57W52PaV3N0Pf+569vcfdm9cwyfUyKFu1NIIEHnC5r/vup30CFfICbQg5mo2FwMavAbx6QJNMnner84uri8kF9P0/bd+zeA==
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+
+<h1 className={"openapi__heading"}>Delete authorization</h1>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/authorizations/{authorizationKey}"}
+></MethodEndpoint>
+
+Deletes the authorization with the given key.
+
+## Request
+
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"authorizationKey","in":"path","required":true,"description":"The key of the authorization to delete.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
+
+The authorization was deleted successfully.
+
+</div><div></div></TabItem><TabItem label={"401"} value={"401"}><div>
+
+The request lacks valid authentication credentials.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
+
+The authorization with the authorizationKey was not found.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
