@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 :::danger breaking changes!
 As of the Camunda 8.6 release, the `/actuator` endpoints (including `/backups`) now default to port 9600. Ensure your `management.server.port` configuration parameter is correctly set before continuing.
 :::warning breaking changes
-As of the Camunda 8.7 release, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory`. The old `/actuator/backups` endpoint is still active only if the applications are deployed standalone (i.e. each application in its own process)
+As of the Camunda 8.8 release, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory`. The old `/actuator/backups` endpoint is still active only if the applications are deployed standalone (i.e. each application in its own process)
 :::
 
 :::note
@@ -33,7 +33,7 @@ camunda_webapps_123_8.1.0_part_6_of_6
 All webapps provide the same API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
 
 :::note
-, which by default is the same as application HTTP port (and in turn defaults to 9600). 
+The backup API can be reached via the Actuator management port, which default defaults to port 9600.
 :::
 
 ## Prerequisites
@@ -44,6 +44,7 @@ Before you can use the backup and restore feature:
 
 1. The [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
 2. All deployed webapps must be configured with the **same** repository name using one of the following configuration options.
+3. Webapps must have the right to take snapshots.
 
 :::warning breaking change
 Configuring different webapps with different repository names will potentially create multiple backups in different repositories
@@ -140,7 +141,7 @@ CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME=<es snapshot repository name>
 ### Index prefix
 
 :::warning breaking change
-Since version 8.7 the `indexPrefix` of all webapps must match. By default it's set to `""`, but if it was overriden, then it must done consistently across Operate, Tasklist and Optimize.
+Since version 8.8 the `indexPrefix` of all webapps must match. By default it's set to `""`, but if it was overriden, then it must done consistently across Operate, Tasklist and Optimize.
 :::
 
 ## Create backup API

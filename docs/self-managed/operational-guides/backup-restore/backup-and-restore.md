@@ -6,7 +6,7 @@ keywords: ["backup", "backups"]
 ---
 
 :::note
-This release introduces breaking changes for [Operate, Tasklist and Optimize](./webapps-backup.md).
+The release 8.8 release introduces breaking changes for [Operate, Tasklist and Optimize](./webapps-backup.md).
 :::
 
 You can use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime (except Web Modeler, see [the Web Modeler backup and restore documentation](./modeler-backup-and-restore.md)).
