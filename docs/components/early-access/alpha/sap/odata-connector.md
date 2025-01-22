@@ -50,8 +50,15 @@ Currently, only `BasicAuthentication` is supported on the Destination by the SAP
 
 A descriptor file is required to deploy the SAP OData Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment. Take the following steps:
 
-1. Adjust the values to match those of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
-2. Adjust the names of the SAP BTP Destination and Connectivity instances to your liking - both will be created automatically for you upon deployment. If instances in your subaccount of any of the two services exist, they will be reused.
+1. Find the matching [docker image](https://hub.docker.com/r/camunda/sap-odata-connector/tags) for the targeted Camunda 8 SaaS version.  
+   The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
+  Examples:
+  
+    - `8.6.0` is the OData connector in version `0` for C8 SaaS version `8.6`
+    - `8.5.1` is the OData connector in version `1` for C8 SaaS version `8.5`
+
+1. Adjust the values for the credentials (Client Id, Client Secret, ...) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
+2. Adjust the names of the SAP BTP Destination and Connectivity instances to your liking - both will be created automatically for you upon deployment. If instances of the same name in your subaccount of any of the two services exist, they will be reused.
 3. After creating the `mtad.yaml` file, log into the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
 
 ```shell
