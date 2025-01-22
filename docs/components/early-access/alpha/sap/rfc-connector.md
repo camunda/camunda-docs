@@ -49,7 +49,7 @@ A descriptor file is required to deploy the SAP RFC Connector to a space in a SA
     - `rfc-8.5.1.war` is the RFC connector in version `1` for C8 SaaS version `8.5`
 
 1. Adjust the values for the credentials (Client Id, Client Secret, ...) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
-2. Log in to the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
+1. Log in to the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
 
 ```shell
 $> cf login
