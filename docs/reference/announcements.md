@@ -25,7 +25,6 @@ Camunda 8.7 is scheduled for release on 8 April 2025.
   - [deployResourceAPI for RPA](#)
 - [Installation and deployment updates](#installation-and-deployment-updates-self-managed)
   - [Web Modeler deploy diagram change](#)
-  - [HELM combined ingress](#)
 - [Southwest Asia for SaaS region](#)
 
 </div>
