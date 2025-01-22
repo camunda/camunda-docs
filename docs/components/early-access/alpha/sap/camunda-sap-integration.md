@@ -1,10 +1,10 @@
 ---
 id: sap-integration
 title: SAP integration
-description: "Camunda's SAP integration consists of several features that can be used independently of one another: SAP OData, RFC, and BTP."
+description: "Camunda's SAP integration consists of several modules that can be used independently of one another: SAP OData, RFC, and BTP."
 ---
 
-Camunda's SAP integration consists of several features that can be used independently of one another: SAP OData, RFC, and BTP.
+Camunda's SAP integration consists of several modules that can be used independently of one another: SAP OData, RFC, and BTP.
 
 - [SAP OData outbound Connector](./odata-connector.md): Interact with a S/4HANA or ECC System via OData v2 + v4 APIs, directly from your BPMN model.
 - [SAP RFC outbound Connector](./rfc-connector.md): Query BAPIs and remote-enabled function modules on SAP ECC systems.
@@ -41,6 +41,6 @@ No additional requirements.
 - [(free) SAP Authorization and Trust Management Service](https://discovery-center.cloud.sap/serviceCatalog/authorization-and-trust-management-service?region=all)
 - [PostgreSQL on SAP BTP, hyperscaler option](https://discovery-center.cloud.sap/serviceCatalog/postgresql-hyperscaler-option?region=all)
 
-For scaling out and up, either add multiple instances of an integration module (for example, the SAP OData Connector) or equip an integration module with more runtime memory (for example, the SAP BTP integration).
+For scaling out and up, either add multiple instances of an integration module (for example, the SAP OData Connector) or equip an integration module with more runtime memory (for example, the SAP BTP plugin).
 
 For more sophisticated tuning, all mechanisms of BTP can be applied (such as the [(free) Application Autoscaler](https://discovery-center.cloud.sap/serviceCatalog/application-autoscaler?service_plan=standard&region=all&commercialModel=btpea)), as all SAP integration artifacts fully adhere to the BTP cloud-based development standards and can be fully configured just as any custom developed apps on BTP.
