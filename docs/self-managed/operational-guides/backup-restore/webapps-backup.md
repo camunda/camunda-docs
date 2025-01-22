@@ -30,10 +30,10 @@ camunda_webapps_123_8.1.0_part_5_of_6
 camunda_webapps_123_8.1.0_part_6_of_6
 ```
 
-All webapps provides the same API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
+All webapps provide the same API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
 
 :::note
-The backup API can be reached via the Actuator management port, which by default is the same as application HTTP port (and in turn defaults to 9600). The port may be reconfigured with the help of `management.server.port` configuration parameter.
+, which by default is the same as application HTTP port (and in turn defaults to 9600). 
 :::
 
 ## Prerequisites
