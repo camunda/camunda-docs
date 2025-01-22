@@ -233,14 +233,13 @@ The following conventions apply to all attributes:
 
 <TabItem value='input-adjustments'>
 
-No input adjustments.
+- No input adjustments.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- V1 returned `200` with the user task body
-- V2 returns `204` (No Content)
+- Response object removed - The V2 API returns a 204 status, indicating that the task was unassigned. Fetching the updated data of the user task should be done through the respective API since the data can change concurrently at any time.
 
 </TabItem>
 </Tabs>
@@ -259,14 +258,16 @@ No input adjustments.
 
 <TabItem value='input-adjustments'>
 
-- `action` attribute added (defaults to `"complete"` if not provided)
+- Adjusted attributes
+  - `variables` - Provide the variables as a proper JSON object instead of an array of objects with a `name` and a serialized JSON string `value`.
+- Added attributes
+  - `action` - Provide any custom lifecycle for this action or use the default value of `"assign"`.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- V1 returned `200` with the user task body
-- V2 returns `204` (No Content)
+- Response object removed - The V2 API returns a 204 status, indicating that the task was completed. Fetching the updated data of the user task should be done through the respective API since the data can change concurrently at any time.
 
 </TabItem>
 </Tabs>
@@ -285,15 +286,16 @@ No input adjustments.
 
 <TabItem value='input-adjustments'>
 
-- `allowOverrideAssignment` renamed to `allowOverride`
-- `action` attribute added (defaults to `"assign"` if not provided)
+- Renamed attributes
+  - `allowOverrideAssignment` - Use `allowOverride`, this still refers to allowing to override any existing assignee.
+- Added attributes
+  - `action` - Provide any custom lifecycle for this action or use the default value of `"assign"`.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-- V1 returned `200` with the user task body
-- V2 returns `204` (No Content)
+- Response object removed - The V2 API returns a 204 status, indicating that the task was assigned. Fetching the updated data of the user task should be done through the respective API since the data can change concurrently at any time.
 
 </TabItem>
 </Tabs>
@@ -312,13 +314,13 @@ No input adjustments.
 
 <TabItem value='input-adjustments'>
 
-No input adjustments.
+- No input adjustments.
 
 </TabItem>
 
 <TabItem value='output-adjustments'>
 
-Same output adjustments as **Search tasks**.
+- Except for the response structure changes, all adjustments from [Search tasks](#search-tasks) apply.
 
 </TabItem>
 </Tabs>
