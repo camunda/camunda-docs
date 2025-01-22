@@ -16,7 +16,7 @@ Ensure you [authenticate](./camunda-api-rest-authentication.md) before accessing
 
 Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 
-Example path: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
+Example path: `https://${REGION_ID}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
 
 ### Self-Managed
 
