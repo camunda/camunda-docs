@@ -71,7 +71,7 @@ API endpoint: https://api.cf. ...
 
 ```shell
 $> cf deploy ./ # append the -f flag to shortcircuit ongoing deployments
-Deploying multi-target app archive /Some/path/sap-odata-connector.mtar in org <your-org> / space <your-space> as you@example.org ..
+Deploying multi-target app archive /some/path/sap-odata-connector in org <your-org> / space <your-space> as you@example.org ..
 ...
 Application "sap-odata-connector" started and available at "some.url.hana.ondemand.com"
 ```
