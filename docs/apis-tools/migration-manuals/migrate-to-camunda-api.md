@@ -323,39 +323,6 @@ Same output adjustments as **Search tasks**.
 </TabItem>
 </Tabs>
 
-### Variables
-
-#### Get variable by ID
-
-- **V1 endpoint**: `GET /v1/variables/{variableId}`
-- **V2 endpoint**: `POST /v2/variables/search`
-
-<Tabs groupId="get-variable-by-id" defaultValue="input-adjustments" queryString values={
-[
-{label: 'Input adjustments', value: 'input-adjustments'},
-{label: 'Output adjustments', value: 'output-adjustments'},
-]
-}>
-
-<TabItem value='input-adjustments'>
-
-- Transitioned from GET to POST with filtering options.
-- Unified request structure as above.
-
-</TabItem>
-
-<TabItem value='output-adjustments'>
-
-- Unified response structure.
-- Variables associated with both process and user task scopes returned with `scopeKey`.
-- `draft` removed.
-- `id` replaced with `variableKey`.
-
-</TabItem>
-</Tabs>
-
-<!--- TODO: insert output adjustments --->
-
 <!--- TODO: open questions and related resources --->
 
 <!--- TODO: insert link to C8 REST API guidelines --->
