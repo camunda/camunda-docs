@@ -61,7 +61,7 @@ Over this guide, you will add and merge values in this file to configure your de
 
 You can find a reference example of this file here:
 
-```hcl reference
+```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/base.yml
 ```
 
@@ -259,7 +259,7 @@ The `global.compatibility.openshift.adaptSecurityContext` variable in your value
 - `force`: The `runAsUser` and `fsGroup` values will be null in all components.
 - `disabled`: The `runAsUser` and `fsGroup` values will not be modified (default).
 
-```hcl reference
+```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/scc.yml
 ```
 
@@ -268,7 +268,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/
 
 To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
 
-```hcl reference
+```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/no-scc.yml
 ```
 
