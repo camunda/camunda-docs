@@ -4,19 +4,21 @@ title: Migration preparation
 description: "Learn readiness indicators for migrating from Camunda 7 to Camunda 8."
 ---
 
-:::note
-Migration of existing projects to Camunda 8 is optional. Camunda 7 still has ongoing [support](https://docs.camunda.org/enterprise/announcement/).
-:::
-
 Let's discuss if you need to migrate before diving into the necessary steps and what tools can help you achieve the migration.
 
 ## When to migrate?
 
 New projects should typically be started using Camunda 8.
 
-Existing solutions using Camunda 7 might simply keep running on Camunda 7. Camunda has ongoing [support](https://docs.camunda.org/enterprise/announcement/), so there is no need to rush on a migration project.
+For Camunda 7:
 
-You should consider migrating existing Camunda 7 solutions if:
+- Camunda 7 CE (Community Edition) will EOL (end of life) in October 2025 with a final release (v7.24) happening on Oct 14, 2025.
+- There will be no more Camunda 7 CE releases after that date and the GitHub repo will be archived. The code will still be available, but we’ll close all issues and pull requests, and update the README to reflect the EOL status.
+- Camunda 7 EE (Enterprise Edition) customers will continue to get patch releases (security patches & bug fixes) on a rolling basis.
+
+If you have not yet migrated to Camunda 8, we strongly recommend that you start that process now.
+
+Migrating to Camunda 8 gives you additional advantages if:
 
 - You are looking to leverage a SaaS offering (e.g. to reduce the effort for hardware or infrastructure setup and maintenance).
 - You are in need of performance at scale and/or improved resilience.
@@ -55,15 +57,15 @@ In general, **workflow engine data** is harder to migrate to Camunda 8:
 
 - **Runtime data:** Running process instances of Camunda 7 are stored in the Camunda 7 relational database. Like with a migration from third party workflow engines, you can read this data from Camunda 7 and use it to create the right process instances in Camunda 8 in the right state. This way, you can migrate running process instances from Camunda 7 to Camunda 8. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) is in place to ease this task. This tool is community supported.
 
-- **History data:** Historic data from the workflow engine itself cannot be migrated. However, data in Optimize can be kept.
+- **History data:** Historic data from the workflow engine itself cannot be migrated. A tool allowing this is currently under development.
 
 ## Migration tooling
 
 :::note
-These tools are community maintained. For more assistance, create an issue on the repo directly.
+We are currently developing a powerful migration toolset - expect this to be available around the 8.7 release of Camunda. For the time being, you can already rely on several migration tools.
 :::
 
-The [Camunda 7 to Camunda 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration), available as a community extension, contains three components that will help you with migration:
+The [Camunda 7 to Camunda 8 migration tooling](https://github.com/camunda-community-hub/camunda-7-to-8-migration) contains three components to help you with migration:
 
 1. [A converter available in different flavors (web app, CLI) to convert BPMN models from Camunda 7 to Camunda 8](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter). This maps possible BPMN elements and technical attributes into the Camunda 8 format and gives you warnings where this is not possible. The result of a conversion is a model with mapped implementation details as well as hints on what changed, needs to be reviewed, or adjusted to function properly in Camunda 8.
 
@@ -71,7 +73,7 @@ The [Camunda 7 to Camunda 8 migration tooling](https://github.com/camunda-commun
 
 3. [A process instance migration tool](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/process-instance-migration) to migrate running process instances from Camunda 7 to Camunda 8. Ideally, you should let running instances finish prior to migrating.
 
-The tools mentioned above are a good starting point, but are only one option for how you can approach your migration, as described below.
+The tools mentioned above are a good starting point.
 
 ## Prepare for smooth migrations
 

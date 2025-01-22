@@ -24,9 +24,21 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/create-authorization",
+          label: "Create authorization",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-authorization",
           label: "Update authorization",
           className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/delete-authorization",
+          label: "Delete authorization",
+          className: "api-method delete",
         },
         {
           type: "doc",
@@ -152,6 +164,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-document",
           label: "Upload document (alpha)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/create-documents",
+          label: "Upload multiple documents (alpha)",
           className: "api-method post",
         },
         {
@@ -597,6 +615,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/delete-user",
           label: "Delete user",
           className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/update-user",
+          label: "Update user",
+          className: "api-method patch",
         },
       ],
     },

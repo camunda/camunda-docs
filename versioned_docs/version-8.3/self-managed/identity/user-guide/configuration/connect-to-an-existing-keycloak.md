@@ -12,7 +12,7 @@ In this guide, we'll demonstrate how to connect Identity to your existing Keyclo
 
 ## Prerequisites
 
-- Access to your [Keycloak Admin Console](https://www.keycloak.org/docs/23.0.1/server_admin/#using-the-admin-console)
+- Access to your [Keycloak Admin Console](https://www.keycloak.org/docs/latest/server_admin/#using-the-admin-console)
 - A basic understanding of [administering realms and clients](https://www.keycloak.org/docs/latest/server_admin/#assembly-managing-clients_server_administration_guide) in Keycloak
 
 ## Steps
