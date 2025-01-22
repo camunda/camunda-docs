@@ -365,7 +365,7 @@ optimize:
     enabled: false
 ```
 
-You should only enable the auto-mounting of a service account token when the application explicitly needs access to the Kubernetes API server or you have created a service account with the exact permissions required for the application and bound it to the pod.
+You should only enable the auto-mounting of a service account token when the application explicitly needs access to the Kubernetes API server, or you have created a service account with the exact permissions required for the application and bound it to the pod.
 
 - If you have a use case for enabling [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) then it is recommended to do so.
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
