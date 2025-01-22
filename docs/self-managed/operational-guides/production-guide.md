@@ -156,7 +156,7 @@ If you would like some more guidance relating to authentication, refer to the [C
 
 ### Connect External Databases
 
-The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as [Bitnami Elasticsearch Helm Chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and [Bitnami PostgresQL Helm Chart](https://artifacthub.io/packages/helm/bitnami/postgresql). Within a production setting, these dependency charts should be disabled and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
+The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as [Bitnami Elasticsearch Helm Chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm Chart](https://artifacthub.io/packages/helm/bitnami/postgresql). Within a production setting, these dependency charts should be disabled, and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
 In our scenario the Core component, and the Optimize importer communicate with a singular Amazon OpenSearch instance. On the other hand, the identity and web-modeler components are connected to separate databases on the Amazon Aurora PostgreSQL instances.
 
@@ -291,6 +291,29 @@ core:
 Here are some points to keep in mind when considering reliability:
 
 - Check node affinity and tolerations. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) to modify the node affinity and tolerations.
+
+For example, this is the default affinity configuration for the Core Pod in the Camunda Helm Chart:
+
+```
+affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: "app.kubernetes.io/component"
+                operator: In
+                values:
+                  - core
+          topologyKey: "kubernetes.io/hostname"
+
+```
+
+This configuration ensures that Core Pods with the deafult label `app.kubernetes.io/component=core` are not scheduled on the same node. The primary benefits include:
+
+1. High Availability: If one node fails, other nodes running the same component remain unaffected.
+2. Load Distribution: Balances the workload across nodes.
+3. Fault Tolerance: Reduces the impact of a node-level failure.
+
 - It is possible to set a `podDisruptionBudget`. For example you can modify the following values for the Core component:
 
 ```yaml
@@ -394,7 +417,7 @@ containerSecurityContext:
 If you would like to add any other security constraints to your `production-values.yaml` then please refer to the official [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 
 - It is recommended to pull images exclusively from a private registry, such as [Amazon ECR](https://aws.amazon.com/ecr/), rather than directly from Docker Hub. Doing so enhances control over the images, avoids rate limits, and improves performance and reliability. Additionally, you can configure your cluster to pull images only from trusted registries. Tools like [Open Policy Agent](https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e) can be used to enforce this restriction.
-- Open Policy Agent can also be used to [whitelist for Ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
+- Open Policy Agent can also be used to [whitelist Ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
 
 ## Observability and Monitoring
 
