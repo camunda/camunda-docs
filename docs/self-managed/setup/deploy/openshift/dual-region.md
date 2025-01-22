@@ -246,7 +246,8 @@ The [architecture of Submariner](https://submariner.io/getting-started/architect
 
 The following diagram illustrates the interaction between the two clusters:
 
-<!-- TODO: add similar diagram https://camo.githubusercontent.com/e47fd6c9d87061b65a001d04faeb0be18d4c7668d745df4dbd752ff4994bc975/68747470733a2f2f6d6561747962797465732e696f2f706f7374732f6f70656e73686966742f6f63702d66656174757265732f6d756c74692d636c75737465722f636f6e6e65637469766974792f7375626d6172696e65725f687533663364303337303338363132383064303237333264653162333764636638625f37323338395f3133323078305f726573697a655f626f785f332e706e67 -->
+_Infrastructure diagram of Submariner setup_
+![Infrastructure diagram of Submariner setup](./assets/submariner-hld.jpg)
 
 - Traffic sent from one broker to another cluster can be encrypted by the [Gateway Engine](https://submariner.io/getting-started/architecture/gateway-engine/). In OpenShift, the IPSec protocol is used on port `4500/UDP`, utilizing the [Libreswan](https://libreswan.org/) implementation.
 - A dedicated node in each cluster assumes the [Broker Role](https://submariner.io/getting-started/architecture/broker/), facilitating the exchange of metadata between Gateway Engines in participating clusters. This component is **not responsible for transmitting data**, unlike the Gateway Engine, which handles data transmission between internal networks of different clusters. High availability can be achieved by adding a second dedicated node.
@@ -349,7 +350,22 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-h
 
 If you don’t have the `subctl` CLI installed, you can follow the [installation instructions here](https://submariner.io/operations/deployment/).
 
-## Deploying Camunda 8 via Helm charts in dual region
+## Deploying Camunda 8 via Helm charts in a dual-region setup
+
+The installation of Camunda 8 in OpenShift across dual regions requires a functioning Submariner setup connecting two OpenShift clusters.
+
+### Verify the pre-requisites
+
+Before proceeding with the installation, ensure the required information is available and configured in your terminal for later use.
+Review and adjust the following environment script to match your specific configuration:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/camunda/export_environment_prerequisites.sh
+```
+
+If you don’t have access to an S3 bucket, you can adapt the backup method to use an alternative elastic backup solution.
+
+### Reference the elastic backup bucket in the clusters
 
 ### Setup the S3 bucket supporting failover
 

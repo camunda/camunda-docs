@@ -688,6 +688,17 @@ The `AWS_REGION` will define the region of the bucket, you can pick one of your 
 
    This command will initiate the creation of the backup bucket.
 
+1. You will need to store the following secret variables to set up the dual-region installation of Camunda:
+
+   ```bash
+   export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
+   export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
+   export AWS_ES_BUCKET_NAME=$(terraform output -raw s3_bucket_name)
+   export AWS_ES_BUCKET_REGION="$AWS_REGION"
+   ```
+
+   Ensure these variables are securely stored, as they will be needed later in the process.
+
 ### Reference files
 
 You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7)
