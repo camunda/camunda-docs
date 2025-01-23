@@ -1,6 +1,6 @@
 ---
 id: redhat-openshift-dual-region
-title: "Dual Region"
+title: "Red Hat OpenShift Dual-Region"
 description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift in two regions"
 ---
 
