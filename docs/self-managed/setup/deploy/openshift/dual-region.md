@@ -509,10 +509,62 @@ chmod +x verify_installation_completed.sh
 
 ## Verify connectivity to Camunda 8
 
-Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8)
-You should see 8 Zeebe brokers.
+1. Open a terminal and port-forward the Zeebe Gateway via `oc` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
-<!-- TODO: modify instructions to test with zbctl as the domain is slighty different -->
+<Tabs groupId="c8-connectivity">
+  <TabItem value="rest-api" label="REST API">
+
+```shell
+oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/$HELM_RELEASE_NAME-zeebe-gateway" 8080:8080
+```
+
+2. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
+
+```
+curl -L -X GET 'http://localhost:8080/v2/topology' -H 'Accept: application/json' | jq
+```
+
+3. Make sure that your output contains all eight brokers from the two regions:
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```text reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/camunda/zeebe-http-output.txt
+```
+
+  </summary>
+</details>
+
+  </TabItem>
+  <TabItem value="zbctl" label="zbctl">
+
+```shell
+oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/$HELM_RELEASE_NAME-zeebe-gateway" 26500:26500
+```
+
+1. Open another terminal and use [zbctl](/apis-tools/community-clients/cli-client/index.md) to print the Zeebe cluster status:
+
+```shell
+zbctl status --insecure --address localhost:26500
+```
+
+3. Make sure that your output contains all eight brokers from the two regions:
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```text reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/camunda/zbctl-output.txt
+```
+
+  </summary>
+</details>
+
+  </TabItem>
+</Tabs>
 
 ## Failover
 
