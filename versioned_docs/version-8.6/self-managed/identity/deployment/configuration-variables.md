@@ -41,7 +41,7 @@ These are the names and values which can be used for the identity sdk to ensure 
 | `CAMUNDA_IDENTITY_JWKS_URL`         | `camunda.identity.jwksUrl`          | defines the JWKS URL, which is used by the services to validate the JWT tokens. If nothing set it will use the WellKnownEndpoint | -                          |
 | `CAMUNDA_IDENTITY_CLIENT_ID`        | `camunda.identity.clientId`         | defines the client id, which is used by Zeebe in authentication flows.                                                           | -                          |
 | `CAMUNDA_IDENTITY_CLIENT_SECRET`    | `camunda.identity.clientSecret`     | The client secret for the Identity client.                                                                                       | -                          |
-| `CAMUNDA_IDENTITY_AUTH_SCOPES`      | `camunda.identity.authScopes`       | defines the scopes that should be applied to the token, provided as list separated by spaces                                     | openid email offline_acces |
+| `CAMUNDA_IDENTITY_AUTH_SCOPES`      | `camunda.identity.authScopes`       | defines the scopes that should be applied to the token, provided as list separated by spaces                                     | `openid email offline_access` |
 
 ## License configuration
 
