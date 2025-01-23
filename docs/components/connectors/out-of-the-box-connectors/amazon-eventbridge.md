@@ -247,7 +247,7 @@ The URLs of the exposed Amazon EventBridge Webhooks adhere to the following patt
 
 `http(s)://<base URL>/webhooks/<webhook ID>`
 
-- `<base URL>` is the URL of the Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of the Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
 - `<webhook ID>` is the ID (path) you configured in the properties of your Amazon EventBridge Webhook Connector.
 
 :::note

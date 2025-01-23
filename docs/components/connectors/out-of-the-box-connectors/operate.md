@@ -38,7 +38,7 @@ Choose between **Camunda 8 SaaS** and **Camunda 8 Self-Managed** depending on yo
 
 ### SaaS clusters
 
-If you are using a SaaS cluster, you will be required to provide **region** and **clusterId**. You will see these values when you [create an API client](/guides/setup-client-connection-credentials.md) for your cluster.
+If you are using a SaaS cluster, you will be required to provide your **region Id** and **cluster Id**. You will see these values when you [create an API client](/guides/setup-client-connection-credentials.md) for your cluster.
 
 ### Self-Managed clusters
 
