@@ -4,9 +4,17 @@ import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
 const DockerComposeBaseURL =
   "https://github.com/camunda/camunda-self-managed/releases/download";
 
-const DockerCompose = () => {
+const getVersion = () => {
   const docsVersion = useActiveVersion();
-  const version = docsVersion == "Next" ? "alpha" : docsVersion;
+  if (docsVersion.label == "Next") return "alpha";
+  // NOTE: This is a workaround for the irregular release cut of the 8.7 version.
+  // TODO: Remove this condition once the 8.7 is released.
+  if (docsVersion.label == "8.7") return "alpha";
+  return docsVersion.label;
+};
+
+const DockerCompose = () => {
+  const version = getVersion();
   return (
     <a
       style={{ color: "var(--ifm-link-color)" }}

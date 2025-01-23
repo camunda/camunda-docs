@@ -4,6 +4,8 @@ title: "Docker"
 keywords: ["camunda docker"]
 ---
 
+import {DockerCompose} from "@site/src/components/CamundaDistributions";
+
 This page guides you through Camunda 8 Docker images and how to run the platform in a developer setup using Docker Compose.
 
 ## Docker images
@@ -85,7 +87,7 @@ A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, Identi
 While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](./helm-kubernetes/overview.md) in production.
 :::
 
-Download the [Camunda 8 Docker Compose artifact](https://github.com/camunda/camunda-self-managed/releases/download/docker-compose-8.3/docker-compose-8.3.zip) and extract it.
+Download the artifact for Camunda 8 <DockerCompose/> and extract it.
 
 This Docker Compose configuration serves two purposes:
 
