@@ -101,7 +101,7 @@ For example, to send a request to the Camunda 8 REST API's `/topology` endpoint:
 <TabItem value='saas'>
 
 :::tip
-The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Camunda 8 REST API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.zeebe.camunda.io/${CLUSTER_ID}/`.
+The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Camunda 8 REST API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/`.
 :::
 
 </TabItem>

@@ -8,7 +8,7 @@ Important changes and updates for Camunda 8 releases that customers should be aw
 
 ## Camunda 8.7
 
-Camunda 8.7 is scheduled for release on 11 February, 2024.
+Camunda 8.7 is scheduled for release on 8 April 2025.
 
 <div class="double-column-container">
 <div class="double-column-left">

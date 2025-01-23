@@ -83,7 +83,7 @@ camunda:
       client-id: <your client id>
       client-secret: <your client secret>
     cluster-id: <your cluster id>
-    region: <your cluster region>
+    region: <your cluster region id>
 ```
 
 ### Self-Managed
