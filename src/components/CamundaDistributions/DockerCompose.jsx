@@ -1,11 +1,11 @@
 import React from "react";
-import DocsVersion from "../DocsVersion";
+import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
 
 const DockerComposeBaseURL =
   "https://github.com/camunda/camunda-self-managed/releases/download";
 
 const DockerCompose = () => {
-  const docsVersion = DocsVersion();
+  const docsVersion = useActiveVersion();
   const version = docsVersion == "Next" ? "alpha" : docsVersion;
   return (
     <a
