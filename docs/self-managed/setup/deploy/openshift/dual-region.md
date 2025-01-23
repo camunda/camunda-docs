@@ -407,38 +407,17 @@ Set up the region ID using a unique integer for each region:
   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/helm-values/values-region-1.yml
   ```
 - Add the following YAML configuration to your `values-region-2.yml`:
+
   ```yaml reference
   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/helm-values/values-region-2.yml
   ```
 
-#### Configuring the Security Context Constraints
+  **Security Context Constraints (SCCs)**
 
-Depending on your OpenShift cluster's Security Context Constraints (SCCs) configuration, the deployment process may vary.
-By default, OpenShift employs more restrictive SCCs. The Helm chart must assign `null` to the user running all components and dependencies.
+The process of deploying applications in an OpenShift cluster can be influenced by its Security Context Constraints (SCCs) configuration.
+By default, OpenShift comes with more restrictive SCCs. For the purposes of this guide, which focuses on multi-region deployment, we assume this to be the standard setup.
 
-<Tabs queryString="current-scc">
-<TabItem value="w-scc" label="Restrictive SCCs" default>
-
-The `global.compatibility.openshift.adaptSecurityContext` variable in your values.yaml can be used to set the following possible values:
-
-- `force`: The `runAsUser` and `fsGroup` values will be null in all components.
-- `disabled`: The `runAsUser` and `fsGroup` values will not be modified (default).
-
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/helm-values/scc.yml
-```
-
-</TabItem>
-<TabItem value="no-scc" label="Permissive SCCs">
-
-To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
-
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/helm-values/no-scc.yml
-```
-
-</TabItem>
-</Tabs>
+For custom configurations or specific requirements, please refer to the [installation guide for OpenShift](redhat-openshift.md#security-context-constraints-sccs)) which details the various available SCC options.
 
 #### Fill your deployment with actual values
 
