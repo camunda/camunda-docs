@@ -625,6 +625,8 @@ For more details, consult the official [AWS VPC Peering documentation](https://d
 This section outlines the process of creating a [S3 bucket](https://aws.amazon.com/en/s3/) that will be used to to [perform backups of the elasticsearch cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) used by Camunda.
 Read more about the [failover procecure](/self-managed/operational-guides/multi-region/dual-region-ops.md#procedure).
 
+The S3 bucket is set up following best practices, including encryption, logging, and versioning. These configurations can be customized to suit your specific requirements.
+
 #### Create the peering configuration module
 
 In the parent directory where your cluster modules reside (`region1` and `region2`), create a new directory called `s3-elastic-backup` for the S3 configuration:
