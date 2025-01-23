@@ -24,6 +24,8 @@ Storage limit?
 
 You can use any of the following data types when creating an extraction field.
 
-| Field type | Description |
-| :--------- | :---------- |
-| Number     | ...         |
+| Data type | Description |
+| :-------- | :---------- |
+| Boolean   | ...         |
+| Number    | ...         |
+| String    | ...         |

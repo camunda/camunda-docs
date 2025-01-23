@@ -44,13 +44,13 @@ To upload your sample document(s):
 1. Click **Upload document** to browse for and upload a sample document.
 1. Once the document has successfully uploaded, click **Extract** to extract data from the document.
 1. Repeat this process for all documents you want to upload.
-1. Once you are ready to start configuring your test extraction, select the **Extract fields** tab.
+1. Once you are ready to start configuring your test extraction, select the **Extract fields** tab or click the **Extract** icon for the document you want to extract data from.
 
 ### Document upload guidelines
 
 Start by uploading a sample document that contains all the data fields you want to extract for this type of document.
 
-- If a single document doesn’t include all the data fields you require, upload multiple documents to cover all variations of the document type. The number and range of documents you need to upload depends on the complexity of your unstructured data and your requirements.
+- If a single document does not include all the data fields you require, upload multiple documents to cover all variations of the document type. The number and range of documents you need to upload depends on the complexity of your unstructured data and your requirements.
 
 - For example, you must upload at least one sample document for each variation of a document type. This should provide enough extraction accuracy if it is an exact representation of the specific type of document, with no variations in layout or content. However, it is more likely that you will need to upload multiple documents to ensure acceptable extraction accuracy.
 
@@ -65,27 +65,33 @@ On the **Extract fields** tab, add the data [extraction fields](idp-key-concepts
 - Add a separate field for each piece of information you want to extract. For example, for an invoice, add a field for the invoice ID, date, vendor name, amount, and so on.
 - You can then extract data from your sample document(s) using your chosen LLM foundation model, edit and refine your fields, and save the extracted data as a test case to compare outcomes across different LLM models.
 
-### Add extraction fields
+### Add extraction field
 
 Add an extraction field for each piece of data you want to extract from your document(s).
 
 1. Click **Add field**.
-1. **Field name**: Enter a name for the field, for example “invoice_id”. The name format should follow FEEL naming convention, for example it is case sensitive and should not include spaces. See [FEEL variable names](/components/modeler/feel/language-guide/feel-variables.md#variable-names).
-1. **Type**: Select the data type the field will be populated with. For example, “Number” for a monetary field (“invoice_amount”). See [extraction field data types](idp-reference.md#extraction-field-data-types).
-1. **Prompt**: Enter a clear and specific prompt to guide the LLM in accurately extracting data. For example, for an "invoice_date" field you might use "The date the invoice was issued".
+1. **Field name**: Enter a descriptive name for the field.
+   - Example: "invoice_id”.
+   - The name format should follow [FEEL naming convention](/components/modeler/feel/language-guide/feel-variables.md#variable-names), for example it is case sensitive and should not include spaces.
+1. **Type**: Select the data type you want/expect the field to be populated with.
+   - Example: “Number” for a monetary field (“invoice_amount”).
+   - See [extraction field data types](idp-reference.md#extraction-field-data-types).
+1. **Prompt**: Enter a clear and specific prompt to guide the LLM in accurately extracting data.
+   - Example: For an "invoice_date" field, you might use "The date when the invoice was issued".
+   - Try and describe the expected outcome in the prompt in clear and concise terms. Refer to the official documentation for your chosen LLM for guidance and best practice for writing prompts.
 1. Click **Add** to add the field.
-1. Repeat the process until you have added all your required extraction fields. You can edit and delete fields at any time.
+1. Repeat the process until you have added all required extraction fields. You can edit and delete fields at any time.
 
 :::note
 
-- The field name serves as an output variable in a BPMN process.
-- To edit, test, and delete extraction fields, select the three vertical dots next to the field prompt to open the actions menu.
+- The **Field name** is used as an output variable in a BPMN process.
+- To edit or delete an existing extraction field, click the three vertical dots next to the field to open the Options menu.
 
 :::
 
 ### Extract data and save as a test case
 
-Once you have set up your extraction fields, you can select an LLM model and test the data extraction.
+Once you have added your extraction fields, select an LLM model and test the data extraction.
 
 1. **Extraction model**: Select the LLM model you want to use.
 1. Select the document you want to test the data extraction against.
@@ -102,15 +108,19 @@ Once you have set up your extraction fields, you can select an LLM model and tes
 :::tip
 
 - You will achieve different results with different LLM models. Test different models until you find the one that best suits your budget and accuracy requirements.
-- You can save and overwrite the test case at any time with your latest results.
+- You can save and overwrite a test case at any time with your latest results.
 
 :::
 
 ## Step 3: Validate extraction
 
-On the **Validate extraction** tab, validate and test your configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by the LLM model, using your extraction fields and prompts.
+On the **Validate extraction** tab, validate and test the configured data extraction against your uploaded documents.
 
 <img src={IdpValidationResultsImg} alt="Validate extraction screen" />
+
+This step evaluates the data extraction results produced by the LLM model, using your extraction fields and prompts.
+
+To validate the data extraction:
 
 1. **Project extraction model**: Select the LLM model to use for validation.
 1. Click **Test all documents** to run the extraction validation against all your uploaded sample documents.
@@ -120,7 +130,7 @@ On the **Validate extraction** tab, validate and test your configured data extra
    - Click **Run failed test case**(s) to...
 1. If your evaluation results are not successful, try the following and rerun the validation:
    - Change the LLM model to try and obtain more accurate results with a different model.
-   - Edit field prompts. Select the three vertical dots on a field to open the actions menu and select **Edit prompt**.
+   - Edit field prompts. Select the three vertical dots on a field to open the actions menu, and select **Edit prompt**.
    - Go back to a previous step and edit your data extraction configuration, or upload more sample documents.
 1. Once you are satisfied that your data extraction configuration is accurate, you can publish the project. Select the **Publish** tab.
 
@@ -138,11 +148,15 @@ Search and filter the results to work with specific documents or extraction fiel
 
 #### Example
 
-The following example shows the results of a partially successful extraction.
+The following example shows the results of a partially successful extraction against three documents.
 
 <img src={IdpValidationExampleImg} alt="Example validation results table" />
 
--
+The expanded "contract_start_date" field shows that each document had different validation results.
+
+- The first document passed the validation, with the **Extracted value** matching the **Expected test case output**.
+- The second document could not be validated as a test case was not found for comparison. Click **Save test case** to create a test case for the document.
+- The third document failed validation as the **Extracted value** did not match the **Expected test case output**. Click **Review document** to open the document again and check the prompt for this field.
 
 ## Step 4: Publish
 
