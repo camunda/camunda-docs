@@ -17,8 +17,6 @@ const DockerCompose = () => {
   const version = getVersion();
   return (
     <a
-      style={{ color: "var(--ifm-link-color)" }}
-      class="theme-doc-version-badge badge badge--secondary"
       title={`${DockerComposeBaseURL}/docker-compose-${version}/docker-compose-${version}.zip`}
       href={`${DockerComposeBaseURL}/docker-compose-${version}/docker-compose-${version}.zip`}
     >
