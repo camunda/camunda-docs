@@ -326,11 +326,20 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
      # local-cluster      submariner                    True                   False
      ```
 
-4. After Submariner is deployed, verify that the clusters can communicate with each other by using the `subctl` utility. Please note that it may take several minutes before all status indicators are green:
+4. After deploying Submariner, check that the clusters can communicate with each other by using the `subctl` utility. Keep in mind that it might take several minutes before all status indicators turn green.
+
+If you don’t have the `subctl` CLI installed, you can follow the [installation instructions here](https://submariner.io/operations/deployment/).
+
+To verify this, run the following command:
 
 ```bash
 subctl show all --contexts "$CLUSTER_1_NAME,$CLUSTER_2_NAME"
 ```
+
+If everything is set up correctly, you should observe in the output of each cluster context the following statuses:
+
+- Gateway's status: `All connections (1) are established`
+- Connection's status: `connected   10.406614ms (RTT)`
 
 <details>
   <summary>Example Submariner check successfull output</summary>
@@ -341,7 +350,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-h
 
 </details>
 
-If you don’t have the `subctl` CLI installed, you can follow the [installation instructions here](https://submariner.io/operations/deployment/).
+For more comprehensive details regarding the verification tests for Submariner using subctl, please refer to the [official documentation](https://submariner.io/operations/deployment/subctl/#verify).
 
 ## Deploying Camunda 8 via Helm charts in a dual-region setup
 
@@ -442,12 +451,8 @@ Ensure that `CLUSTER_1_NAME` is set to the name of your first cluster. In this e
 
 Once you've prepared each region's value file (`values-region-1.yml` and `values-region-2.yml`) file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
-```bash
-ZEEBE_SERVICE_NAME="$REGION_0_ZEEBE_SERVICE_NAME" DOLLAR="\$" envsubst < values-region-1.yml > generated-values-region-1.yml
-cat generated-values-region-1.yml
-
-ZEEBE_SERVICE_NAME="$REGION_1_ZEEBE_SERVICE_NAME" DOLLAR="\$" envsubst < values-region-2.yml > generated-values-region-2.yml
-cat generated-values-region-2.yml
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/camunda/generate_helm_values.sh
 ```
 
 ### Install Camunda 8 using Helm
