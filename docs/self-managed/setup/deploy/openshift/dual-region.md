@@ -48,8 +48,8 @@ This High-Level Design describes how the following critical components interact 
 - Administrative privileges are required for both clusters to perform configurations and operator deployments.
 - A reliable means of communication between the two clusters is necessary. Ensure that each cluster can establish network connections with the other.
 - The version of your OpenShift clusters must be included in the [supported versions list](./redhat-openshift.md#supported-versions).
-
-<!-- TODO: add requirements from https://submariner.io/getting-started/#prerequisites -->
+- Review the [requirements of OpenShift Advanced Cluster Management](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing) if it's not already configured.
+- Review the [requirements of OpenShift Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/networking/networking#submariner) if it's not already configured.
 
 ### CLI Requirements
 
@@ -68,13 +68,6 @@ If you'd like to replicate the topology used in this guide, follow the [ROSA Dua
 To deploy infrastructure components successfully, it’s essential that the OpenShift clusters you use have a `cluster-admin` role, which grants full privileges within the cluster. This level of access is necessary for the proper setup and configuration of the infrastructure components.
 
 However, **Camunda 8 deployment does not require cluster-admin access**. For the best security practice and to follow the principle of least privilege, it is recommended to deploy Camunda 8 with a **standard, limited user**. This approach helps minimize security risks by restricting unnecessary administrative privileges.
-
-### Networking of the clusters
-
-<!-- TODO: improve this part that is WIP -->
-
-- Submariner requirement
-- S3 access for each server
 
 ## Setup Advanced Cluster Management and Submariner
 
@@ -527,11 +520,10 @@ chmod +x verify_installation_completed.sh
 ./verify_installation_completed.sh
 ```
 
-<!-- TODO: add https://medium.com/quark-works/kubernetes-same-domain-ssl-with-dns-verification-using-lets-encrypt-e3e806644bf4 -->
-
 ## Verify connectivity to Camunda 8
 
 Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8)
+You should see 8 Zeebe brokers.
 
 <!-- TODO: modify instructions to test with zbctl as the domain is slighty different -->
 
