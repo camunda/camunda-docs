@@ -141,6 +141,20 @@ a.connector-card {
   transition: all 0.3s ease;
 }
 
+[data-theme="dark"] .connector-card {
+  background-color: #1c1c1c;
+  border: 1px solid #3b3a3a;
+  box-shadow: 0px 8px 16px 4px #00000033;
+}
+[data-theme="dark"] .connector-card:hover {
+  background-color: transparent;
+  border: 1px solid var(--ifm-color-primary);
+  box-shadow: 0px 8px 16px 4px #78a9ff33;
+}
+[data-theme="dark"] .connector-card p {
+  color: #c6c6c6;
+}
+
 .connector-small-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -155,8 +169,17 @@ a.connector-card {
   padding: 10px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-
   margin-bottom: 4px;
+}
+[data-theme="dark"] .connector-small {
+  background-color: #1c1c1c;
+  border: 1px solid #3b3a3a;
+  box-shadow: 0px 8px 16px 4px #00000033;
+}
+[data-theme="dark"] .connector-small:hover {
+  background-color: transparent;
+  border: 1px solid var(--ifm-color-primary);
+  box-shadow: 0px 8px 16px 4px #78a9ff33;
 }
 .connector-small img {
   height: 32px;
@@ -265,11 +288,23 @@ a.connector-small-link {
   line-height: 1;
   color: #616161;
 }
+[data-theme="dark"] .badge--default {
+  color: #999;
+  background-color: #3f3f3f;
+}
 
 .badge--outbound {
   background-color: #0ba7b9;
   color: #fff;
   margin-top: 10px;
+}
+[data-theme="dark"] .badge--outbound {
+  background-color: #005d5d;
+  color: #bae6ff;
+}
+[data-theme="dark"] .badge--inbound {
+  background-color: #9a4e00;
+  color: #e1d9cd;
 }
 
 .badge--inbound {
@@ -281,8 +316,15 @@ a.connector-small-link {
 .badge--default:hover {
   background-color: #ddd;
 }
+[data-theme="dark"] .badge--default:hover {
+  background-color: #555;
+}
 
 .badge--active {
+  background-color: #007bff;
+  color: #fff;
+}
+[data-theme="dark"] .badge--active {
   background-color: #007bff;
   color: #fff;
 }
@@ -290,14 +332,21 @@ a.connector-small-link {
   background-color: #007bff;
   color: #fff;
 }
-
 .badge--active--outbound,
 .badge--active--outbound:hover {
   background-color: #007bff;
   color: #fff;
 }
+[data-theme="dark"] .badge--active--outbound {
+  background-color: #007bff;
+  color: #fff;
+}
 .badge--active--inbound,
 .badge--active--inbound:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+[data-theme="dark"] .badge--active--inbound {
   background-color: #007bff;
   color: #fff;
 }
