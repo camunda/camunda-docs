@@ -35,21 +35,21 @@ To run the SAP RFC Connector, the following SAP infrastructure setup is required
 
 ## Deployment to BTP
 
-Unlike other Camunda Connectors, the SAP RFC Connector must be deployed as a Java `.war` archive. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. the JCo library's license prohibits redistribution, but it is available at runtime on BTP and auto-discovered by Camunda's RFC connector.
+Unlike other Camunda Connectors, the SAP RFC Connector must be deployed as a Java `.war` archive. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. the JCo library's license prohibits redistribution, but it is available at runtime on BTP and auto-discovered by Camunda's RFC Connector.
 
 A descriptor file is required to deploy the SAP RFC Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment.
 
 ### Deploying to BTP
 
-1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version.  .  
-   The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
-  Examples:
-  
-    - `rfc-8.6.0.war` is the RFC connector in version `0` for C8 SaaS version `8.6`
-    - `rfc-8.5.1.war` is the RFC connector in version `1` for C8 SaaS version `8.5`
+1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version.  
+    The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
+   Examples:
 
-1. Adjust the values for the credentials (Client Id, Client Secret, ...) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
-1. Log in to the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
+   - `rfc-8.6.0.war` is the RFC Connector in version `0` for C8 SaaS version `8.6`
+   - `rfc-8.5.1.war` is the RFC Connector in version `1` for C8 SaaS version `8.5`
+
+2. Adjust the values for the credentials (client ID, client secret, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
+3. Log into the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
 
 ```shell
 $> cf login
@@ -57,7 +57,7 @@ API endpoint: https://api.cf. ...
 ...
 ```
 
-2. Deploy the SAP RFC Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on.
+4. Deploy the SAP RFC Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on.
 
 ```shell
 $> cf deploy ./ # append the -f flag to shortcircuit ongoing deployments
