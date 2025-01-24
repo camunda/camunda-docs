@@ -362,7 +362,7 @@ zeebe.client.security.overrideAuthority=host:port
 Path to a root CA certificate to be used instead of the certificate in the default store:
 
 ```properties
-zeebe.client.security.certPath=host:port
+zeebe.client.security.certPath=/path/to/certificate.pem
 ```
 
 ### Message time to live
