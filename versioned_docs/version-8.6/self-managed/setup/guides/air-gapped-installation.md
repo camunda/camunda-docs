@@ -30,11 +30,11 @@ The following images must be available in your air-gapped environment:
 - [bitnami/os-shell](https://hub.docker.com/r/bitnami/os-shell/)
 - [bitnami/elasticsearch](https://hub.docker.com/r/bitnami/elasticsearch/)
 - [bitnami/kibana](https://hub.docker.com/r/bitnami/kibana/)
-- [Web Modeler images](/self-managed/setup/deploy/other/docker.md#web-modeler):
+- [Web Modeler images](/self-managed/setup/deploy/other/docker.md#component-images):
   - `web-modeler-ee/modeler-restapi`
   - `web-modeler-ee/modeler-webapp`
   - `web-modeler-ee/modeler-websockets`
-- [Console images](https://registry.camunda.cloud/):
+- [Console images](/self-managed/setup/deploy/other/docker.md#component-images):
   - `console/console-sm`
 
 We currently have a script in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) that will assist in pulling and saving Docker images.
