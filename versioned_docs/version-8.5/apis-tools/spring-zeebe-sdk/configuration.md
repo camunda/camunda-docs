@@ -343,10 +343,10 @@ Additionally, you can set tenant IDs on the job worker level by using the annota
 @JobWorker(tenantIds="myOtherTenant")
 ```
 
-You can override this property as well:
+You can override this property as well, given the job worker name is `foo`:
 
 ```properties
-zeebe.client.worker.override.tenant-ids=myThirdTenant
+zeebe.client.worker.override.foo.tenant-ids=myThirdTenant
 ```
 
 ### Override authority
