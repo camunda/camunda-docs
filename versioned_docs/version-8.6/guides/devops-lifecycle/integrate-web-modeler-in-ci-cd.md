@@ -14,7 +14,7 @@ import TabItem from "@theme/TabItem";
 
 [Web Modeler](../../components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
-- For low-risk processes, you can use the Web Modeler [process application development pipeline](/docs/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Milestone comparison](/docs/components/modeler/web-modeler/milestones.md#compare-milestones) (Visual and XML diffing) and [Git Sync](/docs/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
+- For low-risk processes, you can use the Web Modeler [process application development pipeline](/docs/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Milestone comparison](../../components/modeler/web-modeler/milestones.md#compare-milestones) (Visual and XML diffing) and [Git Sync](/docs/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
 
 - For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can integrate Web Modeler into your CI/CD pipelines.
 
@@ -43,7 +43,7 @@ This blueprint provides a ready-to-use proof of concept for a CI/CD pipeline for
 
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
-- Web Modeler uses [milestones](/components/modeler/web-modeler/milestones.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
+- Web Modeler uses [milestones](../../components/modeler/web-modeler/milestones.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
 - A process application comprises main processes and diverse resources, such as subprocesses, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
@@ -112,7 +112,7 @@ Pagination is enforced for all listed `search` endpoints. Ensure you obtain all 
 
 We work to replace this with a webhook or subscription approach. An alternate approach involves manually triggering synchronization or delegating synchronization triggers to other sources, such as the pipeline itself, creation of new branches, or pull/merge requests.
 
-Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [milestones](/components/modeler/web-modeler/milestones.md).
+Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [milestones](../../components/modeler/web-modeler/milestones.md).
 
 #### Listening to milestone creation
 

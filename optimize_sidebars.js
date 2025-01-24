@@ -285,10 +285,7 @@ module.exports = {
               "Camunda Marketplace",
               "components/modeler/web-modeler/camunda-marketplace/"
             ),
-            docsLink(
-              "Milestones",
-              "components/modeler/web-modeler/milestones/"
-            ),
+            docsLink("Versions", "components/modeler/web-modeler/versions/"),
             docsLink(
               "Token simulation",
               "components/modeler/web-modeler/token-simulation/"

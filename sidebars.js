@@ -176,7 +176,7 @@ module.exports = {
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
-            "components/modeler/web-modeler/milestones",
+            "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
             {
               "Advanced modeling": [
