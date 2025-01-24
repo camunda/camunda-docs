@@ -375,10 +375,10 @@ zeebe.client.message.timeToLive=PT2H
 
 ### Max message size
 
-A custom maxMessageSize allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
+A custom maxMessageSize (in bytes) allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
 
 ```properties
-zeebe.client.message.maxMessage-size=3
+zeebe.client.message.maxMessage-size=3145728
 ```
 
 ### Keep alive
