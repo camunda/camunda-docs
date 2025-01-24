@@ -21,7 +21,7 @@ These features run in the customer's [SAP BTP instance](https://www.sap.com/prod
 
 All SAP integration artifacts have the following technical requirements:
 
-- minimum Camunda version 8.5
+- Camunda version 8.5+
 - They run on SAP BTP, Cloud Foundry environment, and thus [need the respective service](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all).
 - [(free) Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?region=all&service_plan=lite&commercialModel=btpea) for system and service connectivity.
 - If the S/4 or ECC system is located on-premises:
