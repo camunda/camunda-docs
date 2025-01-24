@@ -18,7 +18,7 @@ There is a dedicated update guide for each version:
 
 Update from 8.6.x to 8.7.0
 
-[Release notes](/reference/release-notes/870.md)
+[Release notes](/reference/announcements-release-notes/870/870-release-notes.md)
 
 ### [Camunda 8.5 to Camunda 8.6](../850-to-860)
 

@@ -1,21 +1,37 @@
 ---
-id: announcements-870
-title: "8.7 Announcements"
+id: 870-announcements
+title: "Announcements"
 description: "Important changes and updates for the Camunda 8.7 release including deprecation & removal notices."
 ---
 
-import DeployDiagramImg from '../img/deploy-diagram-modal.png';
+import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Important changes and updates for the Camunda 8.7 release are summarized below.
 
-| Scheduled release date | Scheduled end of maintenance | Release notes                                        | Blog                                                                                            |
-| :--------------------- | :--------------------------- | :--------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
-| 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/release-notes/870.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
+| Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                                            |
+| :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
 
 - [API updates](#api-updates-saasself-managed)
 - [Identity management updates](#identity-management-updates-saasself-managed)
 - [Installation and deployment updates](#installation-and-deployment-updates-self-managed)
 - [Camunda Java client and Camunda Spring SDK](#camunda-java-client-and-camunda-spring-sdk-self-managed)
+
+## Versioning changes
+
+## Deprecations
+
+## Known limitations
+
+## Major product/feature releases
+
+### Modeler
+
+lorem ipsum
+
+### Operate
+
+lorem ipsum
 
 ## API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -149,7 +165,7 @@ Camunda is harmonizing our index structure and usage.
 - With this change, several Operate indices can and will be used by Tasklist.
 - New indices have been created to integrate Identity into the system.
 
-![Harmonized indices schema](../img/harmonized-indices-schema.png)
+![Harmonized indices schema](../../img/harmonized-indices-schema.png)
 
 #### Camunda Exporter
 
@@ -160,7 +176,7 @@ The exporter can consume Zeebe records (mostly events created by the engine), ag
 
 The following diagram shows a simplified version of this work.
 
-![Camunda Exporter diagram](../img/target-camunda-exporter.png)
+![Camunda Exporter diagram](../../img/target-camunda-exporter.png)
 
 - For example, Tasklist and Operate Importers are still required for old data to be imported, but the Camunda exporter writes all new data into ES/OS. After old indices are drained, importers can be turned off.
 - The archiver, which takes care of the archiving of completed process instances, will be moved into the Zeebe system as well, to reduce the installation complexity and provide a better scaling and replication factor (based on partitions).

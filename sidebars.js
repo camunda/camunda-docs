@@ -869,28 +869,26 @@ module.exports = {
     "reference/overview",
     {
       type: "category",
-      label: "Announcements",
+      label: "Announcements & release notes",
       link: {
         type: "doc",
-        id: "reference/announcements",
+        id: "reference/announcements-release-notes/overview",
       },
       items: [
-        "reference/announcements/announcements-870",
-        "reference/announcements/announcements-860",
-        "reference/announcements/announcements-850",
-      ],
-    },
-    {
-      type: "category",
-      label: "Release notes",
-      link: {
-        type: "doc",
-        id: "reference/release-notes/release-notes",
-      },
-      items: [
-        "reference/release-notes/870",
-        "reference/release-notes/860",
-        "reference/release-notes/850",
+        "reference/announcements-release-notes/overview",
+        {
+          type: "category",
+          label: "8.7",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/870/870-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/870/870-announcements",
+            "reference/announcements-release-notes/870/870-release-notes",
+          ],
+        },
+        "reference/announcements-release-notes/release-policy",
       ],
     },
     "reference/contact",
@@ -901,7 +899,6 @@ module.exports = {
     "reference/status",
     "reference/licenses",
     "reference/notices",
-    "reference/release-policy",
     "reference/regions",
     "reference/usage-metrics",
     "reference/glossary",
