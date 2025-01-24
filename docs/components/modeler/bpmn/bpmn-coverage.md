@@ -122,6 +122,7 @@ import MultiInstanceParallelSvg from './assets/bpmn-symbols/multi-instance-paral
 import MultiInstanceSequentialSvg from './assets/bpmn-symbols/multi-instance-sequential.svg'
 import LoopSvg from './assets/bpmn-symbols/loop.svg'
 import CompensationSvg from './assets/bpmn-symbols/compensation.svg'
+import AdHocSvg from './assets/bpmn-symbols/ad-hoc.svg'
 
 <div className="bpmn-symbol-container">
     <a href="../multi-instance/">
@@ -135,6 +136,9 @@ import CompensationSvg from './assets/bpmn-symbols/compensation.svg'
     </a>
     <a href="../compensation-handler/">
         <CompensationSvg className="implemented" />
+    </a>
+    <a href="../ad-hoc/">
+        <AdHocSvg className="implemented" />
     </a>
 </div>
 
