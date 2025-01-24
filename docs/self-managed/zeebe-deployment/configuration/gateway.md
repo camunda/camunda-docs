@@ -497,7 +497,7 @@ as well.
 :::
 
 :::note
-If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md/#multitenancy-configuration).
+If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md#multitenancy-configuration).
 :::
 
 | Field   | Description                                                                                                                                     | Example value |

@@ -343,10 +343,10 @@ Additionally, you can set tenant IDs on the job worker level by using the annota
 @JobWorker(tenantIds="myOtherTenant")
 ```
 
-You can override this property as well:
+You can override this property as well, given the job worker name is `foo`:
 
 ```properties
-zeebe.client.worker.override.tenant-ids=myThirdTenant
+zeebe.client.worker.override.foo.tenant-ids=myThirdTenant
 ```
 
 ### Override authority
@@ -375,10 +375,10 @@ zeebe.client.message.timeToLive=PT2H
 
 ### Max message size
 
-A custom maxMessageSize allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
+A custom maxMessageSize (in bytes) allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
 
 ```properties
-zeebe.client.message.maxMessage-size=3
+zeebe.client.message.maxMessage-size=3145728
 ```
 
 ### Keep alive
