@@ -1,5 +1,5 @@
 extends: existence
-message: "Improper link format: '%s'. Please use the `$docs$` token when crossing doc instances."
+message: "Improper link format: `%s`. Please use the `$docs$` token when crossing doc instances."
 level: warning
 nonword: true
 scope: raw

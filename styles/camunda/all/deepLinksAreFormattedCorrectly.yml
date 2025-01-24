@@ -1,5 +1,5 @@
 extends: substitution
-message: "Improper link format for deep-links. Exclude the slash (`/`) before the hash (`#`): %s"
+message: "Improper link format for deep-links. Exclude the slash (`/`) before the hash (`#`): `%s`"
 level: error
 nonword: true
 scope: raw
