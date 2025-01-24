@@ -1,7 +1,7 @@
 ---
 id: versions
 title: Versions
-description: Work with versions in Web Modeler
+description: Work with versions in Web Modeler.
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
