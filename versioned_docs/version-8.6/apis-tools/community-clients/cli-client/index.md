@@ -36,7 +36,7 @@ export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
 
-For Self-Managed environment, the Zeebe API may look like `http://localhost:26500`, or `https://mydomain.com:26500` with OAuth.
+For Self-Managed environment, the Zeebe API may look like `http://localhost:26500`, or `https://mydomain.com:26500` when using secure communication.
 
 When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
 
