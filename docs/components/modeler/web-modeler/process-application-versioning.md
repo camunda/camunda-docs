@@ -18,7 +18,7 @@ In this example, you have a process application that contains multiple files as 
 - When you create this new version, a version is also created for every other file and named with the same "1.2" version tag.
 - All files in the process application now have a "1.2" version.
 
-![Diagram showing an example process application bulk version creation](img/process-applications/process-application-milestone-diagram.png)
+![Diagram showing an example process application bulk version creation](img/process-applications/process-application-version-diagram.png)
 
 ## Create a bulk version
 
