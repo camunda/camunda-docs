@@ -358,21 +358,21 @@ Configures a generic BPMN element property.
 
 #### `zeebe:input`
 
-| **Binding `type`**          | `zeebe:input`                                         |
-| --------------------------- | ----------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`   |
-| **Binding parameters**      | `name`: The name of the input parameter               |
-| **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />` |
+| **Binding `type`**          | `zeebe:input`                                                                    |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
+| **Binding parameters**      | `name`: The name of the input parameter                                          |
+| **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />`                            |
 
 Configures an [input mapping](../../../../concepts/variables/#input-mappings).
 
 #### `zeebe:output`
 
-| **Binding `type`**          | `zeebe:output`                                           |
-| --------------------------- | -------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`      |
-| **Binding parameters**      | `source`: The source of the output parameter             |
-| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />` |
+| **Binding `type`**          | `zeebe:output`                                                             |
+| --------------------------- | -------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown``Boolean`<br />`Number` |
+| **Binding parameters**      | `source`: The source of the output parameter                               |
+| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                   |
 
 Configures an [output mapping](../../../../concepts/variables/#output-mappings).
 
