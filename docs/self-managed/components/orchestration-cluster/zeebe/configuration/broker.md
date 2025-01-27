@@ -451,6 +451,30 @@ backup:
       value: null
 ```
 
+### zeebe.broker.data.backup.filesystem
+
+To store your backups in the local filesystem, choose the `FILESYSTEM` backup store and specify where to store the backups locally.
+
+:::note Backup encryption
+Zeebe does not support backup encryption natively, but it _can_ use filesystem based encryption. This then is a feature of the filesystem and not Zeebe itself.
+:::
+
+| Field      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Example Value |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| basePath | The base path is used to define the parent directory of all create backups and backup-manifest files. **This directory must exist and be writable by the Zeebe broker**. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_FILESYSTEM_BASEPATH`.                                                                                                                                                  | /mnt/backups/zeebe |
+
+#### YAML snippet
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        store: FILESYSTEM
+        filesystem:
+          basePath:
+```
+
 ### zeebe.broker.cluster
 
 This section contains all cluster related configurations, to setup a zeebe cluster.

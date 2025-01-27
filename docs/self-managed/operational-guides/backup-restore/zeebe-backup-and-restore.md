@@ -28,7 +28,7 @@ Usage of this API requires the backup store to be configured for the component.
 To use the backup feature in Zeebe, you must choose which external storage system you will use.
 Make sure to set the same configuration on all brokers in your cluster.
 
-Zeebe supports [S3](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3), [Google Cloud Storage (GCS)](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupgcs), and [Azure](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupazure) for external storage.
+Zeebe supports [S3](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3), [Google Cloud Storage (GCS)](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupgcs), and [Azure](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupazure), and [local filesystem](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupfilesystem) for external storage.
 
 :::caution
 Backups created with one store are not available or restorable from another store.
