@@ -49,6 +49,8 @@ Document handling may be beneficial for several use cases. For example:
 
 <!--- Explain how to then retrieve the document in another Connector to store it in a third-party system or provide a screenshot with some text --->
 
+Review the list of [outbound Connectors](#outbound-connectors) below which currently support retrieving the document content to store in a third-party system.
+
 ### Upload a document via public form
 
 A [form](/components/modeler/forms/camunda-forms-reference.md) can display documents with the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md):
