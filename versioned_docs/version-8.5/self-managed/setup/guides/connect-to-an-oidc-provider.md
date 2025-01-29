@@ -41,7 +41,7 @@ configuration](#component-specific-configuration) to ensure the components are c
    - Client ID
    - Client secret
    - Audience
-4. Set the following environment variables or helm values for the component you are configuring an app for:
+4. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
 <TabItem value="env">
