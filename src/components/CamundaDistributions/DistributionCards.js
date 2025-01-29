@@ -1,5 +1,6 @@
 import React from "react";
 import ArtifactCard from "./ArtifactCard.js";
+import { DockerComposeURL } from "./DockerCompose.js";
 
 //
 export const C8Run = () => {
@@ -12,7 +13,14 @@ export const C8Run = () => {
   const versions = ["latest", "1.0.0", "1.1.0", "1.2.0"];
   const releaseNotesUrl = "https://example.com/release-notes";
   const downloadURL = "https://github.com/camunda/camunda/xyz";
-  const architectures = ["x86_64", "arm64", "ppc64le"];
+  const architectures = [
+    "MacOS (amd64)",
+    "MacOS (arm64)",
+    "Linux (amd64)",
+    "Linux (arm64)",
+    "Windows (amd64)",
+    "Windows (arm64)",
+  ];
 
   const osName = "Mac";
   const command = osCommand[osName];
@@ -33,7 +41,7 @@ export const C8Run = () => {
 export const DockerCompose = () => {
   const versions = ["latest"];
   const releaseNotesUrl = "https://example.com/release-notes";
-  const downloadURL = "https://github.com/camunda/camunda/xyz";
+  const downloadURL = DockerComposeURL();
   const command = "docker compose up -d";
 
   return (
@@ -48,7 +56,7 @@ export const DockerCompose = () => {
 
 //
 export const HelmLocal = () => {
-  const versions = ["latest", "1.0.0", "1.1.0", "1.2.0"];
+  const versions = ["1.0.0", "1.1.0", "1.2.0"];
   const releaseNotesUrl = "https://example.com/release-notes";
   const command = [
     "helm repo add camunda https://helm.camunda.io",
@@ -67,7 +75,7 @@ export const HelmLocal = () => {
 };
 
 export const Helm = () => {
-  const versions = ["latest", "1.0.0", "1.1.0", "1.2.0"];
+  const versions = ["1.0.0", "1.1.0", "1.2.0"];
   const releaseNotesUrl = "https://example.com/release-notes";
   const command = [
     "helm repo add camunda https://helm.camunda.io",

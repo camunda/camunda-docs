@@ -14,8 +14,8 @@ const ArtifactCard = ({
   const [architecture, setArchitecture] = useState(architectures[0]);
   const [version, setVersion] = useState(versions[0]);
 
-  const handleDownload = () => {
-    window.open(downloadUrl, "_blank");
+  const handleDownload = (downloadURL) => {
+    window.open(downloadURL, "_blank");
   };
 
   return (
@@ -52,14 +52,15 @@ const ArtifactCard = ({
           </>
         )}
       </div>
-      <div className={styles.linkContainer}>
-        <Link to={releaseNotesUrl}>View Release Notes</Link>
-      </div>
       <div>
         {downloadURL != "" && (
-          <button className={styles.downloadButton} onClick={handleDownload}>
+          <Link
+            to={downloadURL}
+            title={downloadURL}
+            className={styles.downloadURL}
+          >
             Download
-          </button>
+          </Link>
         )}
         <br />
         {runCommand != "" && (
@@ -67,6 +68,9 @@ const ArtifactCard = ({
             {runCommand.replaceAll("${version}", version)}
           </CodeBlock>
         )}
+      </div>
+      <div className={styles.linkContainer}>
+        <Link to={releaseNotesUrl}>View Release Notes</Link>
       </div>
     </div>
   );

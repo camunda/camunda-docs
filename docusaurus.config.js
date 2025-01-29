@@ -233,10 +233,11 @@ module.exports = {
           position: "left",
         },
         {
-          page: "download-hub",
+          type: "doc",
+          docId: "download-hub/index",
           label: "Download Hub",
-          to: "/download-hub",
           class: "badge badge--primary",
+          position: "left",
         },
       ],
     },

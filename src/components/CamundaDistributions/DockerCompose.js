@@ -13,13 +13,14 @@ const getVersion = () => {
   return docsVersion.label;
 };
 
-const DockerCompose = () => {
+export const DockerComposeURL = () => {
   const version = getVersion();
+  return `${DockerComposeBaseURL}/docker-compose-${version}/docker-compose-${version}.zip`;
+};
+
+export const DockerCompose = () => {
   return (
-    <a
-      title={`${DockerComposeBaseURL}/docker-compose-${version}/docker-compose-${version}.zip`}
-      href={`${DockerComposeBaseURL}/docker-compose-${version}/docker-compose-${version}.zip`}
-    >
+    <a title={DockerComposeURL()} href={DockerComposeURL()}>
       Docker Compose
     </a>
   );
