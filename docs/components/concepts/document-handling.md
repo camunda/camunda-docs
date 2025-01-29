@@ -5,9 +5,6 @@ description: "Learn more about integration, secure management, and efficient sto
 keywords: ["document handling"]
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 Offering more robust document handling capabilities within Camunda SaaS and Self-Managed, users can now efficiently manage large volumes of binary data such as PDFs and images across both development and production environments. This assists with streamlining business processes involving document uploads, storage, and management, enhancing workflow efficiency and compliance without compromising the performance or integrity of active workflows.
 
 Across the unified Camunda 8 platform, use document handling to store, track, and manage documents utilizing the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx), Connectors, Forms, and Tasklist.
@@ -26,6 +23,8 @@ A [Google Cloud Platform](https://cloud.google.com/storage) storage integration 
 - **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.
 
 ### Self-Managed
+
+<!--- Does this content belong here, or should we link to it from the SM docs? --->
 
 Use [AWS S3](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution, and to ensure storage is properly isolated and managed for each environment.
 
