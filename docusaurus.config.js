@@ -232,6 +232,12 @@ module.exports = {
           label: "Reference",
           position: "left",
         },
+        {
+          page: "download-hub",
+          label: "Download Hub",
+          to: "/download-hub",
+          class: "badge badge--primary",
+        },
       ],
     },
     footer: {
