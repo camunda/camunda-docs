@@ -1,0 +1,70 @@
+{
+  "8.6": {
+    "8.6.7": [
+      {
+        "architecture": "linux",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.7/camunda8-run-8.6.7-linux.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.7"
+      },
+      {
+        "architecture": "windows",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.7/camunda8-run-8.6.7-windows.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.7"
+      },
+      {
+        "architecture": "darwin-x86_64",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.7/camunda8-run-8.6.7-darwin-x86_64.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.7"
+      },
+      {
+        "architecture": "darwin-aarch64",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.7/camunda8-run-8.6.7-darwin-aarch64.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.7"
+      }
+    ],
+    "8.6.6": [
+      {
+        "architecture": "linux",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.6/camunda8-run-8.6.6-linux.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.6"
+      },
+      {
+        "architecture": "windows",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.6/camunda8-run-8.6.6-windows.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.6"
+      },
+      {
+        "architecture": "darwin-x86_64",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.6/camunda8-run-8.6.6-darwin-x86_64.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.6"
+      },
+      {
+        "architecture": "darwin-aarch64",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.6/camunda8-run-8.6.6-darwin-aarch64.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.6"
+      }
+    ],
+    "8.6.5": [
+      {
+        "architecture": "linux",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.5/camunda8-run-8.6.5-linux.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.5"
+      },
+      {
+        "architecture": "windows",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.5/camunda8-run-8.6.5-windows.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.5"
+      },
+      {
+        "architecture": "darwin-x86_64",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.5/camunda8-run-8.6.5-darwin-x86_64.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.5"
+      },
+      {
+        "architecture": "darwin-aarch64",
+        "download": "https://github.com/camunda/camunda/releases/download/8.6.5/camunda8-run-8.6.5-darwin-aarch64.tar.gz",
+        "link": "https://github.com/camunda/camunda/releases/tag/8.6.5"
+      }
+    ]
+  }
+}
