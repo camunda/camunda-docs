@@ -71,6 +71,8 @@ If you change the **Document URL** under **Download settings**, this feature wil
 
 #### Outbound Connectors
 
+The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md) is enhanced to provide document support in property/variable bindings.
+
 For the following outbound Connectors, you may include a **Request body** under **Payload** in the properties panel to send with your request:
 
 - [REST](/components/connectors/protocol/rest.md) - Supports storing the response as a document.
