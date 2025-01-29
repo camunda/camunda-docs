@@ -53,9 +53,13 @@ Document handling may be beneficial for several use cases. For example:
 
 A [form](/components/modeler/forms/camunda-forms-reference.md) can display documents with the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md):
 
+![document preview settings](./assets/document-preview-settings.png)
+
+With the [filepicker form element](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md), you may also [upload multiple files at once](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties). This can be dynamically set using an [expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md):
+
 ![document preview for form](./assets/document-preview.png)
 
-With the [filepicker form element](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md), you may also [upload multiple files at once](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties). This can be dynamically set using an [expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md).
+For additional guidance on supported file formats, refer to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers).
 
 With Tasklist, users may then view and download files displayed in the task's form.
 
@@ -63,7 +67,7 @@ With Tasklist, users may then view and download files displayed in the task's fo
 If you change the **Document URL** under **Download settings**, this feature will not work for public start forms because there is no valid session.
 :::
 
-![document preview settings](./assets/document-preview-settings.png)
+![document handling in tasklist](./assets/document-handling-tasklist.png)
 
 #### Outbound Connectors
 
