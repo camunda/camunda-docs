@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import csv
 import re
 from collections import defaultdict

@@ -1,6 +1,7 @@
+#!/usr/bin/env python3
+
 import os 
 import re
-import requests
 import json
 
 from dataclasses import dataclass
@@ -20,6 +21,7 @@ class C8RunReleaseArtifact:
         return {
             # "version": self.version,
             "architecture": self.architecture,
+            # "operating_system": get_operating_system(self.architecture),
             "download": self.download,
             "link": self.link
         }
@@ -42,6 +44,13 @@ def get_minor_version(full_version: str) -> str:
     match = re.match(r"^(\d+\.\d+)\.\d+$", full_version)
     return match.group(1) if match else full_version
 
+def get_operating_system(arch: str) -> str:
+    if arch == 'linux':
+        return 'Linux'
+    if arch == 'windows':
+        return 'Windows'
+    if arch.startswith('darwin'):
+        return 'MacOS'
 
 def fetch_github_releases(repo_owner, repo_name, token):
     g = Github(token)
