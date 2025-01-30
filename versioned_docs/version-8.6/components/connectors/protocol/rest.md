@@ -221,6 +221,10 @@ The following fields are available in the `response` variable:
 - **body**: Response body of your request
 - **headers**: Response headers
 
+:::note
+If your endpoint returns multiple Set-Cookie headers and you need to capture all of them, set `groupSetCookieHeaders` to `true` to aggregate them into a list.
+:::
+
 ## Output mapping
 
 ### Result variable
