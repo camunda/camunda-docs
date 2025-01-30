@@ -1,0 +1,290 @@
+{
+  "9.4.6": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.4.6#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.4.6",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.4.5": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.4.5#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.4.5",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.4.4": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.4.4#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.4.4",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.4.3": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.4.3#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.4.3",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.4.2": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.4.2#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.4.2",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.4.1": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.4.1#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.4.1",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.4.0": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.4.0#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.4.0",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.9": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.9#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.9",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.8": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.8#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.8",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.7": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.7#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.7",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.6": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.6#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.6",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.5": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.5#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.5",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.4": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.4#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.4",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.3": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.3#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.3",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.2": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.2#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.2",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.1": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.1#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.1",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.3.0": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.3.0#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.3.0",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.2.0": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.2.0#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.2.0",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.1.2": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.1.2#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.1.2",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.1.1": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.1.1#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.1.1",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.1.0": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.1.0#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.1.0",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.0.2": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.0.2#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.0.2",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.0.1": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.0.1#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.0.1",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "9.0.0": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/9.0.0#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-9.0.0",
+        "description": "Release Notes"
+      }
+    ]
+  }
+}
