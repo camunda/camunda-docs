@@ -10,6 +10,9 @@ from github import Github, GitRelease
 
 GITHUB_TOKEN=os.getenv('GITHUB_TOKEN')
 
+LATEST_VERSION="8.6"
+EXPORT_FILENAME="c8_run_versions.json"
+
 @dataclass
 class C8RunReleaseArtifact:
     version: str  # x.y.z
@@ -20,10 +23,13 @@ class C8RunReleaseArtifact:
     def __dict__(self) -> dict:
         return {
             # "version": self.version,
-            "architecture": self.architecture,
+            "system": self.architecture,
             # "operating_system": get_operating_system(self.architecture),
             "download": self.download,
-            "link": self.link
+            # "link": self.link,
+            "links": [
+                {"link": self.link, "description": "Release Notes"}
+            ]
         }
 
 @dataclass
@@ -112,6 +118,24 @@ def dump_c8_versions(releases_minor: list[C8RunReleaseMinor]) -> dict:
         for minor in releases_minor
     }
 
+def save_dict_to_json(data, file_path):
+    print(f"Saving to file {file_path}")
+
+    directory = os.path.dirname(file_path)
+
+    if directory and not os.path.exists(directory):
+        print(f"Directory '{directory}' does not exist. Skipping JSON save.")
+        return
+
+    if not os.path.exists(file_path):
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write("{}")
+
+    with open(file_path, "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)
+
+    print(f"JSON file '{file_path}' saved successfully!")
+
 def main():
     c8_run_releases: list[C8RunReleaseArtifact] = get_c8_run_releases()
     c8_run_minor: list[C8RunReleaseMinor] = group_by_minor_version(c8_run_releases)
@@ -121,6 +145,19 @@ def main():
         indent=4,
         separators=(',', ': ')
     ))
+    
+    for version in c8_run_minor:
+        # breakpoint()
+        export_filename = f"../versioned_docs/version-{version.version}/download-hub/{EXPORT_FILENAME}"
+        print(f"Dumping version {version.version} to file {export_filename}")
+        dump = {release.version: release.__dict__() for release in version.releases}
+        save_dict_to_json(dump, export_filename)
+
+        if version.version == LATEST_VERSION:
+            export_filename = f"../docs/download-hub/{EXPORT_FILENAME}"
+            print(f"Dumping version {version.version} to file {export_filename}")
+            save_dict_to_json(dump, export_filename)
+
     # breakpoint()
 
 if __name__ == '__main__':

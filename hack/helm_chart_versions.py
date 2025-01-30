@@ -142,7 +142,7 @@ if __name__ == "__main__":
     for version in result:
         export_filename = f"../versioned_docs/version-{version.version}/download-hub/{EXPORT_FILENAME}"
         print(f"Dumping version {version.version} to file {export_filename}")
-        dump = {chart.version: chart.__dict__() for chart in version.charts}
+        dump = {release.version: release.__dict__() for release in version.releases}
         save_dict_to_json(dump, export_filename)
 
         if version.version == LATEST_VERSION:
