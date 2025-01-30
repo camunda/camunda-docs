@@ -1,15 +1,19 @@
 function generateMermaidDiagrams(schema) {
+  const entities = generateEntities(schema);
+
   return `\`\`\`mermaid
 erDiagram
-${generateEntities(schema)}
+${entities.join("\n")}
 \`\`\`
 `;
 }
 
 function generateEntities(schema) {
-  return Object.entries(schema.schema).map(([schemaName, definition]) =>
-    generateEntity(schemaName, definition)
-  );
+  return Object.entries(schema.schema)
+    .map(([schemaName, definition]) =>
+      generateEntity(schemaName, definition.mappings.properties)
+    )
+    .flat();
   // for (const [schemaName, definition] of Object.entries(schema.schema)) {
   //   const properties = definition.mappings.properties;
   //   const entityName = schemaName.toUpperCase().replace(/-/g, '_');
@@ -22,18 +26,37 @@ function generateEntities(schema) {
   // return mermaid;
 }
 
-function generateEntity(entityName, schema) {
-  return `
+function generateEntity(entityName, properties) {
+  const mappedProperties = Object.entries(properties).reduce(
+    (acc, currentProperty) => {
+      const { currentEntityProps, extraEntities } = acc;
+
+      const [propName, propDefinition] = currentProperty;
+      const { type } = propDefinition;
+
+      if (type === "object") {
+        extraEntities.push(generateEntity(propName, propDefinition.properties));
+        extraEntities.push(generateRelationship(propName, entityName));
+      } else {
+        currentEntityProps.push(`        ${type} ${propName}`);
+      }
+
+      return { currentEntityProps, extraEntities };
+    },
+    { currentEntityProps: [], extraEntities: [] }
+  );
+
+  const { currentEntityProps, extraEntities } = mappedProperties;
+  const currentEntity = `
     ${entityName} {
-${generateProperties(schema.mappings.properties)}
-    }
-`;
+${currentEntityProps.join("\n")}
+    }`;
+
+  return [currentEntity, ...extraEntities];
 }
 
-function generateProperties(properties) {
-  return Object.entries(properties)
-    .map(([propName, { type }]) => `        ${type} ${propName}`)
-    .join("\n");
+function generateRelationship(childEntity, parentEntity) {
+  return `    ${parentEntity} ||--o{ ${childEntity} : has`;
 }
 
 // function convertProperties(properties, parentName = '') {

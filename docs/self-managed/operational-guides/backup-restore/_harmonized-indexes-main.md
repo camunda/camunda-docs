@@ -6,11 +6,11 @@ erDiagram
         keyword ownerType
         keyword resourceType
     }
-    camunda-authorization-permissions {
+    permissions {
         keyword type
         keyword resourceIds
     }
-    camunda-authorization ||--o{ camunda-authorization-permissions : has
+    camunda-authorization ||--o{ permissions : has
 
     camunda-mapping {
         keyword id
