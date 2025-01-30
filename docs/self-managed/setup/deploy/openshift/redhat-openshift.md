@@ -49,6 +49,10 @@ Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full 
 - [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
+- [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+  - Ensure at least **3 Elastic IPs** (one per availability zone).
+  - Verify quotas for **VPCs, EC2 instances, and storage**.
+  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
 
 ## Deploy Camunda 8 via Helm charts

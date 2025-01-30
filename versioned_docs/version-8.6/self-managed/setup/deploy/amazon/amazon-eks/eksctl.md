@@ -18,6 +18,10 @@ This guide provides a user-friendly approach for setting up and managing Amazon 
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
 - [AWS CLI (2.17+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
 - [eksctl (0.193+)](https://eksctl.io/getting-started/), a CLI tool for creating and managing Amazon EKS clusters.
+- [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+  - Ensure at least **3 Elastic IPs** (one per availability zone).
+  - Verify quotas for **VPCs, EC2 instances, and storage**.
+  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - This guide uses GNU/Bash for all the shell commands listed.
 
 ### Considerations
