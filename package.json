@@ -72,7 +72,7 @@
     "playwright": "^1.49.0",
     "prettier": "3.3.3",
     "replace-in-file": "^7.2.0",
-    "swc-loader": "^0.2.3"
+    "swc-loader": "^0.2.6"
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"
