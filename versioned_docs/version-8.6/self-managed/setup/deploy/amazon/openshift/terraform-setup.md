@@ -329,7 +329,7 @@ Terraform will now create the OpenShift cluster with all the necessary configura
 
 Depending on the installation path you have chosen, you can find the reference files used on this page:
 
-- **Standard installation:** [Reference Files](https://github.com/camunda/camunda-deployment-references/tree/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.6)
+- **Standard installation:** [Reference Files](https://github.com/camunda/camunda-deployment-references/tree/main/aws/rosa-hcp/camunda-versions/8.6)
 
 ## 2. Preparation for Camunda 8 installation
 
