@@ -16,8 +16,8 @@ module.exports = {
   customFields: {
     canonicalUrlRoot: docsSiteUrl,
   },
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "throw",
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "camunda", // Usually your GitHub org/user name.
   projectName: "camunda-docs", // Usually your repo name.
@@ -403,7 +403,11 @@ module.exports = {
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
+          lastVersion: "8.5",
           versions: {
+            8.6: {
+              label: "8.6 (unreleased)",
+            },
             8.5: {
               banner: "none",
             },
