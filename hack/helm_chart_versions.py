@@ -22,9 +22,6 @@ class HelmChartArtifact:
 
     def __dict__(self) -> dict:
         return {
-            # "version": self.version,
-            # "camunda_version": self.camunda_version,
-            # "release_notes": self.download,
             "links": [
                 {"link": self.link, "description": "Values.yaml"},
                 {"link": self.download, "description": "Release Notes"}
@@ -146,17 +143,9 @@ if __name__ == "__main__":
         export_filename = f"../versioned_docs/version-{version.version}/download-hub/{EXPORT_FILENAME}"
         print(f"Dumping version {version.version} to file {export_filename}")
         dump = {chart.version: chart.__dict__() for chart in version.charts}
-        # print(json.dumps(dump,
-        #     sort_keys=False,
-        #     indent=4,
-        #     separators=(',', ': ')
-        # ))
         save_dict_to_json(dump, export_filename)
 
         if version.version == LATEST_VERSION:
             export_filename = f"../docs/download-hub/{EXPORT_FILENAME}"
             print(f"Dumping version {version.version} to file {export_filename}")
             save_dict_to_json(dump, export_filename)
-        # print(version)
-
-    # breakpoint()
