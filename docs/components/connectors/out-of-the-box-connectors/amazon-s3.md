@@ -1,6 +1,6 @@
 ---
 id: amazon-s3
-sidebar_label: AWS S3 Connector
+sidebar_label: AWS S3
 title: Amazon S3 Connector
 description: Interact with Amazon S3 services from your BPMN process.
 ---

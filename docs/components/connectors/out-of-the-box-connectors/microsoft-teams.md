@@ -1,7 +1,7 @@
 ---
 id: microsoft-teams
 title: Microsoft Teams Connector
-sidebar_label: Microsoft Teams Connector
+sidebar_label: Microsoft Teams
 description: Work with Microsoft Teams from your BPMN process using the Microsoft Teams Connector. Learn about authentication, conversation type and method, and more.
 ---
 

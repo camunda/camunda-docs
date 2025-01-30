@@ -1,7 +1,7 @@
 ---
 id: asana
 title: Asana Connector
-sidebar_label: Asana Connector
+sidebar_label: Asana
 description: Manage Asana projects and tasks from your BPMN process. Learn how to create an Asana Connector task, and get started.
 ---
 

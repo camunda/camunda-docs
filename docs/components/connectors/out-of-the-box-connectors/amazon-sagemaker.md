@@ -1,6 +1,6 @@
 ---
 id: amazon-sagemaker
-sidebar_label: AWS SageMaker Connector
+sidebar_label: AWS SageMaker
 title: Amazon SageMaker Connector
 description: Interact with the Amazon SageMaker Connector from your BPMN process.
 ---

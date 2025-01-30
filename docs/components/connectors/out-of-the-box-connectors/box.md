@@ -1,6 +1,6 @@
 ---
 id: box
-sidebar_label: Box Connector
+sidebar_label: Box
 title: Box Connector
 description: Interact with the Box storage API.
 ---

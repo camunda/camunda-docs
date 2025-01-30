@@ -1,7 +1,7 @@
 ---
 id: microsoft-o365-mail
 title: Microsoft 365 Connector
-sidebar_label: Microsoft 365 Connector
+sidebar_label: Microsoft 365
 description: Send and read Microsoft 365 emails from your BPMN process.
 ---
 

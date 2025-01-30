@@ -1,6 +1,6 @@
 ---
 id: amazon-eventbridge
-sidebar_label: AWS EventBridge Connector
+sidebar_label: AWS EventBridge
 title: Amazon EventBridge Connector
 description: Send events to Amazon EventBridge from your BPMN process.
 ---

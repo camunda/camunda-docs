@@ -1,7 +1,7 @@
 ---
 id: operate
 title: Camunda Operate Connector
-sidebar_label: Camunda Operate Connector
+sidebar_label: Camunda Operate
 description: Fetch process execution data from Camunda Operate, a monitoring solution for Camunda 8.
 ---
 
