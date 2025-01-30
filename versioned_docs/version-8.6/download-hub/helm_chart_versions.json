@@ -1,0 +1,86 @@
+{
+  "11.1.1": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.1.1#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.1.1",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "11.1.0": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.1.0#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.1.0",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "11.0.4": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.0.4#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.0.4",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "11.0.3": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.0.3#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.0.3",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "11.0.2": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.0.2#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.0.2",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "11.0.1": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.0.1#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.0.1",
+        "description": "Release Notes"
+      }
+    ]
+  },
+  "11.0.0": {
+    "links": [
+      {
+        "link": "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.0.0#parameters",
+        "description": "Values.yaml"
+      },
+      {
+        "link": "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.0.0",
+        "description": "Release Notes"
+      }
+    ]
+  }
+}

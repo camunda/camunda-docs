@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import csv
+import os
 import re
 from collections import defaultdict
 from dataclasses import dataclass
@@ -8,6 +9,9 @@ from dataclasses import dataclass
 import json
 
 SOURCE_FILE="helm_chart_mappings.csv"  # exported from https://github.com/camunda/camunda-platform-helm/blob/main/version-matrix.sqlite, POC
+
+LATEST_VERSION="8.6"
+EXPORT_FILENAME="helm_chart_versions.json"
 
 @dataclass
 class HelmChartArtifact:
@@ -20,8 +24,11 @@ class HelmChartArtifact:
         return {
             # "version": self.version,
             # "camunda_version": self.camunda_version,
-            "release_notes": self.download,
-            "link": self.link
+            # "release_notes": self.download,
+            "links": [
+                {"link": self.link, "description": "Values.yaml"},
+                {"link": self.download, "description": "Release Notes"}
+            ]
         }
 
 @dataclass
@@ -101,6 +108,24 @@ def dump_c8_versions(releases_minor: list[CamundaVersion]) -> dict:
         for minor in releases_minor
     }
 
+def save_dict_to_json(data, file_path):
+    print(f"Saving to file {file_path}")
+
+    directory = os.path.dirname(file_path)
+
+    if directory and not os.path.exists(directory):
+        print(f"Directory '{directory}' does not exist. Skipping JSON save.")
+        return
+
+    if not os.path.exists(file_path):
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write("{}")
+
+    with open(file_path, "w", encoding="utf-8") as file:
+        json.dump(data, file, indent=4, ensure_ascii=False)
+
+    print(f"JSON file '{file_path}' saved successfully!")
+
 if __name__ == "__main__":
     parsed_data = parse_csv(SOURCE_FILE)
     display_parsed_data(parsed_data)
@@ -116,5 +141,22 @@ if __name__ == "__main__":
         indent=4,
         separators=(',', ': ')
     ))
+
+    for version in result:
+        export_filename = f"../versioned_docs/version-{version.version}/download-hub/{EXPORT_FILENAME}"
+        print(f"Dumping version {version.version} to file {export_filename}")
+        dump = {chart.version: chart.__dict__() for chart in version.charts}
+        # print(json.dumps(dump,
+        #     sort_keys=False,
+        #     indent=4,
+        #     separators=(',', ': ')
+        # ))
+        save_dict_to_json(dump, export_filename)
+
+        if version.version == LATEST_VERSION:
+            export_filename = f"../docs/download-hub/{EXPORT_FILENAME}"
+            print(f"Dumping version {version.version} to file {export_filename}")
+            save_dict_to_json(dump, export_filename)
+        # print(version)
 
     # breakpoint()
