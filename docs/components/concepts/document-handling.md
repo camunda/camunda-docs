@@ -78,7 +78,7 @@ The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk
 For the following outbound Connectors, you may include a **Request body** under **Payload** in the properties panel to send with your request:
 
 - [REST](/components/connectors/protocol/rest.md) - Supports storing the response as a document.
-- [Email](/components/connectors/out-of-the-box-connectors/email.md) - Supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents.
+- [Email](/components/connectors/out-of-the-box-connectors/email.md#response-structure-1) - Supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents.
 - [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md) - Can read the input document directly from the Camunda document store.
 - [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) - Supports consuming documents as inputs for conversations.
 - [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md) - Supports uploading documents from (or downloading documents to) the Camunda document store.
