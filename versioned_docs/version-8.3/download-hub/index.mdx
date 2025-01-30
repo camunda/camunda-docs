@@ -6,7 +6,6 @@ description: One-stop shop for all Camunda 8 downloads
 import {
   C8Run,
   DockerCompose,
-  HelmLocal,
   Helm,
 } from "@site/src/components/CamundaDistributions/DistributionCards";
 
@@ -20,23 +19,17 @@ A one-click Java application with BPMN Workflow Engine, DMN Decision Engine, Tas
 
 <C8Run />
 
-[More details ...](../../../docs/self-managed/setup/deploy/local/c8run)
-
 ### Docker Compose
 
 A Docker Compose configuration to run Camunda Self-Managed components (Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors).
 
 <DockerCompose />
 
-[More details ...](../../../docs/self-managed/setup/deploy/local/docker-compose)
-
 ### Kubernetes
 
 We recommend using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in development too.
 
-<HelmLocal />
-
-[More details ...](../../../docs/self-managed/setup/deploy/local/local-kubernetes-cluster)
+<Helm />
 
 ## Production Setup
 
@@ -45,8 +38,6 @@ We recommend using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed 
 We recommend using Kubernetes and Helm to deploy and run Camunda 8 Self-Managed in production.
 
 <Helm />
-
-[More details ...](../../../docs/self-managed/setup/install)
 
 ## Tools
 
