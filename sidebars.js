@@ -678,7 +678,7 @@ module.exports = {
             "components/early-access/alpha/sap/sap-integration",
             "components/early-access/alpha/sap/odata-connector",
             "components/early-access/alpha/sap/rfc-connector",
-            "components/early-access/alpha/sap/btp-integration",
+            "components/early-access/alpha/sap/btp-plugin",
           ],
         },
       ],
