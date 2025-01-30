@@ -250,9 +250,8 @@ export class TasklistModule implements OnModuleInit {
     logger.log("Tasklist credentials fetched");
 
     axiosRef.defaults.baseURL = config.get("TASKLIST_API_ADDRESS");
-    axiosRef.defaults.headers[
-      "Authorization"
-    ] = `Bearer ${credentials.access_token}`;
+    axiosRef.defaults.headers["Authorization"] =
+      `Bearer ${credentials.access_token}`;
     axiosRef.defaults.headers["Content-Type"] = "application/json";
     setTimeout(this.onModuleInit.bind(this), credentials.expires_in * 1000); // we need convert minutes to milliseconds
   }
