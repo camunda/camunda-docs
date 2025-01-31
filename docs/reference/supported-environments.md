@@ -82,6 +82,8 @@ For details on typical volume type usage, refer to the following examples specif
 
 ### Helm version matrix
 
+As of the Camunda 8.4 release, the Camunda 8 Helm chart version is independent from the application version (for example, the Camunda 8.4 release uses the Helm chart version 9.0.0). The Helm chart is updated with each application release.
+
 | Camunda version | Helm chart version                                                                       |
 | --------------- | ---------------------------------------------------------------------------------------- |
 | Camunda 8.6.x   | [Helm chart 11.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.6/)  |
