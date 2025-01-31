@@ -90,8 +90,6 @@ As of the Camunda 8.4 release, the Camunda 8 Helm chart version is independent f
 | Camunda 8.5.x   | [Helm chart 10.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.5/)  |
 | Camunda 8.4.x   | [Helm chart 9.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.4/)   |
 | Camunda 8.3.x   | [Helm chart 8.3.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.3/) |
-| Camunda 3.10.x  | [Helm chart 8.2.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.2/) |
-| Camunda 3.7.x   | [Helm chart 8.0.0](https://helm.camunda.io/camunda-platform/version-matrix/camunda-1.3/) |
 
 ## Component requirements
 
