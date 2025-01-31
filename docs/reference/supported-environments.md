@@ -108,19 +108,20 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 This matrix shows which component versions work together:
 
-| Design                | Automate    |                                                                            | Improve         |
-| --------------------- | ----------- | -------------------------------------------------------------------------- | --------------- |
-| Desktop Modeler 5.28+ | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.6.x | Optimize 8.6.x  |
-| Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
-| Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
-| Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
-| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
-| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x                                     | Optimize 3.7.x  |
+| Design                | Automate    |                                                                            | Improve         | Deploy                                                                                   |
+| --------------------- | ----------- | -------------------------------------------------------------------------- | --------------- | ---------------------------------------------------------------------------------------- |
+| Desktop Modeler 5.28+ | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.6.x | Optimize 8.6.x  | [Helm chart 11.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.6/)  |
+| Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  | [Helm chart 10.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.5/)  |
+| Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  | [Helm chart 9.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.4/)   |
+| Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  | [Helm chart 8.3.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.3/) |
+| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x | [Helm chart 8.2.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.2/) |
+| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x                                     | Optimize 3.7.x  | [Helm chart 8.0.0](https://helm.camunda.io/camunda-platform/version-matrix/camunda-1.3/) |
 | -                     | -           | -                                                                          | -               |
-| Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
-| Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
-| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
-| Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
+| Web Modeler 8.6.x     | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.5.x | Optimize 8.6.x  | [Helm chart 11.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.6/)  |
+| Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  | [Helm chart 10.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.5/)  |
+| Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  | [Helm chart 9.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.4/)   |
+| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  | [Helm chart 8.3.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.3/) |
+| Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x | [Helm chart 8.2.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.2/) |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
