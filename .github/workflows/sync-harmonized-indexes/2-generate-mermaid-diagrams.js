@@ -38,7 +38,7 @@ function generateEntity(entityName, properties) {
       const [propName, propDefinition] = currentProperty;
       const { type } = propDefinition;
 
-      if (type === "object") {
+      if (type === "object" && propDefinition.properties !== undefined) {
         extraEntities.push(generateEntity(propName, propDefinition.properties));
         extraEntities.push(generateRelationship(propName, entityName));
       } else {

@@ -1,5 +1,5 @@
 // @ts-check
-const { generateMermaidDiagrams } = require("./generate-mermaid-diagrams.js");
+const { generateMermaidDiagrams } = require("./2-generate-mermaid-diagrams.js");
 
 // /** @type {Array<import("./identify-missing-changes").VersionConfig>} */
 // let versionConfig;

@@ -21,7 +21,6 @@ erDiagram
         long memberKey
         join join
     }
-    camunda-group ||--o{ camunda-group: "group:member"
 
     camunda-mapping {
         keyword id
@@ -134,6 +133,10 @@ erDiagram
         long order
         text version
     }
+```
+
+```mermaid
+erDiagram
 
     operate-process {
         keyword bpmnProcessId
@@ -177,7 +180,6 @@ erDiagram
         boolean isDeleted
         text schema
     }
-
 ```
 
 ```mermaid

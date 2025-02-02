@@ -345,7 +345,4 @@ erDiagram
         keyword action
         keyword changedAttributes
     }
-    tasklist-task ||--o{ tasklist-task: "task:localVariable"
-    tasklist-task ||--o{ tasklist-task: "process:[variable,task]"
-
 ```
