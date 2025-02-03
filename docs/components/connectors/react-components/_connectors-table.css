@@ -121,6 +121,9 @@ a.connector-card {
   margin-top: 0;
   padding: 0;
 }
+[data-theme="dark"] .connector-card img {
+  background-color: transparent;
+}
 
 .connector-card h3 {
   margin: 0;
@@ -187,6 +190,9 @@ a.connector-card {
   padding: 0;
   margin: 0;
   padding-right: 10px;
+}
+[data-theme="dark"] .connector-small img {
+  background-color: transparent;
 }
 
 .connector-small:hover {
@@ -262,6 +268,10 @@ a.connector-small-link {
   opacity: 0;
   transform: translateY(-20px);
   animation: fadeInTop 2s forwards;
+  background-color: transparent;
+}
+[data-theme="dark"] .fade-in-top-image {
+  background-color: transparent !important;
 }
 
 @keyframes fadeInTop {
