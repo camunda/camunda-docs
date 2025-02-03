@@ -1,6 +1,7 @@
 ---
 id: rest
 title: REST Connector
+sidebar_label: REST
 description: Make a request to a REST API and use the response in the next steps of your process.
 ---
 
@@ -232,6 +233,10 @@ The following fields are available in the `response` variable:
 
 :::note
 Starting from version 8.7.0, the REST Connector supports storing the response as a document. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
+
+:::note
+If your endpoint returns multiple Set-Cookie headers and you need to capture all of them, set `groupSetCookieHeaders` to `true` to aggregate them into a list.
 :::
 
 ## Output mapping

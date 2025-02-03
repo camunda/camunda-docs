@@ -2,6 +2,7 @@
 id: automation-anywhere
 title: Automation Anywhere Connector
 description: Orchestrate your Automation Anywhere queue items from your BPMN process.
+sidebar_label: Automation Anywhere
 ---
 
 The **Automation Anywhere Connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/) to add work items to the queue and obtain work item results.

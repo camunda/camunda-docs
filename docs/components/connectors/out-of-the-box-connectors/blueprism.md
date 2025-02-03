@@ -2,6 +2,7 @@
 id: blueprism
 title: Blue Prism Connector
 description: Orchestrate your Blue Prism queue items from your BPMN process.
+sidebar_label: Blue Prism
 ---
 
 The **Blue Prism Connector** allows you to orchestrate a Blue Prism queue from your BPMN process with [Blue Prism RPA](https://www.blueprism.com/).

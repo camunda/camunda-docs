@@ -5,650 +5,115 @@ description: "Search for process definitions based on given criteria."
 sidebar_label: "Query process definitions"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
+import ApiTabs from "@theme/ApiTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import ParamsDetails from "@theme/ParamsDetails";
-import RequestSchema from "@theme/RequestSchema";
-import StatusCodes from "@theme/StatusCodes";
+import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem";
+import SchemaTabs from "@theme/SchemaTabs";
+import Markdown from "@theme/Markdown";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
-import Heading from "@theme/Heading";
 
-<Heading
-  as={"h1"}
-  className={"openapi__heading"}
-  children={"Query process definitions"}
-></Heading>
+<h1 className={"openapi__heading"}>Query process definitions</h1>
 
 <MethodEndpoint
   method={"post"}
   path={"/process-definitions/search"}
-  context={"endpoint"}
 ></MethodEndpoint>
 
 Search for process definitions based on given criteria.
 
-<Heading
-  id={"request"}
-  as={"h2"}
-  className={"openapi-tabs__heading"}
-  children={"Request"}
-></Heading>
+## Request
 
-<ParamsDetails parameters={undefined}></ParamsDetails>
+<MimeTabs className={"openapi-tabs__mime"} schemaType={"request"}><TabItem label={"application/json"} value={"application/json"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
 
-<RequestSchema
-  title={"Body"}
-  body={{
-    required: false,
-    content: {
-      "application/json": {
-        schema: {
-          allOf: [
-            {
-              type: "object",
-              properties: {
-                page: {
-                  description: "Pagination criteria.",
-                  allOf: [
-                    {
-                      type: "object",
-                      properties: {
-                        from: {
-                          description:
-                            "The index of items to start searching from.",
-                          type: "integer",
-                          format: "int32",
-                        },
-                        limit: {
-                          description:
-                            "The maximum number of items to return in one request.",
-                          type: "integer",
-                          format: "int32",
-                        },
-                        searchAfter: {
-                          description:
-                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
-                          type: "array",
-                          items: { type: "object" },
-                        },
-                        searchBefore: {
-                          description:
-                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
-                          type: "array",
-                          items: { type: "object" },
-                        },
-                      },
-                      title: "SearchQueryPageRequest",
-                    },
-                  ],
-                  type: "object",
-                },
-              },
-              title: "SearchQueryRequest",
-            },
-          ],
-          type: "object",
-          properties: {
-            sort: {
-              description: "Sort field criteria.",
-              type: "array",
-              items: {
-                type: "object",
-                properties: {
-                  field: {
-                    description: "The field to sort by.",
-                    type: "string",
-                    enum: [
-                      "processDefinitionKey",
-                      "name",
-                      "resourceName",
-                      "version",
-                      "versionTag",
-                      "processDefinitionId",
-                      "tenantId",
-                    ],
-                  },
-                  order: {
-                    description:
-                      "The order in which to sort the related field.",
-                    type: "string",
-                    enum: ["ASC", "DESC"],
-                    default: "ASC",
-                    title: "SortOrderEnum",
-                  },
-                },
-                required: ["field"],
-                title: "ProcessDefinitionSearchQuerySortRequest",
-              },
-            },
-            filter: {
-              description: "The process definition search filters.",
-              allOf: [
-                {
-                  description: "Process definition search filter.",
-                  type: "object",
-                  properties: {
-                    processDefinitionKey: {
-                      description: "The key for this process definition.",
-                      type: "integer",
-                      format: "int64",
-                    },
-                    name: {
-                      description: "Name of this process definition.",
-                      type: "string",
-                    },
-                    resourceName: {
-                      description: "Resource name of this process definition.",
-                      type: "string",
-                    },
-                    version: {
-                      description: "Version of this process definition.",
-                      type: "integer",
-                      format: "int32",
-                    },
-                    versionTag: {
-                      description: "Version tag of this process definition.",
-                      type: "string",
-                    },
-                    processDefinitionId: {
-                      description:
-                        "Process definition ID of this process definition.",
-                      type: "string",
-                    },
-                    tenantId: {
-                      description: "Tenant ID of this process definition.",
-                      type: "string",
-                    },
-                  },
-                  title: "ProcessDefinitionFilterRequest",
-                },
-              ],
-            },
-          },
-          title: "ProcessDefinitionSearchQueryRequest",
-        },
-      },
-    },
-  }}
-></RequestSchema>
+Sort field criteria.
 
-<StatusCodes
-  id={undefined}
-  label={undefined}
-  responses={{
-    "200": {
-      description: "The process definition search result.\n",
-      content: {
-        "application/json": {
-          schema: {
-            type: "object",
-            allOf: [
-              {
-                type: "object",
-                properties: {
-                  page: {
-                    description:
-                      "Pagination information about the search results.",
-                    allOf: [
-                      {
-                        description:
-                          "Pagination information about the search results.",
-                        type: "object",
-                        properties: {
-                          totalItems: {
-                            description: "Total items matching the criteria.",
-                            type: "integer",
-                            format: "int64",
-                          },
-                          firstSortValues: {
-                            description:
-                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
-                            type: "array",
-                            items: { type: "object" },
-                          },
-                          lastSortValues: {
-                            description:
-                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
-                            type: "array",
-                            items: { type: "object" },
-                          },
-                        },
-                        title: "SearchQueryPageResponse",
-                      },
-                    ],
-                  },
-                },
-                title: "SearchQueryResponse",
-              },
-            ],
-            properties: {
-              items: {
-                description: "The matching process definitions.",
-                type: "array",
-                items: {
-                  type: "object",
-                  allOf: [
-                    {
-                      description: "Base properties for ProcessDefinitionItem.",
-                      type: "object",
-                      properties: {
-                        name: {
-                          description: "Name of this process definition.",
-                          type: "string",
-                        },
-                        resourceName: {
-                          description:
-                            "Resource name for this process definition.",
-                          type: "string",
-                        },
-                        version: {
-                          description: "Version of this process definition.",
-                          type: "integer",
-                          format: "int32",
-                        },
-                        versionTag: {
-                          description:
-                            "Version tag of this process definition.",
-                          type: "string",
-                        },
-                        processDefinitionId: {
-                          description:
-                            "Process definition ID of this process definition.",
-                          type: "string",
-                        },
-                        tenantId: {
-                          description: "Tenant ID of this process definition.",
-                          type: "string",
-                        },
-                      },
-                      title: "ProcessDefinitionItemBase",
-                    },
-                  ],
-                  properties: {
-                    processDefinitionKey: {
-                      description: "The key for this process definition.",
-                      type: "string",
-                    },
-                  },
-                  title: "ProcessDefinitionResult",
-                },
-              },
-            },
-            title: "ProcessDefinitionSearchQueryResult",
-          },
-        },
-        "application/vnd.camunda.api.keys.number+json": {
-          schema: {
-            deprecated: true,
-            type: "object",
-            allOf: [
-              {
-                type: "object",
-                properties: {
-                  page: {
-                    description:
-                      "Pagination information about the search results.",
-                    allOf: [
-                      {
-                        description:
-                          "Pagination information about the search results.",
-                        type: "object",
-                        properties: {
-                          totalItems: {
-                            description: "Total items matching the criteria.",
-                            type: "integer",
-                            format: "int64",
-                          },
-                          firstSortValues: {
-                            description:
-                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
-                            type: "array",
-                            items: { type: "object" },
-                          },
-                          lastSortValues: {
-                            description:
-                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
-                            type: "array",
-                            items: { type: "object" },
-                          },
-                        },
-                        title: "SearchQueryPageResponse",
-                      },
-                    ],
-                  },
-                },
-                title: "SearchQueryResponse",
-              },
-            ],
-            properties: {
-              items: {
-                description: "The matching process definitions.",
-                type: "array",
-                items: {
-                  deprecated: true,
-                  type: "object",
-                  allOf: [
-                    {
-                      description: "Base properties for ProcessDefinitionItem.",
-                      type: "object",
-                      properties: {
-                        name: {
-                          description: "Name of this process definition.",
-                          type: "string",
-                        },
-                        resourceName: {
-                          description:
-                            "Resource name for this process definition.",
-                          type: "string",
-                        },
-                        version: {
-                          description: "Version of this process definition.",
-                          type: "integer",
-                          format: "int32",
-                        },
-                        versionTag: {
-                          description:
-                            "Version tag of this process definition.",
-                          type: "string",
-                        },
-                        processDefinitionId: {
-                          description:
-                            "Process definition ID of this process definition.",
-                          type: "string",
-                        },
-                        tenantId: {
-                          description: "Tenant ID of this process definition.",
-                          type: "string",
-                        },
-                      },
-                      title: "ProcessDefinitionItemBase",
-                    },
-                  ],
-                  properties: {
-                    processDefinitionKey: {
-                      description: "The key for this process definition.",
-                      type: "integer",
-                      format: "int64",
-                    },
-                  },
-                  title: "ProcessDefinitionItem",
-                },
-              },
-            },
-            title: "ProcessDefinitionSearchQueryResponse",
-          },
-        },
-        "application/vnd.camunda.api.keys.string+json": {
-          schema: {
-            type: "object",
-            allOf: [
-              {
-                type: "object",
-                properties: {
-                  page: {
-                    description:
-                      "Pagination information about the search results.",
-                    allOf: [
-                      {
-                        description:
-                          "Pagination information about the search results.",
-                        type: "object",
-                        properties: {
-                          totalItems: {
-                            description: "Total items matching the criteria.",
-                            type: "integer",
-                            format: "int64",
-                          },
-                          firstSortValues: {
-                            description:
-                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
-                            type: "array",
-                            items: { type: "object" },
-                          },
-                          lastSortValues: {
-                            description:
-                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
-                            type: "array",
-                            items: { type: "object" },
-                          },
-                        },
-                        title: "SearchQueryPageResponse",
-                      },
-                    ],
-                  },
-                },
-                title: "SearchQueryResponse",
-              },
-            ],
-            properties: {
-              items: {
-                description: "The matching process definitions.",
-                type: "array",
-                items: {
-                  type: "object",
-                  allOf: [
-                    {
-                      description: "Base properties for ProcessDefinitionItem.",
-                      type: "object",
-                      properties: {
-                        name: {
-                          description: "Name of this process definition.",
-                          type: "string",
-                        },
-                        resourceName: {
-                          description:
-                            "Resource name for this process definition.",
-                          type: "string",
-                        },
-                        version: {
-                          description: "Version of this process definition.",
-                          type: "integer",
-                          format: "int32",
-                        },
-                        versionTag: {
-                          description:
-                            "Version tag of this process definition.",
-                          type: "string",
-                        },
-                        processDefinitionId: {
-                          description:
-                            "Process definition ID of this process definition.",
-                          type: "string",
-                        },
-                        tenantId: {
-                          description: "Tenant ID of this process definition.",
-                          type: "string",
-                        },
-                      },
-                      title: "ProcessDefinitionItemBase",
-                    },
-                  ],
-                  properties: {
-                    processDefinitionKey: {
-                      description: "The key for this process definition.",
-                      type: "string",
-                    },
-                  },
-                  title: "ProcessDefinitionResult",
-                },
-              },
-            },
-            title: "ProcessDefinitionSearchQueryResult",
-          },
-        },
-      },
-    },
-    "400": {
-      description:
-        "The process definition search query failed. More details are provided in the response body.\n",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-              },
-              instance: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the origin of the problem.",
-              },
-            },
-            title: "ProblemDetail",
-          },
-        },
-      },
-    },
-    "401": {
-      description: "The request lacks valid authentication credentials.",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-              },
-              instance: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the origin of the problem.",
-              },
-            },
-            title: "ProblemDetail",
-          },
-        },
-      },
-    },
-    "403": {
-      description: "Forbidden. The request is not allowed.",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-              },
-              instance: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the origin of the problem.",
-              },
-            },
-            title: "ProblemDetail",
-          },
-        },
-      },
-    },
-    "500": {
-      description: "An internal error occurred while processing the request.\n",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-              },
-              instance: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the origin of the problem.",
-              },
-            },
-            title: "ProblemDetail",
-          },
-        },
-      },
-    },
-  }}
-></StatusCodes>
+</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={"**Possible values:** [`processDefinitionKey`, `name`, `resourceName`, `version`, `versionTag`, `processDefinitionId`, `tenantId`]"} schema={{"description":"The field to sort by.","type":"string","enum":["processDefinitionKey","name","resourceName","version","versionTag","processDefinitionId","tenantId"]}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","type":"string","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Pagination criteria.
+
+</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32","default":100}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Process definition search filter. Key attributes as string values.
+
+</div><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key for this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Name of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Resource name of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Version of this process definition.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"versionTag"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Version tag of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Process definition ID of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Tenant ID of this process definition.","type":"string"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Sort field criteria.
+
+</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={"**Possible values:** [`processDefinitionKey`, `name`, `resourceName`, `version`, `versionTag`, `processDefinitionId`, `tenantId`]"} schema={{"description":"The field to sort by.","type":"string","enum":["processDefinitionKey","name","resourceName","version","versionTag","processDefinitionId","tenantId"]}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","type":"string","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Pagination criteria.
+
+</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32","default":100}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property openapi-schema__strikethrough"}>filter</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__deprecated"}>deprecated</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Process definition search filter.
+
+</div><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key for this process definition.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Name of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Resource name of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Version of this process definition.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"versionTag"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Version tag of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Process definition ID of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Tenant ID of this process definition.","type":"string"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Sort field criteria.
+
+</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={"**Possible values:** [`processDefinitionKey`, `name`, `resourceName`, `version`, `versionTag`, `processDefinitionId`, `tenantId`]"} schema={{"description":"The field to sort by.","type":"string","enum":["processDefinitionKey","name","resourceName","version","versionTag","processDefinitionId","tenantId"]}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","type":"string","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Pagination criteria.
+
+</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32","default":100}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Process definition search filter. Key attributes as string values.
+
+</div><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key for this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Name of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Resource name of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Version of this process definition.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"versionTag"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Version tag of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Process definition ID of this process definition.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Tenant ID of this process definition.","type":"string"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+
+The process definition search result.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Pagination information about the search results.
+
+</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+The matching process definitions.
+
+</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key for this process definition.","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"processDefinitionKey\": \"string\",\n      \"name\": \"string\",\n      \"resourceName\": \"string\",\n      \"version\": 0,\n      \"versionTag\": \"string\",\n      \"processDefinitionId\": \"string\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Pagination information about the search results.
+
+</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+The matching process definitions.
+
+</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key for this process definition.","type":"integer","format":"int64"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"processDefinitionKey\": 0,\n      \"name\": \"string\",\n      \"resourceName\": \"string\",\n      \"version\": 0,\n      \"versionTag\": \"string\",\n      \"processDefinitionId\": \"string\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+Pagination information about the search results.
+
+</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+
+The matching process definitions.
+
+</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key for this process definition.","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"processDefinitionKey\": \"string\",\n      \"name\": \"string\",\n      \"resourceName\": \"string\",\n      \"version\": 0,\n      \"versionTag\": \"string\",\n      \"processDefinitionId\": \"string\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
+
+The process definition search query failed. More details are provided in the response body.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
+
+The request lacks valid authentication credentials.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
+
+Forbidden. The request is not allowed.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
+
+An internal error occurred while processing the request.
+
+</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>

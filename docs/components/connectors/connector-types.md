@@ -1,14 +1,10 @@
 ---
 id: connector-types
-title: Types of Connectors
+title: Connector types
 description: "Connectors come in type and subtypes that describe their functionality."
 ---
 
 Connectors are categorized by the direction data flows into or out of Camunda 8.
-
-:::note
-Looking for pre-built, [Out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)?
-:::
 
 ## Outbound Connectors
 
