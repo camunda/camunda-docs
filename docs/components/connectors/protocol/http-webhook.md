@@ -1,7 +1,7 @@
 ---
 id: http-webhook
 title: HTTP Webhook Connector
-sidebar_label: HTTP Webhook Connector
+sidebar_label: HTTP Webhook
 description: Start a process instance with your custom webhook configuration, triggered by an external HTTP call.
 ---
 
