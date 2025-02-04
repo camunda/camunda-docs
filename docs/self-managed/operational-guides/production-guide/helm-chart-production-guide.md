@@ -1,5 +1,5 @@
 ---
-id: production-guide
+id: helm-chart-production-guide
 title: "Helm Chart Production Guide"
 sidebar_label: "Helm Chart Production Guide"
 description: "Learn how to set up the helm chart in a production setting."
@@ -7,7 +7,7 @@ description: "Learn how to set up the helm chart in a production setting."
 
 ## Overview
 
-This guide provides a simplified and streamlined architecture for core Camunda 8 applications using the Camunda Helm Chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
+This guide provides a simplified and streamlined architecture for Camunda 8 using the Camunda Helm Chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
 
 The goal of this guide is to give you a **scenario-based, production focused, step-by-step guide** for setting up the Camunda Helm Chart. We will use AWS as a reference here but the guide would work with other supported cloud providers and their comparable services as well. By following this guide, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm Chart.
 
@@ -36,7 +36,7 @@ Ensure all prerequisites are in place to avoid issues during installation or upg
 ## Architecture Overview
 
 Below is the high-level architecture diagram for the base production setup _(click on the image to open the PDF version)_:
-[![Infrastructure Diagram ROSA Single-Region](./assets/smarch.jpg)](./assets/smarch.pdf)
+[![Infrastructure Diagram ROSA Single-Region](../assets/smarch.jpg)](./assets/smarch.pdf)
 
 If you would like to learn more about the architecture setup, please refer to the [About Self Managed](/docs/self-managed/about-self-managed/#architecture) and [Camunda 8 reference architectures](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console) documents.
 
@@ -108,7 +108,7 @@ core:
 
 For more information on the Ingress setup, please refer to our [Ingress setup guide](/self-managed/setup/guides/ingress-setup.md)
 
-### Identity Provider Integration:
+### Identity Provider Integration
 
 Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use AWS Simple Active Directory. Here is an example configuration to add to your `production-values.yaml` file:
 
@@ -162,7 +162,7 @@ In our scenario the Core component, and the Optimize importer communicate with a
 
 It is expected that you already have one Amazon OpenSearch instance and two databases on Amazon Aurora PostgreSQL ready to use. Complete with a username, password, and URL. If not, refer to the guides in the prerequisites section.
 
-#### Connecting to Amazon OpenSearch:
+#### Connecting to Amazon OpenSearch
 
 ```yaml
 global:
@@ -184,7 +184,7 @@ elasticsearch:
 
 You can see that we have globally disabled all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false` and also disable internal Elasticsearch through `elasticsearch.enabled: false`.
 
-#### Connecting to External Database for Identity:
+#### Connecting to External Database for Identity
 
 Here is how to configure Identity with external Amazon Aurora PostgreSQL:
 
@@ -202,7 +202,7 @@ identity:
 
 Please make sure to correctly define the host, and port.
 
-#### Connecting to External Database for Web Modeler:
+#### Connecting to External Database for Web Modeler
 
 Here is how to configure Web Modeler with external Amazon Aurora PostgreSQL:
 
