@@ -1,15 +1,15 @@
 ---
 id: helm-chart-production-guide
-title: "Helm Chart Production Guide"
-sidebar_label: "Helm Chart Production Guide"
+title: "Helm chart Production Guide"
+sidebar_label: "Helm chart Production Guide"
 description: "Learn how to set up the helm chart in a production setting."
 ---
 
 ## Overview
 
-This guide provides a simplified and streamlined architecture for Camunda 8 using the Camunda Helm Chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
+This guide provides a simplified and streamlined architecture for Camunda 8 using the Camunda Helm chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
 
-The goal of this guide is to give you a **scenario-based, production focused, step-by-step guide** for setting up the Camunda Helm Chart. We will use AWS as a reference here but the guide would work with other supported cloud providers and their comparable services as well. By following this guide, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm Chart.
+The goal of this guide is to give you a **scenario-based, production focused, step-by-step guide** for setting up the Camunda Helm chart. We will use AWS as a reference here but the guide would work with other supported cloud providers and their comparable services as well. By following this guide, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
 
 ## Prerequisites
 
@@ -53,11 +53,11 @@ kubectl create namespace management
 kubectl create namespace orchestration
 ```
 
-Within the `management` namespace (Web Modeler and Console), we will install Identity, Console, and all the Web Modeler components. Within the `orchestration` namespace, we will install the Camunda Orchestration Core component, along with Connectors and Optimize importer. We do not have to worry about installing each component separately since that will be handled by the Helm Chart automatically. For more information on the Orchestration Cluster vs Web Modeler and Console, please review this [guide](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console)
+Within the `management` namespace (Web Modeler and Console), we will install Identity, Console, and all the Web Modeler components. Within the `orchestration` namespace, we will install the Camunda Orchestration Core component, along with Connectors and Optimize importer. We do not have to worry about installing each component separately since that will be handled by the Helm chart automatically. For more information on the Orchestration Cluster vs Web Modeler and Console, please review this [guide](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console)
 
 #### Installing the Helm Chart
 
-The Camunda Helm Chart can be installed using the following command:
+The Camunda Helm chart can be installed using the following command:
 
 ```bash
 # This will add our chart repository so you can pull from it
@@ -156,7 +156,7 @@ If you would like some more guidance relating to authentication, refer to the [C
 
 ### Connect External Databases
 
-The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm Chart provides external, dependency Helm Charts for Databases such as [Bitnami Elasticsearch Helm Chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm Chart](https://artifacthub.io/packages/helm/bitnami/postgresql). Within a production setting, these dependency charts should be disabled, and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
+The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm chart provides external, dependency Helm charts for Databases such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). Within a production setting, these dependency charts should be disabled, and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
 In our scenario the Core component, and the Optimize importer communicate with a singular Amazon OpenSearch instance. On the other hand, the identity and web-modeler components are connected to separate databases on the Amazon Aurora PostgreSQL instances.
 
@@ -217,7 +217,7 @@ webModeler:
 
 The `existingSecret` can be used to specify an existing Kubernetes secret with the password.
 
-If you would like further information on connecting to external databases, we have a number of guides on doing so with the Camunda Helm Chart:
+If you would like further information on connecting to external databases, we have a number of guides on doing so with the Camunda Helm chart:
 
 - [Using existing Elasticsearch](/self-managed/setup/guides/using-existing-elasticsearch.md)
 - [Using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md)
@@ -252,7 +252,7 @@ In order to configure backups, please refer to the [backup guide](/self-managed/
 
 ## Scaling and Performance
 
-At this point you should already have a solid base to run your platform in a production setting. The rest of this guide gives you general Kubernetes based guidance on configuration of the Camunda Helm Chart for long-term maintenance.
+At this point you should already have a solid base to run your platform in a production setting. The rest of this guide gives you general Kubernetes based guidance on configuration of the Camunda Helm chart for long-term maintenance.
 
 Here are some points to keep in mind when considering scalability:
 
@@ -292,7 +292,7 @@ Here are some points to keep in mind when considering reliability:
 
 - Check node affinity and tolerations. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) to modify the node affinity and tolerations.
 
-For example, this is the default affinity configuration for the Core Pod in the Camunda Helm Chart:
+For example, this is the default affinity configuration for the Core Pod in the Camunda Helm chart:
 
 ```
 affinity:
@@ -325,7 +325,7 @@ core:
 ```
 
 - Version Management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/docs/reference/release-notes/) for security patches or critical updates.
-- Secrets should be created prior to installing the Helm Chart so they can be referenced as existing secrets when installing the Helm Chart. In this scenario we are going to auto-generate the secrets. The following can be added to your `production-values.yaml`:
+- Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets when installing the Helm chart. In this scenario we are going to auto-generate the secrets. The following can be added to your `production-values.yaml`:
 
 ```yaml
 global:
@@ -334,7 +334,7 @@ secrets:
   name: "camunda-credentials"
 ```
 
-A secret called `camunda-credentials` will be generated. It will include all the needed secret values for the Camunda Helm Chart.
+A secret called `camunda-credentials` will be generated. It will include all the needed secret values for the Camunda Helm chart.
 
 Please refer to the [Kuberentes documentation](https://kubernetes.io/docs/concepts/configuration/secret/) on how to create a secret.
 
@@ -342,7 +342,7 @@ Please refer to the [Kuberentes documentation](https://kubernetes.io/docs/concep
 The `camunda-credentials` generated secret will not be deleted if the helm chart is uninstalled
 :::
 
-- When upgrading the Camunda Helm Chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version elease notes before upgrading and perform the upgrade on a test environment first before attempting in production.
+- When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version elease notes before upgrading and perform the upgrade on a test environment first before attempting in production.
 - Make sure to not store any state or important, long term business data in the local file system of the container. A pod is transient, if the pod is restarted then the data will get wiped. It is better to create a volume and volume mount instead. Here is some example configuration for the core component to create persistent storage:
 
 ```yaml
@@ -393,7 +393,7 @@ You should only enable the auto-mounting of a service account token when the app
 - If you have a use case for enabling [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) then it is recommended to do so.
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
 - It is possible to have a pod security standard that is suitable to the security constraints you might have. This is possible through modifying the Pod Security Admission. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/) in order to do so.
-- By default, the Camunda Helm Chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your `production-values.yaml`.
+- By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your `production-values.yaml`.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information please visit the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 - It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is the default configuration for the core component:
 
@@ -423,7 +423,7 @@ If you would like to add any other security constraints to your `production-valu
 
 Here are some points to keep in mind when considering observability:
 
-- It is possible to enable integration with Prometheus, a popular monitoring solution, in the Camunda Helm Chart. This can be configured by adding the following configuration below to your `production-values.yaml`:
+- It is possible to enable integration with Prometheus, a popular monitoring solution, in the Camunda Helm chart. This can be configured by adding the following configuration below to your `production-values.yaml`:
 
 ```yaml
 prometheusServiceMonitor:
