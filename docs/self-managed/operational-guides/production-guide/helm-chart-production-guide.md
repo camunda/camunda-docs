@@ -7,7 +7,7 @@ description: "Learn how to set up the helm chart in a production setting."
 
 ## Overview
 
-This guide provides a simplified and streamlined architecture for Camunda 8 using the Camunda Helm chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
+This guide provides a resilient, production-ready architecture for Camunda 8 using the Camunda Helm chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
 
 The goal of this guide is to give you a **scenario-based, production focused, step-by-step guide** for setting up the Camunda Helm chart. We will use AWS as a reference here but the guide would work with other supported cloud providers and their comparable services as well. By following this guide, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
 
