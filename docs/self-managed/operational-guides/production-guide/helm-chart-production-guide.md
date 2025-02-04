@@ -218,7 +218,7 @@ webModeler:
     existingSecretPasswordKey: database-password
 ```
 
-The `existingSecret` can be used to specify an existing Kubernetes secret with the password.
+Use the existingSecret parameter to specify a pre-existing Kubernetes secret containing the password. This approach allows the Camunda Helm chart to reference credentials stored securely in your cluster rather than hardcoding sensitive data in values files or templates.
 
 If you would like further information on connecting to external databases, we have a number of guides on doing so with the Camunda Helm chart:
 
@@ -233,7 +233,7 @@ At this point you would be able connect to your platform through HTTPS, correctl
 
 We will continue our journey in adding to the `production-values.yaml`. Here is what you should consider for Camunda component level configurations:
 
-### Index Retention
+### Elasticsearch/OpenSearch Index Retention
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
@@ -247,7 +247,7 @@ core:
     policyName: core-record-retention-policy
 ```
 
-If you would like more information on configuring ILM policy. Please refer to [our guide](/self-managed/operate-deployment/data-retention.md).
+If you would like more information on configuring ILM policy. Please refer to [the configuration guide on the OpenSearch exporter](/docs/next/self-managed/zeebe-deployment/exporters/opensearch-exporter/#configuration).
 
 ### Configuring Backups
 
