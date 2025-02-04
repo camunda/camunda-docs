@@ -1,7 +1,7 @@
 ---
 id: google-sheets
 title: Google Sheets Connector
-sidebar_label: Google Sheets Connector
+sidebar_label: Google Sheets
 description: Use the Google Sheets Connector to connect your BPMN service with Google Sheets.
 ---
 
