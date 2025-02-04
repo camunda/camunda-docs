@@ -78,24 +78,24 @@ The next section will explain various configurations used in `production-values.
 
 In order to access the Camunda Platform through HTTPS with Ingress, you have to enable TLS. To do that, you require three things:
 
-1. A public registered domain that has configurable DNS records. In our example we will use `camunda.example.com` as the domain.
-2. A TLS certificate created for your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. Also, the certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure Ingress resources. Please reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
-3. A TLS secret created from your TLS certificate. In our example, we will use a secret called `camunda-platform`. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) on how to make a TLS secret.
+1. **Domain name**: A public registered domain that has configurable DNS records. In our example we will use `camunda.example.com` as the domain.
+2. **TLS certificate**: A TLS certificate created for your domain. The certificate must be an X.509 certificate, issued by a trusted Certificate Authority. Also, the certificate must include the correct domain names (Common Name or Subject Alternative Names) to secure Ingress resources. Please reach out to your DNS provider if you are unsure on how to create a TLS certificate. It is not recommended to use self-signed certificates.
+3. **TLS secret**: A TLS secret created from your TLS certificate. In our example, we will use a secret called `camunda-platform`. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) on how to make a TLS secret.
 
-Here is an example values.yaml configuration using the domain and TLS secret mentioned above:
+Here is an example values.yaml configuration using the ingress domain and TLS secret mentioned above:
 
 ```yaml
 global:
   ingress:
     enabled: true
     className: nginx
-    host: "camunda.example.com"
+    host: camunda.example.com
     tls:
       enabled: true
       secretName: camunda-platform
 ```
 
-Optionally, you can configure Ingress for Zeebe GRP endpoints. Here is an example Zeebe GRPC Ingress setup:
+Optionally, you can configure Ingress for Zeebe gRPC API. Here is an example Zeebe gRPC Ingress setup:
 
 ```yaml
 core:
@@ -103,7 +103,7 @@ core:
     grpc:
       enabled: true
       className: nginx
-      host: "zeebe-grpc.camunda.example.com"
+      host: zeebe-grpc.camunda.example.com
       tls:
         enabled: true
         secretName: camunda-platform-core-grpc
@@ -119,40 +119,40 @@ Once secure HTTPS connections are enabled and correctly configured via Ingress, 
 global:
   identity:
     auth:
-      type: "MICROSOFT"
-      issuer: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0"
-      issuerBackendUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0"
-      tokenUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token"
-      jwksUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys"
+      type: MICROSOFT
+      issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+      issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+      tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
+      jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
       identity:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: "password-string-literal"
+        existingSecret: password-string-literal
         audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: "https://identity.camunda.example.com"
-        initialClaimName: "email"
+        redirectUrl: https://identity.camunda.example.com
+        initialClaimName: email
         initialClaimValue: test.user@camunda.com
       optimize:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: "password-string-literal"
+        existingSecret: password-string-literal
         audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: "https://optimize.camunda.example.com"
+        redirectUrl: https://optimize.camunda.example.com
       core:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: "password-string-literal"
+        existingSecret: password-string-literal
         audience: "00000000-0000-0000-0000-000000000000"
         tokenScope: "00000000-0000-0000-0000-000000000000/.default"
-        redirectUrl: "https://core.camunda.example.com"
+        redirectUrl: https://core.camunda.example.com
       console:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret: "password-string-literal"
-        redirectUrl: "https://console.camunda.example.com"
+        existingSecret: password-string-literal
+        redirectUrl: https://console.camunda.example.com
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
         clientApiAudience: "00000000-0000-0000-0000-000000000000"
         publicApiAudience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: "https://modeler.camunda.example.com"
+        redirectUrl: https://modeler.camunda.example.com
 ```
 
 If you would like some more guidance relating to authentication, refer to the [Connect to an OpenID Connect provider](/docs/self-managed/setup/guides/connect-to-an-oidc-provider/#configuration) guide
@@ -195,12 +195,12 @@ Here is how to configure Identity with external Amazon Aurora PostgreSQL:
 identity:
   externalDatabase:
     enabled: true
-    host: "external-postgres-host"
+    host: external-postgres-host
     port: 5432
-    username: "identity_user"
-    database: "identity_db"
-    existingSecret: "identity-db-secret"
-    existingSecretPasswordKey: "database-password"
+    username: identity_user
+    database: identity_db
+    existingSecret: identity-db-secret
+    existingSecretPasswordKey: database-password
 ```
 
 Please make sure to correctly define the host, and port.
@@ -212,10 +212,10 @@ Here is how to configure Web Modeler with external Amazon Aurora PostgreSQL:
 ```yaml
 webModeler:
   externalDatabase:
-    url: "jdbc:postgresql://external-postgres-host:5432/camunda_db"
-    user: "web_modeler_user"
-    existingSecret: "webm-odeler-db-secret"
-    existingSecretPasswordKey: "database-password"
+    url: jdbc:postgresql://external-postgres-host:5432/camunda_db
+    user: web_modeler_user
+    existingSecret: webm-odeler-db-secret
+    existingSecretPasswordKey: database-password
 ```
 
 The `existingSecret` can be used to specify an existing Kubernetes secret with the password.
@@ -303,11 +303,11 @@ affinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         - labelSelector:
             matchExpressions:
-              - key: "app.kubernetes.io/component"
+              - key: app.kubernetes.io/component
                 operator: In
                 values:
                   - core
-          topologyKey: "kubernetes.io/hostname"
+          topologyKey: kubernetes.io/hostname
 
 ```
 
@@ -334,7 +334,7 @@ core:
 global:
 secrets:
   autoGenerated: true
-  name: "camunda-credentials"
+  name: camunda-credentials
 ```
 
 A secret called `camunda-credentials` will be generated. It will include all the needed secret values for the Camunda Helm chart.
@@ -453,11 +453,11 @@ Here is a complete example `production-values.yaml` considering all the above to
 global:
   secrets:
     autoGenerated: true
-    name: "camunda-test-credentials"
+    name: camunda-test-credentials
   Ingress:
     enabled: true
     className: nginx
-    host: "camunda.example.com"
+    host: camunda.example.com
     tls:
       enabled: true
       secretName: camunda-platform
@@ -474,64 +474,64 @@ global:
       port: 443
   identity:
     auth:
-      type: "MICROSOFT"
-      issuer: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0"
-      issuerBackendUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0"
-      tokenUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token"
-      jwksUrl: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys"
+      type: MICROSOFT
+      issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+      issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+      tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
+      jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
       admin:
         existingSecret:
-          name: "camunda-credentials"
-        existingSecretKey: "identity-admin-client-password"
+          name: camunda-credentials
+        existingSecretKey: identity-admin-client-password
       identity:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: "password-string-literal"
+        existingSecret: password-string-literal
         audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: "https://identity.camunda.example.com"
-        initialClaimName: "email"
+        redirectUrl: https://identity.camunda.example.com
+        initialClaimName: email
         initialClaimValue: test.user@camunda.com
       optimize:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: "password-string-literal"
+        existingSecret: password-string-literal
         audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: "https://optimize.camunda.example.com"
+        redirectUrl: https://optimize.camunda.example.com
         existingSecret:
-          name: "camunda-credentials"
-        existingSecretKey: "identity-optimize-client-password"
+          name: camunda-credentials
+        existingSecretKey: identity-optimize-client-password
       core:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: "password-string-literal"
+        existingSecret: password-string-literal
         audience: "00000000-0000-0000-0000-000000000000"
         tokenScope: "00000000-0000-0000-0000-000000000000/.default"
-        redirectUrl: "https://core.camunda.example.com"
+        redirectUrl: https://core.camunda.example.com
         existingSecret:
-          name: "camunda-credentials"
-        existingSecretKey: "identity-core-client-password"
+          name: camunda-credentials
+        existingSecretKey: identity-core-client-password
       console:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret: "password-string-literal"
-        redirectUrl: "https://console.camunda.example.com"
+        existingSecret: password-string-literal
+        redirectUrl: https://console.camunda.example.com
         existingSecret:
-          name: "camunda-credentials"
-        existingSecretKey: "identity-console-client-password"
+          name: camunda-credentials
+        existingSecretKey: identity-console-client-password
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
         clientApiAudience: "00000000-0000-0000-0000-000000000000"
         publicApiAudience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: "https://modeler.camunda.example.com"
+        redirectUrl: https://modeler.camunda.example.com
       connectors:
         existingSecret:
-          name: "camunda-credentials"
-        existingSecretKey: "identity-connectors-client-password"
+          name: camunda-credentials
+        existingSecretKey: identity-connectors-client-password
 core:
-  contextPath: "/core"
+  contextPath: /core
   ingress:
     grpc:
       enabled: true
       className: nginx
-      host: "grpc-{{ .Values.global.ingress.host }}"
+      host: grpc-{{ .Values.global.ingress.host }}
       tls:
         enabled: true
         secretName: camunda-platform-core-grpc
@@ -541,37 +541,37 @@ core:
     policyName: core-record-retention-policy
 
 identity:
-  contextPath: "/identity"
+  contextPath: /identity
   firstUser:
-    existingSecret: "camunda-credentials"
-    existingSecretKey: "identity-user-password"
+    existingSecret: camunda-credentials
+    existingSecretKey: identity-user-password
   externalDatabase:
     enabled: true
-    host: "external-postgres-host"
+    host: external-postgres-host
     port: 5432
-    username: "identity_user"
-    database: "identity_db"
-    existingSecret: "identity-db-secret"
-    existingSecretPasswordKey: "database-password"
+    username: identity_user
+    database: identity_db
+    existingSecret: identity-db-secret
+    existingSecretPasswordKey: database-password
 
 optimize:
-  contextPath: "/optimize"
+  contextPath: /optimize
 
 connectors:
-  contextPath: "/connectors"
+  contextPath: /connectors
 
 webModeler:
   enabled: true
-  contextPath: "/modeler"
+  contextPath: /modeler
   restapi:
     mail:
       # This value is required, otherwise the restapi pod wouldn't start.
       fromAddress: noreply@example.com
   externalDatabase:
-    url: "jdbc:postgresql://external-postgres-host:5432/camunda_db"
-    user: "camunda_user"
-    existingSecret: "camunda-db-secret"
-    existingSecretPasswordKey: "database-password"
+    url: jdbc:postgresql://external-postgres-host:5432/camunda_db
+    user: camunda_user
+    existingSecret: camunda-db-secret
+    existingSecretPasswordKey: database-password
 
 elasticsearch:
   enabled: false
