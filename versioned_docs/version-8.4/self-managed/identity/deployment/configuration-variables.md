@@ -27,6 +27,21 @@ As a Spring Boot application, Identity supports any standard
 | `KEYCLOAK_SETUP_CLIENT_ID`           | The client to use for authentication during setup of the provided Keycloak.         | admin-cli                                                                                                                                                                |
 | `KEYCLOAK_URL`                       | The URL of the Keycloak instance to use.                                            | http://localhost:18080/auth                                                                                                                                              |
 
+## Camunda Identity SDK Configuration
+
+These are the names and values which can be used for the identity sdk to ensure proper authentication and authorization with identity and the identity provider for all components.
+
+| Environment Variable                | Property                            | Description                                                                                                                      | Default Value                 |
+| ----------------------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `CAMUNDA_IDENTITY_ISSUERBACKENDURL` | `camunda.identity.issuerBackendUrl` | The back-channel url to the identity provider, used for token verification                                                       | -                             |
+| `CAMUNDA_IDENTITY_AUDIENCE`         | `camunda.identity.audience`         | The required audience of the auth token.                                                                                         | -                             |
+| `CAMUNDA_IDENTITY_TYPE`             | `camunda.identity.type`             | Define what kind of authentication type you will use, Choose between `KEYCLOAK`, `MICROSOFT`, `GENERIC`                          | `KEYCLOAK`                    |
+| `CAMUNDA_IDENTITY_BASEURL`          | `camunda.identity.baseUrl`          | The base url of the Camunda Identity instance.                                                                                   | -                             |
+| `CAMUNDA_IDENTITY_ISSUER`           | `camunda.identity.issuer`           | The front-channel url to the identity provider, used for login redirect and fetching refresh tokens                              | -                             |
+| `CAMUNDA_IDENTITY_JWKS_URL`         | `camunda.identity.jwksUrl`          | defines the JWKS URL, which is used by the services to validate the JWT tokens. If nothing set it will use the WellKnownEndpoint | -                             |
+| `CAMUNDA_IDENTITY_CLIENT_ID`        | `camunda.identity.clientId`         | defines the client id, which is used by Zeebe in authentication flows.                                                           | -                             |
+| `CAMUNDA_IDENTITY_CLIENT_SECRET`    | `camunda.identity.clientSecret`     | The client secret for the Identity client.                                                                                       | -                             |
+
 ### Component configuration
 
 Identity supports component configuration using preset values. To configure a
