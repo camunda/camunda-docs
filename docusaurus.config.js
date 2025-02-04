@@ -54,10 +54,10 @@ module.exports = {
             label: "8.5 / 3.13.0",
             banner: "none",
           },
-          // "3.12.0": {
-          //   label: "8.4 / 3.12.0",
-          //   banner: "none",
-          // },
+          "3.12.0": {
+            label: "8.4 / 3.12.0",
+            banner: "none",
+          },
           // "3.11.0": {
           //   label: "8.3 / 3.11.0",
           //   banner: "none",
@@ -97,6 +97,13 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
+              8.4: {
+                specPath: "api/operate/version-8.4/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.4/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
             },
           },
         },
@@ -131,6 +138,13 @@ module.exports = {
                 specPath: "api/tasklist/version-8.5/tasklist-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.5/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.4: {
+                specPath: "api/tasklist/version-8.4/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.4/apis-tools/tasklist-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -508,9 +522,9 @@ module.exports = {
             8.5: {
               banner: "none",
             },
-            // 8.4: {
-            //   banner: "none",
-            // },
+            8.4: {
+              banner: "none",
+            },
             // 8.3: {
             //   banner: "none",
             // },
