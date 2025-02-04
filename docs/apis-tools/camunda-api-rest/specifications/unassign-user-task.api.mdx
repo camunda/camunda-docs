@@ -41,17 +41,7 @@ Removes the assignee of a task with the given key.
   children={"Request"}
 ></Heading>
 
-<ParamsDetails
-  parameters={[
-    {
-      name: "userTaskKey",
-      in: "path",
-      required: true,
-      description: "The key of the user task.",
-      schema: { type: "string" },
-    },
-  ]}
-></ParamsDetails>
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"userTaskKey","in":"path","required":true,"description":"The key of the user task.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
 
 <RequestSchema title={"Body"} body={undefined}></RequestSchema>
 

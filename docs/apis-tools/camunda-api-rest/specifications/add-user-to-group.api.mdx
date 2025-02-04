@@ -41,24 +41,7 @@ Assigns a user to a group.
   children={"Request"}
 ></Heading>
 
-<ParamsDetails
-  parameters={[
-    {
-      name: "groupKey",
-      in: "path",
-      required: true,
-      description: "The group key.",
-      schema: { type: "string" },
-    },
-    {
-      name: "userKey",
-      in: "path",
-      required: true,
-      description: "The user key.",
-      schema: { type: "integer", format: "int64" },
-    },
-  ]}
-></ParamsDetails>
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"groupKey","in":"path","required":true,"description":"The group key.","schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"userKey","in":"path","required":true,"description":"The user key.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"202"} value={"202"}><div>
 
 <RequestSchema title={"Body"} body={undefined}></RequestSchema>
 

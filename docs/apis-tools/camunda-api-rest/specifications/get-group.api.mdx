@@ -41,17 +41,7 @@ Get a group by its key.
   children={"Request"}
 ></Heading>
 
-<ParamsDetails
-  parameters={[
-    {
-      name: "groupKey",
-      in: "path",
-      required: true,
-      description: "The group key.",
-      schema: { type: "string" },
-    },
-  ]}
-></ParamsDetails>
+<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"groupKey","in":"path","required":true,"description":"The group key.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
 
 <RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
