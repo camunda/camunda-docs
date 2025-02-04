@@ -29,6 +29,7 @@ import Heading from "@theme/Heading";
 <MethodEndpoint
   method={"put"}
   path={"/tenants/{tenantId}/users/{username}"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Assign a single user to a specified tenant.
@@ -40,7 +41,24 @@ Assign a single user to a specified tenant.
   children={"Request"}
 ></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"tenantId","in":"path","required":true,"description":"The unique identifier of the tenant.","schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"username","in":"path","required":true,"description":"The username of the user to assign.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"202"} value={"202"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+    {
+      name: "username",
+      in: "path",
+      required: true,
+      description: "The username of the user to assign.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
 <RequestSchema title={"Body"} body={undefined}></RequestSchema>
 

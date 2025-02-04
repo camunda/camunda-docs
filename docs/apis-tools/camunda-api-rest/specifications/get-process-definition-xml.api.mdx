@@ -41,7 +41,18 @@ Returns process definition as XML.
   children={"Request"}
 ></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"processDefinitionKey","in":"path","required":true,"description":"The assigned key of the process definition, which acts as a unique identifier for this process.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "processDefinitionKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the process definition, which acts as a unique identifier for this process.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
 <RequestSchema title={"Body"} body={undefined}></RequestSchema>
 

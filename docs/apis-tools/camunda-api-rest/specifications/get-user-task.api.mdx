@@ -41,40 +41,576 @@ Get the user task by the user task key.
   children={"Request"}
 ></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"userTaskKey","in":"path","required":true,"description":"The user task key.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The user task key.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
 <RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name for this user task."}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`, `FAILED`]"} schema={{"type":"string","description":"The state of the user task.","enum":["CREATED","COMPLETED","CANCELED","FAILED"]}}></SchemaItem><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The assignee of the user task.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The element ID of the user task."}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate groups for this user task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate users for this user task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"creationDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The creation date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"completionDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The completion date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"followUpDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The follow date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"dueDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The due date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Tenant ID of this user task."}}></SchemaItem><SchemaItem collapsible={false} name={"externalFormReference"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The external form reference."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","description":"The version of the process definition.","format":"int32"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>customHeaders</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Custom headers for the user task.
-
-</div><SchemaItem name={"property name*"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}} collapsible={false} discriminator={false}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"priority"} required={false} schemaName={"integer"} qualifierMessage={"**Possible values:** `<= 100`"} schema={{"type":"integer","description":"The priority of a user task. The higher the value the higher the priority.","minimum":0,"maximum":100,"default":50}}></SchemaItem><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key of the user task.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the element instance."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the form."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"userTaskKey\": \"string\",\n  \"elementInstanceKey\": \"string\",\n  \"processDefinitionKey\": \"string\",\n  \"processInstanceKey\": \"string\",\n  \"formKey\": \"string\",\n  \"name\": \"string\",\n  \"state\": \"CREATED\",\n  \"assignee\": \"string\",\n  \"elementId\": \"string\",\n  \"candidateGroups\": [\n    \"string\"\n  ],\n  \"candidateUsers\": [\n    \"string\"\n  ],\n  \"processDefinitionId\": \"string\",\n  \"creationDate\": \"2025-01-30T15:06:59.439Z\",\n  \"completionDate\": \"2025-01-30T15:06:59.439Z\",\n  \"followUpDate\": \"2025-01-30T15:06:59.439Z\",\n  \"dueDate\": \"2025-01-30T15:06:59.439Z\",\n  \"tenantId\": \"string\",\n  \"externalFormReference\": \"string\",\n  \"processDefinitionVersion\": 0,\n  \"customHeaders\": {},\n  \"priority\": 50\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name for this user task."}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`, `FAILED`]"} schema={{"type":"string","description":"The state of the user task.","enum":["CREATED","COMPLETED","CANCELED","FAILED"]}}></SchemaItem><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The assignee of the user task.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The element ID of the user task."}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate groups for this user task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate users for this user task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"creationDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The creation date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"completionDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The completion date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"followUpDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The follow date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"dueDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The due date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Tenant ID of this user task."}}></SchemaItem><SchemaItem collapsible={false} name={"externalFormReference"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The external form reference."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","description":"The version of the process definition.","format":"int32"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>customHeaders</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Custom headers for the user task.
-
-</div><SchemaItem name={"property name*"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}} collapsible={false} discriminator={false}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"priority"} required={false} schemaName={"integer"} qualifierMessage={"**Possible values:** `<= 100`"} schema={{"type":"integer","description":"The priority of a user task. The higher the value the higher the priority.","minimum":0,"maximum":100,"default":50}}></SchemaItem><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key of the user task.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the element instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process definition.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the form.","format":"int64"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"userTaskKey\": 0,\n  \"elementInstanceKey\": 0,\n  \"processDefinitionKey\": 0,\n  \"processInstanceKey\": 0,\n  \"formKey\": 0,\n  \"name\": \"string\",\n  \"state\": \"CREATED\",\n  \"assignee\": \"string\",\n  \"elementId\": \"string\",\n  \"candidateGroups\": [\n    \"string\"\n  ],\n  \"candidateUsers\": [\n    \"string\"\n  ],\n  \"processDefinitionId\": \"string\",\n  \"creationDate\": \"2025-01-30T15:06:59.440Z\",\n  \"completionDate\": \"2025-01-30T15:06:59.440Z\",\n  \"followUpDate\": \"2025-01-30T15:06:59.440Z\",\n  \"dueDate\": \"2025-01-30T15:06:59.440Z\",\n  \"tenantId\": \"string\",\n  \"externalFormReference\": \"string\",\n  \"processDefinitionVersion\": 0,\n  \"customHeaders\": {},\n  \"priority\": 50\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name for this user task."}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`, `FAILED`]"} schema={{"type":"string","description":"The state of the user task.","enum":["CREATED","COMPLETED","CANCELED","FAILED"]}}></SchemaItem><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The assignee of the user task.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The element ID of the user task."}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate groups for this user task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate users for this user task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"creationDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The creation date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"completionDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The completion date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"followUpDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The follow date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"dueDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The due date of a user task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Tenant ID of this user task."}}></SchemaItem><SchemaItem collapsible={false} name={"externalFormReference"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The external form reference."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","description":"The version of the process definition.","format":"int32"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>customHeaders</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Custom headers for the user task.
-
-</div><SchemaItem name={"property name*"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}} collapsible={false} discriminator={false}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"priority"} required={false} schemaName={"integer"} qualifierMessage={"**Possible values:** `<= 100`"} schema={{"type":"integer","description":"The priority of a user task. The higher the value the higher the priority.","minimum":0,"maximum":100,"default":50}}></SchemaItem><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key of the user task.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the element instance."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the form."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"userTaskKey\": \"string\",\n  \"elementInstanceKey\": \"string\",\n  \"processDefinitionKey\": \"string\",\n  \"processInstanceKey\": \"string\",\n  \"formKey\": \"string\",\n  \"name\": \"string\",\n  \"state\": \"CREATED\",\n  \"assignee\": \"string\",\n  \"elementId\": \"string\",\n  \"candidateGroups\": [\n    \"string\"\n  ],\n  \"candidateUsers\": [\n    \"string\"\n  ],\n  \"processDefinitionId\": \"string\",\n  \"creationDate\": \"2025-01-30T15:06:59.441Z\",\n  \"completionDate\": \"2025-01-30T15:06:59.441Z\",\n  \"followUpDate\": \"2025-01-30T15:06:59.441Z\",\n  \"dueDate\": \"2025-01-30T15:06:59.441Z\",\n  \"tenantId\": \"string\",\n  \"externalFormReference\": \"string\",\n  \"processDefinitionVersion\": 0,\n  \"customHeaders\": {},\n  \"priority\": 50\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The provided data is not valid. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-The user task with the given key was not found.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user task is successfully returned.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for UserTaskItem.",
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The name for this user task.",
+                  },
+                  state: {
+                    type: "string",
+                    description: "The state of the user task.",
+                    enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                  },
+                  assignee: {
+                    description: "The assignee of the user task.",
+                    type: "string",
+                  },
+                  elementId: {
+                    type: "string",
+                    description: "The element ID of the user task.",
+                  },
+                  candidateGroups: {
+                    type: "array",
+                    description: "The candidate groups for this user task.",
+                    items: { type: "string" },
+                  },
+                  candidateUsers: {
+                    type: "array",
+                    description: "The candidate users for this user task.",
+                    items: { type: "string" },
+                  },
+                  processDefinitionId: {
+                    type: "string",
+                    description: "The ID of the process definition.",
+                  },
+                  creationDate: {
+                    type: "string",
+                    description: "The creation date of a user task.",
+                    format: "date-time",
+                  },
+                  completionDate: {
+                    type: "string",
+                    description: "The completion date of a user task.",
+                    format: "date-time",
+                  },
+                  followUpDate: {
+                    type: "string",
+                    description: "The follow date of a user task.",
+                    format: "date-time",
+                  },
+                  dueDate: {
+                    type: "string",
+                    description: "The due date of a user task.",
+                    format: "date-time",
+                  },
+                  tenantId: {
+                    type: "string",
+                    description: "Tenant ID of this user task.",
+                  },
+                  externalFormReference: {
+                    type: "string",
+                    description: "The external form reference.",
+                  },
+                  processDefinitionVersion: {
+                    type: "integer",
+                    description: "The version of the process definition.",
+                    format: "int32",
+                  },
+                  customHeaders: {
+                    type: "object",
+                    description: "Custom headers for the user task.",
+                    additionalProperties: { type: "string" },
+                  },
+                  priority: {
+                    type: "integer",
+                    description:
+                      "The priority of a user task. The higher the value the higher the priority.",
+                    minimum: 0,
+                    maximum: 100,
+                    default: 50,
+                  },
+                },
+                title: "UserTaskItemBase",
+              },
+            ],
+            properties: {
+              userTaskKey: {
+                description: "The key of the user task.",
+                type: "string",
+              },
+              elementInstanceKey: {
+                type: "string",
+                description: "The key of the element instance.",
+              },
+              processDefinitionKey: {
+                type: "string",
+                description: "The key of the process definition.",
+              },
+              processInstanceKey: {
+                type: "string",
+                description: "The key of the process instance.",
+              },
+              formKey: { type: "string", description: "The key of the form." },
+            },
+            title: "UserTaskResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for UserTaskItem.",
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The name for this user task.",
+                  },
+                  state: {
+                    type: "string",
+                    description: "The state of the user task.",
+                    enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                  },
+                  assignee: {
+                    description: "The assignee of the user task.",
+                    type: "string",
+                  },
+                  elementId: {
+                    type: "string",
+                    description: "The element ID of the user task.",
+                  },
+                  candidateGroups: {
+                    type: "array",
+                    description: "The candidate groups for this user task.",
+                    items: { type: "string" },
+                  },
+                  candidateUsers: {
+                    type: "array",
+                    description: "The candidate users for this user task.",
+                    items: { type: "string" },
+                  },
+                  processDefinitionId: {
+                    type: "string",
+                    description: "The ID of the process definition.",
+                  },
+                  creationDate: {
+                    type: "string",
+                    description: "The creation date of a user task.",
+                    format: "date-time",
+                  },
+                  completionDate: {
+                    type: "string",
+                    description: "The completion date of a user task.",
+                    format: "date-time",
+                  },
+                  followUpDate: {
+                    type: "string",
+                    description: "The follow date of a user task.",
+                    format: "date-time",
+                  },
+                  dueDate: {
+                    type: "string",
+                    description: "The due date of a user task.",
+                    format: "date-time",
+                  },
+                  tenantId: {
+                    type: "string",
+                    description: "Tenant ID of this user task.",
+                  },
+                  externalFormReference: {
+                    type: "string",
+                    description: "The external form reference.",
+                  },
+                  processDefinitionVersion: {
+                    type: "integer",
+                    description: "The version of the process definition.",
+                    format: "int32",
+                  },
+                  customHeaders: {
+                    type: "object",
+                    description: "Custom headers for the user task.",
+                    additionalProperties: { type: "string" },
+                  },
+                  priority: {
+                    type: "integer",
+                    description:
+                      "The priority of a user task. The higher the value the higher the priority.",
+                    minimum: 0,
+                    maximum: 100,
+                    default: 50,
+                  },
+                },
+                title: "UserTaskItemBase",
+              },
+            ],
+            properties: {
+              userTaskKey: {
+                description: "The key of the user task.",
+                type: "integer",
+                format: "int64",
+              },
+              elementInstanceKey: {
+                type: "integer",
+                description: "The key of the element instance.",
+                format: "int64",
+              },
+              processDefinitionKey: {
+                type: "integer",
+                description: "The key of the process definition.",
+                format: "int64",
+              },
+              processInstanceKey: {
+                type: "integer",
+                description: "The key of the process instance.",
+                format: "int64",
+              },
+              formKey: {
+                type: "integer",
+                description: "The key of the form.",
+                format: "int64",
+              },
+            },
+            title: "UserTaskItem",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for UserTaskItem.",
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The name for this user task.",
+                  },
+                  state: {
+                    type: "string",
+                    description: "The state of the user task.",
+                    enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                  },
+                  assignee: {
+                    description: "The assignee of the user task.",
+                    type: "string",
+                  },
+                  elementId: {
+                    type: "string",
+                    description: "The element ID of the user task.",
+                  },
+                  candidateGroups: {
+                    type: "array",
+                    description: "The candidate groups for this user task.",
+                    items: { type: "string" },
+                  },
+                  candidateUsers: {
+                    type: "array",
+                    description: "The candidate users for this user task.",
+                    items: { type: "string" },
+                  },
+                  processDefinitionId: {
+                    type: "string",
+                    description: "The ID of the process definition.",
+                  },
+                  creationDate: {
+                    type: "string",
+                    description: "The creation date of a user task.",
+                    format: "date-time",
+                  },
+                  completionDate: {
+                    type: "string",
+                    description: "The completion date of a user task.",
+                    format: "date-time",
+                  },
+                  followUpDate: {
+                    type: "string",
+                    description: "The follow date of a user task.",
+                    format: "date-time",
+                  },
+                  dueDate: {
+                    type: "string",
+                    description: "The due date of a user task.",
+                    format: "date-time",
+                  },
+                  tenantId: {
+                    type: "string",
+                    description: "Tenant ID of this user task.",
+                  },
+                  externalFormReference: {
+                    type: "string",
+                    description: "The external form reference.",
+                  },
+                  processDefinitionVersion: {
+                    type: "integer",
+                    description: "The version of the process definition.",
+                    format: "int32",
+                  },
+                  customHeaders: {
+                    type: "object",
+                    description: "Custom headers for the user task.",
+                    additionalProperties: { type: "string" },
+                  },
+                  priority: {
+                    type: "integer",
+                    description:
+                      "The priority of a user task. The higher the value the higher the priority.",
+                    minimum: 0,
+                    maximum: 100,
+                    default: 50,
+                  },
+                },
+                title: "UserTaskItemBase",
+              },
+            ],
+            properties: {
+              userTaskKey: {
+                description: "The key of the user task.",
+                type: "string",
+              },
+              elementInstanceKey: {
+                type: "string",
+                description: "The key of the element instance.",
+              },
+              processDefinitionKey: {
+                type: "string",
+                description: "The key of the process definition.",
+              },
+              processInstanceKey: {
+                type: "string",
+                description: "The key of the process instance.",
+              },
+              formKey: { type: "string", description: "The key of the form." },
+            },
+            title: "UserTaskResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The provided data is not valid. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The user task with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
