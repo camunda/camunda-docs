@@ -52,7 +52,11 @@ kubectl create namespace management
 kubectl create namespace orchestration
 ```
 
-Within the `management` namespace (Web Modeler and Console), we will install Identity, Console, and all the Web Modeler components. Within the `orchestration` namespace, we will install the Camunda Orchestration Core component, along with Connectors and Optimize importer. We do not have to worry about installing each component separately since that will be handled by the Helm chart automatically. For more information on the Orchestration Cluster vs Web Modeler and Console, please review this [guide](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console)
+- Namespace `management` (Web Modeler and Console): we will install Identity, Console, and all the Web Modeler components.
+
+- Namespace `orchestration`: we will install the Camunda Orchestration Core component, along with Connectors and Optimize importer.
+
+We do not have to worry about installing each component separately since that will be handled by the Helm chart automatically. For more information on the Orchestration Cluster vs Web Modeler and Console, please review this [guide](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console)
 
 #### Installing the Helm Chart
 
