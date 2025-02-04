@@ -15,7 +15,7 @@ The goal of this guide is to give you a **scenario-based, production focused, st
 
 Before proceeding with the setup, ensure the following requirements are met:
 
-- **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access. We are going to use an AWS EKS cluster. Have a look at the following guides:
+- **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components. We are going to use an AWS EKS cluster. Have a look at the following guides:
   - [Deploy an EKS cluster with Terraform (advanced)](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/)
   - [Install Camunda 8 on an EKS cluster](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm/)
 - **Helm**: Make sure you have the [Helm CLI](/docs/reference/supported-environments/#clients) installed
@@ -28,7 +28,6 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **Ingress NGINX**: Ensure the [ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups. Have a look at the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - This will be used to store backups of the Camunda cluster. [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) must be configured with OpenSearch to take backups.
-- **Persistent Volumes**: Configure block storage persistent volumes for stateful components.
 - **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md/#camunda-8-self-managed) and evaluated sufficient CPU, memory and storage necessary for the deployment.
 
 Ensure all prerequisites are in place to avoid issues during installation or upgrading in a production environment.
