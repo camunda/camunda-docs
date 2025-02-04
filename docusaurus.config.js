@@ -54,10 +54,10 @@ module.exports = {
             label: "8.5 / 3.13.0",
             banner: "none",
           },
-          // "3.12.0": {
-          //   label: "8.4 / 3.12.0",
-          //   banner: "none",
-          // },
+          "3.12.0": {
+            label: "8.4 / 3.12.0",
+            banner: "none",
+          },
           // "3.11.0": {
           //   label: "8.3 / 3.11.0",
           //   banner: "none",
@@ -508,9 +508,9 @@ module.exports = {
             8.5: {
               banner: "none",
             },
-            // 8.4: {
-            //   banner: "none",
-            // },
+            8.4: {
+              banner: "none",
+            },
             // 8.3: {
             //   banner: "none",
             // },
