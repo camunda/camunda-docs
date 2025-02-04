@@ -4,6 +4,7 @@ const { unsupportedVersions } = require("./src/versions");
 const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
 
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
+const { themes } = require("prism-react-renderer");
 
 module.exports = {
   title: "Camunda 8 Docs",
@@ -251,8 +252,8 @@ module.exports = {
 
     prism: {
       additionalLanguages: ["java", "protobuf", "csharp"],
-      theme: require("prism-react-renderer/themes/palenight"),
-      darkTheme: require("prism-react-renderer/themes/dracula"),
+      theme: themes.palenight,
+      darkTheme: themes.dracula,
     },
     navbar: {
       title: "Camunda 8 Docs",
