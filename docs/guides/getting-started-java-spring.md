@@ -137,9 +137,9 @@ camunda:
       rest-address: http://127.0.0.1:8080
 
 zeebe:
-   client:
-      security:
-         plaintext: true
+  client:
+    security:
+      plaintext: true
 ```
 
 ### Create a worker
