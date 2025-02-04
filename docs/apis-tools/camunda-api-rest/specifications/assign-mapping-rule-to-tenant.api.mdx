@@ -41,7 +41,24 @@ Assign a single mapping rule to a specified tenant.
   children={"Request"}
 ></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"tenantKey","in":"path","required":true,"description":"The unique identifier of the tenant.","schema":{"type":"string"}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"mappingKey","in":"path","required":true,"description":"The unique identifier of the mapping rule.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"202"} value={"202"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantKey",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+    {
+      name: "mappingKey",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the mapping rule.",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
 
 <RequestSchema title={"Body"} body={undefined}></RequestSchema>
 

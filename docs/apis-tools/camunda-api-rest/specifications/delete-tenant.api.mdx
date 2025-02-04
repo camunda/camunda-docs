@@ -26,7 +26,11 @@ import Heading from "@theme/Heading";
   children={"Delete tenant"}
 ></Heading>
 
-<MethodEndpoint method={"delete"} path={"/tenants/{tenantId}"}></MethodEndpoint>
+<MethodEndpoint
+  method={"delete"}
+  path={"/tenants/{tenantId}"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Deletes an existing tenant.
 
@@ -37,7 +41,17 @@ Deletes an existing tenant.
   children={"Request"}
 ></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"tenantId","in":"path","required":true,"description":"The unique identifier of the tenant.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
 <RequestSchema title={"Body"} body={undefined}></RequestSchema>
 

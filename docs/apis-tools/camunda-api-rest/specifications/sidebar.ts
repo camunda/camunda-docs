@@ -30,12 +30,6 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/update-authorization",
-          label: "Update authorization",
-          className: "api-method patch",
-        },
-        {
-          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-authorization",
           label: "Delete authorization",
           className: "api-method delete",
@@ -44,12 +38,6 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/find-authorizations",
           label: "Query authorizations",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-user-authorizations",
-          label: "Query user authorizations",
           className: "api-method post",
         },
       ],
@@ -534,15 +522,15 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/update-tenant",
-          label: "Update tenant",
-          className: "api-method patch",
-        },
-        {
-          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/get-tenant",
           label: "Get tenant",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/update-tenant",
+          label: "Update tenant",
+          className: "api-method patch",
         },
         {
           type: "doc",

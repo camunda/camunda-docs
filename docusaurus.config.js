@@ -50,10 +50,10 @@ module.exports = {
           "3.14.0": {
             label: "8.6 / 3.14.0",
           },
-          // "3.13.0": {
-          //   label: "8.5 / 3.13.0",
-          //   banner: "none",
-          // },
+          "3.13.0": {
+            label: "8.5 / 3.13.0",
+            banner: "none",
+          },
           // "3.12.0": {
           //   label: "8.4 / 3.12.0",
           //   banner: "none",
@@ -90,6 +90,13 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
+              8.5: {
+                specPath: "api/operate/version-8.5/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
             },
           },
         },
@@ -117,6 +124,13 @@ module.exports = {
                 specPath: "api/tasklist/version-8.6/tasklist-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.6/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.5: {
+                specPath: "api/tasklist/version-8.5/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/tasklist-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -195,7 +209,7 @@ module.exports = {
         config: {
           zeebe: {
             specPath: "inactive",
-            outputDir: "inactive",
+            outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
@@ -208,6 +222,13 @@ module.exports = {
                 specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.5: {
+                specPath: "api/zeebe/version-8.5/zeebe-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/zeebe-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -484,9 +505,9 @@ module.exports = {
           beforeDefaultRemarkPlugins: [versionedLinks],
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
-            // 8.5: {
-            //   banner: "none",
-            // },
+            8.5: {
+              banner: "none",
+            },
             // 8.4: {
             //   banner: "none",
             // },

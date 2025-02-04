@@ -43,7 +43,17 @@ Note that this endpoint will only return linked forms. This endpoint does not su
   children={"Request"}
 ></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"userTaskKey","in":"path","required":true,"description":"The user task key.","schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The user task key.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
 <RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
