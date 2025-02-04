@@ -8,6 +8,8 @@ When you [create a cluster](/components/console/manage-clusters/create-cluster.m
 
 The following regions are available for customers on Trial, Starter, and Enterprise Plans. Enterprise customers can also discuss custom regions with their Customer Success Manager.
 
+![World map showing the location of each GCP and AWS region](./img/diagram-regions-map.png)
+
 :::note
 
 - Management cluster components (Console and Web Modeler) are currently hosted in GCP (EU). [Contact us](/reference/contact.md) if you have additional questions.
