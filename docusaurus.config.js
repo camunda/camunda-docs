@@ -529,7 +529,6 @@ module.exports = {
               banner: "none",
             },
           },
-          // docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
         blog: false,
