@@ -1,7 +1,7 @@
 ---
 id: email
 title: Email Connector
-sidebar_label: Email Connector
+sidebar_label: Email
 description: The Email Connector allows you to connect your BPMN service with different email protocols such as SMTP, POP3 or IMAP.
 ---
 
@@ -125,6 +125,10 @@ The task returns a JSON object containing detailed information about the email:
 - `htmlBody`: The HTML version of the email's content (if content exists).
 - `attachments`: A list of all the email's attachments, provided as a document reference.
 - `receivedDateTime`: The email's reception datetime
+
+:::note
+Starting from version 8.7.0, the email Connector supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
 
 #### Example Response
 

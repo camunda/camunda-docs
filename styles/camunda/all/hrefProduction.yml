@@ -1,5 +1,5 @@
 extends: existence
-message: "Improper link format: '%s'. Please use relative URLs."
+message: "Improper link format: `%s`. Please use relative URLs."
 level: warning
 nonword: true
 scope: raw

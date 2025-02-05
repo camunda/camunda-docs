@@ -1,6 +1,7 @@
 ---
 id: aws-lambda
 title: AWS Lambda Connector
+sidebar_label: AWS Lambda
 description: Invoke AWS Lambda functions with an outbound Connector.
 ---
 

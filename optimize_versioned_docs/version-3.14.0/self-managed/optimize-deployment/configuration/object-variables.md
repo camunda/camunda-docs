@@ -27,33 +27,18 @@ Similarly, the "contains" filter matches process instances whose list variable c
 
 The value of list properties within objects as well as variables which are lists of objects rather than primitives can be inspected in the raw object variable value column accessible in raw data reports.
 
-## Variable plugins
-
-Any configured [variable plugins](../../plugins/variable-import-plugin) are applied _before_ Optimize creates the flattened property "sub variables", meaning the configured plugins have access to the raw JSON object variables only. Any modifications applied to the JSON object variables will then be persisted to the "sub variables" when Optimize flattens the resulting objects in the next step of the import cycle.
-
 ## Optimize configuration
 
-The import of object variable values is enabled by default and can be disabled using the `import.data.variable.includeObjectVariableValue` [configuration](./system-configuration-platform-7.md).
-
-## Other system configurations
+The import of object variable values is enabled by default and can be disabled using the `import.data.variable.includeObjectVariableValue` configuration.
 
 Depending on where the imported object variables originate, the following configuration is required to ensure that your system produces object variable data that Optimize can import correctly:
 
-<Tabs groupId="systemconfig" defaultValue="platformobject" queryString values={
+<Tabs groupId="systemconfig" defaultValue="zeebeobject" queryString values={
 [
-{label: 'Platform object', value: 'platformobject' },
 {label: 'Zeebe object', value: 'zeebeobject' },
 {label: 'External object', value: 'externalobject' }
 ]
 }>
-
-<TabItem value='platformobject'>
-
-Optimize supports both [object process variables serialized as JSON](https://docs.camunda.org/manual/latest/user-guide/data-formats/json/#serializing-process-variables) and [built-in JSON variables](https://docs.camunda.org/manual/latest/user-guide/data-formats/json/#native-json-variable-value) from Camunda 7. If you are importing object variables, it is required to configure the Platform's spin serialization so that process variables are by default **serialized as JSON**. Refer to the [Camunda 7 documentation](https://docs.camunda.org/manual/latest/user-guide/data-formats/json/#serializing-process-variables) for more information on how to set up JSON serialization.
-
-Furthermore, to allow Optimize to correctly parse date properties within the object or built-in JSON variable, ensure date properties of objects are serialized using a common **date format** (for example `yyyy-MM-dd'T'HH:mm:ss.SSSZ`) other than unix timestamps. If date properties are serialized as unix timestamps, these properties cannot be identified and parsed as dates when importing into Optimize and will instead be persisted as number variables.
-
-</TabItem>
 
 <TabItem value='zeebeobject'>
 

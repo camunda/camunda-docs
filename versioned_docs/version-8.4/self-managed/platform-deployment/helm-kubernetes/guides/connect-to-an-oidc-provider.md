@@ -45,7 +45,7 @@ UI is not available for this version.
    - Client ID
    - Client secret
    - Audience
-4. Set the following environment variables for the component you are configuring an app for:
+4. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
 <TabItem value="env">
@@ -204,10 +204,10 @@ The client should be configured to support `grant_type`:
 To successfully authenticate with Entra ID, you should use the `v2.0` API. This means that
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
-It's also important to follow the [steps described here](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#configure-the-app-manifest) to configure the app manifest and set the [accesstokenAcceptedVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#accesstokenacceptedversion-attribute) to `2` like so:
+Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entra/identity-platform/reference-microsoft-graph-app-manifest#configure-the-app-manifest-in-the-microsoft-entra-admin-center) to configure the app manifest, and set the [requestedAccessTokenVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-microsoft-graph-app-manifest#api-attribute) under `Api:` to `2`:
 
 ```json
-	"accessTokenAcceptedVersion": 2,
+    "requestedAccessTokenVersion": 2,
 ```
 
 </TabItem>

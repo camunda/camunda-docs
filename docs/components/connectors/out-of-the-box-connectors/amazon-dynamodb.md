@@ -1,6 +1,6 @@
 ---
 id: amazon-dynamodb
-sidebar_label: AWS DynamoDB Connector
+sidebar_label: AWS DynamoDB
 title: Amazon DynamoDB Connector
 description: Use the Amazon DynamoDB Connector to connect your BPMN service with Amazon Web Service's DynamoDB Service, and work with tables and items using this service.
 ---

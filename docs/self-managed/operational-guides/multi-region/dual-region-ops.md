@@ -52,7 +52,7 @@ Running a dual-region configuration requires users to detect and manage any regi
 
 - A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region concept](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
-    - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm).
+    - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
 - (deprecated) [zbctl](/apis-tools/community-clients/cli-client/index.md) to interact with the Zeebe cluster.
 - `cURL` or similar to interact with the REST API.
@@ -154,7 +154,7 @@ The following alternatives to port-forwarding are possible:
 In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
 
 <Tabs groupId="c8-connectivity">
-  <TabsItem value="rest-api" label="REST API">
+  <TabItem value="rest-api" label="REST API">
 
 1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
 
@@ -295,8 +295,8 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
   </summary>
 </details>
 
-  </TabsItem>
-  <TabsItem value="zbctl" label="zbctl">
+  </TabItem>
+  <TabItem value="zbctl" label="zbctl">
 
 1. Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
 
@@ -343,7 +343,7 @@ Brokers:
 
   </summary>
 </details>
-  </TabsItem>
+  </TabItem>
 </Tabs>
 
 2. Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
@@ -364,7 +364,7 @@ curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Cont
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the cluster size has decreased to 4, partitions have been redistributed over the remaining brokers, and new leaders have been elected.
 
 <Tabs groupId="c8-connectivity">
-  <TabsItem value="rest-api" label="REST API">
+  <TabItem value="rest-api" label="REST API">
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -503,8 +503,8 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
   </summary>
 </details>
 
-  </TabsItem>
-  <TabsItem value="zbctl" label="zbctl">
+  </TabItem>
+  <TabItem value="zbctl" label="zbctl">
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -550,7 +550,7 @@ Brokers:
   </summary>
 </details>
 
-</TabsItem>
+</TabItem>
 </Tabs>
 
 You can also use the Zeebe Gateway's REST API to ensure the scaling progress has been completed. For better output readability, we use [jq](https://jqlang.github.io/jq/).
@@ -731,7 +731,7 @@ It is expected that the Zeebe broker pods will not reach the "Ready" state since
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the new Zeebe brokers are recognized but yet a full member of the Zeebe cluster.
 
 <Tabs groupId="c8-connectivity">
-  <TabsItem value="rest-api" label="REST API">
+  <TabItem value="rest-api" label="REST API">
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -898,8 +898,8 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
   </summary>
 </details>
 
-  </TabsItem>
-  <TabsItem value="zbctl" label="zbctl">
+  </TabItem>
+  <TabItem value="zbctl" label="zbctl">
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -953,7 +953,7 @@ Brokers:
   </summary>
 </details>
 
-  </TabsItem>
+  </TabItem>
 </Tabs>
 
 </div>

@@ -95,6 +95,29 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
 
+# Rename Web Modeler milestones to versions
+RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
+
+# Send all Optimize 7 content to docs.camunda.org
+RewriteRule ^optimize/self-managed/optimize-deployment/migration-update/camunda-7/(.*)$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/plugins/(.*)$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/components/userguide/decision-analysis/(.*)$  https://docs.camunda.org/optimize/latest/ [R=301,L]
+
+RewriteRule ^optimize/components/userguide/additional-features/footer/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/components/userguide/additional-features/event-based-processes/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/components/userguide/combined-process-reports/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/version-policy/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/reimport/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/webhooks/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/multiple-engines/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/setup-event-based-processes/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/system-configuration-platform-7/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/optimize-license/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/user-management/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/authorization-management/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/advanced-features/import-guide/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/advanced-features/engine-data-deletion/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+
 # Finalize the renaming of Console SM API to Administration API (Self-Managed)
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/sm-administration-api/?$ /docs/next/apis-tools/administration-sm-api/specifications/administration-api-self-managed/ [R=301,L]
 
@@ -105,7 +128,7 @@ RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/?
 RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-tutorial/?$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/$1 [R=301,L]
 
 # Move migrating to Zeebe user tasks
-RewriteRule ^docs/next/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
 RewriteRule ^docs/8.6/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/8.6/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
 

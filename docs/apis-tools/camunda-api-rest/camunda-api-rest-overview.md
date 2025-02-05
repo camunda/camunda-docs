@@ -1,7 +1,7 @@
 ---
 id: camunda-api-rest-overview
 title: "Overview"
-description: "Interact with Camunda 8 clusters. Activate jobs and run user task state operations for Zeebe user tasks."
+description: "Interact with Camunda 8 clusters. Activate jobs and run user task state operations for Camunda user tasks."
 ---
 
 The Camunda 8 REST API is a REST API designed to interact with a Camunda 8 cluster.
@@ -10,13 +10,17 @@ The Camunda 8 REST API is a REST API designed to interact with a Camunda 8 clust
 Ensure you [authenticate](./camunda-api-rest-authentication.md) before accessing the Camunda 8 REST API.
 :::
 
+:::note
+The Camunda 8 REST API only supports user tasks managed by Camunda (formerly known as [Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as such in your XML content).
+:::
+
 ## Context paths
 
 ### SaaS
 
-Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
+Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 
-Example path: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
+Example path: `https://${REGION_ID}.zeebe.camunda.io:443/${CLUSTER_ID}/v2/`
 
 ### Self-Managed
 

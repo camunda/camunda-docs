@@ -24,7 +24,7 @@ An execution listener is a blocking operation, meaning that the workflow executi
 
 ## Define an execution listener
 
-You can configure execution listeners per BPMN element within a process.
+You can configure execution listeners for individual BPMN elements, such as tasks, events, and gateways, as well as for the overall process and subprocesses.
 
 There are two types of execution listener:
 
@@ -53,7 +53,7 @@ Execution listeners are processed by [job workers](/components/concepts/job-work
 See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for an example of how to create a job worker and handler that can also process execution listener jobs.
 
 :::note
-[Throwing a BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md/#throwing-and-handling-bpmn-errors) for an execution listener's job is not supported.
+[Throwing a BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md#throwing-and-handling-bpmn-errors) for an execution listener's job is not supported.
 :::
 
 ## Variables in an execution listener
