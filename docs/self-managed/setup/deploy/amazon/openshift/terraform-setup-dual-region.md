@@ -300,11 +300,11 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
 7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
 
    ```bash
-   export S3_TF_BUCKET_KEY="camunda-terraform/clusters.tfstate"
+   export S3_TF_BUCKET_KEY_CLUSTERS="camunda-terraform/clusters.tfstate"
 
-   echo "Storing clusters terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
+   echo "Storing clusters terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_CLUSTERS"
 
-   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY_CLUSTERS" -backend-config="region=$S3_TF_BUCKET_REGION"
    ```
 
 **For each cluster's file:**
@@ -427,11 +427,11 @@ Once the `.tf` files are set up, configure the backend for Terraform and set the
 export S3_TF_BUCKET_REGION="<your-region>"
 export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
 
-export S3_TF_BUCKET_KEY="camunda-terraform/peering.tfstate"
+export S3_TF_BUCKET_KEY_PEERING="camunda-terraform/peering.tfstate"
 
-echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
+echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_PEERING"
 
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
+terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY_PEERING" -backend-config="region=$S3_TF_BUCKET_REGION"
 ```
 
 This command connects Terraform to the S3 bucket for managing the state file, ensuring remote and persistent storage.
@@ -440,16 +440,21 @@ This command connects Terraform to the S3 bucket for managing the state file, en
 
 1. Open a terminal and navigate to the `peering` directory where the `config.tf` file and other `.tf` files are located. This is where [the previously retrieved VPC values](#retrieve-the-peering-cluster-variables).
 
-1. Run the following command to generate a plan for the VPC peering configuration. It includes the owner and accepter VPCs using the previously retrieved VPC values:
+1. Run the following command to generate a plan for the VPC peering configuration.
+   It will connect with peering the previously retrieved VPCs of each cluster:
 
    ```bash
-   terraform plan -out peering.plan -var "owner=$(echo "$OWNER_JSON" | jq -c .)" -var "accepter=$(echo "$ACCEPTER_JSON" | jq -c .)"
+   terraform plan -out peering.plan \
+        -var cluster_1_region="$CLUSTER_1_REGION" \
+        -var cluster_1_vpc_id="$CLUSTER_1_VPC_ID" \
+        -var cluster_2_region="$CLUSTER_2_REGION" \
+        -var cluster_2_vpc_id="$CLUSTER_2_VPC_ID"
    ```
 
 1. After reviewing the execution plan, apply the configuration to create the VPC peering connection:
 
    ```bash
-   terraform apply peering.plan     # apply the creation
+   terraform apply peering.plan
    ```
 
    This command will initiate the creation of the peering connection, enabling communication between the two clusters.
@@ -458,18 +463,18 @@ For more details, consult the official [AWS VPC Peering documentation](https://d
 
 ### S3 module setup
 
-This section outlines the process of creating a [S3 bucket](https://aws.amazon.com/en/s3/) that will be used to to [perform backups of the elasticsearch cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) used by Camunda.
+This section outlines the process of creating a [S3 bucket](https://aws.amazon.com/en/s3/) that will be used to to [perform backups of the elasticsearch cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) used by Camunda 8.
 Read more about the [failover procecure](/self-managed/operational-guides/multi-region/dual-region-ops.md#procedure).
 
 The S3 bucket is set up following best practices, including encryption, logging, and versioning. These configurations can be customized to suit your specific requirements.
 
 #### Create the peering configuration module
 
-In the parent directory where your cluster modules reside (`region1` and `region2`), create a new directory called `s3-elastic-backup` for the S3 configuration:
+In the parent directory where your other modules reside (`clusters` and `peering`), create a new directory called `backup_bucket` for the S3 configuration:
 
 ```bash
-mkdir s3-elastic-backup
-cd s3-elastic-backup
+mkdir backup_bucket
+cd backup_bucket
 ```
 
 We'll re-use the previously configured S3 bucket to store the state of the backup bucket configuration.
@@ -477,14 +482,17 @@ We'll re-use the previously configured S3 bucket to store the state of the backu
 Begin by setting up the `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/s3-elastic-backup/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/backup_bucket/config.tf
 ```
 
-Finally, create a file called `backup-bucket.tf` to reference the elastic backup bucket configuration:
+Finally, create a file called `backup_bucket.tf` to reference the elastic backup bucket configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/s3-elastic-backup/backup-bucket.tf
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/backup_bucket/backup_bucket.tf
 ```
+
+This bucket configuration follows [multiple best practices](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html).  
+We encourage you to review the implementation and adjust it according to your specific requirements.
 
 #### Initialize Terraform
 
@@ -496,26 +504,27 @@ export S3_TF_BUCKET_REGION="<your-region>"
 export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
 
 # set the region of the bucket
-export AWS_REGION="us-east-1"
+export BACKUP_BUCKET_REGION="us-east-1"
 
-export S3_TF_BUCKET_KEY="camunda-terraform/backup-bucket.tfstate"
+export S3_TF_BUCKET_KEY_BUCKET="camunda-terraform/backup-bucket.tfstate"
 
-echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
+echo "Storing terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY_BUCKET"
 
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
+terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY_BUCKET" -backend-config="region=$S3_TF_BUCKET_REGION"
 ```
 
 This command connects Terraform to the S3 bucket for managing the state file, ensuring remote and persistent storage.
-The `AWS_REGION` will define the region of the bucket, you can pick one of your cluster region.
+The `BACKUP_BUCKET_REGION` will define the region of the bucket, you can pick one of your cluster region.
 
 #### Execution
 
-1. Open a terminal and navigate to the `s3-elastic-backup` directory where the `config.tf` file and other `.tf` files are located.
+1. Open a terminal and navigate to the `backup_bucket` directory where the `config.tf` file and other `.tf` files are located.
 
 1. Run the following command to generate a plan for the S3 bucket configuration. You can edit the default bucket name using `-var=bucket_name=nameOfBucket`
 
    ```bash
-   terraform plan -out backup-bucket.plan
+   terraform plan -out backup-bucket.plan \
+                  -var backup_bucket_region="$BACKUP_BUCKET_REGION"
    ```
 
 1. After reviewing the execution plan, apply the configuration to create the VPC peering connection:
@@ -532,7 +541,7 @@ The `AWS_REGION` will define the region of the bucket, you can pick one of your 
    export AWS_ACCESS_KEY_ES=$(terraform output -raw s3_aws_access_key)
    export AWS_SECRET_ACCESS_KEY_ES=$(terraform output -raw s3_aws_secret_access_key)
    export AWS_ES_BUCKET_NAME=$(terraform output -raw s3_bucket_name)
-   export AWS_ES_BUCKET_REGION="$AWS_REGION"
+   export AWS_ES_BUCKET_REGION="$BACKUP_BUCKET_REGION"
 
    echo "AWS_ACCESS_KEY_ES=$AWS_ACCESS_KEY_ES"
    echo "AWS_SECRET_ACCESS_KEY_ES=$AWS_SECRET_ACCESS_KEY_ES"
@@ -544,7 +553,7 @@ The `AWS_REGION` will define the region of the bucket, you can pick one of your 
 
 ### Reference files
 
-You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7)
+You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform)
 
 ## 2. Preparation for Camunda 8 installation
 
@@ -552,86 +561,59 @@ You can find the reference files used on [this page](https://github.com/camunda/
 
 You can now access the created OpenShift clusters.
 
-**Terminal for each cluster:**
-
-<Tabs groupId="region" defaultValue="region1" queryString values={
-[
-{label: 'Region 1', value: 'region1' },
-{label: 'Region 2', value: 'region2' },
-]}>
-
-<TabItem value="region1">
-
-1.  Verify that you are in the project directory for **region 1**:
+1.  Verify that you are in the [OpenShift clusters module](#openshift-clusters-module-setup) directory `clusters`:
 
     ```bash
     pwd
 
     # Example output:
-    # /home/your-username/camunda/region1
+    # /home/your-username/camunda/clusters
     ```
 
 1.  Set up the required environment variables from the OpenShift terraform module:
 
-    ```shell
+    ```bash
+    # Cluster 1
     export CLUSTER_1_NAME="$(terraform console <<<local.rosa_cluster_1_name | jq -r)"
     export CLUSTER_1_API_URL=$(terraform output -raw cluster_1_openshift_api_url)
     export CLUSTER_1_ADMIN_USERNAME="$(terraform console <<<local.rosa_cluster_1_admin_username | jq -r)"
     export CLUSTER_1_ADMIN_PASSWORD="$(terraform console <<<local.rosa_cluster_1_admin_password | jq -r)"
-    ```
 
-1.  Give cluster administrator role to the created user:
+    echo "CLUSTER_1_NAME=$CLUSTER_1_NAME"
+    echo "CLUSTER_1_API_URL=$CLUSTER_1_API_URL"
+    echo "CLUSTER_1_ADMIN_USERNAME=$CLUSTER_1_ADMIN_USERNAME"
 
-    ```shell
-    rosa grant user cluster-admin --cluster="$CLUSTER_1_NAME" --user="$CLUSTER_1_ADMIN_USERNAME"
-    ```
-
-1.  Log in to the OpenShift cluster and configure the kubeconfig context:
-
-    ```shell
-    oc config delete-context "$CLUSTER_1_NAME" || true
-
-    oc login -u "$CLUSTER_1_ADMIN_USERNAME" "$CLUSTER_1_API_URL" -p "$CLUSTER_1_ADMIN_PASSWORD"
-    oc config rename-context $(oc config current-context) "$CLUSTER_1_NAME"
-    ```
-
-1.  Verify your connection to the clusters with `oc`:
-
-    ```shell
-    oc --context "$CLUSTER_1_NAME" get nodes
-    ```
-
-</TabItem>
-
-<TabItem value="region2">
-
-1.  Verify that you are in the project directory for **region 2**:
-
-    ```bash
-    pwd
-
-    # Example output:
-    # /home/your-username/camunda/region2
-    ```
-
-1.  Set up the required environment variables from the OpenShift terraform module:
-
-    ```shell
+    # Cluster 2
     export CLUSTER_2_NAME="$(terraform console <<<local.rosa_cluster_2_name | jq -r)"
     export CLUSTER_2_API_URL=$(terraform output -raw cluster_2_openshift_api_url)
     export CLUSTER_2_ADMIN_USERNAME="$(terraform console <<<local.rosa_cluster_2_admin_username | jq -r)"
     export CLUSTER_2_ADMIN_PASSWORD="$(terraform console <<<local.rosa_cluster_2_admin_password | jq -r)"
+
+    echo "CLUSTER_2_NAME=$CLUSTER_2_NAME"
+    echo "CLUSTER_2_API_URL=$CLUSTER_2_API_URL"
+    echo "CLUSTER_2_ADMIN_USERNAME=$CLUSTER_2_ADMIN_USERNAME"
     ```
 
-1.  Give cluster administrator role to the created user:
+1.  Give cluster administrator role to the created user for each cluster:
 
-    ```shell
+    ```bash
+    # Cluster 1
+    rosa grant user cluster-admin --cluster="$CLUSTER_1_NAME" --user="$CLUSTER_1_ADMIN_USERNAME"
+
+    # Cluster 2
     rosa grant user cluster-admin --cluster="$CLUSTER_2_NAME" --user="$CLUSTER_2_ADMIN_USERNAME"
     ```
 
-1.  Log in to the OpenShift cluster and configure the kubeconfig context:
+1.  Log in to the OpenShift clusters and configure the kubeconfig contexts:
 
-    ```shell
+    ```bash
+    # Cluster 1
+    oc config delete-context "$CLUSTER_1_NAME" || true
+
+    oc login -u "$CLUSTER_1_ADMIN_USERNAME" "$CLUSTER_1_API_URL" -p "$CLUSTER_1_ADMIN_PASSWORD"
+    oc config rename-context $(oc config current-context) "$CLUSTER_1_NAME"
+
+    # Cluster 2
     oc config delete-context "$CLUSTER_2_NAME" || true
 
     oc login -u "$CLUSTER_2_ADMIN_USERNAME" "$CLUSTER_2_API_URL" -p "$CLUSTER_2_ADMIN_PASSWORD"
@@ -640,12 +622,13 @@ You can now access the created OpenShift clusters.
 
 1.  Verify your connection to the clusters with `oc`:
 
-    ```shell
+    ```bash
+    # Cluster 1
+    oc --context "$CLUSTER_1_NAME" get nodes
+
+    # Cluster 2
     oc --context "$CLUSTER_2_NAME" get nodes
     ```
-
-</TabItem>
-</Tabs>
 
 In the remainder of the guide, different namespaces will be created following the needs of the dual-region architecture.
 
