@@ -12,7 +12,7 @@
  * @property {string=} canonicalId
  *
  * @typedef {object} Metadata
- * @property {string=} unversionedId
+ * @property {string=} id
  * @property {string=} permalink
  */
 

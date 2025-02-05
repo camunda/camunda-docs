@@ -5,7 +5,7 @@
 
 import React, { type ReactNode } from "react";
 import Metadata from "@theme-original/DocItem/Metadata";
-import type MetadataType from "@theme/DocItem/Metadata";
+import type MetadataType from "@theme-original/DocItem/Metadata";
 import type { WrapperProps } from "@docusaurus/types";
 
 import Head from "@docusaurus/Head";
