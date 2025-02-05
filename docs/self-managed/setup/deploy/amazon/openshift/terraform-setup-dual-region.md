@@ -468,7 +468,7 @@ Read more about the [failover procecure](/self-managed/operational-guides/multi-
 
 The S3 bucket is set up following best practices, including encryption, logging, and versioning. These configurations can be customized to suit your specific requirements.
 
-#### Create the peering configuration module
+#### Create the bucket configuration module
 
 In the parent directory where your other modules reside (`clusters` and `peering`), create a new directory called `backup_bucket` for the S3 configuration:
 
@@ -645,4 +645,96 @@ It includes:
 
 Follow the guide next steps in the [Generic OpenShift Dual-Region guide of Camunda 8 Installation](/self-managed/setup/deploy/openshift/dual-region.md#setup-advanced-cluster-management-and-submariner).
 
-## 4. Deletion of the Terraform resources
+## 4. Deletion of Terraform Resources
+
+### Deletion of the VPC peering
+
+The VPC peering module can be deleted once it is no longer in use and has no dependencies.
+Once the VPC peering is deleted, the clusters will not be able to communicate with each other anymore.
+
+To delete the module, follow these steps:
+
+1. Before proceeding with the deletion of the VPC peering module, ensure that the necessary variables, which were provided during the module creation, are still available. To verify that the required variables are correctly defined, repeat the steps from the [retrieve the VPC peering cluster variables](#retrieve-the-peering-cluster-variables) section.
+
+1. Ensure that the `CLUSTER_1_REGION` and `CLUSTER_2_REGION` variables are defined correctly:
+
+   ```bash
+   # set the region, adjust to your needs
+   export CLUSTER_1_REGION="us-east-1"
+   export CLUSTER_2_REGION="us-east-2"
+   ```
+
+1. Navigate to the VPC peering module directory `peering` where the VPC peering module configuration is located.
+
+1. Execute the following command to plan the destruction of the VPC peering module. Ensure the correct variables are passed in, as shown below:
+
+   ```bash
+   terraform plan -destroy \
+     -var cluster_1_region="$CLUSTER_1_REGION" \
+     -var cluster_1_vpc_id="$CLUSTER_1_VPC_ID" \
+     -var cluster_2_region="$CLUSTER_2_REGION" \
+     -var cluster_2_vpc_id="$CLUSTER_2_VPC_ID" \
+     -out destroy-peering.plan
+   ```
+
+   This command will generate a plan to destroy the resources and save it in a file called `destroy-peering.plan`.
+
+1. After reviewing the destruction plan, apply the changes to delete the VPC peering module resources by running:
+
+   ```bash
+   terraform apply destroy-peering.plan
+   ```
+
+   Once the `apply` command completes successfully, the VPC peering module and associated resources will be deleted.
+
+### Deletion of the clusters
+
+The clusters can be deleted once they are no longer in use and have no dependencies. Since clusters rely on the VPC Peering connection, the Peering module must be deleted first.
+
+1. Before proceeding with cluster deletion, ensure that the VPC Peering has been successfully removed by following the steps in the [deletion of the VPC Peering](#deletion-of-the-vpc-peering) section.
+
+1. Go to the directory `clusters` where the clusters configurations are managed.
+
+1. Execute the following command to generate a plan for deleting the clusters, ensuring the correct variables are passed:
+
+   ```bash
+   terraform plan -destroy \
+     -var cluster_1_region="$CLUSTER_1_REGION" \
+     -var cluster_2_region="$CLUSTER_2_REGION" \
+     -out destroy-clusters.plan
+   ```
+
+   This command will generate a plan to destroy the clusters and save it in a file called `destroy-clusters.plan`.
+
+1. After reviewing the destruction plan, apply the changes to delete the cluster resources by running:
+
+   ```bash
+   terraform apply destroy-clusters.plan
+   ```
+
+   Once the `apply` command completes successfully, the clusters and associated resources will be deleted.
+
+### Deletion of the S3 Backup Bucket
+
+The S3 backup bucket can be deleted once it is no longer in use and has no dependencies.
+To delete the bucket, follow these steps:
+
+1. Navigate to the `backup_bucket` directory created during the [S3 module setup](#s3-module-setup).
+   This directory contains the configuration for managing the S3 bucket.
+
+1. Run the Terraform destroy plan:  
+   Execute the following Terraform command to plan the destruction of the S3 bucket and other resources:
+
+   ```bash
+   terraform plan -destroy -out destroy-bucket.plan
+   ```
+
+   This command will generate a plan to destroy the resources and output it into a file called `destroy-bucket.plan`.
+
+1. After reviewing the plan, apply the changes to delete the resources with the following command:
+
+   ```bash
+   terraform apply destroy-bucket.plan
+   ```
+
+   Once the `apply` command is successfully completed, the S3 bucket and associated resources will be deleted.
