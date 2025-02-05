@@ -27,10 +27,10 @@ const versionMappings = [
     docsVersion: "8.4",
     optimizeVersion: "3.12.0",
   },
-  // {
-  //   docsVersion: "8.3",
-  //   optimizeVersion: "3.11.0",
-  // },
+  {
+    docsVersion: "8.3",
+    optimizeVersion: "3.11.0",
+  },
 ];
 
 /** @type {Array<UnsupportedVersion>} */
