@@ -102,7 +102,7 @@ Before setting up Terraform, you need to create an S3 bucket that will store the
 To simplify the process and avoid repeating the region in each command, set your desired AWS region as an environment variable:
 
 ```bash
-export S3_TF_BUCKET_REGION=<your-region>
+export S3_TF_BUCKET_REGION="<your-region>"
 ```
 
 Replace `<your-region>` with the AWS region where you want to create the S3 bucket (e.g., `us-east-1`).
@@ -154,94 +154,13 @@ This module sets up the foundational configuration for ROSA HCP and Terraform us
 
 We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, simplifying infrastructure management.
 
-The [Camunda-provided module](https://github.com/camunda/camunda-tf-rosa) is publicly available and serves as a robust starting point for deploying Red Hat OpenShift clusters on AWS using a Hosted Control Plane. It is highly recommended to review this module before implementation to understand its structure and capabilities.
+The [Camunda-provided module](https://github.com/camunda/camunda-tf-rosa) is publicly available and serves as a starting point for deploying Red Hat OpenShift clusters on AWS using a Hosted Control Plane.
+It is highly recommended to review this module before implementation to understand its structure and capabilities.
 
-Please note that this module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html). It is presented as an example for running Camunda 8 in ROSA. For advanced use cases or custom setups, we encourage you to use the official module, which includes vendor-supported features.
+Please note that this module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html).
+It is presented as an example for running Camunda 8 in ROSA.
 
-#### Structure of the clusters
-
-The dual-cluster setup requires managing two distinct clusters in different regions. To simplify this process, this guide uses a dedicated folder and terminal for each cluster. Additionally, a separate terminal will be used for managing common resources later.
-
-**Terminal setup for each cluster:**
-<Tabs groupId="region" defaultValue="region1" queryString values={
-[
-{label: 'Region 1', value: 'region1' },
-{label: 'Region 2', value: 'region2' },
-]}>
-
-<TabItem value="region1">
-
-1.  Create and configure a dedicated directory for **region 1**
-
-    ```bash
-    mkdir region1
-    cd region1
-
-    # set the region, adjust to your needs
-    export AWS_REGION='us-east-1'
-
-    # ensure bucket variables are set
-    export S3_TF_BUCKET_REGION=<your-region>
-    export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
-    ```
-
-1.  Copy the initial module configuration file `config.tf` into this directory.
-    This configuration will use the previously created S3 bucket for storing the Terraform state file:
-
-```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/region1/config.tf
-```
-
-3.  After setting up the `config.tf` file and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
-
-```bash
-export S3_TF_BUCKET_KEY="camunda-terraform/$AWS_REGION.tfstate"
-
-echo "Storing $AWS_REGION terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
-
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
-```
-
-</TabItem>
-
-<TabItem value="region2">
-
-1.  Create and configure a dedicated directory for **region 2**
-
-    ```bash
-    mkdir region2
-    cd region2
-
-    # set the region, adjust to your needs
-    export AWS_REGION='us-east-2'
-
-    # ensure bucket variables are set
-    export S3_TF_BUCKET_REGION=<your-region>
-    export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
-    ```
-
-1.  Copy the initial module configuration file `config.tf` into this directory.
-    This configuration will use the previously created S3 bucket for storing the Terraform state file:
-
-```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/region2/config.tf
-```
-
-3.  After setting up the `config.tf` file and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
-
-```bash
-export S3_TF_BUCKET_KEY="camunda-terraform/$AWS_REGION.tfstate"
-
-echo "Storing $AWS_REGION terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
-
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
-```
-
-</TabItem>
-
-</Tabs>
-
-With both regions configured, Terraform is now connected to the S3 bucket for managing the state files of each region.
+**For production or advanced use cases or custom setups, we encourage you to use the [official module](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html)**, which includes vendor-supported features.
 
 #### Set up ROSA authentication
 
@@ -292,11 +211,12 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    rosa whoami
    ```
 
-1. As you will use multiple regions, specify `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
+1. Configure `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
 
    ```bash
-   export CLUSTER_1_REGION=us-east-1
-   export CLUSTER_2_REGION=us-east-2
+   # set the region, adjust to your needs
+   export CLUSTER_1_REGION="us-east-1"
+   export CLUSTER_2_REGION="us-east-2"
    ```
 
 1. Verify your AWS quotas for each region:
@@ -325,113 +245,97 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    rosa verify openshift-client
    ```
 
-#### Set up the ROSA clusters module
+#### Create the clusters configuration module
 
-This part of the guide uses the dedicated folder and terminal for each cluster.
-Use the terminal configured [in the previous step](#structure-of-the-clusters).
+The dual-cluster setup requires managing two distinct clusters in different regions.
+For the simplicity of usage, we will manage the two clusters using a single module, therefore
+this guide uses a dedicated [aws terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) for each region.
 
-**Terminal setup for each cluster:**
-<Tabs groupId="region" defaultValue="region1" queryString values={
-[
-{label: 'Region 1', value: 'region1' },
-{label: 'Region 2', value: 'region2' },
-]}>
+1. Initiate the module by creating a `clusters` folder and then navigating to it:
 
-<TabItem value="region1">
+   ```bash
+   mkdir clusters
+   cd clusters
+   ```
 
-1.  Verify that you are in the project directory for **region 1**:
+2. Configure your topology deployment, as you will use multiple regions, specify `CLUSTER_1_REGION` and `CLUSTER_2_REGION` with the target regions respectively.
 
-    ```bash
-    pwd
+   ```bash
+   # set the region, adjust to your needs
+   export CLUSTER_1_REGION="us-east-1"
+   export CLUSTER_2_REGION="us-east-2"
 
-    # Example output:
-    # /home/your-username/camunda/region1
-    ```
+   # ensure bucket variables are set
+   export S3_TF_BUCKET_REGION="<your-region>"
+   export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
+   ```
 
-1.  Create a file named `cluster_region_1.tf` in the same directory as your `config.tf`.
-    Add the module configuration by referencing the provided file:
+3. Ensure that your `RHCS_TOKEN` is defined and valid (otherwise, renew it on [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa)):
 
-    ```hcl reference
-    https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/region1/cluster_region_1.tf
-    ```
+   ```bash
+   rosa login --token="$RHCS_TOKEN"
+   ```
 
-1.  [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
+4. Copy the initial module configuration file `config.tf` into this directory.
+   This configuration will use the previously created S3 bucket for storing the Terraform state file:
 
-```bash
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
-```
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/clusters/config.tf
+   ```
 
-1.  Confirm that the region defined in your environment variable matches the configuration.
-    Use the provided script to check and verify the setup:
+5. Create a file named `cluster_region_1.tf` in the same directory as your `config.tf`.
+   This file describes the cluster of the region 1:
 
-    ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/provision/verify-region1.sh
-    ```
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
+   ```
 
-</TabItem>
+6. Create a file named `cluster_region_2.tf` in the same directory as your `config.tf`.
+   This file describes the cluster of the region 2:
 
-<TabItem value="region2">
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/clusters/cluster_region_2.tf
+   ```
 
-1.  Verify that you are in the project directory for **region 2**:
+7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
 
-    ```bash
-    pwd
+   ```bash
+   export S3_TF_BUCKET_KEY="camunda-terraform/clusters.tfstate"
 
-    # Example output:
-    # /home/your-username/camunda/region2
-    ```
+   echo "Storing clusters terraform state in s3://$S3_TF_BUCKET_NAME/$S3_TF_BUCKET_KEY"
 
-1.  Create a file named `cluster_region_2.tf` in the same directory as your `config.tf`.
-    Add the module configuration by referencing the provided file:
+   terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
+   ```
 
-    ```hcl reference
-    https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/region2/cluster_region_2.tf
-    ```
+**For each cluster's file:**
 
-1.  [Initialize](#initialize-terraform) Terraform for this module using the following Terraform command:
+:::note Configure each cluster
 
-```bash
-terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY" -backend-config="region=$S3_TF_BUCKET_REGION"
-```
+- Customize the cluster name, availability zones, with the values of your choice.
+- Additionally, provide a secure username and password for the cluster administrator.
+  We strongly recommend managing sensitive information using a secure secrets management solution like HashiCorp Vault. For details on how to inject secrets directly into Terraform via Vault, see the [Terraform Vault Secrets Injection Guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
 
-1.  Confirm that the region defined in your environment variable matches the configuration. Use the provided script to check and verify the setup:
+- By default, a cluster is accessible from the internet. If you prefer to restrict access, please refer to the [official documentation of the module](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest#input_private).
 
-    ```bash reference
-    https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/provision/verify-region2.sh
-    ```
-
-</TabItem>
-
-</Tabs>
-
-**For each cluster:**
+:::
 
 1. Configure each cluster by editing the beginning of their respective files in the `locals` section:
 
-   :::note Configure each cluster
-
-   Customize the cluster name, availability zones, with the values you previously retrieved from the Red Hat Console.
-   Additionally, provide a secure username and password for the cluster administrator.
-
-   Ensure that you have set the environment `RHCS_TOKEN` is set with your [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa).
-
-   By default, a cluster is accessible from the internet. If you prefer to restrict access, please refer to the official documentation of the module.
-
-   :::
-
-   - Each cluster should have a unique, non-overlapping CIDR block to ensure proper functioning of the Submariner overlay network (as referenced in the [Submariner documentation](https://submariner.io/0.8/getting-started/architecture/globalnet)). This is essential for successful inter-cluster communication using the Submariner underlay network.
-
-   :::caution Camunda Terraform module
-
-   This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
-
-   We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-tf-rosa/blob/v2.0.0/modules/rosa-hcp/README.md) for more information.
-
-   :::
+   - Each cluster should have a unique, non-overlapping CIDR block to ensure proper functioning of the Submariner overlay network (as referenced in the [Submariner documentation](https://submariner.io/0.8/getting-started/architecture/globalnet)).
+     This is essential for successful inter-cluster communication using the Submariner underlay network.
+     If you can't fullfill this requirement, you may need to implement a [Submariner Global Private Network](https://submariner.io/0.8/getting-started/architecture/globalnet/).
 
 1. Configure user access to the clusters. By default, the user who creates an OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster will be created.
 
 1. Customize the clusters setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-tf-rosa/blob/v2.0.0/modules/rosa-hcp/README.md).
+
+:::caution Camunda Terraform module
+
+This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
+
+We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-tf-rosa/blob/v2.0.0/modules/rosa-hcp/README.md) for more information.
+
+:::
 
 #### Define outputs
 
@@ -441,78 +345,24 @@ Each module that you have previously set up contains an output definition at the
 
 #### Execution
 
-:::note Secret management
-
-We strongly recommend managing sensitive information (for example, the OpenSearch or Aurora username and password) using a secure secrets management solution like HashiCorp Vault. For details on how to inject secrets directly into Terraform via Vault, see the [Terraform Vault Secrets Injection Guide](https://developer.hashicorp.com/terraform/tutorials/secrets/secrets-vault).
-
-:::
-
-**Terminal setup for each cluster:**
-the cluster creation process can be performed in parallel using dedicated terminals for each cluster.
-
-<Tabs groupId="region" defaultValue="region1" queryString values={
-[
-{label: 'Region 1', value: 'region1' },
-{label: 'Region 2', value: 'region2' },
-]}>
-
-<TabItem value="region1">
-
-1.  Verify that you are in the project directory for **region 1**:
-
-    ```bash
-    pwd
-
-    # Example output:
-    # /home/your-username/camunda/region1
-    ```
-
 1.  Plan the configuration files:
 
     ```bash
-    terraform plan -out cluster1.plan # describe what will be created
+    # describes what will be created
+    terraform plan -out clusters.plan \
+        -var cluster_1_region="$CLUSTER_1_REGION" \
+        -var cluster_2_region="$CLUSTER_2_REGION"
     ```
 
 1.  After reviewing the plan, you can confirm and apply the changes.
 
     ```bash
-    terraform apply cluster1.plan     # apply the creation
+    # creates the resources
+    terraform apply clusters.plan
     ```
 
-    Terraform will now create the OpenShift cluster with all the necessary configurations.
-    The completion of this process may require approximately 20-30 minutes for each component.
-
-</TabItem>
-
-<TabItem value="region2">
-
-1.  Verify that you are in the project directory for **region 2**:
-
-    ```bash
-    pwd
-
-    # Example output:
-    # /home/your-username/camunda/region2
-    ```
-
-1.  Plan the configuration files:
-
-    ```bash
-    terraform plan -out cluster2.plan # describe what will be created
-    ```
-
-1.  After reviewing the plan, you can confirm and apply the changes.
-
-    ```bash
-    terraform apply cluster2.plan     # apply the creation
-    ```
-
-    Terraform will now create the OpenShift cluster with all the necessary configurations.
-    The completion of this process may require approximately 20-30 minutes for each component.
-
-</TabItem>
-
-</Tabs>
+    Terraform will now create the OpenShift clusters with all the necessary configurations.
+    The completion of this process may require approximately 20-30 minutes.
 
 ### Region peering module setup
 
@@ -524,38 +374,27 @@ Please note that, once the VPC peering is created, it becomes a dependency of th
 
 #### Retrieve the peering cluster variables
 
-To create the peering between each cluster’s VPC, you need to gather some information using the `rosa` and `aws` CLI tools. Follow these steps:
+To create the peering between each cluster’s VPC, you need to gather some information using the [terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) of the [OpenShift clusters module setup](#openshift-clusters-module-setup). Follow these steps:
 
-1. Open a **new terminal** that will be used for common resources.
-
-   First, confirm that you're in the parent directory where your cluster modules reside (`region1` and `region2` directories).
+1. First, go in the clusters module directory
 
    ```bash
-   ls
-
-   # Example output:
-   # region1 region2
+   cd clusters
    ```
 
-1. Save the following script as `gather-peering-info.sh`
-
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/provision/gather-peering-info.sh
-   ```
-
-   Once the script is saved, run the following command to source the script and retrieve the necessary information from the OpenShift clusters:
+1. Then for each cluster, save the associated [VPC ID](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc):
 
    ```bash
-   source gather-peering-info.sh
-   ```
+   export CLUSTER_1_VPC_ID="$(terraform output -raw cluster_1_vpc_id)"
+   echo "CLUSTER_1_VPC_ID=$CLUSTER_1_VPC_ID"
 
-1. Review the output:
-   - The script will output the configuration of the two VPCs involved in the peering process.
-   - One cluster will be referenced as the **owner**, and the other as the **accepter**. This designation is used solely for networking purposes and does not imply any dependency between the two clusters.
+   export CLUSTER_2_VPC_ID="$(terraform output -raw cluster_2_vpc_id)"
+   echo "CLUSTER_2_VPC_ID=$CLUSTER_2_VPC_ID"
+   ```
 
 #### Create the peering configuration module
 
-In the parent directory where your cluster modules reside (`region1` and `region2`), create a new directory called `peering` for the VPC peering configuration:
+In the parent directory where your clusters module reside (`clusters`), create a new directory called `peering` for the VPC peering configuration:
 
 ```bash
 mkdir peering
@@ -567,20 +406,17 @@ We'll re-use the previously configured S3 bucket to store the state of the peeri
 Begin by setting up the `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/peering/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/peering/config.tf
 ```
 
-Alongside the `config.tf` file, create a variable file called `variables.tf` to reference the variables for this configuration:
+Alongside the `config.tf` file, create a file called `peering.tf` to reference the peering configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/peering/variables.tf
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/peering/peering.tf
 ```
 
-Finally, create a file called `peering.tf` to reference the peering configuration:
-
-```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/peering/peering.tf
-```
+One cluster will be referenced as the **owner**, and the other as the **accepter**.
+This designation is used solely for networking purposes and does not imply any dependency between the two clusters.
 
 #### Initialize Terraform
 
@@ -588,7 +424,7 @@ Once the `.tf` files are set up, configure the backend for Terraform and set the
 
 ```bash
 # ensure bucket variables are set
-export S3_TF_BUCKET_REGION=<your-region>
+export S3_TF_BUCKET_REGION="<your-region>"
 export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
 
 export S3_TF_BUCKET_KEY="camunda-terraform/peering.tfstate"
@@ -656,11 +492,11 @@ Once the `.tf` files are set up, configure the backend for Terraform and set the
 
 ```bash
 # ensure bucket variables are set
-export S3_TF_BUCKET_REGION=<your-region>
+export S3_TF_BUCKET_REGION="<your-region>"
 export S3_TF_BUCKET_NAME="my-rosa-dual-tf-state"
 
 # set the region of the bucket
-export AWS_REGION='us-east-1'
+export AWS_REGION="us-east-1"
 
 export S3_TF_BUCKET_KEY="camunda-terraform/backup-bucket.tfstate"
 
@@ -825,3 +661,5 @@ It includes:
 - Installation of Camunda 8 in OpenShift dual-region.
 
 Follow the guide next steps in the [Generic OpenShift Dual-Region guide of Camunda 8 Installation](/self-managed/setup/deploy/openshift/dual-region.md#setup-advanced-cluster-management-and-submariner).
+
+## 4. Deletion of the Terraform resources

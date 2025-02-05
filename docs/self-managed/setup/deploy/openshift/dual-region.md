@@ -568,6 +568,8 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-h
 
 ## Failover
 
+Consult the generic [dual-region failover procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md).
+
 ## Pitfalls to avoid
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
