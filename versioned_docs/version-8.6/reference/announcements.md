@@ -181,6 +181,10 @@ We are introducing a new base path for both the Operate and Tasklist **web appli
 **API URLs** for both Operate and Tasklist remain **unchanged**.
 :::
 
+### New default port for `/actuator` endpoints
+
+The `/actuator` endpoints (including `/backups`) now default to port 9600. Ensure your `management.server.port` configuration parameter is correctly set before working with the [management API](/self-managed/zeebe-deployment/operations/management-api.md).
+
 ## Camunda 8.5
 
 Release date: 9th of April 2024
