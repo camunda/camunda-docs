@@ -433,14 +433,6 @@ Here are some points to keep in mind when considering observability:
   ```
 
 - A tool such as [Loki](https://grafana.com/oss/loki/) could be used for the retention and archival of logs. It can also be used to aggregate logs.
-- It is possible to enable audit logging for Camunda components to track user actions, especially for sensitive data or configuration changes. Here is an example configuration to change the log level of optimize within the core components. This can be added in your `production-values.yaml`:
-
-  ```yaml
-  core:
-    env:
-      - name: "OPTIMIZE_LOG_LEVEL"
-        value: "TRACE"
-  ```
 
 ## Bringing it All Together
 
