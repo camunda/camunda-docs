@@ -297,18 +297,17 @@ Here are some points to keep in mind when considering reliability:
 
   For example, this is the default affinity configuration for the Core Pod in the Camunda Helm chart:
 
-  ```
+  ```yaml
   affinity:
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-                - key: app.kubernetes.io/component
-                  operator: In
-                  values:
-                    - core
-            topologyKey: kubernetes.io/hostname
-
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/component
+                operator: In
+                values:
+                  - core
+          topologyKey: kubernetes.io/hostname
   ```
 
 This configuration ensures that Core Pods with the deafult label `app.kubernetes.io/component=core` are not scheduled on the same node. The primary benefits include:
@@ -346,7 +345,7 @@ The `camunda-credentials` generated secret will not be deleted if the helm chart
 :::
 
 - When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version elease notes before upgrading and perform the upgrade on a test environment first before attempting in production.
-- Make sure to not store any state or important, long term business data in the local file system of the container. A pod is transient, if the pod is restarted then the data will get wiped. It is better to create a volume and volume mount instead. Here is some example configuration for the core component to create persistent storage:
+- Make sure to not store any state or important, long term business data in the local file system of the container. A Pod is transient, if the Pod is restarted then the data will get wiped. It is better to create a volume and volume mount instead. Here is some example configuration for the core component to create persistent storage:
 
   ```yaml
   core:
@@ -395,7 +394,7 @@ You should only enable the auto-mounting of a service account token when the app
 
 - If you have a use case for enabling [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) then it is recommended to do so.
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
-- It is possible to have a pod security standard that is suitable to the security constraints you might have. This is possible through modifying the Pod Security Admission. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/) in order to do so.
+- It is possible to have a pod security standard that is suitable to the security constraints you might have. This is possible through modifying the Pod Security Admission. Please refer to the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation in order to do so.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your `production-values.yaml`.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information please visit the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 - It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is the default configuration for the core component:
