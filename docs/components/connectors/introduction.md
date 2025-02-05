@@ -1,41 +1,69 @@
 ---
 id: introduction-to-connectors
-title: Introduction
+title: Connectors
 description: "A Connector is a reusable building block that performs the integration with an external system and works out of the box."
 keywords: [bridge, reusable component, low code]
 ---
 
-A **Connector** is a reusable building block that performs the integration with an external system.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import "./react-components/\_connectors-table.css";
+import OverviewImg from './img/connector-overview.png';
 
-Most processes require interaction with systems outside of Camunda to orchestrate and complete work.
+import Marketplace from './react-components/\_banner-marketplace.md'
+import ConnectorsGrid from './react-components/\_connectors-card';
+import ConnectorsGridSml from './react-components/\_connectors-card-sml';
+import { gettingStartedCards, customConnectorCards, latestConnectorCards, latestConnectorCardsSml, popularConnectorCards, popularConnectorCardsSml } from './react-components/\_connectors-card-data';
 
-- In **human task orchestration**, actors are notified of pending or completed processes through communication tools such as [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) for example in onboarding flow.
-- In **business processes**, records are created or updated in enterprise business systems.
-- In **microservices orchestration**, processes communicate through events pushed to a common systems through infrastructure such as [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md).
+<p><a title="Find a Camunda connector" href="../out-of-the-box-connectors/available-connectors-overview"><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}} className="fade-in-top-image"/></a>Camunda connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
 
-Connectors are often represented as tasks in a [BPMN process](/components/concepts/processes.md), which can be configured with parameters specific for the external system. As such, it can remove the need to write custom programming code for integration.
+- Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) Connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
+- In microservices orchestration, use a [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) connector to add real-time messaging to your automated processes.
 
-Connectors offer a multilayer coding experience, enabling users with a variety of technical abilities to be successful when integrating with external systems.
+Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 
-![Multilayer Coding Experience](img/multilayer-coding-experience.png)
+<a class="button button--outline button--secondary button--md button--hero get-started" title="Find a Camunda connector" href="../out-of-the-box-connectors/available-connectors-overview" style={{marginBottom: '40px'}}>Find a Camunda connector</a>
 
-A Connector consists of two parts:
+## Get started
 
-1. The programming code in Java to connect to the external system (for example, refer to the [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic) for outbound Connectors.)
-2. The user interface to be used during modeling, which is provided using [Connector Templates](manage-connector-templates.md).
+New to connectors? Learn about connector types and how to start using connectors in your processes.
 
-Users interacting with Connectors may only need to understand the configuration options exposed by the Connector Template in the properties panel.
+<ConnectorsGrid connectors={gettingStartedCards} />
 
-Connectors are available [out-of-the-box (OOTB)](./out-of-the-box-connectors/available-connectors-overview.md) and come with [Connector Templates](manage-connector-templates.md) which customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), which can also be used when creating custom Connectors via the [Connector SDK](./custom-built-connectors/connector-sdk.md).
+:::info
+Get started by learning how to [integrate a Camunda 8 connector](/guides/configuring-out-of-the-box-connector.md).
+:::
 
-Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) provides Connectors by Camunda partners and community contributors.
+## Custom connectors
 
-## Next steps
+Build and deploy your own [custom connectors](../custom-built-connectors/build-connector) using connector templates and the connector SDK.
 
-- [Learn about types of Connectors](./connector-types.md)
-- [Use Connectors in your BPMN process](./use-connectors/index.md)
-- [Learn about available out-of-the-box Connectors](./out-of-the-box-connectors/available-connectors-overview.md)
-- [Configure Connector Templates](manage-connector-templates.md)
-- [Visit the Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md)
-- [Install Connectors in Self-Managed](/self-managed/connectors-deployment/install-and-start.md)
+<ConnectorsGrid connectors={customConnectorCards} />
+
+## Featured connectors
+
+Get started with our latest and most popular connectors.
+
+<Tabs groupId="featured" defaultValue="new" queryString values={
+[
+{label: 'Latest', value: 'new' },
+{label: 'Popular', value: 'popular' },
+]}>
+<TabItem value="new">
+
+<ConnectorsGrid connectors={latestConnectorCards} />
+
+<ConnectorsGridSml connectors={latestConnectorCardsSml} />
+
+</TabItem>
+<TabItem value="popular">
+
+<ConnectorsGrid connectors={popularConnectorCards} />
+
+<ConnectorsGridSml connectors={popularConnectorCardsSml} />
+
+</TabItem>
+
+</Tabs>
+
+<Marketplace/>

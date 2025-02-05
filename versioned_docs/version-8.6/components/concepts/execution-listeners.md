@@ -53,7 +53,7 @@ Execution listeners are processed by [job workers](/components/concepts/job-work
 See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for an example of how to create a job worker and handler that can also process execution listener jobs.
 
 :::note
-[Throwing a BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md/#throwing-and-handling-bpmn-errors) for an execution listener's job is not supported.
+[Throwing a BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md#throwing-and-handling-bpmn-errors) for an execution listener's job is not supported.
 :::
 
 ## Variables in an execution listener

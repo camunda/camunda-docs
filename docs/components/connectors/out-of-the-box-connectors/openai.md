@@ -1,7 +1,7 @@
 ---
 id: openai
 title: OpenAI Connector
-sidebar_label: OpenAI Connector
+sidebar_label: OpenAI
 description: Send messages to OpenAI from your BPMN process using the OpenAI Connector Connector.
 ---
 

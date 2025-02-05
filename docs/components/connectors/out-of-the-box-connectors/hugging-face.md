@@ -1,7 +1,7 @@
 ---
 id: hugging-face
 title: Hugging Face Connector
-sidebar_label: Hugging Face Connector
+sidebar_label: Hugging Face
 description: Interact with Hugging Face models from your BPMN process.
 ---
 

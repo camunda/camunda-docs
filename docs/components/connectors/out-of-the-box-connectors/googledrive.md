@@ -1,6 +1,7 @@
 ---
 id: googledrive
 title: Google Drive Connector
+sidebar_label: Google Drive
 description: Create folders or files from a Google Drive template from your BPMN process.
 ---
 

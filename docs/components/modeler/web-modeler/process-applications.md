@@ -41,7 +41,7 @@ Validate your process application in development before deploying it to testing,
 
 ## Process application versioning
 
-Although you cannot version a process application itself, you can use [bulk milestone creation](milestones.md#bulk-milestone-creation) and version tags to save a single 'versioned' snapshot of all the process application files in one action, instead of having to create separate milestones for every file.
+Although you cannot version a process application itself, you can use [bulk version creation](versions.md#bulk-version-creation) and version tags to save a single 'versioned' snapshot of all the process application files in one action, instead of having to create separate versions for every file.
 
 - [Process application versioning](process-application-versioning.md)
 

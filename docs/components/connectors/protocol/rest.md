@@ -1,6 +1,7 @@
 ---
 id: rest
 title: REST Connector
+sidebar_label: REST
 description: Make a request to a REST API and use the response in the next steps of your process.
 ---
 
@@ -203,6 +204,12 @@ Secrets are currently not supported in the body of a **REST Connector**.
 }
 ```
 
+### Encoding
+
+In certain scenarios, such as when working with APIs that require pre-encoded URL elements, the REST Connector's default behavior may inadvertently modify encoded segments.
+
+To avoid this, set the `skipEncoding` value to `"true"` in the XML. This disables the automatic decoding and re-encoding process, ensuring the URL is sent to the server exactly as provided.
+
 ### Network communication timeouts
 
 - **Connection timeout in seconds** determines the time frame in which the client will try to establish a connection with the server. If you do not specify a value, the system uses the default of 20 seconds. For cases where you need to wait indefinitely, set this value to 0.
@@ -232,6 +239,10 @@ The following fields are available in the `response` variable:
 
 :::note
 Starting from version 8.7.0, the REST Connector supports storing the response as a document. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
+
+:::note
+If your endpoint returns multiple Set-Cookie headers and you need to capture all of them, set `groupSetCookieHeaders` to `true` to aggregate them into a list.
 :::
 
 ## Output mapping
