@@ -456,7 +456,7 @@ module.exports = {
       {
         highlight: "bash",
         language: "curl",
-        logoClass: "bash",
+        logoClass: "curl",
       },
       {
         highlight: "java",
