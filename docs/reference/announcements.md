@@ -26,7 +26,7 @@ Camunda 8.8 is scheduled for release on 14 October 2025.
 </div>
 </div>
 
-<!-- NEEDS UPDATES BELOW-->
+## Camunda 8.7
 
 Camunda 8.7 is scheduled for release on 8 April 2025.
 
