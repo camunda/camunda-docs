@@ -17,7 +17,7 @@ The following regions are available for customers on Trial, Starter, and Enterpr
 
 :::
 
-## Available Google Cloud Platform (GCP) regions
+## Google Cloud Platform (GCP) regions
 
 The following GCP regions are currently supported in Camunda 8 SaaS.
 
@@ -33,7 +33,7 @@ The following GCP regions are currently supported in Camunda 8 SaaS.
 
 To learn more about each region code/location, refer to [Google cloud locations](https://cloud.google.com/about/locations).
 
-## Available Amazon Web Services (AWS) regions
+## Amazon Web Services (AWS) regions
 
 The following AWS regions are currently supported in Camunda 8 SaaS for Trial plan customers.
 
