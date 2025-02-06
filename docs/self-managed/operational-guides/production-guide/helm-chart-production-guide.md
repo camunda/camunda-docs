@@ -531,7 +531,7 @@ elasticsearch:
 # check the multi-namespace guide for the contents of the console configuration
 ```
 
-`orchestration.yalm` for the `orchestration` namespace:
+`orchestration.yaml` for the `orchestration` namespace:
 
 ```yaml
 global:
