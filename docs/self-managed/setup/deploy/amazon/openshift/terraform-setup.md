@@ -267,7 +267,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    Customize the cluster name, availability zones, with the values you previously retrieved from the Red Hat Console.
    Additionally, provide a secure username and password for the cluster administrator.
 
-   Ensure that you have set the environment `RHCS_TOKEN` is set with your [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa).
+   Ensure that you have set the environment variable `RHCS_TOKEN` with your [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa).
 
    By default, this cluster will be accessible from the internet. If you prefer to restrict access, please refer to the official documentation of the module.
 
