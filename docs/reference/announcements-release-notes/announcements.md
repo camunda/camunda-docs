@@ -33,22 +33,22 @@ Camunda 8.6 was released on 8 October, 2024.
 <div class="double-column-container">
 <div class="double-column-left">
 
-**[8.6 Announcements](/reference/announcements-release-notes/860.md)**
+**[8.6 Announcements](/reference/announcements-release-notes/860/860-release-notes.md)**
 
 </div>
 <div class="double-column-right">
 
-- [License key changes](/reference/announcements-release-notes/860.md#license-key-changes)
-- [Zeebe Java client](/reference/announcements-release-notes/860.md#zeebe-java-client)
-- [Deprecation: Zeebe Go client & CLI client (zbctl)](/reference/announcements-release-notes/860.md#deprecation-zeebe-go-client--cli-client-zbctl)
-- [Camunda 8 SaaS - Required cluster update](/reference/announcements-release-notes/860.md#camunda-8-saas---required-cluster-update)
-- [Support for Amazon OpenSearch for Optimize](/reference/announcements-release-notes/860.md#support-for-amazon-opensearch-for-optimize)
-- [Supported environment changes](/reference/announcements-release-notes/860.md#supported-environment-changes-openjdk-elasticsearch-amazon-opensearch)
-- [Connectors](/reference/announcements-release-notes/860.md#connectors)
-- [Flow control enabled by default in SaaS](/reference/announcements-release-notes/860.md#flow-control-enabled-by-default-in-saas)
-- [Camunda 8 Self-Managed](/reference/announcements-release-notes/860.md#camunda-8-self-managed)
-- [Camunda Optimize artifact and Docker tag separation](/reference/announcements-release-notes/860.md#camunda-optimize-artifact-and-docker-tag-separation)
-- [New base path for Operate and Tasklist web applications](/reference/announcements-release-notes/860.md#new-base-path-for-operate-and-tasklist-web-applications)
+- [License key changes](/reference/announcements-release-notes/860/860-release-notes.md#license-key-changes)
+- [Zeebe Java client](/reference/announcements-release-notes/860/860-release-notes.md#zeebe-java-client)
+- [Deprecation: Zeebe Go client & CLI client (zbctl)](/reference/announcements-release-notes/860/860-release-notes.md#deprecation-zeebe-go-client--cli-client-zbctl)
+- [Camunda 8 SaaS - Required cluster update](/reference/announcements-release-notes/860/860-release-notes.md#camunda-8-saas---required-cluster-update)
+- [Support for Amazon OpenSearch for Optimize](/reference/announcements-release-notes/860/860-release-notes.md#support-for-amazon-opensearch-for-optimize)
+- [Supported environment changes](/reference/announcements-release-notes/860/860-release-notes.md#supported-environment-changes-openjdk-elasticsearch-amazon-opensearch)
+- [Connectors](/reference/announcements-release-notes/860/860-release-notes.md#connectors)
+- [Flow control enabled by default in SaaS](/reference/announcements-release-notes/860/860-release-notes.md#flow-control-enabled-by-default-in-saas)
+- [Camunda 8 Self-Managed](/reference/announcements-release-notes/860/860-release-notes.md#camunda-8-self-managed)
+- [Camunda Optimize artifact and Docker tag separation](/reference/announcements-release-notes/860/860-release-notes.md#camunda-optimize-artifact-and-docker-tag-separation)
+- [New base path for Operate and Tasklist web applications](/reference/announcements-release-notes/860/860-release-notes.md#new-base-path-for-operate-and-tasklist-web-applications)
 
 </div>
 </div>
