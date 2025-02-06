@@ -27,7 +27,7 @@ For example, [service tasks](/components/modeler/bpmn/service-tasks/service-task
 
 Review [the BPMN 2.0 coverage documentation](docs/components/modeler/bpmn/bpmn-coverage.md) for a complete list of BPMN elements supported by our modeling tools.
 
-Additionally, visit [creating readable process models](/docs/components/best-practices/modeling/creating-readable-process-models.md) for general guidelines on modeling with BPMN.
+Additionally, visit [creating readable process models](/components/best-practices/modeling/creating-readable-process-models.md) for general guidelines on modeling with BPMN.
 
 ## BPMN 2.0 properties for execution
 
