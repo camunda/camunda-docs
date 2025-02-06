@@ -18,22 +18,6 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
-## Versioning changes
-
-## Deprecations
-
-## Known limitations
-
-## Major product/feature releases
-
-### Modeler
-
-lorem ipsum
-
-### Operate
-
-lorem ipsum
-
 ## API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 - [Web Modeler](#web-modeler)
