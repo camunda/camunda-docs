@@ -1,14 +1,14 @@
 ---
-id: announcements-860
-title: "8.6 Announcements"
+id: 860-announcements
+title: "Announcements"
 description: "Important changes and updates for the Camunda 8.6 release including deprecation & removal notices."
 ---
 
 Important changes and updates for the Camunda 8.6 release are summarized below.
 
-| Release date   | End of maintenance | Release notes                                        |
-| :------------- | :----------------- | :--------------------------------------------------- |
-| 8 October 2024 | 14 April 2026      | [8.6 release notes](/reference/release-notes/860.md) |
+| Release date   | End of maintenance | Release notes                                                                        |
+| :------------- | :----------------- | :----------------------------------------------------------------------------------- |
+| 8 October 2024 | 14 April 2026      | [8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md) |
 
 ## License key changes
 
@@ -58,7 +58,7 @@ The documentation of the Zeebe Go Client and CLI client (zbctl) moved to the [co
 
 ## Zeebe Spring SDK test support in 8.6.7
 
-[Testing support for the Zeebe Spring SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
+[Testing support for the Zeebe Spring SDK](../../../apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
 
 :::note
 This closes the feature gap where the Zeebe Spring SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).
