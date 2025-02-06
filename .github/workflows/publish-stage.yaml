@@ -1,9 +1,9 @@
-name: publish-steve
+name: publish-stage
 
 on:
   push:
     branches:
-      - "pepopowitz/d3-fallout-compilation-error"
+      - "main"
     tags-ignore:
       - "*"
 
@@ -20,6 +20,8 @@ jobs:
           node-version: 22
       - name: Install Dependencies
         run: npm ci
+      - name: Cache Docusaurus
+        uses: ./.github/actions/docusaurus-cache
       - name: Update redirects for environment
         run: "sed -i 's!https://unsupported.docs.camunda.io!https://stage.unsupported.docs.camunda.io!g' ./static/.htaccess"
       - name: Build
