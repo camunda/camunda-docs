@@ -37,7 +37,7 @@ CPT is in an early stage. It doesn't contain all features, and it is not optimiz
 
 ## Install
 
-We have two variations of CPT: for the [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) and the [Zeebe Java client](/apis-tools/java-client/index.md). Choose the one depending on which library you use in your process application.
+We have two variations of CPT: for the [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) and the [Camunda Java client](/apis-tools/java-client/index.md). Choose the one depending on which library you use in your process application.
 
 Add the following dependency to your Maven project:
 
@@ -90,11 +90,11 @@ Create a new Java class with the following structure:
 ```java
 package com.example;
 
+import io.camunda.client.CamundaClient;
+import io.camunda.client.api.response.ProcessInstanceEvent;
 import io.camunda.process.test.api.CamundaAssert;
 import io.camunda.process.test.api.CamundaProcessTestContext;
 import io.camunda.process.test.api.CamundaSpringProcessTest;
-import io.camunda.zeebe.client.ZeebeClient;
-import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -103,7 +103,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @CamundaSpringProcessTest
 public class MyProcessTest {
 
-    @Autowired private ZeebeClient client;
+    @Autowired private CamundaClient client;
     @Autowired private CamundaProcessTestContext processTestContext;
 
     @Test
@@ -112,7 +112,12 @@ public class MyProcessTest {
 
         // when
         final ProcessInstanceEvent processInstance =
-                client.newCreateInstanceCommand().bpmnProcessId("my-process").latestVersion().send().join();
+            client
+                .newCreateInstanceCommand()
+                .bpmnProcessId("my-process")
+                .latestVersion()
+                .send()
+                .join();
 
         // then
         CamundaAssert.assertThat(processInstance).isCompleted();
@@ -123,7 +128,7 @@ public class MyProcessTest {
 - `@SpringBootTest` is the standard Spring annotation for tests.
 - `@CamundaSpringProcessTest` registers the Camunda test execution listener that starts and stops the test runtime.
 - `@Test` is the standard JUnit 5 annotation for a test case.
-- (_optional_) Inject a preconfigured `ZeebeClient` to interact with the Camunda runtime.
+- (_optional_) Inject a preconfigured `CamundaClient` to interact with the Camunda runtime.
 - (_optional_) Inject a `CamundaProcessTestContext` to interact with the test runtime.
 - (_optional_) Use `CamundaAssert` to verify the process instance state.
 
@@ -134,28 +139,37 @@ public class MyProcessTest {
 ```java
 package com.example;
 
+import io.camunda.client.CamundaClient;
+import io.camunda.client.api.response.ProcessInstanceEvent;
 import io.camunda.process.test.api.CamundaAssert;
 import io.camunda.process.test.api.CamundaProcessTest;
 import io.camunda.process.test.api.CamundaProcessTestContext;
-import io.camunda.zeebe.client.ZeebeClient;
-import io.camunda.zeebe.client.api.response.ProcessInstanceEvent;
 import org.junit.jupiter.api.Test;
 
 @CamundaProcessTest
 public class MyProcessTest {
 
     // to be injected
-    private ZeebeClient client;
+    private CamundaClient client;
     private CamundaProcessTestContext processTestContext;
 
     @Test
     void shouldCompleteProcessInstance() {
         // given
-        client.newDeployResourceCommand().addResourceFromClasspath("my-process.bpmn").send().join();
+        client
+            .newDeployResourceCommand()
+            .addResourceFromClasspath("my-process.bpmn")
+            .send()
+            .join();
 
         // when
         final ProcessInstanceEvent processInstance =
-                client.newCreateInstanceCommand().bpmnProcessId("my-process").latestVersion().send().join();
+            client
+                .newCreateInstanceCommand()
+                .bpmnProcessId("my-process")
+                .latestVersion()
+                .send()
+                .join();
 
         // then
         CamundaAssert.assertThat(processInstance).isCompleted();
@@ -165,7 +179,7 @@ public class MyProcessTest {
 
 - `@CamundaProcessTest` registers the Camunda JUnit extension that starts and stops the test runtime.
 - `@Test` is the standard JUnit 5 annotation for a test case.
-- (_optional_) Get a preconfigured `ZeebeClient` injected to interact with the Camunda runtime.
+- (_optional_) Get a preconfigured `CamundaClient` injected to interact with the Camunda runtime.
 - (_optional_) Get a `CamundaProcessTestContext` injected to interact with the test runtime.
 - (_optional_) Use `CamundaAssert` to verify the process instance state.
 
@@ -243,25 +257,25 @@ public class MyProcessTest {
 
     @RegisterExtension
     private final CamundaProcessTestExtension extension =
-            new CamundaProcessTestExtension()
-                    // Change the version of the Camunda Docker image
-                    .withCamundaVersion("8.6.0")
-                    // Change the Zeebe Docker image
-                    .withZeebeDockerImageName("camunda/zeebe")
-                    // Set additional Zeebe environment variables
-                    .withZeebeEnv("env_1", "value_1")
-                    // Expose addition Zeebe ports
-                    .withZeebeExposedPort(4567)
-                    // Enable Connectors
-                    .withConnectorsEnabled(true)
-                    // Change the Connectors Docker image
-                    .withConnectorsDockerImageName("camunda/connectors")
-                    // Change version of the Connectors Docker image
-                    .withConnectorsDockerImageVersion("8.6.0")
-                    // Set additional Connectors environment variables
-                    .withConnectorsEnv("env_1", "value_1")
-                    // Set Connectors secrets
-                    .withConnectorsSecret("secret_1", "value_1");
+        new CamundaProcessTestExtension()
+            // Change the version of the Camunda Docker image
+            .withCamundaVersion("8.6.0")
+            // Change the Camunda Docker image
+            .withCamundaDockerImageName("camunda/camunda")
+            // Set additional Camunda environment variables
+            .withCamundaEnv("env_1", "value_1")
+            // Expose addition Camunda ports
+            .withCamundaExposedPort(4567)
+            // Enable Connectors
+            .withConnectorsEnabled(true)
+            // Change the Connectors Docker image
+            .withConnectorsDockerImageName("camunda/connectors")
+            // Change version of the Connectors Docker image
+            .withConnectorsDockerImageVersion("8.6.0")
+            // Set additional Connectors environment variables
+            .withConnectorsEnv("env_1", "value_1")
+            // Set Connectors secrets
+            .withConnectorsSecret("secret_1", "value_1");
 }
 ```
 
