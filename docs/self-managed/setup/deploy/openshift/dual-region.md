@@ -134,7 +134,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-h
 
 The creation of the MultiClusterHub using the manifest can sometimes remain stuck in the installation phase when created this way.
 
-To avoid this issue, please follow the [official instructions in the OpenShift UI Console](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
+To avoid this issue, you can follow the [official instructions in the OpenShift UI Console](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
 
 :::
 
@@ -152,12 +152,12 @@ oc --context $CLUSTER_1_NAME get mch -n open-cluster-management multiclusterhub 
 
 :::caution Security consideration
 
-    - A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
+- A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
 
-    - A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed.
-      This is the only local-cluster namespace that can exist.
+- A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed.
+  This is the only local-cluster namespace that can exist.
 
-    - :warning: For security reasons, do not give access to the `local-cluster` namespace to any user that is not a cluster-administrator.
+- :warning: For security reasons, do not give access to the `local-cluster` namespace to any user that is not a cluster-administrator.
 
 :::
 
