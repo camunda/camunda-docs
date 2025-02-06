@@ -4,6 +4,10 @@ title: Process application versioning
 description: Process applications allow you to deploy multiple related files together in a single bundle.
 ---
 
+:::note
+With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related announcement](/reference/announcements/870.md##web-modeler-milestones-renamed-to-versions).
+:::
+
 Although you cannot version a process application itself, you can use [bulk version creation](versions.md#bulk-version-creation) and version tags to save a single snapshot of all the process application files in one action, instead of having to create separate versions for every file.
 
 - When you create a version in any process application file, a version is also created with the same name (version tag) for all files currently available in the process application.

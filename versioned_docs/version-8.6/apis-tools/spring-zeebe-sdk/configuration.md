@@ -251,19 +251,6 @@ For a full set of configuration options, see [CamundaClientConfigurationProperti
 
 Here you find alternatives to authenticate with the cluster
 
-#### Username & Password
-
-You can also authenticate with the cluster through a simple authentication with username and password
-
-```yaml
-camunda:
-  client:
-    mode: self-managed
-    auth:
-      username: <your username>
-      password: <your password>
-```
-
 #### Keystore & Truststore
 
 You can also authenticate with the cluster through java's key- and truststore facilities

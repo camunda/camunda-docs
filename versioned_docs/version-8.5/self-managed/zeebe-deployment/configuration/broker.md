@@ -411,16 +411,18 @@ cluster:
 
 ### zeebe.broker.cluster.raft
 
+This section contains all properties required to configure raft.
+
 | Field                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                            | Example Value |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| raft                   | Configure raft properties.                                                                                                                                                                                                                                                                                                                                                                                                             |               |
 | enablePriorityElection | When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distributed the leaders uniformly across the brokers. Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_ENABLEPRIORITYELECTION`. | true          |
 
 #### YAML snippet
 
 ```yaml
 cluster:
-  raft: enablePriorityElection = true
+  raft:
+    enablePriorityElection: true
 ```
 
 ### zeebe.broker.cluster.flush

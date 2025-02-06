@@ -6,6 +6,10 @@ description: Work with versions in Web Modeler.
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
+:::note
+With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related announcement](/reference/announcements/870.md##web-modeler-milestones-renamed-to-versions).
+:::
+
 You can create a version at any time to save a snapshot of your BPMN or DMN diagram.
 
 You can restore a version to revert to a previous snapshot of your diagram, for example if you make a mistake while modeling. You can also compare two versions to see the differences between them.
