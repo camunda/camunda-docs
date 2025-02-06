@@ -338,48 +338,48 @@ In our example, we went with port-forwarding to a localhost, but other alternati
         zbctl status --insecure --address localhost:26500
         ```
 
-           <details>
-              <summary>Example output</summary>
-              <summary>
+      <details>
+         <summary>Example output</summary>
+         <summary>
 
-              ```bash
-              Cluster size: 8
-              Partitions count: 8
-              Replication factor: 4
-              Gateway version: 8.6.0
-              Brokers:
-              Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-                 Version: 8.6.0
-                 Partition 1 : Leader, Healthy
-                 Partition 6 : Follower, Healthy
-                 Partition 7 : Follower, Healthy
-                 Partition 8 : Follower, Healthy
-              Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-                 Version: 8.6.0
-                 Partition 1 : Follower, Healthy
-                 Partition 2 : Follower, Healthy
-                 Partition 3 : Follower, Healthy
-                 Partition 8 : Leader, Healthy
-              Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-                 Version: 8.6.0
-                 Partition 2 : Follower, Healthy
-                 Partition 3 : Leader, Healthy
-                 Partition 4 : Follower, Healthy
-                 Partition 5 : Follower, Healthy
-              Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-                 Version: 8.6.0
-                 Partition 4 : Follower, Healthy
-                 Partition 5 : Follower, Healthy
-                 Partition 6 : Follower, Healthy
-                 Partition 7 : Leader, Healthy
-              ```
+         ```bash
+         Cluster size: 8
+         Partitions count: 8
+         Replication factor: 4
+         Gateway version: 8.6.0
+         Brokers:
+         Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
+            Version: 8.6.0
+            Partition 1 : Leader, Healthy
+            Partition 6 : Follower, Healthy
+            Partition 7 : Follower, Healthy
+            Partition 8 : Follower, Healthy
+         Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
+            Version: 8.6.0
+            Partition 1 : Follower, Healthy
+            Partition 2 : Follower, Healthy
+            Partition 3 : Follower, Healthy
+            Partition 8 : Leader, Healthy
+         Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
+            Version: 8.6.0
+            Partition 2 : Follower, Healthy
+            Partition 3 : Leader, Healthy
+            Partition 4 : Follower, Healthy
+            Partition 5 : Follower, Healthy
+         Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+            Version: 8.6.0
+            Partition 4 : Follower, Healthy
+            Partition 5 : Follower, Healthy
+            Partition 6 : Follower, Healthy
+            Partition 7 : Leader, Healthy
+         ```
 
-              </summary>
+         </summary>
 
-           </details>
+      </details>
 
-    </TabItem>
-    </Tabs>
+</TabItem>
+</Tabs>
 
 2.  Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
