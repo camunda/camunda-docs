@@ -96,6 +96,8 @@ For a production setup, please consult the [official Red Hat Advanced Cluster Ma
 
 The cluster of the region 1 is referred to as `local-cluster` in **ACM**. This designation cannot be changed, as it is a constant name used to reference the [managed hub cluster](https://open-cluster-management.io/docs/concepts/cluster-inventory/managedcluster/).
 
+Later in this guide, we will refer to it as **first cluster**.
+
 :::
 
 1. Reference each cluster context name and ensure that each cluster's context name matches the corresponding cluster name. If the context name does not match, you will need to rename it to follow this guide.
@@ -114,7 +116,7 @@ The cluster of the region 1 is referred to as `local-cluster` in **ACM**. This d
    Apply the manifests to enable ACM:
 
    ```bash
-   oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/install-manifest.yml
+   oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/install-manifest.yml
    ```
 
    Verify that the installation succeeded after a few seconds:
@@ -141,7 +143,7 @@ The cluster of the region 1 is referred to as `local-cluster` in **ACM**. This d
    Apply the manifest:
 
    ```bash
-   oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/multi-cluster-hub.yml
+   oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/multi-cluster-hub.yml
    ```
 
    Wait until the status shows as "Running." This process can take up to 10 minutes:
@@ -152,7 +154,7 @@ The cluster of the region 1 is referred to as `local-cluster` in **ACM**. This d
 
    :::caution Security consideration
 
-   - A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
+   - A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management (`open-cluster-management` here), [learn more about this on the official documentation](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
 
    - A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed.
      This is the only local-cluster namespace that can exist.
@@ -172,7 +174,7 @@ The cluster of the region 1 is referred to as `local-cluster` in **ACM**. This d
    ```bash
    oc --context $CLUSTER_1_NAME get mch -A
 
-   oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/managed-cluster-set.yml
+   oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/managed-cluster-set.yml
    ```
 
 5. After creating the Managed Cluster Set, the next step is to import clusters into the set.
@@ -397,7 +399,7 @@ Set up the region ID using a unique integer for each region:
 The process of deploying applications in an OpenShift cluster can be influenced by its Security Context Constraints (SCCs) configuration.
 By default, OpenShift comes with more restrictive SCCs. For the purposes of this guide, which focuses on multi-region deployment, we assume this to be the standard setup.
 
-For custom configurations or specific requirements, please refer to the [installation guide for OpenShift](redhat-openshift.md#security-context-constraints-sccs)) which details the various available SCC options.
+For custom configurations or specific requirements, please refer to the [installation guide for OpenShift](redhat-openshift.md#security-context-constraints-sccs) which details the various available SCC options.
 
 #### Fill your deployment with actual values
 
@@ -442,6 +444,8 @@ This command:
 - Installs (or upgrades) the Camunda platform using the Helm chart on each cluster.
 - Substitutes the appropriate version using the `$CAMUNDA_HELM_CHART_VERSION` environment variable.
 - Applies the configuration from the value file.
+
+:warning: **Installation is not complete yet:** at this stage, the two Camunda 8 deployments cannot communicate. You need to follow the next step to complete the installation.
 
 :::note
 
