@@ -8,6 +8,8 @@ When you [create a cluster](/components/console/manage-clusters/create-cluster.m
 
 The following regions are available for customers on Trial, Starter, and Enterprise Plans. Enterprise customers can also discuss custom regions with their Customer Success Manager.
 
+![World map showing the location of each GCP and AWS region](./img/diagram-regions-map.png)
+
 :::note
 
 - Management cluster components (Console and Web Modeler) are currently hosted in GCP (EU). [Contact us](/reference/contact.md) if you have additional questions.
@@ -15,7 +17,7 @@ The following regions are available for customers on Trial, Starter, and Enterpr
 
 :::
 
-## Available Google Cloud Platform (GCP) regions
+## Google Cloud Platform (GCP) regions
 
 The following GCP regions are currently supported in Camunda 8 SaaS.
 
@@ -31,7 +33,7 @@ The following GCP regions are currently supported in Camunda 8 SaaS.
 
 To learn more about each region code/location, refer to [Google cloud locations](https://cloud.google.com/about/locations).
 
-## Available Amazon Web Services (AWS) regions
+## Amazon Web Services (AWS) regions
 
 The following AWS regions are currently supported in Camunda 8 SaaS for Trial plan customers.
 
