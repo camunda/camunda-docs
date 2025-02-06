@@ -5,36 +5,67 @@ description: "Obtains the status of the current Camunda license"
 sidebar_label: "Get status of Camunda license"
 hide_title: true
 hide_table_of_contents: true
-api: eJydVE1v2zAM/SuCzmmc9hTkFnRZ0aHrhjZdD0UPssPE6mTJk+i0geH/PlK2k7RugGEnWxT1Hj8eWUtUmyBnT/JGZ2ADyOeRXEHIvC5ROytn8keKStsgMAcRUGEVhFvHU1Z5DxbFpSoqu1LCdBAj6SGUjn4JuZYXkwl/TqP2OO/Rh6iZs0h+DKbKkuyKwZKXwIi1DFkOhRpSLQmsD4jB95Bk/VNBwDFh464E8nXpC2RI59K7EjzqNoWtMnrVV2hI4CsQ+tOohQ4iPh6JtTIhujny8686ptTRps4ZUJYMtjJGpYaM0b8ZyQ5pGT0/Uj9qYygNrLyN9D0t44ouh93pinb0Ab22G9kQG2pk8l4Od13d6K7h6wIwdyu630CsksKcDskBMYDfgmdF1bLyhi7rti/NLEnq3AVsZnXpPDbJ9oL8t8przjeWma/bHNeqMvQrjcuUieaPsuSu8oVVBXxMcCruFvdLcaUQXtVuLClwpnwPPZ1MJ5+isusJxPnPa9FmGEGPFdfD5ojlp7Ct878AN80zF5LGQuPunp+15UlBefDzimte973r+CJ6lFJ0Ikv789X5QnFc3x6XscHarl183jV6GAh3hVrYRj4Znw+y4WDXzovMFfQ2jqHdiFeNOc3WAS8zVUBOaK9h5uV+HdF2OhO/WkZxPuamtMrh1ALJZkPIVTomuiRrn+2/qXFpUtAm6SUYksv594fbL/Ozm+vLxe394owQx/iGMfmSBFMoexTHFRzvneGEvMu8Pqyg/1qLXcsQ3jApDT1nEcVc626UnvalIgm04/Ak6zpVAR68aRo2087yO7I/H6aHTwSVg1pR73n2fsOOO5VlUGIcM1Mx9WBvstT2Q321YI38BUgnF3I=
+api: eJydVMFO4zAQ/RVrzqEpnFBuFdtFu2LZFZTlgHpw3Glj1rGDPS5UUf59NU5SCgVptbk4icfvzZt54xZIbgIUD3ClFdqAsMxghUF53ZB2Fgr4WZLUNgiqUASSFINw6/SlovdoSVzIOtqVFGaAyMBjaJwNGKBo4Ww65eVz1BHnLfoxqnKW0BKDyaYxWkkGyx8DI7YQVIW1PKZaVCjGhBh8Dyk8PkUMNIEMaNcgFODKR1QEGTTeNehJ9xK20ujVWKFjAh9R6A+zFjqIdDgTa2lCCnNUoX/WSdJAWzpnUFrIwEZjZGkQihTfZTAgLVLke+p7bYzwSNHbRD/SMq4YNOw+r+hAH8hru4Guy4A0Mfloh5uhbtDxk0GNVLkVFLDBVCVJFRSQvyIG9Fv07KgWojdQQNv3pSvyvK1coK5oG+epy7dnkMFWes16U5l5u9e4ltEQFGCckib9fm9L7ipvWFnje4Hn4mZ+uxCXkvBZ7ibQZcCUb6HPp+fTD1E59BPE2a9voleYQA8dN8JWRM2HsH3wvwB33ZILqaLXtLvlY315SpQe/SxyzduxdwNfQk9WSkGQDS9fna8l5/X9fpEarO3apeNDo48T4a6gD33m08npkRpOdu28UK6uo01jaDfiWVMl5IEwZWIgFrT3MPNyvw5oB5+J3z2jOJ1wU3rnsLRQ5PlGUxXLiXJ1rvpj+7U0rsxrqe1owZBfzH7cXX+ZnVx9u5hf385PTifTCb1QEt+4QLW0B3lc4uG9czwhb5S3r1fQf12LQ8sIXyhvjNSWTZS0tsMoPexLtcyGcXiAti1lwDtvuo5/P0X0Oygelq/Tw19dBhXKFfo0e39wx51SChtKY2YiUx/dm2y1/VBfztkjfwFIJxdy
 sidebar_class_name: "get api-method"
-info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+info_path: versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Get status of Camunda license</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get status of Camunda license"}
+></Heading>
 
-<MethodEndpoint method={"get"} path={"/license"}></MethodEndpoint>
+<MethodEndpoint
+  method={"get"}
+  path={"/license"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Obtains the status of the current Camunda license
 
-## Request
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-<div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
-Obtains the current status of the Camunda license
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"validLicense"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"True if the Camunda license is valid, false if otherwise","type":"boolean","nullable":false}}></SchemaItem><SchemaItem collapsible={false} name={"licenseType"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Will return the license type property of the Camunda license","type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"validLicense\": true,\n  \"licenseType\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Obtains the current status of the Camunda license",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The response of a license request.",
+            type: "object",
+            properties: {
+              validLicense: {
+                description:
+                  "True if the Camunda license is valid, false if otherwise",
+                type: "boolean",
+                nullable: false,
+              },
+              licenseType: {
+                description:
+                  "Will return the license type property of the Camunda license",
+                type: "string",
+              },
+            },
+            title: "LicenseResponse",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
