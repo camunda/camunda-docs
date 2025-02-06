@@ -295,25 +295,25 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
 4. After deploying Submariner, check that the clusters can communicate with each other by using the `subctl` utility. Keep in mind that it might take several minutes before all status indicators turn green.
    If you don’t have the `subctl` CLI installed, you can follow the [installation instructions here](https://submariner.io/operations/deployment/).
 
-To verify this, run the following command:
+   To verify this, run the following command:
 
-```bash
-subctl show all --contexts "$CLUSTER_1_NAME,$CLUSTER_2_NAME"
-```
+   ```bash
+   subctl show all --contexts "$CLUSTER_1_NAME,$CLUSTER_2_NAME"
+   ```
 
-If everything is set up correctly, you should observe in the output of each cluster context the following statuses:
+   If everything is set up correctly, you should observe in the output of each cluster context the following statuses:
 
-          - Gateway's status: `All connections (1) are established`
-          - Connection's status: `connected   10.406614ms (RTT)`
+   - Gateway's status: `All connections (1) are established`
+   - Connection's status: `connected   10.406614ms (RTT)`
 
-  <details>
+<details>
     <summary>Example Submariner check successfull output</summary>
 
 ```text reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/submariner/output.txt
 ```
 
-  </details>
+</details>
 
 For more comprehensive details regarding the verification tests for Submariner using subctl, please refer to the [official documentation](https://submariner.io/operations/deployment/subctl/#verify).
 
