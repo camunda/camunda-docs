@@ -23,7 +23,7 @@ To navigate to the Camunda Marketplace, take the following steps:
 3. While modeling your BPMN diagram, you can incorporate Marketplace Connectors from the append menu. The append menu can be accessed in three ways:
 
 - From the canvas, select an element and click the **Change element** icon.
-- From the properties panel on the right side of the screen under the **Deploy** button, navigate to the **Template** section and click **Select**.
+- From the properties panel on the right side of the screen, navigate to the **Template** section and click **Select**.
 - From the side palette, click the **Create element** icon.
   ![change element](./img/change-element.png)
 

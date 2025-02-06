@@ -12,7 +12,7 @@ You can use either of the following approaches to link the DMN decision to be ca
 
 1. Select a business rule task from the canvas. A link icon appears at the bottom right.
 2. Click the link icon and choose any decision from the same project.
-3. Click **Link** to complete the linking process. In the properties panel on the right side of the screen under the **Deploy** button, the value **DMN decision** is chosen for the **Implementation** property, and the Decision ID of the decision you chose to link is automatically copied to the **Called decision** section.
+3. Click **Link** to complete the linking process. In the properties panel on the right side of the screen, the value **DMN decision** is chosen for the **Implementation** property, and the Decision ID of the decision you chose to link is automatically copied to the **Called decision** section.
 
 ![overlay](img/brt_overlay.png)
 

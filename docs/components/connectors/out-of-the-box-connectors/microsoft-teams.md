@@ -27,7 +27,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 ## Make your Microsoft Teams Connector executable
 
 To work with Microsoft Teams, choose the required connection type in the **Authentication** section and complete the
-mandatory fields highlighted in red in the Connector properties panel on the right side of the screen under the **Deploy** button.
+mandatory fields highlighted in red in the Connector properties panel on the right side of the screen.
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the

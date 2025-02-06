@@ -23,7 +23,7 @@ By linking a Camunda Form to a start event, process instances can be started wit
 1. Select a user task or none start event from the canvas and a link button will appear at the bottom right.
 2. Click on the button and choose any form from the same project.
 3. Click the **Link** button to complete the linking process.
-   In the properties panel on the right side of the screen under the **Deploy** button, the value **Camunda Form (linked)** is chosen for the **Type** property, and the form ID of the form you chose to link is automatically copied to the **Form ID** section.
+   In the properties panel on the right side of the screen, the value **Camunda Form (linked)** is chosen for the **Type** property, and the form ID of the form you chose to link is automatically copied to the **Form ID** section.
 
 <p><img src={FormLinkOverlayImg} style={{width: 400}} alt="Linking a Camunda Form" /></p>
 

@@ -20,7 +20,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your Google Drive Connector executable
 
-To make the **Google Drive Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen under the **Deploy** button.
+To make the **Google Drive Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
 
 ### Create a new folder
 

@@ -34,7 +34,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your Twilio Connector executable
 
-To work with the Twilio Connector, choose the required operation type in the **Operation** section and complete the mandatory fields highlighted in red in the Connector properties panel on the right side of the screen under the **Deploy** button.
+To work with the Twilio Connector, choose the required operation type in the **Operation** section and complete the mandatory fields highlighted in red in the Connector properties panel on the right side of the screen.
 
 ### Operation
 
