@@ -5,52 +5,169 @@ description: "Get incident by key"
 sidebar_label: "Get incident by key"
 hide_title: true
 hide_table_of_contents: true
-api: eJzlVm1v2zYQ/ivCfdo6NUr6MhTCMMC1mUyNIxu2nAYLAoGWzjEbiVRJKp1h6L8PR8nKi921/Tj0iy0d7/W5O/HZguW3BsJriGQmcpQWbnxQFWpuhZJRDiEsN+e4SV+DDxXXvESLmiy2IHmJEMIdbsAHISGEits1+JCjybSoyAOEcI4bT608sQvgg8bPtdCYQ2h1jT6YbI0lh3ALdlORSyEt3qIGH1ZKl9y2ot/fQNPckLmplDRoyOLV8TH9PQ05r7MMjQEfMiUtBQ23wKuqEJmrK/hkSG+7H1ktP2FGOVaaULCijUI1fk96zo5Cj3AlpKBY5z9qGkljuczw+w1blV7VWC3kLfiAsi6pt4t4PmXD6DRiI/BhEZ/Hk48x+BBN0ovBdBrFZymbzSYz8OHD5H0aT9IZS2YRm4MP7IoNF0k0idNxNE9YzGZPz4eTeBS5850LdpXMBsMkvRyMF6yXDgfjMRulbMwuWJz04kX81yAeuROSpOySxQn4cMHm88EZS+fR3yxlV0PGRi75zs2IDaP546APAgo7eJLQ6WR2kcaTJD2dLOIR3DQ+lGgMvz0AWuNDptENSSLKwwrGcvufeA+GSXTJqIrobDZIXOIzNp+ML93jlMWjKD5ziXxSyx/oM0ouLS3lXlZ0KmxBon6Tm4bEbw4tSCTveSFyjzYRjf36olRaLQssf/vRhSGMavPNul6/gm90Q3TbcPDw8OA/BoNprXSPxOt9JE6VXoo8R/kUgxfBi/9/uW/2y521DUdqvVG1ztCTynorVcv855iCt4f2YTCNvEcFe+gMfgI86HOGWa2F3bg7fYlco37p7rvrm8bfQqbUnUD3dvP8aj9D29/r3nLjtVSgRLtWxBxu0UFApCCE4P4k2OmaYHuHmwYouL7f8YlaFxDCtgWzCYNgu1bGNuG2UtqS8j3Xgi+LFks6axu54nVByBUq44UTP88zWaNHB8RYiIvYNXrU8jb6kbt8lX7m7t3xu+ODnkj1K14eBuHBz9ra6qCfVvmgJ8dzdo2Zk15b9K4ZfXN5Jc4d6B0Zm0wZ3Tgv52xO1+GOmHV2jf+kwb2XLkWXEL23SrDTPt3N5oePiZsjIVfKmXfzNHGEEb1pvSxERqXsF6w87kiZxzMr7tHjMvcyVVYF0teo4z7ebrDpydu5XSntlUoKq2iSnaXVqqZJWCtl28uXVpVnroftIFFRJgyCL1++HGW8rGXOjzJVEgiFyFAah2OH27iT+M+Mc5WZ3loo9x5oXKFGmWHQOTIBeaVBbos9OTo+Om6nytiSy0eBDq/ME6z6tlj8xwZVwYUkXy6xbbdO13B/4prbLRT4EJKrG79bjGvYbpfc4EIXTUPizzVqt9QPe+S2LheGnnMIV7wwuJdL/wmEX2Ydb//V2+f0B1PeDancuO0tanoDv6XT7rchErRGnqN22bQngyzDyj6y2ePutB/9d+aMEWXkNQHTg/dshp33g/n88d4peIm6Q/lnn52lV8qvaf4FfTtoRQ==
+api: eJzlVttu20YQ/RVintqUsZxLi4BvqrR2GcukIFFOUMMgVuTI2pjcZXaXTgWC/17MkqIvUprksciLRM7O9cwM9zRg+a2B4BpCmYkcpYUbH1SFmluhZJhDAOvdBe7SN+BDxTUv0aImiwYkLxECuMMd+CAkBFBxuwUfcjSZFhV5gAAucOepjSf2AXzQ+LkWGnMIrK7RB5NtseQQNGB3FbkU0uItavBho3TJbSf64y207Q2Zm0pJg4YsXp+e0t/TkMs6y9AY8CFT0lLQoAFeVYXIXF2jT4b0msPIav0JM8qx0oSCFV0UqvF70nN2FHqKGyEFxbr4UdNQGstlht9v2KkMqsZqIW/BB5R1Sb1dRcs5m4RnIZuCD6voIoo/ROBDGKeX4/k8jM5TtljEC/DhffxnGsXpgiWLkC3BB/aRTVZJGEfpLFwmLGKLp+eTOJqG7nzvgn1MFuNJkl6NZys2SCfj2YxNUzZjlyxKBvEq+mscTd0JSVJ2xaIEfLhky+X4nKXL8G+Wso8TxqYu+d7NlE3C5eOgDwIKO36S0Fm8uEyjOEnP4lU0hZvWhxKN4bdHQGt9yDS6IUlEeVzBWG7/E+/xJAmvGFURni/GiUt8wZbx7Mo9zlk0DaNzl8gntf6BPqPk0tJSHmRFp8IWJBo2uW1J/PbYgoTynhci92gT0divL0ql1brA8rcfXRjCqDbfrOvNa/hGN0S/DUcPjw/+YzCY1koPSLw5ROJM6bXIc5RPMXgxevH/L/ftYbmLruFIrTeq1hl6Ullvo2qZ/xxT8PuxfRjPQ+9RwR46g58AD/qcYVZrYXfuTl8j16hfuvvu+qb1G8iUuhPo3m6eX+3naId73VvvvI4KlGi3ipjDLToIiBQEMLp/NdrrmlFzh7sWKLi+3/OJWhcQQNOB2QajUbNVxrZBUyltSfmea8HXRYclnXWN3PC6IOQKlfHCiZ/nmWzRowNiLMRF7BY9ankX/cRdvko/c/fu9N3pUU+k+hUvD4Pw4GdrbXXUT6d81JPjOfvGLEmvK3rfjKG5vBIXDvSejMVzRjfOyyVb0nW4J2a9Xes/afDgpU/RJUTvnRLstc/2s/n+Q+LmSMiNcub9PMWOMKI3r9eFyKiUw4KVxx0p83hmxT16XOZepsqqQPoa9dzH2w82PXl7txulvVJJYRVNsrO0WtU0CVulbHf50qryzPWwGyQqygSj0ZcvX04yXtYy5yeZKgmEQmQojcOxx23WS/xnxrnKzGAtlHsfadygRpnhqHdkRuSVBrkr9tXJ6clpN1XGllw+CnR8ZZ5gNbTF4j92VBVcSPLlEmv6dbqG+1euuf1CgQ8Bubrx+8W4hqZZc4MrXbQtiT/XqN1SP+yR27pcGHrOIdjwwuBBLsMnEH5Z9Lz9V++Q0x9NeT+kcue2t6jpDfyOTrvflkjQFnmO2mXTnYyzDCv7yOaAu9N+DN+Zc0aUkdcEzADesxl23o/m0zSdRqLuULbtkJ6ld0qwbf8FBbFpuw==
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/operate-api/specifications/operate-public-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Get incident by key</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get incident by key"}
+></Heading>
 
-<MethodEndpoint method={"get"} path={"/v1/incidents/{key}"}></MethodEndpoint>
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/incidents/{key}"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Get incident by key
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"key","in":"path","description":"Key of incident","required":true,"schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of incident",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
 
-Success
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`UNSPECIFIED`, `UNKNOWN`, `IO_MAPPING_ERROR`, `JOB_NO_RETRIES`, `EXECUTION_LISTENER_NO_RETRIES`, `CONDITION_ERROR`, `EXTRACT_VALUE_ERROR`, `CALLED_ELEMENT_ERROR`, `UNHANDLED_ERROR_EVENT`, `MESSAGE_SIZE_EXCEEDED`, `CALLED_DECISION_ERROR`, `DECISION_EVALUATION_ERROR`, `FORM_NOT_FOUND`]"} schema={{"type":"string","enum":["UNSPECIFIED","UNKNOWN","IO_MAPPING_ERROR","JOB_NO_RETRIES","EXECUTION_LISTENER_NO_RETRIES","CONDITION_ERROR","EXTRACT_VALUE_ERROR","CALLED_ELEMENT_ERROR","UNHANDLED_ERROR_EVENT","MESSAGE_SIZE_EXCEEDED","CALLED_DECISION_ERROR","DECISION_EVALUATION_ERROR","FORM_NOT_FOUND"]}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"creationTime"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ACTIVE`, `MIGRATED`, `RESOLVED`, `PENDING`]"} schema={{"type":"string","enum":["ACTIVE","MIGRATED","RESOLVED","PENDING"]}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"key\": 0,\n  \"processDefinitionKey\": 0,\n  \"processInstanceKey\": 0,\n  \"type\": \"UNSPECIFIED\",\n  \"message\": \"string\",\n  \"creationTime\": \"string\",\n  \"state\": \"ACTIVE\",\n  \"jobKey\": 0,\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-Invalid request
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"*/*"} value={"*/*"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-Requested resource not found
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-API application error
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\",\n  \"type\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              key: { type: "integer", format: "int64" },
+              processDefinitionKey: { type: "integer", format: "int64" },
+              processInstanceKey: { type: "integer", format: "int64" },
+              type: {
+                type: "string",
+                enum: [
+                  "UNSPECIFIED",
+                  "UNKNOWN",
+                  "IO_MAPPING_ERROR",
+                  "JOB_NO_RETRIES",
+                  "EXECUTION_LISTENER_NO_RETRIES",
+                  "CONDITION_ERROR",
+                  "EXTRACT_VALUE_ERROR",
+                  "CALLED_ELEMENT_ERROR",
+                  "UNHANDLED_ERROR_EVENT",
+                  "MESSAGE_SIZE_EXCEEDED",
+                  "CALLED_DECISION_ERROR",
+                  "DECISION_EVALUATION_ERROR",
+                  "FORM_NOT_FOUND",
+                ],
+              },
+              message: { type: "string" },
+              creationTime: { type: "string" },
+              state: {
+                type: "string",
+                enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+              },
+              jobKey: { type: "integer", format: "int64" },
+              tenantId: { type: "string" },
+            },
+            title: "Incident",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
