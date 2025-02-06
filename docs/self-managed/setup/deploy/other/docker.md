@@ -122,7 +122,7 @@ OpenSearch support in Optimize is limited to data import and the raw data report
 
 Like for example this `docker-compose` configuration:
 
-```
+```sh
 optimize:
     container_name: optimize
     image: camunda/optimize:8-latest
@@ -131,7 +131,7 @@ optimize:
     environment:
         - SPRING_PROFILES_ACTIVE=ccsm
         - CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_URL=http://localhost:9090
-        - CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL=http://keycloak:8080/auth/realms/camunda-platform
+        - CAMUNDA_OPTIMIZE_IDENTITY_ISSUER_BACKEND_URL=http://keycloak:18080/auth/realms/camunda-platform
         - CAMUNDA_OPTIMIZE_IDENTITY_CLIENTID=optimize
         - CAMUNDA_OPTIMIZE_IDENTITY_CLIENTSECRET=secret
         - CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE=optimize-api
