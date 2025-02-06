@@ -24,6 +24,8 @@ You will then need to provide:
 - A sign-in URL
 - A x509 signing certificate
 
+The certificate will have an expiration date and a new certificate must be provided before the old one expires.
+
 ### Azure AD
 
 For Azure AD, you will need to provide:
@@ -32,6 +34,8 @@ For Azure AD, you will need to provide:
 - The Microsoft Azure AD domain
 - The generated client ID
 - The client secret value
+
+The client credentials will have an expiration date and new credentials must be provided before the old ones expire.
 
 To generate the client on your end, you will need to use the Camunda **Redirect URL** `https://weblogin.cloud.camunda.io/login/callback `. Ensure you attach the user permissions `Users > User.Read`.
 
