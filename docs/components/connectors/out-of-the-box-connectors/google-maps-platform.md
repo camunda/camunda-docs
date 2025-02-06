@@ -15,7 +15,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your Google Maps Platform Connector executable
 
-To work with the Google Maps Platform Connector, choose the required operation type in the **Operation** section and enable the required Google Service API (which depends on the operation). Set the API key in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel.
+To work with the Google Maps Platform Connector, choose the required operation type in the **Operation** section and enable the required Google Service API (which depends on the operation). Set the API key in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector on the right side of the screen under the **Deploy** button.
 
 :::note
 All the mandatory and non-mandatory fields and required settings depending on the operation selection you choose are covered in the upcoming sections.

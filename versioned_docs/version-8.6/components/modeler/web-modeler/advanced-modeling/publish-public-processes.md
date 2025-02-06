@@ -43,7 +43,7 @@ Once ready, return to your process. You can read more about form creation in the
 
 To enable public access, follow these steps:
 
-1. Open the **Publication** section in the **properties panel** (not the tab of the same name) and activate the toggle.
+1. Open the **Publication** section in the **properties panel** on the right side of the screen under the **Deploy** button (not the tab of the same name) and activate the toggle.
 
 <img src={PublicationSectionImg} style={{width: 400}} alt="Enabling public access in the properties panel" />
 

@@ -49,7 +49,7 @@ Example:
 "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"
 ```
 
-- `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
+- `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
 - `id : String`: ID of the template.
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
