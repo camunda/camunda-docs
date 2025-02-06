@@ -36,7 +36,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 
 This setup provides a foundational starting point for working with Camunda 8, though it is not optimized for peak performance. It serves as a solid initial step in preparing a production environment by leveraging [Infrastructure as Code (IaC) tools](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
 
-Terraform can seem complex at first. If you lack experience of it, you may need to consider the [deployment on a single region](terraform-setup.md).
+Terraform can initially appear complex. If you're new to it, you might want to start by considering [deployment in a single region](terraform-setup.md) first.
 
 :::warning Cost management
 
