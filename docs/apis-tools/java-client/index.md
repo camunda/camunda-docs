@@ -52,8 +52,8 @@ In Java code, instantiate the client as follows:
             .build();
 
     try (ZeebeClient client = ZeebeClient.newClientBuilder()
-            .grpcAddress(zeebeGrpc)
-            .restAddress(zeebeRest)
+            .grpcAddress(URI.create(zeebeGrpc))
+            .restAddress(URI.create(zeebeRest))
             .credentialsProvider(credentialsProvider)
             .build()) {
       client.newTopologyRequest().send().join();
@@ -91,6 +91,50 @@ ZeebeClient client =
         .restAddress(System.getenv("ZEEBE_REST_ADDRESS"))
         .build();
 ```
+
+### X.509 authorizers
+
+Several identity providers, such as Keycloak, support client X.509 authorizers as an alternative to client credentials flow.
+
+As a prerequisite, ensure you have proper KeyStore and TrustStore configured, so that:
+
+- Both the Spring Zeebe application and identity provider share the same CA trust certificates.
+- Both the Spring Zeebe and identity provider own certificates signed by trusted CA.
+- Your Spring Zeebe application own certificate has proper `Distinguished Name` (DN), e.g.
+  `CN=My Zeebe Client, OU=Camunda Users, O=Best Company, C=DE`.
+- Your application DN registered in the identity provider client authorization details.
+
+In that case, configuring `OAuthCredentialsProvider` might look like this
+
+```java
+final OAuthCredentialsProvider provider =
+        new OAuthCredentialsProviderBuilder()
+            .clientId("myClient")
+            .clientSecret("")
+            .audience("myClient-aud")
+            .authorizationServerUrl(ZEEBE_AUTHORIZATION_SERVER_URL)
+            .keystorePath(Paths.get("/path/to/keystore.p12"))
+            .keystorePassword("password")
+            .keystoreKeyPassword("password")
+            .truststorePath(Paths.get("/path/to/truststore.jks"))
+            .truststorePassword("password")
+            .build();
+```
+
+Or via environment variables:
+
+```bash
+export ZEEBE_CLIENT_ID='[Client ID]'
+export ZEEBE_CLIENT_SECRET=''
+export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
+export ZEEBE_SSL_CLIENT_KEYSTORE_PATH='[Keystore path]'
+export ZEEBE_SSL_CLIENT_KEYSTORE_SECRET='[Keystore password]'
+export ZEEBE_SSL_CLIENT_KEYSTORE_KEY_SECRET='[Keystore material password]'
+export ZEEBE_SSL_CLIENT_TRUSTSTORE_PATH='[Truststore path]'
+export ZEEBE_SSL_CLIENT_TRUSTSTORE_SECRET='[Truststore password]'
+```
+
+Refer to your identity provider documentation on how to configure X.509 authentication. For example, [Keycloak](https://www.keycloak.org/server/mutual-tls).
 
 ## Javadoc
 

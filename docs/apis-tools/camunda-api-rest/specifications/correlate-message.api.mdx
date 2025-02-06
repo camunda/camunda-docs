@@ -5,57 +5,355 @@ description: "Publishes a message and correlates it to a subscription."
 sidebar_label: "Correlate message"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWVFv2zYQ/ivEPW2YYrlt2nV6c9N0c9ekRuJuD0keKOlssaVIlaTiGIb++3CiZMlWnGbAXgY4QGDLPN7xvvu+k3zegONLC9ENXKC1fIlwF4Au0HAntJqmEEGijUHJHbYWAaRoEyMKMoEIZmUshc3QMs5yb8O4Stl2o2XCMacZZ7aMtztHt2q62BoJrZiwzJZJgtYuSkl7VkJKZtCVRjGXIVsIYx0rjCYbJpR1XCXIvuG6Xm6DbwOnbCVcNrpVEIDB7yVa906na4g29aUwmELkTIkBJFo5VI6WeFFIkdRHCr9aSnEDNskw5/TOrQuECHT8FRMHARSG4HICLa0qniO97iI07x2OLBi3LMWFUJgy4VN7N7u4bDOrz9vEsc4ItYQqgB5Sf+L68SB9NAkVvegDM/BKlVzwUjqIgELccyN4LH0qh1PYmlEeH68/X7JUJ2VO8AXA01TQHi5nPWQ8yPvYqVJKcuTXqwAcKq4c0W4/PqXhV9lCG7bKRJLtFF1YVjRETB9JdC8UxRKOLlvin3XQXXmqQFWRnUFbaGU9KC/H46exEbZPP6eZVsi0Ybk2OGCuhX9BvMMxe5XuxW5WAyrSCqWk1x+ISLhb9ah4niZ9E+kgK588X+ddKIdLNBDAQpucO//Rm1N4khjzjhjT988J0ymqwWDaQPCc8x8A74nu85z8fsBGz7+GjqeHGFgYfS9STFnKHSceKu3YPZciPcyywuhYYv7Lj9g2YTNvyVJ0XEjmmeD7GBnGvpPdXH04Y7+dvv717qfMucJGYbharUZmkZxgKpw2I22WoVkk9E92P4/YPEODLOdrFiPrugfrOMZsgYlYiIT05Hyq9WEI2OcQ1K9uBk1hW4fSiMFtbcK+XE2ZSFE5sVgLtRyG3mmgPNali2LJ1TfoCjoMuh/FlnnOzZZhuwGqAKzjruylcYBHr14OfBMr/pjPZ8y7YIlOse6eLqNu6QNRErlQIi9ziE7H4wBy/uCv3ozHFfmkij8jE8XwoZBc+dvPXjpC+RbovdWJter5jyqjjViK/bijHXE1JH7vM2r19GrI9w/axCJNUdX0ZM2zQysqLqVeYTo66uqoq6OuDurqdMj3S02Pb6U63pKO0jlK55B0Xj/2iDdRjFA2xEM0Rhumk6Q0hh4zMyG3Xy7a2M09y3PxqLWj1o5aG2qtCiBHl2macxXa1tThLoMIwubrnA17MxUIwKK5R0MTsw2URkIEG6+aKgrDTaatq6JNoY2rwnsqyc5IhZa9ulrWSJ1wmfnIw+rRQj0varI643mpUs7esqvz6zn7nTtc8XWNJoXcdf12/Hb8qFcyPeBxMpsyn6HnXq8ftG5J2I+69cbPcVxVdwRkUhrh1te0zcMTIzdoJiUVYMuJJl7tna69EQTNmw8tUz7+Pa+LTb3sqpv1nT/wvPBK9LO5jmT7A7VupV+0neFDb3gg1ELXx2zINUyYHKGxHqHx6MWQyLNprcdE53mp6qaslvXQgPEegIksrSPgApAiQRoFdNm0Zp/8CvvLR2QvRlR8z9C2Fy+Fy8p4lOg8TPy27WssdRzmXKiwCWHDs8nFl8v3k5NP07Pzy+vzkxej8cg9uBpk0krOVf8c7dSjN3DZyXbT3YT+JxPjhoAOH1xYSC4Ulb1GdNN0iZt29GV36URDdK/1G9hsYm7xi5FVRR9/L9GsIbq561hGV1UAGfIUTd1YvtV0PPN4nczpHGQuSzrPYEpYBe2OSZJg4Z60vet1vNnn6zkJqRmJ5zqlPYavaFzOVxDBLdwC0A8C5KHWaP35BiRXy5KqHIH3S3//ADwPcwc=
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Correlate message</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Correlate message"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/messages/correlation"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/messages/correlation"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Publishes a message and correlates it to a subscription.
 If correlation is successful it will return the first process instance key the message correlated with.
+The message is not buffered.
+Use the publish message endpoint to send messages that can be buffered.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The message name as defined in the BPMN process\n","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"correlationKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The correlation key of the message","type":"string","default":""}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>variables</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__nullable"}>nullable</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-The message variables as JSON document
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            name: {
+              description: "The message name as defined in the BPMN process\n",
+              type: "string",
+            },
+            correlationKey: {
+              description: "The correlation key of the message",
+              type: "string",
+              default: "",
+            },
+            variables: {
+              description: "The message variables as JSON document",
+              additionalProperties: true,
+              type: "object",
+              nullable: true,
+            },
+            tenantId: {
+              description: "the tenant for which the message is published",
+              type: "string",
+              nullable: true,
+            },
+          },
+          title: "MessageCorrelationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><SchemaItem name={"property name*"} required={false} schemaName={"any"} qualifierMessage={undefined} schema={{"description":"The message variables as JSON document","additionalProperties":true,"type":"object","nullable":true}} collapsible={false} discriminator={false}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the tenant for which the message is published","type":"string","nullable":true}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The message is correlated to one or more process instances
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"messageKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key of the correlated message","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID of the correlated message","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key of the first process instance the message correlated with","type":"integer","format":"int64"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"messageKey\": 0,\n  \"tenantId\": \"string\",\n  \"processInstanceKey\": 0\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The provided data is not valid
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-Not found
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The message is correlated to one or more process instances",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The message key of the correlated message, as well as the first process instance key it\ncorrelated with.\n",
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for MessageCorrelationResponse.",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description: "The tenant ID of the correlated message",
+                    type: "string",
+                  },
+                },
+                title: "MessageCorrelationResponseBase",
+              },
+            ],
+            properties: {
+              messageKey: {
+                description: "The key of the correlated message",
+                type: "string",
+              },
+              processInstanceKey: {
+                description:
+                  "The key of the first process instance the message correlated with",
+                type: "string",
+              },
+            },
+            title: "MessageCorrelationResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            description:
+              "The message key of the correlated message, as well as the first process instance key it\ncorrelated with. Key attributes as numeric values.\n",
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for MessageCorrelationResponse.",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description: "The tenant ID of the correlated message",
+                    type: "string",
+                  },
+                },
+                title: "MessageCorrelationResponseBase",
+              },
+            ],
+            properties: {
+              messageKey: {
+                description: "The key of the correlated message",
+                type: "integer",
+                format: "int64",
+              },
+              processInstanceKey: {
+                description:
+                  "The key of the first process instance the message correlated with",
+                type: "integer",
+                format: "int64",
+              },
+            },
+            title: "MessageCorrelationResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            description:
+              "The message key of the correlated message, as well as the first process instance key it\ncorrelated with.\n",
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for MessageCorrelationResponse.",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description: "The tenant ID of the correlated message",
+                    type: "string",
+                  },
+                },
+                title: "MessageCorrelationResponseBase",
+              },
+            ],
+            properties: {
+              messageKey: {
+                description: "The key of the correlated message",
+                type: "string",
+              },
+              processInstanceKey: {
+                description:
+                  "The key of the first process instance the message correlated with",
+                type: "string",
+              },
+            },
+            title: "MessageCorrelationResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -1,7 +1,7 @@
 ---
 id: amazon-comprehend
 title: Amazon Comprehend Connector
-sidebar_label: AWS Comprehend Connector
+sidebar_label: AWS Comprehend
 description: Use the Amazon Comprehend Connector to extract insights from the content of your documents, like key phrases and personal identifiable information.
 ---
 

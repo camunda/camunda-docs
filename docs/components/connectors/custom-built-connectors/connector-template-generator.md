@@ -1,10 +1,8 @@
 ---
 id: connector-template-generator
-title: Generate a Connector template
-description: Learn how to generate Connector templates for easier custom Connector creation.
+title: Generate a connector template
+description: Learn how to generate connector templates for easier custom Connector creation.
 ---
-
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
 You can configure and automatically generate a custom [Connector template](/components/connectors/custom-built-connectors/connector-templates.md) in Web Modeler.
 

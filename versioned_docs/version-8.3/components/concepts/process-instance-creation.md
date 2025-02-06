@@ -26,9 +26,10 @@ This command creates a new process instance and immediately responds with the pr
 
 ![create-process](assets/create-process.png)
 
- <details>
-   <summary>Code example</summary>
-   <p>Create a process instance:
+<details>
+  <summary>Code example</summary>
+  <p>
+Create a process instance:
 
 ```
 zbctl create instance "order-process"
@@ -38,16 +39,16 @@ Response:
 
 ```
 {
- "processKey": 2251799813685249,
- "bpmnProcessId": "order-process",
- "version": 1,
- "processInstanceKey": 2251799813686019
+  "processKey": 2251799813685249,
+  "bpmnProcessId": "order-process",
+  "version": 1,
+  "processInstanceKey": 2251799813686019
 }
 
 ```
 
-   </p>
- </details>
+  </p>
+</details>
 
 ### Create and await results
 
@@ -67,7 +68,8 @@ When the client resends the command, it creates a new process instance.
 
 <details>
   <summary>Code example</summary>
-  <p>Create a process instance and await results:
+  <p>
+Create a process instance and await results:
 
 ```
 zbctl create instance "order-process" --withResult --variables '{"orderId": "1234"}'
@@ -123,7 +125,7 @@ Start instructions are supported for both `CreateProcessInstance` commands.
 <details>
   <summary>Code example</summary>
   <p>
-  Create a process instance starting before the 'ship_parcel' element:
+Create a process instance starting before the 'ship_parcel' element:
 
 ```java
 client.newCreateInstanceCommand()

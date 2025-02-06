@@ -1,7 +1,7 @@
 ---
 id: easy-post
 title: EasyPost Connector
-sidebar_label: EasyPost Connector
+sidebar_label: EasyPost
 description: Allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments.
 ---
 

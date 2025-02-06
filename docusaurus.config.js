@@ -4,6 +4,7 @@ const { unsupportedVersions } = require("./src/versions");
 const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
 
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
+const { themes } = require("prism-react-renderer");
 
 module.exports = {
   title: "Camunda 8 Docs",
@@ -78,6 +79,32 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/operate/version-8.6/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.5: {
+                specPath: "api/operate/version-8.5/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.4: {
+                specPath: "api/operate/version-8.4/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.4/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -96,42 +123,63 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/tasklist/version-8.6/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.5: {
+                specPath: "api/tasklist/version-8.5/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.4: {
+                specPath: "api/tasklist/version-8.4/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.4/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
     ],
     [
-      // Zeebe REST API docs generation
+      // Administration Self-Managed REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
-        id: "api-zeebe-openapi",
+        id: "api-adminsm-openapi",
         docsPluginId: "default",
         config: {
-          zeebe: {
-            specPath: "api/zeebe/zeebe-openapi.yaml",
-            outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
+          adminsm: {
+            specPath: "api/administration-sm/administration-sm-openapi.yaml",
+            outputDir: "docs/apis-tools/administration-sm-api/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
-          },
-        },
-      },
-    ],
-    [
-      // Zeebe REST API docs generation
-      "docusaurus-plugin-openapi-docs",
-      {
-        id: "api-consolesm-openapi",
-        docsPluginId: "default",
-        config: {
-          consolesm: {
-            specPath: "api/console-sm/console-sm-openapi.yaml",
-            outputDir: "docs/apis-tools/console-sm-api/specifications",
-            sidebarOptions: {
-              groupPathsBy: "tag",
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath:
+                  "api/administration-sm/version-8.6/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
             },
-            hideSendButton: true,
           },
         },
       },
@@ -150,6 +198,55 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/camunda/version-8.6/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
+          },
+        },
+      },
+    ],
+    [
+      // Zeebe REST API docs generation (removed at v8.7)
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-zeebe-openapi",
+        docsPluginId: "default",
+        config: {
+          zeebe: {
+            specPath: "inactive",
+            outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.6: {
+                specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.5: {
+                specPath: "api/zeebe/version-8.5/zeebe-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/zeebe-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -171,6 +268,9 @@ module.exports = {
     },
   ],
   themeConfig: {
+    colorMode: {
+      defaultMode: "light",
+    },
     docs: {
       sidebar: {
         autoCollapseCategories: true,
@@ -187,12 +287,15 @@ module.exports = {
 
     prism: {
       additionalLanguages: ["java", "protobuf", "csharp"],
+      theme: themes.palenight,
+      darkTheme: themes.dracula,
     },
     navbar: {
       title: "Camunda 8 Docs",
       logo: {
         alt: "Camunda 8 Docs",
         src: "img/black-C.png",
+        srcDark: "img/light-C.png",
       },
       items: [
         {
@@ -328,7 +431,7 @@ module.exports = {
               href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
-              html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
+              html: `<a class="footer__link-item" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
             },
             {
               label: "Licenses",
@@ -353,7 +456,7 @@ module.exports = {
       {
         highlight: "bash",
         language: "curl",
-        logoClass: "bash",
+        logoClass: "curl",
       },
       {
         highlight: "java",
@@ -426,7 +529,6 @@ module.exports = {
               banner: "none",
             },
           },
-          docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
         blog: false,

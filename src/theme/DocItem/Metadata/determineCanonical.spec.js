@@ -185,7 +185,7 @@ describe("determineCanonical", () => {
     beforeEach(() => {
       currentDoc = aCurrentDoc({
         metadata: {
-          unversionedId: "components/components-overview",
+          id: "components/components-overview",
         },
       });
 
@@ -314,7 +314,7 @@ function aCurrentDoc(specs = {}) {
   return {
     frontMatter: {},
     metadata: {
-      unversionedId: "a/doc/id",
+      id: "a/doc/id",
     },
     ...specs,
   };

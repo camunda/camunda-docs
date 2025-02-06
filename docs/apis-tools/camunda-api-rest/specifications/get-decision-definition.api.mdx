@@ -1,71 +1,429 @@
 ---
 id: get-decision-definition
-title: "Get decision definition (alpha)"
+title: "Get decision definition"
 description: "Returns a decision definition by key."
-sidebar_label: "Get decision definition (alpha)"
+sidebar_label: "Get decision definition"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: eJztWl1v2zYU/SsEn1ZMkZ027Tq9eUnaZWu7IE23hywPV9SVxYYiVZKyYxj+7wNJyXYiOXGDohgKPRiypMv7ec4VRWpJLUwNTa7oCTJuuJIkw5xLbrmS9DqiqkIN7uQsowmdom3lTjZiEc3QMM0rf5bQC7S1loYAybpKSbogN7iI/3XjKtBQokXtXFhSCSXShGYdE3/igkaUO+UV2IJGVOOXmmvMaGJ1jfc9uCyQgDF8KjFz1ojKiS2wz5+IzAvOCgLMGgLO6VryLzUSnqG0POeoSa40sQU36/ExjahhBZZAkyW1i8q5bazmckpXq2vnnqmUNGjc/efjsTt0XexLDzfE1IyhMXktxIJon0zMQsKYkhaldeqgqgRnvjajz8bpXHZ9UulnZJZGFIT4K/dJvuvGb2CQVNqV2XI0PtRuic8sli7m+1o3A0OAnXFZNz99tTp5/4GcnTxQpZiuogYe++pz0o9pnKE2PKSuUcqlxSlqGtFc6RJsuPTiea+ZNcQaPY+Za69fBPCWKK3ZJ0V2d4r0lioy1VAVxBZgd7nh4FWBtkTl3iOLEqTdt0xB+tFKOb3cCqesH0oOdNTR5DH8ON7v5dk22Z/E6H1K9SRvvm3FHkztBZpaWC+03RxmMosZlLXMIIaKxze4MLGsyxT1z93GkWGlkYHdtNahlQyt5EdrJf21eXX0f2kuT/bvO7Ybl/79mk3AQU+zGVrL0Fp+tNYyzFL2nKU4saOveTVyPqGxJAcuMIvJe6WdoAUuDAHtO8SMZ5gRLr2j7VsYSVW2ePAFqtIqFVj2zoe2XZuQ8yDZ2CWhybgCBsE0WL+6eHNMfj16+cv1T4W1lUlGo/l8HuucHWDGrdKx0tORzpn7OblnMbksUCMpYUFSJJBlPmgQ233PVMh4zhmxygfYuE1csUN8D/e+cLcLjnUXqTXvYGVCPl2ctbBccDntmvZjcnB1TSikqrZJKkDe0A0SHkPkhJi6LEGvoXjXwCqixoKtzVO74O+Xl+ckqCBMZbghV2PIBVFyycu6pMnReBzREm7D2avx2JPNVXyPSCTB20qA9NC6Hw6XpNzg1gfGpbEg2beqjNJ8yu/bvcvKBsQnIaKWiof9VGxpJ4DdGDIDwTMCtS2c1UAfwjR6J0CYeCDZQLKBZDtJ9qKL9zdKpzzLUHp4rvnGDZHKEhBCzTEbeDXwauDVbl4dPTKPnHNbeJ1TPkPp57xzCAzLVS2H6eTAyIGR35CRL/ve7CaSuCxrh0PUWmmiGKu1xsy9DQuv3m19tbabR+HAtYFrA9d2cW0V0RJtoZoNer+tbgua0FH78DvYLKKY0bJ3AWvldrRRz9qt+FoLmtBlINMqGY2WhTJ2lSwrpe1qNHOVmoHmkIqAT3c7kK4Fk1AMhL/cV1R3Y3vx8zgsGpPX5OL04yV5CxbnsPBJdibvqn49fj3u1epEd2icnJ+REGGA5FabaNU6vveqDcL7KPa7/wZZrbldfHTDQnpSBI16UrvCrKHS2PPa3XkQolHz500LoD/+ufQY4DJXfniDha4jdGu1mI7jwy7uzs88fZgqy1r6HiqnYXIEW4ExURvrAoqo4Ayl8Qhvvs9oxd6FO+TvZl35MHZFCchpW+eU26JOY6bKUbMtsD6mQqWjErgcNSbM6Hjy/tOHk8nBu7Pj0w8fTw8O43Fsb8OWZqWMLUFu+fEWbd864f2Yl5snx1d8mtKUyOKtHVUCuHSg8bEtG35d0T5+0Ygm/UvE11FDkiu6XKZg8JMWq5W7/KVGvaDJ1fWGU2EThBv3P6NJDsLc/8plO66fmhXg7Bn5Ht++9CanuQhy4XuDqN0ZjeiNW5DesWy+ul5FtEDIUPuIg+yEMazslpbOty6OZeum9/bU0eM/gMveBQ==
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Get decision definition (alpha)</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get decision definition"}
+></Heading>
 
 <MethodEndpoint
   method={"get"}
   path={"/decision-definitions/{decisionDefinitionKey}"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Returns a decision definition by key.
 
-Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
-The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-:::note
-This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
-in future releases.
-:::
+<ParamsDetails
+  parameters={[
+    {
+      name: "decisionDefinitionKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the decision definition, which acts as a unique identifier for this decision.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
-## Request
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"decisionDefinitionKey","in":"path","required":true,"description":"The assigned key of the decision definition, which acts as a unique identifier for this decision.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The decision definition is successfully returned.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"decisionDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this decision definition."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The DMN ID of the decision definition."}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The DMN name of the decision definition."}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned version of the decision definition."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"the DMN ID of the decision requirements graph that the decision definition is part of."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key of the decision requirements graph that the decision definition is part of."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the decision definition."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"decisionDefinitionKey\": 0,\n  \"decisionDefinitionId\": \"string\",\n  \"name\": \"string\",\n  \"version\": 0,\n  \"decisionRequirementsId\": \"string\",\n  \"decisionRequirementsKey\": 0,\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The decision definition request failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-The decision with the given key was not found. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The decision definition is successfully returned.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for DecisionDefinitionItem.",
+                type: "object",
+                properties: {
+                  decisionDefinitionId: {
+                    type: "string",
+                    description: "The DMN ID of the decision definition.",
+                  },
+                  name: {
+                    type: "string",
+                    description: "The DMN name of the decision definition.",
+                  },
+                  version: {
+                    type: "integer",
+                    format: "int32",
+                    description:
+                      "The assigned version of the decision definition.",
+                  },
+                  decisionRequirementsId: {
+                    type: "string",
+                    description:
+                      "the DMN ID of the decision requirements graph that the decision definition is part of.",
+                  },
+                  tenantId: {
+                    type: "string",
+                    description: "The tenant ID of the decision definition.",
+                  },
+                },
+                title: "DecisionDefinitionItemBase",
+              },
+            ],
+            properties: {
+              decisionDefinitionKey: {
+                type: "string",
+                description:
+                  "The assigned key, which acts as a unique identifier for this decision definition.",
+              },
+              decisionRequirementsKey: {
+                type: "string",
+                description:
+                  "The assigned key of the decision requirements graph that the decision definition is part of.",
+              },
+            },
+            title: "DecisionDefinitionResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for DecisionDefinitionItem.",
+                type: "object",
+                properties: {
+                  decisionDefinitionId: {
+                    type: "string",
+                    description: "The DMN ID of the decision definition.",
+                  },
+                  name: {
+                    type: "string",
+                    description: "The DMN name of the decision definition.",
+                  },
+                  version: {
+                    type: "integer",
+                    format: "int32",
+                    description:
+                      "The assigned version of the decision definition.",
+                  },
+                  decisionRequirementsId: {
+                    type: "string",
+                    description:
+                      "the DMN ID of the decision requirements graph that the decision definition is part of.",
+                  },
+                  tenantId: {
+                    type: "string",
+                    description: "The tenant ID of the decision definition.",
+                  },
+                },
+                title: "DecisionDefinitionItemBase",
+              },
+            ],
+            properties: {
+              decisionDefinitionKey: {
+                type: "integer",
+                format: "int64",
+                description:
+                  "The assigned key, which acts as a unique identifier for this decision definition.",
+              },
+              decisionRequirementsKey: {
+                type: "integer",
+                format: "int64",
+                description:
+                  "The assigned key of the decision requirements graph that the decision definition is part of.",
+              },
+            },
+            title: "DecisionDefinitionItem",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for DecisionDefinitionItem.",
+                type: "object",
+                properties: {
+                  decisionDefinitionId: {
+                    type: "string",
+                    description: "The DMN ID of the decision definition.",
+                  },
+                  name: {
+                    type: "string",
+                    description: "The DMN name of the decision definition.",
+                  },
+                  version: {
+                    type: "integer",
+                    format: "int32",
+                    description:
+                      "The assigned version of the decision definition.",
+                  },
+                  decisionRequirementsId: {
+                    type: "string",
+                    description:
+                      "the DMN ID of the decision requirements graph that the decision definition is part of.",
+                  },
+                  tenantId: {
+                    type: "string",
+                    description: "The tenant ID of the decision definition.",
+                  },
+                },
+                title: "DecisionDefinitionItemBase",
+              },
+            ],
+            properties: {
+              decisionDefinitionKey: {
+                type: "string",
+                description:
+                  "The assigned key, which acts as a unique identifier for this decision definition.",
+              },
+              decisionRequirementsKey: {
+                type: "string",
+                description:
+                  "The assigned key of the decision requirements graph that the decision definition is part of.",
+              },
+            },
+            title: "DecisionDefinitionResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The decision definition request failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The decision with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

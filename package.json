@@ -28,25 +28,25 @@
     "api:generate:operate": "npm run api:generate operate",
     "api:generate:tasklist": "npm run api:generate tasklist",
     "api:generate:zeebe": "npm run api:generate zeebe",
-    "api:generate:consolesm": "npm run api:generate consolesm",
+    "api:generate:adminsm": "npm run api:generate adminsm",
     "api:generate:camunda": "npm run api:generate camunda"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
-    "@bpmn-io/form-js": "^1.7.3",
-    "@docusaurus/core": "^2.4.1",
-    "@docusaurus/preset-classic": "^2.4.1",
-    "@docusaurus/theme-mermaid": "^2.4.1",
-    "@mdx-js/react": "^1.6.22",
+    "@bpmn-io/form-js": "^1.12.0",
+    "@docusaurus/core": "^3.7.0",
+    "@docusaurus/preset-classic": "^3.7.0",
+    "@docusaurus/theme-mermaid": "^3.7.0",
+    "@mdx-js/react": "^3.1.0",
     "@saucelabs/theme-github-codeblock": "^0.2.3",
     "clsx": "^2.1.1",
     "docusaurus": "^1.14.7",
-    "docusaurus-plugin-openapi-docs": "^2.0.4",
-    "docusaurus-theme-openapi-docs": "^2.0.4",
+    "docusaurus-plugin-openapi-docs": "^4.3.1",
+    "docusaurus-theme-openapi-docs": "^4.3.1",
     "mixpanel-browser": "^2.56.0",
     "pushfeedback-react": "^0.1.30",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-player": "^2.16.0",
     "unist-util-visit": "^5.0.0"
   },
@@ -71,7 +71,7 @@
     "lint-staged": "^14.0.1",
     "playwright": "^1.49.0",
     "prettier": "3.3.3",
-    "replace-in-file": "^8.2.0",
+    "replace-in-file": "^7.2.0",
     "swc-loader": "^0.2.3"
   },
   "lint-staged": {
@@ -82,5 +82,8 @@
   },
   "resolutions": {
     "react-live": ">=3.1.1 <4.1.0"
+  },
+  "engines": {
+    "node": ">=18.0"
   }
 }

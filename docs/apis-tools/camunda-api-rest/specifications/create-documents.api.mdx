@@ -1,0 +1,409 @@
+---
+id: create-documents
+title: "Upload multiple documents (alpha)"
+description: "Upload multiple documents to the Camunda 8 cluster."
+sidebar_label: "Upload multiple documents (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Upload multiple documents (alpha)"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/documents/batch"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Upload multiple documents to the Camunda 8 cluster.
+
+The caller must provide a file name for each document, which will be used in case of a multi-status response
+to identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header
+of the file part or in the `filename` field of the metadata part. If both are provided, the `filename` field
+takes precedence.
+
+In case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,
+each of which contains the file name of the document that failed to upload and the reason for the failure.
+The client can choose to retry the whole batch or individual documents based on the response.
+
+Note that this currently only supports an in-memory document store, which is not meant for production use.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "storeId",
+      in: "query",
+      required: false,
+      description: "The ID of the document store to upload the documents to.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "multipart/form-data": {
+        schema: {
+          type: "object",
+          properties: {
+            files: {
+              type: "array",
+              description: "The documents to upload.",
+              items: { type: "string", format: "binary" },
+            },
+          },
+          required: ["files"],
+        },
+        encoding: {
+          files: {
+            headers: {
+              "X-Document-Metadata": {
+                schema: {
+                  description: "Information about the document.",
+                  type: "object",
+                  properties: {
+                    contentType: {
+                      type: "string",
+                      description: "The content type of the document.",
+                    },
+                    fileName: {
+                      type: "string",
+                      description: "The name of the file.",
+                    },
+                    expiresAt: {
+                      type: "string",
+                      format: "date-time",
+                      description:
+                        "The date and time when the document expires.",
+                    },
+                    size: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The size of the document in bytes.",
+                    },
+                    processDefinitionId: {
+                      type: "string",
+                      description:
+                        "The ID of the process definition that created the document.",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The key of the process instance that created the document.",
+                    },
+                    customProperties: {
+                      type: "object",
+                      description: "Custom properties of the document.",
+                      additionalProperties: true,
+                    },
+                  },
+                  title: "DocumentMetadata",
+                },
+              },
+              "X-Document-Id": { schema: { type: "string" } },
+            },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "201": {
+      description: "All documents were uploaded successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    createdDocuments: {
+                      type: "array",
+                      description: "Documents that were successfully created.",
+                      items: {
+                        type: "object",
+                        properties: {
+                          "camunda.document.type": {
+                            type: "string",
+                            description:
+                              'Document discriminator. Always set to "camunda".',
+                            enum: ["camunda"],
+                          },
+                          storeId: {
+                            type: "string",
+                            description: "The ID of the document store.",
+                          },
+                          documentId: {
+                            type: "string",
+                            description: "The ID of the document.",
+                          },
+                          contentHash: {
+                            type: "string",
+                            description: "The hash of the document.",
+                          },
+                          metadata: {
+                            description: "Information about the document.",
+                            type: "object",
+                            properties: {
+                              contentType: {
+                                type: "string",
+                                description:
+                                  "The content type of the document.",
+                              },
+                              fileName: {
+                                type: "string",
+                                description: "The name of the file.",
+                              },
+                              expiresAt: {
+                                type: "string",
+                                format: "date-time",
+                                description:
+                                  "The date and time when the document expires.",
+                              },
+                              size: {
+                                type: "integer",
+                                format: "int64",
+                                description:
+                                  "The size of the document in bytes.",
+                              },
+                              processDefinitionId: {
+                                type: "string",
+                                description:
+                                  "The ID of the process definition that created the document.",
+                              },
+                              processInstanceKey: {
+                                type: "integer",
+                                format: "int64",
+                                description:
+                                  "The key of the process instance that created the document.",
+                              },
+                              customProperties: {
+                                type: "object",
+                                description:
+                                  "Custom properties of the document.",
+                                additionalProperties: true,
+                              },
+                            },
+                            title: "DocumentMetadata",
+                          },
+                        },
+                        title: "DocumentReference",
+                      },
+                    },
+                    failedDocuments: {
+                      type: "array",
+                      description: "Documents that failed creation.",
+                      items: {
+                        type: "object",
+                        properties: {
+                          filename: {
+                            type: "string",
+                            description: "The name of the file.",
+                          },
+                          detail: {
+                            type: "string",
+                            description: "The detail of the failure.",
+                          },
+                        },
+                        title: "DocumentCreationFailureDetail",
+                      },
+                    },
+                  },
+                },
+              ],
+              title: "DocumentCreationBatchResponse",
+            },
+          },
+        },
+      },
+    },
+    "207": {
+      description:
+        "Not all documents were uploaded successfully. More details are provided in the response body.\n",
+      content: {
+        "application/json": {
+          schema: {
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  createdDocuments: {
+                    type: "array",
+                    description: "Documents that were successfully created.",
+                    items: {
+                      type: "object",
+                      properties: {
+                        "camunda.document.type": {
+                          type: "string",
+                          description:
+                            'Document discriminator. Always set to "camunda".',
+                          enum: ["camunda"],
+                        },
+                        storeId: {
+                          type: "string",
+                          description: "The ID of the document store.",
+                        },
+                        documentId: {
+                          type: "string",
+                          description: "The ID of the document.",
+                        },
+                        contentHash: {
+                          type: "string",
+                          description: "The hash of the document.",
+                        },
+                        metadata: {
+                          description: "Information about the document.",
+                          type: "object",
+                          properties: {
+                            contentType: {
+                              type: "string",
+                              description: "The content type of the document.",
+                            },
+                            fileName: {
+                              type: "string",
+                              description: "The name of the file.",
+                            },
+                            expiresAt: {
+                              type: "string",
+                              format: "date-time",
+                              description:
+                                "The date and time when the document expires.",
+                            },
+                            size: {
+                              type: "integer",
+                              format: "int64",
+                              description: "The size of the document in bytes.",
+                            },
+                            processDefinitionId: {
+                              type: "string",
+                              description:
+                                "The ID of the process definition that created the document.",
+                            },
+                            processInstanceKey: {
+                              type: "integer",
+                              format: "int64",
+                              description:
+                                "The key of the process instance that created the document.",
+                            },
+                            customProperties: {
+                              type: "object",
+                              description: "Custom properties of the document.",
+                              additionalProperties: true,
+                            },
+                          },
+                          title: "DocumentMetadata",
+                        },
+                      },
+                      title: "DocumentReference",
+                    },
+                  },
+                  failedDocuments: {
+                    type: "array",
+                    description: "Documents that failed creation.",
+                    items: {
+                      type: "object",
+                      properties: {
+                        filename: {
+                          type: "string",
+                          description: "The name of the file.",
+                        },
+                        detail: {
+                          type: "string",
+                          description: "The detail of the failure.",
+                        },
+                      },
+                      title: "DocumentCreationFailureDetail",
+                    },
+                  },
+                },
+              },
+            ],
+            title: "DocumentCreationBatchResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The document upload failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
