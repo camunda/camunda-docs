@@ -253,7 +253,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    Select the first node and apply the required label:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/submariner/initiate_cluster_set.sh
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/submariner/label_nodes_brokers.sh
    ```
 
 3. Deployment of Submariner on the clusters:
@@ -309,9 +309,9 @@ If everything is set up correctly, you should observe in the output of each clus
   <details>
     <summary>Example Submariner check successfull output</summary>
 
-      ```text reference
-      https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/submariner/output.txt
-      ```
+```text reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/submariner/output.txt
+```
 
   </details>
 
