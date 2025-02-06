@@ -71,7 +71,11 @@ Both can be set up with or without a **Domain** ([ingress](https://docs.aws.amaz
 
 ### Outcome
 
-<!-- TODO : add architecture diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) --->
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+
+_Infrastructure diagram for a single region EKS setup (click on the image to open the PDF version)_
+[![Infrastructure Diagram EKS Single-Region](./assets/eks-single-region.jpg)](./assets/eks-single-region.pdf)
 
 Following this tutorial and steps will result in:
 

@@ -7,6 +7,10 @@ const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const { themes } = require("prism-react-renderer");
 
 module.exports = {
+  // https://docusaurus.io/blog/releases/3.6#adoption-strategy
+  future: {
+    experimental_faster: true,
+  },
   title: "Camunda 8 Docs",
   tagline:
     "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed.",
@@ -556,23 +560,6 @@ module.exports = {
   ],
   markdown: {
     mermaid: true,
-  },
-  webpack: {
-    jsLoader: (isServer) => ({
-      loader: require.resolve("swc-loader"),
-      options: {
-        jsc: {
-          parser: {
-            syntax: "typescript",
-            tsx: true,
-          },
-          target: "es2017",
-        },
-        module: {
-          type: isServer ? "commonjs" : "es6",
-        },
-      },
-    }),
   },
   themes: [
     "docusaurus-theme-openapi-docs",
