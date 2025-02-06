@@ -37,7 +37,7 @@ Once logged in to your Camunda 8 account, take the following steps:
 
 Modeling starts here in the Decision Requirements Diagram (DRD) view. From here, we can add DMN elements from the palette on the left side by dragging and dropping them onto the diagram canvas.
 
-1. We're automatically set up with a rectangular decision symbol, which we'll rename to "Clothes to wear" by double-clicking on the symbol. We'll also rename the ID in the properties panel to "clothingChoice" by clicking the **General** dropdown menu.
+1. We're automatically set up with a rectangular decision symbol, which we'll rename to "Clothes to wear" by double-clicking on the symbol. We'll also rename the ID in the properties panel on the right side of the screen under the **Deploy** button to "clothingChoice" by clicking the **General** dropdown menu.
 2. In this example, we'll append two input data which may determine what we wear for the day: the temperature, and the activity. You can do this in one of two ways:
    - Drag and drop the oval-shaped input data elements from the menu on the left side of the DRD, name them, and connect them by clicking the decision and the arrow icon.
    - Click the decision directly, and click the input data element to drag and drop it onto the canvas. With the second option, you can see this input data will automatically be connected to the decision.

@@ -30,7 +30,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your Slack Connector executable
 
-To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel.
+To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen under the **Deploy** button.
 
 ### Authentication
 

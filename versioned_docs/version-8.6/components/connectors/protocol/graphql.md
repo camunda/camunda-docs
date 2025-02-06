@@ -19,7 +19,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your GraphQL Connector executable
 
-To make the **GraphQL Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
+To make the **GraphQL Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen under the **Deploy** button.
 
 :::note
 All the mandatory and non-mandatory fields are covered in the upcoming sections. Depending on the authentication selection you make, more fields might be required; this is covered in the next section.

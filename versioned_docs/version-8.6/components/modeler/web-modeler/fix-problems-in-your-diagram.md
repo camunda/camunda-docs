@@ -24,7 +24,7 @@ The version selector also provides information about the number of clusters avai
 
 ### Interactivity
 
-The errors are interactive. Clicking on the row highlights the corresponding element in the canvas and points to the specific property in the properties panel where you can resolve the issue.
+The errors are interactive. Clicking on the row highlights the corresponding element in the canvas and points to the specific property in the properties panel on the right side of the screen under the **Deploy** button where you can resolve the issue.
 
 ![error panel](img/diagram-errors/interactivity.png)
 

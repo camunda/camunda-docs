@@ -72,7 +72,7 @@ In this step, you will design a process that demonstrates how to route the proce
 1. Every file in Web Modeler requires a project. Within Modeler, click **New project**.
 2. Name your project and select **Create new > BPMN diagram**.
 3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
+4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel on the right side of the screen under the **Deploy** button. This specifies how the process will appear in other tools of Camunda 8.
 
 </TabItem>
 <TabItem value="sm">

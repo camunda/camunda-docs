@@ -6,7 +6,7 @@ description: Reference for the `called-element` rule.
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
-Call activities must specify the [process ID of the called process](../../../../bpmn/call-activities/#defining-the-called-process). To fix this problem, open the **Called element** group in the properties panel and specify the process ID of the called process.
+Call activities must specify the [process ID of the called process](../../../../bpmn/call-activities/#defining-the-called-process). To fix this problem, open the **Called element** group in the properties panel on the right side of the screen under the **Deploy** button and specify the process ID of the called process.
 
 ## <MarkerGuideline.Invalid /> No process ID specified
 

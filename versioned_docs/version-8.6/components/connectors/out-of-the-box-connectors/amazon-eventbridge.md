@@ -254,7 +254,7 @@ The URLs of the exposed Amazon EventBridge Webhooks adhere to the following patt
 If you make changes to your Amazon EventBridge Webhook Connector configuration, redeploy the BPMN diagram for the changes to take effect.
 :::
 
-When you click on the event with the Amazon EventBridge Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel.
+When you click on the event with the Amazon EventBridge Webhook Connector applied to it, a new **Webhooks** tab will appear in the properties panel on the right side of the screen under the **Deploy** button.
 This tab displays the URL of the Amazon EventBridge Webhook Connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
