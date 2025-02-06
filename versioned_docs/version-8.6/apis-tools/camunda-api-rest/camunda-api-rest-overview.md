@@ -54,6 +54,52 @@ All Query API endpoints contain an `(alpha)` declaration. Those endpoints are no
 You can enable the [alpha feature][] search endpoints by setting either the configuration property `camunda.rest.query.enabled` to `true`,
 or the environment variable `CAMUNDA_REST_QUERY_ENABLED` to `true`.
 
+## API Key Attributes
+
+OpenAPI key attributes are defined as `integer (int64)`.
+
+:::warning Key Attribute Change
+In next minor release the default key attribute type will be changing to `string`.
+:::
+
+In order to have a gradual change and provide our users enough time, we are already introducing new content types in our
+API specification with 8.6. With these content types users can specifically tell our API to accept and return `integer (int64)` or
+`string` key attributes.
+
+### Content Type Headers
+
+We support the following 3 content types in C8 API:
+
+- `application/json`:
+  - Endpoints return and expect objects with key attributes as default `integer (int64)`.
+  - **This changes to `string` in next minor release.**
+- `application/vnd.camunda.api.keys.number+json`:
+  - Endpoints return and expect objects with key attributes as `integer (int64)`.
+- `application/vnd.camunda.api.keys.string+json`:
+  - Endpoints return and expect objects with key attributes as `string`.
+
+Combining multiple headers is not supported.
+
+### Object Naming
+
+The naming of the new objects containing key attributes as `string` is defined according to the following pattern:
+
+- Response objects are always called with a `*Result` postfix. For instance:
+  - `UserTaskSearchQueryResponse` with `integer (int64)` keys.
+  - `UserTaskSearchQueryResult` with `string` keys.
+- Request object name postfixes change depending on their function:
+  - Search queries: `*SearchQuery`. For instance:
+    - `ProcessInstanceSearchQueryRequest` with `integer (int64)` keys.
+    - `ProcessInstanceSearchQuery` with `string` keys.
+  - Filters: `*Filter`. For instance:
+    - `FlowNodeInstanceFilterRequest` with `integer (int64)` keys.
+    - `FlowNodeInstanceFilter` with `string` keys.
+  - Other payloads: `*Instruction`. For instance:
+    - `EvaluateDecisionRequest` with `integer (int64)` keys.
+    - `DecisionEvaluationInstruction` with `string` keys.
+
+See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for more details.
+
 [camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
 [resource authorizations]: /self-managed/concepts/access-control/resource-authorizations.md
 [alpha feature]: /reference/alpha-features.md
