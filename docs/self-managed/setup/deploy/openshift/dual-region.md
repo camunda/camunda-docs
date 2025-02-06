@@ -60,9 +60,8 @@ In addition to the general prerequisites outlined above, the following CLI tools
 
 ### OpenShift clusters
 
-The architecture of your OpenShift clusters may vary depending on your specific configuration. This guide assumes a generic deployment on OpenShift, using a specific cloud provider.
-
-If you'd like to replicate the topology used in this guide, follow the [ROSA Dual-Region Guide](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/).
+The architecture of your OpenShift clusters may vary depending on your specific configuration.
+This guide assumes a generic deployment on OpenShift. If you are interested in a tested topology, follow the [ROSA Dual-Region Guide](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/).
 
 #### Cluster requirements
 
@@ -93,9 +92,9 @@ For a production setup, please consult the [official Red Hat Advanced Cluster Ma
 
 :::
 
-:::note Designation of the first cluster
+:::note Designation of the clusters in ACM
 
-The first cluster is referred to as `local-cluster`. This designation cannot be changed, as it is a constant name used to reference the [managed hub cluster](https://open-cluster-management.io/docs/concepts/cluster-inventory/managedcluster/).
+The cluster of the region 1 is referred to as `local-cluster` in **ACM**. This designation cannot be changed, as it is a constant name used to reference the [managed hub cluster](https://open-cluster-management.io/docs/concepts/cluster-inventory/managedcluster/).
 
 :::
 
@@ -125,8 +124,7 @@ oc --context $CLUSTER_1_NAME --namespace open-cluster-management get csv --watch
 ```
 
 3. With the ACM operator now enabled on the first cluster, the next step is to create the [Multicluster Global Hub](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html-single/install/index#installing-from-the-cli). This feature allows you to import and manage one or more hub clusters from a single central hub cluster.
-
-In this setup, the first cluster will act as the central hub, managing the second cluster. This capability enables the deployment and management of components on the second cluster directly from the first cluster.
+   In this setup, the first cluster will act as the central hub, managing the second cluster. This capability enables the deployment and management of components on the second cluster directly from the first cluster.
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/multi-cluster-hub.yml
