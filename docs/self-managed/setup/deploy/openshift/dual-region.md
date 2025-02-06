@@ -119,10 +119,14 @@ Later in this guide, we will refer to it as **first cluster**.
    oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/install-manifest.yml
    ```
 
-   Verify that the installation succeeded after a few seconds:
+   Verify that the installation succeeded:
 
    ```bash
    oc --context $CLUSTER_1_NAME --namespace open-cluster-management get csv --watch
+
+   # Example output:
+   # NAME                                  DISPLAY                                      VERSION   REPLACES                              PHASE
+   # advanced-cluster-management.v2.12.2   Advanced Cluster Management for Kubernetes   2.12.2    advanced-cluster-management.v2.12.1   Succeeded
    ```
 
 3. With the ACM operator now enabled on the first cluster, the next step is to create the [Multicluster Global Hub](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html-single/install/index#installing-from-the-cli). This feature allows you to import and manage one or more hub clusters from a single central hub cluster.
