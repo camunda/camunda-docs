@@ -100,66 +100,66 @@ The cluster of the region 1 is referred to as `local-cluster` in **ACM**. This d
 
 1. Reference each cluster context name and ensure that each cluster's context name matches the corresponding cluster name. If the context name does not match, you will need to rename it to follow this guide.
 
-```bash
-export CLUSTER_1_NAME="cluster-region-1"  # Replace with your actual context name
-export CLUSTER_2_NAME="cluster-region-2"  # Replace with your actual context name
-```
+   ```bash
+   export CLUSTER_1_NAME="cluster-region-1"  # Replace with your actual context name
+   export CLUSTER_2_NAME="cluster-region-2"  # Replace with your actual context name
+   ```
 
 2. The following manifest will create a namespace for the management cluster, enable the [open-cluster-management operator](https://open-cluster-management.io/) and the [associated subscription](https://docs.openshift.com/container-platform/4.17/operators/admin/olm-adding-operators-to-cluster.html#olm-installing-operator-from-operatorhub-using-cli_olm-adding-operators-to-a-cluster).
 
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/install-manifest.yml
-```
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/install-manifest.yml
+   ```
 
-Apply the manifests to enable ACM:
+   Apply the manifests to enable ACM:
 
-```bash
-oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/install-manifest.yml
-```
+   ```bash
+   oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/install-manifest.yml
+   ```
 
-Verify that the installation succeeded after a few seconds:
+   Verify that the installation succeeded after a few seconds:
 
-```bash
-oc --context $CLUSTER_1_NAME --namespace open-cluster-management get csv --watch
-```
+   ```bash
+   oc --context $CLUSTER_1_NAME --namespace open-cluster-management get csv --watch
+   ```
 
 3. With the ACM operator now enabled on the first cluster, the next step is to create the [Multicluster Global Hub](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html-single/install/index#installing-from-the-cli). This feature allows you to import and manage one or more hub clusters from a single central hub cluster.
    In this setup, the first cluster will act as the central hub, managing the second cluster. This capability enables the deployment and management of components on the second cluster directly from the first cluster.
 
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/multi-cluster-hub.yml
-```
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/multi-cluster-hub.yml
+   ```
 
-:::caution Known issue: may not work correctly with the manifest
+   :::caution Known issue: may not work correctly with the manifest
 
-The creation of the MultiClusterHub using the manifest can sometimes remain stuck in the installation phase when created this way.
+   The creation of the MultiClusterHub using the manifest can sometimes remain stuck in the installation phase when created this way.
 
-To avoid this issue, you can follow the [official instructions in the OpenShift UI Console](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
+   To avoid this issue, you can follow the [official instructions in the OpenShift UI Console](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing-from-the-operatorhub).
 
-:::
+   :::
 
-Apply the manifest:
+   Apply the manifest:
 
-```bash
-oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/multi-cluster-hub.yml
-```
+   ```bash
+   oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/multi-cluster-hub.yml
+   ```
 
-Wait until the status shows as "Running." This process can take up to 10 minutes:
+   Wait until the status shows as "Running." This process can take up to 10 minutes:
 
-```bash
-oc --context $CLUSTER_1_NAME get mch -n open-cluster-management multiclusterhub --watch
-```
+   ```bash
+   oc --context $CLUSTER_1_NAME get mch -n open-cluster-management multiclusterhub --watch
+   ```
 
-:::caution Security consideration
+   :::caution Security consideration
 
-- A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
+   - A ServiceAccount with a ClusterRoleBinding automatically gives cluster administrator privileges to Red Hat Advanced Cluster Management and to any user credentials with access to the namespace where you install Red Hat Advanced Cluster Management.
 
-- A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed.
-  This is the only local-cluster namespace that can exist.
+   - A namespace called `local-cluster` is reserved for the Red Hat Advanced Cluster Management hub cluster when it is self-managed.
+     This is the only local-cluster namespace that can exist.
 
-- :warning: For security reasons, do not give access to the `local-cluster` namespace to any user that is not a cluster-administrator.
+   - :warning: For security reasons, do not give access to the `local-cluster` namespace to any user that is not a cluster-administrator.
 
-:::
+   :::
 
 4. With the MultiClusterHub created, the last step is to create a `ManagedClusterSet` which is a group of managed clusters. With a `ManagedClusterSet`, you can manage access to all of the managed clusters in the group together
 
