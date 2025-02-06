@@ -24,6 +24,10 @@ Modules can be run together or separately in any combination and can be scaled. 
 
 Additionally, you can have several importer and archiver nodes to increase throughput. Internally, they will spread their work based on Zeebe partitions.
 
+:::warning
+Running multiple importers on the same partition may result in wrong usage metrics.
+:::
+
 For example, if your Zeebe runs 10 partitions and you configure two importer nodes, they will import data from five partitions each.
 
 Each single importer/archiver node must be configured using the following configuration parameters:
