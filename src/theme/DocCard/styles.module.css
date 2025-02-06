@@ -1,7 +1,14 @@
-/* 
-  Why is this swizzled?
-    See the associated DocCard/index.js for details. There are no customizations in this file.
-*/
+/** this is the only class altered during swizzling. **/
+
+.cardDescription {
+  font-size: 0.8rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/** everything below here is untouched from the original. **/
 
 .cardContainer {
   --ifm-link-color: var(--ifm-color-emphasis-800);
@@ -25,17 +32,4 @@
 
 .cardTitle {
   font-size: 1.2rem;
-}
-
-.cardDescription {
-  font-size: 0.8rem;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-.cardContainerBetaBorder {
-  border-color: #14d890;
-  border-width: 2px;
 }
