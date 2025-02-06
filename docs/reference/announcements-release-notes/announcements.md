@@ -60,19 +60,19 @@ Camunda 8.5 was released on 9 April, 2024.
 <div class="double-column-container">
 <div class="double-column-left">
 
-**[8.5 Announcements](/reference/announcements-release-notes/850.md#camunda-85)**
+**[8.5 Announcements](/reference/announcements-release-notes/850/850-release-notes.md#camunda-85)**
 
 </div>
 <div class="double-column-right">
 
-- [Updated SaaS URLs](/reference/announcements-release-notes/850.md#updated-saas-urls)
-- [Syntax changes in Helm chart](/reference/announcements-release-notes/850.md#syntax-changes-in-helm-chart)
-- [Support for Amazon OpenSearch](/reference/announcements-release-notes/850.md#support-for-amazon-opensearch)
-- [Known limitations](/reference/announcements-release-notes/850.md#known-limitations)
-- [Changes in supported environments](/reference/announcements-release-notes/850.md#changes-in-supported-environments)
-- [New generation naming scheme](/reference/announcements-release-notes/850.md#camunda-saas-new-generation-naming-scheme)
-- [Removal of Web Modeler's beta API](/reference/announcements-release-notes/850.md#removal-of-web-modelers-beta-api)
-- [Serialization of timestamp values in management API](/reference/announcements-release-notes/850.md#zeebe-850-breaks-serialization-of-timestamp-values-in-management-api-self-managed-only)
+- [Updated SaaS URLs](/reference/announcements-release-notes/850/850-announcements.md#updated-saas-urls)
+- [Syntax changes in Helm chart](/reference/announcements-release-notes/850/850-announcements.md#syntax-changes-in-helm-chart)
+- [Support for Amazon OpenSearch](/reference/announcements-release-notes/850/850-announcements.md#support-for-amazon-opensearch)
+- [Known limitations](/reference/announcements-release-notes/850/850-announcements.md#known-limitations)
+- [Changes in supported environments](/reference/announcements-release-notes/850/850-announcements.md#changes-in-supported-environments)
+- [New generation naming scheme](/reference/announcements-release-notes/850/850-announcements.md#camunda-saas-new-generation-naming-scheme)
+- [Removal of Web Modeler's beta API](/reference/announcements-release-notes/850/850-announcements.md#removal-of-web-modelers-beta-api)
+- [Serialization of timestamp values in management API](/reference/announcements-release-notes/850/850-announcements.md#zeebe-850-breaks-serialization-of-timestamp-values-in-management-api-self-managed-only)
 
 </div>
 </div>
@@ -84,17 +84,17 @@ Camunda 8.4 was released on 9 January, 2024.
 <div class="double-column-container">
 <div class="double-column-left">
 
-**[8.4 Announcements](/reference/announcements-release-notes/850.md#camunda-84)**
+**[8.4 Announcements](/reference/announcements-release-notes/850/850-release-notes.md#camunda-84)**
 
 </div>
 <div class="double-column-right">
 
-- [Versioning changes in Helm chart](/reference/announcements-release-notes/850.md#versioning-changes-in-helm-chart)
-- [Dockerfile numeric ID](/reference/announcements-release-notes/850.md#dockerfile-numeric-id)
-- [Deprecated in 8.4](/reference/announcements-release-notes/850.md#deprecated-in-84)
-- [Versioning changes in Elasticsearch](/reference/announcements-release-notes/850.md#versioning-changes-in-elasticsearch)
-- [Support for Amazon OpenSearch](/reference/announcements-release-notes/850.md#support-for-amazon-opensearch-1)
-- [Known limitations](/reference/announcements-release-notes/850.md#known-limitations-1)
+- [Versioning changes in Helm chart](/reference/announcements-release-notes/850/850-announcements.md#versioning-changes-in-helm-chart)
+- [Dockerfile numeric ID](/reference/announcements-release-notes/850/850-announcements.md#dockerfile-numeric-id)
+- [Deprecated in 8.4](/reference/announcements-release-notes/850/850-announcements.md#deprecated-in-84)
+- [Versioning changes in Elasticsearch](/reference/announcements-release-notes/850/850-announcements.md#versioning-changes-in-elasticsearch)
+- [Support for Amazon OpenSearch](/reference/announcements-release-notes/850/850-announcements.md#support-for-amazon-opensearch-1)
+- [Known limitations](/reference/announcements-release-notes/850/850-announcements.md#known-limitations-1)
 
 </div>
 </div>
@@ -106,14 +106,14 @@ Camunda 8.3 was released on 10 October, 2023.
 <div class="double-column-container">
 <div class="double-column-left">
 
-**[8.3 Announcements](/reference/announcements-release-notes/850.md#camunda-83)**
+**[8.3 Announcements](/reference/announcements-release-notes/850/850-release-notes.md#camunda-83)**
 
 </div>
 <div class="double-column-right">
 
-- [Deprecated in 8.3](/reference/announcements-release-notes/850.md#deprecated-in-83)
-- [Versioning changes in Elasticsearch](/reference/announcements-release-notes/850.md#versioning-changes-in-elasticsearch-1)
-- [Versioning changes in Helm chart](/reference/announcements-release-notes/850.md#versioning-changes-in-helm-chart-1)
+- [Deprecated in 8.3](/reference/announcements-release-notes/850/850-announcements.md#deprecated-in-83)
+- [Versioning changes in Elasticsearch](/reference/announcements-release-notes/850/850-announcements.md#versioning-changes-in-elasticsearch-1)
+- [Versioning changes in Helm chart](/reference/announcements-release-notes/850/850-announcements.md#versioning-changes-in-helm-chart-1)
 
 </div>
 </div>

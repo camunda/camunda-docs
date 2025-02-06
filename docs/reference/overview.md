@@ -9,7 +9,7 @@ This section contains general reference material for Camunda 8.
 
 ## Support
 
-- [Announcements](announcements.md) - Stay up to date on versioning changes, end of maintenance updates, OpenSearch support, and other updates.
+- [Announcements](/reference/announcements-release-notes/announcements.md) - Stay up to date on versioning changes, end of maintenance updates, OpenSearch support, and other updates.
 - [Release notes](/reference/announcements-release-notes/870/870-release-notes.md) - Learn where you can find release notes for components of Camunda 8.
 - [Auto-updates](auto-updates.md) - Learn about the SaaS cluster auto-update feature.
 - [Service status](status.md) - Camunda 8 SaaS is a hosted service for the Camunda 8 stack that runs on the Google Cloud Platform (GCP). When availability changes, Camunda provides you with a current service status.
