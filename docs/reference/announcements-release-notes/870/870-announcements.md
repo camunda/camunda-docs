@@ -12,10 +12,13 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
 | :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
 | 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
 
-- [API updates](#api-updates-saasself-managed)
-- [Identity management updates](#identity-management-updates-saasself-managed)
-- [Installation and deployment updates](#installation-and-deployment-updates-self-managed)
-- [Camunda Java client and Camunda Spring SDK](#camunda-java-client-and-camunda-spring-sdk-self-managed)
+<!--- [Ad-hoc subprocesses](#)
+- [Document handling](#)
+- [RPA](#)
+  - [Fetch RPA resource API](#)
+  - [deployResourceAPI for RPA](#) -->
+
+<<<<<<< HEAD:docs/reference/announcements-release-notes/870/870-announcements.md
 
 ## Versioning changes
 
@@ -35,82 +38,19 @@ lorem ipsum
 
 ## API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The 8.7 release includes API updates to support the move to a [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) unified experience.
+=======
 
-### Camunda 8 REST API updates
+- [Web Modeler](#web-modeler)
+  - [Deploy diagram change Self-Managed {#web-modeler-deploy-diagram-change}](#deploy-diagram-change-self-managed-web-modeler-deploy-diagram-change)
+  - [Milestones renamed to versions {#web-modeler-milestones-renamed-to-versions}](#milestones-renamed-to-versions-web-modeler-milestones-renamed-to-versions)
+- [Southeast Asia region for SaaS customers SaaS](#southeast-asia-region-for-saas-customers-saas)
+  > > > > > > > main:docs/reference/announcements/870.md
 
-- New Query endpoints (with advanced search filtering) will be added for process entities (processes, decisions, user tasks, and forms). These will replace the component APIs (Tasklist, Operate) going forward.
-- New endpoints will allow you to manage and query users and resource permissions in an orchestration cluster.
-- All the Camunda 8 REST API endpoints will support resource-based authorizations to enable fine-grained permissions.
-- API terminology is aligned so technical assets have an identical, easily-understood, descriptive property name.
+## Web Modeler
 
-### Deprecated: Operate and Tasklist v1 REST APIs
+### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
-The deprecation process for the [Operate](/apis-tools/operate-api/overview.md) and [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) REST APIs starts with the 8.7 release. You can begin migrating to the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) for querying to prepare for this change.
-
-- Version 8.7, 8.8: These APIs are still available but deprecated, and so not recommended for new implementations.
-- Version 8.9: These APIs will be removed.
-
-### Deprecated: Job-based user tasks querying
-
-As **job-worker** user tasks will be deprecated with Camunda 8.9, Camunda recommends using **Camunda user tasks** (formerly known as **Zeebe user tasks**) in your process definitions. Note that you may still see references of **Zeebe user tasks** in your XML, but this is the same thing as Camunda user tasks.
-
-- Version 8.7, 8.8: **Job-worker** user tasks are available for querying, but Camunda Modeler automatically applies the **Camunda user task** and shows a warning message for each job worker user task.
-- Version 8.9: **Job-worker** user tasks will be deprecated. With Camunda 8.9+, customers can use the **job-worker** implementation of user tasks as standard jobs with headers to enable open architecture and composable solutions.
-
-### Deprecated: Zeebe gRPC API endpoints
-
-With the 8.7 release, Camunda announces the deprecation of several [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) endpoints for removal in 8.9.
-
-- Key gRPC endpoints necessary for high-throughput and low-latency applications remain available with 8.7.
-- The final list of retained gRPC endpoints will be confirmed with the 8.7 release.
-- Selected endpoints will remain active, with others scheduled for removal in the 8.9 release.
-
-### Removed: Tasklist GraphQL API
-
-With the 8.7 release, the deprecated [Tasklist GraphQL API](/apis-tools/tasklist-api/tasklist-api-overview.md) will be removed from the product.
-
-<!-- :::info
-Learn more about these updates in Upcoming API Changes in Camunda 8.
-::: -->
-
-## Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-The [Identity service](/self-managed/identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
-
-### Cluster-level identity management
-
-Identity settings will be configured at the orchestration cluster level, allowing each cluster to have unique OIDC configurations. This cluster-specific setup empowers organizations to assign different identity providers (IdPs) across clusters, offering improved control over permissions and user group mappings, resulting in a more streamlined and efficient configuration experience.
-
-For SaaS customers, identity management in Camunda 8.7 remains consistent with Camunda 8.6, allowing the attachment of a single IdP per organization. However, cluster-level identity capabilities are provided for SaaS as well as Self-Managed. This means that user groups, roles, and access permissions can now be managed at the cluster level, giving SaaS customers the same granular access control as in Self-Managed environments.
-
-### Decoupling from Keycloak <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-Built-in Keycloak integration in Self-Managed is removed, allowing customers to use any compatible IdP.
-
-- Keycloak remains fully supported as an external option. For cluster-level identity management it must be connected as an external OIDC provider moving forward.
-- OpenID Connect (OIDC) remains the standard for seamless integration with chosen IdPs.
-
-### Resource-based permissions
-
-Resource-level permissions are introduced for process definitions and web applications.
-
-- Admin users retain full access, but regular users must be granted specific permissions to perform actions/view resources.
-- For organizations that build custom front-ends and access Camunda via API, users with API permissions can still access process data through the V2 API.
-
-<!-- :::info
-Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.7.
-::: -->
-
-## Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-Camunda 8.7 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, and Tasklist into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, deployment reference architectures, and improved support for professional developers with Camunda 8 Run.
-
-You can download the alpha release of the unified package from the Camunda GitHub repository, either as an executable Java application (Camunda Orchestration Core) or a Docker image.
-
-:::caution breaking change: Deploy diagram modal
-
-The Web Modeler **Deploy diagram** modal has changed, and clusters must now be proactively configured to be able to deploy from Web Modeler.
+With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/docs/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
 
 <img src={DeployDiagramImg} alt="New 8.7 deploy diagram modal" width="600px" style={{border: '0', paddingTop: '0', marginTop: '0'}} />
 
@@ -118,10 +58,11 @@ The Web Modeler **Deploy diagram** modal has changed, and clusters must now be p
 - In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/docs/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
 - Note that you must also be assigned the `Zeebe` [Identity role](/docs/self-managed/identity/user-guide/roles/add-assign-role.md) to be able to deploy.
 
-:::
+### Milestones renamed to versions {#web-modeler-milestones-renamed-to-versions}
 
-### Helm charts
+The term "milestones" has been renamed to ["versions"](/components/modeler/web-modeler/versions.md) in Web Modeler for clarity and consistency with other Camunda 8 components. The renaming is implemented across the Web Modeler user interface and the API.
 
+<<<<<<< HEAD:docs/reference/announcements-release-notes/870/870-announcements.md
 If you are using the recommended Camunda 8 deployment option (Helm charts), the upgrade path from version 8.6 to 8.7 will be straightforward by chaninging the values file to the new syntax. Updated Helm charts will be provided to support the upgrade to the new streamlined architecture.
 
 New migration guides will also be provided to support you when migrating from a previous Camunda version.
@@ -191,22 +132,16 @@ Learn more about these updates in Streamlined Deployment with 8.7.
 
 With the Camunda 8.7 release, Camunda Java client and Camunda Spring SDK replace the Zeebe Java client and Zeebe Spring SDK. This allows you to use a single consolidated client to interact with Camunda clusters.
 
-The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality and adding new capabilities.
+# The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality and adding new capabilities.
+
+In [the API](/apis-tools/web-modeler-api/index.md), new endpoints starting with `/api/v1/versions` have been introduced, while the previous `/api/v1/milestones` endpoints are now deprecated.
+Further details can be found in [Web Modeler's OpenAPI documentation](https://modeler.camunda.io/swagger-ui/index.html).
+
+> > > > > > > main:docs/reference/announcements/870.md
 
 :::note
-
-- If you need to continue using the old `ZeebeClient`, you can use the version 8.6 artifact without any issues with newer cluster versions as the client is forward-compatible.
-- The Zeebe Java client will not be developed further and only receives bug fixes while version 8.6 is officially supported.
-
+This is a nominal update and the functionality of versions and milestones is equivalent.
 :::
-
-### Key changes
-
-| Change                                          | Description                                                                                                                                                                                                                                                                                                        |
-| :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| New package structure                           | Package `io.camunda.client`: Contains the new `CamundaClient` and all 8.7 features.                                                                                                                                                                                                                                |
-| Refactored properties and environment variables | <p><ul><li><p>All old Java client property names are refactored to more general ones. For example, `zeebe.client.tenantId` to `camunda.client.tenantId`.</p></li><li><p>Similarly, environment variables are renamed following the same concept: `ZEEBE_REST_ADDRESS` to `CAMUNDA_REST_ADDRESS`.</p></li></ul></p> |
-| Artifact ID change                              | The `artifactId` changes from `zeebe-client-java` to `camunda-client-java`.                                                                                                                                                                                                                                        |
 
 ## Southeast Asia region for SaaS customers <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 

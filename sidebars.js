@@ -176,7 +176,7 @@ module.exports = {
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
-            "components/modeler/web-modeler/milestones",
+            "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
             {
               "Advanced modeling": [
@@ -304,23 +304,36 @@ module.exports = {
       ],
     },
     {
-      Connectors: [
-        "components/connectors/introduction-to-connectors",
-        "components/connectors/connector-types",
+      type: "category",
+      label: "Connectors",
+      link: {
+        type: "doc",
+        id: "components/connectors/introduction-to-connectors",
+      },
+      items: [
         {
-          "Use Connectors": [
-            "components/connectors/use-connectors/index",
+          type: "category",
+          label: "How to use connectors",
+          link: {
+            type: "doc",
+            id: "components/connectors/use-connectors/index",
+          },
+          items: [
+            "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
           ],
         },
         {
-          "Out-of-the-box Connectors": [
-            "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-            "components/connectors/out-of-the-box-connectors/asana",
-            "components/connectors/out-of-the-box-connectors/automation-anywhere",
+          type: "category",
+          label: "Camunda connectors",
+          link: {
+            type: "doc",
+            id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+          },
+          items: [
             {
-              AWS: [
+              "Amazon AWS": [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
@@ -333,6 +346,8 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/asana",
+            "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/easy-post",
@@ -347,6 +362,8 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-gemini",
               ],
             },
+            "components/connectors/protocol/graphql",
+            "components/connectors/protocol/http-webhook",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
@@ -358,10 +375,13 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
+            "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
+            "components/connectors/protocol/rest",
             "components/connectors/out-of-the-box-connectors/salesforce",
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/protocol/soap",
             "components/connectors/out-of-the-box-connectors/sql",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
@@ -369,23 +389,31 @@ module.exports = {
           ],
         },
         {
-          "Protocol Connectors": [
-            "components/connectors/protocol/graphql",
-            "components/connectors/protocol/http-webhook",
-            "components/connectors/protocol/polling",
-            "components/connectors/protocol/rest",
-            "components/connectors/protocol/soap",
-          ],
-        },
-        "components/connectors/manage-connector-templates",
-        {
-          "Building custom Connectors": [
+          type: "category",
+          label: "Custom connectors",
+          link: {
+            type: "doc",
+            id: "components/connectors/custom-built-connectors/build-connector",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Connector templates",
+              link: {
+                type: "doc",
+                id: "components/connectors/custom-built-connectors/connector-templates",
+              },
+              items: [
+                "components/connectors/custom-built-connectors/connector-template-generator",
+                "components/connectors/manage-connector-templates",
+              ],
+            },
             "components/connectors/custom-built-connectors/connector-sdk",
-            "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-template-generator",
           ],
         },
       ],
+    },
+    {
       Zeebe: [
         "components/zeebe/zeebe-overview",
         {
@@ -678,7 +706,7 @@ module.exports = {
             "components/early-access/alpha/sap/sap-integration",
             "components/early-access/alpha/sap/odata-connector",
             "components/early-access/alpha/sap/rfc-connector",
-            "components/early-access/alpha/sap/btp-integration",
+            "components/early-access/alpha/sap/btp-plugin",
           ],
         },
       ],

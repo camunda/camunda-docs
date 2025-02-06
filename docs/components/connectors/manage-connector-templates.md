@@ -35,25 +35,25 @@ Take the following steps to create a new Connector template:
 
 ## Publish a Connector template
 
-After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective milestone history management.
+After finalizing your Connector, click **Publish** to activate it within the project context. Assign a distinct version name for effective version management.
 
 ![Publishing a template](img/connector-templates/create-connector-template-3.png)
 
 As a [user with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access), you can publish a Connector template version within the organization context, enabling all organization members to use it in their diagrams.
-To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [milestone history](#versioning-connector-templates).
+To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [versions list](#versioning-connector-templates).
 
 ![Promoting a template](img/connector-templates/create-connector-template-4.png)
 
 ### Manage published Connector templates
 
-After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [milestone history](#versioning-connector-templates).
+After publishing, a Connector template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [versions list](#versioning-connector-templates).
 
 On the Web Modeler home page, you can find an overview of all shared resources within your organization.
 
 [Users with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access) can:
 
 - View additional details about the published version.
-- Open the resource's milestone history (if they are in [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
+- Open the resource's versions list (if they are in [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
 - Unpublish a Connector template directly from this view.
 
 ![Manage published templates - elevated access](img/connector-templates/manage-connector-templates-org-privileges.png)
@@ -61,13 +61,13 @@ On the Web Modeler home page, you can find an overview of all shared resources w
 Organization members without special organization permissions can:
 
 - View all the resources published within the organization.
-- Open the resource's milestone history (if they are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
+- Open the resource's versions list (if they are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
 
 ![Manage published templates - no special organization permissions](img/connector-templates/manage-connector-templates-no-org-privileges.png)
 
 ### Versioning Connector templates
 
-You can version your Connector templates using milestones, [similar to diagrams](/components/modeler/web-modeler/milestones.md).
+You can version your Connector templates [similar to diagrams](/components/modeler/web-modeler/versions.md).
 
 If you publish a new version of a Connector template and an older version is already being used in diagrams, the user can either:
 

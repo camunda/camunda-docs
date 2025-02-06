@@ -1,7 +1,7 @@
 ---
 id: azure-open-ai
 title: Azure OpenAI Connector
-sidebar_label: Azure OpenAI Connector
+sidebar_label: Azure OpenAI
 description: Interact with Azure OpenAI from your BPMN process.
 ---
 

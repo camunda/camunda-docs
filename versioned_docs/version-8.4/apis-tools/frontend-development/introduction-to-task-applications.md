@@ -18,7 +18,7 @@ If you are not familiar with the idea of human task management itself, read the 
 
 ## What are task applications?
 
-Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) (also referred to as a **human task**) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
+Task applications are end-user applications that allow humans to perform work orchestrated with a process. A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) (also referred to as a **human task**) represents a single **work item** to be performed by an individual or a group. The jobs of a task application include:
 
 - Listing available tasks and allowing users to select a task to work on.
 - Providing filter and search options for users so they can more easily find the right next task to work on.
@@ -61,9 +61,9 @@ The **task details panel** shows the details of the selected task. A [form](/gui
 :::tip
 Typically, a task application utilizes forms to capture information from the user, to make a decision, to collect the results from a real-world task, or to provide task instructions to the user.
 
-However, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md/#user-task-forms) is not limited to forms. A user task could also represent navigating to an external desktop or web application, where a task is to be performed, such as updating a record in a CRM. You can even use them to track physical work or actions using sensors, IoT devices, or any interface that can talk to the web, by registering a [job worker](/components/concepts/job-workers.md) to the job type `io.camunda.zeebe:userTask`.
+However, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) is not limited to forms. A user task could also represent navigating to an external desktop or web application, where a task is to be performed, such as updating a record in a CRM. You can even use them to track physical work or actions using sensors, IoT devices, or any interface that can talk to the web, by registering a [job worker](/components/concepts/job-workers.md) to the job type `io.camunda.zeebe:userTask`.
 
-For these cases, utilize the flexible [custom form key](/components/modeler/web-modeler/advanced-modeling/form-linking.md/#custom-form-key).
+For these cases, utilize the flexible [custom form key](/components/modeler/web-modeler/advanced-modeling/form-linking.md#custom-form-key).
 :::
 
 On the top of the form, a header shows the title of the task to work on, and the current assignee. Depending on the status of the assignment, a button allows you to assign the task to yourself or release it to the queue.

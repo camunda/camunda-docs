@@ -6,6 +6,7 @@ keywords: ["camunda docker", "docker compose"]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
 A Docker Compose configuration to run Camunda Self-Managed components (Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors).
 
@@ -23,8 +24,8 @@ While the [Docker images](/self-managed/setup/deploy/other/docker.md) themselves
 
 To start a complete instance of Camunda 8 Self-Managed environment locally:
 
-1. Clone the [Camunda Self-Managed repository](https://github.com/camunda/camunda-self-managed), and navigate to the directory of the desired Camunda version (for example, `/version/camunda-8.6`).
-2. Run the following command:
+1. Download the artifact for Camunda 8 <DockerCompose/>, then extract it.
+2. Run the following command in the extracted directory:
 
 ```shell
 docker compose up -d
