@@ -354,6 +354,12 @@ Elasticsearch will need an S3 bucket for data backup and restore procedure, requ
 
 If you don’t have access to an S3 bucket, you can adapt the backup method to use an [alternative Elasticsearch backup solution](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html). However, this guide focuses solely on S3 snapshots.
 
+:::caution Bucket vulnerable to region outages
+
+The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingBucket.html). If that region becomes unavailable and you want to restore to a different region or S3 services remain disrupted, you must create a new bucket in another region and reconfigure your Elasticsearch cluster to use the new bucket.
+
+:::
+
 The following script will create the required namespaces and secrets used to reference the bucket access.
 
 ```bash reference
@@ -466,6 +472,19 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-h
 ```
 
 Alternatively, you can manage each service individually using the `ServiceExport` Custom Resource Definition (CRD).
+
+<details>
+   <summary>Example of the ServiceExport manifest</summary>
+
+```yaml
+apiVersion: multicluster.x-k8s.io/v1alpha1
+kind: ServiceExport
+metadata:
+  name: camunda-elasticsearch # name of the service to export
+  namespace: camunda-cluster-region-2 #
+```
+
+</details>
 
 For each cluster, verify the status of the exported services with this script:
 
