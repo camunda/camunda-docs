@@ -162,9 +162,9 @@ If you would like some more guidance relating to authentication, refer to the [C
 
 The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm chart provides external, dependency Helm charts for Databases such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). Within a production setting, these dependency charts should be disabled, and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
-In our scenario the Core component, and the Optimize importer communicate with a singular Amazon OpenSearch instance. On the other hand, the identity and web-modeler components are connected to separate databases on the Amazon Aurora PostgreSQL instances.
+In our scenario, the Core component and the Optimize importer communicate with a single Amazon OpenSearch instance. Similarly, the identity and web-modeler components use separate databases within a single Amazon Aurora PostgreSQL instance.
 
-It is expected that you already have one Amazon OpenSearch instance and two databases on Amazon Aurora PostgreSQL ready to use. Complete with a username, password, and URL. If not, refer to the guides in the prerequisites section.
+You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL instance (with two databases) ready to use, complete with a username, password, and URL. If not, refer to the guides in the prerequisites section.
 
 #### Connecting to Amazon OpenSearch
 
