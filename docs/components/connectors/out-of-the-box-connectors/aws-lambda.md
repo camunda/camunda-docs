@@ -23,7 +23,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Invoking your AWS Lambda function
 
-To make the **AWS Lambda Connector** executable, fill out the mandatory fields highlighted in red in the properties panel:
+To make the **AWS Lambda Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen:
 
 1. Choose an applicable authentication type from the **Authentication** dropdown. Learn more about authentication types in the related [appendix entry](#aws-authentication-types).
 2. Set the relevant IAM key and secret pair in the **Authentication** section. For example, `{{secrets.MY_AWS_ACCESS_KEY}}`. The value can be plain text, but this is not recommended due to security concerns.
