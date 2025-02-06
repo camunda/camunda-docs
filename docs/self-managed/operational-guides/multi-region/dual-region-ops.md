@@ -36,7 +36,10 @@ This procedure has been updated in the Camunda 8.6 release. The procedure used i
 
 ## Introduction
 
-This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region and how to ultimately do a full recovery to restore the dual-region setup. The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
+This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region and how to ultimately do a full recovery to restore the dual-region setup.
+
+The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
+It has been also validated for the [OpenShift dual-region setup guidance](/docs/self-managed/setup/deploy/openshift/dual-region.md).
 
 Before proceeding with the operational procedure, thoroughly review and understand the contents of the [dual-region concept page](./../../concepts/multi-region/dual-region.md). This page outlines various limitations and requirements pertinent to the procedure, which are crucial for successful execution.
 
@@ -50,7 +53,7 @@ Running a dual-region configuration requires users to detect and manage any regi
 
 ## Prerequisites
 
-- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region concept](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
+- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region concept](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) or [OpenShift dual-region concept](/docs/self-managed/setup/deploy/openshift/dual-region.md).
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
@@ -87,11 +90,33 @@ For the failback procedure, the recreated region must not include any active Cam
 
 ### Prerequisites
 
-The following procedures assume that the dual-region deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters). We assume you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
+The following procedures assume the following dual-region deployment for:
 
-Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
+- **AWS:** the deployment has been created using [AWS setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) and you have your own copy of the [c8-multi-region](https://github.com/camunda/c8-multi-region) repository and previously completed changes in the `camunda-values.yml` to adjust them in your setup.
+  Follow the [dual-region cluster deployment](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#deploy-camunda-8-to-the-clusters) guide to install Camunda 8, configure a dual-region setup, and have the general environment variables (see [environment prerequisites](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md#environment-prerequisites) already set up.
 
-We will avoid referencing both scenarios of losing either Region 0 or Region 1. Instead, we have generalized the commands and require a one-time setup to configure environment variables, enabling you to execute the procedure based on the surviving region and the one that needs to be recreated.
+- **OpenShift:** the deployment has been created using [OpenShift setup guide](/self-managed/setup/deploy/openshift/dual-region.md#deploying-camunda-8-via-helm-charts-in-a-dual-region-setup) and previously completed changes in your `values-region-1.yml` and `values-region-2.yml` to adjust them in your setup.
+
+:::note OpenShift cluster reference
+
+    The OpenShift guide references the cluster's context using `CLUSTER_1_NAME` and `CLUSTER_2_NAME`.
+    This guide use a different convention, the convertion can be done as follow:
+    <details>
+      <summary>Show OpenShift convertion</summary>
+
+    ```bash
+    export CLUSTER_0="$CLUSTER_1_NAME"
+    echo "CLUSTER_0=$CLUSTER_0"
+
+    export CLUSTER_1="$CLUSTER_2_NAME"
+    echo "CLUSTER_1=$CLUSTER_1"
+    ```
+
+    </details>
+
+:::
+
+We will avoid referencing both scenarios of losing either region. Instead, we have generalized the commands and require a one-time setup to configure environment variables, enabling you to execute the procedure based on the surviving region and the one that needs to be recreated.
 Depending on which region you lost, select the correct tab below and export those environment variables to your terminal for a smoother procedure execution:
 
 <Tabs queryString="lost-region">
@@ -158,206 +183,206 @@ In our example, we went with port-forwarding to a localhost, but other alternati
 
 1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
 
-curl -L -X GET 'http://localhost:8080/v2/topology' \
-  -H 'Accept: application/json'
-```
+   curl -L -X GET 'http://localhost:8080/v2/topology' \
+   -H 'Accept: application/json'
+   ```
 
-<details>
-  <summary>Example output</summary>
-  <summary>
+   <details>
+   <summary>Example output</summary>
+   <summary>
 
-```bash
-{
-  "brokers": [
-    {
-      "nodeId": 0,
-      "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 6,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 7,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 8,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    },
-    {
-      "nodeId": 2,
-      "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 8,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    },
-    {
-      "nodeId": 4,
-      "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 4,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 5,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    },
-    {
-      "nodeId": 6,
-      "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 4,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 5,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 6,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 7,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    }
-  ],
-  "clusterSize": 8,
-  "partitionsCount": 8,
-  "replicationFactor": 4,
-  "gatewayVersion": "8.6.0"
-}
-```
+   ```bash
+   {
+   "brokers": [
+      {
+         "nodeId": 0,
+         "host": "camunda-zeebe-0.camunda-zeebe.camunda-london",
+         "port": 26501,
+         "partitions": [
+         {
+            "partitionId": 1,
+            "role": "leader",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 6,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 7,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 8,
+            "role": "follower",
+            "health": "healthy"
+         }
+         ],
+         "version": "8.6.0"
+      },
+      {
+         "nodeId": 2,
+         "host": "camunda-zeebe-1.camunda-zeebe.camunda-london",
+         "port": 26501,
+         "partitions": [
+         {
+            "partitionId": 1,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 2,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 3,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 8,
+            "role": "leader",
+            "health": "healthy"
+         }
+         ],
+         "version": "8.6.0"
+      },
+      {
+         "nodeId": 4,
+         "host": "camunda-zeebe-2.camunda-zeebe.camunda-london",
+         "port": 26501,
+         "partitions": [
+         {
+            "partitionId": 2,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 3,
+            "role": "leader",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 4,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 5,
+            "role": "follower",
+            "health": "healthy"
+         }
+         ],
+         "version": "8.6.0"
+      },
+      {
+         "nodeId": 6,
+         "host": "camunda-zeebe-3.camunda-zeebe.camunda-london",
+         "port": 26501,
+         "partitions": [
+         {
+            "partitionId": 4,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 5,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 6,
+            "role": "follower",
+            "health": "healthy"
+         },
+         {
+            "partitionId": 7,
+            "role": "leader",
+            "health": "healthy"
+         }
+         ],
+         "version": "8.6.0"
+      }
+   ],
+   "clusterSize": 8,
+   "partitionsCount": 8,
+   "replicationFactor": 4,
+   "gatewayVersion": "8.6.0"
+   }
+   ```
 
-  </summary>
-</details>
+   </summary>
+   </details>
 
   </TabItem>
   <TabItem value="zbctl" label="zbctl">
 
 1. Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
-zbctl status --insecure --address localhost:26500
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+   zbctl status --insecure --address localhost:26500
+   ```
 
-<details>
-  <summary>Example output</summary>
-  <summary>
+      <details>
+      <summary>Example output</summary>
+      <summary>
 
-```bash
-Cluster size: 8
-Partitions count: 8
-Replication factor: 4
-Gateway version: 8.6.0
-Brokers:
-  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Leader, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 8 : Leader, Healthy
-  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Leader, Healthy
-```
+   ```bash
+   Cluster size: 8
+   Partitions count: 8
+   Replication factor: 4
+   Gateway version: 8.6.0
+   Brokers:
+   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
+      Version: 8.6.0
+      Partition 1 : Leader, Healthy
+      Partition 6 : Follower, Healthy
+      Partition 7 : Follower, Healthy
+      Partition 8 : Follower, Healthy
+   Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
+      Version: 8.6.0
+      Partition 1 : Follower, Healthy
+      Partition 2 : Follower, Healthy
+      Partition 3 : Follower, Healthy
+      Partition 8 : Leader, Healthy
+   Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
+      Version: 8.6.0
+      Partition 2 : Follower, Healthy
+      Partition 3 : Leader, Healthy
+      Partition 4 : Follower, Healthy
+      Partition 5 : Follower, Healthy
+   Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+      Version: 8.6.0
+      Partition 4 : Follower, Healthy
+      Partition 5 : Follower, Healthy
+      Partition 6 : Follower, Healthy
+      Partition 7 : Leader, Healthy
+   ```
 
-  </summary>
-</details>
-  </TabItem>
-</Tabs>
+      </summary>
+      </details>
+     </TabItem>
+   </Tabs>
 
 2. Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   ```
 
 3. Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
    In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even brokers.
 
-```bash
-curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
-```
+   ```bash
+   curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
+   ```
 
 #### Verification
 
@@ -599,32 +624,32 @@ desired={<Six viewBox="140 40 680 500" />}
 
 1. Port-forward the service of the Zeebe Gateway for the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   ```
 
 2. List all exporters to find the corresponding ID. Alternatively, you can check your Helm chart `camunda-values.yml` file, which lists the exporters as those that had to be configured explicitly.
 
-```bash
-curl -XGET 'http://localhost:9600/actuator/exporters'
-```
+   ```bash
+   curl -XGET 'http://localhost:9600/actuator/exporters'
+   ```
 
-<details>
-  <summary>Example output</summary>
-  <summary>
+   <details>
+   <summary>Example output</summary>
+   <summary>
 
-```bash
-[{"exporterId":"elasticsearchregion0","status":"ENABLED"},{"exporterId":"elasticsearchregion1","status":"ENABLED"}]
-```
+   ```bash
+   [{"exporterId":"elasticsearchregion0","status":"ENABLED"},{"exporterId":"elasticsearchregion1","status":"ENABLED"}]
+   ```
 
-  </summary>
-</details>
+   </summary>
+   </details>
 
-2. Based on the Exporter APIs you will send a request to the Zeebe Gateway to disable the Elasticsearch exporter connected with the lost region.
+3. Based on the Exporter APIs you will send a request to the Zeebe Gateway to disable the Elasticsearch exporter connected with the lost region.
 
-```bash
-curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/disable'
-```
+   ```bash
+   curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/disable'
+   ```
 
 #### Verification
 
@@ -984,19 +1009,19 @@ This step **does not** affect the process instances in any way. Process informat
 
 1. Disable Operate and Tasklist by scaling to 0:
 
-```bash
-kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-operate --replicas 0
-kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-tasklist --replicas 0
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-operate --replicas 0
+   kubectl --context $CLUSTER_SURVIVING scale -n $CAMUNDA_NAMESPACE_SURVIVING deployments/$HELM_RELEASE_NAME-tasklist --replicas 0
+   ```
 
 2. Disable the Zeebe Elasticsearch exporters in Zeebe via kubectl using the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api):
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-curl -i localhost:9600/actuator/exporting/pause -XPOST
-# The successful response should be:
-# HTTP/1.1 204 No Content
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   curl -i localhost:9600/actuator/exporting/pause -XPOST
+   # The successful response should be:
+   # HTTP/1.1 204 No Content
+   ```
 
 #### Verification
 
@@ -1041,202 +1066,202 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 
 1. Determine the S3 bucket name by retrieving it via Terraform. Go to `aws/dual-region/terraform` within the repository and retrieve the bucket name from the Terraform state:
 
-```bash
-export S3_BUCKET_NAME=$(terraform output -raw s3_bucket_name)
-```
+   ```bash
+   export S3_BUCKET_NAME=$(terraform output -raw s3_bucket_name)
+   ```
 
 2. Configure Elasticsearch backup endpoint in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`:
 
-```bash
-ELASTIC_POD=$(kubectl --context $CLUSTER_SURVIVING get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' -H 'Content-Type: application/json' -d'
-{
-  "type": "s3",
-  "settings": {
-    "bucket": "'$S3_BUCKET_NAME'",
-    "client": "camunda",
-    "base_path": "backups"
-  }
-}
-'
-```
+   ```bash
+   ELASTIC_POD=$(kubectl --context $CLUSTER_SURVIVING get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
+   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' -H 'Content-Type: application/json' -d'
+   {
+   "type": "s3",
+   "settings": {
+      "bucket": "'$S3_BUCKET_NAME'",
+      "client": "camunda",
+      "base_path": "backups"
+   }
+   }
+   '
+   ```
 
 3. Create an Elasticsearch backup in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`. Depending on the amount of data, this operation will take a while to complete.
 
-```bash
-# The backup will be called failback
-kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true'
-```
+   ```bash
+   # The backup will be called failback
+   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true'
+   ```
 
 4. Verify the backup has been completed successfully by checking all backups and ensuring the `state` is `SUCCESS`:
 
-```bash
-kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XGET 'http://localhost:9200/_snapshot/camunda_backup/_all'
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XGET 'http://localhost:9200/_snapshot/camunda_backup/_all'
+   ```
 
-<details>
-  <summary>Example output</summary>
-  <summary>
+   <details>
+   <summary>Example output</summary>
+   <summary>
 
-```json
-{
-  "snapshots": [
-    {
-      "snapshot": "failback",
-      "uuid": "uTHGdUAYSk-91aAS0sMKFQ",
-      "repository": "camunda_backup",
-      "version_id": 8090299,
-      "version": "8.9.2",
-      "indices": [
-        "operate-web-session-1.1.0_",
-        "tasklist-form-8.4.0_",
-        "operate-process-8.3.0_",
-        "zeebe-record_process-instance-creation_8.4.5_2024-03-28",
-        "operate-batch-operation-1.0.0_",
-        "operate-user-1.2.0_",
-        "operate-incident-8.3.1_",
-        "zeebe-record_job_8.4.5_2024-03-28",
-        "operate-variable-8.3.0_",
-        "tasklist-web-session-1.1.0_",
-        "tasklist-draft-task-variable-8.3.0_",
-        "operate-operation-8.4.0_",
-        "zeebe-record_process_8.4.5_2024-03-28",
-        ".ds-.logs-deprecation.elasticsearch-default-2024.03.28-000001",
-        "tasklist-process-8.4.0_",
-        "operate-metric-8.3.0_",
-        "operate-flownode-instance-8.3.1_",
-        "tasklist-flownode-instance-8.3.0_",
-        "tasklist-variable-8.3.0_",
-        "tasklist-metric-8.3.0_",
-        "operate-post-importer-queue-8.3.0_",
-        "tasklist-task-variable-8.3.0_",
-        "operate-event-8.3.0_",
-        "tasklist-process-instance-8.3.0_",
-        "operate-import-position-8.3.0_",
-        "operate-decision-requirements-8.3.0_",
-        "zeebe-record_command-distribution_8.4.5_2024-03-28",
-        "operate-list-view-8.3.0_",
-        "zeebe-record_process-instance_8.4.5_2024-03-28",
-        "tasklist-import-position-8.2.0_",
-        "tasklist-user-1.4.0_",
-        "operate-decision-instance-8.3.0_",
-        "zeebe-record_deployment_8.4.5_2024-03-28",
-        "operate-migration-steps-repository-1.1.0_",
-        "tasklist-migration-steps-repository-1.1.0_",
-        ".ds-ilm-history-5-2024.03.28-000001",
-        "operate-decision-8.3.0_",
-        "operate-sequence-flow-8.3.0_",
-        "tasklist-task-8.4.0_"
-      ],
-      "data_streams": [
-        "ilm-history-5",
-        ".logs-deprecation.elasticsearch-default"
-      ],
-      "include_global_state": true,
-      "state": "SUCCESS",
-      "start_time": "2024-03-28T03:17:38.340Z",
-      "start_time_in_millis": 1711595858340,
-      "end_time": "2024-03-28T03:17:39.340Z",
-      "end_time_in_millis": 1711595859340,
-      "duration_in_millis": 1000,
-      "failures": [],
-      "shards": {
-        "total": 43,
-        "failed": 0,
-        "successful": 43
-      },
-      "feature_states": []
-    }
-  ],
-  "total": 1,
-  "remaining": 0
-}
-```
+   ```json
+   {
+     "snapshots": [
+       {
+         "snapshot": "failback",
+         "uuid": "uTHGdUAYSk-91aAS0sMKFQ",
+         "repository": "camunda_backup",
+         "version_id": 8090299,
+         "version": "8.9.2",
+         "indices": [
+           "operate-web-session-1.1.0_",
+           "tasklist-form-8.4.0_",
+           "operate-process-8.3.0_",
+           "zeebe-record_process-instance-creation_8.4.5_2024-03-28",
+           "operate-batch-operation-1.0.0_",
+           "operate-user-1.2.0_",
+           "operate-incident-8.3.1_",
+           "zeebe-record_job_8.4.5_2024-03-28",
+           "operate-variable-8.3.0_",
+           "tasklist-web-session-1.1.0_",
+           "tasklist-draft-task-variable-8.3.0_",
+           "operate-operation-8.4.0_",
+           "zeebe-record_process_8.4.5_2024-03-28",
+           ".ds-.logs-deprecation.elasticsearch-default-2024.03.28-000001",
+           "tasklist-process-8.4.0_",
+           "operate-metric-8.3.0_",
+           "operate-flownode-instance-8.3.1_",
+           "tasklist-flownode-instance-8.3.0_",
+           "tasklist-variable-8.3.0_",
+           "tasklist-metric-8.3.0_",
+           "operate-post-importer-queue-8.3.0_",
+           "tasklist-task-variable-8.3.0_",
+           "operate-event-8.3.0_",
+           "tasklist-process-instance-8.3.0_",
+           "operate-import-position-8.3.0_",
+           "operate-decision-requirements-8.3.0_",
+           "zeebe-record_command-distribution_8.4.5_2024-03-28",
+           "operate-list-view-8.3.0_",
+           "zeebe-record_process-instance_8.4.5_2024-03-28",
+           "tasklist-import-position-8.2.0_",
+           "tasklist-user-1.4.0_",
+           "operate-decision-instance-8.3.0_",
+           "zeebe-record_deployment_8.4.5_2024-03-28",
+           "operate-migration-steps-repository-1.1.0_",
+           "tasklist-migration-steps-repository-1.1.0_",
+           ".ds-ilm-history-5-2024.03.28-000001",
+           "operate-decision-8.3.0_",
+           "operate-sequence-flow-8.3.0_",
+           "tasklist-task-8.4.0_"
+         ],
+         "data_streams": [
+           "ilm-history-5",
+           ".logs-deprecation.elasticsearch-default"
+         ],
+         "include_global_state": true,
+         "state": "SUCCESS",
+         "start_time": "2024-03-28T03:17:38.340Z",
+         "start_time_in_millis": 1711595858340,
+         "end_time": "2024-03-28T03:17:39.340Z",
+         "end_time_in_millis": 1711595859340,
+         "duration_in_millis": 1000,
+         "failures": [],
+         "shards": {
+           "total": 43,
+           "failed": 0,
+           "successful": 43
+         },
+         "feature_states": []
+       }
+     ],
+     "total": 1,
+     "remaining": 0
+   }
+   ```
 
-  </summary>
-</details>
+   </summary>
+   </details>
 
 5. Configure Elasticsearch backup endpoint in the new region namespace `CAMUNDA_NAMESPACE_RECREATED`. It's essential to only do this step now as otherwise it won't see the backup:
 
-```bash
-ELASTIC_POD=$(kubectl --context $CLUSTER_RECREATED get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_RECREATED)
-kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' -H 'Content-Type: application/json' -d'
-{
-  "type": "s3",
-  "settings": {
-    "bucket": "'$S3_BUCKET_NAME'",
-    "client": "camunda",
-    "base_path": "backups"
-  }
-}
-'
-```
+   ```bash
+   ELASTIC_POD=$(kubectl --context $CLUSTER_RECREATED get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_RECREATED)
+   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' -H 'Content-Type: application/json' -d'
+   {
+   "type": "s3",
+   "settings": {
+      "bucket": "'$S3_BUCKET_NAME'",
+      "client": "camunda",
+      "base_path": "backups"
+   }
+   }
+   '
+   ```
 
 6. Verify that the backup can be found in the shared S3 bucket:
 
-```bash
-kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XGET 'http://localhost:9200/_snapshot/camunda_backup/_all'
-```
+   ```bash
+   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XGET 'http://localhost:9200/_snapshot/camunda_backup/_all'
+   ```
 
-The example output above should be the same since it's the same backup.
+   The example output above should be the same since it's the same backup.
 
 7. Restore Elasticsearch backup in the new region namespace `CAMUNDA_NAMESPACE_RECREATED`. Depending on the amount of data, this operation may take a while to complete.
 
-```bash
-kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPOST 'http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true'
-```
+   ```bash
+   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPOST 'http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true'
+   ```
 
 8. Verify that the restore has been completed successfully in the new region:
 
-```bash
-kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XGET 'http://localhost:9200/_snapshot/camunda_backup/failback/_status'
-```
+   ```bash
+   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XGET 'http://localhost:9200/_snapshot/camunda_backup/failback/_status'
+   ```
 
-<details>
-  <summary>Example output</summary>
-  <summary>
+   <details>
+   <summary>Example output</summary>
+   <summary>
 
-**This is only an example, and the values will differ for you.** Ensure you see `state: "SUCCESS"`, and that the properties `done` and `total` have equal values.
+   **This is only an example, and the values will differ for you.** Ensure you see `state: "SUCCESS"`, and that the properties `done` and `total` have equal values.
 
-```json
-{
-  "snapshots": [
-    {
-      "snapshot": "failback",
-      "repository": "camunda_backup",
-      "uuid": "8AmblqA2Q9WAhuDk-NO5Cg",
-      "state": "SUCCESS",
-      "include_global_state": true,
-      "shards_stats": {
-        "initializing": 0,
-        "started": 0,
-        "finalizing": 0,
-        "done": 43,
-        "failed": 0,
-        "total": 43
-      },
-      "stats": {
-        "incremental": {
-          "file_count": 145,
-          "size_in_bytes": 353953
-        },
-        "total": {
-          "file_count": 145,
-          "size_in_bytes": 353953
-        },
-        "start_time_in_millis": 1712058365525,
-        "time_in_millis": 1005
-      },
-      "indices": {
-        ...
+   ```json
+   {
+   "snapshots": [
+      {
+         "snapshot": "failback",
+         "repository": "camunda_backup",
+         "uuid": "8AmblqA2Q9WAhuDk-NO5Cg",
+         "state": "SUCCESS",
+         "include_global_state": true,
+         "shards_stats": {
+         "initializing": 0,
+         "started": 0,
+         "finalizing": 0,
+         "done": 43,
+         "failed": 0,
+         "total": 43
+         },
+         "stats": {
+         "incremental": {
+            "file_count": 145,
+            "size_in_bytes": 353953
+         },
+         "total": {
+            "file_count": 145,
+            "size_in_bytes": 353953
+         },
+         "start_time_in_millis": 1712058365525,
+         "time_in_millis": 1005
+         },
+         "indices": {
+         ...
+         }
       }
-    }
-  ]
-}
-```
+   ]
+   }
+   ```
 
-  </summary>
-</details>
+   </summary>
+   </details>
 
 </div>
 
@@ -1263,25 +1288,25 @@ The base Helm values file `camunda-values.yml` in `aws/dual-region/kubernetes` c
 
 1. Upgrade the normal Camunda environment in `CAMUNDA_NAMESPACE_SURVIVING` and `REGION_SURVIVING` to deploy Operate and Tasklist:
 
-```bash
-helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
-  --kube-context $CLUSTER_SURVIVING \
-  --namespace $CAMUNDA_NAMESPACE_SURVIVING \
-  -f camunda-values.yml \
-  -f $REGION_SURVIVING/camunda-values.yml
-```
+   ```bash
+   helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+   --version $HELM_CHART_VERSION \
+   --kube-context $CLUSTER_SURVIVING \
+   --namespace $CAMUNDA_NAMESPACE_SURVIVING \
+   -f camunda-values.yml \
+   -f $REGION_SURVIVING/camunda-values.yml
+   ```
 
 2. Upgrade the new region environment in `CAMUNDA_NAMESPACE_RECREATED` and `REGION_RECREATED` to deploy Operate and Tasklist:
 
-```bash
-helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
-  --version $HELM_CHART_VERSION \
-  --kube-context $CLUSTER_RECREATED \
-  --namespace $CAMUNDA_NAMESPACE_RECREATED \
-  -f camunda-values.yml \
-  -f $REGION_RECREATED/camunda-values.yml
-```
+   ```bash
+   helm upgrade $HELM_RELEASE_NAME camunda/camunda-platform \
+   --version $HELM_CHART_VERSION \
+   --kube-context $CLUSTER_RECREATED \
+   --namespace $CAMUNDA_NAMESPACE_RECREATED \
+   -f camunda-values.yml \
+   -f $REGION_RECREATED/camunda-values.yml
+   ```
 
 #### Verification
 
@@ -1316,10 +1341,10 @@ desired={<Twelve viewBox="140 40 680 500" />}
 
 1. Initialize the new exporter for the recreated region by sending an API request via the Zeebe Gateway:
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/enable' -H 'Content-Type: application/json' -d '{"initializeFrom" : "elasticsearchregion0"}'
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   curl -XPOST 'http://localhost:9600/actuator/exporters/elasticsearchregion1/enable' -H 'Content-Type: application/json' -d '{"initializeFrom" : "elasticsearchregion0"}'
+   ```
 
 #### Verification
 
@@ -1386,12 +1411,12 @@ desired={<Thirteen viewBox="140 40 680 500" />}
 
 1. Reactivate the exporters by sending the [exporting API](./../../zeebe-deployment/operations/management-api.md#exporting-api) activation request via the Zeebe Gateway:
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-curl -i localhost:9600/actuator/exporting/resume -XPOST
-# The successful response should be:
-# HTTP/1.1 204 No Content
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   curl -i localhost:9600/actuator/exporting/resume -XPOST
+   # The successful response should be:
+   # HTTP/1.1 204 No Content
+   ```
 
 #### Verification
 
@@ -1421,14 +1446,14 @@ desired={<Fourteen viewBox="140 40 680 500" />}
 2. Port-forwarding the Zeebe Gateway via `kubectl` for the REST API allows you to send a Cluster API call to add the new brokers to the Zeebe cluster with the previous information on size and replication.
    E.g. in our case the `clusterSize` is 8 and `replicationFactor` is 4 meaning we have to list all broker IDs starting from 0 to 7 and set the correct `replicationFactor` in the query.
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' -H 'Content-Type: application/json' -d '["0", "1", "2", "3", "4", "5", "6", "7"]'
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' -H 'Content-Type: application/json' -d '["0", "1", "2", "3", "4", "5", "6", "7"]'
+   ```
 
-:::note
-This step can take longer depending on the size of the cluster, size of the data and the current load.
-:::
+   :::note
+   This step can take longer depending on the size of the cluster, size of the data and the current load.
+   :::
 
 #### Verification
 
