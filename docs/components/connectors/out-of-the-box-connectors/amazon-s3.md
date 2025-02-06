@@ -1,6 +1,6 @@
 ---
 id: amazon-s3
-sidebar_label: AWS S3 Connector
+sidebar_label: AWS S3
 title: Amazon S3 Connector
 description: Interact with Amazon S3 services from your BPMN process.
 ---
@@ -91,6 +91,10 @@ The following JSON response is returned after a successful document upload opera
 - `bucket`: Echoes back the bucket of the uploaded document.
 - `key`: Echoes back the unique key of the uploaded document.
 - `link`: The document link.
+
+:::note
+Starting from version 8.7.0, the Amazon S3 Connector supports uploading documents from (or downloading documents to) the Camunda document store. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
 
 #### Example Response
 

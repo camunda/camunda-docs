@@ -1,6 +1,7 @@
 ---
 id: salesforce
 title: Salesforce Connector
+sidebar_label: Salesforce
 description: Manage your Salesforce Instance from your BPMN process. Learn how to create a Salesforce Connector task, and get started.
 ---
 

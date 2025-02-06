@@ -1,7 +1,7 @@
 ---
 id: whatsapp
 title: WhatsApp Connector
-sidebar_label: WhatsApp Connector
+sidebar_label: WhatsApp
 description: Send messages with [WhatsApp Business](https://business.whatsapp.com/) from your BPMN process.
 ---
 

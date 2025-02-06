@@ -272,7 +272,7 @@ The shared processes require Tasklist authorization to be started, in contrast t
 
 <!-- https://github.com/camunda/product-hub/issues/2026 -->
 
-Users now have the option to [automatically select](/components/tasklist/userguide/using-tasklist.md/#auto-select-first-available-task) the next available task in Tasklist to speed up task workflows.
+Users now have the option to [automatically select](/components/tasklist/userguide/using-tasklist.md#auto-select-first-available-task) the next available task in Tasklist to speed up task workflows.
 
 ### Hot backups: Azure Cloud Storage support <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

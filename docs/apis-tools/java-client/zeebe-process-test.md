@@ -94,6 +94,54 @@ Switching between testcontainers and embedded requires just two steps:
    - Testcontainers: `import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;`
    - Embedded: `import io.camunda.zeebe.process.test.extension.ZeebeProcessTest;`
 
+## Zeebe Spring SDK integration
+
+You can add testing to your Zeebe Spring SDK setup as follows.
+
+### Zeebe Spring SDK embedded module
+
+To integrate an in-memory test engine and use assertions, add the following Maven dependency:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>spring-boot-starter-camunda-test</artifactId>
+  <version>X.Y.Z</version>
+  <scope>test</scope>
+</dependency>
+```
+
+### Zeebe Spring SDK testcontainers module
+
+To integrate a testcontainer engine and use assertions, add the following Maven dependency:
+
+```xml
+<dependency>
+  <groupId>io.camunda</groupId>
+  <artifactId>spring-boot-starter-camunda-test-testcontainer</artifactId>
+    <version>X.Y.Z</version>
+  <scope>test</scope>
+</dependency>
+```
+
+### Usage
+
+Add the `@ZeebeSpringTest` annotation to your Spring Boot test case to make the engine and a client available in your test case.
+
+```java
+@SpringBootTest
+@ZeebeSpringTest
+public class TestMyProcess {
+    private ZeebeTestEngine engine;
+    private ZeebeClient client;
+```
+
+You can find an example test case in the Camunda Community Hub at [Camunda 8 examples](https://github.com/camunda-community-hub/camunda-cloud-examples/blob/main/twitter-review-java-springboot/src/test/java/org/camunda/community/examples/twitter/TestTwitterProcess.java).
+
+:::note
+Do not use `zeebeTestEngine.waitForBusyState(...)` to wait for a timer. This will not work as this is also triggered by an incoming job activation.
+:::
+
 ## Assertions
 
 Start an assertion using the following entry points:

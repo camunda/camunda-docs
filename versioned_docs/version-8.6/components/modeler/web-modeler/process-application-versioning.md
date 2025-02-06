@@ -30,7 +30,7 @@ To create a bulk milestone for a process application:
 
 ![Create a milestone screen](img/milestones/web-modeler-milestone-create-versioned-milestone-highlight.png)
 
-Now when you open the milestone history for any file in the process application, you can use the file navigation header buttons to switch between files, and view their individual milestone history. See [compare milestones](/docs/components/modeler/web-modeler/milestones.md#compare-milestones).
+Now when you open the milestone history for any file in the process application, you can use the file navigation header buttons to switch between files, and view their individual milestone history. See [compare milestones](milestones.md#compare-milestones).
 
 ![Milestone history with file navigation header buttons highlighted](img/milestones/web-modeler-milestone-compare-process-application-files-highlight.png)
 

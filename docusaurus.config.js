@@ -153,6 +153,9 @@ module.exports = {
     },
   ],
   themeConfig: {
+    colorMode: {
+      defaultMode: "light",
+    },
     docs: {
       sidebar: {
         autoCollapseCategories: true,
@@ -169,12 +172,15 @@ module.exports = {
 
     prism: {
       additionalLanguages: ["java", "protobuf", "csharp"],
+      theme: require("prism-react-renderer/themes/palenight"),
+      darkTheme: require("prism-react-renderer/themes/dracula"),
     },
     navbar: {
       title: "Camunda 8 Docs",
       logo: {
         alt: "Camunda 8 Docs",
         src: "img/black-C.png",
+        srcDark: "img/light-C.png",
       },
       items: [
         {
@@ -310,7 +316,7 @@ module.exports = {
               href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
-              html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
+              html: `<a class="footer__link-item" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
             },
             {
               label: "Licenses",

@@ -1,6 +1,6 @@
 ---
 id: amazon-bedrock
-sidebar_label: AWS Bedrock Connector
+sidebar_label: Amazon Bedrock
 title: Amazon Bedrock Connector
 description: Interact with the Amazon Bedrock Connector from your BPMN process.
 ---
@@ -126,3 +126,7 @@ The current implementation supports the assistant's responses only in text forma
 :::
 
 Ideally, the message's history must transit within the process and be the input of this `Converse` task with the new message.
+
+:::note
+Starting from version 8.7.0, the Amazon Bedrock Connector supports consuming documents as inputs for conversations. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
