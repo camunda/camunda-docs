@@ -397,6 +397,10 @@ To create the peering between each cluster’s VPC, you need to gather some info
 In the parent directory where your clusters module reside (`clusters`), create a new directory called `peering` for the VPC peering configuration:
 
 ```bash
+ls
+# Example output:
+# clusters
+
 mkdir peering
 cd peering
 ```
@@ -473,6 +477,10 @@ The S3 bucket is set up following best practices, including encryption, logging,
 In the parent directory where your other modules reside (`clusters` and `peering`), create a new directory called `backup_bucket` for the S3 configuration:
 
 ```bash
+ls
+# Example output:
+# clusters  peering
+
 mkdir backup_bucket
 cd backup_bucket
 ```

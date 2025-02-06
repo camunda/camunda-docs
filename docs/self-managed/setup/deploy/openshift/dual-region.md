@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 This guide is designed to assist users aiming to deploy Camunda 8 in a dual-region setup on Red Hat OpenShift.
 
-The primary goal is to configure and integrate **two OpenShift clusters** for use in the dual-region reference architecture. This setup leverages specific components to address key challenges, and users are encouraged to exercise discretion regarding their use.
+The primary goal is to configure and integrate **two OpenShift clusters** for use in the dual-region reference architecture. This setup leverages specific components to address key challenges, and users are encouraged to exercise discretion regarding their use, learn more about [Advanced Cluster Management](https://www.redhat.com/en/resources/advanced-cluster-management-kubernetes-datasheet).
 While this guide does not cover exhaustive configurations, it aims to provide the key steps needed to achieve the desired outcome.
 
 To enable intercommunication between regions, we will utilize [ACM Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) and [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner). Failover will be managed through DNS configurations, while access to the platform will be ensured via OpenShift Routes.
@@ -32,7 +32,7 @@ _Infrastructure diagram for a OpenShift dual-region setup (click on the image to
 
 This High-Level Design describes how the following critical components interact to achieve a Camunda 8 deployment across two regions:
 
-- An S3-compatible solution is used for replicating and taking snapshots of the Elasticsearch database.
+- An S3-compatible solution is used for taking snapshots of the Elasticsearch database.
 - A DNS entry with an associated domain is used to enable Camunda 8 failover and reroute traffic from one cluster to the other.
 - Firewall and networking components are configured to allow unrestricted communication between the two clusters.
 - Local storage is provided on each OpenShift cluster for persistent data requirements.
@@ -43,8 +43,8 @@ This High-Level Design describes how the following critical components interact 
 ## Requirements
 
 - You need access to the [Advanced Cluster Management operator](https://www.redhat.com/en/technologies/management/advanced-cluster-management) and the [Submariner operator](https://catalog.redhat.com/software/container-stacks/detail/5f0c67b7ce85fb9e399f3a12).
-- The clusters must be separated by a reasonable latency as outlined in the [installation environment guidelines](/self-managed/concepts/multi-region/dual-region/#installation-environment).
-- Each of your OpenShift clusters must meet at least the minimum capacity requirements for a cluster. Refer to the [cluster specification guide](./redhat-openshift.md##cluster-specification) for details on resource allocation and infrastructure needs.
+- The clusters must be separated by a reasonable latency as outlined in the [installation environment guidelines](/self-managed/concepts/multi-region/dual-region.md#installation-environment).
+- Each of your OpenShift clusters must meet at least the minimum capacity requirements for a cluster. Refer to the [cluster specification guide](./redhat-openshift.md#cluster-specification) for details on resource allocation and infrastructure needs.
 - Administrative privileges are required for both clusters to perform configurations and operator deployments.
 - A reliable means of communication between the two clusters is necessary. Ensure that each cluster can establish network connections with the other.
 - The version of your OpenShift clusters must be included in the [supported versions list](./redhat-openshift.md#supported-versions).
