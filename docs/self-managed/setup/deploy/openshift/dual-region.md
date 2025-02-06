@@ -50,6 +50,7 @@ This High-Level Design describes how the following critical components interact 
 - The version of your OpenShift clusters must be included in the [supported versions list](./redhat-openshift.md#supported-versions).
 - Review the [requirements of OpenShift Advanced Cluster Management](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/install/installing#installing) if it's not already configured.
 - Review the [requirements of OpenShift Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.12/html/networking/networking#submariner) if it's not already configured.
+- Review the [requirements of Submariner](https://submariner.io/getting-started/#prerequisites) if it's not already configured, especially the flows to open.
 
 ### CLI Requirements
 
@@ -303,19 +304,25 @@ subctl show all --contexts "$CLUSTER_1_NAME,$CLUSTER_2_NAME"
 
 If everything is set up correctly, you should observe in the output of each cluster context the following statuses:
 
-      - Gateway's status: `All connections (1) are established`
-      - Connection's status: `connected   10.406614ms (RTT)`
+        - Gateway's status: `All connections (1) are established`
+        - Connection's status: `connected   10.406614ms (RTT)`
 
-  <details>
-    <summary>Example Submariner check successfull output</summary>
+    <details>
+      <summary>Example Submariner check successfull output</summary>
 
 ```text reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/submariner/output.txt
 ```
 
-  </details>
+    </details>
 
 For more comprehensive details regarding the verification tests for Submariner using subctl, please refer to the [official documentation](https://submariner.io/operations/deployment/subctl/#verify).
+
+**Debugging the Submariner setup:**
+
+If you are experiencing connectivity issues, we recommend spawning a pod in the `default` namespace that contains networking debugging tools. You can find an [example here](https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/submariner/debug-utils-submariner.yml).  
+With this pod, you will be able to check flow openings, service resolution, and other network-related aspects.  
+Troubleshooting requires examining all the underlying mechanisms of Submariner. Therefore, we also encourage you to read the [Submariner troubleshooting guide](https://submariner.io/operations/troubleshooting/).
 
 ## Deploying Camunda 8 via Helm charts in a dual-region setup
 
@@ -329,6 +336,8 @@ Review and adjust the following environment script to match your specific config
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/camunda/8.7/export_environment_prerequisites.sh
 ```
+
+_If you are unsure about the values of the backup bucket, please refer to the [S3 backup bucket module setup](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md#s3-backup-bucket-module-setup) as a reference for implementation._
 
 Save the file as `export_environment_prerequisites.sh`, replace the placeholders with your values, and then source the file:
 

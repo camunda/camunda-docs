@@ -461,7 +461,7 @@ This command connects Terraform to the S3 bucket for managing the state file, en
 
 For more details, consult the official [AWS VPC Peering documentation](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
 
-### S3 module setup
+### S3 backup bucket module setup
 
 This section outlines the process of creating a [S3 bucket](https://aws.amazon.com/en/s3/) that will be used to to [perform backups of the elasticsearch cluster](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) used by Camunda 8.
 Read more about the [failover procecure](/self-managed/operational-guides/multi-region/dual-region-ops.md#procedure).
@@ -714,12 +714,12 @@ The clusters can be deleted once they are no longer in use and have no dependenc
 
    Once the `apply` command completes successfully, the clusters and associated resources will be deleted.
 
-### Deletion of the S3 Backup Bucket
+### Deletion of the S3 backup bucket
 
 The S3 backup bucket can be deleted once it is no longer in use and has no dependencies.
 To delete the bucket, follow these steps:
 
-1. Navigate to the `backup_bucket` directory created during the [S3 module setup](#s3-module-setup).
+1. Navigate to the `backup_bucket` directory created during the [S3 backup bucket module setup](#s3-backup-bucket-module-setup).
    This directory contains the configuration for managing the S3 bucket.
 
 1. Run the Terraform destroy plan:  
