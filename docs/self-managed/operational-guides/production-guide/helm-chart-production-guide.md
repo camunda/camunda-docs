@@ -72,6 +72,7 @@ helm install camunda camunda/camunda-platform \
     --values production-values.yaml
 ```
 
+Create your own `production-values.yaml` or enhance your existing setup by applying various production recommendations in the next section.
 The next section will explain various configurations used in `production-values.yaml`.
 
 ### Ingress TLS Setup
@@ -113,7 +114,7 @@ For more information on the Ingress setup, please refer to our [Ingress setup gu
 
 ### Identity Provider Integration
 
-Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use AWS Simple Active Directory. Here is an example configuration to add to your `production-values.yaml` file:
+Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory and is compatible with our Microsoft Entra ID guide. Here is an example configuration to add to your `production-values.yaml` file:
 
 ```yaml
 global:
@@ -528,7 +529,7 @@ elasticsearch:
   enabled: false
 # console:
 #   configuration: |
-# check the multi-namespace guide for the contents of the console configuration
+# console configuration to connect both deployments
 ```
 
 `orchestration.yaml` for the `orchestration` namespace:
