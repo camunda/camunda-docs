@@ -524,19 +524,17 @@ oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/
 
 3. Make sure that your output contains all eight brokers from the two regions:
 
-<details>
-   <summary>Example output</summary>
-   <summary>
+   <details>
+      <summary>Example output</summary>
 
-```text reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/camunda/8.7/zeebe-http-output.txt
-```
+   ```text reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/camunda/8.7/zeebe-http-output.txt
+   ```
 
-   </summary>
-</details>
+   </details>
 
-  </TabItem>
-  <TabItem value="zbctl" label="zbctl">
+</TabItem>
+<TabItem value="zbctl" label="zbctl">
 
 ```shell
 oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/$HELM_RELEASE_NAME-zeebe-gateway" 26500:26500
@@ -550,18 +548,16 @@ oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/
 
 2. Make sure that your output contains all eight brokers from the two regions:
 
-<details>
-   <summary>Example output</summary>
-   <summary>
+   <details>
+      <summary>Example output</summary>
 
-```text reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/camunda/8.7/zbctl-output.txt
-```
+   ```text reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/camunda/8.7/zbctl-output.txt
+   ```
 
-   </summary>
-</details>
+   </details>
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Failover
