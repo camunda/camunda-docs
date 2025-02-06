@@ -1,7 +1,7 @@
 ---
 id: amazon-textract
 title: Amazon Textract Connector
-sidebar_label: AWS Textract Connector
+sidebar_label: AWS Textract
 description: Extract printed text, handwriting, layout elements, and data from any document.
 ---
 

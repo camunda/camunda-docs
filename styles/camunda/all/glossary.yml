@@ -1,0 +1,74 @@
+extends: substitution
+message: "This term is spelled, uppercased, lowercased, hyphenated, or used incorrectly. Review the WCoE glossary."
+level: error
+ignorecase: false
+swap:
+  AirTable: Airtable
+  tomcat: Tomcat
+  asana: Asana
+  AzureAD: Azure AD
+  back-pressure: backpressure
+  back pressure: backpressure
+  Camunda Cloud: Camunda 8
+  Chat GPT: ChatGPT
+  Configmap: ConfigMap
+  config map: ConfigMap
+  Config Map: ConfigMap
+  Docker compose: Docker Compose
+  Docker desktop: Docker Desktop
+  Docker hub: Docker Hub
+  Easypost: EasyPost
+  ElasticSearch: Elasticsearch
+  Elastic search: Elasticsearch
+  Element Template: Element template
+  e-mail: email
+  Event based process: Event-based process
+  event based process: event-based process
+  Github: GitHub
+  Gitlab: GitLab
+  Google drive: Google Drive
+  Google maps: Google Maps
+  Google sheets: Google Sheets
+  GRPC: gRPC
+  Heat map: Heatmap
+  heat map: heatmap
+  Helm Chart: Helm chart
+  Hybrid Mode: Hybrid mode
+  iFrame: iframe
+  ingress: Ingress
+  Java Delegate: Java delegate
+  Javascript: JavaScript
+  jdk: JDK
+  JIRA: Jira
+  Job Worker: Job worker
+  Kafka Producer: Kafka producer
+  Kafka Consumer: Kafka consumer
+  KeyCloak: Keycloak
+  Linkedin: LinkedIn
+  MacOS: macOS
+  Microsoft teams: Microsoft Teams
+  multitenancy: multi-tenancy
+  multi tenancy: multi-tenancy
+  Multitenancy: Multi-tenancy
+  Multi tenancy: Multi-tenancy
+  Node.JS: Node.js
+  Opensearch: OpenSearch
+  Openshift: OpenShift
+  Process Instance: Process instance
+  Rabbit MQ: RabbitMQ
+  RedHat: Red Hat
+  Rest API: REST API
+  rest API: REST API
+  Rest Api: REST API
+  Run time: Runtime
+  run time: runtime
+  Saas: SaaS
+  SalesForce: Salesforce
+  Sendgrid: SendGrid
+  Service Task: Service task
+  Signup: Sign up
+  signup: sign up
+  SpringBoot: Spring Boot
+  Whatsapp: WhatsApp
+  Whats App: WhatsApp
+  ZBCTL: zbctl

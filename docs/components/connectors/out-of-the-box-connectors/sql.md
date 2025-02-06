@@ -1,7 +1,7 @@
 ---
 id: sql
 title: SQL Connector
-sidebar_label: SQL Connector
+sidebar_label: SQL
 description: "Connect your BPMN process with SQL databases, learn how to create a SQL Connector, and make it executable."
 ---
 

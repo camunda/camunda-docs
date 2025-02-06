@@ -1,0 +1,11 @@
+extends: substitution
+message: "British English writing style detected. Use American spelling instead."
+level: error
+ignorecase: true
+swap:
+  organise: organize
+  analyse: analyze
+  cancelled: canceled
+  cancelling: canceling
+  travelling: traveling
+  travelled: traveled

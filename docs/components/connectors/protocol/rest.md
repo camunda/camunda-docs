@@ -1,6 +1,7 @@
 ---
 id: rest
 title: REST Connector
+sidebar_label: REST
 description: Make a request to a REST API and use the response in the next steps of your process.
 ---
 
@@ -202,6 +203,12 @@ Secrets are currently not supported in the body of a **REST Connector**.
      "temp_max": 30
 }
 ```
+
+### Encoding
+
+In certain scenarios, such as when working with APIs that require pre-encoded URL elements, the REST Connector's default behavior may inadvertently modify encoded segments.
+
+To avoid this, set the `skipEncoding` value to `"true"` in the XML. This disables the automatic decoding and re-encoding process, ensuring the URL is sent to the server exactly as provided.
 
 ### Network communication timeouts
 
