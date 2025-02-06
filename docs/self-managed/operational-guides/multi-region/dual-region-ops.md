@@ -187,7 +187,7 @@ The following alternatives to port-forwarding are possible:
 In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
 
 <Tabs groupId="c8-connectivity">
-  <TabItem value="rest-api" label="REST API">
+<TabItem value="rest-api" label="REST API">
 
 1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
 
@@ -328,55 +328,56 @@ In our example, we went with port-forwarding to a localhost, but other alternati
    </summary>
 </details>
 
-  </TabItem>
-  <TabItem value="zbctl" label="zbctl">
+</TabItem>
+<TabItem value="zbctl" label="zbctl">
 
 1.  Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
 
-    ```bash
-    kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
-    zbctl status --insecure --address localhost:26500
-    ```
+        ```bash
+        kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+        zbctl status --insecure --address localhost:26500
+        ```
 
-       <details>
-          <summary>Example output</summary>
-          <summary>
+           <details>
+              <summary>Example output</summary>
+              <summary>
 
-          ```bash
-          Cluster size: 8
-          Partitions count: 8
-          Replication factor: 4
-          Gateway version: 8.6.0
-          Brokers:
-          Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-             Version: 8.6.0
-             Partition 1 : Leader, Healthy
-             Partition 6 : Follower, Healthy
-             Partition 7 : Follower, Healthy
-             Partition 8 : Follower, Healthy
-          Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-             Version: 8.6.0
-             Partition 1 : Follower, Healthy
-             Partition 2 : Follower, Healthy
-             Partition 3 : Follower, Healthy
-             Partition 8 : Leader, Healthy
-          Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-             Version: 8.6.0
-             Partition 2 : Follower, Healthy
-             Partition 3 : Leader, Healthy
-             Partition 4 : Follower, Healthy
-             Partition 5 : Follower, Healthy
-          Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-             Version: 8.6.0
-             Partition 4 : Follower, Healthy
-             Partition 5 : Follower, Healthy
-             Partition 6 : Follower, Healthy
-             Partition 7 : Leader, Healthy
-          ```
+              ```bash
+              Cluster size: 8
+              Partitions count: 8
+              Replication factor: 4
+              Gateway version: 8.6.0
+              Brokers:
+              Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
+                 Version: 8.6.0
+                 Partition 1 : Leader, Healthy
+                 Partition 6 : Follower, Healthy
+                 Partition 7 : Follower, Healthy
+                 Partition 8 : Follower, Healthy
+              Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
+                 Version: 8.6.0
+                 Partition 1 : Follower, Healthy
+                 Partition 2 : Follower, Healthy
+                 Partition 3 : Follower, Healthy
+                 Partition 8 : Leader, Healthy
+              Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
+                 Version: 8.6.0
+                 Partition 2 : Follower, Healthy
+                 Partition 3 : Leader, Healthy
+                 Partition 4 : Follower, Healthy
+                 Partition 5 : Follower, Healthy
+              Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+                 Version: 8.6.0
+                 Partition 4 : Follower, Healthy
+                 Partition 5 : Follower, Healthy
+                 Partition 6 : Follower, Healthy
+                 Partition 7 : Leader, Healthy
+              ```
 
-          </summary>
+              </summary>
 
-       </details>
+           </details>
+
     </TabItem>
     </Tabs>
 
