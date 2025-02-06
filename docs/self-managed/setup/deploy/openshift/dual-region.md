@@ -163,17 +163,17 @@ The cluster of the region 1 is referred to as `local-cluster` in **ACM**. This d
 
 4. With the MultiClusterHub created, the last step is to create a `ManagedClusterSet` which is a group of managed clusters. With a `ManagedClusterSet`, you can manage access to all of the managed clusters in the group together
 
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/managed-cluster-set.yml
-```
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/managed-cluster-set.yml
+   ```
 
-Apply the manifest:
+   Apply the manifest:
 
-```bash
-oc --context $CLUSTER_1_NAME get mch -A
+   ```bash
+   oc --context $CLUSTER_1_NAME get mch -A
 
-oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/managed-cluster-set.yml
-```
+   oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/camunda-deployment-references/refs/heads/feat/dual-region-hcp/aws/rosa-hcp-dual-region/camunda-version/8.7/procedure/acm/managed-cluster-set.yml
+   ```
 
 5. After creating the Managed Cluster Set, the next step is to import clusters into the set.
 
@@ -203,9 +203,9 @@ oc --context $CLUSTER_1_NAME apply -f https://raw.githubusercontent.com/camunda/
 
    - Finally, import each cluster into the Managed Cluster Set and verify that they can be reached and managed successfully:
 
-   ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/initiate_cluster_set.sh
-   ```
+     ```bash reference
+     https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/acm/initiate_cluster_set.sh
+     ```
 
 ### Submariner
 
@@ -305,7 +305,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    - Connection's status: `connected   10.406614ms (RTT)`
 
 <details>
-    <summary>Example Submariner check successfull output</summary>
+   <summary>Example Submariner check successfull output</summary>
 
 ```text reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/submariner/output.txt
@@ -392,12 +392,12 @@ Set up the region ID using a unique integer for each region:
   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/camunda/8.7/helm-values/values-region-2.yml
   ```
 
-  **Security Context Constraints (SCCs)**
+**Security Context Constraints (SCCs)**
 
-  The process of deploying applications in an OpenShift cluster can be influenced by its Security Context Constraints (SCCs) configuration.
-  By default, OpenShift comes with more restrictive SCCs. For the purposes of this guide, which focuses on multi-region deployment, we assume this to be the standard setup.
+The process of deploying applications in an OpenShift cluster can be influenced by its Security Context Constraints (SCCs) configuration.
+By default, OpenShift comes with more restrictive SCCs. For the purposes of this guide, which focuses on multi-region deployment, we assume this to be the standard setup.
 
-  For custom configurations or specific requirements, please refer to the [installation guide for OpenShift](redhat-openshift.md#security-context-constraints-sccs)) which details the various available SCC options.
+For custom configurations or specific requirements, please refer to the [installation guide for OpenShift](redhat-openshift.md#security-context-constraints-sccs)) which details the various available SCC options.
 
 #### Fill your deployment with actual values
 
@@ -491,21 +491,21 @@ oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/
 
 2. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
 
-```
-curl -L -X GET 'http://localhost:8080/v2/topology' -H 'Accept: application/json' | jq
-```
+   ```
+   curl -L -X GET 'http://localhost:8080/v2/topology' -H 'Accept: application/json' | jq
+   ```
 
 3. Make sure that your output contains all eight brokers from the two regions:
 
 <details>
-  <summary>Example output</summary>
-  <summary>
+   <summary>Example output</summary>
+   <summary>
 
 ```text reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/camunda/8.7/zeebe-http-output.txt
 ```
 
-  </summary>
+   </summary>
 </details>
 
   </TabItem>
@@ -517,21 +517,21 @@ oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/
 
 1. Open another terminal and use [zbctl](/apis-tools/community-clients/cli-client/index.md) to print the Zeebe cluster status:
 
-```shell
-zbctl status --insecure --address localhost:26500
-```
+   ```shell
+   zbctl status --insecure --address localhost:26500
+   ```
 
-3. Make sure that your output contains all eight brokers from the two regions:
+2. Make sure that your output contains all eight brokers from the two regions:
 
 <details>
-  <summary>Example output</summary>
-  <summary>
+   <summary>Example output</summary>
+   <summary>
 
 ```text reference
 https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/procedure/camunda/8.7/zbctl-output.txt
 ```
 
-  </summary>
+   </summary>
 </details>
 
   </TabItem>
