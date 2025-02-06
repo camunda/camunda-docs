@@ -18,8 +18,6 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
-<<<<<<< HEAD:docs/reference/announcements-release-notes/870/870-announcements.md
-
 ## Versioning changes
 
 ## Deprecations
@@ -38,13 +36,10 @@ lorem ipsum
 
 ## API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-=======
-
 - [Web Modeler](#web-modeler)
   - [Deploy diagram change Self-Managed {#web-modeler-deploy-diagram-change}](#deploy-diagram-change-self-managed-web-modeler-deploy-diagram-change)
   - [Milestones renamed to versions {#web-modeler-milestones-renamed-to-versions}](#milestones-renamed-to-versions-web-modeler-milestones-renamed-to-versions)
 - [Southeast Asia region for SaaS customers SaaS](#southeast-asia-region-for-saas-customers-saas)
-  > > > > > > > main:docs/reference/announcements/870.md
 
 ## Web Modeler
 
@@ -62,7 +57,6 @@ With this version, we ship a breaking change to how Web Modeler **Deploy diagram
 
 The term "milestones" has been renamed to ["versions"](/components/modeler/web-modeler/versions.md) in Web Modeler for clarity and consistency with other Camunda 8 components. The renaming is implemented across the Web Modeler user interface and the API.
 
-<<<<<<< HEAD:docs/reference/announcements-release-notes/870/870-announcements.md
 If you are using the recommended Camunda 8 deployment option (Helm charts), the upgrade path from version 8.6 to 8.7 will be straightforward by chaninging the values file to the new syntax. Updated Helm charts will be provided to support the upgrade to the new streamlined architecture.
 
 New migration guides will also be provided to support you when migrating from a previous Camunda version.
@@ -136,8 +130,6 @@ With the Camunda 8.7 release, Camunda Java client and Camunda Spring SDK replace
 
 In [the API](/apis-tools/web-modeler-api/index.md), new endpoints starting with `/api/v1/versions` have been introduced, while the previous `/api/v1/milestones` endpoints are now deprecated.
 Further details can be found in [Web Modeler's OpenAPI documentation](https://modeler.camunda.io/swagger-ui/index.html).
-
-> > > > > > > main:docs/reference/announcements/870.md
 
 :::note
 This is a nominal update and the functionality of versions and milestones is equivalent.
