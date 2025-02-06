@@ -9,18 +9,26 @@ custom_edit_url: null
 ---
 
 import ApiLogo from "@theme/ApiLogo";
+import Heading from "@theme/Heading";
 import SchemaTabs from "@theme/SchemaTabs";
 import TabItem from "@theme/TabItem";
 import Export from "@theme/ApiExplorer/Export";
 
-<h1 className={"openapi__heading"}>Zeebe REST API</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Zeebe REST API"}
+></Heading>
 
 API for communicating with the Zeebe cluster.
 
 <div style={{ marginBottom: "2rem" }}>
-  <h2 id={"authentication"} style={{ marginBottom: "1rem" }}>
-    Authentication
-  </h2>
+  <Heading
+    id={"authentication"}
+    as={"h2"}
+    className={"openapi-tabs__heading"}
+    children={"Authentication"}
+  ></Heading>
   <SchemaTabs className={"openapi-tabs__security-schemes"}>
     <TabItem label={"HTTP: Bearer Auth"} value={"bearerAuth"}>
       <div>
@@ -48,7 +56,7 @@ API for communicating with the Zeebe cluster.
   <h3 style={{ marginBottom: "0.25rem" }}>License</h3>
   <a
     href={
-      "https://github.com/camunda/camunda/blob/main/licenses/ZEEBE-COMMUNITY-LICENSE-1.1.txt"
+      "https://github.com/camunda/zeebe/blob/main/licenses/ZEEBE-COMMUNITY-LICENSE-1.1.txt"
     }
   >
     Zeebe Community License Version 1.1

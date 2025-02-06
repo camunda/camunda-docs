@@ -22,10 +22,6 @@ Additionally, similar to the issue regarding missing definition data, it is poss
 
 This often occurs when Elasticsearch is running out of disk space. If this is the case, adjusting your Elasticsearch setup accordingly should resolve the issue. Note that you may need to manually unlock your indices afterwards, refer to [Elasticsearch's documentation](https://www.elastic.co/guide/en/elasticsearch/reference/master/index-modules-blocks.html) on how to do this.
 
-## Exception indicating an error while checking the engine version
-
-The most common cause for this issue is that the engine endpoint Optimize uses is not configured correctly. Check your [configuration](./system-configuration-platform-7.md) and ensure the engine REST URL is set correctly.
-
 ## Server language results in UI/server errors
 
 When Optimize is running with its language set to one with characters that it can't recognize, such as Turkish, you may observe logged issues and unusable elements in the UI. We recommend running Optimize on a server with its language set to English.
@@ -34,7 +30,6 @@ When Optimize is running with its language set to one with characters that it ca
 
 Always check the migration and update instructions for the version you are migrating from:
 
-- For Camunda 7, refer to the [Camunda 7 migration guide](./../migration-update/camunda-8/instructions.md).
 - For Camunda 8, refer to the [Camunda 8 migration guide](./../migration-update/camunda-8/instructions.md).
 
 These guides often document known issues along with their solutions, which might already address the problem you're encountering.

@@ -282,29 +282,6 @@ Camunda 8 components without a valid license may display **Non-Production Licens
 
 ## Configuring Web Modeler, Console, and Connectors
 
-### Web Modeler and Console secrets
-
-The Console and Web Modeler Components are published in Camunda's private Docker registry (registry.camunda.cloud) and are under a [proprietary license](/reference/licenses.md#web-modeler-and-console). These components are not available in public repositories.
-
-To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
-
-```shell
-kubectl create secret docker-registry registry-camunda-cloud \
-  --namespace=<NAMESPACE> \
-  --docker-server=registry.camunda.cloud \
-  --docker-username=<DOCKER_USER> \
-  --docker-password=<DOCKER_PASSWORD> \
-  --docker-email=<DOCKER_EMAIL>
-```
-
-:::note
-Use `registry-camunda-cloud` as a secret after replacing `<DOCKER_USER>`, `<DOCKER_PASSWORD>`, and `<DOCKER_EMAIL>` with your credentials.
-
-The secret must be created in the same Kubernetes namespace where you'll install the Helm chart. Replace `<NAMESPACE>` to set the namespace.
-:::
-
-Alternatively, create an image pull secret [from your Docker configuration file](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials).
-
 ### Install Connectors
 
 The **Connector runtime** comes enabled by default. To start using Connectors, install Connector element templates. Learn more in our documentation for [Web Modeler](/components/connectors/manage-connector-templates.md) or [Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md).
@@ -376,19 +353,13 @@ For more details, check [Web Modeler Helm values](https://artifacthub.io/package
 
 ### Install Console
 
-Console Self-Managed is disabled by default in the Camunda 8 Helm chart, as it requires a [proprietary license](/reference/licenses.md#web-modeler-and-console) to access the Camunda container registry.
+Console Self-Managed is disabled by default in the Camunda 8 Helm chart.
 
-To install Console, two steps are required:
-
-1. [Create a secret with Camunda registry credentials](#web-modeler-console-secrets).
-2. Enable Console, and reference the created Kubernetes secret object via Helm values.
+To install Console, enable Console in the Helm chart with `console.enabled: true`. We recommend specifying these values in a YAML file that you pass to the `helm install` command:
 
 ```yaml
 console:
   enabled: true
-  image:
-    pullSecrets:
-      - name: registry-camunda-cloud
 ```
 
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).

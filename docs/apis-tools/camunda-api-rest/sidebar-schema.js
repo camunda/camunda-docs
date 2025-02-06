@@ -5,7 +5,7 @@ module.exports = {
     "apis-tools/camunda-api-rest/camunda-api-rest-overview",
     "apis-tools/camunda-api-rest/camunda-api-rest-authentication",
     {
-      Specifications: require("./specifications/sidebar.js"),
+      Specifications: require("./specifications/sidebar"),
     },
   ],
 };
