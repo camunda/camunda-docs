@@ -1,7 +1,7 @@
 ---
 id: sql
 title: SQL Connector
-sidebar_label: SQL Connector
+sidebar_label: SQL
 description: "Connect your BPMN process with SQL databases, learn how to create a SQL Connector, and make it executable."
 ---
 
@@ -21,7 +21,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your SQL Connector executable
 
-To make your **SQL Connector** executable, fill out the mandatory fields highlighted in red in the properties panel.
+To make your **SQL Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
 
 ### Database
 

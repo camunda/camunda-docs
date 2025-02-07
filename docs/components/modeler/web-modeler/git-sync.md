@@ -120,7 +120,7 @@ When using a self-hosted GitLab instance, ensure the environment variable `CAMUN
    - **Project ID:** The ID copied from the GitLab project settings.
    - **GitLab repository URL:** The base URL of the repository you want to sync with, for example `https://gilab.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
    - **Branch name:** The branch name to use for merging and managing changes.
-   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is **not** automatically created if it does not exist.
+   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -156,7 +156,7 @@ Existing Git configurations can be edited from the gear icon beside the **Sync w
 To switch from GitHub to GitLab, or vice versa, update your configuration with the following steps:
 
 1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with GitHub** or **Sync with GitLab** button, and clicking the **Delete provider connection** button at the bottom of the modal.
-2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md/?platform=github#connect-to-a-remote-repository) or [GitLab](./git-sync.md/?platform=gitlab#connect-to-a-remote-repository).
+2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository) or [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository).
 
 ## Advanced use cases
 

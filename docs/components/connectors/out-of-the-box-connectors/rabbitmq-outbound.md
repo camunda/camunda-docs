@@ -1,7 +1,7 @@
 ---
 id: rabbitmq
 title: RabbitMQ Connector
-sidebar_label: RabbitMQ Connector
+sidebar_label: RabbitMQ
 description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ Connector.
 ---
 
@@ -35,7 +35,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Connecting to RabbitMQ and sending messages
 
-To connect to RabbitMQ, choose the required connection type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel:
+To connect to RabbitMQ, choose the required connection type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel on the right side of the screen.
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the upcoming sections.

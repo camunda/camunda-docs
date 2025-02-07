@@ -1,87 +1,955 @@
 ---
 id: find-decision-requirements
-title: "Query decision requirements (alpha)"
+title: "Query decision requirements"
 description: "Search for decision requirements based on given criteria."
-sidebar_label: "Query decision requirements (alpha)"
+sidebar_label: "Query decision requirements"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query decision requirements (alpha)</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query decision requirements"}
+></Heading>
 
 <MethodEndpoint
   method={"post"}
   path={"/decision-requirements/search"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Search for decision requirements based on given criteria.
 
-Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
-The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-:::note
-This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
-in future releases.
-:::
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-## Request
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              description:
+                "Base properties for DecisionRequirementsSearchQueryRequest",
+              type: "object",
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    page: {
+                      description: "Pagination criteria.",
+                      allOf: [
+                        {
+                          type: "object",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                            searchAfter: {
+                              description:
+                                "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                            searchBefore: {
+                              description:
+                                "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                          },
+                          title: "SearchQueryPageRequest",
+                        },
+                      ],
+                      type: "object",
+                    },
+                  },
+                  title: "SearchQueryRequest",
+                },
+              ],
+              properties: {
+                sort: {
+                  description: "Sort field criteria.",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      field: {
+                        description: "The field to sort by.",
+                        type: "string",
+                        enum: [
+                          "decisionRequirementsKey",
+                          "decisionRequirementsName",
+                          "version",
+                          "decisionRequirementsId",
+                          "tenantId",
+                        ],
+                      },
+                      order: {
+                        description:
+                          "The order in which to sort the related field.",
+                        type: "string",
+                        enum: ["ASC", "DESC"],
+                        default: "ASC",
+                        title: "SortOrderEnum",
+                      },
+                    },
+                    required: ["field"],
+                    title: "DecisionRequirementsSearchQuerySortRequest",
+                  },
+                },
+              },
+              title: "DecisionRequirementsSearchQueryRequestBase",
+            },
+          ],
+          properties: {
+            filter: {
+              description: "The decision definition search filters.",
+              allOf: [
+                {
+                  description:
+                    "Decision requirements search filter. Key attributes as string values.",
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsFilterRequest",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN ID of the decision requirements.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsFilter",
+                },
+              ],
+            },
+          },
+          title: "DecisionRequirementsSearchQuery",
+        },
+      },
+      "application/vnd.camunda.api.keys.number+json": {
+        schema: {
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              description:
+                "Base properties for DecisionRequirementsSearchQueryRequest",
+              type: "object",
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    page: {
+                      description: "Pagination criteria.",
+                      allOf: [
+                        {
+                          type: "object",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                            searchAfter: {
+                              description:
+                                "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                            searchBefore: {
+                              description:
+                                "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                          },
+                          title: "SearchQueryPageRequest",
+                        },
+                      ],
+                      type: "object",
+                    },
+                  },
+                  title: "SearchQueryRequest",
+                },
+              ],
+              properties: {
+                sort: {
+                  description: "Sort field criteria.",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      field: {
+                        description: "The field to sort by.",
+                        type: "string",
+                        enum: [
+                          "decisionRequirementsKey",
+                          "decisionRequirementsName",
+                          "version",
+                          "decisionRequirementsId",
+                          "tenantId",
+                        ],
+                      },
+                      order: {
+                        description:
+                          "The order in which to sort the related field.",
+                        type: "string",
+                        enum: ["ASC", "DESC"],
+                        default: "ASC",
+                        title: "SortOrderEnum",
+                      },
+                    },
+                    required: ["field"],
+                    title: "DecisionRequirementsSearchQuerySortRequest",
+                  },
+                },
+              },
+              title: "DecisionRequirementsSearchQueryRequestBase",
+            },
+          ],
+          properties: {
+            filter: {
+              description: "The decision definition search filters.",
+              allOf: [
+                {
+                  description: "Decision requirements search filter.",
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsFilterRequest",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN ID of the decision requirements.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "DecisionRequirementsSearchQueryRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.string+json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              description:
+                "Base properties for DecisionRequirementsSearchQueryRequest",
+              type: "object",
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    page: {
+                      description: "Pagination criteria.",
+                      allOf: [
+                        {
+                          type: "object",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                            searchAfter: {
+                              description:
+                                "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                            searchBefore: {
+                              description:
+                                "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                          },
+                          title: "SearchQueryPageRequest",
+                        },
+                      ],
+                      type: "object",
+                    },
+                  },
+                  title: "SearchQueryRequest",
+                },
+              ],
+              properties: {
+                sort: {
+                  description: "Sort field criteria.",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      field: {
+                        description: "The field to sort by.",
+                        type: "string",
+                        enum: [
+                          "decisionRequirementsKey",
+                          "decisionRequirementsName",
+                          "version",
+                          "decisionRequirementsId",
+                          "tenantId",
+                        ],
+                      },
+                      order: {
+                        description:
+                          "The order in which to sort the related field.",
+                        type: "string",
+                        enum: ["ASC", "DESC"],
+                        default: "ASC",
+                        title: "SortOrderEnum",
+                      },
+                    },
+                    required: ["field"],
+                    title: "DecisionRequirementsSearchQuerySortRequest",
+                  },
+                },
+              },
+              title: "DecisionRequirementsSearchQueryRequestBase",
+            },
+          ],
+          properties: {
+            filter: {
+              description: "The decision definition search filters.",
+              allOf: [
+                {
+                  description:
+                    "Decision requirements search filter. Key attributes as string values.",
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsFilterRequest",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN ID of the decision requirements.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsFilter",
+                },
+              ],
+            },
+          },
+          title: "DecisionRequirementsSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Sort field criteria.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The field to sort by.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination criteria.
-
-</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Decision requirements search filter.
-
-</div><SchemaItem collapsible={false} name={"decisionRequirementsKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The DMN name of the decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned version of the decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"the DMN ID of the decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the decision requirements."}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The decision requirements search result.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching decision requirements.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"decisionRequirementsKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The DMN name of the decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned version of the decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The DMN ID of the decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the resource from which this decision requirements was parsed."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the decision requirements."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"decisionRequirementsKey\": 0,\n      \"name\": \"string\",\n      \"version\": 0,\n      \"decisionRequirementsId\": \"string\",\n      \"resourceName\": \"string\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The search query failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The decision requirements search result.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching decision requirements.",
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsItem.",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "The DMN ID of the decision requirements.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The name of the resource from which this decision requirements was parsed.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsResult",
+                },
+              },
+            },
+            title: "DecisionRequirementsSearchQueryResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching decision requirements.",
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsItem.",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "The DMN ID of the decision requirements.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The name of the resource from which this decision requirements was parsed.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsItem",
+                },
+              },
+            },
+            title: "DecisionRequirementsSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching decision requirements.",
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsItem.",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "The DMN ID of the decision requirements.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The name of the resource from which this decision requirements was parsed.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsResult",
+                },
+              },
+            },
+            title: "DecisionRequirementsSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

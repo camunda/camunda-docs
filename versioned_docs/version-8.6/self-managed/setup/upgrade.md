@@ -94,6 +94,10 @@ We added the `global.compatibility.openshift.adaptSecurityContext` variable in t
 
 With this change, there is no need to do extra steps with the post-renderer. You can install the chart as normal. Please refer to the [Red Hat OpenShift document](/self-managed/setup/deploy/openshift/redhat-openshift.md) for more information.
 
+#### New base path for Operate and Tasklist web applications
+
+We have introduced a new base path for both the Operate and Tasklist web applications. The new base path for Operate is `/operate`, and for Tasklist, it is `/tasklist`. For more information, see the 8.6 [announcements](/reference/announcements.md#new-base-path-for-operate-and-tasklist-web-applications).
+
 </TabItem>
 
 <TabItem value='8.5'>
@@ -106,7 +110,10 @@ With this change, Camunda applications no longer require a unified patch version
 
 <h3>Helm chart 10.0.2+</h3>
 
-The upgrade path for Camunda Helm Chart v9.x.x is v10.0.2+.
+The upgrade path for Camunda Helm Chart v9.x.x is to the latest patch version of v10.
+
+- You can use any minor or patch version after (and including) 10.0.2.
+- You cannot upgrade from v9.x.x to v10.0.0 or v10.0.1.
 
 The Camunda Helm chart v10.0.2 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
 
@@ -346,7 +353,7 @@ If you have a custom `values.yaml`, change the image repository and tag:
 ```yaml
 image:
   repository: bitnami/elasticsearch
-  tag: 8.6.2
+  tag: 8.8.2
 ```
 
 Setting the persistent volume size of the master nodes can't be done using the `volumeClaimTemplate` anymore. It must be done using the master values:

@@ -23,7 +23,7 @@ By linking a Camunda Form to a start event, process instances can be started wit
 1. Select a user task or none start event from the canvas and a link button will appear at the bottom right.
 2. Click on the button and choose any form from the same project.
 3. Click the **Link** button to complete the linking process.
-   In the properties panel, the value **Camunda Form (linked)** is chosen for the **Type** property, and the form ID of the form you chose to link is automatically copied to the **Form ID** section.
+   In the properties panel on the right side of the screen, the value **Camunda Form (linked)** is chosen for the **Type** property, and the form ID of the form you chose to link is automatically copied to the **Form ID** section.
 
 <p><img src={FormLinkOverlayImg} style={{width: 400}} alt="Linking a Camunda Form" /></p>
 
@@ -90,7 +90,7 @@ To correct any instances affected by this issue, we recommend the following step
 ### Camunda Form (embedded)
 
 :::info
-Embedded forms are supported only by job worker-based user tasks and are not available for the [Zeebe user task implementation type](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-implementation-types).
+Embedded forms are only supported for job worker-based user tasks. They are not available for the [Camunda user task implementation type](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-implementation-types).
 :::
 
 When choosing **Camunda Form (embedded)** as type you have the option to directly paste the form's JSON schema into the **Form JSON configuration** field of the properties panel.

@@ -29,7 +29,7 @@ A decision table is represented by a `decisionTable` element inside a
 ![Decision Name](assets/decision-table/decision-name.png)
 
 The name describes the decision for which the decision table provides the decision logic. It is set as the `name`
-attribute on the `decision` element. It can be changed via the Properties Panel after selecting the respective
+attribute on the `decision` element. It can be changed via the properties panel on the right side of the screen after selecting the respective
 "Decision" in the Decision Requirements Diagram view.
 
 ```xml

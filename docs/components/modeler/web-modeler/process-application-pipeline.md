@@ -12,7 +12,7 @@ You can use Web Modeler to quickly develop and progress low-risk process applica
 <p><img src={DeployProcessApplicationDiagramImg} alt="Process application file list" /></p>
 
 :::caution
-For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/docs/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
+For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
 :::
 
 ## Model
@@ -68,7 +68,7 @@ Play is being rebuilt and progressively rolled out to more users. See [Play limi
 
 After validation is complete, you can release a version of your process application for review and approval.
 
-- Use [process application versioning](process-application-versioning.md) to track and review changes across the files and assets in the process application. You can [compare milestones](/docs/components/modeler/web-modeler/milestones.md#compare-milestones) to visually review changes between two versions of a BPMN file, or view code changes for other files.
+- Use [process application versioning](process-application-versioning.md) to track and review changes across the files and assets in the process application. You can [compare versions](/docs/components/modeler/web-modeler/versions.md#compare-versions) to visually review changes between two versions of a BPMN file, or view code changes for other files.
 - Use comments to make review collaboration easier.
 - Approvers can add a comment to the main process diagram to indicate that a review is complete and that the process application is ready to be promoted to the next stage.
 

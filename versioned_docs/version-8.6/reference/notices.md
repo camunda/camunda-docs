@@ -74,11 +74,11 @@ Tasklist
 
 The REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs:
 
-- GET /v1/tasks/{taskId}
+- GET /v1/tasks/\{taskId}
 - POST /v1/tasks/search
-- POST /v1/tasks/{taskId}/variables/search
-- POST /v1/forms/{formId}
-- POST /v1/variables/{variableId}
+- POST /v1/tasks/\{taskId}/variables/search
+- POST /v1/forms/\{formId}
+- POST /v1/variables/\{variableId}
 
 Find more information about the methods in our [Tasklist REST API documentation](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 

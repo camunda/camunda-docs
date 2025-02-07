@@ -8,7 +8,7 @@ Important changes and updates for Camunda 8 releases that customers should be aw
 
 ## Camunda 8.7
 
-Camunda 8.7 is scheduled for release on 11 February, 2024.
+Camunda 8.7 is scheduled for release on 8 April 2025.
 
 <div class="double-column-container">
 <div class="double-column-left">
@@ -18,10 +18,14 @@ Camunda 8.7 is scheduled for release on 11 February, 2024.
 </div>
 <div class="double-column-right">
 
-- [API updates](/reference/announcements/870.md#api-updates-saasself-managed)
-- [Identity management updates](/reference/announcements/870.md#identity-management-updates-saasself-managed)
-- [Installation and deployment updates](/reference/announcements/870.md#installation-and-deployment-updates-self-managed)
-- [Camunda Java client and Camunda Spring SDK](/reference/announcements/870.md#camunda-java-client-and-camunda-spring-sdk-self-managed)
+<!--- [Ad-hoc subprocesses](#)
+- [Document handling](#)
+- [RPA](#)
+  - [Fetch RPA resource API](#)
+  - [deployResourceAPI for RPA](#) -->
+
+- [Web Modeler Deploy diagram change](/reference/announcements/870.md#web-modeler-deploy-diagram-change)
+- [Southwest Asia for SaaS region](/reference/announcements/870.md#southeast-asia-region-for-saas-customers-saas)
 
 </div>
 </div>

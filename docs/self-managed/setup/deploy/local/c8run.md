@@ -36,7 +36,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha2) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha3) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 
@@ -87,7 +87,7 @@ A success notification displays when complete. [Start a new process instance](/c
 
 ### Use built-in and custom Connectors
 
-Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md/#automatic-connector-template-fetching) templates for pre-built Connectors. [Custom Connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your Camunda 8 Run distribution.
+Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md#automatic-connector-template-fetching) templates for pre-built Connectors. [Custom Connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your Camunda 8 Run distribution.
 
 To add a custom Connector:
 

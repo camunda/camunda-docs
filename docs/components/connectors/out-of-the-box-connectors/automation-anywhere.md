@@ -2,6 +2,7 @@
 id: automation-anywhere
 title: Automation Anywhere Connector
 description: Orchestrate your Automation Anywhere queue items from your BPMN process.
+sidebar_label: Automation Anywhere
 ---
 
 The **Automation Anywhere Connector** allows you to orchestrate an Automation Anywhere queue from your BPMN process with [Automation Anywhere RPA](https://www.automationanywhere.com/) to add work items to the queue and obtain work item results.
@@ -18,7 +19,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your Automation Anywhere Connector executable
 
-To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel.
+To work with Automation Anywhere, choose the required operation type in the **Operation** section and authentication type in the **Authentication** section and complete the mandatory fields highlighted in red in the Connector properties panel on the right side of the screen.
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication and operation selections you choose are covered in the upcoming sections.

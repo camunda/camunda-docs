@@ -1,24 +1,20 @@
 const replace = require("replace-in-file");
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 
-const outputDir = "docs/apis-tools/zeebe-api-rest/specifications";
-const specFile = "api/zeebe/zeebe-openapi.yaml";
-
-function preGenerateDocs() {
-  hackChangesetDescription();
+function preGenerateDocs(config) {
+  hackChangesetDescription(config.specPath);
 }
 
-function postGenerateDocs() {
-  removeDuplicateVersionBadge(`${outputDir}/zeebe-rest-api.info.mdx`);
+function postGenerateDocs(config) {
+  removeDuplicateVersionBadge(`${config.outputDir}/zeebe-rest-api.info.mdx`);
 }
 
 module.exports = {
-  outputDir,
   preGenerateDocs,
   postGenerateDocs,
 };
 
-function hackChangesetDescription() {
+function hackChangesetDescription(specPath) {
   // This is a temporary hack, until https://github.com/camunda/camunda-docs/issues/3568 is resolved.
   //   The OpenAPI generator plugin we're using does not use the correct `description` property
   //   for the `UserTaskUpdateRequest` object. Instead of picking up the actual property description,
@@ -27,7 +23,7 @@ function hackChangesetDescription() {
   //   the `UserTaskUpdateRequest.changeset` property.
   console.log("hacking changeset description...");
   replace.sync({
-    files: `${specFile}`,
+    files: `${specPath}`,
     from: /^      description: A map of changes.$/m,
     to: `      description: |
         JSON object with changed task attribute values.

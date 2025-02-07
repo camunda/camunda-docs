@@ -588,11 +588,6 @@
             },
             {
               "type": "link",
-              "label": "Combined process reports",
-              "href": "/optimize/components/userguide/combined-process-reports/"
-            },
-            {
-              "type": "link",
               "label": "Process KPIs",
               "href": "/optimize/components/userguide/process-KPIs/"
             },
@@ -708,25 +703,6 @@
               ]
             },
             {
-              "Decision analysis": [
-                {
-                  "type": "link",
-                  "label": "Overview",
-                  "href": "/optimize/components/userguide/decision-analysis/decision-analysis-overview/"
-                },
-                {
-                  "type": "link",
-                  "label": "Single report",
-                  "href": "/optimize/components/userguide/decision-analysis/decision-report/"
-                },
-                {
-                  "type": "link",
-                  "label": "Filters",
-                  "href": "/optimize/components/userguide/decision-analysis/decision-filter/"
-                }
-              ]
-            },
-            {
               "Additional features": [
                 {
                   "type": "link",
@@ -735,18 +711,8 @@
                 },
                 {
                   "type": "link",
-                  "label": "Event-based processes",
-                  "href": "/optimize/components/userguide/additional-features/event-based-processes/"
-                },
-                {
-                  "type": "link",
                   "label": "Export and import",
                   "href": "/optimize/components/userguide/additional-features/export-import/"
-                },
-                {
-                  "type": "link",
-                  "label": "Footer",
-                  "href": "/optimize/components/userguide/additional-features/footer/"
                 },
                 {
                   "type": "link",
@@ -1484,11 +1450,6 @@
             },
             {
               "type": "link",
-              "label": "Event ingestion",
-              "href": "/optimize/apis-tools/optimize-api/event-ingestion/"
-            },
-            {
-              "type": "link",
               "label": "External variable ingestion",
               "href": "/optimize/apis-tools/optimize-api/external-variable-ingestion/"
             },
@@ -1834,6 +1795,17 @@
                     "self-managed/setup/deploy/amazon/amazon-eks/irsa"
                   ]
                 },
+                {
+                  "type": "category",
+                  "label": "ROSA",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/setup/deploy/amazon/openshift/terraform-setup"
+                  },
+                  "items": [
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup"
+                  ]
+                },
                 "self-managed/setup/deploy/amazon/aws-marketplace"
               ],
               "Microsoft (Azure)": [
@@ -2053,11 +2025,6 @@
               "href": "/optimize/self-managed/optimize-deployment/install-and-start/"
             },
             {
-              "type": "link",
-              "label": "Version policy",
-              "href": "/optimize/self-managed/optimize-deployment/version-policy/"
-            },
-            {
               "Configuration": [
                 {
                   "type": "link",
@@ -2075,16 +2042,6 @@
                       "type": "link",
                       "label": "Camunda 8 system configuration",
                       "href": "/optimize/self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Camunda 7 system configuration",
-                      "href": "/optimize/self-managed/optimize-deployment/configuration/system-configuration-platform-7/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Event-based process system configuration",
-                      "href": "/optimize/self-managed/optimize-deployment/configuration/event-based-process-configuration/"
                     }
                   ]
                 },
@@ -2092,11 +2049,6 @@
                   "type": "link",
                   "label": "Logging",
                   "href": "/optimize/self-managed/optimize-deployment/configuration/logging/"
-                },
-                {
-                  "type": "link",
-                  "label": "Optimize license key",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/optimize-license/"
                 },
                 {
                   "type": "link",
@@ -2125,276 +2077,62 @@
                 },
                 {
                   "type": "link",
-                  "label": "Clustering",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/clustering/"
-                },
-                {
-                  "type": "link",
-                  "label": "Webhooks",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/webhooks/"
-                },
-                {
-                  "type": "link",
-                  "label": "Authorization management",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/authorization-management/"
-                },
-                {
-                  "type": "link",
-                  "label": "User access management",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/user-management/"
-                },
-                {
-                  "type": "link",
                   "label": "Multi-tenancy",
                   "href": "/optimize/self-managed/optimize-deployment/configuration/multi-tenancy/"
-                },
-                {
-                  "type": "link",
-                  "label": "Multiple process engines",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/multiple-engines/"
-                },
-                {
-                  "type": "link",
-                  "label": "Event-based processes",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/setup-event-based-processes/"
-                },
-                {
-                  "type": "link",
-                  "label": "Common problems",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/common-problems/"
                 }
               ]
-            },
-            {
-              "Plugins": [
-                {
-                  "type": "link",
-                  "label": "Optimize plugin system",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/plugin-system/"
-                },
-                {
-                  "type": "link",
-                  "label": "Business key import customization",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/businesskey-import-plugin/"
-                },
-                {
-                  "type": "link",
-                  "label": "Decision inputs and outputs import customization",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/decision-import-plugin/"
-                },
-                {
-                  "type": "link",
-                  "label": "Elasticsearch header",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/elasticsearch-header/"
-                },
-                {
-                  "type": "link",
-                  "label": "Engine REST filter",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/engine-rest-filter-plugin/"
-                },
-                {
-                  "type": "link",
-                  "label": "Single sign on",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/single-sign-on/"
-                },
-                {
-                  "type": "link",
-                  "label": "Variable import customization",
-                  "href": "/optimize/self-managed/optimize-deployment/plugins/variable-import-plugin/"
-                }
-              ]
-            },
-            {
-              "type": "link",
-              "label": "Camunda engine data reimport",
-              "href": "/optimize/self-managed/optimize-deployment/reimport/"
             },
             {
               "Migration & update": [
                 {
-                  "Camunda 7": [
-                    {
-                      "type": "link",
-                      "label": "Instructions",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/instructions/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.13 to 3.14)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.13-to-3.14/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.12 to 3.13)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.12-to-3.13/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.11 to 3.12)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.11-to-3.12/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.10 to 3.11)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.10-to-3.11/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.9.x to 3.10)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.9-to-3.10/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.9-preview-x to 3.9.x)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.9-preview-1-to-3.9/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.8.x to 3.9.x-preview-1)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.8-to-3.9-preview-1/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.7.x to 3.8.x)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.7-to-3.8/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.6 to 3.7.x)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.6-to-3.7/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.5 to 3.6)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.5-to-3.6/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.4 to 3.5)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.4-to-3.5/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.3 to 3.4)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.3-to-3.4/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.2 to 3.3)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.2-to-3.3/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.1 to 3.2)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.1-to-3.2/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.0 to 3.1)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/3.0-to-3.1/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (2.7 to 3.0)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/2.7-to-3.0/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (2.6 to 2.7)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/2.6-to-2.7/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (2.5 to 2.6)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/2.5-to-2.6/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (2.4 to 2.5)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/2.4-to-2.5/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (2.3 to 2.4)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/2.3-to-2.4/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (2.2 to 2.3)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/2.2-to-2.3/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (2.1 to 2.2)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-7/2.1-to-2.2/"
-                    }
-                  ],
-                  "Camunda 8": [
-                    {
-                      "type": "link",
-                      "label": "Instructions",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/instructions/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (8.5 to 8.6)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.5-to-8.6/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (8.4 to 8.5)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.4-to-8.5/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (8.4 to 8.4)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.4-to-8.4/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (8.3 to 8.4)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.3-to-8.4/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.10 to 8.3)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-8.3/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.9.x to 3.10)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.9-preview-x to 3.9.x)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.8.x to 3.9.x-preview-1)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Update notes (3.7.x to 3.8.x)",
-                      "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8/"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "Advanced features": [
-                {
                   "type": "link",
-                  "label": "Engine data deletion",
-                  "href": "/optimize/self-managed/optimize-deployment/advanced-features/engine-data-deletion/"
+                  "label": "Instructions",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/instructions/"
                 },
                 {
                   "type": "link",
-                  "label": "Data import",
-                  "href": "/optimize/self-managed/optimize-deployment/advanced-features/import-guide/"
+                  "label": "Update notes (8.5 to 8.6)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.5-to-8.6/"
+                },
+                {
+                  "type": "link",
+                  "label": "Update notes (8.4 to 8.5)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.4-to-8.5/"
+                },
+                {
+                  "type": "link",
+                  "label": "Update notes (8.4 to 8.4)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.4-to-8.4/"
+                },
+                {
+                  "type": "link",
+                  "label": "Update notes (8.3 to 8.4)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.3-to-8.4/"
+                },
+                {
+                  "type": "link",
+                  "label": "Update notes (3.10 to 8.3)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-8.3/"
+                },
+                {
+                  "type": "link",
+                  "label": "Update notes (3.9.x to 3.10)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10/"
+                },
+                {
+                  "type": "link",
+                  "label": "Update notes (3.9-preview-x to 3.9.x)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9/"
+                },
+                {
+                  "type": "link",
+                  "label": "Update notes (3.8.x to 3.9.x-preview-1)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1/"
+                },
+                {
+                  "type": "link",
+                  "label": "Update notes (3.7.x to 3.8.x)",
+                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8/"
                 }
               ]
             }

@@ -37,7 +37,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/user-guide/roles/add-assign-role.md/#add-a-role) assigned in Identity to be authorized to deploy.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/user-guide/roles/add-assign-role.md#add-a-role) assigned in Identity to be authorized to deploy.
 
 ### Before deploying a process
 
@@ -113,7 +113,7 @@ To schedule a process using a timer, follow these steps:
 
 <img src={ConvertToTimerImg} style={{width: 600}} alt="Converting the start event to a timer start event" />
 
-3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
+3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** on the right side of the screen under the **Deploy** button to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
 
 4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
 
