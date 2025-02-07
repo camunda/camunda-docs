@@ -9,6 +9,7 @@ import type NavbarItemType from "@theme/NavbarItem";
 import type { WrapperProps } from "@docusaurus/types";
 
 import { useLocation } from "@docusaurus/router";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 type Props = WrapperProps<typeof NavbarItemType> & {
   docsPluginId: string;
@@ -20,9 +21,12 @@ export default function NavbarItemWrapper(props: Props): ReactNode {
   // override docsPluginId for Optimize instance
   const { type } = props;
   const { pathname } = useLocation();
+  const {
+    siteConfig: { baseUrl },
+  } = useDocusaurusContext();
 
   if (type === "docsVersionDropdown" || type === "docsVersion") {
-    if (/^\/([0-9.]*\/)?optimize/.test(pathname)) {
+    if (/^([0-9.]*\/)?optimize/.test(pathname.replace(baseUrl, ""))) {
       childProps.docsPluginId = "optimize";
     }
   }
