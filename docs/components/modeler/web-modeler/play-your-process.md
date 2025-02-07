@@ -56,7 +56,7 @@ In SaaS, view your process instance in Operate by selecting the **Process Instan
 
 You have a few options to mock an external system:
 
-- In **Implement** mode, hard-code an example payload in the task or event's **Example data** section in the properties panel.
+- In **Implement** mode, hard-code an example payload in the task or event's **Example data** section in the properties panel on the right side of the screen.
 - When completing a task or event, use the secondary action to complete it with variables.
 - When filling forms or setting variables from Play, you can also save the variables to the BPMN file as example data to reuse them in future sessions.
 - Use service task placeholders instead of connectors

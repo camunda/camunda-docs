@@ -36,7 +36,7 @@ The following table provides you with a guideline that we would use in a context
 
 ### Editing IDs with Camunda Modeler
 
-We recommend using Camunda Modeler's properties panel to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process ID:
+We recommend using Camunda Modeler's properties panel on the right side of the screen to edit technical identifiers and change them according to your naming conventions, like it is shown here for the process ID:
 
 ![Properties Panel](naming-technically-relevant-ids-assets/camunda-modeler-properties-panel.png)
 

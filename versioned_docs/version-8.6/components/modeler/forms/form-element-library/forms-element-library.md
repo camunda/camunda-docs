@@ -6,7 +6,7 @@ description: Library of all currently available Form Elements
 
 # Form Elements
 
-A form configuration starts off as a composition of **Form Elements** to define the structure. The specific behaviors are then defined as properties on the individual elements via the properties panel.
+A form configuration starts off as a composition of **Form Elements** to define the structure. The specific behaviors are then defined as properties on the individual elements via the properties panel on the right side of the screen.
 
 Most form elements are intended to be bound to a **Form Variable** for the purpose of data entry, in which case we refer to them as **Form Fields**. Other elements may be used for layout purposes or to provide more specific functionality to the form which doesn't directly affect its state.
 
