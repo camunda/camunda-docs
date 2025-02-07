@@ -31,6 +31,13 @@ To use and configure an RDBMS as storage backend, follow the instructions in the
 
 When using a relational database as storage backend, the following limitations apply:
 
+- **ID size limit:** The length of various string properties is limited to 255 characters. Trying to store a value with more than 400 characters will result in an error. Note, that the Zeebe broker itself does not have this limitation and will not reject entities with longer IDs. This size limit applies to:
+  - `id` properties like processDefinitionId, decisionDefinitionId...)
+  - `name` properties like username, processDefinitionName
+- **Comparing / sorting variables:**
+  - When using the Camunda REST API to fetch and filter for variables, the comparison operations are only applied on the first 8191 characters of a String or JSON variable value (4000 when using OracleDB). The LIKE operator is not affected by this limitation.
+  - **OracleDB:** When using the Camunda REST API to fetch variables, by default longer variables will be truncated to 4000 characters instead of 8191 with other database vendors or when using document databases.
+
 #### Variables
 
 [The Camunda REST API](./../../../../apis-tools/camunda-api-rest/camunda-api-rest-overview) allows to fetch and filter for [Variables](./../../../../apis-tools/camunda-api-rest/specifications/get-variable).
