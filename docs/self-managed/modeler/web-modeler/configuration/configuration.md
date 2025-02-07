@@ -26,16 +26,16 @@ The Camunda 8 [Helm](/self-managed/setup/install.md) and [Docker Compose](/self-
 
 To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 
-| Environment variable                        | Description                                                                                            | Example value                        |
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------ |
-| `CAMUNDA_MODELER_CLUSTERS_0_ID`             | A unique identifier to use for your cluster.                                                           | `test-cluster-1`                     |
-| `CAMUNDA_MODELER_CLUSTERS_0_NAME`           | The name of your cluster.                                                                              | `Test Cluster 1`                     |
-| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`        | The Camunda version used by this cluster.                                                              | `8.6.0`                              |
-| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` | The authentication to use with your cluster.                                                           | `OAUTH`, `NONE`                      |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC` | [Internal](#notes-on-host-names-and-port-numbers) The address where your cluster can be reached.       | `grpc://camunda-zeebe-gateway:26500` |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST` | [Internal](#notes-on-host-names-and-port-numbers) The address where the Zeebe REST API can be reached. | `http://camunda-zeebe-gateway:8080`  |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`    | [Internal](#notes-on-host-names-and-port-numbers) The address where Operate can be reached.            | `http://camunda-operate:80`          |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`   | [Internal](#notes-on-host-names-and-port-numbers) The address where Tasklist can be reached.           | `http://camunda-taslkist:80`         |
+| Environment variable                        | Description                                                                                                    | Example value                                                               |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_ID`             | A unique identifier to use for your cluster.                                                                   | `test-cluster-1`                                                            |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME`           | The name of your cluster.                                                                                      | `Test Cluster 1`                                                            |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`        | The Camunda version used by this cluster.                                                                      | `8.7.0`                                                                     |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` | The authentication to use with your cluster.                                                                   | `OAUTH`, `NONE`                                                             |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC` | [Internal or external](#notes-on-host-names-and-port-numbers) address where your cluster can be reached.       | `grpc://camunda-zeebe-gateway:26500`, `grpcs://camunda-zeebe-gateway:26500` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST` | [Internal or external](#notes-on-host-names-and-port-numbers) address where the Zeebe REST API can be reached. | `http://camunda-zeebe-gateway:8080`, `https://camunda-zeebe-gateway:8080`   |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`    | [Internal or external](#notes-on-host-names-and-port-numbers) address where Operate can be reached.            | `http://camunda-operate:80`, `https://camunda-operate:80`                   |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`   | [Internal or external](#notes-on-host-names-and-port-numbers) address where Tasklist can be reached.           | `http://camunda-tasklist:80`, `https://camunda-tasklist:80`                 |
 
 ### Database
 
