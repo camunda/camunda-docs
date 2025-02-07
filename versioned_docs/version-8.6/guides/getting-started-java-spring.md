@@ -72,7 +72,7 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
 
 1. Open Desktop Modeler.
 2. Click **Create a new diagram** in Camunda 8.
-3. In the Properties panel, under the General section:
+3. In the properties panel, under the **General** section:
    - Name your diagram `Process payments`
    - Set the ID to `process-payments`
 4. Add a start event, and name it `Payment request received`.

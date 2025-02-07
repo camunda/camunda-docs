@@ -35,7 +35,7 @@ Additionally, you need the following:
 - Java ≥ 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
-- Download and unzip or clone the [repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/microservice\ orchestration/worker-java`
+- Download and unzip or clone the [repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/microservice-orchestration/worker-java`
 
 ## Step 1: Design your process with BPMN
 
@@ -43,7 +43,7 @@ Start by designing your automated process using BPMN. This guide introduces you 
 
 1. To create a BPMN diagram, click **New project** within Modeler.
 2. Name your project and select **Create new > BPMN diagram**.
-3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel to find the name and id fields. For this guide, we'll use `Microservice Orchestration Tutorial` for the name and `microservice-orchestration-tutorial` for the id.
+3. Give your model a descriptive name and id. On the right side of the page, expand the **General** section of the properties panel on the right side of the screen to find the name and id fields. For this guide, we'll use `Microservice Orchestration Tutorial` for the name and `microservice-orchestration-tutorial` for the id.
 4. Use Web Modeler to design a BPMN process with service tasks. These service tasks are used to call your microservices via workers. Create a service task by dragging the task icon from the palette, or by clicking the existing start event and clicking the task icon. Make sure there is an arrow connecting the start event to the task. Click the wrench icon and select **Service Task** to change the task type.
    ![Task with dropdown showing config, including service task](./img/microservice-orchestration-config-service-task.png)
 5. Add a descriptive name using the **General** section in the properties panel. For this guide, we'll use `Call Microservice`.
@@ -76,7 +76,7 @@ To interact with your Camunda 8 cluster, you'll use the Zeebe client. First, you
 
 Next, we’ll create a worker for the service task by associating it with the type we specified on the service task in the BPMN diagram.
 
-1. Open the downloaded or cloned project ([repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/microservice\ orchestration/worker-java`) in your IDE .
+1. Open the downloaded or cloned project ([repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/microservice-orchestration/worker-java`) in your IDE .
 2. Add your credentials to `application.properties`. Your client id and client secret are available from the previous section in the credential text file you downloaded or copied. Go to the cluster overview page to find your **region Id** and **cluster Id** (in your client credentials under the **API** tab within your cluster).
 3. In the `Worker.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “orchestrate-something”, no action is required.
 4. After making these changes, perform a Maven install, then run the Worker.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.

@@ -94,6 +94,10 @@ We added the `global.compatibility.openshift.adaptSecurityContext` variable in t
 
 With this change, there is no need to do extra steps with the post-renderer. You can install the chart as normal. Please refer to the [Red Hat OpenShift document](/self-managed/setup/deploy/openshift/redhat-openshift.md) for more information.
 
+#### New base path for Operate and Tasklist web applications
+
+We have introduced a new base path for both the Operate and Tasklist web applications. The new base path for Operate is `/operate`, and for Tasklist, it is `/tasklist`. For more information, see the 8.6 [announcements](/reference/announcements.md#new-base-path-for-operate-and-tasklist-web-applications).
+
 </TabItem>
 
 <TabItem value='8.5'>

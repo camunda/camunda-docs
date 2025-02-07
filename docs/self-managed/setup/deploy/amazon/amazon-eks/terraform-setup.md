@@ -30,6 +30,10 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
   - This simplifies the setup by not relying on explicit credentials and instead creating a mapping between IAM roles and Kubernetes service account based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without having to supply explicit credentials.
   - IRSA is recommended as an [EKS best practice](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
+- [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+  - Ensure at least **3 Elastic IPs** (one per availability zone).
+  - Verify quotas for **VPCs, EC2 instances, and storage**.
+  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - This guide uses GNU/Bash for all the shell commands listed.
 
 ### Considerations
@@ -71,7 +75,11 @@ Both can be set up with or without a **Domain** ([ingress](https://docs.aws.amaz
 
 ### Outcome
 
-<!-- TODO : add architecture diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) --->
+<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ --->
+<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder --->
+
+_Infrastructure diagram for a single region EKS setup (click on the image to open the PDF version)_
+[![Infrastructure Diagram EKS Single-Region](./assets/eks-single-region.jpg)](./assets/eks-single-region.pdf)
 
 Following this tutorial and steps will result in:
 

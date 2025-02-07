@@ -1,24 +1,29 @@
 // Why is this swizzled?
 //   To override the `href` of `link rel=canonical`, so that we are properly
 //   canonicalizing our content for search engines.
-// Swizzled from version 2.4.1.
+// Swizzled from version 3.7.0.
 
-import React from "react";
+import React, { type ReactNode } from "react";
+import Metadata from "@theme-original/DocItem/Metadata";
+import type MetadataType from "@theme-original/DocItem/Metadata";
+import type { WrapperProps } from "@docusaurus/types";
+
 import Head from "@docusaurus/Head";
 import { useAllDocsData } from "@docusaurus/plugin-content-docs/client";
-import { useDoc, useDocsVersion } from "@docusaurus/theme-common/internal";
+import { useDoc, useDocsVersion } from "@docusaurus/plugin-content-docs/client";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import Metadata from "@theme-original/DocItem/Metadata";
 import determineCanonical from "./determineCanonical";
 
-export default function MetadataWrapper(props) {
+type Props = WrapperProps<typeof MetadataType>;
+
+export default function MetadataWrapper(props: Props): ReactNode {
   // Gather some context...
   const currentDoc = useDoc();
   const currentVersion = useDocsVersion();
   const allDocsData = useAllDocsData();
   const currentPlugin = allDocsData[currentVersion.pluginId];
   const {
-    siteConfig: { customFields },
+    siteConfig: { customFields = {} },
   } = useDocusaurusContext();
 
   // From the context, identify the proper canonical

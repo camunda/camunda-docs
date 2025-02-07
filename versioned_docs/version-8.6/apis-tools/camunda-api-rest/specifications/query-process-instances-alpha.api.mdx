@@ -5,53 +5,385 @@ description: "Search for process instances based on given criteria."
 sidebar_label: "Query process instances (alpha)"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
-info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+info_path: versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query process instances (alpha)</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query process instances (alpha)"}
+></Heading>
 
 <MethodEndpoint
   method={"post"}
   path={"/process-instances/search"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Search for process instances based on given criteria.
 
 :::note
-This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
 See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
 for further details.
 :::
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","default":"asc"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"running"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"active"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"incidents"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"finished"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"completed"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"canceled"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"retriesLeft"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"errorMessage"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"activityId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"startDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"endDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"bpmnProcessId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The bpmn process ID."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>variable</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"values"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"string"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={false} name={"batchOperationId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"parentProcessInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-The Process Instance Search successful response.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    running: { type: "boolean" },
+                    active: { type: "boolean" },
+                    incidents: { type: "boolean" },
+                    finished: { type: "boolean" },
+                    completed: { type: "boolean" },
+                    canceled: { type: "boolean" },
+                    retriesLeft: { type: "boolean" },
+                    errorMessage: { type: "string" },
+                    activityId: { type: "string" },
+                    startDate: { type: "string", format: "date-time" },
+                    endDate: { type: "string", format: "date-time" },
+                    bpmnProcessId: {
+                      type: "string",
+                      description: "The bpmn process ID.",
+                    },
+                    processDefinitionVersion: {
+                      type: "integer",
+                      format: "int32",
+                    },
+                    variable: {
+                      allOf: [
+                        {
+                          type: "object",
+                          properties: {
+                            name: { type: "string" },
+                            values: {
+                              type: "array",
+                              items: { type: "string" },
+                            },
+                          },
+                          title: "ProcessInstanceVariableFilterRequest",
+                        },
+                      ],
+                    },
+                    batchOperationId: { type: "string" },
+                    parentProcessInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                    },
+                    tenantId: { type: "string" },
+                  },
+                  title: "ProcessInstanceFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "ProcessInstanceSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process name."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"bpmnProcessId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"parentKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"parentFlowNodeInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"startDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"endDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ACTIVE`, `INCIDENT`, `COMPLETED`, `CANCELED`, `UNKNOWN`, `UNSPECIFIED`]"} schema={{"type":"string","enum":["ACTIVE","INCIDENT","COMPLETED","CANCELED","UNKNOWN","UNSPECIFIED"]}}></SchemaItem><SchemaItem collapsible={false} name={"incident"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"hasActiveOperation"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"rootInstanceId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>operations</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"batchOperationId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`RESOLVE_INCIDENT`, `CANCEL_PROCESS_INSTANCE`, `DELETE_PROCESS_INSTANCE`, `ADD_VARIABLE`, `UPDATE_VARIABLE`, `MODIFY_PROCESS_INSTANCE`, `DELETE_DECISION_DEFINITION`, `DELETE_PROCESS_DEFINITION`, `MIGRATE_PROCESS_INSTANCE`]"} schema={{"type":"string","enum":["RESOLVE_INCIDENT","CANCEL_PROCESS_INSTANCE","DELETE_PROCESS_INSTANCE","ADD_VARIABLE","UPDATE_VARIABLE","MODIFY_PROCESS_INSTANCE","DELETE_DECISION_DEFINITION","DELETE_PROCESS_DEFINITION","MIGRATE_PROCESS_INSTANCE"]}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`SCHEDULED`, `LOCKED`, `SENT`, `FAILED`, `COMPLETED`]"} schema={{"type":"string","enum":["SCHEDULED","LOCKED","SENT","FAILED","COMPLETED"]}}></SchemaItem><SchemaItem collapsible={false} name={"errorMessage"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"completedDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>callHierarchy</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"instanceId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"key\": 0,\n      \"processDefinitionName\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"bpmnProcessId\": \"string\",\n      \"parentKey\": 0,\n      \"parentFlowNodeInstanceKey\": 0,\n      \"startDate\": \"2024-10-02T22:01:21.411Z\",\n      \"endDate\": \"2024-10-02T22:01:21.411Z\",\n      \"state\": \"ACTIVE\",\n      \"incident\": true,\n      \"hasActiveOperation\": true,\n      \"processDefinitionKey\": 0,\n      \"tenantId\": \"string\",\n      \"rootInstanceId\": \"string\",\n      \"operations\": [\n        {\n          \"id\": \"string\",\n          \"batchOperationId\": \"string\",\n          \"type\": \"RESOLVE_INCIDENT\",\n          \"state\": \"SCHEDULED\",\n          \"errorMessage\": \"string\",\n          \"completedDate\": \"2024-10-02T22:01:21.411Z\"\n        }\n      ],\n      \"callHierarchy\": [\n        {\n          \"instanceId\": \"string\",\n          \"processDefinitionId\": \"string\",\n          \"processDefinitionName\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The Process Instance Search Query failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The Process Instance Search successful response.\n",
+      content: {
+        "application/json": {
+          schema: {
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            type: "object",
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    key: { type: "integer", format: "int64" },
+                    processDefinitionName: {
+                      type: "string",
+                      description: "The process name.",
+                    },
+                    processDefinitionVersion: {
+                      type: "integer",
+                      format: "int32",
+                    },
+                    bpmnProcessId: { type: "string" },
+                    parentKey: { type: "integer", format: "int64" },
+                    parentFlowNodeInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                    },
+                    startDate: { type: "string", format: "date-time" },
+                    endDate: { type: "string", format: "date-time" },
+                    state: {
+                      type: "string",
+                      enum: [
+                        "ACTIVE",
+                        "INCIDENT",
+                        "COMPLETED",
+                        "CANCELED",
+                        "UNKNOWN",
+                        "UNSPECIFIED",
+                      ],
+                    },
+                    incident: { type: "boolean" },
+                    hasActiveOperation: { type: "boolean" },
+                    processDefinitionKey: { type: "integer", format: "int64" },
+                    tenantId: { type: "string" },
+                    rootInstanceId: { type: "string" },
+                    operations: {
+                      type: "array",
+                      items: {
+                        description: " Operation",
+                        type: "object",
+                        properties: {
+                          id: { type: "string" },
+                          batchOperationId: { type: "string" },
+                          type: {
+                            type: "string",
+                            enum: [
+                              "RESOLVE_INCIDENT",
+                              "CANCEL_PROCESS_INSTANCE",
+                              "DELETE_PROCESS_INSTANCE",
+                              "ADD_VARIABLE",
+                              "UPDATE_VARIABLE",
+                              "MODIFY_PROCESS_INSTANCE",
+                              "DELETE_DECISION_DEFINITION",
+                              "DELETE_PROCESS_DEFINITION",
+                              "MIGRATE_PROCESS_INSTANCE",
+                            ],
+                          },
+                          state: {
+                            type: "string",
+                            enum: [
+                              "SCHEDULED",
+                              "LOCKED",
+                              "SENT",
+                              "FAILED",
+                              "COMPLETED",
+                            ],
+                          },
+                          errorMessage: { type: "string" },
+                          completedDate: {
+                            type: "string",
+                            format: "date-time",
+                          },
+                        },
+                        title: "OperationItem",
+                      },
+                    },
+                    callHierarchy: {
+                      type: "array",
+                      items: {
+                        description: "Process instance reference description",
+                        type: "object",
+                        properties: {
+                          instanceId: { type: "string" },
+                          processDefinitionId: { type: "string" },
+                          processDefinitionName: { type: "string" },
+                        },
+                        title: "ProcessInstanceReferenceItem",
+                      },
+                    },
+                  },
+                  title: "ProcessInstanceItem",
+                },
+              },
+            },
+            title: "ProcessInstanceSearchQueryResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The Process Instance Search Query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

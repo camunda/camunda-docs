@@ -12,7 +12,7 @@ To get editor support for variables created by your [job workers](../concepts/jo
 
 ## Defining example data
 
-To help with editor support, you can also add example data to an element. Add a JSON return value in the `Data` section of the properties panel. The values are used to derive variable names and types in the FEEL editor. Nested objects are also supported.
+To help with editor support, you can also add example data to an element. Add a JSON return value in the `Data` section of the properties panel on the right side of the screen. The values are used to derive variable names and types in the FEEL editor. Nested objects are also supported.
 
 Providing this data is optional, but it's recommended if you want to take full advantage of the FEEL editor's suggestions.
 
