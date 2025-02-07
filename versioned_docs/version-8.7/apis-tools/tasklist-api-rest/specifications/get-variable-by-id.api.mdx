@@ -1,0 +1,122 @@
+---
+id: get-variable-by-id
+title: "Get a variable"
+description: "Get the variable details by variable id."
+sidebar_label: "Get a variable"
+hide_title: true
+hide_table_of_contents: true
+api: eJyVVttu2zgQ/ZUBX9piZcvt5qHQm7tJut522yJ2usAGBkpLI4sNTSrkyKkh6N8XQ0m+xE7XfbIlnjlz0Znh1ILk0ovkTnyVTsmFRi/mkcjQp06VpKwRiXiPBFQgrDsIZEhSaQ+Lze6dyoYiErZEJ9lskolELJF62nebSSYiUUonV0jo2GctjFyhSERPEiCKXZaSCvE0jlmBMLkEmx9Ew24dPlTKYSYSchVGwqcFrqRIakGbkj14csosRdPMGexLazx6Pn8zGvHPoaPPBnyVpug9OKTKGQzJpdYQGmK8LEut0pBp/N2zUX3s1C6+Y0qcteO6kGpdquw4sPNSFU3Ulewce0aeYlhLXZ1JkVdaQ8CfIsqczOn/833GX9Oc8hg4n3EZCVKkmeKSUb20vgb+JhKERhqanFneFs1Vlt7bVEnCDB4VFU/ybHZue483nYJE0/DxxejiWENjA+icdaB2IoLHAs1hK20dfts1wTe2MZYgt5X5mfJKZxcaV7/9qgI9Sar8Hk4ZwiW6ozqNDXRHQIUkcFg69GjIh5j/nM2+QEsGqc22X6xNvO+zIVxbB/hDrkqNEVyMRqBMxjmgBwkv3skMbvChQk8vWlMGXRyCPlmCay7HFiJNBt6CNVyg3LqVpDaT39+wGFbovVyeofMxtAdthqWza5UFnwunMIc98GF6AW7TtHKOx0PDk8uTNOkZPq9aZXR4uL2dXEJuHWhr76sSXuJwOYxAGdB2CV0m/tXwQIyBIygwZEuF7UZuGLNUiETE69dxLysf1zuFNSISHt26n8OV0yIRdaufJonjurCemqQurSMGb1k4Nz5rBZ/LSnPVtU2lDq9PdRof7A+j8ZcJtN5D2djHId3b0dvRSSaGPsOy0/6OpyAqT/K04JNM4YrwmFZO0SYUJ7X2XqFI7uaRWKB06Ab3yEfzfeiUKdv69AZbFchSfcDNUSR/BNxgIT1mICsq0FDX2jwBrNEbkGupdJgU1sAUdT74Wxq5xAxSXXm+SFn+3T06G08/fJxMZ4Pp1XQ6+fypv027gJrD+LfhdWUKReHnFiR69HXfW3/9MwsKVCa3wbxT4kz6e608wc3VdMbVPK55j1DcWA5lthmQHVS+Lf7eTAOy4GSpMr0BxQNjhYZgUXll+DouneVrmftTW7P0KkOoPI8n6e89d8y/iAvsZ6ZMg7JaeXOaPonjx8fHYSpXlcnkMLUrLotWKfI8T7YrycfuTfTEOLOp31orG55jhzk6NCnGHZGPw0WLzrf5r1+3Qve0kmbPC29Wcv+COyhbvZv7v7KDdV+V8AfFpZbKsO+QRd0NhjsOaL+pI5Hs7WDzqGvxO1HXrM5bp5uGXz9U6DZtJ2yD5hbJlOf/mUhyqT3+JI+XN92q9gqeX+dOZtD3ktmI7Q4jRCSClvdXyGbeRKJAmaELwbWAcZpiSXumRyscd/N2jr6/Yq3/B/Aq1EE=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get a variable"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/variables/{variableId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get the variable details by variable id.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "variableId",
+      in: "path",
+      description: "The ID of the variable.",
+      required: true,
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "On success returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              id: { type: "string", description: "The ID of the variable" },
+              name: { type: "string", description: "The name of the variable" },
+              value: {
+                type: "string",
+                description: "The full value of the variable",
+              },
+              draft: {
+                type: "object",
+                properties: { value: { type: "string" } },
+                description: "The draft value of the variable",
+                title: "DraftVariableValue",
+              },
+              tenantId: {
+                type: "string",
+                description: "The tenant ID associated with the variable",
+              },
+            },
+            title: "VariableResponse",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "An error is returned when the variable with the `variableId` is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
