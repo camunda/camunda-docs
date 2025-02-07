@@ -50,6 +50,7 @@ module.exports = {
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
         editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+        lastVersion: "3.14.0",
         versions: {
           "3.15.0": {
             label: "8.7 / 3.15.0 (unreleased)",
@@ -524,6 +525,7 @@ module.exports = {
           // Please change this to your repo.
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
+          lastVersion: "8.6",
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
             8.7: {
