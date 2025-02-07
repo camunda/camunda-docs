@@ -103,6 +103,7 @@ RewriteRule ^docs/next/reference/release-notes/860/?$ /docs/next/reference/annou
 RewriteRule ^docs/next/reference/release-notes/870/?$ /docs/next/reference/announcements-release-notes/870/870-release-notes/$1 [R=301,L]
 RewriteRule ^docs/next/reference/release-policy/?$ /docs/next/reference/announcements-release-notes/release-policy/$1 [R=301,L]
 RewriteRule ^docs/next/reference/release-notes/release-notes/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/next/reference/announcements/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
