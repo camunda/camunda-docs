@@ -60,20 +60,24 @@ We do not have to worry about installing each component separately since that wi
 
 #### Installing the Helm Chart
 
-The Camunda Helm chart can be installed using the following command:
+Since there will be a Helm deployment in each namespace, you can create your own `management-values.yaml` and `orchestration-values.yaml` or enhance your existing setup by applying various production recommendations in the next section.
+
+The Camunda Helm chart can be installed in each namespace using the following command:
 
 ```bash
 # This will add our chart repository so you can pull from it
 helm repo add camunda https://helm.camunda.io
 # This will update the chart repository. Please make sure to run this command before every install or upgrade
 helm repo update
-# This will install the latest Camunda Helm chart with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform \
-    --values production-values.yaml
+# This will install the latest Camunda Helm chart in the management namespace with the latest applications/dependencies.
+helm install camunda camunda/camunda-platform -n management \
+    --values management-values.yaml
+# This will install the latest Camunda Helm chart in the Orchestration namespace with the latest applications/dependencies.
+helm install camunda camunda/camunda-platform -n orchestration \
+    --values orchestration-values.yaml
 ```
 
-Create your own `production-values.yaml` or enhance your existing setup by applying various production recommendations in the next section.
-The next section will explain various configurations used in `production-values.yaml`.
+The next section will explain various configurations used in both values files.
 
 ### Ingress TLS Setup
 
@@ -114,7 +118,7 @@ For more information on the Ingress setup, please refer to our [Ingress setup gu
 
 ### Identity Provider Integration
 
-Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory and is compatible with our Microsoft Entra ID guide. Here is an example configuration to add to your `production-values.yaml` file:
+Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory and is compatible with our Microsoft Entra ID guide. Here is an example configuration to add to your values files:
 
 ```yaml
 global:
@@ -232,13 +236,13 @@ If you would like further information on connecting to external databases, we ha
 
 At this point you would be able connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment.
 
-We will continue our journey in adding to the `production-values.yaml`. Here is what you should consider for Camunda component level configurations:
+We will continue our journey in adding to the `management-values.yaml` and `orchestration-values.yaml`. Here is what you should consider for Camunda component level configurations:
 
 ### Elasticsearch/OpenSearch Index Retention
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
-Here is how the ILM policy can be configured for the core component. This can be added to your `production-values.yaml`:
+Here is how the ILM policy can be configured for the core component. This can be added to your `orchestration-values.yaml`:
 
 ```yaml
 core:
@@ -328,7 +332,7 @@ This configuration ensures that Core Pods with the deafult label `app.kubernetes
   ```
 
 - Version Management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/docs/reference/release-notes/) for security patches or critical updates.
-- Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets when installing the Helm chart. In this scenario we are going to auto-generate the secrets. The following can be added to your `production-values.yaml`:
+- Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets when installing the Helm chart. In this scenario we are going to auto-generate the secrets. The following can be added to both Helm values files:
 
   ```yaml
   global:
@@ -370,7 +374,7 @@ Please refer to the [Kuberentes documentation](https://kubernetes.io/docs/concep
 
 Here are some points to keep in mind when considering security:
 
-- To limit unnecessary permissions, and reduce risk of token exploitations, it is recommended to disable auto-mounting of the default Service Account. It is possible to do so by adding the following to your `production-values.yaml`:
+- To limit unnecessary permissions, and reduce risk of token exploitations, it is recommended to disable auto-mounting of the default Service Account. It is possible to do so by adding the following to both of your values files:
 
   ```yaml
   identity:
@@ -398,7 +402,7 @@ You should only enable the auto-mounting of a service account token when the app
 - If you have a use case for enabling [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) then it is recommended to do so.
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
 - It is possible to have a pod security standard that is suitable to the security constraints you might have. This is possible through modifying the Pod Security Admission. Please refer to the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation in order to do so.
-- By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your `production-values.yaml`.
+- By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information please visit the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
 - It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is the default configuration for the core component:
 
@@ -419,7 +423,7 @@ You should only enable the auto-mounting of a service account token when the app
       type: RuntimeDefault
   ```
 
-If you would like to add any other security constraints to your `production-values.yaml` then please refer to the official [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
+If you would like to add any other security constraints to your Helm values files then please refer to the official [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)
 
 - It is recommended to pull images exclusively from a private registry, such as [Amazon ECR](https://aws.amazon.com/ecr/), rather than directly from Docker Hub. Doing so enhances control over the images, avoids rate limits, and improves performance and reliability. Additionally, you can configure your cluster to pull images only from trusted registries. Tools like [Open Policy Agent](https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e) can be used to enforce this restriction.
 - Open Policy Agent can also be used to [whitelist Ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
@@ -428,7 +432,7 @@ If you would like to add any other security constraints to your `production-valu
 
 Here are some points to keep in mind when considering observability:
 
-- It is possible to enable integration with Prometheus, a popular monitoring solution, in the Camunda Helm chart. This can be configured by adding the following configuration below to your `production-values.yaml`:
+- It is possible to enable integration with Prometheus, a popular monitoring solution, in the Camunda Helm chart. This can be configured by adding the following configuration below to your preferred Helm values file:
 
   ```yaml
   prometheusServiceMonitor:
@@ -441,11 +445,9 @@ Here are some points to keep in mind when considering observability:
 
 Here is a complete example, taking all the above sections into consideration.
 
-`management.yaml` for the `management` namespace:
+`management-values.yaml` for the `management` namespace:
 
 ```yaml
-##INCOMPLETE
-# make sure to configure the production-values.yaml in a multinamespace setting and configure console likewise
 global:
   secrets:
     autoGenerated: true
@@ -534,7 +536,7 @@ elasticsearch:
 # console configuration to connect both deployments
 ```
 
-`orchestration.yaml` for the `orchestration` namespace:
+`orchestration-values.yaml` for the `orchestration` namespace:
 
 ```yaml
 global:
