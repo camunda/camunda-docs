@@ -16,6 +16,17 @@ For example, you can use IDP to extract data from invoices and other document ty
 
 <img src={IdpOverviewImg} alt="An overview of intelligent document processing" />
 
+## Configure IDP
+
+To configure IDP in Camunda 8 you will need to:
+
+- Add your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to the cluster you want to use with IDP. Camunda secrets allow you to store credentials and avoid exposing sensitive information.
+- Self-Managed users must also deploy the [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) and [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md) connectors used by IDP to extract document content and converse with LLM models.
+
+:::note
+To learn more about the IDP technical architecture, see [IDP reference](idp/idp-reference.md).
+:::
+
 ## Get started with IDP
 
 To start using IDP in your processes:
@@ -33,10 +44,6 @@ To start using IDP in your processes:
 :::tip
 
 - New to IDP? See [key IDP concepts](idp/idp-key-concepts.md) to learn about key IDP concepts and terms.
-- See [Get started with IDP] for a worked example of how to integrate IDP into your processes.
+- See [Integrate IDP into your processes](idp/idp-integrate.md) for a worked example of how to integrate IDP into your processes.
 
 :::
-
-## IDP for Self-Managed
-
-What do Self-Managed users need to know and do?

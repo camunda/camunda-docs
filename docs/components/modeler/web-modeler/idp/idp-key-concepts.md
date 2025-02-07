@@ -5,6 +5,7 @@ description: "You can import a BPMN or DMN diagram at any time with Web Modeler.
 ---
 
 import IdpStructuredDocumentImg from './img/idp-structured-document.png';
+import IdpStructuredDocument1Img from './img/idp-unstructured-document.png';
 
 When using IDP it is helpful to understand the following key concepts and terms.
 
@@ -17,7 +18,7 @@ Your choice of [extraction method](idp-document-extraction.md#create-extraction-
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '30px'}}>
 
-<img src={IdpStructuredDocumentImg} alt="Example structured document" width="600px" style={{marginTop: '10px'}}/>
+<img src={IdpStructuredDocumentImg} alt="Example structured document" width="600px" style={{border: 'none', padding: '0', marginTop: '0'}}/>
 
 </div>
 <div class="double-column-right">
@@ -33,6 +34,8 @@ Example structured documents include:
 - Forms
 - Identity documents
 
+Use the [structured data extraction](idp-structured-extraction.md) method to extract data from this type of document.
+
 </div>
 </div>
 
@@ -41,7 +44,7 @@ Example structured documents include:
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '30px'}}>
 
-<img src={IdpStructuredDocumentImg} alt="Example unstructured document" width="600px" style={{marginTop: '10px'}}/>
+<img src={IdpStructuredDocument1Img} alt="Example unstructured document" width="600px" style={{border: 'none', padding: '0', marginTop: '0'}}/>
 
 </div>
 <div class="double-column-right">
@@ -55,6 +58,8 @@ Example unstructured documents include:
 - Emails
 - Reports
 - Memos
+
+Use the [unstructured data extraction](idp-unstructured-extraction.md) method to extract data from this type of document.
 
 </div>
 </div>
