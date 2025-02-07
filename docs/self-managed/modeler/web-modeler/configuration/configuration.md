@@ -27,7 +27,7 @@ The Camunda 8 [Helm](/self-managed/setup/install.md) and [Docker Compose](/self-
 To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 
 | Environment variable                        | Description                                                                                            | Example value                        |
-|---------------------------------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------|
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------ |
 | `CAMUNDA_MODELER_CLUSTERS_0_ID`             | A unique identifier to use for your cluster.                                                           | `test-cluster-1`                     |
 | `CAMUNDA_MODELER_CLUSTERS_0_NAME`           | The name of your cluster.                                                                              | `Test Cluster 1`                     |
 | `CAMUNDA_MODELER_CLUSTERS_0_VERSION`        | The Camunda version used by this cluster.                                                              | `8.6.0`                              |
