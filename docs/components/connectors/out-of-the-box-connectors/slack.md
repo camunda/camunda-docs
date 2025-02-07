@@ -1,6 +1,7 @@
 ---
 id: slack
 title: Slack Connector
+sidebar_label: Slack
 description: Send messages to channels or users in your Slack workspace from your BPMN process.
 ---
 
@@ -29,7 +30,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your Slack Connector executable
 
-To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel.
+To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
 
 ### Authentication
 
@@ -295,7 +296,7 @@ URLs of the exposed **Slack inbound Connector** adhere to the following pattern:
 
 `https://<base URL>/inbound/<webhook ID>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
 - `<webhook ID>` is the ID (path) you configured in the properties of your **Slack inbound Connector**.
 
 If you make changes to your **Slack Inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.

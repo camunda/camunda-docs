@@ -1,6 +1,6 @@
 ---
 id: amazon-dynamodb
-sidebar_label: AWS DynamoDB Connector
+sidebar_label: AWS DynamoDB
 title: Amazon DynamoDB Connector
 description: Use the Amazon DynamoDB Connector to connect your BPMN service with Amazon Web Service's DynamoDB Service, and work with tables and items using this service.
 ---
@@ -24,7 +24,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 ## Make your Amazon DynamoDB Connector executable
 
 To work with **Amazon DynamoDB Connector**, choose the required operation type in the **Operation** section and complete the
-mandatory fields highlighted in red in the Connector properties panel.
+mandatory fields highlighted in red in the Connector properties panel on the right side of the screen.
 
 :::note
 All the mandatory and non-mandatory fields depending on the authentication selection you choose are covered in the upcoming sections.

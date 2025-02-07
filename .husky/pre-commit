@@ -1,4 +1,6 @@
 #!/bin/sh
+# Before adding version-manager code here, read https://typicode.github.io/husky/how-to.html#solution.
+
 . "$(dirname "$0")/_/husky.sh"
 
 npx lint-staged

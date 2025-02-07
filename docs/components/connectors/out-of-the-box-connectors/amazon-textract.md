@@ -1,7 +1,7 @@
 ---
 id: amazon-textract
 title: Amazon Textract Connector
-sidebar_label: AWS Textract Connector
+sidebar_label: AWS Textract
 description: Extract printed text, handwriting, layout elements, and data from any document.
 ---
 
@@ -118,6 +118,10 @@ The response from the **Amazon Textract Connector** mirrors the AWS Textract ser
 - **[Real-time Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_AnalyzeDocument.html#API_AnalyzeDocument_ResponseSyntax)**: Provides immediate analysis for single-page documents.
 - **[Polling Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_GetDocumentAnalysis.html#API_GetDocumentAnalysis_ResponseSyntax)**: Returns chunks of data in a paginated format for multi-page or complex documents.
 - **[Asynchronous Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_StartDocumentAnalysis.html#API_StartDocumentAnalysis_ResponseSyntax)**: Used for batch processing where results are returned later through job completion.
+
+:::note
+Starting from version 8.7.0, the Amazon Textract Connector can read the input document directly from the Camunda document store. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
 
 ### Use the Textract Connector response in your process
 

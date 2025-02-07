@@ -54,8 +54,8 @@ These events include the following properties:
 
 - `diagramType`: BPMN, DMN, or Form
 - Engine profile:
-  - `executionPlatform`: <target platform\>
-  - `executionPlatformVersion`: <target platform version\>
+  - `executionPlatform`: &lt;target platform\>
+  - `executionPlatformVersion`: &lt;target platform version\>
 
 In the case of a form, the payload also includes the `formFieldTypes`:
 
@@ -78,8 +78,8 @@ The `Deployment Event` and `Start Instance` have the following properties:
 
 - `diagramType`: BPMN, DMN, or Form
 - Engine profile:
-  - `executionPlatform`: <target platform\>
-  - `executionPlatformVersion`: <target platform version\>
+  - `executionPlatform`: &lt;target platform\>
+  - `executionPlatformVersion`: &lt;target platform version\>
 
 In the event of an unsuccessful deployment, an `error` property will be present in the payload containing an error code.
 
@@ -173,7 +173,7 @@ In all events [the execution platform and version](#diagram-openedclosed-event) 
 BPMN editor events are sent on different interactions with the BPMN editor:
 
 - User created, appended, or replaced an element on the canvas. These events include the `oldElement`/`sourceElement` (when applicable) and the new element(s).
-- User selected, updated, unlinked, or removed an element template from an element via the properties panel. These events include the current diagram `selection` and respective element templates.
+- User selected, updated, unlinked, or removed an element template from an element via the properties panel on the right side of the screen. These events include the current diagram `selection` and respective element templates.
 - User interacted with the pop-up menu, context menu, or the palette. These events include the target (`entryId`, `entryGroup`, `entryTitle`) and `triggerType` (`"click"`, `"drag"`, or `"keyboard"`) of the interaction, as well as the current diagram `selection`.
 
 Example event:

@@ -1,7 +1,7 @@
 ---
 id: github
 title: GitHub Connector
-sidebar_label: GitHub Connector
+sidebar_label: GitHub
 description: Manage GitHub issues and releases from your BPMN process.
 ---
 
@@ -287,7 +287,7 @@ The **GitHub Webhook Connector** is an inbound Connector that allows you to star
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
-6. Navigate to the **Webhooks** tab in the properties panel to observe the webhook URL.
+6. Navigate to the **Webhooks** tab in the properties panel on the right side of the screen to observe the webhook URL.
 
 ## Make your GitHub Webhook Connector for receiving messages executable
 
@@ -351,7 +351,7 @@ URLs of the exposed GitHub Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/inbound/<webhook ID>>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
 - `<webhook ID>` is the ID (path) you configured in the properties of your GitHub Webhook Connector.
 
 If you make changes to your GitHub Webhook Connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.

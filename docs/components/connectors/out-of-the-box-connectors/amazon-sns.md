@@ -1,7 +1,7 @@
 ---
 id: amazon-sns
 title: Amazon Simple Notification Service Connector
-sidebar_label: AWS SNS Connector
+sidebar_label: AWS SNS
 description: Publish messages to Amazon Simple Notification Service (SNS) from your BPMN process.
 ---
 
@@ -107,7 +107,7 @@ a BPMN process triggered by an [Amazon SNS](https://console.aws.amazon.com/sns/h
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
-6. Navigate to the **Webhooks** tab in the properties panel to observe the webhook URL.
+6. Navigate to the **Webhooks** tab in the properties panel on the right side of the screen to observe the webhook URL.
 
 ## Make your Amazon SNS inbound Connector for receiving notifications executable
 
@@ -165,7 +165,7 @@ URLs of the exposed **Amazon SNS Inbound Connector** adhere to the following pat
 
 `https://<base URL>/inbound/<subscription ID>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
 - `<subscription ID>` is the ID (path) you configured in the properties of your **Amazon SNS inbound Connector**.
 
 If you make changes to your **Amazon SNS inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.

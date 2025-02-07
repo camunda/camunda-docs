@@ -4,14 +4,14 @@ title: Getting started
 description: "Leverage Zeebe APIs (gRPC and REST) in your Spring Boot project."
 ---
 
-This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Zeebe SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
+This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Zeebe SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
 
-| Camunda Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
-| -------------------------- | ---- | --------------- | --------------------------- |
-| 8.5.x                      | ≥ 17 | 8.5.x           | 3.2.x                       |
-| 8.6.x                      | ≥ 17 | 8.6.x           | 3.2.x                       |
+| Zeebe Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| ------------------------ | ---- | --------------- | --------------------------- |
+| 8.5.x                    | ≥ 17 | 8.5.x           | 3.2.x                       |
+| 8.6.x                    | ≥ 17 | 8.6.x           | 3.3.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 
@@ -83,7 +83,7 @@ camunda:
       client-id: <your client id>
       client-secret: <your client secret>
     cluster-id: <your cluster id>
-    region: <your cluster region>
+    region: <your cluster region id>
 ```
 
 ### Self-Managed
@@ -162,3 +162,7 @@ public void handleJobFoo(final ActivatedJob job) {
 ```
 
 See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options for job workers.
+
+## Writing test cases
+
+To learn more about writing test cases using Zeebe Process Test, see [Zeebe Spring SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).

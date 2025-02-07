@@ -50,9 +50,16 @@ Currently, only `BasicAuthentication` is supported on the Destination by the SAP
 
 A descriptor file is required to deploy the SAP OData Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment. Take the following steps:
 
-1. Adjust the values to match those of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
-2. Adjust the names of the SAP BTP Destination and Connectivity instances to your liking - both will be created automatically for you upon deployment. If instances in your subaccount of any of the two services exist, they will be reused.
-3. After creating the `mtad.yaml` file, log into the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
+1. Find the matching [Docker image](https://hub.docker.com/r/camunda/sap-odata-connector/tags) for the targeted Camunda 8 SaaS version.  
+    The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
+   Examples:
+
+   - `8.6.0` is the OData Connector in version `0` for C8 SaaS version `8.6`
+   - `8.5.1` is the OData Connector in version `1` for C8 SaaS version `8.5`
+
+2. Adjust the values for the credentials (client ID, client secret, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
+3. Adjust the names of the SAP BTP Destination and Connectivity instances to your liking - both will be created automatically for you upon deployment. If instances of the same name in your subaccount of any of the two services exist, they will be reused.
+4. After creating the `mtad.yaml` file, log into the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
 
 ```shell
 $> cf login
@@ -60,11 +67,11 @@ API endpoint: https://api.cf. ...
 ...
 ```
 
-4. Deploy the SAP OData Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on:
+5. Deploy the SAP OData Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on:
 
 ```shell
 $> cf deploy ./ # append the -f flag to shortcircuit ongoing deployments
-Deploying multi-target app archive /Some/path/sap-odata-connector.mtar in org <your-org> / space <your-space> as you@example.org ..
+Deploying multi-target app archive /some/path/sap-odata-connector in org <your-org> / space <your-space> as you@example.org ..
 ...
 Application "sap-odata-connector" started and available at "some.url.hana.ondemand.com"
 ```
@@ -168,4 +175,4 @@ If the SAP OData Connector encounters an error, the boundary event will catch th
 
 - Ensure the connection from the Cloud Foundry environment via the destination to the SAP systems works. Using the [Terminal in Business Application Studio](https://community.sap.com/t5/technology-blogs-by-sap/how-to-check-the-connectivity-to-your-backend-system-in-business/ba-p/13479832) is a quick way to verify this.
 - Validate requests first in an API client before trying with the SAP OData Connector in Modeler. Then, copy over to the element template fields. This saves time and reduces potential error.
-- Any payload size <= 2.5MB can be considered safe.
+- Any payload size &lt;= 2.5MB can be considered safe.
