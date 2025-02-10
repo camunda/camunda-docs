@@ -196,6 +196,14 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.7: {
+                specPath:
+                  "api/administration-sm/version-8.7/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.6: {
                 specPath:
                   "api/administration-sm/version-8.6/administration-sm-openapi.yaml",
