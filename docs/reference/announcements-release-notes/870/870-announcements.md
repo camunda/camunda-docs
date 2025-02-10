@@ -18,12 +18,18 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
-- [Web Modeler](#web-modeler)
+- [Major product and feature releases](#major-product-and-feature-releases)
   - [Deploy diagram change Self-Managed {#web-modeler-deploy-diagram-change}](#deploy-diagram-change-self-managed-web-modeler-deploy-diagram-change)
   - [Milestones renamed to versions {#web-modeler-milestones-renamed-to-versions}](#milestones-renamed-to-versions-web-modeler-milestones-renamed-to-versions)
-- [Southeast Asia region for SaaS customers SaaS](#southeast-asia-region-for-saas-customers-saas)
+  - [Southeast Asia region for SaaS customers SaaS](#southeast-asia-region-for-saas-customers-saas)
 
-## Web Modeler
+:::note
+
+There are currently no known versioning changes or deprecations associated with the 8.7 release.
+
+:::
+
+## Major product and feature releases
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
@@ -46,6 +52,6 @@ Further details can be found in [Web Modeler's OpenAPI documentation](https://mo
 This is a nominal update and the functionality of versions and milestones is equivalent.
 :::
 
-## Southeast Asia region for SaaS customers <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+### Southeast Asia region for SaaS customers <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
 SaaS customers can now create orchestration clusters in the [Singapore (asia-southeast1) region](/reference/regions.md), ensuring lower latency and improved processing speed for organizations operating in southeast Asian countries.
