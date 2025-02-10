@@ -2,7 +2,7 @@
 id: bpmn-copilot
 title: BPMN Copilot
 sidebar_label: Get started
-description: "Using AI, select users can now chat with the BPMN Copilot for assistance generating new and functional BPMN process diagrams in Web Modeler based on a process description."
+description: "Using AI, users can now chat with the BPMN Copilot for assistance generating new and functional BPMN process diagrams in Web Modeler based on a process description."
 ---
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
