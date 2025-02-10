@@ -1,6 +1,6 @@
 ---
-id: announcements-870
-title: "8.7 Announcements"
+id: 870-announcements
+title: "Announcements"
 description: "Important changes and updates for the Camunda 8.7 release including deprecation & removal notices."
 ---
 
@@ -27,13 +27,13 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
-With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/docs/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
+With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
 
 <img src={DeployDiagramImg} alt="New 8.7 deploy diagram modal" width="600px" style={{border: '0', paddingTop: '0', marginTop: '0'}} />
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
-- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/docs/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
-- Note that you must also be assigned the `Zeebe` [Identity role](/docs/self-managed/identity/user-guide/roles/add-assign-role.md) to be able to deploy.
+- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
+- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/user-guide/roles/add-assign-role.md) to be able to deploy.
 
 ### Milestones renamed to versions {#web-modeler-milestones-renamed-to-versions}
 
