@@ -56,10 +56,12 @@ or the environment variable `CAMUNDA_REST_QUERY_ENABLED` to `true`.
 
 ## API Key Attributes
 
-OpenAPI key attributes are defined as `integer (int64)`.
+OpenAPI key attributes have a `key` suffix, and they serve as the technical unique identifier for entities, such as
+`processDefinitionKey` and `tenantKey`, with `correlationKey` being the only exception. Those attributes are of type
+`integer (int64)`.
 
 :::warning Key Attribute Change
-With the next minor release, the default key attribute type will changes to `string`.
+With the next minor release, the default key attribute type will change to `string`.
 
 To support a gradual change and provide users with enough time, we already introduced new content types in our API
 specification. With these content types, users can specifically tell our API to accept and return `integer (int64)` or

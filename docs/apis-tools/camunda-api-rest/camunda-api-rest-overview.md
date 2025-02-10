@@ -49,7 +49,9 @@ For example, if you increase the `maxMessageSize` to 10MB, increase these proper
 
 ## API Key Attributes
 
-OpenAPI key attributes are defined as `string`. In previous versions key attributes were defined as `integer (int64)`.
+OpenAPI key attributes have a `key` suffix, and they serve as the technical unique identifier for entities, such as
+`processDefinitionKey` and `tenantKey`, with `correlationKey` being the only exception. Those attributes are of type
+`string`. In previous versions, key attributes were defined as `integer (int64)`.
 
 To support a gradual change and provide users with enough time, we have introduced new content types in our API
 specification. With these content types, users can specifically tell our API to accept and return `integer (int64)` or
