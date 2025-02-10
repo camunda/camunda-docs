@@ -4,7 +4,7 @@ title: "Interceptors"
 sidebar_label: "Interceptors"
 ---
 
-:::warning
+:::danger
 
 Interceptors are only applied to the gRPC API of the gateway, and do not affect any REST calls.
 

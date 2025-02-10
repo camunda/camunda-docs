@@ -102,7 +102,7 @@ Example of a returned JSON array:
 
 Retrieve the contents of an email, using the unique `messageId` associated with the email message.
 
-:::warning
+:::danger
 Reading an email using POP3 protocol will delete the email
 :::
 

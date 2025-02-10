@@ -42,7 +42,7 @@ WebIDESystem: <SAP system ID>
 WebIDEUsage: odata_gen
 ```
 
-:::warning
+:::danger
 Currently, only `BasicAuthentication` is supported on the Destination by the SAP OData Connector.
 :::
 

@@ -14,7 +14,7 @@ This guide is built around the available tools and services that AWS offers, but
 When using this guide with a different cloud provider, note that you will be responsible for configuring and maintaining the resulting infrastructure. Our support is limited to questions related to the guide itself, not to the specific tools and services of the chosen cloud provider.
 :::
 
-:::warning Cost management
+:::danger Cost management
 Following this guide will incur costs on your Cloud provider account, namely for the EC2 instances, and OpenSearch. More information can be found on AWS and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 
 To get an estimate, you can refer to this [example calculation](https://calculator.aws/#/estimate?id=8ce855e2d02d182c4910ec8b4ea2dbf42ea5fd1d), which can be further optimized to suit your specific use cases.

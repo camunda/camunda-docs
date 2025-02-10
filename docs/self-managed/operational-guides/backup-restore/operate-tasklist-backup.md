@@ -8,7 +8,7 @@ keywords: ["backup", "backups"]
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::warning breaking changes!
+:::danger breaking changes!
 As of the Camunda 8.6 release, the `/actuator` endpoints (including `/backups`) now default to port 9600. Ensure your `management.server.port` configuration parameter is correctly set before continuing.
 :::
 

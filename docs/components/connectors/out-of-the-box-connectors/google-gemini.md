@@ -185,7 +185,7 @@ Google supports multiple ways to obtain both types of token. Refer to the [offic
 
 #### Example 1: Obtain JWT bearer token with a service account
 
-:::warning
+:::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
 For production usage, follow the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/service-account).
 :::
@@ -209,7 +209,7 @@ print(credentials.token)
 
 #### Example 2: Obtain bearer and refresh token with OAuth client
 
-:::warning
+:::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
 For production usage, follow the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/web-server).
 :::
