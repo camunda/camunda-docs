@@ -199,6 +199,40 @@ Package this class and all its dependencies as a JAR, for example `my-secret-pro
 provider implementation. Add this JAR to the runtime environment, depending on your deployment setup.
 Your secret provider will serve secrets as implemented.
 
+To use this JAR with [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform), build an [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) to create a volume with your secret provider, and mount it into the Connectors pod.
+
+For example, use the following file as input for your `helm install` command:
+
+```bash
+connectors:
+  extraVolumes:
+    - name: workdir
+      emptyDir: {}
+  extraVolumeMounts:
+    # Mount the secret provider
+    # The Connectors pod will pick up the secret provider from /opt/app during startup
+    - name: workdir
+      mountPath: /opt/app/file-secret-provider-2.1.2.jar
+      subPath: file-secret-provider-2.1.2.jar
+  initContainers:
+    - name: install
+      image: busybox:1.36.1
+      command: ["sh", "-c"]
+      args:
+        # Download a the custom secret provider into the volume
+        - |
+          wget -O /work-dir/file-secret-provider-2.1.2.jar https://artifacts.camunda.com/artifactory/camunda-consulting/com/camunda/consulting/connector/file-secret-provider/2.1.2/file-secret-provider-2.1.2.jar
+      volumeMounts:
+        - name: workdir
+          mountPath: "/work-dir"
+      securityContext:
+        runAsUser: 1000
+        # redundant as 1000 is not root but good to have
+        # as the runtime will do verification that no process will
+        # run as root within the container
+        runAsNonRoot: true
+```
+
 For Docker images, you can add the JAR by using volumes, for example:
 
 ```bash
