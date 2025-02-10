@@ -21,11 +21,11 @@ void shouldTriggerTimerEvent() {
     // given: a process instance waiting at a BPMN timer event
 
     // when
-    assertThat(processInstance).hasActiveElements("Wait 2 days");
+    assertThat(processInstance).hasActiveElements("wait_2_days");
 
     processTestContext.increaseTime(Duration.ofDays(2));
 
     // then
-    assertThat(processInstance).hasCompletedElements("Wait 2 days");
+    assertThat(processInstance).hasCompletedElements("wait_2_days");
 }
 ```

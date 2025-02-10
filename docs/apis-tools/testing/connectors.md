@@ -56,7 +56,7 @@ public class MyProcessTest {
 
     @RegisterExtension
     private final CamundaProcessTestExtension extension =
-            new CamundaProcessTestExtension().withConnectorsEnabled(true);
+        new CamundaProcessTestExtension().withConnectorsEnabled(true);
 }
 ```
 
@@ -94,11 +94,11 @@ Or, set the property directly on your test class:
 
 ```java
 @SpringBootTest(
-        properties = {
-                "io.camunda.process.test.connectors-enabled=true",
-                "io.camunda.process.test.connectors-secrets.GITHUB_TOKEN=ghp_secret",
-                "io.camunda.process.test.connectors-secrets.SLACK_TOKEN=xoxb-secret"
-        }
+    properties = {
+        "io.camunda.process.test.connectors-enabled=true",
+        "io.camunda.process.test.connectors-secrets.GITHUB_TOKEN=ghp_secret",
+        "io.camunda.process.test.connectors-secrets.SLACK_TOKEN=xoxb-secret"
+    }
 )
 @CamundaSpringProcessTest
 public class MyProcessTest {
@@ -118,10 +118,10 @@ public class MyProcessTest {
 
     @RegisterExtension
     private final CamundaProcessTestExtension extension =
-            new CamundaProcessTestExtension()
-                    .withConnectorsEnabled(true)
-                    .withConnectorsSecret("GITHUB_TOKEN", "ghp_secret")
-                    .withConnectorsSecret("SLACK_TOKEN", "xoxb-secret");
+        new CamundaProcessTestExtension()
+            .withConnectorsEnabled(true)
+            .withConnectorsSecret("GITHUB_TOKEN", "ghp_secret")
+            .withConnectorsSecret("SLACK_TOKEN", "xoxb-secret");
 }
 ```
 
@@ -147,7 +147,7 @@ You can retrieve the URL address to invoke an inbound Connector in your test fro
 @CamundaSpringProcessTest
 public class MyProcessTest {
 
-    @Autowired private ZeebeClient client;
+    @Autowired private CamundaClient client;
     @Autowired private CamundaProcessTestContext processTestContext;
 
     @Test
@@ -156,7 +156,7 @@ public class MyProcessTest {
 
         // when
         final String inboundConnectorAddress =
-                processTestContext.getConnectorsAddress() + "/inbound/" + CONNECTOR_ID;
+            processTestContext.getConnectorsAddress() + "/inbound/" + CONNECTOR_ID;
         // invoke the connector address, for example, via HTTP request
 
         // then: verify that the Connector event is completed
@@ -173,7 +173,7 @@ public class MyProcessTest {
 public class MyProcessTest {
 
     // to be injected
-    private ZeebeClient client;
+    private CamundaClient client;
     private CamundaProcessTestContext processTestContext;
 
     @Test
@@ -181,8 +181,8 @@ public class MyProcessTest {
         // given: a process instance waiting at a Connector event
 
         // when
-        final String connectorInboundAddress =
-                processTestContext.getConnectorsAddress() + "/inbound/" + CONNECTOR_ID;
+        final String inboundConnectorAddress =
+            processTestContext.getConnectorsAddress() + "/inbound/" + CONNECTOR_ID;
         // invoke the connector address, for example, via HTTP request
 
         // then: verify that the Connector event is completed
@@ -237,10 +237,10 @@ public class MyProcessTest {
 
     @RegisterExtension
     private final CamundaProcessTestExtension extension =
-            new CamundaProcessTestExtension()
-                    .withConnectorsEnabled(true)
-                    .withConnectorsDockerImageName("my-org/my-connectors")
-                    .withConnectorsDockerImageVersion("1.0.0");
+        new CamundaProcessTestExtension()
+            .withConnectorsEnabled(true)
+            .withConnectorsDockerImageName("my-org/my-connectors")
+            .withConnectorsDockerImageVersion("1.0.0");
 }
 ```
 
