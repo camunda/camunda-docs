@@ -1,0 +1,135 @@
+---
+id: xml-by-key
+title: "Get process definition as XML by key"
+description: "Get process definition as XML by key"
+sidebar_label: "Get process definition as XML by key"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVt1v2zYQ/1eIe1o7xnLadCj0lmFukbVbgtjDCgR+oKmzzUYiVZJyYgj834cjJTm2tY/XoU8SP+53d7/7YgtebBzkD3BnjUTnfsG10soro2HJwdRoBS1uCsjhuSp/3n/CPXCohRUVerQk24IWFUIOj/FMacihFn4LHAp00qo64uXwCffMrFmdVLHioIuDxW+NslhA7m2DHJzcYiUgb8HvawJX2uMGLXBYG1sJn7Z+uoIQliTuaqMdOpJ4M53S51j5vJGkFThIoz1qH7Hx2WfPVUn/Zxqdt0pvIIQQOFyNYd7onShVwch4dP4YW9R1qWSkL6utWZVY/fjVkdyILrP6ipIAakuke5U8cV74xv0rC2/fQOBQoXNigyMeUFCcF1qOH6aNc785eOVL2ppZa+zAxNtzJj4Yu1JFgfqYg9fZ6/+/u1fn7t6ngCOF3pnGSmTaeLY2jS6+jyx4N1YP13c37IXDDKPAd8BH4OBQNlb5fWyIKxQW7QU1xPxhGXgL0phHhXG1PO2LH9GPNEUmHPvy22e22rPUWCv0W0ONeIORE2qxOWS7y6wTvjgIu6x9xH2IvY1ss7u+Vze2hBzaxHXIs6zdGudD3tbG+gAcdsIqsSoT1XSW4rwWTUnElkaKMm6furHYIqMDmgbU5/0WGWVE0j4hTknHMdz76fvpKBJd/RuUQ54ccLbe16M46fIoUpwcfdzmdC853cdqiL2oVZp73aC7vZvdXy9mF/PZfH5z+3s/9Dq5wI/iP6B0JkaDaJ0uQX/7Q5+6v/65iGmm9NpE8S7dbuM0RnbXrEolyZVzhw0TccwxIb3aIRO6YNJUdYnUrPok6/Oe/lgPuzaWVUYrbyjRo6S3pqFM2BrjKflTJQsZY5gSiZxyeZY9PT1NpKgaXYiJNBWRUCqJ2kUeO94+dzv8RLgw0g3SysR1ZnGNFrXErANyGaFSIidnLyfTyTRllfOV0C8U/ceKOiJviFN8FNSlUJrAo6VtV20PsLtM7ei03oBDnkCp5Ja8q5wHaNuVcPiHLUOg7W8N2tgUDoUWy7JQjv4LyNeidHhm29BC4Yf77qn0iv3Tg2rUmT6f9T4WetnQCnh8uaX3W1gGDlsUBdpoVzq5lhJr/0JmeDhRCQ2N6eNsARxEQ1QNdJ6keUQdtaNt042FeUQdwmCWpzUZFsJfTW+pvA==
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get process definition as XML by key"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/process-definitions/{key}/xml"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get process definition as XML by key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of process definition",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: { "text/xml": { schema: { type: "string" } } },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
