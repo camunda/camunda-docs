@@ -51,12 +51,12 @@ For example, if you increase the `maxMessageSize` to 10MB, increase these proper
 
 OpenAPI key attributes are defined as `string`. In previous versions key attributes were defined as `integer (int64)`.
 
-In order to have a gradual change and provide our users enough time, we have introduced new content types in our API
-specification. With these content types users can specifically tell our API to accept and return `integer (int64)` or
+To support a gradual change and provide users with enough time, we have introduced new content types in our API
+specification. With these content types, users can specifically tell our API to accept and return `integer (int64)` or
 `string` key attributes.
 
 :::info Deprecation
-Keep in mind, that objects with key attributes as `integer (int64)` are marked deprecated and **will be removed
+Keep in mind that objects with key attributes as `integer (int64)` are marked deprecated, and **will be removed
 in a future release**.
 :::
 

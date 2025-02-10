@@ -59,12 +59,12 @@ or the environment variable `CAMUNDA_REST_QUERY_ENABLED` to `true`.
 OpenAPI key attributes are defined as `integer (int64)`.
 
 :::warning Key Attribute Change
-In next minor release the default key attribute type will be changing to `string`.
-:::
+With the next minor release, the default key attribute type will changes to `string`.
 
-In order to have a gradual change and provide our users enough time, we are already introducing new content types in our
-API specification with 8.6. With these content types users can specifically tell our API to accept and return `integer (int64)` or
+To support a gradual change and provide users with enough time, we already introduced new content types in our API
+specification. With these content types, users can specifically tell our API to accept and return `integer (int64)` or
 `string` key attributes.
+:::
 
 ### Content Type Headers
 
@@ -72,7 +72,7 @@ We support the following 3 content types in C8 API:
 
 - `application/json`:
   - Endpoints return and expect objects with key attributes as default `integer (int64)`.
-  - **This changes to `string` in next minor release.**
+  - **This changes to `string` with the next minor release.**
 - `application/vnd.camunda.api.keys.number+json`:
   - Endpoints return and expect objects with key attributes as `integer (int64)`.
 - `application/vnd.camunda.api.keys.string+json`:
