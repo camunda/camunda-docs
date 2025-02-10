@@ -1,11 +1,12 @@
 ---
 id: idp-key-concepts
 title: Key IDP concepts
-description: "You can import a BPMN or DMN diagram at any time with Web Modeler."
+description: "Key intelligent document processing (IDP) concepts and terms, such as the difference between structured and unstructured documents."
 ---
 
 import IdpStructuredDocumentImg from './img/idp-structured-document.png';
-import IdpStructuredDocument1Img from './img/idp-unstructured-document.png';
+import IdpUnstructuredDocumentImg from './img/idp-unstructured-document.png';
+import IdpExtractionFieldImg from './img/idp-extraction-field.png';
 
 When using IDP it is helpful to understand the following key concepts and terms.
 
@@ -18,23 +19,22 @@ Your choice of [extraction method](idp-document-extraction.md#create-extraction-
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '30px'}}>
 
-<img src={IdpStructuredDocumentImg} alt="Example structured document" width="600px" style={{border: 'none', padding: '0', marginTop: '0'}}/>
+<img src={IdpStructuredDocumentImg} alt="Example structured document" width="600px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
 </div>
 <div class="double-column-right">
 
 Structured documents have a predefined, consistent layout and fixed format, such as rows and columns in a database or spreadsheet, or fields in a standardized form.
 
-The data in a structured document has a fixed location. For example, the date, company name, and person name is always located in the same place.
+Data in a structured document has a fixed location. For example, the ID, date, and company name are always located in the same place.
 
 Example structured documents include:
 
-- Invoices
-- Customer records
+- Invoices/ customer records
 - Forms
 - Identity documents
 
-Use the [structured data extraction](idp-structured-extraction.md) method to extract data from this type of document.
+Use [structured data extraction](idp-structured-extraction.md) to extract data from this type of document.
 
 </div>
 </div>
@@ -44,14 +44,14 @@ Use the [structured data extraction](idp-structured-extraction.md) method to ext
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '30px'}}>
 
-<img src={IdpStructuredDocument1Img} alt="Example unstructured document" width="600px" style={{border: 'none', padding: '0', marginTop: '0'}}/>
+<img src={IdpUnstructuredDocumentImg} alt="Example unstructured document" width="600px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
 </div>
 <div class="double-column-right">
 
-Unstructured documents have a less defined, free-form layout that is typically more difficult to extract structured data from, such as free-text paragraphs and key information in unpredictable places.
+Unstructured documents have a less defined, free-form layout that can be more difficult to extract structured data from, such as free-text paragraphs where key information is located in unpredictable places.
 
-IDP uses an [LLM foundation model](#llm-foundation-models) to extract data from this type of document.
+IDP uses an [LLM foundation model](#llm-foundation-models) to extract data from this document type.
 
 Example unstructured documents include:
 
@@ -59,19 +59,34 @@ Example unstructured documents include:
 - Reports
 - Memos
 
-Use the [unstructured data extraction](idp-unstructured-extraction.md) method to extract data from this type of document.
+Use [unstructured data extraction](idp-unstructured-extraction.md) to extract data from this document type.
 
 </div>
 </div>
-
-## LLM foundation models
-
-LLM Foundation models are large-scale, pre-trained AI models that can be adapted for various document processing tasks without extensive retraining. For IDP, these models serve as a powerful base for extracting, understanding, and processing data from diverse document types.
 
 ## Document classification
 
-During document automation, …
+Document classification is performed during [document automation](idp-document-automation.md).
 
-### Extraction fields
+- Documents are analyzed, classified, and assigned to the relevant [document extraction](idp-document-extraction.md) project, based on the document content.
+- Document classification ensures that documents processed through IDP are organized into the correct type, so that extracted data is assigned/mapped to the correct property.
+- Classification accuracy is improved with a well-defined taxonomy (set of extraction fields) and a set of example documents that accurately represents each type of document you want to process.
 
-Extraction fields are the set of data fields you want to extract from a document, such as the invoice ID, date, customer name, and so on. When extracting data from an unstructured document, you can define the extraction fields you want to use as the basis for extracting data.
+## Extraction model/Large Language Models (LLM)
+
+LLM Foundation models are large-scale, pre-trained AI models that can be adapted for various document processing tasks without extensive retraining.
+
+- For IDP, these models serve as a powerful base for extracting, understanding, and processing data from diverse document types. Algorithms are used to learn document patterns and to improve data extraction accuracy over time.
+- IDP allows you to work with and test different extraction models until you find the model that best suits your budget and accuracy requirements.
+
+## Extraction fields
+
+Extraction fields are the data fields you want to extract from a document, such as the invoice ID, date, customer name, and so on.
+
+Add a separate field for each piece of information you want to extract from a document. For example, for an invoice, add a separate field for the invoice ID, date, vendor name, amount, and so on.
+
+<img src={IdpExtractionFieldImg} alt="Example structured document" width="800px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+
+:::info
+To learn more about supported data types, see [extraction field data types](idp-reference.md#extraction-field-data-types).
+:::

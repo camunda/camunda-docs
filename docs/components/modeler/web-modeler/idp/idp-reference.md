@@ -1,12 +1,12 @@
 ---
 id: idp-reference
 title: IDP reference
-description: "You can import a BPMN or DMN diagram at any time with Web Modeler."
+description: "Technical reference information for IDP, such as technical architecture, supported document file formats, and document storage."
 ---
 
 The following technical reference information is provided for IDP.
 
-## IDP technical architecture
+## Architecture
 
 diagram
 
@@ -30,7 +30,7 @@ Storage limit?
 
 ## Extraction field data types
 
-You can use any of the following data types when creating an extraction field.
+You can use any of the following supported data types when creating an extraction field.
 
 | Data type | Description |
 | :-------- | :---------- |

@@ -1,7 +1,7 @@
 ---
 id: idp-structured-extraction
 title: Extract structured data
-description: "You can import a BPMN or DMN diagram at any time with Web Modeler."
+description: "Structured data extraction allows you to extract data from structured documents."
 ---
 
 Use this extraction method to extract data from [structured documents](idp-key-concepts.md#structured-documents).

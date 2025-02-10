@@ -1,7 +1,7 @@
 ---
 id: idp
 title: Intelligent document processing (IDP)
-description: "You can import a BPMN or DMN diagram at any time with Web Modeler."
+description: "Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes."
 ---
 
 import IdpOverviewImg from './img/idp-overview-diagram.png';
@@ -31,9 +31,9 @@ To learn more about the IDP technical architecture, see [IDP reference](idp/idp-
 
 To start using IDP in your processes:
 
-1. Create an [IDP application](idp/idp-applications.md) folder to store and manage a set of related IDP projects.
+1. Create an [IDP application](idp/idp-applications.md) folder in which to store and manage a set of related IDP projects.
 
-1. Create and publish IDP projects:
+1. Create and publish your IDP projects in your IDP application folder:
 
    - Create a [document extraction](idp/idp-document-extraction.md) project to identify and extract data from a single type of document (for example, an invoice).
 

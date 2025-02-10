@@ -1,7 +1,7 @@
 ---
 id: idp-applications
 title: IDP applications
-description: "You can import a BPMN or DMN diagram at any time with Web Modeler."
+description: "Create and manage your IDP projects in an IDP application folder."
 ---
 
 import IdpApplicationImg from './img/idp-application.png';

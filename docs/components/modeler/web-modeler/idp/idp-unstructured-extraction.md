@@ -1,7 +1,7 @@
 ---
 id: idp-unstructured-extraction
 title: Extract unstructured data
-description: "You can import a BPMN or DMN diagram at any time with Web Modeler."
+description: "Unstructured data extraction allows you to extract data from unstructured documents."
 ---
 
 import IdpUnstructuredDataExtractionImg from './img/idp-unstructured-data-extraction-screen.png';
