@@ -454,7 +454,7 @@ The base `camunda-values.yml` in `aws/dual-region/kubernetes` requires adjustmen
   <summary>Example output</summary>
   <summary>
 
-:::danger
+:::caution
 For illustration purposes only. These values will not work in your environment.
 :::
 
