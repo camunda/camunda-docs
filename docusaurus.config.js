@@ -94,6 +94,13 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.7: {
+                specPath: "api/operate/version-8.7/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.6: {
                 specPath: "api/operate/version-8.6/operate-openapi.yaml",
                 outputDir:
