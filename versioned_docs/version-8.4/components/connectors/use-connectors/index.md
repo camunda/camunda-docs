@@ -14,7 +14,7 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 
 ## Using secrets
 
-:::warning
+:::danger
 `secrets.*` is a deprecated syntax. Instead, use `{{secrets.*}}`
 :::
 

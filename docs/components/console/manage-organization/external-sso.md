@@ -11,6 +11,10 @@ For customers in the Enterprise and Starter plans, we support integrating extern
 
 We currently support both SAML and Azure Active Directory (Azure AD). As this requires changes in our environment, first raise a ticket in the [support queue](https://jira.camunda.com/projects/SUPPORT/).
 
+:::info
+Expiring certificates or secrets must be renewed prior to their expiration date to avoid a service interruption.
+:::
+
 ### SAML
 
 After opening the ticket in the support queue, we will provide you:

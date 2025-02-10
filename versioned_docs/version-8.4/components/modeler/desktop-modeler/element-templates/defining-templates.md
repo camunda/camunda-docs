@@ -330,7 +330,7 @@ Configures the [task](../../../bpmn/service-tasks/#task-definition) for a servic
 
 #### `zeebe:taskDefinition:type`
 
-:::warning
+:::danger
 `zeebe:taskDefinition:type` is a deprecated binding. Instead, use `zeebe:taskDefinition` with `property=type`.
 :::
 
