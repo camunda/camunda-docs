@@ -31,7 +31,7 @@ With the [filepicker form element](/components/modeler/forms/form-element-librar
 
 ### Outbound Connectors
 
-For the following outbound Connectors, you may include a **Request body** under **Payload** in the properties panel to send with your request:
+For the following outbound Connectors, you may include a **Request body** under **Payload** in the properties panel on the right side of the screen to send with your request:
 
 - [REST](/components/connectors/protocol/rest.md) - Supports storing the response as a document.
 - [Email](/components/connectors/out-of-the-box-connectors/email.md) - Supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents.

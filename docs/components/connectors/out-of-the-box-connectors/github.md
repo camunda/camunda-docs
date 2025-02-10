@@ -287,7 +287,7 @@ The **GitHub Webhook Connector** is an inbound Connector that allows you to star
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the webhook.
-6. Navigate to the **Webhooks** tab in the properties panel to observe the webhook URL.
+6. Navigate to the **Webhooks** tab in the properties panel on the right side of the screen to observe the webhook URL.
 
 ## Make your GitHub Webhook Connector for receiving messages executable
 
