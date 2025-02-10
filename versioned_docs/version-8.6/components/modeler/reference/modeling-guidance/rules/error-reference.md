@@ -6,7 +6,7 @@ description: Reference for the `error-reference` rule.
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
-An [error event](../../../../bpmn/error-events/) must reference an error defined in the process. The referenced error must have a defined error code. To fix this problem, open the **Error** group in the properties panel, select or create an error, and specify its error code.
+An [error event](../../../../bpmn/error-events/) must reference an error defined in the process. The referenced error must have a defined error code. To fix this problem, open the **Error** group in the properties panel on the right side of the screen, select or create an error, and specify its error code.
 
 Camunda 8.2 and later support catch-all events and do not require an error reference.
 
