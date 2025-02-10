@@ -19,6 +19,26 @@ These release notes identify the new features included in 8.7, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 8 April 2025           | 13 October 2026              | -            | -            | -            |
 
+## 8.7.0-alpha4
+
+| Release date     | Changelog(s)                                                                                                                                                                               | Blog                                                                                          |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------- |
+| 11 February 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha4)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.7.0-alpha4)</li></ul> | <!-- [Release blog](https://camunda.com/blog/2025/02/camunda-alpha-release-february-2025) --> |
+
+### BPMN Copilot <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+
+With the new BPMN Copilot for SaaS, go from 0 to 80% of a process diagram in minutes. Generate process diagrams from natural language descriptions, then collaborate on them with colleagues.
+
+For more information, see the [BPMN Copilot documentation](/components/early-access/alpha/bpmn-copilot/bpmn-copilot.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2511 -->
+
+### Ad-hoc subprocesses
+
+A new [ad-hoc subprocess](/components/modeler/bpmn/ad-hoc/ad-hoc.md) BPMN element is now supported. This new kind of subprocess allows more flexible process flows with a compact visual representation. It is the first step towards dynamic processes and execution of ad-hoc activities.
+
+<!-- https://github.com/camunda/product-hub/issues/2546 -->
+
 ## 8.7.0-alpha3
 
 | Release date    | Changelog(s)                                                                                                                                                                                 | Blog                                                                                |
