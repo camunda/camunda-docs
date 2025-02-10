@@ -1,6 +1,6 @@
 ---
 id: helm-chart-production-guide
-title: "Helm chart Production Guide"
+title: "Helm chart Production guide"
 sidebar_label: "Helm chart Production Guide"
 description: "Learn how to set up the helm chart in a production setting."
 ---

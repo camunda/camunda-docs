@@ -1063,10 +1063,9 @@ module.exports = {
           ],
         },
         "self-managed/operational-guides/configure-multi-tenancy",
-        "self-managed/operational-guides/production-guide",
         {
           type: "category",
-          label: "Production Guide",
+          label: "Production guides",
           link: {
             type: "doc",
             id: "self-managed/operational-guides/production-guide/helm-chart-production-guide",
