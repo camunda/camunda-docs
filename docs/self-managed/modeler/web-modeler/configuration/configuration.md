@@ -26,21 +26,16 @@ The Camunda 8 [Helm](/self-managed/setup/install.md) and [Docker Compose](/self-
 
 To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 
-| Environment variable                                 | Description                                                    | Example value                       |
-| ---------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------- |
-| `CAMUNDA_MODELER_CLUSTERS_0_ID`                      | A unique identifier to use for your cluster.                   | `test-cluster-1`                    |
-| `CAMUNDA_MODELER_CLUSTERS_0_NAME`                    | The name of your cluster.                                      | `test cluster 1`                    |
-| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`                 | The Camunda version used by this cluster.                      | `8.6.0`                             |
-| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION`          | The authentication to use with your cluster.                   | `OAUTH`, `NONE`                     |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC`          | The address where your cluster can be reached.                 | `grpcs://zeebe-1.example.com:26500` |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST`          | The address where the Zeebe REST API can be reached.           | `https://zeebe-1.example.com:8080`  |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`             | The address where Operate can be reached.                      | `https://operate-1.example.com`     |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`            | The address where Tasklist can be reached.                     | `https://tasklist-1.example.com`    |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer.                              | `https://auth.example.com/token`    |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | A comma-separated list of the scopes to use with this cluster. | `test-scope`                        |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The permission name for Zeebe.                                 | `zeebe-api`                         |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The permission name for Operate.                               | `operate-api`                       |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist.                              | `tasklist-api`                      |
+| Environment variable                        | Description                                                                                                    | Example value                                                               |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_ID`             | A unique identifier to use for your cluster.                                                                   | `test-cluster-1`                                                            |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME`           | The name of your cluster.                                                                                      | `Test Cluster 1`                                                            |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`        | The Camunda version used by this cluster.                                                                      | `8.7.0`                                                                     |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` | The authentication to use with your cluster.                                                                   | `OAUTH`, `NONE`                                                             |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC` | [Internal or external](#notes-on-host-names-and-port-numbers) address where your cluster can be reached.       | `grpc://camunda-zeebe-gateway:26500`, `grpcs://camunda-zeebe-gateway:26500` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST` | [Internal or external](#notes-on-host-names-and-port-numbers) address where the Zeebe REST API can be reached. | `http://camunda-zeebe-gateway:8080`, `https://camunda-zeebe-gateway:8080`   |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`    | [Internal or external](#notes-on-host-names-and-port-numbers) address where Operate can be reached.            | `http://camunda-operate:80`, `https://camunda-operate:80`                   |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`   | [Internal or external](#notes-on-host-names-and-port-numbers) address where Tasklist can be reached.           | `http://camunda-tasklist:80`, `https://camunda-tasklist:80`                 |
 
 ### Database
 

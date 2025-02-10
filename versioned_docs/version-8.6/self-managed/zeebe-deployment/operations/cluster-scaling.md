@@ -297,7 +297,7 @@ Brokers:
 
 ### 4. Shut down the brokers when the scaling operation has completed
 
-:::warning
+:::danger
 If you shut down brokers before Zeebe has scaled down and moved all partitions away from the brokers, scaling operation would never complete and may result in data loss.
 :::
 

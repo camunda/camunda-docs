@@ -141,7 +141,7 @@ This corresponds with the BAPI's/FM's `exporting` definition, meaning it exports
 
 The `tables parameter` can be both "exporting" and "importing".
 
-:::warning
+:::danger
 Sending tables as tabular data to an RFC target is not yet supported.
 :::
 
