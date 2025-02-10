@@ -119,4 +119,4 @@ connection, see [database configuration](#database-configuration).
 
 ### Google Stackdriver (JSON) logging
 
-To enable Google Stackdriver compatible JSON logging, set the environment variable `IDENTITY_LOG_APPENDER=stackdriver` on Identity.
+To enable Google Stackdriver compatible JSON logging, set the environment variable `IDENTITY_LOG_APPENDER=Stackdriver` on Identity.
