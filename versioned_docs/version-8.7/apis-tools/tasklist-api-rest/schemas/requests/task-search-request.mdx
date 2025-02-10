@@ -1,0 +1,221 @@
+---
+id: task-search-request
+title: TaskSearchRequest
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+TaskSearchRequest - query object to search tasks by provided params.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "state": TaskState,
+    "assigned": boolean,
+    "assignee": string,
+    "taskDefinitionId": string,
+    "candidateGroup": string,
+    "candidateUser": string,
+    "processDefinitionKey": string,
+    "processInstanceKey": string,
+    "pageSize": int,
+    "followUpDate": DateFilter,
+    "dueDate": DateFilter,
+    "taskVariables": [TaskVariables],
+    "tenantIds": [string],
+    "sort": [TaskOrderBy],
+    "searchAfter": [string],
+    "searchAfterOrEqual": [string],
+    "searchBefore": [string],
+    "searchBeforeOrEqual": [string],
+    "includeVariables": [IncludeVariable]
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "state": "CREATED",
+  "assigned": true,
+  "assignee": "string",
+  "taskDefinitionId": "string",
+  "candidateGroup": "string",
+  "candidateUser": "string",
+  "processDefinitionKey": "string",
+  "processInstanceKey": "string",
+  "pageSize": 0,
+  "followUpDate": {
+    "from": "2023-03-29T18:38:10.491Z",
+    "to": "2023-03-29T18:38:10.491Z"
+  },
+  "dueDate": {
+    "from": "2023-03-29T18:38:10.491Z",
+    "to": "2023-03-29T18:38:10.491Z"
+  },
+  "taskVariables": [
+    {
+      "name": "variable_name",
+      "value": "\"variable_value\"",
+      "operator": "eq"
+    }
+  ],
+  "tenantIds": ["string"],
+  "sort": [
+    {
+      "field": "completionTime",
+      "order": "ASC"
+    }
+  ],
+  "searchAfter": ["string"],
+  "searchAfterOrEqual": ["string"],
+  "searchBefore": ["string"],
+  "searchBeforeOrEqual": ["string"],
+  "includeVariables": [
+    {
+      "name": "variable_name",
+      "alwaysReturnFullValue": false
+    }
+  ],
+  "priority": {
+    "eq": 100
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>state</b></code>](#)<Bullet />[`TaskState`](../enums/task-state.mdx) <Badge class="secondary" text="enum"/>
+
+> State of the tasks
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>assigned</b></code>](#)<Bullet />`boolean`
+
+> Are the tasks assigned?
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>assignee</b></code>](#)<Bullet />`string`
+
+> Who is assigned to the tasks?
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>taskDefinitionId</b></code>](#)<Bullet />`string`
+
+> Task definition ID - what's the BPMN flow node?
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>candidateGroup</b></code>](#)<Bullet />`string`
+
+> Given group is in candidate groups list.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>candidateUser</b></code>](#)<Bullet />`string`
+
+> Given group is in candidate user list.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>processDefinitionKey</b></code>](#)<Bullet />`string`
+
+> Reference to process definition
+> (renamed equivalent of [`TaskQuery.processDefinitionId`](../../../tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessdefinitionidbcodestring-) field).
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>processInstanceKey</b></code>](#)<Bullet />`string`
+
+> Reference to process instance
+> (renamed equivalent of [`TaskQuery.processInstanceId`](../../../tasklist-api/inputs/task-query.mdx#code-style-fontweight-normal-taskquerybprocessinstanceidbcodestring-) field).
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>followUpDateDate</b></code>](#)<Bullet />[`DateFilter`](../models/date-filter-input.mdx)
+
+> Specifying a range of follow-up dates for the tasks to search for.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>dueDate</b></code>](#)<Bullet />[`DateFilter`](../models/date-filter-input.mdx)
+
+> Specifying a range of due dates for the tasks to search for.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>taskVariables</b></code>](#)<Bullet />[`TaskVariables`](../models/task-variables.mdx) <Badge class="secondary" text="list"/>
+
+> An array of filter clauses specifying the variables to filter for. If defined, the query returns only tasks to which all clauses apply. However, it's important to note that this filtering mechanism is designed to work exclusively with truncated variables. This means variables of a larger size are not compatible with this filter, and attempts to use them may result in inaccurate or incomplete query results.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>tenantIds</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> An array of Tenant IDs to filter tasks. When multi-tenancy is enabled, tasks associated with the specified tenant IDs are returned; if disabled, this parameter is ignored.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>sort</b></code>](#)<Bullet />[`TaskOrderBy`](../models/task-order-by.mdx) <Badge class="secondary" text="list"/>
+
+> An array of objects specifying the fields to sort the results by.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>pageSize</b></code>](#)<Bullet />`int`
+
+> Size of tasks page (default: 50).
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>searchAfter</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Used to return a paginated result. Array of values that should be copied from `sortValues` of one of the tasks from the current search results page.
+> It enables the API to return a page of tasks that directly follow the task identified by the provided values, with respect to the sorting order.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>searchAfterOrEqual</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Used to return a paginated result. Array of values that should be copied from `sortValues` of one of the tasks from the current search results page.
+> It enables the API to return a page of tasks that directly follow or are equal to the task identified by the provided values, with respect to the sorting order.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>searchBefore</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Used to return a paginated result. Array of values that should be copied from `sortValues` of one of the tasks from the current search results page.
+> It enables the API to return a page of tasks that directly precede the task identified by the provided values, with respect to the sorting order.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>searchBeforeOrEqual</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Used to return a paginated result. Array of values that should be copied from `sortValues` of one of the tasks from the current search results page.
+> It enables the API to return a page of tasks that directly precede or are equal to the task identified by the provided values, with respect to the sorting order.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskSearchRequest.<b>includeVariables</b></code>](#)<Bullet />[`IncludeVariable`](../models/include-variable.mdx) <Badge class="secondary" text="list"/>
+
+> An array used to specify a list of the variables that should be included in the response when querying tasks. This field allows users to selectively retrieve specific variables associated with the tasks returned in the search results.
+
+### Consumed by
+
+[`Search tasks`](../../controllers/tasklist-api-rest-task-controller.md#search-tasks) <Badge class="secondary" text="POST"/>

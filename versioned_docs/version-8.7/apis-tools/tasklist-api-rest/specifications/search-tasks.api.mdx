@@ -1,0 +1,504 @@
+---
+id: search-tasks
+title: "Search tasks"
+description: "Returns the list of tasks that satisfy search request params.<br/><ul><li>If an empty body is provided, all tasks are returned.</li><li>Only one of `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]` search options must be present in request.</li></ul>"
+sidebar_label: "Search tasks"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search tasks"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/tasks/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns the list of tasks that satisfy search request params.<br/><ul><li>If an empty body is provided, all tasks are returned.</li><li>Only one of `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]` search options must be present in request.</li></ul>
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            state: {
+              type: "string",
+              description: "The state of the tasks.",
+              enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+            },
+            assigned: {
+              type: "boolean",
+              description: "Are the tasks assigned?",
+            },
+            assignee: {
+              type: "string",
+              description: "Who is assigned to the tasks?",
+            },
+            assignees: {
+              type: "array",
+              description: "The assignee is one of the given assignees.",
+              items: {
+                type: "string",
+                description: "The assignee is one of the given assignees.",
+              },
+            },
+            taskDefinitionId: {
+              type: "string",
+              description: "What's the BPMN flow node?",
+            },
+            candidateGroup: {
+              type: "string",
+              description: "Given group is in candidate groups list.",
+            },
+            candidateGroups: {
+              type: "array",
+              description:
+                "At least one of the given groups is in candidate groups list.",
+              items: {
+                type: "string",
+                description:
+                  "At least one of the given groups is in candidate groups list.",
+              },
+            },
+            candidateUser: {
+              type: "string",
+              description: "Given user is in candidate user list.",
+            },
+            candidateUsers: {
+              type: "array",
+              description:
+                "At least one of the given users is in candidate user list.",
+              items: {
+                type: "string",
+                description:
+                  "At least one of the given users is in candidate user list.",
+              },
+            },
+            processDefinitionKey: {
+              type: "string",
+              description:
+                "Reference to process definition (renamed equivalent of TaskQuery.processDefinitionId field).",
+            },
+            processInstanceKey: {
+              type: "string",
+              description:
+                "Reference to process instance (renamed equivalent of TaskQuery.processInstanceId field)",
+            },
+            pageSize: {
+              type: "integer",
+              description: "Size of tasks page (default = 50).",
+              format: "int32",
+            },
+            followUpDate: {
+              type: "object",
+              properties: {
+                from: {
+                  type: "string",
+                  description:
+                    "Start date range to search from in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.",
+                  format: "date-time",
+                },
+                to: {
+                  type: "string",
+                  description:
+                    "End date range to search to in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.",
+                  format: "date-time",
+                },
+              },
+              description: "A range of due dates for the tasks to search for.",
+              title: "DateFilter",
+            },
+            dueDate: {
+              type: "object",
+              properties: {
+                from: {
+                  type: "string",
+                  description:
+                    "Start date range to search from in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.",
+                  format: "date-time",
+                },
+                to: {
+                  type: "string",
+                  description:
+                    "End date range to search to in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.",
+                  format: "date-time",
+                },
+              },
+              description: "A range of due dates for the tasks to search for.",
+              title: "DateFilter",
+            },
+            taskVariables: {
+              type: "array",
+              description:
+                "An array of filter clauses specifying the variables to filter for.<br/>If defined, the query returns only tasks to which all clauses apply.<br/>However, it's important to note that this filtering mechanism is<br/>designed to work exclusively with truncated variables. This means<br/>variables of a larger size are not compatible with this filter, and<br/>attempts to use them may result in inaccurate or incomplete query results.",
+              items: {
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The name of the variable.",
+                  },
+                  value: {
+                    type: "string",
+                    description:
+                      "The value of the variable. When specifying the variable value, it's crucial to maintain consistency with JSON values (serialization for the complex objects such as list) and ensure that strings remain appropriately formatted.",
+                  },
+                  operator: {
+                    type: "string",
+                    description:
+                      "The comparison operator to use for the variable.<br/>* `eq`: Equals",
+                    enum: ["eq"],
+                  },
+                },
+                title: "TaskByVariables",
+              },
+            },
+            tenantIds: {
+              type: "array",
+              description:
+                "An array of Tenant IDs to filter tasks. When multi-tenancy is<br/>enabled, tasks associated with the specified tenant IDs are returned;<br/>if disabled, this parameter is ignored.",
+              items: { type: "string" },
+            },
+            sort: {
+              type: "array",
+              description:
+                "An array of objects specifying the fields to sort the results by.",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    type: "string",
+                    enum: [
+                      "completionTime",
+                      "creationTime",
+                      "followUpDate",
+                      "dueDate",
+                      "priority",
+                    ],
+                  },
+                  order: {
+                    type: "string",
+                    description: "* `ASC`: Ascending<br/>* `DESC`: Descending",
+                    enum: ["ASC", "DESC"],
+                  },
+                },
+                description: "Sort results by a specific field.",
+                title: "TaskOrderBy",
+              },
+            },
+            searchAfter: {
+              type: "array",
+              description:
+                "Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly follow the task identified by the provided values, with respect to the sorting order.",
+              items: { type: "string" },
+            },
+            searchAfterOrEqual: {
+              type: "array",
+              description:
+                "Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly follow or are equal to the task identified by the provided values, with respect to the sorting order.",
+              items: { type: "string" },
+            },
+            searchBefore: {
+              type: "array",
+              description:
+                "Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly precede the task identified by the provided values, with respect to the sorting order.",
+              items: { type: "string" },
+            },
+            searchBeforeOrEqual: {
+              type: "array",
+              description:
+                "Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly precede or are equal to the task identified by the provided values, with respect to the sorting order.",
+              items: { type: "string" },
+            },
+            includeVariables: {
+              type: "array",
+              description:
+                "An array used to specify a list of variable names that should be included in the response when querying tasks.<br/>This field allows users to selectively retrieve specific variables associated with the tasks returned in the search results.",
+              items: {
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The name of the variable.",
+                  },
+                  alwaysReturnFullValue: {
+                    type: "boolean",
+                    description:
+                      "Always return the full value of the variable?",
+                    default: false,
+                  },
+                },
+                title: "IncludeVariable",
+              },
+            },
+            implementation: {
+              type: "string",
+              enum: ["JOB_WORKER", "ZEEBE_USER_TASK"],
+            },
+            priority: {
+              description:
+                "Rules to filter out tasks by their priority. Applicable only for job worker-based user tasks managed by Camunda.",
+              type: "object",
+              properties: {
+                eq: { type: "integer", minimum: 0, maximum: 100 },
+                gte: { type: "integer", minimum: 0, maximum: 100 },
+                gt: { type: "integer", minimum: 0, maximum: 100 },
+                lt: { type: "integer", minimum: 0, maximum: 100 },
+                lte: { type: "integer", minimum: 0, maximum: 100 },
+              },
+            },
+          },
+          description: "Request object to search tasks by provided params.",
+          title: "TaskSearchRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "On success returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                id: {
+                  type: "string",
+                  description: "The unique identifier of the task.",
+                },
+                name: { type: "string", description: "The name of the task." },
+                taskDefinitionId: {
+                  type: "string",
+                  description: "User task ID from the BPMN definition.",
+                },
+                processName: {
+                  type: "string",
+                  description: "The name of the process.",
+                },
+                creationDate: {
+                  type: "string",
+                  description:
+                    "When was the task created (renamed equivalent of `Task.creationTime` field).",
+                },
+                completionDate: {
+                  type: "string",
+                  description:
+                    "When was the task completed (renamed equivalent of `Task.completionTime` field).",
+                },
+                assignee: {
+                  type: "string",
+                  description:
+                    "The username/id of who is assigned to the task.",
+                },
+                taskState: {
+                  type: "string",
+                  description: "The state of the task.",
+                  enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                },
+                sortValues: {
+                  type: "array",
+                  description:
+                    "Array of values to be copied into `TaskSearchRequest` to request for next or previous page of tasks.",
+                  items: { type: "string" },
+                },
+                isFirst: {
+                  type: "boolean",
+                  description:
+                    "A flag to show that the task is first in the current filter.",
+                },
+                formKey: {
+                  type: "string",
+                  description: "Reference to the task form.",
+                },
+                formId: {
+                  type: "string",
+                  description:
+                    "Reference to the ID of a deployed form. If the form is not deployed, this property is null.",
+                },
+                formVersion: {
+                  type: "integer",
+                  description:
+                    "Reference to the version of a deployed form. If the form is not deployed, this property is null.",
+                  format: "int64",
+                },
+                isFormEmbedded: {
+                  type: "boolean",
+                  description:
+                    "Is the form embedded for this task? If there is no form, this property is null.",
+                },
+                processDefinitionKey: {
+                  type: "string",
+                  description:
+                    "Reference to process definition (renamed equivalent of `Task.processDefinitionId` field).",
+                },
+                processInstanceKey: {
+                  type: "string",
+                  description:
+                    "Reference to process instance id (renamed equivalent of `Task.processInstanceId` field).",
+                },
+                tenantId: {
+                  type: "string",
+                  description: "The tenant ID associated with the task.",
+                },
+                dueDate: {
+                  type: "string",
+                  description: "The due date for the task.",
+                  format: "date-time",
+                },
+                followUpDate: {
+                  type: "string",
+                  description: "The follow-up date for the task.",
+                  format: "date-time",
+                },
+                candidateGroups: {
+                  type: "array",
+                  description: "The candidate groups for the task.",
+                  items: { type: "string" },
+                },
+                candidateUsers: {
+                  type: "array",
+                  description: "The candidate users for the task.",
+                  items: { type: "string" },
+                },
+                variables: {
+                  type: "array",
+                  description:
+                    "An array of the task's variables. Only variables specified in `TaskSearchRequest.includeVariables` are returned. Note that a variable's draft value is not returned in `TaskSearchResponse`.",
+                  items: {
+                    type: "object",
+                    properties: {
+                      id: {
+                        type: "string",
+                        description: "The unique identifier of the variable.",
+                      },
+                      name: {
+                        type: "string",
+                        description: "The name of the variable.",
+                      },
+                      value: {
+                        type: "string",
+                        description: "The value of the variable.",
+                      },
+                      isValueTruncated: {
+                        type: "boolean",
+                        description:
+                          "Does the `previewValue` contain the truncated value or full value?",
+                      },
+                      previewValue: {
+                        type: "string",
+                        description:
+                          "A preview of the variable's value. Limited in size.",
+                      },
+                      draft: {
+                        type: "object",
+                        properties: {
+                          value: {
+                            type: "string",
+                            description: "The value of the variable.",
+                          },
+                          isValueTruncated: {
+                            type: "boolean",
+                            description:
+                              "Does the `previewValue` contain the truncated value or full value?",
+                          },
+                          previewValue: {
+                            type: "string",
+                            description:
+                              "A preview of the variable's value. Limited in size.",
+                          },
+                        },
+                        description: "The draft value of the variable.",
+                        title: "DraftSearchVariableValue",
+                      },
+                    },
+                    title: "VariableSearchResponse",
+                  },
+                },
+                implementation: {
+                  type: "string",
+                  enum: ["JOB_WORKER", "ZEEBE_USER_TASK"],
+                },
+                priority: {
+                  description:
+                    "The priority of a user task. The higher the value the higher the priority. Applicable only for job worker-based user tasks managed by Camunda.",
+                  type: "integer",
+                  minimum: 0,
+                  maximum: 100,
+                  default: 50,
+                },
+              },
+              title: "TaskSearchResponse",
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "An error is returned when more than one search parameters among `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]` are present in request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

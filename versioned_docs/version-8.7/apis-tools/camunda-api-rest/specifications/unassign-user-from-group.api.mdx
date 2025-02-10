@@ -1,0 +1,239 @@
+---
+id: unassign-user-from-group
+title: "Unassign a user from a group"
+description: "Unassigns a user from a group."
+sidebar_label: "Unassign a user from a group"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWMFy2zYQ/RUMTsmUJmXHSV3eNLacunUyHltuD44OILgUEYMAA4CWORz+e2cB0lYkufV4etRBQ5Fc7MNi38MS21HHlpamd/Sz0U1NFxHVNRjmhFYXOU1po5i1YqluLZhzo6tgFtEcLDeiRjua0tvByhJGGguGFEZXhJElWsffFI1ozQyrwIFBtI4qVgFNqTf4E1oaUYGOauZKGlEDPxphIKepMw1sos1LCJ7JPbQxjajlJVSMph11bY1urTNCLWnfR09IOK23APlw/hNnga5srZUFi++PJkd4ecHdilkyLizkxDacg7VFI2UbVs6NEca0j+jxZPIvzrhuZE6UdiSDNa/xN/VFGyA5OCakJcwAqY1+EDnkRCgPMU6ZZDpvQ5q4Vg6UQzxW11JwT4WkNjqTUP3y3SJ4t7YSP89qSq6C5YBLdPYduCPMkmCYBfS76/NT8tvxx18X70rnapsmyWq1ik3BDyAXTptYm2ViCo4/tHsfk3kJBkjFWgyU5blATCYxqhqME2CJrYGLQnDitA9wmDbBdIX4hsSFaSEtnwY/p3UzvREttKmYQxYZsUX+Kbm9viAiB+VE0Qq13Ib2YwrWSPTBMt24NJNM3WN2nXByJ+gmim2qipmW6GIHQB9R65hr1sKgQjlYglmfv1Duw9GWb+TS7/P5FQkuCNc5kEIb4kphRyAMohJKVE1F0+PJJKIVewx3nyaTHn1ixl8RiSLwWEumPLU2wxGKVM+89YEJZR1T/P/KjDZiKTZxY9wsxlzQgcRnIaK+770KP2zz/VybTOQ5KE9PgtsJWEeE9YJkUuoV5PFeV3td7XX1oq6Od1e3UOK1GWqmcGWoi+IBFFZkX0ZRZoVuVB4Rv65DURwFOJZYz1thx6K61+Nej3s97tbjx11fm1NFcJUN8hCM0YZozhtjICerUkjvHr9hR+yhEO6/Kfda22vtJa31Ea3AlRrP2TlIcODPya6kKU18pbJJN56Q+wQLm0264SDb43kUzMN4oG6MpCntgoj6NEm6UlvXp12tjeuTB8zQAzOCZTLwEl8HsY0kkpoz6R/vSia+wLP0GOQpqxqVM3JCrmc3c/KZOVix1i8uQv7s+mRyMtnpFU1f8Di9uiAhwkDFte1hdIs63+k2GL/GsT+7W+CNEa69wWFheTJgBsy0wWw8UWTA897xPhjRaPhzPhLnj7/nPvdCFdoPHziwPRHMChgbZj6JD7f5dnXhZcN1VTXK751qGb6G2FpgXDbWYUARlYKDsp7ZQ+9jNLsMb8hfAZEcxpiUwJxxy1wKVzZZzHWV8DDs6ZpJnSUVEyoZIGxyOv1y+/VsenB5cTr7ejM7OIwnsXt0PvhaW1cxtTaPsU20q0u0GXj3XDZe014aEuTg0SW1ZEIhZXxk3SCpu9BssjSi6VrbyasKn40NokU0SOOOdl3GLNwa2ff4+EcDpqXp3eJZSV56ubD4P6dpwaTd7CKtB/Lueug3vSdbTaydEQwPmWq9fGWDdzSi99Cud8+wz/XmWax3uN4wiXHd+kUf0RJYDsavSng75RxqtzbuxS8A1OHTdng2u5zNZ7Tv/wF8sRmw
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Unassign a user from a group"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/groups/{groupKey}/users/{userKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Unassigns a user from a group.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "groupKey",
+      in: "path",
+      required: true,
+      description: "The group key.",
+      schema: { type: "string" },
+    },
+    {
+      name: "userKey",
+      in: "path",
+      required: true,
+      description: "The user key.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description: "The user was unassigned successfully from the group.",
+    },
+    "400": {
+      description:
+        "The user could not be unassigned.\nMore details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The group or user with the given key was not found, or the user is not assigned to this group.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

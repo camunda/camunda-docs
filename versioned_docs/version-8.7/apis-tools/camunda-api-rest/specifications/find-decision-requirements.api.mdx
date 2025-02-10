@@ -1,0 +1,955 @@
+---
+id: find-decision-requirements
+title: "Query decision requirements"
+description: "Search for decision requirements based on given criteria."
+sidebar_label: "Query decision requirements"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query decision requirements"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/decision-requirements/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for decision requirements based on given criteria.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              description:
+                "Base properties for DecisionRequirementsSearchQueryRequest",
+              type: "object",
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    page: {
+                      description: "Pagination criteria.",
+                      allOf: [
+                        {
+                          type: "object",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                            searchAfter: {
+                              description:
+                                "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                            searchBefore: {
+                              description:
+                                "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                          },
+                          title: "SearchQueryPageRequest",
+                        },
+                      ],
+                      type: "object",
+                    },
+                  },
+                  title: "SearchQueryRequest",
+                },
+              ],
+              properties: {
+                sort: {
+                  description: "Sort field criteria.",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      field: {
+                        description: "The field to sort by.",
+                        type: "string",
+                        enum: [
+                          "decisionRequirementsKey",
+                          "decisionRequirementsName",
+                          "version",
+                          "decisionRequirementsId",
+                          "tenantId",
+                        ],
+                      },
+                      order: {
+                        description:
+                          "The order in which to sort the related field.",
+                        type: "string",
+                        enum: ["ASC", "DESC"],
+                        default: "ASC",
+                        title: "SortOrderEnum",
+                      },
+                    },
+                    required: ["field"],
+                    title: "DecisionRequirementsSearchQuerySortRequest",
+                  },
+                },
+              },
+              title: "DecisionRequirementsSearchQueryRequestBase",
+            },
+          ],
+          properties: {
+            filter: {
+              description: "The decision definition search filters.",
+              allOf: [
+                {
+                  description:
+                    "Decision requirements search filter. Key attributes as string values.",
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsFilterRequest",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN ID of the decision requirements.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsFilter",
+                },
+              ],
+            },
+          },
+          title: "DecisionRequirementsSearchQuery",
+        },
+      },
+      "application/vnd.camunda.api.keys.number+json": {
+        schema: {
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              description:
+                "Base properties for DecisionRequirementsSearchQueryRequest",
+              type: "object",
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    page: {
+                      description: "Pagination criteria.",
+                      allOf: [
+                        {
+                          type: "object",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                            searchAfter: {
+                              description:
+                                "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                            searchBefore: {
+                              description:
+                                "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                          },
+                          title: "SearchQueryPageRequest",
+                        },
+                      ],
+                      type: "object",
+                    },
+                  },
+                  title: "SearchQueryRequest",
+                },
+              ],
+              properties: {
+                sort: {
+                  description: "Sort field criteria.",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      field: {
+                        description: "The field to sort by.",
+                        type: "string",
+                        enum: [
+                          "decisionRequirementsKey",
+                          "decisionRequirementsName",
+                          "version",
+                          "decisionRequirementsId",
+                          "tenantId",
+                        ],
+                      },
+                      order: {
+                        description:
+                          "The order in which to sort the related field.",
+                        type: "string",
+                        enum: ["ASC", "DESC"],
+                        default: "ASC",
+                        title: "SortOrderEnum",
+                      },
+                    },
+                    required: ["field"],
+                    title: "DecisionRequirementsSearchQuerySortRequest",
+                  },
+                },
+              },
+              title: "DecisionRequirementsSearchQueryRequestBase",
+            },
+          ],
+          properties: {
+            filter: {
+              description: "The decision definition search filters.",
+              allOf: [
+                {
+                  description: "Decision requirements search filter.",
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsFilterRequest",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN ID of the decision requirements.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "DecisionRequirementsSearchQueryRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.string+json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              description:
+                "Base properties for DecisionRequirementsSearchQueryRequest",
+              type: "object",
+              allOf: [
+                {
+                  type: "object",
+                  properties: {
+                    page: {
+                      description: "Pagination criteria.",
+                      allOf: [
+                        {
+                          type: "object",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                            searchAfter: {
+                              description:
+                                "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                            searchBefore: {
+                              description:
+                                "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                              type: "array",
+                              items: { type: "object" },
+                            },
+                          },
+                          title: "SearchQueryPageRequest",
+                        },
+                      ],
+                      type: "object",
+                    },
+                  },
+                  title: "SearchQueryRequest",
+                },
+              ],
+              properties: {
+                sort: {
+                  description: "Sort field criteria.",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      field: {
+                        description: "The field to sort by.",
+                        type: "string",
+                        enum: [
+                          "decisionRequirementsKey",
+                          "decisionRequirementsName",
+                          "version",
+                          "decisionRequirementsId",
+                          "tenantId",
+                        ],
+                      },
+                      order: {
+                        description:
+                          "The order in which to sort the related field.",
+                        type: "string",
+                        enum: ["ASC", "DESC"],
+                        default: "ASC",
+                        title: "SortOrderEnum",
+                      },
+                    },
+                    required: ["field"],
+                    title: "DecisionRequirementsSearchQuerySortRequest",
+                  },
+                },
+              },
+              title: "DecisionRequirementsSearchQueryRequestBase",
+            },
+          ],
+          properties: {
+            filter: {
+              description: "The decision definition search filters.",
+              allOf: [
+                {
+                  description:
+                    "Decision requirements search filter. Key attributes as string values.",
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsFilterRequest",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN ID of the decision requirements.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsFilter",
+                },
+              ],
+            },
+          },
+          title: "DecisionRequirementsSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The decision requirements search result.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching decision requirements.",
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsItem.",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "The DMN ID of the decision requirements.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The name of the resource from which this decision requirements was parsed.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsResult",
+                },
+              },
+            },
+            title: "DecisionRequirementsSearchQueryResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching decision requirements.",
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsItem.",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "The DMN ID of the decision requirements.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The name of the resource from which this decision requirements was parsed.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsItem",
+                },
+              },
+            },
+            title: "DecisionRequirementsSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching decision requirements.",
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionRequirementsItem.",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision requirements.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "The DMN ID of the decision requirements.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The name of the resource from which this decision requirements was parsed.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision requirements.",
+                        },
+                      },
+                      title: "DecisionRequirementsItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision requirements.",
+                    },
+                  },
+                  title: "DecisionRequirementsResult",
+                },
+              },
+            },
+            title: "DecisionRequirementsSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

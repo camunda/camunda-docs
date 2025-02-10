@@ -1,0 +1,599 @@
+---
+security:
+  # everything that's related to authentication
+  auth:
+    cookie:
+      same-site:
+        # decides if the optimize auth cookie has the same site cookie flag set
+        enabled: true
+    token:
+      # Optimize uses token-based authentication to keep track of which users are
+      # logged in. Define when a token is supposed to expire.
+      lifeMin: 60
+      # Optional secret used to sign authentication tokens, it's recommended to use at least a 64 character secret.
+      # If set `null` a random secret will be generated with each startup of Optimize.
+      secret: null
+    # List of user ids that are granted full permission to all collections, reports & dashboards
+    # Note: For reports these users are still required to be granted access to the corresponding process/decision
+    # definitions in Camunda Platform Admin
+    superUserIds: []
+
+  # Here you can define HTTP response headers that Optimize can send in its responses
+  # to increase the security of your application.
+  # Find more information here: https://owasp.org/www-project-secure-headers/
+  responseHeaders:
+    # HTTP Strict Transport Security (HSTS) is a web security policy mechanism which helps to protect websites
+    # against protocol downgrade attacks and cookie hijacking.
+    # More
+    HSTS:
+      # The time, in seconds, that the browser should remember that this site is only to be accessed using HTTPS.
+      # If you set the number to a negative value no HSTS header is sent.
+      max-age: 63072000
+      # If this optional parameter is specified, this rule applies to all of the site’s subdomains as well.
+      includeSubDomains: true
+    # This header enables the cross-site scripting (XSS) filter in your browser.
+    # Can have one of the following options:
+    # * 0: Filter disabled.
+    # * 1: Filter enabled. If a cross-site scripting attack is detected, in order to stop the attack,
+    #      the browser will sanitize the page.
+    # * 1; mode=block: Filter enabled. Rather than sanitize the page, when a XSS attack is detected, the browser will
+    #                  prevent rendering of the page.
+    # * 1; report=http://[YOURDOMAIN]/your_report_URI: Filter enabled. The browser will sanitize the page and
+    #                                                  report the violation. This is a Chromium function utilizing CSP
+    #                                                  violation reports to send details to a URI of your choice.
+    X-XSS-Protection: 1; mode=block
+    # Setting this header will prevent the browser from interpreting files as a different MIME type to
+    # what is specified in the Content-Type HTTP header (e.g. treating text/plain as text/css).
+    X-Content-Type-Options: true
+    # A Content Security Policy (CSP) has significant impact on the way browsers render pages.
+    # By default Optimize uses the base-uri directive which restricts the URLs that can be used to the Optimize pages.
+    # Find more details: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
+    Content-Security-Policy: base-uri 'self'
+
+# A global access token used by all public APIs of Optimize
+api:
+  # Authentication information to be provided for the public APIs of Optimize.
+  # Provide either a static access token OR a URL for a resource server. If both are provided, the static access
+  # token will be ignored and the resource server will be used for validation instead
+  accessToken: ${OPTIMIZE_API_ACCESS_TOKEN:null}
+  jwtSetUri: ${SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI:null}
+
+container:
+  # A host name or IP address, to identify a specific network interface on
+  # which to listen.
+  host: localhost
+  # Allows you to specify a custom context path. If set, must start with a leading '/'
+  contextPath: ${CAMUNDA_OPTIMIZE_CONTEXT_PATH:null}
+  ports:
+    # A port number that will be used by Optimize to process HTTP connections.
+    # If set to null, ~ or left empty, http connections won't be accepted.
+    http: 8090
+    # A port number that will be used by Optimize to process
+    # secure HTTPS connections.
+    https: 8091
+  # HTTPS requires an SSL Certificate. When you generate an SSL Certificate,
+  # you are creating a keystore file and a keystore password for use when the
+  # browser interface connects
+  keystore:
+    location: keystore.jks
+    password: optimize
+  # configuration of status reporting web socket
+  status:
+    # max number of threads\sessions that will be kept to report status
+    connections:
+      max: 10
+  # Optional url to access Optimize (used for links to Optimize in e.g. alert emails)
+  accessUrl: null
+  # Enable use of HTTP/2 for Optimize
+  http2Enabled: false
+
+# Configuration for engines used to import data. Please note that you have to have at
+# least one engine configured at all times.
+engines:
+  # An alias of the engine, which will be used for internal purposes like
+  # logging and displaying which data belong to which engine.
+  "camunda-bpm":
+    # The process engines name on the platform, this is the unique engine identifier on the platforms REST API.
+    name: default
+    # A default tenant to the be injected on data from this engine where no tenant is configured in the engine itself.
+    # This property is only relevant in the context of a `One Process Engine Per Tenant`.
+    # For details consult the Multi-Tenancy documentation.
+    defaultTenant:
+      # the id used for this default tenant on persisted entities
+      id: null
+      # the name used for this tenant when displayed in the UI
+      name: null
+    #A base URL that will be used for connections to the Camunda Engine REST API.
+    rest: "http://localhost:8080/engine-rest"
+    # Determines whether this instance of Optimize should import definition & historical data from this engine.
+    importEnabled: true
+    # Determines whether this instance of Optimize should convert historical data to event data
+    # usable for event based processes.
+    eventImportEnabled: false
+    authentication:
+      # Toggles basic authentication on or off. When enabling basic
+      # authentication, please be aware that you also need to adjust the values
+      # of the user and password.
+      # Also note, when enabled, it is required that the user has
+      # * READ & READ_HISTORY permission on the Process and Decision Definition resources
+      # * READ permission on the Authorization, Group, User, Deployment & Tenant resources
+      # to enable users to log in and Optimize to import the engine data.
+      enabled: false
+      # When basic authentication is enabled, this password is used to
+      # authenticate against the engine.
+      password: ""
+      # When basic authentication is enabled, this user is used to authenticate
+      # against the engine.
+      user: ""
+    # The webapps configuration allows Optimize to directly link
+    # to the other Camunda Web Applications, e.g. to jump from
+    # Optimize directly to a dedicated process instance in Cockpit
+    webapps:
+      # Defines the endpoint where to find the camunda webapps for the given engine
+      endpoint: "http://localhost:8080/camunda"
+      # Enables/disables linking to other Camunda Web Applications
+      enabled: true
+
+engine-commons:
+  connection:
+    #Maximum time without connection to the engine, Optimize should wait
+    #until a time out is triggered. A value of zero means to wait an
+    # infinite amount of time.
+    timeout: 0
+  read:
+    # Maximum time a request to the engine should last,
+    # before a timeout triggers. A value of zero means to wait an
+    # infinite amount of time.
+    timeout: 0
+
+import:
+  data:
+    activity-instance:
+      # Determines the page size for historic activity instance fetching.
+      maxPageSize: 10000
+    incident:
+      # Determines the page size for historic incident fetching.
+      maxPageSize: 10000
+    process-definition-xml:
+      # Determines the page size for process definition xml model
+      # fetching. Should be a low value, as large models will lead to
+      # memory or timeout problems.
+      maxPageSize: 2
+    process-definition:
+      # Determines the page size for process definition fetching.
+      maxPageSize: 10000
+    process-instance:
+      # Determines the maximum page size for historic process instance fetching.
+      maxPageSize: 10000
+    variable:
+      # Determines the page size for historic variable instance fetching.
+      maxPageSize: 10000
+      # Controls whether Optimize fetches the serialized value of object variables from the Camunda Runtime REST API.
+      # By default this is active for backwards compatibility. If no variable plugin to handle object
+      # variables is installed, it can be turned off to reduce the overhead of the variable import.
+      includeObjectVariableValue: true
+    user-task-instance:
+      # Determines the page size for historic user task instance fetching
+      maxPageSize: 10000
+    identity-link-log:
+      # Determines the page size for identity link log fetching.
+      maxPageSize: 10000
+    decision-definition-xml:
+      # Determines the page size for decision definition xml model
+      # fetching. Should be a low value, as large models will lead to
+      # memory or timeout problems.
+      maxPageSize: 2
+    decision-definition:
+      # Determines the page size for decision definition fetching.
+      maxPageSize: 10000
+    decision-instance:
+      # Determines the page size for historic decision instance fetching.
+      maxPageSize: 10000
+    tenant:
+      # Determines the page size for tenants fetching.
+      maxPageSize: 10000
+    group:
+      # Determines the page size for groups fetching.
+      maxPageSize: 10000
+    authorization:
+      # Determines the page size for authorizations fetching.
+      maxPageSize: 10000
+    dmn:
+      # Determines if the DMN/decision data, such as decision definitions and instances
+      # should be imported.
+      enabled: true
+    user-task-worker:
+      # Determines if the user task worker data, such as assignee or candidate group of
+      # a user task, should be imported.
+      enabled: true
+      # This sub-section controls to what extent and how Optimize fetches and displays metadata of user task workers.
+      # The particular metadata is first-, last name and the email of the users or the names of the candidate groups.
+      # The data is displayed in the context of reports when grouping/distributing by assignees/candidateGroups or
+      # when filtering on them.
+      metadata:
+        # Determines whether Optimize imports and displays assignee user metadata, otherwise only the user id is shown.
+        includeUserMetaData: true
+        # Cron expression for when to fully refresh the internal metadata cache, it defaults to every third hour.
+        # Otherwise deleted assignees/candidateGroups or metadata changes are not reflected in Optimize.
+        cronTrigger: "0 */3 * * *"
+        # The max page size when multiple users or groups are iterated during the metadata refresh.
+        maxPageSize: 10000
+        # The entry limit of the cache that holds the metadata, if you need more entries you can increase that limit.
+        # When increasing the limit, keep in mind to account for that by increasing the JVM heap memory as well.
+        # Please refer to the technical guide on how to configure the heap size.
+        maxEntryLimit: 100000
+  # Some data can no longer be imported to a given document if its number of nested documents has reached the configured
+  # limit. Enable this setting to skip this data during import if the nested document limit has been reached.
+  skipDataAfterNestedDocLimitReached: false
+  # Number of threads being used to process the import jobs per data type that are writing data to elasticsearch.
+  elasticsearchJobExecutorThreadCount: 1
+  # Adjust the queue size of the import jobs per data type that store data to elasticsearch.
+  # A too large value might cause memory problems.
+  elasticsearchJobExecutorQueueSize: 5
+  handler:
+    backoff:
+      # Interval which is used for the backoff time calculation.
+      initial: 1000
+      # Once all pages are consumed, the import service component will
+      # start scheduling fetching tasks in increasing periods of time,
+      # controlled by 'backoff' counter.
+      # This property sets maximal backoff interval in seconds
+      max: 30
+  #States how often the import index should be stored to Elasticsearch.
+  importIndexStorageIntervalInSec: 10
+  # the time interval the import backs off from the current tip of the time, to reread potentially missed concurrent writes
+  currentTimeBackoffMilliseconds: 300000
+  # The identity sync enables Optimize to build up a in memory cache containing Optimize authorized users & groups.
+  # This data is used in the collection permissions to allow convenient search capabilities
+  # and to display member meta-data such as first name, last name or email.
+  identitySync:
+    # Whether to include metaData (firstName, lastName, email) when synchronizing users
+    includeUserMetaData: true
+    # Whether collection role cleanup should be performed
+    collectionRoleCleanupEnabled: false
+    # Cron expression for when the identity sync should run, defaults to every second hour.
+    cronTrigger: "0 */2 * * *"
+    # The max page size when multiple users or groups are iterated during the import.
+    maxPageSize: 10000
+    # The entry limit of the cache, if you need more entries you can increase that limit.
+    # When increasing the limit, keep in mind to account for that by increasing the JVM heap memory as well.
+    # Please refer to the technical guide on how to configure the heap size.
+    maxEntryLimit: 100000
+
+# everything that is related with configuring Elasticsearch or creating
+# a connection to it.
+es:
+  connection:
+    # Maximum time without connection to Elasticsearch, Optimize should
+    # wait until a time out triggers.
+    timeout: 10000
+    # Maximum size of the Elasticsearch response consumer heap buffer. This can be increased to resolve errors
+    # from Elasticsearch relating to the entity content being too long
+    responseConsumerBufferLimitInMb: 100
+    # The path prefix under which Elasticsearch is available
+    pathPrefix: ""
+    # a list of Elasticsearch nodes Optimize can connect to. If you  have built
+    # an Elasticsearch cluster with several nodes it is recommended to define
+    # several connection points in case one node fails.
+    nodes:
+      # the address/hostname under which the Elasticsearch node is available.
+      - host: "localhost"
+        # A port number used by Elasticsearch to accept HTTP connections.
+        httpPort: 9200
+    # HTTP forward proxy configuration
+    proxy:
+      # whether an HTTP proxy should be used for requests to elasticsearch
+      enabled: false
+      # the host of the proxy to use
+      host: null
+      # the port of the proxy to use
+      port: null
+      # whether this proxy is using a secured connection
+      sslEnabled: false
+    # Determines whether the hostname verification should be skipped
+    skipHostnameVerification: false
+  # Configuration relating to ES backup
+  backup:
+    # The repository name in which the backups should be stored
+    repositoryName: ""
+
+  # Elasticsearch security settings
+  security:
+    # the basic auth (x-pack) username
+    username: null
+    # the basic auth (x-pack) password
+    password: null
+    # SSL/HTTPS secured connection settings
+    ssl:
+      # path to a PEM encoded file containing the certificate (or certificate chain)
+      # that will be presented to clients when they connect.
+      certificate: null
+      # A list of paths to PEM encoded CA certificate files that should be trusted, e.g. ['/path/to/ca.crt'].
+      # Note: if you are using a public CA that is already trusted by the Java runtime,
+      # you do not need to set the certificate_authorities.
+      certificate_authorities: []
+      # used to enable or disable TLS/SSL for the HTTP connection
+      enabled: false
+      # used to specify that the certificate was self-signed
+      selfSigned: false
+
+  # Maximum time a request to elasticsearch should last, before a timeout
+  # triggers.
+  scrollTimeout: 60000
+  settings:
+    # the maximum number of buckets returned for an aggregation
+    aggregationBucketLimit: 1000
+    index:
+      # the prefix prepended to all Optimize index and alias names
+      # NOTE: Changing this after Optimize was already run before, will create new empty indexes
+      prefix: "optimize"
+      # How often should the data replicated in case of node failure.
+      number_of_replicas: 1
+      # How many shards should be used in the cluster for process instance and decision instance indices.
+      # All other indices will be made up of a single shard
+      # NOTE: this property only applies the first time Optimize is started and
+      # the schema/mapping is deployed on Elasticsearch. If you want to take
+      # this property to take effect again, you need to delete all indexes (with it all data)
+      # and restart Optimize.
+      number_of_shards: 1
+      # How long Elasticsearch waits until the documents are available
+      # for search. A positive value defines the duration in seconds.
+      # A value of -1 means that a refresh needs to be done manually.
+      refresh_interval: 2s
+      # Optimize uses nested documents to store list information such as activities or variables belonging to a
+      # process instance. So this setting defines the maximum number of activities/variables/incidents that a single
+      # process instance can contain. This limit helps to prevent out of memory errors and should be used with care.
+      nested_documents_limit: 10000
+
+# everything that is related with configuring OpenSearch or creating
+# a connection to it.
+opensearch:
+  connection:
+    # Maximum time without connection to OpenSearch, Optimize should
+    # wait until a timeout triggers.
+    timeout: 10000
+    # Maximum size of the OpenSearch response consumer heap buffer.
+    responseConsumerBufferLimitInMb: 100
+    # The path prefix under which OpenSearch is available
+    pathPrefix: ""
+    # a list of OpenSearch nodes Optimize can connect to. If you  have built
+    # an OpenSearch cluster with several nodes it is recommended to define
+    # several connection points in case one node fails.
+    nodes:
+      # the address/hostname under which the OpenSearch node is available.
+      - host: "localhost"
+        # A port number used by OpenSearch to accept HTTP connections.
+        httpPort: 9200
+    # Determines whether the hostname verification should be skipped
+    skipHostnameVerification: false
+  # Configuration relating to OS backup
+  backup:
+    # The repository name in which the backups should be stored
+    repositoryName: ""
+  # OpenSearch security settings
+  security:
+    # the basic auth (x-pack) username
+    username: null
+    # the basic auth (x-pack) password
+    password: null
+    # SSL/HTTPS secured connection settings
+    ssl:
+      # path to a PEM encoded file containing the certificate (or certificate chain)
+      # that will be presented to clients when they connect.
+      certificate: null
+      # A list of paths to PEM encoded CA certificate files that should be trusted, e.g. ['/path/to/ca.crt'].
+      # Note: if you are using a public CA that is already trusted by the Java runtime,
+      # you do not need to set the certificate_authorities.
+      certificate_authorities: []
+      # used to enable or disable TLS/SSL for the HTTP connection
+      enabled: false
+      # used to specify that the certificate was self-signed
+      selfSigned: false
+  # Maximum time in seconds a request to opensearch should last, before a timeout
+  # triggers.
+  scrollTimeoutInSeconds: 60
+  settings:
+    # the maximum number of buckets returned for an aggregation
+    aggregationBucketLimit: 1000
+    index:
+      # the prefix prepended to all Optimize index and alias names
+      # NOTE: Changing this after Optimize was already run before, will create new empty indexes
+      prefix: "optimize"
+      # How often should the data replicated in case of node failure.
+      number_of_replicas: 1
+      # How many shards should be used in the cluster for process instance and decision instance indices.
+      # All other indices will be made up of a single shard
+      # NOTE: this property only applies the first time Optimize is started and
+      # the schema/mapping is deployed on OpenSearch. If you want to take
+      # this property to take effect again, you need to delete all indexes (with it all data)
+      # and restart Optimize. This configuration will also only be applied to the current write instance indices. Archive
+      # indices will have a single shard regardless
+      number_of_shards: 1
+      # How long OpenSearch waits until the documents are available
+      # for search. A positive value defines the duration in seconds.
+      # A value of -1 means that a refresh needs to be done manually.
+      refresh_interval: 2s
+      # Optimize uses nested documents to store list information such as activities or variables belonging to a
+      # process instance. So this setting defines the maximum number of activities/variables that a single
+      # process instance can contain. This limit helps to prevent out of memory errors and should be used with care.
+      nested_documents_limit: 10000
+
+plugin:
+  # Defines the directory path in the local Optimize file system which should be checked for plugins
+  directory: "./plugin"
+  variableImport:
+    # Look in the given base package list for variable import adaption plugins.
+    # If empty, the import is not influenced.
+    basePackages: []
+  engineRestFilter:
+    # Look in the given base package list for engine rest filter plugins.
+    # If empty, the REST calls are not influenced.
+    basePackages: []
+  authenticationExtractor:
+    # Looks in the given base package list for authentication extractor plugins.
+    # If empty, the standard Optimize authentication mechanism is used.
+    basePackages: []
+  decisionInputImport:
+    # Look in the given base package list for Decision input import adaption plugins.
+    # If empty, the import is not influenced.
+    basePackages: []
+  decisionOutputImport:
+    # Look in the given base package list for Decision output import adaption plugins.
+    # If empty, the import is not influenced.
+    basePackages: []
+  elasticsearchCustomHeader:
+    # Look in the given base package list for Elasticsearch custom header fetching plugins.
+    # If empty, ES requests are not influenced.
+    basePackages: []
+
+serialization:
+  # Define a custom date format that should be used for
+  # fetching date data from the engine(should be the same as in the engine)
+  engineDateFormat: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+
+alerting:
+  quartz:
+    jobStore: "org.quartz.simpl.RAMJobStore"
+
+email:
+  # A switch to control email sending process.
+  enabled: false
+  # Email address that can be used to send alerts
+  address: ""
+  # The smtp server name
+  hostname: ""
+  # The smtp server port. This one is also used as SSL port for the security connection.
+  port: 587
+  # Define configuration properties for the authentication of the email server
+  authentication:
+    # A switch to control whether the email server requires authentication
+    enabled: true
+    # Username of your smtp server
+    username: ""
+    # Corresponding password to the given user of your smtp server
+    password: ""
+    # States how the connection to the server should be secured.
+    # Possible values are 'NONE', 'STARTTLS' or 'SSL/TLS'
+    securityProtocol: "NONE"
+
+entity:
+  # which users are authorized to create/edit/delete Optimize entities outside of a collection.
+  # Available options: 'all', 'superuser', 'none'
+  authorizedEditors: "all"
+  # Specifies the frequency with which we want to refresh the KPI values on ES
+  # The given number is the interval in seconds
+  kpiRefreshInterval: 600
+
+export:
+  csv:
+    # which users are authorized to download CSVs. Available options: 'all', 'superuser', 'none'
+    authorizedUsers: "all"
+    # Maximum number of records returned by CSV export
+    # Note: Increasing this value comes at a memory cost for the Optimize application that varies based on the actual data.
+    # As a rough guideline, an export of a 50000 records raw data report containing 8 variables on each instance
+    # can cause temporary heap memory peaks of up to ~200MB with the actual CSV file having a size of ~20MB.
+    # Please adjust the heap memory accordingly.
+    limit: 1000
+
+sharing:
+  # decides if the sharing feature of Optimize can be used in the UI.
+  enabled: true
+
+historyCleanup:
+  # cron expression for when the cleanup should run
+  cronTrigger: "0 1 * * *"
+  # default time to live (ttl) for data, when reached the corresponding process/decision/event instances will get cleaned up
+  # Format is ISO_8601 duration  https://en.wikipedia.org/wiki/ISO_8601#Durations
+  ttl: "P2Y"
+  processDataCleanup:
+    # switch for the camunda process data cleanup, defaults to false
+    enabled: false
+    # type of process data cleanup to perform, possible values:
+    # 'all' - delete everything related to the process instance
+    # 'variables' - only delete associated variables of a process instance
+    cleanupMode: "all"
+    # Defines the batch size in which camunda engine process instance data gets cleaned up
+    # may be reduced if requests fail due to request size constraints
+    batchSize: 10000
+    # process definition specific configuration parameters that will overwrite the general parameters (ttl, processDataCleanupMode)
+    # for the specific processDefinition key
+    perProcessDefinitionConfig:
+    # 'myProcessDefinitionKey':
+    #   ttl: 'P2M'
+    #   cleanupMode: 'variables'
+  decisionDataCleanup:
+    # switch for the camunda decision data cleanup, defaults to false
+    enabled: false
+    # decision definition specific configuration parameters that will overwrite the general parameters (ttl)
+    # for the specific decisionDefinition key
+    perDecisionDefinitionConfig:
+    # 'myDecisionDefinitionKey':
+    #   ttl: 'P2M'
+  ingestedEventCleanup:
+    # switch for the ingested event data cleanup, defaults to false
+    enabled: false
+
+locales:
+  # all locales available
+  # Note: for others than the default there must be a <localeCode>.json file available under ./config/localization.
+  availableLocales: ["en", "de"]
+  # the fallback locale is used if there is a locale requested that is not available in availableLocales
+  fallbackLocale: "en"
+
+ui:
+  header:
+    # determines the color theme of the text in the header. Currently 'dark' and 'light' are supported.
+    textColor: "dark"
+    # Path to the logo that is displayed in the header of Optimize.
+    # Path can be:
+    # * relative: starting from the config folder you can provide a relative path.
+    # * absolute: full path in the file system.
+    #
+    # Supported image formats can be found here:
+    # https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#Supported_image_formats
+    pathToLogoIcon: "logo/camunda_icon.svg"
+    # a hex encoded color that should be used as background color for the header. Default color is white.
+    backgroundColor: "#FFFFFF"
+
+eventBasedProcess:
+  # A list of userIds that are authorized to manage (Create, Update, Publish & Delete) event based processes.
+  authorizedUserIds: []
+  # A list of groupIds that are authorized to manage (Create, Update, Publish & Delete) event based processes.
+  authorizedGroupIds: []
+  eventImport:
+    # Determines whether this Optimize instance performs event based process instance import.
+    enabled: false
+    # The batch size of events being correlated to process instances of event based processes.
+    maxPageSize: 5000
+  eventIngestion:
+    # Content length limit for an ingestion REST API Bulk request in bytes.
+    # Requests will be rejected when exceeding that limit.
+    # Defaults to 10MB.
+    maxBatchRequestBytes: 10485760
+    # The maximum number of requests to the event ingestion endpoint that can be served at a time
+    maxRequests: 5
+  eventIndexRollover:
+    # scheduleIntervalInMinutes specifies how frequently the rollover API should be called to see if a rollover of the
+    # event index is required (whether the rollover is triggered depends on the conditions specified by maxIndexSizeGB).
+    scheduleIntervalInMinutes: 10
+    # A rollover is triggered when the size of the current event index matches or exceeds the maxIndexSizeGB threshold.
+    maxIndexSizeGB: 50
+
+externalVariable:
+  import:
+    # Controls whether external ingested variable data is processed and imported into process instance data
+    enabled: false
+    # Determines the page size for the external variable import, that got ingested via the external variable API
+    maxPageSize: 10000
+  variableIngestion:
+    # Content length limit for the external variable ingestion request in bytes.
+    # Requests will be rejected when exceeding that limit. Defaults to 10MB.
+    maxBatchRequestBytes: 10485760
+    # The maximum number of requests to the external variable ingestion endpoint that can be served at a time.
+    maxRequests: 5
+  variableIndexRollover:
+    # scheduleIntervalInMinutes specifies how frequently the rollover API should be called to see if a rollover of the
+    # external variable index is required (whether the rollover is triggered depends on the conditions specified by maxIndexSizeGB).
+    scheduleIntervalInMinutes: 10
+    # A rollover is triggered when the size of the current external variable index matches or exceeds the maxIndexSizeGB threshold.
+    maxIndexSizeGB: 50

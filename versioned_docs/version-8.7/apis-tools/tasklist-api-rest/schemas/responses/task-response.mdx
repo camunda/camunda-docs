@@ -1,0 +1,197 @@
+---
+id: task-response
+title: TaskResponse
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+TaskResponse - represents a user task.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "id": string,
+    "name": string,
+    "taskDefinitionId": string,
+    "processName": string,
+    "creationDate": string,
+    "completionDate": string,
+    "assignee": string,
+    "taskState": TaskState,
+    "formKey": string,
+    "formId": string,
+    "formVersion": long,
+    "isFormEmbedded": boolean,
+    "processDefinitionKey": string,
+    "processInstanceKey": string,
+    "tenantId": string,
+    "dueDate": string,
+    "followUpDate": string,
+    "candidateGroups": [string],
+    "candidateUsers": [string]
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "taskDefinitionId": "string",
+  "processName": "string",
+  "creationDate": "string",
+  "completionDate": "string",
+  "assignee": "string",
+  "taskState": "CREATED",
+  "formKey": "string",
+  "formId": "string",
+  "formVersion": 1,
+  "isFormEmbedded": true,
+  "processDefinitionKey": "string",
+  "processInstanceKey": "string",
+  "tenantId": "string",
+  "dueDate": "2023-03-29T20:08:07.171Z",
+  "followUpDate": "2023-03-29T20:08:07.171Z",
+  "candidateGroups": ["string"],
+  "candidateUsers": ["string"]
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> The unique identifier of the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>name</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Name of the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>taskDefinitionId</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> User task ID from the BPMN definition
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>processName</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Name of the process
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>creationDate</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> When was the task created
+> (renamed equivalent of [`Task.creationTime`](../../../tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbcreationtimebcodestring--) field)
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>completionDate</b></code>](#)<Bullet />`string`
+
+> When was the task completed
+> (renamed equivalent of [`Task.completionTime`](../../../tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbcompletiontimebcodestring-) field)
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>assignee</b></code>](#)<Bullet />`string`
+
+> Username/id of who is assigned to the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>taskState</b></code>](#)<Bullet />[`TaskState`](../enums/task-state.mdx) <Badge class="secondary" text="non-null"/> <Badge class="secondary" text="enum"/>
+
+> State of the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>formKey</b></code>](#)<Bullet />`string`
+
+> Reference to the task form
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>formId</b></code>](#)<Bullet />`string`
+
+> Reference to the ID of a deployed form. If the form is not deployed, this property is null.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>formVersion</b></code>](#)<Bullet />`long`
+
+> Reference to the version of a deployed form. If the form is not deployed, this property is null.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>isFormEmbedded</b></code>](#)<Bullet />`boolean`
+
+> Reference to the form is embedded or deployed. If there is no form, this property is null.
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>processDefinitionKey</b></code>](#)<Bullet />`string`
+
+> Reference to process definition
+> (renamed equivalent of [`Task.processDefinitionId`](../../../tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessdefinitionidbcodestring-) field)
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>processInstanceKey</b></code>](#)<Bullet />`string`
+
+> Reference to process instance id
+> (renamed equivalent of [`Task.processInstanceId`](../../../tasklist-api/objects/task.mdx#code-style-fontweight-normal-taskbprocessinstanceidbcodestring-) field)
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>tenantId</b></code>](#)<Bullet />`string`
+
+> Indicates the Tenant ID associated with the returned task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>candidateGroups</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Candidate groups
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>candidateUsers</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Candidate users
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>followUpDate</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Follow-up date for the task
+
+#### [<code style={{ fontWeight: 'normal' }}>TaskResponse.<b>dueDate</b></code>](#)<Bullet />`string` <Badge class="secondary" text="list"/>
+
+> Due date for the task
+
+### Returned by
+
+[`Get task`](../../controllers/tasklist-api-rest-task-controller.md#get-task) <Badge class="secondary" text="GET"/> <Bullet />
+[`Assign task`](../../controllers/tasklist-api-rest-task-controller.md#assign-task) <Badge class="secondary" text="PATCH"/> <Bullet />
+[`Unassign task`](../../controllers/tasklist-api-rest-task-controller.md#unassign-task) <Badge class="secondary" text="PATCH"/> <Bullet />
+[`Complete task`](../../controllers/tasklist-api-rest-task-controller.md#complete-task) <Badge class="secondary" text="PATCH"/>

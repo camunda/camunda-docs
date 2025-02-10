@@ -1,0 +1,151 @@
+---
+id: by-key
+title: "Get variable by key"
+description: "Get variable by key"
+sidebar_label: "Get variable by key"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVk1z2zYQ/SuYPbUpI8qJm8nw5oOSUd2pPZbaHDw6gOBKQkwCDLCUq+Hwv3cWIGnLYtrk2MlFIrAf2H27i4cWSO48ZPfwl3Ra5iXCJgFbo5OkrVkWkEF+vMYjJFBLJyskdKzfgpEVQgYPQaYNZFBL2kMCBXrldM32kME1HoXdisPgPgGHXxrtsICMXIMJeLXHSkLWAh1rdqkN4Q4dJLC1rpIUt95dQtdt2NzX1nj0bPFmPue/0yNXjVLoPSSgrCE0xCqyrkutQlbpZ8967fnJNv+MijhXxxiQjqdwjt8SXrDjo5fGkzQKr7/Z0Ctbf4d6BH9U9eS02bHgIMtmWkKuMUoS4z5Kc2tLlCaI0UhDy2LClqWaSt4au6TrePtyCv6lOchSF4LrjJ6+Xoba2bzE6pfvLYcnSY3/T6TevuG8KvRe7qYh0X2ZpvEKG/8GxsI560Yk3p4j8cG6XBcFmlMMXqWv/v/pXp6nexcLjlx6bxunUBhLYmsbU/wYXfDr1Dxc3S7Fs4QFBoMfAA++1lA1TtMxMEaO0qF7HW7T+02XtKCsfdAYVpuXxPERaWQNkR9FJJoKaW+ZlXYYIGDKySA9XKSDrk/bBzx2wIe7w8BWjSshgzaC2WVp2u6tpy5ra+uIlUdzzo5lsZBb2ZSMXGmVLMP2yzjXexQs4CuZmY72KLjk8fRZYAXrXrh7P38/n/TEql/x8tQIT372RPWkn6g86Smw6FCYFevFpIdijMWVtY7M31P9ze3i7mq9eL1arFbLmz8G2u/tuuSkwKOXPsQQUOCcoASD9oehN3/7tA59pM3WBvO+n27CYwTFbZOXWnEq5wlbIQPlC6lIH1BIUwhlq7pEvo16UhZDY/OXGNxurROVNZosd3KwJGcb7oS9tcTdHUdVqlDD2EiclM/S9PHxcaZk1ZhCzpStGIRSKzQ+4Njj9nu/k7wwLqzyo7W2YZ063KJDozDtHfk08Do6H5O9mM1n89hVnippnh00PTInWI1lIfyb0rqUOrB/CKztx+keDhcnE5FAxq42ST8Y99C2ufT4pyu7jre/NOjCUD9ZhakrtOfvArKtLD2exTJegfDTXf8q/FmcvxgnQx6a1BxhfPYAJPGxFn67TZfAHmWBLkQTJVdKYU3PbM5ehjwf4z3zcbGGBGTDwDy9m057OHifjKdto8baPqDpujE84jUH2HX/AJki7kY=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get variable by key"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/variables/{key}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get variable by key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of variable",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              key: { type: "integer", format: "int64" },
+              processInstanceKey: { type: "integer", format: "int64" },
+              scopeKey: { type: "integer", format: "int64" },
+              name: { type: "string" },
+              value: { type: "string" },
+              truncated: { type: "boolean" },
+              tenantId: { type: "string" },
+            },
+            title: "Variable",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

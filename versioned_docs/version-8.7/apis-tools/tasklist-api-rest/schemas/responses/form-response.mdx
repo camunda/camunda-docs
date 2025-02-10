@@ -1,0 +1,113 @@
+---
+id: form-response
+title: FormResponse
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+FormResponse - represents task embedded form.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "id": string,
+    "processDefinitionKey": string,
+    "schema": string,
+    "version": long,
+    "tenantId": string,
+    "isDeleted": boolean
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "id": "string",
+  "processDefinitionKey": "string",
+  "schema": "string",
+  "version": "long",
+  "tenantId": "string",
+  "isDeleted": "boolean"
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> The unique identifier of the embedded form within one process
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>processDefinitionKey</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Reference to process definition
+> (renamed equivalent of [`Form.processDefinitionId`](../../../tasklist-api/objects/form.mdx#code-style-fontweight-normal-formbprocessdefinitionidbcodestring--) field)
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>schema</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Form content
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>version</b></code>](#)<Bullet />`long` <Badge class="secondary" />
+
+> The version field is null in the case of an embedded form, while it represents the deployed form's version in other scenarios.
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>tenantId</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Indicates the Tenant ID associated with the returned form
+
+#### [<code style={{ fontWeight: 'normal' }}>FormResponse.<b>isDeleted</b></code>](#)<Bullet />`boolean` <Badge class="secondary" text="non-null"/>
+
+> Indicates whether the deployed form is deleted or not on Zeebe. This field is false by default, in the case of an embedded form.
+
+### Returned by
+
+[`Get form`](../../controllers/tasklist-api-rest-form-controller.md#get-form) <Badge class="secondary" text="GET"/>

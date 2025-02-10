@@ -1,0 +1,110 @@
+---
+id: variable-response
+title: VariableResponse
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+VariableResponse - represents a variable with `id`, `name` and `value` properties.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+  "id": string,
+  "name": string,
+  "value": string,
+  "draft": {
+    "value": string
+  },
+  "tenantId": string
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "id": "<id>-<var_name>",
+  "name": "<var_name>",
+  "value": "\"stringVariableValue\"",
+  "draft": {
+    "value": "\"draftValueOfVariable\""
+  },
+  "tenantId": "<tenant_ID>"
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> id of the variable
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>name</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> variable name
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>value</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> represents full variable value
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>draft</b></code>](#)<Bullet />`object` <Badge class="secondary" text="non-null"/>
+
+> represents draft value of variable
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableResponse.<b>tenantId</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> Indicates the Tenant ID associated with the returned variable
+
+### Returned by
+
+[`Get variable`](../../controllers/tasklist-api-rest-variables-controller.md#get-variable) <Badge class="secondary" text="GET"/>

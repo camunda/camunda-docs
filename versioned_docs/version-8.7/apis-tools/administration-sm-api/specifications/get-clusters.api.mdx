@@ -1,0 +1,166 @@
+---
+id: get-clusters
+title: "Get current clusters"
+description: "Returns a list of all automation and management clusters. Each cluster entry contains the running apps and their status."
+sidebar_label: "Get current clusters"
+hide_title: true
+hide_table_of_contents: true
+api: eJzFV9tu2zgQ/RViXnYXYGzvDSj0ZgRtkUWzKRoHBdbwA02NLdYUqZBUs66gf18MKcvyJYmBvT1ZooaHM2dmDscN2AqdCMqamxwyWGO41rUP6DxwcOgrazx6yBr4aTKhnxy9dKqiHZDB3QY4SGsCmkBfRVVpJSPe+Isnkwa8LLAU9KQClhGrcnRsUAm5rlVOv2FbIWTgg1NmDfzoqAejHmtkKkcT1EqhY3bFQoFMJoeh5WBEia8j/S5KfGazr4S8ECGaDjGY8szVxiizZsqMCNIHEWp/StuNyYkl9EytmBgCFCh0KLbMOmZsAH7iCJq6hGwOnSFwqM3weWPsk4EFh6CCpp3X1nir8f52mpfKTCs1uk9etRzWaLrsvx7zrFCePIwR186hCewrOq+s2ZG5i35AasI8jv8zfueQ5coHZda18gXtWmJ4QjRM1MGW0SkmTM5KYcQaSzquw/Ujdnu6yJSRus6RDWqQvBWBCRnYWtul0HrLFMEyZXwQWmPOYvX+GTjTaoOsY4v4v7U5anQjNt071B8mXMr9H4hLPPaBojnwIkLfxU5DzmbCb7TyIYZ3VwVVqm84eiHXe0aAw56Pl7Pc9fGMMFtOnelf6MFn8hTZ20dyWOLD4u/oi3Tw01A5G41eivAb7btaOrtBB7x7XYuAT4LKOokUEkAHGBcTc8RJSlXSIuIBOCShCBd3xbSqdlz9LTka0HW5BJhjlv9bHaidvkQAkFX1UivJHj59eCbcf0lRjk5xKHJl0PvLvO7NX3C8xOCUvBCwM34WLrr4WCuHOeUoAsay6ushcX7A16JPsl1+QUlJF3mu6JvQHwfduhLa4yulvNdeEM7FJjoNI4qQXR1q1fn+PokpXtrdjTu8OwcRDmLjOw6iDP1zkV4f3zRdtG1L/v4y+fm08d5Zt1R5jjHrv54bau7RfUV35VWODJ2zKfhDm08Yamc8E3sStb7o6norZNHf+GiC28YrSCjjj0veR5RQoHIssRo1VKw9ZaAf1BYcPMrakdhl8waWKBw6yOaLdsGhEk6UGA2z+SIWemG7WQ/ocyggg7EgSq9EpcZyPwD6yISPqFEjoEnTXJuNx01hfWizprIutMDhq3BKLHW6T+hbYnYlah0gA22l0HH5XCnSBzOYy6Yfb1g6PQ5SdMYh3JvJm8l5ibIuPIOyn0T3OEUI1VmcZHwWqW0HlN+TXQp6R3wvIR14hKL3zoB3D++sKwU58dvnWawxZVY2bu8KPta58iF1UXTi+3vUq6s0/+Q/nHg+lZJ0LirS6Wa76gecIQxVVSe8kMGPo8lo0o31QkbaU+4pGp+Nx09PTyMpytrkYiRtScxqJdH4OEGkGRw+dCv8aHNupe93Kxvfxw5X6NBIHHdAfhz5qKwPpTAD2PcY+rtiUKgHJDT7fyT/a5+mGqDhclxpoczgpk1dN4e+64jvQT+n9plD0yyFxwen25aWH2t029TGu26Lbc5pDMhjzzewwW1XCFWIbanrKIzHf83aoRi8fzsjFa7Jrb58j8o1ou9k1mwH2E2TLGZ2g6YlMUhOBHqHdtG27V8VCQwO
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/administration-sm-api/specifications/administration-api-self-managed
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get current clusters"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/admin-api/clusters"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns a list of all automation and management clusters. Each cluster entry contains the running apps and their status.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={[]}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Ok",
+      content: {
+        "application/json": {
+          schema: {
+            items: {
+              properties: {
+                uuid: {
+                  type: "string",
+                  description: "Unique identifier of the cluster",
+                },
+                name: { type: "string", description: "Name of the cluster" },
+                namespace: {
+                  type: "string",
+                  description: "Namespace the cluster is running in.",
+                },
+                status: {
+                  description: "Indicates if a cluster is healthy or not",
+                  type: "string",
+                  enum: ["healthy", "unhealthy", "unknown"],
+                  title: "ConsoleSMAdminApi.Status",
+                },
+                generation: {
+                  type: "string",
+                  description:
+                    "This is the current version of the running cluster",
+                },
+                type: {
+                  description:
+                    "We're distinguishing between automation and management clusters. Management clusters include applications that act globally in an installed context, like Console or Modeler. Automation clusters are the Zeebe clusters including applications like Operate, Tasklist and Optimize.",
+                  type: "string",
+                  enum: ["automation", "management"],
+                  title: "ConsoleSMAdminApi.ClusterType",
+                },
+                apps: {
+                  items: {
+                    properties: {
+                      type: {
+                        description:
+                          "What application is running in the cluster, like Zeebe, Operate, Tasklist, ...",
+                        type: "string",
+                        enum: [
+                          "zeebe-broker",
+                          "zeebe-gateway",
+                          "operate",
+                          "tasklist",
+                          "optimize",
+                          "modeler",
+                          "console",
+                          "identity",
+                          "unknown",
+                        ],
+                        title: "ConsoleSMAdminApi.AppType",
+                      },
+                      id: {
+                        type: "string",
+                        description: "Unique identifier of the application",
+                      },
+                      status: {
+                        description:
+                          "Indicates if an application is healthy or not",
+                        type: "string",
+                        enum: ["healthy", "unhealthy", "unknown"],
+                        title: "ConsoleSMAdminApi.Status",
+                      },
+                      url: {
+                        type: "string",
+                        description: "The public URL of the application",
+                      },
+                      generation: {
+                        type: "string",
+                        description:
+                          "This is the current version of the running application",
+                      },
+                      readiness: {
+                        type: "string",
+                        description: "The readiness URL of the application",
+                      },
+                      metrics: {
+                        type: "string",
+                        description: "The metrics URL of the application",
+                      },
+                    },
+                    required: ["type", "id", "status", "url", "generation"],
+                    type: "object",
+                    additionalProperties: false,
+                    title: "ConsoleSMAdminApi.App",
+                  },
+                  type: "array",
+                  description:
+                    "The list of applications running in the cluster",
+                },
+              },
+              required: [
+                "uuid",
+                "name",
+                "namespace",
+                "status",
+                "generation",
+                "type",
+                "apps",
+              ],
+              type: "object",
+              additionalProperties: false,
+              title: "ConsoleSMAdminApi.Cluster",
+            },
+            type: "array",
+          },
+        },
+      },
+    },
+    "403": { description: "Forbidden" },
+    "500": { description: "Server-side error" },
+  }}
+></StatusCodes>
