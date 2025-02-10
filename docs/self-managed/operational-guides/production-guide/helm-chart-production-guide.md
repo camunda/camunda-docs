@@ -26,8 +26,8 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **Amazon OpenSearch**: is used as a datastore for Camunda Orchestration Core components. Have a look at our guide for setting an [OpenSearch domain](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/#4-opensearch-domain).
   - **AWS Simple Active Directory**: For simple OIDC authentication in this scenario, we will use [AWS Simple Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html).
 - **Ingress NGINX**: Ensure the [ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
-- **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda cluster. This repository must be configured with OpenSearch to take backups. Have a look at the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
-- **Amazon S3** - This will be used to store backups of the Camunda cluster. [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) must be configured with OpenSearch to take backups.
+- **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda WebApps. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. Have a look at the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
+- **Amazon S3** - An additional bucket will be used to store backups of the Zeebe brokers.
 - **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md/#camunda-8-self-managed) and evaluated sufficient CPU, memory and storage necessary for the deployment.
 
 Ensure all prerequisites are in place to avoid issues during installation or upgrading in a production environment.
