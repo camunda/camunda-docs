@@ -39,12 +39,12 @@ If you do not update the cluster by August 30th 2024, we will update the cluster
 
 Camunda 8 Self-Managed clusters are not affected by this.
 
-### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
+### Supported environment changes (OpenJDK, Elasticsearch, Amazon OpenSearch)
 
 Version changes are made to supported environments:
 
 - OpenJDK minimum version raised to 21+ in Operate
-- ElasticSearch minimum version raised to 8.13+
+- Elasticsearch minimum version raised to 8.13+
 - Amazon OpenSearch minimum version raised to 2.9+
 
 To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
