@@ -937,6 +937,7 @@ module.exports = {
         id: "reference/release-notes/release-notes",
       },
       items: [
+        "reference/release-notes/880",
         "reference/release-notes/870",
         "reference/release-notes/860",
         "reference/release-notes/850",
