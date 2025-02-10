@@ -164,4 +164,4 @@ These are available in a blog format under the [release notes](https://camunda.c
 
 ## Release policy
 
-What the release policy is.
+Review the [release policy](/docs/reference/announcements-release-notes/release-policy.md) to learn more about Camunda releases, including alpha features and alpha releases.

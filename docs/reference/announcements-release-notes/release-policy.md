@@ -7,7 +7,7 @@ description: "Learn more about Camunda releases, including alpha features and al
 Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the following specific clarifications.
 
 :::info
-You can find deprecation and support announcements on the [Announcements](/reference/announcements-release-notes/overview.md#announcements) page.
+You can find deprecation and support announcements on the [announcements](/reference/announcements-release-notes/overview.md#announcements) page.
 :::
 
 ![Stable and alpha channels when provisioning a cluster](../img/diagram-releases.png)

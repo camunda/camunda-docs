@@ -157,7 +157,7 @@ To learn more about this feature, see [user task listeners](/components/concepts
 User task implementation type "Zeebe user task" is renamed to "Camunda user task", and set as the default implementation type.
 
 :::note
-As Job-worker user tasks managed by Camunda will be deprecated in Camunda 8.9, Camunda recommends you start using Camunda User Tasks (formerly known as Zeebe User Task) in your process definitions. To learn more, see [Announcements](/reference/announcements-release-notes/870/870-announcements.md#deprecated-job-based-user-tasks-querying).
+As Job-worker user tasks managed by Camunda will be deprecated in Camunda 8.9, Camunda recommends you start using Camunda User Tasks (formerly known as Zeebe User Task) in your process definitions. To learn more, see [announcements](/reference/announcements-release-notes/870/870-announcements.md#deprecated-job-based-user-tasks-querying).
 :::
 
 ## 8.7.0-alpha2
