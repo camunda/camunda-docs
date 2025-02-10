@@ -34,7 +34,7 @@ Depending on your operating system, you can find Desktop Modeler logs in differe
 <TabItem value='macos'>
 
 ```plain
-~/Library/Logs/Camunda Modeler
+~/Library/Logs/camunda-modeler
 ```
 
 </TabItem>

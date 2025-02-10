@@ -1,0 +1,218 @@
+---
+id: search
+title: "Search variables for process instances"
+description: "Search variables for process instances"
+sidebar_label: "Search variables for process instances"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWFtv2zYU/ivEeXHbqZGcppfoLUsTINvQZHHWPQR5oKVjmy1FqiTl1BP034dDyrJsq00CDAN2yVPEc+G5fOdC1+D43EJ6Cx+5EXwqEe4i0CUa7oRWFzmkYJGbbAERGPxSoXU/6nwFaQ052syIkvgghYnnYstWjYUIMq0cKke8vCylyLzO+JMlgRpstsCC039uVSKkoKefMHMQQWnIAifQEnUmpEPzMN9nXPWYhHI4RwMRzLQpuAtHb46g8XIZWnuhrOMqw58fLWgzXT6BXfECe6zWGaHmRFhyWQ1TnKlUxh3mPepUa4lceTIqrtxFPiBLVOEkHXW5JJPFH/igua8OPatP4clsO9rcGL6CCITDwu5nge612rjHS+znF+WQQxFok2+Z0lIiQFUVBNqTySlE8P5scgp3/QBMyKCmf/JrhWbVjwt+5UUpgwUnUu4D+hpdZZRlXMoNqtmzHGe8ko4ZT2ZSWMcoxkxYNk6ewya5dP2kjf6w6sOkp7kn2SbtMCEV5x7+jKucreP8GEPvhVuw0T7SR2x0nCRvx8fHh6+P3h6Nx8dvRl4x5ozbDFUu1JxNV8yDt2fTpgyHygd2lUKHi9suxdDqbPPq09f4xF3xOWX2m74p/Op6zs20GfZty4MRXTc6YM9Odbli3hGmZ2xEZn2kLzti3jI6LQ0uha4sM2gr6exz9rc4v1N1t2ALLiVEWxoPk+Su8X/UhG2plQ3APUySgU5cZWThX9eAd+v4ifX9f1/e78stPgIKn9ZsnXZcPsrR3s3XAdQ9A4h6NASf99xxJtSSS5F/G0Ol0VOJxQ9PxZJ13FX2QfPDQCrQWj4fTohoQTKcLX/wvVScGaNNF4ZX+2E412Yq8hzVdgxexC/++e4e7bv7QTt2riuV/+vcfT0E8pOrC9aDM0Mv8B9Au1/zssoIt/LDaYrcoHnpe/TtXRPVkGn9WaD/uoseWPL9IG67NlvbSJOnQLfQNPRKbX1YuFtACvFyHHfCcfewsGiWaKw3qDISUqhDhJs0juuFtq5J61Ib1/iZvH5hpDUQLWTXb2WQgtQZl4tw67bxNwtkRKDuTxPfLZARDsLtB34AdQvWWt275F0yqIlYv6Flg46NnoVz5aCewDyoqQnrQcjWhPiC0+sMbaZGKWj4rQcbXF6dXZ/cnL2cnE0mF5cfaJ7Qda1cE21lvdPSmugN8uPNM8Ga+3wN2J9+v/HgomK43jwJz8JCvb0t+RuS4cme9Od20hnfLfntMN4c9GawMxX2p26vGsLunOwuVrUP5u5O1uneWUkpYjPtg9OW0KV/EyO7qqZSZJSo/XRqxv3qxXjmxBL9zp5pigpt13t1woRia7VUSIVWwmkyyEs6oyvC+UJrF4yk7sQzj9BQJpQym8bx/f39QcaLSuX8INMFhUGKDJX16WgD+0t7Eu0I5zqznbTQ/js2OEODKsO4VWRjvyChscHZ8UFykISasa7gqnfRo7vEVvg6HDr86uJScuE3K29r3TaQW1iOt1rAOsv0q0XoBbdQ11Nu8Tcjm4aOv9DLj9rZRi60OlggzwM2Ak7hNHT/lzdkyAaAe7sztckgcZJlWLrv8t71uuHV5eSGCqr9BaXQOckYfk+/rvB7SIGg6APiK92f1SC5mld+NEDQSeXHK4rIZhndrlbv1bo9qFXPwroOHDf6M6qGOmpwxdG3f441fwLNHCaC
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search variables for process instances"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/variables/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search variables for process instances
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    description: "Search variables",
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            filter: {
+              type: "object",
+              properties: {
+                key: { type: "integer", format: "int64" },
+                processInstanceKey: { type: "integer", format: "int64" },
+                scopeKey: { type: "integer", format: "int64" },
+                name: { type: "string" },
+                value: { type: "string" },
+                truncated: { type: "boolean" },
+                tenantId: { type: "string" },
+              },
+              title: "Variable",
+            },
+            size: { type: "integer", format: "int32" },
+            searchAfter: { type: "array", items: { type: "object" } },
+            sort: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: { type: "string" },
+                  order: { type: "string", enum: ["ASC", "DESC"] },
+                },
+                title: "Sort",
+              },
+            },
+          },
+          title: "QueryVariable",
+        },
+        examples: {
+          All: {
+            description:
+              "Returns all variables (default return list size is 10)",
+            value: {},
+          },
+          Size: { description: "Returns 20 variables ", value: { size: 20 } },
+          "Filter and sort": {
+            description:
+              "Returns all variables with 'processInstanceKey' '9007199254741196' sorted ascending by name",
+            value: {
+              filter: { processInstanceKey: "9007199254741196" },
+              sort: [{ field: "name", order: "ASC" }],
+            },
+          },
+          Paging: {
+            description:
+              "Returns next variables for 'processInstanceKey' ascending by 'name'. (Copy value of 'sortValues' field of previous results) ",
+            value: {
+              filter: { processInstanceKey: "9007199254741196" },
+              sort: [{ field: "name", order: "ASC" }],
+              searchAfter: ["small", 9007199254741200],
+            },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    key: { type: "integer", format: "int64" },
+                    processInstanceKey: { type: "integer", format: "int64" },
+                    scopeKey: { type: "integer", format: "int64" },
+                    name: { type: "string" },
+                    value: { type: "string" },
+                    truncated: { type: "boolean" },
+                    tenantId: { type: "string" },
+                  },
+                  title: "Variable",
+                },
+              },
+              sortValues: { type: "array", items: { type: "object" } },
+              total: { type: "integer", format: "int64" },
+            },
+            title: "ResultsVariable",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Data invalid",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not Found",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

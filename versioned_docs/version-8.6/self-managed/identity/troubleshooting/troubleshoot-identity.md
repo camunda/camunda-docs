@@ -88,6 +88,6 @@ these options:
    3. In the `camunda-platform` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) for your version of Keycloak.
    4. Restart the Identity service again. Identity should now start successfully
 
-:::warning
+:::danger
 We would only recommend that requirements for SSL are disabled in a development environment.
 :::
