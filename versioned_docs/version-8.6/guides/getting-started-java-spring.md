@@ -135,6 +135,11 @@ camunda:
       enabled: true
       grpc-address: http://127.0.0.1:26500
       rest-address: http://127.0.0.1:8080
+
+zeebe:
+  client:
+    security:
+      plaintext: true
 ```
 
 ### Create a worker
