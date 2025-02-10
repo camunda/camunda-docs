@@ -1,0 +1,102 @@
+---
+id: error-response
+title: ErrorResponse
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+TaskResponse - represents a user task.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "status": int,
+    "message": string,
+    "instance": string
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "status": 400,
+  "message": "string",
+  "instance": "string"
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>ErrorResponse.<b>status</b></code>](#)<Bullet />`int` <Badge class="secondary" text="non-null"/>
+
+> An integer that represents the HTTP status code of the error response. For example, 400 indicates a "Bad Request" error, 404 indicates a "Not Found" error, and so on.
+
+#### [<code style={{ fontWeight: 'normal' }}>ErrorResponse.<b>message</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> A string that provides a brief description of the error that occurred.
+
+#### [<code style={{ fontWeight: 'normal' }}>ErrorResponse.<b>instance</b></code>](#)<Bullet />`string`
+
+> UUID for look up (eg. in log messages).
+
+### Returned by
+
+[`Get form`](../../controllers/tasklist-api-rest-form-controller.md#get-form) <Badge class="secondary" text="GET"/> <Bullet />
+[`Get variable`](../../controllers/tasklist-api-rest-variables-controller.md#get-variable) <Badge class="secondary" text="GET"/> <Bullet />
+[`Save draft task variables`](../../controllers/tasklist-api-rest-task-controller.md#save-draft-task-variables) <Badge class="secondary" text="POST"/> <Bullet />
+[`Search task variables`](../../controllers/tasklist-api-rest-task-controller.md#search-task-variables) <Badge class="secondary" text="POST"/> <Bullet />
+[`Get task`](../../controllers/tasklist-api-rest-task-controller.md#get-task) <Badge class="secondary" text="GET"/> <Bullet />
+[`Search tasks`](../../controllers/tasklist-api-rest-task-controller.md#search-tasks) <Badge class="secondary" text="POST"/> <Bullet />
+[`Assign task`](../../controllers/tasklist-api-rest-task-controller.md#assign-task) <Badge class="secondary" text="PATCH"/> <Bullet />
+[`Unassign task`](../../controllers/tasklist-api-rest-task-controller.md#unassign-task) <Badge class="secondary" text="PATCH"/> <Bullet />
+[`Complete task`](../../controllers/tasklist-api-rest-task-controller.md#complete-task) <Badge class="secondary" text="PATCH"/>

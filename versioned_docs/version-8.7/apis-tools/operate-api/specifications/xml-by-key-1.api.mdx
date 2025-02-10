@@ -1,0 +1,135 @@
+---
+id: xml-by-key-1
+title: "Get decision requirements as XML by key"
+description: "Get decision requirements as XML by key"
+sidebar_label: "Get decision requirements as XML by key"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVm1v2zYQ/ivEfdo61nLabCj0LcPcIku3BLGHFgiMgabOFhuJVEnKiSHwvw9HSkoca+i+Dv0k8eWeu3vuhdeBFzsH+R38hlI5ZfQtfm2VxRq1d7DmYBq0wiujLwvI4bGufj1c4eHvM+DQCCtq9GgJoAMtaoQc7vEAHJSGHBrhS+BQoJNWNQQCOVzhgZktK3p9zD5XyKFfFpB72yIHJ0usBeQd+END+Ep73KEFDltja+HT1i/nEMKaxF1jtENHEm/mc/oc61+2UqIjVdJoj9pHbHz02WNd0f+JRuet0jsIIQQO51OYl3ovKlVEX9D5Y2zRNJWSkcOssWZTYf3TF0dyE7rM5gtKAmgsMe9V8sR54Vv3TRbevoHAoUbnxA4nPKC4OC+0nD5MG6d+c/DKV7S1sNbYkYm3p0y8N3ajigL1MQevslf/f3fPT929TQFHCr0zrZXItPFsa1pdfB9Z8PNUPVzcXLJnDjOMAt8BH4GDQ9la5Q+xJ25QWLSvqSfmd+vAO5DG3CuMq/XL1vgB/XRfZMKxz398ZJsDS+21Rl8aasg7jLRQo80h259lhS2y7h4PIbYzMsfuhw7d2gpy6BK9Ic+yrjTOh7xrjPUBOOyFVWJTJXbpLIV2K9qKuKyMFFXcfmn5qkRGB/QGUHf3JTJKgqR9RjSSjmO4d/N380kkuvovKE+p8YRTet9M4qTLk0jxsRhCtaR7yekhPGO4RaOuIuX983Z9s7i9WC1eLxfL5eX1n8NT18sFfhTyEaU3MRpE63QJhtvvh2z9/dMqZpbSWxPF+wy7jq8wspt2UylJrpw6bJiILxsT0qs9MqELJk3dVEj9qbEmHg6pTn9sgN0ay2qjlTeU21HSW9NSJpTGeMr3VLxCxhimRCKnXJ5lDw8PMynqVhdiJk1NJFRKonaRx563j/0OfyFcGOlGaWXiOrO4RYtaYtYDuYxQKZGTs2ez+Wyessr5Wuhniv57ER3xN4YqjgJNJZQm/Ghs1xfYHexp7iks9fY8gVCVrXlfLHfQdRvh8C9bhUDbX1u0sfSfaitWYqEc/ReQb0Xl8MSWsVHCD/1AVvzIvjE5Tdo/ZLE+xPKuWloBj1NamtXCOnAoURRoo2np5EJKbPwzmXFCosIZ28+HxQo4iJbYGRl8kdwRddKOrks3VuYedQijWZ7WZFgI/wC6/qOi
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get decision requirements as XML by key"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/drd/{key}/xml"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get decision requirements as XML by key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of decision requirements",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: { "text/xml": { schema: { type: "string" } } },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

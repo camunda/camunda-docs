@@ -1,0 +1,194 @@
+---
+id: search-task-variables
+title: "Search task variables"
+description: "This method returns a list of task variables for the specified `taskId` and `variableName`.<br/>If the request body is not provided or if the `variableNames` parameter in the request is empty, all variables associated with the task will be returned."
+sidebar_label: "Search task variables"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search task variables"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/tasks/{taskId}/variables/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+This method returns a list of task variables for the specified `taskId` and `variableName`.<br/>If the request body is not provided or if the `variableNames` parameter in the request is empty, all variables associated with the task will be returned.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "taskId",
+      in: "path",
+      description: "The ID of the task.",
+      required: true,
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variableNames: {
+              type: "array",
+              description: "Names of variables to find.",
+              items: { type: "string" },
+            },
+            includeVariables: {
+              type: "array",
+              description:
+                "An array of variable names that should be included in the response.",
+              items: {
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The name of the variable.",
+                  },
+                  alwaysReturnFullValue: {
+                    type: "boolean",
+                    description:
+                      "Always return the full value of the variable?",
+                    default: false,
+                  },
+                },
+                title: "IncludeVariable",
+              },
+            },
+          },
+          description:
+            "Request object to search tasks variables by provided variable names.",
+          title: "VariablesSearchRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "On success returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                id: {
+                  type: "string",
+                  description: "The unique identifier of the variable.",
+                },
+                name: {
+                  type: "string",
+                  description: "The name of the variable.",
+                },
+                value: {
+                  type: "string",
+                  description: "The value of the variable.",
+                },
+                isValueTruncated: {
+                  type: "boolean",
+                  description:
+                    "Does the `previewValue` contain the truncated value or full value?",
+                },
+                previewValue: {
+                  type: "string",
+                  description:
+                    "A preview of the variable's value. Limited in size.",
+                },
+                draft: {
+                  type: "object",
+                  properties: {
+                    value: {
+                      type: "string",
+                      description: "The value of the variable.",
+                    },
+                    isValueTruncated: {
+                      type: "boolean",
+                      description:
+                        "Does the `previewValue` contain the truncated value or full value?",
+                    },
+                    previewValue: {
+                      type: "string",
+                      description:
+                        "A preview of the variable's value. Limited in size.",
+                    },
+                  },
+                  description: "The draft value of the variable.",
+                  title: "DraftSearchVariableValue",
+                },
+              },
+              title: "VariableSearchResponse",
+            },
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "An error is returned when the task with the `taskId` is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
