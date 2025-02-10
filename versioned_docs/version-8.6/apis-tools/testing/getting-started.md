@@ -15,7 +15,7 @@ CPT is based on [JUnit 5](https://junit.org/junit5/) and [Testcontainers](https:
 - Connectors
 - Elasticsearch
 
-:::warning Disclaimer
+:::danger Disclaimer
 For Camunda 8.6, CPT is in an [alpha version](/reference/alpha-features.md#alpha).
 
 For a mature testing library, take a look at [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md).

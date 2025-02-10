@@ -149,7 +149,7 @@ public ZeebeClientBuilder configureClientMetrics(
 
 ## Job streaming
 
-:::warning
+:::danger
 Job streaming is an experimental feature which is still under development. It is an opt-in feature which is disabled by default.
 :::
 

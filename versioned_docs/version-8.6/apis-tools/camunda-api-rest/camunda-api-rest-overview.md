@@ -45,7 +45,7 @@ For example, if you increase the `maxMessageSize` to 10MB, increase these proper
 
 ### Query API
 
-:::warning
+:::danger
 Query API endpoints do not currently support [resource authorizations][], and can be used to expand user access to restricted resources. If you use resource permissions, allowing public access to those endpoints is not recommended.
 :::
 
