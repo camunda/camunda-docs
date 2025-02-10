@@ -265,6 +265,7 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              // Removed after 8.6
               8.6: {
                 specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
                 outputDir:
