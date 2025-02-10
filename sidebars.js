@@ -719,7 +719,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "BPMN copilot",
+              label: "BPMN Copilot",
               link: {
                 type: "doc",
                 id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
