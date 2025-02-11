@@ -239,7 +239,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/find-user-tasks">
+            <a href="../../camunda-api-rest/specifications/query-user-tasks-alpha">
                 <code>POST /user-tasks/search</code>
             </a>
         </td>
@@ -252,7 +252,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task">
+            <a href="?????">
                 <code>GET /user-tasks/:userTaskKey</code>
             </a>
         </td>
@@ -278,7 +278,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task-form">
+            <a href="?????">
                 <code>GET /user-tasks/:userTaskKey/form</code>
             </a>
         </td>
