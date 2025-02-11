@@ -927,6 +927,17 @@ module.exports = {
         "reference/announcements-release-notes/overview",
         {
           type: "category",
+          label: "8.8",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/880/880-release-notes",
+          },
+          items: [
+            "reference/announcements-release-notes/880/880-release-notes",
+          ],
+        },
+        {
+          type: "category",
           label: "8.7",
           link: {
             type: "doc",
