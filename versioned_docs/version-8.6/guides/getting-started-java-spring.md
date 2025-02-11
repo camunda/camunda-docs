@@ -36,7 +36,7 @@ While stepping through this guide, you can visit our [sample repository](https:/
 Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
-- [OpenJDK 21+](https://openjdk.org/install/)
+- [OpenJDK ≥ 17](https://openjdk.org/install/)
 - [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
 
 :::note
