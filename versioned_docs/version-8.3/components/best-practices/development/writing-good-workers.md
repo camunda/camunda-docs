@@ -62,7 +62,7 @@ If performance or efficiency matters in your scenario, there are two rules about
 1. Minimize what data you read for your job. In your job client, you can define which process variables you will need in your worker, and only these will be read and transferred, saving resources on the broker as well as network bandwidth.
 2. Minimize what data you write on job completion. You should explicitly not transmit the input variables of a job upon completion, which might happen easily if you simply reuse the map of variables you received as input for submitting the result.
 
-Not transmitting all variables saves resources and bandwidth, but serves another purpose as well: upon job completion, these variables are written to the process and might overwrite existing variables. If you have parallel paths in your process (e.g. [parallel gateway](/docs/components/modeler/bpmn//parallel-gateways/), [multiple instance](/docs/components/modeler/bpmn/multi-instance/)) this can lead to race conditions that you need to think about. The less data you write, the smaller the problem.
+Not transmitting all variables saves resources and bandwidth, but serves another purpose as well: upon job completion, these variables are written to the process and might overwrite existing variables. If you have parallel paths in your process (e.g. [parallel gateway](components/modeler/bpmn/parallel-gateways/parallel-gateways.md), [multiple instance](components/modeler/bpmn/multi-instance/multi-instance.md)) this can lead to race conditions that you need to think about. The less data you write, the smaller the problem.
 
 ## Scaling workers
 

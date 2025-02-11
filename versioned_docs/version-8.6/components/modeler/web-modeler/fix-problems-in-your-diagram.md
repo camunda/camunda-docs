@@ -10,6 +10,10 @@ Based on a set of lint rules, Web Modeler continuously validates implementation 
 
 ![error panel](img/diagram-errors/error-panel.png)
 
+:::note
+An error is shown if any process ID, decision ID, or form ID is more than 255 characters in length. To resolve this error, check and shorten any IDs that exceed this character limit.
+:::
+
 ### Engine version selection
 
 The version selector at the top right in the problems panel can be used to choose the Zeebe version the diagram is validated against. The version chosen should match the Zeebe version of the cluster the diagram is going to be deployed in to get the correct set of errors (if you do not know the version, it is shown alongside the cluster name in the deployment dialog which can be opened by clicking the **Deploy diagram** button.)
@@ -20,7 +24,7 @@ The version selector also provides information about the number of clusters avai
 
 ### Interactivity
 
-The errors are interactive. Clicking on the row highlights the corresponding element in the canvas and points to the specific property in the properties panel where you can resolve the issue.
+The errors are interactive. Clicking on the row highlights the corresponding element in the canvas and points to the specific property in the properties panel on the right side of the screen where you can resolve the issue.
 
 ![error panel](img/diagram-errors/interactivity.png)
 

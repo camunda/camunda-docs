@@ -278,7 +278,7 @@ Now, we want to do some work within our process. Follow the steps below:
 
 ![model-process-step-2](assets/order-process.png)
 
-5. Using the properties panel **Task definition** section, set the **type** of each task, which identifies the nature of the work to be performed.
+5. Using the properties panel **Task definition** section on the right side of the screen under the **Deploy** button, set the **type** of each task, which identifies the nature of the work to be performed.
 
 - Set the **type** of the first task to `payment-service`.
 - Set the **type** of the second task to `fetcher-service`.

@@ -11,7 +11,7 @@ import DualRegion from "./img/dual-region.svg";
 
 Camunda 8 is compatible with a dual-region setup under certain [limitations](#limitations). This allows Camunda 8 to run in a mix of active-active and active-passive setups, resulting in an overall **active-passive** setup. The following will explore the concept, limitations, and considerations.
 
-:::warning
+:::danger
 
 You should get familiar with the topic, the [limitations](#limitations) of the dual-region setup, and the general [considerations](#considerations) on operating a dual-region setup.
 
@@ -91,7 +91,7 @@ In the event of a total active region loss, the following data will be lost:
 ## Requirements
 
 - Camunda 8
-  - Minimum [Helm chart version](https://github.com/camunda/camunda-platform-helm) **9.3+**
+  - Minimum [Helm chart version](https://artifacthub.io/packages/helm/camunda/camunda-platform) **9.3+**
   - Minimum component images
     - Elasticsearch **8.9+**
       - OpenSearch (both managed and self-managed) is not supported
