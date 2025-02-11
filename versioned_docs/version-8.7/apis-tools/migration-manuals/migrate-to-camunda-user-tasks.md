@@ -251,11 +251,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
                 <code>GET /tasks/:taskId</code>
             </a>
         </td>
-        <td>
-            <a href="?????">
-                <code>GET /user-tasks/:userTaskKey</code>
-            </a>
-        </td>
+        <td style={{color: "gray"}}>-</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
@@ -277,11 +273,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
                 <code>GET /forms/:formId</code>
             </a>
         </td>
-        <td>
-            <a href="?????">
-                <code>GET /user-tasks/:userTaskKey/form</code>
-            </a>
-        </td>
+        <td style={{color: "gray"}}>-</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Assign a task</th>
