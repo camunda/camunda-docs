@@ -18,11 +18,17 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
-- [Major product and feature releases](#major-product-and-feature-releases)
+<<<<<<< HEAD:docs/reference/announcements-release-notes/870/870-announcements.md
+
+- # [Major product and feature releases](#major-product-and-feature-releases)
+- [Amazon Web Services (AWS) region support](#amazon-web-services-aws-region-support-saas)
+- [Web Modeler](#web-modeler)
+  > > > > > > > main:docs/reference/announcements/870.md
   - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
   - [Milestones renamed to versions](#web-modeler-milestones-renamed-to-versions)
   - [Southeast Asia region for SaaS customers SaaS](#southeast-asia-region-for-saas-customers-saas)
 
+<<<<<<< HEAD:docs/reference/announcements-release-notes/870/870-announcements.md
 :::note
 
 There are currently no known versioning changes or deprecations associated with the 8.7 release.
@@ -30,6 +36,32 @@ There are currently no known versioning changes or deprecations associated with 
 :::
 
 ## Major product and feature releases
+
+=======
+
+## Amazon Web Services (AWS) region support <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+
+You can choose to host your Camunda 8 SaaS clusters in two new Amazon Web Services (AWS) regions:
+
+- Frankfurt, Europe (eu-central-1)
+- North America, Virginia (us-east-1)
+
+You can select one of these AWS regions when [creating a new cluster](/components/console/manage-clusters/create-cluster.md). You can continue to choose from our Google Cloud Platform (GCP) region options.
+
+To learn more about available Camunda 8 SaaS regions, see [regions](../regions.md).
+
+:::note
+
+The following limitations currently apply for AWS regions:
+
+- Backups are stored on GCP.
+- HTTP connectors continue to route through GCP.
+
+:::
+
+## Web Modeler
+
+> > > > > > > main:docs/reference/announcements/870.md
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
