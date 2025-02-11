@@ -2409,7 +2409,7 @@ module.exports = {
                     ),
                     docsLink(
                       "Dual-region ROSA HCP Cluster with Terraform",
-                      "self-managed/setup/deploy/amazon/openshift/terraform-dual-region/"
+                      "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/"
                     ),
                   ],
                 },
