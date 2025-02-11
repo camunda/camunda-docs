@@ -258,7 +258,7 @@ the [Google Cloud API Library](https://console.cloud.google.com/apis/library).
 
 #### Example 1: Obtaining JWT bearer token with a service account
 
-:::warning
+:::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to
 security concerns.
 For production usage, follow
@@ -285,7 +285,7 @@ print(credentials.token)
 
 #### Example 2: Obtaining bearer and refresh tokens with OAuth client
 
-:::warning
+:::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to
 security concerns.
 For production usage, follow

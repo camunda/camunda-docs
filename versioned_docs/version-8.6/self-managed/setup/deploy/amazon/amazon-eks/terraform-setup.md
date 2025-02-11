@@ -54,7 +54,7 @@ Modules referenced in this guide have been updated recently from **v2** to **v3*
 
 :::
 
-:::warning Cost management
+:::danger Cost management
 
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 

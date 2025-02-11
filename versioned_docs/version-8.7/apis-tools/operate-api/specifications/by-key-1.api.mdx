@@ -1,0 +1,160 @@
+---
+id: by-key-1
+title: "Get process instance by key"
+description: "Get process instance by key"
+sidebar_label: "Get process instance by key"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVt9P20gQ/leseWp7BoeWO1V+Q2CqHBxEkLYPKDqt15Nki73r7o7DRZb/99Os7RASg3KPp74ktne++fnNztRAYuEgfoCJNRKdG2tHQkuEWQimRCtIGT3OIIZ0fYXrv08ghFJYUSChZWANWhQIMTziGkJQGmIoBS0hhAydtKpkDRDDFa4DMw/K1k6gekMhWPxZKYsZxGQrDMHJJRYC4hpoXbJqpQkXaCGEubGFoPbTH6fQNDOGu9Joh44RH0cj/ntp+r6SbBNCkEYTamIRUZa5kj6+6IdjuXrfskl/oCSO2XI2SLVWONZD3PM4Nv0NrVOtjTdBnz7ug6ZisYVzZJVesFRaFrqvWjYoUQqLmq4Od9bLX+bm6cZk2FPhcLwjYelCEA56gzp79czR4AmDqoLpeXY+HX9LIITz278m18k0ueDns5vz5Dq5gFnDzJMq62rbaUmNyVHorZRe4FxpxTU/PCpCLTS9meKd5vG6QSorq1zYdzun771SRTlr2m27pmmaEE6HWDzWK5GrLOB2QUevs7m0Js2x+O2/spqLULkDOVqgc2IxXM1Nbw8dth/2DrZyklhr7CYTn/YzcWlsqrIM9cscfIg+/P/DPd0P964tOHLpnamsxEAbCuam0tmvwYLfh/rhbDIOtgIO0AN+gXzwfYmysorWfgCnKCzaIz+UHmZNWIM05lGhf5vtzuEvSHtDOEjXQTu/C6Sl4XG/QJ8KnuQxRKuTqMMc9RgX1Y+4boCdsat+GahsDjHUbXKbOIrqpXHUxHVpLLHwSlgl0rzNLZ+1hZ2LKudM5kaK3H/e9Xu6xIAPeN3gRYKWGDAFWuvH/jI2dkfd59Hn0aAmFn1FyzMxnvUsicpBPa3woCa/nPSFume5Nui+OJtii1Jd+eR3m9TtJLk7myZH98n9/fj2pt+qOhxP/q2Cb7R0LnqH/PDzQtBLX/Zc/fP71PNK6bnx8I5ft37bw2BSpbmSHMp+wCYQfpMKhCS1wkDoLJCmKHPk22mXVfwU9GrnxgaF0YoMM9sjyZqKmbA0htppz60rpK9hSyQOysVR9PT0dCxFUelMHEtTcBJyJVE7n8cub9fdl3AHnBnpNmhl/HtkcY4WtcSoU+Qi1rrqFzU4OR4dj1pWOSqE3jL0dgu9yNmmPIT/UFTmQvl1xDtYd+31AKsT2Kwozw0GIcSschZ2jfIAdZ0Kh19t3jT8+WeF1jf9c1/5LsyU4+cM4rnIHe75tLki4d1dt3y/D15f0AdD6Mmr176r84rfIGx3Y//b8Fq2RJGh9V61J2dSYklbmL1FnPtmcw99SaYQgqg4Uc+L3Utue+2D/tR1KzE1j6ibZuMe8Ts72DT/Ag1odYQ=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get process instance by key"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/process-instances/{key}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get process instance by key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of process instance",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              key: { type: "integer", format: "int64" },
+              processVersion: { type: "integer", format: "int32" },
+              processVersionTag: { type: "string" },
+              bpmnProcessId: { type: "string" },
+              parentKey: { type: "integer", format: "int64" },
+              parentFlowNodeInstanceKey: { type: "integer", format: "int64" },
+              startDate: { type: "string" },
+              endDate: { type: "string" },
+              state: {
+                type: "string",
+                enum: ["ACTIVE", "COMPLETED", "CANCELED"],
+              },
+              incident: { type: "boolean" },
+              processDefinitionKey: { type: "integer", format: "int64" },
+              tenantId: { type: "string" },
+              parentProcessInstanceKey: "circular(ProcessInstance)",
+            },
+            title: "ProcessInstance",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

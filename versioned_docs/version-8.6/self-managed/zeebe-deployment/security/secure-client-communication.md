@@ -103,7 +103,7 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 3
 
 This will generate a new certificate, `cert.pem`, and a new passwordless key, `key.pem`.
 
-:::warning
+:::danger
 Do not use these in production! Again, this is for development and testing purposes only.
 :::
 
