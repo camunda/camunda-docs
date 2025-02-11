@@ -10,7 +10,7 @@ description: "Using AI, users can now chat with the BPMN Copilot for assistance 
 :::note Terms of use
 By using this tool, you agree to Camunda's use of the anonymized input and output data and anonymized feedback to improve it.
 
-While your latest BPMN diagram will be saved in your account, Camunda does not collect your prompts and the resulting BPMN diagrams.
+While your latest BPMN diagram will be saved in your account, Camunda does not save your prompts and the resulting BPMN diagrams.
 :::
 
 Using AI, users can now chat with the BPMN Copilot for assistance generating new and functional BPMN process diagrams in [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) based on a process description.
