@@ -24,6 +24,7 @@ Camunda 8.7 is scheduled for release on 8 April 2025.
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
+- [Amazon Web Services (AWS) region support](/reference/announcements/870.md#amazon-web-services-aws-region-support-saas)
 - [Web Modeler Deploy diagram change](/reference/announcements/870.md#web-modeler-deploy-diagram-change)
 - [Southwest Asia for SaaS region](/reference/announcements/870.md#southeast-asia-region-for-saas-customers-saas)
 
