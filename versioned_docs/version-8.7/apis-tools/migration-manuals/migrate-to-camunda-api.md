@@ -329,6 +329,6 @@ The following conventions apply to all attributes:
 
 <!--- TODO: insert link to C8 REST API guidelines --->
 
-[setting variables]: /apis-tools/camunda-api-rest/specifications/create-element-instance-variables.api.mdx
+[setting variables]:
 [general changes]: #general-endpoint-changes
 [multi-tenancy]: /self-managed/concepts/multi-tenancy.md
