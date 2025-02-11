@@ -66,18 +66,19 @@ helm pull camunda/camunda-platform
 ```
 
 The package is self-contained and already includes the following dependencies:
+
 - [Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch)
 - [Keycloak Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak)
 - [Postgres Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql)
 - [Bitnami Common Helm chart](https://artifacthub.io/packages/helm/bitnami/common)
 
-Install the Helm chart by either making it available on a [private repository](https://helm.sh/docs/topics/chart_repository/) that can be accessed from the air-gapped environment or by providing the downloaded chart archive locally to Helm, e.g.:
+Install the Helm chart by either making it available on a [private repository](https://helm.sh/docs/topics/chart_repository/) that can be accessed from the air-gapped environment or by providing the downloaded chart archive locally to Helm, for example:
 
 ```shell
 helm install camunda ./camunda-platform-11.1.0.tgz
 ```
 
-For supported versions, refer to our [supported environments](/reference/supported-environments.md#camunda-8-self-managed) page.
+For supported versions, refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed).
 
 ## Dependencies explained
 
