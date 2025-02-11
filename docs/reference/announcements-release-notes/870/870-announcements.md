@@ -41,7 +41,7 @@ You can choose to host your Camunda 8 SaaS clusters in two new Amazon Web Servic
 
 You can select one of these AWS regions when [creating a new cluster](/components/console/manage-clusters/create-cluster.md). You can continue to choose from our Google Cloud Platform (GCP) region options.
 
-To learn more about available Camunda 8 SaaS regions, see [regions](../regions.md).
+To learn more about available Camunda 8 SaaS regions, see [regions](../../regions.md).
 
 :::note
 
