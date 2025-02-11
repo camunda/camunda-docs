@@ -34,7 +34,7 @@ To use the BPMN Copilot in Web Modeler, take the following steps:
 
 :::note
 
-Timeouts may occur at this step if your query is too complex
+Timeouts may occur at this step if your query is too complex.
 
 :::
 
