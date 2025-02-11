@@ -18,17 +18,12 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
-<<<<<<< HEAD:docs/reference/announcements-release-notes/870/870-announcements.md
-
-- # [Major product and feature releases](#major-product-and-feature-releases)
-- [Amazon Web Services (AWS) region support](#amazon-web-services-aws-region-support-saas)
-- [Web Modeler](#web-modeler)
-  > > > > > > > main:docs/reference/announcements/870.md
-  - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
-  - [Milestones renamed to versions](#web-modeler-milestones-renamed-to-versions)
+- [Major product and feature releases](#major-product-and-feature-releases)
+  - [Amazon Web Services (AWS) region support SaaS](#amazon-web-services-aws-region-support-saas)
+  - [Deploy diagram change Self-Managed {#web-modeler-deploy-diagram-change}](#deploy-diagram-change-self-managed-web-modeler-deploy-diagram-change)
+  - [Milestones renamed to versions {#web-modeler-milestones-renamed-to-versions}](#milestones-renamed-to-versions-web-modeler-milestones-renamed-to-versions)
   - [Southeast Asia region for SaaS customers SaaS](#southeast-asia-region-for-saas-customers-saas)
 
-<<<<<<< HEAD:docs/reference/announcements-release-notes/870/870-announcements.md
 :::note
 
 There are currently no known versioning changes or deprecations associated with the 8.7 release.
@@ -37,9 +32,7 @@ There are currently no known versioning changes or deprecations associated with 
 
 ## Major product and feature releases
 
-=======
-
-## Amazon Web Services (AWS) region support <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+### Amazon Web Services (AWS) region support <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
 You can choose to host your Camunda 8 SaaS clusters in two new Amazon Web Services (AWS) regions:
 
@@ -58,10 +51,6 @@ The following limitations currently apply for AWS regions:
 - HTTP connectors continue to route through GCP.
 
 :::
-
-## Web Modeler
-
-> > > > > > > main:docs/reference/announcements/870.md
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 

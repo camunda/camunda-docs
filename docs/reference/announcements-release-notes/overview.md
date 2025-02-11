@@ -45,7 +45,7 @@ Camunda 8.6 was released on 8 October, 2024.
 <div class="double-column-container">
 <div class="double-column-left">
 
-**[8.6 Announcements](/reference/announcements/860.md)**
+**[8.6 Announcements](/reference/announcements-release-notes/860/860-announcements.md)**
 
 </div>
 <div class="double-column-right">
