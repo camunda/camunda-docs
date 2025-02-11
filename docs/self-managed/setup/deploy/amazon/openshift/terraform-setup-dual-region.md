@@ -287,21 +287,21 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
    This configuration will use the previously created S3 bucket for storing the Terraform state file:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/clusters/config.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/terraform/clusters/config.tf
    ```
 
 5. Create a file named `cluster_region_1.tf` in the same directory as your `config.tf`.
    This file describes the cluster of the region 1:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
    ```
 
 6. Create a file named `cluster_region_2.tf` in the same directory as your `config.tf`.
    This file describes the cluster of the region 2:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/clusters/cluster_region_2.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/terraform/clusters/cluster_region_2.tf
    ```
 
 7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
@@ -417,13 +417,13 @@ We'll re-use the previously configured S3 bucket to store the state of the peeri
 Begin by setting up the `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/peering/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/terraform/peering/config.tf
 ```
 
 Alongside the `config.tf` file, create a file called `peering.tf` to reference the peering configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/peering/peering.tf
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/terraform/peering/peering.tf
 ```
 
 One cluster will be referenced as the **owner**, and the other as the **accepter**.
@@ -497,13 +497,13 @@ We'll re-use the previously configured S3 bucket to store the state of the backu
 Begin by setting up the `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/backup_bucket/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/terraform/backup_bucket/config.tf
 ```
 
 Finally, create a file called `backup_bucket.tf` to reference the elastic backup bucket configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform/backup_bucket/backup_bucket.tf
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/terraform/backup_bucket/backup_bucket.tf
 ```
 
 This bucket configuration follows [multiple best practices](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html).  
@@ -568,7 +568,7 @@ The `BACKUP_BUCKET_REGION` will define the region of the bucket, you can pick on
 
 ### Reference files
 
-You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/feat/dual-region-hcp/aws/rosa-hcp-dual-region/terraform)
+You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/main/aws/rosa-hcp-dual-region/terraform)
 
 ## 2. Preparation for Camunda 8 installation
 
