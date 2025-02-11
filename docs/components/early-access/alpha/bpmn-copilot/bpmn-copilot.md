@@ -13,7 +13,7 @@ By using this tool, you agree to Camunda's use of the anonymized input and outpu
 While your latest BPMN diagram will be saved in your account, Camunda does not save your prompts and the resulting BPMN diagrams.
 :::
 
-Using AI, users can now chat with the BPMN Copilot for assistance generating new and functional BPMN process diagrams in [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) based on a process description.
+Using AI, users can now chat with the BPMN Copilot for assistance generating new BPMN process diagrams in [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) based on a process description. BPMN Copilot does not officially support modifying existing diagrams (including those with pools, lanes, or implementation details).
 
 ## Get started
 
@@ -34,6 +34,6 @@ To use the BPMN Copilot in Web Modeler, take the following steps:
 
 :::note
 
-Timeouts may occur at this step if your query is too complex.
+Timeouts may occur at this step if your query is too complex
 
 :::
