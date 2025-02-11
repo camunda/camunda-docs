@@ -57,10 +57,10 @@ Following this tutorial and steps will result in:
 - Two [Red Hat OpenShift with Hosted Control Plane](https://www.redhat.com/en/topics/containers/what-are-hosted-control-planes#rosa-with-hcp) clusters running the latest ROSA version, each with six nodes ready for Camunda 8 installation in separate regions.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) installed and configured, enabling the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - [VPC Peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html) configured to enable cross-region cluster communication.
-<!-- TODO: will be re-included in an other PR - [Route 53](https://aws.amazon.com/en/route53/) configured on [a domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html) with an [active-passive failover](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html), enabling access to Camunda 8 on both clusters. -->
 - An [Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) (S3) bucket for [Elasticsearch backups](https://www.elastic.co/guide/en/elasticsearch/reference/current/repository-s3.html).
 - [Red Hat OpenShift Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) used to manage the two clusters and configure Submariner.
 - [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/manage_cluster/submariner) configured on the two clusters to enable cross-namespace and cross-cluster network communication.
+<!-- TODO: will be re-included in an other PR - [Route 53](https://aws.amazon.com/en/route53/) configured on [a domain](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-register.html) with an [active-passive failover](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html), enabling access to Camunda 8 on both clusters. -->
 
 ## 1. Configure AWS and initialize Terraform
 
@@ -105,7 +105,14 @@ To simplify the process and avoid repeating the region in each command, set your
 export S3_TF_BUCKET_REGION="<your-region>"
 ```
 
-Replace `<your-region>` with the AWS region where you want to create the S3 bucket (e.g., `us-east-1`).
+Replace `<your-region>` with the AWS region where you want to create the S3 bucket (e.g., `us-east-2`).
+
+:::note Special case us-east-1
+
+Regions outside of `us-east-1` require the appropriate `LocationConstraint` to be specified in order to create the bucket in the desired region.
+While `us-east-1` does not require it and can only be created without specifying it.
+
+:::
 
 :::note Region of the bucket's state
 
@@ -642,7 +649,7 @@ In the remainder of the guide, different namespaces will be created following th
 
 ## 3. Next installation steps
 
-The next steps are generic and referenced in the **[:book: Generic OpenShift Dual-Region for Camunda 8 guide](/self-managed/setup/deploy/openshift/dual-region.md#setup-advanced-cluster-management-and-submariner)**.
+The next steps are generic and referenced in the **[Generic OpenShift Dual-Region for Camunda 8 guide](/self-managed/setup/deploy/openshift/dual-region.md#setup-advanced-cluster-management-and-submariner)**.
 
 It includes:
 
@@ -650,8 +657,6 @@ It includes:
 - Installation of Submariner
 - Preparation of the configuration for Camunda 8 on dual-region
 - Installation of Camunda 8 in OpenShift dual-region.
-
-Follow the guide next steps in the [Generic OpenShift Dual-Region guide of Camunda 8 Installation](/self-managed/setup/deploy/openshift/dual-region.md#setup-advanced-cluster-management-and-submariner).
 
 ## 4. Deletion of Terraform Resources
 
