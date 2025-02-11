@@ -14,7 +14,7 @@ The following regions are available for customers on Trial, Starter, and Enterpr
 
 :::note
 
-- Management cluster components (Console and Web Modeler) are currently hosted in GCP (EU). [Contact us](/reference/contact.md) if you have additional questions.
+- Console and Web Modeler cluster components are currently hosted in GCP (EU). [Contact us](/reference/contact.md) if you have additional questions.
 - Single-tenant clusters run on a dedicated GCP or AWS infrastructure.
 
 :::
@@ -45,3 +45,10 @@ The following AWS regions are currently supported in Camunda 8 SaaS.
 | North America, Virginia (us-east-1) | _Not available_          |
 
 To learn more about each region code/location, refer to [AWS regions and availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
+
+### Known limitations
+
+The following limitations currently exist for AWS regions:
+
+- Backups are stored on GCP.
+- HTTP connectors continue to route through GCP.
