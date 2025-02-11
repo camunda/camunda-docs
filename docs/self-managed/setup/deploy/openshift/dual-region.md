@@ -61,7 +61,7 @@ In addition to the general prerequisites outlined above, the following CLI tools
 ### OpenShift clusters
 
 The architecture of your OpenShift clusters may vary depending on your specific configuration.
-This guide assumes a generic deployment on OpenShift. If you are interested in a tested topology, follow the [ROSA Dual-Region Guide](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/).
+This guide assumes a generic deployment on OpenShift. If you are interested in a tested topology, follow the [ROSA Dual-Region Guide](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md).
 
 #### Cluster requirements
 
