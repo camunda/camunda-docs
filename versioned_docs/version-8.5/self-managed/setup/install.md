@@ -319,3 +319,4 @@ For upgrading the Camunda Helm chart from one release to another, perform a [Hel
 
 - **Zeebe gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](/self-managed/zeebe-deployment/configuration/gateway-health-probes.md) for Zeebe.
 - **Zeebe broker nodes** need to be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve the identity of cluster nodes. StatefulSets require persistent storage, which must be allocated in advance. Depending on your cloud provider, the persistent storage differs as it is provider-specific.
+- **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid potential disruptions, authenticate with Docker Hub, use a mirror registry, or follow our guide on [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).

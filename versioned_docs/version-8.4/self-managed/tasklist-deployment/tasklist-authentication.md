@@ -80,7 +80,7 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 
 ## Configure Identity
 
-:::warning
+:::danger
 These configuration variables are deprecated. To connect using the updated values, see [Connecting to an OpenID Connect provider](../platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md).
 :::
 

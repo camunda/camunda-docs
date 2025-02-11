@@ -724,7 +724,7 @@ Half of the amount of your set `clusterSize` is used to spawn Zeebe brokers.
 
 For example, in the case of `clusterSize: 8`, four Zeebe brokers are provisioned in the newly created region.
 
-:::warning
+:::danger
 It is expected that the Zeebe broker pods will not reach the "Ready" state since they are not yet part of a Zeebe cluster and, therefore, not considered healthy by the readiness probe.
 :::
 
