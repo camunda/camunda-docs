@@ -109,7 +109,7 @@ paths:
                 $ref: "#/components/schemas/EvaluateDecisionResponse"
             application/vnd.camunda.api.keys.number+json:
               schema:
-                $ref: "#/components/schemas/EvaluateDecisionResponse"
+                $ref: "#/components/schemas/JobActivationResponse"
             application/vnd.camunda.api.keys.string+json:
               schema:
                 $ref: "#/components/schemas/EvaluateDecisionResult"
@@ -216,6 +216,8 @@ components:
       description: The list of activated jobs
       deprecated: true
       type: object
+      allOf:
+        - $ref: "#/components/schemas/EvaluateDecisionResponseBase"
       properties:
         jobs:
           type: array
@@ -269,6 +271,7 @@ components:
           description: The ID of the tenant that owns the job
           type: string
     ActivatedJob:
+      description: An activated job.
       deprecated: true
       type: object
       allOf:
