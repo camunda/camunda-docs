@@ -1,0 +1,183 @@
+---
+id: update-element-instance-variables
+title: "Update element instance variables"
+description: "Updates all the variables of a particular scope (for example, process instance, flow element instance) with the given variable data."
+sidebar_label: "Update element instance variables"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update element instance variables"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/element-instances/{elementInstanceKey}/variables"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Updates all the variables of a particular scope (for example, process instance, flow element instance) with the given variable data.
+Specify the element instance in the `elementInstanceKey` parameter.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "elementInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The key of the element instance to update the variables for.\nThis can be the process instance key (as obtained during instance creation), or a given\nelement, such as a service task (see the `elementInstanceKey` on the job message).\n",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variables: {
+              description:
+                "JSON object representing the variables to set in the element’s scope.",
+              additionalProperties: true,
+              type: "object",
+            },
+            local: {
+              description:
+                "If set to true, the variables are merged strictly into the local scope (as specified by the `elementInstanceKey`).\nOtherwise, the variables are propagated to upper scopes and set at the outermost one.\n\nLet’s consider the following example:\n\nThere are two scopes '1' and '2'.\nScope '1' is the parent scope of '2'. The effective variables of the scopes are:\n1 => { \"foo\" : 2 }\n2 => { \"bar\" : 1 }\n\nAn update request with elementInstanceKey as '2', variables { \"foo\" : 5 }, and local set\nto true leaves scope '1' unchanged and adjusts scope '2' to { \"bar\" : 1, \"foo\" 5 }.\n\nBy default, with local set to false, scope '1' will be { \"foo\": 5 }\nand scope '2' will be { \"bar\" : 1 }.\n",
+              type: "boolean",
+              default: false,
+            },
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation. Must be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+            },
+          },
+          required: ["variables"],
+          title: "SetVariableRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The variables were updated." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
