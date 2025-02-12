@@ -222,7 +222,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/JobActivationResponseBase"
       properties:
-        jobs6:
+        jobs:
           type: array
           items:
             $ref: "#/components/schemas/ActivatedJob"
