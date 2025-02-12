@@ -40,7 +40,7 @@ Configure the exporter by providing `args`. See the tables below for configurati
 | connect      | Refer to [Connect](./camunda-exporter.md?configuration=connect#options) for the connection configuration options. |         |
 | index        | Refer to [Index](./camunda-exporter.md?configuration=index#options) for the index configuration options.          |         |
 | bulk         | Refer to [Bulk](./camunda-exporter.md?configuration=bulk#options) for the bulk configuration options.             |         |
-| archiver     | Refer to [Archiver](./camunda-exporter.md?configuration=archiver#options) for the retention configuration options |         |
+| archiver     | Refer to [Archiver](./camunda-exporter.md?configuration=archiver#options) for the retention configuration options. |         |
 | createSchema | If `true` missing indexes will be created automatically.                                                          | true    |
 
 ### Options
