@@ -138,7 +138,7 @@ The first message creates a new process instance. The following messages are dis
 
 Publishing a message is a fire-and-forget action. As a user, you do not know if the correlation is a success.
 
-To know if a published message was correlated (and to which process instance), use the [message correlation endpoint](../../apis-tools/camunda-api-rest/specifications/correlate-message.api.mdx).
+To know if a published message was correlated (and to which process instance), use the [message correlation endpoint](../../apis-tools/camunda-api-rest/specifications/correlate-a-message.api.mdx).
 
 The message correlation endpoint works similarly to the message publish endpoint. However, the message correlation endpoint does not support [message buffering](#message-buffering). Any message published using this endpoint is either immediately correlated, or not correlated at all. This is due to the synchronous nature of requiring a response.
 
