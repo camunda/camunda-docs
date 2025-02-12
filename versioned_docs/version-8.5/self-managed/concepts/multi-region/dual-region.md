@@ -11,7 +11,7 @@ import DualRegion from "./img/dual-region.svg";
 
 Camunda 8 is compatible with a dual-region setup under certain [limitations](#limitations). This allows Camunda 8 to run in a mix of active-active and active-passive setups, resulting in an overall **active-passive** setup. The following will explore the concept, limitations, and considerations.
 
-:::warning
+:::danger
 
 You should get familiar with the topic, the [limitations](#limitations) of the dual-region setup, and the general [considerations](#considerations) on operating a dual-region setup.
 
