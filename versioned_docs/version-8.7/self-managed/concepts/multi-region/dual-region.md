@@ -93,7 +93,7 @@ Amazon OpenSearch is **not supported** in dual-region configurations.
 - The regions (for example, two Kubernetes clusters) must be able to communicate with each other (for example, via VPC peering). See [example implementation](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) for AWS EKS.
   - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
     - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md).
-    - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Refer to the [OpenShift dual-region setup guide](/docs/self-managed/setup/deploy/openshift/dual-region.md).
+    - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Refer to the [OpenShift dual-region setup guide](/self-managed/setup/deploy/openshift/dual-region.md).
 - Maximum network round trip time (**RTT**) between regions should not exceed **100 ms**.
 - Required open ports between the two regions:
   - **9200** for Elasticsearch (for cross-region data pushed by Zeebe).

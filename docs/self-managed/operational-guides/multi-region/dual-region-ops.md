@@ -39,7 +39,7 @@ This procedure has been updated in the Camunda 8.6 release. The procedure used i
 This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region and how to ultimately do a full recovery to restore the dual-region setup.
 
 The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
-It has been also validated for the [OpenShift dual-region setup guidance](/docs/self-managed/setup/deploy/openshift/dual-region.md).
+It has been also validated for the [OpenShift dual-region setup guidance](/self-managed/setup/deploy/openshift/dual-region.md).
 
 Before proceeding with the operational procedure, thoroughly review and understand the contents of the [dual-region concept page](./../../concepts/multi-region/dual-region.md). This page outlines various limitations and requirements pertinent to the procedure, which are crucial for successful execution.
 
@@ -53,7 +53,7 @@ Running a dual-region configuration requires users to detect and manage any regi
 
 ## Prerequisites
 
-- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region concept](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) or [OpenShift dual-region concept](/docs/self-managed/setup/deploy/openshift/dual-region.md).
+- A dual-region Camunda 8 setup installed in two different regions, preferably derived from our [AWS dual-region concept](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md) or [OpenShift dual-region concept](/self-managed/setup/deploy/openshift/dual-region.md).
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
