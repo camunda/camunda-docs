@@ -42,7 +42,7 @@ A descriptor file is required to deploy the SAP RFC Connector to a space in a SA
 ### Deploying to BTP
 
 1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version.  
-    The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
+    The version follows the format `<C8 version major>.<C8 version minor>.<RFC connector version>`.  
    Examples:
 
    - `rfc-8.6.0.war` is the RFC Connector in version `0` for C8 SaaS version `8.6`
