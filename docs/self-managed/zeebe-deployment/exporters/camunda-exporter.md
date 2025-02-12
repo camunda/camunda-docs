@@ -137,18 +137,18 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 
 <TabItem value="archiver">
 
-To keep the main runtime index performant, the archiver will periodically move documents into historical
+To keep the main runtime index performant, the archiver periodically moves documents into historical
 indices. The archiver can be configured as follows:
 
 | Option                    | Description                                                                                                                                                                                                   | Default |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| enabled                   | If `true` archiver is enabled                                                                                                                                                                                 | `true`  |
+| enabled                   | If `true` archiver is enabled.                                                                                                                                                                                | `true`  |
 | elsRolloverDateFormat     | Defines how the date values are formatted for historical indices using Java DateTimeFormatter syntax, if no format is specified the first date format specified in teh field mapping is used.                 | `date`  |
 | rolloverInterval          | The time range for groups captured by the historical indices.                                                                                                                                                 | `1d`    |
-| rolloverBatchSize         | The max number of instances for each batch that is being archived                                                                                                                                             | `100`   |
+| rolloverBatchSize         | The max number of instances for each batch that is being archived.                                                                                                                                            | `100`   |
 | waitPeriodBeforeArchiving | Grace period for completed process instances to not be processed by the archiver. For a value of 1 hour, any process instances finished within the last hour will not be collected into the historical index. | `1h`    |
 | delayBetweenRuns          | Time in milliseconds between archiving completed process instances.                                                                                                                                           | `2000`  |
-| maxDelayBetweenRuns       | Maximum time in milliseconds before an archiving attempt for completed process instances                                                                                                                      | `60000` |
+| maxDelayBetweenRuns       | Maximum time in milliseconds before an archiving attempt for completed process instances.                                                                                                                     | `60000` |
 | retention                 | The configuration for a retention policy to delete old data.                                                                                                                                                  |         |
 
 </TabItem>
