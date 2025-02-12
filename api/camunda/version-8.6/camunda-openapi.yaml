@@ -3166,7 +3166,7 @@ components:
         - timeout
         - maxJobsToActivate
     JobActivationResponseBase:
-      description: Base properties for EvaluateDecisionResponse
+      description: Base properties for JobActivationResponseBase
       type: object
     JobActivationResponse:
       description: The list of activated jobs
