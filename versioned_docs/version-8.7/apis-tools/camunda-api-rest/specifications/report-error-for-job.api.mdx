@@ -1,0 +1,263 @@
+---
+id: report-error-for-job
+title: "Report error for job"
+description: "Reports a business error (i.e. non-technical) that occurs while processing a job."
+sidebar_label: "Report error for job"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWE1z2zYQ/Ss7OMVTWlRSp014Ux2ndRonHlluD64OILgSYZMAA4CSNRr+984CpER9OJNDe5NmNBKBxS529z2QfGvm+Nyy5IF90imbRixDK4ysnNSKJWyMlTbOAoe0tlKhtYDGaAOv5AAHoLQ6dyhyJQUvzsDl3IEWojYWlrksECqjBVor1Rw4POp08I9iEau44SU6NBR4zRQvkSXsUad/4opFTFLkirucRczgt1oazFjiTI3725vkCE+4Aj0Dl6MPwCJmRY4lZ8mauVVFnq0zUs1Z00yDQ7TuN52tyGLfv9DKoXI0xauqkIJTqPjRUrz1oWudPqJwlJPRFRon0dKsL9KlzpAuDvccaih0hqFmS1kUkCKU3IkcM1hKlwNXnR2NAi5QuVC/vbSiEO4GreXzIxFHnaMyWISYldELmaEFnmWSLHkBPvvno1Eipuqi4GmBoVRNxBbcSBrwGW+93PYqcaxpn+6+foFQt172UlnHlZPcoe/lxjlw5wcKLXgBVugKu34flCf48wNovYnLjV62+e+ktWncXlpNH3MPvUZOI+akIzuiyhWNjwOWWNOEZbbSyoZyvBlefKcR0nYbm2mzhW4TsYvh8Dhk2nZlkHHHyYHSDha8kFlI6wXgVkanBZY/HQJ4b2twGywhQ8dl0TWIWwiGKWYgFTyMP17C+4u3v05f5c5VNonj5XI5MDNxjpl02gy0mcdmJuhLdmcDmORoCNsrgngPbVvKgK1QyJkU4LQvR7ttoGYdb9su38LsPuEjNtOm5I4lrDaS7QNxBPfja5AZKidnKzqjDkL7NTNeF+SDp7p2SVpw9UStatFwGHQ/iq3LkpvNKbUboImYddzVvTSYVA7naPr7l8r9/ObANwHjj8nkFoKLcKIESEnbBaIkSqlkWZcsuRgOI1by53D1y3DYkE/q+A9kogCfq4IrD639dKSCUhts8eMTC5wW/1VntJFzuR93wJptL1gL4g8ho8DLi2NUnATOhZOW3M3lAhWEe1BHr5mu1YleJ3qd6PVder3/YXo9BW5J5ceWRqu5ry2CqI1B5YrVAG62aVrgpnfra9d1N1pIdbY60fNEzxM9X6bn22MPlCMFVGVDOAxPpP6tzdCrx/57W2Ccf9A9ce3EtRPXXuJaE7ESXa4zUi+09dAhESNh8aNObbwOD5dN7BlHOgWaRaeB1KZgCVsH0jRJHK9zbV2TrEl/aeIFdWTnfZumA7k60PgX5DwEPmweTZDQ0iV1yctaZRzewfjqbgK/c4dLvvLFpJC7rt8N3w2PeiXTFzyObq8hZBig1zsOOrfE66Nug/GPOPaajkVRG+lWd7QslCdFbtCMaqr/BhJtPO+droMRi9o/HzugfPp74ntNR9l4qxddPfOyCkTs6TtboO2qMNvxft8aD9aZ9rtqoXSYHy1CY0NBhoPXh7C9vfbsE7osa+WPYDVvZaNevURRW0d1ilghBSrrN9/qbZ3Z5zADf4WI8HpAvQ6A7E7euXR5nQ6ELmMRlm1+00KnccmlitsQNr4c3dx/+TA6/3x9efXl7ur89WA4cM/O15SYUXLV20fQGNv7ECX1qNP9hNfbu87/pEm2ECH5K64KLhWB1hdh3dL4gRRKyyKWbJTKwORp1LLxga3XKbd4b4qmoeFvNZoVSx6mWxB4tmfS0v+MJTNe2H2FrJ/sq3ErRp3BcbHz6L7bQa5WHn5FTVcsYk+42gqtzbSJWI48Q+M3FSYvQ+jzCbnYLj4QQ5uoWzESAiv3gu3OUwFxdXNE3n69mxD1WiG2DGQyfEmqL1+GDWtfEs9oP7ZmBVfzOhAs+KTPvyXJ3c8=
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Report error for job"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/{jobKey}/error"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Reports a business error (i.e. non-technical) that occurs while processing a job.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "jobKey",
+      in: "path",
+      required: true,
+      description: "The key of the job.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            errorCode: {
+              description:
+                "The error code that will be matched with an error catch event.\n",
+              type: "string",
+            },
+            errorMessage: {
+              description:
+                "An error message that provides additional context.\n",
+              type: "string",
+              nullable: true,
+            },
+            variables: {
+              additionalProperties: true,
+              description:
+                "JSON object that will instantiate the variables at the local scope of the error catch event that catches the thrown error.\n",
+              type: "object",
+              nullable: true,
+            },
+          },
+          required: ["errorCode"],
+          title: "JobErrorRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "An error is thrown for the job." },
+    "400": {
+      description: "The provided data is not valid.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The job with the given jobKey is not found.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The job with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

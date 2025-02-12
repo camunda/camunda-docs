@@ -2940,6 +2940,11 @@
                       "type": "link",
                       "label": "Deploy a ROSA cluster with Terraform",
                       "href": "/docs/8.7/self-managed/setup/deploy/amazon/openshift/terraform/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Dual-region ROSA HCP Cluster with Terraform",
+                      "href": "/docs/8.7/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/"
                     }
                   ]
                 },
@@ -2979,6 +2984,11 @@
                   "type": "link",
                   "label": "Red Hat OpenShift",
                   "href": "/docs/8.7/self-managed/setup/deploy/openshift/redhat-openshift/"
+                },
+                {
+                  "type": "link",
+                  "label": "Dual-Region",
+                  "href": "/docs/8.7/self-managed/setup/deploy/openshift/redhat-openshift-dual-region/"
                 }
               ]
             },
