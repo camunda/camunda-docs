@@ -153,7 +153,7 @@ curl --cookie  cookie.txt  localhost:8080/v2/topology
 
 To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
 
-## Known Issues
+## Known issues
 
-- Unable to perform operations(assign/unassign/complete) on Camunda User Tasks, formerly known as Zeebe User Tasks, in Tasklist
+- In Tasklist, you cannot perform operations (assign/unassign/complete) on Zeebe User Tasks.
 <!-- https://github.com/camunda/camunda/issues/24808 -->
