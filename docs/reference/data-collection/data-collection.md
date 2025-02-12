@@ -52,9 +52,9 @@ Usage telemetry data includes limited product usage data to help make better pro
   - SaaS User Actions: Users that opt-in to analytics cookies gain access to in-app tutorials and automatically submit information about which features they interact with in Camunda’s UI as part of telemetry data. In addition to the data collected from system actions described above, Camunda collects cursor activity, geographical area, browser information, and basic biographical information limited tolike email, and name, and city/region/country for user actions. If a user interacts through API, then personal information is not collected.
   - Desktop Modeler User Actions: Users opting into collection of telemetry data in [Desktop Modeler](/components/modeler/desktop-modeler/telemetry/telemetry.md) send data to Camunda when to track how certain features are used, as described in the linked document.
 
-- AI Usage: Camunda's AI features, currently available in SaaS only, are clearly labeled as AI features. For Enterprise organizations, these features must be enabled by the customer via opt-in in the Console(/docs/components/console/manage-organization/enable-alpha-features/#enable-ai-powered-features.md). Depending on the feature, they may collect different information.
-  Camunda [Docs AI](/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai.md) records the entire conversation to provide ongoing support.
-  Camunda [Copilots](ADD LINK TO BPMN COPILOT DOCS) only gather usage telemetry data. For free users only, Copilots may collect all information sent to and from our AI models for product and model improvement.
+- AI Usage: Camunda's AI features, currently available in SaaS only, are clearly labeled as AI features. For Enterprise organizations, these features must be enabled by the customer via opt-in in the [Console](/components/console/manage-organization/enable-alpha-features/#enable-ai-powered-features.md). Depending on the feature, they may collect different information.
+  - Camunda [Docs AI](/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai.md) records the entire conversation to provide ongoing support.
+  - Camunda [Copilots](/components/early-access/alpha/bpmn-copilot/bpmn-copilot.md) only gather usage telemetry data. For free users only, Copilots may collect all information sent to and from our AI models for product and model improvement.
 
 ### Example
 
