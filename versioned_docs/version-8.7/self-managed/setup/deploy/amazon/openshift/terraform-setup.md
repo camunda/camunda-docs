@@ -36,7 +36,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 
 This setup provides a foundational starting point for working with Camunda 8, though it is not optimized for peak performance. It serves as a solid initial step in preparing a production environment by leveraging [Infrastructure as Code (IaC) tools](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/infrastructure-as-code).
 
-Terraform can seem complex at first. If you're interested in understanding what each component does, consider trying out the [Red Hat OpenShift on AWS UI-based tutorial](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html/tutorials/getting-started-with-rosa#creating-account-wide-roles). This guide will show you what resources are created and how they interact with each other.
+Terraform can initially appear complex. If you're new to it, you might want to start by considering trying out the [Red Hat OpenShift on AWS UI-based tutorial](https://docs.redhat.com/en/documentation/red_hat_openshift_service_on_aws/4/html/tutorials/getting-started-with-rosa#creating-account-wide-roles). This guide will show you what resources are created and how they interact with each other.
 
 If you require managed services for PostgreSQL Aurora or OpenSearch, you can refer to the definitions provided in the [EKS setup with Terraform](../amazon-eks/terraform-setup.md) guide. However, please note that these configurations may need adjustments to fit your specific requirements and have not been tested. By default, this guide assumes that the database services (PostgreSQL and Elasticsearch) integrated into the default chart will be used.
 
@@ -267,7 +267,7 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    Customize the cluster name, availability zones, with the values you previously retrieved from the Red Hat Console.
    Additionally, provide a secure username and password for the cluster administrator.
 
-   Ensure that you have set the environment `RHCS_TOKEN` is set with your [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa).
+   Ensure that you have set the environment variable `RHCS_TOKEN` with your [OpenShift Cluster Management API Token](https://console.redhat.com/openshift/token/rosa).
 
    By default, this cluster will be accessible from the internet. If you prefer to restrict access, please refer to the official documentation of the module.
 
@@ -329,7 +329,7 @@ Terraform will now create the OpenShift cluster with all the necessary configura
 
 Depending on the installation path you have chosen, you can find the reference files used on this page:
 
-- **Standard installation:** [Reference Files](https://github.com/camunda/camunda-deployment-references/tree/feature/openshift-ra-standard/aws/rosa-hcp/camunda-versions/8.7)
+- **Standard installation:** [Reference Files](https://github.com/camunda/camunda-deployment-references/tree/main/aws/rosa-hcp/camunda-versions/8.7)
 
 ## 2. Preparation for Camunda 8 installation
 

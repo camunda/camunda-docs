@@ -1001,6 +1001,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
                   ],
                 },
                 {
@@ -1020,6 +1021,7 @@ module.exports = {
               "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
               "Red Hat (OpenShift)": [
                 "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
               ],
               Other: [
                 "self-managed/setup/deploy/other/docker",
