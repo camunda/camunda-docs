@@ -33,7 +33,7 @@ To try out Camunda 8 or develop against it, consider signing up for our [SaaS of
 
 For the simplicity of this guide, certain best practices will be provided with links to additional documents, enabling you to explore the topic in more detail.
 
-:::warning
+:::danger
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
@@ -90,13 +90,13 @@ There are several ways to authenticate the `AWS` provider.
 
 :::
 
-:::warning
+:::danger
 
 Do not store sensitive information (credentials) in your Terraform files.
 
 :::
 
-:::warning
+:::danger
 
 A user who creates resources in AWS will therefore own these resources. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
 

@@ -5,62 +5,1115 @@ description: "Search for incidents based on given criteria."
 sidebar_label: "Query incidents (alpha)"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
-info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+info_path: versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query incidents (alpha)</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query incidents (alpha)"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/incidents/search"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/incidents/search"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Search for incidents based on given criteria.
 
 :::note
-This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
 See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
 for further details.
 :::
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","default":"asc"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process definition key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The bpmn process id associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"errorType"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`UNSPECIFIED`, `UNKNOWN`, `IO_MAPPING_ERROR`, `JOB_NO_RETRIES`, `CONDITION_ERROR`, `EXTRACT_VALUE_ERROR`, `CALLED_ELEMENT_ERROR`, `UNHANDLED_ERROR_EVENT`, `MESSAGE_SIZE_EXCEEDED`, `CALLED_DECISION_ERROR`, `DECISION_EVALUATION_ERROR`, `FORM_NOT_FOUND`]"} schema={{"type":"string","description":"Incident error type with a defined set of values.","enum":["UNSPECIFIED","UNKNOWN","IO_MAPPING_ERROR","JOB_NO_RETRIES","CONDITION_ERROR","EXTRACT_VALUE_ERROR","CALLED_ELEMENT_ERROR","UNHANDLED_ERROR_EVENT","MESSAGE_SIZE_EXCEEDED","CALLED_DECISION_ERROR","DECISION_EVALUATION_ERROR","FORM_NOT_FOUND"]}}></SchemaItem><SchemaItem collapsible={false} name={"errorMessage"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error message which describes the error in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node id associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The flow node instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"creationTime"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"Date of incident creation.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ACTIVE`, `MIGRATED`, `RESOLVED`, `PENDING`]"} schema={{"type":"string","description":"State of this incident with a defined set of values.","enum":["ACTIVE","MIGRATED","RESOLVED","PENDING"]}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The job key, if exists, associated with this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"treePath"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The path from process instance via flow node ids and flow node instance keys leading to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant id of the incident.","type":"string"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-The incident search successful response.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for IncidentFilterRequest",
+                      type: "object",
+                      properties: {
+                        processDefinitionId: {
+                          type: "string",
+                          description:
+                            "The bpmn process id associated to this incident.",
+                        },
+                        errorType: {
+                          type: "string",
+                          description:
+                            "Incident error type with a defined set of values.",
+                          enum: [
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                            "IO_MAPPING_ERROR",
+                            "JOB_NO_RETRIES",
+                            "CONDITION_ERROR",
+                            "EXTRACT_VALUE_ERROR",
+                            "CALLED_ELEMENT_ERROR",
+                            "UNHANDLED_ERROR_EVENT",
+                            "MESSAGE_SIZE_EXCEEDED",
+                            "CALLED_DECISION_ERROR",
+                            "DECISION_EVALUATION_ERROR",
+                            "FORM_NOT_FOUND",
+                          ],
+                        },
+                        errorMessage: {
+                          type: "string",
+                          description:
+                            "Error message which describes the error in more detail.",
+                        },
+                        flowNodeId: {
+                          type: "string",
+                          description:
+                            "The flow node id associated to this incident.",
+                        },
+                        creationTime: {
+                          type: "string",
+                          description: "Date of incident creation.",
+                          format: "date-time",
+                        },
+                        state: {
+                          type: "string",
+                          description:
+                            "State of this incident with a defined set of values.",
+                          enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                        },
+                        treePath: {
+                          type: "string",
+                          description:
+                            "The path from process instance via flow node ids and flow node instance keys leading to this incident.",
+                        },
+                        tenantId: {
+                          description: "The tenant id of the incident.",
+                          type: "string",
+                        },
+                      },
+                      title: "IncidentFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this incident.",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The process definition key associated to this incident.",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The process instance key associated to this incident.",
+                    },
+                    flowNodeInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The flow node instance key associated to this incident.",
+                    },
+                    jobKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The job key, if exists, associated with this incident.",
+                    },
+                  },
+                  title: "IncidentFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "IncidentSearchQueryRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.number+json": {
+        schema: {
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for IncidentFilterRequest",
+                      type: "object",
+                      properties: {
+                        processDefinitionId: {
+                          type: "string",
+                          description:
+                            "The bpmn process id associated to this incident.",
+                        },
+                        errorType: {
+                          type: "string",
+                          description:
+                            "Incident error type with a defined set of values.",
+                          enum: [
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                            "IO_MAPPING_ERROR",
+                            "JOB_NO_RETRIES",
+                            "CONDITION_ERROR",
+                            "EXTRACT_VALUE_ERROR",
+                            "CALLED_ELEMENT_ERROR",
+                            "UNHANDLED_ERROR_EVENT",
+                            "MESSAGE_SIZE_EXCEEDED",
+                            "CALLED_DECISION_ERROR",
+                            "DECISION_EVALUATION_ERROR",
+                            "FORM_NOT_FOUND",
+                          ],
+                        },
+                        errorMessage: {
+                          type: "string",
+                          description:
+                            "Error message which describes the error in more detail.",
+                        },
+                        flowNodeId: {
+                          type: "string",
+                          description:
+                            "The flow node id associated to this incident.",
+                        },
+                        creationTime: {
+                          type: "string",
+                          description: "Date of incident creation.",
+                          format: "date-time",
+                        },
+                        state: {
+                          type: "string",
+                          description:
+                            "State of this incident with a defined set of values.",
+                          enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                        },
+                        treePath: {
+                          type: "string",
+                          description:
+                            "The path from process instance via flow node ids and flow node instance keys leading to this incident.",
+                        },
+                        tenantId: {
+                          description: "The tenant id of the incident.",
+                          type: "string",
+                        },
+                      },
+                      title: "IncidentFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this incident.",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The process definition key associated to this incident.",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The process instance key associated to this incident.",
+                    },
+                    flowNodeInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The flow node instance key associated to this incident.",
+                    },
+                    jobKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The job key, if exists, associated with this incident.",
+                    },
+                  },
+                  title: "IncidentFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "IncidentSearchQueryRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.string+json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for IncidentFilterRequest",
+                      type: "object",
+                      properties: {
+                        processDefinitionId: {
+                          type: "string",
+                          description:
+                            "The bpmn process id associated to this incident.",
+                        },
+                        errorType: {
+                          type: "string",
+                          description:
+                            "Incident error type with a defined set of values.",
+                          enum: [
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                            "IO_MAPPING_ERROR",
+                            "JOB_NO_RETRIES",
+                            "CONDITION_ERROR",
+                            "EXTRACT_VALUE_ERROR",
+                            "CALLED_ELEMENT_ERROR",
+                            "UNHANDLED_ERROR_EVENT",
+                            "MESSAGE_SIZE_EXCEEDED",
+                            "CALLED_DECISION_ERROR",
+                            "DECISION_EVALUATION_ERROR",
+                            "FORM_NOT_FOUND",
+                          ],
+                        },
+                        errorMessage: {
+                          type: "string",
+                          description:
+                            "Error message which describes the error in more detail.",
+                        },
+                        flowNodeId: {
+                          type: "string",
+                          description:
+                            "The flow node id associated to this incident.",
+                        },
+                        creationTime: {
+                          type: "string",
+                          description: "Date of incident creation.",
+                          format: "date-time",
+                        },
+                        state: {
+                          type: "string",
+                          description:
+                            "State of this incident with a defined set of values.",
+                          enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                        },
+                        treePath: {
+                          type: "string",
+                          description:
+                            "The path from process instance via flow node ids and flow node instance keys leading to this incident.",
+                        },
+                        tenantId: {
+                          description: "The tenant id of the incident.",
+                          type: "string",
+                        },
+                      },
+                      title: "IncidentFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this incident.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description:
+                        "The process definition key associated to this incident.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description:
+                        "The process instance key associated to this incident.",
+                    },
+                    flowNodeInstanceKey: {
+                      type: "string",
+                      description:
+                        "The flow node instance key associated to this incident.",
+                    },
+                    jobKey: {
+                      type: "string",
+                      description:
+                        "The job key, if exists, associated with this incident.",
+                    },
+                  },
+                  title: "IncidentFilter",
+                },
+              ],
+            },
+          },
+          title: "IncidentSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process definition key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The bpmn process id associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"errorType"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`UNSPECIFIED`, `UNKNOWN`, `IO_MAPPING_ERROR`, `JOB_NO_RETRIES`, `CONDITION_ERROR`, `EXTRACT_VALUE_ERROR`, `CALLED_ELEMENT_ERROR`, `UNHANDLED_ERROR_EVENT`, `MESSAGE_SIZE_EXCEEDED`, `CALLED_DECISION_ERROR`, `DECISION_EVALUATION_ERROR`, `FORM_NOT_FOUND`]"} schema={{"type":"string","description":"Incident error type with a defined set of values.","enum":["UNSPECIFIED","UNKNOWN","IO_MAPPING_ERROR","JOB_NO_RETRIES","CONDITION_ERROR","EXTRACT_VALUE_ERROR","CALLED_ELEMENT_ERROR","UNHANDLED_ERROR_EVENT","MESSAGE_SIZE_EXCEEDED","CALLED_DECISION_ERROR","DECISION_EVALUATION_ERROR","FORM_NOT_FOUND"]}}></SchemaItem><SchemaItem collapsible={false} name={"errorMessage"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error message which describes the error in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node id associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The flow node instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"creationTime"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"Date of incident creation.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ACTIVE`, `MIGRATED`, `RESOLVED`, `PENDING`]"} schema={{"type":"string","description":"State of this incident with a defined set of values.","enum":["ACTIVE","MIGRATED","RESOLVED","PENDING"]}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The job key, if exists, associated with this incident.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"treePath"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The path from process instance via flow node ids and flow node instance keys leading to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant id of the incident.","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"key\": 0,\n      \"processDefinitionKey\": 0,\n      \"processDefinitionId\": \"string\",\n      \"processInstanceKey\": 0,\n      \"errorType\": \"UNSPECIFIED\",\n      \"errorMessage\": \"string\",\n      \"flowNodeId\": \"string\",\n      \"flowNodeInstanceKey\": 0,\n      \"creationTime\": \"2024-10-02T22:01:21.465Z\",\n      \"state\": \"ACTIVE\",\n      \"jobKey\": 0,\n      \"treePath\": \"string\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The incident search query failed. More details are provided in the response body.
-
-</div><div></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-Unauthorized
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-Not found
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-Internal server error
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The incident search successful response.\n",
+      content: {
+        "application/json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for IncidentItem",
+                      type: "object",
+                      properties: {
+                        processDefinitionId: {
+                          type: "string",
+                          description:
+                            "The bpmn process id associated to this incident.",
+                        },
+                        errorType: {
+                          type: "string",
+                          description:
+                            "Incident error type with a defined set of values.",
+                          enum: [
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                            "IO_MAPPING_ERROR",
+                            "JOB_NO_RETRIES",
+                            "CONDITION_ERROR",
+                            "EXTRACT_VALUE_ERROR",
+                            "CALLED_ELEMENT_ERROR",
+                            "UNHANDLED_ERROR_EVENT",
+                            "MESSAGE_SIZE_EXCEEDED",
+                            "CALLED_DECISION_ERROR",
+                            "DECISION_EVALUATION_ERROR",
+                            "FORM_NOT_FOUND",
+                          ],
+                        },
+                        errorMessage: {
+                          type: "string",
+                          description:
+                            "Error message which describes the error in more detail.",
+                        },
+                        flowNodeId: {
+                          type: "string",
+                          description:
+                            "The flow node id associated to this incident.",
+                        },
+                        creationTime: {
+                          type: "string",
+                          description: "Date of incident creation.",
+                          format: "date-time",
+                        },
+                        state: {
+                          type: "string",
+                          description:
+                            "State of this incident with a defined set of values.",
+                          enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                        },
+                        treePath: {
+                          type: "string",
+                          description:
+                            "The path from process instance via flow node ids and flow node instance keys leading to this incident.",
+                        },
+                        tenantId: {
+                          description: "The tenant id of the incident.",
+                          type: "string",
+                        },
+                      },
+                      title: "IncidentItemBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this incident.",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The process definition key associated to this incident.",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The process instance key associated to this incident.",
+                    },
+                    flowNodeInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The flow node instance key associated to this incident.",
+                    },
+                    jobKey: {
+                      type: "integer",
+                      description:
+                        "The job key, if exists, associated with this incident.",
+                      format: "int64",
+                    },
+                  },
+                  title: "IncidentItem",
+                },
+              },
+            },
+            title: "IncidentSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for IncidentItem",
+                      type: "object",
+                      properties: {
+                        processDefinitionId: {
+                          type: "string",
+                          description:
+                            "The bpmn process id associated to this incident.",
+                        },
+                        errorType: {
+                          type: "string",
+                          description:
+                            "Incident error type with a defined set of values.",
+                          enum: [
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                            "IO_MAPPING_ERROR",
+                            "JOB_NO_RETRIES",
+                            "CONDITION_ERROR",
+                            "EXTRACT_VALUE_ERROR",
+                            "CALLED_ELEMENT_ERROR",
+                            "UNHANDLED_ERROR_EVENT",
+                            "MESSAGE_SIZE_EXCEEDED",
+                            "CALLED_DECISION_ERROR",
+                            "DECISION_EVALUATION_ERROR",
+                            "FORM_NOT_FOUND",
+                          ],
+                        },
+                        errorMessage: {
+                          type: "string",
+                          description:
+                            "Error message which describes the error in more detail.",
+                        },
+                        flowNodeId: {
+                          type: "string",
+                          description:
+                            "The flow node id associated to this incident.",
+                        },
+                        creationTime: {
+                          type: "string",
+                          description: "Date of incident creation.",
+                          format: "date-time",
+                        },
+                        state: {
+                          type: "string",
+                          description:
+                            "State of this incident with a defined set of values.",
+                          enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                        },
+                        treePath: {
+                          type: "string",
+                          description:
+                            "The path from process instance via flow node ids and flow node instance keys leading to this incident.",
+                        },
+                        tenantId: {
+                          description: "The tenant id of the incident.",
+                          type: "string",
+                        },
+                      },
+                      title: "IncidentItemBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this incident.",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The process definition key associated to this incident.",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The process instance key associated to this incident.",
+                    },
+                    flowNodeInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The flow node instance key associated to this incident.",
+                    },
+                    jobKey: {
+                      type: "integer",
+                      description:
+                        "The job key, if exists, associated with this incident.",
+                      format: "int64",
+                    },
+                  },
+                  title: "IncidentItem",
+                },
+              },
+            },
+            title: "IncidentSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for IncidentItem",
+                      type: "object",
+                      properties: {
+                        processDefinitionId: {
+                          type: "string",
+                          description:
+                            "The bpmn process id associated to this incident.",
+                        },
+                        errorType: {
+                          type: "string",
+                          description:
+                            "Incident error type with a defined set of values.",
+                          enum: [
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                            "IO_MAPPING_ERROR",
+                            "JOB_NO_RETRIES",
+                            "CONDITION_ERROR",
+                            "EXTRACT_VALUE_ERROR",
+                            "CALLED_ELEMENT_ERROR",
+                            "UNHANDLED_ERROR_EVENT",
+                            "MESSAGE_SIZE_EXCEEDED",
+                            "CALLED_DECISION_ERROR",
+                            "DECISION_EVALUATION_ERROR",
+                            "FORM_NOT_FOUND",
+                          ],
+                        },
+                        errorMessage: {
+                          type: "string",
+                          description:
+                            "Error message which describes the error in more detail.",
+                        },
+                        flowNodeId: {
+                          type: "string",
+                          description:
+                            "The flow node id associated to this incident.",
+                        },
+                        creationTime: {
+                          type: "string",
+                          description: "Date of incident creation.",
+                          format: "date-time",
+                        },
+                        state: {
+                          type: "string",
+                          description:
+                            "State of this incident with a defined set of values.",
+                          enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                        },
+                        treePath: {
+                          type: "string",
+                          description:
+                            "The path from process instance via flow node ids and flow node instance keys leading to this incident.",
+                        },
+                        tenantId: {
+                          description: "The tenant id of the incident.",
+                          type: "string",
+                        },
+                      },
+                      title: "IncidentItemBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this incident.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description:
+                        "The process definition key associated to this incident.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description:
+                        "The process instance key associated to this incident.",
+                    },
+                    flowNodeInstanceKey: {
+                      type: "string",
+                      description:
+                        "The flow node instance key associated to this incident.",
+                    },
+                    jobKey: {
+                      type: "string",
+                      description:
+                        "The job key, if exists, associated with this incident.",
+                    },
+                  },
+                  title: "IncidentResult",
+                },
+              },
+            },
+            title: "IncidentSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The incident search query failed. More details are provided in the response body.\n",
+    },
+    "401": {
+      description: "Unauthorized",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "Internal server error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

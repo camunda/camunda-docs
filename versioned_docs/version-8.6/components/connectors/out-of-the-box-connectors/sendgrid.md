@@ -27,7 +27,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 #### Make your SendGrid Email Connector executable
 
-To make the **SendGrid Email Connector** executable, you need to fill out all the mandatory fields highlighted in red in the properties panel:
+To make the **SendGrid Email Connector** executable, you need to fill out all the mandatory fields highlighted in red in the properties panel on the right side of the screen:
 
 1. Set **SendGrid API Key** to `{{secrets.SEND_GRID_API_KEY}}`.
 2. Set **Sender Name** to `Jane Doe` (or the [sender identity](#create-a-sender-identity) you configured above).

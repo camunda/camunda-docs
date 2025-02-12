@@ -24,8 +24,291 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
 }
 
+/* Dark mode */
+[data-theme="dark"]:root {
+  --ifm-color-primary: #78a9ff;
+  --ifm-background-color: #161616;
+  --ifm-background-surface-color: #161616;
+  --ifm-font-color-base: #f4f4f4;
+  --ifm-heading-color: #f4f4f4;
+  --ifm-footer-background-color: #161616;
+  --ifm-footer-color: #161616;
+  --ifm-footer-link-color: var(--ifm-color-secondary);
+  --ifm-footer-title-color: var(--ifm-color-white);
+  --ifm-navbar-link-color: #c6c6c6;
+  --ifm-menu-color: #c6c6c6;
+  --ifm-color-secondary-contrast-background: #323232;
+  --ifm-color-secondary-dark: #646464;
+  --ifm-table-border-color: #3c3c3c;
+  --ifm-toc-border-color: #323232;
+  --ifm-tabs-padding-vertical: 10px;
+  --ifm-tabs-padding-horizontal: 15px;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Dark Mode > Kapa AI */
+
+[data-theme="dark"] .mantine-k0race {
+  border: 1px solid #767676;
+  box-shadow: 0px 8px 16px 4px rgba(120, 169, 255, 0.2);
+}
+
+/* Dark Mode > Search */
+
+[data-theme="dark"] .DocSearch-Modal {
+  background: #161616;
+}
+[data-theme="dark"] .DocSearch-Footer {
+  background: #161616;
+}
+[data-theme="dark"] .DocSearch-Hit a {
+  text-decoration: none;
+}
+
+/* Dark Mode > General */
+
+[data-theme="dark"] .navbar {
+  border-bottom: 1px solid #323232;
+}
+
+[data-theme="dark"] .token .tag {
+  color: red !important;
+}
+
+[data-theme="dark"] .DocSearch-Button {
+  border: 1px solid #48484a;
+}
+
+[data-theme="dark"] .hero__subtitle {
+  color: #f4f4f4;
+}
+[data-theme="dark"] .footer--dark {
+  background-color: #161616;
+  border-top: 1px solid #323232;
+  padding-top: 40px;
+}
+[data-theme="dark"] h2 {
+  border-bottom: 1px solid #48484a;
+}
+[data-theme="dark"] .hero__title {
+  border-bottom: none;
+}
+[data-theme="dark"] .hero--primary {
+  background-image: url("/static/img/hero-bg-dark.png");
+  padding-bottom: 2rem;
+  background-color: #161616;
+}
+[data-theme="dark"] .theme-doc-markdown img {
+  background-color: white;
+  padding: 0;
+  border: 0;
+}
+[data-theme="dark"] .callout {
+  background-color: #135cda;
+  color: white;
+}
+[data-theme="dark"] code {
+  background-color: #2c3342;
+}
+[data-theme="dark"] .hero--secondary {
+  background-color: #161616;
+  margin-bottom: 2rem;
+}
+[data-theme="dark"] .tabs__item {
+  color: #c6c6c6;
+  border: 3px solid var(--ifm-color-emphasis-200);
+  background-color: transparent;
+  margin-right: 10px;
+}
+[data-theme="dark"] .tabs__item--active {
+  border-radius: var(--ifm-global-radius);
+  border: 3px solid #78a9ff;
+  background-color: transparent;
+}
+[data-theme="dark"] .tabs__item:hover {
+  background-color: var(--ifm-color-emphasis-200);
+  color: #c6c6c6;
+}
+
+[data-theme="dark"] .tabs {
+  border-bottom: 0;
+}
+[data-theme="dark"] .get-started-use-case {
+  background-color: #14d890;
+  color: #000 !important;
+}
+[data-theme="dark"] .get-started-use-case:hover {
+  background-color: transparent;
+  border-color: #14d890;
+  color: #14d890 !important;
+}
+[data-theme="dark"] .get-started-use-case-2 {
+  background-color: transparent;
+  border-color: #14d890;
+  color: #14d890 !important;
+}
+[data-theme="dark"] .get-started-use-case-2:hover {
+  background-color: #14d890;
+  color: #000 !important;
+}
+
+/* Dark Mode > Link underlines for AA accessibility */
+
+[data-theme="dark"] p a {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff6b;
+}
+[data-theme="dark"] li a {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff6b;
+}
+[data-theme="dark"] li a.osano-footer-link-docu {
+  text-decoration: none;
+}
+[data-theme="dark"] td a {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff6b;
+}
+[data-theme="dark"] p a:hover {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff;
+}
+[data-theme="dark"] li a:hover {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff;
+}
+[data-theme="dark"] td a:hover {
+  text-decoration: underline;
+  text-decoration-color: #78a9ff;
+}
+[data-theme="dark"] .alert a {
+  text-decoration: underline;
+  text-decoration-color: #e1e1e16b;
+}
+[data-theme="dark"] .alert a:hover {
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+[data-theme="dark"] .menu__link {
+  text-decoration: none;
+}
+[data-theme="dark"] .menu__link:hover {
+  text-decoration: none;
+}
+[data-theme="dark"] .table-of-contents__link {
+  text-decoration: none;
+  color: #c6c6c6;
+}
+[data-theme="dark"] .table-of-contents__link:hover {
+  text-decoration: none;
+  color: #f4f4f4;
+}
+[data-theme="dark"] .footer__link-item {
+  text-decoration: none;
+}
+[data-theme="dark"] li a.dropdown__link {
+  text-decoration: none;
+}
+[data-theme="dark"]
+  .openapi-tabs__schema-list-container
+  .openapi-tabs__schema-item {
+  border: 3px solid var(--ifm-toc-border-color);
+}
+[data-theme="dark"]
+  .openapi-tabs__code-container-inner
+  .openapi-tabs__code-item.active {
+  border: 3px solid var(--ifm-color-primary);
+}
+[data-theme="dark"] .openapi-tabs__response-code-item:hover:not(.active) {
+  border: 3px solid var(--ifm-toc-border-color);
+}
+
+/* Dark Mode > Cards */
+
+[data-theme="dark"] .card {
+  background-color: #1b1b1b;
+  border: 1px solid #282828;
+  box-shadow: 0px 8px 16px 4px #00000033;
+}
+[data-theme="dark"] .card:hover {
+  background-color: transparent;
+  border: 1px solid var(--ifm-color-primary);
+  box-shadow: 0px 8px 16px 4px #78a9ff33;
+}
+
+/* Dark mode > Badges */
+
+[data-theme="dark"] .badge--beginner {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
+}
+[data-theme="dark"] .badge--intermediate {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
+}
+[data-theme="dark"] .badge--advanced {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
+}
+[data-theme="dark"] .badge--platform {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
+}
+[data-theme="dark"] .badge--medium {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
+}
+[data-theme="dark"] .badge--short {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
+}
+[data-theme="dark"] .badge--beta {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
+}
+[data-theme="dark"] .badge--alpha {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
+}
+[data-theme="dark"] .badge--enterprise-only {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
+}
+[data-theme="dark"] .badge--cloud {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
+}
+[data-theme="dark"] .badge--medium {
+  background-color: #00539a;
+  color: #bae6ff;
+  border: 1px solid #1192e8;
+}
+[data-theme="dark"] .badge--long {
+  background-color: #00539a;
+  color: #bae6ff;
+  border: 1px solid #1192e8;
+}
+
+/* End Dark mode */
+
+.pagination-nav {
+  margin-bottom: 2rem;
+}
 .docusaurus-highlight-code-line {
-  background-color: rgb(72, 77, 91);
+  background-color: #484d5b;
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
@@ -46,6 +329,11 @@ body {
     cantarell,
     Helvetica Neue,
     sans-serif;
+}
+
+.alert a {
+  text-decoration: underline;
+  text-decoration-color: var(--ifm-alert-border-color);
 }
 
 .alert--primary {
@@ -524,6 +812,11 @@ h2#request {
 }
 .openapi-tabs__mime-container {
   padding-top: 0;
+}
+ul.openapi-tabs__mime-list-container,
+ul.openapi-tabs__schema-list-container,
+ul.openapi-tabs__response-list-container {
+  overflow-x: auto;
 }
 .openapi-tabs__response-list-container.tabs {
   border-bottom: 0;
