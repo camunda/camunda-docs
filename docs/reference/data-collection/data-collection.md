@@ -4,49 +4,61 @@ title: "Data collection"
 description: "Learn about the data collected by Camunda."
 ---
 
-Camunda collects a variety of data to evaluate contractual usage, provide a better user experience, and improve its products. This section describes which data is collected, how Camunda ensures privacy, and what options you have to modify which data is sent to Camunda. This document applies only to interactions with Camunda's products.
+Camunda collects a variety of telemetry data to evaluate contractual usage, provide a better user experience, and improve its products. This section describes which telemetry data is collected, how Camunda ensures privacy, and what options you have to modify which telemetry data is sent to Camunda. This document is designed to help you understand what telemetry data includes and excludes and applies only to interactions with Camunda's products. This document will be updated from time to time.
+
+## Purposes
+
+Camunda collects certain types of data we call “telemetry data” for the purposes described below:
+
+- for billing,
+- to improve the user experience, to track and analyze usage of the Software,
+- to ensure the security, stability, and functionality of the Software, or
+- to provide support to Customers, such as guidance that will help optimize usage regarding the product and new functionalities.
 
 ## Principles
 
-Camunda follows certain principles to ensure the privacy of its customers and the success of its product development efforts.
+Camunda follows certain principles in its collection and use of telemetry data to ensure the privacy of its customers and the success of its product development efforts:
 
-- Camunda minimizes automatic collection of personally identifiable information (PII) to information required to identify the user like name and email. Where PII is collected, customers have the option to opt-out of sharing this data with Camunda.
-- Camunda avoids automatic collection of protected health information (PHI).
-  - Data collected from end-users such as form fills or process variables are not tracked.
-- Camunda avoids automatic collection of intellectual property (IP).
-  - Assets describing how a process is defined and executed are not automatically shared with Camunda.
-- Camunda does not collect payment information nor sell user information.
+- Camunda will use telemetry data subject to applicable law (including, where necessary, opt-in and opt-out functionalities for personal data).
+  Telemetry data is generally aggregated unless users opt-in for personalized use of their telemetry data (for example, to provide additional support or optimize product usage to customers).
+- Telemetry data does not include any data shared in process instances or uploaded in customer clusters. Therefore, **no end-user or end-customer personal data**, personal information (PII), or protected health information (PHI) uploaded to a customer cluster is part of telemetry data.
+- Telemetry data does **not include payment information**.
+- Camunda does **not sell any personal (user) information.**
+- **For Self-Managed customers, telemetry data is always fully anonymous and only sent upon admin/owner enablement from the customer.**
+- Data collected from end-users such as form fills or process variables are not part of telemetry data. For example, if part of your process involves a user filling in a shipping address, that address is not telemetry data.
+- Assets like the BPMN diagram describing how a process is defined and executed are not telemetry data. Telemetry data does not include information about how customers develop their processes, like keystrokes or BPMN diagrams. Instead, it includes user-provided identifiers like a process ID to track which Camunda software features are used when developing a process.
+- Customers are responsible for avoiding sharing intellectual property, personal data or sensitive data through interaction with AI features. The data collected by different AI features is shared [below](#usage-telemetry-data-saas-and-desktop-modeler-only).
+- Camunda will not use telemetry data in any way that identifies the source of the telemetry data to third parties except as necessary for Camunda to enforce its rights and contractual obligations, such as charging fees for overage of usage metrics or complying with a lawful subpoena.
 
-## Data Collection
+## Telemetry Data Collection
 
-Camunda collects data through a variety of methods.
+Telemetry data includes contractual metrics, environment, usage. Contractual metrics, environment, and usage telemetry data are collected automatically in SaaS (except for personalized telemetry data which is only used via user discretionary opt-in) or collected via admin discretionary opt-in for Self-Managed platforms. Each of these categories of telemetry data are described below.
 
-### Contractual Usage
+### Contractual Metrics Telemetry
 
-Camunda collects a limited set of contractually-agreed [usage metrics](/reference/data-collection/usage-metrics.md) to evaluate billing. These are summary metrics that contain no sensitive information.
+Telemetry Data includes a limited set of contractually agreed [usage metrics](/reference/data-collection/usage-metrics.md) to evaluate usage metric use and bill for overages. For example, how many process instance usage metrics are used compared to the number of process instance usage metrics purchased by customers. These are summary usage metrics that contain no sensitive information and that are collected automatically for SaaS customers and sent in a report generated by Self-Managed customers.
 
-### Environment Data
+### Environment Telemetry Data (Self-Managed only)
 
-Camunda collects information about customer installations to enable better support and product improvement decisions.
+Environment telemetry data includes information about your Self-managed installations to enable better support and product improvement decisions. Self-Managed customers may choose to send a very limited set of environment information through the Console component's telemetry mechanism. View the [telemetry](/self-managed/console-deployment/telemetry.md) page for a description of this data. Environment telemetry data is not relevant to SaaS installations.
 
-Self-Managed customers may choose to send a very limited set of information through the Console component's telemetry mechanism. View the [telemetry](/self-managed/console-deployment/telemetry.md) page for an example of this data.
+### Usage Telemetry Data (SaaS and Desktop Modeler only)
 
-### Usage Data
-
-Camunda collects product usage data from SaaS and Desktop Modeler users to help make better product improvement decisions and enable outreach to support users.
+Usage telemetry data includes limited product usage data to help make better product improvement decisions and enable outreach to support users. This section describes the types of data and how they are collected.
 
 - Feature Usage:
-  - SaaS System Actions: All SaaS organizations submit basic information about which features are being used. When certain features are used, Camunda logs which feature is used and basic information about how it has been used. This information is tied to an pseudonymized organization.
-  - SaaS User Actions: Users that opt-in to analytics cookies
-    (!!!!!!!!!!!!TO CONFIRM- https://camunda.slack.com/archives/C034F8NA1G8/p1736857938619039!!!!!!!!!!!!!!)
-    gain access to in-app tutorials and automatically submit information about the actions they take in Camunda. In addition to the data collected from system actions described above, Camunda collects cursor activity, geographical area, browser information, and basic biographical information like email and name for user actions.
-  - Desktop Modeler User Actions: Users opting into collection of [telemetry data in Desktop Modeler](/components/modeler/desktop-modeler/telemetry/telemetry.md) send certain data to Camunda.
-- Shared Data: Data intentionally shared with Camunda, such as survey information, feedback, or bug reports.
-- AI Usage: Camunda's AI features, currently available in SaaS only, collect anonymized inputs, outputs, and feedback to improve their quality. All AI features are clearly labeled as AI features and, with the exception of the AI Form Generator, require opt-in in the Console to [enable AI-powered features](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features).
+
+  - SaaS System Actions: All SaaS organizations submit basic information about which features are being used as part of telemetry data collection. When certain features are used, Camunda logs which feature is used and basic information about how it has been used. This information is tied to a pseudonymized organization.
+  - SaaS User Actions: Users that opt-in to analytics cookies gain access to in-app tutorials and automatically submit information about which features they interact with in Camunda’s UI as part of telemetry data. In addition to the data collected from system actions described above, Camunda collects cursor activity, geographical area, browser information, and basic biographical information limited tolike email, and name, and city/region/country for user actions. If a user interacts through API, then personal information is not collected.
+  - Desktop Modeler User Actions: Users opting into collection of telemetry data in [Desktop Modeler](/components/modeler/desktop-modeler/telemetry.md) send data to Camunda when to track how certain features are used, as described in the linked document.
+
+- AI Usage: Camunda's AI features, currently available in SaaS only, are clearly labeled as AI features. For Enterprise organizations, these features must be enabled by the customer via opt-in in the Console(/docs/components/console/manage-organization/enable-alpha-features/#enable-ai-powered-features.md). Depending on the feature, they may collect different information.
+  Camunda [Docs AI](/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai.md) records the entire conversation to provide ongoing support.
+  Camunda [Copilots](ADD LINK TO BPMN COPILOT DOCS) only gather usage telemetry data. For free users only, Copilots may collect all information sent to and from our AI models for product and model improvement.
 
 ### Example
 
-Below is an example of user action data collected by the platform.
+Below is an example of user action data collected by the platform:
 
 ```json
 {
