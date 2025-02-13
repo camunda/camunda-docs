@@ -38,7 +38,7 @@ Sometimes it can be helpful to see what docusaurus is generating, though. Use on
 
 The local build consumes a lot of local resources. You might find the `:docker` version to be less disruptive of your local environment.
 
-Both commands generate static content into the `build` director, and can be served using any static contents hosting service.
+Both commands generate static content into the `build` directory, and can be served using any static contents hosting service.
 
 ## Deployment
 
