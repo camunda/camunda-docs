@@ -7,7 +7,7 @@ description: "Technical reference information for IDP, such as technical archite
 import IdpArchitectureImg from './img/idp-architecture-diagram.png';
 import IdpSecretsImg from './img/idp-connector-secrets.png';
 
-Technical reference information for IDP, including the technical architecture and supported document file formats.
+Technical reference information for IDP, including technical architecture, supported documents, and known limitations.
 
 ## Technical architecture
 
@@ -66,3 +66,7 @@ IDP supports the following [extraction field](idp-key-concepts.md#extraction-fie
 | Date      | Dates in specific formats. |
 | Number    | Numeric values.            |
 | String    | A sequence of characters.  |
+
+## Known limitations
+
+Content

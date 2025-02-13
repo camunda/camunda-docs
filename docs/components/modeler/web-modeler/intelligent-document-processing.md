@@ -27,7 +27,7 @@ To configure and use IDP in Camunda 8 you must:
 - Deploy the [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) connectors used by IDP to extract document content and converse with LLM models.
 
 :::note
-To learn more about the IDP technical architecture and how IDP works, see [IDP technical architecture](idp/idp-reference.md#technical-architecture).
+To learn more about IDP technical architecture and how IDP works, see [technical architecture](idp/idp-reference.md#technical-architecture).
 :::
 
 ## Get started with IDP
