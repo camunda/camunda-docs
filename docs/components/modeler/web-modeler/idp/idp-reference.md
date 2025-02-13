@@ -27,7 +27,7 @@ The IDP extraction connector integrates with Camunda document handling connector
 
 :::caution
 
-You may encounter extraction errors during testing if you have not added your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to the cluster you want to use with IDP. Camunda secrets allow you to store credentials and avoid exposing sensitive information.
+You may encounter extraction errors during testing if you have not added your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](../intelligent-document-processing.md#configure-idp).
 <img src={IdpSecretsImg} alt="Architecture diagram of IDP" width="800px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
 :::
