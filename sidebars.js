@@ -924,6 +924,7 @@ module.exports = {
         id: "reference/announcements",
       },
       items: [
+        "reference/announcements/announcements-880",
         "reference/announcements/announcements-870",
         "reference/announcements/announcements-860",
         "reference/announcements/announcements-850",
