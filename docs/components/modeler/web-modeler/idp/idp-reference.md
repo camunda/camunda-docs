@@ -43,21 +43,23 @@ For SaaS, uploaded documents are stored in Web Modeler itself, not your cluster.
 
 Storage limit?
 
-## Document language
+## Document language support
 
 IDP supports data extraction and processing of documents in different languages.
 
 IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. This ensures that the extracted text can be accurately mapped to process variables and used within your workflows, regardless of a document's language.
 
+For example, as of February 2025, Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese.
+
 :::info
-Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) to learn more about supported languages.
+Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for full details of supported languages.
 :::
 
 ## Extraction field data types
 
 IDP allows you to choose an [extraction field](idp-key-concepts.md#extraction-fields) data type to indicate to the LLM what type of data should be extracted. This helps the LLM more accurately extract the data you want.
 
-For example, if you want to extract an expected numeric value (such as a monetary value), you would choose the `Number` data type.
+For example, if you want to extract an expected numeric value (such as a monetary value), select the `Number` data type for the extraction field.
 
 | Data type | Description                                  |
 | :-------- | :------------------------------------------- |
