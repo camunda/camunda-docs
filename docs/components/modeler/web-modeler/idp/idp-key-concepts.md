@@ -88,5 +88,5 @@ Add a separate field for each piece of information you want to extract from a do
 <img src={IdpExtractionFieldImg} alt="Example structured document" width="800px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
 :::info
-To learn more about supported data types, see [extraction field data types](idp-reference.md#extraction-field-data-types).
+To learn more about data types, see [extraction field data types](idp-reference.md#extraction-field-data-types).
 :::

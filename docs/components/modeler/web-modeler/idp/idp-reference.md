@@ -25,20 +25,17 @@ The IDP extraction connector integrates with Camunda document handling connector
 
 1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock Converse to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable. Error handling and retry mechanisms are also configurable.
 
-:::caution
-
+:::note
 You may encounter extraction errors during testing if you have not added your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](../intelligent-document-processing.md#configure-idp).
-<img src={IdpSecretsImg} alt="Architecture diagram of IDP" width="800px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
-
 :::
 
 ## Document file formats
 
 IDP currently only supports data extraction from the following document file formats.
 
-| File format | Description                                                                                                                                                                                                                              |
-| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PDF         | <p><ul><li>PDF documents must not be password protected.</li><li>Maximum document file size is 4MB.</li><li>Text and image content can be extracted from a PDF document. For example, a scanned document converted to PDF.</li></ul></p> |
+| File format | Description                                                                                                                                                                                                                                                                                       |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <p>PDF</p>  | <p><ul><li>PDF documents must not be password protected.</li><li><p>Maximum document file size is 4MB.</p></li><li><p>Both text and image content can be extracted from a PDF document. For example, data can be extracted from a scanned image that has been converted to PDF.</p></li></ul></p> |
 
 ## Document storage
 
@@ -58,14 +55,16 @@ Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) to learn 
 
 ## Extraction field data types
 
-IDP supports the following [extraction field](idp-key-concepts.md#extraction-fields) data types.
+IDP allows you to choose an [extraction field](idp-key-concepts.md#extraction-fields) data type to indicate to the LLM what type of data should be extracted. This helps the LLM more accurately extract the data you want.
 
-| Data type | Description                |
-| :-------- | :------------------------- |
-| Boolean   | True or false values.      |
-| Date      | Dates in specific formats. |
-| Number    | Numeric values.            |
-| String    | A sequence of characters.  |
+For example, if you want to extract an expected numeric value (such as a monetary value), you would choose the `Number` data type.
+
+| Data type | Description                                  |
+| :-------- | :------------------------------------------- |
+| Boolean   | True or false values, such as "yes" or "no". |
+| Date      | Dates in specific formats.                   |
+| Number    | Numeric values.                              |
+| String    | A sequence of characters.                    |
 
 ## Known limitations
 

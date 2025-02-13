@@ -5,6 +5,7 @@ description: "Use intelligent document processing (IDP) to integrate automated d
 ---
 
 import IdpOverviewImg from './img/idp-overview-diagram.png';
+import IdpSecretsImg from './idp/img/idp-connector-secrets.png';
 
 Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes.
 
@@ -20,14 +21,18 @@ For example, you can use IDP to extract data from invoices and other document ty
 
 To configure and use IDP in Camunda 8 you must:
 
-- Add your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to the cluster you want to use with IDP. Camunda secrets allow you to store credentials and avoid exposing sensitive information.
-
 - Create an [Amazon Bedrock](https://aws.amazon.com/bedrock/) account to allow IDP to integrate with the [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) connector.
 
 - Deploy the [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) connectors used by IDP to extract document content and converse with LLM models.
 
-:::note
-To learn more about IDP technical architecture and how IDP works, see [technical architecture](idp/idp-reference.md#technical-architecture).
+- Add your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to the cluster you want to use with IDP.
+
+  <img src={IdpSecretsImg} alt="AWS connector secrets" width="650px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+
+- Create an Amazon AWS S3 bucket named `idp-extraction-connector` used by IDP for document storage during test extraction.
+
+:::info
+To learn more about the IDP technical architecture and how IDP works, see [technical architecture](idp/idp-reference.md#technical-architecture).
 :::
 
 ## Get started with IDP
@@ -44,9 +49,9 @@ To start using IDP in your processes:
 
 1. [Integrate IDP into your processes](idp/idp-integrate.md) by adding your published projects to a BPMN diagram.
 
-:::tip
+:::info
 
 - New to IDP? See [key IDP concepts](idp/idp-key-concepts.md) to learn about key IDP concepts and terms.
-- See [Integrate IDP into your processes](idp/idp-integrate.md) for a worked example of how to integrate IDP into your processes.
+- See [Integrate IDP into your processes](idp/idp-integrate.md) for a simple worked example of how to integrate IDP into your processes.
 
 :::
