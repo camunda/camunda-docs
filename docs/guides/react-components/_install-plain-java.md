@@ -6,7 +6,7 @@
 For this installation, you must have:
 
 - OpenJDK 21+ locally installed
-- Camunda `8.7.0-alpha3` or later
+- Camunda `8.6.0-alpha2` or later
 
 ### Download and configure Elasticsearch
 
@@ -22,7 +22,7 @@ Confirm Elasticsearch is running by visiting `http://localhost:9200` in a browse
 
 ### Download and configure Camunda
 
-1. Download and extract the [latest `camunda-zeebe-` release artifact](https://github.com/camunda/camunda/releases) in the **Assets** section of the release page, starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha3).
+1. Download and extract the [latest `camunda-zeebe-` release artifact](https://github.com/camunda/camunda/releases) in the **Assets** section of the release page, starting with [8.6.0-alpha2](https://github.com/camunda/camunda/releases/tag/8.6.0-alpha2).
 2. Navigate to the directory where you installed Camunda, and open `/config/application.yaml`. Add the following Elasticsearch exporter as a child of the `zeebe`/`broker` configuration element:
 
 ```
