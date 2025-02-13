@@ -6,7 +6,7 @@
 For this installation, you must have:
 
 - OpenJDK 21+ locally installed
-- Camunda `8.6.0-alpha2` or later
+- Camunda `8.7.0-alpha2` or later
 
 ### Download and configure Elasticsearch
 
