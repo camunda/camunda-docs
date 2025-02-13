@@ -41,10 +41,10 @@ Start by uploading a set of sample PDF documents that represent the specific doc
 
 To upload your sample document(s):
 
-1. Click **Upload document** to browse for and upload a sample document.
-1. Once the document has successfully uploaded, click **Extract** to extract data from the document.
-1. Repeat this process for all documents you want to upload.
-1. Once you are ready to start configuring your test extraction, select the **Extract fields** tab or click the **Extract** icon for the document you want to extract data from.
+1. Click **Upload documents** to browse for and upload your sample document(s).
+1. Once you have finished uploading your sample document(s) and want to start testing data extraction, either:
+   - Select the **Extract fields** tab.
+   - Click the **Extract** icon for the document you want to extract data from.
 
 ### Document upload guidelines
 
