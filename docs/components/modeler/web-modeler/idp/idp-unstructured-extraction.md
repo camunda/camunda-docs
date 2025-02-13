@@ -22,16 +22,7 @@ Complete the following steps to configure and publish an unstructured data extra
 
 1. [Upload documents](#step-1-upload-documents): Upload a set of sample documents to use for training the extraction model.
 1. [Extract fields](#step-2-extract-fields): Add and configure the [extraction fields](idp-key-concepts.md#extraction-fields) you want to use to extract data.
-1. [Validate extraction](#step-3-validate-extraction): Test and evaluate the data extraction results using your uploaded documents.
-1. [Publish](#step-4-publish): Publish the project to make it available for use [in your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
-
-<!-- Configure and publish your project on the **Unstructured data extraction** screen.
-
-<img src={IdpUnstructuredDataExtractionImg} alt="Unstructured data extraction screen" />
-
-:::tip
-Use the tabs to navigate between configuration steps at any time.
-::: -->
+1. [Validate extraction](#step-3-validate-extraction): Test and evaluate the data extraction results, and publish the project to make it available [in your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
 
 ## Step 1: Upload documents
 
@@ -138,6 +129,20 @@ To validate the data extraction:
 Search and filter the results to work with specific documents or extraction fields.
 :::
 
+### Publish
+
+On the **Publish** tab, publish the project to make it available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
+
+<img src={IdpPublishProjectImg} alt="Publish project screen" />
+
+1. Click **Publish** to open the **Publish Extraction Project** modal.
+1. Enter a version name and description for the project and click **Publish**.
+1. The project is published and becomes available to use [in your processes](idp-integrate.md) or [document automation](idp-document-automation.md) projects.
+
+:::note
+Projects only become available in your processes or document automation projects once published. Unpublished projects are shown with a “Draft” **Status**.
+:::
+
 ### Validation status
 
 | Icon                                                                        | Status  | Description                                                                                                                     |
@@ -157,17 +162,3 @@ The expanded "contract_start_date" field shows that each document had different 
 - The first document passed the validation, with the **Extracted value** matching the **Expected test case output**.
 - The second document could not be validated as a test case was not found for comparison. Click **Save test case** to create a test case for the document.
 - The third document failed validation as the **Extracted value** did not match the **Expected test case output**. Click **Review document** to open the document again and check the prompt for this field.
-
-## Step 4: Publish
-
-On the **Publish** tab, publish the project to make it available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
-
-<img src={IdpPublishProjectImg} alt="Publish project screen" />
-
-1. Click **Publish** to open the **Publish Extraction Project** modal.
-1. Enter a version name and description for the project and click **Publish**.
-1. The project is published and becomes available to use [in your processes](idp-integrate.md) or [document automation](idp-document-automation.md) projects.
-
-:::note
-Projects only become available in your processes or document automation projects once published. Unpublished projects are shown with a “Draft” **Status**.
-:::

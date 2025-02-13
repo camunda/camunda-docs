@@ -17,13 +17,13 @@ When you publish an IDP project, an IDP extraction [connector template](/compone
 
 <img src={IdpArchitectureImg} alt="Architecture diagram of IDP" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
-The IDP extraction connector integrates with Camunda document handling connectors and APIs, such as [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md), ensuring documents are created, stored, and retrieved efficiently for processing.
+The IDP extraction connector integrates with Camunda document handling connectors and APIs such as [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) to retrieve and process documents.
 
 1. **Document upload**: The connector accepts uploaded documents as input. These documents can be uploaded to a local document store, and their references are used in the extraction process. For example, the connector uploads the document to an Amazon S3 bucket for extraction.
 
-1. **Amazon Textract**: Uploaded documents are then analyzed by Amazon Textract, which extracts the text and returns the results. The connector's configuration includes specifying the document, the S3 bucket name for temporary storage during Amazon Textract analysis, and other required parameters such as extraction fields and Amazon Bedrock Converse parameters.
+1. **Amazon Textract**: Uploaded documents are analyzed by Amazon Textract, which extracts text data and returns the results. The connector configuration includes specifying the document, the S3 bucket name for temporary storage during Amazon Textract analysis, and other required parameters such as extraction fields and Amazon Bedrock Converse parameters.
 
-1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock Converse to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable. Error handling and retry mechanisms are also configurable.
+1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock Converse to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable.
 
 :::note
 You may encounter extraction errors during testing if you have not added your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](../intelligent-document-processing.md#configure-idp).
