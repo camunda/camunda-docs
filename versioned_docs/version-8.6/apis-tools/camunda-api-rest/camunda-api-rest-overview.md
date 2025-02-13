@@ -45,7 +45,7 @@ For example, if you increase the `maxMessageSize` to 10MB, increase these proper
 
 ### Query API
 
-:::warning
+:::danger
 Query API endpoints do not currently support [resource authorizations][], and can be used to expand user access to restricted resources. If you use resource permissions, allowing public access to those endpoints is not recommended.
 :::
 
@@ -53,6 +53,54 @@ All Query API endpoints contain an `(alpha)` declaration. Those endpoints are no
 
 You can enable the [alpha feature][] search endpoints by setting either the configuration property `camunda.rest.query.enabled` to `true`,
 or the environment variable `CAMUNDA_REST_QUERY_ENABLED` to `true`.
+
+## API Key Attributes
+
+OpenAPI key attributes have a `key` suffix, and they serve as the technical unique identifier for entities, such as
+`processDefinitionKey` and `tenantKey`, with `correlationKey` being the only exception. Those attributes are of type
+`integer (int64)`.
+
+:::warning Key Attribute Change
+With the next minor release, the default key attribute type will change to `string`.
+
+To support a gradual change and provide users with enough time, we already introduced new content types in our API
+specification. With these content types, users can specifically tell our API to accept and return `integer (int64)` or
+`string` key attributes.
+:::
+
+### Content Type Headers
+
+We support the following 3 content types in C8 API:
+
+- `application/json`:
+  - Endpoints return and expect objects with key attributes as default `integer (int64)`.
+  - **This changes to `string` with the next minor release.**
+- `application/vnd.camunda.api.keys.number+json`:
+  - Endpoints return and expect objects with key attributes as `integer (int64)`.
+- `application/vnd.camunda.api.keys.string+json`:
+  - Endpoints return and expect objects with key attributes as `string`.
+
+Combining multiple headers is not supported.
+
+### Object Naming
+
+The naming of the new objects containing key attributes as `string` is defined according to the following pattern:
+
+- Response objects are always called with a `*Result` postfix. For instance:
+  - `UserTaskSearchQueryResponse` with `integer (int64)` keys.
+  - `UserTaskSearchQueryResult` with `string` keys.
+- Request object name postfixes change depending on their function:
+  - Search queries: `*SearchQuery`. For instance:
+    - `ProcessInstanceSearchQueryRequest` with `integer (int64)` keys.
+    - `ProcessInstanceSearchQuery` with `string` keys.
+  - Filters: `*Filter`. For instance:
+    - `FlowNodeInstanceFilterRequest` with `integer (int64)` keys.
+    - `FlowNodeInstanceFilter` with `string` keys.
+  - Other payloads: `*Instruction`. For instance:
+    - `EvaluateDecisionRequest` with `integer (int64)` keys.
+    - `DecisionEvaluationInstruction` with `string` keys.
+
+See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for more details.
 
 [camunda-api-explorer]: ./specifications/camunda-8-rest-api.info.mdx
 [resource authorizations]: /self-managed/concepts/access-control/resource-authorizations.md

@@ -353,7 +353,7 @@ This schema defines a structure for a record that includes a name (string), an a
 
 For example, `=(value.itemId = "a4f6j2")` only triggers the start event or continues the catch event if the Kafka message has a matching itemId in the incoming message payload. Leave this field empty to trigger your process every time.
 
-:::warning
+:::danger
 By default, this Connector does not commit the offset if the message cannot be processed. This includes cases where the activation condition is not met.
 This means that if there is a message in the topic that cannot be processed due to an activation condition mismatch, the Kafka subscription will be stopped.
 

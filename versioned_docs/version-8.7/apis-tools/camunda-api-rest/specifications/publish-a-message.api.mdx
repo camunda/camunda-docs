@@ -1,0 +1,271 @@
+---
+id: publish-a-message
+title: "Publish a message"
+description: "Publishes a single message."
+sidebar_label: "Publish a message"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtz2zYQ/is7OCVTmlJSJ015c2ynVeLEHltuD7YPILmSEIMAg4dkjYb/vbMEJVIvx+nk0JnaMx6JwmKf37dYYsEcH1uW3LDPaC0fI7uLWI42M6J0QiuWsAufSmEnaIGDFWosEYogG9+qZpcFbhDKRjIHp8GWmImRyKDkxgnSZSHTRekd5jAyugA3QWEg08ag5CQA9zi38a0aThBQ5aUWykGu0YLSDmZcOBhpA3xtj0HrpYtv1bVFUrl0bk1opY32W59NwFuEjFskeyxiBr95tO69zucsWdSPwmDOEmc8RizTyqFytMTLUoqsVtv7ailDC2azCRacvrl5iSxhOv2KmWMRK40u0TiBllYVL5A+1xNM4dIK6FE3gJhFS3XWGaHGrCJHVkF9wvluXRsZ/a5aKviIe+lYwsiGEwUO9ZmY7vJVFGhLruCFUFDYl1Tp1I9GaNZyr1X9mBp9j6ZjUSiHYzQsYiNtCu7CT28Puz70q4g1egb57gi9Et88wuBkMzY4V3JOtR15Sa6hst6QO3IOWrX+zYSb1BvHYooKBie3aiakBJyigbSL5Be5pySBcBakGCEl52XAzGYWlZeSpxIDaKqITbkR9IPdHcXSmZUYcAsfr86/QK4zX6BylDme5zV7uLzoYCnAchNtWx44VFy5fWkMqxs5BIsqXyvavgCrqMOTmwDuLYTeEZ4c7Vl2mLqfBAJdBtaxqgrKbKmVDel63e8/nrUZt22ZYvYDHN2vs8OWFgErbH3COXDnjEi9C8UKmYEplx5tJ2OrgnApz0csudk0+p5bhLY31G1pV3pCQnYoXu8rTyrzNlu2G0z1eLWCO+Q8q+42nWi07m1L263ox+1TgyChboGnKo8zXniV85iXIq4PEeWLFM0vP634dYMqDWbctafCc7X/XbX3ngJP8+hpCAhB/jwEPNP/v0J/EjvcdzyURk9Fjjnk3HEQYXSccikeOyNKo1OJxXfBcgQXQRJydFxICAUhLATBFHMQCm4uPxzD74dvfrt7MXGutEmvN5vNYjPKDjAXTptYm3HPjDL6J7mXMQwnaBAKPqf5oz30uzBZjdROB5A2zlAW10aSfTipVxdb5/qKhd4Itjn+H8H15QBEjsqJ0ZzwvmV6bYLkqfYuSSVX96yt57bRTSvWFwU3LQHXDFQRs4473wljTxf59fWWboLFn8PhBQQVkOkca8q5ibBLQxREIZQofMGSw34/YgV/CE9v+zSShoo/IRIF+FBKrsIAvhEOTc3aYIOfOjChrOMq+1mV0UaMxabdeI1bDYhPQkSBUG92EWqgHBoCoUVDkzEao80zj5559Myj3TyqX13dROcsYaW2NXS4m7CE9ZpDz/bK9khjEQvMsvWQ4I1kCVsE1lRJr7eYaOuqZFFq46relEqy9k5Jy4FdS9RInXE5CZa3q0cL3ZuG4zA0wTu4PL0awh/c4YzP62ySyXXV7/rv+ju1kugejUcXg6Z3BOx1+sFSLRF7p9og/BTFFU0jFjNvhJtf0baQnhS5QXPkqQArTDT2au30HIRY1Hz5sETKx7+HdbGpl122t0OnD7woAxPDbU4Lss27mXale6PSX7vdaGW6hV17c+/c/gg10nUoDQC3k0KK0NiQxX78ahvsF4Oas5kuCq9qHKpxuA/hnSRn0lsXbgGkyJCm0DbipdhZWIG/gkV4FRNAAoqX/Xos3MSncaaLXjOirz5TqdNewYXqNSZs7/jo8/WXk6ODs8Hx6Zer04NXcT92D+Gdj/hUcNXxo7mZBN6ZKNeiXbQH1f/jGrPBuMMH1yslF4pQUxdk0TSimyX6LPWmTiu6i5p2csMWi5RbvDayqujnbx7NnCU3dy1I6amK2AR5jqbuXfc14o9Dug+G5AeJS0/+bN3HVNFyx1GWYekelb3rNNWL86shcbW5py10TnsMn9EdLp/RDWbEdF3+ugXUvy2Y5GrsCSAJCzrp7x/iUwvH
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Publish a message"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/messages/publication"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Publishes a single message.
+Messages are published to specific partitions computed from their correlation keys.
+The endpoint does not wait for a correlation result.
+Use the message correlation endpoint for such use cases.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            name: { description: "The name of the message.", type: "string" },
+            correlationKey: {
+              description: "The correlation key of the message.",
+              type: "string",
+              default: "",
+            },
+            timeToLive: {
+              description:
+                "Timespan (in ms) to buffer the message on the broker.",
+              type: "integer",
+              format: "int64",
+              default: 0,
+            },
+            messageId: {
+              description:
+                "The unique ID of the message. Only useful to ensure only one message with the given ID\nwill ever be published (during its lifetime).\n",
+              type: "string",
+              nullable: true,
+            },
+            variables: {
+              description: "The message variables as JSON document.",
+              additionalProperties: true,
+              type: "object",
+              nullable: true,
+            },
+            tenantId: {
+              description: "The tenant of the message sender.",
+              type: "string",
+              nullable: true,
+            },
+          },
+          required: ["name", "correlationKey"],
+          title: "MessagePublicationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The message was published.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The message key of the published message. Key attributes as string values.",
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for MessagePublicationResponse",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description: "The tenant ID of the message.",
+                    type: "string",
+                  },
+                },
+                title: "MessagePublicationResponseBase",
+              },
+            ],
+            properties: {
+              messageKey: {
+                description: "The key of the message",
+                type: "string",
+              },
+            },
+            title: "MessagePublicationResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            description: "The message key of the published message.",
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for MessagePublicationResponse",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description: "The tenant ID of the message.",
+                    type: "string",
+                  },
+                },
+                title: "MessagePublicationResponseBase",
+              },
+            ],
+            properties: {
+              messageKey: {
+                description: "The key of the message",
+                type: "integer",
+                format: "int64",
+              },
+            },
+            title: "MessagePublicationResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            description:
+              "The message key of the published message. Key attributes as string values.",
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for MessagePublicationResponse",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description: "The tenant ID of the message.",
+                    type: "string",
+                  },
+                },
+                title: "MessagePublicationResponseBase",
+              },
+            ],
+            properties: {
+              messageKey: {
+                description: "The key of the message",
+                type: "string",
+              },
+            },
+            title: "MessagePublicationResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "Internal server error.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

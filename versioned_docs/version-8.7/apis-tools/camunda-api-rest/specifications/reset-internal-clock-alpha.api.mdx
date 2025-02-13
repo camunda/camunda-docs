@@ -1,0 +1,96 @@
+---
+id: reset-internal-clock-alpha
+title: "Reset internal clock (alpha)"
+description: "Resets the Zeebe engine’s internal clock to the current system time, enabling it to tick in real-time."
+sidebar_label: "Reset internal clock (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVsFu3DYQ/ZUBTwkqS5s0aVPdDCdpXaSpYW9aoLYPFDVaMaZIhRx6vVgI6G/09/olxZBae2M7QA4FeukCu5KWw3kz896MuBUkV0HU5+LIOHUlLgvRYlBej6SdFbU4xYAUgHqEPxAbBLQrbfHvP/8KoC2ht9KA4r1ALpmp6D1agrAJhAOQHrAAtLIx2q5AU7LT6gq0BY/SHLBFeWGXvQ7gRvSSoUEHiAG7aKBzHjxS9JYdJIgZ78Ja5wdpoMFeXmvnQXaEnkF6GaBBtDBqa7FlUAlhRKU7rWCGvLB1XVtHOKOjbUenLTG4tHAuzdhL6FBS9Hj5pFJuGJ1FS6FC6c3mQCqFIVTJLv8ezNahHNqnIG0Lg9xAgxBi8xFVyl710q7wwmoLXWRj8GhQBgzlhRWF8BhGZwMGUW/F88ULvnzOyvK2CGsZIMQURheN2YBnwnZc7HFQiqkQLxeLh84O7R2T6L3z4FQisYV1rw3C6B3731Xf46eIgUpRCOUsoSX2KcfRaJW4q0bvGoPDNx8DA2xFUD0O8hFkOMmW0CJJbcDlGskA2bDBlmVyfvr2CH548fL7yyc90Rjqqlqv16Xv1AG2mpwvnV9VvlP8ZbunJSx79LgrvmxbzZjScDIjetIY9uSQqzWHDbQZMTPBd6IWOSxRiLvNnExe3V1FIK/tShSiY1GSqEX0WtxvqEP4cHoMukVLutvsavoZdNrTyWjYh2xcpLox0l4xg6TJPAp6HyXEYZB+A657BGAqRCBJcS8NwRpYod+PX1v69vkD3yy+n5bLE8guQLkWU5MS99AMxEkM2uohDqJ+sVgUYpA3+em7xWJin8z4V2RiAW9GI20eC/fS0RYG53HWT0pM20DSqn+LGef1St/HLcV0x4WYRfw6ZzTxpxADUu9aUYvRhSQdSb2oRZXatkpdKgoR0F+j5wG8FdEbUYttbpaprqpt7wJN9XZ0nqbqmpm4ll7LxmT98XJuqp1YjFPS9BnwIWm8YOWAu2SO5BBtK+EVnL45W8KPknAtN6mIDPm561eLV4tHvbLpFzwenhxDzjBLbm8M7NxyPz/qNht/jeNpuuRCqug1bc54Wy5Pg9KjP4xc91spzHjJOz9nI1HMN293Avn592XiWNvOpe0z1w8DYVbQhxz5onz2UFcnx6k9lBuGaNOMtCtYa+pB7iWmTAzECRXCaIU2JAUzX3uw7/IK/JYR4VnJpGTl7EbjSlMfm1K5oVJ52+21Ma6pBqltNUOE6ujwlw/vXx8evDs+evP+7M3Bs3JR0g2l5Fm6g7R7caTjwP0X/5P05nt6P/Ht3evh/2PEf3CMmBVPeEPVaKS23INJKtt5Gp2LVIJ85EDi01+eKediu21kwA/eTBP//Smi34j6/PJuBPHTVIgeZYs+DbAr3LDclcKR0qwykQP44smA+/Z2TJ78esYd9w+ppLC0
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Reset internal clock (alpha)"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/clock/reset"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Resets the Zeebe engine’s internal clock to the current system time, enabling it to tick in real-time.
+This operation is useful for returning the clock to
+normal behavior after it has been pinned to a specific time.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The clock was successfully reset to the system time.",
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

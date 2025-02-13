@@ -1,0 +1,162 @@
+---
+id: create-document-link
+title: "Create document link"
+description: "Create a link to a document in the Camunda 8 cluster."
+sidebar_label: "Create document link"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV91v2zYQ/1cIPq2YLDlt1nV685y09ZB2QeKuD0keaOlssaVIlTzZMQz978ORUmxHzkeHYtjDDBi2xON9/X53PG44ioXj6RU/MVldgkZ+E3FTgRUojZ7kPOWZBYHQrZ9J/ZVHPAeXWVmREE/52IswwZTUXxkaJljeyjOpGRbAxqKsdS7YG5ap2iHY+Fpf648GgWEhkGEhHZOOZbW1oFGtmauryliEnM2N3epzaCw4ZuYM1xWkbPT5MmLvxufXmke8ElaUgGAppg3XogSe8m7vJOcRl+RwJbDgEbfwrZYWcp6ireF+VNMC2OTEWypg6wAaH2bMI+6yAkrB0w0nX3jKHVqpF7xpojvj3t+t5W812PWe6blQ7rm2vbLOg/2luTXlc33KjEbQ+F644km/HtR3yOVCuKLndGst4LwSjmWmrGoCdrY+FF5ekwFWV8qIPGZ3eqVjlbDY029hDhZ01jJJOmYBa6shZ6sCdKuIVG5pSWqlYwWIHGzYEuIOW7y9JVg5l5mvBBIBLWaqpWPf7ZhN5o/vEzr3+zIlPWBCKkdYVtYsZQ5hzVgLGXpFkX9DjoFDtpJKsRk9f4EMIY+vNW9uAmDg8HeTrwmkHn5t9mlNVJVq/Uq+OAJt04fXzEg/1ZKlPoASnF+VJUzNmVzCjqzUCAuwPOJzY0uB4dXr416DIAxJwwDNQMkl9DD0fJaalS72m+eiVsjTV6+H9GmaiKNERTZ3G9FFiJ03DUlYcJXRLvj7cnhEP3039k16OvrulTNXZxk4N6+VWpMXPyhztVX96jmUoK557iYmpjqD20pacCM8pOcu87lAGFCSDyrPfYMmBsoSAsmxs9nqj/lDeW4TfDwcPienPp/EfWI45DH74Ksa0BNeWOgYn3eHQ4ccm5l8HftO/kDyK2tmCsqf+yDsezVi50GytcsCOEw4FgRnwfrVxdsx++34l19vfioQK5cmyWq1iu08G0Au0djY2EVi5xl9Se6Fb0gWWCnWVI4izyXZFIptYWeugox6QAdn67Y/skJ8T1SbX30E7NrKHswj9uliwmQOGuV8Tf2uZ3q3triYmRrTmRIE8B3wTzF1xFxdlsKuuxreN9BE3KHA2j3ZJl69PEjU99PpOQsqWGZyaNstNf9giIIopZZlXfL0eDiMeCluw9Pr4dAfS4T4MyLRxHwldGDrvXCoGW156wOT2qHQ2Y9Cxli5kPft7hdhS+KTEFETyrAELAxNZpVxnjo0zKQ86arQJZvtxNMkVJOOBgOwy24w8j2Jb0L1NGmSbArjsEk3NHE1yZKgWQor6eDySNJyqLKOPcpkQhXBgwODgHFIw0YX3Xb8uzi9nLJ3AmEl1j6rZHJf9Zvhm+FBrST6gMbR+YSFCAMHd/pCp5YK/KDaIPwcxQ2duA6y2kpcX9K2kJ4ZCAt2VBMQd9xo7Xnt9ByEeNT+edsx5o/PUw869bSL7Wl+eivKqq3IncO3OxKJjnMTVgNZ+o4TimBdiHQYH/WJeT7x9ZWZsqy1b7J6wVYSCyYOjOw84kpmoJ33qh0mO7GzsML+ChbZUUwgBqZ1vXUhsahncWbKJAvb7n5nysySUkidtCZcMh59+PTxZDQ4m4xPP16eDo7iYYy36JNF3C+F3vUjXEL2zqL7AW+258p/59LS0gXhFpNKCamJwO3UEGr76u4KQ4Wc7t1nQnnfRG2JXvHNZiYcfLKqaeh1GOyp6HPp/CB6+Mqxm5p/fvs4GMtXWO9dhJZC1STF6UryfV79f8H4Vy8YjwK6f4vcgnqzPTu+k3c/XbRJesGevnwf9Kx9KfR616XO453CaW6aiAd0vJNBYBxcGUxJzVZBb/wn4oYdoyyDCh+Vvdk5ss//vJzSCdDe1kqT0x4rVnT1FqvgrPGp8QeLf7fhSuhFLRYkG3TS528T8Ck8
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create document link"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/documents/{documentId}/links"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Create a link to a document in the Camunda 8 cluster.
+
+Note that this is currently supported for document stores of type: AWS, GCP
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "documentId",
+      in: "path",
+      required: true,
+      description: "The ID of the document to link.",
+      schema: { type: "string" },
+    },
+    {
+      name: "storeId",
+      in: "query",
+      required: false,
+      description: "The ID of the document store to link the document from.",
+      schema: { type: "string" },
+    },
+    {
+      name: "contentHash",
+      in: "query",
+      required: false,
+      schema: { type: "string" },
+      description:
+        "The hash of the document content that was computed by the document store during upload. The hash is part of the document reference that is returned when uploading a document. This header is required when hash verification is enabled for the document store. If hash verification is enabled and the client fails to provide the correct hash, the request will be rejected.\n",
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            timeToLive: {
+              type: "integer",
+              format: "int64",
+              description: "The time-to-live of the document link in ms.",
+              default: 3600000,
+            },
+          },
+          title: "DocumentLinkRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "201": {
+      description: "The document link was created successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              url: { type: "string", description: "The link to the document." },
+              expiresAt: {
+                type: "string",
+                format: "date-time",
+                description: "The date and time when the link expires.",
+              },
+            },
+            title: "DocumentLink",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The document link creation failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
