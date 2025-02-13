@@ -1,0 +1,499 @@
+---
+id: activate-jobs
+title: "Activate jobs"
+description: "Iterate through all known partitions and activate jobs up to the requested maximum."
+sidebar_label: "Activate jobs"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Activate jobs"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/activation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Iterate through all known partitions and activate jobs up to the requested maximum.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            type: {
+              description:
+                'the job type, as defined in the BPMN process (e.g. <zeebe:taskDefinition type="payment-service" />)\n',
+              type: "string",
+            },
+            worker: {
+              description:
+                "the name of the worker activating the jobs, mostly used for logging purposes",
+              type: "string",
+              nullable: true,
+            },
+            timeout: {
+              description:
+                "a job returned after this call will not be activated by another call until the timeout (in ms) has been reached\n",
+              type: "integer",
+              format: "int64",
+            },
+            maxJobsToActivate: {
+              description: "the maximum jobs to activate by this request",
+              type: "integer",
+              format: "int32",
+            },
+            fetchVariable: {
+              description:
+                "a list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the scope of the job will be returned\n",
+              type: "array",
+              nullable: true,
+              items: { type: "string" },
+            },
+            requestTimeout: {
+              description:
+                "The request will be completed when at least one job is activated or after the requestTimeout (in ms). If the requestTimeout = 0, a default timeout is used. If the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated.\n",
+              type: "integer",
+              format: "int64",
+              default: 0,
+              nullable: true,
+            },
+            tenantIds: {
+              description:
+                "a list of IDs of tenants for which to activate jobs",
+              type: "array",
+              items: { type: "string" },
+              nullable: true,
+            },
+          },
+          required: ["type", "timeout", "maxJobsToActivate"],
+          title: "JobActivationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The list of activated jobs.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The list of activated jobs. Key attributes as string values.",
+            type: "object",
+            properties: {
+              jobs: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for ActivatedJob",
+                      type: "object",
+                      properties: {
+                        type: {
+                          description:
+                            "the type of the job (should match what was requested)",
+                          type: "string",
+                        },
+                        processDefinitionId: {
+                          description:
+                            "the bpmn process ID of the job's process definition",
+                          type: "string",
+                        },
+                        processDefinitionVersion: {
+                          description:
+                            "the version of the job's process definition",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        elementId: {
+                          description: "the associated task element ID",
+                          type: "string",
+                        },
+                        customHeaders: {
+                          description:
+                            "a set of custom headers defined during modelling; returned as a serialized JSON document",
+                          type: "object",
+                          additionalProperties: true,
+                        },
+                        worker: {
+                          description:
+                            "the name of the worker which activated this job",
+                          type: "string",
+                        },
+                        retries: {
+                          description:
+                            "the amount of retries left to this job (should always be positive)",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        deadline: {
+                          description:
+                            "when the job can be activated again, sent as a UNIX epoch timestamp",
+                          type: "integer",
+                          format: "int64",
+                        },
+                        variables: {
+                          description:
+                            "All variables visible to the task scope, computed at activation time",
+                          type: "object",
+                          additionalProperties: true,
+                        },
+                        tenantId: {
+                          description: "The ID of the tenant that owns the job",
+                          type: "string",
+                        },
+                      },
+                      title: "ActivatedJobBase",
+                    },
+                  ],
+                  properties: {
+                    jobKey: {
+                      description: "the key, a unique identifier for the job",
+                      type: "string",
+                    },
+                    processInstanceKey: {
+                      description: "the job's process instance key©",
+                      type: "string",
+                    },
+                    processDefinitionKey: {
+                      description: "the key of the job's process definition",
+                      type: "string",
+                    },
+                    elementInstanceKey: {
+                      description:
+                        "the unique key identifying the associated task, unique within the scope of the process instance\n",
+                      type: "string",
+                    },
+                  },
+                  title: "ActivatedJobResult",
+                },
+              },
+            },
+            title: "JobActivationResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            description: "The list of activated jobs",
+            deprecated: true,
+            type: "object",
+            properties: {
+              jobs: {
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for ActivatedJob",
+                      type: "object",
+                      properties: {
+                        type: {
+                          description:
+                            "the type of the job (should match what was requested)",
+                          type: "string",
+                        },
+                        processDefinitionId: {
+                          description:
+                            "the bpmn process ID of the job's process definition",
+                          type: "string",
+                        },
+                        processDefinitionVersion: {
+                          description:
+                            "the version of the job's process definition",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        elementId: {
+                          description: "the associated task element ID",
+                          type: "string",
+                        },
+                        customHeaders: {
+                          description:
+                            "a set of custom headers defined during modelling; returned as a serialized JSON document",
+                          type: "object",
+                          additionalProperties: true,
+                        },
+                        worker: {
+                          description:
+                            "the name of the worker which activated this job",
+                          type: "string",
+                        },
+                        retries: {
+                          description:
+                            "the amount of retries left to this job (should always be positive)",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        deadline: {
+                          description:
+                            "when the job can be activated again, sent as a UNIX epoch timestamp",
+                          type: "integer",
+                          format: "int64",
+                        },
+                        variables: {
+                          description:
+                            "All variables visible to the task scope, computed at activation time",
+                          type: "object",
+                          additionalProperties: true,
+                        },
+                        tenantId: {
+                          description: "The ID of the tenant that owns the job",
+                          type: "string",
+                        },
+                      },
+                      title: "ActivatedJobBase",
+                    },
+                  ],
+                  properties: {
+                    jobKey: {
+                      description: "the key, a unique identifier for the job",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    processInstanceKey: {
+                      description: "the job's process instance key©",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    processDefinitionKey: {
+                      description: "the key of the job's process definition",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    elementInstanceKey: {
+                      description:
+                        "the unique key identifying the associated task, unique within the scope of the process instance\n",
+                      type: "integer",
+                      format: "int64",
+                    },
+                  },
+                  title: "ActivatedJob",
+                },
+              },
+            },
+            title: "JobActivationResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            description:
+              "The list of activated jobs. Key attributes as string values.",
+            type: "object",
+            properties: {
+              jobs: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for ActivatedJob",
+                      type: "object",
+                      properties: {
+                        type: {
+                          description:
+                            "the type of the job (should match what was requested)",
+                          type: "string",
+                        },
+                        processDefinitionId: {
+                          description:
+                            "the bpmn process ID of the job's process definition",
+                          type: "string",
+                        },
+                        processDefinitionVersion: {
+                          description:
+                            "the version of the job's process definition",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        elementId: {
+                          description: "the associated task element ID",
+                          type: "string",
+                        },
+                        customHeaders: {
+                          description:
+                            "a set of custom headers defined during modelling; returned as a serialized JSON document",
+                          type: "object",
+                          additionalProperties: true,
+                        },
+                        worker: {
+                          description:
+                            "the name of the worker which activated this job",
+                          type: "string",
+                        },
+                        retries: {
+                          description:
+                            "the amount of retries left to this job (should always be positive)",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        deadline: {
+                          description:
+                            "when the job can be activated again, sent as a UNIX epoch timestamp",
+                          type: "integer",
+                          format: "int64",
+                        },
+                        variables: {
+                          description:
+                            "All variables visible to the task scope, computed at activation time",
+                          type: "object",
+                          additionalProperties: true,
+                        },
+                        tenantId: {
+                          description: "The ID of the tenant that owns the job",
+                          type: "string",
+                        },
+                      },
+                      title: "ActivatedJobBase",
+                    },
+                  ],
+                  properties: {
+                    jobKey: {
+                      description: "the key, a unique identifier for the job",
+                      type: "string",
+                    },
+                    processInstanceKey: {
+                      description: "the job's process instance key©",
+                      type: "string",
+                    },
+                    processDefinitionKey: {
+                      description: "the key of the job's process definition",
+                      type: "string",
+                    },
+                    elementInstanceKey: {
+                      description:
+                        "the unique key identifying the associated task, unique within the scope of the process instance\n",
+                      type: "string",
+                    },
+                  },
+                  title: "ActivatedJobResult",
+                },
+              },
+            },
+            title: "JobActivationResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

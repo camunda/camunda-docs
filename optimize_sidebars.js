@@ -2407,6 +2407,10 @@ module.exports = {
                       "Deploy a ROSA cluster with Terraform",
                       "self-managed/setup/deploy/amazon/openshift/terraform/"
                     ),
+                    docsLink(
+                      "Dual-region ROSA HCP Cluster with Terraform",
+                      "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/"
+                    ),
                   ],
                 },
 
@@ -2444,6 +2448,10 @@ module.exports = {
                 docsLink(
                   "Red Hat OpenShift",
                   "self-managed/setup/deploy/openshift/redhat-openshift/"
+                ),
+                docsLink(
+                  "Dual-Region",
+                  "self-managed/setup/deploy/openshift/redhat-openshift-dual-region/"
                 ),
               ],
             },
@@ -2935,6 +2943,7 @@ module.exports = {
             {
               "Migration & update": [
                 "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
+                "self-managed/optimize-deployment/migration-update/camunda-8/8.6-to-8.7",
                 "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
                 "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
                 "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",

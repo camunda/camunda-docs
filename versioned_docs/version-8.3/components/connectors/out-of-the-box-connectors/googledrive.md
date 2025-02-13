@@ -82,7 +82,7 @@ You also enable _Google Docs API_ and _Google Drive API_ for every client intend
 
 #### Example 1: Obtaining JWT bearer token with a service account
 
-:::warning
+:::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
 For production usage, follow the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/service-account).
 :::
@@ -106,7 +106,7 @@ print(credentials.token)
 
 #### Example 2: Obtaining bearer and refresh tokens with OAuth client
 
-:::warning
+:::danger
 The following code snippet is for demonstration purposes only and must not be used for real production systems due to security concerns.
 For production usage, follow the [official Google guidelines](https://developers.google.com/identity/protocols/oauth2/web-server).
 :::

@@ -25,7 +25,7 @@ The steps below are a general approach for the Camunda components; it is importa
 configuration](#component-specific-configuration) to ensure the components are configured correctly.
 :::
 
-:::warning
+:::danger
 Internally the Camunda components use Identity to handle authentication with your OIDC provider. However, the Identity
 UI is not available for this version.
 :::
@@ -45,7 +45,7 @@ UI is not available for this version.
    - Client ID
    - Client secret
    - Audience
-4. Set the following environment variables for the component you are configuring an app for:
+4. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
 <TabItem value="env">
