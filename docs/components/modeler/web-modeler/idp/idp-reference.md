@@ -5,24 +5,32 @@ description: "Technical reference information for IDP, such as technical archite
 ---
 
 import IdpArchitectureImg from './img/idp-architecture-diagram.png';
+import IdpSecretsImg from './img/idp-connector-secrets.png';
 
 Technical reference information for IDP, including the technical architecture and supported document file formats.
 
-## Architecture
+## Technical architecture
 
 IDP offers a composable architecture that allows you to customize and extend IDP capabilities as needed. This flexibility enables you to adapt quickly to evolving business needs while maintaining a streamlined and manageable system.
 
-When you publish an IDP project, an IDP extraction connector template is created.
+When you publish an IDP project, an IDP extraction [connector template](/components/connectors/manage-connector-templates.md) is created.
 
 <img src={IdpArchitectureImg} alt="Architecture diagram of IDP" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
-The IDP extraction connector is used by IDP to integrate with Camunda document connectors and APIs, such as [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md). This ensures that documents can be created, stored, and retrieved efficiently for processing.
+The IDP extraction connector integrates with Camunda document handling connectors and APIs, such as [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md), ensuring documents are created, stored, and retrieved efficiently for processing.
 
-1. **Document Input**: The connector accepts documents as input. These documents can be uploaded to a local document store, and their references are used in the extraction process. For example, the connector uploads the document to an Amazon S3 bucket for extraction.
+1. **Document upload**: The connector accepts uploaded documents as input. These documents can be uploaded to a local document store, and their references are used in the extraction process. For example, the connector uploads the document to an Amazon S3 bucket for extraction.
 
 1. **Amazon Textract**: Uploaded documents are then analyzed by Amazon Textract, which extracts the text and returns the results. The connector's configuration includes specifying the document, the S3 bucket name for temporary storage during Amazon Textract analysis, and other required parameters such as extraction fields and Amazon Bedrock Converse parameters.
 
 1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock Converse to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable. Error handling and retry mechanisms are also configurable.
+
+:::caution
+
+You may encounter extraction errors during testing if you have not added your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to the cluster you want to use with IDP. Camunda secrets allow you to store credentials and avoid exposing sensitive information.
+<img src={IdpSecretsImg} alt="Architecture diagram of IDP" width="800px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+
+:::
 
 ## Document file formats
 
@@ -38,12 +46,23 @@ For SaaS, uploaded documents are stored in Web Modeler itself, not your cluster.
 
 Storage limit?
 
+## Document language
+
+IDP supports data extraction and processing of documents in different languages.
+
+IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. This ensures that the extracted text can be accurately mapped to process variables and used within your workflows, regardless of a document's language.
+
+:::info
+Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) to learn more about supported languages.
+:::
+
 ## Extraction field data types
 
-You can use any of the following supported data types when creating an extraction field.
+IDP supports the following [extraction field](idp-key-concepts.md#extraction-fields) data types.
 
-| Data type | Description |
-| :-------- | :---------- |
-| Boolean   | ...         |
-| Number    | ...         |
-| String    | ...         |
+| Data type | Description                |
+| :-------- | :------------------------- |
+| Boolean   | True or false values.      |
+| Date      | Dates in specific formats. |
+| Number    | Numeric values.            |
+| String    | A sequence of characters.  |
