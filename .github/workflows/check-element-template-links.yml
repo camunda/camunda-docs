@@ -1,0 +1,36 @@
+name: check-element-template-links
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 1 * *"
+
+jobs:
+  check-for-element-template-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 22
+      - name: Install Dependencies
+        run: npm ci
+      - name: Cache Docusaurus
+        uses: ./.github/actions/docusaurus-cache
+      - name: Collect connector template link
+        run: |
+          chmod +x ./.github/scripts/sync-connector-template-links.sh
+          ./.github/scripts/sync-connector-template-links.sh
+        shell: bash
+      - name: Build
+        run: |
+          npm run build --no-warnings --no-minify 2> >(sed 's/\x1B\[[0-9;]*[a-zA-Z]//g' | sed -n '/\[ERROR\] Error: Unable to build website for locale en\./,$p' > npmOutput_clean.txt)
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+      - name: Create Issue on failure
+        if: failure()
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: Connector template link check failed
+          content-filepath: npmOutput_clean.txt
+          labels: bug, automated issue
