@@ -68,6 +68,6 @@ For example, if you want to extract an expected numeric value (such as a monetar
 | Number    | Numeric values.                              |
 | String    | A sequence of characters.                    |
 
-## Known limitations
+<!-- ## Known limitations
 
-Content
+Content -->

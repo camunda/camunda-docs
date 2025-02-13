@@ -85,7 +85,7 @@ Extraction fields are the data fields you want to extract from a document, such 
 
 Add a separate field for each piece of information you want to extract from a document. For example, for an invoice, add a separate field for the invoice ID, date, vendor name, amount, and so on.
 
-<img src={IdpExtractionFieldImg} alt="Example structured document" width="800px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={IdpExtractionFieldImg} alt="Example structured document" width="800px"/>
 
 :::info
 To learn more about data types, see [extraction field data types](idp-reference.md#extraction-field-data-types).
