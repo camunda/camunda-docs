@@ -2,8 +2,17 @@
 id: conceptual-differences
 title: Conceptual differences with Camunda 7 and Camunda 8
 sidebar_label: Conceptual differences
-description: "Understand conceptual differences with Camunda 7 and Camunda 8 before migrating, such as the embedded engine, different data types, and the expression language."
+description: "Understand conceptual differences with Camunda 7 and Camunda 8 before migrating, such as the embedded engine, different data types, and the expression language.
 ---
+
+<!--
+*Iterate later*
+*Todos:*
+-   *Mention FEEL Copilot*
+-   *Spring Boot solution: Adjust naming to "Camunda SDK" instead of Zeebe*
+-   *Camunda Deployment: Mention Camunda 8 Run*
+-   *Plugins: Mention Execution Listeners*
+-->
 
 ## Conceptual differences
 
