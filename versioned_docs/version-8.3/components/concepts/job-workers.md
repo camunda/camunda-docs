@@ -96,7 +96,7 @@ The fact that jobs may be worked on more than once means that Zeebe is an "at le
 
 ## Job streaming
 
-:::warning
+:::danger
 Job streaming is an experimental feature which is still under development. It is an opt-in feature which is disabled by default. [See the job worker documentation for details on usage](/apis-tools/java-client/job-worker.md).
 :::
 

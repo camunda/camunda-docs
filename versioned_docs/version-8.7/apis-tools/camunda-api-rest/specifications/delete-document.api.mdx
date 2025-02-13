@@ -1,0 +1,155 @@
+---
+id: delete-document
+title: "Delete document"
+description: "Delete a document from the Camunda 8 cluster."
+sidebar_label: "Delete document"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV8FS40YQ/ZWuOe1WhGQ2bEJ0cwG7cYpQFJjsATiMRy1rdqUZ7UwLcKn076keSbYBk5BKDjlwoIw9Pf36Tb8ePbWC5NKL9FocW9VUaEjcRsLW6CRpa2aZSEWGJRKu1yORoVdO1xwgUnEclkFCNkRA7mwFVCAcyaoxmYRDUGXjCV18Y27MmSUEKiQBFdqD9qAa59BQuQLf1LV1hBnk1m0yerIOPdgcaFVjCtMvlxF8PjqPQJu9CivrVhGUVsnyxohI1NLJCgkdM2uFkRUyjyHbLBOR0Fx6LakQkXD4vdEOM5GSa/Apv3mBMDsO2AVuSiIL/cHEIhJeFVhJkbaC6xOp8OS0WYqui9bwgcMG+3uDbvUIPJelfy16SLap4fEin/9fV3XLuL62xqPn9Q+TCX88h17nvJd+wMrAN0qh93lTlqtYdJE4mBz83XZNRShyqe/QMCNOaCxBbhuTxaFtyhpihaWtkHVdahU0mNTOLkqsfvjqOW+7Resx4BTO+0jIkKQuwS6+oiIIlXPgAjPQBq4vPh3BLwcff759VxDVPk2S+/v72OVqDzNN1sXWLROXK/7juPcxzAt0CJVcwQJBZplmTFlC7XhWSKMHX6PSuVbcFWY6lB0U2/MbutCXxTJdb9706GmvIpFbV0kSqWicfjZ8U7i6mIHO0JDOV9osn0OHPblsSs4hF7ahdFFK840bR5rKnaBPUXxTVdKtRh0+Bugi4UlSs0VDaEO4RLddvzb044dnuVkmv87n59CnAGUzDMMfLocBiElU2uiqqUR6MJlEopIP/befJpOOc3LHX8HEAD7UpTRBWk/paAMVz1WfLRDTxpM06r/qjHV6qZ/ixnxPjL0Qg4iPe0Zdx2sfd83n1ACfsmMdonPWgVXhJs3gvtBlSM9zOmLzTYOe3mbtbdbeZu2lWesiUSEVdmN8gp+gQqQiGR9nPmk3ZqLjJy26u9FtNK4UqWj7yenSJGkL66lLWzY2XXLHbbmTTstF2YuRl/sJG5UTnEz4eVcHeYE9xchs47IuTi7n8FkS3sv+wcyQj1MfTg4nO7Ny6AsZp+cz6Bn2+tu6E8a0PNw70/bBr0kcXIlH1ThNq0ve1h/PAqVDN224BWtdDHghO3/vg0Q0/PNpVMtvX+ah4drkNmwfGv+8EO4KOt9XPon3n4vsfBZmRdmqaky4MM2yNzZyh9MVkSi1QuODnAcPOIad9ivwR48I+zE3pVfOeE8uNRXNIla2SlS/bf25KO0iqaQ2yQDhk6Pp71dnx9O909nRydnlyd5+PInpgQL52nqqpNmqY/Ds2Quevt08Hv6P9n7QAOEDJXUptWFVhsNrh1G9Xpt9LyKRbjn/22iYt2vRtgvp8cqVXcc/94acJzjTnofzBUu+fTj/xp3vZPENV49eFe5k2XCU4OEYb41/WOS7i+EV4z285l1mZ13Dj9Kstosa69063+62i0SBMkMXyuwDpkphTVtbX/QczHN9AR+fnJ7MT0TX/QmsMAsg
+sidebar_class_name: "delete api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete document"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/documents/{documentId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Delete a document from the Camunda 8 cluster.
+
+Note that this is currently supported for document stores of type: AWS, GCP, in-memory, local
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "documentId",
+      in: "path",
+      required: true,
+      description: "The ID of the document to delete.",
+      schema: { type: "string" },
+    },
+    {
+      name: "storeId",
+      in: "query",
+      required: false,
+      description: "The ID of the document store to delete the document from.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": { description: "The document was deleted successfully." },
+    "404": {
+      description: "The document with the given ID was not found.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

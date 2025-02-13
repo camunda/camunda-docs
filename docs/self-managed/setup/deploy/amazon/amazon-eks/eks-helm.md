@@ -153,7 +153,7 @@ Consider setting `domainFilters` via `--set` to restrict access to certain hoste
 Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having followed the [eksctl](./eksctl.md#policy-for-external-dns) or [Terraform](./terraform-setup.md#outputs) guide.
 :::
 
-:::warning Uniqueness of txtOwnerId for DNS
+:::danger Uniqueness of txtOwnerId for DNS
 
 If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
 
@@ -249,11 +249,11 @@ The following makes use of the [combined Ingress setup](/self-managed/setup/guid
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
 :::
 
-```hcl reference
+```yaml reference
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/helm-values/values-domain.yml
 ```
 
-:::warning Exposure of the Zeebe Gateway
+:::danger Exposure of the Zeebe Gateway
 
 Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
 
@@ -306,7 +306,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/helm-values/values-domain.yml
 ```
 
-:::warning Exposure of the Zeebe Gateway
+:::danger Exposure of the Zeebe Gateway
 
 Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
 

@@ -113,7 +113,7 @@ To schedule a process using a timer, follow these steps:
 
 <img src={ConvertToTimerImg} style={{width: 600}} alt="Converting the start event to a timer start event" />
 
-3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
+3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** on the right side of the screen under the **Deploy** button to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
 
 4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
 
