@@ -22,7 +22,7 @@ Camunda collects certain types of data we call “telemetry data” for the purp
 
 Camunda follows certain principles in its collection and use of telemetry data to ensure the privacy of its customers and the success of its product development efforts:
 
-- Camunda will use telemetry data subject to applicable law (including, where necessary, opt-in and opt-out functionalities for personal data).
+- Camunda will use telemetry data subject to applicable law (including opt-in and opt-out functionalities for personal data where necessary).
   Telemetry data is generally aggregated unless users opt-in for personalized use of their telemetry data (for example, to provide additional support or optimize product usage to customers).
 - Telemetry data does not include any data shared in process instances or uploaded in customer clusters. Therefore, **no end-user or end-customer personal data**, personal information (PII), or protected health information (PHI) uploaded to a customer cluster is part of telemetry data.
 - Telemetry data does **not include payment information**.
