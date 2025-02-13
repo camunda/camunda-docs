@@ -44,6 +44,8 @@ When successful, a new Operate window automatically opens.
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
+
+For Mac: The binary has not been signed yet and users may encounter the warning `"c8run" Not Openend`. You can follow the instructions of Apples support guide on: [If you want to open an app that hasn’t been notarized or is from an unidentified developer](https://support.apple.com/en-us/102445)
 :::
 
 ### Configuration options
