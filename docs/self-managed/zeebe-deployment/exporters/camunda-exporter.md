@@ -35,13 +35,13 @@ As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPat
 
 Configure the exporter by providing `args`. See the tables below for configuration options and default values, or review the [example YAML configuration](#example).
 
-| Option       | Description                                                                                                         | Default |
-| ------------ | ------------------------------------------------------------------------------------------------------------------- | ------- |
-| connect      | Refer to [Connect](./camunda-exporter.md?configuration=connect#options) for the connection configuration options.   |         |
-| index        | Refer to [Index](./camunda-exporter.md?configuration=index#options) for the index configuration options.            |         |
-| bulk         | Refer to [Bulk](./camunda-exporter.md?configuration=bulk#options) for the bulk configuration options.               |         |
-| retention    | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for the retention configuration options |         |
-| createSchema | If `true` missing indexes will be created automatically.                                                            | true    |
+| Option       | Description                                                                                                       | Default |
+| ------------ | ----------------------------------------------------------------------------------------------------------------- | ------- |
+| connect      | Refer to [Connect](./camunda-exporter.md?configuration=connect#options) for the connection configuration options. |         |
+| index        | Refer to [Index](./camunda-exporter.md?configuration=index#options) for the index configuration options.          |         |
+| bulk         | Refer to [Bulk](./camunda-exporter.md?configuration=bulk#options) for the bulk configuration options.             |         |
+| archiver     | Refer to [Archiver](./camunda-exporter.md?configuration=archiver#options) for the retention configuration options. |         |
+| createSchema | If `true` missing indexes will be created automatically.                                                          | true    |
 
 ### Options
 
@@ -134,6 +134,24 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 :::
 
 </TabItem>
+
+<TabItem value="archiver">
+
+To keep the main runtime index performant, the archiver periodically moves documents into historical
+indices. The archiver can be configured as follows:
+
+| Option                    | Description                                                                                                                                                                                                   | Default |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| enabled                   | If `true` archiver is enabled.                                                                                                                                                                                | `true`  |
+| elsRolloverDateFormat     | Defines how the date values are formatted for historical indices using Java DateTimeFormatter syntax, if no format is specified the first date format specified in teh field mapping is used.                 | `date`  |
+| rolloverInterval          | The time range for groups captured by the historical indices.                                                                                                                                                 | `1d`    |
+| rolloverBatchSize         | The max number of instances for each batch that is being archived.                                                                                                                                            | `100`   |
+| waitPeriodBeforeArchiving | Grace period for completed process instances to not be processed by the archiver. For a value of 1 hour, any process instances finished within the last hour will not be collected into the historical index. | `1h`    |
+| delayBetweenRuns          | Time in milliseconds between archiving completed process instances.                                                                                                                                           | `2000`  |
+| maxDelayBetweenRuns       | Maximum time in milliseconds before an archiving attempt for completed process instances.                                                                                                                     | `60000` |
+| retention                 | The configuration for a retention policy to delete old data.                                                                                                                                                  |         |
+
+</TabItem>
 </Tabs>
 
 ## Example
@@ -178,10 +196,18 @@ exporters:
         numberOfShards: 3
         numberOfReplicas: 0
 
-      retention:
-        enabled: false
-        minimumAge: 30d
-        policyName: camunda-retention-policy
+      archiver:
+        enabled: true
+        elsRolloverDateFormat: "date"
+        rolloverInterval: "1d"
+        rolloverBatchSize: 100
+        waitPeriodBeforeArchiving: "1h"
+        delayBetweenRuns: 2000
+        maxDelayBetweenRuns: 60000
+        retention:
+          enabled: false
+          minimumAge: 30d
+          policyName: camunda-retention-policy
 
       createSchema: true
 ```
