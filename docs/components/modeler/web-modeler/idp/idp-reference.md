@@ -73,6 +73,8 @@ For example, if you want to extract an expected numeric value (such as a monetar
 
 ## Validation status
 
+During validation, a validation status is shown for extraction fields to indicate the accuracy of the extracted data.
+
 | Icon                                                                        | Status  | Description                                                                                                                     |
 | :-------------------------------------------------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------ |
 | <img src={IdpIconPassImg} alt="Pass icon" className="inline-image" />       | Pass    | The document validation passed with accurate and expected results.                                                              |

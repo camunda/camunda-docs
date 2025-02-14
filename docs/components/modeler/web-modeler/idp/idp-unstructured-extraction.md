@@ -118,27 +118,27 @@ To validate the data extraction:
 1. Click **Test documents** to run the extraction validation against your uploaded sample documents.
 1. The extraction validation results are shown in the **Test Case Results** column.
    <img src={IdpValidationResultsDetailImg} alt="Extraction validation results" />
-   - A [validation status](idp-reference.md#validation-status) is shown for each field to indicate the accuracy of the data extracted from each document. For example, if the extracted value matches the expected test case output, it is shown as a “Pass”.
+   - The [validation status](idp-reference.md#validation-status) is shown for each field to indicate the accuracy of the data extracted from each document. For example, if the extracted value matches the expected test case output, it is shown as a “Pass”.
    - Click on a field to expand the detailed results for each individual document.
-   - A **Field extraction summary** shows a summary percentage value for the overall extraction accuracy to allow you to quickly compare extraction accuracy between different LLM models.
+   - A **Field extraction summary** shows a summary percentage value for the overall extraction accuracy to allow you to quickly compare extraction accuracy between different LLM extraction models.
      <img src={IdpValidationResultsSummaryImg} alt="Extraction results summary" />
-1. If your validation results are unsatisfactory, try the following and rerun the validation:
-   - Change the LLM extraction model to try and obtain more accurate results with a different model.
+1. Perform any actions required due to the validation results such as saving missing test cases or reviewing documents. If your validation results remain unsatisfactory, try the following before rerunning the validation:
+   - Change the extraction model to try and obtain more accurate results with a different model.
    - Edit your extraction field prompts. Select the three vertical dots on a field to open the actions menu, and select **Edit**.
    - Go back to a previous step and edit your data extraction configuration, or upload more sample documents.
-1. Once you are satisfied that your data extraction configuration is accurate, publish the project.
+1. Once you are satisfied with the extraction accuracy and extraction model, publish the project.
 
 ### Publish project
 
 Publish the project to make the project available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
 
-1. Click **Publish** and then either **Publish to project** to make it available to users within the Web Modeler project, or **Publish to organization** to make it available within your organization as a shared resource.
+1. Click **Publish** and select either **Publish to project** to make it available to users within the Web Modeler project, or **Publish to organization** to make it available within your organization as a shared resource.
    <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" />
 1. **Version name**: Enter a version for the published project.
 1. **Version description**: Enter a description for the published project version.
-1. **Extraction model**: Select the LLM model you want to use for the published project.
+1. **Extraction model**: Select the extraction model you want to use for the published project.
 1. Click **Publish** to make the project available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
 
 :::note
-Only Administrator users can publish an extraction project to the organization.
+Only Administrators can publish an extraction project to the organization.
 :::
