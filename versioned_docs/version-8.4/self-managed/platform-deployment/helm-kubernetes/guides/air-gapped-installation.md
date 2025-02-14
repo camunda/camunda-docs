@@ -50,15 +50,30 @@ docker pull registry.camunda.cloud/camunda/zeebe:latest
 
 ## Required Helm charts
 
-The following charts must be available in your air-gapped environment:
+The [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
+must be available in your air-gapped environment.
+It can be downloaded from [GitHub](https://github.com/camunda/camunda-platform-helm/releases) or via the following commands:
 
-- [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
+```shell
+helm repo add camunda https://helm.camunda.io
+helm repo update
+helm pull camunda/camunda-platform
+```
+
+The package is self-contained and already includes the following dependencies:
+
 - [Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch)
 - [Keycloak Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak)
 - [Postgres Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql)
 - [Bitnami Common Helm chart](https://artifacthub.io/packages/helm/bitnami/common)
 
-Install the Helm charts by either making it available on a private registry that can be accessed by the air-gapped environment or downloading the artifacts locally. For supported versions, refer to our [supported environments](/reference/supported-environments.md#camunda-8-self-managed) page.
+Install the Helm chart by either making it available on a [private repository](https://helm.sh/docs/topics/chart_repository/) that can be accessed from the air-gapped environment or by providing the downloaded chart archive locally to Helm, for example:
+
+```shell
+helm install camunda ./camunda-platform-11.1.0.tgz
+```
+
+For supported versions, refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed).
 
 ## Dependencies explained
 
@@ -120,12 +135,10 @@ For details about hosting options, visit the [chart repository guide](https://he
 
 ### Add your Helm repositories
 
-You must add your Helm chart repositories to use the charts:
+You must add your Helm chart repository to use the chart:
 
-```
+```shell
 helm repo add camunda https://example.jfrog.io/artifactory/api/helm/camunda-platform
-helm repo add elastic https://example.jfrog.io/artifactory/api/helm/elastic
-helm repo add bitnami https://example.jfrog.io/artifactory/api/helm/bitnami
 helm repo update
 ```
 
