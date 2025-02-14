@@ -50,7 +50,7 @@ To specify the proxy as an HTTP protocol handler, set the following standard JVM
 | `http.user`          | _(optional)_ The username to login to the proxy                                                                                                                                                                                                                                                                                   |
 | `http.password`      | _(optional)_ The password to login to the proxy                                                                                                                                                                                                                                                                                   |
 
-Alternative to setting the proxy with JVM properties, the proxy settings can also be set with these environment variables:
+As an alternative to using JVM properties, the proxy settings can also be set with environment variables:
 
 ```bash
 CONNECTOR_HTTP_PROXY_HOST
@@ -72,7 +72,7 @@ To specify the proxy as an HTTPS (HTTP over SSL) protocol handler, set the follo
 | `https.user`          | _(optional)_ The username to log in to the proxy.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `https.password`      | _(optional)_ The password to log in to the proxy.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 
-Alternative to setting the proxy with JVM properties, the proxy settings can also be set with these environment variables:
+As an alternative to using JVM properties, the proxy settings can also be set with environment variables:
 
 ```bash
 CONNECTOR_HTTPS_PROXY_HOST
