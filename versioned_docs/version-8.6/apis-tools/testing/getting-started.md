@@ -112,7 +112,12 @@ public class MyProcessTest {
 
         // when
         final ProcessInstanceEvent processInstance =
-                client.newCreateInstanceCommand().bpmnProcessId("my-process").latestVersion().send().join();
+            client
+                .newCreateInstanceCommand()
+                .bpmnProcessId("my-process")
+                .latestVersion()
+                .send()
+                .join();
 
         // then
         CamundaAssert.assertThat(processInstance).isCompleted();
@@ -151,11 +156,20 @@ public class MyProcessTest {
     @Test
     void shouldCompleteProcessInstance() {
         // given
-        client.newDeployResourceCommand().addResourceFromClasspath("my-process.bpmn").send().join();
+        client
+            .newDeployResourceCommand()
+            .addResourceFromClasspath("my-process.bpmn")
+            .send()
+            .join();
 
         // when
         final ProcessInstanceEvent processInstance =
-                client.newCreateInstanceCommand().bpmnProcessId("my-process").latestVersion().send().join();
+            client
+                .newCreateInstanceCommand()
+                .bpmnProcessId("my-process")
+                .latestVersion()
+                .send()
+                .join();
 
         // then
         CamundaAssert.assertThat(processInstance).isCompleted();
@@ -243,25 +257,25 @@ public class MyProcessTest {
 
     @RegisterExtension
     private final CamundaProcessTestExtension extension =
-            new CamundaProcessTestExtension()
-                    // Change the version of the Camunda Docker image
-                    .withCamundaVersion("8.6.0")
-                    // Change the Zeebe Docker image
-                    .withZeebeDockerImageName("camunda/zeebe")
-                    // Set additional Zeebe environment variables
-                    .withZeebeEnv("env_1", "value_1")
-                    // Expose addition Zeebe ports
-                    .withZeebeExposedPort(4567)
-                    // Enable Connectors
-                    .withConnectorsEnabled(true)
-                    // Change the Connectors Docker image
-                    .withConnectorsDockerImageName("camunda/connectors")
-                    // Change version of the Connectors Docker image
-                    .withConnectorsDockerImageVersion("8.6.0")
-                    // Set additional Connectors environment variables
-                    .withConnectorsEnv("env_1", "value_1")
-                    // Set Connectors secrets
-                    .withConnectorsSecret("secret_1", "value_1");
+        new CamundaProcessTestExtension()
+            // Change the version of the Camunda Docker image
+            .withCamundaVersion("8.6.0")
+            // Change the Camunda Docker image
+            .withCamundaDockerImageName("camunda/camunda")
+            // Set additional Camunda environment variables
+            .withCamundaEnv("env_1", "value_1")
+            // Expose addition Camunda ports
+            .withCamundaExposedPort(4567)
+            // Enable Connectors
+            .withConnectorsEnabled(true)
+            // Change the Connectors Docker image
+            .withConnectorsDockerImageName("camunda/connectors")
+            // Change version of the Connectors Docker image
+            .withConnectorsDockerImageVersion("8.6.0")
+            // Set additional Connectors environment variables
+            .withConnectorsEnv("env_1", "value_1")
+            // Set Connectors secrets
+            .withConnectorsSecret("secret_1", "value_1");
 }
 ```
 
