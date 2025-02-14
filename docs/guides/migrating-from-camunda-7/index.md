@@ -1,54 +1,40 @@
 ---
 id: index
-title: Pre-migration details
+title: Camunda 7 Migration
 description: "Migrate process solutions developed for Camunda 7 to run them on Camunda 8."
-keywords:
-  [
-    Camunda 8,
-    Camunda 7,
-    migration guide,
-    transition,
-    transition guide,
-    Camunda 7,
-  ]
+keywords: [Camunda 8, Camunda 7, migration guide, transition, transition guide]
 ---
 
-This guide describes how to migrate process solutions developed for Camunda 7 to run them on Camunda 8, including:
+This guide describes how to migrate process solutions developed for Camunda 7 to run them on Camunda 8. Therefore it looks at the typical journey for migration, describing the decisions on the way and linking to more in-depth material or tooling.
 
-- Differences in application architecture
-- How process solutions can be migrated
-- How migration can be very simple for some models, but also marked limitations, where migration might get complicated
-- You need to adjust code that uses the workflow engine API
-- How you might be able to reuse glue code
-- Tooling that can help with migration
-- The Clean Delegate approach, which helps you write Camunda 7 solutions that are easier to migrate
+As a general note, you need to know that Camunda 8 is not a drop-in replacement for Camunda 7. This means that it is not sufficient to exchange a library, but you might have to adjust your BPMN models, do code refactorings, and probably also re-achitect your solution. The effort depends very much on how you have built your existing Camunda 7 solution, and we will dive deeper in all aspects in this guide.
 
 :::note
-We are currently developing improved migration tooling and will overhaul this guide around the 8.7 release. If you embark on a migration journey, please reach out to discuss your use case with us.
-:::
+This migration guide describes tooling that is under development for Camunda 8.8 and might not yet fully ready when you read this. However, the [migration tooling roadmap](http://x) can inform your time planning.
+:::note
 
 ## What to expect
 
-Before diving into concrete steps on migrating your models and code, let's cover some conceptual topics and migration readiness steps. The list below provides an outline of the sections in this guide:
+The list below provides an outline of the sections in this guide:
 
-- [Conceptual differences](./conceptual-differences.md)
-- [Migration readiness](./migration-readiness.md)
-- [Adjusting BPMN models](./adjusting-bpmn-models.md)
-- [Adjusting DMN models](./adjusting-dmn-models.md)
-- [Adjusting source code](./adjusting-source-code.md)
+- [The migration journey](#the-migration-journey)
+- [Conceptual Differences](#conceptual-differences)
+- [Migration Tooling](#migration-tooling)
+- [Code Conversion](#code-conversion)
+- [Prepare for Smooth Migrations](#prepare-for-smooth-migrations)
+- [Technical Details](#technical-details)
 
-## Open issues
+## Where to get help?
 
-As described earlier in this guide, migration is an ongoing topic and this guide is far from complete. Open issues include the following:
+There are many possibilities to get help with your migration efforts:
 
-- Describe implications on testing
-- Discuss adapters for Java or REST client
-- Discuss more concepts around BPMN:
-  ** [Field injection](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#field-injection) that is using `camunda:field` available on many BPMN elements.
-  ** Multiple instance markers available on most BPMN elements.
-  ** `camunda:inputOutput` available on most BPMN elements.
-  ** `camunda:errorEventDefinition` available on several BPMN elements.
-- Discuss workload migrations (operations)
-- Eventual consistency
+- The [Camunda forum](https://forum.camunda.io/c/c7-to-c8/)
+- Camunda Consulting
+- [Migration evaluation workshop (Camunda)](https://camunda.com/wp-content/uploads/2024/03/Camunda_ConsultingWorkshops_5-Migration-Evaluation_2024.pdf)
+- Scoping
+- Professional advisory services
+- [Camunda Partners](https://camunda.com/de/partners/):
+  - Professional advisory services
+  - Implementation services
 
-[Reach out to us](/reference/contact.md) to discuss your specific migration use case.
+Talk to your customer success manager or [reach out to Camunda](https://camunda.com/contact-us/).
