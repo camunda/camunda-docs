@@ -15,7 +15,7 @@ IDP uses artificial intelligence (AI) and machine learning (ML) to identify, ext
 
 For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
 
-<img src={IdpOverviewImg} alt="An overview of intelligent document processing" />
+<img src={IdpOverviewImg} alt="An overview of intelligent document processing" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
 ## Configure IDP
 
@@ -25,7 +25,7 @@ To configure and use IDP in Camunda 8 you must:
 
 - Deploy the [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) connectors used by IDP to extract document content and converse with LLM models.
 
-- Add your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to the cluster you want to use with IDP.
+- Add your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to the cluster you want to use with IDP.
 
   <img src={IdpSecretsImg} alt="AWS connector secrets" width="650px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 

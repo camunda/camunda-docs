@@ -6,6 +6,10 @@ description: "Technical reference information for IDP, such as technical archite
 
 import IdpArchitectureImg from './img/idp-architecture-diagram.png';
 import IdpSecretsImg from './img/idp-connector-secrets.png';
+import IdpIconPassImg from './img/idp-validation-icon-pass.png';
+import IdpIconCautionImg from './img/idp-validation-icon-caution.png';
+import IdpIconFailImg from './img/idp-validation-icon-fail.png';
+import IdpValidationExampleImg from './img/idp-validation-example.png';
 
 Technical reference information for IDP, including technical architecture, supported documents, and known limitations.
 
@@ -26,7 +30,7 @@ The IDP extraction connector integrates with Camunda document handling connector
 1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock Converse to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable.
 
 :::note
-You may encounter extraction errors during testing if you have not added your Amazon AWS IAM account **access key** and **secret key** as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](../intelligent-document-processing.md#configure-idp).
+You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](../intelligent-document-processing.md#configure-idp).
 :::
 
 ## Document file formats
@@ -64,9 +68,28 @@ For example, if you want to extract an expected numeric value (such as a monetar
 | Data type | Description                                  |
 | :-------- | :------------------------------------------- |
 | Boolean   | True or false values, such as "yes" or "no". |
-| Date      | Dates in specific formats.                   |
 | Number    | Numeric values.                              |
 | String    | A sequence of characters.                    |
+
+## Validation status
+
+| Icon                                                                        | Status  | Description                                                                                                                     |
+| :-------------------------------------------------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------ |
+| <img src={IdpIconPassImg} alt="Pass icon" className="inline-image" />       | Pass    | The document validation passed with accurate and expected results.                                                              |
+| <img src={IdpIconCautionImg} alt="Caution icon" className="inline-image" /> | Caution | A test case is missing for comparison. Click **Save test case** to create a test case for this field.                           |
+| <img src={IdpIconFailImg} alt="Fail icon" className="inline-image" />       | Fail    | The validation results do not match the expected output for the document. Click **Review document** to investigate and resolve. |
+
+### Example
+
+The following example shows the results of a partially successful extraction against three documents.
+
+<img src={IdpValidationExampleImg} alt="Example validation results table" />
+
+The expanded "contract_start_date" field shows that each document had different validation results.
+
+- The first document passed the validation, with the **Extracted value** matching the **Expected test case output**.
+- The second document could not be validated as a test case was not found for comparison. Click **Save test case** to create a test case for the document.
+- The third document failed validation as the **Extracted value** did not match the **Expected test case output**. Click **Review document** to open the document again and check the prompt for this field.
 
 <!-- ## Known limitations
 

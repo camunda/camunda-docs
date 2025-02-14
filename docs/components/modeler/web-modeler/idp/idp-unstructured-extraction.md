@@ -6,13 +6,13 @@ description: "Unstructured data extraction allows you to extract data from unstr
 
 import IdpUnstructuredDataExtractionImg from './img/idp-unstructured-data-extraction-screen.png';
 import IdpUploadDocumentsUnstructuredImg from './img/idp-upload-documents-unstructured.png';
-import IdpIconPassImg from './img/idp-validation-icon-pass.png';
-import IdpIconCautionImg from './img/idp-validation-icon-caution.png';
-import IdpIconFailImg from './img/idp-validation-icon-fail.png';
-import IdpValidationExampleImg from './img/idp-validation-example.png';
 import IdpExtractionFieldsImg from './img/idp-extraction-fields-unstructured.png';
 import IdpValidationResultsImg from './img/idp-validation-results.png';
 import IdpPublishProjectImg from './img/idp-publish-unstructured-project.png';
+import IdpPublishProjectModalImg from './img/idp-publish-modal.png';
+import IdpExtractionFieldsDetailsImg from './img/idp-extraction-fields.png';
+import IdpValidationResultsDetailImg from './img/idp-validation-results-detail.png';
+import IdpValidationResultsSummaryImg from './img/idp-summary.png';
 
 Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
 
@@ -22,7 +22,7 @@ Complete the following steps to configure and publish an unstructured data extra
 
 1. [Upload documents](#step-1-upload-documents): Upload a set of sample documents to use for training the extraction model.
 1. [Extract fields](#step-2-extract-fields): Add and configure the [extraction fields](idp-key-concepts.md#extraction-fields) you want to use to extract data.
-1. [Validate extraction](#step-3-validate-extraction): Test and evaluate the data extraction results, and publish the project to make it available [in your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
+1. [Validate extraction](#step-3-validate-extraction): Test and evaluate the data extraction results, and publish the project.
 
 ## Step 1: Upload documents
 
@@ -53,34 +53,33 @@ On the **Extract fields** tab, add the data [extraction fields](idp-key-concepts
 
 <img src={IdpExtractionFieldsImg} alt="Unstructured data extraction screen" />
 
-- Add a separate field for each piece of information you want to extract. For example, for an invoice, add a field for the invoice ID, date, vendor name, amount, and so on.
+- Add a separate field for each piece of information you want to extract. For example, for an invoice, add a field for the invoice ID, date, customer name, amount, and so on.
 - You can then extract data from your sample document(s) using your chosen LLM foundation model, edit and refine your fields, and save the extracted data as a test case to compare outcomes across different LLM models.
 
-### Add extraction field
+### Add extraction fields
 
 Add an extraction field for each piece of data you want to extract from your document(s).
 
-1. Click **Add field**.
+<img src={IdpExtractionFieldsDetailsImg} alt="Data extraction fields" width="650px"/>
+
 1. **Field name**: Enter a descriptive name for the field.
-   - Example: "invoice_id”.
+   - Example: "invoice_id” or "invoiceId".
    - The name format should follow [FEEL naming convention](/components/modeler/feel/language-guide/feel-variables.md#variable-names), for example it is case sensitive and should not include spaces.
-1. **Type**: Select the data type you want/expect the field to be populated with.
+   - The **Field name** is used as an output variable in a BPMN process.
+1. **Type**: Select the data type you want/expect the field to be populated with. This helps the LLM more accurately extract data.
    - Example: “Number” for a monetary field (“invoice_amount”).
    - See [extraction field data types](idp-reference.md#extraction-field-data-types).
 1. **Prompt**: Enter a clear and specific prompt to guide the LLM in accurately extracting data.
    - Example: For an "invoice_date" field, you might use "The date when the invoice was issued".
-   - Try and describe the expected outcome in the prompt in clear and concise terms. Refer to the official documentation for your chosen LLM for guidance and best practice for writing prompts.
+   - Try and describe the expected outcome in the prompt in clear and concise terms. For guidance and best practice when writing prompts, refer to the official documentation for your chosen LLM.
 1. Click **Add** to add the field.
-1. Repeat the process until you have added all required extraction fields. You can edit and delete fields at any time.
+1. Repeat the process until you have added all required extraction fields.
 
 :::note
-
-- The **Field name** is used as an output variable in a BPMN process.
-- To edit or delete an existing extraction field, click the three vertical dots next to the field to open the Options menu.
-
+You can edit and delete extraction fields at any time. Click the three vertical dots next to the field to open the Options menu.
 :::
 
-### Extract data and save as a test case
+### Extract data and save as test case
 
 Once you have added your extraction fields, select an LLM model and test the data extraction.
 
@@ -92,6 +91,8 @@ Once you have added your extraction fields, select an LLM model and test the dat
    - For incorrect field results, edit the field **Prompt** and retry the data extraction until the results are accurate.
    - Add additional fields as required during testing.
 1. Click **Save as test case** to save the results as a test case.
+   - The **Expected output** for each field is now shown below the actual extracted value.
+   - Any unexpected extraction results for the field are highlighted.
 1. (Optional) Test different LLM models with this test case to compare results and determine which model produces the most accurate extraction.
 1. Repeat the process of creating and evaluating a test case for your other uploaded sample documents.
 1. Once you are ready to validate your data extraction configuration, select the **Validate extraction** tab.
@@ -105,60 +106,39 @@ Once you have added your extraction fields, select an LLM model and test the dat
 
 ## Step 3: Validate extraction
 
-On the **Validate extraction** tab, validate and test the configured data extraction against your uploaded documents.
+On the **Validate extraction** tab, test and validate the configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by the LLM model using your extraction fields and prompts.
 
 <img src={IdpValidationResultsImg} alt="Validate extraction screen" />
 
-This step evaluates the data extraction results produced by the LLM model, using your extraction fields and prompts.
+### Validate extraction
 
 To validate the data extraction:
 
-1. **Project extraction model**: Select the LLM model to use for validation.
-1. Click **Test all documents** to run the extraction validation against all your uploaded sample documents.
-1. The extraction validation results are shown in the **Testcase results** column.
-   - A [validation status](#validation-status) summary is shown for each field to indicate the accuracy of the data extracted from each document. For example, if the extracted value matches the expected test case output, it is shown as a “Pass”.
+1. Select the **Project extraction model** you want to use for validation.
+1. Click **Test documents** to run the extraction validation against your uploaded sample documents.
+1. The extraction validation results are shown in the **Test Case Results** column.
+   <img src={IdpValidationResultsDetailImg} alt="Extraction validation results" />
+   - A [validation status](idp-reference.md#validation-status) is shown for each field to indicate the accuracy of the data extracted from each document. For example, if the extracted value matches the expected test case output, it is shown as a “Pass”.
    - Click on a field to expand the detailed results for each individual document.
-   - Click **Run failed test case**(s) to...
-1. If your evaluation results are not successful, try the following and rerun the validation:
-   - Change the LLM model to try and obtain more accurate results with a different model.
-   - Edit field prompts. Select the three vertical dots on a field to open the actions menu, and select **Edit prompt**.
+   - A **Field extraction summary** shows a summary percentage value for the overall extraction accuracy to allow you to quickly compare extraction accuracy between different LLM models.
+     <img src={IdpValidationResultsSummaryImg} alt="Extraction results summary" />
+1. If your validation results are unsatisfactory, try the following and rerun the validation:
+   - Change the LLM extraction model to try and obtain more accurate results with a different model.
+   - Edit your extraction field prompts. Select the three vertical dots on a field to open the actions menu, and select **Edit**.
    - Go back to a previous step and edit your data extraction configuration, or upload more sample documents.
-1. Once you are satisfied that your data extraction configuration is accurate, you can publish the project. Select the **Publish** tab.
+1. Once you are satisfied that your data extraction configuration is accurate, publish the project.
 
-:::tip
-Search and filter the results to work with specific documents or extraction fields.
-:::
+### Publish project
 
-### Publish
+Publish the project to make the project available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
 
-On the **Publish** tab, publish the project to make it available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
-
-<img src={IdpPublishProjectImg} alt="Publish project screen" />
-
-1. Click **Publish** to open the **Publish Extraction Project** modal.
-1. Enter a version name and description for the project and click **Publish**.
-1. The project is published and becomes available to use [in your processes](idp-integrate.md) or [document automation](idp-document-automation.md) projects.
+1. Click **Publish** and then either **Publish to project** to make it available to users within the Web Modeler project, or **Publish to organization** to make it available within your organization as a shared resource.
+   <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" />
+1. **Version name**: Enter a version for the published project.
+1. **Version description**: Enter a description for the published project version.
+1. **Extraction model**: Select the LLM model you want to use for the published project.
+1. Click **Publish** to make the project available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
 
 :::note
-Projects only become available in your processes or document automation projects once published. Unpublished projects are shown with a “Draft” **Status**.
+Only Administrator users can publish an extraction project to the organization.
 :::
-
-### Validation status
-
-| Icon                                                                        | Status  | Description                                                                                                                     |
-| :-------------------------------------------------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------ |
-| <img src={IdpIconPassImg} alt="Pass icon" className="inline-image" />       | Pass    | The document validation passed with accurate and expected results.                                                              |
-| <img src={IdpIconCautionImg} alt="Caution icon" className="inline-image" /> | Caution | A test case is missing for comparison. Click **Save test case** to...                                                           |
-| <img src={IdpIconFailImg} alt="Fail icon" className="inline-image" />       | Fail    | The validation results do not match the expected output for the document. Click **Review document** to investigate and resolve. |
-
-#### Example
-
-The following example shows the results of a partially successful extraction against three documents.
-
-<img src={IdpValidationExampleImg} alt="Example validation results table" />
-
-The expanded "contract_start_date" field shows that each document had different validation results.
-
-- The first document passed the validation, with the **Extracted value** matching the **Expected test case output**.
-- The second document could not be validated as a test case was not found for comparison. Click **Save test case** to create a test case for the document.
-- The third document failed validation as the **Extracted value** did not match the **Expected test case output**. Click **Review document** to open the document again and check the prompt for this field.
