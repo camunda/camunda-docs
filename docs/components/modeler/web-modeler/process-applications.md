@@ -30,8 +30,8 @@ You can use Web Modeler to quickly develop and progress low-risk process applica
 Get started by creating a new process application.
 
 - When you [create a process application](create-a-process-application.md), you must select a cluster to use for deployment during development.
-- A process application must always have a [main process](/docs/components/modeler/web-modeler/create-a-process-application.md#main-process). You can rename and reassign the main process at any time.
-- You can [add files](/docs/components/modeler/web-modeler/create-a-process-application.md#add-files-to-a-process-application) to the process application as required.
+- A process application must always have a [main process](/components/modeler/web-modeler/create-a-process-application.md#main-process). You can rename and reassign the main process at any time.
+- You can [add files](/components/modeler/web-modeler/create-a-process-application.md#add-files-to-a-process-application) to the process application as required.
 
 ## Validate and deploy your process application
 

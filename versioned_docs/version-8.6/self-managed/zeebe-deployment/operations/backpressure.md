@@ -15,7 +15,7 @@ broker receives more requests than it can process with an acceptable
 latency, it rejects some requests (see [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
 
 Alternatively, [flow
-control write rate limits](/docs/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) can also
+control write rate limits](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) can also
 be used with static write rate limits or throttling. This prevents the
 partition from building an excessive backlog of records not exported.
 

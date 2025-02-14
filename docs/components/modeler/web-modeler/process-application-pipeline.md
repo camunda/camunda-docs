@@ -61,7 +61,7 @@ When your process application is ready for validation you can deploy it to your 
 - Validate that all files and resources are correctly deployed.
 
 :::note
-Play is being rebuilt and progressively rolled out to more users. See [Play limitations and availability](/docs/components/modeler/web-modeler/play-your-process.md#limitations-and-availability) for Play limitations and why you might not see the **Play** tab.
+Play is being rebuilt and progressively rolled out to more users. See [Play limitations and availability](/components/modeler/web-modeler/play-your-process.md#limitations-and-availability) for Play limitations and why you might not see the **Play** tab.
 :::
 
 ## Review

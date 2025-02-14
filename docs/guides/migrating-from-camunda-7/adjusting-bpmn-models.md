@@ -122,7 +122,7 @@ The following attributes/elements can be migrated:
   - `camunda:formRef` to `zeebe:formDefinition formId`
   - `camunda:formRefBinding` to `zeebe:formDefinition bindingType`
     :::note
-    Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md) for user task forms.
+    Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for user task forms.
     :::
 
 The following attributes/elements **cannot** yet be migrated:
@@ -146,7 +146,7 @@ The following attributes/elements can be migrated:
 - `camunda:resultVariable` to `zeebe:calledDecision resultVariable`
 - `camunda:decisionRefBinding` to `zeebe:calledDecision bindingType`
   :::note
-  Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md) for business rule tasks.
+  Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for business rule tasks.
   :::
 - `camunda:decisionRefVersionTag` to `zeebe:calledDecision versionTag`
 
@@ -167,7 +167,7 @@ Call activities are generally supported in Zeebe. The following attributes/eleme
 - `camunda:calledElement` to `zeebe:calledElement processId`
 - `camunda:calledElementBinding` to `zeebe:calledElement bindingType`
   :::note
-  Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md) for call activities.
+  Camunda 8 only supports the `latest`, `deployment`, and `versionTag` [binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for call activities.
   :::
 - `camunda:calledElementVersionTag` to `zeebe:calledElement versionTag`
 - Data mapping

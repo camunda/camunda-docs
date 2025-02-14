@@ -190,13 +190,13 @@ You can use the new **variables view** to track variables defined in a process d
 
 <!-- https://github.com/camunda/product-hub/issues/2463 -->
 
-The [Help Center](/docs/reference/help-center.md) now features a step-by-step guide to complete our microservice orchestration tutorial.
+The [Help Center](/reference/help-center.md) now features a step-by-step guide to complete our microservice orchestration tutorial.
 
 ### Get started with human task orchestration <span class="badge badge--long" title="This feature affects Help Center">Help Center</span> <span class="badge badge--long" title="This feature affects Tasklist">Tasklist</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2395 -->
 
-The [Help Center](/docs/reference/help-center.md) now features a step-by-step guide to complete our human task orchestration (HTO) tutorial, explaining the critical features that every developer interested in human task orchestration needs to know.
+The [Help Center](/reference/help-center.md) now features a step-by-step guide to complete our human task orchestration (HTO) tutorial, explaining the critical features that every developer interested in human task orchestration needs to know.
 
 - Users get a glimpse into the user experience for at-scale adoption.
 - Enterprise architects get a picture of how Camunda's out-of-the-box Tasklist fits into their architecture.

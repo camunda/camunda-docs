@@ -89,7 +89,7 @@ docker compose down
 ### Web Modeler
 
 :::info
-Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/docs/reference/licenses.md) for more information.
+Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/reference/licenses.md) for more information.
 :::
 
 #### Standalone setup
