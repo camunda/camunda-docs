@@ -32,7 +32,7 @@ You can configure the deployment policy for process applications in the Web Mode
 By default, only organization administrators can deploy process applications to clusters marked as
 [production stages](/docs/components/modeler/web-modeler/process-application-pipeline.md#deployment-pipeline-stages) from Web Modeler.
 
-You can change this in the **Process application deployment** settings.
+You can change this in the **process application deployment** settings.
 There, you can enable non-admin users with deployment permission to deploy process application versions to production stage clusters
 after a collaborator has reviewed and approved the process application version using the
 [process application review](/docs/components/modeler/web-modeler/process-application-pipeline.md#review) feature.
