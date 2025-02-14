@@ -19,7 +19,7 @@ Configure the projects for which you will receive email notifications when a col
 
 ## Process application deployment
 
-You can configure the deployment policy for process applications in the Web Modeler settings.
+Organization admins can configure the deployment policy for process applications in the Web Modeler settings.
 
 <Tabs groupId="deployment-permissions" defaultValue="saas" queryString values={
 [
