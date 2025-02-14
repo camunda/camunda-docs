@@ -14,7 +14,20 @@ Choose [Camunda 8 Self-Managed](/self-managed/about-self-managed.md) if you want
 
 ## Get started
 
-### Step 1: Sign up and create an account
+It's easy to get started using Camunda 8 SaaS!
+
+### <span className="callout">1</span>Sign up and log in
+
+1. Visit [signup.camunda.com/accounts](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to sign up.
+1. Fill out the signup form and click **Create account**.
+1. Click on the link in your confirmation email to verify your email address.
+1. Log in to Camunda 8 SaaS using the email address and password you signed up with or via the social login buttons.
+
+:::tip
+You can also log in to Camunda 8 SaaS directly at [camunda.io](https://weblogin.cloud.camunda.io/).
+:::
+
+### <span className="callout">2</span>Configure access keys
 
 ## Architecture
 
