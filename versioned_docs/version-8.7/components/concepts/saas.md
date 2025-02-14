@@ -14,6 +14,8 @@ Choose [Camunda 8 Self-Managed](/self-managed/about-self-managed.md) if you want
 
 ## Get started
 
+### Step 1: Sign up and create an account
+
 ## Architecture
 
 The Camunda 8 SaaS platform is built on the Google Cloud Platform (GCP) and based on a micro-services architecture.
@@ -86,3 +88,34 @@ Content
 ### Access controls
 
 Camunda 8 SaaS supports the following access controls.
+
+| Access control type                                                                                                   | Description                                                                                                                                                                                                                                      |
+| :-------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Single sign-on (SSO)](/components/console/manage-organization/external-sso.md)                                       | SSO is available for both Starter and Enterprise plans, using Identity as a bridge between an OpenID Connect (OIDC) provider and the Camunda platform.                                                                                           |
+| [OAuth](/components/console/manage-clusters/manage-api-clients.md)                                                    | The OAuth service is used to allow client applications to interact with Zeebe in SaaS from the outside. Every client application must authenticate itself using an OAuth Flow.                                                                   |
+| [Role based access (RBAC)](/components/console/manage-organization/manage-users.md)                                   | <p>Camunda 8 SaaS supports RBAC through a system of roles and permissions.</p><p>Each role provides a different level of access to Camunda 8 components, allowing organizations to control user permissions based on their responsibilities.</p> |
+| [Resource-based authorization](/components/console/manage-organization/manage-users.md#resource-based-authorizations) | Resource authorizations allow you to control the level of access a user has to a particular resource in the system.                                                                                                                              |
+
+:::note
+In Enterprise plans, the hostname section of the email address for invites can be restricted to meet your internal security policies. To learn more, contact your Customer Success Manager.
+:::
+
+### Known SaaS limitations
+
+Content.
+
+## Support
+
+For support with Camunda 8 SaaS, use the following channels:
+
+## Additional resources
+
+Learn more about Camunda 8 SaaS with the following additional resources.
+
+### SaaS quickstart
+
+### Migrate from Camunda 7
+
+### Advanced
+
+### Reference
