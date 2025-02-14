@@ -53,6 +53,7 @@
     {
       "Concepts": [
         "components/concepts/what-is-camunda-8",
+        "components/concepts/saas",
         "components/concepts/clusters",
         "components/concepts/processes",
         "components/concepts/job-workers",

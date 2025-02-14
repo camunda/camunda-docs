@@ -953,3 +953,7 @@ ul ol {
     flex-direction: column;
   }
 }
+
+.table-of-contents__link .callout {
+  display: none;
+}
