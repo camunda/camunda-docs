@@ -3165,10 +3165,15 @@ components:
         - type
         - timeout
         - maxJobsToActivate
+    JobActivationResponseBase:
+      description: Base properties for JobActivationResponse
+      type: object
     JobActivationResponse:
       description: The list of activated jobs
       deprecated: true
       type: object
+      allOf:
+        - $ref: "#/components/schemas/JobActivationResponseBase"
       properties:
         jobs:
           type: array
