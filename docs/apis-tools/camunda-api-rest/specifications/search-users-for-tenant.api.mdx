@@ -1,0 +1,410 @@
+---
+id: search-users-for-tenant
+title: "Query users for tenant"
+description: "Retrieves a filtered and sorted list of users for a specified tenant."
+sidebar_label: "Query users for tenant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query users for tenant"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/tenants/{tenantId}/users/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Retrieves a filtered and sorted list of users for a specified tenant.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        searchAfter: {
+                          description:
+                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          description:
+                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["username", "name", "email"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "UserSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The user search filters.",
+              allOf: [
+                {
+                  description: "User search filter.",
+                  type: "object",
+                  properties: {
+                    username: {
+                      description: "The username of the user.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the user.",
+                      type: "string",
+                    },
+                    email: {
+                      description: "The email of the user.",
+                      type: "string",
+                    },
+                  },
+                  title: "UserFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "UserSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The search result of users for the tenant.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching users.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    id: {
+                      description: "The ID of the user.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    username: {
+                      description: "The username of the user.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the user.",
+                      type: "string",
+                    },
+                    email: {
+                      description: "The email of the user.",
+                      type: "string",
+                    },
+                    key: {
+                      description: "The key of the user.",
+                      type: "string",
+                    },
+                  },
+                  title: "UserResult",
+                },
+              },
+            },
+            title: "UserSearchResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching users.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    id: {
+                      description: "The ID of the user.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    username: {
+                      description: "The username of the user.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the user.",
+                      type: "string",
+                    },
+                    email: {
+                      description: "The email of the user.",
+                      type: "string",
+                    },
+                    key: {
+                      description: "The key of the user.",
+                      type: "string",
+                    },
+                  },
+                  title: "UserResult",
+                },
+              },
+            },
+            title: "UserSearchResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching users.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    id: {
+                      description: "The ID of the user.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    username: {
+                      description: "The username of the user.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the user.",
+                      type: "string",
+                    },
+                    email: {
+                      description: "The email of the user.",
+                      type: "string",
+                    },
+                    key: {
+                      description: "The key of the user.",
+                      type: "string",
+                    },
+                  },
+                  title: "UserResult",
+                },
+              },
+            },
+            title: "UserSearchResult",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
