@@ -14,25 +14,25 @@ description: Understand conceptual differences with Camunda 7 and Camunda 8 befo
 -   *Plugins: Mention Execution Listeners*
 -->
 
-## Conceptual differences
-
 This section does not compare Camunda 7 with Camunda 8 in detail, but rather lists differing aspects important to know when thinking about migration.
+
+## Architectural differences
 
 ### No embedded engine in Camunda 8
 
 Camunda 7 allows embedding the workflow engine as a library in your application. This means both run in the same JVM, share thread pools, and can even use the same data source and transaction manager.
 
-In contrast, the workflow engine in Camunda 8, Zeebe, is always a remote resource for your application, while the embedded engine mode is not supported.
+In contrast, **the workflow engine** in Camunda 8, Zeebe, is always **a remote resource** for your application, while the embedded engine mode is not supported.
 
-If you are interested in the reasons why we switched our recommendation from embedded to remote workflow engines, refer to [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
+If you are interested in the reasons **why** we switched our recommendation from embedded to remote workflow engines, refer to [this blog post](https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371).
 
-The implications for your process solution and the programming model are described below. Conceptually, the only big difference is that with a remote engine, you cannot share technical [ACID transactions](https://en.wikipedia.org/wiki/ACID) between your code and the workflow engine. You can read more about it in the blog post on [achieving consistency without transaction managers](https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c).
+The implications for your process solution and the programming model are described below. Conceptually, the only big difference is that with a remote engine, **you cannot share technical [ACID transactions](https://en.wikipedia.org/wiki/ACID)** between your code and the workflow engine. You can read more about it in the blog post on [achieving consistency without transaction managers](https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c).
 
 ### Different data types
 
 In Camunda 7, you can store different data types, including serialized Java objects.
 
-Camunda 8 only allows storage of primary data types or JSON as process variables. This might require some additional data mapping in your code when you set or get process variables.
+Camunda 8 only allows storage of **primary data types or JSON** as process variables. This might require some additional data mapping in your code when you set or get process variables.
 
 Camunda 7 provides [Camunda Spin](https://docs.camunda.org/manual/latest/reference/spin/) to ease XML and JSON handling. This is not available with Camunda 8, and ideally you migrate to an own data transformation logic you can fully control (e.g. using Jackson).
 
@@ -44,11 +44,13 @@ Camunda 7 uses [Java Unified Expression Language (JUEL)](https://docs.camunda.or
 
 Camunda 8 uses [Friendly-Enough Expression Language (FEEL)](/components/modeler/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
-Most expressions can be converted (see [this community extension](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java) as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda 7).
+Most expressions can be converted (see [this code in the diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java) as a starting point), some might need to be completely rewritten, and some might require an additional service task to prepare necessary data (which may have been calculated on the fly when using Camunda 7).
+
+You can also use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite complex expressions for you.
 
 ### Different Connector infrastructure
 
-Through Camunda Connect, Camunda 7 provides an HTTP and a SOAP HTTP [Connector](https://docs.camunda.org/manual/latest/reference/connect/). Camunda 8 offers multiple [Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) out-of-the-box.
+Through Camunda Connect, Camunda 7 provides an HTTP and a SOAP HTTP [Connector](https://docs.camunda.org/manual/latest/reference/connect/). Camunda 8 offers multiple [Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) out-of-the-box on a completly different codebase.
 
 To migrate existing Connectors, consider the following options:
 
@@ -110,37 +112,13 @@ public void retrievePayment(ActivatedJob job) {
 
 You can find more information on the programming model in Camunda 8 in [this blog post](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
 
+<!--
 :::note
 JUnit testing with an embedded in-memory engine is also possible with Camunda 8, see the [Spring Zeebe SDK documentation](../../apis-tools/spring-zeebe-sdk/getting-started.md).
 :::
+-->
 
-## Camunda deployment
-
-A typical deployment of the workflow engine itself looks different because the workflow engine is no longer embedded into your own deployment artifacts.
-
-With Camunda 7 a typical deployment includes:
-
-- Your Spring Boot application with all custom code and the workflow engine, Cockpit, and Tasklist embedded. This application is typically scaled to at least two instances (for resilience)
-- A relational database
-- An Elasticsearch database (for Optimize)
-- Optimize (a Java application)
-
-With Camunda 8 you deploy:
-
-- Your Spring Boot application with all custom code and the Zeebe client embedded. This application is typically scaled to at least two instances (for resilience)
-- The Zeebe Broker, typically scaled to at least three instances (for resilience)
-- An elastic database (for Operate, Tasklist, and Optimize)
-- Optimize, Operate, and Tasklist (each one is a Java application). You can scale those applications to increase availability if you want.
-
-![Camunda 7 vs Camunda 8 Deployment View](../img/camunda7-vs-camunda8-deployment-view.png)
-
-Camunda 8 deployments happen within Kubernetes. There are [Helm charts available](self-managed/setup/overview.md) if you want to run Camunda 8 Self-Managed.
-
-Camunda 8 is also available as a SaaS offering from Camunda. In this case, deploy your own process solution and Camunda operates the rest.
-
-:::note
-For local development purposes, you can [spin up Camunda 8 on a developer machine using Docker or Docker Compose](self-managed/setup/deploy/other/docker.md). Developers could also create a cluster for development purposes in the SaaS offering of Camunda.
-:::
+You can check out [code conversion patterns](../code-conversion/) for more details.
 
 ## Other process solution architectures
 
