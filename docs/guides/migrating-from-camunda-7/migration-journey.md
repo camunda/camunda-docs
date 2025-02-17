@@ -5,31 +5,31 @@ sidebar_label: Migration journey
 description: "Understand the main steps for a successful migration journey."
 ---
 
-Migration projects differ depending on complexity and approach. However, there is a common theme how they are approached which is described in this guide.
+Migration projects differ depending on complexity and approach. However, there is a common theme in how they are approached, which is described in this guide.
 
-The complexity of Camunda-7-based solutions differ big time. Solutions range from small solutions that implement [clean delegates](http://x) to huge solutions with hundreds of processes doing quite dirty hacks around the Camunda-internal API. This is why this guide describes two typical journeys:
+The complexity of Camunda-7-based solutions differs significantly. Solutions range from small implementations with [clean delegates](http://x) to large solutions with hundreds of processes using dirty hacks around the Camunda-internal API. This is why this guide describes two different journeys:
 
 - **A simplified migration journey**: A very simple migration approach, suitable for solutions that are easy to migrate. If your solution fits into this category, migrating it to Camunda 8 will be straightforward.
 - **An advanced migration journey**: A sophisticated approach looking into the complexities bigger solutions need to tackle.
 
-Maybe the truth might be even somewhere in the middlefor you. As a rule of thumb we advise to keep things as simple as possible, but of course not simpler.
+Maybe the truth might be somewhere in the middle for you. As a rule of thumb, we advise keeping things as simple as possible, but of course not simpler.
 
 ## Simplified migration journey
 
 ![container-managed](../img/simple-journey.png)
 
-First, you need to orientate yourself:
+First, you need to orient yourself:
 
-- Use the [[Migration Analyzer]](http://xxx) to get a first understanding of required changes based on your models.
-- Explore [[code conversion]](http://xxx) patterns.
-- [[Define your target Camunda version]](http://xxx) for migration.
+- Use the [Migration Analyzer](#analyze-your-solution) to get a first understanding of required changes based on your models.
+- Explore [code conversion](../code-conversion) patterns.
+- [Define your target Camunda version](#define-your-target-camunda-version-for-migration) for migration.
 
 Then you can do two things in parallel:
 
-- Set up Camunda 8, we recommend going with SaaS to keep things simple.
-- Migrate your solution, which should hopefully be done by relative simple refactorings.
+- [Set up Camunda 8](#set-up-camunda-8); we recommend going with SaaS to keep things simple.
+- [Migrate your solution](#migrate-solutions), which should hopefully be done by relatively simple refactorings.
 
-Once, your adjusted solution is ready for prime time, you roll it out, meaning you deploy it to production and route all new traffic to it. The legacy Camunda-7-solution can either be switched off immediately, or the still running process instances need some time to drain out (read: to complete).
+Once your adjusted solution is ready for prime time, you roll it out, meaning you deploy it to production and route all new traffic to it. The legacy Camunda-7 solution can either be switched off immediately, or the still running process instances need some time to drain out (read: to complete).
 
 ## Advanced migration journey
 
@@ -37,18 +37,18 @@ Once, your adjusted solution is ready for prime time, you roll it out, meaning y
 
 Let's explore those steps in more detail.
 
-### Orientate yourself
+### Orient yourself
 
 First, you have to understand what needs to be done in order to migrate, and what effort to expect. This allows you to plan (and budget) a migration project properly. The important steps are:
 
-- Understand [conceptual differences between Camunda 7 and Camunda 8](./conceptual-differences/)
+- Understand [conceptual differences between Camunda 7 and Camunda 8](../conceptual-differences/)
 - [Analyze your solution](#analyze-your-solution) to get a first understanding of required changes based on your models.
-- Explore [code conversion patterns](./code-conversion/)
+- Explore [code conversion patterns](../code-conversion/)
 - [Estimate migration effort](#estimate-migration-effort-and-budget-project) and budget project
 - [Define your target Camunda version](#define-your-target-camunda-version-for-migration) and derive a time plan for migration
 - [Leverage advisory services](#leverage-guidance-advisory-and-tooling) from Camunda consulting or certified partners.
 
-After orientation you can plan your migration project and start two independent work streams:
+After orientation, you can plan your migration project and start two independent work streams:
 
 - [Set up Camunda 8](#set-up-camunda-8)
 - [Migrate your solution(s)](#migrate-solutions)
@@ -57,17 +57,17 @@ But let's first understand orientation in a bit more detail.
 
 #### Analyze your solution
 
-Camunda currently develops the **Migration Analyzer**, a tool to gain a first understanding of migration tasks. This tool will be based on the existing [[diagram converter]](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter), which already today can be used via CLI (command line interface) to produce a CSV file with tasks in your model. Our consultants then import this data into a [[Google Spreadsheet template]](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) to analyze what tasks need to be done to migrate. To give you an example, the following report is generated for the [[Camunda 7 invoice example]](https://github.com/camunda/camunda-bpm-platform/tree/master/examples/invoice).
+Camunda currently develops the **Migration Analyzer**, a tool to gain a first understanding of migration tasks. This tool will be based on the existing [diagram converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter), which already today can be used via CLI (command line interface) to produce a CSV file with tasks in your model. Our consultants then import this data into a [Google Spreadsheet template](https://docs.google.com/spreadsheets/d/1ZUxGhj1twgTnXadbopw1CvZg_ZvDnB2VXRQDSrKtmcM/edit?gid=6013418#gid=6013418) to analyze what tasks need to be done to migrate. To give you an example, the following screenshot shows a sample report.
 
-**_TODO: Screenshot Spreadsheet / Results_**
+![analyzer-screenshot](../img/analyzer-screenshot.png)
 
-To add some flavor: In a real world customer example, our consultants run 400 BPMN files through that tool, which resulted in roughly 12,000 lines of findings. Analyzing those lines using the spreadsheet reduced that big number to roughly 30 different types of tasks, which made the migration project manageable (and gave hooks for automated refactorings).
+To add some real-world flavor: In a customer scenaro, our consultants ran 400 BPMN files through that tool, which resulted in roughly 12,000 lines of findings. Analyzing those lines using the spreadsheet reduced that big number to roughly 30 different types of tasks, which made the migration project manageable (and gave hooks for automated refactorings).
 
 Doing this analysis will foster your understanding of what needs to be done in order to migrate.
 
 #### Estimate migration effort and budget project
 
-This analysis is the basis to estimate migration efforts. Our consultants work with rule of thumb numbers how much effort typical tasks require. So, for example, converting a Camunda 7 Java Delegate to a Camunda 8 Job Worker, might result in one hour of work if this just means refactoring the JavaDelegate. It might be more effort if internal Camunda API is used in the delegate though. Looking at [code conversion patterns](<./code-conversion()>) allows you to come up with your own estimate, which you can multiply with the number of tasks from the analyzer.
+This analysis is the basis to estimate migration efforts. Our consultants work with rule-of-thumb numbers on how much effort typical tasks require. So, for example, converting a Camunda 7 Java Delegate to a Camunda 8 Job Worker might result in one hour of work if this just means refactoring the JavaDelegate. It might be more effort if internal Camunda API is used in the delegate though. Looking at [code conversion patterns](../code-conversion/) allows you to come up with your own estimate, which you can multiply with the number of tasks from the analyzer.
 
 In past migration projects, this gave us a good ballpark estimation which could be used to plan and budget the project.
 
@@ -75,38 +75,39 @@ In past migration projects, this gave us a good ballpark estimation which could 
 
 It goes without saying that any new projects should already be started using Camunda 8.
 
-For Camunda 7 solutions you need to understand the support timeline for the Camunda 7 product:
+For Camunda 7 solutions, you need to understand the support timeline for the Camunda 7 product:
 
-- Camunda 7 CE (Community Edition) will EOL (end of life) in October 2025 with a final release (v7.24) happening on Oct 14, 2025.
+- **Camunda 7 CE** (Community Edition) will EOL (end of life) in **October 2025** with a final release (v7.24) happening on Oct 14, 2025.
 - There will be no more Camunda 7 CE releases after that date and the GitHub repo will be archived. The code will still be available, but we'll close all issues and pull requests, and update the README to reflect the EOL status.
-- Camunda 7 EE (Enterprise Edition) customers will continue to get patch releases (security patches & bug fixes) on a rolling basis till at least 2030.
-- Camunda 7 CE users could still switch to Camunda 7 EE to benefit from this long-term support to have enough time for migration.
+- **Camunda 7 EE** (Enterprise Edition) customers will continue to get **patch releases** (security patches & bug fixes) on a rolling basis **till at least 2030**.
+- Camunda 7 CE users could switch to Camunda 7 EE to benefit from this long-term support to have enough time for migration.
 
 In that sense, while there is some urgency to start migration efforts, you are not yet under hard pressure.
 
-Note, that migrating to Camunda 8 gives you additional advantages - which might raise priority for your solution - if:
+Note that migrating to Camunda 8 gives you additional advantages - which might raise priority for your solution - if:
 
 - You are looking to leverage a SaaS offering (e.g. to reduce the effort for hardware or infrastructure setup and maintenance).
 - You are in need of performance at scale and/or improved resilience.
 - You are in need of certain features that can only be found in Camunda 8 (e.g. BPMN message buffering, improved multi-instance handling, the new Connectors framework, RPA, IDP, or the improved collaboration features in Web Modeler).
 
-<!--
-  TODO:
-  When not to migrate
-  Make transparent what is not possible (E.g. embedded OEM CE)
--->
+#### When not to migrate?
+
+You might wonder, if there are cases where migration doesn't make sense. We basically see two scenarios where migration does not make sense:
+
+- Your own solution is in legacy mode and will approach its own end of life before Camunda ends the support - in which case there is limited value migrating it.
+- Your own solution is relying on an architecture that is not possible with Camunda 8. One example are software vendors that embedded Camunda 7 as a Java library into their own build, rely on shipping exactly one self-contained Java application. Refer to [conceptual differences](../conceptual-differences/) for technical details. Most often, you could still migrate those scenarios if you rearchitect the solution though.
 
 #### Define your target Camunda version for migration
 
 Because of the improved core architecture of Camunda 8, features need to be re-added to Camunda 8 step-by-step. That means there is a possibility that the current Camunda 8 version might not yet have sufficient feature parity for your scenario to migrate. Prominent examples are task listeners (which will be introduced with 8.8) or the business key (which is planned to be introduced with 8.9).
 
-If your solution requires those features, it might make sense for you to wait for the Camunda 8 version that will provide these features. You can [check the public feature roadmap](http://x) to understand timelines.
+If your solution requires those features, it might make sense for you to wait for the Camunda 8 version that will provide these features. You can **[check the public feature roadmap](https://camunda.productboard.com/roadmap/) to understand timelines**.
 
-The Camunda version to target might differ per process solution. So for example, Process A might not need additional features and can migrate right away, but Process B might use the business key planned for 8.9. That means, you wait for rolling out migration for Process B till that version. As we are currently running [an architecture streamlining initiative](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/) to improve the core architecture, which [will be released with Camunda 8.8](https://camunda.com/blog/2025/01/camunda-87-88-release-update/). Unless you have time pressure or momentum to lose, we geenrally recommend to wait for this to happen and target a Camunda version \>= 8.8 for migration.
+The Camunda version to target might differ per process solution. So for example, Process A might not need additional features and can migrate right away, but Process B might use the business key planned for 8.9. That means you wait for rolling out migration for Process B till that version. As we are currently running [an architecture streamlining initiative](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/) to improve the core architecture, which [will be released with Camunda 8.8](https://camunda.com/blog/2025/01/camunda-87-88-release-update/). Unless you have time pressure or momentum to lose, we generally recommend waiting for this to happen and target a Camunda version \>= 8.8 for migration.
 
 ![determining-target-version](../img/target-version.png)
 
-That said, it is important to note that targeting for example the 8.9 release doesn't mean you wait for it to happen before thinking about migration. Typically you can already do analysis (which you might need to do anyway to understand the right target version), which is also especially important to plan your project and apply for the required budget on time. Doing the migration tasks can also happen before the actual release, either independently or probably based on early alpha versions.
+That said, it is important to note that targeting, for example, the 8.9 release doesn't mean you wait for it to happen before thinking about migration. Typically you can already do analysis (which you might need to do anyway to understand the right target version), which is also especially important to plan your project and apply for the required budget on time. Doing the migration tasks can also happen before the actual release, either independently or probably based on early alpha versions.
 
 ![starting-ontime](../img/starting-ontime.png)
 
@@ -117,31 +118,33 @@ This guide is the main resource walking you through migration.
 As part of your migration journey, you might also want to consider engaging professional services to help you. The main starting points are:
 
 - [Migration evaluation workshop (Camunda)](https://camunda.com/wp-content/uploads/2024/03/Camunda_ConsultingWorkshops_5-Migration-Evaluation_2024.pdf)
-- Scoping Workshop (Camunda) **_TODO_**
+- Scoping Workshop (Camunda) <!-- TODO -->
 - Professional advisory services (Camunda, Partners)
 - Implementation services (Partners)
 
-Furthermore, you can [[leverage the migration tooling]](./migration-tooling/) and related resources.
+Furthermore, you can [leverage the migration tooling](../migration-tooling/) and related resources.
 
 ### Set Up Camunda 8
 
-<!-- TODO
-
-==> Mit Vorstellungen aufräumen
-- muss kein großer CLuster sein
-- muss nicht SaaS sein
-
--->
-
 To run any solution on Camunda 8, of course you need to have a running Camunda 8 installation.
 
-If you used an embedded engine with Camunda 7 in the past, this model is no longer possible (see [[conceptual differences between Camunda 7 and Camunda 8]](https://docs.camunda.io/docs/next/guides/migrating-from-camunda-7/conceptual-differences/) and this might be new to your organization to operate Camunda in addition to your solution itself. What we see as the most succesful operating model is to have a central team in the organization caring about Camunda, offering it as a self-service platform to others. This is also described in our [process automation Center of Excellence playbook](https://camunda.com/process-orchestration/automation-center-of-excellence/).
+If you used an embedded engine with Camunda 7 in the past, this model is no longer possible (see [conceptual differences between Camunda 7 and Camunda 8](https://docs.camunda.io/docs/next/guides/migrating-from-camunda-7/conceptual-differences/) and this might be new to your organization to operate Camunda in addition to your solution itself. What we see as the most successful operating model is to have a central team in the organization caring about Camunda, offering it as a self-service platform to others. This is also described in our [process automation Center of Excellence playbook](https://camunda.com/process-orchestration/automation-center-of-excellence/).
+
+:::note
+We want to unmask some typical misconceptions with Camunda 8:
+
+- Camunda 8 does **not** need to be consumed SaaS! But you can.
+- Camunda 8 does **not** mean there needs to be one huge cluster to rule them all! But you can run big workloads on one cluster.
+- Camunda 8 does **not** need to be set up for hoizontal scalability! But you can.
+
+Do you can run small Camunda 8 installations, one per solution if you like. They can all be self-managed, meaning they run in your own datacenter. And with the [architecture streamlining and the RDBMS iniaitive](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/), we provide a very simple Java installation (single JAR) that removes complexity of the installation and is sufficient for many use cases (RDBMS planned to be released with Camunda 8.9).
+:::
 
 There are multiple ways to set up Camunda 8:
 
-- Use **Camunda's SaaS** offering: You don't need to install or operate the platform yourself. This is the most convenient and generally recommended option. If you face legal challenges around information security, privacy and compliance you might to check the [[Camunda Trust Center]](https://camunda.com/trust-center/). Please note that this option comes with limitations. For example you can't [[migrate historical audit data from Camunda 7]](./migration-tooling/) to Camunda 8 SaaS. Or, [[multi-tenancy will just be introduced in SaaS with Camunda 8.8]](https://docs.camunda.io/docs/self-managed/concepts/multi-tenancy/)).
+- Use **Camunda's SaaS** offering: You don't need to install or operate the platform yourself. This is the most convenient and generally recommended option. If you face legal challenges around information security, privacy and compliance you might to check the [Camunda Trust Center](https://camunda.com/trust-center/). Please note that this option comes with limitations. For example you can't [migrate historical audit data from Camunda 7](../migration-tooling/) to Camunda 8 SaaS. Or, [multi-tenancy will be introduced in SaaS with Camunda 8.8](https://docs.camunda.io/docs/self-managed/concepts/multi-tenancy/).
 
-- Run the platform **self-managed**. You might want to have a look at the [[Camunda 8 Run distribution]](http://x) or [[RDBMS support]](http://x) (will be introduced with 8.9), which allows relatively simple setups that Camunda 7 users often like. Still, you can of course also go for [[more scalable options]](http://x). Refer to the [[installation guide]](http://x) for details. **_TODO_**
+- Run the platform **self-managed**. You might want to have a look at the [Camunda 8 Run distribution](https://docs.camunda.io/docs/self-managed/setup/deploy/local/c8run/). RDBMS support is planned to be introduced with 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can of course also go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to the [installation guide](https://docs.camunda.io/docs/self-managed/setup/overview/) for details.
 
 While setting up Camunda 8 is not part of the core migration journey, it is a pre-requisite and should be tackled early in the migration journey to make sure to not run into any blockers.
 
@@ -151,13 +154,15 @@ There are a small number of core decisions that will influence your overall migr
 
 #### Drain-out vs big bang
 
-There are two possible migration scenarios: Drain out and big bang. Both are valid approaches, let's look at the differences briefly. Please note that a "big bang" relates to one process solution only. So if you run multiple processes, you typically migrate them one by one so in multiple big bangs, not in one super big bang. Just that for any of those processes, when you migrate, you flip the switch and are on C8 for those processes.
+There are two possible migration scenarios: Drain out and big bang.
 
 ![drain-out-vs-big-bang](../img/drain-out-vs-big-bang.png)
 
+Both are valid approaches, let's look at the differences briefly.
+
 - **Drain out**: Keep running the C7-based solution, but run the C8-based (migrated) solution in parallel. New process instances are started in the new one. After some time, no processes are active in C7 any more and the C7-based solution can be decommissioned.
 
-- **Big bang**: The solution is migrated from C7 to C8, including data migration scripts. At one moment in time, the C7-based solution is stopped, the data is migrated, and the new C8-based solution is started. This C7 solution can be decommissioned right after.
+- **Big bang**: The solution is migrated from C7 to C8, including data migration scripts. At one moment in time, the C7-based solution is stopped, the data is migrated, and the new C8-based solution is started. This C7 solution can be decommissioned right after. Please note that a big bang relates to **one process solution only**. So if you run multiple processes, you typically migrate them one by one so in multiple big bangs, not in one super big bang. Just that for any of those processes, when you migrate, you flip the switch and are on C8 for those processes.
 
 Let's look at pros and cons of the approaches.
 
@@ -189,7 +194,7 @@ Pro:
 
 Con:
 
-- Requires data migration, at least runtime instances, which has some limitations (see [[documentation]](http://x))
+- Requires data migration, at least runtime instances, which has some limitations (see [[migration tooling]](./migration-tooling/))
 - Complexity of the necessary data migration might drive effort
 - Might require a downtime
 
@@ -199,9 +204,9 @@ There are some scenarios where process instances are short lived and the big ban
 
 There is no general recommendation for which strategy to be used.
 
-You could consider the big bang approach less complex in many scenarios. However, there are some indicators to use drain out instead:
+You could consider the **big bang approach less complex** in many scenarios. However, there are some **indicators to use drain out** instead:
 
-- **Short lived processes**: If processes finish quickly, the drain out happens fast and it might even be a possibility to delay new process starts for it to happen.
+- **Short lived processes**: If processes finish quickly, the drain out happens fast and it might even be a possibility to delay new process starts to after drain out has happened.
 - **Latency sensitive processes**: Some use cases can't stand the outage time required for data migration. Maybe you can delay data migration and do it after you have already switched to the C8-based solution, otherwise big bang might simply not be feasible or requires a more sophisticated data migration strategy.
 - **Risk**: If your use case carries a lot of risk you might not feel comfortable with the big bang. Most often this can be mitigated by properly testing your migration.
 - **No switching logic required**: Maybe running the C8-based solution in parallel requires almost no effort on your end (as you don't have user tasks or message receive events), then it might be simply the simpler choice.
@@ -209,32 +214,32 @@ You could consider the big bang approach less complex in many scenarios. However
 
 **Migrating your solution landscape step-by-step**
 
-If you run multiple process solutions you might best migrate them one by one.
+If you run multiple process solutions you best migrate them one by one.
 
-You can also drive this idea one step further. If you have complex solutions with multiple BPMN models, call activities, and further dependencies, even migrating those solutions in one go might be overwhelming. In this case you could apply a microservices mindset and adjust your call activities to be service calls to other components. This way, you could migrate that solution process by process. To be clear: this is not a general recommendation to do this, just illustrating possibilities to reduce the migration scope (read: blast radius) of changes.
+You can also drive this idea one step further. If you have complex solutions with multiple BPMN models, call activities, and further dependencies, even migrating those solutions in one go might be overwhelming. In this case you could apply a microservices mindset and adjust your call activities to be service calls to other components. This way, you could migrate that solution process by process. To be clear: this is not a general recommendation to do this, just illustrating possibilities to reduce the migration scope.
 
 #### Adapt existing code vs refactoring
 
 You need to adjust the code of your solution during migration. There are two general possibilities:
 
-1. Keep existing code written for Camunda 7 and add an **adapter** to run it with Camunda 8. The [[Camunda 7 Adapter]](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) is a starting point for doing this.
-2. **Refactor** your code to work with Camunda 8. The [[code conversion part of this guide]](./code-conversion/) will focus on this approach.
+1. Keep existing code written for Camunda 7 and add an **adapter** to run it with Camunda 8. The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) is a starting point for doing this.
+2. **Refactor** your code to work with Camunda 8. The [code conversion part of this guide](./code-conversion/) will focus on this approach.
 
-**We generally recommend to refactor your code.** Let's briefly dive into both options.
+We generally **recommend to refactor your code.** Let's briefly dive into both options.
 
-**Adapt existing Code**
+**Adapt existing code**
 
 ![adapt-code](../img/adapt-code.png)
 
-While this approach sounds easy at a first glance, it typically works only with very cleanly implemented Java Delegates (which would also be simply refactored to Job Workers). The Adapter furthermore will not free you from understanding architectural implications (like transactional boundaries), and it does not adapt all assets (for example, the Camunda 7 service API or test cases are not adapted).
+While this approach sounds easy at a first glance, it typically works only with very cleanly implemented Java Delegates (which could also be simply refactored to Job Workers). And even if using an adapter, you still need to understand architectural implications (like transactional boundaries) and might rewrite some code. It also does not adapt all assets (for example, the Camunda 7 service API or test cases are not adapted).
 
-In general, the adapter approach therefore is rarely used.
+In general, the adapter approach is rarely used.
 
-**Refactor code**
+**Refactor your code**
 
 ![refactor-code](../img/refactor-code.png)
 
-You rewrite your code. This follows typical patterns and might even be automated to some extent using OpenRewrite recipes. See the [[code conversion guide]](./code-conversion)) for details.
+You rewrite your code. This follows typical patterns and might even be automated to some extent using OpenRewrite recipes. See the [code conversion guide](../code-conversion)) for details.
 
 This approach has the big advantage, that the resulting solution will comply with best practices on how Camunda 8 solutions should be written. Furthermore, architectural differences can be understood better while refactoring the solution. And some projects are also simply happy to clean up a codebase that has grown over time, so they can reduce technical debt as part of the migration effort.
 
@@ -258,16 +263,16 @@ It can make sense to do a first refactoring step in your Camunda 7 codebase to p
 
 Typical preparation steps include:
 
-- **Extract complex code from your JavaDelegates** into Camunda-independent classes (e.g. Spring beans) that are then invoked from the original JavaDelegate. This way, you do a step towards [[Clean Delegates]](http://x) that will be easy to refactor.
+- **Extract complex code from your JavaDelegates** into Camunda-independent classes (e.g. Spring beans) that are then invoked from the original JavaDelegate. This way, you do a step towards [Clean Delegates](../migration-readiness/) that will be easy to refactor.
 
 - **Remove the usage of internal APIs** or calls that depend on the transactionaly integrated architecture of Camunda 7 (e.g. querying the HistoryService within a JavaDelgate and expect it to know current changes already).
 
-- **Increase test coverage** of the solution to increase confidence that code conversions during migration do not break anything. This is especially important if your C7-based solutions lacks good test coverage. To avoid migration effort on test cases, ideally **abstract the test cases from the Camunda version** used, either by using a small own abstraction layer, or by using a test framework like [[Cucumber]](https://cucumber.io/) or [[Sentinel]](https://developer.hashicorp.com/sentinel/docs/intro).
+- **Increase test coverage** of the solution to increase confidence that code conversions during migration do not break anything. This is especially important if your C7-based solutions lacks good test coverage. To avoid migration effort on test cases, ideally **abstract the test cases from the Camunda version** used, either by using a small own abstraction layer, or by using a test framework like [Cucumber](https://cucumber.io/) or [Sentinel](https://developer.hashicorp.com/sentinel/docs/intro).
 <!-- TODO: Mention Scenario Tests -->
 
-- **Structural changes in your BPMN model** to be runnable on Camunda 8. One trigger could be that you are using constructs that are not supported in Camunda 8 (for example execution listeners on sequence flows). Or you want to get your models into a state that allows runtime data migration (see [data migration](#migrate-data-optional)), e.g. by adding artificial wait states before multi-instance tasks that are not supported for runtime data migration.
+- **Structural changes in your BPMN model** to make them runnable on Camunda 8. One trigger could be that you are using constructs that are not supported in Camunda 8 (for example execution listeners on sequence flows). Or you want to get your models into a state that allows runtime data migration (see [data migration](#migrate-data-optional)), e.g. by adding artificial wait states before multi-instance tasks (as multiple instance is not supported for runtime data migration).
 
-- **Replace JUEL expressions with FEEL**. JUEL is not supported in Camunda 8 (see [conceptual differences](./conceptual-differences/)). We [soon release a FEEL plugin for the Camunda 7 platform](https://github.com/camunda/camunda-bpm-platform/issues/2384), allowing you to already rewrite your expressions within your Camunda 7 environment. This might go beyond simply converting JUEL to FEEL, but also removing any calls to Spring beans that are not possible in FEEL. So you might for example add execution listeners invoking the code you need, writing a process variable that then can be evaluated in FEEL.
+- **Replace JUEL expressions with FEEL**. JUEL is not supported in Camunda 8 (see [conceptual differences](../conceptual-differences/)). We [plan to release a FEEL plugin for the Camunda 7 platform](https://github.com/camunda/camunda-bpm-platform/issues/2384), allowing you to already rewrite your expressions within your Camunda 7 environment. This change goes beyond simply converting JUEL to FEEL, but also removing any calls to Spring beans that are not possible in FEEL. So you might, for example, add execution listeners invoking the code you need, writing a process variable that then can be evaluated in FEEL.
 
 This step is optional and can also be skipped, either because the codebase is already in a clean state or you are feeling confident to directly convert your codebase to Camunda 8.
 
@@ -275,33 +280,37 @@ This step is optional and can also be skipped, either because the codebase is al
 
 Your BPMN and DMN models need to be adjusted.
 
-The [[Diagram Converter]](./migration-tooling/) takes care of most changes. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
+The [Diagram Converter](../migration-tooling/) takes care of most changes. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
 
-You can dive into the [technical details of model differences](./technical-details/) if you are interested in more detail.
+You can dive into the [technical details of model differences](../technical-details/) if you are interested in more detail.
 
 #### Convert expressions
 
 Your models might contain JUEL expressions, which are not supported in Camunda 8.
 
-Simple expressions are [[directly converted by the Diagram Converter]](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java).
+Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java).
 
-Use the [[FEEL copilot]](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
+You can use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
 
-Check the [[code conversion patterns section]](./code-conversion/) for typical more complicated scenarios where you use a lot of Java bean logic called from JUEL expressions.
+Check the [code conversion patterns section](../code-conversion/) for more complicated scenarios.
+
+<!--TODO: Add patterns to deliver on this promise  -->
 
 #### Refactor code
 
-You need to refactor your code to use Camunda 8 APIs and SPIs only.
+You need to refactor your code to use Camunda 8 APIs only.
 
-Most prominently you need to convert any API calls to Camunda (e.g. RuntimeService) and the glue code attached to process models (e.g. JavaDelegates). [Code conversion patterns](./code-conversion/) goes into more details how to approach this. Some of those changes might be automated using [[OpenRewrite recipes]](http://x).
+Most prominently you need to **convert any API calls to Camunda** (e.g. RuntimeService) and the glue code attached to process models (e.g. JavaDelegates). The [code conversion patterns](../code-conversion/) goes into more details how to approach this. Some of those changes might be automated using [OpenRewrite recipes](https://docs.openrewrite.org/).
 
-Depending on your architecture you might also have to re-architect core parts of your solution. This is especially true if you rely on transaction integration, threading, internal API (like calling the HistoryService from within a JavaDelegate), or features that are deprecated and thus are not planned for Camunda 8. See [[conceptual differences between Camunda 7 and Camunda 8]](https://docs.camunda.io/docs/next/guides/migrating-from-camunda-7/conceptual-differences/) for more details on this.
+Depending on your architecture you might also have to **re-architect** core parts of your solution. This is especially true if you rely on transaction integration, threading, internal API (like calling the HistoryService from within a JavaDelegate), or features that are deprecated and thus are not planned for Camunda 8 (like CMMN). See [conceptual differences between Camunda 7 and Camunda 8](https://docs.camunda.io/docs/next/guides/migrating-from-camunda-7/conceptual-differences/) for more details on this.
+
+<!--TODO: Add list features that are not planned -->
 
 <!--TODO!!! -->
 
-As part of this effort you also have to rewrite your test cases. If you used [[camunda-bpm-assert]](http://x), a natural choice is to migrate to [[Camunda Process Test]](http://x). You can also leverage [[code conversion patterns]](http://x) or [[OpenRewrite recipes]](http://x). If you use other means of testing (like Cucumber, camunda-bpm-scneario, ...) you need to adjust accordingly.
+As part of this effort you also have to **adjust your test cases**. If you used [camunda-bpm-assert](https://github.com/camunda/camunda-bpm-platform/tree/master/test-utils/assert), a natural choice is to migrate to [Camunda Process Test](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-java). You can also leverage [code conversion patterns](../code-conversion/) or [OpenRewrite recipes](https://docs.openrewrite.org/). If you use other means of testing (like Cucumber, camunda-bpm-scneario, ...) you need to adjust accordingly.
 
-The [[Code Migration Detector]](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/code-migration-detector) (based on ArchUnit) can check how much Camunda 7 API is used in your codebase to allow you refactor to reduce the footprint step-by-step. Ideally, you can remove any Camunda 7 dependency at the end of your refactoring.
+The [Code Migration Detector](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/code-migration-detector) (based on ArchUnit) can check how much Camunda 7 API is used in your codebase to allow you refactor to reduce the footprint step-by-step. Ideally, you can remove any Camunda 7 dependency at the end of your refactoring.
 
 #### Improve Camunda 8 Solution (optional)
 
@@ -312,33 +321,37 @@ While this step can happen during code conversion already, it might also make se
 While technically it is a great thing to improve your solution, many migration projects are under pressure to run efficiently (read: minimal effort). Therefore it is advisable to at least separate two different goals:
 
 - Migrate the solution
-- Improve the solution / reduce further technical debt
+- Improve the solution and reduce further technical debt
 
-While we see a lot of value in doing both tasks at the same time - as you touch a lot of the code anyway and will probably also retest your full solution thoroughly - if the budget is tight it might be better to focus on migration instead of not getting your migration project budgeted.
+While we see a lot of value in doing both tasks at the same time - as you touch a lot of the code anyway and will probably also retest your solution thoroughly - if the budget is tight it might be better to focus on migration instead of not getting budgeted for the increased scope.
 
 ### Migrate Data (optional)
 
-With your solution code migrated, you also need to look at your production data. Camunda provides the [Data Migrator](./migration-tooling/) to be used for this. You might need to customize the data migrator, especially if you used complex data formats in C7 (e.g. Java objects) that need to be converted to something Camunda 8 can handle (e.g. JSON). As part of this step you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (see [[TODO]](http://x)).
+With your solution code migrated, you also need to look at your production data. Camunda currently develops the **[Data Migrator](../migration-tooling/)** to be used for this (**planned to be available with 8.8**). You might need to customize the data migrator, especially if you used complex data formats in C7 (e.g. Java objects) that need to be converted to something Camunda 8 can handle (e.g. JSON). As part of this step you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using for example [upcoming document handling possibilities](https://docs.camunda.io/docs/next/components/concepts/document-handling/)).
 
-Data to be migrated includes rutnime instances, audit data, and optimize data. Let's look at it one by one.
+Data to be migrated includes **runtime instances, audit data, and optimize data**. Let's look at it one by one.
+
+![data-migration](../img/data-migration.png)
 
 **Runtime instances**
 
-Currently running process instances. Running means that these process instances are not yet ended and currently wait in some [[wait-state]](http://x). This state is persisted in the database and a corresponding data entry needs to be created in Camunda 8, so that the process instance can continue from that state in the new solution.
+Currently running process instances. Running means that these process instances in Camunda 7 are not yet ended and currently wait in some [wait-state](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#wait-states). This state is persisted in the database and a corresponding data entry needs to be created in Camunda 8, so that the process instance can continue from that state in the new solution.
 
-Runtime instance migration has limitations, check [migration tooling](./migration-tooling/) for details. As a result you might need to adjust your process models before migration. You can then use [[process version migration]](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to the version that is then migratable to Camunda 8. An interesting strategy can be to define dedicated migration states you want your process instances to pile up in. Another common strategy is to use [[process instance modification]](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (e.g. process instances within a multiple instance task).
+Runtime instance migration has limitations, check [migration tooling](../migration-tooling/) for details. As a result you might need to adjust your process models before migration. You can use [process version migration](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to the version that is migratable to Camunda 8. An interesting strategy can be to define dedicated migration states you want your process instances to pile up in. Another common strategy is to use [process instance modification](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (e.g. process instances within a multiple instance task).
 
 <!-- TODO: Expand -->
 
 Migrating runtime instances is only necessary if you target a big bang migration for your process solution (keep in mind that "bing bang" in this context means to switch one process solution from Camunda 7 to Camunda 8 on a defined point in time - it doesn't mean that you have to migrate all your processes at once). If you drain out your Camunda 7 processes, or if they are typically very short-lived, you do not need runtime instance migration.
 
-**Audit data**
+The Data Migrator needs to access the Camunda 7 database, but just uses Camunda 8 APIs, which means, you can also use this tool when you run on SaaS.
+
+**Audit data (aka History)**
 
 Process instances left traces, often referred to as "history data". These are audit logs when a process instance was started, what path it took, and so on.
 
-It is important to note, that audit data can exist for ended processes from the past, but also for currently still running processes, as those process instances also left traces up to the current wait state.
+It is important to note, that audit data can exist for ended processes from the past, but is also available for currently still running process instances, as those process instances also left traces up to the current wait state.
 
-Many customers need to preserve audit data and want to transfer it to Camunda 8. This can be achieved with the [Data Migrator](./migration-tooling/) but within limitations (most priminently that you need to run Camunda 8 with RDBMS, a feature that is planned to be introduced with 8.9).
+If you need to preserve audit data and want to transfer it to Camunda 8, you can also use the [Data Migrator](../migration-tooling/). Migrating audit **data comes with limitations** (most prominently that you need to run Camunda 8 with **RDBMS**, a feature that is planned to be introduced with 8.9).
 
 Migrating audit data is optional. If you need to do it, consider that audit data migration might need to look at a huge amount of data, which can take time to migrate. But you can run audit data migration beside the normal operations after a successful big bang migration over a period of time, which helps you to keep downtimes low.
 
@@ -346,7 +359,7 @@ Migrating audit data is optional. If you need to do it, consider that audit data
 
 The process intelligence tool Optimize keeps a lot of audit data to allow various analysis. This data might also want to be migrated when switching to Camunda 8.
 
-Optimize data migration is currently not yet possible but on the roadmap.
+Optimize data migration **is currently not yet possible**, but this is planned on the roadmap.
 
 ### Roll out
 
@@ -356,7 +369,7 @@ After you migrated the solution and prepared and tested the data migration (if n
 
 - **Big bang**: In a big bang scenario, you will typically shutdown the old solution (or at least parts of it for the process under migration), then run the runtime instance migration to make sure all waiting process instances are transferred to the Camunda 8 solution. After this step succeeded, you can start up the new solution and route traffic to it. This approach assumes there can be a downtime of the application. If that is not an option, another alternative is to startup the C8 solution in parallel and just switch the traffic routing without downtime, and then start to migrate runtime instances afterwards.
 
-Audit data migration can run after the switch has happened, after a succesful drain-out (in parallel to normal operations) or of course during the downtime of a big bang. The best approach depends on the amount of data and the possibility for downtimes.
+Audit data migration can run after the switch has happened, after a successful drain-out (in parallel to normal operations) or of course during the downtime of a big bang. The best approach depends on the amount of data and the possibility for downtimes.
 
 ### Decommission Camunda 7 Solution
 
