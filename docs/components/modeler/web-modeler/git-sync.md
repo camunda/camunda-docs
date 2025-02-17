@@ -191,11 +191,11 @@ Creating multiple copies of a process application can complicate navigation and 
 
 ## Self-Managed environment variables
 
-The following environment variables can be set to configure the Git sync feature in a self-managed environment:
+You can set the following environment variables to configure Git sync in a Self-Managed environment:
 
 | Provider      | Variable                                     | Description                                                                                                                   | Default                     |
 | ------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAX_FILES`          | Maximum allowed files for sync operations.                                                                                    | `50`                        |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAX_FILES`          | Maximum number of allowed files for sync operations.                                                                                    | `50`                        |
 | All providers | `CAMUNDA_MODELER_GITSYNC_MAX_IN_MEMORY_SIZE` | Maximum memory size that can be processed by calls to the git provider. This limits the maximum file size that can be synced. | `4MB`                       |
 | GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`     | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`    |
 | GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`     | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4` |
