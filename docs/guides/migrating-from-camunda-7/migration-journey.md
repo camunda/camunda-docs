@@ -7,7 +7,7 @@ description: "Understand the main steps for a successful migration journey."
 
 Migration projects differ depending on complexity and approach. However, there is a common theme in how they are approached, which is described in this guide.
 
-The complexity of Camunda-7-based solutions differs significantly. Solutions range from small implementations with [clean delegates](http://x) to large solutions with hundreds of processes using dirty hacks around the Camunda-internal API. This is why this guide describes two different journeys:
+The complexity of Camunda-7-based solutions differ big time. Solutions range from small solutions that implement [clean delegates](../conceptual-differences/) to huge solutions with hundreds of processes doing quite dirty hacks around the Camunda-internal API. This is why this guide describes two typical journeys:
 
 - **A simplified migration journey**: A very simple migration approach, suitable for solutions that are easy to migrate. If your solution fits into this category, migrating it to Camunda 8 will be straightforward.
 - **An advanced migration journey**: A sophisticated approach looking into the complexities bigger solutions need to tackle.
