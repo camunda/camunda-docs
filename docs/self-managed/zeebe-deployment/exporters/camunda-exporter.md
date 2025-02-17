@@ -149,7 +149,7 @@ indices. The archiver can be configured as follows:
 | waitPeriodBeforeArchiving | Grace period for completed process instances to not be processed by the archiver. For a value of 1 hour, any process instances finished within the last hour will not be collected into the historical index. | `1h`    |
 | delayBetweenRuns          | Time in milliseconds between archiving completed process instances.                                                                                                                                           | `2000`  |
 | maxDelayBetweenRuns       | Maximum time in milliseconds before an archiving attempt for completed process instances.                                                                                                                     | `60000` |
-| retention                 | The configuration for a retention policy to delete old data.                                                                                                                                                  |         |
+| retention                 | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for the retention configuration options                                                                                           |         |
 
 </TabItem>
 </Tabs>
