@@ -1,6 +1,7 @@
 ---
 id: index
-title: Camunda 7 Migration
+title: Camunda 7 to Camunda 8 Migration Guide
+sidebar_label: Overview
 description: "Migrate process solutions developed for Camunda 7 to run them on Camunda 8."
 keywords: [Camunda 8, Camunda 7, migration guide, transition, transition guide]
 ---
@@ -11,18 +12,18 @@ As a general note, you need to know that Camunda 8 is not a drop-in replacement 
 
 :::note
 This migration guide describes tooling that is under development for Camunda 8.8 and might not yet fully ready when you read this. However, the [migration tooling roadmap](http://x) can inform your time planning.
-:::note
+:::
 
 ## What to expect
 
 The list below provides an outline of the sections in this guide:
 
-- [The migration journey](#the-migration-journey)
-- [Conceptual Differences](#conceptual-differences)
-- [Migration Tooling](#migration-tooling)
-- [Code Conversion](#code-conversion)
-- [Prepare for Smooth Migrations](#prepare-for-smooth-migrations)
-- [Technical Details](#technical-details)
+- [The migration journey](./migration-journey)
+- [Conceptual differences](./conceptual-differences)
+- [Migration tooling](./migration-tooling)
+- [Code conversion](./code-conversion)
+- [Prepare for smooth migrations](./migration-readiness)
+- [Technical details](./technical-details)
 
 ## Where to get help?
 

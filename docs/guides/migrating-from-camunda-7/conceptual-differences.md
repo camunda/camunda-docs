@@ -2,7 +2,7 @@
 id: conceptual-differences
 title: Conceptual differences with Camunda 7 and Camunda 8
 sidebar_label: Conceptual differences
-description: "Understand conceptual differences with Camunda 7 and Camunda 8 before migrating, such as the embedded engine, different data types, and the expression language.
+description: Understand conceptual differences with Camunda 7 and Camunda 8 before migrating, such as the embedded engine, different data types, and the expression language.
 ---
 
 <!--

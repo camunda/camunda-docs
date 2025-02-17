@@ -90,6 +90,12 @@ Note, that migrating to Camunda 8 gives you additional advantages - which might 
 - You are in need of performance at scale and/or improved resilience.
 - You are in need of certain features that can only be found in Camunda 8 (e.g. BPMN message buffering, improved multi-instance handling, the new Connectors framework, RPA, IDP, or the improved collaboration features in Web Modeler).
 
+<!--
+  TODO:
+  When not to migrate
+  Make transparent what is not possible (E.g. embedded OEM CE)
+-->
+
 #### Define your target Camunda version for migration
 
 Because of the improved core architecture of Camunda 8, features need to be re-added to Camunda 8 step-by-step. That means there is a possibility that the current Camunda 8 version might not yet have sufficient feature parity for your scenario to migrate. Prominent examples are task listeners (which will be introduced with 8.8) or the business key (which is planned to be introduced with 8.9).
@@ -118,6 +124,14 @@ As part of your migration journey, you might also want to consider engaging prof
 Furthermore, you can [[leverage the migration tooling]](./migration-tooling/) and related resources.
 
 ### Set Up Camunda 8
+
+<!-- TODO
+
+==> Mit Vorstellungen aufräumen
+- muss kein großer CLuster sein
+- muss nicht SaaS sein
+
+-->
 
 To run any solution on Camunda 8, of course you need to have a running Camunda 8 installation.
 
@@ -210,7 +224,7 @@ You need to adjust the code of your solution during migration. There are two gen
 
 **Adapt existing Code**
 
-![adapt-code](adapt-code.png)
+![adapt-code](../img/adapt-code.png)
 
 While this approach sounds easy at a first glance, it typically works only with very cleanly implemented Java Delegates (which would also be simply refactored to Job Workers). The Adapter furthermore will not free you from understanding architectural implications (like transactional boundaries), and it does not adapt all assets (for example, the Camunda 7 service API or test cases are not adapted).
 
@@ -218,7 +232,7 @@ In general, the adapter approach therefore is rarely used.
 
 **Refactor code**
 
-![refactor-code](refactor-code.png)
+![refactor-code](../img/refactor-code.png)
 
 You rewrite your code. This follows typical patterns and might even be automated to some extent using OpenRewrite recipes. See the [[code conversion guide]](./code-conversion)) for details.
 

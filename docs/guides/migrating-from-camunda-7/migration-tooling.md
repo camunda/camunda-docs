@@ -17,7 +17,7 @@ Camunda invests in tooling to ease migration from Camunda 7 to Camunda 8. Specif
 
 :::note
 The migration tooling is currently under development. We plan releases for the above mentioned tools with Camunda 8.8 (October 2025).
-:::note
+:::
 
 ## Status and Roadmap
 
@@ -39,18 +39,35 @@ Migration tooling is under development and generally released in an iterative ap
 | **Camunda 7 Adapter** | [[Existing Cmunda 7 Adapter]](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) can be used. Under discussion if this needs to be productized, including production support. | Currently waiting for customer feedback. |
 +------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+
 
-<!--
 ## Migration Analyzer
 
-*Check how much to describe here - probably link to README?*
+<!--
 
-*Or should he docs for it live here?*
+Check how much to describe here - probably link to README?*
+Or should he docs for it live here?*
 
 *Check how to name the Diagram Converter when used for conversion - do we have a separate name? Or just use the analyzer also in conversion?*
+-->
+
+To be added soon
 
 ## Data Migrator
 
-*Check how much to describe here - probably link to README?*
+![data-migration](../img/data-migration.png)
 
-*Or should he docs for it live here?*
+<!--
+Check how much to describe here - probably link to README?*
+Or should he docs for it live here?*
 -->
+
+### Runtime Instances
+
+Limitations:
+
+- No Multiple Instance
+
+### Audit Log Data
+
+Limitations:
+
+- Only RDBMS environment (means also self-managed)
