@@ -178,7 +178,7 @@ Git sync supports parallel feature development by allowing multiple process appl
 
 To use Git sync for parallel feature development:
 
-1. Create a new [process application](/docs/components/modeler/web-modeler/create-a-process-application.md) in Modeler for each active feature branch you want to develop.
+1. Create a new [process application](./create-a-process-application.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
 3. Work on your feature in Modeler, using **Sync with GitHub** or **Sync with GitLab** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.
@@ -191,14 +191,7 @@ Creating multiple copies of a process application can complicate navigation and 
 
 ## Self-Managed environment variables
 
-You can set the following environment variables to configure Git sync in a Self-Managed environment:
-
-| Provider      | Variable                                     | Description                                                                                                                   | Default                     |
-| ------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAX_FILES`          | Maximum number of allowed files for sync operations.                                                                                    | `50`                        |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAX_IN_MEMORY_SIZE` | Maximum memory size that can be processed by calls to the git provider. This limits the maximum file size that can be synced. | `4MB`                       |
-| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`     | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`    |
-| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`     | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4` |
+Refer to [Configuration of the restapi component](../../../self-managed/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
 
 ## Troubleshooting
 

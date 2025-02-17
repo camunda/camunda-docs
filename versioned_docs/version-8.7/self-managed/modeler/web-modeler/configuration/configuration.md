@@ -221,6 +221,17 @@ Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configu
 
 Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
+### Git Sync
+
+Web Modeler supports syncing files via [Git Sync](../../../../components/modeler/web-modeler/git-sync.md). Providing the base url for you provider is needed if you have self-hosted GitLab or GitHub instances.
+
+| Provider      | Variable                                  | Description                                                                                                                   | Default                     |
+| ------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`        | Maximum number of allowed files for sync operations.                                                                          | `50`                        |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE` | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                       |
+| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`  | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`    |
+| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`  | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4` |
+
 ## Configuration of the `websocket` component
 
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Web Modeler Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
