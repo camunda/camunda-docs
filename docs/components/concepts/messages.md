@@ -84,7 +84,7 @@ A message is rejected and not correlated if a message with the same name, the sa
 The uniqueness check is disabled when no message ID is set.
 
 <details>
-   <summary>Publish message with TTL via Camunda 8 REST API</summary>
+   <summary>Publish message with message ID via Camunda 8 REST API</summary>
    <p>
 
 ```

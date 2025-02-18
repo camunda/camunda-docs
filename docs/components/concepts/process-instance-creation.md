@@ -26,7 +26,24 @@ This command creates a new process instance and immediately responds with the pr
 
 ![create-process](assets/create-process.png)
 
-<!-- ADD REST API ENDPOINT !-->
+<details>
+   <summary>Create a process instance via Camunda 8 REST API</summary>
+   <p>
+
+```
+curl -L 'http://localhost:8080/v2/process-instances' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "processDefinitionKey": "2251799813685249”,
+  "processDefinitionVersion": 1
+}'
+```
+
+See [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
 
 ### Create and await results
 
@@ -44,7 +61,25 @@ If the process mutates system state, or further operations rely on the process o
 When the client resends the command, it creates a new process instance.
 :::
 
-<!-- ADD REST API ENDPOINT !-->
+<details>
+   <summary>Create a process instance and await results via Camunda 8 REST API</summary>
+   <p>
+
+```
+curl -L 'http://localhost:8080/v2/process-instances' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "processDefinitionKey": "2251799813685249”,
+  "processDefinitionVersion": 1,
+  "variables": { "orderId": "1234" }
+}'
+```
+
+See [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
 
 Failure scenarios applicable to other commands are applicable to this command as well. Clients may not get a response in the following cases even if the process execution is completed successfully:
 
@@ -77,6 +112,9 @@ Start instructions are supported for both `CreateProcessInstance` commands.
 <details>
   <summary>Code example</summary>
   <p>
+
+  <!-- For consistency, this should be adjusted to cURL and the C8 REST API -->
+
 Create a process instance starting before the 'ship_parcel' element:
 
 ```java
