@@ -329,16 +329,16 @@ In our example, we went with port-forwarding to a localhost, but other alternati
 
 1. Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
-   ```bash
-   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-   ```
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+```
 
-2. Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
+3. Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
    In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even brokers.
 
-   ```bash
-   curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
-   ```
+```bash
+curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
+```
 
 #### Verification
 
@@ -484,7 +484,55 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
   </summary>
 </details>
 
-  </TabItem>
+  </TabsItem>
+  <TabsItem value="zbctl" label="zbctl">
+
+```bash
+kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
+zbctl status --insecure --address localhost:26500
+```
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```bash
+Cluster size: 4
+Partitions count: 8
+Replication factor: 2
+Gateway version: 8.6.0
+Brokers:
+  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.6.0
+    Partition 1 : Leader, Healthy
+    Partition 6 : Leader, Healthy
+    Partition 7 : Follower, Healthy
+    Partition 8 : Follower, Healthy
+  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.6.0
+    Partition 1 : Follower, Healthy
+    Partition 2 : Leader, Healthy
+    Partition 3 : Follower, Healthy
+    Partition 8 : Leader, Healthy
+  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.6.0
+    Partition 2 : Follower, Healthy
+    Partition 3 : Leader, Healthy
+    Partition 4 : Follower, Healthy
+    Partition 5 : Follower, Healthy
+  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
+    Version: 8.6.0
+    Partition 4 : Leader, Healthy
+    Partition 5 : Leader, Healthy
+    Partition 6 : Follower, Healthy
+    Partition 7 : Leader, Healthy
+```
+
+  </summary>
+</details>
+
+</TabsItem>
+</Tabs>
 
 You can also use the Zeebe Gateway's REST API to ensure the scaling progress has been completed. For better output readability, we use [jq](https://jqlang.github.io/jq/).
 
