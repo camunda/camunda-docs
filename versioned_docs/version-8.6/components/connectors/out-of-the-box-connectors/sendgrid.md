@@ -27,7 +27,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 #### Make your SendGrid Email Connector executable
 
-To make the **SendGrid Email Connector** executable, you need to fill out all the mandatory fields highlighted in red in the properties panel:
+To make the **SendGrid Email Connector** executable, you need to fill out all the mandatory fields highlighted in red in the properties panel on the right side of the screen:
 
 1. Set **SendGrid API Key** to `{{secrets.SEND_GRID_API_KEY}}`.
 2. Set **Sender Name** to `Jane Doe` (or the [sender identity](#create-a-sender-identity) you configured above).
@@ -95,7 +95,7 @@ To make the **SendGrid Email Template Connector** executable, fill out all the m
 4. Set **Receiver Name** to `Your Name`.
 5. Set **Receiver Email** to `Your email address`.
 6. Log in to your SendGrid account and navigate to [the Dynamic Template you created](#configure-a-dynamic-template).
-7. Copy the id of the template and paste it in the **Template ID field**.
+7. Copy the ID of the template and paste it in the **Template ID field**.
 8. Provide the test data in the **Template Data** field as a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md):
 
 ```text

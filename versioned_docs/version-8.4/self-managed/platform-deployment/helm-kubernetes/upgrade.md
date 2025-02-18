@@ -5,13 +5,13 @@ sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
-To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind.
+:::note
+When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the next **major** version of the chart.
 
-:::caution
-
-Ensure to review the [instructions for a specific version](#version-update-instructions) before starting the actual upgrade.
-
+For example, if the current Helm chart version is 10.x.x, and the latest next major version is 11.0.1, the recommended upgrade is to 11.0.1 (not 11.0.0).
 :::
+
+To upgrade to a more recent version of the Camunda Helm charts, review the [instructions for a specific version](#version-update-instructions).
 
 ### Upgrading where Identity disabled
 
@@ -219,7 +219,7 @@ If you have a custom `values.yaml`, change the image repository and tag:
 ```yaml
 image:
   repository: bitnami/elasticsearch
-  tag: 8.6.2
+  tag: 8.8.2
 ```
 
 Setting the persistent volume size of the master nodes can't be done using the `volumeClaimTemplate` anymore. It must be done using the master values:

@@ -151,7 +151,9 @@ This section explains why you might not see the **Play** tab, and any additional
 
 For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
 
-Although Play is compatible with cluster versions 8.5.1 and above, we fully support and recommend using versions 8.6.0 or higher.
+**Version compatibility:** Although Play is compatible with cluster versions 8.5.1 and above, Camunda fully supports and recommends using versions 8.6.0 or higher.
+
+**Execution listeners:** Play does not currently support [execution listeners](/components/concepts/execution-listeners.md). As a workaround, you can skip the element using [modifications](#modify-a-process-instance).
 
 ### Camunda 8 SaaS
 
@@ -196,15 +198,16 @@ If no cluster is configured, Web Modeler requests the following cluster details 
 
 ### Limitations
 
+- Play does not support multi-tenancy.
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
 - Play cannot check the presence of Connector secrets in Self-Managed setups.
   If a secret is missing, Play will show an incident at runtime.
-  Learn more about [configuring Connector secrets](/self-managed/connectors-deployment/connectors-configuration.md/#secrets).
+  Learn more about [configuring Connector secrets](/self-managed/connectors-deployment/connectors-configuration.md#secrets).
 
 ## Play Usage and Billing Considerations
 
 The use of Play may result in additional charges depending on your organization's plan and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
 
 - **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, contact your Customer Success Manager.
-- **Starter/Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. Starter Plan users have one development cluster with free execution for development included in their plan. For Professional Plans, you may need to purchase a development cluster.
+- **Starter/Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. Starter plan users have one development cluster with free execution for development included in their plan. For Professional Plans, you may need to purchase a development cluster.
 - **Trial Plans:** You can use any cluster.

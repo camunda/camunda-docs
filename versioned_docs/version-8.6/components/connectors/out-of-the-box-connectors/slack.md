@@ -29,11 +29,11 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your Slack Connector executable
 
-To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel.
+To make the **Slack Connector** executable, fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
 
 ### Authentication
 
-Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, '{{secrets.SLACK_OAUTH_TOKEN}}'.
+Set **Authentication** to your Slack OAuth token, which is stored as a secret. For example, `{{secrets.SLACK_OAUTH_TOKEN}}`.
 
 ### Create channel
 
@@ -67,16 +67,16 @@ To invite users to a channel, take the following steps:
      - The channel name can be up to 80 characters, and can contain lowercase letters, digits, and symbols `-` and `_`.
      - This can be provided as a FEEL expression.
    - Invite by **Channel ID**:
-     - The channel ID must be a valid slack Channel ID.
+     - The channel ID must be a valid Slack Channel ID.
      - This can be provided as a FEEL expression.
 3. Set the **Users** as required:
-   1. One single user name or email or id (for example: `@myUser` or `my.user@company.com` or `ABCDEF12345`).
+   1. One single username or email or ID (for example: `@myUser` or `my.user@company.com` or `ABCDEF12345`).
    2. A comma separated list of users (for example: `@myUser, my.user@company.com, ABCDEF12345`).
    3. FEEL expression. In this case you can provide a valid list of strings (for example: `["@myUser", "my.user@company.com", "ABCDEF12345"]`).
    - Formats:
      - If a username starts with an `@` symbol, it will be handled as user name.
      - If a username is in an email format, it will be handled as an email.
-     - If a username doesn't start with an `@`, and isn't an email, it will be handled as a user id.
+     - If a username doesn't start with an `@`, and isn't an email, it will be handled as a user ID.
    - If a null input or an input which is not a type of String or a Collection provided, you will get an Exception.
    - If all username is provided as any other type than a String, you will get an Exception.
    - If one of the usernames is provided as any other type than a String, it will be omitted.
@@ -295,7 +295,7 @@ URLs of the exposed **Slack inbound Connector** adhere to the following pattern:
 
 `https://<base URL>/inbound/<webhook ID>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
 - `<webhook ID>` is the ID (path) you configured in the properties of your **Slack inbound Connector**.
 
 If you make changes to your **Slack Inbound Connector** configuration, you need to redeploy the BPMN diagram for the changes to take effect.

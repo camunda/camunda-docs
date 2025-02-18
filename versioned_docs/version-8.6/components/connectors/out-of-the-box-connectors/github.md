@@ -153,8 +153,8 @@ The **GitHub Connector** currently supports the following operations.
 
 - **GitHub API:** [Update a release](https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#update-a-release).
 - **Owner:** The account owner of the repository. The name is not case-sensitive.
-- **Repo:** The name of the repository. The name is not case-sensitive.
-- **Release id:** The unique identifier of the release.
+- **Repository:** The name of the repository. The name is not case-sensitive.
+- **Release ID:** The unique identifier of the release.
 - **Body:** Text describing the contents of the tag.
 - **Tag name:** The name of the tag.
 - **Release name:** The name of the release
@@ -164,8 +164,8 @@ The **GitHub Connector** currently supports the following operations.
 
 - **GitHub API:** [Delete a release](https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#delete-a-release).
 - **Owner:** The account owner of the repository. The name is not case-sensitive.
-- **Repo:** The name of the repository. The name is not case-sensitive.
-- **Release id:** The unique identifier of the release.
+- **Repository:** The name of the repository. The name is not case-sensitive.
+- **Release ID:** The unique identifier of the release.
 
 #### List releases
 
@@ -280,12 +280,6 @@ handling response is still applicable [as described](/components/connectors/prot
 
 The **GitHub Webhook Connector** is an inbound Connector that allows you to start a BPMN process instance triggered by a [GitHub event](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks).
 
-:::note
-If you have used the GitHub Webhook Connector with a self-managed Camunda 8 configuration before the
-Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template.
-Please refer to the [update guide](/components/connectors/custom-built-connectors/update-guide/060-to-070.md) for more details.
-:::
-
 ## Create a GitHub Webhook Connector task
 
 1. Start building your BPMN diagram. You can use GitHub Webhook Connector with either **Start Event** or **Intermediate Catch Event** building blocks.
@@ -357,7 +351,7 @@ URLs of the exposed GitHub Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/inbound/<webhook ID>>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
 - `<webhook ID>` is the ID (path) you configured in the properties of your GitHub Webhook Connector.
 
 If you make changes to your GitHub Webhook Connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.

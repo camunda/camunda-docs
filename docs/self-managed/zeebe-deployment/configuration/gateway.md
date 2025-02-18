@@ -2,7 +2,7 @@
 id: gateway-config
 title: "Gateway configuration"
 sidebar_label: "Gateway configuration"
-description: "Analyze how to configure the Zeebe gateway, including byte sizes, time units, paths, and sample YAML snippets."
+description: "Analyze how to configure the Zeebe Gateway, including byte sizes, time units, paths, and sample YAML snippets."
 ---
 
 The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/camunda/blob/main/dist/src/main/config/gateway.yaml.template).
@@ -127,6 +127,8 @@ The network configuration allows configuration of the host and port details for 
 | port                 | Sets the port the gateway binds to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_PORT`.                                                                                                                                                                                                                     | 26500         |
 | minKeepAliveInterval | Sets the minimum keep alive interval. This setting specifies the minimum accepted interval between keep alive pings. This value must be specified as a positive integer followed by 's' for seconds, 'm' for minutes, or 'h' for hours. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MINKEEPALIVEINTERVAL`. | 30s           |
 | maxMessageSize       | Sets the maximum size of the incoming and outgoing messages (i.e. commands and events). Apply the same setting on the broker too, see `ZEEBE_BROKER_NETWORK_MAXMESSAGESIZE`. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_MAXMESSAGESIZE`.                                                                  | 4MB           |
+| socketReceiveBuffer  | Sets the size of the socket's receive buffer for the gateway. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_SOCKETRECEIVEBUFFER`.                                                                                                                                                | 4MB           |
+| socketSendBuffer     | Sets the size of the socket's send buffer for the gateway. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_NETWORK_SOCKETSENDBUFFER`.                                                                                                                                                      | 4MB           |
 
 #### YAML snippet
 
@@ -136,6 +138,8 @@ network:
   port: 26500
   minKeepAliveInterval: 30s
   maxMessageSize: 4MB
+  socketReceiveBuffer: 4MB
+  socketSendBuffer: 4MB
 ```
 
 ### zeebe.gateway.cluster
@@ -154,7 +158,7 @@ If you use the Helm charts, both properties are configured for you already.
 | contactPoint         | WARNING: This setting is deprecated! Use initialContactPoints instead. Sets the broker the gateway should initial contact. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT`.                                                                                                                  | 127.0.0.1:26502                            |
 | requestTimeout       | Sets the timeout of requests sent to the broker cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_REQUESTTIMEOUT`.                                                                                                                                                                                  | 15s                                        |
 | clusterName          | Sets name of the Zeebe cluster to connect to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`.                                                                                                                                                                                                | zeebe-cluster                              |
-| memberId             | Sets the member id of the gateway in the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERID`.                                                                                                                                                                                               | gateway                                    |
+| memberId             | Sets the member ID of the gateway in the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERID`.                                                                                                                                                                                               | gateway                                    |
 | host                 | Sets the host the gateway node binds to for internal cluster communication. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_HOST`.                                                                                                                                                                         | 0.0.0.0                                    |
 | port                 | Sets the port the gateway node binds to for internal cluster communication. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_PORT`.                                                                                                                                                                         | 26502                                      |
 | advertisedHost       | Controls the advertised host; if omitted defaults to the host. This is particularly useful if your gateway stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_ADVERTISEDHOST`.                                                                                                         | 0.0.0.0                                    |
@@ -206,6 +210,26 @@ membership:
   suspectProbes: 3
   failureTimeout: 10s
   syncInterval: 10s
+```
+
+### zeebe.gateway.cluster.configManager.gossip
+
+Configure the parameters used to propagate the dynamic cluster configuration across brokers and gateways.
+
+| Field              | Description                                                                                                                                                                                                     | ExampleValue |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| syncDelay          | Sets the interval between two synchronization requests to other members of the cluster. This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCDELAY | 10s          |
+| syncRequestTimeout | Sets the timeout for the synchronization requests. This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCREQUESTTIMEOUT                             | 2s           |
+| gossipFanout       | Sets the number of cluster members the configuration is gossiped to. This setting can also be overridden using the environment variable ZEEBE_GATEWAY_CLUSTER_CONFIGMANAGER_GOSSIP_GOSSIPFANOUT                 | 2            |
+
+#### YAML snippet
+
+```yaml
+configManager:
+  gossip:
+    syncDelay: 10s
+    syncRequestTimeout: 2s
+    gossipFanout: 2
 ```
 
 ### zeebe.gateway.cluster.security
@@ -390,7 +414,8 @@ Each interceptor should be configured with the values described below:
         </tr>
         <tr>
             <td>className</td>
-            <td>Entry point of the interceptor, a class which must:
+            <td>
+              Entry point of the interceptor, a class which must:
               <li>implement <a href="https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html">io.grpc.ServerInterceptor</a></li>
               <li>have public visibility</li>
               <li>have a public default constructor (i.e. no-arg constructor)</li>
@@ -437,7 +462,8 @@ Each filter should be configured with the values described below:
         </tr>
         <tr>
             <td>className</td>
-            <td>Entry point of the filter, a class which must:
+            <td>
+              Entry point of the filter, a class which must:
               <li>implement <a href="https://www.javadoc.io/doc/jakarta.servlet/jakarta.servlet-api/6.0.0/jakarta.servlet/jakarta/servlet/Filter.html">jakarta.servlet.Filter</a></li>
               <li>have public visibility</li>
               <li>have a public default constructor (i.e. no-arg constructor)</li>
@@ -471,7 +497,7 @@ as well.
 :::
 
 :::note
-If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md/#multitenancy-configuration).
+If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md#multitenancy-configuration).
 :::
 
 | Field   | Description                                                                                                                                     | Example value |

@@ -12,8 +12,8 @@ import TableTextSmall from "./assets/react-components/TableTextSmall";
 import userTaskMigrationDecisionHelperForm from "./assets/forms/userTaskMigrationDecisionHelperForm.js";
 import "./assets/css/condensedTable.module.css";
 import styles from "./assets/css/cleanImages.module.css";
-import APIArchitectureImg from './assets/img/api-architecture.png';
 import ZeebeTaskSelectionImg from './assets/img/zeebe-user-task-selection.png';
+import APIArchitectureImg from './assets/img/api-architecture.png';
 
 Camunda 8.5 introduces a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
 Zeebe user tasks have several benefits, including:
@@ -373,7 +373,7 @@ docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
 type:"link",
-href:"/docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/",
+href:"/docs/8.5/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/",
 label: "Zeebe API (REST)",
 docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 }

@@ -4,29 +4,51 @@ title: "Regions"
 description: "After creating a cluster, specify a region for that cluster. Read on for details of Google Cloud Platform regions currently supported in Camunda 8 SaaS."
 ---
 
-When you create a cluster in Camunda 8 SaaS, you must specify a region for that cluster.
+import RegionMapImg from './img/diagram-regions-map.png';
 
-Currently, we make these regions available for customers on the Trial, Starter, and Enterprise Plans. Enterprise customers can discuss custom regions with their Customer Success Manager.
+When you [create a cluster](/components/console/manage-clusters/create-cluster.md) in Camunda 8 SaaS, you must specify a region for that cluster.
+
+The following regions are available for customers on Trial, Starter, and Enterprise Plans. Enterprise customers can also discuss custom regions with their Customer Success Manager.
+
+<img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
 :::note
-Our Console and Web Modeler components are currently hosted in the EU. [Contact us](https://camunda.com/contact/) if you have additional questions.
+
+- Console and Web Modeler cluster components are currently hosted in GCP (EU). [Contact us](/reference/contact.md) if you have additional questions.
+- Single-tenant clusters run on a dedicated GCP or AWS infrastructure.
+
 :::
 
-Below, find a list of regions currently supported in Camunda 8 SaaS.
+## Google Cloud Platform (GCP) regions
 
-## Available Google Cloud Platform (GCP) regions
+The following GCP regions are currently supported in Camunda 8 SaaS.
 
 | GCP region                                       | Secondary backups region                          |
-| ------------------------------------------------ | ------------------------------------------------- |
+| :----------------------------------------------- | :------------------------------------------------ |
 | Belgium, Europe (europe-west1)                   | Germany, Europe (europe-west3)                    |
 | Iowa, North America (us-central1)                | Salt Lake City, North America (us-west1)          |
 | London, Europe (europe-west2)                    | _Not available_                                   |
+| Singapore, Asia (asia-southeast1)                | Changhua County, Taiwan (asia-east1)              |
 | South Carolina, North America (us-east1)         | Iowa, North America (us-central1)                 |
 | Sydney, Australia (australia-southeast1)         | Melbourne, Australia (australia-southeast2)       |
 | Toronto, North America (northamerica-northeast2) | Montréal, North America (northamerica-northeast1) |
 
-You can find the locations behind the region codes [on the Google page](https://cloud.google.com/about/locations).
+To learn more about each region code/location, refer to [Google cloud locations](https://cloud.google.com/about/locations).
 
-:::note
-Running on a Trial or Starter plan and want to try a different region, or interested in other regions or cloud providers? [Contact us](https://camunda.com/contact/) as we are able to make additional regions available on request.
-:::
+## Amazon Web Services (AWS) regions
+
+The following AWS regions are currently supported in Camunda 8 SaaS.
+
+| AWS region                          | Secondary backups region |
+| :---------------------------------- | :----------------------- |
+| Frankfurt, Europe (eu-central-1)    | _Not available_          |
+| North America, Virginia (us-east-1) | _Not available_          |
+
+To learn more about each region code/location, refer to [AWS regions and availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
+
+### Known limitations
+
+The following limitations currently exist for AWS regions:
+
+- Backups are stored on GCP.
+- HTTP connectors continue to route through GCP.

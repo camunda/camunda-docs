@@ -6,10 +6,10 @@ description: "Use Spring Boot and the Spring Zeebe SDK to interact with your loc
 keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
 ---
 
-import Install from './react-components/install-c8run.md'
+import Install from './react-components/\_install-c8run.md'
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">1 hour</span><br /><br />
+<span class="badge badge--medium">1 hour</span>
 
 In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
@@ -36,7 +36,7 @@ While stepping through this guide, you can visit our [sample repository](https:/
 Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
-- [OpenJDK 21+](https://openjdk.org/install/)
+- [OpenJDK ≥ 17](https://openjdk.org/install/)
 - [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
 
 :::note
@@ -50,8 +50,8 @@ If no version of Java is found, follow your chosen installation's instructions f
 Next, create a new Spring Boot project:
 
 1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
-2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.3.3).
-3. Under **Project Metadata**, configure the following:
+2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select `3.3.8`.
+3. Under **Project Metadata**, configure the following or use the [pre-filled shortcut](https://start.spring.io/#!type=maven-project&language=java&packaging=jar&groupId=io.camunda.demo&artifactId=process_payments&name=Process%20payments&description=Process%20payments%20with%20Camunda&packageName=io.camunda.demo.process_payments):
    1. **Group**: `io.camunda.demo`
    2. **Artifact**: `process_payments`
    3. **Name**: `Process payments`
@@ -72,7 +72,7 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
 
 1. Open Desktop Modeler.
 2. Click **Create a new diagram** in Camunda 8.
-3. In the Properties panel, under the General section:
+3. In the properties panel, under the **General** section:
    - Name your diagram `Process payments`
    - Set the ID to `process-payments`
 4. Add a start event, and name it `Payment request received`.
@@ -113,41 +113,21 @@ To implement a service task, take the following steps:
 
 ### Configure Spring Boot Starter
 
-See our documentation on [adding the Spring Zeebe SDK to your project](/apis-tools/spring-zeebe-sdk/getting-started.md#add-the-spring-zeebe-sdk-to-your-project) for more details, also described below:
+Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
-1. Copy the following code snippet into the `pom.xml` file of your Spring project, below properties and above dependencies:
-
-```
-<repositories>
-   <repository>
-      <releases>
-         <enabled>true</enabled>
-      </releases>
-      <snapshots>
-         <enabled>false</enabled>
-      </snapshots>
-      <id>identity</id>
-      <name>Camunda Identity</name>
-      <url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
-   </repository>
-</repositories>
-```
-
-2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
-
-```
+```xml
 <dependency>
-   <groupId>io.camunda</groupId>
-   <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-   <version>8.6.0</version>
+    <groupId>io.camunda</groupId>
+    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+    <version>8.6.x</version>
 </dependency>
 ```
 
 ### Configure the Zeebe client
 
-Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
+Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe Broker:
 
-```
+```yaml
 camunda:
   client:
     mode: self-managed

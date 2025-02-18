@@ -1,39 +1,53 @@
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
 const replace = require("replace-in-file");
-const outputDir = "docs/apis-tools/camunda-api-rest/specifications";
-const specFile = "api/camunda/camunda-openapi.yaml";
 const fs = require("fs");
 
-function preGenerateDocs() {
-  const originalSpec = fs.readFileSync(specFile, "utf8");
+function preGenerateDocs(config) {
+  const originalSpec = fs.readFileSync(config.specPath, "utf8");
 
   console.log("adjusting C8 spec file...");
 
   const specUpdates = [
-    addDisclaimer(),
+    ...addDisclaimer(originalSpec),
     ...redefineCreateProcessInstanceRequest(originalSpec),
     ...redefineEvaluateDecisionRequest(originalSpec),
+    ...addAlphaAdmonition(), // needs to go before addFrequentlyLinkedDocs
+    ...addFrequentlyLinkedDocs(config.version),
   ];
 
   replace.sync({
-    files: specFile,
+    files: config.specPath,
     from: specUpdates.map((x) => x.from),
     to: specUpdates.map((x) => x.to),
   });
 }
 
-function postGenerateDocs() {
-  removeDuplicateVersionBadge(`${outputDir}/camunda-8-rest-api.info.mdx`);
+function postGenerateDocs(config) {
+  removeDuplicateVersionBadge(
+    `${config.outputDir}/camunda-8-rest-api.info.mdx`
+  );
 }
 
-function addDisclaimer() {
+function addDisclaimer(originalSpec) {
+  // Make this a repeatable task by checking if it's run already.
+  if (
+    originalSpec.includes(
+      "Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation."
+    )
+  ) {
+    console.log("skipping addDisclaimer...");
+    return [];
+  }
+
   // Adds a disclaimer to the very beginning of the file, so that people know this isn't the true spec.
-  return {
-    from: /^/,
-    to: `# Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
+  return [
+    {
+      from: /^/,
+      to: `# Disclaimer: This is a modified version of the Camunda REST API specification, optimized for the documentation.
 
 `,
-  };
+    },
+  ];
 }
 
 function redefineCreateProcessInstanceRequest(originalSpec) {
@@ -208,8 +222,51 @@ function redefineEvaluateDecisionRequest(originalSpec) {
   ];
 }
 
+function addAlphaAdmonition() {
+  // This task is inherently repeatable, because the `match` is replaced by something that won't match again.
+
+  return [
+    {
+      // Matches an empty line, followed by an alpha warning, with these capture groups:
+      //  $1: the blank line before the warning
+      //  $2: the indentation before the warning
+      //  $3: the warning text
+      from: /^([^\S\n]*\n)([^\S\n]*)(This endpoint is an alpha feature and may be subject to change\n[\s]*in future releases.\n)/gm,
+
+      // Surrounds the warning with `:::note` and `:::`, creating an admonition.
+      to: "$1$2:::note\n$2$3$2:::\n",
+    },
+  ];
+}
+
+function addFrequentlyLinkedDocs(version) {
+  // This task is inherently repeatable, because the `match` is replaced by something that won't match again.
+
+  // The path to the alpha doc varies by version.
+  const otherAlphaPaths = {
+    8.6: "/reference/alpha-features.md",
+    8.5: "/reference/alpha-features.md",
+    8.4: "/reference/alpha-features.md",
+    8.3: "/reference/alpha-features.md",
+  };
+  const alphaPath =
+    otherAlphaPaths[version] ||
+    "/components/early-access/alpha/alpha-features.md";
+
+  // Adds links to the Camunda Alpha REST API documentation, so that they don't have to live in the upstream spec.
+  return [
+    {
+      from: /The Camunda 8 API \(REST\) Overview page/g,
+      to: "The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)",
+    },
+    {
+      from: /endpoint is an alpha feature/g,
+      to: `endpoint is an [alpha feature](${alphaPath})`,
+    },
+  ];
+}
+
 module.exports = {
-  outputDir,
   preGenerateDocs,
   postGenerateDocs,
 };

@@ -14,6 +14,8 @@ When an embedded subprocess is entered, the start event is activated. The subpro
 
 Embedded subprocesses are often used together with **boundary events**. One or more boundary events can be attached to a subprocess. When an interrupting boundary event is triggered, the entire subprocess (including all active elements) is terminated.
 
+When adding an embedded subprocess to your model, you can either add a collapsed or expanded subprocess. You cannot collapse an existing expanded subprocess in your model.
+
 ## Collapsed subprocesses
 
 :::caution
@@ -22,7 +24,7 @@ Collapsed subprocesses are currently only partially supported by Optimize. While
 All other Camunda components fully support collapsed subprocesses.
 :::
 
-A subprocess can be collapsed to conceal its internal details, thereby hiding complexity within an activity and enabling the nesting of multiple levels of subprocesses. This functionality allows you to simplify the view of a process diagram and facilitates drill-down capabilities to examine details.
+A collapsed subprocess conceals its internal details, thereby hiding complexity within an activity and enabling the nesting of multiple levels of subprocesses. This functionality allows you to simplify the view of a process diagram and facilitates drill-down capabilities to examine details.
 
 Collapsed subprocesses serve purely display purposes. For the creation of reusable processes, it is recommended to utilize [call activities](../call-activities/call-activities.md).
 

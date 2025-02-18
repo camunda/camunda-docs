@@ -129,7 +129,7 @@ A snapshot is a projection of all events that represent the current running stat
 When the broker writes a new snapshot, it deletes all data on the log which was written before the latest snapshot.
 
 :::note
-We tested the snapshot interval via a Zeebe Chaos experiment. Learn more about this experiment and snapshot intervals in our [Zeebe Chaos blog](https://zeebe-io.github.io/zeebe-chaos/2022/02/01/High-Snapshot-Frequency/#snapshot-interval).
+We tested the snapshot interval via a Zeebe Chaos experiment. Learn more about this experiment and snapshot intervals in our [Zeebe Chaos blog](https://camunda.github.io/zeebe-chaos/2022/02/01/High-Snapshot-Frequency/#snapshot-interval).
 :::
 
 ### RocksDB
@@ -148,7 +148,7 @@ Only the leader of a partition exports events. Only committed events (events tha
 
 When a partition fails over to a new leader, the new leader is able to construct the current partition state by projecting the event log from the point of the last snapshot. The position of exporters cannot be reconstructed from the event log, so it is set to the last snapshot. This means an exporter can see the same events twice in the event of a fail-over.
 
-You should assign idempotent ids to events in your exporter if this is an issue for your system. The combination of record position and partition id is reliable as a unique id for an event.
+You should assign idempotent ids to events in your exporter if this is an issue for your system. The combination of record position and partition ID is reliable as a unique ID for an event.
 
 ### Effect of quorum loss
 

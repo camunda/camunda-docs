@@ -7,7 +7,7 @@
 - Connectors
 - Optimize
 - Identity
-- Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](/reference/licenses.md/#web-modeler)
+- Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](/reference/licenses.md#web-modeler)
 
 :::note
 As of version 8.4, Console is only available in [Camunda 8 SaaS](/components/components-overview.md).
@@ -19,6 +19,6 @@ Camunda 8 Self-Managed users may also use [Desktop Modeler](../../components/mod
 
 :::note
 
-To obtain or retrieve your Camunda 8 credentials for Enterprise licenses, visit the [contact page](/contact).
+To obtain or retrieve your Camunda 8 credentials for Enterprise licenses, visit the [contact page](/reference/contact.md).
 
 :::

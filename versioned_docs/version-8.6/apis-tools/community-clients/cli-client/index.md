@@ -5,6 +5,12 @@ sidebar_label: "Quick reference"
 description: "Learn how to use the community-supported CLI client and command line interface `zbctl` to interact with Camunda 8 and test a connection."
 ---
 
+:::note Heads up!
+This project is now community-supported.
+
+See the [announcement](reference/announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
+:::
+
 You can use the [community-supported](https://github.com/camunda-community-hub) `zbctl` command line interface to interact with Camunda 8.
 
 After installation, a connection can be tested immediately.
@@ -29,6 +35,8 @@ export ZEEBE_CLIENT_ID='[Client ID]'
 export ZEEBE_CLIENT_SECRET='[Client Secret]'
 export ZEEBE_AUTHORIZATION_SERVER_URL='[OAuth API]'
 ```
+
+For Self-Managed environment, the Zeebe API may look like `http://localhost:26500`, or `https://mydomain.com:26500` when using secure communication.
 
 When you create client credentials in Camunda 8, you have the option to download a file with the lines above filled out for you.
 

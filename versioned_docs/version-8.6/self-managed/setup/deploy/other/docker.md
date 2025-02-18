@@ -5,7 +5,7 @@ keywords: ["camunda docker"]
 description: "Step through multi-platform support, configuration, Docker images, and Docker Compose."
 ---
 
-:::warning
+:::danger
 While the Docker images themselves are supported for production usage, [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](/self-managed/setup/install.md) in production.
 :::
 
@@ -14,6 +14,8 @@ We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All 
 :::info
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
 :::
+
+## Component images
 
 | Component                                 | Docker image                                                                                                                                                                                                                                                                           | Link to configuration options                                                                                          |
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -25,6 +27,7 @@ The provided Docker images are supported for production usage only on Linux syst
 | Connectors                                | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)                                                                                                                                                                                                               | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                            |
 | Connectors Bundle                         | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle)                                                                                                                                                                                                 | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                            |
 | Web Modeler (restapi, webapp, websockets) | [camunda/web-modeler-restapi:latest](https://hub.docker.com/r/camunda/web-modeler-restapi), [camunda/web-modeler-webapp:latest](https://hub.docker.com/r/camunda/web-modeler-webapp), [camunda/web-modeler-websockets:latest](https://hub.docker.com/r/camunda/web-modeler-websockets) | [Configuration variables](/self-managed/modeler/web-modeler/configuration/configuration.md)                            |
+| Console                                   | [camunda/console:latest](https://hub.docker.com/r/camunda/console)                                                                                                                                                                                                                     | [Configuration variables](/self-managed/console-deployment/configuration.md)                                           |
 
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 

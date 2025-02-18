@@ -116,33 +116,13 @@ To implement a service task, take the following steps:
 
 ### Configure Spring Boot Starter
 
-See our documentation on [adding the Spring Zeebe SDK to your project](/apis-tools/spring-zeebe-sdk/getting-started.md#add-the-spring-zeebe-sdk-to-your-project) for more details, also described below:
+Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
-1. Copy the following code snippet into the `pom.xml` file of your Spring project, below properties and above dependencies:
-
-```
-<repositories>
-   <repository>
-      <releases>
-         <enabled>true</enabled>
-      </releases>
-      <snapshots>
-         <enabled>false</enabled>
-      </snapshots>
-      <id>identity</id>
-      <name>Camunda Identity</name>
-      <url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
-   </repository>
-</repositories>
-```
-
-2. Add the following dependency to your `pom.xml` file, as a child of the `<dependencies>` element:
-
-```
+```xml
 <dependency>
-   <groupId>io.camunda</groupId>
-   <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-   <version>8.5.0</version>
+    <groupId>io.camunda</groupId>
+    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+    <version>8.5.x</version>
 </dependency>
 ```
 

@@ -15,9 +15,16 @@ broker receives more requests than it can process with an acceptable
 latency, it rejects some requests (see [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md)).
 
 Alternatively, [flow
-control write rate limits](/docs/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) can also
+control write rate limits](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) can also
 be used with static write rate limits or throttling. This prevents the
 partition from building an excessive backlog of records not exported.
+
+:::note
+When [multi-tenancy](./../../concepts/multi-tenancy.md) is enabled in Camunda 8, a large number of concurrent requests
+may also lead to issues with Camunda Identity. In such cases, it is recommended to enable and configure the management of
+Identity requests in the Zeebe Gateway. This allows Zeebe to employ a backpressure mechanism against these requests.
+For more information, see the Zeebe Gateway [experimental configuration documentation](./../configuration/gateway.md#experimental-configuration).
+:::
 
 ### Terminology
 
@@ -34,7 +41,7 @@ The limit and inflight count are calculated per partition.
 Zeebe uses adaptive algorithms from [concurrency-limits](https://github.com/Netflix/concurrency-limits) to dynamically calculate the limit.
 Configure Zeebe with one of the backpressure algorithms in the following sections.
 
-The default values can be found in the [Zeebe broker standalone configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe broker configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template) in the `# backpressure` section.
+The default values can be found in the [Zeebe Broker standalone configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.standalone.yaml.template) or in the [Zeebe Broker configuration template](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template) in the `# backpressure` section.
 
 #### Fixed limit
 

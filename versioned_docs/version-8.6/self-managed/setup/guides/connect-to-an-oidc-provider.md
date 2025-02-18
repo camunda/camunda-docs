@@ -19,7 +19,7 @@ In this guide, we step through the configuration required to connect Camunda to 
   - Client ID
   - Client secrets
   - Audience
-- A [claim name and value](/self-managed/identity/deployment/configuration-variables.md/#oidc-configuration) to use for initial access.
+- A [claim name and value](/self-managed/identity/deployment/configuration-variables.md#oidc-configuration) to use for initial access.
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific
@@ -34,11 +34,14 @@ configuration](#component-specific-configuration) to ensure the components are c
 <h3>Steps</h3>
 
 1. In your OIDC provider, create an application for each of the components you want to connect. The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
-2. Make a note of the following values for each application you create:
+2. For all Components, ensure the appropriate application type is used:
+   - **Operate, Tasklist, Optimize, Identity:** Web applications requiring confidential access/a confidential client
+   - **Modeler, Console:** Single-page applications requiring public access/a public client
+3. Make a note of the following values for each application you create:
    - Client ID
    - Client secret
    - Audience
-3. Set the following environment variables for the component you are configuring an app for:
+4. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
 <TabItem value="env">
@@ -103,7 +106,7 @@ global:
 </TabItem>
 </Tabs>
 
-:::warning
+:::note
 Once set, you cannot update your initial claim name and value using environment or Helm values. You must change these values directly in the database.
 :::
 
@@ -124,7 +127,7 @@ Ensure you register a new application for each component.
 2. Navigate to the new application's **Overview** page, and make note of the **Client ID**.
 3. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
    - **Web**: Operate, Tasklist, Optimize, Identity
-   - **Single-page application**: Modeler
+   - **Single-page application**: Modeler, Console
 4. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
 5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use.
 6. Set the following environment variables for the component you are configuring an app for:
@@ -135,8 +138,8 @@ Ensure you register a new application for each component.
 ```
     CAMUNDA_IDENTITY_TYPE=MICROSOFT
     CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
-    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
+    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
     CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
     CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 5>
     CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 2>
@@ -152,13 +155,13 @@ Ensure you register a new application for each component.
 global:
   identity:
     auth:
-      issuer: https://login.microsoftonline.com/<Tenant ID>/v2.0
+      issuer: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
       # this is used for container to container communication
-      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/v2.0
-      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant id>/discovery/v2.0/keys
+      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/oauth2/v2.0/token
+      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/discovery/v2.0/keys
       type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Tenant ID>/v2.0
+      publicIssuerUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
       identity:
         clientId: <Client ID from Step 2>
         existingSecret: <Client secret from Step 5>
@@ -184,7 +187,7 @@ global:
       zeebe:
         clientId: <Client ID from Step 2>
         audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 53>
+        existingSecret: <Client secret from Step 5>
         tokenScope: "<Client ID from Step 2>/.default"
       webModeler:
         clientId: <Client ID from Step 2>
@@ -203,7 +206,7 @@ global:
 </TabItem>
 </Tabs>
 
-:::warning
+:::danger
 Once set, your initial claim name and value cannot be updated using environment or Helm values, and must be changed directly in the database.
 :::
 
@@ -229,10 +232,10 @@ The client should be configured to support `grant_type`:
 To successfully authenticate with Entra ID, you should use the `v2.0` API. This means that
 the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
 
-It's also important to follow the [steps described here](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#configure-the-app-manifest) to configure the app manifest and set the [accesstokenAcceptedVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-app-manifest#accesstokenacceptedversion-attribute) to `2` like so:
+Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entra/identity-platform/reference-microsoft-graph-app-manifest#configure-the-app-manifest-in-the-microsoft-entra-admin-center) to configure the app manifest, and set the [requestedAccessTokenVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-microsoft-graph-app-manifest#api-attribute) under `Api:` to `2`:
 
 ```json
-    "accessTokenAcceptedVersion": 2,
+    "requestedAccessTokenVersion": 2,
 ```
 
 </TabItem>
@@ -240,11 +243,11 @@ It's also important to follow the [steps described here](https://learn.microsoft
 
 ### Component-specific configuration
 
-| Component   | Redirect URI                                                                                                                           | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Component   | Redirect URI                                                                                                                           | Notes/Limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Identity    | **Microsoft Entra ID:** <br/> `https://<IDENTITY_URL>/auth/login-callback` <br/><br/> **Helm:** <br/> `https://<IDENTITY_URL>`         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | Operate     | **Microsoft Entra ID:** <br/> `https://<OPERATE_URL>/identity-callback` <br/><br/> **Helm:** <br/> `https://<OPERATE_URL>`             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Optimize    | **Microsoft Entra ID:** <br/> `https://<OPTIMIZE_URL>/api/authentication/callback` <br/><br/> **Helm:** <br/> `https://<OPTIMIZE_URL>` | There is a fallback if you use the existing ENV vars to configure your authentication provider, if you use a custom `yaml`, you need to update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following features are not currently available: User permissions tab in collections, digests, `Alerts` tab in collections.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Optimize    | **Microsoft Entra ID:** <br/> `https://<OPTIMIZE_URL>/api/authentication/callback` <br/><br/> **Helm:** <br/> `https://<OPTIMIZE_URL>` | There is a fallback if you use the existing ENV vars to configure your authentication provider, if you use a custom `yaml`, you need to update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following Optimize features are not currently available: <br/>- The user permissions tab in collections<br/>- The `Alerts` tab in collections<br/>- Digests<br/>- Accessible user names for Owners of resources (the `sub` claim value is displayed instead).                                                                                                                                                                                                                                                                                                                                                                                            |
 | Tasklist    | **Microsoft Entra ID:** <br/> `https://<TASKLIST_URL>/identity-callback` <br/><br/> **Helm:** <br/> `https://<TASKLIST_URL>`           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | Web Modeler | **Microsoft Entra ID:** <br/> `https://<WEB_MODELER_URL>/login-callback` <br/><br/> **Helm:** <br/> `https://<WEB_MODELER_URL>`        | Web Modeler requires two clients: one for the internal API, and one for the external/public API. <br/><br/> Required configuration variables for webapp:<br/> `OAUTH2_CLIENT_ID=[client-id]`<br/> `OAUTH2_JWKS_URL=[provider-jwks-url]`<br/> `OAUTH2_TOKEN_AUDIENCE=[client-audience]`<br/> `OAUTH2_TOKEN_ISSUER=[provider-issuer]`<br/> `OAUTH2_TYPE=[provider-type]`<br/><br/> Required configuration variables for restapi:<br/> `CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[client-audience]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[publicapi-audience]` (for security reasons, <strong>use a different value here than for `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API`</strong>)<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]` |
 | Console     | **Microsoft Entra ID:** <br/> `https://<CONSOLE_URL>` <br/><br/> **Helm:** <br/> `https://<CONSOLE_URL>`                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |

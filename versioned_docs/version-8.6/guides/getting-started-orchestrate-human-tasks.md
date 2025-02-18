@@ -1,13 +1,13 @@
 ---
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
-sidebar_label: Get started with human task orchestration
+sidebar_label: Human tasks
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 
 <span class="badge badge--beginner">Beginner</span>
-<span class="badge badge--medium">Time estimate: 15 minutes</span><br /><br />
+<span class="badge badge--medium">Time estimate: 15 minutes</span>
 
 import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesTop from './img/form-values-top.png';
@@ -27,8 +27,8 @@ import NavigationHistoryImg from './img/modeler-navigation-history.png';
 import clsx from "clsx";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import SaasPrereqs from './react-components/saas-prerequisites.md'
-import Install from './react-components/install-c8run.md'
+import SaasPrereqs from './react-components/\_saas-prerequisites.md'
+import Install from './react-components/\_install-c8run.md'
 
 Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 
@@ -72,7 +72,7 @@ In this step, you will design a process that demonstrates how to route the proce
 1. Every file in Web Modeler requires a project. Within Modeler, click **New project**.
 2. Name your project and select **Create new > BPMN diagram**.
 3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
+4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel on the right side of the screen. This specifies how the process will appear in other tools of Camunda 8.
 
 </TabItem>
 <TabItem value="sm">

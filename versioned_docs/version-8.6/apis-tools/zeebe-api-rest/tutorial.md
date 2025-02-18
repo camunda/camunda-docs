@@ -41,7 +41,7 @@ In this tutorial, we will execute arguments to assign and unassign a user to and
 ## Assign a Zeebe user task (POST)
 
 :::note
-In this tutorial, you will capture a **Zeebe user task** ID to assign and unassign users in this API. Camunda 8.5 introduced this new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type, and these Zeebe user tasks are different from job worker-based user tasks. See more details on task type differences in the [migrating to Zeebe user tasks documentation](/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks.md#task-type-differences).
+In this tutorial, you will capture a **Zeebe user task** ID to assign and unassign users in this API. Camunda 8.5 introduced this new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type, and these Zeebe user tasks are different from job worker-based user tasks (which while still supported, are now deprecated with 8.6). See more details on task type differences in the [migrating to Zeebe user tasks documentation](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md#task-type-differences).
 :::
 
 First, let's script an API call to assign a Zeebe user task.

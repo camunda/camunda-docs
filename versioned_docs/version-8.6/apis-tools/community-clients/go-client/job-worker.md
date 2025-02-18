@@ -5,6 +5,12 @@ description: "Let's take a deeper look at job workers to handle jobs."
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
+:::note Heads up!
+This project is now community-supported.
+
+See the [announcement](reference/announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
+:::
+
 The Go client provides a job worker that handles both polling and streaming for available jobs. This allows you to focus on writing code to handle the activated jobs.
 
 On `Open`, the job worker waits `PollInterval` milliseconds and then polls for `MaxJobsActive` jobs. It then continues with the following schedule:

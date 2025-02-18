@@ -2,7 +2,7 @@
 id: gateway-config
 title: "Gateway configuration"
 sidebar_label: "Gateway configuration"
-description: "Analyze how to configure the Zeebe gateway, including byte sizes, time units, paths, and sample YAML snippets."
+description: "Analyze how to configure the Zeebe Gateway, including byte sizes, time units, paths, and sample YAML snippets."
 ---
 
 The Zeebe Gateway can be configured similarly to the broker via the `application.yaml` file or environment variables. A complete gateway configuration template is available in the [Zeebe repository](https://github.com/camunda/camunda/blob/main/dist/src/main/config/gateway.yaml.template).
@@ -154,7 +154,7 @@ If you use the Helm charts, both properties are configured for you already.
 | contactPoint         | WARNING: This setting is deprecated! Use initialContactPoints instead. Sets the broker the gateway should initial contact. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_CONTACTPOINT`.                                                                                                                  | 127.0.0.1:26502                            |
 | requestTimeout       | Sets the timeout of requests sent to the broker cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_REQUESTTIMEOUT`.                                                                                                                                                                                  | 15s                                        |
 | clusterName          | Sets name of the Zeebe cluster to connect to. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_CLUSTERNAME`.                                                                                                                                                                                                | zeebe-cluster                              |
-| memberId             | Sets the member id of the gateway in the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERID`.                                                                                                                                                                                               | gateway                                    |
+| memberId             | Sets the member ID of the gateway in the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_MEMBERID`.                                                                                                                                                                                               | gateway                                    |
 | host                 | Sets the host the gateway node binds to for internal cluster communication. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_HOST`.                                                                                                                                                                         | 0.0.0.0                                    |
 | port                 | Sets the port the gateway node binds to for internal cluster communication. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_PORT`.                                                                                                                                                                         | 26502                                      |
 | advertisedHost       | Controls the advertised host; if omitted defaults to the host. This is particularly useful if your gateway stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_ADVERTISEDHOST`.                                                                                                         | 0.0.0.0                                    |
@@ -251,7 +251,7 @@ security:
 
 :::note
 The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
-Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
+Camunda Identity properties or the [corresponding SDK environment variables](../../identity/deployment/configuration-variables.md#camunda-identity-sdk-configuration).
 :::
 
 | Field            | Description                                                                                                                                                                                          | Example value                                     |
@@ -390,7 +390,8 @@ Each interceptor should be configured with the values described below:
         </tr>
         <tr>
             <td>className</td>
-            <td>Entry point of the interceptor, a class which must:
+            <td>
+              Entry point of the interceptor, a class which must:
               <li>implement <a href="https://grpc.github.io/grpc-java/javadoc/io/grpc/ServerInterceptor.html">io.grpc.ServerInterceptor</a></li>
               <li>have public visibility</li>
               <li>have a public default constructor (i.e. no-arg constructor)</li>
@@ -437,7 +438,8 @@ Each filter should be configured with the values described below:
         </tr>
         <tr>
             <td>className</td>
-            <td>Entry point of the filter, a class which must:
+            <td>
+              Entry point of the filter, a class which must:
               <li>implement <a href="https://www.javadoc.io/doc/jakarta.servlet/jakarta.servlet-api/6.0.0/jakarta.servlet/jakarta/servlet/Filter.html">jakarta.servlet.Filter</a></li>
               <li>have public visibility</li>
               <li>have a public default constructor (i.e. no-arg constructor)</li>
@@ -471,7 +473,7 @@ as well.
 :::
 
 :::note
-If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md/#multitenancy-configuration).
+If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md#multitenancy-configuration).
 :::
 
 | Field   | Description                                                                                                                                     | Example value |
@@ -484,3 +486,9 @@ If you are using an embedded gateway, refer to the [broker configuration guide](
 multiTenancy:
   enabled: true
 ```
+
+### Experimental configuration
+
+See the experimental section of the [gateway.yaml.template](https://github.com/camunda/camunda/blob/stable/8.6/dist/src/main/config/gateway.yaml.template#L298).
+
+Be aware that all configuration properties which are part of the experimental section are subject to change and can be dropped at any time.

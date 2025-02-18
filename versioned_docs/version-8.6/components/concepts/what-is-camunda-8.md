@@ -59,7 +59,7 @@ Model and deploy business process diagrams with BPMN and DMN. By using industry-
 
 #### Connectors
 
-Connectors help you communicate with systems and technology, reducing the time required to automate and orchestrate business processes that span multiple systems. Connectors are inserted into BPMN diagrams directly from within the Camunda Modeler interface. Once added to your diagram, they are configured via an intuitive properties panel.
+Connectors help you communicate with systems and technology, reducing the time required to automate and orchestrate business processes that span multiple systems. Connectors are inserted into BPMN diagrams directly from within the Camunda Modeler interface. Once added to your diagram, they are configured via an intuitive properties panel on the right side of the screen.
 
 #### Forms
 
@@ -105,7 +105,7 @@ The platform and tools are usable in your environment right away, with full publ
 
 ## Next steps
 
-- To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/contact/) page.
+- To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/reference/contact.md) page.
 - [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
 - [Create a Camunda 8 account](/guides/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)

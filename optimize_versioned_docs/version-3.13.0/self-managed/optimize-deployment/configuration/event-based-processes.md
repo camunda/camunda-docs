@@ -21,7 +21,7 @@ Configuration of the Optimize event-based process feature.
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-Configuration of the Optimize [event ingestion REST API](../../../apis-tools/optimize-api/event-ingestion.md) for [event-based processes](components/userguide/additional-features/event-based-processes.md).
+Configuration of the Optimize [event ingestion REST API](#) for [event-based processes](#).
 
 | YAML path                                             | Default value | Description                                                                                                                                                                                                                                                                       |
 | ----------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

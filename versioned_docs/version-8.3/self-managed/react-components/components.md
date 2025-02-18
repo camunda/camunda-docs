@@ -7,7 +7,7 @@
 - Connectors
 - Optimize
 - Identity
-- Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](/reference/licenses.md/#web-modeler)
+- Web Modeler [<span class="badge badge--enterprise-only">Enterprise only</span>](/reference/licenses.md#web-modeler)
 
 All components except Web Modeler and Console are single Java applications. Depending on your needs, you might not need all of the above components to successfully use Camunda 8.
 
@@ -15,6 +15,6 @@ Camunda 8 Self-Managed users may also use [Desktop Modeler](../../components/mod
 
 :::note
 
-To obtain or retrieve your Camunda 8 credentials for Enterprise licenses, visit the [contact page](/contact).
+To obtain or retrieve your Camunda 8 credentials for Enterprise licenses, visit the [contact page](/reference/contact.md).
 
 :::

@@ -1,5 +1,5 @@
 extends: existence
-message: "Improper link format: '%s'. Please specify the file extension."
+message: "Improper link format: `%s`. Please specify the file extension."
 level: warning
 nonword: true
 scope: raw

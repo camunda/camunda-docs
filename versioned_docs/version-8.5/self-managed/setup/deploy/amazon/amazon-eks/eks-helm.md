@@ -12,7 +12,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 
 ## Prerequisites
 
-- A Kubernetes cluster; see the [eksctl](./eksctl.md) or [terraform](./terraform-setup.md) guide.
+- A Kubernetes cluster; see the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) guide.
 - [Helm (3.16+)](https://helm.sh/docs/intro/install/)
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](../../../../../../apis-tools/cli-client/) or [Camunda Modeler](https://camunda.com/download/modeler/).
@@ -105,7 +105,7 @@ Consider setting `domainFilters` via `--set` to restrict access to certain hoste
 Make sure to have `EXTERNAL_DNS_IRSA_ARN` exported prior by either having followed the [eksctl](./eksctl.md#policy-for-external-dns) or [Terraform](./terraform-setup.md#outputs) guide.
 :::
 
-:::warning
+:::danger
 If you are already running `external-dns` in a different cluster, ensure each instance has a **unique** `txtOwnerId` for the TXT record. Without unique identifiers, the `external-dns` instances will conflict and inadvertently delete existing DNS records.
 
 In the example below, it's set to `external-dns` and should be changed if this identifier is already in use. Consult the [documentation](https://kubernetes-sigs.github.io/external-dns/v0.15.0/#note) to learn more about DNS record ownership.
@@ -189,7 +189,7 @@ For more configuration options, refer to the [Helm chart documentation](https://
 
 The following makes use of the [combined ingress setup](/self-managed/setup/guides/ingress-setup.md#combined-ingress-setup) by deploying a single ingress for all HTTP components and a separate ingress for the gRPC endpoint.
 
-:::warning
+:::danger
 
 Publicly exposing the Zeebe Gateway without authorization enabled can lead to severe security risks. Consider disabling the ingress for the Zeebe Gateway by setting the `zeebeGateway.ingress.grpc.enabled` and `zeebeGateway.ingress.rest.enabled` to `false`.
 

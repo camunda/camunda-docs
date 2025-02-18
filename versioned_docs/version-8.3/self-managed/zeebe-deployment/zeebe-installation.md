@@ -4,7 +4,7 @@ title: "Overview"
 sidebar_label: "Overview"
 ---
 
-:::warning
+:::danger
 Zeebe does not support network file systems (NFS) other types of network storage volumes at this time. Usage of NFS may cause data corruption.
 :::
 

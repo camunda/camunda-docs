@@ -276,10 +276,6 @@ An important problem to solve is how to roll back a business transaction in case
 
 In BPMN, you can use [compensation events](/components/modeler/bpmn/bpmn-coverage.md) to easily implement compensations in your processes.
 
-:::note
-The compensation event is supported in Camunda 7, but not yet in Camunda 8. It is on the roadmap and will eventually be available in Camunda 8.
-:::
-
 <div bpmn="workflow-patterns/compensation.bpmn" callouts="comp1task, comp3task, comp1, compThrow" />
 
 <span className="callout">1</span>

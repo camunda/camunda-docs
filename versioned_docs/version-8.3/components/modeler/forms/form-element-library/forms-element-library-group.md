@@ -6,7 +6,7 @@ description: Learn about the group form element to group multiple form elements
 
 The group element serves as a container to group various form elements together. It allows for nesting of fields and assists in organizing complex forms.
 
-![Form Group Symbol](/img/form-icons/form-group.svg)
+<img src="/img/form-icons/form-group.svg" alt="Form Group Symbol" />
 
 ### Configurable properties
 
@@ -14,7 +14,7 @@ The group element serves as a container to group various form elements together.
 - **Path**: Assigns a path that maps its children into a data object, may be left empty, defined as a variable name or a dot separated variable accessor. See the [data binding docs](../configuration/forms-config-data-binding.md) for more details.
 - **Show outline**: Can be toggled on and off to display a separating outline around the group
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the group.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).
 
 ### Usage
 
