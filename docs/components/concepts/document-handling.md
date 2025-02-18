@@ -32,8 +32,6 @@ Use [AWS S3](https://aws.amazon.com/s3/) storage and bucket creation per cluster
 
 <!--- same limitations as SaaS? if so, make one section --->
 
-<!--- insert section regarding API capabilities? --->
-
 ## Use cases and capabilities
 
 Document handling may be beneficial for several use cases. For example:
@@ -47,9 +45,9 @@ Document handling may be beneficial for several use cases. For example:
 
 ![example payload inbound webhook connector](./assets/inbound-webhook-document.png)
 
-<!--- Explain how to then retrieve the document in another Connector to store it in a third-party system or provide a screenshot with some text --->
+The document reference received as an output of one Connector should be stored in process variables by using the result expression or result variable.
 
-Review the list of [outbound Connectors](#outbound-connectors) below which currently support retrieving the document content to store in a third-party system.
+Then, another Connector can use this variable as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure. Review the list of [outbound Connectors](#outbound-connectors) below which currently support retrieving the document content to store in a third-party system.
 
 ### Upload a document via public form
 
@@ -78,12 +76,10 @@ The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk
 For the following outbound Connectors, you may include a **Request body** under **Payload** in the properties panel to send with your request:
 
 - [REST](/components/connectors/protocol/rest.md) - Supports storing the response as a document.
-- [Email](/components/connectors/out-of-the-box-connectors/email.md#response-structure-1) - Supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents.
-- [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md) - Can read the input document directly from the Camunda document store.
-- [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) - Supports consuming documents as inputs for conversations.
-- [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md) - Supports uploading documents from (or downloading documents to) the Camunda document store.
-- [Box](/components/connectors/out-of-the-box-connectors/box.md) - Supports uploading documents from (or downloading documents to) the Camunda document store.
+- [Email](/components/connectors/out-of-the-box-connectors/email.md#response-structure-1) - Supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents. These documents are automatically stored in the Camunda document store and available to map in the result expression.
+- [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md) - Can read the input document directly from the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided.
+- [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) - Supports consuming documents as inputs for conversations. Review the **Document** field in the properties panel where the document reference can be provided.
+- [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md) - Supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided.
+- [Box](/components/connectors/out-of-the-box-connectors/box.md) - Supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided.
 
 ![example REST configuration](./assets/rest-outbound-document.png)
-
-<!--- need to outline what this looks like for each supported connector in the related connector documentation, and link to these sections instead of the connector as done above --->
