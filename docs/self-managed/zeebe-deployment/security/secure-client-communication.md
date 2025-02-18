@@ -113,11 +113,15 @@ Then start up your gateway with the certificate and key specified above. For exa
 docker run -p 26500:26500 -e ZEEBE_BROKER_NETWORK_HOST=0.0.0.0 -e ZEEBE_BROKER_GATEWAY_SECURITY_ENABLED=true -e ZEEBE_BROKER_GATEWAY_SECURITY_CERTIFICATECHAINPATH=/usr/local/zeebe/cert.pem -e ZEEBE_BROKER_GATEWAY_SECURITY_PRIVATEKEYPATH=/usr/local/zeebe/key.pem --mount type=bind,source="$(pwd)"/cert.pem,target=/usr/local/zeebe/cert.pem --mount type=bind,source="$(pwd)"/key.pem,target=/usr/local/zeebe/key.pem camunda/zeebe
 ```
 
+<!-- ADD REST API ENDPOINT !-->
+
 There is one caveat: in order for the client to accept this self-signed certificate, you will need to trust it. The simplest way is to specify it as part of the client's configuration. For example, if you're using `zbctl`, you can then do `zbctl --certPath cert.pem status`. Refer to the documentation above on how to configure your clients.
 
 ## Troubleshooting authentication issues
 
 Here we will describe a few ways the clients and gateway could be misconfigured and what those errors look like. Hopefully, this will help you recognize these situations and provide an easy fix.
+
+<!-- ADD REST API ENDPOINT !-->
 
 ### TLS is enabled in `zbctl` but disabled in the gateway
 
@@ -156,9 +160,13 @@ io.netty.handler.codec.http2.Http2Exception: HTTP/2 client preface string missin
   at java.lang.Thread.run(Thread.java:748)
 ```
 
+<!-- ADD REST API ENDPOINT !-->
+
 **Solution:** Either enable TLS in the gateway as well or specify the `--insecure` flag when using `zbctl`.
 
 ### TLS is disabled in `zbctl` but enabled for the gateway
+
+<!-- ADD REST API ENDPOINT !-->
 
 `zbctl` will fail with the following error:
 
@@ -169,6 +177,8 @@ Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure
 **Solution:** Either enable TLS in the client by specifying a path to a certificate or disable it in the gateway by editing the appropriate configuration file.
 
 ### TLS is enabled for both client and gateway but the CA certificate can't be found
+
+<!-- ADD REST API ENDPOINT !-->
 
 `zbctl` will fail with the following error:
 

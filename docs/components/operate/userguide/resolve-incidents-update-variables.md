@@ -4,6 +4,8 @@ title: Variables and incidents
 description: "Let's examine variable and incidents."
 ---
 
+<!-- ADD REST API ENDPOINT !-->
+
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 

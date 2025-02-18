@@ -154,6 +154,8 @@ kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 
 Run the following command to see the current status of the cluster:
 
+<!-- ADD REST API ENDPOINT !-->
+
 ```
 zbctl --insecure status
 ```
@@ -250,6 +252,8 @@ When the scaling has completed, the changeId from the previous response will be 
 This step is optional, but it is useful when you are testing to see if scaling worked as expected.
 
 Run the following command to see the current status of the cluster:
+
+<!-- ADD REST API ENDPOINT !-->
 
 ```
 zbctl --insecure status

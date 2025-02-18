@@ -18,16 +18,7 @@ When a message is published and the message name and correlation key match to a 
 
 A subscription is closed when the corresponding element (e.g. the message catch event), or its scope is left. After a subscription is opened, it is not updated (for example, when the referenced process instance variable is changed.)
 
-<details>
-   <summary>Publish message via zbctl</summary>
-   <p>
-
-```
-zbctl publish message "Money collected" --correlationKey "order-123"
-```
-
-   </p>
- </details>
+<!-- ADD REST API ENDPOINT !-->
 
 ## Message buffering
 
@@ -39,16 +30,7 @@ When a subscription is opened, it polls the buffer for a proper message. If a pr
 
 The buffering of a message is disabled when its TTL is set to zero. If no proper subscription is open, the message is discarded.
 
-<details>
-   <summary>Publish message with TTL via zbctl</summary>
-   <p>
-
-```
-zbctl publish message "Money collected" --correlationKey "order-123" --ttl 1h
-```
-
-   </p>
- </details>
+<!-- ADD REST API ENDPOINT !-->
 
 ## Message cardinality
 
@@ -66,16 +48,7 @@ A message is rejected and not correlated if a message with the same name, the sa
 
 The uniqueness check is disabled when no message ID is set.
 
-<details>
-   <summary>Publish message with ID via zbctl</summary>
-   <p>
-
-```
-zbctl publish message "Money collected" --correlationKey "order-123" --messageId "tracking-12345"
-```
-
-   </p>
- </details>
+<!-- ADD REST API ENDPOINT !-->
 
 ## Message correlation overview
 

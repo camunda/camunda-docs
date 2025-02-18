@@ -26,29 +26,7 @@ This command creates a new process instance and immediately responds with the pr
 
 ![create-process](assets/create-process.png)
 
-<details>
-  <summary>Code example</summary>
-  <p>
-Create a process instance:
-
-```
-zbctl create instance "order-process"
-```
-
-Response:
-
-```
-{
-  "processKey": 2251799813685249,
-  "bpmnProcessId": "order-process",
-  "version": 1,
-  "processInstanceKey": 2251799813686019
-}
-
-```
-
-  </p>
-</details>
+<!-- ADD REST API ENDPOINT !-->
 
 ### Create and await results
 
@@ -66,33 +44,7 @@ If the process mutates system state, or further operations rely on the process o
 When the client resends the command, it creates a new process instance.
 :::
 
-<details>
-  <summary>Code example</summary>
-  <p>
-Create a process instance and await results:
-
-```
-zbctl create instance "order-process" --withResult --variables '{"orderId": "1234"}'
-```
-
-Response:
-
-:::note
-The variables in the response depend on the process.
-:::
-
-```
-{
-  "processKey": 2251799813685249,
-  "bpmnProcessId": "order-process",
-  "version": 1,
-  "processInstanceKey": 2251799813686045,
-  "variables": "{\"orderId\":\"1234\"}"
-}
-```
-
-  </p>
-</details>
+<!-- ADD REST API ENDPOINT !-->
 
 Failure scenarios applicable to other commands are applicable to this command as well. Clients may not get a response in the following cases even if the process execution is completed successfully:
 

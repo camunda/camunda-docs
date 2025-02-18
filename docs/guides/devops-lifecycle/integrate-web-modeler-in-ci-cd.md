@@ -178,6 +178,8 @@ In the build stage, deploy your process or project to a cluster or embedded engi
 For GitLab users, consider using [GitLab Review Apps](https://docs.gitlab.com/ee/ci/review_apps/) to provide preview environments.
 :::
 
+<!-- ADD REST API ENDPOINT !-->
+
 Deploy resources using the [`zbctl` CLI](/apis-tools/community-clients/cli-client/index.md) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the [Java](/apis-tools/java-client/index.md) client library or any [community-built alternatives](/apis-tools/community-clients/index.md).
 
 :::info Feature branches and Web Modeler installations
@@ -205,6 +207,8 @@ Pagination is enforced for all listed `search` endpoints. Ensure you obtain all 
 To retrieve the actual file `content`, iterate over the response and fetch it via `GET /api/v1/files/:id`. Parse the XML of the diagram for the `zeebe:taskDefinition` tag to retrieve job worker types. Utilizing a job worker registry mapping, deploy these workers along with the process if required.
 
 If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](/self-managed/connectors-deployment/install-and-start.md) for Self-Managed, or [here](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) for SaaS.
+
+<!-- ADD REST API ENDPOINT !-->
 
 Deploy resources in this pipeline step using the [`zbctl` CLI](/apis-tools/community-clients/cli-client/index.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java or Go client library or any community-built alternatives.
 
@@ -256,6 +260,8 @@ If deployed in a review environment, processes/applications can be shared with p
 In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Play mode](/components/modeler/web-modeler/play-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
 
 ### Publish stage
+
+<!-- ADD REST API ENDPOINT !-->
 
 Push approved changes to staging or production by deploying them to the respective clusters. You can use the [`zbctl` CLI](/apis-tools/community-clients/cli-client/index.md) to deploy via your pipeline, which works both for a SaaS or Self-Managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
 
