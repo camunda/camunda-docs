@@ -18,7 +18,24 @@ When a message is published and the message name and correlation key match to a 
 
 A subscription is closed when the corresponding element (e.g. the message catch event), or its scope is left. After a subscription is opened, it is not updated (for example, when the referenced process instance variable is changed.)
 
-<!-- ADD REST API ENDPOINT !-->
+<details>
+   <summary>Publish message via Camunda 8 REST API</summary>
+   <p>
+
+```
+curl -L 'http://localhost:8080/v2/messages/publication' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "name": "Money collected",
+  "correlationKey": "order-123"
+}'
+```
+
+See [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
 
 ## Message buffering
 
@@ -30,7 +47,25 @@ When a subscription is opened, it polls the buffer for a proper message. If a pr
 
 The buffering of a message is disabled when its TTL is set to zero. If no proper subscription is open, the message is discarded.
 
-<!-- ADD REST API ENDPOINT !-->
+<details>
+   <summary>Publish message with TTL via Camunda 8 REST API</summary>
+   <p>
+
+```
+curl -L 'http://localhost:8080/v2/messages/publication' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "name": "Money collected",
+  "correlationKey": "order-123",
+  "timeToLive": 3600000
+}'
+```
+
+See [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
 
 ## Message cardinality
 
@@ -48,7 +83,25 @@ A message is rejected and not correlated if a message with the same name, the sa
 
 The uniqueness check is disabled when no message ID is set.
 
-<!-- ADD REST API ENDPOINT !-->
+<details>
+   <summary>Publish message with TTL via Camunda 8 REST API</summary>
+   <p>
+
+```
+curl -L 'http://localhost:8080/v2/messages/publication' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "name": "Money collected",
+  "correlationKey": "order-123",
+  "messageId": "tracking-12345"
+}'
+```
+
+See [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
 
 ## Message correlation overview
 
