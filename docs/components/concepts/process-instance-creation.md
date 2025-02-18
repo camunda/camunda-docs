@@ -70,7 +70,7 @@ curl -L 'http://localhost:8080/v2/process-instances' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -d '{
-  "processDefinitionKey": "2251799813685249”,
+  "processDefinitionId": "order-process”,
   "processDefinitionVersion": 1,
   "variables": { "orderId": "1234" }
 }'
@@ -110,25 +110,29 @@ Start instructions have the same [limitations as process instance modification](
 Start instructions are supported for both `CreateProcessInstance` commands.
 
 <details>
-  <summary>Code example</summary>
-  <p>
+   <summary>Create a process instance and await results via Camunda 8 REST API</summary>
+   <p>
 
-  <!-- For consistency, this should be adjusted to cURL and the C8 REST API -->
-
-Create a process instance starting before the 'ship_parcel' element:
-
-```java
-client.newCreateInstanceCommand()
-  .bpmnProcessId("order-process")
-  .latestVersion()
-  .variables(Map.of("orderId", "1234"))
-  .startBeforeElement("ship_parcel")
-  .send()
-  .join();
+```
+curl -L 'http://localhost:8080/v2/process-instances' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "processDefinitionId": "order-process”,
+  "processDefinitionVersion": -1,
+  "startInstructions": [
+    {
+      "elementId": "ship_parcel"
+    }
+  ],
+  "variables": { "orderId": "1234" }
+}'
 ```
 
-  </p>
-</details>
+See [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
 
 ## Events
 
