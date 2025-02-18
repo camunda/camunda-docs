@@ -5,6 +5,7 @@ description: "Learn about Camunda 8 SaaS, the fully managed cloud-based service 
 ---
 
 import SaasArchitectureImg from './assets/saas-architecture.png';
+import SaasComplianceImg from './assets/saas-compliance.png';
 
 Camunda 8 SaaS allows you to run Camunda 8 as a fully managed cloud-based service requiring no technical setup or installation, with all maintenance and scaling handled by Camunda.
 
@@ -14,24 +15,30 @@ Choose [Camunda 8 Self-Managed](/self-managed/about-self-managed.md) if you want
 
 ## Get started
 
-It's easy to get started using Camunda 8 SaaS!
+Sign up and start your developer journey with camunda 8 SaaS.
 
 ### <span className="callout">1</span>Sign up and log in
 
 1. Visit [signup.camunda.com/accounts](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral) to sign up.
 1. Fill out the signup form and click **Create account**.
 1. Click on the link in your confirmation email to verify your email address.
-1. Log in to Camunda 8 SaaS using the email address and password you signed up with or via the social login buttons.
-
-:::tip
-You can also log in to Camunda 8 SaaS directly at [camunda.io](https://weblogin.cloud.camunda.io/).
-:::
+1. Log in to Camunda 8 SaaS using either the email address and password you signed up with or the social login buttons. You can also log in to Camunda 8 SaaS directly at [camunda.io](https://weblogin.cloud.camunda.io/).
 
 ### <span className="callout">2</span>Configure access keys
 
+Content.
+
+### <span className="callout">3</span>Connect to your cluster
+
+Get endpoint and connect to the cluster
+
+:::note
+Enterprise plan users can optionally choose to add IP filtering to restrict access to clusters using an [IP allowlist](/components/console/manage-clusters/manage-ip-allowlists.md).
+:::
+
 ## Architecture
 
-The Camunda 8 SaaS platform is built on the Google Cloud Platform (GCP) and based on a micro-services architecture.
+The Camunda 8 SaaS platform is built on Google Cloud Platform (GCP) and based on a microservices architecture.
 
 <img src={SaasArchitectureImg} alt="World map showing the location of each GCP and AWS region" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
@@ -60,13 +67,13 @@ You can interact with Zeebe in SaaS using both gRPC and REST APIs. See [working 
 
 You can configure a number of deployment options to meet your specific business and hosting requirements. For example, you can choose where to host your data and what level of data encryption to use.
 
-| Deployment option                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| :--------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Cluster](/components/concepts/clusters.md)                      | Configure the cluster [type](/components/concepts/clusters.md#cluster-type) and [size](/components/concepts/clusters.md#cluster-size) to meet your organization's availability and scalability needs, and to provide control over cluster performance, [availability and uptime](/components/concepts/clusters.md#cluster-availability-and-uptime), and disaster recovery guarantees.                                                                                                                                                                                                                                                                                                                |
-| [Region and hosting type](/reference/regions.md)                 | Choose the region and type of hosting you want to use for your clusters. GCP and AWS region hosting options are available.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| [Encryption at rest](/components/concepts/encryption-at-rest.md) | <p>Cluster data is encrypted at rest to provide security and protection for your data.</p><p><ul><li><p>By default, Camunda 8 SaaS GCP and AWS cluster data at rest is protected with a provider-managed encryption key using GCP encryption. The encryption key is owned and managed by GCP.</p></li><li><p>Enterprise customers requiring a higher level of protection can select a dedicated Camunda-managed software or hardware (HSM) encryption key when creating a new GCP cluster. The encryption key is managed by Camunda using Google Cloud Key Management Service (KMS).</p></li><li><p>Camunda-managed encryption is not currently supported for AWS region clusters.</p></li></ul></p> |
-| [Backups](/components/concepts/backups.md)                       | Back up the state of all of Camunda 8 components (Zeebe, Operate, Tasklist, and Optimize) on a regular basis and with zero downtime. In case of failures that lead to data loss, you can request to restore the backup.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| [Auto-updates](/reference/auto-updates.md)                       | Camunda 8 SaaS customers can enable auto-updates. When enabled, the cluster is updated once a new patch release is available.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Deployment option                                                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| :--------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Cluster](/components/concepts/clusters.md)                      | <p>Configure the cluster [type](/components/concepts/clusters.md#cluster-type) and [size](/components/concepts/clusters.md#cluster-size) to meet your organization's availability and scalability needs, and to provide control over cluster performance, [availability and uptime](/components/concepts/clusters.md#cluster-availability-and-uptime), and disaster recovery guarantees.</p><p>To learn more about choosing your cluster size, see [sizing your runtime environment](/components/best-practices/architecture/sizing-your-environment.md#sizing-your-runtime-environment).</p>                                                                                               |
+| [Region](/reference/regions.md)                                  | Choose the region and type of hosting you want to use for your clusters. GCP and AWS region hosting options are available.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| [Encryption at rest](/components/concepts/encryption-at-rest.md) | <p>Cluster data is encrypted at rest to provide data security and protection.</p><p><ul><li><p>By default, Camunda 8 SaaS GCP and AWS cluster data at rest is protected with a provider-managed encryption key using GCP encryption. The encryption key is owned and managed by GCP.</p></li><li><p>Enterprise customers requiring a higher level of protection can select a dedicated Camunda-managed software or hardware (HSM) encryption key when creating a new GCP cluster. The encryption key is managed by Camunda using Google Cloud Key Management Service (KMS).</p></li><li><p>Camunda-managed encryption is not currently supported for AWS region clusters.</p></li></ul></p> |
+| [Backups](/components/concepts/backups.md)                       | Back up the state of all Camunda 8 components (Zeebe, Operate, Tasklist, and Optimize) on a regular basis and with zero downtime. In case of failures that lead to data loss, you can request to restore the backup.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| [Auto-updates](/reference/auto-updates.md)                       | Camunda 8 SaaS customers can enable auto-updates. When enabled, the cluster is updated once a new patch release is available.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
 ### Data storage
 
@@ -89,7 +96,7 @@ Camunda 8 SaaS offers a number of monitoring options to help you keep track of y
 
 ### Compliance
 
-At Camunda, we're committed to Information Security, Privacy and Compliance. Our mission is to establish trust through transparency.
+<p><a title="Find a Camunda connector" href="https://camunda.com/trust-center/" target="_new"><img src={SaasComplianceImg} alt="Visit the Camunda Trust Center" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '35%'}} className="fade-in-top-image" title="Visit the Camunda Trust Center"/></a>At Camunda, we're committed to Information Security, Privacy and Compliance. Our mission is to establish trust through transparency.</p>
 
 - Visit the [Camunda Trust Center](https://camunda.com/trust-center/) to learn more about our standards and certifications, including SOC 2 compliance, ISO/IEC 27001 certification, and GDPR Compliance.
 - Camunda is a member of the [Cloud Security Alliance](https://cloudsecurityalliance.org/star/registry/camunda/services/camunda).
@@ -112,10 +119,6 @@ Camunda 8 SaaS supports the following access controls.
 :::note
 In Enterprise plans, the hostname section of the email address for invites can be restricted to meet your internal security policies. To learn more, contact your Customer Success Manager.
 :::
-
-### Known SaaS limitations
-
-Content.
 
 ## Support
 
