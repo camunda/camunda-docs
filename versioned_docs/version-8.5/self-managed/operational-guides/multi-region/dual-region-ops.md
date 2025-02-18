@@ -76,7 +76,7 @@ The **failover** phase of the procedure results in the temporary restoration of 
 
 The **failback** phase of the procedure results in completely restoring the failed region to its full functionality. It requires you to have the lost region ready again for the redeployment of Camunda 8.
 
-:::warning
+:::danger
 
 For the **failback** procedure, your recreated region cannot contain any active Camunda 8 deployments or leftover persistent volumes related to Camunda 8 or its Elasticsearch instance. You must start from a clean slate and not bring old data from the lost region, as states may have diverged.
 
@@ -556,7 +556,7 @@ You currently have the following setups:
 
 #### Desired state
 
-:::warning
+:::danger
 
 This step is very important to minimize the risk of losing any data when restoring the backup in the recreated region.
 

@@ -53,7 +53,7 @@ To evaluate user tasks, the following features are available in the report build
 
 ## Good to know
 
-:::warning Known limitations
+:::danger Known limitations
 
 - Currently, user task analytics can be used only with assigned or unassigned time. We are working on analyzing net-work time.
 - This will only work with Tasklist and custom task applications implementing the complete [Camunda Tasklist Lifecycle]($docs$/apis-tools/frontend-development/task-applications/introduction-to-task-applications/).

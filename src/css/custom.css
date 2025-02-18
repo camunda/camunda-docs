@@ -331,6 +331,11 @@ body {
     sans-serif;
 }
 
+.alert a {
+  text-decoration: underline;
+  text-decoration-color: var(--ifm-alert-border-color);
+}
+
 .alert--primary {
   background-color: #14d890;
 }

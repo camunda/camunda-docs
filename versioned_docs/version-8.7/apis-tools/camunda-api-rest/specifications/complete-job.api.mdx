@@ -1,0 +1,251 @@
+---
+id: complete-job
+title: "Complete job"
+description: "Complete a job with the given payload, which allows completing the associated service task."
+sidebar_label: "Complete job"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWE1z2zYQ/SsYnJIpLSqp0ya8qY7TOk1Sj620B9eHJbgSYYMAA4CWORr+984CpD6tNJ1Jb9KMRiKx2N2HfQ8kdsk9zB3Pbvh7k/PbhBfohJW1l0bzjJ+ZqlbokQG7MzlbSF8yXyKbywfUrIZWGSgStiilKBkoZRaOiThH6nkwBeeMkOCxYA7tgxTIPLj70d+aJ7wGCxV6tJTCkmuokGf8zuS/Y8sTLimHGnzJE27xSyMtFjzztsHdRKclsntsmZmFoJSsN0MqOOIJd6LECni25L6tKYrzVuo577rb6Byd/8UULVmsY81AOUy4MNqj9jQGda2kAIqb3jkKvtz3bfI7FJ4AWlOj9RIdjT6AlZCreAFFIckLqMsNo0PgVlM3ca2wUmEI5G543ShFs6Lfrku4l54uqdx9caXRVxE+7zoysehqo13M8uX4lH72EwphYVVuKm8jBDo3a5RqR7xL+Ol4/JW521yi4gnQ2niW49rpiH00FlmBHqRyDCyy2poHWWDBpA7zh3RZboo20upAuWprcoXVD/tl205xwi6jZR+XxfVk4Fg0zGP0m6t3Z+zN6aufb5+V3tcuS9PFYjGyM3GChfTGjoydp3Ym6Et2z0dsWqJFVkFLMNcUYGuiMFejkDMpqNIEsE+bUXEjvq+zLI7u8jzhM2Mr8DzjjZV8l2MT9vnqgskCtZezdhDvVugwZwaNIh+Qm8ZnuQJ9z9e02g+6G8U1VQV2JdTtAF3CnQffbMDgUnuco93MX2r/48s930Ss36bTSxZdMGEKZDNjmS+lGwIRiEpqWTUVz07H44RX8BivfhqPO/JJFf8GJJrhY61AB2rtwpGaVWveBmBSOw9afK/KGCvncjfuiG9KvCfx24goavv0q3LelyQpnDQ5M40uRkdpHaV1lNZBab35T9KSbniCLazR87C2yERjLWqv2uOT7yjPozy/nzxfPfUyOtGMVtkSD9FaY5kRQYEFnWlUcE/vtEPs/pxw1NpRa0etHdJal/AKfWkKOrwbF6hDZ/iMp3cmd+kynu+7VKwOoHQ+R/sw9AEaq3jGl1E5XZamy9I432XL2ljfpQ9Ulq2zNA1HhQ3MUUaAKmP0/QrSADUbBmRnUDW6APaaXZ1fT9mv4HEB8RBLIbddvx6/Hj/plUwPeJxcXrCIMPJvY08Y3JK4n3Qbjb/FcehlOBSNlb69pmlxeXIEi3bSUBFWvOjjBe90HY140v95N7Dl/V/TUHDaz67WfZLzR6Dq7bY1ukDCmQmBeorsp0z1Q+sixvHoxT4dLy+CqoSpqkaHrVXP41sUbCyBUI3zBD3hSgrULuTTt5EGsw9xhP0ZI7IXIypf5Niwo86lL5t8JEyVijht9Zsrk6cVSJ32IVx6Nvn4+dPbycmHi7PzT9fnJy9G45F/9GGZiPEV6M08hm7Nncl3gS7XT5H/vdnW193jo09rBVITE8MyLHuB3lDrzfGEZ6sW3IZGb5NeZzd8uczB4Weruo5uf2nQtjy7uV3LMui4kI7+r/toB7E/u+pbbs/Zv7fyngTS3wTdhs1BNXTFE36P7bql2N12CS8RCrQhwTh4FtM4mZKL9eS9Tl+XDDMmQmDtD9huvQCQIle74eUf11MSWN9mrExBcy0sqL8Ji5iwCcsTdBvuLbkCPW9gHlqjwSd9/gGw2oHi
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Complete job"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/{jobKey}/completion"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Complete a job with the given payload, which allows completing the associated service task.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "jobKey",
+      in: "path",
+      required: true,
+      description: "The key of the job to complete.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variables: {
+              additionalProperties: true,
+              description: "The variables to complete the job with.",
+              type: "object",
+              nullable: true,
+            },
+          },
+          title: "JobCompletionRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The job was completed successfully." },
+    "400": {
+      description:
+        "The job with the given key cannot be completed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The job with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The job with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

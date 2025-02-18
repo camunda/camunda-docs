@@ -21,7 +21,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 ## Make your REST Connector executable
 
-To make the **REST Connector** executable, choose the required authentication type and fill out the mandatory fields highlighted in red in the properties panel:
+To make the **REST Connector** executable, choose the required authentication type and fill out the mandatory fields highlighted in red in the properties panel on the right side of the screen.
 
 :::note
 All the mandatory and non-mandatory fields will be covered in the upcoming sections. Depending on the authentication selection you make, more fields might be required. We will also cover this in the next section.
@@ -220,6 +220,10 @@ The following fields are available in the `response` variable:
 - **status**: Response status
 - **body**: Response body of your request
 - **headers**: Response headers
+
+:::note
+If your endpoint returns multiple Set-Cookie headers and you need to capture all of them, set `groupSetCookieHeaders` to `true` to aggregate them into a list.
+:::
 
 ## Output mapping
 

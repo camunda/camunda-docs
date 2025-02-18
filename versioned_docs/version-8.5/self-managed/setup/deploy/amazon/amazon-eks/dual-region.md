@@ -8,7 +8,7 @@ description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a p
 
 import CoreDNSKubeDNS from "./assets/core-dns-kube-dns.svg"
 
-:::warning
+:::danger
 Review our [dual-region concept documentation](./../../../../concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
 :::
 
@@ -33,7 +33,7 @@ To try out Camunda 8 or develop against it, consider signing up for our [SaaS of
 
 For the simplicity of this guide, certain best practices will be provided with links to additional resources, enabling you to explore the topic in more detail.
 
-:::warning
+:::danger
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), traffic between regions, and S3. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
@@ -62,7 +62,7 @@ git clone -b stable/8.5 https://github.com/camunda/c8-multi-region.git
 2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/c8-multi-region/blob/stable/8.5/aws/dual-region/scripts/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
 3. You must adjust these environment variable values within the script to your needs.
 
-:::warning
+:::danger
 
 You have to choose unique namespaces for Camunda 8 installations. The namespace for Camunda 8 installation in the cluster of region 0 (`CAMUNDA_NAMESPACE_0`), needs to have a different name from the namespace for Camunda 8 installation in the cluster of region 1 (`CAMUNDA_NAMESPACE_1`). This is required for proper traffic routing between the clusters.
 
@@ -105,7 +105,7 @@ It's recommended to use a different backend than `local`. Find more information 
 
 :::
 
-:::warning
+:::danger
 
 Do not store sensitive information (credentials) in your Terraform files.
 
@@ -164,7 +164,7 @@ There are several ways to authenticate the `AWS` provider:
 
 ### Execution
 
-:::warning
+:::danger
 
 A user who creates resources in AWS will therefore own these resources. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
 
@@ -450,7 +450,7 @@ This overlay contains the multi-region identification for the cluster in region 
 
 #### Preparation
 
-:::warning
+:::danger
 You must change the following environment variables for Zeebe. The default values will not work for you and are only for illustration.
 :::
 

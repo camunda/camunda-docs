@@ -5,53 +5,951 @@ description: "Search for decision instances based on given criteria."
 sidebar_label: "Query decision instances (alpha)"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
-info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+info_path: versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query decision instances (alpha)</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query decision instances (alpha)"}
+></Heading>
 
 <MethodEndpoint
   method={"post"}
   path={"/decision-instances/search"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Search for decision instances based on given criteria.
 
 :::note
-This endpoint is an alpha feature and not enabled on Camunda clusters out of the box.
+This endpoint is an [alpha feature](/reference/alpha-features.md) and not enabled on Camunda clusters out of the box.
 See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
 for further details.
 :::
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","default":"asc"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the decision instance."}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"DecisionInstanceStateEnum"} qualifierMessage={"**Possible values:** [`EVALUATED`, `FAILED`, `UNKNOWN`, `UNSPECIFIED`]"} schema={{"description":"The state of the decision instance.","enum":["EVALUATED","FAILED","UNKNOWN","UNSPECIFIED"],"title":"DecisionInstanceStateEnum"}}></SchemaItem><SchemaItem collapsible={false} name={"evaluationFailure"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The evaluation failure of the decision instance."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the DMN decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the DMN decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The version of the decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionType"} required={false} schemaName={"DecisionInstanceTypeEnum"} qualifierMessage={"**Possible values:** [`DECISION`, `DECISION_TABLE`, `LITERAL_EXPRESSION`, `RELATION`, `UNSPECIFIED`, `UNKNOWN`]"} schema={{"description":"The type of the decision.","enum":["DECISION","DECISION_TABLE","LITERAL_EXPRESSION","RELATION","UNSPECIFIED","UNKNOWN"],"title":"DecisionInstanceTypeEnum"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the decision instance."}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-The decision instance search successful response.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionInstanceFilterRequest",
+                      type: "object",
+                      properties: {
+                        state: {
+                          description: "The state of the decision instance.",
+                          enum: [
+                            "EVALUATED",
+                            "FAILED",
+                            "UNKNOWN",
+                            "UNSPECIFIED",
+                          ],
+                          title: "DecisionInstanceStateEnum",
+                        },
+                        evaluationFailure: {
+                          type: "string",
+                          description:
+                            "The evaluation failure of the decision instance.",
+                        },
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The ID of the DMN decision.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description: "The name of the DMN decision.",
+                        },
+                        decisionDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The version of the decision.",
+                        },
+                        decisionDefinitionType: {
+                          description: "The type of the decision.",
+                          enum: [
+                            "DECISION",
+                            "DECISION_TABLE",
+                            "LITERAL_EXPRESSION",
+                            "RELATION",
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                          ],
+                          title: "DecisionInstanceTypeEnum",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision instance.",
+                        },
+                      },
+                      title: "DecisionInstanceFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the decision instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the process instance.",
+                    },
+                    decisionDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the decision.",
+                    },
+                  },
+                  title: "DecisionInstanceFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "DecisionInstanceSearchQueryRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.number+json": {
+        schema: {
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionInstanceFilterRequest",
+                      type: "object",
+                      properties: {
+                        state: {
+                          description: "The state of the decision instance.",
+                          enum: [
+                            "EVALUATED",
+                            "FAILED",
+                            "UNKNOWN",
+                            "UNSPECIFIED",
+                          ],
+                          title: "DecisionInstanceStateEnum",
+                        },
+                        evaluationFailure: {
+                          type: "string",
+                          description:
+                            "The evaluation failure of the decision instance.",
+                        },
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The ID of the DMN decision.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description: "The name of the DMN decision.",
+                        },
+                        decisionDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The version of the decision.",
+                        },
+                        decisionDefinitionType: {
+                          description: "The type of the decision.",
+                          enum: [
+                            "DECISION",
+                            "DECISION_TABLE",
+                            "LITERAL_EXPRESSION",
+                            "RELATION",
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                          ],
+                          title: "DecisionInstanceTypeEnum",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision instance.",
+                        },
+                      },
+                      title: "DecisionInstanceFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the decision instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the process instance.",
+                    },
+                    decisionDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the decision.",
+                    },
+                  },
+                  title: "DecisionInstanceFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "DecisionInstanceSearchQueryRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.string+json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionInstanceFilterRequest",
+                      type: "object",
+                      properties: {
+                        state: {
+                          description: "The state of the decision instance.",
+                          enum: [
+                            "EVALUATED",
+                            "FAILED",
+                            "UNKNOWN",
+                            "UNSPECIFIED",
+                          ],
+                          title: "DecisionInstanceStateEnum",
+                        },
+                        evaluationFailure: {
+                          type: "string",
+                          description:
+                            "The evaluation failure of the decision instance.",
+                        },
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The ID of the DMN decision.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description: "The name of the DMN decision.",
+                        },
+                        decisionDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The version of the decision.",
+                        },
+                        decisionDefinitionType: {
+                          description: "The type of the decision.",
+                          enum: [
+                            "DECISION",
+                            "DECISION_TABLE",
+                            "LITERAL_EXPRESSION",
+                            "RELATION",
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                          ],
+                          title: "DecisionInstanceTypeEnum",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision instance.",
+                        },
+                      },
+                      title: "DecisionInstanceFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "string",
+                      description: "The key of the decision instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    decisionDefinitionKey: {
+                      type: "string",
+                      description: "The key of the decision.",
+                    },
+                  },
+                  title: "DecisionInstanceFilter",
+                },
+              ],
+            },
+          },
+          title: "DecisionInstanceSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the decision instance."}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"DecisionInstanceStateEnum"} qualifierMessage={"**Possible values:** [`EVALUATED`, `FAILED`, `UNKNOWN`, `UNSPECIFIED`]"} schema={{"description":"The state of the decision instance.","enum":["EVALUATED","FAILED","UNKNOWN","UNSPECIFIED"],"title":"DecisionInstanceStateEnum"}}></SchemaItem><SchemaItem collapsible={false} name={"evaluationDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time","description":"The evaluation date of the decision instance."}}></SchemaItem><SchemaItem collapsible={false} name={"evaluationFailure"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The evaluation failure of the decision instance."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the DMN decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the DMN decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The version of the decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionType"} required={false} schemaName={"DecisionInstanceTypeEnum"} qualifierMessage={"**Possible values:** [`DECISION`, `DECISION_TABLE`, `LITERAL_EXPRESSION`, `RELATION`, `UNSPECIFIED`, `UNKNOWN`]"} schema={{"description":"The type of the decision.","enum":["DECISION","DECISION_TABLE","LITERAL_EXPRESSION","RELATION","UNSPECIFIED","UNKNOWN"],"title":"DecisionInstanceTypeEnum"}}></SchemaItem><SchemaItem collapsible={false} name={"result"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The result of the decision instance."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the decision instance."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"key\": 0,\n      \"evaluationDate\": \"2024-10-02T22:01:21.436Z\",\n      \"evaluationFailure\": \"string\",\n      \"processDefinitionKey\": 0,\n      \"processInstanceKey\": 0,\n      \"decisionDefinitionKey\": 0,\n      \"decisionDefinitionId\": \"string\",\n      \"decisionDefinitionName\": \"string\",\n      \"decisionDefinitionVersion\": 0,\n      \"result\": \"string\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The decision instance search query failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The decision instance search successful response.\n",
+      content: {
+        "application/json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for DecisionInstanceItem",
+                      type: "object",
+                      properties: {
+                        state: {
+                          description: "The state of the decision instance.",
+                          enum: [
+                            "EVALUATED",
+                            "FAILED",
+                            "UNKNOWN",
+                            "UNSPECIFIED",
+                          ],
+                          title: "DecisionInstanceStateEnum",
+                        },
+                        evaluationDate: {
+                          type: "string",
+                          format: "date-time",
+                          description:
+                            "The evaluation date of the decision instance.",
+                        },
+                        evaluationFailure: {
+                          type: "string",
+                          description:
+                            "The evaluation failure of the decision instance.",
+                        },
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The ID of the DMN decision.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description: "The name of the DMN decision.",
+                        },
+                        decisionDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The version of the decision.",
+                        },
+                        decisionDefinitionType: {
+                          description: "The type of the decision.",
+                          enum: [
+                            "DECISION",
+                            "DECISION_TABLE",
+                            "LITERAL_EXPRESSION",
+                            "RELATION",
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                          ],
+                          title: "DecisionInstanceTypeEnum",
+                        },
+                        result: {
+                          type: "string",
+                          description: "The result of the decision instance.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision instance.",
+                        },
+                      },
+                      title: "DecisionInstanceItemBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the decision instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the process instance.",
+                    },
+                    decisionDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the decision.",
+                    },
+                  },
+                  title: "DecisionInstanceItem",
+                },
+              },
+            },
+            title: "DecisionInstanceSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for DecisionInstanceItem",
+                      type: "object",
+                      properties: {
+                        state: {
+                          description: "The state of the decision instance.",
+                          enum: [
+                            "EVALUATED",
+                            "FAILED",
+                            "UNKNOWN",
+                            "UNSPECIFIED",
+                          ],
+                          title: "DecisionInstanceStateEnum",
+                        },
+                        evaluationDate: {
+                          type: "string",
+                          format: "date-time",
+                          description:
+                            "The evaluation date of the decision instance.",
+                        },
+                        evaluationFailure: {
+                          type: "string",
+                          description:
+                            "The evaluation failure of the decision instance.",
+                        },
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The ID of the DMN decision.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description: "The name of the DMN decision.",
+                        },
+                        decisionDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The version of the decision.",
+                        },
+                        decisionDefinitionType: {
+                          description: "The type of the decision.",
+                          enum: [
+                            "DECISION",
+                            "DECISION_TABLE",
+                            "LITERAL_EXPRESSION",
+                            "RELATION",
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                          ],
+                          title: "DecisionInstanceTypeEnum",
+                        },
+                        result: {
+                          type: "string",
+                          description: "The result of the decision instance.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision instance.",
+                        },
+                      },
+                      title: "DecisionInstanceItemBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the decision instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the process instance.",
+                    },
+                    decisionDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description: "The key of the decision.",
+                    },
+                  },
+                  title: "DecisionInstanceItem",
+                },
+              },
+            },
+            title: "DecisionInstanceSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for DecisionInstanceItem",
+                      type: "object",
+                      properties: {
+                        state: {
+                          description: "The state of the decision instance.",
+                          enum: [
+                            "EVALUATED",
+                            "FAILED",
+                            "UNKNOWN",
+                            "UNSPECIFIED",
+                          ],
+                          title: "DecisionInstanceStateEnum",
+                        },
+                        evaluationDate: {
+                          type: "string",
+                          format: "date-time",
+                          description:
+                            "The evaluation date of the decision instance.",
+                        },
+                        evaluationFailure: {
+                          type: "string",
+                          description:
+                            "The evaluation failure of the decision instance.",
+                        },
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The ID of the DMN decision.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description: "The name of the DMN decision.",
+                        },
+                        decisionDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The version of the decision.",
+                        },
+                        decisionDefinitionType: {
+                          description: "The type of the decision.",
+                          enum: [
+                            "DECISION",
+                            "DECISION_TABLE",
+                            "LITERAL_EXPRESSION",
+                            "RELATION",
+                            "UNSPECIFIED",
+                            "UNKNOWN",
+                          ],
+                          title: "DecisionInstanceTypeEnum",
+                        },
+                        result: {
+                          type: "string",
+                          description: "The result of the decision instance.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the decision instance.",
+                        },
+                      },
+                      title: "DecisionInstanceItemBase",
+                    },
+                  ],
+                  properties: {
+                    key: {
+                      type: "string",
+                      description: "The key of the decision instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    decisionDefinitionKey: {
+                      type: "string",
+                      description: "The key of the decision.",
+                    },
+                  },
+                  title: "DecisionInstanceResult",
+                },
+              },
+            },
+            title: "DecisionInstanceSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The decision instance search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
