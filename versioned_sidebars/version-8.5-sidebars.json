@@ -22,7 +22,6 @@
         "guides/setting-up-development-project",
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",
-        "guides/message-correlation",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors"
       ],
@@ -444,22 +443,7 @@
         {
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
-            "components/connectors/custom-built-connectors/connector-templates",
-            {
-              "Update guide": [
-                "components/connectors/custom-built-connectors/update-guide/introduction",
-                "components/connectors/custom-built-connectors/update-guide/0100-to-0110",
-                "components/connectors/custom-built-connectors/update-guide/090-to-0100",
-                "components/connectors/custom-built-connectors/update-guide/080-to-090",
-                "components/connectors/custom-built-connectors/update-guide/070-to-080",
-                "components/connectors/custom-built-connectors/update-guide/060-to-070",
-                "components/connectors/custom-built-connectors/update-guide/050-to-060",
-                "components/connectors/custom-built-connectors/update-guide/040-to-050",
-                "components/connectors/custom-built-connectors/update-guide/030-to-040",
-                "components/connectors/custom-built-connectors/update-guide/020-to-030",
-                "components/connectors/custom-built-connectors/update-guide/010-to-020"
-              ]
-            }
+            "components/connectors/custom-built-connectors/connector-templates"
           ]
         }
       ],
@@ -1270,7 +1254,7 @@
       ]
     },
     {
-      "Clients": [
+      "Clients & SDKs": [
         {
           "CLI client": [
             "apis-tools/cli-client/index",
@@ -1321,16 +1305,16 @@
             }
           ]
         },
-        "apis-tools/build-your-own-client"
-      ]
-    },
-    {
-      "SDKs": [
-        "apis-tools/node-js-sdk",
+        "apis-tools/build-your-own-client",
         {
-          "Spring Zeebe": [
-            "apis-tools/spring-zeebe-sdk/getting-started",
-            "apis-tools/spring-zeebe-sdk/configuration"
+          "SDKs": [
+            "apis-tools/node-js-sdk",
+            {
+              "Spring Zeebe": [
+                "apis-tools/spring-zeebe-sdk/getting-started",
+                "apis-tools/spring-zeebe-sdk/configuration"
+              ]
+            }
           ]
         }
       ]
@@ -1356,6 +1340,7 @@
       },
       "items": ["reference/release-notes/850"]
     },
+    "reference/contact",
     "reference/auto-updates",
     "reference/status",
     "reference/supported-environments",

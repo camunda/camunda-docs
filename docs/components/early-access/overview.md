@@ -20,7 +20,7 @@ These features may be unstable, and subject to significant changes or removal.
 
 ## Alpha features
 
-[Alpha features](/reference/alpha-features.md) are more developed and closer to becoming part of the product but may not yet be fully optimized or supported. Selected Camunda features and components are released as alpha versions to provide early access. By testing these features, you have the opportunity to participate in their development by sharing feedback before they reach General Availability (GA).
+[Alpha features](/components/early-access/alpha/alpha-features.md) are more developed and closer to becoming part of the product but may not yet be fully optimized or supported. Selected Camunda features and components are released as alpha versions to provide early access. By testing these features, you have the opportunity to participate in their development by sharing feedback before they reach [general availability](/reference/release-policy.md#general-availability-ga).
 
 ## What to expect
 
@@ -35,5 +35,5 @@ These features may be unstable, and subject to significant changes or removal.
 | <b>Support</b>                     | No dedicated support or SLAs.                                                                      | Support based on SLAs, with bugs treated as part of regular feature/help requests. |
 | <b>Maintenance service</b>         | No                                                                                                 | No                                                                                 |
 | <b>Available on</b>                | SaaS/Self-Managed                                                                                  | SaaS/Self-Managed                                                                  |
-| <b>Release cycle</b>               | Outside the standard [release policy](/docs/reference/release-policy.md)                           | Outside the standard [release policy](/docs/reference/release-policy.md)           |
+| <b>Release cycle</b>               | Outside the standard [release policy](/reference/release-policy.md)                                | Outside the standard [release policy](/reference/release-policy.md)                |
 | <b>Admin/owner access required</b> | Yes                                                                                                | Yes                                                                                |

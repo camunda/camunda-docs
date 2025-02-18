@@ -1,0 +1,71 @@
+---
+id: get-status-of-camunda-license
+title: "Get status of Camunda license"
+description: "Obtains the status of the current Camunda license"
+sidebar_label: "Get status of Camunda license"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVMFO4zAQ/RVrzqEpnFBuFdtFu2LZFZTlgHpw3Glj1rGDPS5UUf59NU5SCgVptbk4icfvzZt54xZIbgIUD3ClFdqAsMxghUF53ZB2Fgr4WZLUNgiqUASSFINw6/SlovdoSVzIOtqVFGaAyMBjaJwNGKBo4Ww65eVz1BHnLfoxqnKW0BKDyaYxWkkGyx8DI7YQVIW1PKZaVCjGhBh8Dyk8PkUMNIEMaNcgFODKR1QEGTTeNehJ9xK20ujVWKFjAh9R6A+zFjqIdDgTa2lCCnNUoX/WSdJAWzpnUFrIwEZjZGkQihTfZTAgLVLke+p7bYzwSNHbRD/SMq4YNOw+r+hAH8hru4Guy4A0Mfloh5uhbtDxk0GNVLkVFLDBVCVJFRSQvyIG9Fv07KgWojdQQNv3pSvyvK1coK5oG+epy7dnkMFWes16U5l5u9e4ltEQFGCckib9fm9L7ipvWFnje4Hn4mZ+uxCXkvBZ7ibQZcCUb6HPp+fTD1E59BPE2a9voleYQA8dN8JWRM2HsH3wvwB33ZILqaLXtLvlY315SpQe/SxyzduxdwNfQk9WSkGQDS9fna8l5/X9fpEarO3apeNDo48T4a6gD33m08npkRpOdu28UK6uo01jaDfiWVMl5IEwZWIgFrT3MPNyvw5oB5+J3z2jOJ1wU3rnsLRQ5PlGUxXLiXJ1rvpj+7U0rsxrqe1owZBfzH7cXX+ZnVx9u5hf385PTifTCb1QEt+4QLW0B3lc4uG9czwhb5S3r1fQf12LQ8sIXyhvjNSWTZS0tsMoPexLtcyGcXiAti1lwDtvuo5/P0X0Oygelq/Tw19dBhXKFfo0e39wx51SChtKY2YiUx/dm2y1/VBfztkjfwFIJxdy
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get status of Camunda license"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/license"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Obtains the status of the current Camunda license
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Obtains the current status of the Camunda license",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The response of a license request.",
+            type: "object",
+            properties: {
+              validLicense: {
+                description:
+                  "True if the Camunda license is valid, false if otherwise",
+                type: "boolean",
+                nullable: false,
+              },
+              licenseType: {
+                description:
+                  "Will return the license type property of the Camunda license",
+                type: "string",
+              },
+            },
+            title: "LicenseResponse",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

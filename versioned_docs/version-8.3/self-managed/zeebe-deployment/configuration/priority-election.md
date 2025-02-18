@@ -10,8 +10,8 @@ It aims to achieve a more uniform leader distribution by assigning each node a p
 
 ## Configuration
 
-Enable priority election by setting `zeebe.broker.raft.enablePriorityElection = "true"` in your config or
-by setting the equivalent environment variable `ZEEBE_BROKER_RAFT_ENABLEPRIORITYELECTION="true"`.
+Enable priority election by setting `zeebe.broker.cluster.raft.enablePriorityElection=true` in your config or
+by setting the equivalent environment variable `ZEEBE_BROKER_CLUSTER_RAFT_ENABLEPRIORITYELECTION=true`.
 
 If you are using the fixed partitioning scheme (experimental), you may need [additional configuration](fixed-partitioning.md#priority-election).
 
@@ -19,7 +19,7 @@ If you are using the fixed partitioning scheme (experimental), you may need [add
 
 With priority election enabled, election latency and thus failover time increases.
 
-The result of leader election is not deterministic and priority election can only increase the chance of having a
+The result of a leader election is not deterministic, and priority election can only increase the chance of having a
 uniform leader distribution, not guarantee it.
 
-Factors such as high load can prevent high priority nodes from becoming the leader.
+Factors such as high load can prevent high-priority nodes from becoming the leader.

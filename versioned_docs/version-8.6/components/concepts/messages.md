@@ -4,7 +4,7 @@ title: "Messages"
 description: "Learn how process instances can respond to incoming messages."
 ---
 
-Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called **[message correlation](/guides/message-correlation.md)**.
+Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called [message correlation](/components/modeler/bpmn/message-events/message-events.md#message-correlation).
 
 ## Message subscriptions
 
@@ -117,6 +117,10 @@ The messages are published with a `TTL > 0` and a correlation key that groups th
 The first message creates a new process instance. The following messages are correlated to the same process instance if they have the same correlation key.
 
 When the instance ends and messages with the same correlation key are not correlated yet, a new process instance is created.
+
+:::note
+You may also use TTL to wait for messages that may arrive earlier when combining [start events and intermediate catch events](/components/modeler/bpmn/events.md).
+:::
 
 ### Single instance
 

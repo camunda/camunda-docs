@@ -12,6 +12,7 @@ on:
       - "!1.3.[0-9]+"
       - "!8.0.[0-9]+"
       - "!8.1.[0-9]+"
+      - "!8.2.[0-9]+"
 
 permissions:
   id-token: write
@@ -23,7 +24,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 22
       - name: Install Dependencies
         run: npm ci
       - name: Enable Indexing
@@ -32,6 +33,8 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
+          DOCS_SITE_URL: https://docs.camunda.io
+          DOCS_SITE_BASE_URL: /
       - name: Get Github Actions IP
         id: ip
         uses: haythem/public-ip@v1.3

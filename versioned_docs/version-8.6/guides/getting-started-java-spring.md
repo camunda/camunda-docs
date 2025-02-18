@@ -36,7 +36,7 @@ While stepping through this guide, you can visit our [sample repository](https:/
 Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
-- [OpenJDK 21+](https://openjdk.org/install/)
+- [OpenJDK ≥ 17](https://openjdk.org/install/)
 - [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
 
 :::note
@@ -50,8 +50,8 @@ If no version of Java is found, follow your chosen installation's instructions f
 Next, create a new Spring Boot project:
 
 1. Go to [https://start.spring.io/](https://start.spring.io/) to get started.
-2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select the latest non-SNAPSHOT version (currently 3.3.3).
-3. Under **Project Metadata**, configure the following:
+2. Under **Project**, select **Maven**. Under **Language**, select **Java**. Under **Spring Boot**, select `3.3.8`.
+3. Under **Project Metadata**, configure the following or use the [pre-filled shortcut](https://start.spring.io/#!type=maven-project&language=java&packaging=jar&groupId=io.camunda.demo&artifactId=process_payments&name=Process%20payments&description=Process%20payments%20with%20Camunda&packageName=io.camunda.demo.process_payments):
    1. **Group**: `io.camunda.demo`
    2. **Artifact**: `process_payments`
    3. **Name**: `Process payments`
@@ -72,7 +72,7 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
 
 1. Open Desktop Modeler.
 2. Click **Create a new diagram** in Camunda 8.
-3. In the Properties panel, under the General section:
+3. In the properties panel, under the **General** section:
    - Name your diagram `Process payments`
    - Set the ID to `process-payments`
 4. Add a start event, and name it `Payment request received`.
@@ -125,7 +125,7 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 
 ### Configure the Zeebe client
 
-Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe broker:
+Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe Broker:
 
 ```yaml
 camunda:

@@ -14,7 +14,7 @@ You can create and manage [Connector templates](/components/connectors/custom-bu
 
 Take the following steps to create a new Connector template:
 
-1. Navigate to the project of your choice and click **New**.
+1. Navigate to the project of your choice in Web Modeler and click **New**.
 
 2. Click **Connector Template**.
 

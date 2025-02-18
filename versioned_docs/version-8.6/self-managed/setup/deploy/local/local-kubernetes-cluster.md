@@ -54,9 +54,7 @@ helm repo update
 If you are deploying Camunda 8 with Ingress configuration, make sure to add additional values to the file you just downloaded `camunda-platform-core-kind-values.yaml` as described in [connecting to Camunda 8 components](#connecting-to-camunda-8-components).
 :::
 
-3. Install Camunda 8 using the `camunda-platform-core-kind-values.yaml` file you downloaded previously. This file might contain additional values if you are adding Ingress, TLS, or using a variety of other configuration properties. See [Camunda Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters).
-
-4. Execute the following command:
+3. Install Camunda 8 using the `camunda-platform-core-kind-values.yaml` file you downloaded previously. This file might contain additional values if you are adding Ingress, TLS, or using a variety of other configuration properties. See [Camunda Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters). Execute the following command:
 
 ```sh
 helm install camunda-platform camunda/camunda-platform \
@@ -67,7 +65,7 @@ This will deploy Camunda 8 components (Optimize, Connectors, and Zeebe), but wit
 
 Depending on your machine hardware and internet connection speed, the services might take some time to get started as it will download the Docker images of all Camunda 8 components to your local kind cluster.
 
-5. Check that each pod is running and ready with `kubectl get pods`. If one or more of your pods are pending for long time, it means it cannot be scheduled onto a node. Usually, this happens because there are insufficient resources that prevent it. Use the `kubectl describe <POD NAME>` command to check its status.
+4. Check that each pod is running and ready with `kubectl get pods`. If one or more of your pods are pending for long time, it means it cannot be scheduled onto a node. Usually, this happens because there are insufficient resources that prevent it. Use the `kubectl describe <POD NAME>` command to check its status.
 
 ## Connecting to Camunda 8 components
 
@@ -94,7 +92,7 @@ First, port-forward each of the components. Use a separate terminal for each com
 To interact with the Camunda workflow engine via Zeebe Gateway using the [Camunda 8 API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe gateway as follows:
 
 ```sh
-kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
+kubectl port-forward svc/camunda-platform-zeebe-gateway 26500:26500
 ```
 
 :::note
@@ -169,7 +167,7 @@ Make sure all pods are running with the `kubectl get pods --namespace ingress-ng
 
 ## Ingress configuration in Camunda 8 Helm charts
 
-In this document, we will use the combined Ingress configuration. However, there is one quirk with this particular setup to be aware of - Zeebe Gateway uses gRPC, which uses HTTP/2. This means the Zeebe Gateway has to use its own subdomain `zeebe.camunda.local` instead of context path (such as `/zeebe`).
+In this document, we will use the combined Ingress configuration. However, there is one quirk with this particular setup to be aware of - the Zeebe Gateway uses gRPC, which uses HTTP/2. This means the Zeebe Gateway has to use its own subdomain `zeebe.camunda.local` instead of context path (such as `/zeebe`).
 
 Add the following values to `camunda-platform-core-kind-values.yaml` to allow Camunda 8 components to be discovered by the Ingress controller.
 

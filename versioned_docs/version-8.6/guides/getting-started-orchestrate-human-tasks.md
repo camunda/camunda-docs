@@ -1,7 +1,7 @@
 ---
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
-sidebar_label: Get started with human task orchestration
+sidebar_label: Human tasks
 description: "Efficiently allocate work through user tasks."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
@@ -72,7 +72,7 @@ In this step, you will design a process that demonstrates how to route the proce
 1. Every file in Web Modeler requires a project. Within Modeler, click **New project**.
 2. Name your project and select **Create new > BPMN diagram**.
 3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel. This specifies how the process will appear in other tools of Camunda 8.
+4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel on the right side of the screen. This specifies how the process will appear in other tools of Camunda 8.
 
 </TabItem>
 <TabItem value="sm">

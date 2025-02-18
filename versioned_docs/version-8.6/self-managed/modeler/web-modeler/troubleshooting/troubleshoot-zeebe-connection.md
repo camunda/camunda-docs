@@ -21,7 +21,7 @@ Depending on your infrastructure, the default timeouts configured may be too sho
 You can pass custom timeouts in milliseconds for Web Modeler's Zeebe client to `modeler-restapi` via three individual environment variables:
 
 ```shell
-ZEEBE_CLIENT_REQUESTTIMEOUT=30000 # limit the time to wait for a response from the Zeebe gateway
+ZEEBE_CLIENT_REQUESTTIMEOUT=30000 # limit the time to wait for a response from the Zeebe Gateway
 ZEEBE_AUTH_CONNECT_TIMEOUT=60000 # limit the time to wait for a connection to the OAuth server
 ZEEBE_AUTH_READ_TIMEOUT=60000 # limits the time to wait for a response from the OAuth server
 ```

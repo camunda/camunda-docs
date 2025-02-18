@@ -13,21 +13,19 @@ keywords:
   ]
 ---
 
-:::note
-Migration of existing projects to Camunda 8 is optional. Camunda 7 still has ongoing [support](https://docs.camunda.org/enterprise/announcement/).
-:::
-
 This guide describes how to migrate process solutions developed for Camunda 7 to run them on Camunda 8, including:
 
 - Differences in application architecture
-- How process models and code can generally be migrated, whereas runtime and history data cannot
-- How migration can be very simple for some models, but also marked limitations, where migration might get very complicated
+- How process solutions can be migrated
+- How migration can be very simple for some models, but also marked limitations, where migration might get complicated
 - You need to adjust code that uses the workflow engine API
 - How you might be able to reuse glue code
-- Community extensions that can help with migration
+- Tooling that can help with migration
 - The Clean Delegate approach, which helps you write Camunda 7 solutions that are easier to migrate
 
-We are watching all customer migration projects closely and will update this guide in the future.
+:::note
+We are currently developing improved migration tooling and will overhaul this guide around the 8.7 release. If you embark on a migration journey, please reach out to discuss your use case with us.
+:::
 
 ## What to expect
 
@@ -53,4 +51,4 @@ As described earlier in this guide, migration is an ongoing topic and this guide
 - Discuss workload migrations (operations)
 - Eventual consistency
 
-[Reach out to us](/contact/) to discuss your specific migration use case.
+[Reach out to us](/reference/contact.md) to discuss your specific migration use case.

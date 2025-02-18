@@ -1,0 +1,230 @@
+---
+id: unassign-user-task
+title: "Unassign user task"
+description: "Removes the assignee of a task with the given key."
+sidebar_label: "Unassign user task"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWE1z2zYQ/SuYPSVTmpRTJ3V409hK6zbJeGy5Pbg6gOBSREwCDABK5nD43zsLkpIs2U0mk6MOGook8HYf9j3iowXHlxbie7izaJjj9gEWAaRohZGVk1pBDDdY6hVa5nJk3Fq5VIhMZ4z79mwtXe7fLeUKFXvAJoQAKm54iQ4NobegeIkQQ23RzLl9+AsbCEASesVdDgEY/FpLgynEztS4n8I8RwKmqBSpHpOlSFbkWHKIW3BNRUGsM1ItoesWBGsrrSxaev9mckaXQ+gNHltzy2o1sEyZrYVAa7O6KJoQugDOJpNvQhyMBxNcKe1YgjvYIfukDbIUHZeFZdwgq4xeyRRTJpUHGJNniU6b8F8FAQitHCpHOfCqKqTglENUGZ0UWP7yxVJC7c6YPM10yq77lkNcppMvKBzjlvUNkz76/c2HC/b+7O1vi1e5c5WNo2i9XocmEyeYSqdNqM0yMpmgH7V7HbJ5jgZZyRviydNUUkxeEKsKjZNoma1QyEwK5rQnOKTNqHA9v6GEfVoko03nbYH3Cx1Apk3JHenLSNjXzpTd3VwxmaJyMmukWh6G9n0yXheEwRNduzgpuHqgijvpimeD7kexdVlys9Ho0wBdANZxV+/QAKkcLtHs5i+V+/XNATbp64/5/Jr1EEzoFFmmDXO5tGMgIlFKJcu6hPhsMgmg5I/93bvJpCNMqvh3MFEMH6uCKy+tfTpSsXKrW09MKuu4Ej+rMtrIpdyPG0K3rQUMIr7sGXVd5535bXMfOpP8TtbMdK3S8Giwo8GOBnvRYO9/wGDSjrPZ2mi19COMTNTGoHJFc5wFjyY9mvTnmfTtc+vTqWI0yoZ0iMZow7TwDkzZOpeFh6dl7hib1uJo3dFrR68dvfaS17oASnS5TiGGFAt06He9LocYIpoST2hKtFG7s+ftonH/TPtWNKtxe1ybAmJoexN1cRS1ubaui9tKG9dFK6rQihvJk6LXJb3uzTaKqNCCF/7xc8WkF7QHH0le8LJWKWfn7GZ2O2e/c4dr3m9xKeRT6PPJ+eRZVGr6AuL0+or1DHsp7nweRljy+bOwfePvAfZ7fIuiNtI1t9StH54EuUEzrakaG4kM8Tw63feNIBj+fBiF8+c/c197qTLtuw8aOEyEqoLG9plPwtNDvV1fedsIXZa18t9OteyXSXyHmChq64hQAIUUqKxX9nBmMjb72L9hf/cR2WlIRemVM34yl9LldRIKXUai77a5JoVOopJLFQ0hbHQx/XT3+XJ68vHqYvb5dnZyGk5C9+g8+UpbV3K1k8fdcHSxXe/t0223k8WPHRoNhXL46KKq4FKRdDzDdrDWPWytBQHETw+UNu5aBIND7qFtE27xzhRdR4+/1mgaiO8XW0N5B6bS0v8U4owXdv8AapfZq5vhqOo1+79jqWe5DA+5aryhi5ruIIAHbPZOx7pFF0COPEXj8+tbTIXAyu30fXFKJmNsvk+Xs4+z+Qy67j9JMt9t
+sidebar_class_name: "delete api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Unassign user task"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/user-tasks/{userTaskKey}/assignee"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Removes the assignee of a task with the given key.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The user task was unassigned successfully." },
+    "400": {
+      description:
+        "The user task with the given key cannot be unassigned. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The user task with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The user task with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

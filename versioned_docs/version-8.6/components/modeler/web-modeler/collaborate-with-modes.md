@@ -31,4 +31,4 @@ When a process template is selected, the default mode is **Implement**.
   ![read only properties](img/read-only-properties.png)
 - **Viewers** can access only the **Design** mode with read-only permission,
 
-Read more about the [different roles and how to assign them](components/modeler/web-modeler/collaboration.md/#access-rights-and-permissions).
+Read more about the [different roles and how to assign them](components/modeler/web-modeler/collaboration.md#access-rights-and-permissions).

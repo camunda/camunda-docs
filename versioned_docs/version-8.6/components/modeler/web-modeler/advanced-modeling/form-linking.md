@@ -23,7 +23,7 @@ By linking a Camunda Form to a start event, process instances can be started wit
 1. Select a user task or none start event from the canvas and a link button will appear at the bottom right.
 2. Click on the button and choose any form from the same project.
 3. Click the **Link** button to complete the linking process.
-   In the properties panel, the value **Camunda Form (linked)** is chosen for the **Type** property, and the form ID of the form you chose to link is automatically copied to the **Form ID** section.
+   In the properties panel on the right side of the screen, the value **Camunda Form (linked)** is chosen for the **Type** property, and the form ID of the form you chose to link is automatically copied to the **Form ID** section.
 
 <p><img src={FormLinkOverlayImg} style={{width: 400}} alt="Linking a Camunda Form" /></p>
 
@@ -40,7 +40,7 @@ Using the properties panel, you can connect a form to a user task/start event vi
 
 Choosing **Camunda Form (linked)** as the type and entering the form ID directly produces the same result as [using the link button on the modeling canvas](#using-the-link-button).
 
-- **Binding**: You can also select a different binding for the called decision. See [choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+- **Binding**: You can also select a different binding for the called decision. See [choosing the resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 - **Version tag**: If you select **version tag** for the binding, you must enter the actual version tag to use.
 
 <p><img src={PropertiesPanelImg} style={{width: 430}} alt="form section in properties panel" /></p>
@@ -88,6 +88,10 @@ To correct any instances affected by this issue, we recommend the following step
 7. Click **Apply**; a new task should be generated with the correct form.
 
 ### Camunda Form (embedded)
+
+:::info
+Embedded forms are supported only by job worker-based user tasks and are not available for the [Zeebe user task implementation type](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-implementation-types). However, job worker-based user tasks are now deprecated with 8.6. While these are currently still supported, consider [migrating to Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md).
+:::
 
 When choosing **Camunda Form (embedded)** as type you have the option to directly paste the form's JSON schema into the **Form JSON configuration** field of the properties panel.
 The form will be embedded directly into the BPMN diagram's XML representation.

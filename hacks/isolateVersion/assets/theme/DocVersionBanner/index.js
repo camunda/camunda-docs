@@ -15,7 +15,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Link from "@docusaurus/Link";
 import Translate from "@docusaurus/Translate";
 import { ThemeClassNames } from "@docusaurus/theme-common";
-import { useDocsVersion } from "@docusaurus/theme-common/internal";
+import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
 
 function UnmaintainedVersionLabel({ siteTitle, versionMetadata }) {
   return (

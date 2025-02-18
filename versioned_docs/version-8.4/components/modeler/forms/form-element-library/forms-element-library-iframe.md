@@ -12,7 +12,7 @@ Every iFrame component is a sandbox. This means that the content of the iFrame i
 
 :::
 
-![Form iFrame Symbol](/img/form-icons/form-iframe.svg)
+<img src="/img/form-icons/form-iframe.svg" alt="Form iframe Symbol" />
 
 ## Configurable properties
 
@@ -20,4 +20,4 @@ Every iFrame component is a sandbox. This means that the content of the iFrame i
 - **URL**: Enter an HTTPS URL to a source. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md). Ensure the URL is safe as it might impose security risks. Not all external sources can be displayed in the iFrame. Read more about it in [the X-FRAME-OPTIONS documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options).
 - **Height**: Defines the height of the iFrame. Defined as number of pixels.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the iFrame.
-- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/guidelines/2x-grid/overview).
+- **Columns**: Space the field will use inside its row. **Auto** means it will automatically adjust to available space in the row. Read more about the underlying grid layout in the [Carbon Grid documentation](https://carbondesignsystem.com/elements/2x-grid/overview/).

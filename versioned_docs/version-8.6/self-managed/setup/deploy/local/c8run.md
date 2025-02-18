@@ -36,7 +36,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/c8run-8.6.2) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.6.9) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 
@@ -44,6 +44,8 @@ When successful, a new Operate window automatically opens.
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
+
+Mac users may encounter the warning `"c8run" Not Opened`. Follow the Apple support instructions to [grant an exception](https://support.apple.com/en-us/102445).
 :::
 
 ### Configuration options
@@ -87,7 +89,7 @@ A success notification displays when complete. [Start a new process instance](/c
 
 ### Use built-in and custom Connectors
 
-Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md/#automatic-connector-template-fetching) templates for pre-built Connectors. [Custom Connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your Camunda 8 Run distribution.
+Desktop Modeler [automatically fetches](/components/modeler/desktop-modeler/use-connectors.md#automatic-connector-template-fetching) templates for pre-built Connectors. [Custom Connectors](/components/connectors/custom-built-connectors/connector-sdk.md) can also be added to your Camunda 8 Run distribution.
 
 To add a custom Connector:
 
@@ -98,7 +100,7 @@ Once configured correctly, your Connectors are available for use in Modeler.
 
 ## Use Camunda APIs
 
-Camunda 8 Run authenticates with the [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate](/docs/apis-tools/operate-api/overview.md), and [Zeebe](/apis-tools/zeebe-api/grpc.md) APIs, as well as the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), by including cookie headers in each request. This cookie can be obtained by using the API endpoint `/api/login`.
+Camunda 8 Run authenticates with the [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate](/apis-tools/operate-api/overview.md), and [Zeebe](/apis-tools/zeebe-api/grpc.md) APIs, as well as the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), by including cookie headers in each request. This cookie can be obtained by using the API endpoint `/api/login`.
 
 To authenticate and begin making requests, take the following steps:
 
@@ -152,3 +154,8 @@ curl --cookie  cookie.txt  localhost:8080/v2/topology
 ## Shut down Camunda 8 Run
 
 To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
+
+## Known issues
+
+- In Tasklist, you cannot perform operations (assign/unassign/complete) on Zeebe User Tasks.
+<!-- https://github.com/camunda/camunda/issues/24808 -->

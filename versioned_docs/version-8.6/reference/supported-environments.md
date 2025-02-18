@@ -8,7 +8,7 @@ The supported environments page lists browsers, operating systems, clients, depl
 
 **If the particular technology is not listed, we cannot resolve issues caused by the usage of that unlisted technology.**
 
-You may [raise a feature request](/contact) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/contact) to work with Consulting services.
+You may [raise a feature request](/reference/contact.md) that will be evaluated by our product teams to provide official support from Camunda, or you can make a [help request](/reference/contact.md) to work with Consulting services.
 
 Recommendations are denoted with [recommended], however, other listed options are supported as well.
 
@@ -30,15 +30,13 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Desktop Modeler
 
 - Windows 10 / 11
-- Mac OS 12 / 13 / 14
+- Mac OS 12 / 13 / 14 / 15
 - Ubuntu LTS (latest)
 
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Zeebe Spring SDK**: OpenJDK 17+
-- **Zeebe Go Client**: Go 1.13+
-- **zbctl**: Windows, macOS, and Linux (latest)
 - **Connector SDK**: OpenJDK 17+
 - **Spring SDK**: Spring Boot 3.3.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
@@ -82,6 +80,17 @@ For details on typical volume type usage, refer to the following examples specif
 - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md#volume-performance)
 - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md#volume-performance)
 
+### Helm version matrix
+
+As of the Camunda 8.4 release, the Camunda 8 Helm chart version is independent from the application version (for example, the Camunda 8.4 release uses the Helm chart version 9.0.0). The Helm chart is updated with each application release.
+
+| Camunda version | Helm chart version                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------- |
+| Camunda 8.6.x   | [Helm chart 11.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.6/)  |
+| Camunda 8.5.x   | [Helm chart 10.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.5/)  |
+| Camunda 8.4.x   | [Helm chart 9.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.4/)   |
+| Camunda 8.3.x   | [Helm chart 8.3.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.3/) |
+
 ## Component requirements
 
 Requirements for the components can be seen below:
@@ -114,12 +123,14 @@ This matrix shows which component versions work together:
 
 | Design                | Automate    |                                                                            | Improve         |
 | --------------------- | ----------- | -------------------------------------------------------------------------- | --------------- |
+| Desktop Modeler 5.28+ | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.6.x | Optimize 8.6.x  |
 | Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
 | Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
 | Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
 | Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
 | Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x                                     | Optimize 3.7.x  |
 | -                     | -           | -                                                                          | -               |
+| Web Modeler 8.6.x     | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.6.x | Optimize 8.6.x  |
 | Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
 | Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
 | Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |

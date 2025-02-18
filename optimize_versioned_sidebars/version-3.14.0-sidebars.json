@@ -481,11 +481,6 @@
                 },
                 {
                   "type": "link",
-                  "label": "Defining templates in Camunda 7",
-                  "href": "/docs/components/modeler/desktop-modeler/element-templates/c7-defining-templates/"
-                },
-                {
-                  "type": "link",
                   "label": "Additional resources",
                   "href": "/docs/components/modeler/desktop-modeler/element-templates/additional-resources/"
                 }
@@ -1360,65 +1355,6 @@
               "type": "link",
               "label": "Connector templates",
               "href": "/docs/components/connectors/custom-built-connectors/connector-templates/"
-            },
-            {
-              "Update guide": [
-                {
-                  "type": "link",
-                  "label": "Connector SDK updates",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/introduction/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.10 to 0.11",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/0100-to-0110/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.9 to 0.10",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/090-to-0100/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.8 to 0.9",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/080-to-090/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.7 to 0.8",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/070-to-080/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.6 to 0.7",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/060-to-070/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.5 to 0.6",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/050-to-060/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.4 to 0.5",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/040-to-050/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.3 to 0.4",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/030-to-040/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.2 to 0.3",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/020-to-030/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update 0.1 to 0.2",
-                  "href": "/docs/components/connectors/custom-built-connectors/update-guide/010-to-020/"
-                }
-              ]
             }
           ]
         }
@@ -1599,7 +1535,6 @@
               ]
             },
             "components/userguide/creating-reports",
-            "components/userguide/combined-process-reports",
             "components/userguide/process-KPIs",
             {
               "Process analysis": [
@@ -1637,18 +1572,9 @@
               ]
             },
             {
-              "Decision analysis": [
-                "components/userguide/decision-analysis/decision-analysis-overview",
-                "components/userguide/decision-analysis/decision-report",
-                "components/userguide/decision-analysis/decision-filter"
-              ]
-            },
-            {
               "Additional features": [
                 "components/userguide/additional-features/alerts",
-                "components/userguide/additional-features/event-based-processes",
                 "components/userguide/additional-features/export-import",
-                "components/userguide/additional-features/footer",
                 "components/userguide/additional-features/variable-labeling",
                 "components/userguide/additional-features/process-variants-comparison",
                 "components/userguide/additional-features/ml-dataset"
@@ -1792,60 +1718,6 @@
               "type": "link",
               "label": "Reporting about processes",
               "href": "/docs/components/best-practices/operations/reporting-about-processes/"
-            }
-          ]
-        },
-        {
-          "Camunda 7 specific": [
-            {
-              "type": "link",
-              "label": "Deciding about your Camunda 7 stack",
-              "href": "/docs/components/best-practices/architecture/deciding-about-your-stack-c7/"
-            },
-            {
-              "type": "link",
-              "label": "Sizing your Camunda 7 environment",
-              "href": "/docs/components/best-practices/architecture/sizing-your-environment-c7/"
-            },
-            {
-              "type": "link",
-              "label": "Invoking services from a Camunda 7 process",
-              "href": "/docs/components/best-practices/development/invoking-services-from-the-process-c7/"
-            },
-            {
-              "type": "link",
-              "label": "Understanding Camunda 7 transaction handling",
-              "href": "/docs/components/best-practices/development/understanding-transaction-handling-c7/"
-            },
-            {
-              "type": "link",
-              "label": "Testing process definitions in Camunda 7",
-              "href": "/docs/components/best-practices/development/testing-process-definitions-c7/"
-            },
-            {
-              "type": "link",
-              "label": "Routing events to processes in Camunda 7",
-              "href": "/docs/components/best-practices/development/routing-events-to-processes-c7/"
-            },
-            {
-              "type": "link",
-              "label": "Operating Camunda 7",
-              "href": "/docs/components/best-practices/operations/operating-camunda-c7/"
-            },
-            {
-              "type": "link",
-              "label": "Performance tuning Camunda 7",
-              "href": "/docs/components/best-practices/operations/performance-tuning-camunda-c7/"
-            },
-            {
-              "type": "link",
-              "label": "Securing Camunda 7",
-              "href": "/docs/components/best-practices/operations/securing-camunda-c7/"
-            },
-            {
-              "type": "link",
-              "label": "Extending human task management in Camunda 7",
-              "href": "/docs/components/best-practices/architecture/extending-human-task-management-c7/"
             }
           ]
         }
@@ -2257,11 +2129,6 @@
                   "DecisionDefinition": [
                     {
                       "type": "link",
-                      "label": "Search decision definitions",
-                      "href": "/docs/apis-tools/operate-api/specifications/search-7/"
-                    },
-                    {
-                      "type": "link",
                       "label": "Get decision definition by key",
                       "href": "/docs/apis-tools/operate-api/specifications/by-key-6/"
                     }
@@ -2401,7 +2268,6 @@
                 "apis-tools/optimize-api/report/get-data-export"
               ]
             },
-            "apis-tools/optimize-api/event-ingestion",
             "apis-tools/optimize-api/external-variable-ingestion",
             "apis-tools/optimize-api/health-readiness",
             "apis-tools/optimize-api/import-entities",
@@ -2485,11 +2351,6 @@
                   ]
                 }
               ]
-            },
-            {
-              "type": "link",
-              "label": "Migrate to Zeebe user tasks",
-              "href": "/docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/"
             }
           ]
         },
@@ -3733,93 +3594,35 @@
         {
           "Optimize": [
             "self-managed/optimize-deployment/install-and-start",
-            "self-managed/optimize-deployment/version-policy",
             {
               "Configuration": [
                 "self-managed/optimize-deployment/configuration/getting-started",
                 {
                   "System configuration": [
                     "self-managed/optimize-deployment/configuration/system-configuration",
-                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
-                    "self-managed/optimize-deployment/configuration/system-configuration-platform-7",
-                    "self-managed/optimize-deployment/configuration/event-based-process-configuration"
+                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8"
                   ]
                 },
                 "self-managed/optimize-deployment/configuration/logging",
-                "self-managed/optimize-deployment/configuration/optimize-license",
                 "self-managed/optimize-deployment/configuration/security-instructions",
                 "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
                 "self-managed/optimize-deployment/configuration/history-cleanup",
                 "self-managed/optimize-deployment/configuration/localization",
                 "self-managed/optimize-deployment/configuration/object-variables",
-                "self-managed/optimize-deployment/configuration/clustering",
-                "self-managed/optimize-deployment/configuration/webhooks",
-                "self-managed/optimize-deployment/configuration/authorization-management",
-                "self-managed/optimize-deployment/configuration/user-management",
-                "self-managed/optimize-deployment/configuration/multi-tenancy",
-                "self-managed/optimize-deployment/configuration/multiple-engines",
-                "self-managed/optimize-deployment/configuration/setup-event-based-processes",
-                "self-managed/optimize-deployment/configuration/common-problems"
+                "self-managed/optimize-deployment/configuration/multi-tenancy"
               ]
             },
-            {
-              "Plugins": [
-                "self-managed/optimize-deployment/plugins/plugin-system",
-                "self-managed/optimize-deployment/plugins/businesskey-import-plugin",
-                "self-managed/optimize-deployment/plugins/decision-import-plugin",
-                "self-managed/optimize-deployment/plugins/elasticsearch-header",
-                "self-managed/optimize-deployment/plugins/engine-rest-filter-plugin",
-                "self-managed/optimize-deployment/plugins/single-sign-on",
-                "self-managed/optimize-deployment/plugins/variable-import-plugin"
-              ]
-            },
-            "self-managed/optimize-deployment/reimport",
             {
               "Migration & update": [
-                {
-                  "Camunda 8": [
-                    "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
-                    "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
-                    "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
-                    "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
-                    "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3",
-                    "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10",
-                    "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
-                    "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
-                    "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8"
-                  ],
-                  "Camunda 7": [
-                    "self-managed/optimize-deployment/migration-update/camunda-7/instructions",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.13-to-3.14",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.12-to-3.13",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.11-to-3.12",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.10-to-3.11",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.9-to-3.10",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.9-preview-1-to-3.9",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.8-to-3.9-preview-1",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.7-to-3.8",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.6-to-3.7",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.5-to-3.6",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.4-to-3.5",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.3-to-3.4",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.2-to-3.3",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.1-to-3.2",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/3.0-to-3.1",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.7-to-3.0",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.6-to-2.7",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.5-to-2.6",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.4-to-2.5",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.3-to-2.4",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.2-to-2.3",
-                    "self-managed/optimize-deployment/migration-update/camunda-7/2.1-to-2.2"
-                  ]
-                }
-              ]
-            },
-            {
-              "Advanced features": [
-                "self-managed/optimize-deployment/advanced-features/engine-data-deletion",
-                "self-managed/optimize-deployment/advanced-features/import-guide"
+                "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8"
               ]
             }
           ]

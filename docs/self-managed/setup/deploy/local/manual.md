@@ -70,7 +70,7 @@ For **Windows users**, take the following steps:
 4. Navigate to the `bin` folder.
 5. Start the broker by double-clicking on the `broker.bat` file.
 
-Once the Zeebe broker has started, it should produce the following output:
+Once the Zeebe Broker has started, it should produce the following output:
 
 ```log
 23:39:13.246 [] [main] INFO  io.camunda.zeebe.broker.system - Scheduler configuration: Threads{cpu-bound: 2, io-bound: 2}.
@@ -216,7 +216,7 @@ A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use 
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/setup/deploy/other/docker.md/#optimize) instead.
+The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/setup/deploy/other/docker.md#optimize) instead.
 
 ## Run Web Modeler
 

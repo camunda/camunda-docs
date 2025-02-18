@@ -1,0 +1,210 @@
+---
+id: cancel-process-instance
+title: "Cancel process instance"
+description: "Cancels a running process instance."
+sidebar_label: "Cancel process instance"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWFtv2zYU/isHfGoxRVK6tOv0MMBL0y3rZYbjbg9pHmjpyGJDkSpJxTEE/ffhkPLdBlJgjzFgWCIPz/X7aB52zPG5ZdktGxudo7UglHVc5cjuIlagzY1onNCKZeyShqUFDqZVSqg5NHtrYhaxhhteo0NDWjumeI0sY4Pk9SD4AZcsYoK0NtxVLGIGv7fCYMEyZ1rcNz2tEO5xCboEV+GBXXAacu8deWDzCmvOso65ZUPGrTNCzVnf3wU7aN3vuliSxMZsyaXFiOVaOVSO5njTSJFzciH5ZsmP7lC3nn3D3LGIqVZKPpO4CqAxukHjBFqSpmevaYIlGqT8Zt1ekCMwq0kfbF5piwpmSx9za9GAq7iDhZASZggNN44ywqUEg7k2hQWDtpWOalMaXYOrhIW17fir+tRaR2t/gxRESYl8EAUW8VfFolVIQjmco2ERK7WpuQtDby5YxGqhRN3WLDvv+4g54SjeARjj3RJPQqJZ35OoQdtoZUMyXqUXh9FPj9VV2KGuWMSsj9hFmp5c6QOBgjtOy5R28MClKAgRJ4raGD2TWP90WNz9woyDJBTouJAQig7cQhCcYQFCwe3k/SX8evH6l7sXlXONzZJksVjEpszPsBBOm1ibeWLKnL4k9zKGaYUGoeZLqgovCkE2uYQNfMA2mItS5ITyAf3eGSrXTuHWWNzFXpjdZ8NWdVsj2D7jRvBlcg2iQOVEuSRAHZj2a0reStLBZ7p12Uxydc820Dg0um/FtnXNzTaztwz0EbOOu3YrjBPo/PnVgW6CxZ/T6RiCCsh1gVBqE0gxGIq3QX2RphGr+WN4e5OmPemkij8hEgX42EiuPLT2wxEKam1wwI8PbL3P/j+V0UbMxb7dmG3TdADxuxBR4OXFj1CROFXqVj1z6plTz5w6yanXx/6kRgooy4ZwiMZoAzrPW2OwgEUl5JpwK9vDOeWZac9Me2bacab1EavRVbqgLkJbDx1qJjKWDGQ6W7lpk+6wA+mTcLaUPmhqHNA8rPqW1kiWsS6Qqs+SpKu0dX3WNdq4Pnmgij1wI+jI7wtM04F8K1BJnXNZBccOi0sT1Bytgr7kdasKDm9hcnUzhT+4wwVf+mSTyV3Vb9O36VGtJHpC42h8DSHCAM2t7WKllnh/VG0Qfopi32RZzFsj3PKGloX0zJAbNKOW6rOGzGDPa6f3IMSi4eH9Ckh//Tv1WKCtbrJp4K4eed0Eoh7rr1KP01J7g+tWZd91qiMaG2JN4/NDxI6vPfFyXdet8ruvmsNCuAr4Vipy2VpHKYiYFDkq6/0a2t+V2McwA/8Ei3AeUxkD1lab7ly4qp3Fua6TPCxb/86kniU1FyoZTNjkcvTpy+d3o7OP15dXn2+uzs7jNHaPzqeLSFFzteMHAf7gcLcfc7f5z3li1z8U1OGjSxrJhSKI+bi6gZS37ICULGLZ0YuBHV7eRQO3blnXzbjFL0b2PQ1/b9EsWXZ7t6Gi524hLD1vmvqTwb2YDP3/S/ihK4aj4Q6DXC393iBbemMRu8fl8RuQ/q6PWIW8QOP9DoKXwbuzKanbKDq4jeij1YpRnmPjTsjuHBOInOs9c/z3zZS4NlyF1LqgtYYv6DqGL4Lz2mfNU9iPdUxyNW/5nGSDTvr8B9V8Uz0=
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Cancel process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/cancellation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Cancels a running process instance.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the process instance to cancel.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          nullable: true,
+          properties: {
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+            },
+          },
+          title: "CancelProcessInstanceRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The process instance is canceled." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

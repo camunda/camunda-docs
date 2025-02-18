@@ -2,7 +2,7 @@
 id: broker-config
 title: "Broker configuration"
 sidebar_label: "Broker configuration"
-description: "Let's analyze how to configure the Zeebe broker"
+description: "Let's analyze how to configure the Zeebe Broker"
 ---
 
 A complete broker configuration template is available in the [Zeebe repo](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template).
@@ -411,16 +411,18 @@ cluster:
 
 ### zeebe.broker.cluster.raft
 
+This section contains all properties required to configure raft.
+
 | Field                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                            | Example Value |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| raft                   | Configure raft properties.                                                                                                                                                                                                                                                                                                                                                                                                             |               |
 | enablePriorityElection | When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distributed the leaders uniformly across the brokers. Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_ENABLEPRIORITYELECTION`. | true          |
 
 #### YAML snippet
 
 ```yaml
 cluster:
-  raft: enablePriorityElection = true
+  raft:
+    enablePriorityElection: true
 ```
 
 ### zeebe.broker.cluster.flush
@@ -591,11 +593,11 @@ request:
 
 ### zeebe.broker.flowControl.request.gradient
 
-| Field        | Description                                                                                                                                                                                                                                                                                                                                                    | Example Value |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_MINLIMIT`.                                                                                                                                                                                                                    | 10            |
-| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_INITIALLIMIT`.                                                                                                              | 20            |
-| rttTolerance | Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_RTTTOLERANCE` | 2.0           |
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                   | Example Value |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_MINLIMIT`.                                                                                                                                                                                                                   | 10            |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_INITIALLIMIT`.                                                                                                             | 20            |
+| rttTolerance | Tolerance for changes from minimum latency. A value ≥ 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT_RTTTOLERANCE` | 2.0           |
 
 #### YAML snippet
 
@@ -610,12 +612,12 @@ request:
 
 ### zeebe.broker.flowControl.request.gradient2
 
-| Field        | Description                                                                                                                                                                                                                                                                                                                                                      | Example Value |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_MINLIMIT`.                                                                                                                                                                                                                     | 10            |
-| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_INITIALLIMIT`.                                                                                                               | 20            |
-| rttTolerance | Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_RTTTOLERANCE`. | 2.0           |
-| longWindow   | longWindow is the length of the window (the number of samples) to calculate the exponentially smoothed average latency. This setting can also be overridden using the environment `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_LONGWINDOW`.                                                                                                                       | 600           |
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                     | Example Value |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_MINLIMIT`.                                                                                                                                                                                                                    | 10            |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_INITIALLIMIT`.                                                                                                              | 20            |
+| rttTolerance | Tolerance for changes from minimum latency. A value ≥ 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_RTTTOLERANCE`. | 2.0           |
+| longWindow   | longWindow is the length of the window (the number of samples) to calculate the exponentially smoothed average latency. This setting can also be overridden using the environment `ZEEBE_BROKER_FLOWCONTROL_REQUEST_GRADIENT2_LONGWINDOW`.                                                                                                                      | 600           |
 
 #### YAML snippet
 
@@ -742,11 +744,11 @@ backpressure:
 
 ### zeebe.broker.backpressure.gradient
 
-| Field        | Description                                                                                                                                                                                                                                                                                                                                           | Example Value |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT_MINLIMIT`.                                                                                                                                                                                                                  | 10            |
-| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT_INITIALLIMIT`.                                                                                                            | 20            |
-| rttTolerance | Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable ZEEBE_BROKER_BACKPRESSURE_GRADIENT_RTTTOLERANCE | 2.0           |
+| Field        | Description                                                                                                                                                                                                                                                                                                                                          | Example Value |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT_MINLIMIT`.                                                                                                                                                                                                                 | 10            |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT_INITIALLIMIT`.                                                                                                           | 20            |
+| rttTolerance | Tolerance for changes from minimum latency. A value ≥ 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable ZEEBE_BROKER_BACKPRESSURE_GRADIENT_RTTTOLERANCE | 2.0           |
 
 #### YAML snippet
 
@@ -761,12 +763,12 @@ backpressure:
 
 ### zeebe.broker.backpressure.gradient2
 
-| Field        | Description                                                                                                                                                                                                                                                                                                                                               | Example Value |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_MINLIMIT`.                                                                                                                                                                                                                     | 10            |
-| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_INITIALLIMIT`.                                                                                                               | 20            |
-| rttTolerance | Tolerance for changes from minimum latency. A value >= 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_RTTTOLERANCE`. | 2.0           |
-| longWindow   | longWindow is the length of the window (the number of samples) to calculate the exponentially smoothed average latency. This setting can also be overridden using the environment `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_LONGWINDOW`.                                                                                                                       | 600           |
+| Field        | Description                                                                                                                                                                                                                                                                                                                                              | Example Value |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| minLimit     | The minimum limit. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_MINLIMIT`.                                                                                                                                                                                                                    | 10            |
+| initialLimit | The initial limit to be used when the broker starts. The limit will be reset to this value when the broker restarts. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_INITIALLIMIT`.                                                                                                              | 20            |
+| rttTolerance | Tolerance for changes from minimum latency. A value ≥ 1.0 indicating how much change from minimum latency is acceptable before reducing the limit. For example, a value of 2.0 means that a 2x increase in latency is acceptable. This setting can also be overridden using the environment variable `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_RTTTOLERANCE`. | 2.0           |
+| longWindow   | longWindow is the length of the window (the number of samples) to calculate the exponentially smoothed average latency. This setting can also be overridden using the environment `ZEEBE_BROKER_BACKPRESSURE_GRADIENT2_LONGWINDOW`.                                                                                                                      | 600           |
 
 #### YAML snippet
 
@@ -842,7 +844,7 @@ as well.
 :::
 
 :::note
-If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md/#zeebegatewaymultitenancy).
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md#zeebegatewaymultitenancy).
 :::
 
 | Field   | Description                                                                                                                                                  | Example value |

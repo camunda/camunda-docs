@@ -8,9 +8,9 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 ## Version compatibility
 
-| Camunda Spring SDK version | JDK    | Camunda version | Bundled Spring Boot version |
-| -------------------------- | ------ | --------------- | --------------------------- |
-| 8.5.x                      | \>= 17 | 8.5.x           | 3.2.x                       |
+| Zeebe Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| ------------------------ | ---- | --------------- | --------------------------- |
+| 8.5.x                    | ≥ 17 | 8.5.x           | 3.2.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 
@@ -127,6 +127,14 @@ You can enforce the right connection mode, for example if multiple contradicting
 ```properties
 zeebe.client.connection-mode=CLOUD
 zeebe.client.connection-mode=ADDRESS
+```
+
+### Configuring OAuth Scope (Optional)
+
+The OAuth scope can be configured via the following [client environment variable](self-managed/zeebe-deployment/security/client-authorization.md#environment-variables) only:
+
+```
+ZEEBE_TOKEN_SCOPE=xxx
 ```
 
 ## Obtain the Zeebe client
