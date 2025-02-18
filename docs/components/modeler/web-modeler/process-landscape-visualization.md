@@ -1,6 +1,6 @@
 ---
 id: process-landscape-visualization
-title: Process Landscape Visualization
+title: Process landscape visualization
 description: "A comprehensive, hierarchical view of all processes within the project."
 ---
 
@@ -8,31 +8,48 @@ import ProcessLandscapeVisualization from './img/process-landscape-visualization
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-The process landscape view provides a visual map of all BPMN files within a project and the interfile [call activities](/components/modeler/bpmn/call-activities/call-activities.md) connections between them.
-It helps quickly understand process dependencies, flow relationships, and overall project structure — all in one interactive canvas.
+Process landscape view provides a visual map of BPMN files in a project and interfile [call activities](/components/modeler/bpmn/call-activities/call-activities.md) connections between them.
+
+- Quickly understand process dependencies, flow relationships, and overall project structure in a single interactive canvas.
+- The view is automatically generated from all BPMN diagrams within a project, offering insights without the need for manual maintenance or updates.
 
 <p><img src={ProcessLandscapeVisualization} alt="Process landscape visualization" /></p>
 
-The landscape view is automatically generated from all BPMN diagrams within a project, offering insights without the need for manual maintenance or updates.
+## Open process landscape view
 
-Landscape view is available by clicking **Landscape view** button from:
+To open the process landscape view, click **View landscape** from any of the following views:
 
 - Project view
 - Folder view
 - [Process application](/docs/components/modeler/web-modeler/process-applications.md) view
 
-  ![process landscape visualization button](img/process-landscape-view-button.png)
+![process landscape visualization button](img/process-landscape-view-button.png)
 
-## Landscape interaction
+## Landscape view interaction
 
-1. **Selecting a BPMN File:** Click on any node to see the BPMN file’s information including the latest version of the process on the sidebar.
+You can interact with the process landscape view in a number of ways.
 
-   :::note
-   For process applications, version tags represents a unified "versioned" snapshot of all process application files rather than separate versions for each file as is done with simple BPMN files.
-   :::
-   ![selected node information](img/process-landscape-node-information.png)
+### View BPMN file information
 
-2. **Searching**: Press `Ctrl+F` or `⌘+F` combination to initialize search. Type the name or identifier of a BPMN file to quickly find, highlight and jump to the corresponding node.
-   ![landscape search](img/process-landscape-search.png)
-3. **Highlighting Paths:** Clicking on a node or connection will highlight the entire chain of related connections.
-   ![landscape selected node connections](img/process-landscape-connection.png)
+Click on any node to view the information for the selected BPMN file, including the latest version of the process on the sidebar.
+
+![selected node information](img/process-landscape-node-information.png)
+
+:::note
+For process applications, version tags represent a unified "versioned" snapshot of all process application files rather than separate versions for each file (as with simple BPMN files).
+:::
+
+### Search
+
+You can search the process landscape for a specific BPMN file.
+
+1. Press `Ctrl+F` or `⌘+F` combination to initialize search.
+1. Enter the name or identifier of the BPMN file you want to search for and highlight.
+
+![landscape search](img/process-landscape-search.png)
+
+### Highlight paths
+
+Click on a node or connection to highlight the entire hierarchy of related connections.
+
+![landscape selected node connections](img/process-landscape-connection.png)
