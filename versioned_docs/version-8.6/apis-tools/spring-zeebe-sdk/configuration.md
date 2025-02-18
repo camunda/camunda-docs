@@ -497,7 +497,7 @@ You could also provide a custom class that can customize the `JobWorker` configu
 
 Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
 
-To enable job streaming on the Zeebe client, you can configure it:
+Job streaming is disabled by default for job workers. To enable job streaming on the Zeebe client, you can configure it:
 
 ```yaml
 camunda:
