@@ -1398,7 +1398,7 @@ kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-ze
 zbctl status --insecure --address localhost:26500
 ```
 
-<!-- ADD REST API ENDPOINT !-->
+<!-- HELP NEEDED !-->
 
 <details>
   <summary>Example Output</summary>

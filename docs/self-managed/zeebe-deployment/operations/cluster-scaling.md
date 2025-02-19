@@ -154,10 +154,9 @@ kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 
 Run the following command to see the current status of the cluster:
 
-<!-- ADD REST API ENDPOINT !-->
-
 ```
-zbctl --insecure status
+curl -L 'http://localhost:8080/v2/topology' \
+-H 'Accept: application/json'
 ```
 
 The response would show that partitions are distributed to new brokers:
@@ -253,10 +252,9 @@ This step is optional, but it is useful when you are testing to see if scaling w
 
 Run the following command to see the current status of the cluster:
 
-<!-- ADD REST API ENDPOINT !-->
-
 ```
-zbctl --insecure status
+curl -L 'http://localhost:8080/v2/topology' \
+-H 'Accept: application/json'
 ```
 
 The response would show that the partitions are moved away from brokers `3`, `4`, and `5`:
