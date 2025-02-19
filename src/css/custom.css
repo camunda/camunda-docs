@@ -953,3 +953,15 @@ ul ol {
     flex-direction: column;
   }
 }
+
+.homeSearch {
+  margin: auto;
+  width: 80%;
+  padding: 20px;
+}
+
+.homeSearch .DocSearch-Button {
+  height: 60px;
+  width: 100%;
+  border-radius: 8px;
+}
