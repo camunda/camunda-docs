@@ -32,7 +32,7 @@ curl -L 'http://localhost:8080/v2/messages/publication' \
 }'
 ```
 
-See [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -62,7 +62,7 @@ curl -L 'http://localhost:8080/v2/messages/publication' \
 }'
 ```
 
-See [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -98,7 +98,7 @@ curl -L 'http://localhost:8080/v2/messages/publication' \
 }'
 ```
 
-See [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
