@@ -114,7 +114,7 @@ Furthermore, you can [leverage the migration tooling](../migration-tooling/) and
 
 To run any solution on Camunda 8, you need to have a running Camunda 8 installation.
 
-If you used an embedded engine with Camunda 7 in the past, this model is no longer possible (see [conceptual differences between Camunda 7 and Camunda 8](https://docs.camunda.io/docs/next/guides/migrating-from-camunda-7/conceptual-differences/)). This might be new to your organization to operate Camunda in addition to your solution itself. The most successful operating model is to have a central team in the organization caring about Camunda, offering it as a self-service platform to others. This is also described in our [process automation Center of Excellence playbook](https://camunda.com/process-orchestration/automation-center-of-excellence/).
+If you used an embedded engine with Camunda 7 in the past, this model is no longer possible (see [conceptual differences between Camunda 7 and Camunda 8](../conceptual-differences/)). This might be new to your organization to operate Camunda in addition to your solution itself. The most successful operating model is to have a central team in the organization caring about Camunda, offering it as a self-service platform to others. This is also described in our [process automation Center of Excellence playbook](https://camunda.com/process-orchestration/automation-center-of-excellence/).
 
 :::note
 We want to unmask some typical misconceptions with Camunda 8:
@@ -128,9 +128,9 @@ You can run small Camunda 8 installations, one per solution if you like. They ca
 
 There are multiple ways to set up Camunda 8:
 
-- Use **Camunda's SaaS** offering: You don't need to install or operate the platform yourself. This is the most convenient and generally recommended option. If you face legal challenges around information security, privacy, and compliance, check the [Camunda Trust Center](https://camunda.com/trust-center/). Note that this option comes with limitations. For example, you can't [migrate historical audit data from Camunda 7](../migration-tooling/) to Camunda 8 SaaS. Or, [multi-tenancy will be introduced in SaaS with Camunda 8.8](https://docs.camunda.io/docs/self-managed/concepts/multi-tenancy/).
+- Use **Camunda's SaaS** offering: You don't need to install or operate the platform yourself. This is the most convenient and generally recommended option. If you face legal challenges around information security, privacy, and compliance, check the [Camunda Trust Center](https://camunda.com/trust-center/). Note that this option comes with limitations. For example, you can't [migrate historical audit data from Camunda 7](../migration-tooling/) to Camunda 8 SaaS. Or, [multi-tenancy will be introduced in SaaS with Camunda 8.8](/self-managed/concepts/multi-tenancy/).
 
-- Run the platform **self-managed**. You might want to look at the [Camunda 8 Run distribution](https://docs.camunda.io/docs/self-managed/setup/deploy/local/c8run/). RDBMS support is planned to be introduced with 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to the [installation guide](https://docs.camunda.io/docs/self-managed/setup/overview/) for details.
+- Run the platform **self-managed**. You might want to look at the [Camunda 8 Run distribution](/self-managed/setup/deploy/local/c8run/). RDBMS support is planned to be introduced with 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to the [installation guide](/self-managed/setup/overview/) for details.
 
 While setting up Camunda 8 is not part of the core migration journey, it is a prerequisite and should be tackled early in the migration journey to avoid blockers.
 
@@ -288,7 +288,7 @@ You need to refactor your code to use Camunda 8 APIs only.
 
 Most prominently you need to **convert any API calls to Camunda** (e.g. RuntimeService) and the glue code attached to process models (e.g. JavaDelegates). The [code conversion patterns](../code-conversion/) goes into more details how to approach this. Some of those changes might be automated using [OpenRewrite recipes](https://docs.openrewrite.org/).
 
-Depending on your architecture you might also have to **re-architect** core parts of your solution. This is especially true if you rely on transaction integration, threading, internal API (like calling the HistoryService from within a JavaDelegate), or features that are deprecated and thus are not planned for Camunda 8 (like CMMN). See [conceptual differences between Camunda 7 and Camunda 8](https://docs.camunda.io/docs/next/guides/migrating-from-camunda-7/conceptual-differences/) for more details on this.
+Depending on your architecture you might also have to **re-architect** core parts of your solution. This is especially true if you rely on transaction integration, threading, internal API (like calling the HistoryService from within a JavaDelegate), or features that are deprecated and thus are not planned for Camunda 8 (like CMMN). See [conceptual differences between Camunda 7 and Camunda 8](../conceptual-differences/) for more details on this.
 
 <!--TODO: Add list features that are not planned -->
 
@@ -311,7 +311,7 @@ While technically it is a great thing to improve your solution, many migration p
 
 While we see a lot of value in doing both tasks at the same time - as you touch a lot of the code anyway and will probably also retest your solution thoroughly - if the budget is tight it might be better to focus on migration instead of not getting budgeted for the increased scope.
 
-## Migrate Data (optional)
+## Migrate data (optional)
 
 With your solution code migrated, you also need to look at your production data. Camunda currently develops the **[Data Migrator](../migration-tooling/)** to be used for this (**planned to be available with 8.8**). You might need to customize the data migrator, especially if you used complex data formats in C7 (e.g. Java objects) that need to be converted to something Camunda 8 can handle (e.g. JSON). As part of this step you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using for example [upcoming document handling possibilities](https://docs.camunda.io/docs/next/components/concepts/document-handling/)).
 
