@@ -1391,4 +1391,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
   </summary>
 </details>
 
+</div>
+  </TabItem>
+</Tabs>
+
 In conclusion, adhering to this updated operational procedure ensures a structured and efficient recovery process for maintaining operational continuity in dual-region deployments. Please remain cautious in managing dual-region environments and be prepared to implement the outlined steps for successful failover and failback.
