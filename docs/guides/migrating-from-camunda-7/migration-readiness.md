@@ -1,22 +1,23 @@
 ---
 id: migration-readiness
-title: Prepare for smooth migrations
+title: Migration-ready solutions
 description: "Learn how to build Camunda 7 solutions that are easy to migrate."
 ---
 
-Sometimes you might not be able to use Camunda 8 right away as described in [What to do When You Can’t Quickly Migrate to Camunda 8](https://camunda.com/blog/2022/05/what-to-do-when-you-cant-quickly-migrate-to-camunda-8/). In this case, you will keep developing Camunda 7 process solutions, but you should establish some practices as quickly as possible to ease migration projects later on.
-
-To implement Camunda 7 process solutions that can be easily migrated, stick to the following rules and development practices:
+To implement Camunda 7 process solutions that can be easily migrated, stick to the following rules and development practices. Those practices might also inform a refactoring step to prepare your existing Camunda 7 solution for migration:
 
 - Implement what we call **Clean Delegates** - concentrate on reading and writing process variables, plus business logic delegation. Data transformations will be mostly done as part of your delegate (and especially not as listeners, as mentioned below). Separate your actual business logic from the delegates and all Camunda APIs. Avoid accessing the BPMN model and invoking Camunda APIs within your delegates.
-- Don’t use listeners or Spring beans in expressions to do data transformations via Java code.
-- Don’t rely on an ACID transaction manager spanning multiple steps or resources.
-- Don’t expose Camunda APIs (REST or Java) to other services or frontend applications.
-- Use primitive variable types or JSON payloads only (no XML or serialized Java objects).
-- Use simple expressions or plug-in FEEL. FEEL is the only supported expression language in Camunda 8. JSONPath is also relatively easy to translate to FEEL. Avoid using special variables in expressions, e.g. `execution` or `task`.
-- Use your own user interface or Camunda Forms; the other form mechanisms are not supported out of the box in Camunda 8.
-- Avoid using any implementation classes from Camunda; generally, those with `\*.impl.\*` in their package name.
-- Avoid using engine plugins.
+- **Don’t** rely on an **ACID transaction manager** spanning multiple steps or resources.
+- **Don’t expose Camunda APIs** (REST or Java) to other services or frontend applications.
+- Use **primitive variable types or JSON** payloads only (no XML or serialized Java objects).
+- **Don’t call Spring beans in expressions** (e.g. to leverage Java code to do data transformations).
+- Use **simple expressions** or plug-in **FEEL**. FEEL is the only supported expression language in Camunda 8. JSONPath is also relatively easy to translate to FEEL. Avoid using special variables in expressions, e.g. `execution` or `task`.
+- Use your own user interface for task forms or Camunda Forms; the other form mechanisms are not supported out of the box in Camunda 8.
+- **Avoid** using any **implementation classes** from Camunda; generally, those with `\*.impl.\*` in their package name.
+- **Avoid** using **process engine plugins**.
+- **Avoid** using **Cockpit plugins**.
+
+Let's dive into some of those topics in more depth.
 
 ### Clean delegates
 

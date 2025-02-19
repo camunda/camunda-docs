@@ -1,13 +1,13 @@
 ---
 id: technical-details
-title: Technical Details around Camunda 7 to Camunda 8 Migration
-sidebar_label: Technical Details
+title: Technical details around Camunda 7 to Camunda 8 Migration
+sidebar_label: Technical details
 description: "Understand technical details (e.g. BPMN Schema differences) from Camunda 7 to Camunda 8."
 ---
 
-To run a soluion built for Camunda 7 on Camunda 8 you need to convert or refactor your code. We focus on Java code in this guide. This section will look into typical conversion patterns, and how to leverage tooling (namely [Open Rewrite](https://docs.openrewrite.org/)) to automate some of those patterns, before giving you an outlook how AI (think of GitHub Copilot or ChatGPT) can help you doing those refactoring.
+If you are interested in more details around the differences of the BPMN or DMN models, this page gives you more insight. It describes the logic that is also implemented in the [Diagram Converter](../migration-tooling/).
 
-## Adjusting BPMN Models
+## Adjusting BPMN models
 
 Ensure your BPMN process models are adjusted as follows to migrate them from Camunda 7 to Camunda 8:
 
@@ -236,7 +236,7 @@ These elements will be converted:
 
 Additionally, there is now a built-in way to collect results using `zeebe:loopCharacteristics outputCollection` and `zeebe:loopCharacteristics outputElement`. You should consider this before using a workaround (for example, collecting local variables to a collection in parent scope in an exclusive job).
 
-## DMN Models
+## Adjusting DMN models
 
 The DMN engine in Camunda 8 is more modern than in Camunda 7, which leads to some small differences. To evaluate Camunda 7 DMN files in Camunda 8, change the following in the XML:
 
