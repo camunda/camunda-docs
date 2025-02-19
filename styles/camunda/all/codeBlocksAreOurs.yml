@@ -1,8 +1,8 @@
 extends: existence
-message: "Improper codeblock source: '%s'. Please only reference codeblocks from Camunda GitHub orgs."
+message: "Improper codeblock source: `%s`. Please only reference codeblocks from Camunda GitHub orgs."
 level: error
 nonword: true
 scope: raw
 tokens:
   # Captures any referenced codeblocks that point at a non-Camunda github org.
-  - "`{3}.*\nhttps://github.com/(?!camunda|camunda-cloud).*\n`{3}"
+  - "`{3}.*\nhttps://github.com/(?!camunda/|camunda-cloud/).*\n`{3}"
