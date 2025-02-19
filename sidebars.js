@@ -46,8 +46,13 @@ module.exports = {
       ],
     },
     {
-      "Migrate from Camunda 7": [
-        "guides/migrating-from-camunda-7/index",
+      type: "category",
+      label: "Migrate from Camunda 7",
+      link: {
+        type: "doc",
+        id: "guides/migrating-from-camunda-7/index",
+      },
+      items: [
         "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
         "guides/migrating-from-camunda-7/migration-tooling",
