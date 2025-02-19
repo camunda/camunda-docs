@@ -45,4 +45,6 @@ Get help with your migration journey from the following additional resources.
   - Professional advisory services
   - Implementation services
 
-Talk to your customer success manager or [reach out to Camunda](https://camunda.com/contact-us/).
+:::info
+Still need more help? Contact your customer success manager or [reach out to Camunda](https://camunda.com/contact-us/).
+:::

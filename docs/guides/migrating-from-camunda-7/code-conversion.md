@@ -1,6 +1,6 @@
 ---
 id: code-conversion
-title: Code Conversion from Camunda 7 to Camunda 8
+title: Code Conversion
 sidebar_label: Code conversion
 description: "Understand patterns to convert your code written for Camunda 7 to run on Camunda 8."
 ---

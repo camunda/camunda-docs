@@ -1,11 +1,11 @@
 ---
 id: technical-details
-title: Technical details around Camunda 7 to Camunda 8 Migration
+title: Technical details
 sidebar_label: Technical details
 description: "Understand technical details (e.g. BPMN Schema differences) from Camunda 7 to Camunda 8."
 ---
 
-If you are interested in more details around the differences of the BPMN or DMN models, this page gives you more insight. It describes the logic that is also implemented in the [Diagram Converter](../migration-tooling/).
+Technical details around the differences between Camunda 7 and Camunda 8 BPMN and DMN models, including the logic also implemented in the [Diagram Converter](../migration-tooling/).
 
 ## Adjusting BPMN models
 

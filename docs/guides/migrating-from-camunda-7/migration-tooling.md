@@ -1,17 +1,19 @@
 ---
 id: migration-tooling
-title: Tooling to support Camunda 7 to Camunda 8 migration
+title: Migration tooling
 sidebar_label: Migration tooling
 description: "Understand the available migration tooling and its roadmap."
 ---
 
-Camunda currently invests in tooling to ease migration from Camunda 7 to Camunda 8.
+Camunda currently invests in tooling to help support and ease your migration from Camunda 7 to Camunda 8.
 
 :::info
 The migration tooling is currently under development, with an initial release planned for **Camunda 8.8 (October 2025)**.
 :::
 
-Camunda provides the following tools:
+## Supported tools
+
+Camunda provides the following migration tools:
 
 - **[Migration Analyzer](#migration-analyzer)**: Helps you gain a first understanding of migration tasks. It is available for local installation (requires Java) or [hosted as a free SaaS offering](https://diagram-converter.consulting-sandbox.camunda.cloud/).
 

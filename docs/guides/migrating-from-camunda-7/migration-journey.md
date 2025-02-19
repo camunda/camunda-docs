@@ -1,6 +1,6 @@
 ---
 id: migration-journey
-title: Journey to Migrate from Camunda 7 and Camunda 8
+title: Migration journey
 sidebar_label: Migration journey
 description: "Understand the main steps for a successful migration journey."
 ---
