@@ -1,5 +1,5 @@
 extends: existence
-message: "Improper codeblock source: `%s`. Please only reference codeblocks from Camunda GitHub orgs."
+message: "Improper codeblock source: '%s'. Please only reference codeblocks from Camunda GitHub orgs."
 level: error
 nonword: true
 scope: raw
