@@ -993,10 +993,10 @@ module.exports = {
           label: "8.8",
           link: {
             type: "doc",
-            id: "reference/announcements-release-notes/880-announcements",
+            id: "reference/announcements-release-notes/880/880-announcements",
           },
           items: [
-            "reference/announcements-release-notes/880-announcements",
+            "reference/announcements-release-notes/880/880-announcements",
             "reference/announcements-release-notes/880/880-release-notes",
           ],
         },
