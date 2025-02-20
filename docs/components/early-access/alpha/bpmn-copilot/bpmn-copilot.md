@@ -38,6 +38,12 @@ Timeouts may occur at this step if your query is too complex.
 
 :::
 
+### Example Prompts
+
+- "Create an absence request diagram"
+- "Generate a mortgage approval process"
+- "Create an e-commerce order fulfillment process"
+
 ### Limitations
 
 - The BPMN Copilot does not officially support modifying existing diagrams (including diagrams with implementation details).
