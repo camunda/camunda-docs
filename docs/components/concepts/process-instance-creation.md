@@ -40,6 +40,17 @@ curl -L 'http://localhost:8080/v2/process-instances' \
 }'
 ```
 
+Response:
+
+```
+{
+  "processDefinitionId": "order-process",
+  "processDefinitionVersion": 1,
+  "processDefinitionKey": "2251799813685249",
+  "processInstanceKey": "2251799813686019"
+}
+```
+
 See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
@@ -75,6 +86,18 @@ curl -L 'http://localhost:8080/v2/process-instances' \
   "awaitCompletion": true,
   "variables": { "orderId": "1234" }
 }'
+```
+
+Response:
+
+```
+{
+  "processKey": 2251799813685249,
+  "bpmnProcessId": "order-process",
+  "version": 1,
+  "processInstanceKey": 2251799813686045,
+  "variables": "{\"orderId\":\"1234\"}"
+}
 ```
 
 See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
