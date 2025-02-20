@@ -485,6 +485,11 @@ import SignalCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-catc
 import SignalBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-boundary-event.svg'
 import SignalBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-boundary-event-non-interrupting.svg'
 
+import EscalationEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/escalation-event-subprocess.svg'
+import EscalationEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/escalation-event-subprocess-non-interrupting.svg'
+import EscalationBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/escalation-boundary-event.svg'
+import EscalationBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/escalation-boundary-event-non-interrupting.svg'
+
 <table className="bpmn-coverage-event-table">
   <thead>
       <tr>
@@ -607,6 +612,32 @@ import SignalBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-s
         <td>
             <a href="../../modeler/bpmn/signal-events/">
                 <SignalBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events/">Escalation</a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events/">
+                <EscalationEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events">
+                <EscalationEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td></td>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events">
+                <EscalationBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events">
+                <EscalationBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
     </tr>
