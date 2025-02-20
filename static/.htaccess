@@ -47,7 +47,7 @@ AddType text/plain      graphqls
 AddType text/plain      diff
 
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
-RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|svg|graphqls|diff))/$ /$1 [R=301,L]
+RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 [R=301,L]
 
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
