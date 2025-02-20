@@ -194,7 +194,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-element-instance-variables",
           label: "Update element instance variables",
-          className: "api-method post",
+          className: "api-method put",
         },
       ],
     },
