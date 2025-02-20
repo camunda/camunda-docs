@@ -84,7 +84,7 @@ You can run audit data migration alongside normal operations (for example, after
 
 ### Typical choreography of runtime and history migration
 
-As described in [the roll-out phase of the migration journey](../migration-journey/#roll-out), you will typically use the following sequence of tasks when applying both data migrations while keeping downtimes to a minimum:
+As described in [the roll-out phase of the migration journey](./migration-journey.md#6roll-out), you will typically use the following sequence of tasks when applying both data migrations while keeping downtimes to a minimum:
 
 1. Stop the Camunda 7 solution (normally shut down your application).
 2. Start the Data Migrator in "running instance migration mode".
@@ -97,11 +97,11 @@ With this approach, the duration of history migration doesn't block big bang mig
 
 ### Customization of Data Migrator
 
-You might need to customize the data migration, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step, you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using, for example, [upcoming document handling possibilities](https://docs.camunda.io/docs/next/components/concepts/document-handling/)).
+You might need to customize the data migration, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step, you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using, for example, upcoming document handling possibilities).
 
 ## Code Converter
 
-Code conversion is described in [Code Conversion](./code-conversion/).
+Code conversion is described in [Code Conversion](./code-conversion.md).
 
 ## Camunda 7 Adapter
 
