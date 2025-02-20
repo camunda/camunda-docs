@@ -35,6 +35,7 @@ curl -L 'http://localhost:8080/v2/messages/publication' \
 See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
 When you require immediate feedback if the message was correlated to an open subscription, you can use `Correlate message` via Camunda 8 REST API. If correlation is successful it will return the first process instance key the message correlated with.
 
+```
 curl -L 'http://localhost:8080/v2/messages/correlation' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
@@ -42,8 +43,10 @@ curl -L 'http://localhost:8080/v2/messages/correlation' \
 "name": "Money collected",
 "correlationKey": "order-123"
 }'
+```
 
 See the [API reference for correlate message](/apis-tools/camunda-api-rest/specifications/correlate-message.api.mdx) for more information, including additional request fields and code samples.
+
    </p>
  </details>
 
