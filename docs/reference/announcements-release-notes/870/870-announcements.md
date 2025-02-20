@@ -18,19 +18,19 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
-- [Major product and feature releases](#major-product-and-feature-releases)
+- [New features](#new-features)
   - [Amazon Web Services (AWS) region support SaaS](#amazon-web-services-aws-region-support-saas)
-  - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
-  - [Milestones renamed to versions](#web-modeler-milestones-renamed-to-versions)
+  - [Deploy diagram change Self-Managed {#web-modeler-deploy-diagram-change}](#deploy-diagram-change-self-managed-web-modeler-deploy-diagram-change)
+  - [Milestones renamed to versions {#web-modeler-milestones-renamed-to-versions}](#milestones-renamed-to-versions-web-modeler-milestones-renamed-to-versions)
   - [Southeast Asia region for SaaS customers SaaS](#southeast-asia-region-for-saas-customers-saas)
 
 :::note
 
-There are currently no known versioning changes or deprecations associated with the 8.7 release.
+There are currently no known versioning changes or breaking changes associated with the 8.7 release.
 
 :::
 
-## Major product and feature releases
+## New features
 
 ### Amazon Web Services (AWS) region support <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 

@@ -14,12 +14,12 @@ Important changes and updates for the Camunda 8.8 release are summarized below.
 
 - [Versioning and environment changes Self-Managed](#versioning-and-environment-changes-self-managed)
   - [Helm charts](#helm-charts)
-- [Deprecations and breaking changes](#deprecations-and-breaking-changes)
+- [Breaking changes](#breaking-changes)
   - [Deprecated: Operate and Tasklist v1 REST APIs](#deprecated-operate-and-tasklist-v1-rest-apis)
   - [Deprecated: Job-based user tasks querying](#deprecated-job-based-user-tasks-querying)
   - [Deprecated: Zeebe gRPC API endpoints](#deprecated-zeebe-grpc-api-endpoints)
   - [Removed: Tasklist GraphQL API](#removed-tasklist-graphql-api)
-- [Major product and feature releases](#major-product-and-feature-releases)
+- [New features](#new-features)
   - [Camunda 8 REST API updates SaaSSelf-Managed](#camunda-8-rest-api-updates-saasself-managed)
   - [Identity management updates SaaSSelf-Managed](#identity-management-updates-saasself-managed)
     - [Cluster-level identity management](#cluster-level-identity-management)
@@ -46,7 +46,7 @@ New migration guides will also be provided to support you when migrating from a 
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
 :::
 
-## Deprecations and breaking changes
+## Breaking changes
 
 ### Deprecated: Operate and Tasklist v1 REST APIs
 
@@ -78,7 +78,7 @@ With the 8.8 release, the deprecated [Tasklist GraphQL API](/apis-tools/tasklist
 Learn more about these updates in Upcoming API Changes in Camunda 8.
 ::: -->
 
-## Major product and feature releases
+## New features
 
 ### Camunda 8 REST API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

@@ -110,7 +110,7 @@ Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two
   - **Camunda 7**: Uses the `3.x` versioning scheme and the `latest` Docker tag.
   - **Camunda 8**: Uses the `8.x` versioning scheme and the `8-latest` Docker tag.
 
-## Deprecations and breaking changes
+## Breaking changes
 
 ### Zeebe Go client & CLI client (zbctl)
 
@@ -147,7 +147,7 @@ The `CorrelationResult` record has been changed compared to the previous version
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
 
-## Major product and feature releases
+## New features
 
 ### Zeebe Java client
 

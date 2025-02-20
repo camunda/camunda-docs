@@ -9,9 +9,9 @@ description: "Important announcements and release notes for upcoming and past Ca
 Announcements include the following details:
 
 - Versioning changes
-- Deprecations
+- Deprecations or breaking changes
 - Known limitations
-- Major product/feature releases, which may include any product feature impacting several components and could lead to a disruption in users' typical journey through the product, or a breaking change across additional components.
+- Major product/feature releases, labeled as "New features", which may include any product feature impacting several components and could lead to a disruption in users' typical journey through the product, or a breaking change across additional components.
 
 ### Camunda 8.8
 
