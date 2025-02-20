@@ -5,34 +5,41 @@ sidebar_label: Code conversion
 description: "Understand patterns to convert your code written for Camunda 7 to run on Camunda 8."
 ---
 
-Camunda 8 is a complete rewrite of Camunda 7. As a result, you must convert your models (BPMN and DMN) and some of your code to work with the Camunda 8 API, especially code that does the following:
+As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (BPMN and DMN) and some of your code to work with the Camunda 8 API.
 
-- Uses the Client API (e.g. to start process instances)
+## Overview
+
+You must especially rewrite code that does the following:
+
+- Uses the Client API (to start process instances for example).
 - Implements [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
   - [External tasks](/components/best-practices/development/invoking-services-from-the-process-c7.md#external-tasks), where workers subscribe to the engine.
   - [Java code attached to a service task](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) and called by the engine directly (in-VM).
 
-This guide helps you do this if your code is written in Java. Therefore, it describes:
+This guide helps you do this if your code is written in Java, and covers the following:
 
-- [Typical code conversion patterns](#code-conversion-patterns)
-- [OpenRewrite recipes](#openrewrite-recipes) as a possibility to automate refactoring
-- [Diagram Converter](#diagram-converter) to convert your BPMN and DMN models
-- [Leveraging AI to ease refactoring](#leveraging-ai-for-refactoring)
+- [Typical code conversion patterns](#code-conversion-patterns).
+- [OpenRewrite recipes](#openrewrite-recipes) as a possibility to automate refactoring.
+- [Diagram Converter](#diagram-converter) to convert your BPMN and DMN models.
+- [Leveraging AI to ease refactoring](#leveraging-ai-for-refactoring).
 
 ## Code conversion patterns
 
-Because of the flexibility of Camunda 7, users leveraged different ways to write code. Hence, there are many possible conversion patterns. Our approach to collect those is to use a collaborative GitHub repository, where our consultants, partners, and users can add their own patterns to the catalog. Still, you might adapt the patterns to your own situation, for example, if you introduced your own data handling or glue code abstractions.
+Because of the flexibility of Camunda 7, users leveraged different ways to write code, resulting in many possible conversion patterns.
+
+- Our approach to collect these is to use a collaborative GitHub repository, where our consultants, partners, and users can add their own patterns to the catalog.
+- You might still adapt the patterns to your situation, for example, if you use your own data handling or glue code abstractions.
+
+You can find the pattern catalog at [https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
 
 :::info
 The pattern catalog was kicked off and will be filled in Q2 of 2025.
 :::
 
-You can find the pattern catalog at [https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
-
 ## OpenRewrite recipes
 
 :::info
-First recipes will be delivered throughout Q2 of 2025 and we plan a first release **with Camunda 8.8 (October 2024)**. Iterative improvements will follow afterward.
+First recipes will be delivered throughout Q2 of 2025, and Camunda plans a first release **with Camunda 8.8 (October 2024)**. Iterative improvements will follow after.
 :::
 
 [OpenRewrite](https://docs.openrewrite.org/) is an open-source framework that can automate refactorings by so-called recipes. It is provided with an Apache License, making it easy to adopt in any context. Technically, to [run recipes](https://docs.openrewrite.org/running-recipes), you need to add a Maven plugin to your build.
@@ -62,7 +69,7 @@ For example, to run a recipe to convert JavaDelegates to Spring-based Job Worker
 
 Those recipes might work out-of-the-box for your environment, but most often they need to be adjusted to your code patterns. In this case, use the existing patterns as a basis to make your own adjustments or extensions.
 
-You can find the existing recipes on GitHub: [https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
+You can find the existing recipes on GitHub at [https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
 
 ## Diagram converter
 
@@ -78,7 +85,7 @@ You can use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite mor
 
 ## Leveraging AI for refactoring
 
-You can use any AI you have available to assist you with refactoring tasks. In our experiments with, for example, ChatGPT or GitHub Copilot, we got a long way by simply telling it:
+You can use any AI you have available to assist you with refactoring tasks. In our experiments with ChatGPT and GitHub Copilot for example, we had success by simply telling it:
 
 ```
 Please adjust this codebase, written for Camunda 7, to run with Camunda 8.
@@ -86,29 +93,29 @@ Please adjust this codebase, written for Camunda 7, to run with Camunda 8.
 
 ## Example: Adjusting a Spring Boot application
 
-:::warning
+<!-- :::warning
 This paragraph needs improvement - it is slightly outdated.
-:::
+::: -->
 
 For example, to migrate an existing Spring Boot application, take the following steps:
 
 1. Adjust Maven dependencies:
 
-- Remove Camunda 7 Spring Boot Starter and all other Camunda dependencies.
-- Add the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md).
+   - Remove Camunda 7 Spring Boot Starter and all other Camunda dependencies.
+   - Add the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md).
 
-2. Adjust config:
+2. Adjust configuration:
 
-- Set [Camunda 8 credentials](../../apis-tools/spring-zeebe-sdk/configuration.md) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
-- Remove existing Camunda 7 settings.
+   - Set [Camunda 8 credentials](../../apis-tools/spring-zeebe-sdk/configuration.md) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
+   - Remove existing Camunda 7 settings.
 
 3. Add `@ZeebeDeployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
 
-4. Adjust your source code and process model as described in the sections below.
+4. Adjust your source code and process model as described below.
 
 ### Client API
 
-The Zeebe API (e.g. the workflow engine API - start process instances, subscribe to tasks, or complete them) has been completely redesigned and is not compatible with Camunda 7. While conceptually similar, the API uses different method names, data structures, and protocols.
+The Zeebe API (for example, the workflow engine API - start process instances, subscribe to tasks, or complete them) has been completely redesigned and is not compatible with Camunda 7. While conceptually similar, the API uses different method names, data structures, and protocols.
 
 If this affects large parts of your code base, you could write a small abstraction layer implementing the Camunda 7 API delegating to Camunda 8, probably marking unavailable methods as deprecated. We welcome community extensions that facilitate this but have not yet started our own efforts.
 

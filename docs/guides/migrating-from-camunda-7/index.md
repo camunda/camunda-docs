@@ -16,18 +16,17 @@ Learn how to migrate process solutions developed for Camunda 7 to run on Camunda
 
 This guide covers the typical migration journey from Camunda 7 to Camunda 8, describing the decisions to be made along the way, as well as linking to more in-depth material or tooling you might find useful.
 
-It is important to understand that Camunda 8 is not a drop-in replacement for Camunda 7.
+It is important to understand that **Camunda 8 is not a drop-in replacement for Camunda 7**.
 
-- It is not sufficient to exchange a library; you might have to adjust your BPMN models, refactor code, and probably also re-architect your solution.
-- This effort greatly depends on how your existing Camunda 7 solution is built. This guide dives deeper into all aspects involved.
+It is not sufficient to exchange a library; you might have to adjust your BPMN models, refactor code, and probably also re-architect your solution. This effort greatly depends on how your existing Camunda 7 solution is built. This guide dives deeper into all the aspects involved.
 
 :::note
-This guide covers tooling in development for Camunda 8.8 that might not be complete at the time of reading.
+This guide covers [migration tooling](migration-tooling.md) in development for Camunda 8.8 that might not be complete at the time of reading.
 :::
 
 ## What you will learn
 
-This guide covers the following main aspects involved in a Camunda 7 migration.
+This guide covers the following main aspects involved when migrating from Camunda 7 to Camunda 8.
 
 <MigrationsGrid migrations={gettingStartedCards} />
 

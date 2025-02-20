@@ -37,7 +37,7 @@ The following attributes/elements **cannot** be migrated:
 
 The following attribute can be migrated:
 
-- `camunda:versionTag` to `bpmn:extensionElements > zeebe:versionTag value`
+- `camunda:versionTag` to `bpmn:extensionElements > zeebe:versionTag value`.
 
 ### Service tasks
 
@@ -253,7 +253,7 @@ Web Modeler will automatically update `modeler:executionPlatform` and `modeler:e
 The following elements/attributes are **not** supported in Camunda 8:
 
 - `History Time to Live`
-- You cannot select the `Expression Language`, only FEEL is supported
+- You cannot select the `Expression Language`, only FEEL is supported.
 - The property `Input Variable` is removed. In FEEL, the input value can be accessed by using `?` if needed.
 
 Furthermore, legacy behavior can still be executed but the following should be kept in mind:
