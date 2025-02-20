@@ -39,8 +39,8 @@ curl -L 'http://localhost:8080/v2/messages/correlation' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -d '{
-  "name": "Money collected",
-  "correlationKey": "order-123"
+"name": "Money collected",
+"correlationKey": "order-123"
 }'
 
 See the [API reference for correlate message](/apis-tools/camunda-api-rest/specifications/correlate-message.api.mdx) for more information, including additional request fields and code samples.
