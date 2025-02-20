@@ -26,7 +26,7 @@ This guide covers [migration tooling](migration-tooling.md) in development for C
 
 ## What you will learn
 
-This guide covers the following main aspects involved when migrating from Camunda 7 to Camunda 8.
+This guide covers the following main aspects involved in migrating from Camunda 7 to Camunda 8.
 
 <MigrationsGrid migrations={gettingStartedCards} />
 
