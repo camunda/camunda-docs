@@ -72,6 +72,7 @@ curl -L 'http://localhost:8080/v2/process-instances' \
 -d '{
   "processDefinitionId": "order-process”,
   "processDefinitionVersion": 1,
+  "awaitCompletion": true,
   "variables": { "orderId": "1234" }
 }'
 ```
@@ -110,7 +111,7 @@ Start instructions have the same [limitations as process instance modification](
 Start instructions are supported for both `CreateProcessInstance` commands.
 
 <details>
-   <summary>Create a process instance and await results via Camunda 8 REST API</summary>
+   <summary>Create a process instance and start at a user-defined element</summary>
    <p>
 
 ```
