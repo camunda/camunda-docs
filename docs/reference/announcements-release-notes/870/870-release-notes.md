@@ -200,7 +200,7 @@ As Job-worker user tasks managed by Camunda will be deprecated in Camunda 8.9, C
 
 :::caution
 
-This [alpha release](/reference/announcements-release-notes/release-policy.md) contains a known issue where Self-Managed customers using the 8.7.0-alpha2 Helm Chart cannot login to Operate. This issue is due to key architecture refactoring and improvements, and will be resolved in the next release.
+This [alpha release](/reference/announcements-release-notes/release-policy.md) contains a known issue where Self-Managed customers using the 8.7.0-alpha2 Helm chart cannot login to Operate. This issue is due to key architecture refactoring and improvements, and will be resolved in the next release.
 
 :::
 
