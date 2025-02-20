@@ -4,7 +4,7 @@ title: "Announcements"
 description: "Important changes and updates for the Camunda 8.8 release including deprecation & removal notices."
 ---
 
-import DeployDiagramImg from '../img/deploy-diagram-modal.png';
+import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Important changes and updates for the Camunda 8.8 release are summarized below.
 
