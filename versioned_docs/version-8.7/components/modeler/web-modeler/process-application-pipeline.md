@@ -68,7 +68,7 @@ Play is being rebuilt and progressively rolled out to more users. See [Play limi
 
 ## Review
 
-After validation is complete, you can [create a new version of your process application](/docs/components/modeler/web-modeler/process-application-versioning.md#create-a-bulk-version) and request a review:
+After validation is complete, you can [create a new version of your process application](/components/modeler/web-modeler/process-application-versioning.md#create-a-bulk-version) and request a review:
 
 1. Use [process application versioning](process-application-versioning.md) to create a version for all files in the process application. You can [compare versions](/components/modeler/web-modeler/versions.md#compare-versions) to visually review changes between two versions of a BPMN file, or view code changes for other files.
 2. Request a review for the newest version of the process application from the version history page of the process application. Collaborators with edit permission in your project will see a notification on the process diagram page once you have requested a review.
@@ -96,8 +96,9 @@ If you want to use your own deployment pipeline after the review is complete, yo
 ### Deployment policy
 
 By default, only organization administrators can deploy process applications to the `prod` tagged clusters.
-Organization administrators can change this policy in the [process application deployment settings](/docs/components/modeler/web-modeler/web-modeler-settings.md#process-application-deployment).
-There, you can enable non-admin users with deployment permission to deploy to process applications to production stages
+Organization administrators can change this policy in the [process application deployment settings](/components/modeler/web-modeler/web-modeler-settings.md#process-application-deployment).
+
+From these settings, you can enable non-admin users with deployment permission to deploy to process applications to production stages
 after a collaborator has the approved process application version using the [process application version review](process-application-pipeline.md#review).
 
 ## Process governance
