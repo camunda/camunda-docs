@@ -35,7 +35,7 @@ Use the latest released version from [Maven Central](https://search.maven.org/ar
 In Java code, instantiate the client as follows:
 
 ```java
-  private static final String zeebeGrpc = "[Zeebe Address e.g. f887f1a6-7c2b-48ce-809a-e11e5a6ba31a.dsm-1.zeebe.camunda.io:443]";
+  private static final String zeebeGrpc = "[Zeebe Address e.g. grpcs://f887f1a6-7c2b-48ce-809a-e11e5a6ba31a.dsm-1.zeebe.camunda.io:443]";
   private static final String zeebeRest = "[Zeebe Address e.g. https://dsm-1.zeebe.camunda.io/f887f1a6-7c2b-48ce-809a-e11e5a6ba31a]";
   private static final String audience = "[Zeebe Token Audience, e.g., zeebe.camunda.io]";
   private static final String clientId = "[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]";
@@ -91,6 +91,10 @@ ZeebeClient client =
         .restAddress(System.getenv("ZEEBE_REST_ADDRESS"))
         .build();
 ```
+
+:::note
+Make sure to provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+:::
 
 ### X.509 authorizers
 
