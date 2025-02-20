@@ -134,9 +134,9 @@ You can run small Camunda 8 installations, one per solution if you like. They ca
 
 There are multiple ways to set up Camunda 8:
 
-- Use **Camunda's SaaS** offering: You don't need to install or operate the platform yourself. This is the most convenient and generally recommended option. If you face legal challenges around information security, privacy, and compliance, check the [Camunda Trust Center](https://camunda.com/trust-center/). Note that this option comes with limitations. For example, you can't [migrate historical audit data from Camunda 7](./migration-tooling.md) to Camunda 8 SaaS, and [multi-tenancy will be introduced in SaaS with Camunda 8.8](/self-managed/concepts/multi-tenancy/).
+- Use **Camunda's SaaS** offering: You don't need to install or operate the platform yourself. This is the most convenient and generally recommended option. If you face legal challenges around information security, privacy, and compliance, check the [Camunda Trust Center](https://camunda.com/trust-center/). Note that this option comes with limitations. For example, you can't [migrate historical audit data from Camunda 7](./migration-tooling.md) to Camunda 8 SaaS, and [multi-tenancy will be introduced in SaaS with Camunda 8.8](/self-managed/concepts/multi-tenancy.md).
 
-- Run the platform **Self-Managed**. You might want to look at the [Camunda 8 Run distribution](/self-managed/setup/deploy/local/c8run/). RDBMS support is planned to be introduced with 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to the [installation guide](/self-managed/setup/overview/) for details.
+- Run the platform **Self-Managed**. You might want to look at the [Camunda 8 Run distribution](/self-managed/setup/deploy/local/c8run.md). RDBMS support is planned to be introduced with 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to the [installation guide](/self-managed/setup/overview.md) for details.
 
 While setting up Camunda 8 is not part of the core migration journey, it is a prerequisite and should be tackled early in the migration journey to avoid blockers.
 
@@ -255,7 +255,7 @@ It can make sense to do a first refactoring step in your Camunda 7 codebase to p
 
 Typical preparation steps include:
 
-- **Extract complex code from your JavaDelegates** into Camunda-independent classes (for example, Spring beans) that are then invoked from the original JavaDelegate. This way, you do a step towards [Clean Delegates](migration-readiness/) that will be easy to refactor.
+- **Extract complex code from your JavaDelegates** into Camunda-independent classes (for example, Spring beans) that are then invoked from the original JavaDelegate. This way, you do a step towards [Clean Delegates](./migration-readiness.md) that will be easy to refactor.
 
 - **Remove the usage of internal APIs** or calls that depend on the transactionally integrated architecture of Camunda 7 (for example, querying the HistoryService within a JavaDelgate and expect it to know current changes already).
 
