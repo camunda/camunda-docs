@@ -6,7 +6,7 @@ keywords: ["backup", "backups"]
 ---
 
 :::note
-The release 8.8 release introduces breaking changes for [Operate, Tasklist and Optimize](./webapps-backup.md).
+The Camunda 8.8 release introduces breaking changes for [Operate, Tasklist and Optimize](./webapps-backup.md).
 :::
 
 You can use the backup feature of Camunda 8 Self-Managed to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) without any downtime (except Web Modeler, see [the Web Modeler backup and restore documentation](./modeler-backup-and-restore.md)).
@@ -24,7 +24,7 @@ Zeebe stores its backup to an external storage and must be configured before the
 
 ### Backup process
 
-The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, and backup `x` of Webapps(which includes Optimize, Operate, and Tasklist). The backup ID must be an integer and greater than the previous backups.
+The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, and backup `x` of the web applications (Optimize, Operate, and Tasklist). The backup ID must be an integer and greater than the previous backups.
 
 :::note
 We recommend using the timestamp as the backup id.
@@ -33,8 +33,8 @@ We recommend using the timestamp as the backup id.
 To back up a Camunda 8 cluster, execute the following sequential steps:
 
 1. Soft pause exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
-2. Trigger a backup `x` of Webapps. See [how to take a Webapp backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
-3. Wait until the backup `x` of Webapps is complete. See [how to monitor an Webapp backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+2. Trigger a backup `x` of the web applications. See [how to take a web application backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+3. Wait until the backup `x` of web applications is complete. See [how to monitor a web application backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
 4. Take a backup `x` of the exported Zeebe records in Elasticsearch using the Elasticsearch Snapshots API.
 
 ```
@@ -66,7 +66,7 @@ To restore a Camunda 8 cluster from a backup, all components must be restored fr
 2. Confirm proper configuration (such as shards, replicas count, etc.)
 3. Stop Operate, Tasklist, and Optimize.
 4. Delete all indices.
-5. Restore the state of [Webapps](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+5. Restore the state of the [web applications](/self-managed/operational-guides/backup-restore/webapps-backup.md).
 6. Restore `zeebe-records*` indices from Elasticsearch snapshot.
 7. Restore [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 8. Start Zeebe, Operate, Tasklist, and Optimize.

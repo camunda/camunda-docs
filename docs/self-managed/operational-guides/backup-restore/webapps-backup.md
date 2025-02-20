@@ -1,25 +1,22 @@
 ---
 id: webapps-backup
-title: Backup and restore Webapps (Operate, Tasklist and Optimize) data
-description: "How to perform a backup and restore of Webapps (Operate, Tasklist and Optimize) data."
+title: Backup and restore Operate, Tasklist, and Optimize data
+description: "How to perform a backup and restore of web application (Operate, Tasklist and Optimize) data."
 keywords: ["backup", "backups"]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::danger breaking changes!
-As of the Camunda 8.6 release, the `/actuator` endpoints (including `/backups`) now default to port 9600. Ensure your `management.server.port` configuration parameter is correctly set before continuing.
 :::warning breaking changes
-As of the Camunda 8.8 release, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory`. The old `/actuator/backups` endpoint is still active only if the applications are deployed standalone (i.e. each application in its own process)
+As of the Camunda 8.8 release, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
 :::
 
 :::note
-In this page we will refer to "webapps" as Operate, Tasklist and Optimize. Depending on your deployment configuration, you may not have all of them deployed. If that is the case, you can safely ignore the configurations for those applications.
+This page refers to the components Operate, Tasklist, and Optimize as "web applications". Depending on your deployment configuration, you may not have all of these components deployed. It is safe to ignore the configuration instructions for any applications that are not deployed.
 :::
 
-Webapps store their data over multiple indices in Elasticsearch. Backup of Webapps data includes several
-Elasticsearch snapshots containing sets of different indices. Each backup is identified by `backupId`. For example, a backup with an ID of `123` may contain the following Elasticsearch snapshots:
+The Camunda web applications store their data over multiple indices in Elasticsearch. A backup of web application data includes several Elasticsearch snapshots containing sets of different indices. Each backup is identified by a `backupId`. For example, a backup with an ID of `123` may contain the following Elasticsearch snapshots:
 
 ```
 camunda_webapps_123_8.1.0_part_1_of_6
@@ -30,7 +27,7 @@ camunda_webapps_123_8.1.0_part_5_of_6
 camunda_webapps_123_8.1.0_part_6_of_6
 ```
 
-All webapps provide the same API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
+All web applications provide the same API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
 
 :::note
 The backup API can be reached via the Actuator management port, which default defaults to port 9600.
@@ -43,11 +40,11 @@ The backup API can be reached via the Actuator management port, which default de
 Before you can use the backup and restore feature:
 
 1. The [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html) must be configured.
-2. All deployed webapps must be configured with the **same** repository name using one of the following configuration options.
-3. Webapps must have the right to take snapshots.
+2. All deployed web applications must be configured with the **same** repository name using one of the following configuration options.
+3. Web applications must have the right to take snapshots.
 
 :::warning breaking change
-Configuring different webapps with different repository names will potentially create multiple backups in different repositories
+Configuring different web applications with different repository names will potentially create multiple backups in different repositories.
 :::
 
 <Tabs groupId="config" defaultValue="yaml" values={
@@ -141,12 +138,12 @@ CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME=<es snapshot repository name>
 ### Index prefix
 
 :::warning breaking change
-Since version 8.8 the `indexPrefix` of all webapps must match. By default it's set to `""`, but if it was overriden, then it must done consistently across Operate, Tasklist and Optimize.
+As of Camunda 8.8, the `indexPrefix` of all web applications must match. By default it is set to `""`. If overriden, it must set consistently across Operate, Tasklist and Optimize.
 :::
 
 ## Create backup API
 
-During backup creation webapps can continue running. To create the backup, call the following endpoint:
+During backup creation, web applications can continue running. To create the backup, call the following endpoint:
 
 ```
 POST actuator/backupHistory
@@ -156,7 +153,7 @@ POST actuator/backupHistory
 ```
 
 :::note
-For backward compatibility, the endpoint `actuator/backups` is available if the app is running standalone
+For backward compatibility, the endpoint `actuator/backups` is available if the component is running standalone.
 :::
 
 Response:
@@ -200,7 +197,7 @@ GET actuator/backupHistory/{backupId}
 ```
 
 :::note
-For backward compatibility, the endpoint `actuator/backups` is available if the app is running standalone
+For backward compatibility, the endpoint `actuator/backups` is available if the component is running standalone.
 :::
 
 Response:
@@ -257,7 +254,7 @@ GET actuator/backupHistory
 ```
 
 :::note
-For backward compatibility, the endpoint `actuator/backups` is available if the app is running standalone
+For backward compatibility, the endpoint `actuator/backups` is available if the component is running standalone.
 :::
 
 Response:
@@ -288,7 +285,7 @@ DELETE actuator/backupHistory/123
 ```
 
 :::note
-For backward compatibility, the endpoint `actuator/backups` is available if the app is running standalone
+For backward compatibility, the endpoint `actuator/backups` is available if the component is running standalone.
 :::
 
 Response:
@@ -302,7 +299,7 @@ Response:
 
 ## Restore backup
 
-There is no Webapp API to preform the backup restore. Instead, use the [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html).
+There is no web application API to preform the backup restore. Instead, use the [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html).
 
 :::note
 Operate, Tasklist and Optimize must **not** be running while a backup restore is taking place.
@@ -318,7 +315,7 @@ curl --request POST `http://localhost:9200/_snapshot/test/camunda_operate_123_8.
 
 To summarize, the process may look as follows:
 
-1. Stop all webapps.
-2. Ensure there are no webapp indices present in Elasticsearch (otherwise the restore process will fail).
+1. Stop all web applications.
+2. Ensure there are no web application indices present in Elasticsearch (otherwise the restore process will fail).
 3. Iterate over all Elasticsearch snapshots included in the desired backup and restore them using the Elasticsearch restore snapshot API.
-4. Start all webapps.
+4. Start all web applications.
