@@ -1,0 +1,147 @@
+---
+id: get-cluster-topology
+title: "Get cluster topology"
+description: "Obtains the current topology of the cluster the gateway is part of."
+sidebar_label: "Get cluster topology"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1Vttu2zgQ/RVinnYBJUq6L4Xe0sQNvOglSNxdbAM/UNJYYiuRCkk59Qr698WQlC3bai5A1y+S6OE5MzxzYQeWFwaSe7isWmNRwzKCHE2mRWOFkpDA59RyIQ2zJbKs1RqlZVY1qlLFhqmVX/eb3XvBLT7yDROGNVxbplanEIFG0yhp0EDSwZuzM3r8HzyZkhalJXjeNJXIOMHH3wxxdGCyEmt+TL4okQ0uEhnfUWt8aNFYArebBiEBlX7DzEIEjVYNait8VKlW31GbY/ALVglDDrJgwmzJLeMaB8+ZLYUZohsxca35BiKQbVXxtEJIrG4xAmGxniC60WotcjRMyJXStQudKcl4IGZS5fh8IGQ1z6cPqZXioUX226OwpSDk4PTvDpvNr9hKeX085YhNSIsFaojAO+eX/ngDfQSlMnaakP6RvEaHq5FnpZDFNIGxWsiC4BqlfwJH/7wA6ilfSTNBkE9KvbNiNZe8wJw5Vp+T9CW96kfcg+ivFnlLybbqvEr37f5nxJ9fbVN2u+WFZ6cVJfEh9pX7StEX/y1fWUaGQ9WHIEg1zgqxRjnJG+SPAGVbU0urkOfBj6pSj+5VSJ5ZsUZYUtYhr2z5nD9DM/LWg1Mv8sBvITFbuXvPkeew7PsIrLB0HnAzgAGtrlEb4fvVsQbhMILNRPaPYN8527lcKbccSvVO/DuhAWHLtk5RjxuVkOO++xKRD5vVXsFcqlb+pDB33KPKoRZpGo08ZzzTyphf4M1QgkLJ9zyzSk/7kym5EkWrMWejHWzltoQmN9mzX+NLmGF/PSV4UHrIu6+IKbJrv3Eq9w5IRumwCCPtNgw66OkXQY22VDkkUKBrCpxqAuJhAkIEBvXajbb7DlpdQQKdn6R9Escdteg+6ai19vH6HCJYcy3IB9dWdr19xduKzqNSGa/c8uFlY6/juzl8EO9ecx/w3p69PZuEct1+7+BuZ3cLdnEzZz4kBzi+FAyQpbXNJKQ3fg6075d0almrhd3c0ZZwR0CuUV+0vusE6QKXQ6ZvbwRReHk/pNGffy9cHVPjd9uDrvtOwKiBwNnp+VEU5Cjlb6bqupUusWXhRsYopFFeVyJDyha6GfB6R3jp99sN++AtWMhjdu5YfaJQcCaJ40LYsk1PM1XHGa9bmfPtM61UGtdcyDhQmfjrbPZudnL5+ePHL5/mi39OPswvZ5/uZifnp+en9od1x9AoY2suR35do91dEXfZuxd+t7si/qIrZ1DR4g8bNxUXknLKBd+FWrqHrTfL4a5zD12XcoNfdNX3tPzQot5Acr/clQ99+TFFc4yK7ztuSMEsw8a6Oqtad2U4vOpS+m3L+npGefMfQ+wkNA==
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications/zeebe-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get cluster topology"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/topology"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Obtains the current topology of the cluster the gateway is part of.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "Obtains the current topology of the cluster the gateway is part of.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The response of a topology request.",
+            type: "object",
+            properties: {
+              brokers: {
+                description: "A list of brokers that are part of this cluster.",
+                type: "array",
+                nullable: true,
+                items: {
+                  description: "Provides information on a broker node.",
+                  type: "object",
+                  properties: {
+                    nodeId: {
+                      description:
+                        "The unique (within a cluster) node ID for the broker.",
+                      type: "integer",
+                      format: "int32",
+                    },
+                    host: {
+                      description: "The hostname for reaching the broker.",
+                      type: "string",
+                    },
+                    port: {
+                      description: "The port for reaching the broker.",
+                      type: "integer",
+                      format: "int32",
+                    },
+                    partitions: {
+                      description:
+                        "A list of partitions managed or replicated on this broker.",
+                      type: "array",
+                      items: {
+                        description:
+                          "Provides information on a partition within a broker node.",
+                        type: "object",
+                        properties: {
+                          partitionId: {
+                            description: "The unique ID of this partition.",
+                            type: "integer",
+                            format: "int32",
+                          },
+                          role: {
+                            description:
+                              "Describes the Raft role of the broker for a given partition.",
+                            type: "string",
+                            enum: ["leader", "follower", "inactive"],
+                          },
+                          health: {
+                            description:
+                              "Describes the current health of the partition.",
+                            type: "string",
+                            enum: ["healthy", "unhealthy", "dead"],
+                          },
+                        },
+                        title: "Partition",
+                      },
+                    },
+                    version: {
+                      description: "The broker version.",
+                      type: "string",
+                    },
+                  },
+                  title: "BrokerInfo",
+                },
+              },
+              clusterSize: {
+                description: "The number of brokers in the cluster.",
+                type: "integer",
+                format: "int32",
+                nullable: true,
+              },
+              partitionsCount: {
+                description:
+                  "The number of partitions are spread across the cluster.",
+                type: "integer",
+                format: "int32",
+                nullable: true,
+              },
+              replicationFactor: {
+                description:
+                  "The configured replication factor for this cluster.",
+                type: "integer",
+                format: "int32",
+                nullable: true,
+              },
+              gatewayVersion: {
+                description: "The version of the Zeebe Gateway.",
+                type: "string",
+                nullable: true,
+              },
+            },
+            title: "TopologyResponse",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

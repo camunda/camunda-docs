@@ -28,17 +28,17 @@ You can configure the Connector runtime environment in the following ways:
 To use Camunda 8 SaaS specify the connection properties:
 
 ```bash
-CAMUNDA_CLIENT_CLUSTER-ID=xxx
-CAMUNDA_CLIENT_AUTH_CLIENT-ID=xxx
-CAMUNDA_CLIENT_AUTH_CLIENT-SECRET=xxx
+CAMUNDA_CLIENT_CLUSTERID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
 CAMUNDA_CLIENT_REGION=bru-2
 ```
 
 You can further configure separate connection properties for Camunda Operate (otherwise it will use the properties configured for Zeebe above):
 
 ```bash
-CAMUNDA_OPERATE_CLIENT_CLIENT-ID=xxx
-CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=xxx
+CAMUNDA_OPERATE_CLIENT_CLIENTID=xxx
+CAMUNDA_OPERATE_CLIENT_CLIENTSECRET=xxx
 ```
 
 If you are connecting a local Connector runtime to a SaaS cluster, you may want to review our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).

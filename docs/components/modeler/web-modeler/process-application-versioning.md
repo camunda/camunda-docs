@@ -34,7 +34,7 @@ To create a bulk version for a process application:
 
 ![Create a version screen](img/versions/web-modeler-version-create-versioned-milestone-highlight.png)
 
-Now when you open the versions list for any file in the process application, you can use the file navigation header buttons to switch between files, and view their individual versions list. See [compare versions](/docs/components/modeler/web-modeler/versions.md#compare-versions).
+Now when you open the versions list for any file in the process application, you can use the file navigation header buttons to switch between files, and view their individual versions list. See [compare versions](/components/modeler/web-modeler/versions.md#compare-versions).
 
 ![Versions list with file navigation header buttons highlighted](img/versions/web-modeler-version-compare-process-application-files-highlight.png)
 

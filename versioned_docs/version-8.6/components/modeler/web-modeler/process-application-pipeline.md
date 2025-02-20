@@ -12,7 +12,7 @@ You can use Web Modeler to quickly develop and progress low-risk process applica
 <p><img src={DeployProcessApplicationDiagramImg} alt="Process application file list" /></p>
 
 :::caution
-For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/docs/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
+For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd.md).
 :::
 
 ## Model
@@ -61,7 +61,7 @@ When your process application is ready for validation you can deploy it to your 
 - Validate that all files and resources are correctly deployed.
 
 :::note
-Play is being rebuilt and progressively rolled out to more users. See [Play limitations and availability](/docs/components/modeler/web-modeler/play-your-process.md#limitations-and-availability) for Play limitations and why you might not see the **Play** tab.
+Play is being rebuilt and progressively rolled out to more users. See [Play limitations and availability](/components/modeler/web-modeler/play-your-process.md#limitations-and-availability) for Play limitations and why you might not see the **Play** tab.
 :::
 
 ## Review

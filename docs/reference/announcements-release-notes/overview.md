@@ -13,6 +13,26 @@ Announcements include the following details:
 - Known limitations
 - Major product/feature releases, which may include any product feature impacting several components and could lead to a disruption in users' typical journey through the product, or a breaking change across additional components.
 
+### Camunda 8.8
+
+Camunda 8.8 is scheduled for release on 14 October 2025.
+
+<div class="double-column-container">
+<div class="double-column-left">
+
+**[8.8 Announcements](/reference/announcements-release-notes/880/880-announcements.md)**
+
+</div>
+<div class="double-column-right">
+
+- [API updates](/reference/announcements/870.md#api-updates-saasself-managed)
+- [Identity management updates](/reference/announcements/870.md#identity-management-updates-saasself-managed)
+- [Installation and deployment updates](/reference/announcements/870.md#installation-and-deployment-updates-self-managed)
+- [Camunda Java client and Camunda Spring SDK](/reference/announcements/870.md#camunda-java-client-and-camunda-spring-sdk-self-managed)
+
+</div>
+</div>
+
 ### Camunda 8.7
 
 Camunda 8.7 is scheduled for release on 8 April 2025.

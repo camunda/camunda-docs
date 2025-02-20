@@ -136,7 +136,17 @@ helm repo update
 
 In a custom values file, it is possible to override the image repository and the image tag.
 
+:::note
+`global.identity.image` should be set to the same image referenced by `identity.image`. This image is used to copy camunda themes into keycloak.
+:::
+
 ```yaml
+global:
+  identity:
+    image:
+      registry: example.jfrog.io
+      repository: identity
+      ...
 zeebe:
   image:
     repository: example.jfrog.io/camunda/zeebe
