@@ -41,8 +41,9 @@ Timeouts may occur at this step if your query is too complex.
 ### Example Prompts
 
 - "Create an absence request diagram"
-- "Generate a mortgage approval process"
-- "Create an e-commerce order fulfillment process"
+- "Design a process that uses data objects to drive process logic, showing how data influences process flow and decisions"
+- "Model a complex service orchestration process involving multiple service tasks, conditional routing, and parallel execution of tasks."
+- "Create a service order management process for a telco company. The process starts with a fraud check. First, calculate price dimensions via a script task, then check if the price dimensions are normal or high with an exclusive gateway. If high, escalate to a fraud investigation subprocess."
 
 ### Limitations
 
