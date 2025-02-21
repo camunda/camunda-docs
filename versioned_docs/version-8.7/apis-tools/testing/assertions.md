@@ -26,11 +26,13 @@ The assertions handle the asynchronous behavior and wait until the expected prop
 
 ## Configuration
 
-You can configure the assertions in the following ways.
+Assertions can be configured globally using `CamundaAssert`.
 
 ### Assertion timeout
 
-By default, the assertions wait 10 seconds till the expected property is fulfilled. You can change the time globally in `CamundaAssert`, for example, to set the timeout to 1 minute.
+By default, assertions wait 10 seconds for the expected property to be fulfilled. You can change the time globally in `CamundaAssert`.
+
+For example, the following sets the timeout to 1 minute:
 
 ```java
 CamundaAssert.setAssertionTimeout(Duration.ofMinutes(1));
@@ -38,7 +40,9 @@ CamundaAssert.setAssertionTimeout(Duration.ofMinutes(1));
 
 ### Element selector
 
-By default, the element instance assertions identify the BPMN elements by their ID. You can change the element selector globally in `CamundaAssert`, for example, to identity the BPMN elements by their name.
+By default, the element instance assertions identify the BPMN elements by their ID. You can change the element selector globally in `CamundaAssert`.
+
+For example, the following identifies the BPMN elements by their name:
 
 ```java
 CamundaAssert.setElementSelector(ElementSelectors::byName);
@@ -50,7 +54,7 @@ You can verify the process instance state and other properties using `CamundaAss
 
 ### With process instance event
 
-Use the creation event of the create instance command to identify the process instance.
+Use the creation event of the create instance command to identify the process instance:
 
 ```java
 // given/when
@@ -68,7 +72,7 @@ assertThat(processInstance).isActive();
 
 ### With process instance result
 
-Use the result event of the create instance command to identify the process instance.
+Use the result event of the create instance command to identify the process instance:
 
 ```java
 // given/when
@@ -87,7 +91,7 @@ assertThat(processInstance).isActive();
 
 ### With process instance selector
 
-Use a predefined `ProcessInstanceSelector` from `io.camunda.process.test.api.assertions.ProcessInstanceSelectors` or a custom implementation to identify the process instance.
+Use a predefined `ProcessInstanceSelector` from `io.camunda.process.test.api.assertions.ProcessInstanceSelectors` or a custom implementation to identify the process instance:
 
 ```java
 // by process instance key
@@ -138,7 +142,7 @@ You can verify the element instance states and other properties using `CamundaAs
 
 ### With BPMN element ID
 
-Use the BPMN element ID to identify the elements.
+Use the BPMN element ID to identify the elements:
 
 ```java
 assertThat(processInstance).hasActiveElements("task_A");
@@ -148,7 +152,7 @@ You can customize how the elements are identified in the [configuration](#elemen
 
 ### With element selector
 
-Use a predefined `ElementSelector` from `io.camunda.process.test.api.assertions.ElementSelectors` or a custom implementation to identify the elements.
+Use a predefined `ElementSelector` from `io.camunda.process.test.api.assertions.ElementSelectors` or a custom implementation to identify the elements:
 
 ```java
 // by BPMN element ID
