@@ -98,7 +98,7 @@ The `zeebe.client.cloud.authUrl` property above is the Keycloak token endpoint.
 :::
 
 :::note
-Make sure to provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
 :::
 
 You can also configure the connection to a Self-Managed Zeebe cluster using environment variables and specifying your

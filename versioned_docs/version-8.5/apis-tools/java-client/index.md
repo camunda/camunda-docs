@@ -88,7 +88,7 @@ ZeebeClient client =
 ```
 
 :::note
-Make sure to provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
 :::
 
 ## Javadoc
