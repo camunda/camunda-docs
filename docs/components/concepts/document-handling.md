@@ -5,32 +5,72 @@ description: "Learn more about integration, secure management, and efficient sto
 keywords: ["document handling"]
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Store, track, and manage documents in Camunda 8 using the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx), Connectors, Forms, and Tasklist.
 
 Offering more robust document handling capabilities within Camunda SaaS and Self-Managed, users can now efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
-## Storage integration
+## Storage integration and configuration
 
-### SaaS
+There are several storage options:
 
-A [Google Cloud Platform](https://cloud.google.com/storage) storage integration is configured for SaaS and handled by Camunda.
+- A [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage integration is configured for SaaS and handled by Camunda.
+- Use [**AWS S3**](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution for Self-Managed, and to ensure storage is properly isolated and managed for each environment.
+- Documents can be stored in **local folders**, but this is not supported for production environments.
+- Documents can be stored **in memory**. If the application is stopped, the document will be lost. This is not supported for production environments.
 
-#### Limitations
+:::note
+If no configuration is provided, the default document storage is **in-memory**. To change this to a different storage method, use the environment variables in the section below for **every** component using document handling. No additional configuration is required for in-memory storage.
+:::
+
+To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are aws, in-memory, mygcp (for Google Cloud Platform), and local-storage.
+
+<Tabs groupId="storage" defaultValue="aws" queryString values={
+[
+{label: 'AWS', value: 'aws' },
+{label: 'GCP', value: 'gcp' },
+]}>
+
+<TabItem value='aws'>
+
+| Credentials variable  | Description                                                                                           |
+| --------------------- | ----------------------------------------------------------------------------------------------------- |
+| AWS_ACCESS_KEY_ID     | Access key ID used to interact with AWS S3 buckets.                                                   |
+| AWS_REGION            | Region where the bucket is.                                                                           |
+| AWS_SECRET_ACCESS_KEY | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
+
+| Store variable                 | Description                                                                                                                                                                                          |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| DOCUMENT_STORE_AWS_BUCKET      | Specifies the name of the AWS S3 bucket where documents are stored.                                                                                                                                  |
+| DOCUMENT_STORE_AWS_BUCKET_PATH | Defines the folder-like path within the S3 bucket where documents are stored. This helps organize files within the bucket. For example, `documents/invoices`.                                        |
+| DOCUMENT_STORE_AWS_BUCKET_TTL  | Represents the time-to-live (TTL) for documents stored in the S3 bucket. This could be used to set an expiration policy, meaning documents will be deleted automatically after a specified duration. |
+| DOCUMENT_STORE_AWS_CLASS       | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                               |
+
+</TabItem>
+
+<TabItem value='gcp'>
+
+| Credentials variable           | Description                                                                                                             |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| GOOGLE_APPLICATION_CREDENTIALS | Specifies the file path to a JSON key file that contains authentication credentials for a Google Cloud service account. |
+
+| Store variable            | Description                                                                     |
+| ------------------------- | ------------------------------------------------------------------------------- |
+| DOCUMENT_STORE_GCP_BUCKET | Defines the name of the Google Cloud Storage bucket where documents are stored. |
+| DOCUMENT_STORE_GCP_CLASS  | io.camunda.document.store.gcp.GcpDocumentStoreProvider                          |
+
+</TabItem>
+
+</Tabs>
+
+### Limitations
 
 - One bucket per cluster is permitted with SaaS.
 - This storage integration is handled and configured by Camunda. While this is not dynamically configurable by the cluster, it is provided as environment configuration.
 - **Maximum file size**: 10 MB per file.
 - **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.
-
-### Self-Managed
-
-<!--- Does this content belong here, or should we link to it from the SM docs? --->
-
-Use [AWS S3](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution, and to ensure storage is properly isolated and managed for each environment.
-
-#### Limitations
-
-<!--- same limitations as SaaS? if so, make one section --->
 
 ## Use cases and capabilities
 
@@ -47,7 +87,58 @@ Document handling may be beneficial for several use cases. For example:
 
 The document reference received as an output of one Connector should be stored in process variables by using the result expression or result variable.
 
-Then, another Connector can use this variable as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure. Review the list of [outbound Connectors](#outbound-connectors) below which currently support retrieving the document content to store in a third-party system.
+To call the webhook sending a file, for example:
+
+```curl
+curl --location 'https://lpp-1.connectors.dev.ultrawombat.com/e424e404-39d2-4dcf-9937-a1ebde177d7c/inbound/uploadDocument' \
+--form 'file=@"/path-to-file/file.pdf"'
+```
+
+The result variable will have the following structure:
+
+```
+{
+ "request": {
+   "body": {},
+   "headers": {
+     "host": "lpp-1.connectors.camunda.io",
+     "x-request-id": "335843238a709273200e2055f89147ad",
+     "x-real-ip": "109.78.172.42",
+     "x-forwarded-host": "lpp-1.connectors.camunda.io",
+     "x-forwarded-port": "443",
+     "x-forwarded-proto": "https",
+     "x-forwarded-scheme": "https",
+     "x-scheme": "https",
+     "content-length": "70484",
+     "user-agent": "PostmanRuntime/7.43.0",
+     "accept": "*/*",
+     "cache-control": "no-cache",
+     "postman-token": "b9d78973-b33f-43a4-8d55-c5ac8b2de656",
+     "accept-encoding": "gzip, deflate, br",
+     "content-type": "multipart/form-data; boundary=--------------------------300742796701946745140414"
+   },
+   "params": {}
+ },
+ "connectorData": {},
+ "documents": [
+   {
+     "storeId": "gcp",
+     "documentId": "130ad52a-f90a-4e07-9cfa-0d9abb0b6a68",
+     "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+     "metadata": {
+       "contentType": "application/pdf",
+       "size": 70266,
+       "fileName": "file.pdf"
+     },
+     "camunda.document.type": "camunda"
+   }
+ ]
+}
+```
+
+Here, we assign the portion containing the documents to `userApplicationForms`. This can be later used by the process to retrieve documents. For example, we could use the variable `userApplicationForms` to display the uploaded document in a user task using the document preview component.
+
+Another Connector can also use this variable as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure. Review the list of [outbound Connectors](#outbound-connectors) below which currently support retrieving the document content to store in a third-party system.
 
 ### Upload a document via public form
 
