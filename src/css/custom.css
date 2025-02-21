@@ -382,6 +382,32 @@ body {
   color: #000;
 }
 
+/* Landing page search bar */
+
+.homeSearch {
+  margin: auto;
+  max-width: 1000px;
+  padding: 20px;
+}
+
+.homeSearch .DocSearch-Button {
+  height: 55px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.DocSearch-Button-Keys {
+  display: none !important;
+}
+
+.homeSearch .DocSearch-Button-Placeholder::after {
+  content: " Camunda 8 Docs";
+}
+
+.table-of-contents__link .callout {
+  display: none;
+}
+
 /* style PushFeedback widget */
 .feedback-widget {
   padding-top: 2rem;
@@ -959,29 +985,6 @@ ul ol {
   }
 }
 
-.homeSearch {
-  margin: auto;
-  max-width: 1000px;
-  padding: 20px;
-}
-
-.homeSearch .DocSearch-Button {
-  height: 55px;
-  width: 100%;
-  border-radius: 8px;
-}
-
-.DocSearch-Button-Keys {
-  display: none !important;
-}
-
-.homeSearch .DocSearch-Button-Placeholder::after {
-  content: " Camunda 8 Docs";
-  
-.table-of-contents__link .callout {
-  display: none;
-}
-
 /* Green tick list and orange cross list */
 .list-tick {
   list-style-image: url("/static/img/icon-list-tick.png");
@@ -995,5 +998,4 @@ ul ol {
 .list-cross li {
   padding-left: 10px;
   margin-bottom: 25px;
-
 }
