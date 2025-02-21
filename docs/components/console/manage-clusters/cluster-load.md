@@ -38,7 +38,9 @@ High cluster load is typically defined as anything above x%, and can cause the f
 
 ### Reduce cluster load
 
-If your cluster load is too high, you can...
+If your cluster load is too high, you can help reduce cluster load by:
+
+- action x...
 
 :::note
 If your cluster load continues to remain high even after attempts to reduce it, you might need to increase your cluster size and scale. See [cluster size](/components/concepts/clusters.md#cluster-size) and [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
