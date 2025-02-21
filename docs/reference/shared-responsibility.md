@@ -18,6 +18,10 @@ The following diagram shows a comparison of how responsibilities are shared betw
 
 <img src={DivisionOfResponsibilityImg} alt="A diagram showing a comparison of how responsibilities are shared between Camunda, the cloud provider, and customer for Camunda 8 SaaS and Self-Managed" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
+:::note
+Cloud provider for Self-Managed means the customer choice of cloud provider.
+:::
+
 ## SaaS and Self-Managed responsibilities
 
 The following responsibilities apply for both Camunda 8 SaaS and Camunda 8 Self-Managed.
