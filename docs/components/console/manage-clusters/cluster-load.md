@@ -28,11 +28,11 @@ You can view more detailed information for an individual cluster on the Console 
 
 ## Manage cluster load
 
-Your cluster load should ideally be around x%, ranges etc. If your cluster is running at 100% load, it is at its maximum capacity to process work and perform other cluster-related tasks.
+Cluster load will typically fluctuate in response to processing requests. For example, it may be higher during certain times of day, or when running particular processes.
 
-High cluster load is typically defined as anything above x%.
+Your cluster load should ideally be around x%, ranges etc. If your cluster is running at 100% load, it is at its maximum capacity for processing work and performing other cluster-related tasks. This can affect the performance of your processes and Camunda 8 components.
 
-High cluster load can cause the following issues:
+High cluster load is typically defined as anything above x%, and can cause the following issues:
 
 - issue x
 
