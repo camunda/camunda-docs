@@ -121,44 +121,79 @@ For more information on the Ingress setup, please refer to our [Ingress setup gu
 
 Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory and is compatible with our Microsoft Entra ID guide. Here is an example configuration to add to your values files:
 
+:::note
+Make sure to create a Kubernetes secret for all client secrets that exist in each app registraiton of your Active Directory.
+:::
+
 ```yaml
-global:
   identity:
     auth:
-      type: MICROSOFT
       issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
       issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
       tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
       jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
+      publicIssuerUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+      type: MICROSOFT
       identity:
+        clientId: "00000000-0000-0000-0000-000000000000" #This is the application ID
+        existingSecret:
+          name: oidc-certificate-identity  #secret from the certificate that was created in the Active Directory
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000" #same as client ID
+        redirectUrl: https://management-host.com/identity
+        initialClaimValue: "00000000-0000-0000-0000-000000000000" #object ID of your user
+      operate:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: password-string-literal
+        existingSecret:
+          name: oidc-certificate-operate
+        existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://identity.camunda.example.com
-        initialClaimName: email
-        initialClaimValue: test.user@camunda.com
+        redirectUrl: https://orchestration-host.com/operate
       optimize:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: password-string-literal
+        existingSecret:
+          name: oidc-certificate-optimize
+        existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://optimize.camunda.example.com
-      core:
+        redirectUrl: https://orchestration-host.com/optimize
+      tasklist:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: password-string-literal
+        existingSecret:
+          name: oidc-certificate-tasklist
+        existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
-        tokenScope: "00000000-0000-0000-0000-000000000000/.default"
-        redirectUrl: https://core.camunda.example.com
+        redirectUrl: https://orchestration-host.com/tasklist
+      zeebe:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-zeebe
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+      connectors:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-connectors
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        clientApiAudience: "00000000-0000-0000-0000-000000000000"
+        tokenScope: "00000000-0000-0000-0000-000000000000/.default" # same as appplication ID
       console:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret: password-string-literal
-        redirectUrl: https://console.camunda.example.com
+        existingSecret:
+          name: oidc-certificate-console
+        existingSecretKey: certificate-secret-data
+        redirectUrl: https://management-host.com
+        existingSecret:
+          name: camunda-credentials
+        existingSecretKey: identity-console-client-password
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
+        audience: "00000000-0000-0000-0000-000000000000"
         clientApiAudience: "00000000-0000-0000-0000-000000000000"
         publicApiAudience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://modeler.camunda.example.com
+        redirectUrl: https://modeler.management-host.com
 ```
 
 If you would like some more guidance relating to authentication, refer to the [Connect to an OpenID Connect provider](/docs/self-managed/setup/guides/connect-to-an-oidc-provider/#configuration) guide
@@ -462,33 +497,69 @@ global:
       secretName: camunda-platform
   identity:
     auth:
-      type: MICROSOFT
       issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
       issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
       tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
       jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
-      admin:
-        existingSecret:
-          name: camunda-credentials
-        existingSecretKey: identity-admin-client-password
+      publicIssuerUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+      type: MICROSOFT
       identity:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: password-string-literal
+        existingSecret:
+          name: oidc-certificate-identity
+        existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://identity.management-host.com
-        initialClaimName: email
-        initialClaimValue: test.user@camunda.com
+        redirectUrl: https://management-host.com/identity
+        initialClaimValue: "00000000-0000-0000-0000-000000000000"
+      operate:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-operate
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: https://orchestration-host.com/operate
+      optimize:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-optimize
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: https://orchestration-host.com/optimize
+      tasklist:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-tasklist
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: https://orchestration-host.com/tasklist
+      zeebe:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-zeebe
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+      connectors:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-connectors
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        clientApiAudience: "00000000-0000-0000-0000-000000000000"
+        tokenScope: "00000000-0000-0000-0000-000000000000/.default"
       console:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret: password-string-literal
-        redirectUrl: https://console.management-host.com
+        existingSecret:
+          name: oidc-certificate-console
+        existingSecretKey: certificate-secret-data
+        redirectUrl: https://management-host.com
         existingSecret:
           name: camunda-credentials
         existingSecretKey: identity-console-client-password
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
+        audience: "00000000-0000-0000-0000-000000000000"
         clientApiAudience: "00000000-0000-0000-0000-000000000000"
         publicApiAudience: "00000000-0000-0000-0000-000000000000"
         redirectUrl: https://modeler.management-host.com
@@ -524,7 +595,7 @@ prometheusServiceMonitor:
   enabled: true
   labels:
     release: kube-prometheus-stack
-core:
+zeebe:
   enabled: false
 optimize:
   enabled: false
@@ -565,11 +636,6 @@ global:
   identity:
     service:
       url: "http://management-identity.management.svc.cluster.local:80/identity"
-    keycloak:
-      url:
-        protocol: "http"
-        host: "management-keycloak.management.svc.cluster.local"
-        port: "80"
     auth:
       type: MICROSOFT
       issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
@@ -577,28 +643,42 @@ global:
       issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
       tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
       jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
+      operate:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-operate
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: https://orchestration-host.com/operate
       optimize:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: password-string-literal
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: "https://orchestration-host.com/optimize"
         existingSecret:
-          name: camunda-credentials
-        existingSecretKey: identity-optimize-client-password
-      core:
+          name: oidc-certificate-optimize
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: https://orchestration-host.com/optimize
+      tasklist:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret: password-string-literal
+        existingSecret:
+          name: oidc-certificate-tasklist
+        existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
-        tokenScope: "00000000-0000-0000-0000-000000000000/.default"
-        redirectUrl: "https://orchestration-host.com/core"
+        redirectUrl: https://orchestration-host.com/tasklist
+      zeebe:
+        clientId: "00000000-0000-0000-0000-000000000000"
         existingSecret:
-          name: camunda-credentials
-        existingSecretKey: identity-core-client-password
+          name: oidc-certificate-zeebe
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
       connectors:
+        clientId: "00000000-0000-0000-0000-000000000000"
         existingSecret:
-          name: camunda-credentials
-        existingSecretKey: identity-connectors-client-password
-core:
+          name: oidc-certificate-connectors
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        clientApiAudience: "00000000-0000-0000-0000-000000000000"
+        tokenScope: "00000000-0000-0000-0000-000000000000/.default"
+zeebe:
   contextPath: /core
   ingress:
     grpc:
@@ -626,6 +706,8 @@ identityKeycloak:
 webModeler:
   enabled: false
 postgresql:
+  enabled: false
+elasticsearch:
   enabled: false
 ```
 
