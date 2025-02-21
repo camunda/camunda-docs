@@ -80,6 +80,17 @@ For details on typical volume type usage, refer to the following examples specif
 - [Microsoft AKS](/self-managed/setup/deploy/azure/microsoft-aks.md#volume-performance)
 - [Google GKE](/self-managed/setup/deploy/gcp/google-gke.md#volume-performance)
 
+### Helm version matrix
+
+As of the Camunda 8.4 release, the Camunda 8 Helm chart version is independent from the application version (for example, the Camunda 8.4 release uses the Helm chart version 9.0.0). The Helm chart is updated with each application release.
+
+| Camunda version | Helm chart version                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------- |
+| Camunda 8.6.x   | [Helm chart 11.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.6/)  |
+| Camunda 8.5.x   | [Helm chart 10.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.5/)  |
+| Camunda 8.4.x   | [Helm chart 9.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.4/)   |
+| Camunda 8.3.x   | [Helm chart 8.3.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.3/) |
+
 ## Component requirements
 
 Requirements for the components can be seen below:
@@ -92,7 +103,7 @@ Requirements for the components can be seen below:
 | Identity    | OpenJDK 17+  | Keycloak 24.x, 25.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/identity/deployment/configuration-variables.md#database-configuration)) |
 | Optimize    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
 | Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
-| Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                              |
+| Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                        |
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
@@ -117,6 +128,8 @@ This matrix shows which component versions work together:
 | Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
 | Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x                                     | Optimize 3.7.x  |
 | -                     | -           | -                                                                          | -               |
+| Web Modeler 8.7.x     | Zeebe 8.7.x | Operate 8.7.x Tasklist 8.7.x Identity 8.7.x Connectors 8.7.x Console 8.7.x | Optimize 8.7.x  |
+| Web Modeler 8.6.x     | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.6.x | Optimize 8.6.x  |
 | Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
 | Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
 | Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |

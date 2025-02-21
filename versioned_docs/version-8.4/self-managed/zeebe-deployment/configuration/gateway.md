@@ -174,7 +174,7 @@ security:
 
 :::note
 The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
-Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
+Camunda Identity properties or the [corresponding SDK environment variables](../../identity/deployment/configuration-variables.md#camunda-identity-sdk-configuration).
 :::
 
 | Field            | Description                                                                                                                                                                                          | Example value                                     |
@@ -342,7 +342,7 @@ as well.
 :::
 
 :::note
-If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md/#multitenancy-configuration).
+If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md#multitenancy-configuration).
 :::
 
 | Field   | Description                                                                                                                                     | Example value |

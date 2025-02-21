@@ -65,7 +65,7 @@ You can find a reference example of this file here:
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.6/procedure/install/helm-values/base.yml
 ```
 
-:::warning Merging YAML files
+:::danger Merging YAML files
 
 This guide references multiple configuration files that need to be merged into a single YAML file. Be cautious to avoid duplicate keys when merging the files. Additionally, pay close attention when copying and pasting YAML content. Ensure that the separator notation `---` does not inadvertently split the configuration into multiple documents.
 

@@ -5,56 +5,285 @@ description: "Iterate through all known partitions and activate jobs up to the r
 sidebar_label: "Activate jobs"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Activate jobs</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Activate jobs"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/jobs/activation"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/activation"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Iterate through all known partitions and activate jobs up to the requested maximum.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the job type, as defined in the BPMN process (e.g. <zeebe:taskDefinition type=\"payment-service\" />)\n","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"worker"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the name of the worker activating the jobs, mostly used for logging purposes","type":"string","nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"timeout"} required={true} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"a job returned after this call will not be activated by another call until the timeout (in ms) has been reached\n","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"maxJobsToActivate"} required={true} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"the maximum jobs to activate by this request","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"fetchVariable"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"description":"a list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the scope of the job will be returned\n","type":"array","nullable":true,"items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"requestTimeout"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The request will be completed when at least one job is activated or after the requestTimeout (in ms). If the requestTimeout = 0, a default timeout is used. If the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated.\n","type":"integer","format":"int64","default":0,"nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"tenantIds"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"description":"a list of IDs of tenants for which to activate jobs","type":"array","items":{"type":"string"},"nullable":true}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-The list of activated jobs.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            type: {
+              description:
+                'The job type, as defined in the BPMN process (e.g. <zeebe:taskDefinition type="payment-service" />).\n',
+              type: "string",
+            },
+            worker: {
+              description:
+                "The name of the worker activating the jobs, mostly used for logging purposes.",
+              type: "string",
+              nullable: true,
+            },
+            timeout: {
+              description:
+                "A job returned after this call will not be activated by another call until the timeout (in ms) has been reached.\n",
+              type: "integer",
+              format: "int64",
+            },
+            maxJobsToActivate: {
+              description: "The maximum jobs to activate by this request.",
+              type: "integer",
+              format: "int32",
+            },
+            fetchVariable: {
+              description:
+                "A list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the scope of the job will be returned.\n",
+              type: "array",
+              nullable: true,
+              items: { type: "string" },
+            },
+            requestTimeout: {
+              description:
+                "The request will be completed when at least one job is activated or after the requestTimeout (in ms). If the requestTimeout = 0, a default timeout is used. If the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated.\n",
+              type: "integer",
+              format: "int64",
+              default: 0,
+              nullable: true,
+            },
+            tenantIds: {
+              description:
+                "A list of IDs of tenants for which to activate jobs.",
+              type: "array",
+              items: { type: "string" },
+              nullable: true,
+            },
+          },
+          required: ["type", "timeout", "maxJobsToActivate"],
+          title: "JobActivationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>jobs</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The activated jobs.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the key, a unique identifier for the job","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the job's process instance key","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the key of the job's process definition","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the unique key identifying the associated task, unique within the scope of the process instance\n","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"jobs\": [\n    {\n      \"jobKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"elementInstanceKey\": \"string\",\n      \"type\": \"string\",\n      \"processDefinitionId\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"elementId\": \"string\",\n      \"customHeaders\": {},\n      \"worker\": \"string\",\n      \"retries\": 0,\n      \"deadline\": 0,\n      \"variables\": {},\n      \"tenantId\": \"string\"\n    }\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>jobs</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The activated jobs.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"the key, a unique identifier for the job","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"the job's process instance key","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"the key of the job's process definition","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"the unique key identifying the associated task, unique within the scope of the process instance\n","type":"integer","format":"int64"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"jobs\": [\n    {\n      \"jobKey\": 0,\n      \"processInstanceKey\": 0,\n      \"processDefinitionKey\": 0,\n      \"elementInstanceKey\": 0,\n      \"type\": \"string\",\n      \"processDefinitionId\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"elementId\": \"string\",\n      \"customHeaders\": {},\n      \"worker\": \"string\",\n      \"retries\": 0,\n      \"deadline\": 0,\n      \"variables\": {},\n      \"tenantId\": \"string\"\n    }\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>jobs</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The activated jobs.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the key, a unique identifier for the job","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the job's process instance key","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the key of the job's process definition","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"the unique key identifying the associated task, unique within the scope of the process instance\n","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"jobs\": [\n    {\n      \"jobKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"elementInstanceKey\": \"string\",\n      \"type\": \"string\",\n      \"processDefinitionId\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"elementId\": \"string\",\n      \"customHeaders\": {},\n      \"worker\": \"string\",\n      \"retries\": 0,\n      \"deadline\": 0,\n      \"variables\": {},\n      \"tenantId\": \"string\"\n    }\n  ]\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The provided data is not valid.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The list of activated jobs.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The list of activated jobs",
+            type: "object",
+            properties: {
+              jobs: {
+                description: "The activated jobs.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    type: {
+                      description:
+                        "The type of the job (should match what was requested).",
+                      type: "string",
+                    },
+                    processDefinitionId: {
+                      description:
+                        "The bpmn process ID of the job's process definition.",
+                      type: "string",
+                    },
+                    processDefinitionVersion: {
+                      description:
+                        "The version of the job's process definition.",
+                      type: "integer",
+                      format: "int32",
+                    },
+                    elementId: {
+                      description: "The associated task element ID.",
+                      type: "string",
+                    },
+                    customHeaders: {
+                      description:
+                        "A set of custom headers defined during modelling; returned as a serialized JSON document.",
+                      type: "object",
+                      additionalProperties: true,
+                    },
+                    worker: {
+                      description:
+                        "The name of the worker which activated this job.",
+                      type: "string",
+                    },
+                    retries: {
+                      description:
+                        "The amount of retries left to this job (should always be positive).",
+                      type: "integer",
+                      format: "int32",
+                    },
+                    deadline: {
+                      description:
+                        "When the job can be activated again, sent as a UNIX epoch timestamp.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    variables: {
+                      description:
+                        "All variables visible to the task scope, computed at activation time.",
+                      type: "object",
+                      additionalProperties: true,
+                    },
+                    tenantId: {
+                      description: "The ID of the tenant that owns the job.",
+                      type: "string",
+                    },
+                    jobKey: {
+                      description: "The key, a unique identifier for the job.",
+                      type: "string",
+                    },
+                    processInstanceKey: {
+                      description: "The job's process instance key.",
+                      type: "string",
+                    },
+                    processDefinitionKey: {
+                      description: "The key of the job's process definition.",
+                      type: "string",
+                    },
+                    elementInstanceKey: {
+                      description:
+                        "The unique key identifying the associated task, unique within the scope of the process instance.\n",
+                      type: "string",
+                    },
+                  },
+                  title: "ActivatedJobResult",
+                },
+              },
+            },
+            title: "JobActivationResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

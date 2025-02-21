@@ -8,9 +8,9 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 ## Version compatibility
 
-| Camunda Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
-| -------------------------- | ---- | --------------- | --------------------------- |
-| 8.5.x                      | ≥ 17 | 8.5.x           | 3.2.x                       |
+| Zeebe Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| ------------------------ | ---- | --------------- | --------------------------- |
+| 8.5.x                    | ≥ 17 | 8.5.x           | 3.2.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 
@@ -95,6 +95,10 @@ zeebe.client.security.plaintext=true
 
 :::note
 The `zeebe.client.cloud.authUrl` property above is the Keycloak token endpoint.
+:::
+
+:::note
+Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
 :::
 
 You can also configure the connection to a Self-Managed Zeebe cluster using environment variables and specifying your

@@ -14,7 +14,7 @@ import TabItem from "@theme/TabItem";
 
 [Web Modeler](../../components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
-- For low-risk processes, you can use the Web Modeler [process application development pipeline](/docs/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Milestone comparison](/docs/components/modeler/web-modeler/milestones.md#compare-milestones) (Visual and XML diffing) and [Git Sync](/docs/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
+- For low-risk processes, you can use Web Modeler [process application development pipeline](/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Version comparison](/components/modeler/web-modeler/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/modeler/web-modeler/process-application-pipeline.md#review), and [Git Sync](/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
 
 - For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can integrate Web Modeler into your CI/CD pipelines.
 
@@ -43,7 +43,7 @@ This blueprint provides a ready-to-use proof of concept for a CI/CD pipeline for
 
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
-- Web Modeler uses [milestones](/components/modeler/web-modeler/milestones.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
+- Web Modeler uses [versions](/components/modeler/web-modeler/versions.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
 - A process application comprises main processes and diverse resources, such as subprocesses, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
@@ -85,7 +85,7 @@ You need triggers to initiate the pipeline for files or projects. Choose between
 
 - Initiating the pipeline manually from your CI/CD tool/platform by uploading the file intended for deployment.
 - Starting the CI pipeline by creating a pull/merge request in the version control system.
-- Triggering pipelines by listening to milestones with certain characteristics.
+- Triggering pipelines by listening to versions with certain characteristics.
 
 #### Sync files with version control
 
@@ -112,15 +112,15 @@ Pagination is enforced for all listed `search` endpoints. Ensure you obtain all 
 
 We work to replace this with a webhook or subscription approach. An alternate approach involves manually triggering synchronization or delegating synchronization triggers to other sources, such as the pipeline itself, creation of new branches, or pull/merge requests.
 
-Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [milestones](/components/modeler/web-modeler/milestones.md).
+Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [versions](/components/modeler/web-modeler/versions.md).
 
-#### Listening to milestone creation
+#### Listening to version creation
 
-A milestone reflects a state of a file in Web Modeler with a certain level of qualification, such as being ready for deployment. You can use this property to trigger deployments when a certain milestone is created.
+A version reflects a state of a file in Web Modeler with a certain level of qualification, such as being ready for deployment. You can use this property to trigger deployments when a certain version is created.
 
-Currently, you have to poll for milestones to listen to new ones created. Use the `POST /api/v1/milestones/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones) with the following payload to identify milestones created after the last sync date:
+Currently, you have to poll for versions to listen to new ones created. Use the `POST /api/v1/versions/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Versions/searchVersions) with the following payload to identify versions created after the last sync date:
 
-```json title="POST /api/v1/milestones/search"
+```json title="POST /api/v1/versions/search"
 {
   "filter": {
     "created": ">(YOUR LAST SYNC DATE)"
@@ -130,7 +130,7 @@ Currently, you have to poll for milestones to listen to new ones created. Use th
 }
 ```
 
-You will receive a response similar to this, where the `fileId` indicates the file with the milestone created:
+You will receive a response similar to this, where the `fileId` indicates the file with the version created:
 
 ```json
 {
@@ -146,11 +146,11 @@ You will receive a response similar to this, where the `fileId` indicates the fi
 }
 ```
 
-To retrieve the content of this particular milestone, use the `GET /api/v1/milestones/:id` endpoint. To obtain the latest edit state of the file, use the `GET /api/v1/files/:id` endpoint. This endpoint also provides the `projectId` necessary for the `POST /api/v1/projects/search` endpoint if you want to push the full project via the pipeline.
+To retrieve the content of this particular version, use the `GET /api/v1/versions/:id` endpoint. To obtain the latest edit state of the file, use the `GET /api/v1/files/:id` endpoint. This endpoint also provides the `projectId` necessary for the `POST /api/v1/projects/search` endpoint if you want to push the full project via the pipeline.
 
-Progress is underway to introduce webhook registration or event subscription for milestone creation monitoring.
+Progress is underway to introduce webhook registration or event subscription for version creation monitoring.
 
-Combine these two approaches and listen to milestones to sync files to your version control, create a pull/merge request, and trigger pipelines.
+Combine these two approaches and listen to versions to sync files to your version control, create a pull/merge request, and trigger pipelines.
 
 ## Pipeline stages
 
@@ -181,7 +181,7 @@ For GitLab users, consider using [GitLab Review Apps](https://docs.gitlab.com/ee
 Deploy resources using the [`zbctl` CLI](/apis-tools/community-clients/cli-client/index.md) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the [Java](/apis-tools/java-client/index.md) client library or any [community-built alternatives](/apis-tools/community-clients/index.md).
 
 :::info Feature branches and Web Modeler installations
-To maintain a single source of truth, avoid multiple Web Modeler instances for different feature branches. Instead, maintain a single Web Modeler installation for all environments, utilizing milestones to signify versioning and pipeline stages. Feature branches can be managed by cloning and merging files or projects, ensuring synchronization using VCS.
+To maintain a single source of truth, avoid multiple Web Modeler instances for different feature branches. Instead, maintain a single Web Modeler installation for all environments, utilizing versions to signify versioning and pipeline stages. Feature branches can be managed by cloning and merging files or projects, ensuring synchronization using VCS.
 :::
 
 #### Automate deployment of linked resources/dependencies
@@ -228,24 +228,24 @@ For unit tests, select a test framework suitable for your environment. If workin
 
 ### Review stage
 
-During reviews, use the Modeler API again to [add collaborators](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator), or to [create links to visual diffs of your milestones](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones), and automatically paste them into your GitHub or GitLab pull or merge requests.
+During reviews, use the Modeler API again to [add collaborators](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator), or to [create links to visual diffs of your versions](https://modeler.camunda.io/swagger-ui/index.html#/Versions/compareVersions), and automatically paste them into your GitHub or GitLab pull or merge requests.
 This provides you the freedom to let reviews happen where you want them, and even include business by sharing the diff links with them in an automated fashion.
 
 After review, use the `DELETE /api/v1/projects/{projectId}/collaborators/email` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/deleteCollaborator) to remove collaborators again.
 
 #### Create a link to a visual diff for reviews
 
-Use milestones to indicate a state for review. Use the `POST /api/v1/milestones` endpoint to create a new milestone, and provide a description to reflect the state of this milestone using the `name` property. The current content of the file is copied over on milestone creation.
+Use versions to indicate a state for review. Use the `POST /api/v1/versions` endpoint to create a new version, and provide a description to reflect the state of this version using the `name` property. The current content of the file is copied over on version creation.
 
 While it is possible to do a diff of your diagrams by comparing the XML in your VCS system, this is often not very convenient, and lacks insight into process flow changes. This approach is also less effective when involving business stakeholders in the review.
 
-The Web Modeler API addresses this by providing an endpoint to generate visual diff links for milestones. Utilize the `GET /api/v1/milestones/compare/{milestone1Id}...{milestone2Id}` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/compareMilestones) to compare two milestones. Obtain IDs for the latest milestones via the `POST /api/v1/milestones/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Milestones/searchMilestones), utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
+The Web Modeler API addresses this by providing an endpoint to generate visual diff links for versions. Utilize the `GET /api/v1/versions/compare/{version1Id}...{version2Id}` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Versions/compareVersions) to compare two versions. Obtain IDs for the latest versions via the `POST /api/v1/versions/search` [endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Versions/searchVersions), utilizing the `fileId` filter to identify the file to review. The resulting URL leads to a visual diff page similar to this:
 
-![Visual diff of two milestones](img/visual-diff.png)
+![Visual diff of two versions](img/visual-diff.png)
 
 ##### Example review flow
 
-The following process diagram demonstrates an example flow of how to run a preview using milestones and a diff link in GitHub:
+The following process diagram demonstrates an example flow of how to run a preview using versions and a diff link in GitHub:
 
 <iframe src="https://modeler.cloud.ultrawombat.com/embed/35868bd2-a690-48de-a069-aa8ae6b3a846" style={{width: "100%", height: "500px", border: "1px solid #ccc"}} allowfullscreen></iframe>
 
@@ -290,9 +290,9 @@ To enforce CI/CD pipelines and restrict manual deployments, you can disable manu
 
 Use the Web Modeler API's CRUD operations to sync files between Web Modeler and your version control system. Consider maintaining a second system of record to map Web Modeler projects to VCS repositories and track sync/update dates.
 
-#### How do I listen to milestone creation in Web Modeler?
+#### How do I listen to version creation in Web Modeler?
 
-Currently, you need to poll for milestone creations using the `POST /api/v1/milestones/search` endpoint of the Web Modeler API. Compare the `created` date of milestones with your last sync date to identify newly created milestones.
+Currently, you need to poll for version creations using the `POST /api/v1/versions/search` endpoint of the Web Modeler API. Compare the `created` date of versions with your last sync date to identify newly created versions.
 
 #### What is the purpose of the build stage in my pipeline?
 

@@ -32,6 +32,10 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
   - This simplifies the setup by not relying on explicit credentials and instead creating a mapping between IAM roles and Kubernetes service account based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without having to supply explicit credentials.
   - IRSA is recommended as an [EKS best practice](https://aws.github.io/aws-eks-best-practices/security/docs/iam/).
+- [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+  - Ensure at least **3 Elastic IPs** (one per availability zone).
+  - Verify quotas for **VPCs, EC2 instances, and storage**.
+  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - This guide uses GNU/Bash for all the shell commands listed.
 
 ### Considerations
@@ -50,7 +54,7 @@ Modules referenced in this guide have been updated recently from **v2** to **v3*
 
 :::
 
-:::warning Cost management
+:::danger Cost management
 
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 
@@ -419,6 +423,12 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    ```
 
 1. Customize the cluster setup using various input options. For a full list of available parameters, see the [OpenSearch module documentation](https://github.com/camunda/camunda-tf-eks-module/blob/2.6.0/modules/opensearch/README.md).
+
+:::tip
+
+The instance type `m7i.large.search` in the above example is a suggestion, and can be changed depending on your needs.
+
+:::
 
 ### Define outputs
 

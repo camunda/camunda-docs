@@ -5,128 +5,1111 @@ description: "Search for user tasks based on given criteria."
 sidebar_label: "Query user tasks"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query user tasks</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query user tasks"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/user-tasks/search"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/search"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Search for user tasks based on given criteria.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-Sort field criteria.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description: "User task search query request.",
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        searchAfter: {
+                          description:
+                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          description:
+                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "creationDate",
+                      "completionDate",
+                      "followUpDate",
+                      "dueDate",
+                      "priority",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "UserTaskSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The user task search filters.",
+              allOf: [
+                {
+                  description: "User task filter request.",
+                  type: "object",
+                  properties: {
+                    state: {
+                      type: "string",
+                      description: "The state of the user task.",
+                      enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                    },
+                    assignee: {
+                      description: "The assignee of the user task.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    priority: {
+                      description: "The priority of the user task.",
+                      allOf: [
+                        {
+                          description:
+                            "Integer property with advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "integer",
+                              format: "int32",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced integer (int32) filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "integer", format: "int32" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "IntegerFilterProperty",
+                        },
+                      ],
+                    },
+                    elementId: {
+                      type: "string",
+                      description: "The element ID of the user task.",
+                    },
+                    candidateGroup: {
+                      description: "The candidate group for this user task.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    candidateUser: {
+                      description: "The candidate user for this user task.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      description:
+                                        "Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n",
+                                      type: "string",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      type: "string",
+                      description: "Tenant ID of this user task.",
+                    },
+                    processDefinitionId: {
+                      type: "string",
+                      description: "The ID of the process definition.",
+                    },
+                    creationDate: {
+                      description: "The user task creation date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    completionDate: {
+                      description: "The user task completion date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    followUpDate: {
+                      description: "The user task follow-up date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    dueDate: {
+                      description: "The user task due date.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    processInstanceVariables: {
+                      type: "array",
+                      description:
+                        "Process instance variables associated with the user task.",
+                      items: {
+                        type: "object",
+                        properties: {
+                          name: {
+                            type: "string",
+                            description: "Name of the variable.",
+                          },
+                          value: {
+                            type: "string",
+                            description: "The value of the variable.",
+                          },
+                        },
+                        title: "UserTaskVariableFilterRequest",
+                      },
+                    },
+                    localVariables: {
+                      type: "array",
+                      description:
+                        "Local variables associated with the user task.",
+                      items: {
+                        type: "object",
+                        properties: {
+                          name: {
+                            type: "string",
+                            description: "Name of the variable.",
+                          },
+                          value: {
+                            type: "string",
+                            description: "The value of the variable.",
+                          },
+                        },
+                        title: "UserTaskVariableFilterRequest",
+                      },
+                    },
+                    userTaskKey: {
+                      type: "string",
+                      description: "The key for this user task.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    elementInstanceKey: {
+                      type: "string",
+                      description: "The key of the element instance.",
+                    },
+                  },
+                  title: "UserTaskFilter",
+                },
+              ],
+            },
+          },
+          title: "UserTaskSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The field to sort by.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination criteria.
-
-</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-User task filter request.
-
-</div><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key for this user task.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`, `FAILED`]"} schema={{"type":"string","description":"The state of the user task.","enum":["CREATED","COMPLETED","CANCELED","FAILED"]}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>assignee</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The assignee of the user task.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-string
-
-</div></TabItem><TabItem label={"AdvancedStringFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"$like"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n","type":"string"}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>priority</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The priority of the user task.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-integer
-
-</div></TabItem><TabItem label={"AdvancedIntegerFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$gt"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Greater than comparison with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$gte"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Greater than or equal comparison with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$lt"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Lower than comparison with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$lte"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"Lower than or equal comparison with the provided value.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"int32[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"integer","format":"int32"}}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={false} name={"elementId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The element ID of the user task."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>candidateGroup</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The candidate group for this user task.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-string
-
-</div></TabItem><TabItem label={"AdvancedStringFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"$like"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n","type":"string"}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>candidateUser</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The candidate user for this user task.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-string
-
-</div></TabItem><TabItem label={"AdvancedStringFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"$like"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches the provided like value.\nSupported wildcard characters depend on the configured search client.\n","type":"string"}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process definition.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Tenant ID of this user task."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the element instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>processInstanceVariables</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Process Instance variables associated with the user task.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Name of the variable."}}></SchemaItem><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The value of the variable."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>localVariables</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Local variables associated with the user task.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Name of the variable."}}></SchemaItem><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The value of the variable."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The user task search result.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching user tasks.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key of the user task.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the element instance."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the form."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"userTaskKey\": \"string\",\n      \"elementInstanceKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"formKey\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"CREATED\",\n      \"assignee\": \"string\",\n      \"elementId\": \"string\",\n      \"candidateGroups\": [\n        \"string\"\n      ],\n      \"candidateUsers\": [\n        \"string\"\n      ],\n      \"processDefinitionId\": \"string\",\n      \"creationDate\": \"2024-12-19T15:07:40.079Z\",\n      \"completionDate\": \"2024-12-19T15:07:40.079Z\",\n      \"followUpDate\": \"2024-12-19T15:07:40.079Z\",\n      \"dueDate\": \"2024-12-19T15:07:40.079Z\",\n      \"tenantId\": \"string\",\n      \"externalFormReference\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"customHeaders\": {},\n      \"priority\": 50\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching user tasks.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key of the user task.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the element instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process definition.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the process instance.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The key of the form.","format":"int64"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"userTaskKey\": 0,\n      \"elementInstanceKey\": 0,\n      \"processDefinitionKey\": 0,\n      \"processInstanceKey\": 0,\n      \"formKey\": 0,\n      \"name\": \"string\",\n      \"state\": \"CREATED\",\n      \"assignee\": \"string\",\n      \"elementId\": \"string\",\n      \"candidateGroups\": [\n        \"string\"\n      ],\n      \"candidateUsers\": [\n        \"string\"\n      ],\n      \"processDefinitionId\": \"string\",\n      \"creationDate\": \"2024-12-19T15:07:40.081Z\",\n      \"completionDate\": \"2024-12-19T15:07:40.081Z\",\n      \"followUpDate\": \"2024-12-19T15:07:40.081Z\",\n      \"dueDate\": \"2024-12-19T15:07:40.081Z\",\n      \"tenantId\": \"string\",\n      \"externalFormReference\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"customHeaders\": {},\n      \"priority\": 50\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching user tasks.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"userTaskKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key of the user task.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"elementInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the element instance."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the form."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"userTaskKey\": \"string\",\n      \"elementInstanceKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"formKey\": \"string\",\n      \"name\": \"string\",\n      \"state\": \"CREATED\",\n      \"assignee\": \"string\",\n      \"elementId\": \"string\",\n      \"candidateGroups\": [\n        \"string\"\n      ],\n      \"candidateUsers\": [\n        \"string\"\n      ],\n      \"processDefinitionId\": \"string\",\n      \"creationDate\": \"2024-12-19T15:07:40.082Z\",\n      \"completionDate\": \"2024-12-19T15:07:40.082Z\",\n      \"followUpDate\": \"2024-12-19T15:07:40.082Z\",\n      \"dueDate\": \"2024-12-19T15:07:40.082Z\",\n      \"tenantId\": \"string\",\n      \"externalFormReference\": \"string\",\n      \"processDefinitionVersion\": 0,\n      \"customHeaders\": {},\n      \"priority\": 50\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The user task search query failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user task search result.\n",
+      content: {
+        "application/json": {
+          schema: {
+            description: "User task search query response.",
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching user tasks.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    name: {
+                      type: "string",
+                      description: "The name for this user task.",
+                    },
+                    state: {
+                      type: "string",
+                      description: "The state of the user task.",
+                      enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                    },
+                    assignee: {
+                      description: "The assignee of the user task.",
+                      type: "string",
+                    },
+                    elementId: {
+                      type: "string",
+                      description: "The element ID of the user task.",
+                    },
+                    candidateGroups: {
+                      type: "array",
+                      description: "The candidate groups for this user task.",
+                      items: { type: "string" },
+                    },
+                    candidateUsers: {
+                      type: "array",
+                      description: "The candidate users for this user task.",
+                      items: { type: "string" },
+                    },
+                    processDefinitionId: {
+                      type: "string",
+                      description: "The ID of the process definition.",
+                    },
+                    creationDate: {
+                      type: "string",
+                      description: "The creation date of a user task.",
+                      format: "date-time",
+                    },
+                    completionDate: {
+                      type: "string",
+                      description: "The completion date of a user task.",
+                      format: "date-time",
+                    },
+                    followUpDate: {
+                      type: "string",
+                      description: "The follow date of a user task.",
+                      format: "date-time",
+                    },
+                    dueDate: {
+                      type: "string",
+                      description: "The due date of a user task.",
+                      format: "date-time",
+                    },
+                    tenantId: {
+                      type: "string",
+                      description: "Tenant ID of this user task.",
+                    },
+                    externalFormReference: {
+                      type: "string",
+                      description: "The external form reference.",
+                    },
+                    processDefinitionVersion: {
+                      type: "integer",
+                      description: "The version of the process definition.",
+                      format: "int32",
+                    },
+                    customHeaders: {
+                      type: "object",
+                      description: "Custom headers for the user task.",
+                      additionalProperties: { type: "string" },
+                    },
+                    priority: {
+                      type: "integer",
+                      description:
+                        "The priority of a user task. The higher the value the higher the priority.",
+                      minimum: 0,
+                      maximum: 100,
+                      default: 50,
+                    },
+                    userTaskKey: {
+                      description: "The key of the user task.",
+                      type: "string",
+                    },
+                    elementInstanceKey: {
+                      type: "string",
+                      description: "The key of the element instance.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    formKey: {
+                      type: "string",
+                      description: "The key of the form.",
+                    },
+                  },
+                  title: "UserTaskResult",
+                },
+              },
+            },
+            title: "UserTaskSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The user task search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

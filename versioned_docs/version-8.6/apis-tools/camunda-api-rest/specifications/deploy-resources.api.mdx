@@ -5,41 +5,777 @@ description: "Deploys one or more resources (e.g. processes, decision models, or
 sidebar_label: "Deploy resources"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: eJztW11z2zYW/SsYPLWzNKV0s23KfXKtpPW2ST2O0n1w/ACSVyIaEmAA0I5Gw//euQDFD4mUFEd2djt8yNgygft9DqEzwZoattQ0uKHXoGWhIqC3Ho1BR4rnhktBAzqDPJUrTaQAIhXJpAKiqtWafAP+0ie5khFoDdojMURccylIJmNItYd7FlJl+lv/vZgnXBOuCROEGZnxiEQsTT3CffAJcJOAIixNW/aZAhLbCCBGU8KGsSAmgQwf+u8F9aiCjwVo85OMVzRY249cQUwDowrwaCSFAWHwUVakhudMmQkGdRYzw/DPOkogs7+ZVQ40oDL8EyJDPZormYMyHLSzXAXWWsqUYiu6XbZ5AiTkgqkVQSfESBIpYAYw9CqlDIRpcvXJpcHi5FJrHqaAWxJ2B67kJmHC9gDjJpgBuecmITFfLEChoeaBYBlo/Gx99UfBWjG4InIDWTsvbRQXS+pRNMwMDaizRMvSowYEE+Yy7lu/Wwi3Gr07pzaupslG+tZo07ebutL0tizdM51LoV3lv5tO8ceuo/7B8WlnBliepzxiuG3yp8a97QGIIVcQMdOMz/ZIsDT9fUGDm+0AfmIaSDMvtgGzusjXVQJ012B3xoZLawvPTQo1LNuG0T0tb7fNNW3uG9rtpg/EVAF8BgsuuEu3r1Ldepw3yK32+z3JP6yaV8MGD0R+7MyGeSY2cZPLmUeYRnRpiElc4K4WgDxi5BIsfVlQ4njfgbI8aMmPsPeiEPxjAYTHIAxfcLC8SBjROUR8waPaWVzHisAsvd0c/nC2W4lwYWAJqo1WLsw/v+tNjWnNl6JpyyZWnzqgWQi9YRkcV6nNDss7ZKFkRu4THmEZkM4qH/d1/aybBxHI5azi/p7J6gdHNScD2Ngp7K+wOljU75/vL+oHWHlVAVhkNM4NI/3NbxfoQAZYs8279cEw3Bg4HQ5neyxu89B28Mc2P85Ec6x4EiTWdXL4uzsR3Ook2ngTR+Ns9vqNg1iNAWdub0FOCrZmflrTeO3e2vYN8zktbduv6qJapshSsRwbyIzDSb2Ka3fMkYv9mWPzeiG1GdrBN+b2pJ6CFurwP5cftoaxr+wnoq0v7sfhkg9lcAyRzbbHsBPf6Tnt+oD1/ql5KBz6i36A7v49THd6w3cDs/WEdNfJqM19fTU7/twxxIcdf09PjltT+QhHqv7Cdg5Ye0HYLvcBDjw1y/SH/lBK7Jb6IPl0CKd0gX/mCQq3nI5pXg1Y6/YCfR47nlYEeJIzkq3EaQnDBv+Y30Wsg0f6IuImo38Asc8DQMNtX+Nbx6FwBx69BsOsaFZa+t78+QsyqGLE40cV5wrHtauSDUVaiyr4uK3r3InYj1hWiJj5LOf+B1hpXxRZCOofo+Yzaj6j5jNqPqPmM2o+o+Yzaj6j5jNqPqPmM2o+o+Yzaj6j5jNqPqPm8zfSfFxfezSfUeEZUnhGPWfUc/42es6egB5ZvbkGXaRmn4YzKjajYjMqNo+k2BwD/KfTZ46koSdQY3ZpaVeTGRWYUYEZFZj/RQXms1jta+stDdU0qsuosYway9fRWB7jm8Ch4DYI2KurtBYNqSt7Yv9SLcW5xsfPh25VxTIqcDUp8lSymCwYTyH2yWtpL1kZxlN34SpX8o7HEBMuNle8rIhBQhmv3C2zgXtYuZJhClnv/83pUsaVW1n5JQ7b2Ci3MHTeb65fXZAfn//rh9tvEmNyHUwm9/f3vlpEZxBzI5Uv1XKiFhH+w3Xf+mSegAKSsRUJgbA4todKlrZppkapkTbBKmyCbXL5HVCB7NM9V+wKxXe6fE7eXV/uNLfj2u5ZMOxlQFkoCxOEKRMfaNP1Q7N0TnSRZXhTsEJg10HpUW2YKfRD2eiX+fyKOBMkkjF0vk6jI0wi44JnRUaD59OpRzP2yX36fjq14MCOH5GJIPApT5mwo7WdDhfuQqWzZhPjQhsmolN1Riq+5Nt+uwishnjmMiod/jIwiYxpQHOp7egwk9CATtpan0c1KKRy+04sVEoDunZgKYPJZJ1IbcpgnUtlyskdduKOKc7C1M0fPnag2gxLKiOWJs7hbtPwQfuwd+HkVfKCXL98Oyc/MwP3bGWLiC67pl9MX0x7reLSAYvnV5fEZehGrkUDG7OI516zbvExhkt8X2iICsXN6i1uc+UJgSlQ5wXWvR6Fyp+1jp/dIupVv7zaDMh//ju3PeZiIe32qte7gdDWq51O/We7c3V1aeERySwrhOVIsXSHCtZKLEoLbTAhj6Y8ApShg3UlVdRuf3NPSKU3kmc+NsVNzoYal9wkRehHMptUAnr9M0xlOMkYF5PKhZ5cnL9+92Z2fvbb5cXLN29fnj3zp7755F5gOLoZE6043MumuZm7ney6eSX8X9w1r6bCwCczyVPG7UnNlnNdIfamo87fehXqbuh6HTIN71RalvjnjwWoFQ1ubhuQ4qfSowmwGJSF+Ac8B9ALV6KzOTrH5WmBQfTdZi+9zabzKILctJbvXHxGGNSsc/X72zlOdXWJHmtKA8t/1q7X/IpBluVfUZPedw==
 sidebar_class_name: "post api-method"
-info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+info_path: versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Deploy resources</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Deploy resources"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/deployments"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/deployments"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Deploys one or more resources (e.g. processes, decision models, or forms).
 This is an atomic call, i.e. either all resources are deployed or none of them are.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"multipart/form-data"} value={"multipart/form-data-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"resources"} required={false} schemaName={"binary[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The binary data to create the deployment resources. It is possible to have more than one form part with different form part names for the binary data to create a deployment.\n","items":{"type":"string","format":"binary"}}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant to deploy the resources to."}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-The resources are deployed.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "multipart/form-data": {
+        schema: {
+          type: "object",
+          properties: {
+            resources: {
+              type: "array",
+              description:
+                "The binary data to create the deployment resources. It is possible to have more than one form part with different form part names for the binary data to create a deployment.\n",
+              items: { type: "string", format: "binary" },
+            },
+            tenantId: {
+              type: "string",
+              description: "The tenant to deploy the resources to.",
+            },
+          },
+          required: ["resource"],
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"deploymentKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The unique key identifying the deployment."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>deployments</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>processDefinition</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The bpmn process ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific process definition.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned process version."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this process."}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The resource name from which this process was parsed."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the deployed process."}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>decisionDefinition</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"decisionDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The dmn decision ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific decision.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned decision version."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned decision key, which acts as a unique identifier for this decision.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The DMN name of the decision, as parsed during deployment."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the deployed decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The dmn ID of the decision requirements graph that this decision is part of, as parsed during deployment.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key of the decision requirements graph that this decision is part of.\n"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>decisionRequirements</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"decisionRequirementsId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The dmn decision requirements ID, as parsed during deployment; together with the versions forms a unique identifier for a specific decision.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned decision requirements version."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The DMN name of the decision requirements, as parsed during deployment."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the deployed decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned decision requirements key, which acts as a unique identifier for this decision requirements.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The resource name from which this decision requirements was parsed."}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>form</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"formId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The form ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific form.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned form version."}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this form."}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The resource name from which this form was parsed."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the deployed form."}}></SchemaItem></div></details></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"deploymentKey\": 0,\n  \"deployments\": [\n    {\n      \"processDefinition\": {\n        \"processDefinitionId\": \"string\",\n        \"processDefinitionVersion\": 0,\n        \"processDefinitionKey\": 0,\n        \"resourceName\": \"string\",\n        \"tenantId\": \"string\"\n      },\n      \"decisionDefinition\": {\n        \"decisionDefinitionId\": \"string\",\n        \"version\": 0,\n        \"decisionDefinitionKey\": 0,\n        \"name\": \"string\",\n        \"tenantId\": \"string\",\n        \"decisionRequirementsId\": \"string\",\n        \"decisionRequirementsKey\": 0\n      },\n      \"decisionRequirements\": {\n        \"decisionRequirementsId\": \"string\",\n        \"version\": 0,\n        \"decisionRequirementsName\": \"string\",\n        \"tenantId\": \"string\",\n        \"decisionRequirementsKey\": 0,\n        \"resourceName\": \"string\"\n      },\n      \"form\": {\n        \"formId\": \"string\",\n        \"version\": 0,\n        \"formKey\": 0,\n        \"resourceName\": \"string\",\n        \"tenantId\": \"string\"\n      }\n    }\n  ],\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The document upload failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The resources are deployed.",
+      content: {
+        "application/json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for DeploymentResponse",
+                type: "object",
+                properties: { tenantId: { type: "string" } },
+                title: "DeploymentResponseBase",
+              },
+            ],
+            properties: {
+              deployments: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    processDefinition: {
+                      deprecated: true,
+                      description: "A deployed process.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description: "Base properties for DeploymentProcess.",
+                          type: "object",
+                          properties: {
+                            processDefinitionId: {
+                              type: "string",
+                              description:
+                                "The bpmn process ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific process definition.\n",
+                            },
+                            processDefinitionVersion: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned process version.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this process was parsed.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed process.",
+                            },
+                          },
+                          title: "DeploymentProcessBase",
+                        },
+                      ],
+                      properties: {
+                        processDefinitionKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned key, which acts as a unique identifier for this process.",
+                        },
+                      },
+                      title: "DeploymentProcess",
+                    },
+                    decisionDefinition: {
+                      deprecated: true,
+                      description: "A deployed decision.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description:
+                            "Base properties for DeploymentDecision.",
+                          type: "object",
+                          properties: {
+                            decisionDefinitionId: {
+                              type: "string",
+                              description:
+                                "The dmn decision ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific decision.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned decision version.",
+                            },
+                            name: {
+                              type: "string",
+                              description:
+                                "The DMN name of the decision, as parsed during deployment.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed decision.",
+                            },
+                            decisionRequirementsId: {
+                              type: "string",
+                              description:
+                                "The dmn ID of the decision requirements graph that this decision is part of, as parsed during deployment.\n",
+                            },
+                          },
+                          title: "DeploymentDecisionBase",
+                        },
+                      ],
+                      properties: {
+                        decisionDefinitionKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned decision key, which acts as a unique identifier for this decision.\n",
+                        },
+                        decisionRequirementsKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned key of the decision requirements graph that this decision is part of.\n",
+                        },
+                      },
+                      title: "DeploymentDecision",
+                    },
+                    decisionRequirements: {
+                      deprecated: true,
+                      description: "Deployed decision requirements.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description:
+                            "Base properties for DeploymentDecisionRequirements.",
+                          type: "object",
+                          properties: {
+                            decisionRequirementsId: {
+                              type: "string",
+                              description:
+                                "The dmn decision requirements ID, as parsed during deployment; together with the versions forms a unique identifier for a specific decision.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description:
+                                "The assigned decision requirements version.",
+                            },
+                            decisionRequirementsName: {
+                              type: "string",
+                              description:
+                                "The DMN name of the decision requirements, as parsed during deployment.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed decision requirements.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this decision requirements was parsed.",
+                            },
+                          },
+                          title: "DeploymentDecisionRequirementsBase",
+                        },
+                      ],
+                      properties: {
+                        decisionRequirementsKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned decision requirements key, which acts as a unique identifier for this decision requirements.\n",
+                        },
+                      },
+                      title: "DeploymentDecisionRequirements",
+                    },
+                    form: {
+                      deprecated: true,
+                      description: "A deployed form.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description: "Base properties for DeploymentForm.",
+                          type: "object",
+                          properties: {
+                            formId: {
+                              type: "string",
+                              description:
+                                "The form ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific form.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned form version.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this form was parsed.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed form.",
+                            },
+                          },
+                          title: "DeploymentFormBase",
+                        },
+                      ],
+                      properties: {
+                        formKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned key, which acts as a unique identifier for this form.",
+                        },
+                      },
+                      title: "DeploymentForm",
+                    },
+                  },
+                  title: "DeploymentMetadata",
+                },
+              },
+              deploymentKey: {
+                type: "integer",
+                format: "int64",
+                description: "The unique key identifying the deployment.",
+              },
+            },
+            title: "DeploymentResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for DeploymentResponse",
+                type: "object",
+                properties: { tenantId: { type: "string" } },
+                title: "DeploymentResponseBase",
+              },
+            ],
+            properties: {
+              deployments: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    processDefinition: {
+                      deprecated: true,
+                      description: "A deployed process.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description: "Base properties for DeploymentProcess.",
+                          type: "object",
+                          properties: {
+                            processDefinitionId: {
+                              type: "string",
+                              description:
+                                "The bpmn process ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific process definition.\n",
+                            },
+                            processDefinitionVersion: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned process version.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this process was parsed.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed process.",
+                            },
+                          },
+                          title: "DeploymentProcessBase",
+                        },
+                      ],
+                      properties: {
+                        processDefinitionKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned key, which acts as a unique identifier for this process.",
+                        },
+                      },
+                      title: "DeploymentProcess",
+                    },
+                    decisionDefinition: {
+                      deprecated: true,
+                      description: "A deployed decision.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description:
+                            "Base properties for DeploymentDecision.",
+                          type: "object",
+                          properties: {
+                            decisionDefinitionId: {
+                              type: "string",
+                              description:
+                                "The dmn decision ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific decision.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned decision version.",
+                            },
+                            name: {
+                              type: "string",
+                              description:
+                                "The DMN name of the decision, as parsed during deployment.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed decision.",
+                            },
+                            decisionRequirementsId: {
+                              type: "string",
+                              description:
+                                "The dmn ID of the decision requirements graph that this decision is part of, as parsed during deployment.\n",
+                            },
+                          },
+                          title: "DeploymentDecisionBase",
+                        },
+                      ],
+                      properties: {
+                        decisionDefinitionKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned decision key, which acts as a unique identifier for this decision.\n",
+                        },
+                        decisionRequirementsKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned key of the decision requirements graph that this decision is part of.\n",
+                        },
+                      },
+                      title: "DeploymentDecision",
+                    },
+                    decisionRequirements: {
+                      deprecated: true,
+                      description: "Deployed decision requirements.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description:
+                            "Base properties for DeploymentDecisionRequirements.",
+                          type: "object",
+                          properties: {
+                            decisionRequirementsId: {
+                              type: "string",
+                              description:
+                                "The dmn decision requirements ID, as parsed during deployment; together with the versions forms a unique identifier for a specific decision.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description:
+                                "The assigned decision requirements version.",
+                            },
+                            decisionRequirementsName: {
+                              type: "string",
+                              description:
+                                "The DMN name of the decision requirements, as parsed during deployment.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed decision requirements.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this decision requirements was parsed.",
+                            },
+                          },
+                          title: "DeploymentDecisionRequirementsBase",
+                        },
+                      ],
+                      properties: {
+                        decisionRequirementsKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned decision requirements key, which acts as a unique identifier for this decision requirements.\n",
+                        },
+                      },
+                      title: "DeploymentDecisionRequirements",
+                    },
+                    form: {
+                      deprecated: true,
+                      description: "A deployed form.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description: "Base properties for DeploymentForm.",
+                          type: "object",
+                          properties: {
+                            formId: {
+                              type: "string",
+                              description:
+                                "The form ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific form.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned form version.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this form was parsed.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed form.",
+                            },
+                          },
+                          title: "DeploymentFormBase",
+                        },
+                      ],
+                      properties: {
+                        formKey: {
+                          type: "integer",
+                          format: "int64",
+                          description:
+                            "The assigned key, which acts as a unique identifier for this form.",
+                        },
+                      },
+                      title: "DeploymentForm",
+                    },
+                  },
+                  title: "DeploymentMetadata",
+                },
+              },
+              deploymentKey: {
+                type: "integer",
+                format: "int64",
+                description: "The unique key identifying the deployment.",
+              },
+            },
+            title: "DeploymentResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for DeploymentResponse",
+                type: "object",
+                properties: { tenantId: { type: "string" } },
+                title: "DeploymentResponseBase",
+              },
+            ],
+            properties: {
+              deployments: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    processDefinition: {
+                      description: "A deployed process.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description: "Base properties for DeploymentProcess.",
+                          type: "object",
+                          properties: {
+                            processDefinitionId: {
+                              type: "string",
+                              description:
+                                "The bpmn process ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific process definition.\n",
+                            },
+                            processDefinitionVersion: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned process version.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this process was parsed.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed process.",
+                            },
+                          },
+                          title: "DeploymentProcessBase",
+                        },
+                      ],
+                      properties: {
+                        processDefinitionKey: {
+                          type: "string",
+                          description:
+                            "The assigned key, which acts as a unique identifier for this process.",
+                        },
+                      },
+                      title: "DeploymentProcessResult",
+                    },
+                    decisionDefinition: {
+                      description: "A deployed decision.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description:
+                            "Base properties for DeploymentDecision.",
+                          type: "object",
+                          properties: {
+                            decisionDefinitionId: {
+                              type: "string",
+                              description:
+                                "The dmn decision ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific decision.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned decision version.",
+                            },
+                            name: {
+                              type: "string",
+                              description:
+                                "The DMN name of the decision, as parsed during deployment.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed decision.",
+                            },
+                            decisionRequirementsId: {
+                              type: "string",
+                              description:
+                                "The dmn ID of the decision requirements graph that this decision is part of, as parsed during deployment.\n",
+                            },
+                          },
+                          title: "DeploymentDecisionBase",
+                        },
+                      ],
+                      properties: {
+                        decisionDefinitionKey: {
+                          type: "string",
+                          description:
+                            "The assigned decision key, which acts as a unique identifier for this decision.\n",
+                        },
+                        decisionRequirementsKey: {
+                          type: "string",
+                          description:
+                            "The assigned key of the decision requirements graph that this decision is part of.\n",
+                        },
+                      },
+                      title: "DeploymentDecisionResult",
+                    },
+                    decisionRequirements: {
+                      description: "Deployed decision requirements.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description:
+                            "Base properties for DeploymentDecisionRequirements.",
+                          type: "object",
+                          properties: {
+                            decisionRequirementsId: {
+                              type: "string",
+                              description:
+                                "The dmn decision requirements ID, as parsed during deployment; together with the versions forms a unique identifier for a specific decision.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description:
+                                "The assigned decision requirements version.",
+                            },
+                            decisionRequirementsName: {
+                              type: "string",
+                              description:
+                                "The DMN name of the decision requirements, as parsed during deployment.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed decision requirements.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this decision requirements was parsed.",
+                            },
+                          },
+                          title: "DeploymentDecisionRequirementsBase",
+                        },
+                      ],
+                      properties: {
+                        decisionRequirementsKey: {
+                          type: "string",
+                          description:
+                            "The assigned decision requirements key, which acts as a unique identifier for this decision requirements.\n",
+                        },
+                      },
+                      title: "DeploymentDecisionRequirementsResult",
+                    },
+                    form: {
+                      description: "A deployed form.",
+                      type: "object",
+                      allOf: [
+                        {
+                          description: "Base properties for DeploymentForm.",
+                          type: "object",
+                          properties: {
+                            formId: {
+                              type: "string",
+                              description:
+                                "The form ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific form.\n",
+                            },
+                            version: {
+                              type: "integer",
+                              format: "int32",
+                              description: "The assigned form version.",
+                            },
+                            resourceName: {
+                              type: "string",
+                              description:
+                                "The resource name from which this form was parsed.",
+                            },
+                            tenantId: {
+                              type: "string",
+                              description:
+                                "The tenant ID of the deployed form.",
+                            },
+                          },
+                          title: "DeploymentFormBase",
+                        },
+                      ],
+                      properties: {
+                        formKey: {
+                          type: "string",
+                          description:
+                            "The assigned key, which acts as a unique identifier for this form.",
+                        },
+                      },
+                      title: "DeploymentFormResult",
+                    },
+                  },
+                  title: "DeploymentMetadataResult",
+                },
+              },
+              deploymentKey: {
+                type: "string",
+                description: "The unique key identifying the deployment.",
+              },
+            },
+            title: "DeploymentResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The document upload failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

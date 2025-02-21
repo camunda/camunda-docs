@@ -26,5 +26,5 @@ For details on supported environments (e.g. Java or Elasticsearch versions), see
 
 ## Local deployment
 
-- [**Docker Compose**](https://github.com/camunda/camunda-platform): A configuration file is also provided for local development, and is **not** optimized for production usage.
+- [**Docker Compose**](https://github.com/camunda/camunda-platform): A configuration file is also available for local development, and is **not** optimized for production usage.
 - [**Camunda 8 Run**](/self-managed/setup/deploy/local/c8run.md): Allows you to install and start a simplified, single-application Camunda configuration in a local development environment.

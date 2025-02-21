@@ -1,56 +1,49 @@
 ---
 id: index
-title: Pre-migration details
+title: Camunda 7 to Camunda 8 migration guide
+sidebar_label: Overview
 description: "Migrate process solutions developed for Camunda 7 to run them on Camunda 8."
-keywords:
-  [
-    Camunda 8,
-    Camunda 7,
-    migration guide,
-    transition,
-    transition guide,
-    Camunda 7,
-  ]
+keywords: [Camunda 8, Camunda 7, migration guide, transition, transition guide]
 ---
 
+import "../react-components/\_migration-table.css";
+import MigrationsGrid from '../react-components/\_migration-card';
+import { gettingStartedCards } from '../react-components/\_migration-card-data';
+
+Learn how to migrate process solutions developed for Camunda 7 to run on Camunda 8.
+
+## About this guide
+
+This guide covers the typical migration journey from Camunda 7 to Camunda 8, describing the decisions to be made along the way, as well as linking to more in-depth material or tooling you might find useful.
+
+It is important to understand that **Camunda 8 is not a drop-in replacement for Camunda 7**.
+
+It is not sufficient to exchange a library; you might have to adjust your BPMN models, refactor code, and probably also re-architect your solution. This effort greatly depends on how your existing Camunda 7 solution is built. This guide dives deeper into all the aspects involved.
+
 :::note
-Migration of existing projects to Camunda 8 is optional. Camunda 7 still has ongoing [support](https://docs.camunda.org/enterprise/announcement/).
+This guide covers [migration tooling](migration-tooling.md) in development for Camunda 8.8 that might not be complete at the time of reading.
 :::
 
-This guide describes how to migrate process solutions developed for Camunda 7 to run them on Camunda 8, including:
+## What you will learn
 
-- Differences in application architecture
-- How process models and code can generally be migrated, whereas runtime and history data cannot
-- How migration can be very simple for some models, but also marked limitations, where migration might get very complicated
-- You need to adjust code that uses the workflow engine API
-- How you might be able to reuse glue code
-- Community extensions that can help with migration
-- The Clean Delegate approach, which helps you write Camunda 7 solutions that are easier to migrate
+This guide covers the following main aspects involved in migrating from Camunda 7 to Camunda 8.
 
-We are watching all customer migration projects closely and will update this guide in the future.
+<MigrationsGrid migrations={gettingStartedCards} />
 
-## What to expect
+<!-- TODO: However, the [migration tooling roadmap](http://x) can inform your time planning. -->
 
-Before diving into concrete steps on migrating your models and code, let's cover some conceptual topics and migration readiness steps. The list below provides an outline of the sections in this guide:
+## Help and further resources
 
-- [Conceptual differences](./conceptual-differences.md)
-- [Migration readiness](./migration-readiness.md)
-- [Adjusting BPMN models](./adjusting-bpmn-models.md)
-- [Adjusting DMN models](./adjusting-dmn-models.md)
-- [Adjusting source code](./adjusting-source-code.md)
+Get help with your migration journey from the following additional resources.
 
-## Open issues
+- The [Camunda forum](https://forum.camunda.io/c/c7-to-c8/)
+- Camunda Consulting
+  - [Migration workshops](https://camunda.com/wp-content/uploads/2024/03/Camunda_ConsultingWorkshops_5-Migration-Evaluation_2024.pdf)
+  - Professional advisory services
+- [Camunda Partners](https://camunda.com/de/partners/):
+  - Professional advisory services
+  - Implementation services
 
-As described earlier in this guide, migration is an ongoing topic and this guide is far from complete. Open issues include the following:
-
-- Describe implications on testing
-- Discuss adapters for Java or REST client
-- Discuss more concepts around BPMN:
-  ** [Field injection](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/#field-injection) that is using `camunda:field` available on many BPMN elements.
-  ** Multiple instance markers available on most BPMN elements.
-  ** `camunda:inputOutput` available on most BPMN elements.
-  ** `camunda:errorEventDefinition` available on several BPMN elements.
-- Discuss workload migrations (operations)
-- Eventual consistency
-
-[Reach out to us](/reference/contact.md) to discuss your specific migration use case.
+:::info
+Still need more help? Contact your customer success manager or [reach out to Camunda](https://camunda.com/contact-us/).
+:::

@@ -24,7 +24,7 @@ You can enable resource-based authorization on a per-cluster basis to control th
 - Disable this setting if you do not want to use resource-based authorization in the cluster. You can still configure resource authorizations, but they are only applied to cluster users when you enable this setting.
 
 :::tip
-For more information on resource-based authorization, see [resource authorizations](/components/concepts/resource-authorizations.md) and [resource-based authorization](/components/console/manage-organization/manage-users.md/#resource-based-authorizations).
+For more information on resource-based authorization, see [resource authorizations](/components/concepts/resource-authorizations.md) and [resource-based authorization](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
 :::
 
 ## Automatic cluster updates

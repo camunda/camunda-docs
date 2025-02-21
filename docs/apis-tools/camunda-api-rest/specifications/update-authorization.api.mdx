@@ -1,73 +1,289 @@
 ---
 id: update-authorization
 title: "Update authorization"
-description: "Manage the permissions assigned to the authorization."
+description: "Update the authorization with the given key."
 sidebar_label: "Update authorization"
 hide_title: true
 hide_table_of_contents: true
-api: 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
-sidebar_class_name: "patch api-method"
+api: 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
+sidebar_class_name: "put api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Update authorization</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update authorization"}
+></Heading>
 
 <MethodEndpoint
-  method={"patch"}
-  path={"/authorizations/{ownerKey}"}
+  method={"put"}
+  path={"/authorizations/{authorizationKey}"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
-Manage the permissions assigned to the authorization.
+Update the authorization with the given key.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"ownerKey","in":"path","required":true,"description":"The key of the owner of the authorization.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"action"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ADD`, `REMOVE`]"} schema={{"description":"Indicates if permissions should be added or removed.","type":"string","enum":["ADD","REMOVE"]}}></SchemaItem><SchemaItem collapsible={false} name={"resourceType"} required={false} schemaName={"object"} qualifierMessage={undefined} schema={{"description":"The type of resource to add/remove permissions to/from.","enum":["AUTHORIZATION","MAPPING_RULE","MESSAGE","BATCH","APPLICATION","SYSTEM","TENANT","DEPLOYMENT","PROCESS_DEFINITION","DECISION_REQUIREMENTS_DEFINITION","DECISION_DEFINITION","GROUP","USER","ROLE"],"title":"ResourceTypeEnum"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>permissions</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails
+  parameters={[
+    {
+      name: "authorizationKey",
+      in: "path",
+      required: true,
+      description: "The key of the authorization to delete.",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
 
-The permissions to add/remove.
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            ownerId: {
+              description: "The ID of the owner of the permissions.",
+              type: "string",
+            },
+            ownerType: {
+              description: "The type of the owner of the permissions.",
+              type: "object",
+              allOf: [
+                {
+                  description: "The type of the owner of permissions.",
+                  enum: ["USER", "ROLE", "GROUP", "MAPPING", "UNSPECIFIED"],
+                  title: "OwnerTypeEnum",
+                },
+              ],
+            },
+            resourceId: {
+              description: "The ID of the resource to add permissions to.",
+              type: "string",
+            },
+            resourceType: {
+              description: "The type of resource to add permissions to.",
+              type: "object",
+              allOf: [
+                {
+                  description:
+                    "The type of resource to add/remove permissions to/from.",
+                  enum: [
+                    "AUTHORIZATION",
+                    "MAPPING_RULE",
+                    "MESSAGE",
+                    "BATCH",
+                    "APPLICATION",
+                    "SYSTEM",
+                    "TENANT",
+                    "RESOURCE",
+                    "PROCESS_DEFINITION",
+                    "DECISION_REQUIREMENTS_DEFINITION",
+                    "DECISION_DEFINITION",
+                    "GROUP",
+                    "USER",
+                    "ROLE",
+                  ],
+                  title: "ResourceTypeEnum",
+                },
+              ],
+            },
+            permissionTypes: {
+              type: "array",
+              description: "The permission types to add.",
+              items: {
+                type: "string",
+                allOf: [
+                  {
+                    description: "Specifies the type of permissions.",
+                    enum: [
+                      "ACCESS",
+                      "CREATE",
+                      "CREATE_PROCESS_INSTANCE",
+                      "CREATE_DECISION_INSTANCE",
+                      "READ",
+                      "READ_PROCESS_INSTANCE",
+                      "READ_USER_TASK",
+                      "READ_DECISION_INSTANCE",
+                      "READ_PROCESS_DEFINITION",
+                      "READ_DECISION_DEFINITION",
+                      "UPDATE",
+                      "UPDATE_PROCESS_INSTANCE",
+                      "UPDATE_USER_TASK",
+                      "DELETE",
+                      "DELETE_PROCESS",
+                      "DELETE_DRD",
+                      "DELETE_FORM",
+                      "DELETE_PROCESS_INSTANCE",
+                      "DELETE_DECISION_INSTANCE",
+                    ],
+                    title: "PermissionTypeEnum",
+                  },
+                ],
+              },
+            },
+          },
+          required: [
+            "ownerId",
+            "ownerType",
+            "resourceId",
+            "resourceType",
+            "permissionTypes",
+          ],
+          title: "AuthorizationRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
 
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"permissionType"} required={false} schemaName={"object"} qualifierMessage={undefined} schema={{"description":"Specifies the type of permissions.","enum":["ACCESS","CREATE","CREATE_PROCESS_INSTANCE","CREATE_DECISION_INSTANCE","READ","READ_PROCESS_INSTANCE","READ_USER_TASK","READ_DECISION_INSTANCE","UPDATE","UPDATE_PROCESS_INSTANCE","UPDATE_USER_TASK","DELETE","DELETE_PROCESS","DELETE_DRD","DELETE_FORM","DELETE_PROCESS_INSTANCE"],"title":"PermissionTypeEnum"}}></SchemaItem><SchemaItem collapsible={false} name={"resourceIds"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"A list of resource IDs the permission relates to.","uniqueItems":true,"items":{"type":"string"}}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"202"} value={"202"}><div>
-
-The authorization was patched successfully.
-
-</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The authorization could not be patched.
-More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-The owner was not found.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"409"} value={"409"}><div>
-
-The request to add or remove permissions to an authorization was in conflict.
-More details are provided in the response body.
-
-</div><div></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The authorization was updated successfully." },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The authorization with the authorizationKey was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

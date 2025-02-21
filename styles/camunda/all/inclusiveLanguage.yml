@@ -1,0 +1,19 @@
+extends: substitution
+message: "Non-inclusive terminology used. Use `%s` instead of `%s`. Review the WCoE for using inclusive language - https://confluence.camunda.com/x/VYNBCw ."
+level: error
+ignorecase: true
+swap:
+  whitelist: allowlist
+  white-listed: allow-listed
+  white-list: allow-list
+  abort: force quit
+  blackbox: closed box
+  blacklist: blocklist
+  cripple: slow down
+  cripples: slows down
+  he: they
+  she: they
+  master: main
+  slave: follower
+  webmaster: web manager
+  whitebox: open box

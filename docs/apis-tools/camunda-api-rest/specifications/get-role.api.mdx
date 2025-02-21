@@ -5,52 +5,244 @@ description: "Get a role by its key."
 sidebar_label: "Get role"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWcty2zYU/ZU7WCVThpQTN025Ux0ndfOox3HahesFCF6JiEGAwcMyR8N/71yClGRLdtLHTDutFhqJBHDu6xyAvFoyz+eO5RfszChklwkzDVrupdEnJcvZHH0/kLASnbCyoRGWs9fogYM1CqFoQXoHV9imv2mWsIZbXqNHS7BLpnmNLGc09Q22LGGS1jfcVyxhFj8HabFkubcB7xo5rzCaIGyWMCcqrDnLl8y3DYFK7XGOliVsZmzNfbz1/JB13SWBu8Zoh45WPJ1M6OseA9KBC0Kgc7OgVAsWfbAaS7IqjPaoPa3mTaOk6LOTfXIEsdxw6jY2pQ0ccisqGD0B6bEmzMF/U3xC4VnCuFI/z/p03Qb5gTuExlJNvEQHM2OBgE/uwVlPJYdi6lfZct5KPd8q5SoJND1lXZcwL73CIQYyRW4wSult/Cts/wB8X8QuYdw5OddYvsO6QPsGW7cBwq3l7U4Mhx7MjFAcfdf9agcjGngDfjBFmaFMu23vul3h9TFv1vZal6ngddAlT3kjUzKa6kAWv/nzdYc32AL33soieCTXQYcarRRwzVVAl/aBNxYF92tN/Be5shbuw4q/K+t/ij0PbDQ7UvA+rHz7KmbFZP8FZu13lH/fjkK3DycH9xw6+Dmg86C4uHKkflkCD75C7QemgLBY0iVX7oFTqLGmUFh/kTtTOI0zoUTPpYJYYNqD4sQCS5AaLs5eHcH3h99+d/mo8r5xeZYtFovUzsQTLKU3NjV2ntmZoA/Ne5zCeYUWoeYtFAi8LCXZ5GqTZa5BIWdSjDkd3AZKZXxqeJh3cXSbGCs1Biu3ajyFj2cnIPsszlqp59um+zUzHhRh8MIEnxeK6yu2rumX2DgFF+qa25Y4tG2gS5jz3Icv7ybPnu5k6Y/n56cQIUCYEnvF+kq60RAFUUst61Cz/HAySVjNb+LV88mkI0yq+FdEogFvGsV1JOCdcKSG2lgc+NMHJrXzXIu/qzLGyrm8a/f29jGQ+GWMaBTZs22+vzK2kGWJuqfnSm/SgTYeuFJm8eDT3V5Xe13973V1+MAb00L6qseby2vUdIjCgkd1zUzQe23ttbXX1r3a+nZXN2KqgbJsiYdorbFghAjWYgmLSqoenloUo+3hUItc3Gttr7W91ra11iWsRl+ZoZnZ9yd9xXKW0THmsuXQmOyov4j2emxbBqtYzpZRL12eZcvKON/ly8ZY32XXVIxrbiUvVKQgDUddjXxRRnDV395VNxqg9+MxnqPYFYAXcHb84Rxec48LHt9vyeRt6BeTF5OdqDT1HsTp6QnECCPrNnaCEZYkvftVuZ/8NcB959WhCFb69gMti+kpkFu000C5X7FhsNej03WcxJLhx6uRIz/9et6XWeqZ6ZcP5d52hKqC1kXPJ+nBNrVOT3qFCFPXQffbpJ7Hpxm+EZhQwXkKKGFKCtQO1+2Pldm3cQR+iRbhIKWiROaMu+Nc+ioUqTB1NvR9Vt+FMkVWc6mzwYTLjqbvPr5/OX3y9uTo+P2H4ycH6ST1N74PvjHO11xv+EFNeLujO79cnwYPNeqHIni88VmjuNREi9775SCSi75t71jC8rF/f5kMTL9gy2XBHX60quvo9ueAtmX5xeVaGLH/JB39Llk+48rdbfJv+vrobPg74DHcbQTu9HXs8Oi2F6MKdMWS2EVa/ePQXXYJq5CXaHt/4uhUCGz8xrqt3j4RebV1vD4mBv4OKmmsqw==
+api: eJztWE1z2zYQ/Ss7OCVTRpQTJ3V50zhO6uZjPLLTHlwfQHAlIgYBBlha5mj43ztLkLZiyU4601t10FAkgLdf74HErgXJZRDZpZg7g+IqEa5GL0k7e1qITCyR+oFEFBiU1zWPiEy8RwIJ3hmEvAVNAa6xnfxtRSJq6WWFhJ5h18LKCkUmeOoHbEUiNK+vJZUiER6/NdpjITLyDT40clFiNMHYIhFBlVhJka0FtTWDBvLaLkXXXTFUqJ0NGHj85XTKl0fgdIDQKIUhLBpjWvBIjbdYsA3lLKElXi3r2mjV5yL9GhhiveHC99icJAgovSph9AQ0YcWYg7cu/4qKOEOek0w6+hoT9DCmR3PB0yeiS8Q1tv9iWZ/CLhEyBL20WHzCKkf/AduwASK9l+1OjIAEbsEoga9VvzrAiAbkgAZTHDFHHnYVqksEaTI4pGyOoTHEz7tEHE4PHikafmswEBiprgPcSKMLkA2VaGmoDyiPBd9KE56oYu1dbrD65UfVnMFZnAkFktQGYulABogTcyxAW7icvzuG3w5f/3r1rCSqQ5amq9Vq4hfqBRaanJ84v0z9QvGP5z2fwEWJHqGSLeQIsig025QG7kkBoUalF1qNWR3cBk5m1NjTjIqj29RYOF9JEplovN6q8gy+zE9B91lctNout033axaSK5YJmbuGstxIey3uq/ojPs4gNFUlfcss2jbQJSKQpGaTO9oSLtFv+q8tvXq5k6e/X1ycQYQA5QqEhfNApQ6jIQ6i0lZXTSWyw+k0EZW8jXdvptOOMbniPxGJBbytjbSRgA/C0RYq53HgTx+YtoGkVf9VZZzXS/3Q7kRsKmwg8dsY0SiyV9t8f+d8rosCbU/PO73pANYRSGPc6sndca+rva7+97o6fOKLY6Wp7PGW+gYtv0ZhJaO6Fq6xe23ttbXX1qPaer3ra35mgbPsmYfovfPglGq8xwJWpTY9PH/ij7aHl1rk4l5re63ttbattS4RFVLphqN/f5qnUmQi5ddYSNfDMb7j0zj6m/GQ33gjMrGOeumyNF2XLlCXrWvnqUtvuBg30muZm0hBHo66GvlinJKmf7yrbjzAJ98xnmNZNbaQcATzk/MLeC8JVzKecNnk99BH06PpTlSe+gji7OwUYoSRdRs7wQjLkt59WO4n/wxw37kIqBqvqT3nZTE9OUqPftZw7u/YMNjr0fk+ThLJ8OfdyJE//rroy6ztwvXLh3JvO8JVQR+i59PJwTa1zk57hShXVY3tt0m7jF8zciMwZZpAHFAijFZoA943Nu7Mfowj8Ge0CAcTLkpkzrg7LjWVTT5RrkpVXHZ3zY3L00pqmw4mQno8+/Tl89vZi4+nxyefz09eHEymE7qlPvjaBaqk3fCDW1Z+Ry9rff82eKqtNRSB8JbS2khtmRa99+tBJJd9kyuIRGRjt+sqGZh+KdbrXAb84k3X8eNvDfpWZJdX98LolVTowP8LkS2kCQ9bYpu+PpsPzbPn8LBRttPXscdj216MpuE7MfSR7vpz3VWXiBJlgb73J47OlMKaNtZt9caYyHdbx/sTZuA/EDL/Fw==
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Get role</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get role"}
+></Heading>
 
-<MethodEndpoint method={"get"} path={"/roles/{roleKey}"}></MethodEndpoint>
+<MethodEndpoint
+  method={"get"}
+  path={"/roles/{roleKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Get a role by its key.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"roleKey","in":"path","required":true,"description":"The role key.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "roleKey",
+      in: "path",
+      required: true,
+      description: "The role key.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
-The role is successfully returned.
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The role name."}}></SchemaItem><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The role key."}}></SchemaItem><SchemaItem collapsible={false} name={"assignedMemberKeys"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The set of keys of members assigned to the role.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"key\": \"string\",\n  \"assignedMemberKeys\": [\n    \"string\"\n  ],\n  \"name\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The role name."}}></SchemaItem><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The role key.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"assignedMemberKeys"} required={false} schemaName={"int64[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The set of keys of members assigned to the role.","items":{"type":"integer","format":"int64"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"key\": 0,\n  \"assignedMemberKeys\": [\n    0\n  ],\n  \"name\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The role name."}}></SchemaItem><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The role key."}}></SchemaItem><SchemaItem collapsible={false} name={"assignedMemberKeys"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The set of keys of members assigned to the role.","items":{"type":"string"}}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"key\": \"string\",\n  \"assignedMemberKeys\": [\n    \"string\"\n  ],\n  \"name\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-The role with the given key was not found.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The role is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Role search response item.",
+            type: "object",
+            properties: {
+              name: { type: "string", description: "The role name." },
+              key: { type: "string", description: "The role key." },
+              assignedMemberKeys: {
+                type: "array",
+                description: "The set of keys of members assigned to the role.",
+                items: { type: "string" },
+              },
+            },
+            title: "RoleResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The role with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
