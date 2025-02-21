@@ -401,7 +401,7 @@ body {
 }
 
 .homeSearch .DocSearch-Button-Placeholder::after {
-  content: " Camunda 8 Docs";
+  content: " Camunda 8 docs";
 }
 
 .table-of-contents__link .callout {
