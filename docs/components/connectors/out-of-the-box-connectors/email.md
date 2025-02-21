@@ -129,9 +129,7 @@ The task returns a JSON object containing detailed information about the email:
 :::note
 Starting from version 8.7.0, the outbound email Connector supports sending Camunda documents as attachments.
 
-For example, examine the **Attachment** field in the properties panel `=[ document1, document2]`:
-
-![document handling with email connector](../img/document-handling/email-connector.png)
+For example, the **Attachment** field in the properties panel may look as `=[ document1, document2]`.
 
 See additional details and limitations in [document handling](/components/concepts/document-handling.md).
 :::
