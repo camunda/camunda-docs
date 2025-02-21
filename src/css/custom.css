@@ -22,6 +22,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-menu-color: var(--ifm-color-emphasis-800);
   --ifm-heading-font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont,
     Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
+  --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
 }
 
 /* Dark mode */
@@ -379,6 +380,11 @@ body {
   background-color: #14d890;
   background-size: 100%;
   color: #000;
+}
+
+/* style PushFeedback widget */
+.feedback-widget {
+  padding-top: 2rem;
 }
 
 /* style SVG images of the BPMN coverage page */
@@ -779,7 +785,6 @@ h2 {
   font-size: 28px;
   font-weight: 600;
   border-bottom: 1px solid #dedede;
-  padding-top: 20px;
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
@@ -952,4 +957,23 @@ ul ol {
   .double-column-container {
     flex-direction: column;
   }
+}
+
+.table-of-contents__link .callout {
+  display: none;
+}
+
+/* Green tick list and orange cross list */
+.list-tick {
+  list-style-image: url("/static/img/icon-list-tick.png");
+  line-height: 1.5;
+}
+.list-cross {
+  list-style-image: url("/static/img/icon-list-cross.png");
+  line-height: 1.5;
+}
+.list-tick li,
+.list-cross li {
+  padding-left: 10px;
+  margin-bottom: 25px;
 }

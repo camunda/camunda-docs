@@ -24,7 +24,7 @@ The preset permissions for Camunda components are:
 | Operate     | `read:*` <br/> `write:*`                                                         | Read access to all APIs <br/> Write access to all APIs                                                             |
 | Optimize    | `write:*`                                                                        | Write access to all APIs                                                                                           |
 | Tasklist    | `read:*` <br/> `write:*`                                                         | Read access to all APIs <br/> Write access to all APIs                                                             |
-| Web Modeler | `write:*` <br/><br/> `create:*` <br/> `read:*` <br/> `update:*` <br/> `delete:*` | Access to internal API <br/><br/> CRUD access to public API                                                        |
+| Web Modeler | `write:*` <br/><br/> `create:*` <br/> `read:*` <br/> `update:*` <br/> `delete:*` | Access to UI <br/><br/> CRUD access to public API                                                                  |
 | Zeebe       | `write:*`                                                                        | Write access to all APIs                                                                                           |
 
 In this guide, we will show you how to use Identity to add and assign a permission to a role.

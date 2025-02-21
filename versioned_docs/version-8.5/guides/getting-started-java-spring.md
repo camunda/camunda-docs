@@ -136,6 +136,10 @@ zeebe.client.broker.restAddress=http://127.0.0.1:8080
 zeebe.client.security.plaintext=true
 ```
 
+:::note
+Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+:::
+
 ### Create a worker
 
 1. In `src/main/java/io/camunda/demo/process_payments/`, create a file called `ChargeCreditCardWorker.java`.
