@@ -125,6 +125,10 @@ curl --request POST 'http://localhost:9600/actuator/backups' \
 -d '{ "backupId": 123 }'
 ```
 
+:::note
+This command must be run on port 9600.
+:::
+
 Example response:
 
 ```json
