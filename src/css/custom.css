@@ -956,12 +956,16 @@ ul ol {
 
 .homeSearch {
   margin: auto;
-  width: 80%;
+  max-width: 1000px;
   padding: 20px;
 }
 
 .homeSearch .DocSearch-Button {
-  height: 60px;
+  height: 50px;
   width: 100%;
   border-radius: 8px;
+}
+
+.homeSearch .DocSearch-Button-Keys {
+  display: none;
 }
