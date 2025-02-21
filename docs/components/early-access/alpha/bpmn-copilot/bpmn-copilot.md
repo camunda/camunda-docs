@@ -47,7 +47,16 @@ Timeouts may occur at this step if your query is too complex.
 - Paste existing text documentation of a process (e.g., a Confluence page)
 - Paste a process hard-coded in any language (e.g., BPEL, Java, COBOL, Python)
 - Paste a description of an diagram. Any LLM (like ChatGPT) can generate this description from a screenshot or an image of the diagram.
+## Follow-Up Prompts:
+The BPMN Copilot can also translate business-focused intent into actionable changes to the diagram it creates. For example:
+- "Modify this process to maximize its changes of adhering to a 1 day SLA"
+- "Reduce the operating cost of this process"
+- "Show me ways to integrate AI into the process"
+- "Consider unhappy paths as well"
+- "Add error handling"
+- "Improve the user experience"
 
+Note that the BPMN Copilot may not replicate all parts of the diagram exactly between modifications.
 ### Limitations
 
 - The BPMN Copilot does not officially support modifying existing diagrams (including diagrams with implementation details).
