@@ -34,7 +34,9 @@ Ensure all prerequisites are in place to avoid issues during installation or upg
 
 ## Architecture Overview
 
-Below is the high-level architecture diagram for the base production setup _(click on the image to open the PDF version)_:
+Below is the high-level architecture diagram for the base production setup:
+
+# ![Architecture Diagram](./img/architecture.png)
 
 If you would like to learn more about the architecture setup, please refer to the [About Self-Managed](/docs/self-managed/about-self-managed/#architecture) and [Camunda 8 reference architectures](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console) documents.
 
