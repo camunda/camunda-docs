@@ -394,6 +394,14 @@ body {
   height: 55px;
   width: 100%;
   border-radius: 8px;
+  background: white;
+}
+.homeSearch .DocSearch-Button:hover {
+  height: 55px;
+  width: 100%;
+  border-radius: 8px;
+  background: white;
+  color: var(--docsearch-muted-color);
 }
 
 .DocSearch-Button-Keys {
