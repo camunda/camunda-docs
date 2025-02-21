@@ -92,11 +92,11 @@ Response:
 
 ```
 {
-  "processKey": 2251799813685249,
-  "bpmnProcessId": "order-process",
-  "version": 1,
-  "processInstanceKey": 2251799813686045,
-  "variables": "{\"orderId\":\"1234\"}"
+  "processDefinitionId": "order-process",
+  "processDefinitionVersion": 1,
+  "variables": { "orderId": "1234" }
+  "processDefinitionKey": "2251799813685249",
+  "processInstanceKey": "2251799813686019",
 }
 ```
 
