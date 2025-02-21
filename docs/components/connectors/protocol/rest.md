@@ -32,23 +32,33 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 If you are using Camunda Self-Managed, you can configure this Connector to use an HTTP or HTTPS proxy server.
 
-You can do this using the `JAVA_OPTS` environment variable. For example:
+You can do this using the `JAVA_OPTS` environment variable or the environment variables mentioned below. For example:
 
 ```
 JAVA_OPTS=-Dhttp.proxyHost=proxy -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=OTHER_DOMAIN
 ```
 
+or
+
+```
+CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;
+```
+
+:::note
+To ensure Camunda can access own components properly, non proxy hosts need to contain `camunda-platform-zeebe|camunda-platform-keycloak`
+:::
+
 #### HTTP
 
 To specify the proxy as an HTTP protocol handler, set the following standard JVM properties:
 
-| Property             | Description                                                                                                                                                                                                                                                                                                                       |
-| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `http.proxyHost`     | The host name of the proxy server.                                                                                                                                                                                                                                                                                                |
-| `http.proxyPort`     | The port number (default is 80).                                                                                                                                                                                                                                                                                                  |
-| `http.nonProxyHosts` | _(optional)_ <p>A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>&#124</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
-| `http.user`          | _(optional)_ The username to login to the proxy                                                                                                                                                                                                                                                                                   |
-| `http.password`      | _(optional)_ The password to login to the proxy                                                                                                                                                                                                                                                                                   |
+| Property             | Description                                                                                                                                                                                                                                                                                                                        |
+| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http.proxyHost`     | The host name of the proxy server.                                                                                                                                                                                                                                                                                                 |
+| `http.proxyPort`     | The port number (default is 80).                                                                                                                                                                                                                                                                                                   |
+| `http.nonProxyHosts` | <p> _(optional)_ A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>&#124</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
+| `http.user`          | _(optional)_ The username to login to the proxy                                                                                                                                                                                                                                                                                    |
+| `http.password`      | _(optional)_ The password to login to the proxy                                                                                                                                                                                                                                                                                    |
 
 As an alternative to using JVM properties, the proxy settings can also be set with environment variables:
 
@@ -64,23 +74,27 @@ CONNECTOR_HTTP_PROXY_PASSWORD
 
 To specify the proxy as an HTTPS (HTTP over SSL) protocol handler, set the following standard JVM properties:
 
-| Property              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `https.proxyHost`     | The host name of the proxy server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `https.proxyPort`     | The port number (default is 443).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `https.nonProxyHosts` | _(optional)_ <p>A list of hosts to connect to directly, bypassing the proxy.</p> <ul> <li>Specify as a list of patterns, separated by <code>&#124;</code>.</li> <li>Patterns can start or end with a `*` for wildcards.</li> <li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li> </ul> <div class="note"><strong>Note:</strong> The HTTPS protocol handler also considers the `http.nonProxyHosts` property for specifying non-proxy hosts when set via system properties. If both `http.nonProxyHosts` and `https.nonProxyHosts` are defined, HTTPS connections will bypass the proxy for hosts listed in either property.</div> |
-| `https.user`          | _(optional)_ The username to log in to the proxy.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `https.password`      | _(optional)_ The password to log in to the proxy.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Property             | Description                                                                                                                                                                                                                                                                                                                        |
+| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `https.proxyHost`    | The host name of the proxy server.                                                                                                                                                                                                                                                                                                 |
+| `https.proxyPort`    | The port number (default is 443).                                                                                                                                                                                                                                                                                                  |
+| `http.nonProxyHosts` | <p> _(optional)_ A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>&#124</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
+| `https.user`         | _(optional)_ The username to log in to the proxy.                                                                                                                                                                                                                                                                                  |
+| `https.password`     | _(optional)_ The password to log in to the proxy.                                                                                                                                                                                                                                                                                  |
 
 As an alternative to using JVM properties, the proxy settings can also be set with environment variables:
 
 ```bash
 CONNECTOR_HTTPS_PROXY_HOST
 CONNECTOR_HTTPS_PROXY_PORT
-CONNECTOR_HTTPS_PROXY_NON_PROXY_HOSTS
+CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS
 CONNECTOR_HTTPS_PROXY_USER
 CONNECTOR_HTTPS_PROXY_PASSWORD
 ```
+
+:::note
+The HTTPS protocol handler also uses the `http.nonProxyHosts` or `CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS` property to specify non-proxy hosts.
+:::
 
 ### Authentication
 
