@@ -603,9 +603,82 @@ connectors:
   enabled: false
 elasticsearch:
   enabled: false
-# console:
-#   configuration: |
-# console configuration to connect both deployments
+console:
+  configuration: |
+    camunda:
+      console:
+        oAuth:
+          audience: "console-api"
+          clientId: "console"
+          issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+          jwksUri: "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys"
+          type: "MICROSOFT"
+          wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
+        managed:
+          method: plain
+          releases:
+            - name: camunda
+              namespace: management
+              version: 12.x.x
+              components:
+                - name: Console
+                  id: console
+                  version: 8.6.59
+                  url: https://management-host.com/
+                  readiness: http://camunda-console.oidc:9100/health/readiness
+                  metrics: http://camunda-console.oidc:9100/prometheus
+                - name: Keycloak
+                  id: keycloak
+                  version: 25.0.6
+                  url: https://management-host.com/auth
+                - name: Identity
+                  id: identity
+                  version: 8.6.8
+                  url: https://management-host.com/identity
+                  readiness: http://camunda-identity.oidc:82/actuator/health
+                  metrics: http://camunda-identity.oidc:82/actuator/prometheus
+                - name: WebModeler WebApp
+                  id: webModelerWebApp
+                  version: 8.6.7
+                  url: https://management-host.com/modeler
+                  readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
+                  metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
+            - name: camudna
+              namespace: orchestration
+              version: 11.2.1
+              components:
+                - name: Operate
+                  id: operate
+                  version: 8.6.9
+                  url: https://orchestration-host.com/operate
+                  readiness: http://camunda-operate.orchestration:9600/operate/actuator/health/readiness
+                  metrics: http://camunda-operate.orchestration:9600/operate/actuator/prometheus
+                - name: Optimize
+                  id: optimize
+                  version: 8.6.5
+                  url: https://orchestration-host.com/optimize
+                  readiness: http://camunda-optimize.orchestration:80/optimize/api/readyz
+                  metrics: http://camunda-optimize.orchestration:8092/actuator/prometheus
+                - name: Tasklist
+                  id: tasklist
+                  version: 8.6.9
+                  url: https://orchestration-host.com/tasklist
+                  readiness: http://camunda-tasklist.orchestration:9600/tasklist/actuator/health/readiness
+                  metrics: http://camunda-tasklist.orchestration:9600/tasklist/actuator/prometheus
+                - name: Zeebe Gateway
+                  id: zeebeGateway
+                  version: 8.6.9
+                  urls:
+                    grpc: https://zeebe-orchestration-host.com
+                    http: https://orchestration-host.com/zeebe
+                  readiness: http://camunda-zeebe-gateway.orchestration:9600/zeebe/actuator/health/readiness
+                  metrics: http://camunda-zeebe-gateway.orchestration:9600/zeebe/actuator/prometheus
+                - name: Zeebe
+                  id: zeebe
+                  version: 8.6.9
+                  readiness: http://camunda-zeebe.orchestration:9600/actuator/health/readiness
+                  metrics: http://camunda-zeebe.orchestration:9600/actuator/prometheus
+
 ```
 
 `orchestration-values.yaml` for the `orchestration` namespace:
