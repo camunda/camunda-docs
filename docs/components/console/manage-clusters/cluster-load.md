@@ -13,7 +13,7 @@ Cluster load is a measurement showing how efficiently a cluster is performing in
 This helps you identify if a cluster is not performing efficiently, allowing you to take appropriate action such as...(increasing cluster size?).
 
 :::info
-To understand how cluster load is calculated, see [How cluster is load calculated](#how-cluster-load-is-calculated).
+To understand how cluster load is calculated, see [How cluster load is calculated](#how-cluster-load-is-calculated).
 :::
 
 ## View cluster load
