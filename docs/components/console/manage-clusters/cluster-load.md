@@ -28,7 +28,7 @@ You can view more detailed information for an individual cluster on the Console 
 
 ## Manage cluster load
 
-Your cluster load should ideally be around x%, ranges etc
+Your cluster load should ideally be around x%, ranges etc. If your cluster is running at 100% load, it is at its maximum capacity to process work and perform other cluster-related tasks.
 
 High cluster load is typically defined as anything above x%.
 
