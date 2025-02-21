@@ -23,7 +23,7 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
   - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. Have a look at the [Set up the Aurora PostgreSQL module](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/#set-up-the-aurora-postgresql-module) guide.
-  - **Amazon OpenSearch**: is used as a datastore for Camunda Orchestration Core components. Have a look at our guide for setting an [OpenSearch domain](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/#4-opensearch-domain).
+  - **Amazon OpenSearch**: is used as a datastore for Camunda zeebe component. Have a look at our guide for setting an [OpenSearch domain](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/#4-opensearch-domain).
   - **AWS Simple Active Directory**: For simple OIDC authentication in this scenario, we will use [AWS Simple Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html).
 - **Ingress NGINX**: Ensure the [ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda WebApps. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. Have a look at the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
@@ -55,7 +55,7 @@ kubectl create namespace orchestration
 
 - Namespace `management` (Web Modeler and Console): we will install Identity, Console, and all the Web Modeler components.
 
-- Namespace `orchestration`: we will install the Camunda Orchestration Core component, along with Connectors and Optimize importer.
+- Namespace `orchestration`: we will install the Camunda zeebe component, along with Connectors and all the web applications
 
 We do not have to worry about installing each component separately since that will be handled by the Helm chart automatically. For more information on the Orchestration Cluster vs Web Modeler and Console, please review this [guide](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console)
 
@@ -104,7 +104,7 @@ global:
 Optionally, you can configure Ingress for Zeebe gRPC API. Here is an example Zeebe gRPC Ingress setup:
 
 ```yaml
-core:
+zeebe:
   ingress:
     grpc:
       enabled: true
@@ -112,7 +112,7 @@ core:
       host: zeebe-grpc.camunda.example.com
       tls:
         enabled: true
-        secretName: camunda-platform-core-grpc
+        secretName: camunda-platform-zeebe-grpc
 ```
 
 For more information on the Ingress setup, please refer to our [Ingress setup guide](/self-managed/setup/guides/ingress-setup.md)
@@ -202,8 +202,6 @@ If you would like some more guidance relating to authentication, refer to the [C
 
 The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm chart provides external, dependency Helm charts for Databases such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). Within a production setting, these dependency charts should be disabled, and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
-In our scenario, the Core component and the Optimize importer communicate with a single Amazon OpenSearch instance. Similarly, the identity and web-modeler components use separate databases within a single Amazon Aurora PostgreSQL instance.
-
 You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL instance (with two databases) ready to use, complete with a username, password, and URL. If not, refer to the guides in the prerequisites section.
 
 #### Connecting to Amazon OpenSearch
@@ -268,7 +266,7 @@ If you would like further information on connecting to external databases, we ha
   - [Using Amazon OpenSearch Service through IRSA (only applicable if you are running Camunda Platform on EKS)](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
 - [Running Web Modeler on Amazon Aurora PostgreSQL](/self-managed/modeler/web-modeler/configuration/database.md/#running-web-modeler-on-amazon-aurora-postgresql)
 
-## Camunda Core Configuration
+## Camunda Zeebe Configuration
 
 At this point you would be able connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment.
 
@@ -278,14 +276,14 @@ We will continue our journey in adding to the `management-values.yaml` and `orch
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
-Here is how the ILM policy can be configured for the core component. This can be added to your `orchestration-values.yaml`:
+Here is how the ILM policy can be configured for the zeebe component. This can be added to your `orchestration-values.yaml`:
 
 ```yaml
-core:
+zeebe:
   retention:
     enabled: true
     minimumAge: 30d
-    policyName: core-record-retention-policy
+    policyName: zeebe-record-retention-policy
 ```
 
 If you would like more information on configuring ILM policy. Please refer to [the configuration guide on the OpenSearch exporter](/docs/next/self-managed/zeebe-deployment/exporters/opensearch-exporter/#configuration).
@@ -300,25 +298,25 @@ At this point you should already have a solid base to run your platform in a pro
 
 Here are some points to keep in mind when considering scalability:
 
-- To scale the Core component, the following values can be modified:
+- To scale the zeebe component, the following values can be modified:
 
   ```yaml
-  core:
+  zeebe:
     clusterSize: "3"
     partitionCount: "3"
     replicationFactor: "3"
   ```
 
-The `core.clusterSize` refers to the amount of brokers, the `core.partitionCount` refers to how [zeebe partitions](/docs/components/zeebe/technical-concepts/partitions.md) are configured for each cluster, and the `core.replicationFactor` refers to the [number of replicas](/docs/components/zeebe/technical-concepts/partitions.md/#replication) that each partition replicates to.
+The `zeebe.clusterSize` refers to the amount of brokers, the `zeebe.partitionCount` refers to how [zeebe partitions](/docs/components/zeebe/technical-concepts/partitions.md) are configured for each cluster, and the `zeebe.replicationFactor` refers to the [number of replicas](/docs/components/zeebe/technical-concepts/partitions.md/#replication) that each partition replicates to.
 
 :::note
-The `core.partitionCount` does not yet support dynamic scaling. You will not be able to modify it on future upgrades. It is better to overprovision the partitions to allow potential growth as dynamic partitioning isn't possible yet.
+The `zeebe.partitionCount` does not yet support dynamic scaling. You will not be able to modify it on future upgrades. It is better to overprovision the partitions to allow potential growth as dynamic partitioning isn't possible yet.
 :::
 
-- Check the resources (CPU and memory) and make sure they are appropriate for your workload size. For example, the resource limits can be changed for the core component by modifying the following values:
+- Check the resources (CPU and memory) and make sure they are appropriate for your workload size. For example, the resource limits can be changed for the zeebe component by modifying the following values:
 
   ```yaml
-  core:
+  zeebe:
     resources:
       requests:
         cpu: 800m
@@ -336,7 +334,7 @@ Here are some points to keep in mind when considering reliability:
 
 - Check node affinity and tolerations. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) to modify the node affinity and tolerations.
 
-  For example, this is the default affinity configuration for the Core Pod in the Camunda Helm chart:
+  For example, this is the default affinity configuration for the zeebe Pod in the Camunda Helm chart:
 
   ```yaml
   affinity:
@@ -347,20 +345,20 @@ Here are some points to keep in mind when considering reliability:
               - key: app.kubernetes.io/component
                 operator: In
                 values:
-                  - core
+                  - zeebe
           topologyKey: kubernetes.io/hostname
   ```
 
-This configuration ensures that Core Pods with the deafult label `app.kubernetes.io/component=core` are not scheduled on the same node. The primary benefits include:
+This configuration ensures that zeebe Pods with the deafult label `app.kubernetes.io/component=zeebe` are not scheduled on the same node. The primary benefits include:
 
 1. High Availability: If one node fails, other nodes running the same component remain unaffected.
 2. Load Distribution: Balances the workload across nodes.
 3. Fault Tolerance: Reduces the impact of a node-level failure.
 
-- It is possible to set a `podDisruptionBudget`. For example you can modify the following values for the Core component:
+- It is possible to set a `podDisruptionBudget`. For example you can modify the following values for the zeebe component:
 
   ```yaml
-  core:
+  zeebe:
     podDisruptionBudget:
       enabled: false
       minAvailable: 0
@@ -388,10 +386,10 @@ This configuration ensures that Core Pods with the deafult label `app.kubernetes
 Please refer to the [Kuberentes documentation](https://kubernetes.io/docs/concepts/configuration/secret/) on how to create a secret.
 
 - When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version elease notes before upgrading and perform the upgrade on a test environment first before attempting in production.
-- Make sure to not store any state or important, long term business data in the local file system of the container. A Pod is transient, if the Pod is restarted then the data will get wiped. It is better to create a volume and volume mount instead. Here is some example configuration for the core component to create persistent storage:
+- Make sure to not store any state or important, long term business data in the local file system of the container. A Pod is transient, if the Pod is restarted then the data will get wiped. It is better to create a volume and volume mount instead. Here is an example configuration for the zeebe component to create persistent storage:
 
   ```yaml
-  core:
+  zeebe:
     extraVolumes:
       extraVolumes:
         - name: persistent-state
@@ -425,7 +423,7 @@ Here are some points to keep in mind when considering security:
   connectors:
     serviceAccount:
       enabled: false
-  core:
+  zeebe:
     serviceAccount:
       enabled: false
   optimize:
@@ -440,7 +438,7 @@ You should only enable the auto-mounting of a service account token when the app
 - It is possible to have a pod security standard that is suitable to the security constraints you might have. This is possible through modifying the Pod Security Admission. Please refer to the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation in order to do so.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information please visit the [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/)
-- It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is the default configuration for the core component:
+- It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. For example, here is the default configuration for the zeebe component:
 
   ```yaml
   podSecurityContext:
@@ -482,6 +480,10 @@ Here are some points to keep in mind when considering observability:
 Here is a complete example, taking all the above sections into consideration.
 
 `management-values.yaml` for the `management` namespace:
+
+:::note
+Please be advised that the current values files below contain unresolved issues which may impact functionality. Users are cautioned that implementation may result in unexpected behavior or errors.
+:::
 
 ```yaml
 global:
@@ -623,51 +625,47 @@ console:
               components:
                 - name: Console
                   id: console
-                  version: 8.6.59
+                  version: 8.7.x
                   url: https://management-host.com/
                   readiness: http://camunda-console.oidc:9100/health/readiness
                   metrics: http://camunda-console.oidc:9100/prometheus
-                - name: Keycloak
-                  id: keycloak
-                  version: 25.0.6
-                  url: https://management-host.com/auth
                 - name: Identity
                   id: identity
-                  version: 8.6.8
+                  version: 8.7.x
                   url: https://management-host.com/identity
                   readiness: http://camunda-identity.oidc:82/actuator/health
                   metrics: http://camunda-identity.oidc:82/actuator/prometheus
                 - name: WebModeler WebApp
                   id: webModelerWebApp
-                  version: 8.6.7
+                  version: 8.7.x
                   url: https://management-host.com/modeler
                   readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
                   metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
             - name: camudna
               namespace: orchestration
-              version: 11.2.1
+              version: 12.x
               components:
                 - name: Operate
                   id: operate
-                  version: 8.6.9
+                  version: 8.7.x
                   url: https://orchestration-host.com/operate
                   readiness: http://camunda-operate.orchestration:9600/operate/actuator/health/readiness
                   metrics: http://camunda-operate.orchestration:9600/operate/actuator/prometheus
                 - name: Optimize
                   id: optimize
-                  version: 8.6.5
+                  version: 8.7.x
                   url: https://orchestration-host.com/optimize
                   readiness: http://camunda-optimize.orchestration:80/optimize/api/readyz
                   metrics: http://camunda-optimize.orchestration:8092/actuator/prometheus
                 - name: Tasklist
                   id: tasklist
-                  version: 8.6.9
+                  version: 8.7.x
                   url: https://orchestration-host.com/tasklist
                   readiness: http://camunda-tasklist.orchestration:9600/tasklist/actuator/health/readiness
                   metrics: http://camunda-tasklist.orchestration:9600/tasklist/actuator/prometheus
                 - name: Zeebe Gateway
                   id: zeebeGateway
-                  version: 8.6.9
+                  version: 8.7.x
                   urls:
                     grpc: https://zeebe-orchestration-host.com
                     http: https://orchestration-host.com/zeebe
@@ -675,7 +673,7 @@ console:
                   metrics: http://camunda-zeebe-gateway.orchestration:9600/zeebe/actuator/prometheus
                 - name: Zeebe
                   id: zeebe
-                  version: 8.6.9
+                  version: 8.7.x
                   readiness: http://camunda-zeebe.orchestration:9600/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/actuator/prometheus
 
@@ -752,7 +750,7 @@ global:
         clientApiAudience: "00000000-0000-0000-0000-000000000000"
         tokenScope: "00000000-0000-0000-0000-000000000000/.default"
 zeebe:
-  contextPath: /core
+  contextPath: /zeebe
   ingress:
     grpc:
       enabled: true
@@ -760,11 +758,11 @@ zeebe:
       host: grpc-{{ .Values.global.ingress.host }}
       tls:
         enabled: true
-        secretName: camunda-platform-core-grpc
+        secretName: camunda-platform-zeebe-grpc
   retention:
     enabled: true
     minimumAge: 30d
-    policyName: core-record-retention-policy
+    policyName: zeebe-record-retention-policy
 
 optimize:
   contextPath: /optimize
