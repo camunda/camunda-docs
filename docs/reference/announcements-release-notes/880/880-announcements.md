@@ -12,7 +12,7 @@ Important changes and updates for the Camunda 8.8 release are summarized below.
 | :--------------------- | :--------------------------- | :------------ | :--- |
 | 14 October 2025        | 13 April 2027                |               |      |
 
-- [Versioning and environment changes Self-Managed](#versioning-and-environment-changes-self-managed)
+- [Versioning and environment changes](#versioning-and-environment-changes)
   - [Helm charts](#helm-charts)
 - [Breaking changes](#breaking-changes)
   - [Deprecated: Operate and Tasklist v1 REST APIs](#deprecated-operate-and-tasklist-v1-rest-apis)
@@ -30,7 +30,7 @@ Important changes and updates for the Camunda 8.8 release are summarized below.
   - [Camunda Java client and Camunda Spring SDK](#camunda-java-client-and-camunda-spring-sdk)
     - [Key changes](#key-changes)
 
-## Versioning and environment changes <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+## Versioning and environment changes
 
 Camunda 8.8 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, Tasklist, Optimize, and Connectors into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, [deployment reference architectures](/self-managed/reference-architecture/reference-architecture.md), and improved support for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
 
