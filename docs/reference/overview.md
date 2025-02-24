@@ -1,6 +1,6 @@
 ---
 id: overview
-title: Announcements & release notes
+title: Overview
 sidebar_label: Overview
 slug: /reference/
 ---
