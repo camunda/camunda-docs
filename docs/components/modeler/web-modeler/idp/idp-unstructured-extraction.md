@@ -130,15 +130,22 @@ To validate the data extraction:
 
 ### Publish project
 
-Publish the project to make the project available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
+Publish the project to make the project available for [integration into your processes](idp-integrate.md)<!-- and [document automation](idp-document-automation.md) projects -->.
 
-1. Click **Publish** and select either **Publish to project** to make it available to users within the Web Modeler project, or **Publish to organization** to make it available within your organization as a shared resource.
+1. Click **Publish** and select either:
+
+   - **Publish to project**: Only users in the Web Modeler project can access the extraction project.
+   - **Publish to organization**: The extraction project is available as a shared resource within your organization.
+
+1. On the **Publish Extraction Project** dialog, configure the publish settings.
    <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" />
-1. **Version name**: Enter a version for the published project.
-1. **Version description**: Enter a description for the published project version.
-1. **Extraction model**: Select the extraction model you want to use for the published project.
-1. Click **Publish** to make the project available for [integration into your processes](idp-integrate.md) and [document automation](idp-document-automation.md) projects.
+
+   - **Version name**: Enter a version for the published project.
+   - **Version description**: Enter a description for the published project version.
+   - **Extraction model**: Select the extraction model you want to use for the published project.
+
+1. Click **Publish** to make the project available for [integration into your processes](idp-integrate.md)<!--  and [document automation](idp-document-automation.md) projects -->.
 
 :::note
-Only Administrators can publish an extraction project to the organization.
+Only organization owners or users with the Admin role can publish an extraction project to the organization.
 :::

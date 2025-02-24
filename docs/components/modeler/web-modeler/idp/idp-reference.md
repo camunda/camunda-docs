@@ -61,15 +61,19 @@ Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for full 
 
 ## Extraction field data types
 
-IDP allows you to choose an [extraction field](idp-key-concepts.md#extraction-fields) data type to indicate to the LLM what type of data should be extracted. This helps the LLM more accurately extract the data you want.
+Specify the [extraction field](idp-key-concepts.md#extraction-fields) data type to indicate to the LLM what type of data should be extracted. This helps the LLM more accurately extract the data you want.
 
 For example, if you want to extract an expected numeric value (such as a monetary value), select the `Number` data type for the extraction field.
 
-| Data type | Description                                  |
-| :-------- | :------------------------------------------- |
-| Boolean   | True or false values, such as "yes" or "no". |
-| Number    | Numeric values.                              |
-| String    | A sequence of characters.                    |
+### Supported data types
+
+You can specify the following extraction field data types.
+
+| Data type | Description                                                         |
+| :-------- | :------------------------------------------------------------------ |
+| Boolean   | The LLM should expect a true or false value, such as "yes" or "no". |
+| Number    | The LLM should expect to extract a numeric value.                   |
+| String    | The LLM should expect to extract a sequence of characters.          |
 
 ## Validation status
 
@@ -87,7 +91,7 @@ The following example shows the results of a partially successful extraction aga
 
 <img src={IdpValidationExampleImg} alt="Example validation results table" />
 
-The expanded "contract_start_date" field shows that each document had different validation results.
+The expanded `contract_start_date` field shows that each document returned different validation results.
 
 - The first document passed the validation, with the **Extracted value** matching the **Expected test case output**.
 - The second document could not be validated as a test case was not found for comparison. Click **Save test case** to create a test case for the document.

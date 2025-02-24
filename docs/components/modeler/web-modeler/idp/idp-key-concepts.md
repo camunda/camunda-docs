@@ -1,6 +1,6 @@
 ---
 id: idp-key-concepts
-title: Key IDP concepts
+title: IDP concepts
 description: "Key intelligent document processing (IDP) concepts and terms, such as the difference between structured and unstructured documents."
 ---
 
@@ -12,7 +12,9 @@ When using IDP it is helpful to understand the following key concepts and terms.
 
 ## Structured and unstructured documents
 
-Your choice of [extraction method](idp-document-extraction.md#create-extraction-project) depends on whether your documents contain structured or unstructured data.
+<!-- Your choice of extraction method depends on whether your documents contain structured or unstructured data. -->
+
+Documents are typically classified as containing either structured or unstructured data.
 
 ### Structured documents
 
@@ -34,7 +36,7 @@ Example structured documents include:
 - Forms
 - Identity documents
 
-Use [structured data extraction](idp-structured-extraction.md) to extract data from this type of document.
+<!-- Use [structured data extraction](idp-structured-extraction.md) to extract data from this type of document. -->
 
 </div>
 </div>
@@ -59,17 +61,19 @@ Example unstructured documents include:
 - Reports
 - Memos
 
-Use [unstructured data extraction](idp-unstructured-extraction.md) to extract data from this document type.
+<!-- Use [unstructured data extraction](idp-unstructured-extraction.md) to extract data from this document type. -->
 
 </div>
 </div>
 
 ## Document classification
 
-Document classification is performed during [document automation](idp-document-automation.md).
+Document classification is performed as part of document automation.
+
+<!-- Document classification is performed as part of [document automation](idp-document-automation.md). -->
 
 - Documents are analyzed, classified, and assigned to the relevant [document extraction](idp-document-extraction.md) project, based on the document content.
-- Document classification ensures that documents processed through IDP are organized into the correct type, so that extracted data is assigned/mapped to the correct property.
+- Classification ensures that documents processed through IDP are organized into the correct type, so that extracted data is assigned/mapped to the correct property.
 - Classification accuracy is improved with a well-defined taxonomy (set of extraction fields) and a set of example documents that accurately represents each type of document you want to process.
 
 ## Extraction model/Large Language Models (LLM)

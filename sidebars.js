@@ -195,11 +195,11 @@ module.exports = {
                     id: "components/modeler/web-modeler/idp/idp-document-extraction",
                   },
                   items: [
-                    "components/modeler/web-modeler/idp/idp-structured-extraction",
+                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
                     "components/modeler/web-modeler/idp/idp-unstructured-extraction",
                   ],
                 },
-                "components/modeler/web-modeler/idp/idp-document-automation",
+                // "components/modeler/web-modeler/idp/idp-document-automation",
                 "components/modeler/web-modeler/idp/idp-integrate",
                 "components/modeler/web-modeler/idp/idp-key-concepts",
                 "components/modeler/web-modeler/idp/idp-reference",

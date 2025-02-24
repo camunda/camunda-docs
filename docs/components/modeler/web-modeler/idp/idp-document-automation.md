@@ -6,6 +6,10 @@ description: "Document automation allows you to extract data from complex docume
 
 Extract data from complex documents based on one or more linked [document extraction](idp-document-extraction.md) projects.
 
+:::note
+Document automation is in development for a future release.
+:::
+
 ## About document automation
 
 Document automation allows you to automatically extract data from complex PDF documents.
@@ -16,7 +20,7 @@ For example, if you want to process large multi-page PDFs containing multiple do
 - Choose and test different LLM models to find the model that best suits your budget and accuracy requirements.
 - Document classification automatically categorizes documents into predefined classes/types, based on their content.
 
-## Create document automation project
+<!-- ## Create document automation project
 
 To create a document automation project:
 
@@ -28,4 +32,4 @@ Complete the following steps to configure and publish an unstructured data extra
 
 1. [Step 1: Add projects]: Link one or more document extraction projects to help the system analyze and categorize your documents.
 1. [Step 2: Test classification] Select an LLM and test the document classification results.
-1. [Step 3: Publish]: Publish the project to make it available to use in your document processing BPMN diagrams.
+1. [Step 3: Publish]: Publish the project to make it available to use in your document processing BPMN diagrams. -->

@@ -13,7 +13,8 @@ Extract data from a single type of structured or unstructured document.
 Document extraction projects form the basis for using IDP in your end-to-end processes.
 
 - Create a separate document extraction project for each type of document you want to categorize and extract data from, such as an invoice, a report, identity document, and so on.
-- Published extraction projects can be [integrated into your processes](idp-integrate.md) or linked to a [document automation](idp-document-automation.md) project.
+- Published extraction projects can be [integrated into your processes](idp-integrate.md).
+<!-- - Published extraction projects can be [integrated into your processes](idp-integrate.md) or linked to a [document automation](idp-document-automation.md) project. -->
 
 ## Create document extraction project
 
@@ -23,15 +24,22 @@ To create a document extraction project:
    <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="600px"/>
 
    - **Name**: Enter a descriptive name for the project, such as “Invoice type A” for example.
-   - **Extraction method**: Select an extraction method:
+   - **Extraction method**: Select the **Unstructured data extraction** extraction method.
+
+   <!-- - **Extraction method**: Select an extraction method:
      - **Form extraction**: Select this method to extract data from structured documents.
-     - **Unstructured data extraction**: Select this method to extract data from unstructured documents.
+     - **Unstructured data extraction**: Select this method to extract data from unstructured documents. -->
 
 1. Click **Create** to create and open the new extraction project.
-1. Configure and publish the project:
-   - [Extract structured data](idp-structured-extraction.md): Configure and publish a structured data extraction project.
-   - [Extract unstructured data](idp-unstructured-extraction.md): Configure and publish an unstructured data extraction project.
+1. Configure the project to [extract unstructured data](idp-unstructured-extraction.md).
 
-:::tip
-Not sure which extraction method to use? See [structured and unstructured documents](idp-key-concepts.md#structured-and-unstructured-documents) to help determine what type of document(s) you will be processing.
+   <!-- - [Extract structured data](idp-structured-extraction.md): Configure and publish a structured data extraction project.
+   - [unstructured data extraction project](idp-unstructured-extraction.md): Configure and publish an unstructured data extraction project. -->
+
+:::note
+The Form Extraction method is currently in development for a future release.
 :::
+
+<!-- :::tip
+Not sure which extraction method to use? See [structured and unstructured documents](idp-key-concepts.md#structured-and-unstructured-documents) to help determine what type of document(s) you will be processing.
+::: -->
