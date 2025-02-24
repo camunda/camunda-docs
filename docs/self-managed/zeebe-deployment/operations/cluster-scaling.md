@@ -155,7 +155,8 @@ kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 Run the following command to see the current status of the cluster:
 
 ```
-zbctl --insecure status
+curl -L 'http://localhost:8080/v2/topology' \
+-H 'Accept: application/json'
 ```
 
 The response would show that partitions are distributed to new brokers:
@@ -252,7 +253,8 @@ This step is optional, but it is useful when you are testing to see if scaling w
 Run the following command to see the current status of the cluster:
 
 ```
-zbctl --insecure status
+curl -L 'http://localhost:8080/v2/topology' \
+-H 'Accept: application/json'
 ```
 
 The response would show that the partitions are moved away from brokers `3`, `4`, and `5`:
@@ -297,7 +299,7 @@ Brokers:
 
 ### 4. Shut down the brokers when the scaling operation has completed
 
-:::warning
+:::danger
 If you shut down brokers before Zeebe has scaled down and moved all partitions away from the brokers, scaling operation would never complete and may result in data loss.
 :::
 
@@ -389,7 +391,7 @@ This is a dangerous operation and must be used with caution. When not used corre
 
 Usually, changes can only be made to a cluster when all brokers are up. When some brokers are unreachable, you may want to remove them from the cluster. You can force remove a set of brokers by setting the request parameter `force` to `true`.
 
-This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md/). Any deviations from the described process can result in the cluster being unusable.
+This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md). Any deviations from the described process can result in the cluster being unusable.
 
 :::note
 Do not send more than one force request at a time.

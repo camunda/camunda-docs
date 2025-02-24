@@ -1621,7 +1621,7 @@ All of these libraries are required for core functionality.
 - [chart.js@4.4.0](https://github.com/chartjs/Chart.js) (MIT)
 - [chartjs-plugin-datalabels@2.2.0](https://github.com/chartjs/chartjs-plugin-datalabels) (MIT)
 - [chokidar@3.5.3](https://paulmillr.com) (MIT)
-- [chrome-trace-event@1.0.2](https://github.com:samccone/chrome-trace-event) (MIT)
+- [chrome-trace-event@1.0.2](https://github.com/samccone/chrome-trace-event) (MIT)
 - [classnames@2.3.2](https://github.com/JedWatson/classnames) (MIT)
 - [clsx@1.2.1](https://lukeed.com) (MIT)
 - [clsx@2.0.0](https://lukeed.com) (MIT)

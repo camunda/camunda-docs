@@ -1,0 +1,534 @@
+---
+id: create-process-instance
+title: "Create process instance"
+description: "Creates and starts an instance of the specified process."
+sidebar_label: "Create process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Creates and starts an instance of the specified process.
+The process definition to use to create the instance can be specified either using its unique key
+(as returned by Deploy resources), or using the BPMN process ID and a version.
+
+Waits for the completion of the process instance before returning a result
+when awaitCompletion is enabled.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              description: "Base properties for CreateProcessInstanceRequest",
+              type: "object",
+              properties: {
+                processDefinitionId: {
+                  description:
+                    "The BPMN process ID of the process definition to start an instance of.\nCannot be used together with processDefinitionKey.\n",
+                  type: "string",
+                },
+                processDefinitionVersion: {
+                  description:
+                    "The version of the process. Only considered when a processDefinitionId is provided.\nBy default, the latest version of the process is used.\n",
+                  type: "integer",
+                  format: "int32",
+                  default: -1,
+                },
+                variables: {
+                  description:
+                    "JSON object that will instantiate the variables for the root variable scope\nof the process instance.\n",
+                  type: "object",
+                  additionalProperties: true,
+                },
+                tenantId: {
+                  description: "The tenant ID of the process definition.",
+                  type: "string",
+                },
+                operationReference: {
+                  description:
+                    "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be >0 if provided.\n",
+                  type: "integer",
+                  format: "int64",
+                  minimum: 1,
+                },
+                startInstructions: {
+                  description:
+                    "List of start instructions. By default, the process instance will start at\nthe start event. If provided, the process instance will apply start instructions\nafter it has been created.\n",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      elementId: {
+                        description:
+                          'Future extensions might include:\n  - different types of start instructions\n  - ability to set local variables for different flow scopes\n\nFor now, however, the start instruction is implicitly a "startBeforeElement" instruction\n',
+                        type: "string",
+                      },
+                    },
+                    title: "ProcessInstanceCreationStartInstruction",
+                  },
+                },
+                awaitCompletion: {
+                  description:
+                    "Wait for the process instance to complete. If the process instance completion does\nnot occur within the requestTimeout, the request will be closed. Disabled by default.\n",
+                  type: "boolean",
+                  default: false,
+                },
+                fetchVariables: {
+                  description:
+                    "List of variables names to be included in the response.\nIf empty, all visible variables in the root scope will be returned.\n",
+                  type: "array",
+                  items: { type: "string" },
+                },
+                requestTimeout: {
+                  description:
+                    "Timeout (in ms) the request waits for the process to complete. By default or\nwhen set to 0, the generic request timeout configured in the cluster is applied.\n",
+                  type: "integer",
+                  format: "int64",
+                },
+              },
+              title: "CreateProcessInstanceRequestBase",
+            },
+          ],
+          properties: {
+            processDefinitionKey: {
+              description:
+                "The unique key identifying the process definition, for example, returned for a process in the\ndeploy resources endpoint. Cannot be used together with processDefinitionId.\n",
+              type: "string",
+            },
+          },
+          title: "ProcessInstanceCreationInstruction",
+        },
+        examples: {
+          "By process definition key": {
+            summary: "Create a process instance by processDefinitionKey.",
+            value: { processDefinitionKey: "12345", variables: {} },
+          },
+          "By process definition ID": {
+            summary:
+              "Create a process instance by processDefinitionId and version.",
+            value: {
+              processDefinitionId: "1234-5678",
+              version: 1,
+              variables: {},
+            },
+          },
+        },
+      },
+      "application/vnd.camunda.api.keys.number+json": {
+        schema: {
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              description: "Base properties for CreateProcessInstanceRequest",
+              type: "object",
+              properties: {
+                processDefinitionId: {
+                  description:
+                    "The BPMN process ID of the process definition to start an instance of.\nCannot be used together with processDefinitionKey.\n",
+                  type: "string",
+                },
+                processDefinitionVersion: {
+                  description:
+                    "The version of the process. Only considered when a processDefinitionId is provided.\nBy default, the latest version of the process is used.\n",
+                  type: "integer",
+                  format: "int32",
+                  default: -1,
+                },
+                variables: {
+                  description:
+                    "JSON object that will instantiate the variables for the root variable scope\nof the process instance.\n",
+                  type: "object",
+                  additionalProperties: true,
+                },
+                tenantId: {
+                  description: "The tenant ID of the process definition.",
+                  type: "string",
+                },
+                operationReference: {
+                  description:
+                    "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be >0 if provided.\n",
+                  type: "integer",
+                  format: "int64",
+                  minimum: 1,
+                },
+                startInstructions: {
+                  description:
+                    "List of start instructions. By default, the process instance will start at\nthe start event. If provided, the process instance will apply start instructions\nafter it has been created.\n",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      elementId: {
+                        description:
+                          'Future extensions might include:\n  - different types of start instructions\n  - ability to set local variables for different flow scopes\n\nFor now, however, the start instruction is implicitly a "startBeforeElement" instruction\n',
+                        type: "string",
+                      },
+                    },
+                    title: "ProcessInstanceCreationStartInstruction",
+                  },
+                },
+                awaitCompletion: {
+                  description:
+                    "Wait for the process instance to complete. If the process instance completion does\nnot occur within the requestTimeout, the request will be closed. Disabled by default.\n",
+                  type: "boolean",
+                  default: false,
+                },
+                fetchVariables: {
+                  description:
+                    "List of variables names to be included in the response.\nIf empty, all visible variables in the root scope will be returned.\n",
+                  type: "array",
+                  items: { type: "string" },
+                },
+                requestTimeout: {
+                  description:
+                    "Timeout (in ms) the request waits for the process to complete. By default or\nwhen set to 0, the generic request timeout configured in the cluster is applied.\n",
+                  type: "integer",
+                  format: "int64",
+                },
+              },
+              title: "CreateProcessInstanceRequestBase",
+            },
+          ],
+          properties: {
+            processDefinitionKey: {
+              description:
+                "The unique key identifying the process definition, for example, returned for a process in the\ndeploy resources endpoint. Cannot be used together with processDefinitionId.\n",
+              type: "integer",
+              format: "int64",
+            },
+          },
+          title: "CreateProcessInstanceRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.string+json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              description: "Base properties for CreateProcessInstanceRequest",
+              type: "object",
+              properties: {
+                processDefinitionId: {
+                  description:
+                    "The BPMN process ID of the process definition to start an instance of.\nCannot be used together with processDefinitionKey.\n",
+                  type: "string",
+                },
+                processDefinitionVersion: {
+                  description:
+                    "The version of the process. Only considered when a processDefinitionId is provided.\nBy default, the latest version of the process is used.\n",
+                  type: "integer",
+                  format: "int32",
+                  default: -1,
+                },
+                variables: {
+                  description:
+                    "JSON object that will instantiate the variables for the root variable scope\nof the process instance.\n",
+                  type: "object",
+                  additionalProperties: true,
+                },
+                tenantId: {
+                  description: "The tenant ID of the process definition.",
+                  type: "string",
+                },
+                operationReference: {
+                  description:
+                    "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be >0 if provided.\n",
+                  type: "integer",
+                  format: "int64",
+                  minimum: 1,
+                },
+                startInstructions: {
+                  description:
+                    "List of start instructions. By default, the process instance will start at\nthe start event. If provided, the process instance will apply start instructions\nafter it has been created.\n",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      elementId: {
+                        description:
+                          'Future extensions might include:\n  - different types of start instructions\n  - ability to set local variables for different flow scopes\n\nFor now, however, the start instruction is implicitly a "startBeforeElement" instruction\n',
+                        type: "string",
+                      },
+                    },
+                    title: "ProcessInstanceCreationStartInstruction",
+                  },
+                },
+                awaitCompletion: {
+                  description:
+                    "Wait for the process instance to complete. If the process instance completion does\nnot occur within the requestTimeout, the request will be closed. Disabled by default.\n",
+                  type: "boolean",
+                  default: false,
+                },
+                fetchVariables: {
+                  description:
+                    "List of variables names to be included in the response.\nIf empty, all visible variables in the root scope will be returned.\n",
+                  type: "array",
+                  items: { type: "string" },
+                },
+                requestTimeout: {
+                  description:
+                    "Timeout (in ms) the request waits for the process to complete. By default or\nwhen set to 0, the generic request timeout configured in the cluster is applied.\n",
+                  type: "integer",
+                  format: "int64",
+                },
+              },
+              title: "CreateProcessInstanceRequestBase",
+            },
+          ],
+          properties: {
+            processDefinitionKey: {
+              description:
+                "The unique key identifying the process definition, for example, returned for a process in the\ndeploy resources endpoint. Cannot be used together with processDefinitionId.\n",
+              type: "string",
+            },
+          },
+          title: "ProcessInstanceCreationInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The process instance was created.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description:
+                  "Base properties for CreateProcessInstanceResponse",
+                type: "object",
+                properties: {
+                  processDefinitionId: {
+                    description:
+                      "The BPMN process ID of the process definition which was used to create the process.\ninstance\n",
+                    type: "string",
+                  },
+                  processDefinitionVersion: {
+                    description:
+                      "The version of the process definition which was used to create the process instance.\n",
+                    type: "integer",
+                    format: "int32",
+                  },
+                  tenantId: {
+                    description:
+                      "The tenant ID of the created process instance.",
+                    type: "string",
+                  },
+                  variables: {
+                    additionalProperties: true,
+                    description: "All the variables visible in the root scope.",
+                    type: "object",
+                  },
+                },
+                title: "CreateProcessInstanceResponseBase",
+              },
+            ],
+            properties: {
+              processDefinitionKey: {
+                description:
+                  "The key of the process definition which was used to create the process instance.\n",
+                type: "string",
+              },
+              processInstanceKey: {
+                description:
+                  "The unique identifier of the created process instance; to be used wherever a request\nneeds a process instance key (e.g. CancelProcessInstanceRequest).\n",
+                type: "string",
+              },
+            },
+            title: "CreateProcessInstanceResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description:
+                  "Base properties for CreateProcessInstanceResponse",
+                type: "object",
+                properties: {
+                  processDefinitionId: {
+                    description:
+                      "The BPMN process ID of the process definition which was used to create the process.\ninstance\n",
+                    type: "string",
+                  },
+                  processDefinitionVersion: {
+                    description:
+                      "The version of the process definition which was used to create the process instance.\n",
+                    type: "integer",
+                    format: "int32",
+                  },
+                  tenantId: {
+                    description:
+                      "The tenant ID of the created process instance.",
+                    type: "string",
+                  },
+                  variables: {
+                    additionalProperties: true,
+                    description: "All the variables visible in the root scope.",
+                    type: "object",
+                  },
+                },
+                title: "CreateProcessInstanceResponseBase",
+              },
+            ],
+            properties: {
+              processDefinitionKey: {
+                description:
+                  "The key of the process definition which was used to create the process instance.\n",
+                type: "integer",
+                format: "int64",
+              },
+              processInstanceKey: {
+                description:
+                  "The unique identifier of the created process instance; to be used wherever a request\nneeds a process instance key (e.g. CancelProcessInstanceRequest).\n",
+                type: "integer",
+                format: "int64",
+              },
+            },
+            title: "CreateProcessInstanceResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description:
+                  "Base properties for CreateProcessInstanceResponse",
+                type: "object",
+                properties: {
+                  processDefinitionId: {
+                    description:
+                      "The BPMN process ID of the process definition which was used to create the process.\ninstance\n",
+                    type: "string",
+                  },
+                  processDefinitionVersion: {
+                    description:
+                      "The version of the process definition which was used to create the process instance.\n",
+                    type: "integer",
+                    format: "int32",
+                  },
+                  tenantId: {
+                    description:
+                      "The tenant ID of the created process instance.",
+                    type: "string",
+                  },
+                  variables: {
+                    additionalProperties: true,
+                    description: "All the variables visible in the root scope.",
+                    type: "object",
+                  },
+                },
+                title: "CreateProcessInstanceResponseBase",
+              },
+            ],
+            properties: {
+              processDefinitionKey: {
+                description:
+                  "The key of the process definition which was used to create the process instance.\n",
+                type: "string",
+              },
+              processInstanceKey: {
+                description:
+                  "The unique identifier of the created process instance; to be used wherever a request\nneeds a process instance key (e.g. CancelProcessInstanceRequest).\n",
+                type: "string",
+              },
+            },
+            title: "CreateProcessInstanceResult",
+          },
+        },
+      },
+    },
+    "400": { description: "The provided data is not valid." },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -49,7 +49,7 @@ Example:
 "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"
 ```
 
-- `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
+- `name : String`: Name of the template. Shown in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
 - `id : String`: ID of the template.
 - `description : String`: Optional description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - `documentationRef : String`: Optional URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
@@ -340,6 +340,8 @@ The value of `feel: static` is only valid for `Boolean` and `Number` fields. Sim
   ]
 ```
 
+For binding types `zeebe:input` and `zeebe:output`, `feel: static` is the value used in case of missing `feel` property.
+
 ### Bindings
 
 The following ways exist to map a custom field to the underlying BPMN 2.0 XML. The **mapping result** in the following section uses `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML. As default or if no user input was given, the value specified in `value` is displayed and used for `[userInput]`. `[]` brackets are used to indicate where the parameters are mapped to in the XML.
@@ -358,21 +360,21 @@ Configures a generic BPMN element property.
 
 #### `zeebe:input`
 
-| **Binding `type`**          | `zeebe:input`                                         |
-| --------------------------- | ----------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`   |
-| **Binding parameters**      | `name`: The name of the input parameter               |
-| **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />` |
+| **Binding `type`**          | `zeebe:input`                                                                    |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
+| **Binding parameters**      | `name`: The name of the input parameter                                          |
+| **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />`                            |
 
 Configures an [input mapping](../../../../concepts/variables/#input-mappings).
 
 #### `zeebe:output`
 
-| **Binding `type`**          | `zeebe:output`                                           |
-| --------------------------- | -------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`      |
-| **Binding parameters**      | `source`: The source of the output parameter             |
-| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />` |
+| **Binding `type`**          | `zeebe:output`                                                                   |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
+| **Binding parameters**      | `source`: The source of the output parameter                                     |
+| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                         |
 
 Configures an [output mapping](../../../../concepts/variables/#output-mappings).
 
@@ -398,7 +400,7 @@ Configures the [task](../../../bpmn/service-tasks/#task-definition) for a servic
 
 #### `zeebe:taskDefinition:type`
 
-:::warning
+:::danger
 `zeebe:taskDefinition:type` is a deprecated binding. Instead, use `zeebe:taskDefinition` with `property=type`.
 :::
 

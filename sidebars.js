@@ -46,13 +46,19 @@ module.exports = {
       ],
     },
     {
-      "Migrate from Camunda 7": [
-        "guides/migrating-from-camunda-7/index",
+      type: "category",
+      label: "Migrate from Camunda 7",
+      link: {
+        type: "doc",
+        id: "guides/migrating-from-camunda-7/index",
+      },
+      items: [
+        "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-tooling",
+        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-7/adjusting-source-code",
+        "guides/migrating-from-camunda-7/technical-details",
       ],
     },
   ],
@@ -176,7 +182,7 @@ module.exports = {
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
-            "components/modeler/web-modeler/milestones",
+            "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
             {
               "Advanced modeling": [
@@ -304,23 +310,36 @@ module.exports = {
       ],
     },
     {
-      Connectors: [
-        "components/connectors/introduction-to-connectors",
-        "components/connectors/connector-types",
+      type: "category",
+      label: "Connectors",
+      link: {
+        type: "doc",
+        id: "components/connectors/introduction-to-connectors",
+      },
+      items: [
         {
-          "Use Connectors": [
-            "components/connectors/use-connectors/index",
+          type: "category",
+          label: "How to use connectors",
+          link: {
+            type: "doc",
+            id: "components/connectors/use-connectors/index",
+          },
+          items: [
+            "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",
           ],
         },
         {
-          "Out-of-the-box Connectors": [
-            "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-            "components/connectors/out-of-the-box-connectors/asana",
-            "components/connectors/out-of-the-box-connectors/automation-anywhere",
+          type: "category",
+          label: "Camunda connectors",
+          link: {
+            type: "doc",
+            id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+          },
+          items: [
             {
-              AWS: [
+              "Amazon AWS": [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
                 "components/connectors/out-of-the-box-connectors/amazon-comprehend",
                 "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
@@ -333,6 +352,8 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/asana",
+            "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/easy-post",
@@ -347,6 +368,8 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/google-gemini",
               ],
             },
+            "components/connectors/protocol/graphql",
+            "components/connectors/protocol/http-webhook",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
@@ -358,10 +381,13 @@ module.exports = {
             },
             "components/connectors/out-of-the-box-connectors/openai",
             "components/connectors/out-of-the-box-connectors/operate",
+            "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
+            "components/connectors/protocol/rest",
             "components/connectors/out-of-the-box-connectors/salesforce",
             "components/connectors/out-of-the-box-connectors/sendgrid",
             "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/protocol/soap",
             "components/connectors/out-of-the-box-connectors/sql",
             "components/connectors/out-of-the-box-connectors/twilio",
             "components/connectors/out-of-the-box-connectors/uipath",
@@ -369,23 +395,31 @@ module.exports = {
           ],
         },
         {
-          "Protocol Connectors": [
-            "components/connectors/protocol/graphql",
-            "components/connectors/protocol/http-webhook",
-            "components/connectors/protocol/polling",
-            "components/connectors/protocol/rest",
-            "components/connectors/protocol/soap",
-          ],
-        },
-        "components/connectors/manage-connector-templates",
-        {
-          "Building custom Connectors": [
+          type: "category",
+          label: "Custom connectors",
+          link: {
+            type: "doc",
+            id: "components/connectors/custom-built-connectors/build-connector",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Connector templates",
+              link: {
+                type: "doc",
+                id: "components/connectors/custom-built-connectors/connector-templates",
+              },
+              items: [
+                "components/connectors/custom-built-connectors/connector-template-generator",
+                "components/connectors/manage-connector-templates",
+              ],
+            },
             "components/connectors/custom-built-connectors/connector-sdk",
-            "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-template-generator",
           ],
         },
       ],
+    },
+    {
       Zeebe: [
         "components/zeebe/zeebe-overview",
         {
@@ -675,10 +709,31 @@ module.exports = {
             id: "components/early-access/alpha/alpha-features",
           },
           items: [
-            "components/early-access/alpha/sap/sap-integration",
-            "components/early-access/alpha/sap/odata-connector",
-            "components/early-access/alpha/sap/rfc-connector",
-            "components/early-access/alpha/sap/btp-integration",
+            {
+              type: "category",
+              label: "SAP",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/sap/sap-integration",
+              },
+              items: [
+                "components/early-access/alpha/sap/sap-integration",
+                "components/early-access/alpha/sap/odata-connector",
+                "components/early-access/alpha/sap/rfc-connector",
+                "components/early-access/alpha/sap/btp-plugin",
+              ],
+            },
+            {
+              type: "category",
+              label: "BPMN Copilot",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+              },
+              items: [
+                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+              ],
+            },
           ],
         },
       ],
@@ -779,6 +834,63 @@ module.exports = {
         {
           Deprecated: [
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+            {
+              "Zeebe API (REST)": [
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication",
+                "apis-tools/zeebe-api-rest/zeebe-api-tutorial",
+                {
+                  Specifications: [
+                    {
+                      type: "doc",
+                      id: "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api",
+                    },
+                    {
+                      type: "category",
+                      label: "Cluster",
+                      items: [
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/get-cluster-topology",
+                          label: "Get cluster topology",
+                          className: "api-method get",
+                        },
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "User task",
+                      items: [
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/complete-a-user-task",
+                          label: "Complete a user task",
+                          className: "api-method post",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/assign-a-user-task",
+                          label: "Assign a user task",
+                          className: "api-method post",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/update-a-user-task",
+                          label: "Update a user task",
+                          className: "api-method patch",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task",
+                          label: "Unassign a user task",
+                          className: "api-method delete",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -875,6 +987,7 @@ module.exports = {
         id: "reference/announcements",
       },
       items: [
+        "reference/announcements/announcements-880",
         "reference/announcements/announcements-870",
         "reference/announcements/announcements-860",
         "reference/announcements/announcements-850",
@@ -888,6 +1001,7 @@ module.exports = {
         id: "reference/release-notes/release-notes",
       },
       items: [
+        "reference/release-notes/880",
         "reference/release-notes/870",
         "reference/release-notes/860",
         "reference/release-notes/850",
@@ -951,6 +1065,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
                   ],
                 },
                 {
@@ -970,6 +1085,7 @@ module.exports = {
               "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
               "Red Hat (OpenShift)": [
                 "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
               ],
               Other: [
                 "self-managed/setup/deploy/other/docker",

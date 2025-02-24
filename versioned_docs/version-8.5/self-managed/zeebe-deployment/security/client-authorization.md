@@ -222,7 +222,7 @@ public class SecureClient {
 
 #### Go
 
-:::warning
+:::danger
 The Go client _only_ supports gRPC calls, and as such the `CredentialsProvider` interface is tightly coupled to it.
 :::
 

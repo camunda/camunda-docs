@@ -5,107 +5,632 @@ description: "Search for decision instances based on given criteria."
 sidebar_label: "Query decision instances"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query decision instances</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query decision instances"}
+></Heading>
 
 <MethodEndpoint
   method={"post"}
   path={"/decision-instances/search"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Search for decision instances based on given criteria.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-Pagination criteria.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        searchAfter: {
+                          description:
+                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          description:
+                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "decisionInstanceKey",
+                      "decisionInstanceId",
+                      "state",
+                      "evaluationDate",
+                      "evaluationFailure",
+                      "processDefinitionKey",
+                      "processInstanceKey",
+                      "processInstanceId",
+                      "decisionDefinitionKey",
+                      "decisionDefinitionId",
+                      "decisionDefinitionName",
+                      "decisionDefinitionVersion",
+                      "decisionDefinitionType",
+                      "tenantId",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "DecisionInstanceSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The decision instance search filters.",
+              allOf: [
+                {
+                  description: "Decision instance search filter.",
+                  type: "object",
+                  properties: {
+                    decisionInstanceId: {
+                      type: "string",
+                      description: "The ID of the decision instance.",
+                    },
+                    state: {
+                      description: "The state of the decision instance.",
+                      enum: ["EVALUATED", "FAILED", "UNSPECIFIED", "UNKNOWN"],
+                      title: "DecisionInstanceStateEnum",
+                    },
+                    evaluationFailure: {
+                      type: "string",
+                      description:
+                        "The evaluation failure of the decision instance.",
+                    },
+                    evaluationDate: {
+                      description:
+                        "The evaluation date of the decision instance.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    decisionDefinitionId: {
+                      type: "string",
+                      description: "The ID of the DMN decision.",
+                    },
+                    decisionDefinitionName: {
+                      type: "string",
+                      description: "The name of the DMN decision.",
+                    },
+                    decisionDefinitionVersion: {
+                      type: "integer",
+                      format: "int32",
+                      description: "The version of the decision.",
+                    },
+                    decisionDefinitionType: {
+                      description: "The type of the decision.",
+                      enum: [
+                        "DECISION_TABLE",
+                        "LITERAL_EXPRESSION",
+                        "UNSPECIFIED",
+                        "UNKNOWN",
+                      ],
+                      title: "DecisionDefinitionTypeEnum",
+                    },
+                    tenantId: {
+                      type: "string",
+                      description: "The tenant ID of the decision instance.",
+                    },
+                    decisionInstanceKey: {
+                      type: "string",
+                      description:
+                        "The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionInstanceId` serves as the primary identifier.\n",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    decisionDefinitionKey: {
+                      description: "The key of the decision.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with basic advanced search capabilities.",
+                          type: "object",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "BasicStringFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "DecisionInstanceFilter",
+                },
+              ],
+            },
+          },
+          title: "DecisionInstanceSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Sort field criteria.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={"**Possible values:** [`decisionInstanceKey`, `decisionInstanceId`, `state`, `evaluationDate`, `evaluationFailure`, `processDefinitionKey`, `processInstanceId`, `decisionDefinitionKey`, `decisionDefinitionId`, `decisionDefinitionName`, `decisionDefinitionVersion`, `decisionDefinitionType`, `tenantId`]"} schema={{"description":"The field to sort by.","type":"string","enum":["decisionInstanceKey","decisionInstanceId","state","evaluationDate","evaluationFailure","processDefinitionKey","processInstanceId","decisionDefinitionKey","decisionDefinitionId","decisionDefinitionName","decisionDefinitionVersion","decisionDefinitionType","tenantId"]}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","type":"string","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Decision instance search filter.
-
-</div><SchemaItem collapsible={false} name={"decisionInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionInstanceId` serves as the primary identifier.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"decisionInstanceId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the decision instance."}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"DecisionInstanceStateEnum"} qualifierMessage={"**Possible values:** [`EVALUATED`, `FAILED`, `UNSPECIFIED`, `UNKNOWN`]"} schema={{"description":"The state of the decision instance.","enum":["EVALUATED","FAILED","UNSPECIFIED","UNKNOWN"],"title":"DecisionInstanceStateEnum"}}></SchemaItem><SchemaItem collapsible={false} name={"evaluationFailure"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The evaluation failure of the decision instance."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>evaluationDate</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The evaluation date of the decision instance.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-string
-
-</div></TabItem><TabItem label={"AdvancedDateTimeFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$gt"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"description":"Greater than comparison with the provided value.","type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"$gte"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"description":"Greater than or equal comparison with the provided value.","type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"$lt"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"description":"Lower than comparison with the provided value.","type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"$lte"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"description":"Lower than or equal comparison with the provided value.","type":"string","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"date-time[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"string","format":"date-time"}}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><strong>decisionDefinitionKey</strong><span style={{"opacity":"0.6"}}> object</span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The key of the decision.
-
-</div></div><div><span className={"badge badge--info"}>oneOf</span><SchemaTabs><TabItem label={"MOD1"} value={"0-item-properties"}><div style={{"marginTop":".5rem","marginBottom":".5rem","marginLeft":"1rem"}}>
-
-integer
-
-</div></TabItem><TabItem label={"BasicLongFilter"} value={"1-item-properties"}><SchemaItem collapsible={false} name={"$eq"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Checks for equality with the provided value.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"$neq"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Checks for inequality with the provided value.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"$exists"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Checks if the current property exists.","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"$in"} required={false} schemaName={"int64[]"} qualifierMessage={undefined} schema={{"description":"Checks if the property matches any of the provided values.","type":"array","items":{"type":"integer","format":"int64"}}}></SchemaItem></TabItem></SchemaTabs></div></details></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The ID of the DMN decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the DMN decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The version of the decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionType"} required={false} schemaName={"DecisionDefinitionTypeEnum"} qualifierMessage={"**Possible values:** [`DECISION_TABLE`, `LITERAL_EXPRESSION`, `UNSPECIFIED`, `UNKNOWN`]"} schema={{"description":"The type of the decision.","enum":["DECISION_TABLE","LITERAL_EXPRESSION","UNSPECIFIED","UNKNOWN"],"title":"DecisionDefinitionTypeEnum"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the decision instance."}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The decision instance search result.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching decision instances.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"decisionInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionInstanceId` serves as the primary identifier."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the decision."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"decisionInstanceKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"decisionDefinitionKey\": \"string\",\n      \"decisionInstanceId\": \"string\",\n      \"evaluationDate\": \"2025-01-16T15:06:56.384Z\",\n      \"evaluationFailure\": \"string\",\n      \"decisionDefinitionId\": \"string\",\n      \"decisionDefinitionName\": \"string\",\n      \"decisionDefinitionVersion\": 0,\n      \"result\": \"string\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching decision instances.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"decisionInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionInstanceId` serves as the primary identifier."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The key of the decision."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"decisionInstanceKey\": 0,\n      \"processDefinitionKey\": 0,\n      \"processInstanceKey\": 0,\n      \"decisionDefinitionKey\": 0,\n      \"decisionInstanceId\": \"string\",\n      \"evaluationDate\": \"2025-01-16T15:06:56.386Z\",\n      \"evaluationFailure\": \"string\",\n      \"decisionDefinitionId\": \"string\",\n      \"decisionDefinitionName\": \"string\",\n      \"decisionDefinitionVersion\": 0,\n      \"result\": \"string\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching decision instances.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"decisionInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionInstanceId` serves as the primary identifier."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the process instance."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The key of the decision."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"decisionInstanceKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"decisionDefinitionKey\": \"string\",\n      \"decisionInstanceId\": \"string\",\n      \"evaluationDate\": \"2025-01-16T15:06:56.387Z\",\n      \"evaluationFailure\": \"string\",\n      \"decisionDefinitionId\": \"string\",\n      \"decisionDefinitionName\": \"string\",\n      \"decisionDefinitionVersion\": 0,\n      \"result\": \"string\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The decision instance search query failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The decision instance search result.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching decision instances.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    decisionInstanceId: {
+                      type: "string",
+                      description: "The ID of the decision instance.",
+                    },
+                    state: {
+                      description: "The state of the decision instance.",
+                      enum: ["EVALUATED", "FAILED", "UNSPECIFIED", "UNKNOWN"],
+                      title: "DecisionInstanceStateEnum",
+                    },
+                    evaluationDate: {
+                      type: "string",
+                      format: "date-time",
+                      description:
+                        "The evaluation date of the decision instance.",
+                    },
+                    evaluationFailure: {
+                      type: "string",
+                      description:
+                        "The evaluation failure of the decision instance.",
+                    },
+                    decisionDefinitionId: {
+                      type: "string",
+                      description: "The ID of the DMN decision.",
+                    },
+                    decisionDefinitionName: {
+                      type: "string",
+                      description: "The name of the DMN decision.",
+                    },
+                    decisionDefinitionVersion: {
+                      type: "integer",
+                      format: "int32",
+                      description: "The version of the decision.",
+                    },
+                    decisionDefinitionType: {
+                      description: "The type of the decision.",
+                      enum: [
+                        "DECISION_TABLE",
+                        "LITERAL_EXPRESSION",
+                        "UNSPECIFIED",
+                        "UNKNOWN",
+                      ],
+                      title: "DecisionDefinitionTypeEnum",
+                    },
+                    result: {
+                      type: "string",
+                      description: "The result of the decision instance.",
+                    },
+                    tenantId: {
+                      type: "string",
+                      description: "The tenant ID of the decision instance.",
+                    },
+                    decisionInstanceKey: {
+                      type: "string",
+                      description:
+                        "The key of the decision instance. Note that this is not the unique identifier of the entity itself; the `decisionInstanceId` serves as the primary identifier.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The key of the process definition.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The key of the process instance.",
+                    },
+                    decisionDefinitionKey: {
+                      type: "string",
+                      description: "The key of the decision.",
+                    },
+                  },
+                  title: "DecisionInstanceResult",
+                },
+              },
+            },
+            title: "DecisionInstanceSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The decision instance search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

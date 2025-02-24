@@ -5,7 +5,7 @@ sidebar_label: "Filters"
 description: "All communication from a client to a broker must first pass through a gateway. There, it can be filtered before being dispatched."
 ---
 
-:::warning
+:::danger
 
 Filters are only applied to the REST API of the gateway, and do not affect any gRPC calls.
 

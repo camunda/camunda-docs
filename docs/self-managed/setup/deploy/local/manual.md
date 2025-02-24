@@ -92,23 +92,37 @@ You’ll know Zeebe has started successfully when you see a message similar to t
 [exporter] [0.0.0.0:26501-zb-actors-1] INFO  io.camunda.zeebe.broker.exporter.elasticsearch - Exporter opened
 ```
 
-You can test the Zeebe Gateway by asking for the cluster topology with [zbtcl](/apis-tools/community-clients/cli-client/index.md#usage):
-
-```shell
-./bin/zbctl --insecure status
-```
-
-`zbctl status` should produce an output like this:
+You can test the Zeebe Gateway by asking for the cluster topology with the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md):
 
 ```
-Cluster size: 1
-Partitions count: 1
-Replication factor: 1
-Gateway version: 8.1.6
-Brokers:
-  Broker 0 - 0.0.0.0:26501
-    Version: 8.1.6
-    Partition 1 : Leader, Healthy
+curl -L 'http://localhost:8080/v2/topology' \
+-H 'Accept: application/json'
+```
+
+Which should produce an output like this:
+
+```json
+{
+  "brokers": [
+    {
+      "nodeId": 0,
+      "host": "string",
+      "port": 0,
+      "partitions": [
+        {
+          "partitionId": 0,
+          "role": "leader",
+          "health": "healthy"
+        }
+      ],
+      "version": "8.8.0"
+    }
+  ],
+  "clusterSize": 1,
+  "partitionsCount": 1,
+  "replicationFactor": 1,
+  "gatewayVersion": "8.8.0"
+}
 ```
 
 ## Run Operate
@@ -233,7 +247,7 @@ A local setup of Identity in Camunda 8 is not yet supported out-of-the-box, use 
 
 ## Run Optimize
 
-The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/setup/deploy/other/docker.md/#optimize) instead.
+The installation of Optimize is described in [Optimize Setup]($optimize$/self-managed/optimize-deployment/install-and-start). A local setup in Camunda 8 is not yet supported out-of-the-box, use [Docker](/self-managed/setup/deploy/other/docker.md#optimize) instead.
 
 ## Run Web Modeler
 

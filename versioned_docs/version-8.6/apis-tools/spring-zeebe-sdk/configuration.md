@@ -245,24 +245,11 @@ public void handleJobFoo() {
 
 ## Additional configuration options
 
-For a full set of configuration options, see [CamundaClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/CamundaClientProperties.java).
+For a full set of configuration options, see [CamundaClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/stable/8.6/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/CamundaClientProperties.java).
 
 ### Auth
 
 Here you find alternatives to authenticate with the cluster
-
-#### Username & Password
-
-You can also authenticate with the cluster through a simple authentication with username and password
-
-```yaml
-camunda:
-  client:
-    mode: self-managed
-    auth:
-      username: <your username>
-      password: <your password>
-```
 
 #### Keystore & Truststore
 
@@ -510,7 +497,7 @@ You could also provide a custom class that can customize the `JobWorker` configu
 
 Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
 
-To enable job streaming on the Zeebe client, you can configure it:
+Job streaming is disabled by default for job workers. To enable job streaming on the Zeebe client, configure it as follows:
 
 ```yaml
 camunda:

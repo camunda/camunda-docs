@@ -126,3 +126,9 @@ Identity uses feature flag environment variables to enable and disable features;
 Setting either of the feature flags to `true` requires a database connection. To configure a database
 connection, see [database configuration](#database-configuration).
 :::
+
+## Logging
+
+### Google Stackdriver (JSON) logging
+
+To enable Google Stackdriver compatible JSON logging, set the environment variable `IDENTITY_LOG_APPENDER=Stackdriver` on Identity.
