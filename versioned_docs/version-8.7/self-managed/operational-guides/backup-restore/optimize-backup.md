@@ -179,7 +179,7 @@ To restore a given backup, the following steps must be performed:
 
 1. Stop Optimize.
 2. Ensure no Optimize indices are present in the database (or the restore process will fail).
-3. Iterate over all ElasticSearch snapshots included in the desired backup and restore them using the restore snapshot API mentioned above.
+3. Iterate over all Elasticsearch snapshots included in the desired backup and restore them using the restore snapshot API mentioned above.
 4. Start Optimize.
 
 Example Elasticsearch request:
