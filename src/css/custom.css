@@ -958,3 +958,22 @@ ul ol {
     flex-direction: column;
   }
 }
+
+.table-of-contents__link .callout {
+  display: none;
+}
+
+/* Green tick list and orange cross list */
+.list-tick {
+  list-style-image: url("/static/img/icon-list-tick.png");
+  line-height: 1.5;
+}
+.list-cross {
+  list-style-image: url("/static/img/icon-list-cross.png");
+  line-height: 1.5;
+}
+.list-tick li,
+.list-cross li {
+  padding-left: 10px;
+  margin-bottom: 25px;
+}

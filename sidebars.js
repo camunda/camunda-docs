@@ -46,13 +46,19 @@ module.exports = {
       ],
     },
     {
-      "Migrate from Camunda 7": [
-        "guides/migrating-from-camunda-7/index",
+      type: "category",
+      label: "Migrate from Camunda 7",
+      link: {
+        type: "doc",
+        id: "guides/migrating-from-camunda-7/index",
+      },
+      items: [
+        "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-tooling",
+        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-7/adjusting-source-code",
+        "guides/migrating-from-camunda-7/technical-details",
       ],
     },
   ],
