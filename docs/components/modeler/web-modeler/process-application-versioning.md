@@ -5,7 +5,7 @@ description: Process applications allow you to deploy multiple related files tog
 ---
 
 :::note
-With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related announcement](/reference/announcements/870.md##web-modeler-milestones-renamed-to-versions).
+With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related announcement](/reference/announcements/870.md#web-modeler-milestones-renamed-to-versions).
 :::
 
 Although you cannot version a process application itself, you can use [bulk version creation](versions.md#bulk-version-creation) and version tags to save a single snapshot of all the process application files in one action, instead of having to create separate versions for every file.
@@ -34,7 +34,7 @@ To create a bulk version for a process application:
 
 ![Create a version screen](img/versions/web-modeler-version-create-versioned-milestone-highlight.png)
 
-Now when you open the versions list for any file in the process application, you can use the file navigation header buttons to switch between files, and view their individual versions list. See [compare versions](/docs/components/modeler/web-modeler/versions.md#compare-versions).
+Now when you open the versions list for any file in the process application, you can use the file navigation header buttons to switch between files, and view their individual versions list. See [compare versions](/components/modeler/web-modeler/versions.md#compare-versions).
 
 ![Versions list with file navigation header buttons highlighted](img/versions/web-modeler-version-compare-process-application-files-highlight.png)
 
