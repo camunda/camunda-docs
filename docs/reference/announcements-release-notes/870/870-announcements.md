@@ -24,8 +24,8 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
   - [Deprecated: OpenAPI entities with `integer (int64)` key attributes](#deprecated-openapi-entities-with-integer-int64-key-attributes)
 - [New features](#new-features)
   - [Amazon Web Services (AWS) region support SaaS](#amazon-web-services-aws-region-support-saas)
-  - [Deploy diagram change Self-Managed {#web-modeler-deploy-diagram-change}](#deploy-diagram-change-self-managed-web-modeler-deploy-diagram-change)
-  - [Milestones renamed to versions {#web-modeler-milestones-renamed-to-versions}](#milestones-renamed-to-versions-web-modeler-milestones-renamed-to-versions)
+  - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
+  - [Milestones renamed to versions](#web-modeler-milestones-renamed-to-versions)
   - [Southeast Asia region for SaaS customers SaaS](#southeast-asia-region-for-saas-customers-saas)
 
 ## Versioning and environment changes
