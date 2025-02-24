@@ -94,7 +94,7 @@ function Home() {
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className="homeSearch">
-            <AlgoliaSearchBox /> {/* Add the search box here */}
+            <AlgoliaSearchBox />
           </div>
           <div className={clsx("row", styles.buttonsWrapper)}>
             <div className={clsx("", styles.buttons)}>
