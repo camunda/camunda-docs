@@ -8,6 +8,8 @@ import IdpElementImg from './img/idp-diagram-element.png';
 
 You can integrate your published IDP projects into your end-to-end processes in Modeler.
 
+## About IDP integration
+
 ## Create an IDP task
 
 You can apply a published IDP project to a task or event via the append menu. For example:
@@ -24,12 +26,23 @@ You can configure the [IDP extraction connector](idp-reference.md#technical-arch
 
 ### Input message data
 
-| Parameter          | Description                                                                                                                                                                                                                                                                                                                    |
+| Field              | Description                                                                                                                                                                                                                                                                                                                    |
 | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Document           | The `document` object variable used for handling documents in your Amazon AWS S3 bucket, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md) with the document reference.                                                                                                                                |
 | AWS S3 Bucket name | <p><ul><li><p>Specify the name of the Amazon AWS S3 bucket where documents can be temporarily stored during Amazon Textract analysis.</p></li><li><p>For example, a typical IDP configuration requires an Amazon AWS S3 bucket named `idp-extraction-connector` for document storage during test extraction.</p></li></ul></p> |
 
 ### Output mapping
+
+Specify the process variables that you want to map and export the IDP extraction connector response into.
+
+| Field             | Description |
+| :---------------- | :---------- |
+| Result variable   | fdfd        |
+| Result expression | dfdfd       |
+
+:::info
+To learn more about output mapping, see [variable/response mapping](/components/connectors/use-connectors/index.md#variableresponse-mapping).
+:::
 
 ### Error handling
 
