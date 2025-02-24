@@ -16,6 +16,8 @@ Navigate to the Web Modeler settings by clicking on your user icon in the top ri
 
 Configure the projects for which you will receive email notifications when a collaborator mentions you in a comment.
 
+To do this, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Here under **Email notifications**, toggle on or off the options to receive email notifications when you are mentioned in a comment for all projects and new projects.
+
 ## Process application deployment
 
 Organization admins can configure the deployment policy for process applications in the Web Modeler settings.
@@ -31,7 +33,8 @@ Organization admins can configure the deployment policy for process applications
 By default, only organization administrators can deploy process applications to clusters marked as
 [production stages](/components/modeler/web-modeler/process-application-pipeline.md#deployment-pipeline-stages) from Web Modeler.
 
-You can change this in the **process application deployment** settings.
+You can change this in the **Process application deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Process application deployment**.
+
 Here, you can permit non-admin users with deployment permissions to deploy process application versions to production stage clusters
 after a collaborator has reviewed and approved the process application version using the
 [process application review](/components/modeler/web-modeler/process-application-pipeline.md#review) feature.
@@ -44,7 +47,8 @@ This setting can only be configured by organization admins and applies to all pr
 By default, only users with the **Web Modeler Admin** role can deploy process applications to
 clusters marked as [production stages](/components/modeler/web-modeler/process-application-pipeline.md#deployment-pipeline-stages) from Web Modeler.
 
-You can change this in the **Process application deployment** settings.
+You can change this in the **Process application deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Process application deployment**.
+
 Here, you can permit non-admin users with deployment permissions to deploy process application versions to production stage clusters
 after a collaborator has reviewed and approved the process application version using the
 [process application review](/components/modeler/web-modeler/process-application-pipeline.md#review) feature.
