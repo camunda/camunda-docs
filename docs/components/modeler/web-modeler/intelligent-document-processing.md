@@ -1,6 +1,6 @@
 ---
 id: idp
-title: Intelligent document processing (IDP)
+title: Intelligent document processing
 description: "Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes."
 ---
 
@@ -17,7 +17,7 @@ For example, you can use IDP to extract data from invoices and other document ty
 
 <img src={IdpOverviewImg} alt="An overview of intelligent document processing" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
-## Configure IDP
+## Prerequisites
 
 To configure and use IDP in Camunda 8 you must:
 
@@ -27,23 +27,21 @@ To configure and use IDP in Camunda 8 you must:
 
 - Add your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to the cluster you want to use with IDP.
 
-  <img src={IdpSecretsImg} alt="AWS connector secrets" width="650px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
-
 - Create an Amazon AWS S3 bucket named `idp-extraction-connector` used by IDP for document storage during test extraction.
 
 :::info
-To learn more about the IDP technical architecture and how IDP works, see [technical architecture](idp/idp-reference.md#technical-architecture).
+See [technical architecture](idp/idp-reference.md#technical-architecture) to learn more about the composable IDP architecture.
 :::
 
 ## Get started with IDP
 
 To start using IDP in your processes:
 
-1. Create an [IDP application](idp/idp-applications.md) folder in which to store and manage a set of related IDP projects.
+1. Create an [IDP application](idp/idp-applications.md) in which to store and manage a set of related IDP projects.
 
-1. Create a [document extraction](idp/idp-document-extraction.md) project to identify and extract data from a single type of document (for example, an invoice).
+1. Create and publish a [document extraction](idp/idp-document-extraction.md) project for each type of document you want to extract data from.
 
-1. [Integrate IDP into your processes](idp/idp-integrate.md) by adding your published projects to a BPMN diagram.
+1. [Integrate the published extraction project](idp/idp-integrate.md) into your processes in Modeler.
 
 <!-- 1. Create and publish your IDP projects in your IDP application folder:
 
@@ -52,8 +50,5 @@ To start using IDP in your processes:
    - Create a [document automation](idp/idp-document-automation.md) project to automatically extract data from larger, more complex documents (for example, a multi-page PDF document made up of many types of documents and data). This project type is based on and requires one or more linked document extraction project(s). -->
 
 :::info
-
-- New to IDP? See [key IDP concepts](idp/idp-key-concepts.md) to learn about key IDP concepts and terms.
-- See [Integrate IDP into your processes](idp/idp-integrate.md) for a simple worked example of how to integrate IDP into your processes.
-
+New to IDP? See [IDP concepts](idp/idp-key-concepts.md) to learn about key IDP concepts and terms.
 :::

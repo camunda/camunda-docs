@@ -180,7 +180,7 @@ module.exports = {
             "components/modeler/web-modeler/token-simulation",
             {
               type: "category",
-              label: "Intelligent document processing (IDP)",
+              label: "Intelligent document processing",
               link: {
                 type: "doc",
                 id: "components/modeler/web-modeler/idp",

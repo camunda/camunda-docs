@@ -18,11 +18,16 @@ You can apply a published IDP project to a task or event via the append menu. Fo
 - **From the properties panel:** Navigate to the **Template** section and click **Select**.
 - **From the side palette:** Click the **Create element** icon.
 
-## Configuration
+## IDP extraction connector configuration
 
-After you have applied an IDP project to your element, you can configure the [IDP connector template](idp-reference.md#technical-architecture).
+You can configure the [IDP extraction connector](idp-reference.md#technical-architecture) in the properties panel.
 
 ### Input message data
+
+| Parameter          | Description                                                                                                                                                                                                                                                                                                                    |
+| :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document           | The `document` object variable used for handling documents in your Amazon AWS S3 bucket, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md) with the document reference.                                                                                                                                |
+| AWS S3 Bucket name | <p><ul><li><p>Specify the name of the Amazon AWS S3 bucket where documents can be temporarily stored during Amazon Textract analysis.</p></li><li><p>For example, a typical IDP configuration requires an Amazon AWS S3 bucket named `idp-extraction-connector` for document storage during test extraction.</p></li></ul></p> |
 
 ### Output mapping
 

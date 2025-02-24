@@ -7,7 +7,7 @@ description: "Create and manage your IDP projects in an IDP application folder."
 import IdpApplicationImg from './img/idp-application.png';
 import IdpApplicationModalImg from './img/idp-application-modal.png';
 
-Create and manage your IDP projects in an **IDP application** folder.
+Create and manage your IDP projects in an **IDP application**.
 
 <img src={IdpApplicationImg} alt="IDP application screen" />
 

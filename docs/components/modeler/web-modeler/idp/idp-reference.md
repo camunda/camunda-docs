@@ -41,12 +41,6 @@ IDP currently only supports data extraction from the following document file for
 | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <p>PDF</p>  | <p><ul><li>PDF documents must not be password protected.</li><li><p>Maximum document file size is 4MB.</p></li><li><p>Both text and image content can be extracted from a PDF document. For example, data can be extracted from a scanned image that has been converted to PDF.</p></li></ul></p> |
 
-## Document storage
-
-For SaaS, uploaded documents are stored in Web Modeler itself, not your cluster.
-
-Storage limit?
-
 ## Document language support
 
 IDP supports data extraction and processing of documents in different languages.
@@ -58,6 +52,10 @@ For example, as of February 2025, Amazon Textract can detect printed text and ha
 :::info
 Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for full details of supported languages.
 :::
+
+## Document storage
+
+In SaaS, during test extraction your uploaded sample documents are stored in an Amazon AWS S3 bucket named `idp-extraction-connector`.
 
 ## Extraction field data types
 
