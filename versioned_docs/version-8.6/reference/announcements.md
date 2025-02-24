@@ -391,6 +391,10 @@ If you are using one of these versions, you should first update to Web Modeler 8
 
 If your current version of Web Modeler is 8.2.6 or earlier, you may directly upgrade to a later minor version.
 
+### Breaking changes to backup endpoints
+
+This release changes the location of the backup endpoint to `/backups`. For example, `curl 'http://localhost:8092/actuator/backups'` (rather than the previously used `backup`).
+
 ### Do not update to Camunda 8.2.22
 
 :::caution
