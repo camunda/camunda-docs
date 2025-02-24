@@ -1,0 +1,357 @@
+---
+id: correlate-a-message
+title: "Correlate a message"
+description: "Publishes a message and correlates it to a subscription."
+sidebar_label: "Correlate a message"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWdtu20YQ/ZXFPrUoTSqJk6Z8cxynVS6OYMvtg+OHJTkUN17uMnuxrAj892K4lESJouOgBZoCMmDI1A5nds6cM97Lklo2MzS+ph/AGDYDehPQDEyqeWW5kjSmE5cIbgowhJHSGxEmM5IqrUEwC4ZwS6wijBiXrN8MP8lxvjbiShJuiHFpCsbkTuA7cy4E0WCdlsQWQHKujSWVVmhDuDSWyRTILSya4VXwdeCMzLktwk+SBlTDFwfGvlLZgsbL5pFryGhstYOApkpakBaHWFUJnjZTij4bTHFJTVpAyfAvu6iAxlQlnyG1NKCVVhVoy8HgqGQl4Oc2QtPO5NCCMEMyyLmEjHCf2qvJh/NVZs182zjGai5ntMYZrpF6B4v9QbpoIioq7wLT84qVzJkTlsYUQ9wxzVkifCrDKazNMI+3lx/PSaZSVyJ8AWVZxvEdJiYdZDzIu9hJJwQ68uN1QC1IJu0468fHNPwoyZUm84KnxVbRuSFVS8RsT6I7oTAWt/i44vXpBroLTxVa12inwVRKGg/K09HoYWy46dLPKqIkEKVJqTT0mGvodxBvOGan0p3Y7WiARZqDEPj5DRFx+0n2xfMOFoRZq3nirK+5R5XcMeHAhLRfWCbEx5zG17uzfsVMg0LLi6aU+/D3iO9xvK22YbpMN3QZvx4Gp6+zbxDDTwzToPXN7nRap4PqfLBO+yTfFmnc1ugxjgeq+0B7/H4MsGGgUZevdzILU1Y6mbGQVTy8hYUJpSsT0L/8QFxuWl6lIcUvh9rSgb3/gL1cWpiBpgHNlS6Z9V+9OP4P+Dw8lUfh9DiOe+h/JI4f+vWhX+/p12h2PLR8qbS64xlkJGOW4SJGKot84dnwEqXSKhFQfpP6J2TiLUkGlnFBPDv8IhgNE78Mvr54c0p+O37+681PhbWViaNoPp+HOk+PIONW6VDpWaTzFH/R7ueQTAvQQEq2IAmQzdKzy1lTQcpznuJizPpUm8kgiGF3qT1E2mZ02VtRrnuK05zu7olOyNXFmPAMpOX5AsXXC721+maJcjZOBJO3dFPOftDdKMaVJdNrNm0HqANqLLOuk8ZAT3z2tOcbWfHHdDoh3gVJVQaN/m2BS20fCJMoueSlK2l8PBoFtGT3/unFaFSjT6z4IzKRBO4rwaTfu+ykw6VfP3tvTWIrpfxLlVGaz/hu3HBLWi2JX/uMVnp61uf7lWTOFkrzr3BQz0E9B/UMq+e4z/dzhTt8Jw/SOUjnIJ0h6Tzft5AbSwsaSWhA34EmoLXSBxkdZHSQ0V4Z1QEtwRYqozGtlGmow2xBYxq1ey8TdU7UaUC9sEyzU3Za0JguvWrqOIqWhTK2jpeV0raO7rAkWwfqOOzVtWKNUCkThY/crx4ONLcFbVan/uiBvCQXZ5dT8juzMGeLBk0Mue365ejlaK9XNB3weDIZt63Dc6/TD1ZuUdh73XrjxziucSNuIHWa28UlvubhSYBp0CcOC7DmRBuv8Y7P3ogG7R9vVkx5+9e0KTb2sovNTc/ZPSsrr0R/M7Mh2e51ymakW7StO4nOTp/LXDXTbMnVTxgdgTYeoVH4pE/kybjRY6rK0smmKctZs8MnrANgKpyxCFxABU8Bj1k22azM3vsR8qePSJ6EWHzP0FUvnnFbuCRMVRm1h1jrz0SoJCoZl1EbwkSnJx+uzl+fHL0fn56dX54dPQlHob33576olZLJ7jxWRxSbK8DdfJebf0P/kxvDloIW7m1UCcYlFr7BdNn2ievVEZLZJhTekXq1X9PlMmEGrrSoa/z6iwO9oPH1zYZn+FQHtACWgW5ay21DyFOP19EU54HmwuF8erdEdbB64yRNobIP2t50et7k4+UUpdReiZYqw3c0m+N1KZvjpWBAVQN9o9DmuyUVTM4cVjim3if+/A3E55Kg
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Correlate a message"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/messages/correlation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Publishes a message and correlates it to a subscription.
+If correlation is successful it will return the first process instance key the message correlated with.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            name: {
+              description: "The message name as defined in the BPMN process\n",
+              type: "string",
+            },
+            correlationKey: {
+              description: "The correlation key of the message",
+              type: "string",
+              default: "",
+            },
+            variables: {
+              description: "The message variables as JSON document",
+              additionalProperties: true,
+              type: "object",
+              nullable: true,
+            },
+            tenantId: {
+              description: "the tenant for which the message is published",
+              type: "string",
+              nullable: true,
+            },
+          },
+          title: "MessageCorrelationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The message is correlated to one or more process instances",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The message key of the correlated message, as well as the first process instance key it\ncorrelated with.\nKey attributes as string values.",
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for MessageCorrelationResponse",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description: "The tenant ID of the correlated message",
+                    type: "string",
+                  },
+                },
+                title: "MessageCorrelationResponseBase",
+              },
+            ],
+            properties: {
+              messageKey: {
+                description: "The key of the correlated message",
+                type: "string",
+              },
+              processInstanceKey: {
+                description:
+                  "The key of the first process instance the message correlated with",
+                type: "string",
+              },
+            },
+            title: "MessageCorrelationResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            description:
+              "The message key of the correlated message, as well as the first process instance key it\ncorrelated with.\n",
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for MessageCorrelationResponse",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description: "The tenant ID of the correlated message",
+                    type: "string",
+                  },
+                },
+                title: "MessageCorrelationResponseBase",
+              },
+            ],
+            properties: {
+              messageKey: {
+                description: "The key of the correlated message",
+                type: "integer",
+                format: "int64",
+              },
+              processInstanceKey: {
+                description:
+                  "The key of the first process instance the message correlated with",
+                type: "integer",
+                format: "int64",
+              },
+            },
+            title: "MessageCorrelationResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            description:
+              "The message key of the correlated message, as well as the first process instance key it\ncorrelated with.\nKey attributes as string values.",
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for MessageCorrelationResponse",
+                type: "object",
+                properties: {
+                  tenantId: {
+                    description: "The tenant ID of the correlated message",
+                    type: "string",
+                  },
+                },
+                title: "MessageCorrelationResponseBase",
+              },
+            ],
+            properties: {
+              messageKey: {
+                description: "The key of the correlated message",
+                type: "string",
+              },
+              processInstanceKey: {
+                description:
+                  "The key of the first process instance the message correlated with",
+                type: "string",
+              },
+            },
+            title: "MessageCorrelationResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Unauthorized",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "Internal server error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

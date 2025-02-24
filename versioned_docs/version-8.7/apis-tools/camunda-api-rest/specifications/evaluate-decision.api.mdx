@@ -1,0 +1,914 @@
+---
+id: evaluate-decision
+title: "Evaluate decision"
+description: "Evaluates a decision."
+sidebar_label: "Evaluate decision"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Evaluate decision"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/decision-definitions/evaluation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Evaluates a decision.
+You specify the decision to evaluate either by using its unique key (as returned by
+DeployResource), or using the decision ID. When using the decision ID, the latest deployed
+version of the decision is used.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              description: "Base properties for EvaluateDecisionRequest",
+              type: "object",
+              properties: {
+                decisionDefinitionId: {
+                  description:
+                    "The ID of the decision to be evaluated.\nCannot be used together with decisionDefinitionKey. When using the decision ID, the latest\ndeployed version of the decision is used.\n",
+                  type: "string",
+                },
+                variables: {
+                  description: "The message variables as JSON document.",
+                  additionalProperties: true,
+                  type: "object",
+                },
+                tenantId: {
+                  description: "The tenant ID of the decision.",
+                  type: "string",
+                },
+              },
+              title: "EvaluateDecisionRequestBase",
+            },
+          ],
+          properties: {
+            decisionDefinitionKey: {
+              description:
+                "The unique key identifying the decision to be evaluated.\nCannot be used together with decisionDefinitionId.\n",
+              type: "string",
+            },
+          },
+          title: "DecisionEvaluationInstruction",
+        },
+        examples: {
+          "By decision definition key": {
+            summary: "Evaluate the decision by decisionDefinitionKey.",
+            value: { decisionDefinitionKey: "12345", variables: {} },
+          },
+          "By decision definition ID": {
+            summary: "Evaluate the decision by decisionDefinitionId.",
+            value: { decisionDefinitionId: "1234-5678", variables: {} },
+          },
+        },
+      },
+      "application/vnd.camunda.api.keys.number+json": {
+        schema: {
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              description: "Base properties for EvaluateDecisionRequest",
+              type: "object",
+              properties: {
+                decisionDefinitionId: {
+                  description:
+                    "The ID of the decision to be evaluated.\nCannot be used together with decisionDefinitionKey. When using the decision ID, the latest\ndeployed version of the decision is used.\n",
+                  type: "string",
+                },
+                variables: {
+                  description: "The message variables as JSON document.",
+                  additionalProperties: true,
+                  type: "object",
+                },
+                tenantId: {
+                  description: "The tenant ID of the decision.",
+                  type: "string",
+                },
+              },
+              title: "EvaluateDecisionRequestBase",
+            },
+          ],
+          properties: {
+            decisionDefinitionKey: {
+              description:
+                "The unique key identifying the decision to be evaluated.\nCannot be used together with decisionDefinitionId.\n",
+              type: "integer",
+              format: "int64",
+            },
+          },
+          title: "EvaluateDecisionRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.string+json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              description: "Base properties for EvaluateDecisionRequest",
+              type: "object",
+              properties: {
+                decisionDefinitionId: {
+                  description:
+                    "The ID of the decision to be evaluated.\nCannot be used together with decisionDefinitionKey. When using the decision ID, the latest\ndeployed version of the decision is used.\n",
+                  type: "string",
+                },
+                variables: {
+                  description: "The message variables as JSON document.",
+                  additionalProperties: true,
+                  type: "object",
+                },
+                tenantId: {
+                  description: "The tenant ID of the decision.",
+                  type: "string",
+                },
+              },
+              title: "EvaluateDecisionRequestBase",
+            },
+          ],
+          properties: {
+            decisionDefinitionKey: {
+              description:
+                "The unique key identifying the decision to be evaluated.\nCannot be used together with decisionDefinitionId.\n",
+              type: "string",
+            },
+          },
+          title: "DecisionEvaluationInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The decision was evaluated.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for EvaluateDecisionResponse",
+                type: "object",
+                properties: {
+                  decisionDefinitionId: {
+                    description: "The ID of the decision which was evaluated.",
+                    type: "string",
+                  },
+                  decisionDefinitionName: {
+                    description:
+                      "The name of the decision which was evaluated.",
+                    type: "string",
+                  },
+                  decisionDefinitionVersion: {
+                    description:
+                      "The version of the decision which was evaluated.",
+                    type: "integer",
+                    format: "int32",
+                  },
+                  decisionRequirementsId: {
+                    description:
+                      "The ID of the decision requirements graph that the decision which was evaluated is part of.",
+                    type: "string",
+                  },
+                  output: {
+                    description:
+                      "JSON document that will instantiate the result of the decision which was evaluated.\n",
+                    type: "string",
+                  },
+                  failedDecisionDefinitionId: {
+                    description:
+                      "The ID of the decision which failed during evaluation.",
+                    type: "string",
+                  },
+                  failureMessage: {
+                    description:
+                      "Message describing why the decision which was evaluated failed.",
+                    type: "string",
+                  },
+                  tenantId: {
+                    description: "The tenant ID of the evaluated decision.",
+                    type: "string",
+                  },
+                },
+                title: "EvaluateDecisionResponseBase",
+              },
+            ],
+            properties: {
+              decisionDefinitionKey: {
+                description:
+                  "The unique key identifying the decision which was evaluated.",
+                type: "string",
+              },
+              decisionRequirementsKey: {
+                description:
+                  "The unique key identifying the decision requirements graph that the decision which was evaluated is part of.",
+                type: "string",
+              },
+              decisionInstanceKey: {
+                description:
+                  "The unique key identifying this decision evaluation.",
+                type: "string",
+              },
+              evaluatedDecisions: {
+                type: "array",
+                items: {
+                  description:
+                    "List of decisions that were evaluated within the requested decision evaluation. Key attributes as string values.",
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for EvaluatedDecisionItem",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          description:
+                            "The ID of the decision which was evaluated.",
+                          type: "string",
+                        },
+                        decisionDefinitionName: {
+                          description:
+                            "The name of the decision which was evaluated.",
+                          type: "string",
+                        },
+                        decisionDefinitionVersion: {
+                          description:
+                            "The version of the decision which was evaluated.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        decisionDefinitionType: {
+                          description:
+                            "The type of the decision which was evaluated.",
+                          type: "string",
+                        },
+                        output: {
+                          description:
+                            "JSON document that will instantiate the result of the decision which was evaluated.\n",
+                          type: "string",
+                        },
+                        tenantId: {
+                          description:
+                            "The tenant ID of the evaluated decision.",
+                          type: "string",
+                        },
+                        matchedRules: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            description:
+                              "The decision rules that matched within this decision evaluation.",
+                            properties: {
+                              ruleId: {
+                                description: "The ID of the matched rule.",
+                                type: "string",
+                              },
+                              ruleIndex: {
+                                description: "The index of the matched rule.",
+                                type: "integer",
+                                format: "int32",
+                              },
+                              evaluatedOutputs: {
+                                type: "array",
+                                items: {
+                                  type: "object",
+                                  description:
+                                    "The evaluated decision outputs.",
+                                  properties: {
+                                    outputId: {
+                                      description:
+                                        "The ID of the evaluated decision output.",
+                                      type: "string",
+                                    },
+                                    outputName: {
+                                      description:
+                                        "The name of the evaluated decision output.",
+                                      type: "string",
+                                    },
+                                    outputValue: {
+                                      description:
+                                        "The value of the evaluated decision output.",
+                                      type: "string",
+                                    },
+                                  },
+                                  title: "EvaluatedDecisionOutputItem",
+                                },
+                              },
+                            },
+                            title: "MatchedDecisionRuleItem",
+                          },
+                        },
+                        evaluatedInputs: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            description:
+                              "The decision inputs that were evaluated within this decision evaluation.",
+                            properties: {
+                              inputId: {
+                                description:
+                                  "The ID of the evaluated decision input.",
+                                type: "string",
+                              },
+                              inputName: {
+                                description:
+                                  "The name of the evaluated decision input.",
+                                type: "string",
+                              },
+                              inputValue: {
+                                description:
+                                  "The value of the evaluated decision input.",
+                                type: "string",
+                              },
+                            },
+                            title: "EvaluatedDecisionInputItem",
+                          },
+                        },
+                      },
+                      title: "EvaluatedDecisionItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionDefinitionKey: {
+                      description:
+                        "The unique key identifying the decision which was evaluate.",
+                      type: "string",
+                    },
+                  },
+                  title: "EvaluatedDecisionResult",
+                },
+              },
+            },
+            title: "EvaluateDecisionResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for EvaluateDecisionResponse",
+                type: "object",
+                properties: {
+                  decisionDefinitionId: {
+                    description: "The ID of the decision which was evaluated.",
+                    type: "string",
+                  },
+                  decisionDefinitionName: {
+                    description:
+                      "The name of the decision which was evaluated.",
+                    type: "string",
+                  },
+                  decisionDefinitionVersion: {
+                    description:
+                      "The version of the decision which was evaluated.",
+                    type: "integer",
+                    format: "int32",
+                  },
+                  decisionRequirementsId: {
+                    description:
+                      "The ID of the decision requirements graph that the decision which was evaluated is part of.",
+                    type: "string",
+                  },
+                  output: {
+                    description:
+                      "JSON document that will instantiate the result of the decision which was evaluated.\n",
+                    type: "string",
+                  },
+                  failedDecisionDefinitionId: {
+                    description:
+                      "The ID of the decision which failed during evaluation.",
+                    type: "string",
+                  },
+                  failureMessage: {
+                    description:
+                      "Message describing why the decision which was evaluated failed.",
+                    type: "string",
+                  },
+                  tenantId: {
+                    description: "The tenant ID of the evaluated decision.",
+                    type: "string",
+                  },
+                },
+                title: "EvaluateDecisionResponseBase",
+              },
+            ],
+            properties: {
+              decisionDefinitionKey: {
+                description:
+                  "The unique key identifying the decision which was evaluated.",
+                type: "integer",
+                format: "int64",
+              },
+              decisionRequirementsKey: {
+                description:
+                  "The unique key identifying the decision requirements graph that the decision which was evaluated is part of.",
+                type: "integer",
+                format: "int64",
+              },
+              decisionInstanceKey: {
+                description:
+                  "The unique key identifying this decision evaluation.",
+                type: "integer",
+                format: "int64",
+              },
+              evaluatedDecisions: {
+                type: "array",
+                items: {
+                  description:
+                    "List of decisions that were evaluated within the requested decision evaluation.",
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for EvaluatedDecisionItem",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          description:
+                            "The ID of the decision which was evaluated.",
+                          type: "string",
+                        },
+                        decisionDefinitionName: {
+                          description:
+                            "The name of the decision which was evaluated.",
+                          type: "string",
+                        },
+                        decisionDefinitionVersion: {
+                          description:
+                            "The version of the decision which was evaluated.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        decisionDefinitionType: {
+                          description:
+                            "The type of the decision which was evaluated.",
+                          type: "string",
+                        },
+                        output: {
+                          description:
+                            "JSON document that will instantiate the result of the decision which was evaluated.\n",
+                          type: "string",
+                        },
+                        tenantId: {
+                          description:
+                            "The tenant ID of the evaluated decision.",
+                          type: "string",
+                        },
+                        matchedRules: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            description:
+                              "The decision rules that matched within this decision evaluation.",
+                            properties: {
+                              ruleId: {
+                                description: "The ID of the matched rule.",
+                                type: "string",
+                              },
+                              ruleIndex: {
+                                description: "The index of the matched rule.",
+                                type: "integer",
+                                format: "int32",
+                              },
+                              evaluatedOutputs: {
+                                type: "array",
+                                items: {
+                                  type: "object",
+                                  description:
+                                    "The evaluated decision outputs.",
+                                  properties: {
+                                    outputId: {
+                                      description:
+                                        "The ID of the evaluated decision output.",
+                                      type: "string",
+                                    },
+                                    outputName: {
+                                      description:
+                                        "The name of the evaluated decision output.",
+                                      type: "string",
+                                    },
+                                    outputValue: {
+                                      description:
+                                        "The value of the evaluated decision output.",
+                                      type: "string",
+                                    },
+                                  },
+                                  title: "EvaluatedDecisionOutputItem",
+                                },
+                              },
+                            },
+                            title: "MatchedDecisionRuleItem",
+                          },
+                        },
+                        evaluatedInputs: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            description:
+                              "The decision inputs that were evaluated within this decision evaluation.",
+                            properties: {
+                              inputId: {
+                                description:
+                                  "The ID of the evaluated decision input.",
+                                type: "string",
+                              },
+                              inputName: {
+                                description:
+                                  "The name of the evaluated decision input.",
+                                type: "string",
+                              },
+                              inputValue: {
+                                description:
+                                  "The value of the evaluated decision input.",
+                                type: "string",
+                              },
+                            },
+                            title: "EvaluatedDecisionInputItem",
+                          },
+                        },
+                      },
+                      title: "EvaluatedDecisionItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionDefinitionKey: {
+                      description:
+                        "The unique key identifying the decision which was evaluate.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                  },
+                  title: "EvaluatedDecisionItem",
+                },
+              },
+            },
+            title: "EvaluateDecisionResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for EvaluateDecisionResponse",
+                type: "object",
+                properties: {
+                  decisionDefinitionId: {
+                    description: "The ID of the decision which was evaluated.",
+                    type: "string",
+                  },
+                  decisionDefinitionName: {
+                    description:
+                      "The name of the decision which was evaluated.",
+                    type: "string",
+                  },
+                  decisionDefinitionVersion: {
+                    description:
+                      "The version of the decision which was evaluated.",
+                    type: "integer",
+                    format: "int32",
+                  },
+                  decisionRequirementsId: {
+                    description:
+                      "The ID of the decision requirements graph that the decision which was evaluated is part of.",
+                    type: "string",
+                  },
+                  output: {
+                    description:
+                      "JSON document that will instantiate the result of the decision which was evaluated.\n",
+                    type: "string",
+                  },
+                  failedDecisionDefinitionId: {
+                    description:
+                      "The ID of the decision which failed during evaluation.",
+                    type: "string",
+                  },
+                  failureMessage: {
+                    description:
+                      "Message describing why the decision which was evaluated failed.",
+                    type: "string",
+                  },
+                  tenantId: {
+                    description: "The tenant ID of the evaluated decision.",
+                    type: "string",
+                  },
+                },
+                title: "EvaluateDecisionResponseBase",
+              },
+            ],
+            properties: {
+              decisionDefinitionKey: {
+                description:
+                  "The unique key identifying the decision which was evaluated.",
+                type: "string",
+              },
+              decisionRequirementsKey: {
+                description:
+                  "The unique key identifying the decision requirements graph that the decision which was evaluated is part of.",
+                type: "string",
+              },
+              decisionInstanceKey: {
+                description:
+                  "The unique key identifying this decision evaluation.",
+                type: "string",
+              },
+              evaluatedDecisions: {
+                type: "array",
+                items: {
+                  description:
+                    "List of decisions that were evaluated within the requested decision evaluation. Key attributes as string values.",
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for EvaluatedDecisionItem",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          description:
+                            "The ID of the decision which was evaluated.",
+                          type: "string",
+                        },
+                        decisionDefinitionName: {
+                          description:
+                            "The name of the decision which was evaluated.",
+                          type: "string",
+                        },
+                        decisionDefinitionVersion: {
+                          description:
+                            "The version of the decision which was evaluated.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        decisionDefinitionType: {
+                          description:
+                            "The type of the decision which was evaluated.",
+                          type: "string",
+                        },
+                        output: {
+                          description:
+                            "JSON document that will instantiate the result of the decision which was evaluated.\n",
+                          type: "string",
+                        },
+                        tenantId: {
+                          description:
+                            "The tenant ID of the evaluated decision.",
+                          type: "string",
+                        },
+                        matchedRules: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            description:
+                              "The decision rules that matched within this decision evaluation.",
+                            properties: {
+                              ruleId: {
+                                description: "The ID of the matched rule.",
+                                type: "string",
+                              },
+                              ruleIndex: {
+                                description: "The index of the matched rule.",
+                                type: "integer",
+                                format: "int32",
+                              },
+                              evaluatedOutputs: {
+                                type: "array",
+                                items: {
+                                  type: "object",
+                                  description:
+                                    "The evaluated decision outputs.",
+                                  properties: {
+                                    outputId: {
+                                      description:
+                                        "The ID of the evaluated decision output.",
+                                      type: "string",
+                                    },
+                                    outputName: {
+                                      description:
+                                        "The name of the evaluated decision output.",
+                                      type: "string",
+                                    },
+                                    outputValue: {
+                                      description:
+                                        "The value of the evaluated decision output.",
+                                      type: "string",
+                                    },
+                                  },
+                                  title: "EvaluatedDecisionOutputItem",
+                                },
+                              },
+                            },
+                            title: "MatchedDecisionRuleItem",
+                          },
+                        },
+                        evaluatedInputs: {
+                          type: "array",
+                          items: {
+                            type: "object",
+                            description:
+                              "The decision inputs that were evaluated within this decision evaluation.",
+                            properties: {
+                              inputId: {
+                                description:
+                                  "The ID of the evaluated decision input.",
+                                type: "string",
+                              },
+                              inputName: {
+                                description:
+                                  "The name of the evaluated decision input.",
+                                type: "string",
+                              },
+                              inputValue: {
+                                description:
+                                  "The value of the evaluated decision input.",
+                                type: "string",
+                              },
+                            },
+                            title: "EvaluatedDecisionInputItem",
+                          },
+                        },
+                      },
+                      title: "EvaluatedDecisionItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionDefinitionKey: {
+                      description:
+                        "The unique key identifying the decision which was evaluate.",
+                      type: "string",
+                    },
+                  },
+                  title: "EvaluatedDecisionResult",
+                },
+              },
+            },
+            title: "EvaluateDecisionResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The decision is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

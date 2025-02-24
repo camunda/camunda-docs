@@ -5,88 +5,405 @@ description: "Search for users based on given criteria."
 sidebar_label: "Query users"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query users</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query users"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/users/search"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/users/search"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Search for users based on given criteria.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-Pagination criteria.
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        searchAfter: {
+                          description:
+                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          description:
+                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["username", "name", "email"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "UserSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The user search filters.",
+              allOf: [
+                {
+                  description: "User search filter.",
+                  type: "object",
+                  properties: {
+                    username: {
+                      description: "The username of the user.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the user.",
+                      type: "string",
+                    },
+                    email: {
+                      description: "The email of the user.",
+                      type: "string",
+                    },
+                  },
+                  title: "UserFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "UserSearchQueryRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
 
-</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Sort field criteria.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={"**Possible values:** [`username`, `name`, `email`]"} schema={{"description":"The field to sort by.","type":"string","enum":["username","name","email"]}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","type":"string","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-User search filter.
-
-</div><SchemaItem collapsible={false} name={"username"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The username of the user.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The name of the user.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"email"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The email of the user.","type":"string"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The user search result.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching users.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key of the user.","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"key\": \"string\",\n      \"id\": 0,\n      \"username\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching users.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key of the user.","type":"integer","format":"int64"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"key\": 0,\n      \"id\": 0,\n      \"username\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching users.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"key"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The key of the user.","type":"string"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"key\": \"string\",\n      \"id\": 0,\n      \"username\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The user search query failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user search result.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching users.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    id: {
+                      description: "The ID of the user.",
+                      type: "integer",
+                      format: "int64",
+                    },
+                    username: {
+                      description: "The username of the user.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the user.",
+                      type: "string",
+                    },
+                    email: {
+                      description: "The email of the user.",
+                      type: "string",
+                    },
+                    key: {
+                      description: "The key of the user.",
+                      type: "string",
+                    },
+                  },
+                  title: "UserResult",
+                },
+              },
+            },
+            title: "UserSearchResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The user search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

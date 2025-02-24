@@ -5,59 +5,355 @@ description: "Returns incident as JSON."
 sidebar_label: "Get incident"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: eJztWVtz4jgW/isqPc3UuoGe6dnt9ZsXnIy7E5MCk+nabIoS9gHUbUtuSQ6hKP771pFsQ4BM6K3ZNx4osC7n+n3nGGlDDVto6j/QSKQ8A2Hoo0dlCYoZLkWUUZ8uwLSTHs1Ap4qXOEt9OgJTKaEJrxcQpsmn8TDu/EdQj5ZMsQIMKNSwoYIVQH3arP0Ma+pRjmJKZpbUowq+V1xBRn2jKjjUlSyBMK35QkBGvsGayDkxS2h1e2S15OmSsNRotIORSvDvFRA7y+ccFJlLRcyS7wzuUI/qdAkFo/6GmnWJFmqjuFjQ7fYRbdKlFBo0zv/S6+HXsV2t/1wTXaUpaD2v8nxNlA0QZC4gqRQGw+hvKCvLnKc2yt2vGgVtjg2Rs6+QYtRLhTkx3JlRKokaBjDngjd5OrT+VPjqjSRrd5JogEGVKWcGMmLkYXi2HgWlpEqs8LeUNEAhdg/BxWTFzZIwpxMyosFg5p5YXoHG8IOoCkTgJB7fhf3oKgoH1KOT+HM8/COmHo2G09vg7i6Kr6fhaDQcUY9+Gv5rGg+nozAZReGYejT8EvYnSTSMpzfROAnjcPRyPgnGn1+Z6g/jQWS3NtLDL8ko6CfT++BmEraj/eDmJhxMw5vwNoyTdngS/x7EAzuDI9PwPowT6tHbcDwOrsPpOPp3OA2/9MNwYP2qxQzCfjTeV7obQLXBC4OuhqPbaTxMplfDSTygj01ObkFrtjgjLaHNRuGW1zRxK2agLYlcvrgghVRAMjCM5zb581yuYpnBuRDD9UTIDM5BVqrAMiDhxRleDJgBhE5LtmY7omguVcEM9WnGDLwzKHDrUW2YOUPy2NSiX5h4NnKDfhLdh5j06HoUJDbPo3A8vLm3P+/CeBDF1zZvBgQTxgXzOHhuFiN3UNtQ20Fx8l4U0rNys189/8dqufWOq8/Z+k+UH6zjb6Gk3hYJbZhI4YfV8XrjWcpavP+oth3wf0jfVzk7W8VXOXOp43MCz1wb7e3Lt3A91ICY4yaHveI8Al3lhm63OPnhzZaGXRm0IXPGc8g65HZXITRhysb5iWeQYflA0DYtk8xktv7TxlcqOcuh+NtxA3xpT0Du3MpaL3GNEXHblDGr/WF01Sf//PDbPx5/WhpTar/bXa1WHTVP30HGjVQdqRZdNU/xg+t+7pBkCQpIwdZkBoRlmcUly8mu5RJdQsrnPHUZtA5bYzBjzr8/79fmld7Z1qxK8aOEB2Qyiho2rrlYHKu2e+YMk+lTNpOV8Wc5E9/oLulvwSoguioKptq3qZcK6hJa7blBuTCwALVvPxfm119OQvb3JLkjTgRJkRxtTakVoRMFF7zAUvqh1/NowZ7d0997vS3KxIyf4Ykg8FzmTFhoHbpzorM1NP2LMiMVX/BDvS8JWIN44Dxq+Pf+NP8a2uUs/aax6fCMsMosUaujD/Y/awTLbTu6kOxCsgvJTpPs12O8X0k141kGwsKz5RvXREhDWJ7LFWQXXl14deHV67z68MbLY/1OCmTBn8C97q+YY9hcVuLyOnlh5IWRfyEjfzv1dy4QBKOsEIfuoEemaaUU/mdc8rz9p9zorlvhhWsXrl249hrXth4twCxlfUVirzvMkvq02zQ/3d3sHdFt8aYB1FNzG1KpnPp043iz9bvdzVJqs/U3pVRm233CpDwxxdksd1DEacevBje5TFluh0/lDyfwyqXxq8+KSmSMfCSjcJyQa2ZgxdbuhE2qA9Efex97pw/VpDKvSAzuIuI8dOjbqwiNWKT2SbFu8TmC7a2MhrRS3KzHuM2FZwZMgQoqzEGLilqflY7PbhH16h9XDVY+/ZHYdHMxl3Z7nfZjQzAroLSzvNd5fwyxu8gyJZVFUQlbLsWiOUreyUvzSht0yKM5T0FoC+b6iqxZduNmyL3TSN53MCkOOU2VXHCzrGadVBbd1G1rv2e5nHULxkW3VqG7/eB2Eg+CdzdRP4zH4bv3nV7HPBvrfCm1KZjYs+MaTPsqd+joZtcZ3rgGrHNh4Nl0y5xxgeiwTmxqzjy0Z9maetTfP9h+9GrgP9DNZsY0TFS+3eLw9wrUmvoPjzueWGJlXOPvjPpzluvDa8R9s38a1ReOP5P/2+XiSefrQSbWluR5hU/Uo9/wJPjFuf4WLw2WwDJQ1jm3IkhTKM3e3qPbRCRJW56uQ0T3fwFRS0js
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Get incident</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get incident"}
+></Heading>
 
 <MethodEndpoint
   method={"get"}
   path={"/incidents/{incidentKey}"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Returns incident as JSON.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"incidentKey","in":"path","required":true,"description":"The assigned key of the incident, which acts as a unique identifier for this incident.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails
+  parameters={[
+    {
+      name: "incidentKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the incident, which acts as a unique identifier for this incident.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
-The incident is successfully returned.
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process definition ID associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"errorType"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`UNSPECIFIED`, `UNKNOWN`, `IO_MAPPING_ERROR`, `JOB_NO_RETRIES`, `EXECUTION_LISTENER_NO_RETRIES`, `CONDITION_ERROR`, `EXTRACT_VALUE_ERROR`, `CALLED_ELEMENT_ERROR`, `UNHANDLED_ERROR_EVENT`, `MESSAGE_SIZE_EXCEEDED`, `CALLED_DECISION_ERROR`, `DECISION_EVALUATION_ERROR`, `FORM_NOT_FOUND`]"} schema={{"type":"string","description":"Incident error type with a defined set of values.","enum":["UNSPECIFIED","UNKNOWN","IO_MAPPING_ERROR","JOB_NO_RETRIES","EXECUTION_LISTENER_NO_RETRIES","CONDITION_ERROR","EXTRACT_VALUE_ERROR","CALLED_ELEMENT_ERROR","UNHANDLED_ERROR_EVENT","MESSAGE_SIZE_EXCEEDED","CALLED_DECISION_ERROR","DECISION_EVALUATION_ERROR","FORM_NOT_FOUND"]}}></SchemaItem><SchemaItem collapsible={false} name={"errorMessage"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error message which describes the error in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node ID associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"creationTime"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"Date of incident creation.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ACTIVE`, `MIGRATED`, `RESOLVED`, `PENDING`]"} schema={{"type":"string","description":"State of this incident with a defined set of values.","enum":["ACTIVE","MIGRATED","RESOLVED","PENDING"]}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID of the incident.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"incidentKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The assigned key, which acts as a unique identifier for this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process definition key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The job key, if exists, associated with this incident."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"incidentKey\": \"string\",\n  \"processDefinitionKey\": \"string\",\n  \"processInstanceKey\": \"string\",\n  \"flowNodeInstanceKey\": \"string\",\n  \"jobKey\": \"string\",\n  \"processDefinitionId\": \"string\",\n  \"errorType\": \"UNSPECIFIED\",\n  \"errorMessage\": \"string\",\n  \"flowNodeId\": \"string\",\n  \"creationTime\": \"2025-01-16T15:06:56.458Z\",\n  \"state\": \"ACTIVE\",\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process definition ID associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"errorType"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`UNSPECIFIED`, `UNKNOWN`, `IO_MAPPING_ERROR`, `JOB_NO_RETRIES`, `EXECUTION_LISTENER_NO_RETRIES`, `CONDITION_ERROR`, `EXTRACT_VALUE_ERROR`, `CALLED_ELEMENT_ERROR`, `UNHANDLED_ERROR_EVENT`, `MESSAGE_SIZE_EXCEEDED`, `CALLED_DECISION_ERROR`, `DECISION_EVALUATION_ERROR`, `FORM_NOT_FOUND`]"} schema={{"type":"string","description":"Incident error type with a defined set of values.","enum":["UNSPECIFIED","UNKNOWN","IO_MAPPING_ERROR","JOB_NO_RETRIES","EXECUTION_LISTENER_NO_RETRIES","CONDITION_ERROR","EXTRACT_VALUE_ERROR","CALLED_ELEMENT_ERROR","UNHANDLED_ERROR_EVENT","MESSAGE_SIZE_EXCEEDED","CALLED_DECISION_ERROR","DECISION_EVALUATION_ERROR","FORM_NOT_FOUND"]}}></SchemaItem><SchemaItem collapsible={false} name={"errorMessage"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error message which describes the error in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node ID associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"creationTime"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"Date of incident creation.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ACTIVE`, `MIGRATED`, `RESOLVED`, `PENDING`]"} schema={{"type":"string","description":"State of this incident with a defined set of values.","enum":["ACTIVE","MIGRATED","RESOLVED","PENDING"]}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID of the incident.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"incidentKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process definition key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The flow node instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The job key, if exists, associated with this incident.","format":"int64"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"incidentKey\": 0,\n  \"processDefinitionKey\": 0,\n  \"processInstanceKey\": 0,\n  \"flowNodeInstanceKey\": 0,\n  \"jobKey\": 0,\n  \"processDefinitionId\": \"string\",\n  \"errorType\": \"UNSPECIFIED\",\n  \"errorMessage\": \"string\",\n  \"flowNodeId\": \"string\",\n  \"creationTime\": \"2025-01-16T15:06:56.459Z\",\n  \"state\": \"ACTIVE\",\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process definition ID associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"errorType"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`UNSPECIFIED`, `UNKNOWN`, `IO_MAPPING_ERROR`, `JOB_NO_RETRIES`, `EXECUTION_LISTENER_NO_RETRIES`, `CONDITION_ERROR`, `EXTRACT_VALUE_ERROR`, `CALLED_ELEMENT_ERROR`, `UNHANDLED_ERROR_EVENT`, `MESSAGE_SIZE_EXCEEDED`, `CALLED_DECISION_ERROR`, `DECISION_EVALUATION_ERROR`, `FORM_NOT_FOUND`]"} schema={{"type":"string","description":"Incident error type with a defined set of values.","enum":["UNSPECIFIED","UNKNOWN","IO_MAPPING_ERROR","JOB_NO_RETRIES","EXECUTION_LISTENER_NO_RETRIES","CONDITION_ERROR","EXTRACT_VALUE_ERROR","CALLED_ELEMENT_ERROR","UNHANDLED_ERROR_EVENT","MESSAGE_SIZE_EXCEEDED","CALLED_DECISION_ERROR","DECISION_EVALUATION_ERROR","FORM_NOT_FOUND"]}}></SchemaItem><SchemaItem collapsible={false} name={"errorMessage"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error message which describes the error in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node ID associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"creationTime"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"Date of incident creation.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ACTIVE`, `MIGRATED`, `RESOLVED`, `PENDING`]"} schema={{"type":"string","description":"State of this incident with a defined set of values.","enum":["ACTIVE","MIGRATED","RESOLVED","PENDING"]}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID of the incident.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"incidentKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The assigned key, which acts as a unique identifier for this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process definition key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The job key, if exists, associated with this incident."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"incidentKey\": \"string\",\n  \"processDefinitionKey\": \"string\",\n  \"processInstanceKey\": \"string\",\n  \"flowNodeInstanceKey\": \"string\",\n  \"jobKey\": \"string\",\n  \"processDefinitionId\": \"string\",\n  \"errorType\": \"UNSPECIFIED\",\n  \"errorMessage\": \"string\",\n  \"flowNodeId\": \"string\",\n  \"creationTime\": \"2025-01-16T15:06:56.459Z\",\n  \"state\": \"ACTIVE\",\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The incident request failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-The incident with the given key was not found. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The incident is successfully returned.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              processDefinitionId: {
+                type: "string",
+                description:
+                  "The process definition ID associated to this incident.",
+              },
+              errorType: {
+                type: "string",
+                description:
+                  "Incident error type with a defined set of values.",
+                enum: [
+                  "UNSPECIFIED",
+                  "UNKNOWN",
+                  "IO_MAPPING_ERROR",
+                  "JOB_NO_RETRIES",
+                  "EXECUTION_LISTENER_NO_RETRIES",
+                  "TASK_LISTENER_NO_RETRIES",
+                  "CONDITION_ERROR",
+                  "EXTRACT_VALUE_ERROR",
+                  "CALLED_ELEMENT_ERROR",
+                  "UNHANDLED_ERROR_EVENT",
+                  "MESSAGE_SIZE_EXCEEDED",
+                  "CALLED_DECISION_ERROR",
+                  "DECISION_EVALUATION_ERROR",
+                  "FORM_NOT_FOUND",
+                ],
+              },
+              errorMessage: {
+                type: "string",
+                description:
+                  "Error message which describes the error in more detail.",
+              },
+              flowNodeId: {
+                type: "string",
+                description: "The flow node ID associated to this incident.",
+              },
+              creationTime: {
+                type: "string",
+                description: "Date of incident creation.",
+                format: "date-time",
+              },
+              state: {
+                type: "string",
+                description:
+                  "State of this incident with a defined set of values.",
+                enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+              },
+              tenantId: {
+                description: "The tenant ID of the incident.",
+                type: "string",
+              },
+              incidentKey: {
+                type: "string",
+                description:
+                  "The assigned key, which acts as a unique identifier for this incident.",
+              },
+              processDefinitionKey: {
+                type: "string",
+                description:
+                  "The process definition key associated to this incident.",
+              },
+              processInstanceKey: {
+                type: "string",
+                description:
+                  "The process instance key associated to this incident.",
+              },
+              flowNodeInstanceKey: {
+                type: "string",
+                description:
+                  "The flow node instance key associated to this incident.",
+              },
+              jobKey: {
+                type: "string",
+                description:
+                  "The job key, if exists, associated with this incident.",
+              },
+            },
+            title: "IncidentResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The incident request failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The incident with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

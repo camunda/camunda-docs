@@ -5,79 +5,314 @@ description: "Complete a job with the given payload, which allows completing the
 sidebar_label: "Complete job"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: eJztWVtz27YS/is7eOmNpmjXPkn45uMkrXPa1OPL6UwdzwQkVxJsEGAB0DJHo/9+ZgFSpCTaTtqeN2fGE1vY++63WGGXzPGZZek1+6AzdhMxXaHhTmh1WrCU5bqsJDqkw4gVaHMjKjplKTtpz4DDrc5gIdwc3BxhJu5RQcUbqXkRwWIu8jlwKfXCQitPqJkn5dbqXHCHBVg09yJHcNzexZ8Ui1jFDS/RoSHzlkzxElnKbnX2H2xYxATZUHE3ZxEz+GctDBYsdabGbUMv5wh32ICeeqVkrNOdKRiziNl8jiVn6ZK5piIt1hmhZmy1ugnC0bp/66Ihil7XlEuLEcu1cqgcnfGqkiL34ZvcWlK+3JWts1vMHTloKNhOoKXTe24Ez2T4gxeFIClcng2IHnNuzTr0a+0rJYac3FavaimJK8hdkaO2lm7M0k3SMRMCbxfizobCG8AtFJTHUigsIGs8yUKbOzQxXM6FhWmt8uCucA0IC3ltDConG7B1VWlDorSSDXHXFo0vE5DCOlRobFswG/EsUAnK0tqbTGuJXO3U8akqKGdoYTFHNyfha/vAS7HrTyIQMcaAD5RnQfYVGq36xgGvKqPvEYSL4b02gA+cYhABHzEYcq5IdDOMltCK4scDadaARdcihUIk+YzSSwmI4VSFT9daHpUjLBisDFpULkQ/wNXNuRs6ShatS8dnjMIXw7EF3mZ3R0uLjKCDSgUL4KrwZF65wZILZYHnTtxjDG9xymvpfJ169ITE7VRiUH6OvMXQJirH649ogXIgir7KRkI/1T6rTdeDyP94zIhcG4O+LO0YJjZt+HDx20cIZ6ETcueMyGrni4c7WKCh2HmROyj4pD4p8mKqqU2SZQN2ykw24I2g7w5DuoWQkgjFTGmDRUpCv4fP3FoxU4ifYQ9yidyQ7hAnr0gBlpVr4MIH17MUNb7l7ms4guFX1Vey5VwVouAOfzK6ruxznJTDTb4ri+bL2SojtBGuIYZSKFHWJSQRlPzB/7qfJBEUoUThKKH4nQ2ktReItrgZdUo2fKby+Qz3XNYI2oAuRQCvcODRZ+7RflKU8wqNpWIsejHf2MA5Boftvtbl83lcHLeUXVf2V+so3EK+xyROtSm5YymjaO85UeIo/IoagSieVTUslL+hL4jZq6sv07pZLwO93BjejGqgoiG5a1bfS+y2KuGwtCODw1NGhGL/i1bMPPPfMKMDwYBaKIczNMPwC+V+PBg1qePfNqEFFEuTiLWIYilBatuEVcSccPQnzZzn/mo5GfTaUYLtT0/Wt9B5uITYarUKM0yllQ1QOUgOwySw7YMfi7gdzCm2znO0dlpL2cQUt8MkeYJ3c9al4TLnSmkXGnUrNIZftUGafbiQFrjB/n4SyvN35kKmiyag/5FxsjI6k1j+sDtWboEezgJlq7e7lPyVToRZ0H59/v4E3hwevbr5du5cZdPJZLFYxGaa72EhnDaxNrOJmeb0Q3Tf0axGl1jJG3JzcAn1DQpshbmYityPKr5agjFUacG/p6fgcPpEX6iN2G10cHV+CqJA5cR0fbFvqPY8vrMT3jJduzSTXN2xvqyebadg67LkZl35mwpWEbOOu9r+VWD9fHl5BkEE5LpAP6n4Ka9VtIGyw2SIs38liR+bKONf4InyEyxXvBsWh+4IBWVft94xoazjKv+nMqONmIltvfEGxNsifhs8Ctg+fBLOu5AkhBMmp7pWRfwCrRdovUDrUWi9+SpoCdvdYAuj1czHFvtv7S833ws8X+D5z8HzaGwYPVZAUTZUh2gMfenMPQILenOVXjzNtJ3u9rXmBWsvWHvB2mNYW0WsRDfXtPyotPWlQzuGlE1udWYny7B/WE36Z1DaH9DzTrunqI1kKVsG5KzSyWQ519at0iU9Y68m95SWjbd+Og4I6ypH6pzLedC+m0E6oGVI59kJL2tVcHgN5+8uLuEn7nDBw5dYUrkp+nXyOhn/Wq+Ne0Ti8dkpBA9D/Q16QieWwD0qNhB/iWC/a7GY1/S4cEFsITwZcoPmuKYkrOui1eel+7d9T8Si9pf3XbV8+P3SJ5z62Xm/x3kXns231y4bO5Buf9BtPIYv0n1dbj0S949zA1R0r2vsIDk43Ete7R28udw/So/204PXcfJq/w+2/S72FOX2W9Z1p+lm5IlpeNg//CS+zoWaah/SFgy7yaFKpcdK73IS7+8C7+zU949cl2Wt/CWiZt2TaC8vl7V1lOSISZGjsj7y7UKvI/slnMB/g0bYj6lQA5q6u2Mm3LzO4lyXkzywrf/PpM4mtG2YtCrs5OT416uPb4/3fjk9effx4t3efpzE7iE8JRG2S66GdnTLj9vdXeeyvy//72vPtsIdPrhJJblQhDkfhmXbiq5pCWpZxNL1MnTQjW6itqNcs+Uy4xavjFyt6OM/azQNS69v+gbkO1YhLP3ebzQf9f3b83b5+R08v1QddaR78VSNb4Oypr9YxO6w6Ze7q5tVxObICzTewHB4EszYuyQRPfPOznUVdRzHeY6Ve4R2Y9Sh3rPu+2e/XVxSK2kXvqUuiNfwBW2a+SIYrKs16P1nSya5mtV85pfUXib9+x/4Yehh
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Complete job</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Complete job"}
+></Heading>
 
 <MethodEndpoint
   method={"post"}
   path={"/jobs/{jobKey}/completion"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Complete a job with the given payload, which allows completing the associated service task.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"jobKey","in":"path","required":true,"description":"The key of the job to complete.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>variables</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__nullable"}>nullable</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails
+  parameters={[
+    {
+      name: "jobKey",
+      in: "path",
+      required: true,
+      description: "The key of the job to complete.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
-The variables to complete the job with.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variables: {
+              additionalProperties: true,
+              description: "The variables to complete the job with.",
+              type: "object",
+              nullable: true,
+            },
+            result: {
+              type: "object",
+              nullable: true,
+              description:
+                "The result of the completed job as determined by the worker. This functionality is currently supported only by user task listeners.\n",
+              properties: {
+                denied: {
+                  type: "boolean",
+                  description:
+                    "Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.\n",
+                  nullable: true,
+                },
+                deniedReason: {
+                  type: "string",
+                  description:
+                    "The reason provided by the user task listener for denying the work.",
+                  nullable: true,
+                },
+                corrections: {
+                  type: "object",
+                  description:
+                    "JSON object with attributes that were corrected by the worker.\n\nThe following attributes can be corrected, additional attributes will be ignored:\n\n* `assignee` - clear by providing an empty String\n* `dueDate` - clear by providing an empty String\n* `followUpDate` - clear by providing an empty String\n* `candidateGroups` - clear by providing an empty list\n* `candidateUsers` - clear by providing an empty list\n* `priority` - minimum 0, maximum 100, default 50\n\nProviding any of those attributes with a `null` value or omitting it preserves\nthe persisted attribute's value.\n",
+                  nullable: true,
+                  properties: {
+                    assignee: {
+                      type: "string",
+                      description: "Assignee of the task.",
+                      nullable: true,
+                    },
+                    dueDate: {
+                      type: "string",
+                      format: "date-time",
+                      description: "The due date of the task.",
+                      nullable: true,
+                    },
+                    followUpDate: {
+                      type: "string",
+                      format: "date-time",
+                      description: "The follow-up date of the task.",
+                      nullable: true,
+                    },
+                    candidateUsers: {
+                      type: "array",
+                      description: "The list of candidate users of the task.",
+                      items: { type: "string" },
+                      nullable: true,
+                    },
+                    candidateGroups: {
+                      type: "array",
+                      description: "The list of candidate groups of the task.",
+                      items: { type: "string" },
+                      nullable: true,
+                    },
+                    priority: {
+                      type: "integer",
+                      format: "int32",
+                      description: "The priority of the task.",
+                      minimum: 0,
+                      maximum: 100,
+                      nullable: true,
+                    },
+                  },
+                  title: "JobResultCorrections",
+                },
+              },
+              title: "JobResult",
+            },
+          },
+          title: "JobCompletionRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><SchemaItem name={"property name*"} required={false} schemaName={"any"} qualifierMessage={undefined} schema={{"additionalProperties":true,"description":"The variables to complete the job with.","type":"object","nullable":true}} collapsible={false} discriminator={false}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>result</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__nullable"}>nullable</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The result of the completed job as determined by the worker. This functionality is currently supported only by user task listeners.
-
-</div><SchemaItem collapsible={false} name={"denied"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean","description":"Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.\n","nullable":true}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>corrections</strong><span className={"openapi-schema__name"}> object</span><span className={"openapi-schema__divider"}></span><span className={"openapi-schema__nullable"}>nullable</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-JSON object with attributes that were corrected by the worker.
-
-The following attributes can be corrected, additional attributes will be ignored:
-
-- `assignee` - clear by providing an empty String
-- `dueDate` - clear by providing an empty String
-- `followUpDate` - clear by providing an empty String
-- `candidateGroups` - clear by providing an empty list
-- `candidateUsers` - clear by providing an empty list
-- `priority` - minimum 0, maximum 100, default 50
-
-Providing any of those attributes with a `null` value or omitting it preserves
-the persisted attribute's value.
-
-</div><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Assignee of the task.","nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"dueDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time","description":"The due date of the task.","nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"followUpDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","format":"date-time","description":"The follow-up date of the task.","nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The list of candidate users of the task.","items":{"type":"string"},"nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The list of candidate groups of the task.","items":{"type":"string"},"nullable":true}}></SchemaItem><SchemaItem collapsible={false} name={"priority"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `<= 100`"} schema={{"type":"integer","format":"int32","description":"The priority of the task.","minimum":0,"maximum":100,"nullable":true}}></SchemaItem></div></details></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"204"} value={"204"}><div>
-
-The job was completed successfully.
-
-</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The job with the given key cannot be completed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-The job with the given key was not found.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"409"} value={"409"}><div>
-
-The job with the given key is in the wrong state currently. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The job was completed successfully." },
+    "400": {
+      description:
+        "The job with the given key cannot be completed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The job with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The job with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -83,7 +83,7 @@ You can also find more information on the supported [configuration variables](..
 
 A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors Bundle is available via `docker-compose.yaml`.
 
-:::warning
+:::danger
 While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](./helm-kubernetes/overview.md) in production.
 :::
 

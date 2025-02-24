@@ -5,88 +5,499 @@ description: "Search for incidents based on given criteria."
 sidebar_label: "Query incidents"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Query incidents</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query incidents"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/incidents/search"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/incidents/search"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Search for incidents based on given criteria.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-Pagination criteria.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                        },
+                        searchAfter: {
+                          description:
+                            "Items to search after. Correlates to the `lastSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          description:
+                            "Items to search before. Correlates to the `firstSortValues` property of a previous search response.",
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "incidentKey",
+                      "processDefinitionKey",
+                      "processDefinitionId",
+                      "processInstanceKey",
+                      "errorType",
+                      "errorMessage",
+                      "flowNodeId",
+                      "flowNodeInstanceKey",
+                      "creationTime",
+                      "state",
+                      "jobKey",
+                      "tenantId",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "IncidentSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The incident search filters.",
+              allOf: [
+                {
+                  description: "Incident search filter.",
+                  type: "object",
+                  properties: {
+                    processDefinitionId: {
+                      type: "string",
+                      description:
+                        "The process definition ID associated to this incident.",
+                    },
+                    errorType: {
+                      type: "string",
+                      description:
+                        "Incident error type with a defined set of values.",
+                      enum: [
+                        "UNSPECIFIED",
+                        "UNKNOWN",
+                        "IO_MAPPING_ERROR",
+                        "JOB_NO_RETRIES",
+                        "EXECUTION_LISTENER_NO_RETRIES",
+                        "TASK_LISTENER_NO_RETRIES",
+                        "CONDITION_ERROR",
+                        "EXTRACT_VALUE_ERROR",
+                        "CALLED_ELEMENT_ERROR",
+                        "UNHANDLED_ERROR_EVENT",
+                        "MESSAGE_SIZE_EXCEEDED",
+                        "CALLED_DECISION_ERROR",
+                        "DECISION_EVALUATION_ERROR",
+                        "FORM_NOT_FOUND",
+                      ],
+                    },
+                    errorMessage: {
+                      type: "string",
+                      description:
+                        "Error message which describes the error in more detail.",
+                    },
+                    flowNodeId: {
+                      type: "string",
+                      description:
+                        "The flow node ID associated to this incident.",
+                    },
+                    creationTime: {
+                      type: "string",
+                      description: "Date of incident creation.",
+                      format: "date-time",
+                    },
+                    state: {
+                      type: "string",
+                      description:
+                        "State of this incident with a defined set of values.",
+                      enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                    },
+                    tenantId: {
+                      description: "The tenant ID of the incident.",
+                      type: "string",
+                    },
+                    incidentKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this incident.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description:
+                        "The process definition key associated to this incident.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description:
+                        "The process instance key associated to this incident.",
+                    },
+                    flowNodeInstanceKey: {
+                      type: "string",
+                      description:
+                        "The flow node instance key associated to this incident.",
+                    },
+                    jobKey: {
+                      type: "string",
+                      description:
+                        "The job key, if exists, associated with this incident.",
+                    },
+                  },
+                  title: "IncidentFilter",
+                },
+              ],
+            },
+          },
+          title: "IncidentSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The index of items to start searching from.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"limit"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"description":"The maximum number of items to return in one request.","type":"integer","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search after. Correlates to the `lastSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"Items to search before. Correlates to the `firstSortValues` property of a previous search response.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Sort field criteria.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={true} schemaName={"string"} qualifierMessage={"**Possible values:** [`incidentKey`, `processDefinitionKey`, `processDefinitionId`, `processInstanceKey`, `errorType`, `errorMessage`, `flowNodeId`, `flowNodeInstanceKey`, `creationTime`, `state`, `jobKey`, `tenantId`]"} schema={{"description":"The field to sort by.","type":"string","enum":["incidentKey","processDefinitionKey","processDefinitionId","processInstanceKey","errorType","errorMessage","flowNodeId","flowNodeInstanceKey","creationTime","state","jobKey","tenantId"]}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"SortOrderEnum"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"description":"The order in which to sort the related field.","type":"string","enum":["ASC","DESC"],"default":"ASC","title":"SortOrderEnum"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>filter</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Incident search filter.
-
-</div><SchemaItem collapsible={false} name={"incidentKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process definition key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process definition ID associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"errorType"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`UNSPECIFIED`, `UNKNOWN`, `IO_MAPPING_ERROR`, `JOB_NO_RETRIES`, `CONDITION_ERROR`, `EXTRACT_VALUE_ERROR`, `CALLED_ELEMENT_ERROR`, `UNHANDLED_ERROR_EVENT`, `MESSAGE_SIZE_EXCEEDED`, `CALLED_DECISION_ERROR`, `DECISION_EVALUATION_ERROR`, `FORM_NOT_FOUND`]"} schema={{"type":"string","description":"Incident error type with a defined set of values.","enum":["UNSPECIFIED","UNKNOWN","IO_MAPPING_ERROR","JOB_NO_RETRIES","CONDITION_ERROR","EXTRACT_VALUE_ERROR","CALLED_ELEMENT_ERROR","UNHANDLED_ERROR_EVENT","MESSAGE_SIZE_EXCEEDED","CALLED_DECISION_ERROR","DECISION_EVALUATION_ERROR","FORM_NOT_FOUND"]}}></SchemaItem><SchemaItem collapsible={false} name={"errorMessage"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error message which describes the error in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node ID associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The flow node instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"creationTime"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"Date of incident creation.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ACTIVE`, `MIGRATED`, `RESOLVED`, `PENDING`]"} schema={{"type":"string","description":"State of this incident with a defined set of values.","enum":["ACTIVE","MIGRATED","RESOLVED","PENDING"]}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The job key, if exists, associated with this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID of the incident.","type":"string"}}></SchemaItem></div></details></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The incident search result.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching incidents.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"incidentKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The assigned key, which acts as a unique identifier for this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process definition key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The job key, if exists, associated with this incident."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"incidentKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"flowNodeInstanceKey\": \"string\",\n      \"jobKey\": \"string\",\n      \"processDefinitionId\": \"string\",\n      \"errorType\": \"UNSPECIFIED\",\n      \"errorMessage\": \"string\",\n      \"flowNodeId\": \"string\",\n      \"creationTime\": \"2025-01-16T15:06:56.455Z\",\n      \"state\": \"ACTIVE\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.number+json"} value={"application/vnd.camunda.api.keys.number+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching incidents.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"incidentKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process definition key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The process instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The flow node instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"The job key, if exists, associated with this incident.","format":"int64"}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"incidentKey\": 0,\n      \"processDefinitionKey\": 0,\n      \"processInstanceKey\": 0,\n      \"flowNodeInstanceKey\": 0,\n      \"jobKey\": 0,\n      \"processDefinitionId\": \"string\",\n      \"errorType\": \"UNSPECIFIED\",\n      \"errorMessage\": \"string\",\n      \"flowNodeId\": \"string\",\n      \"creationTime\": \"2025-01-16T15:06:56.456Z\",\n      \"state\": \"ACTIVE\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem><TabItem label={"application/vnd.camunda.api.keys.string+json"} value={"application/vnd.camunda.api.keys.string+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>page</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Pagination information about the search results.
-
-</div><SchemaItem collapsible={false} name={"totalItems"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"Total items matching the criteria.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"firstSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem><SchemaItem collapsible={false} name={"lastSortValues"} required={false} schemaName={"object[]"} qualifierMessage={undefined} schema={{"description":"The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.","type":"array","items":{"type":"object"}}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>items</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-The matching incidents.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"incidentKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The assigned key, which acts as a unique identifier for this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process definition key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The process instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"flowNodeInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The flow node instance key associated to this incident."}}></SchemaItem><SchemaItem collapsible={false} name={"jobKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The job key, if exists, associated with this incident."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"items\": [\n    {\n      \"incidentKey\": \"string\",\n      \"processDefinitionKey\": \"string\",\n      \"processInstanceKey\": \"string\",\n      \"flowNodeInstanceKey\": \"string\",\n      \"jobKey\": \"string\",\n      \"processDefinitionId\": \"string\",\n      \"errorType\": \"UNSPECIFIED\",\n      \"errorMessage\": \"string\",\n      \"flowNodeId\": \"string\",\n      \"creationTime\": \"2025-01-16T15:06:56.457Z\",\n      \"state\": \"ACTIVE\",\n      \"tenantId\": \"string\"\n    }\n  ],\n  \"page\": {\n    \"totalItems\": 0,\n    \"firstSortValues\": [\n      {}\n    ],\n    \"lastSortValues\": [\n      {}\n    ]\n  }\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The incident search query failed. More details are provided in the response body.
-
-</div><div></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The incident search result.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          firstSortValues: {
+                            description:
+                              "The sort values of the first item in the result set. Use this in the `searchBefore` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            description:
+                              "The sort values of the last item in the result set. Use this in the `searchAfter` field of an ensuing request.",
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching incidents.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    processDefinitionId: {
+                      type: "string",
+                      description:
+                        "The process definition ID associated to this incident.",
+                    },
+                    errorType: {
+                      type: "string",
+                      description:
+                        "Incident error type with a defined set of values.",
+                      enum: [
+                        "UNSPECIFIED",
+                        "UNKNOWN",
+                        "IO_MAPPING_ERROR",
+                        "JOB_NO_RETRIES",
+                        "EXECUTION_LISTENER_NO_RETRIES",
+                        "TASK_LISTENER_NO_RETRIES",
+                        "CONDITION_ERROR",
+                        "EXTRACT_VALUE_ERROR",
+                        "CALLED_ELEMENT_ERROR",
+                        "UNHANDLED_ERROR_EVENT",
+                        "MESSAGE_SIZE_EXCEEDED",
+                        "CALLED_DECISION_ERROR",
+                        "DECISION_EVALUATION_ERROR",
+                        "FORM_NOT_FOUND",
+                      ],
+                    },
+                    errorMessage: {
+                      type: "string",
+                      description:
+                        "Error message which describes the error in more detail.",
+                    },
+                    flowNodeId: {
+                      type: "string",
+                      description:
+                        "The flow node ID associated to this incident.",
+                    },
+                    creationTime: {
+                      type: "string",
+                      description: "Date of incident creation.",
+                      format: "date-time",
+                    },
+                    state: {
+                      type: "string",
+                      description:
+                        "State of this incident with a defined set of values.",
+                      enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                    },
+                    tenantId: {
+                      description: "The tenant ID of the incident.",
+                      type: "string",
+                    },
+                    incidentKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this incident.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description:
+                        "The process definition key associated to this incident.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description:
+                        "The process instance key associated to this incident.",
+                    },
+                    flowNodeInstanceKey: {
+                      type: "string",
+                      description:
+                        "The flow node instance key associated to this incident.",
+                    },
+                    jobKey: {
+                      type: "string",
+                      description:
+                        "The job key, if exists, associated with this incident.",
+                    },
+                  },
+                  title: "IncidentResult",
+                },
+              },
+            },
+            title: "IncidentSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The incident search query failed. More details are provided in the response body.\n",
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -156,7 +156,7 @@ Existing Git configurations can be edited from the gear icon beside the **Sync w
 To switch from GitHub to GitLab, or vice versa, update your configuration with the following steps:
 
 1. Disconnect your current Git provider by clicking the gear icon beside the **Sync with GitHub** or **Sync with GitLab** button, and clicking the **Delete provider connection** button at the bottom of the modal.
-2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md/?platform=github#connect-to-a-remote-repository) or [GitLab](./git-sync.md/?platform=gitlab#connect-to-a-remote-repository).
+2. After confirming the operation, open the **Connect repository** modal and provide the necessary information for the new Git provider, following the steps outlined for [GitHub](./git-sync.md?platform=github#connect-to-a-remote-repository) or [GitLab](./git-sync.md?platform=gitlab#connect-to-a-remote-repository).
 
 ## Advanced use cases
 
@@ -178,7 +178,7 @@ Git sync supports parallel feature development by allowing multiple process appl
 
 To use Git sync for parallel feature development:
 
-1. Create a new [process application](/docs/components/modeler/web-modeler/create-a-process-application.md) in Modeler for each active feature branch you want to develop.
+1. Create a new [process application](/components/modeler/web-modeler/create-a-process-application.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
 3. Work on your feature in Modeler, using **Sync with GitHub** or **Sync with GitLab** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.

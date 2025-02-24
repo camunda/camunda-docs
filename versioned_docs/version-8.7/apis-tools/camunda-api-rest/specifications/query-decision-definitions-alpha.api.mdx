@@ -1,0 +1,759 @@
+---
+id: query-decision-definitions-alpha
+title: "Query decision definitions (alpha)"
+description: "Search for decision definitions based on given criteria."
+sidebar_label: "Query decision definitions (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query decision definitions (alpha)"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/decision-definitions/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for decision definitions based on given criteria.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+for further details.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionDefinitionFilterRequest",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The DMN id of the decision definition.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision definition.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision definition.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN id of the decision requirements graph that the decision definition is part of.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant id of the decision definition.",
+                        },
+                      },
+                      title: "DecisionDefinitionFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    decisionDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision definition.",
+                    },
+                    decisionRequirementsKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key of the decision requirements graph that the decision definition is part of.",
+                    },
+                  },
+                  title: "DecisionDefinitionFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "DecisionDefinitionSearchQuery",
+        },
+      },
+      "application/vnd.camunda.api.keys.number+json": {
+        schema: {
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionDefinitionFilterRequest",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The DMN id of the decision definition.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision definition.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision definition.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN id of the decision requirements graph that the decision definition is part of.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant id of the decision definition.",
+                        },
+                      },
+                      title: "DecisionDefinitionFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    decisionDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision definition.",
+                    },
+                    decisionRequirementsKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key of the decision requirements graph that the decision definition is part of.",
+                    },
+                  },
+                  title: "DecisionDefinitionFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "DecisionDefinitionSearchQueryRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.string+json": {
+        schema: {
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for DecisionDefinitionFilterRequest",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The DMN id of the decision definition.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision definition.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision definition.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN id of the decision requirements graph that the decision definition is part of.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant id of the decision definition.",
+                        },
+                      },
+                      title: "DecisionDefinitionFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    decisionDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision definition.",
+                    },
+                    decisionRequirementsKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key of the decision requirements graph that the decision definition is part of.",
+                    },
+                  },
+                  title: "DecisionDefinitionFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "DecisionDefinitionSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The Decision Definition Search successful response.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for DecisionDefinitionItem",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The DMN id of the decision definition.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision definition.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision definition.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN id of the decision requirements graph that the decision definition is part of.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant id of the decision definition.",
+                        },
+                      },
+                      title: "DecisionDefinitionItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionDefinitionKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision definition.",
+                    },
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key of the decision requirements graph that the decision definition is part of.",
+                    },
+                  },
+                  title: "DecisionDefinitionResult",
+                },
+              },
+            },
+            title: "DecisionDefinitionSearchQueryResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for DecisionDefinitionItem",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The DMN id of the decision definition.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision definition.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision definition.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN id of the decision requirements graph that the decision definition is part of.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant id of the decision definition.",
+                        },
+                      },
+                      title: "DecisionDefinitionItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionDefinitionKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision definition.",
+                    },
+                    decisionRequirementsKey: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The assigned key of the decision requirements graph that the decision definition is part of.",
+                    },
+                  },
+                  title: "DecisionDefinitionItem",
+                },
+              },
+            },
+            title: "DecisionDefinitionSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for DecisionDefinitionItem",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          type: "string",
+                          description: "The DMN id of the decision definition.",
+                        },
+                        decisionDefinitionName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision definition.",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned version of the decision definition.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "the DMN id of the decision requirements graph that the decision definition is part of.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant id of the decision definition.",
+                        },
+                      },
+                      title: "DecisionDefinitionItemBase",
+                    },
+                  ],
+                  properties: {
+                    decisionDefinitionKey: {
+                      type: "string",
+                      description:
+                        "The assigned key, which acts as a unique identifier for this decision definition.",
+                    },
+                    decisionRequirementsKey: {
+                      type: "string",
+                      description:
+                        "The assigned key of the decision requirements graph that the decision definition is part of.",
+                    },
+                  },
+                  title: "DecisionDefinitionResult",
+                },
+              },
+            },
+            title: "DecisionDefinitionSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The Decision Definition Search Query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
