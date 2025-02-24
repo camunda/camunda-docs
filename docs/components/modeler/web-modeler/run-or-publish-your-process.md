@@ -43,7 +43,7 @@ In Self-Managed, you can deploy your diagram to the cluster defined in your Web 
 
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
-  If you are using [`versionTag` binding](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
+  If you are using [`versionTag` binding](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
   :::tip
   Consider using a [process application](process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
   :::
@@ -113,7 +113,7 @@ To schedule a process using a timer, follow these steps:
 
 <img src={ConvertToTimerImg} style={{width: 600}} alt="Converting the start event to a timer start event" />
 
-3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
+3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** on the right side of the screen under the **Deploy** button to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
 
 4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
 

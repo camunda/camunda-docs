@@ -1,0 +1,267 @@
+---
+id: update-a-job
+title: "Update a job"
+description: "Update a job with the given key."
+sidebar_label: "Update a job"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "patch api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update a job"}
+></Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/jobs/{jobKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Update a job with the given key.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "jobKey",
+      in: "path",
+      required: true,
+      description: "The key of the job to update.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            changeset: {
+              description:
+                "JSON object with changed job attribute values.\n\nThe following attributes can be adjusted with this endpoint, additional attributes\nwill be ignored:\n\n* `retries` - The new amount of retries for the job; must be a positive number.\n* `timeout` - The duration of the new timeout in ms, starting from the current moment.\n\nProviding any of those attributes with a null value or omitting it preserves the persisted attribute’s value.\n\nThe job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead.\n",
+              type: "object",
+              properties: {
+                retries: {
+                  type: "integer",
+                  format: "int32",
+                  description:
+                    "The new amount of retries for the job; must be a positive number.",
+                  nullable: true,
+                },
+                timeout: {
+                  type: "integer",
+                  format: "int64",
+                  description:
+                    "The duration of the new timeout in ms, starting from the current moment.",
+                  nullable: true,
+                },
+              },
+              title: "JobChangeset",
+            },
+          },
+          required: ["changeset"],
+          title: "JobUpdateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The job was updated successfully." },
+    "400": {
+      description: "The provided data is not valid.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The job with the jobKey is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The job with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

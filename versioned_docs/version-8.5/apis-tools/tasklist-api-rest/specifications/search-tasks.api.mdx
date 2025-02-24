@@ -5,64 +5,479 @@ description: "Returns the list of tasks that satisfy search request params.<br/>
 sidebar_label: "Search tasks"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
-info_path: docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
+info_path: versioned_docs/version-8.5/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Search tasks</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search tasks"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/v1/tasks/search"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/tasks/search"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Returns the list of tasks that satisfy search request params.<br/><ul><li>If an empty body is provided, all tasks are returned.</li><li>Only one of `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]` search options must be present in request.</li></ul>
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"application/json"} value={"application/json-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"state"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`, `FAILED`]"} schema={{"type":"string","description":"The state of the tasks.","enum":["CREATED","COMPLETED","CANCELED","FAILED"]}}></SchemaItem><SchemaItem collapsible={false} name={"assigned"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean","description":"Are the tasks assigned?"}}></SchemaItem><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Who is assigned to the tasks?"}}></SchemaItem><SchemaItem collapsible={false} name={"assignees"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The assignee is one of the given assignees.","items":{"type":"string","description":"The assignee is one of the given assignees."}}}></SchemaItem><SchemaItem collapsible={false} name={"taskDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"What's the BPMN flow node?"}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroup"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Given group is in candidate groups list."}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"At least one of the given groups is in candidate groups list.","items":{"type":"string","description":"At least one of the given groups is in candidate groups list."}}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUser"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Given user is in candidate user list."}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"At least one of the given users is in candidate user list.","items":{"type":"string","description":"At least one of the given users is in candidate user list."}}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to process definition (renamed equivalent of TaskQuery.processDefinitionId field)."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to process instance (renamed equivalent of TaskQuery.processInstanceId field)"}}></SchemaItem><SchemaItem collapsible={false} name={"pageSize"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","description":"Size of tasks page (default = 50).","format":"int32"}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>followUpDate</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-A range of due dates for the tasks to search for.
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            state: {
+              type: "string",
+              description: "The state of the tasks.",
+              enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+            },
+            assigned: {
+              type: "boolean",
+              description: "Are the tasks assigned?",
+            },
+            assignee: {
+              type: "string",
+              description: "Who is assigned to the tasks?",
+            },
+            assignees: {
+              type: "array",
+              description: "The assignee is one of the given assignees.",
+              items: {
+                type: "string",
+                description: "The assignee is one of the given assignees.",
+              },
+            },
+            taskDefinitionId: {
+              type: "string",
+              description: "What's the BPMN flow node?",
+            },
+            candidateGroup: {
+              type: "string",
+              description: "Given group is in candidate groups list.",
+            },
+            candidateGroups: {
+              type: "array",
+              description:
+                "At least one of the given groups is in candidate groups list.",
+              items: {
+                type: "string",
+                description:
+                  "At least one of the given groups is in candidate groups list.",
+              },
+            },
+            candidateUser: {
+              type: "string",
+              description: "Given user is in candidate user list.",
+            },
+            candidateUsers: {
+              type: "array",
+              description:
+                "At least one of the given users is in candidate user list.",
+              items: {
+                type: "string",
+                description:
+                  "At least one of the given users is in candidate user list.",
+              },
+            },
+            processDefinitionKey: {
+              type: "string",
+              description:
+                "Reference to process definition (renamed equivalent of TaskQuery.processDefinitionId field).",
+            },
+            processInstanceKey: {
+              type: "string",
+              description:
+                "Reference to process instance (renamed equivalent of TaskQuery.processInstanceId field)",
+            },
+            pageSize: {
+              type: "integer",
+              description: "Size of tasks page (default = 50).",
+              format: "int32",
+            },
+            followUpDate: {
+              type: "object",
+              properties: {
+                from: {
+                  type: "string",
+                  description:
+                    "Start date range to search from in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.",
+                  format: "date-time",
+                },
+                to: {
+                  type: "string",
+                  description:
+                    "End date range to search to in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.",
+                  format: "date-time",
+                },
+              },
+              description: "A range of due dates for the tasks to search for.",
+              title: "DateFilter",
+            },
+            dueDate: {
+              type: "object",
+              properties: {
+                from: {
+                  type: "string",
+                  description:
+                    "Start date range to search from in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.",
+                  format: "date-time",
+                },
+                to: {
+                  type: "string",
+                  description:
+                    "End date range to search to in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.",
+                  format: "date-time",
+                },
+              },
+              description: "A range of due dates for the tasks to search for.",
+              title: "DateFilter",
+            },
+            taskVariables: {
+              type: "array",
+              description:
+                "An array of filter clauses specifying the variables to filter for.<br/>If defined, the query returns only tasks to which all clauses apply.<br/>However, it's important to note that this filtering mechanism is<br/>designed to work exclusively with truncated variables. This means<br/>variables of a larger size are not compatible with this filter, and<br/>attempts to use them may result in inaccurate or incomplete query results.",
+              items: {
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The name of the variable.",
+                  },
+                  value: {
+                    type: "string",
+                    description:
+                      "The value of the variable. When specifying the variable value, it's crucial to maintain consistency with JSON values (serialization for the complex objects such as list) and ensure that strings remain appropriately formatted.",
+                  },
+                  operator: {
+                    type: "string",
+                    description:
+                      "The comparison operator to use for the variable.<br/>* `eq`: Equals",
+                    enum: ["eq"],
+                  },
+                },
+                title: "TaskByVariables",
+              },
+            },
+            tenantIds: {
+              type: "array",
+              description:
+                "An array of Tenant IDs to filter tasks. When multi-tenancy is<br/>enabled, tasks associated with the specified tenant IDs are returned;<br/>if disabled, this parameter is ignored.",
+              items: { type: "string" },
+            },
+            sort: {
+              type: "array",
+              description:
+                "An array of objects specifying the fields to sort the results by.",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    type: "string",
+                    enum: [
+                      "completionTime",
+                      "creationTime",
+                      "followUpDate",
+                      "dueDate",
+                    ],
+                  },
+                  order: {
+                    type: "string",
+                    description: "* `ASC`: Ascending<br/>* `DESC`: Descending",
+                    enum: ["ASC", "DESC"],
+                  },
+                },
+                description: "Sort results by a specific field.",
+                title: "TaskOrderBy",
+              },
+            },
+            searchAfter: {
+              type: "array",
+              description:
+                "Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly follow the task identified by the provided values, with respect to the sorting order.",
+              items: { type: "string" },
+            },
+            searchAfterOrEqual: {
+              type: "array",
+              description:
+                "Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly follow or are equal to the task identified by the provided values, with respect to the sorting order.",
+              items: { type: "string" },
+            },
+            searchBefore: {
+              type: "array",
+              description:
+                "Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly precede the task identified by the provided values, with respect to the sorting order.",
+              items: { type: "string" },
+            },
+            searchBeforeOrEqual: {
+              type: "array",
+              description:
+                "Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly precede or are equal to the task identified by the provided values, with respect to the sorting order.",
+              items: { type: "string" },
+            },
+            includeVariables: {
+              type: "array",
+              description:
+                "An array used to specify a list of variable names that should be included in the response when querying tasks.<br/>This field allows users to selectively retrieve specific variables associated with the tasks returned in the search results.",
+              items: {
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The name of the variable.",
+                  },
+                  alwaysReturnFullValue: {
+                    type: "boolean",
+                    description:
+                      "Always return the full value of the variable?",
+                    default: false,
+                  },
+                },
+                title: "IncludeVariable",
+              },
+            },
+            implementation: {
+              type: "string",
+              enum: ["JOB_WORKER", "ZEEBE_USER_TASK"],
+            },
+          },
+          description: "Request object to search tasks by provided params.",
+          title: "TaskSearchRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"Start date range to search from in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"to"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"End date range to search to in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.","format":"date-time"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>dueDate</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-A range of due dates for the tasks to search for.
-
-</div><SchemaItem collapsible={false} name={"from"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"Start date range to search from in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"to"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"End date range to search to in date-time format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard.","format":"date-time"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>taskVariables</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-An array of filter clauses specifying the variables to filter for.<br/>If defined, the query returns only tasks to which all clauses apply.<br/>However, it's important to note that this filtering mechanism is<br/>designed to work exclusively with truncated variables. This means<br/>variables of a larger size are not compatible with this filter, and<br/>attempts to use them may result in inaccurate or incomplete query results.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the variable."}}></SchemaItem><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The value of the variable. When specifying the variable value, it's crucial to maintain consistency with JSON values (serialization for the complex objects such as list) and ensure that strings remain appropriately formatted."}}></SchemaItem><SchemaItem collapsible={false} name={"operator"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`eq`]"} schema={{"type":"string","description":"The comparison operator to use for the variable.<br/>* `eq`: Equals","enum":["eq"]}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={false} name={"tenantIds"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"An array of Tenant IDs to filter tasks. When multi-tenancy is<br/>enabled, tasks associated with the specified tenant IDs are returned;<br/>if disabled, this parameter is ignored.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>sort</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-An array of objects specifying the fields to sort the results by.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"field"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`completionTime`, `creationTime`, `followUpDate`, `dueDate`]"} schema={{"type":"string","enum":["completionTime","creationTime","followUpDate","dueDate"]}}></SchemaItem><SchemaItem collapsible={false} name={"order"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`ASC`, `DESC`]"} schema={{"type":"string","description":"* `ASC`: Ascending<br/>* `DESC`: Descending","enum":["ASC","DESC"]}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={false} name={"searchAfter"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly follow the task identified by the provided values, with respect to the sorting order.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchAfterOrEqual"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly follow or are equal to the task identified by the provided values, with respect to the sorting order.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBefore"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly precede the task identified by the provided values, with respect to the sorting order.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"searchBeforeOrEqual"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"Used to return a paginated result. Array of values that should be copied from sortValues of one of the tasks from the current search results page.<br/>It enables the API to return a page of tasks that directly precede or are equal to the task identified by the provided values, with respect to the sorting order.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>includeVariables</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-An array used to specify a list of variable names that should be included in the response when querying tasks.<br/>This field allows users to selectively retrieve specific variables associated with the tasks returned in the search results.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the variable."}}></SchemaItem><SchemaItem collapsible={false} name={"alwaysReturnFullValue"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean","description":"Always return the full value of the variable?","default":false}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={false} name={"implementation"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`JOB_WORKER`, `ZEEBE_USER_TASK`]"} schema={{"type":"string","enum":["JOB_WORKER","ZEEBE_USER_TASK"]}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-On success returned.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The unique identifier of the task."}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the task."}}></SchemaItem><SchemaItem collapsible={false} name={"taskDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"User Task ID from the BPMN definition."}}></SchemaItem><SchemaItem collapsible={false} name={"processName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the process."}}></SchemaItem><SchemaItem collapsible={false} name={"creationDate"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"When was the task created (renamed equivalent of `Task.creationTime` field)."}}></SchemaItem><SchemaItem collapsible={false} name={"completionDate"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"When was the task completed (renamed equivalent of `Task.completionTime` field)."}}></SchemaItem><SchemaItem collapsible={false} name={"assignee"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The username/id of who is assigned to the task."}}></SchemaItem><SchemaItem collapsible={false} name={"taskState"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`CREATED`, `COMPLETED`, `CANCELED`, `FAILED`]"} schema={{"type":"string","description":"The state of the task.","enum":["CREATED","COMPLETED","CANCELED","FAILED"]}}></SchemaItem><SchemaItem collapsible={false} name={"sortValues"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"Array of values to be copied into `TaskSearchRequest` to request for next or previous page of tasks.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"isFirst"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean","description":"A flag to show that the task is first in the current filter."}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to the task form."}}></SchemaItem><SchemaItem collapsible={false} name={"formId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to the ID of a deployed form. If the form is not deployed, this property is null."}}></SchemaItem><SchemaItem collapsible={false} name={"formVersion"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","description":"Reference to the version of a deployed form. If the form is not deployed, this property is null.","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"isFormEmbedded"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean","description":"Is the form embedded for this task? If there is no form, this property is null."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to process definition (renamed equivalent of `Task.processDefinitionId` field)."}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Reference to process instance id (renamed equivalent of `Task.processInstanceId` field)."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID associated with the task."}}></SchemaItem><SchemaItem collapsible={false} name={"dueDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The due date for the task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"followUpDate"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"type":"string","description":"The follow-up date for the task.","format":"date-time"}}></SchemaItem><SchemaItem collapsible={false} name={"candidateGroups"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate groups for the task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={false} name={"candidateUsers"} required={false} schemaName={"string[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The candidate users for the task.","items":{"type":"string"}}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>variables</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-An array of the task's variables. Only variables specified in `TaskSearchRequest.includeVariables` are returned.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={false} name={"id"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The unique identifier of the variable."}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The name of the variable."}}></SchemaItem><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The value of the variable."}}></SchemaItem><SchemaItem collapsible={false} name={"isValueTruncated"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"type":"boolean","description":"Does the `previewValue` contain the truncated value or full value?"}}></SchemaItem><SchemaItem collapsible={false} name={"previewValue"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A preview of the variable's value. Limited in size."}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={false} name={"implementation"} required={false} schemaName={"string"} qualifierMessage={"**Possible values:** [`JOB_WORKER`, `ZEEBE_USER_TASK`]"} schema={{"type":"string","enum":["JOB_WORKER","ZEEBE_USER_TASK"]}}></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"taskDefinitionId\": \"string\",\n    \"processName\": \"string\",\n    \"creationDate\": \"string\",\n    \"completionDate\": \"string\",\n    \"assignee\": \"string\",\n    \"taskState\": \"CREATED\",\n    \"sortValues\": [\n      \"string\"\n    ],\n    \"isFirst\": true,\n    \"formKey\": \"string\",\n    \"formId\": \"string\",\n    \"formVersion\": 0,\n    \"isFormEmbedded\": true,\n    \"processDefinitionKey\": \"string\",\n    \"processInstanceKey\": \"string\",\n    \"tenantId\": \"string\",\n    \"dueDate\": \"2024-04-03T03:24:08.865Z\",\n    \"followUpDate\": \"2024-04-03T03:24:08.865Z\",\n    \"candidateGroups\": [\n      \"string\"\n    ],\n    \"candidateUsers\": [\n      \"string\"\n    ],\n    \"variables\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"isValueTruncated\": true,\n        \"previewValue\": \"string\",\n        \"draft\": {\n          \"value\": \"string\",\n          \"isValueTruncated\": true,\n          \"previewValue\": \"string\"\n        }\n      }\n    ],\n    \"implementation\": \"JOB_WORKER\"\n  }\n]"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-An error is returned when more than one search parameters among `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]` are present in request
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","description":"An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.","format":"int32"}}></SchemaItem><SchemaItem collapsible={false} name={"message"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A string that provides a brief description of the error that occurred."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"Error instance UUID for lookup (e.g., in log messages)."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"status\": 0,\n  \"message\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "On success returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                id: {
+                  type: "string",
+                  description: "The unique identifier of the task.",
+                },
+                name: { type: "string", description: "The name of the task." },
+                taskDefinitionId: {
+                  type: "string",
+                  description: "User Task ID from the BPMN definition.",
+                },
+                processName: {
+                  type: "string",
+                  description: "The name of the process.",
+                },
+                creationDate: {
+                  type: "string",
+                  description:
+                    "When was the task created (renamed equivalent of `Task.creationTime` field).",
+                },
+                completionDate: {
+                  type: "string",
+                  description:
+                    "When was the task completed (renamed equivalent of `Task.completionTime` field).",
+                },
+                assignee: {
+                  type: "string",
+                  description:
+                    "The username/id of who is assigned to the task.",
+                },
+                taskState: {
+                  type: "string",
+                  description: "The state of the task.",
+                  enum: ["CREATED", "COMPLETED", "CANCELED", "FAILED"],
+                },
+                sortValues: {
+                  type: "array",
+                  description:
+                    "Array of values to be copied into `TaskSearchRequest` to request for next or previous page of tasks.",
+                  items: { type: "string" },
+                },
+                isFirst: {
+                  type: "boolean",
+                  description:
+                    "A flag to show that the task is first in the current filter.",
+                },
+                formKey: {
+                  type: "string",
+                  description: "Reference to the task form.",
+                },
+                formId: {
+                  type: "string",
+                  description:
+                    "Reference to the ID of a deployed form. If the form is not deployed, this property is null.",
+                },
+                formVersion: {
+                  type: "integer",
+                  description:
+                    "Reference to the version of a deployed form. If the form is not deployed, this property is null.",
+                  format: "int64",
+                },
+                isFormEmbedded: {
+                  type: "boolean",
+                  description:
+                    "Is the form embedded for this task? If there is no form, this property is null.",
+                },
+                processDefinitionKey: {
+                  type: "string",
+                  description:
+                    "Reference to process definition (renamed equivalent of `Task.processDefinitionId` field).",
+                },
+                processInstanceKey: {
+                  type: "string",
+                  description:
+                    "Reference to process instance id (renamed equivalent of `Task.processInstanceId` field).",
+                },
+                tenantId: {
+                  type: "string",
+                  description: "The tenant ID associated with the task.",
+                },
+                dueDate: {
+                  type: "string",
+                  description: "The due date for the task.",
+                  format: "date-time",
+                },
+                followUpDate: {
+                  type: "string",
+                  description: "The follow-up date for the task.",
+                  format: "date-time",
+                },
+                candidateGroups: {
+                  type: "array",
+                  description: "The candidate groups for the task.",
+                  items: { type: "string" },
+                },
+                candidateUsers: {
+                  type: "array",
+                  description: "The candidate users for the task.",
+                  items: { type: "string" },
+                },
+                variables: {
+                  type: "array",
+                  description:
+                    "An array of the task's variables. Only variables specified in `TaskSearchRequest.includeVariables` are returned. Note that a variable's draft value is not returned in `TaskSearchResponse`.",
+                  items: {
+                    type: "object",
+                    properties: {
+                      id: {
+                        type: "string",
+                        description: "The unique identifier of the variable.",
+                      },
+                      name: {
+                        type: "string",
+                        description: "The name of the variable.",
+                      },
+                      value: {
+                        type: "string",
+                        description: "The value of the variable.",
+                      },
+                      isValueTruncated: {
+                        type: "boolean",
+                        description:
+                          "Does the `previewValue` contain the truncated value or full value?",
+                      },
+                      previewValue: {
+                        type: "string",
+                        description:
+                          "A preview of the variable's value. Limited in size.",
+                      },
+                      draft: {
+                        type: "object",
+                        properties: {
+                          value: {
+                            type: "string",
+                            description: "The value of the variable.",
+                          },
+                          isValueTruncated: {
+                            type: "boolean",
+                            description:
+                              "Does the `previewValue` contain the truncated value or full value?",
+                          },
+                          previewValue: {
+                            type: "string",
+                            description:
+                              "A preview of the variable's value. Limited in size.",
+                          },
+                        },
+                        description: "The draft value of the variable.",
+                        title: "DraftSearchVariableValue",
+                      },
+                    },
+                    title: "VariableSearchResponse",
+                  },
+                },
+                implementation: {
+                  type: "string",
+                  enum: ["JOB_WORKER", "ZEEBE_USER_TASK"],
+                },
+              },
+              title: "TaskSearchResponse",
+            },
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "An error is returned when more than one search parameters among `[searchAfter, searchAfterOrEqual, searchBefore, searchBeforeOrEqual]` are present in request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

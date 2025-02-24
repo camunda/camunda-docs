@@ -28,17 +28,17 @@ You can configure the Connector runtime environment in the following ways:
 To use Camunda 8 SaaS specify the connection properties:
 
 ```bash
-CAMUNDA_CLIENT_CLUSTER-ID=xxx
-CAMUNDA_CLIENT_AUTH_CLIENT-ID=xxx
-CAMUNDA_CLIENT_AUTH_CLIENT-SECRET=xxx
+CAMUNDA_CLIENT_CLUSTERID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
 CAMUNDA_CLIENT_REGION=bru-2
 ```
 
 You can further configure separate connection properties for Camunda Operate (otherwise it will use the properties configured for Zeebe above):
 
 ```bash
-CAMUNDA_OPERATE_CLIENT_CLIENT-ID=xxx
-CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=xxx
+CAMUNDA_OPERATE_CLIENT_CLIENTID=xxx
+CAMUNDA_OPERATE_CLIENT_CLIENTSECRET=xxx
 ```
 
 If you are connecting a local Connector runtime to a SaaS cluster, you may want to review our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
@@ -198,6 +198,40 @@ Package this class and all its dependencies as a JAR, for example `my-secret-pro
 `META-INF/services/io.camunda.connector.api.secret.SecretProvider` that contains the fully qualified class name of your secret
 provider implementation. Add this JAR to the runtime environment, depending on your deployment setup.
 Your secret provider will serve secrets as implemented.
+
+To use this JAR with [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform), build an [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) to create a volume with your secret provider, and mount it into the Connectors pod.
+
+For example, use the following file as input for your `helm install` command:
+
+```bash
+connectors:
+  extraVolumes:
+    - name: workdir
+      emptyDir: {}
+  extraVolumeMounts:
+    # Mount the secret provider
+    # The Connectors pod will pick up the secret provider from /opt/app during startup
+    - name: workdir
+      mountPath: /opt/app/file-secret-provider-2.1.2.jar
+      subPath: file-secret-provider-2.1.2.jar
+  initContainers:
+    - name: install
+      image: busybox:1.36.1
+      command: ["sh", "-c"]
+      args:
+        # Download a the custom secret provider into the volume
+        - |
+          wget -O /work-dir/file-secret-provider-2.1.2.jar https://artifacts.camunda.com/artifactory/camunda-consulting/com/camunda/consulting/connector/file-secret-provider/2.1.2/file-secret-provider-2.1.2.jar
+      volumeMounts:
+        - name: workdir
+          mountPath: "/work-dir"
+      securityContext:
+        runAsUser: 1000
+        # redundant as 1000 is not root but good to have
+        # as the runtime will do verification that no process will
+        # run as root within the container
+        runAsNonRoot: true
+```
 
 For Docker images, you can add the JAR by using volumes, for example:
 

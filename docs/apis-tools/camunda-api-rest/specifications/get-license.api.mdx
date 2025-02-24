@@ -1,44 +1,123 @@
 ---
 id: get-license
 title: "Get license status"
-description: "Obtains the status of the current Camunda license"
+description: "Obtains the status of the current Camunda license."
 sidebar_label: "Get license status"
 hide_title: true
 hide_table_of_contents: true
-api: eJytVt9v2zYQ/lcIPm2YYjldu2UC9mCkaZah7YLEWR+yPFDU2bqWIlXyFMcQ9L8PR0mO4x9bMezBsGWS33ff3XdHtZLUMsjsXr5HDTaAfEikq8ErQmevCpnJJdC4lsgCgvZY86LM5B85KbRBUAkikKImCLeIT7rxHiyJc1U1tlDCbBA8hNrZAEFmrXw1nfLXcdQR5yX6Pqp2lsASg6m6Nqhj/OnnwIitDLqESu1TzUsQY0AMvoEUHr42EGgiE0nrGmQmXf4ZNMlE1p4TRNhLeFQGizFB+wS+AYEHoxYYRDyciIUyIW5zVIJfYZQ00ObOGVBWJtI2xqjcgMzi/i6RA9I87tyl/oTGCA/UeBvpR1rGFYOG9fGMDvSBPNql7BKJ4dxVFXiNyhxhy2GQsirBbiWTqxNLqoR19kRHHNTK/EqcnzGYfdFdIuGpRg9hRoerVyga6A6leDi8JyeRC+crRTKTDHBCWMGLDHNcXZdIQuLHsTtuBq/IruPVN4fsO7MCLYG3ygjw3nnhdLRxIVYlmihXQwholzHm0Wl/2eM+rr3LDVQ//JufZ+K63ykKIIVG9KYVKoh+Yw6FQCvub96di19ev/n54buSqA5Zmq5Wq4lf6BMokJyfOL9M/ULzh/d9PxHzEjyISq25zKookDmVEc/tIEINGheoBbkobQg7Wq7X98+9RIORjxar8bg3hGbi7uZKYAGWcLEes/qCOp5ZqMYwhspdQ1lulP0inyu8T7rLEpqqUn7TMS8JukT2I2oLiV2wBL8dP1r68dUeNvv4t/n8epxy2hUgFs4LKjGMRCyiQotVU8ns9XSayEo99U8/TacdY3LFv0GJ5bYwykZr7cpBKyrnYfBPFIY2kLL6/6qM87jEXd6J3O62wcRve0Vd32wVUOmGC4mdo6iUmUyfJ1YA/wieL7NWNt7ITLZ9n3RZmralC9Rlbe08dekjF+FReeRujzXj5b6fRp8Yp5WJfx+qFy9YVcHuAD0TNxe3c3GpCFZqHfPHlC+hz6Zn04OovPUI4uz6SvQKe7dtTYARllv5IGy/+VuAu+6BE6kbj7S+5WN9enJQHvys4ZxvXDDwRfQ4teMmmQw/3o3e+P3TPJYX7cLF40OZ9wPhqoAPfeTTyem+pa6vYmfwFdLYOB7tUqyQSqG2hGnTBGJBmzuSebleW7TDTBd/9ozidMJF6Z0zTsUlUtnkE+2qVPfHNt+5cXlaKbSjBUN6Pvtw9/Ht7OT91fnFx9uLk9PJdEJPFMXXLlCl7FYcl0Cbi2oYHjty2+f74D+9aw11IniitDYK44UaBbZD/9xv8vOQDD1wL9s2VwHuvOk6/vtrA34ts/uH55bhpy6RJagCfGy4L7Dm8mgNNcXeMg1T772Msb82nXx5wcb4G6S+o1I=
+api: eJytVt9v2zYQ/leIe9owxXK6dssE7MFI0yxD2wWJsz5keaCos8WWIlXyFMcw9L8PR0n+7a0Y9mDYMsnvu+/uu6NWQHIeIHuE91qhDQhPCbgavSTt7E0BGcyRhrUECgzK65oXIYM/cpLaBkElikCSmiDcLD6pxnu0JC5l1dhCCtMhjCABj6F2NmCAbAWvxmP+Og07AO3CH4FVzhJaYjRZ10arqCD9HBhyBUGVWMlDrmmJYoiI0deYwuPXBgMxNi1rhAxc/hkVQQK15xSR7jQ8S6OLIUWHBL5BoY+GLXQQ8XAiZtKEuM1RiX6hY7J72tw5g9JCArYxRuYGIYv72wR6pGncuU/9SRsjPFLjbaQfaBlX9BqWJ1K6oQ/ktZ1Dm4AOl66q0CstzQm2HHspixLtVjK5OrGmUlhnz1TE0UqaX4nzMwRzKLpNAF9q7TFM6Hj1Ckk93bEU94cP5CQwc76SBBkwwBnpCncyzHG1bQKkiR+H/rjrvQJty6tvjvl3YoW2hN5KI9B754VT0ceFWJTaRLkKQ9B2HmMenPaXPe3j2rvcYPXDv/l5Im67naJAktqIzrRCBtFtzLEQ2orHu3eX4pfXb35++q4kqkOWpovFYuRn6gwLTc6PnJ+nfqb4w/u+H4lpiR5FJZdcZlkUmjmlEZt2EKFGpWdaCXJRWh92tFyn7597iXojnyxW4/XBGJqIh7sboQu0pGfLIas71PHMTDaGMWTuGspyI+0X2FT4kHSfJTRVJf26Y3YJ2gS6GbWFxC6Yo9+OX1v68dUBNvv4t+n0dhhzyhUoZs4LKnUYiFhEpa2umgqy1+NxApV86Z5+Go9bxuSKf4MSy21hpI3W2pejraicx94/UZi2gaRV/1dlnNdzvc87gu1u6038tlPUds1WIZWuv5LYOZJKyCDdTKyA/hk9X2craLyBDFZdn7RZmq5KF6jNVrXz1KbPXIRn6TV3e6wZL3f9NPjEOCVN/PtYvXjBygr3B+iFuLu6n4prSbiQy5g/ptyFvhhfjI+i8tYTiJPbG9Ep7Ny2NQEGWG7lo7Dd5m8BbtsnTqRqvKblPR/r0pOj9OgnDed87YKeL6LHqR03QdL/eDd44/dP01hebWcuHu/LfBgIVwV96CIfj84PLXV7EzuDr5DGxvFo52KhqRRyS5gyTSAWtL4jmZfrtUXbz3TxZ8cozkdclM45w1ScayqbfKRclaru2Po7Ny5PK6ntYMGQXk4+PHx8Ozl7f3N59fH+6ux8NB7RC0XxtQtUSbsVxzXS+qLqh8ee3NXmPvhvb1t9oQhfKK2N1PFGjQpXfQM9rhP0lPRN8AirVS4DPnjTtvz31wb9ErLHp03P8FObQImyQB877gsuuT5KYU2xuUzD1AdvY2ywdStfX7Ez/gYsoqPc
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Get license status</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get license status"}
+></Heading>
 
-<MethodEndpoint method={"get"} path={"/license"}></MethodEndpoint>
+<MethodEndpoint
+  method={"get"}
+  path={"/license"}
+  context={"endpoint"}
+></MethodEndpoint>
 
-Obtains the status of the current Camunda license
+Obtains the status of the current Camunda license.
 
-## Request
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-<div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
-Obtains the current status of the Camunda license
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"validLicense"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"True if the Camunda license is valid, false if otherwise","type":"boolean","nullable":false}}></SchemaItem><SchemaItem collapsible={false} name={"licenseType"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Will return the license type property of the Camunda license","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"isCommercial"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Will be false when a license contains a non-commerical=true property","type":"boolean"}}></SchemaItem><SchemaItem collapsible={false} name={"expiresAt"} required={false} schemaName={"date-time"} qualifierMessage={undefined} schema={{"description":"The date when the Camunda license expires","type":"string","format":"date-time","nullable":true}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"validLicense\": true,\n  \"licenseType\": \"string\",\n  \"isCommercial\": true,\n  \"expiresAt\": \"2025-01-30T15:06:59.398Z\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Obtains the current status of the Camunda license.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The response of a license request.",
+            type: "object",
+            properties: {
+              validLicense: {
+                description:
+                  "True if the Camunda license is valid, false if otherwise",
+                type: "boolean",
+                nullable: false,
+              },
+              licenseType: {
+                description:
+                  "Will return the license type property of the Camunda license",
+                type: "string",
+              },
+              isCommercial: {
+                description:
+                  "Will be false when a license contains a non-commerical=true property",
+                type: "boolean",
+              },
+              expiresAt: {
+                description: "The date when the Camunda license expires",
+                type: "string",
+                format: "date-time",
+                nullable: true,
+              },
+            },
+            title: "LicenseResponse",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -46,13 +46,19 @@ module.exports = {
       ],
     },
     {
-      "Migrate from Camunda 7": [
-        "guides/migrating-from-camunda-7/index",
+      type: "category",
+      label: "Migrate from Camunda 7",
+      link: {
+        type: "doc",
+        id: "guides/migrating-from-camunda-7/index",
+      },
+      items: [
+        "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-tooling",
+        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-7/adjusting-source-code",
+        "guides/migrating-from-camunda-7/technical-details",
       ],
     },
   ],
@@ -703,10 +709,31 @@ module.exports = {
             id: "components/early-access/alpha/alpha-features",
           },
           items: [
-            "components/early-access/alpha/sap/sap-integration",
-            "components/early-access/alpha/sap/odata-connector",
-            "components/early-access/alpha/sap/rfc-connector",
-            "components/early-access/alpha/sap/btp-integration",
+            {
+              type: "category",
+              label: "SAP",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/sap/sap-integration",
+              },
+              items: [
+                "components/early-access/alpha/sap/sap-integration",
+                "components/early-access/alpha/sap/odata-connector",
+                "components/early-access/alpha/sap/rfc-connector",
+                "components/early-access/alpha/sap/btp-plugin",
+              ],
+            },
+            {
+              type: "category",
+              label: "BPMN Copilot",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+              },
+              items: [
+                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+              ],
+            },
           ],
         },
       ],
@@ -807,6 +834,63 @@ module.exports = {
         {
           Deprecated: [
             require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+            {
+              "Zeebe API (REST)": [
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication",
+                "apis-tools/zeebe-api-rest/zeebe-api-tutorial",
+                {
+                  Specifications: [
+                    {
+                      type: "doc",
+                      id: "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api",
+                    },
+                    {
+                      type: "category",
+                      label: "Cluster",
+                      items: [
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/get-cluster-topology",
+                          label: "Get cluster topology",
+                          className: "api-method get",
+                        },
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "User task",
+                      items: [
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/complete-a-user-task",
+                          label: "Complete a user task",
+                          className: "api-method post",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/assign-a-user-task",
+                          label: "Assign a user task",
+                          className: "api-method post",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/update-a-user-task",
+                          label: "Update a user task",
+                          className: "api-method patch",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task",
+                          label: "Unassign a user task",
+                          className: "api-method delete",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -903,6 +987,7 @@ module.exports = {
         id: "reference/announcements",
       },
       items: [
+        "reference/announcements/announcements-880",
         "reference/announcements/announcements-870",
         "reference/announcements/announcements-860",
         "reference/announcements/announcements-850",
@@ -916,6 +1001,7 @@ module.exports = {
         id: "reference/release-notes/release-notes",
       },
       items: [
+        "reference/release-notes/880",
         "reference/release-notes/870",
         "reference/release-notes/860",
         "reference/release-notes/850",
@@ -979,6 +1065,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
                   ],
                 },
                 {
@@ -998,6 +1085,7 @@ module.exports = {
               "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
               "Red Hat (OpenShift)": [
                 "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
               ],
               Other: [
                 "self-managed/setup/deploy/other/docker",
@@ -1045,6 +1133,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/870-to-880",
             "self-managed/operational-guides/update-guide/860-to-870",
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",

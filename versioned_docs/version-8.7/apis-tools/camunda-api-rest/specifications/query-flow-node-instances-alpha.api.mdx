@@ -1,0 +1,731 @@
+---
+id: query-flow-node-instances-alpha
+title: "Query flow node instances (alpha)"
+description: "Search for flow node instances based on given criteria."
+sidebar_label: "Query flow node instances (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query flow node instances (alpha)"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/flownode-instances/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for flow node instances based on given criteria.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+for further details.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            "Flow node instance search request. Key attributes as string values.",
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for FlowNodeInstanceFilterRequest",
+                      type: "object",
+                      properties: {
+                        state: {
+                          type: "string",
+                          description:
+                            "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                        },
+                        type: {
+                          type: "string",
+                          description: "The flow node type",
+                        },
+                        flowNodeId: {
+                          type: "string",
+                          description: "The flow node id",
+                        },
+                        flowNodeName: {
+                          type: "string",
+                          description: "The flow node name",
+                        },
+                        treePath: {
+                          type: "string",
+                          description:
+                            "The path of keys from process instance to this flow node instance separated by '/'",
+                        },
+                        incident: {
+                          type: "boolean",
+                          description:
+                            "Shows whether this flow node instance has an incident related to",
+                        },
+                        tenantId: {
+                          description: "The tenant id",
+                          type: "string",
+                        },
+                      },
+                      title: "FlowNodeInstanceFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    flowNodeInstanceKey: {
+                      type: "string",
+                      description: "The key of this flow node instance.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The process instance key.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The process definition key.",
+                    },
+                    incidentKey: {
+                      type: "string",
+                      description:
+                        "The key of incident if field incident is true",
+                    },
+                  },
+                  title: "FlowNodeInstanceFilter",
+                },
+              ],
+            },
+          },
+          title: "FlowNodeInstanceSearchQuery",
+        },
+      },
+      "application/vnd.camunda.api.keys.number+json": {
+        schema: {
+          description: "Flow node instance search request",
+          deprecated: true,
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for FlowNodeInstanceFilterRequest",
+                      type: "object",
+                      properties: {
+                        state: {
+                          type: "string",
+                          description:
+                            "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                        },
+                        type: {
+                          type: "string",
+                          description: "The flow node type",
+                        },
+                        flowNodeId: {
+                          type: "string",
+                          description: "The flow node id",
+                        },
+                        flowNodeName: {
+                          type: "string",
+                          description: "The flow node name",
+                        },
+                        treePath: {
+                          type: "string",
+                          description:
+                            "The path of keys from process instance to this flow node instance separated by '/'",
+                        },
+                        incident: {
+                          type: "boolean",
+                          description:
+                            "Shows whether this flow node instance has an incident related to",
+                        },
+                        tenantId: {
+                          description: "The tenant id",
+                          type: "string",
+                        },
+                      },
+                      title: "FlowNodeInstanceFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    flowNodeInstanceKey: {
+                      type: "integer",
+                      description: "The key of this flow node instance.",
+                      format: "int64",
+                    },
+                    processInstanceKey: {
+                      type: "integer",
+                      description: "The process instance key.",
+                      format: "int64",
+                    },
+                    processDefinitionKey: {
+                      type: "integer",
+                      description: "The process definition key.",
+                      format: "int64",
+                    },
+                    incidentKey: {
+                      type: "integer",
+                      description:
+                        "The key of incident if field incident is true",
+                      format: "int64",
+                    },
+                  },
+                  title: "FlowNodeInstanceFilterRequest",
+                },
+              ],
+            },
+          },
+          title: "FlowNodeInstanceSearchQueryRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.string+json": {
+        schema: {
+          description:
+            "Flow node instance search request. Key attributes as string values.",
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  type: "object",
+                  allOf: [
+                    {
+                      description:
+                        "Base properties for FlowNodeInstanceFilterRequest",
+                      type: "object",
+                      properties: {
+                        state: {
+                          type: "string",
+                          description:
+                            "The state, one of ACTIVE, COMPLETED, TERMINATED.",
+                        },
+                        type: {
+                          type: "string",
+                          description: "The flow node type",
+                        },
+                        flowNodeId: {
+                          type: "string",
+                          description: "The flow node id",
+                        },
+                        flowNodeName: {
+                          type: "string",
+                          description: "The flow node name",
+                        },
+                        treePath: {
+                          type: "string",
+                          description:
+                            "The path of keys from process instance to this flow node instance separated by '/'",
+                        },
+                        incident: {
+                          type: "boolean",
+                          description:
+                            "Shows whether this flow node instance has an incident related to",
+                        },
+                        tenantId: {
+                          description: "The tenant id",
+                          type: "string",
+                        },
+                      },
+                      title: "FlowNodeInstanceFilterRequestBase",
+                    },
+                  ],
+                  properties: {
+                    flowNodeInstanceKey: {
+                      type: "string",
+                      description: "The key of this flow node instance.",
+                    },
+                    processInstanceKey: {
+                      type: "string",
+                      description: "The process instance key.",
+                    },
+                    processDefinitionKey: {
+                      type: "string",
+                      description: "The process definition key.",
+                    },
+                    incidentKey: {
+                      type: "string",
+                      description:
+                        "The key of incident if field incident is true",
+                    },
+                  },
+                  title: "FlowNodeInstanceFilter",
+                },
+              ],
+            },
+          },
+          title: "FlowNodeInstanceSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The Flow node instance search successful response.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for FlowNodeInstanceItem",
+                      type: "object",
+                      properties: {
+                        startDate: { type: "string" },
+                        endDate: { type: "string" },
+                        flowNodeId: { type: "string" },
+                        flowNodeName: { type: "string" },
+                        treePath: { type: "string" },
+                        type: { type: "string" },
+                        state: { type: "string" },
+                        incident: { type: "boolean" },
+                        tenantId: { type: "string" },
+                      },
+                      title: "FlowNodeInstanceItemBase",
+                    },
+                  ],
+                  properties: {
+                    flowNodeInstanceKey: { type: "string" },
+                    processInstanceKey: { type: "string" },
+                    processDefinitionKey: { type: "string" },
+                    incidentKey: { type: "string" },
+                  },
+                  title: "FlowNodeInstanceResult",
+                },
+              },
+            },
+            title: "FlowNodeInstanceSearchQueryResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for FlowNodeInstanceItem",
+                      type: "object",
+                      properties: {
+                        startDate: { type: "string" },
+                        endDate: { type: "string" },
+                        flowNodeId: { type: "string" },
+                        flowNodeName: { type: "string" },
+                        treePath: { type: "string" },
+                        type: { type: "string" },
+                        state: { type: "string" },
+                        incident: { type: "boolean" },
+                        tenantId: { type: "string" },
+                      },
+                      title: "FlowNodeInstanceItemBase",
+                    },
+                  ],
+                  properties: {
+                    flowNodeInstanceKey: { type: "integer", format: "int64" },
+                    processInstanceKey: { type: "integer", format: "int64" },
+                    processDefinitionKey: { type: "integer", format: "int64" },
+                    incidentKey: { type: "integer", format: "int64" },
+                  },
+                  title: "FlowNodeInstanceItem",
+                },
+              },
+            },
+            title: "FlowNodeInstanceSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for FlowNodeInstanceItem",
+                      type: "object",
+                      properties: {
+                        startDate: { type: "string" },
+                        endDate: { type: "string" },
+                        flowNodeId: { type: "string" },
+                        flowNodeName: { type: "string" },
+                        treePath: { type: "string" },
+                        type: { type: "string" },
+                        state: { type: "string" },
+                        incident: { type: "boolean" },
+                        tenantId: { type: "string" },
+                      },
+                      title: "FlowNodeInstanceItemBase",
+                    },
+                  ],
+                  properties: {
+                    flowNodeInstanceKey: { type: "string" },
+                    processInstanceKey: { type: "string" },
+                    processDefinitionKey: { type: "string" },
+                    incidentKey: { type: "string" },
+                  },
+                  title: "FlowNodeInstanceResult",
+                },
+              },
+            },
+            title: "FlowNodeInstanceSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The Flow node instance Search Query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

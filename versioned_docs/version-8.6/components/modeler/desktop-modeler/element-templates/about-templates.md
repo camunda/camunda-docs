@@ -12,7 +12,7 @@ Element templates are a way to extend the [modeler](https://camunda.org/bpmn/too
 
 ![Custom fields in Desktop Modeler](./img/overview.png)
 
-Applicable element templates can be assigned to a BPMN element via the properties panel and/or the replace menu.
+Applicable element templates can be assigned to a BPMN element via the properties panel on the right side of the screen and/or the replace menu.
 
 Applying an element template configures the diagram element with pre-defined values for BPMN properties, input/output mappings, and extension properties.
 

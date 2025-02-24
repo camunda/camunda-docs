@@ -173,7 +173,7 @@ helm install camunda camunda/camunda-platform --skip-crds --version "$CHART_VERS
 
 If you must deploy using Helm 3.2.0 or greater, you have two options. One is to use a SCCs which defines the `RunAsUser` strategy to be at least `RunAsAny`. If that's not possible, then you need to make use of [a post-renderer](https://helm.sh/docs/topics/advanced/#post-rendering).
 
-:::warning
+:::danger
 If using a post-renderer, you **must** use the post-renderer whenever you are updating your release, not only during the initial installation. If you do not, the default values will be used again, which will prevent some services from starting.
 :::
 
@@ -271,7 +271,7 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 An alternative to using [routes](https://docs.openshift.com/container-platform/4.14/networking/routes/route-configuration.html) is to install and use one of the Kubernetes Ingress controllers instead, for example, the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx).
 
-:::warning
+:::danger
 
 Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
 
