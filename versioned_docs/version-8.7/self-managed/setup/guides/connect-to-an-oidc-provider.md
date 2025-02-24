@@ -44,7 +44,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 4. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 :::note
-You can either connect to the OIDC provider through the use of environment variables or Helm values.
+You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
@@ -55,9 +55,9 @@ You can either connect to the OIDC provider through the use of environment varia
    CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
    CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 2>
-   CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 2>
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 3>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
+   CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 3>
    IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name  if not using the default "oid">
    IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
    SPRING_PROFILES_ACTIVE=oidc
@@ -132,12 +132,15 @@ Ensure you register a new application for each component.
 3. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
    - **Web**: Operate, Tasklist, Optimize, Identity
    - **Single-page application**: Modeler, Console
-4. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration). In Microsoft Entra ID, redirect URIs serve as an approved list of destinations. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
+4. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
+   :::note
+   In Microsoft Entra ID, redirect URIs serve as an approved list of destinations. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
+   :::
 5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use. The secret ID is not needed, only the secret value is required.
-6. Set the following configurations for the component you are configuring an app for:
+6. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 :::note
-You can either connect to the OIDC provider through the use of environment variables or Helm values.
+You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
