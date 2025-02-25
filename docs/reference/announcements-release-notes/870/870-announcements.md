@@ -30,11 +30,7 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
 
 ## Versioning and environment changes
 
-:::note
-
 There are currently no known versioning changes or environment changes associated with the 8.7 release.
-
-:::
 
 ## Breaking changes
 
