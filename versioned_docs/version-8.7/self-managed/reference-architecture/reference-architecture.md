@@ -97,7 +97,7 @@ If running a single instance is preferred, make sure to implement [regular backu
 ## Available reference architectures
 
 :::note Documentation Update in Progress
-This is a work in progress as the existing documentation is updated to provide better general guidance on the topic. The Kubernetes and Docker documentation may point to older guides.
+This is a work in progress as the existing documentation is updated to provide better general guidance on the topic. The Docker and Manual documentation may point to older guides.
 :::
 
 Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements. The following guides are available to help choose and guide deployments:
@@ -135,11 +135,7 @@ For organizations that prefer traditional infrastructure, reference architecture
 - Applicable for high availability but requires more detailed planning.
 - Best for teams with expertise in managing physical servers or virtual machines.
 
-:::info
-
-This is being revised for the 8.8 release and will incorporate the new rearchitecture.
-
-:::
+For more information and guides, see the reference for [manual](/self-managed/setup/deploy/local/manual.md).
 
 ### Local development
 
