@@ -7,44 +7,42 @@ description: "Learn how to set up the helm chart in a production setting."
 
 ## Overview
 
-This guide provides a resilient, production-ready architecture for Camunda 8 using the Camunda Helm chart. This setup minimizes complexity while offering a reliable foundation for most production use cases.
+The following is a **scenario-based, production focused, step-by-step guide** for setting up the [Camunda Helm chart](https://helm.camunda.io/). It provides a resilient, production-ready architecture for Camunda 8, and minimizes complexity while offering a reliable foundation for most production use cases.
 
-The goal of this guide is to give you a **scenario-based, production focused, step-by-step guide** for setting up the Camunda Helm chart. We will use AWS as a reference here but the guide would work with other supported cloud providers and their comparable services as well. By following this guide, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
+While this guide uses AWS as a reference, the steps are applicable to other [supported cloud providers](/docs/reference/supported-environments.md#deployment-options) and their comparable services. Upon completion, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
 
 ## Prerequisites
 
 Before proceeding with the setup, ensure the following requirements are met:
 
-- **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components. We are going to use an AWS EKS cluster. Have a look at the following guides:
-  - [Deploy an EKS cluster with Terraform (advanced)](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md)
-  - [Install Camunda 8 on an EKS cluster](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md)
-- **Helm**: Make sure you have the [Helm CLI](/docs/reference/supported-environments.md#clients) installed
-- **DNS Configuration**: Access to configure DNS for your domain to point to the Kubernetes cluster Ingress.
+- **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components. This guide will use an AWS EKS cluster for reference. Step-by-step documentation is available to deploy an EKS cluster with [Terraform](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md), and [install Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md).
+- **Helm**: Make sure the [Helm CLI](/reference/supported-environments.md#clients) is installed.
+- **DNS Configuration**: You must have access to configure DNS for your domain in order to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
-  - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. Have a look at the [Set up the Aurora PostgreSQL module](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#set-up-the-aurora-postgresql-module) guide.
-  - **Amazon OpenSearch**: is used as a datastore for Camunda zeebe component. Have a look at our guide for setting an [OpenSearch domain](/docs/self-managed/setup/deploy/amazon/amazon-eks/eksctl.md#4-opensearch-domain).
-  - **AWS Simple Active Directory**: For simple OIDC authentication in this scenario, we will use [AWS Simple Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html).
+  - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. For step-by-step instructions, see the [Aurora PostgreSQL module setup](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup) guide.
+  - **Amazon OpenSearch**: To provide a datastore for Zeebe, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch domain](/self-managed/setup/deploy/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
+  - **AWS Simple Active Directory**: For simple OIDC authentication. See the [AWS Simple Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html) documentation for more information.
 - **Ingress NGINX**: Ensure the [ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
-- **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda WebApps. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. Have a look at the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
+- **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket will be used to store backups of the Zeebe brokers.
-- **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md#camunda-8-self-managed) and evaluated sufficient CPU, memory and storage necessary for the deployment.
+- **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md#camunda-8-self-managed), and have evaluated sufficient CPU, memory, and storage necessary for the deployment.
 
-Ensure all prerequisites are in place to avoid issues during installation or upgrading in a production environment.
+Ensure all prerequisites are in place to avoid issues during installation or when upgrading in a production environment.
 
-## Architecture Overview
+## Architecture overview
+
+For more information about the Camunda 8 architecture, refer to the [Self-Managed overview](/self-managed/about-self-managed.md#architecture) and Camunda 8 [reference architectures](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
 
 Below is the high-level architecture diagram for the base production setup:
 
 # ![Architecture Diagram](./img/architecture.png)
 
-If you would like to learn more about the architecture setup, please refer to the [About Self-Managed](/docs/self-managed/about-self-managed.md#architecture) and [Camunda 8 reference architectures](/docs/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) documents.
+## Installation and configuration
 
-## Installation and Configuration
+After following the [prerequisites](#prerequisites), you should have an EKS cluster ready with `kubectl` and the `helm` CLI installed.
 
-Assuming that you have followed the prerequisites, you should have an EKS cluster ready with `kubectl` and `helm` cli installed.
-
-#### Namespace Setup
+#### Namespace setup
 
 To get started, create two namespaces:
 
@@ -53,15 +51,19 @@ kubectl create namespace management
 kubectl create namespace orchestration
 ```
 
-- Namespace `management` (Web Modeler and Console): we will install Identity, Console, and all the Web Modeler components.
+- **Namespace `management`:** We will install [Identity](/self-managed/identity/what-is-identity.md), [Console](/self-managed/console-deployment/overview.md), and all the [Web Modeler](/self-managed/modeler/web-modeler/installation.md) components.
 
-- Namespace `orchestration`: we will install the Camunda zeebe component, along with Connectors and all the web applications
+- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/zeebe-deployment/zeebe-installation.md), the Camunda web applications ([Operate](/self-managed/operate-deployment/install-and-start.md), [Tasklist](/self-managed/tasklist-deployment/install-and-start.md), and [Optimize](/$optimize$/self-managed/optimize-deployment/install-and-start.md)), along with [Connectors](/docs/self-managed/connectors-deployment/install-and-start.md).
 
-We do not have to worry about installing each component separately since that will be handled by the Helm chart automatically. For more information on the Orchestration Cluster vs Web Modeler and Console, please review this [guide](/docs/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console)
+Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
-#### Installing the Helm Chart
+:::note
+For more information on the difference between the Orchestration cluster and the Web Modeler and Console cluster, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
+:::
 
-Since there will be a Helm deployment in each namespace, you can create your own `management-values.yaml` and `orchestration-values.yaml` or enhance your existing setup by applying various production recommendations in the next section.
+#### Installing the Helm chart
+
+As there will be a Helm deployment in each namespace, create your own `management-values.yaml` and `orchestration-values.yaml`, or enhance your existing setup by applying various production recommendations in the next section.
 
 The Camunda Helm chart can be installed in each namespace using the following command:
 
@@ -80,7 +82,7 @@ helm install camunda camunda/camunda-platform -n orchestration \
 
 The next section will explain various configurations used in both values files.
 
-### Ingress TLS Setup
+### Ingress TLS setup
 
 In order to access the Camunda Platform through HTTPS with Ingress, you have to enable TLS. To do that, you require three things:
 
@@ -117,7 +119,7 @@ zeebe:
 
 For more information on the Ingress setup, please refer to our [Ingress setup guide](/self-managed/setup/guides/ingress-setup.md)
 
-### Identity Provider Integration
+### Identity provider integration
 
 Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication. In this example, we will use AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory and is compatible with our Microsoft Entra ID guide. Here is an example configuration to add to your values files:
 
@@ -196,9 +198,9 @@ Make sure to create a Kubernetes secret for all client secrets that exist in eac
         redirectUrl: https://modeler.management-host.com
 ```
 
-If you would like some more guidance relating to authentication, refer to the [Connect to an OpenID Connect provider](/docs/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) guide
+If you would like some more guidance relating to authentication, refer to the [Connect to an OpenID Connect provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) guide
 
-### Connect External Databases
+### Connect external databases
 
 The next stage of the production setup is configuring databases. To make it easy for testing, the Camunda Helm chart provides external, dependency Helm charts for Databases such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). Within a production setting, these dependency charts should be disabled, and production databases should be used instead. For example, instead of the Bitnami Elasticsearch dependency chart, we will use Amazon OpenSearch, and instead of the Bitnami PostgreSQL dependency chart, we will use Amazon Aurora PostgreSQL.
 
@@ -226,7 +228,7 @@ elasticsearch:
 
 You can see that we have globally disabled all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false` and also disable internal Elasticsearch through `elasticsearch.enabled: false`.
 
-#### Connecting to External Database for Identity
+#### Connect to an external database for Identity
 
 Here is how to configure Identity with external Amazon Aurora PostgreSQL:
 
@@ -244,7 +246,7 @@ identity:
 
 Please make sure to correctly define the host, and port.
 
-#### Connecting to External Database for Web Modeler
+#### Connect to an external database for Web Modeler
 
 Here is how to configure Web Modeler with external Amazon Aurora PostgreSQL:
 
@@ -266,13 +268,13 @@ If you would like further information on connecting to external databases, we ha
   - [Using Amazon OpenSearch Service through IRSA (only applicable if you are running Camunda Platform on EKS)](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
 - [Running Web Modeler on Amazon Aurora PostgreSQL](/self-managed/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 
-## Camunda Zeebe Configuration
+## Camunda Zeebe configuration
 
 At this point you would be able connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL. The logical next step is to focus on the Camunda application-specific configurations suitable for a production environment.
 
 We will continue our journey in adding to the `management-values.yaml` and `orchestration-values.yaml`. Here is what you should consider for Camunda component level configurations:
 
-### Elasticsearch/OpenSearch Index Retention
+### Elasticsearch/OpenSearch index retention
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
@@ -286,13 +288,13 @@ zeebe:
     policyName: zeebe-record-retention-policy
 ```
 
-If you would like more information on configuring ILM policy. Please refer to [the configuration guide on the OpenSearch exporter](/docs/self-managed/zeebe-deployment/exporters//opensearch-exporter.md#configuration).
+If you would like more information on configuring ILM policy. Please refer to [the configuration guide on the OpenSearch exporter](/self-managed/zeebe-deployment/exporters//opensearch-exporter.md#configuration).
 
-### Configuring Backups
+### Configure backups
 
 In order to configure backups, please refer to the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for self-managed installations.
 
-## Scaling and Performance
+## Scaling and performance
 
 At this point you should already have a solid base to run your platform in a production setting. The rest of this guide gives you general Kubernetes based guidance on configuration of the Camunda Helm chart for long-term maintenance.
 
@@ -307,7 +309,7 @@ Here are some points to keep in mind when considering scalability:
     replicationFactor: "3"
   ```
 
-The `zeebe.clusterSize` refers to the amount of brokers, the `zeebe.partitionCount` refers to how [zeebe partitions](/docs/components/zeebe/technical-concepts/partitions.md) are configured for each cluster, and the `zeebe.replicationFactor` refers to the [number of replicas](/docs/components/zeebe/technical-concepts/partitions.md#replication) that each partition replicates to.
+The `zeebe.clusterSize` refers to the amount of brokers, the `zeebe.partitionCount` refers to how [zeebe partitions](/components/zeebe/technical-concepts/partitions.md) are configured for each cluster, and the `zeebe.replicationFactor` refers to the [number of replicas](/components/zeebe/technical-concepts/partitions.md#replication) that each partition replicates to.
 
 :::note
 The `zeebe.partitionCount` does not yet support dynamic scaling. You will not be able to modify it on future upgrades. It is better to overprovision the partitions to allow potential growth as dynamic partitioning isn't possible yet.
@@ -404,7 +406,7 @@ Please refer to the [Kuberentes documentation](https://kubernetes.io/docs/concep
 
 - It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documenation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-Level Quotas apply limits to all workloads within a namespace. It ensures aggregate resource consumption by all pods in the namespace do not exceed your desired resource limits.
 
-## Security Guidelines
+## Security guidelines
 
 Here are some points to keep in mind when considering security:
 
@@ -462,7 +464,7 @@ If you would like to add any other security constraints to your Helm values file
 - It is recommended to pull images exclusively from a private registry, such as [Amazon ECR](https://aws.amazon.com/ecr/), rather than directly from Docker Hub. Doing so enhances control over the images, avoids rate limits, and improves performance and reliability. Additionally, you can configure your cluster to pull images only from trusted registries. Tools like [Open Policy Agent](https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e) can be used to enforce this restriction.
 - Open Policy Agent can also be used to [whitelist Ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
 
-## Observability and Monitoring
+## Observability and monitoring
 
 Here are some points to keep in mind when considering observability:
 
@@ -475,7 +477,7 @@ Here are some points to keep in mind when considering observability:
 
 - A tool such as [Loki](https://grafana.com/oss/loki/) could be used for the retention and archival of logs. It can also be used to aggregate logs.
 
-## Bringing it All Together
+## Bringing it all together
 
 Here is a complete example, taking all the above sections into consideration.
 
@@ -782,14 +784,14 @@ elasticsearch:
   enabled: false
 ```
 
-## Next Steps
+## Next steps
 
-### Upgrade and Maintenance
+### Upgrade and maintenance
 
-- Make sure to follow our [upgrade guide](/docs/self-managed/setup/upgrade.md) when performing the upgrade on your Helm chart.
+- Make sure to follow our [upgrade guide](/self-managed/setup/upgrade.md) when performing the upgrade on your Helm chart.
 - Secrets are not auto-generated by default in the Camunda Helm chart. It is important to not override this default behavior on upgrade.
 
-### Adding more Orchestration Clusters
+### Adding more Orchestration clusters
 
 The next recommended step is to setup a multi-namespace deployment. To configure multiple Camunda Orchestration Clusters in different namespaces, we recommend you to follow our [guide for our multi-namespace deployments](/self-managed/setup/guides/multi-namespace-deployment.md). This is the most recommended approach to allow you to setup various environments using the Camunda Orchestration Cluster.
 
