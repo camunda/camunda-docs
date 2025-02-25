@@ -178,7 +178,7 @@ Git sync supports parallel feature development by allowing multiple process appl
 
 To use Git sync for parallel feature development:
 
-1. Create a new [process application](/docs/components/modeler/web-modeler/create-a-process-application.md) in Modeler for each active feature branch you want to develop.
+1. Create a new [process application](/components/modeler/web-modeler/create-a-process-application.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
 3. Work on your feature in Modeler, using **Sync with GitHub** or **Sync with GitLab** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.

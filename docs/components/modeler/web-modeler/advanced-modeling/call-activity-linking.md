@@ -24,7 +24,7 @@ For call activities that are already linked, clicking on the link button opens a
 
 You can also enter the process ID directly in the **Called element** section in the properties panel on the right side of the screen.
 
-- **Binding**: You can also select a different binding for the called decision. See [choosing the resource binding type](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md).
+- **Binding**: You can also select a different binding for the called decision. See [choosing the resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md).
 - **Version tag**: If you select **version tag** for the binding, you must enter the actual version tag to use.
 
 <p><img src={PropertiesPanelImg} alt="called element section in properties panel" style={{width: 430}} /></p>

@@ -1,5 +1,5 @@
 extends: substitution
-message: "This term is spelled, uppercased, lowercased, hyphenated, or used incorrectly. Review the WCoE glossary."
+message: "Inconsistent spelling detected. Use `%s` instead of `%s`. Review the WCoE glossary - https://confluence.camunda.com/x/b5RZBw ."
 level: error
 ignorecase: false
 swap:
