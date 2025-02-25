@@ -13,17 +13,16 @@ You can configure the Connector runtime environment in the following ways:
 - The Connector functions to run.
 - The secrets that should be available to the Connectors.
 
-For connecting to **Zeebe**, the Connector runtime uses the [Spring Zeebe SDK](../../../apis-tools/spring-zeebe-sdk/getting-started).
+To connect to **Zeebe**, the Connector runtime uses the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
 
-For interacting with the **Operate API**, the Connector runtime uses the [Operate Java client](https://github.com/camunda-community-hub/camunda-operate-client-java).
+To interact with the **Operate API**, the Connector runtime uses the community-maintained [Operate Java client](https://github.com/camunda-community-hub/camunda-operate-client-java).
 
-Consequently, any configuration that can be set in the Spring Zeebe SDK or Operate Java client can also be set in the Connector runtime environment.
+Any configuration that can be set in the Spring Zeebe SDK or Operate Java client can also be set in the Connector runtime environment.
 
-Below are some of the most common configuration options for the Connector runtime. Refer to the [Spring Zeebe SDK](../../../apis-tools/spring-zeebe-sdk/configuration#zeebe) and Operate Java client documentation for a full list of configuration options.
+Below are some of the most common configuration options for the Connector runtime. Refer to the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/configuration.md#zeebe) and Operate Java client documentation for a full list of configuration options.
 
 :::note
-In this guide, configuration properties are provided in the form of environment variables, while the Spring Zeebe SDK documentation uses Java configuration properties.
-The two formats are interchangeable, and you can use the Java configuration properties in the Connector runtime environment as well.
+This guide provides configuration properties the form of environment variables, while the Spring Zeebe SDK documentation uses Java configuration properties. The two formats are interchangeable, and you can use the Java configuration properties in the Connector runtime environment as well.
 
 For example, the Java configuration property`camunda.client.zeebe.grpc-address` can be set in the Connector runtime environment as an environment variable called `CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS`.
 :::

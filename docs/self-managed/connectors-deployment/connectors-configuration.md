@@ -14,19 +14,15 @@ You can configure the Connector runtime environment in the following ways:
 - The secrets that should be available to the Connectors.
 
 :::note
-Starting from version 8.8, the Connector runtime doesn't require a connection to Operate.
-The Connector runtime now only depends on the Camunda 8 REST API and Zeebe.
+Starting from version 8.8, the Connector runtime no longer requires a connection to Operate. The Connector runtime now only depends on the Camunda 8 REST API and Zeebe.
 :::
 
-For connecting to **Zeebe** and the **Camunda 8 REST API**, the Connector runtime uses the [Camunda Spring SDK](../../../apis-tools/spring-zeebe-sdk/getting-started).
+To connect to **Zeebe** and the **Camunda 8 REST API**, the Connector runtime uses the [Camunda Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md). Any configuration that can be set in the Spring Zeebe SDK can also be set in the Connector runtime environment.
 
-Consequently, any configuration that can be set in the Spring Zeebe SDK can also be set in the Connector runtime environment.
-
-Below are some of the most common configuration options for the Connector runtime. Refer to the [Camunda Spring SDK](../../../apis-tools/spring-zeebe-sdk/configuration#zeebe) for a full list of configuration options.
+Below are some of the most common configuration options for the Connector runtime. Refer to the [Camunda Spring SDK](/apis-tools/spring-zeebe-sdk/configuration.md#zeebe) for a full list of configuration options.
 
 :::note
-In this guide, configuration properties are provided in the form of environment variables, while the Camunda Spring SDK documentation uses Java configuration properties.
-The two formats are interchangeable, and you can use the Java configuration properties in the Connector runtime environment as well.
+This guide provides configuration properties in the form of environment variables, while the Camunda Spring SDK documentation uses Java configuration properties. The two formats are interchangeable, and you can use the Java configuration properties in the Connector runtime environment as well.
 
 For example, the Java configuration property`camunda.client.zeebe.grpc-address` can be set in the Connector runtime environment as an environment variable called `CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS`.
 :::
@@ -304,7 +300,7 @@ configuration of job workers.
 
 ### Inbound Connector configuration
 
-The Connector Runtime fetches process definitions from the Camunda 8 REST API and executes all inbound Connectors within those processes independently of the outbound Connector configuration without any additional configuration required from the user.
+The Connector Runtime fetches process definitions from the Camunda 8 REST API, and executes all inbound Connectors within those processes independently of the outbound Connector configuration without any additional configuration required from the user.
 
 To restrict the Connector Runtime inbound Connector feature to a single tenant or multiple tenants, use Identity and assign the tenants the Connector application should have access to.
 
