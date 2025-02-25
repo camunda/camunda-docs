@@ -28,9 +28,9 @@ You can configure the Connector runtime environment in the following ways:
 To use Camunda 8 SaaS specify the connection properties:
 
 ```bash
-CAMUNDA_CLIENT_CLUSTER-ID=xxx
-CAMUNDA_CLIENT_AUTH_CLIENT-ID=xxx
-CAMUNDA_CLIENT_AUTH_CLIENT-SECRET=xxx
+CAMUNDA_CLIENT_CLUSTERID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
 CAMUNDA_CLIENT_REGION=bru-2
 ```
 

@@ -44,6 +44,10 @@ or
 CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;
 ```
 
+:::note
+To ensure Camunda can access own components properly, non proxy hosts need to contain `camunda-platform-zeebe|camunda-platform-keycloak`
+:::
+
 #### HTTP
 
 To specify the proxy as an HTTP protocol handler, set the following standard JVM properties:

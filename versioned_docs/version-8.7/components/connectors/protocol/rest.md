@@ -44,14 +44,16 @@ or
 CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;
 ```
 
-````bash
+:::note
+To ensure Camunda can access own components properly, non proxy hosts need to contain `camunda-platform-zeebe|camunda-platform-keycloak|camunda-platform-operate`
+:::
 
 #### HTTP
 
 To specify the proxy as an HTTP protocol handler, set the following standard JVM properties:
 
 | Property             | Description                                                                                                                                                                                                                                                                                                                        |
-| :------------------- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `http.proxyHost`     | The host name of the proxy server.                                                                                                                                                                                                                                                                                                 |
 | `http.proxyPort`     | The port number (default is 80).                                                                                                                                                                                                                                                                                                   |
 | `http.nonProxyHosts` | <p> _(optional)_ A list of hosts to connect to directly, bypassing the proxy.</p><p><ul><li>Specify as a list of patterns, separated by <code>&#124</code>.</li><li>Patterns can start or end with a `*` for wildcards.</li><li>Any host matching one of these patterns uses a direct connection instead of a proxy.</li></ul></p> |
@@ -66,7 +68,7 @@ CONNECTOR_HTTP_PROXY_PORT
 CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS
 CONNECTOR_HTTP_PROXY_USER
 CONNECTOR_HTTP_PROXY_PASSWORD
-````
+```
 
 #### HTTPS
 
