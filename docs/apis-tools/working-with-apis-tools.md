@@ -35,7 +35,7 @@ Camunda 8 provides several official clients based on this API. Official clients 
 
 Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
 
-<DocCardList items={[{type:"link", href:"docs/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"}
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"}
 ]}/>
 
 :::note
