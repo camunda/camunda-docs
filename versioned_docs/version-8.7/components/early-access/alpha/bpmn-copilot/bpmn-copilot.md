@@ -59,7 +59,9 @@ The BPMN Copilot can also translate business-focused intent into actionable chan
 - "Add error handling"
 - "Improve the user experience"
 
-Note that the BPMN Copilot may not replicate all parts of the diagram exactly between modifications.
+:::note
+Requesting specific modifications to one or several sections of the BPMN diagram may impact unrelated sections.
+:::
 
 ### Limitations
 
