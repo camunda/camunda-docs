@@ -131,7 +131,6 @@ Open your `src/main/resources/application.yaml` file, and paste the following sn
 camunda:
   client:
     mode: self-managed
-    enabled: true
     grpc-address: http://127.0.0.1:26500
     rest-address: http://127.0.0.1:8080
 ```

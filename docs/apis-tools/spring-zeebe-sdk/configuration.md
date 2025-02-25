@@ -539,11 +539,12 @@ You can override this property as well:
 ```yaml
 camunda:
   client:
-    override:
-      foo:
-        tenants-ids:
-          - <default>
-          - foo
+    worker:
+      override:
+        foo:
+          tenants-ids:
+            - <default>
+            - foo
 ```
 
 ### Custom identity provider security context

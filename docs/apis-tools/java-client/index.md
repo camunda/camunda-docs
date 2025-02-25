@@ -149,5 +149,5 @@ The official Java client library API documentation can be found [here](https://j
 - [Getting Started Guide](https://github.com/camunda/camunda-platform-get-started): A comprehensive tutorial that covers Camunda Modeler, Operate, and the Java client.
 - [Job worker](job-worker.md): An introduction to the Java client's job worker.
 - [Logging](logging.md): An introduction to configuring logging for a Camunda client.
-- [Writing tests](camunda-process-test.md): An introduction to unit testing processes.
+- [Writing tests](zeebe-process-test.md): An introduction to unit testing processes.
 - [Examples](apis-tools/java-client-examples/index.md): A collection of specific examples for different use cases.

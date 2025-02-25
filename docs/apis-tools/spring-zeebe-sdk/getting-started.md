@@ -97,7 +97,7 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
 If you have different endpoints for your applications or want to disable a client, configure the following:
@@ -111,13 +111,12 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-    enabled: true
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      audience: zeebe-api
+      scope: # optional
     grpc-address: http://localhost:26500
     rest-address: http://localhost:8080
     prefer-rest-over-grpc: false
-    audience: zeebe-api
-    scope: # optional
 ```
 
 ## Obtain the Camunda client
