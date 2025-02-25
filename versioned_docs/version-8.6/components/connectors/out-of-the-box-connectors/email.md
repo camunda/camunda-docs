@@ -666,7 +666,7 @@ as prioritizing tasks, content analysis, and automated responses.
 
 The optional **Activation condition** field allows you to specify a Friendly Enough Expression Language ([FEEL](/components/modeler/feel/what-is-feel.md)) expression to control when this Connector should trigger a process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are met by the incoming email.
 
-For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email received by the connector.
+For example, the FEEL expression `subject = "urgent"` ensures that the process is only triggered if the subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email received by the connector.
 
 ## Correlation
 
