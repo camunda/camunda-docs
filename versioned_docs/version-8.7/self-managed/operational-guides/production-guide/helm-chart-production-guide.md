@@ -9,7 +9,7 @@ description: "Learn how to set up the helm chart in a production setting."
 
 The following is a **scenario-based, production focused, step-by-step guide** for setting up the [Camunda Helm chart](https://helm.camunda.io/). It provides a resilient, production-ready architecture for Camunda 8, and minimizes complexity while offering a reliable foundation for most production use cases.
 
-While this guide uses AWS as a reference, the steps are applicable to other [supported cloud providers](/docs/reference/supported-environments.md#deployment-options) and their comparable services. Upon completion, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
+While this guide uses AWS as a reference, the steps are applicable to other [supported cloud providers](/reference/supported-environments.md#deployment-options) and their comparable services. Upon completion, you will be familiar with all of the necessary requirements for having a production ready Camunda Helm chart.
 
 ## Prerequisites
 
@@ -53,7 +53,7 @@ kubectl create namespace orchestration
 
 - **Namespace `management`:** We will install [Identity](/self-managed/identity/what-is-identity.md), [Console](/self-managed/console-deployment/overview.md), and all the [Web Modeler](/self-managed/modeler/web-modeler/installation.md) components.
 
-- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/zeebe-deployment/zeebe-installation.md), the Camunda web applications ([Operate](/self-managed/operate-deployment/install-and-start.md), [Tasklist](/self-managed/tasklist-deployment/install-and-start.md), and [Optimize](/$optimize$/self-managed/optimize-deployment/install-and-start.md)), along with [Connectors](/docs/self-managed/connectors-deployment/install-and-start.md).
+- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/zeebe-deployment/zeebe-installation.md), the Camunda web applications ([Operate](/self-managed/operate-deployment/install-and-start.md), [Tasklist](/self-managed/tasklist-deployment/install-and-start.md), and [Optimize](/$optimize$/self-managed/optimize-deployment/install-and-start.md)), along with [Connectors](/self-managed/connectors-deployment/install-and-start.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
@@ -399,7 +399,7 @@ The following resources and configuration options are important to keep in mind 
   It best to store this secret in an external secret manager such as [Vault by HashiCorp](https://www.vaultproject.io/) in case of a total outage.
   :::
 
-  For more information, refer to the Kuberentes documentation on how to [create a secret](https://kubernetes.io/docs/concepts/configuration/secret/).
+  For more information, refer to the Kubernetes documentation on how to [create a secret](https://kubernetes.io/docs/concepts/configuration/secret/).
 
 - When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/operational-guides/update-guide/introduction.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
 - Make sure to not store any state or important, long-term business data in the local file system of the container. A Pod is transient,meaning if the Pod is restarted, the data will be erased. It is better to create a volume and volume mount instead.
@@ -420,7 +420,7 @@ The following resources and configuration options are important to keep in mind 
 <!-- This seems very specific to the application. I might remove this: -->
 <!-- - Mount Secrets as volumes, not environment variables -->
 
-- It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documenation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-Level Quotas apply limits to all workloads within a namespace. It ensures aggregate resource consumption by all pods in the namespace do not exceed your desired resource limits.
+- It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-Level Quotas apply limits to all workloads within a namespace. It ensures aggregate resource consumption by all pods in the namespace do not exceed your desired resource limits.
 
 ### Security
 
