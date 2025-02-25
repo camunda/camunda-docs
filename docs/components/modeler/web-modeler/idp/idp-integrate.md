@@ -42,9 +42,7 @@ To learn more about output mapping, see [variable/response mapping](/components/
 
 ### Result variable
 
-You can export the complete IDP extraction connector response into a dedicated variable that you can then access anywhere in a process.
-
-To do this, enter a unique dedicated variable name in the **Result variable** field.
+You can export the complete IDP extraction connector response into a dedicated variable that you can then access anywhere in a process. To do this, enter a unique dedicated variable name in the **Result variable** field.
 
 For example, ...
 
