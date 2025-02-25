@@ -2,6 +2,7 @@
 id: 850-announcements
 title: "8.5 - 8.3 Announcements"
 description: "Important announcements including deprecation & removal notices for the Camunda 8.5, 8.4, 8.3, and 8.2 releases."
+toc_max_heading_level: 2
 ---
 
 Important changes and updates for the Camunda 8.5, 8.4, and 8.3 releases are summarized below.

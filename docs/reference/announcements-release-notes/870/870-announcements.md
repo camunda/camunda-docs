@@ -2,6 +2,7 @@
 id: 870-announcements
 title: "Announcements"
 description: "Important changes and updates for the Camunda 8.7 release including deprecation & removal notices."
+toc_max_heading_level: 2
 ---
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
@@ -17,16 +18,6 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
 - [RPA](#)
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
-
-- [Versioning and environment changes](#versioning-and-environment-changes)
-- [Breaking changes](#breaking-changes)
-  - [Camunda Process Test](#camunda-process-test)
-  - [Deprecated: OpenAPI entities with `integer (int64)` key attributes](#deprecated-openapi-entities-with-integer-int64-key-attributes)
-- [New features](#new-features)
-  - [Amazon Web Services (AWS) region support SaaS](#amazon-web-services-aws-region-support-saas)
-  - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
-  - [Milestones renamed to versions](#web-modeler-milestones-renamed-to-versions)
-  - [Southeast Asia region for SaaS customers SaaS](#southeast-asia-region-for-saas-customers-saas)
 
 ## Versioning and environment changes
 

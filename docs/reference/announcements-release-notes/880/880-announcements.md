@@ -2,6 +2,7 @@
 id: 880-announcements
 title: "Announcements"
 description: "Important changes and updates for the Camunda 8.8 release including deprecation & removal notices."
+toc_max_heading_level: 2
 ---
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
@@ -11,25 +12,6 @@ Important changes and updates for the Camunda 8.8 release are summarized below.
 | Scheduled release date | Scheduled end of maintenance | Release notes | Blog |
 | :--------------------- | :--------------------------- | :------------ | :--- |
 | 14 October 2025        | 13 April 2027                |               |      |
-
-- [Versioning and environment changes](#versioning-and-environment-changes)
-  - [Helm charts](#helm-charts)
-- [Breaking changes](#breaking-changes)
-  - [Deprecated: Operate and Tasklist v1 REST APIs](#deprecated-operate-and-tasklist-v1-rest-apis)
-  - [Deprecated: Job-based user tasks querying](#deprecated-job-based-user-tasks-querying)
-  - [Deprecated: Zeebe gRPC API endpoints](#deprecated-zeebe-grpc-api-endpoints)
-  - [Removed: Tasklist GraphQL API](#removed-tasklist-graphql-api)
-  - [Removed: Deprecated OpenAPI objects](#removed-deprecated-openapi-objects)
-- [New features](#new-features)
-  - [Camunda 8 REST API updates SaaSSelf-Managed](#camunda-8-rest-api-updates-saasself-managed)
-  - [Identity management updates SaaSSelf-Managed](#identity-management-updates-saasself-managed)
-    - [Cluster-level identity management](#cluster-level-identity-management)
-    - [Decoupling from Keycloak Self-Managed](#decoupling-from-keycloak-self-managed)
-    - [Resource-based permissions](#resource-based-permissions)
-  - [Camunda Exporter Self-Managed](#camunda-exporter-self-managed)
-  - [Harmonized index schema](#harmonized-index-schema)
-  - [Camunda Java client and Camunda Spring SDK](#camunda-java-client-and-camunda-spring-sdk)
-    - [Key changes](#key-changes)
 
 ## Versioning and environment changes
 

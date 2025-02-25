@@ -2,6 +2,7 @@
 id: 860-announcements
 title: "Announcements"
 description: "Important changes and updates for the Camunda 8.6 release including deprecation & removal notices."
+toc_max_heading_level: 2
 ---
 
 Important changes and updates for the Camunda 8.6 release are summarized below.
