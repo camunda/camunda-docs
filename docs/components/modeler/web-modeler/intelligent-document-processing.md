@@ -27,7 +27,7 @@ To configure and use IDP in Camunda 8 you must:
 
 - Add your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to any cluster used with IDP.
 
-- Create an Amazon AWS S3 bucket named `idp-extraction-connector` that can be used by IDP for temporary document storage during analysis and test extraction.
+- Create an Amazon AWS S3 bucket named `idp-extraction-connector` to be used by IDP for temporary document storage during analysis and test extraction.
 
 :::info
 To learn more about the composable IDP architecture, see [technical architecture](idp/idp-reference.md#technical-architecture).

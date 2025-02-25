@@ -30,7 +30,11 @@ The IDP extraction connector integrates with Camunda document handling connector
 1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock Converse to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable.
 
 :::note
-You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](../intelligent-document-processing.md#configure-idp).
+
+- You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](../intelligent-document-processing.md#configure-idp).
+
+- Learn more about [Camunda document handling](/components/concepts/document-handling.md).
+
 :::
 
 ## Document file formats
@@ -43,14 +47,12 @@ IDP currently only supports data extraction from the following document file for
 
 ## Document language support
 
-IDP supports data extraction and processing of documents in different languages.
+IDP supports data extraction and processing of documents in multiple languages.
 
 IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. This ensures that the extracted text can be accurately mapped to process variables and used within your workflows, regardless of a document's language.
 
-For example, as of February 2025, Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese.
-
 :::info
-Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for full details of supported languages.
+For example, as of February 2025, Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for currently supported languages.
 :::
 
 ## Document storage
