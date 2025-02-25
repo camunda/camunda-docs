@@ -16,19 +16,19 @@ The goal of this guide is to give you a **scenario-based, production focused, st
 Before proceeding with the setup, ensure the following requirements are met:
 
 - **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components. We are going to use an AWS EKS cluster. Have a look at the following guides:
-  - [Deploy an EKS cluster with Terraform (advanced)](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/)
-  - [Install Camunda 8 on an EKS cluster](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm/)
-- **Helm**: Make sure you have the [Helm CLI](/docs/reference/supported-environments/#clients) installed
+  - [Deploy an EKS cluster with Terraform (advanced)](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md)
+  - [Install Camunda 8 on an EKS cluster](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md)
+- **Helm**: Make sure you have the [Helm CLI](/docs/reference/supported-environments.md#clients) installed
 - **DNS Configuration**: Access to configure DNS for your domain to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
-  - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. Have a look at the [Set up the Aurora PostgreSQL module](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/#set-up-the-aurora-postgresql-module) guide.
-  - **Amazon OpenSearch**: is used as a datastore for Camunda zeebe component. Have a look at our guide for setting an [OpenSearch domain](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-eksctl/#4-opensearch-domain).
+  - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. Have a look at the [Set up the Aurora PostgreSQL module](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#set-up-the-aurora-postgresql-module) guide.
+  - **Amazon OpenSearch**: is used as a datastore for Camunda zeebe component. Have a look at our guide for setting an [OpenSearch domain](/docs/self-managed/setup/deploy/amazon/amazon-eks/eksctl.md#4-opensearch-domain).
   - **AWS Simple Active Directory**: For simple OIDC authentication in this scenario, we will use [AWS Simple Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html).
 - **Ingress NGINX**: Ensure the [ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - This will be a place to store the backups of the Camunda WebApps. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. Have a look at the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket will be used to store backups of the Zeebe brokers.
-- **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md/#camunda-8-self-managed) and evaluated sufficient CPU, memory and storage necessary for the deployment.
+- **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md#camunda-8-self-managed) and evaluated sufficient CPU, memory and storage necessary for the deployment.
 
 Ensure all prerequisites are in place to avoid issues during installation or upgrading in a production environment.
 
@@ -38,7 +38,7 @@ Below is the high-level architecture diagram for the base production setup:
 
 # ![Architecture Diagram](./img/architecture.png)
 
-If you would like to learn more about the architecture setup, please refer to the [About Self-Managed](/docs/self-managed/about-self-managed/#architecture) and [Camunda 8 reference architectures](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console) documents.
+If you would like to learn more about the architecture setup, please refer to the [About Self-Managed](/docs/self-managed/about-self-managed.md#architecture) and [Camunda 8 reference architectures](/docs/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) documents.
 
 ## Installation and Configuration
 
@@ -57,7 +57,7 @@ kubectl create namespace orchestration
 
 - Namespace `orchestration`: we will install the Camunda zeebe component, along with Connectors and all the web applications
 
-We do not have to worry about installing each component separately since that will be handled by the Helm chart automatically. For more information on the Orchestration Cluster vs Web Modeler and Console, please review this [guide](/docs/self-managed/reference-architecture/#orchestration-cluster-vs-web-modeler-and-console)
+We do not have to worry about installing each component separately since that will be handled by the Helm chart automatically. For more information on the Orchestration Cluster vs Web Modeler and Console, please review this [guide](/docs/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console)
 
 #### Installing the Helm Chart
 
@@ -196,7 +196,7 @@ Make sure to create a Kubernetes secret for all client secrets that exist in eac
         redirectUrl: https://modeler.management-host.com
 ```
 
-If you would like some more guidance relating to authentication, refer to the [Connect to an OpenID Connect provider](/docs/self-managed/setup/guides/connect-to-an-oidc-provider/#configuration) guide
+If you would like some more guidance relating to authentication, refer to the [Connect to an OpenID Connect provider](/docs/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) guide
 
 ### Connect External Databases
 
@@ -264,7 +264,7 @@ If you would like further information on connecting to external databases, we ha
 - [Using existing Elasticsearch](/self-managed/setup/guides/using-existing-elasticsearch.md)
 - [Using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md)
   - [Using Amazon OpenSearch Service through IRSA (only applicable if you are running Camunda Platform on EKS)](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
-- [Running Web Modeler on Amazon Aurora PostgreSQL](/self-managed/modeler/web-modeler/configuration/database.md/#running-web-modeler-on-amazon-aurora-postgresql)
+- [Running Web Modeler on Amazon Aurora PostgreSQL](/self-managed/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 
 ## Camunda Zeebe Configuration
 
@@ -286,7 +286,7 @@ zeebe:
     policyName: zeebe-record-retention-policy
 ```
 
-If you would like more information on configuring ILM policy. Please refer to [the configuration guide on the OpenSearch exporter](/docs/next/self-managed/zeebe-deployment/exporters/opensearch-exporter/#configuration).
+If you would like more information on configuring ILM policy. Please refer to [the configuration guide on the OpenSearch exporter](/docs/self-managed/zeebe-deployment/exporters//opensearch-exporter.md#configuration).
 
 ### Configuring Backups
 
@@ -307,7 +307,7 @@ Here are some points to keep in mind when considering scalability:
     replicationFactor: "3"
   ```
 
-The `zeebe.clusterSize` refers to the amount of brokers, the `zeebe.partitionCount` refers to how [zeebe partitions](/docs/components/zeebe/technical-concepts/partitions.md) are configured for each cluster, and the `zeebe.replicationFactor` refers to the [number of replicas](/docs/components/zeebe/technical-concepts/partitions.md/#replication) that each partition replicates to.
+The `zeebe.clusterSize` refers to the amount of brokers, the `zeebe.partitionCount` refers to how [zeebe partitions](/docs/components/zeebe/technical-concepts/partitions.md) are configured for each cluster, and the `zeebe.replicationFactor` refers to the [number of replicas](/docs/components/zeebe/technical-concepts/partitions.md#replication) that each partition replicates to.
 
 :::note
 The `zeebe.partitionCount` does not yet support dynamic scaling. You will not be able to modify it on future upgrades. It is better to overprovision the partitions to allow potential growth as dynamic partitioning isn't possible yet.
@@ -365,7 +365,7 @@ This configuration ensures that zeebe Pods with the deafult label `app.kubernete
       maxUnavailable: 1
   ```
 
-- Version Management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/docs/reference/release-notes/) for security patches or critical updates.
+- Version Management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/release-notes/release-notes.md) for security patches or critical updates.
 - Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets when installing the Helm chart. In this scenario we are going to auto-generate the secrets. The following can be added to both Helm values files:
 
   ```yaml
@@ -786,7 +786,7 @@ elasticsearch:
 
 ### Upgrade and Maintenance
 
-- Make sure to follow our [upgrade guide](/docs/next/self-managed/setup/upgrade/) when performing the upgrade on your Helm chart.
+- Make sure to follow our [upgrade guide](/docs/self-managed/setup/upgrade.md) when performing the upgrade on your Helm chart.
 - Secrets are not auto-generated by default in the Camunda Helm chart. It is important to not override this default behavior on upgrade.
 
 ### Adding more Orchestration Clusters
