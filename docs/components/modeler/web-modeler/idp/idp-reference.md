@@ -17,7 +17,7 @@ Technical reference information for IDP, including technical architecture, suppo
 
 IDP offers a composable architecture that allows you to customize and extend IDP capabilities as needed. This flexibility enables you to adapt quickly to evolving business needs while maintaining a streamlined and manageable system.
 
-When you publish an IDP project, an IDP extraction [connector template](/components/connectors/manage-connector-templates.md) is created.
+When you publish an IDP project, an IDP extraction [connector template](/components/connectors/custom-built-connectors/connector-templates.md) is created.
 
 <img src={IdpArchitectureImg} alt="Architecture diagram of IDP" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 

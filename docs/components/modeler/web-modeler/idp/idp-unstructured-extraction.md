@@ -135,7 +135,7 @@ Publish the project to make the project available for [integration into your pro
 1. Click **Publish** and select either:
 
    - **Publish to project**: Only users in the Web Modeler project can access the extraction project.
-   - **Publish to organization**: The extraction project is available as a shared resource within your organization.
+   - **Publish to organization**: The extraction project is available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
    <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" />
@@ -147,5 +147,7 @@ Publish the project to make the project available for [integration into your pro
 1. Click **Publish** to make the project available for [integration into your processes](idp-integrate.md)<!--  and [document automation](idp-document-automation.md) projects -->.
 
 :::note
-Only organization owners or users with the Admin role can publish an extraction project to the organization.
+
+- The most recent **Field extraction summary** results are shown for your chosen **Extraction model**.
+
 :::
