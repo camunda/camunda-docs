@@ -269,6 +269,38 @@ If the process instance is migrated by providing mapping instruction between ser
 
 However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, the compensation subscription will be created on completion of the element `B`.
 
+## Gateways
+
+The migration tool now accommodates several scenarios for gateways involving parallel gateways and inclusive gateways.
+Active parallel and inclusive gateways—especially those with incidents (such as from invalid execution listeners or failed jobs)—can be migrated similarly to other active elements.
+Additionally, the migration tool supports migrating joining gateways.
+
+### Migrating joining parallel and inclusive gateways
+
+Joining parallel and inclusive gateways with active incoming sequence flows are active elements that must have a mapping instruction similar to any other active element.
+
+For migrating joining gateways, following conditions must hold:
+
+- Joining gateway in the process instance must be mapped to the target gateway.
+- The target gateway must have at least the same number of incoming sequence flows as the source gateway.
+- Taken sequence flow ids must exist in the target process definition and flow to the target gateway.
+
+Consider following example:
+The process instance is waiting at the joining parallel gateway with one of the incoming sequence flows is taken as the element `A` is completed.
+Please note that element `B` is still active and waiting at the user task.
+
+![The instance waiting on joining gateway.](assets/process-instance-migration/migration-joining-gateway-before.png)
+
+Mapping the active element `B` to the target element `B` and the joining parallel gateway instance to the target joining parallel gateway will migrate the process instance to the target process definition.
+Please note that, taken sequence flow (from element `A` to joining gateway) must exist in the target process definition and flow to the target gateway.
+After the migration, the process instance will look like following:
+
+![The instance waiting on service task B.](assets/process-instance-migration/migration-joining-gateway-after.png)
+
+As can be seen in the example above, another element `C` is added before the joining gateway in the target process definition.
+To complete the process instance after the migration, element `C` must be completed.
+Process instance modification can be used to active element `C` and complete it to reach the target gateway.
+
 ## Process definitions and versions
 
 So far, we've only discussed migrating a process instance to a new version of its process definition.
