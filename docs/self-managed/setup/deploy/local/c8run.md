@@ -202,6 +202,7 @@ docker run \
 
 Advanced configuration options can be provided via environment variables.
 
-| Variable       | Description                                                      |
-| -------------- | ---------------------------------------------------------------- |
-| `ES_JAVA_OPTS` | #TODO The options this allows you to override for Elasticsearch. |
+| Variable       | Description                                                                                                                      |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `ES_JAVA_OPTS` | Allows you to override java command line parameters for Elasticsearch. Useful when upping memory limits default: `-Xms1g -Xmx1g` |
+| `JAVA_OPTS`    | Allows you to override java command line parameters for Camunda.                                                                 |
