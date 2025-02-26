@@ -3226,10 +3226,16 @@ components:
         - type
         - timeout
         - maxJobsToActivate
+    JobActivationResponseBase:
+      # This base schema exists to support the downstream API documentation.
+      description: Base properties for JobActivationResponse
+      type: object
     JobActivationResponse:
       description: The list of activated jobs
       deprecated: true
       type: object
+      allOf:
+        - $ref: "#/components/schemas/JobActivationResponseBase"
       properties:
         jobs:
           type: array
@@ -3238,6 +3244,8 @@ components:
     JobActivationResult:
       description: The list of activated jobs. Key attributes as string values.
       type: object
+      allOf:
+        - $ref: "#/components/schemas/JobActivationResponseBase"
       properties:
         jobs:
           type: array

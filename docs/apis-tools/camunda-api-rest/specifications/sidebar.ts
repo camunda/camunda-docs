@@ -194,7 +194,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-element-instance-variables",
           label: "Update element instance variables",
-          className: "api-method post",
+          className: "api-method put",
         },
       ],
     },
@@ -306,8 +306,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/report-job-error",
-          label: "Report error for job",
+          id: "apis-tools/camunda-api-rest/specifications/throw-job-error",
+          label: "Throw error for job",
           className: "api-method post",
         },
         {
@@ -558,6 +558,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-users-for-tenant",
+          label: "Query users for tenant",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/assign-mapping-rule-to-tenant",
           label: "Assign a mapping rule to a tenant",
           className: "api-method put",
@@ -592,6 +598,12 @@ const sidebar: SidebarsConfig = {
       type: "category",
       label: "User",
       items: [
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-users-for-tenant",
+          label: "Query users for tenant",
+          className: "api-method post",
+        },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-user",

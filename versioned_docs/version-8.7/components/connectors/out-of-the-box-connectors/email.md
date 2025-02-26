@@ -717,7 +717,7 @@ Language ([FEEL](/components/modeler/feel/what-is-feel.md)) expression to contro
 process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are
 met by the incoming email.
 
-For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the
+For example, the FEEL expression `subject = "urgent"` ensures that the process is only triggered if the
 subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email
 received by the connector.
 
