@@ -181,9 +181,6 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
-            "components/modeler/web-modeler/camunda-marketplace",
-            "components/modeler/web-modeler/versions",
-            "components/modeler/web-modeler/token-simulation",
             {
               type: "category",
               label: "Intelligent document processing",
@@ -192,6 +189,7 @@ module.exports = {
                 id: "components/modeler/web-modeler/idp",
               },
               items: [
+                "components/modeler/web-modeler/idp/idp-configuration",
                 "components/modeler/web-modeler/idp/idp-applications",
                 {
                   type: "category",
@@ -211,6 +209,9 @@ module.exports = {
                 "components/modeler/web-modeler/idp/idp-reference",
               ],
             },
+            "components/modeler/web-modeler/camunda-marketplace",
+            "components/modeler/web-modeler/versions",
+            "components/modeler/web-modeler/token-simulation",
             {
               "Advanced modeling": [
                 "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",

@@ -1,7 +1,7 @@
 ---
 id: idp-applications
 title: IDP applications
-description: "Create and manage your IDP projects in an IDP application folder."
+description: "Create and manage your intelligent document processing (IDP) projects in an IDP application folder."
 ---
 
 import IdpApplicationImg from './img/idp-application.png';

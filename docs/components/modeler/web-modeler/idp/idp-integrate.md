@@ -1,7 +1,7 @@
 ---
 id: idp-integrate
 title: Integrate IDP into your processes
-description: "Integrate IDP into your end-to-end processes in Modeler."
+description: "Integrate intelligent document processing (IDP) into your end-to-end processes in Modeler."
 ---
 
 import IdpElementImg from './img/idp-diagram-element.png';

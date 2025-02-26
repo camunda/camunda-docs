@@ -17,21 +17,11 @@ For example, you can use IDP to extract data from invoices and other document ty
 
 <img src={IdpOverviewImg} alt="An overview of intelligent document processing" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
-## Prerequisites
+## Configure IDP
 
-To configure and use IDP in Camunda 8 you must:
+Before you can get started with IDP, you must ensure your setup is configured with the required components and credentials. For example, IDP only supports Web Modeler. Desktop Modeler is not supported.
 
-- Create an [Amazon Bedrock](https://aws.amazon.com/bedrock/) account to allow IDP to integrate with the [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) connector.
-
-- Deploy the [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) connectors used by IDP to extract document content and converse with LLM models.
-
-- Add your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to any cluster used with IDP.
-
-- Create an Amazon AWS S3 bucket named `idp-extraction-connector` to be used by IDP for temporary document storage during analysis and test extraction.
-
-:::info
-To learn more about the composable IDP architecture, see [technical architecture](idp/idp-reference.md#technical-architecture).
-:::
+- [Configure IDP](idp/idp-configuration.md)
 
 ## Get started with IDP
 

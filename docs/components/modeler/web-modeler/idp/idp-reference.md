@@ -1,7 +1,7 @@
 ---
 id: idp-reference
 title: IDP reference
-description: "Technical reference information for IDP, such as technical architecture, supported document file formats, and document storage."
+description: "Technical reference information for intelligent document processing (IDP), such as technical architecture, supported document file formats, and document storage."
 ---
 
 import IdpArchitectureImg from './img/idp-architecture-diagram.png';
