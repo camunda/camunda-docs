@@ -176,6 +176,24 @@ TLS can be enabled by providing a local file keystore using the `--keystore` arg
 
 Metrics are enabled in Camunda 8 Run by default, and can be accessed at [#todo]. For more information, see the Zeebe [Prometheus metrics](/docs/self-managed/zeebe-deployment/operations/metrics.md) documentation.
 
+### Starting elasticsearch outside c8run
+
+If you want to start Elasticsearch outside of c8run, you can do so by setting the `--disable-elasticsearch` flag when starting c8run. This will prevent c8run from starting its own Elasticsearch instance.
+
+One way to do this is to use the following command:
+
+```bash
+docker run \
+    -m 1GB \
+    -d \
+    --name elasticsearch \
+    -p 9200:9200 \
+    -p 9300:9300 \
+    -e "discovery.type=single-node" \
+    -e "xpack.security.enabled=false" \
+    elasticsearch:8.15.2
+```
+
 ### Environment variables
 
 Advanced configuration options can be provided via environment variables.
