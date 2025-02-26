@@ -113,8 +113,6 @@ Kubernetes is a powerful orchestration platform for containerized applications. 
 
 For more information and guides, see the reference for [Kubernetes](/self-managed/reference-architecture/kubernetes.md).
 
-<!-- TODO add link or card for AWS ref arch -->
-
 ### Containers
 
 Containers, such as Docker, offer a middle ground between the manual JAR and Kubernetes approaches. They provide a lightweight, portable, and consistent runtime environment, making it easier to develop, test, and deploy applications across different environments. Containers encapsulate an application and its dependencies, ensuring that it runs reliably regardless of where it is deployed.
@@ -136,8 +134,6 @@ For organizations that prefer traditional infrastructure, reference architecture
 - Best for teams with expertise in managing physical servers or virtual machines.
 
 For more information and guides, see the reference for [manual setups](/self-managed/setup/deploy/local/manual.md).
-
-<!-- TODO add link or card for AWS EC2 -->
 
 ### Local development
 
