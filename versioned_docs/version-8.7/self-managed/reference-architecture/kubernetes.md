@@ -268,7 +268,7 @@ AWS Certificate Manager (ACM) is not compatible with NLB in this scenario, as AC
 
 #### Load Balancer
 
-Azure offers alternative load-balancing solutions, including the **Application Gateway for Containers**, which replaces the older **Application Gateway Ingress Controller (AGIC)**. This gateway supports **gRPC** and **HTTP/2** via the `GRPCRoute` resource in the [Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/). Configuration details can be found in [official Azure documentation](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/grpc).
+Azure offers alternative load-balancing solutions, including the **Application Gateway for Containers (AGC)**, which replaces the older **Application Gateway Ingress Controller (AGIC)**. This gateway supports **gRPC** and **HTTP/2** via the `GRPCRoute` resource in the [Kubernetes Gateway API](https://kubernetes.io/docs/concepts/services-networking/gateway/). Configuration details can be found in [official Azure documentation](https://learn.microsoft.com/en-us/azure/application-gateway/for-containers/grpc).
 
 ### Google GKE
 
