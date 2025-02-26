@@ -45,13 +45,44 @@ To create a new file from a template, take the following steps:
 6. In the **Operation Details** section, set the field **Template variables** as desired variables that will be applied to the template. The template variables are compatible with the Google Docs [Requests API](https://developers.google.com/docs/api/reference/rest/v1/documents/request). This property requires FEEL input.
 7. _(optional)_ In the **Operation Details** section, you can set the **Additional properties or metadata** field to Google Drive compatible properties. This property requires FEEL input. Check [the appendix](#what-are-the-limitations-of-the-additional-properties-or-metadata) for known values and limitations.
 
+### Upload file
+
+To upload a file, take the following steps:
+
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+2. In the **Select Operation** section, set the field value **Operation Type** to **Upload File**.
+3. _(optional)_ In the **Operation Details** section, set the field **Parent folder ID** to the desired parent, inside which a new file will be created. If not specified, a new folder is created in the Google Drive root folder of the user who owns the OAuth token.
+4. In the **Document** section, input the variable name to which the document is assigned.
+
+:::note
+To work with documents you must upload them first, [using the REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
+:::
+
+### Download file
+
+To download a file, take the following steps:
+
+1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
+2. In the **Select Operation** section, set the field value **Operation Type** to **Download File**.
+3. In the **Operation Details** section, set the field _File ID_ to the google drive file that will be downloaded. For more information, refer to the [file id appendix](#Where-do-I-get-File-ID).
+
 ## Google Drive Connector response
 
-The **Google Drive Connector** exposes Google Drive API response as a local variable called response.
+The following response types can be returned by the _Google Drive Connector response_, depending on the **Operation Type** selected.
+
+### Response type for list of operations
+
+- **Create Folder**
+- **Create File from template**
+- **Upload File**
+
+The **Google Drive Connector response** exposes the Google Drive API response as a local variable named "response".
+
 The following fields are available in the response variable:
 
-- `googleDriveResourceId` - ID of the newly created resource.
-- `googleDriveResourceUrl` - Human-readable URL of the newly created resource.
+- `googleDriveResourceId`: The ID of the newly created resource.
+- `googleDriveResourceUrl`: Human-readable URL of the newly created resource.
 
 You can use an output mapping to map the response:
 
@@ -62,6 +93,26 @@ You can use an output mapping to map the response:
 = {
   "myNewReportFolderId": response.googleDriveResourceId,
   "myNewReportFolderUrl": response.googleDriveResourceUrl
+}
+```
+
+### Response type for _Download file_ operation only
+
+The **Google Drive connector** response will be identical to the [REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
+
+For example:
+
+```
+{
+    "camunda.document.type": "camunda",
+    "storeId": "in-memory",
+    "documentId": "c3c8e499-321d-421c-afa2-4632d2f5ce48",
+    "metadata": {
+        "contentType": "image/png",
+        "fileName": "file name",
+        "size": 66497,
+        "customProperties": {}
+    }
 }
 ```
 
@@ -282,6 +333,20 @@ Sincerely,
 Jane T. Doe, Executive Director
 
 ```
+
+### Where do I get File ID?
+
+To find the File ID for a Google file, follow these steps:
+
+1. Select the desired file on your Google Drive, click on the three horizontal dots to the right of the file name.
+2. Click on the share section.
+3. Click on copy link. The URL will look something like the following:
+
+```
+https://drive.google.com/file/d/1y1td3iIKWOh88gK4hVevGM1WnX7tibCW/view
+```
+
+4. The File ID is the alphanumeric string after `/d/`. In this example, this would be `1y1td3iIKWOh88gK4hVevGM1WnX7tibCW`.
 
 ### What kind of templates are currently supported?
 

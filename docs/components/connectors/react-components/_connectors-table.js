@@ -19,6 +19,7 @@ import EmailImg from "../img/connector-email.png";
 import GithubImg from "../img/connector-github.png";
 import GitlabImg from "../img/connector-gitlab.png";
 import GoogleDriveImg from "../img/connector-google-drive.png";
+import GoogleGeminiImg from "../img/connector-google-gemini.png";
 import GoogleMapsImg from "../img/connector-google-maps.png";
 import GoogleSheetsImg from "../img/connector-google-sheets.png";
 import GraphqlImg from "../img/connector-graphql.png";
@@ -233,6 +234,13 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../googledrive/",
       image: GoogleDriveImg,
+    },
+    {
+      name: "Google Gemini",
+      description: "Access Google Gemini multimodal models.",
+      type: "Outbound",
+      link: "../google-gemini/",
+      image: GoogleGeminiImg,
     },
     {
       name: "Google Maps Platform",
