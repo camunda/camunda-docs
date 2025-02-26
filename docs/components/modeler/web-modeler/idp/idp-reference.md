@@ -31,8 +31,7 @@ The IDP extraction connector integrates with Camunda document handling connector
 
 :::note
 
-- You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](../intelligent-document-processing.md#configure-idp).
-
+- You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](idp-configuration.md).
 - Learn more about [Camunda document handling](/components/concepts/document-handling.md).
 
 :::
