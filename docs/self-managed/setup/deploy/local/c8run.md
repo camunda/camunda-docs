@@ -28,7 +28,7 @@ Camunda 8 Run includes the following:
 
 - **OpenJDK 21+**: Required for running Camunda 8 as a Java application.
 - **Docker [v. TBD]**: Required for running Camunda 8 via Docker Compose.
-- [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
+- **[Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)**
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
@@ -56,18 +56,18 @@ Mac users may encounter the warning `"c8run" Not Opened`. Follow the Apple suppo
 
 The following command line arguments are available:
 
-| Argument                   | Description                                                                                                                           |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                      |
-| `--detached`               | Starts Camunda 8 Run as a detached process.                                                                                           |
-| `--username <arg>`         | Configure the first user’s username to `<arg>`.                                                                                       |
-| `--password <arg>`         | Configure the first user’s password to `<arg>`.                                                                                       |
-| `--keystore <arg>`         | Configure the TLS certificate for HTTPS. If not specified, use HTTP. For more information, see [enabling TLS](#enable-tls).           |
-| `--keystorePassword <arg>` | Provide the password to use with a JKS keystore file.                                                                                 |
-| `--port <arg>`             | Configure the Camunda core port to the value provided (default: 8080).                                                                |
-| `--log-level <arg>`        | Set a different log level for the Camunda core.                                                                                       |
-| `--docker`                 | Download and run the Camunda Docker Compose distribution. Any additional options are not supported at this time, and will be ignored. |
-| `--disable-elasticsearch`  | Do not start the built-in Elasticsearch. Ensure another Elasticsearch instance is provided via `--config`.                            |
+| Argument                   | Description                                                                                                                                                                                              |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                                                                                         |
+| `--detached`               | Starts Camunda 8 Run as a detached process.                                                                                                                                                              |
+| `--username <arg>`         | Configure the first user’s username to `<arg>`.                                                                                                                                                          |
+| `--password <arg>`         | Configure the first user’s password to `<arg>`.                                                                                                                                                          |
+| `--keystore <arg>`         | Configure the TLS certificate for HTTPS. If not specified, use HTTP. For more information, see [enabling TLS](#enable-tls).                                                                              |
+| `--keystorePassword <arg>` | Provide the password to use with a JKS keystore file.                                                                                                                                                    |
+| `--port <arg>`             | Configure the Camunda core port to the value provided (default: 8080).                                                                                                                                   |
+| `--log-level <arg>`        | Set a different log level for the Camunda core.                                                                                                                                                          |
+| `--docker`                 | Download and run the Camunda Docker Compose distribution. Any additional options are not supported at this time, and will be ignored.                                                                    |
+| `--disable-elasticsearch`  | Do not start the built-in Elasticsearch. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) options for more information. |
 
 ## Work with Camunda 8 Run
 
@@ -178,13 +178,13 @@ TLS can be enabled by providing a local file keystore using the `--keystore` arg
 
 ### Access metrics
 
-Metrics are enabled in Camunda 8 Run by default, and can be accessed at [#todo]. For more information, see the Zeebe [Prometheus metrics](/docs/self-managed/zeebe-deployment/operations/metrics.md) documentation.
+Metrics are enabled in Camunda 8 Run by default, and can be accessed at [#todo]. For more information, see the Zeebe [Prometheus metrics](/self-managed/zeebe-deployment/operations/metrics.md) documentation.
 
-### Starting elasticsearch outside c8run
+### Start external Elasticsearch
 
-If you want to start Elasticsearch outside of c8run, you can do so by setting the `--disable-elasticsearch` flag when starting c8run. This will prevent c8run from starting its own Elasticsearch instance.
+To start Elasticsearch outside of Camunda 8 Run, set the `--disable-elasticsearch` flag at startup. This prevents Camunda 8 Run from starting its own Elasticsearch instance.
 
-One way to do this is to use the following command:
+The following command starts an external Elasticsearch instance via `docker run`:
 
 ```bash
 docker run \
@@ -200,9 +200,9 @@ docker run \
 
 ### Environment variables
 
-Advanced configuration options can be provided via environment variables.
+The following advanced configuration options can be provided via environment variables:
 
-| Variable       | Description                                                                                                                      |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `ES_JAVA_OPTS` | Allows you to override java command line parameters for Elasticsearch. Useful when upping memory limits default: `-Xms1g -Xmx1g` |
-| `JAVA_OPTS`    | Allows you to override java command line parameters for Camunda.                                                                 |
+| Variable       | Description                                                                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ES_JAVA_OPTS` | Allows you to override Java command line parameters for Elasticsearch. This can allow you to increase memory limits. **Default:** `-Xms1g -Xmx1g` |
+| `JAVA_OPTS`    | Allows you to override Java command line parameters for Camunda.                                                                                  |
