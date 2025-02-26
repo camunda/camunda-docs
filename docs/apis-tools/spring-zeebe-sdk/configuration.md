@@ -374,7 +374,7 @@ camunda:
 
 #### REST over gRPC
 
-If true, the client will use REST instead of gRPC whenever possible:
+If true, the Zeebe Client will use REST instead of gRPC whenever possible to communicate with the Zeebe Gateway:
 
 ```yaml
 camunda:
@@ -385,7 +385,7 @@ camunda:
 
 #### gRPC address
 
-Define client gRPC address:
+Define the address of the [gRPC API](/apis-tools/zeebe-api/grpc.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -394,9 +394,13 @@ camunda:
       grpc-address: http://localhost:26500
 ```
 
+:::note
+You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerException: target` error.
+:::
+
 #### REST address
 
-Define client REST address:
+Define address of the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -404,6 +408,10 @@ camunda:
     zeebe:
       rest-address: http://localhost:8080
 ```
+
+:::note
+You must add the `http://` scheme to the URL.
+:::
 
 #### Defaults and Overrides
 

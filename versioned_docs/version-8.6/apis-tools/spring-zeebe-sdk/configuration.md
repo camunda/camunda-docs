@@ -372,7 +372,7 @@ camunda:
 
 #### gRPC address
 
-Define the address of the [gRPC API](../zeebe-api/grpc.md) exposed by the [Zeebe Gateway](../../self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
+Define the address of the [gRPC API](/apis-tools/zeebe-api/grpc.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -387,7 +387,7 @@ You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerEx
 
 #### REST address
 
-Define address of the [Camunda 8 REST API](../camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](../../self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
+Define address of the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -395,6 +395,7 @@ camunda:
     zeebe:
       rest-address: http://localhost:8080
 ```
+
 :::note
 You must add the `http://` scheme to the URL.
 :::
