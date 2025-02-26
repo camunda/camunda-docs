@@ -4,11 +4,23 @@ title: Configure IDP
 description: "Set up and configure intelligent document processing (IDP) in Camunda 8 SaaS and Self-Managed."
 ---
 
+import IdpSecretsImg from './img/idp-connector-secrets.png';
+import TOCInline from '@theme/TOCInline';
+
 Configure your setup with the components and credentials required by IDP.
+
+:::info
+To learn more about the technical architecture and how IDP works, see [technical architecture](idp-reference.md#technical-architecture).
+:::
 
 ## Prerequisites
 
 The following prerequisites are required to use IDP in Camunda 8:
+
+<TOCInline
+toc={toc.filter((node) => node.level === 3 || node.level === 4)}
+minHeadingLevel={3}
+/>
 
 ### Web Modeler
 
@@ -17,23 +29,34 @@ You must be able to access and use [Web Modeler](/components/modeler/web-modeler
 - IDP currently only supports Web Modeler. Desktop Modeler is not supported.
 - To use IDP with Camunda 8 Self-Managed and Camunda 8 Run you must [install](/self-managed/modeler/web-modeler/installation.md) and [configure](/self-managed/modeler/web-modeler/configuration/configuration.md) Web Modeler.
 
+### Amazon AWS account and credentials
+
+As IDP uses Camunda connectors to integrate with Amazon AWS technology, you must:
+
+- Create or have access to an [Amazon AWS](https://aws.amazon.com/iam/) account, configured with access to [Amazon Bedrock](https://aws.amazon.com/bedrock/).
+- Add your Amazon AWS account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to any cluster used with IDP.
+  <img src={IdpSecretsImg} alt="Connector secrets" style={{width: '650px'}} />
+
+### Amazon AWS S3 storage
+
+You must create an Amazon AWS S3 bucket named `idp-extraction-connector` to be used by IDP for temporary document storage during analysis and test extraction.
+
 ### Connectors
 
-- Create an [Amazon Bedrock](https://aws.amazon.com/bedrock/) account to allow IDP to integrate with the [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) connector.
+IDP requires the following connectors for extracting document content and conversing with LLM models:
 
-- Deploy the [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) connectors used by IDP to extract document content and converse with LLM models.
+| Connector                                                                                  | Usage                                                     |
+| :----------------------------------------------------------------------------------------- | :-------------------------------------------------------- |
+| [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md)                 | Used for document storage during analysis and extraction. |
+| [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md)     | Used to extract text from documents.                      |
+| [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md) | Used to extract insights about the content of documents.  |
+| [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md)       | Used to extract data from documents.                      |
 
-- Add your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to any cluster used with IDP.
-
-- Create an Amazon AWS S3 bucket named `idp-extraction-connector` to be used by IDP for temporary document storage during analysis and test extraction.
-
-:::info
-To learn more about the technical architecture and how IDP works, see [technical architecture](idp-reference.md#technical-architecture).
-:::
+For example, if you are using Camunda 8 Self-Managed, check you have these connectors [installed and deployed](/self-managed/connectors-deployment/install-and-start.md) in your environment.
 
 ## Configure IDP for Camunda 8 Run
 
-The following example steps typically required for configuring IDP with Camunda 8 Run:
+The following example steps are typically required for configuring IDP with Camunda 8 Run:
 
 1.
 
