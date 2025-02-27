@@ -8,6 +8,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Ad-hoc subprocess",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/find-ad-hoc-subprocess-activities",
+          label: "Query activatable activities (alpha)",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Authentication",
       items: [
         {
