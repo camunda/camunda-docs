@@ -22,15 +22,20 @@ There are several storage options:
 - Documents can be stored **in memory**. If the application is stopped, the document will be lost. This is not supported for production environments.
 
 :::note
+GCP and AWS work with SaaS, and are supported for Self-Managed in production. Camunda does not provide local or in-memory for SaaS, but Self-Managed users may configure in-memory and local storage using [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+:::
+
+:::note
 If no configuration is provided, the default document storage is **in-memory**. To change this to a different storage method, use the environment variables in the section below for **every** component using document handling. No additional configuration is required for in-memory storage.
 :::
 
-To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are aws, in-memory, mygcp (for Google Cloud Platform), and local-storage.
+To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are aws, in-memory, gcp (for Google Cloud Platform), and local-storage.
 
 <Tabs groupId="storage" defaultValue="aws" queryString values={
 [
 {label: 'AWS', value: 'aws' },
 {label: 'GCP', value: 'gcp' },
+{label: 'Local', value: 'local' },
 ]}>
 
 <TabItem value='aws'>
@@ -63,13 +68,21 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 
 </TabItem>
 
+<TabItem value='local'>
+
+| Store variable           | Description                                    |
+| ------------------------ | ---------------------------------------------- |
+| DOCUMENT_STORE_GCP_CLASS | The path where the documents should be stored. |
+
+</TabItem>
+
 </Tabs>
 
 ### Limitations
 
 - One bucket per cluster is permitted with SaaS.
 - This storage integration is handled and configured by Camunda. While this is not dynamically configurable by the cluster, it is provided as environment configuration.
-- **Maximum file size**: 10 MB per file.
+- **Maximum batch payload size**: 10 MB
 - **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.
 
 ## Use cases and capabilities
@@ -81,7 +94,7 @@ Document handling may be beneficial for several use cases. For example:
 
 ### Upload a document via inbound webhook Connector
 
-[Access created documents](/components/connectors/protocol/http-webhook.md) in both the response expression and the result expression, where the `documents` object contains the references for created documents.
+[Access created documents](/components/connectors/protocol/http-webhook.md) in both the response expression and the result expression, where the `documents` object contains the references for created documents. Below, review an example of a webhook configuration:
 
 ![example payload inbound webhook connector](./assets/inbound-webhook-document.png)
 
@@ -140,7 +153,7 @@ Here, we assign the portion containing the documents to `userApplicationForms`. 
 
 Another Connector can also use this variable as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure. Review the list of [outbound Connectors](#outbound-connectors) below which currently support retrieving the document content to store in a third-party system.
 
-### Upload a document via public form
+### Upload a document via form
 
 A [form](/components/modeler/forms/camunda-forms-reference.md) can display documents with the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md):
 
@@ -155,7 +168,7 @@ For additional guidance on supported file formats, refer to the [MDN Web Docs](h
 With Tasklist, users may then view and download files displayed in the task's form.
 
 :::note
-If you change the **Document URL** under **Download settings**, this feature will not work for public start forms because there is no valid session.
+This feature will not work for public processes started by forms.
 :::
 
 ![document handling in tasklist](./assets/document-handling-tasklist.png)
