@@ -6,7 +6,7 @@ description: "Integrate intelligent document processing (IDP) into your end-to-e
 
 import IdpElementImg from './img/idp-diagram-element.png';
 
-You can integrate your published IDP projects into your end-to-end processes in Modeler.
+Integrate your published document extraction projects into your end-to-end processes in Modeler.
 
 ## Create and configure an IDP task
 

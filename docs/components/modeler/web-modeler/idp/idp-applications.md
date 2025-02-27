@@ -25,6 +25,10 @@ To create an IDP application:
 
 <!-- 1. You can now create [document extraction](idp-document-extraction.md) and [document automation](idp-document-automation.md) projects inside your IDP application folder. -->
 
+:::note
+Camunda recommends using a development (dev) cluster for your IDP applications.
+:::
+
 ## IDP application clusters
 
 The following requirements and limitations apply to IDP application clusters:
@@ -32,9 +36,5 @@ The following requirements and limitations apply to IDP application clusters:
 | Note              | Description                                                                                                                                                                                                                              |
 | :---------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Cluster health    | IDP applications and projects are only fully operational when linked to a healthy, active cluster. You can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster when required. |
-| Document handling | When creating an IDP application folder, you can only select a cluster that supports Camunda document handling.                                                                                                                          |
+| Document handling | When creating an IDP application folder, you can only select a cluster that supports Camunda document handling. For example, a cluster that is version 8.7 or higher.                                                                    |
 | Changing cluster  | You cannot change the cluster used by an IDP application once it has been created.                                                                                                                                                       |
-
-:::note
-Camunda recommends using a development cluster for your IDP applications.
-:::

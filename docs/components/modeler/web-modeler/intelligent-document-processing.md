@@ -19,19 +19,19 @@ For example, you can use IDP to extract data from invoices and other document ty
 
 ## Configure IDP
 
-Before you can get started with IDP, you must ensure your setup is configured with the required components and credentials. For example, IDP only supports Web Modeler. Desktop Modeler is not supported.
+[Configure IDP](idp/idp-configuration.md) for your Camunda 8 setup with the components and credentials required by IDP.
 
-- [Configure IDP](idp/idp-configuration.md)
+For example, for Camunda 8 Self-Managed/Camunda 8 Run you must install Web Modeler to be able to create and manage IDP applications and document extraction projects.
 
 ## Get started with IDP
 
-To start using IDP in your processes:
+Once configured, you can start using IDP in your processes:
 
 1. Create an [IDP application](idp/idp-applications.md) in which to store and manage a set of related IDP projects.
 
 1. Create and publish a [document extraction](idp/idp-document-extraction.md) project for each type of document you want to extract data from.
 
-1. [Integrate the published extraction project](idp/idp-integrate.md) into your processes in Modeler.
+1. [Integrate your published document extraction project](idp/idp-integrate.md) into your processes in Modeler.
 
 <!-- 1. Create and publish your IDP projects in your IDP application folder:
 

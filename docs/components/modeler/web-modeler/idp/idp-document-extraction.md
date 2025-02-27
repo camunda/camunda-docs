@@ -1,7 +1,7 @@
 ---
 id: idp-document-extraction
 title: Document extraction
-description: "Document extraction projects form the basis for using IDP in your end-to-end processes. Extract data from a single type of structured or unstructured document."
+description: "Document extraction projects form the basis for using intelligent document processing (IDP) in your end-to-end processes. Extract data from a single type of structured or unstructured document."
 ---
 
 import IdpExtractionProjectModalImg from './img/idp-create-extraction-project-modal.png';
@@ -20,7 +20,7 @@ Document extraction projects form the basis for using IDP in your end-to-end pro
 
 To create a document extraction project:
 
-1. In your IDP application, select **Create new** > **Document extraction** to open the **Create an extraction project** modal.
+1. In your [IDP application](idp-applications.md), select **Create new** > **Document extraction** to open the **Create an extraction project** modal.
    <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="600px"/>
 
    - **Name**: Enter a descriptive name for the project, such as “Invoice type A” for example.
