@@ -7,7 +7,7 @@ description: "Camunda 8 Kubernetes deployment Reference architecture home"
 
 <!-- TODO: Update for 8.8 changes when it's clear what it means -->
 
-This reference architecture provides guidance on deploying Camunda 8 Self-Managed within a Kubernetes cluster. This deployment method is ideal for users who are looking to leverage the benefits of containerization and self-healing capabilities. It's well suited to quickly scale and easily provide resilience by utilizing multi-zone deployments.
+This reference architecture provides guidance on deploying Camunda 8 Self-Managed within a Kubernetes cluster. This deployment method is ideal for users who are looking to leverage the benefits of containerization and self-healing capabilities. It is suited for quick scalability, and can provide additional resilience by utilizing multi-zone deployments.
 
 ## Key features
 
