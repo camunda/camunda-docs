@@ -183,13 +183,13 @@ Assuming the configuration above was saved in a file named `application-custom.y
 SPRING_CONFIG_ADDITIONALLOCATION=/path/to/application-custom.yaml ./bin/camunda
 ```
 
-#### Applying the configuration above when using helm charts
+#### Starting the application using Helm charts
 
-##### Case 1: Auto-generated app config by Helm chart.
+##### Case 1: Auto-generated app config by Helm chart
 
 Using [Spring Boot convention](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables) environment variables can be used to override configuration.
 
-This is the additional configuration needed to disable the schema manager in the Camunda apps.
+These are the Helm values needed to disable the schema manager in the Camunda apps.
 
 ```
 # Helm chart values file.
@@ -227,7 +227,7 @@ operate:
       value: "false"
 ```
 
-##### Case 2: - Manually-managed app config by the user.
+##### Case 2: - Manually-managed app config by the user
 
 In case the application configurations are managed directly and don't rely on the Helm chart auto-generated configuration.
 
@@ -251,27 +251,27 @@ tasklist:
   configuration |
     [...] # Any other custom config.
     camunda.tasklist:
-        elasticsearch:
-          createSchema: false
-          healthCheckEnabled: false
-        archiver:
-          ilmEnabled: false
-          ilmManagePolicy: false
-        migration:
-          migrationEnabled: false
+      elasticsearch:
+        createSchema: false
+        healthCheckEnabled: false
+      archiver:
+        ilmEnabled: false
+        ilmManagePolicy: false
+      migration:
+        migrationEnabled: false
     [...] # Any other custom config.
 
 operate:
   configuration |
     [...] # Any other custom config.
     camunda.operate:
-        elasticsearch:
-          createSchema: false
-          healthCheckEnabled: false
-        archiver:
-          ilmEnabled: false
-        migration:
-          migrationEnabled: false
+      elasticsearch:
+        createSchema: false
+        healthCheckEnabled: false
+      archiver:
+        ilmEnabled: false
+      migration:
+        migrationEnabled: false
     [...] # Any other custom config.
 ```
 
@@ -279,5 +279,4 @@ operate:
 
 - Please note that this feature is only available for the Camunda `8.6.10` version and above.
 - It only works for installations using Elasticsearch.
-- This application setup cannot be used when upgrading from an `8.6.9` installation, since upgrades are not yet supported with the stand-alone schema manager.
 - Camunda Optimize cannot be executed with this setup.
