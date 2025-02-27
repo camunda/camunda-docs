@@ -25,10 +25,11 @@ Camunda 8 Run includes the following:
 
 ## Prerequisites
 
-- **OpenJDK 21+**: Required for running Camunda 8 as a Java application.
-- **Docker [v. TBD]**: Required for running Camunda 8 via Docker Compose.
+**OpenJDK 21+**: Required for running Camunda 8 as a Java application.
+
+- **Docker 20.10.21+**: Required for running Camunda 8 via Docker Compose.
 - **[Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)**
-- **If using Ubuntu, use Ubuntu 22.04 or newer**
+- **If using Ubuntu**: Ubuntu 22.04 or newer
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
