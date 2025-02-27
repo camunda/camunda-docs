@@ -121,7 +121,7 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 The following matrix shows which component versions work together.
 
-- Please note that `Zeebe`, `Operate`, and `Tasklist` form the Core Orchestration cluster and must be running on the exact same `minor`, and `patch` level starting from version `8.6.0` going forward.
+From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the exact same `minor` and `patch` level to ensure compatibility.
 
 | Design                                        | Automate                                                                                         | Improve        |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------ | -------------- |

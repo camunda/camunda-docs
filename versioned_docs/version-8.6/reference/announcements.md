@@ -10,6 +10,10 @@ Release date: 8th of Oct 2024
 
 End of maintenance: 14th of April 2026
 
+## Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
+
+From version `8.6.0` forward, the core components Zeebe, Operate, and Tasklist must run the exact same `minor` and `patch` level to ensure compatibility. See the [component version matrix](./supported-environments.md#component-version-matrix) for an overview of components.
+
 ### License key changes
 
 With the 8.6 release, Camunda 8 Self-Managed requires a license key for production usage. For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).

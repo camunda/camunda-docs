@@ -131,7 +131,7 @@ values={[
 
 <TabItem value="version-8-7-x">
 
-- Please note that `Zeebe`, `Operate`, and `Tasklist` form the Core Orchestration cluster and must be running on the exact same `minor`, and `patch` level starting from version `8.6.0` going forward.
+From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the exact same `minor` and `patch` level to ensure compatibility.
 
 | Design                                        | Automate                                                                                         | Improve        |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------ | -------------- |
@@ -149,7 +149,7 @@ You can also use newer versions of Desktop and Web Modeler with older Zeebe vers
 
 <TabItem value="version-8-8-x">
 
-- Please note that `Zeebe`, `Operate`, `Tasklist` and `Identity` form the Core [Orchestration cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) and must be running on the exact same `minor`, and `patch` level starting from version `8.8.0` going forward.
+From version `8.8.0` forward, Zeebe, Operate, Tasklist and Identity must run on the exact same `minor` and `patch` level to ensure compatibility.
 
 | Design                                     | [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) |
 | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |

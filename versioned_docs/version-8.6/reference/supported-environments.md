@@ -119,7 +119,9 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 ### Component version matrix
 
-This matrix shows which component versions work together:
+This matrix shows which component versions work together.
+
+From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the exact same `minor` and `patch` level to ensure compatibility.
 
 | Design                | Automate    |                                                                            | Improve         |
 | --------------------- | ----------- | -------------------------------------------------------------------------- | --------------- |
