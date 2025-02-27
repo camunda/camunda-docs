@@ -36,6 +36,7 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 {label: 'AWS', value: 'aws' },
 {label: 'GCP', value: 'gcp' },
 {label: 'Local', value: 'local' },
+{label: 'In-memory', value: 'in-memory' },
 ]}>
 
 <TabItem value='aws'>
@@ -73,6 +74,20 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 | Store variable           | Description                                    |
 | ------------------------ | ---------------------------------------------- |
 | DOCUMENT_STORE_GCP_CLASS | The path where the documents should be stored. |
+
+</TabItem>
+
+<TabItem value='in-memory'>
+
+If no configuration is provided and no `DOCUMENT_DEFAULT_STORE_ID` is set, in-memory is used as the default storage type.
+
+If configurations are provided for at least one storage type (DOCUMENT_STORE_AWS_BUCKET, DOCUMENT_STORE_AWS_BUCKET_PATH, etc.) ensure `DOCUMENT_DEFAULT_STORE_ID=in-memory` is set for in-memory storage.
+
+If you also specify the following environment variable:
+
+`DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`
+
+Be sure to remove the hyphen and set `DOCUMENT_DEFAULT_STORE_ID` to `=inmemory`.
 
 </TabItem>
 
@@ -149,7 +164,7 @@ The result variable will have the following structure:
 }
 ```
 
-Here, we assign the portion containing the documents to `userApplicationForms`. This can be later used by the process to retrieve documents. For example, we could use the variable `userApplicationForms` to display the uploaded document in a user task using the document preview component.
+Here, we use the configuration of the image on the initial steps and assign the portion containing the documents to `userApplicationForms`. This can be later used by the process to retrieve documents. For example, we could use the variable `userApplicationForms` to display the uploaded document in a user task using the document preview component.
 
 Another Connector can also use this variable as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure. Review the list of [outbound Connectors](#outbound-connectors) below which currently support retrieving the document content to store in a third-party system.
 
