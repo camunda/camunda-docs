@@ -35,14 +35,14 @@ zeebe.broker.exporters.elasticsearch:
       createTemplate: true
     retention:
       enabled: true
-    # Below is an example assuming an existing user called 'camunda-admin' who has 'superuser' privileges
+    # Example assuming an existing user called 'camunda-admin' who has 'superuser' privileges
     authentication:
       username: camunda-admin
       password: camunda123
 camunda:
   operate:
     elasticsearch:
-      # Below is an example assuming an existing user called 'camunda-admin' who has 'superuser' privileges
+      # Example assuming an existing user called 'camunda-admin' who has 'superuser' privileges
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
@@ -50,7 +50,7 @@ camunda:
       ilmEnabled: true
   tasklist:
     elasticsearch:
-      # Below is an example assuming an existing user called 'camunda-admin' who has 'superuser' privileges
+      # Example assuming an existing user called 'camunda-admin' who has 'superuser' privileges
       username: camunda-admin
       password: camunda123
       healthCheckEnabled: false
@@ -64,8 +64,8 @@ camunda:
 Start the java application `schema` (or `schema.bat` for Windows) provided in the `bin` folder of the delivered jar file. The schema manager will create the necessary indices and templates in the database and apply the respective settings.
 Assuming the configuration above was saved in a file named `schema-manager.yaml`, you can start the application with the following command:
 
-```SPRING_CONFIG_ADDITIONALLOCATION=/path/to/schema-manager.yaml ./bin/schema
-
+```
+SPRING_CONFIG_ADDITIONALLOCATION=/path/to/schema-manager.yaml ./bin/schema
 ```
 
 Wait some minutes and verify that the application executed successfully.
@@ -74,7 +74,7 @@ Wait some minutes and verify that the application executed successfully.
 
 The camunda single application can now be started without cluster level privileges. The application will connect to the database and use the schema created by the schema manager.
 
-#### 2.1 Ensure there is an Elasticsearch user with sufficient privileges
+#### 2.1 Ensure that an Elasticsearch user with sufficient privileges exists
 
 The application requires a database user with at least `manage` privileges on the indices it is supposed to work with.
 
@@ -136,7 +136,7 @@ zeebe.broker.exporters.elasticsearch:
     retention:
       enabled: false
       managePolicy: false
-    # Below is an example assuming an existing user called 'camunda-app' with the privileges described in 2.1
+    # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
     authentication:
       username: camunda-app
       password: camunda123
@@ -148,7 +148,7 @@ camunda:
       password: camunda123
       healthCheckEnabled: false
     zeebeElasticsearch:
-      # Below is an example assuming an existing user called 'camunda-app' with the privileges described in 2.1
+      # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       username: camunda-app
       password: camunda123
     archiver:
@@ -163,7 +163,7 @@ camunda:
       password: camunda123
       healthCheckEnabled: false
     zeebeElasticsearch:
-      # Below is an example assuming an existing user called 'camunda-app' with the privileges described in 2.1
+      # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       username: camunda-app
       password: camunda123
     archiver:
@@ -179,8 +179,8 @@ camunda:
 Start the java application `camunda` (or `camunda.bat` for Windows) provided in the `bin` folder of the delivered jar file.
 Assuming the configuration above was saved in a file named `application-custom.yaml`, you can start the application with the following command:
 
-```SPRING_CONFIG_ADDITIONALLOCATION=/path/to/application-custom.yaml ./bin/camunda
-
+```
+SPRING_CONFIG_ADDITIONALLOCATION=/path/to/application-custom.yaml ./bin/camunda
 ```
 
 ##### Applying the configuration above when using helm charts
