@@ -38,13 +38,19 @@
       ]
     },
     {
-      "Migrate from Camunda 7": [
-        "guides/migrating-from-camunda-7/index",
+      "type": "category",
+      "label": "Migrate from Camunda 7",
+      "link": {
+        "type": "doc",
+        "id": "guides/migrating-from-camunda-7/index"
+      },
+      "items": [
+        "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-tooling",
+        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-7/adjusting-source-code"
+        "guides/migrating-from-camunda-7/technical-details"
       ]
     }
   ],
@@ -57,7 +63,6 @@
         "components/concepts/processes",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
-        "components/concepts/user-task-listeners",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
@@ -1678,6 +1683,63 @@
                   "dirName": "apis-tools/tasklist-api"
                 }
               ]
+            },
+            {
+              "Zeebe API (REST)": [
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication",
+                "apis-tools/zeebe-api-rest/zeebe-api-tutorial",
+                {
+                  "Specifications": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api"
+                    },
+                    {
+                      "type": "category",
+                      "label": "Cluster",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/get-cluster-topology",
+                          "label": "Get cluster topology",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "User task",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/complete-a-user-task",
+                          "label": "Complete a user task",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/assign-a-user-task",
+                          "label": "Assign a user task",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/update-a-user-task",
+                          "label": "Update a user task",
+                          "className": "api-method patch"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task",
+                          "label": "Unassign a user task",
+                          "className": "api-method delete"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -1868,8 +1930,7 @@
                     "id": "self-managed/setup/deploy/amazon/aws-marketplace"
                   },
                   "items": []
-                },
-                "self-managed/setup/deploy/amazon/aws-ec2"
+                }
               ],
               "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks"
@@ -1911,8 +1972,7 @@
     },
     {
       "Reference architecture": [
-        "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual"
+        "self-managed/reference-architecture/reference-architecture"
       ]
     },
     {

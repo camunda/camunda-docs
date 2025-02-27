@@ -178,7 +178,7 @@ Git sync supports parallel feature development by allowing multiple process appl
 
 To use Git sync for parallel feature development:
 
-1. Create a new [process application](/docs/components/modeler/web-modeler/create-a-process-application.md) in Modeler for each active feature branch you want to develop.
+1. Create a new [process application](./create-a-process-application.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
 3. Work on your feature in Modeler, using **Sync with GitHub** or **Sync with GitLab** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.
@@ -189,6 +189,10 @@ To perform hotfixes or patches of production or production-bound processes, sync
 Creating multiple copies of a process application can complicate navigation and deployment if you have multiple files with the same ID in a project. To avoid this, you can create copies of the process application in different projects.
 :::
 
+## Self-Managed environment variables
+
+Refer to [Configuration of the restapi component](../../../self-managed/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
+
 ## Troubleshooting
 
 - Duplicate file names are not allowed for the same file type.
@@ -197,5 +201,5 @@ Creating multiple copies of a process application can complicate navigation and 
 - When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
-- Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler configuration part for your [git host](#connect-to-a-remote-repository) for more details.
+- Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler configuration part for your [git host](#connect-to-a-remote-repository) and available [environment variables](#self-managed-environment-variables) for more details.
 - **(GitHub specific)** A single synchronization action is limited to incorporating a maximum of 250 commits or making changes to up to 300 files, regardless of whether these changes affect the Web Modeler files directly. Web Modeler does not provide a notification when these thresholds are exceeded. Should you encounter this limitation, it may be necessary to initiate a fresh synchronization. A fresh synchronization fetches all the files in the repository without relying on the incremental changes, thus bypassing the limitations. This can be achieved by either changing the branch or modifying the GitHub repository URL.
