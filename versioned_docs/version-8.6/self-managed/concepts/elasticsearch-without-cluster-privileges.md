@@ -15,7 +15,7 @@ Index level privilege of at least `manage` is still required for the camunda sin
 
 ## Setup
 
-For this setup to work, the database schema needs to be initialized first (step 1). This requires cluster level privileges for the database. This only needs to be executed once. 
+For this setup to work, the database schema needs to be initialized first (step 1). This requires cluster level privileges for the database. This only needs to be executed once.
 Once the schema is initialized, the application can be started without cluster level privileges (step 2). The steps are described in detail below.
 
 ### 1. Initialize the schema manager
@@ -26,6 +26,7 @@ This step requires cluster level privileges for the database and only needs to b
 #### 1.1 Configure Schema Manager
 
 Create a configuration for the schema manager with the following values
+
 ```
 zeebe.broker.exporters.elasticsearch:
   className: io.camunda.zeebe.exporter.ElasticsearchExporter
@@ -35,7 +36,7 @@ zeebe.broker.exporters.elasticsearch:
     retention:
       enabled: true
     # Below is an example assuming an existing user called 'camunda-admin' who has 'superuser' privileges
-    authentication: 
+    authentication:
       username: camunda-admin
       password: camunda123
 camunda:
@@ -57,11 +58,14 @@ camunda:
       ilmEnabled: true
 
 ```
+
 #### 1.2 Start the Schema Manager with the config above
 
 Start the java application `schema` (or `schema.bat` for Windows) provided in the `bin` folder of the delivered jar file. The schema manager will create the necessary indices and templates in the database and apply the respective settings.
 Assuming the configuration above was saved in a file named `schema-manager.yaml`, you can start the application with the following command:
-``` SPRING_CONFIG_ADDITIONALLOCATION=/path/to/schema-manager.yaml ./bin/schema
+
+```SPRING_CONFIG_ADDITIONALLOCATION=/path/to/schema-manager.yaml ./bin/schema
+
 ```
 
 Wait some minutes and verify that the application executed successfully.
@@ -72,9 +76,10 @@ The camunda single application can now be started without cluster level privileg
 
 #### 2.1 Ensure there is an Elasticsearch user with sufficient privileges
 
-The application requires a database user with at least `manage` privileges on the indices it is supposed to work with. 
+The application requires a database user with at least `manage` privileges on the indices it is supposed to work with.
 
 Feel free to use an existing user with the required privileges. Alternatively the required privileges can be assigned to an example user called `camunda-app` with the following request to the database:
+
 ```
 PUT _security/role/read_write_role
 {
@@ -112,6 +117,7 @@ PUT _security/role/read_write_role
 ```
 
 Then assign the user to the role defined above (e.g. if Elasticsearch is running on docker, this can be achieved with the following command):
+
 ```
 docker exec -t elasticsearch elasticsearch-users useradd camunda-app -p camunda123
 docker exec -t elasticsearch elasticsearch-users roles camunda-app -a read_write_role
@@ -170,18 +176,19 @@ camunda:
 
 ##### Starting the application from the jar file
 
-Start the java application `camunda` (or `camunda.bat` for Windows) provided in the `bin` folder of the delivered jar file. 
+Start the java application `camunda` (or `camunda.bat` for Windows) provided in the `bin` folder of the delivered jar file.
 Assuming the configuration above was saved in a file named `application-custom.yaml`, you can start the application with the following command:
-``` SPRING_CONFIG_ADDITIONALLOCATION=/path/to/application-custom.yaml ./bin/camunda
+
+```SPRING_CONFIG_ADDITIONALLOCATION=/path/to/application-custom.yaml ./bin/camunda
+
 ```
 
 ##### Applying the configuration above when using helm charts
+
 TBD
 
 ## Limitations
 
-- Please note that this feature is only available for the Camunda `8.6.10` version and above. 
-- It only works for installations using Elasticsearch. 
+- Please note that this feature is only available for the Camunda `8.6.10` version and above.
+- It only works for installations using Elasticsearch.
 - Upgrades using the described setup are not yet supported.
-
-
