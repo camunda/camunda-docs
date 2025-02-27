@@ -30,9 +30,9 @@ Deployment guides for Camunda 8 components are available in the [Self-Managed se
 
 Below are two excellent starting points if you're new to Camunda: modeling a process, and getting started with Spring:
 
-<DocCardList items={[{type:"link", href:"/docs/next/components/modeler/about-modeler/", label: "Model your first process", docId:"components/modeler/about-modeler"},
+<DocCardList items={[{type:"link", href:"/docs/components/modeler/about-modeler/", label: "Model your first process", docId:"components/modeler/about-modeler"},
 {
-type:"link", href:"/docs/next/guides/getting-started-java-spring/", label: "Get started with Spring", docId:"guides/getting-started-java-spring",
+type:"link", href:"/docs/guides/getting-started-java-spring/", label: "Get started with Spring", docId:"guides/getting-started-java-spring",
 }
 ]}/>
 
