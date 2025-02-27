@@ -124,24 +124,6 @@ This matrix shows which component versions work together:
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
 
-## form-js version matrix
-
-| Design                | form-js |
-| --------------------- | ------- |
-| Desktop Modeler 4.7+  | 0.0.1   |
-| Desktop Modeler 4.9+  | 0.1.x   |
-| Desktop Modeler 4.11+ | 0.1.x   |
-| Desktop Modeler 4.12+ | 0.1.x   |
-| Desktop Modeler 5.0+  | 0.2.x   |
-| Desktop Modeler 5.4+  | 0.8.x   |
-| Desktop Modeler 5.10+ | 0.14.x  |
-| Desktop Modeler 5.19+ | 1.6.x   |
-| Desktop Modeler 5.22+ | 1.7.x   |
-| Web Modeler 8.2.x     | 0.14.x  |
-| Web Modeler 8.3.x     | 1.3.x   |
-| Web Modeler 8.4.x     | 1.6.x   |
-| Web Modeler 8.5.x     | 1.7.x   |
-
 ## Camunda 7 & Optimize version matrix
 
 See https://docs.camunda.org/enterprise/download/#camunda-optimize.
