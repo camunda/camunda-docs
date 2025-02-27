@@ -25,7 +25,7 @@ This step requires cluster level privileges for the database and only needs to b
 
 #### 1.1 Configure Schema Manager
 
-Create a configuration for the schema manager with the following values
+Create an additional custom configuration for the schema manager with the following values
 
 ```
 zeebe.broker.exporters.elasticsearch:
@@ -185,10 +185,99 @@ SPRING_CONFIG_ADDITIONALLOCATION=/path/to/application-custom.yaml ./bin/camunda
 
 ##### Applying the configuration above when using helm charts
 
-TBD
+###### Case 1: Auto-generated app config by Helm chart.
+
+Using [Spring Boot convention](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables) environment variables can be used to override configuration.
+
+This is the additional configuration needed to disable the schema manager in the Camunda apps.
+
+```
+# Helm chart values file.
+zeebe:
+  env:
+    - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INDEX_CREATETEMPLATE
+      value: "false"
+    - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_RETENTION_ENABLED
+      value: "false"
+    - name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_RETENTION_MANAGEPOLICY
+      value: "false"
+
+tasklist:
+  env:
+    - name: CAMUNDA_TASKLIST_ELASTICSEARCH_CREATESCHEMA
+      value: "false"
+    - name: CAMUNDA_TASKLIST_ELASTICSEARCH_HEALTHCHECKENABLED
+      value: "false"
+    - name: CAMUNDA_TASKLIST_ARCHIVER_ILMENABLED
+      value: "false"
+    - name: CAMUNDA_TASKLIST_ARCHIVER_ILMMANAGEPOLICY
+      value: "false"
+    - name: CAMUNDA_TASKLIST_MIGRATION_MIGRATIONENABLED
+      value: "false"
+
+operate:
+  env:
+    - name: CAMUNDA_OPERATE_ELASTICSEARCH_CREATESCHEMA
+      value: "false"
+    - name: CAMUNDA_OPERATE_ELASTICSEARCH_HEALTHCHECKENABLED
+      value: "false"
+    - name: CAMUNDA_OPERATE_ARCHIVER_ILMENABLED
+      value: "false"
+    - name: CAMUNDA_OPERATE_MIGRATION_MIGRATIONENABLED
+      value: "false"
+```
+
+###### Case 2: - Manually-managed app config by the user.
+
+In case the application configurations are managed directly and don't rely on the Helm chart auto-generated configuration.
+
+```
+# Helm chart values file.
+
+zeebe:
+  configuration |
+    [...] # Any other custom config.
+    zeebe.broker.exporters.elasticsearch:
+      className: io.camunda.zeebe.exporter.ElasticsearchExporter
+      args:
+        index:
+          createTemplate: false
+        retention:
+          enabled: false
+          managePolicy: false
+    [...] # Any other custom config.
+
+tasklist:
+  configuration |
+    [...] # Any other custom config.
+    camunda.tasklist:
+        elasticsearch:
+          createSchema: false
+          healthCheckEnabled: false
+        archiver:
+          ilmEnabled: false
+          ilmManagePolicy: false
+        migration:
+          migrationEnabled: false
+    [...] # Any other custom config.
+
+operate:
+  configuration |
+    [...] # Any other custom config.
+    camunda.operate:
+        elasticsearch:
+          createSchema: false
+          healthCheckEnabled: false
+        archiver:
+          ilmEnabled: false
+        migration:
+          migrationEnabled: false
+    [...] # Any other custom config.
+```
 
 ## Limitations
 
 - Please note that this feature is only available for the Camunda `8.6.10` version and above.
 - It only works for installations using Elasticsearch.
 - Upgrades using the described setup are not yet supported.
+- Camunda Optimize cannot be executed with this setup.
