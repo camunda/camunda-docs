@@ -223,7 +223,7 @@ If unsure about who to pick, choose one of the corresponding team representative
 - Console: @ultraschuppi
 - Modeler: @camunda/modeling-dev
 - Zeebe: @npepinpe
-- Operate: TBD
+- Operate: @ThorbenLindhauer 
 - Tasklist: @camunda/human-task-orchestration
 - Optimize: @RomanJRW
 - Connectors: @camunda/connectors
