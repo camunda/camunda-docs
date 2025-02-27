@@ -30,7 +30,7 @@ Organization admins can configure the deployment policy for process applications
 
 <TabItem value='saas'>
 
-By default, only organization administrators can deploy process applications to clusters marked as
+By default, only [organization administrators](/components/console/manage-organization/manage-users) can deploy process applications to clusters marked as
 [production stages](/components/modeler/web-modeler/process-application-pipeline.md#deployment-pipeline-stages) from Web Modeler.
 
 You can change this in the **Process application deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Process application deployment**.

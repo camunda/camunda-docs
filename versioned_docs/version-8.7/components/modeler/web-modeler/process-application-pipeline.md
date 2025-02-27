@@ -74,7 +74,7 @@ After validation is complete, you can [create a new version of your process appl
 2. Request a review for the newest version of the process application from the version history page of the process application. Collaborators with edit permission in your project will see a notification on the process diagram page once you have requested a review.
 3. Reviewers can view the changes, comment, request changes, or approve the process application version.
 4. After a user has submitted their review, the process application version is marked as reviewed and the review status is shown in the version history.
-   1. Users can go back and edit the review at any point in time to update their assessment.
+   1. Any user with edit permissions can go back and edit the review at any point in time to update the assessment.
    2. Any changes to the review status of a version are logged in the comment section of the main process diagram.
 5. If the reviewer has marked the version with "changes requested", you can address the feedback by performing the requested changes, creating a new version, and requesting a review for the new version.
 
