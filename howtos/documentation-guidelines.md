@@ -8,13 +8,13 @@ PRs should be in draft status while being actively worked or have a clear writte
 
 ## Labels
 
-PRs should be labeled to help the Documentation Team quickly triage, review, and merge PRs according to urgency and priority. 
+PRs should be labeled to help the Documentation Team quickly triage, review, and merge PRs according to urgency and priority.
 
-Labels include identifiers for teams/components, minor and alpha releases, support engagements, etc. When opening a PR or issue, do your best to use labels that communicate the component, version, and or priority. 
+Labels include identifiers for teams/components, minor and alpha releases, support engagements, etc. When opening a PR or issue, do your best to use labels that communicate the component, version, and or priority.
 
 PRs can be labeled “hold” for any reason, including ongoing conversations, coordination across teams or departments, or anything that’s not obvious within the discussion or description of the PR.
 
-PRs and issues without labels may be at risk for slow triage. 
+PRs and issues without labels may be at risk for slow triage.
 
 ### Preview site label - `deploy`
 
@@ -59,9 +59,9 @@ Specific Optimize versions are aligned with Camunda versions as follows:
 | 8.8             | 3.16.0           |
 | 8.7             | 3.15.0           |
 | 8.6             | 3.14.0           |
-| 8.5             | 3.13.0           | 
-| 8.4             | 3.12.0           | 
-| 8.3             | 3.11.0           | 
+| 8.5             | 3.13.0           |
+| 8.4             | 3.12.0           |
+| 8.3             | 3.11.0           |
 
 ### Interactive API Explorer versions
 
