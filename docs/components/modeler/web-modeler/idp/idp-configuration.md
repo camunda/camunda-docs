@@ -24,22 +24,22 @@ The following prerequisites and configuration are required for IDP in Camunda 8:
 :::info
 
 - See [configure IDP for Camunda 8 Run](#configure-idp-camunda8run) for a summary of the steps typically required to configure IDP with Camunda 8 Run.
-- See [technical architecture](idp-reference.md#technical-architecture) to learn more about the technical architecture and how IDP works.
+- See [technical architecture](idp-reference.md#architecture) to learn more about the technical architecture and how IDP works.
 
 :::
 
 ## Modeler {#modeler}
 
-- Web Modeler is required to create, manage, and publish IDP applications and document extraction projects.
-- Web Modeler or Desktop Modeler can be used to integrate published document extraction projects into your processes.
+- Web Modeler is required to create, manage, and publish IDP applications and document extraction templates.
+- Web Modeler or Desktop Modeler can be used to integrate published document extraction templates into your processes.
 
 This can be summarized as follows:
 
-| IDP functionality                                                                         |                                                Web Modeler                                                 |                                                 Desktop Modeler                                                 |
-| :---------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: |
-| Create and manage [IDP applications](idp-applications.md).                                | <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported | <img src={CrossImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Not supported |
-| Create, manage, and publish [document extraction](idp-document-extraction.md) projects.   | <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported | <img src={CrossImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Not supported |
-| [Integrate published document extraction projects into your processes](idp-integrate.md). | <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported |   <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported    |
+| IDP functionality                                                                          |                                                Web Modeler                                                 |                                                 Desktop Modeler                                                 |
+| :----------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: |
+| Create and manage [IDP applications](idp-applications.md).                                 | <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported | <img src={CrossImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Not supported |
+| Create, manage, and publish [document extraction](idp-document-extraction.md) templates.   | <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported | <img src={CrossImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Not supported |
+| [Integrate published document extraction templates into your processes](idp-integrate.md). | <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported |   <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported    |
 
 ### Self-Managed/Camunda 8 Run
 

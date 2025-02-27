@@ -13,19 +13,19 @@ import IdpValidationExampleImg from './img/idp-validation-example.png';
 
 Technical reference information for IDP, including technical architecture, supported documents, and known limitations.
 
-## Technical architecture
+## Technical architecture {#architecture}
 
 IDP offers a composable architecture that allows you to customize and extend IDP capabilities as needed. This flexibility enables you to adapt quickly to evolving business needs while maintaining a streamlined and manageable system.
 
-When you publish an IDP project, an IDP extraction [connector template](/components/connectors/custom-built-connectors/connector-templates.md) is created.
+IDP allows you to create, configure, and publish a **document extraction template**. This is similar to a [connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
 <img src={IdpArchitectureImg} alt="Architecture diagram of IDP" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
-The IDP extraction connector integrates with Camunda document handling connectors and APIs such as [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) to retrieve and process documents.
+The document extraction template integrates with Camunda document handling connectors and APIs such as [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) to retrieve, analyze, and process documents.
 
-1. **Document upload**: The connector accepts uploaded documents as input. These documents can be uploaded to a local document store, and their references are used in the extraction process. For example, the connector uploads the document to an Amazon S3 bucket for extraction.
+1. **Document upload**: The template accepts uploaded documents as input. These documents can be uploaded to a local document store, and their references used in the extraction process. For example, the connector uploads the document to an Amazon S3 bucket for extraction.
 
-1. **Amazon Textract**: Uploaded documents are analyzed by Amazon Textract, which extracts text data and returns the results. The connector configuration includes specifying the document, the S3 bucket name for temporary storage during Amazon Textract analysis, and other required parameters such as extraction fields and Amazon Bedrock Converse parameters.
+1. **Amazon Textract**: Uploaded documents are analyzed by Amazon Textract, which extracts text data and returns the results. The template configuration includes specifying the document, the S3 bucket name for temporary storage during Amazon Textract analysis, and other required parameters such as extraction fields and Amazon Bedrock Converse parameters.
 
 1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock Converse to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable.
 
@@ -36,7 +36,7 @@ The IDP extraction connector integrates with Camunda document handling connector
 
 :::
 
-## Document file formats
+## Document file formats {#file-formats}
 
 IDP currently only supports data extraction from the following document file formats.
 
@@ -44,7 +44,7 @@ IDP currently only supports data extraction from the following document file for
 | :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <p>PDF</p>  | <p><ul><li>PDF documents must not be password protected.</li><li><p>Maximum document file size is 4MB.</p></li><li><p>Both text and image content can be extracted from a PDF document. For example, data can be extracted from a scanned image that has been converted to PDF.</p></li></ul></p> |
 
-## Document language support
+## Document language support {#languages}
 
 IDP supports data extraction and processing of documents in multiple languages.
 
@@ -54,11 +54,11 @@ IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-conn
 For example, as of February 2025, Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for currently supported languages.
 :::
 
-## Document storage
+## Document storage {#storage}
 
 In SaaS, during test extraction your uploaded sample documents are stored in an Amazon AWS S3 bucket named `idp-extraction-connector`.
 
-## Extraction field data types
+## Extraction field data types {#data-types}
 
 Specify the [extraction field](idp-key-concepts.md#extraction-fields) data type to indicate to the LLM what type of data should be extracted. This helps the LLM more accurately extract the data you want.
 
@@ -74,7 +74,7 @@ You can specify the following extraction field data types.
 | Number    | The LLM should expect to extract a numeric value.                   |
 | String    | The LLM should expect to extract a sequence of characters.          |
 
-## Validation status
+## Validation status {#status}
 
 During validation, a validation status is shown for extraction fields to indicate the accuracy of the extracted data.
 

@@ -6,11 +6,11 @@ description: "Integrate intelligent document processing (IDP) into your end-to-e
 
 import IdpElementImg from './img/idp-diagram-element.png';
 
-Integrate your published document extraction projects into your end-to-end processes in Modeler.
+Integrate your published document extraction templates into your end-to-end processes in Modeler.
 
 ## Create and configure an IDP task
 
-You can apply a published IDP project as an IDP extraction connector to a task or event via the append menu. For example:
+You can apply a published document extraction template to a task or event via the append menu. For example:
 
 <img src={IdpElementImg} alt="An overview of intelligent document processing" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
@@ -18,7 +18,7 @@ You can apply a published IDP project as an IDP extraction connector to a task o
 - **From the properties panel:** Navigate to the **Template** section and click **Select**.
 - **From the side palette:** Click the **Create element** icon.
 
-You can then configure the IDP extraction connector in the properties panel, via the following sections.
+You can then configure the document extraction template in the properties panel, via the following sections:
 
 ## Input message data
 

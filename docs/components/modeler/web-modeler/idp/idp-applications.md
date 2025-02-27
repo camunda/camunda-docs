@@ -1,13 +1,13 @@
 ---
 id: idp-applications
 title: IDP applications
-description: "Create and manage your intelligent document processing (IDP) projects in an IDP application folder."
+description: "Create and manage your intelligent document processing document extraction templates in an IDP application folder."
 ---
 
 import IdpApplicationImg from './img/idp-application.png';
 import IdpApplicationModalImg from './img/idp-application-modal.png';
 
-Create and manage your IDP projects in an **IDP application**.
+Create and manage your IDP document extraction templates in an **IDP application**.
 
 <img src={IdpApplicationImg} alt="IDP application screen" />
 
@@ -21,7 +21,7 @@ To create an IDP application:
    - **Select a cluster**: Select the cluster you want to use for modeling and testing your document extraction.
 1. Click **Create** to create the IDP application.
 
-1. You can now create [document extraction](idp-document-extraction.md) projects inside your IDP application folder.
+1. You can now create [document extraction](idp-document-extraction.md) templates inside your IDP application folder.
 
 <!-- 1. You can now create [document extraction](idp-document-extraction.md) and [document automation](idp-document-automation.md) projects inside your IDP application folder. -->
 

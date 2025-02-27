@@ -18,13 +18,13 @@ Use this extraction method to extract data from [unstructured documents](idp-key
 
 ## Data extraction steps
 
-Complete the following steps to configure and publish an unstructured data extraction project:
+Complete the following steps to configure and publish an unstructured data document extraction template:
 
-1. [Upload documents](#step-1-upload-documents): Upload a set of sample documents to use for training the extraction model.
-1. [Extract fields](#step-2-extract-fields): Add and configure the [extraction fields](idp-key-concepts.md#extraction-fields) you want to use to extract data.
-1. [Validate extraction](#step-3-validate-extraction): Test and evaluate the data extraction results, and publish the project.
+1. [Upload documents](#upload-documents): Upload a set of sample documents to use for training the extraction model.
+1. [Extract fields](#extract-fields): Add and configure the [extraction fields](idp-key-concepts.md#fields) you want to use to extract data.
+1. [Validate extraction](#validate-extraction): Test and evaluate the data extraction results, and publish the document extraction template.
 
-## Step 1: Upload documents
+## Step 1: Upload documents {#upload-documents}
 
 Start by uploading a set of sample PDF documents that represent the specific document type you want to extract data from. You will use these documents throughout the data extraction process.
 
@@ -37,7 +37,7 @@ To upload your sample document(s):
    - Select the **Extract fields** tab.
    - Click the **Extract** icon for the document you want to extract data from.
 
-### Document upload guidelines
+### Document upload guidelines {#document-upload-guidelines}
 
 Start by uploading a sample document that contains all the data fields you want to extract for this type of document.
 
@@ -47,16 +47,16 @@ Start by uploading a sample document that contains all the data fields you want 
 
 - When choosing your sample documents, variation is important to ensure the system captures the full range of document types it will encounter. As a general guideline, Camunda recommends starting with three to five documents, and uploading more as needed to represent the full range of possible data types.
 
-## Step 2: Extract fields
+## Step 2: Extract fields {#extract-fields}
 
-On the **Extract fields** tab, add the data [extraction fields](idp-key-concepts.md#extraction-fields) you want to populate with data from your document(s).
+On the **Extract fields** tab, add the data [extraction fields](idp-key-concepts.md#fields) you want to populate with data from your document(s).
 
 <img src={IdpExtractionFieldsImg} alt="Unstructured data extraction screen" />
 
 - Add a separate field for each piece of information you want to extract. For example, for an invoice, add a field for the invoice ID, date, customer name, amount, and so on.
 - You can then extract data from your sample document(s) using your chosen LLM foundation model, edit and refine your fields, and save the extracted data as a test case to compare outcomes across different LLM models.
 
-### Add extraction fields
+### Add extraction fields {#add-fields}
 
 Add an extraction field for each piece of data you want to extract from your document(s).
 
@@ -68,7 +68,7 @@ Add an extraction field for each piece of data you want to extract from your doc
    - The **Field name** is used as an output variable in a BPMN process.
 1. **Type**: Select the data type you want/expect the field to be populated with. This helps the LLM more accurately extract data.
    - Example: “Number” for a monetary field (“invoice_amount”).
-   - See [extraction field data types](idp-reference.md#extraction-field-data-types).
+   - See [extraction field data types](idp-reference.md#data-types).
 1. **Prompt**: Enter a clear and specific prompt to guide the LLM in accurately extracting data.
    - Example: For an "invoice_date" field, you might use "The date when the invoice was issued".
    - Try and describe the expected outcome in the prompt in clear and concise terms. For guidance and best practice when writing prompts, refer to the official documentation for your chosen LLM.
@@ -79,7 +79,7 @@ Add an extraction field for each piece of data you want to extract from your doc
 You can edit and delete extraction fields at any time. Click the three vertical dots next to the field to open the Options menu.
 :::
 
-### Extract data and save as test case
+### Extract data and save as test case {#extract-data}
 
 Once you have added your extraction fields, select an LLM model and test the data extraction.
 
@@ -104,7 +104,7 @@ Once you have added your extraction fields, select an LLM model and test the dat
 
 :::
 
-## Step 3: Validate extraction
+## Step 3: Validate extraction {#validate-extraction}
 
 On the **Validate extraction** tab, test and validate the configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by the LLM model using your extraction fields and prompts.
 
@@ -118,7 +118,7 @@ To validate the data extraction:
 1. Click **Test documents** to run the extraction validation against your uploaded sample documents.
 1. The extraction validation results are shown in the **Test Case Results** column.
    <img src={IdpValidationResultsDetailImg} alt="Extraction validation results" />
-   - The [validation status](idp-reference.md#validation-status) is shown for each field to indicate the accuracy of the data extracted from each document. For example, if the extracted value matches the expected test case output, it is shown as a “Pass”.
+   - The [validation status](idp-reference.md#status) is shown for each field to indicate the accuracy of the data extracted from each document. For example, if the extracted value matches the expected test case output, it is shown as a “Pass”.
    - Click on a field to expand the detailed results for each individual document.
    - A **Field extraction summary** shows a summary percentage value for the overall extraction accuracy to allow you to quickly compare extraction accuracy between different LLM extraction models.
      <img src={IdpValidationResultsSummaryImg} alt="Extraction results summary" />
@@ -128,23 +128,23 @@ To validate the data extraction:
    - Go back to a previous step and edit your data extraction configuration, or upload more sample documents.
 1. Once you are satisfied with the extraction accuracy and extraction model, publish the project.
 
-### Publish project
+### Publish document extraction template {#publish-template}
 
-Publish the project to make the project available for [integration into your processes](idp-integrate.md)<!-- and [document automation](idp-document-automation.md) projects -->.
+Publish the document extraction template to make it available for [integration into your processes](idp-integrate.md)<!-- and [document automation](idp-document-automation.md) projects -->.
 
 1. Click **Publish** and select either:
 
-   - **Publish to project**: Only users in the Web Modeler project can access the extraction project.
-   - **Publish to organization**: The extraction project is available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
+   - **Publish to project**: Only users in the Web Modeler project can access the document extraction template.
+   - **Publish to organization**: The document extraction template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
    <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" />
 
-   - **Version name**: Enter a version for the published project.
-   - **Version description**: Enter a description for the published project version.
-   - **Extraction model**: Select the extraction model you want to use for the published project.
+   - **Version name**: Enter a version for the published document extraction template.
+   - **Version description**: Enter a description for the published document extraction template version.
+   - **Extraction model**: Select the extraction model you want to use for the published document extraction template.
 
-1. Click **Publish** to make the project available for [integration into your processes](idp-integrate.md)<!--  and [document automation](idp-document-automation.md) projects -->.
+1. Click **Publish** to make the document extraction template available for [integration into your processes](idp-integrate.md)<!--  and [document automation](idp-document-automation.md) projects -->.
 
 :::note
 
