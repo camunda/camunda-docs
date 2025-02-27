@@ -121,16 +121,19 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 This matrix shows which component versions work together:
 
-- Please note that `Zeebe`, `Operate`, and `Tasklist` form the Core Orchestration cluster and must be running on the exact same `minor`, and `patch` level starting from version `8.6.0` going forward.
-
-| Design                                        | Automate                                                                                         | Improve         |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------ | --------------- |
-| Desktop Modeler 5.28+ <br/> Web Modeler 8.6.x | (Zeebe, Operate, Tasklist) 8.6.x, Connectors 8.6.x, <br/>Identity 8.6.x, Console 8.6.x           | Optimize 8.6.x  |
-| Desktop Modeler 5.22+ <br/> Web Modeler 8.5.x | Zeebe 8.5.x, Operate 8.5.x, Tasklist 8.5.x, <br/>Identity 8.5.x, Connectors 8.5.x, Console 8.5.x | Optimize 8.5.x  |
-| Desktop Modeler 5.19+ <br/> Web Modeler 8.4.x | Zeebe 8.4.x, Operate 8.4.x, Tasklist 8.4.x, <br/>Identity 8.4.x, Connectors 8.4.x                | Optimize 8.4.x  |
-| Desktop Modeler 5.16+ <br/> Web Modeler 8.3.x | Zeebe 8.3.x, Operate 8.3.x, Tasklist 8.3.x, <br/>Identity 8.3.x, Connectors 8.3.x                | Optimize 8.3.x  |
-| Desktop Modeler 5.10+ <br/> Web Modeler 8.2.x | Zeebe 8.2.x, Operate 8.2.x, Tasklist 8.2.x, <br/>Identity 8.2.x, Connectors 0.23.2               | Optimize 3.10.x |
-| Desktop Modeler 4.12+                         | Zeebe 1.3.x, Operate 1.3.x, Tasklist 1.3.x, IAM 1.3.x                                            | Optimize 3.7.x  |
+| Design                | Automate    |                                                                            | Improve         |
+| --------------------- | ----------- | -------------------------------------------------------------------------- | --------------- |
+| Desktop Modeler 5.28+ | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.6.x | Optimize 8.6.x  |
+| Desktop Modeler 5.22+ | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
+| Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
+| Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
+| Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
+| -                     | -           | -                                                                          | -               |
+| Web Modeler 8.6.x     | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.6.x | Optimize 8.6.x  |
+| Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
+| Web Modeler 8.4.x     | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
+| Web Modeler 8.3.x     | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
+| Web Modeler 8.2.x     | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
 
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
