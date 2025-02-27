@@ -3,7 +3,7 @@ id: elasticsearch-without-cluster-privileges
 title: "Elasticsearch without cluster privileges"
 ---
 
-In case the camunda single application cannot access elasticsearch with cluster privileges due to business or technical constraints, it is possible to run the schema manager as a stand-alone application separate from the main application. With this setup, the single application does not need to have cluster privileges to work.
+In case the Camunda single application cannot access Elasticsearch with cluster privileges, it is possible to run the schema manager as a stand-alone application separate from the main application. The schema manager solely creates all necessary Elasticsearch Indices. In this case, elevated privileges are only required for the schema creation, the single application does not need to have cluster privileges to work any more.
 
 :::note Database Support
 This feature is only available from 8.6.10 on and is also only supported for Elasticsearch installations (no OpenSearch support).
@@ -68,7 +68,7 @@ Assuming the configuration above was saved in a file named `schema-manager.yaml`
 SPRING_CONFIG_ADDITIONALLOCATION=/path/to/schema-manager.yaml ./bin/schema
 ```
 
-Wait some minutes and verify that the application executed successfully.
+Verify that the application executed successfully.
 
 ### 2. Start the camunda single application
 
@@ -78,7 +78,7 @@ The camunda single application can now be started without cluster level privileg
 
 The application requires a database user with at least `manage` privileges on the indices it is supposed to work with.
 
-Feel free to use an existing user with the required privileges. Alternatively the required privileges can be assigned to an example user called `camunda-app` with the following request to the database:
+Feel free to use an existing user with the required privileges. Alternatively the required privileges can be assigned to an example user called `camunda-app` with the following request to the Elasticsearch REST API:
 
 ```
 PUT _security/role/read_write_role
@@ -125,7 +125,7 @@ docker exec -t elasticsearch elasticsearch-users roles camunda-app -a read_write
 
 #### 2.2 Configure the Camunda Single Application
 
-Create a configuration for the camunda single application with the following values:
+Create a configuration for the Camunda single application with the values below. This essentially disables schema creation for the app.
 
 ```
 zeebe.broker.exporters.elasticsearch:
@@ -174,7 +174,7 @@ camunda:
 
 #### 2.3 Start the application with the config above
 
-##### Starting the application from the jar file
+#### Starting the application from the jar file
 
 Start the java application `camunda` (or `camunda.bat` for Windows) provided in the `bin` folder of the delivered jar file.
 Assuming the configuration above was saved in a file named `application-custom.yaml`, you can start the application with the following command:
@@ -183,9 +183,9 @@ Assuming the configuration above was saved in a file named `application-custom.y
 SPRING_CONFIG_ADDITIONALLOCATION=/path/to/application-custom.yaml ./bin/camunda
 ```
 
-##### Applying the configuration above when using helm charts
+#### Applying the configuration above when using helm charts
 
-###### Case 1: Auto-generated app config by Helm chart.
+##### Case 1: Auto-generated app config by Helm chart.
 
 Using [Spring Boot convention](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables) environment variables can be used to override configuration.
 
@@ -227,7 +227,7 @@ operate:
       value: "false"
 ```
 
-###### Case 2: - Manually-managed app config by the user.
+##### Case 2: - Manually-managed app config by the user.
 
 In case the application configurations are managed directly and don't rely on the Helm chart auto-generated configuration.
 
@@ -279,5 +279,5 @@ operate:
 
 - Please note that this feature is only available for the Camunda `8.6.10` version and above.
 - It only works for installations using Elasticsearch.
-- Upgrades using the described setup are not yet supported.
+- This application setup cannot be used when upgrading from an `8.6.9` installation, since upgrades are not yet supported with the stand-alone schema manager.
 - Camunda Optimize cannot be executed with this setup.
