@@ -306,8 +306,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/report-job-error",
-          label: "Report error for job",
+          id: "apis-tools/camunda-api-rest/specifications/throw-job-error",
+          label: "Throw error for job",
           className: "api-method post",
         },
         {
