@@ -13,6 +13,7 @@ import IdpPublishProjectModalImg from './img/idp-publish-modal.png';
 import IdpExtractionFieldsDetailsImg from './img/idp-extraction-fields.png';
 import IdpValidationResultsDetailImg from './img/idp-validation-results-detail.png';
 import IdpValidationResultsSummaryImg from './img/idp-summary.png';
+import IdpVersionsImg from './img/idp-versions.png';
 
 Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
 
@@ -152,6 +153,46 @@ Publish the document extraction template to make it available for [integration i
 
 :::
 
-### Versions
+## Versions {#versions}
 
-Click **Versions** to view and compare published versions of a document extraction template.
+Click **Versions** to view the document extraction template versions. You can rename versions, compare, restore, and delete versions.
+
+<img src={IdpVersionsImg} alt="Unstructured data extraction screen" />
+
+### Compare versions
+
+You can compare the change history between two template versions as code in the diff layout.
+
+1. Ensure that the sidebar **Show changes** toggle is turned on.
+1. Select the version that you want to compare. The previous version is automatically selected for comparison.
+
+### Restore a version
+
+You can restore a version to revert to a previous snapshot of your template.
+
+1. In the sidebar Versions list, hover over the version you want to restore.
+1. Select the three vertical dots to open the actions menu.
+1. Select **Restore as latest**.
+
+### Rename a version
+
+You can rename a version at any time.
+
+1. In the sidebar Versions list, hover over the version you want to rename.
+1. Select the three vertical dots to open the actions menu.
+1. Select **Edit name** and enter a new name for the version.
+
+### Delete a version
+
+You can permanently delete a version.
+
+1. In the sidebar Versions list, hover over the version you want to rename.
+1. Select the three vertical dots to open the actions menu.
+1. Select **Delete**.
+1. You are prompted to confirm the deletion.
+   - Select **Delete version** to permanently delete the version.
+   - Select **Cancel** to cancel the deletion and return to the versions list.
+
+:::caution
+Deleting a version is permanent. You cannot access a deleted version, and it is removed from the versions list.
+:::
