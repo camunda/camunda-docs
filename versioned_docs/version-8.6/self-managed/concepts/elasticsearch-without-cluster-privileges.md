@@ -3,10 +3,12 @@ id: elasticsearch-without-cluster-privileges
 title: "Elasticsearch without cluster privileges"
 ---
 
-In case the Camunda single application cannot access Elasticsearch with cluster level privileges, it is possible to run the schema manager as a stand-alone application separate from the main application. In this case, cluster privileges are only required for the schema creation, the single application does not need to have cluster privileges to work any more.
+If the Camunda single application cannot access Elasticsearch with cluster-level privileges, it is possible to run the schema manager as a standalone application separate from the main application.
+
+In this case, cluster privileges are only required for the schema creation, the single application does not need cluster privileges to work.
 
 :::note Database Support
-This feature is only available from version 8.6.10 on and is also only supported for Elasticsearch installations (no OpenSearch support).
+This feature is only available from version 8.6.10 onwards and is also only supported for Elasticsearch installations (no OpenSearch support).
 :::
 
 :::note Essential privileges required by the single application
@@ -15,13 +17,18 @@ An index-level privilege of at least `manage` is still required for the Camunda 
 
 ## Setup
 
-For this setup to work, the database schema must be initialized first (step 1). This requires cluster level privileges for the database. This only needs to be executed once.
-Once the schema is initialized, the application can be started without cluster level privileges (step 2). The steps are described in detail below.
+For this setup to work:
+
+- The database schema must be initialized first (step 1). This requires cluster level privileges for the database. This only needs to be executed once.
+- Once the schema is initialized, the application can be started without cluster level privileges (step 2).
+
+The steps are described in detail below.
 
 ### 1. Initialize the Schema Manager
 
 The schema manager is started as a separate standalone Java application and is responsible for creating and managing the database schema and applying database settings, such as retention policies for example.
-This step requires an user with cluster level privileges for the database (for instance: `superuser`) and only needs to be executed once per installation.
+
+This step requires a user with cluster-level privileges for the database (for instance: `superuser`) and only needs to be executed once per installation.
 
 #### 1.1 Configure Schema Manager
 
@@ -74,7 +81,7 @@ Verify that the application executed successfully.
 
 ### 2. Start the Camunda single application
 
-The Camunda single application can now be started without cluster level privileges. The application will connect to the database and use the schema created by the schema manager.
+The Camunda single application can now be started without cluster-level privileges. The application will connect to the database and use the schema created by the schema manager.
 
 #### 2.1 Ensure that an Elasticsearch user with sufficient privileges exists
 
