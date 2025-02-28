@@ -155,7 +155,7 @@ Publish the document extraction template to make it available for [integration i
 
 ## Versions {#versions}
 
-Click **Versions** to view published document extraction template versions. You can rename versions, compare, restore, and delete versions.
+Click **Versions** to view, compare, rename, restore, and delete published document extraction template versions.
 
 <img src={IdpVersionsImg} alt="Unstructured data extraction screen" />
 
@@ -167,7 +167,7 @@ You can compare the change history between two template versions as JSON code in
 1. Select the version that you want to compare. The previous version is automatically selected for comparison.
 
 The JSON for the previous version is shown on the left, with the currently selected version shown on the right.
-Differences between the milestones are highlighted in the JSON. For example, if an element was added, this change is highlighted in green.
+Differences between the versions are highlighted in the JSON. For example, if an extraction field was added, this change is highlighted in green.
 
 ### Restore a version
 
