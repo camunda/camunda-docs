@@ -29,11 +29,6 @@ This section includes deployment reference architectures for manual setups:
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
-## Considerations
-
-- Most reference implementations primarily focus on the [Orchestration cluster](#components).
-- When scaling the web applications (Operate, Tasklist, Optimize), ensure that the importer/archiver runs only once within the whole cluster. See [high availability](#high-availability-ha) for for more information.
-
 ## Architecture
 
 _Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
