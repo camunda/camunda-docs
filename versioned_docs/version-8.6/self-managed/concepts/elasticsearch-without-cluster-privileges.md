@@ -18,14 +18,14 @@ An index-level privilege of at least `manage` is still required for the Camunda 
 For this setup to work, the database schema must be initialized first (step 1). This requires cluster level privileges for the database. This only needs to be executed once.
 Once the schema is initialized, the application can be started without cluster level privileges (step 2). The steps are described in detail below.
 
-### 1. Initialize the schema manager
+### 1. Initialize the Schema Manager
 
 The schema manager is started as a separate standalone Java application and is responsible for creating and managing the database schema and applying database settings, such as retention policies for example.
 This step requires cluster level privileges for the database and only needs to be executed once per installation.
 
 #### 1.1 Configure Schema Manager
 
-Create an additional custom configuration for the schema manager with the following values
+Create an additional custom configuration for the schema manager with the following values:
 
 ```
 zeebe.broker.exporters.elasticsearch:
@@ -123,7 +123,7 @@ docker exec -t elasticsearch elasticsearch-users useradd camunda-app -p camunda1
 docker exec -t elasticsearch elasticsearch-users roles camunda-app -a read_write_role
 ```
 
-#### 2.2 Configure the Camunda Single Application
+#### 2.2 Configure the Camunda single application
 
 Create a configuration for the Camunda single application with the values below. This essentially disables schema creation for the app.
 
@@ -187,7 +187,7 @@ SPRING_CONFIG_ADDITIONALLOCATION=/path/to/application-custom.yaml ./bin/camunda
 
 ##### Case 1: Auto-generated app config by Helm chart
 
-Using [Spring Boot convention](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables) environment variables can be used to override configuration.
+[Spring Boot convention](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables) environment variables can be used to override configuration.
 
 These are the Helm values needed to disable the schema manager in the Camunda apps.
 
