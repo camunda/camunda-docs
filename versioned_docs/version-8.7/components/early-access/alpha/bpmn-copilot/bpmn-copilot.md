@@ -38,7 +38,32 @@ Timeouts may occur at this step if your query is too complex.
 
 :::
 
+### Example prompts
+
+- "Create an absence request diagram"
+- "Design a process that uses data objects to drive process logic, showing how data influences process flow and decisions"
+- "Model a complex service orchestration process involving multiple service tasks, conditional routing, and parallel execution of tasks"
+- "Create a service order management process for a telco company. The process starts with a fraud check. First, calculate price dimensions via a script task, then check if the price dimensions are normal or high with an exclusive gateway. If high, escalate to a fraud investigation subprocess."
+- Paste existing text documentation of a process or of process requirements (for example, a Confluence page)
+- Paste a process hard-coded in any language (for example, BPEL, Java, COBOL, Python)
+- Paste a description of a diagram. Any LLM (like ChatGPT) can generate this description from a screenshot or an image of the diagram.
+
+## Follow-up prompts
+
+The BPMN Copilot can also translate business-focused intent into actionable changes for the diagram it creates. For example:
+
+- "Modify this process to maximize its changes of adhering to a 1 day SLA"
+- "Reduce the operating cost of this process"
+- "Show me ways to integrate AI into the process"
+- "Consider unhappy paths as well"
+- "Add error handling"
+- "Improve the user experience"
+
+:::note
+Requesting specific modifications to one or several sections of the BPMN diagram may impact unrelated sections.
+:::
+
 ### Limitations
 
-- The BPMN Copilot does not officially support modifying existing diagrams (including diagrams with implementation details).
+- The BPMN Copilot officially supports only modifying diagrams that were created by the BPMN Copilot itself. It does not officially support modifying other existing diagrams (including diagrams with implementation details).
 - The BPMN Copilot does not support pools, lanes, and collaborations.
