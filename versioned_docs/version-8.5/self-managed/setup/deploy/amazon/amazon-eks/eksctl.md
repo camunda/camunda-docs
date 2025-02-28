@@ -65,7 +65,7 @@ The following are the required environment variables with some example values. D
 export CLUSTER_NAME=camunda-cluster
 # Your standard region that you host AWS resources in
 export REGION=eu-central-1
-# Multi-region zones, derived from the region
+# Multi-zones, derived from the region
 export ZONES="eu-central-1a eu-central-1b eu-central-1c"
 # The AWS Account ID
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
