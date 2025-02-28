@@ -71,6 +71,15 @@ import styles from "./styles.module.css";
 import Link from "@docusaurus/Link";
 import CodeBlock from "@theme/CodeBlock";
 
+const systemLabel = {
+  "darwin-x86_64": "MacOS (amd64)",
+  "darwin-aarch64": "MacOS (m1/arm64)",
+  "linux-x86_64": "Linux (AMD64)",
+  "linux-x86_64": "Linux (ARM64)",
+  "windows-x86_64": "Windows (amd64)",
+  "windows-x86_64": "Windows (arm64)",
+};
+
 const ArtifactCard = ({ data, runCommand = "" }) => {
   const versions = Object.keys(data);
 
@@ -96,9 +105,13 @@ const ArtifactCard = ({ data, runCommand = "" }) => {
   return (
     <div className={styles.card}>
       <div className={styles.dropdownContainer}>
-        <label>
+        <label for="version">
           Version:
-          <select value={selectedVersion} onChange={handleVersionChange}>
+          <select
+            id="version"
+            value={selectedVersion}
+            onChange={handleVersionChange}
+          >
             {versions.map((version) => (
               <option key={version} value={version}>
                 {version}
@@ -107,12 +120,16 @@ const ArtifactCard = ({ data, runCommand = "" }) => {
           </select>
         </label>
         {selectedSystem && (
-          <label>
+          <label for="system">
             System:
-            <select value={selectedSystem} onChange={handleSystemChange}>
+            <select
+              id="system"
+              value={selectedSystem}
+              onChange={handleSystemChange}
+            >
               {data[selectedVersion]?.map((item) => (
                 <option key={item.system} value={item.system}>
-                  {item.system}
+                  {systemLabel[item.system]}
                 </option>
               ))}
             </select>
@@ -133,11 +150,13 @@ const ArtifactCard = ({ data, runCommand = "" }) => {
         </>
       )}
 
-      <h4>Run</h4>
       {runCommand && (
-        <CodeBlock language="shell">
-          {runCommand.replace("${version}", selectedVersion)}
-        </CodeBlock>
+        <>
+          <h4>Run</h4>
+          <CodeBlock language="shell">
+            {runCommand.replace("${version}", selectedVersion)}
+          </CodeBlock>
+        </>
       )}
 
       {selectedData.links && (

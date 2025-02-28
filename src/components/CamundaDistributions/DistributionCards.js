@@ -1,12 +1,70 @@
 import React from "react";
 import ArtifactCard from "./ArtifactCard.js";
-import { DockerComposeURL } from "./DockerCompose.js";
-import { getDocsVersion } from "./utilz";
 
 //
 export const C8Run = (runCommandArgs = []) => {
   const jsonData = {
     "8.6.7": [
+      {
+        system: "linux-x86_64",
+        download:
+          "https://github.com/camunda/camunda/releases/download/8.6.7/camunda8-run-8.6.7-linux-x86_64.tar.gz",
+        links: [
+          {
+            description: "Release Notes",
+            link: "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.1.1",
+          },
+          {
+            description: "Values",
+            link: "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.1.1#parameters",
+          },
+        ],
+      },
+      {
+        system: "linux-x86_64",
+        download:
+          "https://github.com/camunda/camunda/releases/download/8.6.7/camunda8-run-8.6.7-linux-x86_64.tar.gz",
+        links: [
+          {
+            description: "Release Notes",
+            link: "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.1.1",
+          },
+          {
+            description: "Values",
+            link: "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.1.1#parameters",
+          },
+        ],
+      },
+      {
+        system: "linux-x86_64",
+        download:
+          "https://github.com/camunda/camunda/releases/download/8.6.7/camunda8-run-8.6.7-linux-x86_64.tar.gz",
+        links: [
+          {
+            description: "Release Notes",
+            link: "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.1.1",
+          },
+          {
+            description: "Values",
+            link: "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.1.1#parameters",
+          },
+        ],
+      },
+      {
+        system: "linux-x86_64",
+        download:
+          "https://github.com/camunda/camunda/releases/download/8.6.7/camunda8-run-8.6.7-linux-x86_64.tar.gz",
+        links: [
+          {
+            description: "Release Notes",
+            link: "https://github.com/camunda/camunda-platform-helm/releases/tag/camunda-platform-11.1.1",
+          },
+          {
+            description: "Values",
+            link: "https://artifacthub.io/packages/helm/camunda/camunda-platform/11.1.1#parameters",
+          },
+        ],
+      },
       {
         system: "linux-x86_64",
         download:
