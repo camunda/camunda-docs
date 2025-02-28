@@ -3,7 +3,7 @@ id: elasticsearch-without-cluster-privileges
 title: "Elasticsearch without cluster privileges"
 ---
 
-In case the Camunda single application cannot access Elasticsearch with cluster privileges, it is possible to run the schema manager as a stand-alone application separate from the main application. The schema manager solely creates all necessary Elasticsearch Indices. In this case, elevated privileges are only required for the schema creation, the single application does not need to have cluster privileges to work any more.
+In case the Camunda single application cannot access Elasticsearch with cluster level privileges, it is possible to run the schema manager as a stand-alone application separate from the main application. In this case, cluster privileges are only required for the schema creation, the single application does not need to have cluster privileges to work any more.
 
 :::note Database Support
 This feature is only available from version 8.6.10 on and is also only supported for Elasticsearch installations (no OpenSearch support).
@@ -21,7 +21,7 @@ Once the schema is initialized, the application can be started without cluster l
 ### 1. Initialize the Schema Manager
 
 The schema manager is started as a separate standalone Java application and is responsible for creating and managing the database schema and applying database settings, such as retention policies for example.
-This step requires cluster level privileges for the database and only needs to be executed once per installation.
+This step requires an user with cluster level privileges for the database (for instance: `superuser`) and only needs to be executed once per installation.
 
 #### 1.1 Configure Schema Manager
 
@@ -47,6 +47,7 @@ camunda:
       password: camunda123
       healthCheckEnabled: false
     archiver:
+      # Optional, only if ILM is enabled
       ilmEnabled: true
   tasklist:
     elasticsearch:
@@ -55,6 +56,7 @@ camunda:
       password: camunda123
       healthCheckEnabled: false
     archiver:
+      # Optional, only if ILM is enabled
       ilmEnabled: true
 
 ```
