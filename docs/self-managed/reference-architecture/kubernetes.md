@@ -141,7 +141,7 @@ The following are suggested minimum requirements. Sizing depends heavily on your
 
 #### Networking
 
-While networking is largely managed through services and Load Balancers, understanding port usage can be useful - especially if explicit whitelisting is required within a private network.
+Networking is largely managed through services and Load Balancers. The following describes networking requirements, including port usage, which may be necessary if explicit whitelisting is required within a private network.
 
 - Stable, high-speed network connection
 - Configured firewall rules to allow necessary traffic:
