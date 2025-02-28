@@ -78,7 +78,7 @@ The Camunda single application can now be started without cluster level privileg
 
 The application requires a database user with at least `manage` privileges on the indices it is meant to work with.
 
-Feel free to use an existing user with the required privileges. Alternatively the required privileges can be assigned to an example user called `camunda-app` with the following request to the Elasticsearch REST API:
+If preferred, you can use an existing user with the required privileges. Alternatively the required privileges can be assigned to an example user named `camunda-app` with the following request to the Elasticsearch REST API:
 
 ```
 PUT _security/role/read_write_role
@@ -174,7 +174,7 @@ camunda:
 
 #### 2.3 Start the application with the above configuration
 
-#### Starting the application from the jar file
+#### Starting the application from the JAR file
 
 Start the Java application `camunda` (or `camunda.bat` for Windows) provided in the `bin` folder of the delivered JAR file.
 Assuming the configuration above was saved in a file named `application-custom.yaml`, you can start the application with the following command:
@@ -227,7 +227,7 @@ operate:
       value: "false"
 ```
 
-##### Case 2: - Manually-managed app config by the user
+##### Case 2: Manually-managed app config by the user
 
 If the application configurations are managed directly and do not rely on the Helm chart auto-generated configuration.
 
@@ -277,6 +277,6 @@ operate:
 
 ## Limitations
 
-- Please note that this feature is only available for the Camunda `8.6.10` version and above.
-- It only works for installations using Elasticsearch.
+- This feature is only available for the Camunda `8.6.10` version and above.
+- This feature only works for installations using Elasticsearch.
 - Camunda Optimize cannot be executed with this setup.
