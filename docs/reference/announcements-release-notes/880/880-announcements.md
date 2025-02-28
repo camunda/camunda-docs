@@ -19,6 +19,16 @@ Camunda 8.8 introduces a streamlined architecture, consolidating core components
 
 You can download the alpha release of the unified package from the Camunda GitHub repository, either as an executable Java application (Camunda Orchestration Core) or a Docker image.
 
+### Zeebe, Operate, Tasklist, and Identity must run on exact same minor and patch levels
+
+From version `8.8.0` forward, the following core [Orchestration cluster](../../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility: Zeebe, Operate, Tasklist, and Identity. See the [component version matrix](../supported-environments.md#component-version-matrix) or the [Self-Managed reference architecture](../../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) for an overview of components.
+
+### Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda 8.8 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, Tasklist, Optimize, and Connectors into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, [deployment reference architectures](/self-managed/reference-architecture/reference-architecture.md), and improved support for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+
+You can download the alpha release of the unified package from the Camunda GitHub repository, either as an executable Java application (Camunda Orchestration Core) or a Docker image.
+
 ### Helm charts
 
 If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/setup/install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
@@ -55,7 +65,7 @@ With the 8.8 release, Camunda announces the deprecation of several [Zeebe gRPC](
 
 ### Removed: Tasklist GraphQL API
 
-With the 8.8 release, the deprecated [Tasklist GraphQL API](/apis-tools/tasklist-api/tasklist-api-overview.md) will be removed from the product.
+With the 8.8 release, the deprecated Tasklist GraphQL API will be removed from the product.
 
 ### Removed: Deprecated OpenAPI objects
 
@@ -115,7 +125,7 @@ Resource-level permissions are introduced to control read and write permissions 
 - For organizations that build custom front-ends and access Camunda via API, users or Clients with API permissions can still access data through the V2 API, respecting their resource permissions.
 
 <!-- :::info
-Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.7.
+Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.8.
 ::: -->
 
 ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>

@@ -13,6 +13,10 @@ Important changes and updates for the Camunda 8.6 release are summarized below.
 
 ## Versioning and environment changes
 
+## Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
+
+From version `8.6.0` forward, the core components Zeebe, Operate, and Tasklist must run the exact same `minor` and `patch` level to ensure compatibility. See the [component version matrix](../supported-environments.md#component-version-matrix) for an overview of components.
+
 ### Camunda 8 SaaS - Required cluster update
 
 :::caution
@@ -40,7 +44,9 @@ If you do not update the cluster by August 30th 2024, we will update the cluster
 
 Camunda 8 Self-Managed clusters are not affected by this.
 
-### Supported environment changes (OpenJDK, Elasticsearch, Amazon OpenSearch)
+## Supported environment changes (OpenJDK, Elasticsearch, Amazon OpenSearch)
+
+This release extends the OpenSearch features supported by Optimize. Full support is committed for the 8.8 release.
 
 Version changes are made to supported environments:
 

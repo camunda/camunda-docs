@@ -56,7 +56,7 @@ Configuration adjustments may be required when upgrading to a new version of the
 
 #### Deprecation notes
 
-The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7 (January 2025). We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
+The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7. We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
 
 | Component     | Old Key                            | New Key                             |
 | ------------- | ---------------------------------- | ----------------------------------- |
@@ -123,7 +123,7 @@ Ensure to use Helm CLI with version `3.14.3` or more. The upgrade could fail to 
 
 #### Deprecation notes
 
-The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7 (January 2025). We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
+The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7. We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
 
 | Component     | Old Key                            | New Key                             |
 | ------------- | ---------------------------------- | ----------------------------------- |

@@ -63,7 +63,6 @@
         "components/concepts/processes",
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
-        "components/concepts/user-task-listeners",
         "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
@@ -190,7 +189,8 @@
                 }
               ]
             },
-            "components/modeler/web-modeler/file-download"
+            "components/modeler/web-modeler/file-download",
+            "components/modeler/web-modeler/process-landscape-visualization"
           ]
         },
         {
@@ -1930,8 +1930,7 @@
                     "id": "self-managed/setup/deploy/amazon/aws-marketplace"
                   },
                   "items": []
-                },
-                "self-managed/setup/deploy/amazon/aws-ec2"
+                }
               ],
               "Microsoft (Azure)": [
                 "self-managed/setup/deploy/azure/microsoft-aks"
@@ -1973,8 +1972,7 @@
     },
     {
       "Reference architecture": [
-        "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual"
+        "self-managed/reference-architecture/reference-architecture"
       ]
     },
     {
