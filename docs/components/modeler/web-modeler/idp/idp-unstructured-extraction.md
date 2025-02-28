@@ -151,3 +151,7 @@ Publish the document extraction template to make it available for [integration i
 - The most recent **Field extraction summary** results are shown for your chosen **Extraction model**.
 
 :::
+
+### Versions
+
+Click **Versions** to view and compare published versions of a document extraction template.

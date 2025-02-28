@@ -19,7 +19,7 @@ For example, you can use IDP to extract data from invoices and other document ty
 
 ## Configure IDP
 
-[Configure IDP](idp/idp-configuration.md) for your Camunda 8 setup with the components and credentials required by IDP.
+[Configure IDP](idp/idp-configuration.md) for your Camunda 8 setup to make sure IDP can access the required components and credentials.
 
 For example, for Camunda 8 Self-Managed/Camunda 8 Run you must install Web Modeler to be able to create and manage IDP applications and document extraction projects.
 

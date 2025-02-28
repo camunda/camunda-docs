@@ -8,7 +8,7 @@ import IdpSecretsImg from './img/idp-connector-secrets.png';
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
 
-Configure your Camunda 8 setup with the components and credentials required by IDP.
+Configure IDP for your Camunda 8 setup to make sure IDP can access the required components and credentials.
 
 ## Prerequisites and configuration
 
