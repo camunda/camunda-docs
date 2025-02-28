@@ -234,6 +234,10 @@ Define a secured connection to be able to communicate with a secured OpenSearch 
 | -------------------------------- | ------------- | ------------------------------------------------------------------------ |
 | opensearch.backup.repositoryName | ""            | The name of the snapshot repository to be used to back up Optimize data. |
 
+:::note
+The backup functionality is not yet supported for OpenSearch.
+:::
+
 ### Email
 
 Settings for the email server to send email notifications, e.g. when an alert is triggered.
