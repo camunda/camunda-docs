@@ -142,11 +142,11 @@ For more information on how to configure flow control for a Self-Managed cluster
 
 #### Helm chart - Separated Ingress deprecation
 
-The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 #### Helm chart - `global.multiregion.installationType` deprecation
 
-The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
+The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
 
 #### Helm chart - Elasticsearch nodes number
 
