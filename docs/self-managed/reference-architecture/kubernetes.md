@@ -161,12 +161,12 @@ The exposed Kubernetes service port does not always match the target port of the
 
 :::note Databases
 
-Databases were not considered as those should be maintained outside and ports may differ from the upstream defaults.
+Database ports are not included, as databases should be maintained outside Camunda, and ports may differ from the upstream defaults.
 
 The defaults for the databases are:
 
 - **5432**: PostgreSQL
-- **9200 / 9300**: Elasticsearch / OpenSearch
+- **9200 / 9300**: Elasticsearch/OpenSearch
 
 :::
 
