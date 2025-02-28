@@ -21,7 +21,7 @@ You can download the alpha release of the unified package from the Camunda GitHu
 
 ### Zeebe, Operate, Tasklist, and Identity must run on exact same minor and patch levels
 
-From version `8.8.0` forward, the following core [Orchestration cluster](../../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility: Zeebe, Operate, Tasklist, and Identity. See the [component version matrix](../supported-environments.md#component-version-matrix) or the [Self-Managed reference architecture](../../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) for an overview of components.
+From version `8.8.0` forward, the following core [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility: Zeebe, Operate, Tasklist, and Identity. See the [component version matrix](/reference/supported-environments.md#component-version-matrix) or the [Self-Managed reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) for an overview of components.
 
 ### Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
