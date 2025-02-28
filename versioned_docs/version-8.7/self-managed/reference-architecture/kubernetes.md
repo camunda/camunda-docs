@@ -78,7 +78,7 @@ The following concerns **Operate**, **Tasklist**, and **Optimize**:
 
 When scaling from a single pod to multiple, ensure that the `importer / archiver` is enabled on only one pod and disabled on others. Enabling it on multiple pods will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 
-Example configuration options are available for [Operate](/self-managed/operate-deployment/importer-and-archiver.md#configuration) and [Tasklist](/self-managed/tasklist-deployment/importer-and-archiver.md#configuration).
+Example configuration options are available for [Operate](/self-managed/operate-deployment/importer-and-archiver.md#configuration), [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration-platform-8#general-settings), and [Tasklist](/self-managed/tasklist-deployment/importer-and-archiver.md#configuration).
 :::
 
 For high availability, a minimum of four Kubernetes nodes are recommended to ensure fault tolerance and support leader election in case of failures. To learn more about the Raft protocol and clustering concepts, refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md).
@@ -139,7 +139,7 @@ The following are suggested minimum requirements. Sizing depends heavily on your
 
 #### Networking
 
-While networking is largely managed through services and Load Balancers, understanding port usage can be useful - especially if explicit whitelisting is required within a private network.
+Networking is largely managed through services and Load Balancers. The following describes networking requirements, including port usage, which may be necessary if explicit whitelisting is required within a private network.
 
 - Stable, high-speed network connection
 - Configured firewall rules to allow necessary traffic:
@@ -159,12 +159,12 @@ The exposed Kubernetes service port does not always match the target port of the
 
 :::note Databases
 
-Databases were not considered as those should be maintained outside and ports may differ from the upstream defaults.
+Database ports are not included, as databases should be maintained outside Camunda, and ports may differ from the upstream defaults.
 
 The defaults for the databases are:
 
 - **5432**: PostgreSQL
-- **9200 / 9300**: Elasticsearch / OpenSearch
+- **9200 / 9300**: Elasticsearch/OpenSearch
 
 :::
 
