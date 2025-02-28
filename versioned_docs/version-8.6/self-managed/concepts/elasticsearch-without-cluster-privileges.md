@@ -6,21 +6,21 @@ title: "Elasticsearch without cluster privileges"
 In case the Camunda single application cannot access Elasticsearch with cluster privileges, it is possible to run the schema manager as a stand-alone application separate from the main application. The schema manager solely creates all necessary Elasticsearch Indices. In this case, elevated privileges are only required for the schema creation, the single application does not need to have cluster privileges to work any more.
 
 :::note Database Support
-This feature is only available from 8.6.10 on and is also only supported for Elasticsearch installations (no OpenSearch support).
+This feature is only available from version 8.6.10 on and is also only supported for Elasticsearch installations (no OpenSearch support).
 :::
 
 :::note Essential privileges required by the single application
-Index level privilege of at least `manage` is still required for the camunda single application to work properly
+An index-level privilege of at least `manage` is still required for the Camunda single application to work properly.
 :::
 
 ## Setup
 
-For this setup to work, the database schema needs to be initialized first (step 1). This requires cluster level privileges for the database. This only needs to be executed once.
+For this setup to work, the database schema must be initialized first (step 1). This requires cluster level privileges for the database. This only needs to be executed once.
 Once the schema is initialized, the application can be started without cluster level privileges (step 2). The steps are described in detail below.
 
 ### 1. Initialize the schema manager
 
-The schema manager is started as a separate standalone java application and is responsible for creating and managing the database schema and applying database settings, such as e.g. retention policies.
+The schema manager is started as a separate standalone Java application and is responsible for creating and managing the database schema and applying database settings, such as retention policies for example.
 This step requires cluster level privileges for the database and only needs to be executed once per installation.
 
 #### 1.1 Configure Schema Manager
@@ -61,7 +61,7 @@ camunda:
 
 #### 1.2 Start the Schema Manager with the config above
 
-Start the java application `schema` (or `schema.bat` for Windows) provided in the `bin` folder of the delivered jar file. The schema manager will create the necessary indices and templates in the database and apply the respective settings.
+Start the Java application `schema` (or `schema.bat` for Windows) provided in the `bin` folder of the delivered jar file. The schema manager will create the necessary indices and templates in the database and apply the respective settings.
 Assuming the configuration above was saved in a file named `schema-manager.yaml`, you can start the application with the following command:
 
 ```
@@ -70,13 +70,13 @@ SPRING_CONFIG_ADDITIONALLOCATION=/path/to/schema-manager.yaml ./bin/schema
 
 Verify that the application executed successfully.
 
-### 2. Start the camunda single application
+### 2. Start the Camunda single application
 
-The camunda single application can now be started without cluster level privileges. The application will connect to the database and use the schema created by the schema manager.
+The Camunda single application can now be started without cluster level privileges. The application will connect to the database and use the schema created by the schema manager.
 
 #### 2.1 Ensure that an Elasticsearch user with sufficient privileges exists
 
-The application requires a database user with at least `manage` privileges on the indices it is supposed to work with.
+The application requires a database user with at least `manage` privileges on the indices it is meant to work with.
 
 Feel free to use an existing user with the required privileges. Alternatively the required privileges can be assigned to an example user called `camunda-app` with the following request to the Elasticsearch REST API:
 
@@ -116,7 +116,7 @@ PUT _security/role/read_write_role
 }
 ```
 
-Then assign the user to the role defined above (e.g. if Elasticsearch is running on docker, this can be achieved with the following command):
+Then, assign the user to the role defined above. For example, if Elasticsearch is running on Docker, this can be achieved with the following command:
 
 ```
 docker exec -t elasticsearch elasticsearch-users useradd camunda-app -p camunda123
@@ -172,11 +172,11 @@ camunda:
       migrationEnabled: false
 ```
 
-#### 2.3 Start the application with the config above
+#### 2.3 Start the application with the above configuration
 
 #### Starting the application from the jar file
 
-Start the java application `camunda` (or `camunda.bat` for Windows) provided in the `bin` folder of the delivered jar file.
+Start the Java application `camunda` (or `camunda.bat` for Windows) provided in the `bin` folder of the delivered JAR file.
 Assuming the configuration above was saved in a file named `application-custom.yaml`, you can start the application with the following command:
 
 ```
@@ -229,7 +229,7 @@ operate:
 
 ##### Case 2: - Manually-managed app config by the user
 
-In case the application configurations are managed directly and don't rely on the Helm chart auto-generated configuration.
+If the application configurations are managed directly and do not rely on the Helm chart auto-generated configuration.
 
 ```
 # Helm chart values file.
