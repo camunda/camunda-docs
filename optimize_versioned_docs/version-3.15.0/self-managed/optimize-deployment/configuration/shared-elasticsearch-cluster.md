@@ -18,6 +18,10 @@ The following illustration demonstrates this use case with two Optimize instance
 Changing the value of `*.settings.index.prefix` after an instance was already running results in new indexes being created with the new prefix value. There is no support in migrating data between indexes based on different prefixes.
 :::
 
+:::note
+Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are currently supported, refer to the Camunda 8 [OpenSearch features](https://github.com/camunda/issues/issues/635).
+:::
+
 \* Elasticsearch index prefix settings path: `es.settings.index.prefix`<br/> \* OpenSearch index prefix settings path: `opensearch.settings.index.prefix`
 
 ![Shared Elasticsearch Cluster Setup](img/shared-elasticsearch-cluster.png)

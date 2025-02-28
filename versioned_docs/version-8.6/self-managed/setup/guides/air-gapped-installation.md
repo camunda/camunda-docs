@@ -4,7 +4,7 @@ title: "Installing in an air-gapped environment"
 description: "Camunda 8 Self-Managed installation in an air-gapped environment"
 ---
 
-The [Camunda Helm chart](/self-managed/setup/install.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler](/self-managed/setup/deploy/other/docker.md#web-modeler)).
+The [Camunda Helm chart](/self-managed/setup/install.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub.
 With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
 To find out the necessary Docker images for your Helm release, note that the required images depend on the values you specify for your deployment. You can get an overview of all required images by running the following command:
@@ -31,9 +31,9 @@ The following images must be available in your air-gapped environment:
 - [bitnami/elasticsearch](https://hub.docker.com/r/bitnami/elasticsearch/)
 - [bitnami/kibana](https://hub.docker.com/r/bitnami/kibana/)
 - [Web Modeler images](/self-managed/setup/deploy/other/docker.md#component-images):
-  - `web-modeler-ee/modeler-restapi`
-  - `web-modeler-ee/modeler-webapp`
-  - `web-modeler-ee/modeler-websockets`
+  - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
+  - [camunda/web-modeler-webapp](https://hub.docker.com/r/camunda/web-modeler-webapp)
+  - [camunda/web-modeler-websockets](https://hub.docker.com/r/camunda/web-modeler-websockets)
 - [Console images](/self-managed/setup/deploy/other/docker.md#component-images):
   - `console/console-sm`
 
@@ -207,13 +207,13 @@ webModeler:
     tag: latest
   restapi:
     image:
-      repository: camunda/modeler-restapi
+      repository: camunda/web-modeler-restapi
   webapp:
     image:
-      repository: camunda/modeler-webapp
+      repository: camunda/web-modeler-webapp
   websockets:
     image:
-      repository: camunda/modeler-websockets
+      repository: camunda/web-modeler-websockets
   ...
 postgresql:
   image:
