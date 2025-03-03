@@ -228,7 +228,7 @@ If unsure about who to pick, choose one of the corresponding team representative
 - Optimize: @RomanJRW
 - Connectors: @camunda/connectors
 - Self-Managed/Distribution: @camunda/distribution
-- InfEx: @camunda/infex-docs-dri
+- InfEx: @camunda/infrastructure-experience
 - Identity: @kevinCamunda
 - DevEx: @akeller
 - Product Management: @felix-mueller
