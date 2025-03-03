@@ -154,6 +154,8 @@ kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 
 Run the following command to see the current status of the cluster:
 
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
 ```
 zbctl --insecure status
 ```

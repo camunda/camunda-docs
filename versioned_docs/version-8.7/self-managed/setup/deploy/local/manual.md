@@ -94,6 +94,8 @@ You’ll know Zeebe has started successfully when you see a message similar to t
 
 You can test the Zeebe Gateway by asking for the cluster topology with [zbtcl](/apis-tools/community-clients/cli-client/index.md#usage):
 
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
 ```shell
 ./bin/zbctl --insecure status
 ```

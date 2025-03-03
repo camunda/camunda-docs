@@ -18,6 +18,8 @@ When a message is published and the message name and correlation key match to a 
 
 A subscription is closed when the corresponding element (e.g. the message catch event), or its scope is left. After a subscription is opened, it is not updated (for example, when the referenced process instance variable is changed.)
 
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
 <details>
    <summary>Publish message via zbctl</summary>
    <p>

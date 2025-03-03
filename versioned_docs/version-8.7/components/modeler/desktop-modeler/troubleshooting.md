@@ -54,7 +54,7 @@ To produce logging output, you can also run Desktop Modeler from the command lin
 
 You try to connect (i.e., to deploy) to a remote Zeebe instance, and Desktop Modeler tells you it "cannot find a running Zeebe."
 
-To resolve this issue, check if you can connect to Zeebe through another client, i.e., [`zbctl`](/apis-tools/community-clients/cli-client/index.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
+To resolve this issue, check if you can connect to Zeebe through another client, for example, community-supported [`zbctl`](/apis-tools/community-clients/cli-client/index.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
 
 ## Resolve a general Zeebe connection issue
 

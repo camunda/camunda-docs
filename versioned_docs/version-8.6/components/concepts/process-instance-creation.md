@@ -24,6 +24,8 @@ A process that has a [none start event](/components/modeler/bpmn/none-events/non
 
 This command creates a new process instance and immediately responds with the process instance ID. The execution of the process occurs after the response is sent.
 
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
 ![create-process](assets/create-process.png)
 
 <details>

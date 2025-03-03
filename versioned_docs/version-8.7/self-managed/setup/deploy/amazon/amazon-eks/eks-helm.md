@@ -20,7 +20,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
-- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
 
 ### Considerations
@@ -764,6 +764,8 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS_REST}/v2/topolog
 
   </TabItem>
   <TabItem value="zbctl" label="zbctl">
+
+  <!--- The following example should be revised with the changes made in 5026, yes? --->
 
 After following the installation instructions in the [zbctl docs](/apis-tools/community-clients/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
 

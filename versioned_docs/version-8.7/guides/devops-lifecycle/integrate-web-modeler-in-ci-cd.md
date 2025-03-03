@@ -178,7 +178,9 @@ In the build stage, deploy your process or project to a cluster or embedded engi
 For GitLab users, consider using [GitLab Review Apps](https://docs.gitlab.com/ee/ci/review_apps/) to provide preview environments.
 :::
 
-Deploy resources using the [`zbctl` CLI](/apis-tools/community-clients/cli-client/index.md) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the [Java](/apis-tools/java-client/index.md) client library or any [community-built alternatives](/apis-tools/community-clients/index.md).
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
+Deploy resources using the community-supported [`zbctl` CLI](/apis-tools/community-clients/cli-client/index.md) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the [Java](/apis-tools/java-client/index.md) client library or any [community-built alternatives](/apis-tools/community-clients/index.md).
 
 :::info Feature branches and Web Modeler installations
 To maintain a single source of truth, avoid multiple Web Modeler instances for different feature branches. Instead, maintain a single Web Modeler installation for all environments, utilizing versions to signify versioning and pipeline stages. Feature branches can be managed by cloning and merging files or projects, ensuring synchronization using VCS.

@@ -21,6 +21,8 @@ Let’s look at a case where `orderValue` is present and was set as a string, bu
 
 <TabItem value='linux'>
 
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
 ```
 ./bin/zbctl --insecure create instance order-process --variables '{"orderId": "1234", "orderValue":"99"}'
 ```

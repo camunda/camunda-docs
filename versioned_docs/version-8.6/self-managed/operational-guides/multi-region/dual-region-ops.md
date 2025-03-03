@@ -298,6 +298,8 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
   </TabItem>
   <TabItem value="zbctl" label="zbctl">
 
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
 1. Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
 
 ```bash

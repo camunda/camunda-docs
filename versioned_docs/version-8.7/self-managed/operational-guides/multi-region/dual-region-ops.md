@@ -331,6 +331,8 @@ In our example, we went with port-forwarding to a localhost, but other alternati
 </TabItem>
 <TabItem value="zbctl" label="zbctl">
 
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
 1.  Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
 
         ```bash

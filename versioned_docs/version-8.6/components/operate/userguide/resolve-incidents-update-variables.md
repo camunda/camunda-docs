@@ -19,6 +19,8 @@ Let’s look at a case where `orderValue` is present and was set as a string, bu
 ]
 }>
 
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
 <TabItem value='linux'>
 
 ```

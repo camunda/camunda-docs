@@ -31,6 +31,8 @@ This command creates a new process instance and immediately responds with the pr
   <p>
 Create a process instance:
 
+<!--- The following example should be revised with the changes made in 5026, yes? --->
+
 ```
 zbctl create instance "order-process"
 ```

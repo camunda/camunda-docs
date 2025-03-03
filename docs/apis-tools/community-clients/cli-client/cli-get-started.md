@@ -5,6 +5,12 @@ sidebar_label: "Getting started with the CLI client"
 description: "Get started with this tutorial that shows you how to interact with Camunda 8 using the community-supported CLI client and command line interface `zbctl`."
 ---
 
+:::note Heads up!
+This project is now community-supported.
+
+See the [announcement](reference/announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
+:::
+
 In this tutorial, you will learn how to use the [community-supported](https://github.com/camunda-community-hub) `zbctl` CLI client to interact with Camunda 8.
 
 :::note

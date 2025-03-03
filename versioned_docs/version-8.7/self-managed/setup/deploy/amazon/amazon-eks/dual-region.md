@@ -780,6 +780,8 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
   </TabItem>
   <TabItem value="zbctl" label="zbctl">
 
+  <!--- The following example should be revised with the changes made in 5026, yes? --->
+
 ```shell
 kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500
 ```
