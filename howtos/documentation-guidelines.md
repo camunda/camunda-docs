@@ -231,7 +231,12 @@ If unsure about who to pick, choose one of the corresponding team representative
 - InfEx: @camunda/infrastructure-experience
 - Identity: @kevinCamunda
 - DevEx: @akeller
-- Product Management: @felix-mueller
+- Product Management:
+  - Core Orchestration and Core Platform topics: @felix-mueller
+  - Task Automation: @crobbins215
+  - Business Application Integration: @toco-cam
+  - Embedded Intelligence, Onboarding and Migration: @bastiankoerber
+  - Fallback: @bastiankoerber
 - Documentation: @camunda/tech-writers
 - Documentation infrastructure: @pepopowitz
 - Fallback: @akeller
