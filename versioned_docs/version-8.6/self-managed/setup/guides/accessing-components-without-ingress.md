@@ -12,13 +12,13 @@ You need to keep `port-forward` running all the time to communicate with the rem
 
 ## Accessing workflow engine
 
-To interact with Camunda workflow engine via the [Zeebe Gateway](/self-managed/zeebe-deployment/configuration/gateway.md) using community-supported [zbctl](/apis-tools/community-clients/cli-client/index.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
+To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/zeebe-deployment/configuration/gateway.md) using the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
 
 ```
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 ```
 
-Now, you can connect and execute operations against your new Zeebe cluster. This allows you to use `zbctl` as a command line interface to read and create resources inside the Zeebe Broker.
+Now, you can connect and execute operations against your new Zeebe cluster.
 
 :::note
 Accessing the Zeebe cluster directly using `kubectl port-forward` is recommended for development purposes.
@@ -93,7 +93,7 @@ Log in to these services using the first user `demo`/`demo` credentials.
 
 If you deploy process definitions, they will appear in the dashboard. Then, you can drill down to see your active instances.
 
-You can deploy and create new instances using the Zeebe clients or `zbctl`.
+You can deploy and create new instances using the Zeebe clients.
 
 You can also trigger **Connectors** inbound webhook, given you deployed one.
 You can do so with the following example: `curl -X POST -H "Content-Type: application/json" -d '{"myId": 123456, "myMessage": "Hello, world!"}' http://localhost:8088/inbound/<YOUR_WEBHOOK_ID>`.

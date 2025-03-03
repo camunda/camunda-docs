@@ -58,7 +58,7 @@ To resolve this issue, check if you can connect to Zeebe through another client,
 
 ## Resolve a general Zeebe connection issue
 
-You try to connect to Zeebe from both Desktop Modeler _and_ [`zbctl`](/apis-tools/community-clients/cli-client/index.md), and neither of them works. General connection failures can have a couple of reasons:
+You try to connect to Zeebe from both Desktop Modeler _and_ community-supported [`zbctl`](/apis-tools/community-clients/cli-client/index.md), and neither of them works. General connection failures can have a couple of reasons:
 
 ### The (remote) Zeebe instance is not reachable
 
@@ -72,7 +72,7 @@ Secure connections to Zeebe require [HTTP/2 over TLS with protocol negotiation v
 
 ## Debug Zeebe connection issues
 
-You can connect to Zeebe via [`zbctl`](/apis-tools/community-clients/cli-client/index.md) or another API client. However, connecting through Desktop Modeler fails.
+You can connect to Zeebe via community-supported [`zbctl`](/apis-tools/community-clients/cli-client/index.md) or another API client. However, connecting through Desktop Modeler fails.
 
 ### Secure connection to Zeebe fails
 
