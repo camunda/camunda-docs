@@ -48,7 +48,7 @@ In Camunda 8, [values are stored as JSON](/components/concepts/variables.md#vari
 This best practice describes variable handling within Camunda 8. Process variables are handled slightly differently with Camunda 7. Consult the [Camunda 7 documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/) for details. In essence, variable values are not handled as JSON and thus there are [different values](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#supported-variable-values) supported.
 :::
 
-You can dynamically create such variables by assigning an object of choice to a (string typed) variable name; for example, by passing a `Map<String, Object>` when [completing](../../../apis-tools/tasklist-api/mutations/complete-task.mdx) the "Review tweet" task via the API:
+You can dynamically create such variables by assigning an object of choice to a (string typed) variable name; for example, by passing a `Map<String, Object>` when [completing](apis-tools/tasklist-api-rest/specifications/complete-task.api.mdx) the "Review tweet" task via the API:
 
 ```
 // TODO: Double check!
@@ -67,7 +67,7 @@ In Camunda, you do _not_ declare process variables in the process model. This al
 
 Consult the [docs about variables](/components/concepts/variables.md#variable-values) to learn more.
 
-Camunda does not treat BPMN **data objects** (<img src="/img/bpmn-elements/data-object.svg" width="60" />) as process variables. We recommend using them occasionally _for documentation_, but you need to [avoid excessive usage of data objects](../../modeling/creating-readable-process-models#avoiding-excessive-usage-of-data-objects).
+Camunda does not treat BPMN **data objects** (<img src="/img/bpmn-elements/data-object.svg" width="60" alt="BPMN data object" />) as process variables. We recommend using them occasionally _for documentation_, but you need to [avoid excessive usage of data objects](../../modeling/creating-readable-process-models#avoiding-excessive-usage-of-data-objects).
 
 ## Storing just the relevant data
 

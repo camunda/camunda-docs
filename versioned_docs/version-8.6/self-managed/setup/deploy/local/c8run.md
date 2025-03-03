@@ -27,6 +27,7 @@ Camunda 8 Run includes the following:
 
 - OpenJDK 21+
 - [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
+- If using Ubuntu, use Ubuntu 22.04 or newer
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.

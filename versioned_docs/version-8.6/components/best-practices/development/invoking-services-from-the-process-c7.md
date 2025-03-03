@@ -736,7 +736,7 @@ To call a **SAP** system, you have the following options:
 
 A script task...
 
-<img src="/img/bpmn-elements/task-script.svg" />
+<img src="/img/bpmn-elements/task-script.svg" alt="task script" />
 
 &nbsp;...is defined by specifying the script and the `scriptFormat`.
 
