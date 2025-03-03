@@ -206,7 +206,7 @@ To retrieve the actual file `content`, iterate over the response and fetch it vi
 
 If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](/self-managed/connectors-deployment/install-and-start.md) for Self-Managed, or [here](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) for SaaS.
 
-Deploy resources in this pipeline step using the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java or client library or any community-built alternatives.
+Deploy resources in this pipeline step using the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java client library or any community-built alternatives.
 
 #### Add environment variables via secrets
 
