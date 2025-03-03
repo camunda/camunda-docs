@@ -2,6 +2,14 @@
 # This file is used to check that we don't accidentally break these links
 
 https://docs.camunda.io/docs
+https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-sagemaker
+https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-textract
+https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/sql
+https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/sql/#connection
+https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/sql/#uri-connection
+https://docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/sql/#variables
+https://docs.camunda.io/docs/8.7/apis-tools/camunda-api-rest/specifications/create-document-link/
+https://docs.camunda.io/docs/8.7/components/connectors/out-of-the-box-connectors/amazon-comprehend
 https://docs.camunda.io/docs/apis-clients/operate-api/#filter
 https://docs.camunda.io/docs/apis-clients/operate-api/#sort
 https://docs.camunda.io/docs/apis-tools/camunda-api-rest/specifications/upload-document-alpha/
