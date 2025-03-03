@@ -47,7 +47,7 @@ and how it can be configured by process developers. Connector templates are a sp
 
 A connector consists of the actual Java code, and the Modeler user interface.
 
-<img src={ConnectorArchitectureImg}/>
+<img src={ConnectorArchitectureImg} alt="Diagram showing the architecture of a connector" />
 
 1. The Java code defines the connector functionality and how it connects to an external system. For example, the [Connector function](/components/connectors/custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic) for outbound connectors.
 
