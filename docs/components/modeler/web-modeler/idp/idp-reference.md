@@ -17,7 +17,7 @@ Technical reference information for IDP, including technical architecture, suppo
 
 IDP offers a composable architecture that allows you to customize and extend IDP capabilities as needed. This flexibility enables you to adapt quickly to evolving business needs while maintaining a streamlined and manageable system.
 
-IDP allows you to create, configure, and publish a **document extraction template**. This is similar to a [connector template](/components/connectors/custom-built-connectors/connector-templates.md).
+IDP allows you to create, configure, and publish a **document extraction template**. This is a type of [connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
 <img src={IdpArchitectureImg} alt="Architecture diagram of IDP" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
@@ -31,7 +31,7 @@ The document extraction template integrates with Camunda document handling conne
 
 :::note
 
-- You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster when [configuring IDP](idp-configuration.md).
+- You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster. See [configuring IDP](idp-configuration.md).
 - Learn more about [Camunda document handling](/components/concepts/document-handling.md).
 
 :::
@@ -48,7 +48,7 @@ IDP currently only supports data extraction from the following document file for
 
 IDP supports data extraction and processing of documents in multiple languages.
 
-IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. This ensures that the extracted text can be accurately mapped to process variables and used within your workflows, regardless of a document's language.
+IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. This ensures that the extracted text can be accurately mapped to process variables and used within your workflows, regardless of document language.
 
 :::info
 For example, as of February 2025, Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for currently supported languages.
@@ -60,7 +60,7 @@ In SaaS, during test extraction your uploaded sample documents are stored in an 
 
 ## Extraction field data types {#data-types}
 
-Specify the [extraction field](idp-key-concepts.md#extraction-fields) data type to indicate to the LLM what type of data should be extracted. This helps the LLM more accurately extract the data you want.
+Specify the [extraction field](idp-key-concepts.md#extraction-fields) data type to indicate to the LLM what type of data it should be trying to extract. This helps the LLM more accurately analyze and extract the correct data.
 
 For example, if you want to extract an expected numeric value (such as a monetary value), select the `Number` data type for the extraction field.
 

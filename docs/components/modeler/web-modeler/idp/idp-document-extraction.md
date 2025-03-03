@@ -13,7 +13,7 @@ Extract data from a single type of structured or unstructured document.
 Document extraction templates form the basis for using IDP in your end-to-end processes.
 
 - Create a separate document extraction template for each type of document you want to categorize and extract data from, such as an invoice, a report, identity document, and so on.
-- Published document extraction templates can then be used to [integrated IDP into your processes](idp-integrate.md).
+- Published document extraction templates can then be used to [integrate IDP into your processes](idp-integrate.md).
 <!-- - Published extraction projects can be [integrated into your processes](idp-integrate.md) or linked to a [document automation](idp-document-automation.md) project. -->
 
 ## Create document extraction template
@@ -39,7 +39,7 @@ To create a new document extraction template:
    - [unstructured data extraction project](idp-unstructured-extraction.md): Configure and publish an unstructured data extraction project. -->
 
 :::note
-The **Form Extraction** extraction method is unavailable as it is currently in development for a future release. This method will allow you to configure a document extraction template optimized for extracting data from structured document types.
+The **Form Extraction** extraction method is currently in development for a future release. This method will allow you to create a document extraction template for extracting data from structured document types.
 :::
 
 <!-- :::tip
