@@ -200,6 +200,8 @@ module.exports = {
               ],
             },
             "components/modeler/web-modeler/file-download",
+            "components/modeler/web-modeler/web-modeler-settings",
+            "components/modeler/web-modeler/process-landscape-visualization",
           ],
         },
         {
@@ -747,7 +749,6 @@ module.exports = {
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
-        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
@@ -829,12 +830,12 @@ module.exports = {
             ),
           ],
         },
-        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+            require("./docs/apis-tools/operate-api/sidebar-schema"),
+            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -1134,6 +1135,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/870-to-880",
             "self-managed/operational-guides/update-guide/860-to-870",
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",

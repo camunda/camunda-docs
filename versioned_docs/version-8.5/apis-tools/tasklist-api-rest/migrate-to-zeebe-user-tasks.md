@@ -360,14 +360,12 @@ Use the Zeebe Java client when you are building your task application in Java. T
 
 ### API differences
 
-<!-- TODO two cards to link to boh API docs, once available -->
-
 Refer to the dedicated sections and API explorers to learn details about the APIs.
 
 <DocCardList items={[
 {
 type:"link",
-href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
+href:"/docs/8.5/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
 label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },

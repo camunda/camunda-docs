@@ -402,10 +402,6 @@ module.exports = {
           title: "About",
           items: [
             {
-              label: "How to use our docs",
-              to: "meta",
-            },
-            {
               label: "Camunda Help Center",
               to: "docs/reference/camunda-help-center",
             },

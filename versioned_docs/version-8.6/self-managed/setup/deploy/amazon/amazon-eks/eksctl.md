@@ -103,7 +103,7 @@ Each component starts with a section that configures the different variables acc
 export CLUSTER_NAME=camunda-cluster
 # Your standard region that you host AWS resources in
 export REGION="$AWS_REGION"
-# Multi-region zones, derived from the region
+# Multi-zones, derived from the region
 export ZONES="${REGION}a ${REGION}b ${REGION}c"
 # The AWS Account ID
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
