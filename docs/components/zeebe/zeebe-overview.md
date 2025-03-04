@@ -27,7 +27,3 @@ For documentation on deploying Zeebe as part of Camunda 8 Self-Managed, refer to
 New to Zeebe? Learn about clustering, partitions, internal processing, and more.
 
 <ZeebeGrid zeebe={gettingStartedCards} />
-
-## Next steps
-
-- Get familiar with [technical concepts](technical-concepts/technical-concepts-overview.md).
