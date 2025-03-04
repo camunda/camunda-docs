@@ -15,7 +15,7 @@ There are different ways to authenticate to your cluster. The following sections
 
 <TabItem value="basic">
 
-In Java code, create a `BasicAuthCredentialsProvider` and provide it with your username and password.
+In Java code, create a `BasicAuthCredentialsProvider` and provide it with your username and password:
 
 ```java
 final var credentialsProvider =
@@ -25,7 +25,7 @@ final var credentialsProvider =
     .build();
 ```
 
-Next you need to provide the credentials provider to the client builder.
+Next, provide the credentials provider to the client builder:
 
 ```java
 final var client = CamundaClient.newClientBuilder()
@@ -37,24 +37,11 @@ final var client = CamundaClient.newClientBuilder()
 The client will now add an `Authorization` header to each request with the value `Basic username:password`. `username:password`
 is base64 encoded.
 
-### Environment Variables
-
-You can also use environment variables to provide the username and password. The following environment variables are supported:
-
-```bash
-export CAMUNDA_BASIC_AUTH_USERNAME='username'
-export CAMUNDA_BASIC_AUTH_PASSWORD='password'
-```
-
-When using environment variables you don't have to provide the username and password to the `CredentialsProvider`.
-
-Environment variables will by default override any values provided in Java code. You can enforce that Java code values have precedence via the `.applyEnvironmentOverrides(false)` API on the `BasicAuthCredentialsProviderBuilder`.
-
 </TabItem>
 
 <TabItem value="oidc">
 
-In Java code, create an `OAuthCredentialsProvider` and provide it with the connection properties.
+In Java code, create an `OAuthCredentialsProvider` and provide it with the connection properties:
 
 ```java
 private static final String audience = "[Zeebe Token Audience, e.g., zeebe.camunda.io]";
@@ -71,7 +58,7 @@ final var credentialsProvider =
     .build();
 ```
 
-Next you need to provide the credentials provider to the client builder.
+Next, provide the credentials provider to the client builder:
 
 ```java
 final var client = CamundaClient.newClientBuilder()
@@ -81,22 +68,8 @@ final var client = CamundaClient.newClientBuilder()
 ```
 
 The client will now add an `Authorization` header to each request with the value `Bearer <token>`. The token is obtained by making a request to the authorization server.
+
 Note that the token is cached to not make unnecessary requests to the authorization server. The token is lazily refreshed once expired.
-
-### Environment Variables
-
-You can also use environment variables to provide the properties. The following environment variables are supported:
-
-```bash
-export CAMUNDA_AUTHORIZATION_SERVER_URL='[OAuth API, e.g., https://login.cloud.camunda.io/oauth/token]'
-export CAMUNDA_TOKEN_AUDIENCE='[Zeebe Token Audience, e.g., zeebe.camunda.io]'
-export CAMUNDA_CLIENT_ID='[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]'
-export CAMUNDA_CLIENT_SECRET='[Client Secret]'
-```
-
-When using environment variables you don't have to provide the username and password to the `CredentialsProvider`.
-
-Environment variables will by default override any values provided in Java code. You can enforce that Java code values have precedence via the `.applyEnvironmentOverrides(false)` API on the `OAuthCredentialsProviderBuilder`.
 
 </TabItem>
 
@@ -112,7 +85,7 @@ As a prerequisite, ensure you have proper KeyStore and TrustStore configured, so
   `CN=My Camunda Client, OU=Camunda Users, O=Best Company, C=DE`.
 - Your application DN registered in the identity provider client authorization details.
 
-In that case, configuring `OAuthCredentialsProvider` might look like this
+In that case, an example `OAuthCredentialsProvider` configuration might look like:
 
 ```java
 private static final String audience = "[Zeebe Token Audience, e.g., zeebe.camunda.io]";
@@ -139,7 +112,42 @@ final OAuthCredentialsProvider provider =
     .build();
 ```
 
+</TabItem>
+</Tabs>
+
 ### Environment Variables
+
+<Tabs groupId="authenticationMethods" className="tabs-hidden" defaultValue="basic" queryString values={[{label: 'Basic', value: 'basic' },{label: 'OIDC', value: 'oidc' },{label: 'X.509', value: 'x509' }]}>
+
+<TabItem value="basic">
+You can also use environment variables to provide the username and password. The following environment variables are supported:
+
+```bash
+export CAMUNDA_BASIC_AUTH_USERNAME='username'
+export CAMUNDA_BASIC_AUTH_PASSWORD='password'
+```
+
+When using environment variables you don't have to provide the username and password to the `CredentialsProvider`.
+
+Environment variables will by default override any values provided in Java code. You can enforce that Java code values have precedence via the `.applyEnvironmentOverrides(false)` API on the `BasicAuthCredentialsProviderBuilder`.
+</TabItem>
+
+<TabItem value="oidc">
+You can also use environment variables to provide the properties. The following environment variables are supported:
+
+```bash
+export CAMUNDA_AUTHORIZATION_SERVER_URL='[OAuth API, e.g., https://login.cloud.camunda.io/oauth/token]'
+export CAMUNDA_TOKEN_AUDIENCE='[Zeebe Token Audience, e.g., zeebe.camunda.io]'
+export CAMUNDA_CLIENT_ID='[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]'
+export CAMUNDA_CLIENT_SECRET='[Client Secret]'
+```
+
+When using environment variables you don't have to provide the username and password to the `CredentialsProvider`.
+
+Environment variables will by default override any values provided in Java code. You can enforce that Java code values have precedence via the `.applyEnvironmentOverrides(false)` API on the `OAuthCredentialsProviderBuilder`.
+</TabItem>
+
+<TabItem value="x509">
 
 You can also use environment variables to provide the properties. The following environment variables are supported:
 
