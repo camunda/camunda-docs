@@ -1,7 +1,7 @@
 ---
 id: cluster-load
 title: Cluster load
-description: "If your organization works within Camunda's Enterprise plan, you can create cluster backups."
+description: "Cluster load gives you an approximate, high level overview of how well your cluster handles its current workload."
 ---
 
 View and manage the cluster load of your clusters in Console.
