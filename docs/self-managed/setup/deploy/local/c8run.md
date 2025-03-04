@@ -116,13 +116,13 @@ Once configured correctly, your Connectors are available for use in Modeler.
 
 ### Use Camunda APIs
 
-All served Camunda APIs are by default **unprotected** in Camunda 8 Run and can be accessed without any authentication credentials or token provided.
+All served Camunda APIs are by default **unprotected** in Camunda 8 Run, and can be accessed without any authentication credentials or token provided.
 
 The available APIs are [Tasklist V1](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate V1](/apis-tools/operate-api/overview.md), [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)
 
-### Enable Authentication and Authorization
+### Enable authentication and authorization
 
-In case you want to work with authorizations, you can enable authentication on the APIs and enforcement of authorizations by making use of the optional `--config` flag pointing to e.g. this minimal `application.yaml`.
+To work with authorizations, API authentication and authorization enforcement must be enabled. The following minimal `application.yaml` shows the required configuration for the APIs and authorizations:
 
 ```yaml
 camunda.security:
@@ -130,9 +130,13 @@ camunda.security:
   authorizations.enabled: true
 ```
 
-Assuming you put the file into root of the c8run filter `application.yaml`, you can then run Camunda 8 Run with authorizations enabled by using the following command `./start.sh --config application.yaml`.
+Place the above `application.yaml` into your root `/c8run` folder, provide it to Camunda 8 Run at startup using the `--config` [flag](#configuration-options):
 
-You are then required to provide Basic Authentication credentials on API requests, e.g.
+```
+./start.sh --config application.yaml
+```
+
+You are then required to provide basic authentication credentials on API requests, as in the following:
 
 ```shell
 curl --request POST 'http://localhost:8080/v1/process-definitions/search'  \
