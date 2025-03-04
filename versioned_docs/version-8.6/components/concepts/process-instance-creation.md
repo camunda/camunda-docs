@@ -27,28 +27,34 @@ This command creates a new process instance and immediately responds with the pr
 ![create-process](assets/create-process.png)
 
 <details>
-  <summary>Code example</summary>
-  <p>
-Create a process instance:
+   <summary>Create a process instance via Camunda 8 REST API</summary>
+   <p>
 
 ```
-zbctl create instance "order-process"
+curl -L 'http://localhost:8080/v2/process-instances' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "processDefinitionKey": "2251799813685249”,
+  "processDefinitionVersion": 1
+}'
 ```
 
 Response:
 
 ```
 {
-  "processKey": 2251799813685249,
-  "bpmnProcessId": "order-process",
-  "version": 1,
-  "processInstanceKey": 2251799813686019
+  "processDefinitionId": "order-process",
+  "processDefinitionVersion": 1,
+  "processDefinitionKey": "2251799813685249",
+  "processInstanceKey": "2251799813686019"
 }
-
 ```
 
-  </p>
-</details>
+See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
 
 ### Create and await results
 
@@ -67,32 +73,37 @@ When the client resends the command, it creates a new process instance.
 :::
 
 <details>
-  <summary>Code example</summary>
-  <p>
-Create a process instance and await results:
+   <summary>Create a process instance and await results via Camunda 8 REST API</summary>
+   <p>
 
 ```
-zbctl create instance "order-process" --withResult --variables '{"orderId": "1234"}'
+curl -L 'http://localhost:8080/v2/process-instances' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "processDefinitionId": "order-process”,
+  "processDefinitionVersion": 1,
+  "awaitCompletion": true,
+  "variables": { "orderId": "1234" }
+}'
 ```
 
 Response:
 
-:::note
-The variables in the response depend on the process.
-:::
-
 ```
 {
-  "processKey": 2251799813685249,
-  "bpmnProcessId": "order-process",
-  "version": 1,
-  "processInstanceKey": 2251799813686045,
-  "variables": "{\"orderId\":\"1234\"}"
+  "processDefinitionId": "order-process",
+  "processDefinitionVersion": 1,
+  "variables": { "orderId": "1234" }
+  "processDefinitionKey": "2251799813685249",
+  "processInstanceKey": "2251799813686019",
 }
 ```
 
-  </p>
-</details>
+See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
 
 Failure scenarios applicable to other commands are applicable to this command as well. Clients may not get a response in the following cases even if the process execution is completed successfully:
 
@@ -123,22 +134,29 @@ Start instructions have the same [limitations as process instance modification](
 Start instructions are supported for both `CreateProcessInstance` commands.
 
 <details>
-  <summary>Code example</summary>
-  <p>
-Create a process instance starting before the 'ship_parcel' element:
+   <summary>Create a process instance and start at a user-defined element</summary>
+   <p>
 
-```java
-client.newCreateInstanceCommand()
-  .bpmnProcessId("order-process")
-  .latestVersion()
-  .variables(Map.of("orderId", "1234"))
-  .startBeforeElement("ship_parcel")
-  .send()
-  .join();
+```
+curl -L 'http://localhost:8080/v2/process-instances' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "processDefinitionId": "order-process”,
+  "processDefinitionVersion": -1,
+  "startInstructions": [
+    {
+      "elementId": "ship_parcel"
+    }
+  ],
+  "variables": { "orderId": "1234" }
+}'
 ```
 
-  </p>
-</details>
+See the [API reference for process instance creation](/apis-tools/camunda-api-rest/specifications/create-process-instance.api.mdx) for more information, including additional request fields and code samples.
+
+   </p>
+ </details>
 
 ## Events
 
