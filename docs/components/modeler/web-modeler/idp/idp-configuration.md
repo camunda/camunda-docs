@@ -8,74 +8,35 @@ import IdpSecretsImg from './img/idp-connector-secrets.png';
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
 
-Configure IDP for your Camunda 8 setup to make sure IDP can access the required components and credentials.
+Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials.
 
-## Prerequisites and configuration
+## Prerequisites
 
-The following prerequisites and configuration are required for IDP in Camunda 8:
+The following prerequisites are required for IDP:
 
-| Prerequisite/configuration                         | Camunda 8 SaaS                                                             | Camunda 8 Self-Managed/Camunda 8 Run |
-| :------------------------------------------------- | :------------------------------------------------------------------------- | :----------------------------------- |
-| [Modeler](#modeler)                                | No action required. Web Modeler is the default Modeler for Camunda 8 SaaS. | Install and configure Web Modeler.   |
-| [Amazon AWS account and credentials](#aws-account) | summary                                                                    | summary                              |
-| [Amazon AWS S3 storage](#aws-storage)              | summary                                                                    | summary                              |
-| [Connectors](#connectors)                          | summary                                                                    | summary                              |
+| Prerequisite              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Amazon Web Services (AWS) | <ul><li><p>Create a valid [AWS Identity and Access Management (IAM) user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) with permissions configured to allow access to Amazon Bedrock, AWS S3, and Amazon Textract (for example, `AmazonBedrockFullAccess`).</p></li><li><p>Obtain and store the [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_) for this IAM user. These are required during IDP configuration.</p></li><li><p>Create an [Amazon AWS S3 bucket](https://aws.amazon.com/s3/) named `idp-extraction-connector` that can be used by IDP for document storage during document analysis and extraction.</p></li></ul> |
+| Web Modeler               | <ul><li><p>Web Modeler is required to create, manage, publish, and integrate [IDP applications](idp-applications.md) and [document extraction](idp-document-extraction.md) templates.</p></li><li><p>IDP does not support Desktop Modeler.</p></li><li><p>**Camunda 8 Self-Managed**: Check you have [installed](/self-managed/modeler/web-modeler/installation.md) and [configured](/self-managed/modeler/web-modeler/configuration/configuration.md) Web Modeler.</p></li></ul>                                                                                                                                                                                                                                                              |
+| Connectors                | <ul><li><p>The following connectors are required for IDP:<ul><li><p>[Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md): Used for document storage during analysis and extraction.</p></li><li><p>[Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md): Used to extract text from documents.</p></li><li><p>[Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md): Used to extract data from documents.</p></li></ul></p></li><li><p>**Camunda 8 Self-Managed**: Check you have [installed and deployed](/self-managed/connectors-deployment/install-and-start.md) these connectors.</p></li></ul>                                                     |
 
-:::info
-
-- See [configure IDP for Camunda 8 Run](#configure-idp-camunda8run) for a summary of the steps typically required to configure IDP with Camunda 8 Run.
-- See [technical architecture](idp-reference.md#architecture) to learn more about the technical architecture and how IDP works.
-
+:::note
+As Web Modeler is required to use IDP, Camunda 8 Run is not currently recommended for use with IDP. Install Camunda 8 Self-Managed if you would like to use IDP in a non-SaaS Camunda setup.
 :::
 
-## Modeler {#modeler}
+## Configure IDP
 
-- Web Modeler is required to create, manage, and publish IDP applications and document extraction templates.
-- Web Modeler or Desktop Modeler can be used to integrate published document extraction templates into your processes.
+Once you have completed all the required prerequisites, configure IDP in a `dev` cluster as follows:
 
-This can be summarized as follows:
+### Add AWS connector secrets to cluster {#aws-secrets}
 
-| IDP functionality                                                                          |                                                Web Modeler                                                 |                                                 Desktop Modeler                                                 |
-| :----------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: |
-| Create and manage [IDP applications](idp-applications.md).                                 | <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported | <img src={CrossImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Not supported |
-| Create, manage, and publish [document extraction](idp-document-extraction.md) templates.   | <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported | <img src={CrossImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Not supported |
-| [Integrate published document extraction templates into your processes](idp-integrate.md). | <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported |   <img src={TickImg} alt="Connector secrets" style={{width: '20px', padding: '0', margin: '0'}} /> Supported    |
+Add your Amazon AWS IAM user _access key_ and _secret key_ as [connector secrets](/components/console/manage-clusters/manage-secrets.md) to the cluster, using the following names:
 
-### Self-Managed/Camunda 8 Run
+- _Access key_: `IDP_AWS_ACCESSKEY`
+- _Secret key_: `IDP_AWS_SECRETKEY`
 
-To fully use IDP with Camunda 8 Self-Managed and Camunda 8 Run you must [install](/self-managed/modeler/web-modeler/installation.md) and [configure](/self-managed/modeler/web-modeler/configuration/configuration.md) Web Modeler.
+<img src={IdpSecretsImg} alt="Connector secrets" style={{width: '750px'}} />
 
-## Amazon AWS account and credentials {#aws-account}
-
-As IDP uses Camunda connectors to integrate with Amazon AWS technology, you must:
-
-- Create or have access to an [Amazon AWS](https://aws.amazon.com/iam/) account, configured with access to [Amazon Bedrock](https://aws.amazon.com/bedrock/).
-- Add your Amazon AWS account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to any cluster used with IDP.
-  <img src={IdpSecretsImg} alt="Connector secrets" style={{width: '650px'}} />
-
-## Amazon AWS S3 storage {#aws-storage}
-
-You must create an Amazon AWS S3 bucket named `idp-extraction-connector` that can be used by IDP for temporary document storage during analysis and test extraction.
-
-## Connectors {#connectors}
-
-IDP requires access to the following connectors to analyze/extract document content and converse with LLM models:
-
-| Connector                                                                                  | Usage requirement                                         |
-| :----------------------------------------------------------------------------------------- | :-------------------------------------------------------- |
-| [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md)                 | Used for document storage during analysis and extraction. |
-| [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md)     | Used to extract text from documents.                      |
-| [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md) | Used to extract insights about the content of documents.  |
-| [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md)       | Used to extract data from documents.                      |
-
-**Self-Managed/Camunda 8 Run:** Check you have these connectors [installed and deployed](/self-managed/connectors-deployment/install-and-start.md) in your environment.
-
-## Configure IDP for Camunda 8 Run {#configure-idp-camunda8run}
-
-The steps typically required to configure IDP with Camunda 8 Run can be summarized as follows:
-
-1. [Install and start Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md#install-and-start-camunda-8-run).
-1. As Web Modeler is not included in Camunda 8 Run by default, [install](/self-managed/modeler/web-modeler/installation.md) and [configure](/self-managed/modeler/web-modeler/configuration/configuration.md) Web Modeler.
-1. ...
-
-## Configure IDP for Camunda 8 SaaS
+:::note
+You can rename these connector secrets if you wanted to change the testing bucket used in other environments (such as `test`, `stage` or `prod`). Ensure you also change these names to match within the **Authentication** section of the Properties panel for any related published document extraction templates.
+:::
