@@ -189,7 +189,9 @@
                 }
               ]
             },
-            "components/modeler/web-modeler/file-download"
+            "components/modeler/web-modeler/file-download",
+            "components/modeler/web-modeler/web-modeler-settings",
+            "components/modeler/web-modeler/process-landscape-visualization"
           ]
         },
         {
@@ -2002,6 +2004,17 @@
           ]
         },
         "self-managed/operational-guides/configure-multi-tenancy",
+        {
+          "type": "category",
+          "label": "Production guides",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/operational-guides/production-guide/helm-chart-production-guide"
+          },
+          "items": [
+            "self-managed/operational-guides/production-guide/helm-chart-production-guide"
+          ]
+        },
         {
           "type": "category",
           "label": "Backup and restore",

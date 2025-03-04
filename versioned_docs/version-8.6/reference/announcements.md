@@ -10,6 +10,10 @@ Release date: 8th of Oct 2024
 
 End of maintenance: 14th of April 2026
 
+## Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
+
+From version `8.6.0` forward, the core components Zeebe, Operate, and Tasklist must run the exact same `minor` and `patch` level to ensure compatibility. See the [component version matrix](./supported-environments.md#component-version-matrix) for an overview of components.
+
 ### License key changes
 
 With the 8.6 release, Camunda 8 Self-Managed requires a license key for production usage. For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
@@ -93,7 +97,7 @@ Camunda 8 Self-Managed clusters are not affected by this.
 
 ### Support for Amazon OpenSearch for Optimize
 
-This release extends the OpenSearch features supported by Optimize. Full support is committed for the next release in January 2025.
+This release extends the OpenSearch features supported by Optimize. Full support is committed for the 8.8 release.
 
 ### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
 
@@ -138,11 +142,11 @@ For more information on how to configure flow control for a Self-Managed cluster
 
 #### Helm chart - Separated Ingress deprecation
 
-The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 #### Helm chart - `global.multiregion.installationType` deprecation
 
-The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
+The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
 
 #### Helm chart - Elasticsearch nodes number
 
