@@ -327,7 +327,7 @@ module.exports = {
     },
 
     prism: {
-      additionalLanguages: ["java", "protobuf", "csharp"],
+      additionalLanguages: ["java", "protobuf", "csharp", "bash"],
       theme: themes.palenight,
       darkTheme: themes.dracula,
     },
