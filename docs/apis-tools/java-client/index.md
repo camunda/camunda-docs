@@ -96,50 +96,6 @@ CamundaClient client =
 Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
 :::
 
-### X.509 authorizers
-
-Several identity providers, such as Keycloak, support client X.509 authorizers as an alternative to client credentials flow.
-
-As a prerequisite, ensure you have proper KeyStore and TrustStore configured, so that:
-
-- Both the Spring Camunda application and identity provider share the same CA trust certificates.
-- Both the Spring Camunda and identity provider own certificates signed by trusted CA.
-- Your Spring Camunda application own certificate has proper `Distinguished Name` (DN), e.g.
-  `CN=My Camunda Client, OU=Camunda Users, O=Best Company, C=DE`.
-- Your application DN registered in the identity provider client authorization details.
-
-In that case, configuring `OAuthCredentialsProvider` might look like this
-
-```java
-final OAuthCredentialsProvider provider =
-        new OAuthCredentialsProviderBuilder()
-            .clientId("myClient")
-            .clientSecret("")
-            .audience("myClient-aud")
-            .authorizationServerUrl(System.getenv("CAMUNDA_AUTHORIZATION_SERVER_URL"))
-            .keystorePath(Paths.get("/path/to/keystore.p12"))
-            .keystorePassword("password")
-            .keystoreKeyPassword("password")
-            .truststorePath(Paths.get("/path/to/truststore.jks"))
-            .truststorePassword("password")
-            .build();
-```
-
-Or via environment variables:
-
-```bash
-export CAMUNDA_CLIENT_ID='[Client ID]'
-export CAMUNDA_CLIENT_SECRET=''
-export CAMUNDA_AUTHORIZATION_SERVER_URL='[OAuth API]'
-export CAMUNDA_SSL_CLIENT_KEYSTORE_PATH='[Keystore path]'
-export CAMUNDA_SSL_CLIENT_KEYSTORE_SECRET='[Keystore password]'
-export CAMUNDA_SSL_CLIENT_KEYSTORE_KEY_SECRET='[Keystore material password]'
-export CAMUNDA_SSL_CLIENT_TRUSTSTORE_PATH='[Truststore path]'
-export CAMUNDA_SSL_CLIENT_TRUSTSTORE_SECRET='[Truststore password]'
-```
-
-Refer to your identity provider documentation on how to configure X.509 authentication. For example, [Keycloak](https://www.keycloak.org/server/mutual-tls).
-
 ## Javadoc
 
 The official Java client library API documentation can be found [here](https://javadoc.io/doc/io.camunda/camunda-client-java). These are standard Javadocs, so your favorite JVM IDE will be able to install them locally as well.
