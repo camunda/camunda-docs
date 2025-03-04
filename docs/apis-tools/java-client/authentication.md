@@ -20,7 +20,6 @@ In Java code, create a `BasicAuthCredentialsProvider` and provide it with your u
 ```java
 final var credentialsProvider =
   new BasicAuthCredentialsProviderBuilder()
-    .applyEnvironmentOverrides(false)
     .username(username)
     .password(password)
     .build();
@@ -47,9 +46,9 @@ export CAMUNDA_BASIC_AUTH_USERNAME='username'
 export CAMUNDA_BASIC_AUTH_PASSWORD='password'
 ```
 
-When using environment variables you don't have to provide the username and password to the `CredentialsProvider`. You have
-to make sure that environment overrides are applied. You can do this by explicitly setting the flag to `true`, or by omitting
-it from the builder. By default, environment overrides are applied.
+When using environment variables you don't have to provide the username and password to the `CredentialsProvider`.
+
+Environment variables will by default override any values provided in Java code. You can enforce that Java code values have precedence via the `.applyEnvironmentOverrides(false)` API on the `BasicAuthCredentialsProviderBuilder`.
 
 </TabItem>
 
@@ -65,7 +64,6 @@ private static final String authorizationServer = "[OAuth API, e.g., https://log
 
 final var credentialsProvider =
   new OAuthCredentialsProviderBuilder()
-    .applyEnvironmentOverrides(false)
     .authorizationServerUrl(authorizationServer)
     .audience(audience)
     .clientId(clientId)
@@ -96,9 +94,9 @@ export CAMUNDA_CLIENT_ID='[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]'
 export CAMUNDA_CLIENT_SECRET='[Client Secret]'
 ```
 
-When using environment variables you don't have to provide the properties to the `CredentialsProvider`. You have
-to make sure that environment overrides are applied. You can do this by explicitly setting the flag to `true`, or by omitting
-it from the builder. By default, environment overrides are applied.
+When using environment variables you don't have to provide the username and password to the `CredentialsProvider`.
+
+Environment variables will by default override any values provided in Java code. You can enforce that Java code values have precedence via the `.applyEnvironmentOverrides(false)` API on the `OAuthCredentialsProviderBuilder`.
 
 </TabItem>
 
