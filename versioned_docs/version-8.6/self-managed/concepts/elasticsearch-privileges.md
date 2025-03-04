@@ -7,6 +7,10 @@ If you implement Camunda 8 with Elasticsearch as a service provider, you must co
 
 ## Cluster privileges
 
+:::note Running Elasticsearch with limited cluster privileges
+If an application cannot be granted cluster privileges, the schema manager can be run as a standalone application separate from the main application. In this setup, the single application does not need cluster privileges. To learn more, see [Elasticsearch without cluster privileges](./elasticsearch-without-cluster-privileges.md).
+:::
+
 - `monitor` - necessary for health check
 - `manage_index_templates` to create and manage index schema on start up, if they don't already exist in Elasticsearch.
 - _Optional_ `manage_ilm` - required only when ILM is enabled

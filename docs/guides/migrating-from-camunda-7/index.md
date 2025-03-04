@@ -30,7 +30,7 @@ This guide covers the following main aspects involved in migrating from Camunda 
 
 <MigrationsGrid migrations={gettingStartedCards} />
 
-<!-- TODO: However, the [migration tooling roadmap](http://x) can inform your time planning. -->
+<!-- TODO: However, the [migration tooling roadmap](https://roadmap.camunda.com/) can inform your time planning. -->
 
 ## Help and further resources
 
