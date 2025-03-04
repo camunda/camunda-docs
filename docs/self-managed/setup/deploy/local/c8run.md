@@ -116,56 +116,30 @@ Once configured correctly, your Connectors are available for use in Modeler.
 
 ### Use Camunda APIs
 
-Camunda 8 Run authenticates with the [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate](/apis-tools/operate-api/overview.md), and [Zeebe](/apis-tools/zeebe-api/grpc.md) APIs, as well as the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), by including cookie headers in each request. This cookie can be obtained by using the API endpoint `/api/login`.
+All served Camunda APIs are by default **unprotected** in Camunda 8 Run and can be accessed without any authentication credentials or token provided.
 
-To authenticate and begin making requests, take the following steps:
+The available APIs are [Tasklist V1](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate V1](/apis-tools/operate-api/overview.md), [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)
 
-<Tabs groupId="api" defaultValue="v1" queryString values={
-[
-{label: 'Tasklist, Operate, and Zeebe', value: 'v1' },
-{label: 'Camunda 8 REST API', value: 'v2' },
-]}>
+### Enable Authentication and Authorization
 
-<TabItem value='v1'>
+In case you want to work with authorizations, you can enable authentication on the APIs and enforcement of authorizations by making use of the optional `--config` flag pointing to e.g. this minimal `application.yaml`.
 
-1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
-
-```shell
-curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
-  --cookie-jar cookie.txt
+```yaml
+camunda.security:
+  authentication.unprotected-api: false
+  authorizations.enabled: true
 ```
 
-2. Send the cookie (as a header) in each API request. In this case, request all process definitions:
+Assuming you put the file into root of the c8run filter `application.yaml`, you can then run Camunda 8 Run with authorizations enabled by using the following command `./start.sh --config application.yaml`.
+
+You are then required to provide Basic Authentication credentials on API requests, e.g.
 
 ```shell
 curl --request POST 'http://localhost:8080/v1/process-definitions/search'  \
-  --cookie cookie.txt \
+  -u demo:demo \
   --header 'Content-Type: application/json' \
   --data-raw '{}'
 ```
-
-</TabItem>
-<TabItem value='v2'>
-
-:::note
-Some endpoints in the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) are considered [alpha features](/components/early-access/alpha/alpha-features.md), and are still in development.
-:::
-
-1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
-
-```shell
-curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
-  --cookie-jar cookie.txt
-```
-
-2. Send the cookie (as a header) in each API request. In this case, the topology of your Zeebe cluster:
-
-```shell
-curl --cookie  cookie.txt  localhost:8080/v2/topology
-```
-
-</TabItem>
-</Tabs>
 
 ## Shut down Camunda 8 Run
 
