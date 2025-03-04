@@ -1,7 +1,7 @@
 ---
 id: cluster-load
 title: Cluster capacity
-description: "Cluster cpacity gives you an approximate, high level overview of how well your cluster handles its current workload."
+description: "Cluster capacity gives you an approximate, high level overview of how well your cluster handles its current workload."
 ---
 
 View and manage the cluster capacity of your clusters in Console.
@@ -42,10 +42,6 @@ As such, the capacity will fluctuate throughout the day - for example, it may be
 users are around. On the other, certain processes may cause a fan out effect: creating a process instance is only a single user request, but could do some
 computation on a very large multi-instance collection, resulting in a spike of high load while this is happening. Or you could have thousands of timers all
 triggering at the same time, etc.
-
-### [//] To better understand why the capacity is high, spiking, etc., you should first look at your client traffic, and see if they experience errors. If not, then
-### [//] you can use [our monitoring endpoints](self-managed/console-deployment/configuration/#monitoring), specifically ingesting our metrics in order to better
-### [//] understand where the time is being spent.
 
 A high capacity does not necessarily mean that something is wrong, though it can indicate that your cluster is overloaded. If the capacity is high, but
 your operations are finishing within an acceptable frame, requests are successful, etc., then there is no action needed.
