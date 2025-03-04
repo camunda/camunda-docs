@@ -53,6 +53,10 @@ RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 
 # 2. Broad version (or unversioned) redirects
 ##################################################################################
 
+# Numbered aliases for vNext. These are temporary, until this version becomes current.
+RewriteRule ^docs/8.8/(.*)$ /docs/next/$1 [R=302,L]
+RewriteRule ^optimize/3.16.0/(.*)$ /optimize/next/$1 [R=302,L]
+
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.6/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
@@ -90,6 +94,12 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
+
+# Remove meta page
+RewriteRule ^meta/ / [R=301,L]
+
+# Remove Tasklist GraphQL API in 8.8
+RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
@@ -510,4 +520,3 @@ RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-source-code/(.*)$ /d
 RewriteRule ^docs/next/guides/migrating-from-camunda-7/adjusting-bpmn-models/(.*)$ /docs/next/guides/migrating-from-camunda-7/index/ [R=301,L]
 RewriteRule ^docs/8.7/guides/migrating-from-camunda-7/adjusting-bpmn-models/(.*)$ /docs/8.7/guides/migrating-from-camunda-7/index/ [R=301,L]
 RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-bpmn-models/(.*)$ /docs/guides/migrating-from-camunda-7/index/ [R=301,L]
-
