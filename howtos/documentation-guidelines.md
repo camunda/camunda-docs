@@ -2,7 +2,7 @@
 
 ## PRs for every change
 
-All changes must be done in a separate branch. As soon as the changes are done please open a PR. A Github Action runs with every commit to a branch and checks if the documentation can be build (including a broken links check).
+All changes must be done in a separate branch. As soon as the changes are done please open a PR. A Github Action runs with every commit to a branch and checks if the documentation can be built (including a broken links check).
 
 PRs should be in draft status while being actively worked or have a clear written status in the description or comment. Removing a PR from draft status indicates that it is ready for review (by a technical writer).
 
