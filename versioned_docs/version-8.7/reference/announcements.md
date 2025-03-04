@@ -29,6 +29,7 @@ Camunda 8.7 is scheduled for release on 8 April 2025.
 - [Southeast Asia region for SaaS customers](/reference/announcements/870.md#southeast-asia-region-for-saas-customers-saas)
 - [Breaking changes in Camunda Process Test](/reference/announcements/870.md#breaking-changes-in-camunda-process-test)
 - [API updates](/reference/announcements/870.md#api-updates-saasself-managed)
+- [Identity Keycloak now requires v25 or v26](/reference/announcements/870.md#identity-keycloak-now-requires-v25-or-v26-self-managed)
 
 </div>
 </div>
