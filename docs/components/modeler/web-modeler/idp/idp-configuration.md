@@ -21,7 +21,7 @@ The following prerequisites are required for IDP:
 | Connectors                | <ul><li><p>The following connectors are required for IDP:<ul><li><p>[Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md): Used for document storage during analysis and extraction.</p></li><li><p>[Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md): Used to extract text from documents.</p></li><li><p>[Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md): Used to extract data from documents.</p></li></ul></p></li><li><p>**Camunda 8 Self-Managed**: Check you have [installed and deployed](/self-managed/connectors-deployment/install-and-start.md) these connectors.</p></li></ul>                                                     |
 
 :::note
-As Web Modeler is required to use IDP, Camunda 8 Run is not currently recommended for use with IDP. Install Camunda 8 Self-Managed if you would like to use IDP in a non-SaaS Camunda setup.
+As Web Modeler is required by IDP, Camunda 8 Run is not currently supported for use with IDP. To use IDP in a non-SaaS Camunda setup, you can [install](/self-managed/modeler/web-modeler/installation.md) and [configure](/self-managed/modeler/web-modeler/configuration/configuration.md) Web Modeler with Camunda 8 Self-Managed instead.
 :::
 
 ## Configure IDP
