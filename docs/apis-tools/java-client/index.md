@@ -44,7 +44,7 @@ In Java code, instantiate the client as follows:
     try (CamundaClient client = CamundaClient.newClientBuilder()
             .grpcAddress(URI.create(zeebeGrpc))
             .restAddress(URI.create(zeebeRest))
-            .credentialsProvider(new NoopCredentialsProvider())
+            .credentialsProvider(credentialsProvider)
             .build()) {
       client.newTopologyRequest().send().join();
     }
