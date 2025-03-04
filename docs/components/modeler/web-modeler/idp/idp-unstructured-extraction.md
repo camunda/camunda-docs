@@ -17,7 +17,7 @@ import IdpVersionsImg from './img/idp-versions.png';
 
 Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
 
-## Data extraction steps
+## Data extraction steps {#date-extraction}
 
 Complete the following steps to configure and publish an unstructured data document extraction template:
 

@@ -27,7 +27,7 @@ The document extraction template integrates with Camunda document handling conne
 
 1. **Amazon Textract**: Uploaded documents are analyzed by Amazon Textract, which extracts text data and returns the results. The template configuration includes specifying the document, the S3 bucket name for temporary storage during Amazon Textract analysis, and other required parameters such as extraction fields and Amazon Bedrock Converse parameters.
 
-1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock Converse to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable.
+1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable.
 
 :::note
 
@@ -36,13 +36,21 @@ The document extraction template integrates with Camunda document handling conne
 
 :::
 
+### Document storage {#storage}
+
+IDP stores documents as follows during the different extraction stages:
+
+- Web Modeler: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Web Modeler itself (SaaS) or the database (Self-Managed).
+- Cluster: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is briefly stored in the cluster.
+- Extraction: Finally, when you extract content using a document extraction template, it is stored in an [Amazon AWS S3 bucket](idp-configuration.md#prerequisites), where it can be accessed by AWS Textract.
+
 ## Document file formats {#file-formats}
 
 IDP currently only supports data extraction from the following document file formats.
 
-| File format | Description                                                                                                                                                                                                                                                                                       |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <p>PDF</p>  | <p><ul><li>PDF documents must not be password protected.</li><li><p>Maximum document file size is 4MB.</p></li><li><p>Both text and image content can be extracted from a PDF document. For example, data can be extracted from a scanned image that has been converted to PDF.</p></li></ul></p> |
+| File format | Description                                                                                                                                                                                                                                                                                                           |
+| :---------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <p>PDF</p>  | <p><ul><li>PDF documents must not be password protected.</li><li><p>Maximum document file size is 4MB for test extraction.</p></li><li><p>Both text and image content can be extracted from a PDF document. For example, data can be extracted from a scanned image that has been converted to PDF.</p></li></ul></p> |
 
 ## Document language support {#languages}
 
@@ -53,10 +61,6 @@ IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-conn
 :::info
 For example, as of February 2025, Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for currently supported languages.
 :::
-
-## Document storage {#storage}
-
-In SaaS, during test extraction your uploaded sample documents are stored in an Amazon AWS S3 bucket named `idp-extraction-connector`.
 
 ## Extraction field data types {#data-types}
 

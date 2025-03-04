@@ -31,7 +31,7 @@ Once configured, you can start using IDP in your processes:
 
 1. Create and publish a [document extraction](idp/idp-document-extraction.md) template for each type of document you want to extract data from.
 
-1. [Integrate your published document extraction template](idp/idp-integrate.md) into your processes in Modeler.
+1. [Integrate your published document extraction template](idp/idp-integrate.md) into your processes in Web Modeler.
 
 <!-- 1. Create and publish your IDP projects in your IDP application folder:
 
