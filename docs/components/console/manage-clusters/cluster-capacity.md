@@ -1,5 +1,5 @@
 ---
-id: cluster-load
+id: cluster-capacity
 title: Cluster capacity
 description: "Cluster capacity provides you with a high-level overview of how well a cluster is coping with and handling its current workload."
 ---
