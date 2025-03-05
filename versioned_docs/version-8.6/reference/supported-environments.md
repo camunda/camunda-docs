@@ -140,7 +140,3 @@ From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the ex
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
-
-## Camunda 7 & Optimize version matrix
-
-See https://docs.camunda.org/enterprise/download/#camunda-optimize.
