@@ -46,7 +46,7 @@ IDP stores documents as follows during the different extraction stages:
 
 ## Document file formats {#file-formats}
 
-IDP currently only supports data extraction from the following document file formats.
+IDP currently only supports data extraction from the following uploaded document file formats.
 
 | File format | Description                                                                                                                                                                                                                                                                                                           |
 | :---------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -77,6 +77,19 @@ You can specify the following extraction field data types.
 | Boolean   | The LLM should expect a true or false value, such as "yes" or "no". |
 | Number    | The LLM should expect to extract a numeric value.                   |
 | String    | The LLM should expect to extract a sequence of characters.          |
+
+## Extraction models {#extraction-models}
+
+You can choose from the following supported LLM extraction models during [data extraction](idp-unstructured-extraction.md#extract-fields).
+
+| Extraction model     | Model provider                             | Documentation                                                                                           |
+| :------------------- | :----------------------------------------- | :------------------------------------------------------------------------------------------------------ |
+| Claude 3.5 Sonnet    | [Anthropic](https://www.anthropic.com/)    | [Anthropic's Claude in Amazon Bedrock](https://aws.amazon.com/bedrock/claude/)                          |
+| Claude 3 Sonnet      | [Anthropic](https://www.anthropic.com/)    | [Anthropic's Claude in Amazon Bedrock](https://aws.amazon.com/bedrock/claude/)                          |
+| Claude 3 Haiku       | [Anthropic](https://www.anthropic.com/)    | [Anthropic's Claude in Amazon Bedrock](https://aws.amazon.com/bedrock/claude/)                          |
+| Llama 3 70B Instruct | [Meta](https://www.meta.com/gb/)           | [Meta's Llama in Amazon Bedrock](https://aws.amazon.com/bedrock/llama/)                                 |
+| Llama 3 8B Instruct  | [Meta](https://www.meta.com/gb/)           | [Meta's Llama in Amazon Bedrock](https://aws.amazon.com/bedrock/llama/)                                 |
+| Titan Text Premier   | [Amazon AWS](https://docs.aws.amazon.com/) | [Amazon Titan Text models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-text-models.html) |
 
 ## Validation status {#status}
 

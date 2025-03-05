@@ -100,7 +100,7 @@ Once you have added your extraction fields, select an LLM model and test the dat
 
 :::tip
 
-- You will achieve different results with different LLM models. Test different models until you find the one that best suits your budget and accuracy requirements.
+- You will achieve different results using different [extraction models](idp-reference.md#extraction-models). Test different models until you find the one that best suits your budget and accuracy requirements.
 - You can save and overwrite a test case at any time with your latest results.
 
 :::

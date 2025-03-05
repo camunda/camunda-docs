@@ -73,6 +73,7 @@ Document classification is performed as part of document automation.
 <!-- Document classification is performed as part of [document automation](idp-document-automation.md). -->
 
 - Documents are analyzed, classified, and assigned to the relevant [document extraction](idp-document-extraction.md) template, based on the document content.
+
 - Classification ensures that documents processed through IDP are organized into the correct type, so that extracted data is assigned/mapped to the correct property.
 - Classification accuracy is improved with a well-defined taxonomy (set of extraction fields) and a set of example documents that accurately represents each type of document you want to process.
 
@@ -81,13 +82,17 @@ Document classification is performed as part of document automation.
 LLM Foundation models are large-scale, pre-trained AI models that can be adapted for various document processing tasks without extensive retraining.
 
 - For IDP, these models serve as a powerful base for extracting, understanding, and processing data from diverse document types. Algorithms are used to learn document patterns and to improve data extraction accuracy over time.
+
 - IDP allows you to work with and test different extraction models until you find the model that best suits your budget and accuracy requirements.
+
+- See [extraction models](idp-reference.md#extraction-models) for a list of currently supported LLM extraction models.
 
 ## Extraction fields {#fields}
 
 Extraction fields are the data fields you want to extract from a document, such as an invoice ID, date, customer name, and so on.
 
-Add a separate field for each piece of information you want to extract from a document. For example, for an invoice, add a separate field for the invoice ID, date, customer name, invoice amount, and so on.
+- You must add a separate field for each piece of information you want to extract from a document.
+- For example, for an invoice, add a separate field for the invoice ID, date, customer name, invoice amount, and so on.
 
 <img src={IdpExtractionFieldImg} alt="Example structured document" width="800px"/>
 
