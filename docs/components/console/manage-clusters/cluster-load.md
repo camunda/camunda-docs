@@ -13,8 +13,8 @@ View and manage your cluster capacity and health.
 
 Cluster capacity provides a high-level overview of how well a cluster is coping with its current workload.
 
-- This information primarily allows you to check and monitor if a cluster is appropriately sized for its workload.
-- It can also be used as an additional cluster health indicator. For example, a cluster running at maximum capacity can be an indicator of poor cluster responsiveness.
+- Use this information to check and monitor if a cluster is appropriately sized for its workload.
+- Cluster capacity can also be used as an indicator of cluster health. For example, a cluster running at maximum capacity can be an indicator of poor cluster responsiveness.
 
 A general guideline to follow when using cluster capacity as a metric is:
 
@@ -27,19 +27,19 @@ To understand how cluster capacity is calculated, see [how cluster capacity is c
 
 ## View cluster capacity
 
-The cluster capacity percentage summary is shown in the **Capacity** column on the Console **Clusters** tab.
+The cluster capacity percentage is shown in the **Capacity** column on the Console **Clusters** tab.
 
 <img src={CapacityPercentImg} alt="Example cluster capacity percentage" />
 
 Select a cluster to view detailed cluster capacity information on the cluster **Overview** tab.
 
-<img src={CapacityImg} alt="Example cluster capacity" style={{width: '500px'}}/>
+<img src={CapacityImg} alt="Example cluster capacity" style={{width: '550px'}}/>
 
 - The current cluster capacity is shown as a percentage bar at the top of the section.
 - The chart shows detailed capacity data for the last 24 hours, 7 days, or 30 days.
   - Select the time period you want to view data for.
   - Hover over individual nodes in the chart to view data for a specific time or day.
-- Click the **Refresh** icon to refresh and update the cluster capacity data shown.
+- Click the **Refresh** icon to refresh and update the cluster capacity data.
 
 ## Manage cluster capacity
 
@@ -75,8 +75,8 @@ In this scenario, you should look at reducing the overall load on the cluster to
 
 If your cluster capacity is too high, you can help reduce cluster capacity by:
 
-- Scaling down the load. This can mean stopping certain clients; start with your least critical load, and move on from there.
-- Look at your running process instances for known issues that cause high processing, such as:
+- Scaling down the load. For example, by stopping certain clients. Start with your least critical load, and continue from there.
+- Check your running process instances for known issues that cause high processing, such as:
   - Straight-through processing loops, where there are no wait states. For example, a sub process with an error boundary event which loops back to an activity leading into the sub-process. If you have an activity which consistently throws an error, this will result in a subtle infinite loop where the engine is stuck and cannot process anything else. You would have to cancel this instance, or contact support to force cancel it for you.
 
 :::important
