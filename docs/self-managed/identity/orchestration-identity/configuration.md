@@ -7,8 +7,12 @@ description: "Learn about the Identity configuration options available in your O
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+:::note
 As a Spring Boot application, Identity supports any standard
 [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
+:::
+
+The following variables apply globally to all components within the Camunda Orchestration core: Zeebe, Operate, and Tasklist.
 
 <!-- updates must be made to BOTH tables -->
 <Tabs>

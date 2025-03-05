@@ -1369,7 +1369,7 @@ module.exports = {
           Identity: [
             "self-managed/identity/what-is-identity",
             {
-              "Orchestration cluster Identity": [
+              "Orchestration Cluster Identity": [
                 "self-managed/identity/orchestration-identity/installation",
                 "self-managed/identity/orchestration-identity/configuration",
               ],
