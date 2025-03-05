@@ -4,20 +4,23 @@ title: Cluster capacity
 description: "Cluster capacity gives you an approximate, high level overview of how well your cluster handles its current workload."
 ---
 
-View and manage the cluster capacity of your clusters in Console.
+View and manage your cluster capacity and health in Console.
 
-## Overview
+## About cluster capacity
 
-The cluster capacity metric lets you visualize, at a very high level, how well your cluster is coping with its current workload. While it can be used
-as an additional indicator of your cluster's health (e.g. a maxed out capacity likely indicates poor responsiveness), its primary usage
-is to help you understand if the cluster is appropriately sized for your workload.
+Cluster capacity provides a high-level overview of how well a cluster is coping with its current workload.
+
+- This information primarily allows you to check and monitor if a cluster is appropriately sized for its workload.
+- It can also be used as an additional cluster health indicator. For example, a cluster running at maximum capacity can be an indicator of poor cluster responsiveness.
+
+A general guideline when using cluster capacity as a metric is:
+
+- **High capacity**: The higher the capacity, the more likely it is that things will slow down, time out, requests will fail, and so on.
+- **Low capacity**: The lower the capacity, the more you could increase the cluster workload, as it is likely your cluster is underused.
 
 :::info
-To understand how cluster capacity is calculated, see [How cluster capacity is calculated](#how-cluster-capacity-is-calculated).
+To understand how cluster capacity is calculated, see [how cluster capacity is calculated](#capacity-calculation).
 :::
-
-You can think of it this way: the higher the capacity, the more likely things will start slowing down, timing out, requests will fail, etc.
-The lower the capacity, the more you could increase the workload on this cluster, indicating your cluster is likely underused.
 
 ## View cluster capacity
 
@@ -51,6 +54,7 @@ A high capacity will be relative, but generall anything above the 60% mark would
 :::
 
 However, if you find yourself experiencing any of the following, then you may need to take action:
+
 - REST clients are receiving a high number of `429` errors
 - gRPC clients are receiving a high number of `RESOURCE_EXHAUSTED` errors
 - More and more commands or queries are timing out in your clients
@@ -73,7 +77,7 @@ If your cluster capacity is too high, you can help reduce cluster capacity by:
 If your cluster capacity continues to remain high even after attempts to reduce it, you might need to increase your cluster size and scale. See [cluster size](/components/concepts/clusters.md#cluster-size) and [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
 :::
 
-## How cluster capacity is calculated
+## How cluster capacity is calculated {#capacity-calculation}
 
 Cluster capacity is based on the cluster's [flow control configuration](self-managed/operational-guides/configure-flow-control/).
 
