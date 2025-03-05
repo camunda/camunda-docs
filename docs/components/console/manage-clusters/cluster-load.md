@@ -4,6 +4,9 @@ title: Cluster capacity
 description: "Cluster capacity gives you an approximate, high level overview of how well your cluster handles its current workload."
 ---
 
+import CapacityImg from './img/cluster-capacity.png';
+import CapacityPercentImg from './img/cluster-capacity-percent.png';
+
 View and manage your cluster capacity and health in Console.
 
 ## About cluster capacity
@@ -24,25 +27,28 @@ To understand how cluster capacity is calculated, see [how cluster capacity is c
 
 ## View cluster capacity
 
-You can view a percentage summary of cluster capacity on the Console **Dashboard** tab and **Clusters** tab.
+The percentage summary for cluster capacity is shown in the **Capacity** column on the Console **Clusters** tab.
 
-[screenshot]
+<img src={CapacityPercentImg} alt="Example cluster capacity percentage" />
 
-You can view more detailed information for an individual cluster on the Console **Overview** tab.
+Select a cluster to view detailed cluster capacity information on the cluster **Overview** tab.
 
-[screenshot]
+<img src={CapacityImg} alt="Example cluster capacity" style={{width: '500px'}}/>
+
+- The current cluster capacity is shown as a percentage bar at the top of the section.
+- The chart shows detailed capacity data for the last 24 hours, 7 days, or 30 days.
+  - Select the time period you want to view data for.
+  - Hover over individual nodes in the chart to view data for that specific time or day.
+- Click the **Refresh** icon to refresh and update the cluster capacity data shown.
 
 ## Manage cluster capacity
 
 Cluster capacity will fluctuate based on incoming user requests, and internal processing load.
 
-:::note
-User requests are those sent directly by an external client, whereas internal load refers to all other processing that is **not** directly triggered
-by a client. This can be timer events, a job being made available after back off, etc.
-:::
+- User requests are those sent directly by an external client.
+- Internal load refers to all other processing that is **not** directly triggered by a client. For example, timer events, a job being made available after back off, and so on.
 
-As such, the capacity will fluctuate throughout the day - for example, it may be higher during business hours, but drop off over night when none of your
-users are around. On the other, certain processes may cause a fan out effect: creating a process instance is only a single user request, but could do some
+This means that cluster capacity will fluctuate throughout the day. For example, it may be higher during business hours, but lower overnight when the cluster is not being used. On the other, certain processes may cause a fan out effect: creating a process instance is only a single user request, but could do some
 computation on a very large multi-instance collection, resulting in a spike of high load while this is happening. Or you could have thousands of timers all
 triggering at the same time, etc.
 
