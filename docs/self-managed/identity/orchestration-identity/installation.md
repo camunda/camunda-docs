@@ -27,10 +27,10 @@ For example, to enable basic authentication and create an initial user, the foll
 ```yaml
 camunda.security:
   authentication.unprotected-api: false
-  initialization.users[0].username: <<username>>
-  initialization.users[0].password: <<password>
-  initialization.users[0].name: <<name>
-  initialization.users[0].email: <<email>>
+  initialization.users[0].username: <Your chosen username>
+  initialization.users[0].password: <Your chosen password>
+  initialization.users[0].name: <The name of the first user>
+  initialization.users[0].email: <The email address of the first user>
 ```
 
 ### Enable authorizations
