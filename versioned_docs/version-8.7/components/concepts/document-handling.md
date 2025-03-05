@@ -97,7 +97,7 @@ Be sure to remove the hyphen and set `DOCUMENT_DEFAULT_STORE_ID` to `=inmemory`.
 
 - One bucket per cluster is permitted with SaaS.
 - This storage integration is handled and configured by Camunda. While this is not dynamically configurable by the cluster, it is provided as environment configuration.
-- **Maximum batch payload size**: 10 MB
+- **Maximum upload size for one or multiple files**: 10 MB
 - **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.
 
 ## Use cases and capabilities
