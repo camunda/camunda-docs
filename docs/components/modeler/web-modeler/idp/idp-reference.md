@@ -105,7 +105,7 @@ During validation, a validation status is shown for extraction fields to indicat
 
 The following example shows the results of a partially successful extraction against three documents.
 
-<img src={IdpValidationExampleImg} alt="Example validation results table" />
+<img src={IdpValidationExampleImg} alt="Example validation results table" style={{marginTop: '0'}} />
 
 The expanded `contract_start_date` field shows that each document returned different validation results.
 

@@ -14,6 +14,7 @@ import IdpExtractionFieldsDetailsImg from './img/idp-extraction-fields.png';
 import IdpValidationResultsDetailImg from './img/idp-validation-results-detail.png';
 import IdpValidationResultsSummaryImg from './img/idp-summary.png';
 import IdpVersionsImg from './img/idp-versions.png';
+import IdpExtractionModelImg from './img/idp-extraction-model.png';
 
 Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
 
@@ -29,7 +30,7 @@ Complete the following steps to configure and publish an unstructured data docum
 
 Start by uploading a set of sample PDF documents that represent the specific document type you want to extract data from. You will use these documents throughout the data extraction process.
 
-<img src={IdpUploadDocumentsUnstructuredImg} alt="Unstructured data extraction screen" />
+<img src={IdpUploadDocumentsUnstructuredImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
 
 To upload your sample document(s):
 
@@ -52,16 +53,16 @@ Start by uploading a sample document that contains all the data fields you want 
 
 On the **Extract fields** tab, add the data [extraction fields](idp-key-concepts.md#fields) you want to populate with data from your document(s).
 
-<img src={IdpExtractionFieldsImg} alt="Unstructured data extraction screen" />
+<img src={IdpExtractionFieldsImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
 
-- Add a separate field for each piece of information you want to extract. For example, for an invoice, add a field for the invoice ID, date, customer name, amount, and so on.
-- You can then extract data from your sample document(s) using your chosen LLM foundation model, edit and refine your fields, and save the extracted data as a test case to compare outcomes across different LLM models.
+- Add a separate extraction field for each piece of information you want to extract. For example, for an invoice, you might add a field for the invoice ID, date, customer name, amount, and so on.
+- You can then extract data from your sample document(s) using your chosen LLM extraction model, edit and refine your fields, and save the extracted data as a test case to compare outcomes across different extraction models.
 
 ### Add extraction fields {#add-fields}
 
 Add an extraction field for each piece of data you want to extract from your document(s).
 
-<img src={IdpExtractionFieldsDetailsImg} alt="Data extraction fields" width="650px"/>
+<img src={IdpExtractionFieldsDetailsImg} alt="Data extraction fields" width="700px" style={{marginTop: '0'}} />
 
 1. **Field name**: Enter a descriptive name for the field.
    - Example: "invoice_id” or "invoiceId".
@@ -72,7 +73,7 @@ Add an extraction field for each piece of data you want to extract from your doc
    - See [extraction field data types](idp-reference.md#data-types).
 1. **Prompt**: Enter a clear and specific prompt to guide the LLM in accurately extracting data.
    - Example: For an "invoice_date" field, you might use "The date when the invoice was issued".
-   - Try and describe the expected outcome in the prompt in clear and concise terms. For guidance and best practice when writing prompts, refer to the official documentation for your chosen LLM.
+   - Try and describe the expected outcome in the prompt in clear and concise terms. For guidance and best practice when writing prompts, refer to the [documentation for your chosen LLM extraction model](idp-reference.md#extraction-models).
 1. Click **Add** to add the field.
 1. Repeat the process until you have added all required extraction fields.
 
@@ -83,6 +84,8 @@ You can edit and delete extraction fields at any time. Click the three vertical 
 ### Extract data and save as test case {#extract-data}
 
 Once you have added your extraction fields, select an LLM model and test the data extraction.
+
+<img src={IdpExtractionModelImg} alt="Extraction model" width="700px" style={{marginTop: '0'}} />
 
 1. **Extraction model**: Select the LLM model you want to use.
 1. Select the document you want to test the data extraction against.
@@ -107,9 +110,9 @@ Once you have added your extraction fields, select an LLM model and test the dat
 
 ## Step 3: Validate extraction {#validate-extraction}
 
-On the **Validate extraction** tab, test and validate the configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by the LLM model using your extraction fields and prompts.
+On the **Validate extraction** tab, test and validate the configured data extraction against your uploaded documents. This step evaluates the data extraction results produced by the selected LLM extraction model using your extraction fields and prompts.
 
-<img src={IdpValidationResultsImg} alt="Validate extraction screen" />
+<img src={IdpValidationResultsImg} alt="Validate extraction screen" style={{marginTop: '0'}} />
 
 ### Validate extraction
 
@@ -139,7 +142,7 @@ Publish the document extraction template to make it available for [integration i
    - **Publish to organization**: The document extraction template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
-   <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" />
+   <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" style={{marginTop: '0'}} />
 
    - **Version name**: Enter a version for the published document extraction template.
    - **Version description**: Enter a description for the published document extraction template version.
@@ -155,9 +158,9 @@ Publish the document extraction template to make it available for [integration i
 
 ## Versions {#versions}
 
-Click **Versions** to view, compare, rename, restore, and delete published document extraction template versions.
+Click **Versions** to view and manage your published document extraction template versions.
 
-<img src={IdpVersionsImg} alt="Unstructured data extraction screen" />
+<img src={IdpVersionsImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
 
 ### Compare versions
 
@@ -197,5 +200,5 @@ You can permanently delete a document extraction template version.
    - Select **Cancel** to cancel the deletion and return to the versions list.
 
 :::caution
-Deleting a document extraction template version is permanent. You cannot access a deleted version, and it is removed from the versions list.
+Deleting a document extraction template version is permanent.
 :::

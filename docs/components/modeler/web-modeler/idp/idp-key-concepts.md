@@ -91,11 +91,11 @@ LLM Foundation models are large-scale, pre-trained AI models that can be adapted
 
 Extraction fields are the data fields you want to extract from a document, such as an invoice ID, date, customer name, and so on.
 
+<img src={IdpExtractionFieldImg} alt="Example structured document" width="800px" style={{marginTop: '0'}}/>
+
 - You must add a separate field for each piece of information you want to extract from a document.
 - For example, for an invoice, add a separate field for the invoice ID, date, customer name, invoice amount, and so on.
 
-<img src={IdpExtractionFieldImg} alt="Example structured document" width="800px"/>
-
 :::info
-To learn more about data types, see [extraction field data types](idp-reference.md#data-types).
+To learn more about extraction field data types, see [extraction field data types](idp-reference.md#data-types).
 :::
