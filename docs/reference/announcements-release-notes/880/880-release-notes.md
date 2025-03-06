@@ -30,20 +30,24 @@ The 8.8 release includes API updates to support the move to a [Camunda 8 REST AP
 - All the Camunda 8 REST API endpoints will support resource-based authorizations to enable fine-grained permissions.
 - API terminology is aligned so technical assets have an identical, easily-understood, descriptive property name.
 
-### Cluster-level identity management
+### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+The [Identity service](/self-managed/identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
+
+#### Cluster-level identity management
 
 Identity settings will be configured at the orchestration cluster level, allowing each cluster to have unique OIDC configurations. This cluster-specific setup empowers organizations to assign different identity providers (IdPs) across clusters, offering improved control over permissions and user group mappings, resulting in a more streamlined and efficient configuration experience.
 
 For SaaS customers, identity management in Camunda 8.8 remains consistent with Camunda 8.7, allowing the attachment of a single IdP per organization. However, cluster-level identity capabilities are provided for SaaS as well as Self-Managed. This means that user groups, roles, and access permissions can now be managed at the cluster level, giving SaaS customers the same granular access control as in Self-Managed environments.
 
-### Decoupling from Keycloak <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+#### Decoupling from Keycloak <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 Built-in Keycloak integration in Self-Managed is removed, allowing customers to use any compatible IdP.
 
 - Keycloak remains fully supported as an external option. For cluster-level identity management it must be connected as an external OIDC provider moving forward.
 - OpenID Connect (OIDC) remains the standard for seamless integration with chosen IdPs.
 
-### Resource-based permissions
+#### Resource-based permissions
 
 Resource-level permissions are introduced to control read and write permissions per specific resource.
 
@@ -53,10 +57,6 @@ Resource-level permissions are introduced to control read and write permissions 
 <!-- :::info
 Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.8.
 ::: -->
-
-### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-The [Identity service](/self-managed/identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
 
 ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

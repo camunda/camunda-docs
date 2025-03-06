@@ -6,8 +6,14 @@ toc_max_heading_level: 2
 ---
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
+import AnnouncementsGrid from '../../react-components/\_announcements-card.js';
+import { AnnouncementsCards } from '../../react-components/\_announcements-card-data';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release are summarized below.
+
+[Release notes](/reference/announcements-release-notes/880/880-release-notes.md) now contain all updates for new features and enhancements. Click any of the features below to be re-routed to the release notes.
+
+<AnnouncementsGrid announcements={AnnouncementsCards} />
 
 | Scheduled release date | Scheduled end of maintenance | Release notes | Blog |
 | :--------------------- | :--------------------------- | :------------ | :--- |
