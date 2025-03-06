@@ -548,7 +548,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-tenant",
           label: "Update tenant",
-          className: "api-method patch",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -610,12 +610,6 @@ const sidebar: SidebarsConfig = {
       type: "category",
       label: "User",
       items: [
-        {
-          type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/search-users-for-tenant",
-          label: "Query users for tenant",
-          className: "api-method post",
-        },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-user",
