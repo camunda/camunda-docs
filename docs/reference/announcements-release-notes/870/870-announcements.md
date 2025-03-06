@@ -22,7 +22,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 - [Supported environment changes](#supported-environment-changes)
   - [Identity Keycloak now requires v25 or v26 Self-Managed](#identity-keycloak-now-requires-v25-or-v26-self-managed)
 - [Breaking changes](#breaking-changes)
-  - [Deploy diagram change Self-Managed {#web-modeler-deploy-diagram-change}](#deploy-diagram-change-self-managed-web-modeler-deploy-diagram-change)
+  - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
   - [Breaking changes in Camunda Process Test](#breaking-changes-in-camunda-process-test)
   - [Deprecated: OpenAPI entities with `integer (int64)` key attributes](#deprecated-openapi-entities-with-integer-int64-key-attributes)
 
