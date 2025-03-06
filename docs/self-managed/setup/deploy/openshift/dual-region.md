@@ -110,7 +110,7 @@ Later in this guide, we will refer to it as **first cluster**.
 2. The following manifest will create a namespace for the management cluster, enable the [open-cluster-management operator](https://open-cluster-management.io/) and the [associated subscription](https://docs.openshift.com/container-platform/4.17/operators/admin/olm-adding-operators-to-cluster.html#olm-installing-operator-from-operatorhub-using-cli_olm-adding-operators-to-a-cluster).
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/acm/install-manifest.yml
+   https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/acm/install-manifest.yml
    ```
 
    Apply the manifests to enable ACM:
@@ -133,7 +133,7 @@ Later in this guide, we will refer to it as **first cluster**.
    In this setup, the first cluster will act as the central hub, managing the second cluster. This capability enables the deployment and management of components on the second cluster directly from the first cluster.
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/acm/multi-cluster-hub.yml
+   https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/acm/multi-cluster-hub.yml
    ```
 
    :::caution Known issue: may not work correctly with the manifest
@@ -170,7 +170,7 @@ Later in this guide, we will refer to it as **first cluster**.
 4. With the MultiClusterHub created, the last step is to create a `ManagedClusterSet` which is a group of managed clusters. With a `ManagedClusterSet`, you can manage access to all of the managed clusters in the group together
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/acm/managed-cluster-set.yml
+   https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/acm/managed-cluster-set.yml
    ```
 
    Apply the manifest:
@@ -188,7 +188,7 @@ Later in this guide, we will refer to it as **first cluster**.
      Save the following file as `managed-cluster.yml.tpl`:
 
      ```yaml reference
-     https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/acm/managed-cluster.yml.tpl
+     https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/acm/managed-cluster.yml.tpl
      ```
 
    - The cluster’s associated addon configuration will be managed using the following manifest.
@@ -196,7 +196,7 @@ Later in this guide, we will refer to it as **first cluster**.
      Save it as `klusterlet-config.yml.tpl`:
 
      ```yaml reference
-     https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/acm/klusterlet-config.yml.tpl
+     https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/acm/klusterlet-config.yml.tpl
      ```
 
    - To import a cluster, you must store the associated authentication token.
@@ -204,13 +204,13 @@ Later in this guide, we will refer to it as **first cluster**.
      Save the following file as `auto-import-cluster-secret.yml.tpl`:
 
      ```yaml reference
-     https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/acm/auto-import-cluster-secret.yml.tpl
+     https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/acm/auto-import-cluster-secret.yml.tpl
      ```
 
    - Finally, import each cluster into the Managed Cluster Set and verify that they can be reached and managed successfully:
 
      ```bash reference
-     https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/acm/initiate_cluster_set.sh
+     https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/acm/initiate_cluster_set.sh
      ```
 
 ### Submariner
@@ -258,7 +258,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    Select the first node and apply the required label:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/submariner/label_nodes_brokers.sh
+   https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/submariner/label_nodes_brokers.sh
    ```
 
 3. Deployment of Submariner on the clusters:
@@ -266,7 +266,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    - Save the following file as `submariner.yml.tpl`:
 
      ```yaml reference
-     https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/submariner/submariner.yml.tpl
+     https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/submariner/submariner.yml.tpl
      ```
 
      :::note Cluster naming
@@ -314,7 +314,7 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    <summary>Example Submariner check successfull output</summary>
 
 ```text reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/submariner/output.txt
+https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/submariner/output.txt
 ```
 
 </details>
@@ -323,7 +323,7 @@ For more comprehensive details regarding the verification tests for Submariner u
 
 **Debugging the Submariner setup:**
 
-If you are experiencing connectivity issues, we recommend spawning a pod in the `default` namespace that contains networking debugging tools. You can find an [example here](https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/submariner/debug-utils-submariner.yml).  
+If you are experiencing connectivity issues, we recommend spawning a pod in the `default` namespace that contains networking debugging tools. You can find an [example here](https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/submariner/debug-utils-submariner.yml).  
 With this pod, you will be able to check flow openings, service resolution, and other network-related aspects.  
 Troubleshooting requires examining all the underlying mechanisms of Submariner. Therefore, we also encourage you to read the [Submariner troubleshooting guide](https://submariner.io/operations/troubleshooting/).
 
@@ -337,7 +337,7 @@ Before proceeding with the installation, ensure the required information is avai
 Review and adjust the following environment script to match your specific configuration:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/export_environment_prerequisites.sh
+https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/export_environment_prerequisites.sh
 ```
 
 _If you are unsure about the values of the backup bucket, please refer to the [S3 backup bucket module setup](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md#s3-backup-bucket-module-setup) as a reference for implementation._
@@ -363,7 +363,7 @@ The Elasticsearch backup [bucket is tied to a specific region](https://docs.aws.
 The following script will create the required namespaces and secrets used to reference the bucket access.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/setup_ns_secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/setup_ns_secrets.sh
 ```
 
 Save it as `setup_ns_secrets.sh` and execute it:
@@ -380,7 +380,7 @@ Throughout this guide, you will add and merge values into these files to configu
 
 - Save the following file as both `values-region-1.yml` and `values-region-2.yml` to serve as the base configuration:
   ```yaml reference
-  https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/helm-values/values-base.yml
+  https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/helm-values/values-base.yml
   ```
 
 :::warning Merging YAML files
@@ -396,12 +396,12 @@ Set up the region ID using a unique integer for each region:
 
 - Add the following YAML configuration to your `values-region-1.yml`:
   ```yaml reference
-  https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/helm-values/values-region-1.yml
+  https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/helm-values/values-region-1.yml
   ```
 - Add the following YAML configuration to your `values-region-2.yml`:
 
   ```yaml reference
-  https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/helm-values/values-region-2.yml
+  https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/helm-values/values-region-2.yml
   ```
 
 **Security Context Constraints (SCCs)**
@@ -416,7 +416,7 @@ For custom configurations or specific requirements, please refer to the [install
 Before deploying, some values in the value files need to be updated. To assist with generating these values, save the following Bash script as `generate_zeebe_helm_values.sh`:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/generate_zeebe_helm_values.sh
+https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/generate_zeebe_helm_values.sh
 ```
 
 Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. You will be prompted to specify the number of Zeebe brokers (total number of Zeebe brokers in both Kubernetes clusters), for a dual-region setup we recommend `8`, resulting in four brokers per region:
@@ -438,7 +438,7 @@ Make sure that the variable `CLUSTER_1_NAME` is set to the name of your first cl
 Once you've prepared each region's value file (`values-region-1.yml` and `values-region-2.yml`) file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/generate_helm_values.sh
+https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/generate_helm_values.sh
 ```
 
 ### Install Camunda 8 using Helm
@@ -446,7 +446,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-
 With the value files for each region configured, you can now install Camunda 8 using Helm. Execute the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/install_chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/install_chart.sh
 ```
 
 This command:
@@ -468,7 +468,7 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 Once Camunda is deployed across the two clusters, the next step is to expose each service to Submariner so it can be resolved by the other cluster:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/export_services_submariner.sh
+https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/export_services_submariner.sh
 ```
 
 Alternatively, you can manage each service individually using the `ServiceExport` Custom Resource Definition (CRD).
@@ -489,13 +489,13 @@ metadata:
 For each cluster, verify the status of the exported services with this script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/verify_exported_services.sh
+https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/verify_exported_services.sh
 ```
 
 To monitor the progress of the installation, save and execute the following script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/verify_installation_completed.sh
+https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/verify_installation_completed.sh
 ```
 
 Save it as `verify_installation_completed.sh`, make it executable, and run it:
@@ -525,7 +525,7 @@ oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/
       <summary>Example output</summary>
 
    ```text reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/zeebe-http-output.txt
+   https://github.com/camunda/camunda-deployment-references/blob/tree/stable/8.8/aws/openshift/rosa-hcp-dual-region/procedure/zeebe-http-output.txt
    ```
 
    </details>
