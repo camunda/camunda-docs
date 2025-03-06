@@ -452,17 +452,8 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 
 You can track the progress of the installation using the following command:
 
-```bash
-watch -n 5 '
-  kubectl get pods -n camunda --output=wide;
-  if [ $(kubectl get pods -n camunda --field-selector=status.phase!=Running -o name | wc -l) -eq 0 ] &&
-     [ $(kubectl get pods -n camunda -o json | jq -r ".items[] | select(.status.containerStatuses[]?.ready == false)" | wc -l) -eq 0 ];
-  then
-    echo "All pods are Running and Healthy - Installation completed!";
-  else
-    echo "Some pods are not Running or Healthy";
-  fi
-'
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 <details>
@@ -660,92 +651,14 @@ Generate a temporary token to access the REST API, then capture the value of the
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
-<!-- TODO: also integrate the expected output as part of golden files -->
-
 ...and results in the following output:
 
 <details>
   <summary>Example output</summary>
   <summary>
 
-```shell
-{
-  "brokers": [
-    {
-      "nodeId": 0,
-      "host": "camunda-zeebe-0.camunda-zeebe",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    },
-    {
-      "nodeId": 1,
-      "host": "camunda-zeebe-1.camunda-zeebe",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    },
-    {
-      "nodeId": 2,
-      "host": "camunda-zeebe-2.camunda-zeebe",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    }
-  ],
-  "clusterSize": 3,
-  "partitionsCount": 3,
-  "replicationFactor": 3,
-  "gatewayVersion": "8.6.0"
-}
+```json reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
   </summary>

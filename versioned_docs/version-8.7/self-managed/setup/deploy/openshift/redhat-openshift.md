@@ -95,18 +95,10 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 The route created by OpenShift will use a domain to provide access to the platform. By default, you can use the OpenShift applications domain, but any other domain supported by the router can also be used.
 
-To retrieve the OpenShift applications domain (used as an example here), run the following command:
+To retrieve the OpenShift applications domain (used as an example here), run the following command and define the route domain that will be used for the Camunda 8 deployment:
 
-```bash
-export OPENSHIFT_APPS_DOMAIN=$(oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}')
-```
-
-Next, define the route domain that will be used for the Camunda 8 deployment. For example:
-
-```bash
-export DOMAIN_NAME="camunda.$OPENSHIFT_APPS_DOMAIN"
-
-echo "Camunda 8 will be reachable from $DOMAIN_NAME"
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/openshift/single-region/procedure/setup-application-domain.sh
 ```
 
 If you choose to use a custom domain instead, ensure it is supported by your router configuration and replace the example domain with your desired domain. For more details on configuring custom domains in OpenShift, refer to the official [custom domain OpenShift documentation](https://docs.openshift.com/dedicated/applications/deployments/osd-config-custom-domains-applications.html).
@@ -123,12 +115,8 @@ oc get ingresses.config/cluster -o json | jq '.metadata.annotations."ingress.ope
 
 Alternatively, if you use a dedicated IngressController for the deployment:
 
-```bash
-# List your IngressControllers
-oc -n openshift-ingress-operator get ingresscontrollers
-
-# Replace <ingresscontroller_name> with your IngressController name
-oc -n openshift-ingress-operator get ingresscontrollers/<ingresscontroller_name> -o json | jq '.metadata.annotations."ingress.operator.openshift.io/default-enable-http2"'
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/openshift/single-region/procedure/get-ingress-http2-status.sh
 ```
 
 - If the output is `"true"`, it means HTTP/2 is enabled.
@@ -141,8 +129,8 @@ If HTTP/2 is not enabled, you can enable it by running the following command:
 
 **IngressController configuration:**
 
-```bash
-oc -n openshift-ingress-operator annotate ingresscontrollers/<ingresscontroller_name> ingress.operator.openshift.io/default-enable-http2=true
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/single-region/procedure/enable-ingress-http2.sh
 ```
 
 **Global cluster configuration:**
@@ -339,17 +327,8 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 
 You can track the progress of the installation using the following command:
 
-```bash
-watch -n 5 '
-  kubectl get pods -n camunda --output=wide;
-  if [ $(kubectl get pods -n camunda --field-selector=status.phase!=Running -o name | wc -l) -eq 0 ] &&
-     [ $(kubectl get pods -n camunda -o json | jq -r ".items[] | select(.status.containerStatuses[]?.ready == false)" | wc -l) -eq 0 ];
-  then
-    echo "All pods are Running and Healthy - Installation completed!";
-  else
-    echo "Some pods are not Running or Healthy";
-  fi
-'
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 ## Verify connectivity to Camunda 8
