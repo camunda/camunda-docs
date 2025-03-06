@@ -509,9 +509,6 @@ chmod +x verify_installation_completed.sh
 
 1. Open a terminal and port-forward the Zeebe Gateway via `oc` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
-<Tabs groupId="c8-connectivity">
-  <TabItem value="rest-api" label="REST API">
-
 ```shell
 oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/$HELM_RELEASE_NAME-zeebe-gateway" 8080:8080
 ```
@@ -532,33 +529,6 @@ oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/
    ```
 
    </details>
-
-</TabItem>
-<TabItem value="zbctl" label="zbctl">
-
-```shell
-oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/$HELM_RELEASE_NAME-zeebe-gateway" 26500:26500
-```
-
-1. Open another terminal and use [zbctl](/apis-tools/community-clients/cli-client/index.md) to print the Zeebe cluster status:
-
-   ```shell
-   zbctl status --insecure --address localhost:26500
-   ```
-
-2. Make sure that your output contains all eight brokers from the two regions:
-
-   <details>
-      <summary>Example output</summary>
-
-   ```text reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp-dual-region/procedure/camunda/8.7/zbctl-output.txt
-   ```
-
-   </details>
-
-</TabItem>
-</Tabs>
 
 ## Failover
 
