@@ -37,12 +37,12 @@ To configure with Helm, visit the [Self Managed installation documentation](/sel
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
-### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
+### Supported environment changes (OpenJDK, Elasticsearch, Amazon OpenSearch)
 
 Version changes are made to supported environments:
 
 - OpenJDK minimum version raised to 21+ in Operate
-- ElasticSearch minimum version raised to 8.13+
+- Elasticsearch minimum version raised to 8.13+
 - Amazon OpenSearch minimum version raised to 2.9+
 
 To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
