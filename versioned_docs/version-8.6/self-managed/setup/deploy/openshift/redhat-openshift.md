@@ -176,7 +176,8 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
    - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
-   Finally, we mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe Gateway Pod.
+   Finally, we mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe Gateway Pod and the Zeebe Pod to configure both [broker security](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetworksecurity) and gateway security.
+
    Update your `values.yml` file with the following:
 
    ```yaml reference
