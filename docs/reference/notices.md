@@ -12,7 +12,7 @@ Camunda publishes security notices after fixes are available.
 
 #### Publication date
 
-March 6th, 2025
+March 11th, 2025
 
 #### Product affected
 
@@ -26,18 +26,16 @@ The version of `koa` used by Camunda Web Modeler was affected by the following v
 
 #### How to determine if the installation is affected
 
-You are using Camunda Web Modeler version 8.3.16, 8.4.14, 8.5.15, 8.6.7, 8.7.0-alpha4, 8.8.0-alpha1 or previous.
+You are using Camunda Web Modeler version ≤ 8.3.16, ≤ 8.4.14, ≤ 8.5.15, or ≤ 8.6.7.
 
 #### Solution
 
 Camunda has provided the following releases which contain the fix:
 
-- [Web Modeler 8.3.17](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.3.17)
-- [Web Modeler 8.4.15](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.4.15)
-- [Web Modeler 8.5.16](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.5.16)
-- [Web Modeler 8.6.8](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.6.8)
-- [Web Modeler 8.7.0-alpha5](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.7.0-alpha5)
-- [Web Modeler 8.8.0-alpha2](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.8.0-alpha2)
+- [Camunda Web Modeler 8.3.17](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.3.17)
+- [Camunda Web Modeler 8.4.15](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.4.15)
+- [Camunda Web Modeler 8.5.16](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.5.16)
+- [Camunda Web Modeler 8.6.8](https://hub.docker.com/layers/camunda/web-modeler-webapp/8.6.8/images/sha256-0d12ad2a751d9cc78de25f7a299320c8b7f7fa68f3b2e80f0c826fee926cb547)
 
 ### Notice 13
 
