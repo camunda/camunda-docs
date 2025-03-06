@@ -18,7 +18,7 @@ To create an IDP application:
 1. In a Web Modeler project, select **Create new** > **IDP application** to open the **Create an IDP application** modal.
    <img src={IdpApplicationModalImg} alt="IDP application screen" width="550px"/>
    - **Name**: Enter a name for the IDP application.
-   - **Select a cluster**: Select the cluster you want to use for modeling and testing your document extraction. Note that you cannot change the selected cluster for the IDP application once it has been created.
+   - **Select a cluster**: Select the cluster you want to use for modeling and testing your document extraction.
 1. Click **Create** to create the IDP application.
 
 1. You can now create [document extraction](idp-document-extraction.md) templates inside your IDP application folder.
@@ -26,7 +26,10 @@ To create an IDP application:
 <!-- 1. You can now create [document extraction](idp-document-extraction.md) and [document automation](idp-document-automation.md) projects inside your IDP application folder. -->
 
 :::note
-Camunda recommends using a development (dev) cluster for your IDP applications.
+
+- Camunda recommends using a development (dev) cluster for your IDP applications.
+- You cannot change the selected cluster for the IDP application once it has been created.
+
 :::
 
 ## IDP application clusters
