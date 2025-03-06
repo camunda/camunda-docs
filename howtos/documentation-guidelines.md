@@ -221,7 +221,8 @@ After the proposed change is finished, open a GitHub PR and assign reviewers bas
 If unsure about who to pick, choose one of the corresponding team representatives, and they will take care of delegating the issue:
 
 - Console: @ultraschuppi
-- Modeler: @camunda/modeling-dev
+- Desktop Modeler: @camunda/modeling-dev
+- Web Modeler: @marcosbarbero @wollefitz
 - Zeebe: @npepinpe
 - Operate: @ThorbenLindhauer
 - Tasklist: @camunda/human-task-orchestration
