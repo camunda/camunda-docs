@@ -1037,7 +1037,13 @@ module.exports = {
       ],
     },
     {
-      Install: [
+      type: "category",
+      label: "Install",
+      link: {
+        type: "doc",
+        id: "self-managed/setup/overview",
+      },
+      items: [
         "self-managed/setup/overview",
         {
           type: "doc",
@@ -1053,7 +1059,7 @@ module.exports = {
       label: "Reference architecture",
       link: {
         type: "doc",
-        id: "self-managed/setup/index",
+        id: "self-managed/reference-architecture/reference-architecture",
       },
       items: [
         "self-managed/reference-architecture/reference-architecture",
