@@ -8,11 +8,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::note
-As a Spring Boot application, Identity supports any standard
+As a Spring Boot application, Camunda 8 supports any standard
 [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 :::
 
-The following variables apply globally to all components within the Camunda Orchestration core: Zeebe, Operate, and Tasklist.
+The following variables apply globally to all components within the Camunda Orchestration core: Zeebe, Operate, Tasklist, and Identity.
 
 <!-- updates must be made to BOTH tables -->
 <Tabs>
@@ -22,7 +22,7 @@ The following variables apply globally to all components within the Camunda Orch
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------- |
 | `SPRING_PROFILES_ACTIVE`                            | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
 | `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`            | The authentication method to use.                                                                 | `basic`             |
-| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTED-API`   | If the API is enabled without authentication.                                                     | `true`              |
+| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTED-API`   | If the API can be used without authentication.                                                    | `true`              |
 | `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`               | Enables shared authentication between the Orchestration web applications (Operate and Tasklist).  | `true`              |
 | `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`           | If authorizations are enabled.                                                                    | `true`              |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_USERNAME` | The username of the first user.                                                                   | `demo`              |
@@ -37,7 +37,7 @@ The following variables apply globally to all components within the Camunda Orch
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------- |
 | `spring.profiles.active`                            | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
 | `camunda.security.authentication.method`            | The authentication method to use.                                                                 | `basic`             |
-| `camunda.security.authentication.unprotected-api`   | If the API is enabled without authentication.                                                     | `true`              |
+| `camunda.security.authentication.unprotected-api`   | If the API cane be used without authentication.                                                   | `true`              |
 | `camunda.persistent.sessions.enabled`               | Enables shared authentication between the Orchestration web applications (Operate and Tasklist).  | `true`              |
 | `camunda.security.authorizations.enabled`           | If authorizations are enabled.                                                                    | `true`              |
 | `camunda.security.initialization.users[0].username` | The username of the first user.                                                                   | `demo`              |

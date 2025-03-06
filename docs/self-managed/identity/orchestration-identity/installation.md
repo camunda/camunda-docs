@@ -53,6 +53,10 @@ CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_NAME=<The name of the first user>
 CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_EMAIL=<The email address of the first user>
 ```
 
+:::note
+Any other users included in the initialization `user` list will also be granted the `admin` role.
+:::
+
   </TabItem>
 </Tabs>
 
