@@ -656,21 +656,13 @@ export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda
 
 </Tabs>
 
-Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token.
+Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the REST API and display the cluster topology:
 
-```shell
-export TOKEN=$(curl --location --request POST "${ZEEBE_AUTHORIZATION_SERVER_URL}" \
---header "Content-Type: application/x-www-form-urlencoded" \
---data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
---data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}" \
---data-urlencode "grant_type=client_credentials" | jq '.access_token' -r)
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
-Use the stored token, in our case `TOKEN`, to use the REST API to print the cluster topology.
-
-```shell
-curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS_REST}/v2/topology"
-```
+<!-- TODO: also integrate the expected output as part of golden files -->
 
 ...and results in the following output:
 
