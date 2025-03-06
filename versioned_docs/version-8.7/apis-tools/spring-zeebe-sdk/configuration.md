@@ -3,6 +3,14 @@ id: configuration
 title: Configuration
 ---
 
+This page uses YAML examples to show configuration properties. Alternate methods to [externalize or override your configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) are provided by Spring Boot, and can be applied without rebuilding your application (properties files, Java System properties, or environment variables).
+
+:::note
+Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables). To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace any delimiters `.` with underscore `_`.
+
+For example, the property `camunda.client.zeebe.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXJOBSACTIVE`.
+:::
+
 ## Job worker configuration options
 
 ### Job type
@@ -374,7 +382,7 @@ camunda:
 
 #### REST over gRPC
 
-If true, the client will use REST instead of gRPC whenever possible:
+If true, the Zeebe Client will use REST instead of gRPC whenever possible to communicate with the Zeebe Gateway:
 
 ```yaml
 camunda:
@@ -385,7 +393,7 @@ camunda:
 
 #### gRPC address
 
-Define client gRPC address:
+Define the address of the [gRPC API](/apis-tools/zeebe-api/grpc.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -394,9 +402,13 @@ camunda:
       grpc-address: http://localhost:26500
 ```
 
+:::note
+You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerException: target` error.
+:::
+
 #### REST address
 
-Define client REST address:
+Define address of the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -404,6 +416,10 @@ camunda:
     zeebe:
       rest-address: http://localhost:8080
 ```
+
+:::note
+You must add the `http://` scheme to the URL.
+:::
 
 #### Defaults and Overrides
 

@@ -105,7 +105,7 @@ Requirements for the components can be seen below:
 | Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                              |
 
-\*Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are currently supported, please refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
+\*Not all Optimize features are supported when using OpenSearch as a database, including backups. For a full list of the features that are currently supported, please refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
@@ -119,7 +119,9 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 ### Component version matrix
 
-This matrix shows which component versions work together:
+This matrix shows which component versions work together.
+
+From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the exact same `minor` and `patch` level to ensure compatibility.
 
 | Design                | Automate    |                                                                            | Improve         |
 | --------------------- | ----------- | -------------------------------------------------------------------------- | --------------- |
@@ -128,7 +130,6 @@ This matrix shows which component versions work together:
 | Desktop Modeler 5.19+ | Zeebe 8.4.x | Operate 8.4.x Tasklist 8.4.x Identity 8.4.x Connectors 8.4.x               | Optimize 8.4.x  |
 | Desktop Modeler 5.16+ | Zeebe 8.3.x | Operate 8.3.x Tasklist 8.3.x Identity 8.3.x Connectors 8.3.x               | Optimize 8.3.x  |
 | Desktop Modeler 5.10+ | Zeebe 8.2.x | Operate 8.2.x Tasklist 8.2.x Identity 8.2.x Connectors 0.23.2              | Optimize 3.10.x |
-| Desktop Modeler 4.12+ | Zeebe 1.3.x | Operate 1.3.x Tasklist 1.3.x IAM 1.3.x                                     | Optimize 3.7.x  |
 | -                     | -           | -                                                                          | -               |
 | Web Modeler 8.6.x     | Zeebe 8.6.x | Operate 8.6.x Tasklist 8.6.x Identity 8.6.x Connectors 8.6.x Console 8.6.x | Optimize 8.6.x  |
 | Web Modeler 8.5.x     | Zeebe 8.5.x | Operate 8.5.x Tasklist 8.5.x Identity 8.5.x Connectors 8.5.x Console 8.5.x | Optimize 8.5.x  |
@@ -139,26 +140,3 @@ This matrix shows which component versions work together:
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
-
-## form-js version matrix
-
-| Design                | form-js |
-| --------------------- | ------- |
-| Desktop Modeler 5.22+ | 1.7.x   |
-| Desktop Modeler 5.19+ | 1.6.x   |
-| Desktop Modeler 5.10+ | 0.14.x  |
-| Desktop Modeler 5.4+  | 0.8.x   |
-| Desktop Modeler 5.0+  | 0.2.x   |
-| Desktop Modeler 4.12+ | 0.1.x   |
-| Desktop Modeler 4.11+ | 0.1.x   |
-| Desktop Modeler 4.9+  | 0.1.x   |
-| Desktop Modeler 4.7+  | 0.0.1   |
-| -                     | -       |
-| Web Modeler 8.5.x     | 1.7.x   |
-| Web Modeler 8.4.x     | 1.6.x   |
-| Web Modeler 8.3.x     | 1.3.x   |
-| Web Modeler 8.2.x     | 0.14.x  |
-
-## Camunda 7 & Optimize version matrix
-
-See https://docs.camunda.org/enterprise/download/#camunda-optimize.

@@ -227,7 +227,6 @@ After selecting the **Play** tab in Self-Managed, you are prompted to select fro
 
 ### Limitations {#self-managed-limitations}
 
-- Play does not support multi-tenancy.
 - Play does not work with a custom OIDC provider.
 - The environment variables `CAMUNDA_CUSTOM_CERT_CHAIN_PATH`, `CAMUNDA_CUSTOM_PRIVATE_KEY_PATH`, `CAMUNDA_CUSTOM_ROOT_CERT_PATH`, and `CAMUNDA_CUSTOM_ROOT_CERT_STRING` can be set in Docker or Helm chart setups. However, these configurations have not been tested with Play's behavior, and therefore are not supported when used with Play.
 - Play cannot check the presence of Connector secrets in Self-Managed setups.

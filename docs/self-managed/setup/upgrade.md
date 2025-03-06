@@ -56,7 +56,7 @@ Configuration adjustments may be required when upgrading to a new version of the
 
 #### Deprecation notes
 
-The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7 (January 2025). We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
+The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.8. We highly recommend updating the keys in your values file rather than waiting until the 8.8 release.
 
 | Component     | Old Key                            | New Key                             |
 | ------------- | ---------------------------------- | ----------------------------------- |
@@ -83,7 +83,7 @@ The following keys were deprecated in 8.5, and their removal has been delayed un
 
 #### Separated Ingress deprecation warning
 
-The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.7. If using a separated Ingress, switch to a [combined Ingress](/self-managed/setup/guides/ingress-setup.md) to ensure a smooth upgrade experience.
+The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. If using a separated Ingress, switch to a [combined Ingress](/self-managed/setup/guides/ingress-setup.md) to ensure a smooth upgrade experience.
 
 #### OpenShift Changes
 
@@ -123,7 +123,7 @@ Ensure to use Helm CLI with version `3.14.3` or more. The upgrade could fail to 
 
 #### Deprecation notes
 
-The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7 (January 2025). We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
+The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7. We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
 
 | Component     | Old Key                            | New Key                             |
 | ------------- | ---------------------------------- | ----------------------------------- |
