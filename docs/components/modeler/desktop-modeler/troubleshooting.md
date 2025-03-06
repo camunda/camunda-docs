@@ -72,12 +72,7 @@ Secure connections to Zeebe require [HTTP/2 over TLS with protocol negotiation v
 
 ## Debug Zeebe connection issues
 
-<<<<<<< HEAD
-You can connect to Zeebe via community-supported[`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or another API client. However, connecting through Desktop Modeler fails.
-=======
-You can connect to Zeebe via community-supported [`zbctl`](/apis-tools/community-clients/cli-client/index.md) or another API client. However, connecting through Desktop Modeler fails.
-
-> > > > > > > main
+You can connect to Zeebe via community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or another API client. However, connecting through Desktop Modeler fails.
 
 ### Secure connection to Zeebe fails
 
