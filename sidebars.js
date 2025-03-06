@@ -1048,18 +1048,14 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Deploy",
+      label: "Reference architecture",
       link: {
         type: "doc",
         id: "self-managed/setup/index",
       },
       items: [
-        {
-          "Reference architecture": [
-            "self-managed/reference-architecture/reference-architecture",
-            "self-managed/reference-architecture/manual/manual",
-          ],
-        },
+        "self-managed/reference-architecture/reference-architecture",
+        "self-managed/reference-architecture/manual/manual",
         {
           "Amazon (AWS)": [
             {
