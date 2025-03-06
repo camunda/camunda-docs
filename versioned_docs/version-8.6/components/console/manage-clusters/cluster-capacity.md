@@ -18,8 +18,10 @@ Cluster capacity provides a high-level overview of how well a cluster is coping 
 
 A general guideline to follow when using cluster capacity as a metric is:
 
-- **High capacity**: The higher the capacity, the more likely it is that things will slow down, time out, requests will fail, and so on.
-- **Low capacity**: The lower the capacity, the more you could increase the cluster workload as the cluster is probably underused.
+- **High capacity percentage**: The higher the capacity percentage value, the more likely it is that things will slow down, time out, requests will fail, and so on.
+- **Low capacity percentage**: The lower the capacity percentage value, the more you could increase the cluster workload as the cluster is probably underused.
+
+For example, if a cluster capacity is continually running at 95%, this means it is probably overloaded and may not be performing well, but if the cluster capacity is only 5% then it can probably accept more workload and may be underused.
 
 :::info
 To understand how cluster capacity is calculated, see [how cluster capacity is calculated](#capacity-calculation).
