@@ -5,7 +5,7 @@ sidebar_label: "What is Identity?"
 description: "Identity is the component within the Camunda 8 stack responsible for authentication and authorization."
 ---
 
-Identity is the component within the Camunda 8 stack responsible for authentication and authorization. Identity functions differently in Orchestration clusters and in Console and Web Modeler. For more information on these differences, see the Self-Managed [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
+Identity is responsible for authentication and authorization within the Camunda 8 stack. Identity functions differently in Orchestration clusters and in Console and Web Modeler. For more information on these differences, see the Self-Managed [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
 
 ## Identity for Orchestration clusters
 

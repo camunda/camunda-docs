@@ -1,8 +1,11 @@
 ---
 id: installation
-title: Installation
+title: Initial setup
 description: "Learn how Identity is bundled with your default Orchestration cluster."
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 Identity is included by default with the deployment of any [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster). Within an Orchestration cluster, Identity provides unified, cluster-level identity management and authorizations.
 
@@ -16,32 +19,73 @@ Following the default installation will result in a cluster with the following:
 2. API authentication disabled
 3. Authorizations disabled
 4. An initial user with the username/password `demo`/`demo`
-5. An `admin` role with read, create, update, and delete permissions for other roles
-
-### Configure basic authentication
+5. An `admin` role with read, create, update, and delete permissions for other roles, which is applied to the initial `demo` user
 
 To make changes to the initial configuration, add the desired values via your `application.yaml` or environment variables according to the available [configuration properties](./configuration.md).
 
-For example, to enable basic authentication and create an initial user, the following is required:
+### Configure an initial user
+
+The initial user created by the application will be assigned the `admin` role, and can be used for authentication to the web applications and additional role management.
+
+To create a unique initial user, the following is required in your `application.yaml` or environment variables:
+
+<Tabs>
+  <TabItem value="helm" label="Helm properties" default>
 
 ```yaml
-camunda.security:
-  authentication.unprotected-api: false
-  initialization.users[0].username: <Your chosen username>
-  initialization.users[0].password: <Your chosen password>
-  initialization.users[0].name: <The name of the first user>
-  initialization.users[0].email: <The email address of the first user>
+camunda:
+  security:
+    initialization:
+      users:
+        - username: <Your chosen username>
+          password: <Your chosen password>
+          name: <The name of the first user>
+          email: <The email address of the first user>
 ```
 
-### Enable authorizations
+  </TabItem>
+<TabItem value="env" label="Environment variables" default>
 
-To work with authorizations, API authentication and authorization enforcement must be enabled. The following minimal `application.yaml` shows the required configuration for the APIs and authorizations:
+```shell
+CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_USERNAME=<Your chosen username>
+CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_PASSWORD=<Your chosen password>
+CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_NAME=<The name of the first user>
+CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_EMAIL=<The email address of the first user>
+```
+
+  </TabItem>
+</Tabs>
+
+### Enable API authentication and authorizations
+
+By default, basic authentication is enabled on the Camunda web applications, but the API is unprotected, and authorizations are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
+
+<Tabs>
+  <TabItem value="helm" label="Helm properties" default>
 
 ```yaml
-camunda.security:
-  authentication.unprotected-api: false
-  authorizations.enabled: true
+camunda:
+  security:
+    authentication:
+      unprotected-api: false
+    authorizations:
+      enabled: true
 ```
+
+  </TabItem>
+<TabItem value="env" label="Environment variables" default>
+
+```shell
+CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTED-API=false
+CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED=true
+```
+
+  </TabItem>
+</Tabs>
+
+:::note
+To enable authorizations, API protection must also be enabled.
+:::
 
 Basic authentication credentials are then required when making API requests, as in the following:
 
