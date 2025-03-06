@@ -8,7 +8,7 @@ keywords: ["backpressure", "back-pressure", "back pressure"]
 :::note Heads up!
 This project is community-supported.
 
-See the [announcement](reference/announcements-release-notes/880/880-announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
+See the [announcement](reference/announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
 :::
 
 The Go client provides a job worker that handles both polling and streaming for available jobs. This allows you to focus on writing code to handle the activated jobs.
