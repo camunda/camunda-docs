@@ -9,9 +9,9 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release are summarized below.
 
-| Scheduled release date | Scheduled end of maintenance | Release notes                                        | Blog                                                                                            |
-| :--------------------- | :--------------------------- | :--------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
-| 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/release-notes/870.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
+| Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                                            |
+| :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
 
 <!--- [Ad-hoc subprocesses](#)
 - [Document handling](#)

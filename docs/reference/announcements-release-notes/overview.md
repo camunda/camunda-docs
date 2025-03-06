@@ -12,6 +12,9 @@ In this section you will find announcements and release notes for each supported
 - Supported environments (updates regarding OpenJDK, Spring Boot, Elasticsearch, Keycloak, Amazon OpenSearch, Docker tags, Helm chart versions, etc.)
 
 :::note
+
+Updating your Camunda 8 application or server installation from one Camunda 8 version to the other with Self-Managed? Visit our [update guides](/self-managed/operational-guides/update-guide/introduction.md).
+
 The [supported environments page](/reference/supported-environments.md) additionally lists browsers, operating systems, clients, deployment options, and component requirements, which are tested and supported for compatibility with Camunda 8.
 :::
 
@@ -21,10 +24,6 @@ The [supported environments page](/reference/supported-environments.md) addition
 - Bug fixes
 
 Release notes are separated by minor release pages and include alphas released during the development cycle.
-
-:::note
-Updating your Camunda 8 application or server installation from one Camunda 8 version to the other with Self-Managed? Visit our [update guides](/self-managed/operational-guides/update-guide/introduction.md).
-:::
 
 ## Announcements & release notes
 
