@@ -1,6 +1,6 @@
 ---
-id: 880
-title: "8.8 Release notes"
+id: 880-release-notes
+title: "Release notes"
 description: "Release notes for 8.8, including alphas"
 keywords:
   [
@@ -19,6 +19,77 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
+### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+The 8.8 release includes API updates to support the move to a [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) unified experience.
+
+#### Camunda 8 REST API updates
+
+- New Query endpoints (with advanced search filtering) will be added for process entities (processes, decisions, user tasks, and forms). These will replace the component APIs (Tasklist, Operate) going forward.
+- New endpoints will allow you to manage and query users and resource permissions in an orchestration cluster.
+- All the Camunda 8 REST API endpoints will support resource-based authorizations to enable fine-grained permissions.
+- API terminology is aligned so technical assets have an identical, easily-understood, descriptive property name.
+
+### Cluster-level identity management
+
+Identity settings will be configured at the orchestration cluster level, allowing each cluster to have unique OIDC configurations. This cluster-specific setup empowers organizations to assign different identity providers (IdPs) across clusters, offering improved control over permissions and user group mappings, resulting in a more streamlined and efficient configuration experience.
+
+For SaaS customers, identity management in Camunda 8.8 remains consistent with Camunda 8.7, allowing the attachment of a single IdP per organization. However, cluster-level identity capabilities are provided for SaaS as well as Self-Managed. This means that user groups, roles, and access permissions can now be managed at the cluster level, giving SaaS customers the same granular access control as in Self-Managed environments.
+
+### Decoupling from Keycloak <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Built-in Keycloak integration in Self-Managed is removed, allowing customers to use any compatible IdP.
+
+- Keycloak remains fully supported as an external option. For cluster-level identity management it must be connected as an external OIDC provider moving forward.
+- OpenID Connect (OIDC) remains the standard for seamless integration with chosen IdPs.
+
+### Resource-based permissions
+
+Resource-level permissions are introduced to control read and write permissions per specific resource.
+
+- Admin users retain full access, but regular users must be granted specific permissions to perform operations or view resources.
+- For organizations that build custom front-ends and access Camunda via API, users or Clients with API permissions can still access data through the V2 API, respecting their resource permissions.
+
+<!-- :::info
+Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.8.
+::: -->
+
+### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+The [Identity service](/self-managed/identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
+
+### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+A new Camunda Exporter brings the importer and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). The index schema is also being harmonized.
+
+The exporter can consume Zeebe records (mostly events created by the engine), aggregate data, and store the related data into shared and harmonized indices.
+
+- Data is archived in the background, coupled to the exporter but without blocking the exporter's progress.
+- Indices can be located in either Elasticsearch (ES) or OpenSearch (OS). Our web components (Tasklist and Operate) then use the new harmonized indices to show data to the user.
+
+The following diagram shows a simplified version of this work.
+
+![Camunda Exporter diagram](../../img/target-camunda-exporter.png)
+
+- For example, Tasklist and Operate Importers are still required for old data to be imported, but the Camunda exporter writes all new data into ES/OS. After old indices are drained, importers can be turned off.
+- The archiver, which takes care of the archiving of completed process instances, will be moved into the Zeebe system as well, to reduce the installation complexity and provide a better scaling and replication factor (based on partitions).
+- This helps achieve a streamlined architecture, and improves platform performance and stability (especially regarding ES/OS).
+- A new separate component covers the migration, which will be part of the single application but can also deployed separately. It will adjust the previous Operate indices to make them more harmonized and usable by Tasklist.
+
+#### Harmonized index schema
+
+Camunda is harmonizing our index structure and usage.
+
+- This removes unnecessary duplications over multiple indices due to the previous architecture.
+- With this change, several Operate indices can and will be used by Tasklist.
+- New indices have been created to integrate Identity into the system.
+
+![Harmonized indices schema](../../img/harmonized-indices-schema.png)
+
+<!-- :::info
+Learn more about these updates in Streamlined Deployment with 8.7.
+::: -->
+
 ## 8.8.0-alpha1
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog                                                                                  |
@@ -26,7 +97,7 @@ These release notes identify the new features included in 8.8, including [alpha 
 | 11 February 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha1)</li></ul> | [Release blog](https://camunda.com/blog/2025/02/camunda-alpha-release-february-2025/) |
 
 :::note
-Some features available in 8.8.0-alpha1 were originally released in [8.7.0 alphas](./870.md). These features are longer planned for release in 8.7.0. For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).
+Some features available in 8.8.0-alpha1 were originally released in [8.7.0 alphas](/reference/announcements-release-notes/870/870-release-notes.md). These features are longer planned for release in 8.7.0. For more information, see the Camunda 8.7 and 8.8 [release update blog](https://camunda.com/blog/2025/01/camunda-87-88-release-update/).
 :::
 
 ### User task listeners <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span>

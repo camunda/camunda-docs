@@ -8,7 +8,7 @@ description: "Instantiate the client by passing in the address of the cluster yo
 :::note Heads up!
 This project is community-supported.
 
-See the [announcement](reference/announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
+See the [announcement](reference/announcements-release-notes/880/880-announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
 :::
 
 You can use the [community-supported](https://github.com/camunda-community-hub) Zeebe Go client library to interact with Camunda 8.

@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 :::note Heads up!
 This project is community-supported.
 
-See the [announcement](reference/announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
+See the [announcement](reference/announcements-release-notes/880/880-announcements.md#deprecation-zeebe-go-client--cli-client-zbctl) for more information.
 :::
 
 In this tutorial, you will learn how to use the [community-supported](https://github.com/camunda-community-hub) Go client in a Go application to interact with Camunda 8.

@@ -1,20 +1,23 @@
 ---
-id: announcements-860
-title: "8.6 Announcements"
-description: "Important changes and updates for the Camunda 8.6 release including deprecation & removal notices."
+id: 860-announcements
+title: "Announcements"
+description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.6 release."
+toc_max_heading_level: 2
 ---
 
-Important changes and updates for the Camunda 8.6 release are summarized below.
+Supported environment changes and breaking changes or deprecations for the Camunda 8.6 release are summarized below.
 
-| Release date   | End of maintenance | Release notes                                        |
-| :------------- | :----------------- | :--------------------------------------------------- |
-| 8 October 2024 | 14 April 2026      | [8.6 release notes](/reference/release-notes/860.md) |
+| Release date   | End of maintenance | Release notes                                                                        |
+| :------------- | :----------------- | :----------------------------------------------------------------------------------- |
+| 8 October 2024 | 14 April 2026      | [8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md) |
 
-## Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
+## Supported environment changes
 
-From version `8.6.0` forward, the core components Zeebe, Operate, and Tasklist must run the exact same `minor` and `patch` level to ensure compatibility. See the [component version matrix](../supported-environments.md#component-version-matrix) for an overview of components.
+### Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
 
-## License key changes
+From version `8.6.0` forward, the core components Zeebe, Operate, and Tasklist must run the exact same `minor` and `patch` level to ensure compatibility. See the [component version matrix](/reference/supported-environments.md#component-version-matrix) for an overview of components.
+
+### License key changes
 
 With the 8.6 release, Camunda 8 Self-Managed requires a license key for production usage. For additional details, review the [blog post on licensing updates for Camunda 8 Self-Managed](https://camunda.com/blog/2024/04/licensing-update-camunda-8-self-managed/).
 
@@ -34,7 +37,35 @@ To configure with Helm, visit the [Self Managed installation documentation](/sel
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
-## Zeebe Java client
+### Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
+
+Version changes are made to supported environments:
+
+- OpenJDK minimum version raised to 21+ in Operate
+- ElasticSearch minimum version raised to 8.13+
+- Amazon OpenSearch minimum version raised to 2.9+
+
+To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
+
+### Camunda Optimize artifact and Docker tag separation
+
+Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two distinct versions, and versioning between Camunda 7 and Camunda 8 is no longer interchangeable:
+
+- **Before Camunda 8.6**: Versions like `8.x` and `3.x` (used for Camunda 7) could sometimes be used interchangeably.
+- **From Camunda 8.6 onwards**: `8.6 != 3.14`. Each version corresponds strictly to its platform:
+  - **Camunda 7**: Uses the `3.x` versioning scheme and the `latest` Docker tag.
+  - **Camunda 8**: Uses the `8.x` versioning scheme and the `8-latest` Docker tag.
+
+#### Action required
+
+- **Camunda 7 Users**: Continue using `3.x` versions and the `latest` Docker tag.
+- **Camunda 8 Users**: If you haven't already done so, update your configurations to use `8.x` versions and the `8-latest` Docker tag.
+
+Make sure to update your Docker configurations accordingly to ensure compatibility.
+
+## Breaking changes
+
+### Zeebe Java client will not be developed further
 
 Starting with 8.7, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
@@ -44,7 +75,7 @@ The primary goal of those changes is to enable users to interact with Camunda cl
 The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.6 is officially supported.
 :::
 
-### Key changes
+#### Key changes
 
 - **New package structure**:
   - Package `io.camunda.client`: This package contains the new `CamundaClient` and all the features slated for release in version 8.7.
@@ -54,21 +85,13 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 - **Artifact ID change**:
   - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
 
-## Deprecation: Zeebe Go client & CLI client (zbctl)
+### Deprecation: Zeebe Go client & CLI client (zbctl)
 
 The Zeebe Go Client and CLI client (zbctl) will be [officially deprecated](https://camunda.com/blog/2024/09/deprecating-zbctl-and-go-clients/) with the 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and CLI utility will not be released starting with Camunda 8.6, will no longer receive new features, and will be transitioned to a community-maintained status.
 
 The documentation of the Zeebe Go Client and CLI client (zbctl) moved to the [community clients section](/apis-tools/community-clients/index.md).
 
-## Spring Zeebe SDK test support in 8.6.7
-
-[Testing support for the Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
-
-:::note
-This closes the feature gap where the Spring Zeebe SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).
-:::
-
-## Camunda 8 SaaS - Required cluster update
+### Camunda 8 SaaS - Required cluster update
 
 :::caution
 By **August 30th, 2024** all automation clusters in Camunda 8 SaaS must be [updated](/components/console/manage-clusters/manage-cluster.md#update-a-cluster) to the following versions at a **minimum**:
@@ -95,22 +118,6 @@ If you do not update the cluster by August 30th 2024, we will update the cluster
 
 Camunda 8 Self-Managed clusters are not affected by this.
 
-## Support for Amazon OpenSearch for Optimize
-
-This release extends the OpenSearch features supported by Optimize. Full support is committed for the 8.8 release.
-
-## Supported environment changes (OpenJDK, ElasticSearch, Amazon OpenSearch)
-
-Version changes are made to supported environments:
-
-- OpenJDK minimum version raised to 21+ in Operate
-- ElasticSearch minimum version raised to 8.13+
-- Amazon OpenSearch minimum version raised to 2.9+
-
-To learn more about supported environments, see [supported environments](/reference/supported-environments.md).
-
-## Connectors
-
 ### Deprecation: None start event element templates for Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound Connectors
 
 The [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events) element templates for the out-of-the-box Kafka, RabbitMQ, Amazon SQS, and Amazon SNS inbound Connectors have been deprecated in Camunda Modeler.
@@ -130,49 +137,25 @@ The `CorrelationResult` record has been changed compared to the previous version
 
 An example of how to use the new `CorrelationResult` can be found in the [Connector SDK documentation](/components/connectors/custom-built-connectors/connector-sdk.md#inbound-connector-runtime-logic).
 
-## Flow control enabled by default in SaaS
+### Camunda 8 Self-Managed
 
-Flow control is now enabled by default in Camunda 8.6 SaaS. This change ensures the cluster is protected from excessive load and can maintain a stable state.
-
-These new configuration defaults are tailored to the cluster size and optimized for a stable performance. However, the cluster might reject requests if the load is too high with this change. The error message for this is `Failed to write client request to partition X, because the write limit is exhausted`. If the error persists, this may be a sign of underlining issues, or a need to adjust the cluster size.
-
-For more information on how to configure flow control for a Self-Managed cluster, visit the [flow control documentation](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md).
-
-## Camunda 8 Self-Managed
-
-### Helm chart - Separated Ingress deprecation
+#### Helm chart - Separated Ingress deprecation
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/setup/guides/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
-### Helm chart - `global.multiregion.installationType` deprecation
+#### Helm chart - `global.multiregion.installationType` deprecation
 
 The `global.multiregion.installationType` option is used in failover and failback scenarios. This option in the Helm chart has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. `global.multiregion.installationType` was replaced with a set of API endpoints called while following the ([dual-region operational procedure](/self-managed/operational-guides/multi-region/dual-region-ops.md))
 
-#### Helm chart - Elasticsearch nodes number
+##### Helm chart - Elasticsearch nodes number
 
 The default value of Elasticsearch deployment pods has changed from 2 to 3, and an affinity setting has been added to avoid scheduling Elasticsearch pods on the same Kubernetes worker.
 
-## Camunda Optimize artifact and Docker tag separation
-
-Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two distinct versions, and versioning between Camunda 7 and Camunda 8 is no longer interchangeable:
-
-- **Before Camunda 8.6**: Versions like `8.x` and `3.x` (used for Camunda 7) could sometimes be used interchangeably.
-- **From Camunda 8.6 onwards**: `8.6 != 3.14`. Each version corresponds strictly to its platform:
-  - **Camunda 7**: Uses the `3.x` versioning scheme and the `latest` Docker tag.
-  - **Camunda 8**: Uses the `8.x` versioning scheme and the `8-latest` Docker tag.
-
-### Action required:
-
-- **Camunda 7 Users**: Continue using `3.x` versions and the `latest` Docker tag.
-- **Camunda 8 Users**: If you haven't already done so, update your configurations to use `8.x` versions and the `8-latest` Docker tag.
-
-Make sure to update your Docker configurations accordingly to ensure compatibility.
-
-## New base path for Operate and Tasklist web applications
+### New base path for Operate and Tasklist web applications
 
 We are introducing a new base path for both the Operate and Tasklist **web applications**. This change applies to both Self-Managed and SaaS environments.
 
-### For Self-Managed
+#### For Self-Managed
 
 - The new base path for Operate is `/operate`, and for Tasklist, it is `/tasklist`.
 - For a [Separated Ingress](/self-managed/setup/guides/ingress-setup.md?ingress=separated) configuration:
@@ -182,7 +165,7 @@ We are introducing a new base path for both the Operate and Tasklist **web appli
   - for Operate, the full URL will be `{common-host}/{operate-contextPath}/operate`. Any calls to `{common-host}/{operate-contextPath}` will be automatically redirected to `{common-host}/{operate-contextPath}/operate`.
   - for Tasklist, the full URL will be `{common-host}/{tasklist-contextPath}/tasklist`. Any calls to `{common-host}/{tasklist-contextPath}` will be automatically redirected to `{common-host}/{tasklist-contextPath}/tasklist`.
 
-### For SaaS
+#### For SaaS
 
 - The full URL for Operate is now structured as `https://{region}.operate.camunda.io/{clusterId}/operate`.
 - The full URL for Tasklist is now structured as `https://{region}.tasklist.camunda.io/{clusterId}/tasklist`.
