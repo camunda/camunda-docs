@@ -10,7 +10,7 @@ Release date: 8th of Oct 2024
 
 End of maintenance: 14th of April 2026
 
-## Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
+### Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
 
 From version `8.6.0` forward, the core components Zeebe, Operate, and Tasklist must run the exact same `minor` and `patch` level to ensure compatibility. See the [component version matrix](./supported-environments.md#component-version-matrix) for an overview of components.
 
@@ -64,7 +64,7 @@ The Zeebe Go Client and CLI client (zbctl) will be [officially deprecated](https
 
 The documentation of the Zeebe Go Client and CLI client (zbctl) moved to the [community clients section](/apis-tools/community-clients/index.md).
 
-## Spring Zeebe SDK test support in 8.6.7
+### Spring Zeebe SDK test support in 8.6.7
 
 [Testing support for the Spring Zeebe SDK](../apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
 
