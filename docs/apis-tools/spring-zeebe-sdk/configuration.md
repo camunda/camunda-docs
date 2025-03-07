@@ -266,7 +266,7 @@ You can authenticate with the cluster using username and password authentication
 ```yaml
 camunda:
   client:
-    mode: self-managed
+    mode: basic
     auth:
       username: <your username>
       password: <your password>

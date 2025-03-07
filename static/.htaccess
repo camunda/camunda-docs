@@ -53,6 +53,10 @@ RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 
 # 2. Broad version (or unversioned) redirects
 ##################################################################################
 
+# Numbered aliases for vNext. These are temporary, until this version becomes current.
+RewriteRule ^docs/8.8/(.*)$ /docs/next/$1 [R=302,L]
+RewriteRule ^optimize/3.16.0/(.*)$ /optimize/next/$1 [R=302,L]
+
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.6/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
@@ -90,6 +94,10 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
+
+# Remove go and zbctl pages, redirect to CCH
+RewriteRule ^docs/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
+RewriteRule ^docs/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
 
 # Remove meta page
 RewriteRule ^meta/ / [R=301,L]
