@@ -1135,7 +1135,8 @@ module.exports = {
     {
       "Reference architecture": [
         "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual",
+        "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/manual",
       ],
     },
     {
