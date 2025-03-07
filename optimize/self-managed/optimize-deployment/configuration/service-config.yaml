@@ -429,9 +429,6 @@ historyCleanup:
     # 'myProcessDefinitionKey':
     #   ttl: 'P2M'
     #   cleanupMode: 'variables'
-  ingestedEventCleanup:
-    # switch for the ingested event data cleanup, defaults to false
-    enabled: false
 
 locales:
   # all locales available
