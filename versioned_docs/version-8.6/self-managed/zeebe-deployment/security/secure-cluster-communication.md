@@ -97,11 +97,11 @@ security:
   # Currently only supports PKCS#12 format.
   keyStore:
     # The path for the keystore file
-    # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_PKCS12_FILEPATH
+    # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_FILEPATH
     filePath:
 
     # Sets the password for the keystore file, if not set it is assumed there is no password
-    # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_PKCS12_PASSWORD
+    # This setting can also be overridden using the environment variable ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_PASSWORD
     password:
 ```
 
