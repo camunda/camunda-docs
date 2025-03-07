@@ -31,7 +31,7 @@ An error can be thrown within the process using an error **end event**.
 Alternatively, you can inform Zeebe that a business error occurred using a **client command**. This throw error client
 command can only be used while processing a job.
 
-In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers. Refer to the [gRPC command](/apis-tools/zeebe-api/gateway-service.md#throwerror-rpc) for details.
+In addition to throwing the error, this also disables the job and stops it from being activated or completed by other job workers. Refer to the [gRPC command](/apis-tools/zeebe-api/gateway-service.md#throwerror-rpc) and [REST request](/apis-tools/camunda-api-rest/specifications/throw-job-error.api.mdx) for details.
 
 ## Catching the error
 
@@ -79,7 +79,7 @@ In general, we recommend talking about business reactions, which are modeled in 
 
 ## Variable mappings
 
-All error variables are merged into the error catch event. These variables can be merged into the process instance by defining an output mapping at the error catch event.
+Variables can be passed along into the error catch event with the payload when the error is thrown from the client command. These variables can be merged into the process instance by defining an output mapping at the error catch event.
 
 Visit the documentation regarding [variable mappings](../../../concepts/variables/#inputoutput-variable-mappings) for more information.
 
