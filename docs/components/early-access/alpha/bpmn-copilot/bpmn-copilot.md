@@ -43,6 +43,9 @@ Timeouts may occur at this step if your query is too complex.
 - "Translate this diagram to plain language so I can create documentation"
 - "What SLA's are defined in this process?"
 - "What does the triangle symbol mean?"
+- "Highlight decision points in this diagram"
+- "Summarize this process for a new employee"
+- "Find potential automation opportunities"
 
 ### Example creation prompts
 
