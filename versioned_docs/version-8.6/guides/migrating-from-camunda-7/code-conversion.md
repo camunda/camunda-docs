@@ -69,7 +69,7 @@ For example, to run a recipe to convert JavaDelegates to Spring-based Job Worker
 
 Those recipes might work out-of-the-box for your environment, but most often they need to be adjusted to your code patterns. In this case, use the existing patterns as a basis to make your own adjustments or extensions.
 
-You can find the existing recipes on GitHub at [https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
+You can find the existing recipes on [GitHub](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
 
 ## Diagram converter
 
