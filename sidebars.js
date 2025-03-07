@@ -704,14 +704,6 @@ module.exports = {
         id: "components/early-access/overview",
       },
       items: [
-        // {
-        //   type: "category",
-        //   label: "Experimental features",
-        //   items: [
-        //     // "components/early-access/experimental/rpa/rpa-integration",
-        //     // "components/early-access/experimental/rpa/rpa-framework-library",
-        //   ],
-        // },
         {
           type: "category",
           label: "Alpha features",
