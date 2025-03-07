@@ -181,6 +181,34 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
+            {
+              type: "category",
+              label: "Intelligent document processing",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp",
+              },
+              items: [
+                "components/modeler/web-modeler/idp/idp-configuration",
+                "components/modeler/web-modeler/idp/idp-applications",
+                {
+                  type: "category",
+                  label: "Document extraction",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-document-extraction",
+                  },
+                  items: [
+                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
+                    "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                  ],
+                },
+                // "components/modeler/web-modeler/idp/idp-document-automation",
+                "components/modeler/web-modeler/idp/idp-integrate",
+                "components/modeler/web-modeler/idp/idp-key-concepts",
+                "components/modeler/web-modeler/idp/idp-reference",
+              ],
+            },
             "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
@@ -914,6 +942,7 @@ module.exports = {
             {
               "Java client": [
                 "apis-tools/java-client/index",
+                "apis-tools/java-client/authentication",
                 "apis-tools/java-client/job-worker",
                 "apis-tools/java-client/logging",
                 "apis-tools/java-client/zeebe-process-test",
@@ -935,21 +964,6 @@ module.exports = {
             {
               "Community clients": [
                 "apis-tools/community-clients/index",
-                {
-                  "Zeebe clients": [
-                    {
-                      "CLI client": [
-                        "apis-tools/community-clients/cli-client/index",
-                        "apis-tools/community-clients/cli-client/cli-get-started",
-                      ],
-                      "Go client": [
-                        "apis-tools/community-clients/go-client/index",
-                        "apis-tools/community-clients/go-client/go-get-started",
-                        "apis-tools/community-clients/go-client/job-worker",
-                      ],
-                    },
-                  ],
-                },
                 "apis-tools/build-your-own-client",
               ],
             },

@@ -36,7 +36,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
-- **Zeebe Spring SDK**: OpenJDK 17+
+- **Spring Zeebe SDK**: OpenJDK 17+
 - **Connector SDK**: OpenJDK 17+
 - **Spring SDK**: Spring Boot 3.3.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
@@ -105,7 +105,7 @@ Requirements for the components can be seen below:
 | Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                        |
 
-\*Not all Optimize features are supported when using OpenSearch as a database. For a full list of the features that are currently supported, please refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
+\*Not all Optimize features are supported when using OpenSearch as a database, including backups. For a full list of the features that are currently supported, please refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
@@ -134,7 +134,3 @@ From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the ex
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
-
-## Camunda 7 & Optimize version matrix
-
-See https://docs.camunda.org/enterprise/download/#camunda-optimize.
