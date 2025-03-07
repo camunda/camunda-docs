@@ -2,6 +2,15 @@
 id: idp
 title: Intelligent document processing
 description: "Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes."
+keywords:
+  [
+    IDP,
+    idp,
+    "intelligent document processing",
+    "document automation",
+    "document extraction",
+    extraction,
+  ]
 ---
 
 import IdpOverviewImg from './img/idp-overview-diagram.png';
