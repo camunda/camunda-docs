@@ -1,7 +1,7 @@
 ---
 id: manual-tasks
 title: "Manual tasks"
-description: "A manual task defines a task that is external to the BPM engine."
+description: "A manual task defines a task that is external to the workflow engine."
 ---
 
 A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
