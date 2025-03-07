@@ -102,8 +102,9 @@ Once you have added your extraction fields, select an LLM model and test the dat
 1. Repeat the process of creating and evaluating a test case for your other uploaded sample documents.
 1. Once you are ready to validate your data extraction configuration, select the **Validate extraction** tab.
 
-:::tip
+:::note
 
+- Running an extraction creates a "test" process instance. You can view this in [Operate](/components/operate/operate-introduction.md).
 - You will achieve different results using different [extraction models](idp-reference.md#extraction-models). Test different models until you find the one that best suits your budget and accuracy requirements.
 - You can save and overwrite a test case at any time with your latest results.
 
@@ -161,7 +162,7 @@ Publish the document extraction template to make it available for [integration i
 
 Click **Versions** to view and manage your published document extraction template versions.
 
-<img src={IdpVersionsLinkImg} width="800px" alt="Versions link" style={{marginTop: '0'}} />
+<img src={IdpVersionsLinkImg} width="850px" alt="Versions link" style={{marginTop: '0'}} />
 
 ### Compare versions
 
