@@ -2,28 +2,24 @@
 id: 880-announcements
 title: "Announcements"
 description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release."
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
-import AnnouncementsGrid from '../../react-components/\_announcements-card.js';
-import { AnnouncementsCards } from '../../react-components/\_announcements-card-data';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release are summarized below.
 
-[Release notes](/reference/announcements-release-notes/880/880-release-notes.md) now contain all updates for new features and enhancements. Click any of the features below to be re-routed to the release notes.
-
-<AnnouncementsGrid announcements={AnnouncementsCards} />
+[Release notes](/reference/announcements-release-notes/880/880-release-notes.md) now contain all updates for new features and enhancements.
 
 | Scheduled release date | Scheduled end of maintenance | Release notes | Blog |
 | :--------------------- | :--------------------------- | :------------ | :--- |
 | 14 October 2025        | 13 April 2027                | -             | -    |
 
-- [Supported environment changes](#supported-environment-changes)
+- [Changes in supported environments](#changes-in-supported-environments)
   - [Zeebe, Operate, Tasklist, and Identity must run on exact same minor and patch levels](#zeebe-operate-tasklist-and-identity-must-run-on-exact-same-minor-and-patch-levels)
   - [Installation and deployment updates Self-Managed](#installation-and-deployment-updates-self-managed)
     - [Helm charts](#helm-charts)
-- [Breaking changes](#breaking-changes)
+- [Key changes](#key-changes)
   - [API updates SaaSSelf-Managed](#api-updates-saasself-managed)
     - [Deprecated: Operate and Tasklist v1 REST APIs](#deprecated-operate-and-tasklist-v1-rest-apis)
     - [Deprecated: Job-based user tasks querying](#deprecated-job-based-user-tasks-querying)
@@ -33,7 +29,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
   - [Camunda Java client and Camunda Spring SDK](#camunda-java-client-and-camunda-spring-sdk)
     - [Key changes](#key-changes)
 
-## Supported environment changes
+## Changes in supported environments
 
 ### Zeebe, Operate, Tasklist, and Identity must run on exact same minor and patch levels
 
@@ -55,7 +51,7 @@ New migration guides will also be provided to support you when migrating from a 
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
 :::
 
-## Breaking changes
+## Key changes
 
 ### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -122,7 +118,7 @@ The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality 
 
 :::
 
-#### Key changes
+#### Adjustments
 
 | Change                                          | Description                                                                                                                                                                                                                                                                                                        |
 | :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

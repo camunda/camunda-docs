@@ -8,8 +8,8 @@ In this section you will find announcements and release notes for each supported
 
 **Announcements** include:
 
-- Deprecations and breaking changes
-- Supported environments (updates regarding OpenJDK, Spring Boot, Elasticsearch, Keycloak, Amazon OpenSearch, Docker tags, Helm chart versions, etc.)
+- Key changes (for example, deprecations and breaking changes)
+- Changes in supported environments (updates regarding OpenJDK, Spring Boot, Elasticsearch, Keycloak, Amazon OpenSearch, Docker tags, Helm chart versions, etc.)
 
 :::note
 
@@ -21,7 +21,6 @@ The [supported environments page](/reference/supported-environments.md) addition
 **Release notes** include:
 
 - New product features and enhancements
-- Bug fixes
 
 Release notes are separated by minor release pages and include alphas released during the development cycle.
 
@@ -40,7 +39,7 @@ Release notes are separated by minor release pages and include alphas released d
 Camunda Cloud 1.3 is available in the site dropdown, but is unsupported. However, the corresponding Optimize version for Camunda Cloud 1.3, Optimize 3.7, remains supported at this time.
 :::
 
-### Changelogs
+## Changelogs
 
 Technical changelogs for Camunda 8 are available on GitHub:
 

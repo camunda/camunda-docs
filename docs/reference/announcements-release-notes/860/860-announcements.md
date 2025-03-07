@@ -2,7 +2,7 @@
 id: 860-announcements
 title: "Announcements"
 description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.6 release."
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.6 release are summarized below.
@@ -11,7 +11,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 | :------------- | :----------------- | :----------------------------------------------------------------------------------- |
 | 8 October 2024 | 14 April 2026      | [8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md) |
 
-## Supported environment changes
+## Changes in supported environments
 
 ### Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
 
@@ -37,7 +37,7 @@ To configure with Helm, visit the [Self Managed installation documentation](/sel
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
-### Supported environment changes (OpenJDK, Elasticsearch, Amazon OpenSearch)
+### OpenJDK, Elasticsearch, Amazon OpenSearch
 
 Version changes are made to supported environments:
 
@@ -63,7 +63,7 @@ Starting with Camunda 8.6, the Camunda Optimize artifact has been split into two
 
 Make sure to update your Docker configurations accordingly to ensure compatibility.
 
-## Breaking changes
+## Key changes
 
 ### Zeebe Java client will not be developed further
 
@@ -75,7 +75,7 @@ The primary goal of those changes is to enable users to interact with Camunda cl
 The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.6 is officially supported.
 :::
 
-#### Key changes
+#### Adjustments
 
 - **New package structure**:
   - Package `io.camunda.client`: This package contains the new `CamundaClient` and all the features slated for release in version 8.7.

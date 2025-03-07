@@ -2,7 +2,7 @@
 id: 850-announcements
 title: "8.5 - 8.3 Announcements"
 description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.5, 8.4, and 8.3 releases."
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.5, 8.4, and 8.3 releases are summarized below.
@@ -13,7 +13,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 | :----------- | :----------------- | :----------------------------------------------------------------------------------- |
 | 9 April 2024 | 14 October 2025    | [8.5 release notes](/reference/announcements-release-notes/850/850-release-notes.md) |
 
-### Supported environment changes
+### Changes in supported environments
 
 #### Zeebe Go client
 
@@ -43,7 +43,7 @@ This release contains the following limitations:
     - **Description:** Custom OIDC provider support for Console is not supported
     - **Reference:** https://github.com/camunda/issues/issues/784
 
-### Breaking changes
+### Key changes
 
 #### Removal of Web Modeler's beta API
 
@@ -63,7 +63,7 @@ Until a fix is delivered in 8.5.1, workarounds include not deserializing timesta
 | :------------- | :----------------- |
 | 9 January 2024 | 9 July 2025        |
 
-### Supported environment changes
+### Changes in supported environments
 
 #### Versioning changes in Helm chart
 
@@ -109,7 +109,7 @@ This release contains the following limitations:
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
       2. [Disable Connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
-### Breaking changes
+### Key changes
 
 #### Form linking
 
@@ -136,7 +136,7 @@ This will allow the Helm users to use `runAsNonRoot=true` without the need to ex
 | :-------------- | :----------------- |
 | 10 October 2023 | 9 April 2025       |
 
-### Supported environment changes
+### Changes in supported environments
 
 #### Versioning changes in Elasticsearch
 
@@ -151,7 +151,7 @@ and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-plat
 
 Before this change, the Camunda 8 **Helm chart** version only followed the minor version.
 
-### Breaking changes
+### Key changes
 
 #### Data migration
 

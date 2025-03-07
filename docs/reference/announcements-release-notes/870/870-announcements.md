@@ -2,7 +2,7 @@
 id: 870-announcements
 title: "Announcements"
 description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release."
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
@@ -19,20 +19,20 @@ Supported environment changes and breaking changes or deprecations for the Camun
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
-- [Supported environment changes](#supported-environment-changes)
+- [Changes in supported environments](#changes-in-supported-environments)
   - [Identity Keycloak now requires v25 or v26 Self-Managed](#identity-keycloak-now-requires-v25-or-v26-self-managed)
-- [Breaking changes](#breaking-changes)
+- [Key changes](#key-changes)
   - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
   - [Breaking changes in Camunda Process Test](#breaking-changes-in-camunda-process-test)
   - [Deprecated: OpenAPI entities with `integer (int64)` key attributes](#deprecated-openapi-entities-with-integer-int64-key-attributes)
 
-## Supported environment changes
+## Changes in supported environments
 
 ### Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#identity).
 
-## Breaking changes
+## Key changes
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
