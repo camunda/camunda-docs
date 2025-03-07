@@ -32,10 +32,10 @@ You are using Camunda Web Modeler version ≤ 8.3.16, ≤ 8.4.14, ≤ 8.5.15, or
 
 Camunda has provided the following releases which contain the fix:
 
-- [Camunda Web Modeler 8.3.17](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.3.17)
-- [Camunda Web Modeler 8.4.15](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.4.15)
-- [Camunda Web Modeler 8.5.16](https://github.com/camunda/web-modeler/releases/tag/self-managed%2F8.5.16)
-- [Camunda Web Modeler 8.6.8](https://hub.docker.com/layers/camunda/web-modeler-webapp/8.6.8/images/sha256-0d12ad2a751d9cc78de25f7a299320c8b7f7fa68f3b2e80f0c826fee926cb547)
+- Camunda Web Modeler 8.3.17
+- Camunda Web Modeler 8.4.15
+- Camunda Web Modeler 8.5.16
+- Camunda Web Modeler 8.6.8
 
 ### Notice 13
 
