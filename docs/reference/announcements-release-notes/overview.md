@@ -8,8 +8,8 @@ In this section you will find announcements and release notes for each supported
 
 **Announcements** include:
 
-- Key changes (for example, deprecations and breaking changes)
 - Changes in supported environments (updates regarding OpenJDK, Spring Boot, Elasticsearch, Keycloak, Amazon OpenSearch, Docker tags, Helm chart versions, etc.)
+- Key changes (for example, deprecations and breaking changes)
 
 :::note
 
