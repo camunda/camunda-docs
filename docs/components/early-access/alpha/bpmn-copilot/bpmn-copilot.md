@@ -2,7 +2,7 @@
 id: bpmn-copilot
 title: BPMN Copilot
 sidebar_label: Get started
-description: "Using AI, users can now chat with the BPMN Copilot for assistance generating new and functional BPMN process diagrams in Web Modeler based on a process description."
+description: "Using AI, users can now chat with the BPMN Copilot for assistance generating new BPMN process diagrams in Web Modeler based on a process description."
 ---
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
@@ -13,7 +13,7 @@ By using this tool, you agree to Camunda's use of the anonymized input and outpu
 While your latest BPMN diagram will be saved in your account, Camunda does not save your prompts and the resulting BPMN diagrams.
 :::
 
-Using AI, users can now chat with the BPMN Copilot for assistance generating new BPMN process diagrams in [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) based on a process description.
+Using AI, users can now chat with the BPMN Copilot for assistance generating new BPMN process diagrams in [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) based on a process description. They can also ask the BPMN Copilot questions about existing diagrams.
 
 ## Get started
 
@@ -29,8 +29,8 @@ To use the BPMN Copilot in Web Modeler, take the following steps:
 
 ![bpmn copilot chat window](./img/bpmn-copilot-chat.png)
 
-4. In the chat box, enter your prompt. This prompt should be a simple, clear, and concise request describing the BPMN diagram you would like to generate. For example, "Generate a mortgage loan process diagram". Note that more complex requests may take longer to process.
-5. Wait for your diagram to generate; this takes about 50 seconds. Once complete, the Copilot will then respond with an outline of the process it created.
+4. In the chat box, enter your prompt. This prompt should be a simple, clear, and concise request. For example, "Generate a mortgage loan process diagram" or "Explain this process". Note that more complex requests may take longer to process.
+5. Wait for the BPMN Copilot to respond. This takes about 20-50 seconds depending on the prompt. Once complete, the Copilot will then respond with and (if requested) and outline of the process.
 
 :::note
 
@@ -38,7 +38,13 @@ Timeouts may occur at this step if your query is too complex.
 
 :::
 
-### Example prompts
+### Example explanation prompts
+
+- "What does the triangle symbol mean?"
+- "Translate this diagram to plain language so I can create documentation"
+- "What SLA's are defined in this process?"
+
+### Example creation prompts
 
 - "Create an absence request diagram"
 - "Design a process that uses data objects to drive process logic, showing how data influences process flow and decisions"
