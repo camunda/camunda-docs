@@ -54,7 +54,7 @@ To update an existing authorization, click on the **pencil icon** of the relevan
 
 ## User task access restrictions
 
-User task access restrictions allow you to restrict access of user tasks in [Tasklist](/components/tasklist/introduction-to-tasklist.md) to users or groups where they are assignees or candidates.
+You can restrict user task access in [Tasklist](/components/tasklist/introduction-to-tasklist.md) to assigned users or user group candidates.
 
 For example, if a task has a candidate group named `Team A` and a candidate user named `example`, only the users that belong to `Team A` and the user `example` will have access to the task.
 
