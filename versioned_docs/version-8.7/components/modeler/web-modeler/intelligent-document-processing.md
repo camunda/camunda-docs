@@ -36,7 +36,7 @@ IDP is only supported for Camunda 8 SaaS with the 8.7.0-alpha5 release. Support 
 
 ## Get started with IDP
 
-Once configured, you can start using IDP in your processes:
+Once initial [cluster configuration](idp/idp-configuration.md#configure-idp) is complete, you can start using IDP in your processes:
 
 1. Create an [IDP application](idp/idp-applications.md) in which to store and manage a set of related IDP projects.
 

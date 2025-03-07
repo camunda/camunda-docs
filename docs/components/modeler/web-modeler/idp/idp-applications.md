@@ -9,14 +9,14 @@ import IdpApplicationModalImg from './img/idp-application-modal.png';
 
 Create and manage your IDP document extraction templates in an **IDP application**.
 
-<img src={IdpApplicationImg} alt="IDP application screen" />
+<img src={IdpApplicationImg} alt="IDP application screen" style={{marginTop: '0'}} />
 
 ## Create an IDP application
 
 To create an IDP application:
 
 1. In a Web Modeler project, select **Create new** > **IDP application** to open the **Create an IDP application** modal.
-   <img src={IdpApplicationModalImg} alt="IDP application screen" width="550px"/>
+   <img src={IdpApplicationModalImg} alt="IDP application screen" width="550px" style={{marginTop: '0'}} />
    - **Name**: Enter a name for the IDP application.
    - **Select a cluster**: Select the cluster you want to use for modeling and testing your document extraction.
 1. Click **Create** to create the IDP application.
@@ -28,6 +28,7 @@ To create an IDP application:
 :::note
 
 - Camunda recommends using a development (dev) cluster for your IDP applications.
+- You must [configure the required connector secrets](idp-configuration.md#configure-idp) on the selected cluster.
 - You cannot change the selected cluster for the IDP application once it has been created.
 
 :::
@@ -38,6 +39,7 @@ The following requirements and limitations apply to IDP application clusters:
 
 | Requirement/limitation | Description                                                                                                                                                                                                                               |
 | :--------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Connector secrets      | You must [configure the required connector secrets](idp-configuration.md#configure-idp) on the selected cluster.                                                                                                                          |
 | Cluster health         | IDP applications and projects are only fully operational when linked to a healthy, active cluster. You can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster once available. |
 | Document handling      | When creating an IDP application folder, you can only select a cluster that supports [Camunda document handling](/components/concepts/document-handling.md). For example, the cluster must be version 8.7 or higher.                      |
 | Changing cluster       | You cannot change the selected cluster once the IDP application has been created.                                                                                                                                                         |

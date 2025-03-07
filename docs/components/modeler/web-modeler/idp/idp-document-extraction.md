@@ -22,7 +22,7 @@ To create a new document extraction template:
 
 1. In your [IDP application](idp-applications.md), select **Create document extraction template** or **Create new** > **Document extraction**.
 1. Configure the general document extraction template information and select the extraction method.
-   <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="600px"/>
+   <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="600px" style={{marginTop: '0'}} />
 
    - **Name**: Enter a descriptive name for the type of document, such as “Invoice type A” for example.
    - **Description**: Enter a description to provide more detailed information about the document type.
