@@ -20,7 +20,7 @@ Camunda Optimize
 
 #### Impact
 
-The version of Camunda Optimize was affected by a vulnerability that allows a malicious attacker to craft Camunda URLs that could execute JavaScript code.
+Some Camunda Optimize versions were affected by a vulnerability that allowed a malicious attacker to craft Camunda URLs that could execute JavaScript code.
 
 #### How to determine if the installation is affected
 
