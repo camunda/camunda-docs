@@ -29,7 +29,9 @@ To start building a form, log in to your [Camunda 8](https://camunda.io) account
 
 ### Build your form
 
-Now you can start to build your Camunda Form. Right after creating your form, you can name it by replacing the **New Form** text with the name of your choice. In this example, we'll build a form to help with a task in obtaining an email message.
+Now you can start to build your form by dragging elements from the palette to the canvas, or by using the AI Form Generator at the bottom of the palette. For the purpose of this guide, we'll build a form from scratch.
+
+Right after creating your form, you can name it by replacing the **New Form** text with the name of your choice. In this example, we'll build a form to help with a task in obtaining an email message.
 
 ![form email example](./img/form-email-example.png)
 

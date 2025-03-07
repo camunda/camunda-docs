@@ -7,6 +7,10 @@ description: "Let's examine variable and incidents."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+:::note
+This guide includes steps with community-supported [`zbctl`](/apis-tools/community-clients/cli-client/index.md).
+:::
+
 Every process instance created for the [`order-process.bpmn`](/bpmn/operate/order-process.bpmn) process model requires an `orderValue` so the XOR gateway evaluation will happen properly.
 
 Let’s look at a case where `orderValue` is present and was set as a string, but our `order-process.bpmn` model required an integer to properly evaluate the `orderValue` and route the instance.
