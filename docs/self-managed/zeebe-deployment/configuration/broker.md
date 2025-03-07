@@ -174,11 +174,11 @@ network:
 ```yaml
 security:
   enabled: false
-  certificateChainPath:
-  privateKeyPath:
+  certificateChainPath: null
+  privateKeyPath: null
   keyStore:
-    filePath:
-    password:
+    filePath: null
+    password: null
 ```
 
 ### zeebe.broker.network.commandApi

@@ -256,11 +256,11 @@ You can read more about intra-cluster security on [its dedicated page](../securi
 ```yaml
 security:
   enabled: false
-  certificateChainPath:
-  privateKeyPath:
+  certificateChainPath: null
+  privateKeyPath: null
   keyStore:
-    filePath:
-    password:
+    filePath: null
+    password: null
 ```
 
 ### zeebe.gateway.cluster.security.authentication
