@@ -131,7 +131,7 @@ To validate the data extraction:
    - Change the extraction model to try and obtain more accurate results with a different model.
    - Edit your extraction field prompts. Select the three vertical dots on a field to open the actions menu, and select **Edit**.
    - Go back to a previous step and edit your data extraction configuration, or upload more sample documents.
-1. Once you are satisfied with the extraction accuracy and extraction model, publish the project.
+1. Once you are satisfied with the extraction accuracy and extraction model, publish the document extraction template.
 
 ### Publish document extraction template {#publish-template}
 
