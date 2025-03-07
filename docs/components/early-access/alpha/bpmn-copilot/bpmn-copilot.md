@@ -40,9 +40,9 @@ Timeouts may occur at this step if your query is too complex.
 
 ### Example explanation prompts
 
-- "What does the triangle symbol mean?"
 - "Translate this diagram to plain language so I can create documentation"
 - "What SLA's are defined in this process?"
+- "What does the triangle symbol mean?"
 
 ### Example creation prompts
 
