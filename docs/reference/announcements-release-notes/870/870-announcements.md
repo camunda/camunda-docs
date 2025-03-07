@@ -25,6 +25,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
   - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
   - [Breaking changes in Camunda Process Test](#breaking-changes-in-camunda-process-test)
   - [Deprecated: OpenAPI entities with `integer (int64)` key attributes](#deprecated-openapi-entities-with-integer-int64-key-attributes)
+  - [Zeebe Java client will not be developed further](#zeebe-java-client-will-not-be-developed-further)
 
 ## Changes in supported environments
 
@@ -60,3 +61,27 @@ This is part of a transition where API entity keys change from type `integer (in
 See the [overview about API Key Attributes][camunda8-api-overview] for more details.
 
 [camunda8-api-overview]: /versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes
+
+### Zeebe Java client will not be developed further
+
+Starting with 8.8, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
+
+The primary goal of those changes is to enable users to interact with Camunda clusters with one consolidated client rather than multiple. The `CamundaClient` will replace the `ZeebeClient`, offering the same functionality and adding new capabilities.
+
+If you need to continue using the old `ZeebeClient`, you can use the new version 8.8 `CamundaClient` artifact without issues as it still contains the related `ZeebeClient` classes. Those classes are marked as deprecated, so you can easily spot code you need to adjust to the `CamundaClient`.
+
+The old `zeebe-client-java` artifact will be relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact with a future release and recommend using the new one.
+
+:::note
+The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
+:::
+
+#### Adjustments
+
+- **New package structure**:
+  - Package `io.camunda.client`: This package contains the new `CamundaClient` and all the features slated for release in version 8.8.
+- **Properties and environment variables refactoring**:
+  - All old Java client property names will be refactored to more general ones. For instance, `zeebe.client.tenantId` will become `camunda.client.tenantId`.
+  - Similarly, environment variables will be renamed following the same concept: `ZEEBE_REST_ADDRESS` will become `CAMUNDA_REST_ADDRESS`.
+- **Artifact ID change**:
+  - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
