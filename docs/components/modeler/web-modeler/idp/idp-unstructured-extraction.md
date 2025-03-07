@@ -15,6 +15,7 @@ import IdpValidationResultsDetailImg from './img/idp-validation-results-detail.p
 import IdpValidationResultsSummaryImg from './img/idp-summary.png';
 import IdpVersionsImg from './img/idp-versions.png';
 import IdpExtractionModelImg from './img/idp-extraction-model.png';
+import IdpVersionsLinkImg from './img/idp-versions-link.png';
 
 Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
 
@@ -160,7 +161,7 @@ Publish the document extraction template to make it available for [integration i
 
 Click **Versions** to view and manage your published document extraction template versions.
 
-<img src={IdpVersionsImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
+<img src={IdpVersionsLinkImg} width="800px" alt="Versions link" style={{marginTop: '0'}} />
 
 ### Compare versions
 
@@ -169,8 +170,12 @@ You can compare the change history between two template versions as JSON code in
 1. Ensure that the sidebar **Show changes** toggle is turned on.
 1. Select the version that you want to compare. The previous version is automatically selected for comparison.
 
+<img src={IdpVersionsImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
+
 The JSON for the previous version is shown on the left, with the currently selected version shown on the right.
-Differences between the versions are highlighted in the JSON. For example, if an extraction field was added, this change is highlighted in green.
+
+- Differences between the versions are highlighted in the JSON.
+- For example, if an extraction field was added, this change is highlighted in green.
 
 ### Restore a version
 
