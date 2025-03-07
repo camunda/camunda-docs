@@ -1,6 +1,6 @@
 ---
-id: 860
-title: "8.6 Release notes"
+id: 860-release-notes
+title: "Release notes"
 description: "Release notes for 8.6, including alphas"
 keywords:
   [
@@ -18,6 +18,26 @@ These release notes identify the new features included in 8.6, including [alpha 
 | Release date   | End of maintenance | Changelog(s)                                                                                                                                                  | Release blog                                                          | Update guide                                                                            |
 | -------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | 8 October 2024 | 14 April 2026      | - [ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.6.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.6.0) | [Release blog](https://camunda.com/blog/2024/10/camunda-8-6-release/) | [Self-Managed update guide](self-managed/operational-guides/update-guide/850-to-860.md) |
+
+### Flow control enabled by default <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+
+Flow control is now enabled by default in Camunda 8.6 SaaS. This change ensures the cluster is protected from excessive load and can maintain a stable state.
+
+These new configuration defaults are tailored to the cluster size and optimized for a stable performance. However, the cluster might reject requests if the load is too high with this change. The error message for this is `Failed to write client request to partition X, because the write limit is exhausted`. If the error persists, this may be a sign of underlining issues, or a need to adjust the cluster size.
+
+For more information on how to configure flow control for a Self-Managed cluster, visit the [flow control documentation](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md).
+
+### Support for Amazon OpenSearch for Optimize
+
+This release extends the OpenSearch features supported by Optimize. Full support is committed for the 8.8 release.
+
+### Spring Zeebe SDK test support in 8.6.7
+
+[Testing support for the Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
+
+:::note
+This closes the feature gap where the Spring Zeebe SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).
+:::
 
 ### Advanced SaaS offering <span class="badge badge--long" title="This feature affects SaaS">SaaS</span> <span class="badge badge--long" title="This feature affects Console">Console</span>
 

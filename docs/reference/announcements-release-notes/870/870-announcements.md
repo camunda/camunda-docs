@@ -1,16 +1,17 @@
 ---
-id: announcements-870
-title: "8.7 Announcements"
-description: "Important changes and updates for the Camunda 8.7 release including deprecation & removal notices."
+id: 870-announcements
+title: "Announcements"
+description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release."
+toc_max_heading_level: 3
 ---
 
-import DeployDiagramImg from '../img/deploy-diagram-modal.png';
+import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
-Important changes and updates for the Camunda 8.7 release are summarized below.
+Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release are summarized below.
 
-| Scheduled release date | Scheduled end of maintenance | Release notes                                        | Blog                                                                                            |
-| :--------------------- | :--------------------------- | :--------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
-| 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/release-notes/870.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
+| Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                                            |
+| :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
+| 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/) |
 
 <!--- [Ad-hoc subprocesses](#)
 - [Document handling](#)
@@ -18,34 +19,21 @@ Important changes and updates for the Camunda 8.7 release are summarized below.
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
-- [Amazon Web Services (AWS) region support](#amazon-web-services-aws-region-support-saas)
-- [Web Modeler](#web-modeler)
-- [Southeast Asia region for SaaS customers](#southeast-asia-region-for-saas-customers-saas)
-- [Breaking changes in Camunda Process Test](#breaking-changes-in-camunda-process-test)
-- [API updates](#api-updates-saasself-managed)
-- [Identity Keycloak now requires v25 or v26](#identity-keycloak-now-requires-v25-or-v26-self-managed)
+- [Changes in supported environments](#changes-in-supported-environments)
+  - [Identity Keycloak now requires v25 or v26 Self-Managed](#identity-keycloak-now-requires-v25-or-v26-self-managed)
+- [Key changes](#key-changes)
+  - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
+  - [Breaking changes in Camunda Process Test](#breaking-changes-in-camunda-process-test)
+  - [Deprecated: OpenAPI entities with `integer (int64)` key attributes](#deprecated-openapi-entities-with-integer-int64-key-attributes)
+  - [Zeebe Java client will not be developed further](#zeebe-java-client-will-not-be-developed-further)
 
-## Amazon Web Services (AWS) region support <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+## Changes in supported environments
 
-You can choose to host your Camunda 8 SaaS clusters in two new Amazon Web Services (AWS) regions:
+### Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-- Frankfurt, Europe (eu-central-1)
-- North America, Virginia (us-east-1)
+Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#identity).
 
-You can select one of these AWS regions when [creating a new cluster](/components/console/manage-clusters/create-cluster.md). You can continue to choose from our Google Cloud Platform (GCP) region options.
-
-To learn more about available Camunda 8 SaaS regions, see [regions](../regions.md).
-
-:::note
-
-The following limitations currently apply for AWS regions:
-
-- Backups are stored on GCP.
-- HTTP connectors continue to route through GCP.
-
-:::
-
-## Web Modeler
+## Key changes
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
@@ -57,30 +45,13 @@ With this version, we ship a breaking change to how Web Modeler **Deploy diagram
 - In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
 - Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/user-guide/roles/add-assign-role.md) to be able to deploy.
 
-### Milestones renamed to versions {#web-modeler-milestones-renamed-to-versions}
-
-The term "milestones" has been renamed to ["versions"](/components/modeler/web-modeler/versions.md) in Web Modeler for clarity and consistency with other Camunda 8 components. The renaming is implemented across the Web Modeler user interface and the API.
-
-In [the API](/apis-tools/web-modeler-api/index.md), new endpoints starting with `/api/v1/versions` have been introduced, while the previous `/api/v1/milestones` endpoints are now deprecated.
-Further details can be found in [Web Modeler's OpenAPI documentation](https://modeler.camunda.io/swagger-ui/index.html).
-
-:::note
-This is a nominal update and the functionality of versions and milestones is equivalent.
-:::
-
-## Southeast Asia region for SaaS customers <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
-
-SaaS customers can now create orchestration clusters in the [Singapore (asia-southeast1) region](/reference/regions.md), ensuring lower latency and improved processing speed for organizations operating in southeast Asian countries.
-
-## Breaking changes in Camunda Process Test
+### Breaking changes in Camunda Process Test
 
 In version 8.6, the element assertions use names to identify the BPMN elements. Starting with version 8.7, the [element assertions](/apis-tools/testing/assertions.md#with-bpmn-element-id) use BPMN element IDs instead of names. This change eases the migration of previous testing frameworks and aligns with other APIs.
 
 If you prefer to stay with element names, you can use the new [element selector](/apis-tools/testing/assertions.md#with-element-selector) `io.camunda.process.test.api.assertions.ElementSelectors#byName`.
 
 To migrate all your test cases at once, change the [default element selector](/apis-tools/testing/assertions.md#element-selector) in the configuration.
-
-## API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 ### Deprecated: OpenAPI entities with `integer (int64)` key attributes
 
@@ -91,11 +62,7 @@ See the [overview about API Key Attributes][camunda8-api-overview] for more deta
 
 [camunda8-api-overview]: /versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes
 
-## Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#identity).
-
-## Zeebe Java client
+### Zeebe Java client will not be developed further
 
 Starting with 8.8, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
@@ -109,7 +76,7 @@ The old `zeebe-client-java` artifact will be relocation-only, so your build syst
 The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.7 is officially supported.
 :::
 
-### Key changes
+#### Adjustments
 
 - **New package structure**:
   - Package `io.camunda.client`: This package contains the new `CamundaClient` and all the features slated for release in version 8.8.
