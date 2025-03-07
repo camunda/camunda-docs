@@ -77,34 +77,34 @@ global:
       jwksUrl: <JWKS_URL>
       type: "GENERIC"
       identity:
-        clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 2>
-        audience: <Audience from Step 2>
+        clientId: <Client ID from Step 3>
+        existingSecret: <Client secret from Step 3>
+        audience: <Audience from Step 3>
         initialClaimName: <Initial claim name if not using the default "oid">
         initialClaimValue: <Initial claim value>
       operate:
-        clientId: <Client ID from Step 2>
-        audience: <Audience from Step 2>
-        existingSecret: <Client secret from Step 2>
+        clientId: <Client ID from Step 3>
+        audience: <Audience from Step 3>
+        existingSecret: <Client secret from Step 3>
       tasklist:
-        clientId: <Client ID from Step 2>
-        audience: <Audience from Step 2>
-        existingSecret: <Client secret from Step 2>
+        clientId: <Client ID from Step 3>
+        audience: <Audience from Step 3>
+        existingSecret: <Client secret from Step 3>
       optimize:
-        clientId: <Client ID from Step 2>
-        audience: <Audience from Step 2>
-        existingSecret: <Client secret from Step 2>
+        clientId: <Client ID from Step 3>
+        audience: <Audience from Step 3>
+        existingSecret: <Client secret from Step 3>
       zeebe:
-        clientId: <Client ID from Step 2>
-        audience: <Audience from Step 2>
-        existingSecret: <Client secret from Step 2>
+        clientId: <Client ID from Step 3>
+        audience: <Audience from Step 3>
+        existingSecret: <Client secret from Step 3>
       webModeler:
-        clientId: <Client ID from Step 2>
-        clientApiAudience: <Audience from Step 2>
+        clientId: <Client ID from Step 3>
+        clientApiAudience: <Audience from Step 3>
         publicApiAudience: <Audience for using Web Modeler's API. For security reasons, use a different value than for clientApiAudience>
       console:
-        clientId: <Client ID from Step 2>
-        audience: <Audience from Step 2>
+        clientId: <Client ID from Step 3>
+        audience: <Audience from Step 3>
 ```
 
 </TabItem>
