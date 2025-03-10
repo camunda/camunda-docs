@@ -5,7 +5,7 @@ description: "Learn how to create your first script, test your script, and autom
 ---
 
 :::note
-New to RPA? Visit the [overview page](/components/rpa/overview.md) to get familiar with Robotic Process Automation (RPA) capabilities.
+New to RPA? Visit the [overview page](/components/RPA/overview.md) to get familiar with Robotic Process Automation (RPA) capabilities.
 :::
 
 ### Create your first script
