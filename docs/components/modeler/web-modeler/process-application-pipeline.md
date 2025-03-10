@@ -6,6 +6,8 @@ description: You can use Web Modeler to quickly develop and progress low-risk pr
 
 import DeployProcessApplicationDiagramImg from './img/process-applications/diagram-process-application-pipeline.png'
 import DeployStagesImg from './img/process-applications/define-stages.png'
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 You can use Web Modeler to quickly develop and progress low-risk process application releases through the stages of a typical development lifecycle.
 
@@ -61,18 +63,18 @@ When your process application is ready for validation you can deploy it to your 
 - Validate that all files and resources are correctly deployed.
 
 :::note
-Play is being rebuilt and progressively rolled out to more users. See [Play limitations and availability](/docs/components/modeler/web-modeler/play-your-process.md#limitations-and-availability) for Play limitations and why you might not see the **Play** tab.
+Play is being rebuilt and progressively rolled out to more users. See [Play limitations and availability](/components/modeler/web-modeler/play-your-process.md#limitations-and-availability) for Play limitations and why you might not see the **Play** tab.
 :::
 
 ## Review
 
-After validation is complete, you can create a new version of your process application and request a review:
+After validation is complete, you can [create a new version of your process application](/components/modeler/web-modeler/process-application-versioning.md#create-a-bulk-version) and request a review:
 
 1. Use [process application versioning](process-application-versioning.md) to create a version for all files in the process application. You can [compare versions](/components/modeler/web-modeler/versions.md#compare-versions) to visually review changes between two versions of a BPMN file, or view code changes for other files.
 2. Request a review for the newest version of the process application from the version history page of the process application. Collaborators with edit permission in your project will see a notification on the process diagram page once you have requested a review.
 3. Reviewers can view the changes, comment, request changes, or approve the process application version.
 4. After a user has submitted their review, the process application version is marked as reviewed and the review status is shown in the version history.
-   1. Users can go back and edit the review at any point in time to update their assessment.
+   1. Any user with edit permissions can go back and edit the review at any point in time to update the assessment.
    2. Any changes to the review status of a version are logged in the comment section of the main process diagram.
 5. If the reviewer has marked the version with "changes requested", you can address the feedback by performing the requested changes, creating a new version, and requesting a review for the new version.
 
@@ -91,11 +93,18 @@ After the review is complete, you can promote the versioned process application 
 If you want to use your own deployment pipeline after the review is complete, you can use [Git Sync](git-sync.md) at this point to deploy and promote the process application through your own pipeline.
 :::
 
+### Deployment policy
+
+By default, only organization administrators can deploy process applications to the `prod` tagged clusters.
+Organization administrators can change this policy in the [process application deployment settings](/components/modeler/web-modeler/web-modeler-settings.md#process-application-deployment).
+
+From these settings, you can enable non-admin users with deployment permissions to deploy process applications to prod after a collaborator has approved the process app version using the [process application version review](process-application-pipeline.md#review).
+
 ## Process governance
 
 The Web Modeler development lifecycle provides the following process governance:
 
-| Governance         | Description                                                                                                                                                                                                                                                                                                                                     |
-| :----------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Change control     | Users can announce a review is complete by adding a comment to the main process diagram. Governance is not enforceable, and comments can be deleted.                                                                                                                                                                                            |
-| Deployment control | <p><ul><li><p>Deployments can only be made to the pre-defined set of approved clusters.</p></li><li>Only users with correct privileges can deploy, and only organization administrators can deploy to `prod` tagged clusters.</li><li>Each deployment action is logged with information on the user and stage it was deployed to.</li></ul></p> |
+| Governance         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Change control     | Reviews cannot be performed by the user who created the process application version unless the user is an organization administrator. Reviews can be edited, but changes will be logged in the comment thread of the main process.                                                                                                                                                                                                               |
+| Deployment control | <p><ul><li><p>Deployments can only be made to the pre-defined set of approved clusters.</p></li><li>Only users with correct privileges can deploy. Depending on the [deployment settings](/#deployment-settings), organization administrators can deploy to `prod` tagged clusters, or only approved versions can be deployed.</li><li>Each deployment action is logged with information on the user and stage it was deployed to.</li></ul></p> |

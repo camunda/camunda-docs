@@ -1,0 +1,493 @@
+---
+id: get-incident-by-key-alpha
+title: "Get incident by key (alpha)"
+description: "Returns incident as JSON."
+sidebar_label: "Get incident by key (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get incident by key (alpha)"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/incidents/{incidentKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns incident as JSON.
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+for further details.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "incidentKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the incident, which acts as a unique identifier for this incident.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The incident is successfully returned.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for IncidentItem",
+                type: "object",
+                properties: {
+                  processDefinitionId: {
+                    type: "string",
+                    description:
+                      "The bpmn process id associated to this incident.",
+                  },
+                  errorType: {
+                    type: "string",
+                    description:
+                      "Incident error type with a defined set of values.",
+                    enum: [
+                      "UNSPECIFIED",
+                      "UNKNOWN",
+                      "IO_MAPPING_ERROR",
+                      "JOB_NO_RETRIES",
+                      "CONDITION_ERROR",
+                      "EXTRACT_VALUE_ERROR",
+                      "CALLED_ELEMENT_ERROR",
+                      "UNHANDLED_ERROR_EVENT",
+                      "MESSAGE_SIZE_EXCEEDED",
+                      "CALLED_DECISION_ERROR",
+                      "DECISION_EVALUATION_ERROR",
+                      "FORM_NOT_FOUND",
+                    ],
+                  },
+                  errorMessage: {
+                    type: "string",
+                    description:
+                      "Error message which describes the error in more detail.",
+                  },
+                  flowNodeId: {
+                    type: "string",
+                    description:
+                      "The flow node id associated to this incident.",
+                  },
+                  creationTime: {
+                    type: "string",
+                    description: "Date of incident creation.",
+                    format: "date-time",
+                  },
+                  state: {
+                    type: "string",
+                    description:
+                      "State of this incident with a defined set of values.",
+                    enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                  },
+                  treePath: {
+                    type: "string",
+                    description:
+                      "The path from process instance via flow node ids and flow node instance keys leading to this incident.",
+                  },
+                  tenantId: {
+                    description: "The tenant id of the incident.",
+                    type: "string",
+                  },
+                },
+                title: "IncidentItemBase",
+              },
+            ],
+            properties: {
+              key: {
+                type: "string",
+                description:
+                  "The assigned key, which acts as a unique identifier for this incident.",
+              },
+              processDefinitionKey: {
+                type: "string",
+                description:
+                  "The process definition key associated to this incident.",
+              },
+              processInstanceKey: {
+                type: "string",
+                description:
+                  "The process instance key associated to this incident.",
+              },
+              flowNodeInstanceKey: {
+                type: "string",
+                description:
+                  "The flow node instance key associated to this incident.",
+              },
+              jobKey: {
+                type: "string",
+                description:
+                  "The job key, if exists, associated with this incident.",
+              },
+            },
+            title: "IncidentResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for IncidentItem",
+                type: "object",
+                properties: {
+                  processDefinitionId: {
+                    type: "string",
+                    description:
+                      "The bpmn process id associated to this incident.",
+                  },
+                  errorType: {
+                    type: "string",
+                    description:
+                      "Incident error type with a defined set of values.",
+                    enum: [
+                      "UNSPECIFIED",
+                      "UNKNOWN",
+                      "IO_MAPPING_ERROR",
+                      "JOB_NO_RETRIES",
+                      "CONDITION_ERROR",
+                      "EXTRACT_VALUE_ERROR",
+                      "CALLED_ELEMENT_ERROR",
+                      "UNHANDLED_ERROR_EVENT",
+                      "MESSAGE_SIZE_EXCEEDED",
+                      "CALLED_DECISION_ERROR",
+                      "DECISION_EVALUATION_ERROR",
+                      "FORM_NOT_FOUND",
+                    ],
+                  },
+                  errorMessage: {
+                    type: "string",
+                    description:
+                      "Error message which describes the error in more detail.",
+                  },
+                  flowNodeId: {
+                    type: "string",
+                    description:
+                      "The flow node id associated to this incident.",
+                  },
+                  creationTime: {
+                    type: "string",
+                    description: "Date of incident creation.",
+                    format: "date-time",
+                  },
+                  state: {
+                    type: "string",
+                    description:
+                      "State of this incident with a defined set of values.",
+                    enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                  },
+                  treePath: {
+                    type: "string",
+                    description:
+                      "The path from process instance via flow node ids and flow node instance keys leading to this incident.",
+                  },
+                  tenantId: {
+                    description: "The tenant id of the incident.",
+                    type: "string",
+                  },
+                },
+                title: "IncidentItemBase",
+              },
+            ],
+            properties: {
+              key: {
+                type: "integer",
+                format: "int64",
+                description:
+                  "The assigned key, which acts as a unique identifier for this incident.",
+              },
+              processDefinitionKey: {
+                type: "integer",
+                format: "int64",
+                description:
+                  "The process definition key associated to this incident.",
+              },
+              processInstanceKey: {
+                type: "integer",
+                format: "int64",
+                description:
+                  "The process instance key associated to this incident.",
+              },
+              flowNodeInstanceKey: {
+                type: "integer",
+                format: "int64",
+                description:
+                  "The flow node instance key associated to this incident.",
+              },
+              jobKey: {
+                type: "integer",
+                description:
+                  "The job key, if exists, associated with this incident.",
+                format: "int64",
+              },
+            },
+            title: "IncidentItem",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                description: "Base properties for IncidentItem",
+                type: "object",
+                properties: {
+                  processDefinitionId: {
+                    type: "string",
+                    description:
+                      "The bpmn process id associated to this incident.",
+                  },
+                  errorType: {
+                    type: "string",
+                    description:
+                      "Incident error type with a defined set of values.",
+                    enum: [
+                      "UNSPECIFIED",
+                      "UNKNOWN",
+                      "IO_MAPPING_ERROR",
+                      "JOB_NO_RETRIES",
+                      "CONDITION_ERROR",
+                      "EXTRACT_VALUE_ERROR",
+                      "CALLED_ELEMENT_ERROR",
+                      "UNHANDLED_ERROR_EVENT",
+                      "MESSAGE_SIZE_EXCEEDED",
+                      "CALLED_DECISION_ERROR",
+                      "DECISION_EVALUATION_ERROR",
+                      "FORM_NOT_FOUND",
+                    ],
+                  },
+                  errorMessage: {
+                    type: "string",
+                    description:
+                      "Error message which describes the error in more detail.",
+                  },
+                  flowNodeId: {
+                    type: "string",
+                    description:
+                      "The flow node id associated to this incident.",
+                  },
+                  creationTime: {
+                    type: "string",
+                    description: "Date of incident creation.",
+                    format: "date-time",
+                  },
+                  state: {
+                    type: "string",
+                    description:
+                      "State of this incident with a defined set of values.",
+                    enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                  },
+                  treePath: {
+                    type: "string",
+                    description:
+                      "The path from process instance via flow node ids and flow node instance keys leading to this incident.",
+                  },
+                  tenantId: {
+                    description: "The tenant id of the incident.",
+                    type: "string",
+                  },
+                },
+                title: "IncidentItemBase",
+              },
+            ],
+            properties: {
+              key: {
+                type: "string",
+                description:
+                  "The assigned key, which acts as a unique identifier for this incident.",
+              },
+              processDefinitionKey: {
+                type: "string",
+                description:
+                  "The process definition key associated to this incident.",
+              },
+              processInstanceKey: {
+                type: "string",
+                description:
+                  "The process instance key associated to this incident.",
+              },
+              flowNodeInstanceKey: {
+                type: "string",
+                description:
+                  "The flow node instance key associated to this incident.",
+              },
+              jobKey: {
+                type: "string",
+                description:
+                  "The job key, if exists, associated with this incident.",
+              },
+            },
+            title: "IncidentResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The incident Get failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The incident with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

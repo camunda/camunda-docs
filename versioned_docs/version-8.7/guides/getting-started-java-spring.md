@@ -119,7 +119,7 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-    <version>8.6.x</version>
+    <version>8.7.x</version>
 </dependency>
 ```
 
@@ -136,6 +136,10 @@ camunda:
       grpc-address: http://127.0.0.1:26500
       rest-address: http://127.0.0.1:8080
 ```
+
+:::note
+Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+:::
 
 ### Create a worker
 

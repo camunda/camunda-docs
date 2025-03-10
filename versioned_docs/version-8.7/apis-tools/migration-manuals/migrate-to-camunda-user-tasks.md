@@ -239,7 +239,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/find-user-tasks">
+            <a href="../../camunda-api-rest/specifications/query-user-tasks-alpha">
                 <code>POST /user-tasks/search</code>
             </a>
         </td>
@@ -251,11 +251,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
                 <code>GET /tasks/:taskId</code>
             </a>
         </td>
-        <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task">
-                <code>GET /user-tasks/:userTaskKey</code>
-            </a>
-        </td>
+        <td style={{color: "gray"}}>-</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Retrieve task variables</th>
@@ -277,11 +273,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
                 <code>GET /forms/:formId</code>
             </a>
         </td>
-        <td>
-            <a href="../../camunda-api-rest/specifications/get-user-task-form">
-                <code>GET /user-tasks/:userTaskKey/form</code>
-            </a>
-        </td>
+        <td style={{color: "gray"}}>-</td>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Assign a task</th>
@@ -355,13 +347,13 @@ Refer to the dedicated sections and API explorers to learn details about the API
 <DocCardList items={[
 {
 type:"link",
-href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
+href:"/docs/8.7/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
 label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
 type:"link",
-href:"/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/",
+href:"/docs/8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview/",
 label: "Camunda 8 API (REST)",
 docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 }

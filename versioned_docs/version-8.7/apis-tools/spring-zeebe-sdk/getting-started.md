@@ -8,10 +8,10 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 ## Version compatibility
 
-| Zeebe Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| Spring Zeebe SDK version | JDK  | Camunda version | Bundled Spring Boot version |
 | ------------------------ | ---- | --------------- | --------------------------- |
-| 8.5.x                    | ≥ 17 | 8.5.x           | 3.2.x                       |
 | 8.6.x                    | ≥ 17 | 8.6.x           | 3.3.x                       |
+| 8.7.x                    | ≥ 17 | 8.7.x           | 3.4.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 
@@ -21,13 +21,13 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-    <version>8.6.x</version>
+    <version>8.7.x</version>
 </dependency>
 ```
 
 ## Enable the Java Compiler `-parameters`-flag
 
-If you don't want to specify annotation values just as the process variable name on the [variable](#using-variable) annotation, the Java compiler flag `-parameters` is required.
+If you don't want to specify annotation values just as the process variable name on the [variable](configuration.md#using-variable) annotation, the Java compiler flag `-parameters` is required.
 
 If you are using Maven you can enable this with the Compiler plugin:
 
@@ -165,4 +165,4 @@ See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration
 
 ## Writing test cases
 
-To learn more about writing test cases using Zeebe Process Test, see [Zeebe Spring SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).
+To learn more about writing test cases using Zeebe Process Test, see [Spring Zeebe SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).

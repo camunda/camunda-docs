@@ -13,7 +13,7 @@ Camunda 8 release notes include notable new and improved features, enhancements,
 | 8.3                                    | 10 October 2023 | 9 April 2025                 | - [ Camunda Platform ](https://github.com/camunda/camunda-platform/releases/tag/8.3.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.3.0) | [Release blog](https://camunda.com/blog/2023/10/camunda-8-3-scaling-automation-maximize-value/)                  |
 | 8.2                                    | 11 April 2023   | 8 October 2024               | - [ Camunda Platform ](https://github.com/camunda/camunda-platform/releases/tag/8.2.0) <br /> - [ Connectors ](https://github.com/camunda/connectors/releases/tag/8.2.0) | [Release blog](https://camunda.com/blog/2023/04/camunda-platform-8-2-key-to-scaling-automation/)                 |
 
-_ While Camunda Cloud 1.3 is available in the site dropdown, it is unsupported. However, the corresponding Optimize version for Camunda Cloud 1.3, Optimize 3.7, remains supported at this time. _
+_While Camunda Cloud 1.3 is available in the site dropdown, it is unsupported. However, the corresponding Optimize version for Camunda Cloud 1.3, Optimize 3.7, remains supported at this time._
 
 ## Changelogs
 

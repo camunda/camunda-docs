@@ -104,7 +104,6 @@ Some configuration properties are optional and have default values. See a descri
 | CAMUNDA_OPTIMIZE_ELASTICSEARCH_SECURITY_PASSWORD \*     | The password for authentication in environments where a secured Elasticsearch connection is configured.                                                                                    |
 | CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_USERNAME\*\*       | The username for authentication in environments where a secured OpenSearch connection is configured.                                                                                       |
 | CAMUNDA_OPTIMIZE_OPENSEARCH_SECURITY_PASSWORD\*\*       | The password for authentication in environments where a secured OpenSearch connection is configured.                                                                                       |
-| CAMUNDA_OPTIMIZE_ENTERPRISE                             | This should only be set to `true` if an Enterprise License has been acquired.                                                                                                              | true          |
 | CAMUNDA_OPTIMIZE_ZEEBE_ENABLED                          | Enables import of Zeebe data in Optimize.                                                                                                                                                  | false         |
 | CAMUNDA_OPTIMIZE_ZEEBE_NAME                             | The record prefix for exported Zeebe records.                                                                                                                                              | zeebe-record  |
 | CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT                  | The number of partitions configured in Zeebe.                                                                                                                                              | 1             |
@@ -138,7 +137,6 @@ optimize:
         - OPTIMIZE_ELASTICSEARCH_HOST=localhost
         - OPTIMIZE_ELASTICSEARCH_HTTP_PORT=9200
         - CAMUNDA_OPTIMIZE_SECURITY_AUTH_COOKIE_SAME_SITE_ENABLED=false
-        - CAMUNDA_OPTIMIZE_ENTERPRISE=false
         - CAMUNDA_OPTIMIZE_ZEEBE_ENABLED=true
         - CAMUNDA_OPTIMIZE_ZEEBE_NAME=zeebe-record
         - CAMUNDA_OPTIMIZE_ZEEBE_PARTITION_COUNT=1

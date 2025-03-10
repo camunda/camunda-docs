@@ -1,5 +1,5 @@
 extends: substitution
-message: "Non-inclusive terminology used. Review the WCoE for using inclusive language."
+message: "Non-inclusive terminology used. Use `%s` instead of `%s`. Review the WCoE for using inclusive language - https://confluence.camunda.com/x/VYNBCw ."
 level: error
 ignorecase: true
 swap:

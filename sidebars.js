@@ -46,13 +46,19 @@ module.exports = {
       ],
     },
     {
-      "Migrate from Camunda 7": [
-        "guides/migrating-from-camunda-7/index",
+      type: "category",
+      label: "Migrate from Camunda 7",
+      link: {
+        type: "doc",
+        id: "guides/migrating-from-camunda-7/index",
+      },
+      items: [
+        "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-tooling",
+        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-7/adjusting-source-code",
+        "guides/migrating-from-camunda-7/technical-details",
       ],
     },
   ],
@@ -175,6 +181,34 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
+            {
+              type: "category",
+              label: "Intelligent document processing",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp",
+              },
+              items: [
+                "components/modeler/web-modeler/idp/idp-configuration",
+                "components/modeler/web-modeler/idp/idp-applications",
+                {
+                  type: "category",
+                  label: "Document extraction",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-document-extraction",
+                  },
+                  items: [
+                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
+                    "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                  ],
+                },
+                // "components/modeler/web-modeler/idp/idp-document-automation",
+                "components/modeler/web-modeler/idp/idp-integrate",
+                "components/modeler/web-modeler/idp/idp-key-concepts",
+                "components/modeler/web-modeler/idp/idp-reference",
+              ],
+            },
             "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
@@ -193,6 +227,8 @@ module.exports = {
               ],
             },
             "components/modeler/web-modeler/file-download",
+            "components/modeler/web-modeler/web-modeler-settings",
+            "components/modeler/web-modeler/process-landscape-visualization",
           ],
         },
         {
@@ -740,7 +776,6 @@ module.exports = {
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
-        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
@@ -822,12 +857,69 @@ module.exports = {
             ),
           ],
         },
-        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+            require("./docs/apis-tools/operate-api/sidebar-schema"),
+            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
+            {
+              "Zeebe API (REST)": [
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication",
+                "apis-tools/zeebe-api-rest/zeebe-api-tutorial",
+                {
+                  Specifications: [
+                    {
+                      type: "doc",
+                      id: "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api",
+                    },
+                    {
+                      type: "category",
+                      label: "Cluster",
+                      items: [
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/get-cluster-topology",
+                          label: "Get cluster topology",
+                          className: "api-method get",
+                        },
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "User task",
+                      items: [
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/complete-a-user-task",
+                          label: "Complete a user task",
+                          className: "api-method post",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/assign-a-user-task",
+                          label: "Assign a user task",
+                          className: "api-method post",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/update-a-user-task",
+                          label: "Update a user task",
+                          className: "api-method patch",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task",
+                          label: "Unassign a user task",
+                          className: "api-method delete",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -850,6 +942,7 @@ module.exports = {
             {
               "Java client": [
                 "apis-tools/java-client/index",
+                "apis-tools/java-client/authentication",
                 "apis-tools/java-client/job-worker",
                 "apis-tools/java-client/logging",
                 "apis-tools/java-client/zeebe-process-test",
@@ -871,21 +964,6 @@ module.exports = {
             {
               "Community clients": [
                 "apis-tools/community-clients/index",
-                {
-                  "Zeebe clients": [
-                    {
-                      "CLI client": [
-                        "apis-tools/community-clients/cli-client/index",
-                        "apis-tools/community-clients/cli-client/cli-get-started",
-                      ],
-                      "Go client": [
-                        "apis-tools/community-clients/go-client/index",
-                        "apis-tools/community-clients/go-client/go-get-started",
-                        "apis-tools/community-clients/go-client/job-worker",
-                      ],
-                    },
-                  ],
-                },
                 "apis-tools/build-your-own-client",
               ],
             },
@@ -924,6 +1002,7 @@ module.exports = {
         id: "reference/announcements",
       },
       items: [
+        "reference/announcements/announcements-880",
         "reference/announcements/announcements-870",
         "reference/announcements/announcements-860",
         "reference/announcements/announcements-850",
@@ -1064,7 +1143,8 @@ module.exports = {
     {
       "Reference architecture": [
         "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual",
+        "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/manual",
       ],
     },
     {
@@ -1077,6 +1157,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/870-to-880",
             "self-managed/operational-guides/update-guide/860-to-870",
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",

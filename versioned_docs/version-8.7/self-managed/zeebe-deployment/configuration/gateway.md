@@ -247,6 +247,9 @@ You can read more about intra-cluster security on [its dedicated page](../securi
 | enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED`. | false         |
 | certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH`.                       |               |
 | privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH`.                          |               |
+| keyStore             | Configures the keystore file containing both the certificate chain and the private key; currently only supports PKCS12 format.                                                                                |               |
+| keyStore.filePath    | The path for keystore file; This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_KEYSTORE_FILEPATH`.                                                            | /path/key.pem |
+| keyStore.password    | Sets the password for the keystore file, if not set it is assumed there is no password; This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_CLUSTER_SECURITY_KEYSTORE_PASSWORD` | changeme      |
 
 #### YAML snippet
 
@@ -255,6 +258,9 @@ security:
   enabled: false
   certificateChainPath: null
   privateKeyPath: null
+  keyStore:
+    filePath: null
+    password: null
 ```
 
 ### zeebe.gateway.cluster.security.authentication
@@ -275,7 +281,7 @@ security:
 
 :::note
 The Zeebe configuration properties for Camunda Identity are deprecated as of version `8.4.0`. Use the dedicated
-Camunda Identity properties or the [corresponding environment variables](../../identity/deployment/configuration-variables.md#core-configuration).
+Camunda Identity properties or the [corresponding SDK environment variables](../../identity/deployment/configuration-variables.md#camunda-identity-sdk-configuration).
 :::
 
 | Field            | Description                                                                                                                                                                                          | Example value                                     |

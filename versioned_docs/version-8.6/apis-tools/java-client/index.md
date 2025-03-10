@@ -5,11 +5,6 @@ sidebar_label: "Quick reference"
 description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more."
 ---
 
-:::info
-Starting with 8.7, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
-For more information, visit [announcements](../../reference/announcements.md#zeebe-java-client).
-:::
-
 ## Dependencies
 
 To use the Java client library, declare the following Maven dependency in your project:
@@ -35,7 +30,7 @@ Use the latest released version from [Maven Central](https://search.maven.org/ar
 In Java code, instantiate the client as follows:
 
 ```java
-  private static final String zeebeGrpc = "[Zeebe Address e.g. f887f1a6-7c2b-48ce-809a-e11e5a6ba31a.dsm-1.zeebe.camunda.io:443]";
+  private static final String zeebeGrpc = "[Zeebe Address e.g. grpcs://f887f1a6-7c2b-48ce-809a-e11e5a6ba31a.dsm-1.zeebe.camunda.io:443]";
   private static final String zeebeRest = "[Zeebe Address e.g. https://dsm-1.zeebe.camunda.io/f887f1a6-7c2b-48ce-809a-e11e5a6ba31a]";
   private static final String audience = "[Zeebe Token Audience, e.g., zeebe.camunda.io]";
   private static final String clientId = "[Client ID, e.g., FmT7K8gVv_FcwiUhc8U-fAJ9wph0Kn~P]";
@@ -91,6 +86,10 @@ ZeebeClient client =
         .restAddress(System.getenv("ZEEBE_REST_ADDRESS"))
         .build();
 ```
+
+:::note
+Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+:::
 
 ## Javadoc
 

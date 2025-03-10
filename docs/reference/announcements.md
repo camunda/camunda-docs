@@ -6,6 +6,27 @@ description: "Important announcements for upcoming and past Camunda 8 releases t
 
 Important changes and updates for Camunda 8 releases that customers should be aware of, including deprecation & removal notices.
 
+## Camunda 8.8
+
+Camunda 8.8 is scheduled for release on 14 October 2025.
+
+<div class="double-column-container">
+<div class="double-column-left">
+
+**[8.8 Announcements](/reference/announcements/880.md)**
+
+</div>
+<div class="double-column-right">
+
+- [API updates](/reference/announcements/880.md#api-updates-saasself-managed)
+- [Identity management updates](/reference/announcements/880.md#identity-management-updates-saasself-managed)
+- [Installation and deployment updates](/reference/announcements/880.md#installation-and-deployment-updates-self-managed)
+- [Camunda Exporter](/reference/announcements/880.md#camunda-exporter-self-managed)
+- [Camunda Java client and Camunda Spring SDK](/reference/announcements/880.md#camunda-java-client-and-camunda-spring-sdk-self-managed)
+
+</div>
+</div>
+
 ## Camunda 8.7
 
 Camunda 8.7 is scheduled for release on 8 April 2025.
@@ -25,8 +46,11 @@ Camunda 8.7 is scheduled for release on 8 April 2025.
   - [deployResourceAPI for RPA](#) -->
 
 - [Amazon Web Services (AWS) region support](/reference/announcements/870.md#amazon-web-services-aws-region-support-saas)
-- [Web Modeler Deploy diagram change](/reference/announcements/870.md#web-modeler-deploy-diagram-change)
-- [Southwest Asia for SaaS region](/reference/announcements/870.md#southeast-asia-region-for-saas-customers-saas)
+- [Web Modeler](/reference/announcements/870.md#web-modeler)
+- [Southeast Asia region for SaaS customers](/reference/announcements/870.md#southeast-asia-region-for-saas-customers-saas)
+- [Breaking changes in Camunda Process Test](/reference/announcements/870.md#breaking-changes-in-camunda-process-test)
+- [API updates](/reference/announcements/870.md#api-updates-saasself-managed)
+- [Identity Keycloak now requires v25 or v26](/reference/announcements/870.md#identity-keycloak-now-requires-v25-or-v26-self-managed)
 
 </div>
 </div>
