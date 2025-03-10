@@ -4,7 +4,7 @@ title: Setting up RPA for production deployments
 description: "Understand the specific configuration of your RPA runner to set up your workers for production use cases."
 ---
 
-This article covers the specific configuration of your RPA runner. For the basic getting started guide, check the
+This article covers the specific configuration of your RPA runner. For the basics on getting started, visit the
 [getting started guide](./getting-started.md).
 
 ## Using secrets

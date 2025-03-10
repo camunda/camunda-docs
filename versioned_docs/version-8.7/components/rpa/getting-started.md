@@ -13,12 +13,12 @@ New to RPA? Visit the [overview page](/components/rpa/overview.md) to get famili
 <!-- TODO(marstamm): The modeler flag is only required in the alpha releases. Remove this caution for 8.7 minor relase -->
 
 :::caution
-In Camunda Modeler 5.33.1, the RPA editor is enabled only if the `--no-disable-rpa` flag is set. Check out the [Modeler Documentation](/components/modeler/desktop-modeler/flags/flags.md) to learn about setting flags.
+In Camunda Modeler 5.33.1, the RPA editor is enabled only if the `--no-disable-rpa` flag is set. Visit the [Modeler documentation](/components/modeler/desktop-modeler/flags/flags.md) to learn about setting flags.
 :::
 To get started with RPA, you first need to write an RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts:
 
 1. **Download Camunda Modeler**: Download the latest version of Camunda Modeler from the [Camunda website](https://camunda.com/download/modeler/). As RPA scripts are run locally on your machine, the RPA editor is only available in [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
-2. **Open the RPA script editor**: Open Camunda Modeler and navigate to the RPA script editor under **Testing**.
+2. **Open the RPA script editor**: Open Desktop Modeler and navigate to the RPA script editor under **Testing**.
    ![A screenshot of the RPA Editor in the Camunda Modeler](img/rpa-editor-initial.png)
 3. **Start writing your RPA script using Robot Framework**: Use the interface provided to write your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
 
