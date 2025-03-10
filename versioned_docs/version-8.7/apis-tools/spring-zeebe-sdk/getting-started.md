@@ -107,8 +107,7 @@ If you have different endpoints for your applications or want to disable a clien
 camunda:
   client:
     mode: self-managed
-    tenant-ids:
-      - <default>
+    tenant-id: <default>
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
