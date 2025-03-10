@@ -259,22 +259,6 @@ For a full set of configuration options, see [CamundaClientConfigurationProperti
 
 Here you find alternatives to authenticate with the cluster
 
-#### Keystore & Truststore
-
-You can also authenticate with the cluster through java's key- and truststore facilities
-
-```yaml
-camunda:
-  client:
-    mode: self-managed
-    auth:
-      keystore-path: <your keystore path>
-      keystore-password: <your keystore password>
-      keystore-key-password: <your keystore key password>
-      truststore-path: <your truststore path>
-      truststore-password: <your truststore password>
-```
-
 ### Zeebe
 
 Here you find further zeebe specific configuration options
