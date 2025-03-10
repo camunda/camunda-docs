@@ -252,6 +252,10 @@ A worker executes a job. In the Zeebe nomenclature, these are also referred to a
 
 See [process](#process).
 
+### Workflow engine
+
+A workflow engine is an essential part of any process automation tool. We call it an “engine” because it drives business processes from start to finish, no matter how complex the process and decision logic need to be. [Zeebe](/components/zeebe/zeebe-overview.md) is the workflow engine powering Camunda 8.
+
 ### Workflow instance
 
 See [process instance](#process-instance).
