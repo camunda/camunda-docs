@@ -146,9 +146,9 @@ module.exports = {
       label: "RPA",
       link: {
         type: "doc",
-        id: "components/rpa/overview",
+        id: "components/RPA/overview",
       },
-      items: ["components/rpa/getting-started", "components/rpa/production"],
+      items: ["components/RPA/getting-started", "components/RPA/production"],
     },
     {
       type: "category",
