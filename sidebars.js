@@ -143,6 +143,15 @@ module.exports = {
     },
     {
       type: "category",
+      label: "RPA",
+      link: {
+        type: "doc",
+        id: "components/RPA/overview",
+      },
+      items: ["components/RPA/getting-started", "components/RPA/production"],
+    },
+    {
+      type: "category",
       label: "Modeler",
       link: {
         type: "doc",
@@ -723,14 +732,6 @@ module.exports = {
         id: "components/early-access/overview",
       },
       items: [
-        {
-          type: "category",
-          label: "Experimental features",
-          items: [
-            "components/early-access/experimental/rpa/rpa-integration",
-            "components/early-access/experimental/rpa/rpa-framework-library",
-          ],
-        },
         {
           type: "category",
           label: "Alpha features",
