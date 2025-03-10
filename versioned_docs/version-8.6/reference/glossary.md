@@ -153,7 +153,7 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
 
-Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) which define an actionable task assisted by a business process execution engine or software application.
+Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) which define an actionable task assisted by a workflow engine or software application.
 
 - [Manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md)
 
@@ -260,7 +260,7 @@ This way, a Camunda workflow can receive messages from an external system or ser
 
 ### User task
 
-A user task is used to model work that needs to be done by a human and is assisted by a business process execution engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
 
 - [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
 
@@ -282,7 +282,7 @@ See [process](#process).
 
 ### Workflow engine
 
-A workflow engine is an essential part of any process automation tool. We call it an “engine” because it drives business processes from start to finish, no matter how complex the process and decision logic need to be. At Camunda, [Zeebe](/components/zeebe/zeebe-overview.md) is the workflow engine powering Camunda 8.
+A workflow engine is an essential part of any process automation tool. We call it an “engine” because it drives business processes from start to finish, no matter how complex the process and decision logic need to be. [Zeebe](/components/zeebe/zeebe-overview.md) is the workflow engine powering Camunda 8.
 
 ### Workflow instance
 
