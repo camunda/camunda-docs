@@ -262,15 +262,15 @@ If a compensation boundary event is added, a new compensation subscription is on
 For activity instances that have already finished no new compensation subscription will be opened.
 Consider the following example where the instance is waiting on service task `A`:
 
-![The instance waiting on service task B.](assets/process-instance-migration/migration-compensation_before.png)
+![The instance waiting on service task A.](assets/process-instance-migration/migration-compensation_before.png)
 
 The target process definition contains a compensation boundary event attached to service task `B`:
 
-![The target process definition contains a compensation boundary event attached to service task B.](assets/process-instance-migration/migration-compensation_after.png)
+![The target process definition contains a compensation boundary event attached to service task A.](assets/process-instance-migration/migration-compensation_after.png)
 
-If the process instance is migrated by providing mapping instruction between service tasks `A` -> `C`, then triggering compensation throw event afterward is **not** going to compensate `B`.
+If the process instance is migrated by providing mapping instruction between service tasks `A` -> `A`, the compensation subscription will be created on completion of the element `A`.
 
-However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, the compensation subscription will be created on completion of the element `B`.
+However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, then triggering compensation throw event afterward is **not** going to compensate `A`.
 
 ## Dealing with gateways
 
