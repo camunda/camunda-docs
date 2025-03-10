@@ -251,13 +251,13 @@ Therefore, it is not possible to re-create message catch events with the same me
 While we're working on resolving this, you can migrate this case by providing a mapping between the boundary events.
 :::
 
-## Compensation Boundary Events
+### Compensation Boundary Events
 
 Migrating compensation boundary events requires explicit mapping instructions to decide whether to preserve, remove, or create a compensation subscription like any other catch event.
 
 While being that, it is important to understand the behaviour of creating compensation event subscription in the target process.
 New compensation boundary events contained in the target process definition only will take effect for activity instances that are not started or not finished yet.
-Consider the following example where the instance waiting on service task `B`:
+Consider the following example where the instance is waiting on service task `A`:
 
 ![The instance waiting on service task B.](assets/process-instance-migration/migration-compensation_before.png)
 
@@ -269,15 +269,15 @@ If the process instance is migrated by providing mapping instruction between ser
 
 However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, the compensation subscription will be created on completion of the element `B`.
 
-## Gateways
+## Dealing with gateways
 
-The migration tool now accommodates several scenarios for gateways involving parallel gateways and inclusive gateways.
-Active parallel and inclusive gateways—especially those with incidents (such as from invalid execution listeners or failed jobs)—can be migrated similarly to other active elements.
-Additionally, the migration tool supports migrating joining gateways.
+Process instance migration allows you to migrate several scenarios for gateways.
+An active exclusive gateway with an incident can be migrated like any other active element.
+Parallel and inclusive gateways can be involved in additional scenarios that we'll discuss separately.
 
 ### Migrating joining parallel and inclusive gateways
 
-Joining parallel and inclusive gateways with active incoming sequence flows are active elements that must have a mapping instruction similar to any other active element.
+Joining parallel and inclusive gateways with taken incoming sequence flows that are still waiting for more incoming sequence flows require a mapping instruction similar to active elements.
 
 For migrating joining gateways, following conditions must hold:
 
@@ -299,7 +299,7 @@ After the migration, the process instance will look like following:
 
 As can be seen in the example above, another element `C` is added before the joining gateway in the target process definition.
 To complete the process instance after the migration, element `C` must be completed.
-Process instance modification can be used to active element `C` and complete it to reach the target gateway.
+Process instance modification can be used to activate element `C` and complete it to reach the target gateway.
 
 ## Process definitions and versions
 
