@@ -12,6 +12,7 @@ This article covers the specific configuration of your RPA runner. For the basic
 When running an RPA worker with Camunda SaaS, you can add access to [Connector secrets](/components/connectors/use-connectors/index.md#using-secrets).
 
 To do this, [create client credentials](/guides/setup-client-connection-credentials.md) with both the `Zeebe` and `Secrets` scope and use them in the worker config.
+In your `rpa-worker.properties` file, add the secrets endpoint `camunda.rpa.zeebe.secrets.secrets-endpoint=https://cluster-api.cloud.camunda.io` to enable secret fetching.
 
 In the RPA script, your secrets are stored in the `${secrets}` variable. You can reference a secret like `MY_API_KEY` with `${secrets.MY_API_KEY}`.
 
