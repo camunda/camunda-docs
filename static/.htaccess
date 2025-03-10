@@ -98,9 +98,11 @@ RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camun
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
 
-# Provide current to next redirect for RPA
+# Provide redirects for RPA experimental removal
 RewriteRule ^docs/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/components/rpa/overview/$1 [R=301,L]
 RewriteRule ^docs/components/early-access/experimental/rpa/rpa-integration/?$ /docs/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-integration/?$ /docs/components/rpa/overview/$1 [R=301,L]
 
 # Provide current to next redirect for ad-hoc
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc/ad-hoc/$1 [R=301,L]
