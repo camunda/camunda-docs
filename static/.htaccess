@@ -99,8 +99,8 @@ RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camun
 #---------------------------------------------------------------------------------
 
 # Provide redirects for RPA experimental removal
-RewriteRule ^docs/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/components/rpa/overview/$1 [R=301,L]
-RewriteRule ^docs/components/early-access/experimental/rpa/rpa-integration/?$ /docs/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/next/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/next/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/next/components/early-access/experimental/rpa/rpa-integration/?$ /docs/next/components/rpa/overview/$1 [R=301,L]
 RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
 RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-integration/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
 
