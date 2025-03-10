@@ -272,22 +272,6 @@ camunda:
       password: <your password>
 ```
 
-#### Keystore & Truststore
-
-You can authenticate with the cluster using Java's Keystore and Truststore.
-
-```yaml
-camunda:
-  client:
-    mode: self-managed
-    auth:
-      keystore-path: <your keystore path>
-      keystore-password: <your keystore password>
-      keystore-key-password: <your keystore key password>
-      truststore-path: <your truststore path>
-      truststore-password: <your truststore password>
-```
-
 ### Zeebe
 
 You can use the following Zeebe-specific additional configuration options:
@@ -577,31 +561,6 @@ camunda:
             - <default>
             - foo
 ```
-
-### Custom identity provider security context
-
-If you require configuring SSL context exclusively for your identity provider:
-
-```yaml
-camunda:
-  client:
-    auth:
-      keystore-path: /path/to/keystore.p12
-      keystore-password: password
-      keystore-key-password: password
-      truststore-path: /path/to/truststore.jks
-      truststore-password: password
-```
-
-- **keystore-path**: Path to client's KeyStore; can be both in JKS or PKCS12 formats
-- **keystore-password**: KeyStore password
-- **keystore-key-password**: Key material password
-- **truststore-path**: Path to client's TrustStore
-- **truststore-password**: TrustStore password
-
-When the properties are not specified, the default SSL context is applied. For example, if you configure an application with
-`javax.net.ssl.*` or `spring.ssl.*`, the latter is applied. If both `camunda.client.auth.*` and either `javax.net.ssl.*`
-or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes precedence.
 
 ## Observing metrics
 
