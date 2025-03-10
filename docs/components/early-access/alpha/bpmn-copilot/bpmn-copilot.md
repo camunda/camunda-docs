@@ -41,11 +41,12 @@ Timeouts may occur at this step if your query is too complex.
 ### Example explanation prompts
 
 - "Translate this diagram to plain language so I can create documentation"
-- "What SLA's are defined in this process?"
+- "What KPIs would you recommend for this process?"
+- "Estimate the median and 95th percentile duration for this process"
 - "What does the triangle symbol mean?"
-- "Highlight decision points in this diagram"
+- "Give me a list of test cases to ensure this process completes as expected"
 - "Summarize this process for a new employee"
-- "Find potential automation opportunities"
+- "Give me a prioritized list of recommended improvements to make the 95% of instances complete within 4 hours"
 
 ### Example creation prompts
 
