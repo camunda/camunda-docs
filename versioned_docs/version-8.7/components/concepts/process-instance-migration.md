@@ -610,7 +610,6 @@ import SignalBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-s
             </a>
         </td>
     </tr>
-
   </tbody>
 </table>
 
