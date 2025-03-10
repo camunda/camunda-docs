@@ -2,18 +2,20 @@
 id: bpmn-copilot
 title: BPMN Copilot
 sidebar_label: Get started
-description: "Using AI, users can now chat with the BPMN Copilot for assistance generating new BPMN process diagrams in Web Modeler based on a process description."
+description: "Chat with the AI BPMN Copilot for help generating new BPMN process diagrams in Web Modeler based on a process description."
 ---
 
+import CopilotImg from './img/bpmn-copilot-chat.png';
+
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
+
+Chat with the AI BPMN Copilot for help generating new BPMN process diagrams in [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) based on a process description. You can also ask the BPMN Copilot questions about existing diagrams.
 
 :::note Terms of use
 By using this tool, you agree to Camunda's use of the anonymized input and output data and anonymized feedback to improve it.
 
 While your latest BPMN diagram will be saved in your account, Camunda does not save your prompts and the resulting BPMN diagrams.
 :::
-
-Using AI, users can now chat with the BPMN Copilot for assistance generating new BPMN process diagrams in [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) based on a process description. They can also ask the BPMN Copilot questions about existing diagrams.
 
 ## Get started
 
@@ -23,19 +25,17 @@ Creating a BPMN process diagram with the BPMN Copilot will overwrite existing wo
 
 To use the BPMN Copilot in Web Modeler, take the following steps:
 
-1. If you have not yet already, [opt in](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
+1. If you have not already done so, [opt in](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
 2. Log in to [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md).
-3. Click **New project > Create new > BPMN diagram**. The Camunda Copilot chat window will open.
+3. Click **New project > Create new > BPMN diagram** to open the Camunda Copilot chat window.
 
-![bpmn copilot chat window](./img/bpmn-copilot-chat.png)
+<img src={CopilotImg} alt="bpmn copilot chat window" width="500px" />
 
-4. In the chat box, enter your prompt. This prompt should be a simple, clear, and concise request. For example, "Generate a mortgage loan process diagram" or "Explain this process". Note that more complex requests may take longer to process.
-5. Wait for the BPMN Copilot to respond. This takes about 20-50 seconds depending on the prompt.
+4. In the chat box, enter your prompt. A prompt should be a simple, clear, and concise request. For example, "Generate a mortgage loan process diagram" or "Explain this process". Note that more complex requests may take longer to process.
+5. Wait for the BPMN Copilot to respond. This typically takes between 20-50 seconds, depending on the prompt.
 
 :::note
-
-Timeouts may occur at this step if your query is too complex.
-
+Timeouts can occur during this step if your query is too complex.
 :::
 
 ### Example explanation prompts
