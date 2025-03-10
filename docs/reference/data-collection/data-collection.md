@@ -1,22 +1,22 @@
 ---
 id: data-collection
 title: "Data collection"
-description: "Learn about the data collected by Camunda."
+description: "Learn which telemetry data is collected, how Camunda ensures privacy, and what options you have to modify which telemetry data is sent to Camunda."
 ---
 
 import AnalyticsImg from './../img/analytics.png';
 import CookiePrefsImg from './../img/cookie-preferences.png';
 
-Camunda collects a variety of telemetry data to evaluate contractual usage, provide a better user experience, and improve its products. This section describes which telemetry data is collected, how Camunda ensures privacy, and what options you have to modify which telemetry data is sent to Camunda. This document is designed to help you understand what telemetry data includes and excludes and applies only to interactions with Camunda's products. This document will be updated from time to time.
+Camunda collects a variety of telemetry data to evaluate contractual usage, provide a better user experience, and improve its products. This section describes which telemetry data is collected, how Camunda ensures privacy, and what options you have to modify which telemetry data is sent to Camunda. This document is designed to help you understand what telemetry data includes and excludes, applies only to interactions with Camunda's products, and will be updated periodically.
 
 ## Purposes
 
 Camunda collects certain types of data we call “telemetry data” for the purposes described below:
 
-- for billing,
-- to improve the user experience, to track and analyze usage of the Software,
-- to ensure the security, stability, and functionality of the Software, or
-- to provide support to Customers, such as guidance that will help optimize usage regarding the product and new functionalities.
+- Billing
+- Improving the user experience by tracking and analyzing usage of the software
+- Ensuring the security, stability, and functionality of the foftware
+- Providing support and guidance to customers to help optimize product usage and new functionalities.
 
 ## Principles
 
@@ -52,12 +52,12 @@ Usage telemetry data includes limited product usage data to help make better pro
 - Feature Usage:
 
   - SaaS System Actions: All SaaS organizations submit basic information about which features are being used as part of telemetry data collection. When certain features are used, Camunda logs which feature is used and basic information about how it has been used. This information is tied to a pseudonymized organization.
-  - SaaS User Actions: Users that opt-in to analytics cookies gain access to in-app tutorials and automatically submit information about which features they interact with in Camunda’s UI as part of telemetry data. In addition to the data collected from system actions described above, Camunda collects cursor activity, geographical area, browser information, and basic biographical information limited to email, name, and city/region/country for user actions. If a user interacts through API, then personal information is not collected.
+  - SaaS User Actions: Users that opt-in to personalization cookies gain access to in-app tutorials, whereas analytics cookies cause data to be automatically submitted about which features they interact with in Camunda’s UI as part of telemetry data. In addition to the data collected from system actions described above, Camunda collects cursor activity, geographical area, browser information, and basic biographical information limited to email, name, and city/region/country for user actions. If a user interacts through API, then personal information is not collected.
 
   <img src={CookiePrefsImg} alt="Cookie preferences in user settings" width="300px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
   <img src={AnalyticsImg} alt="Analytics opt-in menu" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
-  - Desktop Modeler User Actions: Users opting into collection of telemetry data in [Desktop Modeler](/components/modeler/desktop-modeler/telemetry/telemetry.md) send data to Camunda when to track how certain features are used, as described in the linked document.
+  - Desktop Modeler User Actions: Users opting into collection of telemetry data in [Desktop Modeler](/components/modeler/desktop-modeler/telemetry/telemetry.md) send data to Camunda to track how certain features are used, as described in the linked document.
 
 - AI Usage: Camunda's AI features, currently available in SaaS only, are clearly labeled as AI features. For Enterprise organizations, these features must be enabled by the customer via opt-in in the [Console](/components/console/manage-organization/enable-alpha-features.md#enable-ai-powered-features). Depending on the feature, they may collect different information.
   - Camunda [Docs AI](/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai.md) records the entire conversation to provide ongoing support.
