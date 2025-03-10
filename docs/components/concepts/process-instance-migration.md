@@ -253,10 +253,13 @@ While we're working on resolving this, you can migrate this case by providing a 
 
 ### Compensation Boundary Events
 
-Migrating compensation boundary events requires explicit mapping instructions to decide whether to preserve, remove, or create a compensation subscription like any other catch event.
+Compensation boundary events can be migrated similarly to other catch events.
+If a mapping instruction is provided, the compensation boundary event will be migrated accordingly.
+However, if no mapping instruction is specified, the event subscription will be removed after migration.
 
-While being that, it is important to understand the behaviour of creating compensation event subscription in the target process.
-New compensation boundary events contained in the target process definition only will take effect for activity instances that are not started or not finished yet.
+While being that, it is important to understand the behaviour of the compensation event subscription creation after the migration.
+If a compensation boundary event is added, a new compensation subscription is only opened for activity instances that are currently active, or haven't been started yet.
+For activity instances that have already finished no new compensation subscription will be opened.
 Consider the following example where the instance is waiting on service task `A`:
 
 ![The instance waiting on service task B.](assets/process-instance-migration/migration-compensation_before.png)
