@@ -7,7 +7,7 @@ description: "Cluster capacity provides you with a high-level overview of how we
 import CapacityImg from './img/cluster-capacity.png';
 import CapacityPercentImg from './img/cluster-capacity-percent.png';
 
-View and manage your cluster capacity and health.
+View and manage your cluster capacity and utilization.
 
 ## About cluster capacity
 
@@ -16,12 +16,12 @@ Cluster capacity provides a high-level overview of how well a cluster is coping 
 - Use this information to check and monitor if a cluster is appropriately sized for its workload.
 - Cluster capacity can also be used as an indicator of cluster health. For example, a cluster running at maximum capacity can be an indicator of poor cluster responsiveness.
 
-A general guideline to follow when using cluster capacity as a metric is:
+A general guideline to follow when using cluster capacity percentage as a metric is:
 
 - **High capacity percentage**: The higher the capacity percentage value, the more likely it is that things will slow down, time out, requests will fail, and so on.
 - **Low capacity percentage**: The lower the capacity percentage value, the more you could increase the cluster workload as the cluster is probably underused.
 
-For example, if a cluster capacity is continually running at 95%, this means it is probably overloaded and may not be performing well, but if the cluster capacity is only 5% then it can probably accept more workload and may be underused.
+For example, if a cluster is continually running at 95%, this means it is probably overloaded and may not be performing well, but if the cluster capacity is only 5% then it can probably accept more workload and may be underused.
 
 :::info
 To understand how cluster capacity is calculated, see [how cluster capacity is calculated](#capacity-calculation).
@@ -29,7 +29,7 @@ To understand how cluster capacity is calculated, see [how cluster capacity is c
 
 ## View cluster capacity
 
-The cluster capacity percentage is shown in the **Capacity** column on the Console **Clusters** tab.
+If your cluster supports capacity monitoring, the percentage is shown in the **Capacity** column on the Console **Clusters** tab.
 
 <img src={CapacityPercentImg} alt="Example cluster capacity percentage" />
 
@@ -56,38 +56,38 @@ This means that cluster capacity could fluctuate throughout the day. For example
 - Certain processes can cause a "fan-out" effect, where even though creating a process instance is only a single user request, it could require computation on a very large multi-instance collection, resulting in a high capacity spike.
 - You could have a spike in capacity if a large number of timers are triggered at the same time.
 
-### High capacity
+### High capacity percentage
 
-A high capacity does not necessarily mean that a cluster needs to be resized, but it could indicate that your cluster is overloaded.
+A high capacity percentage/utilization does not necessarily mean that a cluster needs to be resized, but it could indicate that your cluster is overloaded.
 
-> A high capacity benchmark is relative, but generally **anything above 60%** is considered high capacity.
+> A high capacity percentage benchmark is relative, but generally **anything above 60%** is considered high.
 
-If the capacity is high, but your operations are completing within an acceptable timeframe, requests are successful, and so on, then you do not need to take any action.
+If your cluster utilization is too high, but your operations are completing within an acceptable timeframe, requests are successful, and so on, then you do not need to take any action.
 
-If you find yourself experiencing any of the following, then you might need to investigate and take action:
+However, if you find yourself experiencing any of the following, then you might need to investigate and take action:
 
 - REST clients are receiving a high number of `429` errors.
 - gRPC clients are receiving a high number of `RESOURCE_EXHAUSTED` errors.
 - More and more commands or queries are timing out in your clients.
 - Web components are slowing down, or showing data that is severely out of date (for example, 1 hour).
 
-In this scenario, you should look at reducing the overall load on the cluster to try and lower the cluster capacity value.
+In this scenario, you should look at reducing the overall load on the cluster.
 
-### Reduce cluster capacity
+### Reduce cluster utilization
 
-If your cluster capacity is too high, you can help reduce cluster capacity by:
+If your cluster utilization is too high, you can help reduce it by:
 
 - Scaling down the load. For example, by stopping certain clients. Start with your least critical load, and continue from there.
 - Check your running process instances for known issues that cause high processing, such as:
   - Straight-through processing loops, where there are no wait states. For example, a sub process with an error boundary event which loops back to an activity leading into the sub-process. If you have an activity which consistently throws an error, this will result in a subtle infinite loop where the engine is stuck and cannot process anything else. You would have to cancel this instance, or contact support to force cancel it for you.
 
 :::important
-If your cluster capacity continues to remain high even after attempts to reduce it, you might need to increase your cluster size and scale. See [cluster size](/components/concepts/clusters.md#cluster-size) and [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
+If your cluster capacity percentage remains high even after attempts to reduce it, you might need to increase your cluster size and scale. See [cluster size](/components/concepts/clusters.md#cluster-size) and [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
 :::
 
-## How cluster capacity is calculated {#capacity-calculation}
+## How cluster capacity percentage is calculated {#capacity-calculation}
 
-Cluster capacity is based on the cluster's [flow control configuration](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md).
+Cluster capacity percentage is based on the cluster's [flow control configuration](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md).
 
 Essentially, if flow control is configured, every partition is assigned a [write rate](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#exporting-and-write-rate) and a [write rate limit](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md#write-rate-limit).
 
@@ -97,7 +97,7 @@ This means a partition's cluster capacity is defined as:
 
 This gives a value between 0 and 1, which is multiplied by 100 to give the partition capacity as a percentage.
 
-The cluster capacity is then the average of the capacity of all partitions in the cluster.
+The cluster capacity percentage is then the average of the capacity of all partitions in the cluster.
 
 :::note
 The partition capacity is _only_ calculated and reported on the current partition leader.
