@@ -30,7 +30,7 @@ To use the BPMN Copilot in Web Modeler, take the following steps:
 ![bpmn copilot chat window](./img/bpmn-copilot-chat.png)
 
 4. In the chat box, enter your prompt. This prompt should be a simple, clear, and concise request. For example, "Generate a mortgage loan process diagram" or "Explain this process". Note that more complex requests may take longer to process.
-5. Wait for the BPMN Copilot to respond. This takes about 20-50 seconds depending on the prompt. Once complete, the Copilot will then respond with and (if requested) and outline of the process.
+5. Wait for the BPMN Copilot to respond. This takes about 20-50 seconds depending on the prompt.
 
 :::note
 
@@ -40,10 +40,10 @@ Timeouts may occur at this step if your query is too complex.
 
 ### Example explanation prompts
 
-- "Translate this diagram to plain language so I can create documentation"
+- "Describe this process in plain language"
 - "What KPIs would you recommend for this process?"
 - "Estimate the median and 95th percentile duration for this process"
-- "What does the triangle symbol mean?"
+- "What does this symbol do?" [after selecting a BPMN element in the process]
 - "Give me a list of test cases to ensure this process completes as expected"
 - "Summarize this process for a new employee"
 - "Give me a prioritized list of recommended improvements to make the 95% of instances complete within 4 hours"
