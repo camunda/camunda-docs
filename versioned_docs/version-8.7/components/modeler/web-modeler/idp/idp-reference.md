@@ -51,9 +51,9 @@ IDP stores documents as follows during the different extraction stages:
 
 IDP currently only supports data extraction from the following uploaded document file formats.
 
-| File format | Description                                                                                                                                                                                                                                                                                                           |
-| :---------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <p>PDF</p>  | <p><ul><li>PDF documents must not be password protected.</li><li><p>Maximum document file size is 4MB for test extraction.</p></li><li><p>Both text and image content can be extracted from a PDF document. For example, data can be extracted from a scanned image that has been converted to PDF.</p></li></ul></p> |
+| File format | Description                                                                                                                                                                                                                                                                                                              |
+| :---------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <p>PDF</p>  | <p><ul><li>PDF documents must not be password protected.</li><li><p>Maximum document file size is 4MB for all IDP operations.</p></li><li><p>Both text and image content can be extracted from a PDF document. For example, data can be extracted from a scanned image that has been converted to PDF.</p></li></ul></p> |
 
 ## Document language support {#languages}
 
