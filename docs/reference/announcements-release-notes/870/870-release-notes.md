@@ -75,7 +75,7 @@ Use intelligent document processing (IDP) to integrate automated document proces
 - For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
 
 :::note
-IDP is only supported for Camunda 8 SaaS with the 8.7.0-alpha5 release. Support for Camunda 8 Self-Managed and Camunda 8 Run is planned for delivery with the 8.7 release.
+IDP is only supported for Camunda 8 Self-Managed with the 8.7.0-alpha5 release, with full configuration documentation to follow. Support for Camunda 8 SaaS and Camunda 8 Run is planned for delivery with the 8.7 release.
 :::
 
 To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
