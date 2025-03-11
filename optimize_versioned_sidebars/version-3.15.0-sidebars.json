@@ -3398,7 +3398,7 @@
                 {
                   "type": "link",
                   "label": "Metrics",
-                  "href": "/docs/8.7/self-managed/zeebe-deployment/operations/metrics/"
+                  "href": "/docs/8.7/self-managed/operational-guides/monitoring/metrics/"
                 },
                 {
                   "type": "link",

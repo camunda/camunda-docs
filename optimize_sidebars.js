@@ -2630,7 +2630,7 @@ module.exports = {
                 ),
                 docsLink(
                   "Metrics",
-                  "self-managed/zeebe-deployment/operations/metrics/"
+                  "self-managed/operational-guides/monitoring/metrics"
                 ),
                 docsLink(
                   "Health status",
