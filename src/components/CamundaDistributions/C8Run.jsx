@@ -2,7 +2,7 @@ import React from "react";
 import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
 
 const C8RunBaseURL =
-  "https://github.com/camunda/camunda/releases/tag";
+"https://github.com/camunda/camunda/releases/tag";
 
 const getVersion = () => {
   const docsVersion = useActiveVersion();
@@ -10,7 +10,7 @@ const getVersion = () => {
     return "8.7";
   }
   if (docsVersion.label == "8.8 (unreleased)") {
-    return "8.8"
+    return "8.8";
   }
   return docsVersion.label;
 };
