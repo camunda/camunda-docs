@@ -19,16 +19,31 @@ These release notes identify the new features included in 8.8, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 14 October 2025        | 13 April 2027                | -            | -            | -            |
 
-### API updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+## 8.8.0-alpha2
 
-The 8.8 release includes API updates to support the move to a [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) unified experience.
+| Release date  | Changelog(s)                                                                                                                                                                               | Blog                                                                               |
+| :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
+| 11 March 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha2)</li></ul> | [Release blog](https://camunda.com/blog/2025/03/camunda-alpha-release-march-2025/) |
 
-#### Camunda 8 REST API updates
+### Camunda Spring Boot SDK for the C8 REST API
 
-- New Query endpoints (with advanced search filtering) will be added for process entities (processes, decisions, user tasks, and forms). These will replace the component APIs (Tasklist, Operate) going forward.
-- New endpoints will allow you to manage and query users and resource permissions in an orchestration cluster.
-- All the Camunda 8 REST API endpoints will support resource-based authorizations to enable fine-grained permissions.
-- API terminology is aligned so technical assets have an identical, easily-understood, descriptive property name.
+A Spring Boot SDK is provided for the Camunda 8 REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
+
+- Easily integrate process entity management and queries within your workflows.
+- Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
+- Rely on an official, standardized approach to guarantee consistency and reduce maintenance costs when upgrading.
+
+To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2249 -->
+
+### Camunda 8 Run authentication updates
+
+Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using basic authentication, and to test authorizations and permissions.
+
+To learn more about this feature, see the [API documentation](/self-managed/setup/deploy/local/c8run.md#use-camunda-apis) for Camunda 8 Run.
+
+<!-- https://github.com/camunda/camunda-docs/pull/5145 -->
 
 ### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -69,7 +84,7 @@ The exporter can consume Zeebe records (mostly events created by the engine), ag
 
 The following diagram shows a simplified version of this work.
 
-![Camunda Exporter diagram](../../img/target-camunda-exporter.png)
+![Camunda Exporter diagram](../img/target-camunda-exporter.png)
 
 - For example, Tasklist and Operate Importers are still required for old data to be imported, but the Camunda exporter writes all new data into ES/OS. After old indices are drained, importers can be turned off.
 - The archiver, which takes care of the archiving of completed process instances, will be moved into the Zeebe system as well, to reduce the installation complexity and provide a better scaling and replication factor (based on partitions).
@@ -84,7 +99,7 @@ Camunda is harmonizing our index structure and usage.
 - With this change, several Operate indices can and will be used by Tasklist.
 - New indices have been created to integrate Identity into the system.
 
-![Harmonized indices schema](../../img/harmonized-indices-schema.png)
+![Harmonized indices schema](../img/harmonized-indices-schema.png)
 
 <!-- :::info
 Learn more about these updates in Streamlined Deployment with 8.7.

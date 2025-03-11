@@ -15,31 +15,26 @@ Supported environment changes and breaking changes or deprecations for the Camun
 | :--------------------- | :--------------------------- | :------------ | :--- |
 | 14 October 2025        | 13 April 2027                | -             | -    |
 
-- [Changes in supported environments](#changes-in-supported-environments)
-  - [Zeebe, Operate, Tasklist, and Identity must run on exact same minor and patch levels](#zeebe-operate-tasklist-and-identity-must-run-on-exact-same-minor-and-patch-levels)
-  - [Installation and deployment updates Self-Managed](#installation-and-deployment-updates-self-managed)
-    - [Helm charts](#helm-charts)
-- [Key changes](#key-changes)
-  - [API updates SaaSSelf-Managed](#api-updates-saasself-managed)
-    - [Deprecated: Operate and Tasklist v1 REST APIs](#deprecated-operate-and-tasklist-v1-rest-apis)
-    - [Deprecated: Job-based user tasks querying](#deprecated-job-based-user-tasks-querying)
-    - [Deprecated: Zeebe gRPC API endpoints](#deprecated-zeebe-grpc-api-endpoints)
-    - [Removed: Tasklist GraphQL API](#removed-tasklist-graphql-api)
-    - [Removed: Deprecated OpenAPI objects](#removed-deprecated-openapi-objects)
-  - [Camunda Java client and Camunda Spring SDK](#camunda-java-client-and-camunda-spring-sdk)
-    - [Key changes](#key-changes)
-
 ## Changes in supported environments
 
 ### Zeebe, Operate, Tasklist, and Identity must run on exact same minor and patch levels
 
-From version `8.8.0` forward, the following core [Orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility: Zeebe, Operate, Tasklist, and Identity. See the [component version matrix](/reference/supported-environments.md#component-version-matrix) or the [Self-Managed reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) for an overview of components.
+From version `8.8.0` forward, the following core [Orchestration cluster](../../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility: Zeebe, Operate, Tasklist, and Identity. See the [component version matrix](../supported-environments.md#component-version-matrix) or the [Self-Managed reference architecture](../../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) for an overview of components.
 
 ### Installation and deployment updates <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 Camunda 8.8 introduces a streamlined architecture, consolidating core components such as Zeebe, Operate, Tasklist, Optimize, and Connectors into a single deployable unit. Enhanced deployment options are also included, such as new Kubernetes Helm guides, [deployment reference architectures](/self-managed/reference-architecture/reference-architecture.md), and improved support for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
 
 You can download the alpha release of the unified package from the Camunda GitHub repository, either as an executable Java application (Camunda Orchestration Core) or a Docker image.
+
+#### Identity and authentication limitations in 8.8.0-alpha2
+
+The 13.0.0-alpha2 Helm chart released with Camunda 8.8.0-alpha2 establishes a new default setup to support 8.8 [Identity management updates](#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
+
+- The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration cluster Identity)
+- Connectors
+
+This temporary limitation will be resolved in subsequent alpha releases.
 
 #### Helm charts
 

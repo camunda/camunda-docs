@@ -98,6 +98,10 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 # Remove go and zbctl pages, redirect to CCH
 RewriteRule ^docs/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
 RewriteRule ^docs/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
+RewriteRule ^docs/8.7/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
+RewriteRule ^docs/8.7/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
 
 # Remove meta page
 RewriteRule ^meta/ / [R=301,L]
@@ -119,6 +123,12 @@ RewriteRule ^docs/next/reference/release-notes/870/?$ /docs/next/reference/annou
 RewriteRule ^docs/next/reference/release-policy/?$ /docs/next/reference/announcements-release-notes/release-policy/$1 [R=301,L]
 RewriteRule ^docs/next/reference/release-notes/release-notes/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
 RewriteRule ^docs/next/reference/announcements/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
+
+# Provide redirects for RPA experimental removal
+RewriteRule ^docs/next/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/next/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/next/components/early-access/experimental/rpa/rpa-integration/?$ /docs/next/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-integration/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
 
 # Provide current to next redirect for ad-hoc
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc/ad-hoc/$1 [R=301,L]
@@ -524,6 +534,9 @@ RewriteRule ^docs/components/modeler/web-modeler/start-instance/?$ /docs/compone
 RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
 RewriteRule ^docs/next/components/modeler/web-modeler/start-instance/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
+
+# Move user metrics page to a new folder
+RewriteRule ^docs/reference/usage-metrics.md/?$ ^docs/reference/data-collection/usage-metrics.md/? [R=301,L,NE]
 
 # Remove Migration to Camunda 8 pages
 RewriteRule ^docs/next/guides/migrating-from-camunda-7/adjusting-dmn-models/(.*)$ /docs/next/guides/migrating-from-camunda-7/index/ [R=301,L]

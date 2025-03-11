@@ -21,17 +21,23 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 - [Changes in supported environments](#changes-in-supported-environments)
   - [Identity Keycloak now requires v25 or v26 Self-Managed](#identity-keycloak-now-requires-v25-or-v26-self-managed)
+  - [Camunda Spring SDK now requires Spring Boot 3.4.x SaaSSelf-Managed](#camunda-spring-sdk-now-requires-spring-boot-34x-saasself-managed)
 - [Key changes](#key-changes)
-  - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
+  - [Deploy diagram change Self-Managed {#web-modeler-deploy-diagram-change}](#deploy-diagram-change-self-managed-web-modeler-deploy-diagram-change)
   - [Breaking changes in Camunda Process Test](#breaking-changes-in-camunda-process-test)
   - [Deprecated: OpenAPI entities with `integer (int64)` key attributes](#deprecated-openapi-entities-with-integer-int64-key-attributes)
-  - [Zeebe Java client will not be developed further](#zeebe-java-client-will-not-be-developed-further)
+  - [Zeebe Java client](#zeebe-java-client)
+    - [Adjustments](#adjustments)
 
 ## Changes in supported environments
 
 ### Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#identity).
+
+### Camunda Spring SDK now requires Spring Boot 3.4.x <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda Spring SDK 8.7 now requires Spring Boot 3.4.x. For more information on compatibility, see the Camunda Spring SDK [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
 
 ## Key changes
 
@@ -62,7 +68,7 @@ See the [overview about API Key Attributes][camunda8-api-overview] for more deta
 
 [camunda8-api-overview]: /versioned_docs/version-8.7/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#api-key-attributes
 
-### Zeebe Java client will not be developed further
+### Zeebe Java client
 
 Starting with 8.8, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 

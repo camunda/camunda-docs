@@ -121,6 +121,7 @@ module.exports = {
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity",
           ],
         },
         {
@@ -140,6 +141,15 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "RPA",
+      link: {
+        type: "doc",
+        id: "components/rpa/overview",
+      },
+      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
@@ -179,6 +189,34 @@ module.exports = {
                 "components/modeler/web-modeler/design-your-process",
                 "components/modeler/web-modeler/implement-your-process",
                 "components/modeler/web-modeler/play-your-process",
+              ],
+            },
+            {
+              type: "category",
+              label: "Intelligent document processing",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp",
+              },
+              items: [
+                "components/modeler/web-modeler/idp/idp-configuration",
+                "components/modeler/web-modeler/idp/idp-applications",
+                {
+                  type: "category",
+                  label: "Document extraction",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-document-extraction",
+                  },
+                  items: [
+                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
+                    "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                  ],
+                },
+                // "components/modeler/web-modeler/idp/idp-document-automation",
+                "components/modeler/web-modeler/idp/idp-integrate",
+                "components/modeler/web-modeler/idp/idp-key-concepts",
+                "components/modeler/web-modeler/idp/idp-reference",
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
@@ -697,14 +735,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Experimental features",
-          items: [
-            "components/early-access/experimental/rpa/rpa-integration",
-            "components/early-access/experimental/rpa/rpa-framework-library",
-          ],
-        },
-        {
-          type: "category",
           label: "Alpha features",
           link: {
             type: "doc",
@@ -1034,7 +1064,15 @@ module.exports = {
     "reference/licenses",
     "reference/notices",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      type: "category",
+      label: "Data collection",
+      link: {
+        type: "doc",
+        id: "reference/data-collection/data-collection",
+      },
+      items: ["reference/data-collection/usage-metrics"],
+    },
     "reference/glossary",
   ],
   "Self-Managed": [
@@ -1137,7 +1175,8 @@ module.exports = {
     {
       "Reference architecture": [
         "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual",
+        "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/manual",
       ],
     },
     {
