@@ -17,6 +17,7 @@ A form element to select files.
 [
   {
     "documentId": "u123",
+    "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "metadata": {
       "fileName": "Document.pdf",
       "contentType": "application/pdf"
@@ -24,6 +25,8 @@ A form element to select files.
   }
 ]
 ```
+
+This could also be assigned the output variable of a [Filepicker](./forms-element-library-filepicker.md).
 
 - **Document URL**: A context key which contains the URL value used to get each document. This can only be an [expression](../../feel/language-guide/feel-expressions-introduction.md). The resulting value must be a string and it must contain the placeholder `{documentId}` which will be replaced with the document ID present in the **Document reference** data. By default this component will use the key `defaultDocumentsEndpointKey`, if you leave this field unchanged it will work without any extra configuration on Tasklist and you won't have inject this variable in the process instance context.
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the file picker.
