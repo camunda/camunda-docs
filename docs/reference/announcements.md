@@ -21,8 +21,9 @@ Camunda 8.8 is scheduled for release on 14 October 2025.
 - [API updates](/reference/announcements/880.md#api-updates-saasself-managed)
 - [Identity management updates](/reference/announcements/880.md#identity-management-updates-saasself-managed)
 - [Installation and deployment updates](/reference/announcements/880.md#installation-and-deployment-updates-self-managed)
+- [Zeebe, Operate, Tasklist, and Identity must run on same minor and patch](/reference/announcements/880.md#zeebe-operate-tasklist-and-identity-must-run-on-exact-same-minor-and-patch-levels)
 - [Camunda Exporter](/reference/announcements/880.md#camunda-exporter-self-managed)
-- [Camunda Java client and Camunda Spring SDK](/reference/announcements/880.md#camunda-java-client-and-camunda-spring-sdk-self-managed)
+- [Camunda Java client and Camunda Spring SDK](/reference/announcements/880.md#camunda-java-client-and-camunda-spring-sdk)
 
 </div>
 </div>
@@ -51,6 +52,8 @@ Camunda 8.7 is scheduled for release on 8 April 2025.
 - [Breaking changes in Camunda Process Test](/reference/announcements/870.md#breaking-changes-in-camunda-process-test)
 - [API updates](/reference/announcements/870.md#api-updates-saasself-managed)
 - [Identity Keycloak now requires v25 or v26](/reference/announcements/870.md#identity-keycloak-now-requires-v25-or-v26-self-managed)
+- [Camunda Spring SDK now requires Spring Boot 3.4.x](/reference/announcements/870.md#camunda-spring-sdk-now-requires-spring-boot-34x-saasself-managed)
+- [Zeebe Java client](/reference/announcements/870.md#zeebe-java-client)
 
 </div>
 </div>

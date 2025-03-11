@@ -121,6 +121,7 @@ module.exports = {
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity",
           ],
         },
         {
@@ -140,6 +141,15 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "RPA",
+      link: {
+        type: "doc",
+        id: "components/rpa/overview",
+      },
+      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
@@ -725,14 +735,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Experimental features",
-          items: [
-            "components/early-access/experimental/rpa/rpa-integration",
-            "components/early-access/experimental/rpa/rpa-framework-library",
-          ],
-        },
-        {
-          type: "category",
           label: "Alpha features",
           link: {
             type: "doc",
@@ -1032,7 +1034,15 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      type: "category",
+      label: "Data collection",
+      link: {
+        type: "doc",
+        id: "reference/data-collection/data-collection",
+      },
+      items: ["reference/data-collection/usage-metrics"],
+    },
     "reference/glossary",
   ],
   "Self-Managed": [
