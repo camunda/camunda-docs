@@ -10,6 +10,7 @@ import IdpIconPassImg from './img/idp-validation-icon-pass.png';
 import IdpIconCautionImg from './img/idp-validation-icon-caution.png';
 import IdpIconFailImg from './img/idp-validation-icon-fail.png';
 import IdpValidationExampleImg from './img/idp-validation-example.png';
+import IdpDocumentStorageImg from './img/idp-document-storage.png';
 
 Technical reference information for IDP, including technical architecture, supported documents, and known limitations.
 
@@ -19,7 +20,7 @@ IDP offers a composable architecture that allows you to customize and extend IDP
 
 IDP allows you to create, configure, and publish a **document extraction template**. This is a type of [connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
-<img src={IdpArchitectureImg} alt="Architecture diagram of IDP" width="500px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+<img src={IdpArchitectureImg} alt="Architecture diagram of IDP" width="550px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
 
 The document extraction template integrates with Camunda document handling connectors and APIs such as [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md), [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), [Amazon Comprehend](/components/connectors/out-of-the-box-connectors/amazon-comprehend.md), and [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md) to retrieve, analyze, and process documents.
 
@@ -40,17 +41,19 @@ The document extraction template integrates with Camunda document handling conne
 
 IDP stores documents as follows during the different extraction stages:
 
-- Web Modeler: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Web Modeler itself (SaaS) or the database (Self-Managed).
-- Cluster: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is briefly stored in the cluster.
-- Extraction: Finally, when you extract content using a document extraction template, it is stored in an [Amazon AWS S3 bucket](idp-configuration.md#prerequisites), where it can be accessed by AWS Textract.
+<img src={IdpDocumentStorageImg} alt="IDP document storage diagram" width="800px" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}}/>
+
+1. Web Modeler: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Web Modeler itself (SaaS) or the database (Self-Managed).
+1. Cluster: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is stored in the cluster using the [document handling](/components/concepts/document-handling.md) API.
+1. Extraction: Finally, when you extract content using a document extraction template, it is stored in an [Amazon AWS S3 bucket](idp-configuration.md#prerequisites), where it can be accessed by AWS Textract.
 
 ## Document file formats {#file-formats}
 
 IDP currently only supports data extraction from the following uploaded document file formats.
 
-| File format | Description                                                                                                                                                                                                                                                                                                           |
-| :---------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <p>PDF</p>  | <p><ul><li>PDF documents must not be password protected.</li><li><p>Maximum document file size is 4MB for test extraction.</p></li><li><p>Both text and image content can be extracted from a PDF document. For example, data can be extracted from a scanned image that has been converted to PDF.</p></li></ul></p> |
+| File format | Description                                                                                                                                                                                                                                                                                                              |
+| :---------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <p>PDF</p>  | <p><ul><li>PDF documents must not be password protected.</li><li><p>Maximum document file size is 4MB for all IDP operations.</p></li><li><p>Both text and image content can be extracted from a PDF document. For example, data can be extracted from a scanned image that has been converted to PDF.</p></li></ul></p> |
 
 ## Document language support {#languages}
 
