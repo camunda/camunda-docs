@@ -4,7 +4,7 @@ title: "Metrics"
 keywords: ["observability", "metrics", "monitoring", "monitor"]
 ---
 
-When operating a distributed system like Zeebe, it is important to put proper monitoring in place. To facilitate this, Zeebe leverages [Micrometer](https://micrometer.io/), a library
+When operating a distributed system like Camunda 8, it is important to put proper monitoring in place. To facilitate this, Camunda leverages [Micrometer](https://micrometer.io/), a library
 which provides a convenient facade that allows exporting metrics to [one or more supported implementations](https://docs.micrometer.io/micrometer/reference/implementations.html)
 (e.g. Prometheus, OpenTelemetry, Datadog, Dynatrace, etc.).
 
@@ -14,7 +14,7 @@ Configuration for metrics is done via the [built-in Spring Boot Micrometer confi
 
 ### Defaults
 
-Zeebe comes built-in with support for [Prometheus](https://prometheus.io) and [OpenTelemetry](https://opentelemetry.io/). By default, it is configured to export only Prometheus metrics
+Camunda comes built-in with support for [Prometheus](https://prometheus.io) and [OpenTelemetry](https://opentelemetry.io/). By default, it is configured to export only Prometheus metrics
 via [a scraping endpoint](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.export.prometheus), and OpenTelemetry is disabled.
 
 #### Prometheus
@@ -31,7 +31,7 @@ management:
 In order to collect the metrics, Prometheus needs to be made aware of the new scraping endpoint. To do so, add the following scraping job:
 
 ```
-- job_name: zeebe
+- job_name: camunda
   scrape_interval: 30s
   metrics_path: /actuator/prometheus
   scheme: http
@@ -103,7 +103,7 @@ mvn dependency:copy -Dartifact=io.micrometer:micrometer-registry-datadog:1.14.4 
 ```
 
 :::note
-Make sure the version is the same as the Micrometer version used by Zeebe. You can find this out by checking the distribution artifact on
+Make sure the version is the same as the Micrometer version used by Camunda. You can find this out by checking the distribution artifact on
 [Maven Central](https://central.sonatype.com/artifact/io.camunda/camunda-zeebe/dependencies).
 
 Make sure to select the distribution version you're using, then filter for `micrometer` to get the expected Micrometer version.
@@ -111,12 +111,12 @@ Make sure to select the distribution version you're using, then filter for `micr
 
 ### Customizing metrics
 
-You can modify and filter the metrics exposed in Zeebe via configuration.
+You can modify and filter the metrics exposed in Camunda via configuration.
 
 #### Common tags
 
 [Tags provide a convenient way of aggregating metrics over common attributes](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.customizing.common-tags).
-Via configuration, you can ensure that all metrics for a specific instance of Zeebe share common tags. For example, let's say you deploy two different clusters, and want to differentiate them.
+Via configuration, you can ensure that all metrics for a specific instance of Camunda share common tags. For example, let's say you deploy two different clusters, and want to differentiate them.
 
 The first one could be configured as:
 
@@ -159,7 +159,7 @@ above would also be filtered out, and wouldn't be exported.
 ## Available metrics
 
 [Spring already exposes various metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported), some of which will be made available
-through Zeebe:
+through Camunda:
 
 - [JVM metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported.jvm)
 - [System metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported.system)
@@ -167,10 +167,11 @@ through Zeebe:
 - [Logger metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported.logger)
 - [Spring MVC metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported.spring-mvc)
 
-Additionally, Zeebe will expose several custom metrics, all of which are prefixed with either `zeebe` or `atomix`.
+Additionally, Camunda will expose several custom metrics, all of which are prefixed with either `zeebe`, `atomix`, `operate`, `tasklist`, or `optimize`.
 
 :::note
-Both brokers and gateways expose their respective metrics. The brokers have an optional metrics exporter that can be enabled for maximum insight.
+While all nodes in a Camunda cluster expose metrics, they will expose relevant metrics based on their role. For example, brokers will expose processing related metrics,
+while gateways will expose REST API relevant metrics.
 :::
 
 **Metrics related to process processing:**
@@ -202,11 +203,14 @@ Monitor backpressure and processing latency of the commands using the following 
 
 The health of partitions in a broker can be monitored by the metric `zeebe_health`.
 
-## Enable additional metrics
+## Execution latency metrics
 
-Metrics are exported by default. To enable execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](../configuration/configuration.md).
+The brokers can export optional execution latency metrics. To enable export of execution metrics, configure set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in
+your Zeebe [configuration file](../configuration/configuration.md).
 
 ## Grafana
+
+### Zeebe
 
 Zeebe comes with a pre-built dashboard, available in the repository:
 [monitor/grafana/zeebe.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/zeebe.json).

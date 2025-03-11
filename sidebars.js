@@ -1197,9 +1197,14 @@ module.exports = {
           ],
         },
         {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },
       ],
