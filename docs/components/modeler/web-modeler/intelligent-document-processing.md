@@ -31,7 +31,7 @@ For example, you can use IDP to extract data from invoices and other document ty
 [Configure IDP](idp/idp-configuration.md) for your Camunda 8 setup to make sure IDP can access the required components and credentials.
 
 :::note
-IDP is only supported for Camunda 8 SaaS with the 8.7.0-alpha5 release. Support for Camunda 8 Self-Managed and Camunda 8 Run is planned for delivery with the 8.7 release.
+IDP is only supported for Camunda 8 Self-Managed with the 8.7.0-alpha5 release, with full configuration documentation to follow. Support for Camunda 8 SaaS and Camunda 8 Run is planned for delivery with the 8.7 release.
 :::
 
 ## Get started with IDP
