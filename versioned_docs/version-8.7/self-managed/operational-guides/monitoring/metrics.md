@@ -206,7 +206,7 @@ The health of partitions in a broker can be monitored by the metric `zeebe_healt
 ## Execution latency metrics
 
 The brokers can export optional execution latency metrics. To enable export of execution metrics, configure set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in
-your Zeebe [configuration file](../configuration/configuration.md).
+your Zeebe [configuration file](/versioned_docs/version-8.7/self-managed/zeebe-deployment/configuration/configuration.md).
 
 ## Grafana
 
