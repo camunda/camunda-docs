@@ -75,5 +75,6 @@ Requesting specific modifications to one or several sections of the BPMN diagram
 
 ### Limitations
 
+- The BPMN Copilot only supports processes up to approximately 400 KB large
 - The BPMN Copilot officially supports only modifying diagrams that were created by the BPMN Copilot itself. It does not officially support modifying other existing diagrams (including diagrams with implementation details).
 - The BPMN Copilot does not support pools, lanes, and collaborations.
