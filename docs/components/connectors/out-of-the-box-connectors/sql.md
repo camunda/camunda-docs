@@ -127,10 +127,6 @@ Variables need to be provided as a list or an object. We provide three ways to u
 | Positional parameters | `SELECT * FROM mytable WHERE field = ?`<br/><br/>`INSERT INTO Employee (id, name, age, department) VALUES (?, ?, ?, ?)`                         | `=["theFieldValue"]`<br/><br/>`=[1, "John", 34, "Dept"]`                                   |
 | List parameters       | `SELECT * FROM mytable WHERE field IN (<listField>)`                                                                                            | `={listField: ["val1", "val2"]}`                                                           |
 
-:::note
-Starting from version 8.7.0, the SQL Connector works with document handling to add JSON support. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
-:::
-
 ## Appendix & FAQ
 
 ### How do I store secrets for my Connector?
