@@ -28,13 +28,13 @@ The purge operation is irreversible. It will delete the runtime data in the clus
 
 To purge data from your cluster, send a `POST` request to the `/actuator/cluster/purge` endpoint:
 
-```
+```sh
 curl -X POST 'http://localhost:9600/actuator/cluster'
 ```
 
 The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
 
-```
+```json
 {
   changeId: <changeId>
   currentTopology: [...]
@@ -51,7 +51,7 @@ The response is a JSON object. See detailed specs [here](https://github.com/camu
 <details>
   <summary>Example response</summary>
 
-```
+```json
 {
   "changeId": 2,
   "currentTopology": [
@@ -126,13 +126,13 @@ The purge operation can take some time to complete, depending on the amount of d
 
 You can monitor the progress of the operation by sending a `GET` request to the `/actuator/cluster` endpoint:
 
-```
+```sh
 curl --request GET 'http://localhost:9600/actuator/cluster'
 ```
 
 When the scaling has completed, the `changeId` from the previous response will be marked as completed:
 
-```
+```json
 {
   "version": 3,
   "brokers": [
@@ -170,7 +170,7 @@ When the scaling has completed, the `changeId` from the previous response will b
 
 You can use the `--dry-run` flag to simulate the purge operation without deleting any data. This can be useful to understand the impact of the operation before proceeding.
 
-```
+```sh
 curl -X POST 'http://localhost:9600/actuator/cluster/purge?dry-run=true'
 ```
 
