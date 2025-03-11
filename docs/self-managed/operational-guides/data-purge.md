@@ -4,6 +4,9 @@ title: "Data purge"
 description: "Purge data from your cluster"
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 The data purge feature allows you to delete all runtime and historical data from your cluster. This operation resets the cluster to an empty state while maintaining the original topology.
 
 The purge operation performs two main actions:
@@ -24,12 +27,90 @@ You will need access to the Cluster API as described in the [Cluster scaling gui
 The purge operation is irreversible. It will delete the runtime data in the cluster and the historical data in the exporters! Make sure to back up your data before proceeding.
 :::
 
+### Usage
+
+The purge operation is a cluster-wide, asynchronous operation. Since it is asynchronous, you first launch it by sending a `POST` request to `/actuator/cluster/purge`,
+and then monitor by polling the topology via `/actuator/cluster`, until it's finished.
+
+<Tabs groupId="language" defaultValue="shell" queryString values={
+[
+{label: 'shell', value: 'shell' },
+{label: 'Java', value: 'java' },
+]}>
+
+<TabItem value='shell'>
+
+:::note
+This example relies on the [curl](https://curl.se/) and [jq](https://jqlang.org/) utilities.
+:::
+
+```sh
+changeId=$(curl -sL -X POST 'http://localhost:9600/actuator/cluster/purge' | jq '.changeId')
+lastChangeId=-1
+while [ ! $changeId -eq $lastChangeId ]; do
+  lastChangeId=$(curl -sL 'http://localhost:9600/actuator/cluster' | jq '.lastChange.id')
+  [ $changeId -ge $lastChangeId ] && break
+  echo "Awaiting last change ID ${lastChangeId} to be equal to purge change ID ${changeId}"
+  sleep 1
+done
+```
+
+</TabItem>
+
+<TabItem value='java'>
+
+:::note
+This example relies on code generated from [this OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml),
+bundled with the distribution.
+:::
+
+```java
+final String baseURL = "http://localhost:9600/actuator/cluster";
+final URL monitorURI = URI.create(baseURL).toURL();
+final URI purgeURI = URI.create(baseURL + "/purge");
+final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+try (final HttpClient client = HttpClient.newHttpClient()) {
+  final HttpRequest purgeRequest =
+      HttpRequest.newBuilder().uri(purgeURI).POST(HttpRequest.BodyPublishers.noBody()).build();
+
+  final HttpResponse<InputStream> purgeResponse =
+      client.send(purgeRequest, BodyHandlers.ofInputStream());
+  final PlannedOperationsResponse purgePlan =
+      objectMapper.readValue(purgeResponse.body(), PlannedOperationsResponse.class);
+
+  final long purgeChangeId = purgePlan.getChangeId();
+  long lastChangeId = -1;
+  while (purgeChangeId != lastChangeId) {
+    final GetTopologyResponse topology =
+        objectMapper.readValue(monitorURI, GetTopologyResponse.class);
+    lastChangeId = topology.getLastChange().getId();
+    if (lastChangeId >= purgeChangeId) {
+      break;
+    }
+
+    System.out.println(
+        "Waiting until the last change ID "
+            + lastChangeId
+            + " is equal to the purge change ID "
+            + purgeChangeId);
+    Thread.sleep(1_000);
+  }
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+To know if your purge operation is finished, you can compare the change ID returned by launching it with the last change ID from the topology request.
+When the last change ID is greater than or equal to your purge operation's change ID, then purging is finished.
+
 ### 1. Send the purge request to the Zeebe Gateway
 
 To purge data from your cluster, send a `POST` request to the `/actuator/cluster/purge` endpoint:
 
 ```sh
-curl -X POST 'http://localhost:9600/actuator/cluster'
+curl -X POST 'http://localhost:9600/actuator/cluster/purge'
 ```
 
 The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
