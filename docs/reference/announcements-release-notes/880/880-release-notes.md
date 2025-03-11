@@ -84,7 +84,7 @@ The exporter can consume Zeebe records (mostly events created by the engine), ag
 
 The following diagram shows a simplified version of this work.
 
-![Camunda Exporter diagram](../img/target-camunda-exporter.png)
+![Camunda Exporter diagram](../../img/target-camunda-exporter.png)
 
 - For example, Tasklist and Operate Importers are still required for old data to be imported, but the Camunda exporter writes all new data into ES/OS. After old indices are drained, importers can be turned off.
 - The archiver, which takes care of the archiving of completed process instances, will be moved into the Zeebe system as well, to reduce the installation complexity and provide a better scaling and replication factor (based on partitions).
@@ -99,7 +99,7 @@ Camunda is harmonizing our index structure and usage.
 - With this change, several Operate indices can and will be used by Tasklist.
 - New indices have been created to integrate Identity into the system.
 
-![Harmonized indices schema](../img/harmonized-indices-schema.png)
+![Harmonized indices schema](../../img/harmonized-indices-schema.png)
 
 <!-- :::info
 Learn more about these updates in Streamlined Deployment with 8.7.
