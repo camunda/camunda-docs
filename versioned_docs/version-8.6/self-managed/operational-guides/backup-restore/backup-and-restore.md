@@ -6,6 +6,9 @@ keywords: ["backup", "backups"]
 ---
 
 :::note
+If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2, 3, 5 and 6 from the backup procedure below) as a standalone application separate from the main application (see [Standalone Backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
+:::
+:::note
 This release introduces breaking changes for [Operate and Tasklist](./operate-tasklist-backup.md), as well as [Optimize](./optimize-backup.md).
 :::
 
@@ -60,10 +63,6 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
 
 :::note
 If any of the steps above fail, you may have to restart with a new backup id. Ensure exporting is resumed if the backup process force quits in the middle of the process.
-:::
-
-:::note
-If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2, 3, 5 and 6) as a standalone application separate from the main application (see [Backup and restore Operate and Tasklist data without cluster privileges](/self-managed/operational-guides/backup-restore/operate-tasklist-backup-without-cluster-privileges.md)).
 :::
 
 ### Restore
