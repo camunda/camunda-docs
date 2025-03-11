@@ -46,18 +46,8 @@ Technical changelogs for Camunda 8 are available on GitHub:
 - [Camunda 8 Core](https://github.com/camunda/camunda/releases)
 - [Connectors](https://github.com/camunda/connectors/releases)
 - [Camunda Helm chart](https://github.com/camunda/camunda-platform-helm/releases)
-
-Most releases and changelogs are available through the [Camunda Platform repo](https://github.com/camunda/camunda-platform). The following component release notes are available as linked below:
-
 - [Desktop Modeler](https://github.com/camunda/camunda-modeler/releases)
-- [Connectors](https://github.com/camunda/connectors/releases)
 
-Some components have changelogs that are not publicly available, including the following:
-
-- Web Modeler
-- Console
-
-These are available in a blog format under the [release notes](https://camunda.com/blog/category/releases/) tag.
 
 ## Release policy
 
