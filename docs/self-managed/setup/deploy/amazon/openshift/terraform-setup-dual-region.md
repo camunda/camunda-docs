@@ -340,7 +340,7 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
 
 This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
 
-We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/feature/rosa-8.8/aws/openshift/rosa-hcp-dual-region/README.md) for more information.
+We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/feature/rosa-8.8/aws/modules/rosa-hcp/README.md) for more information.
 
 :::
 
