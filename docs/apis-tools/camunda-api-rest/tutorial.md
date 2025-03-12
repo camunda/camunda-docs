@@ -65,7 +65,9 @@ async function listRoles() {
 
 4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Zeebe API URL beneath your call for an access token by defining `camundaApiUrl`:
 
-`const camundaApiUrl = process.env.ZEEBE_BASE_URL;`
+```javascript
+const camundaApiUrl = process.env.ZEEBE_BASE_URL;
+```
 
 5. On the next line, script the API endpoint to list the existing roles:
 
