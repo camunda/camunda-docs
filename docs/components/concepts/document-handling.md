@@ -105,6 +105,7 @@ Be sure to remove the hyphen and set `DOCUMENT_DEFAULT_STORE_ID` to `=inmemory`.
 Document handling may be beneficial for several use cases. For example:
 
 - [Upload a document via the inbound webhook Connector](#upload-a-document-via-inbound-webhook-connector), and later retrieve the document content in another Connector invocation to store it in a third-party system.
+- [Upload a document via a form](#upload-a-document-via-form), and utilize several outbound Connectors.
 
 ### Upload a document via inbound webhook Connector
 
@@ -166,8 +167,6 @@ The result variable will have the following structure:
 Here, we use the configuration of the image on the initial steps and assign the portion containing the documents to `userApplicationForms`. This can be later used by the process to retrieve documents. For example, we could use the variable `userApplicationForms` to display the uploaded document in a user task using the document preview component.
 
 Another Connector can also use this variable as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure. Review the list of [outbound Connectors](#outbound-connectors) below which currently support retrieving the document content to store in a third-party system.
-
-<!-- Need to confirm if the following is currently available. -->
 
 ### Upload a document via form
 
