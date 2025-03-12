@@ -67,7 +67,7 @@ Over this guide, you will add and merge values in this file to configure your de
 You can find a reference example of this file here:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/base.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/base.yml
 ```
 
 :::danger Merging YAML files
@@ -99,7 +99,7 @@ The route created by OpenShift will use a domain to provide access to the platfo
 To retrieve the OpenShift applications domain (used as an example here), run the following command and define the route domain that will be used for the Camunda 8 deployment:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/single-region/procedure/setup-application-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/procedure/setup-application-domain.sh
 ```
 
 If you choose to use a custom domain instead, ensure it is supported by your router configuration and replace the example domain with your desired domain. For more details on configuring custom domains in OpenShift, refer to the official [custom domain OpenShift documentation](https://docs.openshift.com/dedicated/applications/deployments/osd-config-custom-domains-applications.html).
@@ -117,7 +117,7 @@ oc get ingresses.config/cluster -o json | jq '.metadata.annotations."ingress.ope
 Alternatively, if you use a dedicated IngressController for the deployment:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/single-region/procedure/get-ingress-http2-status.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/procedure/get-ingress-http2-status.sh
 ```
 
 - If the output is `"true"`, it means HTTP/2 is enabled.
@@ -131,7 +131,7 @@ If HTTP/2 is not enabled, you can enable it by running the following command:
 **IngressController configuration:**
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/single-region/procedure/enable-ingress-http2.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/procedure/enable-ingress-http2.sh
 ```
 
 **Global cluster configuration:**
@@ -178,7 +178,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
      Update your `values.yml` file with the following:
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/core-route.yml
+   https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/core-route.yml
    ```
 
    The actual configuration properties can be reviewed:
@@ -190,7 +190,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 2. **Connectors:** update your `values.yml` file with the following:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/connectors-route.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/connectors-route.yml
 ```
 
 The actual configuration properties can be reviewed [in the Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
@@ -200,7 +200,7 @@ The actual configuration properties can be reviewed [in the Connectors configura
 1. Set up the global configuration to enable the single Ingress definition with the host. Update your configuration file as shown below:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/domain.yml
 ```
 
 <!--Intended space left for not breaking the build!-->
@@ -220,7 +220,7 @@ For guidance on installing an Ingress controller, you can refer to the [Ingress 
 
 Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
 
-If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/stable/8.8/examples/ingress-resources/grpc-services/README.md).
+If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/feature/rosa-8.8/examples/ingress-resources/grpc-services/README.md).
 
 :::
 
@@ -233,7 +233,7 @@ However, you can use `kubectl port-forward` to access the Camunda platform witho
 To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Update your `values.yml` file with the following:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/no-domain.yml
 ```
 
   </TabItem>
@@ -253,7 +253,7 @@ The `global.compatibility.openshift.adaptSecurityContext` variable in your value
 - `disabled`: The `runAsUser` and `fsGroup` values will not be modified (default).
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/scc.yml
 ```
 
 </TabItem>
@@ -262,7 +262,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/ope
 To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/no-scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/no-scc.yml
 ```
 
 </TabItem>
@@ -283,7 +283,7 @@ https://github.com/camunda/camunda-deployment-references/blob/8.8/generic/opensh
 Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/generate-passwords.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/generate-passwords.sh
 ```
 
 Use these environment variables in the `kubectl` command to create the secret.
@@ -291,7 +291,7 @@ Use these environment variables in the `kubectl` command to create the secret.
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/create-identity-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/create-identity-secret.sh
 ```
 
 ### Install Camunda 8 using Helm
@@ -301,13 +301,13 @@ Now that the `generated-values.yml` is ready, you can install Camunda 8 using He
 The following are the required environment variables with some example values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/chart-env.sh
 ```
 
 Then run the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/openshift/rosa-hcp-single-region/procedure/install/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/install-chart.sh
 ```
 
 This command:
@@ -325,7 +325,7 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 You can track the progress of the installation using the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 ## Verify connectivity to Camunda 8

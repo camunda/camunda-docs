@@ -127,7 +127,7 @@ If HTTP/2 is not enabled, you can enable it by running the following command:
 **IngressController configuration:**
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/single-region/procedure/enable-ingress-http2.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/openshift/single-region/procedure/enable-ingress-http2.sh
 ```
 
 **Global cluster configuration:**
