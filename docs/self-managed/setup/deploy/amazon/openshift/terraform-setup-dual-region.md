@@ -334,7 +334,7 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
 
 1. Configure user access to the clusters. By default, the user who creates an OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster will be created.
 
-1. Customize the clusters setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/feature/rosa-8.8/aws/openshift/rosa-hcp-dual-region//README.md).
+1. Customize the clusters setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/modules/rosa-hcp/README.md).
 
 :::caution Camunda Terraform module
 
