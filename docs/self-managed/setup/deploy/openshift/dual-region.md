@@ -509,9 +509,9 @@ chmod +x verify_installation_completed.sh
 
 1. Open a terminal and port-forward the Zeebe Gateway via `oc` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
-```shell
-oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/$HELM_RELEASE_NAME-zeebe-gateway" 8080:8080
-```
+   ```shell
+   oc --context "$CLUSTER_1_NAME" -n "$CAMUNDA_NAMESPACE_1" port-forward "services/$HELM_RELEASE_NAME-zeebe-gateway" 8080:8080
+   ```
 
 2. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
 
