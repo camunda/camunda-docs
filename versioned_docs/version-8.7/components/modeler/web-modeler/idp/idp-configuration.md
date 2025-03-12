@@ -39,3 +39,27 @@ Add your Amazon AWS IAM user _access key_ and _secret key_ as [connector secrets
 :::note
 You can rename these connector secrets if you want to change the testing bucket used in other environments (such as `test`, `stage` or `prod`). If you do this, you must also change these names to match within the **Authentication** section of the Properties panel for any related published document extraction templates.
 :::
+
+## Example Self-Managed Docker IDP installation {#idp-docker-example}
+
+You can download and run an example Docker Compose configuration to test IDP in a local environment.
+
+In this set of example files:
+
+- The `.env` file contains variables to get the 8.7.0-SNAPSHOT versions of all components.
+- The `connector-secrets.txt` file sets the [connector secrets](#aws-secrets) required by IDP.
+- In the `docker-compose.yaml` file, IDP is enabled using `IDP_ENABLED: "true"` in the Web Modeler environment variables.
+
+:::info
+See [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) to learn how to use Docker Compose to run Camunda Self-Managed locally.
+:::
+
+To run IDP locally using this example configuration:
+
+1. Download the example `camunda-snapshot-idp-enabled.zip` file, and extract the file contents to your desired location.
+1. In the extracted directory, [run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose) as normal.
+1.
+
+:::note
+Documentation to support a Self-Managed IDP installation using Helm Charts is planned for delivery with the 8.7 release.
+:::
