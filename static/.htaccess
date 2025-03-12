@@ -190,14 +190,14 @@ RewriteRule ^docs/guides/react-components/install-docker-compose/?$ /docs/guides
 RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/$1 [R=301,L]
 
 # Move logging from troubleshooting to monitoring
-RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels [R=301,L]
-RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels [R=301,L]
-RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels [R=301,L]
+RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 
 # Move metrics from zeebe-deployment to monitoring
-RewriteRule ^docs/8.7/self-managed/zeebe-deployment/operations/metrics?$ /docs/8.7/self-managed/operational-guides/monitoring/metrics [R=301,L]
-RewriteRule ^docs/8.6/self-managed/zeebe-deployment/operations/metrics?$ /docs/8.6/self-managed/operational-guides/monitoring/metrics [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/operations/metrics?$ /docs/8.6/self-managed/operational-guides/monitoring/metrics [R=301,L]
+RewriteRule ^docs/8.7/self-managed/zeebe-deployment/operations/metrics/?$ /docs/8.7/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/zeebe-deployment/operations/metrics/?$ /docs/8.6/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/operations/metrics/?$ /docs/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
 
 # TODO at time of release: account for API spec moves in https://github.com/camunda/camunda-docs/pull/4534 (there are many)
 
