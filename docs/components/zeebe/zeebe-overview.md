@@ -2,11 +2,13 @@
 id: zeebe-overview
 title: "Zeebe"
 sidebar_label: "Introduction"
-description: "Zeebe is the process automation engine powering Camunda 8. While written in Java, you do not need to be a Java developer to use Zeebe."
+description: "Zeebe is the workflow engine powering Camunda 8. While written in Java, you do not need to be a Java developer to use Zeebe."
 ---
 
 import OverviewImg from '../zeebe/technical-concepts/assets/zeebe-architecture.png';
 import ZeebeGrid from '../zeebe/react-components/\_zeebe-card';
+
+Zeebe is the workflow engine powering Camunda 8. While written in Java, you do not need to be a Java developer to use Zeebe.
 
 import { gettingStartedCards } from '../zeebe/react-components/\_zeebe-card-data';
 

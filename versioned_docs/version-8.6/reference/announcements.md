@@ -10,7 +10,7 @@ Release date: 8th of Oct 2024
 
 End of maintenance: 14th of April 2026
 
-## Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
+### Zeebe, Operate, and Tasklist must run on exact same minor and patch levels
 
 From version `8.6.0` forward, the core components Zeebe, Operate, and Tasklist must run the exact same `minor` and `patch` level to ensure compatibility. See the [component version matrix](./supported-environments.md#component-version-matrix) for an overview of components.
 
@@ -34,38 +34,18 @@ To configure with Helm, visit the [Self Managed installation documentation](/sel
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
-### Zeebe Java client
-
-Starting with 8.7, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
-
-The primary goal of those changes is to enable users to interact with Camunda clusters with one consolidated client rather than multiple. The `CamundaClient` will replace the `ZeebeClient`, offering the same functionality and adding new capabilities. If you need to continue using the old `ZeebeClient`, you can use the version 8.6 artifact without any issues with newer cluster versions as the client is forward-compatible.
-
-:::note
-The Zeebe Java client will not be developed further and will only receive bug fixes for as long as version 8.6 is officially supported.
-:::
-
-#### Key changes
-
-- **New package structure**:
-  - Package `io.camunda.client`: This package contains the new `CamundaClient` and all the features slated for release in version 8.7.
-- **Properties and environment variables refactoring**:
-  - All old Java client property names will be refactored to more general ones. For instance, `zeebe.client.tenantId` will become `camunda.client.tenantId`.
-  - Similarly, environment variables will be renamed following the same concept: `ZEEBE_REST_ADDRESS` will become `CAMUNDA_REST_ADDRESS`.
-- **Artifact ID change**:
-  - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
-
 ### Deprecation: Zeebe Go client & CLI client (zbctl)
 
 The Zeebe Go Client and CLI client (zbctl) will be [officially deprecated](https://camunda.com/blog/2024/09/deprecating-zbctl-and-go-clients/) with the 8.6 release as part of our efforts to streamline the Camunda 8 API experience. This client and CLI utility will not be released starting with Camunda 8.6, will no longer receive new features, and will be transitioned to a community-maintained status.
 
 The documentation of the Zeebe Go Client and CLI client (zbctl) moved to the [community clients section](/apis-tools/community-clients/index.md).
 
-## Zeebe Spring SDK test support in 8.6.7
+### Spring Zeebe SDK test support in 8.6.7
 
-[Testing support for the Zeebe Spring SDK](../apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
+[Testing support for the Spring Zeebe SDK](../apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
 
 :::note
-This closes the feature gap where the Zeebe Spring SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).
+This closes the feature gap where the Spring Zeebe SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).
 :::
 
 ### Camunda 8 SaaS - Required cluster update
