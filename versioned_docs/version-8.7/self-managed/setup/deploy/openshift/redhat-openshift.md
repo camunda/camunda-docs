@@ -171,7 +171,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
      To configure a Zeebe cluster securely, it's essential to set up a secure communication configuration between pods:
 
-     - We enable gRPC ingress for the Core pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
+     - We enable gRPC ingress for the ZeebeGateway pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
 
      - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
        Finally, we mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe Gateway Pod and the Zeebe Pod to configure both [broker security](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetworksecurity) and gateway security.
