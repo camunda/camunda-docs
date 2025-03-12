@@ -8,8 +8,6 @@ description: "Zeebe is the workflow engine powering Camunda 8. While written in 
 import OverviewImg from '../zeebe/technical-concepts/assets/zeebe-architecture.png';
 import ZeebeGrid from '../zeebe/react-components/\_zeebe-card';
 
-Zeebe is the workflow engine powering Camunda 8. While written in Java, you do not need to be a Java developer to use Zeebe.
-
 import { gettingStartedCards } from '../zeebe/react-components/\_zeebe-card-data';
 
 <p><a title="Zeebe architecture" href="../technical-concepts/architecture"><img src={OverviewImg} alt="Zeebe architecture" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '60%'}} className="fade-in-top-image"/></a>Zeebe is the process automation engine powering Camunda 8. While written in Java, you do not need to be a Java developer to use Zeebe.</p>
