@@ -148,9 +148,9 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 
 Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
 
-1. **Core Pod:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
+1. **Zeebe Gateway:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
 
-   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also use in the other components such as Operate, Tasklist.
+   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`.
 
      In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
 
@@ -174,6 +174,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
      - We enable gRPC ingress for the Core pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
 
      - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
+       Finally, we mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe Gateway Pod and the Zeebe Pod to configure both [broker security](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetworksecurity) and gateway security.
 
    Update your `values.yml` file with the following:
 
@@ -181,13 +182,29 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/generic/openshift/single-region/helm-values/zeebe-gateway-route.yml
    ```
 
-   The actual configuration properties can be reviewed:
+   The domain used by the Zeebe Gateway for gRPC is `zeebe-$DOMAIN_NAME` which different from the one used for the rest, namely `$DOMAIN_NAME`, to avoid any conflicts. It is also important to note that the port used for gRPC is `443`.
 
-   - [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection),
-   - [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection),
-   - [in the Zeebe Gateway configuration documentation](/self-managed/zeebe-deployment/configuration/gateway.md).
+2. **Operate:** mount the **Service Certificate Secret** to the Operate pod and configure the secure TLS connection. Here, only the `tls.crt` file is required.
 
-2. **Connectors:** update your `values.yml` file with the following:
+Update your `values.yml` file with the following:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/generic/openshift/single-region/helm-values/operate-route.yml
+```
+
+The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
+
+1. **Tasklist:** mount the **Service Certificate Secret** to the Tasklist pod and configure the secure TLS connection. Here, only the `tls.crt` file is required.
+
+   Update your `values.yml` file with the following:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/generic/openshift/single-region/helm-values/tasklist-route.yml
+```
+
+The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
+
+1. **Connectors:** update your `values.yml` file with the following:
 
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/generic/openshift/single-region/helm-values/connectors-route.yml
@@ -330,9 +347,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/g
 
 ## Verify connectivity to Camunda 8
 
-Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8).
-
-The username of the first user is `demo`, the password is the one generated previously and stored in the environment variable `FIRST_USER_PASSWORD`.
+Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8)
 
 :::caution Domain name for gRPC Zeebe
 
