@@ -744,7 +744,7 @@ Brokers:
 For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/community-clients/cli-client/cli-get-started.md).
 
   </TabItem>
-    <TabItem value="modeler" label="Desktop Modeler">
+  <TabItem value="modeler" label="Desktop Modeler">
 
 Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
