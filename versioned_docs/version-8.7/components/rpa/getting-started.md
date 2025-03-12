@@ -30,7 +30,7 @@ Once you have written your script, you can test it on a local RPA worker.
 
    1. Download the latest version of the [RPA worker](https://github.com/camunda/rpa-worker/releases).
    2. Create a new file named `rpa-worker.properties` in the same directory as the RPA worker. This is the configuration file for this worker.
-   3. Add `camunda.client.zeebe.enabled=false` to `rpa-worker.properties`. This disables connection to Zeebe and allows you to test scripts locally.
+   3. [Disable the zeebe client](/apis-tools/spring-zeebe-sdk/configuration.md#enabling-and-disabling) in `rpa-worker.properties`. This disables connection to Zeebe and allows you to test scripts locally.
    4. Start the worker by running the executable.
 
 2. **Check Desktop Modeler**: Ensure the RPA worker is now connected to Desktop Modeler. The worker should automatically connect. If not, ensure the connection URL is correct.
