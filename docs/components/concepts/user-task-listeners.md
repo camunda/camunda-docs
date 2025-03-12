@@ -79,17 +79,18 @@ See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for
 
 User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job. The following attributes can be retrieved using reserved header names:
 
-| Attribute         | Header name                        |
-| ----------------- | ---------------------------------- |
-| `action`          | `io.camunda.zeebe:action`          |
-| `assignee`        | `io.camunda.zeebe:assignee`        |
-| `candidateGroups` | `io.camunda.zeebe:candidateGroups` |
-| `candidateUsers`  | `io.camunda.zeebe:candidateUsers`  |
-| `dueDate`         | `io.camunda.zeebe:dueDate`         |
-| `followUpDate`    | `io.camunda.zeebe:followUpDate`    |
-| `formKey`         | `io.camunda.zeebe:formKey`         |
-| `priority`        | `io.camunda.zeebe:priority`        |
-| `userTaskKey`     | `io.camunda.zeebe:userTaskKey`     |
+| Attribute           | Header name                          |
+| ------------------- | ------------------------------------ |
+| `action`            | `io.camunda.zeebe:action`            |
+| `assignee`          | `io.camunda.zeebe:assignee`          |
+| `candidateGroups`   | `io.camunda.zeebe:candidateGroups`   |
+| `candidateUsers`    | `io.camunda.zeebe:candidateUsers`    |
+| `changedAttributes` | `io.camunda.zeebe:changedAttributes` |
+| `dueDate`           | `io.camunda.zeebe:dueDate`           |
+| `followUpDate`      | `io.camunda.zeebe:followUpDate`      |
+| `formKey`           | `io.camunda.zeebe:formKey`           |
+| `priority`          | `io.camunda.zeebe:priority`          |
+| `userTaskKey`       | `io.camunda.zeebe:userTaskKey`       |
 
 Below is an example of accessing the `assignee` value from the headers in Java:
 
@@ -109,6 +110,19 @@ final JobHandler userTaskListenerHandler =
 ```
 
 Each header provides user task metadata that can be leveraged to customize the behavior of the user task listener job. Use these headers to retrieve necessary information about the user task in your job handler implementation.
+
+#### Changed attributes
+
+The `changedAttributes` attribute lists which user task attributes have changed with the event.
+
+:::note
+User task data corrections are taken into account.
+For example, consider a user task with three `assigning` listeners defined.
+When assigning the user task, the first listener sees the `assignee` attribute in the `changedAttributes`.
+If it corrects the priority, a subsequent assigning listener sees both the `assignee` and the `priority` attributes as changed attributes.
+Now, this second listener corrects the priority back to the value it had before assigning.
+The third listener sees only the `assignee` attribute as changed attribute, because the priority is no longer changed with the event.
+:::
 
 ### Correcting user task data
 
