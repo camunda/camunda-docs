@@ -608,6 +608,9 @@ Console:
 
 ### Use the token
 
+<Tabs groupId="c8-connectivity">
+  <TabItem value="rest-api" label="REST API" default>
+
 For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
 <Tabs groupId="domain">

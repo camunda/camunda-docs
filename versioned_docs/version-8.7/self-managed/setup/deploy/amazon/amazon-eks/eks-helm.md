@@ -609,6 +609,9 @@ Console:
 
 ### Use the token
 
+<Tabs groupId="c8-connectivity">
+  <TabItem value="rest-api" label="REST API" default>
+
 For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the REST API](./../../../../../apis-tools/camunda-api-rest/camunda-api-rest-authentication.md?environment=self-managed).
 
 <Tabs groupId="domain">
@@ -659,6 +662,50 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/g
 
   </summary>
 </details>
+  </TabItem>
+  <TabItem value="modeler" label="Desktop Modeler">
+
+Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
+
+<Tabs groupId="domain" defaultValue="with" queryString values={
+[
+{label: 'With domain', value: 'with' },
+{label: 'Without domain', value: 'without' },
+]}>
+
+<TabItem value="with">
+
+The following values are required for the OAuth authentication:
+
+- **Cluster endpoint:** `https://zeebe.$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+
+</TabItem>
+
+<TabItem value="without">
+
+This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
+
+```shell
+kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
+```
+
+The following values are required for OAuth authentication:
+
+- **Cluster endpoint:** `http://localhost:26500`
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
 
 ## Test the installation with payment example application
 
