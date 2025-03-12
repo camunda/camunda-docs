@@ -42,29 +42,25 @@ You can rename these connector secrets if you want to change the testing bucket 
 
 ## Example Self-Managed Docker IDP deployment {#idp-docker-example}
 
-To deploy IDP in a local development environment, download and run the example Docker Compose configuration.
-
-- file
-
-The `camunda-snapshot-idp-enabled.zip` file contains the following files:
-
-| File                    | Notes                                                                                |
-| :---------------------- | :----------------------------------------------------------------------------------- |
-| `docker-compose.yaml`   | IDP is enabled using `IDP_ENABLED: "true"` in the Web Modeler environment variables. |
-| `.env`                  | Contains variables to get the 8.7.0-SNAPSHOT versions of all components.             |
-| `connector-secrets.txt` | Sets the [connector secrets](#aws-secrets) required by IDP.                          |
-| `README.md`             | A standard README file.                                                              |
-
-### Run IDP locally using Docker Compose
-
-To run Camunda 8 with IDP locally using this example configuration:
+To deploy and run Camunda 8 with IDP in a local development environment:
 
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites).
-1. Download the example `camunda-snapshot-idp-enabled.zip` file, and extract the file contents to your desired directory.
+
+1. Download the `camunda-snapshot-idp-enabled.zip` file, and extract the file contents to your desired directory.
 1. In the extracted directory, [run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose).
-1. Launch Web Modeler. For example, at http://localhost:8070 with the username `demo` and password `demo`.
+1. Launch Web Modeler at http://localhost:8070, and log in using the username `demo` and password `demo`.
 1. Get started with IDP by creating an [IDP application](idp-applications.md).
 
 :::info
 To learn more about using Docker Compose to run Camunda Self-Managed locally, see [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md).
 :::
+
+### Deployment files
+
+This example deployment uses the following files:
+
+| File                    | Notes                                                                            |
+| :---------------------- | :------------------------------------------------------------------------------- |
+| `docker-compose.yaml`   | Enables IDP with `IDP_ENABLED: "true"` in the Web Modeler environment variables. |
+| `.env`                  | Environment variables to get the 8.7.0-SNAPSHOT versions of all components.      |
+| `connector-secrets.txt` | Sets the [connector secrets](#aws-secrets) required by IDP.                      |
