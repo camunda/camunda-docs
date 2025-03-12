@@ -2771,12 +2771,7 @@ module.exports = {
             {
               Configuration: [
                 "self-managed/optimize-deployment/configuration/getting-started",
-                {
-                  "System configuration": [
-                    "self-managed/optimize-deployment/configuration/system-configuration",
-                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8",
-                  ],
-                },
+                "self-managed/optimize-deployment/configuration/system-configuration",
                 "self-managed/optimize-deployment/configuration/logging",
                 "self-managed/optimize-deployment/configuration/security-instructions",
                 "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
