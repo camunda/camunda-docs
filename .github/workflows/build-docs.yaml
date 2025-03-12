@@ -29,20 +29,20 @@ jobs:
       - name: Remove https redirect
         run: |
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
-      - name: Run web server
+      - name: Run a web server for link checking
         run: |
           docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnami/apache:2.4.54
           container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' webserver)
           echo "container_ip=${container_ip}" >> $GITHUB_ENV
           echo "domain_to_test=http://${container_ip}:8080" >> $GITHUB_ENV
-      - name: Download sitemap from production
-        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' > sitemap.prod.txt
       - name: Wait for running docs web server
         uses: nev7n/wait_for_response@v1
         with:
           url: ${{ env.domain_to_test }}
 
-      - name: Prepare product & element template links
+      - name: Download sitemap from production
+        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' > sitemap.prod.txt
+      - name: Prepare link collections
         # Turn static lists of URLs into HTML files with anchor tags.
         run: |
           mkdir -p ${temporary_link_path}
@@ -55,7 +55,7 @@ jobs:
           sed "s!https://docs\.camunda\.io\(.*\)!<a href=\"${domain_to_test}\1\">link</a>!g" \
             connectors-element-template-links.txt \
             > ${temporary_link_path}/connectors-element-template-links.html
-      - name: Serve product & element template links
+      - name: Serve link collections
         ## Run another web server because Muffet only works against web pages, not source files.
         uses: Eun/http-server-action@v1
         with:
