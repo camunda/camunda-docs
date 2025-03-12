@@ -105,6 +105,7 @@ Be sure to remove the hyphen and set `DOCUMENT_DEFAULT_STORE_ID` to `=inmemory`.
 Document handling may be beneficial for several use cases. For example:
 
 - [Upload a document via the inbound webhook Connector](#upload-a-document-via-inbound-webhook-connector), and later retrieve the document content in another Connector invocation to store it in a third-party system.
+- [Upload a document via a form](#upload-a-document-via-form), and utilize several outbound Connectors.
 
 ### Upload a document via inbound webhook Connector
 
