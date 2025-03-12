@@ -499,10 +499,6 @@ The following resources and configuration options are important to keep in mind 
 
 The following is a complete configuration example, taking all the above sections into consideration.
 
-:::note
-Please be advised that the current values files below contain unresolved issues which may impact functionality. Users are cautioned that implementation may result in unexpected behavior or errors.
-:::
-
 ### Example management configuration
 
 The following example `management-values.yaml` is provided to the `management` [namespace](#namespace-setup):

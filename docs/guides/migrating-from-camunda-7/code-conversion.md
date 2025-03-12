@@ -30,7 +30,7 @@ Because of the flexibility of Camunda 7, users leveraged different ways to write
 - Our approach to collect these is to use a collaborative GitHub repository, where our consultants, partners, and users can add their own patterns to the catalog.
 - You might still adapt the patterns to your situation, for example, if you use your own data handling or glue code abstractions.
 
-You can find the pattern catalog at [https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
+You can find the pattern catalog [here](https://github.com/camunda-community-hub/camunda-7-to-8-code-conversion).
 
 :::info
 The pattern catalog was kicked off and will be filled in Q2 of 2025.
