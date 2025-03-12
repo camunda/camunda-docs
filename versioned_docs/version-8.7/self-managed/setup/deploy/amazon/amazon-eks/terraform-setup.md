@@ -36,7 +36,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - This guide uses GNU/Bash for all the shell commands listed.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/merge-branch/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
@@ -97,44 +97,30 @@ Following this tutorial and steps will result in:
 
 ## 1. Configure AWS and initialize Terraform
 
-### Download the reference architecture GitHub repository
+### Obtain a copy of the reference architecture
+
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/). This archive will be used throughout the rest of this documentation, the reference architecture are versioned using the same Camunda versions (`stable/8.x`).
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
-There are different ways to clone the repository, either by using `git clone`, `curl / wget` or manually downloading it from [GitHub](https://github.com/camunda/camunda-deployment-references).
+   <Tabs groupId="env">
+   <TabItem value="standard" label="Standard" default>
 
-<!-- TODO: Update the branches to use stable/8.7 -->
-
-```bash
-git clone --depth=1 https://github.com/camunda/camunda-deployment-references.git
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/kubernetes/eks-single-region/procedure/get-your-copy.sh
 ```
 
-```bash
-curl -L -o camunda-deployment-references.zip https://github.com/camunda/camunda-deployment-references/archive/refs/heads/main.zip
-unzip camunda-deployment-references.zip
+   </TabItem>
+   <TabItem value="irsa" label="IRSA">
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/kubernetes/eks-single-region-irsa/procedure/get-your-copy.sh
 ```
 
-### Navigate to your chosen reference
+   </TabItem>
+   </Tabs>
 
-As explained in [How to choose](#how-to-choose), there are two available options. Proceed by navigating to the appropriate subfolder, as all subsequent steps must be executed from there.
-
-#### Standard installation
-
-```bash
-cd camunda-deployment-references/aws/kubernetes/single-region
-```
-
-#### IRSA installation
-
-```bash
-cd camunda-deployment-references/aws/kubernetes/single-region-irsa
-```
-
-### Explaining the layout
-
-<!--
-TODO: Explain the folder layout / files etc.
--->
+With the reference architecture downloaded and extracted, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
 
 ### Terraform prerequisites
 
