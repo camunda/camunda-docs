@@ -204,11 +204,7 @@ try {
   const results = response.data;
 
   // Emit role to output.
-  console.log(
-    `Role Name: ${results.name}; Key: ${
-      results.key
-    };`
-  );
+  console.log(`Role Name: ${results.name}; Key: ${results.key};`);
 } catch (error) {
   // Emit an error from the server.
   console.error(error.message);
