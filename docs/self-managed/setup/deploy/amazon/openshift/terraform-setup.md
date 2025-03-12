@@ -349,7 +349,7 @@ You can access the created OpenShift cluster using the following steps:
 Set up the required environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/8.8/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/gather-cluster-login-id.sh
 ```
 
 If you want to give cluster administrator access to the created user, this is not required for a standard installation but can be useful for debugging:
