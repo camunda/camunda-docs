@@ -20,6 +20,12 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
+
+      - name: Check internal links
+        uses: untitaker/hyperlink@0.1.27
+        with:
+          args: build/
+
       - name: Remove https redirect
         run: |
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
@@ -30,6 +36,16 @@ jobs:
           echo "domain_to_test=http://${container_ip}:8080" >> $GITHUB_ENV
       - name: Download sitemap from production
         run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > sitemap.prod.txt
+      - name: Wait for running docs web server
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: ${{ env.domain_to_test }}
+      - name: Validate sitemap links
+        uses: lycheeverse/lychee-action@v1.6.1
+        with:
+          args: "sitemap.prod.txt"
+          fail: true
+
       - name: Prepare product & element template links
         # Turn static lists of URLs into HTML files with anchor tags.
         run: |
@@ -40,30 +56,17 @@ jobs:
           sed "s!https://docs\.camunda\.io\(.*\)!<a href=\"${domain_to_test}\1\">link</a>!g" \
             connectors-element-template-links.txt \
             > ${temporary_link_path}/connectors-element-template-links.html
-      - name: Wait for running docs web server
-        uses: nev7n/wait_for_response@v1
-        with:
-          url: ${{ env.domain_to_test }}
       - name: Serve product & element template links
         ## Run another web server because Muffet only works against web pages, not source files.
         uses: Eun/http-server-action@v1
         with:
           directory: ${{ env.temporary_link_path }}
-          port: 8080
-      - name: Validate sitemap links
-        uses: lycheeverse/lychee-action@v1.6.1
-        with:
-          args: "sitemap.prod.txt"
-          fail: true
+          port: 8081
       - name: Validate product links
         uses: ./.github/actions/muffet
         with:
-          url_to_validate: "${{ env.domain_to_test }}/product-links.html"
+          url_to_validate: http://localhost:8081/product-links.html
       - name: Validate element template links
         uses: ./.github/actions/muffet
         with:
-          url_to_validate: "${{ env.domain_to_test }}/connectors-element-template-links.html"
-      - name: Check internal links
-        uses: untitaker/hyperlink@0.1.27
-        with:
-          args: build/
+          url_to_validate: http://localhost:8081/connectors-element-template-links.html
