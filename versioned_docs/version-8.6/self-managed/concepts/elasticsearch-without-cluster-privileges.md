@@ -389,4 +389,22 @@ Once completed, you can proceed with step 7 of the [backup procedure](self-manag
 - This feature is only available for the Camunda `8.6.12` version and above.
 - This feature only works for installations using Elasticsearch.
 - Camunda Optimize data cannot be backed up with this setup.
-- TODO add getBackup and deleteBackup
+- Some operations that are supported by the backup actuator API are not supported by this feature.
+
+As a workaround you can use Elasticsearch API as following:
+
+#### List the snapshots of a backup
+
+```
+GET /_snapshot/<repository-name>/*_<backupID>_*
+```
+
+#### Delete the snapshots of a backup
+
+:::note Warning
+Make sure the `<backupID>` is not a single digit integer, otherwise the command below will delete more snapshots than desired.
+:::
+
+```
+DELETE /_snapshot/<repository-name>/*_<backupID>_*
+```
