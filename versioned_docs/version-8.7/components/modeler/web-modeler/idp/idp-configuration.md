@@ -42,13 +42,13 @@ You can rename these connector secrets if you want to change the testing bucket 
 
 ## Example Self-Managed Docker IDP environment {#idp-docker-example}
 
-To try out IDP in a local environment, you can download and run an example Docker Compose configuration.
+To try out IDP in a local environment, download and run the example Docker Compose configuration.
 
 - file
 
 The `camunda-snapshot-idp-enabled.zip` file contains the following files:
 
-| File                    | Description                                                                          |
+| File                    | Notes                                                                                |
 | :---------------------- | :----------------------------------------------------------------------------------- |
 | `docker-compose.yaml`   | IDP is enabled using `IDP_ENABLED: "true"` in the Web Modeler environment variables. |
 | `.env`                  | Contains variables to get the 8.7.0-SNAPSHOT versions of all components              |
@@ -62,10 +62,10 @@ To run Camunda 8 with IDP locally using this example configuration:
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites).
 1. Download the example `camunda-snapshot-idp-enabled.zip` file, and extract the file contents to your desired directory.
 1. In the extracted directory, [run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose).
-1. Once the environment has initialized, launch Web Modeler. For example, at http://localhost:8070 with the username `demo` and password `demo`.
-1. Get started with IDP by first creating an [IDP application](idp-applications.md).
+1. Launch Web Modeler. For example, at http://localhost:8070 with the username `demo` and password `demo`.
+1. Get started with IDP by creating an [IDP application](idp-applications.md).
 
-:::note
+:::info
 
 - To learn more about using Docker Compose to run Camunda Self-Managed locally, see [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md).
 - Documentation to support a Self-Managed IDP installation using Helm Charts is planned for delivery with the 8.7 release.
