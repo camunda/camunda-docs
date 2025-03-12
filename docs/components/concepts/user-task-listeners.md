@@ -77,9 +77,9 @@ See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for
 
 ### Accessing user task data
 
-User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job. The following properties can be retrieved using reserved header names:
+User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job. The following attributes can be retrieved using reserved header names:
 
-| Property          | Header name                        |
+| Attribute         | Header name                        |
 | ----------------- | ---------------------------------- |
 | `action`          | `io.camunda.zeebe:action`          |
 | `assignee`        | `io.camunda.zeebe:assignee`        |
