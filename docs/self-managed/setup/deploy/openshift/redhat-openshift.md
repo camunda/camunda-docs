@@ -187,28 +187,6 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    - [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection),
    - [in the Zeebe Gateway configuration documentation](/self-managed/zeebe-deployment/configuration/gateway.md).
 
-# TODO:; fix it
-
-2. **Operate:** mount the **Service Certificate Secret** to the Operate pod and configure the secure TLS connection. Here, only the `tls.crt` file is required.
-
-Update your `values.yml` file with the following:
-
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/openshift/single-region/helm-values/operate-route.yml
-```
-
-The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
-
-1. **Tasklist:** mount the **Service Certificate Secret** to the Tasklist pod and configure the secure TLS connection. Here, only the `tls.crt` file is required.
-
-   Update your `values.yml` file with the following:
-
-```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/openshift/single-region/helm-values/tasklist-route.yml
-```
-
-The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
-
 2. **Connectors:** update your `values.yml` file with the following:
 
 ```yaml reference
