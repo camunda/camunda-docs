@@ -67,7 +67,7 @@ Over this guide, you will add and merge values in this file to configure your de
 You can find a reference example of this file here:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/base.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/helm-values/base.yml
 ```
 
 :::danger Merging YAML files
@@ -178,7 +178,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
      Update your `values.yml` file with the following:
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/core-route.yml
+   https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/helm-values/core-route.yml
    ```
 
    The actual configuration properties can be reviewed:
@@ -190,7 +190,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 2. **Connectors:** update your `values.yml` file with the following:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/connectors-route.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/helm-values/connectors-route.yml
 ```
 
 The actual configuration properties can be reviewed [in the Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
@@ -200,7 +200,7 @@ The actual configuration properties can be reviewed [in the Connectors configura
 1. Set up the global configuration to enable the single Ingress definition with the host. Update your configuration file as shown below:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/helm-values/domain.yml
 ```
 
 <!--Intended space left for not breaking the build!-->
@@ -233,7 +233,7 @@ However, you can use `kubectl port-forward` to access the Camunda platform witho
 To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Update your `values.yml` file with the following:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/helm-values/no-domain.yml
 ```
 
   </TabItem>
@@ -253,7 +253,7 @@ The `global.compatibility.openshift.adaptSecurityContext` variable in your value
 - `disabled`: The `runAsUser` and `fsGroup` values will not be modified (default).
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/helm-values/scc.yml
 ```
 
 </TabItem>
@@ -262,7 +262,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/a
 To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/helm-values/no-scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/helm-values/no-scc.yml
 ```
 
 </TabItem>
