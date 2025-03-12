@@ -29,13 +29,13 @@ If you need to set up an OpenShift cluster on a cloud provider, we recommend our
 
 We conduct testing and ensure compatibility against the following OpenShift versions:
 
-| OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
-| ----------------- | --------------------------------------------------------------------------------- |
-| 4.18.x            | GA of 4.19 + 3 Months                                                             |
-| 4.17.x            | June 27, 2025                                                                     |
-| 4.16.x            | December 27, 2025                                                                 |
-| 4.15.x            | August 27, 2025                                                                   |
-| 4.14.x            | May 1, 2025                                                                       |
+| OpenShift Version |
+| ----------------- |
+| 4.18.x            |
+| 4.17.x            |
+| 4.16.x            |
+| 4.15.x            |
+| 4.14.x            |
 
 :::caution Versions compatibility
 
