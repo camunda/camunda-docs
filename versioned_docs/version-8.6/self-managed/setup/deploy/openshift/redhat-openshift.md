@@ -208,7 +208,7 @@ The actual configuration properties can be reviewed [in the Connectors configura
 1. Set up the global configuration to enable the single Ingress definition with the host. Update your configuration file as shown below:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/openshift/single-region/helm-values/helm-values/domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/openshift/single-region/helm-values/domain.yml
 ```
 
 <!--Intended space left for not breaking the build!-->
@@ -298,9 +298,9 @@ Use these environment variables in the `kubectl` command to create the secret.
 
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/openshift/single-region/procedure/create-identity-secret.sh
-```
+  ```bash reference
+  https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/openshift/single-region/procedure/create-identity-secret.sh
+  ```
 
 ### Install Camunda 8 using Helm
 

@@ -175,10 +175,10 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
      - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
 
-     Update your `values.yml` file with the following:
+   Update your `values.yml` file with the following:
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/generic/openshift/single-region/helm-values/core-route.yml
+   https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/generic/openshift/single-region/helm-values/zeebe-gateway-route.yml
    ```
 
    The actual configuration properties can be reviewed:
@@ -290,9 +290,9 @@ Use these environment variables in the `kubectl` command to create the secret.
 
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/generic/openshift/single-region/procedure/create-identity-secret.sh
-```
+  ```bash reference
+  https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.7/generic/openshift/single-region/procedure/create-identity-secret.sh
+  ```
 
 ### Install Camunda 8 using Helm
 
