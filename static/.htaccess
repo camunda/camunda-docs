@@ -138,7 +138,6 @@ RewriteRule ^docs/8.6/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?
 
 # Remove community clients
 RewriteRule ^docs/apis-tools/community-clients/c-sharp/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
-RewriteRule ^docs/apis-tools/community-clients/micronaut/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/community-clients/python/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/community-clients/quarkus/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/community-clients/ruby/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
