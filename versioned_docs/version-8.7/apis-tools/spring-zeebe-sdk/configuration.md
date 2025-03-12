@@ -279,6 +279,17 @@ camunda:
 
 You can use the following Zeebe-specific additional configuration options:
 
+#### Enabling and disabling
+
+You can disable the zeebe client by setting:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      enabled: false
+```
+
 #### Execution threads
 
 The number of threads for invocation of job workers. Setting this value to 0 effectively disables subscriptions and workers (default 1):
