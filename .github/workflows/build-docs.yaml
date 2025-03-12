@@ -36,21 +36,19 @@ jobs:
           echo "container_ip=${container_ip}" >> $GITHUB_ENV
           echo "domain_to_test=http://${container_ip}:8080" >> $GITHUB_ENV
       - name: Download sitemap from production
-        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' | sed "s!https://docs.camunda.io!http://${{ env.container_ip }}:8080!g" > sitemap.prod.txt
+        run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' > sitemap.prod.txt
       - name: Wait for running docs web server
         uses: nev7n/wait_for_response@v1
         with:
           url: ${{ env.domain_to_test }}
-      - name: Validate sitemap links
-        uses: lycheeverse/lychee-action@v1.6.1
-        with:
-          args: "sitemap.prod.txt"
-          fail: true
 
       - name: Prepare product & element template links
         # Turn static lists of URLs into HTML files with anchor tags.
         run: |
           mkdir -p ${temporary_link_path}
+          sed "s!https://docs\.camunda\.io\(.*\)!<a href=\"${domain_to_test}\1\">link</a>!g" \
+            sitemap.prod.txt \
+            > ${temporary_link_path}/sitemap-prod.html
           sed "s!https://docs\.camunda\.io\(.*\)!<a href=\"${domain_to_test}\1\">link</a>!g" \
             product-links.txt \
             > ${temporary_link_path}/product-links.html
@@ -63,6 +61,10 @@ jobs:
         with:
           directory: ${{ env.temporary_link_path }}
           port: 8081
+      - name: Validate sitemap links
+        uses: ./.github/actions/muffet
+        with:
+          url_to_validate: http://localhost:8081/sitemap-prod.html
       - name: Validate product links
         uses: ./.github/actions/muffet
         with:
