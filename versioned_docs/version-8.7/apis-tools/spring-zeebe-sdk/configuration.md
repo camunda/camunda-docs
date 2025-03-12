@@ -541,9 +541,19 @@ When using multi-tenancy, the Zeebe client will connect to the `<default>` tenan
 ```yaml
 camunda:
   client:
-    tenant-ids:
-      - <default>
-      - foo
+    tenant-id: foo
+```
+
+To control which tenants your job workers should use, you can configure:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        tenant-ids:
+          - <default>
+          - foo
 ```
 
 Additionally, you can set tenant ids on job worker level by using the annotation:
