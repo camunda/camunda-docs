@@ -73,6 +73,6 @@ The last step is to configure the RPA worker to pick up the jobs from Camunda.
 
    1. Create the necessary worker credentials in Console. You can follow the same steps as for the Modeler credentials. Give your new client the scopes `Zeebe` and `Secrets`.
    2. Save the generated credentials in a file named `rpa-worker.properties` in the same directory as your RPA worker executable.
-   3. Add `camunda.client.zeebe.enabled=true` to `rpa-worker.properties` to start fetching jobs from Zeebe.
+   3. [Enable the zeebe client](/apis-tools/spring-zeebe-sdk/configuration.md#enabling-and-disabling) in `rpa-worker.properties` to start fetching jobs from Zeebe.
 
 2. **Restart the worker**: If your worker is still running, restart it to apply the new credentials. The RPA worker should now be connected and ready to execute scripts from Zeebe.
