@@ -3176,16 +3176,25 @@
           ]
         },
         {
+          "Monitoring": [
+            {
+              "type": "link",
+              "label": "Log levels",
+              "href": "/docs/8.7/self-managed/operational-guides/monitoring/log-levels/"
+            },
+            {
+              "type": "link",
+              "label": "Metrics",
+              "href": "/docs/8.7/self-managed/operational-guides/monitoring/metrics/"
+            }
+          ]
+        },
+        {
           "Troubleshooting": [
             {
               "type": "link",
               "label": "Troubleshooting",
               "href": "/docs/8.7/self-managed/operational-guides/troubleshooting/"
-            },
-            {
-              "type": "link",
-              "label": "Log levels",
-              "href": "/docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/"
             }
           ]
         }

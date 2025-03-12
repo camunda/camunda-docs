@@ -2451,16 +2451,23 @@ module.exports = {
             ),
           ],
         },
-
+        {
+          Monitoring: [
+            docsLink(
+              "Log levels",
+              "self-managed/operational-guides/monitoring/log-levels/"
+            ),
+            docsLink(
+              "Metrics",
+              "self-managed/operational-guides/monitoring/metrics/"
+            ),
+          ],
+        },
         {
           Troubleshooting: [
             docsLink(
               "Troubleshooting",
               "self-managed/operational-guides/troubleshooting/"
-            ),
-            docsLink(
-              "Log levels",
-              "self-managed/operational-guides/troubleshooting/log-levels/"
             ),
           ],
         },
