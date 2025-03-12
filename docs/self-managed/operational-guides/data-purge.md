@@ -29,8 +29,7 @@ The purge operation is irreversible. It will delete the runtime data in the clus
 
 ### Usage
 
-The purge operation is a cluster-wide, asynchronous operation. Since it is asynchronous, you first launch it by sending a `POST` request to `/actuator/cluster/purge`,
-and then monitor by polling the topology via `/actuator/cluster`, until it's finished.
+The purge operation is a cluster-wide, asynchronous operation. Since it is asynchronous, you first launch it by sending a `POST` request to `/actuator/cluster/purge`, and then monitor by polling the topology via `/actuator/cluster` until it is finished.
 
 <Tabs groupId="language" defaultValue="shell" queryString values={
 [
@@ -102,8 +101,7 @@ try (final HttpClient client = HttpClient.newHttpClient()) {
 
 </Tabs>
 
-To know if your purge operation is finished, you can compare the change ID returned by launching it with the last change ID from the topology request.
-When the last change ID is greater than or equal to your purge operation's change ID, then purging is finished.
+To know if your purge operation is finished, compare the change ID returned by launching it with the last change ID from the topology request. When the last change ID is greater than or equal to your purge operation's change ID, then purging is finished.
 
 ### 1. Send the purge request to the Zeebe Gateway
 
@@ -113,7 +111,7 @@ To purge data from your cluster, send a `POST` request to the `/actuator/cluster
 curl -X POST 'http://localhost:9600/actuator/cluster/purge'
 ```
 
-The response is a JSON object. See detailed specs [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
+The response is a [JSON object](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml):
 
 ```json
 {
@@ -124,10 +122,10 @@ The response is a JSON object. See detailed specs [here](https://github.com/camu
 }
 ```
 
-- `changeId`: The ID of the changes initiated to scale the cluster. This can be used to monitor the progress of the scaling operation. The ID typically increases so new requests get a higher ID than the previous one.
+- `changeId`: The ID of the changes initiated to scale the cluster. This can be used to monitor the progress of the scaling operation. The ID typically increases, so new requests have a higher ID than previous requests.
 - `currentTopology`: A list of current brokers and the partition distribution.
 - `plannedChanges`: A sequence of operations that has to be executed to achieve scaling.
-- `expectedToplogy`: The expected list of brokers and the partition distribution once the scaling is completed. For the purge feature the expected topology will be the same as the current topology.
+- `expectedToplogy`: The expected list of brokers and the partition distribution once the scaling is completed. For the purge feature, the expected topology will be the same as the current topology.
 
 <details>
   <summary>Example response</summary>
@@ -257,7 +255,7 @@ curl -X POST 'http://localhost:9600/actuator/cluster/purge?dry-run=true'
 
 ### 2. Don't perform the purge operation during other cluster operations
 
-You cannot perform the purge operation if another cluster operation is already in progress (for example scaling).
+You cannot perform the purge operation if another cluster operation is already in progress (for example, scaling).
 
 Similarly, you cannot perform other cluster operations while the purge operation is in progress.
 
