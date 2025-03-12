@@ -1,5 +1,5 @@
-import Admonition from '@theme/Admonition';
-import Markdown from 'react-markdown';
+import Admonition from "@theme/Admonition";
+import Markdown from "react-markdown";
 
 // The purpose of this component is to conditionally render an admonition based on a date.
 // The date is a string in the format of "YYYY-MM-DD".
@@ -12,13 +12,11 @@ const ConditionalAdmonition = ({ date, text, ...props }) => {
   const currentDate = new Date();
   const targetDate = new Date(date);
 
-  return currentDate >= targetDate ? 
-
+  return currentDate >= targetDate ? (
     <Admonition {...props}>
       <Markdown>{text}</Markdown>
     </Admonition>
-
-    : null;
+  ) : null;
 };
 
 export default ConditionalAdmonition;
