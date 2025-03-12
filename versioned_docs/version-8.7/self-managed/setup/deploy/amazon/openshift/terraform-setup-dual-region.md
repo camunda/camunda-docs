@@ -568,7 +568,7 @@ The `BACKUP_BUCKET_REGION` will define the region of the bucket, you can pick on
 
 ### Reference files
 
-You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/feature/rosa-8.7/aws/openshift/rosa-hcp-dual-region/terraform)
+You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/feature/rosa-8.7/aws/openshift/rosa-hcp-dual-region/)
 
 ## 2. Preparation for Camunda 8 installation
 

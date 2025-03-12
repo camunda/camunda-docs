@@ -220,7 +220,7 @@ For guidance on installing an Ingress controller, you can refer to the [Ingress 
 
 Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
 
-If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/feature/rosa-8.8/examples/ingress-resources/grpc-services/README.md).
+If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
 
 :::
 
@@ -283,7 +283,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/g
 Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/generate-passwords.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/procedure/generate-passwords.sh
 ```
 
 Use these environment variables in the `kubectl` command to create the secret.
@@ -291,7 +291,7 @@ Use these environment variables in the `kubectl` command to create the secret.
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/create-identity-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/procedure/create-identity-secret.sh
 ```
 
 ### Install Camunda 8 using Helm
@@ -301,13 +301,13 @@ Now that the `generated-values.yml` is ready, you can install Camunda 8 using He
 The following are the required environment variables with some example values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/procedure/chart-env.sh
 ```
 
 Then run the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/openshift/rosa-hcp-single-region/procedure/install/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/generic/openshift/single-region/procedure/install-chart.sh
 ```
 
 This command:

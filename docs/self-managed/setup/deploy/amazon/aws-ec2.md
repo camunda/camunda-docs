@@ -80,8 +80,6 @@ Therefore, we recommend extending or reusing some elements of the Terraform exam
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module.
 
-# TODO: fix this one
-
 ```sh
 wget https://github.com/camunda/camunda-deployment-references/archive/refs/heads/main.zip
 ```
