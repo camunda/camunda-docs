@@ -39,6 +39,11 @@
     - Update the description and other metadata as necessary.
 3. Save your changes to finalize the customization.
 
+:::note Warning
+If one of your variables is used somewhere else in your element template, be mindful that the variable using other variables is declared after.
+Otherwise, they will be considered `null`
+:::
+
 
 ## Example Overview
 
