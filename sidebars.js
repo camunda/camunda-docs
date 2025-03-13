@@ -121,6 +121,7 @@ module.exports = {
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity",
           ],
         },
         {
@@ -140,6 +141,15 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "RPA",
+      link: {
+        type: "doc",
+        id: "components/rpa/overview",
+      },
+      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
@@ -179,6 +189,34 @@ module.exports = {
                 "components/modeler/web-modeler/design-your-process",
                 "components/modeler/web-modeler/implement-your-process",
                 "components/modeler/web-modeler/play-your-process",
+              ],
+            },
+            {
+              type: "category",
+              label: "Intelligent document processing",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp",
+              },
+              items: [
+                "components/modeler/web-modeler/idp/idp-configuration",
+                "components/modeler/web-modeler/idp/idp-applications",
+                {
+                  type: "category",
+                  label: "Document extraction",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-document-extraction",
+                  },
+                  items: [
+                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
+                    "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                  ],
+                },
+                // "components/modeler/web-modeler/idp/idp-document-automation",
+                "components/modeler/web-modeler/idp/idp-integrate",
+                "components/modeler/web-modeler/idp/idp-key-concepts",
+                "components/modeler/web-modeler/idp/idp-reference",
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
@@ -697,14 +735,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Experimental features",
-          items: [
-            "components/early-access/experimental/rpa/rpa-integration",
-            "components/early-access/experimental/rpa/rpa-framework-library",
-          ],
-        },
-        {
-          type: "category",
           label: "Alpha features",
           link: {
             type: "doc",
@@ -914,6 +944,7 @@ module.exports = {
             {
               "Java client": [
                 "apis-tools/java-client/index",
+                "apis-tools/java-client/authentication",
                 "apis-tools/java-client/job-worker",
                 "apis-tools/java-client/logging",
                 "apis-tools/java-client/zeebe-process-test",
@@ -935,21 +966,6 @@ module.exports = {
             {
               "Community clients": [
                 "apis-tools/community-clients/index",
-                {
-                  "Zeebe clients": [
-                    {
-                      "CLI client": [
-                        "apis-tools/community-clients/cli-client/index",
-                        "apis-tools/community-clients/cli-client/cli-get-started",
-                      ],
-                      "Go client": [
-                        "apis-tools/community-clients/go-client/index",
-                        "apis-tools/community-clients/go-client/go-get-started",
-                        "apis-tools/community-clients/go-client/job-worker",
-                      ],
-                    },
-                  ],
-                },
                 "apis-tools/build-your-own-client",
               ],
             },
@@ -1018,7 +1034,15 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      type: "category",
+      label: "Data collection",
+      link: {
+        type: "doc",
+        id: "reference/data-collection/data-collection",
+      },
+      items: ["reference/data-collection/usage-metrics"],
+    },
     "reference/glossary",
   ],
   "Self-Managed": [
@@ -1121,7 +1145,8 @@ module.exports = {
     {
       "Reference architecture": [
         "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual",
+        "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/manual",
       ],
     },
     {
@@ -1183,9 +1208,14 @@ module.exports = {
           ],
         },
         {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },
       ],
@@ -1259,7 +1289,6 @@ module.exports = {
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",
