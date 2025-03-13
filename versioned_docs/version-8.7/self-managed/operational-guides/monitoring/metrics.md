@@ -167,7 +167,7 @@ through Camunda:
 - [Logger metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported.logger)
 - [Spring MVC metrics](https://docs.spring.io/spring-boot/reference/actuator/metrics.html#actuator.metrics.supported.spring-mvc)
 
-Additionally, Camunda will expose several custom metrics, all of which are prefixed with either `zeebe`, `atomix`, `operate`, `tasklist`, or `optimize`.
+Additionally, Camunda will expose several custom metrics, most of them under the `zeebe`, `atomix`, `operate`, `tasklist`, or `optimize` prefixes.
 
 :::note
 While all nodes in a Camunda cluster expose metrics, they will expose relevant metrics based on their role. For example, brokers will expose processing related metrics,
