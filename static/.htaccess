@@ -86,9 +86,6 @@ RewriteRule ^blog/ / [R=301,L]
 # Product links that need to be preserved for Desktop Modeler, in perpetuity.
 RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
 RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
-RewriteRule ^docs/guides/utilizing-forms/#connect-your-form-to-a-bpmn-diagram$ /docs/guides/utilizing-forms/#link-your-form-to-a-bpmn-diagram [R=301,L]
-RewriteRule ^docs/components/modeler/bpmn/business-rule-tasks/#defining-a-task$ /docs/components/modeler/bpmn/business-rule-tasks/#defining-a-called-decision [R=301,L]
-RewriteRule ^docs/components/modeler/bpmn/script-tasks/#defining-a-task$ /docs/components/modeler/bpmn/script-tasks/#defining-a-script-task [R=301,L]
 
 ##################################################################################
 # 3. Specific content moves
