@@ -87,6 +87,26 @@ RewriteRule ^blog/ / [R=301,L]
 RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
 RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
 
+# URLs that need to be preserved for connector element templates, in perpetuity.
+RewriteRule ^docs$ /docs/ [R=301,L]
+RewriteRule ^docs/apis-clients/operate-api/$ /docs/apis-clients/operate-api/overview/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-dynamodb$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/?amazonsns=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook$ /docs/components/connectors/out-of-the-box-connectors/github/?github=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound$ /docs/components/connectors/out-of-the-box-connectors/kafka/?kafka=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/?rabbitmq=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rest$ /docs/components/connectors/protocol/rest/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound$ /docs/components/connectors/out-of-the-box-connectors/slack/?slack=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/twilio-webhook$ /docs/components/connectors/out-of-the-box-connectors/twilio/?twilio=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/protocol/amazon-eventbridge/\?awseventbridge=inbound$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/protocol/amazon-eventbridge/\?awseventbridge=outbound$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/ [R=301,L]
+RewriteRule ^docs/components/connectors/protocol/aws-lambda/$ /docs/components/connectors/out-of-the-box-connectors/aws-lambda/ [R=301,L]
+
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
