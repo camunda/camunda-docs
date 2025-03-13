@@ -1,7 +1,7 @@
 ---
 id: cluster-capacity
-title: Cluster capacity
-description: "Cluster capacity provides you with a high-level overview of how well a cluster is coping with and handling its current workload."
+title: Cluster load
+description: "Cluster load provides you with a high-level overview of how well a cluster is coping with and handling its current workload."
 ---
 
 import CapacityImg from './img/cluster-capacity.png';
