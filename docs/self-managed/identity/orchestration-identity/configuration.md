@@ -35,13 +35,13 @@ The default configuration available below is for Camunda 8 Run. Helm installatio
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_EMAIL`    | The email address of the first user.                                                              | `demo@demo.com`               |
 
   </TabItem>
-  <TabItem value="helm" label="Helm properties" default>
+  <TabItem value="helm" label="Helm properties">
 
 | Helm property                                       | Description                                                                                       | Default value (Camunda 8 Run) |
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------- |
 | `spring.profiles.active`                            | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth`           |
 | `camunda.security.authentication.method`            | The authentication method to use.                                                                 | `basic`                       |
-| `camunda.security.authentication.unprotected-api`   | If the API cane be used without authentication.                                                   | `true`                        |
+| `camunda.security.authentication.unprotected-api`   | If the API can be used without authentication.                                                    | `true`                        |
 | `camunda.persistent.sessions.enabled`               | Enables shared authentication between the Orchestration web applications (Operate and Tasklist).  | `true`                        |
 | `camunda.security.authorizations.enabled`           | If authorizations are enabled.                                                                    | `true`                        |
 | `camunda.security.initialization.users[0].username` | The username of the first user.                                                                   | `demo`                        |

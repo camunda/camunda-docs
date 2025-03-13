@@ -19,7 +19,7 @@ Following the default installation for [Camunda 8 Run](/self-managed/setup/deplo
 2. API authentication disabled
 3. Authorizations disabled
 4. An initial user with the username/password `demo`/`demo`
-5. An `admin` role with read, create, update, and delete permissions for other roles, which is applied to the initial `demo` user
+5. An `admin` role with read, create, update, and delete permissions for all roles and all resources, which is applied to the initial `demo` user
 
 To make changes to the [initial configuration](./configuration.md), add the desired values to your `application.yaml`, and provide this file to Camunda 8 Run using the `--config` flag [at startup](/self-managed/setup/deploy/local/c8run.md#enable-authentication-and-authorization).
 
@@ -34,7 +34,7 @@ The initial user created by the application will be assigned the `admin` role, a
 To create a unique initial user, the following is required in your `application.yaml` or environment variables:
 
 <Tabs>
-  <TabItem value="helm" label="Helm properties" default>
+  <TabItem value="helm" label="Helm properties">
 
 ```yaml
 camunda:
@@ -69,7 +69,7 @@ Any other users included in the initialization `user` list will also be granted 
 In Camunda 8 Run installations, basic authentication is enabled on the Camunda web applications, but the API is unprotected, and authorizations are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
 
 <Tabs>
-  <TabItem value="helm" label="Helm properties" default>
+  <TabItem value="helm" label="Helm properties">
 
 ```yaml
 camunda:
