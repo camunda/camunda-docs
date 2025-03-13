@@ -47,8 +47,9 @@ To deploy and run Camunda 8 with IDP in a local development environment:
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites).
 
 1. Download the `camunda-snapshot-idp-enabled.zip` file, and extract the file contents to your desired directory.
+1. In the extracted directory, add and save your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_) connector secrets in the `connector-secrets.txt` file.
 1. In the extracted directory, [run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose).
-1. Launch Web Modeler at http://localhost:8070, and log in using the username `demo` and password `demo`.
+1. Launch Web Modeler at http://localhost:8070 and log in with the username `demo` and password `demo`.
 1. Get started with IDP by creating an [IDP application](idp-applications.md).
 
 :::info
