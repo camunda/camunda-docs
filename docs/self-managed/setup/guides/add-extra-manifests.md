@@ -1,16 +1,17 @@
 ---
 id: add-extra-manifests
-title: "Add Extra Manifests"
-description: "The ability to add extra manifests by injecting arbitrary data in the values.yaml"
+title: "Add extra manifests to the Camunda 8 Helm chart"
+sidebar_label: "Add extra manifests"
+description: "Learn how to add extra manifests to Helm deployments by injecting arbitrary data in the values.yaml."
 ---
 
 ## Overview
 
-This feature allows users to inject arbitrary data into their `values.yaml` file, enabling the addition of extra manifests. This feature is particularly useful for adding custom manifests by including additional Kubernetes resources such as ConfigMaps, Deployments, or Services.
+When using the Camunda 8 [Helm chart](/self-managed/setup/install.md), arbitrary data can be injected into the `values.yaml` file, enabling the addition of extra Kubernetes manifests. This feature is particularly useful for adding custom manifests by including additional Kubernetes resources such as ConfigMaps, Deployments, or Services.
 
 ## Usage
 
-To use this feature, you can add extra manifests within your `values.yaml` file like so:
+Extra manifests are defined within your `values.yaml` file using the following syntax:
 
 ```yaml
 global:
@@ -24,13 +25,15 @@ global:
         test: test
 ```
 
-## Best Practices
+For more information, see the Kubernetes [object documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/).
 
-- **Keep it Simple**: Use clear and concise YAML syntax to avoid complexity.
-- **Use Comments**: Include comments in your YAML file to explain the purpose of each manifest.
-- **Test Thoroughly**: Ensure that all added manifests are correctly formatted and functional before deployment.
+## Best practices
+
+- **Keep it simple**: Use clear and concise YAML syntax to avoid complexity.
+- **Use comments**: Include comments in your YAML file to explain the purpose of each manifest.
+- **Test thoroughly**: Ensure that all added manifests are correctly formatted and functional before deployment.
 
 ## Troubleshooting
 
-- **Syntax Errors**: Check for indentation issues or missing colons in key-value pairs.
-- **Manifest Validation**: Verify that each manifest is valid and correctly formatted according to Kubernetes specifications.
+- **Syntax errors**: Check for indentation issues or missing colons in key-value pairs.
+- **Manifest validation**: Verify that each manifest is valid and correctly formatted according to Kubernetes specifications.
