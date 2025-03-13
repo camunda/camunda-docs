@@ -55,7 +55,7 @@ Alternatively, the same setup can run with a single AWS EC2 instance, but be awa
 
 - An AWS account to create any resources within AWS.
   - On a high level, permissions are required on the **ec2**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **es** level.
-  - For a more fine-grained view of the permissions, check this [example policy](https://github.com/camunda/camunda-deployment-references/blob/main/aws/ec2/example/policy.json).
+  - For a more fine-grained view of the permissions, check this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/ec2/example/policy.json).
 - Terraform (1.7+)
 - Unix based Operating System (OS) with ssh and sftp
   - Windows may be used with [Cygwin](https://www.cygwin.com/) or [Windows WSL](https://learn.microsoft.com/en-us/windows/wsl/install) but has not been tested
