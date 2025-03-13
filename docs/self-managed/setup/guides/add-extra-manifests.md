@@ -20,9 +20,16 @@ global:
       apiVersion: v1
       kind: ConfigMap
       metadata:
-        name: example-cm
+        name: example-cm-one
       data:
-        test: test
+        test: test-one
+    - |
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: example-cm-two
+      data:
+        test: test-two
 ```
 
 For more information, see the Kubernetes [object documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/).
