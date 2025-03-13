@@ -408,7 +408,7 @@ identity:
 Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
 ```
 
 Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
@@ -448,7 +448,7 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 You can track the progress of the installation using the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 <details>
@@ -646,7 +646,7 @@ export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda
 Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the REST API and display the cluster topology:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
 ...and results in the following output:
@@ -656,7 +656,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-
   <summary>
 
 ```json reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/integrate-tests-rosa/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
   </summary>
