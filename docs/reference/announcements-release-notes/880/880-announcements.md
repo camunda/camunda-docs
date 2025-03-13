@@ -1,6 +1,6 @@
 ---
 id: 880-announcements
-title: "Announcements"
+title: "Release announcements"
 description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release."
 toc_max_heading_level: 3
 ---
