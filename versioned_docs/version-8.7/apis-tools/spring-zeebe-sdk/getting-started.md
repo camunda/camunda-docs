@@ -82,8 +82,9 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-    cluster-id: <your cluster id>
-    region: <your cluster region id>
+    cloud:
+      cluster-id: <your cluster id>
+      region: <your cluster region id>
 ```
 
 ### Self-Managed
@@ -97,7 +98,7 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
 If you have different endpoints for your applications or want to disable a client, configure the following:
@@ -106,12 +107,11 @@ If you have different endpoints for your applications or want to disable a clien
 camunda:
   client:
     mode: self-managed
-    tenant-ids:
-      - <default>
+    tenant-id: <default>
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
     zeebe:
       enabled: true
       grpc-address: http://localhost:26500
