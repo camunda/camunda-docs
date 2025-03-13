@@ -187,7 +187,7 @@ while gateways will expose REST API relevant metrics.
   created, activated, timed out, completed, failed, and canceled jobs.
 - `zeebe_incident_events_total`: The number of incident events. The `action` label separates the number
   of created and resolved incident events.
-- `zeebe_pending_incidents_total`: The number of currently pending incident, i.e. not resolved.
+- `zeebe_pending_incidents_total`: The number of currently pending incidents, i.e. not resolved.
 
 **Metrics related to performance:**
 
