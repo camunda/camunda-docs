@@ -199,7 +199,7 @@ For more information, see the [reference architecture overview](/self-managed/re
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmark tests to determine the appropriate size specific to your environment and use case.
 
-Once deployed, the included [Grafana dashboard](/self-managed/zeebe-deployment/operations/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from Zeebe to your database.
+Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from Zeebe to your database.
 
 ## Cloud specifics
 

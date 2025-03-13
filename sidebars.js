@@ -1208,9 +1208,14 @@ module.exports = {
           ],
         },
         {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },
       ],
@@ -1284,7 +1289,6 @@ module.exports = {
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",
