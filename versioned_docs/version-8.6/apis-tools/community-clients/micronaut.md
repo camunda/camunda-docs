@@ -1,5 +1,5 @@
 ---
-id: micronautical
+id: micronaut
 title: "Micronaut"
 ---
 
