@@ -34,6 +34,9 @@ configuration](#component-specific-configuration) to ensure the components are c
 <h3>Steps</h3>
 
 1. In your OIDC provider, create an application for each of the components you want to connect. The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
+   :::note
+   Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
+   :::
 2. For all Components, ensure the appropriate application type is used:
    - **Operate, Tasklist, Optimize, Identity:** Web applications requiring confidential access/a confidential client
    - **Web Modeler, Console:** Single-page applications requiring public access/a public client
@@ -134,7 +137,7 @@ Ensure you register a new application for each component.
    - **Single-page application**: Modeler, Console
 4. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
    :::note
-   In Microsoft Entra ID, redirect URIs serve as an approved list of destinations. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
+   Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
    :::
 5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use. The secret ID is not needed, only the secret value is required.
 6. Set the following environment variables or Helm values for the component you are configuring an app for:
