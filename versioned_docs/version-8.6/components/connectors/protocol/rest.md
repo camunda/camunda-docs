@@ -207,7 +207,7 @@ Secrets are currently not supported in the body of a **REST Connector**.
 
 In certain scenarios, such as when working with APIs that require pre-encoded URL elements, the REST Connector's default behavior may inadvertently modify encoded segments.
 
-To avoid this, set the `skipEncoding` value to `"true"` in the XML. This disables the automatic decoding and re-encoding process, ensuring the URL is sent to the server exactly as provided. This flag is available since 8.6.12.
+To avoid this, set the `skipEncoding` value to `"true"` in the element template XML. This disables the automatic decoding and re-encoding process, ensuring the URL is sent to the server exactly as provided. This flag is available since 8.6.10.
 
 ### Network communication timeouts
 
