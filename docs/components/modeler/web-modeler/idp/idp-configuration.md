@@ -11,7 +11,7 @@ import CrossImg from '/static/img/icon-list-cross.png';
 Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials.
 
 :::note
-IDP only offers support for Camunda 8 Self-Managed development deployment via Docker with the 8.7.0-alpha5 release (see [example deployment](#idp-docker-example)). Full production support for Camunda 8 SaaS and Camunda 8 Self-Managed is planned for delivery with the 8.7 release. Camunda 8 Run is not supported as IDP requires Web Modeler.
+For the 8.7.0-alpha5 release IDP only offers support for Camunda 8 Self-Managed development deployment via Docker (see [example deployment](#idp-docker-example)). Full production support for Camunda 8 SaaS and Camunda 8 Self-Managed is planned for delivery with the 8.7 release. Camunda 8 Run is not supported as IDP requires Web Modeler.
 :::
 
 ## Prerequisites
