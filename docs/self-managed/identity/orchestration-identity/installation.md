@@ -13,7 +13,7 @@ Identity for Orchestration clusters is available via [Helm install](/self-manage
 
 ## Initial configuration
 
-Following the default installation will result in a cluster with the following:
+Following the default installation for [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) will result in a cluster with the following:
 
 1. Basic authentication enabled
 2. API authentication disabled
@@ -21,7 +21,11 @@ Following the default installation will result in a cluster with the following:
 4. An initial user with the username/password `demo`/`demo`
 5. An `admin` role with read, create, update, and delete permissions for other roles, which is applied to the initial `demo` user
 
-To make changes to the initial configuration, add the desired values via your `application.yaml` or environment variables according to the available [configuration properties](./configuration.md).
+To make changes to the [initial configuration](./configuration.md), add the desired values to your `application.yaml`, and provide this file to Camunda 8 Run using the `--config` flag [at startup](/self-managed/setup/deploy/local/c8run.md#enable-authentication-and-authorization).
+
+:::note
+Helm installations have API authentication and authorizations enabled by default. To adjust your Helm configuration, add the desired values to your `application.yaml` or via environment variables.
+:::
 
 ### Configure an initial user
 
@@ -62,7 +66,7 @@ Any other users included in the initialization `user` list will also be granted 
 
 ### Enable API authentication and authorizations
 
-By default, basic authentication is enabled on the Camunda web applications, but the API is unprotected, and authorizations are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
+In Camunda 8 Run installations, basic authentication is enabled on the Camunda web applications, but the API is unprotected, and authorizations are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
 
 <Tabs>
   <TabItem value="helm" label="Helm properties" default>
