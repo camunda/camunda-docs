@@ -1,7 +1,7 @@
 ---
 id: add-extra-manifests
-title: "Add extra manifests to the Camunda 8 Helm chart"
-sidebar_label: "Add extra manifests"
+title: "Add Kubernetes manifests"
+sidebar_label: "Add Kubernetes manifests"
 description: "Learn how to add extra manifests to Helm deployments by injecting arbitrary data in the values.yaml."
 ---
 
