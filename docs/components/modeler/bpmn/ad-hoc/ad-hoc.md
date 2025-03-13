@@ -16,9 +16,9 @@ multiple times, in any order, or skipped.
 If elements depend on each other, the elements can be connected by a sequence flow to build a structured sequence
 within the ad-hoc subprocess.
 
-When a process instance reaches an ad-hoc subprocess, it [activates the inner elements](#activate-an-element) and waits
-for their completion. After the last element is completed, the process instance completes the ad-hoc subprocess and
-takes the outgoing sequence flows.
+When a process instance reaches an ad-hoc subprocess, it [activates the inner elements](#activate-an-element) and
+completes the ad-hoc subprocess depending on the [completion condition](#completion). After completion, the process
+instance takes the outgoing sequence flows.
 
 ### Constraints
 
@@ -50,6 +50,20 @@ Currently, it is not possible to activate elements dynamically after the ad-hoc 
 entering the subprocess.
 :::
 
+## Completion
+
+An ad-hoc subprocess can define an optional `completionCondition` [boolean expression](/components/modeler/feel/language-guide/feel-boolean-expressions.md)
+which is evaluated every time an inner element is completed. If the expression evaluates to `true` after completing an
+inner element, the ad-hoc subprocess is completed and the process instance takes the outgoing sequence flows.
+
+If no `completionCondition` is defined, the ad-hoc subprocess is completed after all [activated elements](#activate-an-element)
+are completed.
+
+A `cancelRemainingInstances` boolean attribute can be configured to influence the ad-hoc subprocess behavior when the
+completion condition is met. If set to `true` (default value), all remaining active instances of inner elements are
+terminated and the ad-hoc subprocess is directly completed. If set to `false`, the ad-hoc subprocess waits for the
+completion of all active instances before completing.
+
 ## Variable mappings
 
 An ad-hoc subprocess can define input and output
@@ -66,10 +80,11 @@ from the ad-hoc subprocess into the process instance. By default, no local varia
 ### XML representation
 
 ```xml
-<bpmn:adHocSubProcess id="ad-hoc-subprocess" name="Ad-hoc subprocess">
+<bpmn:adHocSubProcess id="ad-hoc-subprocess" name="Ad-hoc subprocess" cancelRemainingInstances="false">
   <bpmn:extensionElements>
     <zeebe:adHoc activeElementsCollection="=activeElements" />
   </bpmn:extensionElements>
   ... more contained elements ...
+  <bpmn:completionCondition xsi:type="bpmn:tFormalExpression">=myCondition</bpmn:completionCondition>
 </bpmn:adHocSubProcess>
 ```
