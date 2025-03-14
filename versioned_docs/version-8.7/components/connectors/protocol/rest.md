@@ -96,6 +96,13 @@ CONNECTOR_HTTPS_PROXY_PASSWORD
 The HTTPS protocol handler also uses the `http.nonProxyHosts` or `CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS` property to specify non-proxy hosts.
 :::
 
+| Proxy config set | nonProxyHost config set | valid login provided      | domain1.com (proxied site, no auth required) | domain2.com (proxied site, auth required) | domain3.com (nonProxyHost site) |
+| ---------------- | ----------------------- | ------------------------- | -------------------------------------------- | ----------------------------------------- | ------------------------------- |
+| ❌               | N/A                     | N/A                       | no proxy                                     | no proxy                                  | no proxy                        |
+| ✅               | ❌                      | ✅                        | proxy                                        | proxy                                     | proxy                           |
+| ✅               | ✅                      | ❌ (incorrect or missing) | proxy                                        | Auth error                                | no proxy                        |
+| ✅               | ✅                      | ✅                        | proxy                                        | proxy                                     | no proxy                        |
+
 ### Authentication
 
 You can choose among the available authentication type according to your authentication requirements.
