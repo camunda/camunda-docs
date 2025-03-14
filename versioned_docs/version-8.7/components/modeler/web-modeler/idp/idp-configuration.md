@@ -49,14 +49,14 @@ To deploy and run Camunda 8 with IDP in a local development environment:
 1. Download the `camunda-snapshot-idp.zip` file, and extract the file contents to your desired directory.
 1. In the extracted directory:
 
-   1. Open the `connector-secrets.txt` file and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively. Save and close the file.
+   1. Open the `connector-secrets.txt` file, and locate and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively. Save and close the file.
 
       ```
       IDP_AWS_ACCESSKEY=<YOUR_ACCESS_KEY>
       IDP_AWS_SECRETKEY=<YOUR_SECRET_KEY>
       ```
 
-   1. Open the `docker-compose.yaml` file and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively, for both the Zeebe and Tasklist document store. Save and close the file.
+   1. Open the `docker-compose.yaml` file, and locate and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively, for **both** the Zeebe and Tasklist document store. Save and close the file.
 
       ```
       - AWS_ACCESS_KEY_ID=<YOUR_ACCESS_KEY>
