@@ -50,7 +50,7 @@ If you haven't already, follow [this guide](/self-managed/setup/deploy/local/doc
 2. Clone this repo and run `docker compose up -d` in your terminal to start your environment.
 
 :::note
-   For versions earlier than 8.6, the `docker compose up -d` command is only available to enterprise customers with access to Camunda's private registry. However, from version 8.6 onwards, it will work for all users as Web Modeler images are made publicly available.
+For versions earlier than 8.6, the `docker compose up -d` command is only available to enterprise customers with access to Camunda's private registry. However, from version 8.6 onwards, it will work for all users as Web Modeler images are made publicly available.
 :::
 
 To confirm Camunda 8 Self-Managed is installed, click into Docker Desktop. Here, you will see the `camunda-platform` container. Alternatively, navigate to the different components and log in with the username `demo` and password `demo`. For example, Operate can be accessed at [http://localhost:8081](http://localhost:8081) (as noted under **Port(s)** in the Docker container). Find additional guidance in the repository [README](https://github.com/camunda/camunda-platform?tab=readme-ov-file#using-docker-compose).
