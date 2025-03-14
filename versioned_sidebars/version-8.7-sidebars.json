@@ -111,7 +111,8 @@
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/settings"
+            "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity"
           ]
         },
         {
@@ -131,6 +132,15 @@
           ]
         }
       ]
+    },
+    {
+      "type": "category",
+      "label": "RPA",
+      "link": {
+        "type": "doc",
+        "id": "components/rpa/overview"
+      },
+      "items": ["components/rpa/getting-started", "components/rpa/production"]
     },
     {
       "type": "category",
@@ -862,14 +872,6 @@
         "id": "components/early-access/overview"
       },
       "items": [
-        {
-          "type": "category",
-          "label": "Experimental features",
-          "items": [
-            "components/early-access/experimental/rpa/rpa-integration",
-            "components/early-access/experimental/rpa/rpa-framework-library"
-          ]
-        },
         {
           "type": "category",
           "label": "Alpha features",
@@ -1882,7 +1884,15 @@
     "reference/notices",
     "reference/release-policy",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      "type": "category",
+      "label": "Data collection",
+      "link": {
+        "type": "doc",
+        "id": "reference/data-collection/data-collection"
+      },
+      "items": ["reference/data-collection/usage-metrics"]
+    },
     "reference/glossary"
   ],
   "Self-Managed": [
@@ -1983,7 +1993,8 @@
     },
     {
       "Reference architecture": [
-        "self-managed/reference-architecture/reference-architecture"
+        "self-managed/reference-architecture/reference-architecture",
+        "self-managed/reference-architecture/kubernetes"
       ]
     },
     {
@@ -2055,9 +2066,14 @@
           ]
         },
         {
+          "Monitoring": [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics"
+          ]
+        },
+        {
           "Troubleshooting": [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels"
+            "self-managed/operational-guides/troubleshooting/troubleshooting"
           ]
         }
       ]
@@ -2131,7 +2147,6 @@
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",

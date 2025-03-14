@@ -259,17 +259,31 @@ For a full set of configuration options, see [CamundaClientConfigurationProperti
 
 Authenticate with the cluster using the following alternative methods:
 
-#### Username & Password
+#### Keystore & Truststore
 
-You can authenticate with the cluster using username and password authentication.
+You can authenticate with the cluster using Java's Keystore and Truststore.
 
 ```yaml
 camunda:
   client:
     mode: self-managed
     auth:
-      username: <your username>
-      password: <your password>
+      keystore-path: <your keystore path>
+      keystore-password: <your keystore password>
+      keystore-key-password: <your keystore key password>
+      truststore-path: <your truststore path>
+      truststore-password: <your truststore password>
+```
+
+#### Credentials cache path
+
+You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
+
+```yaml
+camunda:
+  client:
+    auth:
+      credentials-cache-path: /tmp/credentials
 ```
 
 ### Zeebe
@@ -538,9 +552,19 @@ When using multi-tenancy, the Zeebe client will connect to the `<default>` tenan
 ```yaml
 camunda:
   client:
-    tenant-ids:
-      - <default>
-      - foo
+    tenant-id: foo
+```
+
+To control which tenants your job workers should use, you can configure:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        tenant-ids:
+          - <default>
+          - foo
 ```
 
 Additionally, you can set tenant ids on job worker level by using the annotation:

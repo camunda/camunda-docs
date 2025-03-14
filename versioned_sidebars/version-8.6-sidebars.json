@@ -110,7 +110,8 @@
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/settings"
+            "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity"
           ]
         },
         {
@@ -1682,18 +1683,7 @@
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
                 "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/quarkus",
-                {
-                  "CLI client": [
-                    "apis-tools/community-clients/cli-client/index",
-                    "apis-tools/community-clients/cli-client/cli-get-started"
-                  ],
-                  "Go client": [
-                    "apis-tools/community-clients/go-client/index",
-                    "apis-tools/community-clients/go-client/go-get-started",
-                    "apis-tools/community-clients/go-client/job-worker"
-                  ]
-                }
+                "apis-tools/community-clients/quarkus"
               ]
             }
           ]
@@ -1762,7 +1752,15 @@
     "reference/notices",
     "reference/release-policy",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      "type": "category",
+      "label": "Data collection",
+      "link": {
+        "type": "doc",
+        "id": "reference/data-collection/data-collection"
+      },
+      "items": ["reference/data-collection/usage-metrics"]
+    },
     "reference/glossary"
   ],
   "Self-Managed": [
@@ -1906,9 +1904,14 @@
           ]
         },
         {
+          "Monitoring": [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics"
+          ]
+        },
+        {
           "Troubleshooting": [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels"
+            "self-managed/operational-guides/troubleshooting/troubleshooting"
           ]
         }
       ]
@@ -1978,7 +1981,6 @@
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",

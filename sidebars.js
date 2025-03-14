@@ -121,6 +121,7 @@ module.exports = {
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity",
           ],
         },
         {
@@ -140,6 +141,15 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "RPA",
+      link: {
+        type: "doc",
+        id: "components/rpa/overview",
+      },
+      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
@@ -725,14 +735,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Experimental features",
-          items: [
-            "components/early-access/experimental/rpa/rpa-integration",
-            "components/early-access/experimental/rpa/rpa-framework-library",
-          ],
-        },
-        {
-          type: "category",
           label: "Alpha features",
           link: {
             type: "doc",
@@ -1032,7 +1034,15 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      type: "category",
+      label: "Data collection",
+      link: {
+        type: "doc",
+        id: "reference/data-collection/data-collection",
+      },
+      items: ["reference/data-collection/usage-metrics"],
+    },
     "reference/glossary",
   ],
   "Self-Managed": [
@@ -1135,7 +1145,8 @@ module.exports = {
     {
       "Reference architecture": [
         "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual",
+        "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/manual",
       ],
     },
     {
@@ -1197,9 +1208,14 @@ module.exports = {
           ],
         },
         {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },
       ],
@@ -1273,7 +1289,6 @@ module.exports = {
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",
@@ -1382,63 +1397,73 @@ module.exports = {
 
           Identity: [
             "self-managed/identity/what-is-identity",
-            "self-managed/identity/getting-started/install-identity",
             {
-              "User guide": [
-                {
-                  Configuration: [
-                    "self-managed/identity/user-guide/configuration/making-identity-production-ready",
-                    "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
-                    "self-managed/identity/user-guide/configuration/configure-logging",
-                    "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
-                  ],
-                },
-                {
-                  Roles: [
-                    "self-managed/identity/user-guide/roles/add-assign-role",
-                    "self-managed/identity/user-guide/roles/add-assign-permission",
-                  ],
-                },
-                {
-                  Groups: [
-                    "self-managed/identity/user-guide/groups/create-group",
-                    "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
-                  ],
-                },
-                {
-                  Authorizations: [
-                    "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
-                    "self-managed/identity/user-guide/authorizations/managing-user-access",
-                    "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
-                  ],
-                },
-                {
-                  Tenants: [
-                    "self-managed/identity/user-guide/tenants/managing-tenants",
-                  ],
-                },
-                {
-                  "Mapping rules": [
-                    "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
-                  ],
-                },
-                {
-                  "Additional features": [
-                    "self-managed/identity/user-guide/additional-features/adding-an-api",
-                    "self-managed/identity/user-guide/additional-features/incorporate-applications",
-                  ],
-                },
+              "Orchestration Cluster Identity": [
+                "self-managed/identity/orchestration-identity/installation",
+                "self-managed/identity/orchestration-identity/configuration",
               ],
             },
             {
-              Deployment: [
-                "self-managed/identity/deployment/configuration-variables",
-                "self-managed/identity/deployment/application-monitoring",
-                "self-managed/identity/deployment/starting-configuration-for-identity",
-                "self-managed/identity/deployment/resource-management",
+              "Identity for Web Modeler and Console": [
+                "self-managed/identity/getting-started/install-identity",
+                {
+                  "User guide": [
+                    {
+                      Configuration: [
+                        "self-managed/identity/user-guide/configuration/making-identity-production-ready",
+                        "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
+                        "self-managed/identity/user-guide/configuration/configure-logging",
+                        "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
+                      ],
+                    },
+                    {
+                      Roles: [
+                        "self-managed/identity/user-guide/roles/add-assign-role",
+                        "self-managed/identity/user-guide/roles/add-assign-permission",
+                      ],
+                    },
+                    {
+                      Groups: [
+                        "self-managed/identity/user-guide/groups/create-group",
+                        "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
+                      ],
+                    },
+                    {
+                      Authorizations: [
+                        "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
+                        "self-managed/identity/user-guide/authorizations/managing-user-access",
+                        "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
+                      ],
+                    },
+                    {
+                      Tenants: [
+                        "self-managed/identity/user-guide/tenants/managing-tenants",
+                      ],
+                    },
+                    {
+                      "Mapping rules": [
+                        "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
+                      ],
+                    },
+                    {
+                      "Additional features": [
+                        "self-managed/identity/user-guide/additional-features/adding-an-api",
+                        "self-managed/identity/user-guide/additional-features/incorporate-applications",
+                      ],
+                    },
+                  ],
+                },
+                {
+                  Deployment: [
+                    "self-managed/identity/deployment/configuration-variables",
+                    "self-managed/identity/deployment/application-monitoring",
+                    "self-managed/identity/deployment/starting-configuration-for-identity",
+                    "self-managed/identity/deployment/resource-management",
+                  ],
+                },
+                "self-managed/identity/troubleshooting/troubleshoot-identity",
               ],
             },
-            "self-managed/identity/troubleshooting/troubleshoot-identity",
           ],
         },
         {

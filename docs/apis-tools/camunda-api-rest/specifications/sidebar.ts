@@ -418,6 +418,12 @@ const sidebar: SidebarsConfig = {
           label: "Get process start form",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-process-definition-statistics",
+          label: "Get process definition statistics",
+          className: "api-method post",
+        },
       ],
     },
     {
