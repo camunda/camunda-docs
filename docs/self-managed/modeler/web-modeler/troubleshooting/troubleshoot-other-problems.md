@@ -2,7 +2,7 @@
 id: troubleshoot-other-problems
 title: "Troubleshoot other problems"
 sidebar_label: "Other problems"
-description: "Troubleshooting guide for other issues in Web Modeler."
+description: "Troubleshoot and resolve problems with Web Modeler that are not covered by the other troubleshooting guides."
 ---
 
 Troubleshoot and resolve problems that are not covered by the other troubleshooting guides.
@@ -16,7 +16,7 @@ Other requests to the application succeed.
 
 ### Cause
 
-When your Web Modeler installation is running behind a web application firewall (WAF), the request may be blocked by it.
+When your Web Modeler installation is running behind a web application firewall (WAF), the firewall may block the request.
 Some WAF rules block requests that contain certain characters in the request body, such as XML payloads used in BPMN and DMN diagrams.
 
 ### Resolution
