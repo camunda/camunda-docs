@@ -6,7 +6,7 @@ description: "Camunda provides continuously improved Helm charts, of which are n
 ---
 
 :::note
-The 13.0.0-alpha2 Helm chart released with Camunda 8.8.0-alpha2 establishes a new default setup to support 8.8 [Identity management updates](/docs/reference/announcements/880.md#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
+The 13.0.0-alpha2 Helm chart released with Camunda 8.8.0-alpha2 establishes a new default setup to support 8.8 [Identity management updates](/reference/announcements-release-notes/880/880-release-notes.md#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
 
 - The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration cluster Identity)
 - Connectors
