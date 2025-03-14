@@ -6,7 +6,7 @@ sidebar_position: 3
 description: "Step through an example to view your existing clients, create a client, view a particular client's details, and delete a client."
 ---
 
-organise
+organise the document
 
 In this tutorial, we'll step through examples to highlight the capabilities of the Administration API, such as viewing your existing clients, creating a client, viewing a particular client's details, and deleting a client.
 
