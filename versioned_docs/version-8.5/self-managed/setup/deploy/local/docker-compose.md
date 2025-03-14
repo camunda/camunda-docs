@@ -27,6 +27,10 @@ To start a complete instance of Camunda 8 Self-Managed environment locally:
 1. Download the artifact for Camunda 8 <DockerCompose/>, then extract it.
 2. Enter the extracted directory, and run the following command:
 
+:::note
+This command will only work for enterprise customers that have access to Camunda's private registry
+:::
+
 ```shell
 docker compose up -d
 ```
@@ -90,24 +94,6 @@ docker compose down
 :::info
 Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/docs/reference/licenses.md) for more information.
 :::
-
-#### Standalone setup
-
-Web Modeler can be run independently using Identity, Keycloak and Postgres as dependencies.
-
-The following command uses the provided `docker-compose-web-modeler.yaml` configuration file to only start Web Modeler and its dependencies:
-
-```shell
-docker compose -f docker-compose-web-modeler.yaml up -d
-```
-
-Once running, Web Modeler can be accessed at [http://localhost:8070](http://localhost:8070).
-
-To tear down the environment (including all data and volumes), run the following command:
-
-```shell
-docker compose -f docker-compose-web-modeler.yaml down -v
-```
 
 #### Deploy or execute a process
 
