@@ -2,7 +2,9 @@ extends: substitution
 message: "British English writing style detected. Use `%s` instead of `%s`. Use American spelling instead."
 level: error
 ignorecase: true
-replace:
+action:
+name: replace
+swap:
   organise: organize
   analyse: analyze
   cancelled: canceled
