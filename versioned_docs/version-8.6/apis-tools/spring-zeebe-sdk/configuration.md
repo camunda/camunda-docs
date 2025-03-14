@@ -275,6 +275,17 @@ camunda:
       truststore-password: <your truststore password>
 ```
 
+#### Credentials cache path
+
+You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
+
+```yaml
+camunda:
+  client:
+    auth:
+      credentials-cache-path: /tmp/credentials
+```
+
 ### Zeebe
 
 Here you find further zeebe specific configuration options
