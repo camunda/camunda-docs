@@ -66,15 +66,15 @@ Add an extraction field for each piece of data you want to extract from your doc
 <img src={IdpExtractionFieldsDetailsImg} alt="Data extraction fields" width="700px" style={{marginTop: '0'}} />
 
 1. **Field name**: Enter a descriptive name for the field.
-   - Example: "invoice_id” or "invoiceId".
    - The name format should follow [FEEL naming convention](/components/modeler/feel/language-guide/feel-variables.md#variable-names), for example it is case sensitive and should not include spaces.
    - The **Field name** is used as an output variable in a BPMN process.
-1. **Type**: Select the data type you want/expect the field to be populated with. This helps the LLM more accurately extract data.
-   - Example: “Number” for a monetary field (“invoice_amount”).
-   - See [extraction field data types](idp-reference.md#data-types).
+   - Example: "invoiceId” or "invoice_id".
+1. **Type**: Select the data type you want/expect the field to be populated with.
+   - This helps the LLM more accurately extract data. See [extraction field data types](idp-reference.md#data-types).
+   - Example: “Number” for a monetary field (“invoiceAmount”).
 1. **Prompt**: Enter a clear and specific prompt to guide the LLM in accurately extracting data.
-   - Example: For an "invoice_date" field, you might use "The date when the invoice was issued".
-   - Try and describe the expected outcome in the prompt in clear and concise terms. For guidance and best practice when writing prompts, refer to the [documentation for your chosen LLM extraction model](idp-reference.md#extraction-models).
+   - Try to describe the expected outcome in the prompt in clear and concise terms. For guidance and best practice when writing prompts, refer to the [documentation for your chosen LLM extraction model](idp-reference.md#extraction-models).
+   - Example: For an "invoiceDate" field, you might use "The date when the invoice was issued".
 1. Click **Add** to add the field.
 1. Repeat the process until you have added all required extraction fields.
 
