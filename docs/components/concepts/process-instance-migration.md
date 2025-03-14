@@ -251,6 +251,52 @@ Therefore, it is not possible to re-create message catch events with the same me
 While we're working on resolving this, you can migrate this case by providing a mapping between the boundary events.
 :::
 
+### Compensation boundary events
+
+Compensation boundary events can be migrated similarly to other catch events, with one exception. If a compensation boundary event is added, a new compensation subscription is only opened for activity instances that are currently active, or haven't been started yet. For activity instances that have already finished, no new compensation subscription will be opened.
+
+Consider the following example where the instance is waiting on service task `A`:
+
+![The instance waiting on service task A.](assets/process-instance-migration/migration-compensation_before.png)
+
+The target process definition contains a compensation boundary event attached to service task `A`:
+
+![The target process definition contains a compensation boundary event attached to service task A.](assets/process-instance-migration/migration-compensation_after.png)
+
+If the process instance is migrated by providing mapping instruction between service tasks `A` -> `A`, the compensation subscription will be created on completion of the element `A`.
+
+However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, then triggering compensation throw event afterward will **not** compensate `A`. This is because the subscription is only opened when completing a task with a compensation boundary event.
+
+## Dealing with gateways
+
+Process instance migration allows you to migrate several scenarios for gateways:
+
+- An active exclusive gateway with an incident can be migrated like any other active element.
+- Parallel and inclusive gateways can be involved in [additional scenarios](#migrating-joining-parallel-and-inclusive-gateways).
+
+### Migrating joining parallel and inclusive gateways
+
+Joining parallel and inclusive gateways with taken incoming sequence flows, and which are still waiting for more incoming sequence flows, require a mapping instruction similar to active elements.
+
+For migrating joining gateways, the following conditions must be true:
+
+- The joining gateway in the process instance must be mapped to the target gateway.
+- The target gateway must have at least the same number of incoming sequence flows as the source gateway.
+- Taken sequence flow IDs must exist in the target process definition and flow to the target gateway.
+
+Consider the following example:
+The process instance is waiting at the joining parallel gateway, with an incoming sequence flow taken as the element `A` is completed. Element `B` is still active and waiting at the user task.
+
+![The instance waiting on joining gateway.](assets/process-instance-migration/migration-joining-gateway-before.png)
+
+Mapping the active element `B` to the target element `B`, and mapping the joining parallel gateway instance to the target joining parallel gateway, will migrate the process instance to the target process definition. Note that the taken sequence flow (from element `A` to the joining gateway) must exist in the target process definition and flow to the target gateway.
+
+After the migration, the process instance will look like following:
+
+![The instance waiting on service task B.](assets/process-instance-migration/migration-joining-gateway-after.png)
+
+In the example above, another element `C` is added before the joining gateway in the target process definition. To complete the process instance after the migration, element `C` must be completed. Process instance modification can be used to activate element `C` and complete it to reach the target gateway.
+
 ## Process definitions and versions
 
 So far, we've only discussed migrating a process instance to a new version of its process definition.
@@ -485,6 +531,13 @@ import SignalCatchEventSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-catc
 import SignalBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-boundary-event.svg'
 import SignalBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/signal-boundary-event-non-interrupting.svg'
 
+import EscalationEventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/escalation-event-subprocess.svg'
+import EscalationEventSubprocessNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/escalation-event-subprocess-non-interrupting.svg'
+import EscalationBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/escalation-boundary-event.svg'
+import EscalationBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-symbols/escalation-boundary-event-non-interrupting.svg'
+
+import CompensationBoundaryEventSvg from '../modeler/bpmn/assets/bpmn-symbols/compensation-boundary-event.svg'
+
 <table className="bpmn-coverage-event-table">
   <thead>
       <tr>
@@ -609,6 +662,46 @@ import SignalBoundaryEventNonInterruptingSvg from '../modeler/bpmn/assets/bpmn-s
                 <SignalBoundaryEventNonInterruptingSvg className="implemented" />
             </a>
         </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events/">Escalation</a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events/">
+                <EscalationEventSubprocessSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events">
+                <EscalationEventSubprocessNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+        <td></td>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events">
+                <EscalationBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td>
+            <a href="../../modeler/bpmn/escalation-events">
+                <EscalationBoundaryEventNonInterruptingSvg className="implemented" />
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="../../modeler/bpmn/compensation-events/">Compensation</a>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="../../modeler/bpmn/compensation-events/">
+                <CompensationBoundaryEventSvg className="implemented" />
+            </a>
+        </td>
+        <td></td>
     </tr>
 
   </tbody>
