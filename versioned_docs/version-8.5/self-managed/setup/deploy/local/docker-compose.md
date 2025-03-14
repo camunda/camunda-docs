@@ -28,7 +28,7 @@ To start a complete instance of Camunda 8 Self-Managed environment locally:
 2. Enter the extracted directory, and run the following command:
 
 :::note
-This command will only work for enterprise customers that have access to Camunda's private registry
+For versions earlier than 8.6, the `docker compose up -d` command is only available to enterprise customers with access to Camunda's private registry. However, from version 8.6 onwards, it will work for all users as Web Modeler images are made publicly available.
 :::
 
 ```shell
