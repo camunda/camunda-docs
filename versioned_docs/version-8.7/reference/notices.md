@@ -20,7 +20,7 @@ Camunda Zeebe
 
 #### Impact
 
-Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that can crash Gateway.
+Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that could crash the gateway.
 
 #### How to determine if the installation is affected
 
