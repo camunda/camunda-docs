@@ -259,22 +259,6 @@ For a full set of configuration options, see [CamundaClientConfigurationProperti
 
 Authenticate with the cluster using the following alternative methods:
 
-#### Keystore & Truststore
-
-You can authenticate with the cluster using Java's Keystore and Truststore.
-
-```yaml
-camunda:
-  client:
-    mode: self-managed
-    auth:
-      keystore-path: <your keystore path>
-      keystore-password: <your keystore password>
-      keystore-key-password: <your keystore key password>
-      truststore-path: <your truststore path>
-      truststore-password: <your truststore password>
-```
-
 #### Credentials cache path
 
 You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
