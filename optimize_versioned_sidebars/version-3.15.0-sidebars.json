@@ -3572,8 +3572,7 @@
                 "self-managed/optimize-deployment/configuration/getting-started",
                 {
                   "System configuration": [
-                    "self-managed/optimize-deployment/configuration/system-configuration",
-                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8"
+                    "self-managed/optimize-deployment/configuration/system-configuration"
                   ]
                 },
                 "self-managed/optimize-deployment/configuration/logging",
