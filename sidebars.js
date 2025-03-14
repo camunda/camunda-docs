@@ -1193,6 +1193,7 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
         },
+        "self-managed/operational-guides/data-purge",
         {
           type: "doc",
           label: "Configure components",
