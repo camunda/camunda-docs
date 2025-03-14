@@ -2996,6 +2996,10 @@ module.exports = {
                       "Missing data",
                       "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/"
                     ),
+                    docsLink(
+                      "Other problems",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/"
+                    ),
                   ],
                 },
               ],
