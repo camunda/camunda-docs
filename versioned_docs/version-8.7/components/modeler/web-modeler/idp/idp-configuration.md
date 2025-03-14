@@ -46,7 +46,7 @@ To deploy and run Camunda 8 with IDP in a local development environment:
 
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
 
-1. Download the `camunda-snapshot-idp.zip` file, and extract the file contents to your desired directory.
+1. Download [camunda-snapshot-idp.zip](https://github.com/camunda/camunda-distributions/releases/download/untagged-6e9e22f0ece5a636e8d0/camunda-snapshot-idp.zip) from the [camunda-distributions](https://github.com/camunda/camunda-distributions/releases) GitHub repository, and extract the file contents to your desired directory.
 1. In the extracted directory:
 
    1. Open the `connector-secrets.txt` file, and locate and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively. Save and close the file.
