@@ -3,7 +3,7 @@ message: "British English writing style detected. Use `%s` instead of `%s`. Use 
 level: error
 ignorecase: true
 action:
-name: replace
+name: edit
 swap:
   organise: organize
   analyse: analyze
