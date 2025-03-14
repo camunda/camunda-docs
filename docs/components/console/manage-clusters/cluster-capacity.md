@@ -20,7 +20,7 @@ A general guideline to follow when using the cluster load metric is:
 
 - **High cluster load percentage**: The higher the cluster load percentage value, the more likely it is that things will slow down, time out, requests will fail, and so on. For example, if a cluster is continually running at 95% load, this means the cluster is probably overloaded and may not be performing well.
 
-- **Low cluster load percentage**: The lower the capacity percentage value, the more you could increase the cluster workload as the cluster is probably underused. For example, if a cluster load is only 5% then the cluster can probably accept more workload and may be underused.
+- **Low cluster load percentage**: The lower the cluster load percentage value, the more you could increase the cluster workload as the cluster is probably underused. For example, if a cluster load is only 5% then the cluster can probably accept more workload and may be underused.
 
 :::info
 To understand how cluster load is calculated, see [how cluster load is calculated](#load-calculation).
@@ -99,5 +99,8 @@ This gives a value between 0 and 1, which is multiplied by 100 to give the parti
 The cluster load percentage is then the average of the load of all partitions in the cluster.
 
 :::note
-The partition load is _only_ calculated and reported on the current partition leader.
+
+- The partition load is _only_ calculated and reported on the current partition leader.
+- It typically takes about five minutes for cluster load data to update with the latest information.
+
 :::
