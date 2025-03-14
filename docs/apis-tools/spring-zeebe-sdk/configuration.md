@@ -266,7 +266,7 @@ You can authenticate with the cluster using username and password authentication
 ```yaml
 camunda:
   client:
-    mode: self-managed
+    mode: basic
     auth:
       username: <your username>
       password: <your password>
@@ -534,14 +534,24 @@ camunda:
 
 ##### Control tenant usage
 
-When using multi-tenancy, the Camunda client will connect to the `<default>` tenant. To control this, you can configure:
+When using multi-tenancy, the Zeebe client will connect to the `<default>` tenant. To control this, you can configure:
 
 ```yaml
 camunda:
   client:
-    tenant-ids:
-      - <default>
-      - foo
+    tenant-id: foo
+```
+
+To control which tenants your job workers should use, you can configure:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        tenant-ids:
+          - <default>
+          - foo
 ```
 
 Additionally, you can set tenant ids on job worker level by using the annotation:

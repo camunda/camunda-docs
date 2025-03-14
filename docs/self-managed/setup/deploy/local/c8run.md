@@ -39,7 +39,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha4) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha2) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running one of the following in your terminal:
    - `./start.sh`: start Camunda 8 Run as a Java application.
@@ -116,56 +116,34 @@ Once configured correctly, your Connectors are available for use in Modeler.
 
 ### Use Camunda APIs
 
-Camunda 8 Run authenticates with the [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate](/apis-tools/operate-api/overview.md), and [Zeebe](/apis-tools/zeebe-api/grpc.md) APIs, as well as the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), by including cookie headers in each request. This cookie can be obtained by using the API endpoint `/api/login`.
+All served Camunda APIs are by default **unprotected** in Camunda 8 Run, and can be accessed without any authentication credentials or token provided.
 
-To authenticate and begin making requests, take the following steps:
+The available APIs are [Tasklist V1](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate V1](/apis-tools/operate-api/overview.md), [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) and the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)
 
-<Tabs groupId="api" defaultValue="v1" queryString values={
-[
-{label: 'Tasklist, Operate, and Zeebe', value: 'v1' },
-{label: 'Camunda 8 REST API', value: 'v2' },
-]}>
+### Enable authentication and authorization
 
-<TabItem value='v1'>
+To work with authorizations, API authentication and authorization enforcement must be enabled. The following minimal `application.yaml` shows the required configuration for the APIs and authorizations:
 
-1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
-
-```shell
-curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
-  --cookie-jar cookie.txt
+```yaml
+camunda.security:
+  authentication.unprotected-api: false
+  authorizations.enabled: true
 ```
 
-2. Send the cookie (as a header) in each API request. In this case, request all process definitions:
+Place the above `application.yaml` into your root `/c8run` folder, provide it to Camunda 8 Run at startup using the `--config` [flag](#configuration-options):
+
+```
+./start.sh --config application.yaml
+```
+
+You are then required to provide basic authentication credentials on API requests, as in the following:
 
 ```shell
 curl --request POST 'http://localhost:8080/v1/process-definitions/search'  \
-  --cookie cookie.txt \
+  -u demo:demo \
   --header 'Content-Type: application/json' \
   --data-raw '{}'
 ```
-
-</TabItem>
-<TabItem value='v2'>
-
-:::note
-Some endpoints in the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) are considered [alpha features](/components/early-access/alpha/alpha-features.md), and are still in development.
-:::
-
-1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
-
-```shell
-curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
-  --cookie-jar cookie.txt
-```
-
-2. Send the cookie (as a header) in each API request. In this case, the topology of your Zeebe cluster:
-
-```shell
-curl --cookie  cookie.txt  localhost:8080/v2/topology
-```
-
-</TabItem>
-</Tabs>
 
 ## Shut down Camunda 8 Run
 
@@ -179,7 +157,7 @@ TLS can be enabled by providing a local file keystore using the `--keystore` arg
 
 ### Access metrics
 
-Metrics are enabled in Camunda 8 Run by default, and can be accessed at [/actuator/prometheus](http://localhost:9600/actuator/prometheus). For more information, see the Zeebe [Prometheus metrics](/self-managed/zeebe-deployment/operations/metrics.md) documentation.
+Metrics are enabled in Camunda 8 Run by default, and can be accessed at [/actuator/prometheus](http://localhost:9600/actuator/prometheus). For more information, see the [metrics](/self-managed/operational-guides/monitoring/metrics.md) documentation.
 
 ### Start external Elasticsearch
 

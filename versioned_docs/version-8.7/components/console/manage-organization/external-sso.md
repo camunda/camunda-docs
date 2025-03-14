@@ -1,7 +1,7 @@
 ---
 id: external-sso
 title: Connect your IdP with Camunda
-keywords: [SSO, IDP, AzureAD, SAML]
+keywords: [SSO, AzureAD, SAML]
 description: "For enterprise customers, we support integrating external identity providers."
 ---
 

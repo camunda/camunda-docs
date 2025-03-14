@@ -3212,16 +3212,25 @@
           ]
         },
         {
+          "Monitoring": [
+            {
+              "type": "link",
+              "label": "Log levels",
+              "href": "self-managed/operational-guides/monitoring/log-levels/"
+            },
+            {
+              "type": "link",
+              "label": "Metrics",
+              "href": "self-managed/operational-guides/monitoring/metrics/"
+            }
+          ]
+        },
+        {
           "Troubleshooting": [
             {
               "type": "link",
               "label": "Troubleshooting",
               "href": "/docs/self-managed/operational-guides/troubleshooting/"
-            },
-            {
-              "type": "link",
-              "label": "Log levels",
-              "href": "/docs/self-managed/operational-guides/troubleshooting/log-levels/"
             }
           ]
         }
@@ -3434,7 +3443,7 @@
                 {
                   "type": "link",
                   "label": "Metrics",
-                  "href": "/docs/self-managed/zeebe-deployment/operations/metrics/"
+                  "href": "/docs/self-managed/operational-guides/monitoring/metrics/"
                 },
                 {
                   "type": "link",
