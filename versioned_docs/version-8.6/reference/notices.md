@@ -24,7 +24,7 @@ Some Camunda Zeebe versions were affected by a vulnerability that allowed a mali
 
 #### How to determine if the installation is affected
 
-You are using Camunda Zeebe 8.6.x, earlier than 8.6.12
+You are using Camunda Zeebe 8.6.0 - 8.6.11
 
 #### Solution
 
