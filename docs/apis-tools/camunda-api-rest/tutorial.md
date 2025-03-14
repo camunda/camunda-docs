@@ -26,7 +26,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 
 If you're interested in how we use a library to handle auth for our code, or to get started, examine the `auth.js` file in the GitHub repository. This file contains a function named `getAccessToken` which executes an OAuth 2.0 protocol to retrieve authentication credentials based on your client ID and client secret. Then, we return the actual token that can be passed as an authorization header in each request.
 
-To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. You will need to add your `ZEEBE_CLIENT_ID`, `ZEEBE_CLIENT_SECRET`, `ZEEBE_BASE_URL`, and `ZEEBE_AUDIENCE`, which is `zeebe.camunda.io` in a Camunda 8 SaaS environment. For example, your audience may be defined as `ZEEBE_AUDIENCE=zeebe.camunda.io`.
+To set up your credentials, create an `.env` file which will be protected by the `.gitignore` file. You will need to add your `CAMUNDA_CLIENT_ID`, `CAMUNDA_CLIENT_SECRET`, `CAMUNDA_REST_ADDRESS` (represented as `ZEEBE_REST_ADDRESS`), and `CAMUNDA_TOKEN_AUDIENCE` (represented as `ZEEBE_TOKEN_AUDIENCE`), which is `zeebe.camunda.io` in a Camunda 8 SaaS environment. For example, your audience may be defined as `ZEEBE_AUDIENCE=zeebe.camunda.io`.
 
 These keys will be consumed by the `auth.js` file to execute the OAuth protocol, and should be saved when you generate your client credentials in [prerequisites](#prerequisites).
 
@@ -48,9 +48,9 @@ To do this, take the following steps:
 
 ```javascript
 const authorizationConfiguration = {
-  clientId: process.env.ZEEBE_CLIENT_ID,
-  clientSecret: process.env.ZEEBE_CLIENT_SECRET,
-  audience: process.env.ZEEBE_AUDIENCE,
+  clientId: process.env.CAMUNDA_CLIENT_ID,
+  clientSecret: process.env.CAMUNDA_CLIENT_SECRET,
+  audience: process.env.CAMUNDA_TOKEN_AUDIENCE,
 };
 ```
 
@@ -66,7 +66,7 @@ async function listRoles() {
 4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Zeebe API URL beneath your call for an access token by defining `camundaApiUrl`:
 
 ```javascript
-const camundaApiUrl = process.env.ZEEBE_BASE_URL;
+const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
 ```
 
 5. On the next line, script the API endpoint to list the existing roles:
@@ -126,7 +126,7 @@ To create a role, take the following steps:
 ```javascript
 async function createRole([roleName]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
-  const camundaApiUrl = process.env.ZEEBE_BASE_URL;
+  const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
   const url = `${camundaApiUrl}/roles`;
 }
 ```
@@ -175,7 +175,7 @@ To retrieve a role, take the following steps:
 ```javascript
 async function getRole([roleKey]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
-  const camundaApiUrl = process.env.ZEEBE_BASE_URL;
+  const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
   const url = `${camundaApiUrl}/roles/${roleKey}`;
 }
 ```
@@ -222,7 +222,7 @@ To delete a role, take the following steps:
 ```javascript
 async function deleteRole([roleKey]) {
   const accessToken = await getAccessToken(authorizationConfiguration);
-  const camundaApiUrl = process.env.ZEEBE_BASE_URL;
+  const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
   const url = `${camundaApiUrl}/roles/${roleKey}`;
 }
 ```
