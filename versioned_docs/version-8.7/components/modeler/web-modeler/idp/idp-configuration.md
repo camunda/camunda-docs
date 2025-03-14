@@ -44,11 +44,27 @@ You can rename these connector secrets if you want to change the testing bucket 
 
 To deploy and run Camunda 8 with IDP in a local development environment:
 
-1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites).
+1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
 
-1. Download the `camunda-snapshot-idp-enabled.zip` file, and extract the file contents to your desired directory.
-1. In the extracted directory, add and save your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_) connector secrets in the `connector-secrets.txt` file.
-1. In the extracted directory, [run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose).
+1. Download the `camunda-snapshot-idp.zip` file, and extract the file contents to your desired directory.
+1. In the extracted directory:
+
+   1. Open the `connector-secrets.txt` file and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively. Save and close the file.
+
+      ```
+      IDP_AWS_ACCESSKEY=<YOUR_ACCESS_KEY>
+      IDP_AWS_SECRETKEY=<YOUR_SECRET_KEY>
+      ```
+
+   1. Open the `docker-compose.yaml` file and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively, for both the Zeebe and Tasklist document store. Save and close the file.
+
+      ```
+      - AWS_ACCESS_KEY_ID=<YOUR_ACCESS_KEY>
+      - AWS_SECRET_ACCESS_KEY=<YOUR_SECRET_KEY>
+      ```
+
+   1. [Run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose).
+
 1. Launch Web Modeler at http://localhost:8070 and log in with the username `demo` and password `demo`.
 1. Get started with IDP by creating an [IDP application](idp-applications.md).
 
