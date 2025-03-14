@@ -29,12 +29,13 @@ If you need to set up an OpenShift cluster on a cloud provider, we recommend our
 
 We conduct testing and ensure compatibility against the following OpenShift versions:
 
-| OpenShift Version | [End of Support Date](https://access.redhat.com/support/policy/updates/openshift) |
-| ----------------- | --------------------------------------------------------------------------------- |
-| 4.17.x            | June 27, 2025                                                                     |
-| 4.16.x            | December 27, 2025                                                                 |
-| 4.15.x            | August 27, 2025                                                                   |
-| 4.14.x            | May 1, 2025                                                                       |
+| OpenShift Version |
+| ----------------- |
+| 4.18.x            |
+| 4.17.x            |
+| 4.16.x            |
+| 4.15.x            |
+| 4.14.x            |
 
 :::caution Versions compatibility
 
@@ -66,7 +67,7 @@ Over this guide, you will add and merge values in this file to configure your de
 You can find a reference example of this file here:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/base.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/base.yml
 ```
 
 :::danger Merging YAML files
@@ -95,18 +96,10 @@ To use these routes for the Zeebe Gateway, configure this through Ingress as wel
 
 The route created by OpenShift will use a domain to provide access to the platform. By default, you can use the OpenShift applications domain, but any other domain supported by the router can also be used.
 
-To retrieve the OpenShift applications domain (used as an example here), run the following command:
+To retrieve the OpenShift applications domain (used as an example here), run the following command and define the route domain that will be used for the Camunda 8 deployment:
 
-```bash
-export OPENSHIFT_APPS_DOMAIN=$(oc get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}')
-```
-
-Next, define the route domain that will be used for the Camunda 8 deployment. For example:
-
-```bash
-export DOMAIN_NAME="camunda.$OPENSHIFT_APPS_DOMAIN"
-
-echo "Camunda 8 will be reachable from $DOMAIN_NAME"
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/setup-application-domain.sh
 ```
 
 If you choose to use a custom domain instead, ensure it is supported by your router configuration and replace the example domain with your desired domain. For more details on configuring custom domains in OpenShift, refer to the official [custom domain OpenShift documentation](https://docs.openshift.com/dedicated/applications/deployments/osd-config-custom-domains-applications.html).
@@ -123,12 +116,8 @@ oc get ingresses.config/cluster -o json | jq '.metadata.annotations."ingress.ope
 
 Alternatively, if you use a dedicated IngressController for the deployment:
 
-```bash
-# List your IngressControllers
-oc -n openshift-ingress-operator get ingresscontrollers
-
-# Replace <ingresscontroller_name> with your IngressController name
-oc -n openshift-ingress-operator get ingresscontrollers/<ingresscontroller_name> -o json | jq '.metadata.annotations."ingress.operator.openshift.io/default-enable-http2"'
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/get-ingress-http2-status.sh
 ```
 
 - If the output is `"true"`, it means HTTP/2 is enabled.
@@ -141,8 +130,8 @@ If HTTP/2 is not enabled, you can enable it by running the following command:
 
 **IngressController configuration:**
 
-```bash
-oc -n openshift-ingress-operator annotate ingresscontrollers/<ingresscontroller_name> ingress.operator.openshift.io/default-enable-http2=true
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/enable-ingress-http2.sh
 ```
 
 **Global cluster configuration:**
@@ -159,9 +148,9 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 
 Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
 
-1. **Core Pod:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
+1. **Zeebe Gateway:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
 
-   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also use in the other components such as Operate, Tasklist.
+   - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`.
 
      In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
 
@@ -182,26 +171,43 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
 
      To configure a Zeebe cluster securely, it's essential to set up a secure communication configuration between pods:
 
-     - We enable gRPC ingress for the Core pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
+     - We enable gRPC ingress for the ZeebeGateway pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
 
      - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
+       Finally, we mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe Gateway Pod and the Zeebe Pod to configure both [broker security](/self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetworksecurity) and gateway security.
 
-     Update your `values.yml` file with the following:
+   Update your `values.yml` file with the following:
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/core-route.yml
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/zeebe-gateway-route.yml
    ```
 
-   The actual configuration properties can be reviewed:
+   The domain used by the Zeebe Gateway for gRPC is `zeebe-$DOMAIN_NAME` which different from the one used for the rest, namely `$DOMAIN_NAME`, to avoid any conflicts. It is also important to note that the port used for gRPC is `443`.
 
-   - [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection),
-   - [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection),
-   - [in the Zeebe Gateway configuration documentation](/self-managed/zeebe-deployment/configuration/gateway.md).
+2. **Operate:** mount the **Service Certificate Secret** to the Operate pod and configure the secure TLS connection. Here, only the `tls.crt` file is required.
 
-2. **Connectors:** update your `values.yml` file with the following:
+Update your `values.yml` file with the following:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/connectors-route.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/operate-route.yml
+```
+
+The actual configuration properties can be reviewed [in the Operate configuration documentation](/self-managed/operate-deployment/operate-configuration.md#zeebe-broker-connection).
+
+1. **Tasklist:** mount the **Service Certificate Secret** to the Tasklist pod and configure the secure TLS connection. Here, only the `tls.crt` file is required.
+
+   Update your `values.yml` file with the following:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/tasklist-route.yml
+```
+
+The actual configuration properties can be reviewed [in the Tasklist configuration documentation](/self-managed/tasklist-deployment/tasklist-configuration.md#zeebe-broker-connection).
+
+1. **Connectors:** update your `values.yml` file with the following:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/connectors-route.yml
 ```
 
 The actual configuration properties can be reviewed [in the Connectors configuration documentation](/self-managed/connectors-deployment/connectors-configuration.md#zeebe-broker-connection).
@@ -211,7 +217,7 @@ The actual configuration properties can be reviewed [in the Connectors configura
 1. Set up the global configuration to enable the single Ingress definition with the host. Update your configuration file as shown below:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/domain.yml
 ```
 
 <!--Intended space left for not breaking the build!-->
@@ -244,7 +250,7 @@ However, you can use `kubectl port-forward` to access the Camunda platform witho
 To make this work, you will need to configure the deployment to reference `localhost` with the forwarded port. Update your `values.yml` file with the following:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-domain.yml
 ```
 
   </TabItem>
@@ -264,7 +270,7 @@ The `global.compatibility.openshift.adaptSecurityContext` variable in your value
 - `disabled`: The `runAsUser` and `fsGroup` values will not be modified (default).
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/scc.yml
 ```
 
 </TabItem>
@@ -273,7 +279,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/
 To use permissive SCCs, simply install the charts as they are. Follow the [general Helm deployment guide](/self-managed/setup/install.md).
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/helm-values/no-scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-scc.yml
 ```
 
 </TabItem>
@@ -287,27 +293,23 @@ Some components are not enabled by default in this deployment. For more informat
 
 Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
-```bash
-# generate the final values
-envsubst < values.yml > generated-values.yml
-
-# print the result
-cat generated-values.yml
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
 ```
 
 Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/generate-passwords.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/generate-passwords.sh
 ```
 
 Use these environment variables in the `kubectl` command to create the secret.
 
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/create-identity-secret.sh
-```
+  ```bash reference
+  https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-identity-secret.sh
+  ```
 
 ### Install Camunda 8 using Helm
 
@@ -316,13 +318,13 @@ Now that the `generated-values.yml` is ready, you can install Camunda 8 using He
 The following are the required environment variables with some example values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/chart-env.sh
 ```
 
 Then run the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/rosa-hcp/camunda-versions/8.7/procedure/install/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/install-chart.sh
 ```
 
 This command:
@@ -339,24 +341,13 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 
 You can track the progress of the installation using the following command:
 
-```bash
-watch -n 5 '
-  kubectl get pods -n camunda --output=wide;
-  if [ $(kubectl get pods -n camunda --field-selector=status.phase!=Running -o name | wc -l) -eq 0 ] &&
-     [ $(kubectl get pods -n camunda -o json | jq -r ".items[] | select(.status.containerStatuses[]?.ready == false)" | wc -l) -eq 0 ];
-  then
-    echo "All pods are Running and Healthy - Installation completed!";
-  else
-    echo "Some pods are not Running or Healthy";
-  fi
-'
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 ## Verify connectivity to Camunda 8
 
-Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8).
-
-The username of the first user is `demo`, the password is the one generated previously and stored in the environment variable `FIRST_USER_PASSWORD`.
+Please follow our [guide to verify connectivity to Camunda 8](/self-managed/setup/deploy/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8)
 
 :::caution Domain name for gRPC Zeebe
 
