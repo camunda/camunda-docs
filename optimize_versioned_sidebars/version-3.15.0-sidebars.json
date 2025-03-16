@@ -3805,6 +3805,11 @@
                       "type": "link",
                       "label": "Missing data",
                       "href": "/docs/8.7/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Other problems",
+                      "href": "/docs/8.7/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/"
                     }
                   ]
                 }
