@@ -21,7 +21,6 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/ama
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=outbound
-https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-s3
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sns/
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sns/?amazonsns=inbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sns/?amazonsns=outbound
@@ -46,7 +45,6 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/aws
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/azure-open-ai
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/blueprism
-https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/box
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/easy-post
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/email
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/github
@@ -54,7 +52,6 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/git
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/github/?github=outbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/github-webhook
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/googledrive
-https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/google-gemini
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/google-maps-platform
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/google-sheets
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/google-sheets/#add-values-to-spreadsheet
