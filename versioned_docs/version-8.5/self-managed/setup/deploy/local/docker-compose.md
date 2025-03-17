@@ -27,13 +27,13 @@ To start a complete instance of Camunda 8 Self-Managed environment locally:
 1. Download the artifact for Camunda 8 <DockerCompose/>, then extract it.
 2. Enter the extracted directory, and run the following command:
 
-:::note
-For versions earlier than 8.6, the `docker compose up -d` command is only available to enterprise customers with access to Camunda's private registry. However, from version 8.6 onwards, it will work for all users as Web Modeler images are made publicly available.
-:::
-
 ```shell
 docker compose up -d
 ```
+
+:::note
+For Camunda versions earlier than 8.6, the `docker compose up -d` command is only available to enterprise customers with access to Camunda's private registry. From version 8.6 onwards, `docker compose up -d` is available for all users, as Web Modeler images are publicly available.
+:::
 
 3. Wait for the environment to initialize. This may take several minutes. Monitor the logs, especially the Keycloak container log, to ensure the components have started.
 
