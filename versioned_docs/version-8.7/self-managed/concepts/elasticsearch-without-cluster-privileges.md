@@ -10,7 +10,7 @@ If the Camunda single application cannot access Elasticsearch with cluster-level
 
 When running the schema manager as a standalone application, cluster privileges are only required for the schema creation. The single application does not need cluster privileges.
 
-- **Database Support**: This feature is only available from version 8.6.10 onwards and is also only supported for Elasticsearch installations (no OpenSearch support).
+- **Database Support**: This feature is also only supported for Elasticsearch installations (no OpenSearch support).
 - **Essential privileges required by the single application**: An index-level privilege of at least `manage` is still required for the Camunda single application to work correctly.
 
 To run the schema manager as a standalone application:
@@ -288,7 +288,6 @@ operate:
 
 ### Limitations
 
-- This feature is only available for the Camunda `8.6.10` version and above.
 - This feature only works for installations using Elasticsearch.
 - Camunda Optimize cannot be executed with this setup.
 
@@ -298,7 +297,7 @@ If the Camunda application(s) cannot access Elasticsearch with cluster-level pri
 
 Creating a backup snapshot in Elasticsearch requires `manage_snapshots` cluster-level privileges. In this case, cluster privileges are only required for the application that takes care of the backup creation, the Camunda application(s) do not need cluster privileges.
 
-- **Database Support**: This feature is only available from version Camunda 8.6.12 onwards, and is also only supported for Elasticsearch installations (no OpenSearch support).
+- **Database Support**: This feature is also only supported for Elasticsearch installations (no OpenSearch support).
 - **Indices**: This standalone application only takes care of Operate and Tasklist indices; Optimize is not included in this procedure.
 
 :::note
@@ -357,8 +356,8 @@ Example output logs:
 
 ```
 INFO  io.camunda.application.StandaloneBackupManager - Snapshot observation:
-INFO  io.camunda.application.StandaloneBackupManager - Operate indices snapshot is COMPLETED. Details: [GetBackupStateResponseDto{backupId=12345, state=COMPLETED, failureReason='null', details=[GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.6.11-snapshot_part_1_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.016+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.6.11-snapshot_part_2_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.6.11-snapshot_part_3_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.6.11-snapshot_part_4_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.6.11-snapshot_part_5_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.6.11-snapshot_part_6_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}]}]
-INFO  io.camunda.application.StandaloneBackupManager - Tasklist indices snapshot is COMPLETED. Details: [GetBackupStateResponseDto{backupId=12345, state=COMPLETED, failureReason='null', details=[GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.6.11-snapshot_part_1_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.016+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.6.11-snapshot_part_2_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.6.11-snapshot_part_3_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.6.11-snapshot_part_4_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.6.11-snapshot_part_5_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.6.11-snapshot_part_6_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.818+01:00, failures=[]}]}]
+INFO  io.camunda.application.StandaloneBackupManager - Operate indices snapshot is COMPLETED. Details: [GetBackupStateResponseDto{backupId=12345, state=COMPLETED, failureReason='null', details=[GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_1_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.016+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_2_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_3_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_4_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_5_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_operate_12345_8.7.0-snapshot_part_6_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}]}]
+INFO  io.camunda.application.StandaloneBackupManager - Tasklist indices snapshot is COMPLETED. Details: [GetBackupStateResponseDto{backupId=12345, state=COMPLETED, failureReason='null', details=[GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_1_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.016+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_2_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.216+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_3_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_4_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.416+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_5_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.617+01:00, failures=[]}, GetBackupStateResponseDetailDto{snapshotName='camunda_tasklist_12345_8.7.0-snapshot_part_6_of_6', state='SUCCESS', startTime=2025-03-11T17:49:08.818+01:00, failures=[]}]}]
 INFO  io.camunda.application.StandaloneBackupManager - Backup with id:[12345] is completed!
 ```
 
@@ -367,25 +366,24 @@ The backup manager creates a backup of Operate and Tasklist data. The backup inc
 For example, a backup with an ID of `123` might contain the following Elasticsearch snapshots:
 
 ```
-camunda_operate_123_8.6.0_part_1_of_6
-camunda_operate_123_8.6.0_part_2_of_6
-camunda_operate_123_8.6.0_part_3_of_6
-camunda_operate_123_8.6.0_part_4_of_6
-camunda_operate_123_8.6.0_part_5_of_6
-camunda_operate_123_8.6.0_part_6_of_6
-camunda_tasklist_123_8.6.0_part_1_of_6
-camunda_tasklist_123_8.6.0_part_2_of_6
-camunda_tasklist_123_8.6.0_part_3_of_6
-camunda_tasklist_123_8.6.0_part_4_of_6
-camunda_tasklist_123_8.6.0_part_5_of_6
-camunda_tasklist_123_8.6.0_part_6_of_6
+camunda_operate_123_8.7.0_part_1_of_6
+camunda_operate_123_8.7.0_part_2_of_6
+camunda_operate_123_8.7.0_part_3_of_6
+camunda_operate_123_8.7.0_part_4_of_6
+camunda_operate_123_8.7.0_part_5_of_6
+camunda_operate_123_8.7.0_part_6_of_6
+camunda_tasklist_123_8.7.0_part_1_of_6
+camunda_tasklist_123_8.7.0_part_2_of_6
+camunda_tasklist_123_8.7.0_part_3_of_6
+camunda_tasklist_123_8.7.0_part_4_of_6
+camunda_tasklist_123_8.7.0_part_5_of_6
+camunda_tasklist_123_8.7.0_part_6_of_6
 ```
 
 Once completed, you can proceed with step 7 of the [backup procedure](self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
 
 ### Limitations
 
-- This feature is only available for the Camunda `8.6.12` version and above.
 - This feature only works for installations using Elasticsearch.
 - Camunda Optimize data cannot be backed up with this setup.
 - Some operations that are supported by the backup actuator API are not supported by this feature.
