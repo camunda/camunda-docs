@@ -42,6 +42,9 @@ jobs:
 
       - name: Download sitemap from production
         run: curl -sL https://docs.camunda.io/sitemap.xml | grep -oP '<loc>\K.*?(?=</loc>)' > sitemap.prod.txt
+      - name: Remove known broken anchors.
+        run: |
+          sed -i 's!power-automate/#oauth-token-endpoint!power-automate/!g' connectors-element-template-links.txt
       - name: Prepare link collections
         # Turn static lists of URLs into HTML files with anchor tags.
         run: |
