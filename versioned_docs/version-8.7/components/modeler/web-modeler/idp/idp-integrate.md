@@ -26,13 +26,41 @@ You can then configure the document extraction template in the properties panel,
 
 Specify the document object variable used for document handling, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md) with the document reference.
 
+For example, if you have uploaded a document via form upload using a `document` key, you can specify `document[1]` to retrieve the first document in the array.
+
 Example: `document[1]`.
+
+## Provider authentication
+
+### Authentication
+
+Ensure the **Credentials** AWS authentication type is selected.
+
+### Access key
+
+Specify your AWS _access key_ connector secret, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md).
+
+Example: `{{secrets.IDP_AWS_ACCESSKEY}}`
+
+### Secret key
+
+Specify your AWS _secret access key_ connector secret, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md).
+
+Example: `{{secrets.IDP_AWS_SECRETKEY}}`
+
+## Provider configuration
 
 ### AWS S3 Bucket name
 
 Specify the name of the Amazon AWS S3 bucket where documents can be temporarily stored during Amazon Textract analysis.
 
 Example: `idp-extraction-connector` (for the Amazon AWS S3 bucket used for document storage during extraction).
+
+### Region
+
+Specify the region where documents can be temporarily stored during Amazon Textract analysis. This should match the region where the AWS S3 bucket is located.
+
+Example: `us-east-1`
 
 ## Output mapping
 
