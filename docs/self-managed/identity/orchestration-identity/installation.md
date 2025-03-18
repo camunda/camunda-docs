@@ -66,7 +66,7 @@ Any other users included in the initialization `user` list will also be granted 
 
 ### Enable API authentication and authorizations
 
-In Camunda 8 Run installations, basic authentication is enabled on the Camunda web applications, but the API is unprotected, and authorizations are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
+In Camunda 8 Run installations, basic authentication is enabled on the Camunda web applications, but the API is unprotected, and [authorizations](user-guide/authorization.md) are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
 
 <Tabs>
   <TabItem value="helm" label="Helm properties">
