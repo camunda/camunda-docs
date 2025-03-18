@@ -19,16 +19,6 @@ Supported environment changes and breaking changes or deprecations for the Camun
   - [Fetch RPA resource API](#)
   - [deployResourceAPI for RPA](#) -->
 
-- [Changes in supported environments](#changes-in-supported-environments)
-  - [Identity Keycloak now requires v25 or v26 Self-Managed](#identity-keycloak-now-requires-v25-or-v26-self-managed)
-  - [Camunda Spring SDK now requires Spring Boot 3.4.x SaaSSelf-Managed](#camunda-spring-sdk-now-requires-spring-boot-34x-saasself-managed)
-- [Key changes](#key-changes)
-  - [Deploy diagram change Self-Managed](#web-modeler-deploy-diagram-change)
-  - [Breaking changes in Camunda Process Test](#breaking-changes-in-camunda-process-test)
-  - [Deprecated: OpenAPI entities with `integer (int64)` key attributes](#deprecated-openapi-entities-with-integer-int64-key-attributes)
-  - [Zeebe Java client](#zeebe-java-client)
-    - [Adjustments](#adjustments)
-
 ## Changes in supported environments
 
 ### Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
