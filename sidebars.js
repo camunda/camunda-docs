@@ -675,6 +675,21 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "Identity",
+      link: {
+        type: "doc",
+        id: "components/identity/identity-introduction",
+      },
+      items: [
+        "components/identity/identity-introduction",
+        "components/identity/authorization",
+        "components/identity/user",
+      ],
+    },
+    {
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
