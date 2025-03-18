@@ -33,6 +33,8 @@ If you want to invite collaborators to your shared project, you'll need to first
 4. Now that they're added to the organization, you can add them to a project. Open **Modeler**, navigate to your project and open the **Collaborators** panel on the right side.
 5. Click **Add user** and find your colleague you added to your organization. Assign their role with the dropdown and click **Send invites**.
    ![add new user](./img/invite-collaborators.png)
+   Or use **All users in the organization** option to bulk invite all of your colleagues.
+   ![add all organization members](./img/invite-all-organization-members.png)
 6. After your colleague clicks **Accept invitation**, they will have access to the project based on the role you assigned.
 
 ## Adding resources to the Shared project
