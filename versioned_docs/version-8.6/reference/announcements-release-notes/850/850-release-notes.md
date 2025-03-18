@@ -1,6 +1,6 @@
 ---
-id: 850
-title: "8.5 Release notes"
+id: 850-release-notes
+title: "Release notes"
 description: "Release notes for 8.5, including alphas"
 ---
 
@@ -9,6 +9,30 @@ description: "Release notes for 8.5, including alphas"
 | Release date | End of maintenance | Changelog(s)                                                                                                                                                                                                                                                | Release blog                                                          | Update guide                                                                             |
 | ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | 9 April 2024 | 14 October 2025    | -[ Camunda 8 Core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) <br /> -[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) <br /> - [ Optimize ](https://github.com/camunda/camunda-optimize/releases/tag/3.13.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) | [Self-Managed update guide](/self-managed/operational-guides/update-guide/840-to-850.md) |
+
+### Updated SaaS URLs <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+
+We will simplify the URL for Camunda 8 SaaS from cloud.camunda.io ([console.cloud.camunda.io](https://console.cloud.camunda.io/)) to camunda.io ([console.camunda.io](http://console.camunda.io/)).
+
+On or around July 9th, users will be directed to the new URLs. Both URLs will continue to be active for at least 18 months so navigation from supported versions of components like Operate is still possible.
+
+Internal allowlisting or active rules for [cloud.camunda.io](http://cloud.camunda.io/) must be transitioned to the new [camunda.io](http://camunda.io/) URL. This change primarily affects Console and Modeler. During sign up, users will be briefly redirected through [accounts.cloud.camunda.io](http://accounts.camunda.io/), which will also be updated.
+
+### New generation naming scheme <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
+
+With the April release, the generation naming scheme in Camunda 8 changed and no longer includes the patch version.
+
+The new naming scheme used for all Camunda SaaS generations created after April 2024 is `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set. Existing generations will not be renamed.
+
+For patch releases to existing generations, `N` is set to the latest patch level plus 1. For example, when `Camunda 8.4.5` is the current generation name, the following patch will be released as `Camunda 8.4+gen6`.
+
+This was done to decouple the generation name from the particular patch level of the components it contains, as some component versions like Connectors are decoupled from other components.
+
+You will learn about the particular component patch version changes in the update dialogue to the latest generation available. The following screenshot shows a sample update from `Camunda 8.5+gen1` to `Camunda 8.5+gen2`, where only the Connectors patch version changed.
+
+![New Generating naming sample showing an update dialogue from 8.5+gen1 to 8.5+gen2](../../img/generation-naming-scheme-sample.png)
+
+Note that the actual values shown in this screenshot don't correspond to any actual generations and only serve as an example.
 
 ### Role Support for Web Modeler with OIDC in Self-Managed <span class="badge badge--long" title="This feature affects Modeler">Modeler</span> <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
