@@ -128,6 +128,17 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 
 Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
+### Git Sync
+
+Web Modeler supports syncing files via [Git Sync](../../../../components/modeler/web-modeler/git-sync.md). You need to provide the base url for you provider if you are using a self-hosted GitLab or GitHub instance.
+
+| Provider      | Environment variable                      | Description                                                                                                                   | Default value               |
+| ------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`        | Maximum number of allowed files for sync operations.                                                                          | `50`                        |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE` | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                       |
+| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`  | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`    |
+| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`  | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4` |
+
 ## Configuration of the `webapp` component
 
 ### General
@@ -201,7 +212,7 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 | `LOG_LEVEL_CLIENT`   | [optional]<br/>Log level for the client         | `DEBUG`                      |
 | `LOG_LEVEL_WEBAPP`   | [optional]<br/>Log level for the Node.js server | `DEBUG`                      |
 
-The `LOG_LEVEL_*` options can be found [here](../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
+The `LOG_LEVEL_*` options can be found [here](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
 
 ### SSL

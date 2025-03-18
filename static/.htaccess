@@ -1,29 +1,29 @@
-# Welcome to the redirect party! 
-#  ____  ____  ____  __  ____  ____  ___  ____    ____   __   ____  ____  _  _  _   
-# (  _ \(  __)(    \(  )(  _ \(  __)/ __)(_  _)  (  _ \ / _\ (  _ \(_  _)( \/ )/ \  
-#  )   / ) _)  ) D ( )(  )   / ) _)( (__   )(     ) __//    \ )   /  )(   )  / \_/  
-# (__\_)(____)(____/(__)(__\_)(____)\___) (__)   (__)  \_/\_/(__\_) (__) (__/  (_)  
+# Welcome to the redirect party!
+#  ____  ____  ____  __  ____  ____  ___  ____    ____   __   ____  ____  _  _  _
+# (  _ \(  __)(    \(  )(  _ \(  __)/ __)(_  _)  (  _ \ / _\ (  _ \(_  _)( \/ )/ \
+#  )   / ) _)  ) D ( )(  )   / ) _)( (__   )(     ) __//    \ )   /  )(   )  / \_/
+# (__\_)(____)(____/(__)(__\_)(____)\___) (__)   (__)  \_/\_/(__\_) (__) (__/  (_)
 #
 # Please read this guide before adding new redirects.
 #
 ##################################################################################
 #
-# Redirects in this file are sorted in this order: 
+# Redirects in this file are sorted in this order:
 #  1. Universal rules that pertain to all content.
-#     These redirects have no anticipated removal. 
-#  2. Broad version (or unversioned) redirects. 
-#     These redirects have no anticipated removal. 
+#     These redirects have no anticipated removal.
+#  2. Broad version (or unversioned) redirects.
+#     These redirects have no anticipated removal.
 #  3. Specific content moves, in newest-to-oldest order of version in which they are introduced.
 #     These redirects will be removed when their introduced version is no longer supported.
-#  
-#  If you're adding a redirect for a specific page or section, 
+#
+#  If you're adding a redirect for a specific page or section,
 #   you likely want to do that in #3.
 #  That means that you want to find the banner comment identifying that version,
 #    and add your redirect below that comment.
-# 
+#
 # For help writing rules, see https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule.
 #
-################################################################################## 
+##################################################################################
 
 ##################################################################################
 # 1. Universal rules
@@ -53,6 +53,10 @@ RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 
 # 2. Broad version (or unversioned) redirects
 ##################################################################################
 
+# Numbered aliases for vNext. These are temporary, until this version becomes current.
+RewriteRule ^docs/8.8/(.*)$ /docs/next/$1 [R=302,L]
+RewriteRule ^optimize/3.16.0/(.*)$ /optimize/next/$1 [R=302,L]
+
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.6/(.*)$ /docs/$1 [R=302,L]
 RewriteRule ^optimize/3.14.0/(.*)$ /optimize/$1 [R=302,L]
@@ -72,7 +76,7 @@ RewriteRule ^optimize/3.9.0/(.*)$ https://unsupported.docs.camunda.io/8.1/optimi
 RewriteRule ^docs/8.2/(.*)$ https://unsupported.docs.camunda.io/8.2/docs/$1 [R=301,L]
 RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optimize/$1 [R=301,L]
 
-# Timeless classics. 
+# Timeless classics.
 # rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
 ## index pages are not served as /index/ anymore but /index.html
 RewriteRule ^(.*)/index/$ /$1 [R=301,L]
@@ -91,9 +95,29 @@ RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/
 # 3. Specific content moves
 ##################################################################################
 
+# Remove go and zbctl pages, redirect to CCH
+RewriteRule ^docs/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
+RewriteRule ^docs/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
+RewriteRule ^docs/8.7/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
+RewriteRule ^docs/8.7/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
+
+# Remove meta page
+RewriteRule ^meta/ / [R=301,L]
+
+# Remove Tasklist GraphQL API in 8.8
+RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
+
+# Provide redirects for RPA experimental removal
+RewriteRule ^docs/next/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/next/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/next/components/early-access/experimental/rpa/rpa-integration/?$ /docs/next/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-integration/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
 
 # Provide current to next redirect for ad-hoc
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc/ad-hoc/$1 [R=301,L]
@@ -164,6 +188,16 @@ RewriteRule ^docs/guides/react-components/saas-prerequisites/?$ /docs/guides/$1 
 RewriteRule ^docs/guides/react-components/install-plain-java/?$ /docs/guides/$1 [R=301,L]
 RewriteRule ^docs/guides/react-components/install-docker-compose/?$ /docs/guides/$1 [R=301,L]
 RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/$1 [R=301,L]
+
+# Move logging from troubleshooting to monitoring
+RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+
+# Move metrics from zeebe-deployment to monitoring
+RewriteRule ^docs/8.7/self-managed/zeebe-deployment/operations/metrics/?$ /docs/8.7/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/zeebe-deployment/operations/metrics/?$ /docs/8.6/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/operations/metrics/?$ /docs/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
 
 # TODO at time of release: account for API spec moves in https://github.com/camunda/camunda-docs/pull/4534 (there are many)
 
@@ -500,6 +534,9 @@ RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/compon
 RewriteRule ^docs/next/components/modeler/web-modeler/start-instance/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
 
+# Move user metrics page to a new folder
+RewriteRule ^docs/reference/usage-metrics.md/?$ ^docs/reference/data-collection/usage-metrics.md/? [R=301,L,NE]
+
 # Remove Migration to Camunda 8 pages
 RewriteRule ^docs/next/guides/migrating-from-camunda-7/adjusting-dmn-models/(.*)$ /docs/next/guides/migrating-from-camunda-7/index/ [R=301,L]
 RewriteRule ^docs/8.7/guides/migrating-from-camunda-7/adjusting-dmn-models/(.*)$ /docs/8.7/guides/migrating-from-camunda-7/index/ [R=301,L]
@@ -510,4 +547,3 @@ RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-source-code/(.*)$ /d
 RewriteRule ^docs/next/guides/migrating-from-camunda-7/adjusting-bpmn-models/(.*)$ /docs/next/guides/migrating-from-camunda-7/index/ [R=301,L]
 RewriteRule ^docs/8.7/guides/migrating-from-camunda-7/adjusting-bpmn-models/(.*)$ /docs/8.7/guides/migrating-from-camunda-7/index/ [R=301,L]
 RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-bpmn-models/(.*)$ /docs/guides/migrating-from-camunda-7/index/ [R=301,L]
-

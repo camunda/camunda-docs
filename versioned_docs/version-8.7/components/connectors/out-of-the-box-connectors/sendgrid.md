@@ -42,6 +42,10 @@ To make the **SendGrid Email Connector** executable, you need to fill out all th
    - To work with documents you must upload them first, [using the REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
    - The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the list of these variables in the **Attachments** field.
 
+:::note
+Starting from version 8.7.0, the SendGrid Connector provides attachment support. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
+
 ### SendGrid Email Template Connector
 
 Send an email via SendGrid Dynamic Template and use the [Handlebars templating language](https://handlebarsjs.com/) to pass dynamic values to your Connector.

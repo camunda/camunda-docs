@@ -127,7 +127,11 @@ The task returns a JSON object containing detailed information about the email:
 - `receivedDateTime`: The email's reception datetime
 
 :::note
-Starting from version 8.7.0, the email Connector supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the outbound email Connector supports sending Camunda documents as attachments.
+
+For example, the **Attachment** field in the properties panel may look as `=[ document1, document2]`.
+
+See additional details and limitations in [document handling](/components/concepts/document-handling.md).
 :::
 
 #### Example Response
@@ -717,7 +721,7 @@ Language ([FEEL](/components/modeler/feel/what-is-feel.md)) expression to contro
 process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are
 met by the incoming email.
 
-For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the
+For example, the FEEL expression `subject = "urgent"` ensures that the process is only triggered if the
 subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email
 received by the connector.
 

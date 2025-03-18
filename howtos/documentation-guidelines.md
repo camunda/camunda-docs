@@ -2,28 +2,32 @@
 
 ## PRs for every change
 
-All changes have to be done in a separate Branch. As soon as the changes are done please open a PR. A Github Action runs with every commit to a Branch and checks if the documentation can be build (including a broken links check).
+All changes must be done in a separate branch. As soon as the changes are done please open a PR. A Github Action runs with every commit to a branch and checks if the documentation can be built (including a broken links check).
 
-PRs should be in a draft status while being actively worked. Removing a PR from draft status indicates they are ready for review (by a technical writer).
+PRs should be in draft status while being actively worked or have a clear written status in the description or comment. Removing a PR from draft status indicates that it is ready for review (by a technical writer).
 
-## Labeling PRs
+## Labels
 
-PRs can be labeled “hold” by engineering teams for any reason, including ongoing conversations, coordination across teams or departments, or anything that’s not obvious within the discussion or description of the PR.
+PRs should be labeled to help the Documentation Team quickly triage, review, and merge PRs according to urgency and priority.
 
-PRs labeled “bug” will be merged and released as immediately as possible.
+Labels include identifiers for teams/components, minor and alpha releases, support engagements, etc. When opening a PR or issue, do your best to use labels that communicate the component, version, and or priority.
 
-### Preview sites
+PRs can be labeled “hold” for any reason, including ongoing conversations, coordination across teams or departments, or anything that’s not obvious within the discussion or description of the PR.
 
-Adding a “deploy” label to a PR will trigger a deployment of the PR to a preview site. The preview site will be linked in the PR description.
+PRs and issues without labels may be at risk for slow triage.
+
+### Preview site label - `deploy`
+
+Adding a `deploy` label to a PR will trigger its deployment to a preview site, which will be linked in the PR description. We recommend using the `deploy` label for large or complex docs changes.
 
 ## Not all PRs require an issue
 
-In the spirit of "Always Progress", if you are confident you know what change needs to be made a separate issue on the topic is not required. However, if you have an idea that needs to go into the backlog, creating an issue instead of a PR is the best way to go.
+In the spirit of "Always Progress," if you are confident you know what change needs to be made, a separate issue on the topic is not required. However, if you have an idea that needs to go into the backlog, creating an issue instead of a PR is the best way to go.
 
 ## Structure
 
-- Name Markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda 8** --> `introduction-to-camunda-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as internal document id to reference in [the appropriate sidebars file](#sidebar-navigation).
-- Sub categories have to be placed in their own sub directories. Example: Guides/Update Guide can be found in `docs/guides/update-guide`.
+- Name markdown files according to the title. This makes it easier to find a file. Example: **Introduction to Camunda 8** --> `introduction-to-camunda-8.md`. Avoid non-alphanumeric characters in titles. Use the file name as an internal document ID to reference in [the appropriate sidebars file](#sidebar-navigation).
+- Subcategories have to be placed in their own sub-directories. Example: `Guides` > `Get started with Spring` can be found in `/guides/getting-started-java-spring.md`.
 
 ## Instances: Docs vs Optimize vs Interactive API Explorers
 
@@ -37,12 +41,12 @@ Due to a difference in version numbers, the documentation is split into [multipl
 
 [The Optimize and Docs instances of the documentation](#instances-docs-vs-optimize-vs-interactive-api-explorers) each contain documentation for multiple versions:
 
-| Instance   | Version(s)               | Source path                                                         |
-| ---------- | ------------------------ | ------------------------------------------------------------------- |
-| `docs`     | Next                     | [/docs/](../docs/)                                                  |
-| `docs`     | 8.1, 8.0, 1.3, ...       | [/versioned_docs/version-\*/](../versioned_docs/)                   |
-| `optimize` | Next                     | [/optimize/](../optimize/)                                          |
-| `optimize` | 3.9.0, 3.8.0, 3.7.0, ... | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) |
+| Instance   | Version(s)                  | Source path                                                         |
+| ---------- | --------------------------- | ------------------------------------------------------------------- |
+| `docs`     | Next                        | [/docs/](../docs/)                                                  |
+| `docs`     | 8.7, 8.6, 8.5, ...          | [/versioned_docs/version-\*/](../versioned_docs/)                   |
+| `optimize` | Next                        | [/optimize/](../optimize/)                                          |
+| `optimize` | 3.15.0, 3.14.0, 3.13.0, ... | [/optimize_versioned_docs/version-\*/](../optimize_versioned_docs/) |
 
 When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
@@ -52,9 +56,12 @@ Specific Optimize versions are aligned with Camunda versions as follows:
 
 | Camunda version | Optimize version |
 | --------------- | ---------------- |
-| 8.1             | 3.9.0            |
-| 8.0             | 3.8.0            |
-| 1.3             | 3.7.0            |
+| 8.8             | 3.16.0           |
+| 8.7             | 3.15.0           |
+| 8.6             | 3.14.0           |
+| 8.5             | 3.13.0           |
+| 8.4             | 3.12.0           |
+| 8.3             | 3.11.0           |
 
 ### Interactive API Explorer versions
 
@@ -64,12 +71,12 @@ The instances associated with an interactive API Explorer only contain one versi
 
 [Sidebar navigation](https://docusaurus.io/docs/sidebar) of the documentation is managed in the sidebars files. [Each instance of the documentation](#instances-docs-vs-optimize) has its own sidebars file:
 
-| Instance   | Version(s)               | Sidebars path                                                                             |
-| ---------- | ------------------------ | ----------------------------------------------------------------------------------------- |
-| `docs`     | Next                     | [/docs/sidebars.js](../sidebars.js)                                                       |
-| `docs`     | 8.1, 8.0, 1.3, ...       | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/)                    |
-| `optimize` | Next                     | [/optimize/sidebars.js](../optimize_sidebars.js)                                          |
-| `optimize` | 3.9.0, 3.8.0, 3.7.0, ... | [/optimize_versioned_sidebars/version-\*-sidebars.json/](../optimize_versioned_sidebars/) |
+| Instance   | Version(s)                  | Sidebars path                                                                             |
+| ---------- | --------------------------- | ----------------------------------------------------------------------------------------- |
+| `docs`     | Next                        | [/docs/sidebars.js](../sidebars.js)                                                       |
+| `docs`     | 8.7, 8.6, 8.5, ...          | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/)                    |
+| `optimize` | Next                        | [/optimize/sidebars.js](../optimize_sidebars.js)                                          |
+| `optimize` | 3.15.0, 3.14.0, 3.13.0, ... | [/optimize_versioned_sidebars/version-\*-sidebars.json/](../optimize_versioned_sidebars/) |
 
 ### Sidebar items
 
@@ -209,25 +216,33 @@ On a technical level, the Optimize team takes screenshots within their [end-to-e
 
 ## Review process
 
-After the proposed change is finished open a GitHub PR and assign at least one reviewer, it is good to pick a reviewer who is expert in the matter of the change. If unsure about who to pick choose one of the corresponding team representatives, and they will take care of delegating the issue:
+After the proposed change is finished, open a GitHub PR and assign reviewers based on your PR template. Most PRs require a technical writing review and a review from the relevant engineering team.
+
+If unsure about who to pick, choose one of the corresponding team representatives, and they will take care of delegating the issue:
 
 - Console: @ultraschuppi
-- Modeler: @camunda/modeling-dev
+- Desktop Modeler: @camunda/modeling-dev
+- Web Modeler: @marcosbarbero @wollefitz
 - Zeebe: @npepinpe
-- Operate: @ralfpuchert
+- Operate: @ThorbenLindhauer
 - Tasklist: @camunda/human-task-orchestration
 - Optimize: @RomanJRW
 - Connectors: @camunda/connectors
 - Self-Managed/Distribution: @camunda/distribution
-- InfEx: @camunda/infex-docs-dri
-- Identity: @dlavrenuek
+- InfEx: @camunda/infrastructure-experience
+- Identity: @kevinCamunda
 - DevEx: @akeller
-- Product Management: @felix-mueller
+- Product Management:
+  - Core Orchestration and Core Platform topics: @felix-mueller
+  - Task Automation: @crobbins215
+  - Business Application Integration: @toco-cam
+  - Embedded Intelligence, Onboarding and Migration: @bastiankoerber
+  - Fallback: @bastiankoerber
 - Documentation: @camunda/tech-writers
 - Documentation infrastructure: @pepopowitz
 - Fallback: @akeller
 
-As a reviewer feel free to merge any PR which you feel comfortable with after your review. If you have questions, concerns, or feel that you are not the right person to review the PR please make this transparent to the PR author so they can clarify this.
+As a reviewer, feel free to merge any PR you feel comfortable with after your review. If you have questions or concerns or feel that you are not the right person to review the PR, please make this transparent to the PR author so they can clarify.
 
 [versioned-source]: https://github.com/camunda/camunda-docs/tree/main/versioned_docs
 [next-source]: https://github.com/camunda/camunda-docs/tree/main/docs

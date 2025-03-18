@@ -13,7 +13,7 @@ module.exports = {
   },
   title: "Camunda 8 Docs",
   tagline:
-    "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed.",
+    "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed",
   // url: "https://camunda-cloud.github.io",
   url: docsSiteUrl,
   // baseUrl: "/camunda-cloud-documentation/",
@@ -327,7 +327,7 @@ module.exports = {
     },
 
     prism: {
-      additionalLanguages: ["java", "protobuf", "csharp"],
+      additionalLanguages: ["java", "protobuf", "csharp", "bash"],
       theme: themes.palenight,
       darkTheme: themes.dracula,
     },
@@ -401,10 +401,6 @@ module.exports = {
         {
           title: "About",
           items: [
-            {
-              label: "How to use our docs",
-              to: "meta",
-            },
             {
               label: "Camunda Help Center",
               to: "docs/reference/camunda-help-center",
@@ -492,6 +488,7 @@ module.exports = {
       apiKey: "d701d38126d1a43866047d3ab97680d1",
       appId: "6KYF3VMCXZ",
       indexName: "camunda",
+      placeholder: "Search Camunda 8 docs",
     },
     languageTabs: [
       {

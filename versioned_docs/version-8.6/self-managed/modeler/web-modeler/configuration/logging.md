@@ -46,7 +46,7 @@ To control the verbosity of the logs, adjust the environment variables `LOG_LEVE
 LOG_LEVEL_CLIENT=DEBUG
 ```
 
-The `LOG_LEVEL_*` options can be found [here](../../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
+The `LOG_LEVEL_*` options can be found [here](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
 
 ## Logging configuration for the `websocket` component
 

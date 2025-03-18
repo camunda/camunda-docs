@@ -121,6 +121,7 @@ module.exports = {
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity",
           ],
         },
         {
@@ -140,6 +141,15 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "RPA",
+      link: {
+        type: "doc",
+        id: "components/rpa/overview",
+      },
+      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
@@ -181,6 +191,34 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
+            {
+              type: "category",
+              label: "Intelligent document processing",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp",
+              },
+              items: [
+                "components/modeler/web-modeler/idp/idp-configuration",
+                "components/modeler/web-modeler/idp/idp-applications",
+                {
+                  type: "category",
+                  label: "Document extraction",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-document-extraction",
+                  },
+                  items: [
+                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
+                    "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                  ],
+                },
+                // "components/modeler/web-modeler/idp/idp-document-automation",
+                "components/modeler/web-modeler/idp/idp-integrate",
+                "components/modeler/web-modeler/idp/idp-key-concepts",
+                "components/modeler/web-modeler/idp/idp-reference",
+              ],
+            },
             "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
@@ -199,6 +237,8 @@ module.exports = {
               ],
             },
             "components/modeler/web-modeler/file-download",
+            "components/modeler/web-modeler/web-modeler-settings",
+            "components/modeler/web-modeler/process-landscape-visualization",
           ],
         },
         {
@@ -695,14 +735,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Experimental features",
-          items: [
-            "components/early-access/experimental/rpa/rpa-integration",
-            "components/early-access/experimental/rpa/rpa-framework-library",
-          ],
-        },
-        {
-          type: "category",
           label: "Alpha features",
           link: {
             type: "doc",
@@ -746,7 +778,6 @@ module.exports = {
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
-        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
@@ -828,12 +859,12 @@ module.exports = {
             ),
           ],
         },
-        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+            require("./docs/apis-tools/operate-api/sidebar-schema"),
+            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -913,6 +944,7 @@ module.exports = {
             {
               "Java client": [
                 "apis-tools/java-client/index",
+                "apis-tools/java-client/authentication",
                 "apis-tools/java-client/job-worker",
                 "apis-tools/java-client/logging",
                 "apis-tools/java-client/zeebe-process-test",
@@ -934,21 +966,6 @@ module.exports = {
             {
               "Community clients": [
                 "apis-tools/community-clients/index",
-                {
-                  "Zeebe clients": [
-                    {
-                      "CLI client": [
-                        "apis-tools/community-clients/cli-client/index",
-                        "apis-tools/community-clients/cli-client/cli-get-started",
-                      ],
-                      "Go client": [
-                        "apis-tools/community-clients/go-client/index",
-                        "apis-tools/community-clients/go-client/go-get-started",
-                        "apis-tools/community-clients/go-client/job-worker",
-                      ],
-                    },
-                  ],
-                },
                 "apis-tools/build-your-own-client",
               ],
             },
@@ -1017,7 +1034,15 @@ module.exports = {
     "reference/notices",
     "reference/release-policy",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      type: "category",
+      label: "Data collection",
+      link: {
+        type: "doc",
+        id: "reference/data-collection/data-collection",
+      },
+      items: ["reference/data-collection/usage-metrics"],
+    },
     "reference/glossary",
   ],
   "Self-Managed": [
@@ -1109,6 +1134,7 @@ module.exports = {
             "self-managed/setup/guides/using-existing-opensearch",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
+            "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/multi-namespace-deployment",
@@ -1120,7 +1146,8 @@ module.exports = {
     {
       "Reference architecture": [
         "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual",
+        "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/manual",
       ],
     },
     {
@@ -1182,9 +1209,14 @@ module.exports = {
           ],
         },
         {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },
       ],
@@ -1258,7 +1290,6 @@ module.exports = {
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",
@@ -1367,63 +1398,73 @@ module.exports = {
 
           Identity: [
             "self-managed/identity/what-is-identity",
-            "self-managed/identity/getting-started/install-identity",
             {
-              "User guide": [
-                {
-                  Configuration: [
-                    "self-managed/identity/user-guide/configuration/making-identity-production-ready",
-                    "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
-                    "self-managed/identity/user-guide/configuration/configure-logging",
-                    "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
-                  ],
-                },
-                {
-                  Roles: [
-                    "self-managed/identity/user-guide/roles/add-assign-role",
-                    "self-managed/identity/user-guide/roles/add-assign-permission",
-                  ],
-                },
-                {
-                  Groups: [
-                    "self-managed/identity/user-guide/groups/create-group",
-                    "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
-                  ],
-                },
-                {
-                  Authorizations: [
-                    "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
-                    "self-managed/identity/user-guide/authorizations/managing-user-access",
-                    "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
-                  ],
-                },
-                {
-                  Tenants: [
-                    "self-managed/identity/user-guide/tenants/managing-tenants",
-                  ],
-                },
-                {
-                  "Mapping rules": [
-                    "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
-                  ],
-                },
-                {
-                  "Additional features": [
-                    "self-managed/identity/user-guide/additional-features/adding-an-api",
-                    "self-managed/identity/user-guide/additional-features/incorporate-applications",
-                  ],
-                },
+              "Orchestration Cluster Identity": [
+                "self-managed/identity/orchestration-identity/installation",
+                "self-managed/identity/orchestration-identity/configuration",
               ],
             },
             {
-              Deployment: [
-                "self-managed/identity/deployment/configuration-variables",
-                "self-managed/identity/deployment/application-monitoring",
-                "self-managed/identity/deployment/starting-configuration-for-identity",
-                "self-managed/identity/deployment/resource-management",
+              "Identity for Web Modeler and Console": [
+                "self-managed/identity/getting-started/install-identity",
+                {
+                  "User guide": [
+                    {
+                      Configuration: [
+                        "self-managed/identity/user-guide/configuration/making-identity-production-ready",
+                        "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
+                        "self-managed/identity/user-guide/configuration/configure-logging",
+                        "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
+                      ],
+                    },
+                    {
+                      Roles: [
+                        "self-managed/identity/user-guide/roles/add-assign-role",
+                        "self-managed/identity/user-guide/roles/add-assign-permission",
+                      ],
+                    },
+                    {
+                      Groups: [
+                        "self-managed/identity/user-guide/groups/create-group",
+                        "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
+                      ],
+                    },
+                    {
+                      Authorizations: [
+                        "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
+                        "self-managed/identity/user-guide/authorizations/managing-user-access",
+                        "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
+                      ],
+                    },
+                    {
+                      Tenants: [
+                        "self-managed/identity/user-guide/tenants/managing-tenants",
+                      ],
+                    },
+                    {
+                      "Mapping rules": [
+                        "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
+                      ],
+                    },
+                    {
+                      "Additional features": [
+                        "self-managed/identity/user-guide/additional-features/adding-an-api",
+                        "self-managed/identity/user-guide/additional-features/incorporate-applications",
+                      ],
+                    },
+                  ],
+                },
+                {
+                  Deployment: [
+                    "self-managed/identity/deployment/configuration-variables",
+                    "self-managed/identity/deployment/application-monitoring",
+                    "self-managed/identity/deployment/starting-configuration-for-identity",
+                    "self-managed/identity/deployment/resource-management",
+                  ],
+                },
+                "self-managed/identity/troubleshooting/troubleshoot-identity",
               ],
             },
-            "self-managed/identity/troubleshooting/troubleshoot-identity",
           ],
         },
         {
@@ -1444,6 +1485,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
                   ],
                 },
               ],

@@ -4,7 +4,7 @@ title: "User tasks"
 description: "A user task is used to model work that needs to be done by a human actor."
 ---
 
-A user task is used to model work that needs to be done by a human and is assisted by a business process execution engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
 
 When the process instance arrives at a user task, a new user task instance is created at Zeebe.
 The process instance stops at this point and waits until the user task instance is completed.
