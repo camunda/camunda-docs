@@ -16,11 +16,11 @@ March 11th, 2025
 
 #### Product affected
 
-Camunda Web Modeler Self-Managed
+Camunda Web Modeler
 
 #### Impact
 
-The version of `koa` used by Camunda Web Modeler Self-Managed was affected by the following vulnerability:
+The version of `koa` used by Camunda Web Modeler was affected by the following vulnerability:
 
 - https://nvd.nist.gov/vuln/detail/CVE-2025-25200
 
@@ -36,6 +36,8 @@ Camunda has provided the following releases which contain the fix:
 - Camunda Web Modeler Self-Managed 8.4.15
 - Camunda Web Modeler Self-Managed 8.5.16
 - Camunda Web Modeler Self-Managed 8.6.8
+
+The fix was deployed to Web Modeler SaaS on February 14, 2025, 08:50 CET.
 
 ### Notice 13
 

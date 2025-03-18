@@ -11,7 +11,7 @@ import CrossImg from '/static/img/icon-list-cross.png';
 Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials.
 
 :::note
-IDP is only supported for Camunda 8 Self-Managed with the 8.7.0-alpha5 release, with full configuration documentation to follow. Support for Camunda 8 SaaS and Camunda 8 Run is planned for delivery with the 8.7 release.
+For the 8.7.0-alpha5 release IDP only offers support for Camunda 8 Self-Managed development deployment via Docker (see [example deployment](#idp-docker-example)). Full production support for Camunda 8 SaaS and Camunda 8 Self-Managed is planned for delivery with the 8.7 release. Camunda 8 Run is not supported as IDP requires Web Modeler.
 :::
 
 ## Prerequisites
@@ -39,3 +39,45 @@ Add your Amazon AWS IAM user _access key_ and _secret key_ as [connector secrets
 :::note
 You can rename these connector secrets if you want to change the testing bucket used in other environments (such as `test`, `stage` or `prod`). If you do this, you must also change these names to match within the **Authentication** section of the Properties panel for any related published document extraction templates.
 :::
+
+## Example Self-Managed Docker IDP deployment {#idp-docker-example}
+
+To deploy and run Camunda 8 with IDP in a local development environment:
+
+1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
+
+1. Download [camunda-snapshot-idp.zip](https://github.com/camunda/camunda-distributions/releases/download/untagged-6e9e22f0ece5a636e8d0/camunda-snapshot-idp.zip) from the [camunda-distributions](https://github.com/camunda/camunda-distributions/releases) GitHub repository, and extract the file contents to your desired directory.
+1. In the extracted directory:
+
+   1. Open the `connector-secrets.txt` file, and locate and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively. Save and close the file.
+
+      ```
+      IDP_AWS_ACCESSKEY=<YOUR_ACCESS_KEY>
+      IDP_AWS_SECRETKEY=<YOUR_SECRET_KEY>
+      ```
+
+   1. Open the `docker-compose.yaml` file, and locate and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively, for **both** the Zeebe and Tasklist document store. Save and close the file.
+
+      ```
+      - AWS_ACCESS_KEY_ID=<YOUR_ACCESS_KEY>
+      - AWS_SECRET_ACCESS_KEY=<YOUR_SECRET_KEY>
+      ```
+
+   1. [Run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose).
+
+1. Launch Web Modeler at http://localhost:8070 and log in with the username `demo` and password `demo`.
+1. Get started with IDP by creating an [IDP application](idp-applications.md).
+
+:::info
+To learn more about using Docker Compose to run Camunda Self-Managed locally, see [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md).
+:::
+
+### Deployment files
+
+This example deployment uses the following files:
+
+| File                    | Notes                                                                            |
+| :---------------------- | :------------------------------------------------------------------------------- |
+| `docker-compose.yaml`   | Enables IDP with `IDP_ENABLED: "true"` in the Web Modeler environment variables. |
+| `.env`                  | Environment variables to get the 8.7.0-SNAPSHOT versions of all components.      |
+| `connector-secrets.txt` | Sets the [connector secrets](#aws-secrets) required by IDP.                      |

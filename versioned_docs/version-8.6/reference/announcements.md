@@ -99,7 +99,9 @@ Users can no longer select these templates when creating a new none start event 
 
 Message start event element templates are better suited for the message-based communication these Connectors provide, and offer more flexibility and features compared to the none start event element templates, such as the ability to define a message ID and a correlation key for idempotency. Read more in the [inbound Connectors documentation](/components/connectors/use-connectors/inbound.md) and the [messaging concepts documentation](/components/concepts/messages.md#message-uniqueness).
 
-If one of your endpoints returns multiple Set-Cookie headers and you need to capture all of them, set `groupSetCookieHeaders` to `true` in the element template XML. This aggregates the headers into a list. This feature is available since version 8.6.7. The grouping is enabled by default since version 8.6.11.
+If one of your endpoints returns multiple Set-Cookie headers and you need to capture all of them, set `groupSetCookieHeaders` to `true` in the element template XML. This aggregates the headers into a list. This feature is available since version 8.6.7. The grouping is enabled by default since version 8.6.10.
+
+If one of your endpoints requires pre-encoded URL elements, this behavior will change in version 8.6.0. Since 8.6.10, the element template includes the skipEncoding property, which can be set to "true". This disables the automatic decoding and re-encoding process, ensuring the URL is sent to the server exactly as provided.
 
 #### Breaking changes in the Connector SDK
 
