@@ -367,7 +367,7 @@ module.exports = {
         {
           type: "doc",
           docId: "components/components-overview",
-          label: "Components",
+          label: "Manual",
           position: "left",
         },
         {

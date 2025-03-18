@@ -65,36 +65,49 @@ module.exports = {
   Components: [
     "components/components-overview",
     {
-      Concepts: [
-        "components/concepts/what-is-camunda-8",
-        "components/concepts/clusters",
-        "components/concepts/processes",
-        "components/concepts/job-workers",
-        "components/concepts/execution-listeners",
-        "components/concepts/user-task-listeners",
-        "components/concepts/process-instance-creation",
-        "components/concepts/messages",
-        "components/concepts/signals",
-        "components/concepts/incidents",
-        "components/concepts/variables",
-        "components/concepts/expressions",
-        "components/concepts/workflow-patterns",
-        "components/concepts/process-instance-modification",
-        "components/concepts/process-instance-migration",
-        "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
-        "components/concepts/outbound-connectors-job-workers",
-        "components/concepts/backups",
-        "components/concepts/resource-deletion",
-        "components/concepts/resource-authorizations",
-        "components/concepts/document-handling",
+      Features: [
         {
-          "Access control": [
-            "components/concepts/access-control/user-groups",
-            "components/concepts/access-control/user-task-access-restrictions",
+          type: "category",
+          label: "Intelligent Document Processing",
+          link: {
+            type: "doc",
+            id: "components/rpa/overview",
+          },
+          items: [
+            "components/rpa/getting-started",
+            "components/rpa/production",
+          ],
+        },
+        {
+          type: "category",
+          label: "RPA",
+          link: {
+            type: "doc",
+            id: "components/rpa/overview",
+          },
+          items: [
+            "components/rpa/getting-started",
+            "components/rpa/production",
+          ],
+        },
+        {
+          type: "category",
+          label: "SAP",
+          link: {
+            type: "doc",
+            id: "components/rpa/overview",
+          },
+          items: [
+            "components/rpa/getting-started",
+            "components/rpa/production",
           ],
         },
       ],
+    },
+    {
+      "Orchestration cluster": ["components/console/introduction-to-console"],
+    },
+    {
       Console: [
         "components/console/introduction-to-console",
         {
@@ -141,15 +154,6 @@ module.exports = {
           ],
         },
       ],
-    },
-    {
-      type: "category",
-      label: "RPA",
-      link: {
-        type: "doc",
-        id: "components/rpa/overview",
-      },
-      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
@@ -460,221 +464,6 @@ module.exports = {
       ],
     },
     {
-      Zeebe: [
-        "components/zeebe/zeebe-overview",
-        {
-          "Technical concepts": [
-            "components/zeebe/technical-concepts/technical-concepts-overview",
-            "components/zeebe/technical-concepts/architecture",
-            "components/zeebe/technical-concepts/clustering",
-            "components/zeebe/technical-concepts/partitions",
-            "components/zeebe/technical-concepts/internal-processing",
-            "components/zeebe/technical-concepts/process-lifecycles",
-            "components/zeebe/technical-concepts/protocols",
-          ],
-        },
-      ],
-      Operate: [
-        "components/operate/operate-introduction",
-        {
-          "User guide": [
-            "components/operate/userguide/basic-operate-navigation",
-            "components/operate/userguide/resolve-incidents-update-variables",
-            "components/operate/userguide/selections-operations",
-            "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/delete-resources",
-            {
-              "Process instance modification": [
-                "components/operate/userguide/process-instance-modification",
-                "components/operate/userguide/process-instance-batch-modification",
-              ],
-            },
-            "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-operation-status",
-          ],
-        },
-      ],
-      Tasklist: [
-        "components/tasklist/introduction-to-tasklist",
-        {
-          "User guide": [
-            "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/managing-tasks",
-            "components/tasklist/userguide/using-filters",
-            "components/tasklist/userguide/defining-task-priorities",
-            "components/tasklist/userguide/starting-processes",
-            "components/tasklist/userguide/tasklist-localization",
-          ],
-        },
-      ],
-      Optimize: [
-        optimizeLink("What is Optimize?", "components/what-is-optimize/"),
-
-        {
-          "User guide": [
-            optimizeLink(
-              "Collections, dashboards, and reports",
-              "components/userguide/collections-dashboards-reports/"
-            ),
-            optimizeLink(
-              "User permissions",
-              "components/userguide/user-permissions/"
-            ),
-            optimizeLink("Data sources", "components/userguide/data-sources/"),
-
-            {
-              Dashboards: [
-                optimizeLink(
-                  "Creating dashboards",
-                  "components/userguide/creating-dashboards/"
-                ),
-                optimizeLink("Edit mode", "components/userguide/edit-mode/"),
-                optimizeLink("View mode", "components/userguide/view-mode/"),
-              ],
-            },
-
-            {
-              "Dashboards maintained by Camunda": [
-                optimizeLink(
-                  "Process dashboards",
-                  "components/userguide/process-dashboards/"
-                ),
-                optimizeLink(
-                  "Instant process dashboards",
-                  "components/userguide/instant-process-dashboards/"
-                ),
-              ],
-            },
-
-            optimizeLink(
-              "Creating reports",
-              "components/userguide/creating-reports/"
-            ),
-            optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
-
-            {
-              "Process analysis": [
-                optimizeLink(
-                  "Overview",
-                  "components/userguide/process-analysis/process-analysis-overview/"
-                ),
-                optimizeLink(
-                  "Task analysis",
-                  "components/userguide/process-analysis/task-analysis/"
-                ),
-                optimizeLink(
-                  "Branch analysis",
-                  "components/userguide/process-analysis/branch-analysis/"
-                ),
-                optimizeLink(
-                  "User task analytics",
-                  "components/userguide/process-analysis/user-task-analytics/"
-                ),
-                {
-                  "Report analysis": [
-                    optimizeLink(
-                      "Report process analysis",
-                      "components/userguide/process-analysis/report-analysis/overview/"
-                    ),
-
-                    {
-                      "Edit mode": [
-                        optimizeLink(
-                          "Overview",
-                          "components/userguide/process-analysis/report-analysis/edit-mode/"
-                        ),
-                        optimizeLink(
-                          "Select process definitions",
-                          "components/userguide/process-analysis/report-analysis/select-process-definitions/"
-                        ),
-                        optimizeLink(
-                          "Define reports",
-                          "components/userguide/process-analysis/report-analysis/define-reports/"
-                        ),
-                        optimizeLink(
-                          "Measures",
-                          "components/userguide/process-analysis/report-analysis/measures/"
-                        ),
-                        optimizeLink(
-                          "Compare target values",
-                          "components/userguide/process-analysis/report-analysis/compare-target-values/"
-                        ),
-                        optimizeLink(
-                          "Process instance parts",
-                          "components/userguide/process-analysis/report-analysis/process-instance-parts/"
-                        ),
-                        optimizeLink(
-                          "Configure reports",
-                          "components/userguide/process-analysis/report-analysis/configure-reports/"
-                        ),
-                      ],
-                    },
-
-                    optimizeLink(
-                      "View mode",
-                      "components/userguide/process-analysis/report-analysis/view-mode/"
-                    ),
-                  ],
-                },
-
-                {
-                  Filters: [
-                    optimizeLink(
-                      "Overview",
-                      "components/userguide/process-analysis/filters/"
-                    ),
-                    optimizeLink(
-                      "Metadata filters",
-                      "components/userguide/process-analysis/metadata-filters/"
-                    ),
-                    optimizeLink(
-                      "Instance state filters",
-                      "components/userguide/process-analysis/instance-state-filters/"
-                    ),
-                    optimizeLink(
-                      "Flow node filters",
-                      "components/userguide/process-analysis/flow-node-filters/"
-                    ),
-                    optimizeLink(
-                      "Process instance filters",
-                      "components/userguide/process-analysis/process-instance-filters/"
-                    ),
-                    optimizeLink(
-                      "Variable filters",
-                      "components/userguide/process-analysis/variable-filters/"
-                    ),
-                  ],
-                },
-              ],
-            },
-
-            {
-              "Additional features": [
-                optimizeLink(
-                  "Alerts",
-                  "components/userguide/additional-features/alerts/"
-                ),
-                optimizeLink(
-                  "Export and import",
-                  "components/userguide/additional-features/export-import/"
-                ),
-                optimizeLink(
-                  "Variable labeling",
-                  "components/userguide/additional-features/variable-labeling/"
-                ),
-                optimizeLink(
-                  "Process variants comparison",
-                  "components/userguide/additional-features/process-variants-comparison/"
-                ),
-                optimizeLink(
-                  "Machine learning-ready data set",
-                  "components/userguide/additional-features/ml-dataset/"
-                ),
-              ],
-            },
-          ],
-        },
-      ],
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
