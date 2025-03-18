@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("main docs cross-link to optimize docs", async ({ page }) => {
-  await page.goto("/docs/reference/release-policy/");
+  await page.goto("/docs/reference/announcements-release-notes/release-policy/");
 
   await expect(page).toHaveTitle(/Release policy \| Camunda 8 Docs/);
 
