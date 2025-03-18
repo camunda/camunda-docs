@@ -31,6 +31,10 @@ No data is leaked, lost, or corrupted. This issue only affects application avail
 
 [Learn more about this CVE at the GitHub Advisory Database](https://github.com/advisories/GHSA-735f-pc8j-v9w8).
 
+#### How to determine if the installation is affected
+
+You are using Camunda Zeebe 8.6.11.
+
 ### Notice 16
 
 #### Publication date
