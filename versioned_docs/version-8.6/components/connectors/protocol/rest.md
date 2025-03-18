@@ -237,7 +237,7 @@ The following fields are available in the `response` variable:
 :::note
 If your endpoint returns multiple Set-Cookie headers and you need to capture them all, enable the groupSetCookieHeaders option in the element template XML by setting it to true. This will aggregate the headers into a list.
 
-This feature was introduced in version 8.6.7 and is enabled by default starting from 8.6.11. Versions 8.6.0 to 8.6.6 do not support this feature.
+This feature was introduced in version 8.6.7 and is enabled by default starting from 8.6.10. Versions 8.6.0 to 8.6.6 do not support this feature.
 :::
 
 ## Output mapping
