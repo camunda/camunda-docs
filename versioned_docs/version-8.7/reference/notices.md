@@ -21,14 +21,15 @@ Camunda Zeebe
 #### Impact
 
 When parsing unknown fields in the Protobuf Java Lite and Full library, a maliciously crafted message can cause a StackOverflow error and lead to a
-program crash. Since Zeebe makes extensive use of Protobuf, it could lead to DoS issues both on the server side. It allows an attacker to send specific
-payloads that will always result in `StackOverflowException`, which could lead to gateway performance issues, to the point of affecting the availability
-of the system. While the gateway will not crash, it will spend more time working on these requests, and an attacker could use this to make it slow to the
-point of being unusable by sending a lot of requests in a short time frame.
+program crash.
 
-No data is leaked, lost, or corrupted; this would only affect the availability of the application.
+- As Zeebe makes extensive use of Protobuf, this could lead to denial-of-service (DoS) issues on the server side.
+- This issue allows an attacker to send specific payloads that will always result in `StackOverflowException`. This could lead to gateway performance issues and affect system availability.
+- Although the gateway will not crash, it will spend more time working on these requests. An attacker could use this opportunity to slow it down and make it unusable by sending a large number of requests within a short time frame.
 
-[You can read more about this CVE here](https://github.com/advisories/GHSA-735f-pc8j-v9w8).
+No data is leaked, lost, or corrupted. This issue only affects application availability.
+
+[Learn more about this CVE at the GitHub Advisory Database](https://github.com/advisories/GHSA-735f-pc8j-v9w8).
 
 ### Notice 16
 
