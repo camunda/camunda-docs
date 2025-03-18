@@ -1405,6 +1405,7 @@ module.exports = {
                 {
                   "User guide": [
                     "self-managed/identity/orchestration-identity/user-guide/authorization",
+                    "self-managed/identity/orchestration-identity/user-guide/user",
                   ],
                 },
               ],

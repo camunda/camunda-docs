@@ -4,7 +4,7 @@ title: Authorization
 description: "Learn how to manage authorizations in your Orchestration cluster."
 ---
 
-Identity provides unified, cluster-level identity management and authorizations. Authorizations are managed through permissions that can be assigned to users, group, role and mapping.
+Identity provides unified, cluster-level identity management and authorizations. Authorizations are managed through permissions that can be assigned to [users](user.md), group, role and mapping.
 
 ## Authorization overview
 
