@@ -88,8 +88,8 @@ Users can reuse published resources by copying them into their own projects:
 1. Open the shared project and navigate to the file.
 
 2. In versions list choose version which should be reused and elect the three vertical dots to open the actions menu.
-3. Select Copy to....
-4. Select the target project and select Copy here.
+3. Select **Copy to...**.
+4. Select the target project and click **Copy**.
 
 By leveraging shared projects, organizations can create a centralized and structured repository which provides transparency, improves collaboration, and enables efficient governance over shared resources.
 Teams can work at different levels of granularity, ensuring both strategic and operational needs are met while preventing duplication and maximizing asset reuse.
