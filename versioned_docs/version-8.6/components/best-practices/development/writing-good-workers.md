@@ -111,6 +111,8 @@ client.newWorker().jobType("retrieveMoney")
 
 <!-- NEEDS ATTENTION -->
 
+// TODO refer to spring sdk here
+
 :::caution
 [Spring Zeebe](https://github.com/camunda-community-hub/spring-zeebe) is a community-maintained project.
 :::
@@ -132,7 +134,11 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
   .build();
 ```
 
+// TODO refer to spring sdk here
+
 Or, in the community-maintained Spring Zeebe project:
+
+// TODO remove the property, refer to the configuration section.
 
 ```properties
 zeebe.client.worker.threads=5
