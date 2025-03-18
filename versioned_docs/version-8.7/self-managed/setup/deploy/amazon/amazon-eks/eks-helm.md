@@ -56,7 +56,11 @@ To streamline the execution of the subsequent commands, it is recommended to exp
 The following are the required environment variables with some example values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/procedure/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/procedure/setting-region.sh
+```
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/generic/kubernetes/single-region/procedure/chart-env.sh
 ```
 
 ### Export database values
@@ -74,7 +78,7 @@ Verify the configuration of your environment variables by running the following 
 <TabItem value="standard">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -82,7 +86,7 @@ https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/k
 <TabItem value="irsa">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region-irsa/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -252,7 +256,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 :::
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/helm-values/values-domain.yml
 ```
 
 :::danger Exposure of the Zeebe Gateway
@@ -273,7 +277,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the Keycloa
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/procedure/create-setup-db-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/procedure/create-setup-db-secret.sh
 ```
 
 </TabItem>
@@ -281,7 +285,7 @@ https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/k
 <TabItem value="without-domain-std" label="Standard without domain">
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/helm-values/values-no-domain.yml
 ```
 
 #### Reference the credentials in secrets
@@ -291,7 +295,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the Keycloa
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -305,7 +309,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 :::
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region-irsa/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/helm-values/values-domain.yml
 ```
 
 :::danger Exposure of the Zeebe Gateway
@@ -324,7 +328,7 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
   <TabItem value="without-domain-irsa" label="IRSA without domain">
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region-irsa/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/helm-values/values-no-domain.yml
 ```
 
   </TabItem>
@@ -417,7 +421,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/procedure/generate-passwords.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/generic/kubernetes/single-region/procedure/generate-passwords.sh
 ```
 
 Use these environment variables in the `kubectl` command to create the secret.
@@ -425,7 +429,7 @@ Use these environment variables in the `kubectl` command to create the secret.
 - The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/procedure/create-identity-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/generic/kubernetes/single-region/procedure/create-identity-secret.sh
 ```
 
 ### 3. Install Camunda 8 using Helm
@@ -433,7 +437,7 @@ https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/k
 Now that the `generated-values.yml` is ready, you can install Camunda 8 using Helm. Run the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/procedure/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/generic/kubernetes/single-region/procedure/install-chart.sh
 ```
 
 This command:
@@ -451,7 +455,7 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 You can track the progress of the installation using the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 <details>

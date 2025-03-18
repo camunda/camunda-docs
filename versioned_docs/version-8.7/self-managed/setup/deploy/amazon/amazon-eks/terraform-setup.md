@@ -107,14 +107,14 @@ The provided reference architecture repository allows you to directly reuse and 
    <TabItem value="standard" label="Standard" default>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/kubernetes/eks-single-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/procedure/get-your-copy.sh
 ```
 
    </TabItem>
    <TabItem value="irsa" label="IRSA">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/rosa-8.8/aws/kubernetes/eks-single-region-irsa/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/procedure/get-your-copy.sh
 ```
 
    </TabItem>
@@ -234,14 +234,14 @@ The module will be locally sourced, meaning within your cloned repository you ca
    <TabItem value="standard" label="Standard" default>
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/cluster.tf
    ```
 
    </TabItem>
    <TabItem value="irsa" label="IRSA">
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region-irsa/cluster.tf
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/cluster.tf
    ```
 
    </TabItem>
@@ -317,7 +317,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
      <TabItem value="standard" label="Standard" default>
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region/db.tf
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/db.tf
    ```
 
      </TabItem>
@@ -338,7 +338,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    Here’s how to define the IAM role trust policy and access policy for Aurora:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/single-region-irsa/db.tf
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/db.tf
    ```
 
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_aurora_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
@@ -381,7 +381,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/opensearch.tf
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/opensearch.tf
    ```
 
      </TabItem>
@@ -403,7 +403,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    Here's an example of how to define the IAM role trust policy and access policy for OpenSearch, this configuration will deploy an OpenSearch domain with advanced security enabled:
 
    ```hcl reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/opensearch.tf
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/opensearch.tf
    ```
 
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
@@ -495,7 +495,7 @@ The following commands will export the required outputs as environment variables
   <TabItem value="standard" label="Standard" default>
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/procedure/export-helm-values.sh
 ```
 
   </TabItem>
@@ -503,7 +503,7 @@ https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/
   <TabItem value="irsa" label="IRSA">
 
 ```bash reference
-https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/procedure/export-helm-values.sh
 ```
 
 :::note IRSA users
@@ -533,7 +533,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
    ```bash reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/vars-create-db.sh
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/procedure/vars-create-db.sh
    ```
 
    A **Kubernetes job** will connect to the database and create the necessary users with the required privileges. The script installs the necessary dependencies and runs SQL commands to create the IRSA user and assign it the correct roles and privileges.
@@ -544,7 +544,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
      <TabItem value="standard" label="Standard" default>
 
    ```bash reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/procedure/create-setup-db-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/procedure/create-setup-db-secret.sh
    ```
 
    This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -562,7 +562,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    <TabItem value="irsa" label="IRSA">
 
    ```bash reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/create-setup-db-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-db-secret.sh
    ```
 
    This command creates a secret named `setup-db-secret` and dynamically populates it with the values from your environment variables.
@@ -588,14 +588,14 @@ The choice depends on your infrastructure setup and security preferences. In thi
    <TabItem value="standard">
 
    ```yaml reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
    ```
 
    </TabItem>
    <TabItem value="irsa">
 
    ```yaml reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/setup-postgres-create-db.yml
    ```
 
    </TabItem>
@@ -654,7 +654,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. In your terminal, set the necessary environment variables that will be substituted in the setup manifest:
 
    ```bash reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/vars-create-os.sh
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/procedure/vars-create-os.sh
    ```
 
    A **Kubernetes job** will connect to the OpenSearch dommain and configure it.
@@ -662,7 +662,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. Create a secret that references the environment variables:
 
    ```bash reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/procedure/create-setup-os-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/procedure/create-setup-os-secret.sh
    ```
 
    This command creates a secret named `setup-os-secret` and dynamically populates it with the values from your environment variables.
@@ -678,7 +678,7 @@ The standard installation comes already pre-configured, and no additional steps 
 1. Save the following manifest to a file, for example, `setup-opensearch-fgac.yml`.
 
    ```yaml reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7-irsa/setup-opensearch-fgac.yml
+   https://github.com/camunda/camunda-deployment-references/blob/merge-branch/aws/kubernetes/eks-single-region-irsa/setup-opensearch-fgac.yml
    ```
 
 1. Apply the manifest:
