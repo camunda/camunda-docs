@@ -5,7 +5,7 @@ description: "The ad-hoc marker is only available for embedded subprocesses, all
 ---
 
 The ad-hoc marker (represented by a **~** tilde character) is only available
-for [embedded subprocesses](../embedded-subprocesses/embedded-subprocesses.md), and are therefore called **ad-hoc subprocesses**.
+for [embedded subprocesses](../embedded-subprocesses/embedded-subprocesses.md), which are therefore called **ad-hoc subprocesses**.
 Compared to regular subprocesses, ad-hoc subprocesses allow more flexibility for executing inner elements.
 
 ![A demo process with an ad-hoc subprocess. Some elements inside the subprocess are active.](assets/ad-hoc-subprocess.png)
@@ -53,16 +53,16 @@ entering the subprocess.
 ## Completion
 
 An ad-hoc subprocess can define an optional `completionCondition` [boolean expression](/components/modeler/feel/language-guide/feel-boolean-expressions.md)
-which is evaluated every time an inner element is completed. If the expression evaluates to `true` after completing an
-inner element, the ad-hoc subprocess is completed and the process instance takes the outgoing sequence flows.
+that is evaluated every time an inner element is completed.
 
-If no `completionCondition` is defined, the ad-hoc subprocess is completed after all [activated elements](#activate-an-element)
-are completed.
+- If the expression evaluates to `true` after completing an inner element, the ad-hoc subprocess is completed and the process instance takes the outgoing sequence flows.
+- If no `completionCondition` is defined, the ad-hoc subprocess is completed after all [activated elements](#activate-an-element)
+  are completed.
 
-A `cancelRemainingInstances` boolean attribute can be configured to influence the ad-hoc subprocess behavior when the
-completion condition is met. If set to `true` (default value), all remaining active instances of inner elements are
-terminated and the ad-hoc subprocess is directly completed. If set to `false`, the ad-hoc subprocess waits for the
-completion of all active instances before completing.
+A `cancelRemainingInstances` boolean attribute can be configured to influence the ad-hoc subprocess behavior when the completion condition is met.
+
+- If set to `true` (default value), all remaining active instances of inner elements are terminated and the ad-hoc subprocess is directly completed.
+- If set to `false`, the ad-hoc subprocess waits for the completion of all active instances before completing.
 
 ## Variable mappings
 
