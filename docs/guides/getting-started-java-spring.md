@@ -90,7 +90,7 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
 
 To deploy your process, take the following steps:
 
-1. Open Desktop Modeler and ensure the desired Camunda8 version is targeted in the bottom left corner.
+1. Open Desktop Modeler and ensure the desired Camunda 8 version is targeted in the bottom left corner. You can change the desired version by clicking on the version, selecting a new one, and selecting **Apply**.
 2. Click the rocket icon in the bottom left corner.
 3. Change the **Deployment name** to `process-payments`, and ensure the **Target** is `Camunda 8 Self-Managed`.
 4. Change the **Cluster endpoint** to `http://localhost:26500`, with no authentication.
