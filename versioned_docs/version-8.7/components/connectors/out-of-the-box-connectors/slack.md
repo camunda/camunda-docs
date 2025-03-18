@@ -108,6 +108,10 @@ To work with documents you must upload them first, using the [REST API](/apis-to
 The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Attachments** field.
 :::
 
+:::note
+Starting from version 8.7.0, the Slack Connector works with document handling to support adding attachments and increasing template versions. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
+
 The **Channel/User Name** and **Message** can either be given [static values](/components/concepts/expressions.md#expressions-vs-static-values), or FEEL expressions. FEEL expressions can be used to [access process variables or dynamically create values](/components/concepts/expressions.md). This can be handy if a process variable is used to store the relevant channel or if the message needs to be composed dynamically, for example:
 
 `Channel/User Name` property might look like:

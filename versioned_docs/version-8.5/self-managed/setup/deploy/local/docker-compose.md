@@ -31,6 +31,10 @@ To start a complete instance of Camunda 8 Self-Managed environment locally:
 docker compose up -d
 ```
 
+:::note
+For Camunda versions earlier than 8.6, the `docker compose up -d` command is only available to enterprise customers with access to Camunda's private registry. From version 8.6 onwards, `docker compose up -d` is available for all users, as Web Modeler images are publicly available.
+:::
+
 3. Wait for the environment to initialize. This may take several minutes. Monitor the logs, especially the Keycloak container log, to ensure the components have started.
 
 ### Configuration options
@@ -39,7 +43,6 @@ Running `docker compose up -d` starts all Camunda components, including Identity
 
 - **docker-compose.yaml:** Contains the following Camunda 8 Components: Zeebe, Operate, Tasklist, Connectors, Optimize, Identity, Elasticsearch, Keycloak, and PostgreSQL.
 - **docker-compose-core.yaml:** Contains Camunda 8 Orchestration cluster components: Zeebe, Tasklist, Operate, and Connectors.
-- **docker-compose-web-modeler.yaml:** Contains the Camunda 8 Web Modeler standalone installation. For more information, see the [Web Modeler instructions](#web-modeler).
 
 To start Camunda with an alternate configuration, specify a file using the following command:
 
@@ -90,24 +93,6 @@ docker compose down
 :::info
 Non-production installations of Web Modeler are restricted to five collaborators per project. Refer to the [licensing documentation](/docs/reference/licenses.md) for more information.
 :::
-
-#### Standalone setup
-
-Web Modeler can be run independently using Identity, Keycloak and Postgres as dependencies.
-
-The following command uses the provided `docker-compose-web-modeler.yaml` configuration file to only start Web Modeler and its dependencies:
-
-```shell
-docker compose -f docker-compose-web-modeler.yaml up -d
-```
-
-Once running, Web Modeler can be accessed at [http://localhost:8070](http://localhost:8070).
-
-To tear down the environment (including all data and volumes), run the following command:
-
-```shell
-docker compose -f docker-compose-web-modeler.yaml down -v
-```
 
 #### Deploy or execute a process
 
