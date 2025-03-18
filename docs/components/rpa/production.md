@@ -7,6 +7,14 @@ description: "Understand the specific configuration of your RPA runner to set up
 This article covers the specific configuration of your RPA runner. For the basics on getting started, visit the
 [getting started guide](./getting-started.md).
 
+## Transitioning from a development setup
+
+To transition from a development setup to a production setup, there are a few things to consider:
+
+- **Disable the local sandbox**: If your worker should only accept scripts from Zeebe and is not used for testing scripts from Modeler, disable the local execution by setting `camunda.rpa.sandbox.enabled` to `false`
+- **If your scripts require third-party tools**: Install them along with the RPA worker so they are accessible from the scripts.
+- **Add tags to your worker and scripts**: Depending on your use case, it might be useful to tag your workers with their capabilities. Common ways for tagging include operation systems and available applications. [Read more on tags and labels](#labels).
+
 ## Using secrets
 
 When running an RPA worker with Camunda SaaS, you can add access to [Connector secrets](/components/connectors/use-connectors/index.md#using-secrets).
@@ -21,11 +29,17 @@ In the RPA script, your secrets are stored in the `${secrets}` variable. You can
 If you manage multiple RPA worker machines and scripts, you might need specialized environments to run certain tasks.
 To differentiate different capabilities of runners, you can use tags and labels.
 
+Labels are set both on the RPA task in the diagram and on your worker. To ensure your script is only executed by machines with the correct capabilities for this script, we recommend adding labels to your worker.
+
 In the `rpa-worker.properties`, add `camunda.rpa.zeebe.worker-tags=accounting-system`. This worker will now only take up jobs
 which are labeled `accounting-system`. If you also want the worker to work on unlabeled tasks, use `camunda.rpa.zeebe.worker-tags=default,accounting-system` instead.
 Each worker can have multiple labels and will pick up waiting jobs from all scripts.
 
 You can add labels to your script when configuring the RPA task in your diagram. Note that a script can only have a single label.
+
+Labels describe capabilities. If you want your worker to only pick up a specific script, you will need to use a unique label on both the worker and the RPA task. A worker can have multiple labels and will pick up any script that matches one of the given tags. For example, your worker might have access to the SAP application, but if you also want it to pick up browser automation tasks, add `SAP.BROWSER_AUTOMATION` to your worker tags. This will pick up tasks tagged as SAP and tasks tagged as `BROWSER_AUTOMATION`.
+
+If no label is defined, both the task and worker will use the label default.
 
 ## Pre- and post-run scripts
 
