@@ -51,8 +51,8 @@ In this step, the document extraction template is [applied to a task](idp-integr
 
 <img src={IdpExtractImg} alt="Document extraction step" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
-- The **Document** input uses the FEEL expression `document[1]` to get the first document in the FEEL array, as per the uploaded document **Key**.
-- The extraction output data is exported into a **Result variable** named "idpResult".
+- **Input message data**: The **Document** input uses the FEEL expression `document[1]` to get the first document in the FEEL array, as per the uploaded document **Key**.
+- **Output mapping**: The extracted data is stored in an `idpResult` **Result variable**.
 
 ## View results
 
@@ -61,9 +61,17 @@ Once the process completes, the results of the extraction are available in the `
 For example, looking at the process in Operate shows that the data was accurately extracted from the document.
 
 ```
-{"extractedFields":{"invoiceType":"A","invoiceId":"A/3454","invoiceCustomer":"Camunda"}}
+{
+  "extractedFields": {
+    "invoiceType": "A",
+    "invoiceId": "A/3454",
+    "invoiceCustomer": "Camunda"
+  }
+}
 ```
 
 <img src={IdpResultsImg} alt="Document extraction step" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
-This step in the process depends on what you want to do with the data extraction results. For example, you might want to display, check, or summarize the extracted data, or route to further actions in the process.
+:::note
+This step in the process could be one of many types of element, depending on what you want to do with the extraction results. For example, you might want to display, check, or summarize the extracted data, or route to further actions in the process depending on the document data.
+:::
