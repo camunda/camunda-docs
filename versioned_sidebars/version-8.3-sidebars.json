@@ -599,7 +599,6 @@
         },
         {
           "Optimize API (REST)": [
-            // TODO: can this be auto-generated?
             "apis-tools/optimize-api/optimize-api-authorization",
             {
               "Configuration": [
