@@ -91,11 +91,11 @@ By extension, that means that one machine should only host a single RPA-worker i
 
 Some workloads do not require exclusivity of the worker. For example, browser automation is usually free of side effects and can execute multiple jobs in parallel. With this, you may label tasks that can be parallelized (such as BROWSER_AUTOMATION). Create separate workers with the corresponding label and `camunda.rpa.zeebe.max-concurrent-jobs` larger than `1`.
 
-### What happens if a bot encounters an issue during execution and then picks up a new task?
+### What happens if a bot encounters an issue during execution and picks up a new task?
 
-If your rpa script runs into an unexpected error during execution, this error alongside the output will be reported to zeebe. If the Job retries are exceeded, an Incident will be created in Operate.
+If your RPA script runs into an unexpected error during execution, this error alongside the output will be reported to Zeebe. If the job retries are exceeded, an [incident](/components/concepts/incidents.md) will be created in [Operate](/components/operate/operate-introduction.md).
 
-To ensure your Environment is always cleaned up and all open Applications closed, create a cleanup step and tag it as [Teardown]. Read more about Setup and Teardown in the RobotFramework documentation.
+To ensure your environment is always clean and all open applications are closed, create a "clean up" step and tag it as `[Teardown]`. Read more about setup and teardown in the [Robot Framework documentation](https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#user-keyword-setup-and-teardown).
 
 ```
 *** Settings ***
@@ -117,7 +117,9 @@ Cleanup
     Close All Browsers
 ```
 
-(We do not support creating BPMN errors right now, but will potentially do so until the 8.7 release. This will be handled as a keyword, but should be a separate PR)
+:::note
+Creating BPMN errors is not yet supported.
+:::
 
 ## What about shared script resources?
 
