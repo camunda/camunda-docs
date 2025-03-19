@@ -82,13 +82,14 @@ To ensure seamless integration and functionality of document handling with AWS s
 
 To ensure seamless integration and functionality of document handling with GCP services, the API client utilized must be configured with the appropriate permissions. The following permissions are necessary for the execution of operations related to document handling:
 
-| Permission               | Description                                                                                                                                                                                                    |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `storage.buckets.get`    | This permission allows the application to verify it has access to the specified bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up. |
-| `storage.objects.get`    | This permission allows the API client to retrieve objects from Google Cloud Storage. It is vital for downloading or accessing the contents of stored objects.                                                  |
-| `storage.objects.create` | With this permission, the API client can upload new objects to a bucket. It is essential for adding new documents to the storage.                                                                              |
-| `storage.objects.update` | This permission enables the API client to update contents and metadata of existing objects within a bucket.                                                                                                    |
-| `storage.objects.delete` | This permission grants the API client the ability to delete objects from a bucket.                                                                                                                             |
+| Permission                     | Description                                                                                                                                                                                                    |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `storage.buckets.get`          | This permission allows the application to verify it has access to the specified bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up. |
+| `storage.objects.get`          | This permission allows the API client to retrieve objects from Google Cloud Storage. It is vital for downloading or accessing the contents of stored objects.                                                  |
+| `storage.objects.create`       | With this permission, the API client can upload new objects to a bucket. It is essential for adding new documents to the storage.                                                                              |
+| `storage.objects.update`       | This permission enables the API client to update contents and metadata of existing objects within a bucket.                                                                                                    |
+| `storage.objects.delete`       | This permission grants the API client the ability to delete objects from a bucket.                                                                                                                             |
+| `iam.serviceAccounts.signBlob` | This permission allows the service account to sign URLs to the uploaded documents.                                                                                                                             |
 
 </TabItem>
 
