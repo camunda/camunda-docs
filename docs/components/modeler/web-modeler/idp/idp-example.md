@@ -1,0 +1,35 @@
+---
+id: idp-example
+title: Example IDP integration
+description: "A worked example showing how you can integrate a published IDP document extraction template into a simple process in Web Modeler."
+---
+
+import IdpExampleImg from './img/idp-example-process.png';
+import IdpFilepickerImg from './img/idp-filepicker.png';
+
+This worked example shows how you can integrate a published document extraction template into a simple process.
+
+## About this worked example
+
+This worked example is provided for illustration purposes only, to demonstrate the steps involved in creating a simple process that uses a published document extraction template to extract data from a document uploaded via Tasklist.
+
+The process diagram has the following steps:
+
+<img src={IdpExampleImg} alt="An example process diagram with three steps" style={{width: '800px', border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+
+1. **Upload document**: A PDF document is uploaded in Tasklist.
+1. **Extract data**: The document extraction template extracts data from the uploaded file.
+1. **View results**: The extraction results are viewed.
+
+## Document extraction template
+
+In this example a document extraction template has already been created and published as follows.
+
+## Upload document
+
+A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) and linked [form](/components/modeler/forms/camunda-forms-reference.md) allows a document to be uploaded.
+
+- The form uses a [File picker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form element to upload a document.
+- The File picker element **Key** is set to `document`.
+
+<img src={IdpFilepickerImg} alt="The File picker element" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
