@@ -155,8 +155,7 @@ curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo
 2. Send the cookie (as a header) in each API request. In this case, request all process instances:
 
 ```shell
-curl --request POST 'http://localhost:8080/v2/process-instances/search'  \
+curl --request GET 'http://localhost:8080/v2/topology'  \
   --cookie cookie.txt \
-  --header 'Content-Type: application/json' \
-  --data-raw '{}'
+  --header 'Content-Type: application/json'
 ```
