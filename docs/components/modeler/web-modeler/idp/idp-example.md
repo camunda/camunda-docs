@@ -17,8 +17,8 @@ The process diagram has the following steps:
 
 <img src={IdpExampleImg} alt="An example process diagram with three steps" style={{width: '800px', border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
-1. **Upload document**: A PDF document is uploaded in Tasklist.
-1. **Extract data**: The document extraction template extracts data from the uploaded file.
+1. **Upload document**: A PDF document is uploaded via Tasklist.
+1. **Extract data**: The document extraction template extracts data from the uploaded PDF document.
 1. **View results**: The extraction results are viewed.
 
 ## Document extraction template
@@ -27,9 +27,13 @@ In this example a document extraction template has already been created and publ
 
 ## Upload document
 
-A [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) and linked [form](/components/modeler/forms/camunda-forms-reference.md) allows a document to be uploaded.
-
-- The form uses a [File picker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form element to upload a document.
-- The File picker element **Key** is set to `document`.
+In this step, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) and linked [form](/components/modeler/forms/camunda-forms-reference.md) allows a document to be uploaded for extraction.
 
 <img src={IdpFilepickerImg} alt="The File picker element" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+
+- The form uses a [File picker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form element to upload a document.
+- The File picker element **Key** is set to `document`. This will be used as the document input by the document extraction template.
+
+## Extract data
+
+## Running the process
