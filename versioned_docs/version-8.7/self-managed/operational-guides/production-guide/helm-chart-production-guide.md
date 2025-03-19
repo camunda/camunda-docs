@@ -819,6 +819,6 @@ To configure multiple Camunda Orchestration clusters in multiple namespaces, we 
 
 If you would like to run benchmarks on the platform, refer to the Camunda 8 benchmark [community project](https://github.com/camunda-community-hub/camunda-8-benchmark).
 
-### Reference Archtectures
+### Reference architectures
 
-You can lean more about Camunda production deployment and available deployment architectures in [Camunda Deployment Reference Architecture](../../reference-architecture/) section of our documentation.
+You can lean more about Camunda production deployment and available deployment architectures in [Camunda Deployment Reference Architecture](/docs/self-managed/reference-architecture/reference-architecture.md) section of our documentation.
