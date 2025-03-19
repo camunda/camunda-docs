@@ -45,7 +45,7 @@ elasticsearch:
   prefix: custom-zeebe
 
 operate:
-  env: 
+  env:
     - name: CAMUNDA_OPERATE_ELASTICSEARCH_INDEXPREFIX
       value: custom-operate
     - name: CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PREFIX
