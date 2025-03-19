@@ -715,6 +715,7 @@ To test your installation with the deployment of a sample application, refer to 
 
 The following are some advanced configuration topics to consider for your cluster:
 
+- [Camunda Production Installation guide with Kubernetes and Helm](../../../../operational-guides/production-guide/helm-chart-production-guide.md)
 - [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md)
 
 To get more familiar with our product stack, visit the following topics:

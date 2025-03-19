@@ -1,8 +1,8 @@
 ---
 id: configure-db-custom-headers
 title: "Configure custom headers"
-sidebar_label: "Configure custom headers"
-description: "Learn how to configure DB client custom headers"
+sidebar_label: "Configure custom HTTP headers"
+description: "Learn how to configure DB client custom HTTP headers"
 ---
 
 import Tabs from "@theme/Tabs";
