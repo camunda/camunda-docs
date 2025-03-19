@@ -56,7 +56,7 @@ Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full 
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/merge-branch/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ## Deploy Camunda 8 via Helm charts
 

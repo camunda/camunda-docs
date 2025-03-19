@@ -27,7 +27,7 @@ This guide requires you to have previously completed or reviewed the steps taken
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [Terraform](https://developer.hashicorp.com/terraform/downloads)
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/merge-branch/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ## Considerations
 

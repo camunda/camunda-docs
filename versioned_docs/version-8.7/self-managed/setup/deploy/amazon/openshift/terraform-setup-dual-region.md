@@ -32,7 +32,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - [jq](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
 - This guide uses GNU/Bash for all the shell commands listed.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/merge-branch/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
