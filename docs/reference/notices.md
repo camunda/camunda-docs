@@ -35,6 +35,12 @@ No data is leaked, lost, or corrupted. This issue only affects application avail
 
 You are using Camunda Zeebe 8.6.11.
 
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Zeebe 8.6.13](https://github.com/camunda/camunda/releases/tag/8.6.13)
+
 ### Notice 16
 
 #### Publication date
