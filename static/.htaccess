@@ -119,7 +119,7 @@ RewriteRule ^docs/reference/release-notes/850/?$ /docs/reference/announcements-r
 RewriteRule ^docs/reference/announcements/announcements-860/?$ /docs/reference/announcements-release-notes/860/860-announcements/$1 [R=301,L]
 RewriteRule ^docs/reference/release-notes/860/?$ /docs/reference/announcements-release-notes/860/860-release-notes/$1 [R=301,L]
 RewriteRule ^docs/reference/release-policy/?$ /docs/reference/announcements-release-notes/release-policy/$1 [R=301,L]
-RewriteRule ^docs/reference/release-notes/release-notes/?$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/?$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
 RewriteRule ^docs/reference/announcements/?$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
 
 # Restructure announcements and release notes for 8.7
