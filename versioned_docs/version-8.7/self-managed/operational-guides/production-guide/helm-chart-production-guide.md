@@ -381,7 +381,7 @@ The following resources and configuration options are important to keep in mind 
       maxUnavailable: 1
   ```
 
-- Version management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/release-notes/release-notes.md) for security patches or critical updates.
+- Version management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/870/870-release-notes.md) for security patches or critical updates.
 - Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets when installing the Helm chart. In this scenario, the secrets are auto-generated. The following can be added to both Helm values files:
 
   ```yaml
