@@ -1,26 +1,25 @@
 ---
-id: announcements-850
-title: "8.5 - 8.3 Announcements"
-description: "Important announcements including deprecation & removal notices for the Camunda 8.5, 8.4, 8.3, and 8.2 releases."
+id: 850-announcements
+title: "8.5 - 8.3 Release announcements"
+description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.5, 8.4, and 8.3 releases."
+toc_max_heading_level: 3
 ---
 
-Important changes and updates for the Camunda 8.5, 8.4, and 8.3 releases are summarized below.
+Supported environment changes and breaking changes or deprecations for the Camunda 8.5, 8.4, and 8.3 releases are summarized below.
 
 ## Camunda 8.5
 
-| Release date | End of maintenance | Release notes                                        |
-| :----------- | :----------------- | :--------------------------------------------------- |
-| 9 April 2024 | 14 October 2025    | [8.5 release notes](/reference/release-notes/850.md) |
+| Release date | End of maintenance | Release notes                                                                        |
+| :----------- | :----------------- | :----------------------------------------------------------------------------------- |
+| 9 April 2024 | 14 October 2025    | [8.5 release notes](/reference/announcements-release-notes/850/850-release-notes.md) |
 
-### Updated SaaS URLs
+### Changes in supported environments
 
-We will simplify the URL for Camunda 8 SaaS from cloud.camunda.io ([console.cloud.camunda.io](https://console.cloud.camunda.io/)) to camunda.io ([console.camunda.io](http://console.camunda.io/)).
+#### Zeebe Go client
 
-On or around July 9th, users will be directed to the new URLs. Both URLs will continue to be active for at least 18 months so navigation from supported versions of components like Operate is still possible.
+- Raised minimum Go version to 1.21 for the Zeebe Go client
 
-Internal allowlisting or active rules for [cloud.camunda.io](http://cloud.camunda.io/) must be transitioned to the new [camunda.io](http://camunda.io/) URL. This change primarily affects Console and Modeler. During sign up, users will be briefly redirected through [accounts.cloud.camunda.io](http://accounts.camunda.io/), which will also be updated.
-
-### Syntax changes in Helm chart
+#### Syntax changes in Helm chart
 
 A Camunda Helm chart upgrade is not possible from v9.x.x to v10.0.0 or v10.0.1. Instead, upgrade directly to v10.0.2+.
 
@@ -28,11 +27,9 @@ The Camunda Helm chart v10.0.0 has major changes in the values file structure. S
 
 Follow the [upgrade instructions](/self-managed/setup/upgrade.md#helm-chart-1002+) to upgrade from Camunda Helm chart v9.x.x to Camunda Helm chart v10.x.x.
 
-### Support for Amazon OpenSearch
+#### Support for Amazon OpenSearch
 
 With the 8.5 release, Optimize is now also compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5+. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is not supported.
-
-### Known limitations
 
 This release contains the following limitations:
 
@@ -46,32 +43,14 @@ This release contains the following limitations:
     - **Description:** Custom OIDC provider support for Console is not supported
     - **Reference:** https://github.com/camunda/issues/issues/784
 
-### Changes in supported environments
+### Key changes
 
-- Raised minimum Go version to 1.21 for the Zeebe Go client
-
-### Camunda SaaS: New generation naming scheme
-
-With the April release, the generation naming scheme in Camunda 8 changed and no longer includes the patch version.
-
-The new naming scheme used for all Camunda SaaS generations created after April 2024 is `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set. Existing generations will not be renamed.
-
-For patch releases to existing generations, `N` is set to the latest patch level plus 1. For example, when `Camunda 8.4.5` is the current generation name, the following patch will be released as `Camunda 8.4+gen6`.
-
-This was done to decouple the generation name from the particular patch level of the components it contains, as some component versions like Connectors are decoupled from other components.
-
-You will learn about the particular component patch version changes in the update dialogue to the latest generation available. The following screenshot shows a sample update from `Camunda 8.5+gen1` to `Camunda 8.5+gen2`, where only the Connectors patch version changed.
-
-![New Generating naming sample showing an update dialogue from 8.5+gen1 to 8.5+gen2](../img/generation-naming-scheme-sample.png)
-
-Note that the actual values shown in this screenshot don't correspond to any actual generations and only serve as an example.
-
-### Removal of Web Modeler's beta API
+#### Removal of Web Modeler's beta API
 
 The Web Modeler beta API has been removed. The API was deprecated in 8.3 and is no longer available in 8.5. Use the [Web Modeler v1 API](/apis-tools/web-modeler-api/index.md) instead.
 For a migration guide, see the [Web Modeler API documentation](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
 
-### Zeebe 8.5.0 breaks serialization of timestamp values in management API (Self-Managed only)
+#### Zeebe 8.5.0 breaks serialization of timestamp values in management API (Self-Managed only)
 
 Zeebe 8.5.0 was released with [a new bug](https://github.com/camunda/camunda/issues/17347) that breaks serialization of timestamp values in management APIs, such as [backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md) and [cluster scaling](/self-managed/zeebe-deployment/operations/cluster-scaling.md).
 Timestamps which were previously serialized as `ISO8061` strings are now serialized as integer values.
@@ -84,41 +63,25 @@ Until a fix is delivered in 8.5.1, workarounds include not deserializing timesta
 | :------------- | :----------------- |
 | 9 January 2024 | 9 July 2025        |
 
-:::caution
-The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/camunda/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
+### Changes in supported environments
 
-Follow the instructions in the [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#known-issues-with-linked-forms) documentation to resolve this issue.
-:::
-
-### Versioning changes in Helm chart
+#### Versioning changes in Helm chart
 
 As of the 8.4 release, the Camunda 8 **Helm chart** version is decoupled from the version of the application. The Helm chart release still follows the applications release cycle, but it has an independent version. (e.g., in the application release cycle 8.4, the chart version is 9.0.0).
 
 For more details about the applications version included in the Helm chart, review the [full version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
-### Dockerfile numeric ID
-
-The Dockerfile now uses a numeric user ID instead of a non-numeric user.
-This will allow the Helm users to use `runAsNonRoot=true` without the need to explicitly set the ID in the Helm `values.yaml` file.
-
-### Deprecated in 8.4
-
-The [Zeebe configuration properties for Camunda Identity](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
-were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/deployment/configuration-variables.md#core-configuration).
-
-### Versioning changes in Elasticsearch
+#### Versioning changes in Elasticsearch
 
 As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
 
-### Support for Amazon OpenSearch
+#### Support for Amazon OpenSearch
 
 As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
 :::info
 The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/setup/install.md) for further details.
 :::
-
-### Known limitations
 
 This release contains the following limitations:
 
@@ -146,39 +109,40 @@ This release contains the following limitations:
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
       2. [Disable Connectors component](/self-managed/setup/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
 
+### Key changes
+
+#### Form linking
+
+The [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) feature is impacted by an [issue](https://github.com/camunda/camunda/issues/16311) where the wrong forms can get linked with new user task instances, effectively corrupting the user task instance. If you make use of this feature and run either `8.4.0`, `8.4.1` or `8.4.2`, we urge you to update to the newest `8.4.3` patch that includes the required fix.
+
+Follow the instructions in the [form linking](/components/modeler/web-modeler/advanced-modeling/form-linking.md#known-issues-with-linked-forms) documentation to resolve this issue.
+:::
+
+#### Deprecated: Zeebe configuration properties for Camunda Identity
+
+The [Zeebe configuration properties for Camunda Identity](/self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewayclustersecurityauthenticationidentity)
+were deprecated in `8.4`. Please use the dedicated Camunda Identity properties or the [corresponding environment variables](/self-managed/identity/deployment/configuration-variables.md#core-configuration).
+
+### Additional features
+
+#### Dockerfile numeric ID
+
+The Dockerfile now uses a numeric user ID instead of a non-numeric user.
+This will allow the Helm users to use `runAsNonRoot=true` without the need to explicitly set the ID in the Helm `values.yaml` file.
+
 ## Camunda 8.3
 
 | Release date    | End of maintenance |
 | :-------------- | :----------------- |
 | 10 October 2023 | 9 April 2025       |
 
-:::caution
-For existing clusters we recommend updating to `8.3.1` directly and not `8.3.0` due to issues in data migration of Operate, Tasklist, and Optimize that could prolong the migration or even blocking it from finishing.
-:::
+### Changes in supported environments
 
-:::caution Breaking change
-
-### Zeebe Docker image now runs with unprivileged user by default
-
-The default user in the Zeebe Docker image changed from root to an unprivileged user with the UID 1000. This was done to provide stronger compliance with the [OWASP recommendations on Docker Security](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html#rule-2-set-a-user).
-
-Please refer to the [Update 8.2 to 8.3](/self-managed/operational-guides/update-guide/820-to-830.md) guide.
-:::
-
-:::info
-The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities stored in Operate, Tasklist, and Optimize to support [multi-tenancy](/self-managed/concepts/multi-tenancy.md). Therefore, migration may take longer.
-:::
-
-### Deprecated in 8.3
-
-[Web Modeler's beta API](/apis-tools/web-modeler-api/index.md) was deprecated in 8.3 and will be removed in 8.5.
-Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).
-
-### Versioning changes in Elasticsearch
+#### Versioning changes in Elasticsearch
 
 As of the 8.3 release, Camunda is compatible with Elasticsearch 8.8+ and no longer supports Elasticsearch 7.x. See [supported environments](/reference/supported-environments.md).
 
-### Versioning changes in Helm chart
+#### Versioning changes in Helm chart
 
 [Helm charts versioning](/self-managed/setup/overview.md) changed in July 2023.
 
@@ -186,3 +150,24 @@ Starting from July 2023 (v8.2.8), the Camunda 8 **Helm chart** version follows t
 and schedule as [Camunda 8 applications](https://github.com/camunda/camunda-platform).
 
 Before this change, the Camunda 8 **Helm chart** version only followed the minor version.
+
+### Key changes
+
+#### Data migration
+
+For existing clusters we recommend updating to `8.3.1` directly and not `8.3.0` due to issues in data migration of Operate, Tasklist, and Optimize that could prolong the migration or even blocking it from finishing.
+
+#### Zeebe Docker image now runs with unprivileged user by default
+
+The default user in the Zeebe Docker image changed from root to an unprivileged user with the UID 1000. This was done to provide stronger compliance with the [OWASP recommendations on Docker Security](https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html#rule-2-set-a-user).
+
+Please refer to the [Update 8.2 to 8.3](/self-managed/operational-guides/update-guide/820-to-830.md) guide.
+
+:::info
+The update from `8.2.x` to `8.3.x` performs a migration for nearly all entities stored in Operate, Tasklist, and Optimize to support [multi-tenancy](/self-managed/concepts/multi-tenancy.md). Therefore, migration may take longer.
+:::
+
+#### Deprecated: Web Modeler's beta API
+
+[Web Modeler's beta API](/apis-tools/web-modeler-api/index.md) was deprecated in 8.3 and will be removed in 8.5.
+Use `v1` instead, see [migration hints](/apis-tools/web-modeler-api/index.md#migrating-from-beta-to-v1).

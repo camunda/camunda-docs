@@ -13,7 +13,7 @@ You must especially rewrite code that does the following:
 
 - Uses the Client API (to start process instances for example).
 - Implements [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
-  - [External tasks](/components/best-practices/development/invoking-services-from-the-process-c7.md#external-tasks), where workers subscribe to the engine.
+  - External tasks, where workers subscribe to the engine.
   - [Java code attached to a service task](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) and called by the engine directly (in-VM).
 
 This guide helps you do this if your code is written in Java, and covers the following:
