@@ -46,17 +46,6 @@ A new version is also automatically created when dragging and dropping a file in
 
 :::
 
-### Bulk version creation
-
-A [process application](/components/modeler/web-modeler/process-applications.md) is a special type of Web Modeler folder that allows you to work on a set of related files and
-[deploy](/components/modeler/web-modeler/process-applications.md#deploy-and-run-a-process-application) them as a single bundle with just one click. This reduces the risk of having a broken deployment at runtime, and makes it more convenient to deploy related files.
-
-If you create a version on the main process of a process application, versions are created for all other assets in the application, to make it easier to track or revert changes. See [create a bulk version](process-applications.md#create-a-bulk-version).
-
-:::note
-Versions of resources belonging to a process application are tied to the main process and cannot be modified.
-:::
-
 ## Compare versions
 
 You can compare the change history between two versions, either visually as a diagram or as code in an XML diff layout.

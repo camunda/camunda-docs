@@ -39,7 +39,7 @@ The pattern catalog was kicked off and will be filled in Q2 of 2025.
 ## OpenRewrite recipes
 
 :::info
-First recipes will be delivered throughout Q2 of 2025, and Camunda plans a first release **with Camunda 8.8 (October 2024)**. Iterative improvements will follow after.
+First recipes will be delivered throughout Q2 of 2025, and Camunda plans a first release **with Camunda 8.8 (October 2025)**. Iterative improvements will follow after.
 :::
 
 [OpenRewrite](https://docs.openrewrite.org/) is an open-source framework that can automate refactorings by so-called recipes. It is provided with an Apache License, making it easy to adopt in any context. Technically, to [run recipes](https://docs.openrewrite.org/running-recipes), you need to add a Maven plugin to your build.
