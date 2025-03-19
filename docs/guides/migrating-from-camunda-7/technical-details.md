@@ -132,12 +132,10 @@ The following attributes/elements can be migrated:
 
 The following attributes/elements **cannot** yet be migrated:
 
-- Form handling:
-  - `camunda:formHandlerClass`
-  - `camunda:formData`
-  - `camunda:formProperty`
-  - `camunda:formRefVersion`
-- `camunda:taskListener`
+- `camunda:formHandlerClass`
+- `camunda:formData`
+- `camunda:formProperty`
+- `camunda:formRefVersion`
 
 ### Business rule tasks
 
