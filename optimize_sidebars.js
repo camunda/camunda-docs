@@ -825,10 +825,6 @@ module.exports = {
                   "components/modeler/reference/modeling-guidance/rules/feel/"
                 ),
                 docsLink(
-                  "History time to live",
-                  "components/modeler/reference/modeling-guidance/rules/history-time-to-live/"
-                ),
-                docsLink(
                   "Message reference",
                   "components/modeler/reference/modeling-guidance/rules/message-reference/"
                 ),
