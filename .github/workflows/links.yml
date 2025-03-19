@@ -12,16 +12,15 @@ jobs:
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
 
-      - name: Get Current Timestamp
-        id: timestamp
-        run: echo "TIMESTAMP=$(date +%s)" >> "$GITHUB_ENV"
+      - name: Get Current Date
+        id: dateofday
+        run: echo "DATEOFDAY=$(date +%Y-%m-%d)" >> "$GITHUB_ENV"
 
       - name: Restore lychee cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: .lycheecache
-          key: "cache-lychee-${{ env.TIMESTAMP }}"
-          restore-keys: cache-lychee-
+          key: cache-lychee-${{ env.DATEOFDAY }}
 
       - name: Link Checker
         uses: lycheeverse/lychee-action@v1.9.0
@@ -29,6 +28,12 @@ jobs:
           fail: true
           args: -c ./lychee-external-links.toml --base . --cache --max-cache-age 1d . --verbose --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
           token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Cache links
+        uses: actions/cache/save@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ env.DATEOFDAY }}
 
       - name: Create Issue From File
         if: ${{ github.event_name == 'schedule' && env.lychee_exit_code != 0 }}

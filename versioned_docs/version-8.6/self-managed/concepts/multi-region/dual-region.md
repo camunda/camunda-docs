@@ -107,7 +107,6 @@ The following Zeebe brokers and replication configuration is supported:
 - `clusterSize` must be a multiple of **2** and at least **4** to evenly distribute brokers across the two regions.
 - `replicationFactor` must be **4** to ensure even partition distribution across regions.
 - `partitionCount` is unrestricted but should be chosen based on workload requirements. See [understanding sizing and scalability behavior](../../../components/best-practices/architecture/sizing-your-environment.md#understanding-sizing-and-scalability-behavior). For more details on partition distribution, see [documentation on partitions](../../../components/zeebe/technical-concepts/partitions.md).
-  esponsible for detecting regional failures and executing the [operational procedure](./../../operational-guides/multi-region/dual-region-ops.md).
 
 ### Camunda 8 dual-region limitations
 

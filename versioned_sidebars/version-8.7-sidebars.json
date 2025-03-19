@@ -111,7 +111,8 @@
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/settings"
+            "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity"
           ]
         },
         {
@@ -131,6 +132,15 @@
           ]
         }
       ]
+    },
+    {
+      "type": "category",
+      "label": "RPA",
+      "link": {
+        "type": "doc",
+        "id": "components/rpa/overview"
+      },
+      "items": ["components/rpa/getting-started", "components/rpa/production"]
     },
     {
       "type": "category",
@@ -170,6 +180,32 @@
                 "components/modeler/web-modeler/design-your-process",
                 "components/modeler/web-modeler/implement-your-process",
                 "components/modeler/web-modeler/play-your-process"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Intelligent document processing",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/web-modeler/idp"
+              },
+              "items": [
+                "components/modeler/web-modeler/idp/idp-configuration",
+                "components/modeler/web-modeler/idp/idp-applications",
+                {
+                  "type": "category",
+                  "label": "Document extraction",
+                  "link": {
+                    "type": "doc",
+                    "id": "components/modeler/web-modeler/idp/idp-document-extraction"
+                  },
+                  "items": [
+                    "components/modeler/web-modeler/idp/idp-unstructured-extraction"
+                  ]
+                },
+                "components/modeler/web-modeler/idp/idp-integrate",
+                "components/modeler/web-modeler/idp/idp-key-concepts",
+                "components/modeler/web-modeler/idp/idp-reference"
               ]
             },
             "components/modeler/web-modeler/camunda-marketplace",
@@ -836,14 +872,6 @@
         "id": "components/early-access/overview"
       },
       "items": [
-        {
-          "type": "category",
-          "label": "Experimental features",
-          "items": [
-            "components/early-access/experimental/rpa/rpa-integration",
-            "components/early-access/experimental/rpa/rpa-framework-library"
-          ]
-        },
         {
           "type": "category",
           "label": "Alpha features",
@@ -1785,21 +1813,6 @@
             {
               "Community clients": [
                 "apis-tools/community-clients/index",
-                {
-                  "Zeebe clients": [
-                    {
-                      "CLI client": [
-                        "apis-tools/community-clients/cli-client/index",
-                        "apis-tools/community-clients/cli-client/cli-get-started"
-                      ],
-                      "Go client": [
-                        "apis-tools/community-clients/go-client/index",
-                        "apis-tools/community-clients/go-client/go-get-started",
-                        "apis-tools/community-clients/go-client/job-worker"
-                      ]
-                    }
-                  ]
-                },
                 "apis-tools/build-your-own-client"
               ]
             }
@@ -1871,7 +1884,15 @@
     "reference/notices",
     "reference/release-policy",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      "type": "category",
+      "label": "Data collection",
+      "link": {
+        "type": "doc",
+        "id": "reference/data-collection/data-collection"
+      },
+      "items": ["reference/data-collection/usage-metrics"]
+    },
     "reference/glossary"
   ],
   "Self-Managed": [
@@ -1958,6 +1979,7 @@
             "self-managed/setup/guides/accessing-components-without-ingress",
             "self-managed/setup/guides/ingress-setup",
             "self-managed/setup/guides/using-existing-keycloak",
+            "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/using-existing-elasticsearch",
             "self-managed/setup/guides/using-existing-opensearch",
             "self-managed/setup/guides/configure-db-custom-headers",
@@ -1972,7 +1994,8 @@
     },
     {
       "Reference architecture": [
-        "self-managed/reference-architecture/reference-architecture"
+        "self-managed/reference-architecture/reference-architecture",
+        "self-managed/reference-architecture/kubernetes"
       ]
     },
     {
@@ -2044,9 +2067,14 @@
           ]
         },
         {
+          "Monitoring": [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics"
+          ]
+        },
+        {
           "Troubleshooting": [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels"
+            "self-managed/operational-guides/troubleshooting/troubleshooting"
           ]
         }
       ]
@@ -2067,6 +2095,7 @@
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
+        "self-managed/concepts/elasticsearch-without-cluster-privileges",
         "self-managed/concepts/opensearch-privileges"
       ]
     },
@@ -2120,7 +2149,6 @@
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",
@@ -2311,7 +2339,8 @@
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration"
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems"
                   ]
                 }
               ]
