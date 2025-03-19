@@ -289,8 +289,6 @@ The module will be locally sourced, meaning within your cloned repository you ca
 
    For a full list of available policies, refer to the [AWS EKS Access Policies documentation](https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html).
 
-   :::
-
    </p>
    </details>
 
@@ -439,7 +437,7 @@ We strongly recommend managing sensitive information such as the OpenSearch, Aur
 
 1. Open a terminal in the chosen reference folder where `config.tf` and other `.tf` files are.
 
-2. Do a final initialization again in case things were changed throughout the guide
+2. Do a final initialization in case things were changed throughout the guide
 
    ```bash
    terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"

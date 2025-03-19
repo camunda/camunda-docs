@@ -4,10 +4,13 @@ title: "Deploy an EKS cluster with Terraform"
 description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module for a quick Camunda 8 setup."
 ---
 
-import ConditionalAdmonition from "@site/src/mdx/ConditionalAdmonition";
+<!-- The following link to /docs/ is on purpose to always link to the latest version -->
 
-<!-- The link is on purpose /docs/self-managed as that it always the latest release -->
-<ConditionalAdmonition type="warning" date="2024-10-09" text="There is a [**newer release**](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/) of the documentation available with updated instructions. We encourage you to check out the latest release." />
+:::warning
+
+There is a [**newer release**](/docs/self-managed/setup/deploy/amazon/amazon-eks/eks-terraform/) of the documentation available with updated instructions. We encourage you to check out the latest release.
+
+:::
 
 This guide offers a detailed tutorial for deploying an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
 
