@@ -89,7 +89,7 @@ To ensure seamless integration and functionality of document handling with GCP s
 | `storage.objects.create`       | With this permission, the API client can upload new objects to a bucket. It is essential for adding new documents to the storage.                                                                              |
 | `storage.objects.update`       | This permission enables the API client to update contents and metadata of existing objects within a bucket.                                                                                                    |
 | `storage.objects.delete`       | This permission grants the API client the ability to delete objects from a bucket.                                                                                                                             |
-| `iam.serviceAccounts.signBlob` | This permission allows the service account to sign URLs to the uploaded documents.                                                                                                                             |
+| `iam.serviceAccounts.signBlob` | This permission allows the service account to sign data as part of the process to create secure, signed URLs for accessing uploaded documents.                                                                 |
 
 </TabItem>
 
