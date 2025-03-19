@@ -1,7 +1,7 @@
 ---
 id: add-extra-manifests
-title: "Injecting Custom Kubernetes Manifests into Camunda 8 Helm Deployments."
-sidebar_label: "Injecting Custom Kubernetes Manifests"
+title: "Inject custom Kubernetes manifests into Camunda 8 Helm deployments"
+sidebar_label: "Inject custom Kubernetes manifests"
 description: "Learn how to add extra manifests to Helm deployments by injecting arbitrary data in the values.yaml."
 ---
 
