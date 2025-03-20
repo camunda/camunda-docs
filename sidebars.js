@@ -43,6 +43,7 @@ module.exports = {
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
           ],
         },
+        "guides/use-shared-project-for-organization-wide-collaboration",
       ],
     },
     {
