@@ -1414,13 +1414,13 @@ module.exports = {
           Identity: [
             "self-managed/identity/what-is-identity",
             {
-              "Orchestration Cluster Identity": [
+              "Identity for Orchestration clusters": [
                 "self-managed/identity/orchestration-identity/installation",
                 "self-managed/identity/orchestration-identity/configuration",
               ],
             },
             {
-              "Identity for Web Modeler and Console": [
+              "Identity for Web Modeler, Console, and Optimize": [
                 "self-managed/identity/getting-started/install-identity",
                 {
                   "User guide": [

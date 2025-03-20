@@ -115,7 +115,7 @@ The diagram reverts to the restored version. A new version is created with "(res
 You can create a new diagram by copying a specific version.
 
 1. In the sidebar **Versions** list, hover over the diagram version you want to copy.
-1. Select the three vertical dots to open the actions menu.
+1. Select the three to open the actions menu.
 1. Select **Copy to...**.
 1. Choose a project/folder and select **Copy here** to create the new diagram in the chosen folder.
 
