@@ -8,6 +8,10 @@ import IdpElementImg from './img/idp-diagram-element.png';
 
 Integrate your published document extraction templates into your end-to-end processes in Web Modeler.
 
+:::tip
+Not sure how to start integrating IDP? See [example IDP integration](idp-example.md) for a simple process example.
+:::
+
 ## Create and configure an IDP task
 
 You can apply a published document extraction template to a task or event via the append menu. For example:
@@ -26,9 +30,9 @@ You can then configure the document extraction template in the properties panel,
 
 Specify the document object variable used for document handling, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md) with the document reference.
 
-For example, if you have uploaded a document via form upload using a `document` key, you can specify `document[1]` to retrieve the first document in the array.
+For example, if you have uploaded a document via form upload using a `documents` **Key**, you can specify `documents[1]` to retrieve the first document in the array.
 
-Example: `document[1]`.
+Example: `documents[1]`.
 
 ## Provider authentication
 
@@ -60,7 +64,7 @@ Example: `idp-extraction-connector` (for the Amazon AWS S3 bucket used for docum
 
 Specify the region where documents can be temporarily stored during Amazon Textract analysis. This should match the region where the AWS S3 bucket is located.
 
-Example: `us-east-1`
+Example: `us-east-1` (default)
 
 ## Output mapping
 

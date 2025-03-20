@@ -10,23 +10,23 @@ import IdpExtractImg from './img/idp-example-extract-step.png';
 import IdpResultsImg from './img/idp-example-results.png';
 import IdpTemplateImg from './img/idp-example-template.png';
 
-This worked example shows how you can integrate IDP into a simple process.
+This worked example shows how you can [integrate IDP](idp-configuration.md) into a simple process.
 
 ## About this worked example
 
-This worked example is provided for illustration purposes only, to demonstrate how a published document extraction template can be used to extract data from a document uploaded via Tasklist.
+This worked example demonstrates how a published [document extraction template](idp-document-extraction.md) can be used to extract data from a document uploaded via [Tasklist](/components/tasklist/introduction-to-tasklist.md).
 
-The example process diagram has the following steps:
+In this example, a process is set up with the following steps:
 
 <img src={IdpExampleImg} alt="An example process diagram with three steps" style={{width: '800px', border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
-1. **Upload document**: A PDF document is uploaded in Tasklist.
-1. **Extract data**: A published document extraction template is used to extract data from the uploaded PDF document.
+1. **Upload document**: A PDF document is uploaded manually in Tasklist.
+1. **Extract data**: A published document extraction template automatically extracts the required data from the PDF document.
 1. **View results**: The extraction results are viewed.
 
 ## Document extraction template
 
-The document extraction template used in this example has the following extraction fields and sample customer invoice document.
+The document extraction template used in this example uses the following extraction fields and sample document.
 
 | Field name      | Field type | Prompt                    |
 | :-------------- | :--------- | :------------------------ |
@@ -42,23 +42,23 @@ In the first step of the process, a [user task](/components/modeler/bpmn/user-ta
 
 <img src={IdpFilepickerImg} alt="The File picker element" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
-- The form uses a [File picker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form element to upload a document.
-- The File picker element **Key** is set to `document`. This is used for the **Document** input in the document extraction template.
+- The form uses the [File picker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form element to upload a document.
+- The File picker element **Key** is set to `documents`. This is then bound to the **Document** input in the document extraction template.
 
 ## Extract data
 
-In this step, the document extraction template is [applied to a task](idp-integrate.md#create-and-configure-an-idp-task) to extract data from the uploaded document.
+In this step, the document extraction template is [applied to a task](idp-integrate.md#create-and-configure-an-idp-task) to automatically extract data from the uploaded document.
 
 <img src={IdpExtractImg} alt="Document extraction step" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
-- **Input message data**: The **Document** input uses the FEEL expression `document[1]` to get the first document in the FEEL array, as per the uploaded document **Key**.
-- **Output mapping**: The extracted data is stored in an `idpResult` **Result variable**.
+- **Input message data**: The **Document** input uses the FEEL expression `documents[1]` to get the first document in the FEEL array, as per the uploaded document **Key**.
+- **Output mapping**: The extracted data is stored as JSON in a **Result variable** named `idpResult`.
 
 ## View results
 
 Once the process completes, the results of the extraction are available in the `idpResult` variable.
 
-For example, looking at the process in Operate shows that the data was accurately extracted from the document.
+For example, viewing the process in Operate shows the data was accurately extracted from the document as follows:
 
 ```
 {
@@ -73,5 +73,5 @@ For example, looking at the process in Operate shows that the data was accuratel
 <img src={IdpResultsImg} alt="Document extraction step" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
 :::note
-This step in the process could be one of many types of element, depending on what you want to do with the extraction results. For example, you might want to display, check, or summarize the extracted data, or route to further actions in the process depending on the document data.
+This step in the process could be one of many types of element, depending on what you want to do with the extraction results. For example, you might want to display, check, or summarize the extracted data, or route to further actions in the process depending on the document data extracted by IDP.
 :::
