@@ -10,7 +10,7 @@ New to RPA? Visit the [overview page](/components/rpa/overview.md) to get famili
 
 The RPA worker is available on all major platforms (Windows, Linux, and Mac). This allows you to automate your applications on their native platforms. In most cases, this will be windows. For console applications or browser automation, you can use a more light-weight distribution, such as the [Docker image](/self-managed/setup/deploy/other/docker.md).
 
-### Create your first script
+## Create your first script
 
 <!-- TODO(marstamm): The modeler flag is only required in the alpha releases. Remove this caution for 8.7 minor relase -->
 
@@ -24,7 +24,7 @@ To get started with RPA, you first need to write an RPA script. [Camunda Modeler
    ![A screenshot of the RPA Editor in the Camunda Modeler](img/rpa-editor-initial.png)
 3. **Start writing your RPA script using Robot Framework**: Use the interface provided to write your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
 
-### Test your script
+## Test your script
 
 Once you have written your script, you can test it on a local RPA worker.
 
@@ -42,11 +42,11 @@ Once you have written your script, you can test it on a local RPA worker.
    2. Review the execution log and the variables created during the script execution within Modeler.
       ![A screenshot of the RPA testing panel](img/rpa-editor-results.png)
 
-### Automate execution
+## Automate execution
 
 Once you are happy with your script and have tested it locally, you can start automating it with Camunda.
 
-#### Link RPA task to BPMN
+### Link RPA task to BPMN
 
 1. **Deploy the RPA file**:
 
@@ -67,7 +67,7 @@ Once you are happy with your script and have tested it locally, you can start au
    1. Deploy the BPMN model with the configured RPA task.
    2. Start an instance of your process.
 
-#### Connect worker to Zeebe
+### Connect worker to Zeebe
 
 The last step is to configure the RPA worker to pick up the jobs from Camunda.
 
@@ -79,7 +79,7 @@ The last step is to configure the RPA worker to pick up the jobs from Camunda.
 
 2. **Restart the worker**: If your worker is still running, restart it to apply the new credentials. The RPA worker should now be connected and ready to execute scripts from Zeebe.
 
-## Interacting with the process
+## Interact with the process
 
 Now that you integrated your first Script, you can focus on making it more usefull. Your RPA script will be part of a bigger BPMN process. The main interaction between the script and your process will be the variables and documents.
 
@@ -125,7 +125,7 @@ Log Operation
 
 We differenciate 2 ways of handeling problems in your Task: Exceptions and Errors. We recomment reading our [best practices](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to understand which strategy is best for your case.
 
-### Exceptions
+#### Incidents
 
 If your RPA script runs into an unexpected error during execution, this error alongside the output will be reported to Zeebe. If the job retries are exceeded, an [incident](/components/concepts/incidents.md) will be created in [Operate](/components/operate/operate-introduction.md).
 
@@ -151,11 +151,7 @@ Cleanup
     Close All Browsers
 ```
 
-:::note
-Creating BPMN errors is not yet supported.
-:::
-
-#### Businuess Errors
+#### BPMN Errors
 
 If you encounter an error that should be handled by as an BPMN error, you can use the `Throw BPMN Error` keyword. Instead of creating an incident, this will create a [BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md#handling-errors-on-the-process-level) that can be caught in the BPMN.
 
@@ -167,10 +163,10 @@ Library             Camunda
 
 *** Tasks ***
 Log Operation
-    Throw BPMN Error    MY_ERROR_CODE       We encountered a business error
+    Throw BPMN Error     MY_ERROR_CODE       We encountered a business error
     [Teardown]    Log    Teardown is still executed
 ```
 
 ### Shared script resources
 
-While shared script resources may be developed in the future, currently the scripts cannot reference other resources outside of what is defined in the scripts themselves.
+Currently, multiple script files are not supported. Each task should be contained within a single script. You can use [pre-run and post-run scripts](components/rpa/production.md#pre--and-post-run-scripts) for environment setup and cleanup.

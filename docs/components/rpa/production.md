@@ -37,9 +37,9 @@ Each worker can have multiple labels and will pick up waiting jobs from all scri
 
 You can add labels to your script when configuring the RPA task in your diagram. Note that a script can only have a single label.
 
-Labels describe capabilities. If you want your worker to only pick up a specific script, you will need to use a unique label on both the worker and the RPA task. A worker can have multiple labels and will pick up any script that matches one of the given tags. For example, your worker might have access to the SAP application, but if you also want it to pick up browser automation tasks, add `SAP.BROWSER_AUTOMATION` to your worker tags. This will pick up tasks tagged as SAP and tasks tagged as `BROWSER_AUTOMATION`.
+Labels describe capabilities. If you want your worker to only pick up a specific script, you will need to use a unique label on both the worker and the RPA task. A worker can have multiple labels and will pick up any script that matches one of the given tags. For example, your worker might have access to the SAP application, but if you also want it to pick up browser automation tasks, add `SAP,BROWSER_AUTOMATION` to your worker tags. This will pick up tasks tagged as `SAP` and tasks tagged as `BROWSER_AUTOMATION`.
 
-If no label is defined, both the task and worker will use the label default.
+If no label is defined, both the task and worker will use the label `default`.
 
 ## Pre- and post-run scripts
 
@@ -69,6 +69,6 @@ We recommend reviewing [organizing glue code and workers in process solutions](/
 
 By default, workers will only request and execute one job at a time. This ensures there are no side effects from multiple scripts interacting with the system at a time.
 
-By extension, that means that one machine should only host a single RPA-worker instance at a time. To allow execution of multiple scripts on a single machine, [labels](#labels) should be used.
+By extension, that means that one machine should only host a single RPA-worker instance at a time. If your worker can work on different type of tasks, add [labels](#labels) to your worker instead of starting additional workers. This ensures exclusivity of tasks on the machine.
 
 Some workloads do not require exclusivity of the worker. For example, browser automation is usually free of side effects and can execute multiple jobs in parallel. With this, you may label tasks that can be parallelized (such as BROWSER_AUTOMATION). Create separate workers with the corresponding label and `camunda.rpa.zeebe.max-concurrent-jobs` larger than `1`.
