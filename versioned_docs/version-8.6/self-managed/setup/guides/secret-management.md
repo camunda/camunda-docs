@@ -33,15 +33,14 @@ These secrets are generated and managed internally by Camunda’s Helm chart:
 
 These secrets are required when integrating Camunda with external services:
 
-| **Secret**                          | **Chart Values Key**                                                                               | **Purpose**                                                     | **Default Behavior**    |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------- |
-| **External Database Password**      | `webModeler.restapi.externalDatabase.existingSecret`                                               | Password for external PostgreSQL if using an external DB        | Not set unless provided |
-| **External Elasticsearch Auth**     | `global.elasticsearch.auth.existingSecret`                                                         | Password for external Elasticsearch authentication (basic auth) | Not set unless provided |
-| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.existingSecret`                                                          | TLS certificate for external Elasticsearch over SSL             | Not set unless provided |
-| **External OpenSearch Auth**        | `global.opensearch.auth.existingSecret`                                                            | Password for external OpenSearch authentication (basic auth)    | Not set unless provided |
-| **External OpenSearch TLS Cert**    | `global.opensearch.tls.existingSecret`                                                             | TLS certificate for external OpenSearch over SSL                | Not set unless provided |
-| **SMTP Password**                   | `webModeler.restapi.mail.existingSecret`                                                           | SMTP credentials for sending email notifications                | Not set unless provided |
-| **Enterprise License Key**          | `global.license.existingSecret`,`global.license.existingSecret`,`global.license.existingSecretKey` | Camunda Enterprise License Key                                  | Not set unless provided |
+| **Secret**                          | **Chart Values Key**                                 | **Purpose**                                                     | **Default Behavior**    |
+| ----------------------------------- | ---------------------------------------------------- | --------------------------------------------------------------- | ----------------------- |
+| **External Database Password**      | `webModeler.restapi.externalDatabase.existingSecret` | Password for external PostgreSQL if using an external DB        | Not set unless provided |
+| **External Elasticsearch Auth**     | `global.elasticsearch.auth.existingSecret`           | Password for external Elasticsearch authentication (basic auth) | Not set unless provided |
+| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.existingSecret`            | TLS certificate for external Elasticsearch over SSL             | Not set unless provided |
+| **External OpenSearch Auth**        | `global.opensearch.auth.existingSecret`              | Password for external OpenSearch authentication (basic auth)    | Not set unless provided |
+| **External OpenSearch TLS Cert**    | `global.opensearch.tls.existingSecret`               | TLS certificate for external OpenSearch over SSL                | Not set unless provided |
+| **SMTP Password**                   | `webModeler.restapi.mail.existingSecret`             | SMTP credentials for sending email notifications                | Not set unless provided |
 
 > **Best Practice:** For external secrets, **always store them in a Kubernetes Secret** and reference them using `existingSecret` instead of setting them in plaintext within `values.yaml`.
 
