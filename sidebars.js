@@ -1417,12 +1417,6 @@ module.exports = {
               "Orchestration Cluster Identity": [
                 "self-managed/identity/orchestration-identity/installation",
                 "self-managed/identity/orchestration-identity/configuration",
-                {
-                  "User guide": [
-                    "self-managed/identity/orchestration-identity/user-guide/authorization",
-                    "self-managed/identity/orchestration-identity/user-guide/user",
-                  ],
-                },
               ],
             },
             {
