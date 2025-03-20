@@ -72,7 +72,8 @@ criteria:
 - Dashes (`-`)
 - Underscores (`_`)
 - Dots (`.`)
-- A maximum length of 31 characters.
+- At sign (`@`)
+- A maximum length of 256 characters.
 
 ### Inherited tenant ownership
 
