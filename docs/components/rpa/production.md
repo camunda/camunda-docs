@@ -63,6 +63,25 @@ By default, each worker only executes one job at the same time. This ensures scr
 
 Some use cases, like browser automation, can be side effect free and execution can be parallelized. The `camunda.rpa.zeebe.max-concurrent-jobs` defines how many jobs the RPA worker will pick up.
 
+## Additional libraries
+
+The RPA worker comes with a set of [default libraries](https://camunda.github.io/rpa-python-libraries/). Additional dependencies can be installed by providing a supplementary `requirements.txt` file in the `camunda.rpa.python.extra-requirements` property.
+
+These requirements will be installed with the next restart of the RPA worker. Additional libraries are only available on Workers that are configured accordingly. Therefore, it is recommended to use [labels](#labels) to ensure that worker and script are compatible.
+
+For example, the RPA worker allows browser automation with Selenium out of the box. If you want to use playwright instead, you can install the dependencies like this:
+
+```
+# requirements.txt
+robotframework-browser
+```
+
+```
+# application.properties
+camunda.rpa.python.extra-requirements=extra-requirements.txt
+camunda.rpa.zeebe.worker-tags=default,playwright
+```
+
 ## Scaling effectively
 
 We recommend reviewing [organizing glue code and workers in process solutions](/components/best-practices/development/writing-good-workers.md#organizing-glue-code-and-workers-in-process-solutions).
