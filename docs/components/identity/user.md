@@ -5,18 +5,14 @@ description: "Learn how to manage users in your Self-Managed Orchestration clust
 ---
 
 :::note
-User management in Identity is only needed by Self-Managed deployments. For SaaS, see how to [connect your identity provider](http://localhost:3000/docs/next/components/console/manage-organization/external-sso/).
+User management in Identity is only supported by Self-Managed deployments. For SaaS, see how to [connect your identity provider](http://localhost:3000/docs/next/components/console/manage-organization/external-sso/).
 :::
-
-Identity provides unified, cluster-level identity management and authorizations. User management is a key part of identity management, and allows you to create, update, and delete users in your Orchestration cluster.
-
-## User management overview
 
 User management is the process of creating, updating, and deleting users in your Orchestration cluster. Users can be assigned roles and permissions to access applications and perform actions on resources.
 
 ### Create a user
 
-1. Log in to the Camunda 8 web application.
+1. Log in to Identity in your cluster.
 2. Click on the `Users` tab.
 3. Click on the `Create user` button.
 4. Enter the user details:
@@ -31,7 +27,7 @@ User management is the process of creating, updating, and deleting users in your
 
 ### Update a user
 
-1. Log in to the Camunda 8 web application.
+1. Log in to Identity in your cluster.
 2. Click on the `Users` tab.
 3. Select the user you want to update.
 4. Click on the `Edit` button next to the user.
@@ -46,7 +42,7 @@ User management is the process of creating, updating, and deleting users in your
 
 ### Delete a user
 
-1. Log in to the Camunda 8 web application.
+1. Log in to Identity in your cluster.
 2. Click on the `Users` tab.
 3. Select the user you want to delete.
 4. Click on the `Delete` button next to the user.
@@ -55,4 +51,4 @@ User management is the process of creating, updating, and deleting users in your
 
 ### Assign authorizations to a user
 
-Please refer to the [authorization](./authorization.md) section to learn how to assign permissions to users.
+Please refer to the [authorization](./authorization.md) section to learn how to create authorizations for users.
