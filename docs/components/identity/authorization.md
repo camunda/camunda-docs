@@ -4,15 +4,13 @@ title: Authorization
 description: "Learn how to manage authorizations in your Orchestration cluster."
 ---
 
-Identity provides unified, cluster-level identity management and authorizations. Authorizations are managed through permissions that can be assigned to [users](user.md), group, role and mapping.
+Authorizations are managed through permissions that can be assigned to [users](user.md), group, role and mapping.
 
 ## Authorization overview
 
-Authorization is a mechanism that controls access to resources and actions based on permissions assigned to an entity.
-
 Camunda 8 cluster uses resource-based authorization control, which means that permissions are granted to entities (like users) to perform specific actions on specified resources. For example, permissions can be set for actions such as reading, updating, creating, or deleting resources like process instances.
 
-Authorizations can be enabled or disabled for each Camunda 8 cluster via [configuration settings](/self-managed/identity/orchestration-identity/installation.md#enable-api-authentication-and-authorizations). By default, authorizations are disabled. When they are enabled, a user is not granted access to anything by default and must be explicitly granted permission to access applications or perform actions on resources.
+A user is not granted access to anything by default and must be explicitly granted permission to access applications or perform actions on resources. Authorizations can be enabled or disabled in Self-Managed deployments via [configuration settings](/self-managed/identity/orchestration-identity/installation.md#enable-api-authentication-and-authorizations).
 
 ## Authorization concepts
 
@@ -26,9 +24,13 @@ Permissions are defined by a combination of a resource type, resource ID, and ac
 
 Resources are the objects on which actions can be performed. Resources can be entities like process instances, tasks, or users. Resources are identified by a resource ID and type.
 
+### Owners
+
+Owners are the entities to which permissions are granted. Owners can be [users](user.md), groups, roles, or mappings. Owners are identified by an owner ID and type.
+
 ## Create an authorization
 
-1. Log in to the Camunda 8 web application.
+1. Log in to Identity in your cluster.
 2. Click on the `Authorizations` tab.
 3. Select the resource type on the left side of the screen.
 4. Click on the `Create authorization` button, this will create an authorization for the previously selected resource type.
@@ -43,7 +45,7 @@ Resources are the objects on which actions can be performed. Resources can be en
 
 ## Delete an authorization
 
-1. Log in to the Camunda 8 web application.
+1. Log in to Identity in your cluster.
 2. Click on the `Authorizations` tab.
 3. Select the resource type of the authorization you want to delete.
 4. Click on the `Delete` button next to the authorization you want to delete.
