@@ -24,6 +24,64 @@ To get started with RPA, you first need to write an RPA script. [Camunda Modeler
    ![A screenshot of the RPA Editor in the Camunda Modeler](img/rpa-editor-initial.png)
 3. **Start writing your RPA script using Robot Framework**: Use the interface provided to write your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
 
+#### Interacting with the process
+
+Your RPA script will be part of a bigger BPMN process. The main interaction between the script and your process will be the variables and documents.
+
+##### Variables
+
+Process variables will be mapped to robot variables automatically. Use the `Camunda` library and `Set Output Variable` Keyword to set return variables.
+
+In this example, the input would be
+
+```Robot
+*** Settings ***
+Library             Camunda
+
+*** Tasks ***
+Log X
+    Log                    Process variable 'x' is set to ${x}
+    Set Output Variable    result    We logged x
+```
+
+##### Documents
+
+:::note
+Documents can be created by mulitple components. Visit our [concepts page](/components/concepts/document-handling.md) to learn how Camunda handles binary data.
+:::
+
+Documents managed by Camunda can be consumed or created by an RPA script. Use the `Download Documents` to resolve a document descriptor to a file and `Upload Documents` to create a document descriptor from a file.
+
+The script below downloads a file, appends a line and uploads the Document as with the same variable name.
+
+```Robot
+*** Settings ***
+Library             Camunda
+Library             Camunda.FileSystem
+
+*** Tasks ***
+Log Operation
+    ${path}=    Download Documents     ${operationLog}
+    Append To File    ${path}     new Line, appended by RPA script
+    Upload Documents    ${path}     operationLog
+```
+
+##### Errors
+
+If you encounter an error that should be handled by as an BPMN error, you can use the `Throw BPMN Error` keyword. Instead of creating an incident, this will create a [BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md#handling-errors-on-the-process-level) that can be caught in the BPMN.
+
+Note that a BPMN error cannot be caught in the script, it will always stop the script execution and initiate the teardown procedure.
+
+```robot
+*** Settings ***
+Library             Camunda
+
+*** Tasks ***
+Log Operation
+    Throw BPMN Error    MY_ERROR_CODE       We encountered a business error
+    [Teardown]    Log    Teardown is still executed
+```
+
 ### Test your script
 
 Once you have written your script, you can test it on a local RPA worker.
