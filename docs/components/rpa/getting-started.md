@@ -24,64 +24,6 @@ To get started with RPA, you first need to write an RPA script. [Camunda Modeler
    ![A screenshot of the RPA Editor in the Camunda Modeler](img/rpa-editor-initial.png)
 3. **Start writing your RPA script using Robot Framework**: Use the interface provided to write your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
 
-#### Interacting with the process
-
-Your RPA script will be part of a bigger BPMN process. The main interaction between the script and your process will be the variables and documents.
-
-##### Variables
-
-Process variables will be mapped to robot variables automatically. Use the `Camunda` library and `Set Output Variable` Keyword to set return variables.
-
-In this example, the input would be
-
-```Robot
-*** Settings ***
-Library             Camunda
-
-*** Tasks ***
-Log X
-    Log                    Process variable 'x' is set to ${x}
-    Set Output Variable    result    We logged x
-```
-
-##### Documents
-
-:::note
-Documents can be created by mulitple components. Visit our [concepts page](/components/concepts/document-handling.md) to learn how Camunda handles binary data.
-:::
-
-Documents managed by Camunda can be consumed or created by an RPA script. Use the `Download Documents` to resolve a document descriptor to a file and `Upload Documents` to create a document descriptor from a file.
-
-The script below downloads a file, appends a line and uploads the Document as with the same variable name.
-
-```Robot
-*** Settings ***
-Library             Camunda
-Library             Camunda.FileSystem
-
-*** Tasks ***
-Log Operation
-    ${path}=    Download Documents     ${operationLog}
-    Append To File    ${path}     new Line, appended by RPA script
-    Upload Documents    ${path}     operationLog
-```
-
-##### Errors
-
-If you encounter an error that should be handled by as an BPMN error, you can use the `Throw BPMN Error` keyword. Instead of creating an incident, this will create a [BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md#handling-errors-on-the-process-level) that can be caught in the BPMN.
-
-Note that a BPMN error cannot be caught in the script, it will always stop the script execution and initiate the teardown procedure.
-
-```robot
-*** Settings ***
-Library             Camunda
-
-*** Tasks ***
-Log Operation
-    Throw BPMN Error    MY_ERROR_CODE       We encountered a business error
-    [Teardown]    Log    Teardown is still executed
-```
-
 ### Test your script
 
 Once you have written your script, you can test it on a local RPA worker.
@@ -137,19 +79,53 @@ The last step is to configure the RPA worker to pick up the jobs from Camunda.
 
 2. **Restart the worker**: If your worker is still running, restart it to apply the new credentials. The RPA worker should now be connected and ready to execute scripts from Zeebe.
 
-## FAQ
+## Interacting with the process
 
-### How can I scale a bot farm effectively? For instance, how do I manage concurrency, resource allocation, or fault tolerance as the bot farm grows?
+Now that you integrated your first Script, you can focus on making it more usefull. Your RPA script will be part of a bigger BPMN process. The main interaction between the script and your process will be the variables and documents.
 
-We recommend reviewing [organizing glue code and workers in process solutions](/components/best-practices/development/writing-good-workers.md#organizing-glue-code-and-workers-in-process-solutions).
+### Variables
 
-By default, workers will only request and execute one job at a time. This ensures there are no side effects from multiple scripts interacting with the system at a time.
+Process variables will be mapped to robot variables automatically. Use the `Camunda` library and `Set Output Variable` Keyword to set return variables.
 
-By extension, that means that one machine should only host a single RPA-worker instance at a time. To allow execution of multiple scripts on a single machine, [labels](#labels) should be used.
+In this example, the input would be
 
-Some workloads do not require exclusivity of the worker. For example, browser automation is usually free of side effects and can execute multiple jobs in parallel. With this, you may label tasks that can be parallelized (such as BROWSER_AUTOMATION). Create separate workers with the corresponding label and `camunda.rpa.zeebe.max-concurrent-jobs` larger than `1`.
+```Robot
+*** Settings ***
+Library             Camunda
 
-### What happens if a bot encounters an issue during execution and picks up a new task?
+*** Tasks ***
+Log X
+    Log                    Process variable 'x' is set to ${x}
+    Set Output Variable    result    We logged x
+```
+
+### Documents
+
+:::note
+Documents can be created by mulitple components. Visit our [concepts page](/components/concepts/document-handling.md) to learn how Camunda handles binary data.
+:::
+
+Documents managed by Camunda can be consumed or created by an RPA script. Use the `Download Documents` to resolve a document descriptor to a file and `Upload Documents` to create a document descriptor from a file.
+
+The script below downloads a file, appends a line and uploads the Document as with the same variable name.
+
+```Robot
+*** Settings ***
+Library             Camunda
+Library             Camunda.FileSystem
+
+*** Tasks ***
+Log Operation
+    ${path}=    Download Documents     ${operationLog}
+    Append To File    ${path}     new Line, appended by RPA script
+    Upload Documents    ${path}     operationLog
+```
+
+### Handeling exceptions
+
+We differenciate 2 ways of handeling problems in your Task: Exceptions and Errors. We recomment reading our [best practices](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to understand which strategy is best for your case.
+
+### Exceptions
 
 If your RPA script runs into an unexpected error during execution, this error alongside the output will be reported to Zeebe. If the job retries are exceeded, an [incident](/components/concepts/incidents.md) will be created in [Operate](/components/operate/operate-introduction.md).
 
@@ -179,6 +155,22 @@ Cleanup
 Creating BPMN errors is not yet supported.
 :::
 
-## What about shared script resources?
+#### Businuess Errors
+
+If you encounter an error that should be handled by as an BPMN error, you can use the `Throw BPMN Error` keyword. Instead of creating an incident, this will create a [BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md#handling-errors-on-the-process-level) that can be caught in the BPMN.
+
+Note that a BPMN error cannot be caught in the script, it will always stop the script execution and initiate the teardown procedure.
+
+```robot
+*** Settings ***
+Library             Camunda
+
+*** Tasks ***
+Log Operation
+    Throw BPMN Error    MY_ERROR_CODE       We encountered a business error
+    [Teardown]    Log    Teardown is still executed
+```
+
+### Shared script resources
 
 While shared script resources may be developed in the future, currently the scripts cannot reference other resources outside of what is defined in the scripts themselves.

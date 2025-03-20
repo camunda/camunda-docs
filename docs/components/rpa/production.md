@@ -62,3 +62,13 @@ Runtime can vary greatly from script to script. It is important to set the right
 By default, each worker only executes one job at the same time. This ensures scripts don't cause side effects while interacting with applications.
 
 Some use cases, like browser automation, can be side effect free and execution can be parallelized. The `camunda.rpa.zeebe.max-concurrent-jobs` defines how many jobs the RPA worker will pick up.
+
+## Scaling effectively
+
+We recommend reviewing [organizing glue code and workers in process solutions](/components/best-practices/development/writing-good-workers.md#organizing-glue-code-and-workers-in-process-solutions).
+
+By default, workers will only request and execute one job at a time. This ensures there are no side effects from multiple scripts interacting with the system at a time.
+
+By extension, that means that one machine should only host a single RPA-worker instance at a time. To allow execution of multiple scripts on a single machine, [labels](#labels) should be used.
+
+Some workloads do not require exclusivity of the worker. For example, browser automation is usually free of side effects and can execute multiple jobs in parallel. With this, you may label tasks that can be parallelized (such as BROWSER_AUTOMATION). Create separate workers with the corresponding label and `camunda.rpa.zeebe.max-concurrent-jobs` larger than `1`.
