@@ -6,13 +6,10 @@ const C8RunBaseURL =
 
 const getVersion = () => {
   const docsVersion = useActiveVersion();
-  if (docsVersion.label == "8.7 (unreleased)") {
-    return "8.7";
-  }
-  if (docsVersion.label == "8.8 (unreleased)") {
+  if (docsVersion.name == "current") {
     return "8.8";
   }
-  return docsVersion.label;
+  return docsVersion.name;
 };
 
 const C8Run = () => {
