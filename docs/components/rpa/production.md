@@ -67,9 +67,9 @@ Some use cases, like browser automation, can be side effect free and execution c
 
 The RPA worker comes with a set of [default libraries](https://camunda.github.io/rpa-python-libraries/). Additional dependencies can be installed by providing a supplementary `requirements.txt` file in the `camunda.rpa.python.extra-requirements` property.
 
-These requirements will be installed with the next restart of the RPA worker. Additional libraries are only available on Workers that are configured accordingly. Therefore, it is recommended to use [labels](#labels) to ensure that worker and script are compatible.
+These requirements will be installed with the next restart of the RPA worker. Additional libraries are only available on workers configured accordingly. Therefore, it is recommended to use [labels](#labels) to ensure the worker and script are compatible.
 
-For example, the RPA worker allows browser automation with Selenium out of the box. If you want to use playwright instead, you can install the dependencies like this:
+For example, the RPA worker allows browser automation with Selenium out of the box. To use Playwright instead, install the dependencies as follows:
 
 ```
 # requirements.txt

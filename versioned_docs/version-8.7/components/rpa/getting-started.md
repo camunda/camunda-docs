@@ -8,7 +8,7 @@ description: "Learn how to create your first script, test your script, and autom
 New to RPA? Visit the [overview page](/components/rpa/overview.md) to get familiar with Robotic Process Automation (RPA) capabilities.
 :::
 
-The RPA worker is available on all major platforms (Windows, Linux, and Mac). This allows you to automate your applications on their native platforms. In most cases, this will be windows. For console applications or browser automation, you can use a more light-weight distribution, such as the [Docker image](/self-managed/setup/deploy/other/docker.md).
+The RPA worker is available on all major platforms (Windows, Linux, and Mac). This allows you to automate your applications on their native platforms. In most cases, this will be Windows. For console applications or browser automation, you can use a more light-weight distribution, such as the [Docker image](/self-managed/setup/deploy/other/docker.md).
 
 ## Create your first script
 
@@ -81,13 +81,13 @@ The last step is to configure the RPA worker to pick up the jobs from Camunda.
 
 ## Interact with the process
 
-Now that you integrated your first Script, you can focus on making it more usefull. Your RPA script will be part of a bigger BPMN process. The main interaction between the script and your process will be the variables and documents.
+Now that you have integrated your first script, it can be part of a larger BPMN process. The main interaction between the script and your process will be the variables and documents.
 
 ### Variables
 
-Process variables will be mapped to robot variables automatically. Use the `Camunda` library and `Set Output Variable` Keyword to set return variables.
+Process variables will be mapped to robot variables automatically. Use the `Camunda` library and `Set Output Variable` keyword to set return variables.
 
-In this example, the input would be
+In this example, the input would be the following:
 
 ```Robot
 *** Settings ***
@@ -102,12 +102,12 @@ Log X
 ### Documents
 
 :::note
-Documents can be created by mulitple components. Visit our [concepts page](/components/concepts/document-handling.md) to learn how Camunda handles binary data.
+Documents can be created by multiple components. Visit our [concepts page](/components/concepts/document-handling.md) to learn how Camunda handles binary data.
 :::
 
-Documents managed by Camunda can be consumed or created by an RPA script. Use the `Download Documents` to resolve a document descriptor to a file and `Upload Documents` to create a document descriptor from a file.
+Documents managed by Camunda can be consumed or created by an RPA script. Use `Download Documents` to resolve a document descriptor to a file and `Upload Documents` to create a document descriptor from a file.
 
-The script below downloads a file, appends a line and uploads the Document as with the same variable name.
+The script below downloads a file, appends a line, and uploads the document with the same variable name:
 
 ```Robot
 *** Settings ***
@@ -121,13 +121,13 @@ Log Operation
     Upload Documents    ${path}     operationLog
 ```
 
-### Handeling exceptions
+### Handling exceptions
 
-We differenciate 2 ways of handeling problems in your Task: Exceptions and Errors. We recomment reading our [best practices](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to understand which strategy is best for your case.
+There are two ways to handle problems in your tasks: exceptions and errors. We recommend reading our [best practices](/components/best-practices/development/dealing-with-problems-and-exceptions.md) to understand which strategy is best for your case.
 
 #### Incidents
 
-If your RPA script runs into an unexpected error during execution, this error alongside the output will be reported to Zeebe. If the job retries are exceeded, an [incident](/components/concepts/incidents.md) will be created in [Operate](/components/operate/operate-introduction.md).
+If your RPA script runs into an unexpected error during execution, this error (alongside the output) will be reported to Zeebe. If the job retries are exceeded, an [incident](/components/concepts/incidents.md) will be created in [Operate](/components/operate/operate-introduction.md).
 
 To ensure your environment is always clean and all open applications are closed, create a "clean up" step and tag it as `[Teardown]`. Read more about setup and teardown in the [Robot Framework documentation](https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#user-keyword-setup-and-teardown).
 
@@ -151,11 +151,13 @@ Cleanup
     Close All Browsers
 ```
 
-#### BPMN Errors
+#### BPMN errors
 
-If you encounter an error that should be handled by as an BPMN error, you can use the `Throw BPMN Error` keyword. Instead of creating an incident, this will create a [BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md#handling-errors-on-the-process-level) that can be caught in the BPMN.
+If you encounter an error that should be handled as a BPMN error, you can use the `Throw BPMN Error` keyword. Instead of creating an incident, this will create a [BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md#handling-errors-on-the-process-level).
 
-Note that a BPMN error cannot be caught in the script, it will always stop the script execution and initiate the teardown procedure.
+:::note
+A BPMN error cannot be caught in the script, it will always stop the script execution and initiate the teardown procedure.
+:::
 
 ```robot
 *** Settings ***
