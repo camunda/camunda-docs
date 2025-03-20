@@ -10,13 +10,13 @@ import IdpExtractImg from './img/idp-example-extract-step.png';
 import IdpResultsImg from './img/idp-example-results.png';
 import IdpTemplateImg from './img/idp-example-template.png';
 
-This worked example shows how you can integrate a published document extraction template into a simple process.
+This worked example shows how you can integrate IDP into a simple process.
 
 ## About this worked example
 
-This worked example is provided for illustration purposes only, to demonstrate a simple process that uses a published document extraction template to extract data from a document uploaded via Tasklist.
+This worked example is provided for illustration purposes only, to demonstrate how a published document extraction template can be used to extract data from a document uploaded via Tasklist.
 
-The process diagram has the following steps:
+The example process diagram has the following steps:
 
 <img src={IdpExampleImg} alt="An example process diagram with three steps" style={{width: '800px', border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
@@ -28,11 +28,11 @@ The process diagram has the following steps:
 
 The document extraction template used in this example has the following extraction fields and sample customer invoice document.
 
-| Field name      | Field type | Prompt                   |
-| :-------------- | :--------- | :----------------------- |
-| invoiceType     | String     | Find the type of invoice |
-| invoiceCustomer | String     | The invoice customer     |
-| invoiceId       | String     | The invoice ID           |
+| Field name      | Field type | Prompt                    |
+| :-------------- | :--------- | :------------------------ |
+| invoiceType     | String     | Find the type of invoice. |
+| invoiceCustomer | String     | The invoice customer.     |
+| invoiceId       | String     | The invoice ID.           |
 
 <img src={IdpTemplateImg} alt="An example process diagram with three steps" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
