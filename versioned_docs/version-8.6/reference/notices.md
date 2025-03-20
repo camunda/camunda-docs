@@ -8,6 +8,31 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 18
+
+#### Publication date
+
+April 8th, 2025
+
+#### Product affected
+
+Camunda Optimize
+
+#### Impact
+
+Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that could crash the gateway.
+
+#### How to determine if the installation is affected
+
+You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤ 3.11.20, ≤ 3.12.15, ≤ 3.13.12, ≤ 3.14.3, ≤ 3.15.0
+
+#### Solution
+
+Camunda has provided the following release which contains a fix:
+
+- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda/releases/tag/8.6.6-optimize)
+- give links to all other versions
+
 ### Notice 16
 
 #### Publication date
