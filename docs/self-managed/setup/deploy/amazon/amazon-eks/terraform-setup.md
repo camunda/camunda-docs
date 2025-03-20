@@ -50,7 +50,7 @@ For the simplicity of this guide, certain best practices will be provided with l
 
 :::warning
 
-Reference architectures are not intended to be consumed as-is directly. In "Terraform speak" - the examples provided are not designed to be consumed as a Terraform module. It is recommended that you make any modifications locally, therefore the guide will mention cloning the repository.
+Reference architectures are not intended to be consumed exactly as described. The examples provided in this guide are not designed to be consumed as a Terraform module. It is recommended that you make any modifications locally, therefore the guide will mention cloning the repository.
 
 This also makes it easy to extend and customize the codebase to fit your needs. However, it's important to note that maintaining the infrastructure is your responsibility. Camunda will update and refine the reference architecture, which may not be backward compatible with your code. You can use these updates to upgrade your customized codebase as needed.
 
@@ -99,7 +99,7 @@ Following this tutorial and steps will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/). This archive will be used throughout the rest of this documentation, the reference architecture are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/). This archive will be used throughout the rest of this documentation. The reference architectures are versioned using the same Camunda versions (`stable/8.x`).
 
 The provided reference architecture repository allows you to directly reuse and extend the existing Terraform example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a Terraform module maintained by a third party.
 
@@ -220,7 +220,7 @@ Terraform will connect to the S3 bucket to manage the state file, ensuring remot
 
 This module establishes the foundational configuration for AWS access and Terraform.
 
-We will utilize [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, streamlining our infrastructure management. Which follows a best practice of Terraform.
+We will utilize [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, streamlining our infrastructure management and following Terraform best practices.
 
 The reference architecture comes with an example module implementation of the [EKS cluster](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/eks-cluster/) and offers a robust starting point for deploying an EKS cluster. It is highly recommended to review this module prior to implementation to understand its structure and capabilities.
 
@@ -437,7 +437,7 @@ We strongly recommend managing sensitive information such as the OpenSearch, Aur
 
 1. Open a terminal in the chosen reference folder where `config.tf` and other `.tf` files are.
 
-2. Do a final initialization in case things were changed throughout the guide
+2. Preform a final initialization for anything changed throughout the guide:
 
    ```bash
    terraform init -backend-config="bucket=$S3_TF_BUCKET_NAME" -backend-config="key=$S3_TF_BUCKET_KEY"
