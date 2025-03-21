@@ -62,6 +62,30 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Batch operation",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-batch-operation",
+          label: "Get batch operation",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-batch-operation-items",
+          label: "Get batch operation items",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-batch-operations",
+          label: "Search batch operations",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Clock",
       items: [
         {
