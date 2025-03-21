@@ -26,7 +26,7 @@ The default configuration available below is for Camunda 8 Run. Helm installatio
 | --------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------- |
 | `SPRING_PROFILES_ACTIVE`                            | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth`           |
 | `CAMUNDA_SECURITY_AUTHENTICATION_METHOD`            | The authentication method to use.                                                                 | `basic`                       |
-| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTED-API`   | If the API can be used without authentication.                                                    | `true`                        |
+| `CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI`    | If the API can be used without authentication.                                                    | `true`                        |
 | `CAMUNDA_PERSISTENT_SESSIONS_ENABLED`               | Enables shared authentication between the Orchestration web applications (Operate and Tasklist).  | `true`                        |
 | `CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED`           | If authorizations are enabled.                                                                    | `true`                        |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_USERNAME` | The username of the first user.                                                                   | `demo`                        |
