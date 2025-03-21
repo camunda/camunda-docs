@@ -169,8 +169,8 @@ RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-framework-lib
 RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-integration/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
 
 # Provide current to next redirect for ad-hoc
-RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc/ad-hoc/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
