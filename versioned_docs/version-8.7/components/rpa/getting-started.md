@@ -31,9 +31,8 @@ Once you have written your script, you can test it on a local RPA worker.
 1. **Start the RPA worker**:
 
    1. Download the latest version of the [RPA worker](https://github.com/camunda/rpa-worker/releases).
-   2. Create a new file named `rpa-worker.properties` in the same directory as the RPA worker. This is the configuration file for this worker.
-   3. Add `camunda.client.zeebe.enabled=false` to `rpa-worker.properties`. This disables connection to Zeebe and allows you to test scripts locally.
-   4. Start the worker by running the executable.
+   2. Unpack the `rpa-worker_*.zip` file. The zip archive contains the worker executable and an example configuration file.
+   3. Start the worker by running the executable.
 
 2. **Check Desktop Modeler**: Ensure the RPA worker is now connected to Desktop Modeler. The worker should automatically connect. If not, ensure the connection URL is correct.
 
@@ -74,8 +73,7 @@ The last step is to configure the RPA worker to pick up the jobs from Camunda.
 1. **Create credentials for the worker**:
 
    1. Create the necessary worker credentials in Console. You can follow the same steps as for the Modeler credentials. Give your new client the scopes `Zeebe` and `Secrets`.
-   2. Save the generated credentials in a file named `rpa-worker.properties` in the same directory as your RPA worker executable.
-   3. Add `camunda.client.zeebe.enabled=true` to `rpa-worker.properties` to start fetching jobs from Zeebe.
+   2. Add the generated credentials to your `application.properties` in the same directory as your RPA worker executable.
 
 2. **Restart the worker**: If your worker is still running, restart it to apply the new credentials. The RPA worker should now be connected and ready to execute scripts from Zeebe.
 
