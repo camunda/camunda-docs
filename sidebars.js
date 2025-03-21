@@ -445,6 +445,7 @@ module.exports = {
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/create-connector-from-rest",
           ],
         },
       ],
