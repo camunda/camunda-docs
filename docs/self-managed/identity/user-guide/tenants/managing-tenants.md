@@ -36,7 +36,7 @@ On creation, the modal closes and the table updates with your new tenant.
 
 ### Assigning members
 
-Users can be assigned to a tenant. Below we show you how to assign members to a tenant.
+Users and groups can be assigned to a tenant. Below we show you how to assign members to a tenant.
 
 <Tabs groupId="memberType" defaultValue="users" queryString values={[{label: 'Users', value: 'users', },{label: 'Groups', value: 'groups', }]} >
 <TabItem value="users">
