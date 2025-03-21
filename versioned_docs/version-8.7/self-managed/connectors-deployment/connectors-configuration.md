@@ -40,6 +40,8 @@ For example, the Java configuration property`camunda.client.zeebe.grpc-address` 
 
 To use Camunda 8 SaaS, specify the connection properties:
 
+##### Environment variables
+
 ```bash
 CAMUNDA_CLIENT_MODE=saas
 CAMUNDA_CLIENT_CLUSTERID=xxx
@@ -48,7 +50,22 @@ CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
 CAMUNDA_CLIENT_REGION=bru-2
 ```
 
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    mode: saas
+    cluster-id: xxx
+    auth:
+      client-id: xxx
+      client-secret: xxx
+    region: bru-2
+```
+
 To use inbound connectors, specify the Operate connection properties:
+
+##### Environment variables
 
 ```bash
 OPERATE_CLIENT_PROFILE=saas
@@ -58,12 +75,40 @@ OPERATE_CLIENT_CLIENTID=xxx
 OPERATE_CLIENT_CLIENTSECRET=xxx
 ```
 
+##### YAML configuration
+
+```yaml
+operate:
+  client:
+    profile: saas
+    region: bru-2
+    clusterId: xxx
+    client-id: xxx
+    client-secret: xxx
+```
+
 If you don't need to use inbound connectors, you can disable them and remove the need for an Operate connection. This will lead to inability to use inbound capabilities like webhooks.
+
+##### Environment variables
 
 ```bash
 CAMUNDA_CONNECTOR_POLLING_ENABLED=false
 CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false
 OPERATE_CLIENT_ENABLED=false
+```
+
+##### YAML configuration
+
+```yaml
+camunda:
+  connector:
+    polling:
+      enabled: false
+    webhook:
+      enabled: false
+operate:
+  client:
+    enabled: false
 ```
 
 If you are connecting a local Connector runtime to a SaaS cluster, you may want to review our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
@@ -74,19 +119,45 @@ If you are connecting a local Connector runtime to a SaaS cluster, you may want 
 
 Specify the connection properties to connect to a self-managed Zeebe instance:
 
+##### Environment variables
+
 ```bash
 CAMUNDA_CLIENT_MODE=self-managed
 CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS=http://localhost:26500
 CAMUNDA_CLIENT_ZEEBE_RESTADDRESS=http://localhost:8080
 ```
 
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    zeebe:
+      grpc-address: http://localhost:26500
+      rest-address: http://localhost:8080
+```
+
 If using an HTTPS connection, you may need to provide a certificate to validate the gateway's certificate chain.
+
+##### Environment variables
 
 ```bash
 CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH=/path/to/certificate.pem
 ```
 
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      ca-certificate-path: /path/to/certificate.pem
+```
+
 Depending on the authentication method used by the Zeebe instance, you may need to provide authentication properties:
+
+##### Environment variables
 
 ```bash
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
@@ -95,9 +166,23 @@ CAMUNDA_CLIENT_AUTH_ISSUER=http://localhost:18080/auth/realms/camunda-platform/p
 CAMUNDA_CLIENT_AUTH_AUDIENCE=zeebe-api
 ```
 
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    auth:
+      client-id: xxx
+      client-secret: xxx
+      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      audience: zeebe-api
+```
+
 See the [Spring Zeebe SDK documentation](../../../apis-tools/spring-zeebe-sdk/getting-started#self-managed) for more information on authentication properties.
 
 Connect to Operate locally using username and password:
+
+##### Environment variables
 
 ```bash
 OPERATE_CLIENT_PROFILE=simple
@@ -106,7 +191,20 @@ OPERATE_CLIENT_USERNAME=demo
 OPERATE_CLIENT_PASSWORD=demo
 ```
 
+##### YAML configuration
+
+```yaml
+operate:
+  client:
+    profile: simple
+    base-url: http://localhost:8081
+    username: demo
+    password: demo
+```
+
 Connect to Operate in a Self-Managed environment using OAuth 2.0 credentials:
+
+##### Environment variables
 
 ```bash
 OPERATE_CLIENT_PROFILE=oidc
@@ -118,12 +216,42 @@ OPERATE_CLIENT_CLIENTSECRET=xxx
 OPERATE_CLIENT_SCOPE=xxx # optional
 ```
 
+##### YAML configuration
+
+```yaml
+operate:
+  client:
+    profile: oidc
+    base-url: http://localhost:8081
+    auth-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+    audience: operate-api
+    client-id: xxx
+    client-secret: xxx
+    scope: xxx # optional
+```
+
 If you don't need to use inbound connectors, you can disable them and remove the need for an Operate connection. This will lead to inability to use inbound capabilities like webhooks.
+
+##### Environment variables
 
 ```bash
 CAMUNDA_CONNECTOR_POLLING_ENABLED=false
 CAMUNDA_CONNECTOR_WEBHOOK_ENABLED=false
 OPERATE_CLIENT_ENABLED=false
+```
+
+##### YAML configuration
+
+```yaml
+camunda:
+  connector:
+    polling:
+      enabled: false
+    webhook:
+      enabled: false
+operate:
+  client:
+    enabled: false
 ```
 
 </TabItem>

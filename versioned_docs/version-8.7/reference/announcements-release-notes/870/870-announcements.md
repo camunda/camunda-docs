@@ -81,3 +81,14 @@ The Zeebe Java client will not be developed further and will only receive bug fi
   - Similarly, environment variables will be renamed following the same concept: `ZEEBE_REST_ADDRESS` will become `CAMUNDA_REST_ADDRESS`.
 - **Artifact ID change**:
   - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
+
+### Connectors
+
+Starting with 8.7, the connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate to the core APIs of Camunda.
+The new [Camunda Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
+
+Although the official SDK is largely compatible with the community library, some changes might be required in the configuration of self-managed Connectors deployments.
+
+We recommend updating the configuration to match the new property format of the Camunda Spring SDK to avoid any issues. The old properties will be removed in a future release.
+
+For more information, see the [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [Connectors configuration guide](/self-managed/connectors-deployment/connectors-configuration.md).

@@ -40,12 +40,27 @@ For example, the Java configuration property`camunda.client.zeebe.grpc-address` 
 
 To use Camunda 8 SaaS, specify the connection properties:
 
+##### Environment variables
+
 ```bash
 CAMUNDA_CLIENT_MODE=saas
 CAMUNDA_CLIENT_CLUSTERID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
 CAMUNDA_CLIENT_REGION=bru-2
+```
+
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    mode: saas
+    cluster-id: xxx
+    auth:
+      client-id: xxx
+      client-secret: xxx
+    region: bru-2
 ```
 
 If you are connecting a local Connector runtime to a SaaS cluster, you may want to review our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
@@ -56,25 +71,61 @@ If you are connecting a local Connector runtime to a SaaS cluster, you may want 
 
 Specify the connection properties to connect to a self-managed Zeebe instance:
 
+##### Environment variables
+
 ```bash
 CAMUNDA_CLIENT_MODE=self-managed
-CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS=http://localhost:26500
-CAMUNDA_CLIENT_ZEEBE_RESTADDRESS=http://localhost:8080
+CAMUNDA_CLIENT_GRPCADDRESS=http://localhost:26500
+CAMUNDA_CLIENT_RESTADDRESS=http://localhost:8080
+```
+
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    grpc-address: http://localhost:26500
+    rest-address: http://localhost:8080
 ```
 
 If using an HTTPS connection, you may need to provide a certificate to validate the gateway's certificate chain.
 
+##### Environment variables
+
 ```bash
-CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH=/path/to/certificate.pem
+CAMUNDA_CLIENT_CACERTIFICATEPATH=/path/to/certificate.pem
+```
+
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    ca-certificate-path: /path/to/certificate.pem
 ```
 
 Depending on the authentication method used by the Zeebe instance, you may need to provide authentication properties:
+
+##### Environment variables
 
 ```bash
 CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
 CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
 CAMUNDA_CLIENT_AUTH_ISSUER=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 CAMUNDA_CLIENT_AUTH_AUDIENCE=zeebe-api
+```
+
+##### YAML configuration
+
+```yaml
+camunda:
+  client:
+    auth:
+      client-id: xxx
+      client-secret: xxx
+      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      audience: zeebe-api
 ```
 
 See the [Camunda Spring SDK documentation](../../../apis-tools/spring-zeebe-sdk/getting-started#self-managed) for more information on authentication properties.
