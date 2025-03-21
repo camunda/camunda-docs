@@ -6,7 +6,7 @@ description: "The REST API to export dashboard definitions."
 
 This API allows users to export dashboard definitions which can later be imported into another Optimize system. Note that exporting a dashboard also exports all reports contained within the dashboard. The dashboards to be exported may be within a Collection or private entities, the API has access to both.
 
-The obtained list of entity exports can be imported into other Optimize systems either using the dedicated [import API](../import-entities.md) or [via UI](components/userguide/additional-features/export-import.md#importing-entities).
+The obtained list of entity exports can be imported into other Optimize systems either using the dedicated [import API](../import-entities.md) or [via UI](components/optimize/userguide/additional-features/export-import.md#importing-entities).
 
 ## Method & HTTP target resource
 

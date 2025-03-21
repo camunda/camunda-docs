@@ -10,7 +10,7 @@ Camunda Optimize versions are denoted as X.Y.Z as well as by an optional [pre-re
 
 ## Release Cadence
 
-Camunda Optimize has a new release every month. Every six months, a new minor/major is published, while all other months an alpha and/or patch release are released. The release dates are aligned with the rest of the [Camunda 8 Platform]($docs$/reference/release-policy).
+Camunda Optimize has a new release every month. Every six months, a new minor/major is published, while all other months an alpha and/or patch release are released. The release dates are aligned with the rest of the [Camunda 8 Platform](/reference/release-policy.md).
 
 ## Pre-Release Versions
 

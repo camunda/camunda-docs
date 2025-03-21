@@ -5,7 +5,7 @@ description: "Leverage process data and analyze areas for improvement."
 ---
 
 :::note
-New to Optimize? Visit our introductory guide to [Optimize]($docs$/guides/improve-processes-with-optimize/) to get started.
+New to Optimize? Visit our introductory guide to [Optimize](/guides/improve-processes-with-optimize.md) to get started.
 :::
 
 Camunda 8 is built to handle three key aspects of process automation:
@@ -14,7 +14,7 @@ Camunda 8 is built to handle three key aspects of process automation:
 - Automate
 - Improve
 
-Users can design process flows through our [Modeler]($docs$/components/modeler/about-modeler/). In a production scenario, users can deploy through Desktop Modeler, Web Modeler, or programmatically. A user can use [Tasklist]($docs$/components/tasklist/introduction-to-tasklist/) to review and complete tasks, and [Operate]($docs$/components/operate/operate-introduction) to view and analyze process instances.
+Users can design process flows through our [Modeler](/components/modeler/about-modeler.md). In a production scenario, users can deploy through Desktop Modeler, Web Modeler, or programmatically. A user can use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to review and complete tasks, and [Operate](/components/operate/operate-introduction.md) to view and analyze process instances.
 
 Beyond these design and automate cornerstones lies an important component to leverage our process data and analyze areas for improvement: Optimize.
 

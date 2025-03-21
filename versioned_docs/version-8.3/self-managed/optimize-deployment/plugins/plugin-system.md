@@ -85,7 +85,7 @@ If you want to use the provided Optimize dependencies instead, it is possible to
 the uber `jar` by setting the scope of those dependencies to `provided`. Then, Optimize does not load them from the plugin.
 This might have side effects if the used version in the plugin is different to the one provided by Optimize.
 To get an overview of what is already provided by Optimize, have a look at
-the [third-party libraries]($docs$/reference/dependencies).
+the [third-party libraries](/reference/dependencies.md).
 
 ## Debug your plugin
 
