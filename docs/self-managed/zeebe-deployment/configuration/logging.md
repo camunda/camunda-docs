@@ -3,7 +3,8 @@ id: logging
 title: "Logging"
 ---
 
-Zeebe uses Log4j2 framework for logging. In the distribution and the Docker image, find the default log configuration file in `config/log4j2.xml`.
+The Camunda 8 orchestration cluster uses Log4j2 framework for logging. In the distribution and the Docker image, find the default log configuration file
+in `config/log4j2.xml`.
 
 ## Google Stackdriver (JSON) logging
 
@@ -11,57 +12,43 @@ To enable Google Stackdriver compatible JSON logging, set the environment variab
 
 ## Default logging configuration
 
-- `config/log4j2.xml` (applied by default)
+You can find the default log4j2.xml used by the application in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/config/log4j2.xml).
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" shutdownHook="disable">
+It configures the [log level](https://logging.apache.org/log4j/2.x/manual/customloglevels.html) to `WARN` by default, and sets the following exceptions to `INFO`:
 
-  <Properties>
-    <Property name="log.path">${sys:app.home}/logs</Property>
-    <Property name="log.pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{actor-name}] [%t] %-5level %logger{36} - %msg%n</Property>
-    <Property name="log.stackdriver.serviceName">${env:ZEEBE_LOG_STACKDRIVER_SERVICENAME:-}</Property>
-    <Property name="log.stackdriver.serviceVersion">${env:ZEEBE_LOG_STACKDRIVER_SERVICEVERSION:-}</Property>
-  </Properties>
+- Camunda 8 (anything under `io.camunda` and `io.atomix`)
+- Spring and Spring Boot (anything under `org.springframework`)
 
-  <Appenders>
-    <Console name="Console" target="SYSTEM_OUT">
-      <PatternLayout
-        pattern="${log.pattern}"/>
-    </Console>
+:::note
+For more information, see the documentation on [log levels](../../operational-guides/monitoring/log-levels.md).
+:::
 
-    <Console name="Stackdriver" target="SYSTEM_OUT">
-      <StackdriverLayout serviceName="${log.stackdriver.serviceName}"
-        serviceVersion="${log.stackdriver.serviceVersion}" />
-    </Console>
+The log level for the Orchestration cluster is controlled via the `CAMUNDA_LOG_LEVEL` environment variable (for example, `CAMUNDA_LOG_LEVEL=DEBUG`, or
+`CAMUNDA_LOG_LEVEL=ERROR`). The log levels for individual components can be set using additional [environment variables](#component-log-levels).
 
-    <RollingFile name="RollingFile" fileName="${log.path}/zeebe.log"
-      filePattern="${log.path}/zeebe-%d{yyyy-MM-dd}-%i.log.gz">
-      <PatternLayout>
-        <Pattern>${log.pattern}</Pattern>
-      </PatternLayout>
-      <Policies>
-        <TimeBasedTriggeringPolicy/>
-        <SizeBasedTriggeringPolicy size="250 MB"/>
-      </Policies>
-    </RollingFile>
-  </Appenders>
+Additionally, it configures three possible [appenders](https://logging.apache.org/log4j/2.x/manual/appenders.html) (outputs):
 
-  <Loggers>
-    <Logger name="io.camunda.zeebe" level="${env:ZEEBE_LOG_LEVEL:-info}"/>
+- `RollingFile`: A [rolling file appender](https://logging.apache.org/log4j/2.x/manual/appenders/rolling-file.html), which prints out to a file
+  (by default, `logs/zeebe.log` relative from the distribution root). After a day, or once that file reaches 250MB, the file is "rolled" into a
+  compressed archive, and a new one is started.
+  - **This is enabled by default.** Disable the rolling file appender by setting the environment variable
+    `CAMUNDA_LOG_FILE_APPENDER_ENABLED=false`.
+- `Console`: Uses [Console Appender](https://logging.apache.org/log4j/2.x/manual/appenders.html#ConsoleAppender) and a
+  [pattern layout](https://logging.apache.org/log4j/2.x/manual/pattern-layout.html) to output directly to standard out.
+  - **This is enabled by default,** and is mutually exclusive with the `Stackdriver` appender. Select one or the other using the environment variable `ZEEBE_LOG_APPENDER` (for example, `ZEEBE_LOG_APPENDER=Console` or `ZEEBE_LOG_APPENDER=Stackdriver`).
+- `Stackdriver`: A console appender configured to print out JSON logs which conform to the
+  [expected Stackdriver format](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry).
+  - **This is not enabled by default.** Select it by setting `ZEEBE_LOG_APPENDER=Stackdriver`.
 
-    <Logger name="io.atomix" level="${env:ATOMIX_LOG_LEVEL:-warn}"/>
+### Component log levels
 
-    <Root level="info">
-      <AppenderRef ref="RollingFile"/>
+The following environment variables can be used to set the log level for individual components of the application. However, using the general
+`CAMUNDA_LOG_LEVEL` is recommended unless these components are fully understood.
 
-      <!-- remove to disable console logging -->
-      <AppenderRef ref="${env:ZEEBE_LOG_APPENDER:-Console}"/>
-    </Root>
-  </Loggers>
-
-</Configuration>
-```
+- `ZEEBE_LOG_LEVEL`: Sets the level for anything under `io.camunda.zeebe` (Zeebe related logs).
+- `ATOMIX_LOG_LEVEL`: Sets the level for anything clustering or raft related.
+- `OPTIMIZE_LOG_LEVEL`: Sets the level for anything under `io.camunda.optimize`.
+- `ES_LOG_LEVEL`: Sets the level for anything under `org.elasticsearch`.
 
 ## Change log level dynamically
 
