@@ -41,6 +41,10 @@ To add additional clusters, increment the `0` value for each variable (`CAMUNDA_
 
 ### Database
 
+:::note
+Web Modeler does not support the use of custom schemas in versions prior to `8.7.0`.
+:::
+
 Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
 
 | Environment variable                  | Description                                           | Example value                                            |
