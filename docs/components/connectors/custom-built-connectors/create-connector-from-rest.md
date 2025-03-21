@@ -4,38 +4,40 @@ title: Create a new REST-based Connector
 description: Learn how to create a new Connector based off the REST outbound Connector.
 ---
 
-## Step 1: Create a BPMN in the Web Modeler
+## Create and customize a new REST Connector template
+
+### Create a new BPMN diagram
 
 1. Open the Camunda Platform Web Modeler and log in to your account.
 2. Create a new project or open an existing one.
 3. Add a new BPMN diagram to your project:
-   - Click `New Diagram`.
-   - Name your diagram and click `Create`.
+   - Click **New Diagram**.
+   - Name your diagram and click **Create**.
 
-## Step 2: Add the REST Connector to the BPMN
+### Add the REST Connector to the diagram
 
 1. In the BPMN editor, add a new task element to your diagram.
-2. Change the task type to `Connector`:
+2. Change the task type to **Connector**:
    - Click on the task element.
-   - Select the wrench icon to change the element type and choose `REST Outbound Connector` from the Connectors section.
+   - Select the wrench icon to change the element type and choose **REST Outbound Connector** from the Connectors section.
 3. Configure the REST Connector:
    - In the properties panel, fill out the required fields such as Authentication URL, HTTP method, and any headers or payload needed for the API request.
 
-## Step 3: Save the REST Connector as a New Connector Template
+### Save the new Connector template
 
 1. With the REST Connector task selected, open the element template editor:
-   - Click the `Save as Template` button.
+   - Click the **Save as Template** button.
 2. Enter the template details:
    - **Name**: Provide a name that clearly indicates the functionality of the template.
    - **Description**: Describe the main features and benefits of the template.
    - **Icon**: Optionally, upload a custom icon with supported formats: SVG, PNG, and JPEG.
-3. Click `Create Template` to save the new connector template.
+3. Click **Create Template** to save the new connector template.
 
-## Step 4: Customize the New Connector Using the Element Template Editor
+### Customize the new Connector
 
 1. Open the template editor for further customization:
    - Select the newly created template from the template list.
-   - Click `Edit Template` to open the template editor.
+   - Click **Edit Template** to open the template editor.
 2. Customize the template:
    - Add or remove fields as required.
    - Adjust default values and input parameters.
@@ -53,20 +55,20 @@ In this guide, you'll learn how to create a custom connector that fetches data f
 
 ### Step-by-Step Instructions
 
-1. **Create a `Rest Outbound Connector` Task**
+1. **Create a Rest outbound Connector task**
 
-   - Begin by creating a `Rest outbound connector` task in your workflow.
+   - Begin by creating a **Rest outbound connector** task in your workflow.
    - Define the URL using a FEEL (Friendly Enough Expression Language) expression, utilizing the `resource` and `index` variables.
      ![img.png](./img/custom-rest-connector.png)
 
-2. **Click on `Save as`**
+2. **Click on **Save as\*\*\*\*
 
-   - Save your current progress by selecting `Save as`. This will enable you to create a template from your configured connector.
+   - Save your current progress by selecting **Save as**. This will enable you to create a template from your configured connector.
      ![img_1.png](./img/custom-save-as.png)
 
 3. **Fill Out Template Information**
 
-   - Provide essential details such as the `Template Name` and `Template Description`.
+   - Provide essential details such as the **Template Name** and **Template Description**.
    - These fields are crucial for identifying and understanding the purpose of the template.
      ![img_2.png](./img/custom-save-as-template.png)
 
@@ -100,7 +102,7 @@ In this guide, you'll learn how to create a custom connector that fetches data f
 
 9. **Publish the Connector**
 
-   - Once all configurations are complete, click on `Publish` to make your connector available for use.
+   - Once all configurations are complete, click on **Publish** to make your connector available for use.
 
 10. **Access Your New SWAPI Connector**
 

@@ -442,10 +442,10 @@ module.exports = {
               items: [
                 "components/connectors/custom-built-connectors/connector-template-generator",
                 "components/connectors/manage-connector-templates",
+                "components/connectors/custom-built-connectors/create-connector-from-rest",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
-            "components/connectors/custom-built-connectors/create-connector-from-rest",
           ],
         },
       ],
