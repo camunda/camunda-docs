@@ -11,12 +11,13 @@ A form element to select files.
 ### Configurable properties
 
 - **Title**: Title displayed on top of the file picker. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
-- **Document reference**: Data used to render the documents. This can only be an [expression](../../feel/language-guide/feel-expressions-introduction.md). The resulting value must have the following structure:
+- **Document reference**: Data used to render the documents. This should reference the same variable used when uploading a document via the [Filepicker](./forms-element-library-filepicker.md) previously. This can only be an [expression](../../feel/language-guide/feel-expressions-introduction.md). Below one example of how the structure of this variable looks like:
 
 ```json
 [
   {
     "documentId": "u123",
+    "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "metadata": {
       "fileName": "Document.pdf",
       "contentType": "application/pdf"
