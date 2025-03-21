@@ -12,10 +12,12 @@ As a Spring Boot application, Camunda 8 supports any standard
 [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.
 :::
 
-The following variables apply globally to all components within the Camunda Orchestration core: Zeebe, Operate, Tasklist, and Identity.
+The following variables apply globally to all components within the Camunda Orchestration core: Zeebe, Operate,
+Tasklist, and Identity.
 
 :::note
-The default configuration available below is for Camunda 8 Run. Helm installations have API authentication and authorizations enabled by default.
+The default configuration available below is for Camunda 8 Run. Helm installations have API authentication and
+authorizations enabled by default.
 :::
 
 <!-- updates must be made to BOTH tables -->
@@ -33,6 +35,7 @@ The default configuration available below is for Camunda 8 Run. Helm installatio
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_PASSWORD` | The password of the first user.                                                                   | `demo`                        |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_NAME`     | The name of the first user.                                                                       | Demo                          |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS[0]_EMAIL`    | The email address of the first user.                                                              | `demo@demo.com`               |
+| `CAMUNDA_SECURITY_MULTITENANCY_ENABLED`             | Enables multi-tenancy. This requires the api to be protected.                                     | `false`                       |
 
   </TabItem>
   <TabItem value="helm" label="Helm properties">
@@ -48,6 +51,7 @@ The default configuration available below is for Camunda 8 Run. Helm installatio
 | `camunda.security.initialization.users[0].password` | The password of the first user.                                                                   | `demo`                        |
 | `camunda.security.initialization.users[0].name`     | The name of the first user.                                                                       | `Demo`                        |
 | `camunda.security.initialization.users[0].email`    | The email address of the first user.                                                              | `demo@demo.com`               |
+| `camunda.security.multitenancy.enabled`             | Enables multi-tenancy. This requires the api to be protected.                                     | `false`                       |
 
   </TabItem>
 </Tabs>
