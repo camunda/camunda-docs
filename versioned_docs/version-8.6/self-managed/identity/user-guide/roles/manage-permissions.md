@@ -1,14 +1,14 @@
 ---
-id: add-assign-permission
-title: Add and assign a permission to a role
-sidebar_label: "Add and assign a permission"
-description: "Use Identity to add and assign a permission to a role."
+id: manage-permissions
+title: Manage permissions
+sidebar_label: "Manage permissions"
+description: "Use Identity to manage permissions for a role"
 ---
 
 Permissions allow you to control the level of access a user or an application has to a particular component. Traditionally, this is often described as being able to provide "read" or "write" access.
 
 Permissions are assigned to [APIs](/self-managed/identity/user-guide/additional-features/adding-an-api.md) and can be grouped to form
-[roles](/self-managed/identity/user-guide/roles/add-assign-role.md).
+[roles](/self-managed/identity/user-guide/roles/manage-roles.md).
 
 :::note
 You can create permissions for granular access control over your APIs. Permissions granted to a user or M2M application are added to the `permissions.{audience}` claim of the access token.
@@ -27,8 +27,6 @@ The preset permissions for Camunda components are:
 | Web Modeler | `write:*` <br/><br/> `admin:*` <br/><br/> `create:*` <br/> `read:*` <br/> `update:*` <br/> `delete:*` | Access to UI <br/><br/> Elevated access to UI (see [super-user mode](../../../../components/modeler/web-modeler/collaboration.md#super-user-mode) and [publishing Connector templates](../../../../components/connectors/manage-connector-templates.md#publish-a-connector-template)) <br/><br/> CRUD access to public API |
 | Zeebe       | `write:*`                                                                                             | Write access to all APIs                                                                                                                                                                                                                                                                                                   |
 
-In this guide, we will show you how to use Identity to add and assign a permission to a role.
-
 :::caution Write access needed
 To assign a permission to a role and assign a role to a user, you need to have write access to Identity.
 Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
@@ -40,7 +38,7 @@ Read our [guide on managing user access](/self-managed/identity/user-guide/autho
 
 To create a permission using Identity, take the following steps:
 
-1. Log in to the Identity UI and navigate to the **API** tab:
+1. Navigate to the **API** tab:
 
 ![add-permission-api-tab](../img/add-api-tab.png)
 
@@ -60,9 +58,9 @@ On confirmation, the modal will close, the table will update, and your new permi
 
 ### Assign a permission to a role
 
-To assign a permission to a role using Identity, take the following steps:
+To assign a permission to a role, take the following steps:
 
-1. Log in to the Identity UI and navigate to the **Roles** tab, select **Permissions > Assign Permission**:
+1. Navigate to the **Roles** tab, select **Permissions > Assign Permission**:
 
 ![assign-a-permission-tab](../img/assign-a-permission-tab.png)
 
@@ -73,3 +71,15 @@ To assign a permission to a role using Identity, take the following steps:
 On confirmation, the modal will close, the table will update, and your assigned permission will be shown:
 
 ![assign-a-permission-refreshed-table](../img/assign-a-permission-refreshed-table.png)
+
+### Delete a permission from a role
+
+To delete a permission from a role, take the following steps:
+
+1. Navigate to the **Roles** tab.
+
+2. Navigate to the **Permissions** tab.
+
+3. Click the trash icon next to the permission you want to remove.
+
+4. On confirmation, the modal will close, the table will update, and the assigned permission will be removed from the role.

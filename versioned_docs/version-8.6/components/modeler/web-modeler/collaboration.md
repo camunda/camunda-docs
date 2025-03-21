@@ -69,7 +69,7 @@ If the role is not pre-existing, it can be created with the following permission
 - Web Modeler Internal API - `admin:*`
 - Camunda Identity Resource Server - `read:users`
 
-Refer to the documentation pages about [assigning roles](../../../self-managed/identity/user-guide/roles/add-assign-role.md) and [adding permissions](../../../self-managed/identity/user-guide/roles/add-assign-permission.md) for detailed instructions.
+Refer to the documentation pages about [assigning roles](../../../self-managed/identity/user-guide/roles/manage-roles.md) and [adding permissions](../../../self-managed/identity/user-guide/roles/manage-permissions.md) for detailed instructions.
 </TabItem>
 
 </Tabs>

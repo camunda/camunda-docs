@@ -14,7 +14,7 @@ All Web Modeler API requests require authentication. To authenticate, generate a
 :::note
 Clients using a valid generated token have access to all resources within an organization, similar to [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode).
 
-While there's no project-level access control enforced in the public API, access on Self-Managed is still dependent on the [CRUD operations assigned](/self-managed/identity/user-guide/roles/add-assign-permission.md).
+While there's no project-level access control enforced in the public API, access on Self-Managed is still dependent on the [CRUD operations assigned](/self-managed/identity/user-guide/roles/manage-permissions.md).
 :::
 
 ## Generate a token
