@@ -456,7 +456,7 @@ module.exports = {
             },
             {
               label: "Release cycle",
-              to: "docs/reference/release-policy",
+              to: "docs/reference/announcements-release-notes/release-policy",
             },
           ],
         },
