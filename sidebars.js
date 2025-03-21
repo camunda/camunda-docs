@@ -43,6 +43,7 @@ module.exports = {
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
           ],
         },
+        "guides/use-shared-project-for-organization-wide-collaboration",
       ],
     },
     {
@@ -675,6 +676,21 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "Identity",
+      link: {
+        type: "doc",
+        id: "components/identity/identity-introduction",
+      },
+      items: [
+        "components/identity/identity-introduction",
+        "components/identity/authorization",
+        "components/identity/user",
+      ],
+    },
+    {
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
@@ -709,18 +725,6 @@ module.exports = {
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
-          ],
-          "Camunda 7 specific": [
-            "components/best-practices/architecture/deciding-about-your-stack-c7",
-            "components/best-practices/architecture/sizing-your-environment-c7",
-            "components/best-practices/development/invoking-services-from-the-process-c7",
-            "components/best-practices/development/understanding-transaction-handling-c7",
-            "components/best-practices/development/testing-process-definitions-c7",
-            "components/best-practices/development/routing-events-to-processes-c7",
-            "components/best-practices/operations/operating-camunda-c7",
-            "components/best-practices/operations/performance-tuning-camunda-c7",
-            "components/best-practices/operations/securing-camunda-c7",
-            "components/best-practices/architecture/extending-human-task-management-c7",
           ],
         },
       ],
@@ -993,46 +997,75 @@ module.exports = {
       ],
     },
   ],
-
   Reference: [
     "reference/overview",
     {
       type: "category",
-      label: "Announcements",
+      label: "Announcements and release notes",
       link: {
         type: "doc",
-        id: "reference/announcements",
+        id: "reference/announcements-release-notes/overview",
       },
       items: [
-        "reference/announcements/announcements-880",
-        "reference/announcements/announcements-870",
-        "reference/announcements/announcements-860",
-        "reference/announcements/announcements-850",
+        {
+          type: "category",
+          label: "8.8",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/880/880-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/880/880-announcements",
+            "reference/announcements-release-notes/880/880-release-notes",
+          ],
+        },
+        {
+          type: "category",
+          label: "8.7",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/870/870-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/870/870-announcements",
+            "reference/announcements-release-notes/870/870-release-notes",
+          ],
+        },
+        {
+          type: "category",
+          label: "8.6",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/860/860-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/860/860-announcements",
+            "reference/announcements-release-notes/860/860-release-notes",
+          ],
+        },
+        {
+          type: "category",
+          label: "8.5",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/850/850-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/850/850-announcements",
+            "reference/announcements-release-notes/850/850-release-notes",
+          ],
+        },
+        "reference/announcements-release-notes/release-policy",
       ],
     },
-    {
-      type: "category",
-      label: "Release notes",
-      link: {
-        type: "doc",
-        id: "reference/release-notes/release-notes",
-      },
-      items: [
-        "reference/release-notes/880",
-        "reference/release-notes/870",
-        "reference/release-notes/860",
-        "reference/release-notes/850",
-      ],
-    },
-    "reference/contact",
     "reference/supported-environments",
+    "reference/contact",
     "reference/dependencies",
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
     "reference/licenses",
     "reference/notices",
-    "reference/release-policy",
     "reference/regions",
     {
       type: "category",
@@ -1193,6 +1226,7 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
         },
+        "self-managed/operational-guides/data-purge",
         {
           type: "doc",
           label: "Configure components",
@@ -1399,13 +1433,13 @@ module.exports = {
           Identity: [
             "self-managed/identity/what-is-identity",
             {
-              "Orchestration Cluster Identity": [
+              "Identity for Orchestration clusters": [
                 "self-managed/identity/orchestration-identity/installation",
                 "self-managed/identity/orchestration-identity/configuration",
               ],
             },
             {
-              "Identity for Web Modeler and Console": [
+              "Identity for Web Modeler, Console, and Optimize": [
                 "self-managed/identity/getting-started/install-identity",
                 {
                   "User guide": [
