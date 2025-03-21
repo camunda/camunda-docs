@@ -70,8 +70,6 @@ Flags passed as command line arguments take precedence over those configured via
 | "disable-dmn"                                                 | false                               |
 | "disable-form"                                                | false                               |
 | "disable-rpa"                                                 | true                                |
-| ["disable-httl-hint"](#disable-history-time-to-live-hint)     | false                               |
-| ["default-httl"](#default-history-time-to-live)               | false                               |
 | "disable-platform"                                            | false                               |
 | "disable-zeebe"                                               | false                               |
 | "disable-remote-interaction"                                  | false                               |
@@ -104,30 +102,6 @@ To disable the CMMN and DMN editing capabilities of the App, configure your `fla
 As a result, the app will only allow users to model BPMN diagrams.
 
 ![BPMN only mode](./img/bpmn-only.png)
-
-### Disable `history-time-to-live` hint
-
-<span class="badge badge--platform">Camunda 7 only</span>
-
-To disable the [history time to live hint](../../reference/modeling-guidance/rules/history-time-to-live.md) in scenarios where the engine configures HTTL, configure `flags.json`:
-
-```js
-{
-    "disable-httl-hint": true
-}
-```
-
-### Default `history-time-to-live`
-
-<span class="badge badge--platform">Camunda 7 only</span>
-
-To set a default [history time to live](../../reference/modeling-guidance/rules/history-time-to-live.md) value to be used in newly created models, configure `flags.json`:
-
-```js
-{
-    "default-httl": 30
-}
-```
 
 ### Custom `display-version` label
 
