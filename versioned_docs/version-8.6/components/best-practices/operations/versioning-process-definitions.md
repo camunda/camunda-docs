@@ -33,31 +33,14 @@ Run versions _in parallel_ for
 
 ### Migrating process instances to a new version
 
-:::caution Camunda 8
-This description is Camunda 7 specific, but with Camunda 8 you can migrate process instances in a similar fashion.
-Read more about the concept in Camunda 8 [here](../../concepts/process-instance-migration.md).
-:::
-
 _Migrate_ running instances to the newest definition when:
 
 - Deploying _patches or bug fixes_ of a process model.
 - _Avoiding operational complexity_ due to different versions running in production is a priority.
 
-Migrating process instances can be achieved either programmatically or by using the operations tooling. _Programmatically_, you need to _create a migration plan_ that describes how process instances are to be migrated from one process definition to another.
+Migrating process instances can be achieved either by using the operations tooling or by calling the Zeebe API. You can use the [Camunda 8 API (REST)](../../../apis-tools/camunda-api-rest/specifications/migrate-process-instance.api.mdx) or the [Zeebe API (gRPC)](../../../apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) to migrate a process instance.
 
-```java
-// Sample code from Camunda 7.x:
-MigrationPlan migrationPlan = processEngine.getRuntimeService()
-  .createMigrationPlan("exampleProcess:1", "exampleProcess:2")
-    .mapActivities("assessCreditWorthiness", "assessCreditWorthiness")
-    .mapActivities("validateAddress", "validatePostalAddress")
-    .mapActivities("archiveApplication", "archiveApplication")
-  .build();
-```
-
-You can then apply such a plan to a set of process instances selected by you.
-
-Learn more about [process instance migration in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-instance-migration/) in the user guide. You can also learn about [how to use Camunda 7's cockpit](https://docs.camunda.org/manual/latest/webapps/cockpit/bpmn/process-instance-migration/) there. An interesting option is, that you can export the migration plan you configured in Cockpit as JSON string. This migration plan can be applied later [via REST-API](https://docs.camunda.org/manual/latest/reference/rest/migration/), making it possible to _fully automate_ migration even if you do not want to program a migration plan in Java.
+Learn more about the concepts of [process instance migration](../../../components/concepts/process-instance-migration.md) in the components section. You can also learn [how to migrate process instances in Operate](../../../components/operate/userguide/process-instance-migration.md) in it's dedicated section.
 
 It's important to understand that process instance migration _maintains the full 'identity' of the migrated process instances_ including their unique IDs and their full history audit trail. However, as the process definition also might change fundamentally in between versions, this can have effects on the history log of a process instance which might be unexpected from an end user's or operator's perspective.
 
@@ -72,9 +55,7 @@ When planning your migration, here are some factors to consider:
   - Your latest process definition enforces some time-sensitive legal obligations or rules.
 - _How big of a difference is there between process definition versions?_ Not only the definition itself, but the data required to be present at any given time in your instance.
 - _Did supporting implementation resources change from the previous deployment?_ If a service implementation changes in the new deployment and the reference to the implementation did not change from the previous deployment, then older process instances that are in flight will utilize the newer implementation by default upon deployment of the new resources. If that breaks older instances, then you must migrate.
-- _Do I have a proper infrastructure to support “real data” testing of my migration plan?_ This might be the most important aspect. An ideal way to test your process instance migration would be to have prod-like data in some kind of staging environment that represents not only the type and quality of existing production data, but also volume, scale, and size. You run your migration plan there so that you know what to expect when it comes time to migrate in production. You also need the ability to quickly reset this data via some kind of snapshot, so that you can test over and over again. You can expect many iterations of your migration plan before you move forward with a solid plan.
-
-For Camunda 7 users there is some more information available in [these migration examples](https://github.com/camunda-consulting/migration-examples/blob/master/README.md).
+- _Do I have a proper infrastructure to support “real data” testing of my migration?_ This might be the most important aspect. An ideal way to test your process instance migration would be to have prod-like data in some kind of staging environment that represents not only the type and quality of existing production data, but also volume, scale, and size. You run your migration there so that you know what to expect when it comes time to migrate in production. You also need the ability to quickly reset this data via some kind of snapshot, so that you can test over and over again. You can expect many iterations of your migration before you move forward.
 
 ## Avoid versioning of dependant artifacts
 
@@ -146,10 +127,6 @@ Also try to avoid modeling the complete life-cycle of very long living objects, 
 Having said this, we want to emphasize that the engine is perfectly fine with handling lots of process instances for a long time. So if you want to have process instances waiting for months or years, you can still do so. Just make sure you think about all resulting implications.
 
 ### Using call activities to influence versioning behaviour of pieces
-
-:::caution Camunda 8
-With Camunda 8 you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/components/modeler/bpmn/call-activities/call-activities.md).
-:::
 
 When calling separately modeled subprocesses (i.e. _Call Activities_), the default behavior of the process engine is to call the _latest_ deployed version of that subprocess. You can change this default 'binding' behavior to call a _specific_ version or the version which was _deployed_ together with the parent process.
 
