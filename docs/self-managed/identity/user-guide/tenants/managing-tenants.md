@@ -15,7 +15,7 @@ Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to 
 ## Managing tenants
 
 :::note
-The `<default>` tenant is automatically created during Identity startup.
+The `<default>` tenant is automatically created during startup.
 :::
 
 1. Log in to the Identity UI and navigate to the **Tenants** tab.
@@ -24,7 +24,7 @@ The `<default>` tenant is automatically created during Identity startup.
 
 2. Click **Create Tenant** and a modal will open.
 
-3. Enter a name and ID for the tenant and click **Create tenant**:
+3. Enter the name, ID, and optionally a description for the tenant and click **Create tenant**:
 
 ![tenant-management-modal-1](../img/tenant-management-modal-1.png)
 
@@ -36,12 +36,12 @@ On creation, the modal closes and the table updates with your new tenant.
 
 ### Assigning members
 
-Application, groups, and individual users can be assigned to a tenant. Below we show you how to assign members to a tenant for all three:
+Users and groups can be assigned to a tenant. Below we show you how to assign members to a tenant.
 
-<Tabs groupId="memberType" defaultValue="users" queryString values={[{label: 'Users', value: 'users', },{label: 'Groups', value: 'groups', },{label: 'Applications', value: 'applications', },]} >
+<Tabs groupId="memberType" defaultValue="users" queryString values={[{label: 'Users', value: 'users', },{label: 'Groups', value: 'groups', }]} >
 <TabItem value="users">
 
-1. Click **Assigned users** to view the users assigned to the tenant, and click **Assign users**:
+1. Click **Users** to view the users assigned to the tenant, and click **Assign user**:
 
 ![tenant-management-assign-users](../img/tenant-management-assign-users-tab.png)
 
@@ -66,21 +66,6 @@ On confirmation, the modal closes, the table updates, and the assigned users are
 On confirmation, the modal closes, the table updates, and the assigned groups are shown:
 
 ![tenant-management-assign-groups-refreshed](../img/tenant-management-assign-groups-refreshed.png)
-
-</TabItem>
-<TabItem value="applications">
-
-1. Click **Assigned applications** to view the applications assigned to the tenant, and click **Assign applications**:
-
-![tenant-management-assign-applications](../img/tenant-management-assign-applications-tab.png)
-
-2. Search and select the applications to assign to the tenant. After selecting the applications, click **Assign applications**:
-
-![tenant-management-assign-applications-modal](../img/tenant-management-assign-applications-modal.png)
-
-On confirmation, the modal closes, the table updates, and the assigned applications are shown:
-
-![tenant-management-assign-applications-refreshed](../img/tenant-management-assign-applications-refreshed.png)
 
 </TabItem>
 </Tabs>
