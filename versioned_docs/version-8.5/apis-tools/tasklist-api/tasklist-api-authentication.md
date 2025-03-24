@@ -77,7 +77,7 @@ The authentication is described in [Tasklist Configuration - Authentication](/se
 When authenticating via cookie, note that Cross-Site Request Forgery (CSRF) protection must be disabled to allow this method of authentication. In a Camunda Self-Managed cluster, set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`.
 :::
 
-Another way to access the Tasklist API in a Self-Managed cluster is to send cookie headers in each request. This works for scenarios where authentication is not managed by Identity. The cookie can be obtained by using the API endpoint `/api/login`:
+Another way to access the Tasklist API in a Self-Managed cluster is to send cookie headers in each request. This works for scenarios where authentication is managed by Tasklist and not by Identity. The cookie can be obtained by using the API endpoint `/api/login`:
 
 **Example:**
 
