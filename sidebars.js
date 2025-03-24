@@ -47,6 +47,45 @@ module.exports = {
       ],
     },
     {
+      "Best Practices": [
+        "components/best-practices/best-practices-overview",
+        {
+          "Project management": [
+            "components/best-practices/management/following-the-customer-success-path",
+            "components/best-practices/management/doing-a-proper-poc",
+          ],
+          Architecture: [
+            "components/best-practices/architecture/deciding-about-your-stack",
+            "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/understanding-human-tasks-management",
+          ],
+          Development: [
+            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
+            "components/best-practices/development/service-integration-patterns",
+            "components/best-practices/development/writing-good-workers",
+            "components/best-practices/development/dealing-with-problems-and-exceptions",
+            "components/best-practices/development/handling-data-in-processes",
+            "components/best-practices/development/routing-events-to-processes",
+            "components/best-practices/development/testing-process-definitions",
+          ],
+          Modeling: [
+            "components/best-practices/modeling/creating-readable-process-models",
+            "components/best-practices/modeling/naming-bpmn-elements",
+            "components/best-practices/modeling/naming-technically-relevant-ids",
+            "components/best-practices/modeling/modeling-beyond-the-happy-path",
+            "components/best-practices/modeling/modeling-with-situation-patterns",
+            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
+            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type",
+          ],
+          Operations: [
+            "components/best-practices/operations/versioning-process-definitions",
+            "components/best-practices/operations/reporting-about-processes",
+          ],
+        },
+      ],
+    },
+    {
       type: "category",
       label: "Migrate from Camunda 7",
       link: {
@@ -103,10 +142,52 @@ module.exports = {
             "components/rpa/production",
           ],
         },
+        {
+          type: "category",
+          label: "Early access",
+          link: {
+            type: "doc",
+            id: "components/early-access/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Alpha features",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/alpha-features",
+              },
+              items: [
+                {
+                  type: "category",
+                  label: "SAP",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/sap/sap-integration",
+                  },
+                  items: [
+                    "components/early-access/alpha/sap/sap-integration",
+                    "components/early-access/alpha/sap/odata-connector",
+                    "components/early-access/alpha/sap/rfc-connector",
+                    "components/early-access/alpha/sap/btp-plugin",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "BPMN Copilot",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  },
+                  items: [
+                    "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
-    },
-    {
-      "Orchestration cluster": ["components/console/introduction-to-console"],
     },
     {
       Console: [
@@ -363,423 +444,356 @@ module.exports = {
       ],
     },
     {
-      type: "category",
-      label: "Connectors",
-      link: {
-        type: "doc",
-        id: "components/connectors/introduction-to-connectors",
-      },
-      items: [
+      "Orchestration cluster": [
         {
           type: "category",
-          label: "How to use connectors",
+          label: "Identity",
           link: {
             type: "doc",
-            id: "components/connectors/use-connectors/index",
+            id: "components/identity/identity-introduction",
           },
           items: [
-            "components/connectors/connector-types",
-            "components/connectors/use-connectors/inbound",
-            "components/connectors/use-connectors/outbound",
+            "components/identity/identity-introduction",
+            "components/identity/authorization",
+            "components/identity/user",
+          ],
+        },
+        {
+          Zeebe: [
+            "components/zeebe/zeebe-overview",
+            {
+              "Technical concepts": [
+                "components/zeebe/technical-concepts/technical-concepts-overview",
+                "components/zeebe/technical-concepts/architecture",
+                "components/zeebe/technical-concepts/clustering",
+                "components/zeebe/technical-concepts/partitions",
+                "components/zeebe/technical-concepts/internal-processing",
+                "components/zeebe/technical-concepts/process-lifecycles",
+                "components/zeebe/technical-concepts/protocols",
+              ],
+            },
+          ],
+          Operate: [
+            "components/operate/operate-introduction",
+            {
+              "User guide": [
+                "components/operate/userguide/basic-operate-navigation",
+                "components/operate/userguide/resolve-incidents-update-variables",
+                "components/operate/userguide/selections-operations",
+                "components/operate/userguide/delete-finished-instances",
+                "components/operate/userguide/delete-resources",
+                {
+                  "Process instance modification": [
+                    "components/operate/userguide/process-instance-modification",
+                    "components/operate/userguide/process-instance-batch-modification",
+                  ],
+                },
+                "components/operate/userguide/process-instance-migration",
+                "components/operate/userguide/monitor-operation-status",
+              ],
+            },
+          ],
+          Tasklist: [
+            "components/tasklist/introduction-to-tasklist",
+            {
+              "User guide": [
+                "components/tasklist/userguide/using-tasklist",
+                "components/tasklist/userguide/managing-tasks",
+                "components/tasklist/userguide/using-filters",
+                "components/tasklist/userguide/defining-task-priorities",
+                "components/tasklist/userguide/starting-processes",
+                "components/tasklist/userguide/tasklist-localization",
+              ],
+            },
           ],
         },
         {
           type: "category",
-          label: "Camunda connectors",
+          label: "Connectors",
           link: {
             type: "doc",
-            id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
-          },
-          items: [
-            {
-              "Amazon AWS": [
-                "components/connectors/out-of-the-box-connectors/amazon-bedrock",
-                "components/connectors/out-of-the-box-connectors/amazon-comprehend",
-                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
-                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
-                "components/connectors/out-of-the-box-connectors/aws-lambda",
-                "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
-                "components/connectors/out-of-the-box-connectors/amazon-sns",
-                "components/connectors/out-of-the-box-connectors/amazon-sqs",
-                "components/connectors/out-of-the-box-connectors/amazon-s3",
-                "components/connectors/out-of-the-box-connectors/amazon-textract",
-              ],
-            },
-            "components/connectors/out-of-the-box-connectors/asana",
-            "components/connectors/out-of-the-box-connectors/automation-anywhere",
-            "components/connectors/out-of-the-box-connectors/blueprism",
-            "components/connectors/out-of-the-box-connectors/box",
-            "components/connectors/out-of-the-box-connectors/easy-post",
-            "components/connectors/out-of-the-box-connectors/email",
-            "components/connectors/out-of-the-box-connectors/github",
-            "components/connectors/out-of-the-box-connectors/gitlab",
-            {
-              Google: [
-                "components/connectors/out-of-the-box-connectors/googledrive",
-                "components/connectors/out-of-the-box-connectors/google-maps-platform",
-                "components/connectors/out-of-the-box-connectors/google-sheets",
-                "components/connectors/out-of-the-box-connectors/google-gemini",
-              ],
-            },
-            "components/connectors/protocol/graphql",
-            "components/connectors/protocol/http-webhook",
-            "components/connectors/out-of-the-box-connectors/hugging-face",
-            "components/connectors/out-of-the-box-connectors/kafka",
-            {
-              Microsoft: [
-                "components/connectors/out-of-the-box-connectors/azure-open-ai",
-                "components/connectors/out-of-the-box-connectors/microsoft-teams",
-                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
-              ],
-            },
-            "components/connectors/out-of-the-box-connectors/openai",
-            "components/connectors/out-of-the-box-connectors/operate",
-            "components/connectors/protocol/polling",
-            "components/connectors/out-of-the-box-connectors/rabbitmq",
-            "components/connectors/protocol/rest",
-            "components/connectors/out-of-the-box-connectors/salesforce",
-            "components/connectors/out-of-the-box-connectors/sendgrid",
-            "components/connectors/out-of-the-box-connectors/slack",
-            "components/connectors/protocol/soap",
-            "components/connectors/out-of-the-box-connectors/sql",
-            "components/connectors/out-of-the-box-connectors/twilio",
-            "components/connectors/out-of-the-box-connectors/uipath",
-            "components/connectors/out-of-the-box-connectors/whatsapp",
-          ],
-        },
-        {
-          type: "category",
-          label: "Custom connectors",
-          link: {
-            type: "doc",
-            id: "components/connectors/custom-built-connectors/build-connector",
+            id: "components/connectors/introduction-to-connectors",
           },
           items: [
             {
               type: "category",
-              label: "Connector templates",
+              label: "How to use connectors",
               link: {
                 type: "doc",
-                id: "components/connectors/custom-built-connectors/connector-templates",
+                id: "components/connectors/use-connectors/index",
               },
               items: [
-                "components/connectors/custom-built-connectors/connector-template-generator",
-                "components/connectors/manage-connector-templates",
+                "components/connectors/connector-types",
+                "components/connectors/use-connectors/inbound",
+                "components/connectors/use-connectors/outbound",
               ],
             },
-            "components/connectors/custom-built-connectors/connector-sdk",
-          ],
-        },
-      ],
-    },
-    {
-      Zeebe: [
-        "components/zeebe/zeebe-overview",
-        {
-          "Technical concepts": [
-            "components/zeebe/technical-concepts/technical-concepts-overview",
-            "components/zeebe/technical-concepts/architecture",
-            "components/zeebe/technical-concepts/clustering",
-            "components/zeebe/technical-concepts/partitions",
-            "components/zeebe/technical-concepts/internal-processing",
-            "components/zeebe/technical-concepts/process-lifecycles",
-            "components/zeebe/technical-concepts/protocols",
-          ],
-        },
-      ],
-      Operate: [
-        "components/operate/operate-introduction",
-        {
-          "User guide": [
-            "components/operate/userguide/basic-operate-navigation",
-            "components/operate/userguide/resolve-incidents-update-variables",
-            "components/operate/userguide/selections-operations",
-            "components/operate/userguide/delete-finished-instances",
-            "components/operate/userguide/delete-resources",
             {
-              "Process instance modification": [
-                "components/operate/userguide/process-instance-modification",
-                "components/operate/userguide/process-instance-batch-modification",
-              ],
-            },
-            "components/operate/userguide/process-instance-migration",
-            "components/operate/userguide/monitor-operation-status",
-          ],
-        },
-      ],
-      Tasklist: [
-        "components/tasklist/introduction-to-tasklist",
-        {
-          "User guide": [
-            "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/userguide/managing-tasks",
-            "components/tasklist/userguide/using-filters",
-            "components/tasklist/userguide/defining-task-priorities",
-            "components/tasklist/userguide/starting-processes",
-            "components/tasklist/userguide/tasklist-localization",
-          ],
-        },
-      ],
-      Optimize: [
-        optimizeLink("What is Optimize?", "components/what-is-optimize/"),
-
-        {
-          "User guide": [
-            optimizeLink(
-              "Collections, dashboards, and reports",
-              "components/userguide/collections-dashboards-reports/"
-            ),
-            optimizeLink(
-              "User permissions",
-              "components/userguide/user-permissions/"
-            ),
-            optimizeLink("Data sources", "components/userguide/data-sources/"),
-
-            {
-              Dashboards: [
-                optimizeLink(
-                  "Creating dashboards",
-                  "components/userguide/creating-dashboards/"
-                ),
-                optimizeLink("Edit mode", "components/userguide/edit-mode/"),
-                optimizeLink("View mode", "components/userguide/view-mode/"),
-              ],
-            },
-
-            {
-              "Dashboards maintained by Camunda": [
-                optimizeLink(
-                  "Process dashboards",
-                  "components/userguide/process-dashboards/"
-                ),
-                optimizeLink(
-                  "Instant process dashboards",
-                  "components/userguide/instant-process-dashboards/"
-                ),
-              ],
-            },
-
-            optimizeLink(
-              "Creating reports",
-              "components/userguide/creating-reports/"
-            ),
-            optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
-
-            {
-              "Process analysis": [
-                optimizeLink(
-                  "Overview",
-                  "components/userguide/process-analysis/process-analysis-overview/"
-                ),
-                optimizeLink(
-                  "Task analysis",
-                  "components/userguide/process-analysis/task-analysis/"
-                ),
-                optimizeLink(
-                  "Branch analysis",
-                  "components/userguide/process-analysis/branch-analysis/"
-                ),
-                optimizeLink(
-                  "User task analytics",
-                  "components/userguide/process-analysis/user-task-analytics/"
-                ),
+              type: "category",
+              label: "Camunda connectors",
+              link: {
+                type: "doc",
+                id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
+              },
+              items: [
                 {
-                  "Report analysis": [
-                    optimizeLink(
-                      "Report process analysis",
-                      "components/userguide/process-analysis/report-analysis/overview/"
-                    ),
+                  "Amazon AWS": [
+                    "components/connectors/out-of-the-box-connectors/amazon-bedrock",
+                    "components/connectors/out-of-the-box-connectors/amazon-comprehend",
+                    "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                    "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                    "components/connectors/out-of-the-box-connectors/aws-lambda",
+                    "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
+                    "components/connectors/out-of-the-box-connectors/amazon-sns",
+                    "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                    "components/connectors/out-of-the-box-connectors/amazon-s3",
+                    "components/connectors/out-of-the-box-connectors/amazon-textract",
+                  ],
+                },
+                "components/connectors/out-of-the-box-connectors/asana",
+                "components/connectors/out-of-the-box-connectors/automation-anywhere",
+                "components/connectors/out-of-the-box-connectors/blueprism",
+                "components/connectors/out-of-the-box-connectors/box",
+                "components/connectors/out-of-the-box-connectors/easy-post",
+                "components/connectors/out-of-the-box-connectors/email",
+                "components/connectors/out-of-the-box-connectors/github",
+                "components/connectors/out-of-the-box-connectors/gitlab",
+                {
+                  Google: [
+                    "components/connectors/out-of-the-box-connectors/googledrive",
+                    "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                    "components/connectors/out-of-the-box-connectors/google-sheets",
+                    "components/connectors/out-of-the-box-connectors/google-gemini",
+                  ],
+                },
+                "components/connectors/protocol/graphql",
+                "components/connectors/protocol/http-webhook",
+                "components/connectors/out-of-the-box-connectors/hugging-face",
+                "components/connectors/out-of-the-box-connectors/kafka",
+                {
+                  Microsoft: [
+                    "components/connectors/out-of-the-box-connectors/azure-open-ai",
+                    "components/connectors/out-of-the-box-connectors/microsoft-teams",
+                    "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
+                  ],
+                },
+                "components/connectors/out-of-the-box-connectors/openai",
+                "components/connectors/out-of-the-box-connectors/operate",
+                "components/connectors/protocol/polling",
+                "components/connectors/out-of-the-box-connectors/rabbitmq",
+                "components/connectors/protocol/rest",
+                "components/connectors/out-of-the-box-connectors/salesforce",
+                "components/connectors/out-of-the-box-connectors/sendgrid",
+                "components/connectors/out-of-the-box-connectors/slack",
+                "components/connectors/protocol/soap",
+                "components/connectors/out-of-the-box-connectors/sql",
+                "components/connectors/out-of-the-box-connectors/twilio",
+                "components/connectors/out-of-the-box-connectors/uipath",
+                "components/connectors/out-of-the-box-connectors/whatsapp",
+              ],
+            },
+            {
+              type: "category",
+              label: "Custom connectors",
+              link: {
+                type: "doc",
+                id: "components/connectors/custom-built-connectors/build-connector",
+              },
+              items: [
+                {
+                  type: "category",
+                  label: "Connector templates",
+                  link: {
+                    type: "doc",
+                    id: "components/connectors/custom-built-connectors/connector-templates",
+                  },
+                  items: [
+                    "components/connectors/custom-built-connectors/connector-template-generator",
+                    "components/connectors/manage-connector-templates",
+                  ],
+                },
+                "components/connectors/custom-built-connectors/connector-sdk",
+              ],
+            },
+          ],
+        },
+        {
+          Optimize: [
+            optimizeLink("What is Optimize?", "components/what-is-optimize/"),
 
+            {
+              "User guide": [
+                optimizeLink(
+                  "Collections, dashboards, and reports",
+                  "components/userguide/collections-dashboards-reports/"
+                ),
+                optimizeLink(
+                  "User permissions",
+                  "components/userguide/user-permissions/"
+                ),
+                optimizeLink(
+                  "Data sources",
+                  "components/userguide/data-sources/"
+                ),
+
+                {
+                  Dashboards: [
+                    optimizeLink(
+                      "Creating dashboards",
+                      "components/userguide/creating-dashboards/"
+                    ),
+                    optimizeLink(
+                      "Edit mode",
+                      "components/userguide/edit-mode/"
+                    ),
+                    optimizeLink(
+                      "View mode",
+                      "components/userguide/view-mode/"
+                    ),
+                  ],
+                },
+
+                {
+                  "Dashboards maintained by Camunda": [
+                    optimizeLink(
+                      "Process dashboards",
+                      "components/userguide/process-dashboards/"
+                    ),
+                    optimizeLink(
+                      "Instant process dashboards",
+                      "components/userguide/instant-process-dashboards/"
+                    ),
+                  ],
+                },
+
+                optimizeLink(
+                  "Creating reports",
+                  "components/userguide/creating-reports/"
+                ),
+                optimizeLink(
+                  "Process KPIs",
+                  "components/userguide/process-KPIs/"
+                ),
+
+                {
+                  "Process analysis": [
+                    optimizeLink(
+                      "Overview",
+                      "components/userguide/process-analysis/process-analysis-overview/"
+                    ),
+                    optimizeLink(
+                      "Task analysis",
+                      "components/userguide/process-analysis/task-analysis/"
+                    ),
+                    optimizeLink(
+                      "Branch analysis",
+                      "components/userguide/process-analysis/branch-analysis/"
+                    ),
+                    optimizeLink(
+                      "User task analytics",
+                      "components/userguide/process-analysis/user-task-analytics/"
+                    ),
                     {
-                      "Edit mode": [
+                      "Report analysis": [
                         optimizeLink(
-                          "Overview",
-                          "components/userguide/process-analysis/report-analysis/edit-mode/"
+                          "Report process analysis",
+                          "components/userguide/process-analysis/report-analysis/overview/"
                         ),
+
+                        {
+                          "Edit mode": [
+                            optimizeLink(
+                              "Overview",
+                              "components/userguide/process-analysis/report-analysis/edit-mode/"
+                            ),
+                            optimizeLink(
+                              "Select process definitions",
+                              "components/userguide/process-analysis/report-analysis/select-process-definitions/"
+                            ),
+                            optimizeLink(
+                              "Define reports",
+                              "components/userguide/process-analysis/report-analysis/define-reports/"
+                            ),
+                            optimizeLink(
+                              "Measures",
+                              "components/userguide/process-analysis/report-analysis/measures/"
+                            ),
+                            optimizeLink(
+                              "Compare target values",
+                              "components/userguide/process-analysis/report-analysis/compare-target-values/"
+                            ),
+                            optimizeLink(
+                              "Process instance parts",
+                              "components/userguide/process-analysis/report-analysis/process-instance-parts/"
+                            ),
+                            optimizeLink(
+                              "Configure reports",
+                              "components/userguide/process-analysis/report-analysis/configure-reports/"
+                            ),
+                          ],
+                        },
+
                         optimizeLink(
-                          "Select process definitions",
-                          "components/userguide/process-analysis/report-analysis/select-process-definitions/"
-                        ),
-                        optimizeLink(
-                          "Define reports",
-                          "components/userguide/process-analysis/report-analysis/define-reports/"
-                        ),
-                        optimizeLink(
-                          "Measures",
-                          "components/userguide/process-analysis/report-analysis/measures/"
-                        ),
-                        optimizeLink(
-                          "Compare target values",
-                          "components/userguide/process-analysis/report-analysis/compare-target-values/"
-                        ),
-                        optimizeLink(
-                          "Process instance parts",
-                          "components/userguide/process-analysis/report-analysis/process-instance-parts/"
-                        ),
-                        optimizeLink(
-                          "Configure reports",
-                          "components/userguide/process-analysis/report-analysis/configure-reports/"
+                          "View mode",
+                          "components/userguide/process-analysis/report-analysis/view-mode/"
                         ),
                       ],
                     },
 
-                    optimizeLink(
-                      "View mode",
-                      "components/userguide/process-analysis/report-analysis/view-mode/"
-                    ),
+                    {
+                      Filters: [
+                        optimizeLink(
+                          "Overview",
+                          "components/userguide/process-analysis/filters/"
+                        ),
+                        optimizeLink(
+                          "Metadata filters",
+                          "components/userguide/process-analysis/metadata-filters/"
+                        ),
+                        optimizeLink(
+                          "Instance state filters",
+                          "components/userguide/process-analysis/instance-state-filters/"
+                        ),
+                        optimizeLink(
+                          "Flow node filters",
+                          "components/userguide/process-analysis/flow-node-filters/"
+                        ),
+                        optimizeLink(
+                          "Process instance filters",
+                          "components/userguide/process-analysis/process-instance-filters/"
+                        ),
+                        optimizeLink(
+                          "Variable filters",
+                          "components/userguide/process-analysis/variable-filters/"
+                        ),
+                      ],
+                    },
                   ],
                 },
-
                 {
-                  Filters: [
+                  "Additional features": [
                     optimizeLink(
-                      "Overview",
-                      "components/userguide/process-analysis/filters/"
+                      "Alerts",
+                      "components/userguide/additional-features/alerts/"
                     ),
                     optimizeLink(
-                      "Metadata filters",
-                      "components/userguide/process-analysis/metadata-filters/"
+                      "Export and import",
+                      "components/userguide/additional-features/export-import/"
                     ),
                     optimizeLink(
-                      "Instance state filters",
-                      "components/userguide/process-analysis/instance-state-filters/"
+                      "Variable labeling",
+                      "components/userguide/additional-features/variable-labeling/"
                     ),
                     optimizeLink(
-                      "Flow node filters",
-                      "components/userguide/process-analysis/flow-node-filters/"
+                      "Process variants comparison",
+                      "components/userguide/additional-features/process-variants-comparison/"
                     ),
                     optimizeLink(
-                      "Process instance filters",
-                      "components/userguide/process-analysis/process-instance-filters/"
-                    ),
-                    optimizeLink(
-                      "Variable filters",
-                      "components/userguide/process-analysis/variable-filters/"
+                      "Machine learning-ready data set",
+                      "components/userguide/additional-features/ml-dataset/"
                     ),
                   ],
                 },
-              ],
-            },
-
-            {
-              "Additional features": [
-                optimizeLink(
-                  "Alerts",
-                  "components/userguide/additional-features/alerts/"
-                ),
-                optimizeLink(
-                  "Export and import",
-                  "components/userguide/additional-features/export-import/"
-                ),
-                optimizeLink(
-                  "Variable labeling",
-                  "components/userguide/additional-features/variable-labeling/"
-                ),
-                optimizeLink(
-                  "Process variants comparison",
-                  "components/userguide/additional-features/process-variants-comparison/"
-                ),
-                optimizeLink(
-                  "Machine learning-ready data set",
-                  "components/userguide/additional-features/ml-dataset/"
-                ),
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Identity",
-      link: {
-        type: "doc",
-        id: "components/identity/identity-introduction",
-      },
-      items: [
-        "components/identity/identity-introduction",
-        "components/identity/authorization",
-        "components/identity/user",
-      ],
-    },
-    {
-      "Best Practices": [
-        "components/best-practices/best-practices-overview",
-        {
-          "Project management": [
-            "components/best-practices/management/following-the-customer-success-path",
-            "components/best-practices/management/doing-a-proper-poc",
-          ],
-          Architecture: [
-            "components/best-practices/architecture/deciding-about-your-stack",
-            "components/best-practices/architecture/sizing-your-environment",
-            "components/best-practices/architecture/understanding-human-tasks-management",
-          ],
-          Development: [
-            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
-            "components/best-practices/development/service-integration-patterns",
-            "components/best-practices/development/writing-good-workers",
-            "components/best-practices/development/dealing-with-problems-and-exceptions",
-            "components/best-practices/development/handling-data-in-processes",
-            "components/best-practices/development/routing-events-to-processes",
-            "components/best-practices/development/testing-process-definitions",
-          ],
-          Modeling: [
-            "components/best-practices/modeling/creating-readable-process-models",
-            "components/best-practices/modeling/naming-bpmn-elements",
-            "components/best-practices/modeling/naming-technically-relevant-ids",
-            "components/best-practices/modeling/modeling-beyond-the-happy-path",
-            "components/best-practices/modeling/modeling-with-situation-patterns",
-            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
-            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
-            "components/best-practices/modeling/choosing-the-resource-binding-type",
-          ],
-          Operations: [
-            "components/best-practices/operations/versioning-process-definitions",
-            "components/best-practices/operations/reporting-about-processes",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Early access",
-      link: {
-        type: "doc",
-        id: "components/early-access/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Alpha features",
-          link: {
-            type: "doc",
-            id: "components/early-access/alpha/alpha-features",
-          },
-          items: [
-            {
-              type: "category",
-              label: "SAP",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/sap/sap-integration",
-              },
-              items: [
-                "components/early-access/alpha/sap/sap-integration",
-                "components/early-access/alpha/sap/odata-connector",
-                "components/early-access/alpha/sap/rfc-connector",
-                "components/early-access/alpha/sap/btp-plugin",
-              ],
-            },
-            {
-              type: "category",
-              label: "BPMN Copilot",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              },
-              items: [
-                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
               ],
             },
           ],
