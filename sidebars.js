@@ -193,7 +193,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Intelligent document processing",
+              label: "Intelligent document processing (IDP)",
               link: {
                 type: "doc",
                 id: "components/modeler/web-modeler/idp",
