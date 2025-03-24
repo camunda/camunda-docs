@@ -64,7 +64,7 @@ Once you are happy with your script and have tested it locally, you can start au
 
 3. **Deploy and run the process**:
 
-   1. Deploy the BPMN model with the configured RPA task.
+   1. Deploy the BPMN model with the configured RPA task by clicking on the rocket (🚀) icon in Modeler.
    2. Start an instance of your process.
 
 ### Connect worker to Zeebe
