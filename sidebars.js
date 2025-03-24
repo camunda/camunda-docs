@@ -945,8 +945,8 @@ module.exports = {
             "apis-tools/node-js-sdk",
             {
               "Camunda Spring Boot": [
-                "apis-tools/camunda-spring-boot/getting-started",
-                "apis-tools/camunda-spring-boot/configuration",
+                "apis-tools/camunda-spring-boot-sdk/getting-started",
+                "apis-tools/camunda-spring-boot-sdk/configuration",
               ],
             },
           ],

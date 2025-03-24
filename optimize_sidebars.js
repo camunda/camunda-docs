@@ -2024,11 +2024,11 @@ module.exports = {
               "Camunda Spring Boot": [
                 docsLink(
                   "Getting started",
-                  "apis-tools/camunda-spring-boot/getting-started/"
+                  "apis-tools/camunda-spring-boot-sdk/getting-started/"
                 ),
                 docsLink(
                   "Configuration",
-                  "apis-tools/camunda-spring-boot/configuration/"
+                  "apis-tools/camunda-spring-boot-sdk/configuration/"
                 ),
               ],
             },

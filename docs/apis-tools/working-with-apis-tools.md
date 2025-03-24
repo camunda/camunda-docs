@@ -71,7 +71,7 @@ Additionally, visit our documentation on [Operate](../self-managed/operate-deplo
 
 ### SDKs
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/camunda-spring-boot/getting-started/", label: "Spring Zeebe", docId:"apis-tools/camunda-spring-boot/getting-started"},
+<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/camunda-spring-boot-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/camunda-spring-boot-sdk/getting-started"},
 {
 type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js", docId:"apis-tools/node-js-sdk"
 },
