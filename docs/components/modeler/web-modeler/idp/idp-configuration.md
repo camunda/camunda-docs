@@ -29,15 +29,22 @@ Once you have completed all the required prerequisites, configure IDP in a `dev`
 
 ### Add AWS connector secrets to cluster {#aws-secrets}
 
-Add your Amazon AWS IAM user _access key_ and _secret key_ as [connector secrets](/components/console/manage-clusters/manage-secrets.md) to the cluster, using the following names:
+Add the following required AWS [connector secrets](/components/console/manage-clusters/manage-secrets.md):
 
-- _Access key_: `IDP_AWS_ACCESSKEY`
-- _Secret key_: `IDP_AWS_SECRETKEY`
+| Connector secret Key | Description                                                                                                                                                | Example                                    |
+| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
+| IDP_AWS_ACCESSKEY    | Your AWS IAM user _access key_.                                                                                                                            | `AKIBFI2LDHE6MGCDUEB`                      |
+| IDP_AWS_SECRETKEY    | Your AWS IAM user _secret key_.                                                                                                                            | `mtvbk8Xb/5uFg+bqcVIyI7HUFoX1p752hJD9jtC1` |
+| IDP_AWS_REGION       | The AWS region where documents can be temporarily stored during Amazon Textract analysis. This should match the region where the AWS S3 bucket is located. | `us-east-1` (default)                      |
+| IDP_AWS_BUCKET_NAME  | The name of the AWS S3 bucket used for document storage during extraction.                                                                                 | `idp-extraction-connector` (default)       |
 
 <img src={IdpSecretsImg} alt="Connector secrets" style={{width: '750px'}} />
 
-:::note
-You can rename these connector secrets if you want to change the testing bucket used in other environments (such as `test`, `stage` or `prod`). If you do this, you must also change these names to match within the **Authentication** section of the Properties panel for any related published document extraction templates.
+:::note NOTES
+
+- To learn more about how connector secrets are used in a document extraction template, see [integrate IDP into your processes](idp-integrate.md).
+- You can rename these connector secrets if you want to change the testing bucket used in other environments (such as `test`, `stage` or `prod`). If you do this, you must also change these names to match within the **Authentication** section of the Properties panel for any related published document extraction templates.
+
 :::
 
 ## Example Self-Managed Docker IDP deployment {#idp-docker-example}

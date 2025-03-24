@@ -8,11 +8,15 @@ import IdpElementImg from './img/idp-diagram-element.png';
 
 Integrate your published document extraction templates into your end-to-end processes in Web Modeler.
 
+:::tip
+Not sure how to start integrating IDP? See [example IDP integration](idp-example.md) for a simple process example.
+:::
+
 ## Create and configure an IDP task
 
 You can apply a published document extraction template to a task or event via the append menu. For example:
 
-<img src={IdpElementImg} alt="An overview of intelligent document processing" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpElementImg} alt="An overview of intelligent document processing" style={{width: '900px', border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
 - **From the canvas:** Select an element and click the **Change element** icon to change an existing element, or use the append feature to add a new element to the diagram.
 - **From the properties panel:** Navigate to the **Template** section and click **Select**.
@@ -52,15 +56,19 @@ Example: `{{secrets.IDP_AWS_SECRETKEY}}`
 
 ### AWS S3 Bucket name
 
-Specify the name of the Amazon AWS S3 bucket where documents can be temporarily stored during Amazon Textract analysis.
+Specify the name of the AWS S3 bucket where documents can be temporarily stored during Amazon Textract analysis as a connector secret, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md). The default value is `idp-extraction-connector`.
 
-Example: `idp-extraction-connector` (for the Amazon AWS S3 bucket used for document storage during extraction).
+Example: `{{secrets.IDP_AWS_BUCKET_NAME}}` (for the AWS S3 bucket used for document storage during extraction).
+
+:::note
+The AWS S3 bucket name must be unique across all your AWS accounts.
+:::
 
 ### Region
 
-Specify the region where documents can be temporarily stored during Amazon Textract analysis. This should match the region where the AWS S3 bucket is located.
+Specify the region where documents can be temporarily stored during Amazon Textract analysis as a connector secret, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md). This should match the region where the AWS S3 bucket is located. The default region is `us-east-1`.
 
-Example: `us-east-1`
+Example: `{{secrets.IDP_AWS_REGION}}`
 
 ## Output mapping
 

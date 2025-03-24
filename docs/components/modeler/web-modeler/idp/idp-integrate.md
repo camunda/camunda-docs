@@ -56,15 +56,19 @@ Example: `{{secrets.IDP_AWS_SECRETKEY}}`
 
 ### AWS S3 Bucket name
 
-Specify the name of the Amazon AWS S3 bucket where documents can be temporarily stored during Amazon Textract analysis.
+Specify the name of the AWS S3 bucket where documents can be temporarily stored during Amazon Textract analysis as a connector secret, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md). The default value is `idp-extraction-connector`.
 
-Example: `idp-extraction-connector` (for the Amazon AWS S3 bucket used for document storage during extraction).
+Example: `{{secrets.IDP_AWS_BUCKET_NAME}}` (for the AWS S3 bucket used for document storage during extraction).
+
+:::note
+The AWS S3 bucket name must be unique across all your AWS accounts.
+:::
 
 ### Region
 
-Specify the region where documents can be temporarily stored during Amazon Textract analysis. This should match the region where the AWS S3 bucket is located.
+Specify the region where documents can be temporarily stored during Amazon Textract analysis as a connector secret, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md). This should match the region where the AWS S3 bucket is located. The default region is `us-east-1`.
 
-Example: `us-east-1` (default)
+Example: `{{secrets.IDP_AWS_REGION}}`
 
 ## Output mapping
 
