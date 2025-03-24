@@ -131,10 +131,8 @@ The build process for [publish-prod](https://github.com/camunda/camunda-docs/act
 
 Search not working for a new minor version? A specific document, published recently, not showing up in the internal search results?
 
-Our twice yearly minor releases usually line up nicely with the scheduled Algolia crawl - Tuesday early US morning.
+The Algolia crawler runs **daily** between the end of the US day and the beginning of the next European working day.
 
-If the minor version docs are deployed after Tuesday early US morning, the Algolia crawler should be manually triggered, or the internal search (DocSearch) will not work for the new minor version.
-
-Patch releases with significant or urgent updates may also require a manually triggered crawler.
+Patch releases with significant or urgent updates may require a manually triggered crawler.
 
 This requires [admin access](https://crawler.algolia.com/admin/users/login). Contact @pepopowitz or @akeller for assistance.

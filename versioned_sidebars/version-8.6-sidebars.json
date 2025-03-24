@@ -1729,26 +1729,49 @@
 
   "Reference": [
     "reference/overview",
-    "reference/announcements",
     {
       "type": "category",
-      "label": "Release notes",
+      "label": "Announcements and release notes",
       "link": {
         "type": "doc",
-        "id": "reference/release-notes/release-notes"
+        "id": "reference/announcements-release-notes/overview"
       },
-      "items": ["reference/release-notes/860", "reference/release-notes/850"]
+      "items": [
+        {
+          "type": "category",
+          "label": "8.6",
+          "link": {
+            "type": "doc",
+            "id": "reference/announcements-release-notes/860/860-announcements"
+          },
+          "items": [
+            "reference/announcements-release-notes/860/860-announcements",
+            "reference/announcements-release-notes/860/860-release-notes"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "8.5",
+          "link": {
+            "type": "doc",
+            "id": "reference/announcements-release-notes/850/850-announcements"
+          },
+          "items": [
+            "reference/announcements-release-notes/850/850-announcements",
+            "reference/announcements-release-notes/850/850-release-notes"
+          ]
+        },
+        "reference/announcements-release-notes/release-policy"
+      ]
     },
-    "reference/contact",
     "reference/supported-environments",
+    "reference/contact",
     "reference/dependencies",
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
-    "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
-    "reference/release-policy",
     "reference/regions",
     {
       "type": "category",

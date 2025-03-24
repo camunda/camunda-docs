@@ -34,7 +34,8 @@
           "DevOps lifecycle": [
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd"
           ]
-        }
+        },
+        "guides/use-shared-project-for-organization-wide-collaboration"
       ]
     },
     {
@@ -184,7 +185,7 @@
             },
             {
               "type": "category",
-              "label": "Intelligent document processing",
+              "label": "Intelligent document processing (IDP)",
               "link": {
                 "type": "doc",
                 "id": "components/modeler/web-modeler/idp"
@@ -203,7 +204,15 @@
                     "components/modeler/web-modeler/idp/idp-unstructured-extraction"
                   ]
                 },
-                "components/modeler/web-modeler/idp/idp-integrate",
+                {
+                  "type": "category",
+                  "label": "Integrate IDP into your processes",
+                  "link": {
+                    "type": "doc",
+                    "id": "components/modeler/web-modeler/idp/idp-integrate"
+                  },
+                  "items": ["components/modeler/web-modeler/idp/idp-example"]
+                },
                 "components/modeler/web-modeler/idp/idp-key-concepts",
                 "components/modeler/web-modeler/idp/idp-reference"
               ]
@@ -317,15 +326,15 @@
                 "components/modeler/bpmn/subprocesses",
                 "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
                 "components/modeler/bpmn/call-activities/call-activities",
-                "components/modeler/bpmn/event-subprocesses/event-subprocesses"
+                "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+                "components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses"
               ]
             },
             {
               "Markers": [
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
-                "components/modeler/bpmn/compensation-handler/compensation-handler",
-                "components/modeler/bpmn/ad-hoc/ad-hoc"
+                "components/modeler/bpmn/compensation-handler/compensation-handler"
               ]
             }
           ]

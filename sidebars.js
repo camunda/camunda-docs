@@ -43,6 +43,7 @@ module.exports = {
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
           ],
         },
+        "guides/use-shared-project-for-organization-wide-collaboration",
       ],
     },
     {
@@ -193,7 +194,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Intelligent document processing",
+              label: "Intelligent document processing (IDP)",
               link: {
                 type: "doc",
                 id: "components/modeler/web-modeler/idp",
@@ -214,7 +215,15 @@ module.exports = {
                   ],
                 },
                 // "components/modeler/web-modeler/idp/idp-document-automation",
-                "components/modeler/web-modeler/idp/idp-integrate",
+                {
+                  type: "category",
+                  label: "Integrate IDP into your processes",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-integrate",
+                  },
+                  items: ["components/modeler/web-modeler/idp/idp-example"],
+                },
                 "components/modeler/web-modeler/idp/idp-key-concepts",
                 "components/modeler/web-modeler/idp/idp-reference",
               ],
@@ -329,6 +338,7 @@ module.exports = {
                 "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
                 "components/modeler/bpmn/call-activities/call-activities",
                 "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+                "components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses",
               ],
             },
             {
@@ -336,7 +346,6 @@ module.exports = {
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
                 "components/modeler/bpmn/compensation-handler/compensation-handler",
-                "components/modeler/bpmn/ad-hoc/ad-hoc",
               ],
             },
           ],
@@ -674,6 +683,21 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "Identity",
+      link: {
+        type: "doc",
+        id: "components/identity/identity-introduction",
+      },
+      items: [
+        "components/identity/identity-introduction",
+        "components/identity/authorization",
+        "components/identity/user",
+      ],
+    },
+    {
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
@@ -1209,6 +1233,7 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
         },
+        "self-managed/operational-guides/data-purge",
         {
           type: "doc",
           label: "Configure components",
@@ -1415,13 +1440,13 @@ module.exports = {
           Identity: [
             "self-managed/identity/what-is-identity",
             {
-              "Orchestration Cluster Identity": [
+              "Identity for Orchestration clusters": [
                 "self-managed/identity/orchestration-identity/installation",
                 "self-managed/identity/orchestration-identity/configuration",
               ],
             },
             {
-              "Identity for Web Modeler and Console": [
+              "Identity for Web Modeler, Console, and Optimize": [
                 "self-managed/identity/getting-started/install-identity",
                 {
                   "User guide": [

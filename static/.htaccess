@@ -87,9 +87,38 @@ RewriteRule ^(.*)/(.+)/\2/?$ /$1/$2 [R=301,L]
 # disabled blog, redirect to index page.
 RewriteRule ^blog/ / [R=301,L]
 
-# Product links that I don't think we can ever remove
+# Product links that need to be preserved for Desktop Modeler, in perpetuity.
 RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
 RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
+
+# URLs that need to be preserved for connector element templates, in perpetuity.
+RewriteRule ^docs/?$ / [R=301,L]
+RewriteRule ^docs/apis-clients/operate-api/?$ /docs/apis-tools/operate-api/overview/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-dynamodb/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/?amazonsns=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/github/?github=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/kafka/?kafka=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/?rabbitmq=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rest/?$ /docs/components/connectors/protocol/rest/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/slack/?slack=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/twilio-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/twilio/?twilio=inbound [R=301,L]
+RewriteCond %{QUERY_STRING} awseventbridge=inbound
+RewriteRule ^docs/components/connectors/protocol/amazon-eventbridge/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound [R=301,L]
+RewriteCond %{QUERY_STRING} awseventbridge=outbound
+RewriteRule ^docs/components/connectors/protocol/amazon-eventbridge/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/ [R=301,L]
+RewriteRule ^docs/components/connectors/protocol/aws-lambda/?$ /docs/components/connectors/out-of-the-box-connectors/aws-lambda/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/graphql/? /docs/components/connectors/protocol/graphql/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/http-webhook/? /docs/components/connectors/protocol/http-webhook/ [R=301,L]
+
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/automation-anywhere/? /docs/components/connectors/out-of-the-box-connectors/automation-anywhere/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
+
 
 ##################################################################################
 # 3. Specific content moves
@@ -119,14 +148,20 @@ RewriteRule ^docs/8.7/components/modeler/reference/modeling-guidance/rules/histo
 RewriteRule ^docs/components/modeler/reference/modeling-guidance/rules/history-time-to-live/?$ /docs/components/modeler/reference/modeling-guidance/$1 [R=301,L]
 RewriteRule ^docs/8.5/components/modeler/reference/modeling-guidance/rules/history-time-to-live/?$ /docs/8.5/components/modeler/reference/modeling-guidance/$1 [R=301,L]
 
-
-        "components/",
-
 # Remove C7 defining templates
 RewriteRule ^docs/next/components/modeler/desktop-modeler/c7-defining-templates/?$ /docs/next/components/modeler/desktop-modeler/defining-templates/$1 [R=301,L]
 RewriteRule ^docs/8.7/components/modeler/desktop-modeler/c7-defining-templates/?$ /docs/8.7/components/modeler/desktop-modeler/defining-templates/$1 [R=301,L]
 RewriteRule ^docs/components/modeler/desktop-modeler/c7-defining-templates/?$ /docs/components/modeler/desktop-modeler/defining-templates/$1 [R=301,L]
 RewriteRule ^docs/8.5/components/modeler/desktop-modeler/c7-defining-templates/?$ /docs/8.5/components/modeler/desktop-modeler/defining-templates/$1 [R=301,L]
+
+# Restructure announcements and release notes for 8.6
+RewriteRule ^docs/reference/announcements/announcements-850/?$ /docs/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/850/?$ /docs/reference/announcements-release-notes/850/850-release-notes/$1 [R=301,L]
+RewriteRule ^docs/reference/announcements/announcements-860/?$ /docs/reference/announcements-release-notes/860/860-announcements/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/860/?$ /docs/reference/announcements-release-notes/860/860-release-notes/$1 [R=301,L]
+RewriteRule ^docs/reference/release-policy/?$ /docs/reference/announcements-release-notes/release-policy/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/?$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/reference/announcements/?$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
 
 # Restructure announcements and release notes for 8.7
 RewriteRule ^docs/8.7/reference/announcements/announcements-850/?$ /docs/8.7/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
@@ -155,8 +190,8 @@ RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-framework-lib
 RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-integration/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
 
 # Provide current to next redirect for ad-hoc
-RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc/ad-hoc/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
