@@ -85,9 +85,7 @@ For details on typical volume type usage, refer to the following examples specif
 
 ### Helm charts version matrix
 
-| Camunda version | Helm chart version                                                                      |
-| --------------- | --------------------------------------------------------------------------------------- |
-| Camunda 8.8.x   | [Helm chart 13.x](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.8/) |
+Camunda Helm chart version `13.x.x` works with Camunda version `8.8.x`. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.8/) for more details.
 
 ## Component requirements
 
