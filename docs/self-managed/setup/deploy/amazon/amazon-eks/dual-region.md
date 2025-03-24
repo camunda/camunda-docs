@@ -23,9 +23,11 @@ This guide requires you to have previously completed or reviewed the steps taken
 ## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create resources within AWS.
-- [Helm (3.16+)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
-- [Kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
+- [Helm](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Terraform](https://developer.hashicorp.com/terraform/downloads)
+
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ## Considerations
 

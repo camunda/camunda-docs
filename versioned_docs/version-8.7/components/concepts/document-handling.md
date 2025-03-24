@@ -54,6 +54,17 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 | DOCUMENT_STORE_AWS_BUCKET_TTL  | Represents the time-to-live (TTL) for documents stored in the S3 bucket. This could be used to set an expiration policy, meaning documents will be deleted automatically after a specified duration. |
 | DOCUMENT_STORE_AWS_CLASS       | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                               |
 
+### AWS API client permission requirements
+
+To ensure seamless integration and functionality of document handling with AWS services, the API client utilized must be configured with the appropriate permissions. The following AWS Identity and Access Management (IAM) permissions are necessary for the execution of operations related to document handling:
+
+| Permission        | Description                                                                                                                                                                                                                     |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `s3:ListBucket`   | This permission allows the application to verify it has access to the specified S3 bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up.               |
+| `s3:GetObject`    | This permission is required to retrieve contents and metadata of objects from Amazon S3. The API client will utilize this permission to download or access the contents of the documents that have been uploaded to the bucket. |
+| `s3:PutObject`    | To upload documents to an Amazon S3 bucket, the API client must have this permission.                                                                                                                                           |
+| `s3:DeleteObject` | This permission authorizes the API client to remove objects from the specified S3 bucket.                                                                                                                                       |
+
 </TabItem>
 
 <TabItem value='gcp'>
@@ -66,6 +77,19 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 | ------------------------- | ------------------------------------------------------------------------------- |
 | DOCUMENT_STORE_GCP_BUCKET | Defines the name of the Google Cloud Storage bucket where documents are stored. |
 | DOCUMENT_STORE_GCP_CLASS  | io.camunda.document.store.gcp.GcpDocumentStoreProvider                          |
+
+### GCP API client permission requirements
+
+To ensure seamless integration and functionality of document handling with GCP services, the API client utilized must be configured with the appropriate permissions. The following permissions are necessary for the execution of operations related to document handling:
+
+| Permission                     | Description                                                                                                                                                                                                    |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `storage.buckets.get`          | This permission allows the application to verify it has access to the specified bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up. |
+| `storage.objects.get`          | This permission allows the API client to retrieve objects from Google Cloud Storage. It is vital for downloading or accessing the contents of stored objects.                                                  |
+| `storage.objects.create`       | With this permission, the API client can upload new objects to a bucket. It is essential for adding new documents to the storage.                                                                              |
+| `storage.objects.update`       | This permission enables the API client to update contents and metadata of existing objects within a bucket.                                                                                                    |
+| `storage.objects.delete`       | This permission grants the API client the ability to delete objects from a bucket.                                                                                                                             |
+| `iam.serviceAccounts.signBlob` | This permission allows the service account to sign data as part of the process to create secure, signed URLs for accessing uploaded documents.                                                                 |
 
 </TabItem>
 
