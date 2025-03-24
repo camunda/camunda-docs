@@ -207,7 +207,7 @@ For more information, see how to [connect to an OpenID Connect provider](/self-m
 :::note
 To allow for easier testing, the Camunda Helm chart provides databases as an external dependency, such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead.
 
-This guide disables the Bitnami Elasticsearch dependency chart and uses Amazon OpenSearch, and disables the the Bitnami PostgreSQL dependency chart and uses Amazon Aurora PostgreSQL.
+This guide disables the Bitnami Elasticsearch dependency chart and uses Amazon OpenSearch. It also disables the Bitnami PostgreSQL dependency chart and uses Amazon Aurora PostgreSQL instead.
 :::
 
 You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL instance (with two databases) ready to use, complete with a username, password, and URL for each datastore. If these have not been configured, see the [prerequisites](#prerequisites) for requirements.
