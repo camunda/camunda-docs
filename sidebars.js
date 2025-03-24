@@ -1301,19 +1301,38 @@ module.exports = {
       ],
     },
     {
-      Components: [
+      Modeler: [
         {
-          Console: [
-            "self-managed/console-deployment/overview",
-            "self-managed/console-deployment/installation",
+          "Web Modeler": [
+            "self-managed/modeler/web-modeler/installation",
             {
               Configuration: [
-                "self-managed/console-deployment/configuration/configuration",
-                "self-managed/console-deployment/configuration/ssl",
+                "self-managed/modeler/web-modeler/configuration/configuration",
+                "self-managed/modeler/web-modeler/configuration/database",
+                "self-managed/modeler/web-modeler/configuration/identity",
+                "self-managed/modeler/web-modeler/configuration/logging",
+                "self-managed/modeler/web-modeler/configuration/ssl",
+              ],
+              Troubleshooting: [
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
               ],
             },
-            "self-managed/console-deployment/telemetry",
           ],
+        },
+        {
+          "Desktop Modeler": [
+            "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
+          ],
+        },
+      ],
+    },
+    {
+      "Orchestration cluster": [
+        {
           Zeebe: [
             "self-managed/zeebe-deployment/zeebe-installation",
             {
@@ -1392,6 +1411,32 @@ module.exports = {
             "self-managed/tasklist-deployment/importer-and-archiver",
             "self-managed/tasklist-deployment/tasklist-authentication",
             "self-managed/tasklist-deployment/usage-metrics",
+          ],
+          Identity: [
+            "self-managed/identity/what-is-identity",
+            {
+              "Identity for Orchestration clusters": [
+                "self-managed/identity/orchestration-identity/installation",
+                "self-managed/identity/orchestration-identity/configuration",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      "Optional components": [
+        {
+          Console: [
+            "self-managed/console-deployment/overview",
+            "self-managed/console-deployment/installation",
+            {
+              Configuration: [
+                "self-managed/console-deployment/configuration/configuration",
+                "self-managed/console-deployment/configuration/ssl",
+              ],
+            },
+            "self-managed/console-deployment/telemetry",
           ],
           Connectors: [
             "self-managed/connectors-deployment/install-and-start",
@@ -1523,36 +1568,6 @@ module.exports = {
                   ],
                 },
                 "self-managed/identity/troubleshooting/troubleshoot-identity",
-              ],
-            },
-          ],
-        },
-        {
-          Modeler: [
-            {
-              "Web Modeler": [
-                "self-managed/modeler/web-modeler/installation",
-                {
-                  Configuration: [
-                    "self-managed/modeler/web-modeler/configuration/configuration",
-                    "self-managed/modeler/web-modeler/configuration/database",
-                    "self-managed/modeler/web-modeler/configuration/identity",
-                    "self-managed/modeler/web-modeler/configuration/logging",
-                    "self-managed/modeler/web-modeler/configuration/ssl",
-                  ],
-                  Troubleshooting: [
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
-                  ],
-                },
-              ],
-            },
-            {
-              "Desktop Modeler": [
-                "self-managed/modeler/desktop-modeler/deploy-to-self-managed",
               ],
             },
           ],
