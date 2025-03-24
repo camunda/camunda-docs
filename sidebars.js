@@ -194,7 +194,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Intelligent document processing",
+              label: "Intelligent document processing (IDP)",
               link: {
                 type: "doc",
                 id: "components/modeler/web-modeler/idp",
@@ -215,7 +215,15 @@ module.exports = {
                   ],
                 },
                 // "components/modeler/web-modeler/idp/idp-document-automation",
-                "components/modeler/web-modeler/idp/idp-integrate",
+                {
+                  type: "category",
+                  label: "Integrate IDP into your processes",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-integrate",
+                  },
+                  items: ["components/modeler/web-modeler/idp/idp-example"],
+                },
                 "components/modeler/web-modeler/idp/idp-key-concepts",
                 "components/modeler/web-modeler/idp/idp-reference",
               ],
