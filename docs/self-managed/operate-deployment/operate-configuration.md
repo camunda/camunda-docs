@@ -44,28 +44,6 @@ To change the values for http header for security reasons, you can use the confi
 | camunda.operate.websecurity.httpStrictTransportSecurityMaxAgeInSeconds   | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | 63,072,000 (two years)                                                                                                                                                                                                                                                                                           |
 | camunda.operate.websecurity.httpStrictTransportSecurityIncludeSubDomains | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | true                                                                                                                                                                                                                                                                                                             |
 
-## Multi-tenancy
-
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
-clients within a single installation.
-
-From version 8.3 onwards, Operate has been enhanced to support multi-tenancy for Self-Managed setups. More information about
-the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
-
-The following configuration is required to enable multi-tenancy in Operate:
-
-| YAML path                            | Environment variable                 | Description                                         | Default value |
-| ------------------------------------ | ------------------------------------ | --------------------------------------------------- | ------------- |
-| camunda.operate.multiTenancy.enabled | CAMUNDA_OPERATE_MULTITENANCY_ENABLED | Activates the multi-tenancy feature within Operate. | false         |
-
-The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
-
-:::note
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
-
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
-:::
-
 ### Securing Operate - Zeebe interaction
 
 While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed

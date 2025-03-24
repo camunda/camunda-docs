@@ -41,7 +41,7 @@ Performing this analysis will help you understand what needs to be done to migra
 The data migrator can copy runtime and audit data from Camunda 7 to Camunda 8.
 
 :::info
-Camunda is developing the Data Migrator with a first release planned for **Camunda 8.8 (October 2024)**. Iterative improvements might follow.
+Camunda is developing the Data Migrator with a first release planned for **Camunda 8.8 (October 2025)**. Iterative improvements might follow.
 :::
 
 ![data-migration](../img/data-migration.png)

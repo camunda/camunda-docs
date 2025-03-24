@@ -43,6 +43,7 @@ module.exports = {
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
           ],
         },
+        "guides/use-shared-project-for-organization-wide-collaboration",
       ],
     },
     {
@@ -197,7 +198,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Intelligent document processing",
+              label: "Intelligent document processing (IDP)",
               link: {
                 type: "doc",
                 id: "components/modeler/web-modeler/idp",
@@ -218,7 +219,15 @@ module.exports = {
                   ],
                 },
                 // "components/modeler/web-modeler/idp/idp-document-automation",
-                "components/modeler/web-modeler/idp/idp-integrate",
+                {
+                  type: "category",
+                  label: "Integrate IDP into your processes",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-integrate",
+                  },
+                  items: ["components/modeler/web-modeler/idp/idp-example"],
+                },
                 "components/modeler/web-modeler/idp/idp-key-concepts",
                 "components/modeler/web-modeler/idp/idp-reference",
               ],
@@ -334,6 +343,7 @@ module.exports = {
                 "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
                 "components/modeler/bpmn/call-activities/call-activities",
                 "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+                "components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses",
               ],
             },
             {
@@ -341,7 +351,6 @@ module.exports = {
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
                 "components/modeler/bpmn/compensation-handler/compensation-handler",
-                "components/modeler/bpmn/ad-hoc/ad-hoc",
               ],
             },
           ],
@@ -464,6 +473,236 @@ module.exports = {
       ],
     },
     {
+      Zeebe: [
+        "components/zeebe/zeebe-overview",
+        {
+          "Technical concepts": [
+            "components/zeebe/technical-concepts/technical-concepts-overview",
+            "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/partitions",
+            "components/zeebe/technical-concepts/internal-processing",
+            "components/zeebe/technical-concepts/process-lifecycles",
+            "components/zeebe/technical-concepts/protocols",
+          ],
+        },
+      ],
+      Operate: [
+        "components/operate/operate-introduction",
+        {
+          "User guide": [
+            "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/resolve-incidents-update-variables",
+            "components/operate/userguide/selections-operations",
+            "components/operate/userguide/delete-finished-instances",
+            "components/operate/userguide/delete-resources",
+            {
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification",
+              ],
+            },
+            "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-operation-status",
+          ],
+        },
+      ],
+      Tasklist: [
+        "components/tasklist/introduction-to-tasklist",
+        {
+          "User guide": [
+            "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/userguide/managing-tasks",
+            "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
+            "components/tasklist/userguide/starting-processes",
+            "components/tasklist/userguide/tasklist-localization",
+          ],
+        },
+      ],
+      Optimize: [
+        optimizeLink("What is Optimize?", "components/what-is-optimize/"),
+
+        {
+          "User guide": [
+            optimizeLink(
+              "Collections, dashboards, and reports",
+              "components/userguide/collections-dashboards-reports/"
+            ),
+            optimizeLink(
+              "User permissions",
+              "components/userguide/user-permissions/"
+            ),
+            optimizeLink("Data sources", "components/userguide/data-sources/"),
+
+            {
+              Dashboards: [
+                optimizeLink(
+                  "Creating dashboards",
+                  "components/userguide/creating-dashboards/"
+                ),
+                optimizeLink("Edit mode", "components/userguide/edit-mode/"),
+                optimizeLink("View mode", "components/userguide/view-mode/"),
+              ],
+            },
+
+            {
+              "Dashboards maintained by Camunda": [
+                optimizeLink(
+                  "Process dashboards",
+                  "components/userguide/process-dashboards/"
+                ),
+                optimizeLink(
+                  "Instant process dashboards",
+                  "components/userguide/instant-process-dashboards/"
+                ),
+              ],
+            },
+
+            optimizeLink(
+              "Creating reports",
+              "components/userguide/creating-reports/"
+            ),
+            optimizeLink("Process KPIs", "components/userguide/process-KPIs/"),
+
+            {
+              "Process analysis": [
+                optimizeLink(
+                  "Overview",
+                  "components/userguide/process-analysis/process-analysis-overview/"
+                ),
+                optimizeLink(
+                  "Task analysis",
+                  "components/userguide/process-analysis/task-analysis/"
+                ),
+                optimizeLink(
+                  "Branch analysis",
+                  "components/userguide/process-analysis/branch-analysis/"
+                ),
+                optimizeLink(
+                  "User task analytics",
+                  "components/userguide/process-analysis/user-task-analytics/"
+                ),
+                {
+                  "Report analysis": [
+                    optimizeLink(
+                      "Report process analysis",
+                      "components/userguide/process-analysis/report-analysis/overview/"
+                    ),
+
+                    {
+                      "Edit mode": [
+                        optimizeLink(
+                          "Overview",
+                          "components/userguide/process-analysis/report-analysis/edit-mode/"
+                        ),
+                        optimizeLink(
+                          "Select process definitions",
+                          "components/userguide/process-analysis/report-analysis/select-process-definitions/"
+                        ),
+                        optimizeLink(
+                          "Define reports",
+                          "components/userguide/process-analysis/report-analysis/define-reports/"
+                        ),
+                        optimizeLink(
+                          "Measures",
+                          "components/userguide/process-analysis/report-analysis/measures/"
+                        ),
+                        optimizeLink(
+                          "Compare target values",
+                          "components/userguide/process-analysis/report-analysis/compare-target-values/"
+                        ),
+                        optimizeLink(
+                          "Process instance parts",
+                          "components/userguide/process-analysis/report-analysis/process-instance-parts/"
+                        ),
+                        optimizeLink(
+                          "Configure reports",
+                          "components/userguide/process-analysis/report-analysis/configure-reports/"
+                        ),
+                      ],
+                    },
+
+                    optimizeLink(
+                      "View mode",
+                      "components/userguide/process-analysis/report-analysis/view-mode/"
+                    ),
+                  ],
+                },
+
+                {
+                  Filters: [
+                    optimizeLink(
+                      "Overview",
+                      "components/userguide/process-analysis/filters/"
+                    ),
+                    optimizeLink(
+                      "Metadata filters",
+                      "components/userguide/process-analysis/metadata-filters/"
+                    ),
+                    optimizeLink(
+                      "Instance state filters",
+                      "components/userguide/process-analysis/instance-state-filters/"
+                    ),
+                    optimizeLink(
+                      "Flow node filters",
+                      "components/userguide/process-analysis/flow-node-filters/"
+                    ),
+                    optimizeLink(
+                      "Process instance filters",
+                      "components/userguide/process-analysis/process-instance-filters/"
+                    ),
+                    optimizeLink(
+                      "Variable filters",
+                      "components/userguide/process-analysis/variable-filters/"
+                    ),
+                  ],
+                },
+              ],
+            },
+
+            {
+              "Additional features": [
+                optimizeLink(
+                  "Alerts",
+                  "components/userguide/additional-features/alerts/"
+                ),
+                optimizeLink(
+                  "Export and import",
+                  "components/userguide/additional-features/export-import/"
+                ),
+                optimizeLink(
+                  "Variable labeling",
+                  "components/userguide/additional-features/variable-labeling/"
+                ),
+                optimizeLink(
+                  "Process variants comparison",
+                  "components/userguide/additional-features/process-variants-comparison/"
+                ),
+                optimizeLink(
+                  "Machine learning-ready data set",
+                  "components/userguide/additional-features/ml-dataset/"
+                ),
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Identity",
+      link: {
+        type: "doc",
+        id: "components/identity/identity-introduction",
+      },
+      items: [
+        "components/identity/identity-introduction",
+        "components/identity/authorization",
+        "components/identity/user",
+      ],
+    },
+    {
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
@@ -498,18 +737,6 @@ module.exports = {
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
-          ],
-          "Camunda 7 specific": [
-            "components/best-practices/architecture/deciding-about-your-stack-c7",
-            "components/best-practices/architecture/sizing-your-environment-c7",
-            "components/best-practices/development/invoking-services-from-the-process-c7",
-            "components/best-practices/development/understanding-transaction-handling-c7",
-            "components/best-practices/development/testing-process-definitions-c7",
-            "components/best-practices/development/routing-events-to-processes-c7",
-            "components/best-practices/operations/operating-camunda-c7",
-            "components/best-practices/operations/performance-tuning-camunda-c7",
-            "components/best-practices/operations/securing-camunda-c7",
-            "components/best-practices/architecture/extending-human-task-management-c7",
           ],
         },
       ],
@@ -782,46 +1009,75 @@ module.exports = {
       ],
     },
   ],
-
   Reference: [
     "reference/overview",
     {
       type: "category",
-      label: "Announcements",
+      label: "Announcements and release notes",
       link: {
         type: "doc",
-        id: "reference/announcements",
+        id: "reference/announcements-release-notes/overview",
       },
       items: [
-        "reference/announcements/announcements-880",
-        "reference/announcements/announcements-870",
-        "reference/announcements/announcements-860",
-        "reference/announcements/announcements-850",
+        {
+          type: "category",
+          label: "8.8",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/880/880-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/880/880-announcements",
+            "reference/announcements-release-notes/880/880-release-notes",
+          ],
+        },
+        {
+          type: "category",
+          label: "8.7",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/870/870-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/870/870-announcements",
+            "reference/announcements-release-notes/870/870-release-notes",
+          ],
+        },
+        {
+          type: "category",
+          label: "8.6",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/860/860-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/860/860-announcements",
+            "reference/announcements-release-notes/860/860-release-notes",
+          ],
+        },
+        {
+          type: "category",
+          label: "8.5",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/850/850-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/850/850-announcements",
+            "reference/announcements-release-notes/850/850-release-notes",
+          ],
+        },
+        "reference/announcements-release-notes/release-policy",
       ],
     },
-    {
-      type: "category",
-      label: "Release notes",
-      link: {
-        type: "doc",
-        id: "reference/release-notes/release-notes",
-      },
-      items: [
-        "reference/release-notes/880",
-        "reference/release-notes/870",
-        "reference/release-notes/860",
-        "reference/release-notes/850",
-      ],
-    },
-    "reference/contact",
     "reference/supported-environments",
+    "reference/contact",
     "reference/dependencies",
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
     "reference/licenses",
     "reference/notices",
-    "reference/release-policy",
     "reference/regions",
     {
       type: "category",
@@ -982,6 +1238,7 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
         },
+        "self-managed/operational-guides/data-purge",
         {
           type: "doc",
           label: "Configure components",
@@ -1188,13 +1445,13 @@ module.exports = {
           Identity: [
             "self-managed/identity/what-is-identity",
             {
-              "Orchestration Cluster Identity": [
+              "Identity for Orchestration clusters": [
                 "self-managed/identity/orchestration-identity/installation",
                 "self-managed/identity/orchestration-identity/configuration",
               ],
             },
             {
-              "Identity for Web Modeler and Console": [
+              "Identity for Web Modeler, Console, and Optimize": [
                 "self-managed/identity/getting-started/install-identity",
                 {
                   "User guide": [
@@ -1274,6 +1531,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
                   ],
                 },
               ],

@@ -45,9 +45,9 @@ Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full 
 
 ## Requirements
 
-- [Helm (3.16+)](https://helm.sh/docs/intro/install/)
-- [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
+- [Helm](https://helm.sh/docs/intro/install/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
 - [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
@@ -55,6 +55,8 @@ Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full 
   - Verify quotas for **VPCs, EC2 instances, and storage**.
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
+
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ## Deploy Camunda 8 via Helm charts
 
