@@ -944,9 +944,9 @@ module.exports = {
           SDKs: [
             "apis-tools/node-js-sdk",
             {
-              "Spring Zeebe": [
-                "apis-tools/spring-zeebe-sdk/getting-started",
-                "apis-tools/spring-zeebe-sdk/configuration",
+              "Camunda Spring Boot": [
+                "apis-tools/camunda-spring-boot/getting-started",
+                "apis-tools/camunda-spring-boot/configuration",
               ],
             },
           ],

@@ -33,7 +33,7 @@ If too many token requests are executed from the same source IP address in a sho
 When the rate limit is triggered, the client will receive an HTTP 429 response. Note the following workarounds:
 
 - Cache the token as it is still valid for 24 hours. The official SDKs already do this by default.
-- Keep the SDK up to date. We have noted issues in older versions of the Java SDK which did not correctly cache the token.
+- Keep the SDK up to date. We have noted issues in older versions of the Java which did not correctly cache the token.
 - Given the rate limit applies to clients with the same source IP address, be mindful of:
   - Unexpected clients running within your infrastructure.
   - Updating all clients to use a current API key if you delete an API key and create a new one.

@@ -37,7 +37,7 @@ CPT is in an early stage. It doesn't contain all features, and it is not optimiz
 
 ## Install
 
-We have two variations of CPT: for the [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) and the [Camunda Java client](/apis-tools/java-client/index.md). Choose the one depending on which library you use in your process application.
+We have two variations of CPT: for the [Spring SDK](/apis-tools/camunda-spring-boot-sdk/getting-started.md) and the [Camunda Java client](/apis-tools/java-client/index.md). Choose the one depending on which library you use in your process application.
 
 Add the following dependency to your Maven project:
 

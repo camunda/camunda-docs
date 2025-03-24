@@ -136,6 +136,9 @@ RewriteRule ^docs/8.6/apis-tools/community-clients/go-client/(.*)$ https://githu
 RewriteRule ^meta/ / [R=301,L]
 
 # Remove Tasklist GraphQL API in 8.8
+RewriteRule ^docs/next/apis-tools/spring-zeebe-sdk/(.*)$ /docs/next/apis-tools/camunda-spring-boot-sdk/ [R=301,L]
+
+# Rename Spring Zeebe SDK to Camunda Spring Boot SDK in 8.8
 RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
 
 #---------------------------------------------------------------------------------

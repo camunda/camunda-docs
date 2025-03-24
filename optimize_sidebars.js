@@ -2021,14 +2021,14 @@ module.exports = {
             docsLink("Node.js", "apis-tools/node-js-sdk/"),
 
             {
-              "Spring Zeebe": [
+              "Camunda Spring Boot": [
                 docsLink(
                   "Getting started",
-                  "apis-tools/spring-zeebe-sdk/getting-started/"
+                  "apis-tools/camunda-spring-boot/getting-started/"
                 ),
                 docsLink(
                   "Configuration",
-                  "apis-tools/spring-zeebe-sdk/configuration/"
+                  "apis-tools/camunda-spring-boot/configuration/"
                 ),
               ],
             },
