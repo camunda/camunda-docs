@@ -6,7 +6,7 @@ description: "Define which data users are authorized to see."
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-User authorization management differs depending on whether the entities to manage the authorizations for are originating from adjacent systems like imported data from the connected Camunda workflow engine such as process instances, or whether the entities are fully managed by Camunda Optimize, such as [event-based processes and instances](#) or [collections](components/userguide/collections-dashboards-reports.md). For entities originating from adjacent systems authorizations are managed in the Camunda 7 via Camunda Admin, for the latter the authorizations are managed in Camunda Optimize.
+User authorization management differs depending on whether the entities to manage the authorizations for are originating from adjacent systems like imported data from the connected Camunda workflow engine such as process instances, or whether the entities are fully managed by Camunda Optimize, such as [event-based processes and instances](#) or [collections](components/optimize/userguide/collections-dashboards-reports.md). For entities originating from adjacent systems authorizations are managed in the Camunda 7 via Camunda Admin, for the latter the authorizations are managed in Camunda Optimize.
 
 ## Camunda 7 data authorizations
 
@@ -44,7 +44,7 @@ There are entities that only exist in Camunda Optimize and authorizations to the
 
 ### Collections
 
-[Collections](components/userguide/collections-dashboards-reports.md) are the only way to share Camunda Optimize reports and dashboards with other users. Access to them is directly managed via the UI of collections; see the corresponding user guide section on [Collection - User Permissions](components/userguide/collections-dashboards-reports.md#user-permissions).
+[Collections](components/optimize/userguide/collections-dashboards-reports.md) are the only way to share Camunda Optimize reports and dashboards with other users. Access to them is directly managed via the UI of collections; see the corresponding user guide section on [Collection - User Permissions](components/optimize/userguide/collections-dashboards-reports.md#user-permissions).
 
 ### Event-based processes
 
