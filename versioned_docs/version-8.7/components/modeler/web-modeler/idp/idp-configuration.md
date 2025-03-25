@@ -69,11 +69,12 @@ To deploy and run Camunda 8 with IDP in a local development environment:
       ```
 
    1. Save and close the file.
-   1. Open the `docker-compose.yaml` file, and add your AWS connector secrets for **both** the Zeebe and Tasklist document store. The region is prepopulated with the `us-east-1` region.
+   1. Open the `.env` file, and add your AWS connector secrets as environment variables.
 
       For example:
 
       ```
+      # Document store credentials
       - DOCUMENT_STORE_AWS_BUCKET=idp-extraction-connector
       - AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
       - AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
@@ -94,8 +95,8 @@ To learn more about using Docker Compose to run Camunda Self-Managed locally, se
 
 This example deployment uses the following files:
 
-| File                    | Notes                                                                            |
-| :---------------------- | :------------------------------------------------------------------------------- |
-| `docker-compose.yaml`   | Enables IDP with `IDP_ENABLED: "true"` in the Web Modeler environment variables. |
-| `.env`                  | Environment variables to get the 8.7.0-SNAPSHOT versions of all components.      |
-| `connector-secrets.txt` | Sets the [connector secrets](#aws-secrets) required by IDP.                      |
+| File                    | Notes                                                                                  |
+| :---------------------- | :------------------------------------------------------------------------------------- |
+| `docker-compose.yaml`   | Enables IDP with `IDP_ENABLED: "true"` in the Web Modeler environment variables.       |
+| `.env`                  | Environment variables for component 8.7.0-SNAPSHOT versions and AWS connector secrets. |
+| `connector-secrets.txt` | Sets the [connector secrets](#aws-secrets) required by IDP.                            |
