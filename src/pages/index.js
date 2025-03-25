@@ -151,10 +151,10 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/apis-tools/camunda-spring-boot-sdk/getting-started/"
+                  "docs/apis-tools/spring-zeebe-sdk/getting-started/"
                 )}
               >
-                Camunda Spring Boot SDK
+                Spring Zeebe SDK
               </Link>
               <Link
                 className={clsx(
