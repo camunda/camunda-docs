@@ -34,8 +34,8 @@ Add the following required AWS [connector secrets](/components/console/manage-cl
 
 | Connector secret Key | Example                                    | Description                                                                                                                                                   |
 | :------------------- | :----------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| IDP_AWS_ACCESSKEY    | `AKIBFI2LDHE6MGCDUEB`                      | Your AWS IAM user _access key_.                                                                                                                               |
-| IDP_AWS_SECRETKEY    | `mtvbk8Xb/5uFg+bqcVIyI7HUFoX1p752hJD9jtC1` | Your AWS IAM user _secret key_.                                                                                                                               |
+| IDP_AWS_ACCESSKEY    | `AKIAIOSFODNN7EXAMPLE`                     | Your AWS IAM user _access key_.                                                                                                                               |
+| IDP_AWS_SECRETKEY    | `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` | Your AWS IAM user _secret key_.                                                                                                                               |
 | IDP_AWS_REGION       | `us-east-1` (default)                      | The AWS region where documents can be temporarily stored during Amazon Textract analysis. This should match the region where the Amazon S3 bucket is located. |
 | IDP_AWS_BUCKET_NAME  | `idp-extraction-connector` (default)       | The name of the Amazon S3 bucket used for document storage during extraction.                                                                                 |
 
@@ -62,8 +62,8 @@ To deploy and run Camunda 8 with IDP in a local development environment:
       For example:
 
       ```
-      IDP_AWS_ACCESSKEY=AKIBFI2LDHE6MGCDUEB
-      IDP_AWS_SECRETKEY=mtvbk8Xb/5uFg+bqcVIyI7HUFoX1p752hJD9jtC1
+      IDP_AWS_ACCESSKEY=AKIAIOSFODNN7EXAMPLE
+      IDP_AWS_SECRETKEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
       IDP_AWS_REGION=us-east-1
       IDP_AWS_BUCKET_NAME=idp-extraction-connector
       ```
@@ -75,8 +75,8 @@ To deploy and run Camunda 8 with IDP in a local development environment:
 
       ```
       - DOCUMENT_STORE_AWS_BUCKET=idp-extraction-connector
-      - AWS_ACCESS_KEY_ID=AKIBFI2LDHE6MGCDUEB
-      - AWS_SECRET_ACCESS_KEY=mtvbk8Xb/5uFg+bqcVIyI7HUFoX1p752hJD9jtC1
+      - AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+      - AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
       - AWS_REGION=us-east-1
       ```
 
