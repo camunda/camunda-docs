@@ -45,6 +45,10 @@ In the first step of the process, a [user task](/components/modeler/bpmn/user-ta
 - The form uses the [File picker](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) form element to upload a document.
 - The File picker element **Key** is set to `documents`. This is then bound to the **Document** input in the document extraction template.
 
+:::note
+You can also use the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to upload documents for IDP.
+:::
+
 ## Extract data
 
 In this step, the document extraction template is [applied to a task](idp-integrate.md#create-and-configure-an-idp-task) to automatically extract data from the uploaded document.
