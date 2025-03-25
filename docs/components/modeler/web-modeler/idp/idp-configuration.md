@@ -18,10 +18,11 @@ For the 8.7.0-alpha5 release IDP only offers support for Camunda 8 Self-Managed 
 
 The following prerequisites are required for IDP:
 
-| Prerequisite              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| :------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Amazon Web Services (AWS) | <ul><li><p>Create a valid [AWS Identity and Access Management (IAM) user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) with permissions configured to allow access to Amazon Bedrock, AWS S3, and Amazon Textract (for example, `AmazonBedrockFullAccess`).</p></li><li><p>Obtain and store the [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_) for this IAM user. These are required during IDP configuration.</p></li><li><p>Create an [Amazon AWS S3 bucket](https://aws.amazon.com/s3/) named `idp-extraction-connector` that can be used by IDP for document storage during document analysis and extraction.</p></li></ul> |
-| Web Modeler               | <ul><li><p>Web Modeler is required to create, manage, publish, and integrate [IDP applications](idp-applications.md) and [document extraction](idp-document-extraction.md) templates.</p></li><li><p>IDP does not support Desktop Modeler.</p></li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Prerequisite                                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Amazon Web Services (AWS) IAM user and permissions | <ul><li><p>A valid [AWS Identity and Access Management (IAM) user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) with permissions configured to allow access to Amazon Bedrock, Amazon S3, and Amazon Textract, such as:<ul><li><p>`AmazonBedrockFullAccess`</p></li><li><p>`AmazonTextractFullAccess`</p></li></ul></p></li><li><p>Access to the IDP Amazon Bedrock foundation models:<ul><li><p>For a list of models suported by IDP, see [extraction models](idp-reference.md#extraction-models).</p></li><li><p>To learn more about configuring access to foundation models, refer to [add or remove access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).</p></li></ul></p></li><li><p>The [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_) for this IAM user. This is required during IDP configuration.</p></li></ul> |
+| Amazon S3 bucket                                   | <ul><li><p>An [Amazon S3 bucket](https://aws.amazon.com/s3/) named `idp-extraction-connector` that can be used by IDP for document storage during document analysis and extraction.</p><p>If you choose to use a different bucket name, the name must be unique across all your AWS accounts.</p></li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Web Modeler                                        | <ul><li><p>Web Modeler is required to create, manage, publish, and integrate [IDP applications](idp-applications.md) and [document extraction](idp-document-extraction.md) templates.</p></li><li><p>IDP does not support Desktop Modeler.</p></li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ## Configure IDP
 
@@ -31,12 +32,12 @@ Once you have completed all the required prerequisites, configure IDP in a `dev`
 
 Add the following required AWS [connector secrets](/components/console/manage-clusters/manage-secrets.md):
 
-| Connector secret Key | Description                                                                                                                                                | Example                                    |
-| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
-| IDP_AWS_ACCESSKEY    | Your AWS IAM user _access key_.                                                                                                                            | `AKIBFI2LDHE6MGCDUEB`                      |
-| IDP_AWS_SECRETKEY    | Your AWS IAM user _secret key_.                                                                                                                            | `mtvbk8Xb/5uFg+bqcVIyI7HUFoX1p752hJD9jtC1` |
-| IDP_AWS_REGION       | The AWS region where documents can be temporarily stored during Amazon Textract analysis. This should match the region where the AWS S3 bucket is located. | `us-east-1` (default)                      |
-| IDP_AWS_BUCKET_NAME  | The name of the AWS S3 bucket used for document storage during extraction.                                                                                 | `idp-extraction-connector` (default)       |
+| Connector secret Key | Example                                    | Description                                                                                                                                                |
+| :------------------- | :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| IDP_AWS_ACCESSKEY    | `AKIBFI2LDHE6MGCDUEB`                      | Your AWS IAM user _access key_.                                                                                                                            |
+| IDP_AWS_SECRETKEY    | `mtvbk8Xb/5uFg+bqcVIyI7HUFoX1p752hJD9jtC1` | Your AWS IAM user _secret key_.                                                                                                                            |
+| IDP_AWS_REGION       | `us-east-1` (default)                      | The AWS region where documents can be temporarily stored during Amazon Textract analysis. This should match the region where the AWS S3 bucket is located. |
+| IDP_AWS_BUCKET_NAME  | `idp-extraction-connector` (default)       | The name of the Amazon S3 bucket used for document storage during extraction.                                                                              |
 
 <img src={IdpSecretsImg} alt="Connector secrets" style={{width: '750px'}} />
 
@@ -56,24 +57,34 @@ To deploy and run Camunda 8 with IDP in a local development environment:
 1. Download [camunda-snapshot-idp.zip](https://github.com/camunda/camunda-distributions/releases/download/docker-compose-8.7-alpha5-idp-enabled/camunda-snapshot-idp.zip) from the [camunda-distributions](https://github.com/camunda/camunda-distributions/releases) GitHub repository, and extract the file contents to your desired directory.
 1. In the extracted directory:
 
-   1. Open the `connector-secrets.txt` file, and locate and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively. Save and close the file.
+   1. Open the `connector-secrets.txt` file, and add your AWS connector secrets.
+
+      For example:
 
       ```
-      IDP_AWS_ACCESSKEY=<YOUR_ACCESS_KEY>
-      IDP_AWS_SECRETKEY=<YOUR_SECRET_KEY>
+      IDP_AWS_ACCESSKEY=AKIBFI2LDHE6MGCDUEB
+      IDP_AWS_SECRETKEY=mtvbk8Xb/5uFg+bqcVIyI7HUFoX1p752hJD9jtC1
+      IDP_AWS_REGION=us-east-1
+      IDP_AWS_BUCKET_NAME=idp-extraction-connector
       ```
 
-   1. Open the `docker-compose.yaml` file, and locate and replace `<YOUR_ACCESS_KEY>` and `<YOUR_SECRET_KEY>` with your AWS _access key_ and _secret access key_ respectively, for **both** the Zeebe and Tasklist document store. Save and close the file.
+   1. Save and close the file.
+   1. Open the `docker-compose.yaml` file, and add your AWS connector secrets for **both** the Zeebe and Tasklist document store. The region is prepopulated with the `us-east-1` region.
+
+      For example:
 
       ```
-      - AWS_ACCESS_KEY_ID=<YOUR_ACCESS_KEY>
-      - AWS_SECRET_ACCESS_KEY=<YOUR_SECRET_KEY>
+      - DOCUMENT_STORE_AWS_BUCKET=idp-extraction-connector
+      - AWS_ACCESS_KEY_ID=AKIBFI2LDHE6MGCDUEB
+      - AWS_SECRET_ACCESS_KEY=mtvbk8Xb/5uFg+bqcVIyI7HUFoX1p752hJD9jtC1
+      - AWS_REGION=us-east-1
       ```
 
+   1. Save and close the file.
    1. [Run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose).
 
 1. Launch Web Modeler at http://localhost:8070 and log in with the username `demo` and password `demo`.
-1. Get started with IDP by creating an [IDP application](idp-applications.md).
+1. Get started with IDP by creating a new [IDP application](idp-applications.md) in a project.
 
 :::info
 To learn more about using Docker Compose to run Camunda Self-Managed locally, see [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md).
