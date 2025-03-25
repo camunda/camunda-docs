@@ -1,11 +1,11 @@
 ---
-id: get-document
-title: "Download document"
-description: "Download a document from the Camunda 8 cluster."
-sidebar_label: "Download document"
+id: get-resource
+title: "Get resource"
+description: "Returns a deployed resource."
+sidebar_label: "Get resource"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWNty2zYQ/RUMn5KpLCmpk7p609hO4k7q8fjSPNh+AElQQkICDABK5mj47z0LkLpYkuNMO50+OJPYIrHY2zm72s0icnxio9FtdKKTqhDKRfe9SJfCcCe1OkujUTQRbnnYi1JhEyNLOsXZiZ6rXPOUcZa2MiwzumBuKtgxLyqVcnbEkryyTpj+nbpT59oJHHOHH9Iy/E0qY3Axr5mtylIbJ1KWabPSaJ02wjKdMVeXYsTGX6567OPxRY9JdVCIQpu6x3Kd8PxOwcWSG14I2KPAFpHCA1zttCGmXiTJ+ZK7KT4b8b2SRiBUZyrxOMJrBHJ24m3j09Ilp/E5xN6HDptMRcGj0SIiD3HNOiPVJGqa3tIBH8XK+vdKmHrDfMZz+1z7Xtm6F5vHhMFz/Uq0crjzidvpD33bq2+X21No3HK8tRYYMOdAXxdlRZDH9a4Q04oMsKr0qWZLveANcHZb+o3IBNiUtByDmBGuMgoG5lOhWkWkckVZUgvBqeCpMOFKiDtc8fZmwshMJr4sSEQoHuctUbfd7rOz7Ol7XAXIklx6wLjMLeFZGj2TqQhnGoWROK+o59+QY8IicTLPWUzPXyEgUlRW1NwTYLbUygpLEL0dDunXNjBLXyn/HYHgk62SRFibVXleE3tarEgJL8u8jWKgYdEdAHnBCzrbR4pehOQUHPejWCoORjX404sOh4c/8ku6qY93ImcAAPwnT5VGnjRaSt+X+R7vkEAkuPjlqyW9695tGhyziyDJUuGQfaZjyiWjlHjBGBmRit1efjhmvx++++3+1dS50o4Gg/l83jdZciBSCbD72kwGeKR/JPfasxTULXhNGPEUYrDJcwIXrdVJNDNbioSIQZhTpK3bvsOF+NpkBreorS0vr1L9RMpRN1vtesxuLs8Y6KWczGoqgi3T/k7Gq5x08FhXbhTnXH2jEnfS5TuNPrZiq6IA3l1xbhqAIuu4q9bCQNdxYiLMuv949evbLd1Ek0/X1xcsqECJoFZCDVJHCIYoiEIqWVTg5+FwiCf+EJ7eD4e+VxHiz4hEMfFQIvxQvo/CATkK36K8Nh+YVPALzedfQkYbOZGP7fape3dYRC2JT0JEocDe7Sp8xEJZNsRDYQxSphP/zUtdTuZePVV/Z7ttNS+19lJrL7W2r9ZwiElzqts52Q+fGCpH0aD7LrODxWrybGgkE2bWjaaVQWKiRSibBmxfTLV1zWhBU3AzmBEmM24kjQweQjoO5dXRxo+9/vXOEQwHNOZ1Ya1G8svTq2v2kTsx57VPJ5ncVH00PBru1EqiezSOL85YiDCQb60hdGqpsneqDcLPUdzQrGMF2pd09RVdC+mJBTfCjCuCYEmK1p7XTs9BCG/Chw8dVf74cu3RlirT/nqL+rYjhAogDJ4P+2+2GQZnqVAw2+Ku75ZgmZ9q+I61CPfRUgXmNrLbjuWd2Odwwv4KFtmbPoESmNM1yQk0V3Ef5gZJuLb8Hec6HhRcqkFrwg6Ox3/enJ+MDz6fHZ+eX50eQGPfPTgffAnCFFyt+bFc8dI9S+Bi9e3w/9wHWx448eAGaDDYcJo2gYu2XG+X26GF/GhtVQTPQs3dRotFzK24MXnT0OuwI1EVp9L6mX73Breenn+2zO2M45uoN3bLGc8rkopow/s5z172tf90X3sS0M2lfAXq/eoL4Se59+qyTdJr9rz/09jpXfuSq3rdrc7rtcJp7iEdEPKOBoExFszSrV3du1dSpMuv1o+n1Jr/Br8Efwk=
+api: eJztV0tv4zYQ/isET7to1vJus22qm5Fk07TbIHCc9pDkQEmUxY1EavmIIwj6750hZVuRnTQFip5yMCyJw29e3wyHLbVsaWh8Q+fcKKdTTu8OaMZNqkVthZI0hhXrtDSEkYzXpWp4RnQvPLmVcRwLmatbeey05tKWzQGxhTCEy6xWQlqiZNkQ4+paaWvI/HK22W7C/ltJD2jNNKu45RqtaamEF9C9lvydNyAj0Jya2QKeNf/uhOYZja12fGzzouDESfHdcXLPGyIysEzkjZBLMI5v7Qcgkxa8YjRuqW1q1GmsBjnadXeoxdRKGm5w/dN0in+7mtZwBNw2LgXHTO5K8Fr70PEM9aRKWrACEVhdlyJliBB9MwjT7pqhkm88tRgZrWqurQhGrHVd+AC9aA3GkORaVWRViLQIadmsrpghEHQTrBv5fkAfIBMimLarghkjlnJABNKLD6Ag9XzJNXzIla6YDZ9+/DQAX7Dlfvx+nQA5icqfGr7X2vXiefYPMTk/eR0gpIpJ+xxcWH012JDFe/EGVH0FIJonbMl9bQYp+HelhSVcPJwe7qqZDTIvbOHLYCkeuPRakQxSWZIrJ19iK3AxKXn1wy5rx9ougyT0DMtESQKbgTgkCCZAHiHJzfzLMfnl8PPPd+8Ka2sTR9FqtZroPP3AM2GVnii9jOAVfyj3fkIgYJqTijUkASZmIAY6WUm2dUJMzVORi5RY5R3tzSYYyIlvNy8XWVgdd4QBk50WdNxzZuR6fr7Tap6o9ntyhqmKKUuUs3FSMnlPtyndVTrWYlxVMd0zZawAgIxl1g3ceL4S93XNXxeLSxIgSKoyaCBKB0b2itCJSkhRuYrGh9MpvLHH8PbTdNohJmb8FZ5Iwh9rcN9Ta+wOkKNSkOeA5h0TEuyS6X+VGaXFUoz1Tp6UV0/ik+BRqK7P+04B8AWjrJGHXGsImUpTPBAz7L2lh8djYXsAQb0b+1Zpb5X2Vmn7Kw0WYR4sFBzBdMk9c3Dyi2m0GR+jdnCydjjLcf2wniCdhsjQNtRNB3RvC2VsF7c4h3bRAyblgWnBQK/PIS6H+lrzplQpK/3nffnDBT9i9X4dswoOT0aOyPz0akHOmOUr1vh4osqn0EfTo+leVBR9BnF2eU6Ch4F9g46whsXS3gsbhF8D7Odew6F7Cdtc4bYQnoQzzfXMYQ42rOj1eXR8D0LwJTx8WXPlt78WPt14VfDb+7TvGkIHoyedTj7uUgyMxUpJVQV7fbsEmvmZhg0cS0tnLDp0QKGncpjhUW9/rViLfQ0r5M9+3vw4waQE5qy75BKQXTIBdVEatm3+k1IlUcWEjHoVJjqe/XF9cTL78PX8+PTi6vQDIE7so/XO10CYismBHWfcbsaysaPt9mT4n65gfU4tf7QRdAu4bXV9MNq+9m42o6wB+Xg41wJpQgHd0LZNmOHXuuw6/AwnnYa59+ZuW2++QDNh8BnqO2elGV/hhu6/m/eXvffkX1zs9rrTf2Sy8eVfOnyDx3sczZ8M6t0diBecZcBnNDdIzOB2V9vB3p27HJbPpnGdnSLv/wbsZlWw
 sidebar_class_name: "get api-method"
 info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
@@ -23,18 +23,19 @@ import Heading from "@theme/Heading";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Download document"}
+  children={"Get resource"}
 ></Heading>
 
 <MethodEndpoint
   method={"get"}
-  path={"/documents/{documentId}"}
+  path={"/resources/{resourceKey}"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Download a document from the Camunda 8 cluster.
-
-Note that this is currently supported for document stores of type: AWS, GCP, in-memory, local
+Returns a deployed resource.
+:::info
+Currently, this endpoint only supports RPA resources.
+:::
 
 <Heading
   id={"request"}
@@ -46,27 +47,11 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
 <ParamsDetails
   parameters={[
     {
-      name: "documentId",
+      name: "resourceKey",
       in: "path",
       required: true,
-      description: "The ID of the document to download.",
+      description: "The unique key identifying the resource.",
       schema: { type: "string" },
-    },
-    {
-      name: "storeId",
-      in: "query",
-      required: false,
-      description:
-        "The ID of the document store to download the document from.",
-      schema: { type: "string" },
-    },
-    {
-      name: "contentHash",
-      in: "query",
-      required: false,
-      schema: { type: "string" },
-      description:
-        "The hash of the document content that was computed by the document store during upload. The hash is part of the document reference that is returned when uploading a document. This header is required when hash verification is enabled for the document store. If hash verification is enabled and the client fails to provide the correct hash, the request will be rejected.\n",
     },
   ]}
 ></ParamsDetails>
@@ -78,15 +63,46 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
   label={undefined}
   responses={{
     "200": {
-      description: "The document was downloaded successfully.",
+      description: "The resource is successfully returned.",
       content: {
-        "application/octet-stream": {
-          schema: { type: "string", format: "binary" },
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              resourceName: {
+                description:
+                  "The resource name from which this resource was parsed.",
+                type: "string",
+              },
+              version: {
+                description: "The assigned resource version.",
+                type: "integer",
+                format: "int32",
+              },
+              versionTag: {
+                description: "The version tag of this resource.",
+                type: "string",
+              },
+              resourceId: {
+                description: "The resource ID of this resource.",
+                type: "string",
+              },
+              tenantId: {
+                description: "The tenant ID of this resource.",
+                type: "string",
+              },
+              resourceKey: {
+                description: "The unique key of this resource.",
+                type: "string",
+              },
+            },
+            title: "ResourceResult",
+          },
         },
       },
     },
     "404": {
-      description: "The document with the given ID was not found.\n",
+      description: "A resource with the given key was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -127,7 +143,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {

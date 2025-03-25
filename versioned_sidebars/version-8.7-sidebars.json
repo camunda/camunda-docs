@@ -1021,8 +1021,8 @@
                     },
                     {
                       "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/report-error-for-job",
-                      "label": "Report error for job",
+                      "id": "apis-tools/camunda-api-rest/specifications/throw-job-error",
+                      "label": "Throw error for job",
                       "className": "api-method post"
                     },
                     {
@@ -1294,6 +1294,18 @@
                       "id": "apis-tools/camunda-api-rest/specifications/delete-resource",
                       "label": "Delete resource",
                       "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/camunda-api-rest/specifications/get-resource",
+                      "label": "Get resource",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/camunda-api-rest/specifications/get-resource-content",
+                      "label": "Get resource content",
+                      "className": "api-method get"
                     }
                   ]
                 },
