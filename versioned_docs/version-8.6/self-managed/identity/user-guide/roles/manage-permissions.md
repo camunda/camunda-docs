@@ -58,13 +58,13 @@ On confirmation, the modal will close, the table will update, and your new permi
 
 To assign a permission to a role, take the following steps:
 
-1. Navigate to the **Roles** tab, click the role, and select **Permissions > Assign permission**:
+1. Navigate to the **Roles** tab, click the role, and select **Permissions > Assign permission**.
 
 2. Select the API which contains the permission(s) you want to assign.
 
 3. Select the permission(s) you would like to assign and click **Add**.
 
-On confirmation, the modal will close, the table will update, and your assigned permission will be shown:
+On confirmation, the modal will close, the table will update, and your assigned permission will be shown.
 
 ### Delete a permission from a role
 
