@@ -35,7 +35,7 @@ Once you have written your script, you can test it on a local RPA worker.
    2. Unpack the `rpa-worker_*.zip` file. The zip archive contains the worker executable and an example configuration file.
    3. Start the worker by running the executable.
 
-2. **Check Desktop Modeler**: Ensure the RPA worker is now connected to Desktop Modeler. The worker should automatically connect. If not, ensure the connection URL is correct.
+2. **Check Desktop Modeler**: Ensure the RPA worker is now connected to Desktop Modeler. The worker should automatically connect. If not, click on the connection status to display additional configuration options.
 
 3. **Test the script**:
    1. Click the test tube (🧪) icon in the footer of Desktop Modeler to open the run dialog. You can add any variables you expect from the process in JSON format. Once you start the execution, the execution tab will open.
