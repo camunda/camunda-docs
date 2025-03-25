@@ -90,6 +90,7 @@ RewriteRule ^blog/ / [R=301,L]
 # Product links that need to be preserved for Desktop Modeler, in perpetuity.
 RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
 RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/$1 [R=301,L]
 
 # URLs that need to be preserved for connector element templates, in perpetuity.
 RewriteRule ^docs/?$ / [R=301,L]
