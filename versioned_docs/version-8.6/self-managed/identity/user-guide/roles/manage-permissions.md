@@ -34,49 +34,43 @@ Read our [guide on managing user access](/self-managed/identity/user-guide/autho
 
 ## Add and assigning a permission to a role
 
+:::note
+Identity does not check permission definitions for typos or misspelled words.
+:::
+
 ### Add a permission
 
 To create a permission using Identity, take the following steps:
 
-1. Navigate to the **API** tab:
-
-![add-permission-api-tab](../img/add-api-tab.png)
+1. Navigate to the **APIs** tab:
 
 2. Click the API you would like to create a permission for. This will open the details page.
 
 3. Click the **Permissions** tab beneath the API name.
 
-4. Click **Add Permission** located on the top right of the table and a modal will open.
+4. Click **Add permission** located on the top right of the table and a modal will open.
 
 5. We are now able to fill out the details of the permission. For this guide, we will use a set of example values. When you have inserted the details, click **Add**:
 
-![add-permission-modal-2](../img/add-permission-modal-2.png)
-
 On confirmation, the modal will close, the table will update, and your new permission will be shown:
-
-![add-permission-refreshed-table](../img/add-permission-refreshed-table.png)
 
 ### Assign a permission to a role
 
 To assign a permission to a role, take the following steps:
 
-1. Navigate to the **Roles** tab, select **Permissions > Assign Permission**:
+1. Navigate to the **Roles** tab, click the role, and select **Permissions > Assign permission**:
 
-![assign-a-permission-tab](../img/assign-a-permission-tab.png)
+2. Select the API which contains the permission(s) you want to assign.
 
-2. Select the API which contains the permission you want to assign.
-
-3. Select the permission you would like to assign and click **Add**.
+3. Select the permission(s) you would like to assign and click **Add**.
 
 On confirmation, the modal will close, the table will update, and your assigned permission will be shown:
-
-![assign-a-permission-refreshed-table](../img/assign-a-permission-refreshed-table.png)
 
 ### Delete a permission from a role
 
 To delete a permission from a role, take the following steps:
 
-1. Navigate to the **Roles** tab.
+1. Navigate to the **Roles** tab. Click the role you would like to delete permissions from.
 
 2. Navigate to the **Permissions** tab.
 
