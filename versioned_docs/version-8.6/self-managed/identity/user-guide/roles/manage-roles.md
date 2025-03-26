@@ -26,7 +26,7 @@ On confirmation, the modal will close, the table will update, and the new role w
 
 ## Delete a role
 
-Roles can be deleted in two ways, through the trash button in the table view or in the overflow menu once the role is selected.
+Roles can be deleted in two ways: through the trash button in the table view, or in the overflow menu once the role is selected.
 
 1. Navigate to the **Roles** tab.
 

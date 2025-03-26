@@ -17,13 +17,13 @@ To assign a user to a group, you must have write access to Identity.
 Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
 :::
 
-1. Navigate to the **Groups** tab. Select the group you would like to assign a member to from the table:
+1. Navigate to the **Groups** tab. Select the group you would like to assign a member to from the table.
 
 2. Click **Assign members** and a modal will open.
 
 3. Search and select the member to assign to the group. After selecting the member, click **Assign**.
 
-On confirmation, the modal closes, the table updates, and your assigned members are shown:
+On confirmation, the modal closes, the table updates, and your assigned members are shown.
 
 ## Remove a user from a group
 

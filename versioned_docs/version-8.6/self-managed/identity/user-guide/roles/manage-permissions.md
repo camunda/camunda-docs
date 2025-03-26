@@ -14,6 +14,8 @@ Permissions are assigned to [APIs](/self-managed/identity/user-guide/additional-
 You can create permissions for granular access control over your APIs. Permissions granted to a user or M2M application are added to the `permissions.{audience}` claim of the access token.
 :::
 
+## Preset permissions
+
 The preset permissions for Camunda components are:
 
 | Component   | Permissions                                                                                           | Descriptions                                                                                                                                                                                                                                                                                                               |
@@ -32,7 +34,7 @@ To assign a permission to a role and assign a role to a user, you need to have w
 Read our [guide on managing user access](/self-managed/identity/user-guide/authorizations/managing-user-access.md) to learn more.
 :::
 
-## Add and assigning a permission to a role
+## Add and assign a permission to a role
 
 :::note
 Identity does not check permission definitions for typos or misspelled words.
@@ -50,15 +52,15 @@ To create a permission using Identity, take the following steps:
 
 4. Click **Add permission** located on the top right of the table and a modal will open.
 
-5. We are now able to fill out the details of the permission. For this guide, we will use a set of example values. When you have inserted the details, click **Add**:
+5. Fill out the [definition](#preset-permissions) and description of the permission. When you have inserted the details, click **Add**.
 
-On confirmation, the modal will close, the table will update, and your new permission will be shown:
+On confirmation, the modal will close, the table will update, and your new permission will be shown.
 
 ### Assign a permission to a role
 
 To assign a permission to a role, take the following steps:
 
-1. Navigate to the **Roles** tab, click the role, and select **Permissions > Assign permission**.
+1. Navigate to the **Roles** tab, click the role, and select **Permissions > Assign permissions**.
 
 2. Select the API which contains the permission(s) you want to assign.
 
@@ -76,4 +78,4 @@ To delete a permission from a role, take the following steps:
 
 3. Click the trash icon next to the permission you want to remove.
 
-4. On confirmation, the modal will close, the table will update, and the assigned permission will be removed from the role.
+On confirmation, the modal will close, the table will update, and the assigned permission will be removed from the role.
