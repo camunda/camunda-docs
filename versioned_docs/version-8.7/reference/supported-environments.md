@@ -36,9 +36,9 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Clients
 
 - **Zeebe Java Client**: OpenJDK 8+
-- **Zeebe Spring SDK**: OpenJDK 17+
+- **Spring Zeebe SDK**: OpenJDK 17+
 - **Connector SDK**: OpenJDK 17+
-- **Spring SDK**: Spring Boot 3.3.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
+- **Spring SDK**: Spring Boot 3.4.x (for the exact version, check the [version matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).)
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed
@@ -104,6 +104,7 @@ Requirements for the components can be seen below:
 | Optimize    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+                                                                                                                                                                    |
 | Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                        |
+| Console     | -            | -                                                                                                                                                                                                                 |
 
 \*Not all Optimize features are supported when using OpenSearch as a database, including backups. For a full list of the features that are currently supported, please refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 

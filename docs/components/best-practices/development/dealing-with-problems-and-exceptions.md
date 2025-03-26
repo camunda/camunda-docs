@@ -14,7 +14,7 @@ description: "Take a closer look at understanding workers, handling exceptions o
 ## Understanding workers
 
 :::caution Camunda 8 only
-The description of workers targets Camunda 8, even if [external tasks in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are conceptually similar. If you are looking for Camunda 7, visit [understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/).
+The description of workers targets Camunda 8, even if [external tasks in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are conceptually similar.
 :::
 
 First, let's briefly examine how a worker operates.
@@ -44,10 +44,6 @@ A typical example scenario is the following, where a worker calls a REST endpoin
 Technical ACID transaction will only be applied in the business application. The job worker mostly needs to handle exceptions on a technical level, e.g. to control retry behavior, or pass it on to the process level, where you might need to implement business transactions.
 
 ## Handling exceptions on a technical level
-
-:::caution Camunda 8 only
-The description of handling exceptions targets Camunda 8. If you are looking for Camunda 7, visit our documentation on [operating Camunda 7](../operations/operating-camunda-c7.md).
-:::
 
 ### Leveraging retries
 

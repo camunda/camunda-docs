@@ -3634,6 +3634,11 @@
                       "type": "link",
                       "label": "Login issues",
                       "href": "/docs/8.5/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Other problems",
+                      "href": "/docs/8.5/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/"
                     }
                   ]
                 }

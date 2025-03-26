@@ -82,7 +82,7 @@ You can also find more information on the supported [configuration variables](..
 ## Docker Compose
 
 A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors Bundle is available via `docker-compose.yaml`..
-Follow the instructions in the [README](https://github.com/camunda/camunda-self-managed#docker-compose).
+Follow the instructions in the [README](https://github.com/camunda/camunda-distributions#docker-compose).
 
 :::danger
 While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](./helm-kubernetes/overview.md) in production.
@@ -98,10 +98,6 @@ This Docker Compose configuration serves two purposes:
 :::note
 We recommend to use [Helm + KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
 :::
-
-### Web Modeler
-
-An additional Docker Compose configuration to run Web Modeler is also available via `docker-compose-web-modeler.yaml`. It works the same way but runs Web Modeler only.
 
 ## Configuration hints
 

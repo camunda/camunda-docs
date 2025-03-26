@@ -62,6 +62,30 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Batch operation",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-batch-operation",
+          label: "Get batch operation",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-batch-operation-items",
+          label: "Get batch operation items",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-batch-operations",
+          label: "Search batch operations",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Clock",
       items: [
         {
@@ -235,43 +259,43 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-group",
-          label: "Create group",
+          label: "Create group (Work-in-Progress)",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/get-group",
-          label: "Get group",
+          label: "Get group (Work-in-Progress)",
           className: "api-method get",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-group",
-          label: "Update group",
+          label: "Update group (Work-in-Progress)",
           className: "api-method patch",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-group",
-          label: "Delete group",
+          label: "Delete group (Work-in-Progress)",
           className: "api-method delete",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-group",
-          label: "Assign a user to a group",
+          label: "Assign a user to a group (Work-in-Progress)",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/unassign-user-from-group",
-          label: "Unassign a user from a group",
+          label: "Unassign a user from a group (Work-in-Progress)",
           className: "api-method delete",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-groups",
-          label: "Query groups",
+          label: "Query groups (Work-in-Progress)",
           className: "api-method post",
         },
       ],
@@ -361,13 +385,13 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-mapping-rule",
-          label: "Delete a mapping rule",
+          label: "Delete a mapping rule (Work-in-Progress)",
           className: "api-method delete",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/find-mappings",
-          label: "Query mappings",
+          label: "Query mappings (Work-in-Progress)",
           className: "api-method post",
         },
       ],
@@ -417,6 +441,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/get-start-process-form",
           label: "Get process start form",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-process-definition-statistics",
+          label: "Get process definition statistics",
+          className: "api-method post",
         },
       ],
     },
@@ -487,31 +517,31 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-role",
-          label: "Create role",
+          label: "Create role (Work-in-Progress)",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/get-role",
-          label: "Get role",
+          label: "Get role (Work-in-Progress)",
           className: "api-method get",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-role",
-          label: "Update role",
+          label: "Update role (Work-in-Progress)",
           className: "api-method patch",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-role",
-          label: "Delete role",
+          label: "Delete role (Work-in-Progress)",
           className: "api-method delete",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-roles",
-          label: "Query roles",
+          label: "Query roles (Work-in-Progress)",
           className: "api-method post",
         },
       ],
@@ -548,7 +578,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-tenant",
           label: "Update tenant",
-          className: "api-method patch",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -610,12 +640,6 @@ const sidebar: SidebarsConfig = {
       type: "category",
       label: "User",
       items: [
-        {
-          type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/search-users-for-tenant",
-          label: "Query users for tenant",
-          className: "api-method post",
-        },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-user",

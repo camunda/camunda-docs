@@ -1,0 +1,187 @@
+---
+id: get-resource
+title: "Get resource"
+description: "Returns a deployed resource."
+sidebar_label: "Get resource"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV0tv4zYQ/isET7to1vJus22qm5Fk07TbIHCc9pDkQEmUxY1EavmIIwj6750hZVuRnTQFip5yMCyJw29e3wyHLbVsaWh8Q+fcKKdTTu8OaMZNqkVthZI0hhXrtDSEkYzXpWp4RnQvPLmVcRwLmatbeey05tKWzQGxhTCEy6xWQlqiZNkQ4+paaWvI/HK22W7C/ltJD2jNNKu45RqtaamEF9C9lvydNyAj0Jya2QKeNf/uhOYZja12fGzzouDESfHdcXLPGyIysEzkjZBLMI5v7Qcgkxa8YjRuqW1q1GmsBjnadXeoxdRKGm5w/dN0in+7mtZwBNw2LgXHTO5K8Fr70PEM9aRKWrACEVhdlyJliBB9MwjT7pqhkm88tRgZrWqurQhGrHVd+AC9aA3GkORaVWRViLQIadmsrpghEHQTrBv5fkAfIBMimLarghkjlnJABNKLD6Ag9XzJNXzIla6YDZ9+/DQAX7Dlfvx+nQA5icqfGr7X2vXiefYPMTk/eR0gpIpJ+xxcWH012JDFe/EGVH0FIJonbMl9bQYp+HelhSVcPJwe7qqZDTIvbOHLYCkeuPRakQxSWZIrJ19iK3AxKXn1wy5rx9ougyT0DMtESQKbgTgkCCZAHiHJzfzLMfnl8PPPd+8Ka2sTR9FqtZroPP3AM2GVnii9jOAVfyj3fkIgYJqTijUkASZmIAY6WUm2dUJMzVORi5RY5R3tzSYYyIlvNy8XWVgdd4QBk50WdNxzZuR6fr7Tap6o9ntyhqmKKUuUs3FSMnlPtyndVTrWYlxVMd0zZawAgIxl1g3ceL4S93XNXxeLSxIgSKoyaCBKB0b2itCJSkhRuYrGh9MpvLHH8PbTdNohJmb8FZ5Iwh9rcN9Ta+wOkKNSkOeA5h0TEuyS6X+VGaXFUoz1Tp6UV0/ik+BRqK7P+04B8AWjrJGHXGsImUpTPBAz7L2lh8djYXsAQb0b+1Zpb5X2Vmn7Kw0WYR4sFBzBdMk9c3Dyi2m0GR+jdnCydjjLcf2wniCdhsjQNtRNB3RvC2VsF7c4h3bRAyblgWnBQK/PIS6H+lrzplQpK/3nffnDBT9i9X4dswoOT0aOyPz0akHOmOUr1vh4osqn0EfTo+leVBR9BnF2eU6Ch4F9g46whsXS3gsbhF8D7Odew6F7Cdtc4bYQnoQzzfXMYQ42rOj1eXR8D0LwJTx8WXPlt78WPt14VfDb+7TvGkIHoyedTj7uUgyMxUpJVQV7fbsEmvmZhg0cS0tnLDp0QKGncpjhUW9/rViLfQ0r5M9+3vw4waQE5qy75BKQXTIBdVEatm3+k1IlUcWEjHoVJjqe/XF9cTL78PX8+PTi6vQDIE7so/XO10CYismBHWfcbsaysaPt9mT4n65gfU4tf7QRdAu4bXV9MNq+9m42o6wB+Xg41wJpQgHd0LZNmOHXuuw6/AwnnYa59+ZuW2++QDNh8BnqO2elGV/hhu6/m/eXvffkX1zs9rrTf2Sy8eVfOnyDx3sczZ8M6t0diBecZcBnNDdIzOB2V9vB3p27HJbPpnGdnSLv/wbsZlWw
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get resource"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/resources/{resourceKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns a deployed resource.
+:::info
+Currently, this endpoint only supports RPA resources.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "resourceKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the resource.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The resource is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              resourceName: {
+                description:
+                  "The resource name from which this resource was parsed.",
+                type: "string",
+              },
+              version: {
+                description: "The assigned resource version.",
+                type: "integer",
+                format: "int32",
+              },
+              versionTag: {
+                description: "The version tag of this resource.",
+                type: "string",
+              },
+              resourceId: {
+                description: "The resource ID of this resource.",
+                type: "string",
+              },
+              tenantId: {
+                description: "The tenant ID of this resource.",
+                type: "string",
+              },
+              resourceKey: {
+                description: "The unique key of this resource.",
+                type: "string",
+              },
+            },
+            title: "ResourceResult",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "A resource with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
