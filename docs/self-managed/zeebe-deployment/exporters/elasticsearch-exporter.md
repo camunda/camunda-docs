@@ -251,15 +251,18 @@ In this case, it is recommended to create a new custom trust store based on the 
 signed using trusted root certificate authorities.
 
 1.  First, create a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, find the
-    location of the default `cacerts` trust store: - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`. - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
+    location of the default `cacerts` trust store:
 
-        Once you have the right location, e.g. `$JAVA_HOME/lib/security/cacerts`, run the following to create a new trust store:
+    - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`.
+    - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
 
-        ```sh
-        keytool -importkeystore -srckeystore $JAVA_HOME/lib/security/cacerts -destkeystore zeebeTrustStore.jks -srcstoretype PKCS12 -deststoretype JKS
-        ```
+    Once you have the right location, e.g. `$JAVA_HOME/lib/security/cacerts`, run the following to create a new trust store:
 
-        Set any password, so long as it's at least 6 characters.
+    ```sh
+    keytool -importkeystore -srckeystore $JAVA_HOME/lib/security/cacerts -destkeystore zeebeTrustStore.jks -srcstoretype PKCS12 -deststoretype JKS
+    ```
+
+    Set any password, so long as it's at least 6 characters.
 
 2.  Add your custom certificate to to the new trust store. For example, if your custom certificate is located at `/tmp/myCustomCertificate.pem`:
 
