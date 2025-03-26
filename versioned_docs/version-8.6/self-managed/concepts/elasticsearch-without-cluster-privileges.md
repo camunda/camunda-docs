@@ -79,6 +79,8 @@ camunda:
       ilmEnabled: true
 ```
 
+For additional configuration options available, please take a look at the respective guides from [Operate](self-managed/operate-deployment/operate-configuration/), [Tasklist](self-managed/tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](self-managed/zeebe-deployment/exporters/elasticsearch-exporter/).
+
 #### Start the schema manager
 
 Using the custom configuration provided, start the Java application `schema` (or `schema.bat` for Windows) provided in the `bin` folder of the delivered jar file. The schema manager will create the necessary indices and templates in the database and apply the respective settings.
@@ -386,6 +388,8 @@ camunda:
         certificatePath=PATH_TO_CA_CERT
 
 ```
+
+For additional configuration options available, please take a look at the respective guides from [Operate](self-managed/operate-deployment/operate-configuration/), [Tasklist](self-managed/tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](self-managed/zeebe-deployment/exporters/elasticsearch-exporter/).
 
 ### 2. Start the backup application
 
