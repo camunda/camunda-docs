@@ -1021,8 +1021,8 @@
                     },
                     {
                       "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/report-error-for-job",
-                      "label": "Report error for job",
+                      "id": "apis-tools/camunda-api-rest/specifications/throw-job-error",
+                      "label": "Throw error for job",
                       "className": "api-method post"
                     },
                     {
@@ -1294,6 +1294,18 @@
                       "id": "apis-tools/camunda-api-rest/specifications/delete-resource",
                       "label": "Delete resource",
                       "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/camunda-api-rest/specifications/get-resource",
+                      "label": "Get resource",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/camunda-api-rest/specifications/get-resource-content",
+                      "label": "Get resource content",
+                      "className": "api-method get"
                     }
                   ]
                 },
@@ -2022,9 +2034,38 @@
       ]
     },
     {
-      "Reference architecture": [
-        "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/kubernetes"
+      "type": "category",
+      "label": "Reference architecture",
+      "link": {
+        "type": "doc",
+        "id": "self-managed/reference-architecture/reference-architecture"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "Kubernetes",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/reference-architecture/kubernetes"
+          },
+          "items": [
+            {
+              "AWS EKS": [
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                "self-managed/setup/deploy/amazon/amazon-eks/dual-region"
+              ]
+            },
+            {
+              "Openshift": [
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -2305,14 +2346,14 @@
                 },
                 {
                   "Roles": [
-                    "self-managed/identity/user-guide/roles/add-assign-role",
-                    "self-managed/identity/user-guide/roles/add-assign-permission"
+                    "self-managed/identity/user-guide/roles/manage-roles",
+                    "self-managed/identity/user-guide/roles/manage-permissions"
                   ]
                 },
                 {
                   "Groups": [
-                    "self-managed/identity/user-guide/groups/create-group",
-                    "self-managed/identity/user-guide/groups/assign-users-roles-to-group"
+                    "self-managed/identity/user-guide/groups/manage-groups",
+                    "self-managed/identity/user-guide/groups/manage-users-roles-to-group"
                   ]
                 },
                 {
