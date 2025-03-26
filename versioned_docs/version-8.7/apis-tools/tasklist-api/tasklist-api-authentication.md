@@ -71,22 +71,27 @@ If the authentication is successful, the authorization server sends back the acc
 
 The authentication is described in [Tasklist Configuration - Authentication](/self-managed/tasklist-deployment/tasklist-authentication.md#identity).
 
-### Authentication via cookie
+### Authentication via cookie (Self-Managed only)
 
 :::note
 When authenticating via cookie, note that Cross-Site Request Forgery (CSRF) protection must be disabled to allow this method of authentication. In a Camunda Self-Managed cluster, set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`.
 :::
 
-Another way to access the Tasklist API in a Self-Managed cluster is to send cookie headers in each request. The cookie can be obtained by using the API endpoint `/api/login`. Take the following steps:
+Another way to access the Tasklist API in a Self-Managed cluster is to send cookie headers in each request. This works for scenarios where authentication is managed by Tasklist and not by Identity. The cookie can be obtained by using the API endpoint `/api/login`:
 
-1. Log in as user 'demo' and store the cookie in the file `cookie.txt`:
+**Example:**
+
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
 
 ```shell
-curl -c cookie.txt -X POST 'http://localhost:8080/api/login?username=demo&password=demo'
+curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
+   --cookie-jar cookie.txt
 ```
 
-2. Send the cookie (as a header) in each API request. In this case, request all process definitions:
+2. Send the cookie as a header in each API request. In this case, request all process definitions.
 
 ```shell
-curl -b cookie.txt -X POST 'http://localhost:8080/v1/process-definitions/search' -H 'Content-Type: application/json' -d '{}'
+curl --request POST 'http://localhost:8080/v1/process-definitions/search' \
+   --cookie cookie.txt \
+   --header 'Content-Type: application/json' -d '{}'
 ```

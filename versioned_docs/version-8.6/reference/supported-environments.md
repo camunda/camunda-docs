@@ -104,6 +104,7 @@ Requirements for the components can be seen below:
 | Optimize    | OpenJDK 21+  | Elasticsearch 8.13+<br/>Amazon OpenSearch 2.9+\*                                                                                                                                                                  |
 | Connectors  | OpenJDK 21+  |                                                                                                                                                                                                                   |
 | Web Modeler | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                              |
+| Console     | -            | -                                                                                                                                                                                                                 |
 
 \*Not all Optimize features are supported when using OpenSearch as a database, including backups. For a full list of the features that are currently supported, please refer to the [Camunda 8](https://github.com/camunda/issues/issues/635) OpenSearch features.
 
