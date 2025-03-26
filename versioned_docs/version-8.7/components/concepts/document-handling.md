@@ -41,18 +41,18 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 
 <TabItem value='aws'>
 
-| Credentials variable  | Required | Description                                                                                           |
-| --------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| AWS_ACCESS_KEY_ID     | Yes      | Access key ID used to interact with AWS S3 buckets.                                                   |
-| AWS_REGION            | Yes      | Region where the bucket is.                                                                           |
-| AWS_SECRET_ACCESS_KEY | Yes      | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
+| Credentials variable    | Required | Description                                                                                           |
+| ----------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | Yes      | Access key ID used to interact with AWS S3 buckets.                                                   |
+| `AWS_REGION`            | Yes      | Region where the bucket is.                                                                           |
+| `AWS_SECRET_ACCESS_KEY` | Yes      | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
 
-| Store variable                 | Required | Description                                                                                                                                                                                                                                               |
-| ------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DOCUMENT_STORE_AWS_BUCKET      | Yes      | Specifies the name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                       |
-| DOCUMENT_STORE_AWS_BUCKET_PATH | No       | Defines the folder-like path within the S3 bucket where documents are stored. This helps organize files within the bucket. For example, `documents/invoices`. If not provided, the application logic assumes a default value of `""`.                     |
-| DOCUMENT_STORE_AWS_BUCKET_TTL  | No       | Represents the time-to-live (TTL) for documents stored in the S3 bucket. This could be used to set an expiration policy, meaning documents will be deleted automatically after a specified duration. If not provided, the application logic ignores this. |
-| DOCUMENT_STORE_AWS_CLASS       | Yes      | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                                                                                    |
+| Store variable                   | Required | Description                                                                                                                                                                                                                                               |
+| -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_AWS_BUCKET`      | Yes      | Specifies the name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                       |
+| `DOCUMENT_STORE_AWS_BUCKET_PATH` | No       | Defines the folder-like path within the S3 bucket where documents are stored. This helps organize files within the bucket. For example, `documents/invoices`. If not provided, the application logic assumes a default value of `""`.                     |
+| `DOCUMENT_STORE_AWS_BUCKET_TTL`  | No       | Represents the time-to-live (TTL) for documents stored in the S3 bucket. This could be used to set an expiration policy, meaning documents will be deleted automatically after a specified duration. If not provided, the application logic ignores this. |
+| `DOCUMENT_STORE_AWS_CLASS`       | Yes      | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                                                                                    |
 
 **Example:**
 
@@ -82,20 +82,21 @@ To ensure seamless integration and functionality of document handling with AWS s
 
 <TabItem value='gcp'>
 
-| Credentials variable           | Required | Description                                                                                                             |
-| ------------------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------- |
-| GOOGLE_APPLICATION_CREDENTIALS | Yes      | Specifies the file path to a JSON key file that contains authentication credentials for a Google Cloud service account. |
+| Credentials variable             | Required | Description                                                                                                             |
+| -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `GOOGLE_APPLICATION_CREDENTIALS` | Yes      | Specifies the file path to a JSON key file that contains authentication credentials for a Google Cloud service account. |
 
-| Store variable            | Required | Description                                                                     |
-| ------------------------- | -------- | ------------------------------------------------------------------------------- |
-| DOCUMENT_STORE_GCP_BUCKET | Yes      | Defines the name of the Google Cloud Storage bucket where documents are stored. |
-| DOCUMENT_STORE_GCP_CLASS  | Yes      | io.camunda.document.store.gcp.GcpDocumentStoreProvider                          |
+| Store variable              | Required | Description                                                                     |
+| --------------------------- | -------- | ------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_GCP_BUCKET` | Yes      | Defines the name of the Google Cloud Storage bucket where documents are stored. |
+| `DOCUMENT_STORE_GCP_CLASS`  | Yes      | io.camunda.document.store.gcp.GcpDocumentStoreProvider                          |
 
 **Example:**
 
 ```
 DOCUMENT_STORE_GCP_CLASS=io.camunda.document.store.gcp.GcpDocumentStoreProvider
 DOCUMENT_STORE_GCP_BUCKET=test-bucket
+DOCUMENT_DEFAULT_STORE_ID=gcp
 GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json
 ```
 
@@ -120,10 +121,10 @@ To ensure seamless integration and functionality of document handling with GCP s
 Local storage is not usable in production, and is not supported for Self-Managed installations via Helm charts.
 :::
 
-| Store variable             | Required | Description                                                                                                                                 |
-| -------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| DOCUMENT_STORE_LOCAL_PATH  | Yes      | The path to the directory which will host the uploaded files.                                                                               |
-| DOCUMENT_STORE_LOCAL_CLASS | Yes      | The class for instantiating the local store. This must always be `io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider` |
+| Store variable               | Required | Description                                                                                                                                 |
+| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_LOCAL_PATH`  | Yes      | The path to the directory which will host the uploaded files.                                                                               |
+| `DOCUMENT_STORE_LOCAL_CLASS` | Yes      | The class for instantiating the local store. This must always be `io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider` |
 
 **Example:**
 
@@ -143,11 +144,11 @@ In-memory storage is not usable in production.
 
 If no configuration is provided and no `DOCUMENT_DEFAULT_STORE_ID` is set, in-memory is used as the default storage type.
 
-If configurations are provided for at least one storage type (DOCUMENT_STORE_AWS_BUCKET, DOCUMENT_STORE_AWS_BUCKET_PATH, etc.) ensure `DOCUMENT_DEFAULT_STORE_ID=in-memory` is set for in-memory storage.
+If configurations are provided for at least one storage type (`DOCUMENT_STORE_AWS_BUCKET`, `DOCUMENT_STORE_AWS_BUCKET_PATH`, etc.) ensure `DOCUMENT_DEFAULT_STORE_ID=in-memory` is set for in-memory storage.
 
-| Store variable                | Required | Description                                                                                                                                                                                                                               |
-| ----------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DOCUMENT_STORE_INMEMORY_CLASS | Yes      | The class for instantiating the in-memory store. This must always be `io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`. If this is set, Be sure to remove the hyphen and set `DOCUMENT_DEFAULT_STORE_ID` to `=inmemory`. |
+| Store variable                  | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_INMEMORY_CLASS` | Yes      | The class for instantiating the in-memory store. This must always be `io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`. You can specify the environment variables for multiple stores (AWS, GCP, local), but only one store can be used at a time. To use the in-memory store, explicitly specify the variables for other stores, and set `DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider` and `DOCUMENT_DEFAULT_STORE_ID=inmemory`. If you do not explicitly specify variables for any store, our application will use in-memory by default. |
 
 **Example:**
 
