@@ -142,13 +142,18 @@ DOCUMENT_DEFAULT_STORE_ID=local
 In-memory storage is not usable in production.
 :::
 
-If no configuration is provided and no `DOCUMENT_DEFAULT_STORE_ID` is set, in-memory is used as the default storage type.
+You can specify the environment variables for multiple stores (`DOCUMENT_STORE_AWS_BUCKET`, `DOCUMENT_STORE_AWS_BUCKET_PATH`, etc.) but only one store can be used at a time.
 
-If configurations are provided for at least one storage type (`DOCUMENT_STORE_AWS_BUCKET`, `DOCUMENT_STORE_AWS_BUCKET_PATH`, etc.) ensure `DOCUMENT_DEFAULT_STORE_ID=in-memory` is set for in-memory storage.
+To use the in-memory store, take the following steps:
 
-| Store variable                  | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_INMEMORY_CLASS` | Yes      | The class for instantiating the in-memory store. This must always be `io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`. You can specify the environment variables for multiple stores (AWS, GCP, local), but only one store can be used at a time. To use the in-memory store, explicitly specify the variables for other stores, and set `DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider` and `DOCUMENT_DEFAULT_STORE_ID=inmemory`. If you do not explicitly specify variables for any store, our application will use in-memory by default. |
+1. Explicitly specify the variables for the other stores. If you do not explicitly specify variables for any store, our application will use in-memory by default.
+2. Set `DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`.
+3. Set `DOCUMENT_DEFAULT_STORE_ID=inmemory`.
+   If no configuration is provided for at least one storage type, and no `DOCUMENT_DEFAULT_STORE_ID` is set, in-memory is used as the default storage type.
+
+| Store variable                  | Required | Description                                                                                                                              |
+| ------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_INMEMORY_CLASS` | Yes      | The class for instantiating the in-memory store. This must always be `io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`. |
 
 **Example:**
 
