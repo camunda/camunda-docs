@@ -1,29 +1,29 @@
-# Welcome to the redirect party! 
-#  ____  ____  ____  __  ____  ____  ___  ____    ____   __   ____  ____  _  _  _   
-# (  _ \(  __)(    \(  )(  _ \(  __)/ __)(_  _)  (  _ \ / _\ (  _ \(_  _)( \/ )/ \  
-#  )   / ) _)  ) D ( )(  )   / ) _)( (__   )(     ) __//    \ )   /  )(   )  / \_/  
-# (__\_)(____)(____/(__)(__\_)(____)\___) (__)   (__)  \_/\_/(__\_) (__) (__/  (_)  
+# Welcome to the redirect party!
+#  ____  ____  ____  __  ____  ____  ___  ____    ____   __   ____  ____  _  _  _
+# (  _ \(  __)(    \(  )(  _ \(  __)/ __)(_  _)  (  _ \ / _\ (  _ \(_  _)( \/ )/ \
+#  )   / ) _)  ) D ( )(  )   / ) _)( (__   )(     ) __//    \ )   /  )(   )  / \_/
+# (__\_)(____)(____/(__)(__\_)(____)\___) (__)   (__)  \_/\_/(__\_) (__) (__/  (_)
 #
 # Please read this guide before adding new redirects.
 #
 ##################################################################################
 #
-# Redirects in this file are sorted in this order: 
+# Redirects in this file are sorted in this order:
 #  1. Universal rules that pertain to all content.
-#     These redirects have no anticipated removal. 
-#  2. Broad version (or unversioned) redirects. 
-#     These redirects have no anticipated removal. 
+#     These redirects have no anticipated removal.
+#  2. Broad version (or unversioned) redirects.
+#     These redirects have no anticipated removal.
 #  3. Specific content moves, in newest-to-oldest order of version in which they are introduced.
 #     These redirects will be removed when their introduced version is no longer supported.
-#  
-#  If you're adding a redirect for a specific page or section, 
+#
+#  If you're adding a redirect for a specific page or section,
 #   you likely want to do that in #3.
 #  That means that you want to find the banner comment identifying that version,
 #    and add your redirect below that comment.
-# 
+#
 # For help writing rules, see https://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewriterule.
 #
-################################################################################## 
+##################################################################################
 
 ##################################################################################
 # 1. Universal rules
@@ -76,7 +76,7 @@ RewriteRule ^optimize/3.9.0/(.*)$ https://unsupported.docs.camunda.io/8.1/optimi
 RewriteRule ^docs/8.2/(.*)$ https://unsupported.docs.camunda.io/8.2/docs/$1 [R=301,L]
 RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optimize/$1 [R=301,L]
 
-# Timeless classics. 
+# Timeless classics.
 # rules required after update to docusaurs 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
 ## index pages are not served as /index/ anymore but /index.html
 RewriteRule ^(.*)/index/$ /$1 [R=301,L]
@@ -87,13 +87,69 @@ RewriteRule ^(.*)/(.+)/\2/?$ /$1/$2 [R=301,L]
 # disabled blog, redirect to index page.
 RewriteRule ^blog/ / [R=301,L]
 
-# Product links that I don't think we can ever remove
+# Product links that need to be preserved for Desktop Modeler, in perpetuity.
 RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
 RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/$1 [R=301,L]
+
+# URLs that need to be preserved for connector element templates, in perpetuity.
+RewriteRule ^docs/?$ / [R=301,L]
+RewriteRule ^docs/apis-clients/operate-api/?$ /docs/apis-tools/operate-api/overview/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-dynamodb/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-dynamodb/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-eventbridge-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sns-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sns/?amazonsns=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/aws-sqs-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/github-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/github/?github=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/kafka-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/kafka/?kafka=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/rabbitmq/?rabbitmq=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/rest/?$ /docs/components/connectors/protocol/rest/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/slack-inbound/?$ /docs/components/connectors/out-of-the-box-connectors/slack/?slack=inbound [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/twilio-webhook/?$ /docs/components/connectors/out-of-the-box-connectors/twilio/?twilio=inbound [R=301,L]
+RewriteCond %{QUERY_STRING} awseventbridge=inbound
+RewriteRule ^docs/components/connectors/protocol/amazon-eventbridge/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/?awseventbridge=inbound [R=301,L]
+RewriteCond %{QUERY_STRING} awseventbridge=outbound
+RewriteRule ^docs/components/connectors/protocol/amazon-eventbridge/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-eventbridge/ [R=301,L]
+RewriteRule ^docs/components/connectors/protocol/aws-lambda/?$ /docs/components/connectors/out-of-the-box-connectors/aws-lambda/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/graphql/? /docs/components/connectors/protocol/graphql/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/http-webhook/? /docs/components/connectors/protocol/http-webhook/ [R=301,L]
+
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/automation-anywhere/? /docs/components/connectors/out-of-the-box-connectors/automation-anywhere/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
+
 
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
+
+# Identity user guide "manage" pages
+
+RewriteRule ^docs/self-managed/identity/user-guide/roles/add-assign-permission/?$ /docs/self-managed/identity/user-guide/roles/manage-permissions/$1 [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/roles/add-assign-permission/?$ /docs/8.6/self-managed/identity/user-guide/roles/manage-permissions/$1 [R=301,L]
+RewriteRule ^docs/8.7/self-managed/identity/user-guide/roles/add-assign-permission/?$ /docs/8.7/self-managed/identity/user-guide/roles/manage-permissions/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/user-guide/groups/create-group/?$ /docs/self-managed/identity/user-guide/groups/manage-groups/$1 [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/groups/create-group/?$ /docs/8.6/self-managed/identity/user-guide/groups/manage-groups/$1 [R=301,L]
+RewriteRule ^docs/8.7/self-managed/identity/user-guide/groups/create-group/?$ /docs/8.7/self-managed/identity/user-guide/groups/manage-groups/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/self-managed/identity/user-guide/groups/manage-users-roles-to-group/$1 [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/8.6/self-managed/identity/user-guide/groups/manage-users-roles-to-group/$1 [R=301,L]
+RewriteRule ^docs/8.7/self-managed/identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/8.7/self-managed/identity/user-guide/groups/manage-users-roles-to-group/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/user-guide/roles/add-assign-role/?$ /docs/self-managed/identity/user-guide/roles/manage-roles/$1 [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/roles/add-assign-role/?$ /docs/8.6/self-managed/identity/user-guide/roles/manage-roles/$1 [R=301,L]
+RewriteRule ^docs/8.7/self-managed/identity/user-guide/roles/add-assign-role/?$ /docs/8.7/self-managed/identity/user-guide/roles/manage-roles/$1 [R=301,L]
+
+# Remove go and zbctl pages, redirect to CCH
+RewriteRule ^docs/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
+RewriteRule ^docs/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
+RewriteRule ^docs/8.7/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
+RewriteRule ^docs/8.7/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
 
 # Remove meta page
 RewriteRule ^meta/ / [R=301,L]
@@ -105,9 +161,44 @@ RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camun
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
 
+# Restructure announcements and release notes for 8.6
+RewriteRule ^docs/reference/announcements/announcements-850/?$ /docs/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/850/?$ /docs/reference/announcements-release-notes/850/850-release-notes/$1 [R=301,L]
+RewriteRule ^docs/reference/announcements/announcements-860/?$ /docs/reference/announcements-release-notes/860/860-announcements/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/860/?$ /docs/reference/announcements-release-notes/860/860-release-notes/$1 [R=301,L]
+RewriteRule ^docs/reference/release-policy/?$ /docs/reference/announcements-release-notes/release-policy/$1 [R=301,L]
+RewriteRule ^docs/reference/release-notes/?$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/reference/announcements/?$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
+
+# Restructure announcements and release notes for 8.7
+RewriteRule ^docs/8.7/reference/announcements/announcements-850/?$ /docs/8.7/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/release-notes/850/?$ /docs/8.7/reference/announcements-release-notes/850/850-release-notes/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/announcements/announcements-860/?$ /docs/8.7/reference/announcements-release-notes/860/860-announcements/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/release-notes/860/?$ /docs/8.7/reference/announcements-release-notes/860/860-release-notes/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/release-notes/870/?$ /docs/8.7/reference/announcements-release-notes/870/870-release-notes/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/release-policy/?$ /docs/8.7/reference/announcements-release-notes/release-policy/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/release-notes/release-notes/?$ /docs/8.7/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/announcements/?$ /docs/8.7/reference/announcements-release-notes/overview/$1 [R=301,L]
+
+# Restructure announcements and release notes for 8.8
+RewriteRule ^docs/next/reference/announcements/announcements-850/?$ /docs/next/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
+RewriteRule ^docs/next/reference/release-notes/850/?$ /docs/next/reference/announcements-release-notes/850/850-release-notes/$1 [R=301,L]
+RewriteRule ^docs/next/reference/announcements/announcements-860/?$ /docs/next/reference/announcements-release-notes/860/860-announcements/$1 [R=301,L]
+RewriteRule ^docs/next/reference/release-notes/860/?$ /docs/next/reference/announcements-release-notes/860/860-release-notes/$1 [R=301,L]
+RewriteRule ^docs/next/reference/release-notes/870/?$ /docs/next/reference/announcements-release-notes/870/870-release-notes/$1 [R=301,L]
+RewriteRule ^docs/next/reference/release-policy/?$ /docs/next/reference/announcements-release-notes/release-policy/$1 [R=301,L]
+RewriteRule ^docs/next/reference/release-notes/release-notes/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/next/reference/announcements/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
+
+# Provide redirects for RPA experimental removal
+RewriteRule ^docs/next/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/next/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/next/components/early-access/experimental/rpa/rpa-integration/?$ /docs/next/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-framework-library/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-integration/?$ /docs/8.7/components/rpa/overview/$1 [R=301,L]
+
 # Provide current to next redirect for ad-hoc
-RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc/ad-hoc/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
@@ -174,6 +265,16 @@ RewriteRule ^docs/guides/react-components/saas-prerequisites/?$ /docs/guides/$1 
 RewriteRule ^docs/guides/react-components/install-plain-java/?$ /docs/guides/$1 [R=301,L]
 RewriteRule ^docs/guides/react-components/install-docker-compose/?$ /docs/guides/$1 [R=301,L]
 RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/$1 [R=301,L]
+
+# Move logging from troubleshooting to monitoring
+RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+
+# Move metrics from zeebe-deployment to monitoring
+RewriteRule ^docs/8.7/self-managed/zeebe-deployment/operations/metrics/?$ /docs/8.7/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/zeebe-deployment/operations/metrics/?$ /docs/8.6/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/operations/metrics/?$ /docs/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
 
 # TODO at time of release: account for API spec moves in https://github.com/camunda/camunda-docs/pull/4534 (there are many)
 
@@ -509,6 +610,9 @@ RewriteRule ^docs/components/modeler/web-modeler/start-instance/?$ /docs/compone
 RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
 RewriteRule ^docs/next/components/modeler/web-modeler/start-instance/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/modeler/web-modeler/run-or-publish-your-process/#deploy-a-process [R=301,L,NE]
+
+# Move user metrics page to a new folder
+RewriteRule ^docs/reference/usage-metrics.md/?$ ^docs/reference/data-collection/usage-metrics.md/? [R=301,L,NE]
 
 # Remove Migration to Camunda 8 pages
 RewriteRule ^docs/next/guides/migrating-from-camunda-7/adjusting-dmn-models/(.*)$ /docs/next/guides/migrating-from-camunda-7/index/ [R=301,L]

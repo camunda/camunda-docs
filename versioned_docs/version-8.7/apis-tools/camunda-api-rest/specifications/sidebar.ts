@@ -48,8 +48,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "version-8.7/apis-tools/camunda-api-rest/specifications/report-error-for-job",
-          label: "Report error for job",
+          id: "version-8.7/apis-tools/camunda-api-rest/specifications/throw-job-error",
+          label: "Throw error for job",
           className: "api-method post",
         },
         {
@@ -322,6 +322,18 @@ const sidebar: SidebarsConfig = {
           label: "Delete resource",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "version-8.7/apis-tools/camunda-api-rest/specifications/get-resource",
+          label: "Get resource",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "version-8.7/apis-tools/camunda-api-rest/specifications/get-resource-content",
+          label: "Get resource content",
+          className: "api-method get",
+        },
       ],
     },
     {
@@ -332,7 +344,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "version-8.7/apis-tools/camunda-api-rest/specifications/update-element-instance-variables",
           label: "Update element instance variables",
-          className: "api-method post",
+          className: "api-method put",
         },
       ],
     },

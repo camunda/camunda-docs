@@ -24,7 +24,7 @@ instance continues.
 If the FEEL expression evaluation is unsuccessful, an [incident](/components/concepts/incidents.md) is
 raised at the script task. When the incident is resolved, the script task is evaluated again.
 
-## Defining a script task
+## Defining a script task {#defining-a-task}
 
 To define a script task with an inline FEEL expression, use the `zeebe:script` extension element. In the
 `zeebe:script` extension element, perform the following steps:
