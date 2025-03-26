@@ -35,13 +35,13 @@ As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPat
 
 Configure the exporter by providing `args`. See the tables below for configuration options and default values, or review the [example YAML configuration](#example).
 
-| Option       | Description                                                                                                        | Default |
-| ------------ | ------------------------------------------------------------------------------------------------------------------ | ------- |
-| connect      | Refer to [Connect](./camunda-exporter.md?configuration=connect#options) for the connection configuration options.  |         |
-| index        | Refer to [Index](./camunda-exporter.md?configuration=index#options) for the index configuration options.           |         |
-| bulk         | Refer to [Bulk](./camunda-exporter.md?configuration=bulk#options) for the bulk configuration options.              |         |
-| archiver     | Refer to [Archiver](./camunda-exporter.md?configuration=archiver#options) for the retention configuration options. |         |
-| createSchema | If `true` missing indexes will be created automatically.                                                           | true    |
+| Option       | Description                                                                                                       | Default |
+| ------------ | ----------------------------------------------------------------------------------------------------------------- | ------- |
+| connect      | Refer to [Connect](./camunda-exporter.md?configuration=connect#options) for the connection configuration options. |         |
+| index        | Refer to [Index](./camunda-exporter.md?configuration=index#options) for the index configuration options.          |         |
+| bulk         | Refer to [Bulk](./camunda-exporter.md?configuration=bulk#options) for the bulk configuration options.             |         |
+| history      | Refer to [History](./camunda-exporter.md?configuration=history#options) for the retention configuration options.  |         |
+| createSchema | If `true` missing indexes will be created automatically.                                                          | true    |
 
 ### Options
 
@@ -135,14 +135,13 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 
 </TabItem>
 
-<TabItem value="archiver">
+<TabItem value="history">
 
-To keep the main runtime index performant, the archiver periodically moves documents into historical
-indices. The archiver can be configured as follows:
+To keep the main runtime index performant, documents are periodically moved into historical
+indices. The history can be configured as follows:
 
 | Option                    | Description                                                                                                                                                                                                   | Default |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| enabled                   | If `true` archiver is enabled.                                                                                                                                                                                | `true`  |
 | elsRolloverDateFormat     | Defines how the date values are formatted for historical indices using Java DateTimeFormatter syntax, if no format is specified the first date format specified in teh field mapping is used.                 | `date`  |
 | rolloverInterval          | The time range for groups captured by the historical indices.                                                                                                                                                 | `1d`    |
 | rolloverBatchSize         | The max number of instances for each batch that is being archived.                                                                                                                                            | `100`   |
@@ -196,8 +195,7 @@ exporters:
         numberOfShards: 3
         numberOfReplicas: 0
 
-      archiver:
-        enabled: true
+      history:
         elsRolloverDateFormat: "date"
         rolloverInterval: "1d"
         rolloverBatchSize: 100

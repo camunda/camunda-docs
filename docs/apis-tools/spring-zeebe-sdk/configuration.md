@@ -288,6 +288,17 @@ camunda:
       truststore-password: <your truststore password>
 ```
 
+#### Credentials cache path
+
+You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
+
+```yaml
+camunda:
+  client:
+    auth:
+      credentials-cache-path: /tmp/credentials
+```
+
 ### Zeebe
 
 You can use the following Zeebe-specific additional configuration options:
@@ -534,14 +545,24 @@ camunda:
 
 ##### Control tenant usage
 
-When using multi-tenancy, the Camunda client will connect to the `<default>` tenant. To control this, you can configure:
+When using multi-tenancy, the Zeebe client will connect to the `<default>` tenant. To control this, you can configure:
 
 ```yaml
 camunda:
   client:
-    tenant-ids:
-      - <default>
-      - foo
+    tenant-id: foo
+```
+
+To control which tenants your job workers should use, you can configure:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        tenant-ids:
+          - <default>
+          - foo
 ```
 
 Additionally, you can set tenant ids on job worker level by using the annotation:

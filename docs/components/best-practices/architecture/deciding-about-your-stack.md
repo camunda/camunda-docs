@@ -9,10 +9,6 @@ tags:
   - Maven
 ---
 
-:::caution Camunda 8
-This best practice targets Camunda 8. For Camunda 7, please refer to [Deciding about your Camunda 7 stack](../deciding-about-your-stack-c7/).
-:::
-
 Our greenfield stack recommendation is a result of extensive discussions and evaluations. While not the only option, it is a solid choice if there are no specific reasons to choose an alternative.
 
 Your choice of programming language should align with your team's expertise; we suggest Java or JavaScript for their broad applicability and support, and have outlined the Java greenfield stack below with Camunda 8 SaaS.

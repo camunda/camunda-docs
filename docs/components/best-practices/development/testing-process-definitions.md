@@ -46,10 +46,6 @@ There are basically three typical test scopes used when building process solutio
 
 ## Writing process tests in Java
 
-:::caution Camunda 8 only
-This section targets Camunda 8. Refer to the specific [Camunda 7 documentation](/components/best-practices/development/testing-process-definitions-c7.md) if you are looking for Camunda 7.x.
-:::
-
 This section describes how to write process tests as unit tests in Java. We are working on more information on how to write tests in other languages, like Node.Js or C#.
 
 When using Java, most customers use Spring Boot. While this is a common setup for customers, it is not the only one. Find some more examples of Java process tests in the README.md of the [zeebe-process-test](https://github.com/camunda-cloud/zeebe-process-test) project.
@@ -58,13 +54,13 @@ When using Java, most customers use Spring Boot. While this is a common setup fo
 
 :::caution
 
-- The Zeebe Spring SDK only offers test support since 8.6.7 and later releases.
+- The Spring Zeebe SDK only offers test support since 8.6.7 and later releases.
 - You must use JUnit 5 in every test class. The `@Test` annotation you import must be `org.junit.jupiter.api.Test`.
 
 :::
 
 1. Use [_JUnit 5_](http://junit.org) as your unit test framework.
-2. Use the [Zeebe Spring SDK and its test library](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
+2. Use the [Spring Zeebe SDK and its test library](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
 3. Use `@ZeebeSpringTest` to ramp up an in-memory process engine.
 4. Use assertions from [zeebe-process-test](../../../apis-tools/java-client/zeebe-process-test.md#assertions) to check if your expectations about the state of the process are met.
 5. Use mocking of your choice (such as [Mockito](http://mockito.org)) to mock service methods and verify that services are called as expected.

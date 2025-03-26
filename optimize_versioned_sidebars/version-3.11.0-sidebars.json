@@ -3020,6 +3020,11 @@
                       "type": "link",
                       "label": "Login issues",
                       "href": "/docs/8.3/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-login/"
+                    },
+                    {
+                      "type": "link",
+                      "label": "Other problems",
+                      "href": "/docs/8.3/self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/"
                     }
                   ]
                 }
