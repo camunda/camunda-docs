@@ -25,10 +25,6 @@ const versionMappings = [
     optimizeVersion: "3.15.0",
   },
   {
-    docsVersion: "8.5",
-    optimizeVersion: "3.13.0",
-  },
-  {
     docsVersion: "8.4",
     optimizeVersion: "3.12.0",
   },
