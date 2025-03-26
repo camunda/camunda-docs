@@ -6,7 +6,7 @@ description: "Install and configure Optimize Self-Managed."
 
 ## Camunda 8 stack
 
-Please refer to the [Installation Guide]($docs$/self-managed/platform-deployment/overview/) for details on how to install Optimize as part of a Camunda 8 stack.
+Please refer to the [Installation Guide](/self-managed/platform-deployment/overview.md) for details on how to install Optimize as part of a Camunda 8 stack.
 
 ## Camunda 7 Enterprise stack
 
@@ -14,7 +14,7 @@ Please refer to the [Installation Guide]($docs$/self-managed/platform-deployment
 
 This document describes the installation process of the Camunda Optimize and connect it to a Camunda 7 stack, as well as various configuration possibilities available after initial installation.
 
-Before proceeding with the installation, read the article about [supported environments]($docs$/reference/supported-environments).
+Before proceeding with the installation, read the article about [supported environments](/reference/supported-environments.md).
 
 ### Local installation
 
@@ -22,7 +22,7 @@ If you wish to run Camunda Optimize natively on your hardware you can download o
 
 #### Prerequisites
 
-If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime]($docs$/reference/supported-environments#camunda-8-self-managed) section on which runtimes are supported.
+If you intend to run Optimize on your local machine, ensure you have a supported JRE (Java Runtime Environment) installed; best refer to the [Java Runtime](/reference/supported-environments.md#camunda-8-self-managed) section on which runtimes are supported.
 
 #### Demo distribution with Elasticsearch
 
