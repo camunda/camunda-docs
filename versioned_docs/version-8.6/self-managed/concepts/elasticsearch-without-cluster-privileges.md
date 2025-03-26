@@ -79,7 +79,7 @@ camunda:
       ilmEnabled: true
 ```
 
-For additional configuration options available, please take a look at the respective guides from [Operate](self-managed/operate-deployment/operate-configuration/), [Tasklist](self-managed/tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](self-managed/zeebe-deployment/exporters/elasticsearch-exporter/).
+For additional configuration options available, please take a look at the respective guides from [Operate](/self-managed/operate-deployment/operate-configuration/), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter/).
 
 #### Start the schema manager
 
@@ -389,7 +389,7 @@ camunda:
 
 ```
 
-For additional configuration options available, please take a look at the respective guides from [Operate](self-managed/operate-deployment/operate-configuration/), [Tasklist](self-managed/tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](self-managed/zeebe-deployment/exporters/elasticsearch-exporter/).
+For additional configuration options available, please take a look at the respective guides from [Operate](/self-managed/operate-deployment/operate-configuration/), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration/), and [Zeebe Elasticsearch Exporter](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter/).
 
 ### 2. Start the backup application
 
