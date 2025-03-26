@@ -173,7 +173,9 @@ DOCUMENT_DEFAULT_STORE_ID=inmemory
 Document handling may be beneficial for several use cases. For example:
 
 - [Upload a document via the inbound webhook Connector](#upload-a-document-via-inbound-webhook-connector), and later retrieve the document content in another Connector invocation to store it in a third-party system.
-- [Upload a document via a form](#upload-a-document-via-form), and utilize several outbound Connectors.
+- [Upload a document via a form](#upload-a-document-via-form), including start forms and user task forms.
+- [Reference a document in an outbound connector](#reference-a-document-in-an-outbound-connector), such as Amazon Bedrock, REST, Slack, and more.
+- [Display a document in a user task](#display-a-document-in-a-user-task)
 
 ### Upload a document via inbound webhook Connector
 
@@ -256,7 +258,15 @@ This feature will not work for public processes started by forms.
 
 ![document handling in tasklist](./assets/document-handling-tasklist.png)
 
-#### Outbound Connectors
+#### Start forms
+
+Insert text.
+
+### User task forms
+
+Insert text.
+
+### Reference a document in an outbound connector
 
 The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md) is enhanced to provide document support in property/variable bindings.
 
@@ -276,3 +286,7 @@ In most cases for the following outbound Connectors, you can include a **Request
 | [REST](/components/connectors/protocol/rest.md)                                         | Supports storing the response as a document.                                                                                                                                                                                   |
 | [SendGrid](/components/connectors/out-of-the-box-connectors/sendgrid.md)                | Provides attachment support.                                                                                                                                                                                                   |
 | [Slack](/components/connectors/out-of-the-box-connectors/slack.md)                      | Supports adding attachments and increasing template versions.                                                                                                                                                                  |
+
+### Display a document in a user task
+
+Insert text.
