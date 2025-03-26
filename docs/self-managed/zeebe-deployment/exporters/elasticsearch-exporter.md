@@ -242,58 +242,55 @@ exporters:
         variableDocument: true
 ```
 
-## Self signed certificates
+## Self-signed certificates
 
-[The Zeebe Elasticsearch Exporter does not currently support connecting to Elasticsearch using self-signed certificates.](https://github.com/camunda/camunda/issues/9839)
-There is however a workaround if you must use self-signed certificates, which is to build your own trust store and have the application use it.
+The Zeebe Elasticsearch exporter does not [currently support](https://github.com/camunda/camunda/issues/9839) connecting to Elasticsearch using self-signed certificates.
+If you must use self-signed certificates, it is possible to build your own trust store and have the application use it.
 
-The recommendation in this case is to create a new custom trust store based on the default one. This way, it will also be able to verify certificates
+In this case, it is recommended to create a new custom trust store based on the default one. This way, it will also be able to verify certificates
 signed using trusted root certificate authorities.
 
-So let's start by creating a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, you need to find the
-location of the default `cacerts` trust store.
+1.  First, create a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, find the
+    location of the default `cacerts` trust store: - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`. - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
 
-On Linux systems, you can find it at `$JAVA_HOME/lib/security/cacerts`. For macOS, you will find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
+        Once you have the right location, e.g. `$JAVA_HOME/lib/security/cacerts`, run the following to create a new trust store:
 
-Once you have the right location, e.g. `$JAVA_HOME/lib/security/cacerts`, we can run the following to create a new trust store:
+        ```sh
+        keytool -importkeystore -srckeystore $JAVA_HOME/lib/security/cacerts -destkeystore zeebeTrustStore.jks -srcstoretype PKCS12 -deststoretype JKS
+        ```
 
-```sh
-keytool -importkeystore -srckeystore $JAVA_HOME/lib/security/cacerts -destkeystore zeebeTrustStore.jks -srcstoretype PKCS12 -deststoretype JKS
-```
+        Set any password, so long as it's at least 6 characters.
 
-Set any password that you want, so long as it's at least 6 characters.
+2.  Add your custom certificate to to the new trust store. For example, if your custom certificate is located at `/tmp/myCustomCertificate.pem`:
 
-Now, we'll add your custom certificate to it. Let's say it is located at `/tmp/myCustomCertificate.pem`:
+    ```sh
+    keytool -import -alias MyCustomCertificate -keystore zeebeTrustStore.jks -file /tmp/myCustomCertificate.pem
+    ```
 
-```sh
-keytool -import -alias MyCustomCertificate -keystore zeebeTrustStore.jks -file /tmp/myCustomCertificate.pem
-```
+    :::note
+    Replace the `-file` parameter with the actual path to your certificate, and make sure to replace the `-alias` parameter with something
+    descriptive, like `WebServerCertificate`.
+    :::
 
-:::note
-Replace the `-file` parameter with the actual path to your certificate, and make sure to replace the `-alias` parameter with something
-descriptive, like `WebServerCertificate`.
-:::
+    When prompted to trust the certificate, make sure to answer **yes**.
 
-You will be prompted to trust the certificate, make sure to answer `yes`.
+3.  Update the application to use this trust store. First, make sure the file is readable by the application. For example, on Unix systems, run:
 
-The final step is to instruct the application to use this trust store. First, make sure the file is readable by the application. On Unix systems, you would
-run:
+    ```sh
+    chmod a+r zeebeTrustStore.jks
+    ```
 
-```sh
-chmod a+r zeebeTrustStore.jks
-```
+    Then, specify the following properties when running the application:
 
-Then we just need to specify the following properties when running the application:
+    - `javax.net.ssl.trustStore`: must be set to the path of your custom trust store.
+    - `javax.net.ssl.trustStorePassword`: set to your trust store password.
 
-- `javax.net.ssl.trustStore`: must be set to the path of your custom trust store.
-- `javax.net.ssl.trustStorePassword`: set to your trust store password.
+    The following example uses a trust store location of `/tmp/zeebeTrustStore.jks`, and a password of `changeme`. When using the official distribution
+    (whether Docker image or the bundled shell scripts), these propertiescan be provided using the following environment variable:
 
-For example, say your trust store at `/tmp/zeebeTrustStore.jks`, and the password is `changeme`. When using the official distribution
-(whether Docker image or the bundled shell scripts), you just need to specify the following environment variable:
-
-```sh
-JAVA_OPTS="-Djavax.net.ssl.trustStore=/tmp/zeebeTrustStore.jks -Djavax.net.ssl.trustStorePassword=changeme ${JAVA_OPTS}"
-```
+    ```sh
+    JAVA_OPTS="-Djavax.net.ssl.trustStore=/tmp/zeebeTrustStore.jks -Djavax.net.ssl.trustStorePassword=changeme ${JAVA_OPTS}"
+    ```
 
 :::warning
 If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on
