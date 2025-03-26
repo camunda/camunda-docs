@@ -297,6 +297,6 @@ JAVA_OPTS="-Djavax.net.ssl.trustStore=/tmp/zeebeTrustStore.jks -Djavax.net.ssl.t
 
 :::warning
 If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on
-your deployment method (e.g. Helm chart, Docker compose). The simplest way is to build a custom image which already contains your trust store, and specifies
+your deployment method (e.g. Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies
 the environment variable.
 :::
