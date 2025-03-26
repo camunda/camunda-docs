@@ -39,7 +39,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha4) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha5) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running one of the following in your terminal:
    - `./start.sh`: start Camunda 8 Run as a Java application.
@@ -176,7 +176,7 @@ TLS can be enabled by providing a local file keystore using the `--keystore` arg
 
 ### Access metrics
 
-Metrics are enabled in Camunda 8 Run by default, and can be accessed at [/actuator/prometheus](http://localhost:9600/actuator/prometheus). For more information, see the Zeebe [Prometheus metrics](/self-managed/zeebe-deployment/operations/metrics.md) documentation.
+Metrics are enabled in Camunda 8 Run by default, and can be accessed at [/actuator/prometheus](http://localhost:9600/actuator/prometheus). For more information, see the Zeebe [Prometheus metrics](/self-managed/operational-guides/monitoring/metrics.md) documentation.
 
 ### Start external Elasticsearch
 

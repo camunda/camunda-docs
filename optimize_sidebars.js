@@ -2451,16 +2451,23 @@ module.exports = {
             ),
           ],
         },
-
+        {
+          Monitoring: [
+            docsLink(
+              "Log levels",
+              "self-managed/operational-guides/monitoring/log-levels/"
+            ),
+            docsLink(
+              "Metrics",
+              "self-managed/operational-guides/monitoring/metrics/"
+            ),
+          ],
+        },
         {
           Troubleshooting: [
             docsLink(
               "Troubleshooting",
               "self-managed/operational-guides/troubleshooting/"
-            ),
-            docsLink(
-              "Log levels",
-              "self-managed/operational-guides/troubleshooting/log-levels/"
             ),
           ],
         },
@@ -2630,7 +2637,7 @@ module.exports = {
                 ),
                 docsLink(
                   "Metrics",
-                  "self-managed/zeebe-deployment/operations/metrics/"
+                  "self-managed/operational-guides/monitoring/metrics"
                 ),
                 docsLink(
                   "Health status",
@@ -2988,6 +2995,10 @@ module.exports = {
                     docsLink(
                       "Missing data",
                       "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/"
+                    ),
+                    docsLink(
+                      "Other problems",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/"
                     ),
                   ],
                 },
