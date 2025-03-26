@@ -91,6 +91,11 @@ RewriteRule ^blog/ / [R=301,L]
 RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
 RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
 
+## Reabsorbed Optimize docs
+RewriteRule ^optimize/3.11.0/apis-tools/optimize-api/(.*)$ /docs/8.3/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/3.11.0/components/(.*)$ /docs/8.3/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301,L]
+
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
