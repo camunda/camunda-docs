@@ -40,7 +40,7 @@ If you've made changes to the upstream `main` branch and require urgent document
 1. Replace the OpenAPI spec file at `/api/[apiName]/[version]/[apiName]-openapi.yaml`.
 2. Regenerate the docs with this command:
    `npm run api:generate:[apiName] [version]`
-3. If changes affect the sidebars (e.g. the name or method of an endpoint), manually move the changes from the generated `sidebar.ts` into the version's top-level `version-x-sidebars.json` file.
+3. If changes affect the sidebars (for example, the name or method of an endpoint), manually move the changes from the generated `sidebar.ts` into the version's top-level `version-x-sidebars.json` file.
 4. Commit the changes, and open a PR.
 
 ## Code languages
