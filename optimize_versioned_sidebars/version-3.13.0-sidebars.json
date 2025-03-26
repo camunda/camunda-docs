@@ -447,11 +447,6 @@
                 },
                 {
                   "type": "link",
-                  "label": "Defining templates in Camunda 7",
-                  "href": "/docs/8.5/components/modeler/desktop-modeler/element-templates/c7-defining-templates/"
-                },
-                {
-                  "type": "link",
                   "label": "Additional resources",
                   "href": "/docs/8.5/components/modeler/desktop-modeler/element-templates/additional-resources/"
                 }
@@ -1066,11 +1061,6 @@
                   "type": "link",
                   "label": "FEEL",
                   "href": "/docs/8.5/components/modeler/reference/modeling-guidance/rules/feel/"
-                },
-                {
-                  "type": "link",
-                  "label": "History time to live",
-                  "href": "/docs/8.5/components/modeler/reference/modeling-guidance/rules/history-time-to-live/"
                 },
                 {
                   "type": "link",
