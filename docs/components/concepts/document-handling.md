@@ -149,7 +149,8 @@ To use the in-memory store, take the following steps:
 1. Explicitly specify the variables for the other stores. If you do not explicitly specify variables for any store, our application will use in-memory by default.
 2. Set `DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`.
 3. Set `DOCUMENT_DEFAULT_STORE_ID=inmemory`.
-   If no configuration is provided for at least one storage type, and no `DOCUMENT_DEFAULT_STORE_ID` is set, in-memory is used as the default storage type.
+
+If no configuration is provided for at least one storage type, and no `DOCUMENT_DEFAULT_STORE_ID` is set, in-memory is used as the default storage type.
 
 | Store variable                  | Required | Description                                                                                                                              |
 | ------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
