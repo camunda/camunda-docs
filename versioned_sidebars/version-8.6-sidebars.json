@@ -480,7 +480,8 @@
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-template-generator"
+            "components/connectors/custom-built-connectors/connector-template-generator",
+            "components/connectors/custom-built-connectors/create-connector-from-rest"
           ]
         }
       ],
