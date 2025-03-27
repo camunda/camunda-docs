@@ -1,7 +1,7 @@
 ---
 id: cluster-connectors
-title: Manage connectors
-description: "Manage and view your connectors."
+title: Manage your connectors
+description: "In Console you can monitor and manage the connectors you have running on your cluster on the Connector Management page."
 ---
 
 import ManageImg from './img/cluster-manage-connectors.png';
@@ -14,9 +14,10 @@ Monitor and manage inbound connectors running on your cluster.
 
 ## About connector management
 
-Cluster connector management allows you to monitor and manage your running webhooks, message queue subscriptions, and polling subscriptions. Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
+Cluster connector management allows you to monitor and manage your running inbound connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector).
 
-For example, you can see if a connector instance is unhealthy, and use the [Activity log](#activity-log) to troubleshoot and resolve issues.
+- Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
+- For example, you can see if a connector instance is unhealthy, and use the [activity log](#activity-log) to troubleshoot and resolve issues.
 
 ## Connector Management
 
@@ -122,3 +123,4 @@ For example:
 
 :::note
 If you are using deduplication, each connector occurrence in the BPMN diagram is shown in the array.
+:::
