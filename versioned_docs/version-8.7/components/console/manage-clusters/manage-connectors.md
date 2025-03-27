@@ -34,7 +34,7 @@ The **Connector Management** page provides an overview of the inbound connectors
 - **Active instances**: How many process instances are running for the connector. The icon indicates if the running connector instances are healthy or require attention.
 
 :::note
-[Webhook connector](/components/connectors/protocol/http-webhook.md) names also include the names of any connector used by the webhook. For example, "_Webhook (aws:eventbridge, GitHubWebhook, GitHubWebhook)_".
+[Webhook connector](/components/connectors/protocol/http-webhook.md) names also include the names of any connector based on the webhook. For example, "_Webhook (aws:eventbridge, GitHubWebhook)_".
 :::
 
 ## View connector instances
