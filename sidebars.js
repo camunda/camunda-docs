@@ -116,6 +116,7 @@ module.exports = {
           "Manage clusters": [
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
+            "components/console/manage-clusters/cluster-connectors",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
