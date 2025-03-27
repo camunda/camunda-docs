@@ -90,6 +90,7 @@ RewriteRule ^blog/ / [R=301,L]
 # Product links that need to be preserved for Desktop Modeler, in perpetuity.
 RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
 RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/$1 [R=301,L]
 
 # URLs that need to be preserved for connector element templates, in perpetuity.
 RewriteRule ^docs/?$ / [R=301,L]
@@ -166,6 +167,9 @@ RewriteRule ^optimize/3.14.0/apis-tools/optimize-api/event-ingestion/?$ /optimiz
 # Remove event-based-process-configuration from 3.14
 RewriteRule ^optimize/3.14.0/self-managed/optimize-deployment/configuration/event-based-process-configuration/?$ /optimize/3.14.0/self-managed/optimize-deployment/configuration/getting-started/ [R=301,L]
 
+# Moved API endpoint in 8.6
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/report-error-for-job/?$ /docs/apis-tools/camunda-api-rest/specifications/throw-job-error/ [R=301,L]
+
 # Restructure announcements and release notes for 8.6
 RewriteRule ^docs/reference/announcements/announcements-850/?$ /docs/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
 RewriteRule ^docs/reference/release-notes/850/?$ /docs/reference/announcements-release-notes/850/850-release-notes/$1 [R=301,L]
@@ -204,6 +208,9 @@ RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-integration/?
 # Provide current to next redirect for ad-hoc
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses/$1 [R=301,L]
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
+
+# Provide redirects for moved ad-hoc sub-processes page
+RewriteRule ^docs/8.7/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
