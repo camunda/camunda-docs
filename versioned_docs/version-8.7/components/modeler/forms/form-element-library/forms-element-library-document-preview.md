@@ -11,7 +11,7 @@ A form element to select files.
 ### Configurable properties
 
 - **Title**: Title displayed on top of the file picker. Can either be an [expression](../../feel/language-guide/feel-expressions-introduction.md), plain text, or [templating syntax](../configuration/forms-config-templating-syntax.md).
-- **Document reference**: Data used to render the documents. This should reference the same variable used when uploading a document via the [Filepicker](./forms-element-library-filepicker.md) previously. This can only be an [expression](../../feel/language-guide/feel-expressions-introduction.md). Below one example of how the structure of this variable looks like:
+- **Document reference**: Data used to render the documents. This should reference the same variable used when uploading a document via the [Filepicker](./forms-element-library-filepicker.md) or an inbound connector previously. This can only be an [expression](../../feel/language-guide/feel-expressions-introduction.md). Below one example of how the structure of this variable looks like:
 
 ```json
 [
