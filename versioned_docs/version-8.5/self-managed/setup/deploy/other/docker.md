@@ -14,15 +14,15 @@ We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All 
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
 :::
 
-| Component         | Docker image                                                                           | Link to configuration options                                                                                          |
-| ----------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Zeebe             | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)                         | [Environment variables](/self-managed/zeebe-deployment/configuration/environment-variables.md)                         |
-| Operate           | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)                     | [Operate configuration](/self-managed/operate-deployment/operate-configuration.md)                                     |
-| Tasklist          | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                   | [Tasklist configuration](/self-managed/tasklist-deployment/tasklist-configuration.md)                                  |
-| Identity          | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                   | [Configuration variables](/self-managed/identity/deployment/configuration-variables.md)                                |
-| Optimize          | [camunda/optimize:8-latest](https://hub.docker.com/r/camunda/optimize)                 | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start#available-environment-variables) |
-| Connectors        | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)               | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                            |
-| Connectors Bundle | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle) | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                            |
+| Component         | Docker image                                                                           | Link to configuration options                                                                                   |
+| ----------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Zeebe             | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)                         | [Environment variables](/self-managed/zeebe-deployment/configuration/environment-variables.md)                  |
+| Operate           | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)                     | [Operate configuration](/self-managed/operate-deployment/operate-configuration.md)                              |
+| Tasklist          | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                   | [Tasklist configuration](/self-managed/tasklist-deployment/tasklist-configuration.md)                           |
+| Identity          | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                   | [Configuration variables](/self-managed/identity/deployment/configuration-variables.md)                         |
+| Optimize          | [camunda/optimize:8-latest](https://hub.docker.com/r/camunda/optimize)                 | [Environment variables](/self-managed/optimize-deployment/install-and-start.md#available-environment-variables) |
+| Connectors        | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)               | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                     |
+| Connectors Bundle | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle) | [Connectors configuration](/self-managed/connectors-deployment/connectors-configuration.md)                     |
 
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 

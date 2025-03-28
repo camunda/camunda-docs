@@ -8,8 +8,8 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 
 ## Prerequisites
 
-- If you haven't done so already, [create a cluster]($docs$/guides/create-cluster/).
-- Upon cluster creation, [create your first client]($docs$/guides/setup-client-connection-credentials/). Ensure you check the `Optimize` client scope box.
+- If you haven't done so already, [create a cluster](/guides/create-cluster.md).
+- Upon cluster creation, [create your first client](/guides/setup-client-connection-credentials.md). Ensure you check the `Optimize` client scope box.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
@@ -21,7 +21,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 ## Getting started
 
 - You need authentication to access the API endpoints. Find more information [here](./optimize-api-authentication.md).
-- To properly execute the commands to list existing dashboard IDs and delete a dashboard, ensure you have [created a collection](../../components/userguide/collections-dashboards-reports.md) containing a [dashboard](../../components/userguide/creating-dashboards.md).
+- To properly execute the commands to list existing dashboard IDs and delete a dashboard, ensure you have [created a collection](/components/optimize/userguide/collections-dashboards-reports.md) containing a [dashboard](/components/optimize/userguide/creating-dashboards.md).
 
 ## Set up authentication
 
