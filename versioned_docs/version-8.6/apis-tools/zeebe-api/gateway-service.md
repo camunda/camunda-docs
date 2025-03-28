@@ -27,7 +27,7 @@ client using:
 ```java
 final ObjectMapper objectMapper = new ObjectMapper();
 final File configFile = new File("gateway-service-config.json");
-final Map<String, Object> config = objectMapper.readValue(
+final Map<String, Object> serviceConfig = objectMapper.readValue(
       configFile, new TypeReference<Map<String, Object>>() {});
 final ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress("localhost", 26500);
 

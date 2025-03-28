@@ -12,12 +12,12 @@ the [Zeebe repository](https://github.com/camunda/camunda/blob/main/zeebe/gatewa
 
 ## Default Service Config
 
-Along with the gateway protocol definition, [the gateway service also bundles a default service configuration file](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol-impl/src/main/resources/gateway-service-config.json).
+Along with the gateway protocol definition, the gateway service also bundles a [default service configuration file](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol-impl/src/main/resources/gateway-service-config.json).
 This file can be used as is, or as template to create your own, and defines default retry strategies on a per RPC basis: when to retry (based on error code), how often, how soon, etc.
 This file is also loaded by the Camunda Java SDK if `useDefaultRetryPolicy` is set to true.
 
 :::note
-You can read more about pservice configuration files here](https://github.com/grpc/grpc/blob/master/doc/service_config.md). These files are especially useful
+You can read more about service configuration files here](https://github.com/grpc/grpc/blob/master/doc/service_config.md). These files are especially useful
 when using the Camunda protocol in languages without, or with less feature rich clients and SDKs.
 :::
 
@@ -27,7 +27,7 @@ client using:
 ```java
 final ObjectMapper objectMapper = new ObjectMapper();
 final File configFile = new File("gateway-service-config.json");
-final Map<String, Object> config = objectMapper.readValue(
+final Map<String, Object> serviceConfig = objectMapper.readValue(
       configFile, new TypeReference<Map<String, Object>>() {});
 final ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forAddress("localhost", 26500);
 
