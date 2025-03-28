@@ -25,6 +25,57 @@ These release notes identify the new features included in 8.8, including [alpha 
 | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
 | 08 April 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha3)</li></ul> | [Release blog](https://camunda.com/blog/2025/04/camunda-alpha-release-april-2025/) |
 
+<!-- https://github.com/camunda/product-hub/issues/2630 -->
+
+### Ad-hoc subprocess dynamic activation via API {#adhocsubprocess}
+
+<!-- https://github.com/camunda/product-hub/issues/2585 -->
+
+### Advanced User Task Listeners for Updating Events {#listeners}
+
+Advanced User Task Listeners for Updating Events allow you to define listeners that trigger whenever certain task properties or variables change.
+
+- These listeners generate jobs similar to other event-based task listeners, granting direct access to task data as well as the ability to accept or roll back updates (in certain scenarios).
+- Operators can also view, manage, and resolve incidents caused by these listeners in Operate, ensuring a unified and transparent approach to handling task changes.
+
+<!-- https://github.com/camunda/product-hub/issues/2750 -->
+
+### Console <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#console}
+
+New features and enhancements are included in this release:
+
+#### Connector management multiple Connector Runtime instances support {#connector-management}
+
+Cluster connector management in Console now supports monitoring and management of multiple Connector Runtime instances.
+
+This enhancement provides a consolidated view of all webhooks, message queue subscriptions, and polling subscriptions for efficient monitoring and management of multiple Connector Runtime instances.
+
+<!-- Cluster connector management allows you to monitor and manage your running inbound connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector).
+
+- Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
+- For example, you can see if a connector instance is unhealthy, and use the activity log to troubleshoot and resolve issues.
+- To open the **Connector Management** page, on the cluster **Overview** tab, click **Manage** on the Connectors component tile. -->
+
+<!-- To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md). -->
+
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectors}
+
+New Connectors and enhancements are included in this release:
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+#### HubSpot Connector {#hubspot}
+
+Use the new outbound HubSpot Connector to connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your HubsSpot contacts, companies, and deals.
+
+This Connector supports the following operations:
+
+- Contacts: Get all contacts, Get contact by id, Get multiple contacts by id, Search contact, Create contact, Update contact, Delete contact.
+- Companies: Get all companies, Get company by id, Search company, Get all contacts of a company, Add contact to company, Remove contact from company, Create company, Delete company.
+- Deals: Get all deals, Get deal by id, Search deal, Delete deal.
+
+<!-- To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md). -->
+
 ## 8.8.0-alpha2
 
 | Release date  | Changelog(s)                                                                                                                                                                               | Blog                                                                               |
