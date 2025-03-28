@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 Store, track, and manage documents in Camunda 8 using the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx), Connectors, Forms, and Tasklist.
 
-Offering more robust document handling capabilities within Camunda SaaS and Self-Managed, users can now efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+Offering more robust document handling capabilities within Camunda SaaS and Self-Managed, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
 ## Storage integration and configuration
 
@@ -29,7 +29,7 @@ GCP and AWS work with SaaS, and are supported for Self-Managed in production. Ca
 If no configuration is provided, the default document storage is **in-memory**. To change this to a different storage method, use the environment variables in the section below for **every** component using document handling. No additional configuration is required for in-memory storage.
 :::
 
-To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are aws, in-memory, gcp (for Google Cloud Platform), and local-storage.
+To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `in-memory`, `gcp` (for Google Cloud Platform), and `local` (for local storage).
 
 <Tabs groupId="storage" defaultValue="aws" queryString values={
 [
@@ -176,7 +176,9 @@ DOCUMENT_DEFAULT_STORE_ID=inmemory
 Document handling may be beneficial for several use cases. For example:
 
 - [Upload a document via the inbound webhook Connector](#upload-a-document-via-inbound-webhook-connector), and later retrieve the document content in another Connector invocation to store it in a third-party system.
-- [Upload a document via a form](#upload-a-document-via-form), and utilize several outbound Connectors.
+- [Upload a document via a form](#upload-a-document-via-form), including start forms and user task forms.
+- [Reference a document in an outbound connector](#reference-a-document-in-an-outbound-connector), such as Amazon Bedrock, REST, Slack, and more.
+- [Display a document in a user task](#display-a-document-in-a-user-task)
 
 ### Upload a document via inbound webhook Connector
 
@@ -259,7 +261,15 @@ This feature will not work for public processes started by forms.
 
 ![document handling in tasklist](./assets/document-handling-tasklist.png)
 
-#### Outbound Connectors
+#### Start forms
+
+Insert text.
+
+### User task forms
+
+Insert text.
+
+### Reference a document in an outbound connector
 
 The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md) is enhanced to provide document support in property/variable bindings.
 
@@ -279,3 +289,7 @@ In most cases for the following outbound Connectors, you can include a **Request
 | [REST](/components/connectors/protocol/rest.md)                                         | Supports storing the response as a document.                                                                                                                                                                                   |
 | [SendGrid](/components/connectors/out-of-the-box-connectors/sendgrid.md)                | Provides attachment support.                                                                                                                                                                                                   |
 | [Slack](/components/connectors/out-of-the-box-connectors/slack.md)                      | Supports adding attachments and increasing template versions.                                                                                                                                                                  |
+
+### Display a document in a user task
+
+Insert text.
