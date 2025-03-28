@@ -1,7 +1,7 @@
 ---
 id: webapps-backup
-title: Backup and restore Operate, Tasklist, and Optimize data
-description: "How to perform a backup and restore of web application (Operate, Tasklist and Optimize) data."
+title: Backup and restore Operate and Tasklist data
+description: "How to perform a backup and restore of web application (Operate and Tasklist) data."
 keywords: ["backup", "backups"]
 ---
 
@@ -13,7 +13,9 @@ As of the Camunda 8.8 release, the `/actuator` endpoints for backups have been m
 :::
 
 :::note
-This page refers to the components Operate, Tasklist, and Optimize as "web applications". Depending on your deployment configuration, you may not have all of these components deployed. It is safe to ignore the configuration instructions for any applications that are not deployed.
+This page refers to the components Operate and Tasklist as "web applications".
+
+Optimize is not backed up as part of this process. Optimize is a dedicated application with its own backup system. Please see the [documentation for Optimize](./optimize-backup.md) to perform a backup
 :::
 
 The Camunda web applications store their data over multiple indices in Elasticsearch. A backup of web application data includes several Elasticsearch snapshots containing sets of different indices. Each backup is identified by a `backupId`. For example, a backup with an ID of `123` may contain the following Elasticsearch snapshots:
@@ -107,38 +109,10 @@ CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME=<es snapshot repository name>
 </TabItem>
 </Tabs>
 
-#### Optimize
-
-<Tabs groupId="config" className="tabs-hidden" defaultValue="yaml" values={
-[
-{label: 'YAML file', value: 'yaml', },
-{label: 'Environment variables', value: 'env', },
-]
-}>
-
-<TabItem value='yaml'>
-
-In file `environment-config.yaml`:
-
-```yaml
-backup:
-  repositoryName: <repository name>
-```
-
-</TabItem>
-<TabItem value='env'>
-
-```
-CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME=<es snapshot repository name>
-```
-
-</TabItem>
-</Tabs>
-
 ### Index prefix
 
 :::warning breaking change
-As of Camunda 8.8, the `indexPrefix` of all web applications must match. By default it is set to `""`. If overriden, it must set consistently across Operate, Tasklist and Optimize.
+As of Camunda 8.8, the `indexPrefix` of all web applications must match. By default it is set to `""`. If overriden, it must set consistently across Operate and Tasklist.
 :::
 
 ## Create backup API
@@ -302,7 +276,7 @@ Response:
 There is no web application API to preform the backup restore. Instead, use the [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html).
 
 :::note
-Operate, Tasklist and Optimize must **not** be running while a backup restore is taking place.
+Operate and Tasklist must **not** be running while a backup restore is taking place.
 :::
 
 To restore the backup with a known backup id, you must restore all the snapshots this backup contains (check the response of the [create backup API](#create-backup-api)).
