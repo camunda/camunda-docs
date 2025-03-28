@@ -21,7 +21,7 @@ The current known limitations of IDP are as follows:
 | Limitation                                                        | Description                                                                                                                  |
 | :---------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
 | [Microsoft Entra ID](https://docs.azure.cn/en-us/entra/identity/) | Use of Microsoft Entra ID as an OpenID Connect (OIDC) identity provider in Self-Managed is not currently supported with IDP. |
-| [Multi-tenancy](/self-managed/concepts/multi-tenancy.md)          | Multi-tenant Self-Managed installations are not supported with IDP.                                                          |
+| [Multi-tenancy](/self-managed/concepts/multi-tenancy.md)          | If multi-tenancy is enabled, IDP can only be used by users who can access the `<default>` tenant.                            |
 
 ## Prerequisites
 
