@@ -24,7 +24,55 @@ Create a custom REST connector based on and using the [Camunda REST connector](/
 1. Save your changes to the new connector template, and use it as required in your processes.
 
 :::caution
-If a variable is used elsewhere in your element template, the variable using other variables is declared after. Otherwise, they will be considered `null`.
+When creating a new template based on the REST connector, you must ensure that any field(s) used to set variables are placed **before** any field(s) that uses these variables. For example, in the following code, as the `url` requires the variables defined by `swid` and `swresource`, it is placed after them. Incorrectly placed variables will be considered as `null`.
+
+```json
+{
+      "id": "swid",
+      "label": "id",
+      "description": "Index of the resource",
+      "feel": "optional",
+      "group": "swapi",
+      "binding": {
+        "name": "index",
+        "type": "zeebe:input"
+      },
+      "type": "String"
+    },
+    {
+      "id": "swresource",
+      "label": "Type",
+      "description": "Choose the resource type",
+      "value": "Planets",
+      "group": "swapi",
+      "binding": {
+        "name": "resource",
+        "type": "zeebe:input"
+      },
+      "type": "Dropdown",
+      "choices": [...]
+    },
+    {
+      "id": "url",
+      "label": "URL",
+      "optional": false,
+      "constraints": {
+        "notEmpty": true,
+        "pattern": {
+          "value": "^(=|(http://|https://|secrets|\\{\\{).*$)",
+          "message": "Must be a http(s) URL"
+        }
+      },
+      "group": "endpoint",
+      "binding": {
+        "name": "url",
+        "type": "zeebe:input"
+      },
+      "type": "Hidden",
+      "value": "=\"https://swapi.dev/api/\" + resource + \"/\" + index"
+    }
+```
+
 :::
 
 ## Example: Custom Star Wars API connector
