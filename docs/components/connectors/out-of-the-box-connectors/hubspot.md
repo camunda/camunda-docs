@@ -9,7 +9,9 @@ The **Hubspot Connector** is an outbound Connector that allows you to connect yo
 
 ## Prerequisites
 
-To use the **HubSpot Connector**, you must have a HubSpot account and an [Bearer token](https://knowledge.hubspot.com/integrations/how-do-i-get-my-hubspot-api-key) to authenticate requests. When creating a private app make sure to grant the necessary permissions to access the HubSpot API. Different operations require different permissions. To use all operations this connector is capable of add these permissions to your app:
+To use the **HubSpot Connector**, you must have a HubSpot account and a [Bearer token](https://knowledge.hubspot.com/integrations/how-do-i-get-my-hubspot-api-key) to authenticate requests.
+
+When creating a private app, you must grant the permissions required to access the HubSpot API. Different operations require different permissions. To use all HubSpot connector operations, add the following permissions to your app:
 
 - `crm.objects.contacts.read`
 - `crm.objects.contacts.write`
@@ -38,7 +40,7 @@ The **HubSpot Connector** currently supports the following operations.
 
 #### Get all contacts
 
-- **Next page after object id:** HubSpot limits the number of results to 100 and provides pagination. To receive the first page keep this field empty, if you want to receive a following page, set it to `response.body.paging.next.after` from the previous page.
+- **Next page after object id:** HubSpot limits the number of results to 100 and provides pagination. To retrieve the first page keep this field empty. To retrieve the following page, set it to `response.body.paging.next.after` from the previous page.
 
 #### Get contact by id
 
@@ -46,18 +48,21 @@ The **HubSpot Connector** currently supports the following operations.
 
 #### Get multiple contacts by id
 
-- **Contact ids:** The IDs of the contacts to receive. This is limited to 100 contacts.
+- **Contact ids:** The IDs of the contacts to retrieve. This is limited to 100 contacts.
 
 #### Search contact
 
-- **Search field:** The field to search for, e.g. "lastname"
-- **Search value:** The value to search for, e.g. "Smith"
-  All contacts that match the search criteria are returned.
+- **Search field:** The field to search for. For example, "lastname".
+- **Search value:** The value to search for. For example, "Smith".
+
+:::note
+All contacts matching the search criteria are returned.
+:::
 
 #### Create contact
 
 - **Properties:** The properties of the contact to create. Learn more about [properties](https://developers.hubspot.com/docs/guides/api/crm/properties) and [default properties of contacts](https://knowledge.hubspot.com/properties/hubspots-default-contact-properties).
-- **Company ID:** The ID of the company the contact is associated with. Hubspot automatically adds the contact to the company if the mail address domain matches the company domain, e.g. jane.doe@camunda.com is automatically added to the company with the domain camunda.com. If you set the company ID manually, the contact is added to the company with the given ID **AND** the company with the matching domain.
+- **Company ID:** The ID of the company the contact is associated with. HubSpot automatically adds the contact to the company if the mail address domain matches the company domain. For example, "jane.doe@camunda.com" is automatically added to the company with the domain "camunda.com". If you set the company ID manually, the contact is added to the company with the given ID **AND** the company with the matching domain.
 
 #### Update contact
 
@@ -65,7 +70,7 @@ The **HubSpot Connector** currently supports the following operations.
 - **Contact ID:** The ID of the contact to update.
 
 :::note
-It is not possible to update associations to companies here. To do so use the `add contact to` or `remove contact from company` operations under `Companies`.
+It is not possible to update associations to companies with this operation. To do so use the `add contact to` or `remove contact from company` operations under `Companies`.
 :::
 
 #### Delete contact
@@ -76,7 +81,7 @@ It is not possible to update associations to companies here. To do so use the `a
 
 #### Get all companies
 
-- **Next page after object id:** HubSpot limits the number of results to 100 and provides pagination. To receive the first page keep this field empty, if you want to receive a following page, set it to `response.body.paging.next.after` from the previous page.
+- **Next page after object id:** HubSpot limits the number of results to 100 and provides pagination. To retrieve the first page keep this field empty. To retrieve the following page, set it to `response.body.paging.next.after` from the previous page.
 
 #### Get company by id
 
@@ -84,9 +89,12 @@ It is not possible to update associations to companies here. To do so use the `a
 
 #### Search company
 
-- **Search field:** The field to search for, e.g. "name"
-- **Search value:** The value to search for, e.g. "Camunda"
-  All companies that match the search criteria are returned.
+- **Search field:** The field to search for. For example, "name".
+- **Search value:** The value to search for. For example, "Camunda".
+
+:::note
+All companies matching the search criteria are returned.
+:::
 
 #### Get all contacts of a company
 
@@ -114,7 +122,7 @@ It is not possible to update associations to companies here. To do so use the `a
 
 #### Get all deals
 
-- **Next page after object id:** HubSpot limits the number of results to 100 and provides pagination. To receive the first page keep this field empty, if you want to receive a following page, set it to `response.body.paging.next.after` from the previous page.
+- **Next page after object id:** HubSpot limits the number of results to 100 and provides pagination. To retrieve the first page keep this field empty. To retrieve the following page, set it to `response.body.paging.next.after` from the previous page.
 
 #### Get deal by id
 
@@ -122,9 +130,12 @@ It is not possible to update associations to companies here. To do so use the `a
 
 #### Search deal
 
-- **Search field:** The field to search for, e.g. "dealname"
-- **Search value:** The value to search for, e.g. "Inital Deal for Camunda"
-  All deals that match the search criteria are returned.
+- **Search field:** The field to search for. For example, "dealname".
+- **Search value:** The value to search for. For example, "Inital Deal for Camunda".
+
+:::note
+All deals matching the search criteria are returned.
+:::
 
 #### Delete deal
 
@@ -135,7 +146,7 @@ It is not possible to update associations to companies here. To do so use the `a
 #### Submit form
 
 - **Portal ID:** The HubSpot account that the form belongs to. [Learn more](https://knowledge.hubspot.com/account-management/manage-multiple-hubspot-accounts#check-your-current-account)
-- **Form ID:** The unique ID of the form you're sending data to. [Learn more](https://knowledge.hubspot.com/forms/find-your-form-guid)
+- **Form ID:** The unique ID of the form you are sending data to. [Learn more](https://knowledge.hubspot.com/forms/find-your-form-guid)
 - **Form fields:** The value of the input fields of the form. [Learn more](https://developers.hubspot.com/docs/reference/api/marketing/forms/v3-legacy)
 
 #### Add element to list
@@ -144,10 +155,9 @@ It is not possible to update associations to companies here. To do so use the `a
 - **Object IDs:** The IDs of the objects to add to the list.
 
 :::note
-Adding elements to list may take a few seconds to be reflected in the HubSpot UI.
+Adding elements to a list may take a few seconds to be reflected in the HubSpot UI.
 :::
 
 ## Handle Connector response
 
-The **HubSpot Connector** is a protocol Connector, meaning it is built on top of the **HTTP REST Connector**, therefore
-handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).
+As the **HubSpot Connector** is a protocol Connector (built on top of the **HTTP REST Connector**) the handling response is still applicable [as described](/components/connectors/protocol/rest.md#response).
