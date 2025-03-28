@@ -11,6 +11,8 @@ As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (B
 
 You must especially rewrite code that does the following:
 
+// TODO let the external tasks link to point to the camunda 7 docs, not the Best Practices: https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/#the-external-task-pattern
+
 - Uses the Client API (to start process instances for example).
 - Implements [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), which can be:
   - [External tasks](/components/best-practices/development/invoking-services-from-the-process-c7.md#external-tasks), where workers subscribe to the engine.
@@ -79,6 +81,8 @@ The [Diagram Converter](../migration-tooling/) takes care of most changes. Depen
 
 If your models also contain JUEL expressions, which are not supported in Camunda 8, they also need to be converted.
 
+// document the expression transformer instead of referencing code
+
 Simple expressions are [directly converted by this code in the Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/blob/main/backend-diagram-converter/core/src/main/java/org/camunda/community/migration/converter/expression/ExpressionTransformer.java). This can be extended to suit your needs.
 
 You can use the [FEEL copilot](https://feel-copilot.camunda.com/) to rewrite more complex expressions for you.
@@ -106,14 +110,16 @@ For example, to migrate an existing Spring Boot application, take the following 
 
 2. Adjust configuration:
 
-   - Set [Camunda 8 credentials](../../apis-tools/spring-zeebe-sdk/configuration.md) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
+   - Set [Camunda 8 credentials](../../apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
    - Remove existing Camunda 7 settings.
 
-3. Add `@ZeebeDeployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
+3. Add `@Deployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
 
 4. Adjust your source code and process model as described below.
 
 ### Client API
+
+// TODO link to the Zeebe / Camunda API, call it Camunda 8 API, is the mentioning of the protocol still required?
 
 The Zeebe API (for example, the workflow engine API - start process instances, subscribe to tasks, or complete them) has been completely redesigned and is not compatible with Camunda 7. While conceptually similar, the API uses different method names, data structures, and protocols.
 
@@ -123,7 +129,7 @@ If this affects large parts of your code base, you could write a small abstracti
 
 [External task workers](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) in Camunda 7 are conceptually comparable to [job workers](/components/concepts/job-workers.md) in Camunda 8. This means they are generally easier to migrate.
 
-The "external task topic" from Camunda 7 is directly translated into a "task type name" in Camunda 8, therefore `camunda:topic` gets `zeebe:taskDefinition type` in your BPMN model.
+The "external task topic" from Camunda 7 is directly translated into a "task type name" in Camunda 8, therefore `camunda:topic` becomes `zeebe:taskDefinition type` in your BPMN model.
 
 The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) picks up your `@ExternalTaskHandler` beans, wraps them into a JobWorker, and subscribes to the `camunda:topic` you defined as `zeebe:taskDefinition type`.
 
@@ -142,6 +148,8 @@ The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-
 ![Service task in Camunda 7 and Camunda 8](../img/migration-service-task.png)
 
 You can use this worker directly, but more often it might serve as a starting point or simply be used for inspiration.
+
+// TODO naming inconsistency
 
 The [Camunda 7 to Camunda 8 Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/backend-diagram-converter) will adjust the service tasks in your BPMN model automatically for this adapter.
 
