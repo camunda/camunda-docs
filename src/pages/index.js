@@ -161,7 +161,9 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/reference/release-notes/")}
+                to={useBaseUrl(
+                  "docs/reference/announcements-release-notes/overview/"
+                )}
               >
                 Release notes
               </Link>

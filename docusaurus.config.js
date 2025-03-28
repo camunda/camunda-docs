@@ -65,10 +65,6 @@ module.exports = {
             label: "8.5 / 3.13.0",
             banner: "none",
           },
-          "3.12.0": {
-            label: "8.4 / 3.12.0",
-            banner: "none",
-          },
         },
       },
     ],
@@ -452,7 +448,7 @@ module.exports = {
             },
             {
               label: "Release cycle",
-              to: "docs/reference/release-policy",
+              to: "docs/reference/announcements-release-notes/release-policy",
             },
           ],
         },
@@ -587,7 +583,6 @@ module.exports = {
             "/docs/8.3/**",
             "/docs/8.4/**",
             "/docs/8.5/**",
-            "/optimize/3.12.0/**",
             "/optimize/3.13.0/**",
             "/optimize/3.15.0/**",
             "/optimize/next/**",

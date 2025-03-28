@@ -37,7 +37,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.6.11) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.6.12) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 
@@ -151,6 +151,22 @@ curl --cookie  cookie.txt  localhost:8080/v2/topology
 
 </TabItem>
 </Tabs>
+
+#### Use Camunda APIs with the Java client
+
+[The Java client](/apis-tools/java-client/index.md) does not support cookie-based authentication. To access Camunda APIs in a Camunda 8 Run environment with the Java client, you'll need to:
+
+- Manually retrieve a cookie through Java HTTP functionality or cURL, as described above.
+- Manually include the cookie as a custom header in Java client requests:
+
+```java
+zeebeClient
+  .withChainHandlers(
+      (request, producer, scope, chain, callback) -> {
+        request.setHeader("Cookie", "OPERATE-SESSION=<session ID extracted from previous call>");
+        chain.proceed(request, producer, scope, callback);
+      })
+```
 
 ## Shut down Camunda 8 Run
 

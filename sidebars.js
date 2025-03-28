@@ -43,6 +43,7 @@ module.exports = {
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
           ],
         },
+        "guides/use-shared-project-for-organization-wide-collaboration",
       ],
     },
     {
@@ -193,7 +194,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Intelligent document processing",
+              label: "Intelligent document processing (IDP)",
               link: {
                 type: "doc",
                 id: "components/modeler/web-modeler/idp",
@@ -214,7 +215,15 @@ module.exports = {
                   ],
                 },
                 // "components/modeler/web-modeler/idp/idp-document-automation",
-                "components/modeler/web-modeler/idp/idp-integrate",
+                {
+                  type: "category",
+                  label: "Integrate IDP into your processes",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-integrate",
+                  },
+                  items: ["components/modeler/web-modeler/idp/idp-example"],
+                },
                 "components/modeler/web-modeler/idp/idp-key-concepts",
                 "components/modeler/web-modeler/idp/idp-reference",
               ],
@@ -330,6 +339,7 @@ module.exports = {
                 "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
                 "components/modeler/bpmn/call-activities/call-activities",
                 "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+                "components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses",
               ],
             },
             {
@@ -337,7 +347,6 @@ module.exports = {
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
                 "components/modeler/bpmn/compensation-handler/compensation-handler",
-                "components/modeler/bpmn/ad-hoc/ad-hoc",
               ],
             },
           ],
@@ -675,6 +684,21 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "Identity",
+      link: {
+        type: "doc",
+        id: "components/identity/identity-introduction",
+      },
+      items: [
+        "components/identity/identity-introduction",
+        "components/identity/authorization",
+        "components/identity/user",
+      ],
+    },
+    {
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
@@ -709,18 +733,6 @@ module.exports = {
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
-          ],
-          "Camunda 7 specific": [
-            "components/best-practices/architecture/deciding-about-your-stack-c7",
-            "components/best-practices/architecture/sizing-your-environment-c7",
-            "components/best-practices/development/invoking-services-from-the-process-c7",
-            "components/best-practices/development/understanding-transaction-handling-c7",
-            "components/best-practices/development/testing-process-definitions-c7",
-            "components/best-practices/development/routing-events-to-processes-c7",
-            "components/best-practices/operations/operating-camunda-c7",
-            "components/best-practices/operations/performance-tuning-camunda-c7",
-            "components/best-practices/operations/securing-camunda-c7",
-            "components/best-practices/architecture/extending-human-task-management-c7",
           ],
         },
       ],
@@ -1173,10 +1185,47 @@ module.exports = {
       ],
     },
     {
-      "Reference architecture": [
-        "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/kubernetes",
-        "self-managed/reference-architecture/manual",
+      type: "category",
+      label: "Reference architecture",
+      link: {
+        type: "doc",
+        id: "self-managed/reference-architecture/reference-architecture",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Kubernetes",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/kubernetes",
+          },
+          items: [
+            {
+              "AWS EKS": [
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+              ],
+            },
+            {
+              Openshift: [
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Manual JAR",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/manual",
+          },
+          items: ["self-managed/setup/deploy/amazon/aws-ec2"],
+        },
       ],
     },
     {
@@ -1222,6 +1271,7 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
         },
+        "self-managed/operational-guides/data-purge",
         {
           type: "doc",
           label: "Configure components",
@@ -1428,13 +1478,13 @@ module.exports = {
           Identity: [
             "self-managed/identity/what-is-identity",
             {
-              "Orchestration Cluster Identity": [
+              "Identity for Orchestration clusters": [
                 "self-managed/identity/orchestration-identity/installation",
                 "self-managed/identity/orchestration-identity/configuration",
               ],
             },
             {
-              "Identity for Web Modeler and Console": [
+              "Identity for Web Modeler, Console, and Optimize": [
                 "self-managed/identity/getting-started/install-identity",
                 {
                   "User guide": [
