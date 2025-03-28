@@ -6,7 +6,7 @@ description: "Define which data users are authorized to see."
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-User authorization management differs depending on whether the entities to manage the authorizations for are originating from adjacent systems like imported data from the connected Camunda workflow engine such as process instances, or whether the entities are fully managed by Camunda Optimize, such as [event-based processes and instances](#) or [collections](components/userguide/collections-dashboards-reports.md). For entities originating from adjacent systems authorizations are managed in the Camunda 7 via Camunda Admin, for the latter the authorizations are managed in Camunda Optimize.
+User authorization management differs depending on whether the entities to manage the authorizations for are originating from adjacent systems like imported data from the connected Camunda workflow engine such as process instances, or whether the entities are fully managed by Camunda Optimize, such as [event-based processes and instances][event-based-processes] or [collections](components/optimize/userguide/collections-dashboards-reports.md). For entities originating from adjacent systems authorizations are managed in the Camunda 7 via Camunda Admin, for the latter the authorizations are managed in Camunda Optimize.
 
 ## Camunda 7 data authorizations
 
@@ -44,10 +44,12 @@ There are entities that only exist in Camunda Optimize and authorizations to the
 
 ### Collections
 
-[Collections](components/userguide/collections-dashboards-reports.md) are the only way to share Camunda Optimize reports and dashboards with other users. Access to them is directly managed via the UI of collections; see the corresponding user guide section on [Collection - User Permissions](components/userguide/collections-dashboards-reports.md#user-permissions).
+[Collections](components/optimize/userguide/collections-dashboards-reports.md) are the only way to share Camunda Optimize reports and dashboards with other users. Access to them is directly managed via the UI of collections; see the corresponding user guide section on [Collection - User Permissions](components/optimize/userguide/collections-dashboards-reports.md#user-permissions).
 
 ### Event-based processes
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-Although [event-based processes](#) may include data originating from adjacent systems like the Camunda Engine when using [Camunda Activity Event Sources](##event-sources), they do not enforce any authorizations from Camunda Admin. The reason for that is that multiple sources can get combined in a single [event-based process](#) that may contain conflicting authorizations. It is thus required to authorize users or groups to [event-based processes](#) either directly when [publishing](##publishing-an-event-based-process) them or later on via the [event-based process - Edit Access](##event-based-process-list---edit-access) option.
+Although [event-based processes][event-based-processes] may include data originating from adjacent systems like the Camunda Engine when using [Camunda Activity Event Sources](/components/optimize/userguide/additional-features/event-based-processes.md#event-sources), they do not enforce any authorizations from Camunda Admin. The reason for that is that multiple sources can get combined in a single [event-based process][event-based-processes] that may contain conflicting authorizations. It is thus required to authorize users or groups to [event-based processes][event-based-processes] either directly when [publishing](/components/optimize/userguide/additional-features/event-based-processes.md#publishing-an-event-based-process) them or later on via the [event-based process - Edit Access](/components/optimize/userguide/additional-features/event-based-processes.md#event-based-process-list---edit-access) option.
+
+[event-based-processes]: /components/optimize/userguide/additional-features/event-based-processes.md
