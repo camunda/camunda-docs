@@ -8,7 +8,7 @@ Camunda Optimize versions are denoted as X.Y.Z as well as by an optional [pre-re
 
 ## Release cadence
 
-Refer to the [Camunda 8 release policy]($docs$/reference/release-policy) for additional details.
+Refer to the [Camunda 8 release policy](/reference/release-policy.md) for additional details.
 
 ### Alpha releases
 
