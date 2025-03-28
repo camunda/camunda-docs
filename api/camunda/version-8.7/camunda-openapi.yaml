@@ -10,7 +10,7 @@ info:
     url: https://github.com/camunda/camunda/blob/main/licenses/CAMUNDA-LICENSE-1.0.txt
 externalDocs:
   description: Find out more
-  url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/overview/
+  url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
 
 servers:
   - url: "{schema}://{host}:{port}/v2"
@@ -148,7 +148,8 @@ paths:
     post:
       tags:
         - Job
-      summary: Report error for job
+      operationId: throwJobError
+      summary: Throw error for job
       description: |
         Reports a business error (i.e. non-technical) that occurs while processing a job.
       parameters:
@@ -702,6 +703,17 @@ paths:
           description: The provided data is not valid.
         "500":
           description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "504":
+          description: |
+            The process instance creation request timed out in the gateway.
+
+            This can happen if the `awaitCompletion` request parameter is set to `true`
+            and the created process instance did not complete within the defined request timeout.
+            This often happens when the created instance is not fully automated or contains wait states.
           content:
             application/problem+json:
               schema:
@@ -1389,7 +1401,7 @@ paths:
 
         The caller must provide a file name for each document, which will be used in case of a multi-status response
         to identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header
-        of the file part or in the `filename` field of the metadata part. If both are provided, the `filename` field
+        of the file part or in the `fileName` field of the metadata part. If both are provided, the `fileName` field
         takes precedence.
 
         In case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,
@@ -1871,9 +1883,81 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+  /resources/{resourceKey}:
+    get:
+      tags:
+        - Resource
+      summary: Get resource
+      description: |
+        Returns a deployed resource.
+        :::info
+        Currently, this endpoint only supports RPA resources.
+        :::
+      parameters:
+        - name: resourceKey
+          in: path
+          required: true
+          description: The unique key identifying the resource.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The resource is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceResult"
+        "404":
+          description: A resource with the given key was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+  /resources/{resourceKey}/content:
+    get:
+      tags:
+        - Resource
+      summary: Get resource content
+      description: |
+        Returns the content of a deployed resource.
+        :::info
+        Currently, this endpoint only supports RPA resources.
+        :::
+      parameters:
+        - name: resourceKey
+          in: path
+          required: true
+          description: The unique key identifying the resource.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The resource content is successfully returned.
+          content:
+            application/json:
+              schema:
+                type: string
+        "404":
+          description: A resource with the given key was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          description: An internal error occurred while processing the request.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
 
   /element-instances/{elementInstanceKey}/variables:
-    post:
+    put:
       tags:
         - Element instance
       summary: Update element instance variables
@@ -2570,6 +2654,8 @@ components:
             - CALLED_DECISION_ERROR
             - DECISION_EVALUATION_ERROR
             - FORM_NOT_FOUND
+            - RESOURCE_NOT_FOUND
+            - EXECUTION_LISTENER_NO_RETRIES
         errorMessage:
           type: string
           description: Error message which describes the error in more detail.
@@ -2682,6 +2768,8 @@ components:
             - CALLED_DECISION_ERROR
             - DECISION_EVALUATION_ERROR
             - FORM_NOT_FOUND
+            - RESOURCE_NOT_FOUND
+            - EXECUTION_LISTENER_NO_RETRIES
         errorMessage:
           type: string
           description: Error message which describes the error in more detail.
@@ -4169,7 +4257,7 @@ components:
     DocumentCreationFailureDetail:
       type: object
       properties:
-        filename:
+        fileName:
           type: string
           description: The name of the file.
         detail:
@@ -4555,7 +4643,8 @@ components:
         awaitCompletion:
           description: |
             Wait for the process instance to complete. If the process instance completion does
-            not occur within the requestTimeout, the request will be closed. Disabled by default.
+            not occur within the requestTimeout, the request will be closed. This can lead to a 504
+            response status. Disabled by default.
           type: boolean
           default: false
         fetchVariables:
@@ -4916,6 +5005,28 @@ components:
       properties:
         signalKey:
           description: The unique ID of the signal that was broadcast.
+          type: string
+    ResourceResult:
+      type: object
+      properties:
+        resourceName:
+          description: The resource name from which this resource was parsed.
+          type: string
+        version:
+          description: The assigned resource version.
+          type: integer
+          format: int32
+        versionTag:
+          description: The version tag of this resource.
+          type: string
+        resourceId:
+          description: The resource ID of this resource.
+          type: string
+        tenantId:
+          description: The tenant ID of this resource.
+          type: string
+        resourceKey:
+          description: The unique key of this resource.
           type: string
   responses:
     InternalServerError:

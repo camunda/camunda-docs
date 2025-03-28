@@ -41,6 +41,10 @@ To add additional clusters, increment the `0` value for each variable (`CAMUNDA_
 
 ### Database
 
+:::note
+Web Modeler does not support the use of custom schemas in versions prior to `8.7.0`.
+:::
+
 Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
 
 | Environment variable                  | Description                                           | Example value                                            |
@@ -203,7 +207,7 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 | `LOG_LEVEL_CLIENT`   | [optional]<br/>Log level for the client         | `DEBUG`                      |
 | `LOG_LEVEL_WEBAPP`   | [optional]<br/>Log level for the Node.js server | `DEBUG`                      |
 
-The `LOG_LEVEL_*` options can be found [here](../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
+The `LOG_LEVEL_*` options can be found [here](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
 
 ### SSL

@@ -29,6 +29,7 @@ tags:
   - name: Ad-hoc subprocess
   - name: Authentication
   - name: Authorization
+  - name: Batch operation
   - name: Clock
   - name: Cluster
   - name: Decision definition
@@ -585,8 +586,7 @@ paths:
           required: true
           description: The unique identifier of the mapping rule.
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "202":
           description: The mapping rule was successfully assigned to the tenant.
@@ -621,8 +621,7 @@ paths:
           required: true
           description: The unique identifier of the mapping rule.
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "202":
           description: The mapping rule was successfully removed from the tenant.
@@ -658,8 +657,7 @@ paths:
           required: true
           description: The unique identifier of the group.
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "202":
           description: The group was successfully assigned to the tenant.
@@ -694,8 +692,7 @@ paths:
           required: true
           description: The unique identifier of the group.
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "202":
           description: The group was successfully removed from the tenant.
@@ -1332,6 +1329,45 @@ paths:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /process-definitions/{processDefinitionKey}/statistics/flownode-instances:
+    post:
+      tags:
+        - Process definition
+      operationId: getProcessDefinitionStatistics
+      summary: Get process definition statistics
+      description: |
+        Get statistics about flow nodes in currently running process instances by process definition key and search filter.
+      parameters:
+        - name: processDefinitionKey
+          in: path
+          required: true
+          description: The assigned key of the process definition, which acts as a unique identifier for this process definition.
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessDefinitionFlowNodeStatisticsQuery"
+      responses:
+        "200":
+          description: The process definition statistics result.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProcessDefinitionFlowNodeStatisticsResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
         "500":
           $ref: "#/components/responses/InternalServerError"
 
@@ -2030,8 +2066,7 @@ paths:
           required: true
           description: The key of the authorization to delete.
           schema:
-            type: integer
-            format: int64
+            type: string
       requestBody:
         content:
           application/json:
@@ -2063,8 +2098,7 @@ paths:
           required: true
           description: The key of the authorization to delete.
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "204":
           description: The authorization was deleted successfully.
@@ -2441,8 +2475,7 @@ paths:
           required: true
           description: The user key.
           schema:
-            type: integer
-            format: int64
+            type: string
       responses:
         "202":
           description: The user was assigned successfully to the group.
@@ -3388,6 +3421,109 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
+  /batch-operations/{batchOperationKey}:
+    get:
+      tags:
+        - Batch operation
+      operationId: getBatchOperation
+      summary: Get batch operation
+      description: Get batch operation by key.
+      parameters:
+        - name: batchOperationKey
+          in: path
+          required: true
+          description: |
+            The key of the batch operation.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The batch operation was found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchOperationResponse"
+        "400":
+          description: The provided data is not valid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: The batch operation is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /batch-operations/{batchOperationKey}/items:
+    get:
+      tags:
+        - Batch operation
+      operationId: getBatchOperationItems
+      summary: Get batch operation items
+      description: Get items for a batch operation.
+      parameters:
+        - name: batchOperationKey
+          in: path
+          required: true
+          description: |
+            The key of the batch operation.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: The batch operation items were found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchOperationItemSearchQueryResult"
+        "400":
+          description: The provided data is not valid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "404":
+          description: The batch operation was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /batch-operations/search:
+    post:
+      tags:
+        - Batch operation
+      operationId: searchBatchOperations
+      summary: Search batch operations
+      description: Search for batch operations based on given criteria.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessInstanceSearchQuery"
+      responses:
+        "200":
+          description: The batch operation search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchOperationSearchQueryResult"
+        "400":
+          description: The provided data is not valid.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
 components:
   schemas:
     TenantCreateRequest:
@@ -3675,8 +3811,12 @@ components:
           type: string
           description: Name of the variable.
         value:
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
           description: The value of the variable.
+      required:
+        - name
+        - value
     VariableUserTaskFilterRequest:
       description: The user task variable search filters.
       type: object
@@ -4192,26 +4332,10 @@ components:
           title: Exact match
           description: Matches the value exactly.
         - $ref: "#/components/schemas/AdvancedDateTimeFilter"
-    ProcessInstanceFilter:
-      description: Process instance search filter.
+    BaseProcessInstanceFilter:
+      description: Base process instance search filter.
       type: object
       properties:
-        processDefinitionId:
-          description: The process definition ID.
-          allOf:
-            - $ref: "#/components/schemas/StringFilterProperty"
-        processDefinitionName:
-          description: The process definition name.
-          allOf:
-            - $ref: "#/components/schemas/StringFilterProperty"
-        processDefinitionVersion:
-          description: The process definition version.
-          allOf:
-            - $ref: "#/components/schemas/IntegerFilterProperty"
-        processDefinitionVersionTag:
-          description: The process definition version tag.
-          allOf:
-            - $ref: "#/components/schemas/StringFilterProperty"
         startDate:
           description: The start date.
           allOf:
@@ -4240,10 +4364,6 @@ components:
           description: The key of this process instance.
           allOf:
             - $ref: "#/components/schemas/BasicStringFilterProperty"
-        processDefinitionKey:
-          description: The process definition key.
-          allOf:
-            - $ref: "#/components/schemas/BasicStringFilterProperty"
         parentProcessInstanceKey:
           description: The parent process instance key.
           allOf:
@@ -4252,6 +4372,36 @@ components:
           description: The parent flow node instance key.
           allOf:
             - $ref: "#/components/schemas/BasicStringFilterProperty"
+    ProcessInstanceFilter:
+      description: Process instance search filter.
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/BaseProcessInstanceFilter"
+      properties:
+        processDefinitionId:
+          description: The process definition ID.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+        processDefinitionName:
+          description: The process definition name.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+        processDefinitionVersion:
+          description: The process definition version.
+          allOf:
+            - $ref: "#/components/schemas/IntegerFilterProperty"
+        processDefinitionVersionTag:
+          description: The process definition version tag.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+        processDefinitionKey:
+          description: The process definition key.
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
+        batchOperationId:
+          description: The batch operation ID.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
     ProcessInstanceVariableFilterRequest:
       description: Process instance variable filter.
       type: object
@@ -4261,7 +4411,11 @@ components:
           type: string
         value:
           description: The value of the variable.
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+      required:
+        - name
+        - value
     ProcessInstanceSearchQueryResult:
       description: Process instance search response.
       type: object
@@ -4324,6 +4478,37 @@ components:
         - ACTIVE
         - COMPLETED
         - TERMINATED
+    ProcessDefinitionFlowNodeStatisticsQuery:
+      description: Process definition flow node statistics request.
+      type: object
+      properties:
+        filter:
+          description: The process instance search filters.
+          allOf:
+            - $ref: "#/components/schemas/BaseProcessInstanceFilter"
+    ProcessDefinitionFlowNodeStatisticsResult:
+      description: Process definition flow node statistics response.
+      type: object
+      properties:
+        flowNodeId:
+          description: The flow node ID for which the results are aggregated.
+          type: string
+        active:
+          description: The total number of active instances of the flow node.
+          type: integer
+          format: int64
+        canceled:
+          description: The total number of canceled instances of the flow node.
+          type: integer
+          format: int64
+        incidents:
+          description: The total number of incidents for the flow node.
+          type: integer
+          format: int64
+        completed:
+          description: The total number of completed instances of the flow node.
+          type: integer
+          format: int64
     CancelProcessInstanceRequest:
       type: object
       nullable: true
@@ -4722,6 +4907,7 @@ components:
             - CALLED_DECISION_ERROR
             - DECISION_EVALUATION_ERROR
             - FORM_NOT_FOUND
+            - RESOURCE_NOT_FOUND
         errorMessage:
           type: string
           description: Error message which describes the error in more detail.
@@ -4792,6 +4978,7 @@ components:
             - CALLED_DECISION_ERROR
             - DECISION_EVALUATION_ERROR
             - FORM_NOT_FOUND
+            - RESOURCE_NOT_FOUND
         errorMessage:
           type: string
           description: Error message which describes the error in more detail.
@@ -4899,6 +5086,7 @@ components:
         - DELETE_PROCESS
         - DELETE_DRD
         - DELETE_FORM
+        - DELETE_RESOURCE
         - DELETE_PROCESS_INSTANCE
         - DELETE_DECISION_INSTANCE
     ResourceTypeEnum:
@@ -6607,8 +6795,7 @@ components:
           type: string
           description: The ID of the process definition that created the document.
         processInstanceKey:
-          type: integer
-          format: int64
+          type: string
           description: The key of the process instance that created the document.
         customProperties:
           type: object
@@ -7082,6 +7269,135 @@ components:
         formKey:
           description: The assigned key, which acts as a unique identifier for this form.
           type: string
+    BatchOperationSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - batchOperationKey
+            - operationType
+            - status
+            - startDate
+            - endDate
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    BatchOperationSearchQuery:
+      description: Batch operation search request.
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationSearchQuerySortRequest"
+        filter:
+          description: The batch operation search filters.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationFilter"
+    BatchOperationFilter:
+      description: Batch operation filter request.
+      type: object
+      properties:
+        batchOperationKey:
+          description: The batch operation key.
+          type: string
+        operationType:
+          type: string
+          description: The operation type of the batch operation.
+          enum:
+            - PROCESS_CANCELLATION
+        status:
+          type: string
+          description: The status of the batch operation.
+          enum:
+            - CREATED
+            - ACTIVE
+            - PAUSED
+            - COMPLETED
+            - COMPLETED_WITH_ERRORS
+            - CANCELED
+    BatchOperationSearchQueryResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching batch operations.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationResponse"
+    BatchOperationResponse:
+      type: object
+      properties:
+        batchOperationKey:
+          description: Key of the batch operation.
+          type: string
+        status:
+          description: The status of the batch operation.
+          type: string
+          enum:
+            - CREATED
+            - ACTIVE
+            - PAUSED
+            - COMPLETED
+            - COMPLETED_WITH_ERRORS
+            - CANCELED
+        batchOperationType:
+          description: The type of the batch operation.
+          type: string
+          example: PROCESS_CANCELLATION
+        startDate:
+          type: string
+          description: The start date of the batch operation.
+          format: date-time
+        endDate:
+          type: string
+          description: The end date of the batch operation.
+          format: date-time
+        operationsTotalCount:
+          type: integer
+          description: The total number of items contained in this stacking process.
+          format: int32
+        operationsFailedCount:
+          type: integer
+          description: The number of items which failed during execution of the batch operation. (e.g. because they are rejected by the machine)
+          format: int32
+        operationsCompletedCount:
+          type: integer
+          description: The number of successfully completed tasks.
+          format: int32
+    BatchOperationItemSearchQueryResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching batch operations.
+          type: array
+          items:
+            $ref: "#/components/schemas/BatchOperationItemResponse"
+    BatchOperationItemResponse:
+      type: object
+      properties:
+        batchOperationKey:
+          description: Key of the batch operation.
+          type: string
+        itemKey:
+          description: Key of the item, e.g. a process instance key.
+          type: string
+        status:
+          description: Status of the item.
+          type: string
+          enum:
+            - ACTIVE
+            - COMPLETED
+            - FAILED
   responses:
     InternalServerError:
       description: >

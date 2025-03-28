@@ -41,12 +41,13 @@ To add additional clusters, increment the `0` value for each variable (`CAMUNDA_
 
 Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
 
-| Environment variable                  | Description                                           | Example value                                            |
-| ------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
-| `SPRING_DATASOURCE_URL`               | JDBC URL of the database                              | `jdbc:postgresql://postgres.example.com:5432/modeler-db` |
-| `SPRING_DATASOURCE_USERNAME`          | Database user name                                    | `modeler-user`                                           |
-| `SPRING_DATASOURCE_PASSWORD`          | Database user password                                | \*\*\*                                                   |
-| `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver | `software.amazon.jdbc.Driver`                            |
+| Environment variable                  | Description                                                                                                                                                                                                                                                                         | Example value                                            |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `SPRING_DATASOURCE_URL`               | JDBC URL of the database                                                                                                                                                                                                                                                            | `jdbc:postgresql://postgres.example.com:5432/modeler-db` |
+| `SPRING_DATASOURCE_USERNAME`          | Database user name                                                                                                                                                                                                                                                                  | `modeler-user`                                           |
+| `SPRING_DATASOURCE_PASSWORD`          | Database user password                                                                                                                                                                                                                                                              | \*\*\*                                                   |
+| `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver                                                                                                                                                                                                                               | `software.amazon.jdbc.Driver`                            |
+| `SPRING_DATASOURCE_HIKARI_SCHEMA`     | [optional]<br/>Database schema.<br/>Defaults to the default schema of the database user (usually `public`) if not set.<br/>Refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) for naming restrictions. | `custom_schema`                                          |
 
 Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
 
@@ -212,7 +213,7 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 | `LOG_LEVEL_CLIENT`   | [optional]<br/>Log level for the client         | `DEBUG`                      |
 | `LOG_LEVEL_WEBAPP`   | [optional]<br/>Log level for the Node.js server | `DEBUG`                      |
 
-The `LOG_LEVEL_*` options can be found [here](../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
+The `LOG_LEVEL_*` options can be found [here](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
 
 ### SSL

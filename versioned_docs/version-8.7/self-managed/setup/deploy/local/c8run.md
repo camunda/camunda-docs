@@ -164,6 +164,22 @@ curl --cookie  cookie.txt  localhost:8080/v2/topology
 </TabItem>
 </Tabs>
 
+#### Use Camunda APIs with the Java client
+
+[The Java client](/apis-tools/java-client/index.md) does not support cookie-based authentication. To access Camunda APIs in a Camunda 8 Run environment with the Java client, you'll need to:
+
+- Manually retrieve a cookie through Java HTTP functionality or cURL, as described above.
+- Manually include the cookie as a custom header in Java client requests:
+
+```java
+zeebeClient
+  .withChainHandlers(
+      (request, producer, scope, chain, callback) -> {
+        request.setHeader("Cookie", "OPERATE-SESSION=<session ID extracted from previous call>");
+        chain.proceed(request, producer, scope, callback);
+      })
+```
+
 ## Shut down Camunda 8 Run
 
 To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
@@ -176,7 +192,7 @@ TLS can be enabled by providing a local file keystore using the `--keystore` arg
 
 ### Access metrics
 
-Metrics are enabled in Camunda 8 Run by default, and can be accessed at [/actuator/prometheus](http://localhost:9600/actuator/prometheus). For more information, see the Zeebe [Prometheus metrics](/self-managed/zeebe-deployment/operations/metrics.md) documentation.
+Metrics are enabled in Camunda 8 Run by default, and can be accessed at [/actuator/prometheus](http://localhost:9600/actuator/prometheus). For more information, see the Zeebe [Prometheus metrics](/self-managed/operational-guides/monitoring/metrics.md) documentation.
 
 ### Start external Elasticsearch
 

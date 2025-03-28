@@ -99,10 +99,6 @@ This Docker Compose configuration serves two purposes:
 We recommend to use [Helm + KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
 :::
 
-### Web Modeler
-
-An additional Docker Compose configuration to run Web Modeler is also available via `docker-compose-web-modeler.yaml`. It works the same way but runs Web Modeler only.
-
 ## Configuration hints
 
 ### Zeebe

@@ -894,8 +894,8 @@
                     },
                     {
                       "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/report-error-for-job",
-                      "label": "Report error for job",
+                      "id": "apis-tools/camunda-api-rest/specifications/throw-job-error",
+                      "label": "Throw error for job",
                       "className": "api-method post"
                     },
                     {
@@ -1172,7 +1172,7 @@
                       "type": "doc",
                       "id": "apis-tools/camunda-api-rest/specifications/update-element-instance-variables",
                       "label": "Update element instance variables",
-                      "className": "api-method post"
+                      "className": "api-method put"
                     }
                   ]
                 },
@@ -1731,26 +1731,49 @@
 
   "Reference": [
     "reference/overview",
-    "reference/announcements",
     {
       "type": "category",
-      "label": "Release notes",
+      "label": "Announcements and release notes",
       "link": {
         "type": "doc",
-        "id": "reference/release-notes/release-notes"
+        "id": "reference/announcements-release-notes/overview"
       },
-      "items": ["reference/release-notes/860", "reference/release-notes/850"]
+      "items": [
+        {
+          "type": "category",
+          "label": "8.6",
+          "link": {
+            "type": "doc",
+            "id": "reference/announcements-release-notes/860/860-announcements"
+          },
+          "items": [
+            "reference/announcements-release-notes/860/860-announcements",
+            "reference/announcements-release-notes/860/860-release-notes"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "8.5",
+          "link": {
+            "type": "doc",
+            "id": "reference/announcements-release-notes/850/850-announcements"
+          },
+          "items": [
+            "reference/announcements-release-notes/850/850-announcements",
+            "reference/announcements-release-notes/850/850-release-notes"
+          ]
+        },
+        "reference/announcements-release-notes/release-policy"
+      ]
     },
-    "reference/contact",
     "reference/supported-environments",
+    "reference/contact",
     "reference/dependencies",
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
-    "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
-    "reference/release-policy",
     "reference/regions",
     {
       "type": "category",
@@ -1841,6 +1864,7 @@
             "self-managed/setup/guides/using-existing-opensearch",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
+            "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/multi-namespace-deployment",
@@ -1904,9 +1928,14 @@
           ]
         },
         {
+          "Monitoring": [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics"
+          ]
+        },
+        {
           "Troubleshooting": [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels"
+            "self-managed/operational-guides/troubleshooting/troubleshooting"
           ]
         }
       ]
@@ -1976,7 +2005,6 @@
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",
@@ -2157,14 +2185,14 @@
                 },
                 {
                   "Roles": [
-                    "self-managed/identity/user-guide/roles/add-assign-role",
-                    "self-managed/identity/user-guide/roles/add-assign-permission"
+                    "self-managed/identity/user-guide/roles/manage-roles",
+                    "self-managed/identity/user-guide/roles/manage-permissions"
                   ]
                 },
                 {
                   "Groups": [
-                    "self-managed/identity/user-guide/groups/create-group",
-                    "self-managed/identity/user-guide/groups/assign-users-roles-to-group"
+                    "self-managed/identity/user-guide/groups/manage-groups",
+                    "self-managed/identity/user-guide/groups/manage-users-roles-to-group"
                   ]
                 },
                 {
@@ -2220,7 +2248,8 @@
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration"
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems"
                   ]
                 }
               ]

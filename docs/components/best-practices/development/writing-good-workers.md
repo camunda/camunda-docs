@@ -126,11 +126,7 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
   .build();
 ```
 
-Or, in the community-maintained Spring Zeebe project:
-
-```properties
-zeebe.client.worker.threads=5
-```
+In the Spring Zeebe SDK, you can do this using a [configuration](/apis-tools/spring-zeebe-sdk/configuration.md#execution-threads).
 
 Now, you can **leverage blocking code** for your REST call, for example, the `RestTemplate` inside Spring:
 
