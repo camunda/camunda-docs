@@ -65,10 +65,6 @@ module.exports = {
             label: "8.5 / 3.13.0",
             banner: "none",
           },
-          "3.12.0": {
-            label: "8.4 / 3.12.0",
-            banner: "none",
-          },
           "3.11.0": {
             label: "8.3 / 3.11.0",
             banner: "none",
@@ -592,7 +588,6 @@ module.exports = {
             "/docs/8.4/**",
             "/docs/8.5/**",
             "/optimize/3.11.0/**",
-            "/optimize/3.12.0/**",
             "/optimize/3.13.0/**",
             "/optimize/3.15.0/**",
             "/optimize/next/**",
