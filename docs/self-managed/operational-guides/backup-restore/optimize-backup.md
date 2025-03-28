@@ -11,11 +11,11 @@ This release introduces breaking changes, including the utilized URL.
 For example, `curl 'http://localhost:8092/actuator/backups'` rather than the previously used `backup`.
 :::
 
-Optimize stores its data over multiple indices in the database. To ensure data integrity across indices, a backup of Optimize data consists of two ElasticSearch/OpenSearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following snapshots:
+Optimize is a dedicated application that stores its data over multiple indices in the database. To ensure data integrity across indices, a backup of Optimize data consists of two ElasticSearch/OpenSearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following snapshots:
 
 ```
-camunda_optimize_123456_3.9.0_part_1_of_2
-camunda_optimize_123456_3.9.0_part_2_of_2
+camunda_optimize_123456_8.8.0_part_1_of_2
+camunda_optimize_123456_8.8.0_part_2_of_2
 ```
 
 Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard ElasticSearch/OpenSearch snapshot restore API.
@@ -31,9 +31,7 @@ The following prerequisites must be set up before using the backup API:
 backup:
   repositoryName: <repository name>
 ```
-
 ## Create backup API
-
 Note that the backup API can be reached via the `/actuator` management port, which by default is `8092`.
 The configured context path does not apply to the management port.
 
@@ -114,15 +112,15 @@ curl --request GET 'http://localhost:8092/actuator/backups/123456'
     "state": "COMPLETE",
     “details”: [
       {
-          "snapshotName": "camunda_optimize_123456_3.10.0_part_1_of_2",
+          "snapshotName": "camunda_optimize_123456_8.8.0_part_1_of_2",
           "state": "SUCCESS",
-          "startTime": "2022-11-09T10:11:36.978+0100",
+          "startTime": "2024-11-09T10:11:36.978+0100",
           "failures": []
       },
       {
-          "snapshotName": "camunda_optimize_123456_3.10.0_part_2_of_2",
+          "snapshotName": "camunda_optimize_123456_8.8.0_part_2_of_2",
           "state": "SUCCESS",
-          "startTime": "2022-11-09T10:11:37.178+0100",
+          "startTime": "2024-11-09T10:11:37.178+0100",
           "failures": []
       }
     ]
@@ -149,25 +147,21 @@ An existing backup can be deleted using the below API which deletes all Optimize
 ```
 DELETE actuator/backups/{backupId}
 ```
-
 ### Response
-
 | Code             | Description                                                                                                                                                              |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 204 No Content   | The delete request for the associated snapshots was submitted to the database successfully.                                                                              |
 | 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
 | 500 Server Error | An error occurred, for example the snapshot repository does not exist. Refer to the returned error message for details.                                                  |
 | 502 Bad Gateway  | Optimize has encountered issues while trying to connect to ElasticSearch/OpenSearch.                                                                                     |
-
 ### Example request
-
 ```shell
 curl --request DELETE 'http://localhost:8092/actuator/backups/123456'
 ```
 
 ## Restore backup
 
-There is no Optimize API to perform the backup restore. Instead, the standard [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html) / [OpenSearch](https://opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot) restore snapshot API can be used. Note that the Optimize versions of your backup snapshots must match the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names; for example, a snapshot with the name`camunda_optimize_123456_3.9.0_part_1_of_2` was taken of Optimize version `3.9.0`.
+There is no Optimize API to perform the backup restore. Instead, the standard [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html) / [OpenSearch](https://opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot) restore snapshot API can be used. Note that the Optimize versions of your backup snapshots must match the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names; for example, a snapshot with the name`camunda_optimize_123456_8.8.0_part_1_of_2` was taken of Optimize version `8.8.0`.
 
 :::note
 Optimize must NOT be running while a backup is being restored.
@@ -185,5 +179,5 @@ To restore a given backup, the following steps must be performed:
 Example request:
 
 ```shell
-curl --request POST `http://localhost:9200/_snapshot/repository_name/camunda_optimize_123456_3.9.0_part_1_of_2/_restore?wait_for_completion=true`
+curl --request POST `http://localhost:9200/_snapshot/repository_name/camunda_optimize_123456_8.8.0_part_1_of_2/_restore?wait_for_completion=true`
 ```
