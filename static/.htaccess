@@ -90,6 +90,7 @@ RewriteRule ^blog/ / [R=301,L]
 # Product links that need to be preserved for Desktop Modeler, in perpetuity.
 RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
 RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
+RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/$1 [R=301,L]
 
 # URLs that need to be preserved for connector element templates, in perpetuity.
 RewriteRule ^docs/?$ / [R=301,L]
@@ -124,6 +125,24 @@ RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors
 # 3. Specific content moves
 ##################################################################################
 
+# Identity user guide "manage" pages
+
+RewriteRule ^docs/self-managed/identity/user-guide/roles/add-assign-permission/?$ /docs/self-managed/identity/user-guide/roles/manage-permissions/$1 [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/roles/add-assign-permission/?$ /docs/8.6/self-managed/identity/user-guide/roles/manage-permissions/$1 [R=301,L]
+RewriteRule ^docs/8.7/self-managed/identity/user-guide/roles/add-assign-permission/?$ /docs/8.7/self-managed/identity/user-guide/roles/manage-permissions/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/user-guide/groups/create-group/?$ /docs/self-managed/identity/user-guide/groups/manage-groups/$1 [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/groups/create-group/?$ /docs/8.6/self-managed/identity/user-guide/groups/manage-groups/$1 [R=301,L]
+RewriteRule ^docs/8.7/self-managed/identity/user-guide/groups/create-group/?$ /docs/8.7/self-managed/identity/user-guide/groups/manage-groups/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/self-managed/identity/user-guide/groups/manage-users-roles-to-group/$1 [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/8.6/self-managed/identity/user-guide/groups/manage-users-roles-to-group/$1 [R=301,L]
+RewriteRule ^docs/8.7/self-managed/identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/8.7/self-managed/identity/user-guide/groups/manage-users-roles-to-group/$1 [R=301,L]
+
+RewriteRule ^docs/self-managed/identity/user-guide/roles/add-assign-role/?$ /docs/self-managed/identity/user-guide/roles/manage-roles/$1 [R=301,L]
+RewriteRule ^docs/8.6/self-managed/identity/user-guide/roles/add-assign-role/?$ /docs/8.6/self-managed/identity/user-guide/roles/manage-roles/$1 [R=301,L]
+RewriteRule ^docs/8.7/self-managed/identity/user-guide/roles/add-assign-role/?$ /docs/8.7/self-managed/identity/user-guide/roles/manage-roles/$1 [R=301,L]
+
 # Remove go and zbctl pages, redirect to CCH
 RewriteRule ^docs/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
 RewriteRule ^docs/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
@@ -141,6 +160,9 @@ RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camun
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
+
+# Moved API endpoint in 8.6
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/report-error-for-job/?$ /docs/apis-tools/camunda-api-rest/specifications/throw-job-error/ [R=301,L]
 
 # Restructure announcements and release notes for 8.6
 RewriteRule ^docs/reference/announcements/announcements-850/?$ /docs/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
@@ -180,6 +202,9 @@ RewriteRule ^docs/8.7/components/early-access/experimental/rpa/rpa-integration/?
 # Provide current to next redirect for ad-hoc
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses/$1 [R=301,L]
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
+
+# Provide redirects for moved ad-hoc sub-processes page
+RewriteRule ^docs/8.7/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
