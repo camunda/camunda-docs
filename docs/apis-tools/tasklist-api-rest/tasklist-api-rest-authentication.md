@@ -139,3 +139,28 @@ A successful response includes [matching tasks](./specifications/search-tasks.ap
 ## Token expiration
 
 Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
+
+## Authentication via cookie (Self-Managed only)
+
+:::note
+When authenticating via cookie, note that Cross-Site Request Forgery (CSRF) protection must be disabled to allow this method of authentication. In a Camunda Self-Managed cluster, set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`.
+:::
+
+Another way to access the Tasklist API in a Self-Managed cluster is to send cookie headers in each request. This works for scenarios where authentication is managed by Tasklist and not by Identity. The cookie can be obtained by using the API endpoint `/api/login`:
+
+**Example:**
+
+1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
+
+```shell
+curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
+   --cookie-jar cookie.txt
+```
+
+2. Send the cookie as a header in each API request. In this case, request all process definitions.
+
+```shell
+curl --request POST 'http://localhost:8080/v1/process-definitions/search' \
+   --cookie cookie.txt \
+   --header 'Content-Type: application/json' -d '{}'
+```
