@@ -111,6 +111,8 @@ Only Camunda Forms are currently supported in Camunda 8 and can be migrated.
 
 The following attributes/elements can be migrated:
 
+- Custom code integration:
+  - `camunda:taskListener`
 - Task assignment (to users or groups):
   - `bpmn:humanPerformer`
   - `bpmn:potentialOwner`
@@ -137,7 +139,6 @@ The following attributes/elements **cannot** yet be migrated:
   - `camunda:formData`
   - `camunda:formProperty`
   - `camunda:formRefVersion`
-- `camunda:taskListener`
 
 ### Business rule tasks
 
