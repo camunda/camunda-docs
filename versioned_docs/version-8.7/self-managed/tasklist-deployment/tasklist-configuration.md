@@ -136,6 +136,20 @@ camunda.tasklist:
       selfSigned: true
 ```
 
+#### Disable Elasticsearch deprecation logging
+
+When using an Elasticsearch version ≥8.16.0 it is recommended to turn off deprecation logging for the Elasticsearch cluster.
+
+```shell
+curl -X PUT "http://localhost:9200/_cluster/settings" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "persistent": {
+      "logger.org.elasticsearch.deprecation": "OFF"
+    }
+  }'
+```
+
 ## Zeebe Broker connection
 
 Tasklist needs a connection to the Zeebe Broker to start the import.
