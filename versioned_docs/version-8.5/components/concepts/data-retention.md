@@ -24,4 +24,4 @@ The following resources in our [Self-Managed documentation](../../self-managed/a
 
 - [Operate data retention](/self-managed/operate-deployment/data-retention.md)
 - [Tasklist data retention](/self-managed/tasklist-deployment/data-retention.md)
-- [Optimize history cleanup]($optimize$/self-managed/optimize-deployment/advanced-features/engine-data-deletion)
+- [Optimize history cleanup](/self-managed/optimize-deployment/advanced-features/engine-data-deletion.md)

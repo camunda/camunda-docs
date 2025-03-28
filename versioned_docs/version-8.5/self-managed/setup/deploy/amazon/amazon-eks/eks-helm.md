@@ -446,4 +446,4 @@ To get more familiar with our product stack, visit the following topics:
 
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Optimize]($optimize$/components/what-is-optimize)
+- [Optimize](/components/optimize/what-is-optimize.md)
