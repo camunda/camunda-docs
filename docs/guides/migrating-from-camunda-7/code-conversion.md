@@ -102,11 +102,11 @@ For example, to migrate an existing Spring Boot application, take the following 
 1. Adjust Maven dependencies:
 
    - Remove Camunda 7 Spring Boot Starter and all other Camunda dependencies.
-   - Add the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md).
+   - Add the [Camunda Spring Boot SDK](../../apis-tools/camunda-spring-boot-sdk/getting-started.md).
 
 2. Adjust configuration:
 
-   - Set [Camunda 8 credentials](../../apis-tools/spring-zeebe-sdk/configuration.md) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
+   - Set [Camunda 8 credentials](../../apis-tools/camunda-spring-boot-sdk/configuration.md) (for example, in `src/main/resources/application.yaml`) and point it to an existing Zeebe cluster.
    - Remove existing Camunda 7 settings.
 
 3. Add `@ZeebeDeployment(resources = "classpath*:**/*.bpmn")` to automatically deploy all BPMN models.
@@ -137,7 +137,7 @@ In Camunda 7, there are three ways to attach Java code to service tasks in the B
 
 Camunda 8 cannot directly execute custom Java code. Instead, there must be a [job worker](/components/concepts/job-workers.md) executing code.
 
-The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using the [Spring Zeebe SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
+The [Camunda 7 Adapter](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/camunda-7-adapter) implements such a job worker using the [Camunda Spring Boot SDK](../../apis-tools/camunda-spring-boot-sdk/getting-started.md). It subscribes to the task type `camunda-7-adapter`. [Task headers](/components/modeler/bpmn/service-tasks/service-tasks.md#task-headers) are used to configure a delegation class or expression for this worker.
 
 ![Service task in Camunda 7 and Camunda 8](../img/migration-service-task.png)
 

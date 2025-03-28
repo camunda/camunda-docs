@@ -24,7 +24,7 @@ public void handleJobFoo() {
 }
 ```
 
-If you don't specify the `type` attribute, the **method name** is used by default if you enabled the [`-parameters` compiler flag](/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/spring-zeebe-sdk/getting-started.md):
+If you don't specify the `type` attribute, the **method name** is used by default if you enabled the [`-parameters` compiler flag](/apis-tools/camunda-spring-boot-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/camunda-spring-boot-sdk/getting-started.md):
 
 ```java
 @JobWorker
@@ -70,7 +70,7 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job, @Variab
 }
 ```
 
-If you don't specify the `name` attribute on the annotation, the **method parameter name** is used as the variable name if you enabled the [`-parameters` compiler flag](/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/spring-zeebe-sdk/getting-started.md):
+If you don't specify the `name` attribute on the annotation, the **method parameter name** is used as the variable name if you enabled the [`-parameters` compiler flag](/apis-tools/camunda-spring-boot-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/camunda-spring-boot-sdk/getting-started.md):
 
 ```java
 @JobWorker(type = "foo")
@@ -611,7 +611,7 @@ or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes prec
 
 ## Observing metrics
 
-The Spring Camunda SDK provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
+The Camunda Spring Boot SDK (formerly the Spring Zeebe SDK) provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
 
 - `camunda.job.invocations`: Number of invocations of job workers (tagging the job type)
 

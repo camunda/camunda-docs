@@ -33,7 +33,7 @@ A Spring Boot SDK is provided for the Camunda 8 REST API to unify process manage
 - Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
 - Rely on an official, standardized approach to guarantee consistency and reduce maintenance costs when upgrading.
 
-To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/camunda-spring-boot-sdk/getting-started.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2249 -->
 

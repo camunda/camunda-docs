@@ -36,7 +36,7 @@ type:"link", href:"/docs/next/guides/getting-started-java-spring/", label: "Get 
 }
 ]}/>
 
-With these guides, start working with [Web Modeler](/components/modeler/about-modeler.md) to get familiar with BPMN and model a business process, or as a Java developer, step through using Spring Boot and the Spring Zeebe SDK with Desktop Modeler to interact with a local Self-Managed Camunda 8 installation.
+With these guides, start working with [Web Modeler](/components/modeler/about-modeler.md) to get familiar with BPMN and model a business process, or as a Java developer, step through using Spring Boot and the Camunda Spring Boot SDK with Desktop Modeler to interact with a local Self-Managed Camunda 8 installation.
 
 ### Use cases
 

@@ -94,6 +94,8 @@ Switching between testcontainers and embedded requires just two steps:
    - Testcontainers: `import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;`
    - Embedded: `import io.camunda.zeebe.process.test.extension.ZeebeProcessTest;`
 
+<!--- We will need to adjust this section in full. --->
+
 ## Spring Zeebe SDK integration
 
 You can add testing to your Spring Zeebe SDK setup as follows.
