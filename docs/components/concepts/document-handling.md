@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 Store, track, and manage documents in Camunda 8 using the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx), Connectors, Forms, and Tasklist.
 
-Offering more robust document handling capabilities within Camunda SaaS and Self-Managed, users can now efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+Offering more robust document handling capabilities within Camunda SaaS and Self-Managed, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
 ## Storage integration and configuration
 
@@ -29,7 +29,7 @@ GCP and AWS work with SaaS, and are supported for Self-Managed in production. Ca
 If no configuration is provided, the default document storage is **in-memory**. To change this to a different storage method, use the environment variables in the section below for **every** component using document handling. No additional configuration is required for in-memory storage.
 :::
 
-To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are aws, in-memory, gcp (for Google Cloud Platform), and local-storage.
+To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `in-memory`, `gcp` (for Google Cloud Platform), and `local` (for local storage).
 
 <Tabs groupId="storage" defaultValue="aws" queryString values={
 [
