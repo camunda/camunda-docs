@@ -237,6 +237,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
+                "components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files",
                 {
                   "AI features": [
                     "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
