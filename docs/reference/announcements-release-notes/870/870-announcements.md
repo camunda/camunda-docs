@@ -29,6 +29,10 @@ Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be upd
 
 Camunda Spring SDK 8.7 now requires Spring Boot 3.4.x. For more information on compatibility, see the Camunda Spring SDK [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
 
+### Desktop Modeler no longer supports macOS 12
+
+Following the end-of-life of macOS 12, support for Desktop Modeler on macOS 12 has been removed.
+
 ## Key changes
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
