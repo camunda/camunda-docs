@@ -276,7 +276,7 @@ to be configured individually using the following environment variables.
 If you want to use outbound Connectors for a single tenant that is different
 from the default tenant, you can specify a different default tenant ID using:
 
-It is possible to adjust the polling interval of connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often Connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the Connectors to poll every 20 seconds.
+It is possible to adjust the polling interval of Connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often Connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the Connectors to poll every 20 seconds.
 
 Example:
 
