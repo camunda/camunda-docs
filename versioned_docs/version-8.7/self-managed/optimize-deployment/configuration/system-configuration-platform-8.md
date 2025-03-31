@@ -47,7 +47,7 @@ To use multi-tenancy, the feature must be enabled across all components.
 
 <span class="badge badge--platform">Camunda 8 Self-Managed only</span>
 
-For more information on user task reporting in Camunda 8 Self-Managed, refer to our [user task analytics documentation](../../../components/userguide/process-analysis/user-task-analytics.md).
+For more information on user task reporting in Camunda 8 Self-Managed, refer to our [user task analytics documentation](/components/optimize/userguide/process-analysis/user-task-analytics.md).
 
 | YAML path                           | Default value | Description                                                          |
 | ----------------------------------- | ------------- | -------------------------------------------------------------------- |

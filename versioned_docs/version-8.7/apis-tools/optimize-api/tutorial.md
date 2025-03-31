@@ -21,7 +21,7 @@ Make sure you keep the generated client credentials in a safe place. The **Clien
 ## Getting started
 
 - You need authentication to access the API endpoints. Find more information [here](./optimize-api-authentication.md).
-- To properly execute the commands to list existing dashboard IDs and delete a dashboard, ensure you have [created a collection](../../components/userguide/collections-dashboards-reports.md) containing a [dashboard](../../components/userguide/creating-dashboards.md).
+- To properly execute the commands to list existing dashboard IDs and delete a dashboard, ensure you have [created a collection](/components/optimize/userguide/collections-dashboards-reports.md) containing a [dashboard](/components/optimize/userguide/creating-dashboards.md).
 
 ## Set up authentication
 
