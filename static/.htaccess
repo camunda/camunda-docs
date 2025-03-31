@@ -219,7 +219,7 @@ RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
 
 # Provide redirects for moved ad-hoc sub-processes page
-RewriteRule ^docs/8.7/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1
+RewriteRule ^docs/8.7/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
