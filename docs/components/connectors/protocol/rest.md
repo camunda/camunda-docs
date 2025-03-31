@@ -34,7 +34,7 @@ In Camunda Self-Managed you can configure the Connector to use an HTTP or HTTPS 
 
 Depending on how you want the proxy to be used, you can configure it by using JVM properties or environment variables.
 
-The difference between the two is the scope of the configuration:
+The difference between these two configuration types is the scope of the configuration:
 
 | Configuration type                                                                        | Scope                                                                                                                                          | Example                                                                                                                                                                                  |
 | :---------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
