@@ -32,26 +32,26 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 In Camunda Self-Managed you can configure the Connector to use an HTTP or HTTPS proxy server.
 
-Depending on how you want the proxy to be used, you can configure it by using JVM properties or environment variables.
+Depending on how you want the proxy to be used, configure it using either JVM properties or environment variables.
 
-The difference between the two is the scope of the configuration:
+The difference between these two configuration types is the scope of the configuration:
 
-| Configuration type                                                                        | Scope                                                                                                                                          | Example                                                                                                                                                                                  |
-| :---------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [JVM properties](https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html) | JVM, **the whole runtime** will be affected. **Any HTTP client** used internally (e.g. in a connector, or the Zeebe client) might be affected. | `-Dhttp.proxyHost=proxy -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=OTHER_DOMAIN`                                                          |
-| Environment variables                                                                     | Connector, **only the Connector (and REST-based connectors)** will be affected                                                                 | `CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;` |
+| Configuration type                                                                        | Scope                                                                                                                                                  | Example                                                                                                                                                                                  |
+| :---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [JVM properties](https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html) | JVM, **the whole runtime** will be affected. **Any HTTP client** used internally (for example, in a connector, or the Zeebe client) might be affected. | `-Dhttp.proxyHost=proxy -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=OTHER_DOMAIN`                                                          |
+| Environment variables                                                                     | Connector, **only the Connector (and REST-based connectors)** will be affected                                                                         | `CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;` |
 
 :::note
-To ensure Camunda can properly access Camunda components when using JVM properties, non-proxy hosts must contain `camunda-platform-zeebe|camunda-platform-keycloak`
+To ensure Camunda can properly access Camunda components when using JVM properties, non-proxy hosts must contain `camunda-platform-zeebe|camunda-platform-keycloak`.
 :::
 
 #### HTTP/HTTPS properties
 
-Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS protocol handler. A target URL like `http://example.com` will use the HTTP protocol handler, while a target URL like `https://example.com` will use the HTTPS protocol handler.
+Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS protocol handler. A target URL such as `http://example.com` will use the HTTP protocol handler, while a target URL such as `https://example.com` will use the HTTPS protocol handler.
 
 ##### JVM properties
 
-Here's a list of the standard JVM properties you can set for HTTP and HTTPS:
+You can set the following standard JVM properties for HTTP and HTTPS:
 
 | Property (HTTP target URL) | Property (HTTPS target URL)                         | Description                                                                                                                                                                                                                                                                                                                     |
 | :------------------------- | :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -234,7 +234,7 @@ Secrets are currently not supported in the body of a **REST Connector**.
 
 #### File upload
 
-To upload a file, you can take advantage of [Camunda document handling](https://docs.camunda.io/docs/next/components/concepts/document-handling/).
+To upload a file, you can take advantage of [Camunda document handling](/components/concepts/document-handling/).
 
 Depending on the `Content-Type`, the file will be uploaded as a binary or a JSON object (base64 encoded).
 
