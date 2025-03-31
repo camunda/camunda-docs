@@ -149,10 +149,10 @@ RewriteRule ^docs/components/modeler/reference/modeling-guidance/rules/history-t
 RewriteRule ^docs/8.5/components/modeler/reference/modeling-guidance/rules/history-time-to-live/?$ /docs/8.5/components/modeler/reference/modeling-guidance/$1 [R=301,L]
 
 # Remove C7 defining templates
-RewriteRule ^docs/next/components/modeler/desktop-modeler/c7-defining-templates/?$ /docs/next/components/modeler/desktop-modeler/defining-templates/$1 [R=301,L]
-RewriteRule ^docs/8.7/components/modeler/desktop-modeler/c7-defining-templates/?$ /docs/8.7/components/modeler/desktop-modeler/defining-templates/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/desktop-modeler/c7-defining-templates/?$ /docs/components/modeler/desktop-modeler/defining-templates/$1 [R=301,L]
-RewriteRule ^docs/8.5/components/modeler/desktop-modeler/c7-defining-templates/?$ /docs/8.5/components/modeler/desktop-modeler/defining-templates/$1 [R=301,L]
+RewriteRule ^docs/next/components/modeler/desktop-modeler/element-templates/c7-defining-templates/?$ /docs/next/components/modeler/desktop-modeler/element-templates/defining-templates/$1 [R=301,L]
+RewriteRule ^docs/8.7/components/modeler/desktop-modeler/element-templates/c7-defining-templates/?$ /docs/8.7/components/modeler/desktop-modeler/element-templates/defining-templates/$1 [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/c7-defining-templates/?$ /docs/components/modeler/desktop-modeler/element-templates/defining-templates/$1 [R=301,L]
+RewriteRule ^docs/8.5/components/modeler/desktop-modeler/element-templates/c7-defining-templates/?$ /docs/8.5/components/modeler/desktop-modeler/element-templates/defining-templates/$1 [R=301,L]
 
 # Restructure announcements and release notes for 8.6
 RewriteRule ^docs/reference/announcements/announcements-850/?$ /docs/reference/announcements-release-notes/850/850-announcements/$1 [R=301,L]
