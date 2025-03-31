@@ -13,7 +13,7 @@ module.exports = {
   },
   title: "Camunda 8 Docs",
   tagline:
-    "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed.",
+    "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed",
   // url: "https://camunda-cloud.github.io",
   url: docsSiteUrl,
   // baseUrl: "/camunda-cloud-documentation/",
@@ -50,21 +50,16 @@ module.exports = {
         beforeDefaultRemarkPlugins: [versionedLinks],
         sidebarPath: require.resolve("./optimize_sidebars.js"),
         editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
+        lastVersion: "3.14.0",
         versions: {
+          current: {
+            label: "8.8 / 3.16.0 (unreleased)",
+          },
+          "3.15.0": {
+            label: "8.7 / 3.15.0 (unreleased)",
+          },
           "3.14.0": {
             label: "8.6 / 3.14.0",
-          },
-          "3.13.0": {
-            label: "8.5 / 3.13.0",
-            banner: "none",
-          },
-          "3.12.0": {
-            label: "8.4 / 3.12.0",
-            banner: "none",
-          },
-          "3.11.0": {
-            label: "8.3 / 3.11.0",
-            banner: "none",
           },
         },
       },
@@ -87,6 +82,13 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.7: {
+                specPath: "api/operate/version-8.7/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.6: {
                 specPath: "api/operate/version-8.6/operate-openapi.yaml",
                 outputDir:
@@ -131,6 +133,13 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.7: {
+                specPath: "api/tasklist/version-8.7/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.6: {
                 specPath: "api/tasklist/version-8.6/tasklist-openapi.yaml",
                 outputDir:
@@ -175,6 +184,14 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.7: {
+                specPath:
+                  "api/administration-sm/version-8.7/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.6: {
                 specPath:
                   "api/administration-sm/version-8.6/administration-sm-openapi.yaml",
@@ -206,6 +223,13 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.7: {
+                specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.6: {
                 specPath: "api/camunda/version-8.6/camunda-openapi.yaml",
                 outputDir:
@@ -236,6 +260,7 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              // Removed after 8.6
               8.6: {
                 specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
                 outputDir:
@@ -290,7 +315,7 @@ module.exports = {
     },
 
     prism: {
-      additionalLanguages: ["java", "protobuf", "csharp"],
+      additionalLanguages: ["java", "protobuf", "csharp", "bash"],
       theme: themes.palenight,
       darkTheme: themes.dracula,
     },
@@ -365,10 +390,6 @@ module.exports = {
           title: "About",
           items: [
             {
-              label: "How to use our docs",
-              to: "meta",
-            },
-            {
               label: "Camunda Help Center",
               to: "docs/reference/camunda-help-center",
             },
@@ -423,7 +444,7 @@ module.exports = {
             },
             {
               label: "Release cycle",
-              to: "docs/reference/release-policy",
+              to: "docs/reference/announcements-release-notes/release-policy",
             },
           ],
         },
@@ -455,6 +476,7 @@ module.exports = {
       apiKey: "d701d38126d1a43866047d3ab97680d1",
       appId: "6KYF3VMCXZ",
       indexName: "camunda",
+      placeholder: "Search Camunda 8 docs",
     },
     languageTabs: [
       {
@@ -521,8 +543,15 @@ module.exports = {
           // Please change this to your repo.
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           beforeDefaultRemarkPlugins: [versionedLinks],
+          lastVersion: "8.6",
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
+            current: {
+              label: "8.8 (unreleased)",
+            },
+            8.7: {
+              label: "8.7 (unreleased)",
+            },
             8.5: {
               banner: "none",
             },
@@ -546,12 +575,11 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
+            "/docs/8.7/**",
             "/docs/8.3/**",
             "/docs/8.4/**",
             "/docs/8.5/**",
-            "/optimize/3.11.0/**",
-            "/optimize/3.12.0/**",
-            "/optimize/3.13.0/**",
+            "/optimize/3.15.0/**",
             "/optimize/next/**",
           ],
         },

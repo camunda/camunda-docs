@@ -20,7 +20,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
-- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via [zbctl](/apis-tools/community-clients/cli-client/index.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
 
 ### Considerations
@@ -407,19 +407,9 @@ identity:
 
 Once you've prepared the `values.yml` file, run the following `envsubst` command to substitute the environment variables with their actual values:
 
-```bash
-# generate the final values
-envsubst < values.yml > generated-values.yml
-
-# print the result
-cat generated-values.yml
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic/kubernetes/single-region/procedure/assemble-envsubst-values.sh
 ```
-
-:::info Camunda Helm chart no longer automatically generates passwords
-
-Starting from **Camunda 8.6**, the Helm chart deprecated the automatic generation of secrets, and this feature has been fully removed in **Camunda 8.7**.
-
-:::
 
 Next, store various passwords in a Kubernetes secret, which will be used by the Helm chart. Below is an example of how to set up the required secret. You can use `openssl` to generate random secrets and store them in environment variables:
 
@@ -457,17 +447,8 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 
 You can track the progress of the installation using the following command:
 
-```bash
-watch -n 5 '
-  kubectl get pods -n camunda --output=wide;
-  if [ $(kubectl get pods -n camunda --field-selector=status.phase!=Running -o name | wc -l) -eq 0 ] &&
-     [ $(kubectl get pods -n camunda -o json | jq -r ".items[] | select(.status.containerStatuses[]?.ready == false)" | wc -l) -eq 0 ];
-  then
-    echo "All pods are Running and Healthy - Installation completed!";
-  else
-    echo "Some pods are not Running or Healthy";
-  fi
-'
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 <details>
@@ -662,20 +643,10 @@ export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda
 
 </Tabs>
 
-Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token.
+Generate a temporary token to access the REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the REST API and display the cluster topology:
 
-```shell
-export TOKEN=$(curl --location --request POST "${ZEEBE_AUTHORIZATION_SERVER_URL}" \
---header "Content-Type: application/x-www-form-urlencoded" \
---data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
---data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}" \
---data-urlencode "grant_type=client_credentials" | jq '.access_token' -r)
-```
-
-Use the stored token, in our case `TOKEN`, to use the REST API to print the cluster topology.
-
-```shell
-curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS_REST}/v2/topology"
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
 ...and results in the following output:
@@ -684,172 +655,15 @@ curl --header "Authorization: Bearer ${TOKEN}" "${ZEEBE_ADDRESS_REST}/v2/topolog
   <summary>Example output</summary>
   <summary>
 
-```shell
-{
-  "brokers": [
-    {
-      "nodeId": 0,
-      "host": "camunda-zeebe-0.camunda-zeebe",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    },
-    {
-      "nodeId": 1,
-      "host": "camunda-zeebe-1.camunda-zeebe",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    },
-    {
-      "nodeId": 2,
-      "host": "camunda-zeebe-2.camunda-zeebe",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "8.6.0"
-    }
-  ],
-  "clusterSize": 3,
-  "partitionsCount": 3,
-  "replicationFactor": 3,
-  "gatewayVersion": "8.6.0"
-}
+```json reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
   </summary>
 </details>
 
   </TabItem>
-  <TabItem value="zbctl" label="zbctl">
-
-After following the installation instructions in the [zbctl docs](/apis-tools/community-clients/cli-client/index.md), we can configure the required connectivity to check that the Zeebe cluster is reachable.
-
-<Tabs groupId="domain">
-  <TabItem value="with" label="With domain" default>
-
-Export the following environment variables:
-
-```shell
-export ZEEBE_ADDRESS=zeebe.$DOMAIN_NAME:443
-export ZEEBE_AUTHORIZATION_SERVER_URL=https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token
-export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
-export ZEEBE_TOKEN_SCOPE='camunda-identity'
-```
-
-</TabItem>
-<TabItem value="without" label="Without domain">
-
-This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
-
-```shell
-kubectl port-forward services/camunda-zeebe-gateway 26500:26500 --namespace camunda
-```
-
-Export the following environment variables:
-
-```shell
-export ZEEBE_ADDRESS=localhost:26500
-export ZEEBE_AUTHORIZATION_SERVER_URL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-export ZEEBE_TOKEN_AUDIENCE='zeebe-api'
-export ZEEBE_TOKEN_SCOPE='camunda-identity'
-```
-
-</TabItem>
-
-</Tabs>
-
-Executing the following command will result in a successful connection to the Zeebe cluster...
-
-```shell
-zbctl status
-# or in the case of port-forwarding (without domain)
-zbctl status --insecure
-```
-
-...and results in the following output:
-
-<details>
-  <summary>Example output</summary>
-  <summary>
-
-```shell
-Cluster size: 3
-Partitions count: 3
-Replication factor: 3
-Gateway version: 8.6.0
-Brokers:
-  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-  Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
-    Version: 8.6.0
-    Partition 1 : Leader, Healthy
-    Partition 2 : Leader, Healthy
-    Partition 3 : Follower, Healthy
-  Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-```
-
-  </summary>
-</details>
-
-For more advanced topics, like deploying a process or registering a worker, consult the [zbctl docs](/apis-tools/community-clients/cli-client/cli-get-started.md).
-
-  </TabItem>
-    <TabItem value="modeler" label="Desktop Modeler">
+  <TabItem value="modeler" label="Desktop Modeler">
 
 Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 

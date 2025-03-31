@@ -2,8 +2,8 @@
 id: getting-started-java-spring
 title: Get started as a Java developer using Spring
 sidebar_label: Get started with Spring
-description: "Use Spring Boot and the Spring Zeebe SDK to interact with your local Self-Managed Camunda 8 installation."
-keywords: [java, spring, spring zeebe, getting started, user guide, tutorial]
+description: "Use Spring Boot and the Spring Camunda SDK to interact with your local Self-Managed Camunda 8 installation."
+keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
 
 import Install from './react-components/\_install-c8run.md'
@@ -11,7 +11,7 @@ import Install from './react-components/\_install-c8run.md'
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-In this guide, we'll step through using Spring Boot and the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
+In this guide, we'll step through using Spring Boot and the [Spring Camunda SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) with Desktop Modeler to interact with your local Self-Managed Camunda 8 installation. While this guide focuses on Self-Managed, you can do something similar with [SaaS](https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral).
 
 :::note
 This guide specifically uses Java and Spring because the two, in combination with Camunda 8, is our [default technology stack recommendation](/components/best-practices/architecture/deciding-about-your-stack.md#the-java-greenfield-stack).
@@ -36,7 +36,7 @@ While stepping through this guide, you can visit our [sample repository](https:/
 Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
-- [OpenJDK 21+](https://openjdk.org/install/)
+- [OpenJDK 21+](https://openjdk.org/install/) and [Maven 3](https://maven.apache.org/index.html)
 - [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
 
 :::note
@@ -72,7 +72,7 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
 
 1. Open Desktop Modeler.
 2. Click **Create a new diagram** in Camunda 8.
-3. In the properties panel, under the **General** section:
+3. Toggle the properties panel from the Window menu if it is not already visible, and make the following changes in the **General** section:
    - Name your diagram `Process payments`
    - Set the ID to `process-payments`
 4. Add a start event, and name it `Payment request received`.
@@ -82,22 +82,23 @@ Next, we'll create a BPMN diagram to represent the transaction model shown at th
    2. **Script/Result variable**: `totalWithTax`
    3. **Script/FEEL expression**: `total * 1.1` (this represents the tax applied to the transaction.)
 7. Append a task named `Charge credit card`.
-8. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Type** to `charge-credit-card`.
+8. Click on the task and click the wrench-shaped icon to change the type of task to a service task. In the properties panel, change the **Task definition/Job type** to `charge-credit-card`.
 9. Append an end event named `Payment executed`.
 10. Save this BPMN file to your Spring project in `src/main/resources`, and name it `process-payments.bpmn`.
 
-## Step 3: Deploy your process
+## Step 3: Deploy your process from Desktop Modeler
 
 To deploy your process, take the following steps:
 
-1. Open Desktop Modeler and click the rocket icon in the bottom left corner.
-2. Change the **Deployment name** to `process-payments`, and ensure the **Target** is `Camunda 8 Self-Managed`.
-3. Change the **Cluster endpoint** to `http://localhost:26500/`, with no authentication.
-4. Click **Deploy**.
+1. Open Desktop Modeler and ensure the desired Camunda 8 version is targeted in the bottom left corner. You can change the desired version by clicking on the version, selecting a new one, and selecting **Apply**.
+2. Click the rocket icon in the bottom left corner.
+3. Change the **Deployment name** to `process-payments`, and ensure the **Target** is `Camunda 8 Self-Managed`.
+4. Change the **Cluster endpoint** to `http://localhost:26500`, with no authentication.
+5. Click **Deploy**.
 
 When you open Operate at http://localhost:8080/operate/, you should now note the process deployed to your local Self-Managed setup.
 
-## Step 4: Run your process from Modeler
+## Step 4: Run your process from Desktop Modeler
 
 To run your process, take the following steps:
 
@@ -113,29 +114,32 @@ To implement a service task, take the following steps:
 
 ### Configure Spring Boot Starter
 
-Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
+Add the following Maven dependency to your Spring Boot Starter project's pom.xml file, replacing `x` with [the latest patch level available](https://mvnrepository.com/artifact/io.camunda/spring-boot-starter-camunda-sdk):
 
 ```xml
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-    <version>8.6.x</version>
+    <version>8.8.x</version>
 </dependency>
 ```
 
-### Configure the Zeebe client
+### Configure the Camunda client
 
-Open your `src/main/resources/application.yaml` file, and paste the following snippet to connect to the Self-Managed Zeebe Broker:
+1. [Rename your `src/main/resources/application.properties` file to `application.yaml`](https://mvnrepository.com/artifact/io.camunda/spring-boot-starter-camunda-sdk).
+2. Paste the following settings to connect to the Self-Managed Zeebe Broker:
 
 ```yaml
 camunda:
   client:
     mode: self-managed
-    zeebe:
-      enabled: true
-      grpc-address: http://127.0.0.1:26500
-      rest-address: http://127.0.0.1:8080
+    grpc-address: http://127.0.0.1:26500
+    rest-address: http://127.0.0.1:8080
 ```
+
+:::note
+Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+:::
 
 ### Create a worker
 
@@ -151,8 +155,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import io.camunda.zeebe.spring.client.annotation.JobWorker;
-import io.camunda.zeebe.spring.client.annotation.Variable;
+import io.camunda.spring.client.annotation.JobWorker;
+import io.camunda.spring.client.annotation.Variable;
 ```
 
 3. Next, we can add a `ChargeCreditCardWorker` class decorated with `@Component` and instantiate a logger. Additionally, we will add a `chargeCreditCard` method and decorate it with `@JobWorker`, specifying the type of service tasks it will handle. The method takes a `@Variable(name = "totalWithTax") Double totalWithTax` argument to indicate which variables it needs from the task. The implementation of the method will log the `totalWithTax`, and return a map, to indicate to Zeebe that the task has been handled:
@@ -175,6 +179,8 @@ To check your work, visit our [sample repository](https://github.com/camunda/cam
 
 In your terminal, run `mvn spring-boot:run`, where you should see the `charging credit card` output. In Operate, refresh if needed, and note the payment has executed.
 
+Since the application is now running a worker subscribed to the workflow engine, it will not exit until you hit `Ctrl+C`.
+
 ## Step 6: Start a process instance
 
 To start a process instance programmatically, take the following steps:
@@ -192,11 +198,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import io.camunda.zeebe.client.ZeebeClient;
-import io.camunda.zeebe.spring.client.annotation.Deployment;
+import io.camunda.client.CamundaClient;
+import io.camunda.spring.client.annotation.Deployment;
 ```
 
-2. Convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `zeebeClient` with the `@Autowired` annotation.
+2. Convert the application to a `CommandLineRunner`, by adding `implements CommandLineRunner` to the `ProcessPaymentsApplication` class declaration. Instantiate a static `Logger` variable, and an instance variable named `camundaClient` with the `@Autowired` annotation.
 
 ```java
 @SpringBootApplication
@@ -205,7 +211,7 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 	private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
 
 	@Autowired
-	private ZeebeClient zeebeClient;
+	private CamundaClient camundaClient;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProcessPaymentsApplication.class, args);
@@ -219,7 +225,7 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 	@Override
 	public void run(final String... args) {
 		var bpmnProcessId = "process-payments";
-		var event = zeebeClient.newCreateInstanceCommand()
+		var event = camundaClient.newCreateInstanceCommand()
 				.bpmnProcessId(bpmnProcessId)
 				.latestVersion()
 				.variables(Map.of("total", 100))
@@ -235,9 +241,9 @@ To check your work, visit our [sample repository](https://github.com/camunda/cam
 
 Re-run the application in your terminal with `mvn spring-boot:run` to see the process run, and note the instance history in Operate.
 
-## Step 7: Deploy the process
+## Step 7: Deploy your process upon application start
 
-To deploy your process, take the following steps:
+To deploy your process upon application start, take the following steps:
 
 1. Decorate the `ProcessPaymentsApplication` class with `@Deployment(resources = "classpath:process-payments.bpmn")` in `ProcessPaymentsApplication.java`:
 

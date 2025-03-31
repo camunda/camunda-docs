@@ -43,16 +43,23 @@ module.exports = {
             "guides/devops-lifecycle/integrate-web-modeler-in-ci-cd",
           ],
         },
+        "guides/use-shared-project-for-organization-wide-collaboration",
       ],
     },
     {
-      "Migrate from Camunda 7": [
-        "guides/migrating-from-camunda-7/index",
+      type: "category",
+      label: "Migrate from Camunda 7",
+      link: {
+        type: "doc",
+        id: "guides/migrating-from-camunda-7/index",
+      },
+      items: [
+        "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-tooling",
+        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-7/adjusting-source-code",
+        "guides/migrating-from-camunda-7/technical-details",
       ],
     },
   ],
@@ -115,6 +122,7 @@ module.exports = {
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity",
           ],
         },
         {
@@ -134,6 +142,15 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "RPA",
+      link: {
+        type: "doc",
+        id: "components/rpa/overview",
+      },
+      items: ["components/rpa/getting-started", "components/rpa/production"],
     },
     {
       type: "category",
@@ -175,6 +192,42 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
+            {
+              type: "category",
+              label: "Intelligent document processing (IDP)",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp",
+              },
+              items: [
+                "components/modeler/web-modeler/idp/idp-configuration",
+                "components/modeler/web-modeler/idp/idp-applications",
+                {
+                  type: "category",
+                  label: "Document extraction",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-document-extraction",
+                  },
+                  items: [
+                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
+                    "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                  ],
+                },
+                // "components/modeler/web-modeler/idp/idp-document-automation",
+                {
+                  type: "category",
+                  label: "Integrate IDP into your processes",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/idp/idp-integrate",
+                  },
+                  items: ["components/modeler/web-modeler/idp/idp-example"],
+                },
+                "components/modeler/web-modeler/idp/idp-key-concepts",
+                "components/modeler/web-modeler/idp/idp-reference",
+              ],
+            },
             "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
@@ -193,6 +246,8 @@ module.exports = {
               ],
             },
             "components/modeler/web-modeler/file-download",
+            "components/modeler/web-modeler/web-modeler-settings",
+            "components/modeler/web-modeler/process-landscape-visualization",
           ],
         },
         {
@@ -284,6 +339,7 @@ module.exports = {
                 "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
                 "components/modeler/bpmn/call-activities/call-activities",
                 "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+                "components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses",
               ],
             },
             {
@@ -291,7 +347,6 @@ module.exports = {
                 "components/modeler/bpmn/markers",
                 "components/modeler/bpmn/multi-instance/multi-instance",
                 "components/modeler/bpmn/compensation-handler/compensation-handler",
-                "components/modeler/bpmn/ad-hoc/ad-hoc",
               ],
             },
           ],
@@ -364,6 +419,7 @@ module.exports = {
             },
             "components/connectors/protocol/graphql",
             "components/connectors/protocol/http-webhook",
+            "components/connectors/out-of-the-box-connectors/hubspot",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
@@ -406,6 +462,7 @@ module.exports = {
               items: [
                 "components/connectors/custom-built-connectors/connector-template-generator",
                 "components/connectors/manage-connector-templates",
+                "components/connectors/custom-built-connectors/create-connector-from-rest",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
@@ -629,6 +686,21 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "category",
+      label: "Identity",
+      link: {
+        type: "doc",
+        id: "components/identity/identity-introduction",
+      },
+      items: [
+        "components/identity/identity-introduction",
+        "components/identity/authorization",
+        "components/identity/user",
+      ],
+    },
+    {
       "Best Practices": [
         "components/best-practices/best-practices-overview",
         {
@@ -664,18 +736,6 @@ module.exports = {
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
           ],
-          "Camunda 7 specific": [
-            "components/best-practices/architecture/deciding-about-your-stack-c7",
-            "components/best-practices/architecture/sizing-your-environment-c7",
-            "components/best-practices/development/invoking-services-from-the-process-c7",
-            "components/best-practices/development/understanding-transaction-handling-c7",
-            "components/best-practices/development/testing-process-definitions-c7",
-            "components/best-practices/development/routing-events-to-processes-c7",
-            "components/best-practices/operations/operating-camunda-c7",
-            "components/best-practices/operations/performance-tuning-camunda-c7",
-            "components/best-practices/operations/securing-camunda-c7",
-            "components/best-practices/architecture/extending-human-task-management-c7",
-          ],
         },
       ],
     },
@@ -687,14 +747,6 @@ module.exports = {
         id: "components/early-access/overview",
       },
       items: [
-        {
-          type: "category",
-          label: "Experimental features",
-          items: [
-            "components/early-access/experimental/rpa/rpa-integration",
-            "components/early-access/experimental/rpa/rpa-framework-library",
-          ],
-        },
         {
           type: "category",
           label: "Alpha features",
@@ -740,7 +792,6 @@ module.exports = {
         require("./docs/apis-tools/administration-api/sidebar-schema"),
         require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         require("./docs/apis-tools/camunda-api-rest/sidebar-schema"),
-        require("./docs/apis-tools/operate-api/sidebar-schema"),
         {
           "Optimize API (REST)": [
             optimizeLink("Overview", "apis-tools/optimize-api/overview/"),
@@ -822,12 +873,69 @@ module.exports = {
             ),
           ],
         },
-        require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
         require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/tasklist-api/sidebar-schema"),
+            require("./docs/apis-tools/operate-api/sidebar-schema"),
+            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
+            {
+              "Zeebe API (REST)": [
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication",
+                "apis-tools/zeebe-api-rest/zeebe-api-tutorial",
+                {
+                  Specifications: [
+                    {
+                      type: "doc",
+                      id: "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api",
+                    },
+                    {
+                      type: "category",
+                      label: "Cluster",
+                      items: [
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/get-cluster-topology",
+                          label: "Get cluster topology",
+                          className: "api-method get",
+                        },
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "User task",
+                      items: [
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/complete-a-user-task",
+                          label: "Complete a user task",
+                          className: "api-method post",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/assign-a-user-task",
+                          label: "Assign a user task",
+                          className: "api-method post",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/update-a-user-task",
+                          label: "Update a user task",
+                          className: "api-method patch",
+                        },
+                        {
+                          type: "doc",
+                          id: "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task",
+                          label: "Unassign a user task",
+                          className: "api-method delete",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
       ],
@@ -850,6 +958,7 @@ module.exports = {
             {
               "Java client": [
                 "apis-tools/java-client/index",
+                "apis-tools/java-client/authentication",
                 "apis-tools/java-client/job-worker",
                 "apis-tools/java-client/logging",
                 "apis-tools/java-client/zeebe-process-test",
@@ -871,21 +980,6 @@ module.exports = {
             {
               "Community clients": [
                 "apis-tools/community-clients/index",
-                {
-                  "Zeebe clients": [
-                    {
-                      "CLI client": [
-                        "apis-tools/community-clients/cli-client/index",
-                        "apis-tools/community-clients/cli-client/cli-get-started",
-                      ],
-                      "Go client": [
-                        "apis-tools/community-clients/go-client/index",
-                        "apis-tools/community-clients/go-client/go-get-started",
-                        "apis-tools/community-clients/go-client/job-worker",
-                      ],
-                    },
-                  ],
-                },
                 "apis-tools/build-your-own-client",
               ],
             },
@@ -913,46 +1007,85 @@ module.exports = {
       ],
     },
   ],
-
   Reference: [
     "reference/overview",
     {
       type: "category",
-      label: "Announcements",
+      label: "Announcements and release notes",
       link: {
         type: "doc",
-        id: "reference/announcements",
+        id: "reference/announcements-release-notes/overview",
       },
       items: [
-        "reference/announcements/announcements-870",
-        "reference/announcements/announcements-860",
-        "reference/announcements/announcements-850",
+        {
+          type: "category",
+          label: "8.8",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/880/880-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/880/880-announcements",
+            "reference/announcements-release-notes/880/880-release-notes",
+          ],
+        },
+        {
+          type: "category",
+          label: "8.7",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/870/870-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/870/870-announcements",
+            "reference/announcements-release-notes/870/870-release-notes",
+          ],
+        },
+        {
+          type: "category",
+          label: "8.6",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/860/860-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/860/860-announcements",
+            "reference/announcements-release-notes/860/860-release-notes",
+          ],
+        },
+        {
+          type: "category",
+          label: "8.5",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/850/850-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/850/850-announcements",
+            "reference/announcements-release-notes/850/850-release-notes",
+          ],
+        },
+        "reference/announcements-release-notes/release-policy",
       ],
     },
-    {
-      type: "category",
-      label: "Release notes",
-      link: {
-        type: "doc",
-        id: "reference/release-notes/release-notes",
-      },
-      items: [
-        "reference/release-notes/870",
-        "reference/release-notes/860",
-        "reference/release-notes/850",
-      ],
-    },
-    "reference/contact",
     "reference/supported-environments",
+    "reference/contact",
     "reference/dependencies",
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
     "reference/licenses",
     "reference/notices",
-    "reference/release-policy",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      type: "category",
+      label: "Data collection",
+      link: {
+        type: "doc",
+        id: "reference/data-collection/data-collection",
+      },
+      items: ["reference/data-collection/usage-metrics"],
+    },
     "reference/glossary",
   ],
   "Self-Managed": [
@@ -1000,6 +1133,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                    "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
                   ],
                 },
                 {
@@ -1019,6 +1153,7 @@ module.exports = {
               "Google (GCP)": ["self-managed/setup/deploy/gcp/google-gke"],
               "Red Hat (OpenShift)": [
                 "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
               ],
               Other: [
                 "self-managed/setup/deploy/other/docker",
@@ -1042,6 +1177,7 @@ module.exports = {
             "self-managed/setup/guides/using-existing-opensearch",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
+            "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/multi-namespace-deployment",
@@ -1051,9 +1187,47 @@ module.exports = {
       ],
     },
     {
-      "Reference architecture": [
-        "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/manual/manual",
+      type: "category",
+      label: "Reference architecture",
+      link: {
+        type: "doc",
+        id: "self-managed/reference-architecture/reference-architecture",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Kubernetes",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/kubernetes",
+          },
+          items: [
+            {
+              "AWS EKS": [
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+              ],
+            },
+            {
+              Openshift: [
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Manual JAR",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/manual",
+          },
+          items: ["self-managed/setup/deploy/amazon/aws-ec2"],
+        },
       ],
     },
     {
@@ -1066,6 +1240,7 @@ module.exports = {
             id: "self-managed/operational-guides/update-guide/introduction",
           },
           items: [
+            "self-managed/operational-guides/update-guide/870-to-880",
             "self-managed/operational-guides/update-guide/860-to-870",
             "self-managed/operational-guides/update-guide/850-to-860",
             "self-managed/operational-guides/update-guide/840-to-850",
@@ -1098,6 +1273,7 @@ module.exports = {
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
         },
+        "self-managed/operational-guides/data-purge",
         {
           type: "doc",
           label: "Configure components",
@@ -1114,9 +1290,14 @@ module.exports = {
           ],
         },
         {
+          Monitoring: [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics",
+          ],
+        },
+        {
           Troubleshooting: [
             "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels",
           ],
         },
       ],
@@ -1190,7 +1371,6 @@ module.exports = {
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",
@@ -1299,63 +1479,73 @@ module.exports = {
 
           Identity: [
             "self-managed/identity/what-is-identity",
-            "self-managed/identity/getting-started/install-identity",
             {
-              "User guide": [
-                {
-                  Configuration: [
-                    "self-managed/identity/user-guide/configuration/making-identity-production-ready",
-                    "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
-                    "self-managed/identity/user-guide/configuration/configure-logging",
-                    "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
-                  ],
-                },
-                {
-                  Roles: [
-                    "self-managed/identity/user-guide/roles/add-assign-role",
-                    "self-managed/identity/user-guide/roles/add-assign-permission",
-                  ],
-                },
-                {
-                  Groups: [
-                    "self-managed/identity/user-guide/groups/create-group",
-                    "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
-                  ],
-                },
-                {
-                  Authorizations: [
-                    "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
-                    "self-managed/identity/user-guide/authorizations/managing-user-access",
-                    "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
-                  ],
-                },
-                {
-                  Tenants: [
-                    "self-managed/identity/user-guide/tenants/managing-tenants",
-                  ],
-                },
-                {
-                  "Mapping rules": [
-                    "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
-                  ],
-                },
-                {
-                  "Additional features": [
-                    "self-managed/identity/user-guide/additional-features/adding-an-api",
-                    "self-managed/identity/user-guide/additional-features/incorporate-applications",
-                  ],
-                },
+              "Identity for Orchestration clusters": [
+                "self-managed/identity/orchestration-identity/installation",
+                "self-managed/identity/orchestration-identity/configuration",
               ],
             },
             {
-              Deployment: [
-                "self-managed/identity/deployment/configuration-variables",
-                "self-managed/identity/deployment/application-monitoring",
-                "self-managed/identity/deployment/starting-configuration-for-identity",
-                "self-managed/identity/deployment/resource-management",
+              "Identity for Web Modeler, Console, and Optimize": [
+                "self-managed/identity/getting-started/install-identity",
+                {
+                  "User guide": [
+                    {
+                      Configuration: [
+                        "self-managed/identity/user-guide/configuration/making-identity-production-ready",
+                        "self-managed/identity/user-guide/configuration/configure-external-identity-provider",
+                        "self-managed/identity/user-guide/configuration/configure-logging",
+                        "self-managed/identity/user-guide/configuration/connect-to-an-existing-keycloak",
+                      ],
+                    },
+                    {
+                      Roles: [
+                        "self-managed/identity/user-guide/roles/add-assign-role",
+                        "self-managed/identity/user-guide/roles/add-assign-permission",
+                      ],
+                    },
+                    {
+                      Groups: [
+                        "self-managed/identity/user-guide/groups/create-group",
+                        "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
+                      ],
+                    },
+                    {
+                      Authorizations: [
+                        "self-managed/identity/user-guide/authorizations/managing-resource-authorizations",
+                        "self-managed/identity/user-guide/authorizations/managing-user-access",
+                        "self-managed/identity/user-guide/authorizations/generating-m2m-tokens",
+                      ],
+                    },
+                    {
+                      Tenants: [
+                        "self-managed/identity/user-guide/tenants/managing-tenants",
+                      ],
+                    },
+                    {
+                      "Mapping rules": [
+                        "self-managed/identity/user-guide/mapping-rules/managing-mapping-rules",
+                      ],
+                    },
+                    {
+                      "Additional features": [
+                        "self-managed/identity/user-guide/additional-features/adding-an-api",
+                        "self-managed/identity/user-guide/additional-features/incorporate-applications",
+                      ],
+                    },
+                  ],
+                },
+                {
+                  Deployment: [
+                    "self-managed/identity/deployment/configuration-variables",
+                    "self-managed/identity/deployment/application-monitoring",
+                    "self-managed/identity/deployment/starting-configuration-for-identity",
+                    "self-managed/identity/deployment/resource-management",
+                  ],
+                },
+                "self-managed/identity/troubleshooting/troubleshoot-identity",
               ],
             },
-            "self-managed/identity/troubleshooting/troubleshoot-identity",
           ],
         },
         {
@@ -1376,6 +1566,7 @@ module.exports = {
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
                   ],
                 },
               ],

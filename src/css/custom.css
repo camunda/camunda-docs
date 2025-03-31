@@ -22,6 +22,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-menu-color: var(--ifm-color-emphasis-800);
   --ifm-heading-font-family: IBM Plex Sans, -apple-system, blinkmacsystemfont,
     Segoe UI, roboto, oxygen-sans, ubuntu, cantarell, Helvetica Neue, sans-serif;
+  --ifm-leading: calc(var(--ifm-leading-desktop) * 1rem);
 }
 
 /* Dark mode */
@@ -331,6 +332,11 @@ body {
     sans-serif;
 }
 
+.alert a {
+  text-decoration: underline;
+  text-decoration-color: var(--ifm-alert-border-color);
+}
+
 .alert--primary {
   background-color: #14d890;
 }
@@ -374,6 +380,61 @@ body {
   background-color: #14d890;
   background-size: 100%;
   color: #000;
+}
+
+/* Landing page search bar */
+
+.homeSearch {
+  margin: auto;
+  max-width: 1000px;
+  padding: 15px 20px 20px 20px;
+}
+
+.homeSearch .DocSearch-Button {
+  height: 55px;
+  width: 100%;
+  border-radius: 8px;
+  background: white;
+}
+.homeSearch .DocSearch-Button:hover {
+  height: 55px;
+  width: 100%;
+  border-radius: 8px;
+  background: white;
+  color: var(--docsearch-muted-color);
+}
+
+.DocSearch-Button-Keys {
+  display: none !important;
+}
+
+.homeSearch .DocSearch-Button-Placeholder::after {
+  content: " Camunda 8 docs";
+}
+
+@media (max-width: 768px) {
+  .homeSearch .DocSearch-Button-Placeholder {
+    display: inline;
+  }
+}
+[data-theme="dark"] .homeSearch .DocSearch-Button {
+  background-color: transparent;
+  border: 2px solid rgb(40, 40, 40);
+}
+
+[data-theme="dark"] .homeSearch .DocSearch-Button:hover {
+  background-color: transparent;
+  border: 2px solid var(--ifm-color-primary);
+  box-shadow: 0px 8px 16px 4px #78a9ff33;
+}
+
+.table-of-contents__link .callout {
+  display: none;
+}
+
+/* style PushFeedback widget */
+.feedback-widget {
+  padding-top: 2rem;
 }
 
 /* style SVG images of the BPMN coverage page */
@@ -774,7 +835,6 @@ h2 {
   font-size: 28px;
   font-weight: 600;
   border-bottom: 1px solid #dedede;
-  padding-top: 20px;
   margin-bottom: 20px;
   padding-bottom: 10px;
 }
@@ -947,4 +1007,19 @@ ul ol {
   .double-column-container {
     flex-direction: column;
   }
+}
+
+/* Green tick list and orange cross list */
+.list-tick {
+  list-style-image: url("/static/img/icon-list-tick.png");
+  line-height: 1.5;
+}
+.list-cross {
+  list-style-image: url("/static/img/icon-list-cross.png");
+  line-height: 1.5;
+}
+.list-tick li,
+.list-cross li {
+  padding-left: 10px;
+  margin-bottom: 25px;
 }

@@ -38,13 +38,19 @@
       ]
     },
     {
-      "Migrate from Camunda 7": [
-        "guides/migrating-from-camunda-7/index",
+      "type": "category",
+      "label": "Migrate from Camunda 7",
+      "link": {
+        "type": "doc",
+        "id": "guides/migrating-from-camunda-7/index"
+      },
+      "items": [
+        "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-tooling",
+        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
-        "guides/migrating-from-camunda-7/adjusting-bpmn-models",
-        "guides/migrating-from-camunda-7/adjusting-dmn-models",
-        "guides/migrating-from-camunda-7/adjusting-source-code"
+        "guides/migrating-from-camunda-7/technical-details"
       ]
     }
   ],
@@ -104,7 +110,8 @@
             "components/console/manage-clusters/manage-alerts",
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
-            "components/console/manage-clusters/settings"
+            "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity"
           ]
         },
         {
@@ -474,7 +481,8 @@
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-template-generator"
+            "components/connectors/custom-built-connectors/connector-template-generator",
+            "components/connectors/custom-built-connectors/create-connector-from-rest"
           ]
         }
       ],
@@ -887,8 +895,8 @@
                     },
                     {
                       "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/report-error-for-job",
-                      "label": "Report error for job",
+                      "id": "apis-tools/camunda-api-rest/specifications/throw-job-error",
+                      "label": "Throw error for job",
                       "className": "api-method post"
                     },
                     {
@@ -1165,7 +1173,7 @@
                       "type": "doc",
                       "id": "apis-tools/camunda-api-rest/specifications/update-element-instance-variables",
                       "label": "Update element instance variables",
-                      "className": "api-method post"
+                      "className": "api-method put"
                     }
                   ]
                 },
@@ -1676,18 +1684,7 @@
                 "apis-tools/community-clients/python",
                 "apis-tools/community-clients/ruby",
                 "apis-tools/community-clients/rust",
-                "apis-tools/community-clients/quarkus",
-                {
-                  "CLI client": [
-                    "apis-tools/community-clients/cli-client/index",
-                    "apis-tools/community-clients/cli-client/cli-get-started"
-                  ],
-                  "Go client": [
-                    "apis-tools/community-clients/go-client/index",
-                    "apis-tools/community-clients/go-client/go-get-started",
-                    "apis-tools/community-clients/go-client/job-worker"
-                  ]
-                }
+                "apis-tools/community-clients/quarkus"
               ]
             }
           ]
@@ -1735,28 +1732,59 @@
 
   "Reference": [
     "reference/overview",
-    "reference/announcements",
     {
       "type": "category",
-      "label": "Release notes",
+      "label": "Announcements and release notes",
       "link": {
         "type": "doc",
-        "id": "reference/release-notes/release-notes"
+        "id": "reference/announcements-release-notes/overview"
       },
-      "items": ["reference/release-notes/860", "reference/release-notes/850"]
+      "items": [
+        {
+          "type": "category",
+          "label": "8.6",
+          "link": {
+            "type": "doc",
+            "id": "reference/announcements-release-notes/860/860-announcements"
+          },
+          "items": [
+            "reference/announcements-release-notes/860/860-announcements",
+            "reference/announcements-release-notes/860/860-release-notes"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "8.5",
+          "link": {
+            "type": "doc",
+            "id": "reference/announcements-release-notes/850/850-announcements"
+          },
+          "items": [
+            "reference/announcements-release-notes/850/850-announcements",
+            "reference/announcements-release-notes/850/850-release-notes"
+          ]
+        },
+        "reference/announcements-release-notes/release-policy"
+      ]
     },
-    "reference/contact",
     "reference/supported-environments",
+    "reference/contact",
     "reference/dependencies",
     "reference/camunda-help-center",
     "reference/auto-updates",
     "reference/status",
-    "reference/alpha-features",
     "reference/licenses",
     "reference/notices",
-    "reference/release-policy",
     "reference/regions",
-    "reference/usage-metrics",
+    {
+      "type": "category",
+      "label": "Data collection",
+      "link": {
+        "type": "doc",
+        "id": "reference/data-collection/data-collection"
+      },
+      "items": ["reference/data-collection/usage-metrics"]
+    },
     "reference/glossary"
   ],
   "Self-Managed": [
@@ -1837,6 +1865,7 @@
             "self-managed/setup/guides/using-existing-opensearch",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/connect-to-an-oidc-provider",
+            "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/multi-namespace-deployment",
@@ -1900,9 +1929,14 @@
           ]
         },
         {
+          "Monitoring": [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics"
+          ]
+        },
+        {
           "Troubleshooting": [
-            "self-managed/operational-guides/troubleshooting/troubleshooting",
-            "self-managed/operational-guides/troubleshooting/log-levels"
+            "self-managed/operational-guides/troubleshooting/troubleshooting"
           ]
         }
       ]
@@ -1923,6 +1957,7 @@
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
+        "self-managed/concepts/elasticsearch-without-cluster-privileges",
         "self-managed/concepts/opensearch-privileges"
       ]
     },
@@ -1971,7 +2006,6 @@
                 "self-managed/zeebe-deployment/operations/resource-planning",
                 "self-managed/zeebe-deployment/operations/network-ports",
                 "self-managed/zeebe-deployment/operations/setting-up-a-cluster",
-                "self-managed/zeebe-deployment/operations/metrics",
                 "self-managed/zeebe-deployment/operations/health",
                 "self-managed/zeebe-deployment/operations/backpressure",
                 "self-managed/zeebe-deployment/operations/disk-space",
@@ -2152,14 +2186,14 @@
                 },
                 {
                   "Roles": [
-                    "self-managed/identity/user-guide/roles/add-assign-role",
-                    "self-managed/identity/user-guide/roles/add-assign-permission"
+                    "self-managed/identity/user-guide/roles/manage-roles",
+                    "self-managed/identity/user-guide/roles/manage-permissions"
                   ]
                 },
                 {
                   "Groups": [
-                    "self-managed/identity/user-guide/groups/create-group",
-                    "self-managed/identity/user-guide/groups/assign-users-roles-to-group"
+                    "self-managed/identity/user-guide/groups/manage-groups",
+                    "self-managed/identity/user-guide/groups/manage-users-roles-to-group"
                   ]
                 },
                 {
@@ -2215,7 +2249,8 @@
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration"
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems"
                   ]
                 }
               ]

@@ -969,6 +969,10 @@ module.exports = {
             },
 
             docsLink(
+              "HubSpot Connector",
+              "components/connectors/out-of-the-box-connectors/hubspot/"
+            ),
+            docsLink(
               "Hugging Face Connector",
               "components/connectors/out-of-the-box-connectors/hugging-face/"
             ),
@@ -2011,160 +2015,6 @@ module.exports = {
             ),
           ],
         },
-
-        {
-          Deprecated: [
-            {
-              "Tasklist API (GraphQL)": [
-                docsLink("Schema Documentation", "apis-tools/tasklist-api/"),
-                docsLink(
-                  "Overview",
-                  "apis-tools/tasklist-api/tasklist-api-overview/"
-                ),
-                docsLink(
-                  "Authentication",
-                  "apis-tools/tasklist-api/tasklist-api-authentication/"
-                ),
-                docsLink(
-                  "Tutorial",
-                  "apis-tools/tasklist-api/tasklist-api-tutorial/"
-                ),
-                docsLink(
-                  "GraphQL to REST API migration",
-                  "apis-tools/tasklist-api/tasklist-api-graphql-to-rest-migration/"
-                ),
-
-                {
-                  Directives: [
-                    docsLink(
-                      "deprecated",
-                      "apis-tools/tasklist-api/directives/deprecated/"
-                    ),
-                    docsLink(
-                      "include",
-                      "apis-tools/tasklist-api/directives/include/"
-                    ),
-                    docsLink(
-                      "skip",
-                      "apis-tools/tasklist-api/directives/skip/"
-                    ),
-                    docsLink(
-                      "specifiedBy",
-                      "apis-tools/tasklist-api/directives/specified-by/"
-                    ),
-                  ],
-                },
-
-                {
-                  Enums: [
-                    docsLink("Sort", "apis-tools/tasklist-api/enums/sort/"),
-                    docsLink(
-                      "TaskSortFields",
-                      "apis-tools/tasklist-api/enums/task-sort-fields/"
-                    ),
-                    docsLink(
-                      "TaskState",
-                      "apis-tools/tasklist-api/enums/task-state/"
-                    ),
-                  ],
-                },
-
-                {
-                  Inputs: [
-                    docsLink(
-                      "DateFilter",
-                      "apis-tools/tasklist-api/inputs/date-filter-input/"
-                    ),
-                    docsLink(
-                      "TaskOrderBy",
-                      "apis-tools/tasklist-api/inputs/task-order-by/"
-                    ),
-                    docsLink(
-                      "TaskQuery",
-                      "apis-tools/tasklist-api/inputs/task-query/"
-                    ),
-                    docsLink(
-                      "VariableInput",
-                      "apis-tools/tasklist-api/inputs/variable-input/"
-                    ),
-                  ],
-                },
-
-                {
-                  Mutations: [
-                    docsLink(
-                      "claimTask",
-                      "apis-tools/tasklist-api/mutations/claim-task/"
-                    ),
-                    docsLink(
-                      "completeTask",
-                      "apis-tools/tasklist-api/mutations/complete-task/"
-                    ),
-                    docsLink(
-                      "deleteProcessInstance",
-                      "apis-tools/tasklist-api/mutations/delete-process-instance/"
-                    ),
-                    docsLink(
-                      "unclaimTask",
-                      "apis-tools/tasklist-api/mutations/unclaim-task/"
-                    ),
-                  ],
-                },
-
-                {
-                  Objects: [
-                    docsLink("Form", "apis-tools/tasklist-api/objects/form/"),
-                    docsLink("Task", "apis-tools/tasklist-api/objects/task/"),
-                    docsLink("User", "apis-tools/tasklist-api/objects/user/"),
-                    docsLink(
-                      "Variable",
-                      "apis-tools/tasklist-api/objects/variable/"
-                    ),
-                  ],
-                },
-
-                {
-                  Queries: [
-                    docsLink(
-                      "currentUser",
-                      "apis-tools/tasklist-api/queries/current-user/"
-                    ),
-                    docsLink("form", "apis-tools/tasklist-api/queries/form/"),
-                    docsLink("task", "apis-tools/tasklist-api/queries/task/"),
-                    docsLink("tasks", "apis-tools/tasklist-api/queries/tasks/"),
-                    docsLink(
-                      "variable",
-                      "apis-tools/tasklist-api/queries/variable/"
-                    ),
-                    docsLink(
-                      "variables",
-                      "apis-tools/tasklist-api/queries/variables/"
-                    ),
-                  ],
-                },
-
-                {
-                  Scalars: [
-                    docsLink(
-                      "DateTime",
-                      "apis-tools/tasklist-api/scalars/datetime/"
-                    ),
-                    docsLink(
-                      "Boolean",
-                      "apis-tools/tasklist-api/scalars/boolean/"
-                    ),
-                    docsLink("ID", "apis-tools/tasklist-api/scalars/id/"),
-                    docsLink("Int", "apis-tools/tasklist-api/scalars/int/"),
-                    docsLink(
-                      "String",
-                      "apis-tools/tasklist-api/scalars/string/"
-                    ),
-                  ],
-                },
-              ],
-            },
-          ],
-        },
       ],
     },
 
@@ -2407,6 +2257,10 @@ module.exports = {
                       "Deploy a ROSA cluster with Terraform",
                       "self-managed/setup/deploy/amazon/openshift/terraform/"
                     ),
+                    docsLink(
+                      "Dual-region ROSA HCP Cluster with Terraform",
+                      "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/"
+                    ),
                   ],
                 },
 
@@ -2444,6 +2298,10 @@ module.exports = {
                 docsLink(
                   "Red Hat OpenShift",
                   "self-managed/setup/deploy/openshift/redhat-openshift/"
+                ),
+                docsLink(
+                  "Dual-Region",
+                  "self-managed/setup/deploy/openshift/redhat-openshift-dual-region/"
                 ),
               ],
             },
@@ -2597,16 +2455,23 @@ module.exports = {
             ),
           ],
         },
-
+        {
+          Monitoring: [
+            docsLink(
+              "Log levels",
+              "self-managed/operational-guides/monitoring/log-levels/"
+            ),
+            docsLink(
+              "Metrics",
+              "self-managed/operational-guides/monitoring/metrics/"
+            ),
+          ],
+        },
         {
           Troubleshooting: [
             docsLink(
               "Troubleshooting",
               "self-managed/operational-guides/troubleshooting/"
-            ),
-            docsLink(
-              "Log levels",
-              "self-managed/operational-guides/troubleshooting/log-levels/"
             ),
           ],
         },
@@ -2776,7 +2641,7 @@ module.exports = {
                 ),
                 docsLink(
                   "Metrics",
-                  "self-managed/zeebe-deployment/operations/metrics/"
+                  "self-managed/operational-guides/monitoring/metrics"
                 ),
                 docsLink(
                   "Health status",
@@ -3134,6 +2999,10 @@ module.exports = {
                     docsLink(
                       "Missing data",
                       "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/"
+                    ),
+                    docsLink(
+                      "Other problems",
+                      "self-managed/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/"
                     ),
                   ],
                 },

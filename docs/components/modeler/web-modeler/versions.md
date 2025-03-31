@@ -7,7 +7,7 @@ description: Work with versions in Web Modeler.
 <span class="badge badge--cloud">Camunda 8 only</span>
 
 :::note
-With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related announcement](/reference/announcements/870.md##web-modeler-milestones-renamed-to-versions).
+With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related release note](/reference/announcements-release-notes/870/870-release-notes.md#web-modeler-milestones-renamed-to-versions).
 :::
 
 You can create a version at any time to save a snapshot of your BPMN or DMN diagram.
@@ -44,17 +44,6 @@ You can create a new version either from your diagram or the versions list.
 
 A new version is also automatically created when dragging and dropping a file into the diagram view, or when you select the **Replace via upload** option from the breadcrumb menu.
 
-:::
-
-### Bulk version creation
-
-A [process application](/components/modeler/web-modeler/process-applications.md) is a special type of Web Modeler folder that allows you to work on a set of related files and
-[deploy](/components/modeler/web-modeler/process-applications.md#deploy-and-run-a-process-application) them as a single bundle with just one click. This reduces the risk of having a broken deployment at runtime, and makes it more convenient to deploy related files.
-
-If you create a version on the main process of a process application, versions are created for all other assets in the application, to make it easier to track or revert changes. See [create a bulk version](process-applications.md#create-a-bulk-version).
-
-:::note
-Versions of resources belonging to a process application are tied to the main process and cannot be modified.
 :::
 
 ## Compare versions

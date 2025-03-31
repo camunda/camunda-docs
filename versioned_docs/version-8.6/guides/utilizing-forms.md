@@ -25,7 +25,9 @@ To start building a form, log in to your [Camunda 8](https://camunda.io) account
 
 ### Build your form
 
-Now you can start to build your Camunda Form. Right after creating your form, you can name it by replacing the **New Form** text with the name of your choice. In this example, we'll build a form to help with a task in obtaining an email message.
+Now you can start to build your form by dragging elements from the palette to the canvas, or by using the AI Form Generator at the bottom of the palette. For the purpose of this guide, we'll build a form from scratch.
+
+Right after creating your form, you can name it by replacing the **New Form** text with the name of your choice. In this example, we'll build a form to help with a task in obtaining an email message.
 
 ![form email example](./img/form-email-example.png)
 
@@ -45,7 +47,7 @@ Refer to the [camunda forms reference](../components/modeler/forms/camunda-forms
 
 To save your form in Camunda 8, you don't have to do anything. Web Modeler will autosave every change you make.
 
-### Link your form to a BPMN diagram
+### Link your form to a BPMN diagram {#connect-your-form-to-a-bpmn-diagram}
 
 Next, let's implement a task form into a diagram. In tandem, we can link your form to a user task or start event.
 

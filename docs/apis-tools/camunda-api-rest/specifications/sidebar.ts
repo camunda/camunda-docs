@@ -8,6 +8,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Ad-hoc subprocess",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-ad-hoc-subprocess-activities",
+          label: "Search activatable activities (alpha)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/activate-ad-hoc-subprocess-activities",
+          label: "Activate activities within an ad-hoc subprocess",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Authentication",
       items: [
         {
@@ -42,8 +60,32 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-authorizations",
-          label: "Query authorizations",
+          id: "apis-tools/camunda-api-rest/specifications/search-authorizations",
+          label: "Search authorizations",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Batch operation",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-batch-operation",
+          label: "Get batch operation",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-batch-operation-items",
+          label: "Get batch operation items",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-batch-operations",
+          label: "Search batch operations",
           className: "api-method post",
         },
       ],
@@ -84,8 +126,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-decision-definitions",
-          label: "Query decision definitions",
+          id: "apis-tools/camunda-api-rest/specifications/search-decision-definitions",
+          label: "Search decision definitions",
           className: "api-method post",
         },
         {
@@ -114,8 +156,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-decision-instances",
-          label: "Query decision instances",
+          id: "apis-tools/camunda-api-rest/specifications/search-decision-instances",
+          label: "Search decision instances",
           className: "api-method post",
         },
         {
@@ -132,8 +174,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-decision-requirements",
-          label: "Query decision requirements",
+          id: "apis-tools/camunda-api-rest/specifications/search-decision-requirements",
+          label: "Search decision requirements",
           className: "api-method post",
         },
         {
@@ -194,7 +236,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-element-instance-variables",
           label: "Update element instance variables",
-          className: "api-method post",
+          className: "api-method put",
         },
       ],
     },
@@ -204,8 +246,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-flow-node-instances",
-          label: "Query flow node instances",
+          id: "apis-tools/camunda-api-rest/specifications/search-flow-node-instances",
+          label: "Search flow node instances",
           className: "api-method post",
         },
         {
@@ -223,43 +265,43 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-group",
-          label: "Create group",
+          label: "Create group (Work-in-Progress)",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/get-group",
-          label: "Get group",
+          label: "Get group (Work-in-Progress)",
           className: "api-method get",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-group",
-          label: "Update group",
+          label: "Update group (Work-in-Progress)",
           className: "api-method patch",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-group",
-          label: "Delete group",
+          label: "Delete group (Work-in-Progress)",
           className: "api-method delete",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-group",
-          label: "Assign a user to a group",
+          label: "Assign a user to a group (Work-in-Progress)",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/unassign-user-from-group",
-          label: "Unassign a user from a group",
+          label: "Unassign a user from a group (Work-in-Progress)",
           className: "api-method delete",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-groups",
-          label: "Query groups",
+          label: "Search groups (Work-in-Progress)",
           className: "api-method post",
         },
       ],
@@ -276,8 +318,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-incidents",
-          label: "Query incidents",
+          id: "apis-tools/camunda-api-rest/specifications/search-incidents",
+          label: "Search incidents",
           className: "api-method post",
         },
         {
@@ -306,8 +348,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/report-job-error",
-          label: "Report error for job",
+          id: "apis-tools/camunda-api-rest/specifications/throw-job-error",
+          label: "Throw error for job",
           className: "api-method post",
         },
         {
@@ -349,13 +391,13 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-mapping-rule",
-          label: "Delete a mapping rule",
+          label: "Delete a mapping rule (Work-in-Progress)",
           className: "api-method delete",
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-mappings",
-          label: "Query mappings",
+          id: "apis-tools/camunda-api-rest/specifications/search-mappings",
+          label: "Search mappings (Work-in-Progress)",
           className: "api-method post",
         },
       ],
@@ -384,8 +426,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-process-definitions",
-          label: "Query process definitions",
+          id: "apis-tools/camunda-api-rest/specifications/search-process-definitions",
+          label: "Search process definitions",
           className: "api-method post",
         },
         {
@@ -405,6 +447,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/get-start-process-form",
           label: "Get process start form",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-process-definition-statistics",
+          label: "Get process definition statistics",
+          className: "api-method post",
         },
       ],
     },
@@ -426,14 +474,20 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-process-instances",
-          label: "Query process instances",
+          id: "apis-tools/camunda-api-rest/specifications/search-process-instances",
+          label: "Search process instances",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/cancel-process-instance",
           label: "Cancel process instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/cancel-process-instances-batch-operation",
+          label: "Create a batch operation to cancel process instances",
           className: "api-method post",
         },
         {
@@ -466,6 +520,18 @@ const sidebar: SidebarsConfig = {
           label: "Delete resource",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-resource",
+          label: "Get resource",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-resource-content",
+          label: "Get resource content",
+          className: "api-method get",
+        },
       ],
     },
     {
@@ -475,31 +541,31 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/create-role",
-          label: "Create role",
+          label: "Create role (Work-in-Progress)",
           className: "api-method post",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/get-role",
-          label: "Get role",
+          label: "Get role (Work-in-Progress)",
           className: "api-method get",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-role",
-          label: "Update role",
+          label: "Update role (Work-in-Progress)",
           className: "api-method patch",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-role",
-          label: "Delete role",
+          label: "Delete role (Work-in-Progress)",
           className: "api-method delete",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-roles",
-          label: "Query roles",
+          label: "Search roles (Work-in-Progress)",
           className: "api-method post",
         },
       ],
@@ -536,7 +602,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-tenant",
           label: "Update tenant",
-          className: "api-method patch",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -555,6 +621,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/camunda-api-rest/specifications/remove-user-from-tenant",
           label: "Remove a user from a tenant",
           className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/search-users-for-tenant",
+          label: "Search users for tenant",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -583,7 +655,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/search-tenants",
-          label: "Query tenants",
+          label: "Search tenants",
           className: "api-method post",
         },
       ],
@@ -600,8 +672,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-users",
-          label: "Query users",
+          id: "apis-tools/camunda-api-rest/specifications/search-users",
+          label: "Search users",
           className: "api-method post",
         },
         {
@@ -672,14 +744,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-user-tasks",
-          label: "Query user tasks",
+          id: "apis-tools/camunda-api-rest/specifications/search-user-tasks",
+          label: "Search user tasks",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-user-task-variables",
-          label: "Query user task variables",
+          id: "apis-tools/camunda-api-rest/specifications/search-user-task-variables",
+          label: "Search user task variables",
           className: "api-method post",
         },
       ],
@@ -690,8 +762,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/camunda-api-rest/specifications/find-variables",
-          label: "Query variables",
+          id: "apis-tools/camunda-api-rest/specifications/search-variables",
+          label: "Search variables",
           className: "api-method post",
         },
         {

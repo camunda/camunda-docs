@@ -1,0 +1,173 @@
+---
+id: by-key-3
+title: "Get incident by key"
+description: "Get incident by key"
+sidebar_label: "Get incident by key"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVttu20YQ/RVintqUsZxLi4BvqrR2GcukIFFOUMMgVuTI2pjcZXaXTgWC/17MkqIvUprksciLRM7O9cwM9zRg+a2B4BpCmYkcpYUbH1SFmluhZJhDAOvdBe7SN+BDxTUv0aImiwYkLxECuMMd+CAkBFBxuwUfcjSZFhV5gAAucOepjSf2AXzQ+LkWGnMIrK7RB5NtseQQNGB3FbkU0uItavBho3TJbSf64y207Q2Zm0pJg4YsXp+e0t/TkMs6y9AY8CFT0lLQoAFeVYXIXF2jT4b0msPIav0JM8qx0oSCFV0UqvF70nN2FHqKGyEFxbr4UdNQGstlht9v2KkMqsZqIW/BB5R1Sb1dRcs5m4RnIZuCD6voIoo/ROBDGKeX4/k8jM5TtljEC/DhffxnGsXpgiWLkC3BB/aRTVZJGEfpLFwmLGKLp+eTOJqG7nzvgn1MFuNJkl6NZys2SCfj2YxNUzZjlyxKBvEq+mscTd0JSVJ2xaIEfLhky+X4nKXL8G+Wso8TxqYu+d7NlE3C5eOgDwIKO36S0Fm8uEyjOEnP4lU0hZvWhxKN4bdHQGt9yDS6IUlEeVzBWG7/E+/xJAmvGFURni/GiUt8wZbx7Mo9zlk0DaNzl8gntf6BPqPk0tJSHmRFp8IWJBo2uW1J/PbYgoTynhci92gT0divL0ql1brA8rcfXRjCqDbfrOvNa/hGN0S/DUcPjw/+YzCY1koPSLw5ROJM6bXIc5RPMXgxevH/L/ftYbmLruFIrTeq1hl6Ullvo2qZ/xxT8PuxfRjPQ+9RwR46g58AD/qcYVZrYXfuTl8j16hfuvvu+qb1G8iUuhPo3m6eX+3naId73VvvvI4KlGi3ipjDLToIiBQEMLp/NdrrmlFzh7sWKLi+3/OJWhcQQNOB2QajUbNVxrZBUyltSfmea8HXRYclnXWN3PC6IOQKlfHCiZ/nmWzRowNiLMRF7BY9ankX/cRdvko/c/fu9N3pUU+k+hUvD4Pw4GdrbXXUT6d81JPjOfvGLEmvK3rfjKG5vBIXDvSejMVzRjfOyyVb0nW4J2a9Xes/afDgpU/RJUTvnRLstc/2s/n+Q+LmSMiNcub9PMWOMKI3r9eFyKiUw4KVxx0p83hmxT16XOZepsqqQPoa9dzH2w82PXl7txulvVJJYRVNsrO0WtU0CVulbHf50qryzPWwGyQqygSj0ZcvX04yXtYy5yeZKgmEQmQojcOxx23WS/xnxrnKzGAtlHsfadygRpnhqHdkRuSVBrkr9tXJ6clpN1XGllw+CnR8ZZ5gNbTF4j92VBVcSPLlEmv6dbqG+1euuf1CgQ8Bubrx+8W4hqZZc4MrXbQtiT/XqN1SP+yR27pcGHrOIdjwwuBBLsMnEH5Z9Lz9V++Q0x9NeT+kcue2t6jpDfyOTrvflkjQFnmO2mXTnYyzDCv7yOaAu9N+DN+Zc0aUkdcEzADesxl23o/m0zSdRqLuULbtkJ6ld0qwbf8FBbFpuw==
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get incident by key"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/incidents/{key}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get incident by key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of incident",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              key: { type: "integer", format: "int64" },
+              processDefinitionKey: { type: "integer", format: "int64" },
+              processInstanceKey: { type: "integer", format: "int64" },
+              type: {
+                type: "string",
+                enum: [
+                  "UNSPECIFIED",
+                  "UNKNOWN",
+                  "IO_MAPPING_ERROR",
+                  "JOB_NO_RETRIES",
+                  "EXECUTION_LISTENER_NO_RETRIES",
+                  "CONDITION_ERROR",
+                  "EXTRACT_VALUE_ERROR",
+                  "CALLED_ELEMENT_ERROR",
+                  "UNHANDLED_ERROR_EVENT",
+                  "MESSAGE_SIZE_EXCEEDED",
+                  "CALLED_DECISION_ERROR",
+                  "DECISION_EVALUATION_ERROR",
+                  "FORM_NOT_FOUND",
+                ],
+              },
+              message: { type: "string" },
+              creationTime: { type: "string" },
+              state: {
+                type: "string",
+                enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+              },
+              jobKey: { type: "integer", format: "int64" },
+              tenantId: { type: "string" },
+            },
+            title: "Incident",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
