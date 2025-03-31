@@ -56,7 +56,7 @@ README files are uses standard [Markdown](https://www.markdownguide.org/), a lig
     ![view readme versions ](img/view-readme-versions.png)
 2.  README file can be downloaded by clicking **Download** icon making it easy to share or archive documentation.
     ![download readme ](img/download-readme.png)
-    3.To see the final result of README file appearance go to the **Preview** tab
+3.  To see the final result of README file appearance go to the **Preview** tab
     ![readme preview](img/readme-preview.png)
 
 ## Related resources
