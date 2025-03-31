@@ -19,6 +19,29 @@ These release notes identify the new features included in 8.7, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 8 April 2025           | 13 October 2026              | -            | -            | -            |
 
+<!-- https://github.com/camunda/product-hub/issues/1063 -->
+
+### Cluster connector management in Console <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#manage-connectors}
+
+Cluster connector management allows you to monitor and manage your running inbound connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector).
+
+- To open the **Connector Management** page, on the cluster **Overview** tab, click **Manage** on the Connectors component tile.
+- Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
+- For example, you can see if a connector instance is unhealthy, and use the activity log to troubleshoot and resolve issues.
+
+<!-- To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md). -->
+
+<!-- https://github.com/camunda/product-hub/issues/2521 -->
+
+### Intelligent Document Processing (IDP) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#idp}
+
+Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes.
+
+- IDP uses artificial intelligence (AI) and machine learning (ML) to identify, extract, and organize data from your structured and unstructured documents into a structured format you can use in your processes.
+- For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
+
+To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
+
 ## 8.7.0-alpha5
 
 | Release date  | Changelog(s)                                                                                                                                                                               | Blog                                                                               |
