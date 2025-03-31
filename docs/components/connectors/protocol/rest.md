@@ -232,6 +232,16 @@ Secrets are currently not supported in the body of a **REST Connector**.
 }
 ```
 
+#### File upload
+
+To upload a file, you can take advantage of [Camunda document handling](https://docs.camunda.io/docs/next/components/concepts/document-handling/).
+
+Depending on the `Content-Type`, the file will be uploaded as a binary or a JSON object (base64 encoded).
+
+- **Binary**: The file will be uploaded as a binary object. The `Content-Type` header **must** be set to `multipart/form-data`. The body must a map, where the key is the name of the file field and the value is a document reference.
+  ![connectors-rest-upload](../../../images/connectors/connectors-rest-upload.png)
+- **JSON**: The file will be uploaded as a JSON object. The `Content-Type` header **must** be set to `application/json` (this is the default). The body must be a map, where the key is the name of the file field and the value is a document reference, similar to the binary upload. The file will be **base64 encoded** and included in the JSON object.
+
 ### Encoding
 
 In certain scenarios, such as when working with APIs that require pre-encoded URL elements, the REST Connector's default behavior may inadvertently modify encoded segments.
@@ -243,8 +253,6 @@ To avoid this, set the `skipEncoding` value to `"true"` in the XML. This disable
 - **Connection timeout in seconds** determines the time frame in which the client will try to establish a connection with the server. If you do not specify a value, the system uses the default of 20 seconds. For cases where you need to wait indefinitely, set this value to 0.
 
 - **Read timeout in seconds** is the amount of time the client will wait to read data from the server after the connection has been made. The default is also set to 20 seconds. To allow an unlimited wait time for slow responses, set this to 0.
-
-- **Write timeout in seconds** controls how long the client will wait to successfully send data to the server. The default setting for this is 0, indicating that there is no limit and the client will wait indefinitely for the operation to complete.
 
 ## Response
 
