@@ -35,6 +35,7 @@ module.exports = {
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
+        "guides/document-handling",
       ],
       Improve: [
         "guides/improve-processes-with-optimize",
@@ -1317,6 +1318,12 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        {
+          "Document handling": [
+            "self-managed/concepts/document-handling/document-handling",
+            "self-managed/concepts/document-handling/document-handling-configuration",
+          ],
+        },
       ],
     },
     {
