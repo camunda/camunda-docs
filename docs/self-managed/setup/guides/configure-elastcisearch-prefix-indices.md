@@ -30,11 +30,11 @@ ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
 CAMUNDA_OPERATE_ELASTICSEARCH_INDEXPREFIX=custom
 CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PREFIX=custom-zeebe
 
-CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX=custom-optimize
-CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
-
 CAMUNDA_TASKLIST_ELASTICSEARCH_INDEXPREFIX=custom
 CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_PREFIX=custom-zeebe
+
+CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX=custom-optimize
+CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
 ```
 
 </TabItem>
@@ -47,7 +47,7 @@ elasticsearch:
 operate:
   env:
     - name: CAMUNDA_OPERATE_ELASTICSEARCH_INDEXPREFIX
-      value: custom-operate
+      value: custom
     - name: CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PREFIX
       value: custom-zeebe
   migration:
@@ -56,6 +56,13 @@ operate:
         value: custom-operate
       - name: CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PREFIX
         value: custom-zeebe
+
+tasklist:
+  env:
+    - name: CAMUNDA_TASKLIST_ELASTICSEARCH_INDEXPREFIX
+      value: custom
+    - name: CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_PREFIX
+      value: custom-zeebe
 
 optimize:
   env:
@@ -68,12 +75,7 @@ optimize:
       - name: CAMUNDA_OPTIMIZE_ZEEBE_NAME
         value: custom-zeebe
 
-tasklist:
-  env:
-    - name: CAMUNDA_TASKLIST_ELASTICSEARCH_INDEXPREFIX
-      value: custom-tasklist
-    - name: CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_PREFIX
-      value: custom-zeebe
+
 ```
 
 </TabItem>
@@ -93,16 +95,16 @@ camunda:
       indexPrefix: custom
     zeebeElasticsearch:
       prefix: custom-zeebe
+  tasklist:
+    elasticsearch:
+      indexPrefix: custom
+    zeebeElasticsearch:
+      prefix: custom-zeebe
   optimize:
     elasticsearch:
       settings:
         index:
           prefix: custom-optimize
-    zeebeElasticsearch:
-      prefix: custom-zeebe
-  tasklist:
-    elasticsearch:
-      indexPrefix: custom
     zeebeElasticsearch:
       prefix: custom-zeebe
 ```
