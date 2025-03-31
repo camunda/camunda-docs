@@ -105,8 +105,8 @@ These values relate to Optimize data import.
 |                                            |
 | import.skipDataAfterNestedDocLimitReached  | false         | Some data can no longer be imported to a given document if its number of nested documents has reached the configured limit. Enable this setting to skip this data during import if the nested document limit has been reached. |
 | import.currentTimeBackoffMilliseconds      | 300000        | The time interval the import backs off from the current tip of the time, to reread potentially missed concurrent writes.                                                                                                       |
-| import.elasticsearchJobExecutorThreadCount | 1             | Number of threads being used to process the import jobs per data type that are writing data to elasticsearch.                                                                                                                  |
-| import.elasticsearchJobExecutorQueueSize   | 5             | Adjust the queue size of the import jobs per data type that store data to elasticsearch. A too large value might cause memory problems.                                                                                        |
+| import.elasticsearchJobExecutorThreadCount | 1             | Number of threads being used to process the import jobs per data type that are writing data to Elasticsearch.                                                                                                                  |
+| import.elasticsearchJobExecutorQueueSize   | 5             | Adjust the queue size of the import jobs per data type that store data to Elasticsearch. A too large value might cause memory problems.                                                                                        |
 
 ### Public API
 
