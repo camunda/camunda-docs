@@ -34,6 +34,10 @@ For example, if you have uploaded a document via form upload using a `documents`
 
 Example: `documents[1]`.
 
+:::info
+To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/concepts/document-handling.md).
+:::
+
 ## Provider authentication
 
 ### Authentication
