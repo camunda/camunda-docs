@@ -418,6 +418,7 @@ module.exports = {
             },
             "components/connectors/protocol/graphql",
             "components/connectors/protocol/http-webhook",
+            "components/connectors/out-of-the-box-connectors/hubspot",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
@@ -460,6 +461,7 @@ module.exports = {
               items: [
                 "components/connectors/custom-built-connectors/connector-template-generator",
                 "components/connectors/manage-connector-templates",
+                "components/connectors/custom-built-connectors/create-connector-from-rest",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
@@ -1184,10 +1186,47 @@ module.exports = {
       ],
     },
     {
-      "Reference architecture": [
-        "self-managed/reference-architecture/reference-architecture",
-        "self-managed/reference-architecture/kubernetes",
-        "self-managed/reference-architecture/manual",
+      type: "category",
+      label: "Reference architecture",
+      link: {
+        type: "doc",
+        id: "self-managed/reference-architecture/reference-architecture",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Kubernetes",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/kubernetes",
+          },
+          items: [
+            {
+              "AWS EKS": [
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-terraform",
+                "self-managed/setup/deploy/amazon/amazon-eks/eks-helm",
+                "self-managed/setup/deploy/amazon/amazon-eks/dual-region",
+              ],
+            },
+            {
+              Openshift: [
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup",
+                "self-managed/setup/deploy/openshift/redhat-openshift",
+                "self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region",
+                "self-managed/setup/deploy/openshift/redhat-openshift-dual-region",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Manual JAR",
+          link: {
+            type: "doc",
+            id: "self-managed/reference-architecture/manual",
+          },
+          items: ["self-managed/setup/deploy/amazon/aws-ec2"],
+        },
       ],
     },
     {

@@ -479,7 +479,8 @@
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-template-generator"
+            "components/connectors/custom-built-connectors/connector-template-generator",
+            "components/connectors/custom-built-connectors/create-connector-from-rest"
           ]
         }
       ],
@@ -892,8 +893,8 @@
                     },
                     {
                       "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/report-error-for-job",
-                      "label": "Report error for job",
+                      "id": "apis-tools/camunda-api-rest/specifications/throw-job-error",
+                      "label": "Throw error for job",
                       "className": "api-method post"
                     },
                     {
@@ -1170,7 +1171,7 @@
                       "type": "doc",
                       "id": "apis-tools/camunda-api-rest/specifications/update-element-instance-variables",
                       "label": "Update element instance variables",
-                      "className": "api-method post"
+                      "className": "api-method put"
                     }
                   ]
                 },
@@ -2183,14 +2184,14 @@
                 },
                 {
                   "Roles": [
-                    "self-managed/identity/user-guide/roles/add-assign-role",
-                    "self-managed/identity/user-guide/roles/add-assign-permission"
+                    "self-managed/identity/user-guide/roles/manage-roles",
+                    "self-managed/identity/user-guide/roles/manage-permissions"
                   ]
                 },
                 {
                   "Groups": [
-                    "self-managed/identity/user-guide/groups/create-group",
-                    "self-managed/identity/user-guide/groups/assign-users-roles-to-group"
+                    "self-managed/identity/user-guide/groups/manage-groups",
+                    "self-managed/identity/user-guide/groups/manage-users-roles-to-group"
                   ]
                 },
                 {

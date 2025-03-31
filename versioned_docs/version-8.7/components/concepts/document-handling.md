@@ -41,18 +41,31 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 
 <TabItem value='aws'>
 
-| Credentials variable  | Description                                                                                           |
-| --------------------- | ----------------------------------------------------------------------------------------------------- |
-| AWS_ACCESS_KEY_ID     | Access key ID used to interact with AWS S3 buckets.                                                   |
-| AWS_REGION            | Region where the bucket is.                                                                           |
-| AWS_SECRET_ACCESS_KEY | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
+| Credentials variable    | Required | Description                                                                                           |
+| ----------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | Yes      | Access key ID used to interact with AWS S3 buckets.                                                   |
+| `AWS_REGION`            | Yes      | Region where the bucket is.                                                                           |
+| `AWS_SECRET_ACCESS_KEY` | Yes      | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
 
-| Store variable                 | Description                                                                                                                                                                                          |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DOCUMENT_STORE_AWS_BUCKET      | Specifies the name of the AWS S3 bucket where documents are stored.                                                                                                                                  |
-| DOCUMENT_STORE_AWS_BUCKET_PATH | Defines the folder-like path within the S3 bucket where documents are stored. This helps organize files within the bucket. For example, `documents/invoices`.                                        |
-| DOCUMENT_STORE_AWS_BUCKET_TTL  | Represents the time-to-live (TTL) for documents stored in the S3 bucket. This could be used to set an expiration policy, meaning documents will be deleted automatically after a specified duration. |
-| DOCUMENT_STORE_AWS_CLASS       | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                               |
+| Store variable                   | Required | Description                                                                                                                                                                                                                                               |
+| -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_AWS_BUCKET`      | Yes      | Specifies the name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                       |
+| `DOCUMENT_STORE_AWS_BUCKET_PATH` | No       | Defines the folder-like path within the S3 bucket where documents are stored. This helps organize files within the bucket. For example, `documents/invoices`. If not provided, the application logic assumes a default value of `""`.                     |
+| `DOCUMENT_STORE_AWS_BUCKET_TTL`  | No       | Represents the time-to-live (TTL) for documents stored in the S3 bucket. This could be used to set an expiration policy, meaning documents will be deleted automatically after a specified duration. If not provided, the application logic ignores this. |
+| `DOCUMENT_STORE_AWS_CLASS`       | Yes      | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                                                                                    |
+
+**Example:**
+
+```
+AWS_ACCESS_KEY_ID=AWSACCESSKEYID
+AWS_REGION=eu-north-1
+AWS_SECRET_ACCESS_KEY=AWSSECRETACCESSKEYGOESHERE
+DOCUMENT_STORE_AWS_BUCKET=test-bucket
+DOCUMENT_STORE_AWS_BUCKET_PATH=test/path
+DOCUMENT_STORE_AWS_BUCKET_TTL=5
+DOCUMENT_STORE_AWS_CLASS=io.camunda.document.store.aws.AwsDocumentStoreProvider
+DOCUMENT_DEFAULT_STORE_ID=aws
+```
 
 ### AWS API client permission requirements
 
@@ -69,14 +82,23 @@ To ensure seamless integration and functionality of document handling with AWS s
 
 <TabItem value='gcp'>
 
-| Credentials variable           | Description                                                                                                             |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| GOOGLE_APPLICATION_CREDENTIALS | Specifies the file path to a JSON key file that contains authentication credentials for a Google Cloud service account. |
+| Credentials variable             | Required | Description                                                                                                             |
+| -------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `GOOGLE_APPLICATION_CREDENTIALS` | Yes      | Specifies the file path to a JSON key file that contains authentication credentials for a Google Cloud service account. |
 
-| Store variable            | Description                                                                     |
-| ------------------------- | ------------------------------------------------------------------------------- |
-| DOCUMENT_STORE_GCP_BUCKET | Defines the name of the Google Cloud Storage bucket where documents are stored. |
-| DOCUMENT_STORE_GCP_CLASS  | io.camunda.document.store.gcp.GcpDocumentStoreProvider                          |
+| Store variable              | Required | Description                                                                     |
+| --------------------------- | -------- | ------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_GCP_BUCKET` | Yes      | Defines the name of the Google Cloud Storage bucket where documents are stored. |
+| `DOCUMENT_STORE_GCP_CLASS`  | Yes      | io.camunda.document.store.gcp.GcpDocumentStoreProvider                          |
+
+**Example:**
+
+```
+DOCUMENT_STORE_GCP_CLASS=io.camunda.document.store.gcp.GcpDocumentStoreProvider
+DOCUMENT_STORE_GCP_BUCKET=test-bucket
+DOCUMENT_DEFAULT_STORE_ID=gcp
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account.json
+```
 
 ### GCP API client permission requirements
 
@@ -95,23 +117,48 @@ To ensure seamless integration and functionality of document handling with GCP s
 
 <TabItem value='local'>
 
-| Store variable           | Description                                    |
-| ------------------------ | ---------------------------------------------- |
-| DOCUMENT_STORE_GCP_CLASS | The path where the documents should be stored. |
+:::note
+Local storage is not usable in production, and is not supported for Self-Managed installations via Helm charts.
+:::
+
+| Store variable               | Required | Description                                                                                                                                 |
+| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_LOCAL_PATH`  | Yes      | The path to the directory which will host the uploaded files.                                                                               |
+| `DOCUMENT_STORE_LOCAL_CLASS` | Yes      | The class for instantiating the local store. This must always be `io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider` |
+
+**Example:**
+
+```
+DOCUMENT_STORE_LOCAL_CLASS=io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider
+DOCUMENT_STORE_LOCAL_PATH=/usr/local/camunda
+DOCUMENT_DEFAULT_STORE_ID=local
+```
 
 </TabItem>
 
 <TabItem value='in-memory'>
 
-If no configuration is provided and no `DOCUMENT_DEFAULT_STORE_ID` is set, in-memory is used as the default storage type.
+:::note
+In-memory storage is not usable in production.
+:::
 
-If configurations are provided for at least one storage type (DOCUMENT_STORE_AWS_BUCKET, DOCUMENT_STORE_AWS_BUCKET_PATH, etc.) ensure `DOCUMENT_DEFAULT_STORE_ID=in-memory` is set for in-memory storage.
+If no configuration is provided for at least one storage type, and no `DOCUMENT_DEFAULT_STORE_ID` is set, in-memory is used as the default storage type. If the configuration for another storage type has been provided (`DOCUMENT_STORE_AWS_BUCKET`, `DOCUMENT_STORE_AWS_BUCKET_PATH`, etc.), in-memory storage must be set explicitly to be used.
 
-If you also specify the following environment variable:
+To use the in-memory store when an alternate configuration has been provided, take the following steps:
 
-`DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`
+1. Set `DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`.
+2. Set `DOCUMENT_DEFAULT_STORE_ID=inmemory`.
 
-Be sure to remove the hyphen and set `DOCUMENT_DEFAULT_STORE_ID` to `=inmemory`.
+| Store variable                  | Required | Description                                                                                                                              |
+| ------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_INMEMORY_CLASS` | Yes      | The class for instantiating the in-memory store. This must always be `io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider`. |
+
+**Example:**
+
+```
+DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider
+DOCUMENT_DEFAULT_STORE_ID=inmemory
+```
 
 </TabItem>
 
@@ -228,6 +275,7 @@ In most cases for the following outbound Connectors, you can include a **Request
 | [Box](/components/connectors/out-of-the-box-connectors/box.md)                          | Supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided.                                |
 | [Email](/components/connectors/out-of-the-box-connectors/email.md#response-structure-1) | Supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents. These documents are automatically stored in the Camunda document store and available to map in the result expression. |
 | [Google Drive](/components/connectors/out-of-the-box-connectors/googledrive.md)         | Supports document upload and download.                                                                                                                                                                                         |
+| [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md)  | Supports sending documents to channels.                                                                                                                                                                                        |
 | [REST](/components/connectors/protocol/rest.md)                                         | Supports storing the response as a document.                                                                                                                                                                                   |
 | [SendGrid](/components/connectors/out-of-the-box-connectors/sendgrid.md)                | Provides attachment support.                                                                                                                                                                                                   |
 | [Slack](/components/connectors/out-of-the-box-connectors/slack.md)                      | Supports adding attachments and increasing template versions.                                                                                                                                                                  |

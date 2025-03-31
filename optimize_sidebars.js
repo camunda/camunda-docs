@@ -965,6 +965,10 @@ module.exports = {
             },
 
             docsLink(
+              "HubSpot Connector",
+              "components/connectors/out-of-the-box-connectors/hubspot/"
+            ),
+            docsLink(
               "Hugging Face Connector",
               "components/connectors/out-of-the-box-connectors/hugging-face/"
             ),
