@@ -26,19 +26,19 @@ Optimize uses its [own backup process](./optimize-backup.md) and needs to be exe
 
 ### Backup process
 
-The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of the web applications (Operate, and Tasklist), and backup `x` of Optimize. The backup ID must be an integer and greater than the previous backups.
+The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of the web applications (Operate and Tasklist), and backup `x` of Optimize. The backup ID must be an integer and greater than the previous backups.
 
 :::note
-We recommend using the timestamp as the backup id.
+We recommend using the timestamp as the backup ID.
 :::
 
 To back up a Camunda 8 cluster, execute the following sequential steps:
 
-1. Soft pause exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
-2. Trigger a backup `x` of the web applications. See [how to take a web application backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
-3. Trigger a backup `x` of Optimize. See [how to take an Optimize backup](./optimize-backup.md)
-4. Wait until the backup `x` of web applications is complete. See [how to monitor a web application backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
-5. Wait until the backup `x` of Optimize is complete. See [how to monitor an Optimize backup](./optimize-backup.md).
+1. Soft pause exporting in Zeebe. See the [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
+2. Trigger a backup `x` of the web applications. See how to take a [web application backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+3. Trigger a backup `x` of Optimize. See how to take an [Optimize backup](./optimize-backup.md)
+4. Wait until the backup `x` of web applications is complete. See how to [monitor a web application backup](/self-managed/operational-guides/backup-restore/webapps-backup.md).
+5. Wait until the backup `x` of Optimize is complete. See how to [monitor an Optimize backup](./optimize-backup.md).
 6. Take a backup `x` of the exported Zeebe records in Elasticsearch using the Elasticsearch Snapshots API.
 
 ```
@@ -54,8 +54,8 @@ PUT /_snapshot/my_repository/camunda_zeebe_records_backup_x
 By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch exporter in Zeebe, use this instead.
 
 7. Wait until the backup `x` of the exported Zeebe records is complete before proceeding.
-8. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
-9. Wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+8. Take a backup `x` of Zeebe. See how to take a [Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+9. Wait until the backup `x` of Zeebe is completed before proceeding. See how to [monitor a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 10. Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
 
 :::note

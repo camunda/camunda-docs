@@ -15,7 +15,7 @@ As of the Camunda 8.8 release, the `/actuator` endpoints for backups have been m
 :::note
 This page refers to the components Operate and Tasklist as "web applications".
 
-Optimize is not backed up as part of this process. Optimize is a dedicated application with its own backup system. Please see the [documentation for Optimize](./optimize-backup.md) to perform a backup
+Optimize is not backed up as part of this process. Optimize is a dedicated application with its own backup system. Please see the [documentation for Optimize](./optimize-backup.md) to perform a backup.
 :::
 
 The Camunda web applications store their data over multiple indices in Elasticsearch. A backup of web application data includes several Elasticsearch snapshots containing sets of different indices. Each backup is identified by a `backupId`. For example, a backup with an ID of `123` may contain the following Elasticsearch snapshots:
