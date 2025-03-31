@@ -27,10 +27,10 @@ A form element to select files.
 ```
 
 :::note
-When using Document preview with [Filepicker](./forms-element-library-filepicker.md) in the Tasklist webapp, document references are handled automatically. Note that:
+When using document preview with [Filepicker](./forms-element-library-filepicker.md) in Tasklist, document references are handled automatically:
 
-- Modifying document metadata after upload may break the preview
-- To use Camunda's document service without Filepicker, you must include the `contentHash` value along with `endpoint` and `documentId`
+- Modifying document metadata after upload may break the preview.
+- To use Camunda's document service without Filepicker, you must include the `contentHash`, `endpoint`, and `documentId` values.
   :::
 
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the file picker.
