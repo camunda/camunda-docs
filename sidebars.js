@@ -419,6 +419,7 @@ module.exports = {
             },
             "components/connectors/protocol/graphql",
             "components/connectors/protocol/http-webhook",
+            "components/connectors/out-of-the-box-connectors/hubspot",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
