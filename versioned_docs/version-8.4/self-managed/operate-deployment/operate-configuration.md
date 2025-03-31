@@ -348,15 +348,6 @@ With this configuration, the following endpoints are available for use out of th
 
 This configuration may be overwritten by changing the corresponding configuration parameters values.
 
-### Versions before 0.25.0
-
-In versions before 0.25.0, management endpoints look different. Therefore, we recommend reconfiguring for next versions.
-
-| Name      | Before 0.25.0    | Starting with 0.25.0       |
-| --------- | ---------------- | -------------------------- |
-| Readiness | /api/check       | /actuator/health/readiness |
-| Liveness  | /actuator/health | /actuator/health/liveness  |
-
 ## Logging
 
 Operate uses the Log4j2 framework for logging. In the distribution archive, as well as inside a Docker image, `config/log4j2.xml` logging configuration files are included and can be further adjusted to your needs:

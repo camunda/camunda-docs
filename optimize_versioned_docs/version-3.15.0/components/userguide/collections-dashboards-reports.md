@@ -8,7 +8,7 @@ Optimize uses a single visualization for **reports**, and **[dashboards](./creat
 
 ![home page](./img/home.png)
 
-In addition to the name of the dashboard, report, or collection, you can also see modification dates, the number of items they contain, and user/group access. Optimize enables collaborative sharing through the **Share** tab, allowing the creation of shared links for external viewing. Toggle to **Enable sharing**.
+In addition to the name of the dashboard, report, or collection, you can also see modification dates, the number of items they contain, and user access. Optimize enables collaborative sharing through the **Share** tab, allowing the creation of shared links for external viewing. Toggle to **Enable sharing**.
 
 :::note
 Colleagues without access to Optimize can still view your report with the shared link. Learn more about [user permissions](./user-permissions.md).
@@ -24,23 +24,15 @@ To [create a dashboard](./creating-dashboards.md) or [report](./creating-reports
 
 ## User permissions
 
-:::note
-Adding user groups to collections is currently only available in Camunda 7.
-:::
-
 By default, if you create a collection, only you can access the collection and the contents within. To share a collection with other users, add them to the collection.
-
-![users and user groups](./img/users.png)
 
 You are automatically assigned the manager role when creating a new collection. There can be multiple managers for a collection. However, there must be at least one manager for every collection. Managers can do the following:
 
 - Add, edit, and remove dashboards and reports to the collection.
 - Edit the collection name and delete the collection using the context menu in the header.
-- Add, edit, and remove other users and user groups to collections via the collection's **Users** tab.
+- Add, edit, and remove other users to collections via the collection's **Users** tab.
 
-A manager can add a new user or group to the collection using the **Add** button. Use the ID of the user/group to add them. Every user/group has a role assigned to them that specifies their access rights to the collection.
-
-![add user or user group](./img/addUser.png)
+A manager can add a new user to the collection using the **Add** button. Use the ID of the user to add them. Every user has a role assigned to them that specifies their access rights to the collection.
 
 An editor may edit, delete, and create new dashboards or reports in the collection. Editors may not edit the name of the collection, delete the collection, or change anything in the **Users** tab.
 

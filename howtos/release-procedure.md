@@ -127,7 +127,7 @@ Use the GitHub UI and follow the instructions below:
 
 The build process for [publish-prod](https://github.com/camunda/camunda-docs/actions/workflows/publish-prod.yaml) will kick off which could take around 30 min to finish. If publish-prod is successful, the updates will appear on [docs.camunda.io](https://docs.camunda.io).
 
-## Manually Trigger the Algolia crawler (DocSearch)
+## Algolia crawler (DocSearch)
 
 Search not working for a new minor version? A specific document, published recently, not showing up in the internal search results?
 
@@ -136,3 +136,14 @@ The Algolia crawler runs **daily** between the end of the US day and the beginni
 Patch releases with significant or urgent updates may require a manually triggered crawler.
 
 This requires [admin access](https://crawler.algolia.com/admin/users/login). Contact @pepopowitz or @akeller for assistance.
+
+### How to trigger Algolia crawler
+
+Manually triggering the Algolia crawler is not intuitive(!!!) and requires [admin access](https://crawler.algolia.com/admin/users/login). Contact @pepopowitz or @akeller for assistance.
+
+1. Login to the [Algolia dashboard](https://dashboard.algolia.com/apps/6KYF3VMCXZ/dashboard).
+2. In the bottom left corner, click ** Data sources **, and after the UI loads, click ** Crawler **. If the sidebar is collapsed, you may only see a database icon (it looks like a barrel) instead of **Data sources**.
+3. Click **camunda**, which should show the status _Idle_.
+4. Click **Resume crawling** in the upper right corner. It will change to **Cancel crawl**, and the UI should update.
+
+Once the crawl is complete, you should see the updates you expected as search results.

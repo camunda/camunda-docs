@@ -82,7 +82,7 @@ docker run --rm --name=CustomConnectorInSMWithKeyCloak \
     -e ZEEBE_AUTHORIZATION_SERVER_URL=http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/token \
     -e CAMUNDA_OPERATE_CLIENT_KEYCLOAK-URL=http://keycloak:8080 \
     -e CAMUNDA_OPERATE_CLIENT_CLIENT-ID=connectors \
-    -e CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=<YOUR_OPERATE_CLIENT_SECRET> \
+    -e CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=<CONNECTORS_CLIENT_SECRET> \
     -e CAMUNDA_OPERATE_CLIENT_KEYCLOAK-REALM=<YOUR_KEYCLOAK_OPERATE_REALM> \
     -e CAMUNDA_OPERATE_CLIENT_URL=http://operate:8080 \
         camunda/connectors-bundle:<desired-version>

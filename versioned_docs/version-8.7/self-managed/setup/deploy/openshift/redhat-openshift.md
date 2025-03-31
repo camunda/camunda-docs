@@ -15,33 +15,7 @@ Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appr
 
 However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
 
-## Cluster Specification
-
-When deploying Camunda 8 on an OpenShift cluster, the cluster specification should align with your specific requirements and workload characteristics. Here's a suggested configuration to begin with:
-
-- **Instance type:** 4 vCPUs (x86_64, >3.1 GHz), 16 GiB Memory (for example, [mi7.xlarge on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
-- **Number of dedicated nodes:** 4
-- **Volume type:** SSD volumes (with between 1000 and 3000 IOPS per volume, and a throughput of 1,000 MB/s per volume, for instance, [gp3 on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
-
-If you need to set up an OpenShift cluster on a cloud provider, we recommend our [guide to deploying a ROSA cluster](/self-managed/setup/deploy/amazon/openshift/terraform-setup.md).
-
-### Supported Versions
-
-We conduct testing and ensure compatibility against the following OpenShift versions:
-
-| OpenShift Version |
-| ----------------- |
-| 4.18.x            |
-| 4.17.x            |
-| 4.16.x            |
-| 4.15.x            |
-| 4.14.x            |
-
-:::caution Versions compatibility
-
-Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support life cycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
-
-:::
+Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
 
 ## Requirements
 

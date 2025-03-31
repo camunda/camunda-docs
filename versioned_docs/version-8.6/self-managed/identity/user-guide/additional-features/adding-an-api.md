@@ -6,7 +6,7 @@ description: "In this guide we will show you how to use Identity to create an AP
 ---
 
 In this guide we will show you how to use Identity to create an API. An API refers to a service that provides resources which can control
-access via permissions. In [Identity](/self-managed/identity/what-is-identity.md), we use APIs to attach [permissions](/self-managed/identity/user-guide/roles/add-assign-permission.md). Once they have been created, the
+access via permissions. In [Identity](/self-managed/identity/what-is-identity.md), we use APIs to attach [permissions](/self-managed/identity/user-guide/roles/manage-permissions.md). Once they have been created, the
 components in the Camunda 8 stack are able to allow or deny users certain functionality.
 
 :::caution Write access needed

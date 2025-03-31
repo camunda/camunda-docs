@@ -48,8 +48,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "version-8.6/apis-tools/camunda-api-rest/specifications/report-error-for-job",
-          label: "Report error for job",
+          id: "version-8.6/apis-tools/camunda-api-rest/specifications/throw-job-error",
+          label: "Throw error for job",
           className: "api-method post",
         },
         {
@@ -326,7 +326,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "version-8.6/apis-tools/camunda-api-rest/specifications/update-element-instance-variables",
           label: "Update element instance variables",
-          className: "api-method post",
+          className: "api-method put",
         },
       ],
     },
