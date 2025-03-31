@@ -47,7 +47,7 @@ To ensure Camunda can properly access Camunda components when using JVM properti
 
 #### HTTP/HTTPS properties
 
-Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS protocol handler. A target URL like `http://example.com` will use the HTTP protocol handler, while a target URL like `https://example.com` will use the HTTPS protocol handler.
+Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS protocol handler. A target URL such as `http://example.com` will use the HTTP protocol handler, while a target URL such as `https://example.com` will use the HTTPS protocol handler.
 
 ##### JVM properties
 
