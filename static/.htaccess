@@ -120,6 +120,15 @@ RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
 
+## Reabsorbed Optimize docs
+RewriteRule ^optimize/3.12.0/apis-tools/optimize-api/(.*)$ /docs/8.4/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/3.12.0/components/(.*)$ /docs/8.4/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/3.12.0/self-managed/(.*)$ /docs/8.4/self-managed/$1 [R=301,L]
+
+## Reabsorbed Optimize docs
+RewriteRule ^optimize/3.11.0/apis-tools/optimize-api/(.*)$ /docs/8.3/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/3.11.0/components/(.*)$ /docs/8.3/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301,L]
 
 ##################################################################################
 # 3. Specific content moves
