@@ -32,7 +32,7 @@ All the mandatory and non-mandatory fields will be covered in the upcoming secti
 
 In Camunda Self-Managed you can configure the Connector to use an HTTP or HTTPS proxy server.
 
-Depending on how you want the proxy to be used, you can configure it by using JVM properties or environment variables.
+Depending on how you want the proxy to be used, configure it using either JVM properties or environment variables.
 
 The difference between these two configuration types is the scope of the configuration:
 
