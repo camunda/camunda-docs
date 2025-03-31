@@ -106,6 +106,67 @@ For example, supplying `$filter` and `$select` parameters helps in reducing data
 
 ![Advanced options of the SAP OData connector element template](./img/sap-odata-connector-element-template-advanced.png)
 
+### $batch requests
+
+The capabilites are in sync with https://me.sap.com/notes/1869434, except XML over the wire: the OData connector does `JSON` only.
+
+When `Batch Request` is selected as "Request type", the available query options change and reveal the choice of the OData protocol and and the input area for the individual requests. Note that the "Batch Request Payload" field requires the mandatory use of `FEEL` .
+
+![](./img/sap-odata-connector-batch-connector-template.png)
+
+The Batch Request payload is an array of objects that can either be of `"type": "batch"` or `"type": "changeset"` - `batch` denotes read requests, `changeset` denotes write operations (including `DELETE`).
+
+```jsonc
+[
+  {
+    "type": "batch",
+    "requests": [...]
+  },
+  {
+    "type": "changeset",
+    "requests": [...]
+  }
+]
+```
+
+Both `batch` and `changeset` contain a `requests` node that in turn holds the individual requests that should happen within a `batch` (read) or a `changeset` (write, update, delete). Together, they consitute the entirety of the Batch request.
+
+The `requests` node is also an array of `objects`. No matter whether an request is inside a `batch` or a `changeset`, it always has `method` and `resourcePath` as mandatory fields.
+
+```jsonc
+[
+  {
+    "type": "batch",
+    "requests": [
+    	{
+        "method": "GET",
+        "resourcePath": "A_BusinessPartner('" + bp1 + "')",
+        "options": {
+          "format": "json",
+          "select": "FirstName"
+        }
+      }
+    ]
+  },
+  {
+    "type": "changeset",
+    "requests": [
+    	{
+        "method": "PATCH",
+        "resourcePath": "A_BusinessPartner('" + bp1 + "')",
+        "payload": {
+          "FirstName": "Bernd (" + string(now()) + ")"
+        }
+      }
+    ]
+  }
+]
+```
+
+`batch` request entries can contain an additional `options` block, allowing the same query options as the connector template has in [Advanced capabilites](#advanced-capabilities), with the `$` prefix omitted.
+
+`changeset` request entries are modifying operations and thus require a `payload` in JSON format.
+
 ### Query result structure
 
 The result of any query, whether it is reading or writing to the SAP system, is in JSON format in the following structure:
@@ -125,6 +186,94 @@ The result of any query, whether it is reading or writing to the SAP system, is 
 ![the output mapping of the SAP OData element template](./img/sap-odata-connector-element-template-result.png)
 
 The query result can either be mapped to a single result variable or worked on [via FEEL with an expression](/components/connectors/use-connectors/index.md#result-expression). The same is applicable to `getResponse`, as a result variable contains the described query JSON in its entirety. The result expression `{getStatusCode: statusCode}` would only hold the HTTP status code in the `getStatusCode` process variable.
+
+For `$batch` requests, the query result is an Array of the above mentioned result structure. This is an example for an OData v2 Batch Request, consisting of one Read and one Update operation:
+
+```json
+{
+  "<your output mapping result variable>": [
+    {
+      "result": {
+        "d": {
+          "__metadata": {
+            "id": "<host>/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner('...')",
+            "uri": "<host>/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner('...')",
+            "type": "API_BUSINESS_PARTNER.A_BusinessPartnerType"
+          },
+          "FirstName": "..."
+        }
+      },
+      "statusCode": 200
+    },
+    { "result": null, "statusCode": 204 }
+  ]
+}
+```
+
+In case one of the operations in the Batch request fails, the error is relayed to the `result` node for the request, as in the second request in this sample result where the Business Partner with number `0000000` (obviously) couldn't be found.
+
+```jsonc
+{
+  "<your output mapping result variable>": [
+    {
+      "result": {
+        "d": {
+          "__count": "4",
+          "results": [
+            {...}
+          ]
+        }
+      },
+      "statusCode": 200,
+      "countOrInlineCount": 4
+    },
+    {
+      "result": {
+        "target": "/sap/opu/odata/sap/API_BUSINESS_PARTNER/A_BusinessPartner('0000000')?$format=json&$select=FirstName%2CLastName",
+        "odata": {
+          "error": {
+            "code": "/IWBEP/CM_MGW_RT/020",
+            "message": {
+              "lang": "en",
+              "value": "Resource not found for segment 'A_BusinessPartnerType'"
+            },
+            "innererror": {
+              "application": {
+                "component_id": "LO-MD-BP",
+                "service_namespace": "/SAP/",
+                "service_id": "API_BUSINESS_PARTNER",
+                "service_version": "0001"
+              },
+              "transactionid": "D25C6A8CF4D30020E0067DD0610AFCCA",
+              "timestamp": "",
+              "Error_Resolution": {
+                "SAP_Transaction": "",
+                "SAP_Note": "See SAP Note 1797736 for error analysis (https://service.sap.com/sap/support/notes/1797736)",
+                "Batch_SAP_Note": "See SAP Note 1869434 for details about working with $batch (https://service.sap.com/sap/support/notes/1869434)"
+              },
+              "longtext_url": "/sap/opu/odata/iwbep/message_text/T100_longtexts(MSGID='%2FIWBEP%2FCM_MGW_RT',MSGNO='020',MESSAGE_V1='A_BusinessPartnerType',MESSAGE_V2='',MESSAGE_V3='',MESSAGE_V4='')/$value",
+              "errordetails": [
+                {
+                  "ContentID": "",
+                  "code": "/IWBEP/CX_MGW_BUSI_EXCEPTION",
+                  "message": "Resource not found for segment 'A_BusinessPartnerType'",
+                  "longtext_url": "/sap/opu/odata/iwbep/message_text/T100_longtexts(MSGID='%2FIWBEP%2FCM_MGW_RT',MSGNO='020',MESSAGE_V1='A_BusinessPartnerType',MESSAGE_V2='',MESSAGE_V3='',MESSAGE_V4='')/$value",
+                  "propertyref": "",
+                  "severity": "error",
+                  "transition": false,
+                  "target": ""
+                }
+              ]
+            }
+          }
+        }
+      },
+      "statusCode": 404
+    }
+  ]
+}
+
+```
 
 ### Error handling
 
