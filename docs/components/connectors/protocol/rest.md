@@ -51,7 +51,7 @@ Depending on the **target URL**, you can set the proxy as an HTTP or HTTPS proto
 
 ##### JVM properties
 
-Here's a list of the standard JVM properties you can set for HTTP and HTTPS:
+You can set the following standard JVM properties for HTTP and HTTPS:
 
 | Property (HTTP target URL) | Property (HTTPS target URL)                         | Description                                                                                                                                                                                                                                                                                                                     |
 | :------------------------- | :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
