@@ -239,7 +239,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
             </a>
         </td>
         <td>
-            <a href="../../camunda-api-rest/specifications/find-user-tasks">
+            <a href="../../camunda-api-rest/specifications/search-user-tasks">
                 <code>POST /user-tasks/search</code>
             </a>
         </td>
