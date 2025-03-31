@@ -29,6 +29,15 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 ### Ad-hoc subprocess dynamic activation via API {#adhocsubprocess}
 
+Agentic process orchestration enhancements include a new optional `completionCondition` boolean expression for ad-hoc subprocesses that is evaluated every time an inner element is completed.
+
+- If the expression evaluates to true after completing an inner element, the ad-hoc subprocess is completed and the process instance takes the outgoing sequence flows.
+- If no completionCondition is defined, the ad-hoc subprocess is completed after all activated elements are completed.
+
+A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc subprocess behavior when the completion condition is met.
+
+To learn more about this feature, see [ad-hoc subprocesses](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+
 <!-- https://github.com/camunda/product-hub/issues/2585 -->
 
 ### Advanced User Task Listeners for Updating Events {#listeners}
@@ -40,15 +49,11 @@ Advanced User Task Listeners for Updating Events allow you to define listeners t
 
 <!-- https://github.com/camunda/product-hub/issues/2750 -->
 
-### Console <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#console}
+### Connector management multiple Connector Runtimes <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
 
-New features and enhancements are included in this release:
+Cluster connector management in Console now supports managing multiple Connector Runtime instances.
 
-#### Connector management multiple Connector Runtime instances support {#connector-management}
-
-Cluster connector management in Console now supports monitoring and management of multiple Connector Runtime instances.
-
-This enhancement provides a consolidated view of all webhooks, message queue subscriptions, and polling subscriptions for efficient monitoring and management of multiple Connector Runtime instances.
+<!-- To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).  -->
 
 <!-- Cluster connector management allows you to monitor and manage your running inbound connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector).
 
@@ -58,13 +63,9 @@ This enhancement provides a consolidated view of all webhooks, message queue sub
 
 <!-- To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md). -->
 
-### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectors}
-
-New Connectors and enhancements are included in this release:
-
 <!-- https://github.com/camunda/product-hub/issues/2398 -->
 
-#### HubSpot Connector {#hubspot}
+### HubSpot Connector <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#hubspot}
 
 Use the new outbound HubSpot Connector to connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your HubsSpot contacts, companies, and deals.
 
