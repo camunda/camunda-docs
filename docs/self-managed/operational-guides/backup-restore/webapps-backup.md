@@ -21,12 +21,12 @@ Optimize is not backed up as part of this process. Optimize is a dedicated appli
 The Camunda web applications store their data over multiple indices in Elasticsearch. A backup of web application data includes several Elasticsearch snapshots containing sets of different indices. Each backup is identified by a `backupId`. For example, a backup with an ID of `123` may contain the following Elasticsearch snapshots:
 
 ```
-camunda_webapps_123_8.1.0_part_1_of_6
-camunda_webapps_123_8.1.0_part_2_of_6
-camunda_webapps_123_8.1.0_part_3_of_6
-camunda_webapps_123_8.1.0_part_4_of_6
-camunda_webapps_123_8.1.0_part_5_of_6
-camunda_webapps_123_8.1.0_part_6_of_6
+camunda_webapps_123_8.8.0_part_1_of_6
+camunda_webapps_123_8.8.0_part_2_of_6
+camunda_webapps_123_8.8.0_part_3_of_6
+camunda_webapps_123_8.8.0_part_4_of_6
+camunda_webapps_123_8.8.0_part_5_of_6
+camunda_webapps_123_8.8.0_part_6_of_6
 ```
 
 All web applications provide the same API to perform a backup and manage backups (list, check state, delete). Restore a backup using the standard Elasticsearch API.
@@ -152,12 +152,12 @@ Example response:
 ```json
 {
   "scheduledSnapshots": [
-    "camunda_operate_123_8.2.0_part_1_of_6",
-    "camunda_operate_123_8.2.0_part_2_of_6",
-    "camunda_operate_123_8.2.0_part_3_of_6",
-    "camunda_operate_123_8.2.0_part_4_of_6",
-    "camunda_operate_123_8.2.0_part_5_of_6",
-    "camunda_operate_123_8.2.0_part_6_of_6"
+    "camunda_operate_123_8.8.0_part_1_of_6",
+    "camunda_operate_123_8.8.0_part_2_of_6",
+    "camunda_operate_123_8.8.0_part_3_of_6",
+    "camunda_operate_123_8.8.0_part_4_of_6",
+    "camunda_operate_123_8.8.0_part_5_of_6",
+    "camunda_operate_123_8.8.0_part_6_of_6"
   ]
 }
 ```
@@ -199,7 +199,7 @@ Example response:
   "details":  [
     //here goes the list of all Elasticsearch snapshots included in the backup
     {
-      "snapshotName": "camunda_operate_123_8.2.0_part_1_of_6",
+      "snapshotName": "camunda_operate_123_8.8.0_part_1_of_6",
       "state": "SUCCESS",
       "startTime": "2023-01-01T10:10:10.100+0000",
       "failures": []
