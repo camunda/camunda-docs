@@ -33,11 +33,3 @@ Note that alerts can only be created for reports which are visualized as a singl
 Finally, you'll get a resolve notification as soon as the report value is within a typical range. For example, say you defined an alert which should be triggered when the report value becomes greater than 50. You also enabled reminder notifications to be sent each hour. Here's what that would look like:
 
 ![Notifications graph](./img/alert-notifications-graph.png)
-
-## Send alerts to external systems
-
-:::note
-Alerting with webhooks is only available for Camunda 7.
-:::
-
-It's possible to configure Optimize to send alerts to an external system when needed. For details on how to configure and add target systems, visit the [technical guide](/self-managed/optimize-deployment/configuration/system-configuration.md#alert-notification-webhooks). Once at least one target system is configured, alerts will have a new input option to select one of the configured systems.
