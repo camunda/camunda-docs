@@ -26,6 +26,13 @@ A form element to select files.
 ]
 ```
 
+:::note
+When using Document preview with [Filepicker](./forms-element-library-filepicker.md) in the Tasklist webapp, document references are handled automatically. Note that:
+
+- Modifying document metadata after upload may break the preview
+- To use Camunda's document service without Filepicker, you must include the `contentHash` value along with `endpoint` and `documentId`
+  :::
+
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the file picker.
 - **Max height of preview container**: A number which will define the maximum height of each document preview. Any document with a bigger height will display a scroll bar.
 
