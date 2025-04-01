@@ -27,9 +27,9 @@ A form element to select files.
 ```
 
 :::note
-When using document preview with [Filepicker](./forms-element-library-filepicker.md) in Tasklist, document references are handled automatically:
+When previewing documents that were uploaded via [Filepicker](./forms-element-library-filepicker.md) in Tasklist, document references are handled automatically:
 
-- Modifying document metadata after upload may break the preview.
+- Modifying the document’s metadata after upload may prevent the preview from working correctly.
 - To use Camunda's document service without Filepicker, you must include the `contentHash`, `endpoint`, and `documentId` values.
   :::
 
