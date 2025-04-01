@@ -460,6 +460,7 @@ The deployment experience is further simplified for Enterprise customers running
 :::note
 The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](../../../../self-managed/setup/guides/connect-to-an-oidc-provider/?authPlatform=microsoftEntraId#configuration).
 You still need to enter a client ID and secret in this case.
+We plan to [add support in Camunda 8.8](../870-announcements/#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed).
 :::
 
 ## 8.7.0-alpha1
