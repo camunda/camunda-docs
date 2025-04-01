@@ -234,7 +234,7 @@ Secrets are currently not supported in the body of a **REST Connector**.
 
 #### File upload
 
-To upload a file, you can take advantage of [Camunda document handling](/components/concepts/document-handling/).
+To upload a file, you can take advantage of [Camunda document handling](/components/concepts/document-handling.md).
 
 Depending on the `Content-Type`, the file will be uploaded as a binary or a JSON object (base64 encoded).
 

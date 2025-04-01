@@ -36,10 +36,10 @@ Depending on how you want the proxy to be used, configure it using either JVM pr
 
 The difference between these two configuration types is the scope of the configuration:
 
-| Configuration type                                                                        | Scope                                                                                                                                          | Example                                                                                                                                                                                  |
-| :---------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Configuration type                                                                        | Scope                                                                                                                                                  | Example                                                                                                                                                                                  |
+| :---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [JVM properties](https://docs.oracle.com/javase/8/docs/technotes/guides/net/proxies.html) | JVM, **the whole runtime** will be affected. **Any HTTP client** used internally (for example, in a connector, or the Zeebe client) might be affected. | `-Dhttp.proxyHost=proxy -Dhttp.proxyPort=3128 -Dhttps.proxyHost=proxy -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=OTHER_DOMAIN`                                                          |
-| Environment variables                                                                     | Connector, **only the Connector (and REST-based connectors)** will be affected                                                                 | `CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;` |
+| Environment variables                                                                     | Connector, **only the Connector (and REST-based connectors)** will be affected                                                                         | `CONNECTOR_HTTP_PROXY_HOST=proxy; CONNECTOR_HTTP_PROXY_PORT=3128; CONNECTOR_HTTPS_PROXY_HOST=proxy; CONNECTOR_HTTPS_PROXY_PORT=3128; CONNECTOR_HTTP_PROXY_NON_PROXY_HOSTS=OTHER_DOMAIN;` |
 
 :::note
 To ensure Camunda can properly access Camunda components when using JVM properties, non-proxy hosts must contain `camunda-platform-zeebe|camunda-platform-keycloak`.
@@ -234,7 +234,7 @@ Secrets are currently not supported in the body of a **REST Connector**.
 
 #### File upload
 
-To upload a file, you can take advantage of [Camunda document handling](/components/concepts/document-handling/).
+To upload a file, you can take advantage of [Camunda document handling](/components/concepts/document-handling.md).
 
 Depending on the `Content-Type`, the file will be uploaded as a binary or a JSON object (base64 encoded).
 
