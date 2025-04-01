@@ -1,30 +1,34 @@
 ---
 id: prefix-elasticsearch-indices
-title: "Prefix Elasticsearch indicies"
-sidebar_label: "Prefix Elasticsearch indicies"
-description: "Configure elasticsearch prefix indicies."
+title: "Prefix Elasticsearch indices"
+sidebar_label: "Prefix Elasticsearch indices"
+description: "Configure Elasticsearch index prefixes to structure your data, and ensure data isolation."
 ---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 ## Overview
 
-Using Elasticsearch index prefixes in Camunda provides key benefits, specially for multi-instance and multi-tenant environments. It ensure data isolation by allowing multiple Camunda instances to run on a shared cluster without accessing each other’s data. This is crucial for maintaining separation in multi-tenancy and testing different configurations.
-Additionally, prefixes help structure data by appending a unique identifier to each index, making it easier to organize and retrieve relevant information. With a consistent prefix, all related indices are easily identifiable, simplifying queries and data management.
+Elasticsearch prefixes allow you to append a unique identifier to each Elasticsearch index, making it easier to organize and retrieve relevant information by structuring your data. With a consistent prefix, all related indices are easily identifiable, simplifying queries and data management.
+
+Using index prefixes in Camunda ensures data isolation by allowing multiple Camunda instances to run on a shared cluster without accessing each other’s data. This is crucial for maintaining separation in multi-instance and multi-tenant environments, and when testing different configurations.
 
 :::note
-Changing the index prefix after a Camunda instance has been running will create new empty indices with the new prefix, and there is no built-in migration support between old and new prefixes.
+Changing the index prefix after a Camunda instance has been running will create new empty indices with the new prefix. There is no built-in migration support between old and new prefixes.
 :::
 
 ## Usage
 
-<Tabs groupId="featured" defaultValue="new" queryString values={
+<Tabs groupId="featured" defaultValue="envVars" queryString values={
 [
-{label: 'Environment Variables', value: 'envVars' },
+{label: 'Environment variables', value: 'envVars' },
 {label: 'values.yaml', value: 'valuesYaml' },
 {label: 'application.yaml', value: 'applicationYaml' },
 ]}>
 <TabItem value="envVars">
 
-```
+```sh
 ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
 
 CAMUNDA_OPERATE_ELASTICSEARCH_INDEXPREFIX=custom
@@ -40,7 +44,7 @@ CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
 </TabItem>
 <TabItem value="valuesYaml">
 
-```
+```yaml
 elasticsearch:
   prefix: custom-zeebe
 
@@ -74,14 +78,12 @@ optimize:
         value: custom-optimize
       - name: CAMUNDA_OPTIMIZE_ZEEBE_NAME
         value: custom-zeebe
-
-
 ```
 
 </TabItem>
 <TabItem value="applicationYaml">
 
-```
+```yaml
 zeebe:
   broker:
     exporters:
