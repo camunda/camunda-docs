@@ -18,7 +18,7 @@ You can restore a version to revert to a previous snapshot of your diagram, for 
 
 You can use the versions list to view, compare, and manage your diagram versions.
 
-To view the versions list, select **Show versions** from the Versions menu.
+To view the versions list, select **Versions > Show versions**.
 
 ![Versions list showing the show versions button](img/versions/web-modeler-version-action-show-versions.png)
 
@@ -26,7 +26,7 @@ To view the versions list, select **Show versions** from the Versions menu.
 
 You can create a new version either from your diagram or the versions list.
 
-- From your diagram, select **Create version** from the Versions menu.
+- From your diagram, select **Versions > Create version**.
 
   ![versions create via the breadcrumb menu](img/versions/web-modeler-version-create-via-versions-menu.png)
 
