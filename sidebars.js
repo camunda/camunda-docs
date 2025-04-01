@@ -1500,14 +1500,14 @@ module.exports = {
                     },
                     {
                       Roles: [
-                        "self-managed/identity/user-guide/roles/add-assign-role",
-                        "self-managed/identity/user-guide/roles/add-assign-permission",
+                        "self-managed/identity/user-guide/roles/manage-roles",
+                        "self-managed/identity/user-guide/roles/manage-permissions",
                       ],
                     },
                     {
                       Groups: [
-                        "self-managed/identity/user-guide/groups/create-group",
-                        "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
+                        "self-managed/identity/user-guide/groups/manage-groups",
+                        "self-managed/identity/user-guide/groups/manage-users-roles-to-group",
                       ],
                     },
                     {
