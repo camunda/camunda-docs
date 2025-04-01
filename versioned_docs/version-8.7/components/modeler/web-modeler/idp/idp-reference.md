@@ -94,6 +94,30 @@ You can choose from the following supported LLM extraction models during [data e
 | Llama 3 8B Instruct  | [Meta](https://www.meta.com/gb/)           | [Meta's Llama in Amazon Bedrock](https://aws.amazon.com/bedrock/llama/)                                 |
 | Titan Text Premier   | [Amazon AWS](https://docs.aws.amazon.com/) | [Amazon Titan Text models](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-text-models.html) |
 
+## Access rights and permissions
+
+Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions).
+
+For example, users with Viewer or Commenter access only have read-only access for IDP features, and cannot upload documents, manage extraction fields, or publish document extraction templates.
+
+| Feature                                   | Viewer/Commenter | Editor/Project Admin | Super-user |
+| :---------------------------------------- | :--------------: | :------------------: | :--------: |
+| View IDP application                      |       Yes        |         Yes          |    Yes     |
+| Create/edit/delete IDP application        |        No        |         Yes          |    Yes     |
+| View document extraction                  |       Yes        |         Yes          |    Yes     |
+| Create/edit/delete document extraction    |        No        |         Yes          |    Yes     |
+| View documents                            |       Yes        |         Yes          |    Yes     |
+| Upload/delete documents                   |        No        |         Yes          |    Yes     |
+| View extraction fields/prompts            |       Yes        |         Yes          |    Yes     |
+| Add/edit/delete extraction fields/prompts |        No        |         Yes          |    Yes     |
+| Extract data                              |        No        |         Yes          |    Yes     |
+| Save as test case                         |        No        |         Yes          |    Yes     |
+| View validate extraction                  |       Yes        |         Yes          |    Yes     |
+| Validate extraction (test documents)      |        No        |         Yes          |    Yes     |
+| Publish template                          |        No        |         Yes          |    Yes     |
+| View versions                             |       Yes        |          No          |    Yes     |
+| Manage versions (edit, restore, delete)   |        No        |         Yes          |    Yes     |
+
 ## Validation status {#status}
 
 During validation, a validation status is shown for extraction fields to indicate the accuracy of the extracted data.
