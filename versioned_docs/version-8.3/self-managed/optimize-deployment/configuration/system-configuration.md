@@ -96,6 +96,18 @@ These values control mechanisms of Optimize related security, e.g. security head
 | security.responseHeaders.X-Content-Type-Options  | true            | Setting this header will prevent the browser from interpreting files as a different MIME type to what is specified in the Content-Type HTTP header (e.g. treating text/plain as text/css).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | security.responseHeaders.Content-Security-Policy | base-uri 'self' | A Content Security Policy (CSP) has significant impact on the way browsers render pages. By default Optimize uses the base-uri directive which restricts the URLs that can be used to the Optimize pages. Find more details in [Mozilla's Content Security Policy Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy).                                                                                                                                                                                                                                                                                                                                                 |
 
+### Import
+
+These values relate to Optimize data import.
+
+| YAML path                                  | Default value | Description                                                                                                                                                                                                                    |
+| ------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|                                            |
+| import.skipDataAfterNestedDocLimitReached  | false         | Some data can no longer be imported to a given document if its number of nested documents has reached the configured limit. Enable this setting to skip this data during import if the nested document limit has been reached. |
+| import.currentTimeBackoffMilliseconds      | 300000        | The time interval the import backs off from the current tip of the time, to reread potentially missed concurrent writes.                                                                                                       |
+| import.elasticsearchJobExecutorThreadCount | 1             | Number of threads being used to process the import jobs per data type that are writing data to Elasticsearch.                                                                                                                  |
+| import.elasticsearchJobExecutorQueueSize   | 5             | Adjust the queue size of the import jobs per data type that store data to Elasticsearch. A too large value might cause memory problems.                                                                                        |
+
 ### Public API
 
 This section focuses on common properties related to the Public REST API of Optimize. It is
