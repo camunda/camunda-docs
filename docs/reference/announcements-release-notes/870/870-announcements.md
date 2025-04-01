@@ -29,6 +29,10 @@ Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be upd
 
 Camunda Spring SDK 8.7 now requires Spring Boot 3.4.x. For more information on compatibility, see the Camunda Spring SDK [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
 
+### Desktop Modeler no longer supports macOS 12
+
+Following the end-of-life of macOS 12, support for Desktop Modeler on macOS 12 has been removed.
+
 ## Key changes
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
@@ -39,7 +43,7 @@ With this version, we ship a breaking change to how Web Modeler **Deploy diagram
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
 - In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
-- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/user-guide/roles/add-assign-role.md) to be able to deploy.
+- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/user-guide/roles/manage-roles.md) to be able to deploy.
 
 ### Breaking changes in Camunda Process Test
 
