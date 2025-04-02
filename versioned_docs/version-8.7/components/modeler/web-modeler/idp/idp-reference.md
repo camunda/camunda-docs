@@ -11,6 +11,8 @@ import IdpIconCautionImg from './img/idp-validation-icon-caution.png';
 import IdpIconFailImg from './img/idp-validation-icon-fail.png';
 import IdpValidationExampleImg from './img/idp-validation-example.png';
 import IdpDocumentStorageImg from './img/idp-document-storage.png';
+import TickImg from '/static/img/icon-list-tick.png';
+import CrossImg from '/static/img/icon-list-cross.png';
 
 Technical reference information for IDP, including technical architecture, supported documents, and known limitations.
 
@@ -100,23 +102,25 @@ Access to IDP features is determined by your Web Modeler user role and associate
 
 For example, users with Viewer or Commenter access only have read-only access for IDP features, and cannot upload documents, manage extraction fields, or publish document extraction templates.
 
-| Feature                                   | Viewer/Commenter | Editor/Project Admin | Super-user |
-| :---------------------------------------- | :--------------: | :------------------: | :--------: |
-| View IDP application                      |       Yes        |         Yes          |    Yes     |
-| Create/edit/delete IDP application        |        No        |         Yes          |    Yes     |
-| View document extraction                  |       Yes        |         Yes          |    Yes     |
-| Create/edit/delete document extraction    |        No        |         Yes          |    Yes     |
-| View documents                            |       Yes        |         Yes          |    Yes     |
-| Upload/delete documents                   |        No        |         Yes          |    Yes     |
-| View extraction fields/prompts            |       Yes        |         Yes          |    Yes     |
-| Add/edit/delete extraction fields/prompts |        No        |         Yes          |    Yes     |
-| Extract data                              |        No        |         Yes          |    Yes     |
-| Save as test case                         |        No        |         Yes          |    Yes     |
-| View validate extraction                  |       Yes        |         Yes          |    Yes     |
-| Validate extraction (test documents)      |        No        |         Yes          |    Yes     |
-| Publish template                          |        No        |         Yes          |    Yes     |
-| View versions                             |       Yes        |          No          |    Yes     |
-| Manage versions (edit, restore, delete)   |        No        |         Yes          |    Yes     |
+| Feature                                   |                             Viewer/Commenter                              |                         Editor/Project Admin                          |                              Super-user                               |
+| :---------------------------------------- | :-----------------------------------------------------------------------: | :-------------------------------------------------------------------: | :-------------------------------------------------------------------: |
+| View IDP application                      |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View document extraction                  |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View documents                            |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View extraction fields/prompts            |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View validate extraction                  |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Create/edit/delete IDP application        | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Create/edit/delete document extraction    | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Upload/delete documents                   | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Add/edit/delete extraction fields/prompts | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Extract data                              | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Save as test case                         | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Validate extraction (test documents)      | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Publish template                          | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View versions                             | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Manage versions (edit, restore, delete)   | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+
+**Key:** <img src={TickImg} class="table-tick" alt="Can access" width="15px" style={{marginLeft: '10px', marginRight: '5px'}}/>Full access | <img src={CrossImg} class="table-cross" alt="Cannot access" width="15px" style={{marginLeft: '10px', marginRight: '5px'}}/>Read-only access
 
 ## Validation status {#status}
 
@@ -139,7 +143,3 @@ The expanded `contract_start_date` field shows that each document returned diffe
 - The first document passed the validation, with the **Extracted value** matching the **Expected test case output**.
 - The second document could not be validated as a test case was not found for comparison. Click **Save test case** to create a test case for the document.
 - The third document failed validation as the **Extracted value** did not match the **Expected test case output**. Click **Review document** to open the document again and check the prompt for this field.
-
-<!-- ## Known limitations
-
-Content -->
