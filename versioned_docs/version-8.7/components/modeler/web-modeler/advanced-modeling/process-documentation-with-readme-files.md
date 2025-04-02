@@ -56,7 +56,7 @@ Refer to [GitHub’s README guide](https://docs.github.com/en/repositories/manag
 
 ## README interaction
 
-README file changes are fully versioned, you can see previous versions and resent changes by selecting the **Show versions** icon:
+README file changes are fully versioned, you can see previous versions and recent changes by selecting the **Show versions** icon:
 
 ![view readme versions ](img/view-readme-versions.png)
 
