@@ -419,6 +419,7 @@ module.exports = {
             },
             "components/connectors/protocol/graphql",
             "components/connectors/protocol/http-webhook",
+            "components/connectors/out-of-the-box-connectors/hubspot",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
             {
@@ -461,6 +462,7 @@ module.exports = {
               items: [
                 "components/connectors/custom-built-connectors/connector-template-generator",
                 "components/connectors/manage-connector-templates",
+                "components/connectors/custom-built-connectors/create-connector-from-rest",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
@@ -1178,6 +1180,7 @@ module.exports = {
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
+            "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
           ],
@@ -1266,7 +1269,7 @@ module.exports = {
           },
           items: [
             "self-managed/operational-guides/backup-restore/optimize-backup",
-            "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
+            "self-managed/operational-guides/backup-restore/webapps-backup",
             "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
@@ -1498,14 +1501,14 @@ module.exports = {
                     },
                     {
                       Roles: [
-                        "self-managed/identity/user-guide/roles/add-assign-role",
-                        "self-managed/identity/user-guide/roles/add-assign-permission",
+                        "self-managed/identity/user-guide/roles/manage-roles",
+                        "self-managed/identity/user-guide/roles/manage-permissions",
                       ],
                     },
                     {
                       Groups: [
-                        "self-managed/identity/user-guide/groups/create-group",
-                        "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
+                        "self-managed/identity/user-guide/groups/manage-groups",
+                        "self-managed/identity/user-guide/groups/manage-users-roles-to-group",
                       ],
                     },
                     {

@@ -30,9 +30,13 @@ You can then configure the document extraction template in the properties panel,
 
 Specify the document object variable used for document handling, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md) with the document reference.
 
-For example, if you have uploaded a document via form upload using a `document` key, you can specify `document[1]` to retrieve the first document in the array.
+For example, if you have uploaded a document via form upload using a `documents` **Key**, you can specify `documents[1]` to retrieve the first document in the array.
 
-Example: `document[1]`.
+Example: `documents[1]`.
+
+:::info
+To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/concepts/document-handling.md).
+:::
 
 ## Provider authentication
 

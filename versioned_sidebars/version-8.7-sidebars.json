@@ -558,7 +558,8 @@
               },
               "items": [
                 "components/connectors/custom-built-connectors/connector-template-generator",
-                "components/connectors/manage-connector-templates"
+                "components/connectors/manage-connector-templates",
+                "components/connectors/custom-built-connectors/create-connector-from-rest"
               ]
             },
             "components/connectors/custom-built-connectors/connector-sdk"
@@ -2027,6 +2028,7 @@
             "self-managed/setup/guides/connect-to-an-oidc-provider",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
+            "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example"
           ]

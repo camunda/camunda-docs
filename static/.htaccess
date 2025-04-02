@@ -120,6 +120,16 @@ RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
 
+## Reabsorbed Optimize docs
+RewriteRule ^optimize/3.13.0/apis-tools/optimize-api/(.*)$ /docs/8.5/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/3.13.0/components/(.*)$ /docs/8.5/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/3.13.0/self-managed/(.*)$ /docs/8.5/self-managed/$1 [R=301,L]
+RewriteRule ^optimize/3.12.0/apis-tools/optimize-api/(.*)$ /docs/8.4/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/3.12.0/components/(.*)$ /docs/8.4/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/3.12.0/self-managed/(.*)$ /docs/8.4/self-managed/$1 [R=301,L]
+RewriteRule ^optimize/3.11.0/apis-tools/optimize-api/(.*)$ /docs/8.3/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/3.11.0/components/(.*)$ /docs/8.3/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301,L]
 
 ##################################################################################
 # 3. Specific content moves
@@ -160,6 +170,12 @@ RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camun
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
+
+# Remove event ingestion from 3.14
+RewriteRule ^optimize/apis-tools/optimize-api/event-ingestion/(.*)$ /optimize/apis-tools/optimize-api/overview/$1 [R=301,L]
+
+# Remove event-based-process-configuration from 3.14
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/event-based-process-configuration/(.*)$ /optimize/self-managed/optimize-deployment/configuration/getting-started/$1 [R=301,L]
 
 # Moved API endpoint in 8.6
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/report-error-for-job/?$ /docs/apis-tools/camunda-api-rest/specifications/throw-job-error/ [R=301,L]
@@ -204,7 +220,7 @@ RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
 
 # Provide redirects for moved ad-hoc sub-processes page
-RewriteRule ^docs/8.7/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1
+RewriteRule ^docs/8.7/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
