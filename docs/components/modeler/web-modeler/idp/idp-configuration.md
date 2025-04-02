@@ -10,10 +10,6 @@ import CrossImg from '/static/img/icon-list-cross.png';
 
 Configure IDP for your Camunda 8 setup and make sure IDP can access the required components and credentials.
 
-:::note
-For the 8.7.0-alpha5 release IDP only offers support for Camunda 8 Self-Managed development deployment via Docker (see [example deployment](#idp-docker-example)). Full production support for Camunda 8 SaaS and Camunda 8 Self-Managed is planned for delivery with the 8.7 release. Camunda 8 Run is not supported as IDP requires Web Modeler.
-:::
-
 ## Known limitations
 
 The current known limitations of IDP are as follows:
@@ -58,7 +54,7 @@ Add the following required AWS [connector secrets](/components/console/manage-cl
 
 :::
 
-## Example Self-Managed Docker IDP deployment {#idp-docker-example}
+## Example IDP Docker deployment {#idp-docker-example}
 
 To deploy and run Camunda 8 with IDP in a local development environment:
 
@@ -92,21 +88,15 @@ To deploy and run Camunda 8 with IDP in a local development environment:
       ```
 
    1. Save and close the file.
-   1. [Run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose).
+   1. [Run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose). For example, run the following command in the extracted directory:
+
+      ```
+      Docker compose up -d
+      ```
 
 1. Launch Web Modeler at http://localhost:8070 and log in with the username `demo` and password `demo`.
-1. Get started with IDP by creating a new [IDP application](idp-applications.md) in a project.
+1. Get started with IDP by creating a new [IDP application](idp-applications.md) in a Web Modeler project.
 
 :::info
 To learn more about using Docker Compose to run Camunda Self-Managed locally, see [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md).
 :::
-
-### Deployment files
-
-This example deployment uses the following files:
-
-| File                    | Notes                                                                                  |
-| :---------------------- | :------------------------------------------------------------------------------------- |
-| `docker-compose.yaml`   | Enables IDP with `IDP_ENABLED: "true"` in the Web Modeler environment variables.       |
-| `.env`                  | Environment variables for component 8.7.0-SNAPSHOT versions and AWS connector secrets. |
-| `connector-secrets.txt` | Sets the [connector secrets](#aws-secrets) required by IDP.                            |

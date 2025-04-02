@@ -27,13 +27,13 @@ Once deployed, Identity manages the following in Web Modeler, Console, and Optim
 
 - Applications
 - APIs
-- Permissions
 - Roles
+- Permissions
 
 For example, using Identity you can:
 
-- [Add and assign a role to a user](/self-managed/identity/user-guide/roles/add-assign-role.md), which is a way to group sets of permissions which can be assigned to users using the Identity UI.
-- [Add and assign a permission to a role](/self-managed/identity/user-guide/roles/add-assign-permission.md) to control the level of access a user or an application has to a particular component.
-- [Create a group](/self-managed/identity/user-guide/groups/create-group.md) to apply a set of roles and authorizations to users.
+- [Manage roles](/self-managed/identity/user-guide/roles/manage-roles.md), which is a way to group sets of permissions which can be assigned to users using the Identity UI.
+- [Manage permissions](/self-managed/identity/user-guide/roles/manage-permissions.md) to control the level of access a user or an application has to a particular component.
+- [Manage groups](/self-managed/identity/user-guide/groups/manage-groups.md) to apply a set of roles and authorizations to users.
 - [Manage resource authorizations](/self-managed/identity/user-guide/authorizations/managing-resource-authorizations.md) to control resource access within the Identity application.
 - [Utilize configuration variables](/self-managed/identity/deployment/configuration-variables.md).

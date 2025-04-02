@@ -13,6 +13,8 @@ keywords:
   ]
 ---
 
+import IdpGrid from './idp/react-components/\_idp-card';
+import { gettingStartedCards, configCards } from './idp/react-components/\_idp-card-data';
 import IdpOverviewImg from './img/idp-overview-diagram.png';
 import IdpSecretsImg from './idp/img/idp-connector-secrets.png';
 
@@ -24,25 +26,19 @@ IDP uses artificial intelligence (AI) and machine learning (ML) to identify, ext
 
 For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
 
-<img src={IdpOverviewImg} alt="An overview of intelligent document processing" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
+<img src={IdpOverviewImg} class="fade-in-bottom-image" alt="An overview of intelligent document processing" style={{border: 'none', padding: '0', marginTop: '0', backgroundColor: 'transparent'}} />
 
 ## Configure IDP
 
-[Configure IDP](idp/idp-configuration.md) for your Camunda 8 setup to make sure IDP can access the required components and credentials.
+[Configure IDP](idp/idp-configuration.md) for your Camunda 8 setup with access to the required components and credentials.
 
-:::note
-For the 8.7.0-alpha5 release IDP only offers support for Camunda 8 Self-Managed development deployment via Docker (see [example deployment](idp/idp-configuration.md#idp-docker-example)). Full production support for Camunda 8 SaaS and Camunda 8 Self-Managed is planned for delivery with the 8.7 release. Camunda 8 Run is not supported as IDP requires Web Modeler.
-:::
+<IdpGrid idp={configCards} />
 
 ## Get started with IDP
 
-Once initial [cluster configuration](idp/idp-configuration.md#configure-idp) is complete, you can start using IDP in your processes:
+Once initial [configuration](idp/idp-configuration.md#configure-idp) is complete, get started with IDP.
 
-1. Create an [IDP application](idp/idp-applications.md) in which to store and manage a set of related IDP projects.
-
-1. Create and publish a [document extraction](idp/idp-document-extraction.md) template for each type of document you want to extract data from.
-
-1. [Integrate your published document extraction template](idp/idp-integrate.md) into your processes in Web Modeler.
+<IdpGrid idp={gettingStartedCards} />
 
 <!-- 1. Create and publish your IDP projects in your IDP application folder:
 
@@ -50,6 +46,10 @@ Once initial [cluster configuration](idp/idp-configuration.md#configure-idp) is 
 
    - Create a [document automation](idp/idp-document-automation.md) project to automatically extract data from larger, more complex documents (for example, a multi-page PDF document made up of many types of documents and data). This project type is based on and requires one or more linked document extraction project(s). -->
 
-:::info
-New to IDP? See [IDP concepts](idp/idp-key-concepts.md) to learn about key IDP concepts and terms.
-:::
+## IDP concepts
+
+Learn about key [IDP concepts](idp/idp-key-concepts.md) and terms, such as the difference between structured and unstructured documents, document classification, and how IDP uses LLM Foundation models.
+
+## IDP reference
+
+Technical [IDP reference](idp/idp-reference.md) information, including technical architecture and document storage, supported documents and types, and extraction models.

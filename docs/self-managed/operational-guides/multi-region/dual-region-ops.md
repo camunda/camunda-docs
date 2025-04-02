@@ -337,6 +337,8 @@ In our example, we went with port-forwarding to a localhost, but other alternati
     curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
     ```
 
+    Using the `force=true` parameter reduces the replication factor accordingly.
+
 #### Verification
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the cluster size has decreased to 4, partitions have been redistributed over the remaining brokers, and new leaders have been elected.

@@ -237,6 +237,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
+                "components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files",
                 {
                   "AI features": [
                     "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
@@ -1180,6 +1181,7 @@ module.exports = {
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
+            "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
           ],
@@ -1268,7 +1270,7 @@ module.exports = {
           },
           items: [
             "self-managed/operational-guides/backup-restore/optimize-backup",
-            "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
+            "self-managed/operational-guides/backup-restore/webapps-backup",
             "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
@@ -1500,14 +1502,14 @@ module.exports = {
                     },
                     {
                       Roles: [
-                        "self-managed/identity/user-guide/roles/add-assign-role",
-                        "self-managed/identity/user-guide/roles/add-assign-permission",
+                        "self-managed/identity/user-guide/roles/manage-roles",
+                        "self-managed/identity/user-guide/roles/manage-permissions",
                       ],
                     },
                     {
                       Groups: [
-                        "self-managed/identity/user-guide/groups/create-group",
-                        "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
+                        "self-managed/identity/user-guide/groups/manage-groups",
+                        "self-managed/identity/user-guide/groups/manage-users-roles-to-group",
                       ],
                     },
                     {

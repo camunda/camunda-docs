@@ -55,9 +55,6 @@ module.exports = {
           current: {
             label: "8.8 / 3.16.0 (unreleased)",
           },
-          "3.15.0": {
-            label: "8.7 / 3.15.0 (unreleased)",
-          },
           "3.14.0": {
             label: "8.6 / 3.14.0",
           },
@@ -579,7 +576,6 @@ module.exports = {
             "/docs/8.3/**",
             "/docs/8.4/**",
             "/docs/8.5/**",
-            "/optimize/3.15.0/**",
             "/optimize/next/**",
           ],
         },
