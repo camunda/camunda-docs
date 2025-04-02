@@ -100,7 +100,7 @@ You can choose from the following supported LLM extraction models during [data e
 
 Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions).
 
-For example, users with Viewer or Commenter access only have read-only access for IDP features, and cannot upload documents, manage extraction fields, or publish document extraction templates.
+For example, users with a Viewer or Commenter role only have read-only access to IDP features, and cannot upload documents, manage extraction fields, or publish document extraction templates.
 
 | Feature                                   |                             Viewer/Commenter                              |                         Editor/Project Admin                          |                              Super-user                               |
 | :---------------------------------------- | :-----------------------------------------------------------------------: | :-------------------------------------------------------------------: | :-------------------------------------------------------------------: |
