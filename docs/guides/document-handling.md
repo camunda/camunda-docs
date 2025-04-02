@@ -101,6 +101,10 @@ This feature will not work for public processes started by forms.
 
 ![document handling in tasklist](./img/document-handling-tasklist.png)
 
+:::note
+Document handling can also be used with intelligent document processing (IDP). For example, a published document extraction template can be used to extract data from a document uploaded via Tasklist. Learn more in the [IDP documentation](/components/modeler/web-modeler/idp/idp-example.md).
+:::
+
 ### Start forms
 
 Insert text.
@@ -117,7 +121,7 @@ In most cases for the following outbound Connectors, you can include a **Request
 
 ![example REST configuration](./img/rest-outbound-document.png)
 
-See [a complete list of supported outbound Connectors for document handling](/docs/components/concepts/document-handling.md#supported-outbound-connectors).
+See [a complete list of supported outbound Connectors for document handling](/components/concepts/document-handling.md#supported-outbound-connectors).
 
 ## Display a document in a user task
 
