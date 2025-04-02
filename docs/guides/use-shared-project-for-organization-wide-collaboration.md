@@ -104,3 +104,11 @@ To access the associated README file for a process within the shared project:
 1. Open the process landscape view.
 2. Click on a node in the landscape.
 3. The README file (if one is associated) is displayed in the sidebar, providing a high-level overview of the process.
+
+## Next steps
+
+Organization owners and administrators can connect their Web Modeler process applications to GitHub, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+
+Once the basic integration is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from GitHub, integrate contributions from Desktop Modeler users, and merge their own work.
+
+Learn more in Camunda's [Git sync documentation](/components/modeler/web-modeler/git-sync.md).
