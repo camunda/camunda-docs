@@ -145,7 +145,43 @@ module.exports = {
     },
     {
       type: "category",
-      label: "RPA",
+      label: "Intelligent document processing (IDP)",
+      link: {
+        type: "doc",
+        id: "components/modeler/web-modeler/idp",
+      },
+      items: [
+        "components/modeler/web-modeler/idp/idp-configuration",
+        "components/modeler/web-modeler/idp/idp-applications",
+        {
+          type: "category",
+          label: "Document extraction",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp/idp-document-extraction",
+          },
+          items: [
+            // "components/modeler/web-modeler/idp/idp-structured-extraction",
+            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+          ],
+        },
+        // "components/modeler/web-modeler/idp/idp-document-automation",
+        {
+          type: "category",
+          label: "Integrate IDP into your processes",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp/idp-integrate",
+          },
+          items: ["components/modeler/web-modeler/idp/idp-example"],
+        },
+        "components/modeler/web-modeler/idp/idp-key-concepts",
+        "components/modeler/web-modeler/idp/idp-reference",
+      ],
+    },
+    {
+      type: "category",
+      label: "Robotic Process Automation (RPA)",
       link: {
         type: "doc",
         id: "components/rpa/overview",
@@ -190,42 +226,6 @@ module.exports = {
                 "components/modeler/web-modeler/design-your-process",
                 "components/modeler/web-modeler/implement-your-process",
                 "components/modeler/web-modeler/play-your-process",
-              ],
-            },
-            {
-              type: "category",
-              label: "Intelligent document processing (IDP)",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/idp",
-              },
-              items: [
-                "components/modeler/web-modeler/idp/idp-configuration",
-                "components/modeler/web-modeler/idp/idp-applications",
-                {
-                  type: "category",
-                  label: "Document extraction",
-                  link: {
-                    type: "doc",
-                    id: "components/modeler/web-modeler/idp/idp-document-extraction",
-                  },
-                  items: [
-                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
-                    "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-                  ],
-                },
-                // "components/modeler/web-modeler/idp/idp-document-automation",
-                {
-                  type: "category",
-                  label: "Integrate IDP into your processes",
-                  link: {
-                    type: "doc",
-                    id: "components/modeler/web-modeler/idp/idp-integrate",
-                  },
-                  items: ["components/modeler/web-modeler/idp/idp-example"],
-                },
-                "components/modeler/web-modeler/idp/idp-key-concepts",
-                "components/modeler/web-modeler/idp/idp-reference",
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
