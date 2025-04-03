@@ -69,12 +69,12 @@ If you set `result` inside the `Result variable` field of the Rest Outbound Conn
 
 ```json
 {
-  "result":{
-    "status":200,
-    "headers":{
-      "date":"Thu, 03 Apr 2025 07:05:19 GMT",
-      "server":"nginx",
-      "content-type":"text/html; charset=UTF-8"
+  "result": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 03 Apr 2025 07:05:19 GMT",
+      "server": "nginx",
+      "content-type": "text/html; charset=UTF-8"
     },
     "body":"<h1>Hello, World!</h1>",
     "reason":"OK",
