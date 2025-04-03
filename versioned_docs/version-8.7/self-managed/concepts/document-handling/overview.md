@@ -1,15 +1,11 @@
 ---
 id: document-handling
-title: "Document handling"
-description: "Learn more about integration, secure management, and efficient storage and retrieval of documents across development and production environments in a SaaS environment."
+title: "Getting started"
+description: "Learn more about integration, secure management, and efficient storage and retrieval of documents across development and production environments in Self-Managed."
 keywords: ["document handling"]
 ---
 
 import DocCardList from '@theme/DocCardList';
-
-:::note
-Looking for details on document handling for a Self-Managed environment? Visit the [Self-Managed documentation](/self-managed/concepts/document-handling/overview.md).
-:::
 
 Store, track, and manage documents in Camunda 8 using the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx), Connectors, Forms, and Tasklist.
 
@@ -17,14 +13,7 @@ Offering more robust document handling capabilities within Camunda SaaS, users c
 
 ## Storage integration and configuration
 
-A [**Google Cloud Platform**](https://cloud.google.com/storage) and [**AWS S3**](https://aws.amazon.com/s3/) bucket storage integration is configured for SaaS and handled by Camunda.
-
-### Limitations
-
-- One bucket per cluster is permitted with SaaS.
-- This storage integration is handled and configured by Camunda. While this is not dynamically configurable by the cluster, it is provided as environment configuration.
-- **Maximum upload size for one or multiple files**: 10 MB
-- **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.
+Review all storage integration and configuration options in the [configuration documentation](/self-managed/concepts/document-handling/configuration.md).
 
 ## Use cases and capabilities
 
