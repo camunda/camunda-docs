@@ -51,7 +51,7 @@ Following this tutorial and steps will result in:
 
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 15.8](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
+- A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
 
 ## Installing Amazon EKS cluster with Terraform
 
@@ -69,7 +69,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.69"
+      version = "~> 5.93"
     }
   }
 }
@@ -125,7 +125,7 @@ The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module/t
 
 ```hcl
 module "eks_cluster" {
-  source = "git::https://github.com/camunda/camunda-tf-eks-module//modules/eks-cluster?ref=2.5.0"
+  source = "git::https://github.com/camunda/camunda-tf-eks-module//modules/eks-cluster?ref=3.1.3"
 
   region  = "eu-central-1" # change to your AWS region
   name    = "cluster-name" # change to name of your choosing
@@ -150,8 +150,8 @@ We separated the cluster and PostgreSQL modules from each other to allow more cu
 
 ```hcl
 module "postgresql" {
-  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=2.5.0"
-  engine_version             = "15.8"
+  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=3.1.3"
+  engine_version             = "15.10"
   auto_minor_version_upgrade = false
   cluster_name               = "cluster-name-postgresql" # change "cluster-name" to your name
   default_database_name      = "camunda"
