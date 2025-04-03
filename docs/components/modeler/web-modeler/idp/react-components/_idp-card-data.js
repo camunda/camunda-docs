@@ -37,7 +37,7 @@ export const gettingStartedCards = [
     title: "IDP applications",
     image: IconIdpApplication,
     description:
-      "Create an IDP application in which to store and manage your IDP document extraction templates.",
+      "Start by creating an IDP application in which to store and manage your IDP document extraction templates.",
   },
   {
     link: "./idp-document-extraction",
