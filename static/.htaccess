@@ -174,6 +174,19 @@ RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camun
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
 
+# Reroute element templates and HTTL to C7 docs
+RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/camunda-modeler-element-templates/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/camunda-modeler-element-templates/ [R=301,L]
+RewriteRule ^docs/8.7/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/camunda-modeler-element-templates/ [R=301,L]
+RewriteRule ^docs/8.6/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/camunda-modeler-element-templates/ [R=301,L]
+RewriteRule ^docs/8.5/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/camunda-modeler-element-templates/ [R=301,L]
+
+RewriteRule ^docs/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
+RewriteRule ^docs/8.7/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
+RewriteRule ^docs/8.6/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
+RewriteRule ^docs/8.5/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
+
 # Remove HTTL (C7 only) from docs
 RewriteRule ^docs/next/components/modeler/reference/modeling-guidance/rules/history-time-to-live/?$ /docs/next/components/modeler/reference/modeling-guidance/$1 [R=301,L]
 RewriteRule ^docs/8.7/components/modeler/reference/modeling-guidance/rules/history-time-to-live/?$ /docs/8.7/components/modeler/reference/modeling-guidance/$1 [R=301,L]
