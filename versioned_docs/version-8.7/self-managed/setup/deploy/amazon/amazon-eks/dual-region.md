@@ -64,7 +64,7 @@ Additionally, it is recommended to manifest those changes for future interaction
 1. Git clone or fork the repository [c8-multi-region](https://github.com/camunda/c8-multi-region):
 
 ```shell
-git clone https://github.com/camunda/c8-multi-region.git
+git clone -b stable/8.7 https://github.com/camunda/c8-multi-region.git
 ```
 
 2. The cloned repository and folder `aws/dual-region/scripts/` provides a helper script [export_environment_prerequisites.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/export_environment_prerequisites.sh) to export various environment variables to ease the interaction with a dual-region setup. Consider permanently changing this file for future interactions.
