@@ -1,30 +1,65 @@
 ---
 id: document-handling
 title: "Store, track, and manage documents"
-description: "Get started with document handling by uploading a document via an inbound webhook Connector, uploading a document via a form, referencing a document in an outbound Connector, and displaying a document in a user task."
+description: "Get started with document handling by uploading a document via a form or an inbound webhook Connector, displaying and downloading a document in a user task, and sending a document to an external system via an outbound Connector."
 keywords: ["document handling"]
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+Offering a robust document handling capabilities within Camunda, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
-Offering more robust document handling capabilities within Camunda SaaS, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+In this guide we will cover 3 main use cases:
 
-<Tabs groupId="storage" defaultValue="saas" queryString values={
-[
-{label: 'SaaS', value: 'saas' },
-{label: 'Self-Managed', value: 'selfmanaged' },
-]}>
+- [Upload a document for a BPMN process](#upload-a-document);
+- [Display and download a document](#display-and-download-a-document);
+- [Send a document to an external system via a Connector](#send-a-document-to-an-external-system-via-a-connector).
 
-<TabItem value='saas'>
+## Upload a document for a BPMN process
 
-A [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage integration is already configured for SaaS and handled by Camunda.
+You can enable document uploads for your BPMN processes using [forms](#document-upload-via-a-form) and [inbound connectors](#document-upload-via-inbound-webhook-connector).
 
-## Upload a document via inbound webhook Connector
+### Build a form for document upload
 
-[Access created documents](/components/connectors/protocol/http-webhook.md) in both the response expression and the result expression, where the `documents` object contains the references for created documents. Below, review an example of a webhook configuration:
+When [building a form](../guides/utilizing-forms.md) for a process, you can use the [Filepicker form component](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) to allow users to upload files.
 
-![example payload inbound webhook connector](./img/inbound-webhook-document.png)
+In the Filepicker configuration, you can specify whether users can upload a single file or [multiple files](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties) and define the list of [supported file formats](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers).
+
+![Form with Filepicker](./img/form-with-file-picker.png)
+
+A designed form can be [linked](../components/modeler/web-modeler/advanced-modeling/form-linking.md) to a [user task](#upload-a-document-from-a-user-task-in-tasklist) or used to [start a process](#upload-a-document-to-start-a-process).
+Documents uploaded with the form can then be [referenced](#get-reference-to-an-uploaded-document) later in the process.
+
+#### Upload a document from a user task in Tasklist
+
+When the process is deployed and running, users can access and complete user tasks that include a form with the Filepicker component in [Tasklist](../components/tasklist/introduction-to-tasklist.md).
+
+![document handling in tasklist](./img/task-with-file-picker-tasklist.png)
+
+#### Upload a document to start a process
+
+You can configure a form with the Filepicker for a start event of a BPMN process to allow users to upload documents when initiating the process. This is supported in [Tasklist](../components/tasklist/introduction-to-tasklist.md) and is available to logged-in users.
+
+:::note
+Only logged-in users can upload files.
+[Publicly accessible processes](../components/modeler/web-modeler/advanced-modeling/publish-public-processes.md) with a start form do not support file upload using the Filepicker.
+
+:::
+
+#### Get reference to an uploaded document
+
+Uploaded documents can be referenced later in the process.
+
+Filepicker's output variable is an array of objects with document metadata.
+It always returns an array of objects, either a user uploads a single or multiple documents.
+
+Single document uploads are accessible using `value[1]` (since [FEEL](../components/modeler/feel/what-is-feel.md) uses 1-based indexing).
+
+### Document upload via inbound Webhook connector
+
+Documents can be added to a process using the [inbound](../components//connectors/connector-types.md#inbound-connectors) [HTTP Webhook Connector](/components/connectors/protocol/http-webhook.md).
+
+You can pass the documents in both the response expression and the result expression, where the `documents` object contains the references for created documents. Below, review an example of a webhook configuration:
+
+![Example payload of inbound webhook connector](./img/inbound-webhook-connector-example.png)
 
 The document reference received as an output of one Connector should be stored in process variables by using the result expression or result variable.
 
@@ -77,60 +112,50 @@ The result variable will have the following structure:
 }
 ```
 
-Here, we use the configuration of the image on the initial steps and assign the portion containing the documents to `userApplicationForms`. This can be later used by the process to retrieve documents. For example, we could use the variable `userApplicationForms` to display the uploaded document in a user task using the document preview component.
+Here, we use the configuration of the image on the initial steps and assign the portion containing the documents to `applicationDocument`. This can be later used by the process to retrieve documents.
 
-Another Connector can also use this variable as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure. Review the list of [outbound Connectors](#outbound-connectors) below which currently support retrieving the document content to store in a third-party system.
+## Display and download a document
 
-## Upload a document via form
+### Build a form for document preview and downloading
 
-A [form](/components/modeler/forms/camunda-forms-reference.md) can display documents with the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md):
+To display and allow downloading of a document you can use the [Document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) in [forms](/components/modeler/forms/camunda-forms-reference.md).
 
-![document preview settings](./img/document-preview-settings.png)
+The Document preview component offers preview of PDF documents and images.
+Other document types are listed without the preview and show the file name with the option to download the file.
 
-With the [filepicker form element](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md), you may also [upload multiple files at once](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties). This can be dynamically set using an [expression](/components/modeler/feel/language-guide/feel-expressions-introduction.md):
+In the component's configuration you need to provide a document reference as an array of document metadata.
 
-![document preview for form](./img/document-preview.png)
+![document preview for form](./img/document-preview-in-form.png)
 
-For additional guidance on supported file formats, refer to the [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers).
+### Display and download a document from a user task in Tasklist
 
-With Tasklist, users may then view and download files displayed in the task's form.
+A document can be displayed in a user task form in [Tasklist](../components/tasklist/introduction-to-tasklist.md).
 
-:::note
-This feature will not work for public processes started by forms.
-:::
+When a user opens the task, they can view and download the document directly from the form.
 
-![document handling in tasklist](./img/document-handling-tasklist.png)
+![Document preview for task in Tasklist](./img/task-with-document-preview-tasklist.png)
 
-### Start forms
+## Send a document to an external system via a Connector
 
-Insert text.
+You can reference a document in an [outbound Connector](../components//connectors/connector-types.md#outbound-connectors). Connectors can use variables with document metadata as an input. The format of inputs will depend on the Connector, as each Connector has a different input structure.
 
-### User task forms
-
-Insert text.
-
-## Reference a document in an outbound connector
-
-The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md) is enhanced to provide document support in property/variable bindings.
+The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md) provides document support in property/variable bindings.
 
 In most cases for the following outbound Connectors, you can include a **Request body** under **Payload** in the properties panel to send with your request:
 
 ![example REST configuration](./img/rest-outbound-document.png)
 
-See [a complete list of supported outbound Connectors for document handling](/docs/components/concepts/document-handling.md#supported-outbound-connectors).
+### Outbound Connectors that support document handling
 
-## Display a document in a user task
-
-Insert text.
-
-</TabItem>
-
-<TabItem value='selfmanaged'>
-
-<!--- Link to SM config --->
-
-<!--- Insert SM guide --->
-
-</TabItem>
-
-</Tabs>
+| Connector                                                                               | Support details                                                                                                                                                                                                                |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Amazon Bedrock](/components/connectors/out-of-the-box-connectors/amazon-bedrock.md)    | Supports consuming documents as inputs for conversations. Review the **Document** field in the properties panel where the document reference can be provided.                                                                  |
+| [Amazon S3](/components/connectors/out-of-the-box-connectors/amazon-s3.md)              | Supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided.                                |
+| [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md)  | Can read the input document directly from the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided.                                                      |
+| [Box](/components/connectors/out-of-the-box-connectors/box.md)                          | Supports uploading documents from (or downloading documents to) the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided.                                |
+| [Email](/components/connectors/out-of-the-box-connectors/email.md#response-structure-1) | Supports sending Camunda documents as attachments, or storing incoming attachments as Camunda documents. These documents are automatically stored in the Camunda document store and available to map in the result expression. |
+| [Google Drive](/components/connectors/out-of-the-box-connectors/googledrive.md)         | Supports document upload and download.                                                                                                                                                                                         |
+| [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md)  | Supports sending documents to channels.                                                                                                                                                                                        |
+| [REST](/components/connectors/protocol/rest.md)                                         | Supports storing the response as a document.                                                                                                                                                                                   |
+| [SendGrid](/components/connectors/out-of-the-box-connectors/sendgrid.md)                | Provides attachment support.                                                                                                                                                                                                   |
+| [Slack](/components/connectors/out-of-the-box-connectors/slack.md)                      | Supports adding attachments and increasing template versions.                                                                                                                                                                  |

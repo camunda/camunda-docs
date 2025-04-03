@@ -5,6 +5,8 @@ description: "Learn more about integration, secure management, and efficient sto
 keywords: ["document handling"]
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 :::note
 Looking for details on document handling for a Self-Managed environment? Visit the [Self-Managed documentation](/self-managed/concepts/document-handling/overview.md).
 :::
@@ -26,14 +28,10 @@ A [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage i
 
 ## Use cases and capabilities
 
-Document handling may be beneficial for several use cases. For example:
+Document handling may be beneficial for different process use cases. Step through all of its capabilities in our guide:
 
-- **Upload a document via the inbound webhook Connector**, and later retrieve the document content in another Connector invocation to store it in a third-party system.
-- **Upload a document via a form**, including start forms and user task forms.
-- **Reference a document in an outbound Connector**, such as Amazon Bedrock, REST, Slack, and more.
-- **Display a document in a user task**
-
-Step through all of these capabilities in our [document handling guide](/guides/document-handling.md). Below, take a closer look at all supported outbound Connectors.
+<DocCardList items={[{type:"link", href:"/docs/next/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
+]}/>
 
 ## Supported outbound Connectors
 

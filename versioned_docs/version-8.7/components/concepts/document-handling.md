@@ -259,7 +259,7 @@ With Tasklist, users may then view and download files displayed in the task's fo
 This feature will not work for public processes started by forms.
 :::
 
-![document handling in tasklist](./assets/document-handling-tasklist.png)
+![document handling in tasklist](./assets/task-with-file-picker-tasklist.png)
 
 #### Start forms
 
