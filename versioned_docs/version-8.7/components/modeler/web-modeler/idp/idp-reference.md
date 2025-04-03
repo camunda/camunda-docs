@@ -64,7 +64,7 @@ IDP supports data extraction and processing of documents in multiple languages.
 
 IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. This ensures that the extracted text can be accurately mapped to process variables and used within your workflows, regardless of document language.
 
-:::info
+:::note
 At the time of the 8.7 release (April 2025), Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for current information on supported languages.
 :::
 
@@ -118,7 +118,3 @@ The expanded `contract_start_date` field shows that each document returned diffe
 - The first document passed the validation, with the **Extracted value** matching the **Expected test case output**.
 - The second document could not be validated as a test case was not found for comparison. Click **Save test case** to create a test case for the document.
 - The third document failed validation as the **Extracted value** did not match the **Expected test case output**. Click **Review document** to open the document again and check the prompt for this field.
-
-<!-- ## Known limitations
-
-Content -->
