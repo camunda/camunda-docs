@@ -27,14 +27,7 @@ As a general rule, you should assign human tasks, like [user tasks](/components/
   </bpmn:extensionElements>
 ```
 
-Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. Refer to [`Assign a task`](/apis-tools/tasklist-api-rest/specifications/assign-task.api.mdx).
-
-```graphql
-claimTask(
-  taskId: String!
-  assignee: String
-): Task!
-```
+Then, require individual members of that group to explicitly _claim tasks_ before working on them. This way, you avoid different people working on the same task at the same time. Refer to [`assign`](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx).
 
 You can also directly claim tasks in Camunda Tasklist with the click of a button.
 

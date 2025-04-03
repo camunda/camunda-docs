@@ -121,6 +121,9 @@ RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
 
 ## Reabsorbed Optimize docs
+RewriteRule ^optimize/3.15.0/apis-tools/optimize-api/(.*)$ /docs/8.7/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/3.15.0/components/(.*)$ /docs/8.7/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/3.15.0/self-managed/(.*)$ /docs/8.7/self-managed/$1 [R=301,L]
 RewriteRule ^optimize/3.13.0/apis-tools/optimize-api/(.*)$ /docs/8.5/apis-tools/optimize-api/$1 [R=301,L]
 RewriteRule ^optimize/3.13.0/components/(.*)$ /docs/8.5/components/optimize/$1 [R=301,L]
 RewriteRule ^optimize/3.13.0/self-managed/(.*)$ /docs/8.5/self-managed/$1 [R=301,L]
@@ -232,7 +235,7 @@ RewriteRule ^docs/components/modeler/bpmn/ad-hoc/ad-hoc/?$ /docs/8.7/components/
 RewriteRule ^docs/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
 
 # Provide redirects for moved ad-hoc sub-processes page
-RewriteRule ^docs/8.7/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1
+RewriteRule ^docs/8.7/components/modeler/bpmn/ad-hoc/?$ /docs/8.7/components/modeler/bpmn/ad-hoc-subprocesses/$1 [R=301,L]
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]

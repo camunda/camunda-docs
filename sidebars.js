@@ -145,7 +145,43 @@ module.exports = {
     },
     {
       type: "category",
-      label: "RPA",
+      label: "Intelligent document processing (IDP)",
+      link: {
+        type: "doc",
+        id: "components/modeler/web-modeler/idp",
+      },
+      items: [
+        "components/modeler/web-modeler/idp/idp-configuration",
+        "components/modeler/web-modeler/idp/idp-applications",
+        {
+          type: "category",
+          label: "Document extraction",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp/idp-document-extraction",
+          },
+          items: [
+            // "components/modeler/web-modeler/idp/idp-structured-extraction",
+            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+          ],
+        },
+        // "components/modeler/web-modeler/idp/idp-document-automation",
+        {
+          type: "category",
+          label: "Integrate IDP into your processes",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp/idp-integrate",
+          },
+          items: ["components/modeler/web-modeler/idp/idp-example"],
+        },
+        "components/modeler/web-modeler/idp/idp-key-concepts",
+        "components/modeler/web-modeler/idp/idp-reference",
+      ],
+    },
+    {
+      type: "category",
+      label: "Robotic Process Automation (RPA)",
       link: {
         type: "doc",
         id: "components/rpa/overview",
@@ -192,42 +228,6 @@ module.exports = {
                 "components/modeler/web-modeler/play-your-process",
               ],
             },
-            {
-              type: "category",
-              label: "Intelligent document processing (IDP)",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/idp",
-              },
-              items: [
-                "components/modeler/web-modeler/idp/idp-configuration",
-                "components/modeler/web-modeler/idp/idp-applications",
-                {
-                  type: "category",
-                  label: "Document extraction",
-                  link: {
-                    type: "doc",
-                    id: "components/modeler/web-modeler/idp/idp-document-extraction",
-                  },
-                  items: [
-                    // "components/modeler/web-modeler/idp/idp-structured-extraction",
-                    "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-                  ],
-                },
-                // "components/modeler/web-modeler/idp/idp-document-automation",
-                {
-                  type: "category",
-                  label: "Integrate IDP into your processes",
-                  link: {
-                    type: "doc",
-                    id: "components/modeler/web-modeler/idp/idp-integrate",
-                  },
-                  items: ["components/modeler/web-modeler/idp/idp-example"],
-                },
-                "components/modeler/web-modeler/idp/idp-key-concepts",
-                "components/modeler/web-modeler/idp/idp-reference",
-              ],
-            },
             "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/versions",
             "components/modeler/web-modeler/token-simulation",
@@ -237,6 +237,7 @@ module.exports = {
                 "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
                 "components/modeler/web-modeler/advanced-modeling/form-linking",
                 "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
+                "components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files",
                 {
                   "AI features": [
                     "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
@@ -1179,6 +1180,7 @@ module.exports = {
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
+            "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
           ],
@@ -1267,7 +1269,7 @@ module.exports = {
           },
           items: [
             "self-managed/operational-guides/backup-restore/optimize-backup",
-            "self-managed/operational-guides/backup-restore/operate-tasklist-backup",
+            "self-managed/operational-guides/backup-restore/webapps-backup",
             "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
             "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
           ],
@@ -1499,14 +1501,14 @@ module.exports = {
                     },
                     {
                       Roles: [
-                        "self-managed/identity/user-guide/roles/add-assign-role",
-                        "self-managed/identity/user-guide/roles/add-assign-permission",
+                        "self-managed/identity/user-guide/roles/manage-roles",
+                        "self-managed/identity/user-guide/roles/manage-permissions",
                       ],
                     },
                     {
                       Groups: [
-                        "self-managed/identity/user-guide/groups/create-group",
-                        "self-managed/identity/user-guide/groups/assign-users-roles-to-group",
+                        "self-managed/identity/user-guide/groups/manage-groups",
+                        "self-managed/identity/user-guide/groups/manage-users-roles-to-group",
                       ],
                     },
                     {
