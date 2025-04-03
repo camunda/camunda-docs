@@ -8,7 +8,7 @@ The machine learning-ready data set feature allows the export of data into a sin
 
 The data contained in the raw data reports is already organized and pre-processed in such a way that it would allow a trained model to make predictions for future instances based on existing instances for a given definition.
 
-In addition to the previously existing columns in the raw data reports, we added columns for improved machine learning capabilities. These columns allow a user to access information such as the total number of [incidents]($docs$/components/concepts/incidents/) per process instance, the number of open incidents, the number of user tasks, and the total duration of an event.
+In addition to the previously existing columns in the raw data reports, we added columns for improved machine learning capabilities. These columns allow a user to access information such as the total number of [incidents](/components/concepts/incidents.md) per process instance, the number of open incidents, the number of user tasks, and the total duration of an event.
 
 For example, this allows you to predict how long an instance will take to complete based on the number of incidents or user tasks.
 
