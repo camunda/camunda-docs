@@ -50,7 +50,7 @@ These secrets are required when integrating Camunda with external services:
 
 - **Internal Secrets** are auto-generated unless explicitly set in Kubernetes secrets.
 - **External Secrets** must be provided when integrating with external services such as **databases, Elasticsearch, OpenSearch, SMTP, and enterprise licensing**.
-- **Best practice:** Always store secrets securely in Kubernetes Secrets and reference them via `existingSecret` to maintain security and persistence across deployments.
+- **Best practice:** Always store secrets securely in Kubernetes Secrets and reference them via `existingSecret` or `existingSecret.name` to maintain security and persistence across deployments.
 
 ---
 
@@ -93,14 +93,39 @@ Each Camunda component has its **own OAuth client** in Identity (Keycloak). The 
 - **Plaintext (not recommended)**: Set `global.identity.auth.<component>.clientSecret` in `values.yaml`
 - **Secure approach (recommended)**: Store secrets in **existing Kubernetes Secrets** and reference them using:
 
-  ```yaml
-  global:
-    identity:
-      auth:
-        <component>:
-          existingSecret: "your-secret-name"
-          existingSecretKey: "your-secret-key"
-  ```
+```yaml
+global:
+identity:
+  auth:
+    admin:
+      existingSecret:
+        name: "integration-test-credentials"
+      existingSecretKey: "identity-admin-client-password"
+    connectors:
+      existingSecret:
+        name: "integration-test-credentials"
+      existingSecretKey: "identity-connectors-client-password"
+    console:
+      existingSecret:
+        name: "integration-test-credentials"
+      existingSecretKey: "identity-console-client-password"
+    operate:
+      existingSecret:
+        name: "integration-test-credentials"
+      existingSecretKey: "identity-operate-client-password"
+    tasklist:
+      existingSecret:
+        name: "integration-test-credentials"
+      existingSecretKey: "identity-tasklist-client-password"
+    optimize:
+      existingSecret:
+        name: "integration-test-credentials"
+      existingSecretKey: "identity-optimize-client-password"
+    zeebe:
+      existingSecret:
+        name: "integration-test-credentials"
+      existingSecretKey: "identity-zeebe-client-password"
+```
 
 Below is a breakdown of **which chart values control each OAuth client secret**, the **default key name** for each secret, and **how to configure them properly**.
 
@@ -145,22 +170,28 @@ global:
   identity:
     auth:
       operate:
-        existingSecret: identity-oauth-clients
+        existingSecret:
+          name: identity-oauth-clients
         existingSecretKey: operate-secret
       tasklist:
-        existingSecret: identity-oauth-clients
+        existingSecret:
+          name: identity-oauth-clients
         existingSecretKey: tasklist-secret
       optimize:
-        existingSecret: identity-oauth-clients
+        existingSecret:
+          name: identity-oauth-clients
         existingSecretKey: optimize-secret
       connectors:
-        existingSecret: identity-oauth-clients
+        existingSecret:
+          name: identity-oauth-clients
         existingSecretKey: connectors-secret
       console:
-        existingSecret: identity-oauth-clients
+        existingSecret:
+          name: identity-oauth-clients
         existingSecretKey: console-secret
       zeebe:
-        existingSecret: identity-oauth-clients
+        existingSecret:
+          name: identity-oauth-clients
         existingSecretKey: zeebe-secret
 ```
 
