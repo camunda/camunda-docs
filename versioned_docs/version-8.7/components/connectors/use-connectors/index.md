@@ -81,7 +81,6 @@ If you set `result` inside the `Result variable` field of the Rest Outbound Conn
     "document": null
   }
 }
-
 ```
 
 ### Result expression
