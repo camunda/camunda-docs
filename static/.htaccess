@@ -121,9 +121,15 @@ RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
 
 ## Reabsorbed Optimize docs
+RewriteRule ^optimize/next/apis-tools/optimize-api/(.*)$ /docs/next/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/next/components/(.*)$ /docs/next/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/next/self-managed/(.*)$ /docs/next/self-managed/$1 [R=301,L]
 RewriteRule ^optimize/3.15.0/apis-tools/optimize-api/(.*)$ /docs/8.7/apis-tools/optimize-api/$1 [R=301,L]
 RewriteRule ^optimize/3.15.0/components/(.*)$ /docs/8.7/components/optimize/$1 [R=301,L]
 RewriteRule ^optimize/3.15.0/self-managed/(.*)$ /docs/8.7/self-managed/$1 [R=301,L]
+RewriteRule ^optimize/apis-tools/optimize-api/(.*)$ /docs/apis-tools/optimize-api/$1 [R=301,L]
+RewriteRule ^optimize/components/(.*)$ /docs/components/optimize/$1 [R=301,L]
+RewriteRule ^optimize/self-managed/(.*)$ /docs/self-managed/$1 [R=301,L]
 RewriteRule ^optimize/3.13.0/apis-tools/optimize-api/(.*)$ /docs/8.5/apis-tools/optimize-api/$1 [R=301,L]
 RewriteRule ^optimize/3.13.0/components/(.*)$ /docs/8.5/components/optimize/$1 [R=301,L]
 RewriteRule ^optimize/3.13.0/self-managed/(.*)$ /docs/8.5/self-managed/$1 [R=301,L]
