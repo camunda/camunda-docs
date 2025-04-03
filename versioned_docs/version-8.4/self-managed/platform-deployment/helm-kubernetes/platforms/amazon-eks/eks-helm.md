@@ -439,6 +439,6 @@ The following are some advanced configuration topics to consider for your cluste
 
 To get more familiar with our product stack, visit the following topics:
 
-- [Operate](../../../../../../components/operate/operate-introduction/)
-- [Tasklist](../../../../../../components/tasklist/introduction-to-tasklist/)
-- [Optimize](../../../../../../../../optimize/components/what-is-optimize/)
+- [Operate](/components/operate/operate-introduction.md)
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md)
+- [Optimize](/components/optimize/what-is-optimize.md)

@@ -18,7 +18,7 @@ All Optimize API requests except [the health readiness](./health-readiness.md) e
 ]}>
 <TabItem value='saas'>
 
-1. [Create client credentials]($docs$/guides/setup-client-connection-credentials/) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
+1. [Create client credentials](/guides/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
 2. Add permissions to this client for **Optimize**.
 3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
@@ -57,11 +57,11 @@ All Optimize API requests except [the health readiness](./health-readiness.md) e
 
 <TabItem value='self-managed'>
 
-1. [Configure the `api.audience` setting](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) in your Optimize installation to match the audience property of the **Optimize API** [API in Identity]($docs$/self-managed/identity/user-guide/additional-features/adding-an-api/).
-2. [Add an M2M application in Identity]($docs$/self-managed/identity/user-guide/additional-features/incorporate-applications/).
-3. [Add permissions to this application]($docs$/self-managed/identity/user-guide/additional-features/incorporate-applications/) for **Optimize API**.
+1. [Configure the `api.audience` setting](/self-managed/optimize-deployment/configuration/system-configuration.md#public-api) in your Optimize installation to match the audience property of the **Optimize API** [API in Identity](/self-managed/identity/user-guide/additional-features/adding-an-api.md).
+2. [Add an M2M application in Identity](/self-managed/identity/user-guide/additional-features/incorporate-applications.md).
+3. [Add permissions to this application](/self-managed/identity/user-guide/additional-features/incorporate-applications.md) for **Optimize API**.
 4. Capture the `Client ID` and `Client Secret` from the application in Identity.
-5. [Generate a token]($docs$/self-managed/identity/user-guide/authorizations/generating-m2m-tokens/) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
+5. [Generate a token](/self-managed/identity/user-guide/authorizations/generating-m2m-tokens.md) to access the REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
    ```shell
    curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
    --header 'Content-Type: application/x-www-form-urlencoded' \
