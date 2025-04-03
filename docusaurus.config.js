@@ -1,6 +1,4 @@
-const versionedLinks = require("./src/mdx/versionedLinks");
 const { unsupportedVersions } = require("./src/versions");
-
 const { currentVersion } = require("./src/versions");
 
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
@@ -519,7 +517,6 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
-          beforeDefaultRemarkPlugins: [versionedLinks],
           lastVersion: currentVersion,
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
