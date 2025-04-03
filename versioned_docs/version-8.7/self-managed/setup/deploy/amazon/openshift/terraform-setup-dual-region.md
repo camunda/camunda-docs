@@ -32,7 +32,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 - [jq](https://jqlang.github.io/jq/download/) to interact with some Terraform variables.
 - This guide uses GNU/Bash for all the shell commands listed.
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ### Considerations
 
@@ -173,7 +173,7 @@ This module sets up the foundational configuration for ROSA HCP and Terraform us
 
 We will leverage [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allow us to abstract resources into reusable components, simplifying infrastructure management.
 
-The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/) is publicly available and serves as a starting point for deploying Red Hat OpenShift clusters on AWS using a Hosted Control Plane.
+The [Camunda-provided module](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/openshift/rosa-hcp-dual-region/) is publicly available and serves as a starting point for deploying Red Hat OpenShift clusters on AWS using a Hosted Control Plane.
 It is highly recommended to review this module before implementation to understand its structure and capabilities.
 
 Please note that this module is based on the official [ROSA HCP Terraform module documentation](https://docs.openshift.com/rosa/rosa_hcp/terraform/rosa-hcp-creating-a-cluster-quickly-terraform.html).
@@ -302,21 +302,21 @@ cd clusters
    This configuration will use the previously created S3 bucket for storing the Terraform state file:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/terraform/clusters/config.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-dual-region/terraform/clusters/config.tf
    ```
 
 5. Review the file named `cluster_region_1.tf` in the same directory.
    This file describes the cluster of the region 1, you may want to customize the `locals` variables with parameters of your choice, those are described in the next steps.
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_1.tf
    ```
 
 6. Do the same review with `cluster_region_2.tf` and adjust it to your needs.
    This file describes the cluster of the region 2:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_2.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-dual-region/terraform/clusters/cluster_region_2.tf
    ```
 
 7. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to configure the backend and download necessary provider plugins:
@@ -349,13 +349,13 @@ cd clusters
 
 1. Configure user access to the clusters. By default, the user who creates an OpenShift cluster has administrative access. If you want to grant access to other users, follow the [Red Hat documentation for granting admin rights to users](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-getting-started/cloud-experts-getting-started-admin-rights.html) when the cluster will be created.
 
-1. Customize the clusters setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/modules/rosa-hcp/README.md).
+1. Customize the clusters setup. The module offers various input options that allow you to further customize the cluster configuration. For a comprehensive list of available options and detailed usage instructions, refer to the [ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/modules/rosa-hcp/README.md).
 
 :::caution Camunda Terraform module
 
 This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
 
-Consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/modules/rosa-hcp/README.md) for more information.
+Consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/modules/rosa-hcp/README.md) for more information.
 
 :::
 
@@ -427,13 +427,13 @@ We'll re-use the previously configured S3 bucket to store the state of the peeri
 Begin by reviewing up the `config.tf` that configures S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/terraform/peering/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-dual-region/terraform/peering/config.tf
 ```
 
 Alongside the `config.tf` file, review the file called `peering.tf` used to reference the peering configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/terraform/peering/peering.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-dual-region/terraform/peering/peering.tf
 ```
 
 One cluster will be referenced as the **owner**, and the other as the **accepter**.
@@ -506,13 +506,13 @@ We'll re-use the previously configured S3 bucket to store the state of the backu
 Begin by reviewing the `config.tf` file to use the S3 backend for managing the Terraform state:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/terraform/backup_bucket/config.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-dual-region/terraform/backup_bucket/config.tf
 ```
 
 Finally, review the file called `backup_bucket.tf`, that describes the elastic backup bucket configuration:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/terraform/backup_bucket/backup_bucket.tf
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-dual-region/terraform/backup_bucket/backup_bucket.tf
 ```
 
 This bucket configuration follows [multiple best practices](https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html).  
@@ -577,7 +577,7 @@ The `BACKUP_BUCKET_REGION` will define the region of the bucket, you can pick on
 
 ### Reference files
 
-You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/)
+You can find the reference files used on [this page](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/openshift/rosa-hcp-dual-region/)
 
 ## 2. Preparation for Camunda 8 installation
 
