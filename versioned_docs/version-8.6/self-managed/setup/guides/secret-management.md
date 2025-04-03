@@ -6,26 +6,64 @@ description: "A comprehensive guide on configuring and managing secrets in Camun
 
 # Camunda Platform Helm Chart – Secrets Management
 
-This document provides an overview of the secrets used in the Camunda Platform Helm Chart, including their purpose, default behavior, and instructions on how to configure them.
+## Overview
+
+This guide provides a comprehensive reference for managing secrets in **Camunda 8 Self-Managed** when using the official Helm chart. It includes:
+
+- A complete list of internal and external secrets
+- How to create and reference Kubernetes secrets securely
+- Real-world YAML examples for PostgreSQL, TLS, OAuth clients, and more
+- Best practices to prevent common pitfalls during upgrades and secret regeneration
 
 ---
 
 ## Internal Secrets Reference Table
 
-These secrets are generated and managed internally by Camunda’s Helm chart:
+These secrets are generated and managed internally by Camunda’s Helm chart.
+
+### Identity / Keycloak
+
+| **Secret**                       | **Chart Values Key**                                                                 | **Purpose**                                          | **Default Behavior**          |
+| -------------------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------- | ----------------------------- |
+| **Keycloak Admin Password**      | `identity.keycloak.auth.adminPassword`, `identity.keycloak.auth.existingSecret`      | Admin password for Keycloak (Camunda Identity)       | Randomly generated if not set |
+| **Keycloak Management Password** | `identity.keycloak.auth.managementPassword`, `identity.keycloak.auth.existingSecret` | Internal password for Identity service communication | Randomly generated if not set |
+| **Identity First User Password** | `identity.firstUser.password`, `identity.firstUser.existingSecret`                   | Default user password (`demo/demo`)                  | `demo` unless overridden      |
+
+### OAuth Client Secrets
 
 | **Secret**                           | **Chart Values Key**                                                                                    | **Purpose**                                            | **Default Behavior**          |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | ----------------------------- |
-| **Keycloak Admin Password**          | `identity.keycloak.auth.adminPassword`, `identity.keycloak.auth.existingSecret`                         | Admin password for Keycloak (Camunda Identity)         | Randomly generated if not set |
-| **Keycloak Management Password**     | `identity.keycloak.auth.managementPassword`, `identity.keycloak.auth.existingSecret`                    | Internal password for Identity service communication   | Randomly generated if not set |
-| **Identity First User Password**     | `identity.firstUser.password`, `identity.firstUser.existingSecret`                                      | Default user password (`demo/demo`)                    | `demo` unless overridden      |
 | **OAuth Client Secret (Operate)**    | `global.identity.auth.operate.existingSecret.name`, `global.identity.auth.operate.existingSecret`       | OAuth client secret for Operate                        | Randomly generated if not set |
 | **OAuth Client Secret (Tasklist)**   | `global.identity.auth.tasklist.existingSecret.name`, `global.identity.auth.tasklist.existingSecret`     | OAuth client secret for Tasklist                       | Randomly generated if not set |
 | **OAuth Client Secret (Optimize)**   | `global.identity.auth.optimize.existingSecret.name`, `global.identity.auth.optimize.existingSecret`     | OAuth client secret for Optimize                       | Randomly generated if not set |
 | **OAuth Client Secret (Connectors)** | `global.identity.auth.connectors.existingSecret.name`, `global.identity.auth.connectors.existingSecret` | OAuth client secret for Connectors                     | Randomly generated if not set |
 | **OAuth Client Secret (Console)**    | `global.identity.auth.console.existingSecret.name`, `global.identity.auth.console.existingSecret`       | OAuth client secret for Camunda Platform Console       | Randomly generated if not set |
 | **OAuth Client Secret (Zeebe)**      | `global.identity.auth.zeebe.existingSecret.name`, `global.identity.auth.zeebe.existingSecret`           | OAuth client secret for Zeebe’s internal system client | Randomly generated if not set |
-| **Enterprise License Key**           | `global.license.existingSecret`,`global.license.existingSecret`,`global.license.existingSecretKey`      | Camunda Enterprise License Key                         | Not set unless provided       |
+
+### PostgreSQL Credentials
+
+| **Secret**                          | **Chart Values Key**                                                                                                          | **Purpose**                                                       | **Default Behavior**          |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------- |
+| **Identity PostgreSQL Password**    | `identityPostgresql.auth.existingSecret`                                                                                      | Password for embedded PostgreSQL used by Identity                 | Randomly generated if not set |
+| **Keycloak PostgreSQL Password**    | `identityKeycloak.auth.existingSecret`                                                                                        | Password for embedded PostgreSQL used by Keycloak                 | Randomly generated if not set |
+| **Web Modeler PostgreSQL Password** | `postgresql.auth.existingSecret`, `postgresql.auth.secretKeys.adminPasswordKey`, `postgresql.auth.secretKeys.userPasswordKey` | Passwords for Web Modeler's embedded PostgreSQL via Bitnami chart | Randomly generated if not set |
+
+### Other
+
+| **Secret**                 | **Chart Values Key**                                                | **Purpose**                    | **Default Behavior**    |
+| -------------------------- | ------------------------------------------------------------------- | ------------------------------ | ----------------------- |
+| **Enterprise License Key** | `global.license.existingSecret`, `global.license.existingSecretKey` | Camunda Enterprise License Key | Not set unless provided |
+
+---
+
+## Optional Secrets Based on Configuration
+
+Some secrets are only required based on your setup. Below are common conditional cases:
+
+- 🔸 **`webModeler.restapi.externalDatabase.existingSecret`** – Required **only if** `postgresql.enabled: false` and you're using an external database.
+- 🔸 **`webModeler.restapi.mail.existingSecret`** – Required **only if** you enable SMTP for email invites or notifications.
+- 🔸 **`connectors.inbound.auth.existingSecret`** – Needed when **basic authentication** is enabled for inbound connectors (instead of SSO).
+- 🔸 **`global.license.existingSecret`** – Needed **only for Camunda Enterprise** users to apply a valid license.
 
 ---
 
@@ -33,126 +71,85 @@ These secrets are generated and managed internally by Camunda’s Helm chart:
 
 These secrets are required when integrating Camunda with external services:
 
-| **Secret**                          | **Chart Values Key**                                 | **Purpose**                                                     | **Default Behavior**    |
-| ----------------------------------- | ---------------------------------------------------- | --------------------------------------------------------------- | ----------------------- |
-| **External Database Password**      | `webModeler.restapi.externalDatabase.existingSecret` | Password for external PostgreSQL if using an external DB        | Not set unless provided |
-| **External Elasticsearch Auth**     | `global.elasticsearch.auth.existingSecret`           | Password for external Elasticsearch authentication (basic auth) | Not set unless provided |
-| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.existingSecret`            | TLS certificate for external Elasticsearch over SSL             | Not set unless provided |
-| **External OpenSearch Auth**        | `global.opensearch.auth.existingSecret`              | Password for external OpenSearch authentication (basic auth)    | Not set unless provided |
-| **External OpenSearch TLS Cert**    | `global.opensearch.tls.existingSecret`               | TLS certificate for external OpenSearch over SSL                | Not set unless provided |
-| **SMTP Password**                   | `webModeler.restapi.mail.existingSecret`             | SMTP credentials for sending email notifications                | Not set unless provided |
+### External Databases and Services
 
-> **Best Practice:** For external secrets, **always store them in a Kubernetes Secret** and reference them using `existingSecret` instead of setting them in plaintext within `values.yaml`.
+| **Secret**                           | **Chart Values Key**                                                                  | **Purpose**                                              | **Default Behavior**    |
+| ------------------------------------ | ------------------------------------------------------------------------------------- | -------------------------------------------------------- | ----------------------- |
+| **External Database Password**       | `webModeler.restapi.externalDatabase.existingSecret`                                  | Password for external PostgreSQL if using an external DB | Not set unless provided |
+| **SMTP Password**                    | `webModeler.restapi.mail.existingSecret`                                              | SMTP credentials for sending email notifications         | Not set unless provided |
+| **Connectors Inbound Auth Password** | `connectors.inbound.auth.existingSecret`, `connectors.inbound.auth.existingSecretKey` | Basic auth password for Connectors polling Operate       | Not set unless provided |
 
----
+### External Search (Elasticsearch / OpenSearch)
 
-## Summary
-
-- **Internal Secrets** are auto-generated unless explicitly set in Kubernetes secrets.
-- **External Secrets** must be provided when integrating with external services such as **databases, Elasticsearch, OpenSearch, SMTP, and enterprise licensing**.
-- **Best practice:** Always store secrets securely in Kubernetes Secrets and reference them via `existingSecret` or `existingSecret.name` to maintain security and persistence across deployments.
+| **Secret**                          | **Chart Values Key**                       | **Purpose**                                                     | **Default Behavior**    |
+| ----------------------------------- | ------------------------------------------ | --------------------------------------------------------------- | ----------------------- |
+| **External Elasticsearch Auth**     | `global.elasticsearch.auth.existingSecret` | Password for external Elasticsearch authentication (basic auth) | Not set unless provided |
+| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.existingSecret`  | TLS certificate for external Elasticsearch over SSL             | Not set unless provided |
+| **External OpenSearch Auth**        | `global.opensearch.auth.existingSecret`    | Password for external OpenSearch authentication (basic auth)    | Not set unless provided |
+| **External OpenSearch TLS Cert**    | `global.opensearch.tls.existingSecret`     | TLS certificate for external OpenSearch over SSL                | Not set unless provided |
 
 ---
 
----
+## Referencing Secrets in `values.yaml`
 
-## Detailed Secrets Documentation
+> ✅ **Best Practice:** Use the structured form (`existingSecret.name` and `existingSecretKey`) when working with internal secrets. It allows more precise control over which keys are used and promotes reuse of secrets across components.
 
-Below is a more in-depth explanation for each secret, including best practices for management in Helm. It complements the table above.
+There are two primary patterns for referencing secrets, depending on the chart and component:
 
-### Elasticsearch / OpenSearch Secrets
+- Use `existingSecret` (flat string) for **simple secrets** such as external database passwords or SMTP credentials.
+- Use `existingSecret.name` and `existingSecretKey` (structured form) for **internal secrets** like OAuth client passwords, where the chart expects to access a specific key inside the secret.
 
-- **`global.elasticsearch.auth.existingSecret` / `global.opensearch.auth.existingSecret`**  
-  When using **external Elasticsearch** or **OpenSearch** instead of the in-cluster deployment, you often need a password for basic auth. Instead of placing this in plain text via `auth.password`, you can create a Kubernetes Secret containing the password (key might be `password`), then reference it via `existingSecret`. If the chart is set up to mount secrets as environment variables, the components will automatically pick them up.
+> ℹ️ If a field supports the structured format, it's generally safer and clearer to use it.
+> The structured format also enables more consistent secret reuse across multiple components.
 
-- **`global.elasticsearch.tls.existingSecret` / `global.opensearch.tls.existingSecret`**  
-  If your external Elasticsearch/OpenSearch cluster requires TLS with custom certificates, you can store the CA certificate or client certificate in a secret. The chart will mount it and configure the relevant pods to trust/use those certificates.
+### Simple (Flat String)
 
-### Keycloak / Identity Secrets
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      existingSecret: my-db-secret
+```
 
-Camunda Platform Helm includes an embedded Keycloak (also called “Identity”). Several secrets are generated or can be overridden:
-
-- **Keycloak Admin Password (`admin-password`)**  
-  Randomly generated if not set. Best practice is to provide your own known password via an existing K8s secret so you can reliably administer the Keycloak instance.
-
-- **Keycloak Management Password (`management-password`)**  
-  Used for behind-the-scenes communication within Identity. Also randomly generated if not provided. Required if you’re migrating to or from an external Keycloak setup.
-
-Camunda Platform uses **Keycloak (Identity)** to manage authentication and issue OAuth tokens for its components, such as **Operate, Tasklist, Optimize, Connectors, Console, and Zeebe**. By default, the Helm chart **auto-generates random OAuth client secrets** for each component.
-
-However, in **production**, you should **explicitly set and manage these secrets** to prevent them from regenerating unexpectedly during upgrades.
-
-This section details **OAuth Client Secrets** for each Camunda component and the **Identity First User**, with best practices and example configurations.
-
----
-
-## OAuth Client Secrets (Operate, Tasklist, Optimize, etc.)
-
-Each Camunda component has its **own OAuth client** in Identity (Keycloak). The chart allows configuring these secrets in two ways:
-
-- **Plaintext (not recommended)**: Set `global.identity.auth.<component>.clientSecret` in `values.yaml`
-- **Secure approach (recommended)**: Store secrets in **existing Kubernetes Secrets** and reference them using:
+### Structured (Recommended for internal secrets)
 
 ```yaml
 global:
-identity:
-  auth:
-    admin:
-      existingSecret:
-        name: "integration-test-credentials"
-      existingSecretKey: "identity-admin-client-password"
-    connectors:
-      existingSecret:
-        name: "integration-test-credentials"
-      existingSecretKey: "identity-connectors-client-password"
-    console:
-      existingSecret:
-        name: "integration-test-credentials"
-      existingSecretKey: "identity-console-client-password"
-    operate:
-      existingSecret:
-        name: "integration-test-credentials"
-      existingSecretKey: "identity-operate-client-password"
-    tasklist:
-      existingSecret:
-        name: "integration-test-credentials"
-      existingSecretKey: "identity-tasklist-client-password"
-    optimize:
-      existingSecret:
-        name: "integration-test-credentials"
-      existingSecretKey: "identity-optimize-client-password"
-    zeebe:
-      existingSecret:
-        name: "integration-test-credentials"
-      existingSecretKey: "identity-zeebe-client-password"
+  identity:
+    auth:
+      operate:
+        existingSecret:
+          name: camunda-platform-secrets
+        existingSecretKey: operate-secret
 ```
-
-Below is a breakdown of **which chart values control each OAuth client secret**, the **default key name** for each secret, and **how to configure them properly**.
-
-### OAuth Client Secrets Breakdown
-
-| **Component**  | **Chart Values**                                                                                      | **Default Key in K8s Secret** | **Purpose**                                               |
-| -------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------- | --------------------------------------------------------- |
-| **Operate**    | `global.identity.auth.operate.existingSecret`, `global.identity.auth.operate.existingSecretKey`       | `operate-secret`              | OAuth client secret for Operate to request tokens.        |
-| **Tasklist**   | `global.identity.auth.tasklist.existingSecret`, `global.identity.auth.tasklist.existingSecretKey`     | `tasklist-secret`             | OAuth client secret for Tasklist.                         |
-| **Optimize**   | `global.identity.auth.optimize.existingSecret`, `global.identity.auth.optimize.existingSecretKey`     | `optimize-secret`             | OAuth client secret for Optimize.                         |
-| **Connectors** | `global.identity.auth.connectors.existingSecret`, `global.identity.auth.connectors.existingSecretKey` | `connectors-secret`           | OAuth client secret for Connectors (when using Keycloak). |
-| **Console**    | `global.identity.auth.console.existingSecret`, `global.identity.auth.console.existingSecretKey`       | `console-secret`              | OAuth client secret for Camunda Platform Console.         |
-| **Zeebe**      | `global.identity.auth.zeebe.existingSecret`, `global.identity.auth.zeebe.existingSecretKey`           | `zeebe-secret`                | OAuth client secret for Zeebe’s internal system client.   |
-
-> **Best Practice:** Set these secrets explicitly to **avoid regeneration on upgrade**. If left unset, the Helm chart **randomly generates them**, which can break authentication if clients expect consistent secrets.
 
 ---
 
-## Example: Creating a **Single Secret** for All OAuth Client Secrets
+## Creating Kubernetes Secrets
 
-You can store **all OAuth client secrets** in **one Kubernetes Secret**, keeping them **centralized and easy to manage**.
+You can create secrets manually or using manifests. For more examples, see [Create Identity Secrets in the Camunda Docs](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets).
+
+Here's how to create one via `kubectl`:
+
+```sh
+kubectl create secret generic camunda-platform-secrets \
+  --from-literal=operate-secret=S3cure0p3rat3 \
+  --from-literal=tasklist-secret=S3cureT4sk \
+  --from-literal=optimize-secret=S3cure0pt1mz \
+  --from-literal=connectors-secret=S3cureC0nn3ct \
+  --from-literal=console-secret=S3cureC0nsole \
+  --from-literal=zebee-secret=S3cureZ33be \
+  --namespace camunda
+```
+
+Or using YAML:
 
 ```yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: identity-oauth-clients
+  name: camunda-platform-secrets
+  namespace: camunda
 type: Opaque
 stringData:
   operate-secret: "S3cure0p3rat3"
@@ -163,144 +160,197 @@ stringData:
   zeebe-secret: "S3cureZ33be"
 ```
 
-Then reference this secret in your `values.yaml`:
+Apply it with:
 
-```yaml
-global:
-  identity:
-    auth:
-      operate:
-        existingSecret:
-          name: identity-oauth-clients
-        existingSecretKey: operate-secret
-      tasklist:
-        existingSecret:
-          name: identity-oauth-clients
-        existingSecretKey: tasklist-secret
-      optimize:
-        existingSecret:
-          name: identity-oauth-clients
-        existingSecretKey: optimize-secret
-      connectors:
-        existingSecret:
-          name: identity-oauth-clients
-        existingSecretKey: connectors-secret
-      console:
-        existingSecret:
-          name: identity-oauth-clients
-        existingSecretKey: console-secret
-      zeebe:
-        existingSecret:
-          name: identity-oauth-clients
-        existingSecretKey: zeebe-secret
+```sh
+kubectl apply -f my-secret.yaml
 ```
 
 ---
 
-## Identity First User
+## Example: Centralized Secret for Multiple Credentials
 
-The **first user** in Keycloak is created by default as `demo/demo`. **This should always be overridden or disabled in production.**
+In CI/testing environments, it's common to use a single Kubernetes Secret for all credentials. Below is a snippet using `camunda-platform-secrets`:
 
-### Chart Configuration Options
+> ℹ️ **Note:** This example includes the most common internal secrets. If you're using SMTP, external databases, or connectors with basic auth, you’ll need to add additional secrets for those components, such as:
+>
+> - `webModeler.restapi.externalDatabase.existingSecret`
+> - `webModeler.restapi.mail.existingSecret`
+> - `connectors.inbound.auth.existingSecret`
+> - `global.license.existingSecret`
 
-| **Setting**                         | **Description**                            | **Default** |
-| ----------------------------------- | ------------------------------------------ | ----------- |
-| `identity.firstUser.username`       | Initial username for Keycloak.             | `demo`      |
-| `identity.firstUser.password`       | Initial password.                          | `demo`      |
-| `identity.firstUser.existingSecret` | Reference an existing Secret for password. | Not set     |
+```yaml
+global:
+  secrets:
+    autoGenerated: false
+    name: "camunda-platform-secrets"
+  identity:
+    auth:
+      admin:
+        existingSecret:
+          name: "camunda-platform-secrets"
+        existingSecretKey: "identity-admin-client-password"
+      connectors:
+        existingSecret:
+          name: "camunda-platform-secrets"
+        existingSecretKey: "identity-connectors-client-password"
+      console:
+        existingSecret:
+          name: "camunda-platform-secrets"
+        existingSecretKey: "identity-console-client-password"
+      operate:
+        existingSecret:
+          name: "camunda-platform-secrets"
+        existingSecretKey: "identity-operate-client-password"
+      tasklist:
+        existingSecret:
+          name: "camunda-platform-secrets"
+        existingSecretKey: "identity-tasklist-client-password"
+      optimize:
+        existingSecret:
+          name: "camunda-platform-secrets"
+        existingSecretKey: "identity-optimize-client-password"
+      zeebe:
+        existingSecret:
+          name: "camunda-platform-secrets"
+        existingSecretKey: "identity-zeebe-client-password"
+identity:
+  firstUser:
+    existingSecret: "camunda-platform-secrets"
+    existingSecretKey: "identity-user-password"
+identityPostgresql:
+  auth:
+    existingSecret: "camunda-platform-secrets"
+identityKeycloak:
+  auth:
+    existingSecret: "camunda-platform-secrets"
+    passwordSecretKey: "identity-keycloak-admin-password"
+  postgresql:
+    auth:
+      existingSecret: "camunda-platform-secrets"
+      secretKeys:
+        adminPasswordKey: "identity-keycloak-postgresql-admin-password"
+        userPasswordKey: "identity-keycloak-postgresql-user-password"
+# WebModeler Database.
+postgresql:
+  enabled: true
+  auth:
+    existingSecret: "camunda-platform-secrets"
+    secretKeys:
+      adminPasswordKey: "webmodeler-postgresql-admin-password"
+      userPasswordKey: "webmodeler-postgresql-user-password"
+```
 
-### Example: Setting the First User Securely
+---
 
-Instead of using `identity.firstUser.password`, create a **Kubernetes Secret**:
+## Disabling Auto-Generated Secrets
+
+> 🛠️ **Troubleshooting:** If a component fails to start after disabling auto-generated secrets, double-check:
+>
+> - The secret exists in the correct namespace
+> - The `existingSecretKey` is accurate and matches the Kubernetes secret
+> - `autoGenerated: false` is set and all required secrets are provided
+
+By default, the Camunda Helm chart auto-generates secrets like OAuth client passwords on first install. This ensures the platform can start without manual configuration but can lead to issues on upgrades if the secrets are regenerated.
+
+To disable auto-generation and use your own pre-created secrets, set:
+
+```yaml
+global:
+  secrets:
+    autoGenerated: false
+```
+
+This tells the chart to stop generating secrets and instead expect you to provide all necessary secrets via `existingSecret` references.
+
+---
+
+## PostgreSQL Secrets and Examples
+
+This section covers how to configure PostgreSQL secrets used by the Camunda subcharts: Identity, Keycloak, and Web Modeler.
+
+### Web Modeler PostgreSQL (Bitnami Subchart)
+
+> Web Modeler uses the Bitnami PostgreSQL subchart, which requires both an admin and user password. These must be referenced with `secretKeys` if you are managing secrets manually.
+
+```yaml
+postgresql:
+  enabled: true
+  auth:
+    existingSecret: "camunda-platform-secrets"
+    secretKeys:
+      adminPasswordKey: "webmodeler-postgresql-admin-password"
+      userPasswordKey: "webmodeler-postgresql-user-password"
+```
+
+### Identity PostgreSQL
+
+> The Identity service includes its own embedded PostgreSQL instance by default. Set `identityPostgresql.auth.existingSecret` to provide your own password and ensure consistent database access across upgrades.
+
+```yaml
+identityPostgresql:
+  enabled: true
+  auth:
+    existingSecret: "camunda-platform-secrets"
+```
+
+### Keycloak PostgreSQL
+
+> Keycloak uses a PostgreSQL instance for persistence, configured under `identityKeycloak.postgresql`. The chart also allows setting the Keycloak admin UI password under `identityKeycloak.auth`.
+
+```yaml
+identityKeycloak:
+  postgresql:
+    auth:
+      existingSecret: "camunda-platform-secrets"
+      secretKeys:
+        adminPasswordKey: "identity-keycloak-postgresql-admin-password"
+        userPasswordKey: "identity-keycloak-postgresql-user-password"
+  auth:
+    existingSecret: "camunda-platform-secrets"
+    passwordSecretKey: "identity-keycloak-admin-password"
+```
+
+---
+
+## TLS Secrets
+
+When exposing Camunda services via Ingress with TLS, you typically need a Kubernetes Secret containing your TLS certificate and private key. This is especially important when using tools like cert-manager or when securing public-facing services.
+
+### Chart Values
+
+Set your TLS secret like this:
+
+```yaml
+global:
+  ingress:
+    tls:
+      enabled: true
+      secretName: camunda-tls-secret
+```
+
+### TLS Secret Example
 
 ```yaml
 apiVersion: v1
 kind: Secret
 metadata:
-  name: identity-firstuser-secret
-type: Opaque
-stringData:
-  identity-firstuser-password: "S3cur3P@ssw0rd!"
+  name: camunda-tls-secret
+  namespace: camunda
+annotations:
+  cert-manager.io/issuer: "letsencrypt-prod"
+type: kubernetes.io/tls
+data:
+  tls.crt: <base64 encoded cert>
+  tls.key: <base64 encoded key>
 ```
 
-Then reference it in `values.yaml`:
-
-```yaml
-identity:
-  firstUser:
-    existingSecret: identity-firstuser-secret
-    existingSecretKey: identity-firstuser-password
-```
+Make sure to configure the secret name in your `values.yaml` under `global.ingress.tls.secretName`.
 
 ---
 
-## Best Practices for Managing Identity Secrets
+## 🔗 Additional References
 
-1. **Use `existingSecret` whenever possible**
-
-   - Keeps OAuth secrets **out of Helm values files and Git repositories**.
-
-2. **Override defaults**
-
-   - Do **not** use the default `demo/demo` user in production.
-   - Explicitly set **OAuth client secrets** to prevent accidental regeneration.
-
-3. **Persist secrets across upgrades**
-
-   - If secrets are randomly generated on first install, **extract them** and set them explicitly before upgrading.
-   - Use:
-     ```sh
-     kubectl get secret <secret-name> -o yaml
-     ```
-     to retrieve existing secrets and avoid mismatch issues.
-
-4. **Encrypt or externalize secrets**
-
-   - Use [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets), [Vault](https://www.vaultproject.io/), or a similar **secret management tool**.
-
-5. **Ensure secret keys match exactly**
-   - The **Kubernetes Secret key names must match** what the chart expects (`operate-secret`, `tasklist-secret`, etc.).
-   - If using a different key name, set:
-     ```yaml
-     global:
-       identity:
-         auth:
-           operate:
-             existingSecretKey: my-custom-key
-     ```
-
-### Connectors Inbound Auth
-
-If you configure inbound connectors to **use basic authentication** to connect to Operate (instead of SSO with Keycloak), you must provide the Operate user’s password. The chart can reference an existing secret containing that password in `connectors.inbound.auth.existingSecret`.
-
-### Web Modeler Secrets (Database & SMTP)
-
-- **Database Password**  
-  By default, Web Modeler uses its own deployed Postgres sub-chart with a random password. If you disable that (`webModeler.postgresql.enabled=false`) and switch to an external database, you must supply the credentials. Use `webModeler.restapi.externalDatabase.existingSecret` to keep the password out of plain text.
-
-- **SMTP Password**  
-  For email notifications (invites, password resets, etc.), configure your SMTP server’s username and password. Use `webModeler.restapi.mail.existingSecret` to reference a secret containing the `smtp-password` key.
-
-### Enterprise License Key
-
-Camunda Enterprise requires a valid license. You can either:
-
-- Embed the license string directly in `global.license.key`.
-- (Recommended) Create a secret with the license text in a `key` field and set `global.license.existingSecret` to that secret name.
-
-### Best Practices for Managing Secrets with Helm
-
-1. **Use `existingSecret` whenever possible**  
-   This keeps passwords/keys out of your Helm values file and Git history.
-
-2. **Override defaults**  
-   Do not rely on automatically generated credentials or `demo/demo` in production.
-
-3. **Persist across upgrades**  
-   If you do use auto-generated secrets on install, extract them (e.g., via `kubectl get secret ... -o yaml`) and reapply them via `existingSecret` before an upgrade. Otherwise, a mismatch can break authentication.
-
-4. **Encrypt or externalize secrets**  
-   Consider using [Helm Secrets](https://github.com/jkroepke/helm-secrets) or other solutions like [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets), or external secrets managers (e.g., Vault).
-
-5. **Ensure secret key names match**  
-   Typos or mismatches will cause failures. Double-check them.
+- 📘 [Camunda Docs – Create Identity Secrets](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets)
+- 📘 [Camunda Docs – Configure License Key](https://docs.camunda.io/docs/self-managed/setup/install/#configure-license-key)
+- 📘 [Camunda Helm Chart – identity.auth.existingSecrets (8.6)](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-8.6#identity-auth-existing-secrets)
