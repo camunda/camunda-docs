@@ -123,9 +123,7 @@ Do not store sensitive information (credentials) in your Terraform files.
 
 This file is using [Terraform modules](https://developer.hashicorp.com/terraform/language/modules), which allows abstracting resources into reusable components.
 
-The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module/tree/2.5.0/modules/eks-cluster) is publicly available. It's advisable to review this module before usage.
-
-There are various other input options to customize the cluster setup further. See the [module documentation](https://github.com/camunda/camunda-tf-eks-module/tree/2.5.0/modules/eks-cluster) for additional details.
+The Terraform modules of [AWS EKS](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/eks-cluster) are an example implementation and can be used for development purposes or as a starting reference.
 
 This contains the declaration of the two clusters. One of them has an explicit provider declaration, as otherwise everything is deployed to the default AWS provider, which is limited to a single region.
 
@@ -135,7 +133,7 @@ For a multi-region setup, you need to have the [virtual private cloud (VPC)](htt
 
 VPC peering is preferred over [transit gateways](https://aws.amazon.com/transit-gateway/). VPC peering has no bandwidth limit and a lower latency than a transit gateway. For a complete comparison, review the [AWS documentation](https://docs.aws.amazon.com/whitepapers/latest/building-scalable-secure-multi-vpc-network-infrastructure/transit-vpc-solution.html#peering-vs).
 
-The previously mentioned [Camunda module](https://github.com/camunda/camunda-tf-eks-module) will automatically create a VPC per cluster.
+The previously mentioned [Camunda module](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/eks-cluster) will automatically create a VPC per cluster.
 
 This file covers the VPC peering between the two VPCs and allow any traffic between those two by adjusting each cluster's security groups.
 
