@@ -42,6 +42,60 @@ Use intelligent document processing (IDP) to integrate automated document proces
 
 To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
 
+### Task appending framework <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
+
+Create and append tasks with resources available in the current project and process application. Find the available processes, decisions, and forms in the append menu to directly create a task linked to the resource.
+
+<!-- https://github.com/camunda/product-hub/issues/2608 -->
+
+### End-to-end organization process landscape <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Modeler</span>
+
+Automation leaders can visualize all automation projects through a single, hierarchical source of truth of approved processes. Now, users can more easily communicate their automation efforts and maximize asset reuse.
+
+<!-- https://github.com/camunda/product-hub/issues/2611 -->
+
+### Production-ready RPA
+
+With the RPA 1.0 release, our [RPA solution becomes production-ready](/components/rpa/overview.md), empowering customers to deploy robust, scalable, and maintainable automation workflows seamlessly. We also now have [library documentation on Github](https://camunda.github.io/rpa-python-libraries/).
+
+<!-- https://github.com/camunda/product-hub/issues/2533 -->
+
+### Connector Manage + Run (SaaS)
+
+We have provided a consolidated view of all webhooks, message queue subscriptions, and polling subscriptions for efficient monitoring and management. We have also implemented real-time alerts to notify operators when Connectors are not running, preventing unnoticed downtimes.
+
+<!-- https://github.com/camunda/product-hub/issues/2647 https://github.com/camunda/product-hub/issues/1063 -->
+
+### Document handling
+
+We have extended Camunda's document handling capabilities by introducing robust integrations and support for AWS S3, local file systems, and document operations within Zeebe. This version enhances document management by providing additional support for secure storage, retrieval, and integration with Connectors, improving the efficiency and scalability of document-dependent workflows.
+
+<!-- https://github.com/camunda/product-hub/issues/2555 -->
+
+### Process application versioning, README, and review
+
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, versioned, and readable for everyone, and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally reviewed and approved.
+
+<!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
+
+### Process applications in Desktop Modeler
+
+We have enabled developers to manage and work with multi-file BPMN projects directly within Desktop Modeler. This feature brings familiar IDE-like project management capabilities to Modeler, aligning with Web Modeler concepts, projects, and process applications.
+
+<!--- https://github.com/camunda/product-hub/issues/2458 --->
+
+### Bulk publish to shared resources
+
+Develop reusable assets in a pro-code environment, push them to your version control system, then publish them to your Web Modeler environment so anyone in your organization can reuse them with newly modified endpoints.
+
+<!--- https://github.com/camunda/product-hub/issues/2635 --->
+
+### Convert AWS EKS guides to Reference architecture format
+
+We would like to announce the release of the Reference Architecture for AWS EKS package. This package provides a standardized Reference Architecture with Implementation Requirements, Terraform templates, Helm configurations, deployment pipelines, and operational procedures.
+
+<!--- https://github.com/camunda/product-hub/issues/2522 --->
+
 ## 8.7.0-alpha5
 
 | Release date  | Changelog(s)                                                                                                                                                                               | Blog                                                                               |
