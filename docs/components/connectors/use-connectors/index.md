@@ -101,7 +101,7 @@ If you set `{ "bodyReceived": body }` inside the `Result Expression` field of th
 
 ```json
 {
-  "bodyReceived":"<h1>Hello, World!</h1>"
+  "bodyReceived": "<h1>Hello, World!</h1>"
 }
 ```
 
