@@ -5,6 +5,8 @@ description: "Get started with document handling by uploading a document via a f
 keywords: ["document handling"]
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 Offering a robust document handling capabilities within Camunda, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
 In this guide we will cover 3 main use cases:
@@ -159,3 +161,13 @@ In most cases for the following outbound Connectors, you can include a **Request
 | [REST](/components/connectors/protocol/rest.md)                                         | Supports storing the response as a document.                                                                                                                                                                                   |
 | [SendGrid](/components/connectors/out-of-the-box-connectors/sendgrid.md)                | Provides attachment support.                                                                                                                                                                                                   |
 | [Slack](/components/connectors/out-of-the-box-connectors/slack.md)                      | Supports adding attachments and increasing template versions.                                                                                                                                                                  |
+
+## Automate documents with intelligent document processing
+
+Document handling can be integrated with intelligent document processing (IDP).
+This allows you to extract specific data from a high volume of documents using an IDP application, and use the extracted data throughout your BPMN process.
+
+Learn more about it in the IDP documentation:
+
+<DocCardList items={[{type:"link", href:"/docs/next/components/modeler/web-modeler/idp/idp-example/", label: "IDP integration", docId:"components/modeler/web-modeler/idp/idp-example"}
+]}/>

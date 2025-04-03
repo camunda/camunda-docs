@@ -1,22 +1,24 @@
 ---
 id: document-handling-configuration
-title: "Configuration"
-description: "Learn more about storage configuration options like Google Scloud Platform, AWS S3, local folders, and in-memory."
+title: "Configuration and storage"
+description: "Learn more about storage configuration options like Google Cloud Platform, AWS S3, local folders, and in-memory."
 keywords: ["document handling"]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-There are several storage options:
+![document handling storage options](../img/document-handling-config.png)
 
-- A [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage integration is configured for SaaS and handled by Camunda.
-- Use [**AWS S3**](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution for Self-Managed, and to ensure storage is properly isolated and managed for each environment.
-- Documents can be stored in **local folders**, but this is not supported for production environments.
-- Documents can be stored **in memory**. If the application is stopped, the document will be lost. This is not supported for production environments.
+As shown in the screenshot above, there are several storage options:
+
+- A [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage integration can be used in Self-Managed configurations with Camunda 8 Run and Helm.
+- Use [**AWS S3**](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution for Self-Managed, and to ensure storage is properly isolated and managed for each environment. This can be used with Camunda 8 Run and Helm.
+- Documents can be stored in **local folders**. This can be used only for Camunda 8 run, and is not supported for production environments.
+- Documents can be stored **in-memory**. If the application is stopped, the document will be lost. This can be used with both Camunda 8 Run and Helm, but is not supported for production environments.
 
 :::note
-GCP and AWS work with SaaS, and are supported for Self-Managed in production. Camunda does not provide local or in-memory for SaaS, but Self-Managed users may configure in-memory and local storage using [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+GCP and AWS are supported for Self-Managed in production. Self-Managed users may configure in-memory and local storage using [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
 :::
 
 :::note
@@ -160,7 +162,6 @@ DOCUMENT_DEFAULT_STORE_ID=inmemory
 
 ## Limitations
 
-- One bucket per cluster is permitted with SaaS.
 - This storage integration is handled and configured by Camunda. While this is not dynamically configurable by the cluster, it is provided as environment configuration.
 - **Maximum upload size for one or multiple files**: 10 MB
 - **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.

@@ -24,6 +24,10 @@ Document handling may be beneficial for several use cases. For example:
 
 Step through all of these capabilities in our [document handling guide](/guides/document-handling.md). Below, take a closer look at all supported outbound Connectors.
 
+:::note
+Document handling can also be used with intelligent document processing (IDP). For example, a published document extraction template can be used to extract data from a document uploaded via Tasklist. Learn more in the [IDP documentation](/components/modeler/web-modeler/idp/idp-example.md).
+:::
+
 ## Supported outbound Connectors
 
 | Connector                                                                               | Document handling support                                                                                                                                                                                                      |
