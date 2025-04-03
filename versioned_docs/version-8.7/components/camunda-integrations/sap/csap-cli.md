@@ -1,5 +1,5 @@
 ---
 id: csap-cli
-title: csap setup command line utility
-description: "Learn about csap, a cli to configure all SAP integration artifacts for deployment"
+title: CSAP setup command line utility
+description: "Learn about CSAP, a CLI to configure all SAP integration artifacts for deployment."
 ---
