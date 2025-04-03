@@ -76,9 +76,9 @@ If you set `result` inside the `Result variable` field of the Rest Outbound Conn
       "server": "nginx",
       "content-type": "text/html; charset=UTF-8"
     },
-    "body":"<h1>Hello, World!</h1>",
-    "reason":"OK",
-    "document":null
+    "body": "<h1>Hello, World!</h1>",
+    "reason": "OK",
+    "document": null
   }
 }
 ```
