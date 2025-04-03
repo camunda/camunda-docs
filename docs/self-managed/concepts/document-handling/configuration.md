@@ -31,8 +31,8 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 [
 {label: 'AWS', value: 'aws' },
 {label: 'GCP', value: 'gcp' },
-{label: 'Local', value: 'local' },
 {label: 'In-memory', value: 'in-memory' },
+{label: 'Local', value: 'local' },
 ]}>
 
 <TabItem value='aws'>
@@ -40,15 +40,15 @@ To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_
 | Credentials variable    | Required | Description                                                                                           |
 | ----------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
 | `AWS_ACCESS_KEY_ID`     | Yes      | Access key ID used to interact with AWS S3 buckets.                                                   |
-| `AWS_REGION`            | Yes      | Region where the bucket is.                                                                           |
 | `AWS_SECRET_ACCESS_KEY` | Yes      | The AWS secret access key associated with the `AWS_ACCESS_KEY_ID`. This will be used to authenticate. |
+| `AWS_REGION`            | Yes      | Region where the bucket is.                                                                           |
 
 | Store variable                   | Required | Description                                                                                                                                                                                                                                               |
 | -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DOCUMENT_STORE_AWS_BUCKET`      | Yes      | Specifies the name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                       |
+| `DOCUMENT_STORE_AWS_CLASS`       | Yes      | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                                                                                    |
 | `DOCUMENT_STORE_AWS_BUCKET_PATH` | No       | Defines the folder-like path within the S3 bucket where documents are stored. This helps organize files within the bucket. For example, `documents/invoices`. If not provided, the application logic assumes a default value of `""`.                     |
 | `DOCUMENT_STORE_AWS_BUCKET_TTL`  | No       | Represents the time-to-live (TTL) for documents stored in the S3 bucket. This could be used to set an expiration policy, meaning documents will be deleted automatically after a specified duration. If not provided, the application logic ignores this. |
-| `DOCUMENT_STORE_AWS_CLASS`       | Yes      | io.camunda.document.store.aws.AwsDocumentStoreProvider                                                                                                                                                                                                    |
 
 **Example:**
 
@@ -69,10 +69,10 @@ To ensure seamless integration and functionality of document handling with AWS s
 
 | Permission        | Description                                                                                                                                                                                                                     |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `s3:ListBucket`   | This permission allows the application to verify it has access to the specified S3 bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up.               |
-| `s3:GetObject`    | This permission is required to retrieve contents and metadata of objects from Amazon S3. The API client will utilize this permission to download or access the contents of the documents that have been uploaded to the bucket. |
-| `s3:PutObject`    | To upload documents to an Amazon S3 bucket, the API client must have this permission.                                                                                                                                           |
 | `s3:DeleteObject` | This permission authorizes the API client to remove objects from the specified S3 bucket.                                                                                                                                       |
+| `s3:GetObject`    | This permission is required to retrieve contents and metadata of objects from Amazon S3. The API client will utilize this permission to download or access the contents of the documents that have been uploaded to the bucket. |
+| `s3:ListBucket`   | This permission allows the application to verify it has access to the specified S3 bucket. Lack of this permission does not prevent the application from starting, but it logs a warning on application start-up.               |
+| `s3:PutObject`    | To upload documents to an Amazon S3 bucket, the API client must have this permission.                                                                                                                                           |
 
 </TabItem>
 
@@ -111,27 +111,6 @@ To ensure seamless integration and functionality of document handling with GCP s
 
 </TabItem>
 
-<TabItem value='local'>
-
-:::note
-Local storage is not usable in production, and is not supported for Self-Managed installations via Helm charts.
-:::
-
-| Store variable               | Required | Description                                                                                                                                 |
-| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DOCUMENT_STORE_LOCAL_PATH`  | Yes      | The path to the directory which will host the uploaded files.                                                                               |
-| `DOCUMENT_STORE_LOCAL_CLASS` | Yes      | The class for instantiating the local store. This must always be `io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider` |
-
-**Example:**
-
-```
-DOCUMENT_STORE_LOCAL_CLASS=io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider
-DOCUMENT_STORE_LOCAL_PATH=/usr/local/camunda
-DOCUMENT_DEFAULT_STORE_ID=local
-```
-
-</TabItem>
-
 <TabItem value='in-memory'>
 
 :::note
@@ -154,6 +133,27 @@ To use the in-memory store when an alternate configuration has been provided, ta
 ```
 DOCUMENT_STORE_INMEMORY_CLASS=io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider
 DOCUMENT_DEFAULT_STORE_ID=inmemory
+```
+
+</TabItem>
+
+<TabItem value='local'>
+
+:::note
+Local storage is not usable in production, and is not supported for Self-Managed installations via Helm charts.
+:::
+
+| Store variable               | Required | Description                                                                                                                                 |
+| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DOCUMENT_STORE_LOCAL_CLASS` | Yes      | The class for instantiating the local store. This must always be `io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider` |
+| `DOCUMENT_STORE_LOCAL_PATH`  | Yes      | The path to the directory which will host the uploaded files.                                                                               |
+
+**Example:**
+
+```
+DOCUMENT_STORE_LOCAL_CLASS=io.camunda.document.store.localstorage.LocalStorageDocumentStoreProvider
+DOCUMENT_STORE_LOCAL_PATH=/usr/local/camunda
+DOCUMENT_DEFAULT_STORE_ID=local
 ```
 
 </TabItem>

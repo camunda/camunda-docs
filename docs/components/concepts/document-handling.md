@@ -28,7 +28,9 @@ A [**Google Cloud Platform**](https://cloud.google.com/storage) and [**AWS S3**]
 
 ## Use cases and capabilities
 
-Document handling can be beneficial for different process use cases. Step through all of its capabilities in this guide:
+Document handling can be beneficial for different process use cases, such as uploading a document to a BPMN process, displaying and downloading a document, sending a document to an external system via a Connector, and automating documents with [intelligent document processing](/components/modeler/web-modeler/idp/).
+
+Step through all of these capabilities in the guide below:
 
 <DocCardList items={[{type:"link", href:"/docs/next/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
 ]}/>

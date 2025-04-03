@@ -1,23 +1,33 @@
 ---
 id: document-handling
 title: "Store, track, and manage documents"
-description: "Get started with document handling by uploading a document via a form or an inbound webhook Connector, displaying and downloading a document in a user task, and sending a document to an external system via an outbound Connector."
+description: "Get started with document handling by uploading a document to a BPMN process, displaying and downloading a document in a user task, and sending a document to an external system via a Connector."
 keywords: ["document handling"]
 ---
 
 import DocCardList from '@theme/DocCardList';
 
-Offering a robust document handling capabilities within Camunda, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+Offering robust [document handling](/components/concepts/document-handling.md) capabilities within Camunda, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
-In this guide we will cover 3 main use cases:
+In this guide we will cover three main use cases:
 
-- [Upload a document for a BPMN process](#upload-a-document);
+- [Upload a document to a BPMN process](#upload-a-document-to-a-bomn-process);
 - [Display and download a document](#display-and-download-a-document);
 - [Send a document to an external system via a Connector](#send-a-document-to-an-external-system-via-a-connector).
 
-## Upload a document for a BPMN process
+## Storage configuration
 
-You can enable document uploads for your BPMN processes using [forms](#document-upload-via-a-form) and [inbound connectors](#document-upload-via-inbound-webhook-connector).
+### SaaS
+
+A [**Google Cloud Platform**](https://cloud.google.com/storage) and [**AWS S3**](https://aws.amazon.com/s3/) bucket storage integration is configured for SaaS and handled by Camunda.
+
+### Self-Managed
+
+There are several storage and configuration methods for Self-Managed environments. Visit the [Self-Managed documentation](/self-managed/concepts/document-handling/overview.md) for more details.
+
+## Upload a document to a BPMN process
+
+You can enable document uploads for your BPMN processes using [forms](#document-upload-via-a-form) and [inbound Connectors](#document-upload-via-inbound-webhook-connector).
 
 ### Build a form for document upload
 
@@ -32,7 +42,7 @@ Documents uploaded with the form can then be [referenced](#get-reference-to-an-u
 
 #### Upload a document from a user task in Tasklist
 
-When the process is deployed and running, users can access and complete user tasks that include a form with the Filepicker component in [Tasklist](../components/tasklist/introduction-to-tasklist.md).
+When the process is deployed and running, users can access and complete user tasks that include a form with the Filepicker component in [Tasklist](../components/tasklist/introduction-to-tasklist.md):
 
 ![document handling in tasklist](./img/task-with-file-picker-tasklist.png)
 
@@ -41,6 +51,7 @@ When the process is deployed and running, users can access and complete user tas
 You can configure a form with the Filepicker for a start event of a BPMN process to allow users to upload documents when initiating the process. This is supported in [Tasklist](../components/tasklist/introduction-to-tasklist.md) and is available to logged-in users.
 
 :::note
+
 Only logged-in users can upload files.
 [Publicly accessible processes](../components/modeler/web-modeler/advanced-modeling/publish-public-processes.md) with a start form do not support file upload using the Filepicker.
 
@@ -51,13 +62,13 @@ Only logged-in users can upload files.
 Uploaded documents can be referenced later in the process.
 
 Filepicker's output variable is an array of objects with document metadata.
-It always returns an array of objects, either a user uploads a single or multiple documents.
+It always returns an array of objects. A user either uploads a single document or multiple documents.
 
 Single document uploads are accessible using `value[1]` (since [FEEL](../components/modeler/feel/what-is-feel.md) uses 1-based indexing).
 
 ### Document upload via inbound Webhook connector
 
-Documents can be added to a process using the [inbound](../components//connectors/connector-types.md#inbound-connectors) [HTTP Webhook Connector](/components/connectors/protocol/http-webhook.md).
+Documents can be added to a process using the [inbound](../components//connectors/connector-types.md#inbound-connectors) [HTTP webhook Connector](/components/connectors/protocol/http-webhook.md).
 
 You can pass the documents in both the response expression and the result expression, where the `documents` object contains the references for created documents. Below, review an example of a webhook configuration:
 
@@ -120,12 +131,12 @@ Here, we use the configuration of the image on the initial steps and assign the 
 
 ### Build a form for document preview and downloading
 
-To display and allow downloading of a document you can use the [Document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) in [forms](/components/modeler/forms/camunda-forms-reference.md).
+To display and allow downloading of a document you can use the [document preview component](/components/modeler/forms/form-element-library/forms-element-library-document-preview.md) in [forms](/components/modeler/forms/camunda-forms-reference.md).
 
-The Document preview component offers preview of PDF documents and images.
+The document preview component offers preview of PDF documents and images.
 Other document types are listed without the preview and show the file name with the option to download the file.
 
-In the component's configuration you need to provide a document reference as an array of document metadata.
+In the component's configuration, provide a document reference as an array of document metadata.
 
 ![document preview for form](./img/document-preview-in-form.png)
 
@@ -167,7 +178,7 @@ In most cases for the following outbound Connectors, you can include a **Request
 Document handling can be integrated with intelligent document processing (IDP).
 This allows you to extract specific data from a high volume of documents using an IDP application, and use the extracted data throughout your BPMN process.
 
-Learn more about it in the IDP documentation:
+Learn more about this in the IDP documentation:
 
 <DocCardList items={[{type:"link", href:"/docs/next/components/modeler/web-modeler/idp/idp-example/", label: "IDP integration", docId:"components/modeler/web-modeler/idp/idp-example"}
 ]}/>

@@ -5,9 +5,11 @@ description: "Learn more about integration, secure management, and efficient sto
 keywords: ["document handling"]
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 Store, track, and manage documents in Camunda 8 using the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx), Connectors, Forms, and Tasklist.
 
-Offering more robust document handling capabilities within Camunda Self-Managed, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+Offering more robust document handling capabilities within Camunda SaaS, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
 
 ## Storage integration and configuration
 
@@ -15,18 +17,12 @@ Review all storage integration and configuration options in the [configuration d
 
 ## Use cases and capabilities
 
-Document handling may be beneficial for several use cases. For example:
+Document handling can be beneficial for different process use cases, such as uploading a document to a BPMN process, displaying and downloading a document, sending a document to an external system via a Connector, and automating documents with [intelligent document processing](/components/modeler/web-modeler/idp/).
 
-- **Upload a document via the inbound webhook Connector**, and later retrieve the document content in another Connector invocation to store it in a third-party system.
-- **Upload a document via a form**, including start forms and user task forms.
-- **Reference a document in an outbound Connector**, such as Amazon Bedrock, REST, Slack, and more.
-- **Display a document in a user task**
+Step through all of these capabilities in the guide below:
 
-Step through all of these capabilities in our [document handling guide](/guides/document-handling.md). Below, take a closer look at all supported outbound Connectors.
-
-:::note
-Document handling can also be used with intelligent document processing (IDP). For example, a published document extraction template can be used to extract data from a document uploaded via Tasklist. Learn more in the [IDP documentation](/components/modeler/web-modeler/idp/idp-example.md).
-:::
+<DocCardList items={[{type:"link", href:"/docs/next/guides/document-handling/", label: "Store, track and manage documents", docId:"guides/document-handling"}
+]}/>
 
 ## Supported outbound Connectors
 
