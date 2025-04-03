@@ -36,6 +36,6 @@ You can perform the following actions on a process application version:
 3. Deploy, especially after the version has been [reviewed](/components/modeler/web-modeler/process-application-pipeline.md#review).
 4. Download
 5. Delete
-6. Copy
+6. Copy, creates a new process application with the files from the version.
 
 ![Version actions](img/versions/web-modeler-version-actions.png)
