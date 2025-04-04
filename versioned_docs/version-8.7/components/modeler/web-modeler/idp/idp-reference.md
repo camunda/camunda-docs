@@ -35,7 +35,6 @@ The document extraction template integrates with Camunda document handling conne
 :::note
 
 - You may encounter errors during extraction and validation if you have not added your Amazon AWS IAM account `access key` and `secret key` as a [connector secret](/components/console/manage-clusters/manage-secrets.md) to your cluster. See [configuring IDP](idp-configuration.md).
-- Learn more about [Camunda document handling](/components/concepts/document-handling.md).
 
 :::
 
@@ -48,6 +47,10 @@ IDP stores documents as follows during the different extraction stages:
 1. Web Modeler: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Web Modeler itself (SaaS) or the database (Self-Managed).
 1. Cluster: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is stored in the cluster using the [document handling](/components/concepts/document-handling.md) API.
 1. Extraction: Finally, when you extract content using a document extraction template, it is stored in an [Amazon AWS S3 bucket](idp-configuration.md#prerequisites), where it can be accessed by AWS Textract.
+
+:::info
+To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/concepts/document-handling.md).
+:::
 
 ## Document file formats {#file-formats}
 
@@ -63,8 +66,8 @@ IDP supports data extraction and processing of documents in multiple languages.
 
 IDP integrates with [Amazon Textract](/components/connectors/out-of-the-box-connectors/amazon-textract.md), which supports multilingual text extraction and is capable of detecting and extracting text in multiple languages. This ensures that the extracted text can be accurately mapped to process variables and used within your workflows, regardless of document language.
 
-:::info
-For example, as of February 2025, Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for currently supported languages.
+:::note
+At the time of the 8.7 release (April 2025), Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for current information on supported languages.
 :::
 
 ## Extraction field data types {#data-types}

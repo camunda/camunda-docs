@@ -118,9 +118,9 @@ export DOMAIN_NAME=camunda.example.com
 # The email address for Let's Encrypt registration
 export MAIL=admin@camunda.example.com
 # Helm chart versions for Ingress components
-export INGRESS_HELM_CHART_VERSION="4.11.2"
-export EXTERNAL_DNS_HELM_CHART_VERSION="1.15.0"
-export CERT_MANAGER_HELM_CHART_VERSION="1.15.3"
+export INGRESS_HELM_CHART_VERSION="4.12.1"
+export EXTERNAL_DNS_HELM_CHART_VERSION="1.16.0"
+export CERT_MANAGER_HELM_CHART_VERSION="1.17.1"
 ```
 
 Additionally, obtain these values by following the guide for either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md), as they will be needed in later steps:
@@ -728,4 +728,4 @@ To get more familiar with our product stack, visit the following topics:
 
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Optimize]($optimize$/components/what-is-optimize)
+- [Optimize](/components/optimize/what-is-optimize.md)
