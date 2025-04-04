@@ -16,7 +16,7 @@ Optimize offers business intelligence tooling for Camunda customers. By leveragi
 
 With Optimize, review heatmap displays for instances which took longer than average to discover long-running flow nodes. As a result, reap actionable insights and rapidly identify the constraints of your system.
 
-For an in-depth overview of Optimize’s capabilities, visit our [Optimize documentation]($optimize$/components/what-is-optimize).
+For an in-depth overview of Optimize’s capabilities, visit our [Optimize documentation](/components/optimize/what-is-optimize.md).
 
 ## Set up
 
@@ -93,9 +93,9 @@ Within your collection, you can also access the **Users** and **Data Sources** t
 
 ### Users
 
-Within the **Users** tab, review the users and user groups with access to your collection.
+Within the **Users** tab, review the users with access to your collection.
 
-Select **Add** to search for a user or user group to add, of which may be assigned as a viewer, editor, or manager.
+Select **Add** to search for a user to add, who can be assigned as a viewer, editor, or manager.
 
 ### Data sources
 

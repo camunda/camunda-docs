@@ -7,7 +7,7 @@ description: Work with versions in Web Modeler.
 <span class="badge badge--cloud">Camunda 8 only</span>
 
 :::note
-With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related announcement](/reference/announcements/870.md#web-modeler-milestones-renamed-to-versions).
+With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related release note](/reference/announcements-release-notes/870/870-release-notes.md#web-modeler-milestones-renamed-to-versions).
 :::
 
 You can create a version at any time to save a snapshot of your BPMN or DMN diagram.
@@ -18,23 +18,17 @@ You can restore a version to revert to a previous snapshot of your diagram, for 
 
 You can use the versions list to view, compare, and manage your diagram versions.
 
-To view the versions list, either:
+To view the versions list, select **Versions > Show versions**.
 
-- Select **Show versions** from the action menu.
-
-  ![Versions list showing the show versions button](img/versions/web-modeler-version-action-menu-item-highlight.png)
-
-- Select **Show versions** from the breadcrumb menu.
-
-  ![Versions list showing the show versions breadcrumb menu option](img/versions/web-modeler-version-show-via-breadcrumb-highlight.png)
+![Versions list showing the show versions button](img/versions/web-modeler-version-action-show-versions.png)
 
 ## Create a version
 
 You can create a new version either from your diagram or the versions list.
 
-- From your diagram, select **Create version** from the breadcrumb menu.
+- From your diagram, select **Versions > Create version**.
 
-  ![versions create via the breadcrumb menu](img/versions/web-modeler-version-create-via-breadcrumb-highlight.png)
+  ![versions create via the breadcrumb menu](img/versions/web-modeler-version-create-via-versions-menu.png)
 
 - From the versions list, hover over the draft in the **Versions** panel and select **Create a new version**.
 
@@ -44,17 +38,6 @@ You can create a new version either from your diagram or the versions list.
 
 A new version is also automatically created when dragging and dropping a file into the diagram view, or when you select the **Replace via upload** option from the breadcrumb menu.
 
-:::
-
-### Bulk version creation
-
-A [process application](/components/modeler/web-modeler/process-applications.md) is a special type of Web Modeler folder that allows you to work on a set of related files and
-[deploy](/components/modeler/web-modeler/process-applications.md#deploy-and-run-a-process-application) them as a single bundle with just one click. This reduces the risk of having a broken deployment at runtime, and makes it more convenient to deploy related files.
-
-If you create a version on the main process of a process application, versions are created for all other assets in the application, to make it easier to track or revert changes. See [create a bulk version](process-applications.md#create-a-bulk-version).
-
-:::note
-Versions of resources belonging to a process application are tied to the main process and cannot be modified.
 :::
 
 ## Compare versions
@@ -115,7 +98,7 @@ The diagram reverts to the restored version. A new version is created with "(res
 You can create a new diagram by copying a specific version.
 
 1. In the sidebar **Versions** list, hover over the diagram version you want to copy.
-1. Select the three vertical dots to open the actions menu.
+1. Select the three to open the actions menu.
 1. Select **Copy to...**.
 1. Choose a project/folder and select **Copy here** to create the new diagram in the chosen folder.
 

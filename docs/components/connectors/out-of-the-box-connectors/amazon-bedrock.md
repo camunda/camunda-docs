@@ -113,6 +113,7 @@ Ensure the model is available in your region, that your model can invoke the `Co
 - `New Message` is either the first message (to start a conversation) or is the next message from an already started conversation.
 - `Documents` is a list of documents to include as part of your **new message**.
   - To work with documents you must upload them first, [using the REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
+  - See [Amazon Bedrock supported document formats](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html) for currently supported file formats.
   - The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the list of these variables in the **Documents** field.
 - `Message History` is the history of the conversation that should always be passed. If not set, this will be a new conversation.
 
@@ -128,5 +129,5 @@ The current implementation supports the assistant's responses only in text forma
 Ideally, the message's history must transit within the process and be the input of this `Converse` task with the new message.
 
 :::note
-Starting from version 8.7.0, the Amazon Bedrock Connector supports consuming documents as inputs for conversations. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+Starting from version 8.7.0, the Amazon Bedrock Connector supports consuming documents as inputs for conversations. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/concepts/document-handling.md).
 :::

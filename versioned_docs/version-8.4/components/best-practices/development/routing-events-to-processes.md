@@ -485,9 +485,9 @@ Use some simple code on the sending side to route the message to a new process i
 
 ```java
 @JobWorker(type="routeInput")
-public void routeInput(@ZeebeVariable String invoiceId) {
+public void routeInput(@Variable String invoiceId) {
   Map<String, Object> variables = new HashMap<String, Object>();
-  variables.put("invoiceId", execution.getVariable("invoiceId"));
+  variables.put("invoiceId", invoiceId);
   zeebeClient.newCreateInstanceCommand()
     .bpmnProcessId("invoice").latestVersion()
 	.variables(variables)
@@ -502,15 +502,16 @@ Use some simple code on the sending side to correlate the message to a running p
 
 ```java
 @JobWorker(type="notifyOrder")
-public void notifyOrder(@ZeebeVariable String orderId, @ZeebeVariable String paymentInformation) {
+public void notifyOrder(@Variable String orderId, @Variable String paymentInformation) {
   Map<String, Object> variables = new HashMap<String, Object>();
   variables.put("paymentInformation", paymentInformation);
 
-  execution.getProcessEngineServices().getRuntimeService()
-    .createMessageCorrelation("MsgPaymentReceived")
-    .processInstanceVariableEquals("orderId", orderId)
-    .setVariables(variables)
-    .correlate();
+  zeebeClient.newPublishMessageCommand()
+    .messageName("MsgPaymentReceived")
+    .corrlationKey(orderId)
+    .variables(variables)
+    .send()
+    .exceptionally( throwable -> { throw new RuntimeException("Could not publish message", throwable); });
 }
 ```
 

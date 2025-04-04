@@ -38,10 +38,6 @@ Official clients have been developed and tested by Camunda. They also add conven
 <DocCardList items={[{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"}
 ]}/>
 
-:::note
-Other components in Camunda 8, such as [Tasklist API (GraphQL)](../apis-tools/tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
-:::
-
 ## Learn about Camunda Components and their APIs
 
 :::note
@@ -59,7 +55,7 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 type:"link", href:"/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/", label: "Camunda 8 API (REST)", docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 },
 {
-type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
+type:"link", href:"/docs/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
 },
 {
 type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"

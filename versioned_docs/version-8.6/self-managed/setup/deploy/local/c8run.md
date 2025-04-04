@@ -27,6 +27,7 @@ Camunda 8 Run includes the following:
 
 - OpenJDK 21+
 - [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)
+- If using Ubuntu, use Ubuntu 22.04 or newer
 
 :::note
 After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
@@ -36,7 +37,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.6.9) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.6.12) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 
@@ -44,8 +45,6 @@ When successful, a new Operate window automatically opens.
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
-
-Mac users may encounter the warning `"c8run" Not Opened`. Follow the Apple support instructions to [grant an exception](https://support.apple.com/en-us/102445).
 :::
 
 ### Configuration options
@@ -150,6 +149,22 @@ curl --cookie  cookie.txt  localhost:8080/v2/topology
 
 </TabItem>
 </Tabs>
+
+#### Use Camunda APIs with the Java client
+
+[The Java client](/apis-tools/java-client/index.md) does not support cookie-based authentication. To access Camunda APIs in a Camunda 8 Run environment with the Java client, you'll need to:
+
+- Manually retrieve a cookie through Java HTTP functionality or cURL, as described above.
+- Manually include the cookie as a custom header in Java client requests:
+
+```java
+zeebeClient
+  .withChainHandlers(
+      (request, producer, scope, chain, callback) -> {
+        request.setHeader("Cookie", "OPERATE-SESSION=<session ID extracted from previous call>");
+        chain.proceed(request, producer, scope, callback);
+      })
+```
 
 ## Shut down Camunda 8 Run
 

@@ -5,6 +5,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
+import AlgoliaSearchBox from "@theme/SearchBar";
 
 const features = [
   {
@@ -36,7 +37,7 @@ const features = [
       "Explore Zeebe client libraries, Camunda component APIs, and SDKs.",
   },
   {
-    title: "Best practice",
+    title: "Best Practices",
     imageUrl: "img/home-bp.png",
     url: "/docs/components/best-practices/best-practices-overview/",
     description:
@@ -92,6 +93,9 @@ function Home() {
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <div className="homeSearch">
+            <AlgoliaSearchBox />
+          </div>
           <div className={clsx("row", styles.buttonsWrapper)}>
             <div className={clsx("", styles.buttons)}>
               <Link
@@ -157,7 +161,9 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/reference/release-notes/")}
+                to={useBaseUrl(
+                  "docs/reference/announcements-release-notes/overview/"
+                )}
               >
                 Release notes
               </Link>

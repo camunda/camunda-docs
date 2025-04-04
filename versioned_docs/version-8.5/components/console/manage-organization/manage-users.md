@@ -20,12 +20,12 @@ The admin role has the same rights as the owner, but an admin cannot manage othe
 
 The following roles are additionally available, providing dedicated rights for specific elements in Camunda 8:
 
-- **Operations Engineer**: Full access to Console, except deletion privileges. Full access to Operate and Web Modeler, except deployment privileges
-- **Analyst**: Full access to Optimize and Web Modeler, except deployment privileges. Read-only access to Clusters
-- **Task User**: Full access to Tasklist and Web Modeler, except deployment privileges. Read-only access to Clusters
+- **Operations Engineer**: Full access to Console, except deletion privileges. Full access to Operate and Web Modeler, except deployment and process instance creation privileges
+- **Analyst**: Full access to Optimize and Web Modeler, except deployment and process instance creation privileges. Read-only access to Clusters
+- **Task User**: Full access to Tasklist and Web Modeler, except deployment and process instance creation privileges. Read-only access to Clusters
 - **Developer**: Full access to Console, except deletion privileges. Full access to Operate, Tasklist, and Web Modeler
-- **Visitor**: Read-only access to Console, Operate, and Tasklist. Full access to Web Modeler, except deployment privileges
-- **Modeler**: Full access to Web Modeler, except deployment privileges. Read-only access to Console and clusters, except access to cluster components
+- **Visitor**: Read-only access to Console, Operate, and Tasklist. Full access to Web Modeler, except deployment and process instance creation privileges
+- **Modeler**: Full access to Web Modeler, except deployment and process instance creation privileges. Read-only access to Console and clusters, except access to cluster components
 
 Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **[Operate](../../operate/operate-introduction.md)** and **[Tasklist](../../tasklist/introduction-to-tasklist.md)**.
 
@@ -51,6 +51,14 @@ To initiate the creation flow, click **Create resource authorization**.
 To update an existing authorization, click on the **pencil icon** of the relevant row. To delete an existing authorization, click the **trash can** icon.
 
 ![Authorized Resources](./img/user-details-authorized-resources-example.png)
+
+## User task access restrictions
+
+You can restrict user task access in [Tasklist](/components/tasklist/introduction-to-tasklist.md) to assigned users or user group candidates.
+
+For example, if a task has a candidate group named `Team A` and a candidate user named `example`, only the users that belong to `Team A` and the user `example` will have access to the task.
+
+To learn more, visit the [user task access restrictions documentation](/components/concepts/access-control/user-task-access-restrictions.md).
 
 ## Limitations
 

@@ -54,7 +54,6 @@ Running a dual-region configuration requires users to detect and manage any regi
   - In that guide, we're showcasing Kubernetes dual-region installation, based on the following tools:
     - [Helm (3.x)](https://helm.sh/docs/intro/install/) for installing and upgrading the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform).
     - [Kubectl (1.30.x)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the Kubernetes cluster.
-- (deprecated) [zbctl](/apis-tools/community-clients/cli-client/index.md) to interact with the Zeebe cluster.
 - `cURL` or similar to interact with the REST API.
 
 ## Terminology
@@ -153,17 +152,14 @@ The following alternatives to port-forwarding are possible:
 
 In our example, we went with port-forwarding to a localhost, but other alternatives can also be used.
 
-<Tabs groupId="c8-connectivity">
-  <TabItem value="rest-api" label="REST API">
-
 1. Use the [REST API](../../../apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to retrieve the list of the remaining brokers
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
 
-curl -L -X GET 'http://localhost:8080/v2/topology' \
-  -H 'Accept: application/json'
-```
+   curl -L -X GET 'http://localhost:8080/v2/topology' \
+     -H 'Accept: application/json'
+   ```
 
 <details>
   <summary>Example output</summary>
@@ -295,76 +291,24 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
   </summary>
 </details>
 
-  </TabItem>
-  <TabItem value="zbctl" label="zbctl">
-
-1. Use the [zbctl client](/apis-tools/community-clients/cli-client/index.md) to retrieve list of remaining brokers
-
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
-zbctl status --insecure --address localhost:26500
-```
-
-<details>
-  <summary>Example output</summary>
-  <summary>
-
-```bash
-Cluster size: 8
-Partitions count: 8
-Replication factor: 4
-Gateway version: 8.6.0
-Brokers:
-  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Leader, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 8 : Leader, Healthy
-  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Leader, Healthy
-```
-
-  </summary>
-</details>
-  </TabItem>
-</Tabs>
-
 2. Port-forward the service of the Zeebe Gateway to access the [management REST API](../../zeebe-deployment/configuration/gateway.md#managementserver)
 
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
-```
+   ```bash
+   kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 9600:9600 -n $CAMUNDA_NAMESPACE_SURVIVING
+   ```
 
 3. Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
    In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even brokers.
 
-```bash
-curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
-```
+   ```bash
+   curl -XPOST 'http://localhost:9600/actuator/cluster/brokers?force=true' -H 'Content-Type: application/json' -d '["0", "2", "4", "6"]'
+   ```
+
+   Using the `force=true` parameter reduces the replication factor accordingly.
 
 #### Verification
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the cluster size has decreased to 4, partitions have been redistributed over the remaining brokers, and new leaders have been elected.
-
-<Tabs groupId="c8-connectivity">
-  <TabItem value="rest-api" label="REST API">
 
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
@@ -502,56 +446,6 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 
   </summary>
 </details>
-
-  </TabItem>
-  <TabItem value="zbctl" label="zbctl">
-
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
-zbctl status --insecure --address localhost:26500
-```
-
-<details>
-  <summary>Example output</summary>
-  <summary>
-
-```bash
-Cluster size: 4
-Partitions count: 8
-Replication factor: 2
-Gateway version: 8.6.0
-Brokers:
-  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Leader, Healthy
-    Partition 6 : Leader, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Leader, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 8 : Leader, Healthy
-  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 2 : Follower, Healthy
-    Partition 3 : Leader, Healthy
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 4 : Leader, Healthy
-    Partition 5 : Leader, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Leader, Healthy
-```
-
-  </summary>
-</details>
-
-</TabItem>
-</Tabs>
 
 You can also use the Zeebe Gateway's REST API to ensure the scaling progress has been completed. For better output readability, we use [jq](https://jqlang.github.io/jq/).
 
@@ -730,9 +624,6 @@ It is expected that the Zeebe broker pods will not reach the "Ready" state since
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the new Zeebe brokers are recognized but yet a full member of the Zeebe cluster.
 
-<Tabs groupId="c8-connectivity">
-  <TabItem value="rest-api" label="REST API">
-
 ```bash
 kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 8080:8080 -n $CAMUNDA_NAMESPACE_SURVIVING
 
@@ -897,64 +788,6 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 
   </summary>
 </details>
-
-  </TabItem>
-  <TabItem value="zbctl" label="zbctl">
-
-```bash
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
-zbctl status --insecure --address localhost:26500
-```
-
-<details>
-  <summary>Example Output</summary>
-  <summary>
-
-```bash
-Cluster size: 4
-Partitions count: 8
-Replication factor: 2
-Gateway version: 8.6.0
-Brokers:
-  Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Leader, Healthy
-    Partition 6 : Follower, Healthy
-    Partition 7 : Follower, Healthy
-    Partition 8 : Leader, Healthy
-  Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-  Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 1 : Follower, Healthy
-    Partition 2 : Leader, Healthy
-    Partition 3 : Leader, Healthy
-    Partition 8 : Follower, Healthy
-  Broker 3 - camunda-zeebe-1.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-  Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 2 : Follower, Healthy
-    Partition 3 : Follower, Healthy
-    Partition 4 : Leader, Healthy
-    Partition 5 : Leader, Healthy
-  Broker 5 - camunda-zeebe-2.camunda-zeebe.camunda-paris.svc:26501
-    Version: 8.6.0
-  Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-    Partition 4 : Follower, Healthy
-    Partition 5 : Follower, Healthy
-    Partition 6 : Leader, Healthy
-    Partition 7 : Leader, Healthy
-  Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-    Version: 8.6.0
-```
-
-  </summary>
-</details>
-
-  </TabItem>
-</Tabs>
 
 </div>
   </TabItem>
@@ -1450,76 +1283,6 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
   "startedAt": "2024-08-23T12:54:07.968549269Z",
   "completedAt": "2024-08-23T12:54:09.282558853Z"
 }
-```
-
-  </summary>
-</details>
-
-Port-forwarding the Zeebe Gateway via kubectl and printing the topology should reveal that all brokers have joined the Zeebe cluster again.
-
-```
-kubectl --context $CLUSTER_SURVIVING port-forward services/$HELM_RELEASE_NAME-zeebe-gateway 26500:26500 -n $CAMUNDA_NAMESPACE_SURVIVING
-zbctl status --insecure --address localhost:26500
-```
-
-<details>
-  <summary>Example Output</summary>
-  <summary>
-
-```bash
-Cluster size: 8
-Partitions count: 8
-Replication factor: 4
-Gateway version: 8.6.0
-Brokers:
-Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda-london.svc:26501
-  Version: 8.6.0
-  Partition 1 : Leader, Healthy
-  Partition 6 : Follower, Healthy
-  Partition 7 : Follower, Healthy
-  Partition 8 : Leader, Healthy
-Broker 1 - camunda-zeebe-0.camunda-zeebe.camunda-paris.svc:26501
-  Version: 8.6.0
-  Partition 1 : Follower, Healthy
-  Partition 2 : Follower, Healthy
-  Partition 7 : Follower, Healthy
-  Partition 8 : Follower, Healthy
-Broker 2 - camunda-zeebe-1.camunda-zeebe.camunda-london.svc:26501
-  Version: 8.6.0
-  Partition 1 : Follower, Healthy
-  Partition 2 : Follower, Healthy
-  Partition 3 : Follower, Healthy
-  Partition 8 : Follower, Healthy
-Broker 3 - camunda-zeebe-1.camunda-zeebe.camunda-paris.svc:26501
-  Version: 8.6.0
-  Partition 1 : Follower, Healthy
-  Partition 2 : Follower, Healthy
-  Partition 3 : Follower, Healthy
-  Partition 4 : Follower, Healthy
-Broker 4 - camunda-zeebe-2.camunda-zeebe.camunda-london.svc:26501
-  Version: 8.6.0
-  Partition 2 : Leader, Healthy
-  Partition 3 : Leader, Healthy
-  Partition 4 : Leader, Healthy
-  Partition 5 : Follower, Healthy
-Broker 5 - camunda-zeebe-2.camunda-zeebe.camunda-paris.svc:26501
-  Version: 8.6.0
-  Partition 3 : Follower, Healthy
-  Partition 4 : Follower, Healthy
-  Partition 5 : Follower, Healthy
-  Partition 6 : Follower, Healthy
-Broker 6 - camunda-zeebe-3.camunda-zeebe.camunda-london.svc:26501
-  Version: 8.6.0
-  Partition 4 : Follower, Healthy
-  Partition 5 : Leader, Healthy
-  Partition 6 : Leader, Healthy
-  Partition 7 : Leader, Healthy
-Broker 7 - camunda-zeebe-3.camunda-zeebe.camunda-paris.svc:26501
-  Version: 8.6.0
-  Partition 5 : Follower, Healthy
-  Partition 6 : Follower, Healthy
-  Partition 7 : Follower, Healthy
-  Partition 8 : Follower, Healthy
 ```
 
   </summary>

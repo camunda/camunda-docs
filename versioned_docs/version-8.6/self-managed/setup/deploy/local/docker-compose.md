@@ -10,7 +10,7 @@ import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
 A Docker Compose configuration to run Camunda Self-Managed components (Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors).
 
-:::danger
+:::note
 While the [Docker images](/self-managed/setup/deploy/other/docker.md) themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally, and are not designed to be used in production. We recommend [Kubernetes](/self-managed/setup/install.md) for production use cases.
 :::
 
@@ -35,7 +35,7 @@ docker compose up -d
 
 ### Configuration options
 
-Running `docker compose up -d` starts all Camunda components, including Identity. The [Camunda Self-Managed repository](https://github.com/camunda/camunda-self-managed) also contains additional configuration files for lightweight development.
+Running `docker compose up -d` starts all Camunda components, including Identity. The [Camunda Distributions repository](https://github.com/camunda/camunda-distributions) also contains additional configuration files for lightweight development.
 
 - **docker-compose.yaml:** Contains all Camunda 8 Components for a full stack deployment: Zeebe, Operate, Tasklist, Connectors, Optimize, Identity, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
 - **docker-compose-core.yaml:** Contains Camunda 8 Orchestration cluster components: Zeebe, Tasklist, Operate, and Connectors.

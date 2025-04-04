@@ -38,7 +38,7 @@ Each single importer/archiver node must be configured using the following config
 | camunda.tasklist.clusterNode.nodeCount     | Total amount of Importer (or archiver) nodes in the cluster.                           | 1                                                   |
 | camunda.tasklist.clusterNode.currentNodeId | ID of current Importer (or archiver) node, starting from 0.                            | 0                                                   |
 
-It's enough to configure either `partitionIds` or a pair of `nodeCount` and `currentNodeId`. If you provide `nodeCount` and `currentNodeId`, each node will automatically guess the Zeebe partitions they're responsible for.
+It's enough to configure either `partitionIds` or a pair of `nodeCount` and `currentNodeId`. If you provide `nodeCount` and `currentNodeId`, each node will automatically determine the Zeebe partitions they're responsible for.
 
 :::note
 `nodeCount` always represents the number of nodes of one specific type.

@@ -259,20 +259,15 @@ For a full set of configuration options, see [CamundaClientConfigurationProperti
 
 Here you find alternatives to authenticate with the cluster
 
-#### Keystore & Truststore
+#### Credentials cache path
 
-You can also authenticate with the cluster through java's key- and truststore facilities
+You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
 
 ```yaml
 camunda:
   client:
-    mode: self-managed
     auth:
-      keystore-path: <your keystore path>
-      keystore-password: <your keystore password>
-      keystore-key-password: <your keystore key password>
-      truststore-path: <your truststore path>
-      truststore-password: <your truststore password>
+      credentials-cache-path: /tmp/credentials
 ```
 
 ### Zeebe
@@ -369,7 +364,7 @@ camunda:
 
 #### REST over gRPC
 
-If true, the client will use REST instead of gRPC whenever possible:
+If true, the Zeebe Client will use REST instead of gRPC whenever possible to communicate with the Zeebe Gateway:
 
 ```yaml
 camunda:
@@ -380,7 +375,7 @@ camunda:
 
 #### gRPC address
 
-Define client gRPC address:
+Define the address of the [gRPC API](/apis-tools/zeebe-api/grpc.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -389,9 +384,13 @@ camunda:
       grpc-address: http://localhost:26500
 ```
 
+:::note
+You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerException: target` error.
+:::
+
 #### REST address
 
-Define client REST address:
+Define address of the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -399,6 +398,10 @@ camunda:
     zeebe:
       rest-address: http://localhost:8080
 ```
+
+:::note
+You must add the `http://` scheme to the URL.
+:::
 
 #### Defaults and Overrides
 
