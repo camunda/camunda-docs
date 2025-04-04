@@ -9,12 +9,12 @@ Download [Desktop Modeler](./index.md) for Windows, macOS, and Linux from the [C
 
 ## Wire File Associations
 
-On Windows and Linux you can carry out additional steps to register the Modeler as the default editor for BPMN, DMN, and Form files. On macOS the Modeler is automatically registered as the default editor for those.
+On Windows and Linux you can carry out additional steps to register Modeler as the default editor for BPMN, DMN, and Form files. With macOS, Modeler is automatically registered as the default editor.
 
 ### Windows
 
-To make the Modeler the default editor for `.bpmn`, `.dmn`, and `.form` files, execute `support/register_fileassoc.bat`.
+To make Modeler the default editor for `.bpmn`, `.dmn`, and `.form` files, execute `support/register_fileassoc.bat`.
 
 ### Linux
 
-To create a [desktop file](https://specifications.freedesktop.org/desktop-entry-spec/latest/) and make the Modeler the default editor for `.bpmn`, `.dmn`, and `.form`, files execute `support/xdg_register.sh`.
+To create a [desktop file](https://specifications.freedesktop.org/desktop-entry-spec/latest/) and make Modeler the default editor for `.bpmn`, `.dmn`, and `.form`, files execute `support/xdg_register.sh`.
