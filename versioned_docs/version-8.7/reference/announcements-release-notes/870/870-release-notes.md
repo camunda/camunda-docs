@@ -29,7 +29,7 @@ Cluster connector management allows you to monitor and manage your running inbou
 - Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
 - For example, you can see if a connector instance is unhealthy, and use the activity log to troubleshoot and resolve issues.
 
-<!-- To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md). -->
+To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2521 -->
 
