@@ -8,7 +8,7 @@ description: "A comprehensive guide on configuring and managing secrets in Camun
 
 ## Overview
 
-This guide provides a comprehensive reference for managing secrets in **Camunda 8 Self-Managed** when using the official Helm Chart. It includes:
+This guide provides detailed instructions for configuring and managing secrets when using the official Helm Chart. It covers:
 
 - A complete list of internal and external secrets
 - How to create and reference Kubernetes secrets securely
