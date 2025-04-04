@@ -126,7 +126,7 @@ If no storage configuration is provided, the default document storage is **in-me
 
 To change this to a different storage method, use the environment variables in the section below for **every** component using document handling. No additional configuration is required for the **in-memory** storage.
 
-To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `in-memory`, `gcp` (for Google Cloud Platform), and `local` (for local storage).
+To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `inmemory`, `gcp` (for Google Cloud Platform), and `local` (for local storage).
 
 <Tabs groupId="storage" defaultValue="aws" queryString values={
 [
