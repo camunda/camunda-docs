@@ -42,7 +42,7 @@ A cluster typically consists of the following components:
 - [Zeebe](/components/zeebe/zeebe-overview.md)
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Optimize]($optimize$/components/what-is-optimize)
+- [Optimize](/components/optimize/what-is-optimize.md)
 
 You can provision cluster components using one of two channels, following the [Camunda release policy](https://camunda.com/release-policy/).
 

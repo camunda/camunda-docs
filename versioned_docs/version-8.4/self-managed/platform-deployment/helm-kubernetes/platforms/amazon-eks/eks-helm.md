@@ -50,13 +50,13 @@ export DOMAIN_NAME=camunda.example.com
 # The e-mail to register with Let's Encrypt
 export MAIL=admin@camunda.example.com
 # The Ingress-Nginx Helm Chart version
-export INGRESS_HELM_CHART_VERSION="4.11.2"
+export INGRESS_HELM_CHART_VERSION="4.12.1"
 # The External DNS Helm Chart version
-export EXTERNAL_DNS_HELM_CHART_VERSION="1.15.0"
+export EXTERNAL_DNS_HELM_CHART_VERSION="1.16.0"
 # The Cert-Manager Helm Chart version
-export CERT_MANAGER_HELM_CHART_VERSION="1.15.3"
+export CERT_MANAGER_HELM_CHART_VERSION="1.17.1"
 # The Camunda 8 Helm Chart version
-export CAMUNDA_HELM_CHART_VERSION="9.4.1"
+export CAMUNDA_HELM_CHART_VERSION="9.4.8"
 ```
 
 Additionally, follow the guide from either [eksctl](./eks-helm.md) or [Terraform](./terraform-setup.md) to retrieve the following values, which will be required for subsequent steps:
@@ -314,20 +314,20 @@ zbctl status --insecure
 Cluster size: 3
 Partitions count: 3
 Replication factor: 3
-Gateway version: 8.4.12
+Gateway version: 8.4.z
 Brokers:
   Broker 0 - camunda-zeebe-0.camunda-zeebe.camunda.svc:26501
-    Version: 8.4.12
+    Version: 8.4.z
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Follower, Healthy
   Broker 1 - camunda-zeebe-1.camunda-zeebe.camunda.svc:26501
-    Version: 8.4.12
+    Version: 8.4.z
     Partition 1 : Leader, Healthy
     Partition 2 : Leader, Healthy
     Partition 3 : Follower, Healthy
   Broker 2 - camunda-zeebe-2.camunda-zeebe.camunda.svc:26501
-    Version: 8.4.12
+    Version: 8.4.z
     Partition 1 : Follower, Healthy
     Partition 2 : Follower, Healthy
     Partition 3 : Leader, Healthy
@@ -439,6 +439,6 @@ The following are some advanced configuration topics to consider for your cluste
 
 To get more familiar with our product stack, visit the following topics:
 
-- [Operate](../../../../../../components/operate/operate-introduction/)
-- [Tasklist](../../../../../../components/tasklist/introduction-to-tasklist/)
-- [Optimize](../../../../../../../../optimize/components/what-is-optimize/)
+- [Operate](/components/operate/operate-introduction.md)
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md)
+- [Optimize](/components/optimize/what-is-optimize.md)

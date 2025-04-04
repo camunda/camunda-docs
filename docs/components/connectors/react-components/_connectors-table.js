@@ -23,6 +23,7 @@ import GoogleGeminiImg from "../img/connector-google-gemini.png";
 import GoogleMapsImg from "../img/connector-google-maps.png";
 import GoogleSheetsImg from "../img/connector-google-sheets.png";
 import GraphqlImg from "../img/connector-graphql.png";
+import HubSpotImg from "../img/connector-hubspot.png";
 import HuggingFaceImg from "../img/connector-hugging-face.png";
 import KafkaImg from "../img/connector-kafka.png";
 import Microsoft365Img from "../img/connector-365.png";
@@ -272,6 +273,13 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../../protocol/http-webhook/",
       image: WebhookImg,
+    },
+    {
+      name: "HubSpot",
+      description: "Interact with Hubspot objects from your processes.",
+      type: "Outbound",
+      link: "../hubspot/",
+      image: HubSpotImg,
     },
     {
       name: "Hugging Face",
