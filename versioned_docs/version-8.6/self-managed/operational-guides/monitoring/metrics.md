@@ -19,15 +19,7 @@ for each metric. When working with such systems, configure the polling interval 
 itself (which still has to serve this data) or having to store too much data in your monitoring system itself. Additionally, this means exposing the Camunda
 endpoint to your external monitoring system.
 
-When using a **pushing** system (such as OpenTelemetry), Camunda is configured to asynchronously push metric updates to an external endpoint
-at a regular interval. This implies that the system is accessible to Camunda via the network, so you will most likely want to ensure communication is secured.
-Similarly to the polling approach, balance how fast you are pushing (and thus getting updates/data points), without overwhelming your external
-system.for each metric. When working with such systems, configure the polling interval to get information fast enough, without overwhelming Camunda
-itself (which still has to serve this data) or having to store too much data in your monitoring system itself. Additionally, this means exposing the Camunda
-endpoint to your external monitoring system.
-
-When using a **pushing** system (such as OpenTelemetry), Camunda is configured to asynchronously push metric updates to an external endpoint
-at a regular interval. This implies that the system is accessible to Camunda via the network, so you will most likely want to ensure communication is secured. Similarly to the polling approach, balance how fast you are pushing (and thus getting updates/data points), without overwhelming your external system.
+When using a **pushing** system (such as OpenTelemetry), Camunda is configured to asynchronously push metric updates to an external endpoint at a regular interval. This implies that the system is accessible to Camunda via the network, so you will most likely want to ensure communication is secured. Similarly to the polling approach, balance how fast you are pushing (and thus getting updates/data points), without overwhelming your external system.
 
 ## Configuration
 
