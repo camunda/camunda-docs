@@ -927,6 +927,7 @@ module.exports = {
     "reference/dependencies",
     "reference/camunda-help-center",
     "reference/auto-updates",
+    "reference/shared-responsibility",
     "reference/status",
     "reference/licenses",
     "reference/notices",
