@@ -331,7 +331,7 @@ In our example, we went with port-forwarding to a localhost, but other alternati
     ```
 
 3.  Based on the [Cluster Scaling APIs](../../zeebe-deployment/operations/cluster-scaling.md), send a request to the Zeebe Gateway to redistribute the load to the remaining brokers, thereby removing the lost brokers.
-    Depending on which region had been lost, the load needs to be redistributed to the remaining brokers, either the even, or odd numbered ones. In our example, we have lost region 1 and with that our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
+    Depending on which region was lost, the load must be redistributed to the remaining brokers, either the even or odd numbered ones. In our example, we have lost `region 1` and with it our uneven brokers. This means we will have to redistribute to our existing even brokers. Make sure to only run the correct one based on the surviving region's brokers.
 
   <Tabs queryString="lost-region">
     <TabItem value="redistribute-to-even" label="Redistribute to even brokers" default>
