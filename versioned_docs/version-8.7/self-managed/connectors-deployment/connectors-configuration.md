@@ -504,7 +504,7 @@ to `DEBUG`.
 
 You can can use this package based log level approach also with custom Connectors by providing your package (`my.package`) via this variable: `LOGGING_LEVEL_MY_PACKAGE=DEBUG`.
 
-If you want to change the log level for all packages you can do so by changing it for the `root` logger: `LOGGING_LEVEL_ROOT=DEBUG`.
+To change the log level for all packages, change it for the `root` logger: `LOGGING_LEVEL_ROOT=DEBUG`.
 
 ### Google Stackdriver (JSON) logging
 
