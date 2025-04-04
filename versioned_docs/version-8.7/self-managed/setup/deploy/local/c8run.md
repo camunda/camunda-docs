@@ -49,8 +49,6 @@ When successful, a new Operate window automatically opens.
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
-
-Mac users may encounter the warning `"c8run" Not Opened`. Follow the Apple support instructions to [grant an exception](https://support.apple.com/en-us/102445).
 :::
 
 ### Configuration options
@@ -163,6 +161,22 @@ curl --cookie  cookie.txt  localhost:8080/v2/topology
 
 </TabItem>
 </Tabs>
+
+#### Use Camunda APIs with the Java client
+
+[The Java client](/apis-tools/java-client/index.md) does not support cookie-based authentication. To access Camunda APIs in a Camunda 8 Run environment with the Java client, you'll need to:
+
+- Manually retrieve a cookie through Java HTTP functionality or cURL, as described above.
+- Manually include the cookie as a custom header in Java client requests:
+
+```java
+zeebeClient
+  .withChainHandlers(
+      (request, producer, scope, chain, callback) -> {
+        request.setHeader("Cookie", "OPERATE-SESSION=<session ID extracted from previous call>");
+        chain.proceed(request, producer, scope, callback);
+      })
+```
 
 ## Shut down Camunda 8 Run
 

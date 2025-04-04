@@ -9,7 +9,7 @@ import IdpElementImg from './img/idp-diagram-element.png';
 Integrate your published document extraction templates into your end-to-end processes in Web Modeler.
 
 :::tip
-Not sure how to start integrating IDP? See [example IDP integration](idp-example.md) for a simple process example.
+New to IDP integration? See the [example IDP integration](idp-example.md) for a worked example of a simple IDP process.
 :::
 
 ## Create and configure an IDP task
@@ -34,6 +34,10 @@ For example, if you have uploaded a document via form upload using a `documents`
 
 Example: `documents[1]`.
 
+:::info
+To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/concepts/document-handling.md).
+:::
+
 ## Provider authentication
 
 ### Authentication
@@ -56,15 +60,19 @@ Example: `{{secrets.IDP_AWS_SECRETKEY}}`
 
 ### AWS S3 Bucket name
 
-Specify the name of the Amazon AWS S3 bucket where documents can be temporarily stored during Amazon Textract analysis.
+Specify the name of the Amazon S3 bucket where documents can be temporarily stored during Amazon Textract analysis as a connector secret, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md).
 
-Example: `idp-extraction-connector` (for the Amazon AWS S3 bucket used for document storage during extraction).
+Example: `{{secrets.IDP_AWS_BUCKET_NAME}}` (for the Amazon S3 bucket used for document storage during extraction).
+
+:::note
+The Amazon S3 bucket name must be unique across all your AWS accounts.
+:::
 
 ### Region
 
-Specify the region where documents can be temporarily stored during Amazon Textract analysis. This should match the region where the AWS S3 bucket is located.
+Specify the region where documents can be temporarily stored during Amazon Textract analysis as a connector secret, provided as a [FEEL expression](/components/modeler/feel/what-is-feel.md). This should match the region where the AWS S3 bucket is located. The default region is `us-east-1`.
 
-Example: `us-east-1` (default)
+Example: `{{secrets.IDP_AWS_REGION}}`
 
 ## Output mapping
 

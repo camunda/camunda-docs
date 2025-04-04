@@ -130,6 +130,20 @@ camunda.operate:
       selfSigned: true
 ```
 
+#### Disable Elasticsearch deprecation logging
+
+When using an Elasticsearch version 8.16.0+ it is recommended to turn off deprecation logging for the Elasticsearch cluster.
+
+```shell
+curl -X PUT "http://localhost:9200/_cluster/settings" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "persistent": {
+      "logger.org.elasticsearch.deprecation": "OFF"
+    }
+  }'
+```
+
 ### Settings for OpenSearch
 
 #### Settings to connect to a secured OpenSearch instance
@@ -334,15 +348,6 @@ With this configuration, the following endpoints are available for use out of th
 `<server>:8080/actuator/health/readiness` Readiness probe
 
 This configuration may be overwritten by changing the corresponding configuration parameters values.
-
-### Versions before 0.25.0
-
-In versions before 0.25.0, management endpoints look different. Therefore, we recommend reconfiguring for next versions.
-
-| Name      | Before 0.25.0    | Starting with 0.25.0       |
-| --------- | ---------------- | -------------------------- |
-| Readiness | /api/check       | /actuator/health/readiness |
-| Liveness  | /actuator/health | /actuator/health/liveness  |
 
 ## Logging
 

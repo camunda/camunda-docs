@@ -29,6 +29,10 @@ Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be upd
 
 Camunda Spring SDK 8.7 now requires Spring Boot 3.4.x. For more information on compatibility, see the Camunda Spring SDK [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
 
+### Desktop Modeler no longer supports macOS 12
+
+Following the end-of-life of macOS 12, support for Desktop Modeler on macOS 12 has been removed.
+
 ## Key changes
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
@@ -39,7 +43,15 @@ With this version, we ship a breaking change to how Web Modeler **Deploy diagram
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
 - In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
-- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/user-guide/roles/add-assign-role.md) to be able to deploy.
+- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/user-guide/roles/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
+
+### Deprecated: Web Modeler cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+The following authentication methods for a [configured cluster in Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
+
+- `OAUTH`: This method was replaced by `BEARER_TOKEN`.
+- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when [Microsoft Entra ID is used as OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
+  It is marked for removal in 8.8 as the `BEARER_TOKEN` authentication will be supported for Entra ID as well.
 
 ### Breaking changes in Camunda Process Test
 
@@ -81,3 +93,13 @@ The Zeebe Java client will not be developed further and will only receive bug fi
   - Similarly, environment variables will be renamed following the same concept: `ZEEBE_REST_ADDRESS` will become `CAMUNDA_REST_ADDRESS`.
 - **Artifact ID change**:
   - The `artifactId` will change from `zeebe-client-java` to `camunda-client-java`.
+
+### Connectors
+
+Starting with 8.7, the Connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
+
+Although the official SDK is largely compatible with the community library, some changes might be required in the configuration of Self-Managed Connector deployments.
+
+We recommend updating the configuration to match the new property format of the Camunda Spring Boot SDK to avoid any issues. The old properties will be removed in a future release.
+
+For more information, see the [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [Connectors configuration guide](/self-managed/connectors-deployment/connectors-configuration.md).

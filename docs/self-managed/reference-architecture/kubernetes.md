@@ -22,10 +22,15 @@ By leveraging this ecosystem, organizations can extend Kubernetes functionality 
 
 ## Reference implementations
 
-This section includes deployment reference architectures for manual setups:
+This section includes deployment reference architectures:
 
 - [Amazon EKS single-region](/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md): a standard production setup.
 - [Amazon EKS dual-region](/self-managed/setup/deploy/amazon/amazon-eks/dual-region.md): an advanced use case utilizing two regions.
+
+Red Hat OpenShift on AWS (ROSA)
+
+- [ROSA single-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup.md): a standard production setup.
+- [ROSA dual-region](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md): an advanced use case utilizing two regions.
 
 For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting/troubleshooting.md).
 
@@ -75,7 +80,7 @@ The following concerns **Operate**, **Tasklist**, and **Optimize**:
 
 When scaling from a single pod to multiple, ensure that the `importer / archiver` is enabled on only one pod and disabled on others. Enabling it on multiple pods will cause data inconsistencies. This limitation is known and will be addressed in future updates.
 
-Example configuration options are available for [Operate](/self-managed/operate-deployment/importer-and-archiver.md#configuration), [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration-platform-8#general-settings), and [Tasklist](/self-managed/tasklist-deployment/importer-and-archiver.md#configuration).
+Example configuration options are available for [Operate](/self-managed/operate-deployment/importer-and-archiver.md#configuration), [Optimize](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#general-settings), and [Tasklist](/self-managed/tasklist-deployment/importer-and-archiver.md#configuration).
 :::
 
 For high availability, a minimum of four Kubernetes nodes are recommended to ensure fault tolerance and support leader election in case of failures. To learn more about the Raft protocol and clustering concepts, refer to the [clustering documentation](/components/zeebe/technical-concepts/clustering.md).
@@ -98,7 +103,7 @@ The **Orchestration cluster** namespace, as outlined in the [architecture diagra
 - [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md)
 - [Operate](/components/operate/operate-introduction.md)
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md)
-- [Optimize]($optimize$/components/what-is-optimize)
+- [Optimize](/components/optimize/what-is-optimize.md)
 - [Connectors](/components/connectors/introduction.md)
 
 The **Web Modeler and Console** namespace, as outlined in the [architecture diagram](#web-modeler-and-console), consists of the following components:
@@ -200,6 +205,38 @@ For more information, see the [reference architecture overview](/self-managed/re
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmark tests to determine the appropriate size specific to your environment and use case.
 
 Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to address bottlenecks when exporting data from Zeebe to your database.
+
+## Distributions
+
+### OpenShift
+
+Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
+
+#### Minimum cluster requirements
+
+- Instance type: 4 vCPUs (x86_64, >3.1 GHz), 16 GiB Memory
+- Number of dedicated nodes: 4
+- Volume type: SSD
+  - 1,000 - 3,000 IOPS per volume
+  - throughput of 1,000 MB/s per volume
+
+#### Supported Versions
+
+We conduct testing and ensure compatibility against the following OpenShift versions:
+
+| OpenShift Version |
+| ----------------- |
+| 4.18.x            |
+| 4.17.x            |
+| 4.16.x            |
+| 4.15.x            |
+| 4.14.x            |
+
+:::caution Versions compatibility
+
+Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support life cycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
+
+:::
 
 ## Cloud specifics
 

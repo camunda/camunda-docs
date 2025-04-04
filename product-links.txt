@@ -33,3 +33,17 @@ https://docs.camunda.io/docs/components/concepts/variables/?utm_source=modeler&u
 https://docs.camunda.io/docs/components/modeler/desktop-modeler/troubleshooting/#i-cannot-connect-to-zeebe
 https://docs.camunda.io/docs/components/modeler/forms/form-element-library/forms-element-library-text/
 https://docs.camunda.io/docs/components/modeler/forms/configuration/forms-config-templating-syntax/
+
+# Modeling Guidance
+
+https://docs.camunda.io/docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/
+https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/called-element/
+https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/element-type/
+https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/error-reference/
+https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/escalation-reference/
+https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/feel/
+https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/history-time-to-live/
+https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/message-reference/
+
+
+

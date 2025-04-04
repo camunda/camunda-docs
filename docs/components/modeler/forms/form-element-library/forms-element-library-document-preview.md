@@ -17,6 +17,7 @@ A form element to select files.
 [
   {
     "documentId": "u123",
+    "endpoint": "https://api.example.com/documents/u123",
     "metadata": {
       "fileName": "Document.pdf",
       "contentType": "application/pdf"
@@ -25,7 +26,13 @@ A form element to select files.
 ]
 ```
 
-- **Document URL**: A context key which contains the URL value used to get each document. This can only be an [expression](../../feel/language-guide/feel-expressions-introduction.md). The resulting value must be a string and it must contain the placeholder `{documentId}` which will be replaced with the document ID present in the **Document reference** data. By default this component will use the key `defaultDocumentsEndpointKey`, if you leave this field unchanged it will work without any extra configuration on Tasklist and you won't have inject this variable in the process instance context.
+:::note
+When previewing documents that were uploaded via [Filepicker](./forms-element-library-filepicker.md) in Tasklist, document references are handled automatically:
+
+- Modifying the document’s metadata after upload may prevent the preview from working correctly.
+- To use Camunda's document service without Filepicker, you must include the `contentHash`, `endpoint`, and `documentId` values.
+  :::
+
 - **Hide if**: [Expression](../../feel/language-guide/feel-expressions-introduction.md) to hide the file picker.
 - **Max height of preview container**: A number which will define the maximum height of each document preview. Any document with a bigger height will display a scroll bar.
 

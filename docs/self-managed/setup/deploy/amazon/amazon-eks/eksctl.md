@@ -147,7 +147,7 @@ apiVersion: eksctl.io/v1alpha5
 metadata:
   name: ${CLUSTER_NAME:-camunda-cluster} # e.g. camunda-cluster
   region: ${REGION:-eu-central-1} # e.g. eu-central-1
-  version: "1.31"
+  version: "1.32"
 availabilityZones:
   - ${REGION:-eu-central-1}c # e.g. eu-central-1c, the minimal is two distinct Availability Zones (AZs) within the region
   - ${REGION:-eu-central-1}b
@@ -620,7 +620,7 @@ export AURORA_USERNAME=secret_user
 # Postgres DB password of the admin user
 export AURORA_PASSWORD=camundarocks123
 # The PostgreSQL version
-export POSTGRESQL_VERSION=15.8
+export POSTGRESQL_VERSION=15.10
 
 # For each database, we need to generate a username, password and database name
 export DB_KEYCLOAK_NAME="keycloak_db"
@@ -797,7 +797,7 @@ We will also use this step to verify connectivity to the database from the creat
 3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`:
 
    ```yaml reference
-   https://github.com/camunda/camunda-tf-eks-module/blob/main/examples/camunda-8.7/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
    ```
 
 4. Apply the manifest:
