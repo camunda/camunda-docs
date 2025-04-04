@@ -13,7 +13,7 @@ Offering robust document handling capabilities within Camunda Self-Managed, user
 
 ## Storage integration and configuration
 
-Review all storage integration and configuration options:
+You can integrate and configure document storage based on your deployment setup and production requirements. Find more details here:
 
 <DocCardList items={[{type:"link", href:"/docs/next/self-managed/concepts/document-handling/document-handling-configuration/", label: "Storage configuration details", docId:"self-managed/concepts/document-handling/document-handling-configuration"}
 ]}/>

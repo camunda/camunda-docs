@@ -1023,3 +1023,20 @@ ul ol {
   padding-left: 10px;
   margin-bottom: 25px;
 }
+
+.unique-tabs {
+  border: none;
+  gap: 8px;
+}
+
+.unique-tabs .tabs__item--active {
+  background-color: var(--ifm-tabs-color-active);
+  border-radius: var(--ifm-global-radius);
+  color: #fff;
+}
+
+.child-tab-content {
+  padding: 16px;
+  border: 1px solid #dedede;
+  border-radius: 8px;
+}

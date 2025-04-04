@@ -16,12 +16,12 @@ Offering robust document handling capabilities within Camunda SaaS, users can ef
 A [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) and [**AWS S3**](https://aws.amazon.com/s3/) bucket storage integrations are supported on SaaS and handled by Camunda.
 Storage is configured for a cluster based on the selected region (either GCP or AWS).
 
-### Storage policies
+### Storage policies for SaaS
 
-- One bucket per cluster is permitted with SaaS.
+- One bucket per cluster is permitted.
 - Storage integration is handled and configured by Camunda. While this is not dynamically configurable by the cluster, it is provided as environment configuration.
 - **Maximum upload size for one or multiple files**: 10 MB
-- **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.
+- **File expiration time/time-to-live (TTL) policy**: 30 days.
 
 ### Self-Managed environment
 
