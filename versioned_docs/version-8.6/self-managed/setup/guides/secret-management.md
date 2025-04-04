@@ -73,11 +73,11 @@ These secrets are required when integrating Camunda with external services:
 
 ### External Databases and Services
 
-| **Secret**                           | **Chart Values Key**                                                                  | **Purpose**                                              | **Default Behavior**    |
-| ------------------------------------ | ------------------------------------------------------------------------------------- | -------------------------------------------------------- | ----------------------- |
-| **External Database Password**       | `webModeler.restapi.externalDatabase.existingSecret`                                  | Password for external PostgreSQL if using an external DB | Not set unless provided |
-| **SMTP Password**                    | `webModeler.restapi.mail.existingSecret`                                              | SMTP credentials for sending email notifications         | Not set unless provided |
-| **Connectors Inbound Auth Password** | `connectors.inbound.auth.existingSecret`, `connectors.inbound.auth.existingSecretKey` | Basic auth password for Connectors polling Operate       | Not set unless provided |
+| **Secret**                           | **Chart Values Key**                                                                                            | **Purpose**                                              | **Default Behavior**    |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ----------------------- |
+| **External Database Password**       | `webModeler.restapi.externalDatabase.existingSecret`, `webModeler.restapi.externalDatabase.existingSecret.name` | Password for external PostgreSQL if using an external DB | Not set unless provided |
+| **SMTP Password**                    | `webModeler.restapi.mail.existingSecret`                                                                        | SMTP credentials for sending email notifications         | Not set unless provided |
+| **Connectors Inbound Auth Password** | `connectors.inbound.auth.existingSecret`, `connectors.inbound.auth.existingSecretKey`                           | Basic auth password for Connectors polling Operate       | Not set unless provided |
 
 ### External Search (Elasticsearch / OpenSearch)
 
