@@ -90,11 +90,20 @@ Develop reusable assets in a pro-code environment, push them to your version con
 
 <!--- https://github.com/camunda/product-hub/issues/2635 --->
 
-### Convert AWS EKS guides to Reference architecture format
+### Convert AWS EKS and AWS OpenShift (ROSA) Guides to Reference Architecture Format
 
-We would like to announce the release of the Reference Architecture for AWS EKS package. This package provides a standardized Reference Architecture with Implementation Requirements, Terraform templates, Helm configurations, deployment pipelines, and operational procedures.
+We are pleased to announce the release of the Reference Architecture packages for AWS EKS (single-region) and Red Hat OpenShift on AWS (ROSA) in both single and dual-region configurations.  
+These packages offer a standardized Reference Architecture that includes implementation requirements, Terraform templates, Helm configurations, deployment pipelines, and operational procedures.  
+Additionally, we have enhanced the user experience by improving test coverage for the documented procedures.
 
 <!--- https://github.com/camunda/product-hub/issues/2522 --->
+
+### Added Dual-Region Reference Architecture for OpenShift
+
+We are excited to announce the addition of the dual-region reference architecture for Red Hat OpenShift.
+This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions.
+
+<!--- https://github.com/camunda/product-hub/issues/2501  --->
 
 ## 8.7.0-alpha5
 
