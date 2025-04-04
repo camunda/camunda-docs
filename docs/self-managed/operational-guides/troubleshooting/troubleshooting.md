@@ -12,7 +12,7 @@ for container to container communication align with the IP ranges Keycloak consi
 [external requests documentation](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes)
 to be external and therefore require SSL.
 
-As the [Camunda Helm Charts](hhttps://artifacthub.io/packages/helm/camunda/camunda-platform) currently do
+As the [Camunda Helm Charts](https://artifacthub.io/packages/helm/camunda/camunda-platform) currently do
 not provide support for the distribution of the Keycloak TLS key to the other containers, we recommend viewing the solution available in the
 [Identity documentation](/self-managed/identity/troubleshooting/troubleshoot-identity.md#solution-2-identity-making-requests-from-an-external-ip-address).
 
