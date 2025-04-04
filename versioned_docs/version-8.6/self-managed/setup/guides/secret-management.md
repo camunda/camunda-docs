@@ -8,7 +8,7 @@ description: "A comprehensive guide on configuring and managing secrets in Camun
 
 ## Overview
 
-This guide provides detailed instructions for configuring and managing secrets when using the official Helm Chart. It covers:
+This guide provides detailed instructions for configuring and managing secrets when using the official Helm chart. It covers:
 
 - Internal secrets: secrets used by the C8 apps
 - External secrets: secrests used for third party configuration
@@ -20,7 +20,7 @@ This guide provides detailed instructions for configuring and managing secrets w
 
 ## Internal Secrets
 
-These secrets are used by Camunda applications, and created and managed by the Helm Chart unless explicitly configured.
+These secrets are used by Camunda applications, and created and managed by the Helm chart unless explicitly configured.
 
 ### Identity / Keycloak
 
@@ -235,7 +235,7 @@ postgresql:
 
 ## Disabling Auto-Generated Secrets
 
-By default, the Camunda Helm Chart auto-generates secrets like OAuth client passwords on first install. This ensures the platform can start without manual configuration but can lead to issues on upgrades if the secrets are regenerated.
+By default, the Camunda Helm chart auto-generates secrets like OAuth client passwords on first install. This ensures the platform can start without manual configuration but can lead to issues on upgrades if the secrets are regenerated.
 
 To use only user-defined secrets and prevent regeneration during upgrades:
 
@@ -349,4 +349,4 @@ Ensure the secret name is configured in `values.yaml` under `global.ingress.tls.
 
 - 📘 [Camunda Docs – Create Identity Secrets](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets)
 - 📘 [Camunda Docs – Configure License Key](https://docs.camunda.io/docs/self-managed/setup/install/#configure-license-key)
-- 📘 [Camunda Helm Chart – identity.auth.existingSecrets (8.6)](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-8.6#identity-auth-existing-secrets)
+- 📘 [Camunda Helm chart – identity.auth.existingSecrets (8.6)](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-8.6#identity-auth-existing-secrets)
