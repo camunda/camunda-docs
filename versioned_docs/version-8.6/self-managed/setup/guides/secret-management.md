@@ -268,7 +268,7 @@ This will stop auto-generating secrets. Ensure:
 
 ---
 
-## PostgreSQL Secrets and Examples
+## PostgreSQL Configuration Examples
 
 This section covers how to configure PostgreSQL secrets used by the Camunda subcharts: Identity, Keycloak, and Web Modeler.
 
