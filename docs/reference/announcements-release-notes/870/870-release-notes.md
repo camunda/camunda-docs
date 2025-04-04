@@ -19,6 +19,90 @@ These release notes identify the new features included in 8.7, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 8 April 2025           | 13 October 2026              | -            | -            | -            |
 
+### Added dual-region reference architecture for OpenShift
+
+We are excited to announce the addition of the dual-region reference architecture for Red Hat OpenShift.
+This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions.
+
+<!--- https://github.com/camunda/product-hub/issues/2501  --->
+
+### Advanced user task listeners for updating events
+
+Camunda introduces advanced user task listeners for updating events, enabling developers to define listeners that trigger whenever certain task properties or variables change. These listeners generate jobs similar to other event-based task listeners, granting direct access to task data as well as the ability to accept or roll back updates (in certain scenarios). Operators can also view, manage, and resolve incidents caused by these listeners in Operate, ensuring a unified and transparent approach to handling task changes.
+
+<!--- https://github.com/camunda/product-hub/issues/2585 --->
+
+### Bulk publish to shared resources
+
+Develop reusable assets in a pro-code environment, push them to your version control system, then publish them to your Web Modeler environment so anyone in your organization can reuse them with newly modified endpoints.
+
+<!--- https://github.com/camunda/product-hub/issues/2635 --->
+
+### Cluster connector management in Console <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#manage-connectors}
+
+Cluster connector management allows you to monitor and manage your running inbound connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector).
+
+- To open the **Connector Management** page, on the cluster **Overview** tab, click **Manage** on the Connectors component tile.
+- Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
+- For example, you can see if a connector instance is unhealthy, and use the activity log to troubleshoot and resolve issues.
+
+To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2521 -->
+
+### Connector Manage + Run (SaaS) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+
+We have provided a consolidated view of all webhooks, message queue subscriptions, and polling subscriptions for efficient monitoring and management. We have also implemented real-time alerts to notify operators when Connectors are not running, preventing unnoticed downtimes. [Learn more about managing Connectors](/components/console/manage-clusters/manage-connectors.md).
+
+<!-- https://github.com/camunda/product-hub/issues/2647 https://github.com/camunda/product-hub/issues/1063 -->
+
+### Convert AWS EKS and AWS OpenShift (ROSA) guides to reference architecture format
+
+We are pleased to announce the release of the Reference Architecture packages for AWS EKS (single-region) and Red Hat OpenShift on AWS (ROSA) in both single and dual-region configurations.  
+These packages offer a standardized Reference Architecture that includes implementation requirements, Terraform templates, Helm configurations, deployment pipelines, and operational procedures.  
+Additionally, we have enhanced the user experience by improving test coverage for the documented procedures.
+
+<!--- https://github.com/camunda/product-hub/issues/2522 --->
+
+### Document handling <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+We have extended Camunda's [document handling](/components/concepts/document-handling.md) capabilities by introducing robust integrations and support for AWS S3, local file systems, and document operations within Zeebe. This version enhances document management by providing additional support for secure storage, retrieval, and integration with Connectors, improving the efficiency and scalability of document-dependent workflows.
+
+<!-- https://github.com/camunda/product-hub/issues/2555 -->
+
+### End-to-end organization process landscape <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Modeler</span>
+
+Automation leaders can visualize all automation projects through a single, hierarchical source of truth of approved processes. Specifically, there are new features for copying reviewed process application versions to a central project where every org member can be invited with a single click. Now, users can more easily communicate their automation efforts and maximize asset reuse.
+
+<!-- https://github.com/camunda/product-hub/issues/2611 -->
+
+### Intelligent Document Processing (IDP) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span> {#idp}
+
+Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes.
+
+- IDP uses artificial intelligence (AI) and machine learning (ML) to identify, extract, and organize data from your structured and unstructured documents into a structured format you can use in your processes.
+- For example, you can use IDP to extract data from invoices and other document types in your document processing workflow.
+
+To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
+
+### Process applications in Desktop Modeler
+
+We have enabled developers to manage and work with multi-file BPMN projects directly within Desktop Modeler. This feature brings familiar IDE-like project management capabilities to Modeler, aligning with Web Modeler concepts, projects, and process applications.
+
+<!--- https://github.com/camunda/product-hub/issues/2458 --->
+
+### Process application versioning, README, and review
+
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, versioned, and readable for everyone, and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally reviewed and approved.
+
+<!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
+
+### Task appending framework <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
+
+Create and append tasks with resources available in the current project and process application. Find the available processes, decisions, and forms in the append menu to directly create a task linked to the resource.
+
+<!-- https://github.com/camunda/product-hub/issues/2608 -->
+
 ## 8.7.0-alpha5
 
 | Release date  | Changelog(s)                                                                                                                                                                               | Blog                                                                               |
