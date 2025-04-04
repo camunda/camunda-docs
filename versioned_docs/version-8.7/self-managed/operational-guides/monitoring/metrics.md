@@ -14,14 +14,14 @@ Metrics are meant to be accessed directly via your chosen monitoring system, whe
 Camunda. As such, they need to be consumed by your monitoring system before they can be accessed. Broadly speaking, this will happen in one of two ways,
 via polling (the default), or pushing.
 
-A polling system (e.g. Prometheus) will poll an endpoint exposed by Camunda at a regular interval. Each request constitute, grossly simplified, a data point
-for each metric. When working with such systems, you will want to configure the polling interval to get information fast enough, without overwhelming Camunda
+A **polling** system (such as Prometheus) will poll an endpoint exposed by Camunda at a regular interval. Each request constitute a data point
+for each metric. When working with such systems, configure the polling interval to get information fast enough, without overwhelming Camunda
 itself (which still has to serve this data) or having to store too much data in your monitoring system itself. Additionally, this means exposing the Camunda
 endpoint to your external monitoring system.
 
-When using a pushing system (e.g. OpenTelemetry), on the other hand, Camunda will be configured to asynchronously push metric updates to an external endpoint
+When using a **pushing** system (such as OpenTelemetry), Camunda is configured to asynchronously push metric updates to an external endpoint
 at a regular interval. This implies that the system is accessible to Camunda via the network, so you will most likely want to ensure communication is secured.
-Similarly to the polling approach, you will want to balance how fast you are pushing (and thus getting updates/data points), without overwhelming your external
+Similarly to the polling approach, balance how fast you are pushing (and thus getting updates/data points), without overwhelming your external
 system.
 
 ## Configuration
