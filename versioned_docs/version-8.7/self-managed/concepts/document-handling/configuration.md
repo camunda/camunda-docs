@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 Camunda supports multiple storage option for handling documents in Self-Managed environments. Depending on your deployment setup and production requirements, you can choose from cloud-based, local, or in-memory storage methods.
 
-The following section outlines supported storage types, their intended use cases, and configuration guidance.
+The following section outlines supported storage options, their intended use cases, and configuration guidance.
 
 ## Supported storage options
 
@@ -22,11 +22,12 @@ The following section outlines supported storage types, their intended use cases
 
 <TabItem value='all'>
 
-- [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage integration can be used in Self-Managed configurations with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
-- Use [**AWS S3**](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution for Self-Managed, and to ensure storage is properly isolated and managed for each environment.
+- [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) bucket storage provides a secure, scalable solution for storing and retrieving documents externally. Buckets are created per cluster to ensure proper isolation and environment-specific management.
+  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
+- [**AWS S3**](https://aws.amazon.com/s3/) bucket storage offers a secure and scalable document storage. Buckets are also created per cluster to maintain environment isolation and separation.
   - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
 - **Local storage** can be configured for a cluser to store documents in a local folder.
-  - It can be used only for [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+  - It can be used only for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
   - It is not supported for production environments.
 - **In-memory** storage can be used to store documents during application runtime. When the application is stopped, documents will be lost.
   - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
@@ -36,8 +37,9 @@ The following section outlines supported storage types, their intended use cases
 
 <TabItem value='production'>
 
-- A [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage integration can be used in Self-Managed configurations with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
-- Use [**AWS S3**](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution for Self-Managed, and to ensure storage is properly isolated and managed for each environment.
+- [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) bucket storage provides a secure, scalable solution for storing and retrieving documents externally. Buckets are created per cluster to ensure proper isolation and environment-specific management.
+  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
+- [**AWS S3**](https://aws.amazon.com/s3/) bucket storage offers a secure and scalable document storage. Buckets are also created per cluster to maintain environment isolation and separation.
   - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
 
 </TabItem>
