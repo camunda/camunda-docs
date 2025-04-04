@@ -8,19 +8,13 @@ description: "A comprehensive guide on configuring and managing secrets in Camun
 
 ## Overview
 
-This guide provides detailed instructions for configuring and managing secrets when using the official Helm chart. It covers:
-
-- Internal secrets: secrets used by the C8 apps
-- External secrets: secrests used for third party configuration
-- Secure handling of Kubernetes secrets
-- Practical YAML configuration examples, including PostgreSQL, TLS, OAuth clients
-- Best practices for upgrades and secret management
+This guide provides detailed instructions for configuring and managing secrets when using the official Helm chart.
 
 ---
 
 ## Internal Secrets
 
-These secrets are used by Camunda applications, and created and managed by the Helm chart unless explicitly configured.
+These secrets are used by Camunda applications. They are created and managed by the Helm Chart unless explicitly configured.
 
 | **Secret**                           | **Chart Values Key**                                                                                                          | **Purpose**                                                       | **Default Behavior**            |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------------- |
@@ -41,7 +35,7 @@ These secrets are used by Camunda applications, and created and managed by the H
 
 ---
 
-## Disabling Auto-Generated Secrets
+### Disabling Auto-Generated Secrets
 
 By default, the Camunda Helm chart auto-generates secrets like OAuth client passwords on first install. This ensures the platform can start without manual configuration but can lead to issues on upgrades if the secrets are regenerated.
 
@@ -65,8 +59,6 @@ This will stop auto-generating secrets. Ensure:
 
 These secrets are necessary when integrating Camunda with third-party services.
 
-### External Databases and Mail Services
-
 | **Secret**                           | **Chart Values Key**                                                                                            | **Purpose**                                                     | **Default Behavior**    |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------- |
 | **External Database Password**       | `webModeler.restapi.externalDatabase.existingSecret.name`, `webModeler.restapi.externalDatabase.existingSecret` | Password for external PostgreSQL if using an external DB        | Not set unless provided |
@@ -81,7 +73,7 @@ These secrets are necessary when integrating Camunda with third-party services.
 
 ## Creating Kubernetes Secrets
 
-Secrets may be created manually using the kubectl CLI or defined in Kubernetes manifests. For more examples, see [Create Identity Secrets in the Camunda Docs](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets).
+Secrets may be created manually using the kubectl CLI or defined in Kubernetes manifests.
 
 To create a secret via `kubectl`::
 
