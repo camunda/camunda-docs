@@ -31,8 +31,8 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 Agentic process orchestration enhancements include:
 
-- A new optional `completionCondition` boolean expression for ad-hoc subprocesses that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc subprocess behavior when the completion condition is met.
-- A new [Query activatable activities](/apis-tools/camunda-api-rest/specifications/find-ad-hoc-subprocess-activities.api.mdx) API used to search for activatable activities within ad-hoc subprocesses.
+- An optional `completionCondition` boolean expression for ad-hoc subprocesses that is evaluated every time an inner element is completed. A `cancelRemainingInstances` boolean attribute can also be configured to influence the ad-hoc subprocess behavior when the completion condition is met.
+- A [Query activatable activities](/apis-tools/camunda-api-rest/specifications/find-ad-hoc-subprocess-activities.api.mdx) API used to search for activatable activities within ad-hoc subprocesses.
 
 To learn more about these features, see [ad-hoc subprocesses](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
 
