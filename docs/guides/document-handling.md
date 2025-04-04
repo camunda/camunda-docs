@@ -11,7 +11,7 @@ Offering robust [document handling](/components/concepts/document-handling.md) c
 
 In this guide we will cover three main use cases:
 
-- [Upload a document to a BPMN process](#upload-a-document-to-a-bomn-process);
+- [Upload a document to a BPMN process](#upload-a-document-to-a-bpmn-process);
 - [Display and download a document](#display-and-download-a-document);
 - [Send a document to an external system via a Connector](#send-a-document-to-an-external-system-via-a-connector).
 
