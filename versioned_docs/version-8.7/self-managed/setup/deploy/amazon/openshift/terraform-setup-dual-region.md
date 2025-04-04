@@ -68,7 +68,7 @@ Following this tutorial and steps will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/). This material will be used throughout the rest of this documentation, the reference architecture are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/procedure/get-your-copy.sh
@@ -270,7 +270,7 @@ The dual-cluster setup requires managing two distinct clusters in different regi
 For the simplicity of usage, we will manage the two clusters using a single module, therefore
 this guide uses a dedicated [aws terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs) for each region.
 
-1. Ensure that you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture): `./aws/openshift/rosa-hcp-dual-region`. Then navigate into the `clusters` module:
+1. Ensure you are in the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture): `./aws/openshift/rosa-hcp-dual-region`. Then, navigate into the `clusters` module:
 
 ```bash
 ls
@@ -355,7 +355,7 @@ cd clusters
 
 This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
 
-We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/feature/migrate-dual-region-rosa/aws/modules/rosa-hcp/README.md) for more information.
+Consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/feature/migrate-dual-region-rosa/aws/modules/rosa-hcp/README.md) for more information.
 
 :::
 
