@@ -50,13 +50,13 @@ Create and append tasks with resources available in the current project and proc
 
 ### End-to-end organization process landscape <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Modeler</span>
 
-Automation leaders can visualize all automation projects through a single, hierarchical source of truth of approved processes. Now, users can more easily communicate their automation efforts and maximize asset reuse.
+Automation leaders can visualize all automation projects through a single, hierarchical source of truth of approved processes. Specifically, there are new features for copying reviewed process application versions to a central project where every org member can be invited with a single click. Now, users can more easily communicate their automation efforts and maximize asset reuse.
 
 <!-- https://github.com/camunda/product-hub/issues/2611 -->
 
 ### Production-ready RPA
 
-With the RPA 1.0 release, our [RPA solution becomes production-ready](/components/rpa/overview.md), empowering customers to deploy robust, scalable, and maintainable automation workflows seamlessly. We also now have [library documentation on Github](https://camunda.github.io/rpa-python-libraries/).
+With the RPA 1.0 release, our [RPA solution becomes production-ready](/components/rpa/overview.md), empowering customers to deploy robust, scalable, and maintainable automation workflows seamlessly. We also now have [library documentation on GitHub](https://camunda.github.io/rpa-python-libraries/).
 
 <!-- https://github.com/camunda/product-hub/issues/2533 -->
 
