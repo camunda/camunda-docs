@@ -62,7 +62,7 @@ Only logged-in users can upload files.
 Uploaded documents can be referenced later in the process.
 
 Filepicker's output variable is an array of objects with document metadata.
-It always returns an array of objects. A user either uploads a single document or multiple documents.
+It always returns an array of objects, either a user uploads a single document or multiple documents.
 
 Single document uploads are accessible using `value[1]` (since [FEEL](../components/modeler/feel/what-is-feel.md) uses 1-based indexing).
 
