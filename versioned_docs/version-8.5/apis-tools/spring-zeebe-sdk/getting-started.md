@@ -8,9 +8,10 @@ This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grp
 
 ## Version compatibility
 
-| Camunda Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
-| -------------------------- | ---- | --------------- | --------------------------- |
-| 8.5.x                      | ≥ 17 | 8.5.x           | 3.2.x                       |
+| Spring Zeebe SDK version | JDK  | Camunda version | Bundled Spring Boot version |
+| ------------------------ | ---- | --------------- | --------------------------- |
+| 8.5.x (< 8.5.16)         | ≥ 17 | 8.5.x           | 3.2.x                       |
+| 8.5.x (>= 8.5.16)        | ≥ 17 | 8.5.x           | 3.3.x                       |
 
 ## Add the Spring Zeebe SDK to your project
 
@@ -26,7 +27,7 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 
 ## Enable the Java Compiler `-parameters`-flag
 
-If you don't want to specify annotation values just as the process variable name on the [variable](#using-variable) annotation, the Java compiler flag `-parameters` is required.
+If you don't want to specify annotation values just as the process variable name on the [variable](configuration.md#using-variable) annotation, the Java compiler flag `-parameters` is required.
 
 If you are using Maven you can enable this with the Compiler plugin:
 
@@ -97,6 +98,10 @@ zeebe.client.security.plaintext=true
 The `zeebe.client.cloud.authUrl` property above is the Keycloak token endpoint.
 :::
 
+:::note
+Ensure you provide `grpcAddress` and `restAddress` in absolute URI format: `scheme://host(:port)`.
+:::
+
 You can also configure the connection to a Self-Managed Zeebe cluster using environment variables and specifying your
 gateway address:
 
@@ -127,6 +132,14 @@ You can enforce the right connection mode, for example if multiple contradicting
 ```properties
 zeebe.client.connection-mode=CLOUD
 zeebe.client.connection-mode=ADDRESS
+```
+
+### Configuring OAuth Scope (Optional)
+
+The OAuth scope can be configured via the following [client environment variable](self-managed/zeebe-deployment/security/client-authorization.md#environment-variables) only:
+
+```
+ZEEBE_TOKEN_SCOPE=xxx
 ```
 
 ## Obtain the Zeebe client

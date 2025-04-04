@@ -1,0 +1,235 @@
+---
+id: assign-user-to-tenant
+title: "Assign a user to a tenant"
+description: "Assign a single user to a specified tenant."
+sidebar_label: "Assign a user to a tenant"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWMFy2zYQ/ZUdnJIpIyqJ06a8aZykdSf1eGy5Pbg+gORKRAICDLC0rOHw3zsLkLIiyamT6VEHjUhgsQ+LfQ8gthMkl15kN2KORhoSt4mwDTpJypqzUmRCeq+W5tqjm9vBJhEl+sKpho1EJmbBBCR4ZZYaofXogCw3NFiohcISKAydiEQ00skaCR3DdsLIGkUmYv9ZKRKh2GcjqRKJcPilVQ5LkZFrcRd4XiG0Rn1pEVSJhhjKgV0AVbiF6IsKaymyTtC6YTBPTpml6Ptkg89zDo/fjT8MHGE3wYdF+Tb8LQP4xhqPnvtfTU/47zAIrKQH3xYFer9otV4PELy49quI+0ScTKeHPTXO3qkSSyglSVAejCW4k1qVPNXCGkJDPFQ2jVZF4EHaOJtrrH/65NlPtxXRDhHgIlpCiSSVBpt/woJAeoiGOZagDNxcfjiFX0/e/HL7rCJqfJamq9Vq4hbFCywVWTexbpm6RcE/tns+gXmFDqGWa8gRZFkqxpSaA2rQkUI/sq0Y12OYNvCyT/4xIhkTEKfFXNwMfkjPbpoSsbCulsQkcWqf/HB9eTbSb63Mch86jFnIVrMPmduWslxL85kTRYr0QdBdFN/WtXTrkWZfA/SJ8CSp3QpDKEO4RLc9f2Xo9as930yL3+fzC4guoLAlwsI6oEr5EYiDqJVRdVuL7GQ6TUQt7+Pbz9Npzz4540+IxADeN1qaQK3dcJSB2joc+BMCU8aTNMX/lRnr1FLt4k54LxhzIQYSv4sR9X0fBPV6n+8frMtVWaIJ9ATeLNDTqCqptV3hUVdHXR119Q1dHTjyzi3BwramjLqK5xpY93AOmo3FUV1HdR3V9Yi63hz6DJwZ4FV2zEN0zjqwRdE6hyWsKqWDe/7IHLGHYy1y8ai1o9aOWtvXWp+IGqmyfGVu2sAcvkFmIo2nl0+78Yrbp3yM+bQbr449XxLR3Y1X4tZpkYkuaqjP0rSrrKc+6xrrqE/vOEF30imZ60hL7o5aGzmkbSF1aD6US+7YvrOeyro1pYS3cPn+ag6/ScKVXIe1ZcivXb+dvp0e9Mqmj3icXZxBjDAycWt3GN2yzA+6jcZPcRwu1B6L1ilaX/GwuDw5Sodu1nI+NgwZ8IJ3fo9GIhkePoy8+ePveUi9Mgsbhg8U2J8IZwWdjzOfTl7u0+3iLKimsHXdmrB1miWsFFUgtwIrdOuJA0qEVgUaH4g91ClGs4+xB/6KiPBywkmJzBl3zKWiqs0nha3TIg7b/Ofa5mktlUkHCJ+ezv68Pn83e/Hx7PT9+dX7Fy8n0wndUwi+sZ5qabbmsan5PBR76GB1qHs4Mr6zUDQkivCe0kZLZZg6IcJuENfNUDbyIhHZVgUp6IvbNlWd22QQyY3oulx6vHa677n5S4tuLbKb2wdNBRGWyvNzKbKF1H639LMd1bPLoUj0HJ5YkDoY2dAozTrIW7f8JhLxGdfb9TGuWf343P6zWPUDU9sscn/bJ6JCWaILSxi7Z0WBDW0NfPS7geW72UQvrll3/wJjZBiz
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Assign a user to a tenant"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/tenants/{tenantId}/users/{username}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Assign a single user to a specified tenant.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      description: "The unique identifier of the tenant.",
+      schema: { type: "string" },
+    },
+    {
+      name: "username",
+      in: "path",
+      required: true,
+      description: "The username of the user to assign.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The user was successfully assigned to the tenant." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found. The tenant or user was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

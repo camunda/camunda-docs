@@ -214,10 +214,10 @@ Then, take the contents under `application.yml` and put it under the `operate.co
 - [Operate](docs/self-managed/operate-deployment/operate-configuration.md)
 - [Tasklist](docs/self-managed/tasklist-deployment/tasklist-configuration.md)
 - [Web Modeler](docs/self-managed/modeler/web-modeler/configuration/configuration.md)
-- [Console](docs/self-managed/console-deployment/configuration.md)
+- [Console](/self-managed/console-deployment/configuration.md)
 - [Connectors](docs/self-managed/connectors-deployment/connectors-configuration.md)
 - [Identity](docs/self-managed/identity/deployment/configuration-variables.md)
-- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration)
+- [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md)
 
 ## Limitations
 

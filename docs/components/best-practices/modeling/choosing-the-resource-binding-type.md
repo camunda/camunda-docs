@@ -9,9 +9,9 @@ Camunda 8 offers version binding for linked processes, decisions, or forms. This
 
 You can choose the binding type for the linked target resource for the following BPMN process elements:
 
-- [Call activities](/docs/components/modeler/bpmn/call-activities/call-activities.md#defining-the-called-process)
-- [Business rule tasks](/docs/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-called-decision) (if the DMN decision implementation is used)
-- [User tasks](/docs/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) (if a Camunda Form is linked)
+- [Call activities](/components/modeler/bpmn/call-activities/call-activities.md#defining-the-called-process)
+- [Business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-called-decision) (if the DMN decision implementation is used)
+- [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) (if a Camunda Form is linked)
 
 The binding type determines the version of the target resource used at runtime.
 
@@ -56,7 +56,8 @@ Camunda 8 supports the following binding types:
           <li><p>This option ensures predictable behavior by tying the two versions together, and allows you to deploy future versions of the target resource without disrupting ongoing process instances.</p></li>
           <li><p>It is ideal for self-contained projects without external or shared dependencies.</p></li>
           <li>
-            <p>To use the <code>deployment</code> binding option, create and deploy a <a href="../../../modeler/web-modeler/process-applications/#deploy-and-run-a-process-application">process application in Web Modeler</a>,
+            <p>
+              To use the <code>deployment</code> binding option, create and deploy a <a href="../../../modeler/web-modeler/process-applications/#deploy-and-run-a-process-application">process application in Web Modeler</a>,
               or deploy multiple resources together via the <a href="../../../../apis-tools/zeebe-api/gateway-service/#deployresource-rpc"> Zeebe API</a>.
             </p>
           </li>

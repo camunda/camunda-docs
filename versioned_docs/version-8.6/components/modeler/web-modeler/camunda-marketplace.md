@@ -12,6 +12,10 @@ If you are a **[Web Modeler Self-Managed](/self-managed/modeler/web-modeler/inst
 
 ## Browse Marketplace Connectors
 
+:::note
+Connectors created by partners or the community are not part of the commercial Camunda product. Camunda does not support these Connectors as part of its commercial services to enterprise customers. Please evaluate each client to make sure it meets your requirements before using.
+:::
+
 To navigate to the Camunda Marketplace, take the following steps:
 
 1. Log in to your Camunda account.
@@ -19,7 +23,7 @@ To navigate to the Camunda Marketplace, take the following steps:
 3. While modeling your BPMN diagram, you can incorporate Marketplace Connectors from the append menu. The append menu can be accessed in three ways:
 
 - From the canvas, select an element and click the **Change element** icon.
-- From the properties panel, navigate to the **Template** section and click **Select**.
+- From the properties panel on the right side of the screen, navigate to the **Template** section and click **Select**.
 - From the side palette, click the **Create element** icon.
   ![change element](./img/change-element.png)
 

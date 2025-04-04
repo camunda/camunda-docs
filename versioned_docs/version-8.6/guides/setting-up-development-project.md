@@ -1,6 +1,6 @@
 ---
 id: setting-up-development-project
-title: Set up your first development project
+title: Set up a development project
 description: "Set up your first project to model, deploy, and start a process instance."
 keywords: [get-started, local-install]
 ---
@@ -14,7 +14,7 @@ keywords: [get-started, local-install]
 - [Desktop Modeler](https://camunda.com/download/modeler/)
 - [Operate](/self-managed/operate-deployment/install-and-start.md)
 - [Tasklist](/self-managed/tasklist-deployment/install-and-start.md)
-- [Optimize]($optimize$/components/what-is-optimize)
+- [Optimize](/components/optimize/what-is-optimize.md)
 
 ## Setting up your project
 

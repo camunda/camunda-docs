@@ -137,12 +137,14 @@ This section contains the network configuration. Particularly, it allows to conf
 1. command: the socket which is used for gateway-to-broker communication
 2. internal: the socket which is used for broker-to-broker communication
 
-| Field          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example Value |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host           | Controls the default host the broker should bind to. Can be overwritten on a per binding basis for client, management and replication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_HOST`.                                                                                                                                                                                                                                      | 0.0.0.0       |
-| advertisedHost | Controls the advertised host (the contact point advertised to other brokers); if omitted defaults to the host. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_ADVERTISEDHOST`.                                                                                                                                                                                  | 0.0.0.0       |
-| portOffset     | If a port offset is set it will be added to all ports specified in the config or the default values. This is a shortcut to not always specifying every port. The offset will be added to the second last position of the port, as Zeebe requires multiple ports. As example a portOffset of 5 will increment all ports by 50, i.e. 26500 will become 26550 and so on. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_PORTOFFSET`. | 0             |
-| maxMessageSize | Sets the maximum size of the incoming and outgoing messages (i.e. commands and events). This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_MAXMESSAGESIZE`.                                                                                                                                                                                                                                                                           | 4MB           |
+| Field               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example Value |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| host                | Controls the default host the broker should bind to. Can be overwritten on a per binding basis for client, management and replication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_HOST`.                                                                                                                                                                                                                                      | 0.0.0.0       |
+| advertisedHost      | Controls the advertised host (the contact point advertised to other brokers); if omitted defaults to the host. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_ADVERTISEDHOST`.                                                                                                                                                                                  | 0.0.0.0       |
+| portOffset          | If a port offset is set it will be added to all ports specified in the config or the default values. This is a shortcut to not always specifying every port. The offset will be added to the second last position of the port, as Zeebe requires multiple ports. As example a portOffset of 5 will increment all ports by 50, i.e. 26500 will become 26550 and so on. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_PORTOFFSET`. | 0             |
+| maxMessageSize      | Sets the maximum size of the incoming and outgoing messages (i.e. commands and events). This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_MAXMESSAGESIZE`.                                                                                                                                                                                                                                                                           | 4MB           |
+| socketReceiveBuffer | Sets the size of the socket's receive buffer for the broker. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SOCKETRECEIVEBUFFER`.                                                                                                                                                                                                                                                                     | 4MB           |
+| socketSendBuffer    | Sets the size of the socket's send buffer for the broker. If omitted defaults to 1MB. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SOCKETSENDBUFFER`.                                                                                                                                                                                                                                                                           | 4MB           |
 
 #### YAML snippet
 
@@ -152,23 +154,31 @@ network:
   advertisedHost: 0.0.0.0
   portOffset: 0
   maxMessageSize: 4MB
+  socketReceiveBuffer: 4MB
+  socketSendBuffer: 4MB
 ```
 
 ### zeebe.broker.network.security
 
-| Field                | Description                                                                                                                                                                                 | Example Value |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`. | false         |
-| certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH`.                       |               |
-| privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH`.                          |               |
+| Field                | Description                                                                                                                                                                                                  | Example Value |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`.                  | false         |
+| certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH`.                                        |               |
+| privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH`.                                           |               |
+| keyStore             | Configures the keystore file containing both the certificate chain and the private key; currently only supports PKCS12 format.                                                                               |               |
+| keyStore.filePath    | The path for keystore file; This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_FILEPATH`.                                                            | /path/key.pem |
+| keyStore.password    | Sets the password for the keystore file, if not set it is assumed there is no password; This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_PASSWORD` | changeme      |
 
 #### YAML snippet
 
 ```yaml
 security:
   enabled: false
-  certificateChainPath:
-  privateKeyPath:
+  certificateChainPath: null
+  privateKeyPath: null
+  keyStore:
+    filePath: null
+    password: null
 ```
 
 ### zeebe.broker.network.commandApi
@@ -411,16 +421,18 @@ cluster:
 
 ### zeebe.broker.cluster.raft
 
+This section contains all properties required to configure raft.
+
 | Field                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                            | Example Value |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| raft                   | Configure raft properties.                                                                                                                                                                                                                                                                                                                                                                                                             |               |
 | enablePriorityElection | When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distributed the leaders uniformly across the brokers. Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_ENABLEPRIORITYELECTION`. | true          |
 
 #### YAML snippet
 
 ```yaml
 cluster:
-  raft: enablePriorityElection = true
+  raft:
+    enablePriorityElection: true
 ```
 
 ### zeebe.broker.cluster.flush
@@ -866,7 +878,7 @@ as well.
 :::
 
 :::note
-If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md/#zeebegatewaymultitenancy).
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md#zeebegatewaymultitenancy).
 :::
 
 | Field   | Description                                                                                                                                                  | Example value |

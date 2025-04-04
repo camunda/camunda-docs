@@ -12,7 +12,7 @@
  * @property {string=} canonicalId
  *
  * @typedef {object} Metadata
- * @property {string=} unversionedId
+ * @property {string=} id
  * @property {string=} permalink
  */
 
@@ -108,13 +108,13 @@ function determineCanonicalFromId(canonicalId, currentPlugin) {
  */
 function determineCanonicalFromDoc(currentDoc, currentPlugin) {
   const {
-    metadata: { unversionedId, permalink },
+    metadata: { id, permalink },
   } = currentDoc;
 
   const match = currentPlugin.versions
     .filter((x) => x.name !== "current") // exclude `next`
     .flatMap((x) => x.docs)
-    .find((doc) => doc.id === unversionedId);
+    .find((doc) => doc.id === id);
 
   if (match) {
     if (/(optimize|docs)\/((next|[0-9\.]+)\/)/.test(match.path)) {

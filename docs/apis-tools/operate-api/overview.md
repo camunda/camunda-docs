@@ -5,6 +5,10 @@ slug: /apis-tools/operate-api/overview
 description: "Operate API is a REST API and provides searching, getting, and changing Operate data. Requests and responses are in JSON."
 ---
 
+:::note
+To migrate from Camunda's V1 component REST APIs to the V2 [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), review [migrating to the Camunda 8 API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+:::
+
 Operate API is a REST API and provides searching, getting, and changing Operate data.
 Requests and responses are in JSON notation. Some objects have additional endpoints.
 For example, `process-definitions` has an endpoint to get the process-definition as XML representation.
@@ -19,7 +23,7 @@ Work with this API in our [Postman collection](https://www.postman.com/camundate
 For SaaS: `https://${REGION}.operate.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
 
 :::note
-Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
+Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 
 For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Operate component.
 :::
@@ -35,7 +39,7 @@ A Swagger UI is also available within a running instance of Operate, at `https:/
 For SaaS: `https://${REGION}.operate.camunda.io/${CLUSTER_ID}/swagger-ui.html`, and for Self-Managed installations: `http://localhost:8080/swagger-ui.html`.
 
 :::note
-Find your region and cluster ID under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
+Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
 :::
 
 ## Multi-tenancy

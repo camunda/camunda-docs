@@ -7,12 +7,6 @@ description: Start a process instance with your custom webhook configuration, tr
 
 The **HTTP Webhook Connector** is an inbound Connector that allows you to start a BPMN process instance triggered by external HTTP call.
 
-:::note
-If you have used the HTTP Webhook Connector with a self-managed Camunda 8 configuration before the
-Connector SDK [0.7.0 release](https://github.com/camunda/connector-sdk/releases/tag/0.7.0), you might need to manually replace the element template.
-Please refer to the [update guide](/components/connectors/custom-built-connectors/update-guide/060-to-070.md) for more details.
-:::
-
 ## Create an HTTP Webhook Connector event
 
 1. Start building your BPMN diagram. You can use HTTP Webhook Connector with either **Start Event** or **Intermediate Catch Event** building blocks.
@@ -149,7 +143,7 @@ URLs of the exposed HTTP Webhooks adhere to the following pattern:
 
 `http(s)://<base URL>/inbound/<webhook ID>>`
 
-- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your cluster region and cluster ID.
+- `<base URL>` is the URL of Connectors component deployment. When using the Camunda 8 SaaS offering, this will typically contain your **region Id** and **cluster Id**, found in your client credentials under the **API** tab within your cluster.
 - `<webhook ID>` is the ID (path) you configured in the properties of your HTTP Webhook Connector.
 
 If you make changes to your HTTP Webhook Connector configuration, you need to redeploy the BPMN diagram for the changes to take effect.

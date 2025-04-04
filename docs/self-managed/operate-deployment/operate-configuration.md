@@ -44,28 +44,6 @@ To change the values for http header for security reasons, you can use the confi
 | camunda.operate.websecurity.httpStrictTransportSecurityMaxAgeInSeconds   | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | 63,072,000 (two years)                                                                                                                                                                                                                                                                                           |
 | camunda.operate.websecurity.httpStrictTransportSecurityIncludeSubDomains | See [Spring description](https://docs.spring.io/spring-security/site/docs/5.2.0.RELEASE/reference/html/default-security-headers-2.html#webflux-headers-hsts) | true                                                                                                                                                                                                                                                                                                             |
 
-## Multi-tenancy
-
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/identity/user-guide/tenants/managing-tenants.md) or
-clients within a single installation.
-
-From version 8.3 onwards, Operate has been enhanced to support multi-tenancy for Self-Managed setups. More information about
-the feature can be found in [the multi-tenancy documentation](../concepts/multi-tenancy.md).
-
-The following configuration is required to enable multi-tenancy in Operate:
-
-| YAML path                            | Environment variable                 | Description                                         | Default value |
-| ------------------------------------ | ------------------------------------ | --------------------------------------------------- | ------------- |
-| camunda.operate.multiTenancy.enabled | CAMUNDA_OPERATE_MULTITENANCY_ENABLED | Activates the multi-tenancy feature within Operate. | false         |
-
-The same rules apply to the [Operate API](../../apis-tools/operate-api/overview.md#multi-tenancy).
-
-:::note
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
-
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
-:::
-
 ### Securing Operate - Zeebe interaction
 
 While executing user operations, Operate communicates with Zeebe using the Zeebe Java client. For Zeebe to know whether operations are allowed to be executed
@@ -73,7 +51,7 @@ in terms of tenant assignment, Operate - Zeebe connection must be secured. Check
 
 ### Troubleshooting multi-tenancy in Operate
 
-If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-8.6#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
+If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
 
 If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/identity/what-is-identity.md), users will not have any tenant authorizations in Operate
 and will not be able to access the data of any tenants in Operate.
@@ -150,6 +128,20 @@ camunda.operate:
     url: https://localhost:9200
     ssl:
       selfSigned: true
+```
+
+#### Disable Elasticsearch deprecation logging
+
+When using an Elasticsearch version 8.16.0+ it is recommended to turn off deprecation logging for the Elasticsearch cluster.
+
+```shell
+curl -X PUT "http://localhost:9200/_cluster/settings" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "persistent": {
+      "logger.org.elasticsearch.deprecation": "OFF"
+    }
+  }'
 ```
 
 ### Settings for OpenSearch
@@ -356,15 +348,6 @@ With this configuration, the following endpoints are available for use out of th
 `<server>:8080/actuator/health/readiness` Readiness probe
 
 This configuration may be overwritten by changing the corresponding configuration parameters values.
-
-### Versions before 0.25.0
-
-In versions before 0.25.0, management endpoints look different. Therefore, we recommend reconfiguring for next versions.
-
-| Name      | Before 0.25.0    | Starting with 0.25.0       |
-| --------- | ---------------- | -------------------------- |
-| Readiness | /api/check       | /actuator/health/readiness |
-| Liveness  | /actuator/health | /actuator/health/liveness  |
 
 ## Logging
 

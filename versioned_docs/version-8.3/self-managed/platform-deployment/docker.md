@@ -4,6 +4,8 @@ title: "Docker"
 keywords: ["camunda docker"]
 ---
 
+import {DockerCompose} from "@site/src/components/CamundaDistributions";
+
 This page guides you through Camunda 8 Docker images and how to run the platform in a developer setup using Docker Compose.
 
 ## Docker images
@@ -14,15 +16,15 @@ We provide Docker images [via Dockerhub](https://hub.docker.com/u/camunda). All 
 The provided Docker images are supported for production usage only on Linux systems. Windows or macOS are only supported for development environments.
 :::
 
-| Component         | Docker image                                                                           | Link to configuration options                                                                                           |
-| ----------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Zeebe             | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)                         | [Environment variables](../../zeebe-deployment/configuration/environment-variables/)                                    |
-| Operate           | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)                     | [Operate configuration](../../operate-deployment/operate-configuration)                                                 |
-| Tasklist          | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                   | [Tasklist configuration](../../tasklist-deployment/tasklist-configuration)                                              |
-| Identity          | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                   | [Configuration variables](../../identity/deployment/configuration-variables/)                                           |
-| Optimize          | [camunda/optimize:8-latest](https://hub.docker.com/r/camunda/optimize)                 | [Environment variables]($optimize$/self-managed/optimize-deployment/install-and-start/#available-environment-variables) |
-| Connectors        | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)               | [Connectors configuration](../../connectors-deployment/connectors-configuration)                                        |
-| Connectors Bundle | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle) | [Connectors configuration](../../connectors-deployment/connectors-configuration)                                        |
+| Component         | Docker image                                                                           | Link to configuration options                                                                                   |
+| ----------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| Zeebe             | [camunda/zeebe:latest](https://hub.docker.com/r/camunda/zeebe)                         | [Environment variables](../../zeebe-deployment/configuration/environment-variables/)                            |
+| Operate           | [camunda/operate:latest](https://hub.docker.com/r/camunda/operate)                     | [Operate configuration](../../operate-deployment/operate-configuration)                                         |
+| Tasklist          | [camunda/tasklist:latest](https://hub.docker.com/r/camunda/tasklist)                   | [Tasklist configuration](../../tasklist-deployment/tasklist-configuration)                                      |
+| Identity          | [camunda/identity:latest](https://hub.docker.com/r/camunda/identity)                   | [Configuration variables](../../identity/deployment/configuration-variables/)                                   |
+| Optimize          | [camunda/optimize:8-latest](https://hub.docker.com/r/camunda/optimize)                 | [Environment variables](/self-managed/optimize-deployment/install-and-start.md#available-environment-variables) |
+| Connectors        | [camunda/connectors:latest](https://hub.docker.com/r/camunda/connectors)               | [Connectors configuration](../../connectors-deployment/connectors-configuration)                                |
+| Connectors Bundle | [camunda/connectors-bundle:latest](https://hub.docker.com/r/camunda/connectors-bundle) | [Connectors configuration](../../connectors-deployment/connectors-configuration)                                |
 
 Zeebe is the only component that is often run on its own as a standalone component. In this scenario, it does not need anything else, so a simple `docker run` is sufficient:
 
@@ -79,12 +81,13 @@ You can also find more information on the supported [configuration variables](..
 
 ## Docker Compose
 
-A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors Bundle is available in the [camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose.yaml) repository.
-Follow the instructions in the [README](https://github.com/camunda/camunda-platform#using-docker-compose).
+A Docker Compose configuration to run Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors Bundle is available via `docker-compose.yaml`.
 
-:::warning
+:::danger
 While the Docker images themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](./helm-kubernetes/overview.md) in production.
 :::
+
+Download the artifact for Camunda 8 <DockerCompose/> and extract it.
 
 This Docker Compose configuration serves two purposes:
 
@@ -94,11 +97,6 @@ This Docker Compose configuration serves two purposes:
 :::note
 We recommend to use [Helm + KIND](./helm-kubernetes/guides/local-kubernetes-cluster.md) instead of Docker Compose for local environments, as the Helm configurations are battle-tested and much closer to production systems.
 :::
-
-### Web Modeler
-
-An additional Docker Compose configuration to run Web Modeler is also available in the
-[camunda-platform](https://github.com/camunda/camunda-platform/blob/main/docker-compose-web-modeler.yaml) repository. Follow the instructions in the [README](https://github.com/camunda/camunda-platform#web-modeler-self-managed) to utilize this configuration.
 
 ## Configuration hints
 

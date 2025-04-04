@@ -38,11 +38,11 @@ Official clients have been developed and tested by Camunda. They also add conven
 <DocCardList items={[{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"}
 ]}/>
 
-:::note
-Other components in Camunda 8, such as [Tasklist API (GraphQL)](../apis-tools/tasklist-api/generated.md), provide language-agnostic APIs, but no clients to interact with them. GraphQL enables you to query, claim, and complete user tasks.
-:::
-
 ## Learn about Camunda Components and their APIs
+
+:::note
+To migrate from Camunda's V1 component REST APIs to the V2 [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), review [migrating to the Camunda 8 API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+:::
 
 Camunda 8 components have APIs to enable polyglot developers to work with in their programming language of choice. Below are links to available component APIs.
 
@@ -55,7 +55,7 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 type:"link", href:"/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/", label: "Camunda 8 API (REST)", docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 },
 {
-type:"link", href:"/optimize/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
+type:"link", href:"/docs/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
 },
 {
 type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"
@@ -72,6 +72,9 @@ Additionally, visit our documentation on [Operate](../self-managed/operate-deplo
 ### SDKs
 
 <DocCardList items={[{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
+{
+type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js", docId:"apis-tools/node-js-sdk"
+},
 ]}/>
 
 ### Postman

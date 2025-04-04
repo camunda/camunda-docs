@@ -12,19 +12,40 @@ A message is not sent to a process instance directly. Instead, the message corre
 
 ![Message Correlation](assets/message-correlation.png)
 
-A subscription is opened when a process instance awaits a message; for example, when entering a message catch event. The message name is defined either statically in the process (e.g. `Money collected`) or dynamically as an expression. The correlation key is defined dynamically as an expression (e.g. `= orderId`). The expressions are evaluated on activating the message catch event. The results of the evaluations are used as message name and as correlation key of the subscription (e.g. `"order-123"`).
+A subscription is opened when a process instance awaits a message; for example, when entering a message catch event. The message name is defined either statically in the process (e.g. `Money collected`) or dynamically as an expression. The correlation key is defined dynamically as an expression (for example, `= orderId`). The expressions are evaluated on activating the message catch event. The results of the evaluations are used as message name and as correlation key of the subscription (e.g. `"order-123"`).
 
 When a message is published and the message name and correlation key match to a subscription, the message is correlated to the corresponding process instance. If no proper subscription is opened, the message is discarded.
 
 A subscription is closed when the corresponding element (e.g. the message catch event), or its scope is left. After a subscription is opened, it is not updated (for example, when the referenced process instance variable is changed.)
 
 <details>
-   <summary>Publish message via zbctl</summary>
+   <summary>Publish message via Camunda 8 REST API</summary>
    <p>
 
 ```
-zbctl publish message "Money collected" --correlationKey "order-123"
+curl -L 'http://localhost:8080/v2/messages/publication' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "name": "Money collected",
+  "correlationKey": "order-123"
+}'
 ```
+
+See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
+When you require immediate feedback if the message was correlated to an open subscription, you can use `Correlate message` via Camunda 8 REST API. If correlation is successful it will return the first process instance key the message correlated with.
+
+```
+curl -L 'http://localhost:8080/v2/messages/correlation' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+"name": "Money collected",
+"correlationKey": "order-123"
+}'
+```
+
+See the [API reference for correlate message](/apis-tools/camunda-api-rest/specifications/correlate-message.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -40,12 +61,21 @@ When a subscription is opened, it polls the buffer for a proper message. If a pr
 The buffering of a message is disabled when its TTL is set to zero. If no proper subscription is open, the message is discarded.
 
 <details>
-   <summary>Publish message with TTL via zbctl</summary>
+   <summary>Publish message with TTL via Camunda 8 REST API</summary>
    <p>
 
 ```
-zbctl publish message "Money collected" --correlationKey "order-123" --ttl 1h
+curl -L 'http://localhost:8080/v2/messages/publication' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "name": "Money collected",
+  "correlationKey": "order-123",
+  "timeToLive": 3600000
+}'
 ```
+
+See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -67,12 +97,21 @@ A message is rejected and not correlated if a message with the same name, the sa
 The uniqueness check is disabled when no message ID is set.
 
 <details>
-   <summary>Publish message with ID via zbctl</summary>
+   <summary>Publish message with message ID via Camunda 8 REST API</summary>
    <p>
 
 ```
-zbctl publish message "Money collected" --correlationKey "order-123" --messageId "tracking-12345"
+curl -L 'http://localhost:8080/v2/messages/publication' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "name": "Money collected",
+  "correlationKey": "order-123",
+  "messageId": "tracking-12345"
+}'
 ```
+
+See the [API reference for publish message](/apis-tools/camunda-api-rest/specifications/publish-message.api.mdx) for more information, including additional request fields and code samples.
 
    </p>
  </details>
@@ -81,7 +120,7 @@ zbctl publish message "Money collected" --correlationKey "order-123" --messageId
 
 By combining the principles of message correlation, message uniqueness, and message buffering, very different behaviors can be achieved. Please note that a message name is mandatory, so it is omitted from the table.
 
-| Correlation key | Message Id | Time to live | Receiver type      | Behavior                                                                                                                                                                                        |
+| Correlation key | Message ID | Time to live | Receiver type      | Behavior                                                                                                                                                                                        |
 | --------------- | ---------- | ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | set             | not set    | set to 0     | Start event        | A new instance is started if no instance with the correlation key set at start is active, see [single instance](./#single-instance).                                                            |
 | set             | not set    | set to 0     | Intermediate event | The message is correlated if a matching subscription is active.                                                                                                                                 |
@@ -117,6 +156,10 @@ The messages are published with a `TTL > 0` and a correlation key that groups th
 The first message creates a new process instance. The following messages are correlated to the same process instance if they have the same correlation key.
 
 When the instance ends and messages with the same correlation key are not correlated yet, a new process instance is created.
+
+:::note
+You may also use TTL to wait for messages that may arrive earlier when combining [start events and intermediate catch events](/components/modeler/bpmn/events.md).
+:::
 
 ### Single instance
 

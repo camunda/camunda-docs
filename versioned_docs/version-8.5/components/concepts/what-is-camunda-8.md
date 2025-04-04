@@ -79,7 +79,7 @@ With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owner
 
 ### Optimize
 
-[Optimize]($optimize$/components/what-is-optimize) leverages process execution data to continuously [provide actionable insights](/guides/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
+[Optimize](/components/optimize/what-is-optimize.md) leverages process execution data to continuously [provide actionable insights](/guides/improve-processes-with-optimize.md). Optimize specializes in BPMN-based analysis and can show users exactly what their process model needs for successful execution.
 
 ### Console
 
@@ -105,7 +105,7 @@ The platform and tools are usable in your environment right away, with full publ
 
 ## Next steps
 
-- To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/contact/) page.
+- To request information about Camunda 8 performance and benchmarking, refer to our [Contact](/reference/contact.md) page.
 - [Introduction to Camunda 8](/guides/introduction-to-camunda-8.md)
 - [Create a Camunda 8 account](/guides/create-account.md)
 - [Migrate from Camunda 7 to Camunda 8](/guides/migrating-from-camunda-7/index.md)

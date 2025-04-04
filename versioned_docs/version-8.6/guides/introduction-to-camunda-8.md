@@ -30,13 +30,13 @@ Deployment guides for Camunda 8 components are available in the [Self-Managed se
 
 Below are two excellent starting points if you're new to Camunda: modeling a process, and getting started with Spring:
 
-<DocCardList items={[{type:"link", href:"/docs/next/components/modeler/about-modeler/", label: "Model your first process", docId:"components/modeler/about-modeler"},
+<DocCardList items={[{type:"link", href:"/docs/components/modeler/about-modeler/", label: "Model your first process", docId:"components/modeler/about-modeler"},
 {
-type:"link", href:"/docs/next/guides/getting-started-java-spring/", label: "Get started with Spring", docId:"guides/getting-started-java-spring",
+type:"link", href:"/docs/guides/getting-started-java-spring/", label: "Get started with Spring", docId:"guides/getting-started-java-spring",
 }
 ]}/>
 
-With these guides, start working with [Web Modeler](/components/modeler/about-modeler.md) to get familiar with BMPN and model a business process, or as a Java developer, step through using Spring Boot and the Spring Zeebe SDK with Desktop Modeler to interact with a local Self-Managed Camunda 8 installation.
+With these guides, start working with [Web Modeler](/components/modeler/about-modeler.md) to get familiar with BPMN and model a business process, or as a Java developer, step through using Spring Boot and the Spring Zeebe SDK with Desktop Modeler to interact with a local Self-Managed Camunda 8 installation.
 
 ### Use cases
 

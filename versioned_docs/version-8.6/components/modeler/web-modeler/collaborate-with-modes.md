@@ -10,10 +10,6 @@ Collaboration between business and IT professionals can be challenging, which is
 
 The **Design** mode view is tailored to business users, and the **Implement** and **Play** mode views are tailored to developers.
 
-:::note
-**Play** mode is an alpha feature that is being progressively rolled out. Review the [Play documentation](/components/modeler/web-modeler/play-your-process.md) for details.
-:::
-
 Business users can now focus on modeling, sharing, and collaborating, while developers can work on implementation and debugging with ease.
 
 When accessing a BPMN diagram for the [first time](/components/modeler/web-modeler/model-your-first-diagram.md), the **Design** mode is the first selected option. To switch between modes, you can select one of the tabs on the left side of the screen, above the diagram; any further selection is remembered and kept for the next sessions.
@@ -31,4 +27,4 @@ When a process template is selected, the default mode is **Implement**.
   ![read only properties](img/read-only-properties.png)
 - **Viewers** can access only the **Design** mode with read-only permission,
 
-Read more about the [different roles and how to assign them](components/modeler/web-modeler/collaboration.md/#access-rights-and-permissions).
+Read more about the [different roles and how to assign them](components/modeler/web-modeler/collaboration.md#access-rights-and-permissions).

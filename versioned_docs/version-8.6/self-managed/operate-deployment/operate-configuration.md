@@ -73,7 +73,7 @@ in terms of tenant assignment, Operate - Zeebe connection must be secured. Check
 
 ### Troubleshooting multi-tenancy in Operate
 
-If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://github.com/camunda/camunda-platform-helm/tree/main/charts/camunda-platform-8.6#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
+If users can view data from the `<default>` tenant only and no data from other tenants (and you have not [configured multi-tenancy using Helm](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters)), multi-tenancy is not enabled in Operate. Refer to the [configuration instructions above](#multi-tenancy).
 
 If multi-tenancy is enabled in Operate but disabled in [Identity](/self-managed/identity/what-is-identity.md), users will not have any tenant authorizations in Operate
 and will not be able to access the data of any tenants in Operate.
@@ -356,15 +356,6 @@ With this configuration, the following endpoints are available for use out of th
 `<server>:8080/actuator/health/readiness` Readiness probe
 
 This configuration may be overwritten by changing the corresponding configuration parameters values.
-
-### Versions before 0.25.0
-
-In versions before 0.25.0, management endpoints look different. Therefore, we recommend reconfiguring for next versions.
-
-| Name      | Before 0.25.0    | Starting with 0.25.0       |
-| --------- | ---------------- | -------------------------- |
-| Readiness | /api/check       | /actuator/health/readiness |
-| Liveness  | /actuator/health | /actuator/health/liveness  |
 
 ## Logging
 

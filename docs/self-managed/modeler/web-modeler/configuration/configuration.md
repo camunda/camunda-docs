@@ -20,36 +20,66 @@ import Licensing from '../../../../self-managed/react-components/licensing.md'
 
 ### Clusters
 
-Clusters configured using the following options can be selected when deploying from Web Modeler. If no clusters are configured, your cluster information can be provided at the time of the deployment. The Camunda 8 [Helm](/docs/self-managed/setup/install.md) and [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
+Clusters must be configured using the following options to access the cluster from within Web Modeler. If no clusters are configured, you will not be able to perform any actions that require a cluster (for example, deploy, start an instance, or Play a process).
+
+The Camunda 8 [Helm](/self-managed/setup/install.md) and [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
 
 To add additional clusters, increment the `0` value for each variable (`CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 
-| Environment variable                                 | Description                                                    | Example value                       |
+<<<<<<< HEAD
+| Environment variable | Description | Example value |
 | ---------------------------------------------------- | -------------------------------------------------------------- | ----------------------------------- |
-| `CAMUNDA_MODELER_CLUSTERS_0_ID`                      | A unique identifier to use for your cluster.                   | `test-cluster-1`                    |
-| `CAMUNDA_MODELER_CLUSTERS_0_NAME`                    | The name of your cluster.                                      | `test cluster 1`                    |
-| `CAMUNDA_MODELER_CLUSTERS_0_VERSION`                 | The Camunda version used by this cluster.                      | `8.6.0`                             |
-| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION`          | The authentication to use with your cluster.                   | `OAUTH`, `NONE`                     |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC`          | The address where your cluster can be reached.                 | `grpcs://zeebe-1.example.com:26500` |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST`          | The address where the Zeebe REST API can be reached.           | `https://zeebe-1.example.com:8080`  |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE`             | The address where Operate can be reached.                      | `https://operate-1.example.com`     |
-| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST`            | The address where Tasklist can be reached.                     | `https://tasklist-1.example.com`    |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL`               | The address of your token issuer.                              | `https://auth.example.com/token`    |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE`             | A comma-separated list of the scopes to use with this cluster. | `test-scope`                        |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE`    | The permission name for Zeebe.                                 | `zeebe-api`                         |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE`  | The permission name for Operate.                               | `operate-api`                       |
-| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist.                              | `tasklist-api`                      |
+| `CAMUNDA_MODELER_CLUSTERS_0_ID` | A unique identifier to use for your cluster. | `test-cluster-1` |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME` | The name of your cluster. | `test cluster 1` |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION` | The Camunda version used by this cluster. | `8.6.0` |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` | The authentication to use with your cluster. | `OAUTH`, `NONE` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC` | The address where your cluster can be reached. | `grpcs://zeebe-1.example.com:26500` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST` | The address where the Zeebe REST API can be reached. | `https://zeebe-1.example.com:8080` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE` | The address where Operate can be reached. | `https://operate-1.example.com` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST` | The address where Tasklist can be reached. | `https://tasklist-1.example.com` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL` | The address of your token issuer. | `https://auth.example.com/token` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE` | A comma-separated list of the scopes to use with this cluster. | `test-scope` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE` | The permission name for Zeebe. | `zeebe-api` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE` | The permission name for Operate. | `operate-api` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist. | `tasklist-api` |
+=======
+| Environment variable | Description | Example value |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `CAMUNDA_MODELER_CLUSTERS_0_ID` | A unique identifier to use for your cluster. | `test-cluster-1` |
+| `CAMUNDA_MODELER_CLUSTERS_0_NAME` | The name of your cluster. | `Test Cluster 1` |
+| `CAMUNDA_MODELER_CLUSTERS_0_VERSION` | The Camunda version used by this cluster. | `8.7.0` |
+| `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` | The [authentication](#available-authentication-methods) to use with your cluster. | `BEARER_TOKEN` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_GRPC` | [Internal or external](#notes-on-host-names-and-port-numbers) address where your cluster can be reached. | `grpc://camunda-zeebe-gateway:26500`, `grpcs://camunda-zeebe-gateway:26500` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_ZEEBE_REST` | [Internal or external](#notes-on-host-names-and-port-numbers) address where the Zeebe REST API can be reached. | `http://camunda-zeebe-gateway:8080`, `https://camunda-zeebe-gateway:8080` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_OPERATE` | [Internal or external](#notes-on-host-names-and-port-numbers) address where Operate can be reached. | `http://camunda-operate:80`, `https://camunda-operate:80` |
+| `CAMUNDA_MODELER_CLUSTERS_0_URL_TASKLIST` | [Internal or external](#notes-on-host-names-and-port-numbers) address where Tasklist can be reached. | `http://camunda-tasklist:80`, `https://camunda-tasklist:80` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_URL` | The address of your token issuer. Required for authentication `CLIENT_CREDENTIALS`. | `https://auth.example.com/token` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_SCOPE` | A comma-separated list of the scopes to use with this cluster. | `test-scope` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_ZEEBE` | The permission name for Zeebe. | `zeebe-api` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_OPERATE` | The permission name for Operate. | `operate-api` |
+| `CAMUNDA_MODELER_CLUSTERS_0_OAUTH_AUDIENCE_TASKLIST` | The permission name for Tasklist. | `tasklist-api` |
+
+#### Available authentication methods
+
+| Method                                                                                                                                                                                                                  | Description                                                                                                                                                                             | When to use?                                                                                                                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BEARER_TOKEN`<br/><br/>(replaces [deprecated method `OAUTH`](/reference/announcements-release-notes/870/870-announcements.md#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed)) | Web Modeler sends the authenticated user's token with every request to one of the cluster components (Zeebe, Operate, Tasklist).                                                        | The identity provider supports access tokens with multiple audiences.<br/>(_Note_: For the token to be accepted by the different cluster components, it must contain each component's audience.)<br/><br/>Example provider: Keycloak |
+| `CLIENT_CREDENTIALS`<br/><br/>([deprecated](/reference/announcements-release-notes/870/870-announcements.md#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed))                   | Web Modeler requests an M2M token using the client credentials flow and sends this token with every request. The client ID and client secret have to be provided by the user in the UI. | The identity provider does not support access tokens with multiple audiences.<br/><br/>Example provider: [Microsoft Entra ID](/self-managed/setup/guides/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration) |
+| `NONE`                                                                                                                                                                                                                  | Web Modeler does not send any token.                                                                                                                                                    | Requests to the cluster do not require an access token at all because [authentication is disabled](/self-managed/zeebe-deployment/security/client-authorization.md#camunda-identity-authorization).                                  |
+
+> > > > > > > main
 
 ### Database
 
 Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
 
-| Environment variable                  | Description                                           | Example value                                            |
-| ------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
-| `SPRING_DATASOURCE_URL`               | JDBC URL of the database                              | `jdbc:postgresql://postgres.example.com:5432/modeler-db` |
-| `SPRING_DATASOURCE_USERNAME`          | Database user name                                    | `modeler-user`                                           |
-| `SPRING_DATASOURCE_PASSWORD`          | Database user password                                | \*\*\*                                                   |
-| `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver | `software.amazon.jdbc.Driver`                            |
+| Environment variable                  | Description                                                                                                                                                                                                                                                                         | Example value                                            |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| `SPRING_DATASOURCE_URL`               | JDBC URL of the database                                                                                                                                                                                                                                                            | `jdbc:postgresql://postgres.example.com:5432/modeler-db` |
+| `SPRING_DATASOURCE_USERNAME`          | Database user name                                                                                                                                                                                                                                                                  | `modeler-user`                                           |
+| `SPRING_DATASOURCE_PASSWORD`          | Database user password                                                                                                                                                                                                                                                              | \*\*\*                                                   |
+| `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver                                                                                                                                                                                                                               | `software.amazon.jdbc.Driver`                            |
+| `SPRING_DATASOURCE_HIKARI_SCHEMA`     | [optional]<br/>Database schema.<br/>Defaults to the default schema of the database user (usually `public`) if not set.<br/>Refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) for naming restrictions. | `custom_schema`                                          |
 
 Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
 
@@ -131,6 +161,17 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 
 Refer to the [advanced SSL configuration guide](./ssl.md) for additional details on how to set up secure connections (incoming & outgoing) to the Web Modeler components.
 
+### Git Sync
+
+Web Modeler supports syncing files via [Git Sync](../../../../components/modeler/web-modeler/git-sync.md). You need to provide the base url for you provider if you are using a self-hosted GitLab or GitHub instance.
+
+| Provider      | Environment variable                      | Description                                                                                                                   | Default value               |
+| ------------- | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`        | Maximum number of allowed files for sync operations.                                                                          | `50`                        |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE` | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                       |
+| GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`  | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`    |
+| GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`  | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4` |
+
 ## Configuration of the `webapp` component
 
 ### General
@@ -204,7 +245,7 @@ The `webapp` component sends certain events (e.g. "user opened diagram", "user l
 | `LOG_LEVEL_CLIENT`   | [optional]<br/>Log level for the client         | `DEBUG`                      |
 | `LOG_LEVEL_WEBAPP`   | [optional]<br/>Log level for the Node.js server | `DEBUG`                      |
 
-The `LOG_LEVEL_*` options can be found [here](../../../operational-guides/troubleshooting/log-levels/#understanding-log-levels).
+The `LOG_LEVEL_*` options can be found [here](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
 Refer to the [Advanced Logging Configuration Guide](./logging.md#logging-configuration-for-the-webapp-component) for additional details on how to customize the `webapp` logging output.
 
 ### SSL

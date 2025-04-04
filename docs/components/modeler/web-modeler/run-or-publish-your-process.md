@@ -37,13 +37,13 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). If no configuration is found, you are prompted to manually enter your cluster details.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/identity/user-guide/roles/manage-roles.md) assigned in Identity to be authorized to deploy.
 
 ### Before deploying a process
 
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
-  If you are using [`versionTag` binding](/docs/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
+  If you are using [`versionTag` binding](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
   :::tip
   Consider using a [process application](process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
   :::
@@ -113,7 +113,7 @@ To schedule a process using a timer, follow these steps:
 
 <img src={ConvertToTimerImg} style={{width: 600}} alt="Converting the start event to a timer start event" />
 
-3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
+3. [Configure the timer start event](../bpmn/timer-events/timer-events.md#timer-start-events) using the **properties panel** on the right side of the screen under the **Deploy** button to define when the process should be executed. You can set the timer to trigger at a specific date and time or to repeat at a certain interval.
 
 4. Click on **Deploy** to [deploy](#deploy-a-process) the process.
 
@@ -128,7 +128,7 @@ Read more in the [timers documentation](../bpmn/timer-events/timer-events.md).
 - Use [Operate](../../operate/operate-introduction.md) to help you diagnose any problems with the process.
 
 :::tip
-You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize]($optimize$/components/what-is-optimize).
+You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize](/components/optimize/what-is-optimize.md).
 :::
 
 ## Publishing a process
@@ -137,23 +137,15 @@ Publishing a process means that you make it available to other users inside and 
 
 You have the following options to publish a process:
 
-- [Deploy a process](#deploy-a-process)
-  - [Before deploying a process](#before-deploying-a-process)
-- [Run a process](#run-a-process)
-  - [Test run using Play mode](#test-run-using-play-mode)
-  - [Run manually from Modeler](#run-manually-from-modeler)
-  - [Schedule via timer](#schedule-via-timer)
-  - [Best practices for running a process](#best-practices-for-running-a-process)
-- [Publishing a process](#publishing-a-process)
-  - [Deploy to run programmatically](#deploy-to-run-programmatically)
-  - [Publish via webhook](#publish-via-webhook)
-  - [Publish to Tasklist](#publish-to-tasklist)
-  - [Publish via a public form](#publish-via-a-public-form)
-    - [Deploy process to the public](#deploy-process-to-the-public)
-    - [Get the public link and share it](#get-the-public-link-and-share-it)
-  - [Listen to message or signal events](#listen-to-message-or-signal-events)
-  - [Best practices for publishing a process](#best-practices-for-publishing-a-process)
-  - [Missing client credentials](#missing-client-credentials)
+- [Deploy to run programmatically](#deploy-to-run-programmatically)
+- [Publish via webhook](#publish-via-webhook)
+- [Publish to Tasklist](#publish-to-tasklist)
+- [Publish via a public form](#publish-via-a-public-form)
+  - [Deploy process to the public](#deploy-process-to-the-public)
+  - [Get the public link and share it](#get-the-public-link-and-share-it)
+- [Listen to message or signal events](#listen-to-message-or-signal-events)
+- [Best practices for publishing a process](#best-practices-for-publishing-a-process)
+- [Missing client credentials](#missing-client-credentials)
 
 ### Deploy to run programmatically
 

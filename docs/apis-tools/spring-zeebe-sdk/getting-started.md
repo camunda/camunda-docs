@@ -1,19 +1,19 @@
 ---
 id: getting-started
 title: Getting started
-description: "Leverage Zeebe APIs (gRPC and REST) in your Spring Boot project."
+description: "Leverage Camunda APIs (gRPC and REST) in your Spring Boot project."
 ---
 
-This project allows you to leverage Zeebe APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/zeebe-api-rest/zeebe-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Zeebe SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
+This project allows you to leverage Camunda APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Spring Camunda SDK to deliver a Camunda Spring SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
 
 | Camunda Spring SDK version | JDK  | Camunda version | Bundled Spring Boot version |
 | -------------------------- | ---- | --------------- | --------------------------- |
-| 8.5.x                      | ≥ 17 | 8.5.x           | 3.2.x                       |
-| 8.6.x                      | ≥ 17 | 8.6.x           | 3.2.x                       |
+| 8.7.x                      | ≥ 17 | 8.7.x           | 3.4.x                       |
+| 8.8.x                      | ≥ 17 | 8.8.x           | 3.4.x                       |
 
-## Add the Spring Zeebe SDK to your project
+## Add the Spring Camunda SDK to your project
 
 Add the following Maven dependency to your Spring Boot Starter project, replacing `x` with the latest patch level available:
 
@@ -21,13 +21,13 @@ Add the following Maven dependency to your Spring Boot Starter project, replacin
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>spring-boot-starter-camunda-sdk</artifactId>
-    <version>8.6.x</version>
+    <version>8.8.x</version>
 </dependency>
 ```
 
 ## Enable the Java Compiler `-parameters`-flag
 
-If you don't want to specify annotation values just as the process variable name on the [variable](#using-variable) annotation, the Java compiler flag `-parameters` is required.
+If you don't want to specify annotation values just as the process variable name on the [variable](configuration.md#using-variable) annotation, the Java compiler flag `-parameters` is required.
 
 If you are using Maven you can enable this with the Compiler plugin:
 
@@ -82,8 +82,9 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-    cluster-id: <your cluster id>
-    region: <your cluster region>
+    cloud:
+      cluster-id: <your cluster id>
+      region: <your cluster region id>
 ```
 
 ### Self-Managed
@@ -97,7 +98,7 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
 ```
 
 If you have different endpoints for your applications or want to disable a client, configure the following:
@@ -106,28 +107,25 @@ If you have different endpoints for your applications or want to disable a clien
 camunda:
   client:
     mode: self-managed
-    tenant-ids:
-      - <default>
+    tenant-id: <default>
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      issuer: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-    zeebe:
-      enabled: true
-      grpc-address: http://localhost:26500
-      rest-address: http://localhost:8080
-      prefer-rest-over-grpc: false
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
       audience: zeebe-api
       scope: # optional
+    grpc-address: http://localhost:26500
+    rest-address: http://localhost:8080
+    prefer-rest-over-grpc: false
 ```
 
-## Obtain the Zeebe client
+## Obtain the Camunda client
 
-You can inject the Zeebe client and work with it to create new workflow instances, for example:
+You can inject the Camunda client and work with it to create new workflow instances, for example:
 
 ```java
 @Autowired
-private ZeebeClient client;
+private CamundaClient client;
 ```
 
 ## Deploy process models
@@ -162,3 +160,7 @@ public void handleJobFoo(final ActivatedJob job) {
 ```
 
 See [the configuration documentation](/apis-tools/spring-zeebe-sdk/configuration.md) for a more in-depth discussion on parameters and configuration options for job workers.
+
+## Writing test cases
+
+To learn more about writing test cases using Zeebe Process Test, see [Spring Zeebe SDK integration](../java-client/zeebe-process-test.md#zeebe-spring-sdk-integration).

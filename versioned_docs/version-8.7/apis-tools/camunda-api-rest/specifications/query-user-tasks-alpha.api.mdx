@@ -1,0 +1,686 @@
+---
+id: query-user-tasks-alpha
+title: "Query user tasks (alpha)"
+description: "Search for user tasks based on given criteria."
+sidebar_label: "Query user tasks (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Query user tasks (alpha)"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Search for user tasks based on given criteria.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+for further details.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          description:
+            "User task search query request. Key attributes as string values.",
+          type: "object",
+          properties: {
+            filter: {
+              description:
+                "User task filter request. Key attributes as string values.",
+              allOf: [
+                {
+                  description:
+                    "Base properties for ProcessInstanceFilterRequest",
+                  type: "object",
+                  properties: {
+                    state: { type: "string" },
+                    assignee: { type: "string" },
+                    elementId: { type: "string" },
+                    candidateGroup: { type: "string" },
+                    candidateUser: { type: "string" },
+                    tenantIds: { type: "string" },
+                    processDefinitionId: { type: "string" },
+                  },
+                  title: "UserTaskFilterRequestBase",
+                },
+              ],
+              properties: {
+                key: { type: "string" },
+                processDefinitionKey: { type: "string" },
+                processInstanceKey: { type: "string" },
+              },
+              title: "UserTaskFilter",
+            },
+          },
+          title: "UserTaskSearchQuery",
+        },
+      },
+      "application/vnd.camunda.api.keys.number+json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          description: "User task search query request.",
+          deprecated: true,
+          type: "object",
+          properties: {
+            filter: {
+              description: "User task filter request.",
+              type: "object",
+              allOf: [
+                {
+                  description:
+                    "Base properties for ProcessInstanceFilterRequest",
+                  type: "object",
+                  properties: {
+                    state: { type: "string" },
+                    assignee: { type: "string" },
+                    elementId: { type: "string" },
+                    candidateGroup: { type: "string" },
+                    candidateUser: { type: "string" },
+                    tenantIds: { type: "string" },
+                    processDefinitionId: { type: "string" },
+                  },
+                  title: "UserTaskFilterRequestBase",
+                },
+              ],
+              properties: {
+                key: { type: "integer", format: "int64" },
+                processDefinitionKey: { type: "integer", format: "int64" },
+                processInstanceKey: { type: "integer", format: "int64" },
+              },
+              title: "UserTaskFilterRequest",
+            },
+          },
+          title: "UserTaskSearchQueryRequest",
+        },
+      },
+      "application/vnd.camunda.api.keys.string+json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                sort: {
+                  type: "array",
+                  items: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          field: { type: "string" },
+                          order: { type: "string", default: "asc" },
+                        },
+                        required: ["field"],
+                        title: "SearchQuerySortRequest",
+                      },
+                    ],
+                  },
+                },
+                page: {
+                  allOf: [
+                    {
+                      type: "object",
+                      properties: {
+                        from: { type: "integer", format: "int32" },
+                        limit: { type: "integer", format: "int32" },
+                        searchAfter: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                        searchBefore: {
+                          type: "array",
+                          items: { type: "object" },
+                        },
+                      },
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          description:
+            "User task search query request. Key attributes as string values.",
+          type: "object",
+          properties: {
+            filter: {
+              description:
+                "User task filter request. Key attributes as string values.",
+              allOf: [
+                {
+                  description:
+                    "Base properties for ProcessInstanceFilterRequest",
+                  type: "object",
+                  properties: {
+                    state: { type: "string" },
+                    assignee: { type: "string" },
+                    elementId: { type: "string" },
+                    candidateGroup: { type: "string" },
+                    candidateUser: { type: "string" },
+                    tenantIds: { type: "string" },
+                    processDefinitionId: { type: "string" },
+                  },
+                  title: "UserTaskFilterRequestBase",
+                },
+              ],
+              properties: {
+                key: { type: "string" },
+                processDefinitionKey: { type: "string" },
+                processInstanceKey: { type: "string" },
+              },
+              title: "UserTaskFilter",
+            },
+          },
+          title: "UserTaskSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user task search successful response.\n",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "User task search query response. Key attributes as string values.",
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for UserTaskItem",
+                      type: "object",
+                      properties: {
+                        state: { type: "string" },
+                        assignee: { type: "string" },
+                        elementId: { type: "string" },
+                        candidateGroup: {
+                          type: "array",
+                          items: { type: "string" },
+                        },
+                        candidateUser: {
+                          type: "array",
+                          items: { type: "string" },
+                        },
+                        processDefinitionId: { type: "string" },
+                        creationDate: { type: "string", format: "date-time" },
+                        completionDate: { type: "string", format: "date-time" },
+                        followUpDate: { type: "string", format: "date-time" },
+                        dueDate: { type: "string", format: "date-time" },
+                        tenantIds: { type: "string" },
+                        externalFormReference: { type: "string" },
+                        processDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                        },
+                        customHeaders: {
+                          type: "object",
+                          additionalProperties: { type: "string" },
+                        },
+                        priority: {
+                          type: "integer",
+                          description:
+                            "The priority of a user task. The higher the value the higher the priority.",
+                          minimum: 0,
+                          maximum: 100,
+                          default: 50,
+                        },
+                      },
+                      title: "UserTaskItemBase",
+                    },
+                  ],
+                  properties: {
+                    key: { type: "string" },
+                    elementInstanceKey: { type: "string" },
+                    processDefinitionKey: { type: "string" },
+                    processInstanceKey: { type: "string" },
+                    formKey: { type: "string" },
+                  },
+                  title: "UserTaskResult",
+                },
+              },
+            },
+            title: "UserTaskSearchQueryResult",
+          },
+        },
+        "application/vnd.camunda.api.keys.number+json": {
+          schema: {
+            description: "User task search query response.",
+            deprecated: true,
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  deprecated: true,
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for UserTaskItem",
+                      type: "object",
+                      properties: {
+                        state: { type: "string" },
+                        assignee: { type: "string" },
+                        elementId: { type: "string" },
+                        candidateGroup: {
+                          type: "array",
+                          items: { type: "string" },
+                        },
+                        candidateUser: {
+                          type: "array",
+                          items: { type: "string" },
+                        },
+                        processDefinitionId: { type: "string" },
+                        creationDate: { type: "string", format: "date-time" },
+                        completionDate: { type: "string", format: "date-time" },
+                        followUpDate: { type: "string", format: "date-time" },
+                        dueDate: { type: "string", format: "date-time" },
+                        tenantIds: { type: "string" },
+                        externalFormReference: { type: "string" },
+                        processDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                        },
+                        customHeaders: {
+                          type: "object",
+                          additionalProperties: { type: "string" },
+                        },
+                        priority: {
+                          type: "integer",
+                          description:
+                            "The priority of a user task. The higher the value the higher the priority.",
+                          minimum: 0,
+                          maximum: 100,
+                          default: 50,
+                        },
+                      },
+                      title: "UserTaskItemBase",
+                    },
+                  ],
+                  properties: {
+                    key: { type: "integer", format: "int64" },
+                    elementInstanceKey: { type: "integer", format: "int64" },
+                    processDefinitionKey: { type: "integer", format: "int64" },
+                    processInstanceKey: { type: "integer", format: "int64" },
+                    formKey: { type: "integer", format: "int64" },
+                  },
+                  title: "UserTaskItem",
+                },
+              },
+            },
+            title: "UserTaskSearchQueryResponse",
+          },
+        },
+        "application/vnd.camunda.api.keys.string+json": {
+          schema: {
+            description:
+              "User task search query response. Key attributes as string values.",
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                properties: {
+                  page: {
+                    allOf: [
+                      {
+                        type: "object",
+                        properties: {
+                          totalItems: { type: "integer", format: "int64" },
+                          firstSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                          lastSortValues: {
+                            type: "array",
+                            items: { type: "object" },
+                          },
+                        },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                    type: "object",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                type: "array",
+                items: {
+                  type: "object",
+                  allOf: [
+                    {
+                      description: "Base properties for UserTaskItem",
+                      type: "object",
+                      properties: {
+                        state: { type: "string" },
+                        assignee: { type: "string" },
+                        elementId: { type: "string" },
+                        candidateGroup: {
+                          type: "array",
+                          items: { type: "string" },
+                        },
+                        candidateUser: {
+                          type: "array",
+                          items: { type: "string" },
+                        },
+                        processDefinitionId: { type: "string" },
+                        creationDate: { type: "string", format: "date-time" },
+                        completionDate: { type: "string", format: "date-time" },
+                        followUpDate: { type: "string", format: "date-time" },
+                        dueDate: { type: "string", format: "date-time" },
+                        tenantIds: { type: "string" },
+                        externalFormReference: { type: "string" },
+                        processDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                        },
+                        customHeaders: {
+                          type: "object",
+                          additionalProperties: { type: "string" },
+                        },
+                        priority: {
+                          type: "integer",
+                          description:
+                            "The priority of a user task. The higher the value the higher the priority.",
+                          minimum: 0,
+                          maximum: 100,
+                          default: 50,
+                        },
+                      },
+                      title: "UserTaskItemBase",
+                    },
+                  ],
+                  properties: {
+                    key: { type: "string" },
+                    elementInstanceKey: { type: "string" },
+                    processDefinitionKey: { type: "string" },
+                    processInstanceKey: { type: "string" },
+                    formKey: { type: "string" },
+                  },
+                  title: "UserTaskResult",
+                },
+              },
+            },
+            title: "UserTaskSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The user task search query failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

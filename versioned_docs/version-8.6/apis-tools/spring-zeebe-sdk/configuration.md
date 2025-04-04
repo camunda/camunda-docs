@@ -3,6 +3,14 @@ id: configuration
 title: Configuration
 ---
 
+This page uses YAML examples to show configuration properties. Alternate methods to [externalize or override your configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) are provided by Spring Boot, and can be applied without rebuilding your application (properties files, Java System properties, or environment variables).
+
+:::note
+Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables). To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace any delimiters `.` with underscore `_`.
+
+For example, the property `camunda.client.zeebe.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXJOBSACTIVE`.
+:::
+
 ## Job worker configuration options
 
 ### Job type
@@ -170,6 +178,29 @@ public void handleJobFoo(final JobClient client, final ActivatedJob job) {
 }
 ```
 
+You can also control auto-completion in your configuration.
+
+**Globally:**
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      defaults:
+        auto-complete: false
+```
+
+**Per worker:**
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      override:
+        foo:
+          auto-complete: false
+```
+
 Ideally, you **don't** use blocking behavior like `send().join()`, as this is a blocking call to wait for the issued command to be executed on the workflow engine. While this is very straightforward to use and produces easy-to-read code, blocking code is limited in terms of scalability.
 
 This is why the worker above showed a different pattern (using `exceptionally`). Often, you might also want to use the `whenComplete` callback:
@@ -222,7 +253,28 @@ public void handleJobFoo() {
 
 ## Additional configuration options
 
-### Execution threads
+For a full set of configuration options, see [CamundaClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/stable/8.6/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/CamundaClientProperties.java).
+
+### Auth
+
+Here you find alternatives to authenticate with the cluster
+
+#### Credentials cache path
+
+You can define the credentials cache path of the zeebe client, the property contains directory path and file name:
+
+```yaml
+camunda:
+  client:
+    auth:
+      credentials-cache-path: /tmp/credentials
+```
+
+### Zeebe
+
+Here you find further zeebe specific configuration options
+
+#### Execution threads
 
 The number of threads for invocation of job workers. Setting this value to 0 effectively disables subscriptions and workers (default 1):
 
@@ -233,7 +285,7 @@ camunda:
       execution-threads: 2
 ```
 
-### Message time to live
+#### Message time to live
 
 The time-to-live which is used when none is provided for a message (default 1H):
 
@@ -244,7 +296,7 @@ camunda:
       message-time-to-live: PT2H
 ```
 
-### Max message size
+#### Max message size
 
 A custom maxMessageSize allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
 
@@ -252,10 +304,21 @@ A custom maxMessageSize allows the client to receive larger or smaller responses
 camunda:
   client:
     zeebe:
-      max-message-size: 3
+      max-message-size: 4194304
 ```
 
-### Request timeout
+#### Max metadata size
+
+A custom maxMetadataSize allows the client to receive larger or smaller response headers from Camunda:
+
+```yaml
+camunda:
+  client:
+    zeebe:
+      max-metadata-size: 4194304
+```
+
+#### Request timeout
 
 The request timeout used if not overridden by the command (default is 10s):
 
@@ -266,7 +329,7 @@ camunda:
       request-timeout: PT20S
 ```
 
-### CA certificate
+#### CA certificate
 
 Path to a root CA certificate to be used instead of the certificate in the default store:
 
@@ -277,7 +340,7 @@ camunda:
       ca-certificate-path: path/to/certificate
 ```
 
-### Keep alive
+#### Keep alive
 
 Time interval between keep alive messages sent to the gateway (default is 45s):
 
@@ -288,7 +351,7 @@ camunda:
       keep-alive: PT60S
 ```
 
-### Override authority
+#### Override authority
 
 The alternative authority to use, commonly in the form `host` or `host:port`:
 
@@ -299,9 +362,9 @@ camunda:
       override-authority: host:port
 ```
 
-### REST over gRPC
+#### REST over gRPC
 
-If true, the client will use REST instead of gRPC whenever possible:
+If true, the Zeebe Client will use REST instead of gRPC whenever possible to communicate with the Zeebe Gateway:
 
 ```yaml
 camunda:
@@ -310,9 +373,9 @@ camunda:
       prefer-rest-over-grpc: true
 ```
 
-### gRPC address
+#### gRPC address
 
-Define client gRPC address:
+Define the address of the [gRPC API](/apis-tools/zeebe-api/grpc.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -321,9 +384,13 @@ camunda:
       grpc-address: http://localhost:26500
 ```
 
-### REST address
+:::note
+You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerException: target` error.
+:::
 
-Define client REST address:
+#### REST address
+
+Define address of the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) exposed by the [Zeebe Gateway](/self-managed/zeebe-deployment/zeebe-gateway/zeebe-gateway-overview.md):
 
 ```yaml
 camunda:
@@ -332,7 +399,15 @@ camunda:
       rest-address: http://localhost:8080
 ```
 
-### Default task type
+:::note
+You must add the `http://` scheme to the URL.
+:::
+
+#### Defaults and Overrides
+
+You can define defaults and overrides for all supported configuration options for a workers.
+
+##### Default Task type
 
 If you build a worker that only serves one thing, it might also be handy to define the worker job type globally and not in the annotation:
 
@@ -344,7 +419,7 @@ camunda:
         type: foo
 ```
 
-### Configure jobs in flight and thread pool
+##### Configure jobs in flight and thread pool
 
 Number of jobs that are polled from the broker to be worked on in this client and thread pool size to handle the jobs:
 
@@ -357,13 +432,11 @@ camunda:
       execution-threads: 1
 ```
 
-For a full set of configuration options, see [CamundaClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/CamundaClientProperties.java).
-
 :::note
 We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.
 :::
 
-### Disable worker
+##### Disable worker
 
 You can disable workers via the `enabled` parameter of the `@JobWorker` annotation:
 
@@ -403,7 +476,7 @@ camunda:
         enabled: false
 ```
 
-### Overriding `JobWorker` values via configuration file
+##### Overriding `JobWorker` values via configuration file
 
 You can override the `JobWorker` annotation's values, as you can see in the example above where the `enabled` property is overridden:
 
@@ -431,11 +504,11 @@ camunda:
 
 You could also provide a custom class that can customize the `JobWorker` configuration values by implementing the `io.camunda.zeebe.spring.client.annotation.customizer.ZeebeWorkerValueCustomizer` interface.
 
-### Enable job streaming
+##### Enable job streaming
 
 Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
 
-To enable job streaming on the Zeebe client, you can configure it:
+Job streaming is disabled by default for job workers. To enable job streaming on the Zeebe client, configure it as follows:
 
 ```yaml
 camunda:
@@ -456,7 +529,7 @@ camunda:
           stream-enabled: true
 ```
 
-### Control tenant usage
+##### Control tenant usage
 
 When using multi-tenancy, the Zeebe client will connect to the `<default>` tenant. To control this, you can configure:
 

@@ -1,0 +1,200 @@
+---
+id: get-decision-definition-xml-alpha
+title: "Get decision definition XML (alpha)"
+description: "Returns decision definition as XML."
+sidebar_label: "Get decision definition XML (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtz2zYQ/is76MWeUqSSOm3Km8Z2Urd2xmMrbWZkHUBwKSIBAQYPyRwN/3sHICkpktzJIdOTDnqQXOzut/vtEos1sXRhSDojV8i44UpCjgWX3HIlyTwiORqmeR0uU/KA1mlpID8UBmrg091t/CSfZJqmUll8ktOSG0CZ14pLC9wAlTCjoi4pFEit0zg/S5iqaiVRWpMg1aIZUcbQmCTIdd+jXtrEVX4OVOYglQWUNBOYg5JwSSsncwpMOGNRG1DOgirAlgiZeo6f5CNiuJoNom/h4fpxCpP7G1BL1EuOq/lZQmtuRlYpYRLWCY5ozUcajT24MRrWxVX+01eHuvGPzp9koTQUTtsSNeRoKRcmDlF5kiQiNdW0Qu8lSWdrImmFJCVDSK82Ef0LGxIR7uNeU1uSiGj86rjGnKRWO9xPzrREoMbwhcQcvmAz4D+SrAhWJWclUGaNTxwFJ/lXh8BzlJYXHDV4ENbnb1gfk4gYVmJFSbomtqm928ZqLhekbefePVMradD456/HY/9z6OKnu9v/8MyTxLhAgMIJ0YAOlMM8DrFjSlqUNjiAzzZ5roT//7JbbRuRi5dc2XB+G3R4jza4WFAuMI/hTmkckghUI9RaLXmOOXAZQAyoIVN5c+AlrWvBGfWqk1qrTGD182fjPdj1+lvXJnDfSfZ2QWWfkVmfqE4w66zPHt5dwu8Xb36bn5XW1iZNktVqFeuCjTDnVulY6UWiC+Y/Xu48hmmJGqGiDWQINM8DaCo8qhq15WjA1Mh4wRlYFQD2boMPbYevD3Lnlmf0ZvE2BfupiEihdEUtSYnTnOyTdwIfH24G+jVcLg5NhzUFdcLroJlyNs0ElV9IGxHLrThqdN+KcVVF9aY2vjXQRsRYat0ODMKlxQXqXf+5tL+8PtDtCfXHdHoPnQpgKsdtEfWGPIiKS165iqQX43FEKvrcXf06Hrdep8/4dyCRgM+1oDJQax8Ol1BteRuAcWkslexHZUZpvuD7dmPSbnNBehJfdYiGUrw4XoqbVrDitgw6F3yJMvSxFTWh3xfKyVNFniryVJE/sCLfHHs5TiT4KGvPQ9RaaVCMOa0x9xsHEdT7V/Rg229M0NhTrZ1q7VRrL9VaG5EKbalykpIFBub4bX1KkuHlN9rug02yPjoRtGHLGxGDejlMEE4LkpJ1V1BtmiTrUhnbputaadsmS5+tJdXcT0shuf5xV3gDoYRiVITbxxLrH/gxZQC8N0K9pxZXtAmB9ia/Vf12/HZ8VKsXfUGjH8o6hB0td1rFoNbX/FG1nfD3KA5Di0HmNLfNo1/WhSdDqlFPnE/Ohi69vaDdX3dCJOr/vBtI9Oc/08ADLgsVlvd8OHTEZwW16Twfx68OuXd/E0qIqapyMvRRueg2SHQHWD/z+uISnKE0geX9WDmI3XZP4O/OIryKfVI65gztc8Ft6bKYqWoYdTe/mVBZUlEuk96ESS4ndx8/XE1GtzeX1x8er0ev4nFsn20AXytjKyp3/PBj1bFxz49aZ2HGP9/Hv96+SU4HDz/i4KFnchica0G59LUVKLDuW9GMHGtFJCLpS8cTvhvNo76jzMh6nVGDH7VoW387+EbS2XzbgELHyrkJESRpQYXZP8nYTfzZQ3/mcQ7/x/nG0RD1N6lsQiMVzl+RiHzB5sWDm3beRqREmqMOiDvZCWNY2x0tm0MM34o2b4f3176H/AtVztGw
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get decision definition XML (alpha)"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/decision-definitions/{decisionDefinitionKey}/xml"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns decision definition as XML.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
+See the [Camunda 8 REST API overview](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api)
+for further details.
+:::
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "decisionDefinitionKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the decision definition, which acts as a unique identifier for this decision.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The XML of the decision definition is successfully returned.\n",
+      content: { "text/xml": { schema: { type: "string" } } },
+    },
+    "400": {
+      description:
+        "The Decision Definition Get XML failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The decision with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

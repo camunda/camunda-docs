@@ -14,7 +14,7 @@ import TabItem from "@theme/TabItem";
 
 [Web Modeler](../../components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
-- For low-risk processes, you can use the Web Modeler [process application development pipeline](/docs/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Milestone comparison](/docs/components/modeler/web-modeler/milestones.md#compare-milestones) (Visual and XML diffing) and [Git Sync](/docs/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
+- For low-risk processes, you can use the Web Modeler [process application development pipeline](/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Milestone comparison](../../components/modeler/web-modeler/milestones.md#compare-milestones) (Visual and XML diffing) and [Git Sync](/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
 
 - For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can integrate Web Modeler into your CI/CD pipelines.
 
@@ -43,7 +43,7 @@ This blueprint provides a ready-to-use proof of concept for a CI/CD pipeline for
 
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
-- Web Modeler uses [milestones](/components/modeler/web-modeler/milestones.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
+- Web Modeler uses [milestones](../../components/modeler/web-modeler/milestones.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
 - A process application comprises main processes and diverse resources, such as subprocesses, forms, DMN decision models, Connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
@@ -112,7 +112,7 @@ Pagination is enforced for all listed `search` endpoints. Ensure you obtain all 
 
 We work to replace this with a webhook or subscription approach. An alternate approach involves manually triggering synchronization or delegating synchronization triggers to other sources, such as the pipeline itself, creation of new branches, or pull/merge requests.
 
-Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [milestones](/components/modeler/web-modeler/milestones.md).
+Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [milestones](../../components/modeler/web-modeler/milestones.md).
 
 #### Listening to milestone creation
 
@@ -178,7 +178,7 @@ In the build stage, deploy your process or project to a cluster or embedded engi
 For GitLab users, consider using [GitLab Review Apps](https://docs.gitlab.com/ee/ci/review_apps/) to provide preview environments.
 :::
 
-Deploy resources using the [`zbctl` CLI](/apis-tools/community-clients/cli-client/index.md) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the [Java](/apis-tools/java-client/index.md) client library or any [community-built alternatives](/apis-tools/community-clients/index.md).
+Deploy resources using the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) in this pipeline step, compatible with both SaaS and Self-Managed clusters. Alternately, utilize the [Java](/apis-tools/java-client/index.md) client library or any [community-built alternatives](/apis-tools/community-clients/index.md).
 
 :::info Feature branches and Web Modeler installations
 To maintain a single source of truth, avoid multiple Web Modeler instances for different feature branches. Instead, maintain a single Web Modeler installation for all environments, utilizing milestones to signify versioning and pipeline stages. Feature branches can be managed by cloning and merging files or projects, ensuring synchronization using VCS.
@@ -206,7 +206,7 @@ To retrieve the actual file `content`, iterate over the response and fetch it vi
 
 If you are running Connectors in your process or application, you need to deploy the runtimes as well. Parse the process XML for `zeebe:taskDefinition` bindings to identify the necessary runtimes (in addition to job workers). To learn how to deploy Connector runtimes, read more [here](/self-managed/connectors-deployment/install-and-start.md) for Self-Managed, or [here](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) for SaaS.
 
-Deploy resources in this pipeline step using the [`zbctl` CLI](/apis-tools/community-clients/cli-client/index.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java or Go client library or any community-built alternatives.
+Deploy resources in this pipeline step using the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), compatible with both SaaS and Self-Managed clusters. Alternatively, utilize the Java client library or any community-built alternatives.
 
 #### Add environment variables via secrets
 
@@ -224,7 +224,7 @@ You could even report the wrong diagram patterns together with examples to resol
 
 #### Unit and integration tests
 
-For unit tests, select a test framework suitable for your environment. If working with Java, the [zeebe-process-test](/apis-tools/java-client/zeebe-process-test.md) library is an excellent option. Alternatively, employ the [Java client](/apis-tools/java-client/index.md) with JUnit for testing your BPMN and [DMN diagrams](/apis-tools/java-client-examples/decision-evaluate.md) in dev or preview environments. Similar testing can be performed using [community-built clients](/apis-tools/community-clients/index.md) in Node.js, Python, or Go.
+For unit tests, select a test framework suitable for your environment. If working with Java, the [zeebe-process-test](/apis-tools/java-client/zeebe-process-test.md) library is an excellent option. Alternatively, employ the [Java client](/apis-tools/java-client/index.md) with JUnit for testing your BPMN and [DMN diagrams](/apis-tools/java-client-examples/decision-evaluate.md) in dev or preview environments. Similar testing can be performed using [community-built clients](/apis-tools/community-clients/index.md).
 
 ### Review stage
 
@@ -257,7 +257,7 @@ In case you use an embedded Zeebe engine, or want to provide a lightweight, focu
 
 ### Publish stage
 
-Push approved changes to staging or production by deploying them to the respective clusters. You can use the [`zbctl` CLI](/apis-tools/community-clients/cli-client/index.md) to deploy via your pipeline, which works both for a SaaS or Self-Managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
+Push approved changes to staging or production by deploying them to the respective clusters. You can use the [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md) to deploy via your pipeline, which works both for a SaaS or Self-Managed cluster. Deployments work slightly different on SaaS and Self-Managed, since there are differences in the cluster connection. Read more about deployments [here](/apis-tools/working-with-apis-tools.md#deploy-processes-start-process-instances-and-more-using-zeebe-client-libraries).
 
 #### Define resource authorizations
 

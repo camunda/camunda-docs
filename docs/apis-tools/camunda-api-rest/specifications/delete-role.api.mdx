@@ -1,0 +1,190 @@
+---
+id: delete-role
+title: "Delete role (Work-in-Progress)"
+description: "Deletes the role with the given key."
+sidebar_label: "Delete role (Work-in-Progress)"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV01z2zYQ/Ss7e0qmNCmnTpvyprGd1m2a8dhKc7B9AMGViBgEGAC0rNHwv3cWoGxFstsceumMDxqK3MV+vgdg1xjEwmN5hRdWE95kaDtyIihrzmossSZNgaIsw5q8dKpjIZZ4EkUeQkPgrCZYqtDEt4W6IwO3tMqvzbWZNcrD9PwMlAdlQMBn624PlDk4d3bhyHvwQQQCYWpYKq2hNzW5hYXOBjJBCQ2VI3GrzAJkI8yCPPQmKH1tVPDgSJPwo3dhoO+kbVm3Vca6jTi/NphhJ5xoKZDjjNdoREtYIgf/B60wQ8V5dSI0mKGjr71yVGMZXE+7yc8a4gTBzh/zDxZSuXLM0MuGWoHlGsOqYy8+OGUWOAw3bNt31njyLH8zOeLHvv1UVOFHqzX4Xkryft5rvcpxyPBocvjMUvrakw+ghbz1cCe0qkH0oeF6ythdkI7qVF7P8UpruNpsTnSdHrWKztlKU/vDF8+211tpfet0CudJE2oKQmmw1ReSAWL0rFhRzd2/unh/DL8cvf355lUTQufLolgul7mbywOqVbAut25RuLnkH+u9zmHWkCNoxQoqAlHXin0KDZ1jrAZFHnxHUs2V5B5wP8awgWufWj92IYXFUHhY/Nij3V5lOLeuFQFL7J3aI8AUPl2cgYpVnK8Ycnuu45q56DXbEJXtQ1lpYW65eUEF/aTTXS++b1vhHrD2rYMhQ6ZPv5UGKhNoQW47fmXCj2/2bDNUfpvNziGZAGlrgrl1EJizoyNOolVGtX2L5dFkkmEr7tPbT5PJwDa549+RiQG677QwCYA76SgDrXU04icmpowPwsj/qjPWqYXa9Zvj8NgLHEF8kjIahiGS7B/5udn0xl0kEtbYAHPbm/qFWS/MemHWc8x6O5k8gXcDXGXHOCTnrAMrZe8c1bBslI7m+RTc+B6PuoTFF669cO2Fa/tcGzJsKTT28Uofb8OhwRILPrl8sR4PsIEvr+TuNpfk3mkscZ0oM5RFsW6sD0O57qwLQ3HH/bgTTolKJxSyOFFrAxltpdDx81OtYwHfxDcpHYu2N7WAd3BxejmDX0WgpUj3XXb5rel3k3eTJ62y6jMWeRZJGSbgbW0GG7PM6ifNJuXvMRwv+p5k71RYXfKyVJ6KhCM37bn2D4AY/UXr/J6UMBv/vN/A5PfPs9hpZeY2Lh87vh8Id4WcT5FP8sN9dJ2fRZJI27a9iTulWYxT1FZiUvc+cEIZaiXJ+IjjcXLaqH1IEvgreYTDnJuSkLPZIBcqNH2VS9sWMi17eFbaVkUrlClGF744nv756ePJ9ODD2fHpx8vTg8N8kof7EJPvrA+tMFtxpFE0Xche7Y6Xr3dTXz8eE//HIXaETKD7UHRaKMMgjrVej5S+iiOtxwzLzWx7k428vML1uhKePjk9DPz5a09uheXVzSONI+9r5fl/jeVcaL87AG/X8NXFOCq/hn8di58MfvwozCruJbrnN8zwllZb4/lwM2TYkKjJxQCTdColdWFr3bPnPvPxYRM8Of1wOjvFYfgbuyfd4Q==
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete role (Work-in-Progress)"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/roles/{roleKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Deletes the role with the given key.
+
+This API is in a Work-in-Progress state and will undergo potential breaking changes until
+its release with an upcoming minor release.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "roleKey",
+      in: "path",
+      required: true,
+      description: "The key of the role to delete.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The role was deleted successfully." },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The role with the roleKey was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

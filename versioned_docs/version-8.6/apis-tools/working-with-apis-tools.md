@@ -55,7 +55,7 @@ Camunda 8 components have APIs to enable polyglot developers to work with in the
 type:"link", href:"/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/", label: "Camunda 8 API (REST)", docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 },
 {
-type:"link", href:"/optimize/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
+type:"link", href:"/docs/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
 },
 {
 type:"link", href:"/docs/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"
@@ -72,6 +72,9 @@ Additionally, visit our documentation on [Operate](../self-managed/operate-deplo
 ### SDKs
 
 <DocCardList items={[{type:"link", href:"/docs/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring Zeebe", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
+{
+type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js", docId:"apis-tools/node-js-sdk"
+},
 ]}/>
 
 ### Postman

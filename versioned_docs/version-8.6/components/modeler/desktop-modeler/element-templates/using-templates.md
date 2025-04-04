@@ -6,7 +6,7 @@ description: "Learn how to apply, remove, update, and replace templates."
 
 ## Applying templates
 
-If a template matches a selected diagram element, the template catalog button is shown in the properties panel.
+If a template matches a selected diagram element, the template catalog button is shown in the properties panel on the right side of the screen.
 
 ![Template Chooser](./img/chooser.png)
 

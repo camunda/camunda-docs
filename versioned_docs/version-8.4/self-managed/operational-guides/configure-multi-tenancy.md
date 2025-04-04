@@ -21,7 +21,7 @@ Multi-tenancy must be enabled for each required component. Using the single glob
 ## Helm charts
 
 When using Helm charts, you can enable multi-tenancy globally with the flag `global.multitenancy.enabled`.
-Visit [the Helm chart configuration](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.4/README.md#global-parameters) for additional details.
+Visit [the Helm chart configuration](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters) for additional details.
 
 ## Environment variables
 
@@ -32,7 +32,7 @@ enabled in **all** required components, see:
 - [Zeebe](../../../self-managed/zeebe-deployment/configuration/gateway-config/#zeebegatewaymultitenancy)
 - [Operate](../../../self-managed/operate-deployment/operate-configuration/#multi-tenancy)
 - [Tasklist](../../../self-managed/tasklist-deployment/tasklist-configuration/#multi-tenancy)
-- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/multi-tenancy/)
+- [Optimize](/self-managed/optimize-deployment/configuration/multi-tenancy.md)
 - [Connectors](../../../self-managed/connectors-deployment/connectors-configuration/#multi-tenancy)
 
 Unexpected behavior may occur if multi-tenancy is only enabled in some components.

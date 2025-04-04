@@ -1,7 +1,7 @@
 ---
 id: email
 title: Email Connector
-sidebar_label: Email Connector
+sidebar_label: Email
 description: The Email Connector allows you to connect your BPMN service with different email protocols such as SMTP, POP3 or IMAP.
 ---
 
@@ -73,7 +73,7 @@ with a limit of one email, the task will return the most recently sent email.
 The task returns a list of emails in JSON format. Each email object contains the following information:
 
 - `messageId`: A unique identifier for the email message.
-- `fromAddress`: the email addresses of the sender.
+- `fromAddress`: The email addresses of the sender.
 - `subject`: The subject line of the email.
 - `size`: The size of the email (in bytes).
 
@@ -102,7 +102,7 @@ Example of a returned JSON array:
 
 Retrieve the contents of an email, using the unique `messageId` associated with the email message.
 
-:::warning
+:::danger
 Reading an email using POP3 protocol will delete the email
 :::
 
@@ -117,13 +117,22 @@ Reading an email using POP3 protocol will delete the email
 The task returns a JSON object containing detailed information about the email:
 
 - `messageId`: The unique identifier corresponding to the email message.
-- `fromAddress`: the email addresses of the sender.
+- `fromAddress`: The email addresses of the sender.
 - `headers` : A list containing the email's headers
 - `subject`: The subject line of the email.
 - `size`: The size of the email in bytes.
 - `plainTextBody`: The plain text version of the email's content.
-- `htmlBody`: The HTML version of the email's content, provided it exists.
-- `receivedDateTime`: the email's reception datetime
+- `htmlBody`: The HTML version of the email's content (if content exists).
+- `attachments`: A list of all the email's attachments, provided as a document reference.
+- `receivedDateTime`: The email's reception datetime
+
+:::note
+Starting from version 8.7.0, the outbound email Connector supports sending Camunda documents as attachments.
+
+For example, the **Attachment** field in the properties panel may look as `=[ document1, document2]`.
+
+See additional details and limitations in [document handling](/components/concepts/document-handling.md).
+:::
 
 #### Example Response
 
@@ -147,7 +156,19 @@ Below is an example of the JSON response returned when a specific email is read:
       "value": "test"
     }
   ],
-  "sentDate": "2024-08-19T06:54:28Z"
+  "attachments": [
+    {
+      "storeId": "in-memory",
+      "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
+      "metadata": {
+        "contentType": "image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
+        "size": 311032,
+        "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
+      },
+      "documentType": "camunda"
+    }
+  ],
+  "receivedDateTime": "2024-08-19T06:54:28Z"
 }
 ```
 
@@ -246,7 +267,7 @@ object with a field and a value.
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
 
-:::note
+:::
 
 #### Example Response
 
@@ -278,14 +299,18 @@ Allow users to send an email from the connected email account.
 
 #### Parameters
 
-| Parameter | Description                                                                                                                                                                                                                                                                                   |
-| :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `From`    | Specify the sender's email address(es). This can be a single email address (for example, 'example@camunda.com'), a comma-separated list of addresses, or a Friendly Enough Expression Language (FEEL) expression returning a list of email addresses (for example, =["example@camunda.com"]). |
-| `To`      | Defines the email recipient(s). Similar to the `From` parameter, this can be a single email address, a comma-separated list, or a FEEL expression (for example, =["example@camunda.com"]).                                                                                                    |
-| `Cc`      | (Optional) Specify the email address(es) to include in the **Carbon Copy (CC)** field. The format is the same as the **From** and **To** fields, and can include a single address, a list, or a FEEL expression.                                                                              |
-| `Bcc`     | (Optional) Specify the email address(es) to include in the **Blind Carbon Copy (BCC)** field. It follows the same format as the **CC** field and ensures that BCC recipients are not visible to other recipients.                                                                             |
-| `Subject` | The email subject line.                                                                                                                                                                                                                                                                       |
-| `Email`   | The main content of the email.                                                                                                                                                                                                                                                                |
+| Parameter            | Description                                                                                                                                                                                                                                                                                   |
+| :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `From`               | Specify the sender's email address(es). This can be a single email address (for example, 'example@camunda.com'), a comma-separated list of addresses, or a Friendly Enough Expression Language (FEEL) expression returning a list of email addresses (for example, =["example@camunda.com"]). |
+| `To`                 | Defines the email recipient(s). Similar to the `From` parameter, this can be a single email address, a comma-separated list, or a FEEL expression (for example, =["example@camunda.com"]).                                                                                                    |
+| `Cc`                 | (Optional) Specify the email address(es) to include in the **Carbon Copy (CC)** field. The format is the same as the **From** and **To** fields, and can include a single address, a list, or a FEEL expression.                                                                              |
+| `Bcc`                | (Optional) Specify the email address(es) to include in the **Blind Carbon Copy (BCC)** field. It follows the same format as the **CC** field and ensures that BCC recipients are not visible to other recipients.                                                                             |
+| `Headers`            | Feel expression containing all the desired headers to be added to the email's headers. cf. `{ "customHeaders" : "new header value" }`                                                                                                                                                         |
+| `Subject`            | The email subject line.                                                                                                                                                                                                                                                                       |
+| `Content Type`       | The content type of the email.                                                                                                                                                                                                                                                                |
+| `Email Text Content` | The text content of the email. This must only be provided if the `Content Type` is `PLAIN` or `HTML & PlainText`.                                                                                                                                                                             |
+| `Html Text Content`  | The HTML content of the email. This must only be provided if the `Content Type` is `HTML` or `HTML & PlainText`.                                                                                                                                                                              |
+| `Attachment`         | The document reference, either for a single document or as a list for multiple documents.                                                                                                                                                                                                     |
 
 :::info
 To learn more about Friendly Enough Expression Language (FEEL) expression,
@@ -401,6 +426,7 @@ The task returns a JSON object containing detailed information about the email:
 - `size`: The size of the email (in bytes).
 - `plainTextBody`: The plain text version of the email content.
 - `htmlBody`: The HTML version of the email content, if it exists.
+- `attachments`: A list of all the email's attachments, provided as a document reference.
 - `receivedDateTime`: The date and time the email was received.
 
 #### Example Response
@@ -425,7 +451,19 @@ The following JSON structure shows an expected response after a successful email
       "value": "test"
     }
   ],
-  "sentDate": "2024-08-19T06:54:28Z"
+  "attachments": [
+    {
+      "storeId": "in-memory",
+      "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
+      "metadata": {
+        "contentType": "image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
+        "size": 311032,
+        "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
+      },
+      "documentType": "camunda"
+    }
+  ],
+  "receivedDateTime": "2024-08-19T06:54:28Z"
 }
 ```
 
@@ -529,7 +567,7 @@ object with a field and a value.
 - If an operator is set, the criteria array must also be defined.
 - Each criterion within the criteria array is applied to the specified field based on the value associated with it.
 
-:::note
+:::
 
 #### Example Response
 
@@ -578,7 +616,8 @@ The example below shows the expected JSON response after an email has been succe
 
 <TabItem value='inbound'>
 
-The Email Inbound Connector is an inbound Connector that allows you to connect your BPMN service with any email IMAP server.
+The Email Inbound Connector is an inbound Connector that allows you to connect your BPMN service with any email IMAP
+server.
 
 :::caution
 This inbound connector only supports working with IMAP server.
@@ -615,7 +654,7 @@ This inbound connector creates a new process each time a new email is received.
 | Parameter               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | :---------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Folder`                | <p>(Optional) Define the folder the inbound connector will monitor.</p><p><ul><li>If not specified, the default folder is set to `INBOX`.</li><li>For subfolders, use `.` or `/` separated path (for example, `inside/folder` or `inside.folder`)</li></ul></p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `Polling Wait Time`     | Set the interval between each polling operation. See [timer events](/docs/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for more information on time duration and correct format.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `Polling Wait Time`     | Set the interval between each polling operation. See [timer events](/components/modeler/bpmn/timer-events/timer-events.md#time-duration) for more information on time duration and correct format.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `Polling Configuration` | <p>This section contains settings related to the polling behavior of the connector.</p><p><ul><li><code>Poll All Emails</code>: Poll every email found in the specified folder.<ul><li><p><code>Move to Another Folder After Processing</code>: Move processed emails to a specific folder.</p><ul><li><p><code>Folder</code>: Specify the target folder to move processed emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</p></li></ul></li><li><p><code>Delete After Processing</code>: Permanently delete each email after processing.</p></li></ul></li></ul><ul><li>`Poll Unseen Emails`: Poll only emails not marked as read in the specified folder.<ul><li><p>`Move to Another Folder After Processing`: Move processed unseen emails to a specific folder.</p><ul><li>`Folder`: Specify the target folder to move processed unseen emails to. To specify a new folder or a nested hierarchy, use a `.` or `/` separated path (for example, <code>Archive/test</code> or <code>Projects.2023.January</code>). Non-existent folders in the path are automatically created.</li></ul></li><li><p>`Delete After Processing`: Permanently delete unseen emails from the folder after processing.</p></li><li><p>`Mark as Read After Processing`: Mark each unseen email as read after it is processed.</p></li></ul></li></ul></p> |
 
 ## Response Structure
@@ -629,6 +668,7 @@ The task returns a JSON object containing detailed information about the email:
 - `size`: The size of the email (in bytes).
 - `plainTextBody`: The plain text version of the email content.
 - `htmlBody`: The HTML version of the email content, if it exists.
+- `attachments` A list of document reference
 - `receivedDateTime`: The date and time the email was received.
 
 #### Example Response
@@ -654,7 +694,19 @@ instance:
       "value": "test"
     }
   ],
-  "sentDate": "2024-08-19T06:54:28Z"
+  "attachments": [
+    {
+      "storeId": "in-memory",
+      "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
+      "metadata": {
+        "contentType": "image/webp; name=305a4816-b3df-4724-acd3-010478a54add.webp",
+        "size": 311032,
+        "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
+      },
+      "documentType": "camunda"
+    }
+  ],
+  "receivedDateTime": "2024-08-19T06:54:28Z"
 }
 ```
 
@@ -664,9 +716,14 @@ as prioritizing tasks, content analysis, and automated responses.
 
 ## Activation condition
 
-The optional **Activation condition** field allows you to specify a Friendly Enough Expression Language ([FEEL](/components/modeler/feel/what-is-feel.md)) expression to control when this Connector should trigger a process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are met by the incoming email.
+The optional **Activation condition** field allows you to specify a Friendly Enough Expression
+Language ([FEEL](/components/modeler/feel/what-is-feel.md)) expression to control when this Connector should trigger a
+process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are
+met by the incoming email.
 
-For example, the FEEL expression `=(response.subject = "urgent")` ensures that the process is only triggered if the subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email received by the connector.
+For example, the FEEL expression `subject = "urgent"` ensures that the process is only triggered if the
+subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email
+received by the connector.
 
 ## Correlation
 
@@ -729,9 +786,12 @@ To learn more about TTL in Zeebe, see [message correlation](../../../concepts/me
 
 The **Deduplication** section allows you to configure the Connector deduplication parameters.
 
-- **Connector deduplication** is a mechanism in the Connector Runtime that determines how many email listeners are created if there are multiple occurrences of the **Email Listener Connector** in a BPMN diagram. This is different to **message deduplication**.
+- **Connector deduplication** is a mechanism in the Connector Runtime that determines how many email listeners are
+  created if there are multiple occurrences of the **Email Listener Connector** in a BPMN diagram. This is different to
+  **message deduplication**.
 
-- By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription properties only result in one subscription.
+- By default, the Connector runtime deduplicates Connectors based on properties, so elements with the same subscription
+  properties only result in one subscription.
 
 To customize the deduplication behavior, select the **Manual mode** checkbox and configure the custom deduplication ID.
 

@@ -11,21 +11,21 @@ This release introduces breaking changes, including the utilized URL.
 For example, `curl 'http://localhost:8092/actuator/backups'` rather than the previously used `backup`.
 :::
 
-Optimize stores its data over multiple indices in Elasticsearch. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following Elasticsearch snapshots:
+Optimize is a dedicated application that stores its data over multiple indices in the database. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch/OpenSearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following snapshots:
 
 ```
-camunda_optimize_123456_3.9.0_part_1_of_2
-camunda_optimize_123456_3.9.0_part_2_of_2
+camunda_optimize_123456_8.8.0_part_1_of_2
+camunda_optimize_123456_8.8.0_part_2_of_2
 ```
 
-Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard Elasticsearch snapshot restore API.
+Optimize provides an API to trigger a backup and retrieve information about a given backup's state. During backup creation Optimize can continue running. The backed up data can later be restored using the standard ElasticSearch/OpenSearch snapshot restore API.
 
 ## Prerequisites
 
 The following prerequisites must be set up before using the backup API:
 
-1. A snapshot repository of your choice must be registered with Elasticsearch.
-2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable, or by adding it to your Optimize [`environment-config.yaml`]($optimize$/self-managed/optimize-deployment/configuration/system-configuration/):
+1. A snapshot repository of your choice must be registered with ElasticSearch/OpenSearch.
+2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable, or by adding it to your Optimize [`environment-config.yaml`](/self-managed/optimize-deployment/configuration/system-configuration.md):
 
 ```yaml
 backup:
@@ -48,13 +48,13 @@ POST actuator/backups
 
 ### Response
 
-| Code             | Description                                                                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| 202 Accepted     | Backup process was successfully initiated. To determine whether backup process was completed refer to the GET API.                          |
-| 400 Bad Request  | Indicates issues with the request, for example when the `backupId` contains invalid characters.                                             |
-| 409 Conflict     | Indicates that a backup with the same `backupId` already exists.                                                                            |
-| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot creation. Refer to the returned error message for more details. |
-| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch.                                                                   |
+| Code             | Description                                                                                                                                |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| 202 Accepted     | Backup process was successfully initiated. To determine whether backup process was completed refer to the GET API.                         |
+| 400 Bad Request  | Indicates issues with the request, for example when the `backupId` contains invalid characters.                                            |
+| 409 Conflict     | Indicates that a backup with the same `backupId` already exists.                                                                           |
+| 500 Server Error | All other errors, e.g. issues communicating with the database for snapshot creation. Refer to the returned error message for more details. |
+| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to the database.                                                                   |
 
 ### Example request
 
@@ -96,8 +96,8 @@ GET actuator/backup
 | 200 OK           | Backup state could be determined and is returned in the response body (see example below).                                                                               |
 | 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
 | 404 Not Found    | If a backup ID was specified, no backup with that ID exists.                                                                                                             |
-| 500 Server Error | All other errors, e.g. issues communicating with Elasticsearch for snapshot state retrieval. Refer to the returned error message for more details.                       |
-| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch.                                                                                                |
+| 500 Server Error | All other errors, e.g. issues communicating with the database for snapshot state retrieval. Refer to the returned error message for more details.                        |
+| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to the database.                                                                                                 |
 
 ### Example request
 
@@ -114,15 +114,15 @@ curl --request GET 'http://localhost:8092/actuator/backups/123456'
     "state": "COMPLETE",
     “details”: [
       {
-          "snapshotName": "camunda_optimize_123456_3.10.0_part_1_of_2",
+          "snapshotName": "camunda_optimize_123456_8.8.0_part_1_of_2",
           "state": "SUCCESS",
-          "startTime": "2022-11-09T10:11:36.978+0100",
+          "startTime": "2024-11-09T10:11:36.978+0100",
           "failures": []
       },
       {
-          "snapshotName": "camunda_optimize_123456_3.10.0_part_2_of_2",
+          "snapshotName": "camunda_optimize_123456_8.8.0_part_2_of_2",
           "state": "SUCCESS",
-          "startTime": "2022-11-09T10:11:37.178+0100",
+          "startTime": "2024-11-09T10:11:37.178+0100",
           "failures": []
       }
     ]
@@ -135,8 +135,8 @@ Possible states of the backup:
 
 - `COMPLETE`: The backup can be used for restoring data.
 - `IN_PROGRESS`: The backup process for this backup ID is still in progress.
-- `FAILED`: Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch get snapshot status API](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/get-snapshot-status-api.html) for each of the snapshots included in the given backup.
-- `INCOMPATIBLE`: The backup is incompatible with the current Elasticsearch version.
+- `FAILED`: Something went wrong when creating this backup. To find out the exact problem, use the [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/get-snapshot-status-api.html)/[OpenSearch](https://opensearch.org/docs/latest/api-reference/snapshots/get-snapshot-status/) get snapshot status API for each of the snapshots included in the given backup.
+- `INCOMPATIBLE`: The backup is incompatible with the current ElasticSearch/OpenSearch version.
 - `INCOMPLETE`: The backup is incomplete (this could occur when the backup process was interrupted or individual snapshots were deleted).
 
 ## Delete backup API
@@ -154,10 +154,10 @@ DELETE actuator/backups/{backupId}
 
 | Code             | Description                                                                                                                                                              |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 204 No Content   | The delete request for the associated snapshots was submitted to Elasticsearch successfully.                                                                             |
+| 204 No Content   | The delete request for the associated snapshots was submitted to the database successfully.                                                                              |
 | 400 Bad Request  | There is an issue with the request, for example the repository name specified in the Optimize configuration does not exist. Refer to returned error message for details. |
 | 500 Server Error | An error occurred, for example the snapshot repository does not exist. Refer to the returned error message for details.                                                  |
-| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to Elasticsearch.                                                                                                |
+| 502 Bad Gateway  | Optimize has encountered issues while trying to connect to ElasticSearch/OpenSearch.                                                                                     |
 
 ### Example request
 
@@ -167,23 +167,23 @@ curl --request DELETE 'http://localhost:8092/actuator/backups/123456'
 
 ## Restore backup
 
-There is no Optimize API to perform the backup restore. Instead, the standard [Elasticsearch restore snapshot API](https://www.elastic.co/guide/en/elasticsearch/reference/7.17/restore-snapshot-api.html) can be used. Note that the Optimize versions of your backup snapshots must match the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names; for example, a snapshot with the name`camunda_optimize_123456_3.9.0_part_1_of_2` was taken of Optimize version `3.9.0`.
+There is no Optimize API to perform the backup restore. Instead, the standard [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html) / [OpenSearch](https://opensearch.org/docs/latest/api-reference/snapshots/restore-snapshot) restore snapshot API can be used. Note that the Optimize versions of your backup snapshots must match the currently running version of Optimize. You can identify the version at which the backup was taken by the version tag included in respective snapshot names; for example, a snapshot with the name`camunda_optimize_123456_8.8.0_part_1_of_2` was taken of Optimize version `8.8.0`.
 
 :::note
 Optimize must NOT be running while a backup is being restored.
 :::
 
-To restore an existing backup, all the snapshots this backup contains (as listed in the response of the [create backup API request](#example-response)) must be restored using the Elasticsearch API.
+To restore an existing backup, all the snapshots this backup contains (as listed in the response of the [create backup API request](#example-response)) must be restored using the restore API.
 
 To restore a given backup, the following steps must be performed:
 
 1. Stop Optimize.
-2. Ensure no Optimize indices are present in Elasticsearch (or the restore process will fail).
-3. Iterate over all Elasticsearch snapshots included in the desired backup and restore them using the Elasticsearch restore snapshot API.
+2. Ensure no Optimize indices are present in the database (or the restore process will fail).
+3. Iterate over all ElasticSearch/OpenSearch snapshots included in the desired backup and restore them using the restore snapshot API mentioned above.
 4. Start Optimize.
 
-Example Elasticsearch request:
+Example request:
 
 ```shell
-curl --request POST `http://localhost:9200/_snapshot/repository_name/camunda_optimize_123456_3.9.0_part_1_of_2/_restore?wait_for_completion=true`
+curl --request POST `http://localhost:9200/_snapshot/repository_name/camunda_optimize_123456_8.8.0_part_1_of_2/_restore?wait_for_completion=true`
 ```

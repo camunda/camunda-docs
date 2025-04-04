@@ -10,7 +10,7 @@ For this installation, you must have:
 
 ### Download and configure Elasticsearch
 
-:::warning
+:::danger
 Disabling Elasticsearch's security packages is for non-production only!
 :::
 

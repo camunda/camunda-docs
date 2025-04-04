@@ -1,12 +1,43 @@
 ---
 id: notices
 title: "Security notices"
-description: "Let's take a closer look at security notices, reporting vulnerabilities, and addiitonal security information."
+description: "Let's take a closer look at security notices, reporting vulnerabilities, and additional security information."
 ---
 
 ## Security notices
 
 Camunda publishes security notices after fixes are available.
+
+### Notice 14
+
+#### Publication date
+
+March 11th, 2025
+
+#### Product affected
+
+Camunda Web Modeler
+
+#### Impact
+
+The version of `koa` used by Camunda Web Modeler was affected by the following vulnerability:
+
+- https://nvd.nist.gov/vuln/detail/CVE-2025-25200
+
+#### How to determine if the installation is affected
+
+You are using Camunda Web Modeler Self-Managed version ≤ 8.3.16, ≤ 8.4.14, ≤ 8.5.15, or ≤ 8.6.7.
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Web Modeler Self-Managed 8.3.17
+- Camunda Web Modeler Self-Managed 8.4.15
+- Camunda Web Modeler Self-Managed 8.5.16
+- Camunda Web Modeler Self-Managed 8.6.8
+
+The fix was deployed to Web Modeler SaaS on February 14, 2025, 08:50 CET.
 
 ### Notice 13
 
@@ -74,11 +105,11 @@ Tasklist
 
 The REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs:
 
-- GET /v1/tasks/{taskId}
+- GET /v1/tasks/\{taskId}
 - POST /v1/tasks/search
-- POST /v1/tasks/{taskId}/variables/search
-- POST /v1/forms/{formId}
-- POST /v1/variables/{variableId}
+- POST /v1/tasks/\{taskId}/variables/search
+- POST /v1/forms/\{formId}
+- POST /v1/variables/\{variableId}
 
 Find more information about the methods in our [Tasklist REST API documentation](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 

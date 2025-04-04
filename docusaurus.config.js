@@ -1,18 +1,23 @@
-const versionedLinks = require("./src/mdx/versionedLinks");
 const { unsupportedVersions } = require("./src/versions");
+const { currentVersion } = require("./src/versions");
 
-const latestVersion = require("./src/versions").versionMappings[0].docsVersion;
+const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
+const { themes } = require("prism-react-renderer");
 
 module.exports = {
+  // https://docusaurus.io/blog/releases/3.6#adoption-strategy
+  future: {
+    experimental_faster: true,
+  },
   title: "Camunda 8 Docs",
   tagline:
-    "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed.",
+    "Start orchestrating your processes with Camunda 8 SaaS or Self-Managed",
   // url: "https://camunda-cloud.github.io",
-  url: process.env.DOCS_SITE_URL || "https://docs.camunda.io",
+  url: docsSiteUrl,
   // baseUrl: "/camunda-cloud-documentation/",
   baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
   customFields: {
-    canonicalUrlRoot: "https://docs.camunda.io",
+    canonicalUrlRoot: docsSiteUrl,
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -35,34 +40,6 @@ module.exports = {
     ],
     "./static/plugins/bpmn-js",
     [
-      "@docusaurus/plugin-content-docs",
-      {
-        id: "optimize",
-        path: "optimize",
-        routeBasePath: "optimize",
-        beforeDefaultRemarkPlugins: [versionedLinks],
-        sidebarPath: require.resolve("./optimize_sidebars.js"),
-        editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
-        versions: {
-          "3.14.0": {
-            label: "8.6 / 3.14.0",
-          },
-          "3.13.0": {
-            label: "8.5 / 3.13.0",
-            banner: "none",
-          },
-          "3.12.0": {
-            label: "8.4 / 3.12.0",
-            banner: "none",
-          },
-          "3.11.0": {
-            label: "8.3 / 3.11.0",
-            banner: "none",
-          },
-        },
-      },
-    ],
-    [
       // Operate API docs generation
       "docusaurus-plugin-openapi-docs",
       {
@@ -76,6 +53,39 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.7: {
+                specPath: "api/operate/version-8.7/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.6: {
+                specPath: "api/operate/version-8.6/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.5: {
+                specPath: "api/operate/version-8.5/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.4: {
+                specPath: "api/operate/version-8.4/operate-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.4/apis-tools/operate-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -94,42 +104,78 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.7: {
+                specPath: "api/tasklist/version-8.7/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.6: {
+                specPath: "api/tasklist/version-8.6/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.5: {
+                specPath: "api/tasklist/version-8.5/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.4: {
+                specPath: "api/tasklist/version-8.4/tasklist-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.4/apis-tools/tasklist-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
     ],
     [
-      // Zeebe REST API docs generation
+      // Administration Self-Managed REST API docs generation
       "docusaurus-plugin-openapi-docs",
       {
-        id: "api-zeebe-openapi",
+        id: "api-adminsm-openapi",
         docsPluginId: "default",
         config: {
-          zeebe: {
-            specPath: "api/zeebe/zeebe-openapi.yaml",
-            outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
+          adminsm: {
+            specPath: "api/administration-sm/administration-sm-openapi.yaml",
+            outputDir: "docs/apis-tools/administration-sm-api/specifications",
             sidebarOptions: {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
-          },
-        },
-      },
-    ],
-    [
-      // Zeebe REST API docs generation
-      "docusaurus-plugin-openapi-docs",
-      {
-        id: "api-consolesm-openapi",
-        docsPluginId: "default",
-        config: {
-          consolesm: {
-            specPath: "api/console-sm/console-sm-openapi.yaml",
-            outputDir: "docs/apis-tools/console-sm-api/specifications",
-            sidebarOptions: {
-              groupPathsBy: "tag",
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.7: {
+                specPath:
+                  "api/administration-sm/version-8.7/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.6: {
+                specPath:
+                  "api/administration-sm/version-8.6/administration-sm-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/administration-sm-api/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
             },
-            hideSendButton: true,
           },
         },
       },
@@ -148,6 +194,63 @@ module.exports = {
               groupPathsBy: "tag",
             },
             hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              8.7: {
+                specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.7/apis-tools/camunda-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.6: {
+                specPath: "api/camunda/version-8.6/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/camunda-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
+          },
+        },
+      },
+    ],
+    [
+      // Zeebe REST API docs generation (removed at v8.7)
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "api-zeebe-openapi",
+        docsPluginId: "default",
+        config: {
+          zeebe: {
+            specPath: "inactive",
+            outputDir: "docs/apis-tools/zeebe-api-rest/specifications",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+            hideSendButton: true,
+            version: "1",
+            label: "Unused but required field",
+            baseUrl: "Unused but required field",
+            versions: {
+              // Removed after 8.6
+              8.6: {
+                specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+              8.5: {
+                specPath: "api/zeebe/version-8.5/zeebe-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.5/apis-tools/zeebe-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
+            },
           },
         },
       },
@@ -163,12 +266,15 @@ module.exports = {
         "https://avatars.githubusercontent.com/u/2443838?s=200&v=4",
       "data-modal-disclaimer":
         "Welcome to Camunda 8 Smart docs, powered by AI. Accessing developer docs, forum posts and product blogs from the last year, responses are generated by combining various sources to formulate the best possible answer. If you have feedback please give a thumbs up or down as we continue to improve the AI.",
-      "data-modal-example-questions": `What's new in Camunda ${latestVersion}?,What's Camunda SaaS vs Self-Managed?`,
+      "data-modal-example-questions": `What's new in Camunda ${currentVersion}?,What's Camunda SaaS vs Self-Managed?`,
       "data-search-mode-enabled": "true",
       async: true,
     },
   ],
   themeConfig: {
+    colorMode: {
+      defaultMode: "light",
+    },
     docs: {
       sidebar: {
         autoCollapseCategories: true,
@@ -184,13 +290,16 @@ module.exports = {
     },
 
     prism: {
-      additionalLanguages: ["java", "protobuf", "csharp"],
+      additionalLanguages: ["java", "protobuf", "csharp", "bash"],
+      theme: themes.palenight,
+      darkTheme: themes.dracula,
     },
     navbar: {
       title: "Camunda 8 Docs",
       logo: {
         alt: "Camunda 8 Docs",
         src: "img/black-C.png",
+        srcDark: "img/light-C.png",
       },
       items: [
         {
@@ -256,10 +365,6 @@ module.exports = {
           title: "About",
           items: [
             {
-              label: "How to use our docs",
-              to: "meta",
-            },
-            {
               label: "Camunda Help Center",
               to: "docs/reference/camunda-help-center",
             },
@@ -269,7 +374,7 @@ module.exports = {
             },
             {
               label: "Contact",
-              to: "contact",
+              to: "docs/reference/contact",
             },
           ],
         },
@@ -314,7 +419,7 @@ module.exports = {
             },
             {
               label: "Release cycle",
-              to: "docs/reference/release-policy",
+              to: "docs/reference/announcements-release-notes/release-policy",
             },
           ],
         },
@@ -326,7 +431,7 @@ module.exports = {
               href: "https://legal.camunda.com/privacy-and-data-protection",
             },
             {
-              html: `<a class="osano-footer-link-docu" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
+              html: `<a class="footer__link-item" href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>`,
             },
             {
               label: "Licenses",
@@ -346,12 +451,13 @@ module.exports = {
       apiKey: "d701d38126d1a43866047d3ab97680d1",
       appId: "6KYF3VMCXZ",
       indexName: "camunda",
+      placeholder: "Search Camunda 8 docs",
     },
     languageTabs: [
       {
         highlight: "bash",
         language: "curl",
-        logoClass: "bash",
+        logoClass: "curl",
       },
       {
         highlight: "java",
@@ -411,9 +517,15 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
-          beforeDefaultRemarkPlugins: [versionedLinks],
+          lastVersion: currentVersion,
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
+            current: {
+              label: "8.8 (unreleased)",
+            },
+            8.7: {
+              label: "8.7 (unreleased)",
+            },
             8.5: {
               banner: "none",
             },
@@ -424,7 +536,6 @@ module.exports = {
               banner: "none",
             },
           },
-          docLayoutComponent: "@theme/DocPage",
           docItemComponent: "@theme/ApiItem",
         },
         blog: false,
@@ -438,15 +549,10 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.2/**",
+            "/docs/8.7/**",
             "/docs/8.3/**",
             "/docs/8.4/**",
             "/docs/8.5/**",
-            "/optimize/3.10.0/**",
-            "/optimize/3.11.0/**",
-            "/optimize/3.12.0/**",
-            "/optimize/3.13.0/**",
-            "/optimize/next/**",
           ],
         },
       },
@@ -454,23 +560,6 @@ module.exports = {
   ],
   markdown: {
     mermaid: true,
-  },
-  webpack: {
-    jsLoader: (isServer) => ({
-      loader: require.resolve("swc-loader"),
-      options: {
-        jsc: {
-          parser: {
-            syntax: "typescript",
-            tsx: true,
-          },
-          target: "es2017",
-        },
-        module: {
-          type: isServer ? "commonjs" : "es6",
-        },
-      },
-    }),
   },
   themes: [
     "docusaurus-theme-openapi-docs",
