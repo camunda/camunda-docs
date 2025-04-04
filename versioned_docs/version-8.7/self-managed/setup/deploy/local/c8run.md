@@ -56,22 +56,25 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 The following command line arguments are available:
 
-| Argument                   | Description                                                                                                                                                                                              |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                                                                                         |
-| `--detached`               | Starts Camunda 8 Run as a detached process.                                                                                                                                                              |
-| `--keystore <arg>`         | Configure the TLS certificate for HTTPS. If not specified, use HTTP. For more information, see [enabling TLS](#enable-tls).                                                                              |
-| `--keystorePassword <arg>` | Provide the password to use with a JKS keystore file.                                                                                                                                                    |
-| `--port <arg>`             | Configure the Camunda core port to the value provided (default: 8080).                                                                                                                                   |
-| `--log-level <arg>`        | Set a different log level for the Camunda core.                                                                                                                                                          |
-| `--docker`                 | Download and run the Camunda Docker Compose distribution. Any additional options are not supported at this time, and will be ignored.                                                                    |
-| `--disable-elasticsearch`  | Do not start the built-in Elasticsearch. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) options for more information. |
+| Argument                   | Description                                                                                                                                                                                                                                   |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                                                                                                                              |
+| `--keystore <arg>`         | Configure the TLS certificate for HTTPS. If not specified, use HTTP. For more information, see [enabling TLS](#enable-tls).                                                                                                                   |
+| `--keystorePassword <arg>` | Provide the password to use with a JKS keystore file.                                                                                                                                                                                         |
+| `--port <arg>`             | Configure the Camunda core port to the value provided (default: 8080).                                                                                                                                                                        |
+| `--log-level <arg>`        | Set a different log level for the Camunda core.                                                                                                                                                                                               |
+| `--docker`                 | Download and run the Camunda Docker Compose distribution. Any additional options are not supported at this time, and will be ignored. See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
+| `--disable-elasticsearch`  | Do not start the built-in Elasticsearch. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) options for more information.                                      |
 
 ## Work with Camunda 8 Run
 
 ### Access Camunda components
 
 All Camunda 8 Run components can be accessed using the username/password combination `demo`/`demo`.
+
+:::note
+The URLs for the Docker Compose application can be found in the [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#access-components) documentation.
+:::
 
 Tasklist and Operate are available at:
 
@@ -181,7 +184,9 @@ zeebeClient
 
 ## Shut down Camunda 8 Run
 
-To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the C8Run directory.
+To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the `c8run` directory.
+
+The Camunda 8 Run Docker distribution can be shut down using `./shutdown.sh --docker` (or `.\c8run.exe stop -docker` on Windows).
 
 ## Advanced options
 
