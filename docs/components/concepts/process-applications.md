@@ -12,9 +12,9 @@ A process application is a type of folder that contains a set of related files y
 
 For instance, a consumer loan approval process application might bundle:
 
-- A main BPMN process (e.g., consumer-loan-application.bpmn) to define the workflow.
-- DMN decision tables (e.g., interest-rate-calculation.dmn, credit-score-calculation.dmn) for business rules.
-- Forms (e.g., loan-application-review.form) for user interactions.
+- A main BPMN process (for example, `consumer-loan-application.bpmn`) to define the workflow.
+- DMN decision tables (for example, `interest-rate-calculation.dmn`, `credit-score-calculation.dmn`) for business rules.
+- Forms (for example, `loan-application-review.form`) for user interactions.
 
 :::tip
 We recommend you use a process application for all your non-trivial automation projects. These projects tend to have one main BPMN process that represents your end-to-end use case, and additional files that the main process depends on, such as called supporting processes, DMN decisions, or forms.
