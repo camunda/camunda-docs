@@ -1324,7 +1324,7 @@ module.exports = {
         "self-managed/concepts/opensearch-privileges",
         {
           "Document handling": [
-            "self-managed/concepts/document-handling/document-handling",
+            "self-managed/concepts/document-handling/getting-started",
             "self-managed/concepts/document-handling/document-handling-configuration",
           ],
         },

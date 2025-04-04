@@ -2,28 +2,44 @@
 id: document-handling-configuration
 title: "Configuration and storage"
 description: "Learn more about storage configuration options like Google Cloud Platform, AWS S3, local folders, and in-memory."
-keywords: ["document handling"]
+keywords: ["document handling", "document storage configuration"]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-![document handling storage options](../img/document-handling-config.png)
+Camunda supports multiple storage options for handling documents in Self-Managed environments. Depending on your deployment setup and production requirements, you can choose from cloud-based, local, or in-memory storage methods.
 
-As shown in the screenshot above, there are several storage options:
+The following section outlines supported storage types, their intended use cases, and configuration guidance.
 
-- A [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage integration can be used in Self-Managed configurations with Camunda 8 Run and Helm.
-- Use [**AWS S3**](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution for Self-Managed, and to ensure storage is properly isolated and managed for each environment. This can be used with Camunda 8 Run and Helm.
-- Documents can be stored in **local folders**. This can be used only for Camunda 8 run, and is not supported for production environments.
-- Documents can be stored **in-memory**. If the application is stopped, the document will be lost. This can be used with both Camunda 8 Run and Helm, but is not supported for production environments.
+<Tabs groupId="storage-use" defaultValue="all" queryString values={
+[
+{label: 'All storage options', value: 'all' },
+{label: 'Storage options for production use', value: 'production' },
+]}>
 
-:::note
-GCP and AWS are supported for Self-Managed in production. Self-Managed users may configure in-memory and local storage using [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
-:::
+<TabItem value='all'>
 
-:::note
-If no configuration is provided, the default document storage is **in-memory**. To change this to a different storage method, use the environment variables in the section below for **every** component using document handling. No additional configuration is required for in-memory storage.
-:::
+- A [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage integration can be used in Self-Managed configurations with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
+- Use [**AWS S3**](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution for Self-Managed, and to ensure storage is properly isolated and managed for each environment.
+  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
+- **Local storage** can be configured for a cluser to store documents in a local folder.
+  - It can be used only for [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), and is not supported for production environments.
+- **In-memory** storage can be used to store documents during application runtime. When the application is stopped, documents will be lost.
+  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md), but is not supported for production environments.
+
+</TabItem>
+
+<TabItem value='production'>
+
+- A [**Google Cloud Platform**](https://cloud.google.com/storage) bucket storage integration can be used in Self-Managed configurations with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
+- Use [**AWS S3**](https://aws.amazon.com/s3/) storage and bucket creation per cluster to securely store and retrieve documents in an external, scalable storage solution for Self-Managed, and to ensure storage is properly isolated and managed for each environment.
+  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
+
+</TabItem>
+</Tabs>
+
+If no configuration is provided, the default document storage is **in-memory**. It means that documents will be lost when the application is stopped. To change this to a different storage method, use the environment variables in the section below for **every** component using document handling. No additional configuration is required for the **in-memory** storage.
 
 To set what storage should be used, accepted values for `DOCUMENT_DEFAULT_STORE_ID` are `aws`, `in-memory`, `gcp` (for Google Cloud Platform), and `local` (for local storage).
 
@@ -160,8 +176,7 @@ DOCUMENT_DEFAULT_STORE_ID=local
 
 </Tabs>
 
-## Limitations
+## Storage policies
 
-- This storage integration is handled and configured by Camunda. While this is not dynamically configurable by the cluster, it is provided as environment configuration.
 - **Maximum upload size for one or multiple files**: 10 MB
 - **File expiration time/time-to-live (TTL) policy**: 30 days by default. Clients for Connectors and Forms may specify a custom expiration date when uploading documents.

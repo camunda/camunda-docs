@@ -15,7 +15,7 @@ In this guide we will cover three main use cases:
 - [Display and download a document](#display-and-download-a-document);
 - [Send a document to an external system via a Connector](#send-a-document-to-an-external-system-via-a-connector).
 
-## Storage configuration
+## Document storage configuration
 
 ### SaaS
 
