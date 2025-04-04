@@ -194,6 +194,40 @@ Package this class and all its dependencies as a JAR, e.g. `my-secret-provider-w
 provider implementation. Add this JAR to the runtime environment, depending on your deployment setup.
 Your secret provider will serve secrets as implemented.
 
+To use this JAR with [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform), build an [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) to create a volume with your secret provider, and mount it into the Connectors pod.
+
+For example, use the following file as input for your `helm install` command:
+
+```bash
+connectors:
+  extraVolumes:
+    - name: workdir
+      emptyDir: {}
+  extraVolumeMounts:
+    # Mount the secret provider
+    # The Connectors pod will pick up the secret provider from /opt/app during startup
+    - name: workdir
+      mountPath: /opt/app/file-secret-provider-2.1.2.jar
+      subPath: file-secret-provider-2.1.2.jar
+  initContainers:
+    - name: install
+      image: busybox:1.36.1
+      command: ["sh", "-c"]
+      args:
+        # Download a the custom secret provider into the volume
+        - |
+          wget -O /work-dir/file-secret-provider-2.1.2.jar https://artifacts.camunda.com/artifactory/camunda-consulting/com/camunda/consulting/connector/file-secret-provider/2.1.2/file-secret-provider-2.1.2.jar
+      volumeMounts:
+        - name: workdir
+          mountPath: "/work-dir"
+      securityContext:
+        runAsUser: 1000
+        # redundant as 1000 is not root but good to have
+        # as the runtime will do verification that no process will
+        # run as root within the container
+        runAsNonRoot: true
+```
+
 For Docker images, you can add the JAR by using volumes, for example:
 
 ```bash
@@ -235,8 +269,8 @@ for the configuration of multi-tenancy.
 
 | Name                                       | Description                                                     | Default value |
 | ------------------------------------------ | --------------------------------------------------------------- | ------------- |
-| ZEEBE_CLIENT_DEFAULT-TENANT-ID             | The default tenant id used to communicate with Zeebe            | `<default>`   |
-| ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS | The default tenants ids (comma separated) used to activate jobs | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_TENANT_ID             | The default tenant id used to communicate with Zeebe            | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS | The default tenants ids (comma separated) used to activate jobs | `<default>`   |
 
 If you are using an embedded version of the Connector Runtime you can specify the tenant information
 in your Spring configuration like in this example `application.properties` file:
@@ -256,7 +290,7 @@ If you want to use outbound Connectors for a single tenant that is different
 from the `<default>` tenant you can specify a different default tenant id using:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-TENANT-ID=tenant1
+ZEEBE_CLIENT_DEFAULT_TENANT_ID=tenant1
 ```
 
 This will change the default tenant id used for fetching jobs and publishing messages
@@ -271,10 +305,10 @@ If you want to run the Connector Runtime in a setup where a single runtime
 serves multiple tenants you have to add each tenant id to the list of the default job workers:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS=tenant1, tenant2
+ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS=tenant1, tenant2
 ```
 
-In this case the `ZEEBE_CLIENT_DEFAULT-TENANT-ID` will **not** be used for the
+In this case the `ZEEBE_CLIENT_DEFAULT_TENANT_ID` will **not** be used for the
 configuration of job workers.
 
 ### Inbound Connector config

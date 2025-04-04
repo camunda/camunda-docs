@@ -14,7 +14,7 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 
 ## Using secrets
 
-:::warning
+:::danger
 `secrets.*` is a deprecated syntax. Instead, use `{{secrets.*}}`
 :::
 
@@ -142,7 +142,7 @@ In that case, you could declare `Result Expression` as follows:
 }
 ```
 
-## BPMN errors and failing jobs
+## BPMN errors and failing jobs {#bpmn-errors}
 
 Being able to deal with exceptional cases is a common requirement for business process models. Read more about our general best practices around this topic in [dealing with exceptions](/components/best-practices/development/dealing-with-problems-and-exceptions.md).
 

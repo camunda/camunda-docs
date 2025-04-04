@@ -119,10 +119,15 @@ Identity uses feature flag environment variables to enable and disable features;
 | Environment variable         | Description                                                     | Default value |
 | ---------------------------- | --------------------------------------------------------------- | ------------- |
 | RESOURCE_PERMISSIONS_ENABLED | Controls the resource authorizations feature.                   | false         |
-| MULTITENANCY_ENABLED         | Controls the multi tenancy feature.                             | false         |
 | USER_RESTRICTIONS_ENABLED    | Controls the user task access restrictions feature in Tasklist. | true          |
 
 :::note
 Setting either of the feature flags to `true` requires a database connection. To configure a database
 connection, see [database configuration](#database-configuration).
 :::
+
+## Logging
+
+### Google Stackdriver (JSON) logging
+
+To enable Google Stackdriver compatible JSON logging, set the environment variable `IDENTITY_LOG_APPENDER=Stackdriver` on Identity.

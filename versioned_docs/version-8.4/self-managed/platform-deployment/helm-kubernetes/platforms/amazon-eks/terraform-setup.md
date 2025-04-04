@@ -4,6 +4,14 @@ title: "Deploy an EKS cluster with Terraform"
 description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module for a quick Camunda 8 setup."
 ---
 
+<!-- The following link to /docs/ is on purpose to always link to the latest version -->
+
+:::warning
+
+There is a [**newer release**](/docs/self-managed/setup/deploy/amazon/amazon-eks/terraform-setup.md) of the documentation available with updated instructions. Use of the latest release is encouraged.
+
+:::
+
 This guide offers a detailed tutorial for deploying an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster, tailored explicitly for deploying Camunda 8 and using Terraform, a popular Infrastructure as Code (IaC) tool.
 
 This is designed to help leverage the power of IaC to streamline and reproduce a Cloud infrastructure setup. By walking through the essentials of setting up an Amazon EKS cluster, configuring AWS IAM permissions, and integrating a PostgreSQL database, this guide explains the process of using Terraform with AWS, making it accessible even to those new to Terraform or IaC concepts.
@@ -33,7 +41,7 @@ To try out Camunda 8 or develop against it, consider signing up for our [SaaS of
 
 For the simplicity of this guide, certain best practices will be provided with links to additional documents, enabling you to explore the topic in more detail.
 
-:::warning
+:::danger
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
@@ -43,7 +51,7 @@ Following this tutorial and steps will result in:
 
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) is installed and configured, which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 15.8](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
+- A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/postgresql/) instance to be used by the Camunda 8 components.
 
 ## Installing Amazon EKS cluster with Terraform
 
@@ -61,7 +69,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.69"
+      version = "~> 5.93"
     }
   }
 }
@@ -90,13 +98,13 @@ There are several ways to authenticate the `AWS` provider.
 
 :::
 
-:::warning
+:::danger
 
 Do not store sensitive information (credentials) in your Terraform files.
 
 :::
 
-:::warning
+:::danger
 
 A user who creates resources in AWS will therefore own these resources. In this particular case, the user will always have admin access to the Kubernetes cluster until the cluster is deleted.
 
@@ -117,7 +125,7 @@ The [Camunda provided module](https://github.com/camunda/camunda-tf-eks-module/t
 
 ```hcl
 module "eks_cluster" {
-  source = "git::https://github.com/camunda/camunda-tf-eks-module//modules/eks-cluster?ref=2.5.0"
+  source = "git::https://github.com/camunda/camunda-tf-eks-module//modules/eks-cluster?ref=3.1.3"
 
   region  = "eu-central-1" # change to your AWS region
   name    = "cluster-name" # change to name of your choosing
@@ -142,8 +150,8 @@ We separated the cluster and PostgreSQL modules from each other to allow more cu
 
 ```hcl
 module "postgresql" {
-  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=2.5.0"
-  engine_version             = "15.8"
+  source                     = "git::https://github.com/camunda/camunda-tf-eks-module//modules/aurora?ref=3.1.3"
+  engine_version             = "15.10"
   auto_minor_version_upgrade = false
   cluster_name               = "cluster-name-postgresql" # change "cluster-name" to your name
   default_database_name      = "camunda"

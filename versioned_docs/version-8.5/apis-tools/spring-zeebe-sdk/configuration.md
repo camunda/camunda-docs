@@ -3,6 +3,12 @@ id: configuration
 title: Configuration
 ---
 
+This page uses YAML examples to show configuration properties. Alternate methods to [externalize or override your configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) are provided by Spring Boot, and can be applied without rebuilding your application (properties files, Java System properties, or environment variables).
+
+:::note
+Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables). To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace any delimiters `.` with underscore `_`.
+:::
+
 ## Job worker configuration options
 
 ### Job type
@@ -343,10 +349,10 @@ Additionally, you can set tenant IDs on the job worker level by using the annota
 @JobWorker(tenantIds="myOtherTenant")
 ```
 
-You can override this property as well:
+You can override this property as well, given the job worker name is `foo`:
 
 ```properties
-zeebe.client.worker.override.tenant-ids=myThirdTenant
+zeebe.client.worker.override.foo.tenant-ids=myThirdTenant
 ```
 
 ### Override authority
@@ -362,7 +368,7 @@ zeebe.client.security.overrideAuthority=host:port
 Path to a root CA certificate to be used instead of the certificate in the default store:
 
 ```properties
-zeebe.client.security.certPath=host:port
+zeebe.client.security.certPath=/path/to/certificate.pem
 ```
 
 ### Message time to live
@@ -375,10 +381,10 @@ zeebe.client.message.timeToLive=PT2H
 
 ### Max message size
 
-A custom maxMessageSize allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
+A custom maxMessageSize (in bytes) allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the maxInboundMessageSize of the gRPC channel (default 4MB):
 
 ```properties
-zeebe.client.message.maxMessage-size=3
+zeebe.client.message.maxMessage-size=3145728
 ```
 
 ### Keep alive

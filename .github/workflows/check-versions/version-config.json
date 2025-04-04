@@ -1,22 +1,20 @@
 [
   {
-    "version": "next",
+    "version": "8.8 (next + 1)",
     "source": "docs/",
-    "suggestions": ["versioned_docs/version-8.6/"]
+    "suggestions": [
+      "versioned_docs/version-8.6/",
+      "versioned_docs/version-8.7/"
+    ]
   },
   {
-    "version": "current (main docs)",
-    "source": "versioned_docs/version-8.6/",
-    "suggestions": ["docs/"]
-  },
-  {
-    "version": "next",
-    "source": "optimize/",
-    "suggestions": ["optimize_versioned_docs/version-3.14.0/"]
+    "version": "8.7 (next)",
+    "source": "versioned_docs/version-8.7/",
+    "suggestions": ["docs/", "versioned_docs/version-8.6/"]
   },
   {
     "version": "current",
-    "source": "optimize_versioned_docs/version-3.14.0/",
-    "suggestions": ["optimize/"]
+    "source": "versioned_docs/version-8.6/",
+    "suggestions": ["docs/", "versioned_docs/version-8.7/"]
   }
 ]

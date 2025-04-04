@@ -4,7 +4,7 @@ title: "User tasks"
 description: "A user task is used to model work that needs to be done by a human actor."
 ---
 
-A user task is used to model work that needs to be done by a human and is assisted by a business process execution engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
 
 When the process instance arrives at a user task, a new user task instance is created at Zeebe.
 The process instance stops at this point and waits until the user task instance is completed.
@@ -26,6 +26,10 @@ You can define assignments, scheduling, variable mappings, and a form for the us
 
 The [job worker implementation](#job-worker-implementation) section details the differences and limitations of job worker-based user tasks.
 
+:::note
+With 8.6, job worker-based user tasks are now deprecated. While these are currently still supported, consider [migrating to Zeebe user tasks](/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks.md).
+:::
+
 ### Assignments
 
 User tasks support specifying assignments, using the `zeebe:AssignmentDefinition` extension element.
@@ -35,6 +39,11 @@ attributes can be specified simultaneously:
 - `assignee`: Specifies the user assigned to the task. [Tasklist](/components/tasklist/introduction-to-tasklist.md) will claim the task for this user.
 - `candidateUsers`: Specifies the users that the task can be assigned to.
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
+
+:::info
+The assignee attribute must adhere to the userId field’s case-sensitivity requirements.
+Note that in SaaS, all user IDs are converted to lowercase by default, as they are based on email addresses.
+:::
 
 :::info
 Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](docs/self-managed/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.

@@ -156,19 +156,25 @@ network:
 
 ### zeebe.broker.network.security
 
-| Field                | Description                                                                                                                                                                                 | Example Value |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`. | false         |
-| certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH`.                       |               |
-| privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH`.                          |               |
+| Field                | Description                                                                                                                                                                                                  | Example Value |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| enabled              | Enables TLS authentication between this gateway and other nodes in the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_ENABLED`.                  | false         |
+| certificateChainPath | Sets the path to the certificate chain file. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH`.                                        |               |
+| privateKeyPath       | Sets the path to the private key file location. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH`.                                           |               |
+| keyStore             | Configures the keystore file containing both the certificate chain and the private key; currently only supports PKCS12 format.                                                                               |               |
+| keyStore.filePath    | The path for keystore file; This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_FILEPATH`.                                                            | /path/key.pem |
+| keyStore.password    | Sets the password for the keystore file, if not set it is assumed there is no password; This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_SECURITY_KEYSTORE_PASSWORD` | changeme      |
 
 #### YAML snippet
 
 ```yaml
 security:
   enabled: false
-  certificateChainPath:
-  privateKeyPath:
+  certificateChainPath: null
+  privateKeyPath: null
+  keyStore:
+    filePath: null
+    password: null
 ```
 
 ### zeebe.broker.network.commandApi
@@ -411,16 +417,18 @@ cluster:
 
 ### zeebe.broker.cluster.raft
 
+This section contains all properties required to configure raft.
+
 | Field                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                            | Example Value |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| raft                   | Configure raft properties.                                                                                                                                                                                                                                                                                                                                                                                                             |               |
 | enablePriorityElection | When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distributed the leaders uniformly across the brokers. Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_ENABLEPRIORITYELECTION`. | true          |
 
 #### YAML snippet
 
 ```yaml
 cluster:
-  raft: enablePriorityElection = true
+  raft:
+    enablePriorityElection: true
 ```
 
 ### zeebe.broker.cluster.flush
@@ -842,7 +850,7 @@ as well.
 :::
 
 :::note
-If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md/#zeebegatewaymultitenancy).
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md#zeebegatewaymultitenancy).
 :::
 
 | Field   | Description                                                                                                                                                  | Example value |

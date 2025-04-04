@@ -58,7 +58,10 @@ With this change, Camunda applications no longer require a unified patch version
 
 <h3>Helm chart 10.0.2+</h3>
 
-The upgrade path for Camunda Helm Chart v9.x.x is v10.0.2+.
+The upgrade path for Camunda Helm Chart v9.x.x is to the latest patch version of v10.
+
+- You can use any minor or patch version after (and including) 10.0.2.
+- You cannot upgrade from v9.x.x to v10.0.0 or v10.0.1.
 
 The Camunda Helm chart v10.0.2 has major changes in the values file structure. Follow the upgrade steps for each component before starting the chart upgrade.
 
@@ -68,7 +71,7 @@ Ensure to use Helm CLI with version `3.14.3` or more. The upgrade could fail to 
 
 #### Deprecation notes
 
-The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7 (January 2025). We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
+The following keys were deprecated in 8.5, and their removal has been delayed until the release of Camunda 8.7. We highly recommend updating the keys in your values file rather than waiting until the 8.7 release.
 
 | Component     | Old Key                            | New Key                             |
 | ------------- | ---------------------------------- | ----------------------------------- |
@@ -293,7 +296,7 @@ If you have a custom `values.yaml`, change the image repository and tag:
 ```yaml
 image:
   repository: bitnami/elasticsearch
-  tag: 8.6.2
+  tag: 8.8.2
 ```
 
 Setting the persistent volume size of the master nodes can't be done using the `volumeClaimTemplate` anymore. It must be done using the master values:

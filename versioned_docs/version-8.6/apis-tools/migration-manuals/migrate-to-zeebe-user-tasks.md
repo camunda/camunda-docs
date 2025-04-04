@@ -16,7 +16,7 @@ import ZeebeTaskSelectionImg from '../tasklist-api-rest/assets/img/zeebe-user-ta
 
 Camunda 8.5 introduced a new [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) implementation type: Zeebe user tasks.
 
-Zeebe user tasks have several benefits compared to job worked-based user tasks. It includes:
+Zeebe user tasks have several benefits compared to job worked-based user tasks (which while still supported, are now deprecated with 8.6). Such benefits include:
 
 - Running directly on the automation engine for high performance.
 - Removing dependencies and round trips to Tasklist.
@@ -307,13 +307,13 @@ Refer to the dedicated sections and API explorers to learn details about the API
 <DocCardList items={[
 {
 type:"link",
-href:"/docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
+href:"/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
 label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
 type:"link",
-href:"/docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/",
+href:"/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/",
 label: "Camunda 8 API (REST)",
 docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 }

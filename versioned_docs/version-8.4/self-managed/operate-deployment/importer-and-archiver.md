@@ -24,6 +24,10 @@ Modules can be run together or separately in any combination and can be scaled. 
 
 Additionally, you can have several importer and archiver nodes to increase throughput. Internally, they will spread their work based on Zeebe partitions.
 
+:::warning
+Running multiple importers on the same partition may result in wrong usage metrics.
+:::
+
 For example, if your Zeebe runs 10 partitions and you configure two importer nodes, they will import data from five partitions each.
 
 Each single importer/archiver node must be configured using the following configuration parameters:
@@ -34,7 +38,7 @@ Each single importer/archiver node must be configured using the following config
 | camunda.operate.clusterNode.nodeCount     | Total amount of Importer (or Archiver) nodes in the cluster.                           | 1                                                   |
 | camunda.operate.clusterNode.currentNodeId | Id of current Importer (or Archiver) node, starting from 0.                            | 0                                                   |
 
-It's enough to configure either `partitionIds` or a pair of `nodeCount` and `currentNodeId`. If you provide `nodeCount` and `currentNodeId`, each node will automatically guess the Zeebe partitions they're responsible for.
+It's enough to configure either `partitionIds` or a pair of `nodeCount` and `currentNodeId`. If you provide `nodeCount` and `currentNodeId`, each node will automatically determine the Zeebe partitions they're responsible for.
 
 :::note
 `nodeCount` always represents the number of nodes of one specific type.

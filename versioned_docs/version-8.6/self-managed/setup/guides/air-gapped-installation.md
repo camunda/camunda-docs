@@ -4,7 +4,7 @@ title: "Installing in an air-gapped environment"
 description: "Camunda 8 Self-Managed installation in an air-gapped environment"
 ---
 
-The [Camunda Helm chart](/self-managed/setup/install.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub (except for [Web Modeler](/self-managed/setup/deploy/other/docker.md#web-modeler)).
+The [Camunda Helm chart](/self-managed/setup/install.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub.
 With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
 To find out the necessary Docker images for your Helm release, note that the required images depend on the values you specify for your deployment. You can get an overview of all required images by running the following command:
@@ -30,11 +30,11 @@ The following images must be available in your air-gapped environment:
 - [bitnami/os-shell](https://hub.docker.com/r/bitnami/os-shell/)
 - [bitnami/elasticsearch](https://hub.docker.com/r/bitnami/elasticsearch/)
 - [bitnami/kibana](https://hub.docker.com/r/bitnami/kibana/)
-- Web Modeler images (only available from [Camunda's private registry](/self-managed/setup/deploy/other/docker.md#web-modeler)):
-  - `web-modeler-ee/modeler-restapi`
-  - `web-modeler-ee/modeler-webapp`
-  - `web-modeler-ee/modeler-websockets`
-- Console images (only available from [Camunda's private registry](https://registry.camunda.cloud/)):
+- [Web Modeler images](/self-managed/setup/deploy/other/docker.md#component-images):
+  - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
+  - [camunda/web-modeler-webapp](https://hub.docker.com/r/camunda/web-modeler-webapp)
+  - [camunda/web-modeler-websockets](https://hub.docker.com/r/camunda/web-modeler-websockets)
+- [Console images](/self-managed/setup/deploy/other/docker.md#component-images):
   - `console/console-sm`
 
 We currently have a script in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) that will assist in pulling and saving Docker images.
@@ -55,15 +55,30 @@ docker pull registry.camunda.cloud/bitnami/postgresql:latest
 
 ## Required Helm charts
 
-The following charts must be available in your air-gapped environment:
+The [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
+must be available in your air-gapped environment.
+It can be downloaded from [GitHub](https://github.com/camunda/camunda-platform-helm/releases) or via the following commands:
 
-- [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform)
+```shell
+helm repo add camunda https://helm.camunda.io
+helm repo update
+helm pull camunda/camunda-platform
+```
+
+The package is self-contained and already includes the following dependencies:
+
 - [Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch)
 - [Keycloak Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak)
 - [Postgres Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql)
 - [Bitnami Common Helm chart](https://artifacthub.io/packages/helm/bitnami/common)
 
-Install the Helm charts by either making it available on a private registry that can be accessed by the air-gapped environment or downloading the artifacts locally. For supported versions, refer to our [supported environments](/reference/supported-environments.md#camunda-8-self-managed) page.
+Install the Helm chart by either making it available on a [private repository](https://helm.sh/docs/topics/chart_repository/) that can be accessed from the air-gapped environment or by providing the downloaded chart archive locally to Helm, for example:
+
+```shell
+helm install camunda ./camunda-platform-11.1.0.tgz
+```
+
+For supported versions, refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed).
 
 ## Dependencies explained
 
@@ -123,14 +138,12 @@ docker push example.jfrog.io/camunda/<DOCKER_IMAGE>:<DOCKER_TAG>
 You must deploy the [required Helm charts](#required-helm-charts) to your repository.
 For details about hosting options, visit the [chart repository guide](https://helm.sh/docs/topics/chart_repository).
 
-### Add your Helm repositories
+### Add your Helm repository
 
-You must add your Helm chart repositories to use the charts:
+You must add your Helm chart repository to use the chart:
 
 ```shell
 helm repo add camunda https://example.jfrog.io/artifactory/api/helm/camunda-platform
-helm repo add elastic https://example.jfrog.io/artifactory/api/helm/elastic
-helm repo add bitnami https://example.jfrog.io/artifactory/api/helm/bitnami
 helm repo update
 ```
 
@@ -194,13 +207,13 @@ webModeler:
     tag: latest
   restapi:
     image:
-      repository: camunda/modeler-restapi
+      repository: camunda/web-modeler-restapi
   webapp:
     image:
-      repository: camunda/modeler-webapp
+      repository: camunda/web-modeler-webapp
   websockets:
     image:
-      repository: camunda/modeler-websockets
+      repository: camunda/web-modeler-websockets
   ...
 postgresql:
   image:

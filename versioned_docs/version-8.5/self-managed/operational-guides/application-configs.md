@@ -208,15 +208,15 @@ Then, take the contents under `application.yml` and put it under the `operate.co
 
 ## Where to search for configuration options
 
-- [Zeebe Broker](docs/self-managed/zeebe-deployment/configuration/broker.md)
-- [Zeebe Gateway](docs/self-managed/zeebe-deployment/configuration/gateway.md)
-- [Operate](docs/self-managed/operate-deployment/operate-configuration.md)
-- [Tasklist](docs/self-managed/tasklist-deployment/tasklist-configuration.md)
-- [Web Modeler](docs/self-managed/modeler/web-modeler/configuration/configuration.md)
-- [Console](docs/self-managed/console-deployment/configuration.md)
-- [Connectors](docs/self-managed/connectors-deployment/connectors-configuration.md)
-- [Identity](docs/self-managed/identity/deployment/configuration-variables.md)
-- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration)
+- [Zeebe Broker](/self-managed/zeebe-deployment/configuration/broker.md)
+- [Zeebe Gateway](/self-managed/zeebe-deployment/configuration/gateway.md)
+- [Operate](/self-managed/operate-deployment/operate-configuration.md)
+- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md)
+- [Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md)
+- [Console](/self-managed/console-deployment/configuration.md)
+- [Connectors](/self-managed/connectors-deployment/connectors-configuration.md)
+- [Identity](/self-managed/identity/deployment/configuration-variables.md)
+- [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md)
 
 ## Limitations
 

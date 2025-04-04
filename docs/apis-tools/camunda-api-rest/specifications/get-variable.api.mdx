@@ -1,71 +1,309 @@
 ---
 id: get-variable
-title: "Get variable (alpha)"
+title: "Get variable"
 description: "Get the variable by the variable key."
-sidebar_label: "Get variable (alpha)"
+sidebar_label: "Get variable"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWUtz2zYQ/is76MWeSqKcOGnKm+o8qjZ1PY7iHGQfQHAlIgYBBgAlazT6750FSZmWaMfTaS+tDrYsYPHt81uaizXzfO5YPGVX3EqeKGQ3PWYKtNxLo8cpi9kc/Xazx1J0wsqCdlnMPqAHnyEsagFIVg+/3+JqcK2v9bnxCD7jJC4doE4LI7UH6YBrmHJVZBxmyH1p8eYoEiYvjEbtXYTcqlWfC4HORUGu+t2vpd0gT4+B6xS08YCa1KZgNJzxvNQpB6FK59E6MKUHMwv2JeZucK0nGcK0EXsDo4sxHF2++zQ5hj8XaBcSl1DwOdnDC+n63hjlIlHJ93kh+xad31vom/rwIE9/+FaiXdHWMRTWLGSKDmal9RlaSNFzqVyITxzH2ngkm/6t8OR8BQmCK5OvKDx4AyLjeo7XWmqYlSQMFhVyh2RTHMfXmvVYwS3PkQLI4umaaZ4ji1mT4N9xxXpMUi0U3Gesxyx+K6XFlMXelrhbMJPd4mA95kSGOWfxmvlVQeBSe5yjZT02Mzbnvlp6fco2mxtS4AqjHTo68WI4pI8nlEgHrgzhmZVKrcCiL63GdBC8E0Z71J4weFEoKULdR18dAa1bpj3U0BACHHIrMmhsAukxJ59qT0yINUXREqm8rKxuR6/T+ltcwczYiiyNdAv38Qj16gztop7zHKvq70Z03ko9p/MLrsoOgCtafh4CBfqqG+V9qRQsng/lhCmeDlPN6CD4FOZTISusoQIZa+e5Fs/SVx8BWZ/5u6o9aq49Ndo9hWEHxm+fFynpJrbUgnvswPqSYWg5VW+m6EsHvpEHY6l5tmATYxRyzTZkofQKWzU/9pizzYa2TrvY9wtPgZoAOv84wQprEoX5j98j2gguKsm6W0LFKOAOKsEEU5Aappfvz+Dn01c/3Rxl3hcujqLlcjmwM9HHVHpjB8bOIzsT9ENyxwOYZGixaYs8TSXp5AruuQquQCFnUlC3rLMejKEwVQ3kaaJXu+udbLXqoLRy76E6gs+XY5Apai9nK6nn+6rDmRkvFWHwxJQ+ThTXt+w+X/tKd7W4Ms+5bVd0SwFxz3Nfuu/25Zcv9rCJK79OJhdQQYAwKd73s1oROZFLLfMyZ/HpcNhjOb+rvr0eDjeESRl/hica8K5QXIfS2nVHasiNxbp+gmMNZ/+hzBgr53JX7+ABd+oiflt51JDnpLvL1OQBxcUtkV7JFHjpM9Ja0QeExWAEV25wINmBZAeSPUqylx3/hBibyDRFHcpzyzfpwisEV8osMT3w6sCrA68e59VpxzuG8TAzpU4P1DlQ50CdR6jzquulaaSBomypDtFaY8EIUVqLKSwzqbbvm43u+pn15BDjwLUD1/7XXNv0WI4+M/UUOwwzfcZiFjWTFBetW7O4DQ0j0S6aWWdpFYvZuuLNJo6idWac38Trwli/iRaUlC0SOUrbFb+aulFGcBWWu/JHG3o7mEO4n0XTGBo+cI9LvgrxJJUPod8M3ww7UUn0EUQacVceVtXX6ggNLFG7E7YSfg5wGNM6FKWVfvWJjlXhSZBbtKOScrCtilpfQA+jpyDEevUf75ta+e3LJKRb6pkJx+u07xtCWUHrKsuHg5P9ErsYB6YIk+elDu1Sz2EpfQa85Vh9cUAcUlKgdqGY6wF4I/ax2oGrSiOcDCgpVeU0XXIufVYmA2Hy5rJg+5kok0Q5lzqqVbjobPTH5/O3o/7H8dm780/v+ieD4cDf+eB8YZzPuW7ZQTcw21n3URj9H+86vL5/QhxubP77NzY1sTze+ahQXGqieqjIdd0Ap6221WNx+zripld3sSlbrxPu8LNVmw0th8CweHpz3/RCl0ylCxlk8Ywrt3vj0669o8v6bugYuu6BOu2uF7lese3VBGM9dksz+gcXKZubTY9lyFO0wa5KYiQEFr51du+ah5rV9jHx4R11mb8AWyYWCQ==
+api: eJztWU1z2zYQ/Ss7OCVTRpITp0150zhOqjbNeBzFObg+gOBKRAwCDLCUrNHwv3eWHxItya4601t18EgiFm+/3gPN5VqQnAcR34ob6bVMDIq7SLgCvSTt7CQVsZgjbRYjkWJQXhe8KmLxEQkoQ1i0BpCsHv++x9XgLysiUUgvcyT07G0trMxRxKKz+wNXIhKaIQtJmYiExx+l9piKmHyJu36nuz5EJILKMJciXgtaFQweyGs7F1V1x3ChcDZg4PXXoxF/PAOpA4RSKQxhVhqzAo9Ueotpk4tyltASY8iiMFrVxRp+Dwy07gXy2ENXRQgovcqgiwk0Yc4ZtHG75Dsq4pp57gTpJuqmZLugn2WO4GZAmQ6b+HtgXREisZCmPABww5ePQ+Ba3BxG+VAaA4vjoQittMT82utDvQKT98cB6TD1pVWS8ADWtwwpQ99SkoPTAaizB+fBOurBJs4ZlLap1paZB7lyjyuYOX9EiEG54nmcOlOE2vC4tAvvmJ0TG0hadRR6uwV0u+cYR9wpTQZ77L3GUBoSVcWL508pqfBuoVNMIZUkuerWEbdAp4OnBVR4lxjMf/onIY3hqrGEFElqA41iQAZoDBNMQVu4vf5wAb+ev/3l7kVGVIR4OFwulwM/U68w1eT8wPn50M8U/7HdywFMM/QIuVxBgiDTVLNPaWCrRQgFKj3TCsh1ha2D4do1B8TzQm5Wd4+pSMyczyWJWJRe7520Y/h6PQGdoiU9W2k733dd75lJ7k4sZOJKihMj7b3YdnHf6a6XUOa59H3S9BwwmUlS2UtDaEs4R9+PX1t683oPm2nx23R6BQ0EKJfiVkGtI04i11bnZS7i89EoErl8aH79PBpVjMkdPyITC/hQGGlrau2moy3kzmPLnzqxThb/UWec13O963fwSFEtid83GXWCOjssKL4fYiAwUt2HRkkgS8rYayMfUB7rIKQJJ5GdRHYS2dMie3PgPxjnE52maGt6bvTW3rqkMW6Jp5vXSVcnXT2jq/MDDyiOYOZKm56kc5LOSTpPSOftoQepsQWusmceovfOg1Oq9B5TWGbabB7pOt/tPevZIcVJayet/a+1VkUiR8pcO9qsR5OUiVgMuzlIGK5705+KR4voF93ksvRGxGLd6KaKh8N15gJV8bpwnqrhgpuyQeJEebnRV8cb45Q09eVD/eMFu5nqIVzIvLSphHdwffllCh8l4VKu6nqyy8fQ70bvRgdR2fQJxPHVBJoMG/b1ToQOlqV9ELYxPga4HsMGVKXXtPrC25ryJCg9+nHJPdiwovVXo9eDudpIRO2XDx1Xfv82rdut7czV29u27wfCXUEfmshHg7N9il1NaqUol+elrY9LO4elpgxkLzFlykCcUCSMVmgDbmezG7efmhW4aTzC2YCb0jCnOyXnmrIyGSiXD1WzbfOZGJcMc6ntsHURhhfjP79+fj9+9Wlycfn5y+Wrs8FoQA9UJ1+4QLm0vTh4LL94Yma/3t4Z/sX4vu0L4QMNCyN1PSOtE1q3+rntsT4ScX9+ehe1IrgV63UiA371pqr48o8S/UrEt3dbzdQiS3Xg76mIZ9KE3fF/P4UX1+2Lgpdw6KXAwbjbi9KuxGYsLkQk7nmK+mjyW91VkchQpujruBqLsVJYUG/v3lsA5vrmlPl4yST9G6M0xD0=
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Get variable (alpha)</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get variable"}
+></Heading>
 
 <MethodEndpoint
   method={"get"}
   path={"/variables/{variableKey}"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Get the variable by the variable key.
 
-Note that this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
-The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-:::note
-This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
-in future releases.
-:::
+<ParamsDetails
+  parameters={[
+    {
+      name: "variableKey",
+      in: "path",
+      required: true,
+      description: "The variable key.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
-## Request
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"variableKey","in":"path","required":true,"description":"The variable key.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
-
-The variable is successfully returned.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"variableKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key for this variable.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Name of this variable.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"value"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Value of this variable.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"fullValue"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Full value of this variable.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"scopeKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key of the scope of this variable.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"processInstanceKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key of the process instance of this variable.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"Tenant ID of this variable.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"isTruncated"} required={false} schemaName={"boolean"} qualifierMessage={undefined} schema={{"description":"Whether the value is truncated or not.","type":"boolean"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"variableKey\": 0,\n  \"name\": \"string\",\n  \"value\": \"string\",\n  \"fullValue\": \"string\",\n  \"scopeKey\": 0,\n  \"processInstanceKey\": 0,\n  \"tenantId\": \"string\",\n  \"isTruncated\": true\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-Bad request
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-Not found
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The variable is successfully returned.\n",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Variable search response item.",
+            type: "object",
+            properties: {
+              name: { description: "Name of this variable.", type: "string" },
+              value: { description: "Value of this variable.", type: "string" },
+              fullValue: {
+                description: "Full value of this variable.",
+                type: "string",
+              },
+              tenantId: {
+                description: "Tenant ID of this variable.",
+                type: "string",
+              },
+              isTruncated: {
+                description: "Whether the value is truncated or not.",
+                type: "boolean",
+              },
+              variableKey: {
+                description: "The key for this variable.",
+                type: "string",
+              },
+              scopeKey: {
+                description: "The key of the scope of this variable.",
+                type: "string",
+              },
+              processInstanceKey: {
+                description:
+                  "The key of the process instance of this variable.",
+                type: "string",
+              },
+            },
+            title: "VariableResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

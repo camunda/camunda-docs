@@ -4,6 +4,10 @@ title: "Glossary"
 description: "This section defines common terminology referenced within the documentation."
 ---
 
+### Automation cluster
+
+See [orchestration cluster](#orchestration-cluster).
+
 ### Bridge
 
 Synonym to "[Connector](#connector)".
@@ -153,7 +157,7 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 A manual task defines a task that requires human interaction but no external tooling or UI interface. For example, a user reviewing a document or completing a physical task.
 
-Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) which define an actionable task assisted by a business process execution engine or software application.
+Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) which define an actionable task assisted by a workflow engine or software application.
 
 - [Manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md)
 
@@ -162,6 +166,14 @@ Manual tasks are part of [human task orchestration](/guides/getting-started-orch
 A message contains information to be delivered to interested parties during execution of a process instance. Messages can be published via Kafka or Zeebe’s internal messaging system. Messages are associated with timestamp and other constraints such as time-to-live (TTL).
 
 - [Messages](/components/concepts/messages.md)
+
+### Orchestration cluster
+
+An orchestration cluster includes Zeebe, Operate, Tasklist, Optimize, and Connectors. Previously [automation cluster](#automation-cluster).
+
+### Orchestration core
+
+An orchestration core or orchestration cluster core includes Zeebe, Operate, Tasklist, Optimize, and Identity.
 
 ### Outbound Connector
 
@@ -260,9 +272,20 @@ This way, a Camunda workflow can receive messages from an external system or ser
 
 ### User task
 
-A user task is used to model work that needs to be done by a human and is assisted by a business process execution engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
+
+With 8.7, Camunda offers job worker-based user tasks managed by Camunda, also known as Camunda user tasks (and formerly known as Zeebe user tasks). Note that you may still see references of **Zeebe user tasks** in your XML, but this is the same thing as Camunda user tasks.
+
+Camunda recommends using Camunda user tasks in your process definitions. With 8.7, **job-worker** user tasks are available for querying, but Camunda Modeler automatically applies the **Camunda user task** and shows a warning message for each job worker user task.
 
 - [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
+- [Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)
+
+### User task listener
+
+A user task listener allows users to execute custom logic in response to specific user task lifecycle events, such as assigning or completing a task. User task listeners are attached to BPMN user tasks and facilitate validation, custom task assignment, and other operations during user task execution. They operate similarly to job workers, leveraging the same infrastructure for processing external logic.
+
+- [User task listeners](/components/concepts/user-task-listeners.md)
 
 ### Webhook Connector
 
@@ -279,6 +302,10 @@ A worker executes a job. In the Zeebe nomenclature, these are also referred to a
 ### Workflow
 
 See [process](#process).
+
+### Workflow engine
+
+A workflow engine is an essential part of any process automation tool. We call it an “engine” because it drives business processes from start to finish, no matter how complex the process and decision logic need to be. [Zeebe](/components/zeebe/zeebe-overview.md) is the workflow engine powering Camunda 8.
 
 ### Workflow instance
 

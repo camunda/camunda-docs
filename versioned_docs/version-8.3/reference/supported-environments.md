@@ -80,6 +80,10 @@ For details on typical volume type usage, refer to the following examples specif
 - [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
 - [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
 
+### Helm charts version matrix
+
+Camunda Helm chart version `8.3.x` works with Camunda version `8.3.x`. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.3/) for more details.
+
 ## Component requirements
 
 Requirements for the components can be seen below:
@@ -117,20 +121,6 @@ This matrix shows which component versions work together:
 :::note
 You can also use newer versions of Desktop and Web Modeler with older Zeebe versions.
 :::
-
-## form-js version matrix
-
-| Design                | form-js |
-| --------------------- | ------- |
-| Desktop Modeler 4.7+  | 0.0.1   |
-| Desktop Modeler 4.9+  | 0.1.x   |
-| Desktop Modeler 4.11+ | 0.1.x   |
-| Desktop Modeler 4.12+ | 0.1.x   |
-| Desktop Modeler 5.0+  | 0.2.x   |
-| Desktop Modeler 5.4+  | 0.8.x   |
-| Desktop Modeler 5.10+ | 0.14.x  |
-| Web Modeler 8.2.x     | 0.14.x  |
-| Web Modeler 8.3.x     | 1.3.x   |
 
 ## Camunda 7 & Optimize version matrix
 

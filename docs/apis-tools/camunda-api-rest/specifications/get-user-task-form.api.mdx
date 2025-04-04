@@ -1,76 +1,306 @@
 ---
 id: get-user-task-form
-title: "Get user task form (alpha)"
+title: "Get user task form"
 description: "Get the form of a user task."
-sidebar_label: "Get user task form (alpha)"
+sidebar_label: "Get user task form"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWUtz2zYQ/is76MWeUqScOGnKm+LYqdvE9Th2e5B9AMmViAgEGDwkazT8750FKcl6OEmn7ak6+CFiuYvd/b6l+GHBHB9blg7ZnUUDjtsJe4iYrtFwJ7S6LFjKxuho9ZbbyYU2FYtYgTY3oiYLlrL36MCVCCNtKtAj4OCXzuJ7da+utENwJScrYQFVUWuhHMyElKCVnINB540CKdQEi+DHxnC7YVxotKC0A+vrWhsHWGVYFCvze3XhjSvRVNpgtBVJWOAKhlzWJYcRcucNPhwlua5qrVA5myA3ct7jeY7WJsGu/d3rrG1cFcfAVRH2gIpnEgvQCs545VXBIZfeOjQWtHdUBCpIph/je3VbIgyXZm9gcH0JRzfnn26P4fcpmqnAGdR8TPvhtbA9p7W0Sd7a93gtegat27nQ093NcVX88MWjmdPSMdRGT0WBFkZtOaBAx4W0oRNpmirtkPb0X5Wn4nPIEKzPPmPuwGnIS67GeK+EgpEnYzAokVukPaVpeq9YxGpueIVUQJYOF0zxClnKfAe733DOIiYIbDV3JYuYwS9eGCxY6ozHbURSyVcYhAnOYxYxm5dYcZYumJvX5F0oh2M0LGIEIe7aS69PWdM8UARba2XR0h0v+n36sxslYF5YsD7UZuTlCs5YxCG1XCuHytH9vK6lyAOzks+WnCx2t6VD5agmhnjoRLsFikR12LuNCc6XoCM7SvebSUbMoeLKEcf3+WxX4fLdM56tM0KNyU9WV+o5L2+vP159j491GXZ9tGvPuOjK1URsisaKtqi7PrrFv10lKpNwkoxo+F06rFjT0OUX/dP9odbIm3ELI+1VEUHmHSi9wgu3VueCOyxgJlwJwhFYmoid7kPaW14AIR6tex5QtdGZxOrHXWBtOhvAdWvZjQZoKwjcQmuYYQFCwfDm4gx+Pn3108NR6Vxt0ySZzWaxGeU9LITTJtZmnJhRTj9kd0wzGw0uZwAvCkExuYQ1lMHWmIuRyGk0UCe6bQN1oiXM13nQri62EPSkcd6InUfUAO5uLkEUqJwYzYUa74YO94y4l+SDZ9q7NJNcTdgaAbtBt6NYX1XcrLi4GYBQ7rjz9psz6OWLHd8ErF9ub6+hdQG5LgKK2yddF4iSqIQSla9YetrvR6zij+2n1/1+Qz6p49+RiQJ8rCVXAVrb6QgF9JTt8BMSE8o6rvJ/qzPaiLHYjhtvsLED8bs2o5aSp/2T/ZTsyAOS5xMLUy5FAdy7kqK29IHcYNgElzY+kOxAsgPJniXZy128X2iTiaJAFeC54ptov7NzKfUMiwOvDrw68Op5Xu35PnmlXfsN8kCdA3UO1HmGOq/2vTQNFFCVDeEQjdEGdJ57Y+iVqxQyuKd39mXs7pn11Zf2A9cOXPtfc62JWIWu1J0uHJQ7V7KUJaR69Ej1sMniiW7XJKNWM7Zopkt5zxvJUrZo2dOkSbIotXVNuiBlt0mm1JopN4JU1tBJWm5ZtkSP1DmX4fK+LtICaYjL7NbyKymv8J47nPF5qCqF3HT9pv+mv9dr0J33eyRVt80w3lazlm6J4HvdbspbX3MchEmLuTfCzT/RbW15MuQGzcBTJ1bY6OIF7/S5NWJR98/FEjG//nkbmi7USIfbu+bvboQ90dhYPz7ZBdr1ZeBLrqvKqzA01bgVuPiTxDqtnJgkRY7KBkh3mu/S7EO7An90wt1JTE1pkbOclWPhSp/Fua6W+vjqbyZ1llRcqKQLYZOzwce7q3eD3ofLs/OrT+e9k7gfu0cXkq+1dRVXT/ZBpxprJS/odkdB8z7eTnuxfloczkIOZyH/+Cyk46/DR5fUkougCwfgL7ppO2Tracsilm6ek4SB+xB1Q3PIFouMW7wzsmnocigQS4cP6xkbhnIhbOgkS0dc2u0zlacgP7rpTl+OYe9Jy94EuotczcNwl54+sYhN6Exj46SneWgiViIv0ISNtRaDPMfaPbl35zCFhuPq4fT+nKbaX2puA7w=
+api: eJztWU1z2zYQ/SsYnJIpLcqJk6a8aRw7dZt4PI7cHhwfQHAlIgYBBlha1mj43zsLkPpWkkMPnakOGkkEsIu3+x4oPi04iqnn2T2/8+AYCv/IHxJua3AClTVXBc/4FJBGx8I/XlpX8YQX4KVTNc3gGf8AyLAENrGuYnbCBGv6YIMv5ou5tggMS0GzlGdgitoqg2ymtGbW6DlzgI0zTCvzCEWI4wdsvDG5sOCZsch8U9fWIYMqh6JYTv9ieMJr4UQFCI4gLbgRFfCMN93m/4Q5T7iiLdcCS55wB98a5aDgGboGtnGNS1ghYY8wH/CEe1lCJXi24DivKbpHp8yUt+0DxfO1NR48jb8aDultN2aok/LMN1KC95NGL0sARQQirUEwSOtFXWslQzfSr56CLHY3YfOvIJEq4Kh3qOIWEIwwSE3ct484yq7eU9P6BhLGLWQJp4FDUahCJ7WzT4qaoQowqCYK3A+DrkAcKFFXhLXFHcw24U/gvIrF2F3dDfY7oFcBtbbzji1rEZVBmILjEaPAeOntWY+aOLM3h/BeTQ0UxIuEzUolSyYkeiY8CcCobw2sV2NiXaT/gXq0CUeFmi6RyG7BNxp529LAq+HZ4dpHds4ERW5MkbC8QWbskmXCeyuVQCjYTGHJFBLF2oSfHeLnspmFQEEhSHZPQqticJiatbO5huqXXYpuJhixmziTFYBCaRZ7SmWLE3NikWH3t5fn7LezN78+vCgRa5+l6Ww2G7iJPIFCoXUD66apm0h60byXdGKAA1aJOcuBiaJQlFNothIF8zVINVGSoQ286LbNqBtRej9QVBjdFv8aexqndg7IEbu7verJMFdmups6rJkI6nnGRW4bzHItzCNf8WI36XYW31SVcPOe95sJSHEosFmDcYD9r1/txCZa/D4e37AYgklbwIrSXSICUSmjqqbi2dlwmPBKPMdvb4fDlmJSx38CiWHwXGthArW24SjDKuug408ApoxHYeS/1Rnr1FRt5x1saLQj8fuIKMr0bHi6X1B0mwGPTAv56KOSmGiwpKxRPkw6CJsQ2h9FdhTZUWSHRfZ6l++X1uWqKMAEei711t26hNZ2Bseb11FXR119R1d7fmNeW4y/Ko/SOUrnKJ0D0nmz70FqZBhV2REPwTnrmJWycY4ew0qlQ3h6+u9zd/es7z7+H7V21Nr/WmttwivA0nauZHD8sOQZT4MLRU6ITxdrfl+bTqJj6cE99bZg4zTP+CKqp83SdFFaj222IF+xTZ+oNU/CKZHrSEgajirr2aOtFDpc3tdFGiDvsUd3LqrGFIK9Y7cXn8fsg0CYiXmoKqXcDP1u+G64N2pwPfdHHN1csYhwsO2s9WFJ4HvDxsk/EzhYnB5k4xTOP9OyWJ4chAM3aqgTS250+UJ0+h4n8aT7cNkz5o+/x6HpykxsWN41f3cjfM3148PB6S7Rbq6CXqStqsaEQ9NMo+kl1oBJ3XgkQAnXSoLxgdKdV9xP+xhH2F+dlXg6oKZE5vRn5VRh2eQDaatUxmXL91zbPK2EMmmXwqfno0931+9HJx+vzi+uP1+cnA6GA3zGAL62Hith1vZBnvrK3Zvssd0Xq7vEf8iB77qP8IxprYUKTmMo26LT6j1faZUnPNt05wPSh6ST3D1fLHLh4c7ptqXL3xpwc57dP6wUGiRdKE+fC55NhPbbTv56qV7cdp7/S7bX398LoLsozDwcDbqhbzzhj+QOb/y/0D60CS9BFODCxuKMkZRQ49raHVOfpLU82j5ckCb+AbKl144=
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Get user task form (alpha)</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get user task form"}
+></Heading>
 
 <MethodEndpoint
   method={"get"}
   path={"/user-tasks/{userTaskKey}/form"}
+  context={"endpoint"}
 ></MethodEndpoint>
 
 Get the form of a user task.
 
 Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
-Furthermore, this endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and not enabled on Camunda clusters out of the box.
-The [Camunda 8 API (REST) Overview page](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md#query-api) provides further details.
 
-:::note
-This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
-in future releases.
-:::
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-## Request
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The user task key.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
 
-<details style={{"marginBottom":"1rem"}} className={"openapi-markdown__details"} data-collapsed={false} open={true}><summary style={{}}><h3 className={"openapi-markdown__details-summary-header-params"}>Path Parameters</h3></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"userTaskKey","in":"path","required":true,"description":"The user task key.","schema":{"type":"integer","format":"int64"}}}></ParamsItem></ul></div></details><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
 
-The form is successfully returned.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The key of the form.","type":"integer","format":"int64"}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID of the form.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"bpmnId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The BPMN ID of the form.","type":"string"}}></SchemaItem><SchemaItem collapsible={false} name={"schema"} required={false} schemaName={"object"} qualifierMessage={undefined} schema={{"description":"The schema of the form.","type":"object"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"description":"The version of the form.","type":"integer","format":"int64"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"formKey\": 0,\n  \"tenantId\": \"string\",\n  \"bpmnId\": \"string\",\n  \"schema\": {},\n  \"version\": 0\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"204"} value={"204"}><div>
-
-The user task was found, but no form is associated with it.
-
-</div><div></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-Bad request
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"401"} value={"401"}><div>
-
-The request lacks valid authentication credentials.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"403"} value={"403"}><div>
-
-Forbidden. The request is not allowed.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"404"} value={"404"}><div>
-
-Not found
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"500"} value={"500"}><div>
-
-An internal error occurred while processing the request.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The form is successfully returned.\n",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              tenantId: {
+                description: "The tenant ID of the form.",
+                type: "string",
+              },
+              formId: {
+                description: "The user-provided identifier of the form.",
+                type: "string",
+              },
+              schema: { description: "The form content.", type: "object" },
+              version: {
+                description: "The version of the the deployed form.",
+                type: "integer",
+                format: "int64",
+              },
+              formKey: {
+                description:
+                  "The assigned key, which acts as a unique identifier for this form.",
+                type: "string",
+              },
+            },
+            title: "FormResult",
+          },
+        },
+      },
+    },
+    "204": {
+      description:
+        "The user task was found, but no form is associated with it.\n",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

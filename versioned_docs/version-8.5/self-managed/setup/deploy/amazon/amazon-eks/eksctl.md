@@ -25,7 +25,7 @@ To try out Camunda 8 or develop against it, consider signing up for our [SaaS of
 
 While the guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
-:::warning
+:::danger
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 :::
 
@@ -33,9 +33,9 @@ Following this guide will incur costs on your Cloud provider account, namely for
 
 Following this guide results in the following:
 
-- An Amazon EKS 1.30 Kubernetes cluster with four nodes.
+- An Amazon EKS Kubernetes cluster with four nodes.
 - Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 15.4](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
+- A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without supplying explicit credentials.
@@ -65,7 +65,7 @@ The following are the required environment variables with some example values. D
 export CLUSTER_NAME=camunda-cluster
 # Your standard region that you host AWS resources in
 export REGION=eu-central-1
-# Multi-region zones, derived from the region
+# Multi-zones, derived from the region
 export ZONES="eu-central-1a eu-central-1b eu-central-1c"
 # The AWS Account ID
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
@@ -80,7 +80,7 @@ export PG_PASSWORD=camundarocks123
 # The default database name created within Postgres. Can directly be consumed by the Helm chart
 export DEFAULT_DB_NAME=camunda
 # The PostgreSQL version
-export POSTGRESQL_VERSION=15.8
+export POSTGRESQL_VERSION=15.10
 
 # Optional
 # Default node type for the Kubernetes cluster
@@ -119,7 +119,7 @@ apiVersion: eksctl.io/v1alpha5
 metadata:
   name: ${CLUSTER_NAME:-camunda-cluster} # e.g. camunda-cluster
   region: ${REGION:-eu-central-1} # e.g. eu-central-1
-  version: "1.30"
+  version: "1.32"
 availabilityZones:
   - ${REGION:-eu-central-1}c # e.g. eu-central-1c, the minimal is two distinct Availability Zones (AZs) within the region
   - ${REGION:-eu-central-1}b

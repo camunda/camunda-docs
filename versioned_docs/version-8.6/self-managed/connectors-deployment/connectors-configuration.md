@@ -28,17 +28,17 @@ You can configure the Connector runtime environment in the following ways:
 To use Camunda 8 SaaS specify the connection properties:
 
 ```bash
-CAMUNDA_CLIENT_CLUSTER-ID=xxx
-CAMUNDA_CLIENT_AUTH_CLIENT-ID=xxx
-CAMUNDA_CLIENT_AUTH_CLIENT-SECRET=xxx
+CAMUNDA_CLIENT_CLUSTERID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
 CAMUNDA_CLIENT_REGION=bru-2
 ```
 
 You can further configure separate connection properties for Camunda Operate (otherwise it will use the properties configured for Zeebe above):
 
 ```bash
-CAMUNDA_OPERATE_CLIENT_CLIENT-ID=xxx
-CAMUNDA_OPERATE_CLIENT_CLIENT-SECRET=xxx
+CAMUNDA_OPERATE_CLIENT_CLIENTID=xxx
+CAMUNDA_OPERATE_CLIENT_CLIENTSECRET=xxx
 ```
 
 If you are connecting a local Connector runtime to a SaaS cluster, you may want to review our [guide to using Connectors in hybrid mode](/guides/use-connectors-in-hybrid-mode.md).
@@ -199,6 +199,40 @@ Package this class and all its dependencies as a JAR, for example `my-secret-pro
 provider implementation. Add this JAR to the runtime environment, depending on your deployment setup.
 Your secret provider will serve secrets as implemented.
 
+To use this JAR with [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform), build an [init container](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) to create a volume with your secret provider, and mount it into the Connectors pod.
+
+For example, use the following file as input for your `helm install` command:
+
+```bash
+connectors:
+  extraVolumes:
+    - name: workdir
+      emptyDir: {}
+  extraVolumeMounts:
+    # Mount the secret provider
+    # The Connectors pod will pick up the secret provider from /opt/app during startup
+    - name: workdir
+      mountPath: /opt/app/file-secret-provider-2.1.2.jar
+      subPath: file-secret-provider-2.1.2.jar
+  initContainers:
+    - name: install
+      image: busybox:1.36.1
+      command: ["sh", "-c"]
+      args:
+        # Download a the custom secret provider into the volume
+        - |
+          wget -O /work-dir/file-secret-provider-2.1.2.jar https://artifacts.camunda.com/artifactory/camunda-consulting/com/camunda/consulting/connector/file-secret-provider/2.1.2/file-secret-provider-2.1.2.jar
+      volumeMounts:
+        - name: workdir
+          mountPath: "/work-dir"
+      securityContext:
+        runAsUser: 1000
+        # redundant as 1000 is not root but good to have
+        # as the runtime will do verification that no process will
+        # run as root within the container
+        runAsNonRoot: true
+```
+
 For Docker images, you can add the JAR by using volumes, for example:
 
 ```bash
@@ -239,8 +273,8 @@ The Connector Runtime uses the following environment variables to configure mult
 
 | Name                                       | Description                                                                                                                                                                              | Default value |
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| ZEEBE_CLIENT_DEFAULT-TENANT-ID             | The default tenant ID used to communicate with Zeebe. Changing this value will set a new default tenant ID used for fetching jobs and publishing messages.                               | `<default>`   |
-| ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS | The default tenant IDs (comma separated) used to activate jobs. To run the Connector Runtime in a setup where a single runtime serves multiple tenants, add each tenant ID to this list. | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_TENANT_ID             | The default tenant ID used to communicate with Zeebe. Changing this value will set a new default tenant ID used for fetching jobs and publishing messages.                               | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS | The default tenant IDs (comma separated) used to activate jobs. To run the Connector Runtime in a setup where a single runtime serves multiple tenants, add each tenant ID to this list. | `<default>`   |
 
 If you are using an embedded version of the Connector Runtime, you can specify the tenant information in your Spring configuration like in this example `application.properties` file:
 
@@ -259,7 +293,7 @@ If you want to use outbound Connectors for a single tenant that is different
 from the default tenant, you can specify a different default tenant ID using:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-TENANT-ID=myTenant
+ZEEBE_CLIENT_DEFAULT_TENANT_ID=myTenant
 ```
 
 This will change the default tenant ID used for fetching jobs and publishing messages
@@ -274,10 +308,10 @@ To run the Connector Runtime in a setup where a single runtime
 serves multiple tenants, add each tenant ID to the list of the default job workers:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS=`myTenant, otherTenant`
+ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS=`myTenant, otherTenant`
 ```
 
-In this case, the `ZEEBE_CLIENT_DEFAULT-TENANT-ID` will **not** be used for the
+In this case, the `ZEEBE_CLIENT_DEFAULT_TENANT_ID` will **not** be used for the
 configuration of job workers.
 
 ### Inbound Connector configuration
@@ -287,6 +321,14 @@ Operate independently of the outbound Connector configuration without any additi
 configuration required from the user.
 
 To restrict the Connector Runtime inbound Connector feature to a single tenant or multiple tenants, use Identity and assign the tenants the Connector application should have access to.
+
+It is possible to adjust the polling interval of Connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often Connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the Connectors to poll every 20 seconds.
+
+Example:
+
+```
+CAMUNDA_CONNECTOR_POLLING_INTERVAL=10000
+```
 
 ### Troubleshooting
 

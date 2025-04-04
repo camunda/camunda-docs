@@ -5,61 +5,320 @@ description: "Deploys one or more resources (e.g. processes, decision models, or
 sidebar_label: "Deploy resources"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api
 custom_edit_url: null
 hide_send_button: true
 ---
 
-import ApiTabs from "@theme/ApiTabs";
-import DiscriminatorTabs from "@theme/DiscriminatorTabs";
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
-import SecuritySchemes from "@theme/ApiExplorer/SecuritySchemes";
-import MimeTabs from "@theme/MimeTabs";
-import ParamsItem from "@theme/ParamsItem";
-import ResponseSamples from "@theme/ResponseSamples";
-import SchemaItem from "@theme/SchemaItem";
-import SchemaTabs from "@theme/SchemaTabs";
-import Markdown from "@theme/Markdown";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
 
-<h1 className={"openapi__heading"}>Deploy resources</h1>
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Deploy resources"}
+></Heading>
 
-<MethodEndpoint method={"post"} path={"/deployments"}></MethodEndpoint>
+<MethodEndpoint
+  method={"post"}
+  path={"/deployments"}
+  context={"endpoint"}
+></MethodEndpoint>
 
 Deploys one or more resources (e.g. processes, decision models, or forms).
 This is an atomic call, i.e. either all resources are deployed or none of them are.
 
-## Request
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
 
-<MimeTabs className={"openapi-tabs__mime"}><TabItem label={"multipart/form-data"} value={"multipart/form-data-schema"}><details style={{}} className={"openapi-markdown__details mime"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-mime"}><h3 className={"openapi-markdown__details-summary-header-body"}>Body</h3><strong className={"openapi-schema__required"}>required</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"resources"} required={true} schemaName={"binary[]"} qualifierMessage={undefined} schema={{"type":"array","description":"The binary data to create the deployment resources. It is possible to have more than one form part with different form part names for the binary data to create a deployment.\n","items":{"type":"string","format":"binary"}}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant to deploy the resources to."}}></SchemaItem></ul></details></TabItem></MimeTabs><div><div><ApiTabs label={undefined} id={undefined}><TabItem label={"200"} value={"200"}><div>
+<ParamsDetails parameters={undefined}></ParamsDetails>
 
-The resources are deployed.
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "multipart/form-data": {
+        schema: {
+          type: "object",
+          properties: {
+            resources: {
+              type: "array",
+              description:
+                "The binary data to create the deployment resources. It is possible to have more than one form part with different form part names for the binary data to create a deployment.\n",
+              items: { type: "string", format: "binary" },
+            },
+            tenantId: {
+              type: "string",
+              description: "The tenant to deploy the resources to.",
+            },
+          },
+          required: ["resources"],
+        },
+      },
+    },
+  }}
+></RequestSchema>
 
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/json"} value={"application/json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"deploymentKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The unique key identifying the deployment."}}></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>deployments</strong><span className={"openapi-schema__name"}> object[]</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Items deployed by the request.
-
-</div><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem","paddingBottom":".5rem"}}>Array [</div></li><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>processDefinition</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-A deployed process.
-
-</div><SchemaItem collapsible={false} name={"processDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The bpmn process ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific process definition.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionVersion"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned process version."}}></SchemaItem><SchemaItem collapsible={false} name={"processDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this process."}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The resource name from which this process was parsed."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the deployed process."}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>decisionDefinition</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-A deployed decision.
-
-</div><SchemaItem collapsible={false} name={"decisionDefinitionId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The dmn decision ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific decision.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned decision version."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionDefinitionKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned decision key, which acts as a unique identifier for this decision.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The DMN name of the decision, as parsed during deployment."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the deployed decision."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The dmn ID of the decision requirements graph that this decision is part of, as parsed during deployment.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key of the decision requirements graph that this decision is part of.\n"}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>decisionRequirements</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-Deployed decision requirements.
-
-</div><SchemaItem collapsible={false} name={"decisionRequirementsId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The dmn decision requirements ID, as parsed during deployment; together with the versions forms a unique identifier for a specific decision.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned decision requirements version."}}></SchemaItem><SchemaItem collapsible={false} name={"name"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The DMN name of the decision requirements, as parsed during deployment."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the deployed decision requirements."}}></SchemaItem><SchemaItem collapsible={false} name={"decisionRequirementsKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned decision requirements key, which acts as a unique identifier for this decision requirements.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The resource name from which this decision requirements was parsed."}}></SchemaItem></div></details></SchemaItem><SchemaItem collapsible={true} className={"schemaItem"}><details style={{}} className={"openapi-markdown__details"}><summary style={{}}><span className={"openapi-schema__container"}><strong className={"openapi-schema__property"}>form</strong><span className={"openapi-schema__name"}> object</span></span></summary><div style={{"marginLeft":"1rem"}}><div style={{"marginTop":".5rem","marginBottom":".5rem"}}>
-
-A deployed form.
-
-</div><SchemaItem collapsible={false} name={"formId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The form ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific form.\n"}}></SchemaItem><SchemaItem collapsible={false} name={"version"} required={false} schemaName={"int32"} qualifierMessage={undefined} schema={{"type":"integer","format":"int32","description":"The assigned form version."}}></SchemaItem><SchemaItem collapsible={false} name={"formKey"} required={false} schemaName={"int64"} qualifierMessage={undefined} schema={{"type":"integer","format":"int64","description":"The assigned key, which acts as a unique identifier for this form."}}></SchemaItem><SchemaItem collapsible={false} name={"resourceName"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The resource name from which this form was parsed."}}></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"The tenant ID of the deployed form."}}></SchemaItem></div></details></SchemaItem><li><div style={{"fontSize":"var(--ifm-code-font-size)","opacity":"0.6","marginLeft":"-.5rem"}}>]</div></li></div></details></SchemaItem><SchemaItem collapsible={false} name={"tenantId"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"description":"The tenant ID associated with the deployment.","type":"string"}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"deploymentKey\": 0,\n  \"deployments\": [\n    {\n      \"processDefinition\": {\n        \"processDefinitionId\": \"string\",\n        \"processDefinitionVersion\": 0,\n        \"processDefinitionKey\": 0,\n        \"resourceName\": \"string\",\n        \"tenantId\": \"string\"\n      },\n      \"decisionDefinition\": {\n        \"decisionDefinitionId\": \"string\",\n        \"version\": 0,\n        \"decisionDefinitionKey\": 0,\n        \"name\": \"string\",\n        \"tenantId\": \"string\",\n        \"decisionRequirementsId\": \"string\",\n        \"decisionRequirementsKey\": 0\n      },\n      \"decisionRequirements\": {\n        \"decisionRequirementsId\": \"string\",\n        \"version\": 0,\n        \"name\": \"string\",\n        \"tenantId\": \"string\",\n        \"decisionRequirementsKey\": 0,\n        \"resourceName\": \"string\"\n      },\n      \"form\": {\n        \"formId\": \"string\",\n        \"version\": 0,\n        \"formKey\": 0,\n        \"resourceName\": \"string\",\n        \"tenantId\": \"string\"\n      }\n    }\n  ],\n  \"tenantId\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem><TabItem label={"400"} value={"400"}><div>
-
-The document upload failed. More details are provided in the response body.
-
-</div><div><MimeTabs className={"openapi-tabs__mime"} schemaType={"response"}><TabItem label={"application/problem+json"} value={"application/problem+json"}><SchemaTabs className={"openapi-tabs__schema"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} className={"openapi-markdown__details response"} data-collapsed={false} open={true}><summary style={{}} className={"openapi-markdown__details-summary-response"}><strong>Schema</strong></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"type"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the problem type.","default":"about:blank"}}></SchemaItem><SchemaItem collapsible={false} name={"title"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"A summary of the problem type."}}></SchemaItem><SchemaItem collapsible={false} name={"status"} required={false} schemaName={"int32"} qualifierMessage={"**Possible values:** `>= 400` and `<= 600`"} schema={{"type":"integer","format":"int32","description":"The HTTP status code for this problem.","minimum":400,"maximum":600}}></SchemaItem><SchemaItem collapsible={false} name={"detail"} required={false} schemaName={"string"} qualifierMessage={undefined} schema={{"type":"string","description":"An explanation of the problem in more detail."}}></SchemaItem><SchemaItem collapsible={false} name={"instance"} required={false} schemaName={"uri"} qualifierMessage={undefined} schema={{"type":"string","format":"uri","description":"A URI identifying the origin of the problem."}}></SchemaItem></ul></details></TabItem><TabItem label={"Example (from schema)"} value={"Example (from schema)"}><ResponseSamples responseExample={"{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"status\": 0,\n  \"detail\": \"string\",\n  \"instance\": \"string\"\n}"} language={"json"}></ResponseSamples></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div></div>
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The resources are deployed.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              tenantId: {
+                description: "The tenant ID associated with the deployment.",
+                type: "string",
+              },
+              deploymentKey: {
+                type: "string",
+                description: "The unique key identifying the deployment.",
+              },
+              deployments: {
+                description: "Items deployed by the request.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    processDefinition: {
+                      description: "A deployed process.",
+                      type: "object",
+                      properties: {
+                        processDefinitionId: {
+                          type: "string",
+                          description:
+                            "The bpmn process ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific process definition.\n",
+                        },
+                        processDefinitionVersion: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The assigned process version.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The resource name from which this process was parsed.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description: "The tenant ID of the deployed process.",
+                        },
+                        processDefinitionKey: {
+                          type: "string",
+                          description:
+                            "The assigned key, which acts as a unique identifier for this process.",
+                        },
+                      },
+                      title: "DeploymentProcessResult",
+                    },
+                    decisionDefinition: {
+                      description: "A deployed decision.",
+                      type: "object",
+                      properties: {
+                        decisionDefinitionId: {
+                          type: "string",
+                          description:
+                            "The dmn decision ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific decision.\n",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The assigned decision version.",
+                        },
+                        name: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision, as parsed during deployment.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the deployed decision.",
+                        },
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "The dmn ID of the decision requirements graph that this decision is part of, as parsed during deployment.\n",
+                        },
+                        decisionDefinitionKey: {
+                          type: "string",
+                          description:
+                            "The assigned decision key, which acts as a unique identifier for this decision.\n",
+                        },
+                        decisionRequirementsKey: {
+                          type: "string",
+                          description:
+                            "The assigned key of the decision requirements graph that this decision is part of.\n",
+                        },
+                      },
+                      title: "DeploymentDecisionResult",
+                    },
+                    decisionRequirements: {
+                      description: "Deployed decision requirements.",
+                      type: "object",
+                      properties: {
+                        decisionRequirementsId: {
+                          type: "string",
+                          description:
+                            "The dmn decision requirements ID, as parsed during deployment; together with the versions forms a unique identifier for a specific decision.\n",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description:
+                            "The assigned decision requirements version.",
+                        },
+                        decisionRequirementsName: {
+                          type: "string",
+                          description:
+                            "The DMN name of the decision requirements, as parsed during deployment.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description:
+                            "The tenant ID of the deployed decision requirements.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The resource name from which this decision requirements was parsed.",
+                        },
+                        decisionRequirementsKey: {
+                          type: "string",
+                          description:
+                            "The assigned decision requirements key, which acts as a unique identifier for this decision requirements.\n",
+                        },
+                      },
+                      title: "DeploymentDecisionRequirementsResult",
+                    },
+                    form: {
+                      description: "A deployed form.",
+                      type: "object",
+                      properties: {
+                        formId: {
+                          type: "string",
+                          description:
+                            "The form ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific form.\n",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The assigned form version.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The resource name from which this form was parsed.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description: "The tenant ID of the deployed form.",
+                        },
+                        formKey: {
+                          type: "string",
+                          description:
+                            "The assigned key, which acts as a unique identifier for this form.",
+                        },
+                      },
+                      title: "DeploymentFormResult",
+                    },
+                    resource: {
+                      description: "A deployed Resource.",
+                      type: "object",
+                      properties: {
+                        resourceId: {
+                          type: "string",
+                          description:
+                            "The resource ID, as parsed during deployment, together with the version forms a\nunique identifier for a specific form.\n",
+                        },
+                        version: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The assigned resource version.",
+                        },
+                        resourceName: {
+                          type: "string",
+                          description:
+                            "The resource name from which this resource was parsed.",
+                        },
+                        tenantId: {
+                          type: "string",
+                          description: "The tenant ID of the deployed form.",
+                        },
+                        resourceKey: {
+                          type: "string",
+                          description:
+                            "The assigned key, which acts as a unique identifier for this Resource.",
+                        },
+                      },
+                      title: "DeploymentResourceResult",
+                    },
+                  },
+                  title: "DeploymentMetadataResult",
+                },
+              },
+            },
+            title: "DeploymentResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

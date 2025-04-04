@@ -18,6 +18,10 @@ This guide provides a user-friendly approach for setting up and managing Amazon 
 - [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
 - [AWS CLI (2.17+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
 - [eksctl (0.193+)](https://eksctl.io/getting-started/), a CLI tool for creating and managing Amazon EKS clusters.
+- [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
+  - Ensure at least **3 Elastic IPs** (one per availability zone).
+  - Verify quotas for **VPCs, EC2 instances, and storage**.
+  - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - This guide uses GNU/Bash for all the shell commands listed.
 
 ### Considerations
@@ -31,7 +35,7 @@ To try out Camunda 8 or develop against it, consider signing up for our [SaaS of
 
 While the guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
-:::warning Cost management
+:::danger Cost management
 
 Following this guide will incur costs on your Cloud provider account, namely for the managed Kubernetes service, running Kubernetes nodes in EC2, Elastic Block Storage (EBS), and Route53. More information can be found on [AWS](https://aws.amazon.com/eks/pricing/) and their [pricing calculator](https://calculator.aws/#/) as the total cost varies per region.
 
@@ -99,7 +103,7 @@ Each component starts with a section that configures the different variables acc
 export CLUSTER_NAME=camunda-cluster
 # Your standard region that you host AWS resources in
 export REGION="$AWS_REGION"
-# Multi-region zones, derived from the region
+# Multi-zones, derived from the region
 export ZONES="${REGION}a ${REGION}b ${REGION}c"
 # The AWS Account ID
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
@@ -143,7 +147,7 @@ apiVersion: eksctl.io/v1alpha5
 metadata:
   name: ${CLUSTER_NAME:-camunda-cluster} # e.g. camunda-cluster
   region: ${REGION:-eu-central-1} # e.g. eu-central-1
-  version: "1.31"
+  version: "1.32"
 availabilityZones:
   - ${REGION:-eu-central-1}c # e.g. eu-central-1c, the minimal is two distinct Availability Zones (AZs) within the region
   - ${REGION:-eu-central-1}b
@@ -616,7 +620,7 @@ export AURORA_USERNAME=secret_user
 # Postgres DB password of the admin user
 export AURORA_PASSWORD=camundarocks123
 # The PostgreSQL version
-export POSTGRESQL_VERSION=15.8
+export POSTGRESQL_VERSION=15.10
 
 # For each database, we need to generate a username, password and database name
 export DB_KEYCLOAK_NAME="keycloak_db"
@@ -931,7 +935,7 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
    ```shell
    aws opensearch create-domain --domain-name $OPENSEARCH_NAME \
      --engine-version OpenSearch_2.15 \
-     --cluster-config  "InstanceType=t3.medium.search,InstanceCount=3,ZoneAwarenessEnabled=true,ZoneAwarenessConfig={AvailabilityZoneCount=3}" \
+     --cluster-config  "InstanceType=m7i.large.search,InstanceCount=3,ZoneAwarenessEnabled=true,ZoneAwarenessConfig={AvailabilityZoneCount=3}" \
      --node-to-node-encryption-options Enabled=true \
      --ebs-options "EBSEnabled=true,VolumeType=gp3,VolumeSize=50,Iops=3000,Throughput=125" \
      --encryption-at-rest-options Enabled=true \
@@ -942,7 +946,7 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
    - **Domain Name**: `$OPENSEARCH_NAME` is the name of the OpenSearch domain being created.
    - **Engine Version**: Uses OpenSearch version `2.15`.
    - **Cluster Configuration**:
-     - `InstanceType=t3.medium.search` specifies the instance type for the domain.
+     - `InstanceType=m7i.large.search` specifies the instance type for the domain.
      - `InstanceCount=3` creates a cluster with 3 instances.
      - `ZoneAwarenessEnabled=true` and `ZoneAwarenessConfig={AvailabilityZoneCount=3}` enable zone awareness and spread the instances across 3 availability zones to improve fault tolerance.
    - **Node-to-Node Encryption**: Encryption for traffic between nodes in the OpenSearch cluster is enabled (`Enabled=true`).
@@ -955,6 +959,12 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
    - **VPC Options**: The domain is deployed within the specified VPC, restricted to the provided subnets (`SubnetIds=${SUBNET_IDS}`) and associated security group (`SecurityGroupIds=${GROUP_ID_OPENSEARCH}`).
 
    This configuration creates a secure OpenSearch domain with encryption both in transit (between nodes) and at rest, zonal fault tolerance, and sufficient storage performance using `gp3` volumes. The access is restricted to resources in the VPC of the EKS cluster and is governed by the specified security group.
+
+:::tip
+
+The instance type `m7i.large.search` in the above example is a suggestion, and can be changed depending on your needs.
+
+:::
 
 6. Wait for the OpenSearch domain to be active:
 

@@ -8,7 +8,7 @@ import TasklistTasksPageSpecifications from '../img/tasklist-page-specifications
 import TaskTileSpecification from '../img/task-tile-specification.png';
 import styles from "./styles.module.css";
 
-Tasklist provides a user-friendly interface for managing and completing tasks that require manual interaction. It shows you all user tasks that appear in processes running in [Zeebe](/docs/components/zeebe/zeebe-overview.md).
+Tasklist provides a user-friendly interface for managing and completing tasks that require manual interaction. It shows you all user tasks that appear in processes running in [Zeebe](/components/zeebe/zeebe-overview.md).
 
 :::info
 When a user is granted Tasklist access, the user has full access to the respective process instance data.

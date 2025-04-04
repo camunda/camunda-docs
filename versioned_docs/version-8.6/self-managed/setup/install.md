@@ -34,7 +34,7 @@ The following charts will be installed as part of Camunda 8 Self-Managed:
 - **Web Modeler**: Deploys the Web Modeler component that allows you to model BPMN processes in a collaborative way.
   - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-web-modeler).
 - **Console**: Deploys Camunda Console Self-Managed.
-  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console) as the Console is only available to enterprise customers.
+  - _Note_: The chart is disabled by default and needs to be [enabled explicitly](#install-console).
 
 :::note Amazon OpenSearch Helm support
 The existing Helm charts use the Elasticsearch configurations by default. The Helm charts can still be used to connect to Amazon OpenSearch Service. Refer to [using Amazon OpenSearch Service](/self-managed/setup/guides/using-existing-opensearch.md).
@@ -45,7 +45,7 @@ The existing Helm charts use the Elasticsearch configurations by default. The He
 
 For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSEARCH_URL`. In the case of Optimize, please make sure all variables have the proper `CAMUNDA_OPTIMIZE` prefix, i.e. `OPTIMIZE_ELASTICSEARCH_HTTP_PORT` becomes `CAMUNDA_OPTIMIZE_OPENSEARCH_HTTP_PORT`.
 
-Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) and [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration/#opensearch) configuration documentation for additional component configuration parameters to update.
+Refer to the [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch), [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch) and [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch) configuration documentation for additional component configuration parameters to update.
 :::
 
 ![Camunda 8 Self-Managed Architecture Diagram](../assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
@@ -280,30 +280,7 @@ global:
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on startup or functionality, with the exception that Web Modeler has a limitation of five users.
 :::
 
-## Configuring Enterprise components and Connectors
-
-### Enterprise components secret
-
-Enterprise components such as Console are published in Camunda's private Docker registry (registry.camunda.cloud) and are exclusive to enterprise customers. These components are not available in public repositories.
-
-To enable Kubernetes to pull the images from this registry, first [create an image pull secret](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) using the credentials you received from Camunda:
-
-```shell
-kubectl create secret docker-registry registry-camunda-cloud \
-  --namespace=<NAMESPACE> \
-  --docker-server=registry.camunda.cloud \
-  --docker-username=<DOCKER_USER> \
-  --docker-password=<DOCKER_PASSWORD> \
-  --docker-email=<DOCKER_EMAIL>
-```
-
-:::note
-Use `registry-camunda-cloud` as a secret after replacing `<DOCKER_USER>`, `<DOCKER_PASSWORD>`, and `<DOCKER_EMAIL>` with your credentials.
-
-The secret must be created in the same Kubernetes namespace where you'll install the Helm chart. Replace `<NAMESPACE>` to set the namespace.
-:::
-
-Alternatively, create an image pull secret [from your Docker configuration file](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials).
+## Configuring Web Modeler, Console, and Connectors
 
 ### Install Connectors
 
@@ -339,7 +316,7 @@ To set up Web Modeler, you need to provide the following required configuration 
 - Configure the database connection
   - Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
   - _Option 1_: Set `postgresql.enabled: true`. This will install a new PostgreSQL instance as part of the Helm release (using the [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql) by Bitnami as a dependency).
-  - _Option 2_: Set `postgresql.enabled: false` and configure a [connection to an external database](#optional-configure-external-database).
+  - _Option 2_: Set `postgresql.enabled: false` and configure a connection to an external database (see the second example below).
 
 We recommend specifying these values in a YAML file that you pass to the `helm install` command. A minimum configuration file would look as follows:
 
@@ -376,19 +353,13 @@ For more details, check [Web Modeler Helm values](https://artifacthub.io/package
 
 ### Install Console
 
-Console Self-Managed is an [Enterprise component](/reference/licenses.md#console), which means it is disabled by default in the Camunda 8 Helm chart since it requires an Enterprise license to access the Camunda container registry.
+Console Self-Managed is disabled by default in the Camunda 8 Helm chart.
 
-To install Console, two steps are required:
-
-1. [Create a secret with Camunda registry credentials](#enterprise-components-secret).
-2. Enable Console, and reference the created Kubernetes secret object via Helm values.
+To install Console, enable Console in the Helm chart with `console.enabled: true`. We recommend specifying these values in a YAML file that you pass to the `helm install` command:
 
 ```yaml
 console:
   enabled: true
-  image:
-    pullSecrets:
-      - name: registry-camunda-cloud
 ```
 
 For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
@@ -420,3 +391,4 @@ For upgrading the Camunda Helm chart from one release to another, perform a [Hel
 
 - **Zeebe Gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](/self-managed/zeebe-deployment/configuration/gateway-health-probes.md) for Zeebe.
 - **Zeebe broker nodes** need to be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve the identity of cluster nodes. StatefulSets require persistent storage, which must be allocated in advance. Depending on your cloud provider, the persistent storage differs as it is provider-specific.
+- **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid potential disruptions, authenticate with Docker Hub, use a mirror registry, or follow our guide on [installing in an air-gapped environment](/self-managed/setup/guides/air-gapped-installation.md).
