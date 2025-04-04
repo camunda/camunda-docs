@@ -65,7 +65,7 @@ The resulting process variable can be subsequently utilized within the ongoing p
 
 #### Example
 
-If you set `result` inside the `Result variable` field of the Rest Outbound Connector, you would have this variable available:
+If you set `result` inside the `Result variable` field of the REST outbound Connector, this variable is available:
 
 ```json
 {
@@ -97,7 +97,7 @@ While using this field, a process variable with the name `response` is reserved.
 
 #### Example
 
-If you set `{ "bodyReceived": body }` inside the `Result Expression` field of the Rest Outbound Connector, you would have this variable available:
+If you set `{ "bodyReceived": body }` inside the `Result Expression` field of the REST outbound Connector, this variable is available:
 
 ```json
 {
