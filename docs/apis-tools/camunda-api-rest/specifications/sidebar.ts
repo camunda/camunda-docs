@@ -278,7 +278,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-group",
           label: "Update group (Work-in-Progress)",
-          className: "api-method patch",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -290,7 +290,7 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/add-user-to-group",
           label: "Assign a user to a group (Work-in-Progress)",
-          className: "api-method post",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -390,9 +390,21 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/update-mapping-rule",
+          label: "Update mapping rule",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-mapping-rule",
           label: "Delete a mapping rule (Work-in-Progress)",
           className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/get-mapping-rule",
+          label: "Get a mapping rule (Work-in-Progress)",
+          className: "api-method get",
         },
         {
           type: "doc",
@@ -554,13 +566,19 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/update-role",
           label: "Update role (Work-in-Progress)",
-          className: "api-method patch",
+          className: "api-method put",
         },
         {
           type: "doc",
           id: "apis-tools/camunda-api-rest/specifications/delete-role",
           label: "Delete role (Work-in-Progress)",
           className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/camunda-api-rest/specifications/add-user-to-role",
+          label: "Assign a user to a role (Work-in-Progress)",
+          className: "api-method put",
         },
         {
           type: "doc",
