@@ -82,7 +82,7 @@ To use [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) to deploy and 
 
 1. [Install Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md#install-and-start-camunda-8-run). For example, download the latest release of Camunda 8 Run for your operating system and architecture and open the .tgz file to extract the Camunda 8 Run script into a new directory.
 
-1. Navigate to the new c8run directory.
+1. Navigate to the `docker-compose-8.x` folder in the new c8run directory.
 
    1. Open the `connector-secrets.txt` file, and add your AWS connector secrets.
 
