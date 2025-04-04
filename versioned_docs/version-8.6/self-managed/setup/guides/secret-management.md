@@ -245,7 +245,7 @@ postgresql:
 
 ## Disabling Auto-Generated Secrets
 
-> 🛠️ **Troubleshooting:** If a component fails to start after disabling auto-generated secrets, double-check:
+> **Troubleshooting:** If a component fails to start after disabling auto-generated secrets, double-check:
 >
 > - The secret exists in the correct namespace
 > - The `existingSecretKey` is accurate and matches the Kubernetes secret
