@@ -59,7 +59,7 @@ These secrets are generated and managed internally by Camunda’s Helm Chart.
 
 ## Optional Secrets Based on Configuration
 
-Some secrets are only required based on your setup. Below are common conditional cases:
+Some secrets are required only in specific configurations. The following are common conditional cases:
 
 - 🔸 **`webModeler.restapi.externalDatabase.existingSecret`** – Required **only if** `postgresql.enabled: false` and using an external database.
 - 🔸 **`webModeler.restapi.mail.existingSecret`** – Required **only if** SMTP is enabled for email invites or notifications.
@@ -248,7 +248,7 @@ postgresql:
 
 By default, the Camunda Helm Chart auto-generates secrets like OAuth client passwords on first install. This ensures the platform can start without manual configuration but can lead to issues on upgrades if the secrets are regenerated.
 
-To disable auto-generation and use your own pre-created secrets, set:
+To disable auto-generation and rely on pre-created secrets, set the following configuration:
 
 ```yaml
 global:
@@ -284,7 +284,7 @@ postgresql:
 
 ### Identity PostgreSQL
 
-> The Identity service includes its own embedded PostgreSQL instance by default. Set `identityPostgresql.auth.existingSecret` to provide your own password and ensure consistent database access across upgrades.
+> The Identity service includes its own embedded PostgreSQL instance by default. The `identityPostgresql.auth.existingSecret` field can be used to supply a custom password and ensure consistent database access across upgrades.
 
 ```yaml
 identityPostgresql:
@@ -318,7 +318,7 @@ When Camunda services are exposed via Ingress with TLS, a Kubernetes Secret cont
 
 ### Chart Values
 
-Set your TLS secret like this:
+The TLS secret can be configured as shown below:
 
 ```yaml
 global:
@@ -344,7 +344,7 @@ data:
   tls.key: <base64 encoded key>
 ```
 
-Make sure to configure the secret name in your `values.yaml` under `global.ingress.tls.secretName`.
+Ensure the secret name is configured in `values.yaml` under `global.ingress.tls.secretName`.
 
 ---
 
