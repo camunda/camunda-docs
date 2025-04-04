@@ -61,8 +61,8 @@ These secrets are generated and managed internally by Camunda’s Helm Chart.
 
 Some secrets are only required based on your setup. Below are common conditional cases:
 
-- 🔸 **`webModeler.restapi.externalDatabase.existingSecret`** – Required **only if** `postgresql.enabled: false` and you're using an external database.
-- 🔸 **`webModeler.restapi.mail.existingSecret`** – Required **only if** you enable SMTP for email invites or notifications.
+- 🔸 **`webModeler.restapi.externalDatabase.existingSecret`** – Required **only if** `postgresql.enabled: false` and using an external database.
+- 🔸 **`webModeler.restapi.mail.existingSecret`** – Required **only if** SMTP is enabled for email invites or notifications.
 - 🔸 **`connectors.inbound.auth.existingSecret`** – Needed when **basic authentication** is enabled for inbound connectors (instead of SSO).
 - 🔸 **`global.license.existingSecret`** – Needed **only for Camunda Enterprise** users to apply a valid license.
 
@@ -128,7 +128,7 @@ global:
 
 ## Creating Kubernetes Secrets
 
-You can create secrets manually or using manifests. For more examples, see [Create Identity Secrets in the Camunda Docs](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets).
+Secrets may be created manually using the kubectl CLI or defined in Kubernetes manifests. For more examples, see [Create Identity Secrets in the Camunda Docs](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets).
 
 Here's how to create one via `kubectl`:
 
@@ -173,7 +173,7 @@ kubectl apply -f my-secret.yaml
 
 In CI/testing environments, it's common to use a single Kubernetes Secret for all credentials. Below is a snippet using `camunda-credentials`:
 
-> ℹ️ **Note:** This example includes the most common internal secrets. If you're using SMTP, external databases, or connectors with basic auth, you’ll need to add additional secrets for those components, such as:
+> ℹ️ **Note:** This example includes the most common internal secrets. Additional secrets may be required depending on the configuration—for example, when using SMTP, external databases, or connectors with basic authentication:
 >
 > - `webModeler.restapi.externalDatabase.existingSecret`
 > - `webModeler.restapi.mail.existingSecret`
@@ -270,7 +270,7 @@ This section covers how to configure PostgreSQL secrets used by the Camunda subc
 
 ### Web Modeler PostgreSQL (Bitnami Subchart)
 
-> Web Modeler uses the Bitnami PostgreSQL subchart, which requires both an admin and user password. These must be referenced with `secretKeys` if you are managing secrets manually.
+> The Bitnami PostgreSQL subchart used by Web Modeler requires both an admin and user password. These must be referenced using secretKeys when secrets are managed manually.
 
 ```yaml
 postgresql:
@@ -314,7 +314,7 @@ identityKeycloak:
 
 ## TLS Secrets
 
-When exposing Camunda services via Ingress with TLS, you typically need a Kubernetes Secret containing your TLS certificate and private key. This is especially important when using tools like cert-manager or when securing public-facing services.
+When Camunda services are exposed via Ingress with TLS, a Kubernetes Secret containing the TLS certificate and private key is typically required. This is especially important when using tools like cert-manager or securing public-facing services.
 
 ### Chart Values
 
