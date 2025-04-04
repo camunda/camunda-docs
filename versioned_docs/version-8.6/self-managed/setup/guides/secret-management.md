@@ -62,9 +62,9 @@ These secrets are generated and managed internally by Camunda’s Helm Chart.
 Some secrets are required only in specific configurations. The following are common conditional cases:
 
 - 🔸 **`webModeler.restapi.externalDatabase.existingSecret`** – Required **only if** `postgresql.enabled: false` and using an external database.
-- 🔸 **`webModeler.restapi.mail.existingSecret`** – Required **only if** SMTP is enabled for email invites or notifications.
-- 🔸 **`connectors.inbound.auth.existingSecret`** – Needed when **basic authentication** is enabled for inbound connectors (instead of SSO).
-- 🔸 **`global.license.existingSecret`** – Needed **only for Camunda Enterprise** users to apply a valid license.
+- 🔸 **`webModeler.restapi.mail.existingSecret`** – SMTP is enabled for email features.
+- 🔸 **`connectors.inbound.auth.existingSecret`** – If basic auth is used for inbound connectors.
+- 🔸 **`global.license.existingSecret`** – Required for enterprise licensing.
 
 ---
 
