@@ -73,6 +73,10 @@ The following command line arguments are available:
 
 All Camunda 8 Run components can be accessed using the username/password combination `demo`/`demo`.
 
+:::note
+The URLs for the Docker Compose application can be found in the [Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#access-components) documentation.
+:::
+
 Tasklist, Operate, and Identity are available at:
 
 - Tasklist: http://localhost:8080/tasklist

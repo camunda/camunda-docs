@@ -37,9 +37,13 @@ Before getting started, ensure you have the following in your local environment:
 
 - Access to your preferred code editor or IDE
 - [OpenJDK 21+](https://openjdk.org/install/) and [Maven 3](https://maven.apache.org/index.html)
-  - After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal. If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
 - [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
-  - Ensure you are running Camunda 8 Run as a Java application. The Docker Compose distribution is not yet supported.
+
+:::note
+After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
+
+If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
+:::
 
 ## Step 1: Create a new Spring Boot project
 
@@ -92,7 +96,7 @@ To deploy your process, take the following steps:
 4. Change the **Cluster endpoint** to `http://localhost:26500`, with no authentication.
 5. Click **Deploy**.
 
-When you open Operate at http://localhost:8080/operate/, you should now note the process deployed to your local Self-Managed setup.
+When you open Operate at http://localhost:8080/operate/ (or http://localhost:8081 using Docker Compose), you should now note the process deployed to your local Self-Managed setup.
 
 ## Step 4: Run your process from Desktop Modeler
 
