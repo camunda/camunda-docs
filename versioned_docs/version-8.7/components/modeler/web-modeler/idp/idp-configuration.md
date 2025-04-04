@@ -70,7 +70,7 @@ Add the following AWS connector secrets required for IDP.
 
 :::
 
-## Example IDP deployment
+## Example IDP deployment {#examples}
 
 The following examples show how you can deploy and configure IDP in your local development environment.
 
