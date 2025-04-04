@@ -41,12 +41,6 @@ Before getting started, ensure you have the following in your local environment:
 - [Camunda 8 Desktop Modeler](/components/modeler/desktop-modeler/index.md) and [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md)
   - Ensure you are running Camunda 8 Run as a Java application. The Docker Compose distribution is not yet supported.
 
-:::note
-After installing OpenJDK, ensure `JAVA_HOME` is set by running `java -version` in a **new** terminal.
-
-If no version of Java is found, follow your chosen installation's instructions for setting `JAVA_HOME` before continuing.
-:::
-
 ## Step 1: Create a new Spring Boot project
 
 Next, create a new Spring Boot project:
