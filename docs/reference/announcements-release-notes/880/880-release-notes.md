@@ -27,7 +27,7 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 <!-- https://github.com/camunda/product-hub/issues/2630 -->
 
-### Ad-hoc subprocess activation API & completion configuration {#adhocsubprocess}
+### Ad-hoc subprocess activation API & completion configuration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#adhocsubprocess}
 
 Agentic process orchestration enhancements include:
 
@@ -39,7 +39,7 @@ To learn more about these features, see [ad-hoc subprocesses](/components/modele
 
 <!-- https://github.com/camunda/product-hub/issues/2585 -->
 
-### Advanced User Task Listeners for Updating Events {#listeners}
+### Advanced User Task Listeners for Updating Events <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#listeners}
 
 Advanced User Task Listeners for Updating Events allow you to define listeners that trigger whenever certain task properties or variables change.
 
@@ -52,7 +52,7 @@ Advanced User Task Listeners for Updating Events allow you to define listeners t
 
 Cluster connector management in Console now supports managing multiple Connector Runtime instances.
 
-<!-- To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).  -->
+To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
 
 <!-- Cluster connector management allows you to monitor and manage your running inbound connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector).
 
@@ -74,7 +74,7 @@ This Connector supports the following operations:
 - Companies: Get all companies, Get company by id, Search company, Get all contacts of a company, Add contact to company, Remove contact from company, Create company, Delete company.
 - Deals: Get all deals, Get deal by id, Search deal, Delete deal.
 
-<!-- To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md). -->
+To learn more about this Connector, see [HubSpot Connector](/components/connectors/out-of-the-box-connectors/hubspot.md).
 
 ## 8.8.0-alpha2
 
