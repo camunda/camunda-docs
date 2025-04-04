@@ -13,7 +13,7 @@ Offering robust document handling capabilities within Camunda SaaS, users can ef
 
 ## Storage integration and configuration
 
-A [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) and [**AWS S3**](https://aws.amazon.com/s3/) bucket storage integrations are supported on SaaS and handled by Camunda.
+[**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) and [**AWS S3**](https://aws.amazon.com/s3/) bucket storage integrations are supported on SaaS and handled by Camunda.
 Storage is configured for a cluster based on the selected region (either GCP or AWS).
 
 ### Storage policies for SaaS

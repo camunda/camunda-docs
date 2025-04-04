@@ -42,7 +42,7 @@ Given that one of the following properties is set, the form will only submit whe
 
 ## Reference uploaded files
 
-The Filepicker's output variable is an array of objects with file metadata that represent each uploaded file.
+The Filepicker's output variable is an array of objects with file metadata that represents each uploaded file.
 
 It always returns an array of objects, either a user uploads a single file or multiple files.
 Single file uploads are accessible using `value[1]` (since [FEEL](../../feel/what-is-feel.md) uses 1-based indexing).

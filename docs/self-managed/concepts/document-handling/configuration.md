@@ -8,7 +8,7 @@ keywords: ["document handling", "document storage configuration"]
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Camunda supports multiple storage option for handling documents in Self-Managed environments. Depending on your deployment setup and production requirements, you can choose from cloud-based, local, or in-memory storage methods.
+Camunda supports multiple storage options for handling documents in Self-Managed environments. Depending on your deployment setup and production requirements, you can choose from cloud-based, local, or in-memory storage methods.
 
 The following section outlines supported storage options, their intended use cases, and configuration guidance.
 
