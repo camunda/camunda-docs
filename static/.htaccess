@@ -161,9 +161,6 @@ RewriteRule ^docs/next/reference/release-policy/?$ /docs/next/reference/announce
 RewriteRule ^docs/next/reference/release-notes/release-notes/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
 RewriteRule ^docs/next/reference/announcements/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
 
-# Rename Web Modeler milestones to versions
-RewriteRule ^docs/next/components/modeler/web-modeler/milestones/?$ /docs/next/components/modeler/web-modeler/versions/$1 [R=301,L]
-
 # Remove Zeebe REST API
 RewriteRule ^docs/next/apis-tools/zeebe-api-rest/specifications/?$ /docs/next/apis-tools/camunda-api-rest/specifications/$1 [R=301,L]
 RewriteRule ^docs/next/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/?$ /docs/next/apis-tools/camunda-api-rest/camunda-api-rest-overview/$1 [R=301,L]
@@ -233,6 +230,8 @@ RewriteRule ^optimize/components/userguide/additional-features/event-based-proce
 RewriteRule ^optimize/components/userguide/combined-process-reports/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
 RewriteRule ^optimize/self-managed/optimize-deployment/version-policy/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
 RewriteRule ^optimize/self-managed/optimize-deployment/reimport/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/clustering/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
+RewriteRule ^optimize/self-managed/optimize-deployment/configuration/common-problems/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
 RewriteRule ^optimize/self-managed/optimize-deployment/configuration/webhooks/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
 RewriteRule ^optimize/self-managed/optimize-deployment/configuration/multiple-engines/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
 RewriteRule ^optimize/self-managed/optimize-deployment/configuration/setup-event-based-processes/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
@@ -244,11 +243,12 @@ RewriteRule ^optimize/self-managed/optimize-deployment/advanced-features/import-
 RewriteRule ^optimize/self-managed/optimize-deployment/advanced-features/engine-data-deletion/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
 
 # Finalize the renaming of Console SM API to Administration API (Self-Managed)
-RewriteRule ^docs/apis-tools/administration-sm-api/specifications/sm-administration-api/?$ /docs/apis-tools/administration-sm-api/specifications/administration-api-self-managed/ [R=301,L]
+RewriteRule ^docs/apis-tools/administration-sm-api/specifications/sm-admin(istration)?-api/?$ /docs/apis-tools/administration-sm-api/specifications/administration-api-self-managed/ [R=301,L]
 
 # Move migrating to Zeebe user tasks
-RewriteRule ^docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
-RewriteRule ^docs/8.6/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/8.6/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/ [R=301,L]
+RewriteRule ^docs/8.6/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/8.6/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/ [R=301,L]
+RewriteRule ^docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/ [R=301,L]
 
 # Remove community clients
 RewriteRule ^docs/apis-tools/community-clients/c-sharp/?$ /docs/apis-tools/community-clients/$1 [R=301,L]
@@ -284,17 +284,25 @@ RewriteRule ^docs/8.6/self-managed/zeebe-deployment/operations/metrics/?$ /docs/
 RewriteRule ^docs/self-managed/zeebe-deployment/operations/metrics/?$ /docs/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
 
 # Move alpha features to components
-RewriteRule ^docs/reference/alpha-features/?$ /docs/components/early-access/alpha/alpha-features/$1 [R=301,L]
+RewriteRule ^docs/reference/alpha-features/?$ /docs/components/early-access/alpha/alpha-features/ [R=301,L]
 
 # Move user metrics page to a new folder
-RewriteRule ^docs/reference/usage-metrics.md/?$ ^docs/reference/data-collection/usage-metrics.md/? [R=301,L,NE]
+RewriteRule ^docs/reference/usage-metrics.md/?$ ^docs/reference/data-collection/usage-metrics/ [R=301,L,NE]
 
 # Remove Migration to Camunda 8 pages
 RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-dmn-models/(.*)$ /docs/guides/migrating-from-camunda-7/index/ [R=301,L]
 RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-source-code/(.*)$ /docs/guides/migrating-from-camunda-7/index/ [R=301,L]
 RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-bpmn-models/(.*)$ /docs/guides/migrating-from-camunda-7/index/ [R=301,L]
 
-# TODO at time of release: account for API spec moves in https://github.com/camunda/camunda-docs/pull/4534 (there are many)
+# Moved API endpoints in 8.7
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/create-document-link-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/create-document-link/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/delete-document-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/delete-document/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/download-document-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/get-document/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/upload-document-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/create-document/ [R=301,L]
+
+# Rename Web Modeler milestones to versions
+RewriteRule ^docs/components/modeler/web-modeler/milestones/?$ /docs/components/modeler/web-modeler/versions/$1 [R=301,L]
+
 
 #---------------------------------------------------------------------------------
 #   8.6: content moves introduced prior to the release of version 8.6.
