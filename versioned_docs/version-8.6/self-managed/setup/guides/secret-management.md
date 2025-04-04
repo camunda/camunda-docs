@@ -10,10 +10,11 @@ description: "A comprehensive guide on configuring and managing secrets in Camun
 
 This guide provides detailed instructions for configuring and managing secrets when using the official Helm Chart. It covers:
 
-- A complete list of internal and external secrets
-- How to create and reference Kubernetes secrets securely
-- Real-world YAML examples for PostgreSQL, TLS, OAuth clients, and more
-- Best practices to prevent common pitfalls during upgrades and secret regeneration
+- Internal secrets: secrets used by the C8 apps
+- External secrets: secrests used for third party configuration
+- Secure handling of Kubernetes secrets
+- Practical YAML configuration examples, including PostgreSQL, TLS, OAuth clients
+- Best practices for upgrades and secret management
 
 ---
 
