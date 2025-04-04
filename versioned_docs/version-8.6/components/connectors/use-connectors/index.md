@@ -65,19 +65,18 @@ If you set `result` inside the `Result variable` field of the Rest Outbound Conn
 
 ```json
 {
-  "result":{
-    "status":200,
-    "headers":{
-      "date":"Thu, 03 Apr 2025 07:05:19 GMT",
-      "server":"nginx",
-      "content-type":"text/html; charset=UTF-8"
+  "result": {
+    "status": 200,
+    "headers": {
+      "date": "Thu, 03 Apr 2025 07:05:19 GMT",
+      "server": "nginx",
+      "content-type": "text/html; charset=UTF-8"
     },
-    "body":"<h1>Hello, World!</h1>",
-    "reason":"OK",
-    "document":null
+    "body": "<h1>Hello, World!</h1>",
+    "reason": "OK",
+    "document": null
   }
 }
-
 ```
 
 ### Result expression
@@ -94,11 +93,11 @@ While using this field, a process variable with the name `response` is reserved.
 
 #### Example
 
-If you set `{ "bodyReceived": body }`  inside the `Result Expression` field of the Rest Outbound Connector, you would have this variable available:
+If you set `{ "bodyReceived": body }` inside the `Result Expression` field of the Rest Outbound Connector, you would have this variable available:
 
 ```json
 {
-  "bodyReceived":"<h1>Hello, World!</h1>"
+  "bodyReceived": "<h1>Hello, World!</h1>"
 }
 ```
 
