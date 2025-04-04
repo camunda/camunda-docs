@@ -79,13 +79,13 @@ Following this tutorial and steps will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/aws/openshift/rosa-hcp-single-region/). This archive will be used throughout the rest of this documentation, the reference architecture are versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/aws/openshift/rosa-hcp-single-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/stable/8.6/aws/openshift/rosa-hcp-single-region/procedure/get-your-copy.sh
 ```
 
-With the reference architecture downloaded and extracted, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
+With the reference architecture copied, you can proceed with the remaining steps outlined in this documentation. Ensure that you are in the correct directory before continuing with further instructions.
 
 ### Terraform prerequisites
 
