@@ -70,9 +70,47 @@ Add the following AWS connector secrets required for IDP.
 
 :::
 
-## Example IDP Docker deployment {#idp-docker-example}
+## Example IDP deployment
 
-The following example shows how you might deploy and run Camunda 8 with IDP in a local development environment:
+The following examples show how you can deploy and configure IDP in your local development environment.
+
+### Camunda 8 Run {#idp-c8run-example}
+
+To use [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) to deploy and run Camunda 8 with IDP in a local development environment:
+
+1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
+
+1. [Install Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md#install-and-start-camunda-8-run). For example, download the latest release of Camunda 8 Run for your operating system and architecture and open the .tgz file to extract the Camunda 8 Run script into a new directory.
+
+1. Navigate to the new c8run directory.
+
+   1. Open the `connector-secrets.txt` file, and add your AWS connector secrets.
+
+      For example:
+
+      ```
+      IDP_AWS_ACCESSKEY=AWSACCESSKEYID
+      IDP_AWS_SECRETKEY=AWSSECRETACCESSKEYGOESHERE
+      IDP_AWS_REGION=us-east-1
+      IDP_AWS_BUCKET_NAME=idp-extraction-connector
+      ```
+
+   1. Save and close the file.
+
+   1. Configure [document handling environment variables](/components/concepts/document-handling.md) for the Tasklist and Zeebe components (for example, in the `.env` file).
+
+1. Start Camunda 8 Run via Docker Compose. For example, run `./start.sh --docker` (or `.\c8run.exe start -docker` on Windows) in your terminal.
+
+1. Launch Web Modeler at http://localhost:8070 and log in with the username `demo` and password `demo`.
+1. Get started with IDP by creating a new [IDP application](idp-applications.md) in a Web Modeler project.
+
+:::info
+To learn more about using Camunda 8 Run to run Camunda Self-Managed locally, see [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
+:::
+
+### Docker {#idp-docker-example}
+
+To use [Docker](/self-managed/setup/deploy/other/docker.md) to deploy and run Camunda 8 with IDP in a local development environment:
 
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
 
@@ -92,7 +130,7 @@ The following example shows how you might deploy and run Camunda 8 with IDP in a
 
    1. Save and close the file.
 
-1. Configure the [document handling environment variables](/components/concepts/document-handling.md) for the Tasklist and Zeebe components.
+1. Configure [document handling environment variables](/components/concepts/document-handling.md) for the Tasklist and Zeebe components.
 1. [Run Camunda 8 with Docker Compose](/self-managed/setup/deploy/local/docker-compose.md#run-camunda-8-with-docker-compose). For example, run the following command in the extracted directory:
 
    ```
