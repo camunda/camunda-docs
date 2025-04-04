@@ -28,26 +28,14 @@ To create an IDP application:
 :::note
 
 - Camunda recommends using a development (dev) cluster for your IDP applications.
-- You must [configure the required connector secrets](idp-configuration.md#configure-idp) for the selected cluster.
+- Ensure that the selected cluster meets the [IDP application cluster requirements](idp-configuration.md#cluster-requirements).
 
 :::
 
-## IDP application clusters
+## Change IDP application cluster
 
-### Change cluster
-
-Open the **IDP application setting** modal to change the cluster in use for an IDP application.
+Open the **IDP application setting** modal to change the cluster being used by an IDP application.
 
 1. Click **Settings** to open the IDP application settings.
 1. Change the cluster you want to use for the IDP application.
 1. Click **Save** to save and apply your changes.
-
-### Requirements and limitations
-
-The following requirements and limitations apply to IDP application clusters:
-
-| Requirement/limitation | Description                                                                                                                                                                                                                               |
-| :--------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Connector secrets      | You must [configure the required connector secrets](idp-configuration.md#configure-idp) on the selected cluster.                                                                                                                          |
-| Cluster health         | IDP applications and projects are only fully operational when linked to a healthy, active cluster. You can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster once available. |
-| Document handling      | You can only use a cluster that supports [Camunda document handling](/components/concepts/document-handling.md). For example, the cluster must be version 8.7 or higher.                                                                  |
