@@ -132,9 +132,6 @@ kubectl create secret generic camunda-credentials \
   --from-literal=operate-secret=S3cure0p3rat3 \
   --from-literal=tasklist-secret=S3cureT4sk \
   --from-literal=optimize-secret=S3cure0pt1mz \
-  --from-literal=connectors-secret=S3cureC0nn3ct \
-  --from-literal=console-secret=S3cureC0nsole \
-  --from-literal=zebee-secret=S3cureZ33be \
   --namespace camunda
 ```
 
@@ -151,9 +148,6 @@ stringData:
   operate-secret: "S3cure0p3rat3"
   tasklist-secret: "S3cureT4sk"
   optimize-secret: "S3cure0pt1mz"
-  connectors-secret: "S3cureC0nn3ct"
-  console-secret: "S3cureC0nsole"
-  zeebe-secret: "S3cureZ33be"
 ```
 
 Apply it with:
