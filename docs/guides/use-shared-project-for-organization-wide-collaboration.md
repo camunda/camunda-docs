@@ -32,7 +32,7 @@ To create a shared project as a space for your organization's resources:
 2. Name your project accordingly.
    ![web modeler empty home](../components/modeler/web-modeler/img/web-modeler-new-user-home.png)
 3. On the right side of the page under **Collaborators**, select **Add user**.
-4. Enter the email address of the collaborator you would like to invite and select `Enter` or `Tab` between each entry. You may enter up to 20 email addresses. You can also use the **All users in the organization** option to send a bulk invitation to all colleagues.
+4. To add collaborators to your organization and project, enter the email address of the collaborator you would like to invite and select `Enter` or `Tab` between each entry. You may enter up to 20 email addresses. To add **all** existing organization members to your project, use the **All users in the organization** option to send a bulk invitation to all colleagues.
    <img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
 5. (optional) Enter an invitation message in the text box below your invites.
 6. Select **Send invite**. This will invite the users to both the organization and project. Once your colleague clicks **Accept invitation**, they can access the shared project with the assigned role and permissions.
@@ -59,7 +59,7 @@ If you previously invited collaborators to your organization _and_ project in th
 
 ## Share resources within a project
 
-You can share a specific [version](/components/modeler/web-modeler/versions.md) of a file or process application within the shared project.
+You can publish a specific [version](/components/modeler/web-modeler/versions.md) of a file or process application within the shared project.
 
 1. From the BPMN diagram, select the **Versions** dropdown in the top right corner.
 2. Select the three vertical dots on the right side of the version labeled **Browse version actions**.
@@ -107,7 +107,7 @@ To access the associated README file for a process within the shared project:
 
 ## Next steps
 
-Organization owners and administrators can connect their Web Modeler process applications to GitHub, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
+Organization owners and administrators can connect their Web Modeler process applications to GitHub and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
 Once the basic integration is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from GitHub, integrate contributions from Desktop Modeler users, and merge their own work.
 
