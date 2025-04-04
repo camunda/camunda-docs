@@ -59,6 +59,27 @@ These fields export responses from external **Connector** calls into process var
 This field declares a singular process variable designated for the export of responses from a **Connector** call.
 The resulting process variable can be subsequently utilized within the ongoing process.
 
+#### Example
+
+If you set `result` inside the `Result variable` field of the Rest Outbound Connector, you would have this variable available:
+
+```json
+{
+  "result":{
+    "status":200,
+    "headers":{
+      "date":"Thu, 03 Apr 2025 07:05:19 GMT",
+      "server":"nginx",
+      "content-type":"text/html; charset=UTF-8"
+    },
+    "body":"<h1>Hello, World!</h1>",
+    "reason":"OK",
+    "document":null
+  }
+}
+
+```
+
 ### Result expression
 
 This field facilitates the mapping of a **Connector** response into multiple process variables,
@@ -70,6 +91,16 @@ To ensure process isolation, note that Connectors do not have access to process 
 :::note
 While using this field, a process variable with the name `response` is reserved.
 :::
+
+#### Example
+
+If you set `{ "bodyReceived": body }`  inside the `Result Expression` field of the Rest Outbound Connector, you would have this variable available:
+
+```json
+{
+  "bodyReceived":"<h1>Hello, World!</h1>"
+}
+```
 
 ## Activation
 
