@@ -150,7 +150,7 @@ Developers now find [documentation](/apis-tools/frontend-development/01-task-app
 
 <!-- https://github.com/camunda/product-hub/issues/2001 -->
 
-The [KPI Wizard]($optimize$/components/userguide/process-KPIs) is the new way to build a KPI report quickly. The Wizard already contains predefined KPIs that can be selected. It guides the users through the needed customization and allows them to activate an alert that allows passive monitoring. The list of predefined KPIs will be extended with upcoming releases. Start setting up a first process KPI now.
+The [KPI Wizard](/components/optimize/userguide/process-KPIs.md) is the new way to build a KPI report quickly. The Wizard already contains predefined KPIs that can be selected. It guides the users through the needed customization and allows them to activate an alert that allows passive monitoring. The list of predefined KPIs will be extended with upcoming releases. Start setting up a first process KPI now.
 
 ### Use secrets in hybrid mode <span class="badge badge--long" title="This feature affects Connectors">Connectors</span>
 

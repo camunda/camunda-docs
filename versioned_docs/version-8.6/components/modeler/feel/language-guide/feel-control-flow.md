@@ -59,6 +59,16 @@ for i in 1..10 return if (i <= 2) then 1 else partial[-1] + partial[-2]
 // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
 
+:::tip
+The variable `partial` can be used to retrieve the index of the current element.
+
+```feel
+for x in ["a","b","c"] return {value: x, index: count(partial) + 1}
+// [{"value":"a","index":1},{"value":"b","index":2},{"value":"c","index":3}]
+```
+
+:::
+
 Instead of a list, the `for` loop can also iterate over a given range.
 
 ```feel

@@ -147,7 +147,7 @@ apiVersion: eksctl.io/v1alpha5
 metadata:
   name: ${CLUSTER_NAME:-camunda-cluster} # e.g. camunda-cluster
   region: ${REGION:-eu-central-1} # e.g. eu-central-1
-  version: "1.31"
+  version: "1.32"
 availabilityZones:
   - ${REGION:-eu-central-1}c # e.g. eu-central-1c, the minimal is two distinct Availability Zones (AZs) within the region
   - ${REGION:-eu-central-1}b
@@ -620,7 +620,7 @@ export AURORA_USERNAME=secret_user
 # Postgres DB password of the admin user
 export AURORA_PASSWORD=camundarocks123
 # The PostgreSQL version
-export POSTGRESQL_VERSION=15.8
+export POSTGRESQL_VERSION=15.10
 
 # For each database, we need to generate a username, password and database name
 export DB_KEYCLOAK_NAME="keycloak_db"

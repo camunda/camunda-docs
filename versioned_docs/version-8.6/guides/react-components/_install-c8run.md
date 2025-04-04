@@ -19,8 +19,6 @@ When successful, a new Operate window automatically opens.
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](/self-managed/setup/deploy/local/c8run.md#shut-down-camunda-8-run) to end the current processes, then run the start script again.
-
-Mac users may encounter the warning `"c8run" Not Opened`. Follow the Apple support instructions to [grant an exception](https://support.apple.com/en-us/102445).
 :::
 
 For more information and local configuration options, see the [Camunda 8 Run installation guide](/self-managed/setup/deploy/local/c8run.md).
