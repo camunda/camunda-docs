@@ -18,9 +18,9 @@ This guide provides detailed instructions for configuring and managing secrets w
 
 ---
 
-## Internal Secrets Reference Table
+## Internal Secrets
 
-These secrets are generated and managed internally by Camunda’s Helm Chart.
+These secrets are used by Camunda applications, and created and managed by the Helm Chart unless explicitly configured.
 
 ### Identity / Keycloak
 
@@ -61,33 +61,28 @@ These secrets are generated and managed internally by Camunda’s Helm Chart.
 
 Some secrets are required only in specific configurations. The following are common conditional cases:
 
-- 🔸 **`webModeler.restapi.externalDatabase.existingSecret`** – Required **only if** `postgresql.enabled: false` and using an external database.
+- 🔸 **`webModeler.restapi.externalDatabase.existingSecret`** – If using an external PostgreSQL database.
 - 🔸 **`webModeler.restapi.mail.existingSecret`** – SMTP is enabled for email features.
 - 🔸 **`connectors.inbound.auth.existingSecret`** – If basic auth is used for inbound connectors.
 - 🔸 **`global.license.existingSecret`** – Required for enterprise licensing.
 
 ---
 
-## External Secrets Reference Table
+## External Secrets
 
-These secrets are required when integrating Camunda with external services:
+These secrets are necessary when integrating Camunda with third-party services.
 
-### External Databases and Services
+### External Databases and Mail Services
 
-| **Secret**                           | **Chart Values Key**                                                                                            | **Purpose**                                              | **Default Behavior**    |
-| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ----------------------- |
-| **External Database Password**       | `webModeler.restapi.externalDatabase.existingSecret`, `webModeler.restapi.externalDatabase.existingSecret.name` | Password for external PostgreSQL if using an external DB | Not set unless provided |
-| **SMTP Password**                    | `webModeler.restapi.mail.existingSecret`                                                                        | SMTP credentials for sending email notifications         | Not set unless provided |
-| **Connectors Inbound Auth Password** | `connectors.inbound.auth.existingSecret`, `connectors.inbound.auth.existingSecretKey`                           | Basic auth password for Connectors polling Operate       | Not set unless provided |
-
-### External Search (Elasticsearch / OpenSearch)
-
-| **Secret**                          | **Chart Values Key**                       | **Purpose**                                                     | **Default Behavior**    |
-| ----------------------------------- | ------------------------------------------ | --------------------------------------------------------------- | ----------------------- |
-| **External Elasticsearch Auth**     | `global.elasticsearch.auth.existingSecret` | Password for external Elasticsearch authentication (basic auth) | Not set unless provided |
-| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.existingSecret`  | TLS certificate for external Elasticsearch over SSL             | Not set unless provided |
-| **External OpenSearch Auth**        | `global.opensearch.auth.existingSecret`    | Password for external OpenSearch authentication (basic auth)    | Not set unless provided |
-| **External OpenSearch TLS Cert**    | `global.opensearch.tls.existingSecret`     | TLS certificate for external OpenSearch over SSL                | Not set unless provided |
+| **Secret**                           | **Chart Values Key**                                                                                            | **Purpose**                                                     | **Default Behavior**    |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | ----------------------- |
+| **External Database Password**       | `webModeler.restapi.externalDatabase.existingSecret`, `webModeler.restapi.externalDatabase.existingSecret.name` | Password for external PostgreSQL if using an external DB        | Not set unless provided |
+| **SMTP Password**                    | `webModeler.restapi.mail.existingSecret`                                                                        | SMTP credentials for sending email notifications                | Not set unless provided |
+| **Connectors Inbound Auth Password** | `connectors.inbound.auth.existingSecret`, `connectors.inbound.auth.existingSecretKey`                           | Basic auth password for Connectors polling Operate              | Not set unless provided |
+| **External Elasticsearch Auth**      | `global.elasticsearch.auth.existingSecret`                                                                      | Password for external Elasticsearch authentication (basic auth) | Not set unless provided |
+| **External Elasticsearch TLS Cert**  | `global.elasticsearch.tls.existingSecret`                                                                       | TLS certificate for external Elasticsearch over SSL             | Not set unless provided |
+| **External OpenSearch Auth**         | `global.opensearch.auth.existingSecret`                                                                         | Password for external OpenSearch authentication (basic auth)    | Not set unless provided |
+| **External OpenSearch TLS Cert**     | `global.opensearch.tls.existingSecret`                                                                          | TLS certificate for external OpenSearch over SSL                | Not set unless provided |
 
 ---
 
@@ -103,7 +98,7 @@ There are two primary patterns for referencing secrets, depending on the chart a
 > ℹ️ If a field supports the structured format, it's generally safer and clearer to use it.
 > The structured format also enables more consistent secret reuse across multiple components.
 
-### Simple (Flat String)
+### Flat String Example
 
 ```yaml
 webModeler:
@@ -112,7 +107,7 @@ webModeler:
       existingSecret: my-db-secret
 ```
 
-### Structured (Recommended for internal secrets)
+### Structured Example (Recommended)
 
 ```yaml
 global:
@@ -130,7 +125,7 @@ global:
 
 Secrets may be created manually using the kubectl CLI or defined in Kubernetes manifests. For more examples, see [Create Identity Secrets in the Camunda Docs](https://docs.camunda.io/docs/self-managed/setup/install/#create-identity-secrets).
 
-Here's how to create one via `kubectl`:
+To create a secret via `kubectl`::
 
 ```sh
 kubectl create secret generic camunda-credentials \
