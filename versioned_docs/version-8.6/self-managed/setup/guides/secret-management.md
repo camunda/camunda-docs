@@ -4,7 +4,7 @@ title: "Managing Secrets in Camunda 8 Self-Managed"
 description: "A comprehensive guide on configuring and managing secrets in Camunda 8, including Keycloak, OAuth client secrets, and first-user authentication."
 ---
 
-# Camunda Platform Helm Chart – Secrets Management
+# Managing Secrets in Helm Charts
 
 ## Overview
 
