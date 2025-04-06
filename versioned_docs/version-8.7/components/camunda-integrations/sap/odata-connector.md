@@ -14,7 +14,7 @@ This Connector works with Camunda 8 SaaS, and utilizes SAP BTP's [Destination](h
 
 For a standard overview of the steps involved in the SAP OData Connector, see the following diagram:
 
-![OData steps](./img/odata-steps.png)
+![OData steps](./img/odata-connector-ops.png)
 
 ## Prerequisites
 
@@ -44,20 +44,47 @@ WebIDEUsage: odata_gen
 Currently, only `BasicAuthentication` is supported on the Destination by the SAP OData Connector.
 :::
 
-## Deployment to BTP
+## Configuration and deployment
 
-A descriptor file is required to deploy the SAP OData Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment. Take the following steps:
+A descriptor file is required to deploy the SAP OData Connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment.
+
+### Configuring the OData connector
+
+You can either configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) or manually. The advantage of using `csap` is that it pulls together all necessary files and adjusts them to your BTP environment automatically, using the info you provided in the prompts or via command line switches.
+
+#### using `csap`
+
+Either walk yourself through the prompts or provide all information to the cli
+
+- `csap setup` will guide you interactively.
+
+- Assuming your [Camunda Cluster's API credentials](https://docs.camunda.io/docs/guides/setup-client-connection-credentials/) are sourced in your shell environment, this will do the configuration for you:
+
+```shell
+csap setup --for odata \
+	--camunda 8.7 \
+	--deployment SaaS
+```
+
+#### Manual configuration
+
+Take the following steps:
 
 1. Find the matching [Docker image](https://hub.docker.com/r/camunda/sap-odata-connector/tags) for the targeted Camunda 8 SaaS version.  
-    The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
+   The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
    Examples:
 
    - `8.6.0` is the OData Connector in version `0` for C8 SaaS version `8.6`
    - `8.5.1` is the OData Connector in version `1` for C8 SaaS version `8.5`
 
-2. Adjust the values for the credentials (client ID, client secret, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
+2. Download the matching mtad.yaml.example from [the OData connector's Github release page](https://github.com/camunda/sap-odata-connector/releases).
+   Adjust the values for the credentials (`client ID`, client secret, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
 3. Adjust the names of the SAP BTP Destination and Connectivity instances to your liking - both will be created automatically for you upon deployment. If instances of the same name in your subaccount of any of the two services exist, they will be reused.
-4. After creating the `mtad.yaml` file, log into the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
+4. Download the connector template from [the OData connector's Github release page](https://github.com/camunda/sap-odata-connector/releases).
+
+### Deploying to BTP
+
+1. Log into the desired SAP BTP subaccount via the [Cloud Foundry `cli`](https://github.com/cloudfoundry/cli) (cf-cli):
 
 ```shell
 $> cf login
@@ -65,7 +92,7 @@ API endpoint: https://api.cf. ...
 ...
 ```
 
-5. Deploy the SAP OData Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on:
+2. Deploy the SAP OData Connector via the `cf-cli`. Note that this requires [the "multiapps" plugin of Cloud Foundry](https://github.com/cloudfoundry/multiapps-cli-plugin) to be installed on the machine the deployment runs on:
 
 ```shell
 $> cf deploy ./ # append the -f flag to shortcircuit ongoing deployments
@@ -74,7 +101,7 @@ Deploying multi-target app archive /some/path/sap-odata-connector in org <your-o
 Application "sap-odata-connector" started and available at "some.url.hana.ondemand.com"
 ```
 
-## Deployment in Camunda 8 SaaS
+### Deployment in Camunda 8 SaaS
 
 - If using Web Modeler, [import the SAP OData Connector's element template](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) for design use.
 
