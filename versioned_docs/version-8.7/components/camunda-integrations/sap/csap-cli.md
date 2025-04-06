@@ -125,3 +125,7 @@ csap setup --for all --camunda 8.6 --deployment SaaS --clusterId my-cluster-id -
 ```
 
 This command sets up all available SAP integration modules for Camunda version 8.6.
+
+## Deploying modules
+
+After each Camunda SAP integration module is set up with `csap`, it is ready for deployment. How to exactly do this is the responsibility of the SAP practice. However, we recommend using [Cloud Foundry's `cli`](https://github.com/cloudfoundry/cli) for the purpose.
