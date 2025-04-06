@@ -62,7 +62,7 @@ Either walk yourself through the prompts or provide all information to the cli
 
 ```shell
 csap setup --for odata \
-	--camunda 8.7 \
+	--camunda 8.6 \
 	--deployment SaaS
 ```
 
