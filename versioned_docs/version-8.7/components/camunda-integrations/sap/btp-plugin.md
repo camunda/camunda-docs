@@ -27,9 +27,31 @@ The Camunda SAP Business Technology Platform (BTP) plugin is an artifact run on 
 
   ![screenshot of header variable in Modeler](./img/sap-btp-plugin-final-user-task-header.png)
 
+- Auto-start a process via URL parameter using `run=<processID>`. For example, `https://<btp plugin url>/index.html?channelId=<id>&run=application-process`.
+
+- For debugging purposes, add `debug=true` as the URL parameter. For example, `https://<btp plugin url>/index.html?channelId=<id>&run=application-process&debug=true`.
+
+- `/inbound` endpoint for starting a BPMN process in Camunda
+
+  - defined payload:
+
+    ```json
+    {
+    	"bpmnProcessId": "processId",
+      "user": "beck",
+      "wait": true, # wait for the BPMN run to finish and get the result back
+    	"variables": { # optional
+    		"some_key": "some_value",
+    		"some_other_key": 10
+    	}
+    }
+    ```
+
+  - advantage over Camunda REST API: use authentication realm between BTP and S/4 / ECC, no need for adminstrating additional credentials
+
 ## Deploying
 
-- `cd` to folder `csap` logs, e.g. `/var/folders/y9/8d_50ddd4qd5tkpxqb6hm9tc0000gn/T/camunda/8.6/sap-btp-plugin`
+- `cd` to folder `csap` logs, e.g. `/tmp/camunda/8.6/sap-btp-plugin`
 - issue `cf deploy mta_archives/*.mtar`
 - add the `-f` switch to force update, e.g. by deploying the same version again
 - consider adding `--delete-services` to recreate eventually failed service creation of previous deployment
@@ -39,20 +61,13 @@ For advanced deployment configuration, consider working with your SAP practice, 
 The SAP BTP plugin is an alpha feature available upon request. Visit [our contact page](/reference/contact.md) to contact us.
 :::
 
-## Plugin functionality
-
-- Auto-start a process via URL parameter using `run=<processID>`. For example, `https://<btp plugin url>/index.html?channelId=<id>&run=application-process`.
-- For debugging purposes, add `debug=true` as the URL parameter. For example, `https://<btp plugin url>/index.html?channelId=<id>&run=application-process&debug=true`.
-
 ## Camunda Forms in SAP Fiori
 
-<!--- Layout: single row layout only, ![image-20250219112232376](/Users/volker.buzek/git/camunda/camunda-docs/docs/components/early-access/alpha/sap/img/froms-no-columns.png)
+- Layout: single row layout only, ![image-20250219112232376](./img/froms-no-columns.png)
 
-No custom properties. ![image-20250219112156011](/Users/volker.buzek/git/camunda/camunda-docs/docs/components/early-access/alpha/sap/img/forms-no-custom-properties.png)
+- No custom properties. ![image-20250219112156011](./img/forms-no-custom-properties.png)
 
-Explain "one-user multi-page flow"
-
---->
+- Explain "one-user multi-page flow"
 
 ### Supported form features and properties
 
