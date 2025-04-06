@@ -119,7 +119,7 @@ To use the **SAP OData Connector** in your process, either change the type of ex
 The configuration options will dynamically change with the selected HTTP method and the OData protocol version. For example, a `payload` field is only displayed when the HTTP method is something other than "GET".
 :::
 
-![SAP OData connector element template](./img/sap-odata-connector-element-template.png)
+![SAP OData connector element template](./img/sap-odata-connector-template.png)
 
 Specifying the `BTP destination name` allows you to reuse existing Destinations from the subaccount or instance level. Authentication and authorizations are maintained at this level, which is why it's not necessary to maintain credentials for the Connector.
 
