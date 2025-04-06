@@ -10,10 +10,6 @@ This Connector is designed to run in [hybrid mode](/guides/use-connectors-in-hyb
 
 This Connector works with Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via both OData v2 and v4.
 
-:::note Important!
-This Connector is an alpha feature and available upon request. Visit [our contact page](/reference/contact.md) to contact us.
-:::
-
 ## Overview
 
 For a standard overview of the steps involved in the SAP OData Connector, see the following diagram:
