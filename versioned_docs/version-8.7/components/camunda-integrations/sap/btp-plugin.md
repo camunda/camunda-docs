@@ -49,18 +49,6 @@ The Camunda SAP Business Technology Platform (BTP) plugin is an artifact run on 
 
   - advantage over Camunda REST API: use authentication realm between BTP and S/4 / ECC, no need for adminstrating additional credentials
 
-## Deploying
-
-- `cd` to folder `csap` logs, e.g. `/tmp/camunda/8.6/sap-btp-plugin`
-- issue `cf deploy mta_archives/*.mtar`
-- add the `-f` switch to force update, e.g. by deploying the same version again
-- consider adding `--delete-services` to recreate eventually failed service creation of previous deployment
-
-For advanced deployment configuration, consider working with your SAP practice, starting from the created `mta.yaml` deployment descriptor (in the `$TMP` folder as output by `csap`)
-:::note Important!
-The SAP BTP plugin is an alpha feature available upon request. Visit [our contact page](/reference/contact.md) to contact us.
-:::
-
 ## Camunda Forms in SAP Fiori
 
 - Layout: single row layout only, ![image-20250219112232376](./img/froms-no-columns.png)
@@ -100,3 +88,16 @@ The SAP BTP plugin is an alpha feature available upon request. Visit [our contac
 |                  | iFrame                         | :x:                              |                                                                                                                                                                                                                          |
 | **Action**       |                                |                                  |                                                                                                                                                                                                                          |
 |                  | Button                         | :x:                              |                                                                                                                                                                                                                          |
+
+## Deploying
+
+How to exactly deploy the BTP Plugin is the responsibility of the SAP practice.
+
+A possible way with the [Clound Foundry `cf` cli](https://github.com/cloudfoundry/cli) could be:
+
+- `cd` to folder `csap` logs, e.g. `/tmp/camunda/8.6/sap-btp-plugin`
+- issue `cf deploy mta_archives/*.mtar`
+- add the `-f` switch to force update, e.g. by deploying the same version again
+- consider adding `--delete-services` to recreate eventually failed service creation of previous deployment
+
+For advanced deployment configuration, consider working with your SAP practice, starting from the created `mta.yaml` deployment descriptor (in the `$TMP` folder as output by `csap`)
