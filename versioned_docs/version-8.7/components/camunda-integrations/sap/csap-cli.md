@@ -105,7 +105,15 @@ The CLI can detect Camunda API credentials from environment variables. If these 
 #### Example 1: Interactive Setup
 
 ```bash
-csap setup
+$> csap setup
+
+# ...
+
+? SAP integration module (odata)
+  BTP plugin
+❯ OData connector
+  RFC connector
+  All modules
 ```
 
 This will guide you through the setup process interactively.
@@ -113,19 +121,44 @@ This will guide you through the setup process interactively.
 #### Example 2: Automating Setup for the BTP Plugin
 
 ```bash
-csap setup --for btp-plugin --camunda 8.7 --deployment SaaS --btpRoute my-btp-route --clusterId my-cluster-id --region my-region --clientId my-client-id --clientSecret my-client-secret
+$> csap setup --for btp-plugin \
+	--camunda 8.7 \
+	--deployment SaaS \
+	--btpRoute my-btp-route.cfapps.eu10-004.hana.ondemand.com \
+  --clusterId 64ecb347-dd50-49c9-ace2-20c9f6b0798d
+  --region syd-2
+  --clientId dIsfmFEB47_-Dt2uMlYdw-B_72stz.Yh \
+  --clientSecret WzIQFJkxd2xopI7lOGArJ0815kC3SvU5ke~lI4did8k0RMG353DiVDPBPEW1-tuD7
+
+# ...
 ```
 
 This command sets up the BTP Plugin for Camunda version 8.7 with all required options provided as command-line arguments.
 
-#### Example 3: Setting Up All Modules
+#### Example 3: Setting Up All Modules, reusing credentials from envirnoment
 
 ```bash
-csap setup --for all --camunda 8.6 --deployment SaaS --clusterId my-cluster-id --region my-region --clientId my-client-id --clientSecret my-client-secret
+$> csap setup --for all \
+	--camunda 8.6 \
+	--deployment SaaS \
+
+# ...
+
+i Camunda API credentials found in environment. Reusing
+┌────────────────────────┬──────────┐
+│ (idx)                  │ Values   │
+├────────────────────────┼──────────┤
+│ CAMUNDA_CLUSTER_ID     │ "***5ee" │
+│ CAMUNDA_CLIENT_ID      │ "***icQ" │
+│ CAMUNDA_CLIENT_SECRET  │ "***XEq" │
+│ CAMUNDA_CLUSTER_REGION │ "***d-1" │
+└────────────────────────┴──────────┘
 ```
 
 This command sets up all available SAP integration modules for Camunda version 8.6.
 
 ## Deploying modules
 
-After each Camunda SAP integration module is set up with `csap`, it is ready for deployment. How to exactly do this is the responsibility of the SAP practice. However, we recommend using [Cloud Foundry's `cli`](https://github.com/cloudfoundry/cli) for the purpose.
+After each Camunda SAP integration module is set up with `csap`, it is ready for deployment. We consider `csap` to be the kitchen of the deployment lifecycle: it brings all the ingredients together, cooks the meal, plates it, and has it ready to serve.
+
+Bringing the meal from the kitchen to the table, which translates to how to deploy the module to BTP, should be the responsibility of the SAP practice - along with the means how to get the deployed SAP integration module into the application lifecycle management of the organisation.
