@@ -106,13 +106,13 @@ For example, supplying `$filter` and `$select` parameters helps in reducing data
 
 ### $batch requests
 
-The capabilites are in sync with https://me.sap.com/notes/1869434, except XML over the wire: the OData connector does `JSON` only.
+The capabilities are in sync with [https://me.sap.com/notes/1869434](https://me.sap.com/notes/1869434), with the exception of XML over the wire. The OData Connector uses `JSON` only.
 
-When `Batch Request` is selected as "Request type", the available query options change and reveal the choice of the OData protocol and and the input area for the individual requests. Note that the "Batch Request Payload" field requires the mandatory use of `FEEL` .
+When `Batch Request` is selected as **Request type**, the available query options change and reveal the choice of the OData protocol and the input area for the individual requests. Note that the **Batch Request Payload** field requires the mandatory use of `FEEL`.
 
-![](./img/sap-odata-connector-batch-connector-template.png)
+![batch connector template](./img/sap-odata-connector-batch-connector-template.png)
 
-The Batch Request payload is an array of objects that can either be of `"type": "batch"` or `"type": "changeset"` - `batch` denotes read requests, `changeset` denotes write operations (including `DELETE`).
+The **Batch Request** payload is an array of objects that can either be of `"type": "batch"` or `"type": "changeset"` - `batch` (denotes read requests), and `changeset` (denotes write operations, including `DELETE`).
 
 ```jsonc
 [
@@ -127,9 +127,9 @@ The Batch Request payload is an array of objects that can either be of `"type": 
 ]
 ```
 
-Both `batch` and `changeset` contain a `requests` node that in turn holds the individual requests that should happen within a `batch` (read) or a `changeset` (write, update, delete). Together, they consitute the entirety of the Batch request.
+Both `batch` and `changeset` contain a `requests` node that holds the individual requests that should occur within a `batch` (read) or a `changeset` (write, update, delete). Together, they constitute the entirety of the batch request.
 
-The `requests` node is also an array of `objects`. No matter whether an request is inside a `batch` or a `changeset`, it always has `method` and `resourcePath` as mandatory fields.
+The `requests` node is also an array of `objects`. Regardless of if a request is inside a `batch` or a `changeset`, it always has `method` and `resourcePath` as mandatory fields.
 
 ```jsonc
 [
@@ -161,7 +161,7 @@ The `requests` node is also an array of `objects`. No matter whether an request 
 ]
 ```
 
-`batch` request entries can contain an additional `options` block, allowing the same query options as the connector template has in [Advanced capabilites](#advanced-capabilities), with the `$` prefix omitted.
+`batch` request entries can contain an additional `options` block, allowing the same query options as the Connector template has in [advanced capabilities](#advanced-capabilities), with the `$` prefix omitted.
 
 `changeset` request entries are modifying operations and thus require a `payload` in JSON format.
 
@@ -185,7 +185,7 @@ The result of any query, whether it is reading or writing to the SAP system, is 
 
 The query result can either be mapped to a single result variable or worked on [via FEEL with an expression](/components/connectors/use-connectors/index.md#result-expression). The same is applicable to `getResponse`, as a result variable contains the described query JSON in its entirety. The result expression `{getStatusCode: statusCode}` would only hold the HTTP status code in the `getStatusCode` process variable.
 
-For `$batch` requests, the query result is an Array of the above mentioned result structure. This is an example for an OData v2 Batch Request, consisting of one Read and one Update operation:
+For `$batch` requests, the query result is an array of the result structure above. This is an example for an OData v2 batch request, consisting of one `Read` and one `Update` operation:
 
 ```json
 {
@@ -208,7 +208,7 @@ For `$batch` requests, the query result is an Array of the above mentioned resul
 }
 ```
 
-In case one of the operations in the Batch request fails, the error is relayed to the `result` node for the request, as in the second request in this sample result where the Business Partner with number `0000000` (obviously) couldn't be found.
+If one of the operations in the batch request fails, the error is relayed to the `result` node for the request. For example, the second request in this sample result where the business partner with number `0000000` couldn't be found:
 
 ```jsonc
 {
