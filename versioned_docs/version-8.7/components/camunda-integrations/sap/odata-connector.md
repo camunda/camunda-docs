@@ -18,6 +18,8 @@ For a standard overview of the steps involved in the SAP OData Connector, see th
 
 ## Prerequisites
 
+- on Camunda side: recommendation: create an API client for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+
 To run the SAP OData Connector Docker image, the following SAP infrastructure setup is required:
 
 - [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
