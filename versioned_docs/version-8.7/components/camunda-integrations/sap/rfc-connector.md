@@ -8,10 +8,6 @@ The SAP RFC [Connector](/components/connectors/introduction.md) is a [protocol a
 
 It connects to Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
 
-:::note Important!
-This Connector is an alpha feature available upon request. Visit [our contact page](/reference/contact.md) to contact us.
-:::
-
 ## Overview
 
 For a standard overview of the steps involved in the SAP RFC Connector, see the following diagram:
