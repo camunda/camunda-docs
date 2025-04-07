@@ -30,6 +30,7 @@ Add the following dependency to a new Java project:
   <groupId>io.camunda</groupId>
   <artifactId>camunda-search-client-plugin</artifactId>
   <version>${version.camunda-search-client-plugin}</version>
+  <scope>provided</scope>
 </dependency>
 ```
 
@@ -73,6 +74,15 @@ public class MyCustomHeaderPlugin implements DatabaseCustomHeaderSupplier {
 ### Build your project
 
 Build your project with all dependencies included, and copy the resulting JAR file somewhere it can be easily accessed. This JAR file will be required by your Camunda installation.
+
+:::note
+When building the project, the `camunda-search-client-plugin` dependency must have a scope of provided, otherwise there will be a clash between `camunda-search-client-plugin`
+classes which are loaded from different class loaders.
+
+JVM treats `ClassA` loaded by `ClassLoaderA` as completely different from `ClassA` loaded by `ClassLoaderB`.
+
+Therefore, without a scope of provided it would result in `does not implement` or `ClassCastException` errors.
+:::
 
 ## Add the plugin to your self-managed installation
 

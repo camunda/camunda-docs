@@ -5,12 +5,6 @@ description: "How to perform a backup of Optimize data and restore the backup."
 keywords: ["backup", "backups"]
 ---
 
-:::note
-This release introduces breaking changes, including the utilized URL.
-
-For example, `curl 'http://localhost:8092/actuator/backups'` rather than the previously used `backup`.
-:::
-
 Optimize is a dedicated application that stores its data over multiple indices in the database. To ensure data integrity across indices, a backup of Optimize data consists of two Elasticsearch/OpenSearch snapshots, each containing a different set of Optimize indices. Each backup is identified by a positive integer backup ID. For example, a backup with ID `123456` consists of the following snapshots:
 
 ```
@@ -25,7 +19,7 @@ Optimize provides an API to trigger a backup and retrieve information about a gi
 The following prerequisites must be set up before using the backup API:
 
 1. A snapshot repository of your choice must be registered with ElasticSearch/OpenSearch.
-2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable, or by adding it to your Optimize [`environment-config.yaml`]($optimize$/self-managed/optimize-deployment/configuration/system-configuration/):
+2. The repository name must be specified using the `CAMUNDA_OPTIMIZE_BACKUP_REPOSITORY_NAME` environment variable, or by adding it to your Optimize [`environment-config.yaml`](/self-managed/optimize-deployment/configuration/system-configuration.md):
 
 ```yaml
 backup:
