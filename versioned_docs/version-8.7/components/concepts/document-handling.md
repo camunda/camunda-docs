@@ -7,27 +7,27 @@ keywords: ["document handling"]
 
 import DocCardList from '@theme/DocCardList';
 
-Store, track, and manage documents in Camunda 8 using the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx), Connectors, Forms, and Tasklist.
+Camunda 8 SaaS provides built-in support for storing, tracking, and managing documents using Camunda Forms, Connectors, Tasklist, and the [REST API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx).
 
-Offering robust document handling capabilities within Camunda SaaS, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+Document handling is automatically integrated into each SaaS cluster, allowing you to manage binary data, like PDFs and images, across development and production environments without needing to configure or maintain storage infrastructure yourself.
 
-## Storage integration and configuration
+## Storage options
 
-[**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) and [**AWS S3**](https://aws.amazon.com/s3/) bucket storage integrations are supported on SaaS and handled by Camunda.
-Storage is configured for a cluster based on the selected region (either GCP or AWS).
+### SaaS
 
-### Storage policies for SaaS
+Camunda SaaS manages storage for you by integrating with [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) and [**AWS S3**](https://aws.amazon.com/s3/) bucket storage.
 
-- One bucket per cluster is permitted.
-- Storage integration is handled and configured by Camunda. While this is not dynamically configurable by the cluster, it is provided as environment configuration.
+- Each cluster automatically includes one pre-configured storage bucket.
+- Camunda 8 clusters hosted on GCP use a GCP bucket; clusters hosted on AWS use an AWS S3 bucket.
 - **Maximum upload size for one or multiple files**: 10 MB
-- **File expiration time/time-to-live (TTL) policy**: 30 days.
+- **File expiration time/time-to-live (TTL) policy**: 30 days. A custom expiration date can be specified via the [Document upload API](../../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
 
-### Self-Managed environment
+### Self-Managed
 
-Looking for details on document handling for a Self-Managed environment? Visit this guide:
+If you're deploying Camunda in a Self-managed environment, document storage must be configured manually. To learn more, visit the following guides:
 
-<DocCardList items={[{type:"link", href:"/docs/8.7/self-managed/concepts/document-handling/getting-started/", label: "Guide for Self-Managed", docId:"self-managed/concepts/document-handling/getting-started"}
+<DocCardList items={[{type:"link", href:"/docs/next/self-managed/concepts/document-handling/getting-started/", label: "Getting started on Self-Managed", docId:"self-managed/concepts/document-handling/getting-started"},
+{type:"link", href:"/docs/next/self-managed/concepts/document-handling/document-storage-configuration/", label: "Storage configuration", docId:"self-managed/concepts/document-handling/document-storage-configuration"}
 ]}/>
 
 ## Use cases and capabilities

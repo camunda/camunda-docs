@@ -15,19 +15,9 @@ In this guide we will cover three main use cases:
 - [Display and download a document](#display-and-download-a-document);
 - [Send a document to an external system via a Connector](#send-a-document-to-an-external-system-via-a-connector).
 
-## Document storage configuration
-
-### SaaS
-
-A [**Google Cloud Platform**](https://cloud.google.com/storage) and [**AWS S3**](https://aws.amazon.com/s3/) bucket storage integration is configured for SaaS and handled by Camunda.
-
-### Self-Managed
-
-There are several storage and configuration methods for Self-Managed environments. Visit the [Self-Managed documentation](/self-managed/concepts/document-handling/overview.md) for more details.
-
 ## Upload a document to a BPMN process
 
-You can enable document uploads for your BPMN processes using [forms](#document-upload-via-a-form) and [inbound Connectors](#document-upload-via-inbound-webhook-connector).
+You can implement document uploads in your BPMN processes using [forms](#document-upload-via-a-form), [inbound Connectors](#document-upload-via-inbound-webhook-connector), and [Camunda 8 REST API](../apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
 
 ### Build a form for document upload
 
@@ -66,7 +56,7 @@ It always returns an array of objects, either a user uploads a single document o
 
 Single document uploads are accessible using `value[1]` (since [FEEL](../components/modeler/feel/what-is-feel.md) uses 1-based indexing).
 
-### Document upload via inbound Webhook connector
+### Upload a document via inbound Webhook connector
 
 Documents can be added to a process using the [inbound](../components//connectors/connector-types.md#inbound-connectors) [HTTP webhook Connector](/components/connectors/protocol/http-webhook.md).
 

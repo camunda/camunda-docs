@@ -1,5 +1,5 @@
 ---
-id: document-handling-configuration
+id: document-storage-configuration
 title: "Storage configuration"
 description: "Learn more about storage configuration options like Google Cloud Platform, AWS S3, local folders, and in-memory."
 keywords: ["document handling", "document storage configuration"]
@@ -22,25 +22,25 @@ The following section outlines supported storage options, their intended use cas
 
 <TabItem value='all'>
 
-- [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) bucket storage provides a secure, scalable solution for storing and retrieving documents externally. Buckets are created per cluster to ensure proper isolation and environment-specific management.
-  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
-- [**AWS S3**](https://aws.amazon.com/s3/) bucket storage offers a secure and scalable document storage. Buckets are also created per cluster to maintain environment isolation and separation.
-  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
+- By using **external cloud file bucket storages**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storages are supported:
+  - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
+  - [**AWS S3**](https://aws.amazon.com/s3/).
+  - Configuring these buckets is supported in [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), [Docker-compose](../../setup/deploy/other/docker.md) and [Helm](../../setup/install.md).
 - **Local storage** can be configured for a cluser to store documents in a local folder.
   - It can be used only for local development with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md).
-  - It is not supported in production environments. In a typical production topology, local storage is not viable because the pods and file paths are not shared across components, preventing components like Tasklist and Zeebe from accessing the same data.
-- **In-memory** storage can be used to store documents during application runtime. When the application is stopped, documents will be lost.
-  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
-  - It is not supported in production environments. In a typical production topology, in-memory storage is not suitable because memory is not shared between pods/components, preventing components like Tasklist and Zeebe from accessing the same data. Additionally, all uploaded files would be lost upon application restarts.
+  - Local storage is not suitable for production use, as pods and file paths are not shared across components. This prevents components like Tasklist and Zeebe from accessing the same data. Files are stored locally, and their retention must be managed manually.
+- **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost.
+  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), [Docker-compose](../../setup/deploy/other/docker.md) and [Helm](../../setup/install.md).
+  - In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
 
 </TabItem>
 
 <TabItem value='production'>
 
-- [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage) bucket storage provides a secure, scalable solution for storing and retrieving documents externally. Buckets are created per cluster to ensure proper isolation and environment-specific management.
-  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
-- [**AWS S3**](https://aws.amazon.com/s3/) bucket storage offers a secure and scalable document storage. Buckets are also created per cluster to maintain environment isolation and separation.
-  - It can be used with [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md) and [Helm](../../setup/install.md).
+- By using **external cloud file bucket storages**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storages are supported:
+  - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
+  - [**AWS S3**](https://aws.amazon.com/s3/).
+  - Configuring these buckets for production use is recommended when deploying with [Helm](../../setup/install.md).
 
 </TabItem>
 </Tabs>

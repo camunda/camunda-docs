@@ -1178,7 +1178,7 @@ module.exports = {
         {
           "Document handling": [
             "self-managed/concepts/document-handling/getting-started",
-            "self-managed/concepts/document-handling/document-handling-configuration",
+            "self-managed/concepts/document-handling/document-storage-configuration",
           ],
         },
       ],

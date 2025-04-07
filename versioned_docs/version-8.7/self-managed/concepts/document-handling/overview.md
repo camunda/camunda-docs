@@ -7,16 +7,18 @@ keywords: ["document handling", "storage configuration"]
 
 import DocCardList from '@theme/DocCardList';
 
-Store, track, and manage documents in Camunda 8 using the [Camunda 8 API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx), Connectors, Forms, and Tasklist.
+Camunda 8 Self-Managed supports document storage and management using Camunda Forms, Connectors, Tasklist, and the [REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
 
-Offering robust document handling capabilities within Camunda Self-Managed, users can efficiently manage large volumes of binary data such as PDFs and images across both development and production environments.
+You can store, track, and manage binary data, such as PDFs and images, across development and production environments.
+
+Storage must be configured according to your infrastructure and operational needs.
 
 ## Storage integration and configuration
 
-You can integrate and configure document storage based on your deployment setup and production requirements. Find more details here:
+You can configure document storage based on your deployment setup and production requirements.
+Supported options include an external cloud storage such as Google Cloud Platform (GCP) or AWS S3, local file storage or an in-memory storage.
 
-<DocCardList items={[{type:"link", href:"/docs/8.7/self-managed/concepts/document-handling/document-handling-configuration/", label: "Storage configuration details", docId:"self-managed/concepts/document-handling/document-handling-configuration"}
-]}/>
+Learn how to set it up in the [storage configuration guide](configuration.md).
 
 ## Use cases and capabilities
 
