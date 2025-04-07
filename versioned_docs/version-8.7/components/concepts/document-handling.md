@@ -9,7 +9,7 @@ import DocCardList from '@theme/DocCardList';
 
 Camunda 8 SaaS provides built-in support for storing, tracking, and managing documents using Camunda Forms, Connectors, Tasklist, and the [REST API](/apis-tools/camunda-api-rest/specifications/create-documents.api.mdx).
 
-Document handling is automatically integrated into each SaaS cluster, allowing you to manage binary data, like PDFs and images, across development and production environments without needing to configure or maintain storage infrastructure yourself.
+Document handling is automatically integrated into each SaaS cluster, allowing you to manage binary data, like PDFs, images and other file types, across development and production environments without needing to configure or maintain storage infrastructure yourself.
 
 ## Storage options
 

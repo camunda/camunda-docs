@@ -9,7 +9,7 @@ import DocCardList from '@theme/DocCardList';
 
 Camunda 8 Self-Managed supports document storage and management using Camunda Forms, Connectors, Tasklist, and the [REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx).
 
-You can store, track, and manage binary data, such as PDFs and images, across development and production environments.
+You can store, track, and manage binary data, like PDFs, images and other file types, across development and production environments.
 
 Storage must be configured according to your infrastructure and operational needs.
 
