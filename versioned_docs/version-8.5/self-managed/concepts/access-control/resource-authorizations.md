@@ -9,8 +9,8 @@ description: "Resource authorizations allow you to control the level of access a
 Resource authorizations are disabled by default and can be enabled by the use of environment variables. This feature must be enabled in all required components, see:
 
 - [Identity feature flags](../../../../self-managed/identity/deployment/configuration-variables/#feature-flags)
-- [Operate resource based permissions](../../../../self-managed/operate-deployment/operate-authentication/#resource-based-permissions)
-- [Tasklist resource based permissions](../../../../self-managed/tasklist-deployment/tasklist-authentication/#resource-based-permissions)
+- [Operate resource based permissions](../../../../self-managed/operate-deployment/operate-authentication/?authentication=identity#resource-based-permissions)
+- [Tasklist resource based permissions](../../../../self-managed/tasklist-deployment/tasklist-authentication/?authentication=identity#resource-based-permissions)
 
 :::
 
