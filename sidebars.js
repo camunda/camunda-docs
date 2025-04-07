@@ -27,6 +27,7 @@ module.exports = {
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
         "guides/host-custom-connectors",
+        "guides/document-handling",
       ],
       Improve: [
         "guides/improve-processes-with-optimize",
@@ -269,7 +270,6 @@ module.exports = {
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources",
               ],
             },
@@ -1174,6 +1174,12 @@ module.exports = {
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/opensearch-privileges",
+        {
+          "Document handling": [
+            "self-managed/concepts/document-handling/getting-started",
+            "self-managed/concepts/document-handling/document-storage-configuration",
+          ],
+        },
       ],
     },
     {

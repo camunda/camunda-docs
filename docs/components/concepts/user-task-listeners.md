@@ -37,7 +37,23 @@ You can configure user task listeners per BPMN user task element.
 Currently, user task listeners support the following events:
 
 - **Assigning**: Triggered when assigning a user task.
+- **Updating**: Triggered when updating a user task.
 - **Completing**: Triggered when completing a user task.
+
+The events can be triggered in the following ways.
+
+| Event        | Triggered                                                                                                                                                                  |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `assigning`  | When the [assign user task API](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx) is called.                                                           |
+| -            | When activating a user task that [specifies an `assignee`](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) in the process.                                  |
+| -            | When a user task is assigned using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md).                                                             |
+| `updating`   | When the [update user task API](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx) is called.                                                           |
+| -            | When the [update element instance variables API](/apis-tools/camunda-api-rest/specifications/create-element-instance-variables.api.mdx) is called on a user task instance. |
+| -            | When the [set variables RPC](/apis-tools/zeebe-api/gateway-service.md#setvariables-rpc) is called on a user task instance.                                                 |
+| -            | When variables are set using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md).                                                                   |
+| -            | When variables are set at a user task scope using the [Operate interface](/docs/components/operate/userguide/resolve-incidents-update-variables.md).                       |
+| `completing` | When a user task is completed using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md).                                                            |
+| -            | When the [complete user task API](/docs/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx) is called.                                                  |
 
 ### User task listener properties
 
@@ -61,19 +77,20 @@ See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for
 
 ### Accessing user task data
 
-User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job. The following properties can be retrieved using reserved header names:
+User task-specific data, such as `assignee` and `priority`, is accessible through the job headers of the user task listener job. The following attributes can be retrieved using reserved header names:
 
-| Property          | Header name                        |
-| ----------------- | ---------------------------------- |
-| `action`          | `io.camunda.zeebe:action`          |
-| `assignee`        | `io.camunda.zeebe:assignee`        |
-| `candidateGroups` | `io.camunda.zeebe:candidateGroups` |
-| `candidateUsers`  | `io.camunda.zeebe:candidateUsers`  |
-| `dueDate`         | `io.camunda.zeebe:dueDate`         |
-| `followUpDate`    | `io.camunda.zeebe:followUpDate`    |
-| `formKey`         | `io.camunda.zeebe:formKey`         |
-| `priority`        | `io.camunda.zeebe:priority`        |
-| `userTaskKey`     | `io.camunda.zeebe:userTaskKey`     |
+| Attribute           | Header name                          |
+| :------------------ | :----------------------------------- |
+| `action`            | `io.camunda.zeebe:action`            |
+| `assignee`          | `io.camunda.zeebe:assignee`          |
+| `candidateGroups`   | `io.camunda.zeebe:candidateGroups`   |
+| `candidateUsers`    | `io.camunda.zeebe:candidateUsers`    |
+| `changedAttributes` | `io.camunda.zeebe:changedAttributes` |
+| `dueDate`           | `io.camunda.zeebe:dueDate`           |
+| `followUpDate`      | `io.camunda.zeebe:followUpDate`      |
+| `formKey`           | `io.camunda.zeebe:formKey`           |
+| `priority`          | `io.camunda.zeebe:priority`          |
+| `userTaskKey`       | `io.camunda.zeebe:userTaskKey`       |
 
 Below is an example of accessing the `assignee` value from the headers in Java:
 
@@ -93,6 +110,19 @@ final JobHandler userTaskListenerHandler =
 ```
 
 Each header provides user task metadata that can be leveraged to customize the behavior of the user task listener job. Use these headers to retrieve necessary information about the user task in your job handler implementation.
+
+#### Changed attributes
+
+The `changedAttributes` attribute lists which user task attributes have changed with the event.
+
+:::note
+User task data corrections are taken into account.
+For example, consider a user task with three `assigning` listeners defined.
+When assigning the user task, the first listener sees the `assignee` attribute in the `changedAttributes`.
+If it corrects the priority, a subsequent assigning listener sees both the `assignee` and the `priority` attributes as changed attributes.
+Now, this second listener corrects the priority back to the value it had before assigning.
+The third listener sees only the `assignee` attribute as changed attribute, because the priority is no longer changed with the event.
+:::
 
 ### Correcting user task data
 
@@ -169,7 +199,7 @@ There are two types of incidents for task listeners:
 
 User task listeners have the following limitations:
 
-- **Limited events support**: Currently, only `assigning` and `completing` events are supported.
+- **Limited events support**: Currently, only `assigning`, `updating`, and `completing` events are supported.
 - **No variable handling**: User task listener jobs cannot be completed if variables are provided.
 - **No BPMN error throwing**: Throwing BPMN errors from user task listener jobs is not supported.
 

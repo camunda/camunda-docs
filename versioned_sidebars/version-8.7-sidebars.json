@@ -26,7 +26,8 @@
         "guides/setup-client-connection-credentials",
         "guides/configuring-out-of-the-box-connectors",
         "guides/use-connectors-in-hybrid-mode",
-        "guides/host-custom-connectors"
+        "guides/host-custom-connectors",
+        "guides/document-handling"
       ],
       "Improve": [
         "guides/improve-processes-with-optimize",
@@ -266,7 +267,6 @@
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources"
               ]
             },
@@ -450,7 +450,6 @@
                 "components/modeler/reference/modeling-guidance/rules/error-reference",
                 "components/modeler/reference/modeling-guidance/rules/escalation-reference",
                 "components/modeler/reference/modeling-guidance/rules/feel",
-                "components/modeler/reference/modeling-guidance/rules/history-time-to-live",
                 "components/modeler/reference/modeling-guidance/rules/message-reference"
               ]
             }
@@ -1966,7 +1965,13 @@
         "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges"
+        "self-managed/concepts/opensearch-privileges",
+        {
+          "Document handling": [
+            "self-managed/concepts/document-handling/getting-started",
+            "self-managed/concepts/document-handling/document-storage-configuration"
+          ]
+        }
       ]
     },
     {

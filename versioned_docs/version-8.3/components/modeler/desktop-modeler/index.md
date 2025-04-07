@@ -23,6 +23,8 @@ Desktop Modeler is a desktop application for modeling BPMN, DMN, and Forms and s
 
 Download the app for Windows, Linux, or macOS from the [Camunda downloads page](https://camunda.com/download/modeler/).
 
+> On Windows and Linux you can carry out [additional steps](./install-the-modeler#wire-file-associations) to register Modeler as the default editor for BPMN, DMN, and Form files.
+
 ## Get started
 
 Learn how to [develop your first process](./model-your-first-diagram.md) and [deploy it](./connect-to-camunda-8.md) to Camunda 8.
