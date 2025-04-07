@@ -8,6 +8,7 @@ description: "Use the Camunda 8 Run single application script to set up a local 
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
 Camunda 8 Run is not supported for production use.
@@ -37,7 +38,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.6.12) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running `./start.sh` (or `.\c8run.exe start` on Windows) in your terminal.
 

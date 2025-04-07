@@ -108,7 +108,7 @@ As a result, the app will only allow users to model BPMN diagrams.
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-To disable the [history time to live hint](../../reference/modeling-guidance/rules/history-time-to-live.md) in scenarios where the engine configures HTTL, configure `flags.json`:
+To disable the [history time to live](https://docs.camunda.org/manual/latest/modeler/history-time-to-live/) hint in scenarios where the engine configures HTTL, configure `flags.json`:
 
 ```js
 {
@@ -120,7 +120,7 @@ To disable the [history time to live hint](../../reference/modeling-guidance/rul
 
 <span class="badge badge--platform">Camunda 7 only</span>
 
-To set a default [history time to live](../../reference/modeling-guidance/rules/history-time-to-live.md) value to be used in newly created models, configure `flags.json`:
+To set a default [history time to live](https://docs.camunda.org/manual/latest/modeler/history-time-to-live/) value to be used in newly created models, configure `flags.json`:
 
 ```js
 {
