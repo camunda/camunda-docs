@@ -170,5 +170,5 @@ This allows you to extract specific data from a high volume of documents using a
 
 Learn more about this in the IDP documentation:
 
-<DocCardList items={[{type:"link", href:"/docs/8.7/components/modeler/web-modeler/idp/idp-example/", label: "IDP integration", docId:"components/modeler/web-modeler/idp/idp-example"}
+<DocCardList items={[{type:"link", href:"/docs/components/modeler/web-modeler/idp/idp-example/", label: "IDP integration", docId:"components/modeler/web-modeler/idp/idp-example"}
 ]}/>

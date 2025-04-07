@@ -15,7 +15,6 @@ import IdpTableDataImg from './img/idp-table-data.png';
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
 
-
 Technical reference information for IDP, including technical architecture, supported documents, and known limitations.
 
 ## Technical architecture {#architecture}
