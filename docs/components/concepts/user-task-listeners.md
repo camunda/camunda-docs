@@ -42,18 +42,18 @@ Currently, user task listeners support the following events:
 
 The events can be triggered in the following ways.
 
-| Event        | Triggered                                                                                                                                                                   |
-| :----------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `assigning`  | When the [assign user task API](../../../apis-tools/camunda-api-rest/specifications/assign-user-task/) is called.                                                           |
-| -            | When activating a user task that [specifies an `assignee`](../../modeler/bpmn/user-tasks/#assignments) in the process.                                                      |
-| -            | When a user task is assigned using the [Tasklist interface](../../tasklist/userguide/managing-tasks/#assign-tasks).                                                         |
-| `updating`   | When the [update user task API](../../../apis-tools/camunda-api-rest/specifications/update-user-task/) is called.                                                           |
-| -            | When the [update element instance variables API](../../../apis-tools/camunda-api-rest/specifications/create-element-instance-variables/) is called on a user task instance. |
-| -            | When the [set variables RPC](../../../apis-tools/zeebe-api/gateway-service/#setvariables-rpc) is called on a user task instance.                                            |
-| -            | When variables are set using the [Tasklist interface](../../tasklist/userguide/managing-tasks/#add-and-update-variables).                                                   |
-| -            | When variables are set at a user task scope using the [Operate interface](../../operate/userguide/resolve-incidents-update-variables/).                                     |
-| `completing` | When a user task is completed using the [Tasklist interface](../../tasklist/userguide/managing-tasks/#complete-a-task).                                                     |
-| -            | When the [complete user task API](../../../apis-tools/camunda-api-rest/specifications/complete-user-task/) is called.                                                       |
+| Event        | Triggered                                                                                                                                                                  |
+| :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `assigning`  | When the [assign user task API](/apis-tools/camunda-api-rest/specifications/assign-user-task.api.mdx) is called.                                                           |
+| -            | When activating a user task that [specifies an `assignee`](/components/modeler/bpmn/user-tasks/user-tasks.md#assignments) in the process.                                  |
+| -            | When a user task is assigned using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md).                                                             |
+| `updating`   | When the [update user task API](/apis-tools/camunda-api-rest/specifications/update-user-task.api.mdx) is called.                                                           |
+| -            | When the [update element instance variables API](/apis-tools/camunda-api-rest/specifications/create-element-instance-variables.api.mdx) is called on a user task instance. |
+| -            | When the [set variables RPC](/apis-tools/zeebe-api/gateway-service.md#setvariables-rpc) is called on a user task instance.                                                 |
+| -            | When variables are set using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md).                                                                   |
+| -            | When variables are set at a user task scope using the [Operate interface](/docs/components/operate/userguide/resolve-incidents-update-variables.md).                       |
+| `completing` | When a user task is completed using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md).                                                            |
+| -            | When the [complete user task API](/docs/apis-tools/camunda-api-rest/specifications/complete-user-task.api.mdx) is called.                                                  |
 
 ### User task listener properties
 
