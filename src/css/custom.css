@@ -1023,3 +1023,16 @@ ul ol {
   padding-left: 10px;
   margin-bottom: 25px;
 }
+
+/* Green tick list and orange cross in tables */
+.theme-doc-markdown table img.table-tick,
+.theme-doc-markdown table img.table-cross,
+.theme-doc-markdown img.table-tick,
+.theme-doc-markdown img.table-cross {
+  width: 15px;
+  border: none;
+  padding: 0;
+  margin: 0;
+  margin-right: 7px;
+  background-color: transparent;
+}
