@@ -6,7 +6,9 @@ description: A process application is a type of folder that contains a set of re
 
 import ProcessApplicationImg from './assets/process-applications/diagram-process-application-get-started.png'
 
-A process application is a type of folder that contains a set of related files you can work on and deploy as a single bundle. This reduces the risk of a broken deployment at runtime, and makes it easier to deploy related files.
+Solutions built with Camunda typically have a main BPMN process that represents the end-to-end use case, and additional resources the main process depends on, such as called supporting processes, DMN decisions, or forms.
+
+Bundled together, versioned together, and deployed together, these resources constitute a _process application_.
 
 <p><img src={ProcessApplicationImg} alt="Process application" /></p>
 
@@ -17,8 +19,14 @@ For instance, a consumer loan approval process application might bundle:
 - Forms (e.g., loan-application-review.form) for user interactions.
 
 :::tip
-We recommend you use a process application for all your non-trivial automation projects. These projects tend to have one main BPMN process that represents your end-to-end use case, and additional files that the main process depends on, such as called supporting processes, DMN decisions, or forms.
+We recommend you use a process application for all your non-trivial automation projects.
 :::
+
+Our [Modeler](../modeler/about-modeler.md) applications support you as you develop a process applications by different means:
+
+- advanced editor support with contextual assistance
+- versioning and review features
+- deployment of process application files as a unit
 
 ## Next steps
 

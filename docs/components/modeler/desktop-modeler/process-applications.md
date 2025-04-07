@@ -1,13 +1,14 @@
 ---
 id: process-applications
-title: Process applications in Desktop Modeler
+title: Process applications
 description: In Desktop Modeler a process application is a folder that contains a .process-application file and a set of related files you can work on and deploy as a single bundle.
 ---
 
-import GroupingImg from './process-applications/img/grouping.png'
-import OverlayImg from './process-applications/img/overlay.png'
+import GroupingImg from './img/process-applications/grouping.png'
+import LinkResourcesImg from './img/process-applications/link-resources.png'
+import OverlayImg from './img/process-applications/overlay.png'
 
-In Desktop Modeler a [process application](../../concepts/process-applications.md) is a folder that contains a `.process-application` file and a set of Camunda 8 assets that you work on and deploy as a single bundle. Typically, a process application also contains additional assets like job worker implementations.
+Desktop modeler recognizes [process application](../../concepts/process-applications.md) you build and offers you advanced editor intelligence, deployment and execution features within the context of such an application. To identify the boundaries of a process application, Desktop Modeler searches for a `.process-application` file in the root of your project.
 
 For instance, a consumer loan approval process application might contain:
 
@@ -49,7 +50,23 @@ When files of more than one process application are opened they are grouped visu
 
 <p><img src={GroupingImg} alt="Process application file grouping" /></p>
 
-## Features
+## Creating a process application
 
-- creating a process application [Learn more](./process-applications/create-process-application.md)
-- linking resources in a process application [Learn more](./process-applications/link-resources.md)
+To create a process application
+
+1. Click **File > New Process Application...**
+2. Choose a folder
+3. Click **Select folder**
+
+A `.process-application` file will be created in the selected folder. Any file within the folder or its subfolders will be treated as part of the process application.
+
+## Linking resources
+
+Any file within the a process application can be linked as a resource. Linking a resouce can be achieved in a couple of different ways:
+
+1. By using the append feature
+2. By using the replace feature
+3. By using the create feature
+4. Manually by setting the process, decision or form ID in the properties panel
+
+<p><img src={LinkResourcesImg} alt="Linking resources by using the replace feature" /></p>

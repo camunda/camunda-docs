@@ -1,6 +1,6 @@
 ---
 id: process-applications
-title: Process applications in Web Modeler
+title: Process applications
 description: In Web Modeler a process application is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
 ---
 

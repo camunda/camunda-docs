@@ -263,18 +263,7 @@ module.exports = {
             "components/modeler/desktop-modeler/model-your-first-diagram",
             "components/modeler/desktop-modeler/connect-to-camunda-8",
             "components/modeler/desktop-modeler/start-instance",
-            {
-              type: "category",
-              label: "Process applications",
-              link: {
-                type: "doc",
-                id: "components/modeler/desktop-modeler/process-applications",
-              },
-              items: [
-                "components/modeler/desktop-modeler/process-applications/create-process-application",
-                "components/modeler/desktop-modeler/process-applications/link-resources",
-              ],
-            },
+            "components/modeler/desktop-modeler/process-applications",
             "components/modeler/desktop-modeler/use-connectors",
             "components/modeler/desktop-modeler/variables",
             {
