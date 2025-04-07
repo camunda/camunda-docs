@@ -68,7 +68,7 @@ Following this tutorial and steps will result in:
 
 ### Obtain a copy of the reference architecture
 
-The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
+The first step is to download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-dual-region/). This material will be used throughout the rest of this documentation, the reference architecture is versioned using the same Camunda versions (`stable/8.x`).
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/migrate-dual-region-rosa/aws/openshift/rosa-hcp-dual-region/procedure/get-your-copy.sh
