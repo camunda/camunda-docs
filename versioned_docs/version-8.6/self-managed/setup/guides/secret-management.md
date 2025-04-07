@@ -1,7 +1,7 @@
 ---
 id: secret-management
 title: "Managing secrets in Helm charts"
-description: "This guide provides an overview for configuring and managing secrets when using the official Helm chart."
+description: "Provides an overview for configuring and managing secrets when using the official Helm chart."
 ---
 
 This guide provides an overview for configuring and managing secrets when using the official Helm chart.
