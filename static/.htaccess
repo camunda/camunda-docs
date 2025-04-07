@@ -180,6 +180,10 @@ RewriteRule ^docs/next/apis-tools/tasklist-api/(.*)$ /docs/next/apis-tools/camun
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
 
+# Move SAP docs into Camunda integrations
+RewriteRule ^docs/next/components/early-access/sap/?$ /docs/next/components/camunda-integrations/sap/$1 [R=301,L]
+RewriteRule ^docs/8.7/next/components/early-access/sap/?$ /docs/8.7/components/camunda-integrations/sap/$1 [R=301,L]
+
 # Reroute element templates and HTTL to C7 docs
 RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/element-templates/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/element-templates/ [R=301,L]
