@@ -118,6 +118,12 @@ Create and append tasks with resources available in the current project and proc
 
 <!--- https://github.com/camunda/product-hub/issues/2073 --->
 
+### Known bugs in the 8.7.0 release
+
+- **https://github.com/camunda/issues/issues/932**: When changing the element type of an inbound start event connector to blank start event type, then the inbound connector properties are not removed
+  - Affects: Web Modeler
+  - Work-around: Delete and re-create the BPMN element
+
 ## 8.7.0-alpha5
 
 | Release date  | Changelog(s)                                                                                                                                                                               | Blog                                                                               |
