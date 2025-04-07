@@ -21,13 +21,13 @@ These release notes identify the new features included in 8.7, including [alpha 
 
 ### Added dual-region reference architecture for OpenShift <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/setup/deploy/openshift/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/operational-guides/multi-region/dual-region-operational-procedure.md).
+We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/setup/deploy/openshift/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/operational-guides/multi-region/dual-region-ops.md).
 
 <!--- https://github.com/camunda/product-hub/issues/2501  --->
 
 ### Added dual-region ROSA HCP cluster with Terraform <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
+Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region.md). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
 <!--- https://github.com/camunda/product-hub/issues/2501  --->
 
