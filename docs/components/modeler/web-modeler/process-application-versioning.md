@@ -1,45 +1,41 @@
 ---
 id: process-application-versioning
 title: Process application versioning
-description: Process applications allow you to deploy multiple related files together in a single bundle.
+description: Process applications allow you to create distinct versions for the entire application.
 ---
 
 :::note
-With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related release note](/reference/announcements-release-notes/870/870-release-notes.md#web-modeler-milestones-renamed-to-versions).
+With 8.7, "milestone" was renamed to "version". To learn more about this change, see [the related release note](/reference/announcements-release-notes/870/870-release-notes.md#web-modeler-milestones-renamed-to-versions).
 :::
 
-Although you cannot version a process application itself, you can use [bulk version creation](versions.md#bulk-version-creation) and version tags to save a single snapshot of all the process application files in one action, instead of having to create separate versions for every file.
+Process applications support versioning, allowing you to create distinct versions for the entire application. You can use versioning to save a single snapshot of all the process application files in one action.
 
-- When you create a version in any process application file, a version is also created with the same name (version tag) for all files currently available in the process application.
+- When you create a process application version, the input version tag is applied to the `versionTag` field in the main process XML.
+- This helps you track a process application throughout its development lifecycle and ensures the correct version is referenced.
 
-- This allows you to track a process application through the development lifecycle and ensure the correct version is called.
+## Version creation
 
-## A worked example
+To create a process application version:
 
-In this example, you have a process application that contains multiple files as well as the main process.
+1. Open any file in a process application, click on the **Create version** button in the **Versions** dropdown menu.
+   ![Create a version menu](img/versions/web-modeler-version-process-application-versions-menu.png)
+2. Enter a **Version tag** in the version creation modal.
+   ![Create a version modal](img/versions/web-modeler-version-create-process-application-version.png)
+3. Select the **Create** button.
 
-- You create a new version for the main process and enter "1.2" as the version tag.
-- When you create this new version, a version is also created for every other file and named with the same "1.2" version tag.
-- All files in the process application now have a "1.2" version.
+When you open the versions page (use the **Show versions** button in the **Versions** dropdown menu), you can now use the file navigation header buttons to switch between files and view their content. See also [compare versions](/components/modeler/web-modeler/versions.md#compare-versions).
 
-![Diagram showing an example process application bulk version creation](img/process-applications/process-application-version-diagram.png)
+![Versions list with file navigation header buttons highlighted](img/versions/web-modeler-version-view-process-application-version.png)
 
-## Create a bulk version
+## Version actions
 
-To create a bulk version for a process application:
+You can perform the following actions on a process application version:
 
-1. Open any file in a process application and [create a version](versions.md#create-a-version).
-1. Enter a **Version tag**.
-1. Select **Create** to create the version for every file in the process application.
+1. Restore as latest, useful for reverting changes, making further edits, [git syncing](/components/modeler/web-modeler/git-sync.md), downloading, or using Play.
+2. Edit name
+3. Deploy, especially after the version has been [reviewed](/components/modeler/web-modeler/process-application-pipeline.md#review).
+4. Download
+5. Delete
+6. Copy, creates a new process application with the files from the version.
 
-![Create a version screen](img/versions/web-modeler-version-create-versioned-milestone-highlight.png)
-
-Now when you open the versions list for any file in the process application, you can use the file navigation header buttons to switch between files, and view their individual versions list. See [compare versions](/components/modeler/web-modeler/versions.md#compare-versions).
-
-![Versions list with file navigation header buttons highlighted](img/versions/web-modeler-version-compare-process-application-files-highlight.png)
-
-:::note
-
-When naming your version with a version tag, you cannot edit or delete the created versions.
-
-:::
+![Version actions](img/versions/web-modeler-version-actions.png)

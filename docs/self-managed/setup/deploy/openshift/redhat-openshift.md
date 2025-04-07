@@ -15,39 +15,13 @@ Deploying Camunda 8 on Red Hat OpenShift is supported using Helm, given the appr
 
 However, it's important to note that the [Security Context Constraints (SCCs)](#security-context-constraints-sccs) and [Routes](./redhat-openshift.md?current-ingress=openshift-routes#using-openshift-routes) configurations might require slight deviations from the guidelines provided in the [general Helm deployment guide](/self-managed/setup/install.md).
 
-## Cluster Specification
-
-When deploying Camunda 8 on an OpenShift cluster, the cluster specification should align with your specific requirements and workload characteristics. Here's a suggested configuration to begin with:
-
-- **Instance type:** 4 vCPUs (x86_64, >3.1 GHz), 16 GiB Memory (for example, [mi7.xlarge on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
-- **Number of dedicated nodes:** 4
-- **Volume type:** SSD volumes (with between 1000 and 3000 IOPS per volume, and a throughput of 1,000 MB/s per volume, for instance, [gp3 on AWS](https://aws.amazon.com/en/ebs/general-purpose/))
-
-If you need to set up an OpenShift cluster on a cloud provider, we recommend our [guide to deploying a ROSA cluster](/self-managed/setup/deploy/amazon/openshift/terraform-setup.md).
-
-### Supported Versions
-
-We conduct testing and ensure compatibility against the following OpenShift versions:
-
-| OpenShift Version |
-| ----------------- |
-| 4.18.x            |
-| 4.17.x            |
-| 4.16.x            |
-| 4.15.x            |
-| 4.14.x            |
-
-:::caution Versions compatibility
-
-Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full Support, and Maintenance Support life cycle phases. For more information, refer to the [Red Hat OpenShift Container Platform Life Cycle Policy](https://access.redhat.com/support/policy/updates/openshift).
-
-:::
+Additional informational and high-level overview based on Kubernetes as upstream project is available on our [Kubernetes deployment reference](/self-managed/reference-architecture/kubernetes.md).
 
 ## Requirements
 
-- [Helm (3.16+)](https://helm.sh/docs/intro/install/)
-- [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
-- [jq (1.7+)](https://jqlang.github.io/jq/download/) to interact with some variables.
+- [Helm](https://helm.sh/docs/intro/install/)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
 - [oc (version supported by your OpenShift)](https://docs.openshift.com/container-platform/4.17/cli_reference/openshift_cli/getting-started-cli.html) to interact with OpenShift.
 - [AWS Quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
@@ -55,6 +29,8 @@ Camunda 8 supports OpenShift versions in the Red Hat General Availability, Full 
   - Verify quotas for **VPCs, EC2 instances, and storage**.
   - Request increases if needed via the AWS console ([guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)), costs are only for resources used.
 - A namespace to host the Camunda Platform, in this guide we will reference `camunda` as the target namespace.
+
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ## Deploy Camunda 8 via Helm charts
 

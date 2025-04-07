@@ -488,31 +488,3 @@ filters:
   jarPath: null
   className: null
 ```
-
-### zeebe.gateway.multiTenancy
-
-Multi-tenancy in Zeebe can be configured with the following configuration properties.
-Multi-tenancy is disabled by default.
-Read more [in the multi-tenancy documentation](../../../self-managed/concepts/multi-tenancy.md).
-
-:::note
-For now, multi-tenancy is only supported in combination with Identity.
-To use multi-tenancy, you must set [`authentication.mode`](#zeebegatewayclustersecurityauthentication) to `'identity'` and specify the
-`camunda.identity.baseUrl` property or the [corresponding Camunda Identity environment variable](../../identity/deployment/configuration-variables.md#core-configuration)
-as well.
-:::
-
-:::note
-If you are using an embedded gateway, refer to the [broker configuration guide](./broker.md#multitenancy-configuration).
-:::
-
-| Field   | Description                                                                                                                                     | Example value |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | Enables multi-tenancy for the cluster. This setting can also be overridden using the environment variable `ZEEBE_GATEWAY_MULTITENANCY_ENABLED`. | true          |
-
-#### YAML snippet
-
-```yaml
-multiTenancy:
-  enabled: true
-```

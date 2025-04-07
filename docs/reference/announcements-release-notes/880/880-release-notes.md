@@ -73,38 +73,6 @@ Resource-level permissions are introduced to control read and write permissions 
 Learn more about these updates in Introducing Enhanced Identity Management in Camunda 8.8.
 ::: -->
 
-### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-A new Camunda Exporter brings the importer and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). The index schema is also being harmonized.
-
-The exporter can consume Zeebe records (mostly events created by the engine), aggregate data, and store the related data into shared and harmonized indices.
-
-- Data is archived in the background, coupled to the exporter but without blocking the exporter's progress.
-- Indices can be located in either Elasticsearch (ES) or OpenSearch (OS). Our web components (Tasklist and Operate) then use the new harmonized indices to show data to the user.
-
-The following diagram shows a simplified version of this work.
-
-![Camunda Exporter diagram](../../img/target-camunda-exporter.png)
-
-- For example, Tasklist and Operate Importers are still required for old data to be imported, but the Camunda exporter writes all new data into ES/OS. After old indices are drained, importers can be turned off.
-- The archiver, which takes care of the archiving of completed process instances, will be moved into the Zeebe system as well, to reduce the installation complexity and provide a better scaling and replication factor (based on partitions).
-- This helps achieve a streamlined architecture, and improves platform performance and stability (especially regarding ES/OS).
-- A new separate component covers the migration, which will be part of the single application but can also deployed separately. It will adjust the previous Operate indices to make them more harmonized and usable by Tasklist.
-
-#### Harmonized index schema
-
-Camunda is harmonizing our index structure and usage.
-
-- This removes unnecessary duplications over multiple indices due to the previous architecture.
-- With this change, several Operate indices can and will be used by Tasklist.
-- New indices have been created to integrate Identity into the system.
-
-![Harmonized indices schema](../../img/harmonized-indices-schema.png)
-
-<!-- :::info
-Learn more about these updates in Streamlined Deployment with 8.7.
-::: -->
-
 ## 8.8.0-alpha1
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog                                                                                  |
@@ -133,7 +101,7 @@ To learn more about this feature, see [user task listeners](/components/concepts
 
 You can now use a single Query API in the Camunda 8 REST API to find process and decision data instead of using multiple component APIs.
 
-For example, send a request to the [Query decision definitions](/apis-tools/camunda-api-rest/specifications/find-decision-definitions.api.mdx) endpoint to search for decision definitions.
+For example, send a request to the [Search decision definitions](/apis-tools/camunda-api-rest/specifications/search-decision-definitions.api.mdx) endpoint to search for decision definitions.
 
 New Query API endpoints are added as follows:
 

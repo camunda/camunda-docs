@@ -8,6 +8,7 @@ description: "Use the Camunda 8 Run single application script to set up a local 
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
 Camunda 8 Run is not supported for production use.
@@ -39,18 +40,16 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 ## Install and start Camunda 8 Run
 
-1. Download the [latest release of Camunda 8 Run](https://github.com/camunda/camunda/releases/tag/8.7.0-alpha5) for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
+1. Download the latest release of <C8Run/> for your operating system and architecture. Opening the .tgz file extracts the Camunda 8 Run script into a new directory.
 2. Navigate to the new `c8run` directory.
 3. Start Camunda 8 Run by running one of the following in your terminal:
-   - `./start.sh`: start Camunda 8 Run as a Java application.
-   - `./start.sh --docker`: start Camunda 8 Run via Docker Compose.
+   - `./start.sh` (or `.\c8run.exe start` on Windows): start Camunda 8 Run as a Java application.
+   - `./start.sh --docker` (or `.\c8run.exe start -docker` on Windows): start Camunda 8 Run via Docker Compose.
 
 When successful, a new Operate window automatically opens.
 
 :::note
 If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-run) to end the current processes, then run the start script again.
-
-Mac users may encounter the warning `"c8run" Not Opened`. Follow the Apple support instructions to [grant an exception](https://support.apple.com/en-us/102445).
 :::
 
 ### Configuration options
@@ -163,6 +162,22 @@ curl --cookie  cookie.txt  localhost:8080/v2/topology
 
 </TabItem>
 </Tabs>
+
+#### Use Camunda APIs with the Java client
+
+[The Java client](/apis-tools/java-client/index.md) does not support cookie-based authentication. To access Camunda APIs in a Camunda 8 Run environment with the Java client, you'll need to:
+
+- Manually retrieve a cookie through Java HTTP functionality or cURL, as described above.
+- Manually include the cookie as a custom header in Java client requests:
+
+```java
+zeebeClient
+  .withChainHandlers(
+      (request, producer, scope, chain, callback) -> {
+        request.setHeader("Cookie", "OPERATE-SESSION=<session ID extracted from previous call>");
+        chain.proceed(request, producer, scope, callback);
+      })
+```
 
 ## Shut down Camunda 8 Run
 

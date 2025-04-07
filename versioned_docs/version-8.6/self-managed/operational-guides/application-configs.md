@@ -217,7 +217,7 @@ Then, take the contents under `application.yml` and put it under the `operate.co
 - [Console](/self-managed/console-deployment/configuration.md)
 - [Connectors](docs/self-managed/connectors-deployment/connectors-configuration.md)
 - [Identity](docs/self-managed/identity/deployment/configuration-variables.md)
-- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration)
+- [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md)
 
 ## Limitations
 
