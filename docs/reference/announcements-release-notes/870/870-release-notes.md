@@ -47,8 +47,6 @@ Develop reusable assets in a pro-code environment, push them to your version con
 
 Camunda now offers a robust SAP integration featuring an OData Connector for seamless API interactions, an RFC connector for BAPI/function module access, and a dedicated plugin enabling SAP BTP services within BPMN workflows. This solution ensures compliance with IT governance standards using SAP BTP (Business Technology Platform) and the SAP Cloud Connector for enterprise-grade reliability.
 
-To learn more about this feature, see [Camunda SAP Integration](/components/camunda-integrations/sap/camunda-sap-integration.md).
-
 <!--- https://github.com/camunda/product-hub/issues/2415 https://github.com/camunda/product-hub/issues/2649 https://github.com/camunda/product-hub/issues/2650 https://github.com/camunda/product-hub/issues/2578 --->
 
 ### Cluster connector management in Console <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#manage-connectors}
