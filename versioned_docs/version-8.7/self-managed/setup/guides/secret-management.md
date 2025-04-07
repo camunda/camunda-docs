@@ -1,6 +1,6 @@
 ---
 id: secret-management
-title: "Managing Secrets in Helm charts"
+title: "Managing secrets in Helm charts"
 description: "A comprehensive guide on configuring and managing secrets in Camunda 8, including Keycloak, OAuth client secrets, and first-user authentication."
 ---
 
