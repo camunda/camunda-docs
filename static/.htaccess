@@ -91,6 +91,7 @@ RewriteRule ^blog/ / [R=301,L]
 RewriteRule ^docs/guides/migrating-from-Camunda-Platform/?(.*)$ /docs/guides/migrating-from-camunda-7/$1 [R=301,L]
 RewriteRule ^docs/reference/bpmn-processes/?(.*)$ /docs/components/modeler/bpmn/$1 [R=301,L]
 RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/$1 [R=301,L]
+RewriteRule ^docs/next/components/modeler/reference/modeling-guidance/rules/history-time-to-live/?$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
 
 # URLs that need to be preserved for connector element templates, in perpetuity.
 RewriteRule ^docs/?$ / [R=301,L]
