@@ -217,7 +217,6 @@
                 "components/modeler/desktop-modeler/element-templates/configuring-templates",
                 "components/modeler/desktop-modeler/element-templates/using-templates",
                 "components/modeler/desktop-modeler/element-templates/defining-templates",
-                "components/modeler/desktop-modeler/element-templates/c7-defining-templates",
                 "components/modeler/desktop-modeler/element-templates/additional-resources"
               ]
             },
@@ -398,7 +397,6 @@
                 "components/modeler/reference/modeling-guidance/rules/error-reference",
                 "components/modeler/reference/modeling-guidance/rules/escalation-reference",
                 "components/modeler/reference/modeling-guidance/rules/feel",
-                "components/modeler/reference/modeling-guidance/rules/history-time-to-live",
                 "components/modeler/reference/modeling-guidance/rules/message-reference"
               ]
             }
@@ -481,7 +479,8 @@
           "Building custom Connectors": [
             "components/connectors/custom-built-connectors/connector-sdk",
             "components/connectors/custom-built-connectors/connector-templates",
-            "components/connectors/custom-built-connectors/connector-template-generator"
+            "components/connectors/custom-built-connectors/connector-template-generator",
+            "components/connectors/custom-built-connectors/create-connector-from-rest"
           ]
         }
       ],
@@ -533,209 +532,69 @@
         }
       ],
       "Optimize": [
-        {
-          "type": "link",
-          "label": "What is Optimize?",
-          "href": "/optimize/components/what-is-optimize/"
-        },
+        "components/optimize/what-is-optimize",
         {
           "User guide": [
-            {
-              "type": "link",
-              "label": "Collections, dashboards, and reports",
-              "href": "/optimize/components/userguide/collections-dashboards-reports/"
-            },
-            {
-              "type": "link",
-              "label": "User permissions",
-              "href": "/optimize/components/userguide/user-permissions/"
-            },
-            {
-              "type": "link",
-              "label": "Data sources",
-              "href": "/optimize/components/userguide/data-sources/"
-            },
+            "components/optimize/userguide/collections-dashboards-reports",
+            "components/optimize/userguide/user-permissions",
+            "components/optimize/userguide/data-sources",
             {
               "Dashboards": [
-                {
-                  "type": "link",
-                  "label": "Creating dashboards",
-                  "href": "/optimize/components/userguide/creating-dashboards/"
-                },
-                {
-                  "type": "link",
-                  "label": "Edit mode",
-                  "href": "/optimize/components/userguide/edit-mode/"
-                },
-                {
-                  "type": "link",
-                  "label": "View mode",
-                  "href": "/optimize/components/userguide/view-mode/"
-                }
+                "components/optimize/userguide/creating-dashboards",
+                "components/optimize/userguide/edit-mode",
+                "components/optimize/userguide/view-mode"
               ]
             },
             {
               "Dashboards maintained by Camunda": [
-                {
-                  "type": "link",
-                  "label": "Process dashboards",
-                  "href": "/optimize/components/userguide/process-dashboards/"
-                },
-                {
-                  "type": "link",
-                  "label": "Instant process dashboards",
-                  "href": "/optimize/components/userguide/instant-process-dashboards/"
-                }
+                "components/optimize/userguide/process-dashboards",
+                "components/optimize/userguide/instant-process-dashboards"
               ]
             },
-            {
-              "type": "link",
-              "label": "Creating reports",
-              "href": "/optimize/components/userguide/creating-reports/"
-            },
-            {
-              "type": "link",
-              "label": "Process KPIs",
-              "href": "/optimize/components/userguide/process-KPIs/"
-            },
+            "components/optimize/userguide/creating-reports",
+            "components/optimize/userguide/process-KPIs",
             {
               "Process analysis": [
-                {
-                  "type": "link",
-                  "label": "Overview",
-                  "href": "/optimize/components/userguide/process-analysis/process-analysis-overview/"
-                },
-                {
-                  "type": "link",
-                  "label": "Task analysis",
-                  "href": "/optimize/components/userguide/process-analysis/task-analysis/"
-                },
-                {
-                  "type": "link",
-                  "label": "Branch analysis",
-                  "href": "/optimize/components/userguide/process-analysis/branch-analysis/"
-                },
-                {
-                  "type": "link",
-                  "label": "User task analytics",
-                  "href": "/optimize/components/userguide/process-analysis/user-task-analytics/"
-                },
+                "components/optimize/userguide/process-analysis/process-analysis-overview",
+                "components/optimize/userguide/process-analysis/task-analysis",
+                "components/optimize/userguide/process-analysis/branch-analysis",
+                "components/optimize/userguide/process-analysis/user-task-analytics",
                 {
                   "Report analysis": [
-                    {
-                      "type": "link",
-                      "label": "Report process analysis",
-                      "href": "/optimize/components/userguide/process-analysis/report-analysis/overview/"
-                    },
+                    "components/optimize/userguide/process-analysis/report-analysis/overview",
                     {
                       "Edit mode": [
-                        {
-                          "type": "link",
-                          "label": "Overview",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/edit-mode/"
-                        },
-                        {
-                          "type": "link",
-                          "label": "Select process definitions",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/select-process-definitions/"
-                        },
-                        {
-                          "type": "link",
-                          "label": "Define reports",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/define-reports/"
-                        },
-                        {
-                          "type": "link",
-                          "label": "Measures",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/measures/"
-                        },
-                        {
-                          "type": "link",
-                          "label": "Compare target values",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/compare-target-values/"
-                        },
-                        {
-                          "type": "link",
-                          "label": "Process instance parts",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/process-instance-parts/"
-                        },
-                        {
-                          "type": "link",
-                          "label": "Configure reports",
-                          "href": "/optimize/components/userguide/process-analysis/report-analysis/configure-reports/"
-                        }
+                        "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                        "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
+                        "components/optimize/userguide/process-analysis/report-analysis/define-reports",
+                        "components/optimize/userguide/process-analysis/report-analysis/measures",
+                        "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
+                        "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
+                        "components/optimize/userguide/process-analysis/report-analysis/configure-reports"
                       ]
                     },
-                    {
-                      "type": "link",
-                      "label": "View mode",
-                      "href": "/optimize/components/userguide/process-analysis/report-analysis/view-mode/"
-                    }
+                    "components/optimize/userguide/process-analysis/report-analysis/view-mode"
                   ]
                 },
                 {
                   "Filters": [
-                    {
-                      "type": "link",
-                      "label": "Overview",
-                      "href": "/optimize/components/userguide/process-analysis/filters/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Metadata filters",
-                      "href": "/optimize/components/userguide/process-analysis/metadata-filters/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Instance state filters",
-                      "href": "/optimize/components/userguide/process-analysis/instance-state-filters/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Flow node filters",
-                      "href": "/optimize/components/userguide/process-analysis/flow-node-filters/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Process instance filters",
-                      "href": "/optimize/components/userguide/process-analysis/process-instance-filters/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Variable filters",
-                      "href": "/optimize/components/userguide/process-analysis/variable-filters/"
-                    }
+                    "components/optimize/userguide/process-analysis/filters",
+                    "components/optimize/userguide/process-analysis/metadata-filters",
+                    "components/optimize/userguide/process-analysis/instance-state-filters",
+                    "components/optimize/userguide/process-analysis/flow-node-filters",
+                    "components/optimize/userguide/process-analysis/process-instance-filters",
+                    "components/optimize/userguide/process-analysis/variable-filters"
                   ]
                 }
               ]
             },
             {
               "Additional features": [
-                {
-                  "type": "link",
-                  "label": "Alerts",
-                  "href": "/optimize/components/userguide/additional-features/alerts/"
-                },
-                {
-                  "type": "link",
-                  "label": "Export and import",
-                  "href": "/optimize/components/userguide/additional-features/export-import/"
-                },
-                {
-                  "type": "link",
-                  "label": "Variable labeling",
-                  "href": "/optimize/components/userguide/additional-features/variable-labeling/"
-                },
-                {
-                  "type": "link",
-                  "label": "Process variants comparison",
-                  "href": "/optimize/components/userguide/additional-features/process-variants-comparison/"
-                },
-                {
-                  "type": "link",
-                  "label": "Machine learning-ready data set",
-                  "href": "/optimize/components/userguide/additional-features/ml-dataset/"
-                }
+                "components/optimize/userguide/additional-features/alerts",
+                "components/optimize/userguide/additional-features/export-import",
+                "components/optimize/userguide/additional-features/variable-labeling",
+                "components/optimize/userguide/additional-features/process-variants-comparison",
+                "components/optimize/userguide/additional-features/ml-dataset"
               ]
             }
           ]
@@ -894,8 +753,8 @@
                     },
                     {
                       "type": "doc",
-                      "id": "apis-tools/camunda-api-rest/specifications/report-error-for-job",
-                      "label": "Report error for job",
+                      "id": "apis-tools/camunda-api-rest/specifications/throw-job-error",
+                      "label": "Throw error for job",
                       "className": "api-method post"
                     },
                     {
@@ -1172,7 +1031,7 @@
                       "type": "doc",
                       "id": "apis-tools/camunda-api-rest/specifications/update-element-instance-variables",
                       "label": "Update element instance variables",
-                      "className": "api-method post"
+                      "className": "api-method put"
                     }
                   ]
                 },
@@ -1383,98 +1242,34 @@
         },
         {
           "Optimize API (REST)": [
-            {
-              "type": "link",
-              "label": "Overview",
-              "href": "/optimize/apis-tools/optimize-api/overview/"
-            },
-            {
-              "type": "link",
-              "label": "Authentication",
-              "href": "/optimize/apis-tools/optimize-api/optimize-api-authentication/"
-            },
-            {
-              "type": "link",
-              "label": "Tutorial",
-              "href": "/optimize/apis-tools/optimize-api/optimize-api-tutorial/"
-            },
+            "apis-tools/optimize-api/overview",
+            "apis-tools/optimize-api/optimize-api-authentication",
+            "apis-tools/optimize-api/optimize-api-tutorial",
             {
               "Configuration": [
-                {
-                  "type": "link",
-                  "label": "Enable sharing",
-                  "href": "/optimize/apis-tools/optimize-api/configuration/enable-sharing/"
-                },
-                {
-                  "type": "link",
-                  "label": "Disable sharing",
-                  "href": "/optimize/apis-tools/optimize-api/configuration/disable-sharing/"
-                }
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing"
               ]
             },
             {
               "Dashboard": [
-                {
-                  "type": "link",
-                  "label": "Get dashboard IDs",
-                  "href": "/optimize/apis-tools/optimize-api/dashboard/get-dashboard-ids/"
-                },
-                {
-                  "type": "link",
-                  "label": "Delete dashboards",
-                  "href": "/optimize/apis-tools/optimize-api/dashboard/delete-dashboard/"
-                },
-                {
-                  "type": "link",
-                  "label": "Export dashboard definitions",
-                  "href": "/optimize/apis-tools/optimize-api/dashboard/export-dashboard-definitions/"
-                }
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
               ]
             },
             {
               "Report": [
-                {
-                  "type": "link",
-                  "label": "Get report IDs",
-                  "href": "/optimize/apis-tools/optimize-api/report/get-report-ids/"
-                },
-                {
-                  "type": "link",
-                  "label": "Delete reports",
-                  "href": "/optimize/apis-tools/optimize-api/report/delete-report/"
-                },
-                {
-                  "type": "link",
-                  "label": "Export report definitions",
-                  "href": "/optimize/apis-tools/optimize-api/report/export-report-definitions/"
-                },
-                {
-                  "type": "link",
-                  "label": "Export report result data",
-                  "href": "/optimize/apis-tools/optimize-api/report/get-data-export/"
-                }
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export"
               ]
             },
-            {
-              "type": "link",
-              "label": "External variable ingestion",
-              "href": "/optimize/apis-tools/optimize-api/external-variable-ingestion/"
-            },
-            {
-              "type": "link",
-              "label": "Health readiness",
-              "href": "/optimize/apis-tools/optimize-api/health-readiness/"
-            },
-            {
-              "type": "link",
-              "label": "Import entities",
-              "href": "/optimize/apis-tools/optimize-api/import-entities/"
-            },
-            {
-              "type": "link",
-              "label": "Variable labeling",
-              "href": "/optimize/apis-tools/optimize-api/variable-labeling/"
-            }
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling"
           ]
         },
         {
@@ -1867,6 +1662,7 @@
             "self-managed/setup/guides/add-extra-manifests",
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
+            "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example"
           ]
@@ -2052,121 +1848,36 @@
             "self-managed/connectors-deployment/connectors-configuration"
           ],
           "Optimize": [
-            {
-              "type": "link",
-              "label": "Installation",
-              "href": "/optimize/self-managed/optimize-deployment/install-and-start/"
-            },
+            "self-managed/optimize-deployment/install-and-start",
             {
               "Configuration": [
-                {
-                  "type": "link",
-                  "label": "Getting started",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/getting-started/"
-                },
+                "self-managed/optimize-deployment/configuration/getting-started",
                 {
                   "System configuration": [
-                    {
-                      "type": "link",
-                      "label": "Overview",
-                      "href": "/optimize/self-managed/optimize-deployment/configuration/system-configuration/"
-                    },
-                    {
-                      "type": "link",
-                      "label": "Camunda 8 system configuration",
-                      "href": "/optimize/self-managed/optimize-deployment/configuration/system-configuration-platform-8/"
-                    }
+                    "self-managed/optimize-deployment/configuration/system-configuration",
+                    "self-managed/optimize-deployment/configuration/system-configuration-platform-8"
                   ]
                 },
-                {
-                  "type": "link",
-                  "label": "Logging",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/logging/"
-                },
-                {
-                  "type": "link",
-                  "label": "Security instructions",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/security-instructions/"
-                },
-                {
-                  "type": "link",
-                  "label": "Shared Elasticsearch/OpenSearch cluster",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster/"
-                },
-                {
-                  "type": "link",
-                  "label": "History cleanup",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/history-cleanup/"
-                },
-                {
-                  "type": "link",
-                  "label": "Localization",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/localization/"
-                },
-                {
-                  "type": "link",
-                  "label": "Object and list variable support",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/object-variables/"
-                },
-                {
-                  "type": "link",
-                  "label": "Multi-tenancy",
-                  "href": "/optimize/self-managed/optimize-deployment/configuration/multi-tenancy/"
-                }
+                "self-managed/optimize-deployment/configuration/logging",
+                "self-managed/optimize-deployment/configuration/security-instructions",
+                "self-managed/optimize-deployment/configuration/shared-elasticsearch-cluster",
+                "self-managed/optimize-deployment/configuration/history-cleanup",
+                "self-managed/optimize-deployment/configuration/localization",
+                "self-managed/optimize-deployment/configuration/object-variables",
+                "self-managed/optimize-deployment/configuration/multi-tenancy"
               ]
             },
             {
               "Migration & update": [
-                {
-                  "type": "link",
-                  "label": "Instructions",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/instructions/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update notes (8.5 to 8.6)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.5-to-8.6/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update notes (8.4 to 8.5)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.4-to-8.5/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update notes (8.4 to 8.4)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.4-to-8.4/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update notes (8.3 to 8.4)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/8.3-to-8.4/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update notes (3.10 to 8.3)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-8.3/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update notes (3.9.x to 3.10)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update notes (3.9-preview-x to 3.9.x)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update notes (3.8.x to 3.9.x-preview-1)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1/"
-                },
-                {
-                  "type": "link",
-                  "label": "Update notes (3.7.x to 3.8.x)",
-                  "href": "/optimize/self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8/"
-                }
+                "self-managed/optimize-deployment/migration-update/camunda-8/instructions",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.13_8.5-to-8.6",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.10-to-3.11_8.3",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-to-3.10",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.9-preview-1-to-3.9",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.8-to-3.9-preview-1",
+                "self-managed/optimize-deployment/migration-update/camunda-8/3.7-to-3.8"
               ]
             }
           ],
@@ -2185,14 +1896,14 @@
                 },
                 {
                   "Roles": [
-                    "self-managed/identity/user-guide/roles/add-assign-role",
-                    "self-managed/identity/user-guide/roles/add-assign-permission"
+                    "self-managed/identity/user-guide/roles/manage-roles",
+                    "self-managed/identity/user-guide/roles/manage-permissions"
                   ]
                 },
                 {
                   "Groups": [
-                    "self-managed/identity/user-guide/groups/create-group",
-                    "self-managed/identity/user-guide/groups/assign-users-roles-to-group"
+                    "self-managed/identity/user-guide/groups/manage-groups",
+                    "self-managed/identity/user-guide/groups/manage-users-roles-to-group"
                   ]
                 },
                 {

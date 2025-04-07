@@ -117,7 +117,7 @@ Read more in the [timers documentation](../bpmn/timer-events/timer-events.md).
 - Use [Operate](../../operate/operate-introduction.md) to help you diagnose any problems with the process.
 
 :::tip
-You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize]($optimize$/components/what-is-optimize).
+You can also define the success of your processes by setting key performance indicators (KPIs) for your process using [Optimize](/components/optimize/what-is-optimize.md).
 :::
 
 ## Publishing a process

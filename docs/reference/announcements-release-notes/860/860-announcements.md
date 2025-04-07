@@ -27,7 +27,7 @@ Review the following documentation for your components for more information on h
 - [Zeebe](/self-managed/zeebe-deployment/configuration/configuration.md#licensing)
 - [Operate](/self-managed/operate-deployment/operate-configuration.md#licensing)
 - [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#licensing)
-- [Optimize]($optimize$/self-managed/optimize-deployment/configuration/system-configuration-platform-8#licensing)
+- [Optimize](/self-managed/optimize-deployment/configuration/system-configuration-platform-8.md#licensing)
 - [Identity](/self-managed/identity/deployment/configuration-variables.md#license-configuration)
 - [Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#licensing)
 
@@ -159,3 +159,14 @@ We are introducing a new base path for both the Operate and Tasklist **web appli
 :::note
 **API URLs** for both Operate and Tasklist remain **unchanged**.
 :::
+
+### Zeebe, Operate, Tasklist, and Optimize released from single repository
+
+To harmonize and simplify, and also to prepare for the [streamlined Orchestration Cluster Architecture](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/), `Zeebe`, `Operate`, `Tasklist`, and `Optimize` are developed and released from a single repository going forward: https://github.com/camunda/camunda. This prepares for `Zeebe`, `Operate`, `Tasklist`, and a new, Orchestration Cluster level Identity forming the [Orchestration Cluster](/docs/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) application starting with Camunda 8.8.
+
+This change has the following implications:
+
+- Feature-focused release notes continue to be published in the [release notes](./860-release-notes.md).
+- Changelogs are linked from the [release notes](./860-release-notes.md). They are **not** consolidated in https://github.com/camunda/camunda-platform anymore, but can be directly found on https://github.com/camunda/camunda/releases.
+- **SaaS**: Generations in Camunda SaaS continue to be versionined using a `8.<minor>+gen<N>` schema, which is described in [`SaaS - Generation Names`](../../../reference/announcements-release-notes/release-policy.md#generation-names). This schema continues to be relevant because while `Zeebe`, `Operate`, and `Tasklist` must run on the exact same patch-version, the patch level of `Optimize` and `Connectors` might diverge (see the [related announcement](#zeebe-operate-and-tasklist-must-run-on-exact-same-minor-and-patch-levels)).
+- **Self-Managed**: The [Helm chart version matrix](../../supported-environments.md#helm-version-matrix) is used to map Helm chart versions to the respective supported Camunda application versions.

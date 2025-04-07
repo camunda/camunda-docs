@@ -457,6 +457,12 @@ The deployment experience is further simplified for Enterprise customers running
 - User tokens are used for deployments instead of machine-to-machine (M2M) tokens generated from a client ID and secret.
 - You no longer need to enter a client ID and secret in the deploy modal. Instead, simply choose a cluster (or stage for process applications) and deploy.
 
+:::note
+The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](/self-managed/setup/guides/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
+You still need to enter a client ID and secret in this case.
+Support is targeted for [Camunda 8.8](../870-announcements/#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed).
+:::
+
 ## 8.7.0-alpha1
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog                                                                                  |

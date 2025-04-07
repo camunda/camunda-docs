@@ -80,6 +80,10 @@ For details on typical volume type usage, refer to the following examples specif
 - [Microsoft AKS](../self-managed/platform-deployment/helm-kubernetes/platforms/microsoft-aks.md#volume-performance)
 - [Google GKE](../self-managed/platform-deployment/helm-kubernetes/platforms/google-gke.md#volume-performance)
 
+### Helm charts version matrix
+
+Camunda Helm chart version `9.x.x` works with Camunda version `8.4.x`. Check the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/camunda-8.4/) for more details.
+
 ## Component requirements
 
 Requirements for the components can be seen below:

@@ -273,8 +273,8 @@ The Connector Runtime uses the following environment variables to configure mult
 
 | Name                                       | Description                                                                                                                                                                              | Default value |
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| ZEEBE_CLIENT_DEFAULT-TENANT-ID             | The default tenant ID used to communicate with Zeebe. Changing this value will set a new default tenant ID used for fetching jobs and publishing messages.                               | `<default>`   |
-| ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS | The default tenant IDs (comma separated) used to activate jobs. To run the Connector Runtime in a setup where a single runtime serves multiple tenants, add each tenant ID to this list. | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_TENANT_ID             | The default tenant ID used to communicate with Zeebe. Changing this value will set a new default tenant ID used for fetching jobs and publishing messages.                               | `<default>`   |
+| ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS | The default tenant IDs (comma separated) used to activate jobs. To run the Connector Runtime in a setup where a single runtime serves multiple tenants, add each tenant ID to this list. | `<default>`   |
 
 If you are using an embedded version of the Connector Runtime, you can specify the tenant information in your Spring configuration like in this example `application.properties` file:
 
@@ -293,7 +293,7 @@ If you want to use outbound Connectors for a single tenant that is different
 from the default tenant, you can specify a different default tenant ID using:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-TENANT-ID=myTenant
+ZEEBE_CLIENT_DEFAULT_TENANT_ID=myTenant
 ```
 
 This will change the default tenant ID used for fetching jobs and publishing messages
@@ -308,10 +308,10 @@ To run the Connector Runtime in a setup where a single runtime
 serves multiple tenants, add each tenant ID to the list of the default job workers:
 
 ```bash
-ZEEBE_CLIENT_DEFAULT-JOB-WORKER-TENANT-IDS=`myTenant, otherTenant`
+ZEEBE_CLIENT_DEFAULT_JOB_WORKER_TENANT_IDS=`myTenant, otherTenant`
 ```
 
-In this case, the `ZEEBE_CLIENT_DEFAULT-TENANT-ID` will **not** be used for the
+In this case, the `ZEEBE_CLIENT_DEFAULT_TENANT_ID` will **not** be used for the
 configuration of job workers.
 
 ### Inbound Connector configuration
@@ -321,6 +321,14 @@ Operate independently of the outbound Connector configuration without any additi
 configuration required from the user.
 
 To restrict the Connector Runtime inbound Connector feature to a single tenant or multiple tenants, use Identity and assign the tenants the Connector application should have access to.
+
+It is possible to adjust the polling interval of Connectors polling process definitions to Operate by setting the environment variable `CAMUNDA_CONNECTOR_POLLING_INTERVAL`. This variable allows you to control how often Connectors fetch the process definitions, with the interval specified in milliseconds. For example, setting `CAMUNDA_CONNECTOR_POLLING_INTERVAL=20000` will configure the Connectors to poll every 20 seconds.
+
+Example:
+
+```
+CAMUNDA_CONNECTOR_POLLING_INTERVAL=10000
+```
 
 ### Troubleshooting
 

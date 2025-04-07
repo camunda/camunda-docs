@@ -101,7 +101,7 @@ To learn more about this feature, see [user task listeners](/components/concepts
 
 You can now use a single Query API in the Camunda 8 REST API to find process and decision data instead of using multiple component APIs.
 
-For example, send a request to the [Query decision definitions](/apis-tools/camunda-api-rest/specifications/find-decision-definitions.api.mdx) endpoint to search for decision definitions.
+For example, send a request to the [Search decision definitions](/apis-tools/camunda-api-rest/specifications/search-decision-definitions.api.mdx) endpoint to search for decision definitions.
 
 New Query API endpoints are added as follows:
 

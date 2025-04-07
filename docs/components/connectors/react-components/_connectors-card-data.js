@@ -15,6 +15,7 @@ import SqlImg from "../img/connector-sql.png";
 import GraphqlImg from "../img/connector-graphql.png";
 import AsanaImg from "../img/connector-asana.png";
 import AutomationImg from "../img/connector-automation.png";
+import HubspotImg from "../img/connector-hubspot.png";
 
 // Getting started cards on connectors introduction page
 export const gettingStartedCards = [
@@ -64,6 +65,12 @@ export const customConnectorCards = [
 // 3 large Latest tab cards on connectors introduction page
 export const latestConnectorCards = [
   {
+    link: "../out-of-the-box-connectors/hubspot",
+    title: "Hubspot",
+    image: HubspotImg,
+    description: "Interact with Hubspot objects from your processes.",
+  },
+  {
     link: "../out-of-the-box-connectors/amazon-s3",
     title: "Amazon S3",
     image: AmazonS3Img,
@@ -74,13 +81,6 @@ export const latestConnectorCards = [
     title: "Box",
     image: BoxImg,
     description: "Connect your BPMN service to the Box storage API.",
-  },
-  {
-    link: "../out-of-the-box-connectors/email/?email=outbound",
-    title: "Email outbound",
-    image: EmailImg,
-    description:
-      "Connect your BPMN service to an email POP3, IMAP or SMTP server.",
   },
 ];
 
@@ -112,6 +112,11 @@ export const popularConnectorCards = [
 // 3 small Latest tab cards on connectors introduction page
 export const latestConnectorCardsSml = [
   {
+    link: "../out-of-the-box-connectors/email/?email=outbound",
+    title: "Email outbound",
+    image: EmailImg,
+  },
+  {
     link: "../out-of-the-box-connectors/email/?email=inbound",
     title: "Email inbound",
     image: EmailImg,
@@ -120,11 +125,6 @@ export const latestConnectorCardsSml = [
     link: "../out-of-the-box-connectors/amazon-bedrock",
     title: "Amazon Bedrock",
     image: BedrockImg,
-  },
-  {
-    link: "../out-of-the-box-connectors/sql",
-    title: "SQL",
-    image: SqlImg,
   },
 ];
 
