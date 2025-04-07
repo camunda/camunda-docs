@@ -22,7 +22,7 @@ These release notes identify the new features included in 8.7, including [alpha 
 ### Camunda SAP Integration
 Camunda now offers a robust SAP integration featuring an OData connector for seamless API interactions, an RFC connector for BAPI/function module access, and a dedicated plugin enabling SAP BTP services within BPMN workflows. This solution ensures compliance with IT governance standards using SAP BTP (Business Technology Platform) and the SAP Cloud Connector for enterprise-grade reliability.
 
-To learn more about this feature, see [Camunda SAP Integration](/components/camunda-integrations/sap/camunda-sap-integration/sap-integration.md).
+To learn more about this feature, see [Camunda SAP Integration](/components/camunda-integrations/sap/camunda-sap-integration.md).
 
 ### Added dual-region reference architecture for OpenShift
 
