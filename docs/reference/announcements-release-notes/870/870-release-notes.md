@@ -19,30 +19,37 @@ These release notes identify the new features included in 8.7, including [alpha 
 | ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
 | 8 April 2025           | 13 October 2026              | -            | -            | -            |
 
-### Camunda SAP Integration
+### Added dual-region reference architecture for OpenShift <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Camunda now offers a robust SAP integration featuring an OData connector for seamless API interactions, an RFC connector for BAPI/function module access, and a dedicated plugin enabling SAP BTP services within BPMN workflows. This solution ensures compliance with IT governance standards using SAP BTP (Business Technology Platform) and the SAP Cloud Connector for enterprise-grade reliability.
-
-To learn more about this feature, see [Camunda SAP Integration](/components/camunda-integrations/sap/camunda-sap-integration.md).
-
-### Added dual-region reference architecture for OpenShift
-
-We are excited to announce the addition of the dual-region reference architecture for Red Hat OpenShift.
-This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions.
+We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/setup/deploy/openshift/redhat-openshift-dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/operational-guides/multi-region/dual-region-operational-procedure.md).
 
 <!--- https://github.com/camunda/product-hub/issues/2501  --->
 
-### Advanced user task listeners for updating events
+### Added dual-region ROSA HCP cluster with Terraform <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Camunda introduces advanced user task listeners for updating events, enabling developers to define listeners that trigger whenever certain task properties or variables change. These listeners generate jobs similar to other event-based task listeners, granting direct access to task data as well as the ability to accept or roll back updates (in certain scenarios). Operators can also view, manage, and resolve incidents caused by these listeners in Operate, ensuring a unified and transparent approach to handling task changes.
+Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/setup/deploy/amazon/openshift/terraform-setup-dual-region/). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
+
+<!--- https://github.com/camunda/product-hub/issues/2501  --->
+
+### Advanced user task listeners for updating events <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
+
+Camunda introduces [advanced user task listeners for updating events](/components/concepts/user-task-listeners.md), enabling developers to define listeners that trigger whenever certain task properties or variables change. These listeners generate jobs similar to other event-based task listeners, granting direct access to task data as well as the ability to accept or roll back updates (in certain scenarios). Operators can also view, manage, and resolve incidents caused by these listeners in Operate, ensuring a unified and transparent approach to handling task changes.
 
 <!--- https://github.com/camunda/product-hub/issues/2585 --->
 
-### Bulk publish to shared resources
+### Bulk publish to shared resources <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 Develop reusable assets in a pro-code environment, push them to your version control system, then publish them to your Web Modeler environment so anyone in your organization can reuse them with newly modified endpoints.
 
 <!--- https://github.com/camunda/product-hub/issues/2635 --->
+
+### Camunda SAP integration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+
+Camunda now offers a robust SAP integration featuring an OData Connector for seamless API interactions, an RFC connector for BAPI/function module access, and a dedicated plugin enabling SAP BTP services within BPMN workflows. This solution ensures compliance with IT governance standards using SAP BTP (Business Technology Platform) and the SAP Cloud Connector for enterprise-grade reliability.
+
+To learn more about this feature, see [Camunda SAP Integration](/components/camunda-integrations/sap/camunda-sap-integration.md).
+
+<!--- https://github.com/camunda/product-hub/issues/2415 https://github.com/camunda/product-hub/issues/2649 https://github.com/camunda/product-hub/issues/2650 https://github.com/camunda/product-hub/issues/2578 --->
 
 ### Cluster connector management in Console <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#manage-connectors}
 
@@ -62,7 +69,7 @@ We have provided a consolidated view of all webhooks, message queue subscription
 
 <!-- https://github.com/camunda/product-hub/issues/2647 https://github.com/camunda/product-hub/issues/1063 -->
 
-### Convert AWS EKS and AWS OpenShift (ROSA) guides to reference architecture format
+### Convert AWS EKS and AWS OpenShift (ROSA) guides to reference architecture format <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
 We are pleased to announce the release of the Reference Architecture packages for AWS EKS (single-region) and Red Hat OpenShift on AWS (ROSA) in both single and dual-region configurations.  
 These packages offer a standardized Reference Architecture that includes implementation requirements, Terraform templates, Helm configurations, deployment pipelines, and operational procedures.  
@@ -93,15 +100,15 @@ Use intelligent document processing (IDP) to integrate automated document proces
 
 To learn more about this feature, see [intelligent document processing](/components/modeler/web-modeler/intelligent-document-processing.md).
 
-### Process applications in Desktop Modeler
+### Process applications in Desktop Modeler <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
 
 We have enabled developers to manage and work with multi-file BPMN projects directly within Desktop Modeler. This feature brings familiar IDE-like project management capabilities to Modeler, aligning with Web Modeler concepts, projects, and process applications.
 
 <!--- https://github.com/camunda/product-hub/issues/2458 --->
 
-### Process application versioning, README, and review
+### Process application versioning, README, and review <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, versioned, and readable for everyone, and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally reviewed and approved.
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/modeler/web-modeler/process-application-versioning.md), and [readable for everyone](/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/modeler/web-modeler/process-application-pipeline.md#review) and approved.
 
 <!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
 
@@ -176,7 +183,7 @@ To learn more about this feature, see [intelligent document processing](/compone
 
 ### Play multi-tenancy <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Play multi-tenancy allows you to have an isolated, dedicated testing environment without additional cost. This feature is available for Web Modeler in Self-Managed environments.
+Use your existing development cluster with tenancy so multiple teams can develop on the same cluster without impacting each other. This feature is available for Web Modeler in Self-Managed environments.
 
 <!-- https://github.com/camunda/product-hub/issues/2653 -->
 
