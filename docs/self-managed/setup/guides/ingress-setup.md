@@ -8,7 +8,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::caution
-The separated Ingress configuration has been removed in Camunda version 8.7. This guide covers a **combined Ingress setup**.
+The separated Ingress configuration has been removed in Camunda version 8.8. This guide covers a **combined Ingress setup**.
 :::
 
 Camunda 8 Self-Managed has multiple web applications and gRPC services. Both can be accessed externally using Ingress with a **combined setup.** In this configuration, there are two Ingress objects: one Ingress object for all Camunda 8 web applications using a single domain. Each application has a sub-path, for example `camunda.example.com/operate`, and `camunda.example.com/optimize`, and another Ingress that uses gRPC protocol for Zeebe Gateway, for example `zeebe.camunda.example.com`.
