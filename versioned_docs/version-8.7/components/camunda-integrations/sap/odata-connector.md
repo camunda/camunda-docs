@@ -24,7 +24,7 @@ For a standard overview of the steps involved in the SAP OData Connector, see th
   [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
   =======
 - We recommend creating an API client for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`.
-  > > > > > > > bbe7d731de98b6bbb5a93116527318c52f3f5676
+  bbe7d731de98b6bbb5a93116527318c52f3f5676
 
 To run the SAP OData Connector Docker image, the following SAP infrastructure setup is required:
 

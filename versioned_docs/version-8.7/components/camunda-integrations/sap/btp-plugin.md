@@ -13,12 +13,14 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 
 ## Prerequisites
 
+- **Camunda API Client** <br/>
+  [Create an API client](/components/console/manage-clusters/manage-api-clients.md) for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`
+
 - Locally, for configuring via `csap` only (see below): [Node.js >= 20 LTS](https://nodejs.org/en/about/previous-releases)
-- We recommend creating an API client for your Camunda SaaS cluster with the full scope: `Zeebe,Tasklist,Operate,Optimize,Secrets`.
 
 On SAP BTP:
 
-- Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
+- [Cloud Foundry CLI](https://github.com/cloudfoundry/cli) with the [multiapps plugin](https://github.com/cloudfoundry/multiapps-cli-plugin) installed on the machine executing the deployment.
 
 - SAP BTP subaccount with a [Cloud Foundry environment](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) enabled and a [created space](https://help.sap.com/docs/btp/sap-business-technology-platform/create-spaces).
 - A minimum of [4 GB storage quota and 4 GB runtime memory](https://help.sap.com/docs/btp/sap-business-technology-platform/managing-space-quota-plans).
@@ -33,7 +35,7 @@ On SAP BTP:
 
 ## Features
 
-- Model user tasks - they are picked up automatically and run/rendered by the BTP plugin.
+- Model user tasks in your BPMN process—they will be automatically detected and rendered by the BTP plugin at runtime.
 
 ![Camunda Forms in Fiori](./img/forms-fiori.png)
 
@@ -44,50 +46,51 @@ On SAP BTP:
 
   ![screenshot of header variable in Modeler](./img/sap-btp-plugin-final-user-task-header.png)
 
-- Auto-start a process via URL parameter using `run=<processID>`. For example, `https://<btp plugin url>/index.html?channelId=<id>&run=application-process`.
+- Auto-start a process via URL parameter using `run=<processID>`. <br/>For example, `https://<btp plugin url>/index.html?channelId=<id>&run=application-process`.
 
-- For debugging purposes, add `debug=true` as the URL parameter. For example, `https://<btp plugin url>/index.html?channelId=<id>&run=application-process&debug=true`.
+- For debugging purposes, add `debug=true` as the URL parameter. <br/>For example, `https://<btp plugin url>/index.html?channelId=<id>&run=application-process&debug=true`.
 
 - `/inbound` endpoint for starting a BPMN process in Camunda
 
 ## Camunda Forms in SAP Fiori
 
-- Layout: Single row layout only:
-  ![image-20250219112232376](./img/froms-no-columns.png)
-- No custom properties:
-  ![image-20250219112156011](./img/forms-no-custom-properties.png)
+Layout: Only a single-row layout is supported:<br/>
+![image-20250219112232376](./img/froms-no-columns.png)<br/>
 
-### Supported form features and properties
+Custom properties are not supported:<br/>
+![image-20250219112156011](./img/forms-no-custom-properties.png)
 
-|                  | Camunda Forms feature/property | Supported in Camunda BTP plugin? | Comments                                                                                                                                                                                                                 |
-| ---------------- | ------------------------------ | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Input**        |                                |                                  |                                                                                                                                                                                                                          |
-|                  | Text field                     | :white_check_mark:               |                                                                                                                                                                                                                          |
-|                  | Text area                      | :white_check_mark:               |                                                                                                                                                                                                                          |
-|                  | Number                         | :white_check_mark:               |                                                                                                                                                                                                                          |
-|                  | Date time                      | :white_check_mark:               | Only UTC values will be stored<br />- Date format "yyyy-MM-dd", for example "2025-02-29"12<br />- Hours format will be stored as the string "10:12:34 pm"<br />- 24 hours format will be stored as the string "22:12:34" |
-|                  | Expression                     | :x:                              |                                                                                                                                                                                                                          |
-|                  | File picker                    | :x:                              |                                                                                                                                                                                                                          |
-| **Selection**    |                                |                                  |                                                                                                                                                                                                                          |
-|                  | Checkbox                       | :white_check_mark:               |                                                                                                                                                                                                                          |
-|                  | Checkbox group                 | :x:                              |                                                                                                                                                                                                                          |
-|                  | Radio group                    | :white_check_mark:               | Only `static` options source is supported.                                                                                                                                                                               |
-|                  | Select                         | :white_check_mark:               | Only `static` options source is supported.                                                                                                                                                                               |
-|                  | Tag list                       | :x:                              |                                                                                                                                                                                                                          |
-| **Presentation** |                                |                                  |                                                                                                                                                                                                                          |
-|                  | Text view                      | :white_check_mark:               |                                                                                                                                                                                                                          |
-|                  | Image view                     | :white_check_mark:               |                                                                                                                                                                                                                          |
-|                  | Table                          | :x:                              |                                                                                                                                                                                                                          |
-|                  | HTML view                      | :white_check_mark:               |                                                                                                                                                                                                                          |
-|                  | Document preview               | :x:                              |                                                                                                                                                                                                                          |
-|                  | Spacer                         | :x:                              |                                                                                                                                                                                                                          |
-|                  | Separator                      | :x:                              |                                                                                                                                                                                                                          |
-| **Containers**   |                                |                                  |                                                                                                                                                                                                                          |
-|                  | Group                          | :x:                              |                                                                                                                                                                                                                          |
-|                  | Dynamic list                   | :x:                              |                                                                                                                                                                                                                          |
-|                  | iframe                         | :x:                              |                                                                                                                                                                                                                          |
-| **Action**       |                                |                                  |                                                                                                                                                                                                                          |
-|                  | Button                         | :x:                              |                                                                                                                                                                                                                          |
+### Supported Form Features and Properties
+
+|                  | Camunda Forms Feature / Property | Supported in Camunda BTP Plugin? | Comments                                                                                                                                                                                                                  |
+| ---------------- | -------------------------------- | :------------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Input**        |                                  |                                  |                                                                                                                                                                                                                           |
+|                  | Text field                       |        :white_check_mark:        |                                                                                                                                                                                                                           |
+|                  | Text area                        |        :white_check_mark:        |                                                                                                                                                                                                                           |
+|                  | Number                           |        :white_check_mark:        |                                                                                                                                                                                                                           |
+|                  | Date time                        |        :white_check_mark:        | Only UTC values will be stored<br />- Date format `yyyy-MM-dd`, for example `2025-02-29"12`<br />- Hours format will be stored as the string `10:12:34 pm`<br />- 24 hours format will be stored as the string `22:12:34` |
+|                  | Expression                       |               :x:                |                                                                                                                                                                                                                           |
+|                  | File picker                      |               :x:                |                                                                                                                                                                                                                           |
+| **Selection**    |                                  |                                  |                                                                                                                                                                                                                           |
+|                  | Checkbox                         |        :white_check_mark:        |                                                                                                                                                                                                                           |
+|                  | Checkbox group                   |               :x:                |                                                                                                                                                                                                                           |
+|                  | Radio group                      |        :white_check_mark:        | Only `static` options source is supported.                                                                                                                                                                                |
+|                  | Select                           |        :white_check_mark:        | Only `static` options source is supported.                                                                                                                                                                                |
+|                  | Tag list                         |               :x:                |                                                                                                                                                                                                                           |
+| **Presentation** |                                  |                                  |                                                                                                                                                                                                                           |
+|                  | Text view                        |        :white_check_mark:        |                                                                                                                                                                                                                           |
+|                  | Image view                       |        :white_check_mark:        |                                                                                                                                                                                                                           |
+|                  | Table                            |               :x:                |                                                                                                                                                                                                                           |
+|                  | HTML view                        |        :white_check_mark:        |                                                                                                                                                                                                                           |
+|                  | Document preview                 |               :x:                |                                                                                                                                                                                                                           |
+|                  | Spacer                           |               :x:                |                                                                                                                                                                                                                           |
+|                  | Separator                        |               :x:                |                                                                                                                                                                                                                           |
+| **Containers**   |                                  |                                  |                                                                                                                                                                                                                           |
+|                  | Group                            |               :x:                |                                                                                                                                                                                                                           |
+|                  | Dynamic list                     |               :x:                |                                                                                                                                                                                                                           |
+|                  | iframe                           |               :x:                |                                                                                                                                                                                                                           |
+| **Action**       |                                  |                                  |                                                                                                                                                                                                                           |
+|                  | Button                           |               :x:                |                                                                                                                                                                                                                           |
 
 ## Configuration and deployment
 
@@ -131,7 +134,7 @@ For advanced deployment configuration, consider working with your SAP practice, 
 
 ## Working with the BTP plugin
 
-- Describe "one-user multi-page flow" here
+The BTP plugin provides a guided, one-user multi-page flow where a single user progresses through a sequence of steps to complete a task or workflow. It renders subsets of Camunda Forms, with each page representing a distinct part of the process.
 
 After deployment, the BTP plugin is available at the `btpRoute` provided: `https://<btpRoute>`. If called manually (for example, in the browser) it will redirect automatically to `/app/index.html?channelId=<unique id>` . The `<unique id>` or "channel ID" links the output device to the BTP plugin, representing a dedicated "output channel".
 
