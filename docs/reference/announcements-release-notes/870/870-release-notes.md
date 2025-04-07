@@ -142,7 +142,7 @@ Create and append tasks with resources available in the current project and proc
 - **https://github.com/camunda/camunda-platform-helm/issues/3135**: Incomplete Connectors configuration for Entra ID usage.
   - Affects: Connectors
   - Work-around: Set an environment variable with the token scope for Operate (see [issue](https://github.com/camunda/camunda-platform-helm/issues/3135)).
-- **https://github.com/camunda/camunda/issues/29526**: Files are not uploaded to the document storage when starting a process from Web Modeler.
+- **https://github.com/camunda/camunda/issues/29526**: Files are not uploaded to the document storage when starting a process with a start form from Web Modeler or Play.
   - Affects: Document handling / Web Modeler
   - Work-around: Start the process from Tasklist or REST API.
 - **https://github.com/camunda/camunda/issues/25443**: File picker does not display the name of the uploaded file for completed tasks.
